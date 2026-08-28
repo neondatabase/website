@@ -108,11 +108,14 @@ const CopyableModelId = ({ id }) => {
   return (
     <button
       type="button"
-      className="group/model-id inline-flex items-center gap-1.5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green-45"
+      className="group/model-id inline-flex max-w-full min-w-0 items-center gap-1.5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-green-45"
       aria-label={isCopied ? `${id} copied` : `Copy ${id}`}
       onClick={() => handleCopy(id)}
     >
-      <code className="rounded-[0.1875rem] border border-white/10 bg-[#111315] px-1.5 py-0.75 font-mono text-[0.75rem] leading-none whitespace-nowrap text-gray-new-80 transition-colors group-hover/model-id:text-white">
+      <code
+        className="min-w-0 overflow-hidden rounded-[0.1875rem] border border-white/10 bg-[#111315] px-1.5 py-0.75 font-mono text-[0.75rem] leading-none text-ellipsis whitespace-nowrap text-gray-new-80 transition-colors group-hover/model-id:text-white"
+        title={id}
+      >
         {id}
       </code>
       {isCopied ? (

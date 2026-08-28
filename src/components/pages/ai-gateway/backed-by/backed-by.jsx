@@ -25,14 +25,14 @@ const BackedBy = () => (
   >
     <Container className="z-10" size="1600">
       <div className="relative z-10 grid grid-cols-[minmax(0,1fr)_minmax(22.5rem,0.62fr)] gap-x-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.7fr)] md:grid-cols-1 md:gap-y-20">
-        <div className="border-l border-gray-new-50 pl-8 lg:pl-6 md:border-l-0 md:pl-0">
+        <div className="flex flex-col border-l border-gray-new-50 pl-8 lg:pl-6 md:border-l-0 md:pl-0">
           <SectionLabel className="mb-5">Backed by giants</SectionLabel>
           <h2 className="max-w-200 text-[2.75rem] leading-dense tracking-tighter text-gray-new-40 xl:text-[2.25rem] lg:text-[2rem] md:text-[1.75rem]">
             <strong className="font-normal text-black-pure">Trusted at scale.</strong> The numbers
             behind every project running on Neon.
           </h2>
 
-          <ul className="mt-41 flex gap-x-24 xl:mt-30 xl:gap-x-16 lg:mt-22 md:mt-16 sm:flex-col sm:gap-y-10">
+          <ul className="mt-auto flex gap-x-24 xl:gap-x-16 lg:gap-x-8 md:mt-9 md:flex-col md:gap-y-7">
             {METRICS.map(({ value, description }) => (
               <li className="max-w-62.5" key={value}>
                 <h3 className="text-[4.5rem] leading-dense tracking-tighter xl:text-[3.25rem] lg:text-[2.75rem]">
@@ -46,9 +46,9 @@ const BackedBy = () => (
           </ul>
         </div>
 
-        <div className="flex min-h-113.5 flex-col border-l border-gray-new-50 px-8 lg:min-h-105 lg:px-6 md:min-h-65 md:border-l-0 md:px-0">
+        <div className="flex min-h-113.5 flex-col border-l border-gray-new-50 px-8 lg:min-h-105 lg:px-6 md:min-h-0 md:gap-y-4 md:border-l-0 md:px-0">
           <SectionLabel>Trusted by the best</SectionLabel>
-          <div className="mt-auto [&_blockquote]:text-[1.125rem]! [&_blockquote]:leading-[1.5]! md:[&_blockquote]:text-[0.9375rem]! [&_figcaption>.block]:inline! [&_figcaption>.block]:after:content-['_–_']">
+          <div className="mt-auto [&_blockquote]:text-[1.125rem]! [&_blockquote]:leading-[1.5]! md:[&_blockquote]:h-fit md:[&_blockquote]:min-h-40 md:[&_blockquote]:text-base! [&_figcaption>.block]:inline! [&_figcaption>.block]:after:content-['_–_'] md:[&_figure]:relative md:[&_figure]:bottom-auto">
             <Quotes />
           </div>
         </div>

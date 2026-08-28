@@ -18,10 +18,10 @@ const variants = {
   light: {
     section:
       'mt-0! bg-[#E4F1EB] pt-40 pb-35 text-black-pure xl:pt-32 xl:pb-28 lg:pt-24 lg:pb-19 md:pt-20 md:pb-17',
-    container: 'flex max-w-352 gap-x-31 lg:flex-col lg:gap-y-10 md:gap-y-5',
+    container: 'flex max-w-352 gap-x-31 xl:gap-x-12 lg:flex-col lg:gap-y-10 md:gap-y-5',
     title: cn(
       'w-105 shrink-0 text-[5rem] leading-none tracking-tighter text-balance',
-      'xl:text-[3.75rem] lg:w-full lg:text-[3rem] md:text-[2.5rem]'
+      'xl:w-84 xl:text-[3rem] lg:w-full md:text-[2.5rem]'
     ),
     items: '-mt-4 lg:mt-0',
   },
