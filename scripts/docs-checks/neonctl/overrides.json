@@ -194,19 +194,6 @@
         }
       }
     },
-    "skills": {
-      "commands": {
-        "update": {
-          "options": {
-            "yes": {
-              "_comment": "`skills update` re-declares `yes` as a bare { describe }; its `-y` alias and boolean type are inherited from the parent `skills` command's `yes`, which the isolated per-builder parse misses (so it comes out with no alias and type unknown). This override restores both. Remove it once generate-schema.js models parent-option inheritance. Verified against skills.ts at neonctl 4.11.0.",
-              "type": "boolean",
-              "alias": "y"
-            }
-          }
-        }
-      }
-    },
     "claim": {
       "commands": {
         "create": {
