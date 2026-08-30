@@ -13,21 +13,21 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon issues two kinds of credentials for managing your Neon resources and governing connection to your backend services:
+Neon issues two kinds of credentials, and they do different jobs:
 
-- **Credentials that manage your Neon setup.** Platform API keys create projects and branches, change settings, read usage, and issue the service credentials your app uses. Use these in your tooling and CI.
-- **Credentials your running app uses.** Service credentials do the application's work: an object read or a model call. Use these in your app's runtime environment.
+- **Platform API keys** manage your Neon setup: create projects and branches, change settings, read usage, and issue the service credentials your app uses. Use these in your tooling and CI.
+- **Service credentials** do your running app's work, like an object read or a model call. Use these in your app's runtime environment.
 
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
 ## Which credential do you need?
 
-| If you need to...                                                             | Reach for                                                          | What it's for                  | How it's scoped / where it reaches                                                                                                                       | Lives in                                   |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| Create or manage projects, branches, and settings, or issue other credentials | Platform API key (personal, organization, or project-scoped)       | Manage your Neon setup         | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it | Your tooling or CI                         |
-| Have a workload read files or call models                                     | Service credential (an S3-compatible access key or a bearer token) | Run your app                   | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   | Your app runtime                           |
-| Connect to Postgres                                                           | A database connection credential and the branch endpoint           | Run your app                   | IP Allow and Private Networking apply here, and only here                                                                                                | Your backend runtime                       |
-| Authorize an end user through the Data API                                    | A JWT from a trusted issuer, plus database roles and RLS           | Authorize your app's end users | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   | Managed Better Auth or your own JWT issuer |
+| If you need to...                                                             | Reach for                                                          | What it's for                  | How it's scoped / where it reaches                                                                                                                       |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create or manage projects, branches, and settings, or issue other credentials | Platform API key (personal, organization, or project-scoped)       | Manage your Neon setup         | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
+| Have a workload read files or call models                                     | Service credential (an S3-compatible access key or a bearer token) | Run your app                   | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
+| Connect to Postgres                                                           | A database connection credential and the branch endpoint           | Run your app                   | IP Allow and Private Networking apply here, and only here                                                                                                |
+| Authorize an end user through the Data API                                    | A JWT from a trusted issuer, plus database roles and RLS           | Authorize your app's end users | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
 
 ## Platform API keys
 
@@ -88,7 +88,7 @@ Inbound requests are yours to authenticate. A function has a public HTTPS URL an
 
 ### The Data API and Managed Better Auth
 
-The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't use service credentials. They use JWTs, the signed bearer tokens standard in web auth: a request carries a JWT from an issuer the project trusts, the Data API verifies it, selects a Postgres role from it, and runs the query as that role, so your `GRANT`s and RLS decide what it can do. Which branch you touch follows from the endpoint you call, not from anything inside the token.
+The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't use service credentials. They use JWTs, the signed bearer tokens standard in web auth: a request carries a JWT from an issuer the project trusts, a Postgres role is selected from it and the query runs as that role, so your `GRANT`s and RLS decide what it can do. Which branch you touch follows from the endpoint you call, not from anything inside the token.
 
 With an external provider, you register the issuer yourself by adding its JWKS URL to the project. With Managed Better Auth, Neon provides the JWKS URL for you. Either way the trust applies project-wide by default, and can be narrowed to a single branch.
 
