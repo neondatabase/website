@@ -2,7 +2,10 @@
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
 summary: >-
-  Practical strategies for cutting Neon costs across every billing metric:
+  On paid plans, Neon storage is unlimited: there is no fixed per-branch size
+  limit, and storage is governed by an adjustable, quota-based soft limit on
+  your project that helps you avoid unexpected costs. Practical strategies for
+  cutting Neon costs across every billing metric:
   compute (CU-hours), storage, instant restore history, extra branches, and
   public data transfer. Use this page to diagnose an unexpectedly high bill or
   to proactively reduce spend. Key tactics include right-sizing compute,
@@ -76,7 +79,7 @@ Yes. Any data-modifying operation, including deletes, generates [WAL records](/d
 Storage limits depend on your Neon plan:
 
 - **Free plan**: The Free plan includes 0.5 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
-- **Paid plans**: Launch and Scale plans have no storage limit. Storage is billed based on actual usage, so you simply pay for what you use.
+- **Paid plans**: Launch and Scale have no fixed per-branch size limit, and storage is billed on actual usage, so you pay only for what you use. Storage is governed by an adjustable, quota-based soft limit on your project, which Neon applies to help you avoid unexpected costs. Reaching that quota throttles write performance rather than failing writes, and you can still drop or delete data to reclaim space or [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 </details>
 
@@ -141,7 +144,9 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+**On paid plans (Launch and Scale), storage is unlimited: Neon sets no fixed maximum size for a branch.** Storage is governed instead by an adjustable, quota-based soft limit on your project, which Neon applies to help you avoid unexpected costs.
+
+Because that quota is a soft limit rather than a hard ceiling, reaching it throttles write performance instead of failing writes, and you can still drop or delete data to reclaim space. To raise it, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22). The Free plan is limited to 0.5 GB per project.
 
 </details>
 

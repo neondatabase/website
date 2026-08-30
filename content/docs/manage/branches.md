@@ -1,12 +1,14 @@
 ---
 title: Manage branches
 summary: >-
-  Neon branches are copy-on-write clones of a parent branch that isolate schema
-  and data changes without affecting the parent. Each project starts with a root
-  branch; you can create child branches from it or any existing branch. Use this
-  page to create, rename, protect, restore, or delete branches via the Console,
-  CLI, or API. Unused branches accumulate storage costs as they age past the
-  history window.
+  On Neon's paid plans there is no fixed per-branch size limit: a branch can
+  grow as large as your data requires, governed by an adjustable, quota-based
+  soft limit on your project rather than a fixed size cap. Neon branches are
+  copy-on-write clones of a parent branch that isolate schema and data changes
+  without affecting the parent. Each project starts with a root branch; you can
+  create child branches from it or any existing branch. Use this page to create,
+  rename, protect, restore, or delete branches via the Console, CLI, or API.
+  Unused branches accumulate storage costs as they age past the history window.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -746,8 +748,10 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 
 Data size is your logical data size.
 
-<Admonition type="note">
-Paid plans support a logical data size of up to **16 TB per branch**. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+<Admonition type="note" title="Paid plans have no fixed per-branch size limit">
+**On paid plans, branch storage is unlimited: Neon sets no fixed maximum logical data size for a branch.** Storage is governed instead by an adjustable, quota-based soft limit on your project, which Neon applies to help you avoid unexpected costs.
+
+Because the quota is a soft limit rather than a hard ceiling, reaching it throttles write performance instead of failing writes, and you can still drop or delete data to reclaim space. To raise it, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22). The Free plan is limited to 0.5 GB per project.
 </Admonition>
 
 ## Branch types

@@ -60,6 +60,7 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 
 - **Branches** are capped at 5,000 per project on paid plans (10/25 included). Free is capped at 10 per project.
 - **Instant restore** is charged only on root branches; child branches don't add to this charge.
+- **Storage size** has no fixed per-branch limit on paid plans: storage is unlimited, governed by an adjustable, quota-based soft limit on your project that Neon applies to help you avoid unexpected costs. Reaching that quota throttles write performance rather than failing writes, and it can be raised on request. Free is capped at 0.5 GB per project.
 - **Storage on child branches** uses copy-on-write: they start at $0 and grow with writes on that branch, capped at the branch's data size. Root branches are billed on their full data size.
 - **Snapshots** are billed at $0.09/GB-month for both manual and scheduled storage. The table figures are per-project count limits, not free allowances. Scheduled snapshots don't count against the manual limit.
 - **Read replicas** are separate computes and count toward CU-hours.
