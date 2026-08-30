@@ -294,7 +294,7 @@ The template already implements more than `/ping`:
 
 To add LLM chat and image generation, see the [Community Guide](/guides/discord-bot-on-neon-functions). That's a separate from-scratch walkthrough.
 
-Sibling bot templates: [Telegram](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http) and [WhatsApp](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http).
+Sibling HTTP bot templates: [Telegram](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http) and [WhatsApp](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http).
 
 ## Example
 
