@@ -7,9 +7,9 @@ isDraft: true
 
 <FeatureBetaProps feature_name="Neon Functions" />
 
-WhatsApp Cloud API delivers incoming messages over HTTP webhooks. This guide deploys a [Neon Function](/docs/compute/functions/overview) as the webhook endpoint. The function verifies requests from Meta, handles bot commands and sends replies through the Graph API.
+WhatsApp Cloud API sends incoming messages to HTTP webhooks. In this guide, you deploy a [Neon Function](/docs/compute/functions/overview) as the webhook endpoint. The function verifies Meta's requests, handles bot commands and sends replies through the Graph API.
 
-The template also stores user names and command usage in Neon Postgres with Drizzle. Meta's [WhatsApp Cloud API get started guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/) provides background on the account and phone number setup.
+The template uses Drizzle to store user names and command usage in Neon Postgres. See Meta's [WhatsApp Cloud API get started guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/) for details about setting up an account and phone number.
 
 <Admonition type="note" title="WhatsApp Cloud API only">
 This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a personal WhatsApp account or the WhatsApp Business mobile app.
@@ -18,24 +18,36 @@ This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a person
 ## Prerequisites
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`). Functions are available only in this region during beta. See [Get started with Neon Functions](/docs/compute/functions/get-started).
-- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI authentication](/docs/cli/auth).
+- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then follow [CLI authentication](/docs/cli/auth).
 - Node.js 24 (`node -v`). Deployed functions run on `nodejs24`.
 - A Meta developer account.
 - A Meta app connected to a WhatsApp Business Account, with a Cloud API phone number and a test recipient. Meta's get started flow can create test resources for you.
 
-The example README and package scripts use npm, so this guide does too.
+The example's README and package scripts use npm. The commands in this guide do the same.
 
 ## Set up WhatsApp Cloud API
 
-Follow Meta's [WhatsApp Cloud API get started guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/) until you can send its first test message. Keep these values:
+In the Meta App Dashboard, create an app. On **App details**, enter an app name such as `Neon Bot` and continue.
+
+![App details with Neon Bot entered as the app name](/docs/compute/functions/whatsapp-create-app.png)
+
+On **Use cases**, select **Connect with customers through WhatsApp**, then continue through the app creation flow.
+
+![Connect with customers through WhatsApp selected as the app use case](/docs/compute/functions/whatsapp-use-case.png)
+
+Follow Meta's [WhatsApp Cloud API get started guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/) to **WhatsApp** > **API Setup**. Generate an access token, select the phone numbers you'll use for testing and send the first test message.
+
+![WhatsApp API Setup with access token and test phone number details](/docs/compute/functions/whatsapp-api-setup.png)
+
+Keep these values:
 
 - **Access token**: authorizes calls from the function to the Graph API.
 - **Phone number ID**: identifies the Cloud API sender used by the function.
 - **App secret**: lets the function verify the `X-Hub-Signature-256` header on incoming webhook POSTs.
 
-The temporary access token from the API setup flow expires quickly. For continued development, follow Meta's instructions to create a system user and permanent access token.
+The temporary access token from the API setup flow expires quickly. To keep developing the bot, follow Meta's instructions to create a system user and permanent access token.
 
-Create a separate webhook verify token. This can be any strong random value that only you and Meta know:
+Create a separate webhook verify token with any strong random value that only you and Meta know:
 
 ```bash
 openssl rand -hex 32
@@ -56,7 +68,7 @@ neon bootstrap my-whatsapp-bot --template whatsapp-bot-http
 cd my-whatsapp-bot
 ```
 
-See [`neon bootstrap`](/docs/cli/bootstrap) for flags. Later commands in this guide assume you're in that directory.
+See [`neon bootstrap`](/docs/cli/bootstrap) for flags. Run the remaining commands from that directory.
 
 `neon.ts` declares one function named `whatsapp` and passes the four WhatsApp variables into its environment:
 
@@ -86,11 +98,11 @@ export default defineConfig({
 
 The `whatsapp` key is the function slug. It appears in CLI commands and the invocation URL. See the [`neon.ts` reference](/docs/reference/neon-ts).
 
-This walkthrough deploys the function before connecting Meta. Meta needs a public HTTPS callback URL, so you don't need `npm run dev`.
+Deploy the function before connecting Meta. Meta needs a public HTTPS callback URL, so you don't need `npm run dev`.
 
 ## Add WhatsApp secrets
 
-The deploy script reads `.env` with `neon deploy --env .env`. Don't replace a `.env` that `neon bootstrap` created because it can contain the linked project's database variables. Add the WhatsApp keys to the existing file. If it doesn't exist, copy `.env.example` to `.env`.
+The deploy script runs `neon deploy --env .env` to read `.env`. Don't replace a `.env` created by `neon bootstrap` because it can contain database variables for the linked project. Add the WhatsApp keys to the existing file. If the file doesn't exist, copy `.env.example` to `.env`.
 
 ```env filename=".env"
 WHATSAPP_ACCESS_TOKEN=
@@ -126,7 +138,7 @@ Deploy the function with the WhatsApp secrets from `.env`:
 npm run deploy
 ```
 
-The script runs `neon deploy --env .env`. The CLI evaluates `neon.ts`, bundles the handler and waits for the deployment to finish. If it fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
+The script runs `neon deploy --env .env`. The CLI evaluates `neon.ts`, bundles the handler and waits for the deployment to finish. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
 
 Copy the `whatsapp` invocation URL from the deployment output. Remove its trailing slash, then append `/api/webhook`. The complete callback URL looks like:
 
@@ -155,7 +167,9 @@ In the Meta App Dashboard, open **WhatsApp** > **Configuration**. Enter:
 
 Select **Verify and save**. Meta sends a GET request with `hub.mode`, `hub.verify_token` and `hub.challenge`. The function checks that the mode is `subscribe` and the token matches, then returns the challenge as plain text.
 
-After verification succeeds, subscribe to the **messages** webhook field. Meta uses this field for incoming messages and outgoing message status updates. See Meta's [webhook setup guide](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks/) and [messages webhook reference](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components/).
+![WhatsApp webhook configuration with callback URL, verify token and Verify and save highlighted](/docs/compute/functions/whatsapp-configuration.png)
+
+Once Meta verifies the webhook, subscribe to the **messages** field. Meta uses this field for incoming messages and outgoing message status updates. See Meta's [webhook setup guide](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/set-up-webhooks/) and [messages webhook reference](https://developers.facebook.com/docs/whatsapp/cloud-api/webhooks/components/).
 
 If verification fails:
 
@@ -168,7 +182,7 @@ Opening the callback URL directly in a browser returns `403 invalid verify token
 
 ## Try /ping
 
-From a WhatsApp account registered as a test recipient, send `/ping` to the Cloud API phone number. The bot should reply with `Pong` and an estimated webhook latency.
+Use a WhatsApp account registered as a test recipient to send `/ping` to the Cloud API phone number. The bot should reply with `Pong` and an estimated webhook latency.
 
 WhatsApp doesn't need a separate command registration step. The function parses incoming text messages directly.
 
@@ -262,7 +276,7 @@ The template supports:
 - `/name Dana Smith`: stores a name for the sender's WhatsApp user ID. `/name` without an argument returns the stored value.
 - `/profile`: shows the stored name, total commands run and per-command usage.
 
-The parser also accepts command names without the leading slash. An unrecognized command returns `Unknown command. Try /help.` Messages that don't match the command syntax are ignored.
+The parser also accepts command names without the leading slash. An unrecognized command returns `Unknown command. Try /help.` The function ignores messages that don't match the command syntax.
 
 The `/buttons` callbacks use the IDs `button-test:refresh`, `button-test:echo` and `button-test:time`. The handler processes `interactive.button_reply` events before text commands:
 
