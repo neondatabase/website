@@ -1,6 +1,6 @@
 ---
 title: How to host a WhatsApp bot on Neon Functions
-subtitle: Receive WhatsApp messages, run bot commands and store data in Postgres
+subtitle: Receive WhatsApp messages and reply through the Graph API
 enableTableOfContents: true
 isDraft: true
 ---
