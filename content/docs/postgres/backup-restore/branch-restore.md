@@ -20,7 +20,7 @@ redirectFrom:
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
   - /docs/introduction/branch-restore
-updatedOn: '2026-08-25T13:29:13.862Z'
+updatedOn: '2026-08-31T17:27:32.921Z'
 ---
 
 <InfoBlock>
@@ -77,7 +77,7 @@ Backup branches created when restoring root branch from another branch cannot be
 
 It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite of the database timeline, not a merge or refresh. All Postgres data and schema on your branch—along with Managed Better Auth data stored in the `neon_auth` schema—are replaced with the contents from the historical source. All data changes from the selected restore point onwards are excluded from the branch.
 
-Other products in your backend—such as Object Storage, Functions, and AI Gateway—are managed separately and are not part of a database restore.
+Object Storage is managed separately and is not reverted by a database restore. Functions and AI Gateway are also managed separately and are not part of a restore.
 
 #### Changes apply to all databases
 
