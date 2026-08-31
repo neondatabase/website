@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-08-18T16:41:42.467Z'
+updatedOn: '2026-08-24T20:29:40.493Z'
 ---
 
 ## Getting started
@@ -40,8 +40,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 
 ## Products
 
-Build backends for web apps and agents with Lakebase Postgres, Auth, Object Storage, and AI Gateway. <br />
-Every service is agent-ready: instant, branchable, and serverless.
+Build backends for web apps and agents with Lakebase Postgres, Auth, Object Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless.
 
 <DetailIconCards className="my-7!" cols={3} theme="green-flat">
 
