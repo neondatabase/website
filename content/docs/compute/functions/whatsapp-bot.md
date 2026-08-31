@@ -2,7 +2,7 @@
 title: How to host a WhatsApp bot on Neon Functions
 subtitle: Receive WhatsApp messages and reply through the Graph API
 enableTableOfContents: true
-isDraft: true
+isDraft: false
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
