@@ -1214,6 +1214,8 @@
                   slug: cli/auth
                 - title: init
                   slug: cli/init
+                - title: ask
+                  slug: cli/ask
                 - title: mcp
                   slug: cli/mcp
                 - title: skills
