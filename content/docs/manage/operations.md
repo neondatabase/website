@@ -6,11 +6,11 @@ summary: >-
   project. Use this page to view operation history via the Console, CLI, or API;
   poll operation status before issuing the next API call to prevent race
   conditions; and recover from 423 Locked responses using exponential backoff.
-  Terminal statuses are finished, skipped, and cancelled; failed is non-terminal
-  and can be retried.
+  Terminal statuses are finished and skipped for successful completion, and
+  failed, error, and cancelled for unsuccessful completion.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-08-31T17:51:12.515Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
