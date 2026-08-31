@@ -291,6 +291,7 @@ const Animation = () => {
     ? FINAL_MESSAGE_COUNT
     : TIMELINE[timelineIndex].visibleMessages;
   const visibleMessages = isChatVisible ? timelineVisibleMessages : 0;
+  const isThinking = visibleMessages > 0 && visibleMessages % 2 === 1;
   const measuredWidth = visualWidth ?? VISUAL_WIDTH;
   const desktopScale = Math.min(measuredWidth / VISUAL_WIDTH, 1);
   const riveScale = isMobileLayout ? Math.min(measuredWidth / RIVE_WIDTH, 1) : desktopScale;
@@ -338,6 +339,7 @@ const Animation = () => {
           chatRef={chatVisibilityRef}
           composerText={composerText}
           isCompact={isMobileLayout}
+          isThinking={isThinking}
           style={{
             transform: `translate(${chatLeft}px, ${chatTop}px) scale(${chatScale})`,
           }}

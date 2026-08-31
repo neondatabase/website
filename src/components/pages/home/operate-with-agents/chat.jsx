@@ -16,6 +16,8 @@ import RightArrowIcon from 'icons/home/operate-with-agents/right-arrow.inline.sv
 import { cn } from 'utils/cn';
 
 const MESSAGE_TRANSITION = { duration: 0.25, ease: [0.25, 1, 0.5, 1] };
+const THINKING_TEXT = 'Thinking...';
+const THINKING_REVEAL_DELAY = 0.25;
 
 export const CHAT_PROMPTS = [
   'Test two login flows, email-only and social auth. Create a branch for each.',
@@ -48,13 +50,26 @@ InlineCode.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Reveal = ({ children, isCompact = false, shouldReduceMotion }) => (
+const Reveal = ({
+  children,
+  delay = 0,
+  fadeOnly = false,
+  isCompact = false,
+  shouldReduceMotion,
+}) => (
   <m.div
     className={isCompact ? 'shrink-0' : 'absolute inset-0'}
-    initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={shouldReduceMotion ? undefined : { opacity: 0, y: -6 }}
-    transition={shouldReduceMotion ? { duration: 0 } : MESSAGE_TRANSITION}
+    initial={shouldReduceMotion ? false : { opacity: 0, ...(fadeOnly ? {} : { y: 8 }) }}
+    animate={{
+      opacity: 1,
+      ...(fadeOnly ? {} : { y: 0 }),
+      transition: shouldReduceMotion ? { duration: 0 } : { ...MESSAGE_TRANSITION, delay },
+    }}
+    exit={
+      shouldReduceMotion
+        ? undefined
+        : { opacity: 0, ...(fadeOnly ? {} : { y: -6 }), transition: MESSAGE_TRANSITION }
+    }
   >
     {children}
   </m.div>
@@ -62,6 +77,8 @@ const Reveal = ({ children, isCompact = false, shouldReduceMotion }) => (
 
 Reveal.propTypes = {
   children: PropTypes.node.isRequired,
+  delay: PropTypes.number,
+  fadeOnly: PropTypes.bool,
   isCompact: PropTypes.bool,
   shouldReduceMotion: PropTypes.bool.isRequired,
 };
@@ -109,13 +126,77 @@ AgentMessage.propTypes = {
   top: PropTypes.number.isRequired,
 };
 
-const Messages = ({ isCompact = false, shouldReduceMotion, visibleMessages }) => (
+const ShimmeringText = ({ shouldReduceMotion }) => (
+  <m.span className="relative inline-block [perspective:500px]">
+    {THINKING_TEXT.split('').map((character, index) => (
+      <m.span
+        className="inline-block whitespace-pre [transform-style:preserve-3d]"
+        initial={shouldReduceMotion ? false : { color: '#797d86' }}
+        animate={
+          shouldReduceMotion ? { color: '#797d86' } : { color: ['#797d86', '#c9cbcf', '#797d86'] }
+        }
+        transition={
+          shouldReduceMotion
+            ? { duration: 0 }
+            : {
+                duration: 1,
+                repeat: Infinity,
+                repeatType: 'loop',
+                repeatDelay: THINKING_TEXT.length * 0.05,
+                delay: index / THINKING_TEXT.length,
+                ease: 'easeInOut',
+              }
+        }
+        key={`${character}-${index}`}
+      >
+        {character}
+      </m.span>
+    ))}
+  </m.span>
+);
+
+ShimmeringText.propTypes = {
+  shouldReduceMotion: PropTypes.bool.isRequired,
+};
+
+const ThinkingMessage = ({ isCompact = false, shouldReduceMotion, top }) => (
+  <div
+    className={cn(
+      'text-sm leading-none tracking-[-0.021875rem]',
+      isCompact ? 'relative w-full text-[#797d86]' : 'absolute left-4 w-[352px]'
+    )}
+    data-operate-chat-thinking
+    style={isCompact ? undefined : { top }}
+  >
+    <ShimmeringText shouldReduceMotion={shouldReduceMotion} />
+  </div>
+);
+
+ThinkingMessage.propTypes = {
+  isCompact: PropTypes.bool,
+  shouldReduceMotion: PropTypes.bool.isRequired,
+  top: PropTypes.number.isRequired,
+};
+
+const Messages = ({ isCompact = false, isThinking, shouldReduceMotion, visibleMessages }) => (
   <AnimatePresence initial={false}>
     {visibleMessages >= 1 ? (
       <Reveal key="user-one" isCompact={isCompact} shouldReduceMotion={shouldReduceMotion}>
         <UserMessage height={82} isCompact={isCompact} left={82} top={67} width={286}>
           {CHAT_PROMPTS[0]}
         </UserMessage>
+      </Reveal>
+    ) : null}
+
+    {isThinking && visibleMessages === 1 ? (
+      <Reveal
+        key="thinking-one"
+        delay={THINKING_REVEAL_DELAY}
+        fadeOnly
+        isCompact={isCompact}
+        shouldReduceMotion={shouldReduceMotion}
+      >
+        <ThinkingMessage isCompact={isCompact} shouldReduceMotion={shouldReduceMotion} top={181} />
       </Reveal>
     ) : null}
 
@@ -133,6 +214,18 @@ const Messages = ({ isCompact = false, shouldReduceMotion, visibleMessages }) =>
         <UserMessage height={38} isCompact={isCompact} left={180} top={314} width={188}>
           {CHAT_PROMPTS[1]}
         </UserMessage>
+      </Reveal>
+    ) : null}
+
+    {isThinking && visibleMessages === 3 ? (
+      <Reveal
+        key="thinking-two"
+        delay={THINKING_REVEAL_DELAY}
+        fadeOnly
+        isCompact={isCompact}
+        shouldReduceMotion={shouldReduceMotion}
+      >
+        <ThinkingMessage isCompact={isCompact} shouldReduceMotion={shouldReduceMotion} top={384} />
       </Reveal>
     ) : null}
 
@@ -154,6 +247,18 @@ const Messages = ({ isCompact = false, shouldReduceMotion, visibleMessages }) =>
       </Reveal>
     ) : null}
 
+    {isThinking && visibleMessages === 5 ? (
+      <Reveal
+        key="thinking-three"
+        delay={THINKING_REVEAL_DELAY}
+        fadeOnly
+        isCompact={isCompact}
+        shouldReduceMotion={shouldReduceMotion}
+      >
+        <ThinkingMessage isCompact={isCompact} shouldReduceMotion={shouldReduceMotion} top={565} />
+      </Reveal>
+    ) : null}
+
     {visibleMessages >= 6 ? (
       <Reveal key="agent-three" isCompact={isCompact} shouldReduceMotion={shouldReduceMotion}>
         <AgentMessage isCompact={isCompact} top={565}>
@@ -167,11 +272,12 @@ const Messages = ({ isCompact = false, shouldReduceMotion, visibleMessages }) =>
 
 Messages.propTypes = {
   isCompact: PropTypes.bool,
+  isThinking: PropTypes.bool.isRequired,
   shouldReduceMotion: PropTypes.bool.isRequired,
   visibleMessages: PropTypes.number.isRequired,
 };
 
-const CompactMessages = ({ shouldReduceMotion, visibleMessages }) => {
+const CompactMessages = ({ isThinking, shouldReduceMotion, visibleMessages }) => {
   const viewportRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -189,6 +295,7 @@ const CompactMessages = ({ shouldReduceMotion, visibleMessages }) => {
       <div className="flex min-h-full flex-col justify-end gap-4 px-4 py-2">
         <Messages
           isCompact
+          isThinking={isThinking}
           shouldReduceMotion={shouldReduceMotion}
           visibleMessages={visibleMessages}
         />
@@ -198,6 +305,7 @@ const CompactMessages = ({ shouldReduceMotion, visibleMessages }) => {
 };
 
 CompactMessages.propTypes = {
+  isThinking: PropTypes.bool.isRequired,
   shouldReduceMotion: PropTypes.bool.isRequired,
   visibleMessages: PropTypes.number.isRequired,
 };
@@ -239,6 +347,7 @@ const Chat = ({
   chatRef,
   composerText,
   isCompact,
+  isThinking,
   style,
   visibleMessages,
   shouldReduceMotion,
@@ -264,9 +373,17 @@ const Chat = ({
     </div>
 
     {isCompact ? (
-      <CompactMessages shouldReduceMotion={shouldReduceMotion} visibleMessages={visibleMessages} />
+      <CompactMessages
+        isThinking={isThinking}
+        shouldReduceMotion={shouldReduceMotion}
+        visibleMessages={visibleMessages}
+      />
     ) : (
-      <Messages shouldReduceMotion={shouldReduceMotion} visibleMessages={visibleMessages} />
+      <Messages
+        isThinking={isThinking}
+        shouldReduceMotion={shouldReduceMotion}
+        visibleMessages={visibleMessages}
+      />
     )}
 
     <ChatComposer text={composerText} />
@@ -278,6 +395,7 @@ Chat.propTypes = {
   chatRef: PropTypes.func,
   composerText: PropTypes.string.isRequired,
   isCompact: PropTypes.bool.isRequired,
+  isThinking: PropTypes.bool.isRequired,
   visibleMessages: PropTypes.number.isRequired,
   shouldReduceMotion: PropTypes.bool.isRequired,
   style: PropTypes.object,
