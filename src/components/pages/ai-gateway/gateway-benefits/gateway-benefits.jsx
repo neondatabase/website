@@ -49,7 +49,7 @@ const GatewayBenefits = () => (
               {label}
             </span>
 
-            <div className="grid grid-cols-[26rem_minmax(0,1fr)] justify-between gap-x-16 border-t-2 border-gray-new-15 pt-9.75 xl:grid-cols-[24rem_minmax(0,1fr)] xl:gap-x-12 lg:grid-cols-2 lg:gap-x-8 md:grid-cols-1 md:border-0 md:pt-2">
+            <div className="grid grid-cols-[26rem_minmax(0,1fr)] justify-between gap-x-16 border-t border-gray-new-15 pt-9.75 xl:grid-cols-[24rem_minmax(0,1fr)] xl:gap-x-12 lg:grid-cols-2 lg:gap-x-8 md:grid-cols-1 md:border-0 md:pt-2">
               <div>
                 <h3 className="max-w-104 text-[2rem] leading-snug tracking-tighter text-pretty xl:text-[1.75rem] md:text-[1.5rem]">
                   {title}
