@@ -2,10 +2,11 @@
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 summary: >-
-  Neon applies no fixed per-branch size limit on paid plans: storage is
-  governed by adjustable, quota-based soft limits, and the customer-set quotas
-  described here are separate, hard limits you choose. Per-project consumption
-  quotas in Neon let you cap active_time_seconds,
+  On paid plans Neon has no hard per-branch size limit: storage is unlimited,
+  with only a soft limit of 16 TB to help you avoid unexpected costs (reach out
+  to Neon Support if you need more). The customer-set quotas described here are
+  separate, hard limits you choose. Per-project consumption quotas in Neon let
+  you cap active_time_seconds,
   compute_time_seconds, written_data_bytes, data_transfer_bytes, and
   logical_size_bytes via the quota object in the Create or Update Project API
   endpoints. When any quota threshold is met, all active computes for that
@@ -69,7 +70,7 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Once this threshold is met, the compute for that particular branch (and _only_ that particular branch) is suspended. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
 
-These customer-set quotas behave differently from Neon's own platform storage quota. Paid plans have no fixed per-branch size limit; the platform applies an adjustable, quota-based soft limit on your project that throttles writes when reached. A `logical_size_bytes` quota you set yourself is a hard limit and suspends the branch's compute instead.
+These customer-set quotas behave differently from Neon's own platform storage limit. Paid plans have no hard per-branch size limit; storage is unlimited, with only a soft limit (16 TB) that helps you avoid unexpected costs. A `logical_size_bytes` quota you set yourself is a hard limit and suspends the branch's compute instead.
 
 ### Sample quotas
 

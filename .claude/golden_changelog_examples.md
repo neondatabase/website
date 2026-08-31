@@ -170,7 +170,7 @@ We've [doubled/increased] [what] from [old value] to [new value]. [Benefit state
 
 ### Example 1: Simple Quota Increase
 
-**File:** [2025-10-24.md](../content/changelog/2025-10-24.md#default-storage-quota-doubled)
+**File:** [2025-10-24.md](../content/changelog/2025-10-24.md#storage-quota-doubled-to-16tb)
 
 ```markdown
 ## Storage quota doubled to 16TB

@@ -4,15 +4,15 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  On paid plans, project storage is unlimited: there is no fixed per-branch
-  size limit, and storage is governed by an adjustable, quota-based soft limit
-  on the project rather than a fixed size cap. A Neon project is the top-level
-  workspace that groups branches, databases, roles, and computes. This page
-  covers the full project lifecycle: create, configure, and delete, via the
-  Console or API. Use it when you need to set project-level defaults such as
-  compute autoscaling, history window for instant restore and Time Travel, IP
-  Allow rules, logical replication, or project access. Deleted projects can be
-  recovered within a 7-day window using the CLI or API.
+  On paid plans, project storage is unlimited: Neon has no hard per-branch size
+  limit. There's only a soft limit of 16 TB to help you avoid unexpected costs,
+  and if you need more than 16 TB you can reach out to Neon Support. A Neon
+  project is the top-level workspace that groups branches, databases, roles, and
+  computes. This page covers the full project lifecycle: create, configure, and
+  delete, via the Console or API. Use it when you need to set project-level
+  defaults such as compute autoscaling, history window for instant restore and
+  Time Travel, IP Allow rules, logical replication, or project access. Deleted
+  projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
 updatedOn: '2026-08-26T13:16:52.511Z'
@@ -28,7 +28,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), storage is unlimited: Neon sets no fixed maximum size for a branch**, and you pay only for the storage you use. Storage is governed instead by an adjustable, quota-based soft limit on your project, which Neon applies to help you avoid unexpected costs; reaching it throttles write performance rather than failing writes, and you can [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22). The Free plan includes 0.5 GB per project, shared across all branches.
+- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), storage is unlimited: Neon has no hard per-branch size limit**, and you pay only for the storage you use. There's only a soft limit (16 TB) to help you avoid unexpected costs. If you require more than 16 TB of storage, [reach out to Neon Support](/docs/introduction/support). The Free plan includes 0.5 GB per project, shared across all branches.
 
 ## Create a project
 

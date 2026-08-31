@@ -1,10 +1,10 @@
 ---
 title: Neon plans
 summary: >-
-  On Neon's paid plans (Launch and Scale), storage is unlimited: there is no
-  fixed per-branch size limit. Storage is governed by an adjustable,
-  quota-based soft limit on your project that Neon applies to help you avoid
-  unexpected costs. The Free plan includes 0.5 GB of storage per project.
+  On Neon's paid plans (Launch and Scale), storage is unlimited: Neon has no
+  hard per-branch size limit. There's only a soft limit of 16 TB to help you
+  avoid unexpected costs, and if you need more than 16 TB you can reach out to
+  Neon Support. The Free plan includes 0.5 GB of storage per project.
   Free, Launch, and Scale also differ in compute rates, branch counts, storage
   pricing, and autoscaling limits. Compare per-unit pricing, feature
   availability, and billing examples to choose a plan or estimate monthly costs.
@@ -238,11 +238,9 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
-#### Storage per branch: no fixed size limit
+#### Storage per branch: no hard size limit
 
-**On paid plans (Launch and Scale), storage is unlimited: Neon sets no fixed maximum size for a branch.** Storage is governed instead by an adjustable, quota-based soft limit on your project, which Neon applies to help you avoid unexpected costs.
-
-Your project quota is a soft limit, not a hard ceiling: if you reach it, write performance is throttled, and you can still drop or delete data to reclaim space. To raise it, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22). The Free plan is limited to 0.5 GB per project.
+**On paid plans (Launch and Scale), storage is unlimited: Neon has no hard per-branch size limit.** There's only a soft limit (16 TB) to help you avoid unexpected costs. If you require more than 16 TB of storage, [reach out to Neon Support](/docs/introduction/support). The Free plan is limited to 0.5 GB per project.
 
 ### Public network transfer
 
