@@ -13,8 +13,10 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/cover.jpg
+  alt: The post title beside a compute chart labeled autoscaling active, showing a
+    live resize from 4 CU to 8 CU that keeps connections open and Postgres online
 isFeatured: false
 seo:
   title: Autoscaling Lakebase Postgres - Neon
@@ -23,14 +25,17 @@ seo:
   noindex: false
   ogTitle: Autoscaling Lakebase Postgres - Neon
   ogDescription: A deep dive into how we scale Postgres in real time
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/cover.jpg
 ---
 
 Choosing a database instance size before you know the workload is an old building pattern. The process is generally wonky and feels very wasteful of compute, especially [now that compute is becoming a luxury](https://www.reuters.com/technology/openai-projects-50-billion-spending-computing-power-this-year-brockman-says-2026-05-05/).
 
 Lakebase Postgres, the [Neon database](https://neon.com/docs/postgres/overview), omits the sizing experience altogether thanks to autoscaling. [The average production database on Neon changes compute size 32,016 times per month](https://neon.com/autoscaling-report), or about once every 81 seconds. That autoscaling responsiveness comes from in-place VM resizing and an algorithm that tracks CPU, memory, and the database’s working set.
 
-**[ADD DIAGRAM 1 from Figma, Caption: How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note how this is only one hour.]**
+![Provisioned compute units for a sample of Lakebase Postgres databases over one hour, each line rising and falling between 0 and 8 CU](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/autoscaling-sample-hour.png)
+
+_How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note that this is only one hour._
 
 ## The architectural requirement
 
@@ -41,7 +46,7 @@ Our autoscaling implementation is rooted on the [lakebase architecture](https://
 
 A compute node can therefore start, stop, move, or change size without moving the database underneath it. This is an essential foundation.
 
-**[ADD ARCHITECTURE DIAGRAM from Slack chat]**
+![An ephemeral compute node, holding shared_buffers in RAM and a performance cache on NVMe, reads pages from and writes WAL to a durable storage layer of pageservers, safekeepers, and object storage](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/compute-storage-architecture.png)
 
 Now, when it comes to implementing autoscaling, there are two parts to the story: first, one has to determine when to adjust capacity up and down, and second, how to do it without stopping Postgres.
 
@@ -115,7 +120,9 @@ For each Postgres page access, a standard HyperLogLog implementation,
 
 The distribution of those register values would provide an estimate of how many distinct pages have been observed.
 
-**[ADD DIAGRAM 2 in Figma, Caption: Standard HyperLogLog]**
+![A hash of a page identifier selects register index 1, and the remaining bits set that register to 1](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-standard.png)
+
+_Standard HyperLogLog_
 
 However, there’s an issue with simply using HyerLogLog for autoscaling: a standard HyperLogLog only grows. Once a register has observed a value, it cannot tell which item produced it or when that item was last seen.
 
@@ -129,7 +136,9 @@ This is how things actually work in Lakebase Postgres:
 
 Instead of setting a bit when a hash is observed, the estimator stores the current timestamp at that position. To estimate cardinality since time T, it treats positions updated after T as set and older positions as unset.
 
-**[ADD DIAGRAM 3 in Figma, Caption: Modified HyperLogLog in Lakebase Postgres autoscaling]**
+![The same register array stores timestamps instead of bits, with register index 1 updated to 03:00](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-timestamps.png)
+
+_Modified HyperLogLog in Lakebase Postgres autoscaling_
 
 This produces an estimate for any window ending at the present, including
 
@@ -147,11 +156,11 @@ The problem is this: there is no universal window that describes a database’s 
 
 The algorithm solves this by looking at how the working set changes overtime. For example: for a steady workload, the estimated number of pages initially grows, and then levels off. Extending the window adds time, but few new pages are added, because the same working set is being accessed repeatedly.
 
-**[ADD DIAGRAM 4 in Figma]**
+![Working set size plotted against HLL window duration: the lighter current workload grows and levels off, then the estimate jumps once the window reaches the older heavy workload](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/working-set-plateau-and-jump.png)
 
 Now, consider a heavy workload that ended recently. Short windows contain only the current, lighter workload; but once the window reaches far enough into the past to include the previous workload, the estimate jumps. The algorithm searches for that jump, which marks the end of the current plateau.
 
-**[ADD DIAGRAM 5 in Figma]**
+![A search beginning at the five-minute window finds no sharp jump in the curve and falls back to the estimate from the longest window](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/working-set-window-search.png)
 
 In short, 
 
@@ -170,7 +179,7 @@ return the estimate from the 60-minute window
 
 The implementation starts its search after five minutes. This prevents the compute from shrinking immediately during a short pause and then regrowing for the next burst. But if the algorithm finds no sharp increase, it uses the 60-minute estimate - that is the expected result for a stable workload whose working set remains active throughout the hour.
 
-**[ADD DIAGRAM 6 in Figma]**
+![A short plateau for the lighter workload ends just after the five-minute mark, where a sharp jump to the older heavy workload begins](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/working-set-jump-detected.png)
 
 ### Projecting cache growth
 
@@ -180,7 +189,7 @@ So the algorithm also projects working-set growth forward. It examines how the e
 
 Because cache metrics are fetched every 20 seconds, the projection covers only a fraction of a minute. Longer projections would react earlier, but they would also amplify brief spikes and make the compute oscillate.
 
-**[ADD DIAGRAM 7 in Figma]**
+![The measured working set curve extended by a dashed projection to the size expected by the next control interval](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/working-set-projection.png)
 
 The projected size becomes `lfcGoalCU`. And the algorithmic goal is to fit the working set within the portion of memory available to the compute cache, up to 75% of the compute’s RAM.
 
@@ -203,7 +212,7 @@ Four components coordinate each compute resize:
 - A **modified Kubernetes scheduler** maintains the global view of available resources. Every upscale must be approved by the scheduler before memory is committed.
 - **NeonVM** applies the change. It is a custom Kubernetes resource and controller, built with QEMU and KVM, that can add or remove CPU and memory from a running VM.
 
-**[ADD DIAGRAM 8 in Figma]**
+![Inside a Kubernetes node, the autoscaler-agent exchanges metrics and scaling requests with a vm-monitor running beside Postgres in each VM, and coordinates with the modified K8s scheduler and NeonVM](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/autoscaling-components.png)
 
 ### Scaling up
 
@@ -231,7 +240,7 @@ Some autoscaling systems are quick to add capacity but slow to give it back, lea
 
 Lakebase Postgres watches the workload as it runs and resizes compute to match in real time. The lakebase architecture makes this possible: since storage is decoupled and durable on its own, compute is free to move without worrying about the data.
 
-**[ADD DIAGRAM 9 in Figma]**
+![CPU load, memory, and working set each produce a target compute size, combined as goalCU equals the maximum of the three and clamped to the configured autoscaling limits](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/autoscaling-algorithm-overview.png)
 
 The resulting system scales in both directions, on a live database, without dropping connections. Most importantly, it looks past the obvious signal: tracking CPU alone would miss a workload stalled on cache misses, so the algorithm also tracks memory pressure and a time-aware estimate of the working set.
 
