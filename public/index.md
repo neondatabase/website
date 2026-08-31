@@ -32,25 +32,29 @@ neon mcp -y --oauth --agent YOUR_AGENT
 
 `neon skills` and `neon mcp` write to local agent config, so if Neon isn't already set up, show the user this block and get their go-ahead before running it. The installed skills contain the operating instructions; after this block, follow them. If you can't install them (no CLI, or the user declines), read the main skill directly at https://neon.com/.well-known/agent-skills/neon/SKILL.md and follow that instead.
 
-## Get a database
+## Get a backend
 
 Check auth state without blocking: run `neon profile list -o json`, where `"file": "missing"` means no credentials. Then:
 
 - **Credentials present:** `CI=true neon me -o json` exits 0 if they still work; nonzero means expired, see the next bullet.
 - **Missing or expired, human available:** ask them to run `neon auth`. Never run it yourself; it requires a browser.
-- **No account, no human:** `neon claim create` needs no auth, writes `DATABASE_URL` to `.env.local`, and a human can keep the project later with `neon claim accept`. The password lives in `.env.local` (and `neon connection-string` prints it). Keep both out of logs and transcripts.
+- **No account, no human:** `neon claim create` needs no auth, writes `DATABASE_URL` to `.env.local`, and a human can keep the project later with `neon claim accept`. Add `--service` (auth, data-api, functions, object-storage, ai-gateway) to provision more than Postgres. The password lives in `.env.local` (and `neon connection-string` prints it). Keep both out of logs and transcripts.
 
 ## What do you want to do?
 
-| Goal                                         | Where to go                                        |
-| -------------------------------------------- | -------------------------------------------------- |
-| Try Neon with no account, no human present   | https://neon.com/auth.md                           |
-| Connect a database and choose a driver       | https://neon.com/docs/connect/choose-connection.md |
-| Declare a whole backend in one file          | https://neon.com/docs/reference/neon-ts.md         |
-| Fix a connection error or timeout            | https://neon.com/docs/connect/connection-errors.md |
-| Branch a database per PR or test a migration | https://neon.com/docs/introduction/branching.md    |
-| Provision projects and branches over REST    | https://neon.com/docs/reference/api.md             |
-| Pricing and plans                            | https://neon.com/pricing.md                        |
+| Goal                                           | Where to go                                         |
+| ---------------------------------------------- | --------------------------------------------------- |
+| Try Neon with no account (`neon claim create`) | https://neon.com/auth.md                            |
+| Connect a database and choose a driver         | https://neon.com/docs/connect/choose-connection.md  |
+| Add user accounts and login                    | https://neon.com/docs/auth/overview.md              |
+| Store and serve user file uploads              | https://neon.com/docs/storage/overview.md           |
+| Run server code next to the database           | https://neon.com/docs/compute/functions/overview.md |
+| Call any LLM through one API                   | https://neon.com/docs/ai-gateway/overview.md        |
+| Declare a whole backend in one file            | https://neon.com/docs/reference/neon-ts.md          |
+| Fix a connection error or timeout              | https://neon.com/docs/connect/connection-errors.md  |
+| Branch a database per PR or test a migration   | https://neon.com/docs/introduction/branching.md     |
+| Provision projects and branches over REST      | https://neon.com/docs/reference/api.md              |
+| Pricing and plans                              | https://neon.com/pricing.md                         |
 
 ## Ask a human before
 
