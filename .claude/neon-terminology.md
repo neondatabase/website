@@ -123,7 +123,7 @@ Named features that are always capitalized regardless of context — these are p
 | Always capitalize | Notes |
 | --- | --- |
 | Neon Console | The web UI |
-| Neon Auth | Not "Neon Authentication" |
+| Neon Auth | Written with a space. Never "NeonAuth", "neonauth", or "Neon Authentication". Watch for autocomplete suggesting the closed-up form. |
 | Neon CLI | "Neon CLI" in prose; `neonctl` only in code |
 | Neon MCP Server | Full name on first mention; "the MCP Server" after. Never "Neon Postgres MCP Server" — drop "Postgres"; the product name does not contain the database name. |
 | Neon Serverless Driver | The `@neondatabase/serverless` package |
@@ -146,6 +146,19 @@ Feature names — capitalize when referring to the feature, lowercase in general
 | Private Networking | "connect via private networking" |
 
 ---
+
+## Product and plan naming
+
+Mirrors the `neon-writing-style` skill.
+
+| Use | Avoid | Notes |
+| --- | --- | --- |
+| database | DB | Write "database" out; don't abbreviate |
+| Organization, Organization ID (`org-...`) | workspace, workspace ID | "Workspace" is not a Neon term. Accounts are structured into Organizations |
+| Free plan | free tier | It's a plan, not a tier |
+| Free plan / Launch plan / Scale plan (full name on first reference) | bare "Scale", "Launch", "Neon Scale" | Bare "Scale"/"Launch" reads as a verb or capability. Use the full "… plan" name first; bare form is fine only on later mention once established nearby |
+
+**Prefixing Object Storage, Functions, AI Gateway.** The official names are **Object Storage**, **Functions**, and **AI Gateway**. Prefix with "Neon" only when the name appears in isolation (a title, a first mention with no surrounding Neon context) so the generic words don't float unbranded: "Neon Object Storage", "Neon Functions", "Neon AI Gateway". Once the copy is already scoped to Neon, drop the prefix. Don't stack prefixes ("the Neon backend with Neon Object Storage").
 
 ## Postgres-ecosystem terminology
 
@@ -190,6 +203,37 @@ Always include `?sslmode=require` in examples unless demonstrating a specific no
 | whitelist | allowlist | |
 | blacklist | blocklist | |
 | master (branch name in examples) | main | |
+| effortless, effortlessly | cut, or describe why it's easy | |
+| delve | explore, look at, examine | |
+| solutions | be specific ("a branching model", "a set of backend primitives") | |
+| forever | be specific ("no expiration", "persists across sessions") | |
+| enhance | improve, add, extend, or be specific | |
+| holistic | be specific: name what you mean | |
+| incentivize | encourage, reward, motivate | |
+| intelligent (adj.) | describe the specific capability instead | |
+| unified | be specific ("a single interface", "one config") | |
+| challenges | problems, limits, or be specific | |
+| best-in-class | cut, or cite a source | |
+| purpose-built | built for, designed for | |
+| state-of-the-art | cut, or describe what's new | |
+| world-class | cut, or cite a source | |
+| web-scale | be specific ("handles X requests", "scales to Y") | |
+| demystify | explain, walk through, clarify | |
+| security posture | security, security practices, security setup | |
+
+Source: mirrors the banned-word list in the plg-skills `neon-writing-style` skill. Keep in sync when that skill changes.
+
+---
+
+## AI-tell words and phrases
+
+Never use these — they mark writing as AI-generated. Mirrors the `neon-writing-style` skill.
+
+**Words:** seams, testament, underscore, propel, unwavering, heartfelt, embrace, foster, ignite, empower, amplify, catalyst, leverage, epitome, cornerstone, harness (as a verb), noteworthy, unprecedented, profound, pivotal, journey, tapestry, game-changer, nuanced, elevate, intricate, cutting-edge, groundbreaking, innovative, illuminate.
+
+**Filler transitions:** moreover, furthermore, nevertheless, additionally. Start the sentence with the point instead, or join it to the prior one.
+
+**Canned phrases:** "it's not X, it's Y", "it's important to note", "shed light on", "key takeaway", "at its core", and honest / honestly (in any form). Cut them and state the thing directly.
 
 ---
 
