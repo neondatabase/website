@@ -17,7 +17,7 @@ cover:
     https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/cover.jpg
   alt: The post title beside a compute chart labeled autoscaling active, showing a
     live resize from 4 CU to 8 CU that keeps connections open and Postgres online
-isFeatured: false
+isFeatured: true
 seo:
   title: Autoscaling Lakebase Postgres - Neon
   description: A deep dive into how we scale Postgres in real time
