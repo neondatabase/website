@@ -1,12 +1,10 @@
 ---
 title: Manage branches
 summary: >-
-  On Neon's paid plans, storage is unlimited: Neon has no hard per-branch size
-  limit, so a branch can grow as large as your data requires. There's only a
-  soft limit of 16 TB to help you avoid unexpected costs, and if you need more
-  than 16 TB you can reach out to Neon Support. Neon branches are copy-on-write
-  clones of a parent branch that isolate schema and data changes without
-  affecting the parent. Each project starts with a root branch; you can create
+  On paid plans, there's no hard per-branch size limit; storage grows with
+  your usage, so a branch can grow as large as your data requires. Neon branches are
+  copy-on-write clones of a parent branch that isolate schema and data changes
+  without affecting the parent. Each project starts with a root branch; you can create
   child branches from it or any existing branch. Use this page to create,
   rename, protect, restore, or delete branches via the Console, CLI, or API.
   Unused branches accumulate storage costs as they age past the history window.
@@ -750,7 +748,7 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 Data size is your logical data size.
 
 <Admonition type="note" title="Paid plans have no hard per-branch size limit">
-**On paid plans, branch storage is unlimited: Neon has no hard per-branch size limit.** There's only a soft limit (16 TB) to help you avoid unexpected costs. If you require more than 16 TB of storage, [reach out to Neon Support](/docs/introduction/support). The Free plan is limited to 0.5 GB per project.
+**On paid plans (Launch and Scale), there's no hard per-branch size limit; your branch storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
 </Admonition>
 
 ## Branch types
