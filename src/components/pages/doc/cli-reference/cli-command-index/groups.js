@@ -52,6 +52,7 @@ const GROUP_OF = {
   skills: 'setup',
   plugins: 'setup',
   claim: 'setup',
+  ask: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a

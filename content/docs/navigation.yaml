@@ -810,6 +810,10 @@
           items:
             - title: WhatsApp bot
               slug: compute/functions/whatsapp-bot
+            - title: Telegram bot
+              slug: compute/functions/telegram-bot
+            - title: Discord bot
+              slug: compute/functions/discord-bot
             - title: AI agents
               slug: compute/functions/agents
             - title: WebSockets and SSE
@@ -1218,6 +1222,8 @@
                   slug: cli/auth
                 - title: init
                   slug: cli/init
+                - title: ask
+                  slug: cli/ask
                 - title: mcp
                   slug: cli/mcp
                 - title: skills

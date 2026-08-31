@@ -504,6 +504,15 @@
     - title: "Deploy code to a function"
       slug: reference/api/functions/create-project-branch-function-deployment
       method: POST
+    - title: "List the custom domains on a branch"
+      slug: reference/api/functions/list-project-branch-custom-domains
+      method: GET
+    - title: "Register a custom domain on a branch"
+      slug: reference/api/functions/register-project-branch-custom-domain
+      method: POST
+    - title: "Delete a custom domain from a branch"
+      slug: reference/api/functions/delete-project-branch-custom-domain
+      method: DELETE
 - title: "Logs"
   slug: reference/api/logs
   items:
