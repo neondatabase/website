@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.11.0",
+  "neonctlVersion": "4.13.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -219,6 +219,31 @@
       },
       "describe": "Manage API keys",
       "usage": "$0 api-keys <sub-command> [options]"
+    },
+    "ask": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "prompt": {
+          "type": "string",
+          "describe": "The question to ask",
+          "required": true
+        },
+        "url": {
+          "type": "string",
+          "describe": "Override the assistant URL",
+          "hidden": true
+        }
+      },
+      "commands": {},
+      "describe": "Ask a question about Neon",
+      "usage": "$0 ask --prompt <question>",
+      "examples": [
+        {
+          "command": "$0 ask --prompt \"How do schema-only branches work?\"",
+          "description": ""
+        }
+      ]
     },
     "auth": {
       "aliases": [
@@ -1686,6 +1711,11 @@
             }
           ],
           "options": {
+            "bundle": {
+              "type": "boolean",
+              "describe": "Bundle --src with esbuild. Use --no-bundle to zip a prebuilt directory (root must contain index.mjs or index.js) or a file of that name.",
+              "default": true
+            },
             "entry": {
               "type": "string",
               "hidden": true
@@ -1707,7 +1737,7 @@
             },
             "src": {
               "type": "string",
-              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
+              "describe": "Function source: a directory containing index.ts, index.js, or index.mjs (first file match is the entry), or a path to the entry file"
             },
             "wait": {
               "type": "boolean",
@@ -2989,7 +3019,9 @@
       "usage": "$0 orgs <sub-command> [options]"
     },
     "plugins": {
-      "aliases": [],
+      "aliases": [
+        "plugin"
+      ],
       "positionals": [],
       "options": {
         "agent": {
@@ -3473,7 +3505,9 @@
       "usage": "$0 set-context [options]"
     },
     "skills": {
-      "aliases": [],
+      "aliases": [
+        "skill"
+      ],
       "positionals": [],
       "options": {
         "agent": {
