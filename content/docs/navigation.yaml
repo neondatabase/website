@@ -808,6 +808,8 @@
           slug: compute/functions/authentication
         - section: Guides
           items:
+            - title: WhatsApp bot
+              slug: compute/functions/whatsapp-bot
             - title: Telegram bot
               slug: compute/functions/telegram-bot
             - title: Discord bot
