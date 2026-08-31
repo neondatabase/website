@@ -13,7 +13,7 @@ summary: >-
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
 This page documents `@neondatabase/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
@@ -104,6 +104,10 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 ```
 
 </CodeTabs>
+
+<Admonition type="note" title="Version compatibility">
+The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the object form below.
+</Admonition>
 
 The object form remains available for custom endpoint layouts or local development setups where the Auth and Data API URLs cannot be derived from the same Neon database URL:
 

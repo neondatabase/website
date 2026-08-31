@@ -6,7 +6,7 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -38,7 +38,7 @@ export default {
 ```
 
 <Admonition type="note">
-You can test WebSocket behavior locally with `neon dev` or against a deployed function after running `neon deploy`.
+With `neon` CLI 2.45.0 or later, you can test WebSocket behavior locally with `neon dev` or against a deployed function after running `neon deploy`. With an earlier CLI version, `neon dev` returns `200 OK` instead of `101 Switching Protocols` for WebSocket upgrade requests, so test against a deployed function or upgrade the CLI.
 </Admonition>
 
 ## Simple echo server

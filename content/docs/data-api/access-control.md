@@ -11,7 +11,7 @@ summary: >-
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -64,6 +64,10 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 // No sign-in needed. The SDK fetches and caches an anonymous JWT automatically.
 const { data, error } = await client.from('public_items').select('*');
 ```
+
+<Admonition type="note" title="Version compatibility">
+The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the [object form](/docs/reference/javascript-sdk#initializing).
+</Admonition>
 
 **With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 

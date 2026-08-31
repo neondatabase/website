@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -261,6 +261,10 @@ const { data, error } = await client
 
 console.log(data);
 ```
+
+<Admonition type="note" title="Version compatibility">
+The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the [object form](/docs/reference/javascript-sdk#initializing).
+</Admonition>
 
 <Admonition type="note">
 This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same.

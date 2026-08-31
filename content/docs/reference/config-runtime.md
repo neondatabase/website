@@ -63,7 +63,7 @@ const result = await apply(config, target); // apply the policy for real
 
 ## Authentication
 
-None of the functions on this page take a Neon session or browser login. Pass a Neon API key in the `apiKey` option, or inject your own `NeonApi` adapter with `api`. The package doesn't read `NEON_API_KEY` or the credentials written by `neon auth`. If you omit both `apiKey` and `api`, the operation throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY`.
+None of the functions on this page take a Neon session or browser login. [Create a Neon API key in the Console](https://console.neon.tech/app/settings/api-keys), then pass it in the `apiKey` option, or inject your own `NeonApi` adapter with `api`. The package doesn't read `NEON_API_KEY` or the credentials written by `neon auth`. If you omit both `apiKey` and `api`, the operation throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY`.
 
 For `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`, the optional `apiHost` selects a non-production API host. If you omit it, the package uses Neon's production API. The package doesn't read `NEON_API_HOST`. `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call to `createBranch`.
 
