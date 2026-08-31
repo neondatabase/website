@@ -167,12 +167,14 @@ HeroServiceVideo.propTypes = {
 
 const HeroServices = ({
   items,
+  mediaLoading = 'eager',
   variant = 'default',
   videoDirectory = DEFAULT_VIDEO_DIRECTORY,
   videoVersion = DEFAULT_VIDEO_VERSION,
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [autoPlayIndex, setAutoPlayIndex] = useState(null);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
   const [isSliderViewport, setIsSliderViewport] = useState(false);
   const [trailingSpacerWidth, setTrailingSpacerWidth] = useState(0);
   const listRef = useRef(null);
@@ -261,6 +263,12 @@ const HeroServices = ({
       setAutoPlayIndex((currentIndex) => currentIndex ?? 0);
     }
   }, [hoveredIndex, isAutoPlayInView]);
+
+  useEffect(() => {
+    if (mediaLoading === 'in-view' && isListInView) {
+      setHasEnteredView(true);
+    }
+  }, [isListInView, mediaLoading]);
 
   useEffect(() => {
     if (!isSliderViewport || !isAutoPlayInView || hoveredIndex !== null || autoPlayIndex === null) {
@@ -368,6 +376,8 @@ const HeroServices = ({
     }
   }, [isSliderViewport]);
 
+  const shouldLoadMedia = mediaLoading === 'eager' || hasEnteredView;
+
   return (
     <ul
       className={cn(
@@ -410,17 +420,19 @@ const HeroServices = ({
                 aspectRatio
               )}
             >
-              <HeroServiceVideo
-                height={height}
-                isActive={isActive}
-                onEnded={handleAutoPlayVideoEnd}
-                shouldLoop={!isSliderViewport && hoveredIndex === index}
-                title={title}
-                videoBase={videoBase}
-                videoDirectory={videoDirectory}
-                videoVersion={videoVersion}
-                width={width}
-              />
+              {shouldLoadMedia && (
+                <HeroServiceVideo
+                  height={height}
+                  isActive={isActive}
+                  onEnded={handleAutoPlayVideoEnd}
+                  shouldLoop={!isSliderViewport && hoveredIndex === index}
+                  title={title}
+                  videoBase={videoBase}
+                  videoDirectory={videoDirectory}
+                  videoVersion={videoVersion}
+                  width={width}
+                />
+              )}
             </span>
           </li>
         );
@@ -445,6 +457,7 @@ HeroServices.propTypes = {
       height: PropTypes.number.isRequired,
     })
   ).isRequired,
+  mediaLoading: PropTypes.oneOf(['eager', 'in-view']),
   variant: PropTypes.oneOf(Object.keys(variants)),
   videoDirectory: PropTypes.string,
   videoVersion: PropTypes.string,

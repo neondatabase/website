@@ -72,6 +72,7 @@ const BackendServices = () => (
       <div className="mt-18 md:mt-14">
         <HeroServices
           items={serviceItems}
+          mediaLoading="in-view"
           variant="lighten"
           videoDirectory="/videos/pages/ai-gateway/backend-services"
           videoVersion="20260827-2"

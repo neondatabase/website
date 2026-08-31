@@ -1,12 +1,6 @@
-import capabilities from '../../../../app/models/capabilities.json';
-import modelsData from '../../../../app/models.json/data.json';
-import * as modelRows from '../../doc/ai-gateway-model-index/model-rows';
-
-import ModelsTable from './models-table';
+import AiGatewayModelIndex from 'components/pages/doc/ai-gateway-model-index';
 
 const Models = () => {
-  const rows = modelRows.buildRows(modelsData.neon, capabilities);
-
   return (
     <section
       id="models"
@@ -26,7 +20,7 @@ const Models = () => {
           </span>
         </h2>
 
-        <ModelsTable rows={rows} />
+        <AiGatewayModelIndex variant="landing" />
       </div>
     </section>
   );
