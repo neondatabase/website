@@ -33,9 +33,10 @@ Choosing a database instance size before you know the workload is an old buildin
 
 Lakebase Postgres, the [Neon database](https://neon.com/docs/postgres/overview), omits the sizing experience altogether thanks to autoscaling. [The average production database on Neon changes compute size 32,016 times per month](https://neon.com/autoscaling-report), or about once every 81 seconds. That autoscaling responsiveness comes from in-place VM resizing and an algorithm that tracks CPU, memory, and the database’s working set.
 
-![Provisioned compute units for a sample of Lakebase Postgres databases over one hour, each line rising and falling between 0 and 8 CU](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/autoscaling-sample-hour.png)
-
-_How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note that this is only one hour._
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/autoscaling-sample-hour.png" alt="Provisioned compute units for a sample of Lakebase Postgres databases over one hour, each line rising and falling between 0 and 8 CU" />
+<figcaption><em>How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note that this is only one hour.</em></figcaption>
+</figure>
 
 ## The architectural requirement
 
@@ -120,9 +121,10 @@ For each Postgres page access, a standard HyperLogLog implementation,
 
 The distribution of those register values would provide an estimate of how many distinct pages have been observed.
 
-![A hash of a page identifier selects register index 1, and the remaining bits set that register to 1](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-standard.png)
-
-_Standard HyperLogLog_
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-standard.png" alt="A hash of a page identifier selects register index 1, and the remaining bits set that register to 1" />
+<figcaption><em>Standard HyperLogLog</em></figcaption>
+</figure>
 
 However, there’s an issue with simply using HyerLogLog for autoscaling: a standard HyperLogLog only grows. Once a register has observed a value, it cannot tell which item produced it or when that item was last seen.
 
@@ -136,9 +138,10 @@ This is how things actually work in Lakebase Postgres:
 
 Instead of setting a bit when a hash is observed, the estimator stores the current timestamp at that position. To estimate cardinality since time T, it treats positions updated after T as set and older positions as unset.
 
-![The same register array stores timestamps instead of bits, with register index 1 updated to 03:00](https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-timestamps.png)
-
-_Modified HyperLogLog in Lakebase Postgres autoscaling_
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/autoscaling-lakebase-postgres/hyperloglog-timestamps.png" alt="The same register array stores timestamps instead of bits, with register index 1 updated to 03:00" />
+<figcaption><em>Modified HyperLogLog in Lakebase Postgres autoscaling</em></figcaption>
+</figure>
 
 This produces an estimate for any window ending at the present, including
 
@@ -164,7 +167,7 @@ Now, consider a heavy workload that ended recently. Short windows contain only t
 
 In short, 
 
-```
+```text
 start after the initial downscale delay
 
 for each working-set window:
