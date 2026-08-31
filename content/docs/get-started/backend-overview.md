@@ -1,19 +1,19 @@
 ---
 title: How a Neon backend fits together
-subtitle: Postgres, Object Storage, Functions, the AI Gateway, and Auth, declared in one neon.ts and branched together
+subtitle: Postgres, Object Storage, Functions, the AI Gateway, Auth, and the Data API, declared in one neon.ts and branched together
 summary: >-
   A tour of the Neon backend, using one example app, a notes app you can chat
   with, to show how the pieces fit. A single neon.ts declares Postgres, Object
-  Storage, Functions, the AI Gateway, and Auth; each is a toggle (Postgres is
-  on by default) plus neon deploy, which injects standard environment
-  variables. Branch your project and the database, buckets, and functions fork
-  copy-on-write together. Each section covers what a capability is, when to use
-  it, and the Neon-specific part you write, and links to that capability's own
-  quickstart for the full setup.
+  Storage, Functions, the AI Gateway, Auth, and the Data API; each is a toggle
+  (Postgres is on by default) plus neon deploy, which injects standard
+  environment variables. Branch your project and the whole backend follows it
+  through service-specific lifecycle mechanics. Each section covers what a
+  capability is, when to use it, and the Neon-specific part you write, and links
+  to that capability's own quickstart for the full setup.
 enableTableOfContents: true
 ---
 
-On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, and managed **Auth**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend forks with your data.
+On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
 
 <Admonition type="note" title="This is an orientation page">
 This page shows how the pieces fit, not how to build step by step, so the snippets are illustrative. To build now, copy the prompt below or jump to [Where to build it](#where-to-build-it). For one capability's full setup, follow its Reference link.
@@ -23,7 +23,7 @@ This page shows how the pieces fit, not how to build step by step, so the snippe
 
 ## What you'll build
 
-The running example is a **notes app you can chat with**. Signed-in users write notes, attach files to them, and ask an AI questions about their own notes. That one app touches all five capabilities:
+The running example is a **notes app you can chat with**. Signed-in users write notes, attach files to them, and ask an AI questions about their own notes. That one app uses five of Neon's six backend capabilities:
 
 ```
 Browser  ──request + auth token──▶  Function (chat)
@@ -37,8 +37,10 @@ Function  ──streams the answer──▶  Browser
 
 So when you see a `notes` table, an `attachments` bucket, or a `chat` function below, they're all parts of this same app. Postgres is the system of record for notes; Storage holds the files that are too big for a row; the Function is the long-running piece that handles a chat request; the AI Gateway is the single credential for the model call; and Auth decides whose notes a request may read.
 
+The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
+
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to try them. Postgres and Managed Better Auth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
+Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to try them. Postgres is available in every supported region. Managed Better Auth is available in AWS regions, but not Azure regions. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
 </Admonition>
 
 ## The shape of a Neon backend
@@ -96,11 +98,11 @@ This creates `neon.ts` and installs the `@neon/config` and `@neon/env` packages.
 
 ## How it works
 
-Every capability follows the same three steps: **enable it in `neon.ts`, [`neon deploy`](/docs/cli/deploy), then read the injected environment variables.** The same steps apply to all five.
+For capabilities declared in `neon.ts`, the setup follows the same three steps: **enable the service, run [`neon deploy`](/docs/cli/deploy), then read the injected environment variables.**
 
 - **`neon.ts` is your backend as code.** One file declares Auth and any beta services; Postgres is on by default.
 - **`neon deploy` reconciles that file** against your branch, provisions each service, and writes its credentials to your env file.
-- **Branching forks the whole backend together.** A new branch gets its own database, bucket, and function, copy-on-write from the parent. See [Branch your whole backend](#branch-your-whole-backend).
+- **Branching forks the whole backend together through service-specific mechanics.** Postgres and Object Storage create copy-on-write state. Each branch runs its own Functions at their own URLs and gets its own Auth environment, Data API endpoint, and AI Gateway endpoint. AI Gateway credentials work on the branch where they're issued and its descendants. See [Branch your whole backend](#branch-your-whole-backend).
 
 | Capability              | Enable in `neon.ts`  | Injected env vars                                                                 | You use it with                                   |
 | ----------------------- | -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -109,9 +111,10 @@ Every capability follows the same three steps: **enable it in `neon.ts`, [`neon 
 | **Functions**           | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
 | **AI Gateway**          | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
 | **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
+| **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
 
 <Admonition type="note" title="Reading the snippets">
-The `neon.ts` fragments below show only the key being added. `auth` goes at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#where-to-build-it) shows them assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
+The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
 </Admonition>
 
 ## Postgres: the notes
@@ -256,14 +259,16 @@ const userId = String(payload.sub);
 
 ## Branch your whole backend
 
-A branch forks the whole backend, its own database, buckets, and functions, copy-on-write from the parent. To try a change to the notes app safely, switch to a new branch with [`neon checkout`](/docs/cli/checkout), which offers to create the branch if it doesn't exist:
+A branch forks the whole backend through service-specific mechanics. Postgres and Object Storage branch their state copy-on-write. Each branch runs its own Functions at their own URLs and gets its own Managed Better Auth environment, Data API endpoint, and AI Gateway endpoint. AI Gateway credentials work on the branch where they're issued and its descendants.
+
+To try a change to the notes app safely, switch to a new branch with [`neon checkout`](/docs/cli/checkout), which offers to create the branch if it doesn't exist:
 
 ```bash
 neon checkout my-feature      # switch to my-feature (offers to create it if new)
 neon deploy                   # provisions that branch's services
 ```
 
-`neon deploy` writes the new branch's credentials into `.env`, so the same code now runs against isolated infrastructure, a different database, an isolated `attachments` bucket, its own `chat` URL. A note you write on the branch never appears on `main`.
+`neon deploy` writes the new branch's credentials into `.env`, so the same code now runs against branch-specific infrastructure: a different database, an isolated `attachments` bucket, and its own `chat` URL. A note you write on the branch never appears on `main`.
 
 The `branch` function in `neon.ts` sets per-branch policy, for example auto-expiring non-default branches:
 
@@ -279,7 +284,7 @@ branch: (branch) => {
 
 ## Where to build it
 
-Here is the complete `neon.ts` for the notes app, every capability the sections above added, in one file:
+Here is the complete `neon.ts` for the notes app, with the five capabilities used by this example in one file. The Data API remains disabled because the Function queries Postgres directly.
 
 ```typescript filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";

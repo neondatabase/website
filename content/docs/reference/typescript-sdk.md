@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-31T16:23:18.162Z'
 ---
 
 <InfoBlock>
@@ -214,7 +214,6 @@ Branch a project's data and schema; optionally attach compute in one workflow. <
 | `delete(projectId, branchId)`                  | `void`                                                             |                                                                                                                        |
 | `getDefault(projectId)`                        | `Branch`                                                           | Resolve the project's default branch by flag, not by name                                                              |
 | `setDefault(projectId, branchId)`              | `Branch`                                                           |                                                                                                                        |
-| `recover(projectId, branchId)`                 | `Branch`                                                           | Recover a soft-deleted branch within the 7-day window                                                                  |
 | `finalizeRestore(projectId, branchId, input?)` | `void`                                                             | Commit a restore previewed with `snapshots.restore({ finalize: false })`                                               |
 
 ```ts

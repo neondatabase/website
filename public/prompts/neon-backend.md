@@ -18,8 +18,9 @@ Then build the backend, using only the capabilities the app needs:
 - Functions for long-running or streaming work such as an AI call, a background job, or a websocket; a quick query can stay in a normal route handler.
 - AI Gateway for LLM calls through one credential. Check the model catalog for the model and modality you need (text, image, etc.).
 - Managed Better Auth if the app is multi-user; scope every query to the signed-in user.
+- Data API if the app needs a PostgREST-compatible HTTPS interface to Postgres.
 
-Declare what you need in a single `neon.ts` (see the docs below; these beta APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch with `neon branches create --name <name>` then `neon checkout <name>` (always name the branch; bare `neon checkout` prompts interactively), so the database, buckets, and functions fork together.
+Declare what you need in a single `neon.ts` (see the docs below; these beta APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch with `neon branches create --name <name>` then `neon checkout <name>` (always name the branch; bare `neon checkout` prompts interactively). After switching branches, run `neon deploy` to reconcile the declared services and refresh branch-specific credentials. Each service follows its own branching lifecycle.
 
 When done, don't just tell me it works: exercise each capability I enabled (run a query with `neon psql -- -c "..."`, store and retrieve an object, call a function endpoint, make a model request, verify a signed-in user), show me the results, and give me commands I can rerun. Never print connection strings or other secrets back to me.
 
@@ -31,3 +32,4 @@ Read the current docs for exact package names, config syntax, injected env var n
 - Object Storage: https://neon.com/docs/storage/get-started.md
 - AI Gateway models, endpoints, and modality: https://neon.com/docs/ai-gateway/models.md
 - Managed Better Auth (sign-in flow, JWT, and verifying the caller): https://neon.com/docs/auth/authentication-flow.md
+- Data API: https://neon.com/docs/data-api/overview.md
