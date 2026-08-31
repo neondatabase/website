@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:27:32.921Z'
+updatedOn: '2026-08-31T19:14:56.976Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -30,7 +30,7 @@ When you reset a branch to its parent, the data and schema is completely replace
 ### Key points
 
 - You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/postgres/backup-restore/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
-- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any changes to the branch's Postgres data or Managed Better Auth state are lost during the reset. Data in other products (Object Storage, Functions, and AI Gateway) is managed separately and is not reverted.
+- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset. Data in other products (Object Storage, Functions, and AI Gateway) is managed separately and is not reverted.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
