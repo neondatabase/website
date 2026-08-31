@@ -30,16 +30,18 @@ Choosing a database instance size before you know the workload is an old buildin
 
 Lakebase Postgres, the [Neon database](https://neon.com/docs/postgres/overview), omits the sizing experience altogether thanks to autoscaling. [The average production database on Neon changes compute size 32,016 times per month](https://neon.com/autoscaling-report), or about once every 81 seconds. That autoscaling responsiveness comes from in-place VM resizing and an algorithm that tracks CPU, memory, and the database’s working set.
 
-How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note how this is only one hour.
+**[ADD DIAGRAM 1 from Figma, Caption: How autoscaling looks like for an arbitrary sample of Lakebase Postgres databases. Note how this is only one hour.]**
 
 ## The architectural requirement
 
 Our autoscaling implementation is rooted on the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview). Traditional Postgres runs as a stateful process tied to a machine and its disks; replacing or resizing that machine is a database operation because the machine owns both execution and durable state. But Lakebase Postgres separates those responsibilities:
 
 - The compute layer runs Postgres and executes queries. It uses RAM and local NVMe for low-latency access, and owns no durable state.
-- The storage layer owns durability and history. WAL is replicated by safekeepers running on SSDs, pageservers (also SSDs) reconstruct page versions, and object storage keeps the long-term immutable record. (This blog post focuses on compute, but [we wrote a deep dive on the storage piece](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents) if you are also interested.)
+- The storage layer owns durability and history. WAL is replicated by safekeepers running on SSDs, pageservers (also SSDs) reconstruct page versions, and object storage keeps the long-term immutable record. *(This blog post focuses on compute, but [we wrote a deep dive on the storage piece](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents) if you are also interested.)*
 
 A compute node can therefore start, stop, move, or change size without moving the database underneath it. This is an essential foundation.
+
+**[ADD ARCHITECTURE DIAGRAM from Slack chat]**
 
 Now, when it comes to implementing autoscaling, there are two parts to the story: first, one has to determine when to adjust capacity up and down, and second, how to do it without stopping Postgres.
 
@@ -51,9 +53,9 @@ Let's cover both in order.
 
 To deduce when to resize, the Lakebase Postgres autoscaling algorithm tracks three signals, with each signal producing its own target compute size:
 
-- CPU load: cpuGoalCU
-- Memory use: memGoalCU
-- Compute-cache working set size: lfcGoalCU
+- CPU load: `cpuGoalCU`
+- Memory use: `memGoalCU`
+- Compute-cache working set size: `lfcGoalCU`
 
 The final scaling target is the largest of the three, [constrained to the minimum and maximum compute sizes that the user has configured for that database (the autoscaling limits)](https://neon.com/docs/introduction/autoscaling#configuring-autoscaling):
 
@@ -65,7 +67,7 @@ goalCU = max(cpuGoalCU, memGoalCU, lfcGoalCU)
 
 CPU is the most straightforward of the three signals. The algorithm keeps a close watch on how hard the processor is working:
 
-- Every five seconds, the autoscaler-agent reads the VM’s one-minute CPU load average.
+- Every **five seconds**, the autoscaler-agent reads the **VM’s one-minute CPU load average**.
 - The CPU goal aims to keep that load at or below 90% of available CPU capacity.
 - When the load rises above that target, cpuGoalCU increases. When sustained load falls, the goal falls with it.
 
@@ -79,15 +81,15 @@ Memory has a different failure mode from CPU. If demand briefly exceeds the avai
 
 So the system watches memory at two frequencies:
 
-- Every five seconds, the autoscaler-agent reads overall memory metrics from the VM.
-- Every 100 milliseconds, the vm-monitor checks memory used by Postgres.
+- Every **five seconds**, the autoscaler-agent reads **overall memory metrics from the VM**.
+- Every **100 milliseconds**, the vm-monitor checks **memory used by Postgres**.
 
 The memory goal keeps use below 75% of allocated RAM. That headroom gives the system space to respond to new allocations and leaves memory for the guest operating system and other processes.
 
 The vm-monitor also checks every proposed downscale. Memory cannot be removed if doing so would leave the running processes without enough space.
 
 <Admonition type="note" title="A bit of history">
-This polling approach replaced an earlier design based on the cgroup memory.high event. Crossing memory.high caused Linux to reclaim memory and throttle the processes inside the cgroup. Polling proved more predictable and stable while still giving the system a 100-millisecond view of Postgres memory.
+This polling approach replaced an earlier design based on the cgroup `memory.high` event. Crossing `memory.high` caused Linux to reclaim memory and throttle the processes inside the cgroup. Polling proved more predictable and stable while still giving the system a 100-millisecond view of Postgres memory.
 </Admonition>
 
 ### The compute cache (lfcGoalCU)
@@ -113,7 +115,7 @@ For each Postgres page access, a standard HyperLogLog implementation,
 
 The distribution of those register values would provide an estimate of how many distinct pages have been observed.
 
-Standard HyperLogLog
+**[ADD DIAGRAM 2 in Figma, Caption: Standard HyperLogLog]**
 
 However, there’s an issue with simply using HyerLogLog for autoscaling: a standard HyperLogLog only grows. Once a register has observed a value, it cannot tell which item produced it or when that item was last seen.
 
@@ -127,7 +129,7 @@ This is how things actually work in Lakebase Postgres:
 
 Instead of setting a bit when a hash is observed, the estimator stores the current timestamp at that position. To estimate cardinality since time T, it treats positions updated after T as set and older positions as unset.
 
-Modified HyperLogLog in Lakebase Postgres autoscaling
+**[ADD DIAGRAM 3 in Figma, Caption: Modified HyperLogLog in Lakebase Postgres autoscaling]**
 
 This produces an estimate for any window ending at the present, including
 
@@ -135,7 +137,7 @@ This produces an estimate for any window ending at the present, including
 - Distinct pages accessed in the last five minutes
 - Distinct pages accessed in the last hour
 
-So, going back to the algorithm, this is how the granularity actually works: every 20 seconds, the autoscaler-agent collects working-set estimates for windows from one to 60 minutes.
+So, going back to the algorithm, this is how the granularity actually works: **every 20 seconds**, the autoscaler-agent collects **working-set estimates for windows from one to 60 minutes**.
 
 But the story does not end here. As surely you’re noticing, this is a wide time window. How do we actually choose it?
 
@@ -145,21 +147,30 @@ The problem is this: there is no universal window that describes a database’s 
 
 The algorithm solves this by looking at how the working set changes overtime. For example: for a steady workload, the estimated number of pages initially grows, and then levels off. Extending the window adds time, but few new pages are added, because the same working set is being accessed repeatedly.
 
+**[ADD DIAGRAM 4 in Figma]**
+
 Now, consider a heavy workload that ended recently. Short windows contain only the current, lighter workload; but once the window reaches far enough into the past to include the previous workload, the estimate jumps. The algorithm searches for that jump, which marks the end of the current plateau.
 
-In short:
+**[ADD DIAGRAM 5 in Figma]**
+
+In short, 
 
 ```
 start after the initial downscale delay
+
 for each working-set window:
     measure growth before this point
     measure growth after this point
+
     if later growth is much larger than earlier growth:
         return the estimate before the jump
+
 return the estimate from the 60-minute window
 ```
 
 The implementation starts its search after five minutes. This prevents the compute from shrinking immediately during a short pause and then regrowing for the next burst. But if the algorithm finds no sharp increase, it uses the 60-minute estimate - that is the expected result for a stable workload whose working set remains active throughout the hour.
+
+**[ADD DIAGRAM 6 in Figma]**
 
 ### Projecting cache growth
 
@@ -169,7 +180,9 @@ So the algorithm also projects working-set growth forward. It examines how the e
 
 Because cache metrics are fetched every 20 seconds, the projection covers only a fraction of a minute. Longer projections would react earlier, but they would also amplify brief spikes and make the compute oscillate.
 
-The projected size (finally!) becomes lfcGoalCU. And the algorithmic goal is to fit the working set within the portion of memory available to the compute cache, up to 75% of the compute’s RAM.
+**[ADD DIAGRAM 7 in Figma]**
+
+The projected size becomes `lfcGoalCU`. And the algorithmic goal is to fit the working set within the portion of memory available to the compute cache, up to 75% of the compute’s RAM.
 
 ## Part II: Resizing the running compute
 
@@ -185,10 +198,12 @@ Each Postgres instance in Lakebase Postgres runs inside its own virtual machine 
 
 Four components coordinate each compute resize:
 
-- The autoscaler-agent runs on every Kubernetes node. It collects metrics from the Postgres VMs on that node, calculates target sizes, and initiates scaling.
-- The vm-monitor runs inside each VM. It watches Postgres memory closely, validates downscaling requests, and resizes the compute cache.
-- A modified Kubernetes scheduler maintains the global view of available resources. Every upscale must be approved by the scheduler before memory is committed.
-- NeonVM applies the change. It is a custom Kubernetes resource and controller, built with QEMU and KVM, that can add or remove CPU and memory from a running VM.
+- The **autoscaler-agent** runs on every Kubernetes node. It collects metrics from the Postgres VMs on that node, calculates target sizes, and initiates scaling.
+- The **vm-monitor** runs inside each VM. It watches Postgres memory closely, validates downscaling requests, and resizes the compute cache.
+- A **modified Kubernetes scheduler** maintains the global view of available resources. Every upscale must be approved by the scheduler before memory is committed.
+- **NeonVM** applies the change. It is a custom Kubernetes resource and controller, built with QEMU and KVM, that can add or remove CPU and memory from a running VM.
+
+**[ADD DIAGRAM 8 in Figma]**
 
 ### Scaling up
 
@@ -215,6 +230,8 @@ Some autoscaling systems are quick to add capacity but slow to give it back, lea
 ## Wrap up
 
 Lakebase Postgres watches the workload as it runs and resizes compute to match in real time. The lakebase architecture makes this possible: since storage is decoupled and durable on its own, compute is free to move without worrying about the data.
+
+**[ADD DIAGRAM 9 in Figma]**
 
 The resulting system scales in both directions, on a live database, without dropping connections. Most importantly, it looks past the obvious signal: tracking CPU alone would miss a workload stalled on cache misses, so the algorithm also tracks memory pressure and a time-aware estimate of the working set.
 
