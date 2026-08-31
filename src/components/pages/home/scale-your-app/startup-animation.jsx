@@ -324,7 +324,7 @@ const StartupAnimation = ({ onStart }) => {
           />
         </m.div>
 
-        <div className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 xl:top-112 md:w-[480px] sm:top-100 sm:h-[226px] sm:w-full sm:px-5 sm:pt-5">
+        <div className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 xl:top-112 md:w-[480px] sm:top-100 sm:h-auto sm:w-full sm:p-5 sm:pb-6">
           <strong className="block text-[5rem] leading-none font-normal tracking-extra-tight text-white sm:text-[4rem]">
             100K+
           </strong>

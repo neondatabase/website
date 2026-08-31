@@ -57,13 +57,13 @@ const ScaleStat = () => (
 );
 
 const Scale = () => (
-  <div className="relative h-[1051px] overflow-hidden xl:h-250 lg:h-205 md:h-[700px] sm:h-[600px]">
+  <div className="relative h-[1051px] overflow-hidden xl:h-250 lg:h-205 md:h-[700px] sm:h-177">
     <div
-      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px] sm:-translate-x-[53%]"
+      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:left-5 sm:h-[621px] sm:w-[740px] sm:-translate-x-1/2"
       aria-hidden="true"
     >
-      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full lg:top-[163.5px] lg:h-[818px] lg:w-[818px] sm:top-32 sm:h-[555px] sm:w-[555px]">
-        <div className="xl: absolute top-1/2 left-1/2 aspect-1920/1610 w-[1920px] -translate-x-1/2 -translate-y-1/2 xl:w-410 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]">
+      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full lg:top-[163.5px] lg:h-[818px] lg:w-[818px] sm:top-40 sm:h-[453px] sm:w-[453px]">
+        <div className="absolute top-1/2 left-1/2 aspect-1920/1610 w-[1920px] -translate-x-1/2 -translate-y-1/2 xl:w-410 lg:h-[1120px] lg:w-[1336px] sm:h-[621px] sm:w-[740px]">
           <GlobeAnimation />
         </div>
       </div>
@@ -81,7 +81,7 @@ const Scale = () => (
       />
     </Container>
 
-    <div className="absolute top-[570px] left-1/2 -translate-x-3/4 lg:top-[430px] md:top-[360px] sm:inset-5 sm:top-88 sm:translate-x-0">
+    <div className="absolute top-[570px] left-1/2 -translate-x-3/4 lg:top-[430px] md:top-[360px] sm:inset-x-5 sm:top-112.5 sm:bottom-auto sm:translate-x-0">
       <ScaleStat />
     </div>
   </div>
