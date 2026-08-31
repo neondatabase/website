@@ -27,6 +27,8 @@ seo:
 
 [Neon is now available as a plugin in Grok Bot.](https://neon.com/docs/ai/ai-grok-bot-plugin) You just have to connect your Neon account once and you'll be able to ask a Grok bot to build on Neon:
 
+**[ADD CLIP]**
+
 Under the hood, the plugin pairs Neon agent skills with the [Neon MCP Server](https://neon.com/docs/ai/ai-grok-bot-plugin). The skills give Grok Bot context for Neon workflows and MCP gives it authenticated tools to act on your account.
 
 ## What Grok Bot can do
@@ -44,10 +46,14 @@ For example, you can ask things like: *I'm working on a new feature, but it requ
 
 Grok Bot checks the Neon connector, lists your orgs and projects and asks which project to branch from. After you pick one, it creates an isolated copy of production (a Neon branch) and tests the migration there.
 
+**[ADD IMAGE 1]**
+
 The bot returned the branch id, a pooled connection string and an Open in console link. Then it asked whether to point the local `DATABASE_URL` at the new branch.
 
 ## Install the plugin
 
-Here's an install deep link [ADD] that will open the Neon plugin page in Grok Bot (you'll have to authorize Neon in the browser).
+[Here's an install deep link](grokbot://app/v1/plugin/add?id=669) that will open the Neon plugin page in Grok Bot (you'll have to authorize Neon in the browser).
 
 If the deep link above does not open Grok Bot, you can also install from the Plugins directory or simply ask Grok to connect the Neon plugin.
+
+**[ADD IMAGE 2]**
