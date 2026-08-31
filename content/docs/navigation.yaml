@@ -808,6 +808,8 @@
           slug: compute/functions/authentication
         - section: Guides
           items:
+            - title: Telegram bot
+              slug: compute/functions/telegram-bot
             - title: Discord bot
               slug: compute/functions/discord-bot
             - title: AI agents
