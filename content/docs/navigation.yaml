@@ -929,8 +929,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: The object model
-              slug: concepts/the-object-model
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
