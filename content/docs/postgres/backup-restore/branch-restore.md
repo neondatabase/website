@@ -75,7 +75,7 @@ Backup branches created when restoring root branch from another branch cannot be
 
 #### Overwrite, not a merge
 
-It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite of the database timeline, not a merge or refresh. All Postgres data and schema on your branch, along with Managed Better Auth data stored in the `neon_auth` schema, are replaced with the contents from the historical source. All data changes from the selected restore point onwards are excluded from the branch.
+It is important to understand that whenever you restore a branch, you are performing a _complete_ overwrite of the database timeline, not a merge or refresh. All Postgres data and schema on your branch, along with Managed Better Auth data stored in the `neon_auth` schema, are replaced with the contents from the historical source. There is no way to exclude `neon_auth` from a restore, though the backup branch created by the restore still holds your earlier auth state. All data changes from the selected restore point onwards are excluded from the branch.
 
 Object Storage is not part of the database timeline, so a database restore does not revert its contents. The same is true of Functions.
 
