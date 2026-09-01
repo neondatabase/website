@@ -8,7 +8,7 @@ import illustration from 'images/pages/functions/branching/illustration.svg';
 
 const Branching = () => (
   <section
-    className="bg-black-pure py-20 safe-paddings text-white lg:py-16 md:py-12"
+    className="bg-black-pure pt-20 safe-paddings pb-40 text-white lg:pt-16 lg:pb-32 md:pt-12 md:pb-24"
     data-figma-node-id="3122:2194"
     aria-labelledby="functions-branching-heading"
   >
@@ -25,18 +25,14 @@ const Branching = () => (
         included.
       </p>
 
-      <div className="mt-12 overflow-hidden" data-figma-node-id="3122:2198">
-        <Image
-          className="h-auto w-full"
-          src={illustration}
-          width={1344}
-          height={422}
-          unoptimized
-          alt=""
-        />
+      <div
+        className="relative mt-12 aspect-[1344/422] overflow-hidden"
+        data-figma-node-id="3122:2198"
+      >
+        <Image src={illustration} fill unoptimized alt="" />
       </div>
 
-      <ul className="mt-[45px] grid grid-cols-[352px_384px_352px] gap-x-32 xl:grid-cols-3 xl:gap-x-16 lg:gap-x-8 md:grid-cols-1 md:gap-y-8">
+      <ul className="mt-[45px] grid grid-cols-[352px_384px_352px] gap-x-32 min-[1280px]:max-[1407px]:grid-cols-3 min-[1280px]:max-[1407px]:gap-x-16 xl:grid-cols-3 xl:gap-x-16 lg:gap-x-8 md:grid-cols-1 md:gap-y-8">
         <li className="pt-[3px]">
           <h3 className="flex items-center gap-2 text-base leading-none font-medium tracking-extra-tight">
             <span
@@ -47,7 +43,7 @@ const Branching = () => (
             </span>
             Branches with your data
           </h3>
-          <p className="mt-2 text-base leading-normal tracking-extra-tight text-gray-new-50">
+          <p className="mt-2 max-w-[352px] text-base leading-normal tracking-extra-tight text-gray-new-50">
             Create a child branch and the function follows, with its own invocation URL and
             branch-specific database context.
           </p>

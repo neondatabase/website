@@ -26,7 +26,7 @@ const BackendCompute = () => (
     aria-labelledby="backend-compute-heading"
   >
     <Container size="1344">
-      <div className="grid grid-cols-[240px_656px_416px] gap-x-4 xl:grid-cols-[200px_minmax(0,1.58fr)_minmax(0,1fr)] lg:grid-cols-1">
+      <div className="grid grid-cols-[240px_656px_416px] gap-x-4 min-[1024px]:max-[1407px]:grid-cols-[200px_minmax(0,1.58fr)_minmax(0,1fr)] lg:grid-cols-1">
         <SectionLabel className="mt-3.5 lg:mt-0" theme="white">
           Backend compute
         </SectionLabel>

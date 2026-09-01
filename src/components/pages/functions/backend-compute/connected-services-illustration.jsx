@@ -130,19 +130,17 @@ const ConnectedServicesIllustration = () => (
                   className="relative block shrink-0 overflow-hidden"
                   style={{ width: toCanvasUnit(12), height: toCanvasUnit(12) }}
                 >
-                  <Image
-                    className="absolute max-w-none"
+                  <span
+                    className="absolute"
                     style={{
                       left: toCanvasUnit(0.293),
                       top: toCanvasUnit(2.293),
                       width: toCanvasUnit(11.4142),
                       height: toCanvasUnit(7.91421),
                     }}
-                    src={connectedCheckIcon}
-                    width={12}
-                    height={8}
-                    alt=""
-                  />
+                  >
+                    <Image src={connectedCheckIcon} fill unoptimized alt="" />
+                  </span>
                 </span>
                 <span
                   className="leading-[1.375] whitespace-nowrap text-gray-new-50"

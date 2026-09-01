@@ -36,16 +36,11 @@ const Hero = () => (
           </h1>
         </div>
 
-        <div className="flex shrink-0 gap-5 md:w-full md:flex-col md:gap-3">
-          <Button className="md:h-11 md:w-full" theme="white-filled" size="new" to={LINKS.signup}>
+        <div className="flex shrink-0 gap-x-5 sm:gap-x-3">
+          <Button theme="white-filled" size="new" to={LINKS.signup}>
             Start building
           </Button>
-          <Button
-            className="md:h-11 md:w-full"
-            theme="outlined"
-            size="new"
-            to={LINKS.functionsOverview}
-          >
+          <Button theme="outlined" size="new" to={LINKS.functionsOverview}>
             Read the docs
           </Button>
         </div>

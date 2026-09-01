@@ -44,16 +44,9 @@ const Illustration = () => (
       priority
       alt=""
     />
-    <Image
-      className="absolute max-w-none"
-      style={getFrameStyle(464.5, 248, 122, 6)}
-      src={arrowIllustration}
-      width={122}
-      height={6}
-      unoptimized
-      priority
-      alt=""
-    />
+    <span className="absolute" style={getFrameStyle(464.5, 248, 122, 6)}>
+      <Image src={arrowIllustration} fill unoptimized priority alt="" />
+    </span>
     <Image
       className="absolute max-w-none"
       style={getFrameStyle(594, 60, 640, 382)}

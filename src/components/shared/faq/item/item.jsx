@@ -1,6 +1,6 @@
 'use client';
 
-import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import useLocation from 'react-use/lib/useLocation';
@@ -45,6 +45,7 @@ const Item = ({
 }) => {
   const { hash } = useLocation();
   const [isOpen, setIsOpen] = useState(initialState === 'open');
+  const shouldReduceMotion = useReducedMotion();
   const styles = variants[variant] ?? variants.default;
 
   const handleOpen = () => {
@@ -83,40 +84,47 @@ const Item = ({
       )}
       id={id}
     >
-      <button
-        className="group relative flex w-full items-start justify-between gap-4 rounded-sm text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={`panel-${index}`}
-        onClick={handleOpen}
+      <h3
+        className={cn(
+          'text-xl leading-snug font-medium tracking-tighter transition-colors duration-300 lg:text-lg',
+          styles.title
+        )}
       >
-        <h3
-          className={cn(
-            'text-xl leading-snug font-medium tracking-tighter transition-colors duration-300 lg:text-lg',
-            styles.title
-          )}
+        <button
+          className="group relative flex w-full items-start justify-between gap-4 rounded-sm text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={`panel-${index}`}
+          onClick={handleOpen}
         >
-          {question}
-        </h3>
-        <span
-          className={cn(
-            'mt-2.5 mr-2.5 h-2 w-2 shrink-0 transform border-t border-l border-gray-new-80 transition duration-300',
-            styles.icon,
-            isOpen ? 'rotate-[405deg]' : 'rotate-[225deg]'
-          )}
-        />
-      </button>
+          <span>{question}</span>
+          <span
+            className={cn(
+              'mt-2.5 mr-2.5 h-2 w-2 shrink-0 transform border-t border-l border-gray-new-80 transition duration-300',
+              'motion-reduce:transition-none',
+              styles.icon,
+              isOpen ? 'rotate-[405deg]' : 'rotate-[225deg]'
+            )}
+          />
+        </button>
+      </h3>
       <LazyMotion features={domAnimation}>
         <m.div
           key={index}
           id={`panel-${index}`}
+          aria-hidden={!isOpen}
+          inert={!isOpen}
           initial={initialState}
           animate={isOpen ? 'open' : 'closed'}
           variants={variantsAnimation}
-          transition={{
-            opacity: { duration: 0.2 },
-            height: { duration: 0.3 },
-          }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  opacity: { duration: 0.2 },
+                  height: { duration: 0.3 },
+                }
+          }
         >
           <div
             className={cn(
