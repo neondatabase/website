@@ -3,7 +3,11 @@ title: How to host a Telegram bot on Neon Functions
 tag: new
 tagTheme: green
 subtitle: Receive Telegram messages, run bot commands and store data in Postgres
+summary: >-
+  Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
+  webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
+updatedOn: '2026-09-02T23:13:13.838Z'
 isDraft: false
 ---
 
@@ -20,11 +24,11 @@ This guide uses Telegram webhooks. It doesn't run a polling process with `getUpd
 ## Prerequisites
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
-- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest` if needed, then see [CLI auth](/docs/cli/auth).
-- Node.js 24 (`node -v`). Deployed functions run on `nodejs24`.
+- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI auth](/docs/cli/auth).
+- Node.js 24 (`node -v`). Deployed functions run on `nodejs24`, so 24 locally is the closest match. Node.js 20+ works.
 - A Telegram account.
 
-The template uses npm. Its scripts load Telegram values from `.env`.
+The template uses npm. Its scripts load Telegram values from `.env.local`, the same convention as Next.js and `vercel env pull`.
 
 ## Create a Telegram bot
 
@@ -40,14 +44,12 @@ For more BotFather options, see [Creating a new bot](https://core.telegram.org/b
 
 ## Scaffold the project
 
-In an interactive terminal, `neon bootstrap` copies the Telegram example into a new directory, then prompts you to install dependencies and [link](/docs/cli/link) a Neon project. The template ID is `telegram-bot-http`:
+`neon bootstrap` copies the Telegram example into a new directory and prompts you to install dependencies and set up the project. Accept the prompts. Pass `--no-link` to skip linking for now; you'll [link](/docs/cli/link) in the next step, after creating `.env.local`, so Neon writes its variables straight into that file. The template ID is `telegram-bot-http`:
 
 ```bash
-neon bootstrap my-telegram-bot --template telegram-bot-http
+neon bootstrap my-telegram-bot --template telegram-bot-http --no-link
 cd my-telegram-bot
 ```
-
-Accept both prompts. If you skip either, run `npm install` and `neon link` before continuing.
 
 See [`neon bootstrap`](/docs/cli/bootstrap) for flags. Later commands in this guide assume you're in that directory.
 
@@ -83,12 +85,14 @@ This walkthrough deploys the function before connecting Telegram. Telegram requi
 
 ## Add Telegram secrets
 
-Don't overwrite an existing `.env`; doing so can remove `DATABASE_URL`. If `.env` doesn't exist, copy the template. Then pull the linked branch's Neon variables into the same file:
+Bootstrap scaffolds a `.env.example` but no `.env.local`. Copy the example first, then link so Neon merges the branch's variables into it:
 
 ```bash
-cp .env.example .env
-neon env pull --file .env
+cp .env.example .env.local
+neon link
 ```
+
+Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_FUNCTION_TELEGRAM_BASE_URL` (your function's public URL, ready before you deploy) into `.env.local`, leaving the Telegram keys untouched.
 
 Generate a webhook secret:
 
@@ -96,22 +100,26 @@ Generate a webhook secret:
 openssl rand -hex 32
 ```
 
-Add the BotFather token and generated secret to `.env`. Leave `TELEGRAM_WEBHOOK_URL` empty until you deploy:
+Uncomment and set `TELEGRAM_BOT_TOKEN` (the BotFather token) and `TELEGRAM_WEBHOOK_SECRET` (the value you just generated). Leave `TELEGRAM_WEBHOOK_URL` empty until you deploy:
 
-```env filename=".env"
-TELEGRAM_BOT_TOKEN=
-TELEGRAM_WEBHOOK_SECRET=
+```env filename=".env.local"
+# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# TELEGRAM_BOT_TOKEN=
+# TELEGRAM_WEBHOOK_SECRET=
+
+# Local only, used by the set:webhook script. Set after you deploy.
 TELEGRAM_WEBHOOK_URL=
 
-# Written locally by `neon env pull`; injected into deployed functions by Neon.
+# Written into `.env.local` by `neon link`.
 NEON_BRANCH=
 DATABASE_URL=
 DATABASE_URL_UNPOOLED=
+NEON_FUNCTION_TELEGRAM_BASE_URL=
 ```
 
 The webhook secret can contain 1 to 256 characters from `A-Z`, `a-z`, `0-9`, `_` and `-`. The `openssl` command above produces a valid value.
 
-Don't edit `NEON_BRANCH`, `DATABASE_URL` or `DATABASE_URL_UNPOOLED`. Refresh them with `neon env pull --file .env`. See [Environment variables](/docs/compute/functions/environment-variables).
+Leave the pulled `NEON_*` and `DATABASE_URL*` values as written. See [Environment variables](/docs/compute/functions/environment-variables).
 
 Only the local webhook setup script reads `TELEGRAM_WEBHOOK_URL`. Neon doesn't pass it to the function.
 
@@ -119,36 +127,20 @@ Only the local webhook setup script reads `TELEGRAM_WEBHOOK_URL`. Neon doesn't p
 
 If `neon bootstrap` installed dependencies, you can deploy now. If you copied the source by hand, run `npm install` first.
 
-The `deploy` script runs `neon deploy --env .env`, which evaluates `neon.ts` with your Telegram secrets in `process.env`:
+The `deploy` script runs `neon deploy --env .env.local`, which evaluates `neon.ts` with your Telegram secrets in `process.env`:
 
 ```bash
 npm run deploy
 ```
 
-The CLI applies the `neon.ts` policy, bundles the function and waits for the deployment to finish. You'll see `Applied changes` and a **Function URLs** list. Copy the `telegram` URL.
-
-The URL looks like:
-
-```text shouldWrap
-https://br-cool-darkness-123456-telegram.compute.c-1.us-east-2.aws.neon.tech/
-```
-
-Your cell (`c-1`, `c-3`, …) will differ.
-
-If you need the URL later, run:
-
-```bash
-npm run endpoint
-```
-
-This runs `neon functions get telegram`. Copy **Invocation Url** from the output.
+The CLI applies the `neon.ts` policy, bundles the function and waits for the deployment to finish. You'll see `Applied changes` and a **Function URLs** list. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
 
 ## Set the webhook
 
-Telegram sends updates to `/api/webhook`. Remove the trailing slash from the function URL, append `/api/webhook` and add the full URL to `.env`:
+Telegram sends updates to `/api/webhook`. Your webhook URL is `NEON_FUNCTION_TELEGRAM_BASE_URL` (from `.env.local`) with `/api/webhook` appended. Set `TELEGRAM_WEBHOOK_URL` to it:
 
-```env filename=".env"
-TELEGRAM_WEBHOOK_URL=https://br-cool-darkness-123456-telegram.compute.c-1.us-east-2.aws.neon.tech/api/webhook
+```env filename=".env.local"
+TELEGRAM_WEBHOOK_URL=https://br-cool-darkness-123456-telegram.compute.us-east-2.aws.neon.tech/api/webhook
 ```
 
 Register that URL and your webhook secret with Telegram:
@@ -170,11 +162,11 @@ Open the webhook URL in a browser to check that the function is available. A GET
   "ok": true,
   "service": "telegram-webhook",
   "webhookPath": "/api/webhook",
-  "webhookUrl": "https://br-cool-darkness-123456-telegram.compute.c-1.us-east-2.aws.neon.tech/api/webhook"
+  "webhookUrl": "https://br-cool-darkness-123456-telegram.compute.us-east-2.aws.neon.tech/api/webhook"
 }
 ```
 
-`ok: true` confirms only that the function is reachable at that URL. It doesn't verify the webhook secret or confirm webhook registration. A `true` result from `npm run set:webhook` confirms registration. Sending `/ping` verifies end-to-end delivery.
+`ok: true` confirms only that the function is reachable at that URL. `webhookUrl` echoes the public URL you requested; registering it with Telegram is still a separate step (`npm run set:webhook`). This GET doesn't verify the webhook secret or confirm webhook registration. A `true` result from `npm run set:webhook` confirms registration. Sending `/ping` verifies end-to-end delivery.
 
 ## Register bot commands
 
@@ -192,7 +184,7 @@ Run this command again after you change the command list.
 
 Open the bot link that BotFather gave you. If Telegram shows a **Start** button, click it. Then send `/ping`. The bot replies with `Pong` and an estimated webhook latency.
 
-If Telegram replies with `Unknown command` after you click **Start**, send `/ping`. The template doesn't register a `/start` command.
+The template doesn't register a `/start` command, so tapping **Start** may return `Unknown command`. Send `/ping` instead.
 
 If the bot doesn't reply:
 
@@ -230,7 +222,7 @@ The template includes more than `/ping`:
 
 The template stores Telegram user IDs, display names and usage counts in the `profiles` and `command_usage` tables. Usage tracking is best-effort and doesn't block replies.
 
-After `neon env pull --file .env` writes `DATABASE_URL`, create the tables:
+`neon link` wrote `DATABASE_URL` into `.env.local`, so create the tables any time after that:
 
 ```bash
 npm run db:push

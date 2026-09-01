@@ -3,7 +3,11 @@ title: How to host a WhatsApp bot on Neon Functions
 tag: new
 tagTheme: green
 subtitle: Receive WhatsApp messages and reply through the Graph API
+summary: >-
+  Host a WhatsApp bot on Neon Functions. Receive WhatsApp Cloud API webhooks, verify Meta's
+  request signatures, reply through the Graph API, and store data in Postgres on the same branch.
 enableTableOfContents: true
+updatedOn: '2026-09-02T23:13:13.838Z'
 isDraft: false
 ---
 
@@ -20,8 +24,8 @@ This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a person
 ## Prerequisites
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
-- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then follow [CLI authentication](/docs/cli/auth).
-- Node.js 24 (`node -v`). Deployed functions run on `nodejs24`.
+- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI auth](/docs/cli/auth).
+- Node.js 24 (`node -v`). Deployed functions run on `nodejs24`, so 24 locally is the closest match. Node.js 20+ works.
 - A Meta developer account.
 - A Meta app connected to a WhatsApp Business Account, with a Cloud API phone number and a test recipient. Meta's get started flow can create test resources for you.
 
@@ -63,10 +67,10 @@ Treat the access token, app secret and webhook verify token like passwords. Neve
 
 ## Scaffold the project
 
-`neon bootstrap` copies the WhatsApp HTTP example into a new directory, installs its dependencies and links a Neon project. The template ID is `whatsapp-bot-http`:
+`neon bootstrap` copies the WhatsApp HTTP example into a new directory and prompts you to install dependencies and set up the project. Accept the prompts. Pass `--no-link` to skip linking for now; you'll [link](/docs/cli/link) in the next step, after creating `.env.local`, so Neon writes its variables straight into that file. The template ID is `whatsapp-bot-http`:
 
 ```bash
-neon bootstrap my-whatsapp-bot --template whatsapp-bot-http
+neon bootstrap my-whatsapp-bot --template whatsapp-bot-http --no-link
 cd my-whatsapp-bot
 ```
 
@@ -104,61 +108,62 @@ Deploy the function before connecting Meta. Meta needs a public HTTPS callback U
 
 ## Add WhatsApp secrets
 
-The deploy script runs `neon deploy --env .env` to read `.env`. Don't replace a `.env` created by `neon bootstrap` because it can contain database variables for the linked project. Add the WhatsApp keys to the existing file. If the file doesn't exist, copy `.env.example` to `.env`.
+The deploy script runs `neon deploy --env .env.local`, the same convention as Next.js and `vercel env pull`. Bootstrap scaffolds a `.env.example` but no `.env.local`. Copy the example first, then link so Neon merges the branch's variables into it:
 
-```env filename=".env"
-WHATSAPP_ACCESS_TOKEN=
-WHATSAPP_PHONE_NUMBER_ID=
-WHATSAPP_VERIFY_TOKEN=
-WHATSAPP_APP_SECRET=
+```bash
+cp .env.example .env.local
+neon link
+```
 
-# Set automatically by Neon when running `neon deploy`.
+Linking merges `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, and `NEON_FUNCTION_WHATSAPP_BASE_URL` (your function's public URL, ready before you deploy) into `.env.local`, leaving the WhatsApp keys untouched. Uncomment and add them:
+
+```env filename=".env.local"
+# Required. Add real values before deploying; a missing key throws at deploy, an empty one uploads "".
+# WHATSAPP_ACCESS_TOKEN=
+# WHATSAPP_PHONE_NUMBER_ID=
+# WHATSAPP_VERIFY_TOKEN=
+# WHATSAPP_APP_SECRET=
+
+# Written into `.env.local` by `neon link`.
 NEON_BRANCH=
 DATABASE_URL=
 DATABASE_URL_UNPOOLED=
+NEON_FUNCTION_WHATSAPP_BASE_URL=
 ```
 
 Set `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_APP_SECRET` to the values from Meta. Set `WHATSAPP_VERIFY_TOKEN` to the random value you generated.
 
-Leave the Neon variables as written by `neon bootstrap`. Neon also injects them into the deployed function. See [Environment variables](/docs/compute/functions/environment-variables).
-
-## Apply the database schema
-
-The `/name` and `/profile` commands use the `profiles` and `command_usage` tables. Apply the included Drizzle schema to the linked Neon database:
-
-```bash
-npm run db:push
-```
-
-You can deploy and test `/ping` without these tables, but the database-backed commands will return an error until you apply the schema.
+Leave the pulled `NEON_*` and `DATABASE_URL*` values as written. Neon also injects them into the deployed function. See [Environment variables](/docs/compute/functions/environment-variables).
 
 ## Deploy the function
 
-Deploy the function with the WhatsApp secrets from `.env`:
+Deploy the function with the WhatsApp secrets from `.env.local`:
 
 ```bash
 npm run deploy
 ```
 
-The script runs `neon deploy --env .env`. The CLI evaluates `neon.ts`, bundles the handler and waits for the deployment to finish. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
+The script runs `neon deploy --env .env.local`. The CLI evaluates `neon.ts`, bundles the handler and waits for the deployment to finish. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
 
-Copy the `whatsapp` invocation URL from the deployment output. Remove its trailing slash, then append `/api/webhook`. The complete callback URL looks like:
+Your callback URL is `NEON_FUNCTION_WHATSAPP_BASE_URL` (from `.env.local`) with `/api/webhook` appended:
 
 ```text shouldWrap
-https://br-cool-darkness-123456-whatsapp.compute.c-1.us-east-2.aws.neon.tech/api/webhook
+https://br-cool-darkness-123456-whatsapp.compute.us-east-2.aws.neon.tech/api/webhook
 ```
 
-Your branch name, endpoint ID and cell will differ.
+Your URL will differ. Use the exact `NEON_FUNCTION_WHATSAPP_BASE_URL` value from `.env.local`, with `/api/webhook` appended; the host is specific to your branch.
 
-To get the invocation URL again, run:
+Deployed environment variables are a snapshot of `.env.local` at deployment time. Run `npm run deploy` again after changing any WhatsApp value.
+
+## Apply the database schema
+
+The `/name` and `/profile` commands use the `profiles` and `command_usage` tables. `neon link` wrote `DATABASE_URL` into `.env.local`, so apply the included Drizzle schema to the linked Neon database:
 
 ```bash
-npm run endpoint
+npm run db:push
 ```
 
-This script runs `neon functions get whatsapp`. Append `/api/webhook` to the returned invocation URL.
-
-Deployed environment variables are a snapshot of `.env` at deployment time. Run `npm run deploy` again after changing any WhatsApp value.
+You can test `/ping` without these tables, but the database-backed commands return an error until you apply the schema.
 
 ## Configure the webhook
 
@@ -177,7 +182,7 @@ If verification fails:
 
 - Confirm that the callback URL ends in `/api/webhook`.
 - Confirm that Meta's verify token exactly matches `WHATSAPP_VERIFY_TOKEN`.
-- Redeploy after editing `.env`.
+- Redeploy after editing `.env.local`.
 - Check [function logs](/docs/compute/functions/logs).
 
 Opening the callback URL directly in a browser returns `403 invalid verify token`. That's expected because a normal browser request doesn't contain Meta's verification query parameters.
@@ -194,7 +199,7 @@ If the bot doesn't reply:
 - Confirm that you sent the message to the phone number associated with `WHATSAPP_PHONE_NUMBER_ID`.
 - Check whether a temporary `WHATSAPP_ACCESS_TOKEN` expired.
 - Confirm that `WHATSAPP_APP_SECRET` matches the Meta app. A mismatch causes POST signature verification to return `401`.
-- Redeploy after changing `.env`, then check [function logs](/docs/compute/functions/logs).
+- Redeploy after changing `.env.local`, then check [function logs](/docs/compute/functions/logs).
 
 ## How it works
 
