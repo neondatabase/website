@@ -4,7 +4,7 @@ subtitle: Authenticate to Neon via browser or API key and manage credentials
 summary: >-
   The `neon auth` command authenticates the Neon CLI to a Neon account by
   launching a browser OAuth flow that saves credentials to
-  `~/.config/neonctl/credentials.json`. Use this command when setting up
+  `~/.config/neon/credentials.json`. Use this command when setting up
   the CLI for the first time or when not using an API key. Vercel-Managed
   Integration users must authenticate via API key (`--api-key` or
   `NEON_API_KEY`) instead. The CLI resolves authentication in priority order:
@@ -26,7 +26,7 @@ The `auth` command authenticates you to Neon. `neon login` is an alias for `neon
 The command launches a browser window where you authorize the Neon CLI to access your Neon account. Your credentials are then saved locally to `credentials.json`:
 
 ```text filename="Output"
-/home/<home>/.config/neonctl/credentials.json
+/home/<home>/.config/neon/credentials.json
 ```
 
 <Admonition type="note">
