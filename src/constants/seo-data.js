@@ -69,6 +69,12 @@ export default {
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
+  functions: {
+    title: 'Neon Functions — Long-running serverless functions',
+    description:
+      'Run long-running Node.js functions next to Lakebase Postgres, with branch-aware data and Neon service credentials injected automatically.',
+    pathname: LINKS.functions,
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',

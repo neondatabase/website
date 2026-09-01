@@ -13,6 +13,7 @@ export default {
   contactSales: '/contact-sales',
   enterprise: '/enterprise',
   flow: '/flow',
+  functions: '/functions',
   faster: '/faster',
   guides: '/guides',
   faqs: '/faqs',
