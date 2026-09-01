@@ -7,7 +7,7 @@ summary: >-
   from @neon/functions or a lower-level upgrade export, server-sent events for
   one-way streams, and Postgres to broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-09-01T17:41:58.571Z'
+updatedOn: '2026-09-01T17:54:30.907Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -215,7 +215,9 @@ async function poll() {
     const { rows } = await pool.query('SELECT id, body FROM messages WHERE id > $1 ORDER BY id', [cursor]);
     for (const row of rows) {
       cursor = row.id;
-      for (const socket of clients) socket.send(row.body);
+      for (const socket of clients) {
+        if (socket.readyState === socket.OPEN) socket.send(row.body); // skip a socket mid-close
+      }
     }
   } catch (err) {
     console.error('[poll]', err);
