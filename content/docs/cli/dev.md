@@ -43,4 +43,4 @@ neon dev --source ./functions/hello.ts --port 3000
 
 ## WebSockets
 
-`neon dev` serves WebSocket upgrades the way the deployed runtime does, so you can test real-time functions locally. Both patterns work: `upgradeWebSocket` from `@neon/functions` and an `upgrade` export. Connect a client to the dev server's `ws://localhost:<port>` URL. See [WebSockets and SSE](/docs/compute/functions/websockets) for the function-side code.
+`neon dev` serves WebSocket upgrades locally, so you can test real-time functions before you deploy. Both patterns work: `upgradeWebSocket` from `@neon/functions` and an `upgrade` export. Connect a client to the dev server's `ws://localhost:<port>` URL. See [WebSockets and SSE](/docs/compute/functions/websockets) for the function-side code.
