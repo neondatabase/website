@@ -18,9 +18,11 @@ redirectFrom:
 updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
-On Neon, a **branch** is where your backend runs: Lakebase Postgres, plus Managed Better Auth, Object Storage, Functions, and the AI Gateway. Each branch is isolated from every other branch. You can create another branch from a current or past state, change it, and delete it when you are done, without touching the original. That is what makes branching useful for a preview, a pull request, or an experiment: you get a full cloned backend to work against, not a second project to provision.
+On Neon, a **branch** is where your backend runs. It can include Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway.
 
-An **organization** contains projects, and each **project** contains branches.
+You can create a child branch from a current or past state, change it, and delete it without affecting the original. That is useful for a preview, a pull request, or an experiment: you get a cloned backend to work against, not a second project to provision.
+
+Every branch belongs to a **project**, and every project belongs to an **organization**.
 
 ![Tree diagram of the Neon object model. An organization contains projects (one region per project). A project contains branches. A branch holds five services: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children: computes, roles, databases, and the Data API.](/docs/concepts/the-object-model.png 'no-border')
 
