@@ -1,6 +1,6 @@
 ---
 title: The Neon object model
-subtitle: How an organization, a project, and a branch hold your whole backend
+subtitle: How the Neon backend is structured
 summary: >-
   Neon nests resources in three containers: an organization holds projects, and
   a project holds branches. A branch is not just a Postgres database. It is your
