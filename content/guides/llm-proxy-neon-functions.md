@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-01T11:33:24.543Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -17,6 +17,12 @@ In this guide, you’ll build a secure LLM proxy that solves all of this. You’
 - **Per-user rate limiting** backed by Postgres or Redis.
 - **Streaming AI responses** through the [Neon AI Gateway](/docs/ai-gateway/overview), without ever exposing provider keys to the frontend
 - A **React frontend** with [Managed Better Auth](/docs/auth/overview) for sign-in and the [Vercel AI SDK UI](https://ai-sdk.dev/docs/ai-sdk-ui/overview) for real-time chat
+
+<CopyPrompt
+  src="/prompts/llm-proxy-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Architecture overview
 

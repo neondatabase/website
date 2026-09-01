@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-01T11:33:24.543Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -25,6 +25,12 @@ Because the pipeline is just the [Neon CLI](/docs/cli) running in a CI job, the 
 <Admonition type="note" title="Neon Functions are in beta">
 Functions are currently available only in the **AWS US East (Ohio)** (`aws-us-east-2`) region, so create your Neon project there to follow along. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
 </Admonition>
+
+<CopyPrompt
+  src="/prompts/neon-functions-github-actions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Prerequisites
 

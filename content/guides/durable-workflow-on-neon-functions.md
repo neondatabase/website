@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-01T11:33:24.543Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -21,6 +21,12 @@ This guide solves that problem by combining [Inngest](https://www.inngest.com) w
 Inngest handles the orchestration layer: event triggers, step-level retries, and durable delays, while Neon Functions provides the co-located compute and data. Your function code stays linear and readable, and you avoid standing up separate queue infrastructure.
 
 In this tutorial, you will build an automated lead enrichment pipeline that receives a customer signup event, writes initial state to Lakebase Postgres, researches the company using a web search tool to generate an executive summary, executes a durable delay, and updates the database record upon completion. This serves as a blueprint for building multi-step AI agents, human-in-the-loop approval flows, scheduled reporting jobs, or any workflow which requires durable retries.
+
+<CopyPrompt
+  src="/prompts/durable-workflow-on-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Architecture overview
 

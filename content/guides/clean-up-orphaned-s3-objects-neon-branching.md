@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-08-27T18:38:44.047Z'
+updatedOn: '2026-09-01T11:33:24.543Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -32,6 +32,12 @@ Neon Object Storage is in beta and available only in the AWS `us-east-2` region.
 </Admonition>
 
 In this tutorial, you'll build a small demo app that simulates the drift problem, then write a vacuum job and test it on a Neon branch before promoting it to production. The workflow is identical for your own application: declare the bucket, measure drift with the checker, run the vacuum on a branch, and promote.
+
+<CopyPrompt
+  src="/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Prerequisites
 
