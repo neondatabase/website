@@ -1,5 +1,7 @@
 ---
 title: 'Neon CLI command: open'
+tag: new
+tagTheme: green
 subtitle: 'Open the linked project in the Neon Console in your browser'
 summary: >-
   The Neon CLI `open` command opens your linked project's dashboard in the Neon

@@ -1,5 +1,7 @@
 ---
 title: How to host a Discord bot on Neon Functions
+tag: new
+tagTheme: green
 subtitle: Receive slash commands at a public function URL with no Gateway connection
 enableTableOfContents: true
 isDraft: false

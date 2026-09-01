@@ -1,5 +1,7 @@
 ---
 title: 'Neon CLI command: ask'
+tag: new
+tagTheme: green
 subtitle: 'Ask the Neon assistant a question from the terminal'
 summary: >-
   The Neon CLI `ask` command sends a question to the Neon assistant and prints
