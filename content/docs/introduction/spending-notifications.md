@@ -24,6 +24,7 @@ tagTheme: green
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/hard-usage-limits">Set hard usage limits</a>
 <a href="/docs/introduction/manage-billing">Manage billing</a>
 <a href="/docs/introduction/monitor-usage">Monitor billing and usage</a>
 <a href="/docs/introduction/cost-optimization">Cost optimization</a>
@@ -90,7 +91,7 @@ When your organization's monthly charges reach the threshold:
 
 Projects continue to run, and charges continue to accumulate, until you raise the threshold or the billing cycle resets at the start of the next month. Automatic project suspension is coming soon and will stop compute charges at the threshold.
 
-Spending notifications only send alerts; they don't stop usage. If you need Neon to actively suspend computes when a limit is reached, you can set per-project consumption quotas with the Neon API. These work per project and per consumption metric (compute, storage, and data transfer) rather than on total dollar spend. See [Configure consumption limits](/docs/guides/consumption-limits).
+Spending notifications only send alerts; they don't stop usage. If you need Neon to actively suspend computes when a limit is reached, you can set per-project consumption limits with the Neon API. These work per project and per consumption metric (compute, storage, and data transfer) rather than on total dollar spend. For a step-by-step walkthrough of setting an enforced limit, monitoring usage against it, and sizing it to a dollar budget, see [Set hard usage limits to cap your spend](/docs/guides/hard-usage-limits). For the full quota reference, see [Configure consumption limits](/docs/guides/consumption-limits).
 
 <Admonition type="note">
 A spending notification threshold applies to the organization's total monthly Neon charges across all projects in that organization. If you belong to multiple organizations, set a separate threshold for each.
