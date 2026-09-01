@@ -7,7 +7,7 @@ summary: >-
   from @neon/functions or a lower-level upgrade export, server-sent events for
   one-way streams, and Postgres LISTEN/NOTIFY to broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-09-01T00:00:00.000Z'
+updatedOn: '2026-09-01T14:41:02.202Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -334,7 +334,7 @@ A function has a public URL, so authenticate the caller before accepting a conne
 
 Browsers can't set custom headers on a WebSocket or an `EventSource`, so you can't use `Authorization`. Pass the token as a query parameter and verify it before accepting the connection. Refusing an unauthenticated connection is the normal case for a WebSocket endpoint.
 
-With `upgradeWebSocket`, refuse the handshake by returning an ordinary `Response`. A `401`, `403`, or `404` returned from `fetch` reaches the client with its status, headers, and body intact, so you don't call `upgradeWebSocket` at all until the caller checks out:
+With `upgradeWebSocket`, refuse the handshake by returning an ordinary `Response` from `fetch` before you upgrade, so you don't call `upgradeWebSocket` at all until the caller checks out:
 
 ```ts
 async fetch(request: Request) {
@@ -351,6 +351,8 @@ async fetch(request: Request) {
   return response;
 },
 ```
+
+A WebSocket client can't read the status of a refused handshake. The browser reports only a generic connection failure, so don't rely on the client seeing the status or body you returned. Refusing still keeps unauthenticated clients out; send any detail the client needs over a separate authenticated request.
 
 With an `upgrade` export, verify the token before calling `wss.handleUpgrade` and write the refusal to the raw socket:
 
