@@ -80,6 +80,7 @@ const HeroServiceVideo = ({
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch((error) => {
+        if (error.name === 'AbortError') return;
         console.error(`Error attempting to play ${title} video:`, error);
       });
     }
@@ -103,6 +104,7 @@ const HeroServiceVideo = ({
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch((error) => {
+            if (error.name === 'AbortError') return;
             console.error(`Error attempting to loop ${title} video:`, error);
           });
         }
