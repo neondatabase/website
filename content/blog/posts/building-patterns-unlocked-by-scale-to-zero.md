@@ -35,7 +35,7 @@ Most hosted Postgres pricing works like this:
 
 That model creates two kinds of compute waste. First, you're provisioning for peak demand, leaving capacity unused the rest of the time; second, the instance keeps "running" even when the database is not busy. That waste is harder to defend now. Compute is scarce and [getting more expensive](https://www.semafor.com/article/08/23/2026/nvidia-says-its-raising-some-prices-15) - leaving it allocated on databases nobody is querying is a blunt way to spend it.
 
-Lakebase Postgres (the Neon database) addresses each compute waste problem separately. [Autoscaling](https://neon.com/docs/introduction/autoscaling) solves the first kind of waste by adjusting compute to the current load in real time; the second kind of waste is solved by s[cale to zero](https://neon.com/docs/introduction/scale-to-zero), which suspends compute after a few minutes of inactivity, then restarts it automatically.
+Lakebase Postgres (the Neon database) addresses each compute waste problem separately. [Autoscaling](https://neon.com/docs/introduction/autoscaling) solves the first kind of waste by adjusting compute to the current load in real time; the second kind of waste is solved by [scale to zero](https://neon.com/docs/introduction/scale-to-zero), which suspends compute after a few minutes of inactivity, then restarts it automatically.
 
 The effect this last piece can have, scale to zero, is easy to dismiss if you only picture one busy production database. Your might first think, "my DB is active 24/7 and I wouldn't want it to suspend anyway" - but  if you think twice, surely your deployment includes at least some databases that are idle most of the time (development, staging).
 
@@ -67,7 +67,9 @@ This is why [many platforms](https://neon.com/platforms) use Neon's API under th
 
 ### Vector search stops requiring an always-on database
 
-The default Postgres setup for vector search is `pgvector` with an HNSW index, and this is designed for a traditional server - it's a long-lived process that keeps the whole graph pinned in RAM between queries. Every search walks that graph through many small random reads. [Lakebase Search](https://neon.com/docs/ai/lakebase-search) allows to invert the design and take advantage of scale to zero even when running semantic search.
+For years, search mostly meant a search bar: a human typing a query, with load you could forecast and QPS you could plan around. That's changing. Search is increasingly a tool exposed in an agent harness, one way to connect data to agents. Teams index more data than they used to, and those indexes may sit idle between agent calls.
+
+The default Postgres setup for vector search is `pgvector` with an HNSW index, and this is designed for a traditional server - it's a long-lived process that keeps the whole graph pinned in RAM between queries. Every search walks that graph through many small random reads. [Lakebase Search](https://neon.com/docs/ai/lakebase-search) lets you invert the design and take advantage of scale to zero even when running semantic search.
 
 [Read this blog post](https://neon.com/blog/lakebase-search-on-neon) for the full picture on how this works - but the TL;DR is that Lakebase search keeps their indexes durable on object storage instead of in compute memory, and the index keeps existing when the compute shuts down. The compute on top is a cache that rebuilds from object storage on demand, so a search database can suspend and wake without re-indexing anything.
 
@@ -110,14 +112,11 @@ Who keeps count on how many repositories they have? That ubiquity is a consequen
 
 ### Realtime becomes an option for every database (coming soon)
 
-Sync and scale to zero have always been hard to combine. A Postgres sync engine typically follows the logical replication stream, which means a subscriber connection that never goes idle. [Electric joined the Neon team at Databricks](https://neon.com/blog/electric-joins-neon) with an idea to build sync differently:
+Sync and scale to zero have always been hard to combine. A Postgres sync engine typically follows the logical replication stream, which holds a replication connection open and keeps compute active. [Electric joined the Neon team at Databricks](https://neon.com/blog/electric-joins-neon), and we're building sync on Neon in a way that doesn't hold the logical replication connection open and so doesn't prevent scale to zero.
 
-- You register a query
-- You get an initial snapshot of the rows that match it
-- From there you follow the change log: updates appear, deletes appear
-- Joins stay consistent. Change a related row and previously out-of-scope rows come into view, without racing the WAL
+The key is a sync protocol that works natively with the Neon proxy, so the database can scale down when there's no write workload without interrupting realtime consumers.
 
-We're working on this project right now. More soon.
+More soon.
 
 ## Scale to zero is not for prod, but there's still waste there. That's why autoscaling exists
 
