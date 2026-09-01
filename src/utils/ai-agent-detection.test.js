@@ -141,6 +141,15 @@ describe('isAIAgentRequest', () => {
 
 describe('getMarkdownPath', () => {
   describe('Valid content routes', () => {
+    it.each([
+      ['/functions', '/md/functions.md'],
+      ['/functions.md', '/md/functions.md'],
+      ['/ai-gateway', '/md/ai-gateway.md'],
+      ['/ai-gateway.md', '/md/ai-gateway.md'],
+    ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
+      expect(getMarkdownPath(pagePath)).toBe(markdownPath);
+    });
+
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
       expect(result).toBe('/md/docs/introduction.md');

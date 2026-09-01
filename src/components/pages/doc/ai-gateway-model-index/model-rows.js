@@ -31,6 +31,9 @@ const PROVIDER_LABELS = {
   moonshotai: 'Moonshot AI',
 };
 
+const MODEL_CATALOG_NOTE =
+  'Prices are provider list prices per million tokens. Inference is free during the private preview. Click a model for a copy-paste quickstart.';
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const providerLabel = (id) => PROVIDER_LABELS[id] || (id ? id[0].toUpperCase() + id.slice(1) : '—');
@@ -151,6 +154,7 @@ const groupByProvider = (rows) => {
 module.exports = {
   PROVIDER_ORDER,
   PROVIDER_LABELS,
+  MODEL_CATALOG_NOTE,
   providerLabel,
   formatContextWindow,
   formatPrice,

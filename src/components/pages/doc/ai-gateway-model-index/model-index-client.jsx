@@ -17,7 +17,7 @@ import AlibabaIcon from './images/alibaba.inline.svg';
 import AnthropicIcon from './images/anthropic.inline.svg';
 import GoogleIcon from './images/google.inline.svg';
 import OpenAIIcon from './images/openai.inline.svg';
-import { PROVIDER_ORDER, providerLabel } from './model-rows';
+import { MODEL_CATALOG_NOTE, PROVIDER_ORDER, providerLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
 
@@ -671,8 +671,7 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
       </StickyTable>
 
       <p className="mt-3 text-[.8125rem] text-gray-new-40 dark:text-gray-new-60">
-        Prices are provider list prices per million tokens. Inference is free during the private
-        preview. Click a model for a copy-paste quickstart.
+        {MODEL_CATALOG_NOTE}
       </p>
       <p className="sr-only" aria-live="polite">
         Showing {visibleRows.length} {visibleRows.length === 1 ? 'model' : 'models'}.

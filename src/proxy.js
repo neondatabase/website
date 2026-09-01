@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
-import { CONTENT_ROUTES } from 'constants/content';
+import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
@@ -21,13 +21,29 @@ const SITE_URL =
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
-  return Object.keys(CONTENT_ROUTES).some(
+  const isGeneratedPage = Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized);
+  const isContentPage = Object.keys(CONTENT_ROUTES).some(
     (route) => normalized === route || path.startsWith(`${route}/`)
   );
+
+  return isGeneratedPage || isContentPage;
+}
+
+function applyNegotiationVary(response) {
+  const vary = new Set(
+    (response.headers.get('Vary') || '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean)
+  );
+  vary.add('Accept');
+  vary.add('User-Agent');
+  response.headers.set('Vary', [...vary].join(', '));
+  return response;
 }
 
 function applyDocHeaders(response) {
-  response.headers.append('Vary', 'Accept');
+  applyNegotiationVary(response);
   response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
   response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
   response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
@@ -318,13 +334,12 @@ export async function proxy(req) {
     if (pathname === '/docs') {
       const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
       // The /docs response is content-negotiated (agents/markdown get llms.txt above),
-      // so the redirect must vary on Accept to stay correct in shared caches.
-      res.headers.set('Vary', 'Accept');
-      return res;
+      // so the redirect must vary on both negotiation inputs to stay correct in shared caches.
+      return applyNegotiationVary(res);
     }
 
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
-    // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
+    // Negotiated Markdown responses vary on Accept and User-Agent (applyDocHeaders above).
     if (isContentRoute(pathname)) {
       if (pathname.endsWith('.md')) {
         const markdownPath = getMarkdownPath(pathname);
@@ -375,7 +390,7 @@ export async function proxy(req) {
       if (pathname.endsWith('.md')) {
         response.headers.set('X-Robots-Tag', 'noindex');
       }
-      return response;
+      return applyNegotiationVary(response);
     }
 
     // Check if the user is logged in
@@ -405,7 +420,8 @@ export async function proxy(req) {
       console.error('Error checking login indicator:', error);
     }
 
-    return NextResponse.next();
+    const response = NextResponse.next();
+    return getMarkdownPath(pathname) ? applyNegotiationVary(response) : response;
   } catch (error) {
     console.error('Middleware execution error:', error);
     // General error fallback
@@ -418,6 +434,8 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
+    '/functions', // Agent-friendly Functions page
+    '/ai-gateway', // Agent-friendly AI Gateway page
     '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown
