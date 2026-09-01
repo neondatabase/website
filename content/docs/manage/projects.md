@@ -13,7 +13,7 @@ summary: >-
   window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-09-01T16:13:43.529Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -87,7 +87,7 @@ The **Settings** page includes these sub-pages:
 - **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
 - **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
 - **Transfer**: Transfer your project from the current organization to another organization you belong to. Transferring a project out of an organization requires the **Admin** organization role.
-- **Delete**: Use with care! This action deletes your entire project and all its objects. You can recover it within seven days; after that, deletion is permanent.
+- **Delete**: Use with care. This action deletes your entire project and all its objects. You can recover it within seven days; after that, deletion is permanent.
 
 ### General project settings
 

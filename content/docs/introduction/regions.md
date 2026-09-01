@@ -1,20 +1,19 @@
 ---
 title: Regions
 summary: >-
-  New Neon projects deploy to AWS regions. Existing Azure projects remain
-  available during the Azure deprecation. The region is fixed at project
-  creation and cannot be changed afterward. Use this page to choose an AWS
-  region close to your application server, or to find NAT gateway IP addresses
-  for outbound connection allowlists. To move data to a different region, create
-  a new project there and migrate.
+  Neon projects deploy to AWS regions. The region is fixed at project creation
+  and cannot be changed afterward. Use this page to choose a region close to your
+  application server, or to find NAT gateway IP addresses for outbound
+  connection allowlists. To move data to a different region, create a new project
+  there and migrate.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-09-01T16:13:43.529Z'
 ---
 
-Neon offers new project deployment in multiple AWS regions. Existing Azure projects remain available during the [Azure region deprecation](#azure-regions), but you can't create new Azure projects. To minimize latency between your Neon database and application, we recommend choosing the AWS region closest to your application server.
+Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
 Each Neon **project** exists in exactly one region. Your database runs in that region. **You cannot change the region** for an existing project. If you need your **data** in a different region, you **create a new Neon project** in that region and **migrate your database** there. You are not moving the project; region is fixed when the project is created.
 
