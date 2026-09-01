@@ -12,8 +12,9 @@ categories:
 authors:
   - dominik-koch
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-in-grok-bot/cover.jpg
+  alt: The Neon logo beside a Grok Bot window marked Neon connected, stepping through creating an isolated migration-test branch
 isFeatured: false
 seo:
   title: Neon is now available in Grok Bot - Neon
@@ -22,12 +23,13 @@ seo:
   noindex: false
   ogTitle: Neon is now available in Grok Bot - Neon
   ogDescription: Create Neon projects, branch databases and run SQL from your Grok Bot
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-in-grok-bot/cover.jpg
 ---
 
 [Neon is now available as a plugin in Grok Bot.](https://neon.com/docs/ai/ai-grok-bot-plugin) You just have to connect your Neon account once and you'll be able to ask a Grok bot to build on Neon:
 
-**[ADD CLIP]**
+<video width="1920" height="1150" style={{ aspectRatio: '1920 / 1150' }} autoPlay loop muted playsInline src="https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-in-grok-bot/neon-bot-demo.mp4"></video>
 
 Under the hood, the plugin pairs Neon agent skills with the [Neon MCP Server](https://neon.com/docs/ai/ai-grok-bot-plugin). The skills give Grok Bot context for Neon workflows and MCP gives it authenticated tools to act on your account.
 
@@ -46,7 +48,7 @@ For example, you can ask things like: *I'm working on a new feature, but it requ
 
 Grok Bot checks the Neon connector, lists your orgs and projects and asks which project to branch from. After you pick one, it creates an isolated copy of production (a Neon branch) and tests the migration there.
 
-**[ADD IMAGE 1]**
+![Neon Bot creating a migration-test branch from production and returning the branch id, a pooled connection string, and an Open in console link](https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-in-grok-bot/branch-migration-test.png)
 
 The bot returned the branch id, a pooled connection string and an Open in console link. Then it asked whether to point the local `DATABASE_URL` at the new branch.
 
@@ -56,4 +58,4 @@ The bot returned the branch id, a pooled connection string and an Open in consol
 
 If the deep link above does not open Grok Bot, you can also install from the Plugins directory or simply ask Grok to connect the Neon plugin.
 
-**[ADD IMAGE 2]**
+![The Grok Bot Plugins dialog with Neon searched, showing Neon Postgres as the first result with an Add button](https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-in-grok-bot/plugins-directory.png)
