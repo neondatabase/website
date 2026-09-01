@@ -27,6 +27,7 @@ export default {
     description:
       'Call frontier and open-weight models from your Neon backend with one credential, one bill, and zero markup.',
     pathname: LINKS.aiGateway,
+    markdownPath: `${LINKS.aiGateway}.md`,
   },
   aboutUs: {
     title: 'About Us — Neon',
@@ -74,6 +75,7 @@ export default {
     description:
       'Run long-running Node.js functions next to Lakebase Postgres, with branch-aware data and Neon service credentials injected automatically.',
     pathname: LINKS.functions,
+    markdownPath: `${LINKS.functions}.md`,
   },
   contactSales: {
     title: 'Contact Sales — Neon',

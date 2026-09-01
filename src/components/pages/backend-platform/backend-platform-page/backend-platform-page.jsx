@@ -6,7 +6,10 @@ import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
 import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq';
 import Layout from 'components/shared/layout';
+import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
 import LINKS from 'constants/links';
+
+const { cta, faqTitleLines } = sharedBackendPlatformContent;
 
 const BackendPlatformPage = ({ children, faqItems }) => (
   <Layout
@@ -16,17 +19,17 @@ const BackendPlatformPage = ({ children, faqItems }) => (
     isHeaderStickyOverlay
   >
     {children}
-    <Faq items={faqItems} variant="light" />
+    <Faq items={faqItems} titleLines={faqTitleLines} variant="light" />
     <BackendServices />
     <BuiltForAgents />
     <BackedBy />
     <CTANew
       className="mt-0 bg-gray-new-10"
-      title="Building something ambitious?"
-      description="Fill out a short form and we’ll get back to you within a few business days."
-      label="Get started"
-      buttonText="Apply now"
-      buttonUrl={LINKS.contactSales}
+      title={cta.title}
+      description={cta.description}
+      label={cta.label}
+      buttonText={cta.buttonText}
+      buttonUrl={LINKS[cta.linkKey]}
     />
   </Layout>
 );

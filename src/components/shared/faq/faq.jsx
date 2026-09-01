@@ -27,7 +27,9 @@ const variants = {
   },
 };
 
-const Faq = ({ items, variant = 'default', className }) => {
+const DEFAULT_TITLE_LINES = ['Your questions,', 'answered'];
+
+const Faq = ({ items, titleLines = DEFAULT_TITLE_LINES, variant = 'default', className }) => {
   const resolvedVariant = variants[variant] ? variant : 'default';
   const styles = variants[resolvedVariant];
 
@@ -35,8 +37,8 @@ const Faq = ({ items, variant = 'default', className }) => {
     <section className={cn('faq safe-paddings', styles.section, className)} id="faq">
       <Container className={styles.container} size="1152">
         <h2 className={styles.title}>
-          Your questions, <br className="lg:hidden" />
-          answered
+          {titleLines[0]} <br className="lg:hidden" />
+          {titleLines[1]}
         </h2>
         <ul className={cn('flex w-full flex-col', styles.items)}>
           {items.map((item, index) => (
@@ -57,6 +59,7 @@ Faq.propTypes = {
       initialState: PropTypes.oneOf(['open', 'closed']),
     })
   ).isRequired,
+  titleLines: PropTypes.arrayOf(PropTypes.string),
   variant: PropTypes.oneOf(Object.keys(variants)),
   className: PropTypes.string,
 };

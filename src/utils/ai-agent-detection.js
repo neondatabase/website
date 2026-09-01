@@ -1,7 +1,12 @@
 // AI Agent Detection Utility
 // Detects if a request is coming from an AI agent based on User-Agent header
 
-import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
+import {
+  CONTENT_ROUTES,
+  EXCLUDED_ROUTES,
+  EXCLUDED_FILES,
+  GENERATED_PAGE_MARKDOWN_PATHS,
+} from 'constants/content';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
@@ -44,6 +49,7 @@ export function isAIAgentRequest(request) {
 // Paths where the generic CONTENT_ROUTES resolver produces the wrong markdown
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
+  ...GENERATED_PAGE_MARKDOWN_PATHS,
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
   // Docs root aliases to the curated llms.txt rather than a generated page-listing.
   // Three places enforce this alias — keep them in sync if this changes:

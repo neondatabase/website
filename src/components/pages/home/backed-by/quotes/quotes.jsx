@@ -1,6 +1,7 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
+import PropTypes from 'prop-types';
 import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -11,45 +12,7 @@ import AnimatedText from './animated-text';
 
 const FADE_DURATION = 0.2; // Duration for fade in/out animations in seconds
 
-const QUOTES = [
-  {
-    text: [
-      "Neon's serverless philosophy is ",
-      'aligned with our vision:',
-      ' no infrastructure to manage, no servers to provision, no database cluster to maintain.',
-    ],
-    highlight: 'aligned with our vision:',
-    author: 'Edouard Bonlieu',
-    post: 'Co-founder at Koyeb',
-  },
-  {
-    text: ['Neon allows us to develop much ', "faster than we've even been", ' used to.'],
-    highlight: "faster than we've even been",
-    author: 'Alex Klarfeld',
-    post: 'CEO and co-founder of Supergood.ai',
-  },
-  {
-    text: [
-      'The killer feature',
-      ' that convinced us to use Neon was branching: it keeps our engineering velocity high.',
-    ],
-    highlight: 'The killer feature',
-    author: 'Léonard Henriquez',
-    post: 'Co-founder and CTO, Topo.io',
-  },
-  {
-    text: [
-      "We've been able to ",
-      'automate virtually all database tasks',
-      ' via the Neon API, saving us a tremendous amount of time and engineering effort.',
-    ],
-    highlight: 'automate virtually all database tasks',
-    author: 'Himanshu Bhandoh',
-    post: 'Software Engineer at Retool',
-  },
-];
-
-const Quotes = () => {
+const Quotes = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentIndexRef = useRef(0);
   const startTimeRef = useRef(null);
@@ -81,7 +44,7 @@ const Quotes = () => {
 
     const updateIndex = () => {
       const elapsedTime = Date.now() - startTimeRef.current;
-      const newIndex = Math.floor(elapsedTime / 5000) % QUOTES.length;
+      const newIndex = Math.floor(elapsedTime / 5000) % items.length;
       setCurrentIndex(newIndex);
       frameRef.current = requestAnimationFrame(updateIndex);
     };
@@ -96,15 +59,15 @@ const Quotes = () => {
         frameRef.current = null;
       }
     };
-  }, [isVisible]);
+  }, [isVisible, items.length]);
 
   return (
     <div ref={ref} className="relative w-full md:h-40">
-      {QUOTES.map(({ text, highlight, author, post }, index) => {
+      {items.map(({ text, highlight, author, post }, index) => {
         const isActive = index === currentIndex;
 
         return (
-          <LazyMotion features={domAnimation} key={index}>
+          <LazyMotion features={domAnimation} key={author}>
             <AnimatePresence>
               {isActive && (
                 <m.figure
@@ -137,6 +100,17 @@ const Quotes = () => {
       })}
     </div>
   );
+};
+
+Quotes.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.arrayOf(PropTypes.string).isRequired,
+      highlight: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      post: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Quotes;
