@@ -1079,8 +1079,6 @@
           slug: introduction/manage-billing
         - title: Spending notifications
           slug: introduction/spending-notifications
-          tag: new
-          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
