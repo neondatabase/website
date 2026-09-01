@@ -1,14 +1,8 @@
-import BackedBy from 'components/pages/ai-gateway/backed-by';
-import BackendServices from 'components/pages/ai-gateway/backend-services';
-import BuiltForAgents from 'components/pages/ai-gateway/built-for-agents';
 import Compatibility from 'components/pages/ai-gateway/compatibility';
 import GatewayBenefits from 'components/pages/ai-gateway/gateway-benefits';
 import Hero from 'components/pages/ai-gateway/hero';
 import Models from 'components/pages/ai-gateway/models';
-import CTANew from 'components/shared/cta-new';
-import Faq from 'components/shared/faq';
-import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
+import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -67,29 +61,12 @@ const FAQ_ITEMS = [
 ];
 
 const AiGatewayPage = () => (
-  <Layout
-    className="bg-black-pure"
-    headerClassName="h-15! lg:h-14!"
-    isHeaderSticky
-    isHeaderStickyOverlay
-  >
+  <BackendPlatformPage faqItems={FAQ_ITEMS}>
     <Hero />
     <Models />
     <GatewayBenefits />
     <Compatibility />
-    <Faq items={FAQ_ITEMS} variant="light" />
-    <BackendServices />
-    <BuiltForAgents />
-    <BackedBy />
-    <CTANew
-      className="mt-0 bg-gray-new-10"
-      title="Building something ambitious?"
-      description="Fill out a short form and we’ll get back to you within a few business days."
-      label="Get started"
-      buttonText="Apply now"
-      buttonUrl={LINKS.contactSales}
-    />
-  </Layout>
+  </BackendPlatformPage>
 );
 
 export default AiGatewayPage;

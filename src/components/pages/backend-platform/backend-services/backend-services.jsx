@@ -74,7 +74,7 @@ const BackendServices = () => (
           items={serviceItems}
           mediaLoading="in-view"
           variant="lighten"
-          videoDirectory="/videos/pages/ai-gateway/backend-services"
+          videoDirectory="/videos/pages/backend-platform/backend-services"
           videoVersion="20260827-2"
         />
       </div>

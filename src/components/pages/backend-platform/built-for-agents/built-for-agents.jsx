@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
-import agentReadyIcon from 'images/pages/ai-gateway/built-for-agents/agent-ready.svg';
-import branchableIcon from 'images/pages/ai-gateway/built-for-agents/branchable.svg';
-import serverlessIcon from 'images/pages/ai-gateway/built-for-agents/serverless.svg';
+import agentReadyIcon from 'images/pages/backend-platform/built-for-agents/agent-ready.svg';
+import branchableIcon from 'images/pages/backend-platform/built-for-agents/branchable.svg';
+import serverlessIcon from 'images/pages/backend-platform/built-for-agents/serverless.svg';
 
 const ITEMS = [
   {
