@@ -128,7 +128,7 @@ Start feature development with a clean slate by resetting your development branc
 neon branches reset dev-branch --parent
 ```
 
-This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a Postgres-consistent baseline that includes your database and Managed Better Auth state.
+This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a consistent baseline that includes your database and Managed Better Auth state.
 
 ### Refresh staging
 
