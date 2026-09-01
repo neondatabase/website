@@ -5,9 +5,9 @@ subtitle: Understand how the Data API authenticates requests and enforces databa
 summary: >-
   The Neon Data API has no separate permission system. All access control is
   delegated to PostgreSQL through two layers: GRANT-based table privileges and
-  Row-Level Security (RLS) policies. The database role is selected from the
-  incoming JWT: `authenticated` for valid tokens, `anonymous` for unauthenticated
-  requests, or a custom role from the JWT `role` claim. Use this page to
+  Row-Level Security (RLS) policies. The database role always comes from the JWT
+  `role` claim: `authenticated` when the token carries `role: authenticated`,
+  `anonymous` when it has no role claim, or any other role the claim names. Use this page to
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
@@ -33,20 +33,20 @@ Securing your data involves two layers:
 
 ## API Roles
 
-When the Data API receives an HTTP request, it switches to a specific PostgreSQL role before executing the query. The role chosen depends on the JWT sent in the `Authorization` header.
+When the Data API receives an HTTP request, it switches to a specific PostgreSQL role before executing the query. That role is read from the `role` claim in the request's JWT: the API runs `SET ROLE` to the role the claim names. If the token has no `role` claim, the request falls back to the `anonymous` role. A valid signature on its own does not grant the `authenticated` role; the token must actually carry `"role": "authenticated"`.
 
 ### 1. The `authenticated` role
 
-**Used for:** Requests with a valid JWT token.
+**Used for:** Tokens that carry `"role": "authenticated"`.
 
-When a client sends a valid Bearer token, the API switches to the `authenticated` role. This is the primary role for your application users.
+When a token's `role` claim is `authenticated`, the API switches to the `authenticated` role. This is the primary role for your application users, and it's the role the default `GRANT`s target. [Neon Auth](/docs/auth/overview) issues this claim automatically; a custom provider must be configured to include it (see [Required JWT claims](/docs/data-api/custom-authentication-providers#required-jwt-claims)).
 
 - The JWT token identifies _who_ the user is (via the `sub` claim).
 - The `authenticated` role defines _what_ the application is allowed to touch.
 
 ### 2. The `anonymous` role
 
-**Used for:** Requests from unauthenticated users.
+**Used for:** Requests whose token carries no `role` claim, including unauthenticated or guest access.
 
 Anonymous access still uses a JWT, but no user sign-in is required. How you obtain that token depends on your auth setup:
 
@@ -77,7 +77,7 @@ The single-URL form shown above, `createClient(url)`, requires a version of `@ne
 
 ### 3. Custom roles
 
-The API determines the role based on the `role` claim in the JWT. If you issue your own tokens with a custom role claim (for example, `"role": "admin"`), the API will attempt to switch to a Postgres role named `admin`. You must ensure this role exists in your database and has the correct permissions.
+`authenticated` and `anonymous` are the two roles Neon sets up for you, but the `role` claim can name any Postgres role. This is the general rule behind both roles above: the API always runs `SET ROLE` to whatever the claim says. If you issue tokens with a different role (for example, `"role": "admin"`), the API switches to a role named `admin`. That role must exist in your database and hold the right privileges, or the request fails: a claim naming a role that doesn't exist returns a "role does not exist" error, and a role that exists but lacks the table grant returns `42501 permission denied`.
 
 The sections below explain how to configure these roles.
 
