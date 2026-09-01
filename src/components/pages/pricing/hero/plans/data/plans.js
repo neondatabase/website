@@ -1,4 +1,7 @@
+import BACKEND_PRICING from 'constants/backend-pricing';
 import LINKS from 'constants/links';
+
+const { objectStorage, functions } = BACKEND_PRICING;
 
 export default [
   {
@@ -37,14 +40,14 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
           {
-            title: 'Object Storage',
+            title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: '<p>Measured across your account, not per project</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
           },
         ],
       },
@@ -91,17 +94,21 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'AI Gateway',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'Pricing matches model provider list prices (no markup)',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/models#available-models',
+            },
           },
         ],
       },
@@ -148,17 +155,21 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'AI Gateway',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'Pricing matches model provider list prices (no markup)',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/models#available-models',
+            },
           },
         ],
       },

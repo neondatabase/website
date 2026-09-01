@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Fail if any dependency version locked in package-lock.json is too new to be
- * served by the Databricks npm proxy.
+ * Fail if any dependency version locked in package-lock.json cannot be served
+ * by the Databricks npm proxy.
  *
  * Why this exists
  * ---------------
@@ -9,28 +9,23 @@
  * (databricks.jfrog.io/.../db-npm), never the public npm registry. That mirror
  * runs a curation service that quarantines every package version for its first
  * ~7 days ("immature package" cooldown). A lockfile that pins a version younger
- * than the cooldown therefore fails `npm ci` with a 403 (mirror) or ETARGET
- * (cloud proxy) — see .github/workflows/docs-api-consistency.yml.
+ * than the cooldown therefore fails `npm ci` with a 403 — see
+ * .github/workflows/docs-api-consistency.yml.
  *
  * This check turns that late, cryptic install failure into an early, explicit
- * one: it flags any locked version published inside the cooldown window and
- * tells the contributor to pin an older version (or add an allowlist exception).
+ * one: it names the offending dependency and tells the contributor to pin an
+ * older version.
  *
- * How it decides
- * --------------
- * The maturity signal is the version's publish time from the registry packument
- * (`time[version]`), which the mirror exposes even for versions whose tarballs
- * it blocks. A version is a failure when it was published less than
- * COOLDOWN_DAYS ago, or when the registry has no publish time for it at all.
+ * Why the signals differ
+ * ----------------------
+ * Same-repo CI can probe JFrog tarballs directly. Forks cannot mint JFrog
+ * credentials, so they use public npm publish age as the closest available
+ * cooldown signal.
  *
  * Scope: to stay fast and to target the "bumped a dep too aggressively" case,
  * only versions newly introduced relative to the base branch are checked. When
  * the base lockfile can't be resolved (e.g. non-PR runs) the whole lockfile is
  * checked instead.
- *
- * Exceptions: scripts/deps-proxy-allowlist.json may list `name` or
- * `name@version` entries to skip (e.g. a version explicitly allowlisted on the
- * proxy ahead of the cooldown). Missing file means no exceptions.
  *
  * Usage:
  *   node scripts/check-deps-proxy-allowlisted.mjs                 # diff vs base, else full
@@ -40,14 +35,13 @@
  */
 
 import { execFileSync } from 'child_process';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import os from 'os';
 import path from 'path';
 import fs from 'fs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LOCK_PATH = path.join(ROOT, 'package-lock.json');
-const ALLOWLIST_PATH = path.join(ROOT, 'scripts', 'deps-proxy-allowlist.json');
 
 const args = process.argv.slice(2);
 const FORCE_ALL = args.includes('--all');
@@ -65,7 +59,7 @@ const FETCH_CONCURRENCY = 12;
  * of package name -> Set of locked versions. Skips the root project and any
  * git/file/workspace/link deps (they don't go through the npm mirror).
  */
-function collectRegistryDeps(lock) {
+export function collectRegistryDeps(lock) {
   const out = new Map();
   const packages = lock.packages ?? {};
   for (const [key, entry] of Object.entries(packages)) {
@@ -90,14 +84,14 @@ function collectRegistryDeps(lock) {
 }
 
 /** Derive the package name from a lockfile `packages` key like a/node_modules/b. */
-function nameFromPackageKey(key) {
+export function nameFromPackageKey(key) {
   const marker = 'node_modules/';
   const idx = key.lastIndexOf(marker);
   return idx === -1 ? key : key.slice(idx + marker.length);
 }
 
 /** Versions present in head but not in base -> the set a PR newly introduces. */
-function newlyIntroduced(headMap, baseMap) {
+export function newlyIntroduced(headMap, baseMap) {
   const candidates = [];
   for (const [name, versions] of headMap) {
     const baseVersions = baseMap.get(name) ?? new Set();
@@ -108,7 +102,7 @@ function newlyIntroduced(headMap, baseMap) {
   return candidates;
 }
 
-function flatten(headMap) {
+export function flatten(headMap) {
   const all = [];
   for (const [name, versions] of headMap) {
     for (const version of versions) all.push({ name, version });
@@ -116,17 +110,11 @@ function flatten(headMap) {
   return all;
 }
 
-/** Turn an allowlist file's entries into a predicate. */
-function makeAllowlist(entries) {
-  const set = new Set(entries);
-  return ({ name, version }) => set.has(name) || set.has(`${name}@${version}`);
-}
-
 /**
  * Classify a single candidate given the packument `time` map. Pure.
  * Returns { name, version, status: 'ok'|'immature'|'unknown', ageDays }.
  */
-function classify({ name, version }, timeMap, now) {
+export function classify({ name, version }, timeMap, now, cooldownMs = COOLDOWN_MS) {
   const published = timeMap?.[version];
   if (!published) return { name, version, status: 'unknown', ageDays: null };
   const ageMs = now - Date.parse(published);
@@ -134,9 +122,41 @@ function classify({ name, version }, timeMap, now) {
   return {
     name,
     version,
-    status: ageMs < COOLDOWN_MS ? 'immature' : 'ok',
+    status: ageMs < cooldownMs ? 'immature' : 'ok',
     ageDays,
   };
+}
+
+export function fallbackTarballUrl(registry, name, version) {
+  const encoded = name.startsWith('@')
+    ? `@${encodeURIComponent(name.slice(1))}`
+    : encodeURIComponent(name);
+  const filename = name.slice(name.lastIndexOf('/') + 1);
+  return new URL(`${encoded}/-/${filename}-${version}.tgz`, registry).toString();
+}
+
+export function tarballStatusFromHttp(status) {
+  if (status === 200 || status === 204 || status === 206) return 'ok';
+  if (status === 401 || status === 403 || status === 404) return 'blocked';
+  return 'unknown';
+}
+
+/** Forks use publish age because they cannot access JFrog's tarball gate. */
+export function decideAvailability({ tarballStatus, ageStatus, useTarballGate }) {
+  if (useTarballGate) {
+    if (tarballStatus === 'ok') return 'ok';
+    if (tarballStatus === 'blocked') return 'blocked';
+    return 'unknown';
+  }
+  return ageStatus;
+}
+
+export function usesTarballGate(registry) {
+  try {
+    return new URL(registry).host !== PUBLIC_REGISTRY_HOST;
+  } catch {
+    return false;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -145,18 +165,6 @@ function classify({ name, version }, timeMap, now) {
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-function loadAllowlist() {
-  if (!fs.existsSync(ALLOWLIST_PATH)) return () => false;
-  try {
-    const entries = readJson(ALLOWLIST_PATH);
-    if (!Array.isArray(entries)) throw new Error('allowlist must be a JSON array');
-    return makeAllowlist(entries);
-  } catch (err) {
-    console.error(`Warning: could not read ${path.relative(ROOT, ALLOWLIST_PATH)}: ${err.message}`);
-    return () => false;
-  }
 }
 
 function npmConfig(key) {
@@ -219,13 +227,30 @@ function packumentUrl(registry, name) {
   return new URL(encoded, registry).toString();
 }
 
-async function fetchTimeMap(registry, headers, name) {
+async function fetchPackument(registry, headers, name) {
   const res = await fetch(packumentUrl(registry, name), { headers });
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} fetching packument for ${name}`);
   }
-  const doc = await res.json();
-  return doc.time ?? {};
+  return res.json();
+}
+
+export async function probeTarball(url, headers) {
+  // Range GET returns the same 403 npm ci sees. Cancel the body: some registries
+  // ignore Range and would otherwise stream the whole tarball until the job hangs.
+  const controller = new AbortController();
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: { ...headers, Range: 'bytes=0-0' },
+    redirect: 'follow',
+    signal: controller.signal,
+  });
+  const status = tarballStatusFromHttp(res.status);
+  controller.abort();
+  if (res.body) {
+    await res.body.cancel().catch(() => {});
+  }
+  return status;
 }
 
 /** Resolve tasks with bounded concurrency, preserving input order. */
@@ -261,6 +286,20 @@ function loadBaseDepMap() {
   return null;
 }
 
+export function formatFailure(v, cooldownDays = COOLDOWN_DAYS) {
+  const id = `${v.name}@${v.version}`;
+  if (v.status === 'blocked' && v.ageDays != null) {
+    return `  ✗ ${id} — proxy returned 403; published ${v.ageDays.toFixed(1)}d ago (< ${cooldownDays}d cooldown).`;
+  }
+  if (v.status === 'blocked') {
+    return `  ✗ ${id} — tarball is forbidden on the Databricks proxy.`;
+  }
+  if (v.status === 'immature') {
+    return `  ✗ ${id} — published ${v.ageDays.toFixed(1)}d ago (< ${cooldownDays}d cooldown); too new for the Databricks npm mirror.`;
+  }
+  return `  ✗ ${id} — cannot confirm it is available on the Databricks npm mirror.`;
+}
+
 async function main() {
   if (!fs.existsSync(LOCK_PATH)) {
     console.error('No package-lock.json found — nothing to check.');
@@ -269,16 +308,13 @@ async function main() {
 
   const headMap = collectRegistryDeps(readJson(LOCK_PATH));
   const baseMap = loadBaseDepMap();
-  const isAllowed = loadAllowlist();
 
   const scope = baseMap ? 'changed' : 'full';
-  const raw = baseMap ? newlyIntroduced(headMap, baseMap) : flatten(headMap);
-  const candidates = raw.filter((c) => !isAllowed(c));
+  const candidates = baseMap ? newlyIntroduced(headMap, baseMap) : flatten(headMap);
 
   console.log(
-    `Databricks proxy allowlist check — cooldown ${COOLDOWN_DAYS}d, ` +
-      `scope: ${scope} (${candidates.length} version(s) to verify` +
-      `${raw.length !== candidates.length ? `, ${raw.length - candidates.length} allowlisted` : ''}).`
+    `Databricks proxy check — cooldown ${COOLDOWN_DAYS}d, ` +
+      `scope: ${scope} (${candidates.length} version(s) to verify).`
   );
 
   if (candidates.length === 0) {
@@ -287,51 +323,57 @@ async function main() {
   }
 
   const { registry, headers } = registryInfo();
+  const useTarballGate = usesTarballGate(registry);
 
-  // Fetch each packument once per unique package name.
   const names = [...new Set(candidates.map((c) => c.name))];
-  const timeMaps = new Map();
+  const packuments = new Map();
   const fetchErrors = [];
   await mapWithConcurrency(names, FETCH_CONCURRENCY, async (name) => {
     try {
-      timeMaps.set(name, await fetchTimeMap(registry, headers, name));
+      packuments.set(name, await fetchPackument(registry, headers, name));
     } catch (err) {
       fetchErrors.push({ name, message: err.message });
-      timeMaps.set(name, {});
+      packuments.set(name, null);
     }
   });
 
   const now = Date.now();
-  const verdicts = candidates.map((c) => classify(c, timeMaps.get(c.name), now));
+  const verdicts = await mapWithConcurrency(candidates, FETCH_CONCURRENCY, async (c) => {
+    const doc = packuments.get(c.name);
+    const age = classify(c, doc?.time ?? {}, now);
+    let tarballStatus = 'unknown';
+    if (useTarballGate) {
+      const url =
+        doc?.versions?.[c.version]?.dist?.tarball ??
+        fallbackTarballUrl(registry, c.name, c.version);
+      try {
+        tarballStatus = await probeTarball(url, headers);
+      } catch (err) {
+        fetchErrors.push({ name: `${c.name}@${c.version}`, message: err.message });
+      }
+    }
+    return {
+      ...age,
+      status: decideAvailability({ tarballStatus, ageStatus: age.status, useTarballGate }),
+    };
+  });
 
-  const immature = verdicts.filter((v) => v.status === 'immature');
-  const unknown = verdicts.filter((v) => v.status === 'unknown');
+  const failed = verdicts.filter((v) => v.status !== 'ok');
 
-  for (const v of immature) {
-    console.error(
-      `  ✗ ${v.name}@${v.version} — published ${v.ageDays.toFixed(1)}d ago ` +
-        `(< ${COOLDOWN_DAYS}d cooldown); blocked by the Databricks proxy.`
-    );
-  }
-  for (const v of unknown) {
-    console.error(
-      `  ✗ ${v.name}@${v.version} — no publish date on the registry; ` +
-        `cannot confirm it is available on the Databricks proxy.`
-    );
+  for (const v of failed) {
+    console.error(formatFailure(v));
   }
 
   if (fetchErrors.length) {
-    console.error('\nCould not fetch some packuments:');
+    console.error('\nCould not fetch some registry metadata:');
     for (const e of fetchErrors) console.error(`  ! ${e.name}: ${e.message}`);
   }
 
-  if (immature.length || unknown.length) {
+  if (failed.length) {
     console.error(
       '\nThe Databricks npm proxy quarantines package versions for their first ' +
         `${COOLDOWN_DAYS} days. Pin the offending dependency to an older, ` +
-        'already-available version (update the root dependency and refresh the ' +
-        'lockfile), or, if the version has been explicitly allowlisted on the ' +
-        `proxy, add it to ${path.relative(ROOT, ALLOWLIST_PATH)}.`
+        'already-available version (update the root dependency and refresh the lockfile).'
     );
     process.exit(1);
   }
@@ -341,7 +383,12 @@ async function main() {
   );
 }
 
-main().catch((err) => {
-  console.error(err?.stack || String(err));
-  process.exit(1);
-});
+const isDirectRun =
+  Boolean(process.argv[1]) && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+
+if (isDirectRun) {
+  main().catch((err) => {
+    console.error(err?.stack || String(err));
+    process.exit(1);
+  });
+}

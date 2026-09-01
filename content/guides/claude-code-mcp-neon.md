@@ -4,7 +4,7 @@ subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-08-21T02:00:14.259Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -30,13 +30,13 @@ Make sure you have:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
+The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which sets up the current directory for Neon, including the MCP server for Claude Code:
 
 ```bash
 npx neon@latest init
 ```
 
-This command authenticates via OAuth, creates an API key, and configures Claude Code to connect to Neon's remote MCP server. Once complete, ask your AI assistant **"Get started with Neon"**.
+Run it in a terminal. It installs agent tooling (either the Neon plugin, or agent skills and the MCP server) and links a Neon project. Once complete, restart Claude Code and ask your AI assistant **"Get started with Neon"**.
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server (OAuth)
 

@@ -443,6 +443,20 @@ Connection pool
 </DefinitionList>
 ```
 
+**Faq + FaqItem** — SEO-friendly frequently-asked-questions section for the end of a page. This is the standard FAQ component for both docs and guides. Prefer it over ad-hoc `### question` headings, `**Q:/A:**` text, or `DefinitionList` for FAQs. It emits `FAQPage` schema.org JSON-LD (eligible for Google FAQ rich results) and renders each answer with native `<details>`/`<summary>`, so answers stay crawlable even when collapsed. Add a `## Frequently asked questions` heading above it (sentence case) so the section appears in the table of contents. Answers accept full markdown (lists, tables, links, code); keep blank lines around block content. Place `<NeedHelp/>` after `</Faq>`, not inside an item.
+
+```mdx
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="Why must I poll operations after restore?">
+With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+</FaqItem>
+
+</Faq>
+```
+
 ### Interactive elements
 
 **CheckList + CheckItem** — Interactive checklist saved in browser local storage. Best used alongside Steps.
@@ -572,7 +586,6 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 
 | Command             | When to use                                                                                        |
 | ------------------- | -------------------------------------------------------------------------------------------------- |
-| `/create-pr-report` | Weekly report of merged PRs across monitored repos; supports PR deep dives and follow-on workflows |
 | `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content               |
 | `/post-changelog`   | Post the changelog preview to Lakebase Slack channels for review. Databricks employees only.       |
 | `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries                                        |

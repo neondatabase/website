@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-08-04T08:34:18.168Z'
+updatedOn: '2026-08-26T05:16:28.993Z'
 ---
 
 <InfoBlock>
@@ -158,7 +158,7 @@ Because your database is managed by Vercel, you can only perform these actions *
 - Monitor usage via **Storage → Usage** (also available in Neon Console)
 - Create additional databases (each becomes a new Neon project)
 - Rename or delete a database (deleting removes the underlying Neon project permanently)
-- Manage members / collaborators (handled through Vercel "Members", not the Neon Console) - (see [FAQ](#frequently-asked-questions-faq) for details)
+- Manage members / collaborators (handled through Vercel "Members", not the Neon Console) - (see [FAQ](#frequently-asked-questions) for details)
 - Delete the Neon organization (only happens automatically if you uninstall the integration)
 - Update connection-string environment variables (prefix changes, etc.)
 
@@ -255,16 +255,20 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
-## Frequently Asked Questions (FAQ)
+## Frequently asked questions
 
-### Why can't I see Vercel team members in the Neon Console?
+<Faq>
+
+<FaqItem question="Why can't I see Vercel team members in the Neon Console?">
 
 Users added to your Vercel team aren't automatically visible in the Neon organization. Team members only appear in Neon when they:
 
 1. Click the **Open in Neon** button from the Vercel integration page
 2. Complete the authentication flow
 
-### Why do Vercel team members with 'Member' role have the 'Admin' role in Neon?
+</FaqItem>
+
+<FaqItem question="Why do Vercel team members with 'Member' role have the 'Admin' role in Neon?">
 
 This occurs due to how Vercel's JWT tokens map roles to the integration. According to [Vercel's documentation](https://vercel.com/docs/integrations/create-integration/marketplace-api#user-authentication), the JWT token's `user_role` claim doesn't directly map Vercel team roles:
 
@@ -272,5 +276,9 @@ This occurs due to how Vercel's JWT tokens map roles to the integration. Accordi
 - **USER role in JWT**: Only granted to users with read-only Vercel roles (includes Billing and Viewer roles) → maps to Member in Neon.
 
 As a result, most active Vercel team members receive Admin access in the Neon organization. This is expected behavior and ensures team members can fully manage database resources.
+
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>

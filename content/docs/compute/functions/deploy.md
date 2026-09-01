@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-07-16T00:24:48.901Z'
+updatedOn: '2026-08-31T17:10:44.328Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -41,19 +41,20 @@ To deploy one function directly, without a `neon.ts` config:
 neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
+By default, the CLI bundles your source with esbuild, zips the output, and uploads it. Pass `--no-bundle` to skip esbuild and ship a prebuilt source as-is. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
 <Admonition type="note" title="esbuild not found">
 The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
 </Admonition>
 
-| Flag              | Default       | Description                                                                                                                                   |
-| ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                   |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
+| Flag              | Default       | Description                                                                                                                                                                                              |
+| ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.js`, or `index.mjs` (the first match is the entry), or a path to the entry file                                                               |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env`                                                            |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                                                                                     |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                                                                         |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                                                                                     |
+| `--no-bundle`     | off (bundles) | Skip esbuild and zip a prebuilt source as-is. The directory root, or the file you point at, must be `index.mjs` or `index.js` (TypeScript can't ship unbundled). Use it when you run your own build step |
 
 **Examples:**
 

@@ -6,7 +6,7 @@ summary: >-
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-25T02:37:06.867Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -25,7 +25,13 @@ npx neon@latest mcp
 
 It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you.
 
-To set up the MCP server together with agent skills and editor tooling, run [`neon init`](/docs/cli/init):
+For agents that support plugins (such as Cursor, Claude Code, and Codex), [`neon plugins`](/docs/cli/plugins) installs the Neon plugin, which bundles the MCP server and agent skills:
+
+```bash
+npx neon@latest plugins
+```
+
+To set up the MCP server together with agent skills and a linked Neon project, run [`neon init`](/docs/cli/init) in a terminal:
 
 ```bash
 npx neon@latest init

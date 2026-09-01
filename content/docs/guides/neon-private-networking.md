@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-27T15:04:31.041Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -47,6 +47,10 @@ To configure Neon Private Networking, perform the following steps:
     Do not enable **private DNS names** for the VPC endpoint until [Step 3](/docs/guides/neon-private-networking#enable-private-dns). You must add the VPC endpoint to your Neon organization first, as described in [Step 2](/docs/guides/neon-private-networking#add-your-vpc-endpoint-id-to-your-neon-organization).
     </Admonition>
 
+    <Admonition type="important" title="Add all service names for your region">
+    A region can list multiple endpoint service names. When you create the endpoint, add **all** of the names listed for your region below (under **Service settings**). Neon adds service names over time as it expands capacity and updates this page, so re-check that list after a regional expansion. Adding those later additions is optional but improves capacity and reliability. Expansions are announced in the [changelog](/docs/changelog).
+    </Admonition>
+
     1. Go to the AWS **VPC > Endpoints** dashboard and select **Create endpoint**. Make sure you create the endpoint in the same VPC as your client application.
 
        ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
@@ -75,6 +79,8 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0a59493ecf790eccf`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0ce57d490de78526a`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:

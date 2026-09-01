@@ -3,10 +3,10 @@ title: 'Neon CLI command: link'
 subtitle: Link a directory to a Neon project and write a `.neon` context file
 summary: >-
   Covers the usage of the `link` command in the Neon CLI to bind the current
-  directory to a Neon project, including interactive, non-interactive, and
-  agent-oriented workflows.
+  directory to a Neon project, including interactive and non-interactive
+  workflows for CI, scripts, and AI agents.
 enableTableOfContents: true
-updatedOn: '2026-07-11T13:23:16.265Z'
+updatedOn: '2026-08-26T22:59:45.286Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -51,7 +51,7 @@ Linked .neon:
 
 ## Non-interactive mode
 
-Use flags or a `--params` JSON blob for scripts and CI:
+Use flags or a `--params` JSON blob for scripts, CI, and AI agents:
 
 ```bash
 # Link to an existing project
@@ -66,39 +66,7 @@ neon link --params '{"orgId":"org-abc123","projectName":"my-app","regionId":"aws
 
 Flags take precedence over fields in `--params`.
 
-## Agent mode
-
-Use `--agent` for a JSON state machine designed for AI coding assistants. Each invocation returns a single JSON object with a `status` discriminator describing the next step, the available options, and the exact follow-up command to run.
-
-```bash
-neon link --agent
-```
-
-Example response when an organization must be selected:
-
-```json
-{
-  "status": "needs_org",
-  "instruction": "Ask the user which of these 2 organizations they want to link the current directory to. After they pick one, re-run the next_command_template with the chosen --org-id value.",
-  "options": [
-    { "id": "org-abc123", "name": "Personal Org" },
-    { "id": "org-team", "name": "Team Org" }
-  ],
-  "next_command_template": "neon link --agent --org-id <org_id>"
-}
-```
-
-When linking completes, the response includes `status: "linked"` with the context file path and project details.
-
-Any unexpected failure in `--agent` mode is reported as JSON to stdout with exit code 1:
-
-```json
-{
-  "status": "error",
-  "code": "CLIENT_ERROR",
-  "message": "user has no access to projects"
-}
-```
+Agents find the IDs with `neon orgs list --output json` and `neon projects list --org-id <org-id> --output json`, then link with `--project-id` (or create a project with `--org-id`, `--project-name`, and `--region-id`).
 
 ## The `.neon` context file
 
@@ -125,5 +93,4 @@ Neon does not save confidential information to the context file (for example, au
 Organization-scoped API keys (those created at the organization level rather than the user level) cannot list user organizations or call the regions endpoint. `link` handles this transparently:
 
 - If the API key is org-scoped and at least one project already exists in the org, the CLI auto-detects the `org_id` from the first project.
-- If the API key is org-scoped and no projects exist yet, `--agent` returns a `needs_org` response with `options: []` and an instruction to find the org ID in the Neon Console. Interactive mode prints an error pointing to `--org-id`.
 - When the regions endpoint is not allowed, `link` falls back to a built-in static region list.

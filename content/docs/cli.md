@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T22:59:45.286Z'
 ---
 
 One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Managed Better Auth from the terminal, with branch-scoped workflows built in.
@@ -35,7 +35,7 @@ npm i -g neon
 Use Neon CLI with Claude Code, Cursor, Codex, and other AI development tools.
 
 <Admonition type="note">
-Every command supports `--output json` for machine-readable results, and setting the `NEON_API_KEY` environment variable authenticates non-interactively. For AI agents, [`neon link --agent`](/docs/cli/link) emits a JSON state-machine response with a discriminated `status` field describing the next step, instead of prompting.
+Every command supports `--output json` for machine-readable results, and setting the `NEON_API_KEY` environment variable authenticates non-interactively. Agents bind a directory to a project with [`neon link`](/docs/cli/link)'s non-interactive flags, the same ones used for CI and scripts.
 </Admonition>
 
 ## Commands reference

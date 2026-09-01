@@ -5,19 +5,14 @@ name: Dependencies ↔ Databricks proxy
 # ("immature package" cooldown). A lockfile that pins a too-new version fails
 # `npm ci` deep in every build with an opaque 403.
 #
-# This gate runs first and fails fast with a clear message naming the offending
-# dependency, so a contributor who bumps a package before it clears the cooldown
-# learns exactly what to do (pin an older version / refresh the lockfile) instead
-# of chasing a 403 in an unrelated job. See scripts/check-deps-proxy-allowlisted.mjs.
+# Names the quarantined package here instead of failing later inside an unrelated
+# `npm ci`. See scripts/check-deps-proxy-allowlisted.mjs.
+#
+# Run on every PR so the required check also reports on content-only changes.
+# Forks cannot mint JFrog OIDC, so they age-check against public npm instead.
 
 on:
   pull_request:
-    paths:
-      - 'package.json'
-      - 'package-lock.json'
-      - 'scripts/check-deps-proxy-allowlisted.mjs'
-      - 'scripts/deps-proxy-allowlist.json'
-      - '.github/workflows/deps-proxy-allowlist.yml'
   workflow_dispatch:
 
 permissions:
@@ -27,9 +22,7 @@ permissions:
 jobs:
   check:
     name: 'Dependencies available on Databricks proxy'
-    runs-on:
-      group: neondatabase-protected-runner-group
-      labels: linux-ubuntu-latest
+    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || fromJSON('{"group":"neondatabase-protected-runner-group","labels":"linux-ubuntu-latest"}') }}
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
@@ -50,6 +43,7 @@ jobs:
       # OIDC and point npm at the mirror so the packument (with publish dates)
       # is readable.
       - name: Setup JFrog CLI with OIDC
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         id: setup-jfrog
         uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
         env:
@@ -57,6 +51,7 @@ jobs:
         with:
           oidc-provider-name: github-actions
       - name: Configure npm registry (Databricks JFrog mirror)
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         run: |
           cat > ~/.npmrc <<EOF
           registry=https://databricks.jfrog.io/artifactory/api/npm/db-npm/
@@ -69,8 +64,8 @@ jobs:
         with:
           node-version: '22'
 
-      # No `npm ci` here on purpose: the check only reads registry metadata, and
-      # a too-new dependency is exactly what would make `npm ci` fail with a 403.
+      # Probe tarballs directly so a quarantined dependency cannot prevent this
+      # check from naming the package behind `npm ci`'s 403.
       - name: Check dependencies are available on the Databricks proxy
         env:
           BASE_REF: ${{ github.base_ref != '' && format('origin/{0}', github.base_ref) || '' }}

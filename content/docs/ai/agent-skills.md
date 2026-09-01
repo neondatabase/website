@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-25T21:56:50.915Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -125,19 +125,27 @@ Pi reads the `skills/` directory directly, so there's no separate sync step. Thi
 
 ### neon init
 
-The `neon init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
+The `neon init` command sets up the current directory to use Neon with your AI coding assistant. Run it in a terminal: it installs agent tooling (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first.
 
 ```bash
 npx neon@latest init
 ```
 
-If you're using the **Neon backend beta** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Neon backend beta guide](/docs/get-started/backend-beta) for access and setup.
+See the [`neon init` reference](/docs/cli/init) for the full flow, including how to set things up non-interactively for agents and CI.
 
-After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neon init` reference](/docs/cli/init) for details.
+After running `init`, restart your editor and ask your AI assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can walk you through creating or connecting a project and configuring your connection.
 
 ## Available skills
 
 Skills are grouped by area. Each skill is a `SKILL.md` entry point that your agent reads and invokes when relevant. Browse and install individual skills on [skills.sh](https://skills.sh/neondatabase/agent-skills).
+
+Install any of them by name with [`neon skills`](/docs/cli/skills) (`-s` is repeatable):
+
+```bash
+neon skills -s neon -s neon-postgres
+```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-postgres` instead.
 
 ### Core
 

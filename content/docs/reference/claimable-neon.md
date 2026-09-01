@@ -10,10 +10,10 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-08-25T19:29:40.470Z'
+updatedOn: '2026-08-26T18:00:00.000Z'
 ---
 
-If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
+If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours (`project.expires_at`) and are capped at 100 MB storage and 1 GB transfer. Claim codes expire in 15 minutes (`expires_in`). Those are two clocks.
 
 Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an agent [`auth.md`](https://neon.com/auth.md).
 
@@ -196,13 +196,15 @@ Only requested and granted services appear under `services`.
 | Capability          | Available before claim | Environment variable          |
 | ------------------- | ---------------------- | ----------------------------- |
 | Postgres            | Yes                    | `DATABASE_URL`                |
-| Data API            | When requested         | `NEON_DATA_API_URL`           |
-| Managed Better Auth | When requested         | `NEON_AUTH_BASE_URL`          |
+| Data API            | When requested, or later with `neon deploy` | `NEON_DATA_API_URL`           |
+| Managed Better Auth | When requested, or later with `neon deploy` | `NEON_AUTH_BASE_URL`          |
 | Functions           | No                     | Requires claiming the project |
 | Object Storage      | No                     | Requires claiming the project |
 | AI Gateway          | No                     | Requires claiming the project |
 
 Registration records those as `{ granted: false, reason: "requires_claim" }`. A later protected operation returns `capability_requires_claim`. Preserve the denied capability and give the human a claim link; do not retry or drop it.
+
+After create, add Auth or the Data API with `neon.ts` and `neon deploy` on the unclaimed project. After claim, the same config talks to Neon directly.
 
 ## Use the Neon CLI
 
@@ -259,13 +261,17 @@ curl --request POST \
 }
 ```
 
-Open `verification_uri_complete` and sign in to Neon. Opening the URL does not freeze access. Continuing to Neon starts the transfer: it revokes the project key, access tokens, and database password before the console transfer URL is shown. Auth and the Data API stay enabled and transfer with the project. Choose the destination organization. The project then moves through these states:
+`expires_in` is 900 seconds (15 minutes) today. If the unused code expires, POST `/claim` again. Each POST cancels the previous unused code and returns a new one. Re-issue only while `project.expires_at` is still in the future.
+
+Open `verification_uri_complete` and sign in to Neon. Opening the URL does not freeze access. Continuing to Neon starts a transfer with a new 15-minute window: it revokes the project key, access tokens, and database password before the console transfer URL is shown. Auth and the Data API stay enabled and transfer with the project if they were enabled. If that transfer window expires before you accept, POST `/claim` again. The project key and database password stay revoked.
+
+Choose the destination organization. The project then moves through these states:
 
 1. `pending`: the claim code exists, but the transfer has not completed.
 2. `accepted`: the project has left the unclaimed-project organization.
 3. `reconciled`: the identity assertion is revoked and the ceremony is finished.
 
-Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion, then poll claim status at the server-provided `interval`. The new token is only good for that poll until `reconciled`.
+Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion, then poll claim status at the server-provided `interval`. The new token has no project scopes. It authorizes that poll, and a replacement claim code if the transfer window expires.
 
 ```bash
 curl --request POST https://claimable.neon.tech/v1/oauth2/token \
@@ -278,7 +284,31 @@ curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
-Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. Fetch a new `DATABASE_URL` there; Auth and the Data API keep working.
+Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. Fetch a new `DATABASE_URL` there; Auth and the Data API keep working if they were enabled.
+
+Add Auth or the Data API with `neon.ts` and `neon deploy` before or after claim. Data API with the default auth provider requires Auth. An external JWKS is only accepted after claim:
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  auth: true,
+  dataApi: true,
+});
+```
+
+```bash
+neon deploy
+```
+
+`neon checkout` does not apply this to an existing branch. `neon deploy` (alias of `neon config apply`) does.
+
+```typescript
+dataApi: {
+  authProvider: 'external',
+  jwksUrl: 'https://example.com/.well-known/jwks.json',
+}
+```
 
 ## Errors
 
@@ -308,7 +338,7 @@ Common codes include:
 | `token_expired`             | The access token expired. Re-exchange the identity assertion |
 | `scope_insufficient`        | The access token does not permit the operation               |
 | `capability_requires_claim` | The requested service or operation requires human ownership  |
-| `claim_in_progress`         | Only claim-status polling remains available                  |
+| `claim_in_progress`         | The transfer window is still live. Poll status; mint a new code after it expires |
 | `project_claimed`           | The project transferred. Discard the identity assertion      |
 | `project_expired`           | The unclaimed window closed. Discard the identity assertion  |
 | `upstream_error`            | A Neon API or service dependency failed                      |
