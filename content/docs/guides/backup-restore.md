@@ -12,7 +12,7 @@ summary: >-
 tag: new
 tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-05T22:15:40.109Z'
+updatedOn: '2026-08-31T19:23:51.024Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -53,7 +53,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [history window](/docs/introduction/history-window).
+You can restore from any time that falls within your project's [history window](/docs/postgres/backup-restore/history-window).
 
 1. **Select a time**
 
@@ -86,7 +86,7 @@ You can restore from any time that falls within your project's [history window](
 
    ![Backup branch on the Branches page](/docs/guides/backup_restore_backup_branch.png)
 
-   For information about removing backup branches, see [Deleting backup branches](/docs/introduction/branch-restore#deleting-backup-branches).
+   For information about removing backup branches, see [Deleting backup branches](/docs/postgres/backup-restore/branch-restore#deleting-backup-branches).
 
 </TabItem>
 
@@ -166,7 +166,7 @@ Use the [snapshots create](/docs/cli/snapshots#create) command to snapshot a bra
 neon snapshots create --branch main --name pre-migration
 ```
 
-To capture an earlier point within the branch's [history window](/docs/introduction/history-window), pass `--timestamp` or `--lsn`. The two options are mutually exclusive.
+To capture an earlier point within the branch's [history window](/docs/postgres/backup-restore/history-window), pass `--timestamp` or `--lsn`. The two options are mutually exclusive.
 
 ```bash
 neon snapshots create --branch main --timestamp 2025-07-29T21:00:00Z
@@ -208,7 +208,7 @@ For all subcommands and flags, see the [snapshots](/docs/cli/snapshots) CLI refe
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/postgres/backup-restore/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 This endpoint takes its parameters in the query string. It has no request body, and a body you send is ignored without an error.
 

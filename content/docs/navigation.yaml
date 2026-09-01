@@ -355,6 +355,26 @@
                       slug: workflows/data-anonymization-api
                     - title: GitHub Actions
                       slug: workflows/data-anonymization-github-actions
+        - section: Backup & restore
+          icon: report
+          items:
+            - title: Backup strategies
+              slug: postgres/backup-restore/backups
+            - title: Instant restore
+              slug: postgres/backup-restore/branch-restore
+            - title: Time Travel
+              slug: postgres/backup-restore/time-travel-assist
+            - title: History window
+              slug: postgres/backup-restore/history-window
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
         - title: Postgres guides
           slug: postgresql/introduction
           icon: book
@@ -981,26 +1001,6 @@
           items:
             - title: Production checklist
               slug: get-started/production-checklist
-            - title: Backup & restore
-              slug: manage/backups
-              items:
-                - title: Backup & restore
-                  slug: guides/backup-restore
-                - title: History window
-                  slug: introduction/history-window
-                - title: Instant restore
-                  slug: introduction/branch-restore
-                - title: Overview
-                  slug: manage/backups
-                - title: Backup with pg_dump
-                  slug: manage/backup-pg-dump
-                - title: Automate pg_dump backups
-                  slug: manage/backup-pg-dump-automate
-                  items:
-                    - title: Part 1 - Create an S3 bucket
-                      slug: manage/backups-aws-s3-backup-part-1
-                    - title: Part 2 - Automate nightly backups
-                      slug: manage/backups-aws-s3-backup-part-2
             - title: Updates
               slug: manage/updates
               items:
@@ -1044,15 +1044,6 @@
           items:
             - title: Backup & restore
               slug: guides/backup-restore
-            - title: History window
-              slug: introduction/history-window
-            - title: Instant restore
-              slug: introduction/branch-restore
-            - title: Time Travel
-              slug: guides/time-travel-assist
-              items:
-                - title: Time Travel tutorial
-                  slug: guides/time-travel-tutorial
             - title: Schema diff
               slug: guides/schema-diff
               items:
