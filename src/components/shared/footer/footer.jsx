@@ -131,7 +131,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                       {description && (
                         <span
                           className={cn(
-                            'ml-1.5 py-px text-gray-new-70 dark:text-gray-new-40',
+                            'ml-1.5 py-px text-gray-new-45 dark:text-gray-new-50',
                             to &&
                               'transition-colors duration-200 group-hover/link:text-gray-new-10 group-hover/link:dark:text-gray-new-90'
                           )}
