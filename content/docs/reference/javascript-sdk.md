@@ -105,10 +105,6 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 
 </CodeTabs>
 
-<Admonition type="warning" title="Not yet on npm">
-The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form below. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the object form instead.
-</Admonition>
-
 The object form remains available for custom endpoint layouts or local development setups where the Auth and Data API URLs cannot be derived from the same Neon database URL:
 
 ```typescript
