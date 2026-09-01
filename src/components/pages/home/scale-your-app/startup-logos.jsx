@@ -1,10 +1,9 @@
 'use client';
 
+import { easeOut, m, useReducedMotion, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-
-import { cn } from 'utils/cn';
 
 const LOGO_ROOT = '/images/pages/home/scale-your-app';
 const LOGO_REVEAL_START = 0;
@@ -80,8 +79,41 @@ const getRandomRevealDelays = () => {
   }, Array(LOGO_COUNT).fill(0));
 };
 
-const StartupLogos = ({ isActive }) => {
+const StartupLogo = ({ delay, name, shouldReduceMotion, timelineElapsed, width }) => {
+  const opacity = useTransform(timelineElapsed, [delay, delay + LOGO_REVEAL_DURATION], [0, 1], {
+    clamp: true,
+    ease: easeOut,
+  });
+
+  return (
+    <m.span className="block h-11 shrink-0" style={{ opacity: shouldReduceMotion ? 1 : opacity }}>
+      <Image
+        className="block h-11 w-auto"
+        src={`${LOGO_ROOT}/startup-${name}.svg`}
+        width={width}
+        height={64}
+        sizes={`${Math.round((width / 64) * 44)}px`}
+        alt=""
+      />
+    </m.span>
+  );
+};
+
+StartupLogo.propTypes = {
+  delay: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  shouldReduceMotion: PropTypes.bool.isRequired,
+  timelineElapsed: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    on: PropTypes.func.isRequired,
+    set: PropTypes.func.isRequired,
+  }).isRequired,
+  width: PropTypes.number.isRequired,
+};
+
+const StartupLogos = ({ isActive, timelineElapsed }) => {
   const [revealDelays, setRevealDelays] = useState(null);
+  const shouldReduceMotion = useReducedMotion() ?? false;
 
   useEffect(() => {
     if (!isActive || revealDelays) return;
@@ -120,18 +152,13 @@ const StartupLogos = ({ isActive }) => {
               logoIndex += 1;
 
               return (
-                <Image
-                  className={cn(
-                    'h-11 w-auto shrink-0 transition-opacity duration-500 ease-out motion-reduce:opacity-100 motion-reduce:transition-none',
-                    revealDelays ? 'opacity-100' : 'opacity-0'
-                  )}
-                  src={`${LOGO_ROOT}/startup-${name}.svg`}
+                <StartupLogo
+                  delay={revealDelays?.[currentLogoIndex] ?? LOADER_COMPLETE + LOGO_REVEAL_DURATION}
+                  name={name}
+                  shouldReduceMotion={shouldReduceMotion}
+                  timelineElapsed={timelineElapsed}
                   width={width}
-                  height={64}
-                  sizes={`${Math.round((width / 64) * 44)}px`}
-                  style={{ transitionDelay: `${revealDelays?.[currentLogoIndex] ?? 0}ms` }}
-                  alt=""
-                  key={`${name}-${currentLogoIndex}`}
+                  key={`${name}-${currentLogoIndex}-${revealDelays ? 'revealing' : 'waiting'}`}
                 />
               );
             })}
@@ -159,6 +186,11 @@ const StartupLogos = ({ isActive }) => {
 
 StartupLogos.propTypes = {
   isActive: PropTypes.bool.isRequired,
+  timelineElapsed: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    on: PropTypes.func.isRequired,
+    set: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default StartupLogos;

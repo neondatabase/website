@@ -1,6 +1,6 @@
 'use client';
 
-import { domAnimation, LazyMotion, m, useMotionValue, useReducedMotion } from 'framer-motion';
+import { m, useMotionValue, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
@@ -207,7 +207,7 @@ InitializationProgress.propTypes = {
   status: PropTypes.oneOf(['creating', 'preparing', 'complete']).isRequired,
 };
 
-const StartupAnimation = ({ onStart }) => {
+const StartupAnimation = ({ onStart, timelineElapsed }) => {
   const elapsedRef = useRef(0);
   const frameIndexRef = useRef(0);
   const hasStartedRef = useRef(false);
@@ -235,6 +235,7 @@ const StartupAnimation = ({ onStart }) => {
       const nextFrameIndex = getTimelineIndex(elapsed);
       const rightReveal = getRevealProgress(elapsed, 0);
 
+      timelineElapsed.set(elapsed);
       rightCardOpacity.set(rightReveal);
       rightCardY.set(12 * (1 - rightReveal));
 
@@ -285,7 +286,15 @@ const StartupAnimation = ({ onStart }) => {
     return () => {
       if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
     };
-  }, [inView, isDocumentVisible, onStart, rightCardOpacity, rightCardY, shouldReduceMotion]);
+  }, [
+    inView,
+    isDocumentVisible,
+    onStart,
+    rightCardOpacity,
+    rightCardY,
+    shouldReduceMotion,
+    timelineElapsed,
+  ]);
 
   const frame = shouldReduceMotion ? TIMELINE[FINAL_FRAME_INDEX] : TIMELINE[frameIndex];
 
@@ -296,50 +305,52 @@ const StartupAnimation = ({ onStart }) => {
         ref={ref}
         aria-hidden="true"
       />
-      <LazyMotion features={domAnimation}>
-        <m.div
-          className="absolute top-[229px] left-[607px] z-20 h-[173px] w-[398px] font-mono text-[#94979e] will-change-transform 2xl:right-0 2xl:left-auto lg:top-[250px] lg:right-0 md:top-[230px] md:h-[160px] md:w-[360px] sm:top-[219px] sm:right-auto sm:left-0 sm:w-full"
-          style={{
-            opacity: shouldReduceMotion ? 1 : rightCardOpacity,
-            y: shouldReduceMotion ? 0 : rightCardY,
-          }}
-          role="img"
-          aria-label="A Neon project initializes and reaches 100 percent"
-        >
-          {frame.screen === 'create' ? (
-            <CreateProject isPressed={frame.isCreatePressed} />
-          ) : (
-            <InitializationProgress
-              filledBlocks={frame.filledBlocks}
-              progress={frame.progress}
-              status={frame.status}
-            />
-          )}
-          <InitializationNoise
-            asset={
-              frame.screen === 'progress' && frame.status === 'complete'
-                ? 'startup-card-noise.svg'
-                : 'startup-card-noise-progress.svg'
-            }
+      <m.div
+        className="absolute top-[229px] left-[607px] z-20 h-[173px] w-[398px] font-mono text-[#94979e] will-change-transform 2xl:right-0 2xl:left-auto lg:top-[250px] lg:right-0 md:top-[230px] md:h-[160px] md:w-[360px] sm:top-[219px] sm:right-auto sm:left-0 sm:w-full"
+        style={{
+          opacity: shouldReduceMotion ? 1 : rightCardOpacity,
+          y: shouldReduceMotion ? 0 : rightCardY,
+        }}
+        role="img"
+        aria-label="A Neon project initializes and reaches 100 percent"
+      >
+        {frame.screen === 'create' ? (
+          <CreateProject isPressed={frame.isCreatePressed} />
+        ) : (
+          <InitializationProgress
+            filledBlocks={frame.filledBlocks}
+            progress={frame.progress}
+            status={frame.status}
           />
-        </m.div>
+        )}
+        <InitializationNoise
+          asset={
+            frame.screen === 'progress' && frame.status === 'complete'
+              ? 'startup-card-noise.svg'
+              : 'startup-card-noise-progress.svg'
+          }
+        />
+      </m.div>
 
-        <div className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 xl:top-112 md:w-[480px] sm:top-100 sm:h-auto sm:w-full sm:p-5 sm:pb-6">
-          <strong className="block text-[5rem] leading-none font-normal tracking-extra-tight text-white sm:text-[4rem]">
-            100K+
-          </strong>
-          <p className="mt-[29px] max-w-[320px] text-xl leading-tight tracking-extra-tight text-gray-new-80 sm:mt-5 sm:max-w-[290px] sm:text-base">
-            Projects built and launched with Neon, from early-stage products to growing
-            applications.
-          </p>
-        </div>
-      </LazyMotion>
+      <div className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 xl:top-112 md:w-[480px] sm:top-100 sm:h-auto sm:w-full sm:p-5 sm:pb-6">
+        <strong className="block text-[5rem] leading-none font-normal tracking-extra-tight text-white sm:text-[4rem]">
+          100K+
+        </strong>
+        <p className="mt-[29px] max-w-[320px] text-xl leading-tight tracking-extra-tight text-gray-new-80 sm:mt-5 sm:max-w-[290px] sm:text-base">
+          Projects built and launched with Neon, from early-stage products to growing applications.
+        </p>
+      </div>
     </div>
   );
 };
 
 StartupAnimation.propTypes = {
   onStart: PropTypes.func.isRequired,
+  timelineElapsed: PropTypes.shape({
+    get: PropTypes.func.isRequired,
+    on: PropTypes.func.isRequired,
+    set: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default StartupAnimation;
