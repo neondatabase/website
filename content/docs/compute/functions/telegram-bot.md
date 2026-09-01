@@ -1,5 +1,7 @@
 ---
 title: How to host a Telegram bot on Neon Functions
+tag: new
+tagTheme: green
 subtitle: Receive Telegram messages, run bot commands and store data in Postgres
 enableTableOfContents: true
 isDraft: false

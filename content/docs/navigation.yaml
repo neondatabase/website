@@ -93,6 +93,8 @@
               slug: guides/javascript
             - title: Kotlin
               slug: guides/kotlin
+              tag: new
+              tagTheme: green
             - title: Python
               slug: guides/python
             - title: Rust
@@ -836,10 +838,16 @@
           items:
             - title: Discord bot
               slug: compute/functions/discord-bot
+              tag: new
+              tagTheme: green
             - title: Telegram bot
               slug: compute/functions/telegram-bot
+              tag: new
+              tagTheme: green
             - title: WhatsApp bot
               slug: compute/functions/whatsapp-bot
+              tag: new
+              tagTheme: green
         - section: Reference
           items:
             - title: Runtime limits
@@ -890,6 +898,8 @@
               slug: ai-gateway/openai-responses
             - title: Anthropic Messages API
               slug: ai-gateway/anthropic-messages
+              tag: new
+              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -914,6 +924,8 @@
               slug: manage/accounts
             - title: Permissions quickstart
               slug: manage/project-permissions-get-started
+              tag: new
+              tagTheme: green
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -1079,8 +1091,6 @@
           slug: introduction/manage-billing
         - title: Spending notifications
           slug: introduction/spending-notifications
-          tag: new
-          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
@@ -1121,6 +1131,8 @@
           items:
             - title: Claimable Neon
               slug: reference/claimable-neon
+              tag: new
+              tagTheme: green
         - section: Guides
           icon: book
           items:
@@ -1163,6 +1175,8 @@
                   slug: ai/ai-cursor-plugin
                 - title: Grok Bot plugin
                   slug: ai/ai-grok-bot-plugin
+                  tag: new
+                  tagTheme: green
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
             - section: Build AI agents
@@ -1217,14 +1231,24 @@
                   slug: cli/init
                 - title: ask
                   slug: cli/ask
+                  tag: new
+                  tagTheme: green
                 - title: mcp
                   slug: cli/mcp
+                  tag: new
+                  tagTheme: green
                 - title: skills
                   slug: cli/skills
+                  tag: new
+                  tagTheme: green
                 - title: plugins
                   slug: cli/plugins
+                  tag: new
+                  tagTheme: green
                 - title: claim
                   slug: cli/claim
+                  tag: new
+                  tagTheme: green
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link
@@ -1237,6 +1261,8 @@
                   slug: cli/set-context
                 - title: open
                   slug: cli/open
+                  tag: new
+                  tagTheme: green
                 - title: me
                   slug: cli/me
                 - title: profile
@@ -1303,6 +1329,8 @@
                   slug: cli/inspect
                 - title: logs
                   slug: cli/logs
+                  tag: new
+                  tagTheme: green
         - section: API
           icon: api
           items:
