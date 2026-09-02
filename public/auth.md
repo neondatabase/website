@@ -17,17 +17,20 @@ Install the CLI, `@neon/config`, and the skills:
 ```bash
 npm i -g neon@latest
 npm i @neon/config
-neon skills -s neon -s neon-postgres
+neon skills -y -s neon -s neon-postgres
 ```
 
-The `neon` skill documents the claim flow in more detail. `neon-postgres` is for working
-with Lakebase Postgres after claim.
+The `neon` skill is the Neon platform skill. `neon-postgres` is for working with Lakebase
+Postgres after claim.
+
+If you cannot run the CLI, or `neon claim --help` does not list `create`, skip to REST.
 
 ### neon.ts
 
-Write and commit `neon.ts`. Declare the services the app needs. `neon claim create` reads
-this file (walks up from the current directory). After claim, the same file is how you add
-Functions, Object Storage, and the AI Gateway. https://neon.com/docs/reference/neon-ts.md
+Write `neon.ts` and commit it with the app. Declare the services the app needs.
+`neon claim create` reads this file (walks up from the current directory). After claim, the
+same file is how you add Functions, Object Storage, and the AI Gateway.
+https://neon.com/docs/reference/neon-ts.md
 
 ```typescript
 import { defineConfig } from "@neon/config/v1";
@@ -37,8 +40,6 @@ export default defineConfig({
   dataApi: true,
 });
 ```
-
-If `neon claim --help` lists `create`:
 
 ```bash
 neon claim create
@@ -61,13 +62,9 @@ Same env write as above. Then skip to Claim when the human is ready.
 
 ### REST
 
-If you cannot run the CLI, or `create` is not a command, use HTTP.
-
-### Register
-
 `source` is your agent name, 1-100 characters. Replace `your-agent`. Request only services
 the app needs. Finish provision with what was granted. If the app still needs a denied
-service, claim after you have `project.id` and an access token.
+service, wait until the human is ready, then Claim.
 
 ```http
 POST https://claimable.neon.tech/v1/agent/identity
