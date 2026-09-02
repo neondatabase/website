@@ -36,9 +36,7 @@ If `create` is not a command, use HTTP.
 ### Register
 
 `source` is your agent name, 1-100 characters. Replace `your-agent`. Request only services
-the app needs. `postgres`, `data_api`, and `auth` can be granted now. `functions`,
-`storage`, and `ai_gateway` return `granted: false` and `reason: "requires_claim"`. Do not
-retry those. Finish provision with what was granted. If the app still needs a denied
+the app needs. Finish provision with what was granted. If the app still needs a denied
 service, claim after you have `project.id` and an access token.
 
 ```http
