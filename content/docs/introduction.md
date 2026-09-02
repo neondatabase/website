@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-08-18T16:41:42.467Z'
+updatedOn: '2026-09-02T18:49:35.200Z'
 ---
 
 ## Getting started
@@ -21,7 +21,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 
 <TwinPaths>
   <QuickPath
-    title="One-command setup"
+    title="Build with an agent"
     command="npx neon@latest init"
     description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step. Copy the prompt below and get started."
   />
