@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
+import RiveAnimation from 'components/shared/rive-animation';
 import { functionsPageContent } from 'constants/backend-platform-page-content';
 import agentFriendlyIcon from 'icons/functions/branching/agent-friendly.svg';
 import branchesWithDataIcon from 'icons/functions/branching/branches-with-data.svg';
 import declaredInIcon from 'icons/functions/branching/declared-in.svg';
-import illustration from 'images/pages/functions/branching/illustration.svg';
 
 const { branching: branchingContent } = functionsPageContent;
 const branchingItemsById = Object.fromEntries(
@@ -35,10 +35,15 @@ const Branching = () => (
       </p>
 
       <div
-        className="relative mt-12 aspect-[1344/422] overflow-hidden"
+        className="relative mt-12 aspect-[1184/422] overflow-hidden"
         data-figma-node-id="3122:2198"
       >
-        <Image src={illustration} fill unoptimized alt="" />
+        <RiveAnimation
+          className="pointer-events-none size-full select-none"
+          wrapperClassName="absolute inset-0 size-full"
+          src="/animations/pages/functions/branching.riv?202609021517"
+          autoBind={false}
+        />
       </div>
 
       <ul className="mt-[45px] grid grid-cols-[352px_384px_352px] gap-x-32 min-[1280px]:max-[1407px]:grid-cols-3 min-[1280px]:max-[1407px]:gap-x-16 xl:grid-cols-3 xl:gap-x-16 lg:gap-x-8 md:grid-cols-1 md:gap-y-8">
