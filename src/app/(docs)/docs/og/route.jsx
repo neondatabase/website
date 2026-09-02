@@ -1,25 +1,18 @@
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+
 import { ImageResponse } from 'next/og';
 
 export async function GET(request) {
-  const fontBreadcrumbs = fetch(
-    new URL('../../../../fonts/geist-mono/GeistMono-Regular.ttf', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-  const fontTitle = fetch(
-    new URL('../../../../fonts/inter/Inter-Regular.ttf', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-  const logo = fetch(
-    new URL('../../../../../public/images/og-image/logo.png', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-  const background = fetch(
-    new URL('../../../../../public/images/og-image/docs-background.jpg', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-
-  const [fontDataBreadcrumbs, fontDataTitle, logoData, backgroundData] = await Promise.all([
-    fontBreadcrumbs,
-    fontTitle,
-    logo,
-    background,
+  const [fontDataBreadcrumbs, fontDataTitle, logoBuffer, backgroundBuffer] = await Promise.all([
+    readFile(join(process.cwd(), 'src', 'fonts', 'geist-mono', 'GeistMono-Regular.ttf')),
+    readFile(join(process.cwd(), 'src', 'fonts', 'inter', 'Inter-Regular.ttf')),
+    readFile(join(process.cwd(), 'public', 'images', 'og-image', 'logo.png')),
+    readFile(join(process.cwd(), 'public', 'images', 'og-image', 'docs-background.jpg')),
   ]);
+
+  const logoData = `data:image/png;base64,${logoBuffer.toString('base64')}`;
+  const backgroundData = `data:image/jpeg;base64,${backgroundBuffer.toString('base64')}`;
 
   try {
     const { searchParams } = request.nextUrl;
