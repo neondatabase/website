@@ -5,13 +5,11 @@ summary: >-
   patches, and OS changes by restarting the compute, typically in seconds,
   with automatic cache prewarming to avoid cold-cache performance loss after
   restart. Paid plan users can schedule a preferred update window via the
-  console or API. Free plan updates are scheduled by Neon with advance notice.
-  Computes above the 8 CU autoscale ceiling are excluded from automatic
-  updates and must be restarted manually. Configure connection retry logic
-  to handle the brief disruption.
+  console or API. Free plan updates are scheduled by Neon with advance
+  notice. Configure connection retry logic to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-09-02T13:35:43.126Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -49,9 +47,8 @@ Neon applies updates to computes based on the following rules:
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (for example, shutting down or restarting) at the time of an update are not updated.
-- Computes whose **maximum** autoscale size is **greater than 8 CU** are not updated automatically. If your maximum is **exactly 8 CU**, your compute is **not** treated as a large compute and receives scheduled updates like smaller sizes. See [Updating large computes](#updating-large-computes).
 
-If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
+If a compute is skipped for an update (for example, because it was in a transition state), Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
 <Admonition type="important" title="updates outside of scheduled update windows">
 Please be aware that Neon must occasionally perform essential **platform maintenance** outside the scheduled updates performed on Neon computes. This means that you may experience brief disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
@@ -165,14 +162,6 @@ Computes receive available updates immediately upon restart. For example, if Neo
 If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
 
 For compute restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
-
-## Updating large computes
-
-Computes whose **maximum** autoscale size is **greater than 8 CU** are not updated automatically (_scheduled updates do not apply_). Computes capped at **exactly 8 CU** follow the usual [automatic update rules](#how-often-are-updates-applied) above. To apply updates on a large compute, you'll need to restart it manually. A restart may occur automatically due to [scale to zero](/docs/introduction/scale-to-zero), but if scale to zero is disabled or your compute runs continuously, please plan for manual restarts.
-
-Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
-
-For restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Handling connection disruptions during compute updates
 
