@@ -7,12 +7,12 @@ summary: >-
   them. Includes the schema and page to expect, and follow-up prompts for
   sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-02T20:37:43.909Z'
+updatedOn: '2026-09-02T20:53:13.819Z'
 ---
 
-Set up Neon and build on it without leaving your editor. Connect your agent once, then send it a single prompt: it creates a table, seeds a few rows, and adds a page that shows them. You end up with a running Next.js app, not just a connection.
+Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres.
 
-Prefer to write every line yourself? [Build a full backend](/docs/get-started/full-backend-quickstart) is the hands-on tutorial that explains each step.
+<Steps>
 
 ## Connect your agent to Neon
 
@@ -92,6 +92,8 @@ npm run dev
 ```
 
 Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your seeded notes, newest first. You can also open the table in the [Neon Console](https://console.neon.tech).
+
+</Steps>
 
 ## Keep building
 
