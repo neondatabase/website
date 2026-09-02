@@ -79,15 +79,6 @@ Authorization: Bearer <access_token>
 Keep `database_url`. If granted: `services.data_api.url`, `services.auth.base_url`,
 `services.auth.jwks_url`. Use `database_url` with any Postgres client.
 
-Management API calls the proxy allows:
-
-```http
-GET https://claimable.neon.tech/v1/projects/<project_id>/...
-Authorization: Bearer <access_token>
-```
-
-The project-scoped Neon API key stays inside Claimable Neon and is never returned.
-
 ## Claim
 
 Do not mint a claim URL until the human is ready to keep the project.
@@ -96,10 +87,10 @@ If the CLI created the project:
 
 ```bash
 neon claim accept --no-open
-neon claim status
 ```
 
-Report the printed verification URL.
+Report the printed verification URL. Then run `neon claim status` until it reports
+reconciled.
 
 Otherwise HTTP. `project_id` is `project.id`. The access token is from the token call above.
 
@@ -126,11 +117,11 @@ above. The new token has no project scopes. It can poll claim status and mint a 
 code if the transfer window expires. If that window expires before they accept, POST claim
 again.
 
-Poll every `interval` seconds:
+Poll every `interval` seconds with that new `access_token`:
 
 ```http
 GET https://claimable.neon.tech/v1/projects/<project_id>/claim
-Authorization: Bearer <claim_status_access_token>
+Authorization: Bearer <access_token>
 ```
 
 `state` moves `pending` → `accepted` → `reconciled`. `accepted` is brief; the next poll is
