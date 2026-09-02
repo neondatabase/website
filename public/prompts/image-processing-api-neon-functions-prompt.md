@@ -24,3 +24,5 @@ Before writing any code:
 9. Finally, help me run and test the API with an example request.
 
 Prefer the simplest implementation that satisfies my requirements. Don't introduce additional frameworks, services, or abstractions unless they are necessary.
+
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.

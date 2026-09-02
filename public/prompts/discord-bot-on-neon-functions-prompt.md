@@ -41,3 +41,5 @@ Before writing code:
     - and test the bot end to end.
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
+
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.
