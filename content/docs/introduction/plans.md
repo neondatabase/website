@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-09-02T16:25:31.067Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -53,7 +53,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                       | Up to 16 CU (64 GB RAM)                     | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                 | After 5 min, can be disabled                | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                              | $0.35/GB-month                              | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB included                               | 500 GB per project included, then $0.10/GB  | 500 GB per project included, then $0.10/GB                                                        |
+| [Public network transfer](#public-network-transfer)   | 5 GB per project included                   | 500 GB per project included, then $0.10/GB  | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                       | 3 days                                      | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                           | —                                           | ✅                                                                                                |
 | [Spending notifications](#spending-notifications)     | —                                           | ✅                                          | ✅                                                                                                |
@@ -91,7 +91,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress per project. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -249,11 +249,11 @@ Public network transfer (egress) is the total volume of data sent from your data
 
 Allowances per plan:
 
-- **Free**: 5 GB/month
+- **Free**: 5 GB per project per month
 - **Launch**: 500 GB per project per month, then $0.10/GB
 - **Scale**: 500 GB per project per month, then $0.10/GB
 
-> On the **Free** plan, the 5 GB allowance is a single account-wide pool shared across all products, including Postgres, [Object Storage](#object-storage), and [Functions](#functions). On paid plans, the 500 GB allowance is per project and also shared across products.
+> On all plans, the network transfer allowance is per project and shared across all products in that project, including Postgres, [Object Storage](#object-storage), and [Functions](#functions).
 
 ### Monitoring
 
@@ -599,7 +599,7 @@ Only available on Scale: $0.01/GB, bidirectional, between Neon and private netwo
 </FaqItem>
 
 <FaqItem question="What are the limits and quotas for the Free plan?">
-The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
