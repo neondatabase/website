@@ -9,16 +9,17 @@ summary: >-
   are coming. Query records over a time
   window, filter by source, severity, or OpenTelemetry attributes, run raw
   LogQL, and list which fields and values a branch reports. Logs are in beta
-  and available only in AWS US East (Ohio) (aws-us-east-2).
+  and available in AWS US East (Ohio) (aws-us-east-2) and AWS Europe
+  (Frankfurt) (aws-eu-central-1).
 enableTableOfContents: true
-updatedOn: '2026-09-01T16:04:17.197Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 <FeatureBeta />
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
 
-Logs are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so your project must be in that region to use them.
+Logs are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), so your project must be in one of these regions to use them. Support is expanding toward all regions.
 
 Every subcommand resolves the project and branch from your [context](/docs/cli/set-context). Pass `--project-id` and `--branch` to target a specific branch instead.
 
@@ -101,4 +102,4 @@ curl "https://console.neon.tech/telemetry/v1/projects/$PROJECT_ID/branches/$BRAN
 
 The stream label is `entity_type` (not `--source`), so a LogQL selector reads `{entity_type="function"}`. This is a read-only subset, not a push endpoint or a complete Loki deployment. A Loki client that builds its own paths may need a different root: a Grafana data source, for example, appends `/loki/api/v1` to whatever URL it is given. Confirm the data-source URL against this base rather than pasting it verbatim.
 
-Like the CLI, this API reads logs only on branches in **AWS US East (Ohio) (`aws-us-east-2`)**, the only region where branch logs are available during the beta period. A branch in any other region returns `404`.
+Like the CLI, this API reads logs only on branches in a supported region: AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`) during the beta period. Support is expanding toward all regions. A branch in any other region returns `404`.

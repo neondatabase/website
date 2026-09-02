@@ -38,7 +38,7 @@ Function  ──streams the answer──▶  Browser
 So when you see a `notes` table, an `attachments` bucket, or a `chat` function below, they're all parts of this same app. Postgres is the system of record for notes; Storage holds the files that are too big for a row; the Function is the long-running piece that handles a chat request; the AI Gateway is the single credential for the model call; and Auth decides whose notes a request may read.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to try them. Postgres and Managed Better Auth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
+Object Storage, Functions, and the AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward all regions. Postgres and Managed Better Auth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
 </Admonition>
 
 ## The shape of a Neon backend
@@ -52,7 +52,7 @@ npm i -g neon
 neon auth
 ```
 
-Then create the project. Create it in `aws-us-east-2` so the beta services are available:
+Then create the project. Create it in `aws-us-east-2` or `aws-eu-central-1` so the beta services are available:
 
 ```bash
 neon link --project-name notes-app --region-id aws-us-east-2
