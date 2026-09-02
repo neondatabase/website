@@ -4,13 +4,12 @@ summary: >-
   Neon compute updates deliver Postgres minor version upgrades, security
   patches, and OS changes by restarting the compute, typically in seconds,
   with automatic cache prewarming to avoid cold-cache performance loss after
-  restart. All computes receive automatic updates, including the largest
-  sizes. Paid plan users can schedule a preferred update window via the
+  restart. Paid plan users can schedule a preferred update window via the
   console or API. Free plan updates are scheduled by Neon with advance
   notice. Configure connection retry logic to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-02T13:34:38.800Z'
+updatedOn: '2026-09-02T13:35:43.126Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -48,7 +47,6 @@ Neon applies updates to computes based on the following rules:
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
 - Computes in a transition state (for example, shutting down or restarting) at the time of an update are not updated.
-- Computes of all sizes receive automatic updates, including the largest computes. Cache [prewarming](#how-neon-applies-updates) keeps performance intact through the restart, so no size is excluded.
 
 If a compute is skipped for an update (for example, because it was in a transition state), Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
 
