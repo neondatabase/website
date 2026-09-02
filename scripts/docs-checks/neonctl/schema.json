@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.13.0",
+  "neonctlVersion": "4.14.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -917,6 +917,10 @@
         }
       ],
       "options": {
+        "env": {
+          "type": "string",
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+        },
         "env-pull": {
           "type": "boolean",
           "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
@@ -934,6 +938,10 @@
         {
           "command": "$0 checkout br-cool-snow-12345678 --project-id project-id-123",
           "description": "Pin a branch by id for an explicit project"
+        },
+        {
+          "command": "$0 checkout feat --env .env.local",
+          "description": "Create feat from neon.ts, loading Function env from .env.local first"
         },
         {
           "command": "$0 checkout main",
@@ -1082,7 +1090,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1131,7 +1139,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1507,7 +1515,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1635,7 +1643,7 @@
             },
             "service": {
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           },
           "commands": {},
@@ -1660,6 +1668,14 @@
             {
               "command": "$0 env pull -s auth -e DATABASE_URL",
               "description": "Pull all Auth variables plus DATABASE_URL"
+            },
+            {
+              "command": "$0 env pull -s functions",
+              "description": "Pull NEON_FUNCTION_<SLUG>_BASE_URL for every deployed function"
+            },
+            {
+              "command": "$0 env pull -e NEON_FUNCTION_HELLO_BASE_URL",
+              "description": "Write that function's production invocation URL (no deploy required)"
             }
           ],
           "usage": "$0 env pull [options]"
