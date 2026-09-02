@@ -59,6 +59,8 @@ AI Gateway pricing isn't finalized. Here's what to expect once it moves out of b
 
 We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
 
+Free inference doesn't mean unlimited requests. During the beta you can still hit two account-level limits: a per-minute token limit, and a daily spend cap that returns `429 Too Many Requests`. Both are covered on the models page under [Rate limits](/docs/ai-gateway/models#rate-limits) and [Pricing](/docs/ai-gateway/models#pricing).
+
 ## Starter templates
 
 Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Two templates use AI Gateway:
