@@ -147,7 +147,7 @@ module.exports = {
           'manage/branches.md',
           'manage/computes.md',
           'manage/organizations.md',
-          'manage/backups.md',
+          'manage/databases.md',
         ],
       },
     },
