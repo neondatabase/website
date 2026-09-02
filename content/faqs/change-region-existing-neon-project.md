@@ -3,7 +3,7 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-02T18:59:27.831Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -64,6 +64,6 @@ Writes to the source database during the dump and restore won't appear in the ne
 
 ## Data transfer costs
 
-Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB/month of public network transfer, which is usually enough for a one-off migration.
+Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB per project per month of public network transfer, which is usually enough for a one-off migration.
 
 <CTA title="Compare migration paths" description="The region migration guide compares the Import Data Assistant, dump and restore, and logical replication." buttonText="Region migration guide" buttonUrl="https://neon.com/docs/import/migrate-neon-to-another-region" />

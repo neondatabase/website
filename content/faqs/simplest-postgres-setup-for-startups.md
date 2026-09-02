@@ -22,7 +22,7 @@ Sign up at [console.neon.tech](https://console.neon.tech/signup), create a proje
 - 100 projects (one project per app or customer is the recommended pattern)
 - 0.5 GB of storage per project
 - 100 CU-hours/month of compute per project, autoscaling up to 2 CU (≈8 GB RAM)
-- 5 GB of public network transfer per month
+- 5 GB of public network transfer per project per month
 - 10 branches per project for development and previews
 - Scale to zero after 5 minutes of inactivity, so idle prototypes don't burn through the CU-hour allowance
 

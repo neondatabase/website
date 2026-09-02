@@ -23,7 +23,7 @@ Each Neon project is an isolated Postgres instance with its own connection strin
 - 100 CU-hours per project per month
 - 0.5 GB storage per project
 - 10 branches per project
-- 5 GB public network transfer per month
+- 5 GB public network transfer per project per month
 
 100 CU-hours is enough to run a 0.25 CU compute (≈1 GB RAM) for roughly 400 hours per month. For low-traffic apps that scale to zero between requests, that covers most or all of your active time. Compute suspends after 5 minutes idle and resumes in a few hundred milliseconds when a query arrives. See the [Free plan details](/docs/introduction/plans) for the full breakdown.
 

@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-09-02T18:59:27.831Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -100,12 +100,12 @@ For detailed quota examples and consumption limits, see [Configure consumption l
 
 For free-tier users, create projects in your Free organization (sponsored by Neon) with resource quotas matching (or within) Neon's Free plan limits using the [Create project](/docs/reference/api/projects/create-project) API:
 
-| Resource          | Free Tier Quota    | Description                             |
-| ----------------- | ------------------ | --------------------------------------- |
-| **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units |
-| **Active time**   | `360000` seconds   | 100 hours of compute activity per month |
-| **Storage**       | `536870912` bytes  | 512 MB total storage limit              |
-| **Data transfer** | `5368709120` bytes | 5 GB data transfer per month            |
+| Resource          | Free Tier Quota    | Description                              |
+| ----------------- | ------------------ | ---------------------------------------- |
+| **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units  |
+| **Active time**   | `360000` seconds   | 100 hours of compute activity per month  |
+| **Storage**       | `536870912` bytes  | 512 MB total storage limit               |
+| **Data transfer** | `5368709120` bytes | 5 GB data transfer per project per month |
 
 Example API request:
 
