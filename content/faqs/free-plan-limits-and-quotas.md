@@ -18,20 +18,20 @@ The Neon Free plan costs $0/month and includes 100 projects, 10 branches per pro
 
 ## What's included
 
-| Resource                | Free plan allowance                        |
-| ----------------------- | ------------------------------------------ |
-| Projects                | 100                                        |
-| Branches                | 10 per project                             |
-| Compute                 | 100 CU-hours per project per month         |
-| Autoscaling             | Up to 2 CU (≈8 GB RAM)                     |
-| Scale to zero           | After 5 min inactivity, cannot be disabled |
-| Storage                 | 0.5 GB per project                         |
-| Public network transfer | 5 GB/month                                 |
-| Instant restore history | 6 hours, capped at 1 GB of change history  |
-| Manual snapshots        | 1                                          |
-| Neon Auth (Beta)        | Up to 60,000 MAU                           |
-| Monitoring history      | 1 day                                      |
-| Support                 | Community                                  |
+| Resource                   | Free plan allowance                        |
+| -------------------------- | ------------------------------------------ |
+| Projects                   | 100                                        |
+| Branches                   | 10 per project                             |
+| Compute                    | 100 CU-hours per project per month         |
+| Autoscaling                | Up to 2 CU (≈8 GB RAM)                     |
+| Scale to zero              | After 5 min inactivity, cannot be disabled |
+| Storage                    | 0.5 GB per project                         |
+| Public network transfer    | 5 GB/month                                 |
+| Instant restore history    | 6 hours, capped at 1 GB of change history  |
+| Manual snapshots           | 1                                          |
+| Managed Better Auth (Beta) | Up to 60,000 MAU                           |
+| Monitoring history         | 1 day                                      |
+| Support                    | Community                                  |
 
 100 CU-hours is enough to run a 0.25 CU (≈1 GB RAM) compute for about 400 hours per project per month. Compute quotas are measured per project, so 100 projects each get their own 100 CU-hour bucket.
 

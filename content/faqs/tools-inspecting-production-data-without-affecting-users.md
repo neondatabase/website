@@ -58,7 +58,7 @@ Use the read-only endpoint's connection string for read traffic. Replicas count 
 If you're sharing the connection string with non-engineering teammates, create an [anonymized branch](/docs/workflows/data-anonymization) so PII is masked before they connect.
 </Admonition>
 
-## How other Postgres platforms handle this
+## How other Postgres services handle this
 
 - **AWS RDS for Postgres**: Create a read replica or restore a snapshot to a new instance. A read replica reduces load on the primary but adds full instance cost. Restoring a snapshot can take minutes to hours for large databases ([RDS resilience](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/disaster-recovery-resiliency.html)).
 - **Supabase**: [Read Replicas](https://supabase.com/docs/guides/platform/read-replicas) are available on Pro, Team, and Enterprise plans and require at least a Small compute add-on. Each replica inherits the primary's compute size and is billed as separate Compute Hours. Supabase branches don't carry over production data by default; you populate them from a `seed.sql` ([branching](https://supabase.com/docs/guides/deployment/branching)).

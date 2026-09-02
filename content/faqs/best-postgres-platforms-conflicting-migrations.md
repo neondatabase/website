@@ -48,10 +48,10 @@ Branches share storage with the parent until they diverge, so a feature branch t
 If your branch falls behind main and you want production-fresh data again, run `neon branches reset` to discard your changes and pull the latest parent state. No need to delete and recreate. See [Reset from parent](/docs/guides/reset-from-parent).
 </Admonition>
 
-## What other Postgres platforms offer
+## What other Postgres services offer
 
 - **Supabase Branching** is the closest comparable feature. Each preview branch is a full Supabase environment (Postgres, auth, storage), seeded from your migration files rather than copy-on-write off production data, and billed per branch compute hour ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Migration conflicts still have to be [manually resolved on the preview branch](https://supabase.com/docs/guides/deployment/branching/dashboard) before merging.
-- **Aurora and RDS for PostgreSQL** have no native equivalent. The usual workaround is restoring from a snapshot per engineer, which produces a full copy (not a delta) and takes minutes per restore. You also pay full instance price for every restored copy.
+- **Aurora and RDS for Postgres** have no native equivalent. The usual workaround is restoring from a snapshot per engineer, which produces a full copy (not a delta) and takes minutes per restore. You also pay full instance price for every restored copy.
 
 For teams whose blocker is migration coordination rather than full-environment previews, Neon's copy-on-write branches are usually the lighter-weight match: they share storage, take seconds to create, and the compute scales to zero when nobody's running migrations.
 

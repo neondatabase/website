@@ -67,7 +67,7 @@ You can start a project, push to production, and add a database branch for each 
 
 ## How it compares for startups
 
-- **Supabase Free Plan**: Two free projects per Free Plan organization, 500 MB database size per project, projects pause after extended inactivity ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)). Compute is dedicated per project, so each additional project adds a fixed Compute Hours line item on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **Supabase Free Plan**: Two active free projects, counted across every organization where you're an Owner or Admin, 500 MB database size per project, projects pause after extended inactivity ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)). Compute is dedicated per project, so each additional project adds a fixed Compute Hours line item on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
 - **AWS RDS for Postgres**: You pick an instance class and storage up front. There's no free plan comparable to Neon's Free plan, and the instance runs (and bills) until you stop or delete it. Backups go to S3 with a configurable retention window ([RDS backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html)).
 - **AWS Aurora Serverless v2**: No fixed instance, but you set a min/max ACU range. If you want a bill that can fall to zero for compute, you have to opt into auto-pause with a 0 ACU minimum ([Aurora auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
 

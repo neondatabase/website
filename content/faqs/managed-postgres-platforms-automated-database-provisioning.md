@@ -19,9 +19,9 @@ If you need code to create and tear down Postgres databases, look for managed Po
 
 Three things tend to matter for automated provisioning:
 
-1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
-2. **Provisioning that returns in seconds, not minutes.** [Branching](/docs/introduction/branching) on Neon uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
-3. **Billing that doesn't punish idle databases.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges. Storage continues to bill on paid plans.
+1. **A real API.** A stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
+2. **Provisioning that returns in seconds.** [Branching](/docs/introduction/branching) on Neon uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
+3. **Compute billing that stops when a database is idle.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges. Storage continues to bill on paid plans.
 
 ## Example: create a branch from a script
 
@@ -53,7 +53,7 @@ The response includes a connection string you can inject into a preview deploy, 
 A few specifics worth knowing if you're comparing:
 
 - **Supabase** exposes a `POST /v1/projects` endpoint that creates a full project (database, auth, storage, edge functions). Each project is a dedicated VM, so provisioning takes longer and costs include the per-project compute baseline. See [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).
-- **Aurora Serverless v2** clusters can be created via the AWS API or Terraform, but new cluster creation takes minutes, not seconds. Once running, it can scale to 0 ACU with auto-pause for idle workloads.
+- **Aurora Serverless v2** clusters can be created via the AWS API or Terraform, but new cluster creation takes minutes. Once running, it can scale to 0 ACU with auto-pause for idle workloads.
 - **RDS for Postgres** is the slowest of the four: provisioning a new instance involves attaching EBS volumes and starting a VM, which is fine for long-lived databases but not for per-PR or per-tenant workflows.
 
 <CTA title="Browse the Neon API Reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api" />

@@ -13,11 +13,11 @@ nextLink:
   slug: postgres-services-saas-tenant-database-provisioning
 ---
 
-Neon's Launch and Scale plans have no minimum monthly fee. You pay for the compute and storage you actually use. Invoices under $0.50 aren't collected.
+Neon's Launch and Scale plans have no minimum monthly fee. You pay for the compute and storage you use. Invoices under $0.50 aren't collected.
 
 ## How the math works
 
-Compute is metered in **CU-hours** (tracked as CU-seconds under the hood). One CU allocates approximately 4 GB of RAM with proportional CPU. If your database scales to zero when idle, those idle hours don't accrue CU-hours.
+Compute is metered in CU-hours (tracked as CU-seconds under the hood). One CU allocates approximately 4 GB of RAM with proportional CPU. If your database scales to zero when idle, those idle hours don't accrue CU-hours.
 
 A realistic small workload on the Launch plan:
 
@@ -30,10 +30,10 @@ A realistic small workload on the Launch plan:
 If the database sits idle all month with scale-to-zero on, the compute line is $0. You're left paying for storage only.
 
 <Callout title="Free plan baseline">
-The Free plan is $0/month with 100 projects, 100 CU-hours per project, 0.5 GB storage per project, and autoscaling up to 2 CU (≈8 GB RAM). It's enough to host real small projects, not just demos.
+The Free plan is $0/month with 100 projects, 100 CU-hours per project, 0.5 GB storage per project, and autoscaling up to 2 CU (≈8 GB RAM). It's enough to host real small projects.
 </Callout>
 
-## What changes on Scale
+## What changes on the Scale plan
 
 The Scale plan is also pay-per-use. Compute is $0.222/CU-hour instead of $0.106, in exchange for higher autoscaling limits (up to 16 CU autoscaling, 56 CU fixed), longer history (up to 30 days), SOC 2 / ISO / HIPAA compliance, private networking, and an SLA. Compute drops to $0 while suspended; storage is still billed.
 

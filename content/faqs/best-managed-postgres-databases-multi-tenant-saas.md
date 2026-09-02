@@ -21,7 +21,7 @@ On a traditional managed service, each isolated tenant database needs a baseline
 
 ## How Neon's model differs
 
-On Neon, each tenant gets a separate [project](/docs/manage/projects) with its own isolated branch, compute, and storage. The two key cost levers:
+On Neon, each tenant gets a separate [project](/docs/manage/projects) with its own isolated branch, compute, and storage. The two cost levers:
 
 - **Scale to zero.** A tenant's compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query. You don't pay for compute during idle hours; storage continues to bill.
 - **Autoscaling.** Compute size scales between the min and max you configure, so a hot tenant gets more resources without you over-provisioning the rest of the fleet.
@@ -49,7 +49,7 @@ Use the [Neon API](/docs/reference/api) or [Terraform provider](/docs/reference/
 A few comparison points for the same model elsewhere:
 
 - **Aurora Serverless v2** can scale to zero ACUs with [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), which makes per-cluster isolation more affordable than fixed Aurora instances. Each cluster is still its own database cluster with its own management overhead, and there are per-account cluster quotas to consider.
-- **RDS for PostgreSQL** charges per database instance-hour regardless of activity, so one instance per tenant means N times the always-on cost.
+- **RDS for Postgres** charges per database instance-hour regardless of activity, so one instance per tenant means N times the always-on cost.
 - **Supabase** provisions a dedicated VM per project ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase)). Each project's compute is billed by the hour, so a fleet of 100 tenants each on a Micro instance is ~$1000/month in compute alone before storage and other line items.
 
 Neon's combination of scale-to-zero per tenant, an API for provisioning, and the [Agent plan](/docs/introduction/agent-plan) for high-volume fleets is what makes per-tenant isolation economical at scale.

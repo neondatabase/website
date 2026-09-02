@@ -74,7 +74,7 @@ Neon displays the secret token a single time, in the modal that opens right afte
 </Admonition>
 
 <Admonition type="note" title="There are no client-safe Neon keys">
-All Neon API keys are secrets and grant access to manage projects, branches, and roles. There's no equivalent of a "publishable" key. Never ship a Neon API key in a browser bundle or mobile app. For client-facing access, use the [Data API](/docs/data-api/overview) with [Neon Auth](/docs/auth/overview) instead.
+All Neon API keys are secrets and grant access to manage projects, branches, and roles. There's no equivalent of a "publishable" key. Never ship a Neon API key in a browser bundle or mobile app. For client-facing access, use the [Data API](/docs/data-api/overview) with [Managed Better Auth](/docs/auth/overview) instead.
 </Admonition>
 
 <CTA title="API keys reference" description="Full guide to creating, listing, and revoking keys via the Console and the API." buttonText="Read the docs" buttonUrl="/docs/manage/api-keys" />

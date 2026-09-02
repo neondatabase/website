@@ -61,7 +61,7 @@ See [Revoke API keys](/docs/manage/api-keys#revoke-api-keys).
 
 ## Create a replacement key
 
-Create a new key with the same scope as the old one. Use a descriptive name so you can tell keys apart in the dashboard. For routine (non-incident) rotation, do this before you revoke the old key.
+Create a new key with the same scope as the old one. Use a descriptive name so you can tell keys apart in the Console. For routine (non-incident) rotation, do this before you revoke the old key.
 
 In the Console, go to **Account settings → API keys** (personal) or your organization's **Settings → API keys** (organization or project-scoped) and click **Create new**.
 
