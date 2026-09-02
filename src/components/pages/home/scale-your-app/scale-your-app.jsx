@@ -31,8 +31,7 @@ const ScaleYourApp = () => (
           id="scale-your-app-heading"
         >
           <span className="text-white">One backend, from your first user to the Fortune 500. </span>
-          The same Neon primitives that get thousands of startups shipping are what Fortune 500
-          teams run in production.
+          Startups ship on the same Neon primitives that enterprise teams run in production.
         </h2>
       </header>
     </Container>

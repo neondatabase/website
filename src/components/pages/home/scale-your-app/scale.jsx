@@ -77,7 +77,7 @@ const Scale = () => (
           { text: 'WHERE THE FORTUNE', width: 672 },
           { text: '500 SCALES', width: 544 },
         ]}
-        description="Trusted by the most demanding production workloads."
+        description="Enterprises run critical workloads on Lakebase Postgres"
       />
     </Container>
 
