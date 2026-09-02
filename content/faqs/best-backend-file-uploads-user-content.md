@@ -50,7 +50,7 @@ Buckets are `private` (authenticated for every operation) or `public_read` (anon
 When a file needs processing on the way in, a [Neon Function](/docs/compute/functions/overview) receives it, writes it to Object Storage, and records metadata in Postgres, all in the same region. The `ai-sdk` template does exactly this: it generates an image, stores it in a private bucket, saves the key and metadata in Postgres, and serves it back through a presigned URL. Scaffold it with `neon bootstrap --template ai-sdk`.
 
 <Admonition type="note" title="Beta terms">
-Object Storage is in beta, available in `aws-us-east-2` only, and free to use on every plan during the beta. The Free plan includes 5 GB of Object Storage. When billing begins, storage is $0.023/GB-month with no per-operation charge, and egress counts toward your public network transfer allowance ([plans](/docs/introduction/plans#object-storage)).
+Object Storage is in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), and free to use on every plan during the beta. The Free plan includes 5 GB of Object Storage per project. When billing begins, storage is $0.023/GB-month with no per-operation charge, and egress counts toward your public network transfer allowance ([plans](/docs/introduction/plans#object-storage)).
 </Admonition>
 
 ## How other options compare

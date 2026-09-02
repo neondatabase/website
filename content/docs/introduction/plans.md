@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-09-02T16:25:31.067Z'
+updatedOn: '2026-09-02T20:41:07.968Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -345,7 +345,7 @@ There's no charge for Object Storage during the beta, but [usage limits](/docs/s
 - **Storage**: $0.023/GB-month. Only stored volume is metered; there's no per-operation charge.
 - **Egress**: Data transferred out counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products, and is billed at the same rate once you exceed it.
 
-On the **Free** plan, you get 5 GB of Object Storage, measured across your whole account rather than per project.
+On the **Free** plan, you get 5 GB of Object Storage per project.
 
 See [Neon Object Storage](/docs/storage/overview) for more information.
 

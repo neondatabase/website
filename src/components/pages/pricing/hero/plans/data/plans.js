@@ -42,7 +42,7 @@ export default [
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: '<p>Measured across your account, not per project</p>',
+            info: '<p>5 GB per project included</p>',
           },
           {
             title: 'Functions',

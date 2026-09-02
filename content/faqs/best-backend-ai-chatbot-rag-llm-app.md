@@ -57,7 +57,7 @@ const response = await client.chat.completions.create({
 Streaming works over server-sent events on every endpoint, and each branch gets its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway quickstart](/docs/ai-gateway/get-started)).
 
 <Admonition type="note" title="Beta availability">
-AI Gateway is in beta, available in `aws-us-east-2` only, and requires a paid plan. Inference is free during the beta. When billing begins, Neon charges provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)). Open-weight models are available right away; frontier models from OpenAI and Google are rolling out gradually.
+AI Gateway is in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), and requires a paid plan. Inference is free during the beta. When billing begins, Neon charges provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)). Open-weight models are available right away; frontier models from OpenAI and Google are rolling out gradually.
 </Admonition>
 
 ## What it costs at chatbot traffic levels

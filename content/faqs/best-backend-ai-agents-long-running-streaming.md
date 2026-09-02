@@ -49,8 +49,8 @@ export default defineConfig({
 
 Inside the handler, `@neon/ai-sdk-provider` reads the injected gateway credentials, so `neon('<model>')` is the only model configuration you write. Tools run inside the function with a `pg` pool pointed at `DATABASE_URL`. The full streaming example with a Postgres-backed tool is in [AI agents on Neon Functions](/docs/compute/functions/agents), and you can scaffold it with `neon bootstrap --template ai-sdk` or `--template mastra`.
 
-<Admonition type="note" title="Beta, one region">
-Functions and AI Gateway are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`). Functions are free during the beta on every plan; AI Gateway requires a paid plan and inference is free during the beta, with no markup on provider list prices once billing starts ([plans](/docs/introduction/plans#functions)).
+<Admonition type="note" title="Beta and region availability">
+Functions and AI Gateway are in beta and available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), with support expanding toward all regions. Functions are free during the beta on every plan; AI Gateway requires a paid plan and inference is free during the beta, with no markup on provider list prices once billing starts ([plans](/docs/introduction/plans#functions)).
 </Admonition>
 
 ## How other options compare

@@ -43,7 +43,7 @@ client.put_object(
 )
 ```
 
-Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is in beta, available in `aws-us-east-2`, and free during the beta with 5 GB on the Free plan.
+Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), and free during the beta with 5 GB per project on the Free plan.
 
 ## Models through the OpenAI SDK
 

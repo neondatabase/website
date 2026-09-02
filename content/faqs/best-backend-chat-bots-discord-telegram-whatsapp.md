@@ -47,7 +47,7 @@ neon functions deploy helloworld --src hello-world.ts
 Use `waitUntil` for work that should finish after the reply is sent, such as writing analytics or fanning out a follow-up message. It runs for up to 15 minutes after the response ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
 
 <Admonition type="note" title="HTTP bots, not Gateway bots">
-Discord Gateway bots need a long-lived stateful process with session resume, presence, and sharding. Neon Functions aren't the right primitive for that yet; the Discord guide is HTTP interactions only ([Discord bot guide](/docs/compute/functions/discord-bot)). Functions are in beta, JavaScript and TypeScript only, and available in `aws-us-east-2`.
+Discord Gateway bots need a long-lived stateful process with session resume, presence, and sharding. Neon Functions aren't the right primitive for that yet; the Discord guide is HTTP interactions only ([Discord bot guide](/docs/compute/functions/discord-bot)). Functions are in beta, JavaScript and TypeScript only, and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
 </Admonition>
 
 ## What it costs

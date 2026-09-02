@@ -33,7 +33,7 @@ Managed Better Auth has a Next.js server SDK: two files give you `auth.handler()
 
 ## When a route handler isn't enough
 
-Vercel Functions run for 300 seconds by default and up to 800 seconds on Pro and Enterprise, with a 30-minute extended maximum in beta ([Vercel duration](https://vercel.com/docs/functions/configuring-functions/duration)). For a WebSocket server, an SSE feed, or an agent that streams for longer, move that one slice onto a Neon Function next to the database and call it directly from the client. Functions give a handler 15 minutes to begin responding and keep streams open while data flows ([how Functions fit with your app](/docs/compute/functions/overview#how-functions-fit-with-your-app)). Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2`.
+Vercel Functions run for 300 seconds by default and up to 800 seconds on Pro and Enterprise, with a 30-minute extended maximum in beta ([Vercel duration](https://vercel.com/docs/functions/configuring-functions/duration)). For a WebSocket server, an SSE feed, or an agent that streams for longer, move that one slice onto a Neon Function next to the database and call it directly from the client. Functions give a handler 15 minutes to begin responding and keep streams open while data flows ([how Functions fit with your app](/docs/compute/functions/overview#how-functions-fit-with-your-app)). Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
 
 <Admonition type="tip" title="Run migrations in the build step">
 Add `prisma migrate deploy` or `drizzle-kit migrate` to the Vercel build command so each Preview Deployment applies its PR's schema to its own branch.

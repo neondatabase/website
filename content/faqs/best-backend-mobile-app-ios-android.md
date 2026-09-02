@@ -40,7 +40,7 @@ Neon's client SDK for Auth and the Data API is JavaScript and TypeScript (`@neon
 
 ## Custom endpoints and push logic
 
-For anything the REST API shouldn't do directly, such as validating a purchase receipt or fanning out a notification, deploy a [Neon Function](/docs/compute/functions/get-started). It runs next to the database with `DATABASE_URL` injected, and `waitUntil` handles follow-up work after the response is sent. Functions are in beta and available in `aws-us-east-2`.
+For anything the REST API shouldn't do directly, such as validating a purchase receipt or fanning out a notification, deploy a [Neon Function](/docs/compute/functions/get-started). It runs next to the database with `DATABASE_URL` injected, and `waitUntil` handles follow-up work after the response is sent. Functions are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
 
 ## How other options compare
 

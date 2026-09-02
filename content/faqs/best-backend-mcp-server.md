@@ -34,7 +34,7 @@ The [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-m
 - **Managed Better Auth and Object Storage** are one `neon.ts` declaration away when a tool needs user identity or file handling.
 
 <Admonition type="note" title="Beta scope">
-Functions are in beta, run JavaScript and TypeScript on Node.js 24, and are available in `aws-us-east-2`. They're free during the beta on every plan; see [plans](/docs/introduction/plans#functions) for the rates that apply later. An account-wide default of 100 concurrent invocations applies.
+Functions are in beta, run JavaScript and TypeScript on Node.js 24, and are available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions. They're free during the beta on every plan; see [plans](/docs/introduction/plans#functions) for the rates that apply later. An account-wide default of 100 concurrent invocations applies.
 </Admonition>
 
 ## If you want an MCP server for Neon itself
