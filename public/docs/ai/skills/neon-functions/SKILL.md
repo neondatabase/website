@@ -132,12 +132,14 @@ attachDatabasePool(pool);
 
 ```bash
 neon dev      # serves every function in neon.ts with hot reload; injects DATABASE_URL & friends
-neon deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
+neon deploy --env <file>   # preferred full deploy from neon.ts; --env is the file Function env is read from
 ```
 
-To deploy a single function without `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+Keep `.env` or `.env.local` up to date with every key under `preview.functions.*.env`. `neon env pull` writes Neon-managed vars only; add Function secrets to that file, then pass it as `--env`. `neon deploy --env <file>` loads that file into `process.env` each time, then uploads those values. A missing value is `undefined` and `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string (that uploads `""` and deletes the live key). An empty assignment (`KEY=`) is also `""`. Use `process.env.X!` when TypeScript needs an assertion.
 
-When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neon deploy` explicitly.
+To deploy a single function without applying `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). That command's `--env` is `KEY=VALUE` (repeatable), not a file path. Use it for a targeted env update. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+
+When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically. That create-apply does not load `--env`. If Function env reads `process.env`, run `neon deploy --env <file>` after checkout (add `--update-existing` if checkout already created the branch). Checking out an existing branch does not re-deploy; run `neon deploy --env <file>` explicitly.
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
@@ -146,10 +148,10 @@ The `preview.functions` block from [Setup](#setup) is part of `neon.ts`, Neon's 
 ```bash
 neon config status   # print the branch's live config (deployed functions)
 neon config plan     # dry-run diff of what apply would change
-neon config apply    # bundle + deploy the declared functions  (neon deploy is an alias)
+neon config apply --env <file>  # bundle + deploy the declared functions  (neon deploy is an alias; pass --env when Function env reads process.env)
 ```
 
-Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the function already deployed. Checking out an _existing_ branch doesn't redeploy — run `neon deploy` to apply changes.
+Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch. That create-apply does not load `--env`. If Function env reads `process.env`, run `neon deploy --env <file>` after checkout. Checking out an _existing_ branch doesn't redeploy — run `neon deploy --env <file>` to apply changes.
 
 Per-branch deploy tuning (e.g. `runtime`) lives in the `branch` closure, keyed by slug, so it can vary by branch without changing which functions exist:
 
@@ -180,7 +182,7 @@ Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also inje
 
 `neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
 
-**Your own secrets** are per-deployment. Set them with `--env KEY=VALUE` on `neon functions deploy` (repeatable; `--env KEY=` deletes a key, unmentioned keys carry over), or declare them in `neon.ts` under the function's `env` (resolved at deploy time, so read from `process.env` to avoid hardcoding):
+**Your own secrets** are per-deployment. Preferred path: declare them in `neon.ts` and run `neon deploy --env <file>`. `<file>` is the gitignored file env pull already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only; add Function secrets to that file. All declared Function env keys must be present. Omit a key from `neon.ts` if you do not want to write it. `undefined` means you asked to write the key and the value is missing (`defineConfig` throws). Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs an assertion, use `process.env.X!` and make sure the file has the value:
 
 ```typescript
 functions: {
@@ -192,7 +194,9 @@ functions: {
 }
 ```
 
-Load a `.env` before deploy with `neon deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
+`neon functions deploy --env KEY=VALUE` is the manual path (repeatable; `--env KEY=` deletes a key; unmentioned keys carry over). Use it for a targeted env update, not a full `neon.ts` apply.
+
+Load Function secrets into the same file env pull wrote, then `neon deploy --env <file>`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
 
 ## Connecting to Postgres
 
@@ -296,7 +300,7 @@ Pass the JWKS/issuer URL to the function via its `env` (see [Environment Variabl
 
 A WebSocket server is the canonical Functions workload: a long-running handler holds connections open in-process, with no external state store needed to keep a stream coherent. The connection stays alive as long as bytes flow (15-minute heartbeat, see [Timeouts](#timeouts-and-runtime-limits)).
 
-**Upgrade from inside `fetch`.** Call `upgradeWebSocket(request)` from [`@neon/functions`](https://www.npmjs.com/package/@neon/functions) and return the response it gives you. There is one entrypoint and no WebSocket dependency to install:
+**Upgrade from inside `fetch`.** Call `upgradeWebSocket(request)` from [`@neon/functions`](https://www.npmjs.com/package/@neon/functions) and return the response it gives you. Hono apps use the same primitive via `@neon/functions/hono` (see [Hono](#hono) below). There is one entrypoint and no WebSocket dependency to install:
 
 ```typescript
 import { upgradeWebSocket } from "@neon/functions";
@@ -354,31 +358,46 @@ export default {
 
 **Subprotocols.** Pass `{ protocol }` to select one the client offered; it is echoed in `Sec-WebSocket-Protocol` and exposed as `socket.protocol`. Selecting one the client did not offer throws a `TypeError`. Omit it and no protocol is negotiated. No extensions are negotiated either — `socket.extensions` is always `""` and `permessage-deflate` is not available.
 
-**Hono.** Nothing special is needed: `upgradeWebSocket` takes a `Request`, so call it inside a route with `c.req.raw` and return the response. Auth and everything else is ordinary middleware.
+**Hono.** Use `upgradeWebSocket` from `@neon/functions/hono` — the same primitive as Hono's own WebSocket helper, with no `ws` dependency and not the deprecated `@hono/node-ws`. Auth is ordinary middleware; gate upgrade requests before `next()`:
 
 ```typescript
 // src/index.ts
 import { Hono } from "hono";
-import { upgradeWebSocket } from "@neon/functions";
+import { upgradeWebSocket } from "@neon/functions/hono";
 
-const app = new Hono();
+const clients = new Set<WebSocket>();
 
-app.get("/", (c) => c.text("ok"));
+const app = new Hono<{ Variables: { userId: string } }>();
 
-app.get("/ws", async (c) => {
+app.use("/ws", async (c, next) => {
   const identity = await verifyToken(c.req.query("token"));
   if (!identity) return c.text("Unauthorized", 401);
-
-  const { socket, response } = upgradeWebSocket(c.req.raw);
-  socket.addEventListener("open", () => socket.send("welcome"));
-  socket.addEventListener("message", (event) =>
-    socket.send(`echo: ${event.data}`),
-  );
-  return response;
+  c.set("userId", identity.id);
+  await next();
 });
 
-export default { fetch: (request: Request) => app.fetch(request) };
+app.get(
+  "/ws",
+  upgradeWebSocket((c) => ({
+    onOpen(_event, ws) {
+      clients.add(ws.raw);
+      ws.send("welcome");
+    },
+    onClose(_event, ws) {
+      clients.delete(ws.raw);
+    },
+    onMessage(event, ws) {
+      ws.send(`echo: ${event.data}`);
+    },
+  })),
+);
+
+export default app;
 ```
+
+Connect from the browser with the function's `wss://` URL (from `neon functions get <slug>`), for example `new WebSocket("wss://<branch>-<slug>.compute.<region>.aws.neon.tech/ws?token=<jwt>")`. Reconnect on close — isolates are evictable and idle connections may be terminated after 15 minutes.
+
+Do not put `cors()` on the upgrade route, and do not read `c.res` before `await next()` or call `c.header()` after it — both rebuild the `101` and break the upgrade. See `@neon/functions` README for the full middleware table.
 
 ### Heartbeat (keep the socket alive)
 
