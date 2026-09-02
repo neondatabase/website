@@ -34,7 +34,8 @@ If `create` is not a command, use HTTP.
 `source` is your agent name, 1-100 characters. Replace `your-agent`. Request only services
 the app needs. `postgres`, `data_api`, and `auth` can be granted now. `functions`,
 `storage`, and `ai_gateway` return `granted: false` and `reason: "requires_claim"`. Do not
-retry those. If the app needs them, go to Claim.
+retry those. Finish provision with what was granted. If the app still needs a denied
+service, claim after you have `project.id` and an access token.
 
 ```http
 POST https://claimable.neon.tech/v1/agent/identity
@@ -107,28 +108,26 @@ An unused claim code dies in `expires_in` seconds (900 today). If they have not 
 Neon and the code expired, POST this endpoint again. Each POST cancels the previous unused
 code. Re-issue only while `project.expires_at` is still in the future.
 
-Opening `verification_uri_complete` does not freeze access. Keep using `database_url` until
-they continue from that page to Neon.
+Opening `verification_uri_complete` does not freeze access.
 
-Continuing to Neon starts the transfer: existing access tokens are revoked and
-`DATABASE_URL` is rotated. The project key and database password stay revoked. Do not restore
-the old `database_url`. Re-exchange the identity assertion with the same token POST as
-above. The new token has no project scopes. It can poll claim status and mint a replacement
-code if the transfer window expires. If that window expires before they accept, POST claim
-again.
-
-Poll every `interval` seconds with that new `access_token`:
+Start polling now, every `interval` seconds, with the current `access_token`:
 
 ```http
 GET https://claimable.neon.tech/v1/projects/<project_id>/claim
 Authorization: Bearer <access_token>
 ```
 
-`state` moves `pending` → `accepted` → `reconciled`. `accepted` is brief; the next poll is
-usually `reconciled`. Keep polling until `reconciled` is true. That status stays
-`reconciled` if you retry with the same token.
+```json
+{"state":"pending","expires_at":"<iso8601>","reconciled":false}
+```
 
-At `reconciled`, discard the identity assertion, access tokens, and pre-claim
+Stop when `reconciled` is `true`.
+
+If GET returns 401, re-exchange with the same token POST as above and keep polling. When they
+continue to Neon, `DATABASE_URL` is rotated. Do not restore the old `database_url`. If the
+transfer window expires before they accept, POST claim again.
+
+At `reconciled: true`, discard the identity assertion, access tokens, and pre-claim
 `database_url`. They no longer authorize project access. Auth and the Data API stay enabled
 and transfer with the project if they were granted. The human owns the project. You are
 done.
