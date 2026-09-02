@@ -39,7 +39,7 @@ Every engineer works on their own branch with a copy of production data, created
 - **Launch**: $0.106/CU-hour and $0.35/GB-month, autoscaling to 16 CU, 7-day restore window, spending notifications, no monthly minimum.
 - **Scale**: $0.222/CU-hour with SOC 2, HIPAA, IP Allow, Private Networking, and an uptime SLA for the enterprise deals that come later ([plans](/docs/introduction/plans)).
 
-A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage are free during their betas; AI Gateway is free during beta on paid plans. Those three are available in `aws-us-east-2`.
+A 0.25 CU compute active 300 hours a month on Launch is 75 CU-hours × $0.106 = $7.95, plus storage. Functions and Object Storage are free during their betas; AI Gateway is free during beta on paid plans. Those three are available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
 
 <Admonition type="tip" title="Startup credits">
 Early-stage companies can apply to the [Neon Startup Program](/startups) for credits on top of the Free plan allowances.

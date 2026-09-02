@@ -27,8 +27,8 @@ The pieces a side project usually bolts on are included:
 
 - **Sign-in**: [Managed Better Auth](/docs/auth/overview) covers up to 60,000 monthly active users on Free, with users stored in your own database.
 - **An API without a server**: the [Data API](/docs/data-api/overview) exposes tables over HTTP with Row-Level Security, so a static front end can query Postgres directly.
-- **Files**: [Object Storage](/docs/storage/overview) gives the Free plan 5 GB during the beta.
-- **A backend function**: [Neon Functions](/docs/compute/functions/overview) are free during the beta, and the Free plan will include 1 million invocations a month when billing starts. Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2`.
+- **Files**: [Object Storage](/docs/storage/overview) gives the Free plan 5 GB per project during the beta.
+- **A backend function**: [Neon Functions](/docs/compute/functions/overview) are free during the beta, and the Free plan will include 1 million invocations a month when billing starts. Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
 
 <Admonition type="tip" title="The first request after idle">
 Reactivation takes a few hundred milliseconds, so the first visitor after a quiet stretch waits slightly longer. Paid plans can disable scale to zero for a project that must answer instantly ([scale to zero](/docs/introduction/scale-to-zero)); for most side projects the default is the right trade.

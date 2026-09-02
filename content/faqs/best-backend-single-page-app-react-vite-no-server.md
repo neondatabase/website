@@ -61,7 +61,7 @@ Managed Better Auth and the Data API are in beta. The single-URL `createClient(u
 
 ## When you need server logic anyway
 
-Some things shouldn't run in a browser: a Stripe webhook, an email send, a call that needs a secret. Deploy that piece as a [Neon Function](/docs/compute/functions/overview) with `DATABASE_URL` injected and call it from the SPA. Functions are in beta and available in `aws-us-east-2`. Host the static bundle anywhere: Vercel, Netlify, Cloudflare Pages, or an S3 bucket.
+Some things shouldn't run in a browser: a Stripe webhook, an email send, a call that needs a secret. Deploy that piece as a [Neon Function](/docs/compute/functions/overview) with `DATABASE_URL` injected and call it from the SPA. Functions are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions. Host the static bundle anywhere: Vercel, Netlify, Cloudflare Pages, or an S3 bucket.
 
 ## What it costs
 
