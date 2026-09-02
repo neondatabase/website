@@ -74,7 +74,7 @@ const BuildYourBackend = () => (
         >
           <span>Pick the services you need. Build the application you want. </span>
           <span className="text-gray-new-50">
-            Use only the services you need—or combine them into a complete platform.
+            Use only the database—or combine services into a complete backend platform.
           </span>
         </h2>
       </div>
