@@ -323,7 +323,7 @@ export default {
 Three rules that matter:
 
 - **Return `response` unchanged.** A `101` can't be built as a plain `Response` (the fetch spec caps constructed responses at 200–599), so the runtime hands back an object carrying the pending upgrade. `clone()`, or rebuilding it with `new Response(res.body, res)` as response-rewriting middleware does, discards the upgrade and fails the request.
-- **Refuse a handshake by returning an ordinary `Response`.** A `401`, `403` or `404` is relayed to the client as-is. That is how you gate a socket.
+- **Refuse a handshake by returning an ordinary `Response`.** Return a `401`, `403`, or `404` from `fetch`, before you upgrade, to gate a socket. A browser client can't read why a handshake was refused; it sees only a generic connection failure, not your status or body. Refuse to keep clients out, but send any detail the client needs over a separate authenticated request.
 - **`binaryType` defaults to `"arraybuffer"`**, not the browser's `"blob"`. `event.data` is a `string` for text frames and an `ArrayBuffer` for binary ones, so branch on `typeof`.
 
 **With auth.** Browsers can't set headers on a WebSocket, so authenticate with a `?token=` query param (verify it the same way as the [agent backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks): `jwtVerify` against your JWKS) and refuse before upgrading:
@@ -403,7 +403,7 @@ Do not put `cors()` on the upgrade route, and do not read `c.res` before `await 
 
 A connection stays open **only while bytes flow**: Neon evicts a silent stream after 15 minutes ([Timeouts and Runtime Limits](#timeouts-and-runtime-limits)), and intermediary proxies / load balancers are usually far stricter (often tens of seconds). Don't rely on the app being chatty enough — send a periodic keepalive from the server so the socket never goes quiet.
 
-The standard `WebSocket` interface has no `ping()`, so send an application-level message the client ignores:
+The standard `WebSocket` interface has no `ping()`, so send an application-level message the client filters out:
 
 ```typescript
 const HEARTBEAT_MS = 25_000; // comfortably under proxy idle timeouts
@@ -416,7 +416,7 @@ const beat = setInterval(() => {
 beat.unref?.();
 ```
 
-The client should skip these when handling messages. The server does answer a client-sent ping frame with a pong automatically, so a browser client can drive the heartbeat instead if you'd rather not filter messages.
+The client skips these when handling messages. There is no protocol-level shortcut here: the standard `WebSocket` from `upgradeWebSocket` has no `ping()`, and a browser can't send ping frames from JavaScript, so an application-level message is the only keepalive a browser client can use. (A Node `ws` client can send ping frames, and the server auto-replies with a pong, but a browser can't.)
 
 ### Keeping clients in sync across isolates (do not skip this)
 
@@ -427,26 +427,42 @@ Module state doesn't survive eviction anyway, so **Postgres is the shared source
 **1. Poll Postgres — the default, and the only option that keeps Scale to Zero.** Each isolate re-reads the shared state (or rows past a cursor) on a short interval and pushes changes to its own clients. One query per isolate per tick (not per client), and none when the isolate has no clients — so an idle compute still suspends.
 
 ```typescript
-let lastId = 0;
-const poller = setInterval(async () => {
-  if (clients.size === 0) return; // no clients here → no query → compute can scale to zero
-  const { rows } = await pool.query(
-    "SELECT id, payload FROM events WHERE id > $1 ORDER BY id",
-    [lastId],
-  );
-  for (const { id, payload } of rows) {
-    lastId = id;
-    for (const socket of clients) {
-      if (socket.readyState === socket.OPEN) socket.send(payload);
+let lastId = "0"; // bigint id, so a string
+let polling = false;
+
+async function poll() {
+  if (polling || clients.size === 0) return; // guard overlap; no clients → no query → compute can scale to zero
+  polling = true;
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, payload FROM events WHERE id > $1 ORDER BY id",
+      [lastId],
+    );
+    for (const { id, payload } of rows) {
+      lastId = id;
+      for (const socket of clients) {
+        if (socket.readyState === socket.OPEN) socket.send(payload);
+      }
     }
+  } catch (err) {
+    console.error("[poll]", err);
+  } finally {
+    polling = false;
   }
-}, 1000);
-poller.unref?.();
+}
+
+// Seed from the latest id so a fresh isolate sends only new rows, not the whole table, then poll.
+pool
+  .query("SELECT coalesce(max(id), 0)::text AS id FROM events")
+  .then((seed) => { lastId = seed.rows[0].id; })
+  .catch((err) => console.error("[seed]", err))
+  .finally(() => setInterval(poll, 1000).unref?.());
 ```
 
 - **Latency:** up to the interval (~1s) — fine for counters, chat, and dashboards.
 - **Scaling:** database load grows with the number of live isolates, not clients. Keep the cursor on an indexed `serial`/`bigserial` PK and the interval sane.
 - **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
+- **Ordering:** `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually fine; when you need every row, use `LISTEN`/`NOTIFY` or poll by `created_at` with a small overlap window and dedupe by id.
 
 **2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
 
@@ -461,7 +477,7 @@ const CHANNEL = "chat_events";
 // One dedicated DIRECT connection per isolate, just to receive events.
 // Use DATABASE_URL_UNPOOLED — LISTEN needs a real session, not a pooled one.
 // Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
-// An error listener keeps the isolate alive; the feed stays down until the isolate restarts.
+// The error listener keeps the process alive; reconnect the client on error in production (omitted here).
 const listener = new Client({
   connectionString: process.env.DATABASE_URL_UNPOOLED,
 });
@@ -527,16 +543,19 @@ When you only need **server → client** streaming (live counters, notifications
 // src/index.ts — minimal SSE endpoint
 const encoder = new TextEncoder();
 export default {
-  fetch: () =>
-    new Response(
+  fetch: () => {
+    let t: ReturnType<typeof setInterval>;
+    return new Response(
       new ReadableStream<Uint8Array>({
         start(controller) {
           controller.enqueue(encoder.encode("data: hello\n\n"));
-          const t = setInterval(
+          t = setInterval(
             () => controller.enqueue(encoder.encode(": ping\n\n")),
             25_000,
           );
-          return () => clearInterval(t); // fires when the client disconnects
+        },
+        cancel() {
+          clearInterval(t); // fires when the client disconnects
         },
       }),
       {
@@ -545,7 +564,8 @@ export default {
           "Cache-Control": "no-cache, no-transform",
         },
       },
-    ),
+    );
+  },
 };
 ```
 
