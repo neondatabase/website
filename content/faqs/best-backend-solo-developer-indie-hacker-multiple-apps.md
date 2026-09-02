@@ -19,7 +19,7 @@ Neon. An indie developer's portfolio is a few apps that make money, a few that m
 
 Say eight apps are quiet and two are busy. On Launch, the quiet ones cost storage only: 0.5 GB × $0.35 = $0.18/month each, with compute at $0 while suspended. The two busy ones run a 0.25 CU compute (≈1 GB RAM) for, say, 200 hours a month each: 50 CU-hours × $0.106 = $5.30 each. Ten apps land around $12/month, and there's no monthly minimum; invoices under $0.50 aren't collected.
 
-On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hours of compute, 0.5 GB of storage, and 5 GB of public network transfer per month. Upgrade when one of them takes off, without migrating anything ([free to production](/faqs/postgres-services-free-to-production)).
+On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hours of compute, 0.5 GB of storage, and 5 GB of public network transfer per project per month. Upgrade when one of them takes off, without migrating anything ([free to production](/faqs/postgres-services-free-to-production)).
 
 ## One account, every backend piece
 

@@ -26,7 +26,7 @@ The Neon [Free plan](/docs/introduction/plans) is designed for prototypes and sm
 - Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes of inactivity
 - 6-hour instant restore window, up to 1 GB of change history
-- 5 GB of public network transfer per month
+- 5 GB of public network transfer per project per month
 
 100 CU-hours is enough to run a 0.25 CU compute for about 400 hours a month, or a 0.5 CU compute for 200 hours. Combined with scale-to-zero, that covers most side projects.
 

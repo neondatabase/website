@@ -28,7 +28,7 @@ The [Free plan](/docs/introduction/plans) covers most prototypes:
 - 100 projects, 10 branches/project
 - 100 CU-hours/project/month (enough to run a 0.25 CU compute for 400 hours)
 - 0.5 GB storage/project
-- 5 GB of public network transfer per month
+- 5 GB of public network transfer per project per month
 
 When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you-go with no minimum:
 
@@ -50,7 +50,7 @@ If you eventually need SOC 2, HIPAA, private networking, or an uptime SLA, those
 | -------------------- | -------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Neon (Launch)        | Compute drops to $0 while suspended; storage continues to bill | 0.25 CU (≈1 GB RAM)      | Auto-suspend after 5 minutes; resumes in a few hundred ms                                                                                                                                                                                                                                        |
 | Aurora Serverless v2 | Compute pauses at 0 ACUs                                       | 0 ACUs (with auto-pause) | Auto-pause requires setting min capacity to 0 ACUs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)); each ACU is ≈2 GiB ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)) |
-| RDS for Postgres   | Billed 24/7                                                    | Smallest instance class  | Instance-hour pricing; reserved instances available for committed workloads ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html))                                                                                                |
+| RDS for Postgres     | Billed 24/7                                                    | Smallest instance class  | Instance-hour pricing; reserved instances available for committed workloads ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html))                                                                                                |
 | Supabase             | Project compute billed hourly even when idle (paid plans)      | Micro: ~$10/month        | Free Plan pauses inactive projects; paid plans run a dedicated VM per project around the clock ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/compute))                                                                                                                     |
 
 Aurora Serverless v2 is the closest match for variable workloads. The main differences for a startup: Neon's 0.25 CU minimum (when active) bills at $0.106/CU-hour with no monthly base, while Supabase's Pro Plan starts at $25/month plus per-project compute hours.

@@ -23,7 +23,7 @@ Each project on the Free plan includes:
 - **Compute:** 100 CU-hours/month, with autoscaling up to 2 CU (≈8 GB RAM)
 - **Branches:** up to 10 per project, useful for previews and migrations
 - **Instant restore:** 6-hour history window (capped at 1 GB of change history)
-- **Egress:** 5 GB/month of public network transfer
+- **Egress:** 5 GB per project per month of public network transfer
 
 Hitting the monthly CU-hour or network transfer limit suspends compute until the next billing cycle. Exceeding 0.5 GB storage causes writes that increase storage to fail until you free space or upgrade. If you need spend alerts on a paid plan, set up [spending notifications](/docs/introduction/spending-notifications).
 
