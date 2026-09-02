@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-09-02T21:07:43.155Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -86,7 +86,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 | `shared_buffers`                      | 128MB         | In Neon, up to 75% of your compute's RAM is used for data caching. The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
 | `superuser_reserved_connections`      | 7             |                                                                                                                                                                     |
 | `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                     |
-| `wal_level`                           | replica       | Defaults to `replica`. When you [enable logical replication](/docs/guides/logical-replication-guide#enable-logical-replication), Neon changes it to `logical`.      |
+| `wal_level`                           | replica       | Defaults to `replica`. When you [enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication), Neon changes it to `logical`.       |
 | `wal_log_hints`                       | off           |                                                                                                                                                                     |
 | `wal_sender_timeout`                  | 10000         |                                                                                                                                                                     |
 
