@@ -95,7 +95,8 @@ Imagine creating a complete copy of your database as easily as creating a Git br
    ```javascript
    import { Pool, neon, neonConfig } from '@neondatabase/serverless';
 
-   // Uncomment the following lines if you are on environments that do not support WebSocket, e.g, Node.js
+   // For Node.js environments: import and configure the 'ws' package
+   // For browsers/Edge: WebSocket is available natively - no import needed
    // import ws from 'ws';
    // neonConfig.webSocketConstructor = ws;
 
@@ -226,6 +227,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   // Node.js environment: the 'ws' package is required for WebSocket support
    import ws from 'ws';
 
    let connectionString = process.env.DATABASE_URL;
@@ -291,6 +293,7 @@ For instructions on editing your hosts file on different operating systems, see 
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
    import { drizzle as drizzleWs } from 'drizzle-orm/neon-serverless';
    import { drizzle as drizzleHttp } from 'drizzle-orm/neon-http';
+   // Node.js environment: the 'ws' package is required for WebSocket support
    import ws from 'ws';
 
    let connectionString = process.env.DATABASE_URL;
@@ -393,6 +396,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
    import { neonConfig } from '@neondatabase/serverless';
    import { PrismaNeon, PrismaNeonHTTP } from '@prisma/adapter-neon';
    import { PrismaClient } from '@prisma/client';
+   // Node.js environment: the 'ws' package is required for WebSocket support
    import ws from 'ws';
 
    let connectionString =
