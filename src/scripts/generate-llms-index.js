@@ -269,7 +269,7 @@ function generateIndexText(organized, collapsedEntries = []) {
   }
 
   if (config.commonQueries && config.commonQueries.length > 0) {
-    lines.push('## Common Queries');
+    lines.push('## Common tasks');
     lines.push('');
     for (const q of config.commonQueries) {
       lines.push(`- [${q.label}](${q.url})`);
@@ -552,7 +552,15 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error('Error:', err);
-  process.exit(1);
-});
+// Only run the generator when invoked directly (e.g. `node generate-llms-index.js`
+// in postbuild). Guarding this lets tests import generateIndexText without
+// triggering the full docs-tree scan, file writes, or the process.exit on error.
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('Error:', err);
+    process.exit(1);
+  });
+}
+
+// Export for testing
+module.exports = { generateIndexText };

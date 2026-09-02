@@ -25,7 +25,8 @@ module.exports = {
     'This is the primary index. Sections with many pages show key pages and link to full sub-indexes.',
   ].join(' '),
 
-  // Quick-reference links emitted as "## Common Queries" before the section list.
+  // Quick-reference links emitted as "## Common tasks" before the section list.
+  // (Kept as `commonQueries` internally; the generator renders the heading.)
   commonQueries: [
     {
       label:
@@ -33,6 +34,18 @@ module.exports = {
       url: 'https://neon.com/auth.md',
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
+    {
+      label: 'Declare a whole backend in one file',
+      url: 'https://neon.com/docs/reference/neon-ts.md',
+    },
+    {
+      label: 'Add users and authentication',
+      url: 'https://neon.com/docs/auth/overview.md',
+    },
+    {
+      label: 'Explore the full platform: functions, object storage, AI Gateway, and more',
+      url: 'https://neon.com/docs/introduction.md',
+    },
     {
       label: 'Choose a connection method (drivers, pooling, serverless)',
       url: 'https://neon.com/docs/connect/choose-connection.md',
