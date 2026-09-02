@@ -16,6 +16,7 @@ import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getNavigation, getNavigationLinks } from 'utils/api-docs';
 import { loadAllTagGroups } from 'utils/api-ref-server';
+import { compareOpsForDisplay } from 'utils/api-ref.mjs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -32,16 +33,6 @@ const getPublicApiMarkdownPath = (slug) => `/docs/${API_SLUG_PREFIX}/${slug}.md`
 
 // Only serve pre-generated slugs — no dynamic fallback to filesystem
 export const dynamicParams = false;
-
-const STABILITY_RANK = { stable: 0, beta: 1, alpha: 2 };
-
-function stabilitySort(a, b) {
-  if (a.deprecated !== b.deprecated) return a.deprecated ? 1 : -1;
-  const sa = a.stability == null ? 0 : (STABILITY_RANK[a.stability] ?? 0);
-  const sb = b.stability == null ? 0 : (STABILITY_RANK[b.stability] ?? 0);
-  if (sa !== sb) return sa - sb;
-  return (a.specIndex ?? 0) - (b.specIndex ?? 0);
-}
 
 function loadTagIntro(tag) {
   if (!SAFE_SLUG.test(tag)) return null;
@@ -68,7 +59,7 @@ function loadTagOperations(tag) {
   return readdirSync(tagDir)
     .filter((f) => f.endsWith('.json'))
     .map((f) => JSON.parse(readFileSync(join(tagDir, f), 'utf8')))
-    .sort(stabilitySort);
+    .sort(compareOpsForDisplay);
 }
 
 export async function generateStaticParams() {

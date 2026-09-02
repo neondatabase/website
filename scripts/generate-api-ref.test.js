@@ -1093,6 +1093,39 @@ describe('toNavYaml', () => {
     const customIdx = yaml.indexOf('title: "Custom"');
     expect(customIdx).toBeGreaterThan(legacyIdx);
   });
+
+  it('orders endpoints within a tag by title, deprecated last', () => {
+    const withinTag = [
+      { tag: 'projects', tagDisplay: 'Project', summary: 'Zebra thing', id: 'zebra' },
+      { tag: 'projects', tagDisplay: 'Project', summary: 'Apple thing', id: 'apple' },
+      {
+        tag: 'projects',
+        tagDisplay: 'Project',
+        summary: 'Aardvark thing',
+        id: 'old',
+        deprecated: true,
+      },
+    ];
+    const yaml = toNavYaml(withinTag);
+    const order = ['Apple thing', 'Zebra thing', 'Aardvark thing'].map((s) => yaml.indexOf(s));
+    expect(order[0]).toBeLessThan(order[1]);
+    expect(order[1]).toBeLessThan(order[2]);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// tag-config section order
+// ---------------------------------------------------------------------------
+
+describe('tag-config section order', () => {
+  it('is alphabetical by display, with the deprecated Legacy Auth section last', () => {
+    const cfg = JSON.parse(readFileSync(resolve('scripts/data/tag-config.json'), 'utf8'));
+    const displays = cfg.tags.map((t) => t.display);
+    expect(displays[displays.length - 1]).toBe('Legacy Auth');
+    const active = displays.slice(0, -1);
+    const sorted = [...active].sort((a, b) => a.localeCompare(b, 'en'));
+    expect(active).toEqual(sorted);
+  });
 });
 
 // ---------------------------------------------------------------------------

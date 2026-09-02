@@ -1340,9 +1340,9 @@
               slug: reference/api/get-started
             - title: Key concepts
               slug: reference/api/key-concepts
-            - section: API Reference
-              title: Endpoint index
+            - title: Search endpoints
               slug: reference/api/reference
+            - section: API Reference
               items: []
         - section: SDKs
           icon: sdk
