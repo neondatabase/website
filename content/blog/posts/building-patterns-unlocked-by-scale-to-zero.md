@@ -43,7 +43,7 @@ Perhaps more interestingly, some modern building patterns ask for *thousands* of
 
 ## When Postgres scales to zero
 
-### Dev databases can be deployed without second thoughts
+### You don’t ration dev databases anymore
 
 In a traditional workflow, only because databases used to be such a lagging piece of the infra, developers were used to deciding whether something is worth deploying a new instance. Any wondering disappears if your database can behave like an on-demand development resource, just like you open a PR or deploy a preview - or more realistically, your agent goes those now.
 
