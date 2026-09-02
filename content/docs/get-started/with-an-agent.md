@@ -7,7 +7,7 @@ summary: >-
   them. Includes the schema and page to expect, and follow-up prompts for
   sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-02T20:30:02.851Z'
+updatedOn: '2026-09-02T20:37:43.909Z'
 ---
 
 Set up Neon and build on it without leaving your editor. Connect your agent once, then send it a single prompt: it creates a table, seeds a few rows, and adds a page that shows them. You end up with a running Next.js app, not just a connection.
@@ -38,7 +38,7 @@ Build me a working notes app backed by Neon Postgres, using the Neon skills and 
 
 ## What you'll get
 
-Your agent writes the schema, a Drizzle client, and the page. The two files that matter:
+Your agent writes the schema, a Drizzle client, and the page:
 
 ```typescript filename="lib/db/schema.ts"
 import { bigint, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
@@ -49,6 +49,16 @@ export const notes = pgTable('notes', {
   body: text('body').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
+```
+
+```typescript filename="lib/db/client.ts"
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+
+import * as schema from './schema';
+
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql, { schema });
 ```
 
 ```tsx filename="app/notes/page.tsx"
@@ -85,7 +95,7 @@ Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your see
 
 ## Keep building
 
-Each prompt below adds one capability to the app you just built. Send them one at a time.
+Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2`.
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/authentication-flow.md, since this API is in beta.
@@ -100,7 +110,7 @@ Add a one-line AI summary to each note using the Neon AI Gateway, stored in a su
 ```
 
 ```text shouldWrap filename="Prompt: work on a branch"
-Create a Neon branch so I can try changes in isolation, then switch to it: npx neon@latest branches create --name my-feature, then neon checkout my-feature.
+Create a Neon branch so I can try changes in isolation, then switch to it: npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature.
 ```
 
 <NeedHelp/>
