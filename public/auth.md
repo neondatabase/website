@@ -12,26 +12,56 @@ path.
 
 ## Provision
 
+Install the CLI, `@neon/config`, and the skills:
+
 ```bash
 npm i -g neon@latest
+npm i @neon/config
 neon skills -s neon -s neon-postgres
 ```
 
 The `neon` skill documents the claim flow in more detail. `neon-postgres` is for working
 with Lakebase Postgres after claim.
 
+### neon.ts
+
+Write and commit `neon.ts`. Declare the services the app needs. `neon claim create` reads
+this file (walks up from the current directory). After claim, the same file is how you add
+Functions, Object Storage, and the AI Gateway. https://neon.com/docs/reference/neon-ts.md
+
+```typescript
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  dataApi: true,
+});
+```
+
 If `neon claim --help` lists `create`:
 
 ```bash
-neon claim create --service data-api --service auth
+neon claim create
 neon branches list
 ```
 
-Drop `--service` flags the app does not need. Postgres is always included. The CLI writes
-`DATABASE_URL` (and granted service URLs) to `.env` or `.env.local`. Then skip to Claim when
-the human is ready.
+The CLI writes `DATABASE_URL` (and granted service URLs) to `.env` or `.env.local`. Then
+skip to Claim when the human is ready.
 
-If `create` is not a command, use HTTP.
+### CLI only
+
+If you cannot write `neon.ts`, pass `--service` instead. Drop flags the app does not
+need. Postgres is always included.
+
+```bash
+neon claim create --service data-api --service auth
+```
+
+Same env write as above. Then skip to Claim when the human is ready.
+
+### REST
+
+If you cannot run the CLI, or `create` is not a command, use HTTP.
 
 ### Register
 
