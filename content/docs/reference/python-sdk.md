@@ -37,7 +37,7 @@ updatedOn: '2026-08-31T16:23:18.162Z'
 Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/project/neon-api/), a wrapper for the [Neon API](/docs/reference/api). This SDK simplifies integration of Python applications with the Neon platform, providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations.
 
 <Admonition type="warning" title="Compatibility limits in version 0.3.0">
-The published Python SDK hasn't kept pace with several current Neon API routes. Use the [Neon REST API](/docs/reference/api) or [Neon TypeScript SDK](/docs/reference/typescript-sdk) for the operations below.
+The published Python SDK does not yet support all Neon API routes. Use the [Neon REST API](/docs/reference/api) or [Neon TypeScript SDK](/docs/reference/typescript-sdk) for the operations below.
 
 | Python SDK method            | SDK request                                  | Current API contract                     |
 | ---------------------------- | -------------------------------------------- | ---------------------------------------- |
