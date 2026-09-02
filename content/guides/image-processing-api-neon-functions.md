@@ -63,7 +63,7 @@ Use the default setup options for all prompts: this enables AI skills, configure
 During initialization, **Neon Platform** and **Postgres** skills are installed automatically. You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions --skill neon-object-storage
+neon skills -s neon-functions -s neon-ai-gateway -s neon-object-storage
 ```
 
 Link your local workspace to a Neon project:

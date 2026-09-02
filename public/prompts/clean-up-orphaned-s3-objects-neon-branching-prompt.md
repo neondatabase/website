@@ -20,22 +20,17 @@ Before writing code:
    - Do I want to dry-run on a Neon branch before promoting to production?
    - Do I want to use the same framework and project structure as the guide?
 
-5. Identify any accounts, API keys, tokens, environment variables, or other credentials I need before implementation.
+5. Once you understand my requirements, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting, and list the credentials the plan will actually need.
 
-   Whenever I need to create or obtain a credential:
+6. Wait for my confirmation before making significant changes.
+
+7. Implement the job step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Object Storage** as the service `neon.ts` declares, with the `aws-us-east-2` region since Neon Object Storage is only available there during beta. Install the agent skill the guide lists: `neon skills -s neon -s neon-object-storage -y`. Follow the guide's safety rules: delete the object first, then the row, and guard production runs against concurrent writes with an advisory lock.
+
+8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
    - Show me where to get it.
-   - Give me step-by-step instructions for creating it, including any required AWS or Neon settings.
+   - Give me step-by-step instructions for creating it, including any Neon settings.
    - Tell me where the credential should be stored in my project.
-   - Never ask me to commit secrets to source control.
-
-   If a credential is required, stop and ask me to provide/configure it before continuing rather than guessing or using a placeholder without explaining what I need to do.
-
-6. Once you understand my requirements and I have the required credentials configured, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting.
-
-7. Wait for my confirmation before making significant changes.
-
-8. Implement the job step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Object Storage** as the service `neon.ts` declares, with the `aws-us-east-2` region since Neon Object Storage is only available there during beta. Install the agent skill the guide lists: `npx skills add neondatabase/agent-skills --skill neon-object-storage`. Follow the guide's safety rules: delete the object first, then the row, and guard production runs against concurrent writes with an advisory lock.
 
 9. Keep the implementation as simple as possible. Don't introduce additional frameworks, services, or abstractions unless they are necessary.
 

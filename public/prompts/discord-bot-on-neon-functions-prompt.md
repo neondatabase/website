@@ -9,7 +9,7 @@ Before writing code:
 
 2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon auth` and wait for me to complete sign-in before continuing.
 
-3. Ask me what I want the bot to do, and whether I want to:
+3. Ask me what bot I want to build, and whether I want to:
    - follow the example in the guide closely,
    - modify the example for a different use case, or
    - build a different Discord bot that uses the same Neon features.
@@ -20,29 +20,24 @@ Before writing code:
    - Do I need to store anything in Neon Postgres?
    - Do I want to use the same framework and project structure as the guide?
 
-5. Identify any accounts, API keys, tokens, environment variables, or other credentials I need before implementation.
+5. Once you understand my requirements, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting, and list the credentials the plan will actually need.
 
-   Whenever I need to create or obtain a credential:
+6. Wait for my confirmation before making significant changes.
+
+7. Implement the bot step by step using Neon Functions and the Neon AI Gateway where appropriate. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Follow the patterns from the guide, but adapt them to my requirements rather than copying the example blindly.
+
+8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
    - Show me where to get it.
    - Give me step-by-step instructions for creating it, including any required Discord settings, permissions, or configuration.
    - Tell me where the credential should be stored in my project.
-   - Never ask me to commit secrets to source control.
-
-   If a credential is required, stop and ask me to provide/configure it before continuing rather than guessing or using a placeholder without explaining what I need to do.
-
-6. Once you understand my requirements and I have the required credentials configured, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting.
-
-7. Wait for my confirmation before making significant changes.
-
-8. Implement the bot step by step using Neon Functions and the Neon AI Gateway where appropriate. Follow the patterns from the guide, but adapt them to my requirements rather than copying the example blindly.
 
 9. Keep the implementation as simple as possible. Don't introduce additional frameworks, services, or abstractions unless they are necessary.
 
 10. After implementation, show me how to:
-   - run the bot locally,
-   - deploy the Neon Function,
-   - configure any required Discord settings,
-   - and test the bot end to end.
+    - run the bot locally,
+    - deploy the Neon Function,
+    - configure any required Discord settings,
+    - and test the bot end to end.
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
