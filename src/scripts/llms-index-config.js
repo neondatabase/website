@@ -49,6 +49,10 @@ module.exports = {
       label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
     },
+    {
+      label: 'How much data can a Neon database or branch store',
+      url: 'https://neon.com/docs/introduction/cost-optimization.md#storage-faqs',
+    },
   ],
 
   // Sections in display order. Unlisted sections append alphabetically at the end.
@@ -71,6 +75,7 @@ module.exports = {
         highlights: [
           'introduction/architecture-overview.md',
           'introduction/about-billing.md',
+          'introduction/plans.md',
           'introduction/autoscaling.md',
           'introduction/scale-to-zero.md',
           'introduction/branching.md',
