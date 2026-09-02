@@ -9,10 +9,10 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
-A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
+A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object model](/docs/concepts/the-object-model), a database exists within a branch of a project. There is a limit of 500 databases per branch.
 
 If you do not specify your own database name when creating a project, your project's default branch is created with a database called `neondb`, which is owned by your project's default role (see [Manage roles](/docs/manage/roles) for more information). You can create your own databases in a project's default branch or in a child branch.
 

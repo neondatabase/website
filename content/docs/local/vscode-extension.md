@@ -13,7 +13,7 @@ summary: >-
   agents.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-06-10T17:55:26.061Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.
@@ -72,7 +72,7 @@ You can also manually select:
 Click **Connect** to establish the connection.
 
 <Admonition type="note">
-If you're new to Neon, this reflects our object hierarchy: organizations contain projects, and projects contain branches. [Learn more about how Neon organizes your data.](/docs/manage/overview)
+If you're new to Neon, this reflects our object hierarchy: organizations contain projects, and projects contain branches. [Learn more about how Neon organizes your data.](/docs/concepts/the-object-model)
 </Admonition>
 
 ## Create a new branch
