@@ -21,11 +21,11 @@ Neon gives each Git feature branch its own Postgres branch. Each branch is a wri
 
 Sharing one staging database between feature branches creates conflicts. Two developers running migrations on the same schema can leave the database in a state neither expected. Provisioning a full staging instance per branch is too slow and too expensive on a traditional Postgres setup.
 
-The lakebase architecture separates storage from compute, so a branch is mostly metadata. Create one in a few seconds, run your migration against it, point your preview deployment at its connection string, and tear it down when the pull request merges.
+The Lakebase Postgres architecture separates storage from compute, so a branch is mostly metadata. Create one in a few seconds, run your migration against it, point your preview deployment at its connection string, and tear it down when the pull request merges.
 
 ## Setting it up
 
-The most common pattern is GitHub Actions plus the Neon CLI:
+A common pattern is GitHub Actions plus the Neon CLI:
 
 ```yaml
 # .github/workflows/preview.yml
@@ -64,7 +64,7 @@ The hard maximum is 5,000 branches per project on paid plans. For teams running 
 
 - **Amazon Aurora.** [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) is copy-on-write at the storage layer and includes parent data, but each clone is a full Aurora cluster billed at cluster rates. There's no Git-integrated workflow; you'd build one with Lambda or CDK.
 
-- **Amazon RDS for PostgreSQL.** No native per-branch databases. Most teams use snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
+- **Amazon RDS for Postgres.** No native per-branch databases. Most teams use snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
 
 Lakebase Postgres branches include the parent's data by default (or no data, if you prefer a [schema-only branch](/docs/guides/branching-schema-only)). Compute on an idle branch [scales to zero](/docs/introduction/scale-to-zero), so unused preview branches don't accrue CU-hours; you still pay for any storage delta on the branch.
 

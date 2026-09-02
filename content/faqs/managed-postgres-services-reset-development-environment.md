@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?"
-description: "The lakebase architecture separates storage and compute into a branchable, versioned storage system. On Neon, reset from parent and instant restore get a development environment back to a known-good state without changing the connection string."
+description: "The Lakebase Postgres architecture separates storage and compute into a branchable, versioned storage system. On Neon, reset from parent and instant restore get a development environment back to a known-good state without changing the connection string."
 date: 2026-04-25
 slug: managed-postgres-services-reset-development-environment
 category: FAQ
@@ -50,8 +50,8 @@ The Free plan includes 10 branches per project and 0.5 GB of storage per project
 Neon resets a branch from its parent in a single command and keeps the connection string. Other providers handle "back to known-good" differently:
 
 - **Supabase** rebuilds a preview branch by re-running `./supabase/seed.sql` and all migrations. To roll back a preview branch you delete it and recreate it from the PR, which reseeds the database and loses any data added on the branch. See [Working with branches](https://supabase.com/docs/guides/deployment/branching/working-with-branches).
-- **Aurora PostgreSQL** offers point-in-time restore by creating a new DB cluster from a timestamp within the backup retention window. The new cluster has a new endpoint, so connection strings have to change. See [Aurora backups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/BackupRestoreAurora.html).
-- **RDS for PostgreSQL** restores PITR to a new DB instance, with a separate endpoint. Backup retention is configurable up to 35 days. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
+- **Aurora Postgres** offers point-in-time restore by creating a new DB cluster from a timestamp within the backup retention window. The new cluster has a new endpoint, so connection strings have to change. See [Aurora backups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/BackupRestoreAurora.html).
+- **RDS for Postgres** restores PITR to a new DB instance, with a separate endpoint. Backup retention is configurable up to 35 days. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
 
 For a "reset and keep the same connection string" workflow, Neon's reset-from-parent is the closest match. The Aurora and RDS routes produce new endpoints, so the application config has to be updated each time.
 

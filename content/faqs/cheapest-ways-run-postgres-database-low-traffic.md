@@ -24,9 +24,9 @@ The [Free plan](/docs/introduction/plans#free) covers most side projects:
 - 100 CU-hours of compute per project per month (enough to run 0.25 CU for ~400 hours)
 - Scale to zero after 5 minutes (always on, can't disable)
 
-If your app is busier than the Free plan allowance, the [Launch plan](/docs/introduction/plans#launch) bills compute at **$0.106/CU-hour** and storage at **$0.35/GB-month**. There's no monthly minimum.
+If your app is busier than the Free plan allowance, the [Launch plan](/docs/introduction/plans#launch) bills compute at $0.106/CU-hour and storage at $0.35/GB-month. There's no monthly minimum.
 
-## A small worked example
+## Worked example
 
 Say your app gets traffic for about 2 hours of active compute time per day. Active means the compute is actually running, not suspended.
 

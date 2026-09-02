@@ -29,9 +29,9 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 For Lambdas, Vercel Functions, Cloudflare Workers, or any connection-per-request framework, use the pooled string.
 
-## Why this matters under load
+## Connection limits under load
 
-Postgres limits direct connections based on RAM. On a 0.25 CU Neon compute (≈1 GB RAM), `max_connections` is 104 (with 7 reserved for the superuser). A burst of 200 serverless invocations would saturate that. PgBouncer accepts up to **10,000 client connections** and multiplexes them onto a smaller pool of actual Postgres connections, sized at 90% of `max_connections`. Most invocations spend their time waiting for upstream IO, not running SQL, so the multiplexing usually works.
+Postgres limits direct connections based on RAM. On a 0.25 CU Neon compute (≈1 GB RAM), `max_connections` is 104 (with 7 reserved for the superuser). A burst of 200 serverless invocations would saturate that. PgBouncer accepts up to 10,000 client connections and multiplexes them onto a smaller pool of actual Postgres connections, sized at 90% of `max_connections`. Most invocations spend their time waiting for upstream IO, not running SQL, so the multiplexing usually works.
 
 See the full [pooling architecture](/docs/connect/connection-pooling) for limits and timeouts.
 
@@ -57,9 +57,9 @@ PgBouncer 1.22+ supports protocol-level prepared statements, which most drivers 
 | ---------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Neon                   | Managed PgBouncer, on every database                                                                        | Add `-pooler` to hostname                                        | Up to 10,000 client connections                                                                  |
 | Supabase               | Managed Supavisor (transaction and session modes)                                                           | Pick the pooler connection string in the dashboard               | See [connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres) |
-| AWS RDS for PostgreSQL | [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html), separate service | Provision proxy, attach to instance, point app at proxy endpoint | Per-vCPU pricing on top of the database                                                          |
+| AWS RDS for Postgres   | [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html), separate service | Provision proxy, attach to instance, point app at proxy endpoint | Per-vCPU pricing on top of the database                                                          |
 | Aurora Serverless v2   | RDS Proxy, separate service                                                                                 | Same as RDS                                                      | RDS Proxy is the recommended pattern for Lambda-Aurora workloads                                 |
 
-The shape of the question (pooling, by default, without running PgBouncer yourself) maps cleanly onto Neon and Supabase. On AWS, RDS Proxy gives you the same capability but requires a separate resource you set up and pay for.
+Neon and Supabase both provide pooling by default, without you running PgBouncer yourself. On AWS, RDS Proxy gives you the same capability but requires a separate resource you set up and pay for.
 
 <CTA title="See pooling in action" description="Read how Neon's PgBouncer config handles per-user pools, connection lifecycle, and compute restarts." buttonText="Open the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />

@@ -15,13 +15,13 @@ nextLink:
 
 For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for compute capacity you aren't using. Lakebase Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours plus storage, not a provisioned instance size.
 
-## Why traditional providers overcharge for spiky traffic
+## Why fixed-size instances cost more for spiky traffic
 
 Fixed-size Postgres instances on AWS RDS, Cloud SQL, and similar providers bill you for the largest instance you ever expect to need, 24 hours a day. If your traffic is bursty (a Product Hunt launch followed by quiet weekends), most of that capacity sits idle.
 
-The minimum compute is 0.25 CU (≈1 GB RAM) with associated CPU and local SSD ([Plans: Compute](/docs/introduction/plans#compute)). After 5 minutes of inactivity the compute suspends, and a query reactivates it within a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
+On Lakebase Postgres, the minimum compute is 0.25 CU (≈1 GB RAM) with associated CPU and local SSD ([Plans: Compute](/docs/introduction/plans#compute)). After 5 minutes of inactivity the compute suspends, and a query reactivates it within a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
 
-## What you actually pay on Neon
+## What you pay on Neon
 
 The [Free plan](/docs/introduction/plans) covers most prototypes:
 
@@ -50,7 +50,7 @@ If you eventually need SOC 2, HIPAA, private networking, or an uptime SLA, those
 | -------------------- | -------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Neon (Launch)        | Compute drops to $0 while suspended; storage continues to bill | 0.25 CU (≈1 GB RAM)      | Auto-suspend after 5 minutes; resumes in a few hundred ms                                                                                                                                                                                                                                        |
 | Aurora Serverless v2 | Compute pauses at 0 ACUs                                       | 0 ACUs (with auto-pause) | Auto-pause requires setting min capacity to 0 ACUs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)); each ACU is ≈2 GiB ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)) |
-| RDS for PostgreSQL   | Billed 24/7                                                    | Smallest instance class  | Instance-hour pricing; reserved instances available for committed workloads ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html))                                                                                                |
+| RDS for Postgres   | Billed 24/7                                                    | Smallest instance class  | Instance-hour pricing; reserved instances available for committed workloads ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html))                                                                                                |
 | Supabase             | Project compute billed hourly even when idle (paid plans)      | Micro: ~$10/month        | Free Plan pauses inactive projects; paid plans run a dedicated VM per project around the clock ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/compute))                                                                                                                     |
 
 Aurora Serverless v2 is the closest match for variable workloads. The main differences for a startup: Neon's 0.25 CU minimum (when active) bills at $0.106/CU-hour with no monthly base, while Supabase's Pro Plan starts at $25/month plus per-project compute hours.

@@ -23,7 +23,7 @@ A branch on Neon is a writable copy of your database at a point in time. Behind 
 
 1. Storage is versioned at the page level. Creating a branch records a new pointer to the parent's state.
 2. A separate compute is provisioned. The branch gets its own connection string and can scale to zero independently.
-3. As you write to the branch, only changed pages are stored. The [pricing docs](/docs/introduction/plans#storage) cover the billing model: child branch storage is capped at the smaller of the delta or the parent's logical data size.
+3. As you write to the branch, only changed pages are stored. Child branch storage is capped at the smaller of the delta or the parent's logical data size ([pricing](/docs/introduction/plans#storage)).
 
 Create one from the CLI:
 
@@ -61,7 +61,7 @@ The branch is deleted automatically when it expires. This pairs well with previe
 
 - **Amazon Aurora.** [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) uses copy-on-write over the same distributed storage and includes parent data. Clones are full clusters within a single AWS Region, billed at cluster rates. There's no Git-style merge or built-in PR integration.
 
-- **Amazon RDS for PostgreSQL.** No native branching. The closest workflow is snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
+- **Amazon RDS for Postgres.** No native branching. The closest workflow is snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
 
 Lakebase Postgres branches include parent data by default, scale compute to zero independently per branch, and ship with [auto-expiration](/docs/guides/branch-expiration) so preview environments clean themselves up. Idle branch compute doesn't accrue CU-hours; storage delta still bills.
 

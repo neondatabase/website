@@ -30,7 +30,7 @@ Storage is billed separately at $0.35/GB-month on paid plans. Use [branches](/do
 Free plan compute always scales to zero after 5 minutes of inactivity. The Launch and Scale plans let you adjust or disable the timer, which is useful for production where you don't want cold starts.
 </Admonition>
 
-## What about staging?
+## Staging
 
 Most teams treat staging like a long-lived environment, but it still has idle hours overnight and on weekends. The same scale-to-zero applies: if no integration test or QA pass touches the database, you don't pay for compute. Pair it with a [protected branch](/docs/guides/protected-branches) on the Launch or Scale plan to prevent accidental drops.
 

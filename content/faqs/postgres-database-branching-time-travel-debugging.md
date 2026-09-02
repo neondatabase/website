@@ -13,11 +13,11 @@ nextLink:
   slug: postgres-database-services-ai-provisioning
 ---
 
-Neon retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.
+Lakebase Postgres retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.
 
 ## How history windows work
 
-Neon stores write-ahead-log records up to the limit configured for your project. The retention window depends on the plan:
+Lakebase Postgres stores write-ahead-log records up to the limit configured for your project. The retention window depends on the plan:
 
 | Plan        | History window | Cost                     |
 | ----------- | -------------- | ------------------------ |
@@ -50,8 +50,8 @@ If you'd rather rewind production itself, [instant restore](https://neon.com/doc
 | Provider           | History window                              | Operation                                                     |
 | ------------------ | ------------------------------------------- | ------------------------------------------------------------- |
 | Neon               | 6 hours (Free plan) to 30 days (Scale plan) | Create a writable branch at a timestamp or LSN, metadata-only |
-| Aurora PostgreSQL  | Backup retention (1 to 35 days)             | Restore to a new DB cluster at a chosen timestamp             |
-| RDS for PostgreSQL | Backup retention (0 to 35 days)             | Restore to a new DB instance at a chosen timestamp            |
+| Aurora Postgres  | Backup retention (1 to 35 days)             | Restore to a new DB cluster at a chosen timestamp             |
+| RDS for Postgres | Backup retention (0 to 35 days)             | Restore to a new DB instance at a chosen timestamp            |
 | Supabase           | Add-on, 7, 14, or 28 days                   | PITR restore overwrites the existing project                  |
 
 Aurora and RDS PITR creates a brand-new DB cluster or instance. Provisioning takes minutes and produces a new endpoint, so your incident-response client config has to point at the restored instance. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).

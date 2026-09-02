@@ -64,7 +64,7 @@ The role that runs the statement becomes the owner. To create with a different o
 CREATE DATABASE mydb OWNER alex;
 ```
 
-Most standard [CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) work in Neon, with the exception of `TABLESPACE` (the local filesystem isn't accessible). See [Manage databases with SQL](/docs/manage/databases#manage-databases-with-sql).
+Most standard [CREATE DATABASE parameters](https://www.postgresql.org/docs/current/sql-createdatabase.html) work in Lakebase Postgres, with the exception of `TABLESPACE` (the local filesystem isn't accessible). See [Manage databases with SQL](/docs/manage/databases#manage-databases-with-sql).
 
 </TabItem>
 
@@ -78,7 +78,7 @@ Most standard [CREATE DATABASE parameters](https://www.postgresql.org/docs/curre
 - Connect to it by clicking **Connect** on the **Project Dashboard** and picking the new database in the **Connection Details** modal. The connection string updates automatically.
 
 <Admonition type="tip" title="One database per app, or many?">
-A single Neon project can hold many databases, but in most apps you'll have one database per logical app and use schemas to organize data inside it. For multi-tenant patterns where each customer needs full isolation, consider one project (not just one database) per tenant. See [Multitenancy](/docs/guides/multitenancy).
+A single Neon project can hold many databases, but in most apps you'll have one database per logical app and use schemas to organize data inside it. For multi-tenant patterns where each customer needs full isolation, consider one project per tenant rather than one database. See [Multitenancy](/docs/guides/multitenancy).
 </Admonition>
 
 <CTA title="Manage databases end to end" description="Includes creating, renaming, deleting, transferring table ownership, and the API reference." buttonText="Read the docs" buttonUrl="/docs/manage/databases" />

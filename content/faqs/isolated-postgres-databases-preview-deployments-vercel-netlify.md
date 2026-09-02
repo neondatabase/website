@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-databases-free-tier
 ---
 
-The pattern that works: branch the production database per preview deployment, point the preview's `DATABASE_URL` at the branch, and clean up the branch when the PR closes. Neon's branching makes branch creation a single API call, and the [Vercel integration](/docs/guides/vercel-overview) automates the whole flow.
+Branch the production database per preview deployment, point the preview's `DATABASE_URL` at the branch, and clean up the branch when the PR closes. Neon's branching makes branch creation a single API call, and the [Vercel integration](/docs/guides/vercel-overview) automates the whole flow.
 
 ## Vercel: use the native integration
 

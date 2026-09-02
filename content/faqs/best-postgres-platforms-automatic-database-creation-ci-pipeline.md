@@ -15,7 +15,7 @@ nextLink:
 
 Neon's branching model is built for this. A Neon branch is a copy-on-write fork of your database that's ready to query in seconds, costs nothing for storage until you change something, and can be created and torn down through the API or a GitHub Action.
 
-## The shape of the workflow
+## The workflow
 
 When a pull request opens, your CI creates a branch off `main`, points your test environment at the branch's connection string, runs migrations and tests, then deletes the branch when the PR closes. Each PR gets a real database with production schema and (if you want) production data, with no copying cost.
 
@@ -57,11 +57,11 @@ Branches share storage with their parent until they diverge, so you're billed fo
 Even with cheap branch storage, stale branches add up. Set a [time to live](/docs/guides/branch-expiration) so branches auto-delete if a PR sits open too long.
 </Admonition>
 
-## How other Postgres platforms handle this
+## How other Postgres services handle this
 
 - **Supabase Preview Branches** are the closest analog. Each PR gets a separate environment with its own Postgres, auth, and storage, billed by the hour at around $0.013/hour for the default Micro compute size ([Supabase branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). The branch is migration-driven, not a copy of production data, so seed scripts run on every new branch.
 - **Aurora Serverless v2** has no built-in branching primitive. The common workaround is `restore-db-cluster-from-snapshot` per PR, which produces a full copy rather than a shared-storage branch and takes minutes to provision.
-- **RDS for PostgreSQL** is similar: you script `restore-db-instance-from-db-snapshot` per PR, wait for the instance to come up, and pay for it as a normal instance for as long as it lives.
+- **RDS for Postgres** is similar: you script `restore-db-instance-from-db-snapshot` per PR, wait for the instance to come up, and pay for it as a normal instance for as long as it lives.
 
 The differences that matter for CI workflows are speed (Neon branches finish in seconds), data shape (Neon branches start as a copy-on-write fork of the parent, including data), and idle cost (Neon compute suspends when tests aren't running; storage continues to bill for any delta).
 

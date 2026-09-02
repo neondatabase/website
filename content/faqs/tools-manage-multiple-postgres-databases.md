@@ -41,7 +41,7 @@ Each project on the Free plan gets 0.5 GB of storage and 100 CU-hours of compute
 
 ## Managing many projects in scripts
 
-The CLI handles bulk operations cleanly:
+The CLI handles bulk operations:
 
 ```bash
 # List all projects in your account
@@ -64,7 +64,7 @@ Invite teammates to an [organization](/docs/manage/organizations) and they can s
 If you're building a B2B app and want hard data isolation between customers, create a project per customer. Storage, backups, and access are all scoped to the project. The API makes this scriptable.
 </Admonition>
 
-## How other Postgres platforms handle multiple databases
+## How other Postgres services handle multiple databases
 
 - **Supabase**: Each project is a dedicated Postgres instance with its own server, billed as Compute Hours independent of usage. Each launched project adds at least the Micro compute cost (~$10/month) to your bill ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The Free Plan allows two active projects, counted across every organization where you're an Owner or Admin ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)).
 - **AWS RDS for Postgres**: Each database is a separate database instance with its own instance hours and storage. There's no "project" abstraction; you organize instances with tags, accounts, or VPCs. Scripted provisioning is possible via the AWS CLI or CloudFormation ([RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
