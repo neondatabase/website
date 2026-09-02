@@ -71,7 +71,7 @@ The result is still a reviewed, versioned catalog: it looks generated, but it is
 
 `@neon/tools` is the agent-facing end of that pipeline.
 
-## How `@neon/tools` is built
+## Building @neon/tools
 
 `@neon/tools` sits on top of a pipeline that goes from the OpenAPI spec to agent tools. Each layer adds a contract the layer below does not have. The mechanical layers regenerate, the DX layers do not.
 
@@ -81,7 +81,7 @@ The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) is the source
 
 This layer stays close to HTTP. It gives us complete API coverage and catches drift, but it does not decide what makes a good method for developers or agents.
 
-### `@neon/sdk` adds an ergonomic client
+### Adding an ergonomic client
 
 The `createNeonClient()` API groups common operations into namespaces such as `projects`, `branches`, `postgres`, `snapshots`, `storage`, `functions`, and `auth`. It also adds behavior that the OpenAPI operation does not carry on its own:
 
@@ -92,7 +92,7 @@ The `createNeonClient()` API groups common operations into namespaces such as `p
 
 The raw layer still covers every API endpoint. The ergonomic client is not regenerated from the spec. It wraps the methods and workflows we want to support as a deliberate interface, written with AI assistance, then reviewed and checked into the repo.
 
-### `@neon/tools` turns SDK methods into agent tools
+### Turning SDK methods into agent tools
 
 `@neon/tools` wraps that ergonomic client, not the raw operation IDs. You select tools by SDK path:
 
@@ -197,7 +197,7 @@ The hosted Neon MCP Server adds its own controls:
 - result sanitization
 - fixed model-facing names and descriptions
 
-## Native adapters for MCP, Mastra, and Eve
+## With native adapters for MCP, Mastra, and Eve
 
 `@neon/tools` publishes the same descriptors through three adapters:
 
