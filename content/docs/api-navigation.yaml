@@ -486,6 +486,12 @@
     - title: "Revoke a credential"
       slug: reference/api/credentials/revoke-credential
       method: DELETE
+    - title: "Reveal a credential's secrets"
+      slug: reference/api/credentials/reveal-credential
+      method: POST
+    - title: "Rotate a credential's secrets"
+      slug: reference/api/credentials/rotate-credential
+      method: POST
 - title: "Functions"
   slug: reference/api/functions
   items:
