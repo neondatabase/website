@@ -65,19 +65,6 @@ This is why [many platforms](https://neon.com/platforms) use Neon's API under th
 <cite><a href="https://www.linkedin.com/in/dominicwhyte/">Dominic Whyte</a>, Co-founder at <a href="https://www.zite.com/">Zite</a></cite>
 </blockquote>
 
-### Vector search stops requiring an always-on database
-
-For years, search mostly meant a search bar: a human typing a query, with load you could forecast and QPS you could plan around. That's changing. Search is increasingly a tool exposed in an agent harness, one way to connect data to agents. Teams index more data than they used to, and those indexes may sit idle between agent calls.
-
-The default Postgres setup for vector search is `pgvector` with an HNSW index, and this is designed for a traditional server - it's a long-lived process that keeps the whole graph pinned in RAM between queries. Every search walks that graph through many small random reads. [Lakebase Search](https://neon.com/docs/ai/lakebase-search) lets you invert the design and take advantage of scale to zero even when running semantic search.
-
-[Read this blog post](https://neon.com/blog/lakebase-search-on-neon) for the full picture on how this works - but the TL;DR is that Lakebase search keeps their indexes durable on object storage instead of in compute memory, and the index keeps existing when the compute shuts down. The compute on top is a cache that rebuilds from object storage on demand, so a search database can suspend and wake without re-indexing anything.
-
-<blockquote>
-<p>“Using Lakebase Search, we clocked around 18.6ms warm, versus around 19.5 seconds on our old cold-start GIN approach. That's a 1,000x improvement”</p>
-<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
-</blockquote>
-
 ### Coding agents provision backends by the thousands
 
 Coding agents ship infrastructure at a different rate. A Replit-style agent may create a database for every app it builds, and many branches for development and checkpoints along the way. An always-on database per generated app makes that workflow truly wasteful. Scale to zero makes it the default:
@@ -110,13 +97,22 @@ Who keeps count on how many repositories they have? That ubiquity is a consequen
 <cite>Gabriel Tumlos, Founder of Daisy</cite>
 </blockquote>
 
+### Vector search stops requiring an always-on database
+
+For years, search mostly meant a search bar: a human typing a query, with load you could forecast and QPS you could plan around. That's changing. Search is increasingly a tool exposed in an agent harness, one way to connect data to agents. Teams index more data than they used to, and those indexes may sit idle between agent calls.
+
+The default Postgres setup for vector search is `pgvector` with an HNSW index, and this is designed for a traditional server - it's a long-lived process that keeps the whole graph pinned in RAM between queries. Every search walks that graph through many small random reads. [Lakebase Search](https://neon.com/docs/ai/lakebase-search) lets you invert the design and take advantage of scale to zero even when running semantic search.
+
+[Read this blog post](https://neon.com/blog/lakebase-search-on-neon) for the full picture on how this works - but the TL;DR is that Lakebase search keeps their indexes durable on object storage instead of in compute memory, and the index keeps existing when the compute shuts down. The compute on top is a cache that rebuilds from object storage on demand, so a search database can suspend and wake without re-indexing anything.
+
+<blockquote>
+<p>“Using Lakebase Search, we clocked around 18.6ms warm, versus around 19.5 seconds on our old cold-start GIN approach. That's a 1,000x improvement”</p>
+<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
+</blockquote>
+
 ### Realtime becomes an option for every database (coming soon)
 
-Sync and scale to zero have always been hard to combine. A Postgres sync engine typically follows the logical replication stream, which holds a replication connection open and keeps compute active. [Electric joined the Neon team at Databricks](https://neon.com/blog/electric-joins-neon), and we're building sync on Neon in a way that doesn't hold the logical replication connection open and so doesn't prevent scale to zero.
-
-The key is a sync protocol that works natively with the Neon proxy, so the database can scale down when there's no write workload without interrupting realtime consumers.
-
-More soon.
+Sync and scale to zero have always been hard to combine. A Postgres sync engine typically follows the logical replication stream, which holds a replication connection open and keeps compute active. [Electric joined the Neon team at Databricks](https://neon.com/blog/electric-joins-neon), and we're building sync on Neon in a way that doesn't hold the logical replication connection open and so doesn't prevent scale to zero. More soon.
 
 ## Scale to zero is not for prod, but there's still waste there. That's why autoscaling exists
 
@@ -125,13 +121,13 @@ The patterns above rely on databases that spend meaningful time doing nothing. A
 For that workload, turn scale to zero off. The waste comes from something else: provisioning for the peak. Neon also solves for that - [autoscaling](https://neon.com/docs/introduction/autoscaling) adjusts compute between a minimum and maximum you set, based on live load, without restarts. You size the range for the workload instead of keeping peak capacity allocated all day. Compute usage then follows the average resources consumed over the hours the database is running.
 
 <Admonition type="note" title="Get the deep dive">
-This blog post walk you through how our autoscaling works in detail.
+[This blog post](https://neon.com/blog/autoscaling-lakebase-postgres) walks you through how our autoscaling works in detail.
 </Admonition>
 
 ## Stop wasting compute. Let it scale to zero
 
 Scale to zero looks like a minor feature if you just picture a busy production branch. It's everywhere else that it shines - development, staging - plus the architectures that deploy databases en masse, which are only getting more tempting in the era of agents.
 
-Compute is becoming an increasingly sought-after resource - scale to zero simply makes sense: if a database isn't doing work, its compute shouldn't be sitting there.
+Compute is becoming an increasingly sought-after resource. Scale to zero simply makes sense - if a database isn't doing work, its compute shouldn't be sitting there.
 
-Try it on the Neon Free plan, or ask your coding agent to add it to the next app it builds.
+[Try it on the Neon Free plan](https://console.neon.tech/signup), or ask your coding agent to add it to the next app it builds.
