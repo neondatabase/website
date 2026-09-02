@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-08-11T18:35:41.335Z'
+updatedOn: '2026-09-02T04:08:12.679Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -26,6 +26,8 @@ The branch argument is optional. Run `neon checkout` with no branch in an intera
 <CliOptions command="checkout" />
 
 By default, `checkout` pulls environment variables into a `.env` file after checking out the branch; use `--no-env-pull` to skip this.
+
+When `checkout` creates a branch from a [`neon.ts`](/docs/reference/neon-ts) policy, it applies that policy as part of the checkout. Pass `--env <file>` to load Function env from `<file>` first, so the `process.env` values your `neon.ts` reads resolve during that apply. It's ignored when you check out an existing branch, which never re-applies the policy.
 
 ## Branch ID vs name
 
