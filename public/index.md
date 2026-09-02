@@ -38,7 +38,7 @@ Check auth state without blocking: run `neon profile list -o json`, where `"file
 
 - **Credentials present:** `CI=true neon me -o json` exits 0 if they still work; nonzero means expired, see the next bullet.
 - **Missing or expired, human available:** ask them to run `neon auth`. Never run it yourself; it requires a browser.
-- **No account, no human:** `neon claim create` needs no auth, writes `DATABASE_URL` to `.env.local`, and a human can keep the project later with `neon claim accept`. Add `--service` (auth, data-api, functions, object-storage, ai-gateway) to provision more than Postgres. The password lives in `.env.local` (and `neon connection-string` prints it). Keep both out of logs and transcripts.
+- **No account, no human:** `neon claim create` needs no auth, writes `DATABASE_URL` to `.env.local`, and a human can keep the project later with `neon claim accept`. Auth and the Data API can be added before claiming: at create via `--service auth` or `--service data-api`, or later with `neon.ts`. Functions, Object Storage, and the AI Gateway require a claimed project. The password lives in `.env.local` (and `neon connection-string` prints it). Keep both out of logs and transcripts.
 
 ## What do you want to do?
 
