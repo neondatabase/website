@@ -1,8 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
-export const preferredRegion = 'auto';
-
 export async function GET(request) {
   const fontTitle = fetch(
     new URL('../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)

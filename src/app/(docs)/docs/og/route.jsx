@@ -1,8 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
-export const preferredRegion = 'auto';
-
 export async function GET(request) {
   const fontBreadcrumbs = fetch(
     new URL('../../../../fonts/geist-mono/GeistMono-Regular.ttf', import.meta.url)
