@@ -14,7 +14,11 @@ path.
 
 ```bash
 npm i -g neon@latest
+neon skills -s neon -s neon-postgres
 ```
+
+The `neon` skill documents the claim flow in more detail. `neon-postgres` is for working
+with Lakebase Postgres after claim.
 
 If `neon claim --help` lists `create`:
 
