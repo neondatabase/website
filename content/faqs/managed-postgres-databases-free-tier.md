@@ -41,19 +41,19 @@ When you outgrow the Free plan limits, the Launch plan is pay-as-you-go with no 
 
 ## How Neon's Free plan compares
 
-| Provider         | Always free?       | Storage          | Compute                            | Project / database limit            |
-| ---------------- | ------------------ | ---------------- | ---------------------------------- | ----------------------------------- |
-| Neon Free plan   | Yes, no expiration | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                        |
-| Supabase Free    | Yes, with caveat   | 500 MB / project | Shared Micro compute               | 2 projects, paused after inactivity |
-| Aurora Postgres  | Yes, with limits   | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances             |
-| RDS for Postgres | 12 months only     | 20 GB            | db.t4g.micro                       | 750 hours/month                     |
+| Provider         | Always free?         | Storage          | Compute                            | Project / database limit            |
+| ---------------- | -------------------- | ---------------- | ---------------------------------- | ----------------------------------- |
+| Neon Free plan   | Yes, no expiration   | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                        |
+| Supabase Free    | Yes, with caveat     | 500 MB / project | Shared Micro compute               | 2 projects, paused after inactivity |
+| Aurora Postgres  | On the AWS Free plan | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances             |
+| RDS for Postgres | Sign-up credits only | Paid per GB      | Paid per instance-hour             | Account quotas                      |
 
 A few things to know about the alternatives:
 
 - **Supabase Free** pauses projects after about 7 days of low activity, and you can only have two active free projects across organizations where you're an Owner or Admin. See [Free project pausing](https://supabase.com/docs/guides/platform/free-project-pausing) and [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
-- **Aurora Postgres** on AWS allows up to 4 ACUs per cluster, 1 GB storage, and a maximum of 2 clusters per account under the always-free allowance. See [Amazon Aurora always-free allowance](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
-- **RDS for Postgres** offers a 12-month free period on `db.t4g.micro` with 20 GB of gp2 storage, but it expires after the first year.
+- **Aurora Postgres** is the one AWS Postgres with a standing free allowance: up to 4 ACUs per cluster, 1 GB of storage per cluster, and a maximum of 2 clusters and 2 instances per account on the AWS Free plan. Clusters have to be created with express configuration. See [Amazon Aurora on the AWS Free Tier](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
+- **RDS for Postgres** has no free allowance for new accounts. AWS reworked its Free Tier on July 17, 2025: new customers get up to $100 in credits at sign-up and up to $100 more, and RDS usage draws down those credits. The old entitlement of 750 hours/month on `db.t3.micro` or `db.t4g.micro` for 12 months is grandfathered for accounts created before that date. See [AWS Free Tier on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html).
 
-If the app is dormant most of the time, scale-to-zero on Neon means the 100 CU-hour budget covers a real prototype without the inactivity pause Supabase enforces or the 12-month clock RDS runs against.
+If the app is dormant most of the time, scale-to-zero on Neon means the 100 CU-hour budget covers a real prototype without the inactivity pause Supabase enforces or the credit balance RDS draws down.
 
 <CTA title="Start on the Free plan" description="No credit card required. Spin up Postgres in seconds." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

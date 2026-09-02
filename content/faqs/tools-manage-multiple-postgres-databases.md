@@ -66,7 +66,7 @@ If you're building a B2B app and want hard data isolation between customers, cre
 
 ## How other Postgres platforms handle multiple databases
 
-- **Supabase**: Each project is a dedicated Postgres instance with its own server, billed as Compute Hours independent of usage. Each launched project adds at least the Micro compute cost (~$10/month) to your bill ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The Free Plan allows two projects per Free Plan organization ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)).
+- **Supabase**: Each project is a dedicated Postgres instance with its own server, billed as Compute Hours independent of usage. Each launched project adds at least the Micro compute cost (~$10/month) to your bill ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The Free Plan allows two active projects, counted across every organization where you're an Owner or Admin ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)).
 - **AWS RDS for Postgres**: Each database is a separate database instance with its own instance hours and storage. There's no "project" abstraction; you organize instances with tags, accounts, or VPCs. Scripted provisioning is possible via the AWS CLI or CloudFormation ([RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
 - **AWS Aurora Serverless v2**: Same idea as RDS but with elastic compute. Each cluster is billed independently and you manage them through the AWS Console or API ([Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)).
 

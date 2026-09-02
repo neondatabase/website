@@ -43,7 +43,7 @@ When you outgrow Free, the Launch plan is pay-as-you-go:
 - $0.35/GB-month storage
 - No monthly minimum
 
-A 0.25 CU compute running about 40 hours total in a month (10 CU-hours) with 2 GB of storage works out to about $2.31 (from the [Launch plan examples](/docs/introduction/plans#launch-plan)).
+A 0.25 CU compute running about 40 hours total in a month (10 CU-hours) with 2 GB of storage works out to about $1.76: $1.06 of compute plus $0.70 of storage. The [Launch plan examples](/docs/introduction/plans#launch-plan) put the same workload at $2.31 once you add a 1 GB dev branch and 1 GB of instant restore history.
 
 ## How autoscaling helps low-traffic projects
 

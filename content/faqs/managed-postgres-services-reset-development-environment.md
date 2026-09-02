@@ -13,7 +13,9 @@ nextLink:
   slug: managed-postgres-services-serverless-connections
 ---
 
-Neon has two features that get you back to a clean state quickly. **Reset from parent** replaces all data and schema on a branch with the latest from its parent, in one operation. **Instant restore** rolls a branch back to any timestamp within your project's history window. Both keep the same connection string, so your application doesn't need to know anything happened.
+Neon has two features that get you back to a clean state quickly. **Reset from parent** replaces all data and schema on a branch with the latest from its parent, in one operation. **Instant restore** rolls a root branch back to any timestamp within your project's history window. Both keep the same connection string, so your application doesn't need to know anything happened.
+
+The two apply to different branches. Reset from parent is for child branches, which is where most development environments live. Instant restore works on root branches only.
 
 ## Reset from parent
 
@@ -25,11 +27,11 @@ neon branches reset development --parent
 
 The branch's schema and data are replaced with the latest from `main`. The connection string stays the same. Existing connections are briefly interrupted while the reset runs, then reconnect.
 
-If `development` has child branches of its own, the reset is blocked. Delete the children (or use instant restore) and try again. Root branches like `main` can't be reset because they have no parent.
+If `development` has child branches of its own, the reset is blocked. Delete the children and try again, or delete `development` and recreate it from `main`. Root branches like `main` can't be reset because they have no parent.
 
 ## Instant restore for point-in-time rollback
 
-For more precise rollbacks, use [instant restore](https://neon.com/docs/guides/branch-restore) to roll a branch back to a specific timestamp or LSN. The reachable window depends on your plan:
+If the environment you need to rewind is a root branch, use [instant restore](https://neon.com/docs/guides/branch-restore) to roll it back to a specific timestamp or LSN. Child branches don't support instant restore, so reset from parent is the tool for those. The reachable window depends on your plan:
 
 - **Free plan**: 6 hours, no charge, capped at 1 GB of change history
 - **Launch plan**: up to 7 days, $0.20/GB-month for the change history

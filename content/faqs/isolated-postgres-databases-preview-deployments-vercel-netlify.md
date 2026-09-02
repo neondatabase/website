@@ -55,7 +55,7 @@ See [Branching with GitHub Actions](/docs/guides/branching-github-actions).
 Branches are included on every plan: 10 per project on the Free and Launch plans, 25 on the Scale plan. On Launch and Scale, extra branches beyond the included allowance are $1.50/branch-month, prorated hourly (about $0.002/hour). The Free plan does not support extra branches. A preview branch that exists for the lifetime of a PR (for example, 8 hours of active compute, with the rest scaled to zero) typically costs a few cents in compute. Child-branch storage starts at $0 and grows only with writes on that branch.
 
 <Admonition type="tip">
-With Neon Auth, user sessions and OAuth config also branch with your data, so logins work in preview environments without extra setup. See [Branching authentication](/docs/auth/branching-authentication).
+With Managed Better Auth, user sessions and OAuth config also branch with your data, so logins work in preview environments without extra setup. See [Branching authentication](/docs/auth/branching-authentication).
 </Admonition>
 
 ## How this compares to other database providers

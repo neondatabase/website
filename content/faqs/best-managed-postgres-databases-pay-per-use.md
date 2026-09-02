@@ -53,7 +53,7 @@ From the [Launch plan examples](/docs/introduction/plans#launch-plan):
 
 Total: **$2.31** for the month.
 
-A heavier workload at 250 CU-hours with 40 GB storage comes to about $48/month on Launch. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
+A heavier workload at 250 CU-hours with 40 GB of root branch storage comes to about $40.50/month on Launch, or about $48 once you add 10 GB of child branch storage and 20 GB of instant restore history. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
 
 ## Other Postgres providers with usage-based billing
 

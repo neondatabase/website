@@ -40,7 +40,7 @@ Scale-to-zero doesn't change durability. [Instant restore](/docs/introduction/br
 ## Other cloud Postgres services with scale-to-zero
 
 - **Aurora Serverless v2 (PostgreSQL)** added scale-to-zero with the **automatic pause** feature. You enable it by setting the cluster's minimum capacity to 0 ACUs. The engine must be Aurora PostgreSQL 13.15, 14.12, 15.7, 16.3 or later ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)). Storage persists during pause. Resume on the first connection is slower than Lakebase Postgres's few-hundred-millisecond wake.
-- **Supabase** Free Plan projects are paused after about 7 days of low activity and can be restored for up to 1 year ([docs](https://supabase.com/docs/guides/platform/free-project-pausing)). Paid plans do **not** pause projects when idle, so compute is billed 24/7 even with no traffic.
+- **Supabase** Free Plan projects are paused after about 7 days of low activity and can be restored for up to 90 days after the pause ([docs](https://supabase.com/docs/guides/platform/free-project-pausing)). Paid plans do **not** pause projects when idle, so compute is billed 24/7 even with no traffic.
 - **RDS for PostgreSQL** does not support auto-pause. You can stop an instance manually, but billing for storage continues and stopped instances restart automatically after 7 days.
 
 If your workload has long idle periods and tolerates a cold start, Neon and Aurora Serverless v2 are the two managed options that bill compute only while it's running. Supabase Free Plan offers project pausing, but for free-plan abuse prevention rather than low-idle cost optimization on paid usage.

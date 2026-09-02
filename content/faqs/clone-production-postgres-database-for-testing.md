@@ -6,7 +6,7 @@ slug: clone-production-postgres-database-for-testing
 category: FAQ
 status: draft
 previousLink:
-  title: 'How do I check which PostgreSQL version my Neon database is running?'
+  title: 'How do I check which Postgres version my Neon database is running?'
   slug: check-postgresql-version-neon
 nextLink:
   title: 'Which cloud Postgres services scale down to zero automatically without losing any data?'

@@ -57,7 +57,7 @@ The branch is deleted automatically when it expires. This pairs well with previe
 
 ## How others compare
 
-- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a separate Postgres environment per Git pull request and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). Branches seed from a `seed.sql` file. Each preview branch runs its own compute add-on and is billed for hours of existence.
+- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a separate Postgres environment per Git pull request and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). Branches seed from a `seed.sql` file. Each preview branch runs its own compute add-on, billed by the running hour. Preview branches auto-pause on inactivity, and paused compute isn't billed.
 
 - **Amazon Aurora.** [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) uses copy-on-write over the same distributed storage and includes parent data. Clones are full clusters within a single AWS Region, billed at cluster rates. There's no Git-style merge or built-in PR integration.
 

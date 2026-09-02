@@ -60,7 +60,7 @@ The hard maximum is 5,000 branches per project on paid plans. For teams running 
 
 ## How other Postgres options compare
 
-- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a separate Postgres environment per Git pull request and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). You seed it from a `seed.sql` file. Each branch runs as its own compute add-on, [starting at about $0.01344/hour](https://supabase.com/docs/guides/platform/manage-your-usage/branching) and billed for its full lifetime.
+- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a separate Postgres environment per Git pull request and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). You seed it from a `seed.sql` file. Each branch runs as its own compute add-on, [starting at about $0.01344/hour](https://supabase.com/docs/guides/platform/manage-your-usage/branching). Preview branches auto-pause on inactivity, and paused compute isn't billed, so you pay for running hours rather than the branch's whole lifetime.
 
 - **Amazon Aurora.** [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) is copy-on-write at the storage layer and includes parent data, but each clone is a full Aurora cluster billed at cluster rates. There's no Git-integrated workflow; you'd build one with Lambda or CDK.
 

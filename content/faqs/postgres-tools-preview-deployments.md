@@ -21,7 +21,7 @@ When you connect a Neon project to Vercel through the [Vercel-Managed](https://n
 
 Because the lakebase architecture uses copy-on-write storage, the new branch starts with zero added storage. You're billed only for the delta as the branch diverges from its parent. Extra branches beyond your plan's allowance (10 on the Free and Launch plans, 25 on the Scale plan) cost $1.50/branch-month on paid plans, prorated hourly at about $0.002/hour. See [pricing details](https://neon.com/docs/introduction/plans#extra-branches).
 
-If you use Neon Auth, the integration also provisions an isolated auth instance per preview branch, so each preview has its own users and sessions.
+If you use Managed Better Auth, the integration also provisions an isolated auth instance per preview branch, so each preview has its own users and sessions.
 
 Preview branches are deleted when their Vercel deployments are removed. Vercel's default [deployment retention](https://vercel.com/docs/deployment-retention) keeps previews for 6 months, so branches can linger unless you shorten retention or clean them up sooner. See [Managing Vercel preview branch cleanup](https://neon.com/docs/guides/vercel-branch-cleanup).
 
