@@ -33,21 +33,21 @@ Most hosted Postgres pricing works like this:
 - The vendor assumes the instance will run for about 730 hours a month
 - You pay for those hours
 
-That model creates two kinds of compute waste. First, you're provisioning for peak demand, leaving capacity unused the rest of the time; second, the instance keeps "running" even when the database is not busy. That waste is harder to defend now. Compute is scarce and [getting more expensive](https://www.semafor.com/article/08/23/2026/nvidia-says-its-raising-some-prices-15) - leaving it allocated on databases nobody is querying is a blunt way to spend it.
+That model creates two kinds of compute waste. First, you're provisioning for peak demand, leaving capacity unused the rest of the time; second, the instance keeps "running" even when the database is not busy. That waste is harder to defend now. Compute in the era of agents is getting scarce - leaving it allocated on databases nobody is querying seems like a wasteful way to spend it.
 
-Lakebase Postgres (the Neon database) addresses each compute waste problem separately. [Autoscaling](https://neon.com/docs/introduction/autoscaling) solves the first kind of waste by adjusting compute to the current load in real time; the second kind of waste is solved by [scale to zero](https://neon.com/docs/introduction/scale-to-zero), which suspends compute after a few minutes of inactivity, then restarts it automatically.
+[Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database) addresses each compute waste problem separately. [Autoscaling](https://neon.com/docs/introduction/autoscaling) solves the first kind of waste by adjusting compute to the current load in real time; the second kind of waste is solved by [scale to zero](https://neon.com/docs/introduction/scale-to-zero), which suspends compute after a few minutes of inactivity, then restarts it automatically.
 
 The effect this last piece can have, scale to zero, is easy to dismiss if you only picture one busy production database. Your might first think, "my DB is active 24/7 and I wouldn't want it to suspend anyway" - but  if you think twice, surely your deployment includes at least some databases that are idle most of the time (development, staging).
 
-Perhaps more interestingly, some modern building patterns ask for *thousands* of sporadically-used databases.  Keeping all of them running would make the architecture too expensive and too cumbersome to operate. Scale to zero changes that.
+Perhaps more interestingly, many modern building patterns ask for *thousands* of sporadically-used databases.  Keeping all of them running would make the architecture too expensive to operate. Scale to zero changes that.
 
 ## When Postgres scales to zero
 
 ### You don’t ration dev databases anymore
 
-In a traditional workflow, only because databases used to be such a lagging piece of the infra, developers were used to deciding whether something is worth deploying a new instance. Any wondering disappears if your database can behave like an on-demand development resource, just like you open a PR or deploy a preview - or more realistically, your agent goes those now.
+In a traditional workflow, developers couldn't deploy new instances mindlessly - costs and management accumulated too quickly. That hesitation disappears when your database behaves like an on-demand development resource, the way you open a PR or deploy a preview. Your agent can even do that now.
 
-This is possible with Neon due to branches that scale to zero. Your CI can create a Neon for each test run, every PR can get a preview environment with its own data, every developer on a team can work against a separate branch, your agent can deploy branches when iterating on ideas… The list goes on and on. This is only viable because the compute suspends when the work stops, making these sort of ephemeral branches extremely affordable.
+This is how working with Neon feels. Since branches scale to zero, your agent or CI can create a branch for each test run - every PR can get a preview environment with its own data - every developer on a team can work against a separate branch - every experiment and new idea can live on its branch… The list goes on and on. This is only viable because the compute suspends when the work stops, so these sort of ephemeral branches are extremely affordable.
 
 <blockquote>
 <p>“Our users were asking for preview environments that already had their data in place. Neon's branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately”</p>
@@ -56,9 +56,9 @@ This is possible with Neon due to branches that scale to zero. Your CI can creat
 
 ### Running free plans gets cheap
 
-Scale to zero also completely changes the free tier economics. If you're running a platform that gives every free user a database, a thousand signups now means ten thousand databases. With an always-on model, every signup adds another running instance to your infrastructure bill. With scale to zero, inactive databases stop consuming compute. You still pay for their storage, but the majority of these low-activity databases will have very little to no data on them. Your compute bill follows active use instead of total signups.
+Scale to zero also changes the free tier economics. If you're running a platform that gives every free user a database, a thousand signups now means ten thousand databases. With an always-on model, every signup added another running instance to your infrastructure bill. With scale to zero, inactive databases stop consuming compute; you still pay for their storage, but the majority of these low-activity databases will have very little to no data on them. Hosting free plans becomes very doable for [many platforms](https://neon.com/platforms).
 
-This is why [many platforms](https://neon.com/platforms) use Neon's API under the hood to provision databases to their end users, but  our own Neon's Free plan is one proof point for this model. We're including [100 projects](https://neon.com/docs/introduction/plans#projects) on it, each with 100 CU-hours of compute per month and 0.5 GB of storage - and yet our free plan is very affordable to run (we're far from having to subsidize it in any meaningful way). The reason behind this goes beyond scale to zero (our infra is efficient in multiple different ways), but scale to zero is the essential piece - a 100 projects do not mean 100 constantly running computes.
+Our own Neon's Free plan is one proof point for this model. We're currently including [100 projects](https://neon.com/docs/introduction/plans#projects) on it, each with 100 CU-hours of compute per month and 0.5 GB of storage - and yet our free plan is very affordable to run (we're far from having to "subsidize it" in any impactful way). There's many reasons behind this (our infra is very efficient), but scale to zero is the essential piece - a 100 projects do not mean 100 constantly running computes for us.
 
 <blockquote>
 <p>“Because Neon is usage-based and can scale down databases when they aren't being used, we're able to deploy thousands of new databases per day without costs getting out of hand”</p>
@@ -67,7 +67,7 @@ This is why [many platforms](https://neon.com/platforms) use Neon's API under th
 
 ### Coding agents provision backends by the thousands
 
-Coding agents ship infrastructure at a different rate. A Replit-style agent may create a database for every app it builds, and many branches for development and checkpoints along the way. An always-on database per generated app makes that workflow truly wasteful. Scale to zero makes it the default:
+We all know this by now - coding agents ship infrastructure at a huge rate, and this is only increasing. Your agent will deploy a database for every app it builds, and many branches for development and checkpoints along the way. Scale to zero [combined with branching](https://neon.com/branching/branching-for-agents) allows for such an intuitive workflow for an agent:
 
 - Create a backend for the app
 - Branch it before a risky change
@@ -79,13 +79,13 @@ Coding agents ship infrastructure at a different rate. A Replit-style agent may 
 <cite>Nilesh Trivedi, co-founder and CTO at QwikBuild</cite>
 </blockquote>
 
-<Admonition type="note" title="The agent does not need to stop at Postgres">
-Neon is a now complete set of cloud backend primitives built around the database (Lakebase Postgres): a single [`neon.ts`](https://neon.com/docs/get-started/backend-overview) file can also declare Managed Better Auth, Object Storage, Functions, and AI Gateway, all with scale to zero built in.
+<Admonition type="note" title="Your agent won't stop at Postgres">
+Neon is a now complete set of cloud backend primitives. A single [`neon.ts`](https://neon.com/docs/get-started/backend-overview) file can also declare Managed Better Auth, Object Storage, Functions, and AI Gateway, all with scale to zero built in.
 </Admonition>
 
 ### Deploying hosted databases is as routine as creating a repo
 
-Who keeps count on how many repositories they have? That ubiquity is a consequence of GitHub's tech and pricing.  A repo costs nothing while nobody touches it, so nobody ever made you justify one. A Postgres instance could feel exactly the same. This is what we're aiming for at Neon. That's why the Free plan carries 100 projects instead of two, and why [we've kept raising the limit](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan).
+Who keeps count on how many repositories they have? That ubiquity is a consequence of GitHub's tech and pricing.  A repo costs nothing while nobody touches it, so nobody ever made you justify one. A Postgres instance could feel exactly the same - actually, this is what we're aiming for at Neon. That's why our Free Plan carries 100 projects instead of two, and why [we keep raising this limit](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan). This wouldn't be possible without scale to zero.
 
 <blockquote>
 <p>“I'm always surprised by how easy it is to just create a ton of databases”</p>
@@ -116,7 +116,7 @@ Sync and scale to zero have always been hard to combine. A Postgres sync engine 
 
 ## Scale to zero is not for prod, but there's still waste there. That's why autoscaling exists
 
-The patterns above rely on databases that spend meaningful time doing nothing. A production branch serving requests 24/7 has the opposite shape. Its compute is always active, but its demand changes throughout the day.
+The patterns above rely on databases that spend meaningful time doing nothing. A production branch serving requests 24/7 has the opposite shape - its compute is always active, but its demand changes throughout the day.
 
 For that workload, turn scale to zero off. The waste comes from something else: provisioning for the peak. Neon also solves for that - [autoscaling](https://neon.com/docs/introduction/autoscaling) adjusts compute between a minimum and maximum you set, based on live load, without restarts. You size the range for the workload instead of keeping peak capacity allocated all day. Compute usage then follows the average resources consumed over the hours the database is running.
 
@@ -126,8 +126,6 @@ For that workload, turn scale to zero off. The waste comes from something else: 
 
 ## Stop wasting compute. Let it scale to zero
 
-Scale to zero looks like a minor feature if you just picture a busy production branch. It's everywhere else that it shines - development, staging - plus the architectures that deploy databases en masse, which are only getting more tempting in the era of agents.
+Scale to zero looks like a minor feature if you just picture a busy production branch, but its actually one of Neon's most impactful capabilities. It shines everywhere else but prod - development, staging, all the test DBs your agent deploys - and it enables architectures that deploy databases en masse, which are only getting more popular in the era of agents.
 
-Compute is becoming an increasingly sought-after resource. Scale to zero simply makes sense - if a database isn't doing work, its compute shouldn't be sitting there.
-
-[Try it on the Neon Free plan](https://console.neon.tech/signup), or ask your coding agent to add it to the next app it builds.
+Compute is becoming an increasingly sought-after resource. Scale to zero simply makes sense: if a database isn't doing work, its compute shouldn't be sitting there. [Try it on the Neon Free plan](https://console.neon.tech/signup), or ask your coding agent to add it to the next app it builds.
