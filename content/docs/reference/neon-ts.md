@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-08-19T00:03:14.837Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -280,7 +280,7 @@ env.postgres.databaseUrl;
 ## Preview services
 
 <Admonition type="info" title="Beta">
-Functions, Storage, and AI Gateway are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them.
+Functions, Storage, and AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:
@@ -302,6 +302,7 @@ preview: {
       name: string,       // display name shown in neon functions list and the console
       source: string,     // path to entry file, relative to neon.ts
       env?: Record<string, string>,
+      bundler?: "esbuild" | "none",  // default "esbuild"; "none" ships a prebuilt source as-is
       dev?: {
         port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
       },
@@ -321,6 +322,8 @@ env: {
 ```
 
 Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+
+`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
 

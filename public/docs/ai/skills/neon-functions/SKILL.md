@@ -132,12 +132,14 @@ attachDatabasePool(pool);
 
 ```bash
 neon dev      # serves every function in neon.ts with hot reload; injects DATABASE_URL & friends
-neon deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
+neon deploy --env <file>   # preferred full deploy from neon.ts; --env is the file Function env is read from
 ```
 
-To deploy a single function without `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+Keep `.env` or `.env.local` up to date with every key under `preview.functions.*.env`. `neon env pull` writes Neon-managed vars only; add Function secrets to that file, then pass it as `--env`. `neon deploy --env <file>` loads that file into `process.env` each time, then uploads those values. A missing value is `undefined` and `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string (that uploads `""` and deletes the live key). An empty assignment (`KEY=`) is also `""`. Use `process.env.X!` when TypeScript needs an assertion.
 
-When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neon deploy` explicitly.
+To deploy a single function without applying `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). That command's `--env` is `KEY=VALUE` (repeatable), not a file path. Use it for a targeted env update. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+
+When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically. That create-apply does not load `--env`. If Function env reads `process.env`, run `neon deploy --env <file>` after checkout (add `--update-existing` if checkout already created the branch). Checking out an existing branch does not re-deploy; run `neon deploy --env <file>` explicitly.
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
@@ -146,10 +148,10 @@ The `preview.functions` block from [Setup](#setup) is part of `neon.ts`, Neon's 
 ```bash
 neon config status   # print the branch's live config (deployed functions)
 neon config plan     # dry-run diff of what apply would change
-neon config apply    # bundle + deploy the declared functions  (neon deploy is an alias)
+neon config apply --env <file>  # bundle + deploy the declared functions  (neon deploy is an alias; pass --env when Function env reads process.env)
 ```
 
-Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the function already deployed. Checking out an _existing_ branch doesn't redeploy — run `neon deploy` to apply changes.
+Functions are **branch-scoped**: each branch runs its own deployment at its own URL. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch. That create-apply does not load `--env`. If Function env reads `process.env`, run `neon deploy --env <file>` after checkout. Checking out an _existing_ branch doesn't redeploy — run `neon deploy --env <file>` to apply changes.
 
 Per-branch deploy tuning (e.g. `runtime`) lives in the `branch` closure, keyed by slug, so it can vary by branch without changing which functions exist:
 
@@ -180,7 +182,7 @@ Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also inje
 
 `neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
 
-**Your own secrets** are per-deployment. Set them with `--env KEY=VALUE` on `neon functions deploy` (repeatable; `--env KEY=` deletes a key, unmentioned keys carry over), or declare them in `neon.ts` under the function's `env` (resolved at deploy time, so read from `process.env` to avoid hardcoding):
+**Your own secrets** are per-deployment. Preferred path: declare them in `neon.ts` and run `neon deploy --env <file>`. `<file>` is the gitignored file env pull already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only; add Function secrets to that file. All declared Function env keys must be present. Omit a key from `neon.ts` if you do not want to write it. `undefined` means you asked to write the key and the value is missing (`defineConfig` throws). Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs an assertion, use `process.env.X!` and make sure the file has the value:
 
 ```typescript
 functions: {
@@ -192,7 +194,9 @@ functions: {
 }
 ```
 
-Load a `.env` before deploy with `neon deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
+`neon functions deploy --env KEY=VALUE` is the manual path (repeatable; `--env KEY=` deletes a key; unmentioned keys carry over). Use it for a targeted env update, not a full `neon.ts` apply.
+
+Load Function secrets into the same file env pull wrote, then `neon deploy --env <file>`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
 
 ## Connecting to Postgres
 
@@ -296,7 +300,7 @@ Pass the JWKS/issuer URL to the function via its `env` (see [Environment Variabl
 
 A WebSocket server is the canonical Functions workload: a long-running handler holds connections open in-process, with no external state store needed to keep a stream coherent. The connection stays alive as long as bytes flow (15-minute heartbeat, see [Timeouts](#timeouts-and-runtime-limits)).
 
-**Upgrade from inside `fetch`.** Call `upgradeWebSocket(request)` from [`@neon/functions`](https://www.npmjs.com/package/@neon/functions) and return the response it gives you. There is one entrypoint and no WebSocket dependency to install:
+**Upgrade from inside `fetch`.** Call `upgradeWebSocket(request)` from [`@neon/functions`](https://www.npmjs.com/package/@neon/functions) and return the response it gives you. Hono apps use the same primitive via `@neon/functions/hono` (see [Hono](#hono) below). There is one entrypoint and no WebSocket dependency to install:
 
 ```typescript
 import { upgradeWebSocket } from "@neon/functions";
@@ -319,7 +323,7 @@ export default {
 Three rules that matter:
 
 - **Return `response` unchanged.** A `101` can't be built as a plain `Response` (the fetch spec caps constructed responses at 200–599), so the runtime hands back an object carrying the pending upgrade. `clone()`, or rebuilding it with `new Response(res.body, res)` as response-rewriting middleware does, discards the upgrade and fails the request.
-- **Refuse a handshake by returning an ordinary `Response`.** A `401`, `403` or `404` is relayed to the client as-is. That is how you gate a socket.
+- **Refuse a handshake by returning an ordinary `Response`.** Return a `401`, `403`, or `404` from `fetch`, before you upgrade, to gate a socket. A browser client can't read why a handshake was refused; it sees only a generic connection failure, not your status or body. Refuse to keep clients out, but send any detail the client needs over a separate authenticated request.
 - **`binaryType` defaults to `"arraybuffer"`**, not the browser's `"blob"`. `event.data` is a `string` for text frames and an `ArrayBuffer` for binary ones, so branch on `typeof`.
 
 **With auth.** Browsers can't set headers on a WebSocket, so authenticate with a `?token=` query param (verify it the same way as the [agent backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks): `jwtVerify` against your JWKS) and refuse before upgrading:
@@ -354,37 +358,52 @@ export default {
 
 **Subprotocols.** Pass `{ protocol }` to select one the client offered; it is echoed in `Sec-WebSocket-Protocol` and exposed as `socket.protocol`. Selecting one the client did not offer throws a `TypeError`. Omit it and no protocol is negotiated. No extensions are negotiated either — `socket.extensions` is always `""` and `permessage-deflate` is not available.
 
-**Hono.** Nothing special is needed: `upgradeWebSocket` takes a `Request`, so call it inside a route with `c.req.raw` and return the response. Auth and everything else is ordinary middleware.
+**Hono.** Use `upgradeWebSocket` from `@neon/functions/hono` — the same primitive as Hono's own WebSocket helper, with no `ws` dependency and not the deprecated `@hono/node-ws`. Auth is ordinary middleware; gate upgrade requests before `next()`:
 
 ```typescript
 // src/index.ts
 import { Hono } from "hono";
-import { upgradeWebSocket } from "@neon/functions";
+import { upgradeWebSocket } from "@neon/functions/hono";
 
-const app = new Hono();
+const clients = new Set<WebSocket>();
 
-app.get("/", (c) => c.text("ok"));
+const app = new Hono<{ Variables: { userId: string } }>();
 
-app.get("/ws", async (c) => {
+app.use("/ws", async (c, next) => {
   const identity = await verifyToken(c.req.query("token"));
   if (!identity) return c.text("Unauthorized", 401);
-
-  const { socket, response } = upgradeWebSocket(c.req.raw);
-  socket.addEventListener("open", () => socket.send("welcome"));
-  socket.addEventListener("message", (event) =>
-    socket.send(`echo: ${event.data}`),
-  );
-  return response;
+  c.set("userId", identity.id);
+  await next();
 });
 
-export default { fetch: (request: Request) => app.fetch(request) };
+app.get(
+  "/ws",
+  upgradeWebSocket((c) => ({
+    onOpen(_event, ws) {
+      clients.add(ws.raw);
+      ws.send("welcome");
+    },
+    onClose(_event, ws) {
+      clients.delete(ws.raw);
+    },
+    onMessage(event, ws) {
+      ws.send(`echo: ${event.data}`);
+    },
+  })),
+);
+
+export default app;
 ```
+
+Connect from the browser with the function's `wss://` URL (from `neon functions get <slug>`), for example `new WebSocket("wss://<branch>-<slug>.compute.<region>.aws.neon.tech/ws?token=<jwt>")`. Reconnect on close — isolates are evictable and idle connections may be terminated after 15 minutes.
+
+Do not put `cors()` on the upgrade route, and do not read `c.res` before `await next()` or call `c.header()` after it — both rebuild the `101` and break the upgrade. See `@neon/functions` README for the full middleware table.
 
 ### Heartbeat (keep the socket alive)
 
 A connection stays open **only while bytes flow**: Neon evicts a silent stream after 15 minutes ([Timeouts and Runtime Limits](#timeouts-and-runtime-limits)), and intermediary proxies / load balancers are usually far stricter (often tens of seconds). Don't rely on the app being chatty enough — send a periodic keepalive from the server so the socket never goes quiet.
 
-The standard `WebSocket` interface has no `ping()`, so send an application-level message the client ignores:
+The standard `WebSocket` interface has no `ping()`, so send an application-level message the client filters out:
 
 ```typescript
 const HEARTBEAT_MS = 25_000; // comfortably under proxy idle timeouts
@@ -397,7 +416,7 @@ const beat = setInterval(() => {
 beat.unref?.();
 ```
 
-The client should skip these when handling messages. The server does answer a client-sent ping frame with a pong automatically, so a browser client can drive the heartbeat instead if you'd rather not filter messages.
+The client skips these when handling messages. There is no protocol-level shortcut here: the standard `WebSocket` from `upgradeWebSocket` has no `ping()`, and a browser can't send ping frames from JavaScript, so an application-level message is the only keepalive a browser client can use. (A Node `ws` client can send ping frames, and the server auto-replies with a pong, but a browser can't.)
 
 ### Keeping clients in sync across isolates (do not skip this)
 
@@ -408,26 +427,42 @@ Module state doesn't survive eviction anyway, so **Postgres is the shared source
 **1. Poll Postgres — the default, and the only option that keeps Scale to Zero.** Each isolate re-reads the shared state (or rows past a cursor) on a short interval and pushes changes to its own clients. One query per isolate per tick (not per client), and none when the isolate has no clients — so an idle compute still suspends.
 
 ```typescript
-let lastId = 0;
-const poller = setInterval(async () => {
-  if (clients.size === 0) return; // no clients here → no query → compute can scale to zero
-  const { rows } = await pool.query(
-    "SELECT id, payload FROM events WHERE id > $1 ORDER BY id",
-    [lastId],
-  );
-  for (const { id, payload } of rows) {
-    lastId = id;
-    for (const socket of clients) {
-      if (socket.readyState === socket.OPEN) socket.send(payload);
+let lastId = "0"; // bigint id, so a string
+let polling = false;
+
+async function poll() {
+  if (polling || clients.size === 0) return; // guard overlap; no clients → no query → compute can scale to zero
+  polling = true;
+  try {
+    const { rows } = await pool.query(
+      "SELECT id, payload FROM events WHERE id > $1 ORDER BY id",
+      [lastId],
+    );
+    for (const { id, payload } of rows) {
+      lastId = id;
+      for (const socket of clients) {
+        if (socket.readyState === socket.OPEN) socket.send(payload);
+      }
     }
+  } catch (err) {
+    console.error("[poll]", err);
+  } finally {
+    polling = false;
   }
-}, 1000);
-poller.unref?.();
+}
+
+// Seed from the latest id so a fresh isolate sends only new rows, not the whole table, then poll.
+pool
+  .query("SELECT coalesce(max(id), 0)::text AS id FROM events")
+  .then((seed) => { lastId = seed.rows[0].id; })
+  .catch((err) => console.error("[seed]", err))
+  .finally(() => setInterval(poll, 1000).unref?.());
 ```
 
 - **Latency:** up to the interval (~1s) — fine for counters, chat, and dashboards.
 - **Scaling:** database load grows with the number of live isolates, not clients. Keep the cursor on an indexed `serial`/`bigserial` PK and the interval sane.
 - **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
+- **Ordering:** `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually fine; when you need every row, use `LISTEN`/`NOTIFY` or poll by `created_at` with a small overlap window and dedupe by id.
 
 **2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
 
@@ -442,7 +477,7 @@ const CHANNEL = "chat_events";
 // One dedicated DIRECT connection per isolate, just to receive events.
 // Use DATABASE_URL_UNPOOLED — LISTEN needs a real session, not a pooled one.
 // Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
-// An error listener keeps the isolate alive; the feed stays down until the isolate restarts.
+// The error listener keeps the process alive; reconnect the client on error in production (omitted here).
 const listener = new Client({
   connectionString: process.env.DATABASE_URL_UNPOOLED,
 });
@@ -508,16 +543,19 @@ When you only need **server → client** streaming (live counters, notifications
 // src/index.ts — minimal SSE endpoint
 const encoder = new TextEncoder();
 export default {
-  fetch: () =>
-    new Response(
+  fetch: () => {
+    let t: ReturnType<typeof setInterval>;
+    return new Response(
       new ReadableStream<Uint8Array>({
         start(controller) {
           controller.enqueue(encoder.encode("data: hello\n\n"));
-          const t = setInterval(
+          t = setInterval(
             () => controller.enqueue(encoder.encode(": ping\n\n")),
             25_000,
           );
-          return () => clearInterval(t); // fires when the client disconnects
+        },
+        cancel() {
+          clearInterval(t); // fires when the client disconnects
         },
       }),
       {
@@ -526,7 +564,8 @@ export default {
           "Cache-Control": "no-cache, no-transform",
         },
       },
-    ),
+    );
+  },
 };
 ```
 

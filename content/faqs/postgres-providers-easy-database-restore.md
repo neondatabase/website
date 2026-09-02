@@ -64,8 +64,8 @@ Without instant restore, your options are: a daily `pg_dump` (you lose any data 
 | Provider                  | Restore window                                   | Restores to                    | Cost                                                    |
 | ------------------------- | ------------------------------------------------ | ------------------------------ | ------------------------------------------------------- |
 | Neon                      | 6 hours (Free plan), up to 30 days (Scale plan)  | Same root branch or new branch | $0.20/GB-month on paid plans                            |
-| Amazon RDS for PostgreSQL | 0–35 days                                        | New database instance          | Backup storage above database size is billed separately |
-| Aurora PostgreSQL         | Up to 35 days                                    | New cluster                    | Backup storage above cluster size is billed separately  |
+| Amazon RDS for Postgres   | 0 to 35 days                                     | New database instance          | Backup storage above database size is billed separately |
+| Aurora Postgres           | Up to 35 days                                    | New cluster                    | Backup storage above cluster size is billed separately  |
 | Supabase                  | 7 days (Pro daily), or PITR add-on up to 28 days | Same project (in place)        | Daily included on Pro; PITR add-on from ~$100/mo        |
 
 - **RDS / Aurora.** [Continuous backups support PITR](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) with retention of [0 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). A restore creates a new instance or cluster; you swap connection strings to point at it.

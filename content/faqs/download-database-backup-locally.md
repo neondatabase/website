@@ -49,7 +49,7 @@ Add `--no-owner` if you're restoring to a different role, and `--clean --if-exis
 
 ## When to use a local backup
 
-Neon already keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window): up to 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. For most accidental-delete recoveries, restoring from history inside Neon is faster than rebuilding from a local file.
+Lakebase Postgres already keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window): up to 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. For most accidental-delete recoveries, restoring from history inside Neon is faster than rebuilding from a local file.
 
 Local `pg_dump` backups are useful for:
 

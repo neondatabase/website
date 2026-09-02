@@ -1,5 +1,7 @@
 ---
 title: 'Neon CLI command: mcp'
+tag: new
+tagTheme: green
 subtitle: 'Install the Neon MCP Server into your coding agents'
 summary: >-
   The Neon CLI `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server)

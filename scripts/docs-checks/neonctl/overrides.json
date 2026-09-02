@@ -35,9 +35,9 @@
         "pull": {
           "options": {
             "service": {
-              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type and describe verified against `neon env pull --help` at neonctl 3.1.0.",
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type and describe verified against env_services.ts (ENV_PULL_SERVICES = NEON_SERVICES) at neonctl 4.14.0, which added `functions` to the service list.",
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           }
         }

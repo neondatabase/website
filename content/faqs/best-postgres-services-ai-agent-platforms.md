@@ -35,7 +35,7 @@ When the session goes idle, compute suspends after 5 minutes and stops accumulat
 For platforms running thousands of these, the [Agent Plan](/docs/introduction/agent-plan) gives you:
 
 - Two organizations: a sponsored Free plan organization (up to 30,000 projects, Neon covers the cost) for your free users, and a paid organization for your paying users
-- Compute at $0.106/CU-hour in the paid org, lower than the standard Scale rate
+- Compute at $0.106/CU-hour in the paid org, lower than the standard Scale plan rate
 - Up to $25,000 in initial usage credits
 - Higher Management API rate limits
 - A shared Slack channel for support

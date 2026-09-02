@@ -19,7 +19,7 @@ Neon pairs well with Drizzle and Prisma. Lakebase Postgres separates storage fro
 
 A typical Drizzle or Prisma app opens a connection per request. On a serverless platform (Vercel, AWS Lambda, Cloudflare Workers), each function invocation can create a new client. A 1 CU Neon compute caps Postgres at 419 connections, so a busy app exhausts that pool fast. See the [connection pooling guide](/docs/connect/connection-pooling) for the full table of `max_connections` per compute size.
 
-Neon's pooled endpoint, powered by PgBouncer, accepts up to **10,000 client connections** and multiplexes them onto the underlying Postgres connections. To use it with Prisma or Drizzle, point your connection string at the `-pooler` host:
+Neon's pooled endpoint, powered by PgBouncer, accepts up to 10,000 client connections and multiplexes them onto the underlying Postgres connections. To use it with Prisma or Drizzle, point your connection string at the `-pooler` host:
 
 ```bash
 DATABASE_URL="postgresql://user:password@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"

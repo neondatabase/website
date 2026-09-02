@@ -13,13 +13,13 @@ nextLink:
   slug: best-managed-postgres-options-for-teams-migrating
 ---
 
-If the smallest instance on RDS, Cloud SQL, or Aurora is more than you need, the answer isn't a smaller fixed instance. It's a database that scales to zero when you aren't using it. The minimum compute is 0.25 CU (≈1 GB RAM), and it suspends after 5 minutes of inactivity. You pay in CU-hours of active time plus storage, not for a 24/7 instance.
+If the smallest instance on RDS, Cloud SQL, or Aurora is more than you need, the answer is a database that scales to zero when you aren't using it. On Lakebase Postgres, the minimum compute is 0.25 CU (≈1 GB RAM), and it suspends after 5 minutes of inactivity. You pay in CU-hours of active time plus storage, not for a 24/7 instance.
 
-## What "smallest available" actually costs elsewhere
+## What "smallest available" costs elsewhere
 
 Fixed-capacity providers charge for the instance, not the workload:
 
-- **RDS for PostgreSQL** bills by database instance-hour. A `db.t4g.micro` runs 24/7 even at 0% CPU.
+- **RDS for Postgres** bills by database instance-hour. A `db.t4g.micro` runs 24/7 even at 0% CPU.
 - **Aurora Serverless v2** supports a minimum of 0 ACUs with [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), and 1 ACU is approximately 2 GiB of memory ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)). You aren't charged for instance capacity while paused. The auto-pause feature has to be turned on, and the AWS docs note it's intended for workloads where a brief pause is acceptable.
 - **Supabase** on the Pro Plan starts at $25/month plus Compute Hours per project. The smallest paid Compute size is Micro at ~$10/month ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)). Compute is billed by the hour but doesn't suspend automatically on paid plans.
 
@@ -43,7 +43,7 @@ When you outgrow Free, the Launch plan is pay-as-you-go:
 - $0.35/GB-month storage
 - No monthly minimum
 
-A 0.25 CU compute running about 40 hours total in a month (10 CU-hours) with 2 GB of storage works out to about $2.31 (from the [Launch plan examples](/docs/introduction/plans#launch-plan)).
+A 0.25 CU compute running about 40 hours total in a month (10 CU-hours) with 2 GB of storage works out to about $1.76: $1.06 of compute plus $0.70 of storage. The [Launch plan examples](/docs/introduction/plans#launch-plan) put the same workload at $2.31 once you add a 1 GB dev branch and 1 GB of instant restore history.
 
 ## How autoscaling helps low-traffic projects
 

@@ -7,12 +7,12 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-08-26T10:59:34.509Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 
-> During the beta, object storage is available in the **AWS us-east-2** region only and is free to use, subject to usage limits. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
+> During the beta, object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), and is free to use, subject to usage limits. Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
@@ -55,7 +55,7 @@ neon bootstrap --template ai-sdk
 
 During the beta, the following usage limits apply:
 
-- **Region**: object storage is available in AWS us-east-2 only.
+- **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
 - **Free storage**: the Free plan includes 5 GB, measured across your whole account rather than per project. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
 - **Object size**: objects can be up to 5 GiB, whether uploaded in a single request or with [multipart upload](/docs/storage/objects#multipart-upload). [Contact support](/docs/introduction/support) if you need to store larger objects.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).

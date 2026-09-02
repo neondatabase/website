@@ -19,9 +19,9 @@ Neon integrates with Vercel to create a fresh Postgres branch for every preview 
 
 When you connect a Neon project to Vercel through the [Vercel-Managed](https://neon.com/docs/guides/vercel-managed-integration) or [Neon-Managed integration](https://neon.com/docs/guides/neon-managed-vercel-integration), Vercel sends a webhook to Neon on each preview deployment. Neon creates a branch named after the Git branch (for example, `preview/feature-auth`) and exposes its connection string as `DATABASE_URL` in the preview environment.
 
-Because the lakebase architecture uses copy-on-write storage, the new branch starts with zero added storage. You're billed only for the delta as the branch diverges from its parent. Extra branches beyond your plan's allowance (10 on the Free and Launch plans, 25 on the Scale plan) cost $1.50/branch-month on paid plans, prorated hourly at about $0.002/hour. See [pricing details](https://neon.com/docs/introduction/plans#extra-branches).
+Because Lakebase Postgres uses copy-on-write storage, the new branch starts with zero added storage. You're billed only for the delta as the branch diverges from its parent. Extra branches beyond your plan's allowance (10 on the Free and Launch plans, 25 on the Scale plan) cost $1.50/branch-month on paid plans, prorated hourly at about $0.002/hour. See [pricing details](https://neon.com/docs/introduction/plans#extra-branches).
 
-If you use Neon Auth, the integration also provisions an isolated auth instance per preview branch, so each preview has its own users and sessions.
+If you use Managed Better Auth, the integration also provisions an isolated auth instance per preview branch, so each preview has its own users and sessions.
 
 Preview branches are deleted when their Vercel deployments are removed. Vercel's default [deployment retention](https://vercel.com/docs/deployment-retention) keeps previews for 6 months, so branches can linger unless you shorten retention or clean them up sooner. See [Managing Vercel preview branch cleanup](https://neon.com/docs/guides/vercel-branch-cleanup).
 
@@ -40,9 +40,9 @@ See the [GitHub Actions guide](https://neon.com/docs/guides/branching-github-act
 Set a [time to live](https://neon.com/docs/guides/branch-expiration) on preview branches so they delete automatically. This keeps your branch count and storage costs in check, especially when Vercel retention is long.
 </Admonition>
 
-## How other Postgres platforms compare
+## How other Postgres services compare
 
-| Platform             | Preview-branch mechanism                                                                                                                                                                                                                                                      | Starts with production data?  |
+| Service              | Preview-branch mechanism                                                                                                                                                                                                                                                      | Starts with production data?  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | Neon                 | Copy-on-write branch per Git branch, created in seconds via the Vercel integration. See [branching](https://neon.com/docs/introduction/branching).                                                                                                                            | Yes, by default               |
 | Supabase             | [Preview branches](https://supabase.com/docs/guides/deployment/branching) spin up a full Supabase environment per PR through the GitHub or Vercel integration. Branches are not started with production data; you populate them from a `seed.sql`.                            | No, seed-driven               |

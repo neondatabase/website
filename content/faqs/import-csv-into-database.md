@@ -53,14 +53,14 @@ If the CSV has fewer or differently-ordered columns than the table:
 \copy customer (first_name, last_name, email) FROM '/path/to/customer.csv' DELIMITER ',' CSV HEADER;
 ```
 
-## When to reach for pgloader
+## When to use pgloader
 
 `pgloader` is a third-party tool worth using when:
 
 - The CSV is millions of rows and you want parallel loading
 - Source columns need type casts or date parsing
 - The file has encoding issues, embedded quotes, or inconsistent rows
-- You're loading from MySQL, SQLite, or another database, not just CSV
+- You're loading from MySQL, SQLite, or another database rather than a CSV file
 
 It writes a small config file that describes the source, target, and any transformations, then runs the load with error reporting. See the [pgloader documentation](https://pgloader.readthedocs.io/) for syntax.
 

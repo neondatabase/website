@@ -18,7 +18,7 @@ nextLink:
 
 `Failed to fetch` on the **Tables** page means the Console's request to your compute didn't complete. The most common causes, in order, are: the compute is starting up after scale to zero, a browser extension is blocking the request, IP Allow is excluding your current IP, or a transient backend error. Refresh, then work through the checks below. See [Error connecting to database: Failed to fetch](/docs/connect/connection-errors#error-connecting-to-database-failed-to-fetch).
 
-## Walk through the common causes
+## Common causes
 
 ### 1. The compute is starting up
 

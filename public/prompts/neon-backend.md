@@ -1,6 +1,6 @@
 Get this project set up on Neon so I can build a backend on it. Work through it with the Neon CLI; don't rely on interactive pickers.
 
-First, ask me in one message (don't guess or pick a default): which org, an existing `aws-us-east-2` project to reuse or a name to create a new one there, and a one-line description of what I'm building. Neon's backend services (Functions, Object Storage, and the AI Gateway) are only available in `aws-us-east-2` during beta.
+First, ask me in one message (don't guess or pick a default): which org, an existing project in a supported region (`aws-us-east-2` or `aws-eu-central-1`) to reuse or a name to create a new one, and a one-line description of what I'm building. Neon's backend services (Functions, Object Storage, and the AI Gateway) are available in `aws-us-east-2` and `aws-eu-central-1` during beta. Support is expanding toward all regions.
 
 Then set up the tooling and connect:
 

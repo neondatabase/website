@@ -4,13 +4,13 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  A Neon project is the top-level workspace that groups branches, databases,
-  roles, and computes. This page covers the full project lifecycle: create,
-  configure, and delete, via the Console or API. Use it when you need to set
-  project-level defaults such as compute autoscaling, history window for
-  instant restore and Time Travel, IP Allow rules, logical replication, or
-  project access. Deleted projects can be recovered within a 7-day
-  window using the CLI or API.
+  On paid plans, there's no hard per-branch size limit; project storage grows
+  with your usage. A Neon project is the top-level workspace that groups branches,
+  databases, roles, and computes. This page covers the full project lifecycle: create, configure, and
+  delete, via the Console or API. Use it when you need to set project-level
+  defaults such as compute autoscaling, history window for instant restore and
+  Time Travel, IP Allow rules, logical replication, or project access. Deleted
+  projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
 updatedOn: '2026-09-01T16:13:43.529Z'
@@ -26,7 +26,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), there's no hard per-branch size limit**; your storage grows with your usage, and you pay only for the storage you use. The Free plan includes 0.5 GB per project, shared across all branches.
 
 ## Create a project
 
