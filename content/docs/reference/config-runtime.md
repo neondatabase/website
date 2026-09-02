@@ -15,7 +15,7 @@ enableTableOfContents: true
 If you just want to run `neon.ts` from the command line, use the [`neon config` / `neon deploy` commands](/docs/cli/config) instead. Reach for this package only when you need to call the same logic from your own Node.js code.
 
 <Admonition type="note">
-`@neon/config-runtime` is filesystem- and env-agnostic: it never reads a `.neon` context file or `NEON_*` environment variables (except the `NEON_API_KEY` / `NEON_API_HOST` fallbacks documented under [Authentication](#authentication)). You resolve `projectId` and `branchId` yourself and pass them in explicitly. This is different from the `neon` CLI, which resolves both from `.neon` / `NEON_*` for you.
+`@neon/config-runtime` doesn't read a `.neon` context file, `NEON_*` environment variables, or CLI credential files. Resolve `projectId` and `branchId` yourself, then pass either an API key or a custom `api` adapter. This is different from the `neon` CLI, which resolves project context and credentials for you.
 </Admonition>
 
 ## Install
@@ -48,7 +48,11 @@ Passing a branch name where an id is expected fails with a `PLATFORM_BRANCH_NOT_
 import config from "../neon";
 import { apply, inspect, plan } from "@neon/config-runtime/v1";
 
-const target = { projectId: "solitary-fog-12345678", branchId: "br-cool-forest-12345678" };
+const target = {
+  projectId: "solitary-fog-12345678",
+  branchId: "br-cool-forest-12345678",
+  apiKey: process.env.NEON_API_KEY!,
+};
 
 const live = await inspect(target); // read the branch's current live state
 const diff = await plan(config, target); // dry-run: what would apply change?
@@ -59,15 +63,11 @@ const result = await apply(config, target); // apply the policy for real
 
 ## Authentication
 
-None of the functions on this page take a Neon session or browser login. They authenticate with a Neon API key, resolved in this order:
+None of the functions on this page take a Neon session or browser login. [Create a Neon API key in the Console](https://console.neon.tech/app/settings/api-keys), then pass it in the `apiKey` option, or inject your own `NeonApi` adapter with `api`. The package doesn't read `NEON_API_KEY` or the credentials written by `neon auth`. If you omit both `apiKey` and `api`, the operation throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY`.
 
-1. The `apiKey` option, if you pass one.
-2. The `NEON_API_KEY` environment variable.
-3. `~/.config/neonctl/credentials.json`, written after running `neon auth` (or `npx neonctl auth`): the same file the CLI itself uses.
+For `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`, the optional `apiHost` selects a non-production API host. If you omit it, the package uses Neon's production API. The package doesn't read `NEON_API_HOST`. `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call to `createBranch`.
 
-If none of these resolve, every function throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY` and a message pointing you to [console.neon.tech/app/settings/api-keys](https://console.neon.tech/app/settings/api-keys) to generate a key. `apiHost` follows the same pattern for `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`: pass it explicitly, or let it fall back to `NEON_API_HOST` and then Neon's production API. `createBranch` is the exception: `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call there. It still honors `NEON_API_HOST` from the environment if you set it.
-
-For CI, don't rely on the local CLI credentials fallback. A script that works on a developer machine because `neon auth` wrote `~/.config/neonctl/credentials.json` will fail in a clean CI runner. Pass `apiKey` explicitly or set `NEON_API_KEY` in the job environment.
+In CI, read the secret from your CI environment and pass its value as `apiKey`, as shown in [A custom CI step](#a-custom-ci-step).
 
 Pass `api` instead to inject your own `NeonApi` adapter (used internally for tests; most callers don't need this).
 
@@ -87,8 +87,8 @@ Reads a branch's live Neon state and reverse-engineers it into a `neon.ts`-shape
 | ------------------------------ | ---------- | ------------------------------------------------------------------------- |
 | `projectId`                    | `string`   | Required.                                                                 |
 | `branchId`                     | `string`   | Required. Must already exist on the project; `inspect` never creates one. |
-| `apiKey`                       | `string?`  | See [Authentication](#authentication).                                    |
-| `apiHost`                      | `string?`  | See [Authentication](#authentication).                                    |
+| `apiKey`                       | `string?`  | Required unless you pass `api`.                                           |
+| `apiHost`                      | `string?`  | Optional non-production API host. Defaults to Neon's production API.      |
 | `api`                          | `NeonApi?` | Inject a custom adapter (mainly for tests).                               |
 
 Returns a `PulledBranchConfig`:
@@ -152,7 +152,7 @@ Creates a branch **from** a `neon.ts` policy and brings it up with its declared 
 | --------------------------- | ------------------ | ------------------------------------------------------------ |
 | `projectId`                 | `string`           | Required.                                                    |
 | `branchName`                | `string`           | Required. Must not already exist on the project.             |
-| `apiKey`                    | `string?`          | See [Authentication](#authentication).                       |
+| `apiKey`                    | `string?`          | Required unless you pass `api`.                              |
 | `api`                       | `NeonApi?`         | Inject a custom adapter.                                     |
 | `bundleFunction`            | `FunctionBundler?` | Custom bundler. See [Function bundling](#function-bundling). |
 
@@ -239,18 +239,19 @@ Putting the pieces together: a script that plans and applies a policy against a 
 ```ts filename="scripts/deploy-branch.ts"
 import { loadConfigFromFile, plan, apply } from "@neon/config-runtime/v1";
 
-// Resolve these yourself: from CI variables you set, `neon branches list --output json`,
-// or the Neon API. This package never reads `.neon` or `NEON_*` (besides NEON_API_KEY / NEON_API_HOST).
+// Resolve these yourself from CI variables, `neon branches list --output json`,
+// or the Neon API. This package never reads `.neon` or `NEON_*`.
 const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
+const apiKey = process.env.NEON_API_KEY!;
 const shouldApply = process.env.NEON_APPLY === "true";
 
 const { config } = await loadConfigFromFile();
 
-// NEON_API_KEY in the environment is picked up automatically, so there's no need to pass apiKey.
 const target = {
   projectId,
   branchId,
+  apiKey,
   updateExisting: true,
   allowProtectedBranch: true,
 };
@@ -285,7 +286,7 @@ The subclasses relevant to programmatic use:
 | `PushConflictError`                                   | `PLATFORM_PUSH_CONFLICT`      | `apply`, `pushConfig` | Local policy conflicts with remote state and you didn't pass `updateExisting`. Carries a `conflicts: ConflictReport[]` array.                                                  |
 | `PushAbortedError`                                    | `PLATFORM_PUSH_ABORTED`       | `pushConfig`          | Your `confirm` callback returned `false`. Carries `branchName` and `reasons`.                                                                                                  |
 | `ConfigLoadError`                                     | `PLATFORM_CONFIG_LOAD_FAILED` | `loadConfigFromFile`  | No config file found, or it failed to evaluate.                                                                                                                                |
-| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`    | any operation         | No `apiKey` could be resolved. See [Authentication](#authentication).                                                                                                          |
+| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`    | any operation         | You passed neither `apiKey` nor an `api` adapter. See [Authentication](#authentication).                                                                                       |
 | `PlatformError` with code `PLATFORM_BRANCH_NOT_FOUND` | `PLATFORM_BRANCH_NOT_FOUND`   | any operation         | `branchId` doesn't exist on the project (see [Resolving project and branch ids](#resolving-project-and-branch-ids)), or a policy's `parent` names a branch that doesn't exist. |
 
 A `ConflictReport` (on `PushConflictError.conflicts` and `PushResult.conflicts`) has `kind`, `identifier`, `field`, `current`, `desired`, and a human-readable `reason`.
