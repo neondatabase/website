@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-09-01T11:33:24.543Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -83,7 +83,7 @@ neon link
 You will be prompted to select your organization. After selecting your organization, choose an existing Neon project if you already have one, or create a new project named `llm-proxy-demo`.
 
 <Admonition type="note">
-Ensure you select the **AWS US East 2 (Ohio)** region when creating your Neon project, as Neon Functions are currently only available in this region during Beta.
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
 </Admonition>
 
 ```bash

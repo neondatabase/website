@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-09-01T11:33:24.543Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -112,7 +112,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose the **AWS US East 2 (Ohio)** (`aws-us-east-2`) region, since Neon Functions are available only there during beta.
+You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
 
 Next, install the required dependencies:
 
@@ -137,7 +137,7 @@ neon link
 Select your organization and choose to create a new project named `neon-inngest-demo`.
 
 <Admonition type="note">
-Ensure you select the **AWS US East 2 (Ohio)** region (`aws-us-east-2`) when creating your Neon project, as Neon Functions are currently available in this region during beta. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
 </Admonition>
 
 A `.env.local` file should be created automatically in your project root with your Neon project details, including `DATABASE_URL` and other Neon-specific variables.

@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-09-01T11:33:24.543Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -23,7 +23,7 @@ You'll set up that automation with GitHub Actions and build a small API on Neon 
 Because the pipeline is just the [Neon CLI](/docs/cli) running in a CI job, the same recipe works in GitLab CI, CircleCI, Azure DevOps, or any other CI/CD system. The last section shows how to adapt it.
 
 <Admonition type="note" title="Neon Functions are in beta">
-Functions are currently available only in the **AWS US East (Ohio)** (`aws-us-east-2`) region, so create your Neon project there to follow along. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
+Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), so create your Neon project in one of these regions to follow along. Support is expanding toward all regions. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
 </Admonition>
 
 <CopyPrompt
@@ -64,7 +64,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), because Neon Functions are currently available only in this region during beta. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
 
 ```text
 $ neon link

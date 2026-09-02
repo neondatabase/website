@@ -36,7 +36,7 @@ curl -X POST https://console.neon.tech/api/v2/projects \
 
 The response includes a ready-to-use connection string. Store it against the user app in your control plane. See [Manage projects](/docs/manage/projects) for the full API.
 
-For platforms running thousands of these, the [Agent Plan](/docs/introduction/agent-plan) gives you a two-organization structure: a sponsored Free organization (up to 30,000 projects, Neon covers the cost) for free users, and a paid organization at $0.106/CU-hour for paying users. The paid organization starts with up to $25,000 in usage credits and gets higher API rate limits.
+For platforms running thousands of these, the [Agent Plan](/docs/introduction/agent-plan) gives you a two-organization structure: a sponsored Free plan organization (up to 30,000 projects, Neon covers the cost) for free users, and a paid organization at $0.106/CU-hour for paying users. The paid organization starts with up to $25,000 in usage credits and gets higher API rate limits.
 
 ## What it costs in practice
 
@@ -52,10 +52,10 @@ Set a max CU on each user project so one user's runaway workload can't generate 
 
 ## Why this pattern is hard on other Postgres services
 
-- **Supabase**: provisioning is API-driven via the [Management API](https://supabase.com/docs/reference/api/v1-create-a-project) and each project is a fully isolated environment, but paid projects run continuously and start around $10/month each ([billing](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)). Free Plan projects pause, but a single organization is capped at 2 free projects ([billing FAQ](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have)).
+- **Supabase**: provisioning is API-driven via the [Management API](https://supabase.com/docs/reference/api/v1-create-a-project) and each project is a fully isolated environment, but paid projects run continuously and start around $10/month each ([billing](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)). Free Plan projects pause, but you're capped at 2 active free projects counted across every organization where you're an Owner or Admin ([billing FAQ](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have)).
 - **Aurora Serverless v2**: now supports scale-to-zero via [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) when min ACU is set to 0. Each user app still needs its own cluster, and the RDS API takes minutes to bring one up, so first-app-load latency on a fresh provision is significantly higher than Neon's.
 - **RDS for Postgres**: instance-based pricing means every user app costs the same whether anyone opens it or not. Per-app isolation isn't really economically viable past a small fleet.
 
 The combination of seconds-to-provision through the API, resume from idle in a few hundred milliseconds, and an Agent Plan that sponsors free-user projects is why many platforms doing this pattern at scale choose Neon.
 
-<CTA title="Building a platform?" description="The Agent Plan is built for this. Apply for a sponsored Free organization and usage credits." buttonText="Apply for the Agent Plan" buttonUrl="/use-cases/ai-agents" />
+<CTA title="Building a platform?" description="The Agent Plan is built for this. Apply for a sponsored Free plan organization and usage credits." buttonText="Apply for the Agent Plan" buttonUrl="/use-cases/ai-agents" />

@@ -26,7 +26,7 @@ The Neon [Free plan](/docs/introduction/plans) is designed for prototypes and sm
 - Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes of inactivity
 - 6-hour instant restore window, up to 1 GB of change history
-- 5 GB of public network transfer per month
+- 5 GB of public network transfer per project per month
 
 100 CU-hours is enough to run a 0.25 CU compute for about 400 hours a month, or a 0.5 CU compute for 200 hours. Combined with scale-to-zero, that covers most side projects.
 
@@ -47,7 +47,7 @@ If you blow past 100 CU-hours, run out of storage, or want to disable scale-to-z
 - Storage: $0.35/GB-month
 - 500 GB of public network transfer per project included
 
-There's no monthly minimum. A light project running 10 CU-hours/month with 2 GB of storage works out to about $2.31 on Launch (see the [usage examples](/docs/introduction/plans#launch-plan)).
+There's no monthly minimum. A light project running 10 CU-hours/month with 2 GB of storage works out to about $1.76 on Launch: $1.06 of compute plus $0.70 of storage. Add a dev branch and a day of restore history and you're at $2.31, the light-usage figure in the [usage examples](/docs/introduction/plans#launch-plan).
 
 <Callout title="Branching is free under the limits">
 Each project gets 10 branches on Free. Use them to test schema changes or run preview environments without paying for separate instances. See [Branching](/docs/introduction/branching).
@@ -55,12 +55,12 @@ Each project gets 10 branches on Free. Use them to test schema changes or run pr
 
 ## How the free plans compare
 
-| Provider         | Free projects                                                                    | Idle behavior                                                                                                                    | Storage                                                                                 |
-| ---------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Neon Free        | 100 projects                                                                     | Auto-suspend after 5 minutes, resume in a few hundred ms                                                                         | 0.5 GB per project                                                                      |
-| Supabase Free    | 2 active projects per organization; paused projects don't count toward the limit | Inactive projects are paused (manual unpause to restore) ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase)) | 500 MB per project ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) |
-| AWS RDS / Aurora | No permanent Free plan (new-account credits only)                                | Instances run 24/7 unless stopped manually                                                                                       | Pay-per-GB                                                                              |
+| Provider         | Free projects                                                                                                                                                                     | Idle behavior                                                                                                                    | Storage                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Neon Free        | 100 projects                                                                                                                                                                      | Auto-suspend after 5 minutes, resume in a few hundred ms                                                                         | 0.5 GB per project                                                                      |
+| Supabase Free    | 2 active projects across every org where you're Owner or Admin; paused projects don't count                                                                                       | Inactive projects are paused (manual unpause to restore) ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase)) | 500 MB per project ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) |
+| AWS RDS / Aurora | Aurora only: 4 ACUs and 2 clusters on the AWS Free Tier ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html)). RDS runs on sign-up credits | Instances run 24/7 unless stopped manually or paused at 0 ACUs                                                                   | 1 GB per Aurora cluster; otherwise pay-per-GB                                           |
 
-Supabase pauses Free Plan projects after a period of inactivity and requires a manual unpause, while Neon's scale-to-zero resumes automatically on every query. AWS doesn't offer a free Postgres plan beyond promotional credits, so steady-state cost is the smallest instance class billed 24/7.
+Supabase pauses Free Plan projects after a period of inactivity and requires a manual unpause, while Neon's scale-to-zero resumes automatically on every query. On AWS, only Aurora Postgres has a standing free allowance, and it's small: 4 ACUs and 1 GB per cluster, two clusters per account. RDS for Postgres runs on sign-up credits, after which the steady-state cost is the smallest instance class billed 24/7.
 
 <CTA title="Try Neon free" description="No credit card required to start." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-09-01T11:33:24.543Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -28,7 +28,7 @@ The standard fix is a vacuum job: list every object in the bucket, load every `o
 Neon removes that trade-off with [Neon Object Storage](/docs/storage/overview). Buckets [branch with your database](/docs/storage/objects#object-branching), so creating a branch gives you an isolated copy of your data in both systems: the Postgres rows and the S3 objects. You can run the real vacuum, actual `DeleteObject` calls and all, against the branch, verify that rows and objects still agree, and only then run the same script against production with the safeguards described below.
 
 <Admonition type="info" title="Beta">
-Neon Object Storage is in beta and available only in the AWS `us-east-2` region. Create your project there to follow along.
+Neon Object Storage is in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. Create your project in one of these regions to follow along.
 </Admonition>
 
 In this tutorial, you'll build a small demo app that simulates the drift problem, then write a vacuum job and test it on a Neon branch before promoting it to production. The workflow is identical for your own application: declare the bucket, measure drift with the checker, run the vacuum on a branch, and promote.
@@ -79,7 +79,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `postgres-s3-drift-demo` (or pick an existing one). Next, select a region. Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), as Neon Object Storage is currently available only in this region during beta. When asked which Neon services you require, select **Object Storage**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `postgres-s3-drift-demo` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Object Storage is currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Object Storage**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
 
 ```text
 $ neon link

@@ -53,10 +53,10 @@ For migrations you want to keep a fixed restore point for, take a [snapshot](/do
 
 ## How other providers approach safe migrations
 
-- **RDS for PostgreSQL** offers [blue/green deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-creating.html), which create a staging environment (the "green" instance) that's kept in sync with production using logical replication. The green environment is a separate database instance that you provision and pay for while it's running. It's well-suited to engine upgrades and schema changes but slower to spin up than a copy-on-write branch.
+- **RDS for Postgres** offers [blue/green deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-creating.html), which create a staging environment (the "green" instance) that's kept in sync with production using logical replication. The green environment is a separate database instance that you provision and pay for while it's running. It's well-suited to engine upgrades and schema changes but slower to spin up than a copy-on-write branch.
 - **Aurora** has a similar blue/green deployment model on top of cluster-level cloning. Clones share storage initially but become independent copies as data diverges.
 - **Supabase** [preview branches](https://supabase.com/docs/guides/deployment/branching/working-with-branches) create a separate Postgres database per branch, primarily intended for previewing schema migrations from a Git pull request. Branches are reseeded from `supabase/seed.sql` rather than cloning production data, so they aren't a like-for-like copy of your production state.
 
-Neon's branch is a copy-on-write clone of your actual production data at a point in time, created in seconds without provisioning a second instance. That distinction matters when you need to validate a migration against real data, not a seed file.
+Neon's branch is a copy-on-write clone of your production data at a point in time, created in seconds without provisioning a second instance. That distinction matters when you need to validate a migration against real data, not a seed file.
 
 <CTA title="Try branching for migration testing" description="Create a branch, run your migration, and roll back if it fails." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-09-01T11:33:24.543Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -80,7 +80,7 @@ neon link
 Follow the prompts to select your organization and create a new project:
 
 <Admonition type="note">
-Ensure you select the **AWS US East 2 (Ohio)** region when creating your Neon project, as Neon Functions are currently only available in this region during Beta. After linking, choose “yes” when prompted to manage the setup as code to automatically generate a `neon.ts` file for your project.
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. After linking, choose “yes” when prompted to manage the setup as code to automatically generate a `neon.ts` file for your project.
 </Admonition>
 
 ```bash

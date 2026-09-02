@@ -20,7 +20,7 @@ In Neon, rotating a password means resetting the password for the affected Postg
 
 ## Reset the password
 
-Pick the interface that matches your workflow. The result is the same: a new password and a new connection string. Any client trying to reconnect with the old credential will fail to authenticate.
+Pick the interface that matches your workflow. The result is the same: a new password and a new connection string.
 
 <Tabs labels={["Console", "API", "SQL"]}>
 

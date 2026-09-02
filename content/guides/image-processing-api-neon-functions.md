@@ -72,7 +72,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), as Neon Functions are currently available only in this region during beta. When asked which Neon services you require, select **Functions** and **AI Gateway**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Functions** and **AI Gateway**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
 
 ```text
 $ neon link

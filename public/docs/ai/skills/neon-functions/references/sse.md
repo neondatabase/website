@@ -17,17 +17,20 @@ export default {
     const url = new URL(request.url);
     if (url.pathname !== "/events") return new Response("ok");
 
+    let timer: ReturnType<typeof setInterval>;
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         // An SSE frame is `data: <payload>\n\n`. A line starting with `:` is a
         // comment — used here as a heartbeat to keep the stream from going idle.
         controller.enqueue(encoder.encode("data: hello\n\n"));
-        const timer = setInterval(
+        timer = setInterval(
           () => controller.enqueue(encoder.encode(": ping\n\n")),
           25_000,
         );
-        // cancel() fires when the client disconnects.
-        return () => clearInterval(timer);
+      },
+      // cancel() fires when the client disconnects.
+      cancel() {
+        clearInterval(timer);
       },
     });
 
@@ -42,7 +45,7 @@ export default {
 };
 ```
 
-> `cancel()` is returned from `start()` here for brevity; you can also declare it as a separate `cancel()` method on the stream's underlying source. Either way, use it to drop the client from any broadcast set and clear timers.
+> `cancel()` is a method on the stream's underlying source; it fires when the client disconnects. Use it to drop the client from any broadcast set and clear timers. A cleanup function returned from `start()` is ignored, so it has to be a real `cancel()` method.
 
 ## With Hono
 
@@ -91,7 +94,7 @@ const CHANNEL = "events";
 // One dedicated DIRECT connection per isolate to receive events (LISTEN needs a
 // real session — use DATABASE_URL_UNPOOLED, not the pooled URL).
 // Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
-// An error listener keeps the isolate alive; the feed stays down until the isolate restarts.
+// The error listener keeps the process alive; reconnect the client on error in production (omitted here).
 const listener = new Client({
   connectionString: process.env.DATABASE_URL_UNPOOLED,
 });
