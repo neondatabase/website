@@ -11,7 +11,7 @@ const Illustration = () => (
     <RiveAnimation
       className="pointer-events-none size-full select-none"
       wrapperClassName="absolute inset-0 size-full"
-      src="/animations/pages/functions/hero.riv?20260901"
+      src="/animations/pages/functions/hero.riv?20260902"
     />
   </div>
 );
