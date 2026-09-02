@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -23,7 +23,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 ## Get access
 
-You need a project in the AWS us-east-2 region. Foundation model access requires a paid Neon plan, and it's enabled automatically once you're on one, no separate sign-up step needed.
+You need a project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. Foundation model access requires a paid Neon plan, and it's enabled automatically once you're on one, no separate sign-up step needed.
 
 ## Create a credential
 

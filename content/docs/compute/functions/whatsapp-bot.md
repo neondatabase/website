@@ -19,7 +19,7 @@ This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a person
 
 ## Prerequisites
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`). Functions are available only in this region during beta. See [Get started with Neon Functions](/docs/compute/functions/get-started).
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
 - The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then follow [CLI authentication](/docs/cli/auth).
 - Node.js 24 (`node -v`). Deployed functions run on `nodejs24`.
 - A Meta developer account.
