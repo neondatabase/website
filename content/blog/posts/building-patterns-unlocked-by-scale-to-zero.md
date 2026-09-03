@@ -14,8 +14,11 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/building-patterns-unlocked-by-scale-to-zero/cover.jpg
+  alt: >-
+    A wireframe cube labeled "wake on request" beside a stack of metallic cubes,
+    illustrating compute suspending and restarting on demand
 isFeatured: false
 seo:
   title: Building patterns unlocked by scale to zero - Neon
@@ -24,7 +27,8 @@ seo:
   noindex: false
   ogTitle: Building patterns unlocked by scale to zero - Neon
   ogDescription: When idle databases stop wasting compute
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/building-patterns-unlocked-by-scale-to-zero/cover.jpg
 ---
 
 Most hosted Postgres pricing works like this:
