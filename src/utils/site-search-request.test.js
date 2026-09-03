@@ -66,6 +66,27 @@ describe('parseSiteSearchHits', () => {
         ],
       })[0].excerpt
     ).toBe('Learn about branching: Learn about Neon branching');
+    expect(
+      parseSiteSearchHits({
+        hits: [
+          {
+            ...hit,
+            excerpt: 'before\n~~~\nconst x = 1\n~~~\nafter',
+          },
+        ],
+      })[0].excerpt
+    ).toBe('before after');
+    expect(
+      parseSiteSearchHits({
+        hits: [
+          {
+            ...hit,
+            excerpt:
+              '[functions](https://en.wikipedia.org/wiki/Function_(computer_programming)) are useful',
+          },
+        ],
+      })[0].excerpt
+    ).toBe('functions are useful');
   });
 
   it('rejects a host that is not neon.com and an unknown collection', () => {
