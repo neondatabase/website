@@ -5,12 +5,14 @@ description: >-
   behind Neon. Covers setup, connection methods and drivers, pooled vs direct
   connections, branching, schema migrations, autoscaling, scale-to-zero, instant
   restore, read replicas, connection pooling, IP allow lists, and logical
-  replication.
+  replication. Also covers Lakebase Search: semantic vector search, full-text
+  search with BM25 ranking, and hybrid search.
   Use when users ask about "Lakebase Postgres", "Neon setup", "connect to Neon",
   "Neon project", "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
   "scale to zero", "Neon autoscaling", "Neon read replica",
-  "Neon connection pooling", or "schema migrations".
+  "Neon connection pooling", "schema migrations", "semantic search", "vector
+  search", "full-text search", "BM25", or "hybrid search".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres
@@ -164,6 +166,20 @@ Key points:
 - Useful for replicating to/from external Postgres systems.
 
 Link: https://neon.com/docs/guides/logical-replication-guide.md
+
+## Lakebase Search
+
+Use Lakebase Search for semantic, full-text, and hybrid search:
+
+- For semantic search, read [Vector search](references/vector-search.md).
+- For full-text search with BM25 ranking, read [Full-text search](references/full-text-search.md).
+- For combining semantic and lexical results, read [Hybrid search](references/hybrid-search.md).
+
+Links:
+
+- [Get started with Lakebase Search](https://neon.com/docs/ai/lakebase-search-get-started)
+- [`lakebase_vector` reference](https://neon.com/docs/extensions/lakebase-vector)
+- [`lakebase_text` reference](https://neon.com/docs/extensions/lakebase-text)
 
 ## Gotchas
 
