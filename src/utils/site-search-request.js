@@ -67,5 +67,27 @@ function parseSiteSearchHit(hit) {
     throw new Error('Search failed.');
   }
   hrefFromSearchHit(url);
-  return { url, title, slug, collection, heading, excerpt, score };
+  return {
+    url,
+    title,
+    slug,
+    collection,
+    heading,
+    excerpt: markdownToSearchPlainText(excerpt),
+    score,
+  };
+}
+
+function markdownToSearchPlainText(markdown) {
+  const withoutFences = markdown.replace(/```[\s\S]*?```/g, ' ');
+  const withoutImages = withoutFences.replace(/!\[[^\]]*\]\([^)]*\)/g, ' ');
+  const withoutLinks = withoutImages.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+  const withoutInlineCode = withoutLinks.replace(/`([^`]+)`/g, '$1');
+  const withoutBold = withoutInlineCode.replace(/\*\*([^*]+)\*\*/g, '$1');
+  const withoutItalic = withoutBold.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '$1');
+  const withoutHeadings = withoutItalic.replace(/^\s{0,3}#{1,6}\s+/gm, '');
+  const withoutLists = withoutHeadings.replace(/^\s{0,3}(?:[-*+]|\d+\.)\s+/gm, '');
+  const withoutQuotes = withoutLists.replace(/^\s{0,3}>\s?/gm, '');
+  const withoutHtml = withoutQuotes.replace(/<[^>]+>/g, ' ');
+  return withoutHtml.replace(/\s+/g, ' ').trim();
 }

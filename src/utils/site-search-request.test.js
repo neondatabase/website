@@ -54,6 +54,20 @@ describe('parseSiteSearchHits', () => {
     expect(parseSiteSearchHits({ hits: [{ ...hit, extra: 'nope' }] })).toEqual([hit]);
   });
 
+  it('strips markdown from excerpts so the modal shows plain text', () => {
+    expect(
+      parseSiteSearchHits({
+        hits: [
+          {
+            ...hit,
+            excerpt:
+              '- [Learn about branching](https://neon.com/docs/introduction/branching): Learn about Neon branching',
+          },
+        ],
+      })[0].excerpt
+    ).toBe('Learn about branching: Learn about Neon branching');
+  });
+
   it('rejects a host that is not neon.com and an unknown collection', () => {
     expect(() =>
       parseSiteSearchHits({ hits: [{ ...hit, url: 'https://evil.com/docs/x' }] })
