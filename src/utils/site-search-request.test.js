@@ -4,6 +4,7 @@ import {
   hrefFromSearchHit,
   parseSiteSearchHits,
   parseSiteSearchRequest,
+  SEARCH_QUERY_MAX_CHARS,
 } from './site-search-request';
 
 describe('parseSiteSearchRequest', () => {
@@ -20,7 +21,9 @@ describe('parseSiteSearchRequest', () => {
       /Unexpected field/
     );
     expect(() => parseSiteSearchRequest({ query: 'hello', limit: 41 })).toThrow(/1 to 40/);
-    expect(() => parseSiteSearchRequest({ query: 'x'.repeat(501) })).toThrow(/too long/);
+    expect(() => parseSiteSearchRequest({ query: 'x'.repeat(SEARCH_QUERY_MAX_CHARS + 1) })).toThrow(
+      /too long/
+    );
   });
 });
 

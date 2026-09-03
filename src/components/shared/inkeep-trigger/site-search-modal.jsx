@@ -1,6 +1,7 @@
 'use client';
 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useState } from 'react';
 
@@ -8,7 +9,11 @@ import Link from 'components/shared/link';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
-import { parseSiteSearchHits, hrefFromSearchHit } from 'utils/site-search-request';
+import {
+  parseSiteSearchHits,
+  hrefFromSearchHit,
+  SEARCH_QUERY_MAX_CHARS,
+} from 'utils/site-search-request';
 
 const COLLECTION_LABEL = {
   docs: 'Docs',
@@ -20,6 +25,7 @@ const COLLECTION_LABEL = {
 const SEARCH_DEBOUNCE_MS = 250;
 
 const SiteSearchModal = ({ isOpen, onClose }) => {
+  const router = useRouter();
   const inputId = useId();
   const listId = useId();
   const [query, setQuery] = useState('');
@@ -49,7 +55,6 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
 
     const controller = new AbortController();
     const timer = setTimeout(async () => {
-      setHits([]);
       setActiveIndex(0);
       setStatus('loading');
       setError('');
@@ -63,10 +68,11 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
         });
         const payload = await response.json().catch(() => null);
         if (!response.ok) {
+          if (response.status === 503) {
+            throw new Error('Search is temporarily unavailable.');
+          }
           const message =
-            payload &&
-            typeof payload.error === 'string' &&
-            (response.status === 400 || response.status === 503)
+            payload && typeof payload.error === 'string' && response.status === 400
               ? payload.error
               : 'Search failed.';
           throw new Error(message);
@@ -93,9 +99,14 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
 
   const activeHit = hits[activeIndex];
 
+  useEffect(() => {
+    if (!activeHit) return;
+    document.getElementById(`${listId}-${activeIndex}`)?.scrollIntoView({ block: 'nearest' });
+  }, [activeHit, activeIndex, listId]);
+
   const goToHit = (hit) => {
     onClose();
-    window.location.assign(hrefFromSearchHit(hit.url));
+    router.push(hrefFromSearchHit(hit.url));
   };
 
   const onInputKeyDown = (event) => {
@@ -136,6 +147,7 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
               aria-activedescendant={activeHit ? `${listId}-${activeIndex}` : undefined}
               autoComplete="off"
               spellCheck="false"
+              maxLength={SEARCH_QUERY_MAX_CHARS}
               placeholder="Search docs, guides, changelog, and blog…"
               value={query}
               data-test="docs-search-input"
@@ -152,7 +164,7 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
                 Search official docs, community guides, the changelog, and the blog.
               </p>
             )}
-            {status === 'loading' && (
+            {status === 'loading' && hits.length === 0 && (
               <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">Searching…</p>
             )}
             {status === 'error' && (
@@ -164,7 +176,11 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
               </p>
             )}
             {hits.length > 0 && (
-              <ul id={listId} role="listbox" className="py-2">
+              <ul
+                id={listId}
+                role="listbox"
+                className={cn('py-2', status === 'loading' && 'opacity-60')}
+              >
                 {hits.map((hit, index) => {
                   const href = hrefFromSearchHit(hit.url);
                   const showHeading = hit.heading && hit.heading !== hit.title;

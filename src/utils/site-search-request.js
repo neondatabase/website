@@ -1,3 +1,5 @@
+export const SEARCH_QUERY_MAX_CHARS = 500;
+
 const SEARCH_COLLECTIONS = new Set(['docs', 'guides', 'changelog', 'blog']);
 
 export function parseSiteSearchRequest(body) {
@@ -15,7 +17,7 @@ export function parseSiteSearchRequest(body) {
   if (query === '') {
     throw new Error('query is required');
   }
-  if (query.length > 500) {
+  if (query.length > SEARCH_QUERY_MAX_CHARS) {
     throw new Error('query is too long');
   }
   if (body.limit !== undefined) {
