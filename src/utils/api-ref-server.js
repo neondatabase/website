@@ -3,18 +3,10 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+import { compareOpsForDisplay } from './api-ref.mjs';
+
 const API_DATA_DIR = resolve(process.cwd(), 'src/data/api-ref');
 const TAG_CONFIG_PATH = resolve(process.cwd(), 'scripts/data/tag-config.json');
-
-const STABILITY_RANK = { stable: 0, beta: 1, alpha: 2 };
-
-function stabilitySort(a, b) {
-  if (a.deprecated !== b.deprecated) return a.deprecated ? 1 : -1;
-  const sa = a.stability == null ? 0 : (STABILITY_RANK[a.stability] ?? 0);
-  const sb = b.stability == null ? 0 : (STABILITY_RANK[b.stability] ?? 0);
-  if (sa !== sb) return sa - sb;
-  return (a.specIndex ?? 0) - (b.specIndex ?? 0);
-}
 
 let _cache = null;
 
@@ -33,7 +25,7 @@ export function loadAllTagGroups() {
     const ops = readdirSync(join(API_DATA_DIR, tag))
       .filter((f) => f.endsWith('.json'))
       .map((f) => JSON.parse(readFileSync(join(API_DATA_DIR, tag, f), 'utf8')))
-      .sort(stabilitySort);
+      .sort(compareOpsForDisplay);
     if (ops.length > 0) {
       tagMap.set(tag, { tag, display: ops[0].tagDisplay ?? tag, operations: ops });
     }
