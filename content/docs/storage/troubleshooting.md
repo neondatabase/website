@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-08-21T15:53:18.662Z'
+updatedOn: '2026-09-03T13:01:17.594Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -114,9 +114,9 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 ### `EntityTooLarge`
 
-The object exceeds the maximum size. During beta, Neon Object Storage allows objects up to 5 GiB. A single-request `PutObject` fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed the limit.
+The upload exceeds a size limit. A single `PutObject` request can upload up to 5 GiB, and a single object can be up to 5 TiB. A single-request `PutObject` above 5 GiB fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed 5 TiB.
 
-**Fix:** Split the data across multiple objects, or confirm the upload isn't unexpectedly large. Multipart upload makes large uploads more reliable but doesn't raise the per-object limit. The 5 GiB limit is a beta limit, not a permanent cap; [contact support](/docs/introduction/support) if you need to store larger objects.
+**Fix:** For objects larger than 5 GiB, use [multipart upload](/docs/storage/objects#multipart-upload) instead of a single `PutObject` request. For objects that would exceed 5 TiB, split the data across multiple objects.
 
 ## Connection and performance errors
 
