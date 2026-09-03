@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
-
 import RiveAnimation from 'components/shared/rive-animation';
 import { aiGatewayPageContent } from 'constants/backend-platform-page-content';
-import { cn } from 'utils/cn';
 
-const HeroDiagram = ({ className }) => (
+const HeroDiagram = () => (
   <div
-    className={cn('w-full overflow-hidden', className)}
+    className="w-full overflow-hidden"
     role="img"
     aria-label={aiGatewayPageContent.hero.illustrationDescription}
   >
@@ -19,9 +16,5 @@ const HeroDiagram = ({ className }) => (
     </div>
   </div>
 );
-
-HeroDiagram.propTypes = {
-  className: PropTypes.string,
-};
 
 export default HeroDiagram;

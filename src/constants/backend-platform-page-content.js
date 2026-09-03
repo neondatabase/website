@@ -7,6 +7,10 @@ const aiGatewayModelsHighlightedTitleLines = [
 ];
 const builtForAgentsTitleLines = ['Built for agents,', 'not just developers.'];
 const faqTitleLines = ['Your questions,', 'answered'];
+const lakebaseFromFirstLineTitleLines = [
+  'From your first line of code',
+  'to the world’s largest teams.',
+];
 
 const functionsPageContent = {
   slug: 'functions',
@@ -231,6 +235,237 @@ const aiGatewayPageContent = {
   ],
 };
 
+const lakebasePageContent = {
+  slug: 'lakebase',
+  pageLabel: 'Lakebase Postgres',
+  hero: {
+    label: 'Lakebase Postgres',
+    title: 'Postgres for apps and agents, built on the lakebase architecture.',
+    illustrationDescription:
+      'An application connected to Lakebase Postgres and Neon backend services',
+    primaryAction: { label: 'Start building', linkKey: 'signup' },
+    secondaryAction: { label: 'Read the docs', linkKey: 'postgresOverview' },
+  },
+  architecture: {
+    title:
+      'Decoupled storage and compute, with object storage + WAL as the durable foundation for instant',
+    highlightedTitle: 'provisioning, scaling, branching, and recovery.',
+    description: 'Deploy, scale, branch, replicate, and restore instantly —',
+    secondaryDescription:
+      'without moving or duplicating your underlying data between environments.',
+    features: [
+      {
+        title: 'Ephemeral compute',
+        description:
+          'Provisions instantly, autoscales with load, and scales to zero when idle, restarting in <1s.',
+      },
+      {
+        title: 'Shared storage',
+        description:
+          'The same versioned storage built on WAL serves every branch and replica in a project.',
+      },
+      {
+        title: 'Agent-ready',
+        description: 'Operations are lightweight and run through the API, CLI, SDKs, and MCP.',
+      },
+    ],
+  },
+  autoscaling: {
+    label: 'Autoscaling',
+    title: 'Compute follows your traffic. No overprovisioning or performance hiccups.',
+    description:
+      'There’s no instance to size and no manual resizes in Lakebase Postgres: your database autoscales in real time',
+    features: [
+      {
+        title: 'Scales under load',
+        description:
+          'Compute moves within your set range, up during spikes and down during slow times.',
+      },
+      {
+        title: 'Suspends when idle',
+        description:
+          'After five minutes without activity (e.g. in dev environments), compute scales to zero.',
+      },
+      {
+        title: 'Only bills for what runs',
+        description:
+          'You pay for the compute you actually use, without having to worry about sizing.',
+      },
+    ],
+    tabs: [
+      { label: 'Avoid outages', number: 13024, text: 'outages prevented by Autoscaling this year' },
+      { label: 'Save costs', prefix: '$', number: 345966, text: 'saved by Autoscaling every day' },
+    ],
+    legend: ['Neon autoscaling', 'Database load', 'Fixed-resource provisioned'],
+    caption:
+      'Neon monitors your database load ten times a second and autoscales CPU and memory to exactly fit your workload.',
+  },
+  dynamicDatabases: {
+    title: 'As software becomes more dynamic and autonomous, databases need to evolve too:',
+    highlightedTitle: 'branch, rewind, and operate programmatically.',
+    capabilities: [
+      {
+        id: 'instant-branching',
+        label: 'Instant Branching',
+        primary: 'Create a full copy of production in about a second,',
+        secondary:
+          'without duplicating storage, so a 1 TB branch takes just as long to create as a 1 GB branch.',
+        benefits: [
+          {
+            icon: 'branching',
+            title: 'An environment per unit of work',
+            description:
+              'Every PR, version, test, and preview can have its own backend branch, following your code.',
+          },
+          {
+            icon: 'api',
+            title: 'Fully programmable',
+            description:
+              'Creating and deleting branches is a lightweight metadata operation: your agent and the API can manage it end to end.',
+          },
+          {
+            icon: 'storage',
+            title: 'The whole backend branches',
+            description:
+              'A Neon branch also carries its own Object Storage namespace, its own Functions, its own AI Gateway endpoint, and its own auth.',
+          },
+        ],
+      },
+      {
+        id: 'restore-to-any-point',
+        label: 'Restore to any point',
+        primary: 'Roll back instantly to any point in your database history,',
+        secondary:
+          'without copying data, so restore time stays constant no matter how large your database is.',
+      },
+      {
+        id: 'database-built-for-agents',
+        label: 'A database built for agents',
+        primary: 'Let agents create and operate isolated database environments',
+        secondary:
+          'for every task, session, or pull request, with changes kept separate and recovery always at hand.',
+      },
+    ],
+  },
+  fromFirstLine: {
+    title: lakebaseFromFirstLineTitleLines.join(' '),
+    titleLines: lakebaseFromFirstLineTitleLines,
+    description:
+      'From early-stage teams to Fortune 500 organizations, Lakebase Postgres gives you the same flexible foundation to build, scale, and run production workloads with confidence.',
+    slides: [
+      {
+        title: 'Ship faster with a small team',
+        description:
+          'Adopt branching workflows and grow your startup faster. Don’t let the database lag the speed at which you ship code.',
+        tags: [
+          { icon: 'serverless', label: 'Serverless apps' },
+          { icon: 'autoscaling', label: 'Autoscaling' },
+        ],
+        testimonial: {
+          quote:
+            'We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort.',
+          highlight: '300K+ Postgres databases',
+          author: 'Himanshu Bhandoh',
+          company: 'Software Engineer at Retool',
+          logo: {
+            src: '/images/case-studies/retool-dark.svg',
+            width: 95,
+            height: 20,
+            alt: 'Retool',
+            className: 'h-5 w-[95px]',
+          },
+          caseStudyLabel: 'Read case study',
+          caseStudyUrl:
+            '/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases',
+        },
+      },
+      {
+        title: 'Scale with unpredictable demand',
+        description:
+          'Let compute follow traffic automatically, from sudden AI-agent spikes to quiet periods, without manual capacity planning.',
+        tags: [
+          { icon: 'serverless', label: 'Serverless apps' },
+          { icon: 'autoscaling', label: 'Autoscaling' },
+        ],
+        testimonial: {
+          quote:
+            'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer',
+          highlight: 'flexible resource limits',
+          author: 'Lincoln Bergeson',
+          company: 'Infrastructure Engineer',
+          logo: {
+            src: '/images/case-studies/replit.svg',
+            width: 120,
+            height: 32,
+            alt: 'Replit',
+            className: 'h-8 w-[120px] brightness-0',
+          },
+          caseStudyLabel: 'Read case study',
+          caseStudyUrl: '/blog/neon-replit-integration',
+        },
+      },
+      {
+        title: 'Move fast without managing infrastructure',
+        description:
+          'Keep the developer experience simple while the database scales efficiently with your product and team.',
+        tags: [
+          { icon: 'serverless', label: 'Serverless apps' },
+          { icon: 'autoscaling', label: 'Autoscaling' },
+        ],
+        testimonial: {
+          quote:
+            'What first attracted us to Neon was the efficient scaling. What kept us interested were all the thoughtful developer-experience wins.',
+          highlight: 'thoughtful developer-experience wins.',
+          author: 'Ben Halpern',
+          company: 'DEV Co-Founder',
+          logo: {
+            src: '/images/case-studies/dev-dark.svg',
+            width: 41,
+            height: 32,
+            alt: 'DEV',
+            className: 'h-8 w-[41px]',
+          },
+          caseStudyLabel: 'Read case study',
+          caseStudyUrl: '/blog/dev-from-heroku-to-neon',
+        },
+      },
+    ],
+  },
+  faqItems: [
+    {
+      question: 'Is this standard Postgres?',
+      answer:
+        '<p>In terms of compatibility, yes. Lakebase Postgres is Postgres — your existing drivers, ORMs, migration tools, and everything else from the Postgres ecosystem works unchanged. What’s different is the architecture underneath.</p>',
+      initialState: 'open',
+    },
+    {
+      question: 'What is the lakebase architecture, and how does it relate to Databricks Lakebase?',
+      answer:
+        '<p>The lakebase architecture separates standard Postgres compute from durable, versioned storage. Neon Lakebase Postgres and Databricks Lakebase run on the same core technology: Neon delivers it as part of a developer backend, while Databricks integrates it with the Data Intelligence Platform.</p>',
+    },
+    {
+      question: 'How fast is branching, and does database size change that?',
+      answer:
+        '<p>A branch is typically ready in about a second, regardless of database size. Creating one records a pointer into the existing versioned storage instead of copying the database; only data changed after the branch point consumes additional storage.</p>',
+    },
+    {
+      question: 'What happens when my database is idle?',
+      answer:
+        '<p>Its compute can scale to zero after a period of inactivity while durable storage remains available. The database wakes automatically on the next connection, and suspended compute does not consume compute hours.</p>',
+    },
+    {
+      question: 'How does pricing work?',
+      answer:
+        '<p>Neon uses usage-based pricing. You pay for the compute time and storage you actually consume, with plan allowances for branches and restore history. Scale to zero and automatic branch expiration help keep temporary environments inexpensive.</p>',
+    },
+    {
+      question: 'Can agents provision and operate databases?',
+      answer:
+        '<p>Yes. Agents can use the Neon API, CLI, SDKs, and MCP Server to create isolated branches and databases, run SQL, inspect state, and clean up environments programmatically.</p>',
+    },
+  ],
+};
+
 const sharedBackendPlatformContent = {
   faqTitle: faqTitleLines.join(' '),
   faqTitleLines,
@@ -354,5 +589,6 @@ const sharedBackendPlatformContent = {
 module.exports = {
   functionsPageContent,
   aiGatewayPageContent,
+  lakebasePageContent,
   sharedBackendPlatformContent,
 };

@@ -4,6 +4,7 @@ import path from 'path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
+import { lakebasePageContent } from '../constants/backend-platform-page-content';
 import LINKS from '../constants/links';
 
 import {
@@ -13,6 +14,7 @@ import {
   renderAuthMarkdown,
   renderFunctionsMarkdown,
   renderObjectStorageMarkdown,
+  renderLakebaseMarkdown,
 } from './generate-backend-platform-page-markdown';
 
 const tempDirs = [];
@@ -82,6 +84,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('| Released |');
     expect(markdown).toContain('Inference is free during the private preview.');
     expect(markdown).toContain('## Compatibility');
+    expect(markdown).toContain('## Built for agents, not just developers.');
     expect(markdown).toContain('## Trusted at scale.');
   });
 
@@ -115,6 +118,22 @@ describe('backend platform page Markdown', () => {
     expect(markdown).not.toMatch(/<\/?(?:p|strong|code|a)(?:\s|>)/);
   });
 
+  it('renders Lakebase unique content and its shared platform footer', () => {
+    const markdown = renderLakebaseMarkdown(LINKS);
+
+    expect(markdown).toContain(
+      '# Postgres for apps and agents, built on the lakebase architecture.'
+    );
+    expect(markdown).toContain('### Instant Branching');
+    expect(markdown).toContain('### Restore to any point');
+    expect(markdown).toContain('### A database built for agents');
+    expect(markdown).toContain('## From your first line of code to the world’s largest teams.');
+    expect(markdown).toContain('## Your questions, answered.');
+    expect(markdown).toContain('## Backend services');
+    expect(markdown).toContain('## Trusted at scale.');
+    expect(markdown).not.toContain('## Built for agents, not just developers.');
+  });
+
   it('writes all mirrors without deleting other generated Markdown', async () => {
     const rootDir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-platform-markdown-'));
     tempDirs.push(rootDir);
@@ -130,6 +149,7 @@ describe('backend platform page Markdown', () => {
       'ai-gateway.md',
       'object-storage.md',
       'auth-page.md',
+      'lakebase.md',
     ]);
     expect(await fs.readFile(path.join(outputDir, 'functions.md'), 'utf8')).toContain(
       '# Long-running functions'
@@ -143,6 +163,38 @@ describe('backend platform page Markdown', () => {
     expect(await fs.readFile(path.join(outputDir, 'auth-page.md'), 'utf8')).toContain(
       '# Auth that lives in your backend.'
     );
+    expect(await fs.readFile(path.join(outputDir, 'lakebase.md'), 'utf8')).toContain(
+      '# Postgres for apps and agents'
+    );
     expect(await fs.readFile(sentinelPath, 'utf8')).toBe('keep me');
+  });
+
+  it('keeps the new Lakebase sections before branching and mirrors their visible copy', () => {
+    const markdown = renderLakebaseMarkdown(LINKS);
+    const { architecture, autoscaling, dynamicDatabases } = lakebasePageContent;
+
+    expect(markdown).toContain(`## ${architecture.title} ${architecture.highlightedTitle}`);
+    expect(markdown).toContain(`${architecture.description} ${architecture.secondaryDescription}`);
+    expect(markdown).toContain(autoscaling.title);
+    expect(markdown).toContain(autoscaling.description);
+    expect(markdown).toContain(autoscaling.caption);
+
+    for (const { title } of [...architecture.features, ...autoscaling.features]) {
+      expect(markdown).toContain(`### ${title}`);
+    }
+
+    expect(markdown).toContain('restarting in \\<1s.');
+    expect(markdown).toContain('13,024 outages prevented by Autoscaling this year');
+    expect(markdown).toContain('$345,966 saved by Autoscaling every day');
+    expect(markdown.indexOf(`## ${architecture.title}`)).toBeLessThan(
+      markdown.indexOf(`## ${autoscaling.label}`)
+    );
+    expect(markdown.indexOf(`## ${autoscaling.label}`)).toBeLessThan(
+      markdown.indexOf(`## ${dynamicDatabases.title}`)
+    );
+    expect(markdown.indexOf('### Save costs')).toBeLessThan(markdown.indexOf(autoscaling.caption));
+    expect(markdown.indexOf(autoscaling.caption)).toBeLessThan(
+      markdown.indexOf(`### ${autoscaling.features[0].title}`)
+    );
   });
 });

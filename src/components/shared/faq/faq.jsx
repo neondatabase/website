@@ -24,6 +24,17 @@ const variants = {
       'xl:w-84 xl:text-[3rem] lg:w-full md:text-[2.5rem]'
     ),
     items: '-mt-4 lg:mt-0',
+    containerSize: '1152',
+  },
+  lakebase: {
+    section: 'mt-0! bg-gray-new-10 pt-40 pb-10 text-white xl:py-32 lg:py-24 md:py-20',
+    container: 'flex gap-x-[129px] xl:gap-x-16 lg:flex-col lg:gap-y-12 md:gap-y-8',
+    title: cn(
+      'w-104 shrink-0 text-[5rem] leading-none tracking-[-0.04em] text-balance',
+      'xl:w-88 xl:text-[4rem] lg:w-full lg:max-w-144 md:text-[2.75rem]'
+    ),
+    items: 'mt-1 max-w-[800px] lg:mt-0 lg:max-w-none',
+    containerSize: '1344',
   },
 };
 
@@ -35,10 +46,11 @@ const Faq = ({ items, titleLines = DEFAULT_TITLE_LINES, variant = 'default', cla
 
   return (
     <section className={cn('faq safe-paddings', styles.section, className)} id="faq">
-      <Container className={styles.container} size="1152">
+      <Container className={styles.container} size={styles.containerSize ?? '1152'}>
         <h2 className={styles.title}>
           {titleLines[0]} <br className="lg:hidden" />
           {titleLines[1]}
+          {resolvedVariant === 'lakebase' ? '.' : null}
         </h2>
         <ul className={cn('flex w-full flex-col', styles.items)}>
           {items.map((item, index) => (

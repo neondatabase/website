@@ -1,4 +1,7 @@
 import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
+import BackendServices from 'components/pages/backend-platform/backend-services';
+import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
+import Faq from 'components/shared/faq';
 import BackendHero from 'components/pages/backend-platform/hero';
 import Configuration from 'components/pages/object-storage/configuration';
 import HeroAnimation from 'components/pages/object-storage/hero/hero-animation';
@@ -22,11 +25,7 @@ const ITEM_IMAGES = {
 export const metadata = getMetadata(SEO_DATA.objectStorage);
 
 const ObjectStoragePage = () => (
-  <BackendPlatformPage
-    faqItems={objectStoragePageContent.faqItems}
-    faqTitleLines={['Your questions,', 'answered.']}
-    backendServicesTitle={objectStoragePageContent.backendServicesTitle}
-  >
+  <BackendPlatformPage>
     <BackendHero
       className="relative pt-46.5 safe-paddings text-white xl:pt-36 lg:pt-32 md:pt-24"
       content={objectStoragePageContent.hero}
@@ -54,6 +53,9 @@ const ObjectStoragePage = () => (
       {...objectStoragePageContent.isolatedEnvironments}
     />
     <Configuration />
+    <Faq items={objectStoragePageContent.faqItems} titleLines={['Your questions,', 'answered.']} variant="light" />
+    <BackendServices title={objectStoragePageContent.backendServicesTitle} />
+    <BuiltForAgents />
   </BackendPlatformPage>
 );
 

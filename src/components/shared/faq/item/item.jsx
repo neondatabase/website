@@ -37,6 +37,14 @@ const variants = {
       '[&_a]:text-black-pure [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-gray-new-20'
     ),
   },
+  lakebase: {
+    item: 'border-gray-new-20 py-[17.5px] first:pt-0 last:pb-0 md:py-4',
+    button: 'min-h-[30px] gap-5',
+    title:
+      'text-[20px] leading-[1.375] font-normal tracking-[-0.04em] text-gray-new-98 lg:text-[18px]',
+    icon: 'border-gray-new-60',
+    content: 'pt-4 pr-14 text-gray-new-60 lg:pt-4 lg:pr-12 md:pr-0',
+  },
 };
 
 const Item = ({
@@ -95,7 +103,10 @@ const Item = ({
         )}
       >
         <button
-          className="group relative flex w-full items-start justify-between gap-4 rounded-sm text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
+          className={cn(
+            'group relative flex w-full items-start justify-between gap-4 rounded-sm text-left after:absolute after:-inset-y-5 after:left-0 after:w-full',
+            styles.button
+          )}
           type="button"
           aria-expanded={isOpen}
           aria-controls={`panel-${index}`}

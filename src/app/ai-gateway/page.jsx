@@ -3,7 +3,13 @@ import Hero from 'components/pages/ai-gateway/hero';
 import Models from 'components/pages/ai-gateway/models';
 import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
 import ProductBenefits from 'components/shared/product-benefits';
-import { aiGatewayPageContent } from 'constants/backend-platform-page-content';
+import BackendServices from 'components/pages/backend-platform/backend-services';
+import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
+import Faq from 'components/shared/faq';
+import {
+  aiGatewayPageContent,
+  sharedBackendPlatformContent,
+} from 'constants/backend-platform-page-content';
 import SEO_DATA from 'constants/seo-data';
 import fairPricingImage from 'images/pages/ai-gateway/gateway-benefits/fair-pricing.jpg';
 import simplifiedBillingImage from 'images/pages/ai-gateway/gateway-benefits/simplified-billing.jpg';
@@ -19,7 +25,7 @@ const ITEM_IMAGES = {
 export const metadata = getMetadata(SEO_DATA.aiGateway);
 
 const AiGatewayPage = () => (
-  <BackendPlatformPage faqItems={aiGatewayPageContent.faqItems}>
+  <BackendPlatformPage>
     <Hero />
     <Models />
     <ProductBenefits
@@ -28,6 +34,13 @@ const AiGatewayPage = () => (
       itemImages={ITEM_IMAGES}
     />
     <Compatibility />
+    <Faq
+      items={aiGatewayPageContent.faqItems}
+      titleLines={sharedBackendPlatformContent.faqTitleLines}
+      variant="light"
+    />
+    <BackendServices />
+    <BuiltForAgents />
   </BackendPlatformPage>
 );
 

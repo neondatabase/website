@@ -33,11 +33,13 @@ process.env.NEXT_PUBLIC_DEFAULT_SITE_URL = 'https://neon.com';
 
 // Now import middleware after all mocks are set up
 let middleware;
+let middlewareConfig;
 
 describe('Middleware - AI Agent Integration Tests', () => {
   beforeAll(async () => {
     const middlewareModule = await import('./proxy.js');
     middleware = middlewareModule.proxy;
+    middlewareConfig = middlewareModule.config;
   });
   beforeEach(() => {
     vi.clearAllMocks();
@@ -54,6 +56,12 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['user-agent', userAgent],
       ['accept', accept],
     ]),
+  });
+
+  it('matches every generated marketing page for content negotiation', () => {
+    expect(middlewareConfig.matcher).toEqual(
+      expect.arrayContaining(['/functions', '/ai-gateway', '/lakebase'])
+    );
   });
 
   // Helper to mock a successful markdown fetch.
@@ -97,6 +105,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'AI Gateway', path: '/ai-gateway' },
       { name: 'Object Storage', path: '/object-storage' },
       { name: 'Auth', path: '/auth' },
+      { name: 'Lakebase', path: '/lakebase' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
@@ -374,6 +383,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['/functions.md', 'https://neon.com/md/functions.md'],
       ['/ai-gateway.md', 'https://neon.com/md/ai-gateway.md'],
       ['/object-storage.md', 'https://neon.com/md/object-storage.md'],
+      ['/lakebase.md', 'https://neon.com/md/lakebase.md'],
     ])('should serve the generated marketing page for %s', async (pathname, markdownUrl) => {
       const req = createMockRequest(pathname, 'Mozilla/5.0', 'text/html');
 

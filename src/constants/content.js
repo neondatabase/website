@@ -28,6 +28,7 @@ const GENERATED_PAGE_MARKDOWN_PATHS = {
   'ai-gateway': '/md/ai-gateway.md',
   'object-storage': '/md/object-storage.md',
   auth: '/md/auth-page.md',
+  lakebase: '/md/lakebase.md',
 };
 
 const EXCLUDED_ROUTES = ['guides', 'faqs', 'branching'];

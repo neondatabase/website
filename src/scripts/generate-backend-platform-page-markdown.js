@@ -17,6 +17,7 @@ const { authPageContent } = require('../constants/auth-page-content');
 const {
   functionsPageContent,
   aiGatewayPageContent,
+  lakebasePageContent,
   sharedBackendPlatformContent,
 } = require('../constants/backend-platform-page-content');
 const { objectStoragePageContent } = require('../constants/object-storage-page-content');
@@ -120,8 +121,8 @@ const htmlToMarkdown = (html) =>
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-const renderFaq = (faqItems) =>
-  [`## ${sharedBackendPlatformContent.faqTitle}`]
+const renderFaq = (faqItems, title = sharedBackendPlatformContent.faqTitle) =>
+  [`## ${title}`]
     .concat(faqItems.flatMap(({ question, answer }) => [`### ${question}`, htmlToMarkdown(answer)]))
     .join('\n\n');
 
@@ -174,6 +175,20 @@ const renderSharedSections = (links, backendServicesTitle) => {
   ].join('\n\n');
 };
 
+const renderCta = (cta, links) =>
+  [
+    `**${cta.label}**`,
+    `## ${cta.title}`,
+    cta.description,
+    `[${cta.buttonText}](${absoluteUrl(links[cta.linkKey])})`,
+  ].join('\n\n');
+
+const renderPlatformFooter = (links) => {
+  const { backedBy, cta } = sharedBackendPlatformContent;
+
+  return [renderBackedBy(backedBy), renderCta(cta, links)].join('\n\n');
+};
+
 const renderPageHeader = ({ pageLabel, hero }) =>
   [
     `> This page location: ${pageLabel}`,
@@ -196,6 +211,7 @@ const renderFeedbackFooter = (slug) =>
 const renderFunctionsMarkdown = (links) => {
   const { hero, backendCompute, branching, faqItems } = functionsPageContent;
   const { connectedServices, longRunning } = backendCompute;
+  const { backendServices, builtForAgents } = sharedBackendPlatformContent;
 
   const sections = [
     renderPageHeader(functionsPageContent),
@@ -219,7 +235,9 @@ const renderFunctionsMarkdown = (links) => {
       return [`### ${title}`, description];
     }),
     renderFaq(faqItems),
-    renderSharedSections(links),
+    renderBackendServices(backendServices),
+    renderBuiltForAgents(builtForAgents),
+    renderPlatformFooter(links),
     renderFeedbackFooter(functionsPageContent.slug),
   ];
 
@@ -228,6 +246,7 @@ const renderFunctionsMarkdown = (links) => {
 
 const renderAiGatewayMarkdown = (links) => {
   const { hero, models, gatewayBenefits, compatibility, faqItems } = aiGatewayPageContent;
+  const { backendServices, builtForAgents } = sharedBackendPlatformContent;
 
   const sections = [
     renderPageHeader(aiGatewayPageContent),
@@ -247,7 +266,9 @@ const renderAiGatewayMarkdown = (links) => {
     compatibility.description,
     ...compatibility.items.flatMap(({ title, description }) => [`### ${title}`, description]),
     renderFaq(faqItems),
-    renderSharedSections(links),
+    renderBackendServices(backendServices),
+    renderBuiltForAgents(builtForAgents),
+    renderPlatformFooter(links),
     renderFeedbackFooter(aiGatewayPageContent.slug),
   ];
 
@@ -329,6 +350,55 @@ const renderAuthMarkdown = (links) => {
   return `${sections.join('\n\n')}\n`;
 };
 
+const renderLakebaseMarkdown = (links) => {
+  const { hero, architecture, autoscaling, dynamicDatabases, fromFirstLine, faqItems } =
+    lakebasePageContent;
+  const { backendServices } = sharedBackendPlatformContent;
+
+  const sections = [
+    renderPageHeader(lakebasePageContent),
+    '## Get started',
+    renderActionLinks(hero, links),
+    `## ${architecture.title} ${architecture.highlightedTitle}`,
+    `${architecture.description} ${architecture.secondaryDescription}`,
+    ...architecture.features.flatMap(({ title, description }) => [
+      `### ${title}`,
+      escapeMarkdownText(description),
+    ]),
+    `## ${autoscaling.label}`,
+    autoscaling.title,
+    autoscaling.description,
+    ...autoscaling.tabs.flatMap(({ label, prefix = '', number, text }) => [
+      `### ${label}`,
+      `${prefix}${number.toLocaleString('en-US')} ${text}`,
+    ]),
+    autoscaling.caption,
+    ...autoscaling.features.flatMap(({ title, description }) => [`### ${title}`, description]),
+    `## ${dynamicDatabases.title}`,
+    dynamicDatabases.highlightedTitle,
+    ...dynamicDatabases.capabilities.flatMap(({ label, primary, secondary, benefits = [] }) => [
+      `### ${label}`,
+      `${primary} ${secondary}`,
+      ...benefits.flatMap(({ title, description }) => [`#### ${title}`, description]),
+    ]),
+    `## ${fromFirstLine.title}`,
+    fromFirstLine.description,
+    ...fromFirstLine.slides.flatMap(({ title, description, tags, testimonial }) => [
+      `### ${title}`,
+      description,
+      tags.map(({ label }) => `- ${label}`).join('\n'),
+      `> ${testimonial.quote}\n> — ${testimonial.author}, ${testimonial.company}`,
+      `[${testimonial.caseStudyLabel}](${absoluteUrl(testimonial.caseStudyUrl)})`,
+    ]),
+    renderFaq(faqItems, `${sharedBackendPlatformContent.faqTitle}.`),
+    renderBackendServices(backendServices),
+    renderPlatformFooter(links),
+    renderFeedbackFooter(lakebasePageContent.slug),
+  ];
+
+  return `${sections.join('\n\n')}\n`;
+};
+
 async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirname, '../..')) {
   const { default: links } = await import('../constants/links.js');
   const outputDir = path.join(rootDir, 'public/md');
@@ -338,6 +408,7 @@ async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirn
     { filename: 'object-storage.md', content: renderObjectStorageMarkdown(links) },
     // Keep public/auth.md dedicated to the existing Claimable Neon protocol.
     { filename: 'auth-page.md', content: renderAuthMarkdown(links) },
+    { filename: 'lakebase.md', content: renderLakebaseMarkdown(links) },
   ];
 
   await fs.mkdir(outputDir, { recursive: true });
@@ -357,6 +428,7 @@ module.exports = {
   renderAiGatewayMarkdown,
   renderObjectStorageMarkdown,
   renderAuthMarkdown,
+  renderLakebaseMarkdown,
   generateBackendPlatformPageMarkdown,
 };
 

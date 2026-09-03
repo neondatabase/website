@@ -3,8 +3,11 @@ import Branching from 'components/pages/auth/branching';
 import HeroAnimation from 'components/pages/auth/hero/hero-animation';
 import Identity from 'components/pages/auth/identity';
 import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
+import BackendServices from 'components/pages/backend-platform/backend-services';
+import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
 import BackendHero from 'components/pages/backend-platform/hero';
 import NumberedSteps from 'components/shared/numbered-steps';
+import Faq from 'components/shared/faq';
 import { authPageContent } from 'constants/auth-page-content';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
@@ -14,11 +17,7 @@ const LOGOS = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'retool', 'meta
 export const metadata = getMetadata(SEO_DATA.auth);
 
 const AuthPage = () => (
-  <BackendPlatformPage
-    faqItems={authPageContent.faqItems}
-    faqTitleLines={['Your questions,', 'answered.']}
-    backendServicesTitle={authPageContent.backendServicesTitle}
-  >
+  <BackendPlatformPage>
     <BackendHero
       className="relative pt-45.5 safe-paddings text-white xl:pt-36 lg:pt-32 md:pt-24"
       content={authPageContent.hero}
@@ -43,6 +42,9 @@ const AuthPage = () => (
       figmaNodeId="2131:7269"
       {...authPageContent.setupSteps}
     />
+    <Faq items={authPageContent.faqItems} titleLines={['Your questions,', 'answered.']} variant="light" />
+    <BackendServices title={authPageContent.backendServicesTitle} />
+    <BuiltForAgents />
   </BackendPlatformPage>
 );
 

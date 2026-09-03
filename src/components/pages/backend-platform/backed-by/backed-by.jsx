@@ -17,7 +17,7 @@ const BackedBy = () => (
       <div className="relative z-10 grid grid-cols-[minmax(0,1fr)_minmax(22.5rem,0.62fr)] gap-x-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.7fr)] md:grid-cols-1 md:gap-y-20">
         <div className="flex flex-col border-l border-gray-new-50 pl-8 lg:pl-6 md:border-l-0 md:pl-0">
           <SectionLabel className="mb-5">{backedBy.label}</SectionLabel>
-          <h2 className="max-w-200 text-[2.75rem] leading-dense tracking-tighter text-gray-new-40 xl:text-[2.25rem] lg:text-[2rem] md:text-[1.75rem]">
+          <h2 className="max-w-[736px] text-[2.75rem] leading-dense tracking-tighter text-gray-new-40 xl:text-[2.25rem] lg:text-[2rem] md:text-[1.75rem]">
             <strong className="font-normal text-black-pure">{backedBy.title}</strong>{' '}
             {backedBy.highlightedTitle}
           </h2>

@@ -150,6 +150,8 @@ describe('getMarkdownPath', () => {
       ['/object-storage.md', '/md/object-storage.md'],
       ['/auth', '/md/auth-page.md'],
       ['/auth.md', '/auth.md'],
+      ['/lakebase', '/md/lakebase.md'],
+      ['/lakebase.md', '/md/lakebase.md'],
     ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
       expect(getMarkdownPath(pagePath)).toBe(markdownPath);
     });

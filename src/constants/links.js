@@ -2,6 +2,7 @@ export default {
   aboutUs: '/about-us',
   ai: '/ai',
   aiGateway: '/ai-gateway',
+  lakebase: '/lakebase',
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',

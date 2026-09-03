@@ -29,6 +29,13 @@ export default {
     pathname: LINKS.aiGateway,
     markdownPath: `${LINKS.aiGateway}.md`,
   },
+  lakebase: {
+    title: 'Lakebase Postgres — Postgres for apps and agents | Neon',
+    description:
+      'Build apps and agents on Lakebase Postgres: standard Postgres with instant branching, point-in-time restore, autoscaling, and scale to zero.',
+    pathname: LINKS.lakebase,
+    markdownPath: `${LINKS.lakebase}.md`,
+  },
   aboutUs: {
     title: 'About Us — Neon',
     description:
