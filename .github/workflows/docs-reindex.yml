@@ -5,9 +5,7 @@ on:
     branches:
       - main
     paths:
-      # Official docs catalog. Guides and changelog are site-reindex.yml.
-      - 'content/docs/**'
-      - 'content/branching/**'
+      - 'content/**'
   workflow_dispatch:
     inputs:
       urls:
