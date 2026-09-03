@@ -2735,6 +2735,10 @@ const defaultConfig = {
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Unlinked community-guides index. The /guides catch-all would eat this
+        // without a beforeFiles identity rewrite; /docs/changelog/llms.txt is
+        // already covered by /docs/:path*/llms.txt above.
+        { source: '/guides/llms.txt', destination: '/guides/llms.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
         // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).

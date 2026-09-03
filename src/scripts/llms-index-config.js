@@ -324,6 +324,26 @@ module.exports = {
     },
   ],
 
+  // Indexes written at build time that are not linked from public/docs/llms.txt.
+  // Site search ingest walks these URLs; the official docs catalog walk stays on the parent index.
+  unlinkedIndexes: [
+    {
+      route: 'guides',
+      publicPath: 'guides',
+      outputPath: 'public/guides/llms.txt',
+      title: 'Neon Community Guides',
+      intro:
+        'Step-by-step tutorials for frameworks, ORMs, auth providers, and deployment platforms.',
+    },
+    {
+      route: 'docs/changelog',
+      publicPath: 'docs/changelog',
+      outputPath: 'public/docs/changelog/llms.txt',
+      title: 'Neon Changelog',
+      intro: 'Latest updates and releases.',
+    },
+  ],
+
   // Configuration for llms-full.txt (single file with all doc content).
   // Uses shared excludePaths, EXCLUDED_DIRS, EXCLUDED_FILES from this config.
   // Section `collapse` settings are index-only and do not apply here.
