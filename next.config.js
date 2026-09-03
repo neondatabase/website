@@ -207,6 +207,12 @@ const defaultConfig = {
 
     return [
       {
+        // Legacy favicon path removed in #4345; redirect stale references to the current icon.
+        source: '/favicon/favicon.png',
+        destination: '/favicon/favicon.svg',
+        permanent: true,
+      },
+      {
         source: '/guides/neondatabase-toolkit',
         destination: '/docs/reference/sdk',
         permanent: true,
