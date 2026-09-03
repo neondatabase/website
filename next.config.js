@@ -206,6 +206,37 @@ const defaultConfig = {
     }, []);
 
     return [
+      // Common paths from the logs with no page of their own; send them to the closest real page.
+      {
+        source: '/about',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/contact-sales',
+        permanent: true,
+      },
+      {
+        source: '/contact-us',
+        destination: '/contact-sales',
+        permanent: true,
+      },
+      {
+        source: '/leadership',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/people',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/our-team',
+        destination: '/about-us',
+        permanent: true,
+      },
       {
         // Legacy favicon path removed in #4345; redirect stale references to the current icon.
         source: '/favicon/favicon.png',
