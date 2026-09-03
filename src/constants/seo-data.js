@@ -22,6 +22,13 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
+  aiGateway: {
+    title: 'AI Gateway — One API for frontier models | Neon',
+    description:
+      'Call frontier and open-weight models from your Neon backend with one credential, one bill, and zero markup.',
+    pathname: LINKS.aiGateway,
+    markdownPath: `${LINKS.aiGateway}.md`,
+  },
   aboutUs: {
     title: 'About Us — Neon',
     description:
@@ -62,6 +69,13 @@ export default {
     description: 'The Neon CLI brings the Neon backend platform to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
+  },
+  functions: {
+    title: 'Neon Functions — Long-running serverless functions',
+    description:
+      'Run long-running Node.js functions next to Lakebase Postgres, with branch-aware data and Neon service credentials injected automatically.',
+    pathname: LINKS.functions,
+    markdownPath: `${LINKS.functions}.md`,
   },
   contactSales: {
     title: 'Contact Sales — Neon',

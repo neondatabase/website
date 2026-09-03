@@ -64,3 +64,10 @@
     mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .logos-animated .logos-content {
+    animation: none;
+    will-change: auto;
+  }
+}
