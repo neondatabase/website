@@ -1,4 +1,4 @@
-text: 'The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built'
+text: "The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built"
 link:
   url: 'https://neon.com/blog/autoscaling-lakebase-postgres'
   target: '_blank'
