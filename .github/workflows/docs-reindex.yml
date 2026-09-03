@@ -104,6 +104,14 @@ jobs:
                   `Not a neon.com markdown url: ${url} (expected https://neon.com/**.md with no port, userinfo, query, or hash)`,
                 );
               }
+              if (
+                parsed.pathname.startsWith('/guides/') ||
+                parsed.pathname.startsWith('/docs/changelog/')
+              ) {
+                throw new Error(
+                  `Guide and changelog URLs go to the Site reindex workflow: ${url}`,
+                );
+              }
             }
             const payload = JSON.stringify({
               pages: urls.map((url) => ({ url, deleted: false })),

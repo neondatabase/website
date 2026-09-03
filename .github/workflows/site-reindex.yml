@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       urls:
-        description: Space-separated https://neon.com/guides/**.md or /docs/changelog/**.md URLs to reindex (upsert)
+        description: Space-separated https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md URLs to reindex (upsert)
         required: true
         type: string
 
@@ -49,7 +49,7 @@ jobs:
           sha="${{ github.sha }}"
           zeros='0000000000000000000000000000000000000000'
           if [ "${before}" = "${zeros}" ]; then
-            echo "github.event.before is the all-zeros SHA; refusing to guess the compare range. Use workflow_dispatch with the https://neon.com/**.md URLs instead."
+            echo "github.event.before is the all-zeros SHA; refusing to guess the compare range. Use workflow_dispatch with the https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md URLs to upsert. Dispatch cannot delete pages."
             exit 1
           fi
           gh api "repos/${GITHUB_REPOSITORY}/compare/${before}...${sha}" --jq '.files' \
@@ -85,7 +85,9 @@ jobs:
               try {
                 parsed = new URL(url);
               } catch {
-                throw new Error(`Not a neon.com markdown url: ${url}`);
+                throw new Error(
+                  `Not a guides or changelog markdown url: ${url} (expected https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md with no port, userinfo, query, or hash)`,
+                );
               }
               if (
                 parsed.protocol !== 'https:' ||
@@ -101,7 +103,9 @@ jobs:
                   parsed.pathname.startsWith('/docs/changelog/')
                 )
               ) {
-                throw new Error(`Not a guides or changelog markdown url: ${url}`);
+                throw new Error(
+                  `Not a guides or changelog markdown url: ${url} (expected https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md with no port, userinfo, query, or hash)`,
+                );
               }
             }
             const payload = JSON.stringify({
