@@ -8,7 +8,7 @@ excerpt: >-
   ergonomic client into typed agent tools with adapters for MCP, Mastra, and
   Eve. We're also using it to expand the hosted Neon MCP Server.
 date: '2026-09-03T12:00:00'
-updatedOn: '2026-09-02T21:40:00'
+updatedOn: '2026-09-03T15:00:00'
 category: product
 categories:
   - product
@@ -51,9 +51,11 @@ Back then, we identified two problems:
 1. First, tool definitions took up context. A large API could put hundreds of schemas into the prompt before the model read the user's request. Similar names and descriptions also made it harder for the model to select the right tool.
 2. Second, a raw REST operation is not automatically a good agent tool. REST APIs describe resources and requests. Agents are trying to finish tasks. A 1:1 mapping gives you coverage, but not the waiting, workflows, or names that make a tool usable.
 
-MCP hosts and model providers have since moved toward progressive discovery. The host searches a catalog first, then loads the full schema only when the model needs it. The [MCP client best practices](https://modelcontextprotocol.io/docs/2026-07-28/develop/clients/client-best-practices) describe the flow as search, inspect, execute. That makes larger tool catalogs practical, and it solves the first problem.
+MCP hosts and model providers have since moved toward progressive tool discovery. The host searches a catalog first, then loads the full tool schema only when the model needs it. The [MCP client best practices](https://modelcontextprotocol.io/docs/2026-07-28/develop/clients/client-best-practices) describe the flow as search, inspect, execute. That makes larger tool catalogs practical, and it solves the first problem.
 
-The second problem remains. A generated schema can describe a request body, but it does not decide:
+The second problem remains. Neon is an infrastructure provider, and our REST API is not as straightforward as a CRM API where you create, update, and delete a contact in one call. You provision infrastructure, poll operations until resources are ready, and often chain several requests before you have something usable. Creating a project might look like: create project → `operationId` → poll operations → project ready → fetch connection string.
+
+A generated schema can describe a request body, but it does not decide:
 
 - whether a create call should wait until the resource is ready
 - whether the result should include a connection string
@@ -62,18 +64,26 @@ The second problem remains. A generated schema can describe a request body, but 
 - when several API calls should become one workflow
 - which tool names and descriptions help a model choose correctly
 
-Those are product decisions, a spec cannot make them for you. So we split the work into two kinds of code generation:
+Those are product decisions. A spec cannot make them for you.
 
-1. Where the OpenAPI spec is a complete description (types, fetch functions, request schemas) we use real code generation. A spec pull regenerates that layer, coverage stays complete, and drift shows up in CI
-2. Where the spec cannot produce a better experience  (namespaced methods, waiting for readiness, composed workflows, which operations become tools, how those tools should look to a model) we use AI-driven code generation. An agent can write a factory per method at a scale that is painful to maintain by hand.
+Traditional deterministic code generation gets you raw methods, but that only gets you so far. Not the best developer experience, and not the best agent experience either. So we layered on top of the spec instead.
 
-The result is still a reviewed, versioned catalog: it looks generated, but it is not regenerated from the spec. A spec refresh does not add `projects.createAndConnect` or an MCP tool. Someone has to decide that wrap.
+The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) code-generates typed fetch functions and Zod request schemas. [`@neon/sdk`](/blog/neon-sdk) exposes those as a raw layer you can use directly, and adds `createNeonClient()`: a higher-level ergonomic client written with AI assistance, then reviewed and checked in. `@neon/tools` builds on that same ergonomic layer to publish agent tools.
+
+Two pipelines run in parallel from the same spec:
+
+1. OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()`
+2. OpenAPI spec → code generation → `@neon/tools` Zod request schemas → ergonomic client → agent tools
+
+The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `projects.createAndConnect` or an MCP tool. Someone has to decide that wrap.
 
 `@neon/tools` is the agent-facing end of that pipeline.
 
+<iframe loading="lazy" title="Give your agent Neon tools" width="500" height="375" src="https://www.youtube.com/embed/BqRhBq-_kgE?feature=oembed" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen=""></iframe>
+
 ## Building @neon/tools
 
-`@neon/tools` sits on top of a pipeline that goes from the OpenAPI spec to agent tools. Each layer adds a contract the layer below does not have. The mechanical layers regenerate, the DX layers do not.
+`@neon/tools` sits on top of that layered pipeline. Each step adds a contract the layer below does not have. The mechanical layers regenerate. The DX and AX layers do not.
 
 ### OpenAPI gives us complete coverage
 
@@ -83,7 +93,7 @@ This layer stays close to HTTP. It gives us complete API coverage and catches dr
 
 ### Adding an ergonomic client
 
-The `createNeonClient()` API groups common operations into namespaces such as `projects`, `branches`, `postgres`, `snapshots`, `storage`, `functions`, and `auth`. It also adds behavior that the OpenAPI operation does not carry on its own:
+[`@neon/sdk`](/blog/neon-sdk) is our zero-dependencies, fetch-based API client SDK. [`createNeonClient()`](https://neon.com/docs/reference/typescript-sdk) lives in that package and groups common operations into namespaces such as `projects`, `branches`, `postgres`, `snapshots`, `storage`, `functions`, and `auth`. It also adds behavior that the OpenAPI operation does not carry on its own:
 
 - automatic pagination for list methods
 - retries and typed errors
@@ -94,7 +104,7 @@ The raw layer still covers every API endpoint. The ergonomic client is not regen
 
 ### Turning SDK methods into agent tools
 
-`@neon/tools` wraps that ergonomic client, not the raw operation IDs. You select tools by SDK path:
+`@neon/tools` takes the generated Zod request schemas from the same OpenAPI spec, binds them to the ergonomic client, and publishes the result as agent tools. You select tools by SDK path:
 
 ```
 import { createNeonTools } from "@neon/tools";
@@ -285,4 +295,8 @@ npx neon@latest mcp
 
 ```
 npm install @neon/tools
+```
+
+```
+npx neon skills -s neon-postgres-agent-platforms
 ```
