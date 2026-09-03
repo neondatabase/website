@@ -10,7 +10,7 @@ summary: >-
   lakebase_ann.epsilon, and lakebase_ann.prefilter GUCs, and reference all
   operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-08-31T11:23:58.798Z'
+updatedOn: '2026-09-03T16:16:10.689Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
@@ -71,28 +71,46 @@ CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
 WITH (build_mode = 'quality');
 ```
 
-By default, `lakebase_ann` chooses the number of lists based on the number of vectors in the table. You can set `lists` to control the partition layout:
+The `fast` build mode remains supported for backward compatibility.
+
+By default, `lakebase_ann` chooses lists based on the statistics of the table and the configuration of the index. Set `lists` to control the partition layout explicitly:
 
 ```sql
 CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
-WITH (lists = '16');
+WITH (lists = '1000');
 ```
 
 Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
 
+Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of query speed. The default is `'auto'`. Test different values to meet your recall target.
+
+The shape of `probes` must match the shape of `lists`. Call `lakebase_ann_index_info` to find your `lists` array, then set one value for a one-level index or two comma-separated values for a two-level index:
+
+| `lists` from index info | `probes` to set |
+| :---------------------- | :-------------- |
+| `[]` (empty)            | `''`            |
+| `[222]`                 | `'22'`          |
+| `[3333, 33333]`         | `'33, 333'`     |
+
 <Admonition type="note">
-The `probes` GUC applies only once the index has built IVF lists, which happens above a corpus-size threshold. On a small dataset, `lakebase_ann` uses exact (flat) search instead, and `lakebase_ann_index_info` returns empty `lists` and `default_probes`. In this case, leave `probes` set to `'auto'`. The `epsilon` GUC still controls full-precision reranking during flat search. When `lists` isn't empty, the shape of `probes` must match the shape of `lists`: set one value for a one-level index or two comma-separated values for a two-level index. A mismatched value causes an error.
+On a small dataset, `lakebase_ann` uses exact (flat) search instead of IVF partitioning, and `lakebase_ann_index_info` returns empty `lists` and `default_probes`. In this case, leave `probes` set to `''`. When `lists` isn't empty, a `probes` value whose shape doesn't match `lists` causes an error.
 </Admonition>
 
-Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of speed. The default is `'auto'`. Test different values to meet your recall target.
-
 ```sql
--- For a one-level index
+-- Check your index's lists array first
+SELECT lakebase_ann_index_info('items_embedding_ann');
+
+-- Then set probes to match the shape of lists.
+-- One-level index (single-value lists): set one value.
 SET lakebase_ann.probes TO '10';
+
+-- Two-level index: set two ascending comma-separated values, for example '10, 20'.
+-- Flat index (empty lists): leave probes set to ''.
+
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
 ```
 
-`lakebase_ann.epsilon` controls the re-ranking margin. The default value of `'auto'` works well for most workloads.
+`lakebase_ann.epsilon` controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer. The default value of `'auto'` works well for most workloads. During flat search on a small dataset, `epsilon` still controls full-precision reranking.
 
 ### Prefilter
 
@@ -170,17 +188,17 @@ The `halfvec`, `rabitq8`, and `rabitq4` families provide the same three metrics 
 
 ### Index options
 
-| Option       | Type   | Default      | Description                                                                                                       |
-| :----------- | :----- | :----------- | :---------------------------------------------------------------------------------------------------------------- |
-| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff. Use `'quality'` for better recall at the cost of a longer index build.      |
-| `lists`      | string | `'auto'`     | Sets the IVF partition layout. With `auto`, the extension chooses a value based on the number of vectors indexed. |
+| Option       | Type   | Default      | Description                                                                                                                                                                                                                                                                                              |
+| :----------- | :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff. Use `'quality'` for better recall at the cost of a longer index build. `'fast'` remains supported for backward compatibility.                                                                                                                                      |
+| `lists`      | string | `'auto'`     | Sets the IVF partition layout. With `'auto'`, the extension chooses a value based on the statistics of the table and the configuration of the index. Set a single integer such as `'1000'` for a one-level index, or two ascending comma-separated integers such as `'100, 1000'` for a two-level index. |
 
 ### Search parameters
 
-| GUC                      | Type    | Default  | Description                                                                                                                     |
-| :----------------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| `lakebase_ann.probes`    | string  | `'auto'` | Number of IVF partitions to scan at each level. Higher values improve recall at the cost of query speed.                        |
-| `lakebase_ann.epsilon`   | string  | `'auto'` | Controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer. |
-| `lakebase_ann.prefilter` | boolean | `off`    | Evaluates non-vector filters before full-precision distance reranking. Best for cheap filters that remove most candidate rows.  |
+| GUC                      | Type   | Default  | Description                                                                                                                                                                     |
+| :----------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `lakebase_ann.probes`    | string | `'auto'` | Number of IVF partitions to scan at each level. Higher values improve recall at the cost of query speed. The shape must match the `lists` array from `lakebase_ann_index_info`. |
+| `lakebase_ann.epsilon`   | string | `'auto'` | Controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer.                                                 |
+| `lakebase_ann.prefilter` | enum   | `off`    | Evaluates non-vector filters before full-precision distance reranking. Valid values are `on` and `off`. Best for cheap filters that remove most candidate rows.                 |
 
 <NeedHelp />
