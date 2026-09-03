@@ -57,7 +57,7 @@ This is how working with Neon feels. Since branches scale to zero, your agent or
 
 <blockquote>
 <p>“Our users were asking for preview environments that already had their data in place. Neon's branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately”</p>
-<cite><a href="https://www.linkedin.com/in/marcuskohlberg/">Marcus Kohlberg</a>, Founder at <a href="https://encore.dev/">Encore</a></cite>
+<cite><a href="https://www.linkedin.com/in/marcuskohlberg/">Marcus Kohlberg</a>, Founder at Encore</cite>
 </blockquote>
 
 ### Running free plans gets cheap
@@ -68,7 +68,7 @@ Our own Neon's Free plan is one proof point for this model. We're currently incl
 
 <blockquote>
 <p>“Because Neon is usage-based and can scale down databases when they aren't being used, we're able to deploy thousands of new databases per day without costs getting out of hand”</p>
-<cite><a href="https://www.linkedin.com/in/dominicwhyte/">Dominic Whyte</a>, Co-founder at <a href="https://www.zite.com/">Zite</a></cite>
+<cite><a href="https://www.linkedin.com/in/dominicwhyte/">Dominic Whyte</a>, Co-founder at Zite</cite>
 </blockquote>
 
 ### Coding agents provision backends by the thousands
@@ -95,7 +95,7 @@ Who keeps count on how many repositories they have? That ubiquity is a consequen
 
 <blockquote>
 <p>“I'm always surprised by how easy it is to just create a ton of databases”</p>
-<cite>Iman Radjavi, Co-founder at Specific (<a href="https://neon.com/blog/how-specific-provisions-thousands-of-databases-for-coding-agents-using-neon">case study</a>)</cite>
+<cite>Iman Radjavi, Co-founder at Specific</cite>
 </blockquote>
 
 <blockquote>
