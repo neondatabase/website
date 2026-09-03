@@ -23,6 +23,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
   const { theme, systemTheme } = useTheme();
   const [sharedChatId, setSharedChatId] = useState(null);
   const latestInputMessageRef = useRef('');
+  const pendingAskRef = useRef('');
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -75,12 +76,22 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
     baseSettings,
     modalSettings: {
       isOpen: isChatOpen,
-      onOpenChange: setIsChatOpen,
+      onOpenChange: (open) => {
+        if (!open) pendingAskRef.current = '';
+        setIsChatOpen(open);
+      },
     },
     aiChatSettings: {
       ...aiChatSettings,
       onInputMessageChange: (message) => {
         latestInputMessageRef.current = message;
+      },
+      chatFunctionsRef: (fns) => {
+        if (!fns) return;
+        const pending = pendingAskRef.current;
+        if (pending === '') return;
+        pendingAskRef.current = '';
+        fns.submitMessage(pending);
       },
       ...(sharedChatId && { chatId: sharedChatId }),
     },
@@ -96,7 +107,19 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
       {!isNotFoundPage && (
         <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
       )}
-      <SiteSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <SiteSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onAskAi={
+          isNotFoundPage
+            ? undefined
+            : (askQuery) => {
+                pendingAskRef.current = askQuery;
+                setIsSearchOpen(false);
+                setIsChatOpen(true);
+              }
+        }
+      />
       {isChatOpen && <InkeepModalChat {...chatModalProps} />}
     </div>
   );

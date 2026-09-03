@@ -7,6 +7,7 @@ import { useEffect, useId, useState } from 'react';
 
 import Link from 'components/shared/link';
 import SearchIcon from 'icons/search.inline.svg';
+import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 import {
@@ -24,7 +25,58 @@ const COLLECTION_LABEL = {
 
 const SEARCH_DEBOUNCE_MS = 250;
 
-const SiteSearchModal = ({ isOpen, onClose }) => {
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function HighlightedText({ text, query }) {
+  const terms = [
+    ...new Set(
+      query
+        .trim()
+        .split(/\s+/)
+        .filter((term) => term.length > 0)
+    ),
+  ];
+  if (terms.length === 0) {
+    return text;
+  }
+  const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
+  const nodes = [];
+  let lastIndex = 0;
+  let match = pattern.exec(text);
+  while (match) {
+    if (match[0] === '') {
+      pattern.lastIndex += 1;
+      match = pattern.exec(text);
+      continue;
+    }
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    nodes.push(
+      <mark
+        key={match.index}
+        className="rounded-[2px] bg-green-45/20 text-inherit dark:bg-green-45/15"
+      >
+        {match[0]}
+      </mark>
+    );
+    lastIndex = match.index + match[0].length;
+    match = pattern.exec(text);
+  }
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+  return nodes;
+}
+
+HighlightedText.propTypes = {
+  text: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+};
+
+const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
   const router = useRouter();
   const inputId = useId();
   const listId = useId();
@@ -33,6 +85,7 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
+  const trimmedQuery = query.trim();
 
   useEffect(() => {
     if (isOpen) {
@@ -68,7 +121,7 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
         });
         const payload = await response.json().catch(() => null);
         if (!response.ok) {
-          if (response.status === 503) {
+          if (response.status === 502 || response.status === 503) {
             throw new Error('Search is temporarily unavailable.');
           }
           const message =
@@ -98,6 +151,11 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
   }, [isOpen, query]);
 
   const activeHit = hits[activeIndex];
+  const showAskAi =
+    typeof onAskAi === 'function' &&
+    trimmedQuery !== '' &&
+    status !== 'idle' &&
+    !(status === 'loading' && hits.length === 0);
 
   useEffect(() => {
     if (!activeHit) return;
@@ -107,6 +165,10 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
   const goToHit = (hit) => {
     onClose();
     router.push(hrefFromSearchHit(hit.url));
+  };
+
+  const askAi = () => {
+    onAskAi(trimmedQuery);
   };
 
   const onInputKeyDown = (event) => {
@@ -159,71 +221,91 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
             </kbd>
           </div>
           <div className="max-h-[min(60vh,28rem)] overflow-y-auto">
-            {query.trim() === '' && (
+            {trimmedQuery === '' && (
               <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
                 Search official docs, community guides, the changelog, and the blog.
               </p>
             )}
-            {status === 'loading' && hits.length === 0 && (
-              <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">Searching…</p>
-            )}
-            {status === 'error' && (
-              <p className="px-4 py-6 text-sm tracking-extra-tight text-secondary-1">{error}</p>
-            )}
-            {status === 'ok' && hits.length === 0 && (
-              <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
-                {`No results for "${query.trim()}".`}
-              </p>
-            )}
-            {hits.length > 0 && (
-              <ul
-                id={listId}
-                role="listbox"
-                className={cn('py-2', status === 'loading' && 'opacity-60')}
-              >
-                {hits.map((hit, index) => {
-                  const href = hrefFromSearchHit(hit.url);
-                  const showHeading = hit.heading && hit.heading !== hit.title;
-                  return (
-                    <li key={`${hit.url}-${hit.heading}`} role="presentation">
-                      <Link
-                        id={`${listId}-${index}`}
-                        to={href}
-                        role="option"
-                        aria-selected={index === activeIndex}
-                        className={cn(
-                          'flex flex-col gap-1 px-4 py-2.5 no-underline',
-                          index === activeIndex
-                            ? 'bg-gray-new-94 dark:bg-white/5'
-                            : 'hover:bg-gray-new-94 dark:hover:bg-white/5'
-                        )}
-                        data-test="docs-search-hit"
-                        onMouseEnter={() => setActiveIndex(index)}
-                        onClick={onClose}
-                      >
-                        <span className="flex items-baseline gap-2">
-                          <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
-                            {hit.title}
-                          </span>
-                          <span className="text-[11px] tracking-extra-tight text-gray-new-50 uppercase">
-                            {COLLECTION_LABEL[hit.collection] ?? hit.collection}
-                          </span>
+            <div aria-live="polite" aria-atomic="true" role="status">
+              {status === 'loading' && hits.length === 0 && (
+                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
+                  Searching…
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="px-4 py-6 text-sm tracking-extra-tight text-secondary-1">{error}</p>
+              )}
+              {status === 'ok' && hits.length === 0 && (
+                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
+                  {`No results for "${trimmedQuery}".`}
+                </p>
+              )}
+            </div>
+            <ul
+              id={listId}
+              role="listbox"
+              className={cn(
+                'py-2',
+                hits.length === 0 && 'hidden',
+                status === 'loading' && hits.length > 0 && 'opacity-60'
+              )}
+            >
+              {hits.map((hit, index) => {
+                const href = hrefFromSearchHit(hit.url);
+                const showHeading = hit.heading && hit.heading !== hit.title;
+                return (
+                  <li key={`${hit.url}-${hit.heading}`} role="presentation">
+                    <Link
+                      id={`${listId}-${index}`}
+                      to={href}
+                      role="option"
+                      aria-selected={index === activeIndex}
+                      className={cn(
+                        'flex flex-col gap-1 px-4 py-2.5 no-underline',
+                        index === activeIndex
+                          ? 'bg-gray-new-94 dark:bg-white/5'
+                          : 'hover:bg-gray-new-94 dark:hover:bg-white/5'
+                      )}
+                      data-test="docs-search-hit"
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onClick={onClose}
+                    >
+                      <span className="flex items-baseline gap-2">
+                        <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
+                          <HighlightedText text={hit.title} query={trimmedQuery} />
                         </span>
-                        {showHeading && (
-                          <span className="text-[12px] tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
-                            {hit.heading}
-                          </span>
-                        )}
-                        {hit.excerpt && (
-                          <span className="line-clamp-2 text-[13px] leading-snug tracking-extra-tight text-gray-new-50 dark:text-gray-new-60">
-                            {hit.excerpt}
-                          </span>
-                        )}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+                        <span className="text-[11px] tracking-extra-tight text-gray-new-50 uppercase">
+                          {COLLECTION_LABEL[hit.collection] ?? hit.collection}
+                        </span>
+                      </span>
+                      {showHeading && (
+                        <span className="text-[12px] tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
+                          <HighlightedText text={hit.heading} query={trimmedQuery} />
+                        </span>
+                      )}
+                      {hit.excerpt && (
+                        <span className="line-clamp-2 text-[13px] leading-snug tracking-extra-tight text-gray-new-50 dark:text-gray-new-60">
+                          <HighlightedText text={hit.excerpt} query={trimmedQuery} />
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            {showAskAi && (
+              <button
+                className="flex w-full items-center gap-2 border-t border-gray-new-90 px-4 py-3 text-left text-[13px] tracking-extra-tight text-gray-new-30 hover:bg-gray-new-94 dark:border-gray-new-15 dark:text-gray-new-70 dark:hover:bg-white/5"
+                type="button"
+                onClick={askAi}
+              >
+                <SparksIcon className="size-3.5 shrink-0" />
+                <span>
+                  {`Ask Neon AI about "${
+                    trimmedQuery.length > 80 ? `${trimmedQuery.slice(0, 77)}…` : trimmedQuery
+                  }"`}
+                </span>
+              </button>
             )}
           </div>
         </DialogPanel>
@@ -235,6 +317,7 @@ const SiteSearchModal = ({ isOpen, onClose }) => {
 SiteSearchModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onAskAi: PropTypes.func,
 };
 
 export default SiteSearchModal;
