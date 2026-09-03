@@ -4,6 +4,7 @@ const { EXCLUDED_DIRS } = require('../constants/content');
 
 const BASE_URL = 'https://neon.com';
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md', 'GUIDE_TEMPLATE.md'];
+const SITE_REINDEX_MAX_PAGES = 200;
 
 const SITE_ROUTES = [
   { srcPath: 'content/guides', urlPrefix: 'guides' },
@@ -122,6 +123,17 @@ function mapCompareFiles(files) {
   };
 }
 
+function chunkReindexPages(pages, size = SITE_REINDEX_MAX_PAGES) {
+  if (!Number.isInteger(size) || size < 1) {
+    throw new Error('chunk size must be a positive integer');
+  }
+  const chunks = [];
+  for (let i = 0; i < pages.length; i += size) {
+    chunks.push(pages.slice(i, i + size));
+  }
+  return chunks;
+}
+
 function skippedSummary(skipped) {
   const parts = [];
   if (skipped.sharedContent) {
@@ -173,6 +185,8 @@ module.exports = {
   mapCompareFiles,
   classify,
   skippedSummary,
+  chunkReindexPages,
+  SITE_REINDEX_MAX_PAGES,
 };
 
 if (require.main === module) {

@@ -3,7 +3,11 @@ import { createRequire } from 'module';
 import { describe, expect, it } from 'vitest';
 
 const require = createRequire(import.meta.url);
-const { mapCompareFiles } = require('./site-reindex-map.js');
+const {
+  chunkReindexPages,
+  mapCompareFiles,
+  SITE_REINDEX_MAX_PAGES,
+} = require('./site-reindex-map.js');
 
 describe('mapCompareFiles', () => {
   it('maps a community guide and a changelog entry', () => {
@@ -61,6 +65,27 @@ describe('mapCompareFiles', () => {
     expect(result.pages).toEqual([
       { url: 'https://neon.com/guides/old-name.md', deleted: true },
       { url: 'https://neon.com/guides/new-name.md', deleted: false },
+    ]);
+  });
+});
+
+describe('chunkReindexPages', () => {
+  it('keeps a full 200-page payload as one chunk', () => {
+    const pages = Array.from({ length: SITE_REINDEX_MAX_PAGES }, (_, i) => ({
+      url: `https://neon.com/guides/${i}.md`,
+      deleted: false,
+    }));
+    expect(chunkReindexPages(pages).map((chunk) => chunk.length)).toEqual([SITE_REINDEX_MAX_PAGES]);
+  });
+
+  it('splits 201 pages into 200 and 1', () => {
+    const pages = Array.from({ length: SITE_REINDEX_MAX_PAGES + 1 }, (_, i) => ({
+      url: `https://neon.com/guides/${i}.md`,
+      deleted: false,
+    }));
+    expect(chunkReindexPages(pages).map((chunk) => chunk.length)).toEqual([
+      SITE_REINDEX_MAX_PAGES,
+      1,
     ]);
   });
 });

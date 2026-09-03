@@ -140,24 +140,36 @@ jobs:
           fi
           node <<'NODE'
           const { createHmac } = require('node:crypto');
-          const body = process.env.PAYLOAD;
-          const signature = `sha256=${createHmac('sha256', process.env.NEON_AGENT_DOCS_REINDEX_SECRET)
-            .update(body)
-            .digest('hex')}`;
+          const { chunkReindexPages } = require('./src/scripts/site-reindex-map.js');
+          const parsed = JSON.parse(process.env.PAYLOAD);
+          if (!parsed || !Array.isArray(parsed.pages)) {
+            throw new Error('payload must be {"pages":[...]}');
+          }
           (async () => {
-            const response = await fetch(process.env.NEON_AGENT_SITE_REINDEX_URL, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-                'x-site-reindex-signature': signature,
-              },
-              body,
-            });
-            await response.arrayBuffer();
-            if (response.status !== 202) {
-              throw new Error(`site reindex returned ${response.status}`);
+            const chunks = chunkReindexPages(parsed.pages);
+            for (const [index, pages] of chunks.entries()) {
+              const body = JSON.stringify({ pages });
+              const signature = `sha256=${createHmac('sha256', process.env.NEON_AGENT_DOCS_REINDEX_SECRET)
+                .update(body)
+                .digest('hex')}`;
+              const response = await fetch(process.env.NEON_AGENT_SITE_REINDEX_URL, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                  'x-site-reindex-signature': signature,
+                },
+                body,
+              });
+              await response.arrayBuffer();
+              if (response.status !== 202) {
+                throw new Error(
+                  `site reindex chunk ${index + 1}/${chunks.length} returned ${response.status}`,
+                );
+              }
+              console.log(
+                `site reindex chunk ${index + 1}/${chunks.length} returned ${response.status}`,
+              );
             }
-            console.log(`site reindex returned ${response.status}`);
           })().catch((error) => {
             console.error(error instanceof Error ? error.message : error);
             process.exit(1);
