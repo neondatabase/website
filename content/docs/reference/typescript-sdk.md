@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-08-31T16:23:18.162Z'
+updatedOn: '2026-09-03T00:51:45.020Z'
 ---
 
 <InfoBlock>
@@ -24,6 +24,7 @@ updatedOn: '2026-08-31T16:23:18.162Z'
 <a href="/docs/reference/api">Neon API Reference</a>
 <a href="/docs/reference/migrate-api-client-to-sdk">Migrate from @neondatabase/api-client</a>
 <a href="/docs/cli">Neon CLI</a>
+<a href="https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools">@neon/tools (agent tools)</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
@@ -35,6 +36,10 @@ updatedOn: '2026-08-31T16:23:18.162Z'
 `@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Managed Better Auth. Retries, readiness polling, auto-pagination, and typed errors are built in.
 
 It replaces [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client), the deprecated Axios-based SDK. New projects should use `@neon/sdk`. See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.
+
+<Callout title="Building for agents?">
+[`@neon/tools`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools) wraps this same client and publishes selected methods as typed agent tools, with adapters for MCP, Mastra, and Eve. Use it when a model drives the operations; use `@neon/sdk` when your own code does.
+</Callout>
 
 <Admonition type="note" title="Not every endpoint has an ergonomic wrapper">
 `createNeonClient` namespaces cover common workflows (projects, branches, Postgres resources, snapshots, and more). They do **not** wrap every Platform API operation. For endpoints without a namespace method, use the [`raw` layer](#raw-layer) below or the [Neon API Reference](/docs/reference/api).
