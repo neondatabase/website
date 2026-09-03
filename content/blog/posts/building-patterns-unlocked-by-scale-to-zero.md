@@ -31,6 +31,8 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/building-patterns-unlocked-by-scale-to-zero/cover.jpg
 ---
 
+![A wireframe cube labeled "wake on request" beside a stack of metallic cubes, illustrating compute suspending and restarting on demand](https://cdn.neonapi.io/public/images/pages/blog/building-patterns-unlocked-by-scale-to-zero/cover.jpg)
+
 Most hosted Postgres pricing works like this:
 
 - You pick an instance size
