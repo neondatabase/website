@@ -8,8 +8,15 @@ export function parseSiteSearchRequest(body) {
   if (keys.some((key) => key !== 'query' && key !== 'limit')) {
     throw new Error('Unexpected field');
   }
-  if (typeof body.query !== 'string' || body.query.trim() === '') {
+  if (typeof body.query !== 'string') {
     throw new Error('query is required');
+  }
+  const query = body.query.trim();
+  if (query === '') {
+    throw new Error('query is required');
+  }
+  if (query.length > 500) {
+    throw new Error('query is too long');
   }
   if (body.limit !== undefined) {
     if (!Number.isInteger(body.limit) || body.limit < 1 || body.limit > 40) {
@@ -17,7 +24,7 @@ export function parseSiteSearchRequest(body) {
     }
   }
   return {
-    query: body.query.trim(),
+    query,
     ...(body.limit === undefined ? {} : { limit: body.limit }),
   };
 }
