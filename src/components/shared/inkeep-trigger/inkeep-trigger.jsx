@@ -46,6 +46,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      if (event.defaultPrevented) return;
       if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         setIsSearchOpen(true);
