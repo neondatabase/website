@@ -15,8 +15,11 @@ categories:
 authors:
   - andre-landgraf
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/give-your-agent-neon-tools/cover.jpg
+  alt: >-
+    A mixing console with faders and buttons labeled Neon MCP, Mastra, and Eve,
+    its display reading "168 operations"
 isFeatured: false
 seo:
   title: Give your agent Neon tools - Neon
@@ -29,7 +32,8 @@ seo:
   ogDescription: >-
     @neon/tools now publishes the Neon SDK as typed agent tools. Plus, the Neon
     MCP Server now exposes far more of the API
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/give-your-agent-neon-tools/cover.jpg
 ---
 
 **Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 82 Management API tools (68/82 are new) alongside its 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
