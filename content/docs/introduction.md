@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-04T21:01:38.182Z'
+updatedOn: '2026-09-04T21:20:34.673Z'
 ---
 
 ## Getting started
@@ -25,12 +25,13 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
     command="npx neon@latest init"
     description="Run one command to connect Neon to your AI agent, then let it build your backend from a prompt."
     href="/docs/get-started/with-an-agent"
-    linkText="Open guide"
+    linkText="Open quickstart"
   />
   <GuidedPath
     title="Build a full backend yourself"
     description="Write each piece by hand on the full Neon backend: Lakebase Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
+    cta="Open guide"
   />
 </TwinPaths>
 
