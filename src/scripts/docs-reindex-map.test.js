@@ -131,6 +131,7 @@ describe('mapCompareFiles', () => {
     ]);
     expect(result.pages).toEqual([]);
     expect(result.sync).toBe(true);
+    expect(result.skipped.notMarkdown).toBe(0);
     expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
   });
 
@@ -140,7 +141,7 @@ describe('mapCompareFiles', () => {
     ]);
     expect(result.pages).toEqual([]);
     expect(result.sync).toBe(true);
-    expect(result.skipped.notMarkdown).toBe(1);
+    expect(result.skipped.notMarkdown).toBe(0);
     expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
   });
 

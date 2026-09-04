@@ -94,14 +94,16 @@ function classify(file) {
   return { kind: 'catalog', url };
 }
 
+function isCatalogSyncPath(file) {
+  return CATALOG_SYNC_PATHS.has(posix(file));
+}
+
 function catalogShapingChanged(files) {
   return files.some((file) => {
-    if (CATALOG_SYNC_PATHS.has(posix(file.filename))) {
+    if (isCatalogSyncPath(file.filename)) {
       return true;
     }
-    return Boolean(
-      file.previous_filename && CATALOG_SYNC_PATHS.has(posix(file.previous_filename))
-    );
+    return Boolean(file.previous_filename && isCatalogSyncPath(file.previous_filename));
   });
 }
 
@@ -132,14 +134,16 @@ function mapCompareFiles(files) {
       const previous = classify(file.previous_filename);
       if (previous.kind === 'catalog') {
         addPage(pages, previous.url, true);
-      } else {
+      } else if (!isCatalogSyncPath(file.previous_filename)) {
         bump(skipped, previous.kind);
       }
     }
 
     const current = classify(file.filename);
     if (current.kind !== 'catalog') {
-      bump(skipped, current.kind);
+      if (!isCatalogSyncPath(file.filename)) {
+        bump(skipped, current.kind);
+      }
       continue;
     }
     if (status === 'removed') {

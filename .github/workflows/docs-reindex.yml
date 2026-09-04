@@ -8,7 +8,7 @@ on:
       # Official docs catalog. Guides and changelog are site-reindex.yml.
       - 'content/docs/**'
       - 'content/branching/**'
-      # Membership of generated pages (API endpoints) lives here, not in git.
+      # Catalog membership can change without a markdown edit.
       - 'src/constants/content.js'
       - 'src/scripts/llms-index-config.js'
       - 'src/scripts/generate-llms-index.js'
