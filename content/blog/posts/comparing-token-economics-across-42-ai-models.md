@@ -248,7 +248,7 @@ So to amuse us,
 
 At published AI gateway rates, this would come up to:
 
-**[ADD FIGURE 9]**
+![Estimated model cost differences for 100-person and 1,000-person software companies](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-9.jpg)
 
 Under these assumptions, model selection would change inference spend by roughly 86×. Of course, this would not mean that Llama is the right coding model for either company - all kinds of metrics have to be evaluated and tested, including the other parameters we mentioned in this experiment (time to completion, pass rate) plus overall output quality. But this is a good sample to indicate the huge impact optimization in token cost can have in companies today.
 
