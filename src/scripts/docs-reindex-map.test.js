@@ -133,6 +133,8 @@ describe('mapCompareFiles', () => {
     expect(result.sync).toBe(true);
     expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
   });
+
+  it('sets catalog sync when llms-index-config.js changes', () => {
     const result = mapCompareFiles([
       { filename: 'src/scripts/llms-index-config.js', status: 'modified' },
     ]);
