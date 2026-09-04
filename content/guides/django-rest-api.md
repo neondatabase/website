@@ -1,13 +1,13 @@
 ---
 title: Building an API with Django, Django REST Framework, and Lakebase Postgres
-subtitle: Learn how to create a robust RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres
+subtitle: Learn how to create a RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django to provide powerful tools for building RESTful APIs quickly and efficiently based on your Django models with minimal code.
+Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django with tools for building RESTful APIs from your Django models with minimal code.
 
 In this guide, we will go over how to build a RESTful API for a fictional AI Model Marketplace using Django and Django REST Framework with Neon's serverless Postgres as the database backend.
 
@@ -302,7 +302,7 @@ Let's break down each serializer to better understand their purpose:
    - This serializer is for the `ModelBenchmark` model.
    - It includes all fields, enabling the representation of performance benchmarks for AI models.
 
-These serializers provide a powerful abstraction layer between your Python objects and the JSON representations of your API. They handle both serialization (Python to JSON) and deserialization (JSON to Python), including validation of incoming data.
+These serializers provide an abstraction layer between your Python objects and the JSON representations of your API. They handle both serialization (Python to JSON) and deserialization (JSON to Python), including validation of incoming data.
 
 By using `ModelSerializer`, we get a lot of functionality out of the box, such as automatically generated fields based on the model fields, default implementations of `create()` and `update()` methods, and validation based on model field types.
 
@@ -455,7 +455,7 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
 
 In this guide, we've built a RESTful API for a simple AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres. We covered setting up the project, defining models for AI models, authors, purchases, usage scenarios, and benchmarks, creating serializers and views, and configuring URL routing.
 
-This API provides a solid foundation for an AI Model Marketplace platform. You can extend it with features like user authentication, advanced search and filtering, model versioning, and integration with payment systems. The combination of Django's powerful ORM, DRF's flexibility, and Neon's scalable Postgres database makes it easy to build and deploy robust, performant APIs for complex applications like AI model distribution platforms.
+This API provides a solid foundation for an AI Model Marketplace platform. You can extend it with features like user authentication, advanced search and filtering, model versioning, and integration with payment systems. The combination of Django's ORM, DRF's flexibility, and Neon's scalable Postgres database makes it easy to build and deploy performant APIs for complex applications like AI model distribution platforms.
 
 ## Additional Resources
 

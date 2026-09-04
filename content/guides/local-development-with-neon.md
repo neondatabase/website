@@ -24,7 +24,7 @@ Let's explore both options to help you pick the right one.
 
 ## Database branching
 
-Imagine creating a complete copy of your database as easily as creating a Git branch. That's [database branching](/docs/introduction/branching) with Neon – perfect for testing new features or updates without touching production data.
+[Database branching](/docs/introduction/branching) creates a complete copy of your database as easily as creating a Git branch. Use it to test new features or updates without touching production data.
 
 ### Why use it?
 
@@ -467,7 +467,7 @@ Cloud-hosted branches offer several compelling advantages:
 ### Choose database branching when:
 
 - You want instant development environments
-- You need efficient resource utilization
+- You need efficient resource use
 - You're working with a team
 
 **Perfect for:**
@@ -480,7 +480,7 @@ Cloud-hosted branches offer several compelling advantages:
 
 ### Consider local PostgreSQL when:
 
-- Offline development is crucial
+- You need offline development
 - You need zero network latency
 - You require complete database control
 - You have specific local testing requirements
@@ -507,6 +507,6 @@ Cloud-hosted branches offer several compelling advantages:
 
 ## Start building
 
-You're now ready to create a powerful development environment with Neon. Choose the approach that fits your team best and start building.
+You're now ready to set up a development environment with Neon. Choose the approach that fits your team best and start building.
 
 <NeedHelp/>

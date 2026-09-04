@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Laravel Events and Listeners
-subtitle: Learn how to implement and utilize Laravel's event system with Neon
+subtitle: Learn how to implement and use Laravel's event system with Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
@@ -377,7 +377,7 @@ class SendOrderConfirmation implements ShouldQueue, ShouldHandleEventsAfterCommi
 }
 ```
 
-By implementing the `ShouldHandleEventsAfterCommit` interface, we're telling Laravel to only process this listener after all open database transactions have been committed. This is crucial when your listener depends on database changes made within the transaction.
+By implementing the `ShouldHandleEventsAfterCommit` interface, we're telling Laravel to only process this listener after all open database transactions have been committed. This matters when your listener depends on database changes made within the transaction.
 
 This approach ensures that:
 
@@ -392,9 +392,9 @@ If your queue connection's `after_commit` configuration option is set to `true` 
 
 ## Conclusion
 
-In this guide, we've explored how to implement and utilize Laravel's event system, focusing on database operations with Neon as our database provider. We've covered creating and dispatching events, creating and registering listeners, and how to use database transactions with events.
+In this guide, we've explored how to implement and use Laravel's event system, focusing on database operations with Neon as our database provider. We've covered creating and dispatching events, creating and registering listeners, and how to use database transactions with events.
 
-Events and listeners provide a powerful way to decouple various aspects of your application, making your code more maintainable and scalable without blocking the main request flow for time-consuming tasks.
+Events and listeners let you decouple various aspects of your application, making your code more maintainable and scalable without blocking the main request flow for time-consuming tasks.
 
 As a next step, you might want to look into implementing [Supervisor](https://laravel.com/docs/11.x/queues#supervisor-configuration) to manage your queue workers in a production environment and [Laravel Horizon](https://laravel.com/docs/11.x/horizon) for monitoring and managing your queues rather than using the `queue:work` command directly.
 

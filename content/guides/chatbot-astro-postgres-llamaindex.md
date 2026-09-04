@@ -371,7 +371,7 @@ import App from "../App"; // [!code ++]
 </html>
 ```
 
-The changes above import the App component. Additionally, using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that the React application is hydrated immediately on the page.
+The changes above import the App component. Using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that the React application is hydrated immediately on the page.
 
 Let's move on to using Postgres as the vector store for your chatbot.
 
@@ -390,7 +390,7 @@ export default new PGVectorStore({
 });
 ```
 
-The code above begins with importing the `dotenv/config`, loading all the environment variables into the scope. Additionally, it exports an instance of `PGVectorStore` initialized using the Postgres pooled connection URL obtained earlier.
+The code above begins with importing the `dotenv/config`, loading all the environment variables into the scope. It also exports an instance of `PGVectorStore` initialized using the Postgres pooled connection URL obtained earlier.
 
 Let's move on to building the chat API endpoint.
 
@@ -923,6 +923,6 @@ Now, push the added GitHub workflow file to your GitHub repo. Follow the steps b
 
 ## Summary
 
-In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Lakebase Postgres. Additionally, you learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
+In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Lakebase Postgres. You also learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
 
 <NeedHelp />

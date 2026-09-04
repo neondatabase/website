@@ -1,6 +1,6 @@
 ---
 title: Creating a Multi-Tenant Application with Laravel and Neon
-subtitle: Learn how to build a scalable multi-tenant application using Laravel and Neon's powerful database features
+subtitle: Learn how to build a scalable multi-tenant application using Laravel and Neon's database features
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'

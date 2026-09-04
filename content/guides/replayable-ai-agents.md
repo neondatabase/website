@@ -181,7 +181,7 @@ When `finalize_restore` is `True`, Neon preserves your connection string by movi
 You’ll create a **Database Admin agent** that serves as the administrator for a Postgres database. Whenever the agent attempts a sensitive operation such as dropping a table it will automatically pause. At that point, you’ll trigger a Neon snapshot and preserve the agent’s memory state.
 
 <Admonition type="note" title="Use your own agents">  
-The agent and tools in this guide are intentionally kept simple to highlight the basics of replayability. In a real application, your agents and tools will naturally be more sophisticated and you wouldn’t typically provide one with the ability to drop an entire table. The important takeaway is to identify the key points in your agent’s workflow where you want to capture checkpoints to enable replay and recovery.
+The agent and tools in this guide are intentionally kept simple to highlight the basics of replayability. In a real application, your agents and tools will be more complex, and you wouldn’t typically provide one with the ability to drop an entire table. The important takeaway is to identify the key points in your agent’s workflow where you want to capture checkpoints to enable replay and recovery.
 </Admonition>
 
 Create a file named `agent.py`:
@@ -532,7 +532,7 @@ Notice what happens:
 
 ## Why this architecture matters
 
-This pattern of pairing agent state with Neon snapshots creates a powerful architecture for building reliable, replayable AI agents. It addresses the core challenges of AI agent failure modes:
+This pattern of pairing agent state with Neon snapshots gives you an architecture for building reliable, replayable AI agents. It addresses the main AI agent failure modes:
 
 - **Recoverable state:** Standard retry logic fails if an agent has already mutated state. Neon snapshots let you restore the database to the checkpointed state.
 - **Stable connections:** By using `target_branch_id` and `finalize_restore: True` in the Neon API, the compute endpoint for your database moves to the restored state. Your application connection string does not have to change.
@@ -546,7 +546,7 @@ You demonstrated an immediate rollback by restoring the database in place using 
 
 Imagine your agent processed a massive financial reconciliation workflow a week ago. Today, you realize the agent's prompt had a subtle hallucination, and it categorized a batch of transactions incorrectly. You want to replay that exact execution from 10 days ago and fix it.
 
-You cannot restore your production database in-place to 10 days ago. You would wipe out a week of real user activity!
+You cannot restore your production database in-place to 10 days ago. You would wipe out a week of real user activity.
 
 This is where Neon's branching capabilities make historical replay safe:
 
@@ -562,11 +562,11 @@ By combining serialized agent memory with copy-on-write database branches, you c
 
 The examples in this guide show the minimal components required for replayability: a Postgres database, a sample `users` table, and a local `checkpoint.json` file.
 
-In practice, AI systems run inside a robust **agent harness** using an asynchronous, event-driven architecture. The core primitive that pairs an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
+In practice, AI systems run inside an **agent harness** using an asynchronous, event-driven architecture. The core primitive that pairs an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
 
 - **Cloud state persistence:** Instead of a local `checkpoint.json`, agent memory and execution graphs are stored in an object store like AWS S3 or in a JSONB column in a separate metadata database. Every `step_id` is durably linked to a Neon `snapshot_id`.
 - **Asynchronous approvals:** Instead of a local script, an interruption triggers a webhook that sends a Slack message (or email) to a human reviewer. The agent process gracefully shuts down while waiting. When the reviewer clicks "Approve", an API endpoint wakes up the orchestrator, reloads the checkpoint, and resumes the agent.
-- **Durable orchestration:** The `while result.interruptions:` loop is replaced by a durable execution framework like Temporal, [DBOS](/guides/pydantic-ai-dbos-neon), or AWS Step Functions. If a server crashes, the orchestrator seamlessly restores the latest agent state and database snapshot on a new node.
+- **Durable orchestration:** The `while result.interruptions:` loop is replaced by a durable execution framework like Temporal, [DBOS](/guides/pydantic-ai-dbos-neon), or AWS Step Functions. If a server crashes, the orchestrator restores the latest agent state and database snapshot on a new node.
 - **Observability:** Every snapshot and agent state ID is injected as metadata into your LLM observability platform (e.g., LangSmith, Braintrust, Datadog). When looking at a trace of a failed tool call, you have a direct link to the exact database snapshot needed to debug it.
 
 ## Apply the pattern to other agent frameworks

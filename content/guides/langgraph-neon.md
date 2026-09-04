@@ -22,7 +22,7 @@ Before you begin, make sure you have the following prerequisites:
   - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
 - **Google API key:**
-  - This guide utilizes the `gemini-3.5-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
+  - This guide uses the `gemini-3.5-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
   - The free tier is sufficient for the example in this guide.
 
 ## LangGraph basics
@@ -45,7 +45,7 @@ LangGraph is an open‐source orchestration framework for building stateful, mul
 - **Tools:** Integration points for external functionalities (like web search, code execution, or API calls) that extend the agent’s capabilities beyond simple text generation.
 - **Human-in-the-loop workflows:** Built-in mechanisms that allow human oversight, ensuring that agent decisions can be validated, corrected, or enhanced before proceeding.
 
-By leveraging these powerful components, LangGraph empowers you to build reliable, scalable, and highly customizable AI agent applications, from prototyping to production.
+With these components, LangGraph lets you build reliable, customizable AI agent applications, from prototyping to production.
 
 ## Why Neon for AI Agents?
 
@@ -112,7 +112,7 @@ NEON_API_KEY=YOUR_NEON_API_KEY
 **Replace the placeholders** `YOUR_GOOGLE_API_KEY` and `YOUR_NEON_API_KEY` with the actual API keys you obtained in the [Prerequisites](#prerequisites) section.
 
 <Admonition type="note">
-    It is crucial to add `.env` to your `.gitignore` file if you are using Git for version control. This prevents your API keys from being inadvertently exposed in your code repository.
+    Add `.env` to your `.gitignore` file if you are using Git for version control. This prevents your API keys from being inadvertently exposed in your code repository.
 </Admonition>
 
 ### Creating the `main.py` script
@@ -331,7 +331,7 @@ for message in result["messages"]:
 This is the core part of the script where the LangGraph agent is set up and invoked. Let's break down this section:
 
 - `available_tools = [create_database, run_sql_query]`: Creates a list of tools that will be made available to the agent. This list includes the `create_database` and `run_sql_query` functions defined earlier.
-- `system_prompt = SystemMessage(...)`: Defines the system message for the AI agent. This message is crucial as it sets the agent's persona and provides instructions on how to use the available tools. It dynamically lists the tools and their descriptions in the prompt, instructing the agent on its capabilities.
+- `system_prompt = SystemMessage(...)`: Defines the system message for the AI agent. This message sets the agent's persona and provides instructions on how to use the available tools. It dynamically lists the tools and their descriptions in the prompt, instructing the agent on its capabilities.
 - `model = ChatGoogleGenerativeAI(model="gemini-3.5-flash")`: Initializes the language model that will power the agent. Here, `ChatGoogleGenerativeAI` is used to specify Google's Gemini `gemini-3.5-flash` model.
 - `agent_graph = create_react_agent(...)`: This line is where the LangGraph agent is created using the `create_react_agent` function.
   - `model=model`: Specifies the language model (`gemini-3.5-flash`) to be used by the agent for reasoning and generating responses.
@@ -457,7 +457,7 @@ You can verify the successful completion of the task by checking the [Neon Conso
 
 ![Output in Neon console](/docs/guides/langgraph-neon-console.png)
 
-**Congratulations!** You have successfully built and executed a LangGraph agent that interacts with tools (Neon API here) to perform actions based on user input. This example serves as a foundation for creating more complex AI agents and workflows, enabling you to automate a wide range of tasks and processes.
+You have built and run a LangGraph agent that uses tools (the Neon API here) to perform actions based on user input. You can extend this example into more complex agents and workflows.
 
 You can find the source code for the application described in this guide on GitHub.
 
@@ -471,7 +471,7 @@ This guide has provided an introductory exploration into building AI agents usin
 
 While this guide covers the basics, LangGraph offers a range of features for developing more advanced applications. To expand your understanding and capabilities, it is recommended to further investigate several key aspects of the framework. [Checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence) provide a mechanism for state persistence, enabling agents to retain context across sessions and resume operations. The use of [Command](https://langchain-ai.github.io/langgraph/how-tos/command) objects allows for control over workflow and state updates within nodes, enhancing agent responsiveness.
 
-For optimizing application performance and user experience, LangGraph supports [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming), which can provide real-time outputs and token-by-token updates during agent execution. Understanding the [Recursion Limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) is important for managing the execution depth of complex workflows and ensuring predictable behavior. Furthermore, [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows, facilitated by the `interrupt` function and `Command` objects, offer options for integrating human oversight into agent processes, which may be necessary for applications requiring validation or control. Consider adding it for `DELETE` and `UPDATE` operations to the `run_sql_query` tool to enhance the agent's capabilities.
+For optimizing application performance and user experience, LangGraph supports [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming), which can provide real-time outputs and token-by-token updates during agent execution. Understanding the [Recursion Limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) is important for managing the execution depth of complex workflows and ensuring predictable behavior. [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows, facilitated by the `interrupt` function and `Command` objects, offer options for integrating human oversight into agent processes, which may be necessary for applications requiring validation or control. Consider adding it for `DELETE` and `UPDATE` operations to the `run_sql_query` tool.
 
 ## Resources
 

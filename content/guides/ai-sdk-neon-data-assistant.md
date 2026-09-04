@@ -9,7 +9,7 @@ updatedOn: '2026-04-02T06:05:49.000Z'
 
 In many organizations, critical business data lives in a production Postgres database. Product, sales, and marketing teams rely on this information, but direct access is usually restricted to developers and data engineers with SQL expertise. As a result, non-technical teams often face delays: they must request queries, while engineers spend valuable time answering routine data questions.
 
-An AI assistant in Slack can streamline this process by providing instant answers to questions like _"Which regions drove the most sales this week?"_. However, connecting an AI agent directly to a production database introduces risks. Even read-only queries can be resource-intensive and impact performance, and there is always the possibility of unintended write operations.
+An AI assistant in Slack can speed this up by providing instant answers to questions like _"Which regions drove the most sales this week?"_. However, connecting an AI agent directly to a production database introduces risks. Even read-only queries can be resource-intensive and impact performance, and there is always the possibility of unintended write operations.
 
 This guide explains how to build a data driven AI Assistant that avoids these pitfalls. By combining the [**Vercel AI SDK**](https://ai-sdk.dev/), [**Chat SDK**](https://chat-sdk.dev/), and [**Neon Read Replicas**](/docs/introduction/read-replicas), the assistant queries a dedicated read-only replica. This architecture ensures real-time access to business data without slowing down production systems or risking accidental modifications.
 
@@ -431,7 +431,7 @@ You can now test your bot locally. With your ngrok tunnel running and your Hono 
 
      ![Example slack bot interaction](/docs/guides/slack_bot_interaction_example.png)
 
-Congratulations! You have successfully built an AI-powered Slack assistant that can safely run analytical queries against your production data using Neon Read Replicas and the Vercel AI SDK.
+You have built an AI-powered Slack assistant that can safely run analytical queries against your production data using Neon Read Replicas and the Vercel AI SDK.
 
 ## Deploying to production
 

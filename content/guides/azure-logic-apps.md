@@ -208,7 +208,7 @@ Now, every time a new order is placed, the Logic App will automatically insert t
 
 Azure Logic Apps and Lakebase Postgres provide a straightforward way to automate workflows and database operations. Whether you need to process orders, send notifications, or connect different services, this approach allows you to set up reliable automation with minimal effort.
 
-Thanks to the Azure Logic Apps PostgreSQL connector, you can easily integrate your Lakebase Postgres database into your workflows and build powerful automation solutions without writing code or managing infrastructure. Azure Logic Apps has a large number of connectors available, so you can easily integrate with other services and systems to create complex workflows.
+Thanks to the Azure Logic Apps PostgreSQL connector, you can easily integrate your Lakebase Postgres database into your workflows and build automations without writing code or managing infrastructure. Azure Logic Apps has a large number of connectors available, so you can easily integrate with other services and systems to create complex workflows.
 
 ## Additional Resources
 

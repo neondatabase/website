@@ -7,11 +7,11 @@ createdAt: '2024-10-14T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that improve database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
 
 A key advantage of Neon's architecture is that adding a read replica doesn't require additional storage, making it a highly efficient scaling solution. This cost-effective approach is ideal for businesses of all sizes that need to improve database performance without increasing storage costs.
 
-This guide demonstrates how to leverage Neon read replicas to efficiently scale Next.js applications using Drizzle ORM. You'll learn how to configure your Drizzle database client to work with read replicas, enabling you to optimize your database operations and improve overall application performance.
+This guide shows how to use Neon read replicas to scale Next.js applications using Drizzle ORM. You'll learn how to configure your Drizzle database client to work with read replicas, enabling you to optimize your database operations and improve overall application performance.
 
 ## Prerequisites
 
@@ -436,7 +436,7 @@ You can find the source code for the application described in this guide on GitH
 
 ## Conclusion
 
-By leveraging Neon's read replicas with Drizzle in your Next.js application, you can significantly improve your application's performance and scalability. Drizzle makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
+With Neon's read replicas and Drizzle in your Next.js application, you can improve your application's performance and scalability. Drizzle makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
 
 This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
 

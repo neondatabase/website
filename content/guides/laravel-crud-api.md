@@ -1,13 +1,13 @@
 ---
 title: Building a CRUD API with Laravel and Sanctum
-subtitle: Learn how to create a robust, secure CRUD API using Laravel and Laravel Sanctum for authentication
+subtitle: Learn how to create a secure CRUD API using Laravel and Laravel Sanctum for authentication
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
 updatedOn: '2026-02-02T06:44:09.000Z'
 ---
 
-Laravel is a powerful PHP framework that allows developers to easily build web applications and APIs.
+Laravel is a PHP framework for building web applications and APIs.
 
 In this guide, we'll walk through the process of creating a CRUD (Create, Read, Update, Delete) API using Laravel, and we'll implement authentication using [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum).
 
@@ -731,7 +731,7 @@ The end-user will still receive the same JSON response, but the validation logic
 
 ## Testing the API
 
-To ensure our API works as expected, Laravel provides a powerful testing suite out of the box.
+To ensure our API works as expected, Laravel provides a testing suite out of the box.
 
 To learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch).
 
@@ -838,7 +838,7 @@ By following these steps, you now have a fully functional API that allows authen
 
 As next steps you can think about adding more features to the API, such as search, filtering, sorting, and more advanced authentication and authorization mechanisms.
 
-Additionally, it is a good idea to implement throttling to protect your API from abuse and to ensure fair usage.
+It is also a good idea to implement throttling to protect your API from abuse and to ensure fair usage.
 
 ## Additional Resources
 

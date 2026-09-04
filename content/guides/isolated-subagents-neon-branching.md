@@ -24,7 +24,7 @@ In this guide, you'll learn how to build this workflow using **Claude Code Subag
 Using Claude Code's worktree isolation with a custom Neon Git hook, you'll build an automated workflow where every subagent is instantly provisioned its own lightweight directory _and_ its own isolated database branch.
 
 <Admonition type="info" title="New to Git worktrees?">
-If you aren't familiar with how Git worktrees function under the hood to isolate file systems, check out [Git worktrees and Neon Branching](/guides/git-worktrees-neon-branching) for a better understanding of how this powerful combination enables safe parallel development.
+If you aren't familiar with how Git worktrees function under the hood to isolate file systems, check out [Git worktrees and Neon Branching](/guides/git-worktrees-neon-branching) for a closer look at how this combination enables safe parallel development.
 </Admonition>
 
 To demonstrate this in action, a social media application built with Next.js and Drizzle ORM is used as an example throughout the guide. You'll use two Claude subagents to work simultaneously: one building a new **API Key Management** feature, and the other optimizing a slow **User Activity Feed**.
@@ -230,7 +230,7 @@ When invoked with a feature request:
 
 The `isolation: worktree` property instructs Claude to place this agent in its own isolated Git worktree. The `background: true` property allows the agent to run asynchronously, freeing up your main terminal while it works.
 
-Additionally, the `permissionMode` parameter specifies how the subagent handles permission prompts. It can be set to `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, or `plan` depending on your preference. Since each subagent in this workflow operates in a fully isolated Git worktree and a dedicated Neon database branch, it is safe to use `bypassPermissions`. This allows the agent to execute commands and make database changes without pausing to ask for approval, as any modifications are strictly confined to its isolated environment.
+The `permissionMode` parameter specifies how the subagent handles permission prompts. It can be set to `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, or `plan` depending on your preference. Since each subagent in this workflow operates in a fully isolated Git worktree and a dedicated Neon database branch, it is safe to use `bypassPermissions`. This allows the agent to execute commands and make database changes without pausing to ask for approval, as any modifications are strictly confined to its isolated environment.
 
 You can learn more about the different supported parameters in the [Claude Code subagents documentation](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields).
 
@@ -303,7 +303,7 @@ When the background subagents complete their tasks, they return their findings b
 
 ![Claude Code subagent reports](/docs/guides/claude-code-parallel-subagents-reports.png)
 
-Because they worked in isolated Git worktrees, their changes are committed to local branches on your machine. If you are using VS Code or a similar Git GUI, you can seamlessly switch to the branches corresponding to each subagent's worktree to review the code:
+Because they worked in isolated Git worktrees, their changes are committed to local branches on your machine. If you are using VS Code or a similar Git GUI, you can switch to the branches corresponding to each subagent's worktree to review the code:
 
 ![VS Code Git branches](/docs/guides/claude-code-parallel-subagents-vscode-branches.png)
 
@@ -337,7 +337,7 @@ In cases where changes overlap, Claude may prompt you to resolve merge conflicts
 
 ## Conclusion
 
-You now have a workflow where AI agents can truly operate in parallel, breaking free from the bottlenecks of sequential development.
+You now have a workflow where AI agents can operate in parallel instead of waiting on each other.
 
 The root problem of stateful isolation has been solved. By combining **Claude Code subagents** with **Neon's instant Database Branching**, you eliminate the friction of shared infrastructure entirely. Instead of waiting for one agent to finish a task before starting the next, you can dispatch multiple agents simultaneously.
 

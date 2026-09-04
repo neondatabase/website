@@ -110,7 +110,7 @@ The app should now be running on [localhost:3000](http://localhost:3000). Naviga
 
 ![Online course page](/guides/images/payload/906a90a5-a17c-4573-8e45-87b67606f0c6.png)
 
-Congratulations! You have now completed creating your own e-commerce store ✨
+You have now built your own e-commerce store.
 
 ## Scale-to-zero with Postgres (powered by Neon)
 
@@ -120,6 +120,6 @@ Interestingly, during the entire process of setting up this app, you were using 
 
 ## Summary
 
-In this guide, you learned how to build an e-commerce store in Next.js using Payload CMS and a serverless Postgres database (powered by Neon). Furthermore, using Postgres (powered by Neon) allowed you to save on cloud compute resources when the compute endpoint that runs Postgres was idle for more than 5 minutes.
+In this guide, you learned how to build an e-commerce store in Next.js using Payload CMS and a serverless Postgres database (powered by Neon). Using Postgres on Neon also allowed you to save on cloud compute resources when the compute endpoint that runs Postgres was idle for more than 5 minutes.
 
 <NeedHelp />

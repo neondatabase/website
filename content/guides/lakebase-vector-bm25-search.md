@@ -17,7 +17,7 @@ Historically, doing this in Postgres meant using `pgvector` with an HNSW index f
 Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, solve these problems by introducing two new index types. Here’s how they work together:
 
 - **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF (Inverted File) partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101) to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
-- **`lakebase_text`**: A BM25 full-text search index that seamlessly integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
+- **`lakebase_text`**: A BM25 full-text search index that integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
 
 Because these indexes live in storage rather than being bound to compute memory, they work with Neon's [scale-to-zero](/docs/introduction/scale-to-zero) compute and carry over when you [branch your database](/docs/introduction/branching).
 
@@ -247,7 +247,7 @@ Run the script to populate your database:
 npx tsx scripts/seed.ts
 ```
 
-Notice the `WITH (default_limit = 10)` parameter on the text index. This tells Postgres to only calculate the top 10 results from the index before applying query limits. This is the "top-K pushdown" feature that makes `lakebase_text` incredibly fast.
+Notice the `WITH (default_limit = 10)` parameter on the text index. This tells Postgres to only calculate the top 10 results from the index before applying query limits. This is the "top-K pushdown" feature that makes `lakebase_text` fast.
 
 ## Create server actions for search queries
 
@@ -499,7 +499,7 @@ This guide covered the fundamentals: creating indexes, querying with cosine dist
 
 ## Conclusion
 
-You've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Lakebase Postgres. As your application grows, the Lakebase Search extensions scale with it, handling over a billion vectors, surviving cold starts instantly, and carrying over effortlessly when you branch your database.
+You've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Lakebase Postgres. As your application grows, the Lakebase Search extensions scale with it, handling over a billion vectors, surviving cold starts instantly, and carrying over when you branch your database.
 
 ## Source code
 

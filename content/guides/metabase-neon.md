@@ -301,7 +301,7 @@ You can enhance dashboards with filters that apply across multiple questions:
 
 ## Applying Governance with Collections and Permissions
 
-Metabase provides a robust permission system to control who can view, edit, or query your data. Governance is primarily managed through **Groups**.
+Metabase provides a permission system to control who can view, edit, or query your data. Governance is primarily managed through **Groups**.
 
 ### Organizing People into Groups
 
@@ -371,7 +371,7 @@ Now, when a user in this group views the `customers` table (or charts based on i
 
 #### Option B: Connection Impersonation
 
-_Best for: Leveraging PostgreSQL Row-Level Security (RLS) defined in Neon._
+_Best for: Using Postgres Row-Level Security (RLS) defined in Neon._
 
 Since Neon is built on Postgres, you can define RLS policies directly in your database and force Metabase to respect them.
 

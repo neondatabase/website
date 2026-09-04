@@ -9,7 +9,7 @@ updatedOn: '2026-07-31T19:05:29.503Z'
 
 ## Introduction
 
-When building modern web applications, it's crucial to test changes in an environment that closely mirrors production before merging them. This guide shows you how to create an automated workflow that:
+Before merging changes to a web application, you want to test them in an environment that closely mirrors production. This guide shows you how to create an automated workflow that:
 
 - Creates a separate Neon database branch for each pull request
 - Deploys a preview version of your application to Netlify

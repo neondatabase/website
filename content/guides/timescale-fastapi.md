@@ -610,6 +610,6 @@ By following these steps, you can easily create sensors, stream sensor data, and
 
 ## Conclusion
 
-Now, you have created and tested an API for managing, streaming, and querying sensor data into `TimescaleDB` using `FastAPI`. By leveraging TimescaleDB for time-series data storage, you now have a high-performance solution for handling sensor data at scale.
+Now, you have created and tested an API for managing, streaming, and querying sensor data into `TimescaleDB` using `FastAPI`. With TimescaleDB for time-series storage, you can handle sensor data at scale.
 
 As a next step, you can look into streaming data into the database using a distributed event platform like `Kafka` or `Red Panda`, or using `Timescale` to monitor the sensor data with `Apache Superset` or `Grafana`.

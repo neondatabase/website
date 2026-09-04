@@ -174,17 +174,17 @@ Here are some example NRQL queries for other useful metrics:
   WHERE host_memory_active_bytes is NOT NULL TIMESERIES 1 minute since 10 minutes ago
   ```
 
-For a comprehensive list of all metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
 
 </Steps>
 
-Now that Neon's database metrics and logs are flowing into New Relic alongside your application telemetry, you can perform powerful correlational analysis to debug issues. For instance, you can directly correlate a spike in `neon_connection_counts` with error logs from a specific microservice, allowing you to quickly identify which application is causing database strain.
+Now that Neon's database metrics and logs are flowing into New Relic alongside your application telemetry, you can correlate them to debug issues. For instance, you can directly correlate a spike in `neon_connection_counts` with error logs from a specific microservice, allowing you to quickly identify which application is causing database strain.
 
 ## Summary
 
-Congratulations! You have successfully configured Neon to send metrics and Postgres logs to New Relic using the OpenTelemetry integration. You now have a powerful, centralized observability setup that provides real-time insights into your database's health and activity.
+You have configured Neon to send metrics and Postgres logs to New Relic using the OpenTelemetry integration. You now have a centralized observability setup with real-time insight into your database's health and activity.
 
-By leveraging this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the New Relic platform.
+With this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the New Relic platform.
 
 ## Resources
 

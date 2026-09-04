@@ -82,7 +82,7 @@ In the next section, we’ll look at the Docker configuration and how the app de
 
 Here’s the `docker-compose.yml` setup, which defines two services. The first, `app`, starts the Express server, responsible for data fetching and server-side rendering of the React app. The second, `db`, configures the Neon Local Docker image.
 
-Additionally, the `app` service defines two profiles, `dev` and `prod`. The `db` service also defines a `dev` profile, ensuring that the `db` service is only used when the app is run in **development** mode.
+The `app` service defines two profiles, `dev` and `prod`. The `db` service also defines a `dev` profile, ensuring that the `db` service is only used when the app is run in **development** mode.
 
 #### How Docker Profiles Work
 
@@ -165,7 +165,7 @@ const connectionString =
 export const pool = new Pool({ connectionString });
 ```
 
-Additionally, you'll also need to change the `DRIVER` to `postgres` in your `docker-compose.yml` file:
+You'll also need to change the `DRIVER` to `postgres` in your `docker-compose.yml` file:
 
 ```diff
 environment:
@@ -180,6 +180,6 @@ environment:
 
 And that’s it. By default, Neon Local handles creating and deleting a branch whenever you start or stop the container. If you want more control, such as setting a parent branch or disabling branch deletion, check out the [configuration options in the docs](/docs/local/neon-local).
 
-Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s **not** a fully "local" database, it streamlines the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
+Neon Local simplifies the management of temporary database environments, making it easier to work with isolated instances for testing or short-term use. While it’s **not** a fully "local" database, it simplifies the workflow, especially for CI/CD pipelines where short-lived environments are needed to run tests but don’t need to stick around.
 
-Neon Local is still in its early stages, with several improvements on the way. But for now, it could be exactly what you need to streamline your workflows. Give it a try today and [share your feedback with us](https://github.com/neondatabase-labs/neon_local).
+Neon Local is still in its early stages, with several improvements on the way. But for now, it could be exactly what you need. Give it a try today and [share your feedback with us](https://github.com/neondatabase-labs/neon_local).

@@ -76,7 +76,7 @@ INFO: Pulled 3 Neon variables into ~/neon-functions-api/.env.local: NEON_BRANCH,
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts — the source of the hello function.
+INFO: Created hello.ts, the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 ```
 

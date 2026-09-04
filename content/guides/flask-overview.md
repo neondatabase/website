@@ -330,7 +330,7 @@ To integrate Tailwind CSS with Flask templates, you can follow these steps:
    - A list of existing users, also styled with Tailwind
    - Jinja2 template syntax for dynamic content (e.g., `{% for user in users %}`)
 
-Tailwind CSS and Jinja2 templates give you the flexibility to create your frontend design while keeping your codebase organized and maintainable. This approach allows you to build responsive and visually appealing web applications with ease.
+Tailwind CSS and Jinja2 templates give you the flexibility to create your frontend design while keeping your codebase organized and maintainable. This approach lets you build responsive web applications without much extra work.
 
 ## Database Migrations
 

@@ -226,6 +226,6 @@ npm run build && npm run preview
 
 ## Summary
 
-In this guide, you learned how to build a blog in an Astro application using Directus CMS and a serverless Postgres database (powered by Neon). Additionally, you learned how to create content collections in Directus CMS and dynamic blog routes in an Astro application.
+In this guide, you learned how to build a blog in an Astro application using Directus CMS and a serverless Postgres database (powered by Neon). You also learned how to create content collections in Directus CMS and dynamic blog routes in an Astro application.
 
 <NeedHelp />

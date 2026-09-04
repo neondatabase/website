@@ -7,7 +7,7 @@ createdAt: '2024-06-30T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Laravel is a powerful PHP framework that makes it easy to build web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Lakebase Postgres.
+Laravel is a PHP framework for building web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Lakebase Postgres.
 
 By the end of this tutorial, you'll have a fully functional blog where users can create, read, update, and delete posts. We'll also implement comments and a simple tagging system.
 
@@ -856,9 +856,9 @@ In the `PostPolicy` class, we define the `update` and `delete` methods to check 
 
 ### Implementing Comments
 
-By now we have the basic functionality of our blog in place. If you were to visit the blog, you would see a list of posts, be able to view individual posts, and create new posts. However, a blog wouldn't be complete without the ability to add comments to posts!
+By now we have the basic functionality of our blog in place. If you were to visit the blog, you would see a list of posts, be able to view individual posts, and create new posts. However, a blog wouldn't be complete without the ability to add comments to posts.
 
-Let's add the comment system to our blog posts! First, create a new Livewire component:
+Let's add the comment system to our blog posts. First, create a new Livewire component:
 
 ```bash
 php artisan make:livewire CommentSection
@@ -1004,12 +1004,12 @@ This implementation provides a solid foundation for a blog, but there are always
 
 - Implement a more advanced authorization system with roles and permissions
 - Add a rich text editor for post content
-- Implement a more robust tagging system with the ability to create new tags
+- Implement a fuller tagging system with the ability to create new tags
 - Add a search functionality for posts
 - Implement social sharing features
 - Add an admin panel for managing posts, users, and comments
 
-By combining the power of Laravel, the simplicity of Livewire, and the authentication scaffolding provided by Laravel Breeze, you can quickly create dynamic and interactive web applications that meet your users' needs.
+By combining Laravel, Livewire, and the authentication scaffolding provided by Laravel Breeze, you can quickly create dynamic and interactive web applications that meet your users' needs.
 
 ## Additional Resources
 

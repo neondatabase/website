@@ -9,7 +9,7 @@ updatedOn: '2026-08-07T16:05:20.768Z'
 
 [Nuxt.js](https://nuxt.com) is an open-source, progressive framework built on [Vue.js](https://vuejs.org/) that simplifies web development. It enhances Vue with versatile rendering options, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
 
-As your Nuxt application grows, managing database changes for new features can be challenging. How do you test a feature that requires database schema changes without disrupting your live application? This is where the integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) comes in. Vercel is a deployment platform, and Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Together, they offer seamless [**database branching**](/branching).
+As your Nuxt application grows, managing database changes for new features can be challenging. How do you test a feature that requires database schema changes without disrupting your live application? This is where the integration between [Vercel](https://vercel.com) and [Neon](https://neon.com) comes in. Vercel is a deployment platform, and Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Together, they offer [**database branching**](/branching) for every deployment.
 
 When you enable the integration, every time you push a new feature branch, Vercel automatically creates a preview deployment. Simultaneously, Neon creates an isolated copy of your database just for that branch. This gives you a safe, sandboxed environment to develop and test with realistic data, without any risk to your live application.
 
@@ -114,7 +114,7 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     git push -u origin main
     ```
 
-To begin, you will set up the Vercel-managed Neon Integration. This is a crucial first step that provisions a Neon database and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup streamlines both local development and Vercel deployments.
+To begin, you will set up the Vercel-managed Neon Integration. This first step provisions a Neon database and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup covers both local development and Vercel deployments.
 
 ## Create a Vercel project
 
