@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-04T11:30:15.813Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -302,7 +302,7 @@ preview: {
       name: string,       // display name shown in neon functions list and the console
       source: string,     // path to entry file, relative to neon.ts
       env?: Record<string, string>,
-      bundler?: "esbuild" | "none",  // default "esbuild"; "none" ships a prebuilt source as-is
+      bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
       dev?: {
         port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
       },
@@ -323,7 +323,7 @@ env: {
 
 Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
-`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag.
+`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
 
