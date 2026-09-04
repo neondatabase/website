@@ -53,7 +53,9 @@ Back then, we identified two problems:
 
 MCP hosts and model providers have since moved toward progressive tool discovery. The host searches a catalog first, then loads the full tool schema only when the model needs it. The [MCP client best practices](https://modelcontextprotocol.io/docs/2026-07-28/develop/clients/client-best-practices) describe the flow as search, inspect, execute. That makes larger tool catalogs practical, and it solves the first problem.
 
-The second problem remains. Neon is an infrastructure provider, and our REST API is not as straightforward as a CRM API where you create, update, and delete a contact in one call. You provision infrastructure, poll operations until resources are ready, and often chain several requests before you have something usable. Creating a project might look like: create project → `operationId` → poll operations → project ready → fetch connection string.
+The second problem remains. Progressive discovery (and, on some clients, programmatic tool calling) lets an agent work through a large catalog. That still isn't the most token-efficient way to use an API like Neon's.
+
+Neon is infrastructure. Creating a branch over REST is three calls: create the branch, attach compute, then fetch a connection string. If an agent has to rediscover that chain every time, it wastes tokens and repeats the same mistakes. That's why SDKs exist: they expose the raw endpoints, and they also bundle common workflows into one operation. We can do the same for agent tools. In `@neon/sdk`, those three calls are `branches.createAndConnect`.
 
 A generated schema can describe a request body, but it does not decide:
 
@@ -75,7 +77,7 @@ Two pipelines run in parallel from the same spec:
 1. OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()`
 2. OpenAPI spec → code generation → `@neon/tools` Zod request schemas → ergonomic client → agent tools
 
-The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `projects.createAndConnect` or an MCP tool. Someone has to decide that wrap.
+The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `branches.createAndConnect` or an MCP tool. Someone has to decide that wrap.
 
 `@neon/tools` is the agent-facing end of that pipeline.
 
