@@ -1,4 +1,4 @@
-text: 'Same workload, 42 models: we compared costs on Neon AI Gateway'
+text: 'We ran the same workload through 42 models via AI Gateway and compared costs'
 link:
   url: 'https://neon.com/blog/comparing-token-economics-across-42-ai-models'
   target: '_blank'
