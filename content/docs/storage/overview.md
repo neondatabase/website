@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-02T20:41:07.968Z'
+updatedOn: '2026-09-03T13:03:04.907Z'
 ---
 
 Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
@@ -53,11 +53,19 @@ neon bootstrap --template ai-sdk
 
 ## Limits
 
-During the beta, the following usage limits apply:
+During the beta, the following limits apply:
+
+| Limit                      | Value                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| Objects per bucket         | Unlimited                                                                                 |
+| Bucket size                | No maximum                                                                                |
+| Object size (maximum)      | 5 TiB                                                                                     |
+| Single `PutObject` request | 5 GiB (larger objects require [multipart upload](/docs/storage/objects#multipart-upload)) |
+| Free plan object storage   | 5 GB per project ([rates](/docs/introduction/plans#object-storage))                       |
+
+Two limits are behavioral rather than fixed numbers:
 
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
-- **Free object storage**: the Free plan includes 5 GB of object storage per project. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
-- **Object size**: objects can be up to 5 GiB, whether uploaded in a single request or with [multipart upload](/docs/storage/objects#multipart-upload). [Contact support](/docs/introduction/support) if you need to store larger objects.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
 
 For S3 API and feature limitations (as opposed to usage limits), see [Known limitations](/docs/storage/s3-compatibility#known-limitations).
