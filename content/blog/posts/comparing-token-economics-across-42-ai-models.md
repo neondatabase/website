@@ -20,14 +20,14 @@ cover:
     https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/cover.jpg
   alt: null
 isFeatured: false
-draft: true
+draft: false
 seo:
   title: Comparing token economics across 42 AI models - Neon
   description: >-
     We ran the same workload through all models listed in Neon AI Gateway and
     compared total costs, accuracy, and time to completion
   keywords: []
-  noindex: true
+  noindex: false
   ogTitle: Comparing token economics across 42 AI models - Neon
   ogDescription: >-
     We ran the same workload through all models listed in Neon AI Gateway and
