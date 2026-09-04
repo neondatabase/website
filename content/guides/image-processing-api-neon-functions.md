@@ -12,6 +12,12 @@ This guide shows you how to build a complete image processing API that handles a
 
 The API runs on [**Neon Functions**](/docs/compute/functions/overview) which provide a serverless compute environment in the same region as your Neon Postgres database. Image transformations run on [**Sharp**](https://sharp.pixelplumbing.com), a high-performance image processing library powered by libvips. And for captions, the [**Neon AI Gateway**](/docs/ai-gateway/overview) provides access to the latest vision models.
 
+<CopyPrompt
+  src="/prompts/image-processing-api-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## How it works
 
 ```mermaid
@@ -57,7 +63,7 @@ Use the default setup options for all prompts: this enables AI skills, configure
 During initialization, **Neon Platform** and **Postgres** skills are installed automatically. You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions --skill neon-object-storage
+neon skills -s neon-functions -s neon-ai-gateway -s neon-object-storage
 ```
 
 Link your local workspace to a Neon project:

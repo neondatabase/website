@@ -18,6 +18,12 @@ In this guide, you’ll build a secure LLM proxy that solves all of this. You’
 - **Streaming AI responses** through the [Neon AI Gateway](/docs/ai-gateway/overview), without ever exposing provider keys to the frontend
 - A **React frontend** with [Managed Better Auth](/docs/auth/overview) for sign-in and the [Vercel AI SDK UI](https://ai-sdk.dev/docs/ai-sdk-ui/overview) for real-time chat
 
+<CopyPrompt
+  src="/prompts/llm-proxy-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Architecture overview
 
 Consider the following architecture for a React frontend that interacts with a LLM proxy backend built with Neon Functions:

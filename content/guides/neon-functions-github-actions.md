@@ -26,6 +26,12 @@ Because the pipeline is just the [Neon CLI](/docs/cli) running in a CI job, the 
 Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), so create your Neon project in one of these regions to follow along. Support is expanding toward all regions. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
 </Admonition>
 
+<CopyPrompt
+  src="/prompts/neon-functions-github-actions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Prerequisites
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
