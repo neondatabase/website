@@ -1,5 +1,6 @@
 ---
 title: Neon API
+subtitle: Manage Neon projects, branches, and backend services over HTTP.
 summary: >-
   Browse all Neon API endpoints by resource, or get started with authentication
   and your first request.
