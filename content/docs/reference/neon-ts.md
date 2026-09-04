@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-04T11:57:36.377Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -150,14 +150,14 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 
 ### BranchTuning fields
 
-| Field                                            | Type                              | Description                                                                                                           |
-| ------------------------------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `parent`                                         | `string`                          | Parent branch name or ID                                                                                              |
-| `protected`                                      | `boolean`                         | Mark the branch as protected                                                                                          |
-| `ttl`                                            | `string \| number`                | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript |
-| `postgres.computeSettings.autoscalingLimitMinCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Minimum compute units                                                                                                 |
-| `postgres.computeSettings.autoscalingLimitMaxCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Maximum compute units                                                                                                 |
-| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number`       | Idle suspend timeout. `false` disables suspend                                                                        |
+| Field                                            | Type                        | Description                                                                                                                                                      |
+| ------------------------------------------------ | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `parent`                                         | `string`                    | Parent branch name or ID                                                                                                                                         |
+| `protected`                                      | `boolean`                   | Mark the branch as protected                                                                                                                                     |
+| `ttl`                                            | `string \| number`          | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript                                            |
+| `postgres.computeSettings.autoscalingLimitMinCu` | `ComputeUnit`               | Minimum compute units. Any size Neon offers: 0.25, 0.5, every integer 1 to 16, and even sizes 18 to 56                                                           |
+| `postgres.computeSettings.autoscalingLimitMaxCu` | `ComputeUnit`               | Maximum compute units. For an autoscaling range, keep both bounds at 16 or below and no more than 8 CU apart; sizes above 16 are fixed-size (`min` equals `max`) |
+| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number` | Idle suspend timeout. `false` disables suspend                                                                                                                   |
 
 ## Services
 
@@ -302,7 +302,7 @@ preview: {
       name: string,       // display name shown in neon functions list and the console
       source: string,     // path to entry file, relative to neon.ts
       env?: Record<string, string>,
-      bundler?: "esbuild" | "none",  // default "esbuild"; "none" ships a prebuilt source as-is
+      bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
       dev?: {
         port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
       },
@@ -323,7 +323,7 @@ env: {
 
 Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
-`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag.
+`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
 

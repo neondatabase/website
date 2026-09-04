@@ -6,7 +6,7 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-07-20T22:48:16.134Z'
+updatedOn: '2026-09-04T11:30:15.813Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -121,7 +121,7 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and `NEON_BRANCH`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`).
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and `NEON_BRANCH`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`). It also writes a public invocation URL for each Neon Function as `NEON_FUNCTION_<SLUG>_BASE_URL` (origin only, matching `NEON_AUTH_BASE_URL` and `NEON_AI_GATEWAY_BASE_URL`), so one function can call another by reading its URL from the environment.
 
 ## Constraints
 
