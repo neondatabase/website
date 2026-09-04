@@ -65,7 +65,7 @@ At the end of the test, to get back to our tokenomics question, we estimated how
 
 **For 50 engineers, there'd be a $18k/month difference** between the cheap model and the expensive one. That's $188k per month if there were 500 engineers, or a **86× price gap** from model choice alone (and we're not even picking the extremes).
 
-<img src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-2.jpg" alt="Monthly cost comparison between Llama 3.1 8B Instruct and Claude Fable 5" width="640" className="mx-auto" />
+<img src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-2.jpg" alt="Monthly cost comparison between Llama 3.1 8B Instruct and Claude Fable 5" width="420" className="mx-auto" />
 
 Of course, these are results for one workload, not general model rankings, and this was a small experiment run in messy real-world conditions, not a lab. Still, it shows why tokenomics will matter a lot as agents become part of how companies get work done.
 
