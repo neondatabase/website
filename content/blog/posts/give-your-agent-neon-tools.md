@@ -34,13 +34,13 @@ seo:
 
 **Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 82 Management API tools (68/82 are new) alongside its 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
 
-<iframe loading="lazy" title="Give your agent Neon tools" width="500" height="375" src="https://www.youtube.com/embed/BqRhBq-_kgE?feature=oembed" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen=""></iframe>
-
 If you build agent platforms or your own agents, you can now select the Neon operations you need and hand them to a model as tools, without writing the schemas, retries, and workflows by hand:
 
 ```
 npm install @neon/tools
 ```
+
+<iframe loading="lazy" title="Give your agent Neon tools" width="500" height="375" src="https://www.youtube.com/embed/BqRhBq-_kgE?feature=oembed" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen=""></iframe>
 
 ## Rethinking generated agent tools, one year later
 
