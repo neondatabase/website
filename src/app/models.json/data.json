@@ -78,7 +78,7 @@
         ],
         "tool_call": true,
         "temperature": false,
-        "structured_output": true,
+        "structured_output": false,
         "open_weights": false,
         "release_date": "2026-09-01",
         "last_updated": "2026-09-01",
@@ -1975,6 +1975,7 @@
           {
             "type": "effort",
             "values": [
+              "minimal",
               "low",
               "medium",
               "high",
@@ -2121,6 +2122,7 @@
             "type": "effort",
             "values": [
               "none",
+              "minimal",
               "low",
               "medium",
               "high",
