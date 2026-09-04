@@ -1,0 +1,5 @@
+node_modules/
+dist/
+results/
+.env
+docker/build-local.sh
