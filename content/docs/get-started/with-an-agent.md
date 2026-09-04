@@ -4,13 +4,13 @@ subtitle: Prompt your AI coding agent to build a Next.js app on Neon
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that creates a table, seeds sample rows, and adds a page that lists
-  them. Includes the schema and page to expect, and follow-up prompts for
-  sign-in, image uploads, AI summaries, and branching.
+  them. Includes the three files to expect (schema, client, and page), and
+  follow-up prompts for sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-04T18:51:25.816Z'
+updatedOn: '2026-09-04T18:56:19.179Z'
 ---
 
-Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the project, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
+Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
 
 <Steps>
 
@@ -22,7 +22,7 @@ Already have a Next.js app? Run this in it. Starting fresh? Create one with `npx
 npx neon@latest init
 ```
 
-`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to `.env.local` and adds a `neon.ts` config.
+`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file and adds a `neon.ts` config.
 
 Then pull the connection details into your env file:
 
@@ -40,6 +40,8 @@ npx neon@latest link --project-id <project-id> -y
 npx neon@latest config init --services none
 npx neon@latest env pull
 ```
+
+This connects the database but does not install the agent's Neon tooling, so it assumes [agent skills](/docs/ai/agent-skills) and the [Neon MCP server](/docs/ai/neon-mcp-server) are already set up; if not, install them first.
 
 </Admonition>
 
