@@ -129,7 +129,7 @@ npm install --save-dev esbuild @types/node typescript dotenv
 </Tabs>
 
 - `hono`: A lightweight web framework for routing and middleware.
-- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, allowing unified access to LLMs.
+- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, giving you a single interface to LLMs.
 - `pg`: PostgreSQL client for Node.js.
 - `jose`: A lightweight module for cryptographic JWT verification using JWKS endpoints.
 - `@upstash/ratelimit` & `@upstash/redis`: Redis driver if choosing Redis for rate limiting.

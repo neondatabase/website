@@ -9,11 +9,11 @@ updatedOn: '2026-07-31T19:05:29.503Z'
 
 ## Introduction
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that improve database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
 
 A key advantage of Neon's architecture is that adding a read replica doesn't require additional storage, making it a highly efficient scaling solution. This cost-effective approach is ideal for businesses of all sizes that need to improve database performance without increasing storage costs.
 
-This guide demonstrates how to leverage Neon read replicas to efficiently scale Laravel applications. You'll learn how to configure your Laravel database connections to work with read replicas, enabling you to optimize your database operations and improve overall application performance. We'll use a simple URL shortener application as an example.
+This guide shows how to use Neon read replicas to scale Laravel applications. You'll learn how to configure your Laravel database connections to work with read replicas, enabling you to optimize your database operations and improve overall application performance. We'll use a simple URL shortener application as an example.
 
 ## Prerequisites
 
@@ -317,7 +317,7 @@ Edit `config/database.php` to add the read replica configuration:
 ```
 
 <Admonition type="info">
-Now that you've completed the database migrations, you can leverage the pooled connection string for both read and write operations. This streamlines your database interactions. However, it's worth noting that for future migrations, it's best practice to use the direct connection string. This approach helps avoid potential complications that might arise during the migration process.
+Now that you've completed the database migrations, you can use the pooled connection string for both read and write operations. For future migrations, use the direct connection string. This approach helps avoid potential complications that might arise during the migration process.
 </Admonition>
 
 Update your `.env` file with the read replica host:
@@ -338,7 +338,7 @@ Here's how Eloquent handles different types of queries:
 This automatic routing happens transparently, allowing you to scale your application without modifying your application logic.
 
 <Admonition type="tip">
-  Laravel offers powerful flexibility in managing database connections. While automatic query routing is convenient, you can easily override it when needed. For instance, to explicitly use the write connection for querying the urls table, you can do the following:
+  Laravel gives you flexibility in managing database connections. While automatic query routing is convenient, you can easily override it when needed. For instance, to explicitly use the write connection for querying the urls table, you can do the following:
   ```php
   <?php
   use Illuminate\Support\Facades\DB;
@@ -356,7 +356,7 @@ Learn how to scale Laravel applications with Lakebase Postgres Read Replicas" ic
 
 ## Conclusion
 
-By leveraging Neon's read replicas with Laravel, you can significantly improve your application's performance and scalability. Laravel's database configuration makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
+With Neon's read replicas and Laravel, you can improve your application's performance and scalability. Laravel's database configuration makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
 
 This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
 

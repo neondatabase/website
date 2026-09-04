@@ -24,7 +24,7 @@ Before we begin, make sure you have the following:
 
 ## How JWT Works
 
-Before we dive into the building our API, let's understand how JWT works. If you're already familiar with JWT, feel free to skip ahead to the next section.
+Before building the API, let's look at how JWT works. If you're already familiar with JWT, feel free to skip ahead to the next section.
 
 JSON Web Tokens or JWT for short provide a secure way to authenticate and authorize users in web applications.
 

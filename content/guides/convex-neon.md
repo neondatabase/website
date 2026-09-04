@@ -7,14 +7,14 @@ createdAt: '2025-02-14T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) significantly enhances the self-hosted experience, overcoming limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a robust and scalable database option.
+This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) improves the self-hosted experience, removing limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a scalable database option.
 
-Convex empowers developers to create dynamic, live-updating applications. Self-hosting retains these core features while granting you greater control over your deployment environment. While SQLite remains the default for simplicity, Postgres integration unlocks enhanced scalability and resilience, especially beneficial for production applications.
+Convex lets developers create dynamic, live-updating applications. Self-hosting retains these core features while granting you greater control over your deployment environment. While SQLite remains the default for simplicity, Postgres integration adds scalability and resilience for production applications.
 
 This guide provides a step-by-step walkthrough of integrating Convex with Lakebase Postgres. You will learn how to:
 
 - Set up Convex for self-hosting using Docker Compose.
-- Configure Convex to utilize Lakebase Postgres for persistent data storage.
+- Configure Convex to use Lakebase Postgres for persistent data storage.
 - Run the Convex [chat application tutorial](https://docs.convex.dev/tutorial) as a practical example.
 - Test the integration to ensure everything functions correctly.
 
@@ -389,7 +389,7 @@ With the Convex chat application running and connected to your self-hosted Conve
 
 3.  **Send and receive real-time messages:** In one chat window, type and send a message. Verify that the message appears in real-time in both chat windows. Send messages from both windows and observe the bidirectional real-time updates.
 
-Congratulations! You have successfully integrated Convex with Lakebase Postgres and implemented a real-time chat application using Convex queries and mutations.
+You have integrated Convex with Lakebase Postgres and implemented a real-time chat application using Convex queries and mutations.
 
 ## Resources
 

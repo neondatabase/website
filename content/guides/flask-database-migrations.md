@@ -395,7 +395,7 @@ Using Neon's branching feature in your CI pipeline offers several advantages:
 
 ## Conclusion
 
-Managing database migrations is an important part of maintaining and evolving your Flask application. With Flask-Migrate and Lakebase Postgres, you have powerful tools at your disposal to handle schema changes efficiently and safely. Remember to always test your migrations thoroughly and have a solid backup strategy in place.
+Managing database migrations is an important part of maintaining and evolving your Flask application. With Flask-Migrate and Lakebase Postgres, you have the tools to handle schema changes safely. Remember to always test your migrations thoroughly and have a solid backup strategy in place.
 
 One thing that you should get in the habit of doing is to always review the generated migration scripts before applying them to your database. This way you can ensure that the changes that are about to be applied are correct and that they will not cause any issues. As well as that, you should use meaningful names for your migrations so that you can easily identify what each migration does.
 

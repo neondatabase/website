@@ -7,13 +7,13 @@ createdAt: '2025-03-12T00:00:00.000Z'
 updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
-The landscape of application development is rapidly changing, with AI-powered tools empowering even non technical users to build faster and more intuitively than ever before. Imagine describing your app idea in a simple conversation and watching it materialize in seconds, complete with a fully functional database. This is now possible with [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
+AI-powered tools let even non-technical users describe an app in a conversation and get a working version, database included, in seconds. One of these tools is [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
 
-This guide will introduce you to Anything and demonstrate how you can use it to make building database-backed applications incredibly easy and fast. We'll walk through creating a simple AI Image Generator, showcasing how you can go from a text prompt to a functional, full-stack application.
+This guide will introduce you to Anything and demonstrate how you can use it to build database-backed applications quickly. We'll walk through creating a simple AI Image Generator, showcasing how you can go from a text prompt to a functional, full-stack application.
 
 ## Anything & Neon
 
-Anything leverages Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Anything's rapid app development experience. By abstracting away database complexities, Anything users can concentrate solely on their application's functionality and design.
+Anything uses Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Anything's rapid app development experience. By abstracting away database complexities, Anything users can concentrate solely on their application's functionality and design.
 
 This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and focus on developing their application. Neon operates invisibly in the background. To learn more about how Anything uses Neon, see [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
 
@@ -23,7 +23,7 @@ Before you start, ensure you have an **Anything Account**. You can sign up for a
 
 ## Building an AI Image Generator app
 
-This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. We'll leverage Anything's AI capabilities to build this app in minutes without writing a single line of code.
+This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. We'll use Anything's AI capabilities to build this app in minutes without writing a single line of code.
 
 ### Start a new project
 
@@ -72,7 +72,7 @@ To test the new feature, download an image. Click the 'Download' button on any i
 
 ![Final App with Download Feature](/docs/guides/create_xyz_final_app.png)
 
-You've successfully built an AI Image Generator with download tracking! You can now customize it further by enhancing the UI, adding features like user authentication, or integrating services such as Stripe to charge $1 per generated image. To add user authentication, say something like: 'The app should allow users to sign in and sign up. Image generation should only be available to signed-in users.'
+You've built an AI Image Generator with download tracking. You can now customize it further by enhancing the UI, adding features like user authentication, or integrating services such as Stripe to charge $1 per generated image. To add user authentication, say something like: 'The app should allow users to sign in and sign up. Image generation should only be available to signed-in users.'
 
 Anything will add the necessary components to your app to support user authentication.
 
@@ -94,7 +94,7 @@ Finally, you can deploy the app by clicking on the "Publish" button. You can als
 
 <Admonition type="note" title="Version history for restoring a past version of your app">
 
-Anything offers a robust version history. This feature enables instant restoration to any past version of your app, in case you need to rewind.
+Anything keeps a version history. This feature enables instant restoration to any past version of your app, in case you need to rewind.
 
 To restore a past version:
 
@@ -114,10 +114,10 @@ To make the most of Anything and build apps efficiently, consider the following 
 - **Prompting Best Practices**:
   - **Context is key**: Start prompts with clear context. For example describe the app's purpose and main features. For example say, "I want to add a new feature to allow users to download images."
   - **Iterate in small steps**: Break down complex changes. For a whole new page, start by describing the header, then the body, then the footer in separate prompts. This gives you more control.
-  - **Show, Don't just tell**: Use images! Paste screenshots or drag and drop images into the chat to show Anything exactly what you want the style or layout to be wherever possible.
+  - **Show, don't just tell**: Use images. Paste screenshots or drag and drop images into the chat to show Anything exactly what you want the style or layout to be wherever possible.
   - **Pinpoint errors**: Be specific when things go wrong. Instead of saying "it's broken", paste error messages or describe exactly what you expected to happen vs. what did happen.
 
-- **Leverage Anything's integrations**:
+- **Use Anything's integrations**:
   - **Explore the Integration library**: Anything has many integrations ready to use. Type `/` in the chat to see them. Integrations include AI models, UI libraries, and services like Stripe.
   - **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
 

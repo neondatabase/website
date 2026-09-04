@@ -41,13 +41,13 @@ AutoGen is a framework designed to simplify the development of applications usin
 
 - **Conversation:** Engaging in multi-agent dialogues to solve tasks collaboratively.
 - **Planning:** Developing and executing strategic plans to achieve goals.
-- **Tool utilization:** Integrating with external tools and APIs to extend their capabilities beyond simple text generation, enabling real-world interactions.
+- **Tool use:** Integrating with external tools and APIs to extend their capabilities beyond simple text generation, enabling real-world interactions.
 
 ### Key components of AutoGen
 
 - **Agents:** The foundational building blocks in AutoGen. Agents are autonomous entities that can:
   - **Receive and process messages:** Accept and understand messages from users or other agents.
-  - **Act autonomously:** Perform tasks, utilize tools, or generate responses based on their programmed logic and received messages.
+  - **Act autonomously:** Perform tasks, use tools, or generate responses based on their programmed logic and received messages.
   - **Agent types:** AutoGen offers various agent types, including:
     - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and able to follow instructions. Ideal for general tasks and complex reasoning.
     - **`CodeExecutorAgent`:** A specialized agent designed to execute code snippets. Useful for tasks requiring script execution or interacting with system commands.
@@ -55,9 +55,9 @@ AutoGen is a framework designed to simplify the development of applications usin
 
 - **Teams (Group chat):** AutoGen facilitates forming agent teams to tackle complex problems collaboratively. Key team configurations include:
   - **`RoundRobinGroupChat`:** A straightforward team setup where agents communicate in turns, following a round-robin approach to ensure balanced contribution from each member.
-  - **`SelectorGroupChat`:** A more sophisticated team configuration enabling advanced agent selection mechanisms, including LLM-driven speaker selection for dynamic conversation flow.
+  - **`SelectorGroupChat`:** A team configuration with more control over agent selection, including LLM-driven speaker selection for dynamic conversation flow.
 
-- **Tools:** AutoGen agents can leverage tools to interact with external environments or perform specialized functions. Tools can be:
+- **Tools:** AutoGen agents can use tools to interact with external environments or perform specialized functions. Tools can be:
   - **Python functions:** Custom Python functions that agents can call to execute specific actions or computations.
   - **External APIs:** Integrations with external services, allowing agents to access a wide range of functionalities like web searching.
 
@@ -67,7 +67,7 @@ AutoGen is a framework designed to simplify the development of applications usin
   - **`TextMentionTermination`:** Ends the conversation when a predefined text or phrase is detected in the dialogue (e.g., "TERMINATE").
   - **`MaxMessageTermination`:** Automatically stops the conversation after a set number of messages have been exchanged, preventing infinite loops.
 
-Utilizing these fundamental components, AutoGen provides a robust and adaptable framework for building a diverse array of AI applications, ranging from simple interactive chatbots to intricate, collaborative multi-agent systems.
+With these components, AutoGen gives you a framework for building AI applications, from simple chatbots to collaborative multi-agent systems.
 
 ## Why Neon for AI Agents?
 
@@ -127,7 +127,7 @@ NEON_API_KEY=YOUR_NEON_API_KEY
 **Replace the placeholders** `YOUR_OPENAI_API_KEY` and `YOUR_NEON_API_KEY` with the actual API keys you obtained in the [Prerequisites](#prerequisites) section.
 
 <Admonition type="note">
-    It is crucial to add `.env` to your `.gitignore` file if you are using Git for version control. This prevents your API keys from being inadvertently exposed in your code repository.
+    Add `.env` to your `.gitignore` file if you are using Git for version control. This prevents your API keys from being inadvertently exposed in your code repository.
 </Admonition>
 
 ### Creating the `main.py` file
@@ -324,7 +324,7 @@ def create_database(project_name: str) -> str:
 This Python function defines a tool that allows agents to create new Neon projects programmatically using the `neon_api_client`.
 
 - It accepts `project_name: str` as an argument, which specifies the name for the new Neon project.
-- It utilizes `neon_client.project_create()` to send a request to the Neon API to create a new project.
+- It uses `neon_client.project_create()` to send a request to the Neon API to create a new project.
 - Upon successful project creation, it retrieves the connection URI for the newly created Neon database using `neon_client.connection_uri()`.
 - It returns a formatted string that confirms the project and database creation and includes the connection URI, which is essential for connecting to the database.
 - In case of any errors during project creation, it catches the exception and returns an error message, aiding in debugging and error handling.
@@ -427,7 +427,7 @@ This `async def main() -> None:` function is the core of your script, where you 
   )
   ```
 
-  Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is designed to be the main problem solver. The `system_message` is a crucial part of its configuration, defining its role, capabilities, and instructions on how to interact with other agents and tools. It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
+  Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is designed to be the main problem solver. The `system_message` is the key part of its configuration. It defines its role, capabilities, and instructions on how to interact with other agents and tools. It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
 
 - **Create `code_executor` agent:**
 
@@ -486,7 +486,7 @@ This `async def main() -> None:` function is the core of your script, where you 
     <Admonition type="warning">
         This guide uses `LocalCommandLineCodeExecutor` for simplicity, which allows AI agents to execute commands directly on your local machine. **This setup is highly insecure and is strictly NOT recommended for production environments.**  Agents could potentially perform harmful actions on your system.
 
-        For production deployments, we strongly advise using `DockerCommandLineCodeExecutor`. This executor runs code within isolated Docker containers, significantly enhancing security by limiting the agent's access to your system.
+        For production deployments, we strongly advise using `DockerCommandLineCodeExecutor`. This executor runs code within isolated Docker containers, which limits the agent's access to your system.
 
         Setting up `DockerCommandLineCodeExecutor` involves additional configuration steps, including Docker setup and image management, which are beyond the scope of this getting started guide.  Please refer to the [AutoGen documentation](https://microsoft.github.io/autogen/stable/reference/python/autogen_ext.code_executors.docker.html#autogen_ext.code_executors.docker.DockerCommandLineCodeExecutor) for detailed instructions on how to configure and use `DockerCommandLineCodeExecutor` securely.
 
@@ -522,7 +522,7 @@ You can verify the successful completion of the task by checking the [Neon Conso
 
 ![Output in Neon console](/docs/guides/autogen-neon-console.png)
 
-**Congratulations!** You have successfully built and run an AutoGen agent team that effectively interacts with Neon for database management! This example serves as a foundation for creating more complex AI agents and workflows, enabling you to automate a wide range of tasks and processes.
+You have built and run an AutoGen agent team that interacts with Neon for database management. You can extend this example into more complex agents and workflows.
 
 You can find the source code for the application described in this guide on GitHub.
 

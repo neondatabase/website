@@ -16,7 +16,7 @@ This guide demonstrates how to implement automated database branching using Neon
 - Showing schema diffs directly in your pull request
 - Syncing schema changes to production when the PR is merged
 
-By the end of this guide, you'll have a system where database changes are as seamless as code changes, with each feature safely isolated in its own environment until it's ready for production. This approach not only makes database changes safer but also gives developers the confidence to experiment with schema changes without fear of breaking the production environment.
+By the end of this guide, you'll have a system where database changes flow like code changes, with each feature isolated in its own environment until it's ready for production. This makes database changes safer and lets developers experiment with schema changes without risk to production.
 
 ## Prerequisites
 

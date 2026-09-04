@@ -24,7 +24,7 @@ Follow this guide only if you're ready to experience the future of app developme
 
 ## Building an AI MCQ Quiz Generator app from PDF documents
 
-This app allows users to create MCQ quizzes from uploaded PDF documents. Users can upload PDFs, and the app will generate the questions based on the content using OpenAI's `gpt-4o-mini` model. The generated MCQs will be stored in a database, and users can share a unique link to access the quiz. We'll leverage Replit Agent to build this app in minutes, without writing a single line of code.
+This app allows users to create MCQ quizzes from uploaded PDF documents. Users can upload PDFs, and the app will generate the questions based on the content using OpenAI's `gpt-4o-mini` model. The generated MCQs will be stored in a database, and users can share a unique link to access the quiz. We'll use Replit Agent to build this app in minutes, without writing a single line of code.
 
 You can also follow along with the video below to see the step-by-step process:
 
@@ -104,7 +104,7 @@ Examine the generated MCQs, assessing their relevance, accuracy, and overall qua
 
 ### Database integration
 
-A quick review of the generated code will reveal that Replit Agent has defaulted to an in-memory database for simplicity. To confirm this, you can directly ask the Agent about data storage. While in-memory databases are suitable for initial development, they are not ideal for production applications where data persistence is crucial. For a production-grade application, integrating a persistent database like Postgres is essential. You can now instruct Replit Agent to switch your application's data layer to a fully managed Postgres, powered by Neon. Replit Agent will make the necessary changes to the application code to integrate the Postgres database.
+A quick review of the generated code will reveal that Replit Agent has defaulted to an in-memory database for simplicity. To confirm this, you can directly ask the Agent about data storage. While in-memory databases are suitable for initial development, they are not suitable for production applications, which need persistent data. You can now instruct Replit Agent to switch your application's data layer to a fully managed Postgres, powered by Neon. Replit Agent will make the necessary changes to the application code to integrate the Postgres database.
 
     ![Replit Agent Database Integration](/docs/guides/replit-agent-create-database.png)
 
@@ -131,11 +131,11 @@ To optimize your Replit Agent development experience and build applications effe
 - **Prompt engineering:**
   - **Improve Prompt**: Use the "Improve Prompt" feature in Replit Agent to refine the prompt and provide additional context. This helps Replit Agent better understand your requirements and generate more accurate code.
     ![Replit Agent Improve Prompt](/docs/guides/replit-agent-improve-prompt.png)
-  - **Contextual prompts:** Initiate prompts with clear and comprehensive context. For example, "Modify the MCQ display to show one question at a time."
+  - **Contextual prompts:** Start prompts with clear, complete context. For example, "Modify the MCQ display to show one question at a time."
   - **Incremental iteration:** Decompose complex feature additions into smaller, incremental prompts for greater control and reduced complexity. For instance, when developing a multi-step form, address each form section sequentially.
   - **Specific feedback:** When encountering issues, provide precise and detailed feedback to Replit Agent. Include error messages, descriptions of expected vs. actual behavior, and relevant context for efficient debugging and issue resolution.
 
-- **Leveraging Replit Platform Features:**
+- **Using Replit Platform Features:**
   - **Secure secrets management:** Always employ Replit Secrets for storing API keys, database credentials, and other sensitive information.
   - **Deployment**: Use Replit's built-in deployment features to host your applications online. This simplifies the deployment process and makes your applications accessible to a wider audience. You never have to worry about server management, scaling, or maintenance.
 

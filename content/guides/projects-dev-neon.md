@@ -21,9 +21,9 @@ This is where AI-assisted development is headed next. The future isn’t just ab
 
 ## What is Projects.dev?
 
-[Projects.dev](https://projects.dev) is Stripe’s new platform for AI-native development. Think of it as an agent-friendly, simplified version of Terraform with unified billing built in. It offers a CLI and a growing ecosystem of [integrations](https://projects.dev/providers/) that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
+[Projects.dev](https://projects.dev) is Stripe’s new platform for AI-native development. Think of it as an agent-friendly, simplified version of Terraform with a single bill built in. It offers a CLI and a growing ecosystem of [integrations](https://projects.dev/providers/) that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
 
-The core idea is simple but powerful: instead of asking you to go to a provider’s dashboard, create an account, and copy API keys, Projects.dev lets your AI agent run commands that automatically provision resources on your behalf. The credentials are securely retrieved and injected directly into your local environment, so you can start building immediately.
+The core idea is simple: instead of asking you to go to a provider’s dashboard, create an account, and copy API keys, Projects.dev lets your AI agent run commands that automatically provision resources on your behalf. The credentials are securely retrieved and injected directly into your local environment, so you can start building immediately.
 
 ## How does it work?
 
@@ -116,7 +116,7 @@ The prompt is intentionally kept high‑level. The AI agent decides on the exact
 
 ## Watch the AI agent build and provision
 
-Your AI agent begins by analyzing the prompt and determining which services are needed. From there, it leverages the Stripe Projects CLI to provision those services automatically on your behalf.
+Your AI agent begins by analyzing the prompt and determining which services are needed. From there, it uses the Stripe Projects CLI to provision those services automatically on your behalf.
 
 You can inspect its logs to see the exact commands executed and the reasoning behind them. While the agent’s output won’t match this guide word‑for‑word, agents are inherently non‑deterministic but the overall workflow will be similar.
 
@@ -191,13 +191,13 @@ The app built in this guide is available here: [travel-concierge-app.vercel.app]
 
 Building an MVP without leaving your editor is an incredible experience, but the real power of this workflow becomes obvious when you look at the long-term lifecycle of your app.
 
-### 1. Seamless upgrades with unified billing
+### 1. Upgrades with a single bill
 
 Eventually, your weekend project might gain traction. You hit the free-tier limits on Firecrawl, you need a larger compute size in Neon, or you want to use a more expensive AI model on OpenRouter.
 
 Normally, upgrading means logging into three different provider dashboards, entering your credit card details three separate times, and navigating three different billing UIs.
 
-With `projects.dev`, billing is centralized. Because Stripe already handles your KYC (Know Your Customer) and payment details globally, upgrading is incredibly frictionless. First, configure your billing on Stripe by running:
+With `projects.dev`, billing is centralized. Because Stripe already handles your KYC (Know Your Customer) and payment details globally, upgrading takes a single command. First, configure your billing on Stripe by running:
 
 ```bash
 stripe projects billing add
@@ -236,13 +236,13 @@ The CLI rotates the key at the provider level and updates your `.env` safely.
 
 You no longer have to weigh the "cost of setup" against the value of an idea. You can spin up fully realized, full-stack applications with stateful databases, AI features, and hosting in minutes.
 
-Because Neon is serverless and scales to zero, you can provision databases for dozens of AI side projects and forget about them. When you aren't using them, they consume zero compute. If one of those projects suddenly goes viral, Neon's autoscaling seamlessly handles the traffic spikes without requiring you to manually provision larger instances. If you abandon a project a week later, you haven't cluttered your password manager or your credit card statement with orphaned accounts.
+Because Neon is serverless and scales to zero, you can provision databases for dozens of AI side projects and forget about them. When you aren't using them, they consume zero compute. If one of those projects suddenly goes viral, Neon's autoscaling handles the traffic spikes without requiring you to manually provision larger instances. If you abandon a project a week later, you haven't cluttered your password manager or your credit card statement with orphaned accounts.
 
 ### 4. Direct dashboard access
 
 While CLI-driven provisioning eliminates setup friction, you are never locked out of traditional UI workflows. If you prefer to visually inspect your data or tweak configurations manually, you can still access the provider's specific dashboard at any time.
 
-Just ask your AI agent to open the provider's dashboard, or run the command manually. For example, to seamlessly authenticate and open the Neon console, run:
+Just ask your AI agent to open the provider's dashboard, or run the command manually. For example, to authenticate and open the Neon console, run:
 
 ```bash
 stripe projects open neon

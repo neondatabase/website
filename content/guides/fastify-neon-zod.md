@@ -11,7 +11,7 @@ Ensuring end-to-end type safety between your backend and frontend is one of the 
 
 Traditionally, developers define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. This repetitive process is highly prone to code drift, and as soon as an API endpoint changes, frontend types or schemas can fall out of sync, leading to runtime failures.
 
-In this guide, you will build a unified, type-safe pipeline that automatically solves this problem using:
+In this guide, you will build a single, type-safe pipeline that automatically solves this problem using:
 
 1. **Backend database**: Lakebase Postgres for scalable, zero-config relational storage.
 2. **Backend API**: A [Fastify](https://fastify.dev/) server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
@@ -22,7 +22,7 @@ By deriving the client-side validation schemas directly from the backend's Zod s
 
 ## Architecture overview
 
-The workflow relies on a unified flow of schema representation, moving from server to client:
+The workflow relies on a single flow of schema representation, moving from server to client:
 
 ```mermaid
 flowchart TD
@@ -611,7 +611,7 @@ Implementing this automated pipeline provides critical improvements to full-stac
 
 ## Extending this guide
 
-In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better solution is to adopt a modern ORM that integrates seamlessly with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
+In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better option is a modern ORM that integrates with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
 
 With Drizzle, you define your schema once in TypeScript using its `pgTable` API. The [`drizzle-zod`](https://orm.drizzle.team/docs/zod) package then generates Zod schemas directly from those table definitions, so your validation logic is always derived from a single source of truth. Feed these generated Zod schemas into `fastify-type-provider-zod` and the rest of the pipeline (OpenAPI export via Swagger, client SDK and Zod schema generation via Hey API) carries on as before. The result is an unbroken chain of type safety from the database column all the way to the frontend form, with no hand-written schemas to maintain in between.
 

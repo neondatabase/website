@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search with Neon and Azure AI Search
-subtitle: Build a powerful hybrid search system for developer resources with Neon and Azure AI Search
+subtitle: Build a hybrid search system for developer resources with Neon and Azure AI Search
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-05T00:00:00.000Z'
@@ -798,7 +798,7 @@ Feel free to customize the search query, filters, and limit to test different sc
 
 In this guide, you learned how to build a hybrid search service using Neon and Azure AI Search.
 
-As a next step, you can check out the [Full-Text Search guide](/guides/full-text-search) to learn more about Neon's capabilities and how to optimize your search queries. Additionally, you can explore the [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) to discover more advanced features and integrations.
+As a next step, you can check out the [Full-Text Search guide](/guides/full-text-search) to learn more about Neon's capabilities and how to optimize your search queries. You can also explore the [Azure AI Search documentation](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) to discover more advanced features and integrations.
 
 ## Additional Resources
 

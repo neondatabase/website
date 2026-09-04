@@ -501,7 +501,7 @@ export default app;
 
 The above code does the following:
 
-- **Imports**: The `neon` provider from `@neon/ai-sdk-provider` and `generateText` from the [Vercel AI SDK](https://ai-sdk.dev/docs/introduction) give you a unified interface for calling LLMs and image generation tools through the Neon AI Gateway. You don't need to wire up OpenAI, Claude, or any other provider directly. The Gateway handles routing.
+- **Imports**: The `neon` provider from `@neon/ai-sdk-provider` and `generateText` from the [Vercel AI SDK](https://ai-sdk.dev/docs/introduction) give you a single interface for calling LLMs and image generation tools through the Neon AI Gateway. You don't need to wire up OpenAI, Claude, or any other provider directly. The Gateway handles routing.
 
 - **`sendChatResponse`**: This function runs after the deferred response has already been sent. It calls `generateText` with the user's prompt to get an LLM response, then sends a `PATCH` request to the [webhook endpoint](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) to replace the "Bot is thinking..." message with the generated text. The `catch` block handles failures gracefully. If the AI call throws, the bot still sends a user-friendly error message back to Discord instead of leaving the user stuck on "Bot is thinking..." forever.
 

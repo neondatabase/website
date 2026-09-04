@@ -7,7 +7,7 @@ createdAt: '2024-10-08T00:00:00.000Z'
 updatedOn: '2026-01-07T13:45:46.000Z'
 ---
 
-Following this guide, you’ll build an asynchronous product management API and leverage FastAPI's async capabilities and connection pools to efficiently manage database connections, ensuring your API can scale and handle high traffic with ease. Whether you’re aiming to improve performance or simply learn the best practices for building async APIs, this guide has you covered.
+Following this guide, you’ll build an asynchronous product management API using FastAPI's async capabilities and connection pools to manage database connections, so your API can scale and handle high traffic.
 
 ## Prerequisites
 
@@ -269,7 +269,7 @@ class ProductStockUpdate(BaseModel):
 
 ## Creating the API Endpoints
 
-In this section, you will create the API endpoints that allow you to manage products in your `PostgreSQL` database. These endpoints will allow you to create, retrieve, update, delete, and manage product stock. You will leverage asynchronous database connections using `asyncpg`.
+In this section, you will create the API endpoints that allow you to manage products in your `PostgreSQL` database. These endpoints will allow you to create, retrieve, update, delete, and manage product stock. You will use asynchronous database connections with `asyncpg`.
 
 Each endpoint follows a similar flow for interacting with the database. You will first get a connection from the connection pool, execute the desired query, and release the connection back to the pool. Since the connection pool is used as a context manager, the connection will automatically be returned to the pool after each operation.
 
@@ -789,6 +789,6 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
 Using this guide, you have built a fully functional API for managing products using `FastAPI`, `Pydantic`, and `PostgreSQL` with `asyncpg`.
 
-This stack provides a solid foundation for building high-performance and scalable web services. `FastAPI`'s asynchronous support, combined with `Pydantic`'s robust data validation and `asyncpg`'s efficient database interactions, allows for fast and reliable API development.
+This stack provides a solid foundation for building high-performance and scalable web services. `FastAPI`'s asynchronous support, combined with `Pydantic`'s data validation and `asyncpg`'s efficient database interactions, allows for fast and reliable API development.
 
 As a next step, you can look at deploying this application in the cloud using scalable technologies like `Docker` and `Kubernetes`, or implementing automated test, build, and deployment workflows using `GitHub CI`

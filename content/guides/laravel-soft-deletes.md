@@ -514,7 +514,7 @@ This test verifies that force deleting a post removes it entirely from the datab
 
 Laravel's soft delete feature provides a way to manage data deletion without losing valuable information. By using soft deletes, you can improve your application's data integrity and provide features like data recovery or undo functionality to your users.
 
-Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Lakebase Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
+Consider the performance implications of soft deletes, especially when working with large datasets. Use Lakebase Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
 
 When implementing soft deletes, always think about the lifecycle of your data. Plan on implementing policies for permanent deletion of old soft-deleted records to manage database growth optimally and comply with data retention regulations.
 
