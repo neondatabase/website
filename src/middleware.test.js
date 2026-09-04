@@ -613,6 +613,40 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
   });
 
+  describe('Homepage markdown negotiation', () => {
+    it('serves text/markdown with Vary: Accept for / when Accept: text/markdown', async () => {
+      mockMarkdownFetch('# Neon\n\n## When to use Neon\n');
+      const req = createMockRequest('/', 'Mozilla/5.0', 'text/markdown');
+      const res = await middleware(req);
+
+      expect(res.status).toBe(200);
+      expect(res.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(res.headers.get('Vary')).toContain('Accept');
+      // The markdown fetch must have targeted /index.md
+      expect(global.fetch.mock.calls[0][0]).toBe('https://neon.com/index.md');
+    });
+
+    it('serves markdown for /home to agents (same file as /)', async () => {
+      mockMarkdownFetch('# Neon\n');
+      const req = createMockRequest('/home', 'ChatGPT-User', 'text/markdown');
+      const res = await middleware(req);
+
+      expect(res.status).toBe(200);
+      expect(res.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(global.fetch.mock.calls[0][0]).toBe('https://neon.com/index.md');
+    });
+
+    it('does NOT serve markdown for / to a real browser (falls through to next)', async () => {
+      // Browser: text/html Accept, Mozilla UA -> not an agent -> no markdown fetch
+      const req = createMockRequest('/', 'Mozilla/5.0 (Macintosh) Chrome/128', 'text/html');
+      const res = await middleware(req);
+
+      // Not the markdown branch: either a NextResponse.next() ({type:'next'}) or
+      // the logged-in redirect. Crucially, Content-Type is not markdown.
+      expect(res.headers.get?.('Content-Type')).not.toBe('text/markdown; charset=utf-8');
+    });
+  });
+
   describe('AI Agent patterns detection', () => {
     const aiAgents = [
       'ChatGPT-User',

@@ -1,0 +1,181 @@
+name: Site reindex
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/guides/**'
+      - 'content/changelog/**'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: Space-separated https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md URLs to reindex (upsert)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  reindex:
+    name: 'Reindex changed guides and changelog pages'
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '22'
+
+      - name: Map changed files
+        id: map
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -o pipefail
+          before="${{ github.event.before }}"
+          sha="${{ github.sha }}"
+          zeros='0000000000000000000000000000000000000000'
+          if [ "${before}" = "${zeros}" ]; then
+            echo "github.event.before is the all-zeros SHA; refusing to guess the compare range. Use workflow_dispatch with the https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md URLs to upsert. Dispatch cannot delete pages."
+            exit 1
+          fi
+          gh api "repos/${GITHUB_REPOSITORY}/compare/${before}...${sha}" --jq '.files' \
+            > /tmp/site-reindex-files.json
+          payload="$(node src/scripts/site-reindex-map.js < /tmp/site-reindex-files.json)"
+          if [ -z "${payload}" ]; then
+            echo "payload=" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+          {
+            echo 'payload<<EOF'
+            printf '%s\n' "${payload}"
+            echo EOF
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Map dispatch URLs
+        id: dispatch
+        if: github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          set -o pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          (async () => {
+            const urls = process.env.URLS.trim().split(/\s+/).filter(Boolean);
+            if (urls.length === 0) {
+              throw new Error(
+                'workflow_dispatch requires at least one https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md URL',
+              );
+            }
+            for (const url of urls) {
+              let parsed;
+              try {
+                parsed = new URL(url);
+              } catch {
+                throw new Error(
+                  `Not a guides or changelog markdown url: ${url} (expected https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md with no port, userinfo, query, or hash)`,
+                );
+              }
+              if (
+                parsed.protocol !== 'https:' ||
+                parsed.hostname !== 'neon.com' ||
+                parsed.port !== '' ||
+                parsed.username !== '' ||
+                parsed.password !== '' ||
+                parsed.search !== '' ||
+                parsed.hash !== '' ||
+                !parsed.pathname.endsWith('.md') ||
+                !(
+                  parsed.pathname.startsWith('/guides/') ||
+                  parsed.pathname.startsWith('/docs/changelog/')
+                )
+              ) {
+                throw new Error(
+                  `Not a guides or changelog markdown url: ${url} (expected https://neon.com/guides/**.md or https://neon.com/docs/changelog/**.md with no port, userinfo, query, or hash)`,
+                );
+              }
+            }
+            const payload = JSON.stringify({
+              pages: urls.map((url) => ({ url, deleted: false })),
+            });
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              await fs.promises.appendFile(
+                process.env.GITHUB_STEP_SUMMARY,
+                `## Site reindex map\n\nQueued **${urls.length}** page(s) for reindex.\n`,
+              );
+            }
+            await fs.promises.appendFile(
+              process.env.GITHUB_OUTPUT,
+              `payload<<EOF\n${payload}\nEOF\n`,
+            );
+          })().catch((error) => {
+            console.error(error instanceof Error ? error.message : error);
+            process.exit(1);
+          });
+          NODE
+        env:
+          URLS: ${{ inputs.urls }}
+
+      - name: POST reindex
+        if: steps.map.outputs.payload != '' || steps.dispatch.outputs.payload != ''
+        env:
+          NEON_AGENT_SITE_REINDEX_URL: ${{ secrets.NEON_AGENT_SITE_REINDEX_URL }}
+          NEON_AGENT_DOCS_REINDEX_SECRET: ${{ secrets.NEON_AGENT_DOCS_REINDEX_SECRET }}
+          PAYLOAD: ${{ steps.map.outputs.payload || steps.dispatch.outputs.payload }}
+        shell: bash
+        run: |
+          set -o pipefail
+          if [ -z "${NEON_AGENT_SITE_REINDEX_URL}" ] || [ -z "${NEON_AGENT_DOCS_REINDEX_SECRET}" ]; then
+            echo "NEON_AGENT_SITE_REINDEX_URL and NEON_AGENT_DOCS_REINDEX_SECRET must be set"
+            exit 1
+          fi
+          node <<'NODE'
+          const { createHmac } = require('node:crypto');
+          const { chunkReindexPages } = require('./src/scripts/site-reindex-map.js');
+          const parsed = JSON.parse(process.env.PAYLOAD);
+          if (!parsed || !Array.isArray(parsed.pages)) {
+            throw new Error('payload must be {"pages":[...]}');
+          }
+          (async () => {
+            const chunks = chunkReindexPages(parsed.pages);
+            for (const [index, pages] of chunks.entries()) {
+              const body = JSON.stringify({ pages });
+              const signature = `sha256=${createHmac('sha256', process.env.NEON_AGENT_DOCS_REINDEX_SECRET)
+                .update(body)
+                .digest('hex')}`;
+              const response = await fetch(process.env.NEON_AGENT_SITE_REINDEX_URL, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                  'x-site-reindex-signature': signature,
+                },
+                body,
+              });
+              await response.arrayBuffer();
+              if (response.status !== 202) {
+                throw new Error(
+                  `site reindex chunk ${index + 1}/${chunks.length} returned ${response.status}`,
+                );
+              }
+              console.log(
+                `site reindex chunk ${index + 1}/${chunks.length} returned ${response.status}`,
+              );
+            }
+          })().catch((error) => {
+            console.error(error instanceof Error ? error.message : error);
+            process.exit(1);
+          });
+          NODE

@@ -25,7 +25,8 @@ module.exports = {
     'This is the primary index. Sections with many pages show key pages and link to full sub-indexes.',
   ].join(' '),
 
-  // Quick-reference links emitted as "## Common Queries" before the section list.
+  // Quick-reference links emitted as "## Common tasks" before the section list.
+  // (Kept as `commonQueries` internally; the generator renders the heading.)
   commonQueries: [
     {
       label:
@@ -33,6 +34,18 @@ module.exports = {
       url: 'https://neon.com/auth.md',
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
+    {
+      label: 'Declare a whole backend in one file',
+      url: 'https://neon.com/docs/reference/neon-ts.md',
+    },
+    {
+      label: 'Add users and authentication',
+      url: 'https://neon.com/docs/auth/overview.md',
+    },
+    {
+      label: 'Explore the full platform: functions, object storage, AI Gateway, and more',
+      url: 'https://neon.com/docs/introduction.md',
+    },
     {
       label: 'Choose a connection method (drivers, pooling, serverless)',
       url: 'https://neon.com/docs/connect/choose-connection.md',
@@ -139,7 +152,7 @@ module.exports = {
           'manage/branches.md',
           'manage/computes.md',
           'manage/organizations.md',
-          'manage/backups.md',
+          'manage/databases.md',
         ],
       },
     },
@@ -313,6 +326,26 @@ module.exports = {
       title: 'Blog',
       url: 'https://neon.com/blog.md',
       description: 'Engineering, product, and community posts from the Neon team',
+    },
+  ],
+
+  // Indexes written at build time that are not linked from public/docs/llms.txt.
+  // Site search ingest walks these URLs; the official docs catalog walk stays on the parent index.
+  unlinkedIndexes: [
+    {
+      route: 'guides',
+      publicPath: 'guides',
+      outputPath: 'public/guides/llms.txt',
+      title: 'Neon Community Guides',
+      intro:
+        'Step-by-step tutorials for frameworks, ORMs, auth providers, and deployment platforms.',
+    },
+    {
+      route: 'docs/changelog',
+      publicPath: 'docs/changelog',
+      outputPath: 'public/docs/changelog/llms.txt',
+      title: 'Neon Changelog',
+      intro: 'Latest updates and releases.',
     },
   ],
 

@@ -43,11 +43,11 @@ Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`s
 
 A bucket's log level comes from the HTTP status code of the request, not from anything the client sets:
 
-| Level   | HTTP status                           |
-| ------- | ------------------------------------- |
-| `INFO`  | Everything else (successful requests) |
-| `WARN`  | 4xx                                   |
-| `ERROR` | 5xx                                   |
+| Level   | HTTP status                                                |
+| ------- | ---------------------------------------------------------- |
+| `INFO`  | Everything else (successful requests)                      |
+| `WARN`  | 4xx, plus `501 Not Implemented` for unsupported operations |
+| `ERROR` | Other 5xx responses                                        |
 
 `DEBUG`, `NOTICE`, and `FATAL` also appear as filters in the log viewer but aren't currently emitted by Object Storage; they're part of the console's shared log-level set.
 

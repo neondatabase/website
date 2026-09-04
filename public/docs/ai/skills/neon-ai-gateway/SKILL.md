@@ -27,7 +27,7 @@ npx skills add neondatabase/agent-skills --skill neon
 
 # Neon AI Gateway
 
-This is a public beta feature and only available in `us-east-2`.
+This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
 
 The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from many providers (Anthropic, OpenAI, Google, Meta, and more), all hosted and powered by Databricks. The catalog shifts over time, so treat `/v1/models` and the [models.dev Neon page](https://models.dev/providers/neon) as the source of truth rather than a fixed provider list. Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
 
@@ -55,7 +55,7 @@ If the user already has a deep, single-provider integration and no interest in N
 
 Check these preconditions before setting anything up:
 
-The AI Gateway is a public beta feature available in the `us-east-2` region. Foundation model access requires a paid Neon plan. Confirm the user's project is in `us-east-2`.
+The AI Gateway is a public beta feature currently available in `us-east-2` and `eu-central-1`. Foundation model access requires a paid Neon plan. Confirm the user's project is in one of these regions.
 
 ### Enabling the gateway: plan and model-catalog gating
 
