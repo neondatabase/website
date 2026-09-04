@@ -155,6 +155,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "shiki": "^1.1.1",
     "tailwindcss": "^4.2.1",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "ws": "^7.5.11"
   }
 }
