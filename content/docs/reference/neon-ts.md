@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-04T11:30:15.813Z'
+updatedOn: '2026-09-04T11:57:36.377Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -150,14 +150,14 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 
 ### BranchTuning fields
 
-| Field                                            | Type                              | Description                                                                                                           |
-| ------------------------------------------------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `parent`                                         | `string`                          | Parent branch name or ID                                                                                              |
-| `protected`                                      | `boolean`                         | Mark the branch as protected                                                                                          |
-| `ttl`                                            | `string \| number`                | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript |
-| `postgres.computeSettings.autoscalingLimitMinCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Minimum compute units                                                                                                 |
-| `postgres.computeSettings.autoscalingLimitMaxCu` | `0.25 \| 0.5 \| 1 \| 2 \| 4 \| 8` | Maximum compute units                                                                                                 |
-| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number`       | Idle suspend timeout. `false` disables suspend                                                                        |
+| Field                                            | Type                        | Description                                                                                                                                                      |
+| ------------------------------------------------ | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `parent`                                         | `string`                    | Parent branch name or ID                                                                                                                                         |
+| `protected`                                      | `boolean`                   | Mark the branch as protected                                                                                                                                     |
+| `ttl`                                            | `string \| number`          | Branch lifetime: `"7d"`, `"2h"`, or seconds as a number. Maximum 30 days. Validated at deploy time, not by TypeScript                                            |
+| `postgres.computeSettings.autoscalingLimitMinCu` | `ComputeUnit`               | Minimum compute units. Any size Neon offers: 0.25, 0.5, every integer 1 to 16, and even sizes 18 to 56                                                           |
+| `postgres.computeSettings.autoscalingLimitMaxCu` | `ComputeUnit`               | Maximum compute units. For an autoscaling range, keep both bounds at 16 or below and no more than 8 CU apart; sizes above 16 are fixed-size (`min` equals `max`) |
+| `postgres.computeSettings.suspendTimeout`        | `false \| string \| number` | Idle suspend timeout. `false` disables suspend                                                                                                                   |
 
 ## Services
 
