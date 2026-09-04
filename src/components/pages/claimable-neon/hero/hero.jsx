@@ -30,7 +30,12 @@ const Hero = () => (
           <p className="mt-6 max-w-142 text-lg leading-normal tracking-extra-tight text-pretty text-gray-new-70 xl:text-base lg:max-w-xl md:mt-5">
             Agents can provision a Neon project before a human creates an account. Start building,
             then claim the project into a Neon organization before it expires. Powered by{' '}
-            <Link to="/auth.md" theme="white" className="hover:underline">
+            <Link
+              to="https://workos.com/auth-md"
+              theme="white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               auth.md
             </Link>
             .

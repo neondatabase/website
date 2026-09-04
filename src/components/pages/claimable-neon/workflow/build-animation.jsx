@@ -16,11 +16,10 @@ const BuildAnimation = () => (
   >
     <RiveAnimation
       className="pointer-events-none size-full"
-      intersectionClassName="translate-x-[60.526cqw]"
-      wrapperClassName="absolute top-[-46.0526cqw] left-[-168.421cqw] h-[157.072cqw] w-[315.789cqw]"
+      wrapperClassName="size-full"
       src={RIVE_SOURCE}
-      artboard="neon-claimable"
-      stateMachines="State Machine 1"
+      artboard="main"
+      stateMachines="SM"
       autoplay
       autoBind={false}
       fit={Fit.Contain}

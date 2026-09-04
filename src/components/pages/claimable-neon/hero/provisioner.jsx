@@ -18,7 +18,7 @@ const SERVICES = [
   {
     id: 'data-api',
     title: 'Data API',
-    description: 'Query the database over HTTPS. Stays enabled after claim.',
+    description: 'Query over HTTPS. Stays enabled after claim.',
     icon: dataApiIcon,
     iconClassName: 'size-5',
   },
@@ -314,12 +314,12 @@ const Provisioner = () => {
 
   return (
     <FormPanel>
-      <div className="min-h-22.5">
-        <p className="text-sm leading-none font-medium text-green-45">Provision from this page</p>
-        <h2 className="text-2xl leading-snug font-medium tracking-tighter text-pretty">
-          Choose your backend
-        </h2>
-      </div>
+      <h2 className="text-2xl leading-snug font-medium tracking-tighter text-pretty">
+        Configure your backend
+      </h2>
+      <p className="mt-1 max-w-97 text-[1.0625rem] leading-normal font-medium tracking-extra-tight text-pretty text-gray-new-70">
+        Select the services to include in your project. Postgres is always included.
+      </p>
 
       <div className="mt-8 divide-y divide-gray-new-20 border-y border-gray-new-20">
         <div className="flex items-center gap-3.5 py-6.5">
@@ -334,10 +334,10 @@ const Provisioner = () => {
             />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-lg leading-none tracking-extra-tight text-gray-new-90 md:text-base">
+            <p className="text-lg leading-none tracking-extra-tight text-gray-new-90 md:text-base/tight">
               Lakebase Postgres
             </p>
-            <p className="mt-2 text-base leading-tight tracking-extra-tight text-gray-new-60 md:text-sm">
+            <p className="mt-2 text-base leading-none tracking-extra-tight text-gray-new-60 md:text-sm/tight">
               A temporary database is always included.
             </p>
           </div>

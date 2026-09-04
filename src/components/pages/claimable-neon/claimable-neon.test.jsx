@@ -74,15 +74,17 @@ describe('Claimable Neon provisioning form', () => {
     vi.useRealTimers();
   });
 
-  it('retains main form copy and starts with optional services off', () => {
+  it('renders the current form copy and starts with optional services off', () => {
     render(<Provisioner />);
 
-    expect(screen.getByText('Provision from this page')).toBeVisible();
-    expect(screen.getByRole('heading', { name: 'Choose your backend' })).toBeVisible();
-    expect(screen.getByText('A temporary database is always included.')).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Configure your backend' })).toBeVisible();
     expect(
-      screen.getByText('Query the database over HTTPS. Stays enabled after claim.')
+      screen.getByText(
+        'Select the services to include in your project. Postgres is always included.'
+      )
     ).toBeVisible();
+    expect(screen.getByText('A temporary database is always included.')).toBeVisible();
+    expect(screen.getByText('Query over HTTPS. Stays enabled after claim.')).toBeVisible();
     expect(screen.getByText('Add authentication. Stays enabled after claim.')).toBeVisible();
     expect(screen.getByText(/No account or payment details required/)).toHaveTextContent(
       'No account or payment details required. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.'
@@ -236,7 +238,7 @@ describe('Claimable Neon provisioning form', () => {
     submit();
     await screen.findByText('Project ready');
     fireEvent.click(screen.getByRole('button', { name: 'Create another project' }));
-    expect(screen.getByRole('heading', { name: 'Choose your backend' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Configure your backend' })).toBeVisible();
     expect(screen.getByRole('button', { name: /Managed Better Auth/ })).toHaveAttribute(
       'aria-pressed',
       'true'
