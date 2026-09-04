@@ -8,12 +8,24 @@ on:
       # Official docs catalog. Guides and changelog are site-reindex.yml.
       - 'content/docs/**'
       - 'content/branching/**'
+      # Membership of generated pages (API endpoints) lives here, not in git.
+      - 'src/scripts/llms-index-config.js'
+      - 'src/scripts/generate-llms-index.js'
+      - 'scripts/generate-api-ref.mjs'
+      - 'scripts/lib/api-ref-output.mjs'
+      - 'scripts/lib/openapi-spec-source.mjs'
   workflow_dispatch:
     inputs:
       urls:
         description: Space-separated https://neon.com/**.md URLs to reindex (upsert)
-        required: true
+        required: false
         type: string
+        default: ''
+      sync:
+        description: Diff the live docs catalog against indexed pages (add missing, drop extras)
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -75,10 +87,11 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           (async () => {
-            const urls = process.env.URLS.trim().split(/\s+/).filter(Boolean);
-            if (urls.length === 0) {
+            const urls = (process.env.URLS ?? '').trim().split(/\s+/).filter(Boolean);
+            const sync = process.env.SYNC === 'true';
+            if (urls.length === 0 && !sync) {
               throw new Error(
-                'workflow_dispatch requires at least one https://neon.com/**.md URL with no port, userinfo, query, or hash',
+                'workflow_dispatch requires https://neon.com/**.md URLs and/or sync',
               );
             }
             for (const url of urls) {
@@ -113,13 +126,19 @@ jobs:
                 );
               }
             }
-            const payload = JSON.stringify({
-              pages: urls.map((url) => ({ url, deleted: false })),
-            });
+            const payload = JSON.stringify(
+              sync
+                ? urls.length > 0
+                  ? { pages: urls.map((url) => ({ url, deleted: false })), sync: 'docs' }
+                  : { sync: 'docs' }
+                : { pages: urls.map((url) => ({ url, deleted: false })) },
+            );
             if (process.env.GITHUB_STEP_SUMMARY) {
               await fs.promises.appendFile(
                 process.env.GITHUB_STEP_SUMMARY,
-                `## Docs reindex map\n\nQueued **${urls.length}** page(s) for reindex.\n`,
+                `## Docs reindex map\n\nQueued **${urls.length}** page(s) for reindex${
+                  sync ? ' plus catalog sync' : ''
+                }.\n`,
               );
             }
             await fs.promises.appendFile(
@@ -133,6 +152,7 @@ jobs:
           NODE
         env:
           URLS: ${{ inputs.urls }}
+          SYNC: ${{ inputs.sync }}
 
       - name: POST reindex
         if: steps.map.outputs.payload != '' || steps.dispatch.outputs.payload != ''

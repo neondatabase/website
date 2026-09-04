@@ -12,6 +12,14 @@ const ADDITIONAL_RESOURCE_PATHS = new Set(
   (config.additionalResources || []).filter((r) => r.sourcePath).map((r) => r.sourcePath)
 );
 
+const CATALOG_SYNC_PATHS = new Set([
+  'src/scripts/llms-index-config.js',
+  'src/scripts/generate-llms-index.js',
+  'scripts/generate-api-ref.mjs',
+  'scripts/lib/api-ref-output.mjs',
+  'scripts/lib/openapi-spec-source.mjs',
+]);
+
 const INDEXED_ROUTES = Object.entries(CONTENT_ROUTES)
   .filter(([route]) => !(route in COLLAPSED_ROUTES))
   .sort((a, b) => b[1].length - a[1].length);
@@ -85,6 +93,17 @@ function classify(file) {
   return { kind: 'catalog', url };
 }
 
+function catalogShapingChanged(files) {
+  return files.some((file) => {
+    if (CATALOG_SYNC_PATHS.has(posix(file.filename))) {
+      return true;
+    }
+    return Boolean(
+      file.previous_filename && CATALOG_SYNC_PATHS.has(posix(file.previous_filename))
+    );
+  });
+}
+
 function addPage(pages, url, deleted) {
   pages.set(url, { url, deleted });
 }
@@ -140,6 +159,7 @@ function mapCompareFiles(files) {
   return {
     pages: [...pages.values()],
     skipped,
+    sync: catalogShapingChanged(files),
   };
 }
 
@@ -163,6 +183,19 @@ function skippedSummary(skipped) {
   return parts.join(', ');
 }
 
+function toWebhookPayload(result) {
+  if (result.sync) {
+    if (result.pages.length === 0) {
+      return { sync: 'docs' };
+    }
+    return { pages: result.pages, sync: 'docs' };
+  }
+  if (result.pages.length === 0) {
+    return undefined;
+  }
+  return { pages: result.pages };
+}
+
 async function main() {
   const chunks = [];
   for await (const chunk of process.stdin) {
@@ -178,9 +211,13 @@ async function main() {
   if (summary) {
     process.stderr.write(`skipped: ${summary}\n`);
   }
+  const payload = toWebhookPayload(result);
   if (process.env.GITHUB_STEP_SUMMARY) {
     const { appendFile } = require('fs').promises;
     const lines = ['## Docs reindex map', '', `Mapped **${result.pages.length}** catalog page(s).`];
+    if (result.sync) {
+      lines.push('Catalog sync: index pages added or removed from llms.txt.');
+    }
     if (summary) {
       lines.push(`Skipped: ${summary}.`);
     }
@@ -192,16 +229,18 @@ async function main() {
     lines.push('');
     await appendFile(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
   }
-  if (result.pages.length === 0) {
+  if (!payload) {
     process.exit(0);
   }
-  process.stdout.write(`${JSON.stringify({ pages: result.pages })}\n`);
+  process.stdout.write(`${JSON.stringify(payload)}\n`);
 }
 
 module.exports = {
   mapCompareFiles,
   classify,
   skippedSummary,
+  toWebhookPayload,
+  CATALOG_SYNC_PATHS,
 };
 
 if (require.main === module) {
