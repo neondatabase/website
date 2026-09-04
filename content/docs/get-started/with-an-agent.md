@@ -7,25 +7,40 @@ summary: >-
   them. Includes the schema and page to expect, and follow-up prompts for
   sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-02T20:53:13.819Z'
+updatedOn: '2026-09-04T18:51:25.816Z'
 ---
 
-Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres.
+Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the project, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
 
 <Steps>
 
 ## Connect your agent to Neon
 
-Run this once. It installs the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) for your editor, links a Neon project, and writes your `DATABASE_URL` into your env file:
+Already have a Next.js app? Run this in it. Starting fresh? Create one with `npx create-next-app@latest` first.
 
 ```bash
 npx neon@latest init
 ```
 
-Pick how your agent gets Neon (a plugin, or skills and MCP) and which project to use. In an empty folder, `neon init` scaffolds a starter app first. That's it. Your agent now has everything it needs.
+`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to `.env.local` and adds a `neon.ts` config.
+
+Then pull the connection details into your env file:
+
+```bash
+npx neon@latest env pull
+```
+
+If the directory was already linked, `init` skips the pull, so this step makes sure `DATABASE_URL` is in place before the build. Rerun it any time to refresh the values.
 
 <Admonition type="note">
-Automating this with no one at the keyboard (CI, an autonomous agent)? `neon init` is interactive, so use the [non-interactive setup sequence](/docs/cli/init#run-it-non-interactively) instead.
+`neon init` still prompts for sign-in and which project to link, even with `-y` or `--agent`, so it isn't hands-off. For unattended or CI use, script the explicit commands with a project ID and `NEON_API_KEY` instead:
+
+```bash
+npx neon@latest link --project-id <project-id> -y
+npx neon@latest config init --services none
+npx neon@latest env pull
+```
+
 </Admonition>
 
 ## Build your app with one prompt
@@ -38,7 +53,7 @@ Build me a working notes app backed by Neon Postgres, using the Neon skills and 
 
 ## What you'll get
 
-Your agent writes the schema, a Drizzle client, and the page:
+Your agent writes these three files and uses Neon's MCP tools to create the `notes` table and seed it. You review the result, not every step.
 
 ```typescript filename="lib/db/schema.ts"
 import { bigint, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
@@ -97,7 +112,7 @@ Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your see
 
 ## Keep building
 
-Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2`.
+Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2` (Ohio) or `aws-eu-central-1` (Frankfurt).
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/authentication-flow.md, since this API is in beta.
