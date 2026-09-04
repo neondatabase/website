@@ -167,14 +167,15 @@ describe('mapCompareFiles', () => {
     });
   });
 
-  it('sets catalog sync when a catalog-shaping file is renamed', () => {
+  it('sets catalog sync when a catalog-shaping file is renamed away', () => {
     const result = mapCompareFiles([
       {
-        filename: 'src/scripts/llms-index-config.js',
+        filename: 'src/scripts/renamed-llms-index-config.js',
         status: 'renamed',
-        previous_filename: 'src/scripts/old-llms-index-config.js',
+        previous_filename: 'src/scripts/llms-index-config.js',
       },
     ]);
     expect(result.sync).toBe(true);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
   });
 });

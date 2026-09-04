@@ -217,7 +217,7 @@ async function main() {
     const { appendFile } = require('fs').promises;
     const lines = ['## Docs reindex map', '', `Mapped **${result.pages.length}** catalog page(s).`];
     if (result.sync) {
-      lines.push('Catalog sync: index pages added or removed from llms.txt.');
+      lines.push('Catalog sync queued.');
     }
     if (summary) {
       lines.push(`Skipped: ${summary}.`);
