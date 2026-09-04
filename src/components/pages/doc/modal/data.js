@@ -41,19 +41,6 @@
 /** @type {VideoModalConfig[]} */
 const MODALS = [
   {
-    id: 'branching-video',
-    embedId: 'UuHnFlg66Io',
-    title: 'Watch: Git for databases',
-    description: 'See how Neon branching works in practice.',
-    targeting: {
-      all: true,
-    },
-    destination: {
-      label: 'Watch the video',
-      url: '/docs/introduction/branching',
-    },
-  },
-  {
     id: 'serverless-video',
     embedId: 'llSTZMVrbx8',
     title: 'Watch: Neon Database',
