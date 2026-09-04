@@ -1,6 +1,7 @@
 const path = require('path');
 
 const { CONTENT_ROUTES, EXCLUDED_DIRS } = require('../constants/content');
+
 const config = require('./llms-index-config');
 
 const BASE_URL = 'https://neon.com';
@@ -179,11 +180,7 @@ async function main() {
   }
   if (process.env.GITHUB_STEP_SUMMARY) {
     const { appendFile } = require('fs').promises;
-    const lines = [
-      '## Docs reindex map',
-      '',
-      `Mapped **${result.pages.length}** catalog page(s).`,
-    ];
+    const lines = ['## Docs reindex map', '', `Mapped **${result.pages.length}** catalog page(s).`];
     if (summary) {
       lines.push(`Skipped: ${summary}.`);
     }

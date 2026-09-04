@@ -32,13 +32,13 @@ The strongest frameworks add:
 
 Here's how some of the most popular AI agent frameworks compare:
 
-| Framework              | Language   | Architecture                          | Durable + resumable            | First-class long-term memory         | Native Postgres backend             |
-| :--------------------- | :--------- | :------------------------------------ | :----------------------------- | :----------------------------------- | :---------------------------------- |
-| **Mastra**             | TypeScript | Agents + workflows (suspend/resume)   | Yes                            | Yes, built in (working + semantic recall) | Yes, `@mastra/pg`               |
-| **LangGraph**          | Python, TypeScript | Graph (typed state)                   | Yes                            | Yes, via Store + LangMem             | Yes, `PostgresSaver`                |
-| **CrewAI**             | Python     | Crews (role-based) + Flows            | Partial (manual recovery)      | Yes, built in (local by default)     | Local ChromaDB/SQLite (not swappable) |
-| **OpenAI Agents SDK**  | Python, TypeScript     | Minimal model-driven loop             | External (Temporal/DBOS)       | History only (DIY long-term)         | Yes, `SQLAlchemySession`            |
-| **Pydantic AI**        | Python     | Type-safe agent (tools + structured output) | External (Temporal/DBOS/Prefect/Restate) | History only (DIY long-term)  | Yes, store history in Postgres      |
+| Framework             | Language           | Architecture                                | Durable + resumable                      | First-class long-term memory              | Native Postgres backend               |
+| :-------------------- | :----------------- | :------------------------------------------ | :--------------------------------------- | :---------------------------------------- | :------------------------------------ |
+| **Mastra**            | TypeScript         | Agents + workflows (suspend/resume)         | Yes                                      | Yes, built in (working + semantic recall) | Yes, `@mastra/pg`                     |
+| **LangGraph**         | Python, TypeScript | Graph (typed state)                         | Yes                                      | Yes, via Store + LangMem                  | Yes, `PostgresSaver`                  |
+| **CrewAI**            | Python             | Crews (role-based) + Flows                  | Partial (manual recovery)                | Yes, built in (local by default)          | Local ChromaDB/SQLite (not swappable) |
+| **OpenAI Agents SDK** | Python, TypeScript | Minimal model-driven loop                   | External (Temporal/DBOS)                 | History only (DIY long-term)              | Yes, `SQLAlchemySession`              |
+| **Pydantic AI**       | Python             | Type-safe agent (tools + structured output) | External (Temporal/DBOS/Prefect/Restate) | History only (DIY long-term)              | Yes, store history in Postgres        |
 
 ## What's the best AI agent framework for stateful agents?
 
