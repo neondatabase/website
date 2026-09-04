@@ -1,4 +1,4 @@
-text: "The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built"
+text: 'Same workload, 42 models: we compared costs on Neon AI Gateway'
 link:
-  url: 'https://neon.com/blog/autoscaling-lakebase-postgres'
+  url: 'https://neon.com/blog/comparing-token-economics-across-42-ai-models'
   target: '_blank'
