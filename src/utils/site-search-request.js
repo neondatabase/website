@@ -2,6 +2,14 @@ export const SEARCH_QUERY_MAX_CHARS = 500;
 
 const SEARCH_COLLECTIONS = new Set(['docs', 'guides', 'changelog', 'blog']);
 
+export function composeServerTiming(upstream, proxyMs) {
+  const proxy = `proxy;dur=${proxyMs.toFixed(1)}`;
+  if (typeof upstream !== 'string' || upstream.trim() === '') {
+    return proxy;
+  }
+  return `${upstream.trim()}, ${proxy}`;
+}
+
 export function parseSiteSearchRequest(body) {
   if (typeof body !== 'object' || body === null || Array.isArray(body)) {
     throw new Error('Invalid JSON body');

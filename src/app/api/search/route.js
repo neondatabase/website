@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 
-import { parseSiteSearchHits, parseSiteSearchRequest } from 'utils/site-search-request';
+import {
+  composeServerTiming,
+  parseSiteSearchHits,
+  parseSiteSearchRequest,
+} from 'utils/site-search-request';
 
 const SEARCH_FAILED = 'Search failed.';
 
@@ -26,6 +30,7 @@ export async function POST(request) {
   }
 
   let response;
+  const originStarted = performance.now();
   try {
     response = await fetch(searchUrl, {
       method: 'POST',
@@ -35,6 +40,7 @@ export async function POST(request) {
   } catch {
     return NextResponse.json({ error: SEARCH_FAILED }, { status: 502 });
   }
+  const proxyMs = performance.now() - originStarted;
 
   if (!response.ok) {
     return NextResponse.json({ error: SEARCH_FAILED }, { status: 502 });
@@ -54,5 +60,12 @@ export async function POST(request) {
     return NextResponse.json({ error: SEARCH_FAILED }, { status: 502 });
   }
 
-  return NextResponse.json({ hits });
+  return NextResponse.json(
+    { hits },
+    {
+      headers: {
+        'Server-Timing': composeServerTiming(response.headers.get('Server-Timing'), proxyMs),
+      },
+    }
+  );
 }

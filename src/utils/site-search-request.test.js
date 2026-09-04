@@ -5,6 +5,7 @@ import {
   parseSiteSearchHits,
   parseSiteSearchRequest,
   SEARCH_QUERY_MAX_CHARS,
+  composeServerTiming,
 } from './site-search-request';
 
 describe('parseSiteSearchRequest', () => {
@@ -96,5 +97,18 @@ describe('parseSiteSearchHits', () => {
     expect(() => parseSiteSearchHits({ hits: [{ ...hit, collection: 'faqs' }] })).toThrow(
       /Search failed/
     );
+  });
+});
+
+describe('composeServerTiming', () => {
+  it('appends proxy dur to the upstream Server-Timing header', () => {
+    expect(composeServerTiming('bm25;dur=12.3, total;dur=13.0', 48.21)).toBe(
+      'bm25;dur=12.3, total;dur=13.0, proxy;dur=48.2'
+    );
+  });
+
+  it('emits proxy alone when upstream is missing', () => {
+    expect(composeServerTiming(null, 10)).toBe('proxy;dur=10.0');
+    expect(composeServerTiming('', 10)).toBe('proxy;dur=10.0');
   });
 });
