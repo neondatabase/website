@@ -125,7 +125,14 @@ describe('mapCompareFiles', () => {
     expect(result.sync).toBe(false);
   });
 
-  it('sets catalog sync when llms-index-config.js changes', () => {
+  it('sets catalog sync when content.js routes change', () => {
+    const result = mapCompareFiles([
+      { filename: 'src/constants/content.js', status: 'modified' },
+    ]);
+    expect(result.pages).toEqual([]);
+    expect(result.sync).toBe(true);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
+  });
     const result = mapCompareFiles([
       { filename: 'src/scripts/llms-index-config.js', status: 'modified' },
     ]);

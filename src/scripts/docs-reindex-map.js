@@ -13,6 +13,7 @@ const ADDITIONAL_RESOURCE_PATHS = new Set(
 );
 
 const CATALOG_SYNC_PATHS = new Set([
+  'src/constants/content.js',
   'src/scripts/llms-index-config.js',
   'src/scripts/generate-llms-index.js',
   'scripts/generate-api-ref.mjs',

@@ -9,6 +9,7 @@ on:
       - 'content/docs/**'
       - 'content/branching/**'
       # Membership of generated pages (API endpoints) lives here, not in git.
+      - 'src/constants/content.js'
       - 'src/scripts/llms-index-config.js'
       - 'src/scripts/generate-llms-index.js'
       - 'scripts/generate-api-ref.mjs'
