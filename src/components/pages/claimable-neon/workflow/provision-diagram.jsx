@@ -19,15 +19,16 @@ const SHARP_EXPAND_EASE = [0.16, 1, 0.3, 1];
 const PROJECT_ROW_OFFSET = '-1.25cqw';
 
 const TIMING = {
-  agent: { delay: 0.12, duration: 0.26, ease: SHARP_EXPAND_EASE },
-  agentContent: { delay: 0.5, duration: 0.2 },
+  agent: { delay: 0, duration: 0.26, ease: SHARP_EXPAND_EASE },
+  agentContent: { delay: 0.04, duration: 0.2 },
   firstConnector: { delay: 0.72, duration: 0.3 },
   request: { delay: 1.05, duration: 0.2 },
-  secondConnector: { delay: 1.28, duration: 0.3 },
-  project: { delay: 1.62, duration: 0.26, ease: SHARP_EXPAND_EASE },
-  projectHeader: { delay: 2.02, duration: 0.2 },
-  databaseRow: { delay: 2.24, duration: 0.2 },
-  dataApiRow: { delay: 2.46, duration: 0.2 },
+  secondConnector: { delay: 1.4, duration: 0.3 },
+  project: { delay: 1.74, duration: 0.26, ease: SHARP_EXPAND_EASE },
+  projectHeader: { delay: 2.14, duration: 0.2 },
+  projectDividers: { delay: 2.34, duration: 0.2 },
+  databaseRow: { delay: 2.36, duration: 0.2 },
+  dataApiRow: { delay: 2.58, duration: 0.2 },
 };
 
 const ProvisionDiagram = () => {
@@ -155,47 +156,63 @@ const ProvisionDiagram = () => {
               </span>
             </m.div>
 
-            <m.div
-              className="absolute top-[12.5cqw] left-0 flex h-[3.6184cqw] w-[64.9671cqw] items-center"
-              initial={{ opacity: 0, y: PROJECT_ROW_OFFSET }}
-              animate={{ opacity: isActive ? 1 : 0, y: isActive ? '0cqw' : PROJECT_ROW_OFFSET }}
-              transition={getTransition(TIMING.databaseRow)}
-              data-diagram-node="database-url"
-              data-animation-step="database-row"
-              data-project-row=""
-            >
-              <span className="absolute top-[-2.6316cqw] left-0 w-[66.2829cqw] border-t border-gray-new-15" />
-              <span className="flex w-[32.8125cqw] shrink-0 items-center gap-[1.3158cqw]">
-                <RowTableIcon className="size-[2.6316cqw] shrink-0 text-green-44" />
-                <span className="font-mono text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-90">
-                  DATABASE_URL
+            <div className="absolute top-[12.5cqw] left-0 h-[3.6184cqw] w-[64.9671cqw]">
+              <m.span
+                className="absolute top-[-2.6316cqw] left-0 w-[66.2829cqw] border-t border-gray-new-15"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isActive ? 1 : 0 }}
+                transition={getTransition(TIMING.projectDividers)}
+                data-animation-step="project-divider"
+              />
+              <m.div
+                className="flex size-full items-center"
+                initial={{ opacity: 0, y: PROJECT_ROW_OFFSET }}
+                animate={{ opacity: isActive ? 1 : 0, y: isActive ? '0cqw' : PROJECT_ROW_OFFSET }}
+                transition={getTransition(TIMING.databaseRow)}
+                data-diagram-node="database-url"
+                data-animation-step="database-row"
+                data-project-row=""
+              >
+                <span className="flex w-[32.8125cqw] shrink-0 items-center gap-[1.3158cqw]">
+                  <RowTableIcon className="size-[2.6316cqw] shrink-0 text-green-44" />
+                  <span className="font-mono text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-90">
+                    DATABASE_URL
+                  </span>
                 </span>
-              </span>
-              <span className="ml-auto w-[20.0658cqw] overflow-hidden text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-50">
-                ••••••••••••••
-              </span>
-            </m.div>
+                <span className="ml-auto w-[20.0658cqw] overflow-hidden text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-50">
+                  ••••••••••••••
+                </span>
+              </m.div>
+            </div>
 
-            <m.div
-              className="absolute top-[21.3816cqw] left-0 flex h-[3.6184cqw] w-[64.9671cqw] items-center"
-              initial={{ opacity: 0, y: PROJECT_ROW_OFFSET }}
-              animate={{ opacity: isActive ? 1 : 0, y: isActive ? '0cqw' : PROJECT_ROW_OFFSET }}
-              transition={getTransition(TIMING.dataApiRow)}
-              data-diagram-node="data-api-url"
-              data-animation-step="data-api-row"
-              data-project-row=""
-            >
-              <span className="absolute top-[-2.6316cqw] left-0 w-full border-t border-gray-new-15" />
-              <span className="flex shrink-0 items-center gap-[1.3158cqw]">
-                <ApiIcon className="size-[2.6316cqw] shrink-0 text-green-44" />
-                <span className="font-mono text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-90">
-                  NEON_DATA_API_URL
+            <div className="absolute top-[21.3816cqw] left-0 h-[3.6184cqw] w-[64.9671cqw]">
+              <m.span
+                className="absolute top-[-2.6316cqw] left-0 w-full border-t border-gray-new-15"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isActive ? 1 : 0 }}
+                transition={getTransition(TIMING.projectDividers)}
+                data-animation-step="project-divider"
+              />
+              <m.div
+                className="flex size-full items-center"
+                initial={{ opacity: 0, y: PROJECT_ROW_OFFSET }}
+                animate={{ opacity: isActive ? 1 : 0, y: isActive ? '0cqw' : PROJECT_ROW_OFFSET }}
+                transition={getTransition(TIMING.dataApiRow)}
+                data-diagram-node="data-api-url"
+                data-animation-step="data-api-row"
+                data-project-row=""
+              >
+                <span className="flex shrink-0 items-center gap-[1.3158cqw]">
+                  <ApiIcon className="size-[2.6316cqw] shrink-0 text-green-44" />
+                  <span className="font-mono text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-90">
+                    NEON_DATA_API_URL
+                  </span>
                 </span>
-              </span>
-              <span className="ml-auto w-[20.0658cqw] overflow-hidden text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-50">
-                ••••••••••••••
-              </span>
-            </m.div>
+                <span className="ml-auto w-[20.0658cqw] overflow-hidden text-[2.6316cqw] leading-[1.375] tracking-extra-tight whitespace-nowrap text-gray-new-50">
+                  ••••••••••••••
+                </span>
+              </m.div>
+            </div>
           </div>
         </div>
       </LazyMotion>
