@@ -15,6 +15,22 @@ const defaultConfig = {
   },
   outputFileTracingIncludes: {
     '*': ['./public/**/*.svg', './public/**/*.md'],
+    // OG image routes run on the Node.js runtime and read these assets from disk at
+    // request time, so they must be traced into the serverless bundle. The fonts live
+    // under src/ (not traced by default) and the images are otherwise dropped by the
+    // ./public/** exclude above.
+    '/api/og': [
+      './src/fonts/esbuild/ESBuild-Medium.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+      './public/images/og-image/background.png',
+    ],
+    '/docs/og': [
+      './src/fonts/geist-mono/GeistMono-Regular.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+      './public/images/og-image/docs-background.jpg',
+    ],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
