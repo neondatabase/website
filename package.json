@@ -69,7 +69,7 @@
     "@radix-ui/react-toast": "^1.2.19",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@react-hook/throttle": "^2.2.0",
-    "@rive-app/react-canvas": "^4.20.0",
+    "@rive-app/react-canvas": "^4.32.0",
     "@supabase/sql-to-rest": "^0.1.8",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "^0.5.19",
