@@ -85,13 +85,15 @@
         "modalities": {
           "input": [
             "text",
-            "image"
+            "image",
+            "pdf"
           ],
           "output": [
             "text"
           ]
         },
         "limit": {
+          "context": 1000000,
           "output": 128000
         },
         "cost": {
@@ -1997,6 +1999,7 @@
           ]
         },
         "limit": {
+          "context": 1048576,
           "output": 131072
         },
         "cost": {
@@ -2141,6 +2144,7 @@
           ]
         },
         "limit": {
+          "context": 500000,
           "output": 524288
         }
       }
