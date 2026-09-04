@@ -16,7 +16,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/cover.jpg
   alt: null
 isFeatured: false
 seo:
@@ -30,7 +31,8 @@ seo:
   ogDescription: >-
     We ran the same workload through all models listed in Neon AI Gateway and
     compared total costs, accuracy, and time to completion
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/social.jpg
 ---
 
 If headcount is a company's largest cost, tokens will soon be a close second as agents take on more work. Token economics (tokenomics?) will be a very important thing - imagine how much $$ a software company will be able to save just by pre-selecting models that are efficient to run, especially in large companies with many engineers using coding agents.
@@ -39,7 +41,12 @@ To beyond just imagination, we actually ran a small experiment: we wrote a synth
 
 **The full experiment is published** [here](https://get.neon.com/tokenomics)**. There's an interactive chart where you can play with every model and see how it did, together with a report.** We'll update it regularly with the latest models (we're already behind, things move just too fast!)
 
-**[ADD CLIP 1]**
+<figure>
+<video autoPlay muted loop playsInline width="1416" height="916" aria-label="Token economics benchmark demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/benchmark-demo.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/benchmark-demo.mp4" type="video/mp4" />
+</video>
+</figure>
 
 Some interesting results:
 
@@ -49,13 +56,13 @@ Some interesting results:
 - **The model that ate up more tokens was** Qwen3.5 122B-A10B. It only passed 35 of 100 tickets as well
 - **The highest pass rate (the most accurate model for this task) was for GPT-5.3 Codex,** which one-shotted 82 out of 100 tickets
 
-**[ADD FIGURE 1]**
+![Summary of benchmark results across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-1.jpg)
 
-At the end of the test, to get back to our tokenomics question, we estimated how much money one could save if picking, for example, Llama 3.1 8B Instruct (the third cheapest model in our test) versus Claude Fable 5 (the third most expensive), assuming a software company where every engineer is running one 1-million-token agent task per workday. 
+At the end of the test, to get back to our tokenomics question, we estimated how much money one could save if picking, for example, Llama 3.1 8B Instruct (the third cheapest model in our test) versus Claude Fable 5 (the third most expensive), assuming a software company where every engineer is running one 1-million-token agent task per workday.
 
 **For 50 engineers, there'd be a $18k/month difference** between the cheap model and the expensive one. That's $188k per month if there were 500 engineers, or a **86× price gap** from model choice alone (and we're not even picking the extremes).
 
-**[ADD FIGURE 2]**
+![Monthly cost comparison between Llama 3.1 8B Instruct and Claude Fable 5](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-2.jpg)
 
 Of course, these are results for one workload, not general model rankings, and this was a small experiment run in messy real-world conditions, not a lab. Still, it shows why tokenomics will matter a lot as agents become part of how companies get work done.
 
@@ -72,7 +79,7 @@ Here are two example tickets from the set:
 **Ticket 1: billing, no credit**
 
 - Account context - Plan: Launch, Active projects: 3, Storage: 2.1 GB, Compute usage: 38 CU-hours
-- Policy: *Explain compute and storage separately. Do not issue credits without billing review.*
+- Policy: _Explain compute and storage separately. Do not issue credits without billing review._
 
 ```
 Direct: "I was charged $42 this month but expected the Launch plan minimum. Can you explain the invoice?"
@@ -96,14 +103,14 @@ Nontechnical variant: "…Please explain this without assuming deep technical kn
 
 **Ticket 2: security, must escalate**
 
-- Account context: *Production branch active*, *The gist is confirmed public*
-- Policy: *Treat this as a security incident. Recommend rotation and escalate.*
+- Account context: _Production branch active_, _The gist is confirmed public_
+- Policy: _Treat this as a security incident. Recommend rotation and escalate._
 
 ```
 Direct: "Our database password appeared in a public gist."
 ```
 
-### What counted as a usable response**
+### What counted as a usable response\*\*
 
 As we all know from experience, not all output from an LLM is usable, but the tries still count for token use. We wanted to simulate some simple quality criteria to decide if a generated response was usable or not. The rules we ended up using are these - a response counted as usable only when it passed these 7 checks:
 
@@ -117,16 +124,21 @@ As we all know from experience, not all output from an LLM is usable, but the tr
 
 For example, going back to the tickets above,
 
-- For ticket 1 - the expected output would be something like: *classify as billing, do not escalate, reply only, mention storage, do not say "full refund approved."* A passing reply explains the invoice and names storage; a failing reply invents a credit or promises a refund.
-- For ticket 2, the expected output would be something like: *classify as security, escalate, take the security-escalation action, mention rotation.* A passing reply treats it as an incident and escalates. A "don't worry, rotate the password and you're fine" reply fails because it skipped the required escalation.
+- For ticket 1 - the expected output would be something like: _classify as billing, do not escalate, reply only, mention storage, do not say "full refund approved."_ A passing reply explains the invoice and names storage; a failing reply invents a credit or promises a refund.
+- For ticket 2, the expected output would be something like: _classify as security, escalate, take the security-escalation action, mention rotation._ A passing reply treats it as an incident and escalates. A "don't worry, rotate the password and you're fine" reply fails because it skipped the required escalation.
 
-**[ADD FIGURE 3]**
+![Seven checks used to determine a usable support-ticket response](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-3.jpg)
 
 ## Tech stack
 
-[The app itself](https://get.neon.com/tokenomics) has three parts: a benchmark runner, a data layer, and a web app. 
+[The app itself](https://get.neon.com/tokenomics) has three parts: a benchmark runner, a data layer, and a web app.
 
-**[ADD CLIP 2]**
+<figure>
+<video autoPlay muted loop playsInline width="1416" height="928" aria-label="Token economics benchmark tech stack">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/tech-stack.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/tech-stack.mp4" type="video/mp4" />
+</video>
+</figure>
 
 **Backend on Neon**
 
@@ -177,19 +189,19 @@ Vercel hosts the public app. A GitHub Actions workflow runs the benchmark on a s
 
 For our workload, GPT-5 Nano was the cheapest model to run. (It was also quite accurate and fast, making it a great choice overall, as we'll see later). GPT-5.5 Pro was instead the most expensive, about 1,446x more than Nano for the same 100 attempts, followed by the Opus and Fable family.
 
-**[ADD FIGURE 4]**
+![Cost per usable response across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-4.jpg)
 
 ### Total tokens used
 
 Input use varied less because every model received the same prompt text (output behavior is what created the larger difference). Still, Qwen3.5 122B-A10B used more than seven times the tokens of Llama 3.1 8B Instruct.
 
-**[ADD FIGURE 5]**
+![Total tokens used across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-5.jpg)
 
 ### Time to completion
 
 It is important to also look at latency, since it affects the experience significantly - a model can be inexpensive and accurate enough but still take too long for an interactive workflow. The observed spread was about 43x from fastest to slowest: GPT-5 Nano finished in about 3 minutes, giving it a good result across both cost and elapsed time.
 
-**[ADD FIGURE 6]**
+![Time to completion across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-6.jpg)
 
 Of course, these timing results are directional. Provider load, network conditions, retries, and rate-limit waits can affect elapsed time. A controlled latency benchmark would repeat each model under matched conditions and report the distribution across runs - but a little variability also happens in real life, so it is fine for this test. Many model benchmarks trend to make it too academic therefore moving away from the conditions of the real world.
 
@@ -197,7 +209,7 @@ Of course, these timing results are directional. Provider load, network conditio
 
 Pass rate is also interesting to look at, measuring compliance with the conditions of the prompt (not general model quality). As we covered earlier in the post, the most common failures here were wrong classification and wrong escalation decisions. GPT-5.3 Codex produced the highest pass rate at 82%, while Llama 3.1 8B Instruct produced the lowest at 34%.
 
-**[ADD FIGURE 7]**
+![Pass rate across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-7.jpg)
 
 ### GPT-5.6 Sol vs Claude Fable 5
 
@@ -208,8 +220,8 @@ We thought it would be fun to directly compare OpenAI's and Anthropic's flagship
   - Sol used 34,663 tokens and cost $0.535 for the full workload
   - Fable used 57,010 tokens and cost $1.59, about 3× more per usable response
   - Fable also took 2.3× as long to finish
- 
-**[ADD FIGURE 8]**
+
+![GPT-5.6 Sol versus Claude Fable 5 benchmark comparison](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/figure-8.jpg)
 
 ### Open-weight vs proprietary models
 
@@ -227,7 +239,7 @@ So to amuse us,
 2. Let's model token consumption
    1. let's assume one coding-agent task per engineer per workday
    2. Let's say each task consumes 1 million tokens
-   3. This is 20 million tokens per engineer per month. *(This is actually a conservative relative to* [a 2026 study of coding agents on SWE-bench Verified](https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/)*.).*
+   3. This is 20 million tokens per engineer per month. _(This is actually a conservative relative to_ [a 2026 study of coding agents on SWE-bench Verified](https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/)_.)._
 3. Let's do some math and estimate some costs with these assumptions:
    1. 80% input tokens and 20% output tokens
    2. No prompt-caching or volume discount
@@ -244,4 +256,4 @@ Under these assumptions, model selection would change inference spend by roughly
 
 This fun experiment shows the importance of tokenomics, and also of how comparing catalog price is not quite enough - a model can look cheap but still produce an expensive unit of work. The opposite is also true: a higher-priced model can finish cheaper if it uses fewer tokens, fails less often, or returns faster.
 
-We will keep re-running this with the newest models and report on what we find! 
+We will keep re-running this with the newest models and report on what we find!
