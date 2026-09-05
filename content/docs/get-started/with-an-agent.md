@@ -7,7 +7,7 @@ summary: >-
   them. Includes the key files to expect (schema, client, and page), and
   follow-up prompts for sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-05T19:08:01.333Z'
+updatedOn: '2026-09-05T20:05:57.307Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -16,7 +16,7 @@ Connect your AI coding agent to Neon once, send it one prompt, and you'll have a
 
 ## Connect your agent to Neon
 
-In your terminal, create your app and connect Neon:
+Run these in your terminal to create your app and connect Neon (you'll sign in to Neon when prompted):
 
 ```bash filename="Terminal"
 npx create-next-app@latest notes-app --yes --app
