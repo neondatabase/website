@@ -4,10 +4,10 @@ subtitle: Prompt your AI coding agent to build a Next.js app on Neon
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that creates a table, seeds sample rows, and adds a page that lists
-  them. Includes the three files to expect (schema, client, and page), and
+  them. Includes the key files to expect (schema, client, and page), and
   follow-up prompts for sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-05T17:43:23.709Z'
+updatedOn: '2026-09-05T19:04:43.372Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -16,9 +16,11 @@ Connect your AI coding agent to Neon once, send it one prompt, and you'll have a
 
 ## Connect your agent to Neon
 
-Already have a Next.js app? Run this in it. Starting fresh? Create one with `npx create-next-app@latest` first.
+In your terminal, connect Neon to your app. Starting fresh? Run all three lines. Already have a Next.js app? Skip the first two and run `npx neon@latest init` in it.
 
-```bash
+```bash filename="Terminal"
+npx create-next-app@latest notes-app --yes --app
+cd notes-app
 npx neon@latest init
 ```
 
@@ -26,7 +28,7 @@ npx neon@latest init
 
 Then pull the connection details into your env file:
 
-```bash
+```bash filename="Terminal"
 npx neon@latest env pull
 ```
 
@@ -34,15 +36,15 @@ If the directory was already linked, `init` skips the pull, so this step makes s
 
 ## Build your app with one prompt
 
-Paste this into your editor's AI chat:
+In your AI agent's chat, paste:
 
 ```text shouldWrap filename="AI assistant prompt"
-Build me a working notes app backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a notes table (title, body, created_at), seed 5 example rows, and add a /notes page, a Server Component, that lists them newest first. Then run it and show me the actual rows, not "done". If anything fails, show me the error instead of working around it.
+In this Next.js App Router project, build me a working notes app backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a notes table (title, body, created_at), seed 5 example rows, and add a /notes page, a Server Component, that lists them newest first. Then run it and show me the actual rows, not "done". If anything fails, show me the error instead of working around it.
 ```
 
 ## What you'll get
 
-Your agent writes these three files and uses Neon's MCP tools to create the `notes` table and seed it. You review the result, not every step.
+Your agent writes these key files and uses Neon's MCP tools to create the `notes` table and seed it. It may add others too, such as `drizzle.config.ts` or route files. You review the result, not every step.
 
 ```typescript filename="lib/db/schema.ts"
 import { bigint, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
@@ -104,7 +106,7 @@ Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your see
 Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2` (Ohio) or `aws-eu-central-1` (Frankfurt).
 
 ```text shouldWrap filename="Prompt: add sign-in"
-Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/authentication-flow.md, since this API is in beta.
+Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/quick-start/nextjs-api-only.md, since this API is in beta.
 ```
 
 ```text shouldWrap filename="Prompt: add image uploads"
@@ -112,7 +114,7 @@ Let each note carry an image using Neon Object Storage. Store the object key on 
 ```
 
 ```text shouldWrap filename="Prompt: add AI summaries"
-Add a one-line AI summary to each note using the Neon AI Gateway, stored in a summary column. Pick a current model from the catalog. Follow https://neon.com/docs/ai-gateway/models.md.
+Add a one-line AI summary to each note using the Neon AI Gateway, stored in a summary column. Pick a current model from the catalog. Follow https://neon.com/docs/ai-gateway/models.md. The AI Gateway needs a paid Neon plan (Launch or Scale), so if the request is rejected, tell me to upgrade rather than working around it.
 ```
 
 ```text shouldWrap filename="Prompt: work on a branch"
