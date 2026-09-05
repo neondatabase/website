@@ -3,7 +3,7 @@ import { createRequire } from 'module';
 import { describe, expect, it } from 'vitest';
 
 const require = createRequire(import.meta.url);
-const { mapCompareFiles } = require('./docs-reindex-map.js');
+const { mapCompareFiles, toWebhookPayload } = require('./docs-reindex-map.js');
 
 describe('mapCompareFiles', () => {
   it('maps a docs page add and modify', () => {
@@ -24,6 +24,7 @@ describe('mapCompareFiles', () => {
         notContent: 0,
         notMarkdown: 0,
       },
+      sync: false,
     });
   });
 
@@ -121,5 +122,61 @@ describe('mapCompareFiles', () => {
     expect(result.pages).toEqual([]);
     expect(result.skipped.notContent).toBe(1);
     expect(result.skipped.notMarkdown).toBe(1);
+    expect(result.sync).toBe(false);
+  });
+
+  it('sets catalog sync when content.js routes change', () => {
+    const result = mapCompareFiles([
+      { filename: 'src/constants/content.js', status: 'modified' },
+    ]);
+    expect(result.pages).toEqual([]);
+    expect(result.sync).toBe(true);
+    expect(result.skipped.notMarkdown).toBe(0);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
+  });
+
+  it('sets catalog sync when llms-index-config.js changes', () => {
+    const result = mapCompareFiles([
+      { filename: 'src/scripts/llms-index-config.js', status: 'modified' },
+    ]);
+    expect(result.pages).toEqual([]);
+    expect(result.sync).toBe(true);
+    expect(result.skipped.notMarkdown).toBe(0);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
+  });
+
+  it('sets catalog sync when the API-ref generator changes', () => {
+    const result = mapCompareFiles([
+      { filename: 'scripts/generate-api-ref.mjs', status: 'modified' },
+    ]);
+    expect(result.sync).toBe(true);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
+  });
+
+  it('combines mapped pages with catalog sync', () => {
+    const result = mapCompareFiles([
+      { filename: 'content/docs/reference/api.md', status: 'modified' },
+      { filename: 'src/scripts/llms-index-config.js', status: 'modified' },
+    ]);
+    expect(result.pages).toEqual([
+      { url: 'https://neon.com/docs/reference/api.md', deleted: false },
+    ]);
+    expect(result.sync).toBe(true);
+    expect(toWebhookPayload(result)).toEqual({
+      pages: [{ url: 'https://neon.com/docs/reference/api.md', deleted: false }],
+      sync: 'docs',
+    });
+  });
+
+  it('sets catalog sync when a catalog-shaping file is renamed away', () => {
+    const result = mapCompareFiles([
+      {
+        filename: 'src/scripts/renamed-llms-index-config.js',
+        status: 'renamed',
+        previous_filename: 'src/scripts/llms-index-config.js',
+      },
+    ]);
+    expect(result.sync).toBe(true);
+    expect(toWebhookPayload(result)).toEqual({ sync: 'docs' });
   });
 });
