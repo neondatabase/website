@@ -12,16 +12,16 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-05T17:09:41.632Z'
+updatedOn: '2026-09-05T17:43:23.736Z'
 ---
 
 ## Getting started
 
-Start with a quick setup prompt, or follow a guided tutorial to build the full Neon stack step by step.
+Start fast with an agent, or build the full stack step by step.
 
 <TwinPaths>
   <QuickPath
-    title="Build with an agent"
+    title="Build with your agent"
     command="npx neon@latest init"
     description="Connect Neon to your AI agent, then prompt it to build your backend"
     href="/docs/get-started/with-an-agent"

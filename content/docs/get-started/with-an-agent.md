@@ -7,7 +7,7 @@ summary: >-
   them. Includes the three files to expect (schema, client, and page), and
   follow-up prompts for sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-09-04T18:56:19.179Z'
+updatedOn: '2026-09-05T17:43:23.709Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -31,19 +31,6 @@ npx neon@latest env pull
 ```
 
 If the directory was already linked, `init` skips the pull, so this step makes sure `DATABASE_URL` is in place before the build. Rerun it any time to refresh the values.
-
-<Admonition type="note">
-`neon init` still prompts for sign-in and which project to link, even with `-y` or `--agent`, so it isn't hands-off. For unattended or CI use, script the explicit commands with a project ID and `NEON_API_KEY` instead:
-
-```bash
-npx neon@latest link --project-id <project-id> -y
-npx neon@latest config init --services none
-npx neon@latest env pull
-```
-
-This connects the database but does not install the agent's Neon tooling, so it assumes [agent skills](/docs/ai/agent-skills) and the [Neon MCP server](/docs/ai/neon-mcp-server) are already set up; if not, install them first.
-
-</Admonition>
 
 ## Build your app with one prompt
 
