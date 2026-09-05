@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-04T21:20:34.673Z'
+updatedOn: '2026-09-05T17:09:41.632Z'
 ---
 
 ## Getting started
@@ -23,7 +23,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   <QuickPath
     title="Build with an agent"
     command="npx neon@latest init"
-    description="Run one command to connect Neon to your AI agent, then let it build your backend from a prompt."
+    description="Connect Neon to your AI agent, then prompt it to build your backend"
     href="/docs/get-started/with-an-agent"
     linkText="Open quickstart"
   />
