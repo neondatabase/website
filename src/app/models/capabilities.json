@@ -425,6 +425,17 @@
       "imageGeneration": true
     },
     {
+      "id": "gpt-6-astra",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
       "id": "gpt-oss-120b",
       "owner": "databricks",
       "entitled": true,
