@@ -9,7 +9,7 @@ excerpt: >-
   be able to save just by pre-selecting models that are efficient to run,
   especially in large companies with many engineers using coding agents.
 date: '2026-09-04T12:00:00'
-updatedOn: '2026-09-03T19:50:00'
+updatedOn: '2026-09-05T17:30:00'
 category: community
 categories:
   - community
@@ -37,6 +37,12 @@ seo:
 ---
 
 ![Comparing token economics across 42 AI models](https://cdn.neonapi.io/public/images/pages/blog/comparing-token-economics-across-42-ai-models/cover.jpg)
+
+<Admonition type="note" title="Update">
+Since we shipped this post, we added 3 more models to the [benchmark](https://get.neon.com/tokenomics): GPT-6 Astra, Claude Fable 5.1, and GLM-5.3 Flash. The main rankings discussed below did not change.
+
+GPT-6 Astra deserves a special mention, since it is the latest highly discussed frontier model. On this support-ticket workload it was underwhelming. It passed 67 of 100 tickets, ranking 28th of 45. Token use was relatively low at 35,086, but its higher rates pushed the full workload to $0.947, ranking 40th of 45. It was not particularly fast either, finishing 30th. Astra may be stronger on more complex, long-running work. This structured support task did not benefit from its premium price.
+</Admonition>
 
 If headcount is a company's largest cost, tokens will soon be a close second as agents take on more work. Token economics (tokenomics?) will be a very important thing - imagine how much $$ a software company will be able to save just by pre-selecting models that are efficient to run, especially in large companies with many engineers using coding agents.
 
