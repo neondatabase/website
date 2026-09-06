@@ -1,81 +1,124 @@
 ---
 title: Get started with your AI agent
-subtitle: Set up Neon in your project using your AI coding assistant
+subtitle: Prompt your AI coding agent to build a Next.js app on Neon
 summary: >-
-  Set up Neon for your project with your AI coding assistant. Let your agent
-  install the Neon tooling and connect your project, or run `neon init`
-  yourself in a terminal, then ask your agent to get started.
+  Connect your AI coding assistant to Neon with one command, then send a single
+  prompt that creates a table, seeds sample rows, and adds a page that lists
+  them. Includes the key files to expect (schema, client, and page), and
+  follow-up prompts for sign-in, image uploads, AI summaries, and branching.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-05T20:05:57.307Z'
 ---
 
-Set up Neon for your project without leaving your editor. You have two options: let your AI coding assistant install the Neon tooling and connect your project for you, or run `neon init` yourself in a terminal and then hand off to your agent. Either way, your agent ends up with the [agent skills](/docs/ai/agent-skills) and [Neon MCP server](/docs/ai/neon-mcp-server) it needs to create a Neon project, connect your app, and use Neon features as you build.
-
-New to the platform? The [backend overview](/docs/get-started/backend-overview) shows how Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway fit together. For a hands-on walkthrough, see [Build a full backend](/docs/get-started/full-backend-quickstart).
-
-## Before you start
-
-You'll need:
-
-- [Node.js 20+](https://nodejs.org/)
-- A supported AI coding assistant, such as Cursor or Claude Code (see [supported clients](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp))
-
-## Let your agent set it up
-
-The fastest path is to let your agent do the whole setup, from installing the tooling to proving the connection works. Paste this prompt into your editor's AI chat:
-
-```text shouldWrap filename="AI assistant prompt"
-Help me get set up with Neon, based on my project:
-
-1. Install or upgrade the Neon CLI: `npm install -g neon@latest`.
-2. Install the Neon agent tooling for your editor, replacing `<agent>` with your editor id (for example `cursor`, `claude-code`, or `codex`): run `neon plugins --agent <agent>` (recommended, installs the Neon plugin), or `neon skills --agent <agent> -s neon -s neon-postgres`. If sign-in opens a browser, ask me to confirm before continuing, and never print secrets.
-3. Using the installed Neon skill, create a Neon project (or connect an existing one), link it, and pull my DATABASE_URL into my env file. Add a Postgres driver for my stack.
-4. Prove it works: run a real query and show me the result, not just "setup complete." Give me a command to re-check it myself (e.g. `neon psql`).
-5. Then suggest next steps, such as a schema or migrations, branching for previews, or Neon's other services (Object Storage, Functions, Managed Better Auth, AI Gateway).
-```
-
-Your agent installs the Neon CLI and tooling and does the setup for you, so there's no switching between the terminal and the chat. It:
-
-- Installs either the Neon plugin, or [agent skills](/docs/ai/agent-skills) and the [Neon MCP server](/docs/ai/neon-mcp-server), for your editor, and signs you in (finish the browser step if it prompts)
-- Creates or connects a Neon project, writes your `DATABASE_URL` into your env file, and adds a Postgres driver for your stack
-- Uses the connection and shows you a real result so you can see it's working
-
-To confirm it yourself, run the command the agent gives you (e.g., `neon psql`), or open your project in the [Neon Console](https://console.neon.tech).
-
-## Prefer to run it yourself?
-
-You can run the setup manually and then hand off to your agent.
+Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
 
 <Steps>
 
-## Run the init command
+## Connect your agent to Neon
 
-From your project root, run:
+Run these in your terminal to create your app and connect Neon (you'll sign in to Neon when prompted):
 
-```bash
+```bash filename="Terminal"
+npx create-next-app@latest notes-app --yes --app
+cd notes-app
 npx neon@latest init
 ```
 
-`neon init` is interactive, so run it in a terminal. It asks how your coding agents should get Neon (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first. For the full flow, and a non-interactive setup for agents and CI, see the [`neon init` reference](/docs/cli/init).
+`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file and adds a `neon.ts` config.
 
-If you only want the MCP server, without the skills or plugin, run [`npx neon@latest mcp`](/docs/cli/mcp) instead. If you only want agent skills, run [`npx neon@latest skills`](/docs/cli/skills).
+Then pull the connection details into your env file:
 
-## Tell your agent
-
-In your editor's AI chat, send:
-
-```text
-Get started with Neon
+```bash filename="Terminal"
+npx neon@latest env pull
 ```
 
-Your agent reads the installed skill to create or connect a Neon project, pull your `DATABASE_URL` into your env file, add a Postgres driver, and run a real query to confirm the connection. The exact flow depends on your project.
+If the directory was already linked, `init` skips the pull, so this step makes sure `DATABASE_URL` is in place before the build. Rerun it any time to refresh the values.
+
+## Build your app with one prompt
+
+In your AI agent's chat, paste:
+
+```text shouldWrap filename="AI assistant prompt"
+In this Next.js App Router project, build me a working notes app backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a notes table (title, body, created_at), seed 5 example rows, and add a /notes page, a Server Component, that lists them newest first. Then run it and show me the actual rows, not "done". If anything fails, show me the error instead of working around it.
+```
+
+## What you'll get
+
+Your agent writes these key files and uses Neon's MCP tools to create the `notes` table and seed it. It may add others too, such as `drizzle.config.ts` or route files. You review the result, not every step.
+
+```typescript filename="lib/db/schema.ts"
+import { bigint, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+
+export const notes = pgTable('notes', {
+  id: bigint('id', { mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
+  title: text('title').notNull(),
+  body: text('body').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+```
+
+```typescript filename="lib/db/client.ts"
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+
+import * as schema from './schema';
+
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql, { schema });
+```
+
+```tsx filename="app/notes/page.tsx"
+import { desc } from 'drizzle-orm';
+
+import { db } from '@/lib/db/client';
+import { notes } from '@/lib/db/schema';
+
+export const dynamic = 'force-dynamic';
+
+export default async function NotesPage() {
+  const rows = await db.select().from(notes).orderBy(desc(notes.createdAt));
+
+  return (
+    <ul>
+      {rows.map((note) => (
+        <li key={note.id}>
+          <strong>{note.title}</strong>
+          <p>{note.body}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## Run it
+
+```bash
+npm run dev
+```
+
+Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your seeded notes, newest first. You can also open the table in the [Neon Console](https://console.neon.tech).
 
 </Steps>
 
-## What's next
+## Keep building
 
-- [How a Neon backend fits together](/docs/get-started/backend-overview)
-- [Build a full backend with Next.js and Neon](/docs/get-started/full-backend-quickstart)
-- [About branching](/docs/introduction/branching)
+Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2` (Ohio) or `aws-eu-central-1` (Frankfurt).
+
+```text shouldWrap filename="Prompt: add sign-in"
+Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/quick-start/nextjs-api-only.md, since this API is in beta.
+```
+
+```text shouldWrap filename="Prompt: add image uploads"
+Let each note carry an image using Neon Object Storage. Store the object key on the row, never the bytes, add an upload control, and render each image. Follow https://neon.com/docs/storage/get-started.md.
+```
+
+```text shouldWrap filename="Prompt: add AI summaries"
+Add a one-line AI summary to each note using the Neon AI Gateway, stored in a summary column. Pick a current model from the catalog. Follow https://neon.com/docs/ai-gateway/models.md. The AI Gateway needs a paid Neon plan (Launch or Scale), so if the request is rejected, tell me to upgrade rather than working around it.
+```
+
+```text shouldWrap filename="Prompt: work on a branch"
+Create a Neon branch so I can try changes in isolation, then switch to it: npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature.
+```
 
 <NeedHelp/>
