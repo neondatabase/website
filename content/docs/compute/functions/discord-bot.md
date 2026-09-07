@@ -8,7 +8,7 @@ summary: >-
   public function URL, verify Discord's Ed25519 request signatures, and store data in Postgres
   on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-07T18:56:07.527Z'
+updatedOn: '2026-09-07T20:03:10.807Z'
 isDraft: false
 ---
 
@@ -165,7 +165,7 @@ Deployed env is a snapshot of `.env.local` at apply time. Run `npm run deploy` a
 npm run db:push
 ```
 
-`db:push` reads `neon.ts` (the same config `deploy` uses), so it needs the function secrets you set above, plus the `DATABASE_URL` that `neon link` wrote. `/ping` works without the tables; `/name` and `/profile` need them.
+`neon link` wrote `DATABASE_URL` into `.env.local`, so you can apply the schema any time after linking. `/ping` works without the tables; `/name` and `/profile` need them.
 
 ## Set the Interactions Endpoint URL
 
