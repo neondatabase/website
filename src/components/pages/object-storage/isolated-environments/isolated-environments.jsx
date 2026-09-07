@@ -30,7 +30,7 @@ const IsolatedEnvironments = () => (
             >
               {String(index + 1).padStart(2, '0')}
             </span>
-            <h3 className="mt-40 text-[1.75rem] leading-tight font-normal tracking-extra-tight text-pretty xl:mt-32 xl:text-2xl lg:mt-24 lg:text-xl md:mt-5 md:text-2xl">
+            <h3 className="mt-40 text-[1.75rem] leading-tight font-normal tracking-extra-tight text-pretty xl:mt-32 xl:text-2xl lg:mt-24 lg:text-xl md:mt-5">
               {title}
             </h3>
             <p className="mt-3 text-lg leading-normal tracking-extra-tight text-pretty text-gray-new-70 lg:text-base">

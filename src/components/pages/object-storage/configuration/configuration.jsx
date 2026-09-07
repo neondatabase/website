@@ -34,10 +34,10 @@ const Configuration = async () => {
               copyButtonClassName="visible top-16 focus-visible:opacity-100"
             >
               <figcaption className="relative flex h-12 items-center justify-center border-b border-gray-new-20 bg-gray-new-10 px-5 text-base leading-dense tracking-tight text-gray-new-98">
-                <div className="absolute left-4.5 flex gap-3" aria-hidden="true">
-                  <div className="size-3 rounded-full bg-[#FF5A48]" />
-                  <div className="size-3 rounded-full bg-gray-new-20" />
-                  <div className="size-3 rounded-full bg-[#39A57D]" />
+                <div className="absolute left-4.5 flex gap-3 xl:gap-2" aria-hidden="true">
+                  <div className="size-3 rounded-full bg-[#FF5A48] xl:size-2.5" />
+                  <div className="size-3 rounded-full bg-gray-new-20 xl:size-2.5" />
+                  <div className="size-3 rounded-full bg-[#39A57D] xl:size-2.5" />
                 </div>
                 {configuration.filename}
               </figcaption>
