@@ -74,7 +74,7 @@ const FormPanel = ({ children, className, ...props }) => (
   >
     {children}
     <Image
-      className="pointer-events-none absolute right-0 bottom-0 -z-10 h-57 w-144 max-w-none [mask-image:linear-gradient(to_right,transparent,black)]"
+      className="pointer-events-none absolute right-0 bottom-0 -z-10 h-57 w-144 max-w-none [mask-image:linear-gradient(to_right,transparent,black)] md:-right-5 md:-bottom-2.75 md:h-auto md:w-120"
       src={formPattern}
       alt=""
       width={576}

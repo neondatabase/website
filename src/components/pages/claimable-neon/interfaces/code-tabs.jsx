@@ -17,11 +17,6 @@ const CodeTabs = ({ children }) => {
     let nextIndex;
 
     switch (event.key) {
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        setSelectedIndex(index);
-        return;
       case 'ArrowLeft':
         nextIndex = (index - 1 + INTERFACES.length) % INTERFACES.length;
         break;
@@ -46,7 +41,7 @@ const CodeTabs = ({ children }) => {
     <div className="dark min-w-0 self-start border border-gray-new-20 bg-black-pure">
       <div
         className="flex h-11 gap-5 border-b border-gray-new-20 bg-gray-new-10 pr-5 pl-5.5"
-        role="tablist"
+        role="group"
         aria-label="Claimable Neon code examples"
       >
         {INTERFACES.map(({ id, label }, index) => {
@@ -64,10 +59,8 @@ const CodeTabs = ({ children }) => {
                 tabRefs.current[index] = node;
               }}
               type="button"
-              role="tab"
-              tabIndex={0}
-              aria-controls={`${groupId}-${id}-panel`}
-              aria-selected={selected}
+              aria-controls={`${groupId}-panel`}
+              aria-pressed={selected}
               onClick={() => setSelectedIndex(index)}
               onKeyDown={(event) => handleKeyDown(event, index)}
             >
@@ -78,9 +71,8 @@ const CodeTabs = ({ children }) => {
       </div>
       <div
         className="min-h-80 md:min-h-72"
-        id={`${groupId}-${selectedInterface.id}-panel`}
-        role="tabpanel"
-        tabIndex={-1}
+        id={`${groupId}-panel`}
+        role="region"
         aria-labelledby={`${groupId}-${selectedInterface.id}-tab`}
       >
         {children[selectedIndex]}
