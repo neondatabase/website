@@ -76,11 +76,6 @@ const CodeTabs = ({ children }) => {
         aria-labelledby={`${groupId}-${selectedInterface.id}-tab`}
       >
         {children[selectedIndex]}
-        {selectedInterface.id === 'cli' && (
-          <p className="px-6 pb-6 text-sm leading-snug tracking-extra-tight text-gray-new-60 md:px-5">
-            If <code>neon claim</code> is not a command, use the auth.md example.
-          </p>
-        )}
       </div>
     </div>
   );
