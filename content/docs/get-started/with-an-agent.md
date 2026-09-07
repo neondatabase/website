@@ -26,6 +26,8 @@ npx neon@latest init
 
 `neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file and adds a `neon.ts` config.
 
+When `neon init` asks "Manage this project's Neon setup as code?", choose **No** — this notes app only needs Postgres, and you can add backend features later with the prompts further down this page.
+
 Then pull the connection details into your env file:
 
 ```bash filename="Terminal"
