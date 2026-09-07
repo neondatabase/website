@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-08-27T21:13:38.572Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 <InfoBlock>
@@ -153,10 +153,10 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 3. **Authenticate with Neon**
 
-   The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   The `neon login` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
-   neon auth
+   neon login
    ```
 
 4. **View your branches**

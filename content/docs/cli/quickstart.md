@@ -3,7 +3,7 @@ title: Neon CLI quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 summary: >-
   The Neon CLI quickstart installs neon on macOS, Windows, or Linux via
-  Homebrew, npm, or bun, then authenticates using browser-based `neon auth` or
+  Homebrew, npm, or bun, then authenticates using browser-based `neon login` or
   a personal API key. Use this page when setting up terminal access to Neon for
   the first time, before working through the full CLI reference. It also covers
   the `.neon` context file (`neon set-context`) to avoid repeating
@@ -11,7 +11,7 @@ summary: >-
   like `neon projects list`, `neon branches create`, and
   `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:31:28.251Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---
@@ -99,7 +99,7 @@ Authenticate with your Neon account using one of these methods:
 Run the command below to authenticate through your browser:
 
 ```bash
-neon auth
+neon login
 ```
 
 This opens a browser window where you can authorize the CLI to access your Neon account.

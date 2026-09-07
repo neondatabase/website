@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
@@ -43,7 +43,7 @@ Let's explore both options to help you pick the right one.
 2. **Connect your account**
 
    ```bash
-   neon auth
+   neon login
    ```
 
 3. **Create your branch**

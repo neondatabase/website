@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -40,7 +40,7 @@ Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AW
 4. **The Neon CLI**: Installed and authenticated:
    ```bash
    npm install -g neon@latest
-   neon auth
+   neon login
    ```
 
 ## Set up the project

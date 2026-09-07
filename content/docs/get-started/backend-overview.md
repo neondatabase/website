@@ -51,7 +51,7 @@ Install the [`neon` CLI](/docs/cli/install) (requires **Node.js 20.19 or higher*
 
 ```bash
 npm i -g neon
-neon auth
+neon login
 ```
 
 Then create the project. Create it in `aws-us-east-2` or `aws-eu-central-1` so the beta services are available:
