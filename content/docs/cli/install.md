@@ -10,7 +10,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-27T17:11:36.776Z'
+updatedOn: '2026-09-07T21:31:28.251Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -212,7 +212,7 @@ Run the following command to connect to Neon via web authentication:
 neon auth
 ```
 
-The [neon auth](/docs/cli/auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you haven't authenticated previously, running any Neon CLI command launches the web authentication process automatically unless you've specified an API key.
+The [neon login](/docs/cli/login) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you haven't authenticated previously, running any Neon CLI command launches the web authentication process automatically unless you've specified an API key.
 
 <Admonition type="note">
 If you use Neon through the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.

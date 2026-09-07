@@ -47,7 +47,7 @@ Object Storage, Functions, and the AI Gateway are in beta and currently availabl
 
 The setup is a few commands; the [CLI quickstart](/docs/cli/quickstart) is the full how-to. Install the CLI, link a project, scaffold one `neon.ts`.
 
-Install the [`neon` CLI](/docs/cli/install) (requires **Node.js 20.19 or higher**) and sign in with [`neon auth`](/docs/cli/auth):
+Install the [`neon` CLI](/docs/cli/install) (requires **Node.js 20.19 or higher**) and sign in with [`neon login`](/docs/cli/login):
 
 ```bash
 npm i -g neon

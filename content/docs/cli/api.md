@@ -11,7 +11,7 @@ enableTableOfContents: true
 
 The `api` command sends an authenticated request to any [Neon API](/docs/reference/api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.
 
-By default the request uses your [`neon auth`](/docs/cli/auth) credentials. To use a specific key, pass `--api-key` or set `NEON_API_KEY`. The [key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what the request can do.
+By default the request uses your [`neon login`](/docs/cli/login) credentials. To use a specific key, pass `--api-key` or set `NEON_API_KEY`. The [key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what the request can do.
 
 <Admonition type="note">
 `api` is a raw passthrough: it does not read your [context file](/docs/cli/set-context) or auto-fill parameters. Pass what each route needs explicitly. For example, `neon api /projects` returns `ERROR: org_id is required` unless you add `-Q org_id=<org_id>` or authenticate with an organization API key. Get your organization ID from [`neon orgs list`](/docs/cli/orgs).

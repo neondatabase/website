@@ -11,7 +11,7 @@ summary: >-
   like `neon projects list`, `neon branches create`, and
   `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-09-07T21:31:28.251Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---
@@ -118,7 +118,7 @@ To avoid entering your API key with each command, set it as an environment varia
 export NEON_API_KEY=<your-api-key>
 ```
 
-For more about authenticating, see [Neon CLI commands: auth](/docs/cli/auth).
+For more about authenticating, see [Neon CLI commands: login](/docs/cli/login).
 
 ## Link your project
 
