@@ -105,7 +105,9 @@ Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your see
 
 ## Keep building
 
-Each prompt below adds one capability to the app you just built. Send them one at a time. Object Storage and the AI Gateway are in beta and run in select regions, so if a prompt reports one isn't available, create your project in a supported region such as `aws-us-east-2` (Ohio) or `aws-eu-central-1` (Frankfurt).
+The next three prompts each add a backend service to the app you just built. Your agent manages these services as code in `neon.ts` and applies them with `neon deploy`; add them one at a time.
+
+AI Gateway requires a paid Neon plan; Object Storage and Functions currently run only in AWS US East (Ohio), so free-plan or non-Ohio projects may not be able to add them yet.
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/quick-start/nextjs-api-only.md, since this API is in beta.
