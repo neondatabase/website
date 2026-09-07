@@ -80,6 +80,7 @@
         "temperature": false,
         "structured_output": false,
         "open_weights": false,
+        "knowledge": "2026-06",
         "release_date": "2026-09-01",
         "last_updated": "2026-09-01",
         "modalities": {
@@ -2049,8 +2050,8 @@
         "temperature": true,
         "structured_output": true,
         "open_weights": true,
-        "release_date": "2026-08-28",
-        "last_updated": "2026-08-28",
+        "release_date": "2026-08-26",
+        "last_updated": "2026-08-26",
         "modalities": {
           "input": [
             "text",
@@ -2190,8 +2191,9 @@
         "temperature": true,
         "structured_output": true,
         "open_weights": false,
-        "release_date": "2026-08-24",
-        "last_updated": "2026-08-24",
+        "knowledge": "2026-02-01",
+        "release_date": "2026-08-12",
+        "last_updated": "2026-08-12",
         "modalities": {
           "input": [
             "text",
