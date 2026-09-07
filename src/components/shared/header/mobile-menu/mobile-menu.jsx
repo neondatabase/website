@@ -43,7 +43,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
         className="relative flex w-full items-center py-7 text-2xl leading-none font-medium tracking-extra-tight sm:py-5 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
-        handleClick={handleMenuItemClick}
+        {...(sections ? { handleClick: handleMenuItemClick } : {})}
         {...otherProps}
       >
         {text}
