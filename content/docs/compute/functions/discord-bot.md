@@ -8,7 +8,7 @@ summary: >-
   public function URL, verify Discord's Ed25519 request signatures, and store data in Postgres
   on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-02T23:13:13.838Z'
+updatedOn: '2026-09-07T18:56:07.527Z'
 isDraft: false
 ---
 
@@ -115,9 +115,10 @@ This walkthrough is deploy-only. Discord needs a public HTTPS URL, so we don't u
 
 ## Add Discord secrets
 
-Template scripts read `.env.local` (for example `neon deploy --env .env.local` and `node --env-file=.env.local`), the same convention as Next.js and `vercel env pull`. Bootstrap scaffolds a `.env.example` but no `.env.local` yet. Copy the example first, then link so Neon merges the branch's variables into it:
+Template scripts read `.env.local` (for example `neon deploy --env .env.local` and `node --env-file=.env.local`), the same convention as Next.js and `vercel env pull`. Bootstrap scaffolds a `.env.example` but no `.env.local` yet. Install dependencies, copy the example, then link. `neon link` loads `neon.ts` to pull the branch's variables, so the packages must be installed first:
 
 ```bash
+npm install
 cp .env.example .env.local
 neon link
 ```
@@ -148,8 +149,6 @@ If you omit `DISCORD_GUILD_ID`, the register script creates global commands, whi
 
 ## Deploy the function
 
-If you used `neon bootstrap` and let it install dependencies, skip that step. If you cloned by hand, run `npm install` first.
-
 `npm run deploy` runs `neon deploy --env .env.local`, which evaluates `neon.ts` with your Discord secrets in `process.env`:
 
 ```bash
@@ -159,6 +158,14 @@ npm run deploy
 The CLI applies the `neon.ts` policy, bundles the function and waits until that apply finishes. You'll see `Applied changes` and a **Function URLs** list. If the command fails, check [function logs](/docs/compute/functions/logs). Flags are in [Deploy and manage functions](/docs/compute/functions/deploy).
 
 Deployed env is a snapshot of `.env.local` at apply time. Run `npm run deploy` again after any change to `.env.local`.
+
+## Apply the database schema
+
+```bash
+npm run db:push
+```
+
+`db:push` reads `neon.ts` (the same config `deploy` uses), so it needs the function secrets you set above, plus the `DATABASE_URL` that `neon link` wrote. `/ping` works without the tables; `/name` and `/profile` need them.
 
 ## Set the Interactions Endpoint URL
 
@@ -232,33 +239,9 @@ If nothing appears, or Discord says "The application did not respond":
 Call `request.text()` and verify **before** `JSON.parse`. Discord signs `timestamp + body` as the exact bytes it sent. Parsing JSON first can change whitespace and fail verification. See [Interactions Overview](https://discord.com/developers/docs/interactions/overview).
 </Admonition>
 
-The GET and POST `PING` path looks like this. ApplicationCommand and MessageComponent dispatch is in the source.
+The POST path reads the raw body and verifies the signature before parsing:
 
 ```ts filename="functions/discord.ts"
-import { InteractionResponseType, InteractionType } from "discord-api-types/v10";
-import { DISCORD_INTERACTIONS_PATH } from "../src/constants/discord.js";
-import { getDiscordEnv } from "../src/env.js";
-import { discordInteractionSchema } from "../src/schemas/discord.js";
-import { jsonResponse } from "../src/utils/jsonResponse.js";
-import { verifyDiscordRequest } from "../src/utils/verifyDiscordRequest.js";
-
-export default async function handler(request: Request): Promise<Response> {
-  const url = new URL(request.url);
-
-  switch (request.method) {
-    case "GET":
-      return jsonResponse({
-        ok: true,
-        service: "discord-interactions",
-        interactionsPath: DISCORD_INTERACTIONS_PATH,
-        interactionsUrl: `${url.origin}${DISCORD_INTERACTIONS_PATH}`,
-      });
-    case "POST":
-      break;
-    default:
-      return jsonResponse({ error: "method not allowed" }, { status: 405 });
-  }
-
   const body = await request.text();
   const env = getDiscordEnv();
   const isVerified = verifyDiscordRequest({
@@ -279,34 +262,29 @@ export default async function handler(request: Request): Promise<Response> {
   } catch {
     return jsonResponse({ error: "invalid json" }, { status: 400 });
   }
-
-  const parsedPayload = discordInteractionSchema.safeParse(payloadBody);
-
-  if (!parsedPayload.success) {
-    return jsonResponse({ error: "invalid interaction payload" }, { status: 400 });
-  }
-
-  const payload = parsedPayload.data;
-
-  if (payload.type === InteractionType.Ping) {
-    return jsonResponse({ type: InteractionResponseType.Pong });
-  }
-
-  // ApplicationCommand and MessageComponent dispatch is in the source.
-}
 ```
 
-## Next steps
+<details>
+<summary>View full code: `functions/discord.ts`</summary>
 
-The template already implements more than `/ping`:
+<ExternalCode url="https://raw.githubusercontent.com/neondatabase/examples/main/bots/discord-bot-http/functions/discord.ts" />
 
+</details>
+
+View it on [GitHub](https://github.com/neondatabase/examples/blob/main/bots/discord-bot-http/functions/discord.ts).
+
+## Commands
+
+- `/ping`: Pong embed with estimated interaction latency.
 - `/info` and `/help`: [Components v2](https://discord.com/developers/docs/components/overview) panels (Discord's newer message layout) with runtime details and slash-command mentions.
 - `/buttons`: Components v2 buttons (primary, secondary, success and danger).
-- `/name` and `/profile`: Postgres via Drizzle (`profiles` and `command_usage` tables). After the project is linked and deployed so `DATABASE_URL` exists, run `npm run db:push` once. If you skip that, those commands reply that they could not reach the Neon database. On a cold branch they can also fall back to a warming-up reply; run the command again once the branch is warm.
+- `/name` and `/profile`: Postgres via Drizzle (`profiles` and `command_usage` tables). If the database misses a 2.5-second deadline, the bot replies "Warming up"; run the command again once the branch is warm.
 
-To add LLM chat and image generation, see the [Community Guide](/guides/discord-bot-on-neon-functions). That's a separate from-scratch walkthrough.
+## Related templates
 
-Sibling HTTP bot templates: [Telegram](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http) and [WhatsApp](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http).
+- [Community guide: Discord bot on Neon Functions](/guides/discord-bot-on-neon-functions): adds LLM chat and image generation, built from scratch.
+- [Telegram HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http)
+- [WhatsApp HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http)
 
 ## Example
 
