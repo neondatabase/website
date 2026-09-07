@@ -39,6 +39,7 @@ describe('getMetadata', () => {
   it.each([
     [SEO_DATA.functions, 'https://neon.com/functions.md'],
     [SEO_DATA.aiGateway, 'https://neon.com/ai-gateway.md'],
+    [SEO_DATA.objectStorage, 'https://neon.com/object-storage.md'],
   ])('advertises the generated Markdown alternate', (pageSeo, markdownUrl) => {
     const metadata = getMetadata(pageSeo);
 

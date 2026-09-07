@@ -1,5 +1,5 @@
 /**
- * Generate Markdown mirrors for the Functions and AI Gateway marketing pages.
+ * Generate Markdown mirrors for the backend platform marketing pages.
  *
  * Both the React pages and this generator read from the same content module.
  * That keeps negotiated Markdown responses in sync with the visible pages.
@@ -18,6 +18,7 @@ const {
   aiGatewayPageContent,
   sharedBackendPlatformContent,
 } = require('../constants/backend-platform-page-content');
+const { objectStoragePageContent } = require('../constants/object-storage-page-content');
 
 const BASE_URL = 'https://neon.com';
 
@@ -153,11 +154,14 @@ const renderBackedBy = ({ label, title, highlightedTitle, trustedByLabel, metric
     ...quotes.map(({ text, author, post }) => `#### ${author}\n\n> ${text.join('')}\n> — ${post}`),
   ].join('\n\n');
 
-const renderSharedSections = (links) => {
+const renderSharedSections = (links, backendServicesTitle) => {
   const { backendServices, builtForAgents, backedBy, cta } = sharedBackendPlatformContent;
 
   return [
-    renderBackendServices(backendServices),
+    renderBackendServices({
+      ...backendServices,
+      title: backendServicesTitle ?? backendServices.title,
+    }),
     renderBuiltForAgents(builtForAgents),
     renderBackedBy(backedBy),
     [
@@ -249,12 +253,48 @@ const renderAiGatewayMarkdown = (links) => {
   return `${sections.join('\n\n')}\n`;
 };
 
+const renderObjectStorageMarkdown = (links) => {
+  const { hero, storageBenefits, isolatedEnvironments, configuration, faqItems } =
+    objectStoragePageContent;
+
+  const sections = [
+    renderPageHeader(objectStoragePageContent),
+    '## Get started',
+    renderActionLinks(hero, links),
+    `## ${storageBenefits.title}`,
+    storageBenefits.highlightedTitle,
+    ...storageBenefits.items.flatMap(({ label, title, description }) => [
+      `### ${label}: ${title}`,
+      description,
+    ]),
+    `## ${isolatedEnvironments.title}`,
+    isolatedEnvironments.highlightedTitle,
+    ...isolatedEnvironments.items.flatMap(({ title, description }) => [
+      `### ${title}`,
+      description,
+    ]),
+    `## ${configuration.title}`,
+    `### ${configuration.filename}`,
+    `\`\`\`typescript\n${configuration.code}\n\`\`\``,
+    ...configuration.items.flatMap(({ title, description }) => [
+      `### ${title}`,
+      htmlToMarkdown(description),
+    ]),
+    renderFaq(faqItems),
+    renderSharedSections(links, objectStoragePageContent.backendServicesTitle),
+    renderFeedbackFooter(objectStoragePageContent.slug),
+  ];
+
+  return `${sections.join('\n\n')}\n`;
+};
+
 async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirname, '../..')) {
   const { default: links } = await import('../constants/links.js');
   const outputDir = path.join(rootDir, 'public/md');
   const pages = [
     { filename: 'functions.md', content: renderFunctionsMarkdown(links) },
     { filename: 'ai-gateway.md', content: renderAiGatewayMarkdown(links) },
+    { filename: 'object-storage.md', content: renderObjectStorageMarkdown(links) },
   ];
 
   await fs.mkdir(outputDir, { recursive: true });
@@ -272,6 +312,7 @@ module.exports = {
   renderFaq,
   renderFunctionsMarkdown,
   renderAiGatewayMarkdown,
+  renderObjectStorageMarkdown,
   generateBackendPlatformPageMarkdown,
 };
 

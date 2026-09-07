@@ -9,9 +9,14 @@ import Layout from 'components/shared/layout';
 import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
 import LINKS from 'constants/links';
 
-const { cta, faqTitleLines } = sharedBackendPlatformContent;
+const { cta, faqTitleLines: defaultFaqTitleLines } = sharedBackendPlatformContent;
 
-const BackendPlatformPage = ({ children, faqItems }) => (
+const BackendPlatformPage = ({
+  children,
+  faqItems,
+  faqTitleLines = defaultFaqTitleLines,
+  backendServicesTitle,
+}) => (
   <Layout
     className="bg-black-pure"
     headerClassName="h-15! lg:h-14!"
@@ -20,7 +25,7 @@ const BackendPlatformPage = ({ children, faqItems }) => (
   >
     {children}
     <Faq items={faqItems} titleLines={faqTitleLines} variant="light" />
-    <BackendServices />
+    <BackendServices title={backendServicesTitle} />
     <BuiltForAgents />
     <BackedBy />
     <CTANew
@@ -35,6 +40,7 @@ const BackendPlatformPage = ({ children, faqItems }) => (
 );
 
 BackendPlatformPage.propTypes = {
+  backendServicesTitle: PropTypes.string,
   children: PropTypes.node.isRequired,
   faqItems: PropTypes.arrayOf(
     PropTypes.shape({
@@ -44,6 +50,7 @@ BackendPlatformPage.propTypes = {
       initialState: PropTypes.oneOf(['open', 'closed']),
     })
   ).isRequired,
+  faqTitleLines: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default BackendPlatformPage;

@@ -11,6 +11,7 @@ import {
   htmlToMarkdown,
   renderAiGatewayMarkdown,
   renderFunctionsMarkdown,
+  renderObjectStorageMarkdown,
 } from './generate-backend-platform-page-markdown';
 
 const tempDirs = [];
@@ -83,7 +84,22 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('## Trusted at scale.');
   });
 
-  it('writes both mirrors without deleting other generated Markdown', async () => {
+  it('renders Object Storage config, FAQ, and matching shared content', () => {
+    const markdown = renderObjectStorageMarkdown(LINKS);
+
+    expect(markdown).toContain('# S3-compatible object storage, built into the Neon backend');
+    expect(markdown).toContain('[Read the docs](https://neon.com/docs/storage/overview)');
+    expect(markdown).toContain('```typescript\nimport { defineConfig }');
+    expect(markdown).toContain('uploads: {}');
+    expect(markdown).toContain('`neon deploy`');
+    expect(markdown).toContain('`.env.local`');
+    expect(markdown).toContain('Your files branch with everything else.');
+    expect(markdown).not.toContain('Your LLM branches');
+    expect(markdown).toContain('### Is this the same credential I use for Postgres?');
+    expect(markdown).not.toMatch(/<\/?(?:p|strong|code)>/);
+  });
+
+  it('writes all mirrors without deleting other generated Markdown', async () => {
     const rootDir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-platform-markdown-'));
     tempDirs.push(rootDir);
     const outputDir = path.join(rootDir, 'public/md');
@@ -93,12 +109,19 @@ describe('backend platform page Markdown', () => {
 
     const files = await generateBackendPlatformPageMarkdown(rootDir);
 
-    expect(files.map((file) => path.basename(file))).toEqual(['functions.md', 'ai-gateway.md']);
+    expect(files.map((file) => path.basename(file))).toEqual([
+      'functions.md',
+      'ai-gateway.md',
+      'object-storage.md',
+    ]);
     expect(await fs.readFile(path.join(outputDir, 'functions.md'), 'utf8')).toContain(
       '# Long-running functions'
     );
     expect(await fs.readFile(path.join(outputDir, 'ai-gateway.md'), 'utf8')).toContain(
       '# Call the latest models'
+    );
+    expect(await fs.readFile(path.join(outputDir, 'object-storage.md'), 'utf8')).toContain(
+      '# S3-compatible object storage'
     );
     expect(await fs.readFile(sentinelPath, 'utf8')).toBe('keep me');
   });

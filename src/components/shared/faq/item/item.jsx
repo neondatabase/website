@@ -31,7 +31,11 @@ const variants = {
     item: 'border-gray-new-70',
     title: 'text-black-pure font-normal',
     icon: 'border-gray-new-40 size-2.25',
-    content: 'text-gray-new-20',
+    content: cn(
+      'text-gray-new-20',
+      '[&_code]:my-0 [&_code]:inline [&_code]:rounded [&_code]:bg-gray-new-70/30 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-inherit',
+      '[&_a]:text-black-pure [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-gray-new-20'
+    ),
   },
 };
 

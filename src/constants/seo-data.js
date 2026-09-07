@@ -77,6 +77,13 @@ export default {
     pathname: LINKS.functions,
     markdownPath: `${LINKS.functions}.md`,
   },
+  objectStorage: {
+    title: 'Neon Object Storage — S3-compatible storage that branches',
+    description:
+      'S3-compatible object storage built into the Neon backend. Branch files alongside Postgres, use your existing S3 tools, and authenticate with a Neon credential.',
+    pathname: LINKS.objectStorage,
+    markdownPath: `${LINKS.objectStorage}.md`,
+  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',

@@ -146,6 +146,8 @@ describe('getMarkdownPath', () => {
       ['/functions.md', '/md/functions.md'],
       ['/ai-gateway', '/md/ai-gateway.md'],
       ['/ai-gateway.md', '/md/ai-gateway.md'],
+      ['/object-storage', '/md/object-storage.md'],
+      ['/object-storage.md', '/md/object-storage.md'],
     ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
       expect(getMarkdownPath(pagePath)).toBe(markdownPath);
     });

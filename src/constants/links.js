@@ -19,6 +19,7 @@ export default {
   faqs: '/faqs',
   generateTicket: '/generate-ticket',
   migration: '/migration',
+  objectStorage: '/object-storage',
   partners: '/docs/guides/platform-integration-overview',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',

@@ -26,6 +26,7 @@ const CONTENT_ROUTES = {
 const GENERATED_PAGE_MARKDOWN_PATHS = {
   functions: '/md/functions.md',
   'ai-gateway': '/md/ai-gateway.md',
+  'object-storage': '/md/object-storage.md',
 };
 
 const EXCLUDED_ROUTES = ['guides', 'faqs', 'branching'];

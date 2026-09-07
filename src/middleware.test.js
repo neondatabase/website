@@ -95,6 +95,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Pricing', path: '/pricing' },
       { name: 'Functions', path: '/functions' },
       { name: 'AI Gateway', path: '/ai-gateway' },
+      { name: 'Object Storage', path: '/object-storage' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
@@ -371,6 +372,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it.each([
       ['/functions.md', 'https://neon.com/md/functions.md'],
       ['/ai-gateway.md', 'https://neon.com/md/ai-gateway.md'],
+      ['/object-storage.md', 'https://neon.com/md/object-storage.md'],
     ])('should serve the generated marketing page for %s', async (pathname, markdownUrl) => {
       const req = createMockRequest(pathname, 'Mozilla/5.0', 'text/html');
 
