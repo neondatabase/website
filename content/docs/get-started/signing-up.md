@@ -21,7 +21,7 @@ updatedOn: '2026-08-27T21:13:38.572Z'
 <DocsList title="What you will learn:">
 <p>How to view and modify data in the console</p>
 <p>Create an isolated database copy per developer</p>
-<p>Reset your branch to main when ready to start new work</p>
+<p>Reset your branch to production when ready to start new work</p>
 </DocsList>
 
 <DocsList title="Related topics" theme="docs">
@@ -44,11 +44,13 @@ In Neon, everything starts with the **project**. It's the top-level container th
 
 ## About branching
 
-Each [branch](/docs/introduction/branching) is a fully-isolated copy of its parent. We suggest creating a long-term branch for each developer on your team to maintain consistent connection strings. You can reset your development branch to `main` whenever needed.
+Each [branch](/docs/introduction/branching) is a fully-isolated copy of its parent. We suggest creating a long-term branch for each developer on your team to maintain consistent connection strings. You can reset your development branch to production whenever needed.
 
-Your project starts with a `main` branch:
+Your project starts with a `production` branch:
 
-- `main` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
+- `production` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
+
+The default branch is named `main` if the project was created with the CLI or API, or `production` if created in the Console. This tour uses `production`.
 
 You can create additional branches for development, staging, and other environments. For development branches, consider using a smaller compute size (0.25-1 CU) to optimize costs, while keeping production appropriately sized for your workload. All computes scale to zero after 5 minutes of inactivity by default, which keeps costs low for development branches. On paid plans, you can disable this for production if you need always-active compute. See [Scale to zero](/docs/introduction/scale-to-zero).
 
@@ -58,7 +60,7 @@ You can create additional branches for development, staging, and other environme
 
 Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started/query-with-neon-sql-editor#explain-and-analyze).
 
-From the Neon Console, use the sidebar navigation to open **Postgres database** > **SQL Editor**. Notice that your default branch `main` is already selected, along with your project's default database, `neondb`.
+From the Neon Console, use the sidebar navigation to open **Postgres database** > **SQL Editor**. Notice that your default branch `production` is already selected, along with your project's default database, `neondb`.
 
 ![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
@@ -76,7 +78,7 @@ INSERT INTO playing_with_neon(name, value)
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
 ```
 
-Your default branch `main` now has a table with some data.
+Your default branch `production` now has a table with some data.
 
 ## Try the AI Assistant
 
@@ -132,7 +134,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 1. **Create a development branch**
 
-   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **New Branch**. Name it `development`, select `main` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
+   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **New Branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
 
 2. **Install CLI with Brew or NPM**
 
@@ -185,11 +187,11 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
    ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
    │ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2025-12-23T21:05:05Z │
    ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-   │ ✱ main       │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
+   │ ✱ production │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
    └──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
    ```
 
-   This command shows your existing branches, including the `main` branch and the `development` branch you just created.
+   This command shows your existing branches, including the `production` branch and the `development` branch you just created.
 
    <Admonition type="tip">
    To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/cli/set-context) for details.
@@ -197,13 +199,13 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 ## Make some sample schema changes
 
-First, let's make sure our development branch is in sync with `main`. This ensures we're starting from the same baseline:
+First, let's make sure our development branch is in sync with `production`. This ensures we're starting from the same baseline:
 
 ```bash
 neon branches reset development --parent --project-id cool-forest-12345678
 ```
 
-Now that our `development` branch matches `main`, we can make some changes. The `playing_with_neon` table from `main` is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
+Now that our `development` branch matches `production`, we can make some changes. The `playing_with_neon` table from `production` is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
 
 You can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
@@ -299,7 +301,7 @@ With `psql` available, let's work from the terminal to connect to your `developm
 
 After making the schema changes to your development branch, you can use the [Schema Diff](/docs/guides/schema-diff) feature to compare your branch against its parent branch. Schema Diff is a GitHub-style code-comparison tool used to visualize differences between different branch's databases.
 
-For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the `main` branch.
+For this tutorial, Schema Diff helps with validating isolation: it confirms that schema changes made in your isolated development branch remain separate from the production branch.
 
 From the **Branches** page in the Neon Console:
 
@@ -312,17 +314,17 @@ From the **Branches** page in the Neon Console:
 
 A more typical scenario for Schema Diff is when preparing for schema migrations. While Neon does not provide built-in schema migration tools, you can use ORMs like [Drizzle](https://drizzle.team/) or [Prisma](https://www.prisma.io/) to handle schema migrations efficiently. Read more about using Neon in your development workflow in [Connect Neon to your stack](/docs/get-started/connect-neon).
 
-## Reset your development branch to main
+## Reset your development branch to production
 
-After experimenting with changes in your development branch, let's now reset the branch to `main`, its parent branch.
+After experimenting with changes in your development branch, let's now reset the branch to `production`, its parent branch.
 
 [Branch reset](/docs/guides/reset-from-parent) functions much like a `git reset –hard parent` in traditional Git workflows.
 
-Resetting your development branches to the `main` branch ensures that all changes are discarded, and your branch reflects the latest stable state of `main`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
+Resetting your development branches to the `production` branch ensures that all changes are discarded, and your branch reflects the latest stable state of `production`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
 
 You can reset to parent from the **Branches** page of the Neon Console, but here we'll use the Neon CLI.
 
-Use the following command to reset your `development` branch to the state of the `main` branch:
+Use the following command to reset your `development` branch to the state of the `production` branch:
 
     Example:
     ```bash
@@ -339,7 +341,7 @@ Depending on your development workflow, you can use branch reset:
 
 - **After a feature is completed and merged**
 
-  Once your changes are merged into `main`, reset the development branch to start on the next feature.
+  Once your changes are merged into `production`, reset the development branch to start on the next feature.
 
 - **When you need to abandon changes**
 
