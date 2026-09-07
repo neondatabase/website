@@ -1,6 +1,6 @@
 ---
-title: Get started with your AI agent
-subtitle: Prompt your AI coding agent to build a Next.js app on Neon
+title: Build a Next.js app with your AI agent
+subtitle: Connect Neon to your agent, then build and grow your app from prompts
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that creates a table, seeds sample rows, and adds a page that lists
