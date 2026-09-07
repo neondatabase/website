@@ -105,7 +105,7 @@ Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your see
 
 ## Keep building
 
-The next three prompts each add a backend service to the app you just built. Your agent manages these services as code in `neon.ts` and applies them with `neon deploy`; add them one at a time.
+The next three prompts each add a backend service to the app you just built. Your agent manages these services as code in `neon.ts` and applies them with `neon deploy`.
 
 AI Gateway requires a paid Neon plan; Object Storage and Functions currently run only in AWS US East (Ohio), so free-plan or non-Ohio projects may not be able to add them yet.
 
