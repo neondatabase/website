@@ -7,7 +7,7 @@ summary: >-
   Host a WhatsApp bot on Neon Functions. Receive WhatsApp Cloud API webhooks, verify Meta's
   request signatures, reply through the Graph API, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-02T23:13:13.838Z'
+updatedOn: '2026-09-07T18:56:07.527Z'
 isDraft: false
 ---
 
@@ -108,9 +108,10 @@ Deploy the function before connecting Meta. Meta needs a public HTTPS callback U
 
 ## Add WhatsApp secrets
 
-The deploy script runs `neon deploy --env .env.local`, the same convention as Next.js and `vercel env pull`. Bootstrap scaffolds a `.env.example` but no `.env.local`. Copy the example first, then link so Neon merges the branch's variables into it:
+The deploy script runs `neon deploy --env .env.local`, the same convention as Next.js and `vercel env pull`. Bootstrap scaffolds a `.env.example` but no `.env.local`. Install dependencies, copy the example, then link. `neon link` loads `neon.ts` to pull the branch's variables, so the packages must be installed first:
 
 ```bash
+npm install
 cp .env.example .env.local
 neon link
 ```
@@ -145,6 +146,18 @@ npm run deploy
 
 The script runs `neon deploy --env .env.local`. The CLI evaluates `neon.ts`, bundles the handler and waits for the deployment to finish. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
 
+Deployed environment variables are a snapshot of `.env.local` at deployment time. Run `npm run deploy` again after changing any WhatsApp value.
+
+## Apply the database schema
+
+```bash
+npm run db:push
+```
+
+`db:push` reads `neon.ts` (the same config `deploy` uses), so it needs the function secrets you set above, plus the `DATABASE_URL` that `neon link` wrote. `/ping` works without the tables; `/name` and `/profile` need them.
+
+## Set the webhook
+
 Your callback URL is `NEON_FUNCTION_WHATSAPP_BASE_URL` (from `.env.local`) with `/api/webhook` appended:
 
 ```text shouldWrap
@@ -152,20 +165,6 @@ https://br-cool-darkness-123456-whatsapp.compute.us-east-2.aws.neon.tech/api/web
 ```
 
 Your URL will differ. Use the exact `NEON_FUNCTION_WHATSAPP_BASE_URL` value from `.env.local`, with `/api/webhook` appended; the host is specific to your branch.
-
-Deployed environment variables are a snapshot of `.env.local` at deployment time. Run `npm run deploy` again after changing any WhatsApp value.
-
-## Apply the database schema
-
-The `/name` and `/profile` commands use the `profiles` and `command_usage` tables. `neon link` wrote `DATABASE_URL` into `.env.local`, so apply the included Drizzle schema to the linked Neon database:
-
-```bash
-npm run db:push
-```
-
-You can test `/ping` without these tables, but the database-backed commands return an error until you apply the schema.
-
-## Configure the webhook
 
 In the Meta App Dashboard, open **WhatsApp** > **Configuration**. Enter:
 
@@ -203,31 +202,11 @@ If the bot doesn't reply:
 
 ## How it works
 
-`functions/whatsapp.ts` handles GET verification requests and POST webhook deliveries at `/api/webhook`. The GET path compares Meta's verify token with your configured token:
+`functions/whatsapp.ts` handles GET verification requests and POST webhook deliveries at `/api/webhook`. The GET path checks the mode and verify token, then returns the challenge value as plain text.
 
-```ts filename="functions/whatsapp.ts"
-export default async function handler(request: Request): Promise<Response> {
-  const url = new URL(request.url);
-
-  if (request.method === "GET") {
-    const isVerified = verifyWhatsAppWebhookChallenge({
-      mode: url.searchParams.get("hub.mode"),
-      token: url.searchParams.get("hub.verify_token"),
-      verifyToken: getWhatsAppVerifyToken(),
-    });
-
-    if (!isVerified) {
-      return new Response("invalid verify token", { status: 403 });
-    }
-
-    return new Response(url.searchParams.get("hub.challenge") ?? "", {
-      headers: { "content-type": "text/plain" },
-    });
-  }
-
-  // POST signature verification and message dispatch follow.
-}
-```
+<Admonition type="important" title="Verify the raw body">
+Call `request.text()` and verify the signature before `JSON.parse`. Meta computes `X-Hub-Signature-256` from the exact request body with your app secret. Parsing and serializing the payload first can change its bytes and invalidate the signature.
+</Admonition>
 
 For a POST, the handler reads the raw body, verifies its HMAC signature with the app secret and only then parses the JSON:
 
@@ -258,10 +237,6 @@ if (!parsedPayload.success) {
 }
 ```
 
-<Admonition type="important" title="Verify the raw body">
-Call `request.text()` and verify the signature before `JSON.parse`. Meta computes `X-Hub-Signature-256` from the exact request body with your app secret. Parsing and serializing the payload first can change its bytes and invalidate the signature.
-</Admonition>
-
 The handler extracts entries that contain a `messages` array. For each incoming message, it:
 
 1. Tries to mark the message as read.
@@ -272,7 +247,16 @@ The handler extracts entries that contain a `messages` array. For each incoming 
 
 Read status updates and command usage tracking are best effort. A failure in either task doesn't block the command reply. Valid status webhooks don't contain an incoming `messages` array, so the handler acknowledges them without running a command.
 
-## Commands and callbacks
+<details>
+<summary>View full code: `functions/whatsapp.ts`</summary>
+
+<ExternalCode url="https://raw.githubusercontent.com/neondatabase/examples/main/bots/whatsapp-bot-http/functions/whatsapp.ts" />
+
+</details>
+
+View it on [GitHub](https://github.com/neondatabase/examples/blob/main/bots/whatsapp-bot-http/functions/whatsapp.ts).
+
+## Commands
 
 The template supports:
 
@@ -293,7 +277,12 @@ The `/buttons` callbacks use the IDs `button-test:refresh`, `button-test:echo` a
 
 Text responses and button panels are sent through the same Graph API `messages` endpoint. When Meta includes an incoming message ID, the bot adds it as reply context.
 
-The `/name` and `/profile` handlers use a 2.5-second database deadline. If a scaled-to-zero branch is still waking up, the bot returns a warming-up message. Run the command again after the branch is warm.
+The `/name` and `/profile` commands use Postgres via Drizzle. If the database misses a 2.5-second deadline, the bot replies "Warming up"; run the command again once the branch is warm.
+
+## Related templates
+
+- [Discord HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)
+- [Telegram HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http)
 
 ## Example
 
