@@ -98,7 +98,7 @@ You can invite teammates to your organization and they'll have access to all pro
 
 ### Projects
 
-A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object model](/docs/concepts/the-object-model).
+A project is a container for your backend. It includes your database, branches, computes, and backend services like object storage and functions. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your resources. Learn more about [Neon's object model](/docs/concepts/the-object-model).
 
 > For most use cases, create a project for each app or customer to isolate data and manage resources.
 

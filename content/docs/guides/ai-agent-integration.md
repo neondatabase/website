@@ -45,7 +45,7 @@ Keep your API keys secure. You'll use them for all API operations in this guide.
 
 ### Project-per-tenant architecture
 
-This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/concepts/the-object-model) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
+This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/concepts/the-object-model) (containing branches, databases, roles, computes, and backend services like object storage and functions). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
