@@ -486,6 +486,12 @@
     - title: "Revoke a credential"
       slug: reference/api/credentials/revoke-credential
       method: DELETE
+    - title: "Reveal a credential's secrets"
+      slug: reference/api/credentials/reveal-credential
+      method: POST
+    - title: "Rotate a credential's secrets"
+      slug: reference/api/credentials/rotate-credential
+      method: POST
 - title: "Functions"
   slug: reference/api/functions
   items:
@@ -504,6 +510,15 @@
     - title: "Deploy code to a function"
       slug: reference/api/functions/create-project-branch-function-deployment
       method: POST
+    - title: "List the custom domains on a branch"
+      slug: reference/api/functions/list-project-branch-custom-domains
+      method: GET
+    - title: "Register a custom domain on a branch"
+      slug: reference/api/functions/register-project-branch-custom-domain
+      method: POST
+    - title: "Delete a custom domain from a branch"
+      slug: reference/api/functions/delete-project-branch-custom-domain
+      method: DELETE
 - title: "Logs"
   slug: reference/api/logs
   items:
