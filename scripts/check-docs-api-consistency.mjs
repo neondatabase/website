@@ -61,6 +61,7 @@ import {
   sdkRawOperationNames,
 } from './lib/api-coverage.mjs';
 import { defaultSpecCachePath, loadOpenApiSpec } from './lib/openapi-spec-source.mjs';
+import { withoutExcludedOperations } from './lib/excluded-operations.mjs';
 import { findMissingSpecTags, readTagConfig } from './lib/tag-config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -300,7 +301,9 @@ async function main() {
         cachePath: defaultSpecCachePath(ROOT),
         log: () => {},
       });
-      specOps = [...operationIdsFromSpec(spec)];
+      // Drop intentionally-hidden ops (scripts/lib/excluded-operations.mjs) so
+      // they are not reported as `specNotDocumented` drift by the weekly job.
+      specOps = withoutExcludedOperations(operationIdsFromSpec(spec));
       // Spec tags with no entry in tag-config.json render with auto-generated
       // display/order in the API reference (the [tag-config] build warning). The
       // build only logs it; surface it here so the weekly issue flags it too.
@@ -310,6 +313,11 @@ async function main() {
     }
   }
 
+  // rawOps is intentionally NOT filtered by EXCLUDED_OPERATION_IDS: the SDK
+  // really does expose the excluded ops, so offline PR mode may list them as
+  // "raw layer exposes operations the docs do not cover" (true, non-blocking,
+  // self-clearing when the override is lifted). TODO: if that advisory noise
+  // outlives its welcome, filter rawOps too via toSdkMethodName(excludedId).
   const coverage = computeCoverage({
     documentedOps,
     rawOps: rawOperations,
