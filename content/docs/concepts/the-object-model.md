@@ -20,7 +20,7 @@ updatedOn: '2026-08-27T15:07:41.821Z'
 
 On Neon, a **branch** is where your backend runs. It can include Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway.
 
-You can create a child branch from a current or past state, change it, and delete it without affecting the original. That is useful for a preview, a pull request, or an experiment: you get a cloned backend to work against, not a second project to provision.
+You can create a child branch from the current or past state of another branch, starting from your `production` branch. Change it and delete it without affecting the original. That's useful for a preview, a pull request, or an experiment: you get a cloned backend to work against, not a second project to provision.
 
 Every branch belongs to a **project**, and every project belongs to an **organization**.
 
@@ -43,16 +43,16 @@ When you create a child branch, it includes the same services enabled on its par
 | Service | What lives on the branch | What a child branch gets |
 | --- | --- | --- |
 | [**Lakebase Postgres**](/docs/postgres/overview) | Serverless Postgres. You connect through a compute on the branch (`ep-...` in the connection string). | A copy-on-write clone of the parent's data at the moment you branch. Writes stay separate. |
-| [**Managed Better Auth**](/docs/auth/overview) | Sign-in, users, sessions, and auth config. State lives in the branch's database, so there is nothing extra to provision. Each branch has its own Auth URL. | The database copy, including users and sessions. See [Branching authentication](/docs/auth/branching-authentication). |
-| [**Object Storage**](/docs/storage/overview) | S3-compatible buckets and objects. | Buckets and existing objects fork copy-on-write. See [Buckets](/docs/storage/buckets). |
-| [**Functions**](/docs/compute/functions/overview) | Your backend code, deployed on the branch, at its own URL. | The same function at a new URL, against this branch's data. |
-| [**AI Gateway**](/docs/ai-gateway/overview) | One Neon credential for many LLM providers. Each branch has its own endpoint, credentials, access, and metering. | A new endpoint and credentials, with usage metered on that branch. The [model catalog](/docs/ai-gateway/models) is shared and global: you don't configure models per branch. |
+| [**Managed Better Auth**](/docs/auth/overview) | Sign-in, users, sessions, and auth config. State lives in the branch's database, so there is nothing extra to provision. Each branch has its own Auth URL. | A copy of the whole database, including the `neon_auth` schema where its users and sessions live. See [Branching authentication](/docs/auth/branching-authentication). |
+| [**Object Storage**](/docs/storage/overview) | S3-compatible buckets and objects. | A copy-on-write clone of existing buckets and objects. See [Buckets](/docs/storage/buckets). |
+| [**Functions**](/docs/compute/functions/overview) | Your backend code, deployed on the branch, at its own function URL. | The same function at its own function URL, against this branch's data. |
+| [**AI Gateway**](/docs/ai-gateway/overview) | One credential for all models across every major LLM provider. Each branch has its own endpoint, credentials, access, and metering. | A new endpoint and credentials, with usage metered on that branch. The [model catalog](/docs/ai-gateway/models) is shared and global: you don't configure models per branch. |
 
 Managed Better Auth, Object Storage, Functions, and the AI Gateway aren't available in every region yet. See [Product availability](/docs/introduction/regions#product-availability).
 
 ### What Lakebase Postgres contains
 
-You connect as a [role](/docs/manage/roles) to a [database](/docs/manage/databases) through a [compute](/docs/manage/computes). A branch has one read-write compute and can have multiple [read replicas](/docs/introduction/read-replicas). Autoscaling and scale to zero are settings on the compute. The compute runs Postgres; it does not own the data. Durable database storage sits in a separate layer. That split is what defines Lakebase Postgres. See [The lakebase architecture](/docs/introduction/architecture-overview).
+You connect as a [role](/docs/manage/roles) to a [database](/docs/manage/databases) through a [compute](/docs/manage/computes). A branch has one read-write compute and can have multiple [read replicas](/docs/introduction/read-replicas). Autoscaling and scale to zero are settings on the compute. The compute runs Postgres; it does not own the data. Durable database storage sits in a separate storage layer. That separation of storage and compute is what defines Lakebase Postgres. See [The lakebase architecture](/docs/introduction/architecture-overview).
 
 The [Data API](/docs/data-api/overview) is an HTTP interface to the same database, for callers that can't open a Postgres TCP connection, such as browsers and edge runtimes.
 
