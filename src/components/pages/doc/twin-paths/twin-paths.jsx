@@ -47,7 +47,7 @@ PathLabel.propTypes = {
   eta: PropTypes.string.isRequired,
 };
 
-const QuickPath = ({ title, command, description, eta = '~5 min' }) => {
+const QuickPath = ({ title, command, description, href, linkText, eta = '~5 min' }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -101,6 +101,20 @@ const QuickPath = ({ title, command, description, eta = '~5 min' }) => {
             <span className="sr-only">{isCopied ? 'Copied' : 'Copy command'}</span>
           </span>
         </button>
+        {href && linkText && (
+          <Link
+            href={href}
+            className={cn(
+              'mt-5 inline-flex h-11 w-fit items-center rounded-full border border-gray-new-60 bg-black-pure/2 px-7 text-base leading-none font-medium text-black-pure transition-colors duration-150',
+              'hover:border-black-pure dark:hover:border-gray-new-50',
+              'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF321F]',
+              'dark:border-gray-new-40 dark:bg-white/2 dark:text-white'
+            )}
+            onClick={() => sendGtagEvent('Card Clicked', { text: `Twin path continue - ${title}` })}
+          >
+            {linkText}
+          </Link>
+        )}
       </div>
     </article>
   );
@@ -110,6 +124,8 @@ QuickPath.propTypes = {
   title: PropTypes.string.isRequired,
   command: PropTypes.string.isRequired,
   description: PropTypes.node.isRequired,
+  href: PropTypes.string,
+  linkText: PropTypes.string,
   eta: PropTypes.string,
 };
 

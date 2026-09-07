@@ -15,7 +15,7 @@
     - section: Start with Neon
       icon: start
       items:
-        - title: One-command setup
+        - title: Build with an agent
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart

@@ -29,10 +29,10 @@ test.describe('critical documentation onboarding', () => {
     await expectClipboardText(page, INIT_COMMAND);
 
     const quickstartLink = page.getByRole('link', { name: 'Open quickstart' });
-    await expect(quickstartLink).toHaveAttribute(
-      'href',
-      '/docs/get-started/full-backend-quickstart'
-    );
+    await expect(quickstartLink).toHaveAttribute('href', '/docs/get-started/with-an-agent');
+
+    const guideLink = page.getByRole('link', { name: 'Open guide' });
+    await expect(guideLink).toHaveAttribute('href', '/docs/get-started/full-backend-quickstart');
 
     const searchTrigger = page.locator('[data-test="docs-search-trigger"]:visible');
     await expect(searchTrigger).toHaveCount(1);
