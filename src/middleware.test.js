@@ -263,17 +263,17 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should redirect agents to the target .md when a moved page 404s', async () => {
-      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', 'text/html');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
-        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/auth' }) },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/login' }) },
       });
 
       const response = await middleware(req);
 
       expect(response.type).toBe('redirect');
-      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/login.md');
       // Short TTL so the redirect re-enters middleware (and is tracked) ~every 5 min.
       expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
       // The agent hit is still tracked before the redirect returns.
@@ -318,17 +318,17 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should mirror a permanent 301 redirect (not just 308)', async () => {
-      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', 'text/html');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
-        probe: { ok: false, status: 301, headers: new Headers({ location: '/docs/cli/auth' }) },
+        probe: { ok: false, status: 301, headers: new Headers({ location: '/docs/cli/login' }) },
       });
 
       const response = await middleware(req);
 
       expect(response.type).toBe('redirect');
-      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/login.md');
     });
 
     it('should not redirect when the moved page targets the site root', async () => {
@@ -418,25 +418,25 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should redirect to the target .md when a moved .md page 404s', async () => {
       const req = createMockRequest(
-        '/docs/cli/login.md',
+        '/docs/cli/auth.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
-        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/auth' }) },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/login' }) },
       });
 
       const response = await middleware(req);
 
       // Probe fired against the HTML sibling with a neutral (non-agent) UA.
-      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/cli/login', {
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/cli/auth', {
         headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
         redirect: 'manual',
       });
       expect(response.type).toBe('redirect');
-      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/login.md');
     });
 
     it('should append .md to a collapsing subpath redirect target', async () => {
