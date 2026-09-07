@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
 In the case of the distributed training, the `load_if_exists` parameter is set to `True` to load an existing study if it already exists, allowing nodes to join the optimization process.
 
-Based on your machine learning library of choice, you can define an `objective` function that takes a `trial` object as input and returns a metric to optimize. Let's dive into each library and see how to define the `objective` function for scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models using test datasets.
+Based on your machine learning library of choice, you can define an `objective` function that takes a `trial` object as input and returns a metric to optimize. Let's go through each library and see how to define the `objective` function for scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models using test datasets.
 
 To follow along, name your python script `hyperparam_optimization.py`.
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
 ### xgboost
 
-Gradient Boosting is king in the world of tabular data, and XGBoost is one of the most popular libraries for this task. However, these models are especially sensitive to hyperparameter choice. In this example, you will optimize the booster type, regularization weights, sampling ratios, and tree complexity parameters.
+Gradient Boosting is the standard choice for tabular data, and XGBoost is one of the most popular libraries for this task. However, these models are especially sensitive to hyperparameter choice. In this example, you will optimize the booster type, regularization weights, sampling ratios, and tree complexity parameters.
 
 ```python
 import numpy as np
@@ -495,7 +495,7 @@ Here, you can see that the first pod creates a new study, and the other pods joi
 
 ![Stern Logs](/guides/images/optuna-hyperprameter-kubernetes/k8s-example-logs.png)
 
-To show off the power of Kubernetes fault tolerance, you can delete one of the pods, and see that the job is automatically restarted on a new pod. First, find all the running pods and chose one to delete:
+To see Kubernetes fault tolerance in action, you can delete one of the pods, and see that the job is automatically restarted on a new pod. First, find all the running pods and chose one to delete:
 
 ```bash
 kubectl get pods
@@ -513,6 +513,6 @@ In the stern logs, you can see the pod getting removed, and a new pod being crea
 
 ## Conclusion
 
-Now, you have successfully set up distributed hyperparameter tuning using Optuna, Lakebase Postgres, and Kubernetes. By leveraging Kubernetes to manage multiple nodes running hyperparameter tuning jobs, you can speed up the optimization process and find the best hyperparameters for your machine learning models more efficiently. This kind of task, which sees bursts of database activity followed by long periods of inactivity, is well-suited to a serverless database like Lakebase Postgres, which can scale dynamically to any workload, then back to zero.
+Now, you have successfully set up distributed hyperparameter tuning using Optuna, Lakebase Postgres, and Kubernetes. By using Kubernetes to manage multiple nodes running hyperparameter tuning jobs, you can speed up the optimization process and find the best hyperparameters for your machine learning models more efficiently. This kind of task, which sees bursts of database activity followed by long periods of inactivity, is well-suited to a serverless database like Lakebase Postgres, which can scale dynamically to any workload, then back to zero.
 
-To take this to the next step, you can leverage cloud Kubernetes services like Azure Kubernetes Service (AKS) or Amazon Elastic Kubernetes Service (EKS). These services offer managed Kubernetes clusters that can scale to hundreds of nodes to run your jobs at scale. You can also integrate with cloud storage services like Azure Blob Storage or Amazon S3 to store your training data and model checkpoints, making it easier to manage large datasets and distributed training workflows.
+As a next step, you can use managed Kubernetes services like Azure Kubernetes Service (AKS) or Amazon Elastic Kubernetes Service (EKS). These services offer managed Kubernetes clusters that can scale to hundreds of nodes to run your jobs at scale. You can also integrate with cloud storage services like Azure Blob Storage or Amazon S3 to store your training data and model checkpoints, making it easier to manage large datasets and distributed training workflows.

@@ -83,6 +83,7 @@ const PROVIDER_ORDER = [
   'zhipuai',
   'thinkingmachines',
   'moonshotai',
+  'xai',
 ];
 
 // The organisation that made the model, matching models.dev provider ids — not
@@ -105,9 +106,11 @@ function providerFor(model) {
                 ? 'zhipuai'
                 : s.startsWith('kimi')
                   ? 'moonshotai'
-                  : s === 'ling' || s.startsWith('inkling')
-                    ? 'thinkingmachines'
-                    : undefined;
+                  : s.startsWith('grok')
+                    ? 'xai'
+                    : s === 'ling' || s.startsWith('inkling')
+                      ? 'thinkingmachines'
+                      : undefined;
   const family = typeof model.family === 'string' ? model.family : '';
   const id = typeof model.id === 'string' ? model.id : '';
   return match(family) || match(id) || (id.includes('llama') ? 'meta' : undefined);

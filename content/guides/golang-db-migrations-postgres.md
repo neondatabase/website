@@ -346,7 +346,7 @@ For example, split adding a table and populating it with data into separate migr
 
 ### 2. Make Migrations Idempotent When Possible
 
-Idempotent migrations can be applied multiple times without changing the result. Use conditionals in your SQL to make migrations more robust:
+Idempotent migrations can be applied multiple times without changing the result. Use conditionals in your SQL to make migrations safer to re-run:
 
 ```sql
 -- Check if the index exists before creating it
@@ -447,7 +447,7 @@ Running your database migrations directly on your production database can be ris
 
 ### Running Migrations on a Neon Branch
 
-For a more robust approach, you can use Neon's branching capabilities to test migrations before applying them to your production database.
+For a safer approach, you can use Neon's branching capabilities to test migrations before applying them to your production database.
 
 Neon has a set of [GitHub Actions](/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
 
@@ -617,7 +617,7 @@ func GetDatabaseURL() string {
 
 Database migrations are a critical part of managing application evolution. When working with Go applications and Lakebase Postgres, a well-implemented migration strategy ensures that your schema changes are version-controlled and applied consistently across environments.
 
-The combination of Go's strong tooling, the flexibility of golang-migrate, and Neon's powerful Postgres capabilities provides an excellent foundation for managing database schema changes throughout your application's lifecycle.
+The combination of Go's strong tooling, the flexibility of golang-migrate, and Neon's Postgres provides a solid foundation for managing database schema changes throughout your application's lifecycle.
 
 ## Additional Resources
 

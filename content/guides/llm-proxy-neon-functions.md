@@ -18,6 +18,12 @@ In this guide, you’ll build a secure LLM proxy that solves all of this. You’
 - **Streaming AI responses** through the [Neon AI Gateway](/docs/ai-gateway/overview), without ever exposing provider keys to the frontend
 - A **React frontend** with [Managed Better Auth](/docs/auth/overview) for sign-in and the [Vercel AI SDK UI](https://ai-sdk.dev/docs/ai-sdk-ui/overview) for real-time chat
 
+<CopyPrompt
+  src="/prompts/llm-proxy-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Architecture overview
 
 Consider the following architecture for a React frontend that interacts with a LLM proxy backend built with Neon Functions:
@@ -129,7 +135,7 @@ npm install --save-dev esbuild @types/node typescript dotenv
 </Tabs>
 
 - `hono`: A lightweight web framework for routing and middleware.
-- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, allowing unified access to LLMs.
+- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, giving you a single interface to LLMs.
 - `pg`: PostgreSQL client for Node.js.
 - `jose`: A lightweight module for cryptographic JWT verification using JWKS endpoints.
 - `@upstash/ratelimit` & `@upstash/redis`: Redis driver if choosing Redis for rate limiting.

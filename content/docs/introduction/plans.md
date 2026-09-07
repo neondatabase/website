@@ -1,9 +1,9 @@
 ---
 title: Neon plans
 summary: >-
-  On Neon's paid plans (Launch and Scale), there's no hard per-branch size
-  limit; storage grows with your usage. The Free plan includes 0.5 GB of
-  storage per project.
+  Storage on Neon is unlimited on paid plans (Launch and Scale): there is no
+  hard per-branch size limit and your storage grows with your usage. The Free
+  plan includes 0.5 GB of storage per project.
   Free, Launch, and Scale also differ in compute rates, branch counts, storage
   pricing, and autoscaling limits. Compare per-unit pricing, feature
   availability, and billing examples to choose a plan or estimate monthly costs.
@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-09-02T20:41:07.968Z'
+updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -237,9 +237,9 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
-#### Storage per branch: no hard size limit
+#### Unlimited storage
 
-**On paid plans (Launch and Scale), there's no hard per-branch size limit; your storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
 
 ### Public network transfer
 

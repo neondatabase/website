@@ -24,6 +24,12 @@ You'll build a simple JSON API on Neon Functions and wire it up to Sentry's thre
 
 Once the signals are flowing, you'll also tour where each one lands in the Sentry dashboard and how to read it, so you know where to look when a real incident hits.
 
+<CopyPrompt
+  src="/prompts/sentry-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Prerequisites
 
 Before you start, make sure you have:

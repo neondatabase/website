@@ -1,13 +1,13 @@
 ---
 title: Using pgAdmin4 with a Hosted Postgres
-subtitle: A comprehensive guide on how to manage your Postgres database using pgAdmin4.
+subtitle: A guide on how to manage your Postgres database using pgAdmin4.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-11-29T00:00:00.000Z'
 updatedOn: '2025-09-26T08:25:30.000Z'
 ---
 
-pgAdmin4 is a powerful web-based administration tool for managing PostgreSQL databases. This guide will walk you through the steps to set up and use pgAdmin4 with a hosted Postgres database, enabling you to perform various database operations efficiently.
+pgAdmin4 is a web-based administration tool for managing Postgres databases. This guide will walk you through the steps to set up and use pgAdmin4 with a hosted Postgres database, so you can perform common database operations.
 
 ## Table of Contents
 
@@ -83,6 +83,6 @@ You will be using these connecting string components further in the guide. Proce
 
 ## Conclusion
 
-pgAdmin4 is an essential tool for managing your hosted Postgres database. With its user-friendly interface, you can easily perform various database operations, from creating databases and tables to running complex queries. By following this guide, you should be well-equipped to utilize pgAdmin4 effectively.
+pgAdmin4 gives you a graphical interface for managing your hosted Postgres database, from creating databases and tables to running complex queries. This guide covered the setup you need to use it with Neon.
 
 <NeedHelp />

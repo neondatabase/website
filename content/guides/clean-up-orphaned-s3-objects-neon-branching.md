@@ -33,6 +33,12 @@ Neon Object Storage is in beta and currently available in AWS US East (Ohio) (`a
 
 In this tutorial, you'll build a small demo app that simulates the drift problem, then write a vacuum job and test it on a Neon branch before promoting it to production. The workflow is identical for your own application: declare the bucket, measure drift with the checker, run the vacuum on a branch, and promote.
 
+<CopyPrompt
+  src="/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Prerequisites
 
 Before starting, make sure you have:

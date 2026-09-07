@@ -277,7 +277,7 @@ export async function POST({ request }: APIContext) {
 }
 ```
 
-The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then utilizes the Clip embedding model to extract the image embedding. Further, it queries the Lakebase Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
+The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then uses the Clip embedding model to extract the image embedding. Further, it queries the Lakebase Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
 
 The relevant images are filtered based on a similarity threshold of 90%, and their URLs are stored in an array. Finally, the endpoint returns a JSON response containing the URLs of the relevant images. This process enables efficient and high quality retrieval of similar images based on their embeddings, completing the reverse image search functionality within the application.
 
@@ -370,7 +370,7 @@ The response from the query API is received and parsed as JSON. A new div elemen
 
 The resulting search results, consisting of dynamically generated images are then visible to the users. This approach enables real-time querying and display of similar images based on the user upload(s).
 
-With all that, your Astro application is ready to be deployed on Vercel with ease.
+With all that, your Astro application is ready to be deployed on Vercel.
 
 ## Deploy to Vercel
 

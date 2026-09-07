@@ -9,7 +9,7 @@ updatedOn: '2026-07-31T19:05:29.503Z'
 
 Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Lakebase Postgres.
 
-We'll focus on the essential concepts and patterns for implementing a robust authentication system, including user registration, secure password storage, token-based authentication, and protected routes.
+We'll focus on the essential concepts and patterns for implementing an authentication system, including user registration, secure password storage, token-based authentication, and protected routes.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ To follow the steps in this guide, you will need:
 
 ## Understanding JWT in Our Go Authentication System
 
-Before we dive into the implementation details, let's understand how JSON Web Tokens (JWT) work and why they're a popular choice for authentication systems.
+Before the implementation details, let's look at how JSON Web Tokens (JWT) work and why they're a popular choice for authentication systems.
 
 JWT provides a compact, self-contained way to securely transmit information as a JSON object. In our Go authentication system, we'll use JWTs to maintain user sessions without server-side storage.
 
@@ -361,7 +361,7 @@ func (r *UserRepository) GetUserByID(id uuid.UUID) (*User, error) {
 
 This simple repository provides methods to create new users and retrieve existing users by email, which we'll need for our authentication logic. The `User` struct represents the core user data we'll store in the database.
 
-Additionally, we store the `last_login` timestamp to track user activity along with the creation timestamp.
+We also store the `last_login` timestamp to track user activity along with the creation timestamp.
 
 ## Create the JWT authentication system
 

@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -55,7 +55,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Database storage
 
 - Increased ingestion speeds
-- Storage limits up to 200 TB per project
+- Continued storage scaling
 
 ### Postgres compute
 

@@ -132,7 +132,7 @@ Neon exports a range of metrics for your dashboards, including Neon-specific met
 - `host_cpu_seconds_total`: Track the CPU seconds accumulated in different operating modes (user, system, idle, etc.).
 - `host_memory_active_bytes`: Monitor active memory usage on the compute.
 
-For a comprehensive list of all metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
 
 </Steps>
 

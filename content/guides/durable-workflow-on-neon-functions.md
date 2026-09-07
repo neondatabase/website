@@ -22,6 +22,12 @@ Inngest handles the orchestration layer: event triggers, step-level retries, and
 
 In this tutorial, you will build an automated lead enrichment pipeline that receives a customer signup event, writes initial state to Lakebase Postgres, researches the company using a web search tool to generate an executive summary, executes a durable delay, and updates the database record upon completion. This serves as a blueprint for building multi-step AI agents, human-in-the-loop approval flows, scheduled reporting jobs, or any workflow which requires durable retries.
 
+<CopyPrompt
+  src="/prompts/durable-workflow-on-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Architecture overview
 
 Here is how events, compute, and data flow through an Inngest + Neon Functions workflow:

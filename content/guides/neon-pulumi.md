@@ -382,7 +382,7 @@ Once you have defined your resources in `index.ts`:
     Duration: 23s
     ```
 
-You have now successfully created and managed Neon resources using Pulumi! You can continue to modify your `index.ts` file to add, change, or remove resources. After making changes, always run `pulumi preview` to review the plan before deploying with `pulumi up`.
+You have created and managed Neon resources using Pulumi. You can continue to modify your `index.ts` file to add, change, or remove resources. After making changes, always run `pulumi preview` to review the plan before deploying with `pulumi up`.
 
 ## Accessing secret outputs
 

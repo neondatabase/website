@@ -72,4 +72,4 @@ To get started, play around with `app/tools/tool1/page.tsx`.
 
 ## Get Started
 
-[Clone the template](https://github.com/sam-harri/internal_tooling_neon_stack), connect your Neon and StackAuth accounts, and deploy to Vercel. Your next internal tool is just a few commands away!
+[Clone the template](https://github.com/sam-harri/internal_tooling_neon_stack), connect your Neon and StackAuth accounts, and deploy to Vercel. Your next internal tool is a few commands away.

@@ -78,11 +78,11 @@ Visually, you can map your database similarly to your Git branches:
 | feature-a  | main              | feature-a   | main               |
 | feature-b  | main              | feature-b   | main               |
 
-## Putting It All Together: A Git Hook for Seamless Provisioning
+## Putting It All Together: A Git Hook for Automatic Provisioning
 
 We have the components: a Git worktree for code and a Neon branch for data but configuring them manually for every task is tedious.
 
-To make this seamless, we can use a Git `post-checkout` hook. This script triggers automatically whenever a new worktree is created. Its job is simple:
+To automate this, we can use a Git `post-checkout` hook. This script triggers automatically whenever a new worktree is created. Its job is simple:
 
 1.  **Detect** that a new worktree is being created.
 2.  **Bootstrap** the environment by copying your main `.env` file.
@@ -258,7 +258,7 @@ When you checkout a new branch in a worktree, this script copies your main `.env
 This workflow is not specific to Claude Code. Since the Git hook operates at the file system level, it will work with any AI coding agent that can use a Git worktree as its workspace. See [Manual worktree creation](#manual-worktree-creation) below for how to set up worktrees manually if your agent doesn't have built-in support.
 </Admonition>
 
-Modern AI tools like [Claude Code](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees) already have built-in support for Git worktrees, making this workflow incredibly seamless.
+Modern AI tools like [Claude Code](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees) already have built-in support for Git worktrees, so this workflow fits in without extra setup.
 
 Suppose you are working in your main directory, but you want to delegate a new authentication feature to an AI agent running in the background. You simply run:
 

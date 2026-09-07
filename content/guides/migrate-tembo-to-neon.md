@@ -21,7 +21,7 @@ Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.
 Plan your migration accordingly to avoid any disruption to your services.
 </Admonition>
 
-## Tembo—Neon feature comparison
+## Tembo and Neon feature comparison
 
 While both Tembo and Neon provide managed Postgres, Neon's architecture offers some advantages. Here’s a quick comparison of key features:
 

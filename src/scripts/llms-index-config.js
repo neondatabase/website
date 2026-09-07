@@ -197,6 +197,11 @@ module.exports = {
         'API reference, SDKs, Terraform provider, Postgres compatibility, and platform-level tooling.',
       extraEntries: [
         {
+          title: 'Neon API endpoint index',
+          url: 'https://neon.com/docs/reference/api/llms.txt',
+          description: 'Index of every Neon API endpoint, grouped by resource',
+        },
+        {
           title: 'Neon API OpenAPI Spec',
           url: 'https://neon.com/api_spec/release/v2.json',
           description: 'Machine-readable OpenAPI 3.0 specification for the Neon API',
@@ -276,6 +281,9 @@ module.exports = {
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
     { pathPrefix: 'cli/', section: 'Neon CLI' },
+    // Fold the hand-written API intro pages (reference/api/*.md) into the main
+    // Reference list instead of a two-item "API" subsection.
+    { pathPrefix: 'reference/api/', section: 'Reference', subsection: null },
     { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },

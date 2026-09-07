@@ -1,6 +1,6 @@
 ---
 title: Using DbVisualizer with Lakebase Postgres
-subtitle: A comprehensive guide on how to manage your Postgres database using DbVisualizer.
+subtitle: A guide on how to manage your Postgres database using DbVisualizer.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-26T00:00:00.000Z'
@@ -110,9 +110,9 @@ The sidebar will now display your connected Lakebase Postgres database. You can 
 
 ## Conclusion
 
-You have successfully connected DbVisualizer to your Lakebase Postgres database and learned how to perform basic operations such as running SQL queries, managing tables, and importing/exporting data. DbVisualizer's user-friendly interface makes it easy to interact with your database, whether you're a beginner or an experienced user.
+You have connected DbVisualizer to your Lakebase Postgres database and learned how to perform basic operations such as running SQL queries, managing tables, and importing/exporting data. DbVisualizer's user-friendly interface makes it easy to interact with your database.
 
-Furthermore, DbVisualizer offers a rich, tab-based user interface that is highly customizable. The Pro version enhances this experience with advanced features like [Git integration](https://www.dbvis.com/docs/ug/working-with-git/) for version controlling your scripts and powerful [charting tools](https://www.dbvis.com/docs/ug/working-with-charts/) to visualize your data directly from query result sets. You can explore the official documentation for more advanced functionalities and tips to maximize your productivity with DbVisualizer. Check the resources section below for useful links.
+DbVisualizer also offers a customizable, tab-based user interface. The Pro version adds features like [Git integration](https://www.dbvis.com/docs/ug/working-with-git/) for version controlling your scripts and [charting tools](https://www.dbvis.com/docs/ug/working-with-charts/) to visualize your data directly from query result sets. You can explore the official documentation for more advanced functionalities and tips to maximize your productivity with DbVisualizer. Check the resources section below for useful links.
 
 ## Resources
 
