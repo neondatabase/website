@@ -18,6 +18,8 @@ Neon issues two kinds of credentials, and they do different jobs:
 - **Platform API keys** manage your Neon setup: create projects and branches, change settings, read usage, and issue the service credentials your app uses. Use these in your tooling and CI.
 - **Service credentials** do your running app's work, like an object read or a model call. Use these in your app's runtime environment.
 
+![Diagram of Neon's two credential kinds: platform API keys that manage your Neon setup, and service credentials your running app uses, with a platform API key issuing service credentials in one direction only.](/docs/concepts/credentials-access.png 'no-border')
+
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
 ## Which credential do you need?
@@ -30,6 +32,9 @@ Availability differs by product and by region. See [Product availability](/docs/
 | Authorize an end user through the Data API                                    | A JWT from a trusted issuer, plus database roles and RLS           | Authorize your app's end users | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
 
 ## Platform API keys
+
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
 
 An API key is a bearer token for the [Neon API](/docs/reference/api). There's one API surface for the whole platform rather than one per product, so a single key covers Postgres, Object Storage, the AI Gateway, Functions, and Managed Better Auth alike. Keys create projects and branches, change settings, read usage, and issue the service credentials your app uses.
 
@@ -45,7 +50,18 @@ Any API key that can write to a project can also create service credentials for 
 
 To create, list, or revoke keys, see [Manage API keys](/docs/manage/api-keys).
 
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
+
+![Diagram of the three platform API key kinds nested by decreasing reach: personal keys, then organization keys, then project-scoped keys.](/docs/concepts/credentials-api-key-kinds.png 'no-border')
+
+  </div>
+</div>
+
 ## Service credentials
+
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
 
 Most of what your running app connects to uses service credentials. The Data API is the exception, and it's covered at the end of this section.
 
@@ -56,9 +72,20 @@ Object Storage and the AI Gateway use one shared credential, and the scopes you 
 
 Present a credential to a service it has no matching scope for and the request is refused. Attach the narrowest scopes the workload actually needs, and reach for `storage:read` before `storage:write`.
 
-A credential has two dimensions. Its scopes say what it can do. Its **branch anchor** says where it reaches.
+A credential has two independent dimensions. Its scopes say what it can do. Its **branch anchor** says where it reaches. You set the two separately, and one doesn't constrain the other.
+
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
+
+![Diagram of a service credential defined by two independent things: the scopes that say what it can do, and the branch anchor that says where it reaches.](/docs/concepts/credentials-scope-branch.png 'no-border')
+
+  </div>
+</div>
 
 ### A branch and its descendants
+
+<div className="flex items-center gap-6 sm:flex-col">
+  <div style={{ flex: '1 1 50%' }}>
 
 A credential works on the branch it's created on and on any branch descended from it, including branches created later. It does not work on that branch's ancestors (its parent or above) or on sibling branches elsewhere in the project. That affects which branch you should choose:
 
@@ -66,6 +93,14 @@ A credential works on the branch it's created on and on any branch descended fro
 - **Anchored on a child branch:** works on that branch and its own descendants, but not on its parent and not on a sibling. This is the least-privilege choice for one environment.
 
 A credential anchored on your default branch therefore reaches every branch in that lineage, which is convenient for preview workflows and worth being deliberate about in production. Anchor to the narrowest branch that needs the credential, since its descendants inherit it. For how branches relate to each other, see [The object model](/docs/concepts/the-object-model) and [Branching](/docs/introduction/branching).
+
+  </div>
+  <div style={{ flex: '1 1 50%' }}>
+
+![Diagram of a credential anchored on a branch reaching that branch and its descendants but not its ancestors or sibling branches.](/docs/concepts/credentials-branch-anchor.png 'no-border')
+
+  </div>
+</div>
 
 ### S3 keys and bearer tokens
 
@@ -91,6 +126,8 @@ Inbound requests are yours to authenticate. A function has a public HTTPS URL an
 The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't use service credentials. They use JWTs, the signed bearer tokens standard in web auth: a request carries a JWT from an issuer the project trusts, a Postgres role is selected from it and the query runs as that role, so your `GRANT`s and RLS decide what it can do. Which branch you touch follows from the endpoint you call, not from anything inside the token.
 
 With an external provider, you register the issuer yourself by adding its JWKS URL to the project. With Managed Better Auth, Neon provides the JWKS URL for you. Either way the trust applies project-wide by default, and can be narrowed to a single branch.
+
+![Diagram of an end user's JWT verified by the Data API and run as a Postgres role whose access is governed by GRANTs and row-level security.](/docs/concepts/credentials-data-api-jwt.png 'no-border')
 
 To register providers, see [Manage the Data API](/docs/data-api/manage). For roles, `GRANT`s, and RLS, see [Access control & security](/docs/data-api/access-control).
 
