@@ -14,7 +14,7 @@
     },
     "api-key": {
       "type": "string",
-      "describe": "Neon API key, authenticates without `neon auth`",
+      "describe": "Neon API key, authenticates without `neon login`",
       "default": "",
       "defaultText": "NEON_API_KEY environment variable"
     },
@@ -244,24 +244,6 @@
           "description": ""
         }
       ]
-    },
-    "auth": {
-      "aliases": [
-        "login"
-      ],
-      "positionals": [],
-      "options": {
-        "context-file": {
-          "type": "unknown",
-          "hidden": true
-        },
-        "keyring": {
-          "type": "boolean",
-          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
-        }
-      },
-      "commands": {},
-      "describe": "Authenticate"
     },
     "bootstrap": {
       "aliases": [],
@@ -3129,7 +3111,7 @@
           "examples": [
             {
               "command": "$0 profile create work",
-              "description": "Sign in with the browser, like `neon auth --profile work`"
+              "description": "Sign in with the browser, like `neon login --profile work`"
             },
             {
               "command": "$0 profile create ci --mint --org-id org-abc-123",
@@ -4034,6 +4016,24 @@
       },
       "describe": "Manage VPC endpoints and project VPC restrictions",
       "usage": "$0 vpc <sub-command> [options]"
+    },
+    "login": {
+      "aliases": [
+        "auth"
+      ],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
+        }
+      },
+      "commands": {},
+      "describe": "Authenticate"
     }
   }
 }

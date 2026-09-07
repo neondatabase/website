@@ -40,7 +40,9 @@ const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 //   value = what the docs expect (old primary, now an alias in schema)
 // The refresh script will swap these so docs-facing tooling stays stable.
 // Remove an entry once docs are updated to match the CLI's new name.
-const PREFER_ALIAS = {};
+const PREFER_ALIAS = {
+  auth: 'login', // Docs lead with `neon login`; neonctl still has `auth` primary. Remove when neonctl makes login primary.
+};
 
 // The monorepo publishes releases for many packages, so `/releases/latest`
 // is not necessarily the CLI. List releases and pick the highest-versioned

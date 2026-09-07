@@ -1225,8 +1225,8 @@
                   slug: cli/quickstart
             - title: Setup and context
               items:
-                - title: auth
-                  slug: cli/auth
+                - title: login
+                  slug: cli/login
                 - title: init
                   slug: cli/init
                 - title: ask
