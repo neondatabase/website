@@ -166,20 +166,29 @@ describe('Claimable Neon provisioning form', () => {
       database: result.credentials.database_url,
       data: result.credentials.services.data_api.url,
       auth: result.credentials.services.auth.base_url,
-      claim: result.claim.verification_uri_complete,
     }).forEach((value) => expect(screen.getByText(value)).toBeVisible());
 
-    const warning = screen.getByText(/Copy these values now/);
-    expect(warning).toHaveTextContent('This page will not show them again.');
-    expect(warning).toHaveTextContent('The claim link expires at');
-    expect(warning).toHaveTextContent('If it expires, create another project from this page.');
+    expect(screen.queryByText('Claim link')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Copy Claim link' })).not.toBeInTheDocument();
+    const summary = screen.getByText(/Save these values now/);
+    expect(summary).toHaveTextContent('This page will not show them again.');
+    expect(summary).toHaveTextContent('Claim deadline:');
+    expect(summary).toHaveTextContent('Project expires:');
+    expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    await waitFor(() => {
+      fireEvent.focus(screen.getByRole('button', { name: 'More info.' }));
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    });
+    const warning = await screen.findByRole('tooltip');
+    expect(warning).toHaveTextContent(
+      'If the claim link expires, create another project from this page.'
+    );
     expect(warning).toHaveTextContent('Opening the claim link does not freeze access.');
     expect(warning).toHaveTextContent('Continuing to Neon on the claim page rotates DATABASE_URL.');
     expect(warning).toHaveTextContent(
       'After the transfer finishes, pull a new one from the Neon console.'
     );
     expect(warning).toHaveTextContent('Managed Better Auth and the Data API stay enabled.');
-    expect(warning).toHaveTextContent('The project itself expires on');
     expect(screen.getByRole('link', { name: 'Open the claim link' })).toHaveAttribute(
       'href',
       result.claim.verification_uri_complete
@@ -198,9 +207,11 @@ describe('Claimable Neon provisioning form', () => {
     ).toBeVisible();
     expect(screen.getByText('NEON_DATA_API_URL')).toBeVisible();
     expect(screen.queryByText('NEON_AUTH_BASE_URL')).not.toBeInTheDocument();
-    expect(screen.getByText(/Copy these values now/)).toHaveTextContent(
-      'The Data API stays enabled.'
-    );
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'More info.' }));
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    });
+    expect(await screen.findByRole('tooltip')).toHaveTextContent('The Data API stays enabled.');
   });
 
   it('shows denied capabilities without suggesting they were granted', async () => {
@@ -217,7 +228,11 @@ describe('Claimable Neon provisioning form', () => {
       'Managed Better Auth was not granted. Claim the project to enable it.'
     );
     expect(screen.queryByText('NEON_AUTH_BASE_URL')).not.toBeInTheDocument();
-    expect(screen.getByText(/Copy these values now/)).not.toHaveTextContent('stays enabled');
+    await waitFor(() => {
+      fireEvent.focus(screen.getByRole('button', { name: 'More info.' }));
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    });
+    expect(await screen.findByRole('tooltip')).not.toHaveTextContent('stays enabled');
   });
 
   it('copies the exact credential and displays copied feedback', async () => {

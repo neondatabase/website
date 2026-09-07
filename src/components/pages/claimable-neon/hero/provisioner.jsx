@@ -2,9 +2,10 @@
 
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
+import Tooltip from 'components/shared/tooltip';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import authIcon from 'images/pages/claimable-neon/hero/auth.svg';
@@ -121,8 +122,8 @@ const Credential = ({ label, value }) => (
     <p className="font-mono text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-90">
       {label}
     </p>
-    <div className="mt-2 flex min-w-0 items-start gap-3 border border-gray-new-20 bg-black-new py-2.5 pr-2.5 pl-4">
-      <code className="min-w-0 flex-1 py-0.5 font-mono text-base leading-snug tracking-extra-tight break-all text-gray-new-80">
+    <div className="mt-2 flex min-w-0 items-center gap-3 border border-gray-new-20 bg-black-new py-2.5 pr-2.5 pl-4">
+      <code className="min-w-0 flex-1 truncate py-0.5 font-mono text-base leading-snug tracking-extra-tight text-gray-new-80">
         {value}
       </code>
       <CopyButton value={value} ariaLabel={`Copy ${label}`} />
@@ -137,14 +138,16 @@ Credential.propTypes = {
 
 const ProvisionResult = ({ result, onReset }) => {
   const headingRef = useRef(null);
+  const infoTooltipId = useId();
   const { capabilities, claim, credentials, project } = result;
+  const [claimDeadline] = useState(() => Date.now() + claim.expires_in * 1000);
   const formatTime = (value) =>
     new Intl.DateTimeFormat(undefined, {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(new Date(value));
   const expiresAt = formatTime(project.expires_at);
-  const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
+  const claimExpiresAt = formatTime(claimDeadline);
   const granted = new Set(
     capabilities.filter(({ granted: isGranted }) => isGranted).map(({ capability }) => capability)
   );
@@ -204,7 +207,6 @@ const ProvisionResult = ({ result, onReset }) => {
         {credentials.services.auth?.base_url && (
           <Credential label="NEON_AUTH_BASE_URL" value={credentials.services.auth.base_url} />
         )}
-        <Credential label="Claim link" value={claim.verification_uri_complete} />
       </div>
 
       <div className="mt-auto border-t border-gray-new-20 pt-8">
@@ -230,13 +232,31 @@ const ProvisionResult = ({ result, onReset }) => {
           </Button>
         </div>
         <p className="mt-4 text-sm leading-normal tracking-extra-tight text-gray-new-60">
-          Copy these values now. This page will not show them again. The claim link expires at{' '}
-          {claimExpiresAt}. If it expires, create another project from this page. Opening the claim
-          link does not freeze access. Continuing to Neon on the claim page rotates{' '}
+          Save these values now. This page will not show them again.{' '}
+          <button
+            className="border-b border-dashed border-white/40 text-gray-new-90 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            type="button"
+            data-tooltip-id={infoTooltipId}
+          >
+            More info.
+          </button>
+          <br />
+          Claim deadline: {claimExpiresAt}. Project expires: {expiresAt}.
+        </p>
+        <Tooltip
+          id={infoTooltipId}
+          className="max-w-80"
+          place="bottom"
+          openEvents={{ mouseover: true, focus: true, click: true }}
+          closeEvents={{ mouseout: true, blur: true }}
+          globalCloseEvents={{ escape: true, clickOutsideAnchor: true }}
+        >
+          If the claim link expires, create another project from this page. Opening the claim link
+          does not freeze access. Continuing to Neon on the claim page rotates{' '}
           <code>DATABASE_URL</code>. After the transfer finishes, pull a new one from the Neon
           console.
-          {stayEnabledSentence} The project itself expires on {expiresAt}.
-        </p>
+          {stayEnabledSentence}
+        </Tooltip>
       </div>
     </FormPanel>
   );
