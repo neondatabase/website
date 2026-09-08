@@ -828,6 +828,12 @@
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
+        - section: Function Triggers
+          items:
+            - title: Overview
+              slug: compute/functions/triggers/overview
+            - title: Schedule a function
+              slug: compute/functions/triggers/schedule
         - section: Use cases
           items:
             - title: AI agents
