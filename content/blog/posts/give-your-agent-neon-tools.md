@@ -88,24 +88,15 @@ The mechanical layers regenerate on every spec pull. The DX and AX layers do not
 
 ## Building @neon/tools
 
-`@neon/tools` sits on top of that layered pipeline. Each step adds a contract the layer below does not have. The mechanical layers regenerate. The DX and AX layers do not.
+We built `@neon/tools` in part to expand the hosted [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server). However, we quickly realized that code-generation alone isn't enough for MCP. Hence, we decided to leverage coding agents as part of our pipeline. Deterministic code generation and agent-driven code generation compose into a pipeline that allows us to ship higher-level MCP tools and CLI workflows.
 
-### OpenAPI gives us complete coverage
+### Building great MCP and CLIs for agents
 
-The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) is the source for the raw SDK. This is the true codegen layer: it turns 169 operations into typed fetch functions and Zod request schemas.
+CLIs and MCPs can be fully generated off OpenAPI specs, but in the age of agent-driven development it's almost free (aside from token costs, of course) to build tailored ergonomic layers on top to provide better developer and agent experiences.
 
-This layer stays close to HTTP. It gives us complete API coverage and catches drift, but it does not decide what makes a good method for developers or agents.
+For each developer surface, you need to make tailored calls around error handling, abstraction level, return values, etc. Those need to be tailored towards both agents and developers.
 
-### Adding an ergonomic client
-
-[`@neon/sdk`](/blog/neon-sdk) is our zero-dependencies, fetch-based API client SDK. [`createNeonClient()`](https://neon.com/docs/reference/typescript-sdk) lives in that package and groups common operations into namespaces such as `projects`, `branches`, `postgres`, `snapshots`, `storage`, `functions`, and `auth`. It also adds behavior that the OpenAPI operation does not carry on its own:
-
-- automatic pagination for list methods
-- retries and typed errors
-- readiness polling for asynchronous operations
-- composed methods such as `projects.createAndConnect`, `branches.resetFromParent`, and `branches.compareSchema`
-
-The raw layer still covers every API endpoint. The ergonomic client is not regenerated from the spec. It wraps the methods and workflows we want to support as a deliberate interface, written with AI assistance, then reviewed and checked into the repo.
+Once you have a raw code-generation pipeline, you can fill the gaps with agents to quickly ship ergonomic layers on top of your raw OpenAPI spec whenever the spec changes. `@neon/tools` is our answer to automating MCP tool generation with code generation and coding agents.
 
 ### Turning SDK methods into agent tools
 
@@ -160,9 +151,9 @@ The distinction between create methods is explicit:
 
 Some SDK methods stay out of the tool catalog on purpose. Waiting is already part of write tools, raw role-password retrieval should not be a model-facing operation, and downloading an object as binary data is not a useful JSON tool response.
 
-## The same catalog now powers Neon MCP
+## @neon/tools now powers Neon MCP
 
-We built `@neon/tools` in part to expand the hosted [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server). The expanded surface includes:
+With `@neon/tools`, we grew the [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server) to over 101 tools. The expanded surface includes:
 
 - project updates, recovery, members, permissions, regions, and operations
 - branch, Postgres role, and database management
