@@ -3,11 +3,11 @@ title: Build a Next.js app with your AI agent
 subtitle: Connect Neon to your agent, then build and grow your app from prompts
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
-  prompt that creates a table, seeds sample rows, and adds a page that lists
-  them. Includes the key files to expect (schema, client, and page), and
-  follow-up prompts for sign-in, image uploads, AI summaries, and branching.
+  prompt that builds a public blog with seeded posts and a publish form.
+  Includes the key files to expect and follow-up prompts for sign-in, image
+  uploads, and AI summaries.
 enableTableOfContents: true
-updatedOn: '2026-09-05T20:05:57.307Z'
+updatedOn: '2026-09-08T20:56:11.000Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -19,39 +19,31 @@ Connect your AI coding agent to Neon once, send it one prompt, and you'll have a
 Run these in your terminal to create your app and connect Neon (you'll sign in to Neon when prompted):
 
 ```bash filename="Terminal"
-npx create-next-app@latest notes-app --yes --app
-cd notes-app
+npx create-next-app@latest my-app --yes --app
+cd my-app
 npx neon@latest init
 ```
 
-`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file and adds a `neon.ts` config.
+`neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file.
 
-When `neon init` asks "Manage this project's Neon setup as code?", choose **No** — this notes app only needs Postgres, and you can add backend features later with the prompts further down this page.
-
-Then pull the connection details into your env file:
-
-```bash filename="Terminal"
-npx neon@latest env pull
-```
-
-If the directory was already linked, `init` skips the pull, so this step makes sure `DATABASE_URL` is in place before the build. Rerun it any time to refresh the values.
+When `neon init` asks "Manage this project's Neon setup as code?", choose **No** — this blog only needs Postgres, and you can add backend features later with the prompts further down this page.
 
 ## Build your app with one prompt
 
 In your AI agent's chat, paste:
 
 ```text shouldWrap filename="AI assistant prompt"
-In this Next.js App Router project, build me a working notes app backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a notes table (title, body, created_at), seed 5 example rows, and add a /notes page, a Server Component, that lists them newest first. Then run it and show me the actual rows, not "done". If anything fails, show me the error instead of working around it.
+In this Next.js App Router project, build me a working public blog backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a posts table (title, body, created_at), seed a few example posts, add a public page that lists them newest first, and add a simple create/publish form so you can add a post. Run it and show me the actual posts, not "done"; if anything fails show me the error instead of working around it.
 ```
 
 ## What you'll get
 
-Your agent writes these key files and uses Neon's MCP tools to create the `notes` table and seed it. It may add others too, such as `drizzle.config.ts` or route files. You review the result, not every step.
+Your agent writes these key files and uses Neon's MCP tools to create the `posts` table and seed it. It may add others too, such as `drizzle.config.ts`. You review the result, not every step.
 
 ```typescript filename="lib/db/schema.ts"
 import { bigint, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const notes = pgTable('notes', {
+export const posts = pgTable('posts', {
   id: bigint('id', { mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
   title: text('title').notNull(),
   body: text('body').notNull(),
@@ -69,60 +61,79 @@ const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle(sql, { schema });
 ```
 
-```tsx filename="app/notes/page.tsx"
+```tsx filename="app/page.tsx"
 import { desc } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 import { db } from '@/lib/db/client';
-import { notes } from '@/lib/db/schema';
+import { posts } from '@/lib/db/schema';
 
 export const dynamic = 'force-dynamic';
 
-export default async function NotesPage() {
-  const rows = await db.select().from(notes).orderBy(desc(notes.createdAt));
+async function createPost(formData: FormData) {
+  'use server';
+
+  const title = formData.get('title');
+  const body = formData.get('body');
+
+  if (typeof title !== 'string' || typeof body !== 'string') return;
+
+  await db.insert(posts).values({ title, body });
+  revalidatePath('/');
+}
+
+export default async function BlogPage() {
+  const rows = await db.select().from(posts).orderBy(desc(posts.createdAt));
 
   return (
-    <ul>
-      {rows.map((note) => (
-        <li key={note.id}>
-          <strong>{note.title}</strong>
-          <p>{note.body}</p>
-        </li>
+    <main>
+      <form action={createPost}>
+        <input name="title" placeholder="Post title" required />
+        <textarea name="body" placeholder="Write your post" required />
+        <button type="submit">Publish</button>
+      </form>
+
+      {rows.map((post) => (
+        <article key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+        </article>
       ))}
-    </ul>
+    </main>
   );
 }
 ```
 
 ## Run it
 
-```bash
+If it's not already running, start it with:
+
+```bash filename="Terminal"
 npm run dev
 ```
 
-Open [localhost:3000/notes](http://localhost:3000/notes) and you'll see your seeded notes, newest first. You can also open the table in the [Neon Console](https://console.neon.tech).
+Open [localhost:3000](http://localhost:3000) and you'll see your seeded posts, newest first, with a form to publish another. You can also open the table in the [Neon Console](https://console.neon.tech).
 
 </Steps>
 
 ## Keep building
 
-The next three prompts each add a backend service to the app you just built. Your agent manages these services as code in `neon.ts` and applies them with `neon deploy`.
+The next three prompts each add a backend service to the app you just built.
 
-AI Gateway requires a paid Neon plan; Object Storage and Functions currently run only in AWS US East (Ohio), so free-plan or non-Ohio projects may not be able to add them yet.
+Object Storage runs in the AWS US East (Ohio) region. AI Gateway requires a paid Neon plan.
 
 ```text shouldWrap filename="Prompt: add sign-in"
-Add Managed Better Auth so each note belongs to a signed-in user: add a user_id to notes, scope every query to the current user, and add sign-in and sign-out. Follow https://neon.com/docs/auth/quick-start/nextjs-api-only.md, since this API is in beta.
+Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Declare Managed Better Auth in neon.ts and run neon deploy to provision it.
 ```
 
+Follow the [Next.js auth quickstart](/docs/auth/quick-start/nextjs-api-only).
+
 ```text shouldWrap filename="Prompt: add image uploads"
-Let each note carry an image using Neon Object Storage. Store the object key on the row, never the bytes, add an upload control, and render each image. Follow https://neon.com/docs/storage/get-started.md.
+Add an optional cover image to each post using Neon Object Storage. Store the object key on the post, never the bytes, add an upload control, and render the cover image on the post. Declare Object Storage in neon.ts and run neon deploy to provision it.
 ```
 
 ```text shouldWrap filename="Prompt: add AI summaries"
-Add a one-line AI summary to each note using the Neon AI Gateway, stored in a summary column. Pick a current model from the catalog. Follow https://neon.com/docs/ai-gateway/models.md. The AI Gateway needs a paid Neon plan (Launch or Scale), so if the request is rejected, tell me to upgrade rather than working around it.
-```
-
-```text shouldWrap filename="Prompt: work on a branch"
-Create a Neon branch so I can try changes in isolation, then switch to it: npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature.
+Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Declare AI Gateway in neon.ts and run neon deploy to provision it.
 ```
 
 <NeedHelp/>
