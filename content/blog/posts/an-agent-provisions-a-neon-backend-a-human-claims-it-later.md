@@ -1,6 +1,11 @@
 ---
-title: An agent can provision a Neon backend, a human can claim it later
-description: Who'll come through the door?
+title: An agent provisions a Neon backend, a human claims it later
+description: >-
+  We're launching Claimable Neon to give the agent another path. This flow
+  implements the anonymous registration method in auth.md, the open agent
+  registration protocol authored by WorkOS, to give agents a way to provision a
+  temporary Neon project without creating an account or collecting payment
+  details.
 excerpt: >-
   We're launching Claimable Neon to give the agent another path. This flow
   implements the anonymous registration method in auth.md, the open agent
@@ -20,16 +25,24 @@ cover:
   alt: null
 isFeatured: false
 seo:
-  title: An agent can provision a Neon backend, a human can claim it later - Neon
-  description: Who'll come through the door?
+  title: An agent provisions a Neon backend, a human claims it later - Neon
+  description: >-
+    We're launching Claimable Neon to give the agent another path. This flow
+    implements the anonymous registration method in auth.md, the open agent
+    registration protocol authored by WorkOS, to give agents a way to provision a
+    temporary Neon project without creating an account or collecting payment
+    details.
   keywords: []
   noindex: false
-  ogTitle: An agent can provision a Neon backend, a human can claim it later - Neon
-  ogDescription: Who'll come through the door?
+  ogTitle: An agent provisions a Neon backend, a human claims it later - Neon
+  ogDescription: >-
+    We're launching Claimable Neon to give the agent another path. This flow
+    implements the anonymous registration method in auth.md, the open agent
+    registration protocol authored by WorkOS, to give agents a way to provision a
+    temporary Neon project without creating an account or collecting payment
+    details.
   image: null
 ---
-
-## Who'll come through the door?
 
 Everyone has experienced this:
 
