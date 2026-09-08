@@ -33,6 +33,12 @@ const RootLayout = ({ children }) => (
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
+      {/* Dev-only live reload for content edits */}
+      {process.env.NODE_ENV === 'development' && (
+        <Script id="content-live-reload" strategy="afterInteractive">
+          {`(function c(){try{var s=new WebSocket('ws://localhost:3549');s.onmessage=function(e){if(e.data==='reload')location.reload()};s.onclose=function(){setTimeout(c,1000)};s.onerror=function(){s.close()}}catch(e){setTimeout(c,1000)}})()`}
+        </Script>
+      )}
       <link rel="preconnect" href={LINKS.console} />
       <RiveWasm />
     </head>
