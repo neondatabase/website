@@ -179,7 +179,7 @@ Every non-read operation in `@neon/tools` is conservatively marked as requiring 
 
 Those annotations are advice to the host. The protocol does not enforce approval by itself.
 
-The hosted Neon MCP Server adds its own controls:
+The hosted Neon MCP Server builds on top of the `@neon/tools`:
 
 - OAuth or API-key authentication
 - read-only mode
