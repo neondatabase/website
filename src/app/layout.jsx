@@ -13,8 +13,6 @@ import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import ThemeProvider from './theme-provider';
 
-export const preferredRegion = 'edge';
-
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
