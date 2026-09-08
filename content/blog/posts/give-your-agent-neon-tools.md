@@ -273,7 +273,7 @@ Start building:
 npx neon@latest mcp
 ```
 
-- **Use** `@neon/tools` when you are building an agent platform or embedding Neon tools inside your own agent runtime. Select only the SDK methods the agent needs, then use the descriptors directly or convert them to MCP, Mastra, or Eve. The `@neon/tools` [README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools) has the full selector list and current examples.
+- **Use** `@neon/tools` when you are building an agent platform or embedding Neon tools inside your own agent runtime. Select only the SDK methods the agent needs, then expose them through your MCP server, an MCP-tool-capable agent, or frameworks like Mastra or Eve.
 
 ```
 npm install @neon/tools
