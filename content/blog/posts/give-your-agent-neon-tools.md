@@ -263,7 +263,7 @@ export default defineTool(
 
 ## Getting started
 
-We've treated agents as a first interface to Neon since we [shipped our MCP server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) in December 2024. `@neon/tools` is the latest layer of that work.
+We've treated agents as a core way to interact with Neon since we [shipped our MCP server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) in December 2024. `@neon/tools` is the latest layer of that work.
 
 Start building:
 
