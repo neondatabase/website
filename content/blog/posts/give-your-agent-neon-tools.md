@@ -78,7 +78,7 @@ The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) code-generate
 Two pipelines run in parallel from the same spec:
 
 1. OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()`
-2. OpenAPI spec → code generation → `@neon/tools` Zod request schemas → ergonomic client → agent tools
+2. OpenAPI spec → code generation → `@neon/tools` Zod request schemas → agent tools
 
 The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `branches.createAndConnect` or an MCP tool. Someone has to decide that wrap.
 
