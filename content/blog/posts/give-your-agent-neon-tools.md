@@ -75,10 +75,10 @@ Traditional deterministic code generation gets you raw methods, but that only ge
 
 The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) code-generates typed fetch functions and Zod request schemas. [`@neon/sdk`](/blog/neon-sdk) exposes the raw API methods, but also adds `createNeonClient()`: a higher-level, ergonomic client built on top of the raw layer for a better developer experience. `@neon/tools` builds on that same ergonomic layer and the Zod request schemas to publish agent tools.
 
-Two pipelines run in parallel from the same spec:
+Two packages `@neon/sdk` and `@neon/tools` now build on top of each other:
 
-1. OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()`
-2. OpenAPI spec → code generation → `@neon/tools` Zod request schemas + `@neon/sdk` ergonomic layer → agent tools
+`@neon/sdk`: OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()` ergonomic client
+`@neon/tools`: OpenAPI spec → code generation → `@neon/tools` Zod request schemas + `@neon/sdk` ergonomic layer → agent tools
 
 The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `branches.createAndConnect` or an MCP tool. Someone has to decide that wrap.
 
