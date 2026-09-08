@@ -135,21 +135,11 @@ const created = await tools["projects.createAndConnect"].execute({
 });
 ```
 
-The record stays keyed by SDK path, which makes it clear which client method the tool calls. Each tool also gets a model-facing snake-case ID. For example:
+`@neon/tools` lets you select the functions from the `@neon/sdk` ergonomic layer and turns them into MCP tools.
 
 - `projects.list` becomes `list_projects`
 - `projects.createAndConnect` becomes `create_and_connect_projects`
 - `postgres.roles.resetPassword` becomes `reset_password_postgres_roles`
-
-Inputs are flat and use snake case at the tool boundary. List tools follow pagination and return the item array. Write tools set `waitForReadiness: true`, so a project or branch create call waits for its operations to finish before the tool resolves.
-
-The distinction between create methods is explicit:
-
-- `projects.create` and `branches.create` return the created resource without a connection string
-- `projects.createAndConnect` and `branches.createAndConnect` wait for readiness and return a connection string
-- `branches.create` attaches a read-write compute by default; `no_compute: true` skips it
-
-Some SDK methods stay out of the tool catalog on purpose. Waiting is already part of write tools, raw role-password retrieval should not be a model-facing operation, and downloading an object as binary data is not a useful JSON tool response.
 
 ## @neon/tools now powers Neon MCP
 
