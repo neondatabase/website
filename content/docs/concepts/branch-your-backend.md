@@ -16,13 +16,13 @@ updatedOn: '2026-09-05T00:00:00.000Z'
 
 A **branch** is an isolated copy of your whole Neon backend. Like a Git branch, you create it from an existing branch and make changes freely on that child branch, without affecting the original.
 
-A branch includes any services already enabled on its parent: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. It is not one copy operation. When you create a branch, the exact handling depends on each service: some copy state, some share underlying storage until you write, and some create branch-specific endpoints and credentials with no data to copy.
+A branch includes any services already enabled on its parent: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. When you create a branch, the exact handling depends on each service: some copy state, some share underlying storage until you write, and some create branch-specific endpoints and credentials with no data to copy.
 
 ![Three branch lanes over time (main, dev, and a feature branch). Each fork carries along the services enabled on the parent, and the branches then diverge independently.](/docs/concepts/branch-your-backend.png 'no-border')
 
 ## When to branch
 
-A branch gives you a full backend to work against, so you can try a change without touching production or a shared staging database.
+A branch gives you a full backend to work against, so you can make changes without affecting its parent, for example your production or staging branch.
 
 - **Preview environments.** Create one branch for each pull request or preview deployment, so reviewers see the change running against its own data, users, and buckets.
 - **Testing against production-like data.** Test migrations, destructive queries, and schema changes on a branch that starts from production-like data, then delete the branch.
@@ -68,7 +68,7 @@ When you create a branch, it starts with the services enabled on its parent. Her
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-    A branch inherits the parent's buckets and objects without copying them up front. You can overwrite or delete an inherited object right away, and that change stays private to the branch. The parent's objects are unchanged. See [Bucket branching](/docs/storage/buckets#bucket-branching).
+    A branch inherits the parent's buckets and objects without copying them up front. You can overwrite or delete an inherited object right away, and that change is local to the branch. The parent's objects are unchanged. See [Bucket branching](/docs/storage/buckets#bucket-branching).
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -142,8 +142,6 @@ This works because storage is separate from compute: durable data can start a ne
 <a href="/docs/compute/functions/overview" description="Your backend code on a branch, at the branch's own URL" icon="code">Functions</a>
 
 <a href="/docs/ai-gateway/overview" description="A per-branch endpoint and credentials over one shared model catalog" icon="sparkle">The AI Gateway</a>
-
-<a href="/docs/manage/branches" description="Create, protect, reset, and delete branches" icon="split-branch">Manage branches</a>
 
 <a href="/docs/concepts/the-object-model" description="How organizations, projects, and branches contain the backend" icon="cards">The Neon object model</a>
 
