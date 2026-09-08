@@ -1,4 +1,4 @@
-text: 'We ran the same workload through 42 models via AI Gateway and compared costs'
+text: 'Just shipped: @neon/tools turns the Neon SDK into typed agent tools'
 link:
-  url: 'https://neon.com/blog/comparing-token-economics-across-42-ai-models'
+  url: 'https://neon.com/blog/give-your-agent-neon-tools'
   target: '_blank'
