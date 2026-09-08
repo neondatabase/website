@@ -8,7 +8,7 @@ excerpt: >-
   ergonomic client into typed agent tools with adapters for MCP, Mastra, and
   Eve. We're also using it to expand the hosted Neon MCP Server.
 date: '2026-09-03T12:00:00'
-updatedOn: '2026-09-03T15:00:00'
+updatedOn: '2026-09-08T21:00:00'
 category: product
 categories:
   - product
@@ -36,7 +36,7 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/give-your-agent-neon-tools/cover.jpg
 ---
 
-**Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 82 new tools, bringing the total to 101 tools: 82 Management API tools alongside 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
+**Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 71 new tools, bringing the total to 104 tools: 85 Management API tools alongside 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
 
 If you build agent platforms or your own agents, you can now select the Neon operations you need and hand them to a model as tools, without writing the schemas, retries, and workflows by hand:
 
@@ -141,7 +141,7 @@ const created = await tools["projects.createAndConnect"].execute({
 
 ## @neon/tools now powers Neon MCP
 
-With `@neon/tools`, we grew the [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server) to over 101 tools. The expanded surface includes:
+With `@neon/tools`, we grew the [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server) to 104 tools. The expanded surface includes:
 
 - project updates, recovery, members, permissions, regions, and operations
 - branch, Postgres role, and database management
