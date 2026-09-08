@@ -7,7 +7,7 @@ summary: >-
   billing through your Vercel invoice, injecting DATABASE_URL and related
   environment variables automatically. Choose this path over the Neon-Managed
   Integration when you have no existing Neon account or want a single Vercel
-  bill; it does not support the neon login CLI command. Automated Preview
+  bill; it does not support the `neon login` CLI command. Automated Preview
   Branching creates an isolated copy-on-write Lakebase Postgres branch for every Vercel
   Preview Deployment, with branches cleaned up according to Vercel's 6-month
   default deployment retention policy.
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-08T15:58:09.171Z'
 ---
 
 <InfoBlock>

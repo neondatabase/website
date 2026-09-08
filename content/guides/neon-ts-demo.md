@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-08T15:58:09.171Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -29,7 +29,7 @@ Before you begin, ensure you have the following:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
