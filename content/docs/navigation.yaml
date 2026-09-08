@@ -221,6 +221,8 @@
       items:
         - title: The object model
           slug: concepts/the-object-model
+        - title: Branch your backend
+          slug: concepts/branch-your-backend
 
 - nav: Products
   title: Products
@@ -340,8 +342,6 @@
                   slug: guides/reset-from-parent
             - title: Automate & workflows
               items:
-                - title: Get started with branching
-                  slug: guides/branching-intro
                 - title: Branching workflows
                   slug: guides/branching-test-queries
                 - title: Branching with the CLI
