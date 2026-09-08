@@ -52,7 +52,7 @@ About a year ago, we wrote that [turning an OpenAPI spec directly into an MCP se
 
 Back then, we identified two problems:
 
-1. First, tool definitions took up context. A large API could put hundreds of schemas into the prompt before the model read the user's request. Similar names and descriptions also made it harder for the model to select the right tool.
+1. First, tool definitions took up context, a problem commonly known as context bloat. A large API could put hundreds of schemas into the prompt before the model read the user's request. Similar names and descriptions also made it harder for the model to select the right tool.
 2. Second, a raw REST operation is not automatically a good agent tool. REST APIs describe resources and requests. Agents are trying to finish tasks. A 1:1 mapping gives you coverage, but not the waiting, workflows, or names that make a tool usable.
 
 MCP hosts and model providers have since moved toward progressive tool discovery. The host searches a catalog first, then loads the full tool schema only when the model needs it. The [MCP client best practices](https://modelcontextprotocol.io/docs/2026-07-28/develop/clients/client-best-practices) describe the flow as search, inspect, execute. That makes larger tool catalogs practical, and it solves the first problem.
