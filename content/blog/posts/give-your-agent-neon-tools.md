@@ -69,7 +69,7 @@ A generated schema can describe a request body, but it does not decide:
 - when several API calls should become one workflow
 - which tool names and descriptions help a model choose correctly
 
-Those are product decisions. A spec cannot make them for you.
+These are product decisions that happen at a level above the raw API spec.
 
 Traditional deterministic code generation gets you raw methods, but that only gets you so far. Not the best developer experience, and not the best agent experience either. So we layered on top of the spec instead.
 
