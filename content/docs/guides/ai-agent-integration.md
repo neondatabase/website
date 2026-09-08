@@ -11,15 +11,65 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-09-08T15:28:14.308Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
+## Provision Postgres from your agent
+
+When the agent on your platform builds an app for a user, that app needs a database. On Neon, provisioning one is a single call that returns a ready-to-use connection string. Create a branch from it for each preview or pull-request environment you give your users.
+
+<Tabs labels={["Neon MCP server", "REST API"]}>
+
+<TabItem>
+
+If the agent your platform runs is connected to the [Neon MCP server](/docs/ai/neon-mcp-server), provision with one tool call:
+
+```text
+create_project { "name": "my-app" }
+```
+
+The `create_project` tool returns the new project along with a connection string the generated app can use right away. For an isolated database per preview or pull-request environment, follow up with `create_branch`:
+
+```text
+create_branch { "project_id": "...", "name": "pr-123" }
+```
+
+See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon) to set this up.
+
+</TabItem>
+
+<TabItem>
+
+From your platform's backend or a code-gen agent, call the [Create project](/docs/reference/api/projects/create-project) API with a Neon [API key](/docs/manage/api-keys). Its response includes `connection_uris` containing a ready-to-use connection string:
+
+```bash shouldWrap
+curl -X POST https://console.neon.tech/api/v2/projects \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"project":{"name":"my-app"}}' | jq -r '.connection_uris[0].connection_uri'
+```
+
+To create an isolated database for each pull request or preview environment, call [Create branch](/docs/reference/api/branches/create-project-branch) with a `read_write` endpoint:
+
+```bash shouldWrap
+curl -X POST https://console.neon.tech/api/v2/projects/{project_id}/branches \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"branch":{"name":"pr-123"},"endpoints":[{"type":"read_write"}]}' | jq -r '.connection_uris[0].connection_uri'
+```
+
+</TabItem>
+
+</Tabs>
+
+These calls are the core provisioning primitive. The rest of this guide shows how to run it in production: across free and paid tiers, with per-tenant isolation, quotas, and billing.
+
 <CTA title="Learn from other agent platform builders" description="See how <a href='/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
 
 <Admonition type="note">
-**Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
+**Prerequisites:** Running this as a platform, with a Neon-sponsored free tier and usage-based billing, requires enrollment in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
 </Admonition>
 
 ## What you'll learn
