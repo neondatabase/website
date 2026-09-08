@@ -191,7 +191,7 @@ The hosted Neon MCP Server adds its own controls:
 
 ## With native adapters for MCP, Mastra, and Eve
 
-`@neon/tools` publishes the same descriptors through three adapters:
+Once we figured out MCP tools, we didn't stop there. `@neon/tools` publishes the same descriptors through three adapters:
 
 ### MCP
 
