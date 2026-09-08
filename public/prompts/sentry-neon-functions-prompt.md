@@ -7,7 +7,7 @@ Before writing code:
 
 1. Inspect my existing project and understand its current structure.
 
-2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon auth` and wait for me to complete sign-in before continuing.
+2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon login` and wait for me to complete sign-in before continuing.
 
 3. Ask me what I want to monitor, and whether I want to:
    - follow the example in the guide closely,
