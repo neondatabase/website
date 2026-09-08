@@ -13,6 +13,7 @@ const { htmlToDOM } = require('html-react-parser');
 const {
   renderAiGatewayModelIndex,
 } = require('../components/pages/doc/ai-gateway-model-index/model-markdown');
+const { authPageContent } = require('../constants/auth-page-content');
 const {
   functionsPageContent,
   aiGatewayPageContent,
@@ -288,6 +289,46 @@ const renderObjectStorageMarkdown = (links) => {
   return `${sections.join('\n\n')}\n`;
 };
 
+const renderAuthMarkdown = (links) => {
+  const { hero, benefits, identity, branching, setupSteps, faqItems } = authPageContent;
+  const { inspectAuth, identityData } = identity;
+
+  const sections = [
+    renderPageHeader(authPageContent),
+    '## Get started',
+    renderActionLinks(hero, links),
+    `## ${benefits.title}`,
+    benefits.highlightedTitle,
+    ...benefits.items.flatMap(({ label, title, description, badges }) => [
+      `### ${label}: ${title}`,
+      description,
+      badges.map(({ label: badgeLabel }) => `- ${badgeLabel}`).join('\n'),
+    ]),
+    `## ${identity.title}`,
+    identity.highlightedTitle,
+    `### ${inspectAuth.title}`,
+    `${inspectAuth.descriptionBeforeCode} ${renderInlineCode(inspectAuth.code)} ${inspectAuth.descriptionAfterCode}`,
+    `### ${identityData.title}`,
+    identityData.description,
+    `## ${branching.title}`,
+    branching.description,
+    `**Diagram:** ${branching.diagramAlt}`,
+    branching.caption,
+    branching.capabilities.map(({ label }) => `- ${label}`).join('\n'),
+    `## ${setupSteps.title}`,
+    setupSteps.highlightedTitle,
+    ...setupSteps.items.flatMap(({ title, description }, index) => [
+      `### ${index + 1}. ${title}`,
+      description,
+    ]),
+    renderFaq(faqItems),
+    renderSharedSections(links, authPageContent.backendServicesTitle),
+    renderFeedbackFooter(authPageContent.slug),
+  ];
+
+  return `${sections.join('\n\n')}\n`;
+};
+
 async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirname, '../..')) {
   const { default: links } = await import('../constants/links.js');
   const outputDir = path.join(rootDir, 'public/md');
@@ -295,6 +336,8 @@ async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirn
     { filename: 'functions.md', content: renderFunctionsMarkdown(links) },
     { filename: 'ai-gateway.md', content: renderAiGatewayMarkdown(links) },
     { filename: 'object-storage.md', content: renderObjectStorageMarkdown(links) },
+    // Keep public/auth.md dedicated to the existing Claimable Neon protocol.
+    { filename: 'auth-page.md', content: renderAuthMarkdown(links) },
   ];
 
   await fs.mkdir(outputDir, { recursive: true });
@@ -313,6 +356,7 @@ module.exports = {
   renderFunctionsMarkdown,
   renderAiGatewayMarkdown,
   renderObjectStorageMarkdown,
+  renderAuthMarkdown,
   generateBackendPlatformPageMarkdown,
 };
 

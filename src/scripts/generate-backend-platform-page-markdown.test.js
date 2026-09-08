@@ -10,6 +10,7 @@ import {
   generateBackendPlatformPageMarkdown,
   htmlToMarkdown,
   renderAiGatewayMarkdown,
+  renderAuthMarkdown,
   renderFunctionsMarkdown,
   renderObjectStorageMarkdown,
 } from './generate-backend-platform-page-markdown';
@@ -99,6 +100,21 @@ describe('backend platform page Markdown', () => {
     expect(markdown).not.toMatch(/<\/?(?:p|strong|code)>/);
   });
 
+  it('renders Auth content without confusing it with Claimable Neon', () => {
+    const markdown = renderAuthMarkdown(LINKS);
+
+    expect(markdown).toContain('# Auth that lives in your backend.');
+    expect(markdown).toContain('[Read the docs](https://neon.com/docs/auth/overview)');
+    expect(markdown).toContain('Built on Better Auth code');
+    expect(markdown).toContain('`neon_auth`');
+    expect(markdown).toContain('Build previews you can actually log into');
+    expect(markdown).toContain('### 4. Preview');
+    expect(markdown).toContain('Your auth branches with everything else.');
+    expect(markdown).toContain('What happens to sessions when I branch?');
+    expect(markdown).not.toContain('Claimable Neon for agents');
+    expect(markdown).not.toMatch(/<\/?(?:p|strong|code|a)(?:\s|>)/);
+  });
+
   it('writes all mirrors without deleting other generated Markdown', async () => {
     const rootDir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-platform-markdown-'));
     tempDirs.push(rootDir);
@@ -113,6 +129,7 @@ describe('backend platform page Markdown', () => {
       'functions.md',
       'ai-gateway.md',
       'object-storage.md',
+      'auth-page.md',
     ]);
     expect(await fs.readFile(path.join(outputDir, 'functions.md'), 'utf8')).toContain(
       '# Long-running functions'
@@ -122,6 +139,9 @@ describe('backend platform page Markdown', () => {
     );
     expect(await fs.readFile(path.join(outputDir, 'object-storage.md'), 'utf8')).toContain(
       '# S3-compatible object storage'
+    );
+    expect(await fs.readFile(path.join(outputDir, 'auth-page.md'), 'utf8')).toContain(
+      '# Auth that lives in your backend.'
     );
     expect(await fs.readFile(sentinelPath, 'utf8')).toBe('keep me');
   });

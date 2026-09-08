@@ -77,6 +77,13 @@ export default {
     pathname: LINKS.functions,
     markdownPath: `${LINKS.functions}.md`,
   },
+  auth: {
+    title: 'Neon Auth — Managed Better Auth that branches with your backend',
+    description:
+      'Managed Better Auth built into Neon. Keep users, sessions, and auth configuration in Postgres, and test real login flows in isolated database branches.',
+    pathname: LINKS.authPage,
+    markdownPath: '/md/auth-page.md',
+  },
   objectStorage: {
     title: 'Neon Object Storage — S3-compatible storage that branches',
     description:

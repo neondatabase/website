@@ -42,6 +42,8 @@ export default {
   architecture: '/docs/introduction/architecture-overview',
   postgresOverview: '/docs/postgres/overview',
   auth: '/docs/neon-auth/overview',
+  authOverview: '/docs/auth/overview',
+  authPage: '/auth',
   functionsOverview: '/docs/compute/functions/overview',
   objectStorageOverview: '/docs/storage/overview',
   aiGatewayOverview: '/docs/ai-gateway/overview',

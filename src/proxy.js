@@ -437,6 +437,7 @@ export const config = {
     '/functions', // Agent-friendly Functions page
     '/ai-gateway', // Agent-friendly AI Gateway page
     '/object-storage', // Agent-friendly Object Storage page
+    '/auth', // Agent-friendly Auth product page
     '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown

@@ -50,6 +50,8 @@ export function isAIAgentRequest(request) {
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
   ...GENERATED_PAGE_MARKDOWN_PATHS,
+  // /auth.md is the existing Claimable Neon protocol, distinct from the /auth product page.
+  'auth.md': '/auth.md',
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
   // Docs root aliases to the curated llms.txt rather than a generated page-listing.
   // Three places enforce this alias — keep them in sync if this changes:
