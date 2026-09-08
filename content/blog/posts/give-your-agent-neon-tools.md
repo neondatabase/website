@@ -73,7 +73,7 @@ These are product decisions that happen at a level above the raw API spec.
 
 Traditional deterministic code generation gets you raw methods, but that only gets you so far. Not the best developer experience, and not the best agent experience either. So we layered on top of the spec instead.
 
-The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) code-generates typed fetch functions and Zod request schemas. [`@neon/sdk`](/blog/neon-sdk) exposes those as a raw layer you can use directly, and adds `createNeonClient()`: a higher-level ergonomic client written with AI assistance, then reviewed and checked in. `@neon/tools` builds on that same ergonomic layer to publish agent tools.
+The [Neon OpenAPI spec](https://neon.com/api_spec/release/v2.json) code-generates typed fetch functions and Zod request schemas. [`@neon/sdk`](/blog/neon-sdk) exposes the raw API methods, but also adds `createNeonClient()`: a higher-level, ergonomic client built on top of the raw layer for a better developer experience. `@neon/tools` builds on that same ergonomic layer and the Zod request schemas to publish agent tools.
 
 Two pipelines run in parallel from the same spec:
 
