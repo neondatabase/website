@@ -98,7 +98,7 @@ When you create a branch, it starts with the services enabled on its parent. Her
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-    Each branch gets its own AI Gateway endpoint and credentials, and its usage is metered separately, so there is no branch data to copy. Configuration stays shared across your project: the [model catalog](/docs/ai-gateway/models), routing, and rate limits are set for the account, not the branch, and you choose a model per request. So a branch is isolated in how it connects and how its usage is counted, but every branch draws on the same models and shares the same limits.
+    Each branch gets its own AI Gateway endpoint and credentials, and its usage is metered separately, so there is no branch data to copy. Everything else is shared across your account rather than set per branch: the [model catalog](/docs/ai-gateway/models), routing, and rate limits are the same for every branch, and you choose a model on each request.
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
