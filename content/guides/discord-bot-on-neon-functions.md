@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-08T15:58:09.171Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -30,7 +30,7 @@ Before you begin, ensure you have:
 1. **Node.js**: Version 24. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Discord Account**: Sign up for a free Discord account at [discord.com](https://discord.com/register).
-4. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+4. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 

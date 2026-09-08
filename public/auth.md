@@ -7,7 +7,7 @@ This file is https://neon.com/auth.md.
 
 If `NEON_API_KEY` is set, use that account and stop. If `neon` is on `PATH`, run
 `neon profile list -o json`. A profile whose `account` is not `-` is an account; use it and
-stop. A `DEFAULT` row with `account: "-"` is not an account. Do not run `neon auth` on this
+stop. A `DEFAULT` row with `account: "-"` is not an account. Do not run `neon login` on this
 path.
 
 ## Provision

@@ -7,7 +7,7 @@ summary: >-
   Host a WhatsApp bot on Neon Functions. Receive WhatsApp Cloud API webhooks, verify Meta's
   request signatures, reply through the Graph API, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-07T20:03:10.807Z'
+updatedOn: '2026-09-07T21:31:28.251Z'
 isDraft: false
 ---
 
@@ -24,7 +24,7 @@ This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a person
 ## Prerequisites
 
 - A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
-- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI auth](/docs/cli/auth).
+- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI login](/docs/cli/login).
 - Node.js 24 (`node -v`). Deployed functions run on `nodejs24`, so 24 locally is the closest match. Node.js 20+ works.
 - A Meta developer account.
 - A Meta app connected to a WhatsApp Business Account, with a Cloud API phone number and a test recipient. Meta's get started flow can create test resources for you.

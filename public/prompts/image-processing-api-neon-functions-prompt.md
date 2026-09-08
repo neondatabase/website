@@ -6,7 +6,7 @@ https://neon.com/guides/image-processing-api-neon-functions
 Before writing any code:
 
 1. Inspect my existing project and understand its current structure.
-2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon auth` and wait for me to complete sign-in before continuing.
+2. Check if the Neon CLI is authenticated by running `neon me`. If it isn't, run `neon login` and wait for me to complete sign-in before continuing.
 3. Ask me what I want to build and whether I want to follow the example in the guide closely or adapt it to a different use case.
 4. Ask any other questions that would affect the architecture or implementation, such as:
    - What image processing operations do I need?

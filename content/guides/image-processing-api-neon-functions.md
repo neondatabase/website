@@ -39,7 +39,7 @@ Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
-3. **The Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **The Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 

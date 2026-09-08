@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -84,7 +84,7 @@ Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Inngest Account**: Sign up for a free account at [inngest.com](https://www.inngest.com).
    <Admonition type="tip" title="Self-Hosting Inngest">
    You can also self-host Inngest using the [Inngest self-hosting guide](https://www.inngest.com/docs/self-hosting). Use Lakebase Postgres as the backing database for Inngest's durable state storage. The workflow code in this guide works identically with either Inngest Cloud or a self-hosted Inngest instance.

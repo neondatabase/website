@@ -3,7 +3,7 @@ title: "How do I rotate my Neon API keys after they've been exposed?"
 subtitle: 'Revoke the compromised key, create a new one, and update every system that uses it.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -91,7 +91,7 @@ After rotation, find and update:
 
 - GitHub Actions, GitLab CI, CircleCI, or other CI secrets that hold `NEON_API_KEY`
 - Terraform Cloud or self-hosted Terraform variable stores
-- The Neon CLI on developer laptops (run `neon auth` again, or set `--api-key`)
+- The Neon CLI on developer laptops (run `neon login` again, or set `--api-key`)
 - Any custom scripts, serverless functions, or workflows that call the Neon API
 - MCP server configurations that authenticate with the Neon API
 

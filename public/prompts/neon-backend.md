@@ -5,7 +5,7 @@ First, ask me in one message (don't guess or pick a default): which org, an exis
 Then set up the tooling and connect:
 
 1. Install or update the Neon CLI: `npm i -g neon@latest`. The rest uses the `neon` command.
-2. Sign in if needed: check with `neon me`, and run `neon auth` if it's not signed in (it opens a browser, so pause and ask me to confirm once I've signed in before continuing).
+2. Sign in if needed: check with `neon me`, and run `neon login` if it's not signed in (it opens a browser, so pause and ask me to confirm once I've signed in before continuing).
 3. Install the Neon agent skills: `npx skills add neondatabase/agent-skills -y` (covers Postgres plus the Functions, Object Storage, and AI Gateway skills). Optional: set up the Neon MCP server with `npx add-mcp https://mcp.neon.tech/mcp --agent <your editor> --yes`.
 4. Connect the project from the answers above:
    - Reuse an existing one: `neon link --project-id <id>`, then `neon env pull`. Linking records the project but doesn't write env; `env pull` writes the connection variables (like `DATABASE_URL`) into `.env.local`, or `.env` if it exists.
