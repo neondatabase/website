@@ -98,7 +98,7 @@ When you create a branch, it starts with the services enabled on its parent. Her
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-    Each branch gets its own AI Gateway endpoint, credentials, and usage metering, so there is no branch data to copy. The [model catalog](/docs/ai-gateway/models) is shared and global, and you choose a model per request. Branches do not have their own model configuration.
+    Each branch gets its own AI Gateway endpoint and credentials, and its usage is metered separately, so there is no branch data to copy. Configuration stays shared across your project: the [model catalog](/docs/ai-gateway/models), routing, and rate limits are set for the account, not the branch, and you choose a model per request. So a branch is isolated in how it connects and how its usage is counted, but every branch draws on the same models and shares the same limits.
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -112,7 +112,7 @@ Branching does not change the shape of your account or project. For what contain
 
 ## Why branching is instant
 
-Branch creation is fast and does not grow with the size of your data, because no service copies its data up front. In Lakebase Postgres this is copy-on-write: the branch shares the parent's data until it changes something, and then stores only what changed. The other services inherit through lineage or create branch-specific endpoints, so there is nothing to bulk-copy. Because of this:
+Branch creation is fast and does not grow with the size of your data, because no service copies its data up front. Each one branches by sharing or inheriting from its parent instead of duplicating it, so the whole backend forks in seconds no matter how much it holds. Lakebase Postgres is the clearest example: with copy-on-write, the branch shares the parent's data until it changes something, then stores only what changed. The other services follow the same principle, inheriting their state or simply getting their own branch-scoped endpoints. Because of this:
 
 - Branch creation time does not depend on how much data you have.
 - A Postgres branch adds storage primarily for what it changes, not a second full copy.
