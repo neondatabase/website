@@ -36,7 +36,7 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/give-your-agent-neon-tools/cover.jpg
 ---
 
-**Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 82 Management API tools (68/82 are new) alongside its 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
+**Today we're launching** `@neon/tools`**, a package that turns the** `@neon/sdk` **ergonomic client into typed agent tools with adapters for MCP, Mastra, and Eve. We're also using it to expand the hosted** [Neon MCP Server](https://neon.com/docs/ai/neon-mcp-server)**, which now exposes 82 new tools, bringing the total to 101 tools: 82 Management API tools alongside 19 hand-written tools for SQL, migrations, diagnostics, docs, and search.**
 
 If you build agent platforms or your own agents, you can now select the Neon operations you need and hand them to a model as tools, without writing the schemas, retries, and workflows by hand:
 
