@@ -3,18 +3,21 @@ import { join } from 'node:path';
 
 import { ImageResponse } from 'next/og';
 
+// Load fonts and images once per instance rather than on every request.
+const assets = Promise.all([
+  readFile(join(process.cwd(), 'src', 'fonts', 'esbuild', 'ESBuild-Medium.ttf')),
+  readFile(join(process.cwd(), 'src', 'fonts', 'inter', 'Inter-Regular.ttf')),
+  readFile(join(process.cwd(), 'public', 'images', 'og-image', 'logo.png')),
+  readFile(join(process.cwd(), 'public', 'images', 'og-image', 'background.png')),
+]);
+
 export async function GET(request) {
-  const [fontDataEsbuild, fontDataInter, logoBuffer, backgroundBuffer] = await Promise.all([
-    readFile(join(process.cwd(), 'src', 'fonts', 'esbuild', 'ESBuild-Medium.ttf')),
-    readFile(join(process.cwd(), 'src', 'fonts', 'inter', 'Inter-Regular.ttf')),
-    readFile(join(process.cwd(), 'public', 'images', 'og-image', 'logo.png')),
-    readFile(join(process.cwd(), 'public', 'images', 'og-image', 'background.png')),
-  ]);
-
-  const logoData = `data:image/png;base64,${logoBuffer.toString('base64')}`;
-  const backgroundData = `data:image/png;base64,${backgroundBuffer.toString('base64')}`;
-
   try {
+    const [fontDataEsbuild, fontDataInter, logoBuffer, backgroundBuffer] = await assets;
+
+    const logoData = `data:image/png;base64,${logoBuffer.toString('base64')}`;
+    const backgroundData = `data:image/png;base64,${backgroundBuffer.toString('base64')}`;
+
     const { searchParams } = request.nextUrl;
     const title = searchParams.get('title');
     const hasTitle = searchParams.has('title');
