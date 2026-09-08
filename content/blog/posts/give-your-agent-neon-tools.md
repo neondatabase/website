@@ -65,7 +65,6 @@ A generated schema can describe a request body, but it does not decide:
 
 - whether a create call should wait until the resource is ready
 - whether the result should include a connection string
-- whether a list call should follow every page
 - which low-level operations should stay hidden
 - when several API calls should become one workflow
 - which tool names and descriptions help a model choose correctly
