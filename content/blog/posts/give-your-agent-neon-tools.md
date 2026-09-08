@@ -80,8 +80,6 @@ Two packages `@neon/sdk` and `@neon/tools` now build on top of each other:
 `@neon/sdk`: OpenAPI spec → code generation → `@neon/sdk` raw methods → coding-agent-authored layer → `createNeonClient()` ergonomic client
 `@neon/tools`: OpenAPI spec → code generation → `@neon/tools` Zod request schemas + `@neon/sdk` ergonomic layer → agent tools
 
-The mechanical layers regenerate on every spec pull. The DX and AX layers do not. A spec refresh does not add `branches.createAndConnect` or an MCP tool. Someone has to decide that wrap.
-
 `@neon/tools` is the agent-facing end of that pipeline.
 
 <EmbedTweet url="https://x.com/rhyssullivan/status/2093466930078536130?s=46" />
