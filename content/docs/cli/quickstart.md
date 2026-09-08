@@ -6,12 +6,12 @@ summary: >-
   Homebrew, npm, or bun, then authenticates using browser-based `neon auth` or
   a personal API key. Use this page when setting up terminal access to Neon for
   the first time, before working through the full CLI reference. It also covers
-  the `.neon` context file (`neon set-context`) to avoid repeating
+  the `.neon` context file (`neon link`) to avoid repeating
   `--project-id` and `--org-id` flags, shell tab completion, and first commands
   like `neon projects list`, `neon branches create`, and
   `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-09-08T10:51:23.316Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---
@@ -142,17 +142,11 @@ If you run a CLI command without an organization context, the CLI prompts you to
 Once linked, you can run CLI commands from any subdirectory of your project; the CLI walks up parent folders to find the `.neon` file. The file is also automatically added to `.gitignore` so it's not committed by accident.
 </Admonition>
 
-Alternatively, set context manually with [`neon set-context`](/docs/cli/set-context):
-
-```bash
-neon set-context --org-id <your-org-id> --project-id <your-project-id>
-```
-
 <Admonition type="info">
 You can find your organization ID in the Neon Console by selecting your organization and navigating to **Settings**. You can find your Neon project ID by opening your project in the Neon Console and navigating to **Settings** > **General**.
 </Admonition>
 
-The `set-context` command creates a `.neon` file in your current directory with your project context.
+Either form of `neon link` creates a `.neon` file in your current directory with your project context.
 
 ```bash
 cat .neon
@@ -165,19 +159,9 @@ cat .neon
 }
 ```
 
-You can also create named context files for different organization and project contexts:
-
-```bash
-neon set-context --org-id <your-org-id> --project-id <your-project-id> --context-file dev_project
-```
-
-To switch contexts, add the `--context-file` option to any command:
-
-```bash
-neon branches list --context-file Documents/dev_project
-```
-
-For more about the `set-context` command, see [Neon CLI commands: set-context](/docs/cli/set-context).
+<Admonition type="important" title="Deprecated">
+Earlier versions of the CLI used [`neon set-context`](/docs/cli/set-context) to write the `.neon` file directly. That command is deprecated in favor of `neon link` and prints a deprecation warning when you run it. Use `neon link` for new workflows.
+</Admonition>
 
 ## Enable shell completion
 
