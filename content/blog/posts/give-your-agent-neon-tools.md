@@ -161,10 +161,6 @@ This is still the hybrid model [we argued for in 2025](https://neon.com/blog/aut
 - Use generated schemas and shared runtime behavior for broad Management API coverage.
 - Keep opinionated tools for tasks where the agent needs a workflow, not an HTTP operation.
 
-The hosted server does not register the package catalog unchanged. It selects the tools, keeps familiar MCP names such as `describe_project` and `create_branch`, applies OAuth grants and category scopes, injects project context, overrides descriptions, and sanitizes results.
-
-That host layer matters. The same `projects.get` SDK method publishes as `get_projects` by default in `@neon/tools`, but the Neon MCP Server keeps the existing `describe_project` name. A project-scoped MCP session can remove `project_id` from a schema and inject the granted project at execution time. Read-only mode removes write tools before the model can call them.
-
 The server covers 12 categories: projects, branches, endpoints, snapshots, schema, querying, Managed Better Auth, Data API, observability, docs, Functions, and Object Storage. An unfiltered connection exposes every category. Clients that need a narrower surface can select categories in the URL:
 
 ```
