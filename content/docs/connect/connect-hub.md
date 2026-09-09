@@ -1,16 +1,17 @@
 ---
 title: Connect your app
-subtitle: Connect your app to Lakebase Postgres, Object Storage, Data API, Managed Better Auth, and more
+subtitle: Connect your app to Lakebase Postgres, Object Storage, AI Gateway, Data API, and Managed Better Auth
 summary: >-
   You connect your app to a Neon branch. Most apps start with Lakebase Postgres;
-  many also use Object Storage, the Data API, and Managed Better Auth. The same
-  pattern applies to all services: pick a branch, get credentials, and use them.
-  This guide walks through the complete connection workflow, from picking your
-  branch to storing credentials securely and using each service in your app.
+  many also use Object Storage, AI Gateway, the Data API, and Managed Better
+  Auth. The same pattern applies to all services: pick a branch, get credentials,
+  and use them. This guide walks through the complete connection workflow, from
+  picking your branch to storing credentials securely and using each service in
+  your app.
 enableTableOfContents: true
 ---
 
-You connect your app to a branch. Most apps start with Lakebase Postgres; many also use Object Storage, the Data API, and Managed Better Auth. The same pattern applies to all: pick a branch, get credentials, and use them.
+You connect your app to a branch. Most apps start with Lakebase Postgres; many also use Object Storage, AI Gateway, the Data API, and Managed Better Auth. The same pattern applies to all: pick a branch, get credentials, and use them.
 
 <Admonition type="tip" title="Just need a Postgres connection string?">
 Open the Console Connect screen, copy it, done. Jump to [Use Postgres](#use-postgres) for the snippet.
@@ -32,11 +33,11 @@ In the Neon Console, select your project and click **Connect** on the Project Da
 
 - Branch selector (defaults to your default branch)
 - Compute, database, and role selectors
-- Tabs for **Postgres database**, **Storage**, **Data API**, and **Auth**
+- Tabs for **Postgres database**, **Storage**, **AI Gateway**, **Data API**, and **Auth**
 
 ![Connect to your branch modal](/docs/connect/connect_to_branch_modal.png)
 
-Switch tabs to get credentials for each service. For Postgres, you can copy the connection string or individual environment variables (`PGHOST`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`, `PGPORT`). For Object Storage, Data API, and Auth, copy the service-specific connection details.
+Switch tabs to get credentials for each service. For Postgres, you can copy the connection string or individual environment variables (`PGHOST`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`, `PGPORT`). For Object Storage, AI Gateway, Data API, and Auth, copy the service-specific connection details.
 
 ### CLI
 
@@ -60,7 +61,7 @@ neon env pull --service postgres --service object-storage
 
 ### API
 
-For Postgres, fetch the connection string with [`GET /api/v2/projects/{project_id}/connection_uri`](/docs/manage/branches#get-a-connection-uri):
+For Postgres, fetch the connection string with [`GET /api/v2/projects/{project_id}/connection_uri`](/docs/manage/branches#connect-to-a-branch):
 
 ```bash shouldWrap
 curl "https://console.neon.tech/api/v2/projects/{project_id}/connection_uri?branch_id={branch_id}&database_name={database_name}&role_name={role_name}" \
@@ -173,6 +174,34 @@ client = boto3.client(
 
 **Learn more:** [Neon Object Storage overview](/docs/storage/overview)
 
+### Use AI Gateway
+
+AI Gateway credentials are branch-scoped and work for the anchor branch and its descendants. They use the same scoped-credential system as Object Storage.
+
+```typescript shouldWrap
+import OpenAI from 'openai';
+import 'dotenv/config';
+
+const client = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+});
+const response = await client.chat.completions.create({
+  model: 'gpt-5-mini',
+  messages: [{ role: 'user', content: 'Hello!' }],
+});
+console.log(response.choices[0].message.content);
+```
+
+`NEON_AI_GATEWAY_BASE_URL` is the bare branch host, such as `https://<branch-host>`. Append the dialect path, such as `/v1` for the OpenAI-compatible chat completions endpoint.
+
+**Environment variables:**
+
+- `NEON_AI_GATEWAY_BASE_URL` - Bare AI Gateway branch host
+- `NEON_AI_GATEWAY_TOKEN` - AI Gateway bearer token
+
+**Learn more:** [Get started with AI Gateway](/docs/ai-gateway/get-started)
+
 ### Use the Data API
 
 The Neon Data API exposes your Postgres database as a REST endpoint secured by JWT authentication and Row-Level Security. Query tables without a connection pool or SQL driver.
@@ -242,6 +271,7 @@ Credential rotation workflows for Data API and Auth are similar: create a new cr
 - [The object model](/docs/concepts/the-object-model) - projects, branches, databases, and roles
 - [Connect to Neon](/docs/connect/connect-intro) - connection methods, drivers, and tools
 - [Object Storage overview](/docs/storage/overview) - buckets, objects, and authentication
+- [Get started with AI Gateway](/docs/ai-gateway/get-started) - unified access to AI models
 - [Data API overview](/docs/data-api/overview) - REST API for Postgres
 - [Managed Better Auth overview](/docs/auth/overview) - managed authentication service
 
