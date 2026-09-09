@@ -17,7 +17,6 @@ authors:
   - sunil-kamath
   - haoyu-huang
   - david-wein
-  - em-sharnoff
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/improving-lakebase-compute-cache-part-1/cover.jpg
   alt: Improving Lakebase Compute Cache, Part 1
