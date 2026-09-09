@@ -1,5 +1,5 @@
 ---
-title: Claimable Neon: An agent provisions a backend, a human claims it later
+title: 'Claimable Neon: An agent provisions a backend, a human claims it later'
 description: >-
   Who'll come through the door?
 excerpt: >-
