@@ -57,7 +57,7 @@ Claimable Neon separates provisioning from ownership:
 
 An unclaimed project will expire after 72 hours, and it is capped at 100 MB of storage and 1 GB of transfer. Those limits keep the anonymous path useful for prototypes while keeping resource usage contained. As soon as a claim begins, Neon revokes the pre-claim access tokens and rotates the database credentials. Managed Better Auth and the Data API also transfer with the project if the agent enabled them.
 
-## auth.md is the sign on the door
+## Powered by auth.md
 
 To build something like Claimable Neon, you need to guide agents beyond the API docs. They need to know how to register, which flows a service accepts, which capabilities they can request, and how to obtain credentials without pretending to be a human. [auth.md](https://workos.com/auth-md) provides that guide.
 
