@@ -44,6 +44,8 @@ An API key is a bearer token for the [Neon API](/docs/reference/api), and there'
 
 An API key can create a service credential, but a service credential cannot create or manage anything, so keep API keys out of your application runtime. See [Manage API keys](/docs/manage/api-keys).
 
+You can also sign the CLI in with `neon auth`; it then acts with your access, like a personal key. For scripts and CI, give the CLI an API key instead. See [CLI authentication](/docs/cli/auth).
+
   </div>
   <div style={{ flex: '1 1 50%' }}>
 
@@ -132,6 +134,8 @@ HIPAA is a compliance configuration available to eligible organizations and proj
 <a href="/docs/data-api/access-control" description="How JWT verification, roles, and RLS secure the Data API." icon="privacy">Data API access control</a>
 
 <a href="/docs/introduction/ip-allow" description="Restrict database connections to trusted addresses." icon="network">IP Allow</a>
+
+<a href="/docs/get-started/full-backend-quickstart" description="Obtain credentials and wire your app to Postgres, Object Storage, the AI Gateway, and the Data API." icon="setup">Build a full backend</a>
 
 </DetailIconCards>
 
