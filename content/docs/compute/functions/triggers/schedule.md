@@ -6,10 +6,10 @@ summary: >-
   a Hono handler for the scheduled POST, a five-field UTC cron reference, how to confirm a
   run in the logs, and the common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-08T23:00:43.703Z'
+updatedOn: '2026-09-09T05:14:01.852Z'
 ---
 
-This page shows how to schedule a deployed function with a cron expression, then covers listing, updating, disabling, and deleting triggers. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). Triggers are managed through the Neon API; there are no CLI commands for them yet.
+This page shows how to schedule a deployed function with a cron expression, then covers listing, updating, disabling, and deleting triggers. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You manage triggers through the Neon API.
 
 ## Before you begin
 
@@ -28,7 +28,7 @@ export BRANCH_ID="<your-branch-id>"
 
 ## Write a handler for the scheduled call
 
-A scheduled invocation is a `POST` with `{scheduled_at}` and no credentials, so the route must accept an unauthenticated `POST` and read the body for context. A trigger call can't be authenticated yet and the function's URL is public, so make the handler safe for anyone to call (see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives)).
+A scheduled invocation is a `POST` with `{scheduled_at}` and no credentials, so the route accepts an unauthenticated `POST` and reads the body for context. Neon currently delivers the call to the function's public URL, so keep the route outside your auth middleware and make the handler safe for anyone to call (see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives)).
 
 This [Hono](https://hono.dev) function checks a URL and records the result. The outbound `fetch` is work you can't run from SQL inside the database:
 
@@ -140,7 +140,7 @@ A schedule is a five-field numeric cron expression, always interpreted in **UTC*
 minute  hour  day-of-month  month  day-of-week
 ```
 
-There's no timezone setting. For a schedule that tracks local time, convert to UTC yourself, and account for daylight saving shifts.
+To track local time, convert to UTC yourself, and account for daylight saving shifts.
 
 | Expression     | Meaning (UTC)                     |
 | -------------- | --------------------------------- |
@@ -151,7 +151,7 @@ There's no timezone setting. For a schedule that tracks local time, convert to U
 | `0 0 1 * *`    | Midnight on the 1st of each month |
 | `* * * * *`    | Every minute                      |
 
-Ranges (`1-5`), lists (`0,30`), steps (`*/2`), and fixed values all work, and there's no minimum interval, so every minute is allowed. Neon rejects a few things standard cron allows, each with a `400`: a seconds field (`* * * * * *`), named days or months (`0 9 * * MON`, `0 0 1 JAN *`), macros (`@daily`, `@hourly`), values outside a field's range (`70 * * * *`), and zero steps (`*/0 * * * *`).
+Ranges (`1-5`), lists (`0,30`), steps (`*/2`), and fixed values all work, down to every minute. Fields are numeric, so use numbers for days and months (`1` for Monday, `1` for January), not names. A value outside its field's range (`70 * * * *`), a named day or month (`0 9 * * MON`, `0 0 1 JAN *`), a macro (`@daily`, `@hourly`), a seconds field (`* * * * * *`), or a zero step (`*/0 * * * *`) each return a `400`.
 
 ## Manage triggers
 
@@ -184,7 +184,7 @@ curl "$API/projects/$PROJECT_ID/branches/$BRANCH_ID/triggers" \
 }
 ```
 
-The list is ordered by `trigger_id` and includes triggers [inherited](/docs/compute/functions/triggers/overview#triggers-and-branching) from a parent branch. There's no pagination or filtering.
+The list is ordered by `trigger_id`, includes triggers [inherited](/docs/compute/functions/triggers/overview#triggers-and-branching) from a parent branch, and returns every trigger on the branch in one response.
 
 ### Get one trigger
 
@@ -238,9 +238,7 @@ Disabling or deleting stops future scheduling, but an occurrence already committ
 
 ## Observability
 
-A scheduled invocation isn't distinguishable from an ordinary HTTP call in the platform logs. The `invoke begin` and `invoke end` lines under the `neon.function.request` scope look the same either way, and there's no separate "trigger fired" event to query.
-
-Make the run visible from inside your handler instead. A `console.log` that includes `scheduled_at` gives you a searchable line tied to the run that produced it:
+In the platform logs, a scheduled invocation looks like any other HTTP call: the `invoke begin` and `invoke end` lines under the `neon.function.request` scope are the same either way. Trace a run from your own handler output instead. A `console.log` that includes `scheduled_at` gives you a searchable line tied to the run that produced it:
 
 ```ts
 console.log(`check ${scheduledAt}: ${res.status} in ${latencyMs}ms`);
