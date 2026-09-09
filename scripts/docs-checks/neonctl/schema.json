@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.14.2",
+  "neonctlVersion": "4.14.6",
   "binaries": [
     "neonctl",
     "neon"
@@ -976,11 +976,11 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to walking up from the current directory"
             },
             "env-pull": {
               "type": "boolean",
-              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "describe": "Write the same Neon env vars `env pull` would",
               "default": true
             },
             "file": {
@@ -1615,6 +1615,10 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+            },
             "env": {
               "type": "array",
               "alias": "e"
