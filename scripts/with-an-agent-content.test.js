@@ -75,9 +75,9 @@ describe('with-an-agent quickstart content contract', () => {
       ([, body]) => body
     );
 
-    expect(branching).toContain('instant, isolated copy of your database');
-    expect(branching).toContain('including its data');
-    expect(branching).toContain('without affecting your main database');
+    expect(branching).toContain('instant, isolated copy of your backend');
+    expect(branching).toContain('including your data and its stored files');
+    expect(branching).toContain('without affecting your main branch');
     expect(branching).toContain(
       '**Prompt: make a change on a branch (this one deletes every post)**'
     );
@@ -85,22 +85,25 @@ describe('with-an-agent quickstart content contract', () => {
     expect(promptBody).toContain('npx neon@latest branches create --name my-feature');
     expect(promptBody).toContain('npx neon@latest checkout my-feature');
     expect(promptBody).toContain("Restart the dev server so it uses the branch's DATABASE_URL.");
-    expect(promptBody).toContain('delete every post and show me the blog feed is now empty');
+    expect(promptBody).toContain(
+      'delete every post and its stored Markdown file, and show me the blog feed is now empty'
+    );
     expect(promptBody).not.toContain('checkout main');
     expect(promptBody).not.toContain('branches delete');
     expect(promptBody).not.toContain('Switch back');
     expect(promptBody).not.toContain('`');
 
-    expect(branching).toContain('The posts are gone on the branch');
-    expect(branching).toContain('your main database still has them');
+    expect(branching).toContain('The feed is empty on the branch');
+    expect(branching).toContain('your main branch still has all the posts and their files');
     expect(terminalRecipes).toEqual([
       'npx neon@latest checkout main',
       'npx neon@latest branches delete my-feature',
     ]);
-    expect(branching).toContain('Restart the dev server so it picks up the change');
+    expect(branching).toContain('Reload the page and your posts are back');
+    expect(branching).toContain('If they do not reappear, restart the dev server');
     expect(branching).toContain('Next.js only reads `DATABASE_URL` at startup');
-    expect(branching).toContain('refreshing the page is not enough');
-    expect(branching).toContain('Every post is back');
+    expect(branching).toContain('and reload again');
+    expect(branching).not.toContain('refreshing the page is not enough');
     expect(branching).toContain(
       "[Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration)"
     );

@@ -7,7 +7,7 @@ summary: >-
   Includes the key files to expect, three service follow-up prompts, and a
   hands-on Neon branching demo.
 enableTableOfContents: true
-updatedOn: '2026-09-09T18:38:29.000Z'
+updatedOn: '2026-09-09T23:16:52.000Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -136,21 +136,21 @@ Generate a short summary or excerpt from each post body using Neon AI Gateway, s
 
 ## Try changes safely with branching
 
-A Neon branch is an instant, isolated copy of your database, including its data. You can make changes on the branch without affecting your main database, then delete the branch when you're done.
+A Neon branch is an instant, isolated copy of your backend, including your data and its stored files. You can make changes on the branch without affecting your main branch, then delete the branch when you're done.
 
 **Prompt: make a change on a branch (this one deletes every post)**
 
 ```text
-Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and show me the blog feed is now empty.
+Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and its stored Markdown file, and show me the blog feed is now empty.
 ```
 
-The posts are gone on the branch, but your main database still has them. Switch back to see for yourself:
+The feed is empty on the branch, but your main branch still has all the posts and their files. Switch back to see for yourself:
 
 ```bash
 npx neon@latest checkout main
 ```
 
-Restart the dev server so it picks up the change (Next.js only reads `DATABASE_URL` at startup, so refreshing the page is not enough), then reload the page. Every post is back. Delete the branch when you're done:
+Reload the page and your posts are back. If they do not reappear, restart the dev server (Next.js only reads `DATABASE_URL` at startup) and reload again. Delete the branch when you are done:
 
 ```bash
 npx neon@latest branches delete my-feature
