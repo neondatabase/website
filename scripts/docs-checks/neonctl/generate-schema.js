@@ -466,6 +466,17 @@ function parseCommandCall(callArgs, consts) {
     // Second arg is the description; third is the builder function.
     describe = resolveStringValue(callArgs[1], consts);
     builderNode = callArgs[2];
+  } else if (ts.isArrayLiteralExpression(first)) {
+    // Array form: `.command([name, ...aliases], desc, builder, handler)`.
+    // The first element is the command (may carry positionals, e.g.
+    // `'register <domain>'`); the rest are aliases.
+    const arr = arrayLiteralStrings(first);
+    if (arr && arr.length) {
+      commandString = arr[0];
+      aliases = arr.slice(1);
+    }
+    describe = resolveStringValue(callArgs[1], consts);
+    builderNode = callArgs[2];
   } else if (ts.isObjectLiteralExpression(first)) {
     const cmdProp = getProp(first, 'command');
     if (cmdProp) commandString = stringLiteralValue(cmdProp.initializer);

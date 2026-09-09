@@ -1750,6 +1750,61 @@
           "commands": {},
           "describe": "Deploy a function from a local directory"
         },
+        "domains": {
+          "name": "domains",
+          "aliases": [
+            "domain"
+          ],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Custom domain",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a custom domain from the branch"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List custom domains on the branch"
+            },
+            "register": {
+              "name": "register",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain you already own (for example docs.example.com)",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "slug": {
+                  "type": "string",
+                  "describe": "Function slug this domain should point at",
+                  "required": true
+                }
+              },
+              "commands": {},
+              "describe": "Point a domain you already own at a function on the branch"
+            }
+          },
+          "describe": "Manage custom domains on the branch (beta)"
+        },
         "get": {
           "name": "get",
           "aliases": [],
