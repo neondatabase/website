@@ -7,14 +7,14 @@ summary: >-
   sends your function, how triggers behave across branches, and the current limits. Schedule
   is the only trigger type today, evaluated in UTC.
 enableTableOfContents: true
-updatedOn: '2026-09-08T22:56:13.993Z'
+updatedOn: '2026-09-09T05:14:01.852Z'
 ---
 
 A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) on a schedule. You give it a cron expression, and Neon calls the function at each run. No external scheduler, and no compute kept running to hold the timer.
 
 Today the only trigger type is `schedule`, a cron expression evaluated in UTC. The API uses a `type` discriminator, so more types can be added later without changing existing triggers.
 
-Triggers are managed through the Neon API; there are no `neon` CLI commands for them yet. To create one, see [Schedule a function](/docs/compute/functions/triggers/schedule).
+You manage triggers through the Neon API. To create one, see [Schedule a function](/docs/compute/functions/triggers/schedule).
 
 ## Function Triggers vs pg_cron
 
@@ -50,7 +50,7 @@ Neon returns these read-only fields on every trigger:
 | `source_branch_id` | The branch that authored the configuration in effect.                   |
 | `inherited`        | `true` when that configuration came from an ancestor branch.            |
 
-A function can have multiple triggers, each evaluated independently, for example a 15-minute sync and a nightly full run. Give each a distinct `function_path` so the handler can tell them apart; the request itself doesn't say which trigger fired.
+A function can have multiple triggers, each evaluated independently, for example a 15-minute sync and a nightly full run. Give each a distinct `function_path` so the handler can tell them apart, since the request carries only the scheduled time.
 
 ## What your function receives
 
@@ -61,9 +61,9 @@ When a schedule fires, Neon sends the function:
 - **Body:** the scheduled minute, `{"scheduled_at":"2026-09-08T19:30:00Z"}`. This is the only context in the request.
 - **Headers:** `content-type: application/json` and a W3C [`traceparent`](https://www.w3.org/TR/trace-context/).
 
-Design your handler for this. It must answer `POST` (a `GET`-only handler won't see the call) and read `scheduled_at` from the body, since the headers don't carry it.
+Design your handler for this. It answers `POST` and reads `scheduled_at` from the body.
 
-A trigger call also can't be authenticated yet: scheduled calls carry no credentials, so keep this route outside your auth middleware, or the trigger's own request is rejected. And since the URL is public, you can't tell a trigger from any other caller, so make the handler safe to call: keep it idempotent and guard destructive actions. An unguessable `function_path` is obscurity, not authentication; don't rely on it as a secret.
+Neon currently delivers scheduled calls to the function's public URL with no credentials, so keep the route outside your auth middleware and make the handler safe for anyone to call: keep it idempotent and guard destructive actions. An unguessable `function_path` adds obscurity, not authentication.
 
 If the compute is scaled to zero when a schedule fires, the invocation wakes it, so that first run is slower while the compute starts (a cold start).
 
