@@ -78,4 +78,5 @@ export const STATIC_MD_PATHS = [
   '/prompts/tanstack-start-prompt.md',
   '/prompts/tortoise-orm-prompt.md',
   '/prompts/typeorm-prompt.md',
+  '/prompts/upstash-workflow-neon-functions-prompt.md',
 ];
