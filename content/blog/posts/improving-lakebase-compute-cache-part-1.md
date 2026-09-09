@@ -102,7 +102,7 @@ On larger working sets, capping shared buffers at 1 GB forced most cache hits to
 <Admonition type="tip" title="Fixed computes came first">
 Our first delivery of larger shared buffers targets fixed-size computes, since shared buffers are not yet dynamic. On these, we now disable the LFC and set shared buffers to 75% of DRAM. This is live today for fixed-size computes with CU >= 18 (Neon) or >= 80 (Databricks). Eliminating the ~1 GB buffer cap keeps hot pages in the fastest memory layer instead of cascading down to local file storage. 
   
-  To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU [Lakebase endpoint in Databricks](https://www.databricks.com/product/lakebase) should see a value of `20971520`.
+  To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU [Lakebase endpoint in Databricks](https://www.databricks.com/product/lakebase) should see a value of `120GB`.
 </Admonition>
 
 Keeping hot data in shared buffers rather than the OS page cache also addresses the downsides described earlier. There is no double buffering, so 1 GB of cached data consumes 1 GB of RAM instead of 2 GB. And because the cache lives inside Postgres rather than the kernel, eviction decisions can be made with knowledge of database state — that positions us to pursue smarter replacement policies than the OS can offer.
