@@ -75,10 +75,10 @@ Now that we've provided some background, let's talk about how we are solving the
 
 **Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory.** 
 
-We need to eventually adjust our compute platform to leverage autoscaling shared buffers, as well as deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers.
+We need to eventually adjust our compute platform to leverage autoscaling shared buffers, but we also want to deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers. So even if autoscaling computes are the goal, we started with fixed computes, as we'll see next.  
 
 <Admonition type="Note" title="Contributing upstream: next">
-The Postgres machinery for this has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community.
+The Postgres machinery for achieving this goal has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community. Coming soon.
 </Admonition>
 
 ### Larger shared buffers
