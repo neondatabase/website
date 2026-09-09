@@ -73,15 +73,17 @@ This shared buffers + page cache scheme works reasonably well but has some downs
 
 Now that we've provided some background, let's talk about how we are solving them at Databricks.
 
-Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory. We need to eventually adjust our compute platform to leverage autoscaling shared buffers, as well as deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers.
+**Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory.** 
 
-**[ADD Lakebase cache path diagram]**
+We need to eventually adjust our compute platform to leverage autoscaling shared buffers, as well as deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers.
 
 <Admonition type="Note" title="Contributing upstream: next">
 The Postgres machinery for this has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community.
 </Admonition>
 
 ### Larger shared buffers
+
+**[ADD Lakebase cache path diagram]**
 
 If you recall from the technical challenges above, a disaggregated system such as Lakebase does not route its reads through the standard OS file system and its page cache.  Also recall that Postgres shared buffers are static and cannot autoscale.
 
