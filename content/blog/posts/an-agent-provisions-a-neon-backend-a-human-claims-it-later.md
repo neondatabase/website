@@ -47,7 +47,7 @@ We're launching **[Claimable Neon](https://neon.com/claimable-neon)** to give th
 
 Today, agents can deploy Neon databases ([Lakebase Postgres](https://neon.com/docs/postgres/overview)), the [Data API](https://neon.com/docs/data-api/overview), and [Managed Better Auth](https://neon.com/docs/auth/overview) via Claimable Neon, with the rest of the Neon backend services ([Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview)) coming soon.
 
-## How Claimable Neon works
+## The idea is simple: deploy a Neon backend before an account
 
 **[add clip 1]**
 
