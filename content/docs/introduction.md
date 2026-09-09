@@ -23,7 +23,7 @@ Start fast with an agent, or build the full stack step by step.
   <QuickPath
     title="Build with your agent"
     command="npx neon@latest init"
-    description="Connect Neon to your AI agent, then prompt it to build a public blog"
+    description="Connect Neon to your AI agent, then prompt it to build your backend"
     href="/docs/get-started/with-an-agent"
     linkText="Open quickstart"
   />
