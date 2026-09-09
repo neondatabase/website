@@ -1,8 +1,8 @@
 ---
 title: 'Improving Lakebase Compute Cache, Part 1'
 description: >-
-  Lakebase large Postgres compute nodes now run up to 2× faster and with lower
-  latency by increasing the shared buffers size and backing with huge pages
+  Large Postgres compute nodes now run up to 2× faster and with lower
+  latency
 excerpt: >-
   On large fixed-size Lakebase Postgres computes, we now put most of the
   machine's memory into Postgres shared buffers and back that cache with huge
