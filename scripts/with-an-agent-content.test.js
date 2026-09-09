@@ -68,26 +68,34 @@ describe('with-an-agent quickstart content contract', () => {
     );
   });
 
-  it('demonstrates a destructive change on an isolated branch and cleans it up', () => {
+  it('stops the agent at an empty feed, then gives the reader restore commands', () => {
     const branching = section(page, 'Try changes safely with branching');
+    const promptBody = branching.match(/```text[^\n]*\n([\s\S]*?)\n```/)?.[1];
+    const terminalRecipe = branching.match(/```bash[^\n]*\n([\s\S]*?)\n```/)?.[1];
 
     expect(branching).toContain('instant, isolated copy of your database');
     expect(branching).toContain('current data and schema');
-    expect(branching).toContain('npx neon@latest branches create --name my-feature');
-    expect(branching).toContain('npx neon@latest checkout my-feature');
-    expect(branching).toContain(
-      "Restart the dev server so it picks up the branch's updated DATABASE_URL."
-    );
-    expect(branching).toContain('delete every post and show me the blog feed is now empty');
-    expect(branching).toContain('npx neon@latest checkout main');
-    expect(branching).toContain('all the original posts are still there');
-    expect(branching).toContain('npx neon@latest branches delete my-feature');
+    expect(promptBody).toBeDefined();
+    expect(promptBody).toContain('npx neon@latest branches create --name my-feature');
+    expect(promptBody).toContain('npx neon@latest checkout my-feature');
+    expect(promptBody).toContain("Restart the dev server so it uses the branch's DATABASE_URL.");
+    expect(promptBody).toContain('delete every post and show me the blog feed is now empty');
+    expect(promptBody).not.toContain('checkout main');
+    expect(promptBody).not.toContain('branches delete');
+    expect(promptBody).not.toContain('Switch back');
+    expect(promptBody).not.toContain('`');
+
+    expect(branching).toContain('The feed is empty only on the branch');
+    expect(branching).toContain('your production data is untouched');
+    expect(branching).toContain('Switching back rewrites `DATABASE_URL` in your local env file');
+    expect(branching).toContain('Next.js reads it only at startup');
+    expect(branching).toContain('a browser refresh alone is not enough');
+    expect(terminalRecipe).toBeDefined();
+    expect(terminalRecipe).toContain('npx neon@latest checkout main');
+    expect(terminalRecipe).toContain('Restart your dev server, then refresh the page');
+    expect(terminalRecipe).toContain('npx neon@latest branches delete my-feature');
     expect(branching).toContain(
       "[Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration)"
     );
-
-    const promptBody = branching.match(/```text[^\n]*\n([\s\S]*?)\n```/)?.[1];
-    expect(promptBody).toBeDefined();
-    expect(promptBody).not.toContain('`');
   });
 });
