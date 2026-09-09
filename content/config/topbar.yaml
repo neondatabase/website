@@ -1,4 +1,4 @@
-text: 'Just shipped: @neon/tools turns the Neon SDK into typed agent tools'
+text: 'Large Postgres compute nodes now run up to 2× faster and with lower latency. Read the engineering writeup'
 link:
-  url: 'https://neon.com/blog/give-your-agent-neon-tools'
+  url: 'https://neon.com/blog/improving-lakebase-compute-cache-part-1'
   target: '_blank'
