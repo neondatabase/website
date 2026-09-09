@@ -209,7 +209,7 @@ The Neon Data API exposes your Postgres database as a REST endpoint secured by J
 Fetch the Data API URL from the Console or CLI (`neon data-api get`). For client-side code, use a framework-specific prefix (`VITE_` for Vite, `NEXT_PUBLIC_` for Next.js):
 
 ```bash shouldWrap
-curl -X GET 'https://YOUR_BRANCH.apirest.REGION.aws.neon.tech/DATABASE/rest/v1/posts?select=*' \
+curl -X GET 'https://YOUR_ENDPOINT.apirest.REGION.aws.neon.tech/DATABASE/rest/v1/posts?select=*' \
   -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
   -H 'Content-Type: application/json'
 ```
