@@ -77,7 +77,7 @@ A credential has two independent dimensions: its scopes say what it can do, and 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-A credential works on the branch it's created on and on any branch descended from it, including branches created later. It does not work on that branch's ancestors or on sibling branches elsewhere in the project. A credential anchored on your default branch therefore reaches every branch in that lineage, which is convenient for preview workflows and worth being deliberate about in production. See [The object model](/docs/concepts/the-object-model) and [Branching](/docs/introduction/branching).
+A credential is tied to the branch you create it on. It works on that branch and on any branch that comes from it, now or later. So a credential created on your default branch reaches nearly every branch in your project, which is handy for preview branches. For production, create a credential on the specific branch that needs it, so its reach stays narrow. See [The object model](/docs/concepts/the-object-model) and [Branching](/docs/introduction/branching).
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -89,15 +89,15 @@ A credential works on the branch it's created on and on any branch descended fro
 
 ### S3 keys and bearer tokens
 
-The same credential reaches you in two forms: an S3-compatible access key for Object Storage, or a bearer token for the HTTP services. One grant sits underneath both forms, so revoking or deleting the grant disables both. Credentials are immutable: you can't add scopes or re-anchor one. See [Object storage authentication](/docs/storage/authentication#mapping-to-your-s3-sdk).
+A service credential comes in the form each service expects: an S3-compatible access key for Object Storage, and a bearer token for services you call over HTTP, like the AI Gateway. Both are the same underlying credential, so if you revoke or delete it, both stop working at once. You cannot change a credential after you create it: you cannot add scopes or move it to a different branch. To change either, create a new credential and revoke the old one. See [Object storage authentication](/docs/storage/authentication#mapping-to-your-s3-sdk).
 
 ### Functions
 
-A Neon Function receives an injected service credential for the branch it serves, so your handler reaches Object Storage and the AI Gateway on that branch without you shipping a secret. Inbound requests are yours to authenticate: a function has a public HTTPS URL with no platform gate in front of your handler. See [Environment variables](/docs/compute/functions/environment-variables) and [Neon Functions authentication](/docs/compute/functions/authentication).
+A Neon Function is given a service credential for the branch it runs on, so your code can reach Object Storage and the AI Gateway on that branch without you adding a secret. But the function has a public HTTPS URL, and Neon does not check who is calling it. Authenticating incoming requests is up to you, in your handler. See [Environment variables](/docs/compute/functions/environment-variables) and [Neon Functions authentication](/docs/compute/functions/authentication).
 
 ### The Data API and Managed Better Auth
 
-The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't use service credentials. They use JWTs: a request carries a JWT from an issuer the project trusts, a Postgres role is selected from it and the query runs as that role, so your `GRANT`s and RLS decide what it can do. See [Manage the Data API](/docs/data-api/manage) and [Access control & security](/docs/data-api/access-control).
+The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) authenticate end users with JWTs. A request carries a JWT from an issuer the project trusts, Neon selects a Postgres role from it, and the query runs as that role, so your `GRANT`s and RLS decide what it can do. See [Manage the Data API](/docs/data-api/manage) and [Access control & security](/docs/data-api/access-control).
 
 ![Diagram of an end user's JWT verified by the Data API and run as a Postgres role whose access is governed by GRANTs and row-level security.](/docs/concepts/credentials-data-api-jwt.png 'no-border')
 
