@@ -1,17 +1,16 @@
 ---
 title: Connect your app
-subtitle: Connect your app to Lakebase Postgres, Object Storage, AI Gateway, Data API, and Managed Better Auth
+subtitle: Connect your app to Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway
 summary: >-
   You connect your app to a Neon branch. Most apps start with Lakebase Postgres;
-  many also use Object Storage, AI Gateway, the Data API, and Managed Better
-  Auth. The same pattern applies to all services: pick a branch, get credentials,
-  and use them. This guide walks through the complete connection workflow, from
-  picking your branch to storing credentials securely and using each service in
-  your app.
+  many also use Object Storage, Managed Better Auth, and AI Gateway. The same
+  pattern applies to all services: pick a branch, get credentials, and use them.
+  This guide walks through the complete connection workflow, from picking your
+  branch to storing credentials securely and using each service in your app.
 enableTableOfContents: true
 ---
 
-You connect your app to a branch. Most apps start with Lakebase Postgres; many also use Object Storage, AI Gateway, the Data API, and Managed Better Auth. The same pattern applies to all: pick a branch, get credentials, and use them.
+You connect your app to a branch. Most apps start with Lakebase Postgres; many also use Object Storage, Managed Better Auth, and AI Gateway. The same pattern applies to all: pick a branch, get credentials, and use them.
 
 <Admonition type="tip" title="Just need a Postgres connection string?">
 Open the Console Connect screen, copy it, done. Jump to [Use Postgres](#use-postgres) for the snippet.
@@ -99,6 +98,8 @@ Each service has its own connection pattern. Below are minimal snippets to get s
 ### Use Postgres
 
 Lakebase Postgres is Neon's serverless Postgres. Connect with any Postgres driver or the Neon serverless driver for edge runtimes.
+
+You can also reach the same Postgres data over HTTP through the [Neon Data API](/docs/data-api/overview). It provides a PostgREST-compatible interface for clients that cannot use a Postgres driver.
 
 <CodeTabs labels={["Serverless driver", "Node.js (pg)", "psql"]}>
 
@@ -201,26 +202,6 @@ console.log(response.choices[0].message.content);
 - `NEON_AI_GATEWAY_TOKEN` - AI Gateway bearer token
 
 **Learn more:** [Get started with AI Gateway](/docs/ai-gateway/get-started)
-
-### Use the Data API
-
-The Neon Data API exposes your Postgres database as a REST endpoint secured by JWT authentication and Row-Level Security. Query tables without a connection pool or SQL driver.
-
-Fetch the Data API URL from the Console or CLI (`neon data-api get`). For client-side code, use a framework-specific prefix (`VITE_` for Vite, `NEXT_PUBLIC_` for Next.js):
-
-```bash shouldWrap
-curl -X GET 'https://YOUR_ENDPOINT.apirest.REGION.aws.neon.tech/DATABASE/rest/v1/posts?select=*' \
-  -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
-  -H 'Content-Type: application/json'
-```
-
-**Environment variable (example for Vite-based frameworks):**
-
-- `VITE_NEON_DATA_API_URL` - Data API endpoint URL (client-side)
-
-For server-side usage, the Data API URL is the same; use your authentication provider to get the JWT token.
-
-**Learn more:** [Data API overview](/docs/data-api/overview)
 
 ### Use Managed Better Auth
 
