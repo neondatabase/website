@@ -1,11 +1,7 @@
 ---
-title: An agent provisions a Neon backend, a human claims it later
+title: Claimable Neon: An agent provisions a backend, a human claims it later
 description: >-
-  We're launching Claimable Neon to give the agent another path. This flow
-  implements the anonymous registration method in auth.md, the open agent
-  registration protocol authored by WorkOS, to give agents a way to provision a
-  temporary Neon project without creating an account or collecting payment
-  details.
+Who'll come through the door?
 excerpt: >-
   We're launching Claimable Neon to give the agent another path. This flow
   implements the anonymous registration method in auth.md, the open agent
