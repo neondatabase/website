@@ -3,8 +3,7 @@ title: 'Claimable Neon: Provisioned by agents, claimed by humans'
 description: >-
   Who'll come through the door?
 excerpt: >-
-  We're launching Claimable Neon to give the agent another path. This flow
-  implements the anonymous registration method in auth.md, the open agent
+  Claimable Neon implements the anonymous registration method in auth.md, the open agent
   registration protocol authored by WorkOS, to give agents a way to provision a
   temporary Neon project without creating an account or collecting payment
   details.
