@@ -27,7 +27,7 @@ npx skills add neondatabase/agent-skills --skill neon
 
 # Neon Object Storage
 
-This is a public beta feature and only available in `us-east-2`.
+This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
 
 Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
 
@@ -53,7 +53,7 @@ If the files in question ship with the app itself — HTML, JS bundles, CSS, the
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Object Storage is a public beta feature available in the `us-east-2` region. Confirm the user's Neon project is in `us-east-2` before proceeding.
+Check this precondition before setting anything up: Neon Object Storage is a public beta feature currently available in `us-east-2` and `eu-central-1`. Confirm the user's Neon project is in one of these regions before proceeding.
 
 ## Architecture: Where Object Storage Fits
 

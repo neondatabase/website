@@ -1,6 +1,6 @@
 ---
 title: Using DBeaver with a Hosted Postgres
-subtitle: A comprehensive guide on how to manage your Postgres database using DBeaver.
+subtitle: A guide on how to manage your Postgres database using DBeaver.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-21T00:00:00.000Z'
@@ -94,6 +94,6 @@ To prevent Neon's scale-to-zero feature from interrupting an idle connection, co
 
 ## Conclusion
 
-DBeaver is a powerful tool for managing your hosted Postgres database. With its intuitive interface and robust features, you can easily perform tasks such as creating tables, running queries, and visualizing data. By following this guide, you should be well-equipped to utilize DBeaver effectively for your database management needs.
+DBeaver is a tool for managing your hosted Postgres database. With it, you can create tables, run queries, and visualize data. This guide covered the setup you need to use DBeaver with Neon.
 
 <NeedHelp />

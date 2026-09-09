@@ -1,6 +1,6 @@
 ---
 title: Building a TODO Application with Laravel, Livewire, and Volt
-subtitle: Learn how to create a simple yet powerful TODO app using Laravel, Livewire, Volt, and Laravel Breeze for authentication
+subtitle: Learn how to create a simple TODO app using Laravel, Livewire, Volt, and Laravel Breeze for authentication
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
@@ -400,7 +400,7 @@ DB_DATABASE=:memory:
 
 This will allow us to use the `RefreshDatabase` trait to reset the database before each test, ensuring a clean slate for testing.
 
-> It is important to note that the `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss as the database will be reset for each test meaning that any data that you have in the database will be lost.
+> The `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss as the database will be reset for each test meaning that any data that you have in the database will be lost.
 
 ### Creating and Using a `TodoFactory`
 

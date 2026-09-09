@@ -25,7 +25,7 @@ npm i -g neon
 brew install neonctl
 ```
 
-Authenticate with `neon auth` (opens a browser once), or set `NEON_API_KEY` for headless use.
+Authenticate with `neon login` (opens a browser once), or set `NEON_API_KEY` for headless use.
 
 From there, a single command creates a project, a branch, or a database. A new project gets you a fresh Postgres database in seconds:
 
@@ -60,9 +60,9 @@ For the full command reference, including options for `--expires-at`, `--schema-
 ## How other CLIs compare
 
 - **Supabase CLI** creates and manages [preview branches](https://supabase.com/docs/reference/cli/supabase-branches) with `supabase branches create`, but a brand-new project still has to be created through the dashboard or the Management API. The CLI is most useful for local development and applying migrations to existing projects.
-- **AWS CLI for RDS PostgreSQL** uses [`aws rds create-db-instance`](https://docs.aws.amazon.com/cli/v1/reference/rds/create-db-instance.html), which provisions a dedicated DB instance. Creating a new instance takes minutes, not seconds, because it boots a VM and attaches EBS volumes.
-- **AWS CLI for Aurora PostgreSQL** uses `aws rds create-db-cluster` (cluster) followed by `aws rds create-db-instance` (writer). Aurora Serverless v2 with min capacity 0 can scale to zero between uses, so the per-cluster cost when idle is the storage rate plus zero ACU-hours.
+- **AWS CLI for RDS Postgres** uses [`aws rds create-db-instance`](https://docs.aws.amazon.com/cli/v1/reference/rds/create-db-instance.html), which provisions a dedicated DB instance. Creating a new instance takes minutes because it boots a VM and attaches EBS volumes.
+- **AWS CLI for Aurora Postgres** uses `aws rds create-db-cluster` (cluster) followed by `aws rds create-db-instance` (writer). Aurora Serverless v2 with min capacity 0 can scale to zero between uses, so the per-cluster cost when idle is the storage rate plus zero ACU-hours.
 
 If your use case is "spin up an isolated, throwaway Postgres in one CLI call for a CI job or agent task," Neon and Supabase preview branching are the closest fits. AWS CLIs target longer-lived instances.
 
-<CTA title="Install the CLI" description="Run neon auth once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/cli/quickstart" />
+<CTA title="Install the CLI" description="Run neon login once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/cli/quickstart" />

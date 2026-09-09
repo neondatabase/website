@@ -246,7 +246,7 @@ Here we've implemented the following:
 1. Next, for each feedback entry, it uses the `analyzeSentiment` function to get the sentiment and the `extractKeyPhrases` function to identify key phrases. These operations are performed in parallel using `Promise.all` to speed up the process.
 1. After that, we insert the sentiment score, sentiment label, key phrases, and detected language into the `sentiment_results` table.
 
-It is worth mentioning that, we are also using a database transaction (`BEGIN`, `COMMIT`, and `ROLLBACK`) to ensure data integrity. If an error occurs, changes are rolled back.
+We are also using a database transaction (`BEGIN`, `COMMIT`, and `ROLLBACK`) to ensure data integrity. If an error occurs, changes are rolled back.
 
 We can use this script and run it periodically or triggered whenever new feedback is received to keep the sentiment analysis up-to-date.
 

@@ -11,7 +11,7 @@ AI agents are increasingly used to create conversational assistants, customer su
 
 [Mastra](https://mastra.ai/) is an unopinionated TypeScript framework for building full‑stack AI applications. To address the challenge of statelessness, it includes a native Memory module. By default, Mastra uses local file‑based storage (such as libSQL) to support rapid prototyping. For production environments, however, applications require a storage backend that is scalable, durable, and cloud‑native.
 
-This guide explains how to integrate Mastra’s Memory component with Lakebase Postgres. By connecting Mastra to Neon, you can easily build robust AI assistants that remember user interactions across threads and sessions.
+This guide explains how to integrate Mastra’s Memory component with Lakebase Postgres. By connecting Mastra to Neon, you can build AI assistants that remember user interactions across threads and sessions.
 
 ## Prerequisites
 
@@ -268,7 +268,7 @@ Agent: Of course! Here's a summary of our conversation so far:
 Is there anything else you'd like to discuss?
 ```
 
-You can see that the agent successfully recalls the user's favorite color and can answer questions based on that memory. Additionally, it can provide a summary of the conversation, demonstrating its ability to retain and utilize context across multiple interactions.
+You can see that the agent successfully recalls the user's favorite color and can answer questions based on that memory. It can also provide a summary of the conversation, showing that it retains and uses context across multiple interactions.
 
 If you log into the [Neon Console](https://console.neon.tech) and inspect your database tables, you will now see tables like `mastra_messages` and `mastra_threads` populated with these interactions.
 

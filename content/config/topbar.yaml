@@ -1,4 +1,4 @@
-text: 'A deep dive on the lakebase storage: S3 + WAL for the era of agents'
+text: 'Just shipped: @neon/tools turns the Neon SDK into typed agent tools'
 link:
-  url: 'https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents'
+  url: 'https://neon.com/blog/give-your-agent-neon-tools'
   target: '_blank'

@@ -7,7 +7,7 @@ createdAt: '2025-05-26T00:00:00.000Z'
 updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
-[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
+[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
 
 This guide will show you how to use **OpenTofu to manage your Neon projects**, including your branches, databases, and compute endpoints. By using OpenTofu with Neon, you get better control, can track changes, and automate your database setup.
 
@@ -404,7 +404,7 @@ Once you have defined your resources:
     ```
     OpenTofu will ask for confirmation. Type `yes` to confirm.
 
-You have now successfully created and managed Neon resources using OpenTofu! You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
+You have created and managed Neon resources using OpenTofu. You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
 
 ## Import existing Neon resources with OpenTofu
 

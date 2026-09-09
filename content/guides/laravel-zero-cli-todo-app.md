@@ -9,7 +9,7 @@ updatedOn: '2026-07-31T19:05:29.503Z'
 
 [Laravel Zero](https://laravel-zero.com/) is a micro-framework that provides a starting point for your console application.
 
-Combined with Neon's serverless Postgres database, you can create powerful CLI tools with persistent storage.
+Combined with Neon's serverless Postgres database, you can create CLI tools with persistent storage.
 
 In this guide, we'll build a Todo CLI app that allows users to manage their tasks efficiently from the command line.
 
@@ -65,7 +65,7 @@ php todo app:install database
 
 > The `todo` command is the name of the executable file we defined in the previous step using the `app:rename` command.
 
-Additionally, we can install the `fakerphp/faker` package to generate sample data for testing later on:
+We can also install the `fakerphp/faker` package to generate sample data for testing later on:
 
 ```bash
 composer require fakerphp/faker --dev
@@ -638,7 +638,7 @@ This implementation provides a solid foundation for a CLI-based task management 
 - Add user authentication for multi-user support
 - Implement task dependencies (subtasks)
 
-By combining the power of Laravel Zero and the scalability of Lakebase Postgres, you can quickly create efficient and powerful CLI applications that meet your specific needs.
+By combining Laravel Zero and Lakebase Postgres, you can quickly create CLI applications with persistent storage.
 
 ## Additional Resources
 

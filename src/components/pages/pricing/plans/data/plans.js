@@ -275,7 +275,7 @@ export default {
         title: 'Public network transfer',
         subtitle: 'Egress',
       },
-      free: '5 GB included',
+      free: '5 GB per project included',
       launch: '500 GB per project included<span>then $0.10/GB</span>',
       scale: '500 GB per project included<span>then $0.10/GB</span>',
     },

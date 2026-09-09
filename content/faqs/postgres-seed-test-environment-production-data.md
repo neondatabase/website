@@ -27,7 +27,7 @@ pg_dump -Fc -d prod_db -f prod.dump
 pg_restore -d test_db prod.dump
 ```
 
-For anything above a few GB, that's slow, eats storage, and the data is stale the moment the dump finishes. Branching skips both problems.
+For anything above a few GB, that's slow, eats storage, and the data is stale the moment the dump finishes. Branching skips all three.
 
 ## Creating a test branch
 
@@ -58,7 +58,7 @@ A child branch is billed only for changes you make against it, capped at the par
 ## How other Postgres services compare
 
 - **Aurora cloning** uses the same copy-on-write idea and is the closest analog. From the AWS docs: "Aurora cloning uses a copy-on-write protocol, where data is copied at the time when it changes." See [cloning a volume for an Aurora database cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html). The clone is a new database cluster with its own compute and endpoint.
-- **RDS for PostgreSQL** doesn't support copy-on-write clones. The standard pattern is `pg_dump` and restore, or restoring from a snapshot to a new instance. Both physically materialize the data.
+- **RDS for Postgres** doesn't support copy-on-write clones. The standard pattern is `pg_dump` and restore, or restoring from a snapshot to a new instance. Both physically materialize the data.
 - **Supabase branching** creates an isolated environment per branch, but [no production data is copied to preview branches](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). You seed test data with a `seed.sql` file. That's good for compliance, but doesn't solve "test against real production data."
 
 If your goal is "spin up a test database that looks exactly like production, in seconds, without paying for a full second copy of your data," Lakebase Postgres branching and Aurora cloning are the two options that match the requirement. Branches on Neon scale to zero when idle and are addressable by branch name, which fits day-to-day developer and CI workflows.

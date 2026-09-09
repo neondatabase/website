@@ -64,10 +64,10 @@ Set a TTL on PR branches with [branch expiration](/docs/guides/branch-expiration
 
 The project-per-service pattern works elsewhere, but the cost shape differs:
 
-- **RDS for PostgreSQL** charges each database instance by the hour. Ten services means ten always-on instances. Reserved instances reduce the per-hour rate but still bill 24/7 ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html)).
+- **RDS for Postgres** charges each database instance by the hour. Ten services means ten always-on instances. Reserved instances reduce the per-hour rate but still bill 24/7 ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html)).
 - **Aurora Serverless v2** can scale each cluster to 0 ACUs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)), so per-service clusters are more affordable when idle. Each cluster is still its own resource to provision and monitor.
 - **Supabase** provisions a dedicated VM per project ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase)). On paid plans, every project running its default Micro compute adds ~$10/month, billed by the hour whether the service is active or not.
 
-Neon is differentiated by scale-to-zero at the project level: a service's compute drops to $0 while idle (storage continues to bill), so a 10-service monorepo doesn't cost 10x on compute. Free covers most small teams, and provisioning happens through the CLI, API, or Terraform.
+The difference on Neon is scale-to-zero at the project level: a service's compute drops to $0 while idle (storage continues to bill), so a 10-service monorepo doesn't cost 10x on compute. The Free plan covers most small teams, and provisioning happens through the CLI, API, or Terraform.
 
 <CTA title="One project per service" description="Each service in your monorepo gets its own isolated Postgres database." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

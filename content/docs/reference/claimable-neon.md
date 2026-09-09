@@ -1,5 +1,7 @@
 ---
 title: Claimable Neon
+tag: new
+tagTheme: green
 subtitle: CLI, claim, and HTTP reference
 summary: >-
   If an agent needs a Neon account and the user is not around, provision a
@@ -10,7 +12,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-08-26T18:00:00.000Z'
+updatedOn: '2026-09-01T16:04:17.197Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours (`project.expires_at`) and are capped at 100 MB storage and 1 GB transfer. Claim codes expire in 15 minutes (`expires_in`). Those are two clocks.
@@ -193,14 +195,14 @@ Only requested and granted services appear under `services`.
 
 ## Capabilities
 
-| Capability          | Available before claim | Environment variable          |
-| ------------------- | ---------------------- | ----------------------------- |
-| Postgres            | Yes                    | `DATABASE_URL`                |
+| Capability          | Available before claim                      | Environment variable          |
+| ------------------- | ------------------------------------------- | ----------------------------- |
+| Postgres            | Yes                                         | `DATABASE_URL`                |
 | Data API            | When requested, or later with `neon deploy` | `NEON_DATA_API_URL`           |
 | Managed Better Auth | When requested, or later with `neon deploy` | `NEON_AUTH_BASE_URL`          |
-| Functions           | No                     | Requires claiming the project |
-| Object Storage      | No                     | Requires claiming the project |
-| AI Gateway          | No                     | Requires claiming the project |
+| Functions           | No                                          | Requires claiming the project |
+| Object Storage      | No                                          | Requires claiming the project |
+| AI Gateway          | No                                          | Requires claiming the project |
 
 Registration records those as `{ granted: false, reason: "requires_claim" }`. A later protected operation returns `capability_requires_claim`. Preserve the denied capability and give the human a claim link; do not retry or drop it.
 
@@ -330,18 +332,18 @@ Use `error.code` for control flow and show `error.message` to the user. Retry on
 
 Common codes include:
 
-| Code                        | Meaning                                                      |
-| --------------------------- | ------------------------------------------------------------ |
-| `invalid_request`           | The request body or parameter is invalid                     |
-| `invalid_grant`             | The identity assertion cannot be exchanged. Discard it       |
-| `unauthorized`              | No credential was presented, or it did not verify            |
-| `token_expired`             | The access token expired. Re-exchange the identity assertion |
-| `scope_insufficient`        | The access token does not permit the operation               |
-| `capability_requires_claim` | The requested service or operation requires human ownership  |
+| Code                        | Meaning                                                                          |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| `invalid_request`           | The request body or parameter is invalid                                         |
+| `invalid_grant`             | The identity assertion cannot be exchanged. Discard it                           |
+| `unauthorized`              | No credential was presented, or it did not verify                                |
+| `token_expired`             | The access token expired. Re-exchange the identity assertion                     |
+| `scope_insufficient`        | The access token does not permit the operation                                   |
+| `capability_requires_claim` | The requested service or operation requires human ownership                      |
 | `claim_in_progress`         | The transfer window is still live. Poll status; mint a new code after it expires |
-| `project_claimed`           | The project transferred. Discard the identity assertion      |
-| `project_expired`           | The unclaimed window closed. Discard the identity assertion  |
-| `upstream_error`            | A Neon API or service dependency failed                      |
+| `project_claimed`           | The project transferred. Discard the identity assertion                          |
+| `project_expired`           | The unclaimed window closed. Discard the identity assertion                      |
+| `upstream_error`            | A Neon API or service dependency failed                                          |
 
 ## Resources
 

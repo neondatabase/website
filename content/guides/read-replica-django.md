@@ -7,7 +7,7 @@ createdAt: '2024-10-20T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that improve database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
 
 This guide explains how to integrate Neon read replicas into your Django application. You'll learn how to configure your Django database router to direct read operations to these replicas, optimizing your database performance and overall application speed.
 
@@ -332,7 +332,7 @@ With these configurations in place, Django will automatically route read queries
 
 ## Conclusion
 
-By leveraging Neon's read replicas in your Django application, you can significantly improve your application's performance and scalability. Django's database router makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
+With Neon's read replicas in your Django application, you can improve your application's performance and scalability. Django's database router makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
 
 This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
 

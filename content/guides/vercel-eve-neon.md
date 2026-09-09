@@ -4,7 +4,7 @@ subtitle: "Learn how to build a Slack-based database assistant with Eve that pro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-27T18:03:21.795Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
@@ -207,11 +207,6 @@ export async function createBranch(name: string): Promise<Branch> {
   const branch = await neon.branches.create(projectId, {
     name,
     expires_at: expiresAt,
-  });
-
-  await neon.postgres.endpoints.create(projectId, {
-    branch_id: branch.id,
-    type: "read_write",
   });
 
   const connectionUri = await neon.postgres.connectionString({

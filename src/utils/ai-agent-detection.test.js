@@ -274,14 +274,23 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for root path /', () => {
-      const result = getMarkdownPath('/');
-      expect(result).toBeNull();
-    });
-
     it('should resolve /pricing to custom markdown path', () => {
       const result = getMarkdownPath('/pricing');
       expect(result).toBe('/pricing.md');
+    });
+  });
+
+  describe('Homepage', () => {
+    it('should resolve the root path / to /index.md', () => {
+      expect(getMarkdownPath('/')).toBe('/index.md');
+    });
+
+    it('should resolve /home to /index.md (same marketing homepage)', () => {
+      expect(getMarkdownPath('/home')).toBe('/index.md');
+    });
+
+    it('should resolve /index.md to itself', () => {
+      expect(getMarkdownPath('/index.md')).toBe('/index.md');
     });
   });
 

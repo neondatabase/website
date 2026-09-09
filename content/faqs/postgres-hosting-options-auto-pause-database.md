@@ -15,13 +15,13 @@ nextLink:
 
 ## Short answer
 
-Neon suspends a Postgres compute after a configurable idle window and resumes it on the next connection. The Free plan and Launch plan suspend after 5 minutes; the Scale plan lets you set anything from 1 minute up to always-on. Amazon Aurora Serverless v2 also supports auto-pause down to zero ACUs, but its idle pause is per cluster and only on recent PostgreSQL engine versions.
+Lakebase Postgres suspends a compute after a configurable idle window and resumes it on the next connection. The Free plan and Launch plan suspend after 5 minutes; the Scale plan lets you set anything from 1 minute up to always-on. Amazon Aurora Serverless v2 also supports auto-pause down to zero ACUs, but its idle pause is per cluster and only on recent Postgres engine versions.
 
 ## How it works
 
 A traditional Postgres instance keeps every process running even when no one is connected. You pay for the VM whether you're serving traffic or not.
 
-The lakebase architecture decouples storage from compute. When no connections are active and no background work is happening, the compute is shut down. Storage stays available, billed separately at $0.35/GB-month (root branches) on paid plans, or included in the 0.5 GB free allowance.
+The Lakebase Postgres architecture decouples storage from compute. When no connections are active and no background work is happening, the compute is shut down. Storage stays available, billed separately at $0.35/GB-month (root branches) on paid plans, or included in the 0.5 GB free allowance.
 
 Per-plan defaults from the [plans page](/docs/introduction/plans#scale-to-zero):
 
@@ -50,12 +50,12 @@ Connection-per-request runtimes (Vercel functions, Lambda, Cloudflare Workers) s
 | Provider                          | Pauses when idle         | Notes                                                                                                                       |
 | --------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Neon                              | Yes, 1–5 min idle window | Configurable on paid plans; storage stays available                                                                         |
-| Aurora Serverless v2 (PostgreSQL) | Yes, when min ACU is 0   | Requires Aurora PostgreSQL 13.15, 14.12, 15.7, or 16.3+; auto-pause is per cluster                                          |
-| Amazon RDS for PostgreSQL         | No                       | Instance pricing is hourly regardless of activity; you can stop a DB instance manually, but RDS auto-starts it after 7 days |
+| Aurora Serverless v2 (Postgres) | Yes, when min ACU is 0   | Requires Aurora Postgres 13.15, 14.12, 15.7, or 16.3+; auto-pause is per cluster                                          |
+| Amazon RDS for Postgres         | No                       | Instance pricing is hourly regardless of activity; you can stop a database instance manually, but RDS auto-starts it after 7 days |
 | Supabase                          | No                       | Compute add-ons run continuously                                                                                            |
 
 Aurora Serverless v2 added scale-to-zero in late 2024. You configure a cluster minimum of 0 ACUs and an idle timeout, and Aurora pauses the instance when no user connections are present. Pause and resume happens at the cluster level. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
 
-[Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) doesn't auto-pause. Instances are billed by the hour for the chosen class size whether or not connections are active.
+[Amazon RDS for Postgres](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) doesn't auto-pause. Instances are billed by the hour for the chosen class size whether or not connections are active.
 
 <CTA title="Run Postgres that pauses when idle" description="Free plan auto-pauses after 5 minutes. No credit card." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

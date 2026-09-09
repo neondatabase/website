@@ -198,7 +198,7 @@ The pr_data file may be large (200KB+). Read it in chunks if needed, but:
 
 3. **Quota & Limit Changes:**
    - Project limits (e.g., 20 → 30 projects on Free plan)
-   - Storage limits (e.g., 8TB → 16TB)
+   - Snapshot limits (e.g., 10 → 100 manual snapshots)
    - Branch limits, compute limits, any user-facing constraints
    - Look for: numbers changing in user-facing contexts
    - These are ALWAYS H2-worthy if they affect users

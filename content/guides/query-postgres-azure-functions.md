@@ -19,11 +19,11 @@ You will need:
 
 ## Why Neon?
 
-Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Its Postgres database uses an innovative architecture that separates compute and storage, offering a truly serverless experience. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scalability without directly managing the infrastructure. In other words, Neon allows you to accelerate project delivery by focusing solely on development, while having an infrastructure that scales on demand.
+Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Its Postgres database separates compute and storage. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scalability without directly managing the infrastructure. In other words, Neon allows you to accelerate project delivery by focusing solely on development, while having an infrastructure that scales on demand.
 
 > Neon Database is cloud-native Serverless Postgres, meaning it has completely separated storage from compute. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scaling without directly managing the infrastructure. In other words, Neon Database is a fully managed database service that allows you to focus on building your application without worrying about the underlying infrastructure.
 
-Azure Functions are also a serverless compute service, which enables you to run event-driven code without having to manage infrastructure. It is a great choice for building serverless applications, microservices, and APIs. By combining Neon Database with Azure Functions, you can create a powerful and scalable application that can handle a wide range of use cases.
+Azure Functions are also a serverless compute service, which enables you to run event-driven code without having to manage infrastructure. It is a great choice for building serverless applications, microservices, and APIs. By combining Neon Database with Azure Functions, you can create a scalable application without managing servers.
 
 At the same time, Azure Functions enables you to run code in response to events without worrying about the underlying infrastructure. It will create microservices that respond to events, such as **HTTP requests**, without the need to deploy or manage servers.
 
@@ -548,11 +548,11 @@ After creating the database, make sure to copy the connection details (such as *
 
 ## Conclusion
 
-We have demonstrated how combining Neon and Azure Functions enables the development of fast, scalable applications while reducing the complexity associated with managing infrastructure. With this combination, you can efficiently query your Postgres database without worrying about server maintenance. Moreover, Neon simplifies the scalability of your applications, making it an ideal choice for many modern projects.
+We have demonstrated how combining Neon and Azure Functions enables the development of fast, scalable applications while reducing the complexity associated with managing infrastructure. With this combination, you can efficiently query your Postgres database without worrying about server maintenance. Neon also handles scaling for you.
 
 ## Additional Resources
 
-- [Neon Documentation](/docs) - Comprehensive documentation for Neon's database services, including guides, tutorials, and API references.
+- [Neon Documentation](/docs) - Documentation for Neon's database services, including guides, tutorials, and API references.
 - [Azure Functions Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
 
 <NeedHelp />

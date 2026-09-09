@@ -46,7 +46,7 @@ For more information, see [relevant docs](/docs/path).
 
 **Title patterns:**
 - New capability: "Configure X in the console", "Monitor Y with Z"
-- Version/limit: "Postgres 18 support", "Storage quota doubled to 16TB"
+- Version/limit: "Postgres 18 support", "Higher manual snapshot limit on paid plans"
 - Feature area: "Data API updates", "MCP Server enhancements"
 - Product integration: "ChatGPT + Neon MCP Server"
 
@@ -98,7 +98,7 @@ For more information, see [relevant docs](/docs/path).
 ### Details & Specifics
 
 **Always include when possible:**
-- Numbers: "8TB → 16TB", "10 → 20 projects", "1 hour expiration"
+- Numbers: "10 → 100 snapshots", "10 → 20 projects", "1 hour expiration"
 - Examples: Branch names, field names, feature names
 - Locations: Which page, which tab, which menu
 - Versions: Extension versions, Postgres versions
@@ -170,21 +170,21 @@ We've [doubled/increased] [what] from [old value] to [new value]. [Benefit state
 
 ### Example 1: Simple Quota Increase
 
-**File:** [2025-10-24.md](../content/changelog/2025-10-24.md#storage-quota-doubled-to-16tb)
+**File:** [2026-05-22.md](../content/changelog/2026-05-22.md#higher-manual-snapshot-limit-on-paid-plans)
 
 ```markdown
-## Storage quota doubled to 16TB
+## Higher manual snapshot limit on paid plans
 
-We've doubled our default storage quota from 8TB to 16TB. This means you can now
-run databases up to 16TB without contacting us to increase your limit. If you need
-to run larger databases, please [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+Paid plans now include **100 manual snapshots** per project, up from 10. Snapshots
+created by backup schedules do not count toward this limit. To create a manual
+snapshot, see [Backup & restore](/docs/guides/backup-restore).
 ```
 
 **What makes this exemplary:**
-- ✅ Specific numbers (8TB → 16TB)
-- ✅ Clear benefit ("run databases up to 16TB")
+- ✅ Specific numbers (10 → 100 snapshots)
+- ✅ Clear benefit ("100 manual snapshots per project")
 - ✅ One focused paragraph
-- ✅ Practical next step (contact for larger)
+- ✅ Practical next step (link to the how-to)
 - ✅ 40 words - concise
 
 ### Example 2: Console Feature with Detail
@@ -354,7 +354,7 @@ directly within ChatGPT.
 | Type | Pattern | Example |
 |------|---------|---------|
 | New capability | `[Action] [object] in [location]` | "Configure scale to zero in the console" |
-| Version/number | `[Thing] [change] to [value]` | "Storage quota doubled to 16TB" |
+| Version/number | `[Thing] [change] to [value]` | "Manual snapshot limit raised to 100" |
 | Product support | `[Product] [version] support` | "Postgres 18 support (preview)" |
 | Integration | `[Partner] + [Neon feature]` | "ChatGPT + Neon MCP Server" |
 | Feature group | `[Feature area] [enhancements/updates]` | "MCP Server enhancements" |

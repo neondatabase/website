@@ -63,6 +63,6 @@ Other managed Postgres offerings provide ways to create per-PR databases, but th
 | RDS for Postgres | Restore from snapshot into a new database instance per PR                                                                                                                                         | Instance billed by the hour while running, no scale-to-zero                                                                                                                    |
 | Supabase         | [Preview branches](https://supabase.com/docs/guides/deployment/branching) tied to a GitHub PR; each is a full Supabase environment                                                                | Branch [Compute billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/branching) starting at ~$0.01344/hr on Micro; auto-pauses on inactivity             |
 
-Neon's branch creation is typically faster (seconds, not minutes) because branches don't require copying data or provisioning a new instance.
+Neon's branch creation typically takes seconds because branches don't require copying data or provisioning a new instance.
 
 <CTA title="Try branching on a PR" description="Sign up free, install the GitHub Action, and get isolated databases for every pull request." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

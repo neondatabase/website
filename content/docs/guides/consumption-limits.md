@@ -2,7 +2,10 @@
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 summary: >-
-  Per-project consumption quotas in Neon let you cap active_time_seconds,
+  Storage is unlimited on paid plans: there's no hard per-branch size limit
+  and storage grows with your usage. The customer-set quotas described here are
+  separate, hard limits you choose. Per-project consumption quotas in Neon let
+  you cap active_time_seconds,
   compute_time_seconds, written_data_bytes, data_transfer_bytes, and
   logical_size_bytes via the quota object in the Create or Update Project API
   endpoints. When any quota threshold is met, all active computes for that
@@ -15,7 +18,7 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-08-07T17:04:50.326Z'
+updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -66,7 +69,7 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 There is one additional `quota` parameter, `logical_size_bytes`, which applies to individual branches, not to the overall project. You can use `logical_size_bytes` to set the maximum size (measured in bytes) that any one individual branch is allowed to reach. Once this threshold is met, the compute for that particular branch (and _only_ that particular branch) is suspended. Note that this limit is _not_ refreshed once per month: it is a strict size limit that applies for the life of the branch.
 
-Unlike the platform 16 TB storage limit on paid plans, which slows writes when reached, customer-set `logical_size_bytes` quotas remain hard limits.
+These customer-set quotas behave differently from Neon's own platform storage. On paid plans there's no hard per-branch size limit; your storage grows with your usage. A `logical_size_bytes` quota you set yourself is a hard limit and suspends the branch's compute instead.
 
 ### Sample quotas
 

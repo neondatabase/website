@@ -82,6 +82,11 @@ const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp']
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
 
+  // Homepage: '/' and '/home' both render the marketing homepage; serve the
+  // hand-written public/index.md. (getMarkdownPath('/index.md') also lands here
+  // via the CONTENT_ROUTES miss below returning null, so serve it explicitly.)
+  if (path === '' || path === 'home' || path === 'index.md') return '/index.md';
+
   // Early return for excluded routes and files
   const isExcluded =
     EXCLUDED_ROUTES.some((route) => path === route) ||

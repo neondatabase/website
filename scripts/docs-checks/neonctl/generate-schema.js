@@ -165,6 +165,24 @@ function resolveSpecObject(expr, consts) {
       return resolveSpecObject(prop.initializer, consts);
     }
   }
+  // Dot access into a resolvable const object, e.g. `envFlag.env` where
+  // `envFlag = { env: { type, describe } }` is pooled in `consts`. Mirrors the
+  // bracket-access branch above; needed because checkout.ts redefines its `env`
+  // option as `{ ...envFlag.env, describe: envFlag.env.describe + '…' }`, so both
+  // the inner spread and the describe concat resolve through this.
+  if (
+    ts.isPropertyAccessExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    consts &&
+    consts.has(e.expression.text)
+  ) {
+    const container = consts.get(e.expression.text);
+    if (!ts.isObjectLiteralExpression(container)) return undefined;
+    const prop = getProp(container, e.name.text);
+    if (prop && ts.isPropertyAssignment(prop)) {
+      return resolveSpecObject(prop.initializer, consts);
+    }
+  }
   return undefined;
 }
 

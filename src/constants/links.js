@@ -93,9 +93,9 @@ export default {
 
   // Socials
   discord: 'https://discord.gg/92vNTzKDGp',
-  github: 'https://github.com/neondatabase/neon',
-  linkedin: 'https://www.linkedin.com/company/neon-inc/',
-  twitter: 'https://twitter.com/neondatabase/',
+  github: 'https://github.com/neondatabase',
+  linkedin: 'https://www.linkedin.com/company/neondatabase/',
+  twitter: 'https://x.com/neondatabase',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
 
   // Copilot

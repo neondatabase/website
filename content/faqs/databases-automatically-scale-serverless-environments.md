@@ -15,7 +15,7 @@ nextLink:
 
 Lakebase Postgres adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no CU-hour charge while suspended. Storage is billed separately and continuously.
 
-## How autoscaling works on Neon
+## How autoscaling works on Lakebase Postgres
 
 You set a minimum and maximum compute size for each compute. The system scales between them as queries arrive. A typical configuration is min 0.25 CU (≈1 GB RAM), max 4 CU (≈16 GB RAM). Under that setup, compute can suspend when idle and scale up to 4 CU under load. The autoscaling range can span up to 8 CU between min and max.
 
@@ -46,7 +46,7 @@ A development database autoscaling between 0.25 and 1 CU, averaging 0.25 CU and 
 | Neon                 | Yes, between configured min and max CU                                                                     | Yes, after 5 min idle (configurable)                                                                                                            | CU-hour, billed per second |
 | Aurora Serverless v2 | Yes, between configured min and max ACU                                                                    | Yes, set min ACU to 0 to enable [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) | ACU-hour                   |
 | Supabase             | No, [compute sizes](https://supabase.com/docs/guides/platform/compute-and-disk) are fixed sizes you select | Free-plan projects pause after ~7 days idle; paid projects stay on                                                                              | Per-hour compute size      |
-| RDS for PostgreSQL   | No, instance class is fixed                                                                                | No                                                                                                                                              | Per-hour instance class    |
+| RDS for Postgres   | No, instance class is fixed                                                                                | No                                                                                                                                              | Per-hour instance class    |
 
 Aurora Serverless v2 added auto-pause to zero ACUs more recently. AWS notes resume takes "a brief pause" and the feature targets dev/test and lightly used workloads; see [Scaling to Zero ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Supabase doesn't autoscale compute within a project; you pick a fixed compute size and resize manually (with brief downtime).
 

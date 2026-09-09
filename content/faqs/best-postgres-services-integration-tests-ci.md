@@ -19,7 +19,7 @@ Branch your production database for each CI run. The branch is a copy-on-write f
 
 Standard options each have a tradeoff. A dedicated staging cluster runs 24/7 even when no tests are running. Docker Postgres in CI is fast to start but has an empty schema, so you spend time loading fixtures that don't match production. Restoring a production dump per run takes minutes and costs IOPS.
 
-Neon's branching skips both. A branch is created in seconds, comes with production schema and data, and is billed only for the delta from parent plus active compute time.
+Neon's branching avoids all three. A branch is created in seconds, comes with production schema and data, and is billed only for the delta from parent plus active compute time.
 
 ## A GitHub Actions setup
 

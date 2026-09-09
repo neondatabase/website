@@ -21,7 +21,7 @@ Lakebase Postgres on Neon runs the [`pgvector`](/docs/extensions/pgvector) exten
 
 Most AI apps don't have steady traffic. Embedding lookups happen in bursts, then go quiet for hours. A traditional always-on Postgres instance bills the same whether you're serving 10 queries an hour or 10,000.
 
-The lakebase architecture separates storage and compute, so the compute can suspend when idle. On the Free plan, scale-to-zero kicks in after 5 minutes and can't be disabled. On the Launch plan it's also 5 minutes by default (can be disabled), and on the Scale plan it's configurable from 1 minute up to always-on. See [Scale to zero](/docs/introduction/scale-to-zero) for the full behavior.
+The Lakebase Postgres architecture separates storage and compute, so the compute can suspend when idle. On the Free plan, scale-to-zero kicks in after 5 minutes and can't be disabled. On the Launch plan it's also 5 minutes by default (can be disabled), and on the Scale plan it's configurable from 1 minute up to always-on. See [Scale to zero](/docs/introduction/scale-to-zero) for the full behavior.
 
 Cold starts add latency on the first query after a suspend, so for low-latency endpoints, keep an instance warm by disabling scale-to-zero (Launch or Scale).
 
@@ -57,7 +57,7 @@ When an inference request wakes the compute, your serverless functions may open 
 | Provider                          | pgvector                 | Scales to zero          | Notes                                                                                           |
 | --------------------------------- | ------------------------ | ----------------------- | ----------------------------------------------------------------------------------------------- |
 | Neon                              | Yes                      | Yes, after 1–5 min idle | Compute drops to $0 when suspended; storage still applies                                       |
-| Aurora Serverless v2 (PostgreSQL) | Yes (via extension)      | Yes, when min ACU is 0  | Requires Aurora PostgreSQL 13.15, 14.12, 15.7, or 16.3+; pause is per cluster, not per database |
+| Aurora Serverless v2 (Postgres) | Yes (via extension)      | Yes, when min ACU is 0  | Requires Aurora Postgres 13.15, 14.12, 15.7, or 16.3+; pause is per cluster, not per database |
 | Supabase                          | Yes (`vector` extension) | No                      | Compute add-ons run continuously                                                                |
 
 Aurora Serverless v2 added scale-to-zero in late 2024. You set the cluster's minimum ACU to 0 and configure an idle timeout, and Aurora pauses the instance when no user connections are active. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Note that auto-pause works at the cluster level, so you can't pause one logical database independently of others on the same cluster.

@@ -34,7 +34,7 @@ neon branches delete migration-test
 
 Branches included per project: 10 on the Free plan and Launch plan, 25 on the Scale plan. On paid plans, extra branches are billed at $1.50/branch-month, prorated hourly to roughly $0.002/hour, so a short-lived migration branch costs cents. Extra branches aren't available on the Free plan. See [Plans](/docs/introduction/plans) for the full breakdown.
 
-## Why this beats dump-and-restore
+## Compared with dump-and-restore
 
 A `pg_dump`/`pg_restore` cycle on a 50 GB database can take hours, and you pay full storage for the duplicate. With branching, your test environment is ready in seconds and you only pay for the delta the migration writes. You can also automate the whole flow in CI with the [Neon GitHub Action](/docs/guides/branching-github-actions) so every PR gets its own throwaway database with real schema and data.
 
@@ -44,7 +44,7 @@ Use [schema-only branches](/docs/guides/branching-schema-only) if you need to te
 
 ## How other providers compare
 
-| Capability                    | Neon                                 | Supabase                                             | AWS RDS for PostgreSQL                       |
+| Capability                    | Neon                                 | Supabase                                             | AWS RDS for Postgres                       |
 | ----------------------------- | ------------------------------------ | ---------------------------------------------------- | -------------------------------------------- |
 | Branch with prod data         | Yes, copy-on-write                   | No, branches start empty and re-seed from `seed.sql` | No native branching                          |
 | Time to provision a test copy | Seconds                              | Minutes (build, migrate, seed)                       | Restore-from-snapshot creates a new instance |

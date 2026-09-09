@@ -15,7 +15,7 @@ nextLink:
 
 Every database on Neon includes a managed [PgBouncer pooler](/docs/connect/connection-pooling). You don't deploy it, configure it, or maintain it. To use it, add `-pooler` to your endpoint hostname.
 
-## Two strings, one database
+## The two connection strings
 
 Every Neon branch gives you both a direct and a pooled connection string. They differ by one segment in the hostname:
 
@@ -50,9 +50,9 @@ The Neon pooler handles connection multiplexing on the server side. Most apps st
 ## How other Postgres services handle this
 
 - **Supabase** runs a managed pooler (Supavisor) and exposes both session-mode and transaction-mode connection strings, similar in shape to Neon's two strings. See [connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres).
-- **AWS RDS for PostgreSQL** and **Aurora** don't include a pooler by default. You enable [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) as a separate, billable service and point your app at the proxy endpoint. It's managed, but you provision and configure it yourself.
+- **AWS RDS for Postgres** and **Aurora** don't include a pooler by default. You enable [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) as a separate, billable service and point your app at the proxy endpoint. It's managed, but you provision and configure it yourself.
 - **Aurora Serverless v2** scales compute automatically and recommends RDS Proxy for connection-heavy workloads; the pooler isn't bundled with the database.
 
-The practical difference: on Neon and Supabase, the pooled endpoint is available without setting up extra infrastructure. On RDS, you stand up RDS Proxy as a separate resource.
+On Neon and Supabase, the pooled endpoint is available without setting up extra infrastructure. On RDS, you stand up RDS Proxy as a separate resource.
 
 <CTA title="Read the connection pooling guide" description="Learn how pool sizes, transaction mode, and protocol-level prepared statements work on Neon." buttonText="Open the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />

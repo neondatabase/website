@@ -28,6 +28,8 @@ Deploys a function from a local directory or entry file. The `<slug>` is the per
 
 By default, `deploy` waits until the deployment finishes building (`--wait=true`), which is the predictable path for scripts and CI. Use `--no-wait` to return immediately after triggering the deployment.
 
+By default, `deploy` bundles your `--src` with esbuild before uploading. Pass `--no-bundle` to skip bundling and deploy a prebuilt source instead: the directory root (or the file you point at) must be named or contain `index.mjs` or `index.js`. This is useful when you run your own build step and want to ship the output as-is.
+
 Deploy a function from an entry file:
 
 ```bash

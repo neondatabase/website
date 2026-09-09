@@ -58,7 +58,7 @@ Free plan: 100 projects, 10 branches per project. Launch plan: 100 projects, 10 
 
 ## How other Postgres providers compare on REST APIs
 
-Most managed Postgres providers expose a REST API for cluster lifecycle, but they differ in granularity and provisioning latency.
+Providers differ in API granularity and provisioning latency.
 
 - **AWS (RDS / Aurora)** uses the AWS API (and SDKs / CloudFormation / Terraform) for `CreateDBInstance` and `CreateDBCluster`. The API call returns quickly but the database isn't usable until the instance reaches `available` state, which takes minutes. Per-PR or per-CI workflows aren't a great fit because billing is per instance-hour.
 - **Supabase Management API** exposes `POST /v1/projects` to create a new project programmatically, and `POST /v1/projects/{ref}/branches` to create preview branches. Project creation includes the full Supabase stack (database, auth, storage, edge functions) and the deploy workflow waits for health checks. See [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).

@@ -153,15 +153,15 @@ For example, you can build charts to visualize:
 - `neon_db_total_size`: To monitor the total size of all databases in your project, in bytes.
 - `host_cpu_seconds_total`: To track the number of CPU seconds accumulated in different operating modes (user, system, idle, etc.)
 
-For a comprehensive list of all metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
 
 </Steps>
 
 ## Summary
 
-Congratulations! You have successfully configured Neon to send metrics and Postgres logs to Better Stack using the OpenTelemetry integration. You now have a powerful, centralized observability setup that provides real-time insights into your database's health and activity.
+You have configured Neon to send metrics and Postgres logs to Better Stack using the OpenTelemetry integration. You now have a centralized observability setup with real-time insight into your database's health and activity.
 
-By leveraging this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the Better Stack platform.
+With this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the Better Stack platform.
 
 ## Resources
 

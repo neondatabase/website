@@ -52,7 +52,7 @@ Mark production as a [protected branch](/docs/guides/protected-branches) on the 
 
 ## How this compares to other options
 
-- **AWS RDS for PostgreSQL**: to debug against prod data without affecting prod, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new database instance. The new instance has its own full storage and instance-hour bill, and restore takes minutes to hours depending on data size.
+- **AWS RDS for Postgres**: to debug against prod data without affecting prod, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new database instance. The new instance has its own full storage and instance-hour bill, and restore takes minutes to hours depending on data size.
 - **Aurora Serverless v2**: same restore model. Restoring is creating a new cluster from a snapshot or PITR, not a copy-on-write fork.
 - **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) give you a separate database, but they do not include data from your main project. You'd seed the branch and then reproduce the bug against synthetic data.
 

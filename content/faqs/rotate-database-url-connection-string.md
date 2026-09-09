@@ -85,10 +85,9 @@ Then:
    This is the step that actually closes the breach. You can also reset it from the Console under **Roles & Databases**. Do not skip this step, even if no service uses the old role anymore.
 
 <Admonition type="important" title="Why you usually can't drop the old role">
-In most projects, the original role owns the database, schemas, and tables. `DROP ROLE` fails if the role owns any objects, and during an incident is the wrong time to reassign ownership across your schema. Resetting the password is the realistic 99% path: the role stays as the owner of its objects, but the leaked credentials no longer authenticate.
+In most projects, the original role owns the database, schemas, and tables. `DROP ROLE` fails if the role owns any objects, and during an incident is the wrong time to reassign ownership across your schema. Resetting the password is the realistic path in nearly every case: the role stays as the owner of its objects, but the leaked credentials no longer authenticate.
 
 If you do want to remove the role later (outside of incident pressure), you'll need to [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of every object it owns, then drop it. See [Delete a role](/docs/manage/roles#delete-a-role).
 </Admonition>
 
-**Note: The hostname doesn't change**
 Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx` portion of your URL is the compute endpoint ID. If you need a new hostname, recreate the compute (or the project).

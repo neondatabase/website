@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T03:15:28.979Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -36,7 +36,7 @@ You'll land on the **Project Dashboard** with the connection string ready in the
 
 <TabItem>
 
-Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then:
+Install the CLI with `npm i -g neon` and run `neon login` to log in. Then:
 
 ```bash
 neon projects create \

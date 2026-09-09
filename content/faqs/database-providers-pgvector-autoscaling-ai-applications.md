@@ -19,7 +19,7 @@ Lakebase Postgres supports the [pgvector extension](/docs/extensions/pgvector) a
 
 Vector similarity searches are CPU-heavy. An HNSW query on a few million embeddings can pin a CPU for hundreds of milliseconds, but the rest of the time the database may be nearly idle while users read responses or wait on the LLM. A fixed-size database has to be provisioned for the spike, which means paying for the spike every hour of the month.
 
-[Autoscaling](/docs/introduction/autoscaling) on Neon changes compute size between a min and max you set:
+[Autoscaling](/docs/introduction/autoscaling) on Lakebase Postgres changes compute size between a min and max you set:
 
 - **Free plan**: autoscale up to 2 CU (≈8 GB RAM)
 - **Launch plan**: autoscale up to 16 CU (≈64 GB RAM)
@@ -47,14 +47,14 @@ For end-to-end examples with OpenAI, LangChain, and LlamaIndex, see [AI and embe
 Test a new embedding model on a branch of your production data without re-embedding the whole corpus twice. Branches start instantly and share storage until you change something.
 </Admonition>
 
-## How other providers stack up
+## How other providers compare
 
 | Provider                          | pgvector                                                                    | Autoscaling compute                                                                                             | Scale to zero                                                                                                                                                               |
 | --------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Neon                              | Yes ([docs](/docs/extensions/pgvector))                                     | Between min/max CU, second-level scaling ([docs](/docs/introduction/autoscaling))                               | 5 min idle, few-hundred-ms wake                                                                                                                                             |
-| Aurora Serverless v2 (PostgreSQL) | Yes                                                                         | ACU range, scales automatically                                                                                 | 0 ACU auto-pause on Aurora PostgreSQL 13.15+/14.12+/15.7+/16.3+ ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)) |
+| Aurora Serverless v2 (Postgres) | Yes                                                                         | ACU range, scales automatically                                                                                 | 0 ACU auto-pause on Aurora Postgres 13.15+/14.12+/15.7+/16.3+ ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)) |
 | Supabase                          | Yes ([docs](https://supabase.com/docs/guides/database/extensions/pgvector)) | Manual compute size change, brief downtime ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) | Paid plans run 24/7                                                                                                                                                         |
-| RDS for PostgreSQL                | Yes                                                                         | None on the database compute                                                                                    | None                                                                                                                                                                        |
+| RDS for Postgres                | Yes                                                                         | None on the database compute                                                                                    | None                                                                                                                                                                        |
 
 For AI inference workloads that swing between dozens of queries per second and idle minutes, the architectures that match are Neon and Aurora Serverless v2. Both bill compute by the moment-in-time size, both run pgvector with HNSW indexes. Lakebase Postgres wake time is faster; Aurora's regional and IAM integration is deeper if you're already on AWS.
 
