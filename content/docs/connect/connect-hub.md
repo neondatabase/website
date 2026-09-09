@@ -2,15 +2,16 @@
 title: Connect your app
 subtitle: Connect your app to Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway
 summary: >-
-  You connect your app to a Neon branch. Most apps start with Lakebase Postgres;
-  many also use Object Storage, Managed Better Auth, and AI Gateway. The same
-  pattern applies to all services: pick a branch, get credentials, and use them.
-  This guide walks through the complete connection workflow, from picking your
-  branch to storing credentials securely and using each service in your app.
+  You connect your app to a branch. A branch can provide Lakebase Postgres,
+  Object Storage, Managed Better Auth, and AI Gateway. Connecting to any of them
+  follows the same steps: pick a branch, get its credentials, and use them in
+  your app. This guide walks through the complete connection workflow, from
+  picking your branch to storing credentials securely and using each service in
+  your app.
 enableTableOfContents: true
 ---
 
-You connect your app to a branch. Most apps start with Lakebase Postgres; many also use Object Storage, Managed Better Auth, and AI Gateway. The same pattern applies to all: pick a branch, get credentials, and use them.
+You connect your app to a branch. A branch can provide Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway. Connecting to any of them follows the same steps: pick a branch, get its credentials, and use them in your app.
 
 <Admonition type="tip" title="Just need a Postgres connection string?">
 Open the Console Connect screen, copy it, done. Jump to [Use Postgres](#use-postgres) for the snippet.
@@ -94,6 +95,18 @@ Neon Functions auto-injects credentials for declared services. If you declare Ob
 ## Use each service
 
 Each service has its own connection pattern. Below are minimal snippets to get started; follow the links for full product guides.
+
+<DetailIconCards>
+
+<a href="#use-postgres" description="Connect with a Postgres driver or the Neon serverless driver." icon="postgres">Lakebase Postgres</a>
+
+<a href="#use-object-storage" description="Store and retrieve files with S3-compatible tools." icon="aws">Object Storage</a>
+
+<a href="#use-ai-gateway" description="Call AI models through an OpenAI-compatible API." icon="openai">AI Gateway</a>
+
+<a href="#use-managed-better-auth" description="Add managed authentication that branches with your data." icon="lock-landscape">Managed Better Auth</a>
+
+</DetailIconCards>
 
 ### Use Postgres
 
