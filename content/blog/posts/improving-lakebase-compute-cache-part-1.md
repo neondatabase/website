@@ -2,7 +2,7 @@
 title: 'Improving Lakebase Compute Cache, Part 1'
 description: >-
   Lakebase large Postgres compute nodes now run up to 2× faster and with lower
-  latency by increasing the shared buffers size and backing with huge pages.
+  latency by increasing the shared buffers size and backing with huge pages
 excerpt: >-
   On large fixed-size Lakebase Postgres computes, we now put most of the
   machine's memory into Postgres shared buffers and back that cache with huge
@@ -61,7 +61,7 @@ This shared buffers + page cache scheme works reasonably well but has some downs
 1. Double buffering which reduces the amount of data you can effectively cache on the compute.  Consider a compute with 4 GB of RAM using 1 GB for shared buffers.  As you read pages from disk to populate the 1 GB of shared buffers, the reads go through the OS page cache, which also holds that data. You are now consuming 2 GB of RAM to cache 1 GB of data.
 2. The OS page cache doesn't know anything about the shared buffers or Postgres internals, so it can't make smart decisions on which pages to replace.
 
-#### Technical Challenges
+#### Technical challenges
 
 1. In a disaggregated storage system such as Lakebase, data read from storage does not travel through the OS filesystem or page cache.
 2. Shared buffers is a static parameter, meaning that it is set prior to starting Postgres and cannot be changed without rebooting the database.  This is a meaningful challenge for a serverless autoscaling system such as Lakebase.
@@ -69,13 +69,19 @@ This shared buffers + page cache scheme works reasonably well but has some downs
 
 ## The lakebase cache path
 
+**[ADD lakebase cache hierarchy DIAGRAM]**
+
 Now that we've provided some background, let's talk about how we are solving them at Databricks.
 
-**Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory.** The Postgres machinery for this has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community.
+Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory. We need to eventually adjust our compute platform to leverage autoscaling shared buffers, as well as deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers.
 
-In parallel we need to adjust our compute platform to leverage auto scaling shared buffers as well as deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers.
+**[ADD Lakebase cache path diagram]**
 
-### Larger Shared Buffers
+<Admonition type="Note" title="Contributing upstream: next">
+The Postgres machinery for this has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community.
+</Admonition>
+
+### Larger shared buffers
 
 If you recall from the technical challenges above, a disaggregated system such as Lakebase does not route its reads through the standard OS file system and its page cache.  Also recall that Postgres shared buffers are static and cannot autoscale.
 
@@ -100,7 +106,7 @@ Keeping hot data in shared buffers rather than the OS page cache also addresses 
 
 Sizing shared buffers at 75% of DRAM on fixed-size computes was not as simple as making a configuration change.  That is because of the third technical challenge, the process per backend architecture. We describe our solution in the next section.
 
-### Addressing Memory and Translation Overhead with Huge Pages
+### Addressing memory and translation overhead with huge pages
 
 Postgres uses a process-based structure in which each backend maps shared buffers into its own address space, requiring its own page table entries — the kernel-maintained structures the hardware walks to translate virtual addresses to physical memory. By default Linux does this mapping across 4 KB pages.
 
@@ -110,7 +116,7 @@ This working set also far exceeds the capacity of the Translation Lookaside Buff
 
 To mitigate this, the Postgres community advises using an OS mechanism named huge pages (2 MB each) with large shared buffers. Switching to huge pages reduces page table sizes by a factor of 512 and significantly lowers TLB miss rates. In our benchmark tests, configuring Postgres with huge pages reduced tail read latency by up to ~40% and decreased CPU utilization by up to ~30%.
 
-### Huge Page Support in Virtualized Environments
+### Huge page support in virtualized environments
 
 Lakebase executes within lightweight guest virtual machines on bare-metal hosts. Memory address translation involves two virtualized layers. Capitalizing on huge pages requires a consistent implementation across the entire stack: from host-level reservation, through the hypervisor backing the VM's memory, to the guest kernel. A breakdown at any tier degrades the resulting performance benefits.
 
@@ -134,21 +140,30 @@ If you're using Neon, the hit-rate charts are the same `Compute cache hit rate` 
 
 On one large endpoint, the change became active around 06:10 UTC on August 11. Accessed Postgres blocks per second doubled, which we use here as a proxy for throughput. The customer reported lower p50 and p99 latency compared with the prior day, week, and month.
 
+**[ADD shared buffer hits & misses DIAGRAM]**
+
 This endpoint configured a large local file cache. With larger shared buffers, the storage GetPage/s dropped from about 8K per second to about 1.5K.
+
+**[ADD GetPage DIAGRAM]**
+
 
 ### Example 2: 1.3× throughput
 
 On another large endpoint, the change became active around 01:30 UTC on August 14. Throughput rose about 43%.
 
+**[ADD shared buffer hits & misses Aug 12-13 diagram]**
+
 The compute cache hit rate reached nearly 100%, with requests served almost entirely from the shared buffers.
+
+**[ADD shared buffer hit rate DIAGRAM]**
 
 ### Example 3: 5× lower CPU use, 2× higher throughput
 
 On this workload, CPU use fell from 20 cores to 4 after the August 15 rollout. The compute cache hit rate rose to almost 100%, and the measured throughput doubled.
 
-## Coming next: autoscaling
+**[ADD CPU usage DIAGRAM]**
 
-## What comes next?
+## Coming next: autoscaling
 
 We are currently working to bring larger shared buffers to auto-scaling Postgres computes. Auto-scaling introduces additional complexity. We must dynamically expand shared buffers when scaling up and shrink them when scaling down—all while allocating the exact required volume of huge pages.
 
