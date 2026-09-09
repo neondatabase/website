@@ -1,7 +1,7 @@
 ---
 title: Claimable Neon: An agent provisions a backend, a human claims it later
 description: >-
-Who'll come through the door?
+  Who'll come through the door?
 excerpt: >-
   We're launching Claimable Neon to give the agent another path. This flow
   implements the anonymous registration method in auth.md, the open agent
