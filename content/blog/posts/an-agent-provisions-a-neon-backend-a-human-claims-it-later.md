@@ -16,9 +16,10 @@ categories:
   - community
 authors:
   - andre-landgraf
+  - zachary-proser
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/cover.jpg
+  alt: Claimable Neon
 isFeatured: false
 seo:
   title: An agent provisions a Neon backend, a human claims it later - Neon
@@ -37,7 +38,7 @@ seo:
     registration protocol authored by WorkOS, to give agents a way to provision a
     temporary Neon project without creating an account or collecting payment
     details.
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/social.jpg
 ---
 
 Everyone has experienced this:
