@@ -24,19 +24,25 @@ Availability differs by product and by region. See [Product availability](/docs/
 
 ## Which credential do you need?
 
-| Goal                                                                          | Use                                                                | Scope and reach                                                                                                                                          |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create or manage projects, branches, and settings, or issue other credentials | Platform API key (personal, organization, or project-scoped)       | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
-| Have a workload read files or call models                                     | Service credential (an S3-compatible access key or a bearer token) | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
-| Connect to Postgres                                                           | A database connection credential and the branch endpoint           | IP Allow and Private Networking apply here, and only here                                                                                                |
-| Authorize an end user through the Data API                                    | A JWT from a trusted issuer, plus database roles and RLS           | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
+| Goal                                                                          | Use                                                           | Scope and reach                                                                                                                                          |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create or manage projects, branches, and settings, or issue other credentials | [Platform API key](/docs/manage/api-keys)                     | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
+| Have a workload read files or call models                                     | [Service credential](/docs/storage/authentication)           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
+| Connect to Postgres                                                           | [Database connection credential](/docs/connect/connect-intro) | IP Allow and Private Networking apply here, and only here                                                                                                |
+| Authorize an end user through the Data API                                    | [JWT from a trusted issuer](/docs/data-api/access-control)    | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
 
 ## Platform API keys
 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-An API key is a bearer token for the [Neon API](/docs/reference/api), and there's one API surface for the whole platform rather than one per product, so a single key covers Postgres, Object Storage, the AI Gateway, Functions, and Managed Better Auth alike. Keys come in three kinds with decreasing reach: personal keys that act as you, organization keys that cover one organization, and project-scoped keys that cover one project. An API key can create a service credential, but a service credential cannot create or manage anything, so keep API keys out of your application runtime. See [Manage API keys](/docs/manage/api-keys).
+An API key is a bearer token for the [Neon API](/docs/reference/api), and there's one API surface for the whole platform rather than one per product, so a single key covers Postgres, Object Storage, the AI Gateway, Functions, and Managed Better Auth alike. Keys come in three kinds with decreasing reach:
+
+- **Personal keys** act as you.
+- **Organization keys** cover one organization.
+- **Project-scoped keys** cover one project.
+
+An API key can create a service credential, but a service credential cannot create or manage anything, so keep API keys out of your application runtime. See [Manage API keys](/docs/manage/api-keys).
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -51,7 +57,12 @@ An API key is a bearer token for the [Neon API](/docs/reference/api), and there'
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-Most of what your running app connects to uses service credentials. Object Storage and the AI Gateway use one shared credential, and the scopes you attach decide what it unlocks: `storage:read` and `storage:write` for Object Storage, `ai_gateway:invoke` for the AI Gateway. A credential has two independent dimensions: its scopes say what it can do, and its branch anchor says where it reaches. See [Object storage authentication](/docs/storage/authentication) and [AI Gateway authentication](/docs/ai-gateway/authentication).
+Most of what your running app connects to uses service credentials. Object Storage and the AI Gateway use one shared credential, and the scopes you attach decide what it unlocks:
+
+- `storage:read` and `storage:write` for Object Storage.
+- `ai_gateway:invoke` for the AI Gateway.
+
+A credential has two independent dimensions: its scopes say what it can do, and its branch anchor says where it reaches. See [Object storage authentication](/docs/storage/authentication) and [AI Gateway authentication](/docs/ai-gateway/authentication).
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
