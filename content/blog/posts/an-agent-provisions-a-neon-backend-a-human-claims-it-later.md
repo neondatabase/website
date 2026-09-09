@@ -16,9 +16,10 @@ categories:
   - community
 authors:
   - andre-landgraf
+  - zachary-proser
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/cover.jpg
+  alt: Claimable Neon
 isFeatured: false
 seo:
   title: 'Claimable Neon: Provisioned by agents, claimed by humans - Neon'
@@ -37,7 +38,7 @@ seo:
     registration protocol authored by WorkOS, to give agents a way to provision a
     temporary Neon project without creating an account or collecting payment
     details.
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/social.jpg
 ---
 
 While building with agents, you've probably run into a situation where an agent needs a database, but by then you've stepped away from the keyboard. The next step is something like a signup form, an email verification, or an API key the agent doesn't have. It needs you to complete that step manually, and until then it can't proceed with the implementation.

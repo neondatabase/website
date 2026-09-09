@@ -281,6 +281,8 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
     return { post: null, relatedPosts: [] };
   }
 
+  const socialImage = postEntry.data.seo?.image || postEntry.data.cover?.image;
+
   const post = {
     ...mapPostToListShape(postEntry, snapshot.authorsData, snapshot.categoriesData),
     content: postEntry.content,
@@ -296,9 +298,7 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
         postEntry.data.seo?.ogDescription ||
         postEntry.data.seo?.description ||
         postEntry.data.description,
-      twitterImage: postEntry.data.cover?.image
-        ? { mediaItemUrl: postEntry.data.cover.image }
-        : null,
+      twitterImage: socialImage ? { mediaItemUrl: socialImage } : null,
     },
   };
 
