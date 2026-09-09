@@ -63,7 +63,7 @@ This shared buffers + page cache scheme works reasonably well but has some downs
 
 #### Technical challenges
 
-1. In a disaggregated storage system such as Lakebase, data read from storage does not travel through the OS filesystem or page cache.
+1. In a [disaggregated storage system such as Lakebase Postgres](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents), data read from storage does not travel through the OS filesystem or page cache.
 2. Shared buffers is a static parameter, meaning that it is set prior to starting Postgres and cannot be changed without rebooting the database. This is a meaningful challenge for a serverless autoscaling system such as Lakebase.
 3. Postgres uses a separate operating system process for each active connection, so the larger the shared buffers - i.e. the more memory you give Postgres - the more memory management the OS must do for each and every connection, which in turn consumes memory.
 
@@ -102,7 +102,8 @@ On larger working sets, capping shared buffers at 1 GB forced most cache hits to
 
 <Admonition type="tip" title="Fixed computes came first">
 Our first delivery of larger shared buffers targets fixed-size computes, since shared buffers are not yet dynamic. On these, we now disable the LFC and set shared buffers to 75% of DRAM. This is live today for fixed-size computes with CU >= 18 (Neon) or >= 80 (Databricks). Eliminating the ~1 GB buffer cap keeps hot pages in the fastest memory layer instead of cascading down to local file storage. 
-  To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU Lakebase endpoint in Databricks should see a value of `20971520`
+  
+  To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU [Lakebase endpoint in Databricks](https://www.databricks.com/product/lakebase) should see a value of `20971520`.
 </Admonition>
 
 Keeping hot data in shared buffers rather than the OS page cache also addresses the downsides described earlier. There is no double buffering, so 1 GB of cached data consumes 1 GB of RAM instead of 2 GB. And because the cache lives inside Postgres rather than the kernel, eviction decisions can be made with knowledge of database state — that positions us to pursue smarter replacement policies than the OS can offer.
@@ -132,8 +133,6 @@ We recently introduced dedicated huge-page backing across our VM infrastructure.
 <Admonition type="tip" title="Tip">
 To see if large explicit huge pages are enabled for your compute, run `show huge_pages` within a Postgres connection.  An 80 CU Lakebase endpoint should see a value of `"on"`
 </Admonition>
-
-To move beyond fixed sized computes, we've developed a protocol for autoscaling huge pages provided to the guest. Huge pages are scaled in concert with dynamic shared buffers, ensuring that we maintain efficient address translation even at high concurrency and memory sizes.
 
 ## Production results
 
@@ -175,7 +174,7 @@ On this workload, CPU use fell from 20 cores to 4 after the August 15 rollout. T
 
 We are currently working to bring larger shared buffers to autoscaling Postgres computes. Autoscaling introduces additional complexity: we must dynamically expand shared buffers when scaling up and shrink them when scaling down—all while allocating the exact required volume of huge pages.
 
-Our next post (part 2) will get into the technical details of the dynamic shared buffers implementation, including the current state of open source Postgres and the areas we've chosen to further advance the feature and contribute upstream.
+To move beyond fixed sized computes, we've developed a protocol for autoscaling huge pages provided to the guest. Huge pages are scaled in concert with dynamic shared buffers, ensuring that we maintain efficient address translation even at high concurrency and memory sizes. Our next post (part 2) will get into the technical details of this dynamic shared buffers implementation, including the current state of open source Postgres and the areas we've chosen to further advance the feature and contribute upstream.
 
 ## Related work: disabling full-page images
 
