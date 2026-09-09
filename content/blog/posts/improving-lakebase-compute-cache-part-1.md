@@ -119,11 +119,13 @@ Some simple numbers: each 1 GB of shared buffers corresponds to 262,144 page tab
 
 This working set also far exceeds the capacity of the Translation Lookaside Buffer (TLB), a cache in the CPU's memory management unit that speeds virtual-to-physical translation. Even a shared buffer hit then incurs a penalty from TLB misses and page table walks.
 
-To mitigate this, the Postgres community advises using an OS mechanism named huge pages (2 MB each) with large shared buffers. Switching to huge pages reduces page table sizes by a factor of 512 and significantly lowers TLB miss rates. In our benchmark tests, configuring Postgres with huge pages reduced tail read latency by up to ~40% and decreased CPU utilization by up to ~30%.
+To mitigate this, the Postgres community advises using an OS mechanism named huge pages (2 MB each) with large shared buffers. Switching to huge pages reduces page table sizes by a factor of 512 and significantly lowers TLB miss rates. 
+
+In our benchmark tests, configuring Postgres with huge pages reduced tail read latency by up to ~40% and decreased CPU utilization by up to ~30%.
 
 ### Huge page support in virtualized environments
 
-Lakebase executes within lightweight guest virtual machines on bare-metal hosts. Memory address translation involves two virtualized layers. Capitalizing on huge pages requires a consistent implementation across the entire stack: from host-level reservation, through the hypervisor backing the VM's memory, to the guest kernel. A breakdown at any tier degrades the resulting performance benefits.
+Lakebase Postgres executes within lightweight guest virtual machines on bare-metal hosts. Memory address translation involves two virtualized layers. Capitalizing on huge pages requires a consistent implementation across the entire stack: from host-level reservation, through the hypervisor backing the VM's memory, to the guest kernel. A breakdown at any tier degrades the resulting performance benefits.
 
 We recently introduced dedicated huge-page backing across our VM infrastructure. We chose to use explicit 2 MB HugeTLB pages rather than rely on best-effort transparent huge pages. Now, VMs allocated for large fixed-size computes initialize with a predetermined volume of huge pages sufficient for Postgres startup. To optimize system resources, compute startup automatically releases any surplus huge pages beyond those required by Postgres.
 
@@ -131,11 +133,11 @@ We recently introduced dedicated huge-page backing across our VM infrastructure.
 To see if large explicit huge pages are enabled for your compute, run `show huge_pages` within a Postgres connection.  An 80 CU Lakebase endpoint should see a value of `"on"`
 </Admonition>
 
-To move beyond fixed sized computes we've developed a protocol for autoscaling huge pages provided to the guest. Huge pages are scaled in concert with dynamic shared buffers, ensuring that we maintain efficient address translation even at high concurrency and memory sizes.
+To move beyond fixed sized computes, we've developed a protocol for autoscaling huge pages provided to the guest. Huge pages are scaled in concert with dynamic shared buffers, ensuring that we maintain efficient address translation even at high concurrency and memory sizes.
 
 ## Production results
 
-The rollout started region by region a few weeks ago. The examples below were measured on large production endpoints after the restart that enabled the new configuration. The hit-rate charts are the same `Compute cache hit rate` metric you see on the Metrics tab.
+The rollout started region by region a few weeks ago. The examples below were measured on large production endpoints after the restart that enabled the new configuration.
 
 <Admonition type="tip" title="Tip">
 If you're using Neon, the hit-rate charts are the same `Compute cache hit rate` metric you see on the Metrics tab.
@@ -170,19 +172,19 @@ On this workload, CPU use fell from 20 cores to 4 after the August 15 rollout. T
 
 ## Coming next: autoscaling
 
-We are currently working to bring larger shared buffers to auto-scaling Postgres computes. Auto-scaling introduces additional complexity. We must dynamically expand shared buffers when scaling up and shrink them when scaling down—all while allocating the exact required volume of huge pages.
+We are currently working to bring larger shared buffers to autoscaling Postgres computes. Autoscaling introduces additional complexity: we must dynamically expand shared buffers when scaling up and shrink them when scaling down—all while allocating the exact required volume of huge pages.
 
-Part 2 of this series  Our next post will get into the technical details of the dynamic shared buffers implementation, including the current state of open source Postgres and the areas we've chosen to further advance the feature and contribute upstream.
+Our next post (part 2) will get into the technical details of the dynamic shared buffers implementation, including the current state of open source Postgres and the areas we've chosen to further advance the feature and contribute upstream.
 
 ## Related work: disabling full-page images
 
-Our performance optimizations extend to all compute sizes, not just large instances. Earlier this year, we [disabled Postgres full-page writes and delegated image generation to the storage tier](https://neon.com/blog/turning-off-fpw-for-faster-writes). This enhancement delivers a 94% reduction in WAL volume, up to 5× higher write throughput, and an increase from 17,000 to 62,000 rows/s on production synced-table workloads.
-
-These advancements stem from the same core architectural principle that decouples compute from the distributed storage. The storage layer acts as the authoritative system of record. A compute node is stateless, and its memory serves as a caching layer.
+Worth mentioning that our performance optimization work extend to all compute sizes, not just large instances. Earlier this year, we [disabled Postgres full-page writes and delegated image generation to the storage tier](https://neon.com/blog/turning-off-fpw-for-faster-writes). This enhancement delivers a 94% reduction in WAL volume, up to 5× higher write throughput, and an increase from 17,000 to 62,000 rows/s on production synced-table workloads.
 
 ## Try it
 
-Lakebase Postgres runs in two places — same core engine, different surroundings:
+All these performance improvements stem from the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview). The storage layer acts as the authoritative system of record, a compute node is stateless - and its memory serves as a caching layer.
+
+You can run Lakebase Postgres in two places — same core engine, different surroundings:
 
 - On [Neon](https://neon.com/), as backend primitives for developers, startups, and agent platforms.
 - On [Databricks](https://www.databricks.com/product/lakebase), integrated with the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows.
