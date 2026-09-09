@@ -4,8 +4,8 @@ subtitle: Connect Neon to your agent, then build and grow your app from prompts
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that builds a public blog with seeded posts and a publish form.
-  Includes the key files to expect and follow-up prompts for sign-in, image
-  uploads, and AI summaries.
+  Includes the key files to expect and follow-up prompts for sign-in, file
+  downloads, AI summaries, and Neon branching.
 enableTableOfContents: true
 updatedOn: '2026-09-09T13:42:19.000Z'
 ---
@@ -24,11 +24,11 @@ cd my-app
 npx neon@latest init
 ```
 
-Open your AI coding agent in the newly created `my-app` directory so it works on this project.
-
 `neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file.
 
 When `neon init` asks "Manage this project's Neon setup as code?", choose **Yes**. At the service picker, select **no** optional services for now. This scaffolds a starter `neon.ts` that you'll add services to with the follow-up prompts.
+
+Open your AI coding agent in the newly created `my-app` directory so it works on this project.
 
 ## Build your app with one prompt
 
@@ -123,19 +123,19 @@ Open [localhost:3000](http://localhost:3000) and you'll see your seeded posts, n
 The first three prompts each add a backend service to the app you just built. The fourth creates a branch for isolated changes.
 
 ```text shouldWrap filename="Prompt: add sign-in"
-Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Update `neon.ts` to declare Managed Better Auth, then run `neon deploy` to apply and provision it.
+Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.
 ```
 
-```text shouldWrap filename="Prompt: add image uploads"
-Add an optional cover image to each post using Neon Object Storage. Store the object key on the post, never the bytes, add an upload control, and render the cover image on the post. Update `neon.ts` to declare Object Storage, then run `neon deploy` to apply and provision it.
+```text shouldWrap filename="Prompt: save posts as files"
+Save each post as a Markdown file in Neon Object Storage and show a Download link on every post. Store the file in a private bucket, keep the object key on the post, and fetch it through a short-lived presigned URL. Update neon.ts to declare Object Storage, then run neon deploy to apply and provision it.
 ```
 
 ```text shouldWrap filename="Prompt: add AI summaries"
-Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update `neon.ts` to declare AI Gateway, then run `neon deploy` to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
+Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
 ```
 
 ```text shouldWrap filename="Prompt: work on a branch"
-Create a Neon branch to try changes in isolation, then switch to it: run `npx neon@latest branches create --name my-feature`, then `npx neon@latest checkout my-feature`.
+Create a Neon branch to try changes in isolation, then switch to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature.
 ```
 
 <NeedHelp/>
