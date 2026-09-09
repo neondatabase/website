@@ -3,8 +3,8 @@ title: 'Run durable multi-step workflows on Neon Functions with Upstash Workflow
 subtitle: 'Learn how to build reliable, long-running multi-step pipelines by combining Upstash Workflow with Neon Functions'
 author: dhanush-reddy
 enableTableOfContents: true
-createdAt: '2026-08-29T00:00:00.000Z'
-updatedOn: '2026-09-01T10:42:51.379Z'
+createdAt: '2026-09-09T00:00:00.000Z'
+updatedOn: '2026-09-09T12:34:45.864Z'
 ---
 
 If you're building a backend that runs long jobs, you need a way to execute each step reliably and keep track of state between them. Maybe it's a sequence of onboarding emails spread over a few days, an AI pipeline where each model call depends on the previous one's output, or a weekly report that takes minutes to generate. If the request times out or the server restarts halfway through, the job can stop, and restarting it often means repeating steps that already succeeded.
@@ -15,7 +15,7 @@ That's where [Upstash Workflow](https://upstash.com/docs/workflow/getstarted) co
 
 Pair it with [Neon Functions](/docs/compute/functions/overview) and the whole pipeline can run in one place. Neon Functions are long-running Node.js functions deployed onto a Neon branch, so your workflow endpoint runs in the same region as [Lakebase Postgres](/docs/postgres/overview). Since a function is just an HTTPS endpoint, QStash can deliver each workflow step directly to it. You don't need to manage a separate queue or keep worker processes running.
 
-In this guide, you'll build a subscriber onboarding pipeline with Upstash Workflow running on a Neon Function. The endpoint you deploy will run four steps, including a durable wait:
+In this guide, you'll build a subscriber onboarding pipeline with Upstash Workflow running on a Neon Function. The endpoint you deploy will run three steps and a durable wait:
 
 - Records the signup in Lakebase Postgres with a `pending` status
 - Drafts a personalized welcome message with an LLM through the [Neon AI Gateway](/docs/ai-gateway/overview)
@@ -213,17 +213,31 @@ CREATE TABLE subscribers (
 
 The table will be used to store subscriber information, including their email, name, welcome message, status, and the timestamp of when they were created.
 
-## Set up the database connection pool
+## Set up environment variables and the connection pool
+
+Create `src/env.ts` and export a typed `env` object with the Neon config. The `parseEnv` function reads the variables from the environment and ensures they match the types declared in `neon.ts`. This gives you type-safe access to your environment variables throughout your code:
+
+```ts filename="src/env.ts"
+import { parseEnv } from "@neon/env";
+import { config } from "../neon";
+
+export const env = parseEnv(config, "workflow");
+```
+
+<Admonition type="note">
+The `config` object is the named export you add to `neon.ts` in [Configure `neon.ts` and deploy](#configure-neonts-and-deploy).
+</Admonition>
 
 Neon Functions run as long-lived Node.js processes, so you can use a Postgres connection pool to reuse connections across requests.
 
 Create `src/db.ts` and export a `Pool` instance from the `pg` package. The pool reads the `DATABASE_URL` from the environment, which Neon injects automatically:
 
 ```ts filename="src/db.ts"
-import { Pool } from 'pg';
+import { Pool } from "pg";
+import { env } from "./env";
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: env.postgres.databaseUrl,
   max: 5,
 });
 ```
@@ -305,6 +319,7 @@ Create the entry point for your Neon Function at `index.ts`. It registers the Ho
 ```ts filename="index.ts"
 import { Hono } from "hono";
 import { Client } from "@upstash/workflow";
+import { env } from "./src/env";
 import workflowApp from "./src/workflow";
 
 const app = new Hono();
@@ -318,9 +333,8 @@ app.route("/api/workflow", workflowApp);
 app.post("/api/signup", async (c) => {
   const { subscriberId, email, name } = await c.req.json();
 
-  const baseUrl = new URL(c.req.url).origin;
   const { workflowRunId } = await workflowClient.trigger({
-    url: `${baseUrl}/api/workflow`,
+    url: `${env.function.NEON_FUNCTION_WORKFLOW_BASE_URL}/api/workflow`,
     body: { subscriberId, email, name },
     retries: 3,
   });
@@ -338,6 +352,10 @@ The Hono app exposes two routes:
 - **`/api/workflow`**: The workflow endpoint that QStash calls once per step. It delegates to the `workflowApp` defined in [`src/workflow.ts`](#define-the-workflow-endpoint).
 - **`/api/signup`**: The trigger route that starts a new workflow run.
 
+The trigger route reads `env.function.NEON_FUNCTION_WORKFLOW_BASE_URL` from the typed `env` object in [`src/env.ts`](#set-up-environment-variables-and-the-connection-pool) and appends `/api/workflow` to build the callback URL it hands to QStash. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment the same way, and the Upstash SDK reads them automatically.
+
+`NEON_FUNCTION_WORKFLOW_BASE_URL` is populated in `.env.local` with the function's own base URL after your first deploy, so you'll deploy twice, in [Configure `neon.ts` and deploy](#configure-neonts-and-deploy).
+
 ## Configure Upstash credentials
 
 With the Hono app and the workflow client set up, you need to add your Upstash credentials to `.env.local`. Copy your Upstash Workflow credentials from the [Upstash Console](https://console.upstash.com/qstash) and add them to your `.env.local` file:
@@ -352,12 +370,12 @@ QSTASH_NEXT_SIGNING_KEY="sig_..."
 
 ## Configure `neon.ts` and deploy
 
-The `neon init` command created a `neon.ts` file in your project root. Update it to register the workflow function and pass the Upstash credentials to the function at deploy time. The workflow function is declared under `preview.functions.workflow`, and the `env` object passes the credentials to the function:
+The `neon init` command created a `neon.ts` file in your project root. Update it to register the workflow function and pass the function's environment variables at deploy time. The workflow function is declared under `preview.functions.workflow`, and the `env` object passes the Upstash credentials and `NEON_FUNCTION_WORKFLOW_BASE_URL` to the function:
 
-```ts filename="neon.ts" {9-23}
+```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
 
-export default defineConfig({
+export const config = defineConfig({
   branch: (branch) => {
     if (branch.isDefault) { return {}; }
     if (!branch.exists) { return { ttl: "7d" }; }
@@ -369,6 +387,7 @@ export default defineConfig({
         name: "Upstash Workflow Endpoint",
         source: "./index.ts",
         env: {
+          NEON_FUNCTION_WORKFLOW_BASE_URL: process.env.NEON_FUNCTION_WORKFLOW_BASE_URL || "http://localhost:8787",
           QSTASH_URL: process.env.QSTASH_URL!,
           QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
           QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY!,
@@ -379,6 +398,8 @@ export default defineConfig({
     aiGateway: true
   },
 });
+
+export default config;
 ```
 
 Deploy your function with the following command:
@@ -392,6 +413,31 @@ The `--env .env.local` flag loads your env file so the `process.env` references 
 ```text
 Function URLs
   • workflow: https://br-damp-voice-xxx-workflow.compute.c-3.us-east-2.aws.neon.tech
+```
+
+The URL is derived from the function's slug, so it stays the same across deploys. You can retrieve the function's slug and invocation URL at any time with:
+
+```bash
+neon functions get workflow
+```
+
+```text
+slug           workflow
+name           workflow
+invocation_url https://br-damp-voice-xxx-workflow.compute.c-3.us-east-2.aws.neon.tech
+```
+
+With the function deployed, `NEON_FUNCTION_WORKFLOW_BASE_URL` is populated in `.env.local` with the function's invocation URL:
+
+```bash filename=".env.local"
+# ..other environment variables..
+NEON_FUNCTION_WORKFLOW_BASE_URL="https://br-damp-voice-xxx-workflow.compute.c-3.us-east-2.aws.neon.tech"
+```
+
+Deploy a second time so the deployed function receives `NEON_FUNCTION_WORKFLOW_BASE_URL`.
+
+```bash
+neon deploy --env .env.local
 ```
 
 Your workflow endpoint is now live at:
