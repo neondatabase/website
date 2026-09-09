@@ -4,7 +4,7 @@ subtitle: 'Learn how to build reliable, long-running multi-step pipelines by com
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-09T00:00:00.000Z'
-updatedOn: '2026-09-09T12:34:45.864Z'
+updatedOn: '2026-09-09T12:42:37.395Z'
 ---
 
 If you're building a backend that runs long jobs, you need a way to execute each step reliably and keep track of state between them. Maybe it's a sequence of onboarding emails spread over a few days, an AI pipeline where each model call depends on the previous one's output, or a weekly report that takes minutes to generate. If the request times out or the server restarts halfway through, the job can stop, and restarting it often means repeating steps that already succeeded.
@@ -23,6 +23,12 @@ In this guide, you'll build a subscriber onboarding pipeline with Upstash Workfl
 - Saves the message and marks the subscriber as `onboarded`
 
 These same four building blocks can be applied to any multi-step pipeline where a failed step shouldn't force earlier steps to run again.
+
+<CopyPrompt
+  src="/prompts/upstash-workflow-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Architecture overview
 
@@ -105,7 +111,7 @@ Follow the prompts to configure your project:
 
 1. **Coding agents**: Choose **Plugin (recommended)**, then select the agents you use (for example, Claude Code, Codex, or Cursor). The plugin lets these agents assist you in building and working with Neon.
 2. **Project**: `neon init` runs `neon link` automatically and asks which project to link. **Create a new project** named `neon-upstash-workflow` (or pick an existing one).
-3. **Region**: Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), because Neon Functions are currently available only in this region during beta.
+3. **Region**: Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
 4. **Setup as code**: Confirm that you want to manage your setup as code, then select **Functions** and **AI Gateway** as the services `neon.ts` should declare.
 
 The full initialization looks like this:
