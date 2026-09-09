@@ -7,7 +7,7 @@ summary: >-
   Includes the key files to expect, three service follow-up prompts, and a
   hands-on Neon branching demo.
 enableTableOfContents: true
-updatedOn: '2026-09-09T18:08:59.000Z'
+updatedOn: '2026-09-09T18:38:29.000Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -136,19 +136,23 @@ Generate a short summary or excerpt from each post body using Neon AI Gateway, s
 
 ## Try changes safely with branching
 
-A Neon branch is an instant, isolated copy of your database, including its current data and schema. Use one to try a risky change, prove the result, and throw the branch away without touching production.
+A Neon branch is an instant, isolated copy of your database, including its data. You can make changes on the branch without affecting your main database, then delete the branch when you're done.
 
-```text shouldWrap filename="Prompt: try a destructive change safely"
+**Prompt: make a change on a branch (this one deletes every post)**
+
+```text
 Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and show me the blog feed is now empty.
 ```
 
-The feed is empty only on the branch; your production data is untouched. Switch back yourself to watch the original posts return.
+The posts are gone on the branch, but your main database still has them. Switch back to see for yourself:
 
-Switching back rewrites `DATABASE_URL` in your local env file, and Next.js reads it only at startup. Run the checkout command, **restart the dev server** (a browser refresh alone is not enough), refresh the page to see every post restored, and then delete the throwaway branch:
-
-```bash filename="Terminal"
+```bash
 npx neon@latest checkout main
-# Restart your dev server, then refresh the page — every post is back
+```
+
+Restart the dev server so it picks up the change (Next.js only reads `DATABASE_URL` at startup, so refreshing the page is not enough), then reload the page. Every post is back. Delete the branch when you're done:
+
+```bash
 npx neon@latest branches delete my-feature
 ```
 

@@ -71,10 +71,16 @@ describe('with-an-agent quickstart content contract', () => {
   it('stops the agent at an empty feed, then gives the reader restore commands', () => {
     const branching = section(page, 'Try changes safely with branching');
     const promptBody = branching.match(/```text[^\n]*\n([\s\S]*?)\n```/)?.[1];
-    const terminalRecipe = branching.match(/```bash[^\n]*\n([\s\S]*?)\n```/)?.[1];
+    const terminalRecipes = [...branching.matchAll(/```bash[^\n]*\n([\s\S]*?)\n```/g)].map(
+      ([, body]) => body
+    );
 
     expect(branching).toContain('instant, isolated copy of your database');
-    expect(branching).toContain('current data and schema');
+    expect(branching).toContain('including its data');
+    expect(branching).toContain('without affecting your main database');
+    expect(branching).toContain(
+      '**Prompt: make a change on a branch (this one deletes every post)**'
+    );
     expect(promptBody).toBeDefined();
     expect(promptBody).toContain('npx neon@latest branches create --name my-feature');
     expect(promptBody).toContain('npx neon@latest checkout my-feature');
@@ -85,17 +91,19 @@ describe('with-an-agent quickstart content contract', () => {
     expect(promptBody).not.toContain('Switch back');
     expect(promptBody).not.toContain('`');
 
-    expect(branching).toContain('The feed is empty only on the branch');
-    expect(branching).toContain('your production data is untouched');
-    expect(branching).toContain('Switching back rewrites `DATABASE_URL` in your local env file');
-    expect(branching).toContain('Next.js reads it only at startup');
-    expect(branching).toContain('a browser refresh alone is not enough');
-    expect(terminalRecipe).toBeDefined();
-    expect(terminalRecipe).toContain('npx neon@latest checkout main');
-    expect(terminalRecipe).toContain('Restart your dev server, then refresh the page');
-    expect(terminalRecipe).toContain('npx neon@latest branches delete my-feature');
+    expect(branching).toContain('The posts are gone on the branch');
+    expect(branching).toContain('your main database still has them');
+    expect(terminalRecipes).toEqual([
+      'npx neon@latest checkout main',
+      'npx neon@latest branches delete my-feature',
+    ]);
+    expect(branching).toContain('Restart the dev server so it picks up the change');
+    expect(branching).toContain('Next.js only reads `DATABASE_URL` at startup');
+    expect(branching).toContain('refreshing the page is not enough');
+    expect(branching).toContain('Every post is back');
     expect(branching).toContain(
       "[Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration)"
     );
+    expect(page).not.toContain('—');
   });
 });
