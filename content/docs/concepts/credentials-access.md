@@ -110,7 +110,7 @@ Your access on a project is your organization role plus any per-project grant yo
 IP Allow and Private Networking only protect the Postgres connection. Object Storage, the AI Gateway, and Function URLs are protected by their credentials instead. See [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking).
 
 <Admonition type="important" title="Network controls don't cover every service">
-IP Allow and Private Networking gate the Postgres endpoint. They don't restrict requests to Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately. IP Allow and Private Networking do not apply to them.
+IP Allow and Private Networking gate the Postgres endpoint. They don't restrict requests to Object Storage, the AI Gateway, or Function URLs. For those services the credential is the access control, so scope it and anchor it deliberately.
 </Admonition>
 
 ## Compliance controls
