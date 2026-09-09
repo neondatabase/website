@@ -41,7 +41,10 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/social.jpg
 ---
 
-While building with agents, you've probably run into a situation where an agent needs a database, but by then you've stepped away from the keyboard. The next step is something like a signup form, an email verification, or an API key the agent doesn't have. It needs you to complete that step manually, and until then it can't proceed with the implementation.
+When building with agents, surely you have experienced this: 
+- Your agent is halfway through building an app
+- It needs a database, but you (the human who started the task) are no longer at the keyboard
+- The next step would be a signup form, an email verification, or an API key the agent does not have - it needs you, so the work stops
 
 We're launching **[Claimable Neon](https://neon.com/claimable-neon)** to give the agent another path. This flow implements the anonymous registration method in [auth.md](https://workos.com/auth-md), the open agent registration protocol authored by WorkOS, to give agents a way to provision a temporary Neon project without creating an account or collecting payment details. The agent gets credentials scoped to that project and keeps building. If you like the result, you can sign in later and claim the project into a Neon organization.
 
@@ -80,7 +83,7 @@ The protocol supports three registration methods:
 - User claimed: the agent waits while a human signs in and confirms a code.
 - Anonymous: the agent starts with limited access, then offers a claim flow if the human wants to keep the result.
 
-Claimable Neon uses the **Anonymous** method.
+Claimable Neon uses the Anonymous method.
 
 ## Why we chose anonymous registration
 
@@ -115,8 +118,8 @@ neon branches list
 neon claim accept --no-open
 ```
 
-If the agent already has access to a Neon account, it should use that account. Claimable Neon is the path for the moment before an account exists and the human is not around to create one.
+PS: If the agent already has access to a Neon account, it should use that account. Claimable Neon is the path for the moment before an account exists and the human is not around to create one.
 
 ---
 
-We loved collaborating with WorkOS to build Claimable Neon. If you're building something similar, make sure to check out [auth.md](https://workos.com/auth-md).
+**We loved collaborating with WorkOS to build Claimable Neon. If you're building something similar, make sure to check out [auth.md](https://workos.com/auth-md).**
