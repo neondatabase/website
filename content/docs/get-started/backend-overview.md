@@ -212,7 +212,7 @@ import { neon } from "@neon/ai-sdk-provider";
 import { streamText } from "ai";
 
 const result = streamText({
-  model: neon("gpt-5-mini"), // or "claude-sonnet-4-6", "gemini-3-flash", ...
+  model: neon("gpt-5-mini"), // or "glm-5-3-flash", "gemini-3-flash", ...
   system: "Answer using only the user's notes.",
   prompt: `${question}\n\nNotes:\n${notesText}`,
 });
