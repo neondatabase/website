@@ -356,6 +356,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/hans-norheim.jpg",
     "photoAlt": "Hans Norheim"
   },
+  "haoyu-huang": {
+    "name": "Haoyu Huang",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/haoyu-huang.jpg",
+    "photoAlt": "Haoyu Huang"
+  },
   "hayla-westhead": {
     "name": "Hayla Westhead",
     "role": "Lead Legal Counsel",
@@ -740,6 +747,13 @@
     "url": "https://twitter.com/siegerts",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/stephen-siegert.jpg",
     "photoAlt": "Stephen Siegert"
+  },
+  "sunil-kamath": {
+    "name": "Sunil Kamath",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/sunil-kamath.jpg",
+    "photoAlt": "Sunil Kamath"
   },
   "taraneh-dohmer": {
     "name": "Taraneh Dohmer",
