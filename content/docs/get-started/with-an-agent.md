@@ -4,10 +4,10 @@ subtitle: Connect Neon to your agent, then build and grow your app from prompts
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that builds a public blog with seeded posts and a publish form.
-  Includes the key files to expect and follow-up prompts for sign-in, file
-  downloads, AI summaries, and Neon branching.
+  Includes the key files to expect, three service follow-up prompts, and a
+  hands-on Neon branching demo.
 enableTableOfContents: true
-updatedOn: '2026-09-09T13:42:19.000Z'
+updatedOn: '2026-09-09T18:04:36.000Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -120,7 +120,7 @@ Open [localhost:3000](http://localhost:3000) and you'll see your seeded posts, n
 
 ## Keep building
 
-The first three prompts each add a backend service to the app you just built. The fourth creates a branch for isolated changes.
+These three prompts each add a backend service to the app you just built.
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.
@@ -134,8 +134,14 @@ Save each post as a Markdown file in Neon Object Storage and show a Download lin
 Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
 ```
 
-```text shouldWrap filename="Prompt: work on a branch"
-Create a Neon branch to try changes in isolation, then switch to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature.
+## Try changes safely with branching
+
+A Neon branch is an instant, isolated copy of your database, including its current data and schema. Use one to try a risky change, prove the result, and throw the branch away without touching production.
+
+```text shouldWrap filename="Prompt: try a destructive change safely"
+Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it picks up the branch's updated DATABASE_URL. Then delete every post and show me the blog feed is now empty. Switch back to the default branch with npx neon@latest checkout main, restart the server, and show me that all the original posts are still there — proving the branch let me run a destructive change without touching production data. When you're done, delete the throwaway branch with npx neon@latest branches delete my-feature.
 ```
+
+Want each code branch to get its own preview URL with a matching database branch? See [Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration).
 
 <NeedHelp/>
