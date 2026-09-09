@@ -13,24 +13,23 @@ import backgroundNoise from 'images/pages/home/backed-by/bg-noise.jpg';
 const CARDS = [
   {
     icon: startAtZeroIcon,
-    title: 'Start at $0',
-    description: 'There are no per-app fixed fees, there are no fees for security and compliance.',
+    title: 'Deploy instantly',
+    description: 'Your users get a backend in seconds, including Postgres.',
   },
   {
     icon: efficientDevTestIcon,
-    title: 'Efficient dev/test',
-    description: 'Usage-based billing with branching duplicates environments cost-effectively.',
+    title: 'With agent economics',
+    description: 'Inactive backends cost practically $0 thanks to scale to zero.',
   },
   {
     icon: multiTenancyIcon,
-    title: 'Multi-tenancy',
-    description:
-      'Infra is managed automatically by agents via API, enabling user architectures at scale.',
+    title: 'Mature API',
+    description: 'Provision, set quotas, manage fleets, and control pricing from one API.',
   },
   {
     icon: lowEntryBarrierIcon,
-    title: 'Low entry barrier',
-    description: 'Our architectural efficiency powers a free plan with 100 projects.',
+    title: 'Branch everything',
+    description: 'Use branches for checkpoints, preview environments, and undos.',
   },
 ];
 
@@ -59,11 +58,12 @@ const AgentPlatform = () => (
           className="text-[4.5rem] leading-none font-normal tracking-tighter xl:text-6xl lg:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
           id="agent-platform-heading"
         >
-          Pay for what you use, not for the infrastructure you might need.
+          Tell your codegen agent to deploy Neon.
         </h2>
         <p className="mt-6 max-w-184 text-lg leading-normal font-normal tracking-extra-tight text-gray-new-40 lg:text-base lg:leading-snug md:mt-4.5 md:text-[0.9375rem]">
-          Neon is built for a world where developers create, test, and scale more than ever. Start
-          free, experiment freely, and pay only for the resources your applications actually use.
+          Neon already backs Replit, v0, Netlify, Laravel, and many other agents that build apps.
+          Apply to our Agent Plan for a sponsored free tier, up to $25K in credits, and a shared
+          Slack channel.
         </p>
         <Button
           className="mt-9 bg-black-pure! font-medium hover:bg-gray-new-20! lg:mt-8 md:mt-7"

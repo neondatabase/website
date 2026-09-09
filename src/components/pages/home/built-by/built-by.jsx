@@ -43,9 +43,8 @@ const BuiltBy = () => (
             'xl:max-w-200 xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
           )}
         >
-          <strong className="font-normal text-white">Trusted Postgres. Backed by Giants.</strong>{' '}
-          Neon was founded by Postgres committers, bringing decades of expertise. In 2025, Neon
-          became part of the Databricks Platform.
+          <strong className="font-normal text-white">Backed by giants.</strong> First founded by
+          Postgres hackers with decades of expertise, Neon is now part of the Databricks Platform.
         </h2>
 
         <ul className="mt-24.5 grid max-w-296 min-w-0 grid-cols-[2fr_1fr_.9fr] xl:mt-20 lg:mt-16 md:mt-12 md:grid-cols-1 md:gap-y-10">

@@ -46,8 +46,8 @@ const OperateWithAgents = () => (
           className="ml-px max-w-[1182px] indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 xl:ml-0 xl:indent-16 xl:text-4xl lg:indent-0 lg:text-[2.25rem] md:text-[2rem]"
           id="operate-with-agents-heading"
         >
-          <span className="text-white">Built for developers working with coding agents.</span>{' '}
-          Coding agents can now build features, spin up environments, and ship code in minutes.
+          <span className="text-white">Agent, deploy Neon.</span> Create and branch environments the
+          way you work with PRs, with full access via MCP, CLI, and SDK.
         </h2>
       </header>
 

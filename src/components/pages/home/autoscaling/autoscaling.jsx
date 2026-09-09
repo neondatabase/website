@@ -70,10 +70,9 @@ const Autoscaling = () => {
             )}
           >
             <strong className="font-normal text-white">
-              Automatic scaling adapts to your application,
+              Autoscaling scales compute in real-time following your application.
             </strong>{' '}
-            removing capacity planning and delivering the right infrastructure at every stage of
-            growth.
+            Optimized cost-performance, without capacity planning.
           </h2>
 
           <div

@@ -30,7 +30,9 @@ const ScaleYourApp = () => (
           className="relative left-px max-w-296 indent-24 text-5xl leading-dense font-normal tracking-tighter text-gray-new-50 xl:left-0 xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[2rem]"
           id="scale-your-app-heading"
         >
-          <span className="text-white">One backend, from your first user to the Fortune 500. </span>
+          <span className="text-white">
+            A backend that scales from your first user to the Fortune 500.{' '}
+          </span>
           Startups ship on the same Neon primitives that enterprise teams run in production.
         </h2>
       </header>
