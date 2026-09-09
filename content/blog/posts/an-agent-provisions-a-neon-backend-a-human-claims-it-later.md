@@ -1,5 +1,5 @@
 ---
-title: 'Claimable Neon: Backends provisioned by agents & claimed by humans'
+title: 'Claimable Neon: Provisioned by agents, claimed by humans'
 description: >-
   Who'll come through the door?
 excerpt: >-
@@ -21,7 +21,7 @@ cover:
   alt: null
 isFeatured: false
 seo:
-  title: 'Claimable Neon: Backends provisioned by agents & claimed by humans - Neon'
+  title: 'Claimable Neon: Provisioned by agents, claimed by humans - Neon'
   description: >-
     We're launching Claimable Neon to give the agent another path. This flow
     implements the anonymous registration method in auth.md, the open agent
