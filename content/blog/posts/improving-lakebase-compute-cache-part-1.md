@@ -75,11 +75,13 @@ Now that we've provided some background, let's talk about how we are solving the
 
 **Our desired end state is to make the most efficient use of the DRAM on your compute via Postgres dynamic shared buffers that autoscale with your workload and use up to 75% of available memory.** 
 
-We need to eventually adjust our compute platform to leverage autoscaling shared buffers, but we also want to deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers. So even if autoscaling computes are the goal, we started with fixed computes, as we'll see next.  
+We need to eventually adjust our compute platform to leverage autoscaling shared buffers, but we also want to deliver sensible incremental improvements to our customers as they become available.  Each incremental delivery allows us to confidently ship one or more pieces of the roadmap while giving real benefit to customers. So even if autoscaling computes are the goal, we started with fixed computes, as covered in the next section.   
 
 <Admonition type="Note" title="Contributing upstream: next">
 The Postgres machinery for achieving this goal has been discussed in the open source community with reasonable progress.  We've decided to collaborate in the open and accelerate delivery of this technology for the broader Postgres community. Coming soon.
 </Admonition>
+
+Here's what we implemented.
 
 ### Larger shared buffers
 
@@ -98,15 +100,16 @@ Shared buffers were tuned conservatively so that they did not consume too much m
 
 On larger working sets, capping shared buffers at 1 GB forced most cache hits to pass through the slower LFC tier. The LFC has served us well, but our intent is to retire its current form as we progress towards fully dynamic shared buffers.
 
-Our first delivery of larger shared buffers targets fixed-size computes, since shared buffers are not yet dynamic. On these, we now disable the LFC and set shared buffers to 75% of DRAM. It is live today for fixed-size computes with CU >= 18 (Neon) or >= 80 (Lakebase). Eliminating the ~1 GB buffer cap keeps hot pages in the fastest memory layer instead of cascading down to local file storage.
-
-<Admonition type="tip" title="Tip">
-To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU Lakebase endpoint should see a value of `20971520`
+<Admonition type="tip" title="Fixed computes came first">
+Our first delivery of larger shared buffers targets fixed-size computes, since shared buffers are not yet dynamic. On these, we now disable the LFC and set shared buffers to 75% of DRAM. This is live today for fixed-size computes with CU >= 18 (Neon) or >= 80 (Databricks). Eliminating the ~1 GB buffer cap keeps hot pages in the fastest memory layer instead of cascading down to local file storage. 
+  To see if large shared buffers are enabled for your compute, run `show shared_buffers` within a Postgres connection.  An 80 CU Lakebase endpoint in Databricks should see a value of `20971520`
 </Admonition>
 
 Keeping hot data in shared buffers rather than the OS page cache also addresses the downsides described earlier. There is no double buffering, so 1 GB of cached data consumes 1 GB of RAM instead of 2 GB. And because the cache lives inside Postgres rather than the kernel, eviction decisions can be made with knowledge of database state — that positions us to pursue smarter replacement policies than the OS can offer.
 
-Sizing shared buffers at 75% of DRAM on fixed-size computes was not as simple as making a configuration change.  That is because of the third technical challenge, the process per backend architecture. We describe our solution in the next section.
+Sizing shared buffers at 75% of DRAM on fixed-size computes was not as simple as making a configuration change.  That is because of the third technical challenge, the process per backend architecture. 
+
+This next section describes our solution.
 
 ### Addressing memory and translation overhead with huge pages
 
