@@ -1,10 +1,10 @@
 ---
-title: 'Improving Lakebase Compute Cache, Part 1'
+title: 'Improving Lakebase Postgres Compute Cache on Neon, Part 1'
 description: >-
   Large Postgres compute nodes now run up to 2× faster and with lower
   latency
 excerpt: >-
-  On large fixed-size Lakebase Postgres computes, we now put most of the
+  On large fixed-size Lakebase Postgres computes on Neon, we now put most of the
   machine's memory into Postgres shared buffers and back that cache with huge
   pages. Hot pages stay in DRAM instead of falling through to a local disk
   cache, so the same working set is served faster and with less CPU.
@@ -23,24 +23,24 @@ cover:
   alt: Improving Lakebase Compute Cache, Part 1
 isFeatured: false
 seo:
-  title: Improving Lakebase Compute Cache, Part 1 - Neon
+  title: Improving Lakebase Postgres Compute Cache on Neon, Part 1
   description: >-
-    Lakebase large Postgres compute nodes now run up to 2× faster and with lower
+    Large Lakebase Postgres compute nodes on Neon now run up to 2× faster and with lower
     latency by increasing the shared buffers size and backing with huge pages.
   keywords: []
   noindex: false
-  ogTitle: Improving Lakebase Compute Cache, Part 1 - Neon
+  ogTitle: Improving Lakebase Postgres Compute Cache on Neon, Part 1
   ogDescription: >-
-    Lakebase large Postgres compute nodes now run up to 2× faster and with lower
+    Large Lakebase Postgres compute nodes on Neon now run up to 2× faster and with lower
     latency by increasing the shared buffers size and backing with huge pages.
   image: https://cdn.neonapi.io/public/images/pages/blog/improving-lakebase-compute-cache-part-1/social.jpg
 ---
 
 <Admonition type="tip" title="TL;DR">
-On large fixed-size [Lakebase Postgres](https://neon.com/docs/postgres/overview) computes, we now put most of the machine's memory into Postgres shared buffers and back that cache with huge pages. Hot pages stay in DRAM instead of falling through to a local disk cache, so the same working set is served faster and with less CPU. As a result, we're measuring up to about 2× throughput, fewer reads from the storage layer, and lower latency. This improvement is already live today on fixed-size computes at CU ≥ 80 on [Databricks](https://www.databricks.com/product/lakebase) and CU ≥ 18 on [Neon](https://neon.com/). Autoscaling computes are next (it'll be part 2 of this series).
+On large fixed-size [Lakebase Postgres](https://neon.com/docs/postgres/overview) computes on Neon, we now put most of the machine's memory into Postgres shared buffers and back that cache with huge pages. Hot pages stay in DRAM instead of falling through to a local disk cache, so the same working set is served faster and with less CPU. As a result, we're measuring up to about 2× throughput, fewer reads from the storage layer, and lower latency. This improvement is already live today on fixed-size computes at CU ≥ 80 on [Databricks](https://www.databricks.com/product/lakebase) and CU ≥ 18 on [Neon](https://neon.com/). Autoscaling computes are next (it'll be part 2 of this series).
 </Admonition>
 
-The disaggregated storage model of a lakebase provides a feature rich, flexible, low cost platform for Postgres. Efficient caching of data is critical to provide high throughput and low latency while data is backed in an object store such as S3.
+The disaggregated storage model of Neon's lakebase architecture provides a feature rich, flexible, low cost platform for Postgres. Efficient caching of data is critical to provide high throughput and low latency while data is backed in an object store such as S3.
 
 This caching takes place at two layers: in distributed storage, where Postgres pages are materialized for high write throughput and read serving; and on the Postgres compute itself to serve frequently accessed pages from DRAM for ultra fast access.
 
