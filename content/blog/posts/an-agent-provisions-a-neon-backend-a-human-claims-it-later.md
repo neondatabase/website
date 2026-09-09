@@ -48,6 +48,8 @@ Today, agents can deploy Neon databases ([Lakebase Postgres](https://neon.com/do
 
 ## How Claimable Neon works
 
+**[add clip 1]**
+
 Claimable Neon separates provisioning from ownership:
 
 1. **The agent discovers the path:** It starts with `llms.txt`, then reads `neon.com/auth.md` to learn how Claimable Neon works.
@@ -61,6 +63,8 @@ An unclaimed project will expire after 72 hours, and it is capped at 100 MB of s
 
 To build something like Claimable Neon, you need to guide agents beyond the API docs. They need to know how to register, which flows a service accepts, which capabilities they can request, and how to obtain credentials without pretending to be a human. [auth.md](https://workos.com/auth-md) provides that guide.
 
+**[add clip 2]**
+
 WorkOS authored auth.md, but the protocol is not tied to WorkOS infrastructure - any service can publish it, and any agent can read it. It composes existing OAuth standards with a registration layer designed for agents.
 
 How it works:
@@ -71,9 +75,9 @@ How it works:
 
 The protocol supports three registration methods:
 
-- **Agent verified:** an agent provider vouches for a signed-in user.
-- **User claimed:** the agent waits while a human signs in and confirms a code.
-- **Anonymous:** the agent starts with limited access, then offers a claim flow if the human wants to keep the result.
+- Agent verified: an agent provider vouches for a signed-in user.
+- User claimed: the agent waits while a human signs in and confirms a code.
+- Anonymous: the agent starts with limited access, then offers a claim flow if the human wants to keep the result.
 
 Claimable Neon uses the **Anonymous** method.
 
