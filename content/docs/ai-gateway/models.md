@@ -7,7 +7,7 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:18:16.922Z'
+updatedOn: '2026-09-09T18:39:19.826Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -48,7 +48,9 @@ If you hit the limit, you'll receive a `429 Too Many Requests` response with a m
 
 The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-Once billing begins, usage will also be capped by your prepaid credit balance. See [Pricing](#pricing) below.
+The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
+
+Once billing begins, a default daily spend limit of $20 per account also applies, alongside your prepaid credit balance. It's a soft limit too, so [contact Support](/docs/introduction/support) if you need it raised. When you reach either limit, requests are blocked with a `429 Too Many Requests` response and error code `REQUEST_LIMIT_EXCEEDED`; see [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded). See [Pricing](#pricing) below.
 
 ## Pricing
 
