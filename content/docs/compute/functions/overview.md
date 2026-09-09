@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-09T23:53:23.490Z'
 ---
 
 Neon Functions are serverless functions you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -42,6 +42,8 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 <a href="/docs/compute/functions/environment-variables" description="Neon-injected variables and how to add your own secrets." icon="gear">Environment variables</a>
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
+
+<a href="/docs/compute/functions/custom-domains" description="Serve a function from a domain you own with automatic TLS." icon="globe">Custom domains</a>
 
 <a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
 
