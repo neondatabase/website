@@ -35,7 +35,7 @@ const Architecture = () => (
       </h2>
 
       <figure
-        className="mt-[77px] xl:mt-[64px] lg:mt-[56px] md:mt-[40px]"
+        className="mt-[72px] md:mt-[40px]"
         aria-label="Decoupled compute and shared versioned storage in Lakebase"
         role="img"
       >
@@ -51,7 +51,7 @@ const Architecture = () => (
         />
       </figure>
 
-      <div className="mt-14 grid grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-x-48 xl:gap-x-20 lg:mt-10 lg:grid-cols-1 lg:gap-y-10 md:mt-8 md:gap-y-10">
+      <div className="mt-[56px] grid grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-x-48 xl:gap-x-20 lg:grid-cols-1 lg:gap-y-10 md:mt-8 md:gap-y-10">
         <p className="text-[40px] leading-dense tracking-extra-tight text-gray-new-40 xl:text-[32px] lg:max-w-[720px] lg:text-[28px] md:text-[22px] sm:text-[20px]">
           <span className="text-black-new">{architecture.description}</span>{' '}
           {architecture.secondaryDescription}

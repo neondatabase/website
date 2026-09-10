@@ -15,12 +15,13 @@ icon features below the diagram; Autoscaling uses a contained chart on a gray
 background with three numbered benefits beneath it. On mobile these rows stack.
 The PR's Rive interactions, mobile image fallbacks, and statistic/tab behavior
 are preserved. The shared Markdown mirror reads the same content in page order.
-Architecture additionally keeps all tooltip flags off while idle; the original
-file otherwise reopens its default Compute tooltip without pointer input. The
-neutral/hover synchronization runs only while the diagram is visible.
-The Architecture Rive fills the container at its native 2770 × 1530 artboard
-ratio. Its height follows the width; no cropped stage, extra background, or
-bottom rule is added around it. Pointer coordinates use the full artboard.
+Architecture uses the supplied `lakebase-scheme.riv` with its own state machine
+and pointer interactions; the previous file's manual hover adapter is removed.
+The Architecture layout follows the visible 2368 × 1058 background at (262, 374)
+inside the 2770 × 1770 artboard. The full canvas scales proportionally around
+that frame, with overflow available for native tooltips. The visible background
+fills the container, 72 px below the heading and 56 px above the following text
+on desktop. No extra background or bottom rule is added.
 
 ## Source mapping
 
@@ -41,6 +42,9 @@ animation hook and WebGL2 renderer are unchanged.
 
 ## Assets and eventual consolidation
 
+- `public/animations/pages/lakebase/lakebase-scheme.riv` is the replacement
+  Architecture animation supplied on September 10, 2026. Its `main` artboard
+  uses state machine `SM`; the original homepage asset is retained.
 - `public/animations/pages/home/lakebase-postgres.riv` and the three new mobile
   PNGs keep their original PR paths and exact bytes.
 - `public/animations/rive/` keeps the PR's matching Canvas WASM files and paths.
