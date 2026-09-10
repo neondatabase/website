@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.14.6",
+  "neonctlVersion": "4.15.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -899,6 +899,11 @@
         }
       ],
       "options": {
+        "create": {
+          "type": "boolean",
+          "describe": "Create the named branch if it does not exist, then check it out",
+          "default": false
+        },
         "env": {
           "type": "string",
           "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
@@ -922,8 +927,12 @@
           "description": "Pin a branch by id for an explicit project"
         },
         {
-          "command": "$0 checkout feat --env .env.local",
+          "command": "$0 checkout feat --create --env .env.local",
           "description": "Create feat from neon.ts, loading Function env from .env.local first"
+        },
+        {
+          "command": "$0 checkout dev --create",
+          "description": "Create and pin a missing branch named dev"
         },
         {
           "command": "$0 checkout main",
