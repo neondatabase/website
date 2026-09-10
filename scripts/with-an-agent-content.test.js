@@ -79,6 +79,9 @@ describe('with-an-agent quickstart content contract', () => {
     expect(branching).toContain('including your data and its stored files');
     expect(branching).toContain('without affecting your main branch');
     expect(branching).toContain(
+      '```text shouldWrap filename="Prompt: make a change on a branch (this one deletes every post)"'
+    );
+    expect(branching).not.toContain(
       '**Prompt: make a change on a branch (this one deletes every post)**'
     );
     expect(promptBody).toBeDefined();
@@ -93,8 +96,12 @@ describe('with-an-agent quickstart content contract', () => {
     expect(promptBody).not.toContain('Switch back');
     expect(promptBody).not.toContain('`');
 
-    expect(branching).toContain('The feed is empty on the branch');
-    expect(branching).toContain('your main branch still has all the posts and their files');
+    expect(branching).toContain(
+      'The feed is empty because your app is now pointed at the branch, where you deleted every post.'
+    );
+    expect(branching).toContain(
+      'Your main branch still has all the posts and their files. Switch back to verify:'
+    );
     expect(terminalRecipes).toEqual([
       'npx neon@latest checkout main',
       'npx neon@latest branches delete my-feature',
