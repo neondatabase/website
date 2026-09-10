@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-10T13:38:23.543Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -438,6 +438,10 @@ The following table outlines the RAM, compute cache size (75% of RAM), and the `
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+</Admonition>
+
+<Admonition type="note" title="Caching on large fixed-size computes">
+On fixed-size computes of 18 CU and above, Neon delivers this cache as Postgres `shared_buffers` set to 75% of RAM and backed by huge pages, and disables the secondary file cache that smaller and autoscaling computes rely on. This keeps hot data in memory rather than on the compute's local disk. Confirm the configuration with `SHOW shared_buffers` and `SHOW huge_pages`, and measure cache efficiency with the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph. See [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache) for details.
 </Admonition>
 
 | Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
