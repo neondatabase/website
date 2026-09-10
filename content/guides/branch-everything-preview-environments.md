@@ -4,7 +4,7 @@ subtitle: 'Give every pull request its own production-like copy of your entire b
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
-updatedOn: '2026-09-10T10:25:11.177Z'
+updatedOn: '2026-09-10T12:30:12.482Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
@@ -43,7 +43,7 @@ Database branching solves the data problem, but most applications also have an a
 | **[Neon AI Gateway](/docs/ai-gateway/overview)**       | Its own gateway endpoint, with credentials bound to the branch and its descendants              |
 | **[Neon Object Storage](/docs/storage/overview)**      | Its own storage namespace: buckets and objects cloned copy-on-write at fork time                |
 
-Every service in the table inherits from the parent at fork time and is scoped to the branch: auth tokens issued on one branch are invalid on another, function URLs contain the branch ID, and storage credentials point at the branch's endpoint. A branch has your production schema, rows, users, and files. It's production-like because it _is_ production, isolated at a point in time.
+Every service in the table inherits from the parent at fork time and is scoped to the branch: auth tokens issued on one branch are invalid on another, function URLs contain the branch ID, and storage credentials point at the branch's endpoint. A branch has your production schema, rows, users, and files.
 
 ## What you'll build
 
@@ -78,8 +78,8 @@ Before starting, make sure you have:
 1. **Node.js**: Version 20 or later. Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup). AI Gateway requires a paid plan.
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
-4. **GitHub account and repository**: Sign up at [github.com](https://github.com) and push the DocNotes code to a repository. The preview and production workflows run there.
-5. **Vercel account**: Sign up at [vercel.com](https://vercel.com). The workflows deploy the frontend there.
+4. **GitHub account and repository**: Sign up at [github.com](https://github.com) and create a new repository for the project. The workflows will run on this repository.
+5. **Vercel account**: Sign up at [vercel.com](https://vercel.com). The frontend will be deployed to Vercel for every branch.
 
 <Admonition type="note" title="Beta regions">
 Functions, AI Gateway, and Object Storage are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. Create your project in one of these regions to follow along.
@@ -143,10 +143,7 @@ Replace the contents of `neon.ts` with the following. It declares the backend se
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  // Services on every branch
   auth: true,
-
-  // Beta services, also on every branch
   preview: {
     aiGateway: true,
     buckets: {
@@ -170,9 +167,7 @@ export default defineConfig({
         },
       };
     }
-    // Every non-default branch is a disposable preview:
-    // minimum compute, auto-expire. Applies whether you created
-    // the branch locally or CI created it before applying this policy.
+    // Size for disposable preview and set a 7-day TTL
     return {
       ttl: "7d",
       postgres: {
@@ -186,7 +181,7 @@ export default defineConfig({
 });
 ```
 
-The `preview` section declares the beta services (AI Gateway, Object Storage, and Functions). You will define the function source in a later step. The `branch` section declares the policy for every branch: the default branch is protected and sized for production, and every other branch is a disposable preview with minimum compute and a 7-day TTL. The preview rule doesn't check whether the branch exists, so it applies to branches you create locally with `neon checkout` and to preview branches CI creates before applying the policy.
+The `preview` section declares the beta services (AI Gateway, Object Storage, and Functions). You will define the function source in a later step. The `branch` section declares the policy for every branch: the default branch is protected and sized for production, and every other branch is a disposable preview with minimum compute and a 7-day TTL.
 
 <details>
 <summary>Why these branch policy choices?</summary>
@@ -230,12 +225,6 @@ AWS_SECRET_ACCESS_KEY=nsk_live_...
 AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-2.us-east-2.aws.neon.tech
 AWS_REGION=us-east-2
 NEON_FUNCTION_API_BASE_URL=https://br-cool-darkness-a1b2c3d4-api.compute.c-2.us-east-2.aws.neon.tech
-```
-
-Before committing this project to GitHub, make sure environment files are ignored. Add `.env*` to your `.gitignore` so credentials never land in the repository:
-
-```text filename=".gitignore"
-.env*
 ```
 
 You can see what these variables have in common: every URL and credential is scoped to the _linked branch_. `DATABASE_URL` points at this branch's Postgres. `NEON_AUTH_BASE_URL` is this branch's auth endpoint. `NEON_AI_GATEWAY_BASE_URL` is this branch's gateway host. `AWS_ENDPOINT_URL_S3` is this branch's storage endpoint. `NEON_FUNCTION_API_BASE_URL` is this branch's function deployment. This is exactly what makes every branch a complete, isolated preview environment: the code running on a branch only sees the services for that branch.
@@ -316,7 +305,7 @@ In a similar way, every other service on Neon branches with your database. Every
 
 ## Create the app schema and database client
 
-Now build the real schema for DocNotes. The `documents` table stores one row per uploaded document: who owns it, where the file lives in the bucket, and what the AI summary says. The owner is a foreign key into the `user` table that Managed Better Auth maintains in the `neon_auth` schema, which is how auth data ends up branching with your business data.
+Now you'll build the backend for DocNotes. The app has a single table, `documents`, which stores uploaded documents and their AI summaries. Each document is owned by a user in the `user` table that Managed Better Auth maintains in the `neon_auth` schema.
 
 Install Drizzle ORM and the Postgres driver:
 
@@ -387,7 +376,7 @@ This step makes Drizzle aware of the auth tables, allowing you to create relatio
 
 3.  **Add the documents table to the schema:**
 
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing database schema. At the bottom of the file, append the `documents` table definition as shown below. You'll also need the imports at the top of the file:
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing database schema. At the bottom of the file, append the `documents` table definition as shown below. You'll also need to add the necessary imports at the top of the file.
 
     ```ts filename="src/db/schema.ts" {24-35}
     import { pgTable, pgSchema, index, foreignKey, uuid, text, timestamp, unique, boolean, uniqueIndex, jsonb } from "drizzle-orm/pg-core"
@@ -475,9 +464,9 @@ Foreign-key constraints:
 
 ## Build the function
 
-You'll now build the function that uses every service: it verifies the caller's JWT, calls the AI Gateway, uploads to Object Storage, and writes to Postgres. The function is deployed to a branch-scoped URL, so every branch gets its own deployment.
+You'll now build the function that handles document uploads. The function exposes two endpoints: `POST /documents` (upload, summarize, store) and `GET /documents` (list the caller's documents).
 
-Install the dependencies:
+Install the dependencies for the function:
 
 ```bash
 npm install @neon/functions hono jose openai @aws-sdk/client-s3
@@ -571,7 +560,7 @@ app.post('/documents', async (c) => {
   );
 
   const response = await ai.chat.completions.create({
-    model: 'gpt-5-mini',
+    model: 'gpt-oss-120b',
     messages: [
       { role: 'user', content: `Summarize this document:\n\n${content}` },
     ],
@@ -610,7 +599,7 @@ The code above does the following:
 
 3.  **Branch-scoped service clients**
     - `JWKS` fetches the signing keys from the branch's Managed Better Auth endpoint (`NEON_AUTH_JWKS_URL`), used to verify JWTs.
-    - `ai` is an OpenAI-compatible client pointed at the branch's AI Gateway endpoint (`NEON_AI_GATEWAY_BASE_URL`), authenticated with the branch's gateway token.
+    - `ai` is an OpenAI client that the Neon AI Gateway uses to summarize documents, authenticated with the branch's gateway token (`NEON_AI_GATEWAY_TOKEN`).
     - `s3` is an S3 client that the AWS SDK uses to upload files to the branch's Object Storage endpoint (`AWS_ENDPOINT_URL_S3`), authenticated with the branch's access key and secret.
 
 4.  **Authentication middleware**
@@ -654,29 +643,20 @@ neon functions get api
 ```
 
 ```yaml
-id: api
-slug: api
-name: DocNotes API
-invocation_url: https://br-cool-darkness-a1b2c3d4-api.compute.c-2.us-east-2.aws.neon.tech/
-current_deployment:
-  id: 1
-  status: completed
-  runtime: nodejs24
-active_deployment:
-  id: 1
-  status: completed
-  runtime: nodejs24
+Slug: api
+Name: api
+Invocation Url: https://br-cool-darkness-a1b2c3d4-api.compute.c-2.us-east-2.aws.neon.tech
 ```
 
 You can also see the function's invocation URL in `.env.local` as `NEON_FUNCTION_API_BASE_URL`. This is the URL the frontend will use to call the function. The URL is scoped to the branch (as indicated by the `br-` prefix), so every branch gets its own deployment.
 
-You can run the function locally with the Neon Functions dev server. Start it with:
+You can also run the function locally with the Neon Functions dev server. Start it with:
 
 ```bash
 neon dev
 ```
 
-The dev server prints a local URL for the function. An unauthenticated request should be rejected:
+The dev server prints a local URL for the function. An unauthenticated request should be rejected. Test it with `curl`:
 
 ```bash
 curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:8787/documents
@@ -714,12 +694,28 @@ export default defineConfig({
 });
 ```
 
-Add the Tailwind imports to the top of `src/index.css`:
+Update `src/index.css` to import Tailwind and the pre-built auth UI styles:
 
 ```css filename="src/index.css"
-@import 'tailwindcss'; // [!code ++]
+@import 'tailwindcss';
+@import '@neondatabase/auth-ui/tailwind';
 
-/* Your existing styles */
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #0f172a;
+  background-color: #f3f4f6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000000;
+}
 ```
 
 Create the auth client in `src/neon.ts`:
@@ -740,8 +736,8 @@ VITE_NEON_AUTH_URL=https://ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.build
 VITE_NEON_FUNCTION_API_BASE_URL=https://br-cool-darkness-a1b2c3d4-api.compute.c-2.us-east-2.aws.neon.tech
 ```
 
-<Admonition type="note" title="Where the VITE_ variables come from">
-Locally, `neon deploy` writes a public invocation URL for each declared function to `.env.local` as `NEON_FUNCTION_<SLUG>_BASE_URL`, so `NEON_FUNCTION_API_BASE_URL` here. Running `neon env pull` refreshes the branch's variables on demand. Copy the values to the two `VITE_` aliases for the frontend to use; you do this once per branch you work on, because `neon checkout` refreshes `.env.local` when you switch branches. In CI, no one copies anything by hand: the preview workflow pulls the preview branch's variables with `neon env pull` and derives the `VITE_` aliases from them before the build, so the frontend always talks to its own branch.
+<Admonition type="note" title="How to keep frontend variables in sync with the branch">
+Locally, `neon deploy` writes a public invocation URL for each declared function to `.env.local` as `NEON_FUNCTION_<SLUG>_BASE_URL`, so `NEON_FUNCTION_API_BASE_URL` here. Running `neon env pull` refreshes the branch's variables on demand. Copy the values to the two `VITE_` aliases for the frontend to use; you do this once per branch you work on, because `neon checkout` refreshes `.env.local` when you switch branches. In CI, you need to setup a script to pull the branch's variables and copy the necessary ones to the `VITE_` aliases before building the frontend.
 </Admonition>
 
 Update the app entry point in `src/main.tsx` to wrap the app in `NeonAuthUIProvider` and `BrowserRouter`:
@@ -766,7 +762,7 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
-The `emailOTP` prop enables one-time-code sign-in in the pre-built UI. Make sure the project allows it too: in the Neon Console, open **Settings → Auth** and enable **Sign-up and Sign-in with Email**. Neon then delivers the one-time code by email.
+The `emailOTP` prop enables one-time-code sign-in in the pre-built UI.
 
 Create `src/api.ts`. This helper fetches the session's JWT and attaches it to every request to the function:
 
@@ -803,30 +799,17 @@ export const api = {
       method: 'POST',
       body: formData,
     }),
-
-  toggleStar: (id: string) =>
-    api.request(`/documents/${id}`, { method: 'PATCH' }),
 };
 ```
 
-Now the app itself. Replace `src/App.tsx` with the DocNotes UI: a sign-in gate, an upload form, and the document list:
+Finally, update `src/App.tsx` to display the list of documents and the upload form. The app uses the pre-built `AuthView` and `AccountView` components for sign-in and account management, and calls the function through the `api` helper.
 
 ```tsx filename="src/App.tsx"
 import { useEffect, useState } from 'react';
-import {
-  AuthView,
-  RedirectToSignIn,
-  SignedIn,
-} from '@neondatabase/auth-ui';
+import { AccountView, AuthView, RedirectToSignIn, SignedIn } from '@neondatabase/auth-ui';
 import { api } from './api';
 import { Route, Routes, useParams } from 'react-router';
-
-type Document = {
-  id: string;
-  filename: string;
-  summary: string;
-  starred?: boolean;
-};
+import { type Document } from './db/schema';
 
 function Documents() {
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -849,38 +832,35 @@ function Documents() {
     refresh();
   };
 
-  const toggleStar = async (doc: Document) => {
-    const updated = await api.toggleStar(doc.id);
-    setDocuments(
-      documents.map((d) => (d.id === doc.id ? updated : d)),
-    );
-  };
-
   return (
     <main className="mx-auto max-w-2xl space-y-8 p-8">
-      <h1 className="text-2xl font-bold">DocNotes</h1>
+      <h1 className="text-2xl font-bold tracking-tight text-white">DocNotes</h1>
 
       <SignedIn>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <input type="file" name="file" accept=".txt" required />
+          <input
+            type="file"
+            name="file"
+            accept=".txt"
+            required
+            className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white text-sm text-gray-600 file:mr-3 file:cursor-pointer file:rounded-md file:border-0 file:bg-black file:px-3 file:py-1.5 file:text-white hover:border-gray-400"
+          />
           <button
             type="submit"
-            className="rounded bg-black px-4 py-2 text-white"
+            className="w-full rounded-lg bg-black px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 sm:w-auto"
           >
             Upload and summarize
           </button>
         </form>
 
-        <ul className="space-y-4">
+        <ul className="space-y-3">
           {documents.map((doc) => (
-            <li key={doc.id} className="rounded border p-4">
-              <div className="flex items-center justify-between">
-                <p className="font-medium">{doc.filename}</p>
-                <button onClick={() => toggleStar(doc)} aria-label="Star">
-                  {doc.starred ? '★' : '☆'}
-                </button>
-              </div>
-              <p className="text-sm text-gray-600">{doc.summary}</p>
+            <li
+              key={doc.id}
+              className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow"
+            >
+              <p className="font-medium text-gray-900">{doc.filename}</p>
+              <p className="mt-1 text-sm text-gray-600">{doc.summary}</p>
             </li>
           ))}
         </ul>
@@ -891,20 +871,32 @@ function Documents() {
   );
 }
 
+function AuthViewWrapper() {
+  const { pathname } = useParams();
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-8 dark:bg-gray-900">
+      <AuthView pathname={pathname} />
+    </div>
+  );
+}
+
+function AccountPage() {
+  const { pathname } = useParams();
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-8 dark:bg-gray-900">
+      <AccountView pathname={pathname} />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Documents />} />
       <Route path="/auth/:pathname" element={<AuthViewWrapper />} />
+      <Route path="/account/:pathname" element={<AccountPage />} />
     </Routes>
   );
-}
-
-// AuthView needs the current pathname (for example, sign-in or sign-up),
-// which it reads from the route parameter.
-function AuthViewWrapper() {
-  const { pathname } = useParams();
-  return <AuthView pathname={pathname} />;
 }
 ```
 
@@ -918,23 +910,23 @@ npm run dev
 2. Sign up with an email address you can check. Neon emails you a one-time code; enter it to finish signing in.
 3. Upload a text file. You should see the AI-generated summary appear in the list.
 
-The whole stack just ran against your local checkout of `main`: the auth, the function, the gateway call, and the bucket were all the `main` branch's own.
+You can verify that the document is stored in Object Storage and the summary is stored in the `documents` table on your branch's database.
 
 ## Configure auth domains for previews
 
-Managed Better Auth needs to know which domains it should accept, because your preview deployments live on different URLs than production. There are two pieces.
+Managed Better Auth needs to know which domains it should accept, because your preview deployments live on different URLs than production. You need to register your production domain and
 
-First, add your production domain. In the Neon Console, navigate to **Auth → Configuration**, then under **Domains**, add your production URL (for example, `https://doc-notes.vercel.app`) and click **Add Domain**.
+First, add your production domain. In the Neon Console, navigate to **Auth → Configuration**, then under **Domains**, add your production URL (for example, `https://doc-notes.com`) and click **Add Domain**.
 
-Second, add a wildcard trusted domain for previews. Each preview deploy gets a new `*.vercel.app` hostname, such as `https://doc-notes-abc123.vercel.app`, and you don't want to register each one by hand. Follow [wildcard domains for previews](/docs/auth/guides/configure-domains) to add a pattern such as `https://*.vercel.app`. Registering domains here is what lets sign-in work from a given origin. The function's CORS middleware already reflects any origin, so tighten it to an allowlist of your hosts before going to production.
+Second, add a wildcard trusted domain for previews. Each preview deploy gets a new `*.vercel.app` hostname, such as `https://doc-notes-abc123.vercel.app`, and you don't want to register each one by hand. Follow [wildcard domains for previews](/docs/auth/guides/configure-domains#wildcard-domains-for-previews) to add a pattern such as `https://*.vercel.app`. Registering domains here is what lets sign-in work from a given origin. The function's CORS middleware already reflects any origin, so tighten it to an allowlist of your hosts before going to production.
 
 <Admonition type="info" title="How preview auth endpoints are provisioned">
-The preview workflow applies your `neon.ts` policy to each preview branch, and `auth: true` gives every branch its own Auth API endpoint. You configure production domains once; preview origins are trusted with the wildcard pattern. For OAuth providers like Google, register the branch callback URLs as described in [branches and preview deployments](/docs/auth/guides/setup-oauth#branches-and-preview-deployments).
+The preview workflow applies your `neon.ts` policy to each preview branch, and `auth: true` gives every branch its own Auth API endpoint. You configure production domains once; preview origins are trusted with the wildcard pattern.
 </Admonition>
 
 ## Automate previews and production with GitHub Actions
 
-Two GitHub Actions workflows now automate the whole loop:
+You can automate the creation of preview environments and production deployments with GitHub Actions. The workflows in this guide do the following:
 
 - **Preview** (`preview.yml`): on every pull request, creates a `preview/<git-branch>` Neon branch, applies your `neon.ts` policy to it (provisioning auth, the AI Gateway, Object Storage, and deploying the function from the PR's code), runs migrations, builds the frontend with the preview's URLs baked in, and deploys it to Vercel. A second job deletes the branch when the pull request closes.
 - **Production** (`production.yml`): on every push to `main`, deploys the function from `main`, runs migrations against production, and deploys the production build to Vercel.
@@ -1150,11 +1142,11 @@ From now on, the workflow is automatic:
 
 ## Test branch-everything with a pull request
 
-Time to see the whole thing work. You'll add a small feature to DocNotes: the ability to star a document. It touches two layers of the backend and one of the frontend, which makes it a good isolation test:
+Time to see the whole thing work. You'll add a small feature to DocNotes: the ability to star a document. It touches all three layers of the stack, which makes it a good isolation test:
 
 1. **Schema:** a `starred boolean` column on `documents`.
 2. **Function:** a `PATCH /documents/:id` route to toggle the star.
-3. **UI:** the star button in `src/App.tsx` calls the new route; it's already in the code you wrote, it just had nothing to call until now.
+3. **Frontend:** a star button on each document, wired to the new route.
 
 Start from your production branch:
 
@@ -1187,7 +1179,7 @@ npx drizzle-kit generate
 
 Add the route to `functions/api.ts`:
 
-```ts filename="functions/api.ts" {3}
+```ts filename="functions/api.ts"
 app.patch('/documents/:id', async (c) => {
   const userId = c.get('userId');
   const id = c.req.param('id');
@@ -1209,7 +1201,62 @@ app.patch('/documents/:id', async (c) => {
 });
 ```
 
-The star button is already in the frontend you built (the `toggleStar` helper in `src/api.ts` and the button in `src/App.tsx`), so the UI work here is done. Commit, push, and open a pull request:
+Then wire up the frontend. Add the `toggleStar` helper to `src/api.ts`:
+
+```ts filename="src/api.ts"
+export const api = {
+  // ... the request helper ...
+
+  getDocuments: () => api.request('/documents'),
+
+  uploadDocument: (formData: FormData) =>
+    api.request('/documents', {
+      method: 'POST',
+      body: formData,
+    }),
+
+  toggleStar: (id: string) => // [!code ++]
+    api.request(`/documents/${id}`, { method: 'PATCH' }), // [!code ++]
+};
+```
+
+Then make three changes in `src/App.tsx`. Add `starred` to the `Document` type:
+
+```tsx filename="src/App.tsx"
+type Document = {
+  id: string;
+  filename: string;
+  summary: string;
+  starred?: boolean; // [!code ++]
+};
+```
+
+Add a handler that calls the new route and updates the list in place:
+
+```tsx filename="src/App.tsx"
+const toggleStar = async (doc: Document) => { // [!code ++]
+  const updated = await api.toggleStar(doc.id); // [!code ++]
+  setDocuments( // [!code ++]
+    documents.map((d) => (d.id === doc.id ? updated : d)), // [!code ++]
+  ); // [!code ++]
+}; // [!code ++]
+```
+
+And render a star button next to each document's filename:
+
+```tsx filename="src/App.tsx"
+<li key={doc.id} className="rounded border p-4">
+  <div className="flex items-center justify-between"> // [!code ++]
+    <p className="font-medium">{doc.filename}</p> // [!code ++]
+    <button onClick={() => toggleStar(doc)} aria-label="Star"> // [!code ++]
+      {doc.starred ? '★' : '☆'} // [!code ++]
+    </button> // [!code ++]
+  </div> // [!code ++]
+  <p className="text-sm text-gray-600">{doc.summary}</p>
+</li>
+```
+
+That's the full feature: one migration, one new route, and a handful of frontend edits, all in one pull request. Commit, push, and open the pull request:
 
 ```bash
 git add . && git commit -m "feat: star documents"
