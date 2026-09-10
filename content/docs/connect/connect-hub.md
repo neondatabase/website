@@ -1,6 +1,6 @@
 ---
 title: Connect your app
-subtitle: Connect your app to Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway
+subtitle: Connect your app to Lakebase Postgres and other backend services
 summary: >-
   You connect your app to a branch. A branch can provide Lakebase Postgres,
   Object Storage, Managed Better Auth, and AI Gateway. Connecting to any of them
@@ -11,35 +11,33 @@ summary: >-
 enableTableOfContents: true
 ---
 
-You connect your app to a branch. A branch can provide Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway. Connecting to any of them follows the same steps: pick a branch, get its credentials, and use them in your app.
+For all backend services, you connect your app to a particular branch. Each branch can serve whichever services you have enabled: Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway.
 
 <Admonition type="tip" title="Just need a Postgres connection string?">
-Open the Console Connect screen, copy it, done. Jump to [Use Postgres](#use-postgres) for the snippet.
+If you only need a Postgres connection string, click **Connect** on your project dashboard and copy it. See [Use each service](#use-each-service) for details.
 </Admonition>
 
-## Pick your branch
+<Steps>
 
-Credentials are branch-scoped. Each branch has its own isolated credentials and data, whether it is your default branch (named `main` or `production`) or a child branch you use for development, testing, or preview deployments.
+## Choose your branch
 
-A child branch is a copy-on-write clone of its parent, so it starts with isolated credentials and its own copy of the data. You can test your app with real authentication workflows and real storage without touching your default branch. Integrations like Vercel take this further by creating a child branch for each preview deployment automatically. See [Isolated credentials per branch](#isolated-credentials-per-branch) below.
+Credentials are branch-scoped. Each branch has its own isolated credentials and data, whether it is your default branch (for example, `main`) or a child branch you use for development, testing, or preview deployments.
+
+A child branch is a copy-on-write clone of its parent, so it starts with isolated credentials and its own copy of the data. You can test your app with real authentication workflows and real storage without touching your default branch. You can automate previews using [GitHub Actions](/docs/guides/branching-github-actions) or the [Vercel integration](/docs/guides/neon-managed-vercel-integration), where a child branch is created for each preview automatically. See [Develop with preview branches](#develop-with-preview-branches) below.
 
 ## Get your connection details
 
 You can get connection details from the Console, CLI, or API.
 
-### Console
+<Tabs labels={["Console", "CLI", "API"]}>
+<TabItem>
 
-In the Neon Console, select your project and click **Connect** on the Project Dashboard. The **Connect to your branch** modal shows:
-
-- Branch selector (defaults to your default branch)
-- Compute, database, and role selectors
-- Tabs for **Postgres database**, **Storage**, **AI Gateway**, **Data API**, and **Auth**
+In the Neon Console, select your project and click **Connect** on the Project Dashboard to open the **Connect to your branch** modal.
 
 ![Connect to your branch modal](/docs/connect/connect_to_branch_modal.png)
 
-Switch tabs to get credentials for each service. For Postgres, you can copy the connection string or individual environment variables (`PGHOST`, `PGDATABASE`, `PGUSER`, `PGPASSWORD`, `PGPORT`). For Object Storage, AI Gateway, Data API, and Auth, copy the service-specific connection details.
-
-### CLI
+</TabItem>
+<TabItem>
 
 For Postgres credentials, use [`neon connection-string`](/docs/cli/connection-string):
 
@@ -59,7 +57,8 @@ By default, `neon env pull` writes `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and 
 neon env pull --service postgres --service object-storage
 ```
 
-### API
+</TabItem>
+<TabItem>
 
 For Postgres, fetch the connection string with [`GET /api/v2/projects/{project_id}/connection_uri`](/docs/manage/branches#connect-to-a-branch):
 
@@ -70,7 +69,10 @@ curl "https://console.neon.tech/api/v2/projects/{project_id}/connection_uri?bran
 
 For Object Storage credentials, use [`POST /api/v2/projects/{project_id}/branches/{branch_id}/credentials`](/docs/storage/authentication#creating-a-credential) with `storage:read` and `storage:write` scopes. For Data API and Auth, see [Managing the Data API](/docs/data-api/manage) and [Manage Auth via the API](/docs/auth/guides/manage-auth-api).
 
-## Store credentials
+</TabItem>
+</Tabs>
+
+## Store your credentials
 
 Store credentials in `.env` files for local development, in your CI secrets manager for CI/CD workflows, or let Neon Functions auto-inject them if you are deploying to Neon Functions.
 
@@ -94,27 +96,14 @@ Neon Functions auto-injects credentials for declared services. If you declare Ob
 
 ## Use each service
 
-Each service has its own connection pattern. Below are minimal snippets to get started; follow the links for full product guides.
+Use the credentials for your selected branch with each enabled service.
 
-<DetailIconCards>
+<Tabs labels={["Postgres", "Object Storage", "AI Gateway", "Auth"]}>
+<TabItem>
 
-<a href="#use-postgres" description="Connect with a Postgres driver or the Neon serverless driver." icon="postgres">Lakebase Postgres</a>
-
-<a href="#use-object-storage" description="Store and retrieve files with S3-compatible tools." icon="aws">Object Storage</a>
-
-<a href="#use-ai-gateway" description="Call AI models through an OpenAI-compatible API." icon="openai">AI Gateway</a>
-
-<a href="#use-managed-better-auth" description="Add managed authentication that branches with your data." icon="lock-landscape">Managed Better Auth</a>
-
-</DetailIconCards>
-
-### Use Postgres
-
-Lakebase Postgres is Neon's serverless Postgres. Connect with any Postgres driver or the Neon serverless driver for edge runtimes.
+Lakebase Postgres is serverless Postgres that you can access with any Postgres driver or the Neon serverless driver.
 
 You can also reach the same Postgres data over HTTP through the [Neon Data API](/docs/data-api/overview). It provides a PostgREST-compatible interface for clients that cannot use a Postgres driver.
-
-<CodeTabs labels={["Serverless driver", "Node.js (pg)", "psql"]}>
 
 ```typescript shouldWrap
 import { neon } from '@neondatabase/serverless';
@@ -123,33 +112,16 @@ const sql = neon(process.env.DATABASE_URL!);
 const rows = await sql`SELECT * FROM users`;
 ```
 
-```javascript shouldWrap
-const { Pool } = require('pg');
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const { rows } = await pool.query('SELECT * FROM users');
-```
-
-```bash shouldWrap
-psql "$DATABASE_URL"
-```
-
-</CodeTabs>
-
-**Learn more:**
-
-- [Connect to Neon](/docs/connect/connect-intro) - connection methods, drivers, and tools
-- [Connect from any app](/docs/connect/connect-from-any-app) - detailed connection string reference
+**Learn more:** [Connect from any app](/docs/connect/connect-from-any-app)
 
 <Admonition type="note" title="Credentials access and the object model">
 This guide focuses on connecting your app. For deeper background on how credentials work in Neon and how they map to the object hierarchy (projects, branches, databases, roles), see [Credentials and access](/docs/concepts/credentials-access) and [The object model](/docs/concepts/the-object-model).
 </Admonition>
 
-### Use Object Storage
+</TabItem>
+<TabItem>
 
-Neon Object Storage is S3-compatible storage. Use the Files SDK or any AWS S3 SDK.
-
-<CodeTabs labels={["Files SDK", "AWS SDK"]}>
+Neon Object Storage is S3-compatible storage. Configure an AWS S3 SDK with the branch-specific `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION` environment variables.
 
 ```typescript shouldWrap
 import { S3Client } from '@aws-sdk/client-s3';
@@ -165,32 +137,12 @@ const client = new S3Client({
 });
 ```
 
-```python shouldWrap
-import boto3, os
-
-client = boto3.client(
-    's3',
-    region_name=os.environ['AWS_REGION'],
-    endpoint_url=os.environ['AWS_ENDPOINT_URL_S3'],
-    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
-)
-```
-
-</CodeTabs>
-
-**Environment variables:**
-
-- `AWS_ACCESS_KEY_ID` - S3 Access Key ID
-- `AWS_SECRET_ACCESS_KEY` - S3 Secret Access Key
-- `AWS_ENDPOINT_URL_S3` - Branch S3 endpoint URL
-- `AWS_REGION` - Storage region (for example, `us-east-2`)
-
 **Learn more:** [Neon Object Storage overview](/docs/storage/overview)
 
-### Use AI Gateway
+</TabItem>
+<TabItem>
 
-AI Gateway credentials are branch-scoped and work for the anchor branch and its descendants. They use the same scoped-credential system as Object Storage.
+AI Gateway uses a branch-scoped credential. Set `NEON_AI_GATEWAY_BASE_URL` to the branch host, append a dialect path such as `/v1`, and authenticate with `NEON_AI_GATEWAY_TOKEN`.
 
 ```typescript shouldWrap
 import OpenAI from 'openai';
@@ -207,20 +159,12 @@ const response = await client.chat.completions.create({
 console.log(response.choices[0].message.content);
 ```
 
-`NEON_AI_GATEWAY_BASE_URL` is the bare branch host, such as `https://<branch-host>`. Append the dialect path, such as `/v1` for the OpenAI-compatible chat completions endpoint.
+**Learn more:** [AI Gateway overview](/docs/ai-gateway/overview)
 
-**Environment variables:**
+</TabItem>
+<TabItem>
 
-- `NEON_AI_GATEWAY_BASE_URL` - Bare AI Gateway branch host
-- `NEON_AI_GATEWAY_TOKEN` - AI Gateway bearer token
-
-**Learn more:** [Get started with AI Gateway](/docs/ai-gateway/get-started)
-
-### Use Managed Better Auth
-
-Managed Better Auth is Neon's managed authentication service. It stores users, sessions, and OAuth configuration in your database and branches with your data.
-
-<CodeTabs labels={["React (client)", "Next.js (server)"]}>
+Managed Better Auth stores authentication data in the `neon_auth` schema and remains branch-aware as your database branches.
 
 ```typescript shouldWrap
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -228,32 +172,20 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-```typescript shouldWrap
-import { createNeonAuth } from '@neondatabase/auth/next/server';
-
-export const auth = createNeonAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
-});
-```
-
-</CodeTabs>
-
-**Environment variables:**
-
-- `NEON_AUTH_BASE_URL` - Auth API base URL (server-side)
-- `NEON_AUTH_COOKIE_SECRET` - Cookie signing secret (server-side)
-- `VITE_NEON_AUTH_URL` - Auth API URL (client-side, use framework-specific prefix)
-
 **Learn more:** [Managed Better Auth overview](/docs/auth/overview)
 
-## Isolated credentials per branch
+</TabItem>
+</Tabs>
+
+## Develop with preview branches
 
 When you create a child branch from your default branch, the child branch gets its own credentials that are valid only for that branch and its descendants. This means you can test authentication workflows, storage uploads, and data changes in a development, test, or preview environment without affecting your default branch.
 
 Credentials are branch-scoped: a credential created on a branch is valid for that branch and any branches descended from it. It's not valid for branches outside that lineage. See [How branch binding works](/docs/storage/authentication#how-branch-binding-works) for details.
 
-## Rotate or revoke credentials
+</Steps>
+
+## Rotate or revoke
 
 To rotate a Postgres password, generate a new one in the Console or CLI and update your environment variables. For Object Storage credentials, create a new credential, update your app, then revoke the old one. See [Revoking credentials](/docs/storage/authentication#revoking-credentials) for API details.
 
