@@ -114,6 +114,8 @@ The agent can then use existing Neon commands:
 
 ```
 neon branches list
+neon checkout dev
+neon env pull
 neon claim accept --no-open
 ```
 
