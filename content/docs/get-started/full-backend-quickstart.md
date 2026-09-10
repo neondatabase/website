@@ -393,7 +393,7 @@ app.post('/generate', async (c) => {
   const { topic, author = 'anonymous' } = await c.req.json();
 
   const { text } = await generateText({
-    model: neon('claude-sonnet-4-6'),
+    model: neon('gpt-5-nano'),
     prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
 
@@ -411,7 +411,7 @@ app.post('/assistant', async (c) => {
   const { messages } = await c.req.json();
 
   const result = streamText({
-    model: neon('claude-sonnet-4-6'),
+    model: neon('gpt-5-mini'),
     system:
       "You are a helpful assistant that answers questions about the user's blog posts. Use the queryPosts tool to look them up.",
     messages: await convertToModelMessages(messages),
