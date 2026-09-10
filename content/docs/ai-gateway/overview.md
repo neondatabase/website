@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-09T19:36:33.907Z'
+updatedOn: '2026-09-10T10:23:31.223Z'
 ---
 
 ## Foundation model access
@@ -102,7 +102,7 @@ Your credits will stay on your account, but you won't be able to use AI Gateway 
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
-By default, each account has a soft limit of 200,000 tokens per minute, plus a $20 daily spend limit once billing begins. These soft limits guard against runaway costs and platform abuse. If you need higher limits, [contact Support](/docs/introduction/support). See [Rate limits](/docs/ai-gateway/models#rate-limits) for details.
+By default, each account has a soft limit of 200,000 tokens per minute. Separately, Neon enforces an account-level daily spend cap on total usage. It applies even during the free beta, isn't a fixed published number, and can vary by account. Both guard against runaway costs and platform abuse. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Rate limits](/docs/ai-gateway/models#rate-limits) for details.
 </FaqItem>
 
 <FaqItem question="What happens if I hit a usage limit?">
