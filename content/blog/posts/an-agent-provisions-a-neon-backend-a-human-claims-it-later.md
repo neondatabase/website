@@ -19,7 +19,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/cover.jpg
   alt: Claimable Neon
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Claimable Neon: Provisioned by agents, claimed by humans - Neon'
   description: >-
@@ -39,6 +39,8 @@ seo:
     details.
   image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/social.jpg
 ---
+
+![Claimable Neon](https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/cover.jpg)
 
 When building with agents, surely you have experienced this:
 
