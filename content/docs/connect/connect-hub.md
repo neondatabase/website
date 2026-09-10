@@ -19,9 +19,9 @@ Open the Console Connect screen, copy it, done. Jump to [Use Postgres](#use-post
 
 ## Pick your branch
 
-Credentials are branch-scoped. Your production app connects to your production branch (usually `main` or `production`); preview deployments connect to preview branches. Each branch has its own isolated credentials and data.
+Credentials are branch-scoped. Each branch has its own isolated credentials and data, whether it is your default branch (named `main` or `production`) or a child branch you use for development, testing, or preview deployments.
 
-Preview branches get isolated credentials and data automatically, so you can test your app with real authentication workflows and real storage without touching production. See [Preview branches with isolated credentials](#preview-branches-with-isolated-credentials) below.
+A child branch is a copy-on-write clone of its parent, so it starts with isolated credentials and its own copy of the data. You can test your app with real authentication workflows and real storage without touching your default branch. Integrations like Vercel take this further by creating a child branch for each preview deployment automatically. See [Isolated credentials per branch](#isolated-credentials-per-branch) below.
 
 ## Get your connection details
 
@@ -247,9 +247,9 @@ export const auth = createNeonAuth({
 
 **Learn more:** [Managed Better Auth overview](/docs/auth/overview)
 
-## Preview branches with isolated credentials
+## Isolated credentials per branch
 
-Preview branches get isolated credentials and data automatically. When you create a preview branch from your main branch, the preview branch gets its own credentials that are valid only for that branch and its descendants. This means you can test authentication workflows, storage uploads, and data changes in a preview environment without affecting production.
+When you create a child branch from your default branch, the child branch gets its own credentials that are valid only for that branch and its descendants. This means you can test authentication workflows, storage uploads, and data changes in a development, test, or preview environment without affecting your default branch.
 
 Credentials are branch-scoped: a credential created on a branch is valid for that branch and any branches descended from it. It's not valid for branches outside that lineage. See [How branch binding works](/docs/storage/authentication#how-branch-binding-works) for details.
 
