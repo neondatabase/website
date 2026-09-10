@@ -2,12 +2,11 @@
 title: Connect your app
 subtitle: Connect your app to Lakebase Postgres and other backend services
 summary: >-
-  You connect your app to a branch. A branch can provide Lakebase Postgres,
-  Object Storage, Managed Better Auth, and AI Gateway. Connecting to any of them
-  follows the same steps: pick a branch, get its credentials, and use them in
-  your app. This guide walks through the complete connection workflow, from
-  picking your branch to storing credentials securely and using each service in
-  your app.
+  For all backend services, you connect your app to a particular branch. Each
+  branch can serve whichever services you have enabled: Lakebase Postgres,
+  Object Storage, Managed Better Auth, and AI Gateway. This guide walks through
+  choosing a branch, getting your connection details, storing credentials, and
+  using each service.
 enableTableOfContents: true
 ---
 
@@ -23,7 +22,7 @@ If you only need a Postgres connection string, click **Connect** on your project
 
 Credentials are branch-scoped. Each branch has its own isolated credentials and data, whether it is your default branch (for example, `main`) or a child branch you use for development, testing, or preview deployments.
 
-A child branch is a copy-on-write clone of its parent, so it starts with isolated credentials and its own copy of the data. You can test your app with real authentication workflows and real storage without touching your default branch. You can automate previews using [GitHub Actions](/docs/guides/branching-github-actions) or the [Vercel integration](/docs/guides/neon-managed-vercel-integration), where a child branch is created for each preview automatically. See [Develop with preview branches](#develop-with-preview-branches) below.
+A child branch is a copy-on-write clone of its parent, so it starts with isolated credentials and its own copy of the data. You can test your app with real authentication workflows and real storage without touching your default branch. See [Develop with preview branches](#develop-with-preview-branches) below.
 
 ## Get your connection details
 
@@ -114,10 +113,6 @@ const rows = await sql`SELECT * FROM users`;
 
 **Learn more:** [Connect from any app](/docs/connect/connect-from-any-app)
 
-<Admonition type="note" title="Credentials access and the object model">
-This guide focuses on connecting your app. For deeper background on how credentials work in Neon and how they map to the object hierarchy (projects, branches, databases, roles), see [Credentials and access](/docs/concepts/credentials-access) and [The object model](/docs/concepts/the-object-model).
-</Admonition>
-
 </TabItem>
 <TabItem>
 
@@ -177,11 +172,17 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 </TabItem>
 </Tabs>
 
+<Admonition type="note" title="Credentials access and the object model">
+This guide focuses on connecting your app. For deeper background on how credentials work in Neon and how they map to the object hierarchy (projects, branches, databases, roles), see [Credentials and access](/docs/concepts/credentials-access) and [The object model](/docs/concepts/the-object-model).
+</Admonition>
+
 ## Develop with preview branches
 
 When you create a child branch from your default branch, the child branch gets its own credentials that are valid only for that branch and its descendants. This means you can test authentication workflows, storage uploads, and data changes in a development, test, or preview environment without affecting your default branch.
 
 Credentials are branch-scoped: a credential created on a branch is valid for that branch and any branches descended from it. It's not valid for branches outside that lineage. See [How branch binding works](/docs/storage/authentication#how-branch-binding-works) for details.
+
+To automate preview branches, use [GitHub Actions](/docs/guides/branching-github-actions) or the [Vercel integration](/docs/guides/neon-managed-vercel-integration). For how branches work, see [Get started with branching](/docs/guides/branching-intro).
 
 </Steps>
 
@@ -197,7 +198,7 @@ Credential rotation workflows for Data API and Auth are similar: create a new cr
 - [The object model](/docs/concepts/the-object-model) - projects, branches, databases, and roles
 - [Connect to Neon](/docs/connect/connect-intro) - connection methods, drivers, and tools
 - [Object Storage overview](/docs/storage/overview) - buckets, objects, and authentication
-- [Get started with AI Gateway](/docs/ai-gateway/get-started) - unified access to AI models
+- [AI Gateway overview](/docs/ai-gateway/overview) - unified access to AI models
 - [Data API overview](/docs/data-api/overview) - REST API for Postgres
 - [Managed Better Auth overview](/docs/auth/overview) - managed authentication service
 
