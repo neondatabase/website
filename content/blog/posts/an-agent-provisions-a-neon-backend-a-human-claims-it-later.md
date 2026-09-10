@@ -94,7 +94,7 @@ And anonymous registration does not mean unrestricted access. The agent receives
 
 If you've been following Neon for a while, you might recognize the predecessors of Claimable Neon: we've been experimenting with this claimable workflows for a while, with projects like [neon.new](https://neon.new) or Instagres. This was built for developers: for example, they used it in workshops and demos to create an ephemeral Postgres database without stopping for signup.
 
-Claimable Neon keeps that useful split between creation and ownership, but changes who the first user is. If neon.new was an unauthenticated endpoint for developers, claimable Neon is a service for agents. It is also more closely integrated with Neon than its predecessors - it is built on the Neon Open API and `@neon/sdk`.
+Claimable Neon keeps that useful split between creation and ownership, but changes who the first user is. If neon.new was an unauthenticated endpoint for developers, claimable Neon is a service for agents. Just like its predecessors - it is built on the Neon Open API. This time using the [new `@neon/sdk`](/blog/neon-sdk).
 
 Since agents are the main access point now, Claimable Neon will eventually replace neon.new.
 
