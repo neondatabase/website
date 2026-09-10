@@ -93,8 +93,8 @@ The protocol supports three registration methods:
 
 Claimable Neon uses the Anonymous method.
 
-<Admonition type="note" title="From WorkOS">
-WorkOS published a [case study](https://workos.com/blog/neon-claimable-postgres-auth-md-case-study) on how Claimable Neon implements auth.md.
+<Admonition type="note" title="Read the WorkOS story">
+[Get the full story by WorkOS](https://workos.com/blog/neon-claimable-postgres-auth-md-case-study) on how Claimable Neon implements auth.md.
 </Admonition>
 
 ## Why we chose anonymous registration
