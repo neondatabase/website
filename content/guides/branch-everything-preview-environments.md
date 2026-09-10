@@ -4,7 +4,7 @@ subtitle: 'Give every pull request its own production-like copy of your entire b
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
-updatedOn: '2026-09-10T13:50:07.689Z'
+updatedOn: '2026-09-10T13:55:57.516Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
@@ -1381,6 +1381,14 @@ The preview workflow is a complete end-to-end test of your feature, but you can 
 - **Show schema changes in the PR.** Add Neon's [`schema-diff-action`](https://github.com/neondatabase/schema-diff-action) to your pull request workflow to post a comment summarizing the schema changes between the preview branch and production. Reviewers see the exact SQL that will hit production before it does.
 - **Run E2E tests against the preview.** The preview workflow exports the branch's connection details as environment variables, so your end-to-end suite can run against a fresh fork of production on every push. See [automated E2E testing with Neon Branching and Playwright](/guides/e2e-playwright-tests-with-neon-branching).
 - **Not on Vercel?** The preview workflow builds the frontend and deploys it to Vercel, but you can adapt it to any static hosting provider. The workflow's `npm run build` step produces a static bundle in `dist/`, which you can deploy anywhere.
+
+## Source code
+
+You can find the complete source code for this example on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/dhanushreddy291/doc-notes" description="Complete source code for the DocNotes example built with Lakebase Postgres, Managed Better Auth, Functions, AI Gateway, and Object Storage" icon="github">DocNotes Example Repository</a>
+</DetailIconCards>
 
 ## Resources
 
