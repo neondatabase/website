@@ -40,7 +40,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/social.jpg
 ---
 
-When building with agents, surely you have experienced this: 
+When building with agents, surely you have experienced this:
+
 - Your agent is halfway through building an app
 - It needs a database, but you (the human who started the task) are no longer at the keyboard
 - The next step would be a signup form, an email verification, or an API key the agent does not have - it needs you, so the work stops
@@ -51,7 +52,10 @@ Today, agents can deploy Neon databases ([Lakebase Postgres](https://neon.com/do
 
 ## Deploy a Neon backend before an account
 
-**[add clip 1]**
+<video autoPlay muted loop playsInline width="708" height="398" aria-label="Claimable Neon: an agent provisions a backend and a human claims it">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/clip-1.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/clip-1.mp4" type="video/mp4" />
+</video>
 
 Claimable Neon separates provisioning from ownership:
 
@@ -66,7 +70,10 @@ An unclaimed project will expire after 72 hours, and it is capped at 100 MB of s
 
 To build something like Claimable Neon, you need to guide agents beyond the API docs. They need to know how to register, which flows a service accepts, which capabilities they can request, and how to obtain credentials without pretending to be a human. [auth.md](https://workos.com/auth-md) provides that guide.
 
-**[add clip 2]**
+<video autoPlay muted loop playsInline width="708" height="631" aria-label="WorkOS auth.md agent registration protocol walkthrough">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/clip-2.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later/clip-2.mp4" type="video/mp4" />
+</video>
 
 WorkOS authored auth.md, but the protocol is not tied to WorkOS infrastructure - any service can publish it, and any agent can read it. It composes existing OAuth standards with a registration layer designed for agents.
 
