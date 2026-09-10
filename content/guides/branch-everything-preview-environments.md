@@ -4,7 +4,7 @@ subtitle: 'Give every pull request its own production-like copy of your entire b
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
-updatedOn: '2026-09-10T13:25:56.427Z'
+updatedOn: '2026-09-10T13:40:25.127Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
@@ -1218,7 +1218,7 @@ Generate the migration file:
 npx drizzle-kit generate
 ```
 
-> You can optionally run the migration locally, which will use the `.env.local` variables to apply it to the preview branch and allow you to test the feature in your local environment.
+> You can optionally run the migration locally, which will use the `.env.local` variables to apply it to the preview branch. This allows you to test the end-to-end flow locally with `npm run dev` and `neon dev`.
 
 Add the route to `functions/api.ts`:
 
@@ -1315,7 +1315,7 @@ When you open the pull request, the preview workflow takes over:
 
 1. It creates branch `preview/feat-star-documents`: a copy-on-write fork of production made at that instant, with production's rows, production's users, production's uploaded objects, and production's function code.
 2. `neon deploy` applies your `neon.ts` policy to the branch, so it gets its own auth, gateway endpoint, storage namespace, and a function deployment built from the PR's code at the preview branch's URL.
-3. The workflow pulls the preview branch's variables and derives the `VITE_` aliases from them, so the frontend build points at the preview's own auth and function.
+3. The workflow pulls the preview branch's variables and derives the necessary `VITE_` aliases from them, so the frontend build points at the preview's own auth and function.
 4. `npx drizzle-kit migrate` runs against the preview branch's `DATABASE_URL`, adding the `starred` column to the preview's database only.
 5. The workflow builds the frontend and deploys it to Vercel, then comments the preview URL on the pull request.
 
@@ -1346,25 +1346,19 @@ The production function rejects it. The token was issued by the preview branch's
 
 **Function URL.** The preview's function requests hit a URL containing the preview branch ID, not the production deployment. You can confirm in the function's logs in the Neon Console: select the preview branch, open **Functions**, and you'll see the preview's `api` deployment serving the preview's traffic.
 
-**AI spend.** The preview's calls to the gateway are attributed to the preview branch's credential. A runaway experiment on a feature branch can't exhaust production quota, and per-branch usage is visible in the console.
+**AI credentials.** The preview branch has its own AI Gateway credentials.
 
 **Storage.** Upload a file in the preview, then check the production branch's bucket in the Neon Console: the object only exists on the preview branch's namespace. The bucket forked copy-on-write at branch time, so the preview can even read production's existing documents, but anything it writes stays on the preview.
 
 ## Merge, promote, and clean up
 
-When the review passes, merge the pull request. Two things need to happen: the migration applies to production, and the preview branch goes away. Both are already wired.
+You've verified the feature works end to end on the preview branch, and that the preview is isolated from production. Now merge the pull request to `main` to promote the feature to production.
 
-**Promote the migration to production.** The merge pushes to `main`, which triggers the production workflow: `neon deploy` re-applies the policy and deploys the function from `main`, and `npx drizzle-kit migrate` runs against the production `DATABASE_URL`. The migration you rehearsed on the preview branch on every push now applies to production, already proven against a fork of production's data. The workflow finishes by deploying the production build to Vercel with `--prod`.
+**Promote the migration to production.** The merge pushes to `main`, which triggers the production workflow: `neon deploy` re-applies the policy and deploys the function from `main`, and `npx drizzle-kit migrate` runs against the production `DATABASE_URL`. The migration you tested on the preview branch on every push now applies to production, already proven against a fork of production's data. The workflow finishes by deploying the production build to Vercel with `--prod`.
 
 **Verify the feature in production.** Once the production deployment finishes, open your production URL, sign in, and star a document. The `starred` column now exists on the production database, and the production function deployment serves the new route.
 
 **Clean up the preview branch.** The preview workflow's cleanup job deletes `preview/<git-branch>` as soon as the pull request closes, merged or not. Deleting the branch removes everything attached to it: the auth, the function deployments, the storage namespace, and any diverged data. The branch policy's 7-day TTL is the backstop if the job can't run.
-
-**Delete the local feature branch too.** The `feat/branch-everything` branch you created in the [fork production into a feature branch step](#fork-production-into-a-feature-branch) still exists:
-
-```bash
-neon branches delete feat/branch-everything
-```
 
 </Steps>
 
@@ -1372,16 +1366,13 @@ neon branches delete feat/branch-everything
 
 Neon collapses the whole backend into a single primitive: the branch. Lakebase Postgres, Auth, Functions, AI Gateway, and Object Storage all fork copy-on-write with it and disappear together when the branch expires. One `neon.ts` file declares the environment, two GitHub Actions workflows fork it per pull request and deploy everything, and the TTL cleans up anything the workflows miss. Previews run against production's real data on near-zero-cost compute, and the protected production branch stays out of reach of the whole workflow.
 
-Two caveats while Functions, AI Gateway, and Object Storage are in beta: they're limited to the two supported regions, and some limits (like the 5 GiB object size limit) are beta-specific. Check the [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview) overviews for current status.
-
 ## Next steps
 
-The setup here is a starting point. A few directions to take it further:
+The preview workflow is a complete end-to-end test of your feature, but you can add more automation to make it even easier to review and ship:
 
 - **Show schema changes in the PR.** Add Neon's [`schema-diff-action`](https://github.com/neondatabase/schema-diff-action) to your pull request workflow to post a comment summarizing the schema changes between the preview branch and production. Reviewers see the exact SQL that will hit production before it does.
 - **Run E2E tests against the preview.** The preview workflow exports the branch's connection details as environment variables, so your end-to-end suite can run against a fresh fork of production on every push. See [automated E2E testing with Neon Branching and Playwright](/guides/e2e-playwright-tests-with-neon-branching).
-- **Prefer a managed integration?** Everything the preview workflow does to Neon (branch creation, service provisioning, variable injection) can also come from the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration), which trades the workflows you own for less setup. You can keep the production workflow either way.
-- **Not on Vercel?** The preview workflow's Neon steps don't care where you deploy. Swap the `vercel deploy dist` step for a deploy to Cloudflare Pages, Fly.io, or anywhere else that serves static files. See [automated database branching with GitHub Actions](/guides/neon-github-actions-authomated-branching).
+- **Not on Vercel?** The preview workflow builds the frontend and deploys it to Vercel, but you can adapt it to any static hosting provider. The workflow's `npm run build` step produces a static bundle in `dist/`, which you can deploy anywhere.
 
 ## Resources
 
@@ -1389,8 +1380,6 @@ The setup here is a starting point. A few directions to take it further:
 - [Branching authentication](/docs/auth/branching-authentication)
 - [`neon.ts` reference](/docs/reference/neon-ts)
 - [Automate branching with GitHub Actions](/docs/guides/branching-github-actions)
-- [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration)
-- [Automated database branching with GitHub Actions](/guides/neon-github-actions-authomated-branching)
-- [Automated E2E testing with Neon Branching and Playwright](/guides/e2e-playwright-tests-with-neon-branching)
+- [Automate Neon Functions deployments with GitHub Actions](/guides/neon-functions-github-actions)
 
 <NeedHelp/>
