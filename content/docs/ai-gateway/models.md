@@ -7,7 +7,7 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-10T10:23:31.223Z'
+updatedOn: '2026-09-10T10:25:32.615Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -50,7 +50,7 @@ The TPM limit is counted against total tokens (input and output combined), not i
 
 The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
 
-Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limit above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` (message `ai gateway daily token limit exceeded`) until the cap resets or the block is lifted. This can happen even though inference itself isn't billed yet during the beta. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this, or [contact Support](/docs/introduction/support) if you need it raised. See [Pricing](#pricing) below.
+A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED` even during the free beta. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
 ## Pricing
 
