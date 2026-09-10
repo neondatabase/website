@@ -890,6 +890,8 @@
               slug: ai-gateway/get-started
             - title: Models
               slug: ai-gateway/models
+            - title: Prepaid credits
+              slug: ai-gateway/prepaid-credits
         - section: APIs
           items:
             - title: Chat completions
