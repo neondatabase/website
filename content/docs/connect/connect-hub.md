@@ -12,8 +12,8 @@ enableTableOfContents: true
 
 For all backend services, you connect your app to a particular branch. Each branch can serve whichever services you have enabled: Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway.
 
-<Admonition type="tip" title="Just need a Postgres connection string?">
-If you only need a Postgres connection string, click **Connect** on your project dashboard and copy it. See [Use each service](#use-each-service) for details.
+<Admonition type="tip" title="Get your Postgres connection string">
+If you only need a Postgres connection string, click **Connect** on your project dashboard and copy it. See [Get your connection details](#get-your-connection-details).
 </Admonition>
 
 <Steps>
