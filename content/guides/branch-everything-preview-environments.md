@@ -4,7 +4,7 @@ subtitle: 'Give every pull request its own production-like copy of your entire b
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
-updatedOn: '2026-09-10T12:30:12.482Z'
+updatedOn: '2026-09-10T13:25:56.427Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
@@ -75,11 +75,12 @@ flowchart TD
 
 Before starting, make sure you have:
 
-1. **Node.js**: Version 20 or later. Download from [nodejs.org](https://nodejs.org/).
+1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup). AI Gateway requires a paid plan.
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **GitHub account and repository**: Sign up at [github.com](https://github.com) and create a new repository for the project. The workflows will run on this repository.
 5. **Vercel account**: Sign up at [vercel.com](https://vercel.com). The frontend will be deployed to Vercel for every branch.
+6. **Vercel CLI**: Installed globally (`npm i -g vercel@latest`) and authenticated (`vercel login`). See the [Vercel CLI Quickstart](https://vercel.com/docs/cli) for details.
 
 <Admonition type="note" title="Beta regions">
 Functions, AI Gateway, and Object Storage are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. Create your project in one of these regions to follow along.
@@ -937,13 +938,49 @@ The workflows deploy the built `dist` folder to Vercel as a static site. The app
 
 ```json filename="public/vercel.json"
 {
+  "framework": null,
+  "installCommand": null,
+  "buildCommand": null,
+  "outputDirectory": null,
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
 ```
 
+> The `framework`, `installCommand`, `buildCommand`, and `outputDirectory` fields are set to `null` to tell Vercel that the workflow will handle building and deploying the app, rather than Vercel's default build process.
+
+### Commit and push the project to GitHub
+
+The workflows run on GitHub, so commit your work and push it to the repository you created in the prerequisites:
+
+> For instructions on creating a new repository on GitHub, see [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+
+```bash shouldWrap
+git init
+git add .
+git commit -m "Add DocNotes app with Neon backend"
+git branch -M main
+git remote add origin <YOUR_GITHUB_REPO_URL>
+git push -u origin main
+```
+
 ### Create the Vercel project and token
 
-1. From the project directory, run `npx vercel link` and attach the directory to a new Vercel project named `doc-notes`.
+1. From the project directory, run `vercel link` and attach the directory to a new Vercel project named `doc-notes`.
+
+   ```bash
+   vercel link
+   ? Set up “~/doc-notes”? yes
+   ? Which scope should contain your project? My Org's projects
+   ? Link to existing project? no
+   ? What’s your project’s name? doc-notes
+   ? In which directory is your code located? ./
+   > Auto-detected Project Settings for Vite
+
+   ? Want to modify these settings? no
+   ? Do you want to change additional project settings? no
+   ✅  Linked to my-org-projects/doc-notes (created .vercel and added it to .gitignore)
+   ```
+
 2. Run `cat .vercel/project.json` and note the `orgId` and `projectId` values.
 3. Create a Vercel token at [vercel.com/account/tokens](https://vercel.com/account/tokens).
 4. In your GitHub repository, go to **Settings → Secrets and variables → Actions** and add three secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID`.
@@ -954,15 +991,15 @@ The workflows authenticate with the Neon CLI and Neon's branch actions using an 
 
 1. Create a Neon API key. See [create an API key](/docs/manage/api-keys#create-an-api-key).
 2. Add it as the repository secret `NEON_API_KEY`.
-3. Add your project ID (Neon Console → **Settings → General**) as the repository variable `NEON_PROJECT_ID`.
+3. Add your project ID (found in the `.neon` file as `projectId`) as a variable `NEON_PROJECT_ID` in **Settings → Secrets and variables → Actions → Variables**.
 
 <Admonition type="tip" title="Automatic setup">
-The [Neon GitHub integration](/docs/guides/neon-github-integration) can set `NEON_API_KEY` and `NEON_PROJECT_ID` up for you, and it's how the workflows in this guide get their credentials. The manual steps above work too.
+The [Neon GitHub integration](/docs/guides/neon-github-integration) can set `NEON_API_KEY` and `NEON_PROJECT_ID` up for you. This guide shows how to do it manually, so you understand what the workflow needs.
 </Admonition>
 
 ### Add the preview workflow
 
-Create `.github/workflows/preview.yml`:
+Create `.github/workflows/preview.yml` with the following content:
 
 ```yaml filename=".github/workflows/preview.yml"
 name: Preview environment
@@ -987,7 +1024,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - run: npm ci
@@ -1055,19 +1092,15 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-What the preview job does, step by step:
+The preview workflow does the following:
 
 1. **Creates the preview branch.** `create-branch-action` creates `preview/<git-branch>` from your project's default branch. If the branch already exists (a push to an open pull request), the action reuses it, so the workflow is safe to run on every event.
-2. **Applies `neon.ts`.** `neon deploy --branch` reconciles the preview branch with your policy: auth, the AI Gateway, and Object Storage are provisioned on it, and the function is deployed from the PR's code to the preview branch's URL. The policy also gives the branch its 7-day TTL and minimum compute.
+2. **Applies `neon.ts`.** `neon deploy --branch` reconciles the preview branch with your policy: auth, the AI Gateway, and Object Storage are provisioned on it, and the function is deployed from the PR's code to the preview branch's URL.
 3. **Pulls variables and migrates.** `neon env pull` fetches every branch-scoped variable into `.env.preview`, the workflow derives the two `VITE_` aliases from them, and `npx drizzle-kit migrate` runs against the preview branch's `DATABASE_URL`. This is the piece that makes schema changes reviewable: every push to the pull request applies the migrations to the preview branch only, so the reviewer always sees the feature against a schema that matches the code.
 4. **Builds and deploys.** `npm run build` bakes the `VITE_` URLs into the bundle, and `vercel deploy dist` publishes it as a static preview deployment. The `mkdir` + `printf` step writes the Vercel project link from your secrets, so the deployment lands in the right project without committing `.vercel/` to the repository.
-5. **Comments the URL.** `gh pr comment` posts the preview URL on the pull request, so reviewers always have a link. Every push adds a new comment; consolidate them if it gets noisy.
+5. **Comments the URL.** `gh pr comment` posts the preview URL on the pull request, so reviewers always have a link to the latest build.
 
 The `cleanup` job runs when the pull request closes, merged or not, and deletes the preview branch. Deleting the branch removes everything attached to it: the auth, the function deployments, the storage namespace, and any diverged data. If the job can't run, the branch policy's TTL expires the branch anyway.
-
-<Admonition type="note" title="Preview URLs are behind Vercel authentication by default">
-New Vercel projects protect preview deployments: only signed-in team members can open the URL. If reviewers outside your Vercel team need access, disable it under **Vercel Dashboard → Settings → Deployment Protection**.
-</Admonition>
 
 ### Add the production workflow
 
@@ -1091,7 +1124,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - run: npm ci
@@ -1140,18 +1173,26 @@ From now on, the workflow is automatic:
 4. You review the pull request against a complete, isolated copy of production.
 5. When you merge or close the pull request, the workflow deletes the branch.
 
-## Test branch-everything with a pull request
-
-Time to see the whole thing work. You'll add a small feature to DocNotes: the ability to star a document. It touches all three layers of the stack, which makes it a good isolation test:
-
-1. **Schema:** a `starred boolean` column on `documents`.
-2. **Function:** a `PATCH /documents/:id` route to toggle the star.
-3. **Frontend:** a star button on each document, wired to the new route.
-
-Start from your production branch:
+Commit the workflows and push them to GitHub:
 
 ```bash
-neon checkout main
+git add .github/workflows
+git commit -m "ci: add preview and production workflows"
+git push origin main
+```
+
+## Test branch-everything with a pull request
+
+Now that the workflows are in place, you can test a new feature with a pull request. The feature is to let users "star" documents, so they can mark important ones. This requires three changes:
+
+1. **Schema:** a `starred boolean` column on `documents`
+2. **Function:** a `PATCH /documents/:id` route to toggle the star
+3. **Frontend:** a star button on each document, wired to the new route.
+
+Create a new branch for the feature:
+
+```bash
+neon checkout feat/star-documents
 git checkout -b feat/star-documents
 ```
 
@@ -1171,11 +1212,13 @@ export const documents = pgTable('documents', {
 });
 ```
 
-Generate the migration file locally (don't apply it; the preview workflow will):
+Generate the migration file:
 
 ```bash
 npx drizzle-kit generate
 ```
+
+> You can optionally run the migration locally, which will use the `.env.local` variables to apply it to the preview branch and allow you to test the feature in your local environment.
 
 Add the route to `functions/api.ts`:
 
@@ -1201,7 +1244,7 @@ app.patch('/documents/:id', async (c) => {
 });
 ```
 
-Then wire up the frontend. Add the `toggleStar` helper to `src/api.ts`:
+Then update the frontend's API helper to call the new route:
 
 ```ts filename="src/api.ts"
 export const api = {
@@ -1220,18 +1263,7 @@ export const api = {
 };
 ```
 
-Then make three changes in `src/App.tsx`. Add `starred` to the `Document` type:
-
-```tsx filename="src/App.tsx"
-type Document = {
-  id: string;
-  filename: string;
-  summary: string;
-  starred?: boolean; // [!code ++]
-};
-```
-
-Add a handler that calls the new route and updates the list in place:
+Then make the frontend call the new route when the user clicks the star button:
 
 ```tsx filename="src/App.tsx"
 const toggleStar = async (doc: Document) => { // [!code ++]
@@ -1244,19 +1276,35 @@ const toggleStar = async (doc: Document) => { // [!code ++]
 
 And render a star button next to each document's filename:
 
-```tsx filename="src/App.tsx"
-<li key={doc.id} className="rounded border p-4">
-  <div className="flex items-center justify-between"> // [!code ++]
-    <p className="font-medium">{doc.filename}</p> // [!code ++]
-    <button onClick={() => toggleStar(doc)} aria-label="Star"> // [!code ++]
-      {doc.starred ? '★' : '☆'} // [!code ++]
-    </button> // [!code ++]
-  </div> // [!code ++]
-  <p className="text-sm text-gray-600">{doc.summary}</p>
+```tsx filename="src/App.tsx" {5-22}
+<li
+  key={doc.id}
+  className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow"
+>
+  <div className="flex items-center justify-between">
+    <p className="text-sm text-gray-500">
+      {doc.createdAt
+        ? new Date(doc.createdAt).toLocaleString()
+        : 'Unknown'}
+    </p>
+    <button
+      onClick={() => toggleStar(doc)}
+      aria-label={doc.starred ? 'Unstar' : 'Star'}
+      className={`rounded text-xl leading-none transition-colors hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 ${
+        doc.starred
+          ? 'text-yellow-500'
+          : 'text-gray-300 hover:text-yellow-400'
+      }`}
+    >
+      {doc.starred ? '★' : '☆'}
+    </button>
+  </div>
+  <p className="font-medium text-gray-900">{doc.filename}</p>
+  <p className="mt-1 text-sm text-gray-600">{doc.summary}</p>
 </li>
 ```
 
-That's the full feature: one migration, one new route, and a handful of frontend edits, all in one pull request. Commit, push, and open the pull request:
+You now have a complete feature that touches the database, the function, and the frontend. You can similarly add a feature that touches Object Storage, or the AI Gateway, or any combination of services. Commit the changes and push the branch to GitHub:
 
 ```bash
 git add . && git commit -m "feat: star documents"
