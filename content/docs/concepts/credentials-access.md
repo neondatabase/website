@@ -135,7 +135,7 @@ HIPAA is a compliance configuration available to eligible organizations and proj
 
 <a href="/docs/introduction/ip-allow" description="Restrict database connections to trusted addresses." icon="network">IP Allow</a>
 
-<a href="/docs/get-started/full-backend-quickstart" description="Obtain credentials and wire your app to Postgres, Object Storage, the AI Gateway, and the Data API." icon="setup">Build a full backend</a>
+<a href="/docs/connect/connect-hub" description="Connect your app to Postgres, Object Storage, the AI Gateway, and the Data API, one branch at a time." icon="setup">Connect your app</a>
 
 </DetailIconCards>
 
