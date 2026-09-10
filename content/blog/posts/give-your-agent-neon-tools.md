@@ -20,7 +20,7 @@ cover:
   alt: >-
     A mixing console with faders and buttons labeled Neon MCP, Mastra, and Eve,
     its display reading "168 operations"
-isFeatured: false
+isFeatured: true
 seo:
   title: Give your agent Neon tools - Neon
   description: >-
