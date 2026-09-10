@@ -18,7 +18,7 @@ Before writing code:
    - Which services does my app actually use (auth, functions, AI, object storage)?
    - What framework is my frontend built with?
    - How should preview branches be cleaned up (TTL, delete-branch-action, or both)?
-   - Do I want migrations to run as part of the preview build?
+   - Do I want migrations to run as part of the preview workflow?
 
 5. Once you understand my requirements, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting, and list the credentials and accounts the plan will actually need.
 
