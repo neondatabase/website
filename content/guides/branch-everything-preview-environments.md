@@ -1,10 +1,10 @@
 ---
 title: 'Branch everything: fully isolated preview environments on Neon'
-subtitle: 'Give every pull request its own production-like copy of your entire backend: Lakebase Postgres, Auth, Functions, AI Gateway, and Object Storage'
+subtitle: 'Give every pull request its own production-like copy of your entire backend: Lakebase Postgres, Managed Better Auth, Functions, AI Gateway, and Object Storage'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
-updatedOn: '2026-09-10T13:40:25.127Z'
+updatedOn: '2026-09-10T13:50:07.689Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
@@ -19,7 +19,7 @@ Each one is a problem on its own, but together they make the preview environment
 
 The usual fix is a shared staging environment. But if you've maintained one, you know the problems: it drifts out of sync with production the moment someone deploys to it manually, everyone's tests collide on the same data, and someone has to keep the whole thing running.
 
-[Neon](/docs/introduction) takes a different approach. On Neon, you can branch your database the same way you branch your code, and everything Neon offers (Auth, Functions, AI Gateway, and Object Storage) branches with it.
+[Neon](/docs/introduction) takes a different approach. On Neon, you can branch your database the same way you branch your code, and everything Neon offers (Managed Better Auth, Functions, AI Gateway, and Object Storage) branches with it.
 
 In this guide, you'll build a small document summarization app and wire it up so every pull request gets a complete isolated environment. Every branch has its own copy of your production data, its own auth, its own function deployments, its own AI credentials, and its own storage namespace. You can review features against a full copy of production without touching production at all.
 
@@ -31,7 +31,7 @@ In this guide, you'll build a small document summarization app and wire it up so
 
 ## What is branching?
 
-If you've used Git, [database branching](/docs/introduction/branching) will feel familiar. A Neon branch is a fork of your production database at a point in time. Branches are built on **copy-on-write**: instead of duplicating data, the branch shares storage with its parent and only records the changes made after the fork, so creating one takes about a second and costs almost nothing. And because the branch starts as an exact fork of production, you're reviewing against your real data.
+If you've used Git, [database branching](/docs/introduction/branching) will feel familiar. A Neon branch is a fork of your production database at a point in time. Branches are built on **copy-on-write**: instead of duplicating data, the branch shares storage with its parent and only records the changes made after the fork, so creating one takes about a second and costs almost nothing. And because the branch starts as an exact copy of production, you're reviewing against your real data.
 
 Database branching solves the data problem, but most applications also have an auth provider, serverless functions, AI calls, and file storage. On Neon, everything branches together: every branch gets its own copy of every service, isolated from the parent and from other branches:
 
@@ -47,7 +47,7 @@ Every service in the table inherits from the parent at fork time and is scoped t
 
 ## What you'll build
 
-You'll build **DocNotes**, a small document summarization tool, and wire it so every pull request gets a complete isolated environment. The app has one core flow: a signed-in user uploads a text document, an AI model summarizes it, the file is stored, and the summary is saved with the document.
+You'll build **DocNotes**, a small document summarization tool, and wire it so every pull request gets a complete isolated environment. The app has one core flow: a signed-in user uploads a text document, an AI model summarizes it, and the app stores the file and saves the summary with the document.
 
 The backend pieces:
 
@@ -58,7 +58,7 @@ The backend pieces:
 The workflow pieces:
 
 1. A single `neon.ts` file declaring the backend services and branch policy, which the Neon CLI uses to provision every branch automatically.
-2. Two GitHub Actions workflows that automate the whole loop: for every pull request they create a preview branch, deploy the function from the PR's code, run migrations, and deploy the frontend to Vercel; when you merge, they promote the changes to production and delete the preview branch.
+2. Two GitHub Actions workflows that automate the whole loop: for every pull request, they create a preview branch, deploy the function from the PR's code, run migrations, and deploy the frontend to Vercel. When you merge, they promote the changes to production and delete the preview branch.
 
 ```mermaid
 flowchart TD
@@ -101,7 +101,7 @@ npm create vite@latest . -- --template react-ts
 
 When prompted:
 
-- Select "Eslint" for the Linter.
+- Select "ESLint" for the Linter.
 - Select "No" for "Install with npm and start now?"
 
 Then install the dependencies:
@@ -182,7 +182,7 @@ export default defineConfig({
 });
 ```
 
-The `preview` section declares the beta services (AI Gateway, Object Storage, and Functions). You will define the function source in a later step. The `branch` section declares the policy for every branch: the default branch is protected and sized for production, and every other branch is a disposable preview with minimum compute and a 7-day TTL.
+The `preview` section declares the beta services (AI Gateway, Object Storage, and Functions). You'll define the function source in a later step. The `branch` section declares the policy for every branch: the default branch is protected and sized for production, and every other branch is a disposable preview with minimum compute and a 7-day TTL.
 
 <details>
 <summary>Why these branch policy choices?</summary>
@@ -211,7 +211,7 @@ neon deploy --update-existing
 This updates the existing branch's settings to match `neon.ts`.
 </Admonition>
 
-After `neon deploy` completes, an `.env.local` file should be created in your project root. It contains the branch's environment variables, which your code will use to connect to the backend services:
+After `neon deploy` completes, the CLI creates an `.env.local` file in your project root. It contains the branch's environment variables, which your code will use to connect to the backend services:
 
 ```text filename=".env.local"
 NEON_BRANCH=main
@@ -230,9 +230,9 @@ NEON_FUNCTION_API_BASE_URL=https://br-cool-darkness-a1b2c3d4-api.compute.c-2.us-
 
 You can see what these variables have in common: every URL and credential is scoped to the _linked branch_. `DATABASE_URL` points at this branch's Postgres. `NEON_AUTH_BASE_URL` is this branch's auth endpoint. `NEON_AI_GATEWAY_BASE_URL` is this branch's gateway host. `AWS_ENDPOINT_URL_S3` is this branch's storage endpoint. `NEON_FUNCTION_API_BASE_URL` is this branch's function deployment. This is exactly what makes every branch a complete, isolated preview environment: the code running on a branch only sees the services for that branch.
 
-## Fork production into a feature branch
+## Branch production into a feature branch
 
-To demonstrate how branching works, you'll create a demo table on production, fork it into a feature branch, and make changes on the branch. The changes will be isolated to the branch and won't affect production.
+To demonstrate how branching works, you'll create a demo table on production, branch it into a feature branch, and make changes on the branch. The changes will be isolated to the branch and won't affect production.
 
 Run the following commands to create a demo table and insert a row on production:
 
@@ -244,13 +244,15 @@ psql "$DATABASE_URL" -c "CREATE TABLE summaries (id serial primary key, content 
 psql "$DATABASE_URL" -c "INSERT INTO summaries (content, summary) VALUES ('production doc', 'made in prod')"
 ```
 
-Now fork production into a feature branch:
+Now branch production into a feature branch:
 
 ```bash
 neon checkout feat/branch-everything
 ```
 
-> When prompted to create the branch, click **Yes**.
+<Admonition type="note" title="Create the branch when prompted">
+When prompted to create the branch, click **Yes**.
+</Admonition>
 
 `neon checkout` creates a new branch named `feat/branch-everything` and updates your `.env.local` file with the new branch's variables. The branch is a copy-on-write fork of production, so it shares storage with production and only records changes made on the branch. It follows the branch policy you declared in `neon.ts`: it has a 7-day TTL and minimum compute.
 
@@ -306,7 +308,7 @@ In a similar way, every other service on Neon branches with your database. Every
 
 ## Create the app schema and database client
 
-Now you'll build the backend for DocNotes. The app has a single table, `documents`, which stores uploaded documents and their AI summaries. Each document is owned by a user in the `user` table that Managed Better Auth maintains in the `neon_auth` schema.
+Now you'll build the backend for DocNotes. The app has a single table, `documents`, which stores uploaded documents and their AI summaries. Each document belongs to a user in the `user` table that Managed Better Auth maintains in the `neon_auth` schema.
 
 Install Drizzle ORM and the Postgres driver:
 
@@ -338,7 +340,7 @@ This config tells Drizzle Kit where to find your schema, where to output migrati
 
 ### Pull the Managed Better Auth schema
 
-A key feature of Managed Better Auth is the automatic creation and maintenance of Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres-compatible ORM, including defining foreign key relationships.
+Managed Better Auth automatically creates and maintains Better Auth tables in the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres-compatible ORM, including defining foreign key relationships.
 
 To integrate the Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
@@ -362,7 +364,7 @@ This step makes Drizzle aware of the auth tables, allowing you to create relatio
 
     Your project structure should now look like this:
 
-    ```
+    ```text
      ├ 📂 drizzle
      │ ├ 📂 meta
      │ ├ 📜 schema.ts ───────────┐
@@ -417,7 +419,7 @@ This step makes Drizzle aware of the auth tables, allowing you to create relatio
     export type Document = typeof documents.$inferSelect;
     ```
 
-    The `documents` table contains the following columns: `id`, `user_id`, `filename`, `object_key`, `summary` and `created_at`. It is linked to the `user` table in the `neon_auth` schema via a foreign key relationship on the `user_id` column.
+    The `documents` table contains the following columns: `id`, `user_id`, `filename`, `object_key`, `summary`, and `created_at`. It references the `user` table in the `neon_auth` schema via a foreign key on the `user_id` column.
 
 ### Generate and apply migrations
 
@@ -738,7 +740,7 @@ VITE_NEON_FUNCTION_API_BASE_URL=https://br-cool-darkness-a1b2c3d4-api.compute.c-
 ```
 
 <Admonition type="note" title="How to keep frontend variables in sync with the branch">
-Locally, `neon deploy` writes a public invocation URL for each declared function to `.env.local` as `NEON_FUNCTION_<SLUG>_BASE_URL`, so `NEON_FUNCTION_API_BASE_URL` here. Running `neon env pull` refreshes the branch's variables on demand. Copy the values to the two `VITE_` aliases for the frontend to use; you do this once per branch you work on, because `neon checkout` refreshes `.env.local` when you switch branches. In CI, you need to setup a script to pull the branch's variables and copy the necessary ones to the `VITE_` aliases before building the frontend.
+Locally, `neon deploy` writes a public invocation URL for each declared function to `.env.local` as `NEON_FUNCTION_<SLUG>_BASE_URL`, so `NEON_FUNCTION_API_BASE_URL` here. Running `neon env pull` refreshes the branch's variables on demand. Copy the values to the two `VITE_` aliases for the frontend to use; you do this once per branch you work on, because `neon checkout` refreshes `.env.local` when you switch branches. In CI, you need to set up a script to pull the branch's variables and copy the necessary ones to the `VITE_` aliases before building the frontend.
 </Admonition>
 
 Update the app entry point in `src/main.tsx` to wrap the app in `NeonAuthUIProvider` and `BrowserRouter`:
@@ -915,7 +917,7 @@ You can verify that the document is stored in Object Storage and the summary is 
 
 ## Configure auth domains for previews
 
-Managed Better Auth needs to know which domains it should accept, because your preview deployments live on different URLs than production. You need to register your production domain and
+Managed Better Auth needs to know which domains it should accept, because your preview deployments live on different URLs than production. You need to register your production domain and add a wildcard pattern that trusts your preview origins.
 
 First, add your production domain. In the Neon Console, navigate to **Auth → Configuration**, then under **Domains**, add your production URL (for example, `https://doc-notes.com`) and click **Add Domain**.
 
@@ -946,13 +948,17 @@ The workflows deploy the built `dist` folder to Vercel as a static site. The app
 }
 ```
 
-> The `framework`, `installCommand`, `buildCommand`, and `outputDirectory` fields are set to `null` to tell Vercel that the workflow will handle building and deploying the app, rather than Vercel's default build process.
+<Admonition type="note" title="Why these fields are null">
+The `framework`, `installCommand`, `buildCommand`, and `outputDirectory` fields are set to `null` to tell Vercel that the workflow will handle building and deploying the app, rather than Vercel's default build process.
+</Admonition>
 
 ### Commit and push the project to GitHub
 
 The workflows run on GitHub, so commit your work and push it to the repository you created in the prerequisites:
 
-> For instructions on creating a new repository on GitHub, see [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+<Admonition type="note" title="New to GitHub?">
+For instructions on creating a new repository on GitHub, see [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+</Admonition>
 
 ```bash shouldWrap
 git init
@@ -991,7 +997,7 @@ The workflows authenticate with the Neon CLI and Neon's branch actions using an 
 
 1. Create a Neon API key. See [create an API key](/docs/manage/api-keys#create-an-api-key).
 2. Add it as the repository secret `NEON_API_KEY`.
-3. Add your project ID (found in the `.neon` file as `projectId`) as a variable `NEON_PROJECT_ID` in **Settings → Secrets and variables → Actions → Variables**.
+3. Add your project ID (found in the `.neon` directory as `projectId`) as a variable `NEON_PROJECT_ID` in **Settings → Secrets and variables → Actions → Variables**.
 
 <Admonition type="tip" title="Automatic setup">
 The [Neon GitHub integration](/docs/guides/neon-github-integration) can set `NEON_API_KEY` and `NEON_PROJECT_ID` up for you. This guide shows how to do it manually, so you understand what the workflow needs.
@@ -1163,7 +1169,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 ```
 
-The production job mirrors the preview job with two differences: it targets the `main` branch, so `neon deploy` needs `--allow-protected` to apply the policy to your protected production branch, and `vercel deploy --prod` publishes to your production domain instead of a preview URL.
+The production job mirrors the preview job with two differences: it targets the `main` branch, so `neon deploy` needs `--allow-protected` to apply the policy to your protected production branch. And `vercel deploy --prod` publishes to your production domain instead of a preview URL.
 
 From now on, the workflow is automatic:
 
@@ -1185,8 +1191,8 @@ git push origin main
 
 Now that the workflows are in place, you can test a new feature with a pull request. The feature is to let users "star" documents, so they can mark important ones. This requires three changes:
 
-1. **Schema:** a `starred boolean` column on `documents`
-2. **Function:** a `PATCH /documents/:id` route to toggle the star
+1. **Schema:** a `starred boolean` column on `documents`.
+2. **Function:** a `PATCH /documents/:id` route to toggle the star.
 3. **Frontend:** a star button on each document, wired to the new route.
 
 Create a new branch for the feature:
@@ -1218,7 +1224,9 @@ Generate the migration file:
 npx drizzle-kit generate
 ```
 
-> You can optionally run the migration locally, which will use the `.env.local` variables to apply it to the preview branch. This allows you to test the end-to-end flow locally with `npm run dev` and `neon dev`.
+<Admonition type="note" title="Run the migration locally">
+You can optionally run the migration locally, which uses the `.env.local` variables to apply it to your local branch. This lets you test the end-to-end flow locally with `npm run dev` and `neon dev`.
+</Admonition>
 
 Add the route to `functions/api.ts`:
 
@@ -1313,7 +1321,7 @@ git push origin feat/star-documents
 
 When you open the pull request, the preview workflow takes over:
 
-1. It creates branch `preview/feat-star-documents`: a copy-on-write fork of production made at that instant, with production's rows, production's users, production's uploaded objects, and production's function code.
+1. It creates branch `preview/feat/star-documents`: a copy-on-write fork of production made at that instant, with production's rows, production's users, production's uploaded objects, and production's function code.
 2. `neon deploy` applies your `neon.ts` policy to the branch, so it gets its own auth, gateway endpoint, storage namespace, and a function deployment built from the PR's code at the preview branch's URL.
 3. The workflow pulls the preview branch's variables and derives the necessary `VITE_` aliases from them, so the frontend build points at the preview's own auth and function.
 4. `npx drizzle-kit migrate` runs against the preview branch's `DATABASE_URL`, adding the `starred` column to the preview's database only.
@@ -1342,7 +1350,7 @@ curl -s -o /dev/null -w "%{http_code}" https://<production-function-url>/documen
 401
 ```
 
-The production function rejects it. The token was issued by the preview branch's auth, with the preview branch's issuer. The same check works in reverse: a production token fails verification at a preview function, too.
+The production function rejects it. The preview branch's auth issued the token with its own issuer. The same check works in reverse: a production token fails verification at a preview function, too.
 
 **Function URL.** The preview's function requests hit a URL containing the preview branch ID, not the production deployment. You can confirm in the function's logs in the Neon Console: select the preview branch, open **Functions**, and you'll see the preview's `api` deployment serving the preview's traffic.
 
@@ -1364,7 +1372,7 @@ You've verified the feature works end to end on the preview branch, and that the
 
 ## Summary
 
-Neon collapses the whole backend into a single primitive: the branch. Lakebase Postgres, Auth, Functions, AI Gateway, and Object Storage all fork copy-on-write with it and disappear together when the branch expires. One `neon.ts` file declares the environment, two GitHub Actions workflows fork it per pull request and deploy everything, and the TTL cleans up anything the workflows miss. Previews run against production's real data on near-zero-cost compute, and the protected production branch stays out of reach of the whole workflow.
+Neon collapses the whole backend into a single primitive: the branch. Lakebase Postgres, Managed Better Auth, Functions, AI Gateway, and Object Storage all branch copy-on-write with it and disappear together when the branch expires. One `neon.ts` file declares the environment, two GitHub Actions workflows create a branch per pull request and deploy everything, and the TTL cleans up anything the workflows miss. Previews run against production's real data on near-zero-cost compute, and the protected production branch stays out of reach of the whole workflow.
 
 ## Next steps
 
