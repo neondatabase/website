@@ -39,27 +39,37 @@ describe('with-an-agent quickstart content contract', () => {
     expect(page).not.toContain('neon env pull');
   });
 
-  it('keeps exactly three plain-text service prompts in Keep building', () => {
-    const keepBuilding = section(page, 'Keep building', 'Try changes safely with branching');
-    const promptLabels = [...keepBuilding.matchAll(/filename="Prompt: ([^"]+)"/g)].map(
+  it('keeps exactly three independent capability prompts in Add more to your backend', () => {
+    const addMore = section(page, 'Add more to your backend', 'Try changes safely with branching');
+    const promptLabels = [...addMore.matchAll(/filename="Prompt: ([^"]+)"/g)].map(
       ([, label]) => label
     );
-    const promptBodies = [...keepBuilding.matchAll(/```text[^\n]*\n([\s\S]*?)\n```/g)].map(
+    const promptBodies = [...addMore.matchAll(/```text[^\n]*\n([\s\S]*?)\n```/g)].map(
       ([, body]) => body
     );
 
+    expect(addMore).toContain(
+      'You now have a working backend. Each prompt below adds another Neon capability. They are independent, so add whichever you want, in any order.'
+    );
+    expect(addMore).toContain(
+      '**Add authentication** so readers sign in to publish while anyone can still read:'
+    );
+    expect(addMore).toContain(
+      '**Save each post as a file** in object storage, with a download link:'
+    );
+    expect(addMore).toContain('**Generate an AI summary** for every post:');
     expect(promptLabels).toEqual(['add sign-in', 'save posts as files', 'add AI summaries']);
     expect(promptBodies).toHaveLength(3);
-    expect(keepBuilding).toContain(
+    expect(addMore).toContain(
       'Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.'
     );
-    expect(keepBuilding).toContain(
+    expect(addMore).toContain(
       'Update neon.ts to declare Object Storage, then run neon deploy to apply and provision it.'
     );
-    expect(keepBuilding).toContain(
+    expect(addMore).toContain(
       'Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it.'
     );
-    expect(keepBuilding).not.toContain('branch');
+    expect(addMore).not.toContain('branch');
     expect(promptBodies.every((body) => !body.includes('`'))).toBe(true);
     expect(page).not.toContain('Prompt: add image uploads');
     expect(page).not.toContain('Follow the [Next.js auth quickstart]');

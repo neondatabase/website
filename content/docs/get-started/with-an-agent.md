@@ -118,17 +118,23 @@ Open [localhost:3000](http://localhost:3000) and you'll see your seeded posts, n
 
 </Steps>
 
-## Keep building
+## Add more to your backend
 
-These three prompts each add a backend service to the app you just built.
+You now have a working backend. Each prompt below adds another Neon capability. They are independent, so add whichever you want, in any order.
+
+**Add authentication** so readers sign in to publish while anyone can still read:
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.
 ```
 
+**Save each post as a file** in object storage, with a download link:
+
 ```text shouldWrap filename="Prompt: save posts as files"
 Save each post as a Markdown file in Neon Object Storage and show a Download link on every post. Store the file in a private bucket, keep the object key on the post, and fetch it through a short-lived presigned URL. Update neon.ts to declare Object Storage, then run neon deploy to apply and provision it.
 ```
+
+**Generate an AI summary** for every post:
 
 ```text shouldWrap filename="Prompt: add AI summaries"
 Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
