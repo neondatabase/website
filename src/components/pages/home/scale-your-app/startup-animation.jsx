@@ -8,26 +8,33 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
+import {
+  CREATE_PRESS_START,
+  PROGRESS_COMPLETE_START,
+  PROGRESS_SPEED,
+  PROGRESS_START,
+} from './startup-timing';
+
 const ASSET_ROOT = '/images/pages/home/scale-your-app';
 const CARD_REVEAL_DURATION = 450;
-const PROGRESS_COMPLETE_START = 6100;
 const FINAL_STATE_START = PROGRESS_COMPLETE_START + 800;
 const ANIMATION_DURATION = FINAL_STATE_START;
+const progressAt = (elapsed) => PROGRESS_START + elapsed / PROGRESS_SPEED;
 
 const TIMELINE = [
   { at: 0, screen: 'create', isCreatePressed: false },
-  { at: 1600, screen: 'create', isCreatePressed: true },
-  { at: 1770, screen: 'create', isCreatePressed: false },
-  { at: 1900, screen: 'progress', progress: 0, filledBlocks: 0, status: 'creating' },
-  { at: 2160, screen: 'progress', progress: 7, filledBlocks: 1, status: 'creating' },
-  { at: 2400, screen: 'progress', progress: 13, filledBlocks: 2, status: 'creating' },
-  { at: 2780, screen: 'progress', progress: 21, filledBlocks: 3, status: 'creating' },
-  { at: 3020, screen: 'progress', progress: 34, filledBlocks: 5, status: 'creating' },
-  { at: 3460, screen: 'progress', progress: 45, filledBlocks: 8, status: 'preparing' },
-  { at: 3740, screen: 'progress', progress: 61, filledBlocks: 9, status: 'preparing' },
-  { at: 4260, screen: 'progress', progress: 72, filledBlocks: 11, status: 'preparing' },
-  { at: 4520, screen: 'progress', progress: 84, filledBlocks: 13, status: 'preparing' },
-  { at: 5300, screen: 'progress', progress: 92, filledBlocks: 14, status: 'preparing' },
+  { at: CREATE_PRESS_START, screen: 'create', isCreatePressed: true },
+  { at: CREATE_PRESS_START + 170, screen: 'create', isCreatePressed: false },
+  { at: PROGRESS_START, screen: 'progress', progress: 0, filledBlocks: 0, status: 'creating' },
+  { at: progressAt(260), screen: 'progress', progress: 7, filledBlocks: 1, status: 'creating' },
+  { at: progressAt(500), screen: 'progress', progress: 13, filledBlocks: 2, status: 'creating' },
+  { at: progressAt(880), screen: 'progress', progress: 21, filledBlocks: 3, status: 'creating' },
+  { at: progressAt(1120), screen: 'progress', progress: 34, filledBlocks: 5, status: 'creating' },
+  { at: progressAt(1560), screen: 'progress', progress: 45, filledBlocks: 8, status: 'preparing' },
+  { at: progressAt(1840), screen: 'progress', progress: 61, filledBlocks: 9, status: 'preparing' },
+  { at: progressAt(2360), screen: 'progress', progress: 72, filledBlocks: 11, status: 'preparing' },
+  { at: progressAt(2620), screen: 'progress', progress: 84, filledBlocks: 13, status: 'preparing' },
+  { at: progressAt(3400), screen: 'progress', progress: 92, filledBlocks: 14, status: 'preparing' },
   {
     at: PROGRESS_COMPLETE_START,
     screen: 'progress',

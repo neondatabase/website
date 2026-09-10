@@ -5,9 +5,11 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
+import { PROGRESS_COMPLETE_START } from './startup-timing';
+
 const LOGO_ROOT = '/images/pages/home/scale-your-app';
 const LOGO_REVEAL_START = 0;
-const LOADER_COMPLETE = 6100;
+const LOADER_COMPLETE = PROGRESS_COMPLETE_START;
 const LOGO_REVEAL_DURATION = 500;
 
 const LOGO_ROWS = [
