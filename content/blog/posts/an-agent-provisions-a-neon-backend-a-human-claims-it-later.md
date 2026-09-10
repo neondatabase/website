@@ -83,7 +83,7 @@ How it works:
 
 - A service publishes a Markdown file, usually at `https://service.example.com/auth.md`, with instructions for agents to follow.
 - The file points the agent to structured OAuth metadata that defines the actual endpoints and supported flows.
-- The agent uses that metadata to register, receives a service-signed identity assertion, and exchanges the assertion for a short-lived, scoped access token. It can exchange the same assertion again when the access token expires, with no long-lived API key required.
+- The agent uses that metadata to register, receives a service-signed identity assertion, and exchanges the assertion for a short-lived, scoped access token. It can exchange the same assertion again when the access token expires, without sharing a human's existing Neon API key.
 
 The protocol supports three registration methods:
 
@@ -101,7 +101,7 @@ And anonymous registration does not mean unrestricted access. The agent receives
 
 ## From neon.new to Claimable Neon
 
-If you've been following Neon for a while, you might recognize the predecessors of Claimable Neon: we've been experimenting with this claimable workflows for a while, with projects like [neon.new](https://neon.new) or Instagres. This was built for developers: for example, they used it in workshops and demos to create an ephemeral Postgres database without stopping for signup.
+If you've been following Neon for a while, you might recognize the predecessors of Claimable Neon: we've been experimenting with these claimable workflows for a while, with projects like [neon.new](https://neon.new) or Instagres. This was built for developers: for example, they used it in workshops and demos to create an ephemeral Postgres database without stopping for signup.
 
 Claimable Neon keeps that useful split between creation and ownership, but changes who the first user is. If neon.new was an unauthenticated endpoint for developers, claimable Neon is a service for agents. Just like its predecessors - it is built on the Neon Open API. This time using the [new `@neon/sdk`](/blog/neon-sdk).
 
