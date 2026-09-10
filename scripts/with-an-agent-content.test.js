@@ -97,22 +97,18 @@ describe('with-an-agent quickstart content contract', () => {
     expect(promptBody).not.toContain('`');
 
     expect(branching).toContain(
-      'The feed is empty because your app is now pointed at the branch, where you deleted every post.'
-    );
-    expect(branching).toContain(
-      'Your main branch still has all the posts and their files. Switch back to verify:'
+      'Reload the page and the feed is now empty. Your app is pointed at the branch where you deleted every post, but your main branch still has all the posts and their files. Switch back to verify:'
     );
     expect(terminalRecipes).toEqual([
       'npx neon@latest checkout main',
       'npx neon@latest branches delete my-feature',
     ]);
-    expect(branching).toContain('Reload the page and your posts are back');
-    expect(branching).toContain('If they do not reappear, restart the dev server');
-    expect(branching).toContain('Next.js only reads `DATABASE_URL` at startup');
-    expect(branching).toContain('and reload again');
-    expect(branching).not.toContain('refreshing the page is not enough');
     expect(branching).toContain(
-      "[Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration)"
+      "Reload the page and you'll now see your posts are back (restart the dev server if you don't see them). Your main branch was unaffected by changes to your feature branch."
+    );
+    expect(branching).toContain('You can delete the feature branch when done:');
+    expect(branching).toContain(
+      "If you want each code branch to get its own preview URL with a matching database branch, see [Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration)."
     );
     expect(page).not.toContain('—');
   });

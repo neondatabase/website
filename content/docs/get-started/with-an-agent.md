@@ -142,18 +142,20 @@ A Neon branch is an instant, isolated copy of your backend, including your data 
 Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and its stored Markdown file, and show me the blog feed is now empty.
 ```
 
-The feed is empty because your app is now pointed at the branch, where you deleted every post. Your main branch still has all the posts and their files. Switch back to verify:
+Reload the page and the feed is now empty. Your app is pointed at the branch where you deleted every post, but your main branch still has all the posts and their files. Switch back to verify:
 
 ```bash
 npx neon@latest checkout main
 ```
 
-Reload the page and your posts are back. If they do not reappear, restart the dev server (Next.js only reads `DATABASE_URL` at startup) and reload again. Delete the branch when you are done:
+Reload the page and you'll now see your posts are back (restart the dev server if you don't see them). Your main branch was unaffected by changes to your feature branch.
+
+You can delete the feature branch when done:
 
 ```bash
 npx neon@latest branches delete my-feature
 ```
 
-Want each code branch to get its own preview URL with a matching database branch? See [Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration).
+If you want each code branch to get its own preview URL with a matching database branch, see [Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration).
 
 <NeedHelp/>
