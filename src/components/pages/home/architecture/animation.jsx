@@ -7,10 +7,10 @@ import useRiveAnimation from 'hooks/use-rive-animation';
 import { cn } from 'utils/cn';
 
 const ARTBOARD_WIDTH = 2770;
-const ARTBOARD_HEIGHT = 1530;
+const ARTBOARD_HEIGHT = 1770;
 // The 1184 × 529 Figma base is exported at 2× inside the larger Rive artboard.
-const BASE_X = 276;
-const BASE_Y = 316;
+const BASE_X = 262;
+const BASE_Y = 374;
 const BASE_WIDTH = 2368;
 const BASE_HEIGHT = 1058;
 const POINTER_ORIGIN_X = 1112;
@@ -24,11 +24,11 @@ const ARTBOARD_STYLE = {
 };
 
 const HOVER_REGIONS = [
-  { key: 'scales', minX: 471, maxX: 857, minY: 855, maxY: 960 },
-  { key: 'scales', minX: 649, maxX: 677, minY: 961, maxY: 974 },
-  { key: 'compute', minX: 1204, maxX: 1644, minY: 576, maxY: 1189 },
-  { key: 'branching', minX: 1661, maxX: 1820, minY: 576, maxY: 1189 },
-  { key: 'built', minX: 1844, maxX: 2282, minY: 576, maxY: 1188 },
+  { key: 'compute', minX: 986, maxX: 1432, minY: 560, maxY: 675 },
+  { key: 'scales', minX: 1024, maxX: 1394, minY: 676, maxY: 948 },
+  { key: 'branching', minX: 1024, maxX: 1394, minY: 964, maxY: 1192 },
+  { key: 'hotPath', minX: 1400, maxX: 2070, minY: 676, maxY: 1255 },
+  { key: 'built', minX: 2122, maxX: 2448, minY: 676, maxY: 1275 },
 ];
 
 const ACTIVE_PROPERTY_PATHS = {
@@ -36,6 +36,7 @@ const ACTIVE_PROPERTY_PATHS = {
   compute: 'propertyOfCompute/activeCompute',
   branching: 'propertyOfInstBranching/activeBranch',
   built: 'propertyOfBuilt/activeBuilt',
+  hotPath: 'propertyOfHotPath/activeHotPath',
 };
 
 const getHoverTarget = (x, y) =>
@@ -53,7 +54,7 @@ const Animation = () => {
 
   const { isReady, wrapperRef, animationRef, isIntersecting, isVisible, rive, RiveComponent } =
     useRiveAnimation({
-      src: '/animations/pages/home/lakebase-postgres.riv',
+      src: '/animations/pages/home/lakebase-postgres.riv?20260910-3',
       artboard: 'main',
       stateMachines: 'SM',
       fit: Fit.Contain,

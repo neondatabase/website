@@ -43,7 +43,7 @@ const Architecture = () => (
               alt=""
             />
 
-            <p className="mt-9 max-w-248 text-4xl leading-dense tracking-tighter text-gray-new-40 xl:text-[2rem] lg:text-[1.75rem] md:mt-8 md:text-[1.375rem] sm:text-xl">
+            <p className="mt-9 max-w-248 text-4xl leading-dense tracking-tighter text-gray-new-40 2xl:max-w-4/5 xl:text-[2rem] lg:text-[1.75rem] md:mt-8 md:max-w-none md:text-[1.375rem] sm:text-xl">
               <span className="text-black-new">A new category of database. </span>
               Isolated compute and durable storage turn branching, scale-to-zero, and point-in-time
               restore into metadata operations, not data copies.
