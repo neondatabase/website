@@ -28,7 +28,7 @@ In order to use Amazon Q, you will need to have an AWS Organization set up with 
 
 ### Configure IAM Identity Center
 
-To begin setting up the AWS Q Business application, you will have to configure the application environment to enable end-user access by integrating AWS IAM Identity Center for streamlined user management.
+To begin setting up the AWS Q Business application, you will have to configure the application environment to enable end-user access by integrating AWS IAM Identity Center for user management.
 
 If you haven't set up IAM Identity Center yet, complete the setup process first following AWS's [detailed guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html).
 

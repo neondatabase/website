@@ -21,8 +21,8 @@ You'll need [Node.js 20.19+](https://nodejs.org/) and the [Neon CLI](/docs/cli/i
 npm i -g neon
 ```
 
-<Admonition type="important" title="Create your project in AWS US East (Ohio)">
-Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to follow this guide. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
+<Admonition type="important" title="Create your project in a supported region">
+Object Storage, Functions, and the AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), on new or existing projects in those regions, so use a project in one of them to follow this guide. Support is expanding toward all regions. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
 </Admonition>
 
 <TwoColumnLayout>
@@ -32,7 +32,7 @@ Object Storage, Functions, and the AI Gateway are in beta and available only in 
 
 If you don't have a Neon account, sign up at [console.neon.tech](https://console.neon.tech/signup).
 
-Create your project in **AWS US East (Ohio)**. Any path below works; the rest of this guide uses the Neon CLI, which you'll also use in step 3 to link the project and pull its credentials automatically.
+Create your project in **AWS US East (Ohio)** or **AWS Europe (Frankfurt)**. Any path below works; the rest of this guide uses the Neon CLI, which you'll also use in step 3 to link the project and pull its credentials automatically.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -44,7 +44,7 @@ Create your project in **AWS US East (Ohio)**. Any path below works; the rest of
 Sign in and create the project:
 
 ```bash filename="Terminal"
-neon auth
+neon login
 neon projects create --name my-backend --region-id aws-us-east-2
 ```
 
@@ -99,7 +99,7 @@ A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code
 
 Work through the commands on the right:
 
-1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon auth` first.
+1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon login` first.
 2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the `preview` blocks shown in later steps alongside it (those snippets omit the policy for brevity).
 
 Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding any beta services.
@@ -393,7 +393,7 @@ app.post('/generate', async (c) => {
   const { topic, author = 'anonymous' } = await c.req.json();
 
   const { text } = await generateText({
-    model: neon('claude-sonnet-4-6'),
+    model: neon('gpt-5-nano'),
     prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
 
@@ -411,7 +411,7 @@ app.post('/assistant', async (c) => {
   const { messages } = await c.req.json();
 
   const result = streamText({
-    model: neon('claude-sonnet-4-6'),
+    model: neon('gpt-5-mini'),
     system:
       "You are a helpful assistant that answers questions about the user's blog posts. Use the queryPosts tool to look them up.",
     messages: await convertToModelMessages(messages),

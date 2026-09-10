@@ -145,7 +145,7 @@ Cursor will then apply the index to the production branch, ensuring the fix is l
 
 ## Extending the workflow
 
-This guide demonstrates a simple, single-agent happy path. For real-world production systems, you can expand this into a robust, automated debugging pipeline:
+This guide demonstrates a simple, single-agent happy path. For real-world production systems, you can expand this into an automated debugging pipeline:
 
 - **Multi-agent orchestration:** Instead of a single chat thread, use specialized subagents. A "Triage Agent" analyzes the Sentry stack trace, a "Database Agent" tests schema changes on Neon, and a "Review Agent" verifies safety before opening the PR.
 - **Parallel experimentation:** Don't just test the first guess. Have the AI generate multiple hypotheses (e.g., three different indexing strategies), spin up three isolated Neon branches simultaneously, and automatically promote the one with the best result. Checkout [Git worktrees and Neon Branching: Running multiple AI coding agents in parallel](/guides/git-worktrees-neon-branching) for how to run multiple AI agents in parallel.

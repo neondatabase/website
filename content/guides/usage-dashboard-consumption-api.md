@@ -50,7 +50,7 @@ To get a quick look at your consumption data, you can use the following `curl` c
 
 2.  **Run the request:**
 
-    Run the following command to fetch your consumption data for the last month. This will give you a comprehensive view of all the metrics available.
+    Run the following command to fetch your consumption data for the last month. This will show you all the metrics available.
 
     ```bash shouldWrap
     curl --request GET \
@@ -707,7 +707,7 @@ The complete source code for this example is available on GitHub.
 ## Resources
 
 - [Neon API Reference: project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)
-- [Neon API Reference: branch consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-branch-v2) — extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
+- [Neon API Reference: branch consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-branch-v2): extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
 - [Query consumption metrics](/docs/guides/consumption-metrics)
 - [Recharts Documentation](https://recharts.org/)
 - [Shadcn/ui Components](https://ui.shadcn.com/)

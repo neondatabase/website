@@ -12,7 +12,7 @@
 // each one against schema.json, so a CLI change that invalidates an
 // example fails the test suite.
 const META = {
-  auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
+  login: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon login'] },
   init: {
     desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
     examples: ['npx neon@latest init'],

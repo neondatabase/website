@@ -1131,7 +1131,7 @@ function buildBackendCopyRequirements(backendPricing) {
         `active compute is $${functions.launch.activeCapacityHourRate}/Capacity-Hour (Launch) or $${functions.scale.activeCapacityHourRate}/Capacity-Hour (Scale)`,
         `waiting compute is $${functions.launch.waitingCapacityHourRate}/Capacity-Hour (Launch) or $${functions.scale.waitingCapacityHourRate}/Capacity-Hour (Scale)`,
         `invocations are $${functions.launch.invocationRatePerMillion}/M on both plans`,
-        `${objectStorage.freeAllowanceGb} GB Object Storage and, for Functions, ${functions.free.activeCapacityHours} active Capacity-Hours, ${functions.free.waitingCapacityHours} waiting Capacity-Hours, and ${functions.free.invocations} invocations`,
+        `${objectStorage.freeAllowanceGb} GB Object Storage per project and, for Functions, ${functions.free.activeCapacityHours} active Capacity-Hours, ${functions.free.waitingCapacityHours} waiting Capacity-Hours, and ${functions.free.invocations} invocations`,
       ],
     },
   ];

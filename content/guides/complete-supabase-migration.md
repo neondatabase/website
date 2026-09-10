@@ -1,6 +1,6 @@
 ---
 title: The Complete Supabase to Neon Database & Auth Migration Guide
-subtitle: A comprehensive guide to migrating your Postgres database, user accounts, and RLS policies from Supabase to Neon
+subtitle: A guide to migrating your Postgres database, user accounts, and RLS policies from Supabase to Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-03T00:00:00.000Z'
@@ -212,7 +212,7 @@ npx ts-node migrate_users.ts
 Upon completion, all your users will be migrated into Managed Better Auth.
 
 <Admonition type="important" title="User IDs Have Changed">
-It's important to note that this migration process has assigned **new, unique `user_id`** values to all your users within Managed Better Auth. In the next steps, we will fix the broken references in your database that result from this change.
+This migration process has assigned **new, unique `user_id`** values to all your users within Managed Better Auth. In the next steps, we will fix the broken references in your database that result from this change.
 </Admonition>
 
 ### Step 2: Export the Supabase Public Schema
@@ -232,7 +232,7 @@ pg_dump -v -d "SUPABASE_CONNECTION_STRING" --schema=public --no-acl -f supabase_
 
 ### Step 3: Pre-process the SQL Dump File
 
-This is a crucial manual step. Open `supabase_dump.sql`, make the following changes, and save it as `supabase_dump.sql`.
+This is a manual step. Open `supabase_dump.sql`, make the following changes, and save it as `supabase_dump.sql`.
 
 #### 3.1. Update RLS policies
 
@@ -323,7 +323,7 @@ DROP TABLE public.temp_users;
 
 ## Part 2: Finalize: Row level security
 
-> If your Supabase project does not utilize Row-Level Security (RLS), you can safely skip this section.
+> If your Supabase project does not use Row-Level Security (RLS), you can safely skip this section.
 
 The next step is to configure table permissions in Neon so your RLS policies behave correctly. The primary difference is the name of the anonymous role.
 
@@ -722,7 +722,7 @@ export default function Page() {
 </CodeTabs>
 
     <Admonition type="info" title="Managed Better Auth Hooks">
-      The Managed Better Auth SDK for Next.js offers a comprehensive set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
+      The Managed Better Auth SDK for Next.js offers a set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
 
     To explore the full API, including hooks for more advanced features like handling teams and permissions, refer to the [Managed Better Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview).
     </Admonition>
@@ -748,7 +748,7 @@ The repository includes two branches: [supabase](https://github.com/neondatabase
 
 ## Part 4: Upgrading your development workflow with Database Branching
 
-If you used Supabase's branching feature for preview environments, you'll feel right at home with Neon. In fact, you'll be working with the original, more powerful version of the concept: **Neon was the first postgres database provider to introduce instant, serverless copy-on-write database branching.**
+If you used Supabase's branching feature for preview environments, you'll feel right at home with Neon. In fact, you'll be working with the original version of the concept: **Neon was the first postgres database provider to introduce instant, serverless copy-on-write database branching.**
 
 While the goal is similar, creating isolated environments for development and testing the implementation and capabilities are fundamentally different. Migrating to Neon offers a significant upgrade to your CI/CD and development workflows.
 
@@ -766,19 +766,19 @@ This approach provides several key benefits:
 
 - **Test with production-like data:** Safely test schema changes and queries against a full replica of your production data.
 - **Zero setup time:** Eliminate the time and effort spent hydrating databases for preview deployments.
-- **Cost-efficient:** Because branches are copy-on-write, you only store the changes (the delta) from the parent branch, making it incredibly storage-efficient.
+- **Cost-efficient:** Because branches are copy-on-write, you only store the changes (the delta) from the parent branch, which keeps storage costs low.
 
 ### Branching workflows and tooling
 
-Neon provides a complete toolkit for managing branches, allowing you to integrate this powerful feature into any part of your workflow.
+Neon provides a complete toolkit for managing branches, allowing you to integrate branching into any part of your workflow.
 
 - **Neon Console:** Create, manage, and inspect branches visually through the dashboard. Perfect for quick manual operations or getting started. Learn more: [Manage branches](/docs/manage/branches)
 - **Neon CLI:** Programmatically manage branches from your terminal. Ideal for local development, scripting, and automation. Learn more: [Branching with the Neon CLI](/docs/guides/branching-neon-cli)
-- **Neon API:** The most powerful option for full programmatic control. Integrate branching directly into your custom tools, scripts, and platforms. Learn more: [Branching with the Neon API](/docs/guides/branching-neon-api)
+- **Neon API:** The option for full programmatic control. Integrate branching directly into your custom tools, scripts, and platforms. Learn more: [Branching with the Neon API](/docs/guides/branching-neon-api)
 
 ### Automating with CI/CD (Vercel & GitHub Actions)
 
-For most developers the primary use case for branching is creating preview environments for pull requests. Neon excels here with zero-config integrations and powerful, composable actions.
+For most developers the primary use case for branching is creating preview environments for pull requests. Neon covers this with zero-config integrations and composable actions.
 
 - **Vercel Integration:** The simplest way to get started. The [Neon Vercel Integration](/docs/guides/neon-managed-vercel-integration) automatically creates a new database branch for every preview deployment. It injects the correct connection string as an environment variable, giving you a fully isolated database environment for each PR with no configuration required.
 
@@ -791,9 +791,9 @@ For most developers the primary use case for branching is creating preview envir
 
 ## Conclusion
 
-Congratulations! You've successfully migrated your Supabase database, users, and Row-Level Security (RLS) policies to Neon. Data integrity is intact, security policies are fully operational, and users can sign in using their original passwords with no resets required.
+You've migrated your Supabase database, users, and Row-Level Security (RLS) policies to Neon. Data integrity is intact, security policies are fully operational, and users can sign in using their original passwords with no resets required.
 
-If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can seamlessly continue using these in Managed Better Auth without any issues. Note that Managed Better Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Managed Better Auth best practices documentation](/docs/neon-auth/best-practices#production-oauth-setup).
+If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can continue using these in Managed Better Auth. Note that Managed Better Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Managed Better Auth best practices documentation](/docs/neon-auth/best-practices#production-oauth-setup).
 
 </Steps>
 

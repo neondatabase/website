@@ -51,7 +51,7 @@ You can launch the Schema Diff viewer from the **Branches** and **Restore** page
 
 ### From the Branches page
 
-Open the detailed view for the branch whose schema you want to inspect. In the row of details for the parent branch, under the **COMPARE TO PARENT** block, click **Open schema diff**.
+Open the detailed view for the child branch whose schema you want to inspect. Open the three-dot menu and select **Compare to parent**.
 
 ![Schema diff from branches page](/docs/guides/schema_diff_compare_parent.png)
 

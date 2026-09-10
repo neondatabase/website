@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-08-27T21:13:38.572Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 <InfoBlock>
@@ -50,6 +50,8 @@ Your project starts with a `production` branch:
 
 - `production` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
 
+The default branch is named `main` if the project was created with the CLI or API, or `production` if created in the Console. This tour uses `production`.
+
 You can create additional branches for development, staging, and other environments. For development branches, consider using a smaller compute size (0.25-1 CU) to optimize costs, while keeping production appropriately sized for your workload. All computes scale to zero after 5 minutes of inactivity by default, which keeps costs low for development branches. On paid plans, you can disable this for production if you need always-active compute. See [Scale to zero](/docs/introduction/scale-to-zero).
 
 <Steps>
@@ -82,7 +84,7 @@ Your default branch `production` now has a table with some data.
 
 Now that you have some sample data, let's explore how the AI Assistant can help you write SQL queries using natural language prompts.
 
-From the SQL Editor, click the **AI Assistant** button in the top-right corner and try a few prompts:
+From the SQL Editor, click the **Generate SQL** button (the sparkle icon) in the top-right corner of the editor. This button opens the prompt field shown below. Don't use the separate **Ask AI** button next to your account menu. Try a few prompts:
 
 - _Add three more rows to the playing_with_neon table with tech company names_
 - _Show me the highest value in the table_
@@ -132,7 +134,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 1. **Create a development branch**
 
-   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **Create branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
+   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **New Branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
 
 2. **Install CLI with Brew or NPM**
 
@@ -151,10 +153,10 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 3. **Authenticate with Neon**
 
-   The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
+   The `neon login` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
    ```bash
-   neon auth
+   neon login
    ```
 
 4. **View your branches**
@@ -303,7 +305,7 @@ For this tutorial, Schema Diff helps with validating isolation: it confirms that
 
 From the **Branches** page in the Neon Console:
 
-1. Open the detailed view for your `development` branch and click **Open schema diff**.
+1. Open the detailed view for your `development` branch, open the three-dot menu, and select **Compare to parent**.
 2. Verify the right branches are selected and click **Compare**. You can see the schema changes we added to our development branch highlighted in green.
 
    ![Schema diff from branches page](/docs/get-started/getting_started_schema_diff.png)

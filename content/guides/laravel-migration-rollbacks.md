@@ -159,7 +159,7 @@ Smaller, manageable migrations make rollbacks simpler.
   php artisan migrate
   ```
 
-### Implement a robust backup strategy
+### Implement a backup strategy
 
 1. **Daily Full Backups:** Schedule daily full backups.
 2. **Incremental Backups:** Use frequent snapshots throughout the day.
@@ -173,7 +173,7 @@ Even with a solid recovery plan, preventing deployment issues in the first place
 
 ### Automate and validate deployments
 
-Implement a CI/CD pipeline to streamline the deployment process and add safeguards.
+Implement a CI/CD pipeline to automate the deployment process and add safeguards.
 
 **Example CI/CD pipeline:**
 

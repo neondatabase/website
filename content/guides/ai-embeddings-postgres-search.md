@@ -116,7 +116,7 @@ CREATE TABLE documents (
 CREATE INDEX documents_embedding_idx ON documents USING ivfflat (embedding vector_cosine_ops);
 ```
 
-The `vector(1536)` data type stores 1,536-dimensional vectors, matching OpenAI's embedding size. The `ivfflat` indexes enable fast approximate nearest neighbor searches using cosine similarity, this is crucial for performance when searching through thousands of embeddings.
+The `vector(1536)` data type stores 1,536-dimensional vectors, matching OpenAI's embedding size. The `ivfflat` indexes enable fast approximate nearest neighbor searches using cosine similarity, which matters for performance when searching through thousands of embeddings.
 
 ## Building an embedding generation service
 
@@ -556,7 +556,7 @@ node test-search.js
 
 You should see output showing how the semantic search finds relevant documents even when the search terms don't appear exactly in the document text.
 
-For example, searching for "artificial intelligence and computers" should return documents about machine learning and neural networks, demonstrating the power of semantic understanding.
+For example, searching for "artificial intelligence and computers" should return documents about machine learning and neural networks, because the search matches on meaning rather than keywords.
 
 The similarity scores help you understand how closely each result matches the query - scores closer to 1.0 indicate higher semantic similarity.
 
@@ -588,7 +588,7 @@ The `lists` parameter should be adjusted based on your data size, more documents
 
 You now should have a solid foundation for a semantic search system that uses AI embeddings alongside `pgvector` in Neon.
 
-You've built a simple semantic search system that demonstrates the power of AI embeddings with Neon and `pgvector`.
+You've built a simple semantic search system using AI embeddings with Neon and `pgvector`.
 
 The foundation you've built can be extended with features like real-time search suggestions or multilingual support. The principles of semantic search and vector similarity will enable you to create intelligent applications that understand user intent and context.
 

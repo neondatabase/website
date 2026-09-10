@@ -9,10 +9,8 @@ summary: >-
   automated daily, weekly, or monthly backups. Snapshot storage is billed at
   $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
   limit.
-tag: new
-tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-31T19:23:51.024Z'
+updatedOn: '2026-09-01T14:50:06.167Z'
 ---
 
 <Admonition type="note" title="Snapshots">

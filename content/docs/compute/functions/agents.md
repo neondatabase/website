@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-08-18T19:33:13.398Z'
+updatedOn: '2026-09-09T19:59:14.718Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -63,7 +63,7 @@ export default {
     const { messages } = (await request.json()) as { messages: ModelMessage[] };
 
     const result = streamText({
-      model: neon('claude-sonnet-4-6'), // any model in the AI Gateway catalog
+      model: neon('gpt-5-mini'), // any model in the AI Gateway catalog
       system: 'You are a concise assistant. Use tools when relevant.',
       messages,
       tools: {
@@ -92,7 +92,7 @@ export default {
 };
 ```
 
-`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `claude-sonnet-4-6` for a different one without changing anything else.
+`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `gpt-5-mini` for a different one without changing anything else.
 
 Deploy and call it. `toUIMessageStreamResponse()` returns a stream the AI SDK's `useChat` hook consumes directly:
 

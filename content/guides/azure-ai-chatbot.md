@@ -169,7 +169,7 @@ After setting up instructions for the model, you can test them in the playground
 1. Adjust the instructions if needed
 1. Save the instructions when you're happy with the responses
 
-Additionally, you can add training data to help the model understand your specific needs. To learn more about training data, check the [Azure OpenAI Studio documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning).
+You can also add training data to help the model understand your specific needs. To learn more about training data, check the [Azure OpenAI Studio documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning).
 
 ## Building the Backend
 
@@ -1104,7 +1104,7 @@ Visit `http://localhost:5173` to test the chatbot interface. It will automatical
 
 In this guide, we've built a simple AI-powered chatbot widget that combines Azure AI Studio with Neon's serverless Postgres database. This implementation works well for documentation websites and help systems, where the chatbot can be embedded as a widget to provide immediate assistance to users.
 
-When the Azure OpenAI model is trained on your specific documentation or knowledge base, the chatbot can provide accurate, relevant responses about your product or service. This creates a seamless experience for anonymous users who can get quick answers without searching through documentation.
+When the Azure OpenAI model is trained on your specific documentation or knowledge base, the chatbot can provide accurate, relevant responses about your product or service. Anonymous users can get quick answers without searching through documentation.
 
 Also, by capturing chat interactions, user queries, bot responses, and feedback in your database, you can analyze where users face challenges and identify areas for documentation improvement.
 

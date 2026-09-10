@@ -229,7 +229,7 @@ Your React application should now be running in your browser. It's actively conn
 
 While Electric simplifies real-time data synchronization, Electric itself does not handle authentication or authorization. In production, you must implement a secure architecture to ensure that only authorized users can access and sync data.
 
-The core principle for a secure and scalable Electric deployment is to place an **Authorization Proxy** in front of Electric. This proxy becomes the gatekeeper for data access, ensuring that clients only sync the data they are permitted to see. Additionally, you may whitelist Electric to only accept requests from your proxy, preventing direct access from end users.
+The core principle for a secure and scalable Electric deployment is to place an **Authorization Proxy** in front of Electric. This proxy becomes the gatekeeper for data access, ensuring that clients only sync the data they are permitted to see. You may also whitelist Electric to only accept requests from your proxy, preventing direct access from end users.
 
 ### Production Architecture overview
 
@@ -243,7 +243,7 @@ A typical production architecture with Electric and Lakebase Postgres involves t
 
 ### Securing read access
 
-The read path (data syncing from Neon to your client via Electric) needs to be robustly secured.
+The read path (data syncing from Neon to your client via Electric) needs to be secured.
 
 **Typical flow for read requests (`GET /v1/shape`):**
 
@@ -284,7 +284,7 @@ The read path (data syncing from Neon to your client via Electric) needs to be r
 
     For more details on securing Electric in production, refer to the [Electric Security Guide](https://electric.ax/docs/guides/security).
 
-Congratulations! You have successfully set up Electric with Lakebase Postgres and built a basic real-time React application.
+You have set up Electric with Lakebase Postgres and built a basic real-time React application.
 
 ## Resources
 

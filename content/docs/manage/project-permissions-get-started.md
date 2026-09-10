@@ -1,5 +1,7 @@
 ---
 title: Get started with project permissions
+tag: new
+tagTheme: green
 subtitle: Scope each person and agent to the projects they need, in about five minutes
 summary: >-
   A worked example that takes a four-person team from everyone-sees-everything

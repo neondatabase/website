@@ -1,5 +1,7 @@
 ---
 title: Connect a Kotlin application to Neon Postgres
+tag: new
+tagTheme: green
 subtitle: Learn how to run SQL queries in Neon from Kotlin using the PostgreSQL JDBC
   driver
 summary: >-
@@ -9,7 +11,7 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-07-17T21:07:05.131Z'
+updatedOn: '2026-09-01T16:04:17.197Z'
 ---
 
 <CopyPrompt src="/prompts/kotlin-prompt.md"

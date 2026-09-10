@@ -7,7 +7,7 @@ redirectFrom:
 ---
 
 <Admonition type="info" title="Beta">
-Functions, Object Storage, and the AI Gateway are in beta and not yet recommended for production workloads. They're available to every Neon account, no invite required, on new or existing projects in **AWS US East (Ohio) (`aws-us-east-2`)**.
+Functions, Object Storage, and the AI Gateway are in beta and not yet recommended for production workloads. They're available to every Neon account, no invite required, on new or existing projects in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
 
 Functions and Object Storage are free on any plan during the beta, subject to usage limits. The AI Gateway requires a paid plan (Launch or Scale), with inference free during the beta. Build something and help us refine them by sharing your feedback in Discord.
 </Admonition>
@@ -24,9 +24,9 @@ You declare all of it in one `neon.ts` file, and it branches together: fork a br
 
 ## Check your access
 
-To confirm access, go to [console.neon.tech](https://console.neon.tech), open a project in **US East (Ohio)**, and check the left navigation for **Object storage**, **Credentials**, **AI Gateway**, and **Functions**. For what AI Gateway costs once billing begins, see [AI Gateway pricing](/docs/ai-gateway/overview#pricing).
+To confirm access, go to [console.neon.tech](https://console.neon.tech), open a project in **US East (Ohio)** or **Europe (Frankfurt)**, and check the left navigation for **Object storage**, **Credentials**, **AI Gateway**, and **Functions**. For what AI Gateway costs once billing begins, see [AI Gateway pricing](/docs/ai-gateway/overview#pricing).
 
-Not seeing the services? The most common reason is region: the project isn't in `us-east-2`. Create a new project in **US East (Ohio)**, or switch to an existing one there. If AI Gateway is the only thing missing, check your plan, it requires Launch or Scale. If a service is still missing after that, post in [#neon-platform-beta](https://discord.com/channels/1176467419317940276/1525919714541437058) on Discord.
+Not seeing the services? The most common reason is region: the project isn't in a supported region. Create a new project in **US East (Ohio)** or **Europe (Frankfurt)**, or switch to an existing one there. If AI Gateway is the only thing missing, check your plan, it requires Launch or Scale. If a service is still missing after that, post in [#neon-platform-beta](https://discord.com/channels/1176467419317940276/1525919714541437058) on Discord.
 
 Using the CLI? Keep it current, the beta CLI updates frequently. Run `npm i -g neon@latest` before each session and before reporting a bug.
 

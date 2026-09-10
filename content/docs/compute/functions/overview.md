@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-08-26T11:04:20.169Z'
+updatedOn: '2026-09-02T15:10:53.712Z'
 ---
 
 Neon Functions are serverless functions you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -21,7 +21,7 @@ What makes Neon Functions different from lambda-style serverless?
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-> Functions are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Functions are free to use during beta, subject to [usage limits](/docs/compute/functions/reference/runtime-limits), on any plan. See [plans and pricing](/docs/introduction/plans#functions) for the rates that apply when billing begins.
+> Functions are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions. Functions are free to use during beta, subject to [usage limits](/docs/compute/functions/reference/runtime-limits), on any plan. See [plans and pricing](/docs/introduction/plans#functions) for the rates that apply when billing begins.
 
 <Admonition type="important" title="JavaScript and TypeScript only">
 Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't supported during beta.

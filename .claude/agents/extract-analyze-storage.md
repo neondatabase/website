@@ -156,9 +156,12 @@ PR_DATA_FILE="$OUTPUT_DIR/raw_data/pr_data_storage_${TODAY}.txt"
    - Note: old version → new version
 
 2. **Storage capacity increases:**
-   - Search for: "quota", "limit", "capacity", "TB", "GB", storage size increases
+   - Search for: "quota", "limit", "capacity", storage size increases
    - Changes to default storage values = customer-facing
-   - Example: "Increase default storage from 8TB to 16TB"
+   - Do NOT publish a specific storage ceiling: storage is unlimited on paid
+     plans, so describe capacity work qualitatively (e.g. "Raised the default
+     storage quota") rather than quoting a TB figure
+   - Example: "Higher manual snapshot limit on paid plans"
 
 **Include:**
 - User-visible performance improvements (if measurable)

@@ -53,7 +53,7 @@ Neon removes the branch at the expiration time. No script to write, no orphaned 
 Use the [Neon GitHub Action](/docs/guides/branching-github-actions) to create a branch on each pull request, run tests against it, and delete it on merge. The whole loop adds a few seconds to your CI job.
 </Admonition>
 
-## How other Postgres platforms compare for per-developer environments
+## How other Postgres services compare for per-developer environments
 
 - **AWS RDS for Postgres**: Each developer gets their own database instance. There's no native concept of a copy-on-write branch, so realistic data per developer means snapshot-and-restore (which can take a long time on larger databases) or sharing a single dev instance. Instances run and bill continuously until stopped or deleted ([RDS user guide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
 - **AWS Aurora Serverless v2**: One cluster per developer is possible, with auto-pause keeping idle clusters from billing. Spin-up still requires provisioning a new cluster from a snapshot, which is not the few-seconds workflow you get from a Lakebase Postgres branch ([Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)).

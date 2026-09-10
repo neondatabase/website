@@ -7,7 +7,7 @@ createdAt: '2025-03-21T13:24:36.612Z'
 updatedOn: '2025-04-08T21:24:58.000Z'
 ---
 
-PostgreSQL provides powerful tools to optimize query performance, including caching layers that help reduce expensive computations.
+Postgres provides several tools to optimize query performance, including caching layers that help reduce expensive computations.
 [Materialized views](https://www.postgresql.org/docs/current/rules-materializedviews.html) can be used for caching: materialized views store the results of a query and can be refreshed on demand.
 This approach is particularly useful for complex aggregations, expensive joins, and frequently accessed datasets that do not require real-time updates.
 

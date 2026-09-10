@@ -4,13 +4,13 @@ subtitle: Install the Neon CLI and connect with web auth or API key
 summary: >-
   Install the Neon CLI (neon) with npm i -g neon@latest, or on macOS, Windows,
   or Linux via Homebrew, bun, or a standalone binary, with no-install options
-  via npx or bunx. After installing, connect by running `neon auth` for
+  via npx or bunx. After installing, connect by running `neon login` for
   browser-based authentication,
   or set the NEON_API_KEY environment variable or pass --api-key per command.
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-27T17:11:36.776Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -209,13 +209,13 @@ The Neon CLI supports connecting via web authentication or API key.
 Run the following command to connect to Neon via web authentication:
 
 ```bash
-neon auth
+neon login
 ```
 
-The [neon auth](/docs/cli/auth) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you haven't authenticated previously, running any Neon CLI command launches the web authentication process automatically unless you've specified an API key.
+The [neon login](/docs/cli/login) command launches a browser window where you can authorize the Neon CLI to access your Neon account. If you haven't authenticated previously, running any Neon CLI command launches the web authentication process automatically unless you've specified an API key.
 
 <Admonition type="note">
-If you use Neon through the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+If you use Neon through the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon login` command requires an account registered through Neon rather than Vercel.
 </Admonition>
 
 ### API key

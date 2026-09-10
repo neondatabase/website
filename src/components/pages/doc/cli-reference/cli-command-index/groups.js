@@ -13,7 +13,7 @@ const GROUPS = [
 ];
 
 const GROUP_OF = {
-  auth: 'setup',
+  login: 'setup',
   init: 'setup',
   bootstrap: 'setup',
   link: 'setup',

@@ -17,7 +17,7 @@ nextLink:
 
 You have a few options for running Postgres without managing servers. Neon is a complete set of cloud backend primitives built around Lakebase Postgres. Lakebase Postgres separates storage from compute, autoscales between a min and max size, and suspends compute when idle. AWS Aurora Serverless v2 and Supabase are alternatives, each with different trade-offs on minimum capacity and cold-start behavior.
 
-## What "no infrastructure" actually means
+## What "no infrastructure" means
 
 With a self-managed Postgres install, you pick instance sizes, plan for failover, run major-version upgrades, and provision storage ahead of demand. A managed platform takes those tasks over. A serverless platform goes further: capacity scales with traffic, and you stop paying for **compute** when traffic stops (storage continues to bill on paid plans).
 
@@ -32,11 +32,11 @@ With a self-managed Postgres install, you pick instance sizes, plan for failover
 
 ## When serverless isn't the right fit
 
-If your workload runs at sustained high load 24/7, a provisioned instance on RDS or self-hosted Postgres may be cheaper. Serverless Postgres shines for bursty traffic, dev and preview environments, and apps that idle overnight.
+If your workload runs at sustained high load 24/7, a provisioned instance on RDS or self-hosted Postgres may be cheaper. Serverless Postgres is a better fit for bursty traffic, dev and preview environments, and apps that idle overnight.
 
 ## How the main "no infrastructure" Postgres options compare
 
-| Platform                 | Capacity model                                                                                                                                                                                                 | Scale-to-zero                                                                                                                                                                                                                                                       |
+| Service                  | Capacity model                                                                                                                                                                                                 | Scale-to-zero                                                                                                                                                                                                                                                       |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Neon                     | Autoscaling between a min and max CU. Storage is separate from compute. See [autoscaling](/docs/introduction/autoscaling).                                                                                     | Yes by default after 5 minutes idle. See [scale to zero](/docs/introduction/scale-to-zero).                                                                                                                                                                         |
 | AWS Aurora Serverless v2 | You configure a min/max ACU range; capacity adjusts within that range. See [Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html).        | Optional, by setting the min to 0 ACU and enabling auto-pause. Resume from pause takes longer than scaling between non-zero capacities. See [Aurora auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). |

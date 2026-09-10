@@ -1,13 +1,13 @@
 ---
 title: Implementing Fine-Grained Authorization in Laravel with Lakebase Postgres
-subtitle: Learn how to set up and utilize Laravel's powerful authorization features to create a secure and flexible application using Neon, the AI-native backend platform for apps and agents.
+subtitle: Learn how to set up and use Laravel's authorization features to create a secure and flexible application using Neon, the AI-native backend platform for apps and agents.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Laravel provides an authorization system that allows developers to implement fine-grained access control in their applications. While Laravel's built-in features are powerful, some projects require even more advanced role-based access control (RBAC). This is where third-party packages like Spatie's Laravel Permission come into play.
+Laravel provides an authorization system that allows developers to implement fine-grained access control in their applications. Laravel's built-in features cover most cases, but some projects require even more advanced role-based access control (RBAC). This is where third-party packages like Spatie's Laravel Permission come into play.
 
 In this guide, we'll walk through the process of setting up fine-grained authorization in a Laravel application using Lakebase Postgres. We'll start with Laravel's native authorization features, including Gates and Policies, and then expand our implementation to incorporate Spatie's Laravel Permission package for more sophisticated RBAC capabilities.
 
@@ -64,7 +64,7 @@ For fine-grained authorization, we'll primarily focus on Policies, as they provi
 
 That said, Gates can still play an important role in your authorization strategy. They're great for defining broader, application-wide permissions that aren't tied to a specific model. You might use Gates for actions like "access admin dashboard" or "manage site settings".
 
-It's worth noting that Laravel's authorization system is deeply integrated with its authentication system. This means you can easily check a user's permissions within your controllers, views, and even database queries. Whether you're using Gates or Policies, you'll find that Laravel provides a consistent and intuitive API for performing authorization checks throughout your application.
+Laravel's authorization system is deeply integrated with its authentication system. This means you can easily check a user's permissions within your controllers, views, and even database queries. With both Gates and Policies, Laravel provides a consistent and intuitive API for performing authorization checks throughout your application.
 
 ## Implementing Fine-Grained Authorization
 

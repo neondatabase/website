@@ -1,0 +1,54 @@
+---
+title: 'Neon CLI command: login'
+subtitle: Authenticate to Neon via browser or API key and manage credentials
+summary: >-
+  The `neon login` command authenticates the Neon CLI to a Neon account by
+  launching a browser OAuth flow that saves credentials to
+  `~/.config/neon/credentials.json`. Use this command when setting up
+  the CLI for the first time or when not using an API key. `neon auth` is a
+  legacy alias for `neon login`. Vercel-Managed Integration users must
+  authenticate via API key (`--api-key` or `NEON_API_KEY`) instead. The CLI
+  resolves authentication in priority order: `--api-key` flag, then
+  `NEON_API_KEY` env var, then the credentials file, then triggers browser
+  login if none are found.
+enableTableOfContents: true
+updatedOn: '2026-09-08T15:58:09.171Z'
+redirectFrom:
+  - /docs/reference/cli-auth
+  - /docs/cli/auth
+---
+
+The `login` command authenticates you to Neon. `neon auth` is a legacy alias for `neon login`.
+
+## Usage
+
+<CliUsage command="login" />
+
+The command launches a browser window where you authorize the Neon CLI to access your Neon account. Your credentials are then saved locally to `credentials.json`:
+
+```text filename="Output"
+~/.config/neon/credentials.json
+```
+
+<Admonition type="note">
+If you use Neon through the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), authenticate with a Neon API key instead (see below). The `neon login` command requires an account registered through Neon rather than Vercel.
+</Admonition>
+
+Instead of running `neon login`, you can provide an API key with the global `--api-key` option or the `NEON_API_KEY` environment variable. See [Global options](/docs/cli#global-options).
+
+<Admonition type="info">
+
+The Neon CLI resolves authentication in this order:
+
+- The `--api-key` option, if provided.
+- The `NEON_API_KEY` environment variable, if set.
+- The `credentials.json` file created by `neon login`.
+- If none are found, the CLI starts the `neon login` web authentication flow.
+
+</Admonition>
+
+## Options
+
+<CliOptions command="login" />
+
+Pass `--keyring` to store the credential in your operating system's keyring instead of the `credentials.json` file. The choice is saved per profile, so once set, `neon login` keeps using the keyring for that profile even without the flag. Along with this option, `login` accepts the [global options](/docs/cli#global-options).

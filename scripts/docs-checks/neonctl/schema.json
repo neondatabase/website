@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.13.0",
+  "neonctlVersion": "4.14.6",
   "binaries": [
     "neonctl",
     "neon"
@@ -14,7 +14,7 @@
     },
     "api-key": {
       "type": "string",
-      "describe": "Neon API key, authenticates without `neon auth`",
+      "describe": "Neon API key, authenticates without `neon login`",
       "default": "",
       "defaultText": "NEON_API_KEY environment variable"
     },
@@ -244,24 +244,6 @@
           "description": ""
         }
       ]
-    },
-    "auth": {
-      "aliases": [
-        "login"
-      ],
-      "positionals": [],
-      "options": {
-        "context-file": {
-          "type": "unknown",
-          "hidden": true
-        },
-        "keyring": {
-          "type": "boolean",
-          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
-        }
-      },
-      "commands": {},
-      "describe": "Authenticate"
     },
     "bootstrap": {
       "aliases": [],
@@ -917,6 +899,10 @@
         }
       ],
       "options": {
+        "env": {
+          "type": "string",
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
+        },
         "env-pull": {
           "type": "boolean",
           "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
@@ -934,6 +920,10 @@
         {
           "command": "$0 checkout br-cool-snow-12345678 --project-id project-id-123",
           "description": "Pin a branch by id for an explicit project"
+        },
+        {
+          "command": "$0 checkout feat --env .env.local",
+          "description": "Create feat from neon.ts, loading Function env from .env.local first"
         },
         {
           "command": "$0 checkout main",
@@ -986,11 +976,11 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to walking up from the current directory"
             },
             "env-pull": {
               "type": "boolean",
-              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "describe": "Write the same Neon env vars `env pull` would",
               "default": true
             },
             "file": {
@@ -1082,7 +1072,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
             },
             "env-pull": {
               "type": "boolean",
@@ -1131,7 +1121,7 @@
             },
             "env": {
               "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
             }
           },
           "commands": {},
@@ -1507,7 +1497,7 @@
         },
         "env": {
           "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
         },
         "env-pull": {
           "type": "boolean",
@@ -1625,6 +1615,10 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+            },
             "env": {
               "type": "array",
               "alias": "e"
@@ -1635,7 +1629,7 @@
             },
             "service": {
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           },
           "commands": {},
@@ -1660,6 +1654,14 @@
             {
               "command": "$0 env pull -s auth -e DATABASE_URL",
               "description": "Pull all Auth variables plus DATABASE_URL"
+            },
+            {
+              "command": "$0 env pull -s functions",
+              "description": "Pull NEON_FUNCTION_<SLUG>_BASE_URL for every deployed function"
+            },
+            {
+              "command": "$0 env pull -e NEON_FUNCTION_HELLO_BASE_URL",
+              "description": "Write that function's production invocation URL (no deploy required)"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -1747,6 +1749,61 @@
           },
           "commands": {},
           "describe": "Deploy a function from a local directory"
+        },
+        "domains": {
+          "name": "domains",
+          "aliases": [
+            "domain"
+          ],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Custom domain",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a custom domain from the branch"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List custom domains on the branch"
+            },
+            "register": {
+              "name": "register",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain you already own (for example docs.example.com)",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "slug": {
+                  "type": "string",
+                  "describe": "Function slug this domain should point at",
+                  "required": true
+                }
+              },
+              "commands": {},
+              "describe": "Point a domain you already own at a function on the branch"
+            }
+          },
+          "describe": "Manage custom domains on the branch (beta)"
         },
         "get": {
           "name": "get",
@@ -3113,7 +3170,7 @@
           "examples": [
             {
               "command": "$0 profile create work",
-              "description": "Sign in with the browser, like `neon auth --profile work`"
+              "description": "Sign in with the browser, like `neon login --profile work`"
             },
             {
               "command": "$0 profile create ci --mint --org-id org-abc-123",
@@ -4018,6 +4075,24 @@
       },
       "describe": "Manage VPC endpoints and project VPC restrictions",
       "usage": "$0 vpc <sub-command> [options]"
+    },
+    "login": {
+      "aliases": [
+        "auth"
+      ],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
+        }
+      },
+      "commands": {},
+      "describe": "Authenticate"
     }
   }
 }

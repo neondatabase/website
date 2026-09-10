@@ -44,9 +44,9 @@ Append `-pooler` to the compute hostname in your connection string to route thro
 
 The two things a vibe coding platform needs are fast API-driven provisioning and idle compute that actually drops to zero. Most managed Postgres options miss one or both.
 
-- **Supabase**: provisioning is API-driven via the [Management API](https://supabase.com/docs/reference/api/v1-create-a-project), but each paid project is a dedicated VM that runs continuously and bills compute hourly (starting around $10/month per project, ref [billing docs](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)). Free plan projects pause, but only paid orgs can have more than 2 projects.
-- **Aurora Serverless v2**: supports scale-to-zero via [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) since recent engine versions, but cluster creation through CloudFormation or the RDS API takes minutes, not seconds, and resume from a paused state takes longer than from a Neon suspend.
-- **RDS for PostgreSQL**: instance-based pricing means every generated app costs the same whether it's idle or not, so the math fails past a handful of users.
+- **Supabase**: provisioning is API-driven via the [Management API](https://supabase.com/docs/reference/api/v1-create-a-project), but each paid project is a dedicated VM that runs continuously and bills compute hourly (starting around $10/month per project, ref [billing docs](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)). Free Plan projects pause, and the Free Plan caps you at 2 active projects counted across every organization where you're an Owner or Admin, so a fleet means paid projects.
+- **Aurora Serverless v2**: supports scale-to-zero via [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) since recent engine versions, but cluster creation through CloudFormation or the RDS API takes minutes, and resume from a paused state takes longer than from a Neon suspend.
+- **RDS for Postgres**: instance-based pricing means every generated app costs the same whether it's idle or not, so the math fails past a handful of users.
 
 Neon's model maps to the workload: project creation completes in seconds, idle compute drops to $0 (storage continues to bill), and the Agent Plan absorbs the Free plan population so a platform with 10,000 unused generated apps doesn't blow up your bill.
 

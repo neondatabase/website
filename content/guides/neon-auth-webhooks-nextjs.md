@@ -7,7 +7,7 @@ createdAt: '2026-03-24T00:00:00.000Z'
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-Managed Better Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Neon database. By default, Managed Better Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
+Managed Better Auth offers a fully integrated authentication and user management system designed to work with your Neon database. By default, Managed Better Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
 
 But every application is different, and you may need to customize how these messages are delivered or add extra logic to your authentication flow. Some common scenarios that go beyond the default Managed Better Auth features include:
 
