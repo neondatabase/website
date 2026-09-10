@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-09-02T21:17:48.434Z'
+updatedOn: '2026-09-10T10:25:32.615Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -372,15 +372,17 @@ There's no charge for Functions during the beta, but [usage limits](/docs/comput
 
 On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
 
+When billing begins, these Free allowances will be enforced at two levels: an account-wide total across all your projects, and an independent per-project limit.
+
 When billing begins, egress (data a function sends out) will count toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
 
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
 ### AI Gateway
 
-Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans (Launch and Scale) during the beta.
+Neon AI Gateway provides access to foundation models from OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans (Launch and Scale) during the beta. When AI Gateway reaches GA, any paid customer with prepaid credits will be able to access all available models.
 
-Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup.
+Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup, drawing down a prepaid credit balance you buy from the Billing page in the Neon Console.
 
 See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
 
