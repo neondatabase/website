@@ -4,6 +4,7 @@ subtitle: 'Give every pull request its own production-like copy of your entire b
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-07T00:00:00.000Z'
+updatedOn: '2026-09-10T08:27:53.593Z'
 ---
 
 If you're building an application with a real backend (a database, authentication, serverless functions, AI, and file storage), a preview deployment that only deploys your code doesn't tell you much about how the change will behave in production. The preview runs your new code, but everything behind that code is still shared with production. So every time you click through a feature to review it, your test actions land in the same systems your real users depend on:
