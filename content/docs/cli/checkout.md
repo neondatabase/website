@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-09-02T13:05:14.252Z'
+updatedOn: '2026-09-10T21:19:42.305Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -34,7 +34,7 @@ Creating a branch from a [`neon.ts`](/docs/reference/neon-ts) policy evaluates t
 Branch ID vs name is detected automatically (a `br-…` value is treated as an ID):
 
 - **ID:** Matched strictly by ID. A non-existent ID is a hard "not found" error (IDs are server-assigned, so `checkout` never creates one).
-- **Name:** Matched by name. If the name does not exist, in an interactive terminal `checkout` offers to create it (equivalent to `neon branches create --name <name>`: branched from the project's default branch with a read-write compute), then checks it out. In a non-interactive context, a missing name is the usual "not found" error.
+- **Name:** Matched by name. If the name doesn't exist, pass `--create` to create it (equivalent to `neon branches create --name <name>`: branched from the project's default branch with a read-write compute), then check it out. Without `--create`, an interactive terminal offers to create it, while a non-interactive context (CI or no TTY) exits with a "not found" error that tells you to pass `--create`. `--create` needs a branch name, so `neon checkout --create` on its own is an error. `--create` requires neon 4.15.0 or later.
 
 ## Project resolution
 
@@ -78,6 +78,12 @@ Pin a branch by ID:
 
 ```bash
 neon checkout br-cool-snow-12345678 --project-id polished-snowflake-12345678
+```
+
+Create a branch by name if it doesn't exist yet, then pin it:
+
+```bash
+neon checkout dev --create --project-id polished-snowflake-12345678
 ```
 
 After checking out a branch, commands such as [`connection-string`](/docs/cli/connection-string) and [`psql`](/docs/cli/psql) use the pinned branch by default.
