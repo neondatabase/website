@@ -37,7 +37,7 @@ const HeroAnimation = () => {
         <RiveAnimation
           className="pointer-events-none size-full select-none"
           wrapperClassName="absolute inset-0 size-full bg-gray-new-8"
-          src="/animations/pages/object-storage/hero.riv"
+          src="/animations/pages/object-storage/hero.riv?20260907"
         />
       )}
     </div>

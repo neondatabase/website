@@ -47,15 +47,16 @@ const defaultConfig = {
           { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
         ],
       }));
-    const generatedPageMarkdownHeaders = Object.keys(GENERATED_PAGE_MARKDOWN_PATHS).map(
-      (route) => ({
-        source: `/${route}.md`,
-        headers: [
-          { key: 'Content-Disposition', value: 'inline' },
-          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
-          { key: 'X-Robots-Tag', value: 'noindex' },
-        ],
-      })
+    const generatedPageMarkdownHeaders = Object.entries(GENERATED_PAGE_MARKDOWN_PATHS).flatMap(
+      ([route, destination]) =>
+        [`/${route}.md`, destination].map((source) => ({
+          source,
+          headers: [
+            { key: 'Content-Disposition', value: 'inline' },
+            { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+            { key: 'X-Robots-Tag', value: 'noindex' },
+          ],
+        }))
     );
 
     return [
