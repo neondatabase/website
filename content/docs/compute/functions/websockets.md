@@ -3,11 +3,11 @@ title: WebSockets and SSE on Neon Functions
 subtitle: Hold long-lived connections open for real-time apps.
 summary: >-
   Neon Functions stay alive while data flows, so they can host real-time
-  backends. Use WebSockets for two-way connections, either with upgradeWebSocket
-  from @neon/functions or a lower-level upgrade export, server-sent events for
-  one-way streams, and Postgres to broadcast across isolates.
+  backends. Use WebSockets for two-way connections with upgradeWebSocket from
+  @neon/functions, server-sent events for one-way streams, and Postgres to
+  broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-09-01T17:54:30.907Z'
+updatedOn: '2026-09-11T20:58:44.264Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -21,16 +21,7 @@ Two options, depending on direction:
 
 ## Serve a WebSocket
 
-There are two ways to accept a WebSocket connection:
-
-- **`upgradeWebSocket` from `@neon/functions`** opens the connection from inside your normal `fetch` handler and returns a standard [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket). No extra export and no `ws` dependency. Start here for new functions.
-- **An `upgrade` export** gives you the raw socket to drive with the [`ws`](https://github.com/websockets/ws) library. It's lower level and needs the `ws` dependency. Use it when you need `ws` features directly, such as `ws.ping()` for a [heartbeat](#heartbeat) or a `WebSocketServer` shared across clients for [broadcast](#cross-isolate-messaging).
-
-If a function has both, the `upgrade` export takes precedence.
-
-### With upgradeWebSocket
-
-`upgradeWebSocket(request)` turns a handshake into a live connection and returns `{ socket, response }`. Return `response` from your handler to complete the upgrade; `socket` is a standard `WebSocket`. The API mirrors [`Deno.upgradeWebSocket`](https://docs.deno.com/api/deno/~/Deno.upgradeWebSocket).
+Accept a WebSocket connection with `upgradeWebSocket` from `@neon/functions` (0.7.0 or later). Called inside your normal `fetch` handler, `upgradeWebSocket(request)` turns a handshake into a live connection and returns `{ socket, response }`: return `response` to complete the upgrade, and `socket` is a standard [`WebSocket`](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket), with no `ws` dependency. The API mirrors [`Deno.upgradeWebSocket`](https://docs.deno.com/api/deno/~/Deno.upgradeWebSocket).
 
 ```ts filename="functions/echo.ts"
 import { upgradeWebSocket } from '@neon/functions';
@@ -52,11 +43,13 @@ export default {
 };
 ```
 
-Install the dependency:
+Install the dependency (`@neon/functions` 0.7.0 or later):
 
 ```bash
 npm install @neon/functions
 ```
+
+Local WebSocket support needs the `neon` CLI 2.45.0 or later. With an earlier CLI, `neon dev` returns `200 OK` instead of `101 Switching Protocols` for upgrade requests, so test against a deployed function or upgrade the CLI. Installing `@neon/functions` does not upgrade the CLI; they version independently.
 
 Note:
 
@@ -82,52 +75,15 @@ wscat --connect wss://<your-function-url>   # deployed
 
 Type a message and press Enter. The server echoes it back.
 
-### With an upgrade export
-
-Export an `upgrade` method alongside `fetch`. The runtime calls `upgrade` for WebSocket upgrade requests and `fetch` for everything else. This pattern uses the [`ws`](https://github.com/websockets/ws) library, which gives you the raw socket and features like `ws.ping()`. `noServer: true` prevents `ws` from starting its own HTTP server; the runtime owns the server and passes the raw socket to `handleUpgrade`.
-
-```ts filename="functions/echo-ws.ts"
-import type { IncomingMessage } from 'node:http';
-import type { Duplex } from 'node:stream';
-import { WebSocketServer } from 'ws';
-
-const wss = new WebSocketServer({ noServer: true });
-
-export default {
-  fetch(request: Request) {
-    return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', {
-      status: 426,
-    });
-  },
-
-  upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
-    wss.handleUpgrade(req, socket, head, (ws) => {
-      ws.on('message', (data) => ws.send(data));
-    });
-  },
-};
-```
-
-Install the dependency (`ws` version 8 or later, which exports `WebSocketServer`):
-
-```bash
-npm install ws
-npm install --save-dev @types/ws
-```
-
-`fetch` is required even if you only plan to serve WebSocket clients.
-
 ## Hono app with WebSocket
 
-With `upgradeWebSocket`, the handshake is a normal request to your Hono app, so it flows through routing and middleware like any other. Call `upgradeWebSocket(c.req.raw)` in the route handler and return the `response`. This is the main advantage over the `upgrade` export: auth is just route middleware, not something you reimplement on the raw socket.
+For a Hono app, use `upgradeWebSocket` from `@neon/functions/hono` (needs `@neon/functions` 0.9.0 or later). It's a Hono route helper: pass a function that returns `onOpen`, `onMessage`, `onClose`, and `onError` handlers. The handshake is a normal request to your app, so it flows through routing and middleware like any other, and auth is just route middleware, not something you reimplement on a raw socket.
 
-<Admonition type="note" title="Two different upgradeWebSocket functions">
-Watch the package name. This page recommends `upgradeWebSocket` from `@neon/functions`, which works with Neon Functions. The similarly named `upgradeWebSocket` from `@hono/node-server` does not: it requires Hono's own `serve()` wrapper, which the runtime doesn't use. For a Hono app, call the `@neon/functions` `upgradeWebSocket` inside a route, as shown below.
-</Admonition>
+Watch the import path. The similarly named `upgradeWebSocket` from `@hono/node-server` is a different function that does not work here, because it requires Hono's own `serve()` wrapper, which the runtime doesn't use.
 
 ```ts filename="functions/hono-echo.ts"
 import { Hono } from 'hono';
-import { upgradeWebSocket } from '@neon/functions';
+import { upgradeWebSocket } from '@neon/functions/hono';
 
 const app = new Hono();
 
@@ -135,17 +91,17 @@ app.get('/', (c) => c.text('WebSocket server. Connect via wss://'));
 
 app.get(
   '/ws',
+  // Normal Hono middleware, applied to the handshake. verifyToken is your own
+  // JWT or API-key check; see Authentication below.
   async (c, next) => {
-    // Normal Hono middleware, applied to the handshake. verifyToken is your own
-    // JWT or API-key check; see Authentication below.
     if (!(await verifyToken(c.req.query('token')))) return c.text('unauthorized', 401);
     await next();
   },
-  (c) => {
-    const { socket, response } = upgradeWebSocket(c.req.raw);
-    socket.addEventListener('message', (event) => socket.send(`echo: ${event.data}`));
-    return response;
-  },
+  upgradeWebSocket(() => ({
+    onOpen: (_event, ws) => ws.send('welcome'),
+    onMessage: (event, ws) => ws.send(`echo: ${event.data}`),
+    onClose: () => console.log('client disconnected'),
+  })),
 );
 
 export default {
@@ -153,31 +109,17 @@ export default {
 };
 ```
 
-The `/ws` route is WebSocket-only: a plain (non-upgrade) GET reaches `upgradeWebSocket` on a request that isn't a handshake and returns `500`. That's fine for a dedicated socket route; add the `426` guard from the [echo example](#with-upgradewebsocket) to any route that also serves normal HTTP.
+Install the dependencies (`@neon/functions` 0.9.0 or later, plus Hono):
 
-If you use the `upgrade` export instead, Hono never sees the handshake: the runtime routes WebSocket upgrades directly to `upgrade`, so Hono middleware and route guards don't apply and you handle auth in `upgrade` directly.
-
-```ts filename="functions/hono-echo-ws.ts"
-import type { IncomingMessage } from 'node:http';
-import type { Duplex } from 'node:stream';
-import { Hono } from 'hono';
-import { WebSocketServer } from 'ws';
-
-const app = new Hono();
-const wss = new WebSocketServer({ noServer: true });
-
-app.get('/', (c) => c.text('WebSocket server. Connect via wss://'));
-
-export default {
-  fetch: (request: Request) => app.fetch(request),
-
-  upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
-    wss.handleUpgrade(req, socket, head, (ws) => {
-      ws.on('message', (data) => ws.send(`echo: ${data}`));
-    });
-  },
-};
+```bash
+npm install @neon/functions hono
 ```
+
+The `ws` handle passed to each callback is Hono's [`WSContext`](https://hono.dev/docs/helpers/websocket): use `ws.send()`, `ws.close()`, and `ws.readyState`, and reach the underlying standard `WebSocket` through `ws.raw`. A non-upgrade request on the same path is left alone and passed to the next handler, so a plain `GET /ws` still reaches any route you define below it.
+
+<Admonition type="warning" title="Middleware that rebuilds the response breaks the upgrade">
+The upgrade completes only when the runtime writes the handler's `response` unchanged, so Hono middleware that reads or rebuilds the response defeats it. In particular, `app.use('*', cors())` on an upgrade route fails the handshake with HTTP `500` and `websocket_upgrade_response_lost`; the same happens when middleware reads `c.res` before calling `next()` and sets headers afterward. Scope response-rewriting middleware to your non-WebSocket routes, not the upgrade route.
+</Admonition>
 
 ## Cross-isolate messaging
 
@@ -255,9 +197,7 @@ npm install --save-dev @types/pg
 
 Between messages a quiet feed sends nothing, so pair it with a [heartbeat](#heartbeat) to keep idle clients from being dropped.
 
-<Admonition type="note">
 `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually acceptable; when you need every row, use `LISTEN/NOTIFY` (below, on always-on compute) or poll by `created_at` with a small overlap window and dedupe by id.
-</Admonition>
 
 ### LISTEN/NOTIFY (lowest latency, always-on compute only)
 
@@ -267,7 +207,7 @@ For sub-second latency, each isolate holds one `LISTEN` connection at module sco
 The `LISTEN` client holds an idle connection open on every isolate, and an idle connection doesn't count as active traffic. [Scale to zero](/docs/introduction/scale-to-zero) suspends the compute on its normal timer and drops that connection, silently killing the feed. Only use `LISTEN`/`NOTIFY` on an always-on compute, with scale to zero disabled (a paid-plan setting).
 </Admonition>
 
-The example below uses the `upgrade` export because it shares one `WebSocketServer` across clients. The same `Set`-of-connections pattern works with `upgradeWebSocket`: add the `socket` it returns to the `Set` on `open`, remove it on `close`, and call `socket.send()` on each to broadcast.
+Each isolate keeps a `Set` of the `upgradeWebSocket` sockets it accepted, one `LISTEN` client to receive `NOTIFY`, and a pool to `pg_notify` when a client sends a message.
 
 Install the additional dependencies:
 
@@ -277,11 +217,7 @@ npm install --save-dev @types/pg
 ```
 
 ```ts filename="functions/chat.ts"
-import type { IncomingMessage } from 'node:http';
-import type { Duplex } from 'node:stream';
-import { Hono } from 'hono';
-import { attachDatabasePool } from '@neon/functions';
-import { WebSocketServer, type WebSocket } from 'ws';
+import { upgradeWebSocket, attachDatabasePool } from '@neon/functions';
 import { Pool, Client } from 'pg';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
@@ -300,38 +236,33 @@ listener
 const clients = new Set<WebSocket>();
 const CHANNEL = 'chat';
 
+// Re-push every NOTIFY to this isolate's own clients.
 listener.on('notification', (msg) => {
   if (!msg.payload) return;
-  for (const ws of clients) {
-    if (ws.readyState === ws.OPEN) ws.send(msg.payload);
+  for (const socket of clients) {
+    if (socket.readyState === socket.OPEN) socket.send(msg.payload);
   }
 });
 
-const wss = new WebSocketServer({ noServer: true });
-const app = new Hono();
-
-app.get('/', (c) => c.text('Realtime chat. Connect over WebSocket'));
-
 export default {
-  fetch: (request: Request) => app.fetch(request),
-
-  upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
-    wss.handleUpgrade(req, socket, head, (ws) => {
-      clients.add(ws);
-      ws.on('close', () => clients.delete(ws));
-      ws.on('message', async (data) => {
-        const body = data.toString().trim();
-        if (!body) return;
-        await pool.query('SELECT pg_notify($1, $2)', [CHANNEL, body]);
-      });
+  fetch(request: Request) {
+    if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
+      return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', { status: 426 });
+    }
+    const { socket, response } = upgradeWebSocket(request);
+    socket.addEventListener('open', () => clients.add(socket)); // add once the 101 is written
+    socket.addEventListener('close', () => clients.delete(socket));
+    socket.addEventListener('message', async (event) => {
+      const body = String(event.data).trim();
+      if (!body) return;
+      await pool.query('SELECT pg_notify($1, $2)', [CHANNEL, body]);
     });
+    return response;
   },
 };
 ```
 
-<Admonition type="note">
 Use `DATABASE_URL_UNPOOLED` for the `LISTEN` client. The pooled `DATABASE_URL` routes through PgBouncer, which doesn't support `LISTEN/NOTIFY`.
-</Admonition>
 
 ## Heartbeat
 
@@ -354,11 +285,9 @@ process.on('SIGINT', () => clearInterval(beat));
 
 `clients` is this isolate's `Set` of live connections, populated where you accept a socket (the feed and chat examples above).
 
-With the `upgrade` export you get a `ws` socket instead, which has `ws.ping()`: it sends a real WebSocket ping frame that browsers and the `ws` library (so also `wscat`) answer with a pong automatically, below your message handlers, so nothing reaches application code. Swap `socket.send('ping')` for `ws.ping()` on the same timer and drop the client-side filtering.
-
 ## Server-sent events (SSE)
 
-When you only need server-to-client updates, SSE is simpler than a WebSocket. There's no `upgrade` method and no library to install. A plain `fetch` handler returns a `Response` whose body is a `ReadableStream`, with the `Content-Type` set to `text/event-stream`. The runtime keeps that response open while the stream keeps writing.
+When you only need server-to-client updates, SSE is simpler than a WebSocket. There's no upgrade handshake and no library to install. A plain `fetch` handler returns a `Response` whose body is a `ReadableStream`, with the `Content-Type` set to `text/event-stream`. The runtime keeps that response open while the stream keeps writing.
 
 ```ts filename="functions/sse.ts"
 const encoder = new TextEncoder();
@@ -417,11 +346,11 @@ A function has a public URL, so authenticate the caller before accepting a conne
 
 Browsers can't set custom headers on a WebSocket or an `EventSource`, so you can't use `Authorization`. Pass the token as a query parameter and verify it before accepting the connection. Refusing an unauthenticated connection is the normal case for a WebSocket endpoint.
 
-Whichever pattern you use, a browser client can't read why a handshake was refused; it sees only a generic connection failure, not the status or body you returned. Refuse to keep unauthenticated clients out, but send any detail the client needs over a separate authenticated request.
+A browser client can't read why a handshake was refused; it sees only a generic connection failure, not the status or body you returned. Refuse to keep unauthenticated clients out, but send any detail the client needs over a separate authenticated request.
 
-In the snippets below (and in the Hono example above), `verifyToken(token)` is your own check: verify a JWT with `jose`'s `jwtVerify`, or look up an API key, returning the caller's identity or `null`.
+In the snippet below (and in the Hono example above), `verifyToken(token)` is your own check: verify a JWT with `jose`'s `jwtVerify`, or look up an API key, returning the caller's identity or `null`.
 
-With `upgradeWebSocket`, refuse the handshake by returning an ordinary `Response` from `fetch` before you upgrade, so you don't call `upgradeWebSocket` at all until the caller checks out:
+Refuse the handshake by returning an ordinary `Response` from `fetch` before you upgrade, so you don't call `upgradeWebSocket` at all until the caller checks out. In a Hono app, do the same as route middleware ahead of the `upgradeWebSocket` helper, as in the [Hono example](#hono-app-with-websocket).
 
 ```ts
 async fetch(request: Request) {
@@ -436,26 +365,6 @@ async fetch(request: Request) {
   const { socket, response } = upgradeWebSocket(request);
   // authenticated; identity is in scope
   return response;
-},
-```
-
-With an `upgrade` export, verify the token before calling `wss.handleUpgrade` and write the refusal to the raw socket:
-
-```ts
-async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
-  const url = new URL(req.url ?? '/', 'http://localhost');
-  const token = url.searchParams.get('token');
-  const identity = token ? await verifyToken(token) : null; // e.g. jwtVerify with jose
-
-  if (!identity) {
-    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-    socket.destroy();
-    return;
-  }
-
-  wss.handleUpgrade(req, socket, head, (ws) => {
-    // authenticated; identity is in scope
-  });
 },
 ```
 
