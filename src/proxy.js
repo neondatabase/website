@@ -212,7 +212,10 @@ export async function proxy(req) {
             status: 200,
             headers: {
               'Content-Type': 'text/markdown; charset=utf-8',
-              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              // Short TTL so a cached hit still re-enters the proxy and fires the
+              // LLM read beacon (which runs only here). A long s-maxage lets the
+              // CDN replay hits for a day, silently zeroing agent pageview tracking.
+              'Cache-Control': 'public, max-age=60, s-maxage=300',
               'X-Content-Source': 'markdown',
               'X-Robots-Tag': 'noindex',
               'X-LLMs-Txt': '/blog/llms.txt',
@@ -282,7 +285,10 @@ export async function proxy(req) {
                 status: 200,
                 headers: {
                   'Content-Type': 'text/markdown; charset=utf-8',
-                  'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                  // Short TTL so a cached hit still re-enters the proxy and fires the
+                  // LLM read beacon (which runs only here). A long s-maxage lets the
+                  // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                  'Cache-Control': 'public, max-age=60, s-maxage=300',
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
                 },
@@ -351,7 +357,10 @@ export async function proxy(req) {
                   status: 200,
                   headers: {
                     'Content-Type': 'text/markdown; charset=utf-8',
-                    'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                    // Short TTL so a cached hit still re-enters the proxy and fires the
+                    // LLM read beacon (which runs only here). A long s-maxage lets the
+                    // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                    'Cache-Control': 'public, max-age=60, s-maxage=300',
                     'X-Content-Source': 'markdown',
                     'X-Robots-Tag': 'noindex',
                   },
