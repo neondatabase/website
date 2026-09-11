@@ -226,7 +226,7 @@ module.exports = {
     {
       name: 'Security',
       description:
-        'Compliance certifications, acceptable use policies, HIPAA, and security reporting.',
+        'Compliance certifications (SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA), acceptable use policies, HIPAA, and security reporting.',
     },
     {
       name: 'Extensions',
