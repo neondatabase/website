@@ -6,7 +6,7 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-09-11T12:00:43.655Z'
+updatedOn: '2026-09-11T12:11:39.591Z'
 ---
 
 <!--
@@ -32,14 +32,15 @@ the Free plan. See [Neon plans](/docs/introduction/plans) and
 - **Minimum purchase: $5.**
   <!-- TODO/CONFIRM: Maximum custom purchase amount and supported range. -->
 - **Minimum balance: $2.**
+  <!-- TODO/CONFIRM: Clarify when requests are actually blocked relative to the $2 minimum, $0, and negative balance — tied to enforcement enablement (see enforcement TODO). -->
 - **Credits expire 12 months after purchase.**
 - Your balance can go **negative** — usage is metered after a request is served,
   so a final request can push the balance below zero.
   <!-- TODO/CONFIRM: How a negative balance is communicated or settled. -->
 
-Your balance **draws down as usage is metered**. Metering tracks token usage, so
-your balance decreases as you send requests. For example, after image
-generation, a balance can move from $25.00 to $24.99.
+Your balance **draws down as usage is metered** — each request consumes credits
+based on its token usage, so your balance decreases as you send requests. For
+example, a small request might reduce a $25.00 balance to $24.99.
 
 ## Who can buy credits
 
@@ -153,6 +154,17 @@ internal source and are not confirmed for public use; (3) it ages badly on an
 evergreen page. If PM wants a public transitional note, use a short time-boxed
 callout or a separate announcement or migration page — pending PM decision.
 -->
+
+## Availability
+
+At GA, the AI Gateway is available in **US East 1, US East 2, EU London, and
+Singapore** (more regions to follow).
+
+<Admonition type="note">
+**IP Allow** and **Private Link** do not cover AI Gateway traffic at GA.
+</Admonition>
+
+<!-- TODO/CONFIRM: Verify the GA region list and the IP Allow / Private Link coverage scope before publishing. -->
 
 ## If you downgrade to Free
 
