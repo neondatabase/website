@@ -42,7 +42,11 @@ const serviceItems = heroServiceItems.map((item) => ({
   ...VIDEO_META[item.videoBase],
 }));
 
-const BackendServices = ({ title = backendServices.title, className = null, contentClassName = null }) => (
+const BackendServices = ({
+  title = backendServices.title,
+  className = null,
+  contentClassName = null,
+}) => (
   <section
     className={cn(
       'backend-services bg-gray-new-10 pt-40 safe-paddings pb-20 xl:pt-32 xl:pb-16 lg:pt-24 lg:pb-12 md:pt-20 md:pb-10',

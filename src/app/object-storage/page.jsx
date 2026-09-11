@@ -1,10 +1,10 @@
 import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
 import BackendServices from 'components/pages/backend-platform/backend-services';
 import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
-import Faq from 'components/shared/faq';
 import BackendHero from 'components/pages/backend-platform/hero';
 import Configuration from 'components/pages/object-storage/configuration';
 import HeroAnimation from 'components/pages/object-storage/hero/hero-animation';
+import Faq from 'components/shared/faq';
 import NumberedSteps from 'components/shared/numbered-steps';
 import ProductBenefits from 'components/shared/product-benefits';
 import { objectStoragePageContent } from 'constants/object-storage-page-content';
@@ -53,7 +53,11 @@ const ObjectStoragePage = () => (
       {...objectStoragePageContent.isolatedEnvironments}
     />
     <Configuration />
-    <Faq items={objectStoragePageContent.faqItems} titleLines={['Your questions,', 'answered.']} variant="light" />
+    <Faq
+      items={objectStoragePageContent.faqItems}
+      titleLines={['Your questions,', 'answered.']}
+      variant="light"
+    />
     <BackendServices title={objectStoragePageContent.backendServicesTitle} />
     <BuiltForAgents />
   </BackendPlatformPage>
