@@ -10,11 +10,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import InkeepAIButton from './inkeep-ai-button';
 import InkeepSearch from './inkeep-search';
-
-const InkeepModalSearch = dynamic(
-  () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalSearch),
-  { ssr: false }
-);
+import SiteSearchModal from './site-search-modal';
 
 const InkeepModalChat = dynamic(
   () => import('@inkeep/cxkit-react').then((mod) => mod.InkeepModalChat),
@@ -27,8 +23,8 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
   const { theme, systemTheme } = useTheme();
   const [sharedChatId, setSharedChatId] = useState(null);
   const latestInputMessageRef = useRef('');
+  const pendingAskRef = useRef('');
 
-  // Check if URL contains chatId parameter and open AI chat modal automatically on doc pages
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const chatId = urlParams.get('chatId');
@@ -48,31 +44,27 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
       themeMode = theme;
   }
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'k' && event.metaKey) {
-      setIsSearchOpen(true);
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.defaultPrevented) return;
+      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   const handleInkeepEvent = (event) => {
-    const { eventName, properties = {} } = event;
+    const { eventName } = event;
 
     if (eventName === 'user_message_submitted') {
       const payload = latestInputMessageRef.current ? { text: latestInputMessageRef.current } : {};
       sendGtagEvent('AI Chat Message Submitted', payload);
       latestInputMessageRef.current = '';
-    }
-
-    if (eventName === 'search_query_submitted') {
-      sendGtagEvent('Search Query Submitted', { text: properties.searchQuery });
     }
   };
 
@@ -81,24 +73,26 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
     themeMode,
   });
 
-  const searchModalProps = {
-    baseSettings,
-    modalSettings: {
-      isOpen: isSearchOpen,
-      onOpenChange: setIsSearchOpen,
-    },
-  };
-
   const chatModalProps = {
     baseSettings,
     modalSettings: {
       isOpen: isChatOpen,
-      onOpenChange: setIsChatOpen,
+      onOpenChange: (open) => {
+        if (!open) pendingAskRef.current = '';
+        setIsChatOpen(open);
+      },
     },
     aiChatSettings: {
       ...aiChatSettings,
       onInputMessageChange: (message) => {
         latestInputMessageRef.current = message;
+      },
+      chatFunctionsRef: (fns) => {
+        if (!fns) return;
+        const pending = pendingAskRef.current;
+        if (pending === '') return;
+        pendingAskRef.current = '';
+        fns.submitMessage(pending);
       },
       ...(sharedChatId && { chatId: sharedChatId }),
     },
@@ -114,7 +108,19 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
       {!isNotFoundPage && (
         <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
       )}
-      {isSearchOpen && <InkeepModalSearch {...searchModalProps} />}
+      <SiteSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onAskAi={
+          isNotFoundPage
+            ? undefined
+            : (askQuery) => {
+                pendingAskRef.current = askQuery;
+                setIsSearchOpen(false);
+                setIsChatOpen(true);
+              }
+        }
+      />
       {isChatOpen && <InkeepModalChat {...chatModalProps} />}
     </div>
   );
