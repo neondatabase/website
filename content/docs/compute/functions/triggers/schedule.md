@@ -6,7 +6,7 @@ summary: >-
   a Hono handler for the scheduled POST, a five-field UTC cron reference, how to confirm a
   run in the logs, and the common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-11T15:58:40.262Z'
+updatedOn: '2026-09-11T17:09:23.864Z'
 ---
 
 This page shows how to schedule a deployed function with a cron expression, then covers listing, updating, disabling, and deleting triggers. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You manage triggers through the Neon API.
@@ -123,6 +123,8 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 ```
 
 `next_run_at` is when the first run happens. It's in UTC and advances on its own as runs pass.
+
+You can also declare triggers in your [`neon.ts`](/docs/reference/neon-ts) config and apply them with `neon deploy`.
 
 ## Confirm it ran
 

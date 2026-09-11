@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-11T16:59:49.653Z'
+updatedOn: '2026-09-11T17:09:23.864Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -334,7 +334,7 @@ Use `neon deploy --env .env.production` to load a `.env` file before evaluation.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
 
-`triggers` attaches cron schedule triggers to the function, so recurring work like a nightly report or cleanup job runs without a separate scheduler. `neon deploy` reconciles a function's triggers along with the function itself, which is the declarative counterpart to managing them one at a time with [`neon triggers`](/docs/cli/triggers). Each trigger needs a `name` and a `cron` expression (a five-field expression evaluated in UTC). `functionPath` is the path the trigger invokes and defaults to `/`; `enabled` defaults to `true`. See [Schedule a function](/docs/compute/functions/triggers/schedule) for how scheduled triggers work.
+`triggers` declares cron schedule triggers on the function, reconciled by `neon deploy` as the declarative counterpart to [`neon triggers`](/docs/cli/triggers). `cron` is a five-field UTC expression. See [Schedule a function](/docs/compute/functions/triggers/schedule).
 
 ```ts filename="neon.ts"
 preview: {
