@@ -6,7 +6,7 @@ summary: >-
   a Hono handler for the scheduled POST, a five-field UTC cron reference, how to confirm a
   run in the logs, and the common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-09T05:14:01.852Z'
+updatedOn: '2026-09-11T15:58:40.262Z'
 ---
 
 This page shows how to schedule a deployed function with a cron expression, then covers listing, updating, disabling, and deleting triggers. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You manage triggers through the Neon API.
@@ -28,7 +28,7 @@ export BRANCH_ID="<your-branch-id>"
 
 ## Write a handler for the scheduled call
 
-A scheduled invocation is a `POST` with `{scheduled_at}` and no credentials, so the route accepts an unauthenticated `POST` and reads the body for context. Neon currently delivers the call to the function's public URL, so keep the route outside your auth middleware and make the handler safe for anyone to call (see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives)).
+A scheduled invocation is a `POST` whose JSON body carries the occurrence: `data.scheduled_at`, the `trigger` that fired, and an `invocation_id`. Neon delivers it to the function's public URL, so the route sits outside your auth middleware. You can confirm the call came from Neon with the `X-Neon-Trigger-Invocation-Id` header (see [Confirming a request came from Neon](/docs/compute/functions/triggers/overview#confirming-a-request-came-from-neon)); keep the handler idempotent and guard destructive actions regardless.
 
 This [Hono](https://hono.dev) function checks a URL and records the result. The outbound `fetch` is work you can't run from SQL inside the database:
 
@@ -39,9 +39,15 @@ import { neon } from '@neondatabase/serverless';
 const app = new Hono();
 const sql = neon(process.env.DATABASE_URL!);
 
-// No auth middleware on this route: scheduled invocations arrive without credentials.
+// This route is public. Neon strips client-set X-Neon-* headers, so the presence of
+// X-Neon-Trigger-Invocation-Id attests the call came from Neon's trigger system.
 app.post('/', async (c) => {
-  const { scheduled_at: scheduledAt } = await c.req.json<{ scheduled_at: string }>();
+  if (!c.req.header('x-neon-trigger-invocation-id')) {
+    return c.json({ error: 'not a trigger call' }, 403);
+  }
+
+  const { data } = await c.req.json<{ data: { scheduled_at: string } }>();
+  const scheduledAt = data.scheduled_at;
 
   const started = performance.now();
   const res = await fetch('https://example.com', { signal: AbortSignal.timeout(10_000) });
@@ -116,7 +122,7 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 }
 ```
 
-`next_run_at` is when the first run lands. It's in UTC and advances on its own as runs pass.
+`next_run_at` is when the first run happens. It's in UTC and advances on its own as runs pass.
 
 ## Confirm it ran
 
@@ -126,7 +132,7 @@ The schedule is every minute, so wait about a minute, then read the function's l
 neon logs query --source function
 ```
 
-Your `check ...` line appears with the `scheduled_at` value from the request body. See [Observability](#observability) for why that line matters.
+Your `check ...` line appears with the `scheduled_at` value read from `data`. See [Observability](#observability) for why that line matters.
 
 Once you've seen a run, move the trigger to its real cadence with a `PATCH` on `schedule` (see [Update a trigger](#update-a-trigger)). Left at `* * * * *`, it keeps invoking the function every minute.
 
@@ -233,7 +239,7 @@ HTTP/1.1 204 No Content
 ```
 
 <Admonition type="note">
-Disabling or deleting stops future scheduling, but an occurrence already committed for delivery is still expected to run. Change a trigger a second or more before the scheduled minute to prevent that run; don't rely on a disable landing in the same instant as a fire.
+Disabling or deleting stops future scheduling, but an occurrence already committed for delivery is still expected to run. Change a trigger a second or more before the scheduled minute to prevent that run; don't rely on a disable taking effect in the same instant as a fire.
 </Admonition>
 
 ## Observability
@@ -244,7 +250,7 @@ In the platform logs, a scheduled invocation looks like any other HTTP call: the
 console.log(`check ${scheduledAt}: ${res.status} in ${latencyMs}ms`);
 ```
 
-Your output lands under the `neon.function.app` scope, in the Console's Logs tab and in:
+Your output appears under the `neon.function.app` scope, in the Console's Logs tab and in:
 
 ```bash
 neon logs query --source function
@@ -267,6 +273,7 @@ The request body is strict: any field not in the schema is rejected rather than 
 ## Related
 
 - [Function Triggers overview](/docs/compute/functions/triggers/overview)
+- [Trigger on an object upload](/docs/compute/functions/triggers/object-storage): the object-created trigger type
 - [pg_cron](/docs/extensions/pg_cron): schedule SQL inside Postgres instead
 - [Deploy and manage](/docs/compute/functions/deploy)
 - [Authentication](/docs/compute/functions/authentication)

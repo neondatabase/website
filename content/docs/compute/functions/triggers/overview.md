@@ -2,23 +2,26 @@
 title: Function Triggers
 subtitle: Let Neon invoke a function for you.
 summary: >-
-  Function Triggers invoke a deployed Neon Function on a cron schedule, with no external
-  scheduler and no compute kept running to hold the timer. Covers what a scheduled invocation
-  sends your function, how triggers behave across branches, and the current limits. Schedule
-  is the only trigger type today, evaluated in UTC.
+  Function Triggers invoke a deployed Neon Function in response to an event, with no external
+  scheduler and no compute kept running to watch for it. Covers the trigger types (schedule and
+  object-created), what an invocation sends your function, how triggers behave across branches,
+  and the current limits.
 enableTableOfContents: true
-updatedOn: '2026-09-09T05:14:01.852Z'
+updatedOn: '2026-09-11T15:58:40.262Z'
 ---
 
-A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) on a schedule. You give it a cron expression, and Neon calls the function at each run. No external scheduler, and no compute kept running to hold the timer.
+A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) in response to an event. No external scheduler, no queue wiring, and no compute kept running to watch for it.
 
-Today the only trigger type is `schedule`, a cron expression evaluated in UTC. The API uses a `type` discriminator, so more types can be added later without changing existing triggers.
+Trigger types available today:
 
-You manage triggers through the Neon API. To create one, see [Schedule a function](/docs/compute/functions/triggers/schedule).
+- **`schedule`** — a cron expression evaluated in UTC. See [Schedule a function](/docs/compute/functions/triggers/schedule).
+- **`storage_object_created`** — an object created in an [Object Storage](/docs/storage/overview) bucket, optionally under a key prefix. See [Trigger on an object upload](/docs/compute/functions/triggers/object-storage).
+
+The API uses a `type` discriminator, so more types can be added later without changing existing triggers. You manage all types through the Neon API.
 
 ## Function Triggers vs pg_cron
 
-[pg_cron](/docs/extensions/pg_cron) schedules SQL inside Postgres. Function Triggers schedule your function code. They solve different problems:
+[pg_cron](/docs/extensions/pg_cron) schedules SQL inside Postgres. A scheduled Function Trigger runs your function code instead. They solve different problems:
 
 |                        | pg_cron                              | Function Triggers                                                                            |
 | ---------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------- |
@@ -31,14 +34,15 @@ You manage triggers through the Neon API. To create one, see [Schedule a functio
 
 A trigger belongs to a project and branch and points to one function on that branch.
 
-| Field           | Required | Description                                                                                           |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `type`          | Yes      | `"schedule"` is the only value today.                                                                 |
-| `function_slug` | Yes      | The [slug](/docs/compute/functions/deploy#slugs) of the function to invoke. It's the only identifier. |
-| `name`          | Yes      | A label, 1 to 256 characters. Unique among triggers visible on the branch, including inherited ones.  |
-| `schedule`      | Yes      | `{ "cron": "*/15 * * * *" }`. Cron is always UTC.                                                     |
-| `function_path` | No       | Path the invocation is sent to. Defaults to `/`. Path only, no query string.                          |
-| `enabled`       | No       | Defaults to `true`. Set `false` to keep a trigger without running it.                                 |
+| Field                    | Required                     | Description                                                                                                                                                     |
+| ------------------------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                   | Yes                          | `"schedule"` or `"storage_object_created"`.                                                                                                                     |
+| `function_slug`          | Yes                          | The [slug](/docs/compute/functions/deploy#slugs) of the function to invoke. It's the only identifier.                                                           |
+| `name`                   | Yes                          | A label, 1 to 256 characters. Unique among triggers visible on the branch, including inherited ones.                                                            |
+| `schedule`               | For `schedule`               | `{ "cron": "*/15 * * * *" }`, always UTC. See [Schedule a function](/docs/compute/functions/triggers/schedule).                                                 |
+| `storage_object_created` | For `storage_object_created` | `{ "bucket_name": "my-bucket", "prefix": "uploads/" }` (`prefix` optional). See [Trigger on an object upload](/docs/compute/functions/triggers/object-storage). |
+| `function_path`          | No                           | Path the invocation is sent to. Defaults to `/`. Path only, no query string.                                                                                    |
+| `enabled`                | No                           | Defaults to `true`. Set `false` to keep a trigger without running it.                                                                                           |
 
 Neon returns these read-only fields on every trigger:
 
@@ -50,22 +54,38 @@ Neon returns these read-only fields on every trigger:
 | `source_branch_id` | The branch that authored the configuration in effect.                   |
 | `inherited`        | `true` when that configuration came from an ancestor branch.            |
 
-A function can have multiple triggers, each evaluated independently, for example a 15-minute sync and a nightly full run. Give each a distinct `function_path` so the handler can tell them apart, since the request carries only the scheduled time.
+A function can have multiple triggers, each evaluated independently, for example a 15-minute sync and a nightly full run. Give each a distinct `function_path`, or read `trigger.id` / `trigger.name` from the request body, so the handler can tell them apart.
 
 ## What your function receives
 
-When a schedule fires, Neon sends the function:
+When a trigger fires, Neon sends the function:
 
 - **Method:** `POST`.
-- **Path:** the trigger's `function_path`, exactly as configured.
-- **Body:** the scheduled minute, `{"scheduled_at":"2026-09-08T19:30:00Z"}`. This is the only context in the request.
-- **Headers:** `content-type: application/json` and a W3C [`traceparent`](https://www.w3.org/TR/trace-context/).
+- **Path:** the trigger's `function_path`, exactly as configured. Your handler needs a route that matches it (the default `/` matches `app.post('/')`).
+- **Body:** a JSON envelope describing the occurrence. The shape is the same for every trigger type; `trigger.type` and the `data` object vary:
 
-Design your handler for this. It answers `POST` and reads `scheduled_at` from the body.
+  ```json
+  {
+    "version": 1,
+    "invocation_id": "abc123FUPHOw0Pl1ZooidgpJhvHaShi1aX40cQ0b321",
+    "trigger": { "type": "schedule", "id": "trigger-1a2b3c4d-5e6f-7890-abcd-ef1234567890", "name": "uptime-check" },
+    "data": { "scheduled_at": "2026-09-08T19:30:00Z" }
+  }
+  ```
 
-Neon currently delivers scheduled calls to the function's public URL with no credentials, so keep the route outside your auth middleware and make the handler safe for anyone to call: keep it idempotent and guard destructive actions. An unguessable `function_path` adds obscurity, not authentication.
+  `data` holds the event details: `scheduled_at` (UTC) for a `schedule` trigger, or `bucket_name` and `object_key` for a [`storage_object_created`](/docs/compute/functions/triggers/object-storage#what-your-function-receives) trigger. `trigger` says which trigger fired, so a function with several triggers can tell them apart.
 
-If the compute is scaled to zero when a schedule fires, the invocation wakes it, so that first run is slower while the compute starts (a cold start).
+- **Headers:** `content-type: application/json`, a W3C [`traceparent`](https://www.w3.org/TR/trace-context/), and `X-Neon-Trigger-Invocation-Id` (equal to the body's `invocation_id`).
+
+Design your handler for the trigger type you use: it answers `POST` and reads what it needs from `data`.
+
+### Confirming a request came from Neon
+
+Neon delivers trigger calls to the function's public URL. To confirm a request is a genuine trigger invocation and not an arbitrary caller, check for the `X-Neon-Trigger-Invocation-Id` header: Neon strips any client-supplied `X-Neon-*` header at the edge, so a request that carries one is sent by Neon's trigger system. A handler that only serves triggers can reject requests that lack it, as the [worked handler](/docs/compute/functions/triggers/schedule#write-a-handler-for-the-scheduled-call) does.
+
+The `invocation_id` is a correlation ID, not a secret: a digest of the trigger and its occurrence, stable across retries, so it ties your logs to a specific run. Matching the header against the body is a consistency check, not the security boundary; the guarantee is the header's presence. Keep the handler idempotent and guard destructive actions regardless.
+
+If the compute is scaled to zero when a trigger fires, the invocation wakes it, so that first run is slower while the compute starts (a cold start).
 
 ## Triggers and branching
 
@@ -79,15 +99,15 @@ So branching a production branch for a test doesn't double your scheduled work. 
 
 ## Limits
 
-|                 |                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------ |
-| Trigger types   | `schedule` only                                                                                        |
-| Cron format     | Five numeric fields, UTC. No seconds, named days or months, or macros.                                 |
-| Interval        | As frequent as every minute (`* * * * *`); no maximum interval                                         |
-| `function_slug` | Must match a function on the branch. Slugs are `^[a-z0-9]{1,20}$` and can't change after first deploy. |
-| `name`          | 1 to 256 characters, unique per branch including inherited triggers                                    |
-| `function_path` | 1 to 2048 characters, path only                                                                        |
+|                          |                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Trigger types            | `schedule` and `storage_object_created`                                                                |
+| Cron format (`schedule`) | Five numeric fields, UTC. No seconds, named days or months, or macros.                                 |
+| Interval (`schedule`)    | As frequent as every minute (`* * * * *`); no maximum interval                                         |
+| `function_slug`          | Must match a function on the branch. Slugs are `^[a-z0-9]{1,20}$` and can't change after first deploy. |
+| `name`                   | 1 to 256 characters, unique per branch including inherited triggers                                    |
+| `function_path`          | 1 to 2048 characters, path only                                                                        |
 
 ## Next steps
 
-When you're ready, [Schedule a function](/docs/compute/functions/triggers/schedule) walks through creating, updating, and deleting triggers, with a cron reference and a worked example.
+When you're ready, walk through a worked example for each type: [Schedule a function](/docs/compute/functions/triggers/schedule) (with a cron reference) and [Trigger on an object upload](/docs/compute/functions/triggers/object-storage).

@@ -834,6 +834,8 @@
               slug: compute/functions/triggers/overview
             - title: Schedule a function
               slug: compute/functions/triggers/schedule
+            - title: Trigger on object upload
+              slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
             - title: AI agents
