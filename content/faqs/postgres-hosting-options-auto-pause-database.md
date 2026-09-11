@@ -47,12 +47,12 @@ Connection-per-request runtimes (Vercel functions, Lambda, Cloudflare Workers) s
 
 ## How other Postgres providers compare
 
-| Provider                          | Pauses when idle         | Notes                                                                                                                       |
-| --------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| Neon                              | Yes, 1–5 min idle window | Configurable on paid plans; storage stays available                                                                         |
-| Aurora Serverless v2 (Postgres) | Yes, when min ACU is 0   | Requires Aurora Postgres 13.15, 14.12, 15.7, or 16.3+; auto-pause is per cluster                                          |
+| Provider                        | Pauses when idle         | Notes                                                                                                                             |
+| ------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| Neon                            | Yes, 1–5 min idle window | Configurable on paid plans; storage stays available                                                                               |
+| Aurora Serverless v2 (Postgres) | Yes, when min ACU is 0   | Requires Aurora Postgres 13.15, 14.12, 15.7, or 16.3+; auto-pause is per cluster                                                  |
 | Amazon RDS for Postgres         | No                       | Instance pricing is hourly regardless of activity; you can stop a database instance manually, but RDS auto-starts it after 7 days |
-| Supabase                          | No                       | Compute add-ons run continuously                                                                                            |
+| Supabase                        | No                       | Compute add-ons run continuously                                                                                                  |
 
 Aurora Serverless v2 added scale-to-zero in late 2024. You configure a cluster minimum of 0 ACUs and an idle timeout, and Aurora pauses the instance when no user connections are present. Pause and resume happens at the cluster level. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
 

@@ -48,8 +48,8 @@ Storage is billed separately at $0.35/GB-month, and instant-restore history at $
 | Provider             | Billing unit                                   | Scale to zero                                                                          |
 | -------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------- |
 | Neon                 | CU-hours, billed by the second                 | Default, suspend after configurable idle window (1 minute to never on the Scale plan)  |
-| Aurora Serverless v2 | ACU-hours (1 ACU is ~2 GB RAM)                 | Supported via auto-pause, requires Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+   |
-| RDS for Postgres   | Per-instance hour at the chosen instance class | Not supported. Stopping a DB instance pauses for at most 7 days before AWS restarts it |
+| Aurora Serverless v2 | ACU-hours (1 ACU is ~2 GB RAM)                 | Supported via auto-pause, requires Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+     |
+| RDS for Postgres     | Per-instance hour at the chosen instance class | Not supported. Stopping a DB instance pauses for at most 7 days before AWS restarts it |
 | Supabase             | Compute add-on hour at the chosen size         | Not supported on paid plans. Free projects pause after inactivity                      |
 
 Aurora Serverless v2 supports scale-to-zero through the auto-pause feature when you set the minimum ACU to 0. It requires Aurora Postgres 13.15, 14.12, 15.7, 16.3 or later. See [Scaling to zero ACUs with auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). On resume, capacity may come back at a lower ACU than at pause.

@@ -1,12 +1,12 @@
-import AI from 'components/pages/home/ai';
-import Auth from 'components/pages/home/auth';
+import AgentPlatform from 'components/pages/home/agent-platform';
+import Architecture from 'components/pages/home/architecture';
 import Autoscaling from 'components/pages/home/autoscaling';
-import BackedBy from 'components/pages/home/backed-by';
-import Branching from 'components/pages/home/branching';
+import BuildYourBackend from 'components/pages/home/build-your-backend';
+import BuiltBy from 'components/pages/home/built-by';
 import CTA from 'components/pages/home/cta';
-import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
-// import SpeedScale from 'components/pages/home/speed-scale';
+import OperateWithAgents from 'components/pages/home/operate-with-agents';
+import ScaleYourApp from 'components/pages/home/scale-your-app';
 import TocWrapper from 'components/pages/home/toc-wrapper/toc-wrapper';
 import JsonLd from 'components/shared/json-ld';
 import Layout from 'components/shared/layout';
@@ -26,15 +26,15 @@ const HomePage = () => {
     <Layout isHeaderSticky isHeaderStickyOverlay>
       <JsonLd data={organizationSchema} />
       <Hero />
+      <BuildYourBackend />
+      <OperateWithAgents />
+      <ScaleYourApp />
       <TocWrapper>
-        <AI />
+        <Architecture />
         <Autoscaling />
-        <Branching />
-        <Auth />
-        <Features />
+        <BuiltBy />
       </TocWrapper>
-      {/* <SpeedScale /> */}
-      <BackedBy />
+      <AgentPlatform />
       <CTA />
     </Layout>
   );

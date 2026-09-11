@@ -54,11 +54,11 @@ When an inference request wakes the compute, your serverless functions may open 
 
 ## How other Postgres options compare
 
-| Provider                          | pgvector                 | Scales to zero          | Notes                                                                                           |
-| --------------------------------- | ------------------------ | ----------------------- | ----------------------------------------------------------------------------------------------- |
-| Neon                              | Yes                      | Yes, after 1–5 min idle | Compute drops to $0 when suspended; storage still applies                                       |
+| Provider                        | pgvector                 | Scales to zero          | Notes                                                                                         |
+| ------------------------------- | ------------------------ | ----------------------- | --------------------------------------------------------------------------------------------- |
+| Neon                            | Yes                      | Yes, after 1–5 min idle | Compute drops to $0 when suspended; storage still applies                                     |
 | Aurora Serverless v2 (Postgres) | Yes (via extension)      | Yes, when min ACU is 0  | Requires Aurora Postgres 13.15, 14.12, 15.7, or 16.3+; pause is per cluster, not per database |
-| Supabase                          | Yes (`vector` extension) | No                      | Compute add-ons run continuously                                                                |
+| Supabase                        | Yes (`vector` extension) | No                      | Compute add-ons run continuously                                                              |
 
 Aurora Serverless v2 added scale-to-zero in late 2024. You set the cluster's minimum ACU to 0 and configure an idle timeout, and Aurora pauses the instance when no user connections are active. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Note that auto-pause works at the cluster level, so you can't pause one logical database independently of others on the same cluster.
 

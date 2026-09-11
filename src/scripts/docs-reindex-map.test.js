@@ -126,9 +126,7 @@ describe('mapCompareFiles', () => {
   });
 
   it('sets catalog sync when content.js routes change', () => {
-    const result = mapCompareFiles([
-      { filename: 'src/constants/content.js', status: 'modified' },
-    ]);
+    const result = mapCompareFiles([{ filename: 'src/constants/content.js', status: 'modified' }]);
     expect(result.pages).toEqual([]);
     expect(result.sync).toBe(true);
     expect(result.skipped.notMarkdown).toBe(0);

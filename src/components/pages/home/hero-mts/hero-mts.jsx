@@ -1,7 +1,5 @@
 import Image from 'next/image';
 
-import { heroServiceItems } from 'components/pages/home/hero/hero';
-import HeroServices from 'components/pages/home/hero/hero-services';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
@@ -34,7 +32,7 @@ const HeroMts = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
+      <h1 className="mt-5 max-w-280 text-[4.5rem] leading-dense tracking-tighter xl:max-w-215 xl:text-6xl lg:max-w-180 lg:text-[3.25rem] md:mt-4 md:text-[2.625rem] sm:text-[2rem]">
         Neon is the Postgres backend
         <br />
         designed for apps and agents.
@@ -52,7 +50,7 @@ const HeroMts = () => (
           quality={100}
           alt=""
         />
-        <span className="relative z-10 inline-flex shrink-0 items-center bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-left bg-no-repeat px-2.5 py-1 font-mono text-[13px] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
+        <span className="relative z-10 inline-flex shrink-0 items-center bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-left bg-no-repeat px-2.5 py-1 font-mono text-[0.8125rem] leading-none font-medium tracking-extra-tight text-black-pure uppercase">
           Startups
         </span>
         <span className="relative z-10 text-base leading-snug font-medium tracking-extra-tight text-black-pure">
@@ -73,11 +71,7 @@ const HeroMts = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 md:mt-14 sm:mt-12">
-        <HeroServices items={heroServiceItems} />
-      </div>
-
-      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 md:mt-12 sm:mt-10 sm:pt-8">
+      <div className="relative mt-11 border-t border-gray-new-20 pt-10 select-none lg:mt-10 md:mt-9 sm:mt-8 sm:pt-8">
         <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
