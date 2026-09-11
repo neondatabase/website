@@ -8,7 +8,7 @@ const RIVE_WASM_URL = RuntimeLoader.getWasmUrl();
 const RiveWasm = () => {
   const pathname = usePathname();
 
-  const pagesWithRiveInHero = ['/functions', '/ai-gateway', '/object-storage'];
+  const pagesWithRiveInHero = ['/functions', '/ai-gateway', '/object-storage', '/auth'];
 
   if (pagesWithRiveInHero.includes(pathname)) {
     return <link rel="preload" href={RIVE_WASM_URL} as="fetch" crossOrigin="anonymous" />;
