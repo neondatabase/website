@@ -136,6 +136,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/datadog.svg',
     darkIconPath: '/images/technology-logos/datadog-dark.svg',
   },
+  'dbconvert-streams': {
+    name: 'dbconvert-streams',
+    lightIconPath: '/images/technology-logos/dbconvert-streams.svg',
+    darkIconPath: null,
+  },
   decodable: {
     name: 'decodable',
     lightIconPath: '/images/technology-logos/decodable.svg',
