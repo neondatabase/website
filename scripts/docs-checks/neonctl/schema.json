@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.16.0",
+  "neonctlVersion": "4.17.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -267,7 +267,7 @@
         },
         "default": {
           "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link --yes. Skips those pickers; link --yes still asks for a project unless one is already linked",
+          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link with defaults. Project selection may still be required",
           "default": false,
           "alias": "y"
         },
@@ -288,7 +288,7 @@
         },
         "link": {
           "type": "boolean",
-          "describe": "Run `neon link` after scaffolding. Templates with neon.ts link after install so env pull works; otherwise link runs before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "describe": "Link a Neon project after scaffolding. Templates with neon.ts link after install so env pull works; otherwise linking happens before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
           "default": true
         },
         "list-templates": {
@@ -319,7 +319,7 @@
         },
         {
           "command": "$0 bootstrap my-app --default",
-          "description": "Skip the pickers; link --yes still asks for a project unless one is already linked"
+          "description": "Skip the pickers; project selection may still be required"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
@@ -1971,6 +1971,11 @@
           "type": "string",
           "hidden": true
         },
+        "link": {
+          "type": "boolean",
+          "describe": "Link a Neon project during setup. Use --no-link to skip without being asked",
+          "default": true
+        },
         "org-id": {
           "type": "string",
           "describe": "Forwarded to link: organization ID to link to"
@@ -2004,7 +2009,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
+          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link with defaults and create the bare neon.ts policy. Project selection may still be required",
           "default": false,
           "alias": "y"
         }
