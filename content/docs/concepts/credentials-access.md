@@ -1,10 +1,10 @@
 ---
 title: Credentials & access
-subtitle: How API keys, service credentials, permissions, and network controls govern access to your backend
+subtitle: How API keys, scoped credentials, permissions, and network controls govern access to your backend
 summary: >-
-  Neon issues two kinds of credentials: platform API keys that manage your
-  projects, branches, and settings, and service credentials that a running app
-  uses. A service credential is limited by its scopes and anchored to a branch
+  Neon issues two kinds of credentials: API keys that manage your
+  projects, branches, and settings, and scoped credentials that a running app
+  uses. A scoped credential is limited by its scopes and anchored to a branch
   and its descendants, and it appears as an S3-compatible access key or a bearer
   token. The Data API instead takes a JWT from a trusted issuer and runs each
   query as a Postgres role. Your access to a project is your organization role
@@ -13,12 +13,12 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon issues two kinds of credentials, and they do different jobs:
+Neon separates the credentials that manage your setup from the ones your running app uses:
 
-- **Platform API keys** manage your Neon setup: create projects and branches, change settings, read usage, and issue the service credentials your app uses. Use these in your tooling and CI.
-- **Service credentials** do your running app's work, like an object read or a model call. Use these in your app's runtime environment.
+- **API keys** are your platform-level credential. They manage your Neon setup: create projects and branches, change settings, read usage, and issue the scoped credentials your app uses. Use these in your tooling and CI.
+- **Scoped credentials** do your running app's work: reading a file from Object Storage, calling a model through the AI Gateway. Each is limited to the scopes you give it. Use these in your app's runtime environment.
 
-![Diagram of Neon's two credential kinds: platform API keys that manage your Neon setup, and service credentials your running app uses, with a platform API key issuing service credentials in one direction only.](/docs/concepts/credentials-access.png 'no-border')
+![Diagram of Neon's two credential kinds: API keys that manage your Neon setup, and scoped credentials your running app uses, with an API key issuing scoped credentials in one direction only.](/docs/concepts/credentials-access.png 'no-border')
 
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
@@ -26,12 +26,12 @@ Availability differs by product and by region. See [Product availability](/docs/
 
 | Goal                                                                          | Use                                                           | Scope and reach                                                                                                                                          |
 | ----------------------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create or manage projects, branches, and settings, or issue other credentials | [Platform API key](/docs/manage/api-keys)                     | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
-| Have a workload read files or call models                                     | [Service credential](/docs/storage/authentication)           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
+| Create or manage projects, branches, and settings, or issue other credentials | [API key](/docs/manage/api-keys)                     | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it |
+| Have a workload read files or call models                                     | [Scoped credential](/docs/storage/authentication)           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   |
 | Connect to Postgres                                                           | [Database connection credential](/docs/connect/connect-intro) | IP Allow and Private Networking apply here, and only here                                                                                                |
 | Authorize an end user through the Data API                                    | [JWT from a trusted issuer](/docs/data-api/access-control)    | Trust is registered on the project, and `GRANT`s and RLS in your database decide what the query can do                                                   |
 
-## Platform API keys
+## API keys
 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
@@ -42,24 +42,24 @@ An API key is a bearer token for the [Neon API](/docs/reference/api), and there'
 - **Organization keys** cover one organization.
 - **Project-scoped keys** cover one project.
 
-An API key can create a service credential, but a service credential cannot create or manage anything, so keep API keys out of your application runtime. See [Manage API keys](/docs/manage/api-keys).
+An API key can create a scoped credential, but a scoped credential cannot create or manage anything, so keep API keys out of your application runtime. See [Manage API keys](/docs/manage/api-keys).
 
 You can also sign the CLI in with `neon auth`; it then acts with your access, like a personal key. For scripts and CI, give the CLI an API key instead. See [CLI authentication](/docs/cli/auth).
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
 
-![Diagram of the three platform API key kinds nested by decreasing reach: personal keys, then organization keys, then project-scoped keys.](/docs/concepts/credentials-api-key-kinds.png 'no-border')
+![Diagram of the three API key kinds nested by decreasing reach: personal keys, then organization keys, then project-scoped keys.](/docs/concepts/credentials-api-key-kinds.png 'no-border')
 
   </div>
 </div>
 
-## Service credentials
+## Scoped credentials
 
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-Most of what your running app connects to uses service credentials. Object Storage and the AI Gateway use one shared credential, and the scopes you attach decide what it unlocks:
+Most of what your running app connects to uses scoped credentials. Object Storage and the AI Gateway use one shared credential, and the scopes you attach decide what it unlocks:
 
 - `storage:read` and `storage:write` for Object Storage.
 - `ai_gateway:invoke` for the AI Gateway.
@@ -69,7 +69,7 @@ A credential has two independent dimensions: its scopes say what it can do, and 
   </div>
   <div style={{ flex: '1 1 50%' }}>
 
-![Diagram of a service credential defined by two independent things: the scopes that say what it can do, and the branch anchor that says where it reaches.](/docs/concepts/credentials-scope-branch.png 'no-border')
+![Diagram of a scoped credential defined by two independent things: the scopes that say what it can do, and the branch anchor that says where it reaches.](/docs/concepts/credentials-scope-branch.png 'no-border')
 
   </div>
 </div>
@@ -91,11 +91,11 @@ A credential is tied to the branch you create it on. It works on that branch and
 
 ### S3 keys and bearer tokens
 
-A service credential comes in the form each service expects: an S3-compatible access key for Object Storage, and a bearer token for services you call over HTTP, like the AI Gateway. Both are the same underlying credential, so if you revoke or delete it, both stop working at once. You cannot change a credential after you create it: you cannot add scopes or move it to a different branch. To change either, create a new credential and revoke the old one. See [Object storage authentication](/docs/storage/authentication#mapping-to-your-s3-sdk).
+A scoped credential comes in the form each service expects: an S3-compatible access key for Object Storage, and a bearer token for services you call over HTTP, like the AI Gateway. Both are the same underlying credential, so if you revoke or delete it, both stop working at once. You cannot change a credential after you create it: you cannot add scopes or move it to a different branch. To change either, create a new credential and revoke the old one. See [Object storage authentication](/docs/storage/authentication#mapping-to-your-s3-sdk).
 
 ### Functions
 
-A Neon Function is given a service credential for the branch it runs on, so your code can reach Object Storage and the AI Gateway on that branch without you adding a secret. But the function has a public HTTPS URL, and Neon does not check who is calling it. Authenticating incoming requests is up to you, in your handler. See [Environment variables](/docs/compute/functions/environment-variables) and [Neon Functions authentication](/docs/compute/functions/authentication).
+A Neon Function is given a scoped credential for the branch it runs on, so your code can reach Object Storage and the AI Gateway on that branch without you adding a secret. But the function has a public HTTPS URL, and Neon does not check who is calling it. Authenticating incoming requests is up to you, in your handler. See [Environment variables](/docs/compute/functions/environment-variables) and [Neon Functions authentication](/docs/compute/functions/authentication).
 
 ### The Data API and Managed Better Auth
 
