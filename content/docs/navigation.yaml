@@ -822,6 +822,8 @@
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Custom domains
+          slug: compute/functions/custom-domains
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
