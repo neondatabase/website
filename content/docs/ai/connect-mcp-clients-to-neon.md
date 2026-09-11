@@ -10,7 +10,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -27,7 +27,7 @@ The fastest way to get started:
 npx neon@latest init
 ```
 
-**`neon init`** (see [`neon init` reference](/docs/cli/init)) sets up the current directory for Neon. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server), links a Neon project, and writes a `neon.ts` config. Then restart your editor and ask your AI assistant **"Get started with Neon"**.
+**`neon init`** (see [`neon init` reference](/docs/cli/init)) sets up the current directory for Neon. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server), links a Neon project, and optionally writes a `neon.ts` config. Then restart your editor and ask your AI assistant **"Get started with Neon"**.
 
 If you only want the MCP server and nothing else, run [`neon mcp`](/docs/cli/mcp):
 

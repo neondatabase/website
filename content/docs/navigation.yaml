@@ -1307,12 +1307,16 @@
               items:
                 - title: functions
                   slug: cli/functions
+                - title: triggers
+                  slug: cli/triggers
                 - title: buckets
                   slug: cli/buckets
                 - title: data-api
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: credentials
+                  slug: cli/credentials
             - title: Organizations and networking
               items:
                 - title: api

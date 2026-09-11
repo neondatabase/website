@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.15.0",
+  "neonctlVersion": "4.16.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1242,6 +1242,103 @@
         }
       ]
     },
+    "credentials": {
+      "aliases": [
+        "credential"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Label for the credential"
+            },
+            "scope": {
+              "type": "string",
+              "describe": "Capability to grant. Repeatable. Values: storage:read, storage:write, ai_gateway:invoke, functions:invoke",
+              "required": true,
+              "choices": [
+                "storage:read",
+                "storage:write",
+                "ai_gateway:invoke",
+                "functions:invoke"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Issue a scoped credential on the branch"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List credentials on the branch"
+        },
+        "reveal": {
+          "name": "reveal",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a credential's api_token and s3_secret_access_key"
+        },
+        "revoke": {
+          "name": "revoke",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Revoke a credential"
+        },
+        "rotate": {
+          "name": "rotate",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Replace a credential's secrets in place. The token id is unchanged."
+        }
+      },
+      "describe": "Manage branch credentials",
+      "usage": "$0 credentials <sub-command> [options]"
+    },
     "data-api": {
       "aliases": [],
       "positionals": [],
@@ -1857,6 +1954,15 @@
           "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
           "alias": "a"
         },
+        "branch": {
+          "type": "string",
+          "describe": "Forwarded to link: branch name or ID to pin",
+          "alias": "branch-id"
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Existing app or --skip-template: create neon.ts after linking. Use --no-config to skip. Omitted in a terminal: you will be asked. Scaffolding a template keeps that template's neon.ts"
+        },
         "context-file": {
           "type": "unknown",
           "hidden": true
@@ -1865,30 +1971,59 @@
           "type": "string",
           "hidden": true
         },
+        "org-id": {
+          "type": "string",
+          "describe": "Forwarded to link: organization ID to link to"
+        },
         "output": {
           "type": "unknown",
           "describe": "Not supported; the commands init runs print their own output",
           "alias": "o",
           "hidden": true
         },
+        "project-id": {
+          "type": "string",
+          "describe": "Forwarded to link: existing project ID to link to"
+        },
+        "project-name": {
+          "type": "string",
+          "describe": "Forwarded to link: name for a new project"
+        },
+        "region-id": {
+          "type": "string",
+          "describe": "Forwarded to link: region for a new project"
+        },
+        "skip-template": {
+          "type": "boolean",
+          "describe": "Do not scaffold a template. Set up agents, link a project, and optionally neon.ts in this directory",
+          "default": false
+        },
+        "template": {
+          "type": "string",
+          "describe": "Template to scaffold into an empty directory. Conflicts with --skip-template"
+        },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: bootstrap --default. Otherwise plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
+          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
           "default": false,
           "alias": "y"
         }
       },
       "commands": {},
-      "describe": "Set up this directory for Neon: agent tooling, a linked project, and neon.ts. In an empty directory, scaffolds a template first. Skills needs Node.js 22.20 or newer.",
+      "describe": "Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts. In an empty directory, pick a template or skip scaffolding.",
       "usage": "$0 init [options]",
       "examples": [
         {
           "command": "$0 init",
-          "description": "Empty dir: bootstrap (scaffold, agent tooling, link). Existing app: agent tooling, link, config init"
+          "description": "Set up this directory (template picker if empty)"
+        },
+        {
+          "command": "$0 init --skip-template",
+          "description": "Empty dir: agents, link, and neon.ts — no template files"
         },
         {
           "command": "$0 init -y",
-          "description": "Same steps, using each child's defaults"
+          "description": "Default template, or existing-app defaults"
         },
         {
           "command": "$0 init --agent cursor --agent claude-code",
@@ -2139,6 +2274,11 @@
           "type": "boolean",
           "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
           "default": false
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Offer to create neon.ts after interactive linking. Use --no-config to skip the offer",
+          "default": true
         },
         "env-pull": {
           "type": "boolean",
@@ -3946,6 +4086,162 @@
       "commands": {},
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
+    },
+    "triggers": {
+      "aliases": [
+        "trigger"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'",
+              "required": true
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs (default true)"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to (default '/')"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke",
+              "required": true
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)",
+              "required": true
+            }
+          },
+          "commands": {},
+          "describe": "Create a trigger that invokes a function on a cron schedule"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a trigger"
+        },
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Disable a trigger without deleting it"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Enable a trigger"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a trigger"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List triggers on the branch"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression"
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke"
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)"
+            }
+          },
+          "commands": {},
+          "describe": "Update a trigger"
+        }
+      },
+      "describe": "Manage function triggers",
+      "usage": "$0 triggers <sub-command> [options]"
     },
     "vpc": {
       "aliases": [],

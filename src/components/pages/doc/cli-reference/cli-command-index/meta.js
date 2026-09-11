@@ -14,7 +14,7 @@
 const META = {
   login: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon login'] },
   init: {
-    desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {
@@ -101,6 +101,14 @@ const META = {
   functions: {
     desc: 'Deploy and manage Neon Functions on a branch.',
     examples: ['neon functions deploy api --src ./api.ts'],
+  },
+  triggers: {
+    desc: 'Invoke a Neon Function on a cron schedule.',
+    examples: ["neon triggers create --function-slug api --name nightly --cron '0 6 * * *'"],
+  },
+  credentials: {
+    desc: 'Issue and manage scoped credentials on a branch.',
+    examples: ['neon credentials create --scope storage:read'],
   },
   buckets: {
     desc: 'Branch-scoped object storage and its objects.',

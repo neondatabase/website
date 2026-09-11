@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -97,7 +97,13 @@ A `404` response means object storage is not available for that branch. There is
 
 ## Create a credential
 
-Use the Neon API to create a credential with storage access:
+Create a credential with storage access. With the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope storage:read --scope storage:write
+```
+
+Or use the Neon API:
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \

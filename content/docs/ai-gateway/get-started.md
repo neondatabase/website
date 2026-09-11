@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -27,7 +27,13 @@ You need a project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankf
 
 ## Create a credential
 
-In the Neon Console, select your branch, click **Credentials** under **Branch**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing, it's shown only once.
+With the [Neon CLI](/docs/cli/credentials), run:
+
+```bash
+neon credentials create --scope ai_gateway:invoke
+```
+
+Or, in the Neon Console, select your branch, click **Credentials** under **Branch**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing, it's shown only once.
 
 Or use the API:
 
