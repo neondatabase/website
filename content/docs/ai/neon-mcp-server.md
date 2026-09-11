@@ -6,7 +6,7 @@ summary: >-
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-11T13:06:18.813Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -120,6 +120,15 @@ When you ask why a branch is slow, large, or behind, the MCP server can run `ins
 Pick a check with the `check` parameter (for example `table-sizes` or `unused-indexes`). The tool runs inside a read-only transaction, so it works with [`?readonly=true`](#read-only-mode). It belongs to the `querying` category, not `observability`. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool reports that and asks before suggesting installation.
 
 <MCPTools />
+
+## Telemetry
+
+The Neon MCP server collects product analytics and error reports to help Neon understand usage and improve reliability:
+
+- **Product analytics.** When you connect with an authenticated Neon account, the server sends an event with your Neon account ID, name, and email, and tracks session start, each tool call, and unexpected server errors. A tool-call event records the tool name, auth method, and client, not the tool arguments or query results. Documentation lookups made without an account are tracked anonymously.
+- **Error reporting.** Unexpected server errors are reported with stack traces and request context.
+
+This collection is covered by the [Neon Privacy Policy](https://neon.com/privacy-policy). If you run the MCP server yourself instead of using the hosted server, set `NEON_MCP_DISABLE_ANALYTICS=1` to disable product analytics. This flag doesn't disable error reporting.
 
 ## Troubleshooting
 
