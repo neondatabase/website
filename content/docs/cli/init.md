@@ -9,7 +9,7 @@ summary: >-
   MCP server), links a Neon project, and optionally writes a neon.ts config. It runs
   interactively by default; pass -y and --agent for an unattended agent setup.
 enableTableOfContents: true
-updatedOn: '2026-09-11T02:29:56.410Z'
+updatedOn: '2026-09-11T17:10:38.159Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -55,7 +55,7 @@ The plugin and the skills-plus-MCP option are mutually exclusive. Installing ski
 
 ### Link a project and write neon.ts
 
-After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`.
+After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`. Pass `--no-link` to set up agent tooling and `neon.ts` without linking a project; you can link later with `neon link`.
 
 It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with `neon config apply`. In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). When you scaffold a template, `init` keeps the `neon.ts` that template ships and ignores these flags.
 
