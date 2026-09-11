@@ -18,7 +18,7 @@ Neon separates the credentials that manage your setup from the ones your running
 - **API keys** are your platform-level credential. They manage your Neon setup: create projects and branches, change settings, read usage, and issue the scoped credentials your app uses. Use these in your tooling and CI.
 - **Scoped credentials** do your running app's work: reading a file from Object Storage, calling a model through the AI Gateway. Each is limited to the scopes you give it. Use these in your app's runtime environment.
 
-![Diagram of Neon's two credential kinds: API keys that manage your Neon setup, and scoped credentials your running app uses, with an API key issuing scoped credentials in one direction only.](/docs/concepts/credentials-access.png 'no-border')
+![Diagram of Neon's two credential kinds: API keys that manage your Neon setup, and scoped credentials that your app holds, scoped and anchored to a branch. An arrow shows API keys issuing scoped credentials.](/docs/concepts/credentials-access.png 'no-border')
 
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
