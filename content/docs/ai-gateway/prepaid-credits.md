@@ -6,14 +6,14 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-09-11T12:11:39.591Z'
+updatedOn: '2026-09-11T15:30:40.342Z'
 ---
 
-<!--
+{/_
 DRAFT — not ready to publish.
 Destination: content/docs/ai-gateway/prepaid-credits.md →
 neon.com/docs/ai-gateway/prepaid-credits.
--->
+_/}
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
 and AI Gateway usage draws down your balance. This page explains who can buy
@@ -30,13 +30,13 @@ the Free plan. See [Neon plans](/docs/introduction/plans) and
 
 - **1 credit = $1 USD.** Credits are prepaid — purchased before use.
 - **Minimum purchase: $5.**
-  <!-- TODO/CONFIRM: Maximum custom purchase amount and supported range. -->
+  {/_ TODO/CONFIRM: Maximum custom purchase amount and supported range. _/}
 - **Minimum balance: $2.**
-  <!-- TODO/CONFIRM: Clarify when requests are actually blocked relative to the $2 minimum, $0, and negative balance — tied to enforcement enablement (see enforcement TODO). -->
+  {/_ TODO/CONFIRM: Clarify when requests are actually blocked relative to the $2 minimum, $0, and negative balance — tied to enforcement enablement (see enforcement TODO). _/}
 - **Credits expire 12 months after purchase.**
 - Your balance can go **negative** — usage is metered after a request is served,
   so a final request can push the balance below zero.
-  <!-- TODO/CONFIRM: How a negative balance is communicated or settled. -->
+  {/_ TODO/CONFIRM: How a negative balance is communicated or settled. _/}
 
 Your balance **draws down as usage is metered** — each request consumes credits
 based on its token usage, so your balance decreases as you send requests. For
@@ -66,16 +66,16 @@ Buying credits is a Neon Console flow:
 Credits post to your balance promptly after the charge succeeds. The purchase
 appears in your credit history as **Manual purchase**, with the date and amount.
 
-<!-- SCREENSHOT: Buy credits entry point -->
+{/_ SCREENSHOT: Buy credits entry point _/}
 
 <Admonition type="important">
 Only **one purchase can be open at a time** per account — you can't start a second
 purchase until the first completes.
 </Admonition>
 
-<!-- TODO/CONFIRM: 3DS decline behavior — whether a purchase is declined when the card on file requires 3-D Secure authentication, and what customer guidance to provide. -->
+{/_ TODO/CONFIRM: 3DS decline behavior — whether a purchase is declined when the card on file requires 3-D Secure authentication, and what customer guidance to provide. _/}
 
-<!-- TODO/CONFIRM: Orb invoice or receipt surfacing — whether an Orb-hosted invoice or PDF receipt is available or emailed after purchase, and where customers find it. -->
+{/_ TODO/CONFIRM: Orb invoice or receipt surfacing — whether an Orb-hosted invoice or PDF receipt is available or emailed after purchase, and where customers find it. _/}
 
 ## View your balance and usage history
 
@@ -89,9 +89,9 @@ card shows:
 The balance is shown in **whole cents**, so small or occasional requests might not
 visibly change it even though their metered usage still draws down the balance.
 
-<!-- TODO: confirm GA enablement (TLDR framed monitoring as post-GA) -->
+{/_ TODO: confirm GA enablement (TLDR framed monitoring as post-GA) _/}
 
-<!-- SCREENSHOT: balance surface -->
+{/_ SCREENSHOT: balance surface _/}
 
 ## Usage limits
 
@@ -112,7 +112,7 @@ Short-window rate limits, the daily spend cap, and balance depletion are
 If you need a higher TPM limit, open a Neon Support ticket and choose the
 **AI Gateway TPM increase request** ticket type.
 
-<!-- TODO/CONFIRM: Exact Console path to create the support ticket, and whether a daily spend-cap increase uses the AI Gateway TPM increase request ticket type or the separate Billing ticket type. -->
+{/_ TODO/CONFIRM: Exact Console path to create the support ticket, and whether a daily spend-cap increase uses the AI Gateway TPM increase request ticket type or the separate Billing ticket type. _/}
 
 When you exceed a limit, the API returns **HTTP 429**:
 
@@ -131,21 +131,21 @@ model requires an entitled, funded account — it does **not** mean the model is
 unavailable. An unfunded organization sees models as locked; they unlock once the
 organization is on a paid plan and has credits.
 
-<!-- TODO: abuse/verification enforcement exists for rejected/quarantined/suspended accounts (LKB-15222); confirm customer-facing behavior before documenting -->
+{/_ TODO: abuse/verification enforcement exists for rejected/quarantined/suspended accounts (LKB-15222); confirm customer-facing behavior before documenting _/}
 
 The model list is subject to change. See
 [Supported models](/docs/ai-gateway/models) for the current catalog.
 
-<!-- TODO/CONFIRM: Running out of credits and enforcement enablement. Real enforcement landed (LKB-16345), but GA enablement and the customer-facing blocked-state behavior (for example, whether a depleted wallet returns HTTP 429 "ai gateway credit balance depleted") are unconfirmed. -->
+{/_ TODO/CONFIRM: Running out of credits and enforcement enablement. Real enforcement landed (LKB-16345), but GA enablement and the customer-facing blocked-state behavior (for example, whether a depleted wallet returns HTTP 429 "ai gateway credit balance depleted") are unconfirmed. _/}
 
-<!-- TODO/CONFIRM: Notifications. LKB-16060 is In Review. Confirm which AI Gateway low-balance, depleted-balance, or top-up notifications ship; their email or Console channels; and whether they are configurable. Do not conflate them with the general organization spending notifications (a non-blocking monthly-spend email alert). -->
+{/_ TODO/CONFIRM: Notifications. LKB-16060 is In Review. Confirm which AI Gateway low-balance, depleted-balance, or top-up notifications ship; their email or Console channels; and whether they are configurable. Do not conflate them with the general organization spending notifications (a non-blocking monthly-spend email alert). _/}
 
 ## Automatic top-up
 
 Automatic top-up is **not available**. You add credits manually by purchasing as
 described above.
 
-<!--
+{/_
 PULLED: The "Beta to GA transition" section about a one-time beta-user credit
 grant remains removed from this public page. Reasons: (1) it is a one-time
 migration event better delivered through direct communications (email or in-app
@@ -153,7 +153,7 @@ notice) than evergreen documentation; (2) the amount and framing came from an
 internal source and are not confirmed for public use; (3) it ages badly on an
 evergreen page. If PM wants a public transitional note, use a short time-boxed
 callout or a separate announcement or migration page — pending PM decision.
--->
+_/}
 
 ## Availability
 
@@ -164,7 +164,7 @@ Singapore** (more regions to follow).
 **IP Allow** and **Private Link** do not cover AI Gateway traffic at GA.
 </Admonition>
 
-<!-- TODO/CONFIRM: Verify the GA region list and the IP Allow / Private Link coverage scope before publishing. -->
+{/_ TODO/CONFIRM: Verify the GA region list and the IP Allow / Private Link coverage scope before publishing. _/}
 
 ## If you downgrade to Free
 
