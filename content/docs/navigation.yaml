@@ -221,6 +221,11 @@
       items:
         - title: The object model
           slug: concepts/the-object-model
+    - section: Backend behavior
+      icon: settings
+      items:
+        - title: Credentials & access
+          slug: concepts/credentials-access
 
 - nav: Products
   title: Products
