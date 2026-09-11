@@ -30,15 +30,15 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-        <div className="flex flex-col items-start justify-between gap-5 lg:w-full lg:flex-row sm:flex-col">
+        <div className="mt-12 flex flex-col items-start justify-between gap-5 lg:mt-0 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
           <div
             className={cn(
-              'flex max-w-2xl flex-col gap-y-2 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
+              'flex max-w-2xl flex-col gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
               'dark:text-gray-new-60'
             )}
           >
-            <p>
+            <p className="leading-snug">
               © Neon 2026. All rights reserved. Apache, Apache Spark, Spark, the Spark Logo, Apache
               Iceberg, Iceberg, and the Apache Iceberg logo are trademarks of the{' '}
               <a
@@ -51,7 +51,7 @@ const Footer = ({ hasThemesSupport = false }) => (
               </a>
               .
             </p>
-            <p className="flex flex-wrap gap-x-3 gap-y-1">
+            <p className="flex flex-wrap gap-x-3 gap-y-1.5">
               <Link
                 className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
                 to={LINKS.privacy}

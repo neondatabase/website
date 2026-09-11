@@ -5,6 +5,7 @@ import Autoscaling from 'components/pages/lakebase/autoscaling';
 import DynamicDatabases from 'components/pages/lakebase/dynamic-databases';
 import FromFirstLine from 'components/pages/lakebase/from-first-line';
 import Hero from 'components/pages/lakebase/hero';
+import Configuration from 'components/shared/configuration';
 import Faq from 'components/shared/faq';
 import { lakebasePageContent } from 'constants/backend-platform-page-content';
 import SEO_DATA from 'constants/seo-data';
@@ -17,10 +18,18 @@ const LakebasePage = () => (
     <Hero />
     <Architecture />
     <Autoscaling />
+    <Configuration
+      content={lakebasePageContent.configuration}
+      id="data-api"
+      className="pt-40 pb-0 xl:pt-32 xl:pb-0 lg:pt-24 lg:pb-0 md:pt-20 md:pb-0"
+    />
     <DynamicDatabases />
     <FromFirstLine />
     <Faq items={lakebasePageContent.faqItems} variant="lakebase" />
-    <BackendServices className="pb-40" contentClassName="mt-[73.5px] min-h-[441px]" />
+    <BackendServices
+      className="pb-40 lg:pt-12 md:pt-10"
+      contentClassName="mt-[73.5px] min-h-[441px]"
+    />
   </BackendPlatformPage>
 );
 

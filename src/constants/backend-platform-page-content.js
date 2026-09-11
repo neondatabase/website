@@ -300,9 +300,42 @@ const lakebasePageContent = {
     caption:
       'Neon monitors your database load ten times a second and autoscales CPU and memory to exactly fit your workload.',
   },
+  configuration: {
+    label: 'Data API',
+    title: 'Turn your Postgres database into a REST API without building a backend.',
+    filename: 'data-api.ts',
+    code: `await fetch(\`\${DATA_API_URL}/projects\`, {
+  method: "POST",
+  headers: {
+    Authorization: \`Bearer \${token}\`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    name: "New project"
+  })
+})`,
+    items: [
+      {
+        title: 'Instant REST API',
+        description:
+          'Turn Postgres tables, views, and functions into REST endpoints you can access directly over HTTPS.',
+      },
+      {
+        title: 'Secure access',
+        description:
+          'Authenticate with JWTs and use Postgres Row-Level Security to control who can access and modify your data.',
+      },
+      {
+        title: 'PostgREST compatible',
+        description:
+          'Use standard HTTP methods and PostgREST-compatible tools to work with your database through a REST interface.',
+      },
+    ],
+  },
   dynamicDatabases: {
-    title: 'As software becomes more dynamic and autonomous, databases need to evolve too:',
-    highlightedTitle: 'branch, rewind, and operate programmatically.',
+    title:
+      'As software becomes more dynamic and autonomous, databases need to evolve too: branch, rewind, and operate programmatically.',
+    highlightedTitle: '',
     capabilities: [
       {
         id: 'instant-branching',

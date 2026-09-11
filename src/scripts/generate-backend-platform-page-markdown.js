@@ -351,8 +351,15 @@ const renderAuthMarkdown = (links) => {
 };
 
 const renderLakebaseMarkdown = (links) => {
-  const { hero, architecture, autoscaling, dynamicDatabases, fromFirstLine, faqItems } =
-    lakebasePageContent;
+  const {
+    hero,
+    architecture,
+    autoscaling,
+    configuration,
+    dynamicDatabases,
+    fromFirstLine,
+    faqItems,
+  } = lakebasePageContent;
   const { backendServices } = sharedBackendPlatformContent;
 
   const sections = [
@@ -374,8 +381,14 @@ const renderLakebaseMarkdown = (links) => {
     ]),
     autoscaling.caption,
     ...autoscaling.features.flatMap(({ title, description }) => [`### ${title}`, description]),
+    `## ${configuration.title}`,
+    `### ${configuration.filename}`,
+    `\`\`\`typescript\n${configuration.code}\n\`\`\``,
+    ...configuration.items.flatMap(({ title, description }) => [
+      `### ${title}`,
+      htmlToMarkdown(description),
+    ]),
     `## ${dynamicDatabases.title}`,
-    dynamicDatabases.highlightedTitle,
     ...dynamicDatabases.capabilities.flatMap(({ label, primary, secondary, benefits = [] }) => [
       `### ${label}`,
       `${primary} ${secondary}`,

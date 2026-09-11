@@ -45,8 +45,8 @@ const SectionNavigation = ({ items }) => {
   }, [updateActiveItem]);
 
   return (
-    <nav className="h-full pt-16" ref={navigationRef} aria-label="Lakebase capabilities">
-      <ol className="sticky top-40 z-10 flex w-56 flex-col gap-y-1.5">
+    <nav className="h-full" ref={navigationRef} aria-label="Lakebase capabilities">
+      <ol className="sticky top-36 z-10 flex w-56 flex-col gap-y-1.5">
         {items.map(({ id, label }) => {
           const isActive = activeId === id;
 

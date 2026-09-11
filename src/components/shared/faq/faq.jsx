@@ -28,13 +28,13 @@ const variants = {
   },
   lakebase: {
     section: 'mt-0! bg-gray-new-10 pt-40 pb-10 text-white xl:py-32 lg:py-24 md:py-20',
-    container: 'flex gap-x-[129px] xl:gap-x-16 lg:flex-col lg:gap-y-12 md:gap-y-8',
+    container: 'flex gap-x-56 xl:gap-x-16 lg:flex-col lg:gap-y-12 md:gap-y-8',
     title: cn(
       'w-104 shrink-0 text-[5rem] leading-none tracking-[-0.04em] text-balance',
       'xl:w-88 xl:text-[4rem] lg:w-full lg:max-w-144 md:text-[2.75rem]'
     ),
-    items: 'mt-1 max-w-[800px] lg:mt-0 lg:max-w-none',
-    containerSize: '1344',
+    items: 'mt-1 max-w-224 lg:mt-0 lg:max-w-none',
+    containerSize: '1600',
   },
 };
 

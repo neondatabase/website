@@ -125,6 +125,15 @@ describe('backend platform page Markdown', () => {
       '# Postgres for apps and agents, built on the lakebase architecture.'
     );
     expect(markdown).toContain('### Instant Branching');
+    expect(markdown).toContain(
+      '## Turn your Postgres database into a REST API without building a backend.'
+    );
+    expect(markdown).toContain('### data-api.ts');
+    expect(markdown).toContain('${DATA_API_URL}/projects');
+    expect(markdown).toContain('### Secure access');
+    expect(markdown.indexOf('### data-api.ts')).toBeLessThan(
+      markdown.indexOf('### Instant Branching')
+    );
     expect(markdown).toContain('### Restore to any point');
     expect(markdown).toContain('### A database built for agents');
     expect(markdown).toContain('## From your first line of code to the world’s largest teams.');

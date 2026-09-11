@@ -2,8 +2,8 @@ import BackendPlatformPage from 'components/pages/backend-platform/backend-platf
 import BackendServices from 'components/pages/backend-platform/backend-services';
 import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
 import BackendHero from 'components/pages/backend-platform/hero';
-import Configuration from 'components/pages/object-storage/configuration';
 import HeroAnimation from 'components/pages/object-storage/hero/hero-animation';
+import Configuration from 'components/shared/configuration';
 import Faq from 'components/shared/faq';
 import NumberedSteps from 'components/shared/numbered-steps';
 import ProductBenefits from 'components/shared/product-benefits';
@@ -52,7 +52,11 @@ const ObjectStoragePage = () => (
       figmaNodeId="2070:6669"
       {...objectStoragePageContent.isolatedEnvironments}
     />
-    <Configuration />
+    <Configuration
+      content={objectStoragePageContent.configuration}
+      id="object-storage-configuration"
+      figmaNodeId="2070:6690"
+    />
     <Faq
       items={objectStoragePageContent.faqItems}
       titleLines={['Your questions,', 'answered.']}

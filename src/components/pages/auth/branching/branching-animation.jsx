@@ -38,6 +38,7 @@ const BranchingAnimation = ({ description }) => {
           className="pointer-events-none size-full select-none"
           wrapperClassName="absolute inset-0 size-full"
           src="/animations/pages/auth/branching.riv?v=fe58f210"
+          autoBind={false}
         />
       )}
     </div>

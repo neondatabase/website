@@ -19,7 +19,7 @@ const ProductBenefits = ({
     )}
   >
     <Container size="1344">
-      <h2 className="max-w-280 text-5xl leading-[1.125] tracking-tighter text-pretty xl:max-w-232 xl:text-4xl xl:leading-[1.08] lg:max-w-192 lg:text-[2.25rem] md:text-[2rem]">
+      <h2 className="max-w-280 text-5xl leading-[1.125] tracking-tighter text-pretty xl:max-w-232 xl:text-4xl xl:leading-[1.08] lg:max-w-192 lg:text-[2.25rem] md:text-[1.75rem]">
         {title} <span className="text-gray-new-50">{highlightedTitle}</span>
       </h2>
 
