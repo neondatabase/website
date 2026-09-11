@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -125,7 +125,7 @@ Pi reads the `skills/` directory directly, so there's no separate sync step. Thi
 
 ### neon init
 
-The `neon init` command sets up the current directory to use Neon with your AI coding assistant. Run it in a terminal: it installs agent tooling (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first.
+The `neon init` command sets up the current directory to use Neon with your AI coding assistant. Run it in a terminal: it installs agent tooling (either a plugin, or skills and the MCP server), links a Neon project, and optionally writes a `neon.ts` config. In an empty directory, it lets you pick a starter template, name one with `--template`, or skip scaffolding with `--skip-template`.
 
 ```bash
 npx neon@latest init

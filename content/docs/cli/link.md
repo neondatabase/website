@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive and non-interactive
   workflows for CI, scripts, and AI agents.
 enableTableOfContents: true
-updatedOn: '2026-08-26T22:59:45.286Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -28,6 +28,8 @@ For most workflows, use `neon link` instead of manually running `neon set-contex
 <CliOptions command="link" />
 
 By default, linking pulls the linked branch's environment variables (such as `DATABASE_URL`) into a local `.env` file. Use `--no-env-pull` to skip this step, for example when you inject environment variables at runtime instead.
+
+After an interactive link, `link` also prompts you to create a [`neon.ts` config](/docs/cli/config) when the directory doesn't already have one, so you can manage the project's Neon setup as code. Accept the prompt to write `neon.ts`, or pass `--no-config` to skip it. This applies to interactive linking only; non-interactive runs never prompt.
 
 ## Interactive mode (default)
 

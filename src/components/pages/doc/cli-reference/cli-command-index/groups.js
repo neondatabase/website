@@ -53,6 +53,8 @@ const GROUP_OF = {
   plugins: 'setup',
   claim: 'setup',
   ask: 'setup',
+  credentials: 'surfaces',
+  triggers: 'surfaces',
 };
 
 // Commands documented as a section of another command's page instead of a

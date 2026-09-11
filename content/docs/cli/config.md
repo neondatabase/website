@@ -70,7 +70,7 @@ npm install @neon/config @neon/env
 Use `config init` when you want a trusted starter artifact and package list. Hand-write `neon.ts` instead when you need a different filename/module format or want to avoid modifying files in the current directory.
 
 <Admonition type="tip">
-After running an interactive [`neon link`](/docs/cli/link), the CLI offers to run `config init` as its final step, unless the project already has a `neon.ts` file.
+After running an interactive [`neon link`](/docs/cli/link), the CLI prompts you to run `config init` as its final step, unless the project already has a `neon.ts` file.
 </Admonition>
 
 ## neon config status (#status)

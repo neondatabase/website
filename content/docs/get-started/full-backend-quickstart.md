@@ -99,7 +99,7 @@ A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code
 
 Work through the commands on the right:
 
-1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon login` first.
+1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon login` first. Run interactively, `neon link` prompts you to create `neon.ts`; the `--no-config` flag skips that prompt so the explicit `neon config init` in step 2 stays in control.
 2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the `preview` blocks shown in later steps alongside it (those snippets omit the policy for brevity).
 
 Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding any beta services.
@@ -108,9 +108,9 @@ Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-neon link            # select the my-backend project
-neon checkout main   # pin the branch, pull env vars into .env.local
-neon config init     # scaffold neon.ts, install @neon/config and @neon/env
+neon link --no-config  # select the my-backend project; skip link's neon.ts prompt
+neon checkout main     # pin the branch, pull env vars into .env.local
+neon config init       # scaffold neon.ts, install @neon/config and @neon/env
 ```
 
 </TwoColumnLayout.Block>

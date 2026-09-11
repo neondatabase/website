@@ -8,13 +8,11 @@
 // This override is intentionally sticky: routine "regenerate the API reference"
 // runs keep skipping these operations until an id is removed here. The spec is
 // never filtered, only the rendered output, so spec tracking stays live.
-export const EXCLUDED_OPERATION_IDS = new Set([
-  'createProjectBranchTrigger',
-  'getProjectBranchTrigger',
-  'listProjectBranchTriggers',
-  'updateProjectBranchTrigger',
-  'deleteProjectBranchTrigger',
-]);
+//
+// Currently empty: the function-trigger operations that used to live here were
+// un-hidden so the API reference documents them alongside the `neon triggers`
+// CLI command. Add operationIds here to hide them again.
+export const EXCLUDED_OPERATION_IDS = new Set([]);
 
 // Pure helper: drop excluded operationIds from an iterable of ids, preserving
 // order. Used by the strict docs<->API consistency check so intentionally

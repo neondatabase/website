@@ -1,20 +1,20 @@
 ---
 title: 'Neon CLI command: init'
 subtitle: Set up the current directory for Neon with agent tooling, a linked project,
-  and a neon.ts config
+  and an optional neon.ts config
 summary: >-
   The `neon init` command sets up the current directory to use Neon with your AI
-  coding assistant. In an empty directory it scaffolds a starter template first,
-  then installs agent tooling (either a plugin, or skills and the MCP server), links a
-  Neon project, and writes a neon.ts config. It runs interactively by default;
-  pass -y and --agent for an unattended agent setup.
+  coding assistant. In an empty directory it lets you pick a starter template or
+  skip scaffolding, then installs agent tooling (either a plugin, or skills and the
+  MCP server), links a Neon project, and optionally writes a neon.ts config. It runs
+  interactively by default; pass -y and --agent for an unattended agent setup.
 enableTableOfContents: true
-updatedOn: '2026-08-28T15:55:20.032Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
 
-The `init` command sets up the current directory to use Neon with your AI coding assistant. It's a thin wrapper that runs Neon's other setup commands for you: it installs agent tooling (either the [Neon plugin](/docs/cli/plugins), or [agent skills](/docs/cli/skills) and the [Neon MCP server](/docs/cli/mcp)), [links a Neon project](/docs/cli/link), and writes a [`neon.ts` config](/docs/cli/config). In an empty directory, it [scaffolds a starter template](/docs/cli/bootstrap) first.
+The `init` command sets up the current directory to use Neon with your AI coding assistant. It's a thin wrapper that runs Neon's other setup commands for you: it installs agent tooling (either the [Neon plugin](/docs/cli/plugins), or [agent skills](/docs/cli/skills) and the [Neon MCP server](/docs/cli/mcp)), [links a Neon project](/docs/cli/link), and can write a [`neon.ts` config](/docs/cli/config). In an empty directory, it also [scaffolds a starter template](/docs/cli/bootstrap): pick one interactively, name one with `--template`, or skip scaffolding with `--skip-template`.
 
 `init` is interactive, so run it from a terminal. It asks how coding agents should get Neon, and prompts you to pick a project to link. If you don't have the CLI installed, run it with `npx`:
 
@@ -32,12 +32,14 @@ For agents, CI, or scripts that can't answer prompts, see [Run it non-interactiv
 
 What `init` runs depends on whether the directory is empty:
 
-| Directory                  | What `init` does                                                                                   |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| Empty (nothing but `.git`) | Runs [`neon bootstrap`](/docs/cli/bootstrap): scaffolds a template, then agent tooling and linking |
-| Already has files          | Installs agent tooling, links a project, then runs [`neon config init`](/docs/cli/config)          |
+| Directory                  | What `init` does                                                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Empty (nothing but `.git`) | Scaffolds a starter template with [`neon bootstrap`](/docs/cli/bootstrap), then sets up agent tooling and links a project |
+| Already has files          | Sets up agent tooling, links a project, and optionally writes a [`neon.ts` config](/docs/cli/config)                      |
 
 A directory counts as empty only when it contains nothing but a `.git` folder. Any other entry, including a `README`, a `.env` file, or a `.gitignore`, makes it an existing app. So a directory you just ran `git init` in that already has a `.gitignore` takes the existing-app path.
+
+In an empty directory, pass `--skip-template` to skip scaffolding and take the existing-app path instead: `init` sets up agent tooling, links a project, and optionally writes `neon.ts` without adding template files.
 
 ### Choose how coding agents get Neon
 
@@ -53,7 +55,9 @@ The plugin and the skills-plus-MCP option are mutually exclusive. Installing ski
 
 ### Link a project and write neon.ts
 
-After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`. It then runs [`neon config init`](/docs/cli/config), which creates a `neon.ts` config you can edit and apply with `neon config apply`.
+After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`.
+
+It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with `neon config apply`. In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). When you scaffold a template, `init` keeps the `neon.ts` that template ships and ignores these flags.
 
 ## Options
 
@@ -71,22 +75,17 @@ Combine `-y` with `--agent` to do the agent setup without prompts, for example i
 neon init -y --agent cursor
 ```
 
-For the project, `init` links to the one the directory is already linked to. When the directory isn't linked yet, `neon link` picks the project interactively. To target a specific project without prompts, run the underlying commands directly and pass the project explicitly, each taking its own flags:
+By default, `init` links to the project the directory is already linked to, and when it isn't linked yet, [`neon link`](/docs/cli/link) picks one interactively. To target a project without prompts, `init` forwards project-selection flags to `link`: pass `--project-id` (with `--org-id`) to link an existing project, or `--org-id`, `--project-name`, and `--region-id` to create and link a new one. Pass `--branch` to pin a branch.
 
 ```bash
-# Install agent tooling for a specific editor
-neon skills --agent cursor -s neon -s neon-postgres
-# or install the plugin instead:
-neon plugins --agent cursor
+# Existing project, fully non-interactive
+neon init -y --agent cursor --project-id <project-id> --org-id <org-id>
 
-# Link a specific project (no prompt)
-neon link --project-id <project-id> --org-id <org-id>
-
-# Scaffold neon.ts
-neon config init --services none
+# Create a new project and link it
+neon init -y --agent cursor --org-id <org-id> --project-name my-app --region-id aws-us-east-2
 ```
 
-Authenticate without a browser by setting `NEON_API_KEY` or passing `--api-key`. See [`neon skills`](/docs/cli/skills), [`neon plugins`](/docs/cli/plugins), [`neon link`](/docs/cli/link), and [`neon config`](/docs/cli/config) for the full options.
+Authenticate without a browser by setting `NEON_API_KEY` or passing `--api-key`. Agents can find the IDs with `neon orgs list --output json` and `neon projects list --org-id <org-id> --output json`. To control `neon.ts` in the same run, add `--config`, `--no-config`, or `--services`; in an empty directory, add `--skip-template` to skip scaffolding.
 
 ## What gets created
 
