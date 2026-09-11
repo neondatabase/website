@@ -3,9 +3,10 @@ title: AI Gateway prepaid credits
 subtitle: Buy credits, understand pricing and limits, and manage your balance for the Neon AI Gateway
 summary: >-
   Learn how AI Gateway prepaid credits work, who can buy them, how to purchase
-  credits, and how usage limits and balances affect access.
+  credits, how to check your balance, and how usage limits and metering affect
+  access.
 enableTableOfContents: true
-updatedOn: '2026-09-11T11:52:33.212Z'
+updatedOn: '2026-09-11T12:00:43.655Z'
 ---
 
 <!--
@@ -36,9 +37,9 @@ the Free plan. See [Neon plans](/docs/introduction/plans) and
   so a final request can push the balance below zero.
   <!-- TODO/CONFIRM: How a negative balance is communicated or settled. -->
 
-Your balance draws down as requests are metered. Metering tracks token usage. For
-example, metered image generation can change the displayed balance from $25.00
-to $24.99.
+Your balance **draws down as usage is metered**. Metering tracks token usage, so
+your balance decreases as you send requests. For example, after image
+generation, a balance can move from $25.00 to $24.99.
 
 ## Who can buy credits
 
@@ -51,17 +52,18 @@ to $24.99.
 
 ## Buy or top up credits
 
+Buying credits is a Neon Console flow:
+
 1. In the Neon Console, select **Billing**.
 2. Find the **AI gateway credits** card and select **Add credits**.
 3. Select a preset amount: **$5**, **$10**, **$25**, **$50**, or **$100**. You can
    also select **Other** to enter a custom amount. The default selection is $25,
    and the minimum purchase is $5.
-4. Confirm the purchase. Neon makes a **one-time charge** to the payment card
+4. Confirm the purchase. Neon applies a **one-time charge** to the payment card
    already on file for your organization.
 
-Credits are added to your balance promptly after the charge succeeds. The
-purchase appears in credit history as **Manual purchase**, with the date and
-amount.
+Credits post to your balance promptly after the charge succeeds. The purchase
+appears in your credit history as **Manual purchase**, with the date and amount.
 
 <!-- SCREENSHOT: Buy credits entry point -->
 
@@ -70,9 +72,9 @@ Only **one purchase can be open at a time** per account — you can't start a se
 purchase until the first completes.
 </Admonition>
 
-<!-- TODO/CONFIRM: 3DS decline behavior, including whether a purchase is declined when the card requires 3-D Secure authentication and what customer guidance to provide. -->
+<!-- TODO/CONFIRM: 3DS decline behavior — whether a purchase is declined when the card on file requires 3-D Secure authentication, and what customer guidance to provide. -->
 
-<!-- TODO/CONFIRM: Orb invoice or receipt surfacing, including whether an Orb-hosted invoice or PDF receipt is available or emailed and where customers can find it. -->
+<!-- TODO/CONFIRM: Orb invoice or receipt surfacing — whether an Orb-hosted invoice or PDF receipt is available or emailed after purchase, and where customers find it. -->
 
 ## View your balance and usage history
 
@@ -80,11 +82,11 @@ In the Console, select **Billing** and find the **AI gateway credits** card. The
 card shows:
 
 - **Credits remaining**: your organization's current credit balance.
-- **Credits added in last 30 days**: a history panel with each entry's date,
+- **Credits added in last 30 days**: a history panel that lists each entry's date,
   source, and amount, plus the total credits added during the period.
 
-The balance is shown in whole cents, so small or occasional requests might not
-visibly change it. Their metered usage still draws down the balance.
+The balance is shown in **whole cents**, so small or occasional requests might not
+visibly change it even though their metered usage still draws down the balance.
 
 <!-- TODO: confirm GA enablement (TLDR framed monitoring as post-GA) -->
 
@@ -98,15 +100,18 @@ abuse. Standard accounts have:
 - **200,000 tokens per minute (TPM)**
 - **$20 per day**
 
-Short-window rate limits, the daily spend cap, and balance depletion are distinct
-concepts. Short-window limits are surfaced through `x-ratelimit-*` response
-headers. The daily spend cap limits spend over a day. Balance depletion occurs
-when prepaid credits run out.
+Short-window rate limits, the daily spend cap, and balance depletion are
+**distinct concepts**:
+
+- **Short-window rate limits** are surfaced through `x-ratelimit-*` response
+  headers on each request.
+- The **daily spend cap** limits how much you can spend over a single day.
+- **Balance depletion** happens when your prepaid credits run out.
 
 If you need a higher TPM limit, open a Neon Support ticket and choose the
 **AI Gateway TPM increase request** ticket type.
 
-<!-- TODO/CONFIRM: Exact Console path for creating the support ticket and whether daily spend-cap increases use the AI Gateway TPM increase request ticket type or the Billing ticket type. -->
+<!-- TODO/CONFIRM: Exact Console path to create the support ticket, and whether a daily spend-cap increase uses the AI Gateway TPM increase request ticket type or the separate Billing ticket type. -->
 
 When you exceed a limit, the API returns **HTTP 429**:
 
@@ -119,20 +124,20 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 ## Model access and verification
 
-A paid account with prepaid credits can access all available AI Gateway models,
-including locked and frontier models. A model's lock icon means that the model
-requires an entitled, funded account; it does not mean that the model is
-unavailable. An unfunded organization sees models as locked. They unlock after
-the organization is on a paid plan and has credits.
+A **paid account with prepaid credits can access all available AI Gateway
+models**, including locked and frontier models. A model's **lock icon** means the
+model requires an entitled, funded account — it does **not** mean the model is
+unavailable. An unfunded organization sees models as locked; they unlock once the
+organization is on a paid plan and has credits.
 
 <!-- TODO: abuse/verification enforcement exists for rejected/quarantined/suspended accounts (LKB-15222); confirm customer-facing behavior before documenting -->
 
 The model list is subject to change. See
 [Supported models](/docs/ai-gateway/models) for the current catalog.
 
-<!-- TODO/CONFIRM: Running out of credits and enforcement enablement. LKB-16345 landed, but GA enablement and the customer-facing blocked-state behavior are unconfirmed. -->
+<!-- TODO/CONFIRM: Running out of credits and enforcement enablement. Real enforcement landed (LKB-16345), but GA enablement and the customer-facing blocked-state behavior (for example, whether a depleted wallet returns HTTP 429 "ai gateway credit balance depleted") are unconfirmed. -->
 
-<!-- TODO/CONFIRM: Notifications. LKB-16060 is In Review. Confirm which AI Gateway low-balance, depleted-balance, or top-up notifications ship; their email or Console channels; and whether they are configurable. Do not conflate them with general organization spending notifications. -->
+<!-- TODO/CONFIRM: Notifications. LKB-16060 is In Review. Confirm which AI Gateway low-balance, depleted-balance, or top-up notifications ship; their email or Console channels; and whether they are configurable. Do not conflate them with the general organization spending notifications (a non-blocking monthly-spend email alert). -->
 
 ## Automatic top-up
 
@@ -141,11 +146,12 @@ described above.
 
 <!--
 PULLED: The "Beta to GA transition" section about a one-time beta-user credit
-grant remains removed from this public page. It is a one-time migration event
-better delivered through direct communications than evergreen documentation.
-The amount and framing came from an internal source and are not confirmed for
-public use. If PM wants a public transitional note, use a short time-boxed
-callout or separate announcement or migration page after PM decides.
+grant remains removed from this public page. Reasons: (1) it is a one-time
+migration event better delivered through direct communications (email or in-app
+notice) than evergreen documentation; (2) the amount and framing came from an
+internal source and are not confirmed for public use; (3) it ages badly on an
+evergreen page. If PM wants a public transitional note, use a short time-boxed
+callout or a separate announcement or migration page — pending PM decision.
 -->
 
 ## If you downgrade to Free
