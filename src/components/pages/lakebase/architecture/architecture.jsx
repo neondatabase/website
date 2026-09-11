@@ -35,7 +35,7 @@ const Architecture = () => (
       </h2>
 
       <figure
-        className="mt-18 md:mt-10"
+        className="mt-50 2xl:mt-32 md:mt-10"
         aria-label="Decoupled compute and shared versioned storage in Lakebase"
         role="img"
       >
