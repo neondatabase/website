@@ -7,21 +7,27 @@ summary: >-
   Includes the key files to expect, three service follow-up prompts, and a
   hands-on Neon branching demo.
 enableTableOfContents: true
-updatedOn: '2026-09-10T13:11:52.000Z'
+updatedOn: '2026-09-11T15:25:18.000Z'
 ---
 
-Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
+Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Lakebase Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
 
 <Steps>
 
 ## Connect your agent to Neon
+
+Install the Neon CLI globally:
+
+```bash filename="Terminal"
+npm install -g neon@latest
+```
 
 Run these in your terminal to create your app and connect Neon (you'll sign in to Neon when prompted):
 
 ```bash filename="Terminal"
 npx create-next-app@latest my-app --yes --app
 cd my-app
-npx neon@latest init
+neon init
 ```
 
 `neon init` links a Neon project to your app and installs your AI tooling. It asks you two things: which tooling to set up (a plugin, or agent skills and the Neon MCP server), and which project to link. Linking writes your `DATABASE_URL` to your env file.
@@ -32,10 +38,10 @@ Open your AI coding agent in the newly created `my-app` directory so it works on
 
 ## Build your app with one prompt
 
-In your AI agent's chat, paste:
+In your AI agent's chat, paste this prompt to build the app and provision Lakebase Postgres:
 
 ```text shouldWrap filename="AI assistant prompt"
-In this Next.js App Router project, build me a working public blog backed by Neon Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a posts table (title, body, created_at), seed a few example posts, add a public page that lists them newest first, and add a simple create/publish form so you can add a post. Run it and show me the actual posts, not "done"; if anything fails show me the error instead of working around it.
+In this Next.js App Router project, build me a working public blog backed by Lakebase Postgres, using the Neon skills and MCP server you have. Use Drizzle with @neondatabase/serverless. Create a posts table (title, body, created_at), seed a few example posts, add a public page that lists them newest first, and add a simple create/publish form so you can add a post. Run it and show me the actual posts, not "done"; if anything fails show me the error instead of working around it.
 ```
 
 ## What you'll get
@@ -122,19 +128,19 @@ Open [localhost:3000](http://localhost:3000) and you'll see your seeded posts, n
 
 You now have a working backend. Each prompt below adds another Neon capability. They are independent, so add whichever you want, in any order.
 
-**Add authentication** so readers sign in to publish while anyone can still read:
+**Add [Managed Better Auth](/docs/auth/overview)** so readers sign in to publish while anyone can still read:
 
 ```text shouldWrap filename="Prompt: add sign-in"
 Add Managed Better Auth so readers sign in to publish while the public feed stays visible to everyone. Gate posting, not reading. Attribute new posts to the signed-in author, and keep the seeded posts visible with a demo author or no author. Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.
 ```
 
-**Save each post as a file** in object storage, with a download link:
+**Add [Object Storage](/docs/storage/overview)** to save each post as a file, with a download link:
 
 ```text shouldWrap filename="Prompt: save posts as files"
 Save each post as a Markdown file in Neon Object Storage and show a Download link on every post. Store the file in a private bucket, keep the object key on the post, and fetch it through a short-lived presigned URL. Update neon.ts to declare Object Storage, then run neon deploy to apply and provision it.
 ```
 
-**Generate an AI summary** for every post:
+**Add [AI Gateway](/docs/ai-gateway/overview)** to generate an AI summary for every post:
 
 ```text shouldWrap filename="Prompt: add AI summaries"
 Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
@@ -145,13 +151,13 @@ Generate a short summary or excerpt from each post body using Neon AI Gateway, s
 A Neon branch is an instant, isolated copy of your backend, including your data and its stored files. You can make changes on the branch without affecting your main branch, then delete the branch when you're done.
 
 ```text shouldWrap filename="Prompt: make a change on a branch (this one deletes every post)"
-Create a Neon branch named my-feature and switch this project to it: run npx neon@latest branches create --name my-feature, then npx neon@latest checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and its stored Markdown file, and show me the blog feed is now empty.
+Create a Neon branch named my-feature and switch this project to it: run neon branches create --name my-feature, then neon checkout my-feature. Restart the dev server so it uses the branch's DATABASE_URL. Then delete every post and its stored Markdown file, and show me the blog feed is now empty.
 ```
 
 Reload the page and the feed is now empty. Your app is pointed at the branch where you deleted every post, but your main branch still has all the posts and their files. Switch back to verify:
 
 ```bash
-npx neon@latest checkout main
+neon checkout main
 ```
 
 Reload the page and you'll now see your posts are back (restart the dev server if you don't see them). Your main branch was unaffected by changes to your feature branch.
@@ -159,7 +165,7 @@ Reload the page and you'll now see your posts are back (restart the dev server i
 You can delete the feature branch when done:
 
 ```bash
-npx neon@latest branches delete my-feature
+neon branches delete my-feature
 ```
 
 If you want each code branch to get its own preview URL with a matching database branch, see [Neon's preview deployments guide](/docs/guides/neon-managed-vercel-integration).

@@ -20,9 +20,8 @@ function section(markdown, heading, nextHeading) {
 
 describe('with-an-agent quickstart content contract', () => {
   it('keeps the init flow scoped to the new app and configures a starter neon.ts', () => {
-    expect(page).toContain(
-      'npx create-next-app@latest my-app --yes --app\ncd my-app\nnpx neon@latest init'
-    );
+    expect(page).toContain('npm install -g neon@latest');
+    expect(page).toContain('npx create-next-app@latest my-app --yes --app\ncd my-app\nneon init');
     expect(page).toContain(
       'When `neon init` asks "Manage this project\'s Neon setup as code?", choose **Yes**.'
     );
@@ -37,6 +36,11 @@ describe('with-an-agent quickstart content contract', () => {
     expect(openAgent).toBeLessThan(buildHeading);
     expect(page).not.toContain('choose **No**');
     expect(page).not.toContain('neon env pull');
+    expect(page).not.toContain('npx neon@latest');
+    expect(page).toContain('running Next.js app backed by Lakebase Postgres');
+    expect(page).toContain('build the app and provision Lakebase Postgres');
+    expect(page).toContain('working public blog backed by Lakebase Postgres');
+    expect(page).not.toContain('Neon Postgres');
   });
 
   it('keeps exactly three independent capability prompts in Add more to your backend', () => {
@@ -52,12 +56,14 @@ describe('with-an-agent quickstart content contract', () => {
       'You now have a working backend. Each prompt below adds another Neon capability. They are independent, so add whichever you want, in any order.'
     );
     expect(addMore).toContain(
-      '**Add authentication** so readers sign in to publish while anyone can still read:'
+      '**Add [Managed Better Auth](/docs/auth/overview)** so readers sign in to publish while anyone can still read:'
     );
     expect(addMore).toContain(
-      '**Save each post as a file** in object storage, with a download link:'
+      '**Add [Object Storage](/docs/storage/overview)** to save each post as a file, with a download link:'
     );
-    expect(addMore).toContain('**Generate an AI summary** for every post:');
+    expect(addMore).toContain(
+      '**Add [AI Gateway](/docs/ai-gateway/overview)** to generate an AI summary for every post:'
+    );
     expect(promptLabels).toEqual(['add sign-in', 'save posts as files', 'add AI summaries']);
     expect(promptBodies).toHaveLength(3);
     expect(addMore).toContain(
@@ -95,8 +101,8 @@ describe('with-an-agent quickstart content contract', () => {
       '**Prompt: make a change on a branch (this one deletes every post)**'
     );
     expect(promptBody).toBeDefined();
-    expect(promptBody).toContain('npx neon@latest branches create --name my-feature');
-    expect(promptBody).toContain('npx neon@latest checkout my-feature');
+    expect(promptBody).toContain('neon branches create --name my-feature');
+    expect(promptBody).toContain('neon checkout my-feature');
     expect(promptBody).toContain("Restart the dev server so it uses the branch's DATABASE_URL.");
     expect(promptBody).toContain(
       'delete every post and its stored Markdown file, and show me the blog feed is now empty'
@@ -109,10 +115,7 @@ describe('with-an-agent quickstart content contract', () => {
     expect(branching).toContain(
       'Reload the page and the feed is now empty. Your app is pointed at the branch where you deleted every post, but your main branch still has all the posts and their files. Switch back to verify:'
     );
-    expect(terminalRecipes).toEqual([
-      'npx neon@latest checkout main',
-      'npx neon@latest branches delete my-feature',
-    ]);
+    expect(terminalRecipes).toEqual(['neon checkout main', 'neon branches delete my-feature']);
     expect(branching).toContain(
       "Reload the page and you'll now see your posts are back (restart the dev server if you don't see them). Your main branch was unaffected by changes to your feature branch."
     );
