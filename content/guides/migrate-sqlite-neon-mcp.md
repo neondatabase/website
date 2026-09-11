@@ -79,7 +79,7 @@ To learn how pgloader handles SQLite specifically, see the [pgloader SQLite refe
 
 ## Connect the Neon MCP Server
 
-The easiest way to setup Neon MCP Server in an AI coding agent is via [`neon init`](/docs/cli/init). It links a Neon project and configures the MCP server for your client:
+The easiest way to set up Neon MCP Server in an AI coding agent is via [`neon init`](/docs/cli/init). It links a Neon project and configures the MCP server for your client:
 
 ```bash
 npx neon@latest init
