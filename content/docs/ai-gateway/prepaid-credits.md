@@ -5,14 +5,13 @@ summary: >-
   Learn how AI Gateway prepaid credits work, who can buy them, how to purchase
   credits, and how usage limits and balances affect access.
 enableTableOfContents: true
-updatedOn: '2026-09-10T14:03:33.000Z'
+updatedOn: '2026-09-11T11:52:33.212Z'
 ---
 
 <!--
 DRAFT — not ready to publish.
 Destination: content/docs/ai-gateway/prepaid-credits.md →
 neon.com/docs/ai-gateway/prepaid-credits.
-Several sections are gated on the open questions in the checklist at the bottom.
 -->
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -29,86 +28,85 @@ the Free plan. See [Neon plans](/docs/introduction/plans) and
 ## How credits and pricing work
 
 - **1 credit = $1 USD.** Credits are prepaid — purchased before use.
-- **Minimum purchase: $5.** <!-- TODO: Confirm the GA maximum and supported range. -->
-- **Minimum balance: $2.** <!-- LKB-17487 -->
+- **Minimum purchase: $5.**
+  <!-- TODO/CONFIRM: Maximum custom purchase amount and supported range. -->
+- **Minimum balance: $2.**
 - **Credits expire 12 months after purchase.**
 - Your balance can go **negative** — usage is metered after a request is served,
   so a final request can push the balance below zero.
-  <!-- TODO: Confirm how a negative balance is communicated or settled. -->
-- Credits are billed in **USD only**; there are no fixed credit packages — you
-  choose the amount.
+  <!-- TODO/CONFIRM: How a negative balance is communicated or settled. -->
 
-## Who can buy credits (eligibility)
+Your balance draws down as requests are metered. Metering tracks token usage. For
+example, metered image generation can change the displayed balance from $25.00
+to $24.99.
+
+## Who can buy credits
 
 - Only **organization admins** can purchase credits.
-- The account must pay by card (**`payment_method = stripe`**).
-- Members, editors, and viewers cannot purchase.
-- **Accounts that cannot self-serve purchase** (credits are added by an admin
-  grant / through your account team instead):
-  - Sales-invoiced accounts (direct/manual payment)
-  - AWS, Azure, or Vercel marketplace accounts
-  - Trial or sponsored accounts
-  - Shared-token accounts
+- The organization must be billed directly by payment card.
+- Members, editors, and viewers cannot purchase credits.
+- Sales-invoiced, marketplace, trial, sponsored, and shared-token accounts cannot
+  purchase credits through this self-service flow. Contact your account team for
+  assistance.
 
-<!--
-TODO: Buy or top up credits
+## Buy or top up credits
 
-TODO: Confirm whether purchase is a Console UI flow or API-only at GA, and where
-Buy credits appears in the Console. The steps and screenshots are placeholders.
+1. In the Neon Console, select **Billing**.
+2. Find the **AI gateway credits** card and select **Add credits**.
+3. Select a preset amount: **$5**, **$10**, **$25**, **$50**, or **$100**. You can
+   also select **Other** to enter a custom amount. The default selection is $25,
+   and the minimum purchase is $5.
+4. Confirm the purchase. Neon makes a **one-time charge** to the payment card
+   already on file for your organization.
 
-1. SCREENSHOT TODO: Go to the confirmed Console location and select **Buy credits**.
-2. Enter the amount you want to purchase (minimum $5). The charge uses the
-   **payment card already on file** for your organization.
-3. Confirm. Credits are added to your balance once the charge succeeds.
+Credits are added to your balance promptly after the charge succeeds. The
+purchase appears in credit history as **Manual purchase**, with the date and
+amount.
+
+<!-- SCREENSHOT: Buy credits entry point -->
 
 <Admonition type="important">
 Only **one purchase can be open at a time** per account — you can't start a second
 purchase until the first completes.
 </Admonition>
 
-<Admonition type="warning">
-The purchase charge is made against your card **off-session**, so cards that
-require **3-D Secure (3DS)** authentication are expected to be **declined**. Use a
-payment card that does not require 3DS for AI Gateway credit purchases.
-</Admonition>
+<!-- TODO/CONFIRM: 3DS decline behavior, including whether a purchase is declined when the card requires 3-D Secure authentication and what customer guidance to provide. -->
 
-TODO: Confirm that 3DS declines are intended GA behavior and the guidance to publish.
+<!-- TODO/CONFIRM: Orb invoice or receipt surfacing, including whether an Orb-hosted invoice or PDF receipt is available or emailed and where customers can find it. -->
 
-TODO: Confirm whether an Orb-hosted invoice or PDF receipt is surfaced or emailed
-after purchase. If so, document where to find it.
--->
+## View your balance and usage history
 
-<!--
-TODO: View your balance and usage history
+In the Console, select **Billing** and find the **AI gateway credits** card. The
+card shows:
 
-Confirm GA enablement before publishing this section. The customer-facing
-balance and usage-history public API has landed (LKB-17262 Done), and the balance
-UI closed (LKB-16059 Done, September 7), shipped behind a config flag and enabled
-in staging. The GA TLDR framed balance and monitoring as post-GA. Confirm whether
-it is enabled for customers at the September 17 GA. If yes, document the endpoint,
-Console surface, and screenshot. If no, replace this section with a short
-"coming soon" note.
+- **Credits remaining**: your organization's current credit balance.
+- **Credits added in last 30 days**: a history panel with each entry's date,
+  source, and amount, plus the total credits added during the period.
 
-SCREENSHOT TODO: Balance surface after GA enablement is confirmed.
--->
+The balance is shown in whole cents, so small or occasional requests might not
+visibly change it. Their metered usage still draws down the balance.
+
+<!-- TODO: confirm GA enablement (TLDR framed monitoring as post-GA) -->
+
+<!-- SCREENSHOT: balance surface -->
 
 ## Usage limits
 
 AI Gateway usage is subject to **soft limits** to protect against runaway cost and
-abuse. At GA, standard accounts have:
+abuse. Standard accounts have:
 
 - **200,000 tokens per minute (TPM)**
 - **$20 per day**
 
-These are soft limits — if you need higher throughput or spend, **contact Support**
-to request an increase.
+Short-window rate limits, the daily spend cap, and balance depletion are distinct
+concepts. Short-window limits are surfaced through `x-ratelimit-*` response
+headers. The daily spend cap limits spend over a day. Balance depletion occurs
+when prepaid credits run out.
 
-<!-- TODO: Confirm the Support or contact path to link. -->
+If you need a higher TPM limit, open a Neon Support ticket and choose the
+**AI Gateway TPM increase request** ticket type.
 
-<!--
-Publish Tier 1 only. The higher Tier 2 (600K TPM / $500 per day) is internal and
-must not be published.
--->
+<!-- TODO/CONFIRM: Exact Console path for creating the support ticket and whether daily spend-cap increases use the AI Gateway TPM increase request ticket type or the Billing ticket type. -->
 
 When you exceed a limit, the API returns **HTTP 429**:
 
@@ -119,59 +117,35 @@ When you exceed a limit, the API returns **HTTP 429**:
 }
 ```
 
-<!--
-BLOCKED: Model access and verification
+## Model access and verification
 
-Verification reconciliation is the primary open question. The GA FAQ
-says an account with a paid plan and credits can use all models. The code gates
-unverified accounts to approximately eight open-access models and returns HTTP
-403 "model requires a verified account" for the rest. Do not write this section
-until engineering confirms how, or whether, verification surfaces to customers
-at GA.
+A paid account with prepaid credits can access all available AI Gateway models,
+including locked and frontier models. A model's lock icon means that the model
+requires an entitled, funded account; it does not mean that the model is
+unavailable. An unfunded organization sees models as locked. They unlock after
+the organization is on a paid plan and has credits.
 
-Two possible outcomes:
-1. Paid plan plus credits grants all-model access. Make this section a one-line
-   statement and omit the open-access model list.
-2. Gating remains. Document which models require a verified account, the 403
-   response, and the remediation path for unverified or rejected accounts. There
-   is no customer status or retry endpoint today.
+<!-- TODO: abuse/verification enforcement exists for rejected/quarantined/suspended accounts (LKB-15222); confirm customer-facing behavior before documenting -->
 
-Any published model list must be marked "subject to change" because models are
-added regularly. See [Supported models](/docs/ai-gateway/models).
--->
+The model list is subject to change. See
+[Supported models](/docs/ai-gateway/models) for the current catalog.
 
-<!--
-TODO: Running out of credits
+<!-- TODO/CONFIRM: Running out of credits and enforcement enablement. LKB-16345 landed, but GA enablement and the customer-facing blocked-state behavior are unconfirmed. -->
 
-Confirm enforcement is enabled at GA before publishing. Real BlockSender
-landed (LKB-16345 Done). If enforcement is enabled, a depleted wallet returns
-HTTP 429 "ai gateway credit balance depleted". Document the behavior after
-enforcement enablement and blocked-state UX are confirmed.
--->
-
-<!--
-TODO: Notifications
-
-LKB-16060, for real low-balance and no-balance notifications, is in review.
-Confirm which notifications ship (low balance, depleted balance, or top-up
-confirmation), the channels (email or Console), and whether they are configurable
-before publishing.
--->
+<!-- TODO/CONFIRM: Notifications. LKB-16060 is In Review. Confirm which AI Gateway low-balance, depleted-balance, or top-up notifications ship; their email or Console channels; and whether they are configurable. Do not conflate them with general organization spending notifications. -->
 
 ## Automatic top-up
 
 Automatic top-up is **not available**. You add credits manually by purchasing as
 described above.
 
-<!-- Automatic top-up is out of scope for GA per the GA TLDR. -->
-
 <!--
-BLOCKED: The "Beta to GA transition" section about a one-time beta-user credit
-grant was removed from this public page. It is a one-time migration event better
-delivered through direct communications than evergreen documentation. The amount
-and framing came from the internal GA TLDR and are not confirmed for public use.
-If PM wants a public transitional note, use a short time-boxed callout or separate
-announcement or migration page after PM decides.
+PULLED: The "Beta to GA transition" section about a one-time beta-user credit
+grant remains removed from this public page. It is a one-time migration event
+better delivered through direct communications than evergreen documentation.
+The amount and framing came from an internal source and are not confirmed for
+public use. If PM wants a public transitional note, use a short time-boxed
+callout or separate announcement or migration page after PM decides.
 -->
 
 ## If you downgrade to Free
@@ -180,34 +154,9 @@ If your organization moves to the Free plan, any AI Gateway credits **remain on
 your account**, but the AI Gateway is **not usable on Free**. Your credits become
 usable again when you upgrade to a paid plan.
 
-## Availability
-
-At GA the AI Gateway is available in: **US East 1, US East 2, EU London, and
-Singapore** (more regions to follow).
-
-<Admonition type="note">
-**IP Allow** and **Private Link** do not cover AI Gateway traffic at GA.
-</Admonition>
-
 ## Related
 
 - [Supported models](/docs/ai-gateway/models)
 - [AI Gateway troubleshooting](/docs/ai-gateway/troubleshooting)
 - [About billing](/docs/introduction/about-billing)
 - [Manage billing](/docs/introduction/manage-billing)
-
-<!--
-NOT-FOR-PUBLICATION NOTES — what is still needed to finish this page
-
-1. VERIFICATION: Resolve the FAQ-versus-code disagreement before writing Model
-   access and verification.
-2. BETA-TO-GA GRANT: Pending a PM decision on public docs versus direct comms.
-3. SCREENSHOTS:
-   - Buy credits entry point in the Console and the purchase flow.
-   - Balance and usage-history surface, only if GA-enabled.
-   - Optional 429 limit or depleted-balance state, if there is UI.
-4. GA ENABLEMENT: Confirm balance and history API, enforcement, and notifications.
-5. PURCHASE SURFACE: Confirm Console UI versus API-only and exact location.
-6. NUMBERS: Confirm purchase maximum and range, beta-to-GA grant, and receipt.
-7. SUPPORT: Confirm the contact link for limit-increase requests.
--->
