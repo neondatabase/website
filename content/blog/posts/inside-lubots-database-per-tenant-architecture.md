@@ -33,7 +33,7 @@ seo:
 
 [LuBot](https://lubot.ai) is a chat product for business analytics [built by a solo founder](https://www.linkedin.com/in/lubo-bali/). It allows users to ask questions in plain English about their data while pulling info from their portfolio and stocks, website traffic, and files such as Excel spreadsheets or PDFs.
 
-*Explore it at [lubot.ai](https://lubot.ai/).*
+**[ADD IMAGE 1]**
 
 Right since it first started, LuBot was built as a multi-tenant SaaS:
 
@@ -90,6 +90,8 @@ The whole flow sits behind one function, `get_tenant_engine`, in `services/tenan
 What makes this architecture doable in Neon is not only the ability to manage branches via the API but also its serverless compute model.
 
 Each tenant compute can autoscale. In LuBot, the most common configuration is a 0.25 CU active floor and a 4 CU burst ceiling. After 300 seconds without activity, the compute suspends. LuBot stops paying for compute while it is suspended, though storage remains billed. That combination is what makes a database-per-tenant design viable on a bootstrap budget.
+
+**[ADD IMAGE 2]**
 
 ## Tips on pooled connections, search_path, and pool leaks
 
