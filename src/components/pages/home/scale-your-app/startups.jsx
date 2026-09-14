@@ -15,7 +15,7 @@ const Startups = () => (
             { text: 'WHERE STARTUPS', width: 608 },
             { text: 'START', width: 384 },
           ]}
-          description="Thousands of new companies spin up on Neon every week."
+          description="From Bootstrapped to VC Funded, Startups Ship Faster on Neon."
         />
 
         <StartupExperience />
