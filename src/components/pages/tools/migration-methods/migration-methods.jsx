@@ -34,7 +34,7 @@ const GROUPS = [
     title: 'Requirements',
     rows: [
       { label: 'Database size', values: ['< 10 GB', '10–200 GB', '> 200 GB'] },
-      { label: 'Downtime', values: ['Minutes', 'Minutes to hours', 'Seconds'] },
+      { label: 'Downtime', values: ['Minutes to hours', 'Minutes to hours', 'Seconds'] },
     ],
   },
   {
@@ -98,19 +98,19 @@ const MigrationMethods = () => {
         >
           {/* Keyboard users need to focus the overflow region to scroll the comparison. */}
           <div
-            className="no-scrollbars overflow-x-auto overscroll-x-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green-45"
+            className="no-scrollbars overflow-x-auto overscroll-x-contain focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green-45 lg:pr-8 md:pr-5"
             onScroll={(event) => setHasScrolled(event.currentTarget.scrollLeft > 0)}
             role="region"
             aria-label="Migration methods comparison, scroll horizontally to compare all methods"
             // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
             tabIndex={0}
           >
-            <table className="w-full table-fixed border-separate border-spacing-0 text-left text-base/snug tracking-extra-tight lg:min-w-252 md:min-w-212">
+            <table className="w-full table-fixed border-separate border-spacing-0 text-left text-base/snug tracking-extra-tight lg:min-w-252 md:min-w-200">
               <caption className="sr-only">Compare migration methods for your database</caption>
               <colgroup>
                 <col className="w-1/4 lg:w-48 md:w-32" />
                 {METHODS.map(({ title }) => (
-                  <col className="w-1/4 lg:w-68 md:w-60" key={title} />
+                  <col className="w-1/4 lg:w-68 md:w-44" key={title} />
                 ))}
               </colgroup>
               <thead>
