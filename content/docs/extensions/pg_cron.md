@@ -11,10 +11,14 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-08T22:56:13.993Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
+
+<Admonition type="tip" title="Scheduling without keeping a compute active">
+If the work you want to schedule isn't SQL, or you don't want to keep a compute active to hold the schedule, see [Function Triggers](/docs/compute/functions/triggers/overview). They invoke a [Neon Function](/docs/compute/functions/overview) on a cron schedule and run even when the compute is scaled to zero.
+</Admonition>
 
 <CTA />
 
