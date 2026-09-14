@@ -1,4 +1,4 @@
-text: 'Just shipped: Claimable Neon - agents provision backends without signup, humans claim them later'
+text: '"A quarter of work, done in 6 days".  How a solo founder built isolated Postgres per tenant on Neon'
 link:
-  url: 'https://neon.com/blog/an-agent-provisions-a-neon-backend-a-human-claims-it-later'
+  url: 'https://neon.com/blog/inside-lubots-database-per-tenant-architecture'
   target: '_blank'
