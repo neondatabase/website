@@ -925,6 +925,23 @@ function buildTests() {
     { note: 'pitfall: agent UA on bare slug gets HTML/404; agents must request /blog/[slug].md' }
   );
 
+  // A post published after the blog moved into this repo. The pinned slug above
+  // is an older post that proves the mechanism; this proves recent posts are
+  // served too (catches a source that only leaves new posts 404ing). Update the
+  // slug if this post is removed.
+  add(
+    'Blog post .md (recent)',
+    '/blog/inside-lubots-database-per-tenant-architecture.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+      (r) => expectMarkdownBody(r.body),
+    ],
+    { note: 'recent post (published after the blog moved in-repo)' }
+  );
+
   // ── 9b. Non-docs marketing page (stays HTML for agents / Accept: markdown)
   // Tests that middleware does not serve markdown for pages outside CONTENT_ROUTES.
 
