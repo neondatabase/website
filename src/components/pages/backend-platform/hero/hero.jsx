@@ -26,7 +26,7 @@ const Hero = ({
   dataFigmaNodeId = null,
   headingClassName = null,
   headingId,
-  headingRowClassName,
+  headingRowClassName = 'gap-x-12 xl:flex-col xl:items-start xl:gap-y-8',
   illustration,
   illustrationClassName,
   logos = DEFAULT_LOGOS,
@@ -38,12 +38,22 @@ const Hero = ({
   const titleLines = content.titleLines ?? [content.title];
 
   return (
-    <section className={className} data-figma-node-id={dataFigmaNodeId} aria-labelledby={headingId}>
+    <section
+      className={cn('safe-paddings xl:pt-36 lg:pt-32', className)}
+      data-figma-node-id={dataFigmaNodeId}
+      aria-labelledby={headingId}
+    >
       <Container size="1344">
         <SectionLabel theme="white">{content.label}</SectionLabel>
 
-        <div className={headingRowClassName}>
-          <h1 className={headingClassName} id={headingId}>
+        <div className={cn('mt-5 flex items-end justify-between', headingRowClassName)}>
+          <h1
+            className={cn(
+              'text-[4.5rem] leading-dense tracking-tighter xl:text-[3.75rem] lg:text-[3rem] md:text-[2.5rem] sm:text-[2.25rem]',
+              headingClassName
+            )}
+            id={headingId}
+          >
             {titleLines.map((line, index) => (
               <Fragment key={line}>
                 {index > 0 && (
@@ -76,10 +86,10 @@ const Hero = ({
           </div>
         </div>
 
-        <div className={illustrationClassName}>{illustration}</div>
+        <div className={cn('mt-12 md:mt-10', illustrationClassName)}>{illustration}</div>
 
         <div
-          className={cn('select-none', logosClassName)}
+          className={cn('mt-14 select-none lg:mt-12 md:mt-10', logosClassName)}
           data-figma-node-id={logosDataFigmaNodeId}
         >
           <Logos
@@ -112,11 +122,11 @@ Hero.propTypes = {
   dataFigmaNodeId: PropTypes.string,
   headingClassName: PropTypes.string,
   headingId: PropTypes.string.isRequired,
-  headingRowClassName: PropTypes.string.isRequired,
+  headingRowClassName: PropTypes.string,
   illustration: PropTypes.node.isRequired,
-  illustrationClassName: PropTypes.string.isRequired,
+  illustrationClassName: PropTypes.string,
   logos: PropTypes.arrayOf(PropTypes.string),
-  logosClassName: PropTypes.string.isRequired,
+  logosClassName: PropTypes.string,
   logosDataFigmaNodeId: PropTypes.string,
   logosStaticDesktop: PropTypes.bool,
   testIdPrefix: PropTypes.string,

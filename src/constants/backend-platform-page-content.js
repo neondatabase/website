@@ -1,10 +1,7 @@
 const functionsBranchingTitleLines = ['Functions that branch with', 'the rest of your stack.'];
 const aiGatewayHeroTitleLines = ['Call the latest models right', 'from your Neon backend'];
 const aiGatewayModelsTitleLines = ['Access a wide catalog of frontier and open', 'weight models.'];
-const aiGatewayModelsHighlightedTitleLines = [
-  'Served with optimized performance',
-  'via Databricks.',
-];
+const aiGatewayModelsHighlightedTitleLines = ['Served with optimized performance via Databricks.'];
 const builtForAgentsTitleLines = ['Built for agents,', 'not just developers.'];
 const faqTitleLines = ['Your questions,', 'answered'];
 const lakebaseFromFirstLineTitleLines = [

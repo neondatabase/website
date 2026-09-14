@@ -9,6 +9,7 @@ import CountingNumber from 'components/shared/animation/counting-number';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import { lakebasePageContent } from 'constants/backend-platform-page-content';
+import useWindowSize from 'hooks/use-window-size';
 import autoscalingLegendIcon from 'icons/lakebase/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/lakebase/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/lakebase/autoscaling/legend/resource.svg';
@@ -22,6 +23,8 @@ const { autoscaling } = lakebasePageContent;
 const LEGEND_ICONS = [autoscalingLegendIcon, dbLoadLegendIcon, resourceLegendIcon];
 
 const Autoscaling = () => {
+  const { width } = useWindowSize();
+  const isDesktop = width >= 768;
   const [animationWrapperRef, isAnimationIntersecting] = useInView({
     triggerOnce: true,
     rootMargin: '500px 0px',
@@ -76,7 +79,7 @@ const Autoscaling = () => {
               ))}
             </div>
             <div className="relative aspect-1344/293 w-full overflow-hidden md:hidden">
-              {isAnimationIntersecting && (
+              {isDesktop && isAnimationIntersecting && (
                 <Animation className="absolute inset-0 h-full w-full" state={activeItem} />
               )}
             </div>

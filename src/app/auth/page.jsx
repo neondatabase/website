@@ -12,23 +12,18 @@ import { authPageContent } from 'constants/auth-page-content';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-const LOGOS = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'retool', 'meta'];
-
 export const metadata = getMetadata(SEO_DATA.auth);
 
 const AuthPage = () => (
   <BackendPlatformPage>
     <BackendHero
-      className="relative pt-45.5 safe-paddings text-white xl:pt-36 lg:pt-32 md:pt-24"
+      className="relative pt-45.5 text-white md:pt-24"
       content={authPageContent.hero}
       dataFigmaNodeId="2131:7296"
-      headingClassName="max-w-233 text-[4.5rem] leading-none tracking-tighter xl:text-[3.75rem] lg:text-5xl md:text-4xl sm:text-[2.25rem]"
+      headingClassName="max-w-233 leading-none md:text-4xl"
       headingId="auth-hero-heading"
-      headingRowClassName="mt-5 flex items-end justify-between gap-x-12 xl:flex-col xl:items-start xl:gap-y-8"
       illustration={<HeroAnimation description={authPageContent.hero.illustrationDescription} />}
-      illustrationClassName="mt-12 overflow-hidden md:mt-10"
-      logos={LOGOS}
-      logosClassName="mt-14 lg:mt-12 md:mt-10"
+      illustrationClassName="overflow-hidden"
       logosDataFigmaNodeId="2131:7525"
       testIdPrefix="auth"
     />
