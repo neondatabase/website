@@ -2,10 +2,10 @@
   title: 'LuBot'
   isFeatured: false
   logo:
-    mediaItemUrl: ''
+    mediaItemUrl: '/images/case-studies/lubot.svg'
     mediaDetails:
-      width: 0
-      height: 0
+      width: 72
+      height: 48
   quote: 'It took six days to go from zero to isolated Postgres per tenant, provisioned the moment someone pays. A traditional Postgres setup would have been a full quarter of work.'
   author:
     name: 'Lubo Bali'
