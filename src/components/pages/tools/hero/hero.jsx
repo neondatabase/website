@@ -31,7 +31,7 @@ const TOOLS = [
         ],
       },
     ],
-    href: '/docs/postgresql/postgres-upgrade',
+    href: `${LINKS.labs}/assess`,
     action: 'Run an assessment',
   },
   {
@@ -53,13 +53,13 @@ const TOOLS = [
         ],
       },
     ],
-    href: LINKS.migrationIntro,
+    href: `${LINKS.labs}/migrate`,
     action: 'Plan your migration',
   },
 ];
 
 const Hero = () => (
-  <section className="pt-40 safe-paddings xl:pt-36 lg:pt-16 md:pt-12">
+  <section className="hero pt-40 safe-paddings xl:pt-36 lg:pt-16 md:pt-12">
     <Container size="1344">
       <SectionLabel theme="white">Neon Tools</SectionLabel>
       <h1 className="mt-5 max-w-208 text-[4.5rem] leading-none tracking-tighter text-pretty xl:text-[4rem] lg:max-w-180 lg:text-[3.5rem] md:text-[2.5rem]">
@@ -76,7 +76,14 @@ const Hero = () => (
             key={title}
           >
             <div className="border-b border-gray-new-20 bg-gray-new-8/80 px-8 pt-8 pb-9 md:p-6">
-              <Image className="size-14" src={icon} width={56} height={56} alt="" loading="eager" />
+              <Image
+                className="size-14 md:size-12"
+                src={icon}
+                width={56}
+                height={56}
+                alt=""
+                loading="eager"
+              />
               <h2 className="mt-7 text-[2rem] leading-tight tracking-tighter text-pretty text-white lg:text-[1.75rem]">
                 {title}
               </h2>
@@ -106,7 +113,7 @@ const Hero = () => (
                 ))}
               </div>
               <div className="mt-auto pt-14 md:pt-9">
-                <Button size="new" theme="white-filled" to={href}>
+                <Button size="new" theme="white-filled" to={href} isExternal>
                   {action}
                 </Button>
               </div>

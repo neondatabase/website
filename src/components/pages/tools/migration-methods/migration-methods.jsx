@@ -11,21 +11,21 @@ import LINKS from 'constants/links';
 const METHODS = [
   {
     title: 'Import Data Assistant',
-    action: 'Start',
+    action: 'Open Neon Console',
     href: `${LINKS.console}/app/projects`,
     docs: '/docs/import/import-data-assistant',
   },
   {
     title: 'pg_dump + pg_restore',
-    action: 'Open Neon Console',
-    href: LINKS.console,
-    docs: '/docs/import/migrate-from-postgres',
+    action: 'Start',
+    href: `${LINKS.labs}/migrate/dump-restore`,
+    docs: '/docs/postgresql/postgres-upgrade',
   },
   {
     title: 'Logical replication',
     action: 'Start',
-    href: '/docs/guides/logical-replication-guide#replicate-data-to-neon',
-    docs: '/docs/guides/logical-replication-guide',
+    href: `${LINKS.labs}/migrate/replication`,
+    docs: '/docs/guides/logical-replication-neon-to-neon',
   },
 ];
 
@@ -127,6 +127,7 @@ const MigrationMethods = () => {
                           size="sm-new"
                           theme="outlined"
                           to={href}
+                          isExternal
                           aria-label={`${action}: ${title}`}
                         >
                           {action}

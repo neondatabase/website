@@ -3,6 +3,7 @@ import MigrationMethods from 'components/pages/tools/migration-methods';
 import UpgradeAssessment from 'components/pages/tools/upgrade-assessment';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
+import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -20,7 +21,8 @@ const ToolsPage = () => (
       title="Ready to move your database forward?"
       description="Assess your next Postgres upgrade or find the migration path that best fits your database and workload."
       buttonText="Explore Neon tools"
-      buttonUrl="#neon-tools"
+      buttonUrl={LINKS.labs}
+      isExternal
     />
   </Layout>
 );
