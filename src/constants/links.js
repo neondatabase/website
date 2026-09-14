@@ -31,6 +31,7 @@ export default {
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
   autoscalingReport: '/autoscaling-report',
+  tools: '/tools',
 
   // Docs
   docs: '/docs',
