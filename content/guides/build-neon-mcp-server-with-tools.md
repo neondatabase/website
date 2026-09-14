@@ -4,7 +4,7 @@ subtitle: "Learn how to expose Neon operations as tools in your own agent runtim
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-04T00:00:00.000Z'
-updatedOn: '2026-09-14T06:45:29.767Z'
+updatedOn: '2026-09-14T06:47:49.039Z'
 ---
 
 If you're embedding Neon operations into your own agent runtime, you need a way to expose them as tools: an MCP server for your team, an agent built with a framework like Mastra or Eve, or a dev tool that resets test data. The Model Context Protocol (MCP) lets you publish a catalog of tools with input validation, approval metadata, and auto-pagination for lists. You can then connect your agent to the catalog over stdio or HTTP.
@@ -20,7 +20,7 @@ Choose the approach that fits your workflow:
 | Hosted Neon MCP Server                        | Connect your own agent to Neon       | Full catalog with 19 workflow plus 85 API tools, OAuth, readonly mode, and project scoping. No code to maintain. |
 | Custom server with `@neon/tools` (this guide) | Embed Neon tools in your own runtime | Subset catalog, project injection, custom names and descriptions, logging, and multi-tenant HTTP.                |
 
-In this tutorial, you'll build a minimal MCP server with five project and branch tools, run it over stdio, and connect it to Claude Code. You'll then customize it with project injection, custom names and descriptions, and logging, before serving the same catalog remotely over HTTP so multiple agents can call it with their own credentials. The same pattern scales when you add snapshots, endpoints, auth, storage, and functions that the `@neon/tools` package already exposes.
+In this tutorial, you'll build a minimal MCP server with five project and branch tools, run it over stdio, and connect it to Claude Code. You'll then customize it with project injection, custom names and descriptions, and logging. Finally, you'll serve the same catalog remotely over HTTP so multiple agents can call it with their own credentials. The same pattern scales when you add snapshots, endpoints, auth, storage, and functions that the `@neon/tools` package already exposes.
 
 ## How credentials flow
 
@@ -214,7 +214,7 @@ Create `.mcp.json` in your project root:
 
 > Replace `/absolute/path/to/neon-custom-mcp/src/index.ts` with the absolute path to your `src/index.ts` file, and `your_neon_api_key` with your Neon API key.
 
-Run `claude` in your project directory and select "Use this MCP server" when prompted. You should see the following output:
+Run `claude` in your project directory and select **Use this MCP server** when prompted. You should see the following output:
 
 ```bash
 $ claude
@@ -428,7 +428,11 @@ createServer((req, res) => {
 }).listen(3000, "127.0.0.1");
 ```
 
-Here, `createNeonTools()` takes no `apiKey`. A credential is only needed when a tool executes, and that credential arrives per request. This example trusts any bearer token and passes it straight through to Neon, where an invalid token fails with an API error. In a real deployment, verify the token yourself before setting `req.auth`, for example by looking it up in your session store, so only your application's users can reach the handler.
+Here, `createNeonTools()` takes no `apiKey`. A credential is only needed when a tool executes, and that credential arrives per request. This example trusts any bearer token and passes it straight through to Neon, where an invalid token fails with an API error.
+
+<Admonition type="important" title="Verify tokens in production">
+In a real deployment, verify the token yourself before setting `req.auth`, for example by looking it up in your session store, so only your application's users can reach the handler.
+</Admonition>
 
 ### Test the remote server
 
@@ -495,13 +499,17 @@ If either client fails to connect, check the server logs for the request: a miss
 
 ### Deploy it
 
-The handler is stateless and scales horizontally. Deploy the same file anywhere Node runs: a container, a serverless platform, or a VPC service. Keep the server behind TLS and mount the token verification in front of the handler; the handler itself validates neither tokens nor headers.
+The handler is stateless and scales horizontally. Deploy the same file anywhere Node runs: a container, a serverless platform, or a VPC service.
+
+<Admonition type="warning" title="Secure the deployment">
+Keep the server behind TLS and mount the token verification in front of the handler; the handler itself validates neither tokens nor headers.
+</Admonition>
 
 </Steps>
 
 ## Conclusion
 
-You built a custom Neon MCP server, both locally over stdio and remotely over HTTP. You picked the SDK operations your agent requires, shaped how each tool appears to the model, kept naming, inputs, and logging in your own code, and deployed a credential-free server where each client brings its own key. Reach for this pattern when the hosted server's fixed catalog doesn't fit and you're comfortable owning the auth layer yourself: a team exposing only the few operations its workflow needs, or a runtime that already has its own user model and just needs Neon operations behind it. If you need Neon-issued tokens and per-user project access without building that layer, the hosted [Neon MCP Server](/docs/ai/neon-mcp-server) is the better fit.
+You built a custom Neon MCP server, both locally over stdio and remotely over HTTP. You picked the SDK operations your agent requires, shaped how each tool appears to the model, kept naming, inputs, and logging in your own code, and deployed a credential-free server where each client brings its own key. Reach for this pattern when the hosted server's fixed catalog doesn't fit and you're comfortable owning the auth layer yourself. For example: a team exposing only the few operations its workflow needs, or a runtime that already has its own user model and needs Neon operations behind it. If you need Neon-issued tokens and per-user project access without building that layer, the hosted [Neon MCP Server](/docs/ai/neon-mcp-server) is the better fit.
 
 From here you can add snapshots, endpoints, Data API config, Functions, Object Storage, or Managed Better Auth by extending the `tools` array. The complete selector list is exported as `toolIds` from `@neon/tools` (see the [`toolIds` source](https://github.com/neondatabase/neon-pkgs/blob/main/packages/tools/src/lib/ergonomic/ids.ts)), and adapter examples are in the [`@neon/tools` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools).
 
