@@ -31,6 +31,7 @@ export const STATIC_MD_PATHS = [
   '/index.md',
   '/pricing.md',
   '/prompts/astro-serverless-prompt.md',
+  '/prompts/branch-everything-preview-environments-prompt.md',
   '/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md',
   '/prompts/connection-issues-prompt.md',
   '/prompts/consumption-api-prompt.md',
