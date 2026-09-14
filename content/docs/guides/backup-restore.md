@@ -10,7 +10,7 @@ summary: >-
   $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
   limit.
 enableTableOfContents: true
-updatedOn: '2026-09-01T14:50:06.167Z'
+updatedOn: '2026-09-11T12:15:20.212Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -415,6 +415,8 @@ Manual and scheduled snapshots expire on different rules:
 
 - **Scheduled snapshots** are kept for 35 days unless you set a shorter retention, and 35 days is also the maximum. The Console shows this per frequency as 35 days, 5 weeks, or 1 month.
 - **Manual snapshots** never expire unless you give them an expiration, which has no maximum. Backup schedule retention settings do not apply to them.
+
+While a branch has an active snapshot schedule, its most recent scheduled snapshot is preserved rather than deleted, even if it reaches its retention deadline, so a scheduled branch always keeps at least its latest scheduled snapshot. Older scheduled snapshots and manual snapshots follow the rules above. Turning off the schedule returns the latest snapshot to the standard expiry path.
 
 You can adjust retention at any time by editing the schedule. Shorter retention periods help manage storage. On paid plans, the per-plan snapshot limit applies only to manual snapshots; scheduled backup snapshots do not count. Deleted snapshots cannot be recovered.
 
