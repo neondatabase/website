@@ -43,7 +43,7 @@ describe('with-an-agent quickstart content contract', () => {
     expect(page).not.toContain('Neon Postgres');
   });
 
-  it('keeps exactly three independent capability prompts in Add more to your backend', () => {
+  it('keeps exactly four independent capability prompts in Add more to your backend', () => {
     const addMore = section(page, 'Add more to your backend', 'Try changes safely with branching');
     const promptLabels = [...addMore.matchAll(/filename="Prompt: ([^"]+)"/g)].map(
       ([, label]) => label
@@ -64,8 +64,16 @@ describe('with-an-agent quickstart content contract', () => {
     expect(addMore).toContain(
       '**Add [AI Gateway](/docs/ai-gateway/overview)** to generate an AI summary for every post:'
     );
-    expect(promptLabels).toEqual(['add sign-in', 'save posts as files', 'add AI summaries']);
-    expect(promptBodies).toHaveLength(3);
+    expect(addMore).toContain(
+      '**Add [Functions](/docs/compute/functions/overview)** to show a featured post of the day:'
+    );
+    expect(promptLabels).toEqual([
+      'add sign-in',
+      'save posts as files',
+      'add AI summaries',
+      'add featured post of the day',
+    ]);
+    expect(promptBodies).toHaveLength(4);
     expect(addMore).toContain(
       'Update neon.ts to declare Managed Better Auth, then run neon deploy to apply and provision it.'
     );
@@ -74,6 +82,9 @@ describe('with-an-agent quickstart content contract', () => {
     );
     expect(addMore).toContain(
       'Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it.'
+    );
+    expect(addMore).toContain(
+      'Declare the Function and its daily schedule in neon.ts, then run neon deploy to apply and provision it.'
     );
     expect(addMore).not.toContain('branch');
     expect(promptBodies.every((body) => !body.includes('`'))).toBe(true);

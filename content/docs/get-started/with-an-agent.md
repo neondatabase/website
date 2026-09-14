@@ -4,10 +4,11 @@ subtitle: Connect Neon to your agent, then build and grow your app from prompts
 summary: >-
   Connect your AI coding assistant to Neon with one command, then send a single
   prompt that builds a public blog with seeded posts and a publish form.
-  Includes the key files to expect, three service follow-up prompts, and a
-  hands-on Neon branching demo.
+  Includes the key files to expect, four service follow-up prompts (auth,
+  storage, AI summaries, and a scheduled featured post), and a hands-on Neon
+  branching demo.
 enableTableOfContents: true
-updatedOn: '2026-09-11T15:25:18.000Z'
+updatedOn: '2026-09-14T13:20:42.599Z'
 ---
 
 Connect your AI coding agent to Neon once, send it one prompt, and you'll have a running Next.js app backed by Lakebase Postgres. Your agent uses the [Neon MCP server](/docs/ai/neon-mcp-server) and [agent skills](/docs/ai/agent-skills) to create the table, run the SQL, and seed the data, so you watch it work instead of copy-pasting code.
@@ -144,6 +145,12 @@ Save each post as a Markdown file in Neon Object Storage and show a Download lin
 
 ```text shouldWrap filename="Prompt: add AI summaries"
 Generate a short summary or excerpt from each post body using Neon AI Gateway, store it in Postgres, and display it on the post. Update neon.ts to declare AI Gateway, then run neon deploy to apply and provision it. If the request is rejected because AI Gateway needs a paid Neon plan, tell me to upgrade rather than working around it.
+```
+
+**Add [Functions](/docs/compute/functions/overview)** to show a featured post of the day:
+
+```text shouldWrap filename="Prompt: add featured post of the day"
+Build a scheduled Neon Function that runs once a day, picks one published post as the featured post of the day chosen deterministically from the current date so it stays stable for the whole day, and shows a "Featured today" card at the top of the blog. Declare the Function and its daily schedule in neon.ts, then run neon deploy to apply and provision it.
 ```
 
 ## Try changes safely with branching
