@@ -4,7 +4,7 @@ subtitle: "Learn how to expose Neon operations as tools in your own agent runtim
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-04T00:00:00.000Z'
-updatedOn: '2026-09-14T06:47:49.039Z'
+updatedOn: '2026-09-14T06:50:40.725Z'
 ---
 
 If you're embedding Neon operations into your own agent runtime, you need a way to expose them as tools: an MCP server for your team, an agent built with a framework like Mastra or Eve, or a dev tool that resets test data. The Model Context Protocol (MCP) lets you publish a catalog of tools with input validation, approval metadata, and auto-pagination for lists. You can then connect your agent to the catalog over stdio or HTTP.
@@ -473,9 +473,9 @@ claude mcp list
 </TabItem>
 <TabItem>
 
-Add a remote entry to `opencode.json`:
+Add a remote entry to `opencode.jsonc`:
 
-```json filename="opencode.json"
+```json filename="opencode.jsonc"
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
