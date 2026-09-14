@@ -19,8 +19,6 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
-        - title: Tour the Neon backend
-          slug: get-started/backend-overview
         - title: Tour the Neon Console
           slug: get-started/signing-up
     - section: Frontend & Frameworks
@@ -219,6 +217,8 @@
     - section: Backend primitives
       icon: book
       items:
+        - title: The Neon backend
+          slug: concepts/backend-overview
         - title: The object model
           slug: concepts/the-object-model
 
