@@ -1160,15 +1160,15 @@ function buildTests() {
 
   // ── 11. redirectFrom for .md URLs ─────────────────────────────────────
   // A moved doc's .md URL must 308 to the target .md, matching the HTML redirect
-  // (see src/proxy.js). /docs/cli/login is a redirectFrom of content/docs/cli/auth.md.
+  // (see src/proxy.js). /docs/cli/auth is a redirectFrom of content/docs/cli/login.md.
 
   add(
     'redirectFrom .md',
-    '/docs/cli/login.md',
+    '/docs/cli/auth.md',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth.md'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login.md'),
     ],
     { note: 'redirectFrom source .md → 308 to target .md' }
   );
@@ -1177,11 +1177,11 @@ function buildTests() {
   // variant did not displace the original redirect).
   add(
     'redirectFrom HTML',
-    '/docs/cli/login',
+    '/docs/cli/auth',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login'),
     ],
     { note: 'redirectFrom source → 308 to target' }
   );
