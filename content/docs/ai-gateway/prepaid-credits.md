@@ -6,7 +6,7 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-09-11T15:38:26.118Z'
+updatedOn: '2026-09-14T15:00:46.877Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -54,6 +54,8 @@ Buying credits is a Neon Console flow:
 4. Confirm the purchase. Neon applies a **one-time charge** to the payment card
    already on file for your organization.
 
+![AI Gateway credits purchase modal with preset and custom amounts](/docs/ai-gateway/ai-gateway-add-credits-modal.png)
+
 Credits post to your balance promptly after the charge succeeds. The purchase
 appears in your credit history as **Manual purchase**, with the date and amount.
 
@@ -70,6 +72,8 @@ card shows:
 - **Credits remaining**: your organization's current credit balance.
 - **Credits added in last 30 days**: a history panel that lists each entry's date,
   source, and amount, plus the total credits added during the period.
+
+![AI Gateway credits balance and credits added in the last 30 days](/docs/ai-gateway/ai-gateway-credits-balance.png)
 
 The balance is shown in **whole cents**, so small or occasional requests might not
 visibly change it even though their metered usage still draws down the balance.
