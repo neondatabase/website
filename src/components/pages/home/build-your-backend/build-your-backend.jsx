@@ -5,8 +5,8 @@ import BackendServices from './services';
 
 const SERVICE_ITEMS = [
   {
-    title: 'Postgres Database',
-    description: 'Serverless Postgres that scales and branches with your app.',
+    title: 'Lakebase Postgres',
+    description: 'Serverless database that scales and branches with your app.',
     videoBase: 'postgres-database',
     version: '20260813-3',
     aspectRatio: 'aspect-588/580',
@@ -15,7 +15,7 @@ const SERVICE_ITEMS = [
   },
   {
     title: 'Authentication',
-    description: 'Managed auth with users and sessions stored in Postgres.',
+    description: 'Fully-managed user auth in every database for free, built on Better Auth.',
     videoBase: 'authentication',
     version: '20260821',
     aspectRatio: 'aspect-590/440',
@@ -72,9 +72,10 @@ const BuildYourBackend = () => (
           className="max-w-296 min-w-0 indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-white xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[2rem]"
           id="build-your-backend-heading"
         >
-          <span>Backend primitives for software 3.0. </span>
+          <span>Neon is a complete backend platform. </span>
           <span className="text-gray-new-50">
-            The building blocks agents need to ship apps, with a Postgres foundation.
+            Each service is built on industry-standard technology: Zero lock-in, familiar to agents,
+            and continuously developed.
           </span>
         </h2>
       </div>
