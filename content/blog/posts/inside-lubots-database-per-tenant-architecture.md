@@ -14,8 +14,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-lubots-database-per-tenant-architecture/cover.jpg
+  alt: "Inside LuBot's database-per-tenant architecture"
 isFeatured: false
 seo:
   title: "Inside LuBot's database-per-tenant architecture - Neon"
@@ -24,7 +24,7 @@ seo:
   noindex: false
   ogTitle: "Inside LuBot's database-per-tenant architecture - Neon"
   ogDescription: One solo founder, the Neon API, six days = a scalable multi-tenant setup
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-lubots-database-per-tenant-architecture/social.jpg
 ---
 
 <blockquote>
@@ -33,7 +33,7 @@ seo:
 
 [LuBot](https://lubot.ai) is a chat product for business analytics [built by a solo founder](https://www.linkedin.com/in/lubo-bali/). It allows users to ask questions in plain English about their data while pulling info from their portfolio and stocks, website traffic, and files such as Excel spreadsheets or PDFs.
 
-**[ADD IMAGE 1]**
+![LuBot interface showing portfolio exposure analysis and tools for portfolio, file, and website data](https://cdn.neonapi.io/public/images/pages/blog/inside-lubots-database-per-tenant-architecture/image-1.jpg)
 
 Right since it first started, LuBot was built as a multi-tenant SaaS:
 
@@ -91,7 +91,7 @@ What makes this architecture doable in Neon is not only the ability to manage br
 
 Each tenant compute can autoscale. In LuBot, the most common configuration is a 0.25 CU active floor and a 4 CU burst ceiling. After 300 seconds without activity, the compute suspends. LuBot stops paying for compute while it is suspended, though storage remains billed. That combination is what makes a database-per-tenant design viable on a bootstrap budget.
 
-**[ADD IMAGE 2]**
+![Neon Console showing LuBot tenant branches with independent autoscaling computes](https://cdn.neonapi.io/public/images/pages/blog/inside-lubots-database-per-tenant-architecture/image-2.jpg)
 
 ## Tips on pooled connections, search_path, and pool leaks
 
