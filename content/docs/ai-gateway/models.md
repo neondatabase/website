@@ -7,7 +7,7 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-10T10:25:32.615Z'
+updatedOn: '2026-09-15T02:51:38.578Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -74,7 +74,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Meta, Alibaba, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                                        |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For some models, confirmed on Gemini 3.x (`gemini-3-5-flash`, `gemini-3-1-pro`) and Claude 5 (`claude-sonnet-5`, `claude-opus-5`, `claude-fable-5`), it's an array of typed content blocks instead (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`). A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+For most models, `message.content` in a chat completions response is a plain string. For Claude 5 (`claude-sonnet-5`, `claude-opus-5`, `claude-fable-5`), it's an array of typed content blocks instead (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`). A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
 
 ```typescript
 const { content } = response.choices[0].message;
