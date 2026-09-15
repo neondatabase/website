@@ -2,8 +2,8 @@ const objectStoragePageContent = {
   slug: 'object-storage',
   pageLabel: 'Object Storage',
   hero: {
-    label: 'Object storage',
-    title: 'S3-compatible object storage, built into the Neon backend',
+    label: 'Neon Object Storage',
+    title: 'Files that branch with your Neon database',
     illustrationDescription:
       'Creating a Neon preview branch forks the Postgres database and its S3-compatible object storage together, including tables, data, files, and assets.',
     primaryAction: { label: 'Start building', linkKey: 'signup' },
@@ -17,7 +17,7 @@ const objectStoragePageContent = {
       {
         id: 's3-compatible',
         label: 'S3 compatible',
-        title: 'Use the S3 tools you already know',
+        title: 'Keep your stack',
         description:
           'boto3, the AWS SDK, and the CLI work with Neon Object Storage out of the box. Swap the endpoint and keep your existing code.',
       },
@@ -38,7 +38,7 @@ const objectStoragePageContent = {
     ],
   },
   isolatedEnvironments: {
-    title: 'Isolated files for every environment.',
+    title: 'Test on real environments.',
     highlightedTitle:
       'On Neon, a branch forks Postgres and your files together, with nothing duplicated upfront.',
     items: [
@@ -63,8 +63,8 @@ const objectStoragePageContent = {
     ],
   },
   configuration: {
-    label: 'Lakebase Architecture',
-    title: 'Declare your files alongside Postgres and deploy them together from one config.',
+    label: 'Agent-first',
+    title: 'Ask your agent: deploy Postgres and files via the Neon backend',
     filename: 'neon.ts',
     code: `import { defineConfig } from "@neon/config/v1";
 
@@ -88,9 +88,8 @@ export default defineConfig({
           'Run <code>neon deploy</code> to provision the bucket and automatically pull the required S3 variables into your <code>.env.local</code>.',
       },
       {
-        title: 'Branch together',
-        description:
-          'Child branches inherit the bucket with the database, keeping files isolated and aligned with each environment.',
+        title: 'Agent tools',
+        description: 'Agents are a first-class interface through Neon’s API, CLI, and MCP server.',
       },
     ],
   },

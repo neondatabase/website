@@ -91,7 +91,7 @@ describe('backend platform page Markdown', () => {
   it('renders Object Storage config, FAQ, and matching shared content', () => {
     const markdown = renderObjectStorageMarkdown(LINKS);
 
-    expect(markdown).toContain('# S3-compatible object storage, built into the Neon backend');
+    expect(markdown).toContain('# Files that branch with your Neon database');
     expect(markdown).toContain('[Read the docs](https://neon.com/docs/storage/overview)');
     expect(markdown).toContain('```typescript\nimport { defineConfig }');
     expect(markdown).toContain('uploads: {}');
@@ -167,7 +167,7 @@ describe('backend platform page Markdown', () => {
       '# Call the latest models'
     );
     expect(await fs.readFile(path.join(outputDir, 'object-storage.md'), 'utf8')).toContain(
-      '# S3-compatible object storage'
+      '# Files that branch with your Neon database'
     );
     expect(await fs.readFile(path.join(outputDir, 'auth-page.md'), 'utf8')).toContain(
       '# Better Auth that branches, managed by Neon'
