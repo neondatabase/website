@@ -153,11 +153,12 @@ const renderBackedBy = ({ label, title, highlightedTitle, trustedByLabel, metric
     ...quotes.map(({ text, author, post }) => `#### ${author}\n\n> ${text.join('')}\n> — ${post}`),
   ].join('\n\n');
 
-const renderSharedSections = (links) => {
+const renderSharedSections = (links, { backendServices: backendServicesOverride } = {}) => {
   const { backendServices, builtForAgents, backedBy, cta } = sharedBackendPlatformContent;
+  const services = { ...backendServices, ...backendServicesOverride };
 
   return [
-    renderBackendServices(backendServices),
+    renderBackendServices(services),
     renderBuiltForAgents(builtForAgents),
     renderBackedBy(backedBy),
     [
@@ -214,7 +215,7 @@ const renderFunctionsMarkdown = (links) => {
       return [`### ${title}`, description];
     }),
     renderFaq(faqItems),
-    renderSharedSections(links),
+    renderSharedSections(links, functionsPageContent),
     renderFeedbackFooter(functionsPageContent.slug),
   ];
 

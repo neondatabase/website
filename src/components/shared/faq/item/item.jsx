@@ -31,7 +31,8 @@ const variants = {
     item: 'border-gray-new-70',
     title: 'text-black-pure font-normal',
     icon: 'border-gray-new-40 size-2.25',
-    content: 'text-gray-new-20',
+    content:
+      'text-gray-new-20 [&_code]:my-0 [&_code]:rounded-sm [&_code]:bg-transparent [&_code]:px-0 [&_code]:py-0 [&_code]:font-medium [&_a]:text-black-pure',
   },
 };
 

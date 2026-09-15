@@ -65,7 +65,8 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('## Backend compute');
     expect(markdown).toContain('### Declared in `neon.ts`');
     expect(markdown).toContain('## Your questions, answered');
-    expect(markdown).toContain('## Built for agents, not just developers.');
+    expect(markdown).toContain('## Build for agents and the developers behind them.');
+    expect(markdown).toContain('Your functions branch with everything else.');
     expect(markdown).toContain('[Apply now](https://neon.com/contact-sales)');
     expect(markdown).not.toMatch(/<\/?(?:p|strong|code)>/);
   });
@@ -80,7 +81,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('| Released |');
     expect(markdown).toContain('Inference is free during the private preview.');
     expect(markdown).toContain('## Compatibility');
-    expect(markdown).toContain('## Trusted at scale.');
+    expect(markdown).toContain('## Backed by giants.');
   });
 
   it('writes both mirrors without deleting other generated Markdown', async () => {

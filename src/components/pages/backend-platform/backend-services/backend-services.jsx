@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { heroServiceItems } from 'components/pages/home/hero/hero';
 import HeroServices from 'components/pages/home/hero/hero-services';
 import Container from 'components/shared/container';
@@ -39,12 +41,11 @@ const serviceItems = heroServiceItems.map((item) => ({
   ...VIDEO_META[item.videoBase],
 }));
 
-const BackendServices = () => (
+const BackendServices = ({ title = backendServices.title }) => (
   <section className="backend-services bg-gray-new-10 pt-40 safe-paddings pb-20 xl:pt-32 xl:pb-16 lg:pt-24 lg:pb-12 md:pt-20 md:pb-10">
     <Container size="1600">
       <h2 className="max-w-275 text-[2.75rem] leading-dense tracking-tighter xl:max-w-240 xl:text-[2.25rem] lg:max-w-190 lg:text-[2rem] md:text-[1.75rem]">
-        {backendServices.title}{' '}
-        <span className="text-gray-new-50">{backendServices.highlightedTitle}</span>
+        {title} <span className="text-gray-new-50">{backendServices.highlightedTitle}</span>
       </h2>
       <div className="mt-18 md:mt-14">
         <HeroServices
@@ -58,5 +59,9 @@ const BackendServices = () => (
     </Container>
   </section>
 );
+
+BackendServices.propTypes = {
+  title: PropTypes.string,
+};
 
 export default BackendServices;

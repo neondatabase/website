@@ -4,9 +4,14 @@ import Quotes from 'components/pages/home/backed-by/quotes';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
+import databricksIcon from 'icons/home/databricks.svg';
 import bgNoise from 'images/pages/home/backed-by/bg-noise.jpg';
 
 const { backedBy } = sharedBackendPlatformContent;
+
+const METRIC_ICONS = {
+  databricks: databricksIcon,
+};
 
 const BackedBy = () => (
   <section
@@ -23,8 +28,17 @@ const BackedBy = () => (
           </h2>
 
           <ul className="mt-auto flex gap-x-24 xl:gap-x-16 lg:gap-x-8 md:mt-9 md:flex-col md:gap-y-7">
-            {backedBy.metrics.map(({ value, description }) => (
+            {backedBy.metrics.map(({ value, description, icon }) => (
               <li className="max-w-62.5" key={value}>
+                {icon && (
+                  <Image
+                    className="mb-5 size-8 xl:mb-4 lg:mb-3.5 lg:size-7 md:size-6"
+                    src={METRIC_ICONS[icon]}
+                    width={32}
+                    height={32}
+                    alt=""
+                  />
+                )}
                 <h3 className="text-[4.5rem] leading-dense tracking-tighter xl:text-[3.25rem] lg:text-[2.75rem]">
                   {value}
                 </h3>

@@ -9,7 +9,10 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.functions);
 
 const FunctionsPage = () => (
-  <BackendPlatformPage faqItems={functionsPageContent.faqItems}>
+  <BackendPlatformPage
+    faqItems={functionsPageContent.faqItems}
+    backendServicesTitle={functionsPageContent.backendServices.title}
+  >
     <Hero />
     <BackendCompute />
     <Branching />

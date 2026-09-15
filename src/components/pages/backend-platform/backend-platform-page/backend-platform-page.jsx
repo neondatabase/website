@@ -11,7 +11,7 @@ import LINKS from 'constants/links';
 
 const { cta, faqTitleLines } = sharedBackendPlatformContent;
 
-const BackendPlatformPage = ({ children, faqItems }) => (
+const BackendPlatformPage = ({ children, faqItems, backendServicesTitle }) => (
   <Layout
     className="bg-black-pure"
     headerClassName="h-15! lg:h-14!"
@@ -20,7 +20,7 @@ const BackendPlatformPage = ({ children, faqItems }) => (
   >
     {children}
     <Faq items={faqItems} titleLines={faqTitleLines} variant="light" />
-    <BackendServices />
+    <BackendServices title={backendServicesTitle} />
     <BuiltForAgents />
     <BackedBy />
     <CTANew
@@ -44,6 +44,7 @@ BackendPlatformPage.propTypes = {
       initialState: PropTypes.oneOf(['open', 'closed']),
     })
   ).isRequired,
+  backendServicesTitle: PropTypes.string,
 };
 
 export default BackendPlatformPage;

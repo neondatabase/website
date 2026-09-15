@@ -5,7 +5,7 @@ const aiGatewayModelsHighlightedTitleLines = [
   'Served with optimized performance',
   'via Databricks.',
 ];
-const builtForAgentsTitleLines = ['Built for agents,', 'not just developers.'];
+const builtForAgentsTitleLines = ['Build for agents and', 'the developers behind them.'];
 const faqTitleLines = ['Your questions,', 'answered'];
 
 const functionsPageContent = {
@@ -73,11 +73,14 @@ const functionsPageContent = {
       },
     ],
   },
+  backendServices: {
+    title: 'Your functions branch with everything else.',
+  },
   faqItems: [
     {
       question: 'What are Functions?',
       answer:
-        "<p>Neon Functions are serverless Node.js functions you deploy onto a Neon branch, in the same region as your <strong>Lakebase Postgres</strong> database. DATABASE_URL is injected automatically, along with <strong>AI Gateway</strong> and <strong>Object Storage</strong> credentials if you're using them, so a function reads process.env instead of assembling third-party accounts.</p>",
+        "<p>Neon Functions are serverless Node.js functions you deploy onto a Neon branch, in the same region as your Lakebase Postgres database. DATABASE_URL is injected automatically, along with AI Gateway and Object Storage credentials if you're using them, so a function reads process.env instead of assembling third-party accounts.</p>",
       initialState: 'open',
     },
     {
@@ -289,19 +292,23 @@ const sharedBackendPlatformContent = {
   },
   backedBy: {
     label: 'Backed by giants',
-    title: 'Trusted at scale.',
-    highlightedTitle: 'The numbers behind every project running on Neon.',
+    title: 'Backed by giants.',
+    highlightedTitle:
+      'First founded by Postgres hackers with decades of expertise, Neon is now part of the Databricks Platform.',
     trustedByLabel: 'Trusted by the best',
     metrics: [
       {
-        value: '60%',
-        description:
-          'Cheaper than running the same infrastructure yourself, once you factor in maintenance.',
+        value: 'Databricks',
+        description: 'Neon has been part of the Databricks Platform since May 2025.',
+        icon: 'databricks',
       },
       {
-        value: '>90%',
-        description:
-          'Success rate on operations run directly by agents, from provisioning to schema changes.',
+        value: '12M+',
+        description: 'Databases provisioned daily - built for scale and reliability.',
+      },
+      {
+        value: '40K+',
+        description: 'Databases provisioned daily by developers worldwide.',
       },
     ],
     quotes: [
@@ -343,7 +350,7 @@ const sharedBackendPlatformContent = {
     ],
   },
   cta: {
-    title: 'Building something ambitious?',
+    title: 'Talk to us.',
     description: 'Fill out a short form and we’ll get back to you within a few business days.',
     label: 'Get started',
     buttonText: 'Apply now',
