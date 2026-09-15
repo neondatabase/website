@@ -69,9 +69,9 @@ const AgentPlatform = () => (
           className="mt-9 bg-black-pure! font-medium hover:bg-gray-new-20! lg:mt-8 md:mt-7"
           size="new"
           theme="secondary"
-          to={LINKS.signup}
+          to={LINKS.pricing}
         >
-          Start Building for Free
+          View Pricing
         </Button>
       </div>
 
