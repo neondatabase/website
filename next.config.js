@@ -15,6 +15,31 @@ const defaultConfig = {
   },
   outputFileTracingIncludes: {
     '*': ['./public/**/*.svg', './public/**/*.md'],
+    // OG image routes run on the Node.js runtime and read these assets from disk at
+    // request time, so they must be traced into the serverless bundle. The fonts live
+    // under src/ (not traced by default) and the images are otherwise dropped by the
+    // ./public/** exclude above.
+    '/api/og': [
+      './src/fonts/esbuild/ESBuild-Medium.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+      './public/images/og-image/background.png',
+    ],
+    '/docs/og': [
+      './src/fonts/geist-mono/GeistMono-Regular.ttf',
+      './src/fonts/inter/Inter-Regular.ttf',
+      './public/images/og-image/logo.png',
+      './public/images/og-image/docs-background.jpg',
+    ],
+    // The blog `.md` route handler reads the blog snapshot from disk at request
+    // time (unlike the blog pages, which are statically generated at build).
+    // Its read path is dynamic (process.cwd() + join), so nft can't detect the
+    // dependency — trace the content in explicitly or the route 502s in prod.
+    '/blog/[slug]/md': [
+      './content/blog/posts/**/*.md',
+      './content/blog/authors/data.json',
+      './content/blog/categories/data.json',
+    ],
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -206,6 +231,43 @@ const defaultConfig = {
     }, []);
 
     return [
+      // Common paths from the logs with no page of their own; send them to the closest real page.
+      {
+        source: '/about',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/contact-sales',
+        permanent: true,
+      },
+      {
+        source: '/contact-us',
+        destination: '/contact-sales',
+        permanent: true,
+      },
+      {
+        source: '/leadership',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/people',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/our-team',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        // Legacy favicon path removed in #4345; redirect stale references to the current icon.
+        source: '/favicon/favicon.png',
+        destination: '/favicon/favicon.svg',
+        permanent: true,
+      },
       {
         source: '/guides/neondatabase-toolkit',
         destination: '/docs/reference/sdk',
@@ -2698,6 +2760,10 @@ const defaultConfig = {
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
         { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Unlinked community-guides index. The /guides catch-all would eat this
+        // without a beforeFiles identity rewrite; /docs/changelog/llms.txt is
+        // already covered by /docs/:path*/llms.txt above.
+        { source: '/guides/llms.txt', destination: '/guides/llms.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
         // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).

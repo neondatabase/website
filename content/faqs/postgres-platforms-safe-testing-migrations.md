@@ -48,7 +48,7 @@ A common pattern combining both:
 Restoring `main` in place overwrites the branch's current state. Writes made after the target timestamp are gone. If you might need them for forensics, branch to a new name from the timestamp instead of restoring in place.
 </Admonition>
 
-## What about protected branches
+## Protected branches
 
 On the Launch and Scale plans, mark `main` as a [protected branch](/docs/guides/protected-branches) to block accidental drops, restrict who can run destructive operations, and optionally require IP allowlisting (Scale only). Treat it like a protected Git branch in your CI/CD.
 
@@ -56,7 +56,7 @@ On the Launch and Scale plans, mark `main` as a [protected branch](/docs/guides/
 
 - **Amazon Aurora.** [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) gives you a writable copy-on-write copy of production data to test against. Rollback after a bad change uses [PITR](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html), which restores to a new cluster; you then swap connection strings.
 
-- **Amazon RDS for PostgreSQL.** No copy-on-write clone. Testing migrations against real data usually means snapshot-and-restore, which copies the full dataset to a new instance. PITR up to [35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html) is the rollback path, and again restores to a new instance.
+- **Amazon RDS for Postgres.** No copy-on-write clone. Testing migrations against real data usually means snapshot-and-restore, which copies the full dataset to a new instance. PITR up to [35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html) is the rollback path, and again restores to a new instance.
 
 - **Supabase.** [Preview branches](https://supabase.com/docs/guides/deployment/branching) let you run migrations on a separate Postgres environment, but [the preview is not seeded with production data](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). Rollback after a bad change uses daily backups or the [PITR add-on](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) (paid).
 

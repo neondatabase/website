@@ -4,16 +4,17 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  A Neon project is the top-level workspace that groups branches, databases,
-  roles, and computes. This page covers the full project lifecycle: create,
-  configure, and delete, via the Console or API. Use it when you need to set
-  project-level defaults such as compute autoscaling, history window for
-  instant restore and Time Travel, IP Allow rules, logical replication, or
-  project access. Deleted projects can be recovered within a 7-day
-  window using the CLI or API.
+  Storage is unlimited on paid plans: there's no hard per-branch size limit
+  and project storage grows with your usage. A Neon project is the top-level
+  workspace that groups branches,
+  databases, roles, and computes. This page covers the full project lifecycle: create, configure, and
+  delete, via the Console or API. Use it when you need to set project-level
+  defaults such as compute autoscaling, history window for instant restore and
+  Time Travel, IP Allow rules, logical replication, or project access. Deleted
+  projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -26,7 +27,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. When a branch reaches this limit, write performance drops, but you can still drop or delete data to reclaim space. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
+- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), there's no hard per-branch size limit**; your storage grows with your usage, and you pay only for the storage you use. The Free plan includes 0.5 GB per project, shared across all branches.
 
 ## Create a project
 
@@ -49,7 +50,7 @@ After creating a project, you are directed to the **Project Dashboard**.
 
 <TabItem>
 
-Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then create a project with `neon projects create`:
+Install the CLI with `npm i -g neon` and run `neon login` to log in. Then create a project with `neon projects create`:
 
 ```bash
 neon projects create --name myproject --region-id aws-us-east-2
@@ -87,7 +88,7 @@ The **Settings** page includes these sub-pages:
 - **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
 - **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
 - **Transfer**: Transfer your project from the current organization to another organization you belong to. Transferring a project out of an organization requires the **Admin** organization role.
-- **Delete**: Use with care! This action deletes your entire project and all its objects, and is irreversible.
+- **Delete**: Use with care. This action deletes your entire project and all its objects. You can recover it within seven days; after that, deletion is permanent.
 
 ### General project settings
 
@@ -439,7 +440,7 @@ After enabling logical replication, the next steps involve creating publications
 
 ### Delete a project
 
-Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+Deleting a project also deletes any computes, branches, databases, and roles that belong to the project. You can recover the project within seven days. After the recovery period ends, deletion is permanent.
 
 Deleting a project requires **Admin** access on that project, which every organization Admin has. A member granted Admin on a single project can delete that project. See [Per-project permissions](/docs/manage/user-permissions#per-project-permissions).
 
@@ -945,7 +946,7 @@ For attribute definitions, find the [Delete project](/docs/reference/api/project
 
 ## Recover a deleted project
 
-If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
+If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** restores the resources and settings listed below. Some integrations and Data API configuration require setup again after recovery.
 
 <Admonition type="note">
 The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.

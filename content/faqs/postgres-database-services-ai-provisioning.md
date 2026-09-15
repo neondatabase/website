@@ -57,10 +57,10 @@ For implementation patterns (storing per-session state, snapshotting knowledge g
 
 For an agent that creates databases on demand, two characteristics matter: how long a fresh database takes to come up, and what it costs to keep many of them around idle.
 
-- **Aurora Serverless v2**: provisions a cluster in minutes. Setting min ACU to 0 enables [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) on Aurora PostgreSQL 13.15+, 14.12+, 15.7+, or 16.3+, so idle clusters don't accrue compute charges. Storage is still billed even when paused.
-- **RDS for PostgreSQL**: provisions a DB instance in minutes via `aws rds create-db-instance`. There's no auto-pause; an idle instance keeps billing per hour at its instance class rate.
+- **Aurora Serverless v2**: provisions a cluster in minutes. Setting min ACU to 0 enables [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) on Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+, so idle clusters don't accrue compute charges. Storage is still billed even when paused.
+- **RDS for Postgres**: provisions a DB instance in minutes via `aws rds create-db-instance`. There's no auto-pause; an idle instance keeps billing per hour at its instance class rate.
 - **Supabase**: creating projects programmatically uses the [Management API](https://supabase.com/docs/reference/api). Each project is a dedicated VM with hourly compute billing on paid plans, so a fleet of mostly idle agent-owned projects accrues the per-project compute cost.
 
-The fit for ephemeral, per-task databases depends on the model: Neon and Aurora Serverless v2 (with auto-pause on supported engine versions) can scale to zero so an unused database stops accruing compute (storage still bills). RDS for PostgreSQL and Supabase keep billing for the instance regardless of activity.
+The fit for ephemeral, per-task databases depends on the model: Neon and Aurora Serverless v2 (with auto-pause on supported engine versions) can scale to zero so an unused database stops accruing compute (storage still bills). RDS for Postgres and Supabase keep billing for the instance regardless of activity.
 
 <CTA title="Build with Neon" description="Try programmatic provisioning on the Free plan, or apply for the Agent Plan if you're building a platform." buttonText="Apply" buttonUrl="https://neon.com/use-cases/ai-agents" />

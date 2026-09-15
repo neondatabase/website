@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services let you start free and scale to production without migrating to a different provider?"
-description: "Neon's Free, Launch, and Scale plans share the same lakebase architecture and connection strings. Upgrading raises limits and unlocks features without a data migration."
+description: "Neon's Free, Launch, and Scale plans share the same Lakebase Postgres architecture and connection strings. Upgrading raises limits and unlocks features without a data migration."
 date: 2026-04-24
 slug: postgres-services-free-to-production
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-github-actions-fresh-database-pull-requests
 ---
 
-Neon's three plans share the same lakebase architecture. Upgrading from the Free plan to the Launch plan to the Scale plan is a billing change, not a data migration. The connection string stays the same. The compute, storage layer, and Postgres version stay the same. What changes are the resource limits, the level of support, and access to compliance features.
+Neon's three plans share the same Lakebase Postgres architecture. Upgrading from the Free plan to the Launch plan to the Scale plan is a billing change, not a data migration. The connection string stays the same. The compute, storage layer, and Postgres version stay the same. What changes are the resource limits, the level of support, and access to compliance features.
 
 ## What you get on each plan
 
@@ -53,9 +53,9 @@ Run the [usage calculator](https://neon.com/docs/introduction/usage-calculations
 ## How this compares to other Postgres providers
 
 - **Supabase** has Free, Pro, Team, and Enterprise plans on the same platform. Upgrading is a plan change at the organization level, no migration. The notable Free-plan limitation: projects [pause after about a week of inactivity](https://supabase.com/docs/guides/troubleshooting/http-status-codes#540-project-paused), and you're capped at [two active free projects](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have).
-- **AWS RDS and Aurora** don't really have a "free plan" beyond the [12-month AWS Free Tier](https://aws.amazon.com/free/) for new accounts, which covers a single `db.t2.micro` (or t3/t4g.micro) instance for 750 hours/month for the first year. After that you're paying per instance-hour. There's no shared-architecture story; you pick an instance type and stay there.
+- **AWS RDS and Aurora** don't really have a "free plan." New accounts get sign-up credits on the [AWS Free Tier](https://aws.amazon.com/free/), and Aurora Postgres has a small standing allowance (4 ACUs and 1 GB per cluster, two clusters per account). RDS for Postgres has neither, so once the credits are gone you're paying per instance-hour. There's no shared-architecture story; you pick an instance type and stay there.
 - **Aurora Serverless v2** doesn't have a free plan. You pay per ACU-hour from the first query (down to zero ACU with [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), but there's still no included monthly allowance).
 
-Neon keeps the same lakebase architecture across the Free, Launch, and Scale plans, with a Free plan sized for a real low-traffic app and a path to usage-based pricing without changing the connection string. Supabase has a similar plan-to-plan upgrade shape; AWS expects you to think in instance sizes from day one.
+Neon keeps the same Lakebase Postgres architecture across the Free, Launch, and Scale plans, with a Free plan sized for a real low-traffic app and a path to usage-based pricing without changing the connection string. Supabase has a similar plan-to-plan upgrade shape; AWS expects you to think in instance sizes from day one.
 
 <CTA title="Start on the Free plan" description="Build on the same Postgres you'll run in production. Upgrade when you need higher limits." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

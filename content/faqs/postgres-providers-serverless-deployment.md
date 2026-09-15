@@ -17,7 +17,7 @@ Neon is a complete set of cloud backend primitives built around Lakebase Postgre
 
 ## What "serverless" means here
 
-The lakebase architecture separates storage from compute, so a database isn't tied to a fixed instance. A few things this changes:
+The Lakebase Postgres architecture separates storage from compute, so a database isn't tied to a fixed instance. A few things this changes:
 
 - **Autoscaling.** Compute moves between a minimum and maximum CU based on load. Up to 2 CU on the Free plan, up to 16 CU on the Launch and Scale plans (Scale also supports fixed sizes up to 56 CU).
 - **Scale to zero.** Compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query. The Free plan keeps the 5-minute timeout and can't disable it. The Launch plan defaults to 5 minutes and can disable scale to zero. The Scale plan is configurable from 1 minute to always-on. See [Scale to Zero](/docs/introduction/scale-to-zero).
@@ -48,11 +48,11 @@ That prints a Postgres connection string you can paste into `DATABASE_URL`. The 
 
 ## What you do manage
 
-Schema, queries, indexes, roles, and which extensions to enable. Neon supports the standard Postgres extensions library, including `pgvector`, `PostGIS`, and `pg_stat_statements`. See the [extension reference](/docs/extensions/pg-extensions).
+Schema, queries, indexes, roles, and which extensions to enable. Lakebase Postgres supports the standard Postgres extensions library, including `pgvector`, `PostGIS`, and `pg_stat_statements`. See the [extension reference](/docs/extensions/pg-extensions).
 
 ## How this differs from other "serverless" Postgres options
 
-| Capability         | Neon                                         | Aurora Serverless v2                                                                                                                 | RDS for PostgreSQL            | Supabase                                                                                                                                      |
+| Capability         | Neon                                         | Aurora Serverless v2                                                                                                                 | RDS for Postgres              | Supabase                                                                                                                                      |
 | ------------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | Scales to zero     | Yes, default after 5 min idle                | Yes, when [min ACU set to 0](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)      | No, instance always on        | No on paid plans; Free plan [pauses inactive projects](https://supabase.com/docs/guides/troubleshooting/http-status-codes#540-project-paused) |
 | Autoscaling        | Up to 2 CU (Free plan), 16 CU (Launch/Scale) | [Min/max ACU range](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html) per cluster | Manual resize, brief downtime | Manual via [compute add-ons](https://supabase.com/docs/guides/platform/compute-add-ons)                                                       |

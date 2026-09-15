@@ -35,7 +35,7 @@ When integrating Neon into your platform, we strongly recommend a **project-per-
 
 ### What is a project?
 
-In Neon, resources such as branches, databases, roles, and computes are organized within a Neon [project](/docs/concepts/the-object-model). When a user signs up with Neon directly, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration.
+In Neon, resources such as branches, databases, roles, computes, and backend services like object storage and functions are organized within a Neon [project](/docs/concepts/the-object-model). When a user signs up with Neon directly, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration.
 
 ### Why project-per-user?
 

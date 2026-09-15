@@ -241,8 +241,10 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
-      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
-      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      launch:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+      scale:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
     },
     {
       rows: '1',
@@ -273,7 +275,7 @@ export default {
         title: 'Public network transfer',
         subtitle: 'Egress',
       },
-      free: '5 GB included',
+      free: '5 GB per project included',
       launch: '500 GB per project included<span>then $0.10/GB</span>',
       scale: '500 GB per project included<span>then $0.10/GB</span>',
     },

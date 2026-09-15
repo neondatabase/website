@@ -21,7 +21,7 @@ A Neon [branch](/docs/introduction/branching) is a copy-on-write clone of anothe
 
 - A new dev branch is ready to query in seconds, regardless of database size
 - Storage on a child branch starts at $0 and grows only with writes on that branch
-- The parent (production or main) is untouched and unaffected
+- The parent (production or main) is unaffected
 
 Each developer can have their own branch, with their own connection string and their own compute. No more "did you run that migration on staging?"
 

@@ -13,7 +13,7 @@ This guide shows how to combine OpenCode’s GitHub Action with Neon’s instant
 
 ## Overview
 
-In this guide, you'll connect GitHub Actions, OpenCode, and Neon Database Branching to create a seamless workflow for AI-driven development. The high-level flow looks like this:
+In this guide, you'll connect GitHub Actions, OpenCode, and Neon Database Branching to create a workflow for AI-driven development. The high-level flow looks like this:
 
 ```mermaid
 flowchart TD
@@ -239,7 +239,7 @@ After setup is complete, you can trigger OpenCode from a GitHub issue comment an
 
 ## Conclusion
 
-AI coding agents are incredibly powerful, but their potential is often constrained by the environments they run in. By combining OpenCode with Neon Database Branching and GitHub Actions, you remove one of the biggest barriers to AI-driven development: safe access to stateful infrastructure.
+AI coding agents are often constrained by the environments they run in. By combining OpenCode with Neon Database Branching and GitHub Actions, you remove one of the biggest barriers to AI-driven development: safe access to stateful infrastructure.
 
 With a simple GitHub Action, a static CI runner becomes a fully capable, isolated development sandbox. This means you can confidently request complex, database-altering features directly from a GitHub Issue, knowing the AI has everything it needs to iteratively test, validate, and refine its changes without ever putting your production data at risk.
 

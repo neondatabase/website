@@ -68,7 +68,7 @@ Replace `your-neon-hostname.neon.tech`, `your_database_name`, `your_username`, a
 
 ## Database Design
 
-Let's create the database migrations for our job application form. We'll use separate tables for each section and leverage Postgres JSON columns for flexible data storage for additional information.
+Let's create the database migrations for our job application form. We'll use separate tables for each section and use Postgres JSON columns for flexible data storage for additional information.
 
 First, let's create the migration for the applicants table using the following `artisan` command:
 
@@ -450,7 +450,7 @@ The main thing to remember here is that with Folio, you don't need to manually d
 
 ## Building the Multi-Step Form with Volt
 
-Volt is a powerful addition to Laravel Livewire that allows you to build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt lets you define your component's state and validation rules directly in the view file, eliminating the need for a separate component class.
+Volt is an addition to Laravel Livewire that lets you build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt lets you define your component's state and validation rules directly in the view file, eliminating the need for a separate component class.
 
 Let's create Volt components for each step of our multi-step form.
 

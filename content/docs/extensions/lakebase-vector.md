@@ -6,10 +6,11 @@ summary: >-
   for fast approximate nearest-neighbor vector search. It requires no migration
   from pgvector — the same vector types, distance operators, and query syntax
   work unchanged. Use this page to enable the extension, create a lakebase_ann
-  index, configure build_mode, tune search with the lakebase_ann.probes and
-  lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
+  index, configure build_mode, tune search with the lakebase_ann.probes,
+  lakebase_ann.epsilon, and lakebase_ann.prefilter GUCs, and reference all
+  operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-09T10:20:49.000Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
@@ -62,33 +63,96 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 
 Set `build_mode` at index creation to control the accuracy/speed tradeoff:
 
-- `standard` (default): optimizes for recall. Use for most workloads.
-- `fast`: builds faster at lower recall. Use when build time matters more than search quality.
+- `standard` (default): balances recall and index build time. Use for most workloads.
+- `quality`: improves recall but takes longer to build.
 
 ```sql
-CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (build_mode = 'fast');
+CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
+WITH (build_mode = 'quality');
+```
+
+The `fast` build mode remains supported for backward compatibility.
+
+By default, `lakebase_ann` chooses lists based on the statistics of the table and the configuration of the index. Set `lists` to control the partition layout explicitly:
+
+```sql
+CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
+WITH (lists = '1000');
 ```
 
 Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
 
+Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of query speed. The default is `'auto'`. Test different values to meet your recall target.
+
+The shape of `probes` must match the shape of `lists`. Call `lakebase_ann_index_info` to find your `lists` array, then set one value for a one-level index or two comma-separated values for a two-level index:
+
+| `lists` from index info | `probes` to set |
+| :---------------------- | :-------------- |
+| `[]` (empty)            | `''`            |
+| `[222]`                 | `'22'`          |
+| `[3333, 33333]`         | `'33, 333'`     |
+
 <Admonition type="note">
-The `probes` and `epsilon` GUCs apply only once the index has built IVF lists, which happens above a corpus-size threshold. On a small dataset, `lakebase_ann` uses exact (flat) search instead: `lakebase_ann_index_info` returns empty `lists` and `default_probes`, `SET lakebase_ann.probes` fails with `usage: need 0 probes, but N provided`, and `epsilon` has no effect. This is expected, since the index is already returning exact results, so there is nothing to tune. These GUCs become relevant as your data grows and the index switches to IVF partitioning.
+On a small dataset, `lakebase_ann` uses exact (flat) search instead of IVF partitioning, and `lakebase_ann_index_info` returns empty `lists` and `default_probes`. In this case, leave `probes` set to `''`. When `lists` isn't empty, a `probes` value whose shape doesn't match `lists` causes an error.
 </Admonition>
 
-Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of speed.
-
 ```sql
+-- Check your index's lists array first
+SELECT lakebase_ann_index_info('items_embedding_ann');
+
+-- Then set probes to match the shape of lists.
+-- One-level index (single-value lists): set one value.
 SET lakebase_ann.probes TO '10';
+
+-- Two-level index: set two ascending comma-separated values, for example '10, 20'.
+-- Flat index (empty lists): leave probes set to ''.
+
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
 ```
 
-`lakebase_ann.epsilon` controls the re-ranking margin. The default value of `1.9` works well for most workloads.
+`lakebase_ann.epsilon` controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer. The default value of `'auto'` works well for most workloads. During flat search on a small dataset, `epsilon` still controls full-precision reranking.
+
+### Prefilter
+
+By default, Postgres applies non-vector filter conditions after the ANN index returns candidate rows. Enable `lakebase_ann.prefilter` to evaluate those conditions before full-precision distance reranking:
 
 ```sql
-SET lakebase_ann.epsilon TO '1.5';
+SET lakebase_ann.prefilter TO on;
+
+SELECT * FROM items
+WHERE id % 100 = 0
+ORDER BY embedding <-> '[3,1,2]'
+LIMIT 10;
 ```
 
+Prefiltering works best when the filter is cheap to evaluate and removes most rows. Leave it off for filters that match many rows or require expensive calculations, since evaluating the filter inside the index can add overhead.
+
 When you set these GUCs from application code, the `SET` and the query must run on the same session. With a connection pool or the [Neon serverless driver](/docs/serverless/serverless-driver), where each statement can use a different connection, issue both in a single transaction so the `SET` applies to the query.
+
+### Index build time
+
+Larger `shared_buffers` can significantly reduce index build time. Neon enables this optimization only on [larger computes](/docs/manage/computes#how-to-size-your-compute). Check the current value before optimizing an index build:
+
+```sql title="PostgreSQL"
+SHOW shared_buffers;
+```
+
+If `shared_buffers` is 1 GB or less, consider temporarily resizing to a larger compute before starting the index build.
+
+You can also speed up index creation by increasing the number of parallel workers.
+
+The `max_parallel_maintenance_workers` configuration parameter sets the maximum number of parallel workers that can be started by a single utility command such as `CREATE INDEX`.
+
+The `max_parallel_workers` configuration parameter sets the maximum number of workers that the compute can support for parallel operations. Values of `max_parallel_maintenance_workers` above this limit have no effect.
+
+The `max_worker_processes` configuration parameter sets the maximum number of background processes that the compute can support. Neon [manages this setting](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) based on compute size. Values of `max_parallel_workers` above this limit have no effect.
+
+```sql title="PostgreSQL"
+SHOW max_worker_processes;
+-- Set both values to the desired parallelism minus one.
+SET max_parallel_workers = 15;
+SET max_parallel_maintenance_workers = 15;
+```
 
 ### Concurrent index updates
 
@@ -149,15 +213,17 @@ The `halfvec`, `rabitq8`, and `rabitq4` families provide the same three metrics 
 
 ### Index options
 
-| Option       | Type   | Default      | Description                                                                                                                            |
-| :----------- | :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff at index build time. `'standard'` optimizes for recall; `'fast'` builds faster with lower recall. |
+| Option       | Type   | Default      | Description                                                                                                                                                                                                                                                                                              |
+| :----------- | :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff. Use `'quality'` for better recall at the cost of a longer index build. `'fast'` remains supported for backward compatibility.                                                                                                                                      |
+| `lists`      | string | `'auto'`     | Sets the IVF partition layout. With `'auto'`, the extension chooses a value based on the statistics of the table and the configuration of the index. Set a single integer such as `'1000'` for a one-level index, or two ascending comma-separated integers such as `'100, 1000'` for a two-level index. |
 
 ### Search parameters
 
-| GUC                    | Type    | Default | Description                                                                                              |
-| :--------------------- | :------ | :------ | :------------------------------------------------------------------------------------------------------- |
-| `lakebase_ann.probes`  | integer | not set | Number of IVF partitions to scan at query time. Higher values improve recall at the cost of query speed. |
-| `lakebase_ann.epsilon` | float   | `1.9`   | Re-ranking margin. Valid range: `0.0` to `4.0`.                                                          |
+| GUC                      | Type   | Default  | Description                                                                                                                                                                     |
+| :----------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `lakebase_ann.probes`    | string | `'auto'` | Number of IVF partitions to scan at each level. Higher values improve recall at the cost of query speed. The shape must match the `lists` array from `lakebase_ann_index_info`. |
+| `lakebase_ann.epsilon`   | string | `'auto'` | Controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer.                                                 |
+| `lakebase_ann.prefilter` | enum   | `off`    | Evaluates non-vector filters before full-precision distance reranking. Valid values are `on` and `off`. Best for cheap filters that remove most candidate rows.                 |
 
 <NeedHelp />

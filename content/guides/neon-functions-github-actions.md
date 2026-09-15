@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-18T17:01:39.853Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -23,8 +23,14 @@ You'll set up that automation with GitHub Actions and build a small API on Neon 
 Because the pipeline is just the [Neon CLI](/docs/cli) running in a CI job, the same recipe works in GitLab CI, CircleCI, Azure DevOps, or any other CI/CD system. The last section shows how to adapt it.
 
 <Admonition type="note" title="Neon Functions are in beta">
-Functions are currently available only in the **AWS US East (Ohio)** (`aws-us-east-2`) region, so create your Neon project there to follow along. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
+Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), so create your Neon project in one of these regions to follow along. Support is expanding toward all regions. Functions run JavaScript or TypeScript on the Node.js 24 runtime.
 </Admonition>
+
+<CopyPrompt
+  src="/prompts/neon-functions-github-actions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Prerequisites
 
@@ -34,7 +40,7 @@ Functions are currently available only in the **AWS US East (Ohio)** (`aws-us-ea
 4. **The Neon CLI**: Installed and authenticated:
    ```bash
    npm install -g neon@latest
-   neon auth
+   neon login
    ```
 
 ## Set up the project
@@ -46,18 +52,10 @@ mkdir neon-functions-api && cd neon-functions-api
 npm init -y
 ```
 
-Run the Neon CLI initialization command:
+Install the Neon agent skills so AI agents such as Claude Code and Cursor have the context to help you build and work with Neon. This function uses the **Neon** and **Neon Functions** skills:
 
 ```bash
-neon init
-```
-
-Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
-
-During initialization, the **Neon** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install them with:
-
-```bash
-npx skills add https://github.com/neondatabase/agent-skills --skill neon-functions
+neon skills -s neon -s neon-functions
 ```
 
 Link your local workspace to a Neon project:
@@ -66,7 +64,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), because Neon Functions are currently available only in this region during beta. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
 
 ```text
 $ neon link
@@ -84,7 +82,7 @@ INFO: Pulled 3 Neon variables into ~/neon-functions-api/.env.local: NEON_BRANCH,
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts — the source of the hello function.
+INFO: Created hello.ts, the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 ```
 

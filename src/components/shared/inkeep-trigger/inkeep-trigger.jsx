@@ -114,8 +114,8 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
       {!isNotFoundPage && (
         <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
       )}
-      <InkeepModalSearch {...searchModalProps} />
-      <InkeepModalChat {...chatModalProps} />
+      {isSearchOpen && <InkeepModalSearch {...searchModalProps} />}
+      {isChatOpen && <InkeepModalChat {...chatModalProps} />}
     </div>
   );
 };

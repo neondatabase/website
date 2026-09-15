@@ -13,11 +13,11 @@ nextLink:
   slug: managed-postgres-providers-rest-api-database-automation
 ---
 
-Point-in-time recovery on Neon is built into the storage layer, not bolted on as a backup product. Every project has a **history window**: the time range you can restore from. Instant restore works on **root branches** only. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
+Point-in-time recovery on Neon is built into the storage layer. Every project has a **history window**: the time range you can restore from. Instant restore works on **root branches** only. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
 
 ## How the history window works
 
-When you write to a branch on Neon, the storage layer keeps the older versions of the changed pages for the duration of the [history window](/docs/introduction/history-window). To restore, Neon reconstructs the database state at the timestamp you choose. There's no separate WAL archive to manage and no backup bucket to provision.
+When you write to a branch on Neon, the storage layer keeps the older versions of the changed pages for the duration of the [history window](/docs/introduction/history-window). To restore, Lakebase Postgres reconstructs the database state at the timestamp you choose. There's no separate WAL archive to manage and no backup bucket to provision.
 
 | Plan        | Default history window | Maximum | Change history pricing |
 | ----------- | ---------------------- | ------- | ---------------------- |

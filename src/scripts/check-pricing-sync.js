@@ -654,6 +654,8 @@ const CROSS_SOURCE_CHECKS = [
   // differently-worded "free/no charge during beta" prose to a single concept).
   // Object Storage and Functions publish their post-beta rates on the pricing
   // page, but the cells keep a beta note, so betaValue still applies there.
+  // AI Gateway links to its published model prices instead of repeating beta
+  // status, so only verify that every source agrees the feature is offered.
   // The Free cells lead with the included allowance instead of a beta note and
   // have nothing comparable in the docs table, hence offeredValue.
   ...['free', 'launch', 'scale'].flatMap((plan) => [
@@ -679,9 +681,9 @@ const CROSS_SOURCE_CHECKS = [
       id: `ai-gateway-${plan}`,
       label: `AI Gateway (${plan})`,
       comp: 'AI Gateway',
-      docs: 'AI Gateway (Beta)',
+      docs: 'AI Gateway',
       plan,
-      norm: betaValue,
+      norm: offeredValue,
       agentLabel: 'AI Gateway',
     },
   ]),
@@ -1129,7 +1131,7 @@ function buildBackendCopyRequirements(backendPricing) {
         `active compute is $${functions.launch.activeCapacityHourRate}/Capacity-Hour (Launch) or $${functions.scale.activeCapacityHourRate}/Capacity-Hour (Scale)`,
         `waiting compute is $${functions.launch.waitingCapacityHourRate}/Capacity-Hour (Launch) or $${functions.scale.waitingCapacityHourRate}/Capacity-Hour (Scale)`,
         `invocations are $${functions.launch.invocationRatePerMillion}/M on both plans`,
-        `${objectStorage.freeAllowanceGb} GB Object Storage and, for Functions, ${functions.free.activeCapacityHours} active Capacity-Hours, ${functions.free.waitingCapacityHours} waiting Capacity-Hours, and ${functions.free.invocations} invocations`,
+        `${objectStorage.freeAllowanceGb} GB Object Storage per project and, for Functions, ${functions.free.activeCapacityHours} active Capacity-Hours, ${functions.free.waitingCapacityHours} waiting Capacity-Hours, and ${functions.free.invocations} invocations`,
       ],
     },
   ];

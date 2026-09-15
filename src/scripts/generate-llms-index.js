@@ -22,7 +22,7 @@ const config = require('./llms-index-config');
 
 const BASE_URL = 'https://neon.com';
 const OUTPUT_PATH = 'public/docs/llms.txt';
-const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md'];
+const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md', 'GUIDE_TEMPLATE.md'];
 
 const COLLAPSED_ROUTES = config.collapsedRoutes || {};
 
@@ -62,8 +62,9 @@ function toTitleCase(str) {
  * @param {string} dirPath - absolute path to content directory
  * @param {string} baseContentPath - absolute path to content/ root (for URL generation)
  * @param {string} routeKey - the route key from CONTENT_ROUTES (used as fallback section name)
+ * @param {string} [urlPrefix] - public URL prefix after neon.com, e.g. "docs/changelog"
  */
-async function scanDirectory(dirPath, baseContentPath, routeKey) {
+async function scanDirectory(dirPath, baseContentPath, routeKey, urlPrefix) {
   const docs = [];
   const excludeMatchCounts = new Map();
   for (const prefix of ALL_EXCLUDE_PATHS) {
@@ -108,7 +109,7 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
           const subtitle = frontmatter.subtitle || '';
 
           const mdPath = path.relative(baseContentPath, fullPath);
-          const url = `${BASE_URL}/${mdPath}`;
+          const url = urlPrefix ? `${BASE_URL}/${urlPrefix}/${relPath}` : `${BASE_URL}/${mdPath}`;
 
           docs.push({
             section,
@@ -269,7 +270,7 @@ function generateIndexText(organized, collapsedEntries = []) {
   }
 
   if (config.commonQueries && config.commonQueries.length > 0) {
-    lines.push('## Common Queries');
+    lines.push('## Common tasks');
     lines.push('');
     for (const q of config.commonQueries) {
       lines.push(`- [${q.label}](${q.url})`);
@@ -426,6 +427,23 @@ function generateSubIndexText(sectionName, sectionConf, sectionData) {
   return `${lines.join('\n').trim()}\n`;
 }
 
+function generateUnlinkedIndexText(indexConf, docs) {
+  const lines = [];
+  lines.push(`# ${indexConf.title}`);
+  lines.push('');
+  if (indexConf.intro) {
+    lines.push(indexConf.intro);
+    lines.push('');
+  }
+  const sorted = [...docs].sort((a, b) => a.title.localeCompare(b.title));
+  for (const doc of sorted) {
+    const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+    lines.push(`- [${doc.title}](${doc.url})${description}`);
+  }
+  lines.push('');
+  return `${lines.join('\n').trim()}\n`;
+}
+
 /**
  * Validate config against scanned results and emit warnings
  */
@@ -531,10 +549,38 @@ async function main() {
     });
   }
 
+  const unlinkedIndexFiles = [];
+  for (const indexConf of config.unlinkedIndexes || []) {
+    const srcPath = CONTENT_ROUTES[indexConf.route];
+    if (!srcPath) {
+      throw new Error(`unlinkedIndex route is not a content route: ${indexConf.route}`);
+    }
+    const fullPath = path.join(projectRoot, srcPath);
+    const { docs } = await scanDirectory(
+      fullPath,
+      contentPath,
+      indexConf.route,
+      indexConf.publicPath
+    );
+    if (docs.length === 0) {
+      throw new Error(`Unlinked index ${indexConf.route} scanned zero pages`);
+    }
+    unlinkedIndexFiles.push({
+      name: indexConf.route,
+      outputPath: indexConf.outputPath,
+      content: generateUnlinkedIndexText(indexConf, docs),
+    });
+    console.log(`  ${indexConf.route} (unlinked): ${docs.length} files`);
+  }
+
   if (dryRun) {
     console.log('--- Generated llms.txt ---\n');
     console.log(indexContent);
     for (const sub of subIndexFiles) {
+      console.log(`--- Generated ${sub.outputPath} ---\n`);
+      console.log(sub.content);
+    }
+    for (const sub of unlinkedIndexFiles) {
       console.log(`--- Generated ${sub.outputPath} ---\n`);
       console.log(sub.content);
     }
@@ -549,10 +595,24 @@ async function main() {
       await fs.writeFile(subPath, sub.content);
       console.log(`Written to ${subPath}`);
     }
+    for (const sub of unlinkedIndexFiles) {
+      const subPath = path.join(projectRoot, sub.outputPath);
+      await fs.mkdir(path.dirname(subPath), { recursive: true });
+      await fs.writeFile(subPath, sub.content);
+      console.log(`Written to ${subPath}`);
+    }
   }
 }
 
-main().catch((err) => {
-  console.error('Error:', err);
-  process.exit(1);
-});
+// Only run the generator when invoked directly (e.g. `node generate-llms-index.js`
+// in postbuild). Guarding this lets tests import generateIndexText without
+// triggering the full docs-tree scan, file writes, or the process.exit on error.
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('Error:', err);
+    process.exit(1);
+  });
+}
+
+// Export for testing
+module.exports = { generateIndexText, generateUnlinkedIndexText };

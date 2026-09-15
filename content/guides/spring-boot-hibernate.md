@@ -74,7 +74,7 @@ We will revisit the `spring.jpa.hibernate.ddl-auto` property later in this guide
 
 ## Approaches to Schema Management
 
-Before we dive into specific schema changes, let's explore different approaches to managing schema changes with Hibernate and Spring Boot.
+Before specific schema changes, let's explore different approaches to managing schema changes with Hibernate and Spring Boot.
 
 ### 1. Hibernate Auto DDL (Development Only)
 
@@ -225,7 +225,7 @@ Now that you have the `Product` entity, let's add a new column to the `products`
    }
    ```
 
-2. Run your application, and Hibernate will automatically add the `description` column to the `products` table. Quite convenient for development!
+2. Run your application, and Hibernate will automatically add the `description` column to the `products` table. Quite convenient for development.
 
 ### Renaming and Dropping Columns
 

@@ -7,7 +7,7 @@ summary: >-
   layer 1.0 breaking changes. Use this page when updating scripts, CI jobs, or
   apps that call the Neon Platform API with TypeScript.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-27T18:25:57.494Z'
 ---
 
 <Admonition type="note" title="@neondatabase/api-client still works">
@@ -71,24 +71,24 @@ const neon = createNeonClient({
 
 Common Platform API calls and their `@neon/sdk` equivalents:
 
-| `@neondatabase/api-client`             | `@neon/sdk`                                                                      |
-| -------------------------------------- | -------------------------------------------------------------------------------- |
-| `getCurrentUserOrganizations()`        | `neon.user.organizations()`                                                      |
-| `getCurrentUserInfo()`                 | `neon.user.me()`                                                                 |
-| `listProjects({ org_id })`             | `neon.projects.list({ org_id }).page()` or `.all()`                              |
-| `createProject({ project })`           | `neon.projects.create({ name, region_id, … })`                                   |
-| `getProject(projectId)`                | `neon.projects.get(projectId)`                                                   |
-| `deleteProject(projectId)`             | `neon.projects.delete(projectId)`                                                |
-| `listProjectBranches({ projectId })`   | `neon.branches.list(projectId).page()` or `.all()`                               |
-| `createProjectBranch(projectId, body)` | `neon.branches.create(projectId, input)` or `neon.branches.createWithCompute(…)` |
-| `getConnectionUri(projectId, query)`   | `neon.postgres.connectionString({ projectId, … })`                               |
-| `listProjectBranchDatabases(…)`        | `neon.postgres.databases.list(…)`                                                |
-| `createProjectBranchDatabase(…)`       | `neon.postgres.databases.create(…)`                                              |
-| `listProjectBranchRoles(…)`            | `neon.postgres.roles.list(…)`                                                    |
-| `createProjectBranchRole(…)`           | `neon.postgres.roles.create(…)`                                                  |
-| `listProjectEndpoints(projectId)`      | `neon.postgres.endpoints.list(projectId)`                                        |
-| `listApiKeys()`                        | `neon.apiKeys.list()`                                                            |
-| `getActiveRegions()`                   | `neon.regions.list()`                                                            |
+| `@neondatabase/api-client`             | `@neon/sdk`                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| `getCurrentUserOrganizations()`        | `neon.user.organizations()`                                                     |
+| `getCurrentUserInfo()`                 | `neon.user.me()`                                                                |
+| `listProjects({ org_id })`             | `neon.projects.list({ org_id }).page()` or `.all()`                             |
+| `createProject({ project })`           | `neon.projects.create({ name, region_id, … })`                                  |
+| `getProject(projectId)`                | `neon.projects.get(projectId)`                                                  |
+| `deleteProject(projectId)`             | `neon.projects.delete(projectId)`                                               |
+| `listProjectBranches({ projectId })`   | `neon.branches.list(projectId).page()` or `.all()`                              |
+| `createProjectBranch(projectId, body)` | `neon.branches.create(projectId, input)` or `neon.branches.createAndConnect(…)` |
+| `getConnectionUri(projectId, query)`   | `neon.postgres.connectionString({ projectId, … })`                              |
+| `listProjectBranchDatabases(…)`        | `neon.postgres.databases.list(…)`                                               |
+| `createProjectBranchDatabase(…)`       | `neon.postgres.databases.create(…)`                                             |
+| `listProjectBranchRoles(…)`            | `neon.postgres.roles.list(…)`                                                   |
+| `createProjectBranchRole(…)`           | `neon.postgres.roles.create(…)`                                                 |
+| `listProjectEndpoints(projectId)`      | `neon.postgres.endpoints.list(projectId)`                                       |
+| `listApiKeys()`                        | `neon.apiKeys.list()`                                                           |
+| `getActiveRegions()`                   | `neon.regions.list()`                                                           |
 
 Endpoints that are not wrapped in an ergonomic namespace remain available through [`raw`](/docs/reference/typescript-sdk#raw-layer).
 
@@ -154,7 +154,7 @@ const response = await apiClient.createProject({
 });
 const uri = response.data.connection_uris[0].connection_uri;
 
-// After — waits for provisioning and returns a ready connection string
+// After — waits for provisioning; data is { project, connectionString }
 const { data, error } = await neon.projects.createAndConnect({
   name: 'my-app',
   region_id: 'aws-us-east-1',
@@ -175,13 +175,13 @@ await apiClient.createProjectBranch(projectId, {
   endpoints: [{ type: EndpointType.ReadWrite }],
 });
 
-// After
-const { data, error } = await neon.branches.createWithCompute(projectId, {
+// After — read-write compute is attached by default
+const { data, error } = await neon.branches.create(projectId, {
   name: 'dev-1',
-  parentId: parentBranchId,
+  parent_id: parentBranchId,
 });
 if (error) throw error;
-const { branch, endpoint, connectionString } = data;
+const branch = data;
 ```
 
 ### Create a database
@@ -241,7 +241,7 @@ Some generated type names changed (for example, `DataAPI*` → `DataApi*`). Endp
 
 ## What you gain
 
-- **Workflow helpers** such as `projects.createAndConnect` and `branches.createWithCompute` that poll operations and return connection strings
+- **Workflow helpers** such as `projects.createAndConnect` and `branches.createAndConnect` that poll operations and return `{ project, connectionString }` or `{ branch, endpoint, connectionString }`. `create` returns the resource; `branches.create` attaches a read-write endpoint unless you pass `noCompute: true`.
 - **Readiness polling** via `waitForReadiness` and `neon.operations.waitFor`
 - **Automatic retries** on safe statuses (`423`, `429`, `503`)
 - **Ergonomic beta APIs** for storage, functions, credentials, AI gateway, snapshots, and branch-scoped Managed Better Auth (`neon.auth`, `neon.storage`, …)

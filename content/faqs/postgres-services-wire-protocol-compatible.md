@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-tools-avoid-breaking-staging-database
 ---
 
-Lakebase Postgres runs unmodified Postgres on the lakebase architecture, so it speaks the standard Postgres wire protocol. Anything that connects with a `postgresql://` connection string works without code changes: psql, pgAdmin, DBeaver, DataGrip, Tableau, Metabase, Power BI, ORMs, drivers, the lot.
+Lakebase Postgres runs unmodified Postgres, so it speaks the standard Postgres wire protocol. Anything that connects with a `postgresql://` connection string works without code changes: psql, pgAdmin, DBeaver, DataGrip, Tableau, Metabase, Power BI, ORMs, and drivers.
 
 ## What "compatible" means in practice
 

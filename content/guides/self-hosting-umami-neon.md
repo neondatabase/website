@@ -184,7 +184,7 @@ In the modal, set the name of the secret as `DATABASE_URL`, and set the `Secret`
 
 ![](/guides/images/self-hosting-umami-neon/307263972-75bef039-f4d1-4b7d-a66d-dd312290a6d1.png)
 
-Great! With that done, you have successfully ensured that each deployment of your app on Fly.io will have the database URL pointing to the Lakebase Postgres instance. Let's trigger a deploy to see it all in action.
+With that done, each deployment of your app on Fly.io will have the database URL pointing to the Lakebase Postgres instance. Let's trigger a deploy to see it all in action.
 
 ## Deploy To Fly.io
 

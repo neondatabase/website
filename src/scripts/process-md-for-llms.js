@@ -216,6 +216,7 @@ const IGNORED_COMPONENTS = [
   'ComputeCalculator', // Interactive widget
   'UseCaseContext', // Repetitive boilerplate
   'McpSetupConfigurator', // Interactive MCP setup widget
+  'AutoscalingViz', // Animated autoscaling visualization (figures are in the surrounding prose)
 ];
 
 // ESM modules loaded dynamically

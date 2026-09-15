@@ -4,4 +4,4 @@ These endpoints are served by your session, so they need no S3 credentials. For 
 
 You can also manage buckets from the CLI with [`neon buckets`](/docs/cli/buckets).
 
-Object Storage is in beta and available only in AWS US East (Ohio) (`aws-us-east-2`). See [Object Storage](/docs/storage/overview) for setup and [S3 compatibility](/docs/storage/s3-compatibility) for supported operations.
+Object Storage is in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Object Storage](/docs/storage/overview) for setup and [S3 compatibility](/docs/storage/s3-compatibility) for supported operations.

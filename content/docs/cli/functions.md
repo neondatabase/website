@@ -1,12 +1,10 @@
 ---
 title: 'Neon CLI command: functions'
-subtitle: 'Deploy, list, inspect, and delete Neon Functions'
+subtitle: 'Deploy, list, inspect, and delete Neon Functions, and manage their custom domains'
 summary: >-
-  The Neon CLI `neon functions` command manages Neon Functions on a branch:
-  `neon functions deploy <slug>` bundles and deploys a function from a local
-  directory or entry file (with --src, --runtime, --env, and --wait), and the list,
-  get, and delete subcommands manage deployed functions. The slug is the
-  permanent function identifier: 1 to 20 lowercase letters and digits.
+  The Neon CLI `neon functions` command manages Neon Functions on a branch: deploy,
+  list, get, and delete functions, and register and manage their custom domains with
+  the `domains` subcommands.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cli/function
@@ -27,6 +25,8 @@ Deploys a function from a local directory or entry file. The `<slug>` is the per
 <CliOptions command="functions deploy" />
 
 By default, `deploy` waits until the deployment finishes building (`--wait=true`), which is the predictable path for scripts and CI. Use `--no-wait` to return immediately after triggering the deployment.
+
+By default, `deploy` bundles your `--src` with esbuild before uploading. Pass `--no-bundle` to skip bundling and deploy a prebuilt source instead: the directory root (or the file you point at) must be named or contain `index.mjs` or `index.js`. This is useful when you run your own build step and want to ship the output as-is.
 
 Deploy a function from an entry file:
 
@@ -149,3 +149,70 @@ neon functions delete hello
 ```text filename="Output"
 INFO: Function hello deleted from branch br-cool-darkness-123456
 ```
+
+## neon functions domains (#domains)
+
+Manage custom domains for functions on the branch. Custom domains are in beta.
+
+<CliSubcommands command="functions domains" anchorParts="domains" />
+
+### neon functions domains list (#domains-list)
+
+Lists the custom domains registered on the branch.
+
+<CliUsage command="functions domains list" />
+
+<CliOptions command="functions domains list" />
+
+```bash
+neon functions domains list
+```
+
+The default table shows the domain, target function, and CNAME target. To inspect DNS and routing status, use JSON output:
+
+```bash
+neon functions domains list --output json
+```
+
+```json filename="Output"
+[
+  {
+    "domain": "docs.example.com",
+    "entity_type": "function",
+    "entity_id": "hello",
+    "cname_target": "fn-custom-domains.us-east-2.aws.neon.build",
+    "status": "active",
+    "dns_status": "ok",
+    "binding_status": "present",
+    "status_reason": ""
+  }
+]
+```
+
+An `active` status confirms that DNS, CAA authorization, and routing are ready. Verify the domain with an HTTPS request because certificate issuance isn't included in this status.
+
+### neon functions domains register (#domains-register)
+
+Points a domain you already own at a function on the branch. Both `--slug` and the domain are required. The command prints a CNAME target; create a CNAME record for the domain at your DNS provider pointing at that target.
+
+<CliUsage command="functions domains register" />
+
+<CliOptions command="functions domains register" />
+
+```bash
+neon functions domains register docs.example.com --slug hello
+```
+
+### neon functions domains delete (#domains-delete)
+
+Deletes a custom domain from the branch.
+
+<CliUsage command="functions domains delete" />
+
+<CliOptions command="functions domains delete" />
+
+```bash
+neon functions domains delete docs.example.com
+```
+
+Routing changes are eventually consistent, so the custom URL can continue reaching the function briefly after deletion. Deleting a function doesn't delete its custom-domain registration; delete the domain separately.

@@ -140,6 +140,8 @@ These tools just achieved beta, meaning that they are not yet feature-complete. 
 
 All Neon projects in the us-east-2 region only. More regions will roll out progressively after beta.
 
+_Update: region availability has since expanded. See [Regions](/docs/introduction/regions) for current coverage._
+
 ### Which plans have access?
 
 Object Storage and Functions are available on all plans, including Free. AI Gateway is available on Launch and Scale plans only (paid plans), with no difference in AI Gateway pricing or model access between the two.

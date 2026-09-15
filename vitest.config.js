@@ -11,7 +11,7 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
-    exclude: [...configDefaults.exclude, 'tests/critical-flows/**'],
+    exclude: [...configDefaults.exclude, 'tests/critical-flows/**', '**/.claude/**'],
     globals: true,
     setupFiles: ['./vitest.setup.js'],
   },
@@ -29,6 +29,7 @@ export default defineConfig({
       data: path.resolve(__dirname, './src/data'),
       hooks: path.resolve(__dirname, './src/hooks'),
       icons: path.resolve(__dirname, './src/icons'),
+      images: path.resolve(__dirname, './src/images'),
       lib: path.resolve(__dirname, './src/lib'),
       styles: path.resolve(__dirname, './src/styles'),
       utils: path.resolve(__dirname, './src/utils'),

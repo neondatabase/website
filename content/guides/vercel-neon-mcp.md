@@ -1,10 +1,10 @@
 ---
 title: 'AI Driven Incident response with Vercel and Neon MCP servers'
-subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
+subtitle: 'Use Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
-updatedOn: '2026-03-05T08:21:55.000Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
@@ -26,7 +26,7 @@ Because the schema owner on the data engineering team is unavailable, the pull r
 
 After deployment to Vercel, the core application continues to function, but the new analytics events fail silently. Since these events are sent via background fetch requests, users see no errors. Behind the scenes, however, Vercel’s serverless functions return `500 Internal Server Error` due to a schema mismatch: the code attempts to insert parameters that the production database does not recognize.
 
-While not a full outage, this issue causes data loss during a critical campaign. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, we will delegate the investigation to Claude Code. By leveraging the Vercel and Neon MCP servers, Claude Code will be able to troubleshoot the problem and generate a detailed report on the root cause and required fixes.
+While not a full outage, this issue causes data loss during a critical campaign. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, we will delegate the investigation to Claude Code. Using the Vercel and Neon MCP servers, Claude Code will be able to troubleshoot the problem and generate a detailed report on the root cause and required fixes.
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ You can follow the guide using your own projects.
 
 The Neon MCP server gives Claude Code tools to work with your Neon database, including creating database branches, running SQL queries, and applying migrations. For this scenario, we will use it to validate database schema changes in an isolated environment.
 
-The simplest way to connect Claude Code to Neon is with the `neon init` command. It handles OAuth authentication, API key creation, configures Claude Code to use Neon's remote MCP server, and installs [Neon agent skills](https://github.com/neondatabase/agent-skills) for best practices.
+The simplest way to connect Claude Code to Neon is with the `neon init` command. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server) and links a Neon project.
 
 Run the following in your project directory:
 
@@ -57,7 +57,7 @@ Run the following in your project directory:
 npx neon@latest init
 ```
 
-Follow the prompts in your browser to authenticate. Once complete, Claude Code will have access to [Neon MCP tools](/docs/ai/neon-mcp-server#supported-actions-tools) and the installed agent skills.
+Follow the prompts in your browser to authenticate. Once complete, Claude Code will have access to [Neon MCP tools](/docs/ai/neon-mcp-server#available-tools) and the installed agent skills.
 
 ## Step 2: Set up the Vercel MCP server
 
@@ -121,7 +121,7 @@ If validation fails, it can iterate safely on the branch until the issue is reso
 
 Now that the fix has been validated on the branch, the schema change can be promoted to production through your standard release process.
 
-What we demonstrated here is a focused scenario, but the same pattern applies broadly: use the Vercel MCP Server for observability and root cause analysis, and the Neon MCP Server for safe experimentation before rollout. Together, they enable AI agents not only to detect issues but also to test and confirm solutions with confidence.
+What we demonstrated here is a focused scenario, but the same pattern applies broadly: use the Vercel MCP Server for observability and root cause analysis, and the Neon MCP Server for safe experimentation before rollout. Together, they let AI agents detect issues and then test and confirm fixes with confidence.
 
 </Steps>
 

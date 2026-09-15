@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-08-11T22:46:22.787Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -32,7 +32,7 @@ Create a Neon project with the [Neon CLI](/docs/cli/install) or the Console.
 Install the CLI (`npm i -g neon`), then sign in and create the project:
 
 ```bash filename="Terminal"
-neon auth
+neon login
 neon projects create --name my-app
 ```
 
@@ -99,7 +99,7 @@ neon env pull --file .env    # writes DATABASE_URL from your default branch into
 
 Notes:
 
-- Not signed in yet? Run `neon auth` first.
+- Not signed in yet? Run `neon login` first.
 - `neon link` prompts for an org and project. To skip the prompts, pass `--project-id <id>` (find IDs with `neon projects list`).
 - For Nuxt, pass in `--file .env` to `neon env pull` as it writes to `.env.local` by default, and `nuxt dev` only reads `.env` by default.
 - Which branch? `neon env pull` uses your project's default branch: `main` for CLI-created projects, `production` for Console-created ones (`neon branches list` shows yours). To use a different branch, run `neon checkout <branch>` first; it re-pins the branch in `.neon` so the next `env pull` reads from it.

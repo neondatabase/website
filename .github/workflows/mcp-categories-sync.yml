@@ -1,23 +1,25 @@
 name: MCP Categories Sync
 
 # The Neon MCP server owns the list of tool categories (`?category=` values).
-# Two places here restate it for readers and silently rot when the server gains
-# or drops one: SCOPE_CATEGORIES in the docs config generator, and the
-# "Available tools" table in content/docs/shared-content/mcp-tools.md. A missing
-# entry in the generator is the worst case — it emits a `?category=` URL that
-# quietly disables tools the user never chose to turn off.
+# Three places here restate it for readers and silently rot when the server
+# gains or drops one: SCOPE_CATEGORIES in the docs config generator, the
+# "Available tools" table in content/docs/shared-content/mcp-tools.md, and the
+# `--category` list in content/docs/cli/mcp.md. A missing entry in the
+# generator emits a `?category=` URL that quietly disables tools the user
+# never chose to turn off.
 #
-#   - Pull requests touching either surface -> offline check (no network): the
-#     generator and the docs table must agree.
-#   - Daily schedule / manual dispatch -> --live: both are additionally compared
-#     against mcp.neon.tech's advertised x-neon-scope-categories, and drift
-#     opens/updates a tracking issue so a new category can't rot silently.
+#   - Pull requests touching any of those surfaces -> offline check (no
+#     network): the generator, the docs table, and the CLI list must agree.
+#   - Daily schedule / manual dispatch -> --live: all three are additionally
+#     compared against mcp.neon.tech's advertised x-neon-scope-categories, and
+#     drift opens/updates a tracking issue so a new category can't rot silently.
 
 on:
   pull_request:
     paths:
       - 'src/components/pages/doc/mcp-setup-configurator/**'
       - 'content/docs/shared-content/mcp-tools.md'
+      - 'content/docs/cli/mcp.md'
       - 'scripts/check-mcp-categories-sync.mjs'
       - '.github/workflows/mcp-categories-sync.yml'
   schedule:

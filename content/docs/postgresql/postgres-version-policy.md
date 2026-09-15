@@ -1,20 +1,20 @@
 ---
-title: Lakebase Postgres Version Support Policy
+title: Lakebase Postgres version support policy
 summary: >-
-  Neon's Postgres version support policy tracks the latest major versions,
+  The Lakebase Postgres version support policy tracks the latest major versions,
   applies minor releases automatically at the next compute restart, and
   aligns end-of-life with the official PostgreSQL five-year support window.
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-08-26T14:40:58.742Z'
+updatedOn: '2026-09-14T17:26:32.745Z'
 ---
 
-This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
+This topic outlines the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy).
 
 ## The official Postgres versioning policy
 
-To better understand [Neon's Postgres Version Support Policy](#neon-version-support-policy), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
+To better understand the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
@@ -35,7 +35,7 @@ To better understand [Neon's Postgres Version Support Policy](#neon-version-supp
 - The major version is indicated by the first part of the version number, such as the "16" in "16.1".
 - The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
 
-## Neon Version Support Policy
+## Lakebase Postgres version support policy
 
 Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen Postgres version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates.
 
@@ -65,14 +65,14 @@ Neon does not support skipping minor releases or downgrading to a previous minor
 
 #### Recent minor version rollouts
 
-The table below shows when recent Postgres releases became available on Neon.
+The table below shows when recent Postgres releases became available on Neon. Each version links to its PostgreSQL release notes, which list the bug fixes and CVE patches included in that minor release.
 
-| Postgres release date | Versions in the release          | First available on Neon | Time to availability |
-| --------------------- | -------------------------------- | ----------------------- | -------------------- |
-| 2026-08-13            | 18.6, 17.11, 16.15, 15.19, 14.24 | 2026-08-18              | 5 days               |
-| 2026-05-14            | 18.4, 17.10, 16.14, 15.18, 14.23 | 2026-05-19              | 5 days               |
-| 2026-02-12            | 18.2, 17.8, 16.12, 15.16, 14.21  | 2026-02-13              | 1 day                |
-| 2025-11-13            | 18.1, 17.7, 16.11, 15.15, 14.20  | 2025-12-03              | 20 days              |
+| Postgres release date | Versions in the release                                                                                                                                                                                                                                                                   | First available on Neon | Time to availability |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- |
+| 2026-08-13            | [18.6](https://www.postgresql.org/docs/release/18.6/), [17.11](https://www.postgresql.org/docs/release/17.11/), [16.15](https://www.postgresql.org/docs/release/16.15/), [15.19](https://www.postgresql.org/docs/release/15.19/), [14.24](https://www.postgresql.org/docs/release/14.24/) | 2026-08-18              | 5 days               |
+| 2026-05-14            | [18.4](https://www.postgresql.org/docs/release/18.4/), [17.10](https://www.postgresql.org/docs/release/17.10/), [16.14](https://www.postgresql.org/docs/release/16.14/), [15.18](https://www.postgresql.org/docs/release/15.18/), [14.23](https://www.postgresql.org/docs/release/14.23/) | 2026-05-19              | 5 days               |
+| 2026-02-12            | [18.2](https://www.postgresql.org/docs/release/18.2/), [17.8](https://www.postgresql.org/docs/release/17.8/), [16.12](https://www.postgresql.org/docs/release/16.12/), [15.16](https://www.postgresql.org/docs/release/15.16/), [14.21](https://www.postgresql.org/docs/release/14.21/)   | 2026-02-13              | 1 day                |
+| 2025-11-13            | [18.1](https://www.postgresql.org/docs/release/18.1/), [17.7](https://www.postgresql.org/docs/release/17.7/), [16.11](https://www.postgresql.org/docs/release/16.11/), [15.15](https://www.postgresql.org/docs/release/15.15/), [14.20](https://www.postgresql.org/docs/release/14.20/)   | 2025-12-03              | 20 days              |
 
 The **First available on Neon** date marks when a release first became available to run, not the point at which every compute is running it; each compute picks it up on the next restart, as described above.
 

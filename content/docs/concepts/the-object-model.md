@@ -1,89 +1,66 @@
 ---
 title: The Neon object model
-subtitle: How an organization, a project, and a branch hold your whole backend
+subtitle: How the Neon backend is structured
 summary: >-
-  Neon nests resources in three containers: an organization holds projects, and
-  a project holds branches. A branch is not just a Postgres database. It is your
-  whole backend, holding Lakebase Postgres alongside Managed Better Auth,
-  Object Storage, Functions, and the AI Gateway as peers. Postgres has its own children
-  (computes, roles, databases, and the Data API) but it does not define the
-  branch. Branching is copy-on-write across the backend, though the semantics
-  differ by product: Postgres forks its data, Managed Better Auth rides the
-  database
-  branch, Functions are branch-aware with their own URLs, and the AI Gateway is
-  branch-aware for its endpoint and credentials while its model catalog stays
-  global.
+  The Neon backend is structured as an organization, a project, and a branch.
+  The branch is where the backend runs: Lakebase Postgres, Managed Better Auth,
+  Object Storage, Functions, and the AI Gateway. A child branch is an isolated
+  copy of that backend. Organizations hold billing, membership, and projects. A
+  project sets the region and groups branches. Postgres and Object Storage use
+  copy-on-write; Auth state lives in the database and branches with it; Functions
+  and the AI Gateway get per-branch URLs and credentials. The AI Gateway model
+  catalog is global. Computes, roles, databases, and the Data API belong to
+  Postgres. API keys are scoped to an account, organization, or project, not to
+  a branch.
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/overview
 updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
-Neon nests your backend resources in three containers: an **organization** holds **projects**, and a project holds **branches**. A branch is not just a Postgres database — it's your whole backend. Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway all live inside a branch.
+On Neon, a **branch** is where your backend runs. It can include Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway.
 
-This page explains how those pieces fit together: what each resource belongs to, what you get a copy of when you branch, and where to read about each product.
+You can create a child branch from the current or past state of another branch, starting from your `production` branch. Change it and delete it without affecting the original. That's useful for a preview, a pull request, or an experiment: you get a cloned backend to work against, not a second project to provision.
 
-![Tree diagram of the Neon object model. An organization contains projects; a project (one region per project) contains branches; a branch is your whole backend and holds five products: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children of its own: computes, roles, databases, and the Data API. The AI Gateway is branch-aware for endpoint, credentials, access, and metering, with a shared, global model catalog and no per-branch model configuration.](/docs/concepts/the-object-model.png 'no-border')
+Every branch belongs to a **project**, and every project belongs to an **organization**.
 
+![Tree diagram of the Neon object model. An organization contains projects (one region per project). A project contains branches. A branch holds five services: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children: computes, roles, databases, and the Data API.](/docs/concepts/the-object-model.png 'no-border')
 
-## The three containers
+In the Neon Console, API, and CLI, the hierarchy is `org_id` → `project_id` → `branch_id`. Connection strings, Auth URLs, function URLs, and the AI Gateway endpoint all belong to a branch. An API key is scoped to an account, an organization, or a project, so the same key can reach every branch in that scope. See [What sits outside the hierarchy](#what-sits-outside-the-hierarchy).
 
-Organizations, projects, and branches nest, and each one answers a different question.
+## The hierarchy
 
-**Organization:** the top-level container. Billing, membership, and project ownership are all organization-level concerns. One Neon account can belong to several organizations, and projects can be transferred between them. See [Organizations](/docs/manage/organizations).
+An **organization** is the top-level container for your Neon projects. Billing, membership, and project ownership live at this level. One Neon account can belong to several organizations, and you can transfer projects between them. See [Organizations](/docs/manage/organizations).
 
-**Project:** the unit of isolation, and the level where you pick a region. Two projects share nothing: separate storage, separate credentials, separate billing lines. That makes a project the natural boundary for an application, an environment, or a tenant that needs hard isolation. See [Projects](/docs/manage/projects) and [Regions](/docs/introduction/regions).
+A **project** is the workspace that groups your branches and holds the settings they share. You choose a [region](/docs/introduction/regions) when you create the project, and it's fixed for the life of the project. Other project-level settings, such as the history window for instant restore, IP Allow rules, and project access, apply to every branch inside it. Each project is fully isolated, with separate data and credentials, which makes a project the right boundary for an app or a tenant that must stay separate. See [Projects](/docs/manage/projects) and [Multitenancy](/docs/guides/multitenancy).
 
-**Branch:** the unit of copy. A branch holds the backend itself, and creating one gives you an isolated copy to work in. Branches form a tree: every project starts with a root branch that can't be deleted, and every other branch descends from another branch.
+A **branch** sits inside a project. Every project starts with a root branch you can't delete (`production` in the Neon Console, `main` via API or CLI). Every other branch is created as a child of an existing branch. Create a new project, rather than a branch, when you need a different region or a tenant that must stay fully separate. See [Manage branches](/docs/manage/branches).
 
-## A branch is the whole backend
+## A full backend per branch
 
-The older way to describe a branch was "computes, roles, and databases," which is really a description of Postgres. That's too narrow. A branch holds five products, and Postgres is one of them, not the definition of the branch.
+When you create a child branch, it includes the same services enabled on its parent. What gets copied, shared, or re-created depends on the service.
 
-| Product | What it is |
-| --- | --- |
-| [**Lakebase Postgres**](/docs/postgres/overview) | Serverless Postgres, and for most applications the system of record for relational data. |
-| [**Managed Better Auth**](/docs/auth/overview) | Managed authentication: sign-in, users, sessions, and auth configuration. |
-| [**Object Storage**](/docs/storage/overview) | S3-compatible buckets and objects, for files too large to sit in a row. |
-| [**Functions**](/docs/compute/functions/overview) | Long-running serverless compute deployed onto the branch, next to your data. |
-| [**AI Gateway**](/docs/ai-gateway/overview) | One Neon credential for reaching many LLM providers, with no provider keys to manage. |
+| Service | What lives on the branch | What a child branch gets |
+| --- | --- | --- |
+| [**Lakebase Postgres**](/docs/postgres/overview) | Serverless Postgres. You connect through a compute on the branch (`ep-...` in the connection string). | A copy-on-write clone of the parent's data at the moment you branch. Writes stay separate. |
+| [**Managed Better Auth**](/docs/auth/overview) | Sign-in, users, sessions, and auth config. State lives in the branch's database, so there is nothing extra to provision. Each branch has its own Auth URL. | A copy of the whole database, including the `neon_auth` schema where its users and sessions live. See [Branching authentication](/docs/auth/branching-authentication). |
+| [**Object Storage**](/docs/storage/overview) | S3-compatible buckets and objects. | A copy-on-write clone of existing buckets and objects. See [Buckets](/docs/storage/buckets). |
+| [**Functions**](/docs/compute/functions/overview) | Your backend code, deployed on the branch, at its own function URL. | The same function at its own function URL, against this branch's data. |
+| [**AI Gateway**](/docs/ai-gateway/overview) | One credential for all models across every major LLM provider. Each branch has its own endpoint, credentials, access, and metering. | A new endpoint and credentials, with usage metered on that branch. The [model catalog](/docs/ai-gateway/models) is shared and global: you don't configure models per branch. |
 
-Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
-
-For a detailed example that builds one app across all five, see [How a Neon backend fits together](/docs/get-started/backend-overview).
+Managed Better Auth, Object Storage, Functions, and the AI Gateway aren't available in every region yet. See [Product availability](/docs/introduction/regions#product-availability).
 
 ### What Lakebase Postgres contains
 
-Lakebase Postgres contains four objects you manage directly:
+You connect as a [role](/docs/manage/roles) to a [database](/docs/manage/databases) through a [compute](/docs/manage/computes). A branch has one read-write compute and can have multiple [read replicas](/docs/introduction/read-replicas). Autoscaling and scale to zero are settings on the compute. The compute runs Postgres; it does not own the data. Durable database storage sits in a separate storage layer. That separation of storage and compute is what defines Lakebase Postgres. See [The lakebase architecture](/docs/introduction/architecture-overview).
 
-- **Computes:** the Postgres processes that serve your queries. A branch has one read-write compute and can have additional [read replicas](/docs/introduction/read-replicas). Compute size, autoscaling, and scale to zero are compute settings. See [Computes](/docs/manage/computes).
-- **Roles:** Postgres roles, which belong to a branch. A role is what you connect as, and what owns database objects. See [Roles](/docs/manage/roles).
-- **Databases:** standard Postgres databases, each a container for schemas, tables, views, functions, and indexes. A database belongs to a branch. See [Databases](/docs/manage/databases).
-- **Data API:** a PostgREST-compatible HTTP interface to a database on the branch, for callers that can't hold a TCP connection, such as browsers and edge runtimes. See [Data API](/docs/data-api/overview).
-
-Those four are the object model's view of Postgres. The layer underneath, where compute is separated from durable storage and branching becomes a metadata operation, is a different subject. For that, read [The lakebase architecture](/docs/introduction/architecture-overview).
-
-## What a branch gives you a copy of
-
-Branching is copy-on-write across the backend, but it isn't one mechanism, and the products don't behave identically.
-
-| Product           | What a new branch gets                                                                                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Lakebase Postgres | A copy-on-write clone of the parent's data at the moment of branching. Nothing is duplicated up front, and writes on either side stay separate.                                                                                                    |
-| Managed Better Auth | Nothing separate to provision. Its state (users, sessions, and configuration) lives in the branch's database, so it rides the database branch. Each branch gets its own Auth URL. See [Branching authentication](/docs/auth/branching-authentication). |
-| Object Storage    | Buckets and the objects already in them fork copy-on-write, so nothing is duplicated up front. Availability is limited, so check the [Object Storage](/docs/storage/overview) overview first. See [Buckets](/docs/storage/buckets).                    |
-| Functions         | Branch-aware. Each branch runs its own function at its own URL, against that branch's data, with no redeploy needed.                                                                                                                                   |
-| AI Gateway        | Branch-aware for endpoint, credentials, access, and metering. The [model catalog](/docs/ai-gateway/models) is shared and global: there is no per-branch model configuration.                                                                           |
-
-That's as far as this page goes on branching. For what branches are for and how to work with them, see [Branching](/docs/introduction/branching) and [Manage branches](/docs/manage/branches).
+The [Data API](/docs/data-api/overview) is an HTTP interface to the same database, for callers that can't open a Postgres TCP connection, such as browsers and edge runtimes.
 
 ## What sits outside the hierarchy
 
-Three things are worth naming because they don't live in a branch:
-
-- **Your Neon account.** Your account is your identity for signing in, not a container for resources. It can belong to several organizations. See [Accounts](/docs/manage/accounts).
-- **API keys.** A key is personal (scoped to your account), organization-scoped, or project-scoped. No key is scoped to a branch. See [Manage API keys](/docs/manage/api-keys).
-- **Region.** A region is fixed on the project when you create it, and every branch in the project inherits it. See [Regions](/docs/introduction/regions).
+- **Your Neon account.** The account is how you sign in. It isn't a container for resources, and it can belong to several organizations. See [Accounts](/docs/manage/accounts).
+- **API keys.** A key is personal (your account), organization-scoped, or project-scoped. None of those scopes is a branch. See [Manage API keys](/docs/manage/api-keys).
+- **Region.** The region is set on the project when you create it. Every branch in the project inherits it. See [Regions](/docs/introduction/regions).
 
 ## Where to go next
 
@@ -93,13 +70,7 @@ Three things are worth naming because they don't live in a branch:
 
 <a href="/docs/introduction/branching" description="What branches are for and how to work with them" icon="split-branch">Branching</a>
 
-<a href="/docs/get-started/backend-overview" description="One example app built across all five products" icon="setup">How a Neon backend fits together</a>
-
-<a href="/docs/manage/projects" description="Create, configure, and delete projects" icon="cards">Manage projects</a>
-
-<a href="/docs/manage/branches" description="Create, reset, and delete branches" icon="branching">Manage branches</a>
-
-<a href="/docs/manage/computes" description="Compute size, autoscaling, and scale to zero" icon="autoscaling">Manage computes</a>
+<a href="/docs/get-started/backend-overview" description="One example app built across all five services" icon="setup">How a Neon backend fits together</a>
 
 </DetailIconCards>
 

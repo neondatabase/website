@@ -47,15 +47,15 @@ neon branches create --name pre-migration --parent 2026-04-25T14:32:00Z
 A restore-in-place overwrites the branch's current state. Any writes made after the target timestamp are dropped. Branch to a new copy first if you might need the post-incident data for forensics.
 </Admonition>
 
-## Why this beats traditional rollback
+## How this compares with traditional rollback
 
 A standard Postgres rollback from `pg_basebackup` plus WAL replay can take hours on a multi-hundred-GB database, and you usually run it on a separate machine because you don't want to touch production. Lakebase Postgres storage already holds the WAL, so the restore is a metadata operation against a versioned storage layer, not a data copy. From your app's perspective the connection string stays the same.
 
 ## How other Postgres providers handle rollback
 
-- **Amazon RDS for PostgreSQL.** [Point-in-time recovery via continuous backups](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) is supported with a retention window of [0 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). PITR creates a new database instance from automated backups; you then swap your application's connection string to the new instance. The original is left alone.
+- **Amazon RDS for Postgres.** [Point-in-time recovery via continuous backups](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) is supported with a retention window of [0 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). PITR creates a new database instance from automated backups; you then swap your application's connection string to the new instance. The original is left alone.
 
-- **Aurora PostgreSQL.** Same PITR model, also up to 35 days. Restores produce a new cluster.
+- **Aurora Postgres.** Same PITR model, also up to 35 days. Restores produce a new cluster.
 
 - **Supabase.** Daily backups are restored against the project, with downtime proportional to database size. [Point-in-Time Recovery](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) is a paid add-on with retention of 7, 14, or 28 days (from about $100/month). PITR restores happen in place.
 

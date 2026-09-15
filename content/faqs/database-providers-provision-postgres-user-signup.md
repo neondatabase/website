@@ -47,8 +47,8 @@ Each tenant database supports up to 10,000 pooled connections via PgBouncer. Use
 ## How this works on other providers
 
 - **Supabase** projects are created via the Management API, but each project provisions a dedicated VM and Postgres instance. Compute is billed hourly per project (Micro starts at $0.01344/hour, ~$10/month), and projects don't pause on paid plans ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)). For thousands of tenants, this means thousands of always-on VMs.
-- **Aurora Serverless v2 (PostgreSQL)** can be provisioned via the RDS API. Per-tenant clusters take longer to create than Neon branches and don't share storage with a template, but auto-pause on supported engine versions reduces idle compute cost ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for PostgreSQL** is not designed for per-user provisioning at sign-up speed. Instance creation takes minutes and there's no idle-compute billing model.
+- **Aurora Serverless v2 (Postgres)** can be provisioned via the RDS API. Per-tenant clusters take longer to create than Neon branches and don't share storage with a template, but auto-pause on supported engine versions reduces idle compute cost ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+- **RDS for Postgres** is not designed for per-user provisioning at sign-up speed. Instance creation takes minutes and there's no idle-compute billing model.
 
 The architecture Neon optimizes for is many small databases, most of them idle most of the time. Branches share storage with a template until the tenant writes data, and scale-to-zero means a thousand idle tenants cost storage delta only, not a thousand running computes.
 

@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest';
 import {
   parseConfiguratorCategories,
   parseDocsTableCategories,
+  parseCliMcpCategories,
   describeDrift,
 } from './check-mcp-categories-sync.mjs';
 
@@ -64,6 +65,33 @@ describe('parseDocsTableCategories', () => {
       '\n'
     );
     expect(() => parseDocsTableCategories(noSlugs)).toThrow(/no `category` slugs/);
+  });
+});
+
+describe('parseCliMcpCategories', () => {
+  const markdown = [
+    '## neon mcp',
+    '',
+    '- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, and `storage`.',
+    '',
+    'Other `categories` in backticks should not be parsed.',
+  ].join('\n');
+
+  it('reads slugs from the Categories are sentence in source order', () => {
+    expect(parseCliMcpCategories(markdown)).toEqual([
+      'projects',
+      'branches',
+      'endpoints',
+      'storage',
+    ]);
+  });
+
+  it('throws when the sentence is missing', () => {
+    expect(() => parseCliMcpCategories('# Nothing here')).toThrow(/Categories are/);
+  });
+
+  it('throws when the sentence has no backticked slugs', () => {
+    expect(() => parseCliMcpCategories('Categories are none.')).toThrow(/no `category` slugs/);
   });
 });
 

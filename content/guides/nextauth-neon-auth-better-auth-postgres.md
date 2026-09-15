@@ -101,7 +101,7 @@ export const config = {
 };
 ```
 
-With Managed Better Auth, your authentication state (users, sessions, etc.) lives right in your Neon-managed Postgres under the `neon_auth` schema. You can inspect and query them directly with SQL, and when you branch your database in Neon, both app and auth state branch together making previews and integration environments seamless.
+With Managed Better Auth, your authentication state (users, sessions, etc.) lives right in your Neon-managed Postgres under the `neon_auth` schema. You can inspect and query them directly with SQL, and when you branch your database in Neon, both app and auth state branch together, which makes previews and integration environments easy to set up.
 
 Managed Better Auth works best when you want authentication state to follow your database lifecycle, including branching, previews, and continuous integration. It’s a good fit if you prefer a managed authentication API, want to keep your application logic slim, and if SQL-level access to identity and Postgres-native authorization (like RLS) is important to you.
 

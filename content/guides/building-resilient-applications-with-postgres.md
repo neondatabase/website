@@ -11,7 +11,7 @@ Building resilient applications is essential when working with managed database 
 
 Managed database services routinely perform maintenance, apply updates, and optimize resources. While some maintenance can be scheduled, urgent security patches or critical updates may require brief compute restarts. These restarts can lead to temporary connection drops lasting a few seconds.
 
-Instead of treating these events as errors, robust applications anticipate and handle them gracefully. This guide teaches you best practices and patterns such as connection pooling, intelligent retry logic, and idempotency for write operations that work across managed database services, ensuring your application remains stable and provides a seamless user experience.
+Instead of treating these events as errors, resilient applications anticipate and handle them. This guide covers patterns such as connection pooling, retry logic, and idempotency for write operations that work across managed database services, so your application stays stable and users don't notice the interruption.
 
 ## Understanding connection drops in Neon
 
@@ -31,7 +31,7 @@ Building a resilient application involves three core strategies: using a connect
 
 ### Use a connection pool
 
-A connection pool is essential. Instead of opening and closing connections for each query, a pool maintains a set of open connections that your application can borrow and return. This significantly reduces the overhead of establishing new connections and is the foundation for handling interruptions gracefully. Most production-grade database drivers and ORMs provide robust connection pooling implementations.
+A connection pool is essential. Instead of opening and closing connections for each query, a pool maintains a set of open connections that your application can borrow and return. This significantly reduces the overhead of establishing new connections and is the foundation for handling interruptions gracefully. Most production-grade database drivers and ORMs provide connection pooling.
 
 ### Implement retry logic with exponential backoff
 
@@ -78,12 +78,12 @@ Consider this scenario:
 
 Your application receives a connection error and is left in an ambiguous state: it doesn't know if the transaction was committed or rolled back. A naive retry would re-execute the `INSERT`, potentially creating duplicate data, for example, charging a customer twice or creating a duplicate order.
 
-While this specific scenario of a lost commit acknowledgment is rare, it is a critical edge case to handle for systems where data integrity is paramount, such as e-commerce, financial services, or booking platforms.
+While this specific scenario of a lost commit acknowledgment is rare, it is a critical edge case to handle for systems where data integrity matters most, such as e-commerce, financial services, or booking platforms.
 </Admonition>
 
 #### The Idempotency Key Pattern
 
-A robust solution is to make your write operations **idempotent**. An idempotent operation is one that can be performed multiple times with the same result as if it were performed only once. This can be achieved by using a client-generated **idempotency key**.
+The fix is to make your write operations **idempotent**. An idempotent operation is one that can be performed multiple times with the same result as if it were performed only once. This can be achieved by using a client-generated **idempotency key**.
 
 The pattern works as follows:
 
@@ -840,7 +840,7 @@ Navigate to the **Branches** page in the Neon Console:
 
 <TabItem>
 
-To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage/api-keys) section in the Neon Console settings. You also need your project ID and endpoint ID, which you can find in the [Branches](/docs/manage/branches#view-branches) page of your project. For more details on project settings, see [Project Settings](/docs/manage/projects#project-settings). Additionally, refer to [Computes](/docs/manage/computes) for information on endpoints.
+To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage/api-keys) section in the Neon Console settings. You also need your project ID and endpoint ID, which you can find in the [Branches](/docs/manage/branches#view-branches) page of your project. For more details on project settings, see [Project Settings](/docs/manage/projects#project-settings). See [Computes](/docs/manage/computes) for information on endpoints.
 
 Use the [Restart compute endpoint](/docs/reference/api#/operations/restartProjectEndpoint) API. This is ideal for automated testing.
 

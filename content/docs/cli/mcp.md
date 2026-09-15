@@ -1,5 +1,7 @@
 ---
 title: 'Neon CLI command: mcp'
+tag: new
+tagTheme: green
 subtitle: 'Install the Neon MCP Server into your coding agents'
 summary: >-
   The Neon CLI `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server)
@@ -15,7 +17,7 @@ The `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server) into 
 Run `neon mcp` with no flags for an interactive walkthrough: it asks whether to write global or project-level config, which detected agents to install into, and whether to authenticate with a minted API key or OAuth, then shows you what it will do before writing anything. Pass flags to skip the prompts and run it non-interactively, which is what you want in scripts or a headless environment.
 
 <Callout title="mcp vs init">
-[`neon init`](/docs/cli/init) is the broader onboarding command: it sets up the MCP Server along with agent skills and editor config. Use `neon mcp` when you only want to install the Neon MCP Server into your agents, or [`neon skills`](/docs/cli/skills) when you only want to install agent skills.
+For the full setup, use [`neon init`](/docs/cli/init). For just one piece: [`neon skills`](/docs/cli/skills) (skills), [`neon plugins`](/docs/cli/plugins) (skills and MCP), or `neon mcp` (MCP server).
 </Callout>
 
 ## Usage
@@ -28,7 +30,7 @@ Run `neon mcp` with no flags for an interactive walkthrough: it asks whether to 
 
 ### Authentication
 
-By default, `mcp` mints a new Neon API key and writes it into each agent's config. Minting requires you to already be signed in, so run [`neon auth`](/docs/cli/auth) first or pass `--api-key`. If you aren't authenticated, the command stops and tells you to sign in, pass `--api-key`, or use `--oauth`.
+By default, `mcp` mints a new Neon API key and writes it into each agent's config. Minting requires you to already be signed in, so run [`neon login`](/docs/cli/login) first or pass `--api-key`. If you aren't authenticated, the command stops and tells you to sign in, pass `--api-key`, or use `--oauth`.
 
 <Admonition type="warning" title="Minted keys are account-wide by default">
 By default a minted API key reaches everything your account can access, in every organization. Pass `--project-id` to limit a newly minted key to a single project instead (see [Scoping the tools](#scoping-the-tools)). The command prints the key's id when it mints one. Revoke it with [`neon api-keys revoke <id>`](/docs/cli/api-keys).
@@ -47,7 +49,7 @@ The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `co
 By default the server exposes every MCP tool. Use these flags to narrow what an agent can do:
 
 - `--read-only` hides the write tools by adding `?readonly=true` to the server URL.
-- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, and `docs`.
+- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, and `storage`.
 - `--project-id <id>` pins the tools to a single Neon project with `?projectId=`, and limits a newly minted key to that project.
 
 `--read-only` and `--category` shape the server URL only; they don't change a key's scope, and neither does reusing an already-configured key.

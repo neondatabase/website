@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-08-25T17:09:07.082Z'
+updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -55,7 +55,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Database storage
 
 - Increased ingestion speeds
-- Storage limits up to 200 TB per project
+- Continued storage scaling
 
 ### Postgres compute
 
@@ -90,7 +90,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Debug Postgres from the CLI with `neon inspect db`**: Run read-only Postgres diagnostics (table sizes, bloat, unused indexes, long-running queries, locks, and more) straight from the Neon CLI, safe to hand to an agent. [Learn more](/docs/cli/inspect).
 - **Snapshots in the Neon CLI**: The new `neon snapshots` command group manages the full snapshot lifecycle (list, create, restore, and schedule) from your terminal. [Learn more](/docs/cli/snapshots).
 - **Query Functions and Storage logs from the Neon MCP server**: New read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools let your AI assistant investigate Functions and Object Storage failures without leaving your editor. [Learn more](/docs/ai/neon-mcp-server).
-- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](/blog/neon-backend-is-beta).
+- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available in AWS US East (Ohio) and AWS Europe (Frankfurt). Support is expanding toward all regions. Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](/blog/neon-backend-is-beta).
 - **New TypeScript SDK for the Neon API**: `@neon/sdk` is a fetch-based, zero-dependency client that covers the full Neon Platform API, including the new backend services, and replaces `@neondatabase/api-client` as the recommended client. [Learn more](/docs/reference/typescript-sdk).
 - **Passkey support**: Sign in to Neon with a passkey using device biometrics or a security key. Passkeys satisfy organization-level 2FA requirements. [Learn more](/docs/manage/accounts#passkeys).
 - **Git-style diffs in the Neon CLI**: The new `neon diff` command shows schema changes between your current branch and any other branch, and the config commands now report their changes as a git diff. [Learn more](/docs/cli).
@@ -134,7 +134,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Agent Skills**: Install [Agent Skills](https://github.com/neondatabase/agent-skills) to teach your AI assistant about Neon best practices. The Neon MCP Server can also provision the Data API with optional Managed Better Auth or external auth. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Managed Better Auth on Vercel previews**: Both Vercel-managed and Neon-managed integrations now automatically provision Managed Better Auth on preview branches when enabled on production, so preview deployments get the right auth environment variables. [Learn more](/docs/auth/overview).
 - **One-command setup for MCP and VS Code extension**: `npx neon@latest init` now configures both the Neon MCP Server and the Neon VS Code Extension in one step for Cursor or VS Code. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
-- **Expanded `neon init`**: The **init** wizard configures MCP and agent skills for many more coding assistants (for example Claude Desktop, Codex, Zed, Gemini CLI, and GitHub Copilot CLI), not only Cursor, VS Code, and Claude Code. [Learn more](/docs/cli/init).
+- **Expanded `neon init`**: [`neon init`](/docs/cli/init) sets up your project with agent tooling (either a plugin, or skills and the MCP server) for many more coding assistants (for example Claude Desktop, Codex, Zed, Gemini CLI, and GitHub Copilot CLI), not only Cursor, VS Code, and Claude Code. [Learn more](/docs/cli/init).
 - **New Neon VS Code extension**: A revamped extension that replaces the previous Neon Local extension. It uses direct Neon connection strings and brings schema browsing, SQL editing, and table data into your IDE, plus automatic MCP Server configuration. Available for VS Code, Cursor, Windsurf, and other compatible editors. [Learn more](/docs/local/vscode-extension).
 - **Connection pooling metrics**: Pooler client and server connection graphs are now available in the Neon Console and via OpenTelemetry and Datadog integrations, so you can monitor PgBouncer usage and tune pool size. [Learn more](/docs/introduction/monitoring-page).
 - **GitHub Action support for Managed Better Auth and Data API**: The Neon Create Branch GitHub Action now supports `get_auth_url` and `get_data_api_url` outputs, so you can run integration tests against isolated branch environments with the same auth and data access patterns as production. [Learn more](https://github.com/marketplace/actions/neon-create-branch-github-action).

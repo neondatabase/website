@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -25,7 +25,7 @@ This guide walks you through enabling the Data API, creating a table with RLS, a
 ## Enable the Data API
 
 <Admonition type="tip" title="Enable programmatically">
-You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
+You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page
@@ -262,8 +262,8 @@ const { data, error } = await client
 console.log(data);
 ```
 
-<Admonition type="warning" title="Not yet on npm">
-The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference instead.
+<Admonition type="note" title="Version compatibility">
+The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the [object form](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 <Admonition type="note">

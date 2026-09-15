@@ -165,6 +165,24 @@ function resolveSpecObject(expr, consts) {
       return resolveSpecObject(prop.initializer, consts);
     }
   }
+  // Dot access into a resolvable const object, e.g. `envFlag.env` where
+  // `envFlag = { env: { type, describe } }` is pooled in `consts`. Mirrors the
+  // bracket-access branch above; needed because checkout.ts redefines its `env`
+  // option as `{ ...envFlag.env, describe: envFlag.env.describe + '…' }`, so both
+  // the inner spread and the describe concat resolve through this.
+  if (
+    ts.isPropertyAccessExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    consts &&
+    consts.has(e.expression.text)
+  ) {
+    const container = consts.get(e.expression.text);
+    if (!ts.isObjectLiteralExpression(container)) return undefined;
+    const prop = getProp(container, e.name.text);
+    if (prop && ts.isPropertyAssignment(prop)) {
+      return resolveSpecObject(prop.initializer, consts);
+    }
+  }
   return undefined;
 }
 
@@ -446,6 +464,17 @@ function parseCommandCall(callArgs, consts) {
   if (ts.isStringLiteral(first) || ts.isNoSubstitutionTemplateLiteral(first)) {
     commandString = first.text;
     // Second arg is the description; third is the builder function.
+    describe = resolveStringValue(callArgs[1], consts);
+    builderNode = callArgs[2];
+  } else if (ts.isArrayLiteralExpression(first)) {
+    // Array form: `.command([name, ...aliases], desc, builder, handler)`.
+    // The first element is the command (may carry positionals, e.g.
+    // `'register <domain>'`); the rest are aliases.
+    const arr = arrayLiteralStrings(first);
+    if (arr && arr.length) {
+      commandString = arr[0];
+      aliases = arr.slice(1);
+    }
     describe = resolveStringValue(callArgs[1], consts);
     builderNode = callArgs[2];
   } else if (ts.isObjectLiteralExpression(first)) {
@@ -819,6 +848,55 @@ function applyDynamicCommands(schema, src) {
   return schema;
 }
 
+// Backfills inherited option fields from a parent command onto the same-named
+// options its subcommands declare. yargs merges a parent command's `.options()`
+// into each subcommand, so a subcommand that re-declares an option only to
+// change its describe (like `skills update`'s `yes: { describe }`) still gets
+// the parent's `alias`, `type`, and `default`. The static parser reads each
+// builder in isolation and misses this, so the subcommand's spec came out
+// missing its alias and typed `unknown`.
+//
+// This is deliberately conservative: it only enriches options a subcommand
+// ALREADY declares, and never copies a parent option a subcommand omits. A
+// subcommand can hide or reject an inherited parent option (`skills update`
+// hides and throws on `--agent`/`--skill`), so blindly propagating every parent
+// option would add flags the subcommand doesn't actually accept. The
+// subcommand's own fields always win; the parent only fills the gaps, and
+// `hidden` is never inherited (a subcommand re-declaring an option means it).
+//
+// Scope: this models command→subcommand inheritance only. Global options are
+// not in the inherited chain (each top-level command is seeded with `{}`), so a
+// subcommand that re-declares a global with a partial spec isn't resolved here.
+// That's fine today: every such case in the CLI is a hidden option, not one
+// docs examples validate against.
+function inheritParentOptions(node, inherited = {}) {
+  const localOptions = node.options || {};
+  for (const [name, spec] of Object.entries(localOptions)) {
+    const parentSpec = inherited[name];
+    if (!parentSpec || typeof parentSpec !== 'object') continue;
+    for (const [key, value] of Object.entries(parentSpec)) {
+      if (key === 'hidden') continue;
+      // A local `type: "unknown"` is the parser's "couldn't tell" sentinel, so
+      // treat it as a gap and let the parent's real type fill it (same rule the
+      // `.positional()` merge uses).
+      const isGap = !(key in spec) || (key === 'type' && spec[key] === 'unknown');
+      if (isGap && value !== 'unknown') {
+        // Clone object/array values (e.g. a `choices` array) so the subcommand
+        // never shares a reference with the parent's spec.
+        spec[key] = value && typeof value === 'object' ? structuredClone(value) : value;
+      }
+    }
+  }
+  const commands = node.commands || {};
+  if (Object.keys(commands).length === 0) return;
+  // Nearest ancestor wins: a subcommand inherits this node's resolved options
+  // layered over what this node itself inherited from higher up.
+  const childInherited = { ...inherited, ...localOptions };
+  for (const sub of Object.values(commands)) {
+    inheritParentOptions(sub, childInherited);
+  }
+}
+
 // Deep-merges `overrides.json` (if present) into the schema. Overrides are
 // the escape hatch for terse or missing upstream descriptions — same shape
 // as the schema itself, merged key-by-key with overrides winning.
@@ -897,6 +975,12 @@ function buildSchema({ src } = {}) {
     if (parsed.describe) entry.describe = parsed.describe;
     if (parsed.usage) entry.usage = parsed.usage;
     if (parsed.examples) entry.examples = parsed.examples;
+    // Backfill options a subcommand inherits from this command (yargs merges a
+    // parent's `.options()` into its subcommands). Runs before overrides so a
+    // hand-written override still has the final say. Dynamic subcommands are
+    // injected later with no options, so running before applyDynamicCommands is
+    // a no-op on them.
+    inheritParentOptions(entry, {});
     commands[parsed.name] = entry;
   }
 
@@ -1008,6 +1092,7 @@ module.exports = {
   parseOptionsObject,
   parseCommandCall,
   enumerateConstEntries,
+  inheritParentOptions,
 };
 
 if (require.main === module) main();

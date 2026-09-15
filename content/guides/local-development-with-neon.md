@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
@@ -24,7 +24,7 @@ Let's explore both options to help you pick the right one.
 
 ## Database branching
 
-Imagine creating a complete copy of your database as easily as creating a Git branch. That's [database branching](/docs/introduction/branching) with Neon – perfect for testing new features or updates without touching production data.
+[Database branching](/docs/introduction/branching) creates a complete copy of your database as easily as creating a Git branch. Use it to test new features or updates without touching production data.
 
 ### Why use it?
 
@@ -43,7 +43,7 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 2. **Connect your account**
 
    ```bash
-   neon auth
+   neon login
    ```
 
 3. **Create your branch**
@@ -467,7 +467,7 @@ Cloud-hosted branches offer several compelling advantages:
 ### Choose database branching when:
 
 - You want instant development environments
-- You need efficient resource utilization
+- You need efficient resource use
 - You're working with a team
 
 **Perfect for:**
@@ -480,7 +480,7 @@ Cloud-hosted branches offer several compelling advantages:
 
 ### Consider local PostgreSQL when:
 
-- Offline development is crucial
+- You need offline development
 - You need zero network latency
 - You require complete database control
 - You have specific local testing requirements
@@ -507,6 +507,6 @@ Cloud-hosted branches offer several compelling advantages:
 
 ## Start building
 
-You're now ready to create a powerful development environment with Neon. Choose the approach that fits your team best and start building.
+You're now ready to set up a development environment with Neon. Choose the approach that fits your team best and start building.
 
 <NeedHelp/>

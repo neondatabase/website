@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-08-31T19:23:51.024Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -29,8 +29,8 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Key points
 
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/introduction/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
-- This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/postgres/backup-restore/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
+- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset, and there is no way to exclude `neon_auth`. Unlike instant restore, a reset leaves no backup branch, so keep any auth work you want to preserve on its own branch. Object Storage and Functions are not part of the database timeline, so a reset does not affect any local changes you've made to them.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
@@ -110,7 +110,7 @@ curl --request POST \
 '
 ```
 
-For details, see [Instant restore using the API](/docs/introduction/branch-restore#how-to-use-instant-restore)
+For details, see [Instant restore using the API](/docs/postgres/backup-restore/branch-restore#how-to-use-instant-restore)
 
 </TabItem>
 
@@ -122,24 +122,24 @@ You can include resetting database branches as part of your CI/CD workflow. For 
 
 ### For new features
 
-Start feature development with a clean slate by resetting your development branch to align with staging or production (whichever is its parent). This replaces the branch's current state with the parent's latest data and schema. Use the command:
+Start feature development with a clean slate by resetting your development branch to align with staging or production (whichever is its parent). This replaces the branch's current Postgres database and Managed Better Auth state with the parent's latest data and schema. Use the command:
 
 ```bash
 neon branches reset dev-branch --parent
 ```
 
-This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a fully updated and consistent environment.
+This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a consistent baseline that includes your database and Managed Better Auth state.
 
 ### Refresh staging
 
-Reset **staging** to match its parent branch (i.e., **production**) for a reliable testing baseline. Automate staging updates with:
+Reset **staging** to match its parent branch (i.e., **production**) for a reliable Postgres database testing baseline. Automate staging updates with:
 
 ```bash
 neon branches reset staging --parent
 ```
 
-This ensures staging accurately reflects the current production state for reliable testing.
+This ensures staging accurately reflects the current production database state for reliable testing.
 
 ## Limitations
 
-- **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/introduction/branch-restore) to restore the child branch from the parent directly.
+- **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/postgres/backup-restore/branch-restore) to restore the child branch from the parent directly.

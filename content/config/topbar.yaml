@@ -1,4 +1,4 @@
-text: 'A deep dive on the lakebase storage: S3 + WAL for the era of agents'
+text: '"A quarter of work, done in 6 days".  How a solo founder built isolated Postgres per tenant on Neon'
 link:
-  url: 'https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents'
+  url: 'https://neon.com/blog/inside-lubots-database-per-tenant-architecture'
   target: '_blank'

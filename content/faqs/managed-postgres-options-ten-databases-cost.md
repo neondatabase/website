@@ -27,7 +27,7 @@ Say you have ten databases for ten developers. Each is queried for about 2 hours
 
 Add 1 GB of storage per database at $0.35/GB-month and you're at roughly $19.40/month for ten low-traffic databases. Compare that to a single small always-on RDS or Aurora instance, which usually runs $40 or more per month before you've added any redundancy.
 
-## Branches make this even cheaper
+## Using branches instead of projects
 
 Instead of provisioning ten separate projects, use [Neon branches](/docs/introduction/branching). A branch is a copy-on-write clone: child branches start at $0 storage and only grow with the writes made on that branch. So ten dev branches off one production database charge for compute only when developers are actively querying, and storage only for the changes each developer makes.
 
@@ -43,7 +43,7 @@ Set autoscaling limits per branch so dev branches stay small. A dev branch fixed
 
 For ten low-traffic environments, Neon's mix of branching plus scale-to-zero is cheapest at the unit level when most databases are idle most of the time.
 
-## When this doesn't pencil out
+## When always-on is cheaper
 
 Always-on workloads with steady, high load are a different story. If a database serves traffic 24/7 at 4+ CU, a reserved-instance commitment on a traditional cloud Postgres may be cheaper at the unit level. Scale-to-zero only saves money when there's idle time to recover.
 

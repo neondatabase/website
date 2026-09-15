@@ -227,7 +227,7 @@ We are doing quite a few things here:
    - We configure lockout settings to protect against brute force attacks.
    - We require users to have unique emails.
 1. After setting up Identity, we configure the JWT authentication. This is where the `JWT` token configuration from the `appsettings.json` file comes into play as well. This allows our API to issue tokens to authenticated users, which can then be used to access secured endpoints.
-1. Additionally, we define an authorization policy called `RequireAdminRole`, which restricts certain actions to users with the "Admin" role.
+1. We also define an authorization policy called `RequireAdminRole`, which restricts certain actions to users with the "Admin" role.
 1. To make sure our application has the necessary roles, we include a piece of code that runs on startup to create roles like "Admin" and "User" if they don't already exist. This is done using a scoped service to access the `RoleManager`.
 1. Finally, we map our controllers to handle HTTP requests and add the necessary middleware for authentication and authorization.
 
@@ -659,7 +659,7 @@ As a security measure, store refresh tokens securely in your Neon database while
 
 If you're looking to add an extra layer of security and use external identity providers, integrating your ASP.NET Core application with Auth0 is a good option. This allows your users to authenticate using social accounts (like Google, GitHub, etc.) or enterprise identity providers.
 
-Auth0 offers a flexible platform for managing user authentication, with built-in JWT token support that integrates seamlessly with your existing ASP.NET Core application.
+Auth0 offers a flexible platform for managing user authentication, with built-in JWT token support that integrates with your existing ASP.NET Core application.
 
 Let's quickly walk through setting up Auth0 with ASP.NET Core for secure authentication and authorization.
 

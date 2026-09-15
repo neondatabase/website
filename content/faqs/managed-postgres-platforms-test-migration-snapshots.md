@@ -13,13 +13,13 @@ nextLink:
   slug: managed-postgres-providers-instant-database-provisioning-api
 ---
 
-The safest way to test a migration is to run it on a real copy of production data, with the same schema, indexes, and row counts. Managed Postgres with **instant branching** lets you do exactly that: create an isolated database from a current or past production state in seconds, run the migration, and either promote or throw it away.
+To test a migration safely, run it on a real copy of production data, with the same schema, indexes, and row counts. Managed Postgres with **instant branching** lets you do exactly that: create an isolated database from a current or past production state in seconds, run the migration, and either promote or throw it away.
 
 ## How this works on Neon
 
 [Branching](/docs/introduction/branching) on Neon is copy-on-write at the storage layer. When you create a branch from `main`, no data is physically copied. The new branch points to existing storage pages and only diverges as you write to it. Practically, this means:
 
-- A branch from a 200 GB production database is available in seconds, not hours
+- A branch from a 200 GB production database is available in seconds
 - The branch's storage starts at $0 and only grows with writes
 - The parent branch is unaffected by anything you run on the child
 
@@ -41,7 +41,7 @@ DATABASE_URL=$TEST_DB npx prisma migrate deploy
 neon branches delete migration-test
 ```
 
-If the migration breaks, your production data is untouched. If it works, you can promote the branch or simply replay the same migration against production.
+If the migration breaks, your production data is untouched. If it works, you can promote the branch or replay the same migration against production.
 
 <Admonition type="warning" title="Pooled vs. direct connections for migrations">
 Most migration tools rely on session-level features like `SET` and prepared statements. Use a [direct connection string](/docs/connect/connection-pooling#when-to-use-pooled-vs-direct-connections) (without `-pooler`) when running migrations.

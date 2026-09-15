@@ -49,7 +49,7 @@ Most importantly, you can install `@neon/sdk` today:
 npm install @neon/sdk
 ```
 
-And use ergonomic functions like `createAndConnect` to provision a Neon project, wait for the provisioning operations to finish and hand you back a ready-to-use Postgres connection string, all in a single call:
+And use ergonomic functions like `createAndConnect` to provision a Neon project, wait for the provisioning operations to finish, and hand you back `{ project, connectionString }` in a single call:
 
 ```ts
 import { createNeonClient } from "@neon/sdk";
@@ -79,7 +79,7 @@ import { createNeonClient, raw } from "@neon/sdk";
 - **`createNeonClient`**: the high-level ergonomic client, organized into resource namespaces like `neon.projects` and `neon.branches`.
 - **`raw`**: the low-level generated surface, every endpoint as a standalone, tree-shakeable function.
 
-Take readiness polling as an example. The Neon API provisions real infrastructure and a lot of that work happens in the background, so most mutations don't hand you a ready-to-use resource. They return `operations` that you'd normally poll yourself until the resource is ready. `@neon/sdk` offers an abstraction that does that polling behind the scenes, so a call only resolves once the resource is actually ready. `createAndConnect` does this by default and you can opt any other mutation into the same behavior.
+Take readiness polling as an example. The Neon API provisions real infrastructure and a lot of that work happens in the background, so most mutations don't hand you a ready-to-use resource. They return `operations` that you'd normally poll yourself until the resource is ready. `@neon/sdk` offers an abstraction that does that polling behind the scenes, so a call only resolves once the resource is actually ready. `projects.create`, `branches.create`, and both `createAndConnect` workflows poll by default. Other mutations take `{ waitForReadiness: true }`.
 
 We hope `createNeonClient` covers most of what you need to build platforms and programmatic automations on Neon: a type-safe, ergonomic way to use Neon's capabilities. That said, you can always reach for the raw API methods directly.
 
@@ -116,17 +116,12 @@ await neon.projects.transfer({
 });
 ```
 
-### Create a branch with its own compute
+### Create a branch and get a connection string
 
-If you create a Neon branch through the API, you have to chain two calls:
-
-1. Create the branch
-2. Provision compute for the branch
-
-If you're used to the Neon UI, this is done automatically for you, but over the REST API it's split into two calls, which usually takes both devs and agents a few attempts to get right. `createWithCompute` creates the branch, spins up a read-write endpoint, waits for it to be ready and returns a connection string, all in one call:
+`branches.create` attaches a read-write endpoint by default and returns the branch. `createAndConnect` does the same, waits until the branch is ready, and returns `{ branch, endpoint, connectionString }`:
 
 ```ts
-const { data, error } = await neon.branches.createWithCompute(projectId, {
+const { data, error } = await neon.branches.createAndConnect(projectId, {
   name: "preview/pr-123",
   compute: { minCu: 0.25, maxCu: 2 },
 });

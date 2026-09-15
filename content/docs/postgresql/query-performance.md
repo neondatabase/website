@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-09-10T13:38:23.543Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -363,7 +363,11 @@ For information about right-sizing your compute in Neon, see [How to size your c
 
 A cache hit ratio tells you the percentage of queries served from memory. Queries not served from memory retrieve data from disk, which is more costly and can result in slower query performance.
 
-In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon caches data in your compute's memory (up to 75% of your compute's RAM). To query your cache hit ratio in Neon, you need to look at compute cache hits instead of shared buffer hits.
+In a standalone Postgres instance, you can query the cache hit ratio with an SQL statement that looks for `shared buffers` block hits. In Neon, it’s a little different. Neon caches data on your compute (up to 75% of your compute's RAM). To query your cache hit ratio in Neon, you need to look at compute cache hits instead of shared buffer hits.
+
+<Admonition type="note">
+This applies to autoscaling computes and fixed-size computes below 18 CU. On fixed-size computes of 18 CU and above, Neon caches data in Postgres `shared_buffers` rather than the file cache, so the `neon_stat_file_cache` view below does not reflect the working cache there. On those computes, check the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph or `SHOW shared_buffers` instead. See [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache) for details.
+</Admonition>
 
 To enable querying compute cache statistics, Neon provides a [neon_stat_file_cache](/docs/extensions/neon#the-neonstatfilecache-view) view. To access this view, you need to install the [neon](/docs/extensions/neon) extension:
 

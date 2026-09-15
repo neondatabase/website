@@ -172,7 +172,7 @@ A key feature of Managed Better Auth is the automatic creation and maintenance o
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
+This step makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
@@ -458,7 +458,7 @@ The component creates a simple header with the app title on the left and the `Us
 
 ### Todo application component
 
-Create `src/pages/TodoApp.tsx`. This component manages the todo list, allowing users to add, toggle, and delete tasks. It uses the Neon Data API to interact with the `todos` table, leveraging RLS policies to ensure secure data access.
+Create `src/pages/TodoApp.tsx`. This component manages the todo list, allowing users to add, toggle, and delete tasks. It uses the Neon Data API to interact with the `todos` table, with RLS policies controlling data access.
 
 <Admonition type="note" title="Note">
 Because **RLS policies** are defined in the schema, you don’t need to manually filter by `user_id` when selecting data; the database automatically applies filtering based on the authenticated user’s token. For performance and indexing efficiency, however, it’s still recommended to include `user_id` in your queries.

@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-services-reset-development-environment
 ---
 
-Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges. There's no per-instance monthly fee and no minimum compute charge. Storage continues to bill while the compute is suspended ($0.35/GB-month on paid plans; Free includes 0.5 GB/project).
+Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges. There's no per-instance monthly fee and no minimum compute charge. Storage continues to bill while the compute is suspended ($0.35/GB-month on paid plans; the Free plan includes 0.5 GB/project).
 
 ## How CU-hours work
 
@@ -29,7 +29,7 @@ A 0.25 CU database running for 5 hours costs 0.25 × 5 = 1.25 CU-hours, or about
 
 ## Scale-to-zero in practice
 
-After 5 minutes of inactivity (the default), Neon suspends the compute. On the next query, it wakes up. On the Launch plan you can disable this; on the Scale plan it's configurable from 1 minute up to always-on.
+After 5 minutes of inactivity (the default), Lakebase Postgres suspends the compute. On the next query, it wakes up. On the Launch plan you can disable this; on the Scale plan it's configurable from 1 minute up to always-on.
 
 ```bash
 # Sample Launch-plan bill for a small side project
@@ -48,13 +48,13 @@ Storage is billed separately at $0.35/GB-month, and instant-restore history at $
 | Provider             | Billing unit                                   | Scale to zero                                                                          |
 | -------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------- |
 | Neon                 | CU-hours, billed by the second                 | Default, suspend after configurable idle window (1 minute to never on the Scale plan)  |
-| Aurora Serverless v2 | ACU-hours (1 ACU is ~2 GB RAM)                 | Supported via auto-pause, requires Aurora PostgreSQL 13.15+, 14.12+, 15.7+, or 16.3+   |
-| RDS for PostgreSQL   | Per-instance hour at the chosen instance class | Not supported. Stopping a DB instance pauses for at most 7 days before AWS restarts it |
+| Aurora Serverless v2 | ACU-hours (1 ACU is ~2 GB RAM)                 | Supported via auto-pause, requires Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+   |
+| RDS for Postgres   | Per-instance hour at the chosen instance class | Not supported. Stopping a DB instance pauses for at most 7 days before AWS restarts it |
 | Supabase             | Compute add-on hour at the chosen size         | Not supported on paid plans. Free projects pause after inactivity                      |
 
-Aurora Serverless v2 supports scale-to-zero through the auto-pause feature when you set the minimum ACU to 0. It requires Aurora PostgreSQL 13.15, 14.12, 15.7, 16.3 or later. See [Scaling to zero ACUs with auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). On resume, capacity may come back at a lower ACU than at pause.
+Aurora Serverless v2 supports scale-to-zero through the auto-pause feature when you set the minimum ACU to 0. It requires Aurora Postgres 13.15, 14.12, 15.7, 16.3 or later. See [Scaling to zero ACUs with auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). On resume, capacity may come back at a lower ACU than at pause.
 
-RDS for PostgreSQL is billed per hour for the chosen instance class. There's no auto-pause; you can stop a DB instance manually but AWS restarts it after seven days. See [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html).
+RDS for Postgres is billed per hour for the chosen instance class. There's no auto-pause; you can stop a DB instance manually but AWS restarts it after seven days. See [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html).
 
 Supabase bills a flat hourly rate per compute add-on size. A Micro project costs $0.01344 per hour even when idle. See [Supabase compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute).
 

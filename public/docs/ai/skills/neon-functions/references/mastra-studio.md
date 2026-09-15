@@ -102,8 +102,8 @@ functions: {
     name: "my app",
     source: "src/index.ts",
     env: {
-      MASTRA_PROJECT_ID: process.env.MASTRA_PROJECT_ID ?? "",
-      MASTRA_PLATFORM_ACCESS_TOKEN: process.env.MASTRA_PLATFORM_ACCESS_TOKEN ?? "",
+      MASTRA_PROJECT_ID: process.env.MASTRA_PROJECT_ID!,
+      MASTRA_PLATFORM_ACCESS_TOKEN: process.env.MASTRA_PLATFORM_ACCESS_TOKEN!,
     },
   },
 }

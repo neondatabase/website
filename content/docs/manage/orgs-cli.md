@@ -7,18 +7,18 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-07-28T21:59:28.499Z'
+updatedOn: '2026-09-08T15:58:09.171Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
 
 ## Authorization
 
-Use the `auth` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neonctl/credentials.json`.
+Use the `login` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neon/credentials.json`.
 
 Authentication is tied to your Neon user account. Once authenticated, you can access and manage any organization you belong to. When running commands, you'll need to specify which organization to use via `--org-id`, a [context file](/docs/cli/set-context), or by responding to the interactive prompt.
 
-See [Auth - CLI](/docs/cli/auth) to learn more.
+See [Login - CLI](/docs/cli/login) to learn more.
 
 ## List Organizations
 

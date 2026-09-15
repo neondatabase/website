@@ -93,6 +93,8 @@
               slug: guides/javascript
             - title: Kotlin
               slug: guides/kotlin
+              tag: new
+              tagTheme: green
             - title: Python
               slug: guides/python
             - title: Rust
@@ -371,6 +373,26 @@
                       slug: workflows/data-anonymization-api
                     - title: GitHub Actions
                       slug: workflows/data-anonymization-github-actions
+        - section: Backup & restore
+          icon: report
+          items:
+            - title: Backup strategies
+              slug: postgres/backup-restore/backups
+            - title: Instant restore
+              slug: postgres/backup-restore/branch-restore
+            - title: Time Travel
+              slug: postgres/backup-restore/time-travel-assist
+            - title: History window
+              slug: postgres/backup-restore/history-window
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
         - title: Postgres guides
           slug: postgresql/introduction
           icon: book
@@ -822,10 +844,26 @@
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
-        - title: AI agents
-          slug: compute/functions/agents
-        - title: WebSockets and SSE
-          slug: compute/functions/websockets
+        - section: Use cases
+          items:
+            - title: AI agents
+              slug: compute/functions/agents
+            - title: WebSockets and SSE
+              slug: compute/functions/websockets
+        - section: Example apps
+          items:
+            - title: Discord bot
+              slug: compute/functions/discord-bot
+              tag: new
+              tagTheme: green
+            - title: Telegram bot
+              slug: compute/functions/telegram-bot
+              tag: new
+              tagTheme: green
+            - title: WhatsApp bot
+              slug: compute/functions/whatsapp-bot
+              tag: new
+              tagTheme: green
         - section: Reference
           items:
             - title: Runtime limits
@@ -868,6 +906,8 @@
               slug: ai-gateway/get-started
             - title: Models
               slug: ai-gateway/models
+            - title: Prepaid credits
+              slug: ai-gateway/prepaid-credits
         - section: APIs
           items:
             - title: Chat completions
@@ -876,6 +916,8 @@
               slug: ai-gateway/openai-responses
             - title: Anthropic Messages API
               slug: ai-gateway/anthropic-messages
+              tag: new
+              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -900,6 +942,8 @@
               slug: manage/accounts
             - title: Permissions quickstart
               slug: manage/project-permissions-get-started
+              tag: new
+              tagTheme: green
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -934,8 +978,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: The object model
-              slug: concepts/the-object-model
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
@@ -987,26 +1029,6 @@
           items:
             - title: Production checklist
               slug: get-started/production-checklist
-            - title: Backup & restore
-              slug: manage/backups
-              items:
-                - title: Backup & restore
-                  slug: guides/backup-restore
-                - title: History window
-                  slug: introduction/history-window
-                - title: Instant restore
-                  slug: introduction/branch-restore
-                - title: Overview
-                  slug: manage/backups
-                - title: Backup with pg_dump
-                  slug: manage/backup-pg-dump
-                - title: Automate pg_dump backups
-                  slug: manage/backup-pg-dump-automate
-                  items:
-                    - title: Part 1 - Create an S3 bucket
-                      slug: manage/backups-aws-s3-backup-part-1
-                    - title: Part 2 - Automate nightly backups
-                      slug: manage/backups-aws-s3-backup-part-2
             - title: Updates
               slug: manage/updates
               items:
@@ -1050,15 +1072,6 @@
           items:
             - title: Backup & restore
               slug: guides/backup-restore
-            - title: History window
-              slug: introduction/history-window
-            - title: Instant restore
-              slug: introduction/branch-restore
-            - title: Time Travel
-              slug: guides/time-travel-assist
-              items:
-                - title: Time Travel tutorial
-                  slug: guides/time-travel-tutorial
             - title: Schema diff
               slug: guides/schema-diff
               items:
@@ -1094,8 +1107,6 @@
           slug: introduction/manage-billing
         - title: Spending notifications
           slug: introduction/spending-notifications
-          tag: new
-          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
@@ -1136,6 +1147,8 @@
           items:
             - title: Claimable Neon
               slug: reference/claimable-neon
+              tag: new
+              tagTheme: green
         - section: Guides
           icon: book
           items:
@@ -1176,6 +1189,10 @@
                   slug: ai/ai-codex-plugin
                 - title: Cursor plugin
                   slug: ai/ai-cursor-plugin
+                - title: Grok Bot plugin
+                  slug: ai/ai-grok-bot-plugin
+                  tag: new
+                  tagTheme: green
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
             - section: Build AI agents
@@ -1224,18 +1241,30 @@
                   slug: cli/quickstart
             - title: Setup and context
               items:
-                - title: auth
-                  slug: cli/auth
+                - title: login
+                  slug: cli/login
                 - title: init
                   slug: cli/init
+                - title: ask
+                  slug: cli/ask
+                  tag: new
+                  tagTheme: green
                 - title: mcp
                   slug: cli/mcp
+                  tag: new
+                  tagTheme: green
                 - title: skills
                   slug: cli/skills
+                  tag: new
+                  tagTheme: green
                 - title: plugins
                   slug: cli/plugins
+                  tag: new
+                  tagTheme: green
                 - title: claim
                   slug: cli/claim
+                  tag: new
+                  tagTheme: green
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link
@@ -1248,6 +1277,8 @@
                   slug: cli/set-context
                 - title: open
                   slug: cli/open
+                  tag: new
+                  tagTheme: green
                 - title: me
                   slug: cli/me
                 - title: profile
@@ -1292,12 +1323,16 @@
               items:
                 - title: functions
                   slug: cli/functions
+                - title: triggers
+                  slug: cli/triggers
                 - title: buckets
                   slug: cli/buckets
                 - title: data-api
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: credentials
+                  slug: cli/credentials
             - title: Organizations and networking
               items:
                 - title: api
@@ -1314,6 +1349,8 @@
                   slug: cli/inspect
                 - title: logs
                   slug: cli/logs
+                  tag: new
+                  tagTheme: green
         - section: API
           icon: api
           items:
@@ -1323,9 +1360,9 @@
               slug: reference/api/get-started
             - title: Key concepts
               slug: reference/api/key-concepts
-            - section: API Reference
-              title: Endpoint index
+            - title: Search endpoints
               slug: reference/api/reference
+            - section: API Reference
               items: []
         - section: SDKs
           icon: sdk

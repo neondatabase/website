@@ -7,11 +7,11 @@ createdAt: '2025-01-31T00:00:00.000Z'
 updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
-In today's AI-driven world, the ability to connect intelligent agents with powerful tools is key to building sophisticated applications. Imagine AI agents that can not only think and plan but also seamlessly interact with your database to retrieve information, manage resources, and perform complex tasks. This guide explores exactly that, demonstrating how to harness the power of **CrewAI** for agent orchestration, **Composio** for tool integration, and **Neon API** for database management.
+This guide shows how to build AI agents that can query your database, manage resources, and perform tasks on your Neon account. It uses **CrewAI** for agent orchestration, **Composio** for tool integration, and the **Neon API** for database management.
 
-Composio acts as a crucial bridge, empowering your CrewAI agents with the ability to interact directly with the Neon API. This integration unlocks a range of possibilities, from querying your Neon project details to managing your database infrastructure programmatically through AI. By leveraging Composio's wide range of tools, you can equip your AI agents with a comprehensive suite of actions, all without needing to wrestle with complex API integrations manually.
+Composio is the bridge between your CrewAI agents and the Neon API. Through it, agents can query your Neon project details and manage your database infrastructure programmatically. Composio's tool catalog gives your agents a set of ready-made actions, so you don't need to write API integrations by hand.
 
-This guide provides a practical, hands-on approach to building an AI agent capable of retrieving information from your Neon account. You'll not only see how easily these technologies integrate but also gain a foundational understanding of how to extend this setup for more advanced AI-driven database interactions.
+This guide provides a practical, hands-on approach to building an AI agent capable of retrieving information from your Neon account. You'll see how these technologies fit together and how to extend this setup for more advanced AI-driven database interactions.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Once these prerequisites in place, you'll be ready to follow the guide and build
 
 ## Building your AI Agent to interact with Neon API
 
-Now, let's dive into building your AI agent that can interact with Neon API using CrewAI and Composio. We'll go through each step, from setting up your project to running your first agent.
+Now, let's build an AI agent that can interact with the Neon API using CrewAI and Composio. We'll go through each step, from setting up your project to running your first agent.
 
 ### Project structure
 
@@ -261,11 +261,11 @@ This command will:
 
 ### Expected output
 
-After running `python main.py`, you should see the information about your Neon user printed in the terminal! The output will look something like this:
+After running `python main.py`, you should see the information about your Neon user printed in the terminal. The output will look something like this:
 
 ![Example output](/docs/guides/composio-crewai-neon-example-output.png)
 
-**Congratulations!** You have successfully built and run an AI agent that can interact with your Neon account using CrewAI and Composio!
+You have built and run an AI agent that can interact with your Neon account using CrewAI and Composio.
 
 ## Explore Further Neon Actions
 
@@ -360,7 +360,7 @@ To effectively use the wide array of Neon actions available through Composio, it
 
 You can find detailed information about each action, including its required parameters and their descriptions under [Neon app in your Composio dashboard](https://app.composio.dev/app/neon)
 
-**To utilize actions that require parameters, you simply need to include these parameters within the `description` of the task you assign to your CrewAI agent.** The agent will intelligently extract these parameters from the task description when it uses the Composio tool.
+**To use actions that require parameters, include those parameters in the `description` of the task you assign to your CrewAI agent.** The agent extracts them from the task description when it uses the Composio tool.
 
 For instance, let's consider the `NEON_GET_PROJECT_CONNECTION_URI` action.
 
@@ -376,7 +376,7 @@ get_connection_string_task = Task(
 )
 ```
 
-In this example, the task description clearly provides all the necessary information for the `NEON_GET_PROJECT_CONNECTION_URI` action. When the `crewai_agent` executes this task, it will understand from the description which action to use and what parameters are needed, making it seamless to interact with more complex Neon functionalities through your AI agents. Remember to tailor your task descriptions to accurately reflect the parameters needed for the specific Neon action you intend to use.
+In this example, the task description clearly provides all the necessary information for the `NEON_GET_PROJECT_CONNECTION_URI` action. When the `crewai_agent` executes this task, it will understand from the description which action to use and what parameters are needed, so you can use more complex Neon actions through your AI agents. Remember to tailor your task descriptions to accurately reflect the parameters needed for the specific Neon action you intend to use.
 
 ## Summary
 
@@ -388,7 +388,7 @@ In this guide, we've successfully built an AI agent capable of interacting with 
 - Running the example script and observing your AI agent successfully retrieve and display your Neon user information.
 - Exploring the wide range of available Neon actions within the Composio toolset, understanding how to extend your AI agent's capabilities.
 
-As a next step, consider expanding your AI agent's capabilities by utilizing more of the available Neon actions. Imagine automating project creation using `NEON_CREATE_PROJECT_WITH_QUOTA_AND_SETTINGS`, programmatically retrieving database connection URIs with `NEON_GET_PROJECT_CONNECTION_URI`, and then using a Postgres library of your choice to execute database queries. This opens the door to building sophisticated AI-driven workflows for database management, data analysis, and countless other applications tailored to your specific needs.
+As a next step, consider expanding your AI agent's capabilities with more of the available Neon actions. For example, you could automate project creation using `NEON_CREATE_PROJECT_WITH_QUOTA_AND_SETTINGS`, programmatically retrieving database connection URIs with `NEON_GET_PROJECT_CONNECTION_URI`, and then using a Postgres library of your choice to execute database queries. From there you can build AI-driven workflows for database management, data analysis, and other tasks.
 
 You can find the source code for the application described in this guide on GitHub.
 

@@ -7,7 +7,7 @@ createdAt: '2026-07-02T00:00:00.000Z'
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-Row level security (RLS) is a Postgres feature that attaches per-row access rules to a table, so a SELECT, INSERT, UPDATE, or DELETE only accesses the rows the current role is permitted to. You define this with a policy, and as that policy changes over time, it gets hard to prove on every change that it still runs for every caller you have in production, and that is not just your web app. It is also cron jobs, serverless functions, background workers, and internal services, each connecting with its own role and level of access.
+Row level security (RLS) is a Postgres feature that attaches per-row access rules to a table, so a SELECT, INSERT, UPDATE, or DELETE only accesses the rows the current role is permitted to. You define this with a policy, and as that policy changes over time, it gets hard to prove on every change that it still runs for every caller you have in production. That includes your web app, but also cron jobs, serverless functions, background workers, and internal services, each connecting with its own role and level of access.
 
 A local Postgres instance is a fine place to draft a policy and check its syntax, but it runs as one app on one connection with mock data. Production is the opposite where many callers connect at once with different access levels, the connection pool reuses connections across requests, and the auth layer sets the identity on each request.
 

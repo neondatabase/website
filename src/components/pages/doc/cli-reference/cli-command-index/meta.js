@@ -12,9 +12,9 @@
 // each one against schema.json, so a CLI change that invalidates an
 // example fails the test suite.
 const META = {
-  auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
+  login: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon login'] },
   init: {
-    desc: 'Wire up MCP, agent skills, and editor (Cursor/VS Code/Claude).',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {
@@ -38,6 +38,10 @@ const META = {
     examples: ['neon open'],
   },
   me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
+  ask: {
+    desc: 'Ask the Neon assistant a question from the terminal.',
+    examples: ['neon ask --prompt "How do schema-only branches work?"'],
+  },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],
@@ -97,6 +101,14 @@ const META = {
   functions: {
     desc: 'Deploy and manage Neon Functions on a branch.',
     examples: ['neon functions deploy api --src ./api.ts'],
+  },
+  triggers: {
+    desc: 'Invoke a Neon Function on a cron schedule.',
+    examples: ["neon triggers create --function-slug api --name nightly --cron '0 6 * * *'"],
+  },
+  credentials: {
+    desc: 'Issue and manage scoped credentials on a branch.',
+    examples: ['neon credentials create --scope storage:read'],
   },
   buckets: {
     desc: 'Branch-scoped object storage and its objects.',

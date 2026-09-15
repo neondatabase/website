@@ -7,7 +7,7 @@ title: Building a Real-Time AI Voice Assistant with ElevenLabs
 subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next.js application with ElevenLabs and Postgres
 ---
 
-Imagine having an AI voice assistant like Iron Man's [J.A.R.V.I.S.](https://en.wikipedia.org/wiki/J.A.R.V.I.S.), capable of understanding and responding to your needs in real-time. In this guide, you will learn how to build your very own real-time AI voice assistant using ElevenLabs, store each conversation in a Postgres database, and index them for faster retrieval.
+In this guide, you will learn how to build your very own real-time AI voice assistant using ElevenLabs, store each conversation in a Postgres database, and index them for faster retrieval.
 
 <Admonition type="note" title="Deal alert">
 Take advantage of the [AI Engineer Starter Pack](https://www.aiengineerpack.com) by ElevenLabs to get discounts for the tools used in this guide.
@@ -313,7 +313,7 @@ export default function AiTalkingAnimation({
 }
 ```
 
-The code above exports a React component that creates an interactive UI for the AI voice assistant. It utilizes the `useTypingEffect` hook to simulate a typing effect for the AI's responses and displays different states of interaction, such as "idle," "listening," and "speaking." The component also includes a clickable circle that toggles between starting and stopping the listening state, providing visual feedback through animations.
+The code above exports a React component that creates an interactive UI for the AI voice assistant. It uses the `useTypingEffect` hook to simulate a typing effect for the AI's responses and displays different states of interaction, such as "idle," "listening," and "speaking." The component also includes a clickable circle that toggles between starting and stopping the listening state, providing visual feedback through animations.
 
 ## Generate a Signed URL for private conversations with ElevenLabs
 
