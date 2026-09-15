@@ -50,6 +50,7 @@ const UpgradeAssessment = () => (
         height={562}
         sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1408px) calc(100vw - 64px), 1344px"
         alt="Postgres 15 to 18 upgrade assessment showing compatibility findings, review guidance, and a prompt to copy to a coding agent"
+        quality={100}
       />
       <ul className="mt-9.5 grid grid-cols-3 gap-x-33 xl:gap-x-12 lg:gap-x-8 md:mt-8 md:grid-cols-1 md:gap-y-7">
         {FEATURES.map(({ icon, title, description }) => (
