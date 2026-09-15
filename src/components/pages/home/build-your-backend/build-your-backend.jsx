@@ -72,10 +72,10 @@ const BuildYourBackend = () => (
           className="max-w-296 min-w-0 indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-white xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[2rem]"
           id="build-your-backend-heading"
         >
-          <span>Neon is a complete backend platform </span>
+          <span>Every backend primitive </span>
           <span className="text-gray-new-50">
-            built on industry-standard technology. Zero lock-in, familiar to agents, and
-            continuously developed.
+            built on industry-standard open source technology and APIs. Zero lock-in, familiar to
+            work with, continuously maintained.
           </span>
         </h2>
       </div>
