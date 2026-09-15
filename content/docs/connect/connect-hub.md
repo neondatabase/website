@@ -91,7 +91,7 @@ For production deployments, store credentials in your secrets manager (AWS Secre
 
 ### Neon Functions
 
-Neon Functions auto-injects credentials for declared services. If you declare Object Storage buckets in `neon.ts`, the `AWS_*` credentials are injected automatically. No manual setup required. See [Neon Functions environment variables](/docs/compute/functions/environment-variables).
+A deployed Neon Function gets credentials injected automatically for every service enabled on its branch. Enable Object Storage and the `AWS_*` credentials are in `process.env` with no manual setup. Declaring buckets in `neon.ts` is what pulls those credentials into your local `.env` (see [Local development](#local-development) above) and gives you type-safe access. See [Neon Functions environment variables](/docs/compute/functions/environment-variables).
 
 ## Use each service
 
