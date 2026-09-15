@@ -19,6 +19,8 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
+        - title: Connect your app
+          slug: connect/connect-hub
         - title: Tour the Neon backend
           slug: get-started/backend-overview
         - title: Tour the Neon Console
