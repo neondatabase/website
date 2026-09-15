@@ -6,7 +6,7 @@ import BackendServices from './services';
 const SERVICE_ITEMS = [
   {
     title: 'Lakebase Postgres',
-    description: 'Serverless database that scales and branches with your app.',
+    description: 'Serverless postgres database that scales and branches with your app.',
     videoBase: 'postgres-database',
     version: '20260813-3',
     aspectRatio: 'aspect-588/580',
