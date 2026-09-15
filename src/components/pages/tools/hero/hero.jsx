@@ -31,7 +31,7 @@ const TOOLS = [
         ],
       },
     ],
-    href: `${LINKS.labs}/assess`,
+    href: 'https://neon-postgres-upgrade-assessment.vercel.app/assess',
     action: 'Run an assessment',
   },
   {
