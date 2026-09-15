@@ -46,8 +46,8 @@ const Architecture = () => (
 
             <p className="mt-9 max-w-248 text-4xl leading-dense tracking-tighter text-gray-new-40 2xl:max-w-4/5 xl:text-[2rem] lg:text-[1.75rem] md:mt-8 md:max-w-none md:text-[1.375rem] sm:text-xl">
               The <span className="text-black-new">lakebase architecture</span> decouples storage
-              and compute to deliver instant operations and scale without compromise on durability,
-              reliability or speed.
+              and compute to deliver instant operations and scale without compromise on performance
+              or reliability.
             </p>
           </div>
         </div>
