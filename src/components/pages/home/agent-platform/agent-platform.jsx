@@ -12,25 +12,24 @@ import backgroundNoise from 'images/pages/home/backed-by/bg-noise.jpg';
 
 const CARDS = [
   {
+    icon: lowEntryBarrierIcon,
+    title: 'Powerful Free Tier',
+    description: 'Our architectural efficiency powers a free plan with 100 projects.',
+  },
+  {
     icon: startAtZeroIcon,
-    title: 'Start at $0',
-    description: 'There are no per-app fixed fees, there are no fees for security and compliance.',
+    title: 'Starts at $0',
+    description: 'There are no fixed fees for security and compliance features.',
   },
   {
     icon: efficientDevTestIcon,
     title: 'Efficient dev/test',
-    description: 'Usage-based billing with branching duplicates environments cost-effectively.',
+    description: 'Scale-to-zero and copy-on-write keep non-production costs low.',
   },
   {
     icon: multiTenancyIcon,
-    title: 'Multi-tenancy',
-    description:
-      'Infra is managed automatically by agents via API, enabling user architectures at scale.',
-  },
-  {
-    icon: lowEntryBarrierIcon,
-    title: 'Low entry barrier',
-    description: 'Our architectural efficiency powers a free plan with 100 projects.',
+    title: 'No-Fee AI Gateway',
+    description: 'At-cost rates for frontier models with no add-on fees.',
   },
 ];
 
