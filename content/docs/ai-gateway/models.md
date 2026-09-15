@@ -7,7 +7,7 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-15T02:51:38.578Z'
+updatedOn: '2026-09-15T18:17:04.567Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -24,9 +24,9 @@ The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/
 
 ## Model access
 
-Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-3-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
+Neon AI Gateway serves both frontier and open-weight models. See the full list in the [catalog](#available-models) below.
 
-Open-weight models are available to every project right away. Frontier models from OpenAI and Google are rolling out gradually. Don't see them in your project yet? [Request early access](/docs/ai-gateway/overview#foundation-model-access).
+Model access requires a paid plan. Any paid project with prepaid credits can access all available models.
 
 ## Available models
 
@@ -50,13 +50,13 @@ The TPM limit is counted against total tokens (input and output combined), not i
 
 The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
 
-A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED` even during the free beta. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
+A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
 ## Pricing
 
-Inference is free during the beta. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
+See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
 
-Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. This can happen even though inference itself isn't billed yet. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
+Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 
 ## Which endpoint to use
 
@@ -143,7 +143,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. To request access to more models, see [Foundation model access](/docs/ai-gateway/overview#foundation-model-access).
+- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. Model access requires a paid plan. See [Model access](/docs/ai-gateway/overview#model-access).
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.

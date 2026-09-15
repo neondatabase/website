@@ -9,7 +9,7 @@ redirectFrom:
 <Admonition type="info" title="Beta">
 Functions, Object Storage, and the AI Gateway are in beta and not yet recommended for production workloads. They're available to every Neon account, no invite required, on new or existing projects in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
 
-Functions and Object Storage are free on any plan during the beta, subject to usage limits. The AI Gateway requires a paid plan (Launch or Scale), with inference free during the beta. Build something and help us refine them by sharing your feedback in Discord.
+Functions and Object Storage are free on any plan during the beta, subject to usage limits. The AI Gateway requires a paid plan (Launch or Scale). Build something and help us refine them by sharing your feedback in Discord.
 </Admonition>
 
 ## What's in the beta
