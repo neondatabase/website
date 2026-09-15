@@ -13,7 +13,7 @@ enableTableOfContents: true
 For all backend services, you connect your app to a particular branch. Each branch can serve whichever services you have enabled: Lakebase Postgres, Object Storage, Managed Better Auth, and AI Gateway.
 
 <Admonition type="tip" title="Get your Postgres connection string">
-If you only need a Postgres connection string, click **Connect** on your project dashboard and copy it. See [Get your connection details](#get-your-connection-details).
+If you only need a Postgres connection string, click **Connect** in the Console nav and copy it. See [Get your connection details](#get-your-connection-details).
 </Admonition>
 
 <Steps>
@@ -31,7 +31,7 @@ You can get connection details from the Console, CLI, or API.
 <Tabs labels={["Console", "CLI", "API"]}>
 <TabItem>
 
-In the Neon Console, select your project and click **Connect** on the Project Dashboard to open the **Connect to your branch** modal.
+In the Neon Console, select your project and branch and click **Connect** to open the **Connect to your branch** modal.
 
 ![Connect to your branch modal](/docs/connect/connect_to_branch_modal.png)
 
@@ -188,7 +188,7 @@ To automate preview branches, use [GitHub Actions](/docs/guides/branching-github
 
 ## Rotate or revoke
 
-To rotate a Postgres password, generate a new one in the Console or CLI and update your environment variables. For Object Storage credentials, create a new credential, update your app, then revoke the old one. See [Revoking credentials](/docs/storage/authentication#revoking-credentials) for API details.
+To rotate a Postgres password, generate a new one in the Console or CLI and update your environment variables. For Object Storage credentials, create a new credential, update your app, then revoke the old one. See [Revoking object storage credentials](/docs/storage/authentication#revoking-credentials) for API details.
 
 Credential rotation workflows for Data API and Auth are similar: create a new credential or reset the password, update your app, then revoke the old one.
 
