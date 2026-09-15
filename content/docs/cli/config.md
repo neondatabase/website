@@ -50,7 +50,7 @@ export default defineConfig({
 
 If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
-`config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Pass `--no-install` to skip installation and just print the command to run.
+`config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
 
 <CliUsage command="config init" />
 
@@ -70,7 +70,7 @@ npm install @neon/config @neon/env
 Use `config init` when you want a trusted starter artifact and package list. Hand-write `neon.ts` instead when you need a different filename/module format or want to avoid modifying files in the current directory.
 
 <Admonition type="tip">
-After running an interactive [`neon link`](/docs/cli/link), the CLI offers to run `config init` as its final step, unless the project already has a `neon.ts` file.
+After running an interactive [`neon link`](/docs/cli/link), the CLI prompts you to run `config init` as its final step, unless the project already has a `neon.ts` file.
 </Admonition>
 
 ## neon config status (#status)

@@ -17,20 +17,20 @@ Neon, with the real-time server on a Neon Function. A chat room or presence indi
 
 ## Two transports
 
-- **WebSockets** for two-way traffic: chat, presence, collaborative editing. Export an `upgrade` method next to `fetch`, and the runtime hands WebSocket upgrades to it. The `ws` package works with `noServer: true`.
+- **WebSockets** for two-way traffic: chat, presence, collaborative editing. Call `upgradeWebSocket` from `@neon/functions` in your `fetch` handler and return the `response` it gives you. No extra export and no `ws` dependency.
 - **Server-sent events** for one-way streams: live counters, notifications, progress, token streams. Plain HTTP, no library, and the browser's `EventSource` reconnects on its own ([WebSockets and SSE](/docs/compute/functions/websockets)).
 
 ```ts
-import type { IncomingMessage } from 'node:http';
-import type { Duplex } from 'node:stream';
+import { upgradeWebSocket } from '@neon/functions';
 
 export default {
   fetch(request: Request) {
-    return new Response('...');
-  },
-
-  upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
-    // handle the WebSocket upgrade
+    if (request.headers.get('upgrade')?.toLowerCase() !== 'websocket') {
+      return new Response('This endpoint speaks WebSocket. Send an Upgrade request.', { status: 426 });
+    }
+    const { socket, response } = upgradeWebSocket(request);
+    socket.addEventListener('message', (event) => socket.send(`echo: ${event.data}`));
+    return response;
   },
 };
 ```
@@ -44,7 +44,7 @@ Under load the platform runs several isolates, and a message posted through one 
 Two templates show the whole pattern: `neon bootstrap --template realtime-chat` (Next.js, Hono, Postgres, Managed Better Auth) and `--template realtime-sse` (TanStack Router, Hono) ([starter templates](/docs/compute/functions/overview#starter-templates)).
 
 <Admonition type="note" title="Beta scope">
-Functions are in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), free during the beta on every plan, and JavaScript and TypeScript only. `neon dev` returns `200 OK` for WebSocket upgrades locally during the beta, so test WebSocket behavior against a deployed function ([WebSockets and SSE](/docs/compute/functions/websockets)).
+Functions are in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), free during the beta on every plan, and JavaScript and TypeScript only. With a current `neon` CLI, `neon dev` serves WebSocket upgrades locally, so you can test before deploying ([WebSockets and SSE](/docs/compute/functions/websockets)).
 </Admonition>
 
 ## Keep the front end where it is

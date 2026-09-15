@@ -1,4 +1,4 @@
-text: 'Just shipped: @neon/tools turns the Neon SDK into typed agent tools'
+text: '"A quarter of work, done in 6 days".  How a solo founder built isolated Postgres per tenant on Neon'
 link:
-  url: 'https://neon.com/blog/give-your-agent-neon-tools'
+  url: 'https://neon.com/blog/inside-lubots-database-per-tenant-architecture'
   target: '_blank'

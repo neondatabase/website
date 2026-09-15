@@ -31,6 +31,15 @@ const defaultConfig = {
       './public/images/og-image/logo.png',
       './public/images/og-image/docs-background.jpg',
     ],
+    // The blog `.md` route handler reads the blog snapshot from disk at request
+    // time (unlike the blog pages, which are statically generated at build).
+    // Its read path is dynamic (process.cwd() + join), so nft can't detect the
+    // dependency — trace the content in explicitly or the route 502s in prod.
+    '/blog/[slug]/md': [
+      './content/blog/posts/**/*.md',
+      './content/blog/authors/data.json',
+      './content/blog/categories/data.json',
+    ],
   },
   images: {
     formats: ['image/avif', 'image/webp'],

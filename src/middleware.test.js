@@ -599,7 +599,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600, s-maxage=86400');
+      // Short TTL so a cached hit re-enters the proxy and re-fires the LLM read beacon.
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
       expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
     });
 
