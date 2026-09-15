@@ -125,6 +125,32 @@ returns the same result. Registering a
 domain already assigned to another target returns a conflict without revealing
 the existing owner.
 
+## Declare with neon.ts
+
+If you manage the branch with a [`neon.ts`](/docs/reference/neon-ts) policy, declare the domain on the function instead of registering it imperatively. Add `customDomains` to the function and run `neon deploy`:
+
+```ts filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  preview: {
+    functions: {
+      api: {
+        name: "API",
+        source: "./functions/api.ts",
+        customDomains: ["api.example.com"],
+      },
+    },
+  },
+});
+```
+
+```bash filename="Neon CLI"
+neon deploy
+```
+
+`neon deploy` registers the domain and prints the CNAME target to configure below. The static `customDomains` list applies on the default branch only, since a hostname is globally unique and can't be inherited by child branches. Removing a domain from `neon.ts` doesn't delete its registration; delete it explicitly, as described in [Delete a custom domain](#delete-a-custom-domain). For per-branch overrides and the full ruleset, see the [neon.ts reference](/docs/reference/neon-ts).
+
 ## Configure DNS
 
 At your DNS provider, create a CNAME record using the target returned during
