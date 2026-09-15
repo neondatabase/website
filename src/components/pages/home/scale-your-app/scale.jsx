@@ -47,10 +47,10 @@ const ScaleStat = () => (
     </div>
     <div className="px-[27px] pt-[92px] xl:pt-20 md:px-5 md:pt-15 sm:pt-8 sm:pb-8">
       <strong className="block text-[98px] leading-none font-normal tracking-extra-tight text-white md:text-[5rem] sm:text-[4rem]">
-        250M+
+        70%
       </strong>
       <p className="mt-[18px] max-w-[235px] text-xl leading-tight tracking-extra-tight text-gray-new-80 md:mt-4 md:text-lg sm:max-w-[220px] sm:text-base">
-        Monthly users powered by Zillow’s agentic AI
+        Fortune 500 Enterprises build on Databricks Platform
       </p>
     </div>
   </div>
