@@ -306,6 +306,7 @@ preview: {
       dev?: {
         port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
       },
+      customDomains?: string[],  // hostnames to serve this function; default branch only
     },
   },
 },
@@ -326,6 +327,26 @@ Use `neon deploy --env .env.production` to load a `.env` file before evaluation.
 `bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
+
+`customDomains` lists hostnames you own that serve the function, such as `["api.example.com"]`. `neon deploy` registers them, and each hostname can point at only one function on one branch. For DNS setup, status checks, and TLS verification, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
+
+Static `customDomains` apply on the default branch only. A hostname is globally unique, so applying the production list to a child branch would conflict. On other branches, `neon deploy` and `neon checkout` still deploy the function but skip the list. To give one branch its own hostname, return `customDomains` from the `branch` closure:
+
+```ts filename="neon.ts"
+branch: (branch) =>
+  // Target one named branch: a hostname is globally unique, so it can't apply to a class of branches.
+  branch.name === "staging"
+    ? {
+        preview: {
+          functions: {
+            api: { customDomains: ["staging.example.com"] },
+          },
+        },
+      }
+    : {},
+```
+
+Omitting `customDomains`, or returning `[]` from the closure, registers nothing on that branch. Neither removes a hostname that's already registered remotely; delete those with [`neon functions domains delete`](/docs/cli/functions#domains-delete).
 
 ### `preview.buckets`
 
