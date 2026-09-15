@@ -152,6 +152,12 @@ export default {
       'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
+  tools: {
+    title: 'Postgres upgrade and migration tools — Neon',
+    description:
+      'Tools to assess major version upgrades, catch compatibility issues, and find the right migration path for your database.',
+    pathname: LINKS.tools,
+  },
   autoscalingReport: {
     title: 'Compute Autoscaling Report',
     description: 'A deep-dive into the numbers behind Neon Autoscaling.',

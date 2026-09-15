@@ -31,6 +31,7 @@ export default {
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
   autoscalingReport: '/autoscaling-report',
+  tools: '/tools',
 
   // Docs
   docs: '/docs',
@@ -115,6 +116,7 @@ export default {
 
   // Other
   status: 'https://neonstatus.com',
+  labs: 'https://labs.neon.com',
   cdn: 'https://cdn.neonapi.io',
   apiReference: '/docs/reference/api',
   bugBounty: 'https://hackerone.com/neon_bbp',
