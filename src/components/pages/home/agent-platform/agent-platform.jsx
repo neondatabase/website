@@ -69,9 +69,9 @@ const AgentPlatform = () => (
           className="mt-9 bg-black-pure! font-medium hover:bg-gray-new-20! lg:mt-8 md:mt-7"
           size="new"
           theme="secondary"
-          to={LINKS.programsAgents}
+          to={LINKS.signup}
         >
-          I’m building an agent
+          Start Building for Free
         </Button>
       </div>
 
