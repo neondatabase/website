@@ -18,17 +18,17 @@ redirectFrom:
 updatedOn: '2026-09-15T00:00:00.000Z'
 ---
 
-Neon is one backend for your apps and agents. **A branch is the whole backend.** A single branch can run Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together. You connect to the branch, and every service on it is available through that one backend, so you do not wire separate services together yourself.
+Neon is the backend for your apps and agents. Each branch is a complete backend, running Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together. Connect to the branch and every service on it is available, so you do not have to wire separate services together yourself.
 
-Every branch belongs to a **project**, and every project belongs to an **organization**: `organization` > `project` > `branch`. A child branch is an isolated backend you can build against, where each service branches in the way that is right for it.
+Every branch belongs to a project, and every project belongs to an organization: organization > project > branch. A child branch gives you an isolated backend you can build against.
 
 ![How the Neon backend fits together](/docs/concepts/backend-overview.png 'no-border')
 
-Enable the services your app needs, and each is available on that branch as a peer of the others.
+Enable the services your app needs, then branch the whole backend on demand.
 
-## One backend, illustrated
+## A single backend for your app
 
-These services compose into one app. Take a notes app you can chat with: signed-in users write notes, attach files, and ask an AI questions about their own notes. A single request touches all of them:
+These services are the backend for a single app. Here's a concrete example: a notes app you can chat with. Signed-in users write notes, attach files, and ask an AI questions about their own notes. A single request touches all of them:
 
 ```
 Browser  --request + auth token-->  Function (chat)
@@ -40,13 +40,13 @@ Browser  --request + auth token-->  Function (chat)
 Function  --streams the answer-->  Browser
 ```
 
-Postgres is the system of record for the notes; Object Storage holds the files too big for a row; the Function is the long-running piece that handles the chat request; the AI Gateway is the single credential for the model call; and Managed Better Auth decides whose notes a request may read. Each lives on the same branch, so this whole flow runs against one backend. The sections below look at each service in turn.
+Postgres is the system of record for the notes. Object Storage holds files that are too big to store in a row. The Function is the long-running piece that handles the chat request. The AI Gateway provides a single credential for calling the model. Managed Better Auth decides whose notes a request is allowed to read. All of these services live on the same branch, so this whole flow runs against one backend. The sections below describe each service in turn.
 
 ## Lakebase Postgres
 
-- **What it is:** a fully managed, serverless Postgres database, generally available.
+- **What it is:** a fully managed, serverless Postgres database.
 - **When to use it:** relational application data you query and update with SQL and transactions.
-- **When not:** uploaded files or other large binary objects, store those in [Object Storage](#object-storage) and keep the key and metadata in a Postgres column.
+- **When not:** uploaded files or other large binary objects; store those in [Object Storage](#object-storage) and keep the key and metadata in a Postgres column.
 
 The [Data API](/docs/data-api/overview) is a child of Postgres, an HTTP interface to the same database for callers such as browsers and edge runtimes.
 
@@ -65,7 +65,7 @@ See the [Lakebase Postgres overview](/docs/postgres/overview), [serverless drive
 
 - **What it is:** managed authentication that stores users and sessions in your Postgres database; its tokens can also be verified inside a Function to authenticate callers.
 - **When to use it:** your app needs sign-up, sign-in, sessions, OAuth, or tenant membership.
-- **When not:** there are no user identities or sessions, protect machine-to-machine endpoints with an API key or service credential instead.
+- **When not:** there are no user identities or sessions; protect machine-to-machine endpoints with an API key or service credential instead.
 
 Managed Better Auth gives you a signed-in session on the server. Scope each query to `session.user.id` so a caller sees only their own rows:
 
@@ -89,7 +89,7 @@ Inside a Function, verify the caller's token before reading data. See the [Manag
 
 - **What it is:** S3-compatible object storage with a separate storage view per branch. A child inherits the parent's buckets and objects at branch time, and later changes stay isolated to that branch.
 - **When to use it:** uploads and files, attachments, images, documents, generated media.
-- **When not:** values that must be read and updated transactionally with the rest of a row, keep those in Postgres.
+- **When not:** values that must be read and updated transactionally with the rest of a row; keep those in Postgres.
 
 Store the object key on a row in Postgres and generate a short-lived URL on read, so a record and its file never drift. Any S3 client works against the injected credentials; with the [Files SDK](https://files-sdk.dev):
 
@@ -109,7 +109,7 @@ See the [Object Storage overview](/docs/storage/overview) and [get-started guide
 
 - **What it is:** long-running serverless JavaScript or TypeScript that runs in the same region as your branch, reached through a public HTTPS URL.
 - **When to use it:** request/response work that needs long HTTP streams, SSE, WebSockets, or multi-step AI agents.
-- **When not:** short handlers your web framework already serves, or durable background jobs, use a queue or workflow system for those.
+- **When not:** short handlers your web framework already serves, or durable background jobs; use a queue or workflow system for those.
 
 Because a Function keeps running across requests, it can open a `pg` connection once and reuse it, rather than the per-request serverless driver. A Function is a normal [Hono](https://hono.dev) app:
 
@@ -135,7 +135,7 @@ See the [Functions overview](/docs/compute/functions/overview) and [get-started 
 
 - **What it is:** an LLM gateway that uses one Neon credential to call models from multiple providers, with no separate provider accounts or keys.
 - **When to use it:** you want one credential and billing path across providers, or want to switch models by changing the request's `model` value.
-- **When not:** you specifically need provider features the gateway does not expose, using a single provider alone does not make the gateway unnecessary.
+- **When not:** you specifically need provider features the gateway doesn't expose; using a single provider alone doesn't make the gateway unnecessary.
 
 Each branch has its own endpoint, credentials, access, and usage metering. The model catalog is shared and global, and your application chooses a model with each request. The [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) discovers the gateway from the injected variables, so `neon(model)` needs no base URL or key and routes each model family to the right upstream:
 
