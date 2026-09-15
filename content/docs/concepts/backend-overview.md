@@ -18,17 +18,17 @@ redirectFrom:
 updatedOn: '2026-09-15T00:00:00.000Z'
 ---
 
-Neon is the backend for your apps and agents. Each branch is a complete backend, running Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together. Connect to the branch and every service on it is available, so you do not have to wire separate services together yourself.
+Neon is the backend for your apps and agents. A single branch offers you a complete backend: it runs Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together, so you connect to the branch instead of wiring separate services together yourself.
 
-Every branch belongs to a project, and every project belongs to an organization: organization > project > branch. A child branch gives you an isolated backend you can build against.
+Every branch belongs to a project, and every project belongs to an organization: organization > project > branch.
 
 ![How the Neon backend fits together](/docs/concepts/backend-overview.png 'no-border')
 
-Enable the services your app needs, then branch the whole backend on demand.
+One branch holds every service your app needs.
 
 ## A single backend for your app
 
-These services are the backend for a single app. Here's a concrete example: a notes app you can chat with. Signed-in users write notes, attach files, and ask an AI questions about their own notes. A single request touches all of them:
+These services form the backend for a single app. Take a notes app you can chat with: signed-in users write notes, attach files, and ask an AI about their own notes. One request can touch all of them:
 
 ```
 Browser  --request + auth token-->  Function (chat)
@@ -40,7 +40,7 @@ Browser  --request + auth token-->  Function (chat)
 Function  --streams the answer-->  Browser
 ```
 
-Postgres is the system of record for the notes. Object Storage holds files that are too big to store in a row. The Function is the long-running piece that handles the chat request. The AI Gateway provides a single credential for calling the model. Managed Better Auth decides whose notes a request is allowed to read. All of these services live on the same branch, so this whole flow runs against one backend. The sections below describe each service in turn.
+Postgres is the system of record for the notes. Object Storage holds files too big for a row. The Function handles the chat request. The AI Gateway provides a single credential for the model call. Managed Better Auth decides whose notes a request may read. Because every service lives on the same branch, this whole flow runs against one backend. The sections below describe each service in turn.
 
 ## Lakebase Postgres
 
