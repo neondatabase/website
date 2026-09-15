@@ -18,7 +18,7 @@ redirectFrom:
 updatedOn: '2026-09-15T00:00:00.000Z'
 ---
 
-Neon is the backend for your apps and agents. A single branch offers you a complete backend: it runs Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together, so you connect to the branch instead of wiring separate services together yourself.
+Neon is the backend for your apps and agents. A single branch gives you all of it, running Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway together, so you connect to the branch instead of wiring separate services together yourself.
 
 Every branch belongs to a project, and every project belongs to an organization: organization > project > branch.
 
