@@ -9,7 +9,7 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-08-18T16:41:42.467Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
 ## The Neon platform, in brief
@@ -62,7 +62,7 @@ Learn how to manage all aspects of your Neon projects. These topics cover the ba
 
 <DetailIconCards>
 
-<a href="/docs/manage/overview" description="Learn about the Neon project and all its resources" icon="filter">Object hierarchy</a>
+<a href="/docs/concepts/the-object-model" description="Learn about the Neon project and all its resources" icon="filter">The object model</a>
 
 <a href="/docs/manage/projects" description="Create and manage projects in Neon" icon="ladder">Projects</a>
 
