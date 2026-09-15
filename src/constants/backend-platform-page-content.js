@@ -2,7 +2,7 @@ const functionsBranchingTitleLines = ['Functions that branch with', 'the rest of
 const aiGatewayHeroTitleLines = ['Call the latest models right', 'from your Neon backend'];
 const aiGatewayModelsTitleLines = ['Access a wide catalog of frontier and open', 'weight models.'];
 const aiGatewayModelsHighlightedTitleLines = ['Served with optimized performance via Databricks.'];
-const builtForAgentsTitleLines = ['Built for agents,', 'not just developers.'];
+const builtForAgentsTitleLines = ['Built for agents and', 'the developers behind them.'];
 const faqTitleLines = ['Your questions,', 'answered'];
 const lakebaseFromFirstLineTitleLines = [
   'From your first line of code',
@@ -555,18 +555,16 @@ const sharedBackendPlatformContent = {
   backedBy: {
     label: 'Backed by giants',
     title: 'Trusted at scale.',
-    highlightedTitle: 'The numbers behind every project running on Neon.',
+    highlightedTitle: 'Neon has been part of the Databricks Platform since May 2025.',
     trustedByLabel: 'Trusted by the best',
     metrics: [
       {
-        value: '60%',
-        description:
-          'Cheaper than running the same infrastructure yourself, once you factor in maintenance.',
+        value: '20M+',
+        description: 'Databases started daily - built for scale and reliability.',
       },
       {
-        value: '>90%',
-        description:
-          'Success rate on operations run directly by agents, from provisioning to schema changes.',
+        value: '3M+',
+        description: 'Developers building on Neon worldwide',
       },
     ],
     quotes: [
@@ -608,7 +606,7 @@ const sharedBackendPlatformContent = {
     ],
   },
   cta: {
-    title: 'Building something ambitious?',
+    title: 'Talk to us.',
     description: 'Fill out a short form and we’ll get back to you within a few business days.',
     label: 'Get started',
     buttonText: 'Apply now',

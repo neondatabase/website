@@ -69,7 +69,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('## Backend compute');
     expect(markdown).toContain('### Declared in `neon.ts`');
     expect(markdown).toContain('## Your questions, answered');
-    expect(markdown).toContain('## Built for agents, not just developers.');
+    expect(markdown).toContain('## Built for agents and the developers behind them.');
     expect(markdown).toContain('[Apply now](https://neon.com/contact-sales)');
     expect(markdown).not.toMatch(/<\/?(?:p|strong|code)>/);
   });
@@ -84,7 +84,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('| Released |');
     expect(markdown).toContain('Inference is free during the private preview.');
     expect(markdown).toContain('## Compatibility');
-    expect(markdown).toContain('## Built for agents, not just developers.');
+    expect(markdown).toContain('## Built for agents and the developers behind them.');
     expect(markdown).toContain('## Trusted at scale.');
   });
 
@@ -106,9 +106,9 @@ describe('backend platform page Markdown', () => {
   it('renders Auth content without confusing it with Claimable Neon', () => {
     const markdown = renderAuthMarkdown(LINKS);
 
-    expect(markdown).toContain('# Auth that lives in your backend.');
+    expect(markdown).toContain('# Better Auth that branches, managed by Neon');
     expect(markdown).toContain('[Read the docs](https://neon.com/docs/auth/overview)');
-    expect(markdown).toContain('Built on Better Auth code');
+    expect(markdown).toContain('Built on Better Auth');
     expect(markdown).toContain('`neon_auth`');
     expect(markdown).toContain('Build previews you can actually log into');
     expect(markdown).toContain('### 4. Preview');
@@ -140,7 +140,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('## Your questions, answered.');
     expect(markdown).toContain('## Backend services');
     expect(markdown).toContain('## Trusted at scale.');
-    expect(markdown).not.toContain('## Built for agents, not just developers.');
+    expect(markdown).not.toContain('## Built for agents and the developers behind them.');
   });
 
   it('writes all mirrors without deleting other generated Markdown', async () => {
@@ -170,7 +170,7 @@ describe('backend platform page Markdown', () => {
       '# S3-compatible object storage'
     );
     expect(await fs.readFile(path.join(outputDir, 'auth-page.md'), 'utf8')).toContain(
-      '# Auth that lives in your backend.'
+      '# Better Auth that branches, managed by Neon'
     );
     expect(await fs.readFile(path.join(outputDir, 'lakebase.md'), 'utf8')).toContain(
       '# Postgres for apps and agents'

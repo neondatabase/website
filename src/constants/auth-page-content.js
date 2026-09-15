@@ -37,8 +37,8 @@ const authPageContent = {
   ],
   hero: {
     label: 'Managed Better Auth for Lakebase Postgres',
-    title: 'Auth that lives in your backend.',
-    titleLines: ['Auth that lives', 'in your backend.'],
+    title: 'Better Auth that branches, managed by Neon',
+    titleLines: ['Better Auth that branches,', 'managed by Neon'],
     illustrationDescription:
       'Sign-up and password recovery interfaces connected to user records in the Neon Postgres database.',
     primaryAction: {
@@ -53,14 +53,14 @@ const authPageContent = {
   benefits: {
     title: 'Test real login flows.',
     highlightedTitle:
-      'Branch your backend to get an isolated copy of production auth, so you can test against real users and sessions.',
+      'When you deploy a Neon branch, auth branches too, so your previews fully reflect production.',
     items: [
       {
         id: 'foundation',
         label: 'Foundation',
-        title: 'Built on Better Auth code',
+        title: 'Built on Better Auth',
         description:
-          'Use the Better Auth foundation your team already knows, with the same concepts and workflows you’re used to.',
+          'The Better Auth foundation your team (and agent) already knows, plus branching.',
         badges: [
           {
             id: 'better-auth',
@@ -115,7 +115,8 @@ const authPageContent = {
   identity: {
     label: 'Backend compute',
     title: 'Users, sessions, and auth live in Postgres.',
-    highlightedTitle: 'Keep identity data and auth configuration together in Lakebase Postgres.',
+    highlightedTitle:
+      'Keep identity data and auth configuration right in your backend, not on an external service.',
     inspectAuth: {
       title: 'Inspect auth with SQL.',
       descriptionBeforeCode: 'The',
@@ -161,8 +162,8 @@ const authPageContent = {
     ],
   },
   setupSteps: {
-    title: 'Let your coding agent deploy and configure auth for you.',
-    highlightedTitle: 'Preview real login flows on an isolated Neon branch.',
+    title: 'Ask your coding agent to deploy and configure Managed Better Auth.',
+    highlightedTitle: 'Deploy a preview branch and start testing.',
     items: [
       {
         id: 'enable',
