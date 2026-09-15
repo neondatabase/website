@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-14T21:34:48.957Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -46,6 +46,8 @@ Roles created in the Neon Console, CLI, or API, including the role created with 
 - `pg_monitor`: A predefined Postgres role that provides read/execute privileges on various Postgres monitoring views and functions. The `neon_superuser` role also has `WITH ADMIN` on the `pg_monitor` role, which enables granting the `pg_monitor` to other Postgres roles.
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
 - `pg_signal_backend`: The `neon_superuser` role is granted the `pg_signal_backend` privilege, which allows it to cancel (terminate) backend sessions belonging to roles that are not members of `neon_superuser`. The `WITH ADMIN OPTION` allows `neon_superuser` to grant the `pg_signal_backend` role to other users/roles.
+- `pg_maintain`: A predefined Postgres role that provides the ability to run maintenance commands (`VACUUM`, `ANALYZE`, `CLUSTER`, `REFRESH MATERIALIZED VIEW`, `REINDEX`, and `LOCK TABLE`) on all relations, as if having `MAINTAIN` rights on those objects. Available as of Postgres 17.
+- `pg_signal_autovacuum_worker`: A predefined Postgres role that allows signaling autovacuum workers to cancel the current table's vacuum or terminate the worker's session. Available as of Postgres 18.
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
 - `GRANT ALL ON SEQUENCES` and `WITH GRANT OPTION` on the `public` schema.
 - `CREATE EVENT TRIGGER`, `ALTER EVENT TRIGGER`, `DROP EVENT TRIGGER`. The `ALTER EVENT TRIGGER` command does not allow changing the function associated with the event trigger.
@@ -55,6 +57,8 @@ You can think of roles with `neon_superuser` privileges as administrator roles. 
 <Admonition type="note">
 Creating a database with the `neon_superuser` role, altering a database to have owner `neon_superuser`, and altering the `neon_superuser role` itself are _not_ permitted. This `NOLOGIN` role is not intended to be used directly or modified.
 </Admonition>
+
+You may also see internal roles Neon uses to operate your project, such as `neon_service`. They act on your behalf (which is why they can appear with `neon_superuser` membership); their credentials are managed by Neon, and they are not intended for you to use or modify.
 
 ## Manage roles
 
