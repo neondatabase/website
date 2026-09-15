@@ -6,7 +6,7 @@ summary: >-
   install the Neon tooling and connect your project, or run `neon init`
   yourself in a terminal, then ask your agent to get started.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 Set up Neon for your project without leaving your editor. You have two options: let your AI coding assistant install the Neon tooling and connect your project for you, or run `neon init` yourself in a terminal and then hand off to your agent. Either way, your agent ends up with the [agent skills](/docs/ai/agent-skills) and [Neon MCP server](/docs/ai/neon-mcp-server) it needs to create a Neon project, connect your app, and use Neon features as you build.
@@ -56,7 +56,7 @@ From your project root, run:
 npx neon@latest init
 ```
 
-`neon init` is interactive, so run it in a terminal. It asks how your coding agents should get Neon (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first. For the full flow, and a non-interactive setup for agents and CI, see the [`neon init` reference](/docs/cli/init).
+`neon init` is interactive, so run it in a terminal. It asks how your coding agents should get Neon (either a plugin, or skills and the MCP server), links a Neon project, and optionally writes a `neon.ts` config. In an empty directory, it lets you pick a starter template, name one with `--template`, or skip scaffolding with `--skip-template`. For the full flow, and a non-interactive setup for agents and CI, see the [`neon init` reference](/docs/cli/init).
 
 If you only want the MCP server, without the skills or plugin, run [`npx neon@latest mcp`](/docs/cli/mcp) instead. If you only want agent skills, run [`npx neon@latest skills`](/docs/cli/skills).
 

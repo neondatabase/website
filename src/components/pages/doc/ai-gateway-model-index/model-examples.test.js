@@ -32,16 +32,15 @@ describe('AI Gateway model examples', () => {
     }
   );
 
-  it('uses model-specific Gemini examples and install commands', () => {
+  it('renders OpenAI SDK examples for conforming Gemini', () => {
     const languages = getLanguagesForMode(getExamplesByMode('gemini-3-5-flash'), 'text');
 
-    expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'curl']);
-    expect(languages.find(({ key }) => key === 'mastra')?.install).toBe(
-      'npm i @mastra/core ai @neondatabase/ai-sdk-provider'
+    expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'ts', 'python', 'curl']);
+    expect(languages.find(({ key }) => key === 'mastra')?.code).toContain(
+      'model: "neon/gemini-3-5-flash"'
     );
-    expect(languages.find(({ key }) => key === 'curl')?.code).toContain(
-      '/gemini/v1beta/models/gemini-3-5-flash:generateContent'
-    );
+    expect(languages.find(({ key }) => key === 'curl')?.code).toContain('/v1/chat/completions');
+    expect(languages.find(({ key }) => key === 'curl')?.code).not.toContain('/gemini/v1beta');
   });
 
   it('keeps only supported image-generation languages', () => {

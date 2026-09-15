@@ -10,7 +10,7 @@ summary: >-
   double-pooling or WebSocket lifecycle errors in serverless request handlers.
   ORM compatibility for Drizzle, Prisma, Kysely, and TypeORM is also covered.
 enableTableOfContents: true
-updatedOn: '2026-07-17T21:07:05.131Z'
+updatedOn: '2026-09-14T11:31:53.481Z'
 ---
 
 Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.
@@ -72,10 +72,6 @@ Choose your transport based on your query pattern: use **HTTP** for single queri
 ### Building a client-side app without a backend?
 
 Use the [Neon Data API](/docs/data-api/overview) via [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
-
-<Admonition type="note">
-The Data API is currently in beta.
-</Admonition>
 
 See the [JavaScript SDK reference](/docs/reference/javascript-sdk) for full documentation.
 

@@ -83,7 +83,7 @@ export default defineConfig({
     }
     if (!branch.exists) {
       // New non-default branches: auto-expire
-      // Run `neon checkout <name>` to create a new branch with these settings
+      // Run `neon checkout <name> --create` to create a new branch with these settings
       return { ttl: "7d" };
     }
     // Existing branch: no changes
@@ -261,11 +261,11 @@ const userId = String(payload.sub);
 
 A branch forks the whole backend through service-specific mechanics. Postgres and Object Storage branch their state copy-on-write. Each branch runs its own Functions at their own URLs and gets its own Managed Better Auth environment, Data API endpoint, and AI Gateway endpoint. AI Gateway credentials work on the branch where they're issued and its descendants.
 
-To try a change to the notes app safely, switch to a new branch with [`neon checkout`](/docs/cli/checkout), which offers to create the branch if it doesn't exist:
+To try a change to the notes app safely, switch to a new branch with [`neon checkout`](/docs/cli/checkout). Pass `--create` to create the branch if it doesn't exist yet:
 
 ```bash
-neon checkout my-feature      # switch to my-feature (offers to create it if new)
-neon deploy                   # provisions that branch's services
+neon checkout my-feature --create   # create my-feature if new, then switch to it
+neon deploy                         # provisions that branch's services
 ```
 
 `neon deploy` writes the new branch's credentials into `.env`, so the same code now runs against branch-specific infrastructure: a different database, an isolated `attachments` bucket, and its own `chat` URL. A note you write on the branch never appears on `main`.

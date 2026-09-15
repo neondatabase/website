@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-08-17T23:18:55.558Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -20,7 +20,18 @@ An object storage credential requires at minimum one of:
 - [`storage:read`](#read-vs-write-scopes): allows GetObject, HeadObject, ListObjects, and ListBuckets
 - [`storage:write`](#read-vs-write-scopes): allows all read operations plus PutObject and DeleteObject
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+<TabItem>
+
+Create a credential with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope storage:read --scope storage:write --name my-app-credential
+```
+
+The `api_token` and `s3_secret_access_key` are printed once, so store them right away. Map `token_id` to `AWS_ACCESS_KEY_ID` and `s3_secret_access_key` to `AWS_SECRET_ACCESS_KEY` (see [Mapping to your S3 SDK](#mapping-to-your-s3-sdk)). Run it in a directory [linked](/docs/cli/link) to your project, or pass `--project-id` and `--branch`.
+
+</TabItem>
 <TabItem>
 
 In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check the storage scopes you need.
@@ -217,7 +228,13 @@ curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-To rotate a credential, create a new one, update your environment variables, then revoke the old one.
+With the [Neon CLI](/docs/cli/credentials), run `neon credentials list` to find a credential, then revoke it by its `token_id`:
+
+```bash
+neon credentials revoke <token_id>
+```
+
+To rotate a credential in place, run `neon credentials rotate <token_id>`. This mints a new `s3_secret_access_key` while keeping the `token_id` (your `AWS_ACCESS_KEY_ID`) the same, so you only update the secret. Otherwise, create a new credential, update your environment variables, then revoke the old one.
 
 ## Common errors
 

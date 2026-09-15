@@ -8,10 +8,8 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-14T11:31:53.481Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">

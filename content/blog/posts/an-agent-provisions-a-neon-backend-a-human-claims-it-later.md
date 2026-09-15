@@ -93,6 +93,10 @@ The protocol supports three registration methods:
 
 Claimable Neon uses the Anonymous method.
 
+<Admonition type="note" title="Read the WorkOS story">
+[Get the full story by WorkOS](https://workos.com/blog/neon-claimable-postgres-auth-md-case-study) on how Claimable Neon implements auth.md.
+</Admonition>
+
 ## Why we chose anonymous registration
 
 An allowlist of known agent products would have been the more predictable launch: we could recognize requests from a handful of providers and reject everything else. But we actually want to see what happens when the instructions are public and the first interaction does not require a human identity. Which agents discover the file? What do they request? How far do they get? Do they ask for a database, Auth, or the Data API? Which projects do humans decide to keep?

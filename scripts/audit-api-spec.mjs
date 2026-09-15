@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 // Audits the live Neon OpenAPI spec for example coverage and schema validity.
-// Usage: node scripts/audit-api-spec.mjs [spec-url] > spec-audit.md
+// Usage: node scripts/audit-api-spec.mjs [spec-url] [--verbose] > spec-audit.md
+//   --verbose  expand the summarized sections (valid list, per-operation parameter gaps)
 
 import Ajv from 'ajv';
 import { dereference } from '@scalar/openapi-parser';
 
 export { mergeParams, flattenAllOf, find2xxResponse } from './lib/spec-utils.mjs';
 import { mergeParams, flattenAllOf, find2xxResponse } from './lib/spec-utils.mjs';
+import { EXCLUDED_OPERATION_IDS } from './lib/excluded-operations.mjs';
 
 const SPEC_URL = 'https://neon.com/api_spec/release/v2.json';
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
@@ -35,7 +37,11 @@ export function validateExample(example, schema) {
   if (!schema || example === undefined) return { valid: true, errors: [] };
   const { example: _e, examples: _es, ...cleanSchema } = schema;
   try {
-    const ajv = new Ajv({ strict: false, allErrors: true });
+    // logger:false silences Ajv's "unknown format 'date-time' ignored" warnings.
+    // The spec uses OpenAPI formats (date-time, uuid, int32/int64, email) that
+    // Ajv doesn't validate by default; we don't rely on Ajv's logger since we
+    // read `validate.errors` directly, so drop the noise.
+    const ajv = new Ajv({ strict: false, allErrors: true, logger: false });
     const validate = ajv.compile(cleanSchema);
     const valid = validate(example);
     return {
@@ -128,28 +134,32 @@ export function auditOperation(pathItem, operation, method, path) {
 // Report rendering
 // ---------------------------------------------------------------------------
 
-function renderReport(results, localExamples = new Set()) {
+// Bucket operations by response-example status. Exported so the report headline
+// and the terminal summary share one source of truth.
+export function summarize(results, localExamples = new Set()) {
   const missingAll = results.filter(
     (r) => r.responseIssue?.type === 'missing' || r.responseIssue?.type === 'no-2xx'
   );
-  // Split: truly missing vs covered by our response-examples.json
-  const missing = missingAll.filter((r) => !localExamples.has(r.operationId));
-  const coveredLocally = missingAll.filter((r) => localExamples.has(r.operationId));
-  const invalid = results.filter((r) => r.responseIssue?.type === 'invalid');
-  const valid = results.filter((r) => !r.responseIssue);
+  return {
+    valid: results.filter((r) => !r.responseIssue),
+    // Split "missing" into truly missing vs covered by our response-examples.json.
+    coveredLocally: missingAll.filter((r) => localExamples.has(r.operationId)),
+    missing: missingAll.filter((r) => !localExamples.has(r.operationId)),
+    invalid: results.filter((r) => r.responseIssue?.type === 'invalid'),
+  };
+}
+
+function renderReport(results, localExamples = new Set(), { verbose = false } = {}) {
+  const { valid, coveredLocally, missing, invalid } = summarize(results, localExamples);
 
   const paramWarnings = results.filter((r) => r.paramIssues.length > 0);
   const bodyWarnings = results.filter((r) => r.requestBodyIssue);
 
   const lines = [];
+  // No summary block here — the run's tally is printed to stderr at the end
+  // (see main), where it stays readable after the report scrolls past or is
+  // redirected to a file. The per-section counts below carry the detail.
   lines.push('# Neon API Spec Audit\n');
-  lines.push(
-    `**${results.length} operations** — ` +
-      `${valid.length} valid response examples in spec, ` +
-      `${coveredLocally.length} covered by local data, ` +
-      `${missing.length} missing, ` +
-      `${invalid.length} schema-invalid\n`
-  );
 
   // --- Missing (no local fallback — real gap) ---
   lines.push(`## Missing response examples — no local fallback (${missing.length})\n`);
@@ -190,19 +200,48 @@ function renderReport(results, localExamples = new Set()) {
 
   // --- Valid ---
   lines.push(`## Valid response examples (${valid.length})\n`);
-  for (const r of valid) {
-    lines.push(`- \`${r.method} ${r.path}\` — \`${r.operationId}\``);
+  if (verbose) {
+    for (const r of valid) {
+      lines.push(`- \`${r.method} ${r.path}\` — \`${r.operationId}\``);
+    }
+  } else {
+    lines.push(
+      `_${valid.length} operations have a valid response example in the spec. Run with \`--verbose\` to list them._`
+    );
   }
   lines.push('');
 
   // --- Parameter example gaps ---
-  lines.push(`## Parameters missing examples (${paramWarnings.length} operations)\n`);
+  // Count how many operations each parameter name lacks an example on, so the
+  // default report is a short "which params to fix" summary rather than a list
+  // of nearly every operation (path params like project_id recur everywhere).
+  const paramFreq = new Map();
+  for (const r of paramWarnings) {
+    for (const name of r.paramIssues) {
+      paramFreq.set(name, (paramFreq.get(name) ?? 0) + 1);
+    }
+  }
+  const rankedParams = [...paramFreq.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  lines.push(
+    `## Parameters missing examples (${paramWarnings.length} operations, ${paramFreq.size} distinct params)\n`
+  );
   if (paramWarnings.length === 0) {
     lines.push('_None._\n');
-  } else {
+  } else if (verbose) {
     for (const r of paramWarnings) {
       lines.push(`- \`${r.operationId}\`: ${r.paramIssues.join(', ')}`);
     }
+    lines.push('');
+  } else {
+    lines.push(
+      'Query and path parameters with no `example` in the spec. The generated docs fall back ' +
+        'to a `$PARAM_NAME` placeholder, so they render but without a realistic value. Add ' +
+        'examples in the spec to improve them. Ranked by operations affected:\n'
+    );
+    for (const [name, count] of rankedParams) {
+      lines.push(`- \`${name}\` — ${count} ${count === 1 ? 'op' : 'ops'}`);
+    }
+    lines.push('\n_Run with `--verbose` for the full per-operation list._');
     lines.push('');
   }
 
@@ -247,7 +286,9 @@ function renderReport(results, localExamples = new Set()) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const specUrl = process.argv[2] ?? SPEC_URL;
+  const args = process.argv.slice(2);
+  const verbose = args.includes('--verbose') || args.includes('-v');
+  const specUrl = args.find((a) => !a.startsWith('-')) ?? SPEC_URL;
   process.stderr.write(`Fetching spec from ${specUrl}...\n`);
 
   const raw = await fetch(specUrl).then((r) => r.json());
@@ -271,13 +312,28 @@ async function main() {
     for (const method of METHODS) {
       const operation = pathItem[method];
       if (!operation) continue;
-      if (operation.tags?.includes('Auth (legacy)')) continue;
+      // Match the generated API reference's scope so the audit reflects what
+      // actually renders, not the raw spec. Only EXCLUDED_OPERATION_IDS are
+      // hidden from the docs (shared with generate-api-ref.mjs); everything else
+      // in the spec is documented — including Auth (legacy) — so it's audited.
+      if (operation.operationId && EXCLUDED_OPERATION_IDS.has(operation.operationId)) continue;
       results.push(auditOperation(pathItem, operation, method, path));
     }
   }
 
-  process.stdout.write(renderReport(results, localExamples));
-  process.stderr.write(`Done. ${results.length} operations audited.\n`);
+  process.stdout.write(renderReport(results, localExamples, { verbose }));
+
+  // Print the tally to stderr so it's the last thing shown in a terminal, and
+  // stays visible even when the report on stdout is redirected to a file.
+  const s = summarize(results, localExamples);
+  const pad = (n) => String(n).padStart(3);
+  process.stderr.write(
+    `\n${results.length} operations audited for response-example coverage:\n` +
+      `${pad(s.valid.length)}  have a valid response example in the spec\n` +
+      `${pad(s.coveredLocally.length)}  have no spec example but are filled from local data (response-examples.json)\n` +
+      `${pad(s.missing.length)}  have no response example anywhere — the real gaps\n` +
+      `${pad(s.invalid.length)}  have a response example that fails schema validation\n`
+  );
 }
 
 const isMain =
