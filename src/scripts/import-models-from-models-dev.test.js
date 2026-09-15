@@ -31,9 +31,13 @@ describe('import-models-from-models-dev', () => {
       })
     );
 
-    const stdout = execFileSync(process.execPath, [SCRIPT, '--from', from, '--models', 'grok-4-6', '--stdout'], {
-      encoding: 'utf8',
-    });
+    const stdout = execFileSync(
+      process.execPath,
+      [SCRIPT, '--from', from, '--models', 'grok-4-6', '--stdout'],
+      {
+        encoding: 'utf8',
+      }
+    );
     const merged = JSON.parse(stdout);
 
     expect(merged.neon.models['grok-4-6'].provider).toBe('xai');

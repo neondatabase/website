@@ -1,11 +1,10 @@
 'use client';
 
-import { RuntimeLoader } from '@rive-app/react-canvas';
 import { usePathname } from 'next/navigation';
 
-const RIVE_WASM_URL = 'https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.32.0/rive.wasm';
+import { configureRiveRuntime, RIVE_WASM_URL } from 'utils/rive-runtime';
 
-RuntimeLoader.setWasmUrl(RIVE_WASM_URL);
+configureRiveRuntime();
 
 const RiveWasm = () => {
   const pathname = usePathname();
