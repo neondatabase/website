@@ -137,7 +137,7 @@ const client = new S3Client({
 </TabItem>
 <TabItem>
 
-AI Gateway uses a branch-scoped credential. Set `NEON_AI_GATEWAY_BASE_URL` to the branch host, append a dialect path such as `/v1`, and authenticate with `NEON_AI_GATEWAY_TOKEN`.
+Neon AI Gateway uses a branch-scoped credential. Set `NEON_AI_GATEWAY_BASE_URL` to the branch host, append a dialect path such as `/v1`, and authenticate with `NEON_AI_GATEWAY_TOKEN`.
 
 ```typescript shouldWrap
 import OpenAI from 'openai';
