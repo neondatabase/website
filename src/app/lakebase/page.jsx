@@ -28,12 +28,12 @@ const LakebasePage = () => (
     />
     <Architecture />
     <Autoscaling />
+    <DynamicDatabases />
     <Configuration
       content={lakebasePageContent.configuration}
       id="data-api"
       className="pt-40 pb-0 xl:pt-32 xl:pb-0 lg:pt-24 lg:pb-0 md:pt-20 md:pb-0"
     />
-    <DynamicDatabases />
     <FromFirstLine />
     <Faq items={lakebasePageContent.faqItems} variant="lakebase" />
     <BackendServices

@@ -366,7 +366,7 @@ const renderLakebaseMarkdown = (links) => {
     renderPageHeader(lakebasePageContent),
     '## Get started',
     renderActionLinks(hero, links),
-    `## ${architecture.title} ${architecture.highlightedTitle}`,
+    `## ${architecture.title} ${architecture.highlightedTitle} ${architecture.titleAfterHighlight}`,
     `${architecture.description} ${architecture.secondaryDescription}`,
     ...architecture.features.flatMap(({ title, description }) => [
       `### ${title}`,
@@ -381,18 +381,18 @@ const renderLakebaseMarkdown = (links) => {
     ]),
     autoscaling.caption,
     ...autoscaling.features.flatMap(({ title, description }) => [`### ${title}`, description]),
+    `## ${dynamicDatabases.title}`,
+    ...dynamicDatabases.capabilities.flatMap(({ label, primary, secondary, benefits = [] }) => [
+      `### ${label}`,
+      `${primary} ${secondary}`,
+      ...benefits.flatMap(({ title, description }) => [`#### ${title}`, description]),
+    ]),
     `## ${configuration.title}`,
     `### ${configuration.filename}`,
     `\`\`\`typescript\n${configuration.code}\n\`\`\``,
     ...configuration.items.flatMap(({ title, description }) => [
       `### ${title}`,
       htmlToMarkdown(description),
-    ]),
-    `## ${dynamicDatabases.title}`,
-    ...dynamicDatabases.capabilities.flatMap(({ label, primary, secondary, benefits = [] }) => [
-      `### ${label}`,
-      `${primary} ${secondary}`,
-      ...benefits.flatMap(({ title, description }) => [`#### ${title}`, description]),
     ]),
     `## ${fromFirstLine.title}`,
     fromFirstLine.description,

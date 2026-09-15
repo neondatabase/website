@@ -121,22 +121,23 @@ describe('backend platform page Markdown', () => {
   it('renders Lakebase unique content and its shared platform footer', () => {
     const markdown = renderLakebaseMarkdown(LINKS);
 
-    expect(markdown).toContain(
-      '# Postgres for apps and agents, built on the lakebase architecture.'
-    );
+    expect(markdown).toContain('# The Neon database: Lakebase Postgres');
     expect(markdown).toContain('### Instant Branching');
     expect(markdown).toContain(
-      '## Turn your Postgres database into a REST API without building a backend.'
+      '## Query Postgres directly from browsers, edge runtimes, and serverless functions.'
     );
     expect(markdown).toContain('### data-api.ts');
     expect(markdown).toContain('${DATA_API_URL}/projects');
     expect(markdown).toContain('### Secure access');
+    expect(markdown.indexOf('### Instant Branching')).toBeLessThan(
+      markdown.indexOf('### data-api.ts')
+    );
     expect(markdown.indexOf('### data-api.ts')).toBeLessThan(
-      markdown.indexOf('### Instant Branching')
+      markdown.indexOf("## From your first five users to the world's largest teams")
     );
     expect(markdown).toContain('### Restore to any point');
     expect(markdown).toContain('### A database built for agents');
-    expect(markdown).toContain('## From your first line of code to the world’s largest teams.');
+    expect(markdown).toContain("## From your first five users to the world's largest teams");
     expect(markdown).toContain('## Your questions, answered.');
     expect(markdown).toContain('## Backend services');
     expect(markdown).toContain('## Trusted at scale.');
@@ -173,7 +174,7 @@ describe('backend platform page Markdown', () => {
       '# Better Auth that branches, managed by Neon'
     );
     expect(await fs.readFile(path.join(outputDir, 'lakebase.md'), 'utf8')).toContain(
-      '# Postgres for apps and agents'
+      '# The Neon database: Lakebase Postgres'
     );
     expect(await fs.readFile(sentinelPath, 'utf8')).toBe('keep me');
   });

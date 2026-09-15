@@ -32,6 +32,7 @@ const Architecture = () => (
         <mark className="-mr-[0.15em] -ml-[0.1em] bg-transparent bg-[linear-gradient(to_bottom,transparent_0.15em,rgba(57,165,125,0.6)_0.15em)] box-decoration-clone pr-[0.15em] pl-[0.1em]">
           {architecture.highlightedTitle}
         </mark>
+        {architecture.titleAfterHighlight && ` ${architecture.titleAfterHighlight}`}
       </h2>
 
       <figure

@@ -5,8 +5,8 @@ const aiGatewayModelsHighlightedTitleLines = ['Served with optimized performance
 const builtForAgentsTitleLines = ['Built for agents and', 'the developers behind them.'];
 const faqTitleLines = ['Your questions,', 'answered'];
 const lakebaseFromFirstLineTitleLines = [
-  'From your first line of code',
-  'to the world’s largest teams.',
+  'From your first five users',
+  "to the world's largest teams",
 ];
 
 const functionsPageContent = {
@@ -237,17 +237,18 @@ const lakebasePageContent = {
   pageLabel: 'Lakebase Postgres',
   hero: {
     label: 'Lakebase Postgres',
-    title: 'Postgres for apps and agents, built on the lakebase architecture.',
+    title: 'The Neon database: Lakebase Postgres',
     illustrationDescription:
       'An application connected to Lakebase Postgres and Neon backend services',
     primaryAction: { label: 'Start building', linkKey: 'signup' },
     secondaryAction: { label: 'Read the docs', linkKey: 'postgresOverview' },
   },
   architecture: {
-    title:
-      'Decoupled storage and compute, with object storage + WAL as the durable foundation for instant',
-    highlightedTitle: 'provisioning, scaling, branching, and recovery.',
-    description: 'Deploy, scale, branch, replicate, and restore instantly —',
+    title: 'Built on the',
+    highlightedTitle: 'lakebase architecture.',
+    titleAfterHighlight:
+      'Decoupled storage and compute, with object storage + WAL as the foundation.',
+    description: 'Deploy, scale, branch, replicate, and restore instantly,',
     secondaryDescription:
       'without moving or duplicating your underlying data between environments.',
     features: [
@@ -299,7 +300,7 @@ const lakebasePageContent = {
   },
   configuration: {
     label: 'Data API',
-    title: 'Turn your Postgres database into a REST API without building a backend.',
+    title: 'Query Postgres directly from browsers, edge runtimes, and serverless functions.',
     filename: 'data-api.ts',
     code: `await fetch(\`\${DATA_API_URL}/projects\`, {
   method: "POST",
@@ -325,13 +326,13 @@ const lakebasePageContent = {
       {
         title: 'PostgREST compatible',
         description:
-          'Use standard HTTP methods and PostgREST-compatible tools to work with your database through a REST interface.',
+          'Bring any PostgREST client, including <code>@neondatabase/postgrest-js</code>, and keep familiar filtering, ordering, pagination, and CRUD patterns.',
       },
     ],
   },
   dynamicDatabases: {
     title:
-      'As software becomes more dynamic and autonomous, databases need to evolve too: branch, rewind, and operate programmatically.',
+      'Agents demand new database primitives like branching, together with instant deploys and restores, and full CLI/MCP coverage.',
     highlightedTitle: '',
     capabilities: [
       {
@@ -366,14 +367,14 @@ const lakebasePageContent = {
         label: 'Restore to any point',
         primary: 'Roll back instantly to any point in your database history,',
         secondary:
-          'without copying data, so restore time stays constant no matter how large your database is.',
+          'without copying data, so restore time stays small no matter how large your database is.',
       },
       {
         id: 'database-built-for-agents',
         label: 'A database built for agents',
-        primary: 'Let agents create and operate isolated database environments',
+        primary: 'Let agents deploy and operate isolated database environments',
         secondary:
-          'for every task, session, or pull request, with changes kept separate and recovery always at hand.',
+          'for every task, session, or pull request, with full isolation and undos always at hand.',
       },
     ],
   },
@@ -381,16 +382,13 @@ const lakebasePageContent = {
     title: lakebaseFromFirstLineTitleLines.join(' '),
     titleLines: lakebaseFromFirstLineTitleLines,
     description:
-      'From early-stage teams to Fortune 500 organizations, Lakebase Postgres gives you the same flexible foundation to build, scale, and run production workloads with confidence.',
+      'From early-stage startups to Fortune 500 organizations, Lakebase Postgres gives you the same flexible foundation to build, scale, and run production workloads with confidence.',
     slides: [
       {
         title: 'Ship faster with a small team',
         description:
           'Adopt branching workflows and grow your startup faster. Don’t let the database lag the speed at which you ship code.',
-        tags: [
-          { icon: 'serverless', label: 'Serverless apps' },
-          { icon: 'autoscaling', label: 'Autoscaling' },
-        ],
+        tags: [],
         testimonial: {
           quote:
             'We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort.',
@@ -413,10 +411,7 @@ const lakebasePageContent = {
         title: 'Scale with unpredictable demand',
         description:
           'Let compute follow traffic automatically, from sudden AI-agent spikes to quiet periods, without manual capacity planning.',
-        tags: [
-          { icon: 'serverless', label: 'Serverless apps' },
-          { icon: 'autoscaling', label: 'Autoscaling' },
-        ],
+        tags: [],
         testimonial: {
           quote:
             'The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer',
@@ -438,10 +433,7 @@ const lakebasePageContent = {
         title: 'Move fast without managing infrastructure',
         description:
           'Keep the developer experience simple while the database scales efficiently with your product and team.',
-        tags: [
-          { icon: 'serverless', label: 'Serverless apps' },
-          { icon: 'autoscaling', label: 'Autoscaling' },
-        ],
+        tags: [],
         testimonial: {
           quote:
             'What first attracted us to Neon was the efficient scaling. What kept us interested were all the thoughtful developer-experience wins.',
@@ -500,12 +492,12 @@ const sharedBackendPlatformContent = {
   faqTitle: faqTitleLines.join(' '),
   faqTitleLines,
   backendServices: {
-    title: 'Your LLM branches with everything else.',
+    title: 'Your Postgres branches with everything else.',
     highlightedTitle:
       'Create a branch and your whole backend forks with it — database, storage, auth, and a gateway endpoint of its own.',
     itemsByVideo: {
       'postgres-database': {
-        title: 'Postgres Database',
+        title: 'Lakebase Postgres',
         description: 'Serverless Postgres that scales and branches with your app.',
       },
       authentication: {
