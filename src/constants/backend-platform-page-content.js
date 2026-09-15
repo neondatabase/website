@@ -5,7 +5,7 @@ const aiGatewayModelsHighlightedTitleLines = [
   'Served with optimized performance',
   'via Databricks.',
 ];
-const builtForAgentsTitleLines = ['Build for agents and', 'the developers behind them.'];
+const builtForAgentsTitleLines = ['Built for agents and', 'the developers behind them.'];
 const faqTitleLines = ['Your questions,', 'answered'];
 
 const functionsPageContent = {
@@ -292,23 +292,17 @@ const sharedBackendPlatformContent = {
   },
   backedBy: {
     label: 'Backed by giants',
-    title: 'Backed by giants.',
-    highlightedTitle:
-      'First founded by Postgres hackers with decades of expertise, Neon is now part of the Databricks Platform.',
+    title: 'Trusted at scale.',
+    highlightedTitle: 'Neon has been part of the Databricks Platform since May 2025.',
     trustedByLabel: 'Trusted by the best',
     metrics: [
       {
-        value: 'Databricks',
-        description: 'Neon has been part of the Databricks Platform since May 2025.',
-        icon: 'databricks',
+        value: '20M+',
+        description: 'Databases started daily - built for scale and reliability.',
       },
       {
-        value: '12M+',
-        description: 'Databases provisioned daily - built for scale and reliability.',
-      },
-      {
-        value: '40K+',
-        description: 'Databases provisioned daily by developers worldwide.',
+        value: '3M+',
+        description: 'Developers building on Neon worldwide',
       },
     ],
     quotes: [
