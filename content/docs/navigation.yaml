@@ -1071,6 +1071,8 @@
           slug: security/security-reporting
         - title: Compliance
           slug: security/compliance
+        - title: SOC 3 report
+          slug: security/soc-3-report
         - title: HIPAA
           slug: security/hipaa
         - title: Acceptable Use Policy
