@@ -54,7 +54,7 @@ const AgentPlatform = () => (
     <DecorativeBackground />
     <Container className="relative z-10 px-0! 2xl:px-8! md:px-5!" size="1280">
       <div className="max-w-5xl">
-        <SectionLabel className="mb-5">Agent platform</SectionLabel>
+        <SectionLabel className="mb-5">Usage-based pricing</SectionLabel>
         <h2
           className="text-[4.5rem] leading-none font-normal tracking-tighter xl:text-6xl lg:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
           id="agent-platform-heading"
