@@ -14,14 +14,14 @@ const STATS = [
     hasIcon: true,
   },
   {
-    title: '12M+',
-    description: 'Databases provisioned daily - built for scale and reliability.',
+    title: '20M+',
+    description: 'Databases started daily - built for scale and reliability.',
     className: 'col-span-1',
     descriptionClassName: 'max-w-54',
   },
   {
-    title: '40K+',
-    description: 'Databases provisioned daily by developers worldwide.',
+    title: '3M+',
+    description: 'Developers building on Neon worldwide.',
     className: 'col-span-1',
     descriptionClassName: 'max-w-64',
   },
