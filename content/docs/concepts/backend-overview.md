@@ -73,7 +73,9 @@ Managed Better Auth gives you a signed-in session on the server. Scope each quer
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
-const session = await auth.getSession();
+const { data: session } = await auth.getSession();
+
+if (!session?.user) throw new Error('Unauthorized');
 
 const notes = await sql`
   select id, title, body from notes
