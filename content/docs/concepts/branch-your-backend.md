@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-intro
-updatedOn: '2026-09-05T00:00:00.000Z'
+updatedOn: '2026-09-16T14:23:11.640Z'
 ---
 
 A **branch** is an isolated copy of your whole Neon backend. Like a Git branch, you create it from an existing branch and make changes freely on that child branch, without affecting the original.
@@ -98,7 +98,7 @@ When you create a branch, it starts with the services enabled on its parent. Her
 <div className="flex items-center gap-6 sm:flex-col">
   <div style={{ flex: '1 1 50%' }}>
 
-    Each branch gets its own AI Gateway endpoint and credentials, and its usage is metered separately, so there is no branch data to copy. Everything else is shared across your account rather than set per branch: the [model catalog](/docs/ai-gateway/models), routing, and rate limits are the same for every branch, and you choose a model on each request.
+    Each branch gets its own AI Gateway endpoint and credentials, so there is no branch data to copy. Everything else is shared across your account rather than set per branch: the [model catalog](/docs/ai-gateway/models), routing, rate limits, and your organization's [prepaid credit balance](/docs/ai-gateway/prepaid-credits) are the same for every branch, and you choose a model on each request.
 
   </div>
   <div style={{ flex: '1 1 50%' }}>
@@ -125,9 +125,9 @@ This works because storage is separate from compute: durable data can start a ne
 ## Limits and caveats
 
 - **A restore rolls back Postgres and Auth only.** Restoring a branch rolls back its Postgres timeline, including Managed Better Auth data stored in the `neon_auth` schema. It does not roll back Object Storage buckets or objects, and it does not roll back deployed functions. See [Backup & restore](/docs/guides/backup-restore).
-- **AI Gateway configuration is global.** Branches get their own AI Gateway endpoint, credentials, and usage metering, but the model catalog, routing, and rate limits are shared. A branch can call a different model by sending a different `model` value in the request; it cannot have its own model catalog.
+- **AI Gateway configuration is global.** Branches get their own AI Gateway endpoint and credentials, but the model catalog, routing, rate limits, and your organization's prepaid credit balance are shared. Usage on every branch draws down the same credit balance. A branch can call a different model by sending a different `model` value in the request; it cannot have its own model catalog.
 - **Logical replication is not copied.** A branch does not inherit logical replication slots or subscriptions. Set up replication again on the branch if it needs to publish or subscribe.
-- **Some services are still maturing.** Managed Better Auth, Object Storage, Functions, and the AI Gateway are in preview or beta and are not available in every region. See [Product availability](/docs/introduction/regions#product-availability).
+- **Not every service is available in every region.** Object Storage, Functions, and the AI Gateway currently run in two regions. See [Product availability](/docs/introduction/regions#product-availability).
 
 ## Where to go next
 
