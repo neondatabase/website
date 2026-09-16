@@ -6,10 +6,22 @@ summary: >-
   a Hono handler for the scheduled POST, a five-field UTC cron reference, how to confirm a
   run in the logs, and the common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-11T17:09:23.864Z'
+updatedOn: '2026-09-16T13:50:39.546Z'
 ---
 
 This page shows how to schedule a deployed function with a cron expression, then covers listing, updating, disabling, and deleting triggers. For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). You manage triggers through the Neon API.
+
+To build this with an AI agent, start from this prompt and fill in the task:
+
+```text shouldWrap filename="AI assistant prompt"
+Create a Neon Function that <task>, then schedule it with a Function Trigger.
+Docs: https://neon.com/docs/compute/functions/triggers/schedule.md
+
+- Add one unauthenticated POST route (scheduled invocations arrive without credentials). Read `scheduled_at` from the JSON body; keep the handler idempotent.
+- If the task uses Postgres, connect with the injected DATABASE_URL.
+- Deploy it, then create a schedule trigger via the Neon API with a five-field UTC cron. Start at `* * * * *` to confirm a run, then PATCH to the real cadence.
+- The route and trigger both default to `/`; set `function_path` on both if you want a different path.
+```
 
 ## Before you begin
 

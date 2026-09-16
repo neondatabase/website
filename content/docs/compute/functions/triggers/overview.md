@@ -7,14 +7,16 @@ summary: >-
   object-created), what an invocation sends your function, how triggers behave across branches,
   and the current limits.
 enableTableOfContents: true
-updatedOn: '2026-09-11T15:58:40.262Z'
+updatedOn: '2026-09-16T13:50:39.546Z'
 ---
 
 A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) in response to an event. No external scheduler, no queue wiring, and no compute kept running to watch for it.
 
+A trigger runs recurring or event-driven work next to your data, with no separate scheduler or queue to operate: roll up yesterday's rows into a summary table each night, refresh rates or embeddings from an external API, expire stale records on a cadence, or process each new upload as it lands. Functions are long-running, so one trigger handles a quick health check or a table-scanning batch, and it fires even when the compute is scaled to zero.
+
 Trigger types available today:
 
-- **`schedule`** — a cron expression evaluated in UTC. See [Schedule a function](/docs/compute/functions/triggers/schedule).
+- **`schedule`** — a cron expression evaluated in Coordinated Universal Time (UTC). See [Schedule a function](/docs/compute/functions/triggers/schedule).
 - **`storage_object_created`** — an object created in an [Object Storage](/docs/storage/overview) bucket, optionally under a key prefix. See [Trigger on an object upload](/docs/compute/functions/triggers/object-storage).
 
 The API uses a `type` discriminator, so more types can be added later without changing existing triggers. You manage all types through the Neon API.

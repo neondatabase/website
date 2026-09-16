@@ -6,12 +6,26 @@ summary: >-
   handler for the upload event, the bucket and prefix filter, what your function receives,
   and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-11T15:58:40.262Z'
+updatedOn: '2026-09-16T13:50:39.546Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
 
 For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). The scheduled trigger type is covered in [Schedule a function](/docs/compute/functions/triggers/schedule); this page covers the object-created type. You manage both through the Neon API.
+
+An object-created trigger runs work the moment a file lands, with no bucket polling and no external event bus to wire up: generate a thumbnail or preview, parse an uploaded CSV into rows, extract and index text for search, or record the object's metadata in Postgres. Functions are long-running, so the same handler processes a small avatar or a multi-megabyte export without extra setup.
+
+To build this with an AI agent, start from this prompt and fill in the task:
+
+```text shouldWrap filename="AI assistant prompt"
+Create a Neon Function that <task>, then trigger it on new uploads with a Function Trigger.
+Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
+
+- Add one unauthenticated POST route (trigger invocations arrive without credentials). Read `data.bucket_name` and `data.object_key` from the JSON body; keep the handler idempotent.
+- If the task uses Postgres, connect with the injected DATABASE_URL.
+- Deploy it, then create a `storage_object_created` trigger via the Neon API with the bucket name, optionally scoped to a key prefix. Upload an object to confirm a run in the logs.
+- The route and trigger both default to `/`; set `function_path` on both if you want a different path.
+```
 
 ## Before you begin
 
