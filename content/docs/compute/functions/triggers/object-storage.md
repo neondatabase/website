@@ -6,7 +6,7 @@ summary: >-
   or the Neon API: a Hono handler for the upload event, the bucket and prefix
   filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-16T18:05:06.759Z'
+updatedOn: '2026-09-16T18:08:16.994Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -15,7 +15,7 @@ For what a trigger is and how it behaves across branches, see the [overview](/do
 
 Because the function is long-running, it can do real work on each upload, whatever the file size.
 
-![A new object fires the long-running function, which can generate a thumbnail, parse a CSV, extract and index text, or record metadata in Postgres](/docs/compute/functions/triggers/object-upload-use-cases.png)
+![A new object fires the long-running function, which can generate a thumbnail, parse a CSV, extract and index text, or record metadata in Postgres](/docs/compute/functions/triggers/object-upload-use-cases.png 'priority')
 
 ## Before you begin
 
