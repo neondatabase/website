@@ -7,7 +7,7 @@ summary: >-
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-08-26T14:40:58.742Z'
+updatedOn: '2026-08-28T13:01:05.062Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -65,14 +65,14 @@ Neon does not support skipping minor releases or downgrading to a previous minor
 
 #### Recent minor version rollouts
 
-The table below shows when recent Postgres releases became available on Neon.
+The table below shows when recent Postgres releases became available on Neon. Each version links to its PostgreSQL release notes, which list the bug fixes and CVE patches included in that minor release.
 
-| Postgres release date | Versions in the release          | First available on Neon | Time to availability |
-| --------------------- | -------------------------------- | ----------------------- | -------------------- |
-| 2026-08-13            | 18.6, 17.11, 16.15, 15.19, 14.24 | 2026-08-18              | 5 days               |
-| 2026-05-14            | 18.4, 17.10, 16.14, 15.18, 14.23 | 2026-05-19              | 5 days               |
-| 2026-02-12            | 18.2, 17.8, 16.12, 15.16, 14.21  | 2026-02-13              | 1 day                |
-| 2025-11-13            | 18.1, 17.7, 16.11, 15.15, 14.20  | 2025-12-03              | 20 days              |
+| Postgres release date | Versions in the release                                                                                                                                                                                                                                                                   | First available on Neon | Time to availability |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------- |
+| 2026-08-13            | [18.6](https://www.postgresql.org/docs/release/18.6/), [17.11](https://www.postgresql.org/docs/release/17.11/), [16.15](https://www.postgresql.org/docs/release/16.15/), [15.19](https://www.postgresql.org/docs/release/15.19/), [14.24](https://www.postgresql.org/docs/release/14.24/) | 2026-08-18              | 5 days               |
+| 2026-05-14            | [18.4](https://www.postgresql.org/docs/release/18.4/), [17.10](https://www.postgresql.org/docs/release/17.10/), [16.14](https://www.postgresql.org/docs/release/16.14/), [15.18](https://www.postgresql.org/docs/release/15.18/), [14.23](https://www.postgresql.org/docs/release/14.23/) | 2026-05-19              | 5 days               |
+| 2026-02-12            | [18.2](https://www.postgresql.org/docs/release/18.2/), [17.8](https://www.postgresql.org/docs/release/17.8/), [16.12](https://www.postgresql.org/docs/release/16.12/), [15.16](https://www.postgresql.org/docs/release/15.16/), [14.21](https://www.postgresql.org/docs/release/14.21/)   | 2026-02-13              | 1 day                |
+| 2025-11-13            | [18.1](https://www.postgresql.org/docs/release/18.1/), [17.7](https://www.postgresql.org/docs/release/17.7/), [16.11](https://www.postgresql.org/docs/release/16.11/), [15.15](https://www.postgresql.org/docs/release/15.15/), [14.20](https://www.postgresql.org/docs/release/14.20/)   | 2025-12-03              | 20 days              |
 
 The **First available on Neon** date marks when a release first became available to run, not the point at which every compute is running it; each compute picks it up on the next restart, as described above.
 

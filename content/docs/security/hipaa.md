@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T05:16:28.993Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -373,16 +373,23 @@ For step-by-step instructions, see [Delete a project](/docs/manage/projects#dele
 
 If you want to disable HIPAA for your Neon organization entirely, you need to [submit a support request](https://console.neon.tech/app/projects?modal=support). This can only be done after all HIPAA-enabled projects have been deleted.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
-**Q: Can I request Neon to delete my PHI?**  
-A: Yes, upon termination of services, we will securely delete or return your PHI.
+<Faq>
 
-**Q: How does Neon ensure compliance with HIPAA?**  
-A: We conduct regular internal audits and provide training to our employees to ensure adherence to HIPAA requirements.
+<FaqItem question="Can I request Neon to delete my PHI?">
+Yes, upon termination of services, we will securely delete or return your PHI.
+</FaqItem>
 
-**Q: What should I do if I suspect a data breach?**  
-A: Contact our security team immediately at security@neon.tech.
+<FaqItem question="How does Neon ensure compliance with HIPAA?">
+We conduct regular internal audits and provide training to our employees to ensure adherence to HIPAA requirements.
+</FaqItem>
+
+<FaqItem question="What should I do if I suspect a data breach?">
+Contact our security team immediately at security@neon.tech.
+</FaqItem>
+
+</Faq>
 
 ## Contact information
 

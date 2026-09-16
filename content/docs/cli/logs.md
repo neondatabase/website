@@ -1,5 +1,7 @@
 ---
 title: 'Neon CLI command: logs'
+tag: new
+tagTheme: green
 subtitle: Query the logs a branch's services emit
 summary: >-
   The Neon CLI `neon logs` command reads the logs a branch's services emit.
@@ -9,7 +11,7 @@ summary: >-
   LogQL, and list which fields and values a branch reports. Logs are in beta
   and available only in AWS US East (Ohio) (aws-us-east-2).
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-01T16:04:17.197Z'
 ---
 
 <FeatureBeta />

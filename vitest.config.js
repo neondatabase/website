@@ -11,7 +11,7 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
-    exclude: [...configDefaults.exclude, 'tests/critical-flows/**'],
+    exclude: [...configDefaults.exclude, 'tests/critical-flows/**', '**/.claude/**'],
     globals: true,
     setupFiles: ['./vitest.setup.js'],
   },

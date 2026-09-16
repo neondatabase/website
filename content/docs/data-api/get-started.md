@@ -25,7 +25,7 @@ This guide walks you through enabling the Data API, creating a table with RLS, a
 ## Enable the Data API
 
 <Admonition type="tip" title="Enable programmatically">
-You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
+You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page

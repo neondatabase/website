@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 169,
+  "count": 172,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -45,6 +45,7 @@
     "deleteProjectBranchBucket",
     "deleteProjectBranchBucketObject",
     "deleteProjectBranchBucketObjectsByPrefix",
+    "deleteProjectBranchCustomDomain",
     "deleteProjectBranchDataAPI",
     "deleteProjectBranchDatabase",
     "deleteProjectBranchFunction",
@@ -110,6 +111,7 @@
     "listOrganizationVPCEndpointsAllRegions",
     "listProjectBranchBucketObjects",
     "listProjectBranchBuckets",
+    "listProjectBranchCustomDomains",
     "listProjectBranchDatabases",
     "listProjectBranchEndpoints",
     "listProjectBranchFunctions",
@@ -128,6 +130,7 @@
     "presignProjectBranchBucketObject",
     "queryProjectBranchLogs",
     "recoverProject",
+    "registerProjectBranchCustomDomain",
     "removeOrganizationMember",
     "removeProjectMemberRole",
     "resetProjectBranchRolePassword",

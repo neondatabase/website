@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-24T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-31T11:23:58.798Z'
 title: Build image search over CLIP embeddings with Lakebase Search
 subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Lakebase Postgres with Lakebase Search.
 ---
@@ -297,11 +297,11 @@ Then build the three indexes from the code in `scripts/create-indexes.ts`:
 ```sql
 create index photos_embedding_ann on photos
 using lakebase_ann (embedding vector_cosine_ops)
-with (build_mode = 'standard');
+with (build_mode = 'quality');
 
 create index captions_embedding_ann on captions
 using lakebase_ann (embedding vector_cosine_ops)
-with (build_mode = 'standard');
+with (build_mode = 'quality');
 
 create index captions_tsv_bm25 on captions
 using lakebase_bm25 (tsv tsvector_bm25_ops)
@@ -310,7 +310,7 @@ with (k1 = 1.2, b = 0.75);
 
 In the queries above:
 
-- `build_mode` takes `standard`, which optimises for recall.
+- `build_mode = 'quality'` improves recall but takes longer to build.
 - On the BM25 side, `k1` controls term-frequency saturation and `b` controls document-length normalisation. Flickr captions are short and even in length, so `b` does very little for this kind of dataset.
 
 Now, run the following command to build all three indexes:
@@ -439,10 +439,10 @@ It returns JSON with the partition layout, the default probe counts, and the def
 
 Once `lists` is populated, two settings come into play:
 
-- `lakebase_ann.probes` takes one integer per partition level. Higher values read more of the index and raise recall at the cost of latency.
-- `lakebase_ann.epsilon` is the re-ranking margin. It defaults to 1.9 and is valid from 0.0 to 4.0.
+- `lakebase_ann.probes` takes one integer per partition level. Higher values read more of the index and raise recall at the cost of latency. It defaults to `auto`.
+- `lakebase_ann.epsilon` controls how many candidates are reranked using full-precision distances. Leave it set to its default value of `auto`.
 
-Both are session settings, so you set them per connection with `SET`, and they are only valid until the connection closes. Raise `probes` or `epsilon` to read more of the index and gain recall but at the cost of latency.
+Both are session settings, so you set them per connection with `SET`, and they are only valid until the connection closes. Raise `probes` to read more of the index and gain recall at the cost of latency.
 
 ```sql
 set lakebase_ann.probes to '32';

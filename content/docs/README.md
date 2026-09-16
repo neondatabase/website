@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-20T15:50:59.873Z'
+updatedOn: '2026-08-26T16:06:50.814Z'
 ---
 
 # Docs
@@ -818,6 +818,44 @@ Another term for smoke test
 ![Definition list example](images/definition-list-example.jpg)
 
 </details>
+
+## FAQ
+
+Use the `Faq` component with `FaqItem` items to add a frequently-asked-questions section at the end of a page. This is the standard component for FAQs across docs and guides. Prefer it over ad-hoc `### question` headings, bold `**Q:/A:**` text, or `DefinitionList` so every FAQ looks and behaves the same.
+
+The component is built for SEO. It emits `FAQPage` [schema.org](https://schema.org/FAQPage) JSON-LD structured data to help search engines and AI agents parse the questions and answers, and it renders each answer with native `<details>`/`<summary>` so the answer text stays in the DOM even when collapsed, keeping it crawlable and accessible. It also gives every FAQ consistent styling and deep-link anchors.
+
+Add a `## Frequently asked questions` heading above the component so the section shows up in the table of contents, then wrap the questions:
+
+```md
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="Why must I poll operations after restore?">
+With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+</FaqItem>
+
+<FaqItem question="What if we need multiple preview environments?">
+Restore different snapshots to new branches. Each restore creates a new branch with its own connection string.
+</FaqItem>
+
+</Faq>
+```
+
+### Props
+
+`FaqItem`:
+
+- `question` (required) — the question text. Rendered as an `<h3>` inside the `<summary>`, and used verbatim as the `name` in the JSON-LD.
+- `id` (optional) — anchor id for the item. Defaults to a slug generated from `question`, so `#your-question-text` deep links work without setting it.
+- `defaultOpen` (optional) — set to `true` to render the item expanded on load.
+
+### Notes
+
+- Answers accept full markdown: paragraphs, lists, tables, links, images, and code. Keep a blank line above and below block content inside `FaqItem` so MDX parses it.
+- Each question becomes an `<h3>` inside the component but does **not** appear in the table of contents (the TOC is built from markdown headings, not rendered JSX). The single `## Frequently asked questions` heading is the TOC entry.
+- Put shared blocks like `<NeedHelp/>` after `</Faq>`, not inside a `FaqItem`.
 
 ## Detail Icon Cards
 

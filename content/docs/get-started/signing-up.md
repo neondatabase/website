@@ -1,8 +1,8 @@
 ---
 title: Tour the Neon Console
-subtitle: Sign up and explore Neon's core features — the SQL Editor, branching, the Tables view, and Managed Better Auth
+subtitle: 'Explore Neon''s core Postgres database features: the SQL Editor, branching, the Tables view, and Managed Better Auth'
 summary: >-
-  The Neon Console tour walks first-time users through sign-up, querying with
+  The Neon Console tour walks you through querying with
   the SQL Editor and AI assistant, editing rows in the Tables view, enabling
   Managed Better Auth, and creating an isolated development branch with the Neon CLI.
   Choose this page to understand the object hierarchy (project, branch,
@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-08-27T21:13:38.572Z'
 ---
 
 <InfoBlock>
@@ -32,13 +32,21 @@ updatedOn: '2026-08-18T10:29:02.410Z'
 </DocsList>
 </InfoBlock>
 
-This tutorial walks you through your first steps using Neon as your Postgres database. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
+This tutorial walks you through your first steps using Neon as your Postgres database. It assumes you've already signed up and created a project. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
+
+<Admonition type="note">
+This tour focuses on Postgres. For a tour of Neon's other backend services, including Object Storage, Functions, and the AI Gateway, see [Tour the Neon backend](/docs/get-started/backend-overview).
+</Admonition>
+
+## Everything starts with a project
+
+In Neon, everything starts with the **project**. It's the top-level container that holds your branches, databases, and roles. Typically, you create a project for each repository in your application. This lets you manage your database branches just like you manage your code branches: a branch for production, staging, development, new features, previews, and so forth.
 
 ## About branching
 
 Each [branch](/docs/introduction/branching) is a fully-isolated copy of its parent. We suggest creating a long-term branch for each developer on your team to maintain consistent connection strings. You can reset your development branch to production whenever needed.
 
-After signing up, you'll start with a `production` branch:
+Your project starts with a `production` branch:
 
 - `production` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
 
@@ -46,55 +54,11 @@ You can create additional branches for development, staging, and other environme
 
 <Steps>
 
-## Sign up
-
-<div className="flex gap-5 sm:flex-col">
-  <div style={{ flex: '0 0 60%' }}>
-
-    If you're already signed up, you can skip ahead to [Step 2](#step-2-onboarding-in-the-neon-console).
-
-    If you haven't signed up yet, you can sign up for free here:
-
-    [https://console.neon.tech/signup](https://console.neon.tech/signup)
-
-    Sign up with your email, GitHub, Google, or other partner account.
-
-    For information about what's included with the Free and paid plans, see
-    [Neon plans](/docs/introduction/plans).
-
-  </div>
-  <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>
-    ![sign_up](/docs/get-started/sign_up_reduced.png "no-border")
-  </div>
-</div>
-
-## Onboarding in the Neon Console
-
-After you sign up, you are guided through some onboarding steps that ask you to create a **Project**.
-
-![onboarding](/docs/get-started/onboarding.png)
-
-The steps should be self-explanatory, but it's important to understand a few key points:
-
-- **In Neon, everything starts with the _Project_**
-
-  It is the top-level container that holds your branches, databases, and roles. Typically, you should create a project for each repository in your application. This allows you to manage your database branches just like you manage your code branches: a branch for production, staging, development, new features, previews, and so forth.
-
-- **We create a production branch for you**
-  - `production` is the root default branch. It hosts your database, role, and a compute that you can connect your application to
-  - You can create additional branches for development, staging, previews, and other workflows as needed
-
-At this point, if you want to just get started connecting Neon to your toolchain, go to [Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
-
-<Admonition type="tip" title="Working with a team?">
-Your organization is now set up. You can start inviting teammates immediately. See [Invite members](/docs/manage/orgs-manage#invite-members).
-</Admonition>
-
 ## Add sample data
 
 Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started/query-with-neon-sql-editor#explain-and-analyze).
 
-From the Neon Console, use the sidebar navigation to open **Postgres database** > **SQL Editor**. Notice that your default branch `production` is already selected, along with the database created during onboarding, `neondb`.
+From the Neon Console, use the sidebar navigation to open **Postgres database** > **SQL Editor**. Notice that your default branch `production` is already selected, along with your project's default database, `neondb`.
 
 ![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
@@ -192,8 +156,6 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
    ```bash
    neon auth
    ```
-
-   ![neon auth](/docs/get-started/neonctl_auth.png 'no-border')
 
 4. **View your branches**
 

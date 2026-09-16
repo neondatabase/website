@@ -14,7 +14,7 @@
 const META = {
   auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
   init: {
-    desc: 'Wire up MCP, agent skills, and editor (Cursor/VS Code/Claude).',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {
@@ -38,6 +38,10 @@ const META = {
     examples: ['neon open'],
   },
   me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
+  ask: {
+    desc: 'Ask the Neon assistant a question from the terminal.',
+    examples: ['neon ask --prompt "How do schema-only branches work?"'],
+  },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],

@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-18T17:01:39.853Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -46,18 +46,10 @@ mkdir neon-functions-api && cd neon-functions-api
 npm init -y
 ```
 
-Run the Neon CLI initialization command:
+Install the Neon agent skills so AI agents such as Claude Code and Cursor have the context to help you build and work with Neon. This function uses the **Neon** and **Neon Functions** skills:
 
 ```bash
-neon init
-```
-
-Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
-
-During initialization, the **Neon** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install them with:
-
-```bash
-npx skills add https://github.com/neondatabase/agent-skills --skill neon-functions
+neon skills -s neon -s neon-functions
 ```
 
 Link your local workspace to a Neon project:

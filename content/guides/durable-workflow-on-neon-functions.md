@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-08-06T15:58:59.107Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -94,19 +94,19 @@ Create a project directory and navigate into it:
 mkdir neon-inngest-workflow && cd neon-inngest-workflow
 ```
 
-Run `neon init` to configure AI agent skills for development:
+Install the Neon agent skills so AI agents like Claude Code and Cursor have the context to help you build and deploy. This durable workflow uses the **Neon**, **Neon Functions**, and **Neon AI Gateway** skills:
 
 ```bash
-neon init
+neon skills -s neon -s neon-functions -s neon-ai-gateway
 ```
 
-Use the default setup options for all prompts such as enabling AI skills, configuring the MCP server, and installing the VS Code extension. This streamlined setup makes it easier to build Neon powered applications with AI agents like Claude Code, Cursor, and others.
-
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your durable workflow. Install them with the following command:
+Link your local workspace to a Neon project:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
+neon link
 ```
+
+You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose the **AWS US East 2 (Ohio)** (`aws-us-east-2`) region, since Neon Functions are available only there during beta.
 
 Next, install the required dependencies:
 

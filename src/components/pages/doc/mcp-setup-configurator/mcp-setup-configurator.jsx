@@ -33,20 +33,19 @@ const AUTH_MODES = [
   },
 ];
 
-// Must stay in sync with the MCP server's own category list, advertised at
-// https://mcp.neon.tech/.well-known/oauth-authorization-server as
-// `x-neon-scope-categories`, and with the table in
-// content/docs/shared-content/mcp-tools.md. Enforced by
-// `npm run check:mcp-categories` — see scripts/check-mcp-categories-sync.mjs.
 const SCOPE_CATEGORIES = [
   { id: 'projects', label: 'Projects', description: 'Create and manage projects' },
-  { id: 'branches', label: 'Branches', description: 'Create, reset, delete branches' },
-  { id: 'schema', label: 'Schema', description: 'Tables, columns, indexes' },
-  { id: 'querying', label: 'Querying', description: 'Run SQL and explain plans' },
-  { id: 'neon_auth', label: 'Neon Auth', description: 'Users and sessions' },
-  { id: 'data_api', label: 'Data API', description: 'RESTful data endpoints' },
-  { id: 'observability', label: 'Observability', description: 'Function and storage logs' },
+  { id: 'branches', label: 'Branches', description: 'Branches, roles, and databases' },
+  { id: 'endpoints', label: 'Endpoints', description: 'Start, suspend, and manage computes' },
+  { id: 'snapshots', label: 'Snapshots', description: 'Create, restore, and schedule snapshots' },
+  { id: 'schema', label: 'Schema', description: 'Tables, columns, and schema compare' },
+  { id: 'querying', label: 'Querying', description: 'SQL, explain plans, and migrations' },
+  { id: 'neon_auth', label: 'Neon Auth', description: 'Provision and configure Auth' },
+  { id: 'data_api', label: 'Data API', description: 'Enable, update, and disable the Data API' },
+  { id: 'observability', label: 'Observability', description: 'Logs and AI Gateway availability' },
   { id: 'docs', label: 'Docs', description: 'Search and fetch docs' },
+  { id: 'functions', label: 'Functions', description: 'List, deploy, and update functions' },
+  { id: 'storage', label: 'Storage', description: 'Buckets, objects, and presigned URLs' },
 ];
 const SCOPE_IDS = SCOPE_CATEGORIES.map((scope) => scope.id);
 const SCOPE_ID_SET = new Set(SCOPE_IDS);
@@ -454,8 +453,8 @@ const McpSetupConfigurator = () => {
               </button>
             </div>
             <p className={clsx('mt-2 mb-3', HELPER_TEXT_CLASS)}>
-              Pick which capability groups the agent can access. Unselected categories are excluded
-              via the{' '}
+              All tools are available by default; select categories to narrow the agent's access
+              through the{' '}
               <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
                 category
               </code>{' '}

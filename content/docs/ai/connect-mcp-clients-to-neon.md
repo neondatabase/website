@@ -10,7 +10,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-25T02:37:06.867Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -27,11 +27,7 @@ The fastest way to get started:
 npx neon@latest init
 ```
 
-**`neon init`** (see [`neon init` reference](/docs/cli/init)) creates a Neon API key and configures the MCP server with **API key** auth so you can skip OAuth when using the connection. It installs the VS Code/Cursor extension where applicable, wires **Claude Code** and **many other assistants** the wizard supports, and installs Neon's [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.
-
-<Admonition type="note">
-Each run of `npx neon@latest init` creates a new Neon API key. If you run it multiple times, review your [API keys](https://console.neon.tech/app/settings/api-keys) and revoke any you no longer need.
-</Admonition>
+**`neon init`** (see [`neon init` reference](/docs/cli/init)) sets up the current directory for Neon. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server), links a Neon project, and writes a `neon.ts` config. Then restart your editor and ask your AI assistant **"Get started with Neon"**.
 
 If you only want the MCP server and nothing else, run [`neon mcp`](/docs/cli/mcp):
 
@@ -120,7 +116,7 @@ Run the [init](/docs/cli/init) command:
 npx neon@latest init
 ```
 
-Authenticates via OAuth, creates an API key, configures the MCP Server in `~/.claude.json`, and installs [agent skills](https://github.com/neondatabase/agent-skills). Then ask your AI assistant **"Get started with Neon"**.
+Signs you in, installs agent tooling (either the Neon plugin, or agent skills and the MCP server), and links a Neon project. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 
@@ -262,7 +258,7 @@ Run the [init](/docs/cli/init) command:
 npx neon@latest init
 ```
 
-Authenticates via OAuth, creates an API key, installs the [Neon extension](/docs/local/vscode-extension) (which includes the MCP Server), and installs [agent skills](https://github.com/neondatabase/agent-skills). Then ask your AI assistant **"Get started with Neon"**.
+Signs you in, installs agent tooling (either the Neon plugin, or agent skills and the MCP server), and links a Neon project. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 <TabItem>
@@ -437,7 +433,7 @@ Run the [init](/docs/cli/init) command:
 npx neon@latest init
 ```
 
-Authenticates via OAuth, creates an API key, installs the [Neon extension](/docs/local/vscode-extension) (which includes the MCP Server), and installs [agent skills](https://github.com/neondatabase/agent-skills). Then ask your AI assistant **"Get started with Neon"**.
+Signs you in, installs agent tooling (either the Neon plugin, or agent skills and the MCP server), and links a Neon project. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 

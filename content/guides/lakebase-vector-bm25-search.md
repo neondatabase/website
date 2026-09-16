@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-31T11:23:58.798Z'
 ---
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
@@ -493,7 +493,7 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
 
 This guide covered the fundamentals: creating indexes, querying with cosine distance and BM25 scoring, and understanding the `<=>` and `<@>` operators. Both extensions offer significantly more tuning options that become important as your dataset grows:
 
-- **Vector index tuning:** Configure `build.internal.lists` to partition the vector space for datasets over 100,000 rows, adjust `lakebase_ann.probes` to trade off recall versus query speed, and enable `residual_quantization` with `spherical_centroids` for better cosine similarity performance. See [The `lakebase_vector` extension](/docs/extensions/lakebase-vector) for details.
+- **Vector index tuning:** Use `build_mode = 'quality'` for better recall when you can allow a longer index build. The extension chooses the number of `lists` from the number of vectors by default, or you can set a value such as `lists = '16'`. Tune `lakebase_ann.probes` to meet your recall target, and leave `lakebase_ann.epsilon` set to `auto`. See [The `lakebase_vector` extension](/docs/extensions/lakebase-vector) for details.
 - **Text search tuning:** Adjust `lakebase_bm25.default_limit` to control how many results the index returns, enable `lakebase_bm25.prefilter` to prune the search space before BM25 scoring on filtered queries, and tune BM25 parameters (`k1`, `b`) stored directly in the index. See [The `lakebase_text` extension](/docs/extensions/lakebase-text) for details.
 - **Concurrent index management:** Both extensions support `CREATE INDEX CONCURRENTLY` and `REINDEX INDEX CONCURRENTLY` for rebuilding indexes without blocking reads and writes, important for production workloads with large, frequently changing datasets.
 

@@ -56,11 +56,15 @@ If none of these fit, [export your data in Postgres-compatible form](/docs/guide
 
 ## Frequently asked questions
 
-### Why are these regions being deprecated?
+<Faq>
+
+<FaqItem question="Why are these regions being deprecated?">
 
 We're focusing our infrastructure investment where our customers want to run Neon. Most Neon projects run in AWS regions, so concentrating there lets us ship features and reliability improvements faster, rather than splitting effort to maintain Azure in parallel. For teams that need Azure, [Databricks Lakebase](/docs/guides/migrate-neon-to-lakebase) runs the same Postgres technology as Neon and supports Azure regions.
 
-### How do I find out which region a project is in?
+</FaqItem>
+
+<FaqItem question="How do I find out which region a project is in?">
 
 You can check from the Console, the CLI, or the API:
 
@@ -70,7 +74,9 @@ You can check from the Console, the CLI, or the API:
 
 ![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)
 
-### Which AWS region should I migrate to?
+</FaqItem>
+
+<FaqItem question="Which AWS region should I migrate to?">
 
 To keep latency similar, choose the AWS region closest to your current Azure region. For the deprecated Azure regions, the nearest AWS equivalents are:
 
@@ -82,16 +88,26 @@ To keep latency similar, choose the AWS region closest to your current Azure reg
 
 If your workload has specific latency or data residency requirements, pick the region closest to your users.
 
-### What changes about my project when I migrate to a new region?
+</FaqItem>
+
+<FaqItem question="What changes about my project when I migrate to a new region?">
 
 A region migration creates a **new** Neon project in the target region. The new project gets a new hostname, so you'll need to update connection strings in your application. The new project also has a different project ID. Project-level settings (branches, integrations, autoscaling, IP Allow rules, monitoring) are configured per project. See the [migration guide](/docs/import/migrate-neon-to-another-region) for method-specific steps.
 
-### Should I take a backup before migrating?
+</FaqItem>
+
+<FaqItem question="Should I take a backup before migrating?">
 
 If your migration method uses `pg_dump` and `pg_restore`, the dump itself is a backup. If you're using Postgres logical replication, it's good practice to take a `pg_dump` snapshot of your source database first. See [Backups](/docs/manage/backups).
 
-### How do I contact Neon about my Azure projects?
+</FaqItem>
+
+<FaqItem question="How do I contact Neon about my Azure projects?">
 
 Keep an eye on your inbox for communication from us. If you have specific constraints, such as regulatory requirements or migration dependencies, reply to any migration outreach you receive or contact [Neon Support](https://console.neon.tech/app/projects?modal=support).
+
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>

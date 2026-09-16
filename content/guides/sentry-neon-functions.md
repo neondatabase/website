@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-13T14:46:11.074Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -53,18 +53,10 @@ Create a directory for your project and initialize a workspace:
 mkdir neon-sentry-demo && cd neon-sentry-demo
 ```
 
-Run the Neon CLI initialization command:
+Install the Neon agent skills so AI agents such as Claude Code and Cursor have the context to help you build and deploy. This function uses the **Neon**, **Neon Functions**, and **Neon AI Gateway** skills:
 
 ```bash
-neon init
-```
-
-Use the default setup options for all prompts: this includes enabling AI skills, configuring the MCP server, and installing the VS Code extension. These steps ensure AI agents such as Claude Code and Cursor can assist you in building with Neon.
-
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your function. Install them with the following command:
-
-```bash
-npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
+neon skills -s neon -s neon-functions -s neon-ai-gateway
 ```
 
 Link your local workspace to a Neon project:

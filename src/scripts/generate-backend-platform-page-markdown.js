@@ -188,7 +188,6 @@ const renderPlatformFooter = (links) => {
 
   return [renderBackedBy(backedBy), renderCta(cta, links)].join('\n\n');
 };
-
 const renderPageHeader = ({ pageLabel, hero }) =>
   [
     `> This page location: ${pageLabel}`,
@@ -235,7 +234,7 @@ const renderFunctionsMarkdown = (links) => {
       return [`### ${title}`, description];
     }),
     renderFaq(faqItems),
-    renderBackendServices(backendServices),
+    renderBackendServices({ ...backendServices, ...functionsPageContent.backendServices }),
     renderBuiltForAgents(builtForAgents),
     renderPlatformFooter(links),
     renderFeedbackFooter(functionsPageContent.slug),
@@ -411,7 +410,6 @@ const renderLakebaseMarkdown = (links) => {
 
   return `${sections.join('\n\n')}\n`;
 };
-
 async function generateBackendPlatformPageMarkdown(rootDir = path.resolve(__dirname, '../..')) {
   const { default: links } = await import('../constants/links.js');
   const outputDir = path.join(rootDir, 'public/md');

@@ -21,6 +21,17 @@ describe('AI Gateway model examples', () => {
     expect(languages.find(({ key }) => key === 'ts')?.code).toContain('client.responses.create');
   });
 
+  it.each(['gpt-oss-20b', 'gpt-oss-120b', 'qwen35-122b-a10b'])(
+    'renders OpenAI SDK examples for conforming %s',
+    (id) => {
+      const languages = getLanguagesForMode(getExamplesByMode(id), 'text');
+
+      expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'ts', 'python', 'curl']);
+      expect(languages.find(({ key }) => key === 'mastra')?.code).toContain(`model: "neon/${id}"`);
+      expect(languages.find(({ key }) => key === 'curl')?.code).toContain('/v1/chat/completions');
+    }
+  );
+
   it('uses model-specific Gemini examples and install commands', () => {
     const languages = getLanguagesForMode(getExamplesByMode('gemini-3-5-flash'), 'text');
 

@@ -36,7 +36,7 @@ const FunctionsPage = () => (
       titleLines={sharedBackendPlatformContent.faqTitleLines}
       variant="light"
     />
-    <BackendServices />
+    <BackendServices title={functionsPageContent.backendServices.title} />
     <BuiltForAgents />
   </BackendPlatformPage>
 );

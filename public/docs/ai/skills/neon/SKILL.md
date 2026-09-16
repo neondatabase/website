@@ -160,7 +160,7 @@ The above `init` command will install the Neon CLI, but the CLI can also be inst
 
 These commands are included in the `init` command but can be run manually as needed.
 
-1. `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`). `neon link --agent` can be used to run in a non-interactive, state-machine mode.
+1. `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`).
 2. `neon checkout <branch-name>` — Pins a different branch in `.neon`, creating it if it doesn't exist yet, and pulls that branch's env. It drives the [Branch-First Dev Flow](#branch-first-dev-flow) described below.
 3. `neon config init` — Initializes a `neon.ts` file, which declares how you provision and manage Neon services, in the root of the project.
 4. `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
@@ -187,7 +187,7 @@ If the Getting Started account check found credentials, use them. If a command w
 
 If they cannot sign in or provide a key right now, ask before using Claimable Neon. Continue only after they say yes. That is a temporary workaround.
 
-If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback.
+If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback. Unclaimed projects expire at `project_expires_at` (72 hours today). Claim codes expire in `expires_in` (15 minutes today). Add Auth or the Data API with `neon.ts` and `neon deploy` before or after claim.
 
 Requests for neon.new, Claimable Postgres, claimable.neon.tech, instant Postgres, or a no-signup database are the same path.
 
@@ -243,10 +243,20 @@ Reconcile the declaration from the CLI — the Neon equivalent of `terraform sta
 ```bash
 neon status          # print the branch's live config (read-only). Alias for `neon config status`.
 neon config plan     # dry-run diff of what apply would change (read-only)
-neon deploy          # provision the declared services. Alias for `neon config apply`
+neon deploy --env <file>  # apply neon.ts. Pass --env when Function env reads process.env. Alias for `neon config apply`
 ```
 
 `apply` / `deploy` provision the declared services **and then pull the branch's env into your local `.env.local`** (e.g. `Pulled 5 Neon variables into .env.local: DATABASE_URL, …`), so your local env always matches what's deployed.
+
+### Function env and `neon deploy`
+
+`neon deploy` is the preferred full deployment: it applies `neon.ts` (services and functions) to the linked branch. `neon deploy --env <file>` loads that file into `process.env` before evaluating `neon.ts`, then uploads those values as Function env. Use it every time Function env reads `process.env`.
+
+`<file>` is the gitignored file `neon env pull` already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only (`DATABASE_URL`, `NEON_AI_GATEWAY_*`, …). Add every key under `preview.functions.*.env` to that file yourself, then pass the same path to `--env`.
+
+Every declared Function env key must be a defined string. `undefined` (an unset `process.env.X`) means you listed a key you want written but the value is missing: `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs a type assertion, use `process.env.X!` and make sure the file actually has the value.
+
+Use `neon functions deploy` when you are not applying `neon.ts`: a single function by slug, or a targeted `--env KEY=VALUE` update (that flag is not a file path).
 
 ### Type-safe env vars with parseEnv
 
@@ -364,7 +374,7 @@ Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` l
 
 ### How checkout composes with neon.ts
 
-When a `neon.ts` is present, `neon checkout` applies your policy as it **creates** a branch, so a fresh branch comes up with its declared settings and services already in place. Checking out an _existing_ branch never reconciles it — apply config changes to it explicitly with `neon config apply` (or `neon deploy`). The bundled `env pull` also checks `neon.ts` against the linked branch and fails fast if the branch is missing a declared service, pointing you at `neon deploy` to provision it, so your local env and the remote branch never drift apart silently.
+When a `neon.ts` is present, `neon checkout` applies your policy as it **creates** a branch, so a fresh branch comes up with its declared settings and services already in place. That create-apply does not load `--env`; if Function env reads `process.env`, run `neon deploy --env <file>` after checkout (add `--update-existing` if checkout already created the branch). Checking out an _existing_ branch never reconciles it — apply config changes to it explicitly with `neon deploy --env <file>` (alias for `neon config apply`). The bundled `env pull` also checks `neon.ts` against the linked branch and fails fast if the branch is missing a declared service, pointing you at `neon deploy --env <file>` to provision it, so your local env and the remote branch never drift apart silently.
 
 ### Opting out of local env vars
 

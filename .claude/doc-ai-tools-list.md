@@ -8,7 +8,6 @@ When the user asks "what doc AI tools are available" or "what AI tools for docs"
 
 **Commands** (`.claude/commands/`) — run with `/command-name`
 
-- **create-pr-report** — Runs a report of merged PRs across monitored Neon repos (default: since last Friday) so you can see what shipped and what may need documenting. Also supports deep-diving into a specific PR to assess documentation impact and follow on to draft a changelog entry or open a docs PR.
 - **create-changelog** — Creates the changelog file for next Friday (or a date you specify) with the correct structure and placeholder content. Run this at the start of changelog week to get the file ready to fill in.
 - **post-changelog** — Posts the changelog preview link and PR to all Lakebase Slack channels so the team can review before it publishes. Databricks employees only — requires Slack MCP access.
 - **update-roadmap** — Reads the recent changelog (default: past month) and updates the introduction roadmap page: moves shipped items out of "What we're working on now" and into "What we've shipped recently," and adds any major changelog features that are missing.

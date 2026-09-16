@@ -2,15 +2,14 @@
 title: Get started with your AI agent
 subtitle: Set up Neon in your project using your AI coding assistant
 summary: >-
-  `neon init` sets up Neon for your project through your AI coding
-  assistant: it installs the Neon CLI, signs you in, installs agent
-  skills, and can configure the MCP server, so your agent can create a
-  project and connect your app.
+  Set up Neon for your project with your AI coding assistant. Let your agent
+  install the Neon tooling and connect your project, or run `neon init`
+  yourself in a terminal, then ask your agent to get started.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
-Set up Neon for your project without leaving your editor. `neon init` installs the Neon CLI, signs you in, installs Neon-specific agent skills, and can set up the [Neon MCP server](/docs/ai/neon-mcp-server). Together these give your agent what it needs to create a Neon project, connect your app, and use Neon features as you build. For Cursor and VS Code, it also installs the Neon Local Connect extension for in-editor schema browsing.
+Set up Neon for your project without leaving your editor. You have two options: let your AI coding assistant install the Neon tooling and connect your project for you, or run `neon init` yourself in a terminal and then hand off to your agent. Either way, your agent ends up with the [agent skills](/docs/ai/agent-skills) and [Neon MCP server](/docs/ai/neon-mcp-server) it needs to create a Neon project, connect your app, and use Neon features as you build.
 
 New to the platform? The [backend overview](/docs/get-started/backend-overview) shows how Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway fit together. For a hands-on walkthrough, see [Build a full backend](/docs/get-started/full-backend-quickstart).
 
@@ -23,19 +22,21 @@ You'll need:
 
 ## Let your agent set it up
 
-The fastest path is to let your agent do the whole setup, from running `init` to proving the connection works. Paste this prompt into your editor's AI chat:
+The fastest path is to let your agent do the whole setup, from installing the tooling to proving the connection works. Paste this prompt into your editor's AI chat:
 
 ```text shouldWrap filename="AI assistant prompt"
 Help me get set up with Neon, based on my project:
 
-1. Run `npx neon@latest init --agent` and work through the steps it returns to install the CLI, sign in, and connect my project. If it opens a browser for sign-in, ask me to confirm before continuing.
-2. Run it through verification and show me the real query result, not just "setup complete." Give me a command to re-check it myself (e.g. `neon psql`), and never print secrets.
-3. Then suggest next steps for my project, such as a schema or migrations, branching for previews, or Neon's other services (Object Storage, Functions, Managed Better Auth, AI Gateway).
+1. Install or upgrade the Neon CLI: `npm install -g neon@latest`.
+2. Install the Neon agent tooling for your editor, replacing `<agent>` with your editor id (for example `cursor`, `claude-code`, or `codex`): run `neon plugins --agent <agent>` (recommended, installs the Neon plugin), or `neon skills --agent <agent> -s neon -s neon-postgres`. If sign-in opens a browser, ask me to confirm before continuing, and never print secrets.
+3. Using the installed Neon skill, create a Neon project (or connect an existing one), link it, and pull my DATABASE_URL into my env file. Add a Postgres driver for my stack.
+4. Prove it works: run a real query and show me the result, not just "setup complete." Give me a command to re-check it myself (e.g. `neon psql`).
+5. Then suggest next steps, such as a schema or migrations, branching for previews, or Neon's other services (Object Storage, Functions, Managed Better Auth, AI Gateway).
 ```
 
-Your agent installs the Neon CLI and runs its setup for you, so there's no switching between the terminal and the chat. It:
+Your agent installs the Neon CLI and tooling and does the setup for you, so there's no switching between the terminal and the chat. It:
 
-- Signs you in to Neon (finish the browser step if it prompts), creates an API key, optionally configures the [Neon MCP server](/docs/ai/neon-mcp-server), and installs [agent skills](/docs/ai/agent-skills)
+- Installs either the Neon plugin, or [agent skills](/docs/ai/agent-skills) and the [Neon MCP server](/docs/ai/neon-mcp-server), for your editor, and signs you in (finish the browser step if it prompts)
 - Creates or connects a Neon project, writes your `DATABASE_URL` into your env file, and adds a Postgres driver for your stack
 - Uses the connection and shows you a real result so you can see it's working
 
@@ -55,13 +56,9 @@ From your project root, run:
 npx neon@latest init
 ```
 
-<Admonition type="note">
-`neon init` installs or updates the Neon CLI and sets up your editor tooling: authentication, agent skills, and optionally the MCP server. It doesn't create a Neon project, though; your agent does that when you ask it to get started.
-</Admonition>
+`neon init` is interactive, so run it in a terminal. It asks how your coding agents should get Neon (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first. For the full flow, and a non-interactive setup for agents and CI, see the [`neon init` reference](/docs/cli/init).
 
-The wizard asks which editor to configure, then signs you in, creates an API key, installs [agent skills](/docs/ai/agent-skills), optionally configures the [Neon MCP server](/docs/ai/neon-mcp-server), and (for Cursor and VS Code) installs the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect). Run it from your project root so the skills land in the right place. For details and manual setup, see the [`neon init` reference](/docs/cli/init).
-
-If you only want the MCP server, without the skills or extension, run [`npx neon@latest mcp`](/docs/cli/mcp) instead. If you only want agent skills, run [`npx neon@latest skills`](/docs/cli/skills).
+If you only want the MCP server, without the skills or plugin, run [`npx neon@latest mcp`](/docs/cli/mcp) instead. If you only want agent skills, run [`npx neon@latest skills`](/docs/cli/skills).
 
 ## Tell your agent
 

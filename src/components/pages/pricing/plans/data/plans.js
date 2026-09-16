@@ -1,3 +1,7 @@
+import BACKEND_PRICING from 'constants/backend-pricing';
+
+const { objectStorage, functions } = BACKEND_PRICING;
+
 export default {
   headings: {
     feature: '',
@@ -163,20 +167,72 @@ export default {
       feature: {
         title: 'Object Storage',
         tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Stored volume',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free: `${objectStorage.freeAllowanceGb} GB included`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
     },
     {
-      rows: '2',
+      fluid: true,
       feature: {
         title: 'Functions',
         tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Compute and invocations',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `${functions.free.activeCapacityHours} active capacity-hours`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`${functions.free.invocations} invocations`],
+          },
+        ],
+      },
+      launch: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.launch.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.launch.invocationRatePerMillion} per 1M invocations`],
+          },
+          {
+            title: 'Charges',
+            details: ['No charges during beta'],
+          },
+        ],
+      },
+      scale: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.scale.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.scale.invocationRatePerMillion} per 1M invocations`],
+          },
+          {
+            title: 'Charges',
+            details: ['No charges during beta'],
+          },
+        ],
+      },
     },
     {
       rows: '2',
@@ -185,8 +241,10 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
-      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
-      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      launch:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+      scale:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
     },
     {
       rows: '1',

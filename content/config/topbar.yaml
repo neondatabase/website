@@ -1,4 +1,4 @@
-text: 'A deep dive on the lakebase storage: S3 + WAL for the era of agents'
+text: 'The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built'
 link:
-  url: 'https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents'
+  url: 'https://neon.com/blog/autoscaling-lakebase-postgres'
   target: '_blank'

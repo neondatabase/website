@@ -26,6 +26,7 @@ import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
+import Faq, { FaqItem } from 'components/pages/doc/faq';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -199,6 +200,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Callout,
   CodeTabs,
   DetailIconCards,
+  Faq,
+  FaqItem,
   TechCards,
   CompactCards,
   Tag,

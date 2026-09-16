@@ -134,13 +134,34 @@ describe('GET /models', () => {
       expect(curl.variantReason).toBeTruthy();
     });
 
-    it('keeps cURL on chat completions for an array-content model with no native dialect', async () => {
-      const res = await GET(request('?model=gpt-oss-20b'));
-      const { model } = await body(res);
-      const curl = model.examples.find((e) => e.id === 'curl');
+    it.each(['gpt-oss-20b', 'gpt-oss-120b', 'qwen35-122b-a10b'])(
+      'serves OpenAI SDK examples for conforming %s',
+      async (id) => {
+        const res = await GET(request(`?model=${id}`));
+        const { model } = await body(res);
+        const ids = model.examples.map((e) => e.id);
+        const mastra = model.examples.find((e) => e.id === 'mastra');
+        const curl = model.examples.find((e) => e.id === 'curl');
 
-      expect(model.capabilities.native_dialect).toBe('none');
-      expect(curl.endpoint).toBe('/v1/chat/completions');
+        expect(model.capabilities.chat).toBe('conforms');
+        expect(model.capabilities.native_dialect).toBe('none');
+        expect(ids).toEqual(
+          expect.arrayContaining(['ai-sdk', 'mastra', 'typescript', 'python', 'curl'])
+        );
+        expect(mastra.files[0].content).toContain(`model: "neon/${id}"`);
+        expect(mastra.files[0].content).not.toContain('neon(');
+        expect(curl.endpoint).toBe('/v1/chat/completions');
+      }
+    );
+
+    it('has no array-content model without a native dialect to fall back to', async () => {
+      const res = await GET(request());
+      const { models } = await body(res);
+      const stranded = models.filter(
+        (m) => m.capabilities.chat === 'array-content' && m.capabilities.native_dialect === 'none'
+      );
+
+      expect(stranded.map((m) => m.id)).toEqual([]);
     });
 
     it('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {

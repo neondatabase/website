@@ -11,10 +11,8 @@ summary: >-
   and the branch is unavailable while anonymization runs.
 redirectFrom:
   - /docs/concepts/anonymized-data
-tag: new
-tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-01T14:50:06.167Z'
 ---
 
 <FeatureBeta />

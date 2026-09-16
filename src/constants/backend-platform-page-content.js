@@ -10,6 +10,9 @@ const lakebaseFromFirstLineTitleLines = [
 ];
 
 const functionsPageContent = {
+  backendServices: {
+    title: 'Your functions branch with everything else.',
+  },
   slug: 'functions',
   pageLabel: 'Functions',
   hero: {
@@ -78,7 +81,7 @@ const functionsPageContent = {
     {
       question: 'What are Functions?',
       answer:
-        "<p>Neon Functions are serverless Node.js functions you deploy onto a Neon branch, in the same region as your <strong>Lakebase Postgres</strong> database. DATABASE_URL is injected automatically, along with <strong>AI Gateway</strong> and <strong>Object Storage</strong> credentials if you're using them, so a function reads process.env instead of assembling third-party accounts.</p>",
+        "<p>Neon Functions are serverless Node.js functions you deploy onto a Neon branch, in the same region as your Lakebase Postgres database. DATABASE_URL is injected automatically, along with AI Gateway and Object Storage credentials if you're using them, so a function reads process.env instead of assembling third-party accounts.</p>",
       initialState: 'open',
     },
     {

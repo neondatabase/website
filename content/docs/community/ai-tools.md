@@ -8,7 +8,7 @@ summary: >-
   to choose the right command for each task. Commands are stored in
   .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-27T14:02:21.025Z'
 ---
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.
@@ -44,11 +44,10 @@ Run `/list-doc-tools` in Claude to see the full list with descriptions, or brows
 
 ## Changelog and roadmap
 
-| Command             | Description                                                                                                              |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `/create-pr-report` | Weekly report of merged PRs across monitored repos. Supports PR deep dives and follow-on changelog or docs PR workflows. |
-| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content and titled dropdown sections.       |
-| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries.                                                             |
+| Command             | Description                                                                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content and titled dropdown sections. |
+| `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries.                                                       |
 
 ## Reference and navigation
 
@@ -63,6 +62,5 @@ Run `/list-doc-tools` in Claude to see the full list with descriptions, or brows
 The `.claude/agents/` directory contains specialized sub-agents used by the writing workflow commands:
 
 - **content-drafter**, **content-planner**, **content-refiner**, **ia-specialist**, **syntax-validator**, **supervisor** — write, plan, review, structure, validate, and orchestrate multi-step workflows
-- **extract-analyze-console**, **-cli**, **-mcp**, **-storage**, **-compute** — changelog extraction by repo, used by `/create-pr-report`
 
 <NeedHelp/>

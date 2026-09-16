@@ -306,7 +306,7 @@ The beta services live under `preview` while they're in beta; that key goes away
 
 Two ways to get it running:
 
-**Let your AI editor build it.** Copy the prompt at the top of this page and hand it to your assistant. It runs `neon init` to configure the MCP server and install the core skill, adds the Object Storage, Functions, and AI Gateway skills with `neon skills`, then builds against each capability's current API.
+**Let your AI editor build it.** Copy the prompt at the top of this page and hand it to your assistant. It installs the core skill, links a Neon project, adds the Object Storage, Functions, and AI Gateway skills with `neon skills`, then builds against each capability's current API.
 
 **Start from a template.** `neon bootstrap` scaffolds a ready-to-run starter, installs dependencies, and links a project:
 

@@ -10,8 +10,6 @@ summary: >-
 redirectFrom:
   - /docs/introduction/spending-limit
 enableTableOfContents: true
-tag: new
-tagTheme: green
 ---
 
 <InfoBlock>
