@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started/query-with-psql-editor
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
@@ -72,7 +72,7 @@ The easiest way to connect to Neon using `psql` is with a connection string.
 
 You can obtain a connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 From your terminal or command prompt, run the `psql` client with the connection string copied from the Neon **Dashboard**.
 

@@ -10,7 +10,7 @@ summary: >-
   host-level installation are not supported by Neon. PgHero runs externally
   and connects over the standard Postgres protocol.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 [PgHero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.
@@ -50,7 +50,7 @@ docker pull ankane/pghero
 
 Find the connection string for your database by clicking the **Connect** button in the Console nav.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Finally, run this command, replacing `$NEON_DB` with your Neon database connection string.
 

@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -62,7 +62,7 @@ If you do not have one already, create a Neon project.
 ## Get your connection string
 
 Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 The connection string includes the user name, password, hostname, and database name.
 
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:

@@ -8,7 +8,7 @@ summary: >-
   your driver requires a native connection. A serverless driver enables
   WebSocket and HTTP for edge runtimes where TCP is unavailable.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <InfoBlock>
@@ -39,7 +39,7 @@ When connecting to Neon from an application or client, you connect to a database
 
 You can find the connection details for your database by clicking the **Connect** button in the Console nav. This opens the **Connect to your branch** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Neon supports both pooled and direct connections to your database. Neon's connection pooler supports a higher number of concurrent connections, so we provide pooled connection details in the **Connect to your branch** modal by default, which adds a `-pooler` option to your connection string. If needed, you can get direct database connection details from the modal disabling the **Connection pooling** toggle. For more information about pooled connections, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 

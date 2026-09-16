@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -56,7 +56,7 @@ You need a Lakebase Postgres database for the demo application, plus a Neon API 
 4. Go back to the Projects page and create a new project. You can choose any name and region.
 5. Click **Connect** in the Console nav and copy the connection string. You will use this as the `DATABASE_URL` in your application.
 
-   ![Connection details in Neon Console](/docs/connect/connection_details.png)
+   ![Connection details in Neon Console](/docs/connect/connect_to_branch_modal.png)
 
 6. Go to **Settings** > **General**, to copy the **Project ID**. You will use this as `NEON_PROJECT_ID` in your application.
 

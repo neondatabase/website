@@ -8,7 +8,7 @@ summary: >-
   also improve performance by switching to `pg-native` via the
   `NODE_PG_FORCE_NATIVE` environment variable.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
@@ -22,7 +22,7 @@ Knex is an open-source SQL query builder for Postgres. This guide covers the fol
 To establish a basic connection from Knex to Neon, perform the following steps:
 
 1. Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   ![Connection details modal](/docs/connect/connect_to_branch_modal.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the Knex's initialization in your application to the following:

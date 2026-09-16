@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
@@ -20,7 +20,7 @@ Connecting to Neon works like any Postgres database. You use a standard connecti
 
 Click **Connect** in the Console nav to open the **Connect to your branch** modal. Select your branch, database, and role. Your connection string appears automatically.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 The connection string includes everything you need to connect:
 

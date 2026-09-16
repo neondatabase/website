@@ -10,7 +10,7 @@ summary: >-
   interface-based schema definitions, client initialization per driver,
   optional migrations via FileMigrationProvider, and CRUD query examples.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -94,7 +94,7 @@ If you do not have one already, create a Neon project.
 ## Get your connection string
 
 Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 

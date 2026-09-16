@@ -4,7 +4,7 @@ subtitle: 'Learn how to set up a CRUD backend using Fastify and Lakebase Postgre
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-13T00:00:00.000Z'
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Ensuring end-to-end type safety between your backend and frontend is one of the most common challenges in modern web development.
@@ -52,7 +52,7 @@ You will need a Lakebase Postgres database to store your data.
    ```text
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
-   ![Neon Console Connection String](/docs/connect/connection_details.png)
+   ![Neon Console Connection String](/docs/connect/connect_to_branch_modal.png)
 5. Save this connection string. You will be using it later in the backend configuration.
 
 ## Set up the Fastify backend with Zod validation

@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
@@ -112,7 +112,7 @@ Create a file named `.env` in your project's root directory. This file will secu
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
-    ![Connection modal](/docs/connect/connection_details.png)
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.
     ```text

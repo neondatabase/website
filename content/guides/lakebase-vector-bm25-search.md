@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-08-31T11:23:58.798Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
@@ -102,7 +102,7 @@ You will need a Neon database to store your knowledge base articles and the asso
 3. Choose a name for your project and select the region closest to you. Ensure you chose Postgres 16 or later.
 4. Click **Create**.
 5. You will be greeted with the connection details for your new database. Copy the `Connection string` as you will need it later to connect your Next.js application to the database.
-   ![Neon Console Connection String](/docs/connect/connection_details.png)
+   ![Neon Console Connection String](/docs/connect/connect_to_branch_modal.png)
 
 ## Enable the Lakebase extensions
 

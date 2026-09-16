@@ -4,7 +4,7 @@ subtitle: Learn how to connect Metabase to your Lakebase Postgres database for i
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-25T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 [Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Lakebase Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
@@ -48,7 +48,7 @@ If you're using Metabase Cloud, follow these steps to connect to your Neon datab
      postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
      ```
 
-     ![Neon connection string](/docs/connect/connection_details.png)
+     ![Neon connection string](/docs/connect/connect_to_branch_modal.png)
 
    - Make sure **Use a secure connection (SSL)** is enabled - Neon requires SSL by default.
 
@@ -393,7 +393,7 @@ Metabase opens multiple connections to your database when running concurrent que
 
 Ensure you enable **Connection pooling** in the Neon Console (**Connect** modal) and use the provided pooled host and port when configuring Metabase. This ensures efficient connection management and prevents resource exhaustion.
 
-![Neon connection string](/docs/connect/connection_details.png)
+![Neon connection string](/docs/connect/connect_to_branch_modal.png)
 
 ### Read replicas for Analytics
 

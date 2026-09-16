@@ -9,7 +9,7 @@ summary: >-
   connections. To prevent timeouts from Lakebase Postgres idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
@@ -26,7 +26,7 @@ TypeORM is an open-source ORM that lets you to manage and interact with your dat
 To establish a basic connection from TypeORM to a database on Neon, perform the following steps:
 
 1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button in the Console nav. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+   ![Connection details modal](/docs/connect/connect_to_branch_modal.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the TypeORM's DataSource initialization in your application to the following:

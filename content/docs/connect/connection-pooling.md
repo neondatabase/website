@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.
@@ -191,7 +191,7 @@ postgresql://user1:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.t
 
 You can copy a pooled connection string from the Neon Console by clicking **Connect** in the Console nav and enabling the **Connection pooling** toggle.
 
-![Connection Details pooled connection string](/docs/connect/connection_details.png)
+![Connection Details pooled connection string](/docs/connect/connect_to_branch_modal.png)
 
 ### Enable, disable, and find the pooled connection string in the Console
 

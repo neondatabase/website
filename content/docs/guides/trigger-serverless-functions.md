@@ -10,7 +10,7 @@ summary: >-
   installing the Inngest client, writing TypeScript Inngest functions, and
   syncing with the Inngest platform across all three serverless runtimes.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
@@ -83,7 +83,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 You can find the connection string for your database by clicking the **Connect** button in the Console nav.
 
-![Connection modal](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Triggering Serverless functions from database changes
 

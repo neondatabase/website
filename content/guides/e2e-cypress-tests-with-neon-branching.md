@@ -33,7 +33,7 @@ This process ensures that database-dependent E2E tests are run in a clean, predi
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
 2.  Copy your database connection string by clicking **Connect** in the Console nav.
 
-    ![Connection modal](/docs/connect/connection_details.png)
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
     Your connection string will look something like this:
 
