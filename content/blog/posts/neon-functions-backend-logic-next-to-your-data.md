@@ -53,7 +53,7 @@ We recommend you keep the UI on Vercel, Netlify, or wherever you already host fr
 
 This is one thing we were sure about when designing Functions: they had to be long-running. Lambda-style caps are fine for CRUD, but [longer runtimes are needed in the age of agents](https://neon.com/docs/compute/functions/agents), since one agent request can stream for minutes while the agent calls models and tools.
 
-This is also relevant for [WebSockets and SSE](https://neon.com/docs/compute/functions/websockets). You can use functions to export an upgrade handler for WebSockets, or return text/event-stream for SSE, and fan out across isolates with Postgres LISTEN/NOTIFY instead of standing up Redis.
+This is also relevant for [WebSockets and SSE](https://neon.com/docs/compute/functions/websockets). You can use functions to accept a WebSocket with `upgradeWebSocket`, or return text/event-stream for SSE, and fan out across isolates with Postgres LISTEN/NOTIFY instead of standing up Redis.
 
 <Admonition type="note" title="Another important note">
 A function isn't a background job runner: it's always requested and always returns a web response (JSON, a stream, SSE, or a WebSocket upgrade). For queued work with its own lifecycle, [pair a function with something like Inngest today.](https://neon.com/guides/durable-workflow-on-neon-functions)

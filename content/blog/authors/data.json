@@ -859,5 +859,12 @@
     "url": "https://www.linkedin.com/in/pan-angel/",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/angel-pan.jpg",
     "photoAlt": "Angel Pan"
+  },
+  "zachary-proser": {
+    "name": "Zachary Proser",
+    "role": "AI Engineer, WorkOS",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zachary-proser.jpg",
+    "photoAlt": "Zachary Proser"
   }
 }

@@ -29,6 +29,10 @@ When you omit `--database-name`, `inspect` covers every database on the branch a
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
 
+<Admonition type="note">
+On large fixed-size computes (18 CU and above), Neon disables the file cache and serves the [compute cache](/docs/extensions/neon#what-is-the-compute-cache) from Postgres `shared_buffers`, so `lfc-hit-rate` and `working-set` return empty or misleading results on those computes. Use the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph or run `SHOW shared_buffers` instead.
+</Admonition>
+
 From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
 
 <CliSubcommands command="inspect db" anchorParts="db" />

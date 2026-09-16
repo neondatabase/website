@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-08-17T23:18:55.558Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -18,7 +18,18 @@ AI Gateway uses Neon bearer credentials, the same scoped-credential system as [O
 
 A credential must include the `ai_gateway:invoke` scope.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+<TabItem>
+
+Create a credential with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope ai_gateway:invoke --name my-app-credential
+```
+
+The `api_token` is printed once; set it as `NEON_AI_GATEWAY_TOKEN`. Run it in a directory [linked](/docs/cli/link) to your project, or pass `--project-id` and `--branch`.
+
+</TabItem>
 <TabItem>
 
 In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
@@ -188,13 +199,19 @@ This design lets you use a single credential across your entire development work
 
 ## Rotating credentials
 
-To rotate a credential: create a new one, update your environment variables, then revoke the old one.
+To rotate a credential in place with the [Neon CLI](/docs/cli/credentials), run `neon credentials rotate <token_id>` (find the id with `neon credentials list`). The `token_id` stays the same and a new `api_token` is minted, so update `NEON_AI_GATEWAY_TOKEN` with it. Otherwise, create a new credential, update your environment variables, then revoke the old one.
 
 To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
   -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+Or with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials revoke <token_id>
 ```
 
 <NeedHelp/>

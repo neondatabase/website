@@ -19,6 +19,8 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
+        - title: Connect your app
+          slug: connect/connect-hub
         - title: Tour the Neon backend
           slug: get-started/backend-overview
         - title: Tour the Neon Console
@@ -212,6 +214,22 @@
           slug: import/import-from-csv
         - title: Sample data
           slug: import/import-sample-data
+
+- nav: Concepts
+  slug: concepts/the-object-model
+  title: Concepts
+  icon: glossary
+  items:
+    - section: Backend primitives
+      icon: book
+      items:
+        - title: The object model
+          slug: concepts/the-object-model
+    - section: Backend behavior
+      icon: settings
+      items:
+        - title: Credentials & access
+          slug: concepts/credentials-access
 
 - nav: Products
   title: Products
@@ -890,6 +908,8 @@
               slug: ai-gateway/get-started
             - title: Models
               slug: ai-gateway/models
+            - title: Prepaid credits
+              slug: ai-gateway/prepaid-credits
         - section: APIs
           items:
             - title: Chat completions
@@ -960,8 +980,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
@@ -1307,12 +1325,16 @@
               items:
                 - title: functions
                   slug: cli/functions
+                - title: triggers
+                  slug: cli/triggers
                 - title: buckets
                   slug: cli/buckets
                 - title: data-api
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: credentials
+                  slug: cli/credentials
             - title: Organizations and networking
               items:
                 - title: api

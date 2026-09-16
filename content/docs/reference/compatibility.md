@@ -13,24 +13,16 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-09-02T21:07:43.155Z'
+updatedOn: '2026-09-14T17:20:27.778Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17, and 18, as per the [Neon version support policy](/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, and 18. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
-The table below lists the latest minor version available on Neon for each supported major version, along with the upstream Postgres release date.
-
-| Major version | Latest minor version on Neon | Upstream release date |
-| ------------- | ---------------------------- | --------------------- |
-| 14            | PostgreSQL 14.24             | 2026-08-13            |
-| 15            | PostgreSQL 15.19             | 2026-08-13            |
-| 16            | PostgreSQL 16.15             | 2026-08-13            |
-| 17            | PostgreSQL 17.11             | 2026-08-13            |
-| 18            | PostgreSQL 18.6              | 2026-08-13            |
+For the current latest minor version available on Neon for each major version, and for details on how minor and major version updates work, see the [Lakebase Postgres version support policy](/docs/postgresql/postgres-version-policy).
 
 ## Postgres extensions
 
@@ -58,37 +50,37 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and constraints.
 </Admonition>
 
-| Parameter                             | Value         | Note                                                                                                                                                                |
-| ------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `client_connection_check_interval`    | 60000         |                                                                                                                                                                     |
-| `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                     |
-| `effective_io_concurrency`            | 20            |                                                                                                                                                                     |
-| `effective_cache_size`                |               | Set based on the [compute cache](/docs/reference/glossary#compute-cache) size of your maximum Neon compute size                                                     |
-| `fsync`                               | off           | Neon syncs data to the Neon database storage engine to store your data safely and reliably                                                                          |
-| `hot_standby`                         | off           |                                                                                                                                                                     |
-| `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                     |
-| `listen_addresses`                    | '\*'          |                                                                                                                                                                     |
-| `log_connections`                     | on            |                                                                                                                                                                     |
-| `log_disconnections`                  | on            |                                                                                                                                                                     |
-| `log_min_error_statement`             | panic         |                                                                                                                                                                     |
-| `log_temp_files`                      | 1048576       |                                                                                                                                                                     |
-| `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                    |
-| `max_connections`                     | 112           | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                    |
-| `max_parallel_workers`                | 8             |                                                                                                                                                                     |
-| `max_replication_flush_lag`           | 10240         |                                                                                                                                                                     |
-| `max_replication_slots`               | 10            |                                                                                                                                                                     |
-| `max_replication_write_lag`           | 500           |                                                                                                                                                                     |
-| `max_wal_senders`                     | 10            |                                                                                                                                                                     |
-| `max_wal_size`                        | 1024          |                                                                                                                                                                     |
-| `max_worker_processes`                | 26            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                    |
-| `password_encryption`                 | scram-sha-256 |                                                                                                                                                                     |
-| `restart_after_crash`                 | off           |                                                                                                                                                                     |
-| `shared_buffers`                      | 128MB         | In Neon, up to 75% of your compute's RAM is used for data caching. The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
-| `superuser_reserved_connections`      | 7             |                                                                                                                                                                     |
-| `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                     |
-| `wal_level`                           | replica       | Defaults to `replica`. When you [enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication), Neon changes it to `logical`.       |
-| `wal_log_hints`                       | off           |                                                                                                                                                                     |
-| `wal_sender_timeout`                  | 10000         |                                                                                                                                                                     |
+| Parameter                             | Value         | Note                                                                                                                                                                                                                    |
+| ------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `client_connection_check_interval`    | 60000         |                                                                                                                                                                                                                         |
+| `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                         |
+| `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                         |
+| `effective_cache_size`                |               | Set based on the [compute cache](/docs/reference/glossary#compute-cache) size of your maximum Neon compute size                                                                                                         |
+| `fsync`                               | off           | Neon syncs data to the Neon database storage engine to store your data safely and reliably                                                                                                                              |
+| `hot_standby`                         | off           |                                                                                                                                                                                                                         |
+| `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                         |
+| `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                         |
+| `log_connections`                     | on            |                                                                                                                                                                                                                         |
+| `log_disconnections`                  | on            |                                                                                                                                                                                                                         |
+| `log_min_error_statement`             | panic         |                                                                                                                                                                                                                         |
+| `log_temp_files`                      | 1048576       |                                                                                                                                                                                                                         |
+| `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                        |
+| `max_connections`                     | 112           | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                        |
+| `max_parallel_workers`                | 8             |                                                                                                                                                                                                                         |
+| `max_replication_flush_lag`           | 10240         |                                                                                                                                                                                                                         |
+| `max_replication_slots`               | 10            |                                                                                                                                                                                                                         |
+| `max_replication_write_lag`           | 500           |                                                                                                                                                                                                                         |
+| `max_wal_senders`                     | 10            |                                                                                                                                                                                                                         |
+| `max_wal_size`                        | 1024          |                                                                                                                                                                                                                         |
+| `max_worker_processes`                | 26            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                        |
+| `password_encryption`                 | scram-sha-256 |                                                                                                                                                                                                                         |
+| `restart_after_crash`                 | off           |                                                                                                                                                                                                                         |
+| `shared_buffers`                      | 128MB         | The `shared_buffers` value differs by compute size; the [compute cache](/docs/reference/glossary#compute-cache) provides up to 75% of your compute's RAM. See [below](#parameter-settings-that-differ-by-compute-size). |
+| `superuser_reserved_connections`      | 7             |                                                                                                                                                                                                                         |
+| `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                                                                         |
+| `wal_level`                           | replica       | Defaults to `replica`. When you [enable logical replication](/docs/guides/logical-replication-neon#enable-logical-replication), Neon changes it to `logical`.                                                           |
+| `wal_log_hints`                       | off           |                                                                                                                                                                                                                         |
+| `wal_sender_timeout`                  | 10000         |                                                                                                                                                                                                                         |
 
 ### Parameter settings that differ by compute size
 
@@ -196,6 +188,8 @@ _For most applications, we recommend using connection pooling, which supports up
   backends = 1 + max_connections + max_worker_processes
   shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
   ```
+
+  On large fixed-size computes (18 CU and above), `shared_buffers` is instead set to 75% of your compute's RAM (backed by huge pages) and the secondary file cache is disabled, so this formula does not apply. See [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache).
 
 - The `effective_cache_size` parameter is set based on the [compute cache](/docs/reference/glossary#compute-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on compute cache size by compute size, see the table in [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 

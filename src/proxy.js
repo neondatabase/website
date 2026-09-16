@@ -5,11 +5,7 @@ import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
-import {
-  isAIAgentRequest,
-  getMarkdownPath,
-  buildAgent404Response,
-} from './utils/ai-agent-detection';
+import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
 import { trackLLMPageview } from './utils/llm-analytics';
 import { markdownNotFoundResponse } from './utils/markdown-404';
 
@@ -33,8 +29,6 @@ function applyDocHeaders(response) {
   response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
   return response;
 }
-
-const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
 
 // Resolve where a moved `.md` page should redirect. next.config `redirectFrom`
 // rules match only the non-`.md` source, so we probe the HTML sibling (which
@@ -200,56 +194,21 @@ export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
 
-    // /blog/[slug].md — serve raw markdown from CDN for any requester
+    // /blog/[slug].md — serve raw markdown from the in-repo blog snapshot (the
+    // same source the HTML post page renders from). Reading that snapshot needs
+    // the Node runtime (disk/fs), which this Edge middleware can't use, so
+    // rewrite to the Node route handler at /blog/[slug]/md, which reads it and
+    // fires the LLM read beacon. (Previously this fetched an external CDN that
+    // stopped receiving new posts once the blog moved into this repo.)
     if (pathname.startsWith('/blog/') && pathname.endsWith('.md')) {
       const slug = pathname.slice('/blog/'.length, -'.md'.length);
-      try {
-        const res = await fetch(`${BLOG_CDN_BASE}/posts/${slug}.md`);
-        if (res.ok) {
-          trackLLMPageview(req);
-          const markdown = await res.text();
-          return new NextResponse(markdown, {
-            status: 200,
-            headers: {
-              'Content-Type': 'text/markdown; charset=utf-8',
-              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-              'X-Content-Source': 'markdown',
-              'X-Robots-Tag': 'noindex',
-              'X-LLMs-Txt': '/blog/llms.txt',
-            },
-          });
-        }
-        if (res.status === 404) {
-          trackLLMPageview(req, { is404: true });
-          return new NextResponse(
-            buildAgent404Response(pathname, {
-              context: 'Neon Blog',
-              extraLinks: [
-                { label: 'Blog index', href: '/blog/llms.txt', description: 'All Neon blog posts' },
-              ],
-            }),
-            {
-              status: 404,
-              headers: {
-                'Content-Type': 'text/markdown; charset=utf-8',
-                'Cache-Control': 'public, max-age=60, s-maxage=300',
-                'X-Content-Source': 'agent-404',
-                'X-LLMs-Txt': '/blog/llms.txt',
-              },
-            }
-          );
-        }
-        // Non-200/404 from CDN (5xx, etc.) — fall through to 502
-        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
-          status: 502,
-          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
-        });
-      } catch (error) {
-        console.error('[blog .md] Error fetching from CDN', { slug, error: error.message });
-        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
-          status: 502,
-          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
-        });
+      // Only real (single-segment) post slugs map to the handler. A nested path
+      // like /blog/a/b.md isn't a post; let it fall through to the generic .md
+      // handler below so it still returns a markdown 404, not an HTML one.
+      if (slug && !slug.includes('/')) {
+        const rewriteUrl = req.nextUrl.clone();
+        rewriteUrl.pathname = `/blog/${slug}/md`;
+        return NextResponse.rewrite(rewriteUrl);
       }
     }
 
@@ -282,7 +241,10 @@ export async function proxy(req) {
                 status: 200,
                 headers: {
                   'Content-Type': 'text/markdown; charset=utf-8',
-                  'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                  // Short TTL so a cached hit still re-enters the proxy and fires the
+                  // LLM read beacon (which runs only here). A long s-maxage lets the
+                  // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                  'Cache-Control': 'public, max-age=60, s-maxage=300',
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
                 },
@@ -351,7 +313,10 @@ export async function proxy(req) {
                   status: 200,
                   headers: {
                     'Content-Type': 'text/markdown; charset=utf-8',
-                    'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                    // Short TTL so a cached hit still re-enters the proxy and fires the
+                    // LLM read beacon (which runs only here). A long s-maxage lets the
+                    // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                    'Cache-Control': 'public, max-age=60, s-maxage=300',
                     'X-Content-Source': 'markdown',
                     'X-Robots-Tag': 'noindex',
                   },
