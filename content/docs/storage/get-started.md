@@ -19,7 +19,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 To follow this guide, you need:
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
 - The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
 - A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
@@ -91,7 +91,7 @@ export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2
 export AWS_REGION=us-east-2
 ```
 
-A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in a supported region: AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`).
+A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in a supported region: AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`).
 
 ## Create a credential
 

@@ -124,8 +124,7 @@ described above.
 
 ## Availability
 
-The AI Gateway is available in **US East 1** and **US East 2** (more regions to
-follow).
+The AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore) (more [regions](/docs/introduction/regions) to follow).
 
 <Admonition type="note">
 **IP Allow** and **Private Link** do not cover AI Gateway traffic.
