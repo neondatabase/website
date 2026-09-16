@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy/
-updatedOn: '2026-09-16T14:45:14.539Z'
+updatedOn: '2026-09-16T14:46:15.548Z'
 ---
 
 This topic outlines [Postgres version support](#postgres-version-support).
@@ -84,7 +84,7 @@ As of August 2026, Neon runs the latest community minor release for every suppor
 
 As a managed service, Neon strives to manage all minor version updates automatically, minimizing the need for user intervention. However, certain updates, such as security fixes, may require decisions that depend on your application and cannot be fully automated.
 
-In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequently &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
+In such cases, your action may occasionally be required. When this occurs, which is infrequent, we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
 ### Supported major versions
 
