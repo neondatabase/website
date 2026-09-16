@@ -72,10 +72,10 @@ const BuildYourBackend = () => (
           className="max-w-296 min-w-0 indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-white xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[2rem]"
           id="build-your-backend-heading"
         >
-          <span>Every backend primitive </span>
+          <span>Not just a Database. </span>
           <span className="text-gray-new-50">
-            built on industry-standard open source technology and APIs. Zero lock-in, familiar to
-            work with, continuously maintained.
+            Neon is a complete backend platform with Authentication, Object Storage, Functions and
+            an AI Gateway.
           </span>
         </h2>
       </div>
