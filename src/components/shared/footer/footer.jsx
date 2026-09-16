@@ -86,7 +86,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                           'group/link relative -my-px flex cursor-pointer items-center rounded-sm py-px whitespace-nowrap',
                           'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
                           'transition-colors duration-200 hover:text-black-pure',
-                          'dark:text-gray-new-60 dark:hover:text-white'
+                          'dark:text-gray-new-70 dark:hover:text-white'
                         )}
                         to={to}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}
@@ -154,7 +154,7 @@ const Footer = ({ hasThemesSupport = false }) => (
         </div>
       </div>
     </Container>
-    <div className="mt-10 border-t border-gray-new-10 py-8 lg:mt-4 lg:border-0 lg:pt-0">
+    <div className="mt-10 border-t border-gray-new-94 py-8 dark:border-gray-new-10 lg:mt-4 lg:border-0 lg:pt-0">
       <Container
         className="flex flex-row justify-between gap-5 lg:w-full lg:flex-col-reverse lg:items-start"
         size="1920"
@@ -167,29 +167,32 @@ const Footer = ({ hasThemesSupport = false }) => (
           )}
         >
           <p className="flex w-full flex-wrap justify-between gap-3 leading-none lg:justify-start">
-            <Link className="hover:text-gray-new-20 dark:hover:text-gray-new-80" to={LINKS.privacy}>
+            <Link
+              className="text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white"
+              to={LINKS.privacy}
+            >
               Privacy Notice
             </Link>
             <Link
-              className="leading-none hover:text-gray-new-20 dark:hover:text-gray-new-80"
+              className="leading-none text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white"
               to={LINKS.websiteTerms}
             >
               Terms of Use
             </Link>
             <Link
-              className="leading-none hover:text-gray-new-20 dark:hover:text-gray-new-80"
+              className="leading-none text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white"
               to={LINKS.platformTerms}
             >
               Neon Platform Terms
             </Link>
             <Link
-              className="leading-none hover:text-gray-new-20 dark:hover:text-gray-new-80"
+              className="leading-none text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white"
               to={LINKS.modernSlaveryStatement}
             >
               Modern Slavery Statement
             </Link>
             <Link
-              className="leading-none hover:text-gray-new-20 dark:hover:text-gray-new-80"
+              className="leading-none text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white"
               to={LINKS.californiaPolicy}
             >
               California Privacy
