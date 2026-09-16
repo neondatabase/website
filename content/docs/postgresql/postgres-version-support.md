@@ -9,14 +9,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy/
-updatedOn: '2026-09-16T13:05:58.588Z'
+updatedOn: '2026-09-16T14:04:35.775Z'
 ---
 
 This topic outlines [Postgres version support](#postgres-version-support).
 
-## The official Postgres versioning policy
+## The official PostgreSQL versioning policy
 
-To better understand [Postgres version support](#postgres-version-support), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
+To better understand [PostgreSQL version support on Neon](#postgres-version-support), it’s helpful to first familiarize yourself with the official PostgreSQL versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
@@ -32,7 +32,7 @@ To better understand [Postgres version support](#postgres-version-support), it�
 - A minor release is issued for all supported major versions simultaneously.
 - Occasionally, manual actions are necessary after a minor version upgrade. The PostgreSQL Global Development Group strives to minimize these situations, but they do occur. Any exceptions, required manual steps, or incompatibilities introduced in minor releases are detailed in the [PostgreSQL release notes](https://www.postgresql.org/docs/release/).
 
-### Postgres version numbering
+### PostgreSQL version numbering
 
 - The major version is indicated by the first part of the version number, such as the "16" in "16.1".
 - The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
@@ -57,7 +57,7 @@ Your Postgres major version is also displayed in the **Project settings** widget
 
 ### Minor releases
 
-In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official Postgres release, these updates may occur a few days later than the official release date.
+In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official PostgreSQL release, these updates may occur a few days later than the official release date.
 
 Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
@@ -88,7 +88,7 @@ In such cases, your action may occasionally be required. When this occurs &#8212
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
+Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official PostgreSQL version support policy.
 
 ### Major version upgrades
 
