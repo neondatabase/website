@@ -52,9 +52,9 @@ Extra branches are metered hourly, so a 2-hour branch costs about $0.004. See [e
 Set a [time to live](/docs/guides/branch-expiration) when you create a branch (Console presets: 1 hour, 1 day, or 7 days; CLI/API use an RFC 3339 `--expires-at` timestamp up to 30 days out). Neon deletes it automatically when the timer runs out, which prevents extra-branch charges from creeping up.
 </Admonition>
 
-## How other Postgres platforms handle per-branch isolation
+## How other Postgres services handle per-branch isolation
 
-| Platform             | Per-branch isolation                                                                                                                                                                                                                                                                                                               |
+| Service              | Per-branch isolation                                                                                                                                                                                                                                                                                                               |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Neon                 | Copy-on-write branch per Git branch in about a second, starting from production data. See [branching](/docs/introduction/branching).                                                                                                                                                                                               |
 | Supabase             | [Preview branches](https://supabase.com/docs/guides/deployment/branching) create a separate Supabase environment per Git branch via the GitHub integration. Branches don't include production data; you populate them from a `seed.sql`. Each preview branch runs as a full Supabase project and bills as Branching Compute Hours. |

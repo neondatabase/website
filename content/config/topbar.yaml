@@ -1,4 +1,4 @@
-text: 'The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built'
+text: '"A quarter of work, done in 6 days".  How a solo founder built isolated Postgres per tenant on Neon'
 link:
-  url: 'https://neon.com/blog/autoscaling-lakebase-postgres'
+  url: 'https://neon.com/blog/inside-lubots-database-per-tenant-architecture'
   target: '_blank'

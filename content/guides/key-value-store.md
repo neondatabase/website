@@ -7,7 +7,7 @@ createdAt: '2025-04-15T13:24:36.612Z'
 updatedOn: '2025-04-18T18:52:41.000Z'
 ---
 
-PostgreSQL is well known for its relational features, but it also offers powerful tools for working with key-value pairs. If you want to store flexible, schema-less data in a Postgres column, you can use either the [`hstore` extension](https://www.postgresql.org/docs/current/hstore.html) or the built-in [JSONB type](https://www.postgresql.org/docs/current/datatype-json.html).
+Postgres is well known for its relational features, but it also has tools for working with key-value pairs. If you want to store flexible, schema-less data in a Postgres column, you can use either the [`hstore` extension](https://www.postgresql.org/docs/current/hstore.html) or the built-in [JSONB type](https://www.postgresql.org/docs/current/datatype-json.html).
 
 ## Steps
 

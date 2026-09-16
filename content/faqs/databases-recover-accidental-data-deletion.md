@@ -17,7 +17,7 @@ Postgres supports point-in-time recovery, but most managed offerings make you re
 
 ## How instant restore works
 
-Neon retains a log of changes to your data over a configurable history window. To recover from a bad `DELETE` or `UPDATE`, you pick a timestamp or LSN from before the incident and restore the root branch to that point. The database is back to its previous state in seconds. Instant restore applies to root branches only; child branches don't support it. See [Instant restore](https://neon.com/docs/introduction/branch-restore).
+Lakebase Postgres retains a log of changes to your data over a configurable history window. To recover from a bad `DELETE` or `UPDATE`, you pick a timestamp or LSN from before the incident and restore the root branch to that point. The database is back to its previous state in seconds. Instant restore applies to root branches only; child branches don't support it. See [Instant restore](https://neon.com/docs/introduction/branch-restore).
 
 History window by plan ([History window](https://neon.com/docs/introduction/history-window)):
 

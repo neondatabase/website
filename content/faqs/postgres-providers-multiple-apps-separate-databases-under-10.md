@@ -23,7 +23,7 @@ Each Neon project is an isolated Postgres instance with its own connection strin
 - 100 CU-hours per project per month
 - 0.5 GB storage per project
 - 10 branches per project
-- 5 GB public network transfer per month
+- 5 GB public network transfer per project per month
 
 100 CU-hours is enough to run a 0.25 CU compute (≈1 GB RAM) for roughly 400 hours per month. For low-traffic apps that scale to zero between requests, that covers most or all of your active time. Compute suspends after 5 minutes idle and resumes in a few hundred milliseconds when a query arrives. See the [Free plan details](/docs/introduction/plans) for the full breakdown.
 
@@ -58,8 +58,8 @@ On the Launch and Scale plans, you can set up [spending notifications](/docs/int
 | Supabase (Free)      | 2 active projects  | Projects [paused after ~1 week of inactivity](https://supabase.com/docs/guides/troubleshooting/http-status-codes#540-project-paused)            | N/A on Free                                                                                                                                                                         |
 | Supabase (Pro)       | Unlimited          | No idle pause; instance always on                                                                                                               | ~$10/month per extra project on Micro compute ([compute add-ons](https://supabase.com/docs/guides/platform/billing-faq#how-are-multiple-projects-billed-under-a-paid-organization)) |
 | Aurora Serverless v2 | N/A                | [Auto-pause to 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) when min ACU set to 0 | One cluster per app; minimum 0.5 ACU when active                                                                                                                                    |
-| RDS for PostgreSQL   | N/A                | None; instances run 24/7                                                                                                                        | Pay per instance-hour even when idle                                                                                                                                                |
+| RDS for Postgres     | N/A                | None; instances run 24/7                                                                                                                        | Pay per instance-hour even when idle                                                                                                                                                |
 
-For 5 to 10 low-traffic apps under $10/month total, Neon's Free plan and Supabase's two-project cap are the only zero-cost options. On paid tiers, Neon's per-CU-hour billing and scale-to-zero make multi-app setups cheap as long as each app stays small. On Supabase Pro, each extra project adds a fixed monthly cost. On Aurora and RDS, each app needs its own instance or cluster, and even Aurora Serverless v2's auto-pause assumes you can tolerate the resume delay.
+For 5 to 10 low-traffic apps under $10/month total, Neon's Free plan and Supabase's two-project cap are the two zero-cost options. On paid plans, Neon's per-CU-hour billing and scale-to-zero make multi-app setups cheap as long as each app stays small. On Supabase Pro, each extra project adds a fixed monthly cost. On Aurora and RDS, each app needs its own instance or cluster, and even Aurora Serverless v2's auto-pause assumes you can tolerate the resume delay.
 
 <CTA title="Start free with Neon" description="Spin up 100 Postgres projects at no cost, then pay per CU-hour as individual apps grow." buttonText="Create a free account" buttonUrl="https://console.neon.tech/signup" />

@@ -36,7 +36,7 @@ const LOCAL_DATA_PATH = path.resolve(DIRNAME, '../app/models.json/data.json');
 
 const UPSTREAM_PR_HINT =
   'Open a PR on anomalyco/models.dev updating providers/neon/ to match. See the ' +
-  '`neon-ai-gateway-model-changes` skill for the entry format.';
+  '`add-model-to-ai-gateway` skill for the entry format.';
 
 async function fetchJson(url) {
   const res = await fetch(url, { headers: { accept: 'application/json' } });

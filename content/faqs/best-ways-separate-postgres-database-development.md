@@ -44,7 +44,7 @@ Branches can auto-delete after 1 hour, 1 day, 7 days, or a custom date. Use this
 
 ## How other providers handle per-developer databases
 
-- **Supabase** supports branching as well, but new branches are **data-less by default** to protect production data ([docs](https://supabase.com/docs/guides/deployment/branching)). Each branch is a separate environment with its own dedicated Postgres instance, billed as Branching Compute (Micro starts at $0.01344/hour) ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). A team of 10 dev branches running 8 hours a day works out to ~$32/month in branching compute alone.
+- **Supabase** supports branching as well, but new branches are data-less by default to protect production data ([docs](https://supabase.com/docs/guides/deployment/branching)). Each branch is a separate environment with its own dedicated Postgres instance, billed as Branching Compute (Micro starts at $0.01344/hour) ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). A team of 10 dev branches running 8 hours a day works out to ~$32/month in branching compute alone.
 - **Aurora Serverless v2 (Postgres)** doesn't have a copy-on-write branching feature. Per-developer databases mean cloning the cluster or restoring a snapshot, which provisions full storage every time. Auto-pause to 0 ACUs on supported engines keeps idle costs down ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
 - **RDS for Postgres** has no native branching. Standard practice is one RDS instance per developer, or shared instances with per-developer schemas. Either way, you pay full instance pricing per environment.
 

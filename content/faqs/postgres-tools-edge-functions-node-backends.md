@@ -54,7 +54,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 In Vercel Edge Functions and Cloudflare Workers, WebSocket connections can't outlive a request. Create the `Pool` inside the handler, use it, and close it before returning. For one-shot queries, prefer the HTTP `neon()` function, which doesn't have this constraint.
 </Admonition>
 
-## Why this matters for connection limits
+## Connection limits
 
 Serverless platforms can spin up hundreds of concurrent function instances. Each opens a connection if you use a standard driver, which blows past Postgres' `max_connections` ceiling. The HTTP path skips this entirely (each query is a stateless HTTP call). For WebSocket mode, route through Lakebase Postgres's built-in PgBouncer pooler by adding `-pooler` to the hostname; it accepts up to 10,000 client connections per compute.
 

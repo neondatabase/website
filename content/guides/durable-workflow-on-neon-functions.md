@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -21,6 +21,12 @@ This guide solves that problem by combining [Inngest](https://www.inngest.com) w
 Inngest handles the orchestration layer: event triggers, step-level retries, and durable delays, while Neon Functions provides the co-located compute and data. Your function code stays linear and readable, and you avoid standing up separate queue infrastructure.
 
 In this tutorial, you will build an automated lead enrichment pipeline that receives a customer signup event, writes initial state to Lakebase Postgres, researches the company using a web search tool to generate an executive summary, executes a durable delay, and updates the database record upon completion. This serves as a blueprint for building multi-step AI agents, human-in-the-loop approval flows, scheduled reporting jobs, or any workflow which requires durable retries.
+
+<CopyPrompt
+  src="/prompts/durable-workflow-on-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Architecture overview
 
@@ -78,7 +84,7 @@ Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Inngest Account**: Sign up for a free account at [inngest.com](https://www.inngest.com).
    <Admonition type="tip" title="Self-Hosting Inngest">
    You can also self-host Inngest using the [Inngest self-hosting guide](https://www.inngest.com/docs/self-hosting). Use Lakebase Postgres as the backing database for Inngest's durable state storage. The workflow code in this guide works identically with either Inngest Cloud or a self-hosted Inngest instance.
@@ -106,7 +112,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose the **AWS US East 2 (Ohio)** (`aws-us-east-2`) region, since Neon Functions are available only there during beta.
+You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
 
 Next, install the required dependencies:
 
@@ -131,7 +137,7 @@ neon link
 Select your organization and choose to create a new project named `neon-inngest-demo`.
 
 <Admonition type="note">
-Ensure you select the **AWS US East 2 (Ohio)** region (`aws-us-east-2`) when creating your Neon project, as Neon Functions are currently available in this region during beta. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
 </Admonition>
 
 A `.env.local` file should be created automatically in your project root with your Neon project details, including `DATABASE_URL` and other Neon-specific variables.

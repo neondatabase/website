@@ -29,7 +29,7 @@ A Neon `DATABASE_URL` looks like:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Neon requires SSL/TLS (`sslmode=require`). `channel_binding=require` adds SCRAM mutual authentication. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
+Lakebase Postgres requires SSL/TLS (`sslmode=require`). `channel_binding=require` adds SCRAM mutual authentication. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Use it in your app
 

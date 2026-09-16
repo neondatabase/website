@@ -23,11 +23,15 @@ Run a single diagnostic query against a branch's Postgres. Pick the query with a
 
 <CliOptions command="inspect db" />
 
-By default the command resolves the project, branch, database, and role from your [context](/docs/cli/set-context) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon.
+By default the command resolves the project, branch, database, and role from your [context](/docs/cli/set-context) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon without being logged in to Neon.
 
 When you omit `--database-name`, `inspect` covers every database on the branch and adds a `database` column so you can tell the rows apart. Pass `--database-name` to inspect a single database, which also scopes `locks` and `long-running-queries` to that database so lock and relation names resolve correctly. Database-scoped checks such as `table-sizes`, `locks`, and `outliers` run against each database, while compute-wide checks (`lfc-hit-rate`, `working-set`, and `replication-slots`) run once. If any database fails, the whole run fails, so pass `--database-name` to narrow to one when that happens. `--db-url` always inspects the single database in the connection string and never adds the `database` column.
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
+
+<Admonition type="note">
+On large fixed-size computes (18 CU and above), Neon disables the file cache and serves the [compute cache](/docs/extensions/neon#what-is-the-compute-cache) from Postgres `shared_buffers`, so `lfc-hit-rate` and `working-set` return empty or misleading results on those computes. Use the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph or run `SHOW shared_buffers` instead.
+</Admonition>
 
 From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
 

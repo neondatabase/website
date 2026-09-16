@@ -17,7 +17,7 @@ This guide demonstrates how to create this workflow using [Google Jules](https:/
 
 With Neon’s instant [Database Branching](/branching), Jules can quickly spin up isolated, production-like environments on demand. It can branch databases, run migrations, adjust RLS policies all safely, without ever touching your production data. This means you can hand Jules a feature request, and it will autonomously build, test, and open a PR with zero risk to your live environment.
 
-To demonstrate, we’ll walk through a real example: asking Jules to implement a feature request in an example app that requires updating the database schema. You’ll see how Jules leverages the Neon MCP server to create a new database branch and seamlessly execute the necessary migrations.
+To demonstrate, we’ll walk through a real example: asking Jules to implement a feature request in an example app that requires updating the database schema. You’ll see how Jules uses the Neon MCP server to create a new database branch and run the necessary migrations.
 
 ## Prerequisites
 
@@ -179,7 +179,7 @@ Jules will then update the code, run any necessary migrations on the branched da
 
 As AI agents transition into fully autonomous software engineers, they require infrastructure that matches their speed and agility.
 
-By combining **Google Jules** with **Neon's branchable database**, you eliminate the friction of stateful AI development. Every feature requested gets a clean, production-like database. Every PR acts as a safe sandbox for testing and iteration. This means you can confidently leverage AI agents to build complex, data-driven features without worrying about breaking production or managing local environments.
+By combining **Google Jules** with **Neon's branchable database**, you eliminate the friction of stateful AI development. Every feature requested gets a clean, production-like database. Every PR acts as a safe sandbox for testing and iteration. This means you can use AI agents to build complex, data-driven features without worrying about breaking production or managing local environments.
 
 ## Resources
 

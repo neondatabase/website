@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-08T15:58:09.171Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -29,7 +29,7 @@ Before you begin, ensure you have the following:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
@@ -121,7 +121,7 @@ export default defineConfig({
 The `neon.ts` file defines the Neon services and branch policies for your project:
 
 - **Services**: Enables Postgres, Managed Better Auth and the Neon Data API for your project.
-- **Production**: Allows scaling up to 2 Compute Units (CU). You can additionally mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
+- **Production**: Allows scaling up to 2 Compute Units (CU). You can also mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
 - **Development branches** (`dev*`): Applies strict resource controls to new branches whose name starts with `dev`: capped at 1 CU, and scheduled for deletion after 7 days to prevent unnecessary costs.
 - **Other new branches**: Gets an even more minimal profile with a 2-day TTL and a fixed 0.25 CU compute ceiling.
 - **Existing branches**: Left untouched. Returning `{}` for branches that already exist avoids overwriting settings on branches already in use. This is important: `neon checkout` only applies policy when _creating_ a new branch, never when checking out an existing one.
@@ -359,7 +359,7 @@ preview: {
 
 Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
 
-_Neon Functions and Storage are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them._
+_Neon Functions and Storage are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions._
 
 ## Conclusion
 

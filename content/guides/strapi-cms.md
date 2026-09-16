@@ -128,7 +128,7 @@ Enter **text** as the Name of the markdown field and click **Finish**.
 
 ![Enter markdown field name](/guides/images/strapi-cms/76b789ff-a15f-48ba-84a4-0cfe2cb37eb7.png)
 
-Great! Click **Save** to save the present configuration.
+Click **Save** to save the present configuration.
 
 ![Configuration saved](/guides/images/strapi-cms/32a0b6ca-e7fd-4f6e-9942-4d63cc66d02b.png)
 
@@ -326,6 +326,6 @@ Interestingly, during the entire process of building this application, you have 
 
 ## Summary
 
-In this guide, you learned how to build a blog in an Astro application using Strapi CMS and a serverless Postgres database (powered by Neon). Additionally, you learned how to create content collections in Strapi CMS and dynamic blog routes in an Astro application.
+In this guide, you learned how to build a blog in an Astro application using Strapi CMS and a serverless Postgres database (powered by Neon). You also learned how to create content collections in Strapi CMS and dynamic blog routes in an Astro application.
 
 <NeedHelp />

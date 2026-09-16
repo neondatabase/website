@@ -212,7 +212,7 @@ The `dotnet ef database update` command applies the migration to your Neon datab
 
 > **Note**: Make sure your database connection string in `appsettings.json` is correctly configured before running the migrations. That way the changes are applied to your Neon database instance.
 
-At this point, your database is set up and ready to store product data!
+At this point, your database is set up and ready to store product data.
 
 ## Building the API Endpoints
 
@@ -355,7 +355,7 @@ The Swagger UI will appear, displaying all your API endpoints with detailed docu
 
 ## Testing Your API with Postman
 
-Now that your API is running, you can use Postman or any other API testing tool to interact with your endpoints. You can even use the Swagger UI to test the endpoints, but Postman provides a more robust environment for testing complex scenarios.
+Now that your API is running, you can use Postman or any other API testing tool to interact with your endpoints. You can even use the Swagger UI to test the endpoints, but Postman is better suited to testing complex scenarios.
 
 In this section, we'll walk through testing the CRUD operations using Postman but feel free to use any tool you're comfortable with like Insomnia or cURL.
 

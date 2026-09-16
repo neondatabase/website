@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-10T13:38:23.543Z'
 ---
 
 ## access token
@@ -130,7 +130,7 @@ Neon creates a primary read-write compute for the project's default branch. Neon
 
 ## compute cache
 
-The compute cache is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. Like Postgres [shared buffers](#shared-buffers), it caches your most recently accessed data. In Neon, up to 75% of your compute's RAM is used for data caching.
+The compute cache is a layer of caching on the compute that stores frequently accessed data from the storage layer, reducing latency and improving query performance by avoiding repeated fetches from storage. Exposed as a single cache, it can span two tiers: Postgres [shared buffers](#shared-buffers), which are held in memory, and a larger secondary file cache on the compute's local disk. It provides up to 75% of your compute's RAM in capacity. For details, see [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache).
 
 ## compute endpoint
 
@@ -217,7 +217,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. Free plan projects are limited to 5 GB per month.
+A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. Each Free plan project is limited to 5 GB per month.
 
 ## Database
 
@@ -570,7 +570,7 @@ A cloud-based development model that enables developing and running applications
 
 ## shared buffers
 
-A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size), and up to 75% of your compute's RAM is used for data caching. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. In Neon, `shared_buffers` is the in-memory tier of the [compute cache](#compute-cache), and its value [differs by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
 
 ## Snapshot
 

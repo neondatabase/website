@@ -34,7 +34,7 @@ The migration process from FaunaDB to Lakebase Postgres involves several key ste
 
 ### Step 1: Exporting data from FaunaDB
 
-If you are on a paid FaunaDB plan, you can utilize the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) can be used to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/)
+If you are on a paid FaunaDB plan, you can use the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) can be used to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/)
 
 ```bash
 fauna export create s3 \
@@ -183,7 +183,7 @@ collection Product {
 Unfortunately, there isn't a fully automated FSL to SQL DDL converter as these are fundamentally different database paradigms. You'll need to manually translate your FaunaDB schema to Postgres DDL. This process involves mapping FaunaDB collections, fields, indexes, and constraints to Postgres tables, columns, indexes, and constraints.
 </Admonition>
 
-Begin by thoroughly examining the exported Fauna Schema Language (FSL) files. This step is crucial for gaining a comprehensive understanding of your FaunaDB schema structure. Pay close attention to the definitions of collections, their associated fields, indexes, and constraints.
+Begin by thoroughly examining the exported Fauna Schema Language (FSL) files. This gives you a full picture of your FaunaDB schema structure. Pay close attention to the definitions of collections, their associated fields, indexes, and constraints.
 
 For instance, the Product collection, as shown in the above example `collections.fsl` file, includes fields like `name`, `description`, `price`, `category`, and `stock`. The schema also specifies unique and check constraints for data integrity, along with indexes to optimize query performance.
 

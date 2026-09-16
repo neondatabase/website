@@ -26,7 +26,7 @@ neon branches create \
   --expires-at "2026-04-25T15:00:00Z"
 ```
 
-The `--expires-at` flag sets a deletion timestamp (RFC 3339). The branch auto-deletes when that time is reached. The console offers presets of **1 hour, 1 day, or 7 days**, plus a custom timestamp via API or CLI. See [Branch expiration](/docs/guides/branch-expiration).
+The `--expires-at` flag sets a deletion timestamp (RFC 3339). The branch auto-deletes when that time is reached. The console offers presets of 1 hour, 1 day, or 7 days, plus a custom timestamp via API or CLI. See [Branch expiration](/docs/guides/branch-expiration).
 
 For the API equivalent:
 
@@ -52,8 +52,8 @@ Short-lived processes that each open a connection can exhaust `max_connections` 
 ## How other providers handle ephemeral databases
 
 - **Supabase** branches are designed for preview environments tied to a Git branch ([docs](https://supabase.com/docs/guides/deployment/branching)). Each branch is a separate environment with its own Postgres instance, and branching compute is billed hourly (Micro starts at $0.01344/hour) ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Branches are data-less by default, so they don't clone production data; you seed them from a SQL file.
-- **Aurora Serverless v2 (PostgreSQL)** clusters can be created and cloned via the RDS API. Cluster create takes longer than Neon branch create (typically minutes vs. seconds), but auto-pause on supported engine versions reduces idle compute cost between CI runs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for PostgreSQL** is the slowest of the three to provision via API and has no auto-pause, so it's a poor fit for thousands of short-lived instances.
+- **Aurora Serverless v2 (Postgres)** clusters can be created and cloned via the RDS API. Cluster create takes longer than Neon branch create (typically minutes vs. seconds), but auto-pause on supported engine versions reduces idle compute cost between CI runs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+- **RDS for Postgres** is the slowest of the three to provision via API and has no auto-pause, so it's a poor fit for thousands of short-lived instances.
 
 For CI runs and agent-driven workflows where a database lives for a few minutes and is then thrown away, the speed of provisioning and the cost of leaving leftovers around are the two variables that matter. Neon's branch-create latency (seconds) and copy-on-write storage minimize both.
 

@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -24,13 +24,19 @@ You'll build a simple JSON API on Neon Functions and wire it up to Sentry's thre
 
 Once the signals are flowing, you'll also tour where each one lands in the Sentry dashboard and how to read it, so you know where to look when a real incident hits.
 
+<CopyPrompt
+  src="/prompts/sentry-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
+
 ## Prerequisites
 
 Before you start, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Sentry Account**: Sign up for a free account at [sentry.io](https://sentry.io/signup/).
 
 <Steps>
@@ -65,7 +71,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You’ll be prompted to select your organization. Once chosen, either pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`), as Neon Functions are currently available only in this region during beta. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project.
+You’ll be prompted to select your organization. Once chosen, either pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project.
 
 ```text
 $ neon link

@@ -19,7 +19,7 @@ Lakebase Postgres keeps a continuous log of every write (the Write-Ahead Log, or
 
 ## How instant restore works
 
-The lakebase architecture stores the WAL natively, so any point in time within your history window is queryable. You don't restore from a backup file. You restore a root branch to a timestamp or LSN (Neon keeps an automatic backup branch of the pre-restore state), or you create a new branch from a timestamp so you can inspect first.
+The Lakebase Postgres architecture stores the WAL natively, so any point in time within your history window is queryable. You don't restore from a backup file. You restore a root branch to a timestamp or LSN (Lakebase Postgres keeps an automatic backup branch of the pre-restore state), or you create a new branch from a timestamp so you can inspect first.
 
 History window by plan:
 
@@ -44,16 +44,16 @@ neon branches create --name recovery --parent 2026-05-17T13:45:00Z
 The second approach is the safer pattern when you want to verify data before changing production: create a recovery branch, confirm the rows, then restore or copy what you need.
 
 <Admonition type="warning" title="In-place restore overwrites the branch">
-Restoring a root branch replaces its current data and schema for every database on that branch. Neon creates a backup branch automatically (or via `--preserve-under-name` on the CLI). Use [Time Travel Assist](/docs/guides/time-travel-assist) to confirm the restore point before you restore.
+Restoring a root branch replaces its current data and schema for every database on that branch. Lakebase Postgres creates a backup branch automatically (or via `--preserve-under-name` on the CLI). Use [Time Travel Assist](/docs/guides/time-travel-assist) to confirm the restore point before you restore.
 </Admonition>
 
 ## Picking the right history window
 
 A longer window catches slow-rolling bugs (someone notices the missing rows three weeks later) but costs more in WAL storage. A 30-day window on a 10 GB database with active writes typically adds a few dollars per month. See [history window configuration](/docs/introduction/history-window) for tuning.
 
-## How other Postgres platforms handle point-in-time recovery
+## How other Postgres services handle point-in-time recovery
 
-| Platform             | Mechanism                                                                                                                                                                                                                                                                                                                               | Granularity                                            |
+| Service              | Mechanism                                                                                                                                                                                                                                                                                                                               | Granularity                                            |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | Neon                 | Instant restore via copy-on-write for root branches from any timestamp in the history window. See [branch restore](/docs/introduction/branch-restore).                                                                                                                                                                                  | Down to the millisecond                                |
 | AWS RDS for Postgres | Automated backups in S3 plus transaction logs allow restore to a new database instance at any second within the retention period. The new instance must boot before you can connect. See [RDS PITR](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html).                                      | One second, into a new instance                        |

@@ -6,4 +6,4 @@ Renaming acts only on a function the branch owns. A slug that's only inherited f
 
 You can also manage functions from the CLI with [`neon functions`](/docs/cli/functions).
 
-Functions are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`). See [Neon Functions](/docs/compute/functions/overview) for the deployment workflow, [Environment variables](/docs/compute/functions/environment-variables) for what gets injected, and [Runtime limits](/docs/compute/functions/reference/runtime-limits) for timeouts and concurrency.
+Functions are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Neon Functions](/docs/compute/functions/overview) for the deployment workflow, [Environment variables](/docs/compute/functions/environment-variables) for what gets injected, and [Runtime limits](/docs/compute/functions/reference/runtime-limits) for timeouts and concurrency.

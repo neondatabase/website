@@ -359,7 +359,7 @@ When the pull request is opened, the GitHub Action will start automatically. You
 The pull request should now show a comment summarizing the schema changes:
 ![Schema Diff Comment](/docs/guides/e2e-tests-schema-diff-comment-github-actions.png)
 
-Additionally, GitHub Actions uploads Cypress test artifacts. Videos are recorded for every test run, while screenshots are uploaded only if tests fail. You can download these from the Actions tab to help diagnose issues.
+GitHub Actions also uploads Cypress test artifacts. Videos are recorded for every test run, while screenshots are uploaded only if tests fail. You can download these from the Actions tab to help diagnose issues.
 
 ![Cypress Artifacts](/docs/guides/cypress_test_artifacts_github_actions.png)
 

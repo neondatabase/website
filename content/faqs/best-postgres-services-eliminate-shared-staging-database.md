@@ -52,7 +52,7 @@ Extra branches beyond your plan allowance are $1.50/branch-month, prorated hourl
 Set a [time to live](/docs/guides/branch-expiration) on PR branches so they clean up automatically if a PR sits open for weeks.
 </Admonition>
 
-## How this works on other Postgres platforms
+## How this works on other Postgres services
 
 - **Supabase Preview Branches** are the closest match. Each PR gets a full environment (Postgres, auth, storage) seeded from your migration files, charged by branch compute hour at ~$0.013/hour on the default Micro size ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Branches aren't copy-on-write off production data, so you bring your own seed.
 - **Aurora and RDS for Postgres** don't have a branching primitive. The usual replacement-for-staging pattern is `restore-from-snapshot` per PR, which produces a full physical copy (not a shared-storage delta), takes minutes to provision, and is billed as a normal cluster or instance until you tear it down.

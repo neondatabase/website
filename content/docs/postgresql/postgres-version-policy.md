@@ -1,20 +1,20 @@
 ---
-title: Lakebase Postgres Version Support Policy
+title: Lakebase Postgres version support policy
 summary: >-
-  Neon's Postgres version support policy tracks the latest major versions,
+  The Lakebase Postgres version support policy tracks the latest major versions,
   applies minor releases automatically at the next compute restart, and
   aligns end-of-life with the official PostgreSQL five-year support window.
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-08-28T13:01:05.062Z'
+updatedOn: '2026-09-14T17:26:32.745Z'
 ---
 
-This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
+This topic outlines the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy).
 
 ## The official Postgres versioning policy
 
-To better understand [Neon's Postgres Version Support Policy](#neon-version-support-policy), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
+To better understand the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
@@ -35,7 +35,7 @@ To better understand [Neon's Postgres Version Support Policy](#neon-version-supp
 - The major version is indicated by the first part of the version number, such as the "16" in "16.1".
 - The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
 
-## Neon Version Support Policy
+## Lakebase Postgres version support policy
 
 Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen Postgres version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates.
 

@@ -1,13 +1,13 @@
 ---
-title: Building a Robust JSON API with TypeScript, Postgres, and Azure Functions
-subtitle: Learn how to leverage TypeScript, Lakebase Postgres Databases, and Azure Functions for Next-Level API Performance
+title: Building a JSON API with TypeScript, Postgres, and Azure Functions
+subtitle: Learn how to use TypeScript, Lakebase Postgres Databases, and Azure Functions to build a fast, type-safe API
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Creating scalable and maintainable APIs is a cornerstone of modern web development. In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.
+In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.
 
 Using this combination gives a great balance of development experience and deploying your application without having to worry about managing your own infrastructure.
 
@@ -286,7 +286,7 @@ We can verify all this works by running the app, hitting the `/api/recipes` endp
 [{"id":1,"name":"The Best Chocolate Cake EVER","description":"A delicious chocolate cake"}]
 ```
 
-Exciting stuff - I've now queried my database from an Azure Function using TypeScript!
+I've now queried my database from an Azure Function using TypeScript.
 
 Let's add another endpoint to get a single recipe by its ID, including its ingredients in the response:
 
@@ -488,7 +488,7 @@ Recipes API
 
 ### Configuring the Azure Function App
 
-I've verified that my function app is deployed and working, so that's exciting!
+I've verified that my function app is deployed and working.
 
 However, if I hit any of the endpoints that access the Postgres database, I will get a failure response.
 
@@ -523,11 +523,11 @@ Now when I hit the `/api/recipes` endpoint, I see the response that I expect:
 [{"id":1,"name":"The Best Chocolate Cake EVER","description":"A delicious chocolate cake"}]
 ```
 
-And that's it! My Recipes API is deployed and working in the cloud.
+And that's it. My Recipes API is deployed and working in the cloud.
 
 ### Wrapping Up
 
-The setup I've shown here provides a solid foundation for building a robust, type-safe, and scalable JSON API.
+The setup I've shown here provides a solid foundation for building a type-safe, scalable JSON API.
 While this is where I'm going to end this post, there is still several things I've had to leave out.
 
 Using what I've already shown in this article you should be able take care of some of these yourself, such as:

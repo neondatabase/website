@@ -3,13 +3,13 @@ title: Migrate to Managed Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 summary: >-
   Migration guide for upgrading from legacy Neon Auth (Stack Auth) to Managed
-  BetterAuth. Replace Stack Auth environment variables with a single
+  Better Auth. Replace Stack Auth environment variables with a single
   `NEON_AUTH_BASE_URL` and swap the `@stackframe/stack` SDK for
   `@neondatabase/auth`. Use this page when moving an existing Next.js or React
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-14T12:58:18.350Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react

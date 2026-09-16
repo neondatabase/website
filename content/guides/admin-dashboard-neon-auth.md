@@ -7,7 +7,7 @@ createdAt: '2025-12-31T00:00:00.000Z'
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-In a production application, internal tooling is often critical for operations and support teams. The Managed Better Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
+In a production application, internal tooling is often critical for operations and support teams. The Managed Better Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
 
 This guide demonstrates how to build an **internal admin dashboard** using Managed Better Auth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
 
@@ -741,7 +741,7 @@ This setup provides a **client dashboard** that shows session details, user stat
 
 ## Use cases for impersonation and admin tools
 
-While this demo app simply shows the impersonated user’s information and session details, in a production application impersonation and admin tools can be far more powerful and useful. They enable support teams, moderators, and operations staff to manage accounts effectively and resolve issues quickly. Common scenarios include:
+While this demo app simply shows the impersonated user’s information and session details, in a production application impersonation and admin tools can do much more. They let support teams, moderators, and operations staff manage accounts effectively and resolve issues quickly. Common scenarios include:
 
 - **Customer support & debugging:** Admins can impersonate a user to reproduce bugs, troubleshoot login issues, or verify account settings exactly as the user sees them. This eliminates guesswork when a user reports a problem that only occurs on their account.
 - **Billing & subscriptions:** Support staff can impersonate a user to confirm subscription status, payment history, or upgrade/downgrade flows.

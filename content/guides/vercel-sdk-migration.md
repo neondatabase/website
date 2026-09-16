@@ -11,7 +11,7 @@ With Vercel Postgres transitioning to Neon's native integration in the [Vercel M
 
 ## Why migrate?
 
-Switching to the Neon serverless driver provides several advantages. It offers greater flexibility by allowing the choice between HTTP for single queries or WebSockets for transactions and full [node-postgres](https://node-postgres.com/) compatibility. Additionally, it enhances maintainability by relying on Neon's actively maintained, native database driver.
+Switching to the Neon serverless driver provides several advantages. It offers greater flexibility by allowing the choice between HTTP for single queries or WebSockets for transactions and full [node-postgres](https://node-postgres.com/) compatibility. It also relies on Neon's actively maintained, native database driver.
 
 ## Prerequisites
 

@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 0.5 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T03:15:28.979Z'
+updatedOn: '2026-09-02T18:59:27.831Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,24 +14,24 @@ nextLink:
   slug: import-csv-into-database
 ---
 
-The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 0.5 GB of storage per project, and 5 GB of public network transfer per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
+The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 0.5 GB of storage per project, and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
 
 ## What's included
 
-| Resource                | Free plan allowance                        |
-| ----------------------- | ------------------------------------------ |
-| Projects                | 100                                        |
-| Branches                | 10 per project                             |
-| Compute                 | 100 CU-hours per project per month         |
-| Autoscaling             | Up to 2 CU (≈8 GB RAM)                     |
-| Scale to zero           | After 5 min inactivity, cannot be disabled |
-| Storage                 | 0.5 GB per project                         |
-| Public network transfer | 5 GB/month                                 |
-| Instant restore history | 6 hours, capped at 1 GB of change history  |
-| Manual snapshots        | 1                                          |
-| Neon Auth (Beta)        | Up to 60,000 MAU                           |
-| Monitoring history      | 1 day                                      |
-| Support                 | Community                                  |
+| Resource                   | Free plan allowance                        |
+| -------------------------- | ------------------------------------------ |
+| Projects                   | 100                                        |
+| Branches                   | 10 per project                             |
+| Compute                    | 100 CU-hours per project per month         |
+| Autoscaling                | Up to 2 CU (≈8 GB RAM)                     |
+| Scale to zero              | After 5 min inactivity, cannot be disabled |
+| Storage                    | 0.5 GB per project                         |
+| Public network transfer    | 5 GB per project per month                 |
+| Instant restore history    | 6 hours, capped at 1 GB of change history  |
+| Manual snapshots           | 1                                          |
+| Managed Better Auth (Beta) | Up to 60,000 MAU                           |
+| Monitoring history         | 1 day                                      |
+| Support                    | Community                                  |
 
 100 CU-hours is enough to run a 0.25 CU (≈1 GB RAM) compute for about 400 hours per project per month. Compute quotas are measured per project, so 100 projects each get their own 100 CU-hour bucket.
 

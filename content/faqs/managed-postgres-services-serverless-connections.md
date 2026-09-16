@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-create-database-cli-single-command
 ---
 
-Neon runs PgBouncer on a pooled endpoint for every compute, in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.
+Lakebase Postgres runs PgBouncer on a pooled endpoint for every compute, in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.
 
 ## Why this matters for serverless
 
@@ -56,10 +56,10 @@ For edge runtimes that can't hold TCP at all (Cloudflare Workers, Vercel Edge Fu
 | --------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | Neon                        | PgBouncer per endpoint, up to 10,000 client connections   | HTTP and WebSockets via `@neondatabase/serverless`                                                                                       |
 | Supabase                    | Supavisor (shared) and dedicated PgBouncer for paid tiers | None native. Use Edge Functions over the [Data API](https://supabase.com/docs/guides/database/connecting-to-postgres) or fetch over HTTP |
-| Aurora / RDS for PostgreSQL | RDS Proxy (separate AWS service, hourly cost)             | TCP only. Edge clients have to route through an HTTP endpoint you build                                                                  |
+| Aurora / RDS for Postgres | RDS Proxy (separate AWS service, hourly cost)             | TCP only. Edge clients have to route through an HTTP endpoint you build                                                                  |
 
 Supabase ships a shared Supavisor pool with each project in both session (port 5432) and transaction (port 6543) modes. Paid tiers also get a dedicated PgBouncer co-located with the database. Total client connection capacity scales with the compute tier's "max pooler clients" limit. See [Connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres) and [Update connection pool settings](https://supabase.com/docs/guides/troubleshooting/how-do-i-update-connection-pool-settings-in-my-dashboard-wAxTJ_).
 
 Aurora and RDS use [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-connections.html) as the pooling layer. It's billed separately per vCPU-hour and is configured with a `MaxConnectionsPercent` of the database's `max_connections`. It speaks Postgres wire protocol over TCP, so edge runtimes that can't open TCP sockets need a separate HTTP layer (API Gateway + Lambda, for example).
 
-<CTA title="Read the full guide" description="Connection pooling has nuances around pool size per user/database and timeout behavior worth understanding before you ship." buttonText="Read the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />
+<CTA title="Read the full guide" description="Pool size per user/database and timeout behavior are worth understanding before you ship." buttonText="Read the docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />

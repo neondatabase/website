@@ -134,7 +134,7 @@ This approach helps applications handle high concurrency while minimizing latenc
 
 #### Configuring Connection Pooling in GORM
 
-When using Go with Neon, GORM offers built-in connection pooling that works seamlessly with Neon's pooler. By configuring settings like `SetMaxOpenConns` and `SetConnMaxIdleTime`, developers can fine-tune how connections are managed within their application before they reach the database layer.
+When using Go with Neon, GORM offers built-in connection pooling that works with Neon's pooler. By configuring settings like `SetMaxOpenConns` and `SetConnMaxIdleTime`, developers can fine-tune how connections are managed within their application before they reach the database layer.
 
 Since Neon already optimizes pooling on the database side, applications should maintain a moderate number of open connections to avoid excessive connection churn.
 
@@ -200,7 +200,7 @@ GORM provides sensible defaults for table names (pluralized struct names) and co
 
 Migrations are a way to manage database schema changes over time. GORM provides a convenient `AutoMigrate` feature that automatically creates tables, indexes, constraints, and foreign keys based on your model definitions.
 
-While this automation is extremely useful during development, it's worth noting that for production environments, you'll typically want more control over schema changes. We'll cover structured migrations for production later in this guide, but for now, let's see how to use GORM's automatic migrations for development.
+This automation is useful during development, but for production environments you'll typically want more control over schema changes. We'll cover structured migrations for production later in this guide, but for now, let's see how to use GORM's automatic migrations for development.
 
 Here's how to set up automatic migrations:
 
@@ -400,13 +400,13 @@ By default, GORM queries won't return soft-deleted records. If you need to inclu
 
 ## Advanced GORM Features
 
-With the basics covered, let's explore some advanced features of GORM that can help you build more robust and efficient applications.
+With the basics covered, let's explore some advanced features of GORM that can help you build more reliable and efficient applications.
 
 ### Transactions
 
 Transactions are a way to group multiple database operations into a single unit of work. They ensure that either all operations succeed or none of them do, maintaining data consistency. This is especially important when you have multiple related changes that need to happen together.
 
-GORM provides comprehensive support for database transactions:
+GORM supports database transactions:
 
 ```go
 // Begin a transaction
@@ -449,7 +449,7 @@ Transactions are essential in scenarios like:
 
 They help maintain data integrity by ensuring that related operations either all succeed or all fail, preventing partial updates that could leave your database in an inconsistent state.
 
-For a more elegant and concise approach, GORM provides a transaction helper method that automatically handles the begin, commit, and rollback operations:
+For a more concise approach, GORM provides a transaction helper method that automatically handles the begin, commit, and rollback operations:
 
 ```go
 err := db.Transaction(func(tx *gorm.DB) error {
@@ -485,7 +485,7 @@ With this method, you focus on the business logic inside the transaction rather 
 
 ### Raw SQL and Complex Queries
 
-While GORM's built-in query methods are powerful and cover most common scenarios, sometimes you need more control or have complex requirements that are best expressed in raw SQL. GORM provides several ways to work with raw SQL while still benefiting from its safety features and result handling.
+While GORM's built-in query methods cover most common scenarios, sometimes you need more control or have complex requirements that are best expressed in raw SQL. GORM provides several ways to work with raw SQL while still benefiting from its safety features and result handling.
 
 Here are different approaches to executing raw SQL and complex queries:
 
@@ -535,7 +535,7 @@ In either case, GORM handles parameter binding to protect against SQL injection,
 
 Hooks (also known as callbacks) are functions that are called at specific stages of the database operation lifecycle. They allow you to inject custom logic before or after these operations, such as validation, data transformation, or triggering side effects.
 
-GORM provides a comprehensive set of hooks for various operations, you can find the full list of hooks in the [GORM documentation](https://gorm.io/docs/hooks.html). But let's look at a couple of common hooks:
+GORM provides hooks for various operations. You can find the full list of hooks in the [GORM documentation](https://gorm.io/docs/hooks.html). But let's look at a couple of common hooks:
 
 ```go
 // Define hooks in your model
@@ -946,7 +946,7 @@ Save this code in a file named `main.go`, run `go mod tidy` to download the nece
 
 GORM with Lakebase Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
 
-By following the steps in this guide, you can build robust applications that efficiently interact with your Neon database. As your application grows, you can leverage additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
+By following the steps in this guide, you can build reliable applications that interact efficiently with your Neon database. As your application grows, you can use additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
 
 ## Additional Resources
 

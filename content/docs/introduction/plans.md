@@ -1,9 +1,9 @@
 ---
 title: Neon plans
 summary: >-
-  On Neon's paid plans (Launch and Scale), there's no hard per-branch size
-  limit; storage grows with your usage. The Free plan includes 0.5 GB of
-  storage per project.
+  Storage on Neon is unlimited on paid plans (Launch and Scale): there is no
+  hard per-branch size limit and your storage grows with your usage. The Free
+  plan includes 0.5 GB of storage per project.
   Free, Launch, and Scale also differ in compute rates, branch counts, storage
   pricing, and autoscaling limits. Compare per-unit pricing, feature
   availability, and billing examples to choose a plan or estimate monthly costs.
@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-09-15T18:17:04.567Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -53,7 +53,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                       | Up to 16 CU (64 GB RAM)                     | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                 | After 5 min, can be disabled                | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                              | $0.35/GB-month                              | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB included                               | 500 GB per project included, then $0.10/GB  | 500 GB per project included, then $0.10/GB                                                        |
+| [Public network transfer](#public-network-transfer)   | 5 GB per project included                   | 500 GB per project included, then $0.10/GB  | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                       | 3 days                                      | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                           | —                                           | ✅                                                                                                |
 | [Spending notifications](#spending-notifications)     | —                                           | ✅                                          | ✅                                                                                                |
@@ -63,7 +63,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Auth](#auth) (Beta)                                  | Up to 60k MAU                               | Up to 1M MAU                                | Up to 1M MAU                                                                                      |
 | [Object Storage](#object-storage) (Beta)              | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage))                                                       |
 | [Functions](#functions) (Beta)                        | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))                                                            |
-| [AI Gateway](#ai-gateway) (Beta)                      | —                                           | Free during beta                            | Free during beta                                                                                  |
+| [AI Gateway](#ai-gateway)                             | —                                           | Prepaid credits                             | Prepaid credits                                                                                   |
 | [Private network transfer](#private-network-transfer) | —                                           | —                                           | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                           | Protected branches                          | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                           | —                                           | ✅                                                                                                |
@@ -91,7 +91,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress per project. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -101,7 +101,7 @@ You can invite teammates to your organization and they'll have access to all pro
 
 ### Projects
 
-A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object hierarchy](/docs/manage/overview).
+A project is a container for your backend. It includes your database, branches, computes, and backend services like object storage and functions. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your resources. Learn more about [Neon's object model](/docs/concepts/the-object-model).
 
 > For most use cases, create a project for each app or customer to isolate data and manage resources.
 
@@ -237,9 +237,9 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
-#### Storage per branch: no hard size limit
+#### Unlimited storage
 
-**On paid plans (Launch and Scale), there's no hard per-branch size limit; your storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
 
 ### Public network transfer
 
@@ -249,11 +249,11 @@ Public network transfer (egress) is the total volume of data sent from your data
 
 Allowances per plan:
 
-- **Free**: 5 GB/month
+- **Free**: 5 GB per project per month
 - **Launch**: 500 GB per project per month, then $0.10/GB
 - **Scale**: 500 GB per project per month, then $0.10/GB
 
-> On the **Free** plan, the 5 GB allowance is a single account-wide pool shared across all products, including Postgres, [Object Storage](#object-storage), and [Functions](#functions). On paid plans, the 500 GB allowance is per project and also shared across products.
+> On all plans, the network transfer allowance is per project and shared across all products in that project, including Postgres, [Object Storage](#object-storage), and [Functions](#functions).
 
 ### Monitoring
 
@@ -345,7 +345,7 @@ There's no charge for Object Storage during the beta, but [usage limits](/docs/s
 - **Storage**: $0.023/GB-month. Only stored volume is metered; there's no per-operation charge.
 - **Egress**: Data transferred out counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products, and is billed at the same rate once you exceed it.
 
-On the **Free** plan, you get 5 GB of Object Storage, measured across your whole account rather than per project.
+On the **Free** plan, you get 5 GB of Object Storage per project.
 
 See [Neon Object Storage](/docs/storage/overview) for more information.
 
@@ -372,17 +372,19 @@ There's no charge for Functions during the beta, but [usage limits](/docs/comput
 
 On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
 
+When billing begins, these Free allowances will be enforced at two levels: an account-wide total across all your projects, and an independent per-project limit.
+
 When billing begins, egress (data a function sends out) will count toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
 
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
 ### AI Gateway
 
-Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans (Launch and Scale) during the beta.
+Neon AI Gateway provides access to foundation models from OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can access all available models.
 
-Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup.
+Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 
-See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
+See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for pricing details, buying credits, and usage limits.
 
 ### Private network transfer
 
@@ -599,7 +601,7 @@ Only available on Scale: $0.01/GB, bidirectional, between Neon and private netwo
 </FaqItem>
 
 <FaqItem question="What are the limits and quotas for the Free plan?">
-The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">

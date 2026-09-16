@@ -1,6 +1,6 @@
 ---
 title: Zero downtime schema migrations with pgroll
-subtitle: A comprehensive guide to using pgroll for safe, reversible Postgres migrations
+subtitle: A guide to using pgroll for safe, reversible Postgres migrations
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-06-30T00:00:00.000Z'
@@ -114,7 +114,7 @@ This abstracts the schema's structure. For example, when you rename a column, th
 
 ## Getting started
 
-Now that you understand the basics, let's dive into using `pgroll` for schema migrations in a Lakebase Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
+Now that you understand the basics, let's use `pgroll` for schema migrations in a Lakebase Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
 
 ### Prerequisites
 
@@ -394,7 +394,7 @@ This command removes the new version schema and all temporary structures, revert
 
 ## Integrating `pgroll` into your workflow
 
-`pgroll` is designed to fit seamlessly into modern development practices, including workflows with ORMs and CI/CD pipelines.
+`pgroll` is designed to fit into modern development practices, including workflows with ORMs and CI/CD pipelines.
 
 ### Generating migrations with ORMs
 
@@ -425,7 +425,7 @@ A typical workflow with Drizzle ORM and `pgroll` involves the following steps:
     **Crucially, review the output YAML.** For any breaking changes, you will likely need to manually provide the correct `up` and `down` SQL expression to handle data backfilling.
 
     <Admonition type="important" title="Manual review required">
-    The `convert` command is a powerful starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file.
+    The `convert` command is a starting point, but you may need to manually edit the output. For complex changes, `pgroll` often creates `TODO` markers for `up`/`down` expressions that it cannot infer automatically. Always review and complete the generated migration file.
     </Admonition>
 
 4.  **Start the migration:** Apply the migration to your database using the `start` command. This creates the new schema version alongside the old one without causing downtime.
@@ -472,10 +472,10 @@ You should then use a tool like `pg_dump --schema-only` to capture your current 
 `pgroll` migrations consist of a list of declarative operations. Below are a few common examples.
 
 <Admonition type="note" title="Refer to the Official Documentation">
-The following examples showcase some of the most common use cases, but `pgroll`'s capabilities are far more extensive. It provides a comprehensive suite of declarative operations for fine-grained schema control, including:
+The following examples showcase some of the most common use cases, but `pgroll`'s capabilities are far more extensive. It provides a set of declarative operations for fine-grained schema control, including:
 
 - **Table Management:** `create_table`, `drop_table`, and `rename_table`.
-- **Column Manipulation:** `add_column`, `drop_column`, and a powerful `alter_column` operation for changing types, nullability, defaults, and comments.
+- **Column Manipulation:** `add_column`, `drop_column`, and an `alter_column` operation for changing types, nullability, defaults, and comments.
 - **Indexes and Constraints:** Full lifecycle management for indexes and constraints, including `create_index`, `drop_index`, `create_constraint`, `drop_constraint`, and `rename_constraint`.
 - **Raw SQL Escape Hatch:** An `sql` operation for executing custom DDL or handling advanced scenarios not covered by the declarative operations.
 

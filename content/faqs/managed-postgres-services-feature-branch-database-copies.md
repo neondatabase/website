@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?"
-description: "Lakebase Postgres on Neon supports instant branching. The lakebase architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
+description: "Lakebase Postgres on Neon supports instant branching. The Lakebase Postgres architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
 date: 2026-04-24
 slug: managed-postgres-services-feature-branch-database-copies
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-services-full-database-copy-storage-costs
 ---
 
-Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because the lakebase architecture separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
+Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because the Lakebase Postgres architecture separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
 
 ## How branches and expiration work together
 
@@ -45,14 +45,14 @@ For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs
 | Provider           | Per-branch database                                         | Auto-cleanup                                                                       |
 | ------------------ | ----------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Neon               | Copy-on-write branch, metadata-only create                  | TTL via `expires_at` (1 hour to 30 days)                                           |
-| Supabase           | Preview branch per PR, full project (DB, Auth, Storage)     | Branch deleted when PR closes                                                      |
-| Aurora PostgreSQL  | Aurora clone, copy-on-write at the storage layer            | No built-in TTL; up to 15 copy-on-write clones before the next becomes a full copy |
-| RDS for PostgreSQL | No native per-branch copy. Restore-from-snapshot or pg_dump | Manual cleanup                                                                     |
+| Supabase           | Preview branch per PR, full project (database, Auth, Storage)     | Branch deleted when PR closes                                                      |
+| Aurora Postgres  | Aurora clone, copy-on-write at the storage layer            | No built-in TTL; up to 15 copy-on-write clones before the next becomes a full copy |
+| RDS for Postgres | No native per-branch copy. Restore-from-snapshot or pg_dump | Manual cleanup                                                                     |
 
 Supabase ties preview branches to GitHub pull requests. Each branch is a full Supabase project with its own database, Auth, and Storage, and is removed when the PR closes. See [Supabase branching](https://supabase.com/docs/guides/deployment/branching).
 
 Aurora cloning also uses copy-on-write, so the clone initially shares pages with the source and only diverges on writes. Aurora caps copy-on-write clones at 15 per source cluster before falling back to a full copy, and has no built-in expiration. See [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html).
 
-RDS for PostgreSQL doesn't offer copy-on-write clones. To produce a per-branch database you either restore from an automated snapshot or replay a `pg_dump`, both of which take time proportional to data size.
+RDS for Postgres doesn't offer copy-on-write clones. To produce a per-branch database you either restore from an automated snapshot or replay a `pg_dump`, both of which take time proportional to data size.
 
 <CTA title="Try branching for free" description="The Free plan includes 10 branches per project so you can wire branching into a CI pipeline before paying anything." buttonText="Start on Neon" buttonUrl="https://console.neon.tech/signup" />

@@ -47,7 +47,7 @@ In a GitHub Actions step:
 
 See the [GitHub Actions guide](/docs/guides/branching-github-actions) for the full setup, including a cleanup workflow that deletes the branch when the PR closes.
 
-## Why this works on the lakebase architecture
+## Why this works on Lakebase Postgres
 
 Branches are cheap because storage is versioned. A new branch records a pointer to the parent's state and only stores the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch doesn't accrue CU-hours. You still pay for any storage delta on the branch.
 
@@ -61,7 +61,7 @@ For other providers, the [Neon API](/docs/reference/api) is the integration poin
 
 - **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) ties preview branches directly to GitHub pull requests through the [Supabase GitHub integration](https://supabase.com/docs/guides/deployment/branching/github-integration). Migrations in your `supabase/migrations/` directory run automatically when the branch is created. Preview branches don't receive production data; they're seeded from `seed.sql`. Each branch is a separate compute add-on billed [from about $0.01344/hour](https://supabase.com/docs/guides/platform/manage-your-usage/branching) for its lifetime.
 
-- **Amazon Aurora / RDS for PostgreSQL.** No built-in PR integration. You typically script the workflow with Terraform, AWS CDK, or Lambda functions that create snapshots, restore them to fresh instances or [Aurora clones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), and wire connection strings into preview deployments. Aurora clones share storage; RDS snapshot-restore copies the dataset.
+- **Amazon Aurora / RDS for Postgres.** No built-in PR integration. You typically script the workflow with Terraform, AWS CDK, or Lambda functions that create snapshots, restore them to fresh instances or [Aurora clones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), and wire connection strings into preview deployments. Aurora clones share storage; RDS snapshot-restore copies the dataset.
 
 Neon's GitHub Action, [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), and the [`@neondatabase/serverless`](/docs/serverless/serverless-driver) driver are the parts of the system that make per-PR Postgres simple to wire in. Branches include parent data by default, and compute scales to zero when the preview deploy goes idle.
 

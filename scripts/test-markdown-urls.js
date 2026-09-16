@@ -51,8 +51,8 @@
 // - Matches isAIAgentRequest() in src/utils/ai-agent-detection.js: we test text/markdown,
 //   text/plain, application/json (no text/html in Accept), axios UA, and Claude UA — not
 //   every UA pattern (got, perplexity, etc.) or application/xml Accept alone.
-// - Root / and /home: only spot-check that markdown is not served for negotiated requests;
-//   login redirects are not exercised.
+// - Root / and /home: assert index.md markdown is served to agents (Accept: markdown / agent
+//   UA) and HTML to browsers; login redirects for /home are not exercised.
 // - Changelog entry date is pinned; update if that file is removed from content/changelog/.
 // - Top-level hub .md URLs (/guides.md, /branching.md): dot-md tests require markdown 404
 //   (md-404). Fails on hosts without middleware + rewrite fixes for those paths.
@@ -639,21 +639,67 @@ function buildTests() {
     { note: 'should NOT serve markdown' }
   );
 
-  // ── 8. Non-content routes ─────────────────────────────────────────────
+  // ── 8. Homepage (index.md) — negotiated markdown for agents, HTML for browsers ──
+  // getMarkdownPath maps '', 'home', 'index.md' → /index.md (src/utils/ai-agent-detection.js).
+  // The hand-written public/index.md is served to agents at / and /home; browsers get the
+  // marketing homepage HTML. Not the docs markdown pipeline, but it sets x-content-source: markdown.
 
+  // Browser: the HTML homepage, never index.md markdown.
   add(
-    'Non-docs route',
+    'Homepage',
     '/',
-    'accept-md',
+    'browser',
     [
-      (r) => {
-        if (r.headers.get('x-content-source') === 'markdown')
-          return 'root URL must not use docs markdown pipeline';
-        return null;
-      },
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+      (r) =>
+        r.headers.get('x-content-source') === 'markdown'
+          ? 'browser must not get markdown at /'
+          : null,
     ],
-    { note: 'homepage is not a CONTENT_ROUTE' }
+    { note: 'browser gets the HTML homepage, not index.md' }
   );
+
+  // Agents (Accept: markdown or agent UA) and the /home alias: serve public/index.md.
+  for (const [homePath, homeMode] of [
+    ['/', 'accept-md'],
+    ['/', 'agent-ua'],
+    ['/home', 'accept-md'],
+    ['/home', 'agent-ua'],
+  ]) {
+    add(
+      'Homepage',
+      homePath,
+      homeMode,
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectContentType(r.contentType, 'text/markdown'),
+        (r) => expectMarkdownBody(r.body),
+        (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+        (r) => expectHeader(r.headers, 'vary', 'Accept'),
+      ],
+      {
+        spotCheck: (r) => expectBodyContains(r.body, 'Neon', true),
+        note: 'agent / markdown client gets public/index.md',
+      }
+    );
+  }
+
+  // /index.md is a real static file in public/ (served as text/markdown, no agent detection).
+  add(
+    'Homepage',
+    '/index.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+    ],
+    { spotCheck: (r) => expectBodyContains(r.body, 'Neon', true), note: 'static file in public/' }
+  );
+
+  // ── 8b. Other non-content routes ──────────────────────────────────────
 
   const nonContentRoutes = ['/about'];
 
@@ -882,6 +928,23 @@ function buildTests() {
       },
     ],
     { note: 'pitfall: agent UA on bare slug gets HTML/404; agents must request /blog/[slug].md' }
+  );
+
+  // A post published after the blog moved into this repo. The pinned slug above
+  // is an older post that proves the mechanism; this proves recent posts are
+  // served too (catches a source that only leaves new posts 404ing). Update the
+  // slug if this post is removed.
+  add(
+    'Blog post .md (recent)',
+    '/blog/inside-lubots-database-per-tenant-architecture.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+      (r) => expectMarkdownBody(r.body),
+    ],
+    { note: 'recent post (published after the blog moved in-repo)' }
   );
 
   // ── 9b. Non-docs marketing page (stays HTML for agents / Accept: markdown)
@@ -1119,15 +1182,15 @@ function buildTests() {
 
   // ── 11. redirectFrom for .md URLs ─────────────────────────────────────
   // A moved doc's .md URL must 308 to the target .md, matching the HTML redirect
-  // (see src/proxy.js). /docs/cli/login is a redirectFrom of content/docs/cli/auth.md.
+  // (see src/proxy.js). /docs/cli/auth is a redirectFrom of content/docs/cli/login.md.
 
   add(
     'redirectFrom .md',
-    '/docs/cli/login.md',
+    '/docs/cli/auth.md',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth.md'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login.md'),
     ],
     { note: 'redirectFrom source .md → 308 to target .md' }
   );
@@ -1136,11 +1199,11 @@ function buildTests() {
   // variant did not displace the original redirect).
   add(
     'redirectFrom HTML',
-    '/docs/cli/login',
+    '/docs/cli/auth',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login'),
     ],
     { note: 'redirectFrom source → 308 to target' }
   );

@@ -19,7 +19,7 @@ If your CI pipeline or test runner needs a fresh Postgres database for every job
 
 A traditional managed Postgres provider creates a new database by spinning up a VM, attaching storage, and initializing a Postgres instance. That takes minutes.
 
-The lakebase architecture decouples storage from compute. Creating a [branch](/docs/introduction/branching) is a metadata operation: the API records a new branch pointing to existing storage pages and provisions a compute endpoint. The compute is ready within seconds, and the connection string is returned in the API response.
+The Lakebase Postgres architecture decouples storage from compute. Creating a [branch](/docs/introduction/branching) is a metadata operation: the API records a new branch pointing to existing storage pages and provisions a compute endpoint. The compute is ready within seconds, and the connection string is returned in the API response.
 
 ## Provision a database via API
 
@@ -35,7 +35,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches" \
 
 The response includes the branch ID and a connection string. The first connection wakes the compute in a few hundred milliseconds.
 
-For CI specifically, see [Branching with GitHub Actions](/docs/guides/branching-github-actions) for a turnkey setup.
+For CI specifically, see [Branching with GitHub Actions](/docs/guides/branching-github-actions).
 
 ## Pair it with branch expiration
 

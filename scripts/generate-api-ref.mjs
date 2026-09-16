@@ -46,7 +46,8 @@ import {
   getRawSchemaAt,
 } from './lib/spec-utils.mjs';
 import { loadTagConfig } from './lib/tag-config.mjs';
-import { buildTs, toSdkMethodName } from '../src/utils/api-ref.mjs';
+import { EXCLUDED_OPERATION_IDS } from './lib/excluded-operations.mjs';
+import { buildTs, toSdkMethodName, compareOpsForDisplay } from '../src/utils/api-ref.mjs';
 
 // Single source of truth for neonctl global flags that should not count as
 // API-specific flag mappings.
@@ -763,7 +764,7 @@ export function toNavYaml(allOps) {
     lines.push(`- title: ${JSON.stringify(sectionName)}`);
     lines.push(`  slug: reference/api/${tag}`);
     lines.push('  items:');
-    const sorted = [...ops].sort((a, b) => (a.deprecated ? 1 : 0) - (b.deprecated ? 1 : 0));
+    const sorted = [...ops].sort(compareOpsForDisplay);
     for (const op of sorted) {
       lines.push(`    - title: ${JSON.stringify(op.summary)}`);
       lines.push(`      slug: reference/api/${op.tag}/${op.id}`);
@@ -1312,6 +1313,9 @@ async function main() {
     for (const method of METHODS) {
       const op = pathItem[method];
       if (!op?.operationId) continue;
+      // Temporary manual override (scripts/lib/excluded-operations.mjs): hide
+      // these ops from every generated output. Spec tracking is unaffected.
+      if (EXCLUDED_OPERATION_IDS.has(op.operationId)) continue;
 
       const opData = buildOperationData(
         pathStr,
@@ -1338,6 +1342,11 @@ async function main() {
       opCount++;
     }
   }
+
+  // Alphabetize each tag's operations for every downstream listing (llms.txt,
+  // llms-full.txt, api.md, per-tag markdown). Sidebar order comes from toNavYaml,
+  // which sorts the same way.
+  for (const ops of Object.values(tagOps)) ops.sort(compareOpsForDisplay);
 
   process.stderr.write(`Generated ${opCount} operations.\n`);
 

@@ -15,9 +15,9 @@ nextLink:
 
 Neon bills you for active compute time in CU-hours, not provisioned instance size. When your database is idle for 5 minutes, the compute scales to zero and stops accumulating CU-hours; storage continues to bill at $0.35/GB-month. When a query comes in, the compute resumes in a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
 
-## How Neon's billing actually works
+## How Neon's billing works
 
-Compute is the largest variable on most bills, and Neon measures it in CU-hours. Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and SSD. The formula is simple:
+Compute is the largest variable on most bills, and Neon measures it in CU-hours. Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and SSD. The formula:
 
 ```text
 compute size × hours running = CU-hours
@@ -32,9 +32,9 @@ Rates on the paid plans:
 
 Storage is billed separately at $0.35/GB-month. There's no monthly minimum, and invoices under $0.50 aren't collected ([Plans](/docs/introduction/plans#price)).
 
-## The scale-to-zero piece
+## How scale-to-zero works
 
-The reason Neon can charge per-use for compute is that the lakebase architecture decouples compute from storage. Storage lives in a log-structured layer that's always available. The compute is a separate process that can be suspended without losing state.
+The reason Neon can charge per-use for compute is that the Lakebase Postgres architecture decouples compute from storage. Storage lives in a log-structured layer that's always available. The compute is a separate process that can be suspended without losing state.
 
 After 5 minutes of inactivity, the compute is suspended. The next query reactivates it in a few hundred milliseconds. On the Free plan, scale-to-zero is fixed at 5 minutes. On Launch you can disable it. On Scale, it's configurable from 1 minute to always-on ([Scale to Zero](/docs/introduction/scale-to-zero)).
 
@@ -53,16 +53,16 @@ From the [Launch plan examples](/docs/introduction/plans#launch-plan):
 
 Total: **$2.31** for the month.
 
-A heavier workload at 250 CU-hours with 40 GB storage comes to about $48/month on Launch. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
+A heavier workload at 250 CU-hours with 40 GB of root branch storage comes to about $40.50/month on Launch, or about $48 once you add 10 GB of child branch storage and 20 GB of instant restore history. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
 
 ## Other Postgres providers with usage-based billing
 
 Pay-per-use looks different on each provider:
 
 - **Aurora Serverless v2** bills per ACU-hour and supports scaling to zero when you set min capacity to 0 ACUs. Each ACU is approximately 2 GiB of memory with corresponding CPU and networking ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)). Auto-pause is the closest analogue to Neon's scale-to-zero ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for PostgreSQL** is not usage-based. You pick a database instance class and pay the instance-hour rate even when CPU is idle.
+- **RDS for Postgres** is not usage-based. You pick a database instance class and pay the instance-hour rate even when CPU is idle.
 - **Supabase** uses a hybrid model: a monthly subscription fee (Pro starts at $25/month) plus hourly Compute Hours for each project's dedicated VM ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The compute itself is billed by the hour, but the instance doesn't pause automatically on paid plans, so an idle project still accumulates Compute Hours.
 
-Neon's Launch model has no monthly subscription, no per-project base, and active compute is the only thing that accumulates CU-hours. Storage still bills while compute is suspended.
+Neon's Launch plan has no monthly subscription, no per-project base, and active compute is the only thing that accumulates CU-hours. Storage still bills while compute is suspended.
 
 <CTA title="Pay only when you query" description="Start free, then upgrade to Launch with no monthly minimum." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

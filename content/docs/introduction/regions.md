@@ -1,19 +1,19 @@
 ---
 title: Regions
 summary: >-
-  Neon projects deploy to multiple AWS and Azure regions. The region is fixed at
-  project creation and cannot be changed afterward. Use this page to choose a
-  region close to your application server, or to find NAT gateway IP addresses
-  for outbound connection allowlists. To move data to a different region, create
-  a new project there and migrate.
+  Neon projects deploy to AWS regions. The region is fixed at project creation
+  and cannot be changed afterward. Use this page to choose a region close to your
+  application server, or to find NAT gateway IP addresses for outbound
+  connection allowlists. To move data to a different region, create a new project
+  there and migrate.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-08-27T14:53:35.933Z'
+updatedOn: '2026-09-15T18:59:15.155Z'
 ---
 
-Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
+Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
 Each Neon **project** exists in exactly one region. Your database runs in that region. **You cannot change the region** for an existing project. If you need your **data** in a different region, you **create a new Neon project** in that region and **migrate your database** there. You are not moving the project; region is fixed when the project is created.
 
@@ -31,6 +31,20 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 ## Azure regions
 
 <AzureRegionsDeprecation/>
+
+## Product availability
+
+Not every product is available in every region yet. Postgres is available in all regions listed above; the newer backend products are in beta and rolling out region by region.
+
+| Product             | Availability                                                                                                      |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Lakebase Postgres   | All regions listed above.                                                                                         |
+| Managed Better Auth | Beta. Runs in the same region as your database.                                                                   |
+| Object Storage      | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
+| Functions           | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
+| AI Gateway          | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`); requires a paid plan. |
+
+For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
 
 ## Request a region
 

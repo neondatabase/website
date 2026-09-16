@@ -45,7 +45,7 @@ Schema tools accept schema-qualified table names, such as \`crm.contacts\`. An u
 
 The \`querying\` category includes \`inspect_database\`, which runs the same 15 read-only checks as [\`neon inspect db\`](https://neon.com/docs/cli/inspect): relation and index sizes, unused indexes, sequential scans, active queries and locks, stalled queries running longer than 30 seconds, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. Some checks need [\`pg_stat_statements\`](https://neon.com/docs/extensions/pg_stat_statements) or the [\`neon\`](https://neon.com/docs/extensions/neon) extension; the tool asks before suggesting \`CREATE EXTENSION\`.
 
-**Note:** The \`observability\` tools query [Neon Functions logs](https://neon.com/docs/compute/functions/logs) and [object storage logs](https://neon.com/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS \`us-east-2\` only. Log querying returns results only for projects in a supported region. Database diagnostics via \`inspect_database\` are under \`querying\`, not \`observability\`.
+**Note:** The \`observability\` tools query [Neon Functions logs](https://neon.com/docs/compute/functions/logs) and [object storage logs](https://neon.com/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS US East (Ohio) (\`aws-us-east-2\`) and AWS Europe (Frankfurt) (\`aws-eu-central-1\`). Support is expanding toward all regions. Log querying returns results only for projects in a supported region. Database diagnostics via \`inspect_database\` are under \`querying\`, not \`observability\`.
 
 ### LinkAPIKey
 

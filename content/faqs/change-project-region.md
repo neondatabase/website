@@ -50,11 +50,11 @@ Use the [unpooled](/docs/reference/glossary#unpooled-connection-string) connecti
 If `pg_dump` plus `pg_restore` would mean more downtime than you can accept, use logical replication to stream changes from the old project to the new one and cut over at the end. Neon's [Import Data Assistant](/docs/import/import-data-assistant) automates this for databases under 10 GB. See [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) for the full set of options.
 </Admonition>
 
-## What about branches in another region?
+## Branches in another region
 
 Branches inherit the project's region. You cannot create a branch in a different region than the project. If you need data in two regions for latency reasons, run two separate projects and use logical replication between them, or run a read replica in the same region.
 
-## What about Azure?
+## Azure regions
 
 All [Neon Azure regions are deprecated](/docs/introduction/regions#azure-regions). If you need to keep Postgres on Azure for residency reasons, look at [Databricks Lakebase](/docs/guides/migrate-neon-to-lakebase), which supports Azure regions.
 

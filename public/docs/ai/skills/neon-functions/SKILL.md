@@ -27,7 +27,7 @@ npx skills add neondatabase/agent-skills --skill neon
 
 # Neon Functions
 
-This is a public beta feature and only available in `us-east-2`.
+This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
 
 Neon Functions are long-running Node.js HTTP handlers deployed onto a Neon branch. Each function gets a public HTTPS URL, runs in the same region as your database, and — if the branch has Postgres — gets `DATABASE_URL` injected automatically. You deploy and manage them through the same Neon CLI, `neon.ts`, and API you already use.
 
@@ -43,7 +43,7 @@ Reach for Neon Functions when the workload is a request/response handler that be
 - **A backend that branches with your data.** Each branch runs its own version of the function at its own URL, against its own isolated database (and storage, and gateway) state. Preview deployments, CI, and dev environments each get a self-contained backend — deploying to a child never affects the parent.
 - **Webhooks, bots, and post-response work.** Webhook handlers that fan out into multiple DB writes, Discord/WebSocket bots, and fire-and-forget follow-ups via `waitUntil` (analytics, audit logs) all fit.
 
-If the workload is a pure static site, a cron/background job that needs its own lifecycle and cancellation, or something that must run outside `us-east-2` today, this isn't the right tool yet (see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits) and [Availability](#availability)).
+If the workload is a pure static site, a cron/background job that needs its own lifecycle and cancellation, or something that must run outside the supported regions (`us-east-2`, `eu-central-1`) today, this isn't the right tool yet (see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits) and [Availability](#availability)).
 
 ## What It Does
 
@@ -55,7 +55,7 @@ If the workload is a pure static site, a cron/background job that needs its own 
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Functions is a public beta feature available in the `us-east-2` region. Confirm the user's Neon project is in `us-east-2`. Functions usage isn't billed during the public beta.
+Check this precondition before setting anything up: Neon Functions is a public beta feature currently available in `us-east-2` and `eu-central-1`. Confirm the user's Neon project is in one of these regions. Functions usage isn't billed during the public beta.
 
 ## Architecture: Where Functions Fit
 

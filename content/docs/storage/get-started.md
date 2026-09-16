@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-09-11T02:29:56.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -21,7 +21,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 To follow this guide, you need:
 
-- A Neon project in the AWS `us-east-2` region
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
 - The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
 - A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
@@ -93,11 +93,17 @@ export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2
 export AWS_REGION=us-east-2
 ```
 
-A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in the AWS `us-east-2` region.
+A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in a supported region: AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`).
 
 ## Create a credential
 
-Use the Neon API to create a credential with storage access:
+Create a credential with storage access. With the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope storage:read --scope storage:write
+```
+
+Or use the Neon API:
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \

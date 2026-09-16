@@ -131,7 +131,7 @@ A key feature of Managed Better Auth is the automatic creation and maintenance o
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Managed Better Auth.
+This step makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
@@ -333,7 +333,7 @@ The code above does the following:
 
 2. **Database integration**
    - Connects to a **Lakebase Postgres database** using the `@neondatabase/serverless` client.
-   - Utilizes **Drizzle ORM** for database operations.
+   - Uses **Drizzle ORM** for database operations.
    - Uses the `journalEntries` schema to store and retrieve user journal data.
 
 3. **Authentication middleware**

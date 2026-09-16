@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -17,6 +17,12 @@ In this guide, you’ll build a secure LLM proxy that solves all of this. You’
 - **Per-user rate limiting** backed by Postgres or Redis.
 - **Streaming AI responses** through the [Neon AI Gateway](/docs/ai-gateway/overview), without ever exposing provider keys to the frontend
 - A **React frontend** with [Managed Better Auth](/docs/auth/overview) for sign-in and the [Vercel AI SDK UI](https://ai-sdk.dev/docs/ai-sdk-ui/overview) for real-time chat
+
+<CopyPrompt
+  src="/prompts/llm-proxy-neon-functions-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Architecture overview
 
@@ -50,7 +56,7 @@ Before starting, ensure you have:
 
 1. **Node.js**: Version `20` or higher installed. Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 
@@ -77,7 +83,7 @@ neon link
 You will be prompted to select your organization. After selecting your organization, choose an existing Neon project if you already have one, or create a new project named `llm-proxy-demo`.
 
 <Admonition type="note">
-Ensure you select the **AWS US East 2 (Ohio)** region when creating your Neon project, as Neon Functions are currently only available in this region during Beta.
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
 </Admonition>
 
 ```bash
@@ -129,7 +135,7 @@ npm install --save-dev esbuild @types/node typescript dotenv
 </Tabs>
 
 - `hono`: A lightweight web framework for routing and middleware.
-- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, allowing unified access to LLMs.
+- `@neon/ai-sdk-provider`: Neon's provider for the Vercel AI SDK, giving you a single interface to LLMs.
 - `pg`: PostgreSQL client for Node.js.
 - `jose`: A lightweight module for cryptographic JWT verification using JWKS endpoints.
 - `@upstash/ratelimit` & `@upstash/redis`: Redis driver if choosing Redis for rate limiting.

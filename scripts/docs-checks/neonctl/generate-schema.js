@@ -165,6 +165,24 @@ function resolveSpecObject(expr, consts) {
       return resolveSpecObject(prop.initializer, consts);
     }
   }
+  // Dot access into a resolvable const object, e.g. `envFlag.env` where
+  // `envFlag = { env: { type, describe } }` is pooled in `consts`. Mirrors the
+  // bracket-access branch above; needed because checkout.ts redefines its `env`
+  // option as `{ ...envFlag.env, describe: envFlag.env.describe + '…' }`, so both
+  // the inner spread and the describe concat resolve through this.
+  if (
+    ts.isPropertyAccessExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    consts &&
+    consts.has(e.expression.text)
+  ) {
+    const container = consts.get(e.expression.text);
+    if (!ts.isObjectLiteralExpression(container)) return undefined;
+    const prop = getProp(container, e.name.text);
+    if (prop && ts.isPropertyAssignment(prop)) {
+      return resolveSpecObject(prop.initializer, consts);
+    }
+  }
   return undefined;
 }
 
@@ -446,6 +464,17 @@ function parseCommandCall(callArgs, consts) {
   if (ts.isStringLiteral(first) || ts.isNoSubstitutionTemplateLiteral(first)) {
     commandString = first.text;
     // Second arg is the description; third is the builder function.
+    describe = resolveStringValue(callArgs[1], consts);
+    builderNode = callArgs[2];
+  } else if (ts.isArrayLiteralExpression(first)) {
+    // Array form: `.command([name, ...aliases], desc, builder, handler)`.
+    // The first element is the command (may carry positionals, e.g.
+    // `'register <domain>'`); the rest are aliases.
+    const arr = arrayLiteralStrings(first);
+    if (arr && arr.length) {
+      commandString = arr[0];
+      aliases = arr.slice(1);
+    }
     describe = resolveStringValue(callArgs[1], consts);
     builderNode = callArgs[2];
   } else if (ts.isObjectLiteralExpression(first)) {

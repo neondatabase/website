@@ -18,6 +18,7 @@ const PROVIDER_ORDER = [
   'zhipuai',
   'thinkingmachines',
   'moonshotai',
+  'xai',
 ];
 
 const PROVIDER_LABELS = {
@@ -29,6 +30,7 @@ const PROVIDER_LABELS = {
   zhipuai: 'Zhipu AI',
   thinkingmachines: 'Thinking Machines',
   moonshotai: 'Moonshot AI',
+  xai: 'xAI',
 };
 
 const MODEL_CATALOG_NOTE =
