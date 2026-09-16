@@ -49,7 +49,7 @@ const ScaleStat = () => (
       <strong className="block text-[98px] leading-none font-normal tracking-extra-tight text-white md:text-[5rem] sm:text-[4rem]">
         70%
       </strong>
-      <p className="mt-[18px] max-w-[235px] text-xl leading-tight tracking-extra-tight text-gray-new-80 md:mt-4 md:text-lg sm:max-w-[220px] sm:text-base">
+      <p className="mt-[18px] max-w-70 text-xl leading-tight tracking-extra-tight text-pretty text-gray-new-80 md:mt-4 md:max-w-3xs md:text-lg sm:max-w-56 sm:text-base">
         Fortune 500 Enterprises build on Databricks Platform
       </p>
     </div>
@@ -77,7 +77,8 @@ const Scale = () => (
           { text: 'WHERE THE FORTUNE', width: 672 },
           { text: '500 SCALES', width: 544 },
         ]}
-        description="Enterprises run critical workloads on Lakebase Postgres"
+        description="Enterprises run critical workloads on Lakebase Postgres."
+        descriptionClassName="max-w-[440px] lg:max-w-[400px] md:max-w-[360px] sm:max-w-[290px]"
       />
     </Container>
 

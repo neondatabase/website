@@ -131,7 +131,7 @@ const StartupLogos = ({ isActive, timelineElapsed }) => {
 
   return (
     <div
-      className="pointer-events-none absolute top-0 left-0 z-0 h-[939px] w-[1056px] origin-top select-none xl:left-1/2 xl:-translate-x-1/2 xl:scale-[0.82] lg:scale-90 md:scale-[0.68] sm:-top-[41px] sm:scale-[0.54] xs:scale-[0.35]"
+      className="pointer-events-none absolute top-0 left-0 z-0 h-[939px] w-[1056px] origin-top select-none xl:left-1/2 xl:-translate-x-1/2 xl:scale-[0.82] lg:scale-90 md:scale-[0.68] sm:top-0 sm:scale-[0.54] xs:top-10 xs:scale-[0.35]"
       aria-hidden="true"
     >
       <div
@@ -167,21 +167,6 @@ const StartupLogos = ({ isActive, timelineElapsed }) => {
           </div>
         ))}
       </div>
-
-      <span
-        className="absolute top-[124px] left-0 z-[1] h-[815px] w-[1024px] bg-black-pure blur-[77px]"
-        style={{
-          WebkitMaskImage: `url(${LOGO_ROOT}/startup-logos-noise-mask.png)`,
-          WebkitMaskRepeat: 'no-repeat',
-          WebkitMaskSize: '1034px 881px',
-          maskImage: `url(${LOGO_ROOT}/startup-logos-noise-mask.png)`,
-          maskMode: 'alpha',
-          maskRepeat: 'no-repeat',
-          maskSize: '1034px 881px',
-        }}
-      />
-
-      <span className="absolute top-[800px] left-[3px] z-[2] h-[121px] w-[1021px] bg-linear-to-b from-transparent to-black-pure" />
     </div>
   );
 };

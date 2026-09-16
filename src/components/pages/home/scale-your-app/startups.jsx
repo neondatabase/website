@@ -16,6 +16,7 @@ const Startups = () => (
             { text: 'START', width: 384 },
           ]}
           description="From Bootstrapped to VC Funded, Startups Ship Faster on Neon."
+          descriptionClassName="max-w-[440px] lg:max-w-[400px] md:max-w-[360px] sm:max-w-[290px]"
         />
 
         <StartupExperience />
