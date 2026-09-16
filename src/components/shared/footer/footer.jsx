@@ -1,14 +1,16 @@
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
-import Logo from 'components/shared/logo';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { cn } from 'utils/cn';
 
+import databricksLogoDark from './images/databricks-logo-dark.svg';
+import databricksLogoLight from './images/databricks-logo-light.svg';
 import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
@@ -16,7 +18,20 @@ const Footer = ({ hasThemesSupport = false }) => (
     <Container className="flex justify-between gap-x-10 py-12 3xl:py-8 sm:py-5" size="1920">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
-          <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
+          <Image
+            className="dark:hidden sm:h-6 sm:w-auto"
+            src={databricksLogoLight}
+            width={177}
+            height={28}
+            alt="Databricks"
+          />
+          <Image
+            className="hidden dark:block sm:h-6 sm:w-auto"
+            src={databricksLogoDark}
+            width={177}
+            height={28}
+            alt="Databricks"
+          />
           <span
             className={cn(
               'mt-3.5 block text-[13px] leading-none tracking-extra-tight',
