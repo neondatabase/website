@@ -33,7 +33,7 @@ export default {
   autoscalingReport: '/autoscaling-report',
   tools: '/tools',
   toolsUpgradeAssessment: '/tools/postgres-major-version-assessment/assess',
-  toolsMigration: '/tools/migrate',
+  toolsMigration: '/tools/postgres-migration',
 
   // Docs
   docs: '/docs',

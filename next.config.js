@@ -2845,12 +2845,13 @@ const defaultConfig = {
             'https://neon-postgres-upgrade-assessment.vercel.app/tools/postgres-major-version-assessment/:path*',
         },
         {
-          source: '/tools/migrate',
-          destination: 'https://postgres-migration-assistant.vercel.app/tools/migrate',
+          source: '/tools/postgres-migration',
+          destination: 'https://postgres-migration-assistant.vercel.app/tools/postgres-migration',
         },
         {
-          source: '/tools/migrate/:path*',
-          destination: 'https://postgres-migration-assistant.vercel.app/tools/migrate/:path*',
+          source: '/tools/postgres-migration/:path*',
+          destination:
+            'https://postgres-migration-assistant.vercel.app/tools/postgres-migration/:path*',
         },
         {
           source: '/ai-chat',
