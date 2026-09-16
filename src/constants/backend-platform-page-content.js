@@ -603,8 +603,8 @@ const sharedBackendPlatformContent = {
   cta: {
     title: 'Talk to us.',
     description: 'Fill out a short form and we’ll get back to you within a few business days.',
-    label: 'Get started',
-    buttonText: 'Apply now',
+    label: 'Get help',
+    buttonText: 'Contact us',
     linkKey: 'contactSales',
   },
 };

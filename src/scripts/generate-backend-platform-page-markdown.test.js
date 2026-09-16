@@ -70,7 +70,7 @@ describe('backend platform page Markdown', () => {
     expect(markdown).toContain('### Declared in `neon.ts`');
     expect(markdown).toContain('## Your questions, answered');
     expect(markdown).toContain('## Built for agents and the developers behind them.');
-    expect(markdown).toContain('[Apply now](https://neon.com/contact-sales)');
+    expect(markdown).toContain('[Contact us](https://neon.com/contact-sales)');
     expect(markdown).not.toMatch(/<\/?(?:p|strong|code)>/);
   });
 
