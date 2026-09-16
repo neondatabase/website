@@ -4,7 +4,7 @@ subtitle: 'Learn how to give your Mastra AI agents long-term memory by integrati
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 AI agents are increasingly used to create conversational assistants, customer support bots, and productivity tools. A common limitation, however, is their lack of memory. Most agents are stateless, meaning each interaction begins without awareness of past conversations or user preferences. Without the ability to recall prior exchanges, agents struggle to manage multi-turn dialogues or maintain continuity across sessions.
@@ -28,7 +28,7 @@ Before you begin, ensure you have the following:
 You need a Lakebase Postgres database to store your agent's memory. Mastra will automatically create the necessary tables for you on its first interaction.
 
 1. Log in to the [Neon Console](https://console.neon.tech) and select your project.
-2. Navigate to the **Dashboard** and click on the **Connect** button to view your connection details.
+2. Click **Connect** in the Console nav to view your connection details.
 3. Copy the Postgres connection string (it should look like `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require&channel_binding=require`).
 
 ![Connection details in Neon Console](/docs/connect/connection_details.png)

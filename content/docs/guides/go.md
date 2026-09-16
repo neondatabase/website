@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -76,7 +76,7 @@ For your Go project, create a project directory, initialize a Go module, and add
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
     ![Connection modal](/docs/connect/connection_details.png)
 3.  Copy the connection string, which includes your password.
 4.  Add the connection string to your `.env` file as shown below.

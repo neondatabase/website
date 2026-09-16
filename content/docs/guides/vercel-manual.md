@@ -10,7 +10,7 @@ summary: >-
   monorepo, or any setup requiring direct control over branch naming, seeding, and
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <InfoBlock>
@@ -50,7 +50,7 @@ If you simply want Neon and Vercel with minimal setup, stick to the managed inte
 
 ## Connection steps
 
-1. Copy the connection string from the [Neon Console](https://console.neon.tech). Click **Connect** on your Project Dashboard, select the branch, role, and database you want, then copy the _Connection string_.
+1. Copy the connection string from the [Neon Console](https://console.neon.tech). Click **Connect** in the Console nav, select the branch, role, and database you want, then copy the _Connection string_.
 
    ![Neon connection details modal](/docs/connect/connection_details.png)
 

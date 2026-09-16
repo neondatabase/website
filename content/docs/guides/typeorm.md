@@ -9,7 +9,7 @@ summary: >-
   connections. To prevent timeouts from Lakebase Postgres idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
@@ -25,7 +25,7 @@ TypeORM is an open-source ORM that lets you to manage and interact with your dat
 
 To establish a basic connection from TypeORM to a database on Neon, perform the following steps:
 
-1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button in the Console nav. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
    ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
@@ -65,7 +65,7 @@ Serverless functions can require a large number of database connections as deman
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your database** modal, which you can access by clicking **Connect** on your **Project Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
+A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your branch** modal, which you can access by clicking **Connect** in the Console nav. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
 
 <Admonition type="important">
 Use a pooled connection string for your application at runtime, but use a direct (non-pooled) connection string when running TypeORM migrations. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that migration tools rely on, so running migrations over a pooled connection can lead to errors. See [Connection pooling](/docs/connect/connection-pooling).

@@ -11,7 +11,7 @@ summary: >-
   covers Auth0 application configuration, callback URLs, session handling with
   UserProvider, and Next.js server actions for inserting and deleting user data.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -87,7 +87,7 @@ Now, we can start building the application.
 
 ### Retrieve your Neon database connection string
 
-You can find your connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
+You can find your connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

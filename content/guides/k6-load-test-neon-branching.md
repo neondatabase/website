@@ -4,7 +4,7 @@ subtitle: 'Learn how to fork your production database into an isolated Neon bran
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-26T00:00:00.000Z'
-updatedOn: '2026-04-28T06:24:08.000Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Performance testing is one of the hardest parts of shipping applications. Teams often turn to staging environments for testing, but these rarely reflect the realities of production. Staging databases are smaller, cleaner, and more predictable. Queries that seem instantaneous in staging can become serious bottlenecks when executed against millions of rows in production.
@@ -87,7 +87,7 @@ If you are following along with your own application, you can skip this step. Th
 For a load test to be meaningful, the database needs data. You will create a `products` table and insert 500,000 rows to simulate a production-like volume.
 
 1. Log in to the [Neon Console](https://console.neon.tech) and create a new project. Name it something like `k6-load-test`.
-2. Navigate to your Project dashboard and click on the **Connect** button to view your connection details.
+2. Click **Connect** in the Console nav to view your connection details.
    ![Connection details in Neon Console](/docs/connect/connection_details.png)
 
 3. Create a `.env` file in your project directory and add the connection string by copying it from the Neon Console:

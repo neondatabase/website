@@ -4,7 +4,7 @@ subtitle: 'Learn how to build resilient, fault-tolerant AI agents that automatic
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 AI agents are evolving beyond simple chat interfaces. Today’s systems can research topics, orchestrate APIs, and coordinate multi‑step workflows that resemble full applications rather than single prompts. This shift opens the door to agents that handle increasingly complex tasks in production environments.
@@ -45,7 +45,7 @@ Before you begin, ensure you have the following:
 You need a Lakebase Postgres database to store DBOS execution state:
 
 1. Log in to the [Neon Console](https://console.neon.tech) and create a new project.
-2. Navigate to your Project dashboard and click on the **Connect** button to view your connection details.
+2. Click **Connect** in the Console nav to view your connection details.
    ![Connection details in Neon Console](/docs/connect/connection_details.png)
 3. Copy the Postgres connection string, it should look something like this:
 

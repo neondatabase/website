@@ -10,7 +10,7 @@ summary: >-
   distance operator to run nearest-neighbor queries. A pre-built Colab notebook
   is available for one-click setup.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -24,7 +24,7 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 ## Retrieve your database connection string
 
-Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** in the Console nav to open the **Connect to your branch** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
 ![Connection modal](/docs/connect/connection_details.png)
 

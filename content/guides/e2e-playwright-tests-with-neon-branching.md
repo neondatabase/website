@@ -30,7 +30,7 @@ By the end of this guide, you'll have a CI/CD pipeline where database-dependent 
 ## Setting up your Neon database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+2.  Copy your database connection string by clicking **Connect** in the Console nav.
 
     ![Connection modal](/docs/connect/connection_details.png)
 
