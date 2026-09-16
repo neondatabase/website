@@ -2832,6 +2832,26 @@ const defaultConfig = {
           destination:
             'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
         },
+        // Neon tools mounted under /tools/* (each app deployed with a matching
+        // basePath, so source and destination keep the prefix and assets resolve).
+        {
+          source: '/tools/postgres-major-version-assessment',
+          destination:
+            'https://neon-postgres-upgrade-assessment.vercel.app/tools/postgres-major-version-assessment',
+        },
+        {
+          source: '/tools/postgres-major-version-assessment/:path*',
+          destination:
+            'https://neon-postgres-upgrade-assessment.vercel.app/tools/postgres-major-version-assessment/:path*',
+        },
+        {
+          source: '/tools/migrate',
+          destination: 'https://postgres-migration-assistant.vercel.app/tools/migrate',
+        },
+        {
+          source: '/tools/migrate/:path*',
+          destination: 'https://postgres-migration-assistant.vercel.app/tools/migrate/:path*',
+        },
         {
           source: '/ai-chat',
           destination: '/docs/introduction#ai-chat',

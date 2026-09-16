@@ -32,6 +32,8 @@ export default {
   useCasesAI: '/use-cases/ai-agents',
   autoscalingReport: '/autoscaling-report',
   tools: '/tools',
+  toolsUpgradeAssessment: '/tools/postgres-major-version-assessment/assess',
+  toolsMigration: '/tools/migrate',
 
   // Docs
   docs: '/docs',
@@ -116,7 +118,6 @@ export default {
 
   // Other
   status: 'https://neonstatus.com',
-  labs: 'https://labs.neon.com',
   cdn: 'https://cdn.neonapi.io',
   apiReference: '/docs/reference/api',
   bugBounty: 'https://hackerone.com/neon_bbp',

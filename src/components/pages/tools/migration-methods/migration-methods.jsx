@@ -18,13 +18,13 @@ const METHODS = [
   {
     title: 'pg_dump + pg_restore',
     action: 'Start',
-    href: `${LINKS.labs}/migrate/dump-restore`,
+    href: LINKS.toolsMigration,
     docs: '/docs/postgresql/postgres-upgrade',
   },
   {
     title: 'Logical replication',
     action: 'Start',
-    href: `${LINKS.labs}/migrate/replication`,
+    href: LINKS.toolsMigration,
     docs: '/docs/guides/logical-replication-neon-to-neon',
   },
 ];
@@ -84,7 +84,7 @@ const MigrationMethods = () => {
     >
       <Container size="1344">
         <header className="max-w-256">
-          <SectionLabel theme="white">Upgrade assessment</SectionLabel>
+          <SectionLabel theme="white">Migration methods</SectionLabel>
           <h2
             className="mt-5 text-[4rem] leading-none font-normal tracking-[-0.05em] text-pretty xl:text-[3.5rem] lg:text-[3rem] md:mt-4 md:text-[2.25rem]"
             id="migration-methods-title"
