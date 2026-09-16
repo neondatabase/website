@@ -7,10 +7,8 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-09-11T02:29:56.410Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
@@ -71,7 +69,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta. Revoke credentials explicitly instead of relying on expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced. Revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 

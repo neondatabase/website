@@ -9,10 +9,8 @@ summary: >-
   `NeonAuthUIProvider` prop table, CSS import instructions for Tailwind v4 and
   non-Tailwind projects, or the `neon-auth-codemod` migration command.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Quick reference for Managed Better Auth UI components from `@neondatabase/auth-ui`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Managed Better Auth.
 

@@ -10,7 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-09-15T18:59:15.155Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -34,15 +34,15 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 
 ## Product availability
 
-Not every product is available in every region yet. Postgres is available in all regions listed above; the newer backend products are in beta and rolling out region by region.
+Not every product is available in every region yet. Postgres is available in all regions listed above; the newer backend products are rolling out region by region.
 
-| Product             | Availability                                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Lakebase Postgres   | All regions listed above.                                                                                         |
-| Managed Better Auth | Beta. Runs in the same region as your database.                                                                   |
-| Object Storage      | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
-| Functions           | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
-| AI Gateway          | Beta. AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`); requires a paid plan. |
+| Product             | Availability                                                                                                |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Lakebase Postgres   | All regions listed above.                                                                                   |
+| Managed Better Auth | Runs in the same region as your database.                                                                   |
+| Object Storage      | AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
+| Functions           | AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`).                       |
+| AI Gateway          | AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`); requires a paid plan. |
 
 For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
 

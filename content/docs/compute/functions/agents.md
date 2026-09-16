@@ -6,10 +6,8 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-09-09T19:59:14.718Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 AI agents make several model and tool calls to answer a single request, then stream the result back. That work can run for minutes, but lambda-style serverless caps execution at roughly 10 to 60 seconds, so a multi-step tool loop or an image-generation run gets cut off mid-stream.
 

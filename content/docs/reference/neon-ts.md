@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-04T11:57:36.377Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -279,8 +279,8 @@ env.postgres.databaseUrl;
 
 ## Preview services
 
-<Admonition type="info" title="Beta">
-Functions, Storage, and AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions.
+<Admonition type="info" title="Region requirements">
+Functions, Storage, and AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:

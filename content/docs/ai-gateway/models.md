@@ -7,10 +7,8 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-15T18:17:04.567Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
@@ -38,7 +36,7 @@ For full request paths and when to prefer each endpoint, see [Which endpoint to 
 
 ## Rate limits
 
-During the beta, the following limit applies per account:
+The following limit applies per account:
 
 | Limit                   | Value   |
 | ----------------------- | ------- |

@@ -9,8 +9,6 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<FeatureBetaProps feature_name="Neon Object Storage" />
-
 Every S3 request against a bucket streams a log line to the Neon Console, along with a line for any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
 
 ```text

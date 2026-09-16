@@ -8,8 +8,6 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<FeatureBetaProps feature_name="Function Triggers" />
-
 The `triggers` command manages function triggers on a branch. A trigger invokes a [Neon Function](/docs/compute/functions/overview) on a cron schedule, so you can run recurring work (a nightly report, a cleanup job, a periodic sync) without a separate scheduler. You deploy the function with [`neon functions deploy`](/docs/cli/functions), then point a trigger at it by slug.
 
 Triggers are branch-scoped. Pass `--project-id` and `--branch` to target a branch, or let the CLI resolve them from your [context file](/docs/cli/set-context). Triggers can also be inherited: a trigger created on a parent branch is visible on its child branches, where the `Inherited` column shows `true` and `source_branch_id` points to the origin branch. An inherited trigger stays disabled on the child until you enable it there with [`neon triggers enable`](#enable).

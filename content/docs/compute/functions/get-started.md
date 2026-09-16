@@ -7,10 +7,8 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
 
@@ -103,7 +101,7 @@ Create `neon.ts` at your project root. It declares your functions and is what `n
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  // preview groups features still in beta: functions, AI Gateway, and object-storage buckets.
+  // preview groups the backend features: functions, AI Gateway, and object-storage buckets.
   preview: {
     functions: {
       // The key is the function's slug:
