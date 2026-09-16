@@ -11,7 +11,7 @@ summary: >-
   and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
   Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
@@ -37,7 +37,7 @@ You'll first need to create a Neon database. Follow these steps:
     When creating your Neon project, choose a region that is geographically close to your Medusa server to minimize latency and improve overall performance of your Medusa application.
     </Admonition>
 
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+2.  Copy your database connection string by clicking **Connect** in the Console nav.
 
     <Admonition type="important">
     Use the non-pooled connection string for setup. Medusa needs it to run the initial migrations. After installation you can switch to the pooled version to improve performance.

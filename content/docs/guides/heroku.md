@@ -9,7 +9,7 @@ summary: >-
   Useful when migrating from Heroku Postgres or hosting a new Node app on
   Heroku with Neon.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
@@ -52,7 +52,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

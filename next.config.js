@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { CONTENT_ROUTES } = require('./src/constants/content');
+const { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
@@ -72,6 +72,17 @@ const defaultConfig = {
           { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
         ],
       }));
+    const generatedPageMarkdownHeaders = Object.entries(GENERATED_PAGE_MARKDOWN_PATHS).flatMap(
+      ([route, destination]) =>
+        [`/${route}.md`, destination].map((source) => ({
+          source,
+          headers: [
+            { key: 'Content-Disposition', value: 'inline' },
+            { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+            { key: 'X-Robots-Tag', value: 'noindex' },
+          ],
+        }))
+    );
 
     return [
       {
@@ -196,6 +207,7 @@ const defaultConfig = {
         ],
       },
       ...mdIndexHeaders,
+      ...generatedPageMarkdownHeaders,
     ];
   },
   async redirects() {
@@ -2781,6 +2793,14 @@ const defaultConfig = {
         // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
         { source: '/docs.md', destination: '/docs/llms.txt' },
         { source: '/blog.md', destination: '/blog/llms.txt' },
+        ...Object.entries(GENERATED_PAGE_MARKDOWN_PATHS)
+          // /auth.md is the existing Claimable Neon protocol. The Auth product
+          // page exposes its separate Markdown mirror at /md/auth-page.md.
+          .filter(([route]) => route !== 'auth')
+          .map(([route, destination]) => ({
+            source: `/${route}.md`,
+            destination,
+          })),
         // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
         // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
         ...indexRewrites,

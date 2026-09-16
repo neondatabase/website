@@ -4,7 +4,7 @@ subtitle: 'Learn how to migrate your data and applications from Tembo.io to Lake
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your service from Tembo.io to Neon, follow the steps in this guide.
@@ -107,7 +107,7 @@ This is the traditional method for Postgres migrations and offers full control. 
 
 - `psql`, `pg_dump`, and `pg_restore` client utilities installed locally. Use versions compatible with your Tembo Postgres version and Neon (Postgres 14-17). It's generally recommended to use the latest client versions.
 - Connection string or parameters for your source Tembo database.
-- Connection string for your target Neon database: You can find the connection string by clicking the **Connect** button on your Project Dashboard. It will look something like this:
+- Connection string for your target Neon database: You can find the connection string by clicking **Connect** in the Console nav. It will look something like this:
   ```bash
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```

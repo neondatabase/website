@@ -9,7 +9,7 @@ summary: >-
   Setup requires creating the replica in the Console and sharing its connection
   string.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 When you create a read replica in Neon, you gain the ability to provide read-only access to your data. Use it when you want to grant access to users, partners, or third-party applications that only need to run queries to analyze data, generate reports, or audit your database. Since no write operations are permitted on read replicas, it ensures the integrity of your data while allowing others to work with up-to-date information.
@@ -30,7 +30,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
 2. **Provide the connection string**
 
    Once the read replica is created, obtain the connection string from the Neon Console:
-   - You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. Select the branch, the database, and the role.
+   - You can find the connection details for your database by clicking the **Connect** button in the Console nav. Select the branch, the database, and the role.
    - Choose **Replica** compute under the compute settings.
    - Copy the connection string and provide it to your partner. The connection string might look something like this:
 

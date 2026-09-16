@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -67,7 +67,7 @@ If you do not have one already, create a Neon project.
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection details to it. You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Please select Node.js from the **Connection string** dropdown. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 PGHOST='[neon_hostname]'

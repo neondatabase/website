@@ -10,7 +10,7 @@ summary: >-
   seconds via the Console, CLI, or API, and scales to zero automatically after
   5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -104,7 +104,7 @@ curl --request POST \
 
 Connecting to a read replica is the same as connecting to any branch, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to connect to your read replica with connection details obtained from the Neon Console.
 
-1. Click the **Connect** button on your **Project Dashboard**. On the **Connect to your database modal**, select the branch, the database, and the role you want to connect with.
+1. Click the **Connect** button in the Console nav. On the **Connect to your branch** modal, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select the **Replica** compute.
 1. Select a **Database** and the **Role** you want to connect with.
 1. Copy the connection string. This is the information you need to connect to the read replica from your client or application.
