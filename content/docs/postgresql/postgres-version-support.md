@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy/
-updatedOn: '2026-09-16T14:04:35.775Z'
+updatedOn: '2026-09-16T14:38:23.468Z'
 ---
 
 This topic outlines [Postgres version support](#postgres-version-support).
@@ -34,8 +34,8 @@ To better understand [PostgreSQL version support on Neon](#postgres-version-supp
 
 ### PostgreSQL version numbering
 
-- The major version is indicated by the first part of the version number, such as the "16" in "16.1".
-- The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
+- The major version is indicated by the first part of the version number, such as the "18" in "18.1".
+- The minor release is indicated by the second part of the version number, such as the "1" in "18.1".
 
 ## Postgres version support
 
