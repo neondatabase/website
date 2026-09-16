@@ -13,7 +13,7 @@ summary: >-
   project and the change cannot be reverted.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -170,6 +170,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete or in a failover situation, you can switch your application over to the destination database by swapping out your source database connection details for your destination database connection details.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

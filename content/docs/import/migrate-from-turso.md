@@ -11,7 +11,7 @@ summary: >-
   supports up to 0.5 GB; larger Turso databases require a paid Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to migrate your Turso database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -82,7 +82,7 @@ You now have a `turso_export.db` file containing your data, ready for migration.
 
 ## Retrieve your Neon database connection string
 
-Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled:
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button in the Console nav. Make sure the **Connection pooling** toggle is disabled:
 
 ![Connection details modal with connection pooling disabled](/docs/connect/connection_details_without_connection_pooling.png)
 

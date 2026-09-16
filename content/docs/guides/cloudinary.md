@@ -10,7 +10,7 @@ summary: >-
   Postgres. Includes JavaScript (Hono) and Python (Flask) backend examples
   covering the /generate-signature and /save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -30,7 +30,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 ## Create a Neon project
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Cloudinary account and get credentials
 

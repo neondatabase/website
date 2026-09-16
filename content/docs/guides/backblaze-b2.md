@@ -12,7 +12,7 @@ summary: >-
   implementations in JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask,
   boto3).
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -32,7 +32,7 @@ This guide demonstrates how to integrate Backblaze B2 with Neon by storing file 
 ## Create a Neon project
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Backblaze account and B2 bucket
 

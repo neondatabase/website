@@ -10,7 +10,7 @@ summary: >-
   pg_upgrade is not supported, minor version upgrades are automatic, and
   pg_dump must use an unpooled connection string.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
@@ -83,6 +83,6 @@ Alternatively, you can apply these configurations after migrating your data.
 
 After the migration is complete and you have verified that your new database is working as expected, you can switch your application over to the database in your new Neon project by swapping out your current database connection details for your new database connection details.
 
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. This opens the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button in the Console nav. This opens the **Connect to your branch** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 <NeedHelp/>

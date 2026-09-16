@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/import/import-from-mysql
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This topic describes how to migrate your MySQL database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -45,7 +45,7 @@ Keep your MySQL database connection details handy for later use.
 
 ## Retrieve your Neon database connection string
 
-Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button in the Console nav. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
 
 Your connection string should look similar to this:
 
