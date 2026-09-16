@@ -2,18 +2,33 @@
 title: Trigger on an object upload
 subtitle: Run a function when an object is created in a bucket.
 summary: >-
-  Create and manage storage_object_created Function Triggers with the Neon API: a Hono
-  handler for the upload event, the bucket and prefix filter, what your function receives,
-  and how to confirm a run in the logs.
+  Create and manage storage_object_created Function Triggers from the Neon Console
+  or the Neon API: a Hono handler for the upload event, the bucket and prefix
+  filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-16T13:50:39.546Z'
+updatedOn: '2026-09-16T18:05:06.759Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
 
-For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). The scheduled trigger type is covered in [Schedule a function](/docs/compute/functions/triggers/schedule); this page covers the object-created type. You manage both through the Neon API.
+For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). The scheduled trigger type is covered in [Schedule a function](/docs/compute/functions/triggers/schedule); this page covers the object-created type. You can manage object-created triggers from the Neon Console or the Neon API.
 
-An object-created trigger runs work the moment a file lands, with no bucket polling and no external event bus to wire up: generate a thumbnail or preview, parse an uploaded CSV into rows, extract and index text for search, or record the object's metadata in Postgres. Functions are long-running, so the same handler processes a small avatar or a multi-megabyte export without extra setup.
+Because the function is long-running, it can do real work on each upload, whatever the file size.
+
+![A new object fires the long-running function, which can generate a thumbnail, parse a CSV, extract and index text, or record metadata in Postgres](/docs/compute/functions/triggers/object-upload-use-cases.png)
+
+## Before you begin
+
+You need a [deployed function](/docs/compute/functions/get-started) and its [slug](/docs/compute/functions/deploy#slugs), and a [bucket](/docs/storage/buckets) on the branch. The API also needs a Neon [API key](/docs/manage/api-keys); the Console doesn't. If you deployed with the CLI, [`neon link`](/docs/cli/link) already wrote your project and branch to a `.neon` file; you can also find the IDs in the [Neon Console](https://console.neon.tech).
+
+The API examples use these variables:
+
+```bash
+export API="https://console.neon.tech/api/v2"
+export NEON_API_KEY="<your-api-key>"
+export PROJECT_ID="<your-project-id>"
+export BRANCH_ID="<your-branch-id>"
+```
 
 To build this with an AI agent, start from this prompt and fill in the task:
 
@@ -25,19 +40,6 @@ Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
 - If the task uses Postgres, connect with the injected DATABASE_URL.
 - Deploy it, then create a `storage_object_created` trigger via the Neon API with the bucket name, optionally scoped to a key prefix. Upload an object to confirm a run in the logs.
 - The route and trigger both default to `/`; set `function_path` on both if you want a different path.
-```
-
-## Before you begin
-
-You need a [deployed function](/docs/compute/functions/get-started) and its [slug](/docs/compute/functions/deploy#slugs), a [bucket](/docs/storage/buckets) on the branch, and a Neon [API key](/docs/manage/api-keys). If you deployed with the CLI, [`neon link`](/docs/cli/link) already wrote your project and branch to a `.neon` file; you can also find the IDs in the [Neon Console](https://console.neon.tech).
-
-The examples use these variables:
-
-```bash
-export API="https://console.neon.tech/api/v2"
-export NEON_API_KEY="<your-api-key>"
-export PROJECT_ID="<your-project-id>"
-export BRANCH_ID="<your-branch-id>"
 ```
 
 <Steps>
@@ -99,6 +101,26 @@ neon functions deploy onupload --src functions/onupload.ts
 
 ## Create the trigger
 
+With the function deployed, create the trigger. It fires when an object is created in the bucket, optionally scoped to a key prefix.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+In the [Neon Console](https://console.neon.tech), open **Functions**, click the **⋮** menu next to your function, and select **Manage Triggers**. Click **Create trigger** (the **Function** is already set to the one you opened) and choose **Object upload** under **Trigger type**, then fill in:
+
+- **Trigger name**: a label, unique across the branch, including inherited triggers.
+- **Function path**: the request path sent to the function. Defaults to `/`.
+- **Bucket name**: matches this bucket name exactly.
+- **Path prefix (optional)**: matches object keys that start with this exact, case-sensitive prefix. Leave blank to match every object in the bucket.
+- **Enable trigger**: on by default.
+
+Click **Create trigger** to save.
+
+</TabItem>
+
+<TabItem>
+
 `POST` to the branch's triggers collection. `type`, `function_slug`, `name`, and `storage_object_created` (with `bucket_name`) are required; `prefix`, `function_path`, and `enabled` are optional.
 
 ```bash
@@ -142,6 +164,10 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 
 Unlike a scheduled trigger, an object-created trigger has no `schedule` or `next_run_at`: it fires on the event, not the clock.
 
+</TabItem>
+
+</Tabs>
+
 ## Confirm it ran
 
 Upload an object under the bucket and prefix you configured (see [Upload and manage objects](/docs/storage/objects)), then read the function's logs:
@@ -160,7 +186,7 @@ A newly created trigger takes a few seconds to become active. If your first test
 
 ## What your function receives
 
-An object-created fire delivers the same envelope shape as every trigger type, with `trigger.type` set to `storage_object_created` and the event details under `data`:
+An object-created invocation delivers the same envelope shape as every trigger type, with `trigger.type` set to `storage_object_created` and the event details under `data`:
 
 ```json
 {
@@ -174,10 +200,10 @@ An object-created fire delivers the same envelope shape as every trigger type, w
 }
 ```
 
-- **`data.bucket_name`** — the bucket the object was created in.
-- **`data.object_key`** — the full key of the created object, including any prefix.
+- **`data.bucket_name`**: the bucket the object was created in.
+- **`data.object_key`**: the full key of the created object, including any prefix.
 
-The request also carries the `X-Neon-Trigger-Invocation-Id` header (equal to `invocation_id`), `content-type: application/json`, and a W3C [`traceparent`](https://www.w3.org/TR/trace-context/). For confirming the request came from Neon, see [Confirming a request came from Neon](/docs/compute/functions/triggers/overview#confirming-a-request-came-from-neon) in the overview.
+The request carries the same headers as any trigger invocation. For the full envelope, headers, and how to confirm a request came from Neon, see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives) in the overview.
 
 ## Trigger config
 
@@ -190,9 +216,21 @@ The object-created settings live under `storage_object_created`:
 
 The top-level `type`, `function_slug`, `name`, `function_path`, and `enabled` fields, and the read-only `trigger_id` / `version` / `source_branch_id` / `inherited`, work exactly as in [Trigger fields](/docs/compute/functions/triggers/overview#trigger-fields).
 
+![With prefix uploads/, keys under uploads/ fire the trigger and others are ignored; prefix matching is case-sensitive](/docs/compute/functions/triggers/prefix-filter.png)
+
 ## Manage triggers
 
-Listing, getting, updating, disabling, and deleting an object-created trigger use the same API as scheduled triggers, described in [Manage triggers](/docs/compute/functions/triggers/schedule#manage-triggers). A `PATCH` must include the `type` discriminator; for this type you can change `function_slug`, `name`, `function_path`, `enabled`, and the `storage_object_created` config (for example, to move the watched `prefix`):
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+Manage object-created triggers from the same **Functions → ⋮ → Manage Triggers** panel: edit a trigger's fields, toggle **Enable trigger** on or off, or delete it.
+
+</TabItem>
+
+<TabItem>
+
+Listing, getting, updating, disabling, and deleting use the same endpoints as scheduled triggers, described in [Manage triggers](/docs/compute/functions/triggers/schedule#manage-triggers). A `PATCH` must include the `type` discriminator; for this type you can change `function_slug`, `name`, `function_path`, `enabled`, and the `storage_object_created` config (for example, to move the watched `prefix`):
 
 ```bash
 curl -X PATCH "$API/projects/$PROJECT_ID/branches/$BRANCH_ID/triggers/$TRIGGER_ID" \
@@ -203,6 +241,10 @@ curl -X PATCH "$API/projects/$PROJECT_ID/branches/$BRANCH_ID/triggers/$TRIGGER_I
     "storage_object_created": { "bucket_name": "my-bucket", "prefix": "incoming/" }
   }'
 ```
+
+</TabItem>
+
+</Tabs>
 
 ## Observability
 
@@ -216,11 +258,13 @@ Your output appears under the `neon.function.app` scope, in the Console's Logs t
 
 ## Common errors
 
-| Situation                                               | Status | Message (ends with)                            |
+The API rejects a bad request with an HTTP status and message:
+
+| Situation                                               | Status | Message                                        |
 | ------------------------------------------------------- | ------ | ---------------------------------------------- |
 | A trigger with that `name` already exists on the branch | `409`  | function trigger name already exists on branch |
-| No `storage_object_created` object                      | `400`  | `storage_object_created (field required)`      |
-| `storage_object_created` without `bucket_name`          | `400`  | `bucket_name (field required)`                 |
+| No `storage_object_created` object                      | `400`  | storage_object_created (field required)        |
+| `storage_object_created` without `bucket_name`          | `400`  | bucket_name (field required)                   |
 | A query string in `function_path`                       | `400`  | invalid function trigger path                  |
 | No function with that slug on the branch                | `404`  | target function not visible on branch          |
 
