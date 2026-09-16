@@ -61,8 +61,8 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                   | Up to 7 days                                | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                           | 100 manual snapshots                        | 100 manual snapshots                                                                              |
 | [Auth](#auth) (Beta)                                  | Up to 60k MAU                               | Up to 1M MAU                                | Up to 1M MAU                                                                                      |
-| [Object Storage](#object-storage) (Beta)              | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage))                                                       |
-| [Functions](#functions) (Beta)                        | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))                                                            |
+| [Object Storage](#object-storage)                     | 5 GB included                               | $0.023/GB-month                             | $0.023/GB-month                                                                                   |
+| [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
 | [AI Gateway](#ai-gateway)                             | —                                           | Prepaid credits                             | Prepaid credits                                                                                   |
 | [Private network transfer](#private-network-transfer) | —                                           | —                                           | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                           | Protected branches                          | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
@@ -338,9 +338,9 @@ See [Managed Better Auth](/docs/auth/overview) for more information.
 
 ### Object Storage
 
-Neon Object Storage is S3-compatible object storage that branches with your Neon project. It's available on all plans, including Free, during the beta.
+Neon Object Storage is S3-compatible object storage that branches with your Neon project. It's available on all plans, including Free.
 
-There's no charge for Object Storage during the beta, but [usage limits](/docs/storage/overview#limits) apply. When billing begins, the following rates apply on all plans:
+The following rates apply on all paid plans:
 
 - **Storage**: $0.023/GB-month. Only stored volume is metered; there's no per-operation charge.
 - **Egress**: Data transferred out counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products, and is billed at the same rate once you exceed it.
@@ -351,18 +351,18 @@ See [Neon Object Storage](/docs/storage/overview) for more information.
 
 ### Functions
 
-Neon Functions are serverless Node.js compute you deploy onto a Neon branch, so your backend code runs next to your database. They're available on all plans, including Free, during the beta.
+Neon Functions are serverless Node.js compute you deploy onto a Neon branch, so your backend code runs next to your database. They're available on all plans, including Free.
 
 You're billed for compute only while a request is being processed. Billing starts when a request triggers the function and continues until processing finishes, either by returning a response or by completing any background [`waitUntil`](/docs/compute/functions/reference/runtime-limits#timeouts) work it started. You aren't billed between requests.
 
-Compute is measured in **Capacity-Hours**. During the beta, functions run at a fixed size, so one hour of function runtime equals one Capacity-Hour. That runtime is billed at two rates, and a single request usually incurs both:
+Compute is measured in **Capacity-Hours**. Functions currently run at a fixed size, so one hour of function runtime equals one Capacity-Hour. That runtime is billed at two rates, and a single request usually incurs both:
 
 - **Active compute**: billed while your code is actively using the CPU.
 - **Waiting compute**: billed at a lower rate when your code isn't using much CPU, typically while it waits on the network, a timer, or other I/O.
 
 **Invocations** are counted separately: each time your function is called counts as one invocation, regardless of how long it runs. Billed per million.
 
-There's no charge for Functions during the beta, but [usage limits](/docs/compute/functions/reference/runtime-limits) apply. When billing begins, the following rates apply:
+[Usage limits](/docs/compute/functions/reference/runtime-limits) apply. The following rates apply on paid plans:
 
 | Metric          | **Launch**           | **Scale**           |
 | --------------- | -------------------- | ------------------- |
@@ -372,9 +372,9 @@ There's no charge for Functions during the beta, but [usage limits](/docs/comput
 
 On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
 
-When billing begins, these Free allowances will be enforced at two levels: an account-wide total across all your projects, and an independent per-project limit.
+These Free allowances are enforced at two levels: an account-wide total across all your projects, and an independent per-project limit.
 
-When billing begins, egress (data a function sends out) will count toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
+Egress (data a function sends out) counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
 
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
