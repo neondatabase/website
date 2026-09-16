@@ -12,7 +12,7 @@ summary: >-
   behavior in Hyperdrive local connection strings and how to test with
   wrangler dev --remote.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.
@@ -64,7 +64,7 @@ To follow along with this guide, you require:
 
 ### Retrieve your Neon database connection string
 
-Log in to your **Project Dashboard** in the Neon Console and open the **Connect to your database** modal to find your database connection string. It should look similar to this:
+In the Neon Console, click **Connect** in the nav to open the **Connect to your branch** modal and find your database connection string. It should look similar to this:
 
 ```bash
 postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require

@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Managed Better Auth](/docs/auth/overview) to handle identity securely.
@@ -41,7 +41,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
     - **Managed Better Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
-      ![Connection modal](/docs/connect/connection_details.png)
+      ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Setup the Backend (Hono)
 

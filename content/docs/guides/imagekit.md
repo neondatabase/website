@@ -9,7 +9,7 @@ summary: >-
   (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
   per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
@@ -29,7 +29,7 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 ## Create a Neon project
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an ImageKit.io account and get credentials
 

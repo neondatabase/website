@@ -10,7 +10,7 @@ summary: >-
   working backend examples in JavaScript (Hono, AWS SDK v3) and Python (Flask,
   boto3) with an s3_files schema and presign/save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -30,7 +30,7 @@ This guide demonstrates how to integrate AWS S3 with Lakebase Postgres by storin
 ## Create a Neon project
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an AWS account and S3 bucket
 

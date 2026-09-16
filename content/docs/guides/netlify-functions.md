@@ -10,7 +10,7 @@ summary: >-
   page when the goal is serverless backend database access inside a Netlify
   Function, not edge middleware or static site build steps.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
@@ -57,7 +57,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
 
 ### Retrieve your database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

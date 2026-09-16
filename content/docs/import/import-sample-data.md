@@ -9,7 +9,7 @@ summary: >-
   Pagila, Chinook, Employees, Wikipedia vector embeddings (pgvector), and
   Postgres Air.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -19,7 +19,7 @@ This guide describes how to download and install sample data for use with Neon.
 - [wget](https://www.gnu.org/software/wget/) for downloading datasets, unless otherwise instructed. If your system does not support `wget`, you can paste the source file address in your browser's address bar.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
-- A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button on your **Project Dashboard**. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
+- A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button in the Console nav. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
 - A Neon [paid plan](/docs/introduction/plans) if you intend to install a dataset larger than 0.5 GB.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 

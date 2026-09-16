@@ -10,7 +10,7 @@ summary: >-
   BI tools such as Metabase, Tableau, and Power BI, Neon recommends connecting
   to a read replica to avoid performance impact on the primary branch.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.
@@ -25,9 +25,9 @@ The following details are typically required when configuring a connection:
 - role (user)
 - password
 
-You can gather these details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
+You can gather these details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 <Admonition type="note">
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
