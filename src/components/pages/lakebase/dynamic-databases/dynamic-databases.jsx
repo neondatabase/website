@@ -21,7 +21,7 @@ const DynamicDatabases = () => {
 
   return (
     <section
-      className="dynamic-databases bg-black-pure pt-40 safe-paddings pb-25 xl:pt-32 xl:pb-32 lg:pt-24 lg:pb-24 md:pt-20 md:pb-20"
+      className="dynamic-databases bg-black-pure pt-40 safe-paddings pb-20 xl:pt-32 xl:pb-16 lg:pt-24 lg:pb-12 md:pt-20 md:pb-10"
       aria-labelledby="dynamic-databases-heading"
     >
       <Container size="1344">
