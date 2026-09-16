@@ -9,14 +9,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy/
-updatedOn: '2026-09-16T14:46:15.548Z'
+updatedOn: '2026-09-16T14:56:14.231Z'
 ---
 
-This topic outlines [Postgres version support](#postgres-version-support).
+This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
 
 ## The official PostgreSQL versioning policy
 
-To better understand [PostgreSQL version support on Neon](#postgres-version-support), it’s helpful to first familiarize yourself with the official PostgreSQL versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
+To better understand [PostgreSQL version support on Neon](#postgresql-version-support-on-neon), it’s helpful to first familiarize yourself with the official PostgreSQL versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
@@ -37,7 +37,7 @@ To better understand [PostgreSQL version support on Neon](#postgres-version-supp
 - The major version is indicated by the first part of the version number, such as the "18" in "18.1".
 - The minor release is indicated by the second part of the version number, such as the "1" in "18.1".
 
-## Postgres version support
+## PostgreSQL version support on Neon
 
 Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen Postgres version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates.
 
