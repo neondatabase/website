@@ -22,6 +22,20 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
+  aiGateway: {
+    title: 'AI Gateway — One API for frontier models | Neon',
+    description:
+      'Call frontier and open-weight models from your Neon backend with one credential, one bill, and zero markup.',
+    pathname: LINKS.aiGateway,
+    markdownPath: `${LINKS.aiGateway}.md`,
+  },
+  lakebase: {
+    title: 'Lakebase Postgres — Postgres for apps and agents | Neon',
+    description:
+      'Build apps and agents on Lakebase Postgres: standard Postgres with instant branching, point-in-time restore, autoscaling, and scale to zero.',
+    pathname: LINKS.lakebase,
+    markdownPath: `${LINKS.lakebase}.md`,
+  },
   aboutUs: {
     title: 'About Us — Neon',
     description:
@@ -62,6 +76,27 @@ export default {
     description: 'The Neon CLI brings the Neon backend platform to your terminal.',
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
+  },
+  functions: {
+    title: 'Neon Functions — Long-running serverless functions',
+    description:
+      'Run long-running Node.js functions next to Lakebase Postgres, with branch-aware data and Neon service credentials injected automatically.',
+    pathname: LINKS.functions,
+    markdownPath: `${LINKS.functions}.md`,
+  },
+  auth: {
+    title: 'Neon Auth — Managed Better Auth that branches with your backend',
+    description:
+      'Managed Better Auth built into Neon. Keep users, sessions, and auth configuration in Postgres, and test real login flows in isolated database branches.',
+    pathname: LINKS.authPage,
+    markdownPath: '/md/auth-page.md',
+  },
+  objectStorage: {
+    title: 'Neon Object Storage — S3-compatible storage that branches',
+    description:
+      'S3-compatible object storage built into the Neon backend. Branch files alongside Postgres, use your existing S3 tools, and authenticate with a Neon credential.',
+    pathname: LINKS.objectStorage,
+    markdownPath: `${LINKS.objectStorage}.md`,
   },
   contactSales: {
     title: 'Contact Sales — Neon',
