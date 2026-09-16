@@ -5,7 +5,7 @@ import MENUS from './menus';
 describe('Product navigation', () => {
   it.each([
     ['Lakebase Postgres', '/lakebase'],
-    ['Auth', '/auth'],
+    ['Managed Better Auth', '/auth'],
     ['Functions', '/functions'],
     ['Object Storage', '/object-storage'],
     ['AI Gateway', '/ai-gateway'],

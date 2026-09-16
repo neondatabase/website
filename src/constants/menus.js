@@ -14,9 +14,9 @@ export default {
               description: 'Serverless Postgres database',
             },
             {
-              title: 'Auth',
-              to: LINKS.authPage,
-              description: 'Authentication built into your database',
+              title: 'Object Storage',
+              to: LINKS.objectStorage,
+              description: 'S3-compatible storage that branches',
             },
             {
               title: 'Functions',
@@ -24,9 +24,9 @@ export default {
               description: 'Serverless compute next to your data',
             },
             {
-              title: 'Object Storage',
-              to: LINKS.objectStorage,
-              description: 'S3-compatible storage that branches',
+              title: 'Managed Better Auth',
+              to: LINKS.authPage,
+              description: 'Authentication built into your database',
             },
             {
               title: 'AI Gateway',
