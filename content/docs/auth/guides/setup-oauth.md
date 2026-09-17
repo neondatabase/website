@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-09-17T22:37:33.962Z'
+updatedOn: '2026-09-17T22:38:32.866Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -23,7 +23,7 @@ Google OAuth is enabled by default with shared credentials for development and t
 
 ### About shared credentials
 
-Shared credentials are a Google OAuth app that Neon owns and shares across projects, so you can add Google sign-in without setting up your own app. Because the app belongs to Neon, users see Neon's name and logo on the Google consent screen instead of yours, and you don't control the credentials.
+Shared credentials are a single Google OAuth app that Neon owns and makes available to Neon projects for development, so you can add Google sign-in without setting up your own app. The app isn't unique to your project; every project that uses shared credentials shares the same Neon-owned app. Because the app belongs to Neon, users see Neon's name and logo on the Google consent screen instead of yours, and you don't control the credentials.
 
 Use shared credentials only for development and testing. For production, add your own Google Client ID and secret so users see your app's branding and you control the credentials. See [Production setup](#production-setup).
 
