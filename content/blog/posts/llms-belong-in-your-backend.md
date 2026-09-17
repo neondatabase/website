@@ -171,4 +171,4 @@ neon bootstrap --template ai-sdk
 
 **Tokens are a backend primitive, and they should live where the rest of the backend lives. Neon AI Gateway puts frontier and open-weight models right on your branch, billed through Neon with no markup, with Databricks-scale performance.**
 
-AI Gateway is in beta, it is free to use during the beta period. Point your SDK at Neon, call a model, and [send us feedback](https://discord.gg/92vNTzKDGp) - we’re working hard to take AI Gateway to GA!
+AI Gateway is in beta, it is free to use during the beta period. Point your SDK at Neon, call a model, and [send us feedback](https://neon.com/discord) - we’re working hard to take AI Gateway to GA!

@@ -289,6 +289,6 @@ Here's the part I'm proud of. The default way TypeScript communicates "these two
 
 `neon.ts` is the config layer for Neon as a platform. Declare your services and provision them with `config apply`, get type-safe environment variables with `parseEnv` and program your branch settings in plain TypeScript. It composes with the [branch-first dev loop](https://neon.com/blog/branch-first-dev-loop), so the same `link` and `checkout` commands that set up a branch (pulling its env for you) also keep it in sync with your config.
 
-This is just the start. More primitives (functions, buckets, the AI gateway) are landing under `preview` soon. To try `neon.ts` today, install `neonctl` and `@neondatabase/config`, run `neonctl link` and drop a `defineConfig({})` into a `neon.ts` file. If there's something you wish it did, drop into the [Neon Discord](https://discord.gg/tXC49r2M4q) and tell us.
+This is just the start. More primitives (functions, buckets, the AI gateway) are landing under `preview` soon. To try `neon.ts` today, install `neonctl` and `@neondatabase/config`, run `neonctl link` and drop a `defineConfig({})` into a `neon.ts` file. If there's something you wish it did, drop into the [Neon Discord](https://neon.com/discord) and tell us.
 
 Happy coding!

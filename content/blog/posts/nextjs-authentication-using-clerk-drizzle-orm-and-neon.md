@@ -370,4 +370,4 @@ Congratulations, you’ve built a Next.js application that integrates with Clerk
 
 Now that you’ve got an application up and running, you should visit [Clerk’s Next.js documentation to learn how to deploy your application to production](https://clerk.com/docs/quickstarts/nextjs#next-steps). You can use Neon’s Vercel Integration to manage development and preview database branches when you deploy your Next.js application on Vercel, which uses Neon’s serverless Postgres.
 
-We would love to get your feedback. Follow us on [X](https://twitter.com/neondatabase), join us on [Discord](https://neon.tech/discord), and let us know how we can help you build the next generation of applications.
+We would love to get your feedback. Follow us on [X](https://twitter.com/neondatabase), join us on [Discord](https://neon.com/discord), and let us know how we can help you build the next generation of applications.

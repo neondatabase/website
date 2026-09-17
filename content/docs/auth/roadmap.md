@@ -9,7 +9,7 @@ summary: >-
   yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
   for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 Managed Better Auth is in active development. This page shows what's currently supported and what we're working on next.
@@ -103,6 +103,6 @@ For launch readiness, see the [production checklist](/docs/auth/production-check
 
 ## Let us know
 
-We prioritize based on demand. If you need a specific framework or plugin, let us know on our [Discord](https://discord.com/invite/92vNTzKDGp).
+We prioritize based on demand. If you need a specific framework or plugin, let us know on our [Discord](https://neon.com/discord).
 
 <NeedHelp/>

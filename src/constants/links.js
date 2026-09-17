@@ -102,7 +102,7 @@ export default {
   consoleSupport: 'https://console.neon.tech/app/projects?modal=support',
 
   // Socials
-  discord: 'https://discord.gg/92vNTzKDGp',
+  discord: 'https://neon.com/discord',
   github: 'https://github.com/neondatabase',
   linkedin: 'https://www.linkedin.com/company/neondatabase/',
   twitter: 'https://x.com/neondatabase',

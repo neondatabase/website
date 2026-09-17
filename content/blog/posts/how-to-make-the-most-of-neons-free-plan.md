@@ -115,4 +115,4 @@ Neon’s Free Plan gives you a lot of room to build – up to 20 projects, each 
 
 ---
 
-_If you have any questions or just want to interact with the Neon community, you can always find us on_ [Discord](https://discord.gg/92vNTzKDGp)_._
+_If you have any questions or just want to interact with the Neon community, you can always find us on_ [Discord](https://neon.com/discord)_._

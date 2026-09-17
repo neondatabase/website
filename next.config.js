@@ -2302,7 +2302,7 @@ const defaultConfig = {
       },
       {
         source: '/discord',
-        destination: 'https://discord.gg/92vNTzKDGp',
+        destination: 'https://discord.gg/N8kvBm7qH5',
         permanent: false,
       },
       {
