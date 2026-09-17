@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-17T00:30:38.129Z'
+updatedOn: '2026-09-17T20:36:56.097Z'
 ---
 
 Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them. Point any S3 SDK at your branch endpoint and use your existing Neon credential.
@@ -65,7 +65,7 @@ Two limits are behavioral rather than fixed numbers:
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
 
-When billing begins, paid plans follow standard [S3 limits](https://aws.amazon.com/s3/faqs/): individual objects up to 5 TB, with a 5 GB maximum for a single-request upload. Use [multipart upload](/docs/storage/objects#multipart-upload) for larger objects; AWS recommends it for anything over 100 MB. Storage-volume limits apply to the Free plan only; paid plans have no fixed limit on total storage or number of objects, which is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)).
+Storage-volume limits apply to the Free plan only. Paid plans have no fixed limit on total storage or number of objects; storage is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)). For large objects, use [multipart upload](/docs/storage/objects#multipart-upload), which AWS recommends for anything over 100 MB.
 
 For S3 API and feature limitations (as opposed to usage limits), see [Known limitations](/docs/storage/s3-compatibility#known-limitations).
 
