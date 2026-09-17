@@ -6,7 +6,7 @@ summary: >-
   or the Neon API: a Hono handler for the upload event, the bucket and prefix
   filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-16T18:08:16.994Z'
+updatedOn: '2026-09-17T12:24:58.811Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -156,7 +156,6 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
     },
     "enabled": true,
     "version": 1347042,
-    "source_branch_id": "br-example-branch-12345678",
     "inherited": false
   }
 }
@@ -214,7 +213,7 @@ The object-created settings live under `storage_object_created`:
 | `bucket_name` | Yes      | The bucket to watch, on the trigger's branch.                                                    |
 | `prefix`      | No       | Only objects whose key starts with this prefix fire the trigger. Omit to watch the whole bucket. |
 
-The top-level `type`, `function_slug`, `name`, `function_path`, and `enabled` fields, and the read-only `trigger_id` / `version` / `source_branch_id` / `inherited`, work exactly as in [Trigger fields](/docs/compute/functions/triggers/overview#trigger-fields).
+The top-level `type`, `function_slug`, `name`, `function_path`, and `enabled` fields, and the read-only `trigger_id` / `version` / `inherited`, work exactly as in [Trigger fields](/docs/compute/functions/triggers/overview#trigger-fields).
 
 ![With prefix uploads/, keys under uploads/ fire the trigger and others are ignored; prefix matching is case-sensitive](/docs/compute/functions/triggers/prefix-filter.png)
 

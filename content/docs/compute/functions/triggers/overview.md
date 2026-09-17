@@ -7,7 +7,7 @@ summary: >-
   object-created), what an invocation sends your function, and how triggers behave across
   branches.
 enableTableOfContents: true
-updatedOn: '2026-09-16T18:05:06.759Z'
+updatedOn: '2026-09-17T12:24:58.811Z'
 ---
 
 A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) in response to an event, so recurring or event-driven work runs as your own code next to your data. There's no scheduler or queue to operate and no compute kept running to watch for the event. Functions are long-running, so one trigger handles a quick health check or a table-scanning batch, and it fires even when the compute is scaled to zero.
@@ -37,13 +37,12 @@ A trigger belongs to a project and branch and points to one function on that bra
 
 Neon returns these read-only fields on every trigger:
 
-| Field              | Description                                                                  |
-| ------------------ | ---------------------------------------------------------------------------- |
-| `trigger_id`       | Opaque ID in the form `trigger-<uuid>`, stable across the project.           |
-| `version`          | A number that increases when the trigger's configuration changes.            |
-| `next_run_at`      | Next run, UTC. `null` while disabled. Advances automatically after each run. |
-| `source_branch_id` | The branch that authored the configuration in effect.                        |
-| `inherited`        | `true` when that configuration came from an ancestor branch.                 |
+| Field         | Description                                                                  |
+| ------------- | ---------------------------------------------------------------------------- |
+| `trigger_id`  | Opaque ID in the form `trigger-<uuid>`, stable across the project.           |
+| `version`     | A number that increases when the trigger's configuration changes.            |
+| `next_run_at` | Next run, UTC. `null` while disabled. Advances automatically after each run. |
+| `inherited`   | `true` when that configuration came from an ancestor branch.                 |
 
 A function can have multiple triggers, each evaluated independently, for example a 15-minute sync and a nightly full run. Give each a distinct `function_path`, or read `trigger.id` / `trigger.name` from the request body, so the handler can tell them apart.
 
@@ -83,7 +82,7 @@ The `invocation_id` is a correlation ID, not a secret. It's a digest of the trig
 Triggers follow Neon's branch inheritance:
 
 - **A child branch inherits its parent's triggers.** They appear with `inherited: true`, `enabled: false`, and `next_run_at: null`, and keep the same `trigger_id`. An inherited trigger doesn't run on the child until you enable it there.
-- **Editing an inherited trigger makes it branch-local.** The `PATCH` creates a child-local copy under the same `trigger_id`: `inherited` becomes `false` and `source_branch_id` becomes the child. The parent is unchanged.
+- **Editing an inherited trigger makes it branch-local.** The `PATCH` creates a child-local copy under the same `trigger_id`, and `inherited` becomes `false`. The parent is unchanged.
 - **Deleting an inherited trigger on the child removes it there for good.** It won't reappear, and the parent keeps running it.
 
 So branching a production branch for a test doesn't double your scheduled work. Nothing runs on the child until you enable it, and enabling it there can't affect the parent.

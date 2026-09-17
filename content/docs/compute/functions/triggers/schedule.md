@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-17T12:22:22.063Z'
+updatedOn: '2026-09-17T12:24:58.811Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -165,7 +165,6 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
     "enabled": true,
     "version": 1347042,
     "next_run_at": "2026-09-08T19:31:00.000000Z",
-    "source_branch_id": "br-example-branch-12345678",
     "inherited": false
   }
 }
@@ -279,7 +278,6 @@ curl "$API/projects/$PROJECT_ID/branches/$BRANCH_ID/triggers" \
       "enabled": true,
       "version": 1347043,
       "next_run_at": "2026-09-09T03:00:00.000000Z",
-      "source_branch_id": "br-example-branch-12345678",
       "inherited": false
     }
   ]
