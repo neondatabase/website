@@ -21,7 +21,7 @@ What makes Neon Functions different from lambda-style serverless?
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
 
-> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions. Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
+> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
 
 <Admonition type="important" title="JavaScript and TypeScript only">
 Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.

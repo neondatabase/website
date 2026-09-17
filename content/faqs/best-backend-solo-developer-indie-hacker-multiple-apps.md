@@ -30,7 +30,7 @@ Each project can enable the same set of services, so you stop assembling a diffe
 - [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free during the beta.
 - [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, free during the beta.
 
-Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
+Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions, Object Storage, and AI Gateway are in beta.
 
 ## Manage them all from the terminal
 
