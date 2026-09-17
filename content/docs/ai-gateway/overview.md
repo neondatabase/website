@@ -1,12 +1,12 @@
 ---
 title: Neon AI Gateway
-subtitle: One API for frontier and open-source models from OpenAI, Google, and more. Built into your Neon project.
+subtitle: One API for open-weight and foundation models from OpenAI, Google, and more. Built into your Neon project.
 summary: >-
   Neon AI Gateway is the LLM gateway built into your Neon project. One
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-17T09:17:59.291Z'
+updatedOn: '2026-09-17T09:58:15.444Z'
 ---
 
 Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
@@ -19,9 +19,9 @@ Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your ex
 
 ## Model access
 
-Neon AI Gateway serves both frontier and open-weight models. Foundation models are being rolled out gradually, so the full catalog opens up over time.
+Neon AI Gateway serves open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time.
 
-Any paid project with prepaid credits can start making requests right away. To request access to all foundation models, open the **AI Gateway** page in the [Neon Console](https://console.neon.tech) and select **Apply for access**. We'll reach out as access opens up.
+To request access to the full foundation model catalog, open the **AI Gateway** page in the [Neon Console](https://console.neon.tech) and select **Apply for access**. We'll reach out as access opens up.
 
 **See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).** See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) to add credits.
 
@@ -49,7 +49,7 @@ Participation in this Beta is subject to our Terms of Service. Access is not ava
 
 AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 
-- **Paid plans only.** AI Gateway is available on Neon's Launch and Scale plans, with no difference in pricing or model access between the two. Any paid customer with prepaid credits can use the generally available models. See [Model access](#model-access) for the full foundation model catalog.
+- **Paid plans only.** AI Gateway is available on Neon's Launch and Scale plans, with no difference in pricing or model access between the two. Any paid customer with prepaid credits can use the open-weight models. See [Model access](#model-access) for the full foundation model catalog.
 - **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
 - **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
 

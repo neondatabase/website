@@ -6,7 +6,7 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-09-17T09:17:59.291Z'
+updatedOn: '2026-09-17T09:58:15.444Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -109,8 +109,8 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 ## Model access
 
-A paid account with prepaid credits can use the generally available AI Gateway
-models. Foundation models are rolled out gradually and require requesting access.
+A paid account with prepaid credits can use the open-weight AI Gateway models.
+Foundation models are rolled out gradually and require requesting access.
 See [Model access](/docs/ai-gateway/overview#model-access) for what's included and
 how to apply.
 
@@ -150,7 +150,7 @@ usable again when you upgrade to a paid plan.
 <Faq>
 
 <FaqItem question="Who can use AI Gateway?">
-AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use the generally available models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
+AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
 </FaqItem>
 
 <FaqItem question="How much do AI Gateway credits cost?">

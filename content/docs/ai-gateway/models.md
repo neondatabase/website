@@ -2,11 +2,11 @@
 title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
-  Neon AI Gateway serves Databricks-hosted frontier and open-weight foundation
-  models behind one credential. Use short model IDs like gpt-5-mini or
+  Neon AI Gateway serves Databricks-hosted open-weight and foundation models
+  behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-17T09:17:59.291Z'
+updatedOn: '2026-09-17T09:58:15.444Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -23,9 +23,9 @@ The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/
 
 ## Model access
 
-Neon AI Gateway gives you one credential for both frontier and open-weight models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
+Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
 
-Using the AI Gateway requires a paid plan with prepaid credits. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to the full catalog.
+Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to the full catalog.
 
 ## Available models
 
