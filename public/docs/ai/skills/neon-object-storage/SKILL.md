@@ -22,7 +22,7 @@ metadata:
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon
+neon skills -s neon -y
 ```
 
 # Neon Object Storage
@@ -64,18 +64,16 @@ Neon (Object Storage included) is **backend primitives, not full-stack app hosti
 
 ## Setup
 
-Object storage is part of the `neon.ts` infrastructure-as-code config (see the `neon` skill for the branch-first workflow, `link`/`checkout`, and `neon.ts` basics). Declare buckets under `preview.buckets`, keyed by bucket name:
+Object storage is part of the `neon.ts` infrastructure-as-code config (see the `neon` skill for the branch-first workflow, `link`/`checkout`, and `neon.ts` basics). Declare buckets under `buckets`, keyed by bucket name:
 
 ```typescript
 // neon.ts
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    buckets: {
-      images: {}, // private by default
-      "public-assets": { access: "public_read" },
-    },
+  buckets: {
+    images: {}, // private by default
+    "public-assets": { access: "public_read" },
   },
 });
 ```
@@ -88,7 +86,7 @@ neon deploy   # alias for `neon config apply`
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
-The `preview.buckets` block above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares your buckets alongside every other service the branch should have (see the `neon` skill for the full reference). Reconcile the declaration against a branch the Terraform way:
+The `buckets` block above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares your buckets alongside every other service the branch should have (see the `neon` skill for the full reference). Reconcile the declaration against a branch the Terraform way:
 
 ```bash
 neon config status   # print the branch's live config (which buckets exist)
@@ -100,7 +98,7 @@ Buckets are **branch-scoped**: when a `neon.ts` is present, `neon checkout` appl
 
 ## Environment Variables
 
-When `preview.buckets` is declared, Neon injects **AWS-standard** S3 env vars so the AWS SDKs work from the environment with zero extra config. Inside a deployed Neon Function these are injected automatically; locally, pull them onto disk (or inject them at runtime) via the CLI:
+When `buckets` is declared, Neon injects **AWS-standard** S3 env vars so the AWS SDKs work from the environment with zero extra config. Inside a deployed Neon Function these are injected automatically; locally, pull them onto disk (or inject them at runtime) via the CLI:
 
 ```bash
 neon env pull            # writes the branch's vars into .env (or .env.local)

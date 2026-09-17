@@ -559,7 +559,7 @@
                 - title: Run RLS queries with Drizzle ORM
                   slug: guides/rls-query-execution
             - title: Version support
-              slug: postgresql/postgres-version-policy
+              slug: postgresql/postgres-version-support
               icon: version
             - title: Upgrade
               slug: postgresql/postgres-upgrade
@@ -916,10 +916,6 @@
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
-            - title: Anthropic Messages API
-              slug: ai-gateway/anthropic-messages
-              tag: new
-              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference

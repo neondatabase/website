@@ -8,18 +8,18 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T00:30:38.129Z'
 ---
 
-Neon Functions are serverless functions you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
+Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
 
 What makes Neon Functions different from lambda-style serverless?
 
-- **Next to your data.** Same region as the branch, with `DATABASE_URL` (plus [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) credentials) injected automatically. No cross-region hops, and no credentials to wire up.
+- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
 - **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
-- **Branches with your data.** Each branch runs its own function at its own URL against its own database state.
+- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
 
-Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
 
 > Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions. Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
 

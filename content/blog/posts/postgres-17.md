@@ -33,7 +33,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/postgres-17/neon-postgres-17-2-1024x576-a33b4992.jpg)
 
-Postgres 17 is out today, and we’re here for it. In keeping with our [version policy](https://neon.com/docs/postgresql/postgres-version-policy#major-versions), the latest major version is now available for all Neon users including those on the Free plan. [Get your Postgres 17 database](https://console.neon.tech/signup) and start exploring the latest features immediately.
+Postgres 17 is out today, and we’re here for it. In keeping with our [version policy](https://neon.com/docs/postgresql/postgres-version-support#major-versions), the latest major version is now available for all Neon users including those on the Free plan. [Get your Postgres 17 database](https://console.neon.tech/signup) and start exploring the latest features immediately.
 
 ## How to speed run Postgres 17 on Neon
 
@@ -310,7 +310,7 @@ The new line `Planning Memory Usage: 10,240 kB` tells you memory consumed by the
 
 ## Upgrading to Postgres 17
 
-While minor version upgrades in Neon [happen automatically](https://neon.com/docs/postgresql/postgres-version-policy#minor-releases), there is still manual work necessary to upgrade major versions. If you want to test moving an existing database running an older major version of Postgres to 17, follow the steps outlined in our [upgrading your Postgres version guide](https://neon.com/docs/postgresql/postgres-upgrade). If you are using any extensions, be sure to check [extension support for Postgres 17](https://neon.com/docs/extensions/pg-extensions) on Neon before upgrading.
+While minor version upgrades in Neon [happen automatically](https://neon.com/docs/postgresql/postgres-version-support#minor-releases), there is still manual work necessary to upgrade major versions. If you want to test moving an existing database running an older major version of Postgres to 17, follow the steps outlined in our [upgrading your Postgres version guide](https://neon.com/docs/postgresql/postgres-upgrade). If you are using any extensions, be sure to check [extension support for Postgres 17](https://neon.com/docs/extensions/pg-extensions) on Neon before upgrading.
 
 ## Get started with Postgres 17
 

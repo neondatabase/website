@@ -2,22 +2,22 @@
 title: Neon Object Storage
 subtitle: S3-compatible object storage that branches with your database
 summary: >-
-  Neon Object Storage is S3-compatible object storage built into the Neon backend.
+  Neon Object Storage is S3-compatible object storage built into your Neon project.
   Every branch gets its own isolated storage namespace. Use any AWS S3 SDK
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T00:30:38.129Z'
 ---
 
-Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
-
-> Object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
+Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them. Point any S3 SDK at your branch endpoint and use your existing Neon credential.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
+
+> Object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
 
 ## Get started
 

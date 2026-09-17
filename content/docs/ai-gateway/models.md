@@ -2,12 +2,11 @@
 title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
-  Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
-  OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, and Thinking Machines.
-  Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
-  is also accepted.
+  Neon AI Gateway serves Databricks-hosted open-weight and foundation models
+  behind one credential. Use short model IDs like gpt-5-mini or
+  gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T09:58:15.444Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -22,9 +21,9 @@ The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/
 
 ## Model access
 
-Neon AI Gateway serves both frontier and open-weight models. See the full list in the [catalog](#available-models) below.
+Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
 
-Model access requires a paid plan. Any paid project with prepaid credits can access all available models.
+Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to the full catalog.
 
 ## Available models
 
@@ -62,32 +61,19 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                                | Recommended endpoint   | Notes                                                                                        |
-| ------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
-| OpenAI (most models)                                    | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                        |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)                 | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions                  |
-| Anthropic Claude                                        | `/v1/chat/completions` | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching |
-| Google Gemini                                           | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                |
-| Google Gemma 3 12B                                      | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                               |
-| Meta, Alibaba, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                                        |
-
-<Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For Claude 5 (`claude-sonnet-5`, `claude-opus-5`, `claude-fable-5`), it's an array of typed content blocks instead (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`). A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
-
-```typescript
-const { content } = response.choices[0].message;
-const text = typeof content === 'string'
-  ? content
-  : content.find((block) => block.type === 'text')?.text ?? '';
-```
-
-</Admonition>
+| Provider                                                | Recommended endpoint   | Notes                                                                         |
+| ------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| OpenAI (most models)                                    | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                         |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)                 | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions   |
+| Google Gemini                                           | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B                                      | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                |
+| Meta, Alibaba, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                         |
 
 ## Shorter paths
 
 Each inference dialect is reachable at two equivalent paths: a shorter top-level path (recommended, and what most examples and the `@neon/ai-sdk-provider` use) and a longer `/ai-gateway/<dialect>/v1` path. Both forms behave identically, using the same branch host, bearer token, request body, response body, model routing, rate limits, and quota, and **neither is deprecated**. The longer `/ai-gateway/...` paths keep working indefinitely.
 
-The shorter form isn't a uniform `/v1/<dialect>` rule. The unified chat completions endpoint is a bare `/v1/chat/completions`, matching the OpenAI and OpenRouter convention. The native dialects are prefixed by provider instead, and each keeps its own upstream version segment so the path matches what that provider's SDK expects: `/openai/v1/...`, `/anthropic/v1/...`, and `/gemini/v1beta/...`.
+The shorter form isn't a uniform `/v1/<dialect>` rule. The unified chat completions endpoint is a bare `/v1/chat/completions`, matching the OpenAI and OpenRouter convention. The native dialects are prefixed by provider instead, and each keeps its own upstream version segment so the path matches what that provider's SDK expects: `/openai/v1/...` and `/gemini/v1beta/...`.
 
 Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
@@ -95,7 +81,6 @@ Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-g
 | ---------------------------------------------------- | ---------------------------------------------------------- |
 | `POST /v1/chat/completions`                          | `/ai-gateway/mlflow/v1/chat/completions`                   |
 | `POST /openai/v1/responses`                          | `/ai-gateway/openai/v1/responses`                          |
-| `POST /anthropic/v1/messages`                        | `/ai-gateway/anthropic/v1/messages`                        |
 | `POST /gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models
@@ -141,7 +126,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. Model access requires a paid plan. See [Model access](/docs/ai-gateway/overview#model-access).
+- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. See [Model access](/docs/ai-gateway/overview#model-access) for what determines access and how to request more models.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.
