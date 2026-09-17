@@ -27,7 +27,7 @@ Shared credentials let you add Google sign-in with no setup, using a Google OAut
 
 When someone signs in, Google shows them Neon's name and logo, not your app's, because the sign-in runs through Neon's app rather than one you own. Your users are effectively trusting Neon, and you don't control the app's branding, its permission scopes, or the credentials.
 
-This is safe for development and testing. An outside website can't use the shared app to capture your users, because Google only ever redirects sign-ins back to Neon, and Neon keeps each project's sign-ins separate. The reason not to use it in production is trust and control, not a security hole: real users should see your app on the consent screen, and you should own the credentials.
+This is safe for development and testing. An outside website can't use the shared app to capture your users, because Google only ever redirects sign-ins back to Neon, and Neon keeps each project's sign-ins separate. The reason not to use it in production is trust and control. Real users should see your app on the consent screen, and you should own the credentials.
 
 For production, add your own Google Client ID and secret. See [Production setup](#production-setup).
 
