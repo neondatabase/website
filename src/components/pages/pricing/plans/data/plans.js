@@ -166,18 +166,16 @@ export default {
       rows: '2',
       feature: {
         title: 'Object Storage',
-        tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Stored volume',
       },
       free: `${objectStorage.freeAllowanceGb} GB included`,
-      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
-      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>Not billed yet</span>`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>Not billed yet</span>`,
     },
     {
       fluid: true,
       feature: {
         title: 'Functions',
-        tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Compute and invocations',
       },
       free: {
@@ -210,7 +208,7 @@ export default {
           },
           {
             title: 'Charges',
-            details: ['No charges during beta'],
+            details: ['Not billed yet'],
           },
         ],
       },
@@ -229,7 +227,7 @@ export default {
           },
           {
             title: 'Charges',
-            details: ['No charges during beta'],
+            details: ['Not billed yet'],
           },
         ],
       },
@@ -238,13 +236,12 @@ export default {
       rows: '2',
       feature: {
         title: 'AI Gateway',
-        tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Not billed yet</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Not billed yet</span>",
     },
     {
       rows: '1',

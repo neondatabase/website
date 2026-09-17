@@ -116,22 +116,22 @@ const yesNo = (val) => {
   return s;
 };
 
-// Beta features are free during beta, but each source words it differently
-// (component "No charges applied during beta…", docs "No charge during beta…",
-// pricing.md "Free during beta"). They share one reliable signal: the word
-// "beta". Collapse anything mentioning beta to a single concept; treat
-// false/—/blank as not-offered. Any other wording (e.g. a real GA rate) falls
-// through to its literal value, so post-beta drift surfaces as a mismatch
-// instead of silently matching.
-const betaValue = (val) => {
+// The backend services aren't billed yet, but each source words it differently
+// (component and pricing.md "Not billed yet…", docs "No charge during beta…").
+// Collapse anything that says the feature is unbilled (the word "beta", "not
+// billed", or "no charge") to a single concept; treat false/—/blank as
+// not-offered. Any other wording (e.g. a real GA rate with no unbilled note)
+// falls through to its literal value, so drift surfaces as a mismatch instead
+// of silently matching.
+const unbilledValue = (val) => {
   if (val === false || val === undefined || val === null) return '--';
   const s = String(val).trim();
   if (!s || s === '--' || s === '—' || s === '-') return '--';
-  if (/\bbeta\b/i.test(s)) return 'beta';
+  if (/\bbeta\b|\bnot billed\b|\bno charges?\b/i.test(s)) return 'unbilled';
   return normalizeValue(val);
 };
 
-// The overview table intentionally summarizes beta availability while the
+// The overview table intentionally summarizes availability while the
 // pricing table leads with Free-plan allowances. This normalizer compares only
 // availability here; exact allowances and rates are verified separately by the
 // backend pricing checks below.
@@ -648,16 +648,16 @@ const CROSS_SOURCE_CHECKS = [
     agentLabel: 'Auth (MAU)',
   },
 
-  // --- Backend (Beta) ---
-  // These features are free during beta, so on Launch and Scale we only verify
-  // that each source agrees they're offered (betaValue collapses the
-  // differently-worded "free/no charge during beta" prose to a single concept).
-  // Object Storage and Functions publish their post-beta rates on the pricing
-  // page, but the cells keep a beta note, so betaValue still applies there.
-  // AI Gateway links to its published model prices instead of repeating beta
+  // --- Backend ---
+  // These features aren't billed yet, so on Launch and Scale we only verify
+  // that each source agrees they're offered (unbilledValue collapses the
+  // differently-worded "not billed yet / no charge" prose to a single concept).
+  // Object Storage and Functions publish their rates on the pricing page, but
+  // the cells keep an unbilled note, so unbilledValue still applies there.
+  // AI Gateway links to its published model prices instead of repeating billing
   // status, so only verify that every source agrees the feature is offered.
-  // The Free cells lead with the included allowance instead of a beta note and
-  // have nothing comparable in the docs table, hence offeredValue.
+  // The Free cells lead with the included allowance instead of a billing note
+  // and have nothing comparable in the docs table, hence offeredValue.
   ...['free', 'launch', 'scale'].flatMap((plan) => [
     {
       id: `object-storage-${plan}`,
@@ -665,7 +665,7 @@ const CROSS_SOURCE_CHECKS = [
       comp: 'Object Storage',
       docs: 'Object Storage (Beta)',
       plan,
-      norm: plan === 'free' ? offeredValue : betaValue,
+      norm: plan === 'free' ? offeredValue : unbilledValue,
       agentLabel: 'Object Storage',
     },
     {
@@ -674,7 +674,7 @@ const CROSS_SOURCE_CHECKS = [
       comp: 'Functions',
       docs: 'Functions (Beta)',
       plan,
-      norm: plan === 'free' ? offeredValue : betaValue,
+      norm: plan === 'free' ? offeredValue : unbilledValue,
       agentLabel: 'Functions',
     },
     {

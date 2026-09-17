@@ -106,7 +106,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
+You'll be prompted to select your organization, then a project. Create a new one or pick an existing project. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward all regions.
 
 Next, install the required dependencies:
 
@@ -131,7 +131,7 @@ neon link
 Select your organization and choose to create a new project named `neon-inngest-demo`.
 
 <Admonition type="note">
-Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward all regions. Select **Yes** when prompted to manage your setup as code (`neon.ts`).
 </Admonition>
 
 A `.env.local` file should be created automatically in your project root with your Neon project details, including `DATABASE_URL` and other Neon-specific variables.

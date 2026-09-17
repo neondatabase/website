@@ -35,7 +35,7 @@ If you'd rather use your own stack, every Neon database speaks standard Postgres
 If a coding agent is doing the build and you haven't signed up, [Claimable Neon](/docs/reference/claimable-neon) creates a project immediately and hands you a claim link. `neon claim create --env-pull` writes credentials to `.env`. Unclaimed projects expire in 72 hours and are capped at 100 MB of storage and 1 GB of transfer, which is plenty for a demo; claim it if the project deserves to live.
 
 <Admonition type="tip" title="What the Free plan includes">
-100 projects, 0.5 GB of storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU, and Object Storage and Functions free during their betas ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you abandon on Monday stops using its CU-hours.
+100 projects, 0.5 GB of storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU, and Object Storage and Functions not billed yet ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you abandon on Monday stops using its CU-hours.
 </Admonition>
 
 ## How other options compare

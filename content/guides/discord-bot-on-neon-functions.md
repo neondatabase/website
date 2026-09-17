@@ -74,7 +74,7 @@ neon link
 Follow the prompts to select your organization and create a new project:
 
 <Admonition type="note">
-Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions. After linking, choose “yes” when prompted to manage the setup as code to automatically generate a `neon.ts` file for your project.
+Select **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`) when creating your Neon project; this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward all regions. After linking, choose “yes” when prompted to manage the setup as code to automatically generate a `neon.ts` file for your project.
 </Admonition>
 
 ```bash

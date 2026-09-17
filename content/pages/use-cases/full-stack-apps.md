@@ -170,6 +170,6 @@ You can start building on the [Neon Free plan](/docs/introduction/plans). It com
 - **100 projects** and **100 CU-hours per project** (enough to run a 0.25 CU compute for 400 active hours)
 - **0.5 GB storage per project** and **5 GB of public network transfer per project per month**
 - **Autoscaling** up to 2 CU (≈8 GB RAM) with scale to zero after 5 minutes of inactivity
-- **Managed Better Auth** up to 60,000 MAU (beta)
+- **Managed Better Auth** up to 60,000 MAU
 
 <CTA title="Start building" description="Create a project on the Free plan, run npx neon@latest init, and deploy your first backend primitive in minutes." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" secondaryButtonText="Browse templates" secondaryButtonUrl="https://build-on-neon.vercel.app/" />
