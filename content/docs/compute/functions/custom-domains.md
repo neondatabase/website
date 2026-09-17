@@ -7,8 +7,6 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
-
 Each Neon Function has a native invocation URL. You can also serve it from a
 domain you own, such as `api.example.com`. Neon routes the custom domain to one
 function on one branch and provisions its TLS certificate automatically. You
@@ -43,11 +41,10 @@ You need:
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-1. In the Neon Console, select your project and branch.
-2. Select **Custom Domains** in the branch sidebar.
-3. Enter the domain you own.
-4. Select **Function**, then select the function to serve from the domain.
-5. Select **Add custom domain**.
+1. In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**.
+2. Enter the domain you own.
+3. Select **Function**, then select the function to serve from the domain.
+4. Select **Add custom domain**.
 
 The Console displays the CNAME target to add at your DNS provider.
 
@@ -133,13 +130,11 @@ If you manage the branch with a [`neon.ts`](/docs/reference/neon-ts) policy, dec
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    functions: {
-      api: {
-        name: "API",
-        source: "./functions/api.ts",
-        customDomains: ["api.example.com"],
-      },
+  functions: {
+    api: {
+      name: "API",
+      source: "./functions/api.ts",
+      customDomains: ["api.example.com"],
     },
   },
 });
@@ -189,9 +184,7 @@ Encrypt.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-In the Neon Console, select the project and branch, then select **Custom
-Domains**. The table lists each domain, its target function, and its CNAME
-target.
+In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**. The table lists each domain, its target function, and its CNAME target.
 
 </TabItem>
 <TabItem>
@@ -325,7 +318,7 @@ dangling CNAME from continuing to point at Neon's custom-domain edge.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-On the **Custom Domains** page in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
+Under **Settings → Functions → Custom Domains** in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
 
 </TabItem>
 <TabItem>
