@@ -380,7 +380,7 @@ See [Neon Functions](/docs/compute/functions/overview) for what's included and c
 
 ### AI Gateway
 
-Neon AI Gateway provides access to foundation models from OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can access all available models.
+Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
 
 Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 
@@ -450,24 +450,24 @@ Use the table below to understand how Console metrics map to invoice line items.
 **Extra branches**, **Neon Functions**, and **Object Storage** do not appear in the Console usage summary but can appear on your invoice.
 </Admonition>
 
-### Invoice metrics
+## Invoice metrics
 
 The following metrics may appear on your Neon invoice. Each metric represents a specific type of usage that contributes to your monthly bill.
 
-| **Metric**                                       | **Description**                                                                                                                                                                                   |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Database compute, CU-hour**                    | Total compute usage in **CU-hours** (Compute Unit hours). [Learn more](/docs/introduction/plans#compute).                                                                                         |
-| **Database extra branches, branch-month**        | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                                                       |
-| **Database storage (instant restore), GB-month** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                                                |
-| **Database storage (child branches), GB-month**  | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                          |
-| **Database storage (root branches), GB-month**   | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                                              |
-| **Database storage (snapshots), GB-month**       | Storage used for branch snapshots, billed per GB-month. [Learn more](/docs/introduction/plans#snapshots).                                                                                         |
-| **Private network transfer, GB**                 | Bi-directional data transfer to and from your databases over private networking (for example, AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer).                  |
-| **Public network transfer, GB**                  | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                                                       |
-| **Function compute (active), capacity-hour**     | Neon Functions compute billed while your code is actively using the CPU. Free during the beta; billed per capacity-hour when billing begins. [Learn more](/docs/introduction/plans#functions).    |
-| **Function compute (waiting), capacity-hour**    | Neon Functions compute billed at a lower rate while your code waits on I/O. Free during the beta; billed per capacity-hour when billing begins. [Learn more](/docs/introduction/plans#functions). |
-| **Function invocations, million**                | Number of times your functions are called. Free during the beta; billed per million when billing begins. [Learn more](/docs/introduction/plans#functions).                                        |
-| **Object storage, GB-month**                     | Stored Object Storage volume. Free during the beta; billed per GB-month when billing begins. [Learn more](/docs/introduction/plans#object-storage).                                               |
+| **Metric**                                       | **Description**                                                                                                                                                                  |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Database compute, CU-hour**                    | Total compute usage in **CU-hours** (Compute Unit hours). [Learn more](/docs/introduction/plans#compute).                                                                        |
+| **Database extra branches, branch-month**        | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                                      |
+| **Database storage (instant restore), GB-month** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                               |
+| **Database storage (child branches), GB-month**  | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                         |
+| **Database storage (root branches), GB-month**   | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                             |
+| **Database storage (snapshots), GB-month**       | Storage used for branch snapshots, billed per GB-month. [Learn more](/docs/introduction/plans#snapshots).                                                                        |
+| **Private network transfer, GB**                 | Bi-directional data transfer to and from your databases over private networking (for example, AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
+| **Public network transfer, GB**                  | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                                      |
+| **Function compute (active), capacity-hour**     | Neon Functions compute for time your code is actively using the CPU. Free during the beta. [Learn more](/docs/introduction/plans#functions).                                     |
+| **Function compute (waiting), capacity-hour**    | Neon Functions compute for time your code waits on I/O, billed at a lower rate. Free during the beta. [Learn more](/docs/introduction/plans#functions).                          |
+| **Function invocations, million**                | Number of times your functions are called. Free during the beta. [Learn more](/docs/introduction/plans#functions).                                                               |
+| **Object storage, GB-month**                     | Stored Object Storage volume. Free during the beta. [Learn more](/docs/introduction/plans#object-storage).                                                                       |
 
 ## Usage-based cost examples
 

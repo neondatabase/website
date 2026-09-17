@@ -559,7 +559,7 @@
                 - title: Run RLS queries with Drizzle ORM
                   slug: guides/rls-query-execution
             - title: Version support
-              slug: postgresql/postgres-version-policy
+              slug: postgresql/postgres-version-support
               icon: version
             - title: Upgrade
               slug: postgresql/postgres-upgrade

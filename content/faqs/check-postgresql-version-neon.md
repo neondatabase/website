@@ -3,7 +3,7 @@ title: 'How do I check which Postgres version my Neon database is running?'
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-16T13:05:58.588Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -62,7 +62,7 @@ The output includes a `pg_version` field with the major version your project is 
 
 ## Major vs minor versions
 
-Neon manages minor version upgrades for you under the [Postgres version support policy](/docs/postgresql/postgres-version-policy). Minor versions are deployed soon after release and typically don't require any action on your part.
+Neon manages minor version upgrades for you under the [Postgres version support policy](/docs/postgresql/postgres-version-support). Minor versions are deployed soon after release and typically don't require any action on your part.
 
 Major versions (16 to 17, 17 to 18, and so on) are not upgraded automatically because they can introduce incompatibilities. You upgrade by creating a new Neon project with the target major version and migrating your data with the [Import Data Assistant](/docs/import/import-data-assistant), `pg_dump` / `pg_restore`, or [logical replication](/docs/guides/logical-replication-neon-to-neon).
 
