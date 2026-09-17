@@ -114,7 +114,7 @@ For capabilities declared in `neon.ts`, the setup follows the same three steps: 
 | **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
 
 <Admonition type="note" title="Reading the snippets">
-The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
+The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` go inside a single `preview` block. That block is deprecated on `@neon/config` 1.6.0 and later, where these are top-level keys, but it still works, so this page uses it for the widest compatibility (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
 </Admonition>
 
 ## Postgres: the notes
@@ -292,7 +292,7 @@ import { defineConfig } from "@neon/config/v1";
 export default defineConfig({
   auth: true,
   preview: {
-    // groups today's beta features: Object Storage, Functions, and the AI Gateway
+    // preview groups Object Storage, Functions, and the AI Gateway; deprecated on @neon/config 1.6.0+, where they're top-level keys
     aiGateway: true,
     buckets: { attachments: {} },
     functions: {

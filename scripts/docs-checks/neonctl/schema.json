@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.18.0",
+  "neonctlVersion": "4.21.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -4113,10 +4113,13 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
             "cron": {
               "type": "string",
-              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'",
-              "required": true
+              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'"
             },
             "enabled": {
               "type": "boolean",
@@ -4135,10 +4138,14 @@
               "type": "string",
               "describe": "Trigger name (unique per branch)",
               "required": true
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match (requires --bucket on create)"
             }
           },
           "commands": {},
-          "describe": "Create a trigger that invokes a function on a cron schedule"
+          "describe": "Create a trigger that invokes a function on a cron schedule or when an object is created"
         },
         "delete": {
           "name": "delete",
@@ -4220,6 +4227,10 @@
             }
           ],
           "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
             "cron": {
               "type": "string",
               "describe": "Five-field UTC cron expression"
@@ -4239,6 +4250,10 @@
             "name": {
               "type": "string",
               "describe": "Trigger name (unique per branch)"
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match"
             }
           },
           "commands": {},

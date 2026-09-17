@@ -3,31 +3,38 @@ title: neon.ts
 subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
-  configured. Use it for branch policy alone, or add preview services like
-  Functions, Storage, and AI Gateway. Works with neon deploy, neon dev,
+  configured. Use it for branch policy alone, or add services like
+  Functions, Object Storage, and AI Gateway. Works with neon deploy, neon dev,
   and neon checkout.
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-04T11:57:36.377Z'
+updatedOn: '2026-09-17T04:00:06.054Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
 
 Specifically:
 
-- **Declares services**: which Neon services (`auth`, `dataApi`, preview services) exist on the project and are available on every branch.
+- **Declares services**: which Neon services (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`) exist on the project and are available on every branch.
 - **Configures branches**: optional per-branch tuning (TTLs, compute sizing, protected status) via a `branch` closure.
 
 Services and branch policy are independent. Use one, the other, or both.
+
+The fastest way to create a `neon.ts` is [`neon config init`](/docs/cli/config#init), which scaffolds a starter policy and installs the config packages. To set it up by hand instead, install the package:
 
 ```bash
 npm install @neon/config
 ```
 
-The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
+`@neon/config` provides `defineConfig` and is all you need to author a `neon.ts`; you apply it with `neon deploy`. Two optional packages extend it:
 
-`neon.ts` itself is declarative: it only describes the policy. `neon config` / `neon deploy` (below) are how the CLI runs it. To call the same `inspect` / `plan` / `apply` logic from your own script or CI job instead of the CLI, see [`@neon/config-runtime`](/docs/reference/config-runtime).
+- [`@neon/env`](#type-safe-environment-variables): type-safe access to the injected variables.
+- [`@neon/config-runtime`](/docs/reference/config-runtime): run the `inspect` / `plan` / `apply` logic yourself instead of through the CLI.
+
+The package [source is on GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
+
+`neon.ts` is declarative: it describes the policy but doesn't apply it. `neon deploy` (an alias for `neon config apply`) applies it to the linked branch. It provisions or updates the declared services, applies your branch tuning, and pulls the branch's variables into your local `.env`. Run it whenever you change `neon.ts`.
 
 Link your working directory to a Neon project before using `neon.ts` commands:
 
@@ -62,8 +69,122 @@ export default defineConfig({
 
 `defineConfig` takes two optional parts:
 
-- **Static fields** (`auth`, `dataApi`, `preview`): declare which services exist. Same set on every branch.
+- **Static fields** (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`): declare which services exist. Same set on every branch.
 - **`branch` closure**: receives a read-only `BranchTarget` and returns per-branch tuning. It can adjust settings, but can't add or remove services.
+
+## Services
+
+Declare services as top-level keys in `defineConfig`; declare only the ones you use. Every branch always has Postgres, so `DATABASE_URL` is injected without being declared here. After `neon deploy`, `neon env pull` writes any injected URLs and credentials to your local `.env` file automatically.
+
+| Field       | Values / type                                | Default | What it enables                                                                                                                                                                                                                                |
+| ----------- | -------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `auth`      | `true`, `false`, `{ enabled: bool }`         | `false` | [Managed Better Auth](/docs/auth/overview). Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                                                                                                                                 |
+| `dataApi`   | `true`, `false`, [`DataApiConfig`](#dataapi) | `false` | [Neon Data API](/docs/data-api/overview). Injects `NEON_DATA_API_URL`                                                                                                                                                                          |
+| `aiGateway` | `true`, `false`, `{ enabled: bool }`         | `false` | [Neon AI Gateway](/docs/ai-gateway/overview). Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`                                                                                                                                      |
+| `functions` | Record of slug → [function def](#functions)  | (none)  | [Neon Functions](/docs/compute/functions/overview). Long-running Node.js compute. The branch's service variables (`DATABASE_URL` and more) are injected at runtime; see [Environment variables](/docs/compute/functions/environment-variables) |
+| `buckets`   | Record of name → [bucket def](#buckets)      | (none)  | [Neon Object Storage](/docs/storage/overview). S3-compatible object storage, branched with your database. Injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                                            |
+
+<Admonition type="note" title="preview is deprecated">
+`@neon/config` 1.6.0 and later accept `aiGateway`, `functions`, and `buckets` as the top-level keys shown here. Declaring them under a `preview` block still works but logs a deprecation warning on `neon deploy`, so keep `preview` only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
+</Admonition>
+
+### dataApi (#dataapi)
+
+`dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+
+```text
+Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
+`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
+Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
+authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
+```
+
+To use the Data API with an external identity provider instead, pass the object form:
+
+```ts
+dataApi: {
+  authProvider: "external",
+  jwksUrl: "https://your-idp/.well-known/jwks.json",
+}
+```
+
+### functions (#functions)
+
+Each key is the function's slug, the permanent identifier used in CLI commands and the invocation URL:
+
+<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "preview (deprecated)"]}>
+
+```ts
+functions: {
+  "<slug>": {
+    name: string,       // display name shown in neon functions list and the console
+    source: string,     // path to entry file, relative to neon.ts
+    env?: Record<string, string>,
+    bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
+    dev?: {
+      port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
+    },
+  },
+},
+```
+
+```ts
+preview: {
+  functions: {
+    "<slug>": {
+      name: string,
+      source: string,
+      env?: Record<string, string>,
+      bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),
+      dev?: { port?: number },
+    },
+  },
+},
+```
+
+</CodeTabs>
+
+Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
+
+`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
+
+```ts
+env: {
+  API_KEY: process.env.API_KEY ?? "",
+}
+```
+
+Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+
+`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
+
+`dev` settings apply only to `neon dev` and never affect deploy.
+
+### buckets (#buckets)
+
+<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "preview (deprecated)"]}>
+
+```ts
+buckets: {
+  "<name>": {
+    access?: "private" | "public_read",  // default: "private"
+  },
+},
+```
+
+```ts
+preview: {
+  buckets: {
+    "<name>": {
+      access?: "private" | "public_read",
+    },
+  },
+},
+```
+
+</CodeTabs>
+
+Bucket names follow S3 naming rules. `public_read` makes objects accessible without credentials at the branch's storage endpoint.
 
 ## Branch policy
 
@@ -134,7 +255,7 @@ export default defineConfig({
 });
 ```
 
-Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closure runs with `branch.exists === false`, so TTL, compute settings, and services take effect at creation. Checking out an existing branch doesn't apply or reconcile the policy.
+When `neon checkout` creates a new branch, the closure runs with `branch.exists === false`, so TTL, compute settings, and services take effect at creation. Checking out an existing branch doesn't apply or reconcile the policy.
 
 ### BranchTarget fields
 
@@ -159,35 +280,6 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 | `postgres.computeSettings.autoscalingLimitMaxCu` | `ComputeUnit`               | Maximum compute units. For an autoscaling range, keep both bounds at 16 or below and no more than 8 CU apart; sizes above 16 are fixed-size (`min` equals `max`) |
 | `postgres.computeSettings.suspendTimeout`        | `false \| string \| number` | Idle suspend timeout. `false` disables suspend                                                                                                                   |
 
-## Services
-
-`auth` and `dataApi` declare which Neon services exist on every branch. After `neon deploy`, running `neon env pull` writes their URLs to your local `.env` file automatically.
-
-| Field     | Values                               | Default | What it enables                                                         |
-| --------- | ------------------------------------ | ------- | ----------------------------------------------------------------------- |
-| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed Better Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
-| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                              |
-
-### `dataApi` config
-
-`dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
-
-```text
-Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
-`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
-Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
-authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
-```
-
-To use the Data API with an external identity provider instead, pass the object form:
-
-```ts
-dataApi: {
-  authProvider: "external",
-  jwksUrl: "https://your-idp/.well-known/jwks.json",
-}
-```
-
 ## Type-safe environment variables
 
 `@neon/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
@@ -204,12 +296,22 @@ const env = parseEnv(config);
 
 env.postgres.databaseUrl;         // DATABASE_URL
 env.postgres.databaseUrlUnpooled; // DATABASE_URL_UNPOOLED
-env.auth.baseUrl;                 // NEON_AUTH_BASE_URL  (env.auth only present when auth: true)
+env.branch.name;                  // NEON_BRANCH             (when NEON_BRANCH is set)
+env.auth.baseUrl;                 // NEON_AUTH_BASE_URL       (env.auth when auth: true)
 env.auth.jwksUrl;                 // NEON_AUTH_JWKS_URL
-env.dataApi.url;                  // NEON_DATA_API_URL   (env.dataApi only present when dataApi is enabled)
+env.dataApi.url;                  // NEON_DATA_API_URL        (env.dataApi when dataApi enabled)
+env.aiGateway.apiKey;             // NEON_AI_GATEWAY_TOKEN    (env.aiGateway when aiGateway enabled)
+env.aiGateway.baseUrl;            // NEON_AI_GATEWAY_BASE_URL
+env.storage.accessKeyId;          // AWS_ACCESS_KEY_ID        (env.storage when buckets declared)
+env.storage.secretAccessKey;      // AWS_SECRET_ACCESS_KEY
+env.storage.endpoint;             // AWS_ENDPOINT_URL_S3
+env.storage.region;               // AWS_REGION
+env.functions['<slug>'].baseUrl;  // a deployed function's URL, keyed by slug (env.functions when functions declared)
 ```
 
-`env.auth` only exists when `auth: true`, `env.dataApi` only when `dataApi` is enabled. If you access a namespace your config doesn't declare, TypeScript will catch it.
+Each namespace exists only when its service is declared: `env.auth` when `auth: true`, `env.storage` when you declare `buckets`, and so on. If you access a namespace your config doesn't declare, TypeScript catches it.
+
+`env.functions` (plural) is a map of every declared function's slug to its `baseUrl`. It's distinct from `env.function` (singular), which you get from `parseEnv(config, '<slug>')`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
 
 Pass an array of keys to validate and return only a subset. Useful when a process needs just one or two variables:
 
@@ -255,93 +357,20 @@ env.postgres.databaseUrl;
 
 ## CLI commands
 
-| Command                                  | What it does                                                                                              |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
-| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
-| [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
-| [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
-| [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
-| [`neon dev`](/docs/cli/dev)              | Run functions locally against the linked branch; watches for changes and hot-reloads                      |
+| Command                                     | What it does                                                                                              |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [`neon config init`](/docs/cli/config#init) | Scaffold a starter `neon.ts` and install the config packages                                              |
+| [`neon link`](/docs/cli/link)               | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
+| [`neon deploy`](/docs/cli/config)           | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
+| [`neon config plan`](/docs/cli/config)      | Preview what `neon deploy` would change, without applying                                                 |
+| [`neon config status`](/docs/cli/config)    | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
+| [`neon env pull`](/docs/cli/env)            | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
+| [`neon checkout`](/docs/cli/checkout)       | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
+| [`neon dev`](/docs/cli/dev)                 | Run functions locally against the linked branch; watches for changes and hot-reloads                      |
 
-## Flags for `neon deploy`
+`neon deploy` is an alias for `neon config apply`. For its flags (`--branch`, `--project-id`, `--config`, `--env`, `--update-existing`, and more), see the [`neon config`](/docs/cli/config) reference.
 
-| Flag                | Default        | Description                                                                                          |
-| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
-| `--config`          | (auto)         | Path to the `neon.ts` file. When omitted, the CLI walks up from cwd stopping at `.git`               |
-| `--env`             | (none)         | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
-| `--env-pull`        | `true`         | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
-| `--branch`          | linked branch  | Target branch ID or name                                                                             |
-| `--project-id`      | linked project | Project ID                                                                                           |
-| `--update-existing` | `false`        | Auto-confirm overriding existing remote settings                                                     |
-| `--allow-protected` | `false`        | Auto-confirm applying to a protected branch                                                          |
-
-## Preview services
-
-<Admonition type="info" title="Beta">
-Functions, Storage, and AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions.
-</Admonition>
-
-Preview services are declared under the `preview` block. All three are optional and independent:
-
-| Field               | Type                                 | What it enables                                                                |
-| ------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
-| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                     |
-| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database |
-| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`   |
-
-### `preview.functions`
-
-Each key is the function's slug, the permanent identifier used in CLI commands and the invocation URL:
-
-```ts
-preview: {
-  functions: {
-    "<slug>": {
-      name: string,       // display name shown in neon functions list and the console
-      source: string,     // path to entry file, relative to neon.ts
-      env?: Record<string, string>,
-      bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
-      dev?: {
-        port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
-      },
-    },
-  },
-},
-```
-
-Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
-
-`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
-
-```ts
-env: {
-  API_KEY: process.env.API_KEY ?? "",
-}
-```
-
-Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
-
-`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
-
-`dev` settings apply only to `neon dev` and never affect deploy.
-
-### `preview.buckets`
-
-```ts
-preview: {
-  buckets: {
-    "<name>": {
-      access?: "private" | "public_read",  // default: "private"
-    },
-  },
-},
-```
-
-Bucket names follow S3 naming rules. `public_read` makes objects accessible without credentials at the branch's storage endpoint.
-
-### Full stack example
+## Full stack example
 
 All services combined. `neon deploy` provisions everything and writes credentials to `.env.local`.
 
@@ -352,16 +381,14 @@ export default defineConfig({
   auth: true,
   dataApi: true,
 
-  preview: {
-    aiGateway: true,
-    buckets: {
-      uploads: {},
-    },
-    functions: {
-      api: {
-        name: "API",
-        source: "./functions/api.ts",
-      },
+  aiGateway: true,
+  buckets: {
+    uploads: {},
+  },
+  functions: {
+    api: {
+      name: "API",
+      source: "./functions/api.ts",
     },
   },
 
@@ -396,5 +423,24 @@ export default defineConfig({
   },
 });
 ```
+
+## Troubleshooting
+
+### "keys can be lifted out of preview" warning
+
+```text
+These neon.ts keys are now GA and can be lifted out of preview: preview.aiGateway → aiGateway, preview.functions → functions, preview.buckets → buckets.
+```
+
+Informational, not an error: your services still deploy. You're declaring GA services under the deprecated `preview` block on `@neon/config` 1.6.0 or later. Move those keys to the top level to clear it, or keep `preview` if you also run on installs older than 1.6.0.
+
+### "unknown keys" error
+
+```text
+ConfigValidationError: Invalid Neon config:
+  - unknown keys: "aiGateway", "functions"
+```
+
+Your `@neon/config` is older than 1.6.0, which introduced top-level `aiGateway`, `functions`, and `buckets`. Upgrade with `npm install @neon/config@latest` (and `npm install -g neon@latest`), or keep the services under `preview`.
 
 <NeedHelp/>
