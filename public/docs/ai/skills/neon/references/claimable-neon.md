@@ -10,8 +10,8 @@ Use this after the neon skill account check found no account.
 
 1. Install the CLI: `npm i -g neon@latest`
 2. If `neon claim --help` does not list `create`, skip to [If neon claim is missing](#if-neon-claim-is-missing).
-3. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested.
-4. Create the project: `neon claim create --env-pull` (add `--service data-api --service auth` if there is no `neon.ts`)
+3. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested. Request Auth when login is needed. Request `data-api` only for PostgREST / Supabase database-client compatibility.
+4. Create the project: `neon claim create --env-pull` (add `--service auth` if there is no `neon.ts` and login is requested)
 5. If create did not write env, pull it: `neon env pull`
 6. Use the `neon-postgres` skill for connections, schemas, and queries. Install it if it is missing: `neon skills -s neon-postgres`
 
@@ -22,15 +22,20 @@ npm i -g neon@latest
 neon claim --help
 ```
 
-If that help lists `create` and you need Auth or the Data API, `npm i @neon/config` and write `neon.ts`. Then `neon claim create --env-pull`.
+If that help lists `create` and you need Auth, `npm i @neon/config` and write `neon.ts`. Then `neon claim create --env-pull`.
 
 ```typescript
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true,
-  dataApi: true,
 });
+```
+
+`claim create --service` accepts `postgres`, `auth`, `data-api`, `functions`, `object-storage`, and `ai-gateway`. `init --services` accepts the same names except `postgres` (every branch has it). Selecting `data-api` on init also declares Auth. Compatibility-only:
+
+```bash
+neon claim create --service auth --service data-api --env-pull
 ```
 
 `neon claim create` reads `neon.ts` when it is present. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`. The identity assertion is the pre-claim credential.
@@ -49,16 +54,7 @@ Continuing to Neon starts a transfer with a new 15-minute window and leaves the 
 
 When `reconciled` is true, the pre-claim `DATABASE_URL` no longer works. Auth and Data API URLs stay if they were granted. The human signs in with `neon auth`. Then the agent runs `neon link` and `neon env pull` to write the new `DATABASE_URL`. `neon link` discovers the project after that sign-in.
 
-Auth and the Data API stay off unless requested at create or enabled later. On the unclaimed project, `neon.ts` plus `neon deploy` enables them. After claim, the same config talks to Neon directly. An external JWKS is only accepted after claim. Data API with the default auth provider requires Auth:
-
-```typescript
-import { defineConfig } from "@neon/config/v1";
-
-export default defineConfig({
-  auth: true,
-  dataApi: true,
-});
-```
+Auth stays off unless requested at create or enabled later. Request the Data API only for PostgREST / Supabase database-client compatibility. On the unclaimed project, `neon.ts` plus `neon deploy` enables requested services. After claim, the same config talks to Neon directly. An external JWKS is only accepted after claim. Data API with the default auth provider requires Auth.
 
 ```bash
 neon deploy

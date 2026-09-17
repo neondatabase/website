@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-09-10T13:38:23.543Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 ## access token
@@ -172,7 +172,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/
 
 The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (for example, `c-2`) in the region slug to support scalability in Neon's high-demand regions.
 
-Connection strings for a Neon databases can be obtained by clicking the **Connect** button on your **Project Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
+Connection strings for a Neon databases can be obtained by clicking the **Connect** button in the Console nav. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## console
 
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview). Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -415,7 +415,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
+You can obtain a pooled connection string for your database by clicking the **Connect** button in the Console nav. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
@@ -634,7 +634,7 @@ An unpooled connection string connects to your Neon database directly. It does n
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-You can obtain an unpooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+You can obtain an unpooled connection string for your database by clicking the **Connect** button in the Console nav. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Time Travel
 

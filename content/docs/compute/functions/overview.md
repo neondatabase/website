@@ -8,23 +8,23 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-09-17T00:30:38.129Z'
 ---
 
-Neon Functions are serverless functions you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
+Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
 
 What makes Neon Functions different from lambda-style serverless?
 
-- **Next to your data.** Same region as the branch, with `DATABASE_URL` (plus [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview) credentials) injected automatically. No cross-region hops, and no credentials to wire up.
+- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
 - **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
-- **Branches with your data.** Each branch runs its own function at its own URL against its own database state.
+- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
 
-Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
 
-> Functions are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions. Functions are free to use during beta, subject to [usage limits](/docs/compute/functions/reference/runtime-limits), on any plan. See [plans and pricing](/docs/introduction/plans#functions) for the rates that apply when billing begins.
+> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
 
 <Admonition type="important" title="JavaScript and TypeScript only">
-Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't supported during beta.
+Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
 </Admonition>
 
 ## Get started
@@ -43,6 +43,8 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
 
+<a href="/docs/compute/functions/custom-domains" description="Serve a function from a domain you own with automatic TLS." icon="globe">Custom domains</a>
+
 <a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
@@ -51,9 +53,9 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 
 ## Request/response, not background jobs
 
-A function is always requested (by a `fetch`, a browser, an agent) and always returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade.
+A function always runs in response to a request and returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade. The request usually comes from a client (a `fetch`, a browser, an agent), but it can also come from Neon: a [Function Trigger](/docs/compute/functions/triggers/overview) invokes the function on a cron schedule.
 
-That makes functions a fit for request/response work, and not for background jobs. Background jobs and workflows are the other kind of compute: queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup. Those need a job queue or workflow engine to own that lifecycle. Today you can pair a function with a third-party queue or scheduler like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com): the service owns the queue, retries, and scheduling, and invokes your function over HTTP to run each job. A native Neon job queue and workflow engine is a separate, upcoming offering.
+Functions fit request/response work, including scheduled runs with [Function Triggers](/docs/compute/functions/triggers/overview). They aren't a job queue. Queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup, still needs a queue or workflow engine to own that lifecycle. You can pair a function with a third-party queue like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com), which owns the queue and retries and invokes your function over HTTP. A native Neon job queue and workflow engine is a separate, upcoming offering.
 
 Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
 

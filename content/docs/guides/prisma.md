@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-08-17T13:35:16.350Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -46,7 +46,7 @@ From your Neon Console, click **Connect** and copy both connection strings:
 - **Pooled connection** (has `-pooler` in the hostname): for your application
 - **Direct (unpooled) connection**: for Prisma CLI commands (migrations, introspection)
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 Add them to your `.env` file:
 

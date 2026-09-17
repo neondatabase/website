@@ -9,8 +9,6 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
-
 The `dev` command runs [Neon Functions](/docs/compute/functions/overview) locally with a dev server and hot reload. Serve one function from its entry module, or every function declared in your `neon.ts` policy.
 
 ## Usage

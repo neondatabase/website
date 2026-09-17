@@ -8,7 +8,7 @@ summary: >-
   database as a REST API locally using Docker, including JWT-based
   authentication and row-level security for per-user access control.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <InfoBlock>
@@ -83,7 +83,7 @@ While this example uses SERIAL for simplicity, consider using UUID as a primary 
 Retrieve an unpooled database connection string. PostgREST requires a direct connection to your database.
 
 1. Navigate to your **Project Dashboard** in the Neon Console.
-2. Click the **Connect** button to open the **Connect to your database modal**.
+2. Click the **Connect** button to open the **Connect to your branch** modal.
 3. Toggle **Connection pooling** to disable it; you need an unpooled connection string.
 4. Copy the connection string.
 

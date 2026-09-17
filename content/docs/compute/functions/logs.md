@@ -10,8 +10,6 @@ summary: >-
 enableTableOfContents: true
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
-
 Every deployed function streams its logs to the Neon Console: standard output and standard error from your handler, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
 
 ```text

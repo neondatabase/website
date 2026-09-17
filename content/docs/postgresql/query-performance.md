@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2026-09-10T13:38:23.543Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -416,7 +416,7 @@ Enabling connection pooling in Neon requires adding a `-pooler` option to your N
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Alternatively, you can obtain a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
+Alternatively, you can obtain a pooled connection string for your database by clicking the **Connect** button in the Console nav.
 
 For more information about connection pooling in Neon, see [Connection pooling](/docs/connect/connection-pooling).
 

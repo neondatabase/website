@@ -9,7 +9,7 @@ summary: >-
   JDBC URL format for Neon and demonstrates the update and rollbackCount
   commands.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -109,7 +109,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Retrieve your Neon database connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use the selection drop-down menu.
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Use the selection drop-down menu.
 
 Your Java connection string should look something like the one shown below.
 

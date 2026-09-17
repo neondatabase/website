@@ -9,7 +9,7 @@ summary: >-
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
-updatedOn: '2026-09-14T12:58:18.350Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -20,8 +20,6 @@ redirectFrom:
   - /docs/guides/neon-auth
   - /docs/guides/neon-auth-demo
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 This guide shows you the code differences between legacy Neon Auth (Stack Auth) and Managed Better Auth. Use it as a reference to understand what changes if you decide to upgrade.
 

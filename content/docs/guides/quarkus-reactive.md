@@ -9,7 +9,7 @@ summary: >-
   configuring QUARKUS_DATASOURCE_REACTIVE_URL with sslmode=require, and
   exposing a REST endpoint that queries the database asynchronously using Mutiny.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"
@@ -51,7 +51,7 @@ QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[
 ```
 
 <Admonition type="note">
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 ## Use the Reactive PostgreSQL client

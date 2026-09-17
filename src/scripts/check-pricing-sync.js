@@ -12,8 +12,10 @@
  * Source 3 vs Sources 1+2: rate sniff — every rate-shaped string in plans.md
  * (e.g. $0.35/GB-month) must also appear in pricing.md.
  *
- * Exits non-zero on any mismatch or pricing.md issue. Wired into prebuild and
- * predev so Vercel and local builds fail when sources drift.
+ * Reports drift as a warning (exit 0), not a build failure. Wired into prebuild
+ * and predev to surface drift in the build logs, so pricing sources drifting
+ * mid-transition (a GA or beta change landing on one source first) don't block
+ * unrelated builds. Genuine load errors (missing sources) still exit non-zero.
  *
  * Usage:
  *   node src/scripts/check-pricing-sync.js              # Verbose locally, terse in CI
@@ -616,7 +618,7 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-free',
     label: 'Auth MAU (Free)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'free',
     norm: extractCore(/(60k|60,?000)/i, '60k'),
     agentLabel: 'Auth (MAU)',
@@ -625,7 +627,7 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-launch',
     label: 'Auth MAU (Launch)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'launch',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
@@ -634,7 +636,7 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-scale',
     label: 'Auth MAU (Scale)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'scale',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
@@ -1348,7 +1350,7 @@ Source 3: Hand-edited agent markdown
     `\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped, ${pricingIssues} pricing source issue(s), ${agentIssues} cell issue(s)`
   );
   if (mismatch > 0 || pricingIssues > 0 || agentIssues > 0) {
-    console.log('\nResult: FAIL — drift detected\n');
+    console.log('\nResult: WARN - drift detected (non-blocking)\n');
   } else if (missing > 0) {
     console.log('\nResult: WARN — some data points could not be compared\n');
   } else {
@@ -1374,7 +1376,7 @@ function printTerseReport(results, pricingMd, agentChecks) {
     return;
   }
 
-  console.log('[FAIL] Pricing sync: drift detected\n');
+  console.log('[WARN] Pricing sync: drift detected (non-blocking)\n');
 
   const mismatches = results.filter((r) => r.status === 'mismatch');
   if (mismatches.length) {
@@ -1508,7 +1510,11 @@ function main() {
     printTerseReport(results, pricingMd, agentChecks);
   }
 
-  process.exit(summarize(results, pricingMd, agentChecks).critical > 0 ? 1 : 0);
+  // Pricing drift is a warning, not a build failure. The sources routinely
+  // drift mid-transition (a GA or beta change often lands on one source before
+  // the others), so failing here blocks unrelated builds. The check still runs
+  // and prints any drift above, keeping it visible in build logs.
+  process.exit(0);
 }
 
 main();

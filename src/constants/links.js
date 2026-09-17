@@ -35,6 +35,9 @@ export default {
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
   autoscalingReport: '/autoscaling-report',
+  tools: '/tools',
+  toolsUpgradeAssessment: '/tools/postgres-major-version-assessment/assess',
+  toolsMigration: '/tools/postgres-migration',
 
   // Docs
   docs: '/docs',

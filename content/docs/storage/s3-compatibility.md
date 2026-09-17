@@ -6,10 +6,8 @@ summary: >-
   for JavaScript, boto3, and the AWS CLI. Not all S3 operations are supported.
   This page lists what works, what returns 501, and known limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Neon Object Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
 

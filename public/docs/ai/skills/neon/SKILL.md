@@ -1,31 +1,29 @@
 ---
 name: neon
 description: >-
-  Overview of Neon, a complete set of cloud backend primitives for apps and
-  agents, spanning Lakebase Postgres, Auth, the Data API, Object Storage, Compute
-  Functions, and the AI Gateway. Start here to route to the right Neon skill, set
-  up the CLI or MCP server, and follow the branch-first workflow. Use when "Neon"
-  or "Lakebase Postgres" is mentioned, or when any of its individual capabilities
-  are the trigger: "object storage" or "S3", "buckets", "serverless functions",
-  "AI gateway", "call an LLM", "logs", "branch logs", "query logs",
-  "log export", "Loki", "Grafana", "observability", "telemetry", "postgres",
-  "database", or "backend". Also use when there is no Neon account yet, the
-  user cannot sign in or provide an API key right now and needs a project they
-  can claim later, or the user asks for a throwaway DATABASE_URL, Claimable Neon,
-  Claimable Postgres, neon.new, claimable.neon.tech, instant Postgres, a no-signup
-  database, temporary postgres, quick postgres, a no credit card database, or
-  npx neon-new.
+  Overview of Neon, a complete set of cloud backend primitives around Lakebase
+  Postgres: Auth, Object Storage, Functions, and the AI Gateway. Start here to
+  choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or
+  MCP server, and follow the branch-first workflow. Use when building an app or
+  backend on Neon, or when "Neon" or "Lakebase Postgres" is mentioned. Child
+  skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect,
+  or search. Also use for object storage, S3, buckets, serverless functions,
+  function triggers, cron, AI gateway, LLM calls, logs, Loki, Grafana,
+  observability, postgres, database, backend, Claimable Neon, neon.new, or a
+  no-signup database.
 metadata:
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
 
 # Neon
 
-Important: Neon is no longer just a Postgres provider. Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks — bundling Lakebase Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, and an AI Gateway, all instant, branchable, and serverless.
+Neon is a complete set of cloud backend primitives around Lakebase Postgres, from Databricks — Lakebase Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, and an AI Gateway, all instant, branchable, and serverless.
 
 **Lakebase Postgres** is the database itself. It is one product, reached two ways: through Neon, with a free plan and the full set of backend primitives above, or through Databricks, alongside the rest of the Databricks suite. Same infrastructure, same features, same engineering team. Call the database Lakebase Postgres, and use "Neon" for the brand and for this access path — not as a name for the database.
 
 A Neon branch is an isolated, copy-on-write clone of your data, taken from its current state or from a past state within your project's retained history window. You can freely modify or delete it. It shares data with its parent until writes cause it to diverge, and those writes are stored independently as deltas.
+
+Agents pick Neon for instant Postgres provision, copy-on-write branches and snapshots, compute that scales to zero (storage is still billed), and ordinary Postgres that works with any driver or ORM.
 
 ## Backend Primitives
 
@@ -34,8 +32,9 @@ Neon bundles several backend primitives for building apps and agents that all br
 - **Lakebase Postgres** — Postgres that scales and branches with your app, built on the lakebase architecture: OLTP directly on cloud object storage, with storage decoupled from compute. _Generally available._
 - **Auth** — Managed Better Auth with users and sessions stored in Postgres. _Generally available._
 - **Object Storage** — S3-compatible object storage that branches with your projects. _Public beta._
-- **Functions** — Neon's compute offering: long-running serverless functions that run close to your database, for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Public beta._
+- **Functions** — Neon's compute offering: long-running serverless functions that run close to your database, for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. A Function Trigger POSTs to a function on a cron. _Public beta._
 - **AI Gateway** — One API for frontier and open-source models, supporting the chat completions API and the responses API, powered by Databricks Unity AI Gateway. _Public beta._
+- **Data API** — Optional PostgREST-compatible HTTP interface. Use it only when the app already uses PostgREST or a Supabase database client, or is migrating that client. New apps query Postgres from Functions or existing handlers. There is no `neon-data-api` skill; configuration is `dataApi` in `neon.ts` (see [Type-safe config](#type-safe-config-invalid-setups-dont-compile) when you have chosen it).
 
 ### Public Beta Service Availability
 
@@ -45,17 +44,47 @@ Beta access features are currently available on projects in `us-east-2` and `eu-
 
 ## Architecture: How to Use Neon
 
-Neon is **not** a place to host your app frontend. Neon provides the backend primitives (Lakebase Postgres, Auth, Object Storage, Functions, AI Gateway) that **compose with** the application platform you already use.
+Query Postgres from Neon Functions or existing app handlers. Use the Data API only for PostgREST / Supabase client compatibility and migrations that already depend on it. Do not default new apps to the Data API.
+
+Neon is **not** a place to host your app frontend. Neon provides the backend primitives (Lakebase Postgres, Auth, Object Storage, Functions, AI Gateway) that **compose with** the application platform you already use. The Data API is an optional PostgREST-compatible HTTP path, not a required primitive for a new app.
 
 Recommended architectures:
 
-**Full-stack app on Vercel** (or Netlify) augmented with Neon — the app framework (Next.js, TanStack Start, etc.) owns your UI and routes and talks directly to your Neon services (Lakebase Postgres, Auth, Object Storage, Functions, AI Gateway).
+**New client-only app** — host the UI on Vercel or Netlify; the browser calls a Neon Function; the Function queries Postgres (and Object Storage, Auth, AI Gateway as needed).
 
-**Reach for Neon Functions when you outgrow the host's limits** — a WebSocket or SSE server, long-running agents, or an MCP server that risks timing out on short, lambda-style serverless functions. As long as there is an active connection, a Neon Function can run up to 24 hours without interruption, with the added benefit of running close to your data.
+**Existing full-stack app on Vercel** (or Netlify) — keep the framework's route handlers querying Postgres. Add a Neon Function when a workload needs long-running compute (WebSocket, SSE, a long agent, an MCP server). As long as there is an active connection, a Neon Function can run up to 24 hours without interruption, with the added benefit of running close to your data.
 
-**Move your whole backend control plane onto Neon Functions** — especially useful when the frontend is **client-only** rather than full-stack: TanStack Router, React Router in client mode, and similar SPAs hosted on Vercel or Netlify. The client talks **directly to Neon Functions**, where you build REST APIs and request/response agents. Secure these functions like any standalone REST API — verify a JWT or API key at the top of each handler (see the `neon-functions` skill).
+**Existing PostgREST or Supabase-js database client** — keep the Data API compatibility path. An installed Supabase package used only for Auth or Storage is not evidence that database access needs PostgREST.
 
-Because Functions are just your backend, they compose with a full-stack app that already has one (Next.js route handlers, etc.), too.
+A generic request for REST endpoints is a Function or existing-handler request, not a Data API request.
+
+Secure a Function like any standalone REST API — verify a JWT or API key at the top of each handler (see the `neon-functions` skill).
+
+## Convert an app onto Neon
+
+Inspect the repo before provisioning.
+
+1. Map requested capabilities: login, files, HTTP APIs, LLM calls, SQL.
+2. Reuse what is already there: a supplied `DATABASE_URL`, an existing ORM or driver, Clerk or another auth provider, S3 or another object store, an existing `.neon` / `neon.ts`, an existing Data API or PostgREST client.
+3. Select Neon primitives for capabilities that are still undecided.
+4. Provision only when infrastructure is missing: `neon init` / `neon link` / Claimable, then `neon.ts`, then `neon deploy`.
+5. Verify the app flow (sign-in, upload, API call), not only that env vars landed.
+
+Do not replace a working Clerk, S3, or supplied `DATABASE_URL` with a Neon primitive unless the user asks. Do not rewrite an existing `neon.ts`. If Neon credentials fail for an existing account, stop and ask the user to sign in; do not create a Claimable project as a substitute.
+
+A supplied `DATABASE_URL` with no Neon credentials is schema work: complete it without provisioning. Managed Better Auth cannot be enabled on a project that uses IP Allow or Private Networking. Leave those protections in place.
+
+New projects are created in AWS regions. Prefer pooled `DATABASE_URL` for application traffic.
+
+| Need | Use |
+| --- | --- |
+| Login, users, sessions (no existing provider) | Auth (`auth: true`) |
+| Files, uploads, blobs (no existing object store) | Object Storage |
+| HTTP APIs, cron, WebSocket, SSE, long-running agents | Functions querying Postgres |
+| LLM calls | AI Gateway |
+| SQL, schema, inspect, search | `neon-postgres` |
+| Existing PostgREST / Supabase database client | Data API (`dataApi` in `neon.ts`) |
+| Generic REST endpoints | Function or existing handler, not Data API |
 
 ## Neon Documentation
 
@@ -89,105 +118,158 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 | `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, and autoscaling: SQL development, schema design, performance optimization, and scaling decisions.           |
 | `neon-postgres-branches`         | Choosing or creating the right branch type for dev, preview, test, or CI workflows. Use this skill as a slash command.                                                               |
 | `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
-| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers.                                                                                      |
+| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                                     |
 | `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
 | `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase.                                                                                          |
+
+There is no `neon-data-api` skill. Configure `dataApi` in `neon.ts` only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
 
 For guidance on agent platforms that provision and operate Lakebase Postgres on Neon at scale, use `neon-postgres-agent-platforms`, which lives in a separate repo: [`neondatabase/neon-for-agent-platforms`](https://github.com/neondatabase/neon-for-agent-platforms).
 
 ### Installing the Right Skill
 
-First check whether the target skill is already installed and accessible (for example, it appears in the available skills list or its `SKILL.md` is present). If it is, use it directly. If it is not installed, install it via the `skills` CLI, if available, with `npx`/`bunx`:
+First check whether the target skill is already installed and accessible (for example, it appears in the available skills list or its `SKILL.md` is present). If it is, use it directly. If it is not installed, install it with `neon skills`:
 
 ```bash
-npx skills add neondatabase/agent-skills -s <skill-name>
+neon skills -s <skill-name>
 ```
 
 Replace `<skill-name>` with the skill you need (for example, `neon-object-storage`, `neon-functions`, or `neon-ai-gateway`). Useful flags:
 
-- `-g` — install globally instead of into the current project.
+- `--global` — install globally instead of into the current project.
 - `-y` — non-interactive mode (skip prompts).
-- `-a <agent-name>` — pick the target agent(s) for non-interactive mode.
+- `--agent <agent-name>` — pick the target agent(s) for non-interactive mode.
 
 For example, to install the object storage skill globally for a specific agent without prompts:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-object-storage -g -y -a <agent-name>
+neon skills -s neon-object-storage --global -y --agent <agent-name>
 ```
 
-If you don't have access to the `skills` CLI, you can visit https://neon.com/.well-known/agent-skills for a registry of all available Neon skills and fetch them manually.
+If the Neon CLI is not available, you can visit https://neon.com/.well-known/agent-skills for a registry of all available Neon skills and fetch them manually.
 
 ### Updating Skills
 
 Keep the skills up to date: for every new session, update them so you are working with the latest best practices.
 
-Use the same method that was used to install them. With the `skills` CLI, run the install command above with `update` in place of `add`, or run `npx skills update` to update all Neon skills. If the skills were installed via a plugin, they are updated automatically.
+Run `neon skills update` to update all installed Neon skills, or `neon skills update -y` to skip prompts. If the skills were installed via a plugin, they are updated automatically.
 
 ## Getting Started with Neon
 
-Before `npx neon@latest init --agent`, check whether the CLI is already authenticated:
-
-- `NEON_API_KEY` is set
-- `npx neon@latest profile list -o json` lists a profile whose `account` is not `-`
-
-A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account. If `neon` is not installed, or `npx neon@latest profile list` cannot run, that is not an account.
-
-If none of those hold, follow [Starting without a Neon account](#starting-without-a-neon-account).
-
-The easiest way to get started with Neon is to use our CLI and the project bootstrap wizard:
-
-```bash
-npx neon@latest init --agent
-```
-
-Use the `--agent` flag to run in a non-interactive, state-machine mode.
-
-This init command will guide you through installation of suggested Neon development tools. Everything is customizable. The defaults are:
-
-- Neon CLI installed globally
-- Neon MCP server installed globally
-- Neon Agent skills installed into the project
-
-If `init` is run in an empty project, it will run the `bootstrap` command, offering to install one of our project templates.
-
-### Getting Started with the Neon CLI
-
 **Prefer the CLI over the MCP server** unless the user instructs otherwise, the CLI is unavailable or blocked in your environment, or it is not authenticated, since it provides more capabilities, including deploying Neon Functions.
 
-The above `init` command will install the Neon CLI, but the CLI can also be installed manually with `npm i -g neon` or `bun i -g neon`. For full CLI installation options, see https://neon.com/docs/cli/install.md
+### Check the CLI, then credentials
 
-#### Useful CLI Commands
+```bash
+neon --version
+```
 
-These commands are included in the `init` command but can be run manually as needed.
+If that fails, install first:
 
-1. `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`).
-2. `neon checkout <branch-name>` — Pins a different branch in `.neon`, creating it if it doesn't exist yet, and pulls that branch's env. It drives the [Branch-First Dev Flow](#branch-first-dev-flow) described below.
-3. `neon config init` — Initializes a `neon.ts` file, which declares how you provision and manage Neon services, in the root of the project.
-4. `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
+```bash
+npm i -g neon       # npm
+bun add -g neon     # bun
+pnpm add -g neon    # pnpm
+```
 
-   Without `neon.ts` it pulls the vars of every service the branch actually has (Postgres, plus Neon Auth, the Data API, and bucket `AWS_*` once provisioned); with `neon.ts` it pulls only the services declared there and errors if the branch is missing one — and the AI Gateway vars are never pulled unless `neon.ts` declares `aiGateway`.
+For full CLI installation options, see https://neon.com/docs/cli/install.md
 
-### Getting Started with the Neon MCP Server
+Then inspect credentials without printing secrets. `NEON_API_KEY` or a `neon profile list -o json` row whose `account` is not `-` is an account. A `DEFAULT` row with `account: "-"` and `file: "missing"` is not.
 
-The above `init` command will install the Neon MCP server globally, but it can also be installed manually using: `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>` or through your IDE plugin.
+- Credentials already available: reuse them. Do not launch a browser.
+- A human needs to sign in: they run `neon login` (`neon auth` is an alias). An unattended agent must not launch browser authentication.
+- No account yet: follow [Starting without a Neon account](#starting-without-a-neon-account) for the Claimable Neon path.
 
-For all available plugins, see: https://neon.com/docs/ai/ai-agents-tools.md
+### Combined setup: `neon init`
+
+When both agent tooling and project setup are needed, use authenticated `neon init`. `--agent` takes the coding-agent name. `-y` skips prompts but does not supply project selection or credentials. `--skip-template` skips scaffolding a starter app.
+
+Link an existing project:
+
+```bash
+neon init --skip-template --agent cursor \
+  --org-id <org-id> --project-id <project-id> -y
+```
+
+Create and link a project:
+
+```bash
+neon init --skip-template --agent cursor \
+  --org-id <org-id> --project-name my-app \
+  --region-id aws-us-east-2 -y
+```
+
+`--services` may declare `auth`, `data-api`, `functions`, `object-storage`, and `ai-gateway` (repeat the flag or comma-separate). Pass `none` for the bare starter policy. It writes `neon.ts`; it does not deploy or wire the app. Selecting `data-api` also declares Auth (the default Data API provider requires it). Use `data-api` only for PostgREST / Supabase database-client compatibility.
+
+If `init` already installed the Neon plugin, do not also run `neon mcp` and `neon skills` for the same agent.
+
+When tooling already exists, only one component is missing, or env writes need `--no-env-pull`, use the manual steps below. `init` has no `--no-env-pull`. Before a command that pulls env, inspect existing configuration. If a supplied `DATABASE_URL` or `AWS_*` value must stay, pass `--no-env-pull` on `link` / `checkout` and write env to a separate `--file`.
+
+### 1. Install the Neon CLI
+
+Use the install check above. Do not run `neon login` unattended. MCP remains the fallback when the CLI is unavailable, blocked, unauthenticated, or the user prefers it.
+
+### 2. Install the Neon MCP Server
+
+```bash
+neon mcp --oauth --project --agent cursor -y
+```
+
+`--oauth` writes the server URL and leaves sign-in to the MCP client. That is not an authenticated MCP session. `--project` means project-level agent config, not a Neon project ID; the agent must support project-level installs (`cursor` does). Bare `neon mcp -y` installs globally and can reuse or mint an account-wide API key — do not treat it as the unattended default.
+
+For all available plugins and IDE integrations, see: https://neon.com/docs/ai/ai-agents-tools.md
 
 For full MCP server installation options, see https://neon.com/docs/ai/connect-mcp-clients-to-neon.md
 
-Useful MCP tools to initialize a project:
+### 3. Install Neon Agent Skills
 
-- `list_projects` — Lists the first 10 Neon projects in your account, providing a summary of each project. If you can't find a specific project, increase the limit by passing a higher value to the `limit` parameter.
-- `create_project` — Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
-- `get_connection_string` — Returns your database connection string.
+```bash
+neon skills -s neon --agent cursor -y
+```
+
+To install a specific skill only:
+
+```bash
+neon skills -s <skill-name> --agent cursor -y
+```
+
+Useful flags: `--global`, `-y`, `--agent <agent-name>`. Interactive `neon skills` with no flags prompts.
+
+### 4. Link Your Project and Get Started
+
+With setup complete, connect the workspace to a Neon org, project, and branch. Then consult the skill for each Neon feature your app requires. See [Choosing the Right Skill](#choosing-the-right-skill) above.
+
+Non-interactive link:
+
+```bash
+neon link --project-id <project-id> -y
+neon link --org-id <org-id> --project-name my-app --region-id aws-us-east-2
+```
+
+`-y` skips the already-linked confirmation and pins the default branch when the project has more than one. Pass `--branch <name>` when branch selection matters.
+
+#### Useful CLI Commands
+
+1. `neon link` — Writes org, project, and branch IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`). Non-interactive: `--org-id` / `--project-id` / `--project-name` plus `--region-id`, and `-y` when appropriate. There is no `neon link --agent`.
+2. `neon checkout <branch-name>` — Pins a branch in `.neon` and pulls that branch's env. An existing branch is enough. A missing **name** needs `--create` for unattended use (`neon checkout dev --create`). A missing branch **id** cannot be created. Interactive checkout with no name may offer to create; do not rely on that unattended. Drives the [Branch-First Dev Flow](#branch-first-dev-flow) below.
+3. `neon config init` — Initializes a `neon.ts` file, which declares how you provision and manage Neon services, in the root of the project.
+4. `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
+
+   Without `neon.ts`, a **bare** `neon env pull` includes the default Gateway credential on claimed projects. Implicit pulls bundled into `link` / `checkout` / `apply` do **not** pull an undeclared Gateway token. Declaring `aiGateway` in `neon.ts` requests those variables. With `neon.ts`, pull includes only the services declared there and errors if the branch is missing one.
+
+### Bootstrap a New Project
+
+`neon bootstrap` scaffolds from a Neon project template.
+
+```bash
+neon bootstrap
+```
 
 ## Starting without a Neon account
 
-If the Getting Started account check found credentials, use them. If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Prefer that over Claimable Neon unless they say otherwise.
+If the Getting Started account check found credentials, use them. If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Do not create a Claimable project as a substitute for a failed existing account.
 
-If they cannot sign in or provide a key right now, ask before using Claimable Neon. Continue only after they say yes. That is a temporary workaround.
-
-If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback. Unclaimed projects expire at `project_expires_at` (72 hours today). Claim codes expire in `expires_in` (15 minutes today). Add Auth or the Data API with `neon.ts` and `neon deploy` before or after claim.
+If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback. Unclaimed projects expire at `project_expires_at` (72 hours today). Claim codes expire in `expires_in` (15 minutes today). Functions, Object Storage, and AI Gateway report `requires_claim` before a human claims the project; report that and keep the denied capabilities. Add Auth with `neon.ts` and `neon deploy` when login is requested and no existing provider should be preserved. Add the Data API only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
 
 Requests for neon.new, Claimable Postgres, claimable.neon.tech, instant Postgres, or a no-signup database are the same path.
 
@@ -204,18 +286,16 @@ npm i @neon/config
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-    buckets: {
-      images: {
-        access: "private",
-      },
+  aiGateway: true,
+  buckets: {
+    images: {
+      access: "private",
     },
-    functions: {
-      imagegen: {
-        name: "AI SDK image agent",
-        source: "src/index.ts",
-      },
+  },
+  functions: {
+    imagegen: {
+      name: "AI SDK image agent",
+      source: "src/index.ts",
     },
   },
 });
@@ -223,20 +303,19 @@ export default defineConfig({
 
 ### Provision services with neon config
 
-Every project ships with Lakebase Postgres; `neon.ts` lets you also declare Neon Auth and the Data API today, with Functions, buckets, and the AI Gateway under a `preview` block — every service for the branch composes in one file:
+Every project ships with Lakebase Postgres; `neon.ts` also declares Auth, Functions, buckets, and the AI Gateway. Data API is a compatibility toggle, not part of a default backend:
 
 ```typescript
 // neon.ts
 export default defineConfig({
   auth: true,
-  dataApi: true,
-  preview: {
-    functions: {},
-    buckets: {},
-    aiGateway: true, // see the neon-ai-gateway skill
-  },
+  functions: {},
+  buckets: {},
+  aiGateway: true, // see the neon-ai-gateway skill
 });
 ```
+
+Empty `functions` / `buckets` maps are configuration slots, not a deployed API. Do not replace an existing `neon.ts` wholesale with this example.
 
 Reconcile the declaration from the CLI — the Neon equivalent of `terraform status` / `plan` / `apply`:
 
@@ -252,44 +331,19 @@ neon deploy --env <file>  # apply neon.ts. Pass --env when Function env reads pr
 
 `neon deploy` is the preferred full deployment: it applies `neon.ts` (services and functions) to the linked branch. `neon deploy --env <file>` loads that file into `process.env` before evaluating `neon.ts`, then uploads those values as Function env. Use it every time Function env reads `process.env`.
 
-`<file>` is the gitignored file `neon env pull` already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only (`DATABASE_URL`, `NEON_AI_GATEWAY_*`, …). Add every key under `preview.functions.*.env` to that file yourself, then pass the same path to `--env`.
+`<file>` is the gitignored file `neon env pull` already writes (`.env` if that file exists, otherwise `.env.local`). Env pull writes Neon-managed vars only (`DATABASE_URL`, `NEON_AI_GATEWAY_*`, …). Add every key under `functions.*.env` to that file yourself, then pass the same path to `--env`.
 
 Every declared Function env key must be a defined string. `undefined` (an unset `process.env.X`) means you listed a key you want written but the value is missing: `defineConfig` throws. Omit the key from `neon.ts` if you do not want to write it. Never coerce a missing `process.env` value to an empty string: that uploads `""` and deletes the live key. An empty assignment in the file (`KEY=`) is also `""`. If TypeScript needs a type assertion, use `process.env.X!` and make sure the file actually has the value.
 
 Use `neon functions deploy` when you are not applying `neon.ts`: a single function by slug, or a targeted `--env KEY=VALUE` update (that flag is not a file path).
 
+### Function Triggers
+
+A Function Trigger POSTs to a Neon Function on a cron (`type: "schedule"`) or when an object is created in a bucket (`type: "storage_object_created"`). Beta; same regions as Functions. Prefer a `triggers` map in `neon.ts` (the record key is the trigger name) and `neon deploy`. CLI, MCP, REST, inherited-trigger behavior, and parsers: [references/function-triggers.md](https://neon.com/docs/ai/skills/neon/references/function-triggers.md). Handler payload and Hono example: the `neon-functions` skill, `references/function-triggers.md`.
+
 ### Type-safe env vars with parseEnv
 
-`@neon/env`'s `parseEnv` takes your `neon.ts` config object and returns a parsed, typed env object, validated against the services you declared. The shape of `env` follows your config, and missing variables are flagged with clear errors.
-
-```bash
-npm i @neon/env
-```
-
-```typescript
-import { parseEnv } from "@neon/env";
-import config from "./neon";
-
-const env = parseEnv(config);
-
-console.log(env.postgres.databaseUrl);
-console.log(env.auth.baseUrl);
-```
-
-By default `parseEnv` requires _every_ variable your config implies. When one of your apps only uses a subset, for example when you need to read `DATABASE_URL` but never the unpooled URL, pass an array of env-var keys to require and validate only those. The keys are typesafe: autocomplete only offers variables your config enables, and the returned shape is narrowed to exactly what you selected (so unselected variables are neither enforced nor present).
-
-```typescript
-import { parseEnv } from "@neon/env";
-import config from "./neon";
-
-// Only DATABASE_URL is required and returned; DATABASE_URL_UNPOOLED is not enforced.
-const { postgres } = parseEnv(config, ["DATABASE_URL"]);
-console.log(postgres.databaseUrl);
-
-// Selecting across services — only these keys are validated.
-const env = parseEnv(config, ["DATABASE_URL", "NEON_AUTH_BASE_URL"]);
-console.log(env.postgres.databaseUrl, env.auth.baseUrl);
-```
+`@neon/env`'s `parseEnv` returns a typed env object from your `neon.ts` config. Require a subset of keys when an app does not need every implied variable: [references/parse-env.md](https://neon.com/docs/ai/skills/neon/references/parse-env.md).
 
 ### Branch configuration
 
@@ -301,7 +355,6 @@ import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true,
-  dataApi: true,
   branch: (branch) => {
     if (branch.exists) {
       // leave existing branches untouched
@@ -328,7 +381,7 @@ The `branch` function receives the target branch (its `name`, whether it `exists
 
 ### Type-safe config: invalid setups don't compile
 
-Because `neon.ts` is TypeScript, the compiler catches invalid infrastructure before you ever deploy — and Neon encodes the actual rules (and their fixes) into the types, so the error tells you what to do rather than failing with a useless `Type 'true' is not assignable to type 'never'`. The canonical case: the Data API verifies requests with Neon Auth by default, so enabling it on its own is a type error _on_ `dataApi`:
+Because `neon.ts` is TypeScript, the compiler catches invalid infrastructure before you ever deploy — and Neon encodes the actual rules (and their fixes) into the types, so the error tells you what to do rather than failing with a useless `Type 'true' is not assignable to type 'never'`. The canonical case, **when the app has chosen Data API for PostgREST/Supabase compatibility**: the Data API verifies requests with Neon Auth by default, so enabling it on its own is a type error _on_ `dataApi`. Do not enable Auth merely to satisfy this error in an app that never needed Data API.
 
 ```typescript
 export default defineConfig({
@@ -361,117 +414,52 @@ Neon branches enable a branch-first development flow, which we recommend when us
 
 Create a Neon branch any time you would create a git branch. Use the following commands if you have CLI access:
 
-- `neon checkout <branch-name>` — Creates the branch if it doesn't exist, or checks out the existing one, by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. It does not touch code or local Postgres.
-- `neon env pull` — Fetches the current branch's Neon environment variables into your `.env` (see [Useful CLI Commands](#useful-cli-commands) above). **`link` and `checkout` run this for you by default**, so you rarely call it directly.
+- `neon checkout <branch-name>` — Pins an existing branch by updating only the branch pointer in `.neon`. Pass `--create` to create a missing **name** (`neon checkout dev --create`). Run without a name for an interactive picker. It does not touch code or local Postgres.
+- `neon env pull` — Fetches the current branch's Neon environment variables into your `.env`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
 - `neon diff` — Shows the schema diff between the child branch and its parent. Run this to see what changes have been made to the schema since the last branch was created and before you commit your changes.
 
 ```bash
 neon link                     # once; also pulls the linked branch's env
-neon checkout dev-add-search  # per feature; also pulls the branch's env
+neon checkout dev-add-search --create  # per feature; also pulls the branch's env
 ```
 
 Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: run `checkout` between tasks.
 
 ### How checkout composes with neon.ts
 
-When a `neon.ts` is present, `neon checkout` applies your policy as it **creates** a branch, so a fresh branch comes up with its declared settings and services already in place. That create-apply does not load `--env`; if Function env reads `process.env`, run `neon deploy --env <file>` after checkout (add `--update-existing` if checkout already created the branch). Checking out an _existing_ branch never reconciles it — apply config changes to it explicitly with `neon deploy --env <file>` (alias for `neon config apply`). The bundled `env pull` also checks `neon.ts` against the linked branch and fails fast if the branch is missing a declared service, pointing you at `neon deploy --env <file>` to provision it, so your local env and the remote branch never drift apart silently.
+When a `neon.ts` is present, `neon checkout <name> --create` applies your policy as it **creates** a branch, so a fresh branch comes up with its declared settings and services already in place. Pass `--env <file>` on that create so Function env that reads `process.env` resolves (`neon checkout feat --create --env .env.local`). Existing process env wins over the file. Checking out an _existing_ branch never reconciles it — apply config changes to it explicitly with `neon deploy --env <file>` (alias for `neon config apply`). `--update-existing` auto-confirms overriding remote settings; add it only after reviewing those changes. The bundled `env pull` also checks `neon.ts` against the linked branch and fails fast if the branch is missing a declared service, pointing you at `neon deploy --env <file>` to provision it, so your local env and the remote branch never drift apart silently.
 
 ### Opting out of local env vars
 
 If env vars are injected at runtime instead of written to disk — or you simply don't want secrets in the working tree — pass `--no-env-pull` to `link` / `checkout` and supply the env another way:
 
-- `neon-env run -- <your dev command>` (from `@neon/env`) fetches the branch's vars from your `neon.ts` and injects them into the child process at runtime — no `.env` file needed. This is the runtime counterpart to the on-disk `env pull`.
-- `neon-env export` (from `@neon/env`) prints the branch's env to stdout as dotenv lines or, with `--format json`, JSON — for piping into another env manager rather than running a command. For example, [varlock](https://varlock.dev) can bulk-load it from a `.env.schema` with `@setValuesBulk(exec("neon-env export --format json"), format=json)`.
-- `fetchEnv` from `@neon/env` is the programmatic version of the same thing: resolve the branch's env in code at runtime instead of shelling out to `neon-env run`.
-- `neon dev` injects the same vars into your local dev server — it's part of Neon Functions local development (a public beta feature).
+- `neon-env run -- <your dev command>` (from `@neon/env`) injects the branch's vars at runtime.
+- `neon-env export` prints dotenv or `--format json`.
+- `fetchEnv` from `@neon/env` is the programmatic version.
+- `neon dev` injects the same vars into the local Functions dev server.
 
 When an agent should not write a local `.env`, instruct it (for example in your `AGENTS.md`) to run `neon checkout <branch> --no-env-pull` and rely on runtime injection.
 
-For reading env you _already_ have on disk (typed and validated against your `neon.ts`), use `parseEnv` — see [Type-safe env vars with parseEnv](#type-safe-env-vars-with-parseenv) above.
+For reading env you _already_ have on disk (typed and validated against your `neon.ts`), use `parseEnv` — see [Type-safe env vars with parseEnv](https://neon.com/docs/ai/skills/neon/references/parse-env.md).
 
 ## Observability
 
-Neon exposes branch-scoped logs. **Today they cover Neon Functions and Object Storage only.** Postgres computes and the AI Gateway are coming; until then, neither emits records. Logs are region-gated like the other beta services above. `us-east-2` and `eu-central-1` are enabled today. A branch that can't serve logs at all answers `404` with `reason: telemetry_not_enabled` (the message says whether it's the wrong region or a branch not collecting telemetry yet), versus a `200` empty result when the branch is enabled but has no records in the window; an unknown branch answers `reason: branch_not_found`.
-
-Use Neon CLI 3.1 or newer first. **Decide which branch you are querying.** Without `--branch`, the CLI uses the branch pinned in `.neon`, or the project's default branch when the workspace isn't linked. A deployed function or bucket usually lives on a different branch than the one checked out for development, so an empty result is more often the wrong branch than a missing log.
+Neon exposes branch-scoped logs for Functions and Object Storage today (`us-east-2`, `eu-central-1`). Query the branch that hosts the deployed function or bucket, not the checkout used for development.
 
 ```bash
 neon logs query --since 1h
 neon logs query --branch production --source function --minimum-severity error --since 6h
-neon logs query --source storage --since 1h --output json
-neon logs fields
-neon logs field-values service_name --since 1h
 ```
 
-`--source` accepts `function`, `storage`, and `pg_endpoint`, but only `function` and `storage` return records today — `pg_endpoint` is accepted and comes back empty until Postgres logs ship. The window defaults to 1h on `query` and 6h on `field-values`, and cannot exceed 7d on either. If Neon reports `--minimum-severity` as unsupported on a branch, use `--severity-text` instead (an exact, case-sensitive match, e.g. `ERROR`); severities vary by source, so confirm what a branch carries with `neon logs field-values severity_text`. Run `neon logs --help` for the full filter and pagination interface.
-
-`--logql` replaces the structured filters with a raw stream selector or line filter. Its stream label is `entity_type`, not `source`:
-
-```bash
-neon logs query --since 1h --logql '{entity_type="function"} |= "timeout"'
-```
-
-If the CLI is unavailable, fall back to the Neon MCP server's read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools.
-
-In TypeScript applications, use `@neon/sdk`. Project and branch are positional, and `query` returns a lazy paginated iterable rather than a promise:
-
-```typescript
-for await (const record of neon.logs.query(projectId, branchId, {
-  since: "1h",
-  source: "function",
-})) {
-  console.log(record.timestamp, record.severity_text, record.message);
-}
-
-const { data: fields } = await neon.logs.fields(projectId, branchId);
-const { data: serviceNames } = await neon.logs.fieldValues(
-  projectId,
-  branchId,
-  "service_name",
-);
-```
-
-`query`'s iterator always throws on error, but `fields` and `fieldValues` follow the client's `throwOnError`, which defaults to `false` and hands back `{ data, error }`. `fieldValues` resolves to the whole response, not a bare array: read `serviceNames.values`, and treat them as an arbitrary subset whenever `serviceNames.is_truncated` is true.
-
-### Loki-compatible read API
-
-For direct HTTP reads, authenticate with `Authorization: Bearer <NEON_API_KEY>` and use this branch-scoped base URL:
-
-```text
-https://console.neon.tech/telemetry/v1/projects/{projectId}/branches/{branchId}/loki
-```
-
-The available endpoints are:
-
-- `GET /api/v1/query_range`
-- `GET /api/v1/labels`
-- `GET /api/v1/label/{name}/values`
-
-This is a read-only Loki-compatible subset, not a push endpoint or complete Loki deployment. `query_range` supports LogQL stream selectors and line filters, plus `since` or `start`/`end`, `limit`, and `direction`; it does not support aggregations, parsers, or formatting stages.
-
-The paths above are the ones to call directly. A Loki client that builds its own paths — a Grafana data source appends `/loki/api/v1` to whatever URL it is given — may need a different root, so confirm the data-source URL against the Neon docs rather than pasting this base.
+CLI flags, LogQL, MCP fallback, Loki HTTP, Grafana URLs, and `@neon/sdk` pagination: [references/logs-loki.md](https://neon.com/docs/ai/skills/neon/references/logs-loki.md).
 
 ## Manage Neon Resources
 
-Recommended: Use `@neon/sdk` to manage Neon resources programmatically, such as creating projects, branches, and snapshots for dev scripts, CI/CD automations, and platforms building on top of Neon.
-
-`@neon/sdk` is the official TypeScript client for the [Neon API](https://neon.com/docs/reference/api-reference.md): **Fetch-based, zero-dependency, ESM-only**, generated from Neon's [OpenAPI spec](https://neon.com/api_spec/release/v2.json) with an ergonomic layer on top. It is the successor to [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client) (axios-based, generated-only). The old client is **not deprecated** and is safe to keep using, but new code should prefer `@neon/sdk`.
+Use [`@neon/sdk`](https://neon.com/docs/ai/skills/neon/references/sdk.md) to manage projects, branches, and snapshots from TypeScript. New code should prefer it over `@neondatabase/api-client`.
 
 ### Neon for (Agentic) Platforms
 
-If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: an instant, branchable, serverless Lakebase Postgres data layer, invisible to users.
-
-Neon features for agents:
-
-- Instant Provisioning: your users never wait for infrastructure.
-- Snapshots: let users toggle between checkpoints of code and state together.
-- Low cost-per-Database: automatic scale to zero and 350ms cold starts.
-- Full-Stack, Batteries-Included: Neon Auth, Data API included at no added charge.
-- Granular API Controls: Track and control usage for flexible limits and invoicing.
-
-All details here: https://neon.com/programs/agents.md
-
-Apply for the Neon Agent Program for special program pricing here: https://neon.com/programs/agents
+Enroll in the [Neon Agent Program](https://neon.com/programs/agents.md) only when the work is a fleet of user databases (app-generating agents and platforms). A single-app backend skips this. Instant provision, snapshots, scale-to-zero compute (storage still billed), Auth, and Data API compatibility details: that page.
 
 ## Gotchas
 
