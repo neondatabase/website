@@ -28,6 +28,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-postgres/references/hybrid-search.md',
   '/docs/ai/skills/neon-postgres/references/vector-search.md',
   '/docs/ai/skills/neon/SKILL.md',
+  '/docs/ai/skills/neon/references/auth.md',
   '/docs/ai/skills/neon/references/claimable-neon.md',
   '/docs/ai/skills/neon/references/function-triggers.md',
   '/docs/ai/skills/neon/references/logs-loki.md',
