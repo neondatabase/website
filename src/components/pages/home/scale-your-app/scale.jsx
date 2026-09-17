@@ -9,7 +9,7 @@ const ASSET_ROOT = '/images/pages/home/scale-your-app';
 
 const ScaleNoise = () => (
   <div
-    className="pointer-events-none absolute top-0 left-1/2 z-[1] h-[66.2733%] w-[99.9479%] -translate-x-1/2"
+    className="pointer-events-none absolute top-0 left-1/2 z-[1] h-[66.2733%] w-[99.9479%] -translate-x-1/2 md:hidden"
     style={{
       WebkitMaskImage: `url(${ASSET_ROOT}/scale-noise-mask.png)`,
       WebkitMaskPosition: 'center',
@@ -45,7 +45,7 @@ const ScaleStat = () => (
     <div className="flex h-[37px] items-center justify-between bg-[#303236] px-3 font-mono text-base font-semibold text-white md:text-sm">
       <span>Trusted by giants</span>
     </div>
-    <div className="px-[27px] pt-[92px] xl:pt-20 md:px-5 md:pt-15 sm:pt-8 sm:pb-8">
+    <div className="px-[27px] pt-[92px] xl:pt-20 md:px-5 md:pt-15 sm:py-5">
       <strong className="block text-[98px] leading-none font-normal tracking-extra-tight text-white md:text-[5rem] sm:text-[4rem]">
         70%
       </strong>
@@ -57,13 +57,13 @@ const ScaleStat = () => (
 );
 
 const Scale = () => (
-  <div className="relative h-[1051px] overflow-hidden xl:h-220 lg:h-205 md:h-[700px] sm:h-177">
+  <div className="relative h-[1051px] overflow-hidden xl:h-220 lg:h-205 md:flex md:h-auto md:flex-col">
     <div
-      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:left-5 sm:h-[621px] sm:w-[740px] sm:-translate-x-1/2"
+      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] md:relative md:order-1 md:mt-5 md:mb-[-14vw] md:aspect-square md:h-auto md:w-[120%]"
       aria-hidden="true"
     >
-      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full xl:top-28 lg:top-40 lg:h-[818px] lg:w-[818px] sm:top-40 sm:h-[453px] sm:w-[453px]">
-        <div className="absolute top-1/2 left-1/2 aspect-1920/1610 w-[1920px] -translate-x-1/2 -translate-y-1/2 xl:w-410 lg:h-[1120px] lg:w-[1336px] sm:h-[621px] sm:w-[740px]">
+      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full xl:top-28 lg:top-40 lg:h-[818px] lg:w-[818px] md:inset-0 md:h-full md:w-full md:translate-x-0">
+        <div className="absolute top-1/2 left-1/2 aspect-1920/1610 w-[1920px] -translate-x-1/2 -translate-y-1/2 xl:w-410 lg:h-[1120px] lg:w-[1336px] md:inset-0 md:aspect-square md:h-full md:w-full md:translate-x-0 md:translate-y-0">
           <GlobeAnimation />
         </div>
       </div>
@@ -82,7 +82,7 @@ const Scale = () => (
       />
     </Container>
 
-    <div className="absolute top-[570px] left-1/2 -translate-x-3/4 xl:top-120 lg:top-[430px] md:top-[360px] sm:inset-x-5 sm:top-112.5 sm:bottom-auto sm:translate-x-0">
+    <div className="absolute top-[570px] left-1/2 -translate-x-3/4 xl:top-120 lg:top-[430px] md:relative md:top-auto md:left-auto md:order-2 md:mx-5 md:-mt-[46vw] md:mb-5 md:flex md:translate-x-0 md:justify-center">
       <ScaleStat />
     </div>
   </div>

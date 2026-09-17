@@ -24,7 +24,7 @@ const FeatureHeading = ({ className, lines, description, descriptionClassName })
 
     <p
       className={cn(
-        'mt-3.5 ml-8 max-w-[352px] font-mono text-xl leading-dense font-normal text-[#cae6dc] uppercase lg:ml-6 lg:text-lg md:ml-5 md:max-w-[320px] md:text-base sm:mt-3 sm:ml-4 sm:max-w-[270px] sm:text-sm',
+        'mt-3.5 ml-8 max-w-[352px] font-mono text-xl leading-dense font-normal text-[#cae6dc] uppercase xl:ml-6 lg:text-lg md:ml-5 md:max-w-[320px] md:text-base sm:mt-3 sm:ml-4 sm:max-w-[270px] sm:text-sm',
         descriptionClassName
       )}
     >
