@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-17T12:45:40.183Z'
+updatedOn: '2026-09-17T13:03:07.641Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -393,70 +393,6 @@ env.postgres.databaseUrl;
 | [`neon dev`](/docs/cli/dev)                 | Run functions locally against the linked branch; watches for changes and hot-reloads                      |
 
 `neon deploy` is an alias for `neon config apply`. For its flags (`--branch`, `--project-id`, `--config`, `--env`, `--update-existing`, and more), see the [`neon config`](/docs/cli/config) reference.
-
-## Preview services
-
-<Admonition type="info" title="Region requirements">
-Functions, Storage, and AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use them. Support is expanding toward all regions.
-</Admonition>
-
-Preview services are declared under the `preview` block. All three are optional and independent:
-
-| Field               | Type                                 | What it enables                                                                |
-| ------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
-| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                     |
-| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database |
-| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`   |
-
-### `preview.functions`
-
-Each key is the function's slug, the permanent identifier used in CLI commands and the invocation URL:
-
-```ts
-preview: {
-  functions: {
-    "<slug>": {
-      name: string,       // display name shown in neon functions list and the console
-      source: string,     // path to entry file, relative to neon.ts
-      env?: Record<string, string>,
-      bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),  // default "esbuild"
-      dev?: {
-        port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
-      },
-    },
-  },
-},
-```
-
-Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
-
-`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
-
-```ts
-env: {
-  API_KEY: process.env.API_KEY ?? "",
-}
-```
-
-Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
-
-`bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
-
-`dev` settings apply only to `neon dev` and never affect deploy.
-
-### `preview.buckets`
-
-```ts
-preview: {
-  buckets: {
-    "<name>": {
-      access?: "private" | "public_read",  // default: "private"
-    },
-  },
-},
-```
-
-Bucket names follow S3 naming rules. `public_read` makes objects accessible without credentials at the branch's storage endpoint.
 
 ## Full stack example
 
