@@ -29,7 +29,7 @@ const STATS = [
 
 const BuiltBy = () => (
   <section
-    className="built-by relative overflow-hidden bg-gray-new-10 safe-paddings pb-40 text-white 2xl:pb-32 lg:pb-24 md:pb-20"
+    className="built-by relative overflow-hidden bg-gray-new-10 safe-paddings pb-40 text-white 2xl:pb-32 xl:pb-24 md:pb-20"
     id="built-by"
   >
     <Container
@@ -40,7 +40,7 @@ const BuiltBy = () => (
         <h2
           className={cn(
             'max-w-272 indent-24 text-4xl leading-dense tracking-tighter text-pretty text-gray-new-50',
-            '2xl:max-w-240 2xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
+            '2xl:max-w-240 2xl:text-[2.25rem] xl:text-[2rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
           )}
         >
           <strong className="font-normal text-white">Backed by giants.</strong> First founded by
@@ -52,7 +52,7 @@ const BuiltBy = () => (
             <li
               className={cn(
                 'relative flex min-h-84.25 min-w-0 flex-col border-l border-gray-new-30 px-4 pb-2',
-                'md:min-h-52 md:pb-0',
+                'xl:min-h-74 md:min-h-52 md:pb-0',
                 className
               )}
               key={title}
@@ -65,7 +65,7 @@ const BuiltBy = () => (
               >
                 {description}
               </p>
-              <div className="mt-auto flex min-w-0 items-center gap-5">
+              <div className="mt-auto flex min-h-18 min-w-0 items-center gap-5 lg:min-h-14 md:min-h-12">
                 {hasIcon && (
                   <Image
                     className="size-18 shrink-0 lg:size-14 md:size-12"
@@ -75,7 +75,7 @@ const BuiltBy = () => (
                     alt=""
                   />
                 )}
-                <span className="min-w-0 text-7xl leading-none tracking-tighter 2xl:text-6xl lg:text-[3.25rem] md:text-[2.75rem]">
+                <span className="min-w-0 text-7xl leading-none tracking-tighter 2xl:text-6xl xl:text-[3.5rem] lg:text-[3.25rem] md:text-[2.75rem]">
                   {title}
                 </span>
               </div>

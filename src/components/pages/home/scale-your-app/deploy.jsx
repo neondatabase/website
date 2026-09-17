@@ -31,7 +31,7 @@ const EncoreTestimonial = () => (
 );
 
 const Deploy = () => (
-  <div className="relative h-[1181px] overflow-hidden 2xl:h-256 xl:h-220 lg:h-[800px] md:h-[700px]">
+  <div className="relative h-[1181px] overflow-hidden 2xl:h-256 xl:h-200 md:h-[700px]">
     <Container
       className="grid grid-cols-[22rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)] lg:block"
       size="1600"

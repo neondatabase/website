@@ -46,7 +46,7 @@ const DecorativeBackground = () => (
 
 const AgentPlatform = () => (
   <section
-    className="agent-platform relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure 2xl:py-32 lg:py-24 md:py-20"
+    className="agent-platform relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure 2xl:py-32 xl:py-24 md:py-20"
     id="agent-platform"
     aria-labelledby="agent-platform-heading"
   >
@@ -55,12 +55,12 @@ const AgentPlatform = () => (
       <div className="max-w-5xl">
         <SectionLabel className="mb-5">Usage-based pricing</SectionLabel>
         <h2
-          className="text-[4.5rem] leading-none font-normal tracking-tighter 2xl:text-[4rem] xl:text-6xl lg:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
+          className="text-[4.5rem] leading-none font-normal tracking-tighter text-pretty 2xl:text-[4rem] xl:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
           id="agent-platform-heading"
         >
           Pay for what you use, not for the infrastructure you might need.
         </h2>
-        <p className="mt-6 max-w-184 text-lg leading-normal font-normal tracking-extra-tight text-gray-new-40 lg:text-base lg:leading-snug md:mt-4.5 md:text-[0.9375rem]">
+        <p className="mt-6 max-w-184 text-lg leading-normal font-normal tracking-extra-tight text-pretty text-gray-new-40 lg:text-base lg:leading-snug md:mt-4.5 md:text-[0.9375rem]">
           Neon is built for a world where developers create, test, and scale more than ever. Start
           free, experiment freely, and pay only for the resources your applications actually use.
         </p>
@@ -77,12 +77,12 @@ const AgentPlatform = () => (
       <ul className="mt-22 grid grid-cols-4 gap-4 lg:mt-16 lg:grid-cols-2 sm:mt-12 sm:grid-cols-1 sm:gap-3">
         {CARDS.map(({ icon, title, description }) => (
           <li
-            className="flex h-94 flex-col bg-[#CDDFD7] px-8 pt-8 pb-7 lg:h-80 lg:px-7 lg:pt-7 lg:pb-6 md:h-75 md:px-5 md:pt-5 md:pb-5 sm:h-63"
+            className="flex min-h-94 flex-col bg-[#CDDFD7] px-8 pt-8 pb-7 xl:min-h-84 lg:min-h-80 lg:px-7 lg:pt-7 lg:pb-6 md:h-75 md:px-5 md:pt-5 md:pb-5 sm:h-63"
             key={title}
           >
             <Image className="size-14 md:size-10" src={icon} width={56} height={56} alt="" />
             <div className="mt-auto flex flex-col gap-3">
-              <h3 className="text-[1.75rem] leading-tight font-normal tracking-extra-tight md:text-2xl/tight sm:text-[1.375rem]/tight">
+              <h3 className="text-[1.75rem] leading-tight font-normal tracking-extra-tight text-balance xl:text-[1.375rem] md:text-2xl/tight sm:text-[1.375rem]/tight">
                 {title}
               </h3>
               <p className="max-w-xl text-base leading-snug font-normal tracking-tight text-pretty text-gray-new-20 md:text-[0.9375rem] md:leading-snug">

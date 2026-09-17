@@ -18,11 +18,11 @@ Highlight.propTypes = {
 
 const Architecture = () => (
   <section
-    className="architecture scroll-mt-16 overflow-hidden bg-[#E4F1EB] py-40 safe-paddings 2xl:pt-32 2xl:pb-24 xl:pt-34 lg:scroll-mt-0 lg:pt-20 md:pb-20"
+    className="architecture scroll-mt-16 overflow-hidden bg-[#E4F1EB] py-40 safe-paddings 2xl:pt-32 2xl:pb-24 xl:pt-24 lg:scroll-mt-0 lg:pt-20 md:pb-20"
     id="architecture"
   >
     <Container className="xl:px-16 md:px-5!" size="1600">
-      <h2 className="max-w-320 indent-24 text-[3.5rem] leading-dense font-normal tracking-tighter text-black-pure 2xl:text-[3.25rem] xl:max-w-240 xl:indent-16 xl:text-5xl lg:max-w-180 lg:text-[2.25rem] md:max-w-full md:indent-0 md:text-[2rem] sm:text-[1.75rem]">
+      <h2 className="max-w-320 indent-24 text-[3.5rem] leading-dense font-normal tracking-tighter text-black-pure 2xl:text-[3.25rem] xl:max-w-240 xl:indent-16 xl:text-[2.75rem] lg:max-w-180 lg:text-[2.25rem] md:max-w-full md:indent-0 md:text-[2rem] sm:text-[1.75rem]">
         The way we build software is changing, but the fundamentals remain the same:{' '}
         <Highlight>powerful databases,</Highlight> <Highlight>reliable infrastructure,</Highlight>{' '}
         and <Highlight>seamless scalability.</Highlight>

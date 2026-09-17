@@ -9,7 +9,7 @@ const CTA = () => (
   <section className="cta relative bg-[#151617] safe-paddings">
     <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
-        <h2 className="text-[80px] leading-none tracking-tighter 2xl:text-[4.5rem] xl:text-[64px] lg:text-[44px] md:text-[32px]">
+        <h2 className="text-[5rem] leading-none tracking-tighter 2xl:text-[4.5rem] xl:text-[3.5rem] lg:text-[2.75rem] md:text-[2rem]">
           The world&apos;s most advanced <br /> backend platform.
         </h2>
 

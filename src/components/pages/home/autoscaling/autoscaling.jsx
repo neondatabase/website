@@ -66,7 +66,7 @@ const Autoscaling = () => {
           <h2
             className={cn(
               'max-w-272 indent-24 text-4xl leading-dense tracking-tighter text-pretty text-gray-new-50',
-              '2xl:max-w-240 2xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-[1.375rem] md:tracking-tighter'
+              '2xl:max-w-240 2xl:text-[2.25rem] xl:text-[2rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-[1.375rem] md:tracking-tighter'
             )}
           >
             <strong className="font-normal text-white">

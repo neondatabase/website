@@ -4,7 +4,7 @@ import FeatureHeading from './feature-heading';
 import StartupExperience from './startup-experience';
 
 const Startups = () => (
-  <div className="relative h-[977px] lg:h-[900px] md:h-[790px] sm:h-[720px]">
+  <div className="relative h-[977px] xl:h-[830px] md:h-[790px] sm:h-[720px]">
     <Container
       className="grid h-full grid-cols-[22rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)] lg:block"
       size="1600"

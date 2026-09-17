@@ -28,13 +28,13 @@ const OperateWithAgents = () => (
     aria-labelledby="operate-with-agents-heading"
   >
     <Container
-      className="grid grid-cols-[22rem_minmax(0,1fr)] gap-y-[70px] xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-y-14 lg:grid-cols-1 lg:gap-y-10 md:gap-y-8"
+      className="grid grid-cols-[22rem_minmax(0,1fr)] gap-y-[70px] xl:grid-cols-[16rem_minmax(0,1fr)] xl:items-center xl:gap-y-14 lg:grid-cols-1 lg:items-start lg:gap-y-10 md:gap-y-8"
       size="1600"
     >
       <div className="pt-3.25 lg:pt-0">
         <SectionLabel theme="white">OPERATE IT WITH AGENTS</SectionLabel>
         <span
-          className="mt-4.25 block font-mono text-[8rem] leading-none tracking-tighter text-gray-new-10 lg:text-[6rem] md:mt-2 md:text-[5rem]"
+          className="mt-4.25 block font-mono text-[8rem] leading-none tracking-tighter text-gray-new-10 xl:text-[6rem] md:mt-2 md:text-[5rem]"
           aria-hidden="true"
         >
           02
@@ -43,7 +43,7 @@ const OperateWithAgents = () => (
 
       <header className="min-w-0">
         <h2
-          className="ml-px max-w-[1182px] indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 2xl:text-[2.75rem] xl:ml-0 xl:indent-16 xl:text-4xl lg:indent-0 lg:text-[2.25rem] md:text-[1.75rem]"
+          className="ml-px max-w-[1182px] indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 2xl:text-[2.75rem] xl:ml-0 xl:indent-16 xl:text-[2.25rem] lg:indent-0 md:text-[1.75rem]"
           id="operate-with-agents-heading"
         >
           <span className="text-white">Ready for coding agents.</span> Create and branch
