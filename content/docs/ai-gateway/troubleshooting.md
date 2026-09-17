@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-09-15T18:17:04.567Z'
+updatedOn: '2026-09-17T09:17:59.291Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -75,7 +75,7 @@ The model exists in the catalog, but your account can't call it yet. This is a p
 }
 ```
 
-**Fix:** Check which models your account can call by listing `GET /v1/models` and filtering on `enabled` (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). Model access requires a paid plan. See [Model access](/docs/ai-gateway/overview#model-access).
+**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan and still can't call a model, it's a foundation model you haven't been granted yet. See [Model access](/docs/ai-gateway/overview#model-access) to request access.
 
 ---
 
