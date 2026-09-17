@@ -80,7 +80,7 @@ const BuildYourBackend = () => (
         </h2>
       </div>
 
-      <div className="mt-33 lg:mt-16 md:mt-14 sm:mt-12">
+      <div className="mt-33 2xl:mt-16 md:mt-14 sm:mt-12">
         <BackendServices items={SERVICE_ITEMS} />
       </div>
     </Container>
