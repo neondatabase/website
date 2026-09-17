@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-import { heroServiceItems } from 'components/pages/home/hero/hero';
-import HeroServices from 'components/pages/home/hero/hero-services';
 import Container from 'components/shared/container';
 import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
 import { cn } from 'utils/cn';
+
+import HeroServices from './service-videos';
 
 const { backendServices } = sharedBackendPlatformContent;
 
@@ -36,10 +36,10 @@ const VIDEO_META = {
   },
 };
 
-const serviceItems = heroServiceItems.map((item) => ({
-  ...item,
-  ...backendServices.itemsByVideo[item.videoBase],
-  ...VIDEO_META[item.videoBase],
+const serviceItems = Object.entries(VIDEO_META).map(([videoBase, metadata]) => ({
+  videoBase,
+  ...backendServices.itemsByVideo[videoBase],
+  ...metadata,
 }));
 
 const BackendServices = ({

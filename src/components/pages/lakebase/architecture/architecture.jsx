@@ -46,8 +46,9 @@ const Architecture = () => (
         <Image
           className="hidden h-auto w-full md:block"
           src={schemaMobileImage}
-          sizes="(max-width: 767px) 100vw, 1184px"
           quality={100}
+          width={280}
+          height={256}
           alt=""
         />
       </figure>

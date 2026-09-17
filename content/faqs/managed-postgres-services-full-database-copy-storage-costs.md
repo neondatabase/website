@@ -42,11 +42,11 @@ See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/pl
 
 ## How other managed Postgres services handle per-engineer copies
 
-| Provider           | Per-copy storage                                                         | Practical limit                                                                 |
-| ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Neon               | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale plans                      |
+| Provider         | Per-copy storage                                                         | Practical limit                                                                 |
+| ---------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Neon             | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale plans                      |
 | Aurora Postgres  | Copy-on-write at the storage layer (clones share pages until divergence) | Up to 15 copy-on-write clones per source cluster before the next is a full copy |
-| Supabase           | Full project per preview branch (dedicated database, Auth, Storage)            | Each preview branch incurs its own compute and disk size charges                |
+| Supabase         | Full project per preview branch (dedicated database, Auth, Storage)      | Each preview branch incurs its own compute and disk size charges                |
 | RDS for Postgres | Full duplicate via `pg_dump` or snapshot restore                         | Each copy uses the full provisioned disk                                        |
 
 Aurora clones share storage pages with the source via copy-on-write, so the initial clone uses minimal additional space. Storage grows only as the clone diverges. Aurora caps copy-on-write clones at 15 per source cluster before the next clone becomes a full copy. See [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html).

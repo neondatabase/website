@@ -1,10 +1,11 @@
 import Image from 'next/image';
 
-import Quotes from 'components/pages/home/backed-by/quotes';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import { sharedBackendPlatformContent } from 'constants/backend-platform-page-content';
 import bgNoise from 'images/pages/home/backed-by/bg-noise.jpg';
+
+import Quotes from './quotes';
 
 const { backedBy } = sharedBackendPlatformContent;
 
