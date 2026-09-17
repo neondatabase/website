@@ -10,7 +10,7 @@ summary: >-
   copy-paste MDX syntax, live rendering, dependency requirements, and guidance
   on when to choose a simpler alternative.
 enableTableOfContents: true
-updatedOn: '2026-06-18T21:04:52.651Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.
@@ -259,14 +259,14 @@ Components for community engagement and interaction.
 Community engagement banner for promoting community participation.
 
 ```mdx
-<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">
+<CommunityBanner buttonText="Join Discord" buttonUrl="https://neon.com/discord" logo="discord">
   Connect with the Neon community!
 </CommunityBanner>
 ```
 
 **Live preview:**
 
-<CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Connect with the Neon community!</CommunityBanner>
+<CommunityBanner buttonText="Join Discord" buttonUrl="https://neon.com/discord" logo="discord">Connect with the Neon community!</CommunityBanner>
 
 ---
 

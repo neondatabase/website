@@ -120,7 +120,7 @@ Once `neonctl init` connects your app to Neon, Cursor gains full project context
 
 ## Try it
 
-If you’re a Cursor user, you can try this today, and [tell us in Discord how it went](https://discord.gg/92vNTzKDGp). You can also email us at [feedback@neon.com](mailto:feedback@neon.com) – we read every single email and truly appreciate your input.
+If you’re a Cursor user, you can try this today, and [tell us in Discord how it went](https://neon.com/discord). You can also email us at [feedback@neon.com](mailto:feedback@neon.com) – we read every single email and truly appreciate your input.
 
 <Admonition type="tip" title="Coming soon to other IDEs">
 `neonctl init` is currently in beta for Cursor, but VS Code and Claude Code support is coming soon. [Keep an eye on our changelog.](https://neon.com/docs/changelog)

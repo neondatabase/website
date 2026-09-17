@@ -81,4 +81,4 @@ Next,
 
 Once you’re done, click “Connect”. That’s it: with each commit to a branch in your application’s GitHub repository, Vercel preview deployments will be created with their own Neon branch.
 
-Check out [our documentation](https://neon.com/docs/guides/vercel-native-integration-previews) for more detailed instructions, and join us [on Discord](https://discord.gg/92vNTzKDGp) to ask questions.
+Check out [our documentation](https://neon.com/docs/guides/vercel-native-integration-previews) for more detailed instructions, and join us [on Discord](https://neon.com/discord) to ask questions.

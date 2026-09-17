@@ -218,10 +218,10 @@ In this hypothetical subset,
 - id = 1 has been transformed using the function uppercase(prefix(’not ’, username))
 - id = 4 has been generated to create new data needed for this environment
 
-**This is a feature we’re actively working on at Neon.** It’s still early days, but if you’re interested in trying out our MVPs and providing feedback while we build it, reach out to us via [Discord](https://discord.gg/92vNTzKDGp) or [this form](https://neon.tech/contact-sales).
+**This is a feature we’re actively working on at Neon.** It’s still early days, but if you’re interested in trying out our MVPs and providing feedback while we build it, reach out to us via [Discord](https://neon.com/discord) or [this form](https://neon.tech/contact-sales).
 
 ## In the meantime, start branching
 
 You can sign up for the [Neon Free Plan](https://console.neon.tech/signup) and build your first branching workflow right away. You don’t need a credit card, and you get 10 branches per project for free. Once you’re ready to upgrade to a paid plan, you’ll get 500 branches per project, with this limit increasing very soon to thousands of branches.
 
-If you have any questions, ask us on [Discord](https://discord.gg/92vNTzKDGp)!
+If you have any questions, ask us on [Discord](https://neon.com/discord)!

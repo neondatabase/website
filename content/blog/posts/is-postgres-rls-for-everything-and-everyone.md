@@ -153,4 +153,4 @@ Then, just make sure that the JWTs you’re passing to [Neon RLS](https://neon.c
 
 ## Conclusion
 
-So, is RLS for everyone? Well, no technology is for everyone. But RLS has its place and we at Neon are committed to supporting it with Neon RLS and [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt). Reach out on [our Discord](https://neon.tech/discord) if you have any questions!
+So, is RLS for everyone? Well, no technology is for everyone. But RLS has its place and we at Neon are committed to supporting it with Neon RLS and [pg_session_jwt](https://github.com/neondatabase/pg_session_jwt). Reach out on [our Discord](https://neon.com/discord) if you have any questions!

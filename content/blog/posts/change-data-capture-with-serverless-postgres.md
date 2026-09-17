@@ -163,6 +163,6 @@ It’s important to monitor replication lag and understand its impact, especiall
 
 ## Conclusion
 
-Logical replication is undoubtedly one of the most important features for modern applications. As we continue to develop its capabilities, we encourage you to test, experiment, and push the boundaries of what logical replication can do. Join us on [Discord](https://neon.tech/discord), and share your experiences, suggestions, and challenges with us.
+Logical replication is undoubtedly one of the most important features for modern applications. As we continue to develop its capabilities, we encourage you to test, experiment, and push the boundaries of what logical replication can do. Join us on [Discord](https://neon.com/discord), and share your experiences, suggestions, and challenges with us.
 
 We can’t wait to see what you build with Neon.

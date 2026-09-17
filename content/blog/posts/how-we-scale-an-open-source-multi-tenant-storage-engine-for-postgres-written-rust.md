@@ -125,7 +125,7 @@ The current problem is that the number of shards in a tenant is defined at creat
 
 # Conclusion
 
-Storage sharding allows Neon to support databases up to 10x the current capacity. This architecture will enable even larger storage capacity in the near future and is the first step towards implementing bottomless storage.<br />If you have a large dataset and want to benefit from a higher throughput on Neon, contact our [support team](https://support@neon.tech), [join us in Discord](https://neon.tech/discord), and let us know how we can help you scale your applications to millions of users.
+Storage sharding allows Neon to support databases up to 10x the current capacity. This architecture will enable even larger storage capacity in the near future and is the first step towards implementing bottomless storage.<br />If you have a large dataset and want to benefit from a higher throughput on Neon, contact our [support team](https://support@neon.tech), [join us in Discord](https://neon.com/discord), and let us know how we can help you scale your applications to millions of users.
 
 ## 📚 Continue reading
 

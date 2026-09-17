@@ -72,4 +72,4 @@ If you want the longer answer, here are some customer favorites:
 
 ## Get started
 
-To get started with the workflows, [create a Neon project](https://console.neon.tech/signup) and follow the steps in the guide. If you implement this, we want to hear about it. Find us on [Twitter](https://x.com/neondatabase) and [Discord](https://neon.tech/discord).
+To get started with the workflows, [create a Neon project](https://console.neon.tech/signup) and follow the steps in the guide. If you implement this, we want to hear about it. Find us on [Twitter](https://x.com/neondatabase) and [Discord](https://neon.com/discord).

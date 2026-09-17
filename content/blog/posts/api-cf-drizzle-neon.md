@@ -395,4 +395,4 @@ Adding the integration automatically redeploys your worker. So now, when you vis
 
 In this guide, you learned about Cloudflare workers, Hono, Drizzle ORM, Neon, and how you can use them together to create a serverless API.
 
-If you have any questions or run into issues, please reach out to us in the [Neon Discord community](https://neon.tech/discord).
+If you have any questions or run into issues, please reach out to us in the [Neon Discord community](https://neon.com/discord).
