@@ -194,43 +194,78 @@ const aiGatewayPageContent = {
     {
       question: 'What is AI Gateway?',
       answer:
-        '<p>AI Gateway is an LLM inference layer built right into your Neon project. It runs on Databricks Foundation Model APIs, the same serving engine Databricks uses for its own inference. You use your Neon credential to call a wide catalog of models from several providers through a single endpoint, with no third-party accounts to set up, all billed via Neon.</p>',
+        '<p>AI Gateway is the LLM inference layer built into your Neon project. It runs on Databricks Foundation Model APIs. Use your Neon credential to call models from multiple providers through one endpoint, without setting up separate provider accounts.</p>',
       initialState: 'open',
     },
     {
       question: 'Which models can I call?',
       answer:
-        '<p>Call frontier and open-weight models from providers including Anthropic, OpenAI, Google, Meta, and Alibaba. The live model catalog above is sourced from the same data as our documentation.</p>',
+        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/models#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
     },
     {
       question: 'What is the difference between Neon AI Gateway and Databricks Unity AI Gateway?',
       answer:
-        '<p>Neon AI Gateway is the inference layer built into a Neon project and credential. Databricks Unity AI Gateway is designed for centralized enterprise governance inside the Databricks platform. Neon uses Databricks Foundation Model APIs for model serving while keeping setup and billing inside Neon.</p>',
+        '<p>Both use <a href="https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/">Databricks Foundation Model APIs</a> for model serving. Neon AI Gateway is built into Neon projects and credentials for developers building applications and agents. Databricks Unity AI Gateway provides centralized governance for AI traffic within the Databricks Platform.</p>',
     },
     {
       question: 'How does AI Gateway relate to the rest of the Neon backend?',
       answer:
-        '<p>It shares the same project and branch boundaries as your Postgres database, authentication, storage, and functions. That gives each environment its own endpoint and lets the complete backend move together.</p>',
+        '<p>AI Gateway shares the same project and branch boundaries as Lakebase Postgres, Functions, Object Storage, and Managed Better Auth. A Function receives <code>NEON_AI_GATEWAY_TOKEN</code> and <code>NEON_AI_GATEWAY_BASE_URL</code> alongside <code>DATABASE_URL</code>, so it can call a model and write results to Postgres without separate provider keys.</p>',
     },
     {
-      question: 'Do I need to run my app on Neon to use AI Gateway?',
+      question: 'Do I need to run my application on Neon to use AI Gateway?',
       answer:
-        '<p>No. Any application or service that can make HTTPS requests can call the gateway. Neon Functions are optional and are useful when you want model calls to run close to the rest of your backend.</p>',
+        '<p>No. Any application or service that can make an HTTPS request with a bearer token can call AI Gateway. Running model calls in Functions keeps them close to the other services in your Neon backend and lets them follow the same branching workflow.</p>',
     },
     {
-      question: 'What happens when I branch?',
+      question: 'What happens to AI Gateway when I create a branch?',
       answer:
-        '<p>The new branch receives its own AI Gateway endpoint and branch-scoped credentials alongside the rest of its Neon backend, so you can test model or application changes without touching production.</p>',
+        '<p>Each Neon branch has its own AI Gateway endpoint. Requests from a development or preview branch stay scoped to that branch, separate from production.</p>',
     },
     {
-      question: 'Do I have to change my code to switch to Neon AI Gateway?',
+      question: 'Do I have to change my code to use AI Gateway?',
       answer:
-        '<p>OpenAI-compatible clients only need a Neon base URL and credential. Your request and streaming formats stay the same, and switching providers is usually just a model-name change.</p>',
+        '<p>For an OpenAI-compatible client, change the base URL and credential. The request and streaming formats stay the same. AI Gateway also provides provider-specific endpoints when you need features from the OpenAI Responses API, Anthropic Messages API, or Gemini API.</p>',
     },
     {
-      question: 'How does pricing work?',
+      question: 'Who can use AI Gateway after GA?',
       answer:
-        '<p>AI Gateway is free during beta on paid Neon plans. When billing begins, Neon will pass through each provider’s published per-token rate with zero markup. See the model catalog for current rates.</p>',
+        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Model access can also depend on region, availability, and any verification required by provider policies.</p>',
+    },
+    {
+      question: 'How does AI Gateway pricing work?',
+      answer:
+        '<p>Inference is billed per token at the published rate for each model, with no additional Neon markup. One AI Gateway credit equals $1 USD. The minimum credit purchase is $5, and purchased credits are valid for 12 months. Check the <a href="/docs/ai-gateway/models#available-models">model catalog</a> for current per-model rates.</p>',
+    },
+    {
+      question: 'What are the rate limits?',
+      answer:
+        '<p>AI Gateway applies a default limit of 200,000 tokens per minute (TPM). These are default limits and can be increased on request. If you hit a limit, requests return HTTP 429 and the error body explains which limit you reached. <a href="/docs/introduction/support">Contact support</a> if you need a higher TPM limit.</p>',
+    },
+    {
+      question: 'How do I buy and manage credits?',
+      answer:
+        '<p>Buy credits from the Billing page in the Neon Console. Credits are added to your AI Gateway balance after payment and accumulate across purchases. You can see your current balance in the Neon Console. Automatic top-ups can add credits when your balance falls below a threshold.</p>',
+    },
+    {
+      question: 'How are credits deducted?',
+      answer:
+        '<p>Each inference request deducts credits based on the model&apos;s token price and the final number of tokens reported by the serving system. Balance updates can take about five minutes. A failed request can still be billed if the model consumed tokens before the request failed.</p>',
+    },
+    {
+      question: 'What happens when my credit balance runs out?',
+      answer:
+        '<p>AI Gateway stops accepting new inference requests when the available balance is too low. Requests already in progress can finish and are charged for the tokens they consume. Because usage reporting is not instantaneous, your balance can fall slightly below zero. Neon applies a $2 minimum balance to account for this delay.</p>',
+    },
+    {
+      question: 'Do credits expire?',
+      answer:
+        '<p>Purchased credits are valid for 12 months from the purchase date. Promotional credits can have a different expiration date. Check the Billing page or the terms of the promotion for the applicable date.</p>',
+    },
+    {
+      question: "Why can't I access a model in the catalog?",
+      answer:
+        '<p>Model access can vary by region and account. Proprietary models may require account verification to meet provider requirements. Use the authenticated <code>GET /v1/models</code> endpoint and check for <code>enabled: true</code> to see which models your account can call.</p>',
     },
   ],
 };
