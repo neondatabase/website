@@ -840,12 +840,22 @@
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Custom domains
+          slug: compute/functions/custom-domains
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
+        - section: Function Triggers
+          items:
+            - title: Overview
+              slug: compute/functions/triggers/overview
+            - title: Schedule a function
+              slug: compute/functions/triggers/schedule
+            - title: Trigger on object upload
+              slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
             - title: AI agents

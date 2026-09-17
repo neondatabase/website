@@ -43,6 +43,8 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
 
+<a href="/docs/compute/functions/custom-domains" description="Serve a function from a domain you own with automatic TLS." icon="globe">Custom domains</a>
+
 <a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
@@ -51,9 +53,9 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 
 ## Request/response, not background jobs
 
-A function is always requested (by a `fetch`, a browser, an agent) and always returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade.
+A function always runs in response to a request and returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade. The request usually comes from a client (a `fetch`, a browser, an agent), but it can also come from Neon: a [Function Trigger](/docs/compute/functions/triggers/overview) invokes the function on a cron schedule.
 
-That makes functions a fit for request/response work, and not for background jobs. Background jobs and workflows are the other kind of compute: queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup. Those need a job queue or workflow engine to own that lifecycle. Today you can pair a function with a third-party queue or scheduler like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com): the service owns the queue, retries, and scheduling, and invokes your function over HTTP to run each job. A native Neon job queue and workflow engine is a separate, upcoming offering.
+Functions fit request/response work, including scheduled runs with [Function Triggers](/docs/compute/functions/triggers/overview). They aren't a job queue. Queued, retryable, cancellable work with its own lifecycle, like sending a welcome email after signup, still needs a queue or workflow engine to own that lifecycle. You can pair a function with a third-party queue like [Upstash QStash](https://upstash.com/docs/qstash) or [Inngest](https://www.inngest.com), which owns the queue and retries and invokes your function over HTTP. A native Neon job queue and workflow engine is a separate, upcoming offering.
 
 Any module whose default export provides a `fetch(request)` method that returns a `Response` is a function. It embraces the web platform standards: the Fetch API's `Request` and `Response` interface, the same handler shape used by other serverless runtimes and standardized by [WinterTC](https://wintertc.org/). That can be an object with a `fetch` method:
 

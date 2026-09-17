@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-`@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, and bundle and deploy Neon Functions. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
+`@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
 
 If you just want to run `neon.ts` from the command line, use the [`neon config` / `neon deploy` commands](/docs/cli/config) instead. Reach for this package only when you need to call the same logic from your own Node.js code.
 
@@ -139,6 +139,7 @@ Returns a `PushResult`:
 | `dryRun`     | `boolean`          | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                          |
 | `applied`    | `AppliedChange[]`  | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field. |
 | `conflicts`  | `ConflictReport[]` | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                          |
+| `customDomains` | `Array<{ domain, slug, cnameTarget? }>?` | Custom domains declared for the branch after the push, or what `apply` would leave in place on a dry run. `cnameTarget` is absent for a not-yet-registered domain on a dry run, and is an empty string when the region has no custom-domains front door. |
 
 ### `createBranch`
 
