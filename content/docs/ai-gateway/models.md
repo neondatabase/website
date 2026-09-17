@@ -6,7 +6,7 @@ summary: >-
   models behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-17T04:58:47.512Z'
+updatedOn: '2026-09-17T09:17:59.291Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -25,7 +25,7 @@ The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/
 
 Neon AI Gateway gives you one credential for both frontier and open-weight models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
 
-Model access requires a paid plan. Any paid project with prepaid credits can access every model in the catalog.
+Using the AI Gateway requires a paid plan with prepaid credits. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to the full catalog.
 
 ## Available models
 
@@ -128,7 +128,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. Model access requires a paid plan. See [Model access](/docs/ai-gateway/overview#model-access).
+- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. See [Model access](/docs/ai-gateway/overview#model-access) for what determines access and how to request more models.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.
