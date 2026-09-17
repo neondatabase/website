@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-08T07:49:27.987Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
@@ -20,7 +20,7 @@ We have successfully attained SOC 2 Type 1 and Type 2 compliance. These complian
 
 ## SOC 3
 
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. If available on your plan, you can request the report through our [Trust Center](https://trust.neon.com/).
+The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. You can read the full [SOC 3 report](/docs/security/soc-3-report) or download the document through our [Trust Center](https://trust.neon.com/).
 
 ## ISO 27001
 
