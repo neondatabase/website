@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-09-14T11:44:58.639Z'
+updatedOn: '2026-09-17T10:12:21.857Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -443,9 +443,11 @@ Use the table below to understand how Console metrics map to invoice line items.
 | **History**          | Database storage (instant restore), GB-month <br/> Database storage (snapshots), GB-month                                                 |
 | **Network transfer** | Public network transfer, GB <br/> Private network transfer, GB (if [Private Networking](/docs/guides/neon-private-networking) is enabled) |
 | —                    | Database extra branches, branch-month                                                                                                     |
+| —                    | Function compute (active), capacity-hour <br/> Function compute (waiting), capacity-hour <br/> Function invocations, million              |
+| —                    | Object storage, GB-month                                                                                                                  |
 
 <Admonition type="note">
-**Extra branches** does not appear in the Console usage summary but will appear on your invoice if you exceed your plan's branch allowance.
+**Extra branches**, **Neon Functions**, and **Object Storage** do not appear in the Console usage summary but can appear on your invoice.
 </Admonition>
 
 ### Invoice metrics
