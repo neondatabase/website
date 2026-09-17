@@ -119,4 +119,4 @@ You can install Neon for VS Code today. All you need is:
 - VS Code
 - And [installing the extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) from the marketplace
 
-We’d love to hear what you build with it. Drop feedback in [our Discord](https://discord.gg/92vNTzKDGp)!
+We’d love to hear what you build with it. Drop feedback in [our Discord](https://discord.gg/N8kvBm7qH5)!

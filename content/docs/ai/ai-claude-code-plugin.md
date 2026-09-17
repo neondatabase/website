@@ -12,7 +12,7 @@ summary: >-
 description: >-
   Install the Neon Claude Code plugin to give Claude access to Neon's APIs,
   Postgres workflows, and built-in Skills.
-updatedOn: '2026-08-25T21:56:50.915Z'
+updatedOn: '2026-09-17T16:28:26.813Z'
 ---
 
 The **Neon Claude Code plugin** is available on the official Claude plugins marketplace. It adds Neon-specific Skills and API access to Claude Code, Anthropic's AI development environment, bundling guided Skills plus an MCP (Model Context Protocol) server integration.
@@ -100,4 +100,4 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 - [Claude Skills documentation](https://docs.anthropic.com/en/docs/agents/claude-code)
 - [AI Agents and Tools overview](/docs/ai/ai-agents-tools)
 
-If you run into issues, visit our [Discord](https://discord.gg/92vNTzKDGp) or open an issue in the [Agent Skills repository](https://github.com/neondatabase/agent-skills/issues).
+If you run into issues, visit our [Discord](https://discord.gg/N8kvBm7qH5) or open an issue in the [Agent Skills repository](https://github.com/neondatabase/agent-skills/issues).

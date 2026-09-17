@@ -201,4 +201,4 @@ Our new pricing plans are available immediately, but we won’t disrupt your cur
 
 **For paid plan users:<br />** You will not be migrated automatically. You can keep your current plan and rate for now, or switch to one of the new usage-based plans manually from the Neon console at any time (available immediately).
 
-As always, feel free to join us [on Discord](https://discord.gg/92vNTzKDGp) if you have any questions or want to talk to the team directly.
+As always, feel free to join us [on Discord](https://discord.gg/N8kvBm7qH5) if you have any questions or want to talk to the team directly.

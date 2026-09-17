@@ -95,7 +95,7 @@ The Data API is a great latest addition to the stack, as it removes the friction
 
 ## Try it
 
-The Data API is out in beta. [Check out our docs](https://neon.com/docs/data-api/get-started) for instructions and [create a free account](https://console.neon.tech/signup) if you don’t have one already. If you have any questions, reach out to us in our [Discord](https://discord.gg/92vNTzKDGp).
+The Data API is out in beta. [Check out our docs](https://neon.com/docs/data-api/get-started) for instructions and [create a free account](https://console.neon.tech/signup) if you don’t have one already. If you have any questions, reach out to us in our [Discord](https://discord.gg/N8kvBm7qH5).
 
 <Admonition type="info" title="Building an agent?">
 If you’re building a full-stack AI Agent, apply to our Agents Program for higher resource limits, special pricing, and exclusive features. Fill out the form [here](https://neon.com/use-cases/ai-agents) and we’ll respond shortly.

@@ -152,4 +152,4 @@ INSERT INTO todos (title, description, is_completed) VALUES
 ('Star on GitHub', 'Go to the repository and let us know you liked it', FALSE);
 ```
 
-Give it a try and build something with it. The code is [open-source on GitHub](https://github.com/neondatabase/neondb-cli). We’d love to hear about your experiences, share it with us on [discord](https://discord.com/invite/92vNTzKDGp), [X](https://x.com/neondatabase), or [LinkedIn](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A72287133&keywords=Neon&origin=ENTITY_SEARCH_HOME_HISTORY&position=0&sid=SA8). We’d love to hear from you.
+Give it a try and build something with it. The code is [open-source on GitHub](https://github.com/neondatabase/neondb-cli). We’d love to hear about your experiences, share it with us on [discord](https://discord.gg/N8kvBm7qH5), [X](https://x.com/neondatabase), or [LinkedIn](https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A72287133&keywords=Neon&origin=ENTITY_SEARCH_HOME_HISTORY&position=0&sid=SA8). We’d love to hear from you.

@@ -140,4 +140,4 @@ You can try it for multiple use cases:
 - [Local development](https://neon.tech/guides/local-development-with-neon)
 - [Onboarding new engineers](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity)
 
-[Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://discord.gg/92vNTzKDGp). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.
+[Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://discord.gg/N8kvBm7qH5). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.

@@ -88,10 +88,10 @@ Nonetheless, the concerns are valid, and we’ve been working hard to find a new
 Here’s a sneak peek at what we’ve been working on: branches with anonymized data. Can your database do that?
 
 <figure>
-<a href="https://discord.gg/92vNTzKDGp">
+<a href="https://discord.gg/N8kvBm7qH5">
 <img src="https://cdn.neonapi.io/public/images/pages/blog/instant-branches-schema-only-or-with-data-the-choice-is-yours/wip-anonymize-data-image-4-1024x576-be34a373.png" alt="Mockup of Anonymize data feature" />
 </a>
-<figcaption><em>Only a mockup. <a href="https://discord.gg/92vNTzKDGp">Reach out on Discord</a> if you want to give feedback while we develop this feature.</em></figcaption>
+<figcaption><em>Only a mockup. <a href="https://discord.gg/N8kvBm7qH5">Reach out on Discord</a> if you want to give feedback while we develop this feature.</em></figcaption>
 </figure>
 
 With the upcoming addition of [data anonymiziation](https://neon.com/docs/introduction/roadmap#what-were-working-on-now), Neon is set to transform database workflows—by making them as seamless, intuitive, and effective as other modern development tools.

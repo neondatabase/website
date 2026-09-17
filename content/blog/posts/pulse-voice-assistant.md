@@ -81,7 +81,7 @@ Why we picked Next.js:
 
 ## Learn how to build it
 
-This guide will walk you through how to build an app like Pulse: [https://neon.tech/guides/pulse](https://neon.tech/guides/pulse). You can also explore [the repository](https://github.com/neondatabase-labs/pulse), and ask us any questions [in Discord.](https://discord.gg/92vNTzKDGp)
+This guide will walk you through how to build an app like Pulse: [https://neon.tech/guides/pulse](https://neon.tech/guides/pulse). You can also explore [the repository](https://github.com/neondatabase-labs/pulse), and ask us any questions [in Discord.](https://discord.gg/N8kvBm7qH5)
 
 ---
 

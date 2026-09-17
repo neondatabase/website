@@ -142,4 +142,4 @@ Our configuration advice:
 
 ## Get started for free
 
-Neon autoscaling brings transparent, open-source autoscaling to all Postgres workloads. [If you’re still resizing servers, create a free Neon account and experiment with autoscaling.](https://console.neon.tech/signup) We want to hear your feedback: join us [in Discord](https://discord.gg/92vNTzKDGp) and share your experience with the community.
+Neon autoscaling brings transparent, open-source autoscaling to all Postgres workloads. [If you’re still resizing servers, create a free Neon account and experiment with autoscaling.](https://console.neon.tech/signup) We want to hear your feedback: join us [in Discord](https://discord.gg/N8kvBm7qH5) and share your experience with the community.

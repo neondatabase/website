@@ -102,6 +102,6 @@ We have plenty of ideas to improve the app experience (and sadly, so little spar
 - Would you like the ability to query your actual databases running in Neon or even elsewhere?
 - How about AI-powered features like “SQL generation”?
 
-Let us know your thoughts on [Discord](https://discord.gg/92vNTzKDGp) or in our [GitHub](https://github.com/neondatabase-labs/psqlsh) discussions.
+Let us know your thoughts on [Discord](https://discord.gg/N8kvBm7qH5) or in our [GitHub](https://github.com/neondatabase-labs/psqlsh) discussions.
 
 This project is also open-source, so feel free to explore the code and contribute directly: [https://github.com/neondatabase-labs/psqlsh](https://github.com/neondatabase-labs/psqlsh)<br />

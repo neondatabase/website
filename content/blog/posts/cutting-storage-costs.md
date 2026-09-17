@@ -73,4 +73,4 @@ But this tradeoff is well worth it. By implementing achive storage, we can lower
 
 ## Wrap up
 
-This storage model enables us to pass down storage savings to our customers with minimal consequences. Once again, no action is required from you—you can just enjoy the savings when they come. If you have questions, [ask us in Discord](https://discord.gg/92vNTzKDGp), we’ll be happy to chat.
+This storage model enables us to pass down storage savings to our customers with minimal consequences. Once again, no action is required from you—you can just enjoy the savings when they come. If you have questions, [ask us in Discord](https://discord.gg/N8kvBm7qH5), we’ll be happy to chat.

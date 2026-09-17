@@ -1633,7 +1633,7 @@ const componentHandlers = {
             { type: 'text', value: ' or let us know in the ' },
             {
               type: 'link',
-              url: 'https://discord.gg/92vNTzKDGp',
+              url: 'https://discord.gg/N8kvBm7qH5',
               children: [{ type: 'text', value: 'Neon Discord' }],
             },
             { type: 'text', value: '.' },

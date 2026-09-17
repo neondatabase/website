@@ -111,4 +111,4 @@ DELETE FROM cron.job WHERE target_table = dropped_table_name;
 
 Event triggers open up a new layer of control in Neon. If you’ve been blocked by the lack of event triggers in other managed Postgres platforms, [give Neon a try](https://console.neon.tech/signup). Event trigger support is available by default through the neon_superuser role in any branch.
 
-Check out the [docs on event triggers](https://www.postgresql.org/docs/current/event-triggers.html) for more. And if you have questions, [find us on Discord](https://discord.gg/92vNTzKDGp).
+Check out the [docs on event triggers](https://www.postgresql.org/docs/current/event-triggers.html) for more. And if you have questions, [find us on Discord](https://discord.gg/N8kvBm7qH5).

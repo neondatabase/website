@@ -73,4 +73,4 @@ You can also use Outerbase to create beautiful charts and share them with your t
 
 ## Start exploring
 
-We are so excited for you to try this integration. If you’re a Neon user, you can [sign up to Outerbase](https://app.outerbase.com/signup/) for free and get started. We would also love your feedback: share it in the [Neon Discord](https://discord.gg/92vNTzKDGp) or email us at [support@outerbase.com](mailto:support@outerbase.com)
+We are so excited for you to try this integration. If you’re a Neon user, you can [sign up to Outerbase](https://app.outerbase.com/signup/) for free and get started. We would also love your feedback: share it in the [Neon Discord](https://discord.gg/N8kvBm7qH5) or email us at [support@outerbase.com](mailto:support@outerbase.com)

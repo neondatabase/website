@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-08-31T20:01:21.799Z'
+updatedOn: '2026-09-17T16:28:26.813Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -153,7 +153,7 @@ Neon supports a large number of Postgres extensions. When we say an extension is
 
 We don’t actively maintain third-party extension code. If you run into an issue or discover a bug with an extension, we recommend reporting it to the extension’s upstream maintainers. If a fix is released, we’re happy to update to the latest version of the extension.
 
-For the extension versions that Neon supports, refer to the [Supported extensions table](/docs/extensions/pg-extensions) above. You can request support for a new version of an extension by opening a [support ticket](https://console.neon.tech/app/projects?modal=support) or by reaching out to us on [Discord](https://discord.com/invite/92vNTzKDGp).
+For the extension versions that Neon supports, refer to the [Supported extensions table](/docs/extensions/pg-extensions) above. You can request support for a new version of an extension by opening a [support ticket](https://console.neon.tech/app/projects?modal=support) or by reaching out to us on [Discord](https://discord.gg/N8kvBm7qH5).
 
 ## Experimental extensions
 

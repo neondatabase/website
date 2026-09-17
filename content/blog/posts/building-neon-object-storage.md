@@ -28,7 +28,7 @@ seo:
 ---
 
 <Admonition type="note" title="Neon Object Storage is in beta">
-It's available to all users free of charge during beta. [Deploy it](https://neon.com/docs/storage/overview) and [give us feedback](https://discord.gg/92vNTzKDGp) so we can take it to GA.
+It's available to all users free of charge during beta. [Deploy it](https://neon.com/docs/storage/overview) and [give us feedback](https://discord.gg/N8kvBm7qH5) so we can take it to GA.
 </Admonition>
 
 [We just launched Neon Object Storage](https://neon.com/blog/neon-backend-is-beta), a branch-aware, S3-compatible object store built into the Neon backend. If you've used [Neon branches](https://neon.com/docs/introduction/branching) before, you know the workflow: branch main into a child and get an isolated copy of your database in about a second. Object Storage adds files to that picture. When you create a branch, the child also inherits your buckets and objects at that point in time.
@@ -128,5 +128,5 @@ neon branches create --name preview/feature-x --parent main
 Start by [deploying an entire Neon backend](https://neon.com/docs/introduction) on the [Free plan](https://neon.com/pricing). You get up to 100 projects, with limits generous enough to actually build products.
 
 <Admonition type="note" title="Remember that Object Storage is still beta!">
-Use it with caution, expect rough edges, and [tell us what breaks](https://discord.gg/92vNTzKDGp).
+Use it with caution, expect rough edges, and [tell us what breaks](https://discord.gg/N8kvBm7qH5).
 </Admonition>

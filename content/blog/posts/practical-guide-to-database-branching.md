@@ -219,4 +219,4 @@ For teams that need to examine historical records or reconstruct events, [creati
 
 The branching workflows presented here are a new way to do things, but they make development safer and faster – and the truth is that they only take a few seconds to try. Many teams start with one simple workflow (a dev branch, a PR branch) and quickly get converted, wondering how they ever worked without it.
 
-If you haven’t used branching before, pick one of the workflows above and [spin up your first branch on the Free Plan](https://console.neon.tech/signup). If you have any questions, [tell us on Discord](https://discord.gg/92vNTzKDGp).
+If you haven’t used branching before, pick one of the workflows above and [spin up your first branch on the Free Plan](https://console.neon.tech/signup). If you have any questions, [tell us on Discord](https://discord.gg/N8kvBm7qH5).

@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:10:44.328Z'
+updatedOn: '2026-09-17T16:28:26.813Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -47,10 +47,10 @@ The support channels you can access differ according to your [Support Plan](#sup
 
 ### Neon Discord Server
 
-All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNTzKDGp), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
+All Neon users have access to the [Neon Discord Server](https://discord.gg/N8kvBm7qH5), where you can ask questions or see what others are doing with Neon. You will find Neon users and members of the Neon team actively engaged.
 
 <Admonition type="important">
-The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon Support channel.
+The [Neon Discord Server](https://discord.gg/N8kvBm7qH5) is not an official Neon Support channel.
 </Admonition>
 
 ### Neon AI chat assistance
@@ -59,7 +59,7 @@ Neon AI chat assistance is available to all Neon users. You can access it from t
 
 - **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant** so you can ask questions about Neon.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
-- **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
+- **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/N8kvBm7qH5)
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
 
 Neon AI Chat assistants are updated regularly and built on various sources including the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
