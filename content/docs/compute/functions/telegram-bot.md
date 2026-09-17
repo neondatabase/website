@@ -7,7 +7,7 @@ summary: >-
   Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
   webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T21:40:25.774Z'
 isDraft: false
 ---
 
@@ -59,18 +59,16 @@ To start from the source instead, copy [bots/telegram-bot-http](https://github.c
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    functions: {
-      telegram: {
-        name: "Telegram webhook",
-        source: "./functions/telegram.ts",
-        env: {
-          TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN!,
-          TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET!,
-        },
-        dev: {
-          port: 8787,
-        },
+  functions: {
+    telegram: {
+      name: "Telegram webhook",
+      source: "./functions/telegram.ts",
+      env: {
+        TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN!,
+        TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET!,
+      },
+      dev: {
+        port: 8787,
       },
     },
   },

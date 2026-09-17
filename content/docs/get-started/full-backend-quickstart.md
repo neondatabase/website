@@ -100,7 +100,7 @@ A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code
 Work through the commands on the right:
 
 1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon login` first. Run interactively, `neon link` prompts you to create `neon.ts`; the `--no-config` flag skips that prompt so the explicit `neon config init` in step 2 stays in control.
-2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the `preview` blocks shown in later steps alongside it (those snippets omit the policy for brevity).
+2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the service keys shown in later steps alongside it (those snippets omit the policy for brevity).
 
 Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding the other services.
 
@@ -274,10 +274,8 @@ import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   // branch policy omitted for brevity; keep the one from `neon config init`
-  preview: {
-    buckets: {
-      images: { access: 'public_read' },
-    },
+  buckets: {
+    images: { access: 'public_read' },
   },
 });
 ```
@@ -466,14 +464,12 @@ import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   // branch policy omitted for brevity; keep the one from `neon config init`
-  preview: {
-    aiGateway: true,
-    buckets: {
-      images: { access: 'public_read' },
-    },
-    functions: {
-      posts: { name: 'posts assistant', source: './functions/posts.ts' },
-    },
+  aiGateway: true,
+  buckets: {
+    images: { access: 'public_read' },
+  },
+  functions: {
+    posts: { name: 'posts assistant', source: './functions/posts.ts' },
   },
 });
 ```
