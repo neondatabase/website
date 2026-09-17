@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-17T12:21:13.884Z'
+updatedOn: '2026-09-17T12:45:40.183Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -131,6 +131,7 @@ functions: {
       functionPath?: string,  // default "/"
       enabled?: boolean,      // default true
     }>,
+    customDomains?: string[],  // hostnames to serve this function; default branch only
   },
 },
 ```
@@ -145,6 +146,7 @@ preview: {
       bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),
       dev?: { port?: number },
       triggers?: Array<{ type: "schedule", name: string, cron: string, functionPath?: string, enabled?: boolean }>,
+      customDomains?: string[],  // hostnames to serve this function; default branch only
     },
   },
 },
@@ -179,6 +181,8 @@ functions: {
   },
 },
 ```
+
+`customDomains` lists hostnames you own that serve the function, such as `["api.example.com"]`. `neon deploy` registers them, and each hostname can point at only one function on one branch. Static `customDomains` apply on the default branch only. For DNS setup, per-branch domains, status checks, and TLS verification, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
 
 ### buckets (#buckets)
 
