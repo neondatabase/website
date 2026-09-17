@@ -132,7 +132,7 @@ Every docs page requires `title`. All other fields are optional.
 | `subtitle`              | Subtitle shown below the title.                                                                                                    |
 | `summary`               | SEO description / meta summary.                                                                                                    |
 | `tag`                   | Badge shown in the nav. Values: `new`, `beta`, `coming soon`, `deprecated`, or custom text. Also add the tag to `navigation.yaml`. |
-| `redirectFrom`          | Array of old paths to redirect from. Each path must start and end with `/`.                                                        |
+| `redirectFrom`          | Array of old paths to redirect from. Each path must start with `/` and must not have a trailing slash (the site runs `trailingSlash: false`, so a trailing-slash source is normalized to the slashless path and never matches, returning 404). |
 | `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                 |
 | `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                 |
 | `ogImage`               | Social preview image path.                                                                                                         |
