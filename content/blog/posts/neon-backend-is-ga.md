@@ -92,7 +92,7 @@ The Neon database you already know:
 - Run it with your agent
 
 <Admonition type="note" title="Included in the Free Plan">
-The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours, 0.5 GB of database storage, and 10 branches. Public network transfer is 5 GB per project per month, shared with Functions and Object Storage.
+The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours, 0.5 GB of database storage, and 10 branches.
 </Admonition>
 
 ### Object Storage
@@ -109,10 +109,8 @@ import { defineConfig } from "@neon/config/v1";
 
 ```
 export default defineConfig({
-  preview: {
-    buckets: {
-      uploads: {},
-    },
+  buckets: {
+    uploads: { access: "public_read" },
   },
 });
 ```
@@ -125,7 +123,7 @@ Your files now follow your database as you branch:
 - Standard S3 clients work
 
 <Admonition type="note" title="Included in the Free Plan">
-The Neon Free Plan includes 5 GB of Object Storage per project. Egress draws from the same 5 GB public network transfer pool as the database and Functions.
+The Neon Free Plan includes 5 GB of Object Storage per project.
 </Admonition>
 
 ### Functions
@@ -138,13 +136,14 @@ The Neon Free Plan includes 5 GB of Object Storage per project. Egress draws fro
 
 ```
 import { defineConfig } from "@neon/config/v1";
+```
+
+```
 export default defineConfig({
-  preview: {
-    functions: {
-      processupload: {
-        name: "Process upload",
-        source: "./functions/process-upload.ts",
-      },
+  functions: {
+    processupload: {
+      name: "Process upload",
+      source: "./functions/process-upload.ts",
     },
   },
 });
@@ -158,12 +157,12 @@ Serverless functions you can deploy right next to Postgres:
 - [Just shipped] We also support custom domains ([docs](https://neon.com/docs/cli/functions))
 
 <Admonition type="note" title="Included in the Neon Free Plan">
-The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month. Function egress draws from the same 5 GB public network transfer pool as the rest of the project.
+The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month.
 </Admonition>
 
 ### Managed Better Auth
 
-[Authentication built on Better Auth, managed by Neon.](https://neon.com/auth)
+[Auth that branches, with the Better Auth code you know.](https://neon.com/auth)
 
 ```
 > Add Managed Better Auth to this app and use it as the identity provider.
@@ -171,16 +170,19 @@ The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, a
 
 ```
 import { defineConfig } from "@neon/config/v1";
+```
+
+```
 export default defineConfig({
   auth: true,
 });
 ```
 
-Your Auth lives next to your database and branches with it so you can test real auth flows:
+Your auth lives next to your database and branches with it:
 
 - Users, sessions, organizations, and configuration live in the `neon_auth` schema, where they can be queried with SQL and used with RLS
-- When the database branches, its auth state branches too, so preview sign-ups reflect production accurately
-- It uses Better Auth APIs and schema. Agents work with an established auth primitive instead of a proprietary identity model
+- When the database branches, its auth state branches too, so preview signups reflect production accurately
+- It uses Better Auth APIs and schema: agents work with an established auth primitive instead of a proprietary identity model
 
 <Admonition type="note" title="Included in the Neon Free Plan">
 Managed Better Auth is included in the Free Plan, with up to 60,000 monthly active users.
@@ -200,13 +202,11 @@ import { defineConfig } from "@neon/config/v1";
 
 ```
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-  },
+  aiGateway: true,
 });
 ```
 
-You can call AI models directly from your Neon:
+You can call AI models directly from Neon:
 
 - A branch-scoped Neon credential reaches models from multiple providers. An agent can switch models without provisioning a separate provider account and key each time
 - Models are served through Databricks Foundation Model APIs
