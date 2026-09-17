@@ -17,7 +17,7 @@ Use Neon Functions with Postgres. Discord, Telegram, and WhatsApp can all delive
 
 ## Why a function fits a bot
 
-A webhook bot spends almost all of its life waiting. A long-running server for it wastes money, and a lambda-style function with a cross-region hop to the database adds latency to every reply. Neon Functions run on Neon's compute platform next to your branch, with `DATABASE_URL` injected automatically ([overview](/docs/compute/functions/overview)). Billing, once the beta ends, covers only the time a request is being processed; you aren't billed between requests ([plans](/docs/introduction/plans#functions)).
+A webhook bot spends almost all of its life waiting. A long-running server for it wastes money, and a lambda-style function with a cross-region hop to the database adds latency to every reply. Neon Functions run on Neon's compute platform next to your branch, with `DATABASE_URL` injected automatically ([overview](/docs/compute/functions/overview)). Billing covers only the time a request is being processed; you aren't billed between requests ([plans](/docs/introduction/plans#functions)).
 
 Neon publishes a complete template for each platform:
 
@@ -47,12 +47,12 @@ neon functions deploy helloworld --src hello-world.ts
 Use `waitUntil` for work that should finish after the reply is sent, such as writing analytics or fanning out a follow-up message. It runs for up to 15 minutes after the response ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
 
 <Admonition type="note" title="HTTP bots, not Gateway bots">
-Discord Gateway bots need a long-lived stateful process with session resume, presence, and sharding. Neon Functions aren't the right primitive for that yet; the Discord guide is HTTP interactions only ([Discord bot guide](/docs/compute/functions/discord-bot)). Functions are JavaScript and TypeScript only, and available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are in beta.
+Discord Gateway bots need a long-lived stateful process with session resume, presence, and sharding. Neon Functions aren't the right primitive for that yet; the Discord guide is HTTP interactions only ([Discord bot guide](/docs/compute/functions/discord-bot)). Functions are JavaScript and TypeScript only, and available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 </Admonition>
 
 ## What it costs
 
-Functions are free during the beta on every plan. The Free plan will include 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month once billing begins, and paid plans will bill active compute at $0.10 per Capacity-Hour on Launch ([plans](/docs/introduction/plans#functions)). The Postgres side scales to zero after 5 minutes without queries, so a quiet bot pays for storage only.
+Functions are available on every plan. The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month, and paid plans bill active compute at $0.10 per Capacity-Hour on Launch ([plans](/docs/introduction/plans#functions)). The Postgres side scales to zero after 5 minutes without queries, so a quiet bot pays for storage only.
 
 ## How other options compare
 

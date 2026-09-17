@@ -27,8 +27,8 @@ The standard fix is a vacuum job: list every object in the bucket, load every `o
 
 Neon removes that trade-off with [Neon Object Storage](/docs/storage/overview). Buckets [branch with your database](/docs/storage/objects#object-branching), so creating a branch gives you an isolated copy of your data in both systems: the Postgres rows and the S3 objects. You can run the real vacuum, actual `DeleteObject` calls and all, against the branch, verify that rows and objects still agree, and only then run the same script against production with the safeguards described below.
 
-<Admonition type="info" title="Beta">
-Neon Object Storage is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Create your project in one of these regions to follow along. Neon Object Storage is in beta.
+<Admonition type="info" title="Region availability">
+Neon Object Storage is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Create your project in one of these regions to follow along.
 </Admonition>
 
 In this tutorial, you'll build a small demo app that simulates the drift problem, then write a vacuum job and test it on a Neon branch before promoting it to production. The workflow is identical for your own application: declare the bucket, measure drift with the checker, run the vacuum on a branch, and promote.
