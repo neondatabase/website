@@ -28,6 +28,8 @@ seo:
   image: null
 ---
 
+**[ADD VIDEO BY PIXELPOINT]** 
+
 <Admonition type="tip" title="TL;DR">
 Neon is now a complete suite of backend primitives built around the database and rooted on the lakebase architecture: [Lakebase Postgres](https://neon.com/lakebase), [Object Storage](https://neon.com/object-storage), [Functions](https://neon.com/functions), [Managed Better Auth](https://neon.com/auth), and [AI Gateway](https://neon.com/ai-gateway). All tools are GA and ready for production. Tell your agent to deploy them.
 </Admonition>
@@ -50,11 +52,17 @@ The reason comes down to how agents write software. An agent is good at composin
 
 We're building our backend as a set of primitives, each with a standard interface and an understanding of the Neon [design principles](https://neon.com/docs/get-started/dev-experience): infra that adapts to the workload, instant deploys and restores, and branching-first, agents-first workflows. Nothing here asks you to learn a proprietary framework or trades your data for convenience, and you can point standard tools at any of it and leave whenever you want. But the primitives compose, and an agent can wire them together through one interface to build solid foundations for software.
 
-## What's included in Neon now
+## What's included in Neon
+
+A full walkthrough:
+
+**[ADD ANTHONY'S YOUTUBE VIDEO]**
 
 ### Lakebase Postgres
 
 [Postgres at the center, setting up the stage for all workflows.](https://neon.com/lakebase)
+
+**[ADD LAKEBASE POSTGRES CLIP]**
 
 ```
 > Create a Neon database for my app. Make the main branch autoscale up to 8 CU, make sure it suspends after 5 minutes of inactivity.
@@ -99,6 +107,8 @@ The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours
 
 [S3-compatible object storage that branches with your data.](https://neon.com/object-storage)
 
+**[ADD OBJECT STORAGE CLIP]**
+
 ```
 > Add a private bucket called `uploads` to this Neon backend. Keep it on the same branch as the database so preview uploads cannot change production files.
 ```
@@ -129,6 +139,8 @@ The Neon Free Plan includes 5 GB of Object Storage per project.
 ### Functions
 
 [Long-running Node.js compute for those jobs touching Postgres.](https://neon.com/functions)
+
+**[ADD FUNCTIONS CLIP]**
 
 ```
 > Add a function that reads an uploaded file and records its status in Postgres.
@@ -164,6 +176,8 @@ The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, a
 
 [Auth that branches, with the Better Auth code you know.](https://neon.com/auth)
 
+**[ADD MANAGED BETTER AUTH CLIP]**
+
 ```
 > Add Managed Better Auth to this app and use it as the identity provider.
 ```
@@ -191,6 +205,8 @@ Managed Better Auth is included in the Free Plan, with up to 60,000 monthly acti
 ### AI Gateway
 
 [Frontier and open-weight models powered by Databricks Foundation APIs.](https://neon.com/ai-gateway)
+
+**[ADD AI GATEWAY CLIP]**
 
 ```
 > Use Neon AI Gateway for model calls. Keep the model configurable so I can test another model in a preview branch without changing production.
