@@ -11,6 +11,9 @@ summary: >-
   capability is, when to use it, and the Neon-specific part you write, and links
   to that capability's own quickstart for the full setup.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started/backend-beta
+  - /docs/get-started/platform-private-preview
 ---
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
