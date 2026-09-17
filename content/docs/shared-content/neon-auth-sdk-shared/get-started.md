@@ -1,8 +1,6 @@
 ---
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth lets you add authentication to your app in seconds. User data is synced directly to your database, so you can query and join it just like any other table.
 

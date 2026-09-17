@@ -1,157 +1,14 @@
 {
   "$comment": "Measured behaviour of every model the Neon AI Gateway serves. Produced by calling each model on /v1/chat/completions, its provider-native dialect, and /openai/v1/responses with the web_search and image_generation tools. This is what the gateway DID; models.json is what each model CLAIMS. /models needs both to know which code examples are correct.",
   "$howToRegenerate": "Generated from the conformance record in neondatabase/neon-console-code-examples: run `bun run probe:conformance` there, then copy its conformance.json into the shape below. One probe feeds both repos so the console and /models cannot disagree. Fields per model: id, owner, entitled, chat (conforms | array-content | not-served | not-entitled), deviations[], nativeDialect (anthropic | openai-responses | gemini | none), responses, webSearch, imageGeneration. Conformance MUST be measured with a prompt that makes the model reason as well as a trivial one, taking the worse shape: claude-opus-5, claude-sonnet-5 and claude-fable-5 return a compliant string for a trivial prompt and an array of {reasoning, text} parts once they think, and an easy-prompt-only probe is what published all three as `conforms`. CI checks completeness, not freshness - see the models-rest validator in scripts/verify-agent-endpoints.mjs.",
-  "probedAt": "2026-09-04T13:32:52.955Z",
+  "probedAt": "2026-09-15T00:34:44.698Z",
   "models": [
-    {
-      "id": "claude-fable-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`content` is an array[2] of {reasoning, text} with keys {summary, text, type}; the spec requires a string"
-      ],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-fable-5-1",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-haiku-4-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-4-1",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-4-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-4-6",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-4-7",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-4-8",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-opus-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`content` is an array[2] of {reasoning, text} with keys {summary, text, type}; the spec requires a string"
-      ],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-sonnet-4-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-sonnet-4-6",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "conforms",
-      "deviations": [],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
-    {
-      "id": "claude-sonnet-5",
-      "owner": "anthropic",
-      "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`content` is an array[2] of {reasoning, text} with keys {summary, text, type}; the spec requires a string"
-      ],
-      "nativeDialect": "anthropic",
-      "responses": false,
-      "webSearch": false,
-      "imageGeneration": false
-    },
     {
       "id": "gemini-3-1-flash-lite",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 346, but prompt + completion is 208",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -161,13 +18,8 @@
       "id": "gemini-3-1-pro",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 542, but prompt + completion is 250",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -177,13 +29,8 @@
       "id": "gemini-3-5-flash",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 444, but prompt + completion is 231",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -193,13 +40,8 @@
       "id": "gemini-3-5-flash-lite",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 603, but prompt + completion is 243",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -209,13 +51,8 @@
       "id": "gemini-3-6-flash",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 442, but prompt + completion is 193",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -225,13 +62,8 @@
       "id": "gemini-3-flash",
       "owner": "google",
       "entitled": true,
-      "chat": "array-content",
-      "deviations": [
-        "`id` is null; the spec requires a string",
-        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 603, but prompt + completion is 210",
-        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
-      ],
+      "chat": "conforms",
+      "deviations": [],
       "nativeDialect": "gemini",
       "responses": false,
       "webSearch": false,
@@ -415,6 +247,17 @@
     },
     {
       "id": "gpt-5-nano",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-6-astra",
       "owner": "openai",
       "entitled": true,
       "chat": "conforms",

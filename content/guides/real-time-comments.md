@@ -320,7 +320,7 @@ The code above interacts with the Postgres database using Prisma to manage comme
 
 - `getPosts()`: Fetches all posts from the database, along with their associated comments and the authors of those comments. The function returns a list of posts, each containing its comments and authors.
 
-- `getPost(id: number): Promise<[Post, number]>`: Fetches a single post by its ID, along with the associated comments and authors. Additionally, it executes a raw SQL query within a transaction to get the next value from a PostgreSQL sequence (`outbox_sequence_id_seq`), returning this value alongside the post. This ensures that the operation has both the requested post and sequence number, which may be used in event-driven systems for ordering.
+- `getPost(id: number): Promise<[Post, number]>`: Fetches a single post by its ID, along with the associated comments and authors. It also executes a raw SQL query within a transaction to get the next value from a PostgreSQL sequence (`outbox_sequence_id_seq`), returning this value alongside the post. This ensures that the operation has both the requested post and sequence number, which may be used in event-driven systems for ordering.
 
 - `getPostTx(tx: TxClient, id: number)`: A helper function used by `getPost()` to retrieve a post within a transaction (`tx`). It ensures the post's comments are fetched in ascending order of their creation timestamp.
 
@@ -353,7 +353,7 @@ export const modelsClient = () => {
 };
 ```
 
-In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, leveraging the Ably API key stored in environment variables to create the Realtime connection.
+In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, using the Ably API key stored in environment variables to create the Realtime connection.
 
 In the same directory, you would see the following code in the `mutations.ts` file:
 
@@ -445,7 +445,7 @@ In the code above, three asynchronous functions to handle CRUD operations for co
 - **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
 - **deleteComment**: Sends a DELETE request to remove a comment by its `id`.
 
-Each function validates the server response and throws an error for unsuccessful requests. Additionally, the `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
+Each function validates the server response and throws an error for unsuccessful requests. The `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
 
 In the same directory, you would see the following code in the `hook.ts` file:
 
@@ -647,6 +647,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-In this guide, you learned how to build a real-time comment system for a Next.js application by integrating Ably LiveSync with a serverless Lakebase Postgres database. The tutorial covered setting up the database schema, configuring Prisma for streamlined database access, and implementing Ably for real-time updates. You also explored how to handle optimistic updates, ensure data synchronization, and deploy the application to Vercel.
+In this guide, you learned how to build a real-time comment system for a Next.js application by integrating Ably LiveSync with a serverless Lakebase Postgres database. The tutorial covered setting up the database schema, configuring Prisma for database access, and implementing Ably for real-time updates. You also explored how to handle optimistic updates, ensure data synchronization, and deploy the application to Vercel.
 
 <NeedHelp />

@@ -1,15 +1,15 @@
 ---
 title: Efficiently Syncing 60 Million Rows from Snowflake to Postgres
-subtitle: A comprehensive guide on optimizing data transfer from Snowflake to Postgres using chunking and upsert strategies.
+subtitle: A guide to optimizing data transfer from Snowflake to Postgres using chunking and upsert strategies.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-11-26T00:00:00.000Z'
 updatedOn: '2024-12-02T08:26:51.000Z'
 ---
 
-Transferring large datasets can be challenging, especially when dealing with memory constraints and the need for atomic operations. This guide will provide a structured approach to efficiently sync data from Snowflake to Postgres, ensuring minimal memory usage and the ability to rollback in case of errors. In this guide, we will explore an efficient method to sync a large dataset (60 million rows) from Snowflake to Postgres on a nightly basis. We will discuss the challenges faced with the traditional `COPY INTO` method and provide a robust solution using chunking and upsert strategies.
+Transferring large datasets gets hard when you're working within memory constraints and need atomic operations. This guide will provide a structured approach to efficiently sync data from Snowflake to Postgres, ensuring minimal memory usage and the ability to rollback in case of errors. In this guide, we will explore an efficient method to sync a large dataset (60 million rows) from Snowflake to Postgres on a nightly basis. We will cover the problems with the traditional `COPY INTO` method and an alternative using chunking and upsert strategies.
 
-A common scenario for synchronizing data from Snowflake to Postgres involves integrating third-party datasets sourced from the Snowflake Marketplace that necessitate transformation. This data can subsequently be loaded into Neon, facilitating the creation of relationships between the Snowflake tables and the Postgres tables. Such an integration enables application-facing data to be queried through a unified Object-Relational Mapping (ORM) framework.
+A common scenario for synchronizing data from Snowflake to Postgres involves integrating third-party datasets sourced from the Snowflake Marketplace that necessitate transformation. This data can subsequently be loaded into Neon, facilitating the creation of relationships between the Snowflake tables and the Postgres tables. Application-facing data can then be queried through a single Object-Relational Mapping (ORM) framework.
 
 ## Table of Contents
 
@@ -131,7 +131,7 @@ VACUUM ANALYZE table_name;
 
 ## Conclusion
 
-By implementing chunking and upsert strategies, you can efficiently sync large datasets from Snowflake to Neon while minimizing memory usage and ensuring data integrity. This approach not only improves performance but also provides a robust error handling mechanism.
+By implementing chunking and upsert strategies, you can efficiently sync large datasets from Snowflake to Neon while minimizing memory usage and ensuring data integrity. This approach improves performance and gives you a way to recover from errors.
 
 With these strategies in place, you can confidently manage your nightly data syncs without the risk of overwhelming your system resources.
 

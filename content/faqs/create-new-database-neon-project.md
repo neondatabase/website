@@ -3,7 +3,7 @@ title: 'How do I create a new database in my Neon project?'
 subtitle: 'Add a database from the Console, the Neon CLI, or with a CREATE DATABASE statement.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -36,7 +36,7 @@ The owner role you pick becomes the database owner and has full privileges on it
 
 <TabItem>
 
-Install the CLI with `npm i -g neon` and authenticate with `neon auth`. Then:
+Install the CLI with `npm i -g neon` and authenticate with `neon login`. Then:
 
 ```bash
 neon databases create \

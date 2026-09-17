@@ -416,4 +416,4 @@ After your basic recall is working well, try expanding the candidate pool to 50 
 
 ## Conclusion
 
-Postgres on Neon brings all the essential pieces for a production-ready RAG system together in one place. It stores your chunks, indexes, vectors, and session data and gives you the flexibility to try out improvements in isolation before shipping to production. As you move from a prototype to a robust system, the real challenges are in designing your schema, building strong retrieval logic, and making sure your queries account for things like keyword accuracy and session context.
+Postgres on Neon brings all the essential pieces for a production-ready RAG system together in one place. It stores your chunks, indexes, vectors, and session data and gives you the flexibility to try out improvements in isolation before shipping to production. As you move from a prototype to a production system, the real work is in designing your schema, building strong retrieval logic, and making sure your queries account for things like keyword accuracy and session context.

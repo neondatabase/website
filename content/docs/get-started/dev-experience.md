@@ -2,28 +2,30 @@
 title: Our DX Principles
 subtitle: 'Neon adapts to your workflow, not the other way around.'
 summary: >-
-  Lakebase Postgres replaces traditional Postgres ops with continuous
-  autoscaling, copy-on-write branching, sub-second provisioning, and on-demand
-  storage. Read this page to understand why Neon behaves differently from
-  fixed-instance Postgres and which lakebase architecture decisions drive
-  scale-to-zero, instant restore, and branch-per-PR workflows. It also covers
-  agents-first workflows (API, MCP, and agent platforms), a composable backend
-  of open primitives around Lakebase Postgres, and CLI and GitHub Actions
-  support for database lifecycle automation.
+  Neon's developer experience rests on the lakebase architecture and four
+  principles: invisible infra, no waiting, branching- and agents-first
+  workflows, and a composable, open backend. Autoscaling, scale-to-zero,
+  copy-on-write branching, instant restore, and sub-second provisioning apply
+  across the whole backend, Lakebase Postgres plus Object Storage, Functions,
+  Managed Better Auth, the Data API, and the AI Gateway, not just the database.
+  It also covers config-as-code with neon.ts and API, CLI, and MCP automation
+  for agents and platforms.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-09-15T18:26:27.284Z'
 ---
 
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
 
-1. **Invisible infra** - compute and storage adapt to your workload in real-time
-2. **No waiting** - deployment of new instances, restores, and rebuilds from past states are instant
+1. **Invisible infra** - compute and storage adapt to your workload in real time, with no instances to size anywhere in the backend
+2. **No waiting** - new environments, deployments, and restores are instant across the backend, not just the database
 3. **Branching-first and agents-first workflows** - databases and backends behave like any other modern, automatable tool
 4. **Composable and open** - a full backend of open primitives around Lakebase Postgres, not a locked-in all-in-one
 
 ## Invisible infra
+
+These behaviors start with Lakebase Postgres, but they define the whole backend. The other primitives provision, scale, and branch the same way, so there's no fixed infrastructure to size or maintain anywhere in your stack.
 
 ### Autoscaling compute
 
@@ -53,7 +55,7 @@ For production workloads where cold starts are not acceptable, paid plan users c
 
 Scale to zero is a foundational capability for the Neon experience, allowing us to offer:
 
-- **A free plan developers can actually use**. Neon can offer a generous free plan without subsidizing large amounts of idle infrastructure, something made possible by the lakebase architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
+- **A Free plan developers can actually use**. Neon can offer a generous Free plan without subsidizing large amounts of idle infrastructure, something made possible by the lakebase architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
 
 - **Many short-lived, non-production environments**. Scale to zero makes it practical to run [large numbers of ephemeral databases](https://neon.com/use-cases/dev-test) for previews, CI runs, experiments, and testing. Teams can create and discard environments freely, without cost pressure forcing them to share databases or cut corners.
 
@@ -69,11 +71,15 @@ Lakebase Postgres storage is [built on object storage](/docs/introduction/archit
 
 Neon developers don’t estimate disk sizes or plan storage migrations. Databases grow naturally with the application, without operational intervention or downtime.
 
+### The rest of the backend
+
+The same principle holds beyond Postgres. [Functions](/docs/compute/functions/overview) run serverless, with no instances to size and nothing to keep warm. [Object Storage](/docs/storage/overview) has no capacity to provision. [Managed Better Auth](/docs/auth/overview) and the [Data API](/docs/data-api/overview) run as managed services on the same branch. There's no fixed infrastructure to plan for anywhere in your stack, only the workload you actually run.
+
 ## No waiting
 
 ### New deployments are fast
 
-With Neon, deploying backends is a fast operation that takes less than a second. Creating a new project or branch does not involve provisioning a new virtual machine, eliminating minutes of provisioning time.
+With Neon, deploying backends is a fast operation that takes less than a second. Creating a new project or branch does not involve provisioning a new virtual machine, eliminating minutes of provisioning time. And it's the whole backend, not just the database: Functions deploy in seconds, and a new branch inherits its parent's Object Storage buckets and configuration, so the full environment comes up together.
 
 **What this means for DX**
 
@@ -154,6 +160,14 @@ Every core operation in Neon is available programmatically:
 
 Backend workflows stop being the exception you still have to manage manually. Developers can delegate them to coding agents, and agent platforms can treat Neon as infrastructure they drive end to end - with the lakebase architecture keeping that automation fast and affordable.
 
+### Config as code
+
+Your backend's configuration can live in code, not just in the console. A [`neon.ts`](/docs/reference/neon-ts) policy declares a branch's shape in one typed file: compute and lifecycle settings, Managed Better Auth and the Data API, Object Storage buckets, and Functions. [`neon config plan`](/docs/cli/config) previews the diff against a branch's live state and [`neon deploy`](/docs/cli/deploy) reconciles it, following the same inspect-plan-apply model as Terraform.
+
+**What this means for DX**
+
+Backend configuration is reviewed in pull requests, reproduced exactly across branches, and applied by the same CI that builds your app. A preview branch can be brought up to a known-good backend in one command, and agents can manage that configuration as code alongside the application.
+
 ## Composable and open
 
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres: Managed Better Auth, Object Storage, Functions, Data API, and AI Gateway. It gives you a full backend for apps and agents as open, composable pieces on open standards, rather than an all-in-one where every layer is proprietary and inseparable.
@@ -176,4 +190,4 @@ You get a backend that is complete when you want it to be, and modular when you 
 
 ## Build without friction
 
-Neon is designed to remove friction from database workflows without constraining how you build. Our users tell us the best thing about Neon is that building feels intuitive, and that they forget the backend is even there. That’s exactly the goal. When the backend stops getting in the way, teams can move faster, experiment safely, and focus on shipping.
+Neon is designed to remove friction from backend workflows without constraining how you build. Our users tell us the best thing about Neon is that building feels intuitive, and that they forget the backend is even there. That’s exactly the goal. When the backend stops getting in the way, teams can move faster, experiment safely, and focus on shipping.

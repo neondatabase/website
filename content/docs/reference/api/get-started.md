@@ -1,5 +1,6 @@
 ---
 title: Get started with the Neon API
+subtitle: Create an API key and make your first authenticated request.
 summary: >-
   Create a Neon API key, authenticate with the REST API, and make your first
   request to list projects using curl.

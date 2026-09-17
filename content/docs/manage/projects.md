@@ -4,8 +4,9 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  On paid plans, there's no hard per-branch size limit; project storage grows
-  with your usage. A Neon project is the top-level workspace that groups branches,
+  Storage is unlimited on paid plans: there's no hard per-branch size limit
+  and project storage grows with your usage. A Neon project is the top-level
+  workspace that groups branches,
   databases, roles, and computes. This page covers the full project lifecycle: create, configure, and
   delete, via the Console or API. Use it when you need to set project-level
   defaults such as compute autoscaling, history window for instant restore and
@@ -13,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-09-01T16:13:43.529Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -49,7 +50,7 @@ After creating a project, you are directed to the **Project Dashboard**.
 
 <TabItem>
 
-Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then create a project with `neon projects create`:
+Install the CLI with `npm i -g neon` and run `neon login` to log in. Then create a project with `neon projects create`:
 
 ```bash
 neon projects create --name myproject --region-id aws-us-east-2

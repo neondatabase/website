@@ -91,15 +91,15 @@ export default [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage',
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>Not billed yet</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p><p>Not billed yet</p>`,
+            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
               href: '/docs/ai-gateway/models#available-models',
@@ -149,15 +149,15 @@ export default [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage',
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>Not billed yet</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p><p>Not billed yet</p>`,
+            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
               href: '/docs/ai-gateway/models#available-models',

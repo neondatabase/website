@@ -7,11 +7,9 @@ summary: >-
   Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
   webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-02T23:13:13.838Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 isDraft: false
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 Telegram can send bot updates to an HTTPS webhook. A [Neon Function](/docs/compute/functions/overview) can receive those updates, run bot commands and query Postgres from the same branch.
 
@@ -23,8 +21,8 @@ This guide uses Telegram webhooks. It doesn't run a polling process with `getUpd
 
 ## Prerequisites
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
-- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI auth](/docs/cli/auth).
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). See [Get started with Neon Functions](/docs/compute/functions/get-started).
+- The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI login](/docs/cli/login).
 - Node.js 24 (`node -v`). Deployed functions run on `nodejs24`, so 24 locally is the closest match. Node.js 20+ works.
 - A Telegram account.
 
@@ -85,9 +83,10 @@ This walkthrough deploys the function before connecting Telegram. Telegram requi
 
 ## Add Telegram secrets
 
-Bootstrap scaffolds a `.env.example` but no `.env.local`. Copy the example first, then link so Neon merges the branch's variables into it:
+Bootstrap scaffolds a `.env.example` but no `.env.local`. Install dependencies, copy the example, then link. `neon link` loads `neon.ts` to pull the branch's variables, so the packages must be installed first:
 
 ```bash
+npm install
 cp .env.example .env.local
 neon link
 ```
@@ -125,8 +124,6 @@ Only the local webhook setup script reads `TELEGRAM_WEBHOOK_URL`. Neon doesn't p
 
 ## Deploy the function
 
-If `neon bootstrap` installed dependencies, you can deploy now. If you copied the source by hand, run `npm install` first.
-
 The `deploy` script runs `neon deploy --env .env.local`, which evaluates `neon.ts` with your Telegram secrets in `process.env`:
 
 ```bash
@@ -134,6 +131,14 @@ npm run deploy
 ```
 
 The CLI applies the `neon.ts` policy, bundles the function and waits for the deployment to finish. You'll see `Applied changes` and a **Function URLs** list. If the deployment fails, check [function logs](/docs/compute/functions/logs) and [Deploy and manage functions](/docs/compute/functions/deploy).
+
+## Apply the database schema
+
+```bash
+npm run db:push
+```
+
+`neon link` wrote `DATABASE_URL` into `.env.local`, so you can apply the schema any time after linking. `/ping` works without the tables; `/name` and `/profile` need them.
 
 ## Set the webhook
 
@@ -180,7 +185,7 @@ The script calls Telegram's `setMyCommands` method with `/ping`, `/info`, `/help
 
 Run this command again after you change the command list.
 
-## Try `/ping`
+## Try /ping
 
 Open the bot link that BotFather gave you. If Telegram shows a **Start** button, click it. Then send `/ping`. The bot replies with `Pong` and an estimated webhook latency.
 
@@ -206,31 +211,53 @@ The template doesn't deduplicate Telegram `update_id` values. If you add a comma
 Check `X-Telegram-Bot-Api-Secret-Token` before processing an update. The template compares it with `TELEGRAM_WEBHOOK_SECRET` using Node.js `timingSafeEqual`.
 </Admonition>
 
-The handler verifies the secret before parsing an update. It handles callback queries, tracks recognized commands without delaying replies and sends `Unknown command. Try /help.` for unsupported commands. See the complete handler:
+The POST path verifies the secret before parsing the update:
+
+```ts filename="functions/telegram.ts"
+  const isVerified = verifyTelegramRequest(
+    getTelegramWebhookSecret(),
+    request.headers.get("x-telegram-bot-api-secret-token"),
+  );
+
+  if (!isVerified) {
+    return jsonResponse({ error: "invalid webhook secret" }, { status: 401 });
+  }
+
+  let payloadBody: unknown;
+
+  try {
+    payloadBody = await request.json();
+  } catch {
+    return jsonResponse({ error: "invalid json" }, { status: 400 });
+  }
+```
+
+It handles callback queries, tracks recognized commands without delaying replies and sends `Unknown command. Try /help.` for unsupported commands.
+
+<details>
+<summary>View full code: `functions/telegram.ts`</summary>
 
 <ExternalCode url="https://raw.githubusercontent.com/neondatabase/examples/main/bots/telegram-bot-http/functions/telegram.ts" />
 
-## Next steps
+</details>
 
-The template includes more than `/ping`:
+View it on [GitHub](https://github.com/neondatabase/examples/blob/main/bots/telegram-bot-http/functions/telegram.ts).
 
-- `/info`: shows the Node.js version, platform, request method, function URL and Neon branch.
-- `/help`: lists the commands defined by the template's shared command list.
-- `/buttons`: shows an inline keyboard with refresh, echo, time and confirm callbacks.
+## Commands
+
+- `/ping`: replies with Pong and an estimated webhook latency.
+- `/info`: Node.js version, platform, request method, function URL and Neon branch.
+- `/help`: lists the template's commands.
+- `/buttons`: inline keyboard with refresh, echo, time and confirm callbacks.
 - `/name <your name>`: stores a display name. `/name` without an argument shows the stored name.
-- `/profile`: shows the stored name, total command count and per-command usage.
+- `/profile`: stored name, total command count and per-command usage.
 
-The template stores Telegram user IDs, display names and usage counts in the `profiles` and `command_usage` tables. Usage tracking is best-effort and doesn't block replies.
+The template stores Telegram user IDs, display names and usage counts in the `profiles` and `command_usage` tables. Usage tracking is best-effort and doesn't block replies. If the database misses a 2.5-second deadline, the bot replies "Warming up"; run the command again once the branch is warm.
 
-`neon link` wrote `DATABASE_URL` into `.env.local`, so create the tables any time after that:
+## Related templates
 
-```bash
-npm run db:push
-```
-
-The template gives `/name` and `/profile` 2.5 seconds for a database response. If a cold Postgres compute misses that deadline, the bot returns **Warming up**. Wait a moment, then run the command again.
-
-Sibling bot templates: [Discord](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http) and [WhatsApp](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http).
+- [Discord HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)
+- [WhatsApp HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http)
 
 ## Example
 

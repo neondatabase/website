@@ -6,9 +6,9 @@ author: dhanush-reddy
 createdAt: '2025-09-03T00:00:00.000Z'
 ---
 
-End-to-end (E2E) testing is crucial for ensuring application quality, but it becomes complex when database changes are involved. Running tests that depend on a specific schema against a shared staging environment can lead to flaky results and development bottlenecks.
+End-to-end (E2E) testing catches problems unit tests miss, but it gets complicated when database changes are involved. Running tests that depend on a specific schema against a shared staging environment can lead to flaky results and development bottlenecks.
 
-Database branching solves this problem by creating isolated database environments for each feature branch, perfectly mirroring your code branching strategy. This guide demonstrates how to combine the power of Neon's instant database branching with Playwright and GitHub Actions to create a fully automated E2E testing pipeline.
+Database branching solves this problem by creating isolated database environments for each feature branch, perfectly mirroring your code branching strategy. This guide shows how to combine Neon's instant database branching with Playwright and GitHub Actions to create a fully automated E2E testing pipeline.
 
 You will build a Next.js Todo application and configure a workflow that, for every pull request:
 
@@ -30,9 +30,9 @@ By the end of this guide, you'll have a CI/CD pipeline where database-dependent 
 ## Setting up your Neon database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+2.  Copy your database connection string by clicking **Connect** in the Console nav.
 
-    ![Connection modal](/docs/connect/connection_details.png)
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
     Your connection string will look something like this:
 

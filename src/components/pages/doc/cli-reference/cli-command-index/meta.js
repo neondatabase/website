@@ -12,9 +12,9 @@
 // each one against schema.json, so a CLI change that invalidates an
 // example fails the test suite.
 const META = {
-  auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
+  login: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon login'] },
   init: {
-    desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {
@@ -101,6 +101,14 @@ const META = {
   functions: {
     desc: 'Deploy and manage Neon Functions on a branch.',
     examples: ['neon functions deploy api --src ./api.ts'],
+  },
+  triggers: {
+    desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',
+    examples: ["neon triggers create --function-slug api --name nightly --cron '0 6 * * *'"],
+  },
+  credentials: {
+    desc: 'Issue and manage scoped credentials on a branch.',
+    examples: ['neon credentials create --scope storage:read'],
   },
   buckets: {
     desc: 'Branch-scoped object storage and its objects.',

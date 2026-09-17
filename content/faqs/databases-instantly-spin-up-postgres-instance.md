@@ -21,7 +21,7 @@ Install the CLI and create a project:
 
 ```bash
 npm i -g neon
-neon auth
+neon login
 neon projects create --name my-app
 neon connection-string
 ```

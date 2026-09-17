@@ -34,4 +34,12 @@ describe('AI Gateway model rows', () => {
     expect(row.isImageCapable).toBe(false);
     expect(row.endpoints).toEqual([]);
   });
+
+  it('labels Grok as xAI and includes the Responses endpoint', () => {
+    const row = rows.find(({ id }) => id === 'grok-4-6');
+
+    expect(row.provider).toBe('xai');
+    expect(row.providerName).toBe('xAI');
+    expect(row.endpoints).toEqual(['chat/completions', 'openai/responses']);
+  });
 });

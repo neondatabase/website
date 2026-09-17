@@ -1,3 +1,22 @@
+- id: 'lubot'
+  title: 'LuBot'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/lubot.svg'
+    mediaDetails:
+      width: 72
+      height: 48
+  quote: 'It took six days to go from zero to isolated Postgres per tenant, provisioned the moment someone pays. A traditional Postgres setup would have been a full quarter of work.'
+  author:
+    name: 'Lubo Bali'
+    post: 'Founder of LuBot'
+  isInternal: true
+  internalPostSlug: 'inside-lubots-database-per-tenant-architecture'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+
 - id: 'commsync'
   title: 'CommSync'
   isFeatured: false

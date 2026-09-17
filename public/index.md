@@ -37,7 +37,7 @@ neon mcp -y --oauth --agent YOUR_AGENT
 Check auth state without blocking: run `neon profile list -o json`, where `"file": "missing"` means no credentials. Then:
 
 - **Credentials present:** `CI=true neon me -o json` exits 0 if they still work; nonzero means expired, see the next bullet.
-- **Missing or expired, human available:** ask them to run `neon auth`. Never run it yourself; it requires a browser.
+- **Missing or expired, human available:** ask them to run `neon login`. Never run it yourself; it requires a browser.
 - **No account, no human:** `neon claim create` needs no auth, writes `DATABASE_URL` to `.env.local`, and a human can keep the project later with `neon claim accept`. Auth and the Data API can be added before claiming: at create via `--service auth` or `--service data-api`, or later with `neon.ts`. Functions, Object Storage, and the AI Gateway require a claimed project. The password lives in `.env.local` (and `neon connection-string` prints it). Keep both out of logs and transcripts.
 
 ## What do you want to do?
@@ -58,7 +58,7 @@ Check auth state without blocking: run `neon profile list -o json`, where `"file
 
 ## Ask a human before
 
-Deleting anything (projects, branches, buckets, databases, `neon claim delete`) · migrations on the default branch (via MCP: `prepare_database_migration` → test → `complete_database_migration`; otherwise branch, migrate there, verify, then promote) · resets or restores over live data · billing, plans, spend limits · API keys · `neon auth` and `neon claim accept`.
+Deleting anything (projects, branches, buckets, databases, `neon claim delete`) · migrations on the default branch (via MCP: `prepare_database_migration` → test → `complete_database_migration`; otherwise branch, migrate there, verify, then promote) · resets or restores over live data · billing, plans, spend limits · API keys · `neon login` and `neon claim accept`.
 
 Creating branches, reads, and deploys to non-default branches are safe on your own.
 

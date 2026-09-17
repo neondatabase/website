@@ -10,7 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-09-01T16:13:43.529Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -31,6 +31,20 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 ## Azure regions
 
 <AzureRegionsDeprecation/>
+
+## Product availability
+
+Not every product is available in every region yet. Postgres is available in all regions listed above; the newer backend products are rolling out region by region.
+
+| Product             | Availability                                                                                                                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lakebase Postgres   | All regions listed above.                                                                                                                                                             |
+| Managed Better Auth | Runs in the same region as your database.                                                                                                                                           |
+| Object Storage      | AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`).                       |
+| Functions           | AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`).                       |
+| AI Gateway          | AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`); requires a paid plan. |
+
+For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
 
 ## Request a region
 
@@ -84,7 +98,7 @@ _NAT gateway IP lists last updated: August 28, 2026._
 | `aws-eu-west-2`      | 16.60.68.174, 18.133.205.39, 18.134.194.79, 3.10.42.8, 35.178.12.220, 52.56.191.86                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `aws-ap-southeast-1` | 13.251.199.154, 18.141.120.105, 18.142.42.169, 3.1.149.186, 3.1.239.32, 47.131.90.115, 52.221.53.167, 52.74.190.151, 52.76.51.78, 54.254.50.26, 54.254.92.70, 54.255.161.23                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `aws-ap-southeast-2` | 13.237.134.148, 13.55.152.144, 54.153.185.87                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `aws-sa-east-1`      | 18.230.1.215, 52.67.202.176, 54.232.117.41                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `aws-sa-east-1`      | 18.230.1.215, 52.67.111.132, 52.67.202.176, 54.232.117.41, 54.233.189.29, 56.126.102.242                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 ### Azure NAT Gateway IP Addresses
 

@@ -7,7 +7,7 @@ createdAt: '2025-10-10T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-[SST](https://sst.dev/) is an open-source framework that simplifies building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate, version-control, and streamline your database provisioning workflows alongside your serverless applications.
+[SST](https://sst.dev/) is an open-source framework that simplifies building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate and version-control your database provisioning alongside your serverless applications.
 
 In this guide, you’ll learn how to use SST to provision and manage Neon resources, then connect them to an [Hono](https://hono.dev/) API running on AWS Lambda.
 
@@ -404,7 +404,7 @@ curl https://qn2gxx.lambda-url.us-east-1.on.aws/version
 
 You should see the same response as before, confirming that your production deployment is working correctly and successfully connected to your Neon database.
 
-You have now successfully provisioned a Neon database and connected it to a serverless API using SST! You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
+You have provisioned a Neon database and connected it to a serverless API using SST. You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
 
 ## Import existing Neon resources
 

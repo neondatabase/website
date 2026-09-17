@@ -1,6 +1,6 @@
 ---
 title: 'AI Driven Incident response with Vercel and Neon MCP servers'
-subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
+subtitle: 'Use Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
@@ -26,7 +26,7 @@ Because the schema owner on the data engineering team is unavailable, the pull r
 
 After deployment to Vercel, the core application continues to function, but the new analytics events fail silently. Since these events are sent via background fetch requests, users see no errors. Behind the scenes, however, Vercel’s serverless functions return `500 Internal Server Error` due to a schema mismatch: the code attempts to insert parameters that the production database does not recognize.
 
-While not a full outage, this issue causes data loss during a critical campaign. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, we will delegate the investigation to Claude Code. By leveraging the Vercel and Neon MCP servers, Claude Code will be able to troubleshoot the problem and generate a detailed report on the root cause and required fixes.
+While not a full outage, this issue causes data loss during a critical campaign. Instead of manually inspecting Vercel logs, tracing the Postgres exception, writing a migration, and updating the ORM, we will delegate the investigation to Claude Code. Using the Vercel and Neon MCP servers, Claude Code will be able to troubleshoot the problem and generate a detailed report on the root cause and required fixes.
 
 ## Prerequisites
 
@@ -121,7 +121,7 @@ If validation fails, it can iterate safely on the branch until the issue is reso
 
 Now that the fix has been validated on the branch, the schema change can be promoted to production through your standard release process.
 
-What we demonstrated here is a focused scenario, but the same pattern applies broadly: use the Vercel MCP Server for observability and root cause analysis, and the Neon MCP Server for safe experimentation before rollout. Together, they enable AI agents not only to detect issues but also to test and confirm solutions with confidence.
+What we demonstrated here is a focused scenario, but the same pattern applies broadly: use the Vercel MCP Server for observability and root cause analysis, and the Neon MCP Server for safe experimentation before rollout. Together, they let AI agents detect issues and then test and confirm fixes with confidence.
 
 </Steps>
 

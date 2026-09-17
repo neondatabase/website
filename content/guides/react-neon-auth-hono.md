@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Managed Better Auth](/docs/auth/overview) to handle identity securely.
@@ -41,7 +41,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
     - **Managed Better Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
-      ![Connection modal](/docs/connect/connection_details.png)
+      ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Setup the Backend (Hono)
 
@@ -131,7 +131,7 @@ A key feature of Managed Better Auth is the automatic creation and maintenance o
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Managed Better Auth.
+This step makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
@@ -333,7 +333,7 @@ The code above does the following:
 
 2. **Database integration**
    - Connects to a **Lakebase Postgres database** using the `@neondatabase/serverless` client.
-   - Utilizes **Drizzle ORM** for database operations.
+   - Uses **Drizzle ORM** for database operations.
    - Uses the `journalEntries` schema to store and retrieve user journal data.
 
 3. **Authentication middleware**

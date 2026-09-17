@@ -5,7 +5,7 @@
       "describe": "Show help for a command or subcommand"
     },
     "api-key": {
-      "describe": "Neon API key, authenticates without `neon auth`",
+      "describe": "Neon API key, authenticates without `neon login`",
       "defaultText": "NEON_API_KEY environment variable"
     },
     "config-dir": {
@@ -57,7 +57,7 @@
           "examples": [
             {
               "command": "$0 profile create work",
-              "description": "Sign in with the browser, like `neon auth --profile work`"
+              "description": "Sign in with the browser, like `neon login --profile work`"
             },
             {
               "command": "$0 profile create ci --mint --org-id org-abc-123",

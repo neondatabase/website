@@ -33,8 +33,8 @@ The [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-m
 - **Branch per environment.** Each branch runs its own copy of the function at its own URL against its own database state. Point a client at a preview branch to test a new tool without touching production ([overview](/docs/compute/functions/overview)).
 - **Managed Better Auth and Object Storage** are one `neon.ts` declaration away when a tool needs user identity or file handling.
 
-<Admonition type="note" title="Scope">
-Functions run JavaScript and TypeScript on Node.js 24, and are available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions. They aren't billed yet on any plan; see [plans](/docs/introduction/plans#functions) for the rates that apply later. An account-wide default of 100 concurrent invocations applies.
+<Admonition type="note" title="Beta scope">
+Functions run JavaScript and TypeScript on Node.js 24, and are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are in beta. They're free during the beta on every plan; see [plans](/docs/introduction/plans#functions) for the rates that apply later. An account-wide default of 100 concurrent invocations applies.
 </Admonition>
 
 ## If you want an MCP server for Neon itself

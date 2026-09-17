@@ -169,8 +169,8 @@ export default {
         subtitle: 'Stored volume',
       },
       free: `${objectStorage.freeAllowanceGb} GB included`,
-      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>Not billed yet</span>`,
-      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>Not billed yet</span>`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
     },
     {
       fluid: true,
@@ -206,10 +206,6 @@ export default {
             title: 'Invocations',
             details: [`$${functions.launch.invocationRatePerMillion} per 1M invocations`],
           },
-          {
-            title: 'Charges',
-            details: ['Not billed yet'],
-          },
         ],
       },
       scale: {
@@ -225,10 +221,6 @@ export default {
             title: 'Invocations',
             details: [`$${functions.scale.invocationRatePerMillion} per 1M invocations`],
           },
-          {
-            title: 'Charges',
-            details: ['Not billed yet'],
-          },
         ],
       },
     },
@@ -239,9 +231,9 @@ export default {
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Not billed yet</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Not billed yet</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
     },
     {
       rows: '1',

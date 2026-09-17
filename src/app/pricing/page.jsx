@@ -94,14 +94,14 @@ const faqItems = [
       'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>No. CU-hours are specific to Postgres database compute. Object Storage, Functions, and AI Gateway have their own allowances and rates, listed in the Backend section of the plan comparison above. They aren't billed yet, and usage guardrails are in place to prevent abuse.</p>
+      <p>No. CU-hours measure Postgres database compute only. Object Storage, Functions, and AI Gateway have their own allowances and rates, shown in the plan table.</p>
     `,
   },
   {
     question: 'How are the workload cost estimates calculated?',
     id: 'workload-cost-estimates',
     answer: `
-      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are priced separately and aren't billed yet.</strong></p>
+      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately.</strong></p>
       <p>Each estimate combines two components:</p>
       <ul>
         <li><strong>Database compute cost:</strong> Based on the specified CU-hours per month. </li>
@@ -153,8 +153,10 @@ const faqItems = [
     question: 'How are Object Storage, Functions, and AI Gateway billed?',
     id: 'backend-billing',
     answer: `
-      <p>They aren't billed yet. Usage is free of charge for all three for now, with rate and usage guardrails in place. Object Storage and Functions rates are listed in the plan comparison above and apply once billing begins.</p>
-      <p>AI Gateway requires a paid Neon plan (Launch or Scale) to access. It isn't billed yet either, but its pricing model is already public - Neon charges the same per-token rate as the underlying model provider, with zero markup. See the <a href="/docs/ai-gateway/models#available-models">model list</a> for per-model rates.</p>
+      <p>Each is billed separately from Postgres compute (CU-hours).</p>
+      <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
+      <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per month.</p>
+      <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/models#available-models">per-model rates</a>.</p>
     `,
   },
   {

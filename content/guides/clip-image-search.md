@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-24T00:00:00.000Z'
-updatedOn: '2026-08-31T11:23:58.798Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 title: Build image search over CLIP embeddings with Lakebase Search
 subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Lakebase Postgres with Lakebase Search.
 ---
@@ -100,7 +100,7 @@ This flow uses the Neon CLI (2.22.2 or newer). If you don't have it yet, refer t
 First, authenticate with the Neon CLI. This opens a browser window to log in to (or sign up for) your Neon account:
 
 ```bash
-neon auth
+neon login
 ```
 
 Now, run `neon link` to create the project and bind the application directory to it:

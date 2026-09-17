@@ -164,7 +164,7 @@ Finally, add an import to `app.css` in your `+page.svelte` file:
 
 ## Managing Feature Flags in Serverless Postgres
 
-Feature flags offer a powerful way to control the behavior of your application without deploying new code. In a Serverless Postgres environment, you can easily create, read, and update feature flags using the following steps:
+Feature flags let you control the behavior of your application without deploying new code. In a Serverless Postgres environment, you can easily create, read, and update feature flags using the following steps:
 
 ### Create a serverless Postgres client
 
@@ -325,7 +325,7 @@ export const setEnabled = async (flagName: string, flagValue: boolean) => {
 
 The `setEnabled` function updates the value of a feature flag in the database. In this example, you will update the `fast_payments` feature dynamically per request to get a taste of how feature flags are used in production.
 
-Great! You can use these helper functions in your application to manage and control feature flags dynamically.
+You can use these helper functions in your application to manage and control feature flags dynamically.
 
 ## Dynamic feature flag integration for testing fast payment methods
 
@@ -397,7 +397,7 @@ In the code above, UI elements related to fast payment methods are conditionally
 
 ## Summary
 
-In this guide, you learned how to add feature flags in your SvelteKit apps using Serverless Postgres powered by Neon. By dynamically updating and utilizing feature flags, you can effectively test and roll out new features like fast payment methods, providing a controlled and iterative approach to your deployments.
+In this guide, you learned how to add feature flags in your SvelteKit apps using Serverless Postgres powered by Neon. By updating and reading feature flags at runtime, you can test and roll out new features like fast payment methods in a controlled, iterative way.
 
 ## Source code
 

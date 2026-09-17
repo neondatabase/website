@@ -11,10 +11,8 @@ summary: >-
   request is stateless, so the API scales to thousands of concurrent users
   without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-14T11:31:53.481Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 The Neon Data API is the HTTP query service in the Neon backend for apps and agents. It provides a secure, stateless interface to your database, letting you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
 

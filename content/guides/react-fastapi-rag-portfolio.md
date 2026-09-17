@@ -7,9 +7,9 @@ createdAt: '2024-10-17T00:00:00.000Z'
 updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-In this guide, you will build a full-stack portfolio website using `React` for the frontend and `FastAPI` for the backend, featuring a Retrieval-Augmented Generation (RAG) chatbot that leverages `pgvector` on `Neon`'s serverless Postgres to store and retrieve embeddings created with `OpenAI`'s embedding model.
+In this guide, you will build a full-stack portfolio website using `React` for the frontend and `FastAPI` for the backend, featuring a Retrieval-Augmented Generation (RAG) chatbot that uses `pgvector` on `Neon`'s serverless Postgres to store and retrieve embeddings created with `OpenAI`'s embedding model.
 
-This project is perfect for showcasing technical skills through a portfolio that not only demonstrates front-end and back-end capabilities but also integrates AI to answer questions about your experience.
+The result is a portfolio that shows front-end and back-end work and uses AI to answer questions about your experience.
 
 ## Prerequisites
 
@@ -628,6 +628,6 @@ The only prerequisite for this section is having Docker installed on your machin
 
 ## Conclusion
 
-You have successfully built and deployed a full-stack portfolio website powered by React, FastAPI, pgvector, Lakebase Postgres, and OpenAI. By leveraging OpenAI embeddings and the RAG-powered chatbot, you added an AI-driven layer to your portfolio that can dynamically answer questions about your projects, skills, and experience.
+You have built and deployed a full-stack portfolio website powered by React, FastAPI, pgvector, Lakebase Postgres, and OpenAI. With OpenAI embeddings and the RAG-powered chatbot, you added an AI-driven layer to your portfolio that can dynamically answer questions about your projects, skills, and experience.
 
 The next steps in the project could include deploying the application to a cloud platform like AWS, Azure, or Google Cloud, adding more features to the chatbot, or customizing the frontend design to match your personal style. You can also extend the chatbot's capabilities by fine-tuning it on more data or using a different model for generating responses.

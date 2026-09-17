@@ -4,7 +4,7 @@ subtitle: Learn how to setup Managed Better Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This guide walks you through building a demo todo application with **Next.js**, [Managed Better Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Managed Better Auth into your Next.js projects and manage database interactions with Drizzle ORM.
@@ -35,7 +35,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
     - **Auth URL:** Found on the **Auth** page under Configuration (e.g., `https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth`).
       ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
-      ![Connection modal](/docs/connect/connection_details.png)
+      ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Set up the Next.js project
 
@@ -102,7 +102,7 @@ A key feature of Managed Better Auth is the automatic creation and maintenance o
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
+This step makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.

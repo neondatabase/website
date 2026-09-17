@@ -11,7 +11,7 @@ summary: >-
   environments and want to integrate Neon branch creation with Flyway migration
   ordering.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -94,7 +94,7 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 ## Retrieve your Neon database connection strings
 
-From the Neon **Dashboard**, click **Connect** to retrieve the connection string for each branch (`production`, `development`, and `staging`) from the **Connect to your database** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
+From the Neon **Dashboard**, click **Connect** to retrieve the connection string for each branch (`production`, `development`, and `staging`) from the **Connect to your branch** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
 Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 

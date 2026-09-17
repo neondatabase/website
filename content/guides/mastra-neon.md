@@ -4,14 +4,14 @@ subtitle: 'Learn how to give your Mastra AI agents long-term memory by integrati
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 AI agents are increasingly used to create conversational assistants, customer support bots, and productivity tools. A common limitation, however, is their lack of memory. Most agents are stateless, meaning each interaction begins without awareness of past conversations or user preferences. Without the ability to recall prior exchanges, agents struggle to manage multi-turn dialogues or maintain continuity across sessions.
 
 [Mastra](https://mastra.ai/) is an unopinionated TypeScript framework for building full‑stack AI applications. To address the challenge of statelessness, it includes a native Memory module. By default, Mastra uses local file‑based storage (such as libSQL) to support rapid prototyping. For production environments, however, applications require a storage backend that is scalable, durable, and cloud‑native.
 
-This guide explains how to integrate Mastra’s Memory component with Lakebase Postgres. By connecting Mastra to Neon, you can easily build robust AI assistants that remember user interactions across threads and sessions.
+This guide explains how to integrate Mastra’s Memory component with Lakebase Postgres. By connecting Mastra to Neon, you can build AI assistants that remember user interactions across threads and sessions.
 
 ## Prerequisites
 
@@ -28,10 +28,10 @@ Before you begin, ensure you have the following:
 You need a Lakebase Postgres database to store your agent's memory. Mastra will automatically create the necessary tables for you on its first interaction.
 
 1. Log in to the [Neon Console](https://console.neon.tech) and select your project.
-2. Navigate to the **Dashboard** and click on the **Connect** button to view your connection details.
+2. Click **Connect** in the Console nav to view your connection details.
 3. Copy the Postgres connection string (it should look like `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require&channel_binding=require`).
 
-![Connection details in Neon Console](/docs/connect/connection_details.png)
+![Connection details in Neon Console](/docs/connect/connect_to_branch_modal.png)
 
 ## Initialize a new Mastra project
 
@@ -268,7 +268,7 @@ Agent: Of course! Here's a summary of our conversation so far:
 Is there anything else you'd like to discuss?
 ```
 
-You can see that the agent successfully recalls the user's favorite color and can answer questions based on that memory. Additionally, it can provide a summary of the conversation, demonstrating its ability to retain and utilize context across multiple interactions.
+You can see that the agent successfully recalls the user's favorite color and can answer questions based on that memory. It can also provide a summary of the conversation, showing that it retains and uses context across multiple interactions.
 
 If you log into the [Neon Console](https://console.neon.tech) and inspect your database tables, you will now see tables like `mastra_messages` and `mastra_threads` populated with these interactions.
 

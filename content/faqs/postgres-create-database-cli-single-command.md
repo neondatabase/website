@@ -25,7 +25,7 @@ npm i -g neon
 brew install neonctl
 ```
 
-Authenticate with `neon auth` (opens a browser once), or set `NEON_API_KEY` for headless use.
+Authenticate with `neon login` (opens a browser once), or set `NEON_API_KEY` for headless use.
 
 From there, a single command creates a project, a branch, or a database. A new project gets you a fresh Postgres database in seconds:
 
@@ -65,4 +65,4 @@ For the full command reference, including options for `--expires-at`, `--schema-
 
 If your use case is "spin up an isolated, throwaway Postgres in one CLI call for a CI job or agent task," Neon and Supabase preview branching are the closest fits. AWS CLIs target longer-lived instances.
 
-<CTA title="Install the CLI" description="Run neon auth once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/cli/quickstart" />
+<CTA title="Install the CLI" description="Run neon login once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/cli/quickstart" />

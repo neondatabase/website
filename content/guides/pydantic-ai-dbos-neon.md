@@ -4,7 +4,7 @@ subtitle: 'Learn how to build resilient, fault-tolerant AI agents that automatic
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 AI agents are evolving beyond simple chat interfaces. Today’s systems can research topics, orchestrate APIs, and coordinate multi‑step workflows that resemble full applications rather than single prompts. This shift opens the door to agents that handle increasingly complex tasks in production environments.
@@ -17,10 +17,10 @@ This guide shows how to build a fault‑tolerant agent using [**Pydantic AI**](h
 
 ## Architecture overview
 
-A durable AI agent requires three core components working together seamlessly: a framework to define and orchestrate the agent’s logic, a durable execution layer to manage state and recovery, and a persistent database to store checkpoints. Here’s how Pydantic AI, DBOS, and Neon fit together:
+A durable AI agent requires three core components working together: a framework to define and orchestrate the agent’s logic, a durable execution layer to manage state and recovery, and a persistent database to store checkpoints. Here’s how Pydantic AI, DBOS, and Neon fit together:
 
 - **Pydantic AI**  
-  Built by the team behind [Pydantic](https://pydantic.dev/), Pydantic AI is a modern agent framework that brings type safety, modularity, and structure to LLM applications. Inputs and outputs are defined as models, ensuring predictable behavior, easier debugging, and seamless orchestration of tool calls and structured responses.
+  Built by the team behind [Pydantic](https://pydantic.dev/), Pydantic AI is a modern agent framework that brings type safety, modularity, and structure to LLM applications. Inputs and outputs are defined as models, which gives you predictable behavior, easier debugging, and structured orchestration of tool calls and responses.
 
 - **DBOS**  
   DBOS is an open-source durable execution SDK that makes workflows fault-tolerant by automatically checkpointing progress to a database. If a crash, retry, or timeout occurs, DBOS resumes execution from the last completed step instead of starting over, helping ensure reliable, “exactly-once” behavior at the workflow level.
@@ -45,8 +45,8 @@ Before you begin, ensure you have the following:
 You need a Lakebase Postgres database to store DBOS execution state:
 
 1. Log in to the [Neon Console](https://console.neon.tech) and create a new project.
-2. Navigate to your Project dashboard and click on the **Connect** button to view your connection details.
-   ![Connection details in Neon Console](/docs/connect/connection_details.png)
+2. Click **Connect** in the Console nav to view your connection details.
+   ![Connection details in Neon Console](/docs/connect/connect_to_branch_modal.png)
 3. Copy the Postgres connection string, it should look something like this:
 
    ```text
@@ -99,7 +99,7 @@ For this example, you will build a simple financial research agent that gathers 
 1. `fetch_company_overview`: A reliable tool that gets general company info.
 2. `fetch_financial_metrics`: A "flaky" tool that simulates a fragile API by randomly throwing errors.
 
-By using two tools, you can clearly see the power of durable execution. If the second tool crashes, DBOS will recover the agent _without_ needing to re-run the first tool or re-ask the LLM for the initial tool calls.
+Using two tools makes the effect of durable execution visible. If the second tool crashes, DBOS will recover the agent _without_ needing to re-run the first tool or re-ask the LLM for the initial tool calls.
 
 <Admonition type="important" title="Example tools are intentionally simplified">
 The tools in this guide are intentionally illustrative. They are designed to make durability behavior obvious, not to represent a complete production integration.
@@ -291,11 +291,11 @@ Look at the logs this time:
 Based on my research of Quantum Compute Corp...
 ```
 
-**Notice what didn't happen.** The agent did _not_ invoke `Tool 1` again!
+**Notice what didn't happen.** The agent did _not_ invoke `Tool 1` again.
 
 When DBOS started up, it scanned your Neon database and found the interrupted workflow (`Recovering 1 workflows...`). It read the checkpointed state, saw that `Tool 1` had already completed successfully prior to the crash, and immediately picked up right where it left off at `Tool 2`.
 
-This is incredibly useful. It guarantees that expensive, slow, or side-effect-heavy steps are executed exactly once, regardless of crashes, host failures, or other interruptions. Your agent can now survive real-world production conditions without losing progress or wasting resources.
+This guarantees that expensive, slow, or side-effect-heavy steps are executed exactly once, regardless of crashes, host failures, or other interruptions. Your agent can now survive real-world production conditions without losing progress or wasting resources.
 
 ## Run the same workflow ID again (idempotent replay)
 
@@ -329,7 +329,7 @@ By composing Pydantic AI, DBOS, and Neon, you get several immediate benefits:
 
 ## Conclusion
 
-You have successfully built an AI agent that is resilient to both transient API failures and hard process crashes. By combining Pydantic AI's structured agent framework with DBOS's durable execution capabilities and Neon's elastic Postgres, you can ensure that your agents complete their tasks reliably in real-world production environments. This architecture allows you to focus on building powerful agent logic and integrations, while DBOS and Neon handle the complexities of state management, recovery, and scalability.
+You have built an AI agent that is resilient to both transient API failures and hard process crashes. By combining Pydantic AI's structured agent framework with DBOS's durable execution capabilities and Neon's elastic Postgres, you can ensure that your agents complete their tasks reliably in real-world production environments. This architecture lets you focus on agent logic and integrations, while DBOS and Neon handle state management, recovery, and scaling.
 
 ## Resources
 

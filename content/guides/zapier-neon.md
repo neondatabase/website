@@ -4,10 +4,10 @@ subtitle: Automate workflows by connecting Lakebase Postgres to hundreds of apps
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-29T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
-Zapier is a powerful no-code automation platform that allows you to connect Lakebase Postgres to thousands of other web services. By linking your Neon database with apps like Slack, Google Sheets, Gmail, Stripe, or Typeform, you can automate actions based on database events (e.g., a new row is added) or push data into Neon from these external systems.
+Zapier is a no-code automation platform that lets you connect Lakebase Postgres to thousands of other web services. By linking your Neon database with apps like Slack, Google Sheets, Gmail, Stripe, or Typeform, you can automate actions based on database events (e.g., a new row is added) or push data into Neon from these external systems.
 
 This guide will walk you through setting up two common automation scenarios:
 
@@ -64,7 +64,7 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
     ![App Connections in Zapier](/docs/guides/zapier-app-connections.png)
 3.  Click "**Add connection**" and search for "**PostgreSQL**".
     ![Add connection page in Zapier](/docs/guides/zapier-add-connection.png)
-4.  A pop-up window will appear asking for connection details. You can find most of these in your Neon Console on the **Dashboard** page, by clicking on the **Connect** button for your database. Fill in the following fields:
+4.  A pop-up window will appear asking for connection details. You can find most of these in your Neon Console by clicking **Connect** in the nav for your database. Fill in the following fields:
     - **Host:** Your Neon host (e.g., `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`)
     - **Port:** `5432`
     - **Database:** Your Neon database name (e.g., `neondb`)
@@ -233,7 +233,7 @@ If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon
 
 ## Conclusion
 
-Zapier provides a user-friendly way to connect your Lakebase Postgres database to the wider ecosystem of cloud applications, enabling powerful automations without writing code. By understanding the trigger and action model, you can streamline workflows, synchronize data, and save significant time.
+Zapier provides a user-friendly way to connect your Lakebase Postgres database to the wider ecosystem of cloud applications, so you can build automations without writing code. With the trigger and action model, you can automate workflows and synchronize data.
 
 ## Resources
 

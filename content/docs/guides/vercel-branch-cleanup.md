@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-09-10T00:31:17.488Z'
 ---
 
 <InfoBlock>
@@ -53,10 +53,19 @@ If you're using the **Neon-Managed integration**, your branch cleanup is based o
 If you're using the **Vercel-Managed integration**, you might expect preview branches to be deleted when you close a PR or delete a Git branch. That doesn't happen because cleanup is tied to **deployment deletion**, not Git branch deletion. Manually deleting a Vercel deployment triggers immediate Neon branch cleanup, but most teams rely on Vercel's automatic retention, which follows this timeline:
 
 1. **Vercel retains preview deployments for 6 months by default.** As of [October 2025](https://vercel.com/changelog/updated-defaults-for-deployment-retention), Vercel's default retention for pre-production deployments is 180 days. The clock starts when the deployment is created, not when the PR is closed.
-2. **Vercel's cleanup job runs asynchronously.** After the retention period expires, Vercel deletes the deployment in a batch process. This typically happens within hours to days of the expiration date, not instantly. Vercel offers a [30-day recovery window](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) to restore deleted deployments, but this does not delay cleanup for connected integrations.
+2. **Vercel's cleanup job runs asynchronously.** Vercel marks an expired deployment for deletion within about 48 hours. If a [retention exception](#retention-exceptions) still protects it, deletion waits until the exception no longer applies, and that re-evaluation can take up to 30 days. Vercel offers a [30-day recovery window](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) to restore deleted deployments, but this does not delay cleanup for connected integrations.
 3. **Neon deletes the branch when Vercel deletes the deployment.** Neon receives a cleanup webhook and removes the corresponding preview branch immediately.
 
-In the worst case (a deployment created moments before the PR is closed), this means up to **~6 months** before the Neon branch is automatically deleted.
+Vercel's current default retention periods:
+
+| Plan               | Canceled | Errored | Pre-Production (Preview) | Production |
+| ------------------ | -------- | ------- | ------------------------ | ---------- |
+| Hobby              | 30 days  | 30 days | 30 days                  | 30 days    |
+| Pro and Enterprise | 30 days  | 90 days | 180 days                 | 1 year     |
+
+Preview deployments use the Pre-Production column. Production retention matters here too, because production deployments count toward the "last 10 deployments" exception described below.
+
+In the worst case (a deployment created moments before the PR is closed), this means up to **~6 months** before the Neon branch is automatically deleted, and longer, potentially never, if a [retention exception](#retention-exceptions) keeps one of the branch's deployments alive.
 
 <Admonition type="warning" title="Restoring deleted deployments">
 Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) within a 30-day recovery window. However, restoring a Vercel deployment does **not** restore the associated Neon branch. The restored deployment will have no database behind it. To recover, you would need to recreate the Neon branch manually or push a new commit to trigger the integration.
@@ -64,9 +73,14 @@ Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment
 
 ### Retention exceptions
 
-Vercel keeps a minimum number of recent deployments regardless of your retention settings. See [Vercel's retention exceptions](https://vercel.com/docs/deployment-retention#exceptions-to-the-retention-policy) for details. Neon branches associated with these retained deployments won't be automatically cleaned up. Use the [GitHub Action approach](#github-action-on-pr-close-recommended) for those.
+Vercel keeps some deployments regardless of your retention setting. A deployment is kept while any of these is true (see [Vercel's retention exceptions](https://vercel.com/docs/deployment-retention#exceptions-to-the-retention-policy) for the full list):
 
-These exceptions protect _deployments_, not branches. A single branch can have multiple deployments, so the number of protected branches depends on how deployments are distributed across them.
+- It is one of the last 10 deployments created in the project (production and preview combined).
+- It is one of the last 20 non-production (preview) deployments in state Ready.
+- It is the latest preview deployment for a Git branch whose pull request is still open. While a PR is open, that branch's latest preview deployment, and the Neon branch behind it, stay protected. A branch whose PR was merged or closed, or that never had a PR at all, does not get this protection, so its preview deployment is cleaned up on the normal retention schedule.
+- It has a custom alias assigned.
+
+These exceptions protect _deployments_, not branches, and they are the usual reason a preview branch is "never" cleaned up. In particular, a project with fewer than about 20 preview deployments may never auto-delete any preview branch, because every preview stays within the last-20 set. For those projects, reducing retention does nothing on its own, and the [GitHub Action approach](#github-action-on-pr-close-recommended) is the reliable path.
 
 The following screenshot shows Vercel's default retention policy settings, where pre-production deployments are set to 180 days:
 
@@ -81,17 +95,17 @@ Lowering the retention period reduces how long Vercel keeps deployments before d
 To adjust your retention settings:
 
 1. Open your Vercel project dashboard
-2. Go to **Settings → Security**
-3. Scroll to **Deployment Retention Policy**
+2. Open **Settings**
+3. Find the **Deployment Retention Policy** section (currently under **Build and Deployment**)
 4. Set **Pre-Production Deployments** to the shortest available duration
 5. Save
 
-After the retention period expires, Vercel's cleanup job processes deletions asynchronously, typically within hours to days. To avoid waiting for retention entirely, you can [delete deployments manually](#delete-vercel-deployments) or use a [GitHub Action](#github-action-on-pr-close-recommended).
+After the retention period expires, Vercel marks the deployment for deletion within about 48 hours, and longer if an exception still applies. To avoid waiting for retention entirely, you can [delete deployments manually](#delete-vercel-deployments) or use a [GitHub Action](#github-action-on-pr-close-recommended).
 
 For more details, see [Vercel's deployment retention documentation](https://vercel.com/docs/deployment-retention#setting-a-deployment-retention-policy).
 
 <Admonition type="note">
-You can also set a default retention policy for all new projects in your Vercel team under **Team Settings → Security & Privacy → Deployment Retention Policy**.
+You can also set a default retention policy for all new projects in your **Team Settings**, in the **Deployment Retention Policy** section.
 </Admonition>
 
 ---
@@ -187,7 +201,7 @@ The most common cause is Vercel's deployment retention policy. With the default 
 
 <FaqItem question="I reduced retention but branches are still not being deleted">
 
-Vercel keeps a minimum number of recent deployments regardless of your retention settings. The project's `deploymentsToKeep` value (typically 10, visible via the [Vercel project API](https://vercel.com/docs/rest-api/projects/retrieve-a-list-of-projects)) controls how many are protected. Neon branches tied to these deployments won't be auto-deleted. Use the [GitHub Action workaround](#github-action-on-pr-close-recommended) or [manual cleanup](#cleaning-up-existing-stale-branches) for these branches.
+Vercel keeps some deployments regardless of your retention setting (see [Retention exceptions](#retention-exceptions)). On low-activity projects, every preview can stay within the protected set, so reducing retention may change nothing. Use the [GitHub Action workaround](#github-action-on-pr-close-recommended) or [manual cleanup](#cleaning-up-existing-stale-branches).
 
 </FaqItem>
 

@@ -3,7 +3,7 @@ title: 'Where can I find or generate API keys for Neon?'
 subtitle: 'Generate keys in Account or Organization settings. Neon shows the token once at creation.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-07T21:32:59.304Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -60,7 +60,7 @@ See [Create project-scoped organization API keys](/docs/manage/api-keys#create-p
 
 </Tabs>
 
-Use the key with `Authorization: Bearer $NEON_API_KEY` on Neon API calls. For the CLI, pass it with the `--api-key` global option (or set the `NEON_API_KEY` environment variable) instead of running `neon auth`, which launches an interactive browser login.
+Use the key with `Authorization: Bearer $NEON_API_KEY` on Neon API calls. For the CLI, pass it with the `--api-key` global option (or set the `NEON_API_KEY` environment variable) instead of running `neon login`, which launches an interactive browser login.
 
 ## List or revoke existing keys
 

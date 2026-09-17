@@ -9,7 +9,7 @@ updatedOn: '2026-08-27T18:03:21.795Z'
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
 
-AI coding assistants are rapidly transitioning to the cloud. Platforms like [Cursor Cloud Agents](https://cursor.com/blog/cloud-agents) and [Claude Code](https://code.claude.com/docs/en/claude-code-on-the-web) let developers offload programming tasks to AI agents running on remote servers. This eliminates the need for local setup and enables multiple agents to run in parallel, streamlining workflows and scaling development capacity.
+AI coding assistants are rapidly transitioning to the cloud. Platforms like [Cursor Cloud Agents](https://cursor.com/blog/cloud-agents) and [Claude Code](https://code.claude.com/docs/en/claude-code-on-the-web) let developers offload programming tasks to AI agents running on remote servers. This eliminates the need for local setup and lets multiple agents run in parallel.
 
 For full‑stack development, however, raw compute power isn’t enough. Tasks such as updating database schemas, running migrations, or testing API routes require access to a database environment that mirrors production. Typically, developers configure cloud agents by setting environment variables in [dashboards](https://code.claude.com/docs/en/claude-code-on-the-web#environment-configuration) or [project settings](https://cursor.com/docs/cloud-agent/setup#environment-variables-and-secrets). The drawback is that these variables are defined at the workspace or environment level, meaning every agent instance inherits the same credentials (for example, a single `DATABASE_URL`).
 
@@ -367,7 +367,7 @@ npx wrangler secret put NEON_PROJECT_ID
 npx wrangler secret put GITHUB_TOKEN
 ```
 
-You now have your own Full-Stack Cloud Agent runner deployed on Cloudflare! You can send `POST` requests to the Worker URL with a JSON body containing a `repoUrl` and a `task` to see it in action.
+You now have your own Full-Stack Cloud Agent runner deployed on Cloudflare. You can send `POST` requests to the Worker URL with a JSON body containing a `repoUrl` and a `task` to see it in action.
 
 ## Step 8: Test the full workflow end-to-end
 
@@ -420,7 +420,7 @@ Building your own AI agent runner pairs ephemeral compute with ephemeral data, s
 
 ## Extending this workflow
 
-Because the runner is a standard Cloudflare Worker, you can easily extend it to build more robust internal automation:
+Because the runner is a standard Cloudflare Worker, you can extend it to build more internal automation:
 
 - **Custom triggers:** Launch agents asynchronously via Slack commands, MS Teams, or GitHub Issue webhooks.
 - **Resource cleanup:** Automatically delete branches when a PR merges using webhooks, or configure [auto-expiring branches](/docs/guides/branch-expiration).
@@ -432,7 +432,7 @@ For more details on programmatic database management, explore the [Neon API Refe
 
 Standard cloud AI agents are often limited by a lack of ephemeral state. By pairing Cloudflare sandboxes with Neon's instant database branching, you bridge this gap - providing agents with the disposable, production-like environments they need to function as true full-stack developers.
 
-You have successfully built a custom execution layer that empowers AI agents to write, test, and validate complex codebase and schema changes autonomously. With this architecture, you can scale your AI-driven development workflows with confidence and zero risk to production.
+You have built a custom execution layer that lets AI agents write, test, and validate codebase and schema changes autonomously. With this architecture, you can scale AI-driven development workflows without putting production at risk.
 
 ## Resources
 

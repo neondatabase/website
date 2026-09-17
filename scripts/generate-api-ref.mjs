@@ -46,6 +46,7 @@ import {
   getRawSchemaAt,
 } from './lib/spec-utils.mjs';
 import { loadTagConfig } from './lib/tag-config.mjs';
+import { EXCLUDED_OPERATION_IDS } from './lib/excluded-operations.mjs';
 import { buildTs, toSdkMethodName, compareOpsForDisplay } from '../src/utils/api-ref.mjs';
 
 // Single source of truth for neonctl global flags that should not count as
@@ -1312,6 +1313,9 @@ async function main() {
     for (const method of METHODS) {
       const op = pathItem[method];
       if (!op?.operationId) continue;
+      // Temporary manual override (scripts/lib/excluded-operations.mjs): hide
+      // these ops from every generated output. Spec tracking is unaffected.
+      if (EXCLUDED_OPERATION_IDS.has(op.operationId)) continue;
 
       const opData = buildOperationData(
         pathStr,

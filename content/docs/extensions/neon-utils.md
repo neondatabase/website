@@ -9,7 +9,7 @@ summary: >-
   `num_cpus()` rounds fractional CU values up and only returns correct results
   on autoscaling-enabled computes, not fixed-size computes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates CPU resources in response to workload. The function returns the current number of allocated CPU cores.
@@ -73,7 +73,7 @@ The following instructions demonstrate how you can use the `num_cpus()` function
    SELECT txid_current();
    ```
 
-3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+3. To avoid errors when running `pgbench`, initialize your database with the tables used by `pgbench`. This can be done using the `pgbench -i` command, specifying the connection string for your Neon database. You can obtain a connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
    ```bash shouldWrap
    pgbench -i postgresql://[user]:[password]@[neon_hostname]/[dbname]

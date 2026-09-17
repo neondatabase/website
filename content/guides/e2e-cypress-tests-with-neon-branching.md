@@ -31,9 +31,9 @@ This process ensures that database-dependent E2E tests are run in a clean, predi
 ## Setting up your Neon database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+2.  Copy your database connection string by clicking **Connect** in the Console nav.
 
-    ![Connection modal](/docs/connect/connection_details.png)
+    ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
     Your connection string will look something like this:
 
@@ -359,7 +359,7 @@ When the pull request is opened, the GitHub Action will start automatically. You
 The pull request should now show a comment summarizing the schema changes:
 ![Schema Diff Comment](/docs/guides/e2e-tests-schema-diff-comment-github-actions.png)
 
-Additionally, GitHub Actions uploads Cypress test artifacts. Videos are recorded for every test run, while screenshots are uploaded only if tests fail. You can download these from the Actions tab to help diagnose issues.
+GitHub Actions also uploads Cypress test artifacts. Videos are recorded for every test run, while screenshots are uploaded only if tests fail. You can download these from the Actions tab to help diagnose issues.
 
 ![Cypress Artifacts](/docs/guides/cypress_test_artifacts_github_actions.png)
 

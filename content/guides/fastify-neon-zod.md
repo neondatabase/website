@@ -4,14 +4,14 @@ subtitle: 'Learn how to set up a CRUD backend using Fastify and Lakebase Postgre
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-13T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Ensuring end-to-end type safety between your backend and frontend is one of the most common challenges in modern web development.
 
 Traditionally, developers define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. This repetitive process is highly prone to code drift, and as soon as an API endpoint changes, frontend types or schemas can fall out of sync, leading to runtime failures.
 
-In this guide, you will build a unified, type-safe pipeline that automatically solves this problem using:
+In this guide, you will build a single, type-safe pipeline that automatically solves this problem using:
 
 1. **Backend database**: Lakebase Postgres for scalable, zero-config relational storage.
 2. **Backend API**: A [Fastify](https://fastify.dev/) server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
@@ -22,7 +22,7 @@ By deriving the client-side validation schemas directly from the backend's Zod s
 
 ## Architecture overview
 
-The workflow relies on a unified flow of schema representation, moving from server to client:
+The workflow relies on a single flow of schema representation, moving from server to client:
 
 ```mermaid
 flowchart TD
@@ -48,11 +48,11 @@ You will need a Lakebase Postgres database to store your data.
 1. Log in to the [Neon Console](https://console.neon.tech).
 2. Click on **New Project**.
 3. Choose a name for your project and select the region closest to you. Click **Create**.
-4. From the project dashboard, click **Connect** and copy your database connection string. It will look like this:
+4. Click **Connect** in the Console nav and copy your database connection string. It will look like this:
    ```text
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
-   ![Neon Console Connection String](/docs/connect/connection_details.png)
+   ![Neon Console Connection String](/docs/connect/connect_to_branch_modal.png)
 5. Save this connection string. You will be using it later in the backend configuration.
 
 ## Set up the Fastify backend with Zod validation
@@ -611,7 +611,7 @@ Implementing this automated pipeline provides critical improvements to full-stac
 
 ## Extending this guide
 
-In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better solution is to adopt a modern ORM that integrates seamlessly with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
+In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better option is a modern ORM that integrates with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
 
 With Drizzle, you define your schema once in TypeScript using its `pgTable` API. The [`drizzle-zod`](https://orm.drizzle.team/docs/zod) package then generates Zod schemas directly from those table definitions, so your validation logic is always derived from a single source of truth. Feed these generated Zod schemas into `fastify-type-provider-zod` and the rest of the pipeline (OpenAPI export via Swagger, client SDK and Zod schema generation via Hey API) carries on as before. The result is an unbroken chain of type safety from the database column all the way to the frontend form, with no hand-written schemas to maintain in between.
 
