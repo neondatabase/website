@@ -15,8 +15,8 @@ categories:
 authors:
   - bryan-clark
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/cover.jpg
+  alt: 'The Neon backend is GA'
 isFeatured: false
 seo:
   title: 'The Neon backend is GA: a complete set of primitives so agents can build - Neon'
@@ -25,10 +25,13 @@ seo:
   noindex: false
   ogTitle: 'The Neon backend is GA: a complete set of primitives so agents can build - Neon'
   ogDescription: We started with Postgres, now we expand to the backend
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/social.jpg
 ---
 
-**[ADD VIDEO BY PIXELPOINT]** 
+<video autoPlay muted loop playsInline width="708" height="531" aria-label="The Neon backend is GA">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/neon-ga.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/neon-ga.mp4" type="video/mp4" />
+</video>
 
 <Admonition type="tip" title="TL;DR">
 Neon is now a complete suite of backend primitives built around the database and rooted on the lakebase architecture: [Lakebase Postgres](https://neon.com/lakebase), [Object Storage](https://neon.com/object-storage), [Functions](https://neon.com/functions), [Managed Better Auth](https://neon.com/auth), and [AI Gateway](https://neon.com/ai-gateway). All tools are GA and ready for production. Tell your agent to deploy them.
@@ -44,7 +47,7 @@ Postgres was finally catching up with how developers worked. And then agents cam
 
 The other side of the Neon API are now agents acting on behalf of developers. Giving Postgres the right DX turned out to be the perfect starting point to provide a great AX, but when agents build apps they don't build on databases alone - they deploy backends.
 
-When a coding agent ships an app it deploys Postgres *and a set of tooling around it*. Apps need to store uploads, run jobs that touch that data, authenticate users, call AI models. If those are wired up as separate services on top of the Neon database, the Neon experience breaks - the bucket points at production from every branch, the function doesn't know the branch exists, auth users live in a different system, and so on. This is not the right AX, so we're building these tools ourselves from the same semantics as Lakebase Postgres, our database.
+When a coding agent ships an app it deploys Postgres _and a set of tooling around it_. Apps need to store uploads, run jobs that touch that data, authenticate users, call AI models. If those are wired up as separate services on top of the Neon database, the Neon experience breaks - the bucket points at production from every branch, the function doesn't know the branch exists, auth users live in a different system, and so on. This is not the right AX, so we're building these tools ourselves from the same semantics as Lakebase Postgres, our database.
 
 When we say "we're building backends", we think of "backend" as a set of solid primitives an agent can call, not a bundle of managed services behind one bill. The distinction is deliberate. A backend-as-a-service bundles features and asks you to adopt its way of doing things. That is not what we're building.
 
@@ -56,13 +59,16 @@ We're building our backend as a set of primitives, each with a standard interfac
 
 A full walkthrough:
 
-**[ADD ANTHONY'S YOUTUBE VIDEO]**
+<YoutubeIframe embedId="3NSc8rZJkec" isDocPost={false} />
 
 ### Lakebase Postgres
 
 [Postgres at the center, setting up the stage for all workflows.](https://neon.com/lakebase)
 
-**[ADD LAKEBASE POSTGRES CLIP]**
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Lakebase Postgres demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/lakebase.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/lakebase.mp4" type="video/mp4" />
+</video>
 
 ```
 > Create a Neon database for my app. Make the main branch autoscale up to 8 CU, make sure it suspends after 5 minutes of inactivity.
@@ -93,7 +99,7 @@ export default defineConfig({
 
 The Neon database you already know:
 
-- 100% Postgres, with the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview) -  compute is separated from versioned, copy-on-write object storage
+- 100% Postgres, with the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview) - compute is separated from versioned, copy-on-write object storage
 - Compute [provisions instantly](https://neon.com/claimable-neon), [autoscales](https://neon.com/docs/introduction/autoscaling) within limits you set, and [suspends](https://neon.com/docs/introduction/scale-to-zero) when idle
 - [Branching](https://neon.com/docs/introduction/branching) gives every pull request, preview, dev environment, test run, or agent session an isolated copy of the database that's available instantly
 - Query it over HTTP with a [PostgREST-compatible interface](https://neon.com/docs/data-api/overview)
@@ -107,7 +113,10 @@ The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours
 
 [S3-compatible object storage that branches with your data.](https://neon.com/object-storage)
 
-**[ADD OBJECT STORAGE CLIP]**
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Object Storage demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/storage.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/storage.mp4" type="video/mp4" />
+</video>
 
 ```
 > Add a private bucket called `uploads` to this Neon backend. Keep it on the same branch as the database so preview uploads cannot change production files.
@@ -140,7 +149,10 @@ The Neon Free Plan includes 5 GB of Object Storage per project.
 
 [Long-running Node.js compute for those jobs touching Postgres.](https://neon.com/functions)
 
-**[ADD FUNCTIONS CLIP]**
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Functions demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/functions.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/functions.mp4" type="video/mp4" />
+</video>
 
 ```
 > Add a function that reads an uploaded file and records its status in Postgres.
@@ -176,7 +188,10 @@ The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, a
 
 [Auth that branches, with the Better Auth code you know.](https://neon.com/auth)
 
-**[ADD MANAGED BETTER AUTH CLIP]**
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Managed Better Auth demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/auth.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/auth.mp4" type="video/mp4" />
+</video>
 
 ```
 > Add Managed Better Auth to this app and use it as the identity provider.
@@ -206,7 +221,10 @@ Managed Better Auth is included in the Free Plan, with up to 60,000 monthly acti
 
 [Frontier and open-weight models powered by Databricks Foundation APIs.](https://neon.com/ai-gateway)
 
-**[ADD AI GATEWAY CLIP]**
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon AI Gateway demo">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/ai-gateway.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/ai-gateway.mp4" type="video/mp4" />
+</video>
 
 ```
 > Use Neon AI Gateway for model calls. Keep the model configurable so I can test another model in a preview branch without changing production.
