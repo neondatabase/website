@@ -8,7 +8,7 @@ summary: >-
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/postgresql/postgres-version-policy/
+  - /docs/postgresql/postgres-version-policy
 updatedOn: '2026-09-16T15:12:58.425Z'
 ---
 
