@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T21:57:33.742Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -21,11 +21,15 @@ OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed B
 
 Google OAuth is enabled by default with shared credentials for development and testing. You can start using Google sign-in immediately without any configuration.
 
+### About shared credentials
+
+Shared credentials are a Google OAuth app that Neon owns and shares across projects, so you can add Google sign-in without setting up your own app. Because the app belongs to Neon, users see Neon's name and logo on the Google consent screen instead of yours, and you don't control the credentials.
+
+Use shared credentials only for development and testing. For production, add your own Google Client ID and secret so users see your app's branding and you control the credentials. See [Production setup](#production-setup).
+
 <Admonition type="note">
 GitHub and Vercel OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
 </Admonition>
-
-For production, configure your own OAuth app credentials for each provider you use. See [Production setup](#production-setup) below.
 
 ## Sign in with OAuth
 
@@ -172,7 +176,7 @@ Then give the **Client ID** and **Client Secret** to Managed Better Auth for tha
 
 <TabItem>
 
-In the Neon Console, open your **project**, select the **branch**, open **Auth**, then enter the **Client ID** and **Client Secret** for each provider.
+In the Neon Console, open your **project** and select the **branch**, then go to **Settings → Auth**. Under **OAuth providers**, open the provider's **⋮** menu (or **Add OAuth provider**) and enter your **Client ID** and **Client Secret**. A provider using Neon's shared credentials shows a **Shared credentials** badge until you add your own.
 
 </TabItem>
 
