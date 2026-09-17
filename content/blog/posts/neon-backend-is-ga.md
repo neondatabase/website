@@ -76,9 +76,7 @@ A full walkthrough:
 
 ```
 import { defineConfig } from "@neon/config/v1";
-```
 
-```
 export default defineConfig({
   branch: (branch) => {
     if (branch.isDefault) {
@@ -124,9 +122,7 @@ The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours
 
 ```
 import { defineConfig } from "@neon/config/v1";
-```
 
-```
 export default defineConfig({
   buckets: {
     uploads: { access: "public_read" },
@@ -160,9 +156,7 @@ The Neon Free Plan includes 5 GB of Object Storage per project.
 
 ```
 import { defineConfig } from "@neon/config/v1";
-```
 
-```
 export default defineConfig({
   functions: {
     processupload: {
@@ -199,9 +193,7 @@ The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, a
 
 ```
 import { defineConfig } from "@neon/config/v1";
-```
 
-```
 export default defineConfig({
   auth: true,
 });
@@ -232,9 +224,7 @@ Managed Better Auth is included in the Free Plan, with up to 60,000 monthly acti
 
 ```
 import { defineConfig } from "@neon/config/v1";
-```
 
-```
 export default defineConfig({
   aiGateway: true,
 });
