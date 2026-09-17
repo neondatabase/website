@@ -1642,6 +1642,11 @@
         "limit": {
           "context": 500000,
           "output": 524288
+        },
+        "cost": {
+          "input": 2,
+          "output": 6,
+          "cache_read": 0.5
         }
       }
     }
