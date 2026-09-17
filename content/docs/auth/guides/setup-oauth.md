@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-09-17T22:38:32.866Z'
+updatedOn: '2026-09-17T22:42:14.094Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -27,7 +27,7 @@ Shared credentials are a single Google OAuth app that Neon owns and makes availa
 
 Use shared credentials only for development and testing. For production, add your own Google Client ID and secret so users see your app's branding and you control the credentials. See [Production setup](#production-setup).
 
-Shared credentials are a branding and control trade-off, not an impersonation risk. The provider only redirects to Neon Auth's callback URLs for your project, so another site can't use the shared app to receive your users' sign-ins. What you give up is a distinct app identity: users consent to Neon rather than your app, and Neon controls the app's branding, scopes, and verification. For production, use your own credentials so users consent to your app and you own the trust relationship.
+Shared credentials are a branding and control trade-off. Google only redirects to Neon Auth's own callback, and Neon keeps each project's sign-ins separate at that shared endpoint, so another site can't use the shared app to receive your users' sign-ins. What you give up is a distinct app identity: users consent to Neon rather than your app, the same app is shared with every other project using shared credentials, and Neon controls its branding, scopes, and verification. For production, use your own credentials so users consent to your app and you own the trust relationship.
 
 <Admonition type="note">
 GitHub and Vercel OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
