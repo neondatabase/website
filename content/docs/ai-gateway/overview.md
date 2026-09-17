@@ -2,12 +2,20 @@
 title: Neon AI Gateway
 subtitle: One API for frontier and open-source models from OpenAI, Google, and more. Built into your Neon project.
 summary: >-
-  Neon AI Gateway is the LLM gateway built into the Neon backend. One
+  Neon AI Gateway is the LLM gateway built into your Neon project. One
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-15T18:17:04.567Z'
+updatedOn: '2026-09-17T00:30:38.129Z'
 ---
+
+Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
+
+- **One credential across all providers.** Call models like GPT-6 Astra, Grok 4.6, Kimi K3, and Gemini 3.6 Flash with no separate account for each.
+- **Keep your SDK.** Point your existing AI SDK at the branch endpoint, with no new client to learn.
+- **Scoped to your branch.** Each branch has its own gateway endpoint.
+- **Streaming built in.** Stream responses with no extra setup.
+- **Familiar paths.** The same short paths OpenAI and OpenRouter use, plus native provider paths when you need them. See [Shorter paths](/docs/ai-gateway/models#shorter-paths).
 
 ## Model access
 
@@ -31,21 +39,11 @@ Any paid project with prepaid credits can access all available models. See [AI G
 
 </DetailIconCards>
 
-## Overview
-
-Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI SDK works without code changes. Just point it at your branch endpoint.
-
 > AI Gateway is in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Create your project in one of these regions to use it. Support is expanding toward all regions. It requires a paid Neon plan. See [Pricing](#pricing) for details.
 
 <Admonition type="important">
 Participation in this Beta is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
-
-- **One credential for all providers.** A single Neon credential gives you access to models from OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
-- **Standard SDKs, one URL change.** OpenAI SDK and google-genai both work out of the box.
-- **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
-- **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
-- **Shorter, OpenRouter-style paths.** Every dialect has a short top-level path: `/v1/chat/completions` for chat completions, and a provider-prefixed path for the native dialects (`/openai/v1/...`, `/anthropic/v1/...`, `/gemini/v1beta/...`). `GET /v1/models` lists the catalog. See [Shorter paths](/docs/ai-gateway/models#shorter-paths).
 
 ## Pricing
 
