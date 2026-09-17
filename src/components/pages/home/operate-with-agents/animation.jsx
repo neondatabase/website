@@ -127,7 +127,7 @@ const Animation = () => {
     fit: Fit.Contain,
     alignment: Alignment.Center,
     threshold: 0.1,
-    rootMargin: '2000px 0px',
+    rootMargin: '800px 0px',
     visibilityRootMargin: '250px 0px',
     assetLoader: fontLoader,
     managePlayback: false,

@@ -18,7 +18,7 @@ const ScaleYourApp = () => (
       <div>
         <SectionLabel theme="white">SCALE YOUR APP AND AGENT</SectionLabel>
         <span
-          className="mt-4.25 block font-mono text-[8rem] leading-none tracking-tighter text-gray-new-10 lg:text-[6rem] md:text-[5rem] sm:text-[5rem]"
+          className="mt-4.25 block font-mono text-[8rem] leading-none tracking-tighter text-gray-new-10 lg:text-[6rem] md:mt-2 md:text-[5rem]"
           aria-hidden="true"
         >
           03
@@ -27,7 +27,7 @@ const ScaleYourApp = () => (
 
       <header className="min-w-0">
         <h2
-          className="relative left-px max-w-296 indent-24 text-5xl leading-dense font-normal tracking-tighter text-gray-new-50 xl:left-0 xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[2rem]"
+          className="relative left-px max-w-296 indent-24 text-5xl leading-dense font-normal tracking-tighter text-gray-new-50 2xl:text-[2.75rem] xl:left-0 xl:indent-16 xl:text-4xl lg:mt-10 lg:indent-0 lg:text-[2.25rem] md:mt-8 md:text-[1.75rem]"
           id="scale-your-app-heading"
         >
           <span className="text-white">Scale from your first users to the Fortune 500. </span>

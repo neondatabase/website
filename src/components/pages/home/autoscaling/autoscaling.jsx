@@ -55,7 +55,7 @@ const Autoscaling = () => {
 
   return (
     <section
-      className="autoscaling relative scroll-mt-16 overflow-hidden bg-gray-new-10 pt-40 safe-paddings pb-40 text-white xl:py-32 lg:scroll-mt-0 lg:py-20 md:py-14"
+      className="autoscaling relative scroll-mt-16 overflow-hidden bg-gray-new-10 py-40 safe-paddings text-white 2xl:py-24 lg:scroll-mt-0 lg:py-20 md:py-14"
       id="autoscaling"
     >
       <Container
@@ -66,7 +66,7 @@ const Autoscaling = () => {
           <h2
             className={cn(
               'max-w-272 indent-24 text-4xl leading-dense tracking-tighter text-pretty text-gray-new-50',
-              'xl:max-w-200 xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-[1.375rem] md:tracking-tighter'
+              '2xl:max-w-240 2xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-[1.375rem] md:tracking-tighter'
             )}
           >
             <strong className="font-normal text-white">

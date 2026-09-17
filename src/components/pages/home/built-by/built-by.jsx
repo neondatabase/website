@@ -29,7 +29,7 @@ const STATS = [
 
 const BuiltBy = () => (
   <section
-    className="built-by relative overflow-hidden bg-gray-new-10 safe-paddings pb-40 text-white xl:pb-32 lg:pb-20 md:pb-14"
+    className="built-by relative overflow-hidden bg-gray-new-10 safe-paddings pb-40 text-white 2xl:pb-32 lg:pb-24 md:pb-20"
     id="built-by"
   >
     <Container
@@ -40,7 +40,7 @@ const BuiltBy = () => (
         <h2
           className={cn(
             'max-w-272 indent-24 text-4xl leading-dense tracking-tighter text-pretty text-gray-new-50',
-            'xl:max-w-200 xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
+            '2xl:max-w-240 2xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
           )}
         >
           <strong className="font-normal text-white">Backed by giants.</strong> First founded by

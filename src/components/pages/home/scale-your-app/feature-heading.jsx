@@ -4,7 +4,7 @@ import { cn } from 'utils/cn';
 
 const FeatureHeading = ({ className, lines, description, descriptionClassName }) => (
   <header className={cn('relative z-20', className)}>
-    <h3 className="font-mono text-[3.5rem] leading-none font-normal text-[#cae6dc] lg:text-[2.75rem] md:text-[2.25rem] sm:text-2xl">
+    <h3 className="font-mono text-[3.5rem] leading-none font-normal text-[#cae6dc] 2xl:text-[3.25rem] lg:text-[2.75rem] md:text-[2.25rem] sm:text-2xl">
       {lines.map(({ text, width }) => (
         <span
           className="relative block h-[63px] max-w-full lg:h-[50px] md:h-[41px] sm:h-[30px]"
@@ -12,7 +12,7 @@ const FeatureHeading = ({ className, lines, description, descriptionClassName })
           key={text}
         >
           <span
-            className="absolute inset-x-0 top-px h-[60px] bg-[#0d221a] lg:h-[48px] md:h-[39px] sm:h-[29px]"
+            className="absolute inset-x-0 top-px h-15 bg-[#0d221a] 2xl:h-14 lg:h-12 md:h-10 sm:h-7"
             aria-hidden="true"
           />
           <span className="relative block h-full pl-8 leading-[63px] whitespace-nowrap lg:pl-6 lg:leading-[50px] md:pl-5 md:leading-[41px] sm:pl-4 sm:leading-[30px]">

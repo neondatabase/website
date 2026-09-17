@@ -46,7 +46,7 @@ const DecorativeBackground = () => (
 
 const AgentPlatform = () => (
   <section
-    className="agent-platform relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure xl:py-32 lg:py-28 md:py-20"
+    className="agent-platform relative overflow-hidden bg-[#E4F1EB] py-40 safe-paddings text-black-pure 2xl:py-32 lg:py-24 md:py-20"
     id="agent-platform"
     aria-labelledby="agent-platform-heading"
   >
@@ -55,7 +55,7 @@ const AgentPlatform = () => (
       <div className="max-w-5xl">
         <SectionLabel className="mb-5">Usage-based pricing</SectionLabel>
         <h2
-          className="text-[4.5rem] leading-none font-normal tracking-tighter xl:text-6xl lg:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
+          className="text-[4.5rem] leading-none font-normal tracking-tighter 2xl:text-[4rem] xl:text-6xl lg:text-[3.25rem] md:text-[2.25rem] sm:text-[2rem]"
           id="agent-platform-heading"
         >
           Pay for what you use, not for the infrastructure you might need.
