@@ -22,7 +22,7 @@ metadata:
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon
+neon skills -s neon -y
 ```
 
 # Neon AI Gateway
@@ -61,23 +61,21 @@ The AI Gateway is a public beta feature currently available in `us-east-2` and `
 
 The AI Gateway is credential-gated rather than a provisioning step, but two plan/beta limits gate it — one blocks provisioning, the other only trims the catalog — and the CLI surfaces each:
 
-- **Free plan → provisioning is blocked.** `neon config apply` / `deploy` and `neon checkout` **refuse** to enable the gateway on a Free plan (the gateway can't serve requests there), with a friendly "upgrade to a paid plan, or remove `preview.aiGateway`" error. A dry-run `neon config plan` and `neon env pull` don't provision, so they only **warn**. So: to use the gateway the project's account must be on a paid Neon plan.
+- **Free plan → provisioning is blocked.** `neon config apply` / `deploy` and `neon checkout` **refuse** to enable the gateway on a Free plan (the gateway can't serve requests there), with a friendly "upgrade to a paid plan, or remove `aiGateway`" error. A dry-run `neon config plan` and `neon env pull` don't provision, so they only **warn**. So: to use the gateway the project's account must be on a paid Neon plan.
 - **Paid plan with a reduced model catalog.** On a paid plan the gateway provisions and serves, but during the beta an account can start with a trimmed catalog — some flagship models (e.g. Anthropic Opus, OpenAI Codex / `*-pro`) are missing from `GET /v1/models`. This is expected; `neon env pull` (and the env pull bundled into `apply` / `deploy` / `checkout`) warns and links the user to their branch's AI Gateway page in the Neon Console (`https://console.neon.tech/app/projects/<project-id>/branches/<branch-id>/ai-gateway`) to request access to more models. Verify what's actually available for the branch by reading `/v1/models` (see the models section below) rather than assuming the full catalog.
 
 When helping a user debug "the gateway isn't working" or "a model is missing", use `/v1/models` plus the account's plan to distinguish these two cases — a Free plan blocks provisioning entirely, while a reduced catalog on a paid plan just needs a model-access request.
 
 ## Setup
 
-The gateway is part of `neon.ts` (see the `neon` skill for the branch-first workflow and `neon.ts` basics). Enable it under `preview.aiGateway`:
+The gateway is part of `neon.ts` (see the `neon` skill for the branch-first workflow and `neon.ts` basics). Enable it with `aiGateway`:
 
 ```typescript
 // neon.ts
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-  },
+  aiGateway: true,
 });
 ```
 
@@ -87,7 +85,7 @@ neon deploy   # provisions the gateway on the linked branch
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
-The `preview.aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
+The `aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
 
 ```bash
 neon config status   # print the branch's live config (is the gateway on?)
@@ -99,7 +97,7 @@ The gateway is **branch-scoped**: each branch gets its own gateway host. When a 
 
 ## Environment Variables
 
-When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **Neon-branded** env vars. Inside a deployed Neon Function these are injected automatically; locally, `neon env pull` writes them to `.env`/`.env.local` (or use `neon-env run -- <cmd>` to inject at runtime without a file):
+When `aiGateway` is enabled, Neon injects the gateway credentials as **Neon-branded** env vars. Inside a deployed Neon Function these are injected automatically; locally, `neon env pull` writes them to `.env`/`.env.local` (or use `neon-env run -- <cmd>` to inject at runtime without a file):
 
 | Variable                   | Meaning                                                                                                                             |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,7 +179,7 @@ For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, im
 
 ## Build Agents with Mastra (Recommended)
 
-[Mastra](https://mastra.ai) is the recommended framework when you want batteries-included agents — built-in memory, tools, workflows, and tracing — with the model still pointed at the gateway. With `@mastra/core` 1.47+, use a `neon/<model>` magic string; Mastra reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment (injected by `neon deploy` when `preview.aiGateway` is enabled). Use `parseEnv` only for other declared services (e.g. `env.postgres.databaseUrl` for `@mastra/pg` memory):
+[Mastra](https://mastra.ai) is the recommended framework when you want batteries-included agents — built-in memory, tools, workflows, and tracing — with the model still pointed at the gateway. With `@mastra/core` 1.47+, use a `neon/<model>` magic string; Mastra reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment (injected by `neon deploy` when `aiGateway` is enabled). Use `parseEnv` only for other declared services (e.g. `env.postgres.databaseUrl` for `@mastra/pg` memory):
 
 ```typescript
 import { Agent } from "@mastra/core/agent";
@@ -255,8 +253,8 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 **Getting the credentials for the request.** Both values come from the same branch-scoped Neon credential the gateway uses everywhere else — you never manage a provider key:
 
-- **Provision via `neon.ts` (recommended).** Enable `preview.aiGateway` in `neon.ts` and run `neon deploy` (or `neon config apply`). Provisioning, `neon link`, and `neon checkout` pull `NEON_AI_GATEWAY_TOKEN` + `NEON_AI_GATEWAY_BASE_URL` into your local `.env.local`; inside a deployed Neon Function they're injected automatically. See **Setup** and **Environment Variables** above.
-- **Pull into the environment via CLI.** `neon env pull` writes the two vars to `.env`/`.env.local`, or `neon-env run -- <cmd>` injects them at runtime without a file — but only when `neon.ts` declares `preview.aiGateway`; the vars are never pulled off branch state alone.
+- **Provision via `neon.ts` (recommended).** Enable `aiGateway` in `neon.ts` and run `neon deploy` (or `neon config apply`). Provisioning, `neon link`, and `neon checkout` pull `NEON_AI_GATEWAY_TOKEN` + `NEON_AI_GATEWAY_BASE_URL` into your local `.env.local`; inside a deployed Neon Function they're injected automatically. See **Setup** and **Environment Variables** above.
+- **Pull into the environment via CLI.** `neon env pull` writes the two vars to `.env`/`.env.local`, or `neon-env run -- <cmd>` injects them at runtime without a file — but only when `neon.ts` declares `aiGateway`; the vars are never pulled off branch state alone.
 - **Provision via the Console UI.** Enable the AI Gateway on the branch in the Neon Console and copy the branch's gateway base URL and a Neon credential (token) from the project's connection/credentials view.
 
 Any Neon credential (`nt_live_...`) valid for the branch works as the bearer token; `NEON_AI_GATEWAY_BASE_URL` is the bare branch host (no path).
