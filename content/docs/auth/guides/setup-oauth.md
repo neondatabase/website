@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-09-17T22:44:36.874Z'
+updatedOn: '2026-09-17T22:48:53.595Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -23,11 +23,13 @@ Google OAuth is enabled by default with shared credentials for development and t
 
 ### About shared credentials
 
-Shared credentials are a single Google OAuth app that Neon owns and makes available to Neon projects for development, so you can add Google sign-in without setting up your own app. The app isn't unique to your project; every project that uses shared credentials, including projects belonging to other Neon users, shares the same Neon-owned app. Because the app belongs to Neon, users see Neon's name and logo on the Google consent screen instead of yours, and you don't control the credentials.
+Shared credentials let you add Google sign-in with no setup, using a Google OAuth app that Neon owns. That one app is shared by every project that uses shared credentials, including projects belonging to other Neon users. It isn't unique to you.
 
-Use shared credentials only for development and testing. For production, add your own Google Client ID and secret so users see your app's branding and you control the credentials. See [Production setup](#production-setup).
+When someone signs in, Google shows them Neon's name and logo, not your app's, because the sign-in runs through Neon's app rather than one you own. Your users are effectively trusting Neon, and you don't control the app's branding, its permission scopes, or the credentials.
 
-Shared credentials are a branding and control trade-off. Google only redirects to Neon Auth's own callback, and Neon keeps each project's sign-ins separate at that shared endpoint, so another site can't use the shared app to receive your users' sign-ins. What you give up is a distinct app identity: users consent to Neon rather than your app, the same app is shared with every other Neon user whose project uses shared credentials, and Neon controls its branding, scopes, and verification. For production, use your own credentials so users consent to your app and you own the trust relationship.
+This is safe for development and testing. An outside website can't use the shared app to capture your users, because Google only ever redirects sign-ins back to Neon, and Neon keeps each project's sign-ins separate. The reason not to use it in production is trust and control, not a security hole: real users should see your app on the consent screen, and you should own the credentials.
+
+For production, add your own Google Client ID and secret. See [Production setup](#production-setup).
 
 <Admonition type="note">
 GitHub and Vercel OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
