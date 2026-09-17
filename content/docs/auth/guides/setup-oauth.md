@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T22:03:00.724Z'
 ---
 
 OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
@@ -21,11 +21,15 @@ OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed B
 
 Google OAuth is enabled by default with shared credentials for development and testing. You can start using Google sign-in immediately without any configuration.
 
+### About shared credentials
+
+Shared credentials are a Google OAuth app that Neon owns and shares across projects, so you can add Google sign-in without setting up your own app. Because the app belongs to Neon, users see Neon's name and logo on the Google consent screen instead of yours, and you don't control the credentials.
+
+Use shared credentials only for development and testing. For production, add your own Google Client ID and secret so users see your app's branding and you control the credentials. See [Production setup](#production-setup).
+
 <Admonition type="note">
 GitHub and Vercel OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
 </Admonition>
-
-For production, configure your own OAuth app credentials for each provider you use. See [Production setup](#production-setup) below.
 
 ## Sign in with OAuth
 
@@ -152,7 +156,7 @@ Set **Authorization callback URL** to **`{NEON_AUTH_BASE_URL}/callback/github`**
 
 **Vercel**
 
-Follow [Vercel's OAuth app docs](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app) and register **`{NEON_AUTH_BASE_URL}/callback/vercel`**.
+Set the authorization callback URL to **`{NEON_AUTH_BASE_URL}/callback/vercel`**. In the Vercel app's permissions, enable the **`openid`**, **`email`**, and **`profile`** scopes, which Managed Better Auth requires to create a session. See [Vercel's OAuth app docs](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app).
 
 ### 2. Add trusted domains for your app
 
@@ -172,7 +176,13 @@ Then give the **Client ID** and **Client Secret** to Managed Better Auth for tha
 
 <TabItem>
 
-In the Neon Console, open your **project**, select the **branch**, open **Auth**, then enter the **Client ID** and **Client Secret** for each provider.
+In the Neon Console, open your **project** and select the **branch**, then go to **Settings → Auth**. Under **OAuth providers**, click **Add OAuth provider** (or open an existing provider's **⋮** menu and choose **Configure**).
+
+The dialog shows the exact **authorization callback URL** to register with the provider (for example, `{NEON_AUTH_BASE_URL}/callback/github`). Copy it from the dialog rather than assembling it by hand, then enter your **Client ID** and **Client Secret**.
+
+Click **Add** (or **Update** when editing an existing provider) to save. Neon applies the change to the branch and confirms with a success message. Your app uses the new credentials on the next sign-in. A provider using Neon's shared credentials shows a **Shared credentials** badge until you add your own.
+
+To disable a provider, open its **⋮** menu and choose **Remove**. Its sign-in button no longer appears in your app.
 
 </TabItem>
 
