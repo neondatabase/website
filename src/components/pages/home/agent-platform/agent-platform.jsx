@@ -14,7 +14,7 @@ const CARDS = [
   {
     icon: lowEntryBarrierIcon,
     title: 'Powerful Free Tier',
-    description: 'Our architectural efficiency powers a free plan with 100 projects.',
+    description: '100 free projects with Database, Storage, Functions & Auth',
   },
   {
     icon: startAtZeroIcon,
