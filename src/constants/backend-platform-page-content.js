@@ -79,40 +79,75 @@ const functionsPageContent = {
   },
   faqItems: [
     {
-      question: 'What are Functions?',
+      question: 'What are Neon Functions?',
       answer:
-        "<p>Neon Functions are serverless Node.js functions you deploy onto a Neon branch, in the same region as your Lakebase Postgres database. DATABASE_URL is injected automatically, along with AI Gateway and Object Storage credentials if you're using them, so a function reads process.env instead of assembling third-party accounts.</p>",
+        '<p>Neon Functions are serverless functions you deploy onto a Neon branch, so your backend code runs in the same region as your database. <code>DATABASE_URL</code> is injected automatically, along with AI Gateway and Object Storage credentials when you use them. Use a Function to host an API, an MCP server, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure. Functions run JavaScript or TypeScript on the Node.js runtime.</p>',
       initialState: 'open',
     },
     {
-      question: 'How are they different from lambda-style serverless?',
+      question: 'How are Neon Functions different from lambda-style serverless?',
       answer:
-        '<p>Neon Functions support long-running requests, streaming responses, WebSockets, and server-sent events without the short execution windows common to lambda-style runtimes.</p>',
+        '<p>Functions run next to your data and stay open for long-running work. A Function can start responding within 15 minutes and keep streaming while data flows, so agents, WebSockets, and SSE connections aren&apos;t cut off by a short execution limit. They are still serverless: idle functions can be evicted.</p>',
     },
     {
-      question: 'When should I call Neon Functions?',
+      question: 'When should I use Neon Functions?',
       answer:
-        '<p>Use Functions for backend APIs, AI agents, MCP servers, WebSockets, SSE, and other request-driven work that benefits from running close to your data.</p>',
+        '<p>Use Functions for backend APIs, AI agents, MCP servers, WebSockets, SSE, file upload handlers, webhook handlers, and other request-driven work that benefits from running close to your data. Hosting an MCP server is a common pattern: the Function stays close to Postgres, can keep a long-lived stream open, and gets <code>DATABASE_URL</code> plus other Neon credentials injected automatically, so the MCP tools can query and mutate the same branch as the rest of the backend.</p>',
     },
     {
       question: 'Should I run my frontend on Neon Functions?',
       answer:
-        '<p>Run your frontend on your preferred web host. Use Neon Functions for backend work that needs longer execution, persistent connections, or direct access to your Neon services.</p>',
+        '<p>Run your frontend on your preferred web host. Use Functions for backend work that needs longer execution, persistent connections, or direct access to your Neon services.</p>',
     },
     {
-      question: 'Can I run cron jobs or background work?',
+      question: 'Can I run cron jobs or scheduled work?',
       answer:
-        '<p>Functions are designed for request and response workloads. Use a dedicated job system for scheduled or durable background processing.</p>',
+        '<p>Yes. Function Triggers let Neon invoke a deployed Function on a cron schedule. Schedules run outside the Postgres compute, so they fire even when the database is scaled to zero. This replaces the pattern of running an external scheduler or keeping a compute awake for <code>pg_cron</code>. For queued, retryable background jobs with their own lifecycle, pair a Function with a job queue or workflow service. A native Neon job queue is a separate, upcoming offering.</p>',
     },
     {
-      question: 'What happens to my functions when I create a Neon branch?',
+      question: 'What are Function Triggers?',
       answer:
-        '<p>Your function configuration branches with the rest of your backend, giving the branch isolated data and its own function endpoint.</p>',
+        '<p>Triggers tell Neon when to invoke a deployed Function. They live on a branch and point to a Function on that branch. A child branch inherits its parent&apos;s triggers, but they arrive disabled and don&apos;t run until you enable them, so branching production for a test doesn&apos;t fire the parent&apos;s schedule a second time. The first trigger type is cron schedules, with event-based triggers that react to activity inside Neon planned next.</p>',
     },
     {
-      question: 'How do I deploy a function?',
+      question: 'What happens to my Functions when I create a branch?',
       answer:
-        '<p>Declare the function in <code>neon.ts</code>, then run <code>neon deploy</code>. You can also deploy a single function with the Neon CLI.</p>',
+        '<p>Each branch runs its own copy of a Function, at its own URL, against its own database state. Your Function configuration branches with the rest of your backend, so a preview or test branch gets an isolated Function endpoint.</p>',
+    },
+    {
+      question: 'How do I deploy a Function?',
+      answer:
+        '<p>Declare the Function in <code>neon.ts</code>, then run <code>neon deploy</code>. You can also deploy a single Function with the Neon CLI.</p>',
+    },
+    {
+      question: 'Can I use a custom domain?',
+      answer:
+        '<p>Yes. You can serve a Function from your own hostname, such as <code>api.example.com</code>, instead of its native Neon invocation URL. Register the domain from the Neon Console, CLI, SDK, or API, add the returned CNAME record at your DNS provider, and Neon issues the TLS certificate automatically through Let&apos;s Encrypt. Custom domains are included with Functions with no separate charge; traffic is billed like any other Function traffic.</p>',
+    },
+    {
+      question: 'How do custom domains work with branches?',
+      answer:
+        '<p>A custom domain is attached to one Function on one branch, not to the whole project. If you register <code>api.example.com</code> on production, that hostname keeps pointing at the production Function after you branch. Each hostname can be registered once, so a preview branch needs its own name, such as <code>preview.api.example.com</code>. Adding a custom domain doesn&apos;t authenticate the Function or disable its native Neon URL, so protect the Function with application-level authentication.</p>',
+    },
+    {
+      question: 'How does Functions pricing work?',
+      answer:
+        '<p>Functions are pay-as-you-go on paid plans and billed on three parts: active compute while your code runs, waiting compute while a Function is idle but held ready, and invocations. Active compute is $0.10 per Capacity-Hour on Launch and $0.12 on Scale. Waiting compute is $0.025 per Capacity-Hour on Launch and $0.03 on Scale. Invocations are $0.60 per million on both plans. See the <a href="/pricing">pricing page</a> for current rates.</p>',
+    },
+    {
+      question: 'Is there a free allowance for Functions?',
+      answer:
+        '<p>The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month. Custom domains and triggers are part of Functions and don&apos;t carry a separate charge.</p>',
+    },
+    {
+      question: 'Which languages and runtimes do Functions support?',
+      answer:
+        '<p>Functions run JavaScript or TypeScript on the Node.js runtime. You can deploy JS/TS handlers or code that bundles to JavaScript for Node.js. A Function is any module whose default export provides a <code>fetch(request)</code> method that returns a web <code>Response</code>, the same handler shape used by other standards-based serverless runtimes. Hono is the recommended framework.</p>',
+    },
+    {
+      question: 'Which regions are Functions available in?',
+      answer:
+        '<p>Functions run in the same region as your Neon branch. Region coverage is expanding; create your project in a supported region to use Functions. See the <a href="/docs/compute/functions/overview">Functions overview</a> for the current list.</p>',
     },
   ],
 };
