@@ -271,6 +271,23 @@ export const getAllPosts = async (options = {}) => {
   return [...featuredPosts, ...restPosts];
 };
 
+// Raw source of a single post (frontmatter + body), exactly as authored in the
+// blog content repo. This is what the `/blog/[slug].md` endpoint serves, read
+// from the same snapshot the HTML page renders from so the two never drift.
+// Returns null for an unknown slug, or a draft when running as production.
+export const getBlogPostRawBySlug = async (slug, options = {}) => {
+  const snapshot = options.previewBranch
+    ? await getBranchSnapshot(options.previewBranch, { postSlug: slug })
+    : await getResolvedBlogSnapshot(options);
+  const postEntry = snapshot.posts.find((entry) => entry.slug === slug);
+
+  if (!postEntry || (postEntry.data?.draft && isProductionWebsite())) {
+    return null;
+  }
+
+  return postEntry.raw;
+};
+
 export const getBlogPostBySlug = async (slug, options = {}) => {
   const snapshot = options.previewBranch
     ? await getBranchSnapshot(options.previewBranch, { postSlug: slug })

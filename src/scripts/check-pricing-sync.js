@@ -681,7 +681,7 @@ const CROSS_SOURCE_CHECKS = [
       id: `ai-gateway-${plan}`,
       label: `AI Gateway (${plan})`,
       comp: 'AI Gateway',
-      docs: 'AI Gateway (Beta)',
+      docs: 'AI Gateway',
       plan,
       norm: offeredValue,
       agentLabel: 'AI Gateway',

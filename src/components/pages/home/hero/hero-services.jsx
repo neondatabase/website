@@ -7,10 +7,25 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260709';
+const DEFAULT_VIDEO_DIRECTORY = '/videos/pages/home/hero';
+const DEFAULT_VIDEO_VERSION = '20260709';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 20;
+
+const variants = {
+  default: {
+    list: 'grid grid-cols-5 grid-rows-[auto_auto] gap-x-16 gap-y-8 2xl:gap-x-6 xl:gap-x-6 xl:gap-y-6 lg:-mx-5 lg:gap-x-8 lg:gap-y-0 lg:px-5 md:gap-x-6',
+    item: 'max-w-64',
+    description: 'max-w-sm',
+  },
+  lighten: {
+    list: 'grid grid-cols-[repeat(5,18.4375rem)] grid-rows-[auto_auto] gap-x-4 gap-y-8 2xl:grid-cols-5 xl:gap-y-6 lg:-mx-5 lg:gap-x-8 lg:gap-y-0 lg:px-5',
+    item: 'max-w-73.75 grid-rows-[auto_auto] content-end gap-y-8 xl:gap-y-6 lg:content-start lg:gap-y-8 md:gap-y-6',
+    description:
+      'max-w-3xs text-[1.125rem]/tight 2xl:text-base/tight xl:text-base/tight lg:text-base/tight',
+  },
+};
 
 const getScrollPaddingLeft = (element) => {
   const scrollPaddingLeft = Number.parseFloat(window.getComputedStyle(element).scrollPaddingLeft);
@@ -25,13 +40,23 @@ const getScrollPaddingLeft = (element) => {
     poster: ffmpeg -ss 00:00:00 -i sources/input.mp4 -frames:v 1 -vf "scale=512:-2:flags=lanczos" -q:v 1 output.jpg
 */
 
-const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase, width }) => {
+const HeroServiceVideo = ({
+  height,
+  isActive,
+  onEnded,
+  shouldLoop,
+  title,
+  videoBase,
+  videoDirectory,
+  videoVersion,
+  width,
+}) => {
   const videoRef = useRef(null);
   const endDelayTimeoutRef = useRef(null);
   const shouldLoopRef = useRef(shouldLoop);
   const onEndedRef = useRef(onEnded);
-  const posterImagePath = `/videos/pages/home/hero/${videoBase}.jpg`;
-  const posterVideoPath = `${posterImagePath}?updated=${VIDEO_VERSION}`;
+  const posterImagePath = `${videoDirectory}/${videoBase}.jpg`;
+  const posterVideoPath = `${posterImagePath}?updated=${videoVersion}`;
 
   useEffect(() => {
     shouldLoopRef.current = shouldLoop;
@@ -55,6 +80,7 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch((error) => {
+        if (error.name === 'AbortError') return;
         console.error(`Error attempting to play ${title} video:`, error);
       });
     }
@@ -78,6 +104,7 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
         const playPromise = video.play();
         if (playPromise !== undefined) {
           playPromise.catch((error) => {
+            if (error.name === 'AbortError') return;
             console.error(`Error attempting to loop ${title} video:`, error);
           });
         }
@@ -116,11 +143,11 @@ const HeroServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoB
         onEnded={handleEnded}
       >
         <source
-          src={`/videos/pages/home/hero/${videoBase}.webm?updated=${VIDEO_VERSION}`}
+          src={`${videoDirectory}/${videoBase}.webm?updated=${videoVersion}`}
           type="video/webm"
         />
         <source
-          src={`/videos/pages/home/hero/${videoBase}.mp4?updated=${VIDEO_VERSION}`}
+          src={`${videoDirectory}/${videoBase}.mp4?updated=${videoVersion}`}
           type="video/mp4"
         />
       </video>
@@ -135,17 +162,27 @@ HeroServiceVideo.propTypes = {
   shouldLoop: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   videoBase: PropTypes.string.isRequired,
+  videoDirectory: PropTypes.string.isRequired,
+  videoVersion: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
 };
 
-const HeroServices = ({ items }) => {
+const HeroServices = ({
+  items,
+  mediaLoading = 'eager',
+  variant = 'default',
+  videoDirectory = DEFAULT_VIDEO_DIRECTORY,
+  videoVersion = DEFAULT_VIDEO_VERSION,
+}) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [autoPlayIndex, setAutoPlayIndex] = useState(null);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
   const [isSliderViewport, setIsSliderViewport] = useState(false);
   const [trailingSpacerWidth, setTrailingSpacerWidth] = useState(0);
   const listRef = useRef(null);
   const itemRefs = useRef([]);
   const isUserScrollingRef = useRef(false);
+  const styles = variants[variant] ?? variants.default;
   const { ref: inViewRef, inView: isListInView } = useInView({ threshold: 0.2 });
   const { ref: autoPlayInViewRef, inView: isAutoPlayInView } = useInView({ threshold: 0.4 });
 
@@ -228,6 +265,12 @@ const HeroServices = ({ items }) => {
       setAutoPlayIndex((currentIndex) => currentIndex ?? 0);
     }
   }, [hoveredIndex, isAutoPlayInView]);
+
+  useEffect(() => {
+    if (mediaLoading === 'in-view' && isListInView) {
+      setHasEnteredView(true);
+    }
+  }, [isListInView, mediaLoading]);
 
   useEffect(() => {
     if (!isSliderViewport || !isAutoPlayInView || hoveredIndex !== null || autoPlayIndex === null) {
@@ -335,9 +378,14 @@ const HeroServices = ({ items }) => {
     }
   }, [isSliderViewport]);
 
+  const shouldLoadMedia = mediaLoading === 'eager' || hasEnteredView;
+
   return (
     <ul
-      className="grid grid-cols-5 grid-rows-[auto_auto] gap-x-16 gap-y-8 2xl:gap-x-6 xl:gap-x-6 xl:gap-y-6 lg:-mx-5 lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:gap-x-8 lg:gap-y-0 lg:overflow-x-auto lg:px-5 md:gap-x-6"
+      className={cn(
+        'lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:overflow-x-auto',
+        styles.list
+      )}
       ref={setListRef}
     >
       {items.map(({ title, description, videoBase, aspectRatio, width, height }, index) => {
@@ -347,7 +395,8 @@ const HeroServices = ({ items }) => {
         return (
           <li
             className={cn(
-              'group row-span-2 grid w-full max-w-64 cursor-default grid-rows-subgrid content-start text-white transition-opacity duration-200 lg:shrink-0 lg:snap-start lg:grid-rows-[auto_auto] lg:gap-y-8 lg:self-start md:gap-y-6',
+              'group row-span-2 grid w-full cursor-default grid-rows-subgrid content-start text-white transition-opacity duration-200 lg:shrink-0 lg:snap-start lg:grid-rows-[auto_auto] lg:gap-y-8 lg:self-start md:gap-y-6',
+              styles.item,
               isActive
                 ? 'opacity-100'
                 : cn('opacity-80', !isSliderViewport && 'group-hover:opacity-100')
@@ -359,7 +408,12 @@ const HeroServices = ({ items }) => {
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
           >
-            <p className="block max-w-sm text-base tracking-extra-tight text-pretty text-gray-new-60 xl:text-sm/normal lg:text-base">
+            <p
+              className={cn(
+                'block text-base tracking-extra-tight text-pretty text-gray-new-60 xl:text-sm/normal lg:text-base',
+                styles.description
+              )}
+            >
               <span className="font-semibold text-white">{title}.</span> {description}
             </p>
             <span
@@ -368,15 +422,19 @@ const HeroServices = ({ items }) => {
                 aspectRatio
               )}
             >
-              <HeroServiceVideo
-                height={height}
-                isActive={isActive}
-                onEnded={handleAutoPlayVideoEnd}
-                shouldLoop={!isSliderViewport && hoveredIndex === index}
-                title={title}
-                videoBase={videoBase}
-                width={width}
-              />
+              {shouldLoadMedia && (
+                <HeroServiceVideo
+                  height={height}
+                  isActive={isActive}
+                  onEnded={handleAutoPlayVideoEnd}
+                  shouldLoop={!isSliderViewport && hoveredIndex === index}
+                  title={title}
+                  videoBase={videoBase}
+                  videoDirectory={videoDirectory}
+                  videoVersion={videoVersion}
+                  width={width}
+                />
+              )}
             </span>
           </li>
         );
@@ -401,6 +459,10 @@ HeroServices.propTypes = {
       height: PropTypes.number.isRequired,
     })
   ).isRequired,
+  mediaLoading: PropTypes.oneOf(['eager', 'in-view']),
+  variant: PropTypes.oneOf(Object.keys(variants)),
+  videoDirectory: PropTypes.string,
+  videoVersion: PropTypes.string,
 };
 
 export default HeroServices;

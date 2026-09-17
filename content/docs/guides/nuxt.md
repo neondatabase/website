@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -108,7 +108,7 @@ Notes:
 
 <TabItem>
 
-Add a `.env` file and paste your connection string, which you can copy from the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file and paste your connection string, which you can copy from the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell filename=".env" shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech/<dbname>?sslmode=require&channel_binding=require"

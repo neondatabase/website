@@ -11,7 +11,7 @@ summary: >-
   connection pooler) when configuring the Postgres source.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -136,7 +136,7 @@ The publication name is customizable. Refer to the [Postgres docs](https://www.p
 1. On the **All Resources** page, click **Create Resource**.
 1. Under **Jump right in, create a resource**, click **Connections**.
 1. Select **Postgres**.
-1. Enter your Neon database connection details. Click **Connect** on your **Project Dashboard**, select the replication role you created earlier (not the default `neondb_owner` role), and click **Copy snippet**. Use a direct connection string; the hostname must not include `-pooler`. Logical replication is not compatible with connection poolers.
+1. Enter your Neon database connection details. Click **Connect** in the Console nav, select the replication role you created earlier (not the default `neondb_owner` role), and click **Copy snippet**. Use a direct connection string; the hostname must not include `-pooler`. Logical replication is not compatible with connection poolers.
 
 1. If you have disabled **Allow traffic via the public internet** under **Networking** in Neon's **Settings**, select **I confirm I have allowlisted these Stacksync IPs on my side** in Stacksync, and copy the IP addresses into your trusted IP addresses in Neon's settings under **Networking**.
 1. In Stacksync, click **Next**.

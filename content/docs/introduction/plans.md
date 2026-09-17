@@ -63,7 +63,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Auth](#auth) (Beta)                                  | Up to 60k MAU                               | Up to 1M MAU                                | Up to 1M MAU                                                                                      |
 | [Object Storage](#object-storage) (Beta)              | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage)) | Free during beta ([rates](#object-storage))                                                       |
 | [Functions](#functions) (Beta)                        | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))      | Free during beta ([rates](#functions))                                                            |
-| [AI Gateway](#ai-gateway) (Beta)                      | —                                           | Free during beta                            | Free during beta                                                                                  |
+| [AI Gateway](#ai-gateway)                             | —                                           | Prepaid credits                             | Prepaid credits                                                                                   |
 | [Private network transfer](#private-network-transfer) | —                                           | —                                           | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                           | Protected branches                          | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                           | —                                           | ✅                                                                                                |
@@ -101,7 +101,7 @@ You can invite teammates to your organization and they'll have access to all pro
 
 ### Projects
 
-A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object hierarchy](/docs/manage/overview).
+A project is a container for your backend. It includes your database, branches, computes, and backend services like object storage and functions. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your resources. Learn more about [Neon's object model](/docs/concepts/the-object-model).
 
 > For most use cases, create a project for each app or customer to isolate data and manage resources.
 
@@ -380,11 +380,11 @@ See [Neon Functions](/docs/compute/functions/overview) for what's included and c
 
 ### AI Gateway
 
-Neon AI Gateway provides access to foundation models from OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans (Launch and Scale) during the beta. When AI Gateway reaches GA, any paid customer with prepaid credits will be able to access all available models.
+Neon AI Gateway provides access to foundation models from OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can access all available models.
 
-Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup, drawing down a prepaid credit balance you buy from the Billing page in the Neon Console.
+Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 
-See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
+See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for pricing details, buying credits, and usage limits.
 
 ### Private network transfer
 

@@ -8,7 +8,7 @@ summary: >-
   also improve performance by switching to `pg-native` via the
   `NODE_PG_FORCE_NATIVE` environment variable.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
@@ -21,8 +21,8 @@ Knex is an open-source SQL query builder for Postgres. This guide covers the fol
 
 To establish a basic connection from Knex to Neon, perform the following steps:
 
-1. Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
-   ![Connection details modal](/docs/connect/connection_details.png)
+1. Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+   ![Connection details modal](/docs/connect/connect_to_branch_modal.png)
    The connection string includes the user name, password, hostname, and database name.
 
 2. Update the Knex's initialization in your application to the following:
@@ -53,7 +53,7 @@ Serverless functions can require a large number of database connections as deman
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
+A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
 
 <Admonition type="important">
 Use a pooled connection string for your application at runtime, but use a direct (non-pooled) connection string when running Knex migrations. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that migration tools rely on, so running migrations over a pooled connection can lead to errors. See [Connection pooling](/docs/connect/connection-pooling).

@@ -10,7 +10,7 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -259,7 +259,7 @@ Visit `http://localhost:8787` in your browser to test the worker application. It
 
 ### Retrieve your Neon database connection string
 
-Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+In the Neon Console, click **Connect** in the nav to open the **Connect to your branch** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
 Your pooled connection string should look similar to this:
 

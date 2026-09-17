@@ -47,7 +47,7 @@ Save your PlanetScale connection details.
 
 ## Retrieve your Neon database connection string
 
-Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
+Log in to the [Neon Console](https://console.neon.tech). Find the connection string for your database by clicking the **Connect** button in the Console nav. Make sure the **Connection pooling** toggle is disabled to get a direct connection string.
 
 ![Neon Connect modal showing connection string](/docs/connect/connection_details_without_connection_pooling.png)
 

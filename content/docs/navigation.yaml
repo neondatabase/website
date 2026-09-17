@@ -19,6 +19,8 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
+        - title: Connect your app
+          slug: connect/connect-hub
         - title: Tour the Neon backend
           slug: get-started/backend-overview
         - title: Tour the Neon Console
@@ -213,6 +215,24 @@
         - title: Sample data
           slug: import/import-sample-data
 
+- nav: Concepts
+  slug: concepts/the-object-model
+  title: Concepts
+  icon: glossary
+  items:
+    - section: Backend primitives
+      icon: book
+      items:
+        - title: The object model
+          slug: concepts/the-object-model
+        - title: Branch your backend
+          slug: concepts/branch-your-backend
+    - section: Backend behavior
+      icon: settings
+      items:
+        - title: Credentials & access
+          slug: concepts/credentials-access
+
 - nav: Products
   title: Products
   icon: features
@@ -331,8 +351,6 @@
                   slug: guides/reset-from-parent
             - title: Automate & workflows
               items:
-                - title: Get started with branching
-                  slug: guides/branching-intro
                 - title: Branching workflows
                   slug: guides/branching-test-queries
                 - title: Branching with the CLI
@@ -890,16 +908,14 @@
               slug: ai-gateway/get-started
             - title: Models
               slug: ai-gateway/models
+            - title: Prepaid credits
+              slug: ai-gateway/prepaid-credits
         - section: APIs
           items:
             - title: Chat completions
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
-            - title: Anthropic Messages API
-              slug: ai-gateway/anthropic-messages
-              tag: new
-              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -960,8 +976,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
             - title: Projects
               slug: manage/projects
             - title: Multitenancy

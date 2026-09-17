@@ -4,7 +4,7 @@ subtitle: Build a Todo app using React, Managed Better Auth, and the Neon Data A
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This guide will walk you through building a secure Todo application using **React**, [Managed Better Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
@@ -48,7 +48,7 @@ You'll need to create a Neon project and enable both Managed Better Auth and the
 
       > The database connection string is used exclusively for Drizzle ORM migrations and should not be exposed in the frontend application.
 
-      ![Connection modal](/docs/connect/connection_details.png)
+      ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Set up the React project
 

@@ -11,7 +11,7 @@ summary: >-
   (generate-upload-sas and save-metadata) in JavaScript (Hono) and Python
   (Flask), and generating read-only SAS tokens for secure file retrieval.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -31,7 +31,7 @@ This guide demonstrates how to integrate Azure Blob Storage with Neon by storing
 ## Create a Neon project
 
 1.  Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
-2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+2.  Copy the connection string by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Azure account, storage account, and container
 

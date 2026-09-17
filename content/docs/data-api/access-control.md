@@ -11,10 +11,8 @@ summary: >-
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-09-14T11:31:53.481Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
