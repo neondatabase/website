@@ -10,8 +10,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T04:58:47.512Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
-
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
 ## Creating a credential
@@ -71,7 +69,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta. Revoke credentials explicitly instead of relying on expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced. Revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 

@@ -17,7 +17,7 @@ Neon Object Storage is S3-compatible file storage built into your Neon project. 
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
 
-> During the beta, object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), and is free to use, subject to usage limits. Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
+> Object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
 
 ## Get started
 
@@ -53,7 +53,7 @@ neon bootstrap --template ai-sdk
 
 ## Limits
 
-During the beta, the following limits apply:
+The following limits apply:
 
 | Limit                    | Value                                                                                                          |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------- |

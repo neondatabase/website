@@ -7,11 +7,9 @@ summary: >-
   Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
   webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:31:28.251Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 isDraft: false
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 Telegram can send bot updates to an HTTPS webhook. A [Neon Function](/docs/compute/functions/overview) can receive those updates, run bot commands and query Postgres from the same branch.
 

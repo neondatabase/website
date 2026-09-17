@@ -9,8 +9,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T09:58:15.444Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
-
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
 
 ```bash

@@ -10,8 +10,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T04:00:06.054Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
-
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
 
 ## Hello world

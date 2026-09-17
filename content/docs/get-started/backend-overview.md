@@ -11,6 +11,9 @@ summary: >-
   capability is, when to use it, and the Neon-specific part you write, and links
   to that capability's own quickstart for the full setup.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started/backend-beta
+  - /docs/get-started/platform-private-preview
 ---
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
@@ -40,7 +43,7 @@ So when you see a `notes` table, an `attachments` bucket, or a `chat` function b
 The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward all regions. Postgres and Managed Better Auth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward all regions. Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway requires a paid plan.
 </Admonition>
 
 ## The shape of a Neon backend
@@ -54,7 +57,7 @@ npm i -g neon
 neon login
 ```
 
-Then create the project. Create it in `aws-us-east-2` or `aws-eu-central-1` so the beta services are available:
+Then create the project. Create it in `aws-us-east-2` or `aws-eu-central-1` so the backend services are available:
 
 ```bash
 neon link --project-name notes-app --region-id aws-us-east-2
@@ -100,7 +103,7 @@ This creates `neon.ts` and installs the `@neon/config` and `@neon/env` packages.
 
 For capabilities declared in `neon.ts`, the setup follows the same three steps: **enable the service, run [`neon deploy`](/docs/cli/deploy), then read the injected environment variables.**
 
-- **`neon.ts` is your backend as code.** One file declares Auth and any beta services; Postgres is on by default.
+- **`neon.ts` is your backend as code.** One file declares Auth and the backend services; Postgres is on by default.
 - **`neon deploy` reconciles that file** against your branch, provisions each service, and writes its credentials to your env file.
 - **Branching forks the whole backend together through service-specific mechanics.** Postgres and Object Storage create copy-on-write state. Each branch runs its own Functions at their own URLs and gets its own Auth environment, Data API endpoint, and AI Gateway endpoint. AI Gateway credentials work on the branch where they're issued and its descendants. See [Branch your whole backend](#branch-your-whole-backend).
 
@@ -114,7 +117,7 @@ For capabilities declared in `neon.ts`, the setup follows the same three steps: 
 | **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
 
 <Admonition type="note" title="Reading the snippets">
-The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` go inside a single `preview` block. That block is deprecated on `@neon/config` 1.6.0 and later, where these are top-level keys, but it still works, so this page uses it for the widest compatibility (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
+The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the backend features marked `// inside preview` go inside a single `preview` block. That block is deprecated on `@neon/config` 1.6.0 and later, where these are top-level keys, but it still works, so this page uses it for the widest compatibility (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
 </Admonition>
 
 ## Postgres: the notes
@@ -307,7 +310,7 @@ export default defineConfig({
 });
 ```
 
-The beta services live under `preview` while they're in beta; that key goes away as they reach GA. `auth` is already top-level.
+These services live under the `preview` block; `auth` is already top-level.
 
 Two ways to get it running:
 

@@ -9,8 +9,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T04:00:06.054Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Object Storage" />
-
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
 
 ```bash

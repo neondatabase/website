@@ -12,8 +12,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T04:58:47.512Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
-
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
 **Base URL:** `https://<branch-host>/anthropic`

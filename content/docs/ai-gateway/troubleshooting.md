@@ -8,8 +8,6 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T09:17:59.291Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
-
 ## Authentication errors
 
 ### `401 invalid or missing credential`

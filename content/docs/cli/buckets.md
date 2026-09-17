@@ -13,8 +13,6 @@ redirectFrom:
   - /docs/cli/bucket
 ---
 
-<FeatureBetaProps feature_name="Neon Object Storage" />
-
 The `buckets` command manages branch object-storage buckets and their objects. Buckets belong to a branch; the `object` subcommands work with the objects inside a bucket.
 
 <CliSubcommands command="buckets" />

@@ -8,10 +8,8 @@ summary: >-
   forgot-password flow; reset links expire after 15 minutes, and the SDK
   `resetPasswordForEmail` method is not yet supported.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
 
