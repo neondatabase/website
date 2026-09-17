@@ -314,4 +314,4 @@ While minor version upgrades in Neon [happen automatically](https://neon.com/doc
 
 ## Get started with Postgres 17
 
-[Start here](https://console.neon.tech/signup) to create a free Neon account with Postgres 17 ready to go. [We’re on Discord](https://discord.gg/N8kvBm7qH5) if you have any questions.
+[Start here](https://console.neon.tech/signup) to create a free Neon account with Postgres 17 ready to go. [We’re on Discord](https://neon.com/discord) if you have any questions.

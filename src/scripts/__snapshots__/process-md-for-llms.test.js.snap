@@ -73,13 +73,13 @@ This feature is in private preview: it's not ready for production use, and it ma
 
 **Note: Public Preview**
 
-This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/N8kvBm7qH5).
+This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 ### LRBeta
 
 **Note: Beta**
 
-Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://discord.gg/N8kvBm7qH5).
+Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://neon.com/discord).
 
 ### MigrationAssistant
 
@@ -368,13 +368,13 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 **Note: Beta**
 
-This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/N8kvBm7qH5).
+This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
 
-The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord.gg/N8kvBm7qH5) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+The **Autoscaling** is in Beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 ### EarlyAccessProps (with prop)
 

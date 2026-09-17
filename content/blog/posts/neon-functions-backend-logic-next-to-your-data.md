@@ -146,4 +146,4 @@ Browse them all at [Build on Neon](http://build-on-neon.vercel.app).
 
 ## Deploy one and poke it
 
-Functions are free during beta on any pricing plan. Start from the [Functions quickstart](https://neon.com/docs/compute/functions/get-started), and if something breaks, [tell us on Discord](https://discord.gg/N8kvBm7qH5).
+Functions are free during beta on any pricing plan. Start from the [Functions quickstart](https://neon.com/docs/compute/functions/get-started), and if something breaks, [tell us on Discord](https://neon.com/discord).

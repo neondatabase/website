@@ -72,7 +72,7 @@ The developer experience is dramatically simpler:
 <Admonition type="important" title="Note for Better Auth users">
 Neon Auth is powered by Better Auth under the hood, but **it isn’t a drop-in replacement for a self-hosted Better Auth setup**. Because Neon Auth implements the server-side layer for you, it requires using the Neon SDKs, and it doesn’t yet support bringing your own Better Auth plugins or custom server-side handlers.
 
-We’re actively exploring ways to make it easier to bring existing Better Auth apps to Neon Auth, stay tuned. And if this is something you need, let us know on [Discord](https://discord.gg/N8kvBm7qH5) or [X](https://x.com/neondatabase).
+We’re actively exploring ways to make it easier to bring existing Better Auth apps to Neon Auth, stay tuned. And if this is something you need, let us know on [Discord](https://neon.com/discord) or [X](https://x.com/neondatabase).
 </Admonition>
 
 ## Identity belongs in your database
@@ -148,8 +148,8 @@ If you’re building a full-stack codegen platform, [check out our Agent Plan](h
 
 ## Get started
 
-Neon Auth is now a first-class part of the Neon platform, fully aligned with the developer experience we want to offer across our stack. Getting started is simple: follow the Quick Starts in our docs for Next.js, React, and TanStack, [explore our Quickstarts](https://neon.com/docs/auth/quick-start/nextjs), and if you have any questions, you’ll find us in [Discord](https://discord.gg/N8kvBm7qH5).
+Neon Auth is now a first-class part of the Neon platform, fully aligned with the developer experience we want to offer across our stack. Getting started is simple: follow the Quick Starts in our docs for Next.js, React, and TanStack, [explore our Quickstarts](https://neon.com/docs/auth/quick-start/nextjs), and if you have any questions, you’ll find us in [Discord](https://neon.com/discord).
 
 <Admonition type="important" title="Note for existing Neon Auth users">
-If you’re using the previous implementation of Neon Auth via Stack Auth, there’s no need to make changes right now. **Your version will continue to work.** When it’s time to migrate to the new implementation, we’ll reach out with clear instructions and tools to make the transition smooth. In the meantime, [we've prepared this migration guide](https://neon.com/docs/auth/migrate/from-stack-auth) if you'd like to transition to the new Auth. If you have questions, ask us [on Discord.](https://discord.gg/N8kvBm7qH5)
+If you’re using the previous implementation of Neon Auth via Stack Auth, there’s no need to make changes right now. **Your version will continue to work.** When it’s time to migrate to the new implementation, we’ll reach out with clear instructions and tools to make the transition smooth. In the meantime, [we've prepared this migration guide](https://neon.com/docs/auth/migrate/from-stack-auth) if you'd like to transition to the new Auth. If you have questions, ask us [on Discord.](https://neon.com/discord)
 </Admonition>

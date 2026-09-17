@@ -95,7 +95,7 @@ Let’s break down why.
 
 <blockquote>
 <p>“I created 15 Neon databases in the time it took to spin up one RDS instance” </p>
-<cite><a href="https://discord.gg/N8kvBm7qH5">Heard on Neon Discord</a></cite>
+<cite><a href="https://neon.com/discord">Heard on Neon Discord</a></cite>
 </blockquote>
 
 With Neon, provisioning new environments is nearly instantaneous. Thanks to its serverless architecture, you can spin up a new database (or branch an existing one) in less than a second. This rapid provisioning accelerates development cycles and allows you to add your database to your existing workflow without being slowed down.

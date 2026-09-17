@@ -100,4 +100,4 @@ We also allow backslash commands to be newline-terminated, which is just a small
 
 This enables us to quickly split your SQL Editor selection into an array of SQL queries and backslash commands. As you may have already noticed, that means we can also now tell you ahead of time how many separate result tabs are going to be presented when you hit the Run button.
 
-If you have any feedback on any of these new features, please [let us know on Discord](https://discord.gg/N8kvBm7qH5).
+If you have any feedback on any of these new features, please [let us know on Discord](https://neon.com/discord).

@@ -103,4 +103,4 @@ To make it super easy for you to get started, we’ve put together a [JSON confi
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/key-neon-metrics-to-monitor-via-datadog/ad4nxftvdxmmt-tr9antbou8w8tvovbmpbklplmbngwuwekcwbygiptmho9yhy9tg4x7ceuk6mihkz988ksd2flosjl48vucxxjpbmqpazx-5vm8jzjy3j5lklfbxq18eue3g16op26w0rabntluukponevcng-780f092c.png)
 
-Follow the instructions [in our docs](https://neon.com/docs/guides/datadog#import-the-neon-dashboard) to import the dashboard and to get all the details about the Datadog integration. If you have any questions, reach out to us ([we’re on Discord](https://discord.gg/N8kvBm7qH5)).
+Follow the instructions [in our docs](https://neon.com/docs/guides/datadog#import-the-neon-dashboard) to import the dashboard and to get all the details about the Datadog integration. If you have any questions, reach out to us ([we’re on Discord](https://neon.com/discord)).

@@ -32,7 +32,7 @@ seo:
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/fixing-javascript-timezone-issues/neon-timezone-1-1024x576-626b99ad.jpg)
 
 <Admonition type="note" title="share your tips">
-This blog post is written by a Neon user as part of our Community series. Many thanks to [Deepesh Genari](https://deepeshgenani.vercel.app/) for sharing this writeup! If you use Neon and want to share your own tips with the community, [reach out to us on Discord.](https://discord.gg/N8kvBm7qH5)
+This blog post is written by a Neon user as part of our Community series. Many thanks to [Deepesh Genari](https://deepeshgenani.vercel.app/) for sharing this writeup! If you use Neon and want to share your own tips with the community, [reach out to us on Discord.](https://neon.com/discord)
 </Admonition>
 
 Working with timezones in JavaScript often feels like navigating a minefield. Recently, I faced a timezone issue when building a parking booking app while handling date storage in our database, something you may also encounter if you’re working across timezones. Here’s what went wrong, how we fixed it, and how Neon simplified the process.

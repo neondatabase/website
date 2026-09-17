@@ -122,4 +122,4 @@ This API maturity is highly relevant to make the Cursor experience truly useful 
 
 [Install the Neon plugin from the Cursor Marketplace](https://cursor.com/en-US/marketplace/neon) and start experimenting with real database workflows from Cursor.
 
-If you’re new to Neon, you can [create a free account](https://console.neon.tech/signup) in a minute – and if you have any questions, [you’ll find us in the Neon Discord](https://discord.gg/N8kvBm7qH5).
+If you’re new to Neon, you can [create a free account](https://console.neon.tech/signup) in a minute – and if you have any questions, [you’ll find us in the Neon Discord](https://neon.com/discord).

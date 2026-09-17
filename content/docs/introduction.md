@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-17T16:28:26.813Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 ## Getting started
@@ -155,4 +155,4 @@ Neon integrates with AI coding tools and agents through MCP. Pick your editor fo
 
 </CompactCards>
 
-<CommunityBanner className="mt-14" buttonText="Join the server" buttonUrl="https://discord.gg/N8kvBm7qH5">Questions about Neon or Postgres? Join our Discord</CommunityBanner>
+<CommunityBanner className="mt-14" buttonText="Join the server" buttonUrl="https://neon.com/discord">Questions about Neon or Postgres? Join our Discord</CommunityBanner>

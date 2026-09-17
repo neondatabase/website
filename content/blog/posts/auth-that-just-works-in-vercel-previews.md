@@ -130,4 +130,4 @@ This integration between previews, databases, and auth enables workflows that ar
 
 ## Try it now
 
-To try it, [connect your Vercel project to Neon](https://neon.com/docs/guides/vercel-overview), enable Auth, and start building. Preview deployments will come up with fully working authentication automatically. [Here’s a complete guide for you to follow](https://neon.com/guides/vercel-neon-auth-branching), and if you have any questions, reach out to us on [Discord](https://discord.gg/N8kvBm7qH5).
+To try it, [connect your Vercel project to Neon](https://neon.com/docs/guides/vercel-overview), enable Auth, and start building. Preview deployments will come up with fully working authentication automatically. [Here’s a complete guide for you to follow](https://neon.com/guides/vercel-neon-auth-branching), and if you have any questions, reach out to us on [Discord](https://neon.com/discord).

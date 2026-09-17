@@ -84,7 +84,7 @@ With Dynamic Extension Loading, private and default extensions can be added to c
 
 ## How to bring your own extension to Neon
 
-To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the feedback channel on our [Discord Server](https://discord.gg/N8kvBm7qH5).
+To request support for a Postgres extension, paid plan users can [open a support ticket](https://console.neon.tech/app/projects?modal=support). Free plan users can submit a request via the feedback channel on our [Discord Server](https://neon.com/discord).
 
 Our engineers will then evaluate the compatibility of your extensions with Neon, build it, and upload the artifacts to the extension storage once it pass all the security tests.
 

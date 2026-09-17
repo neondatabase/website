@@ -345,4 +345,4 @@ export default defineNuxtConfig({
 
 Integrating Neon database branches with Amplify Hosting CI/CD provides a flexible way to automate environment isolation and database creation – in a truly serverless way.
 
-To get started with incorporating Serverless Postgres into your Amplify Hosting SSR apps, [sign up and try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter](https://twitter.com/neondatabase) and join us in [Discord](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+To get started with incorporating Serverless Postgres into your Amplify Hosting SSR apps, [sign up and try Neon for free](https://console.neon.tech/signup). Follow us on [Twitter](https://twitter.com/neondatabase) and join us in [Discord](https://neon.com/discord) to share your experiences, suggestions, and challenges.

@@ -129,5 +129,5 @@ const response = await client.chat.completions.create({
 <Admonition type="note" title="Neon AI Gateway is in beta - try it">
 Tokens are free during the beta period. Spin up a Neon project on a Launch or Scale plan in aws-us-east-2, point your SDK at Neon, and benchmark latency on your own agent loop. 
   
-  If you have feedback, [please send it over](https://discord.gg/N8kvBm7qH5) - we’re working hard to bring AI Gateway ([and the rest of the Neon backend](https://neon.com/blog/neon-backend-is-beta)) to GA.
+  If you have feedback, [please send it over](https://neon.com/discord) - we’re working hard to bring AI Gateway ([and the rest of the Neon backend](https://neon.com/blog/neon-backend-is-beta)) to GA.
 </Admonition>

@@ -114,4 +114,4 @@ MCP support can also be disabled entirely from the extension settings, in which 
 
 ## Try the new workflow
 
-This update turns the Neon VS Code extension into a more direct, editor-native way to work with Neon. [Install or update the Neon VS Code extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) and give it a try. We’d also love your feedback – tell us on [Discord](https://discord.gg/N8kvBm7qH5).
+This update turns the Neon VS Code extension into a more direct, editor-native way to work with Neon. [Install or update the Neon VS Code extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) and give it a try. We’d also love your feedback – tell us on [Discord](https://neon.com/discord).

@@ -88,4 +88,4 @@ Once you click `Create`, your read replica will appear in the list of computes a
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/create-read-replicas-in-the-free-plan/ad4nxfwszbahn-q5vsuhf7gqmui0nk0obtaemv0lmsfz1-1s0ao1uzhav01cj1nmrpz2g-idrhkc3ta4ymyuh6fy1buwtvxneeyt7v1kuotcpucjg5f8dmbwiy4cr9jw7eueg9cn7c8cbr86b90xccotyujo-20db5fcb.png)
 
-Go ahead and replicate! If you have any questions, feel free to ask us in [Discord](https://discord.gg/N8kvBm7qH5).
+Go ahead and replicate! If you have any questions, feel free to ask us in [Discord](https://neon.com/discord).
