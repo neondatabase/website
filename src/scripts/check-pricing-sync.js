@@ -142,6 +142,32 @@ const offeredValue = (val) => {
   return 'offered';
 };
 
+// Expected pricing.md "Plans at a glance" cells for the backend rows, built
+// from the shared rate constants so the agent table can never drift from the
+// pricing page. Loaded lazily because CROSS_SOURCE_CHECKS is defined before
+// component data is read.
+let backendPricingCache;
+function backendAgentCell(service, plan) {
+  if (!backendPricingCache) {
+    backendPricingCache = loadEsmModule(
+      path.join(PROJECT_ROOT, 'src/constants/backend-pricing.js')
+    );
+  }
+  const { objectStorage, functions } = backendPricingCache;
+  if (service === 'objectStorage') {
+    return plan === 'free'
+      ? `${objectStorage.freeAllowanceGb} GB/project included`
+      : `$${objectStorage.storageRatePerGbMonth}/GB-month`;
+  }
+  if (plan === 'free') {
+    const { activeCapacityHours, waitingCapacityHours, invocations } = functions.free;
+    return `${activeCapacityHours} active + ${waitingCapacityHours} waiting Capacity-Hours, ${invocations} invocations/month`;
+  }
+  const { activeCapacityHourRate, waitingCapacityHourRate, invocationRatePerMillion } =
+    functions[plan];
+  return `$${activeCapacityHourRate}/Capacity-Hour active, $${waitingCapacityHourRate}/Capacity-Hour waiting, $${invocationRatePerMillion}/M invocations`;
+}
+
 function extractCore(pattern, replacement) {
   return (val) => {
     if (!val || val === '--') return val;
@@ -650,10 +676,13 @@ const CROSS_SOURCE_CHECKS = [
 
   // --- Backend ---
   // These features aren't billed yet, so on Launch and Scale we only verify
-  // that each source agrees they're offered (unbilledValue collapses the
-  // differently-worded "not billed yet / no charge" prose to a single concept).
-  // Object Storage and Functions publish their rates on the pricing page, but
-  // the cells keep an unbilled note, so unbilledValue still applies there.
+  // that the component and docs agree they're offered (unbilledValue collapses
+  // the differently-worded "not billed yet / no charge" prose to a single
+  // concept). Object Storage and Functions publish their rates on the pricing
+  // page, but the component cells keep an unbilled note, so unbilledValue still
+  // applies there. pricing.md instead states the published rates in its cells,
+  // so agentValue pins each cell to the exact string built from
+  // src/constants/backend-pricing.js.
   // AI Gateway links to its published model prices instead of repeating billing
   // status, so only verify that every source agrees the feature is offered.
   // The Free cells lead with the included allowance instead of a billing note
@@ -667,6 +696,7 @@ const CROSS_SOURCE_CHECKS = [
       plan,
       norm: plan === 'free' ? offeredValue : unbilledValue,
       agentLabel: 'Object Storage',
+      agentValue: () => backendAgentCell('objectStorage', plan),
     },
     {
       id: `functions-${plan}`,
@@ -676,6 +706,7 @@ const CROSS_SOURCE_CHECKS = [
       plan,
       norm: plan === 'free' ? offeredValue : unbilledValue,
       agentLabel: 'Functions',
+      agentValue: () => backendAgentCell('functions', plan),
     },
     {
       id: `ai-gateway-${plan}`,
