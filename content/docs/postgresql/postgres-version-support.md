@@ -1,20 +1,22 @@
 ---
-title: Lakebase Postgres version support policy
+title: Postgres version support
 summary: >-
-  The Lakebase Postgres version support policy tracks the latest major versions,
+  Postgres version support tracks the latest major versions,
   applies minor releases automatically at the next compute restart, and
   aligns end-of-life with the official PostgreSQL five-year support window.
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-09-14T17:26:32.745Z'
+redirectFrom:
+  - /docs/postgresql/postgres-version-policy/
+updatedOn: '2026-09-16T15:12:58.425Z'
 ---
 
-This topic outlines the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy).
+This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
 
-## The official Postgres versioning policy
+## The official PostgreSQL versioning policy
 
-To better understand the [Lakebase Postgres version support policy](#lakebase-postgres-version-support-policy), it’s helpful to first familiarize yourself with the official Postgres versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
+To better understand [PostgreSQL version support on Neon](#postgresql-version-support-on-neon), it’s helpful to first familiarize yourself with the official PostgreSQL versioning policy and numbering system. You can refer to the official [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/) documentation for details, but here’s a condensed summary:
 
 ### Major versions
 
@@ -30,12 +32,12 @@ To better understand the [Lakebase Postgres version support policy](#lakebase-po
 - A minor release is issued for all supported major versions simultaneously.
 - Occasionally, manual actions are necessary after a minor version upgrade. The PostgreSQL Global Development Group strives to minimize these situations, but they do occur. Any exceptions, required manual steps, or incompatibilities introduced in minor releases are detailed in the [PostgreSQL release notes](https://www.postgresql.org/docs/release/).
 
-### Postgres version numbering
+### PostgreSQL version numbering
 
-- The major version is indicated by the first part of the version number, such as the "16" in "16.1".
-- The minor release is indicated by the second part of the version number, such as the "1" in "16.1".
+- The major version is indicated by the first part of the version number, such as the "18" in "18.1".
+- The minor release is indicated by the second part of the version number, such as the "1" in "18.1".
 
-## Lakebase Postgres version support policy
+## PostgreSQL version support on Neon
 
 Neon is committed to providing stability and hassle-free maintenance. You select the major version of Postgres when [creating a Neon project](/docs/manage/projects#create-a-project), and Neon automatically updates your chosen Postgres version to the latest minor release soon after it becomes available. Typically, no user action is required for minor release updates.
 
@@ -55,11 +57,11 @@ Your Postgres major version is also displayed in the **Project settings** widget
 
 ### Minor releases
 
-In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official Postgres release, these updates may occur a few days later than the official release date.
+In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official PostgreSQL release, these updates may occur a few days later than the official release date.
 
 Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
-Neon only supports the latest minor release for each major Postgres version. For example, when 16.4 is the latest minor release of Postgres version 16, it is no longer possible run a Neon compute with version 16.3.
+Neon only supports the latest minor release for each major Postgres version. For example, when 18.4 is the latest minor release of Postgres version 18, you cannot choose to run a Neon compute on version 18.3.
 
 Neon does not support skipping minor releases or downgrading to a previous minor release.
 
@@ -82,11 +84,11 @@ As of August 2026, Neon runs the latest community minor release for every suppor
 
 As a managed service, Neon strives to manage all minor version updates automatically, minimizing the need for user intervention. However, certain updates, such as security fixes, may require decisions that depend on your application and cannot be fully automated.
 
-In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequently &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
+In such cases, your action may occasionally be required. When this occurs, which is infrequent, we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
+Neon currently supports Postgres 14, 15, 16, 17, and 18. Neon supports the five latest major Postgres versions, in alignment with the official PostgreSQL version support policy.
 
 ### Major version upgrades
 
