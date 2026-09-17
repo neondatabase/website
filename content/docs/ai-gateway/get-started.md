@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-09-11T02:29:56.410Z'
+updatedOn: '2026-09-17T04:00:06.054Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -45,7 +45,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 ```
 
 <Callout title="Using neon.ts?">
-If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` and run `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically — no manual creation needed. See [Authentication](/docs/ai-gateway/authentication) for details.
+If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` (deprecated on `@neon/config` 1.6.0 and later, where it's the top-level `aiGateway: true`) and run `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically, with no manual creation step. See [Authentication](/docs/ai-gateway/authentication) for details.
 </Callout>
 
 Store the credential as an environment variable:
