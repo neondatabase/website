@@ -38,9 +38,9 @@ Invoices under $0.50 are not collected.
 | Public network transfer (egress) | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                       |
 | Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                     |
-| Object Storage                   | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
-| Functions                        | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
-| AI Gateway                       | -                                          | Free during beta                     | Free during beta                                                 |
+| Object Storage                   | 5 GB included                              | $0.023/GB-month                      | $0.023/GB-month                                                  |
+| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
+| AI Gateway                       | -                                          | Prepaid credits                      | Prepaid credits                                                  |
 | Monitoring retention             | 1 day                                      | 3 days                               | 14 days                                                          |
 | Metrics/logs export              | -                                          | -                                    | Yes                                                              |
 | Spending notifications           | -                                          | Yes                                  | Yes                                                              |
@@ -67,8 +67,8 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Auth (MAU)** can scale beyond 1M; contact Neon for higher limits.
 - **Private Networking** ($0.01/GB on Scale) counts traffic in **both directions**.
 - **HIPAA** is self-serve on Scale (BAA required), currently at no additional cost. See [HIPAA](https://neon.com/docs/security/hipaa.md) for details.
-- **Object Storage** and **Functions** are free during beta. When billing begins: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
-- **Free tier** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per month.
+- **Object Storage** and **Functions**: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
+- **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per month.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
 
