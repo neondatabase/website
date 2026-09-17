@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-16T18:08:16.994Z'
+updatedOn: '2026-09-17T12:22:22.063Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -180,13 +180,11 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 Declare the trigger on the function in [`neon.ts`](/docs/reference/neon-ts), then apply it with `neon deploy`. `cron` is a five-field UTC expression.
 
 ```ts filename="neon.ts"
-preview: {
-  functions: {
-    uptime: {
-      name: "Uptime",
-      source: "./functions/uptime.ts",
-      triggers: [{ type: "schedule", name: "uptime-check", cron: "* * * * *" }],
-    },
+functions: {
+  uptime: {
+    name: "Uptime",
+    source: "./functions/uptime.ts",
+    triggers: [{ type: "schedule", name: "uptime-check", cron: "* * * * *" }],
   },
 },
 ```

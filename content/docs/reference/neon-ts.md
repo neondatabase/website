@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-17T04:00:06.054Z'
+updatedOn: '2026-09-17T12:21:13.884Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -124,6 +124,13 @@ functions: {
     dev?: {
       port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
     },
+    triggers?: Array<{    // cron schedule triggers; see below
+      type: "schedule",
+      name: string,
+      cron: string,
+      functionPath?: string,  // default "/"
+      enabled?: boolean,      // default true
+    }>,
   },
 },
 ```
@@ -137,6 +144,7 @@ preview: {
       env?: Record<string, string>,
       bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),
       dev?: { port?: number },
+      triggers?: Array<{ type: "schedule", name: string, cron: string, functionPath?: string, enabled?: boolean }>,
     },
   },
 },
@@ -159,6 +167,18 @@ Use `neon deploy --env .env.production` to load a `.env` file before evaluation.
 `bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
+
+`triggers` declares cron schedule triggers on the function, reconciled by `neon deploy` as the declarative counterpart to [`neon triggers`](/docs/cli/triggers). `cron` is a five-field UTC expression. See [Schedule a function](/docs/compute/functions/triggers/schedule).
+
+```ts filename="neon.ts"
+functions: {
+  reports: {
+    name: "Reports",
+    source: "./functions/reports.ts",
+    triggers: [{ type: "schedule", name: "nightly", cron: "0 6 * * *" }],
+  },
+},
+```
 
 ### buckets (#buckets)
 
