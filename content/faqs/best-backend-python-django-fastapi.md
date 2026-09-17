@@ -43,7 +43,7 @@ client.put_object(
 )
 ```
 
-Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Object Storage is in beta and free during the beta with 5 GB per project on the Free plan.
+Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). The Free plan includes 5 GB of Object Storage per project; paid plans are billed at $0.023/GB-month.
 
 ## Models through the OpenAI SDK
 
@@ -58,10 +58,10 @@ client = OpenAI(
 )
 ```
 
-AI Gateway is in beta, requires a paid plan, and is free during the beta; when billing begins Neon charges provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)).
+AI Gateway requires a paid plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)).
 
 <Admonition type="note" title="Functions are JavaScript only for now">
-Neon Functions run JavaScript and TypeScript on Node.js 24 during the beta ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.
+Neon Functions run JavaScript and TypeScript on Node.js 24 ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.
 </Admonition>
 
 ## Branch-per-feature for Python teams

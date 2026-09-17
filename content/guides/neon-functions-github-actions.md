@@ -22,7 +22,7 @@ You'll set up that automation with GitHub Actions and build a small API on Neon 
 
 Because the pipeline is just the [Neon CLI](/docs/cli) running in a CI job, the same recipe works in GitLab CI, CircleCI, Azure DevOps, or any other CI/CD system. The last section shows how to adapt it.
 
-<Admonition type="note" title="Neon Functions are in beta">
+<Admonition type="note" title="Region availability">
 Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), so create your Neon project in one of these regions to follow along. Support is expanding toward [all regions](/docs/introduction/regions). Functions run JavaScript or TypeScript on the Node.js 24 runtime.
 </Admonition>
 

@@ -39,7 +39,7 @@ Whichever path you pick, the pooled connection string (the `-pooler` hostname) r
 
 ## Keep the rest of the backend close to the data
 
-Edge functions are good at request routing and light logic. Work that needs a long-lived process, like a WebSocket server or an agent that streams for minutes, fits better next to the database. [Neon Functions](/docs/compute/functions/overview) run in the same region as your branch with `DATABASE_URL` injected, and a Worker can call them directly. Functions are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward all regions. Functions are in beta.
+Edge functions are good at request routing and light logic. Work that needs a long-lived process, like a WebSocket server or an agent that streams for minutes, fits better next to the database. [Neon Functions](/docs/compute/functions/overview) run in the same region as your branch with `DATABASE_URL` injected, and a Worker can call them directly. Functions are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward all regions.
 
 <Admonition type="tip" title="Match regions">
 Put your Neon project in the AWS region closest to where most of your Workers traffic resolves. Neon runs in eight AWS regions across the US, Europe, Asia Pacific, and South America ([regions](/docs/introduction/regions)).
