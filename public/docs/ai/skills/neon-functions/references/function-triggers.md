@@ -2,7 +2,7 @@
 
 A Function Trigger is a branch-scoped rule that POSTs to a Neon Function so recurring work does not need a separate scheduler. The request is a normal `fetch` invocation: same public URL, same 15-minute time-to-first-byte limit, same injected env (`DATABASE_URL`, …).
 
-Beta. Same regions as Functions: `us-east-2` and `eu-central-1`. Needs Neon CLI 4.21 or newer to declare triggers in `neon.ts`.
+Same regions as Functions: `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Needs Neon CLI 4.21 or newer to declare triggers in `neon.ts`.
 
 If `neon deploy` returns 404 `function triggers not available for this project`, the project does not have Function Triggers yet. Deploy the function without applying the trigger (`neon functions deploy <slug> --src <entry>`) and retry `neon deploy` once the project has them.
 

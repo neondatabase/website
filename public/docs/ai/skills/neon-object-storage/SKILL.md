@@ -27,7 +27,7 @@ neon skills -s neon -y
 
 # Neon Object Storage
 
-This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
+Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
 Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
 
@@ -53,7 +53,7 @@ If the files in question ship with the app itself — HTML, JS bundles, CSS, the
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Object Storage is a public beta feature currently available in `us-east-2` and `eu-central-1`. Confirm the user's Neon project is in one of these regions before proceeding.
+Check this precondition before setting anything up: Neon Object Storage is currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Confirm the user's Neon project is in one of these regions before proceeding. Region coverage: https://neon.com/docs/get-started/backend-overview.md
 
 ## Architecture: Where Object Storage Fits
 
@@ -216,6 +216,7 @@ The Neon documentation is the source of truth and Object Storage is evolving rap
 
 ## Further Reading
 
+- https://neon.com/docs/get-started/backend-overview.md
 - https://neon.com/docs/storage/overview.md
 - https://neon.com/docs/storage/get-started.md
 - https://neon.com/docs/storage/buckets.md

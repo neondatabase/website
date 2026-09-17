@@ -27,7 +27,7 @@ neon skills -s neon -y
 
 # Neon AI Gateway
 
-This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
+Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
 The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from many providers (Anthropic, OpenAI, Google, Meta, and more), all hosted and powered by Databricks. The catalog shifts over time, so treat `/v1/models` and the [models.dev Neon page](https://models.dev/providers/neon) as the source of truth rather than a fixed provider list. Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
 
@@ -55,14 +55,14 @@ If the user already has a deep, single-provider integration and no interest in N
 
 Check these preconditions before setting anything up:
 
-The AI Gateway is a public beta feature currently available in `us-east-2` and `eu-central-1`. Foundation model access requires a paid Neon plan. Confirm the user's project is in one of these regions.
+The AI Gateway is currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Foundation model access requires a paid Neon plan. Confirm the user's project is in one of these regions.
 
 ### Enabling the gateway: plan and model-catalog gating
 
-The AI Gateway is credential-gated rather than a provisioning step, but two plan/beta limits gate it — one blocks provisioning, the other only trims the catalog — and the CLI surfaces each:
+The AI Gateway is credential-gated rather than a provisioning step, but two plan limits gate it — one blocks provisioning, the other only trims the catalog — and the CLI surfaces each:
 
 - **Free plan → provisioning is blocked.** `neon config apply` / `deploy` and `neon checkout` **refuse** to enable the gateway on a Free plan (the gateway can't serve requests there), with a friendly "upgrade to a paid plan, or remove `aiGateway`" error. A dry-run `neon config plan` and `neon env pull` don't provision, so they only **warn**. So: to use the gateway the project's account must be on a paid Neon plan.
-- **Paid plan with a reduced model catalog.** On a paid plan the gateway provisions and serves, but during the beta an account can start with a trimmed catalog — some flagship models (e.g. Anthropic Opus, OpenAI Codex / `*-pro`) are missing from `GET /v1/models`. This is expected; `neon env pull` (and the env pull bundled into `apply` / `deploy` / `checkout`) warns and links the user to their branch's AI Gateway page in the Neon Console (`https://console.neon.tech/app/projects/<project-id>/branches/<branch-id>/ai-gateway`) to request access to more models. Verify what's actually available for the branch by reading `/v1/models` (see the models section below) rather than assuming the full catalog.
+- **Paid plan with a reduced model catalog.** On a paid plan the gateway provisions and serves, but an account can start with a trimmed catalog — some flagship models (e.g. Anthropic Opus, OpenAI Codex / `*-pro`) are missing from `GET /v1/models`. This is expected; `neon env pull` (and the env pull bundled into `apply` / `deploy` / `checkout`) warns and links the user to their branch's AI Gateway page in the Neon Console (`https://console.neon.tech/app/projects/<project-id>/branches/<branch-id>/ai-gateway`) to request access to more models. Verify what's actually available for the branch by reading `/v1/models` (see the models section below) rather than assuming the full catalog.
 
 When helping a user debug "the gateway isn't working" or "a model is missing", use `/v1/models` plus the account's plan to distinguish these two cases — a Free plan blocks provisioning entirely, while a reduced catalog on a paid plan just needs a model-access request.
 

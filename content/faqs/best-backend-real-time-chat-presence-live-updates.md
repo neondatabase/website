@@ -43,8 +43,8 @@ Under load the platform runs several isolates, and a message posted through one 
 
 Two templates show the whole pattern: `neon bootstrap --template realtime-chat` (Next.js, Hono, Postgres, Managed Better Auth) and `--template realtime-sse` (TanStack Router, Hono) ([starter templates](/docs/compute/functions/overview#starter-templates)).
 
-<Admonition type="note" title="Beta scope">
-Functions are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and are JavaScript and TypeScript only. Functions are in beta and free during the beta on every plan. With a current `neon` CLI, `neon dev` serves WebSocket upgrades locally, so you can test before deploying ([WebSockets and SSE](/docs/compute/functions/websockets)).
+<Admonition type="note" title="Scope">
+Functions are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and are JavaScript and TypeScript only. Functions are available on every plan. With a current `neon` CLI, `neon dev` serves WebSocket upgrades locally, so you can test before deploying ([WebSockets and SSE](/docs/compute/functions/websockets)).
 </Admonition>
 
 ## Keep the front end where it is

@@ -30,7 +30,7 @@ neon skills -s neon -y
 
 # Neon Functions
 
-This is a public beta feature, currently available in `us-east-2` and `eu-central-1`.
+Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
 Neon Functions are long-running Node.js HTTP handlers deployed onto a Neon branch. Each function gets a public HTTPS URL, runs in the same region as your database, and — if the branch has Postgres — gets `DATABASE_URL` injected automatically. You deploy and manage them through the same Neon CLI, `neon.ts`, and API you already use.
 
@@ -48,7 +48,7 @@ Reach for Neon Functions when the workload is a request/response handler that be
 - **Webhooks, bots, and post-response work.** Webhook handlers that fan out into multiple DB writes, Discord/WebSocket bots, and fire-and-forget follow-ups via `waitUntil` (analytics, audit logs) all fit.
 - **Recurring HTTP work.** A Function Trigger POSTs to the function on a cron (`type: "schedule"`). Same `fetch` handler, same 15-minute time-to-first-byte limit. See [Function Triggers](#function-triggers).
 
-If the workload is a pure static site, or something that must run outside the supported regions (`us-east-2`, `eu-central-1`) today, this isn't the right tool yet (see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits) and [Availability](#availability)).
+If the workload is a pure static site, or something that must run outside the supported regions (`aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`) today, this isn't the right tool yet (see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits) and [Availability](#availability)).
 
 ## What It Does
 
@@ -61,7 +61,7 @@ If the workload is a pure static site, or something that must run outside the su
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Functions is a public beta feature currently available in `us-east-2` and `eu-central-1`. Confirm the user's Neon project is in one of these regions. Functions usage isn't billed during the public beta.
+Check this precondition before setting anything up: Neon Functions is currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Confirm the user's Neon project is in one of these regions.
 
 ## Architecture: Where Functions Fit
 
@@ -239,7 +239,7 @@ Functions are long-running but **still serverless** — they are a request/respo
 - **Heartbeat: 15 minutes.** Open WebSocket/SSE connections stay alive as long as data flows. The timeout only fires when a connection goes silent — send at least one byte every 15 minutes to keep a quiet stream alive.
 - **`waitUntil`: 15 minutes.** Work registered with `waitUntil` (from `@neon/functions`) keeps the invocation alive after the response is sent, up to 15 minutes — for cleanup like analytics writes and audit logs, **not** a background job runner. Off the Neon runtime (local `neon dev`, tests) it's a no-op: the promise still runs but isn't tracked.
 - **Idle eviction.** With no active connections Neon shuts the function down; it may also evict/restart for operational reasons — e.g. maintenance, or moving the function to a different compute node (active functions can run for hours first). Treat eviction like a process restart — WebSocket/SSE clients must reconnect. Neon sends `SIGINT` before evicting, so a `process.on("SIGINT", ...)` handler lets you detect that the function is about to be evicted and run any last-minute cleanup. You don't need one just to close Postgres connections — Neon's pooler reclaims those on its own.
-- **Runtime:** Node.js 24, memory fixed at 2048 MiB during the preview. Slugs must match `^[a-z0-9]{1,20}$`. **An isolate is reused across many requests** — multiple requests can be in flight on the same isolate at once (interleaved on Node's single-threaded event loop), and under load the runtime runs several isolates in parallel, each with its own copy of module state. State held in module scope is therefore per-isolate (shared by every request that isolate handles) and in-memory only — persist anything that must survive eviction in Postgres. This reuse is exactly why you create a connection pool once at module scope rather than per request (see [Connecting to Postgres](#connecting-to-postgres)).
+- **Runtime:** Node.js 24, memory fixed at 2048 MiB. Slugs must match `^[a-z0-9]{1,20}$`. **An isolate is reused across many requests** — multiple requests can be in flight on the same isolate at once (interleaved on Node's single-threaded event loop), and under load the runtime runs several isolates in parallel, each with its own copy of module state. State held in module scope is therefore per-isolate (shared by every request that isolate handles) and in-memory only — persist anything that must survive eviction in Postgres. This reuse is exactly why you create a connection pool once at module scope rather than per request (see [Connecting to Postgres](#connecting-to-postgres)).
 
 ## Functions as an Agent Backend (Next.js and Similar Frameworks)
 
@@ -628,6 +628,5 @@ The Neon documentation is the source of truth and Functions is evolving rapidly,
 - https://neon.com/docs/compute/functions/environment-variables.md
 - https://neon.com/docs/compute/functions/reference/neon-ts.md
 - https://neon.com/docs/compute/functions/reference/runtime-limits.md
-- https://neon.com/docs/compute/functions/preview-access.md
 - https://neon.com/docs/cli/triggers.md
 - [references/function-triggers.md](references/function-triggers.md)
