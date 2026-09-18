@@ -36,7 +36,7 @@ const HeroAnimation = ({ description }) => {
       {isMounted && shouldReduceMotion === false && (
         <RiveAnimation
           className="pointer-events-none size-full select-none"
-          wrapperClassName="absolute inset-0 size-full bg-gray-new-8"
+          wrapperClassName="pointer-events-none absolute inset-0 size-full bg-gray-new-8"
           src="/animations/pages/auth/hero.riv?20260908"
         />
       )}

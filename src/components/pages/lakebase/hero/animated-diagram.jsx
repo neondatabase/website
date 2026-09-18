@@ -8,8 +8,11 @@ import {
   useRive,
 } from '@rive-app/react-webgl2';
 import { useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import HeroImage from 'images/pages/lakebase/hero/hero-lakebase.jpg';
 
 const RIVE_SRC = '/animations/pages/lakebase/hero.riv?20260902';
 const RIVE_LAYOUT = new Layout({ fit: Fit.Contain, alignment: Alignment.Center });
@@ -48,7 +51,7 @@ const RiveCanvas = () => {
 
   return (
     <div
-      className="absolute top-[-95.6175%] left-[-21.4286%] aspect-[1920/1146] w-[142.8572%]"
+      className="pointer-events-none absolute top-[-95.6175%] left-[-21.4286%] aspect-[1920/1146] w-[142.8572%]"
       ref={containerRef}
       aria-hidden
     >
@@ -61,7 +64,7 @@ const RiveCanvas = () => {
 
 const AnimatedDiagram = () => {
   const prefersReducedMotion = useReducedMotion();
-  const [supportsRenderer, setSupportsRenderer] = useState(false);
+  const [supportsRenderer, setSupportsRenderer] = useState(null);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -76,7 +79,25 @@ const AnimatedDiagram = () => {
     context?.getExtension('WEBGL_lose_context')?.loseContext();
   }, [prefersReducedMotion]);
 
-  return !prefersReducedMotion && supportsRenderer ? <RiveCanvas /> : null;
+  if (supportsRenderer === null) return null;
+
+  if (prefersReducedMotion || !supportsRenderer) {
+    return (
+      <Image
+        className="absolute inset-0 size-full"
+        src={HeroImage}
+        width={2688}
+        height={1004}
+        sizes="(max-width: 39.9375rem) 110vw, (max-width: 95.9375rem) calc(100vw - 64px), 1344px"
+        alt=""
+        priority
+        unoptimized
+        draggable={false}
+      />
+    );
+  }
+
+  return <RiveCanvas />;
 };
 
 export default AnimatedDiagram;

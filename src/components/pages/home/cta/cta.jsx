@@ -41,28 +41,19 @@ const CTA = () => (
     </div>
 
     <div className="pointer-events-none relative overflow-hidden">
-      {/*
-        Video optimization parameters:
-          mp4 av1: ffmpeg -i cta-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-av1.mp4
-          mp4: ffmpeg -i cta-origin.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
-          webm: ffmpeg -i cta-origin.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an cta.webm
-      */}
+      {/* Footer: 3840×1888, 30 FPS, 14 seconds, no audio. HEVC CRF 30 / VP9 CRF 34. */}
       <PauseableVideo
-        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:left-1/2 lg:w-[1024px] lg:-translate-x-1/2 md:hidden"
         videoClassName="size-full object-cover"
         width={1920}
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4?updated=20260113`}
-          type="video/mp4; codecs=av01.0.05M.08,opus"
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20260918`}
+          type='video/mp4; codecs="hvc1"'
         />
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4?updated=20260113`}
-          type="video/mp4"
-        />
-        <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.webm?updated=20260113`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20260918`}
           type="video/webm"
         />
       </PauseableVideo>

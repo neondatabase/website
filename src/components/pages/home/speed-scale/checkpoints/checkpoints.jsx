@@ -15,11 +15,11 @@ const Checkpoints = () => (
     <div className="border-t border-b border-gray-new-20">
       <RiveAnimation
         className={cn(
-          'pointer-events-none relative mx-auto aspect-[1920/500] w-full max-w-[1920px]',
+          'relative mx-auto aspect-[1920/500] w-full max-w-[1920px]',
           'lg:left-1/2 lg:w-[140vw] lg:-translate-x-1/2 md:w-[204vw]',
           '[&_canvas]:h-full! [&_canvas]:w-full!'
         )}
-        wrapperClassName="relative"
+        wrapperClassName="pointer-events-none relative"
         src="/animations/pages/home/checkpoints.riv?20260114"
         autoBind={false}
       />

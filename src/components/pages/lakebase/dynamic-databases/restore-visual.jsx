@@ -13,7 +13,7 @@ const RestoreVisual = () => (
         'lg:w-[140vw] md:w-[170vw]',
         '[&_canvas]:h-full! [&_canvas]:w-full!'
       )}
-      wrapperClassName="relative"
+      wrapperClassName="pointer-events-none relative"
       src="/animations/pages/home/checkpoints.riv?20260114"
       autoBind={false}
     />

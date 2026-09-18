@@ -308,7 +308,7 @@ const Animation = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden md:mx-auto md:mt-8 md:max-w-sm"
+      className="pointer-events-none relative w-full overflow-hidden md:mx-auto md:mt-8 md:max-w-sm"
       ref={setVisualRef}
       style={
         visualWidth === null
