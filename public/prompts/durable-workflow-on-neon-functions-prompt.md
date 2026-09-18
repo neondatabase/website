@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the workflow step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` region since Neon Functions are only available there during beta. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Wrap every discrete task in `step.run` and use `step.sleep` for delays so Inngest can checkpoint and retry at the step level. Create tables as a separate migration or `neon psql` step; `neon deploy` provisions services, not schema.
+7. Implement the workflow step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Wrap every discrete task in `step.run` and use `step.sleep` for delays so Inngest can checkpoint and retry at the step level. Create tables as a separate migration or `neon psql` step; `neon deploy` provisions services, not schema.
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
