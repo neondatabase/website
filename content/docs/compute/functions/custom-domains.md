@@ -343,11 +343,11 @@ const neon = createNeonClient({
 const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
-const { error } = await neon.functions.customDomains.delete(
+const { error } = await neon.functions.customDomains.delete({
   projectId,
   branchId,
-  'api.example.com',
-);
+  domain: 'api.example.com',
+});
 
 if (error) throw error;
 ```
