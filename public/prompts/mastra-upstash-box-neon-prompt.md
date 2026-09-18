@@ -1,7 +1,7 @@
 I want to build a Slack bot backed by a data-analysis agent with Mastra, an Upstash Box sandbox, and Neon branching.
 
 Use this guide as a reference:
-https://neon.com/guides/mastra-tools-upstash-box-neon
+https://neon.com/guides/mastra-upstash-box-neon
 
 Before writing code:
 

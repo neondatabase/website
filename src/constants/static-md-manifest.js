@@ -61,7 +61,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/kysely-prompt.md',
   '/prompts/laravel-prompt.md',
   '/prompts/llm-proxy-neon-functions-prompt.md',
-  '/prompts/mastra-tools-upstash-box-neon-prompt.md',
+  '/prompts/mastra-upstash-box-neon-prompt.md',
   '/prompts/micronaut-kotlin-prompt.md',
   '/prompts/neon-api-prompt.md',
   '/prompts/neon-backend.md',

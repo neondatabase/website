@@ -4,21 +4,21 @@ subtitle: 'Learn how to build a Slack bot that runs a Mastra agent on Neon Funct
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-14T00:00:00.000Z'
-updatedOn: '2026-09-18T13:58:26.373Z'
+updatedOn: '2026-09-18T16:08:45.923Z'
 ---
 
 [Mastra](https://mastra.ai) is a TypeScript framework for building AI agents in production. It provides the primitives you need to define an agent, its tools, and the reasoning loop that decides which tool to call next. With Mastra, you can build agents that explore databases, run Python scripts, generate charts, and write Markdown reports.
 
 But this kind of agent needs two things that are risky to hand out: a place to run code, and a database it can explore freely. You don't want the agent executing arbitrary code on your production server, or querying and modifying your production database directly.
 
-This guide solves both problems by building a Slack-based data-analysis agent where every question runs in a fresh, disposable workspace, so the agent can execute code and explore your data without touching production. You'll implement:
+This guide solves both problems with a Slack-based data-analysis agent. Every question runs in a fresh, disposable workspace, so the agent can execute code and explore your data without touching production. You'll implement:
 
 - A Mastra agent hosted on a [Neon Function](/docs/compute/functions/overview), whose tools run Python, shell commands, and file operations inside an isolated [Upstash Box](https://upstash.com/docs/box)
 - A fresh [branch](/docs/introduction/branching) on Neon per session, deleted when the session ends, so production stays untouched
 - A Slack bot that receives @mentions, provisions the branch and box, runs the agent, and posts the answer and chart back into the thread
 
 <CopyPrompt
-  src="/prompts/mastra-tools-upstash-box-neon-prompt.md"
+  src="/prompts/mastra-upstash-box-neon-prompt.md"
   description="Use this prompt to customize the guide and build it with your AI agent."
   buttonText="Copy prompt"
 />
@@ -28,13 +28,13 @@ This guide solves both problems by building a Slack-based data-analysis agent wh
 The runner has four components, each with a clear role:
 
 - **Slack:** Users ask questions by @mentioning the bot in a thread.
-- **Branch on Neon:** A disposable, copy-on-write clone of your database, created per session so the agent can query and modify it without touching production.
+- **Branch on Neon:** A disposable branch of your database, created per session so the agent can query and modify it without touching production.
 - **Mastra:** The agent's reasoning loop. It defines the agent and its tools and runs inside a Neon Function.
 - **Upstash Box:** The isolated sandbox where the tools execute. It runs Python and shell commands and holds the files the agent produces.
 
 Here is how a question flows through the system:
 
-1. **Event:** A user @mentions the bot. Slack sends the event to `POST /slack/events`, the adapter verifies the signature and returns `200` within Slack's 3-second window, and the real work happens in the background.
+1. **Event:** A user @mentions the bot. Slack sends the event to `POST /slack/events`. The adapter verifies the signature and returns `200` within Slack's 3-second window, while the real work happens in the background.
 2. **Provision:** The mention handler posts an acknowledgment message, creates a branch with an `expires_at` backstop, and restores an Upstash Box from a prepared snapshot with the branch connection string injected as `DATABASE_URL`.
 3. **Reason:** The handler runs the agent with the box ID in the request context. The agent calls `run-python`, `run-shell`, and the file tools as it works, and each tool call executes inside the box.
 4. **Deliver:** The agent writes a Markdown report and, optionally, a chart into `/work/out`. The handler reads both, deletes the box and the branch, and posts the answer and chart back into the thread.
@@ -213,7 +213,7 @@ FROM generate_series(1, 2000) AS i;
 
 ## Prepare the box snapshot
 
-You'll use an Upstash Box to run Python and shell commands in an isolated sandbox. Snapshots are point-in-time copies of a box's filesystem, so you can prepare a snapshot with the Python packages the agent needs and restore it for each session. Customize the snapshot with any additional packages your agent requires.
+You'll use an Upstash Box to run Python and shell commands in an isolated sandbox. Snapshots are point-in-time copies of a box's filesystem. You can prepare a snapshot with the Python packages the agent needs and restore it for each session. Customize the snapshot with any additional packages your agent requires.
 
 Create a `prepare-snapshot.js` script in the project root:
 
@@ -254,7 +254,7 @@ Snapshot ID: exxx-xxxx-xxxx-xxxx-xxxxxxxx
 Copy the printed Snapshot ID and add it to `.env.local` as `UPSTASH_BOX_SNAPSHOT_ID`. The snapshot is now ready to restore for each session.
 
 <Admonition type="note" title="Re-snapshot when dependencies change">
-The snapshot is a point-in-time copy of the box's filesystem. If you later need different or additional Python packages, create a new snapshot with the same script and update `UPSTASH_BOX_SNAPSHOT_ID`. Snapshots are independent of the box that created them, so deleting that box does not affect the snapshot.
+The snapshot is a point-in-time copy of the box's filesystem. If you later need different or additional Python packages, create a new snapshot with the same script and update `UPSTASH_BOX_SNAPSHOT_ID`. Snapshots are independent of the box that created them, so deleting that box doesn't affect the snapshot.
 </Admonition>
 
 ## Declare the function and its secrets
@@ -302,7 +302,7 @@ export default defineConfig({
 });
 ```
 
-The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step: the empty fallback lets this first deploy succeed, and you'll redeploy with the real values right after.
+The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed. You'll redeploy with the real values right after.
 
 You also don't list `DATABASE_URL` as Neon injects it automatically, because the function is deployed onto your branch. The per-session branch connection comes from the Neon SDK at runtime instead.
 
@@ -347,7 +347,7 @@ export function slugForSession(sessionId: string): string {
 }
 ```
 
-Setting `throwOnError: true` makes the SDK throw a typed error instead of returning a `{ data, error }` envelope. The slug is deliberately short because it becomes part of the session branch name (`agent/<slug>`), and the random suffix keeps two sessions from colliding on a branch name when the same session ID prefix appears twice.
+Setting `throwOnError: true` makes the SDK throw a typed error instead of returning a `{ data, error }` envelope. The slug is deliberately short because it becomes part of the session branch name (`agent/<slug>`). The random suffix keeps two sessions from colliding when the same session ID prefix appears twice.
 
 ## Create the sandbox tools
 
@@ -575,7 +575,7 @@ export const dataAnalystAgent = new Agent({
 
 The above code defines a Mastra agent that answers questions about a Postgres database by writing and running code inside an isolated Linux sandbox. The agent uses the tools defined earlier to run Python scripts, shell commands, and read/write files in the sandbox. The instructions provide guidance on how the agent should operate, including inspecting the schema, answering questions with real query results, and writing reports.
 
-The `beforeToolCall` hook is a policy layer at the Mastra level. It runs before the tool executes and can short-circuit the call by returning `{ proceed: false, output }`, in which case the agent receives `output` as the tool result. The check here blocks a small set of destructive commands. Because the box and database branch are already isolated and disposable, this is defense in depth rather than a hard boundary. For a production deployment, combine it with [Box network policy](https://upstash.com/docs/box/overall/network-policy) to restrict outbound access.
+The `beforeToolCall` hook is a policy layer at the Mastra level. It runs before the tool executes and can short-circuit the call by returning `{ proceed: false, output }`. In that case the agent receives `output` as the tool result. The check here blocks a small set of destructive commands. Because the box and database branch are already isolated and disposable, this is defense in depth rather than a hard boundary. For a production deployment, combine it with [Box network policy](https://upstash.com/docs/box/overall/network-policy) to restrict outbound access.
 
 ## Configure the Mastra instance
 
@@ -590,7 +590,7 @@ export const mastra = new Mastra({
 });
 ```
 
-Because this agent has no memory or durable workflow, it needs no storage adapter and no `storage.init()` call. If you later add [Mastra memory](https://mastra.ai/docs/memory/overview) to keep session history, that is the point where you would add a Postgres store backed by your Neon database. The guide: [Building stateful AI Agents with Mastra and Lakebase Postgres](/guides/mastra-neon) shows how to wire up `@mastra/pg`'s `PostgresStore` against Neon for exactly that.
+Because this agent has no memory or durable workflow, it needs no storage adapter and no `storage.init()` call. If you later add [Mastra memory](https://mastra.ai/docs/memory/overview) to keep session history, add a Postgres store backed by your database on Neon at that point. See [Building stateful AI Agents with Mastra and Lakebase Postgres](/guides/mastra-neon), which wires up `@mastra/pg`'s `PostgresStore` against Neon for exactly that.
 
 ## Create the session runner
 
@@ -679,7 +679,7 @@ export async function runSession(question: string): Promise<SessionResult> {
 }
 ```
 
-The session runner does three things in order: provision, run, and clean up. Provisioning starts with `branches.createAndConnect`, which creates the branch, attaches compute, and polls until the branch is ready to accept connections. The `expires_at` update is a backstop in case the cleanup fails: the branch will be deleted automatically after 12 hours, which is long enough for a session to finish but short enough to avoid leaving a dangling branch.
+The session runner does three things in order: provision, run, and clean up. Provisioning starts with `branches.createAndConnect`, which creates the branch, attaches compute, and polls until the branch is ready to accept connections. The `expires_at` update is a backstop in case the cleanup fails: Neon deletes the branch automatically after 12 hours. That's long enough for a session to finish but short enough to avoid leaving a dangling branch.
 
 The `Box.fromSnapshot` call restores the snapshot you prepared earlier with the branch connection string injected as `DATABASE_URL`, and sets `MPLBACKEND=Agg` so matplotlib can render charts without a display.
 
@@ -844,7 +844,7 @@ Try the Slack path first. In a channel with the bot invited, send:
 
 The bot replies immediately with a status message, then runs the session in the background. When the agent finishes, it posts a Markdown report with the answer and attaches a chart if it produced one.
 
-If the bot doesn't reply, check [function logs](/docs/compute/functions/logs) first: a failed signature check (the `SLACK_SIGNING_SECRET` must match **Basic Information** > **App Credentials**) or a session error shows up there. The adapter posts an error message to the thread when a session fails, so a silent thread usually means the event never arrived: the bot isn't in the channel, or the manifest's `request_url` doesn't point at your function URL with `/slack/events` appended. Also check for stale env: deployed env is a snapshot at apply time, so redeploy after editing `.env.local`.
+If the bot doesn't reply, check [function logs](/docs/compute/functions/logs) first. A failed signature check or a session error shows up there. (The `SLACK_SIGNING_SECRET` must match **Basic Information** > **App Credentials**.) The adapter posts an error message to the thread when a session fails, so a silent thread usually means the event never arrived. In that case, check that the bot is in the channel and that the manifest's `request_url` points at your function URL with `/slack/events` appended. Also check for stale env: deployed env is a snapshot at apply time, so redeploy after editing `.env.local`.
 
 Slack retries events when your endpoint doesn't return a `2xx` response. The adapter deduplicates retried deliveries automatically, but if you add side effects of your own, make them safe to run more than once.
 
