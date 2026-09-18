@@ -21,7 +21,7 @@ Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your ex
 
 Neon AI Gateway serves open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time.
 
-To request access to the full foundation model catalog, open the **AI Gateway** page in the [Neon Console](https://console.neon.tech) and select **Apply for access**. We'll reach out as access opens up.
+To request access to the full foundation model catalog, open the **AI Gateway** page in the [Neon Console](https://console.neon.tech) and select **Request access**. We'll reach out as access opens up.
 
 **See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).** See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) to add credits.
 

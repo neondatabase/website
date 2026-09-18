@@ -65,7 +65,7 @@ To enable logical replication:
 
 1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query:

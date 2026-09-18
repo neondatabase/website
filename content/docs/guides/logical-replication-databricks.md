@@ -64,7 +64,7 @@ Enabling logical replication sets `wal_level` from `replica` to `logical` for th
 </Admonition>
 
 1. In the Neon Console, open your project.
-2. Go to **Settings** → **Logical Replication**.
+2. Go to **Settings** → **Postgres**, then **Logical replication**.
 3. Click **Enable**.
 
 Verify:

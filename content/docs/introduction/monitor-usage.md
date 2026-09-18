@@ -28,7 +28,7 @@ From the **Billing** page (Organization → **Billing** in the Neon Console) you
 To open the Billing page:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing**.
 
 ### Projects page

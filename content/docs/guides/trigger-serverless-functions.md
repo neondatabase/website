@@ -65,7 +65,7 @@ VALUES
 
 The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
 
-Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
+Navigate to your Neon Project using the Neon Console and open the **Settings** > **Postgres** page. From here, follow the instructions to enable Logical Replication:
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 

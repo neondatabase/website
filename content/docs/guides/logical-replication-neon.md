@@ -30,7 +30,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 1. Select your project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
-3. Select **Logical replication**.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 </TabItem>

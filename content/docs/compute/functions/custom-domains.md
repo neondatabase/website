@@ -34,7 +34,7 @@ You need:
 - A deployed Neon Function.
 - A domain you control, and access to its DNS settings.
 - Optional: The latest [Neon CLI](/docs/cli), if you want to manage the domain from the command line.
-- Optional: `@neon/sdk` 3.1.0 or later, if you want to manage the domain with the SDK.
+- Optional: `@neon/sdk` 5.0.0 or later, if you want to manage the domain with the SDK.
 
 ## Register a custom domain
 
@@ -85,7 +85,9 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
 const { data: domain, error } =
-  await neon.functions.customDomains.register(projectId, branchId, {
+  await neon.functions.customDomains.register({
+    projectId,
+    branchId,
     domain: 'api.example.com',
     entity_type: 'function',
     entity_id: 'api',
@@ -225,7 +227,7 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
 const { data: domains, error } =
-  await neon.functions.customDomains.list(projectId, branchId).all();
+  await neon.functions.customDomains.list({ projectId, branchId }).all();
 
 if (error) throw error;
 console.log(domains);
@@ -341,11 +343,11 @@ const neon = createNeonClient({
 const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
-const { error } = await neon.functions.customDomains.delete(
+const { error } = await neon.functions.customDomains.delete({
   projectId,
   branchId,
-  'api.example.com',
-);
+  domain: 'api.example.com',
+});
 
 if (error) throw error;
 ```

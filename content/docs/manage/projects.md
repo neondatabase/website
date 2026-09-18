@@ -41,8 +41,9 @@ You can create a project from the Console or the Neon CLI. To create one with th
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Project Name**, **Postgres version**, **Cloud service provider**, and **Region**. Project names are limited to 64 characters.
-4. Click **Create Project**.
+3. Enter a **Project name** and choose a **Region** (the cloud provider is part of the region). Project names are limited to 64 characters.
+4. Under **Services**, choose what to enable. **Postgres database** is on by default (expand it to set the **Postgres version**). Where the selected region supports them, you can also enable **Object storage**, **Functions**, **AI gateway**, and **Neon Auth**. Services that aren't available in the selected region aren't shown.
+5. Click **Create project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
 
@@ -67,7 +68,7 @@ The output includes the new project ID and the default connection string. For al
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
+1. From the profile menu in the top-right of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
