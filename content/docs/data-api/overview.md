@@ -11,26 +11,15 @@ summary: >-
   request is stateless, so the API scales to thousands of concurrent users
   without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-09-14T11:31:53.481Z'
+updatedOn: '2026-09-18T16:54:04.950Z'
 ---
 
 The Neon Data API is the HTTP query service in the Neon backend for apps and agents. It provides a secure, stateless interface to your database, letting you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
 
-- **Browser & edge compatibility**
-
-  Standard Postgres drivers do not work in web browsers and struggle in edge runtimes. The Data API allows you to query your database from Cloudflare Workers, Vercel Edge, or directly from a browser-based frontend using standard HTTP requests.
-
-- **Connectionless scalability**
-
-  Eliminate connection pool exhaustion. Because the API uses short-lived HTTP requests instead of persistent TCP connections, it handles thousands of concurrent users and serverless auto-scaling.
-
-- **Secure by default**
-
-  The API validates JWTs from any authentication provider and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see. Use [Managed Better Auth](/docs/auth/overview), or bring your own provider like [Auth0, Clerk, Firebase, and others](/docs/data-api/custom-authentication-providers).
-
-- **CI/CD integration**
-
-  Test your Data API integrations in isolated branch environments using the [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action), which can retrieve branch-specific Data API URLs for your workflows.
+- **Browser and edge compatibility.** Standard Postgres drivers don't work in web browsers and struggle in edge runtimes, so query from Cloudflare Workers, Vercel Edge, or a browser frontend over standard HTTP.
+- **Connectionless scalability.** Short-lived HTTP requests replace persistent TCP connections, so you avoid connection pool exhaustion and scale to thousands of concurrent users.
+- **Secure by default.** The API validates JWTs from any authentication provider and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so users only access data they're permitted to see. Use [Managed Better Auth](/docs/auth/overview), or bring your own provider like [Auth0, Clerk, or Firebase](/docs/data-api/custom-authentication-providers).
+- **CI/CD integration.** Test integrations in isolated branch environments with the [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action), which retrieves branch-specific Data API URLs for your workflows.
 
 ## PostgREST compatibility
 
