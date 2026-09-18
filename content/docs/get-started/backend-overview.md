@@ -215,7 +215,7 @@ import { neon } from "@neon/ai-sdk-provider";
 import { streamText } from "ai";
 
 const result = streamText({
-  model: neon("gpt-5-mini"), // or "glm-5-3-flash", "gemini-3-flash", ...
+  model: neon("gpt-oss-120b"), // any enabled model, e.g. "glm-5-3-flash"; frontier models (OpenAI, Gemini) need access requested first
   system: "Answer using only the user's notes.",
   prompt: `${question}\n\nNotes:\n${notesText}`,
 });
