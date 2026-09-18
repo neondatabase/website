@@ -67,7 +67,7 @@ Check this precondition before setting anything up: Neon Functions is currently 
 
 Neon (Functions included) is **backend primitives, not full-stack app hosting**. Host your app on **Vercel** (or Netlify, or another frontend/app host); Functions are the long-running, stateful slice of your backend that lives next to your data. They compose with that platform in two ways:
 
-- **Add a Function to a full-stack app.** Your Next.js / TanStack Start app on Vercel (or Netlify) owns UI, auth (e.g. Neon Auth), and talks directly to Lakebase Postgres and Object Storage. When one workload outgrows the host's short serverless limits — a WebSocket or SSE server, or a long-running agent that would time out — move just that piece onto a Neon Function. (See [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the client-direct pattern.)
+- **Add a Function to a full-stack app.** Your Next.js / TanStack Start app on Vercel (or Netlify) owns UI, auth (Managed Auth, Better Auth, Clerk, or another IdP), and talks directly to Lakebase Postgres and Object Storage. When one workload outgrows the host's short serverless limits — a WebSocket or SSE server, or a long-running agent that would time out — move just that piece onto a Neon Function. (See [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the client-direct pattern.)
 - **Run the whole backend control plane on Functions.** Especially when the frontend is **client-only** — TanStack Router, React Router in client mode, and similar SPAs hosted on Vercel or Netlify — the client calls Functions **directly**. Build REST APIs and request/response agents, host **MCP servers**, and run anything stateful or that belongs close to Postgres and Object Storage.
 
 Either way, secure a Function like any standalone REST API: verify a JWT or API key at the top of the handler (see the WARNING under [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks)). Because a Function is just your backend, you can **move pieces between your host and Neon** — relocate an agent or a stateful WebSocket server onto a Function when it needs more runtime, and back if needed.
@@ -180,6 +180,7 @@ Neon injects branch-scoped connection strings and service URLs at runtime — yo
 | `DATABASE_URL`          | Pooled connection string. Use for most queries. Present only if the branch has Postgres.           |
 | `DATABASE_URL_UNPOOLED` | Direct connection. Use for migrations, `LISTEN`/`NOTIFY`, multi-round-trip transactions.           |
 | `NEON_AUTH_BASE_URL`    | Present when Neon Auth is enabled on the branch.                                                   |
+| `NEON_AUTH_JWKS_URL`    | Present when Neon Auth is enabled on the branch. JWKS for verifying Managed Auth JWTs.             |
 | `NEON_DATA_API_URL`     | Present when the Data API is enabled on the branch.                                                |
 
 Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
@@ -254,20 +255,23 @@ Browser ──(Authorization: Bearer <JWT>)──▶  Neon Function (agent)   �
 Browser ──▶ your app backend ──▶ Neon Function                       ❌ host cuts the stream
 ```
 
-- Mint a **short-lived JWT** on your app backend (e.g. better-auth's `jwt` plugin, NextAuth, or your own signer) — that call is fast and well within host limits.
-- Hand the token to the client and have it call the Neon Function **directly** (cross-origin), e.g. with the Vercel AI SDK: `new DefaultChatTransport({ api: NEON_FUNCTION_URL, fetch })` where `fetch` attaches `Authorization: Bearer <token>`. Your app server is never in the path of the long stream.
+- Get a **short-lived bearer token** from the identity the app already uses. Do not switch Clerk, Better Auth, Auth.js, Supabase Auth, or Managed Auth in order to call a Function.
+  - Managed Auth, default client (`createAuthClient` / Next wrapper): `authClient.token()`, then `data.token`. Verify with injected `NEON_AUTH_JWKS_URL` and issuer `new URL(process.env.NEON_AUTH_BASE_URL!).origin`.
+  - Managed Auth with `SupabaseAuthAdapter()`: that client has no `.token()`. Use `getSession()`, then `data.session.access_token`. Same JWKS/issuer as above.
+  - Existing Better Auth / Auth.js / other signer that already publishes JWKS: use that JWKS URL, issuer, and audience. Inspect the installed contract; cookie or database sessions are not a JWKS.
+  - Cookie/database sessions only: mint a short token on the existing app backend (that call is fast and stays within host limits), then the browser calls the Function **directly** with `Authorization: Bearer`. The Function stream must not go through the app host.
+- Hand the token to the client, e.g. with the Vercel AI SDK: `new DefaultChatTransport({ api: NEON_FUNCTION_URL, fetch })` where `fetch` attaches `Authorization: Bearer <token>`. Your app server is never in the path of the long stream.
 - Add **CORS** so the browser can reach it (handle `OPTIONS`, set `Access-Control-Allow-Origin`/`-Headers`).
 
 > [!WARNING]
-> A Neon Function has a **public HTTPS URL — it is reachable by anyone.** A direct client→function call means there is no app backend in front of it to gate access, so **you must authenticate the function yourself.** Verify a JWT (e.g. against your app's JWKS), check a shared secret / API key, or validate a session token at the top of the handler and reject anything else. Never deploy an unauthenticated agent.
+> A Neon Function has a **public HTTPS URL — it is reachable by anyone.** A direct client→function call means there is no app backend in front of it to gate access, so **you must authenticate the function yourself.** Verify a JWT against the caller's JWKS, check a shared secret / API key, or reject the request. Never deploy an unauthenticated agent.
 
 ```typescript
 // src/index.ts — verify the caller before doing any work
 import { createRemoteJWKSet, jwtVerify } from "jose";
 
-const jwks = createRemoteJWKSet(
-  new URL(`${process.env.AUTH_BASE_URL}/api/auth/jwks`),
-);
+const jwks = createRemoteJWKSet(new URL(process.env.NEON_AUTH_JWKS_URL!));
+const issuer = new URL(process.env.NEON_AUTH_BASE_URL!).origin;
 
 export default {
   async fetch(request: Request) {
@@ -281,24 +285,33 @@ export default {
         headers: cors(request),
       });
     }
+    let userId: string;
     try {
-      const { payload } = await jwtVerify(auth.slice(7), jwks, {
-        issuer: process.env.AUTH_BASE_URL,
-        audience: process.env.AUTH_BASE_URL,
-      });
-      const userId = payload.sub; // scope the agent to this user
-      // ... run the agent, return result.toUIMessageStreamResponse({ headers: cors(request) })
+      const { payload } = await jwtVerify(auth.slice(7), jwks, { issuer });
+      if (!payload.sub) {
+        return new Response("Unauthorized", {
+          status: 401,
+          headers: cors(request),
+        });
+      }
+      userId = payload.sub;
     } catch {
       return new Response("Unauthorized", {
         status: 401,
         headers: cors(request),
       });
     }
+    // Authorize resource access by userId, then run the agent scoped to that user.
+    // ... return result.toUIMessageStreamResponse({ headers: cors(request) })
   },
 };
 ```
 
-Pass the JWKS/issuer URL to the function via its `env` (see [Environment Variables](#environment-variables)). Persist anything you need to keep (generated images, history) in Postgres — module state doesn't survive eviction.
+That snippet is Managed Auth verification. Mint the bearer token with `.token()` (`data.token`) on the default client, or `getSession()` then `data.session.access_token` on `SupabaseAuthAdapter()`. For another identity, pass that app's JWKS URL and issuer through Function `env` (see [Environment Variables](#environment-variables)) and include `audience` only when that token contract requires it. https://neon.com/docs/compute/functions/authentication.md
+
+A valid token is not permission to read another user's rows. Exercise two users: each can access their own data; cross-user access is denied. Repeat after restarting the Function against stored rows. A request-supplied owner id cannot grant access.
+
+Persist anything you need to keep (generated images, history) in Postgres — module state doesn't survive eviction.
 
 ## WebSocket Servers
 
