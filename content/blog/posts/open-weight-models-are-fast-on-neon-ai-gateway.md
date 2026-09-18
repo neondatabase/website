@@ -53,7 +53,7 @@ MoE only pays off in production if the serving stack can keep up. Serve those we
 
 ## How we optimize performance in open-weight models
 
-AI Gateway’s open-weight path runs on [Databricks Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/), the same production stack Databricks uses to serve [well over 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-beta). You get the serving optimizations Databricks already ships - these are just a few examples:
+AI Gateway’s open-weight path runs on [Databricks Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/), the same production stack Databricks uses to serve [well over 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-ga). You get the serving optimizations Databricks already ships - these are just a few examples:
 
 ### Continuous batching
 
@@ -126,8 +126,8 @@ const response = await client.chat.completions.create({
 
 **You’d pay the standard per-token rate for each model, with no Neon markup on top.** If you’re a Neon user, calling AI Gateway is a no-brainer - you’ll get a boost in performance and convenience without price penalties.
 
-<Admonition type="note" title="Neon AI Gateway is in beta - try it">
-Tokens are free during the beta period. Spin up a Neon project on a Launch or Scale plan in aws-us-east-2, point your SDK at Neon, and benchmark latency on your own agent loop. 
+<Admonition type="note" title="Try Neon AI Gateway">
+AI Gateway is now generally available. It was free to use during the [beta](https://neon.com/blog/neon-backend-is-beta); see [pricing](https://neon.com/pricing) for current token costs. Spin up a Neon project on a Launch or Scale plan in one of the [supported regions](https://neon.com/docs/introduction/regions), point your SDK at Neon, and benchmark latency on your own agent loop. 
   
-  If you have feedback, [please send it over](https://neon.com/discord) - we’re working hard to bring AI Gateway ([and the rest of the Neon backend](https://neon.com/blog/neon-backend-is-beta)) to GA.
+  If you have feedback, [please send it over](https://neon.com/discord) - read the [GA announcement](https://neon.com/blog/neon-backend-is-ga) for the rest of the Neon backend.
 </Admonition>

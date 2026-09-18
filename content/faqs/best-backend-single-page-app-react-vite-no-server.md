@@ -56,7 +56,7 @@ export default function App() {
 The [React quick start](/docs/auth/quick-start/react) covers the API-method version if you want your own UI, and [TanStack Router](/docs/auth/quick-start/tanstack-router) has one with components.
 
 <Admonition type="note" title="Client versions">
-Managed Better Auth and the Data API are in beta. The single-URL `createClient(url)` form depends on a `@neondatabase/neon-js` release that may not be on npm yet; if `npm install` gives you `0.6.2-beta` or earlier, use the two-URL object form in the [JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
+The single-URL `createClient(url)` form depends on a `@neondatabase/neon-js` release that may not be on npm yet; if `npm install` gives you `0.6.2-beta` or earlier, use the two-URL object form in the [JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 ## When you need server logic anyway
