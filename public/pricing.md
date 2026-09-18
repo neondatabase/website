@@ -13,44 +13,44 @@ Paid plans are pay-as-you-go: usage is metered hourly and billed at the end of t
 | GB-month          | Storage, metered hourly.                                                                                |
 | branch-month      | Extra branch kept for one month. Prorated hourly.                                                       |
 
-Compute suspends automatically after inactivity (**scale-to-zero**); no CU-hours accrue while suspended. Always on for Free; configurable on Launch and Scale.
+Compute suspends automatically after inactivity (**scale-to-zero**); no CU-hours accrue while suspended. Always enabled on Free (suspends after 5 min, cannot be turned off); can be disabled on Launch; fully configurable on Scale.
 
 Invoices under $0.50 are not collected.
 
 ## Plans at a glance
 
-| Feature                          | Free                                       | Launch                               | Scale                                                            |
-| -------------------------------- | ------------------------------------------ | ------------------------------------ | ---------------------------------------------------------------- |
-| Price                            | $0/month                                   | Pay for what you use                 | Pay for what you use                                             |
-| Who it's for                     | Prototypes, side projects, and small teams | Startups and growing teams           | Production-grade workloads and larger companies                  |
-| Organization members             | Unlimited                                  | Unlimited                            | Unlimited                                                        |
-| Projects                         | 100                                        | 100                                  | 1,000 (can be increased on request)                              |
-| Branches per project             | 10                                         | 10                                   | 25                                                               |
-| Extra branches                   | -                                          | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                             |
-| Compute                          | 100 CU-hours/project                       | $0.106/CU-hour                       | $0.222/CU-hour                                                   |
-| Autoscaling                      | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM) |
-| Scale to zero                    | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                             |
-| Storage                          | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                   |
-| Instant restore                  | -                                          | $0.20/GB-month                       | $0.20/GB-month                                                   |
-| History window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
-| Snapshots (manual)               | 1                                          | 100                                  | 100                                                              |
-| Snapshots (scheduled)            | -                                          | Yes                                  | Yes                                                              |
-| Public network transfer (egress) | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                       |
-| Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
-| Auth (MAU)                       | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                     |
-| Object Storage                   | 5 GB included                              | $0.023/GB-month                      | $0.023/GB-month                                                  |
-| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
-| AI Gateway                       | -                                          | Prepaid credits                      | Prepaid credits                                                  |
-| Monitoring retention             | 1 day                                      | 3 days                               | 14 days                                                          |
-| Metrics/logs export              | -                                          | -                                    | Yes                                                              |
-| Spending notifications           | -                                          | Yes                                  | Yes                                                              |
-| Protected branches               | -                                          | Yes                                  | Yes                                                              |
-| IP Allow rules                   | -                                          | -                                    | Yes                                                              |
-| Private Networking               | -                                          | -                                    | Yes                                                              |
-| HIPAA                            | -                                          | -                                    | Available                                                        |
-| SOC 2                            | -                                          | -                                    | Available                                                        |
-| Uptime SLA                       | -                                          | -                                    | Yes                                                              |
-| Support                          | Community                                  | Billing support                      | Standard, Business, or Production                                |
+| Feature                          | Free                                                   | Launch                                                | Scale                                                            |
+| -------------------------------- | ------------------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------------- |
+| Price                            | $0/month                                               | Pay for what you use                                  | Pay for what you use                                             |
+| Who it's for                     | Prototypes, side projects, and small teams             | Startups and growing teams                            | Production-grade workloads and larger companies                  |
+| Organization members             | Unlimited                                              | Unlimited                                             | Unlimited                                                        |
+| Projects                         | 100                                                    | 100                                                   | 1,000 (can be increased on request)                              |
+| Branches per project             | 10                                                     | 10                                                    | 25                                                               |
+| Extra branches                   | -                                                      | $1.50/branch-month (prorated hourly)                  | $1.50/branch-month (prorated hourly)                             |
+| Compute                          | 100 CU-hours/project                                   | $0.106/CU-hour                                        | $0.222/CU-hour                                                   |
+| Autoscaling                      | Up to 2 CU (8 GB RAM)                                  | Up to 16 CU (64 GB RAM)                               | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM) |
+| Scale to zero                    | After 5 min                                            | After 5 min, can be disabled                          | Configurable (1 minute to always on)                             |
+| Storage                          | 0.5 GB/project                                         | $0.35/GB-month                                        | $0.35/GB-month                                                   |
+| Instant restore                  | -                                                      | $0.20/GB-month                                        | $0.20/GB-month                                                   |
+| History window                   | 6 hours (1 GB limit)                                   | Up to 7 days                                          | Up to 30 days                                                    |
+| Snapshots (manual)               | 1                                                      | 100                                                   | 100                                                              |
+| Snapshots (scheduled)            | -                                                      | Yes ($0.09/GB-month)                                  | Yes ($0.09/GB-month)                                             |
+| Public network transfer (egress) | 5 GB per project included                              | 500 GB per project included, then $0.10/GB            | 500 GB per project included, then $0.10/GB                       |
+| Private network transfer         | -                                                      | -                                                     | $0.01/GB                                                         |
+| Auth (MAU)                       | Up to 60k MAU                                          | Up to 1M MAU                                          | Up to 1M MAU                                                     |
+| Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
+| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
+| AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
+| Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
+| Metrics/logs export              | -                                                      | -                                                     | Yes                                                              |
+| Spending notifications           | -                                                      | Yes                                                   | Yes                                                              |
+| Protected branches               | -                                                      | Yes                                                   | Yes                                                              |
+| IP Allow rules                   | -                                                      | -                                                     | Yes                                                              |
+| Private Networking               | -                                                      | -                                                     | Yes                                                              |
+| HIPAA                            | -                                                      | -                                                     | Available                                                        |
+| SOC 2                            | -                                                      | -                                                     | Available                                                        |
+| Uptime SLA                       | -                                                      | -                                                     | Yes                                                              |
+| Support                          | Community                                              | Billing support                                       | Standard, Business, or Production                                |
 
 A "-" means the feature is not available on that plan.
 
@@ -88,7 +88,7 @@ Branches above your plan's allowance (10 included on Free/Launch, 25 on Scale) a
 
 ### What happens when I hit Free plan limits?
 
-Hitting any Free monthly limit (100 CU-hours, 0.5 GB storage, 5 GB egress) suspends compute until the next billing month. Upgrade to Launch or Scale to resume immediately.
+All limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 0.5 GB storage blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
 
 ### How can I control my costs?
 
