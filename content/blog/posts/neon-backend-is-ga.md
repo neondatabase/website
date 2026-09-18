@@ -171,7 +171,7 @@ Serverless functions you can deploy right next to Postgres:
 
 - Node.js 24 HTTP handlers run on the same branch and in the same region as your database, with `DATABASE_URL` and credentials for other Neon primitives injected automatically
 - Long-running enough for agents and realtime
-- [Just shipped] You can use Function Triggers for scheduled triggers ([docs](https://neon.com/docs/cli/triggers))
+- [Just shipped] You can use Function Triggers ([docs](https://neon.com/docs/cli/triggers))
 - [Just shipped] We also support custom domains ([docs](https://neon.com/docs/cli/functions))
 
 <Admonition type="note" title="Included in the Neon Free Plan">
