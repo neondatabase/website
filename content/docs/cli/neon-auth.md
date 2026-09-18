@@ -18,11 +18,9 @@ redirectFrom:
 
 The `neon-auth` command manages [Managed Better Auth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed Better Auth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.
 
-Requires neon 2.23.0 or later. Check your version with `neon --version`.
-
 <CliSubcommands command="neon-auth" />
 
-If `--project-id` or `--branch` are omitted, the CLI resolves them from your [context file](/docs/cli/set-context), auto-selects when there is only one option, and prompts otherwise.
+If `--project-id` or `--branch` are omitted, the CLI resolves them from your [context file](/docs/cli/link), auto-selects when there is only one option, and otherwise asks you to pass the flag.
 
 ## Enable and status (#enable-and-status)
 

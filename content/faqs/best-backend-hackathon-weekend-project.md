@@ -22,7 +22,7 @@ npm i -g neon
 neon bootstrap my-app --default
 ```
 
-`--default` scaffolds the default template and runs install, git init, agent tooling, and `neon link` without prompting. Pass `--template hono` for a REST API, `realtime-chat` for a chat app with Managed Better Auth, or `mcp` for an MCP server; `neon bootstrap --list-templates` prints the catalog ([starter templates](/docs/compute/functions/overview#starter-templates)).
+`--default` scaffolds the default template and runs install, git init, agent tooling, and `neon link` without prompting. If your account has several organizations or projects, add `--org-id <org-id>` and `--project-id <project-id>` so the unattended link doesn't stop to ask. Pass `--template hono` for a REST API, `realtime-chat` for a chat app with Managed Better Auth, or `mcp` for an MCP server; `neon bootstrap --list-templates` prints the catalog ([starter templates](/docs/compute/functions/overview#starter-templates)).
 
 If you'd rather use your own stack, every Neon database speaks standard Postgres. Copy the connection string into `.env` and use whichever driver or ORM you already know ([connect](/docs/connect/connect-from-any-app)).
 

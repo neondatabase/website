@@ -17,7 +17,7 @@ The available scopes are:
 - `ai_gateway:invoke` for the [Neon AI Gateway](/docs/ai-gateway/overview)
 - `functions:invoke` for invoking [Neon Functions](/docs/compute/functions/overview)
 
-Credentials are branch-scoped. Pass `--project-id` and `--branch` to target a branch, or let the CLI resolve them from your [context file](/docs/cli/set-context). A credential's `token_id` has the form `nak_live_<hex>` and is stable across a rotation.
+Credentials are branch-scoped. Pass `--project-id` and `--branch` to target a branch, or let the CLI resolve them from your [context file](/docs/cli/link). A credential's `token_id` has the form `nak_live_<hex>` and is stable across a rotation.
 
 <Admonition type="important" title="Secrets are shown only once">
 The `api_token` and `s3_secret_access_key` are returned only when you create or rotate a credential, or when you explicitly run `neon credentials reveal`. Store them securely as soon as they're issued.
