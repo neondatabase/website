@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-17T00:30:38.129Z'
+updatedOn: '2026-09-18T17:46:57.332Z'
 ---
 
 Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
@@ -18,6 +18,7 @@ What makes Neon Functions different from lambda-style serverless?
 - **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
 - **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
 - **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
+- **Event-driven.** Invoke a function on a cron schedule or an object upload with [Function Triggers](/docs/compute/functions/triggers/overview), no external scheduler.
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
 
@@ -33,6 +34,10 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
 
+<a href="/docs/compute/functions/triggers/overview" description="Invoke a function on a cron schedule or an object upload, with no external scheduler." icon="stopwatch">Function Triggers</a>
+
+<a href="/docs/compute/functions/custom-domains" description="Serve a function from a domain you own with automatic TLS." icon="globe">Custom domains</a>
+
 <a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
 
 <a href="/docs/compute/functions/websockets" description="Hold long-lived connections open with WebSockets or SSE." icon="globe">WebSockets and SSE</a>
@@ -42,8 +47,6 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 <a href="/docs/compute/functions/environment-variables" description="Neon-injected variables and how to add your own secrets." icon="gear">Environment variables</a>
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
-
-<a href="/docs/compute/functions/custom-domains" description="Serve a function from a domain you own with automatic TLS." icon="globe">Custom domains</a>
 
 <a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
 
@@ -83,6 +86,7 @@ A [Hono](https://hono.dev) app exports the object shape, so `export default app`
 - **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
 - **File upload APIs**: receive a file, write it to [Object Storage](/docs/storage/overview), return a result.
 - **Webhook handlers and bots**: receive events and query Postgres in the same region.
+- **Scheduled and event-driven jobs**: run a function on a cron schedule or when a file lands in Object Storage, with no external scheduler. See [Function Triggers](/docs/compute/functions/triggers/overview).
 
 ## How Functions fit with your app
 

@@ -11,22 +11,20 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-09-18T17:46:57.332Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
 
-<Admonition type="tip" title="Scheduling without keeping a compute active">
-If the work you want to schedule isn't SQL, or you don't want to keep a compute active to hold the schedule, see [scheduled Function Triggers](/docs/compute/functions/triggers/schedule). They invoke a [Neon Function](/docs/compute/functions/overview) on a cron schedule and run even when the compute is scaled to zero.
+<Admonition type="important" title="Consider Function Triggers first">
+For scheduled work, [scheduled Function Triggers](/docs/compute/functions/triggers/schedule) are usually the better choice. They run a [Neon Function](/docs/compute/functions/overview) on a cron schedule and fire at scale to zero. The job runs your code with the same [injected environment](/docs/compute/functions/environment-variables) as any function, including [Postgres](/docs/postgres/overview) via `DATABASE_URL`, [AI Gateway](/docs/ai-gateway/overview) and [Object Storage](/docs/storage/overview).
+
+`pg_cron` runs only while the compute is active, so keep it for in-database maintenance on an always-on compute.
 </Admonition>
 
 <CTA />
 
 This guide provides an introduction to the `pg_cron` extension. You'll learn how to enable the extension, schedule jobs, understand the cron syntax, manage and monitor your scheduled tasks, and about considerations specific to the Neon environment.
-
-<Admonition type="warning" title="Key details about using pg_cron with Neon">
-Please note that `pg_cron` jobs will only run when your compute is active. We therefore recommend only using `pg_cron` on computes that run 24/7 or where you have disabled [scale to zero](/docs/introduction/scale-to-zero).
-</Admonition>
 
 ## Enable the `pg_cron` extension
 

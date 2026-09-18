@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-18T17:46:57.332Z'
 ---
 
 Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
@@ -437,5 +437,6 @@ Objects branch with your database. When you fork a branch, the child can immedia
 
 - [Buckets](/docs/storage/buckets): set access levels, understand bucket branching
 - [Authentication](/docs/storage/authentication): credential scopes and read vs write access
+- [Trigger on an object upload](/docs/compute/functions/triggers/object-storage): run a function when an object is created
 
 <NeedHelp/>
