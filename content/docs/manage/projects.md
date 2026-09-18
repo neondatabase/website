@@ -67,7 +67,7 @@ The output includes the new project ID and the default connection string. For al
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
+1. From the profile menu in the top-right of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
