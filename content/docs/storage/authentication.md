@@ -6,10 +6,8 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-09-11T02:29:56.410Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
 
@@ -60,7 +58,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 The `name` and `expires_at` fields are optional.
 
 <Admonition type="warning">
-`expires_at` is not currently enforced during the beta. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control yet; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
+`expires_at` is not currently enforced. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
 </Admonition>
 
 The response includes these fields. Both secrets are returned once only, so store them immediately:

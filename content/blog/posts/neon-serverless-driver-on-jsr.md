@@ -102,4 +102,4 @@ deployctl deploy --project=<project-name> <application-file-name>
 
 With the addition of Neon’s serverless driver to JSR, you can quickly add the driver to your project dependencies and run sub-10ms queries on multiple JavaScript runtimes, including Deno, Cloudflare, Bun, and Node.
 
-[Try Neon for free now](https://console.neon.tech). Join us on [Discord](https://neon.tech/discord), follow us on [X](https://x.com/neondatabase), and let us know how we can make your experience using Neon and Postgres better. Happy coding!
+[Try Neon for free now](https://console.neon.tech). Join us on [Discord](https://neon.com/discord), follow us on [X](https://x.com/neondatabase), and let us know how we can make your experience using Neon and Postgres better. Happy coding!

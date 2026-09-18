@@ -10,27 +10,27 @@ export default {
           items: [
             {
               title: 'Lakebase Postgres',
-              to: LINKS.postgresOverview,
+              to: LINKS.lakebase,
               description: 'Serverless Postgres database',
             },
             {
-              title: 'Auth',
-              to: LINKS.auth,
-              description: 'Authentication built into your database',
-            },
-            {
-              title: 'Functions',
-              to: LINKS.functionsOverview,
-              description: 'Serverless compute next to your data',
-            },
-            {
               title: 'Object Storage',
-              to: LINKS.objectStorageOverview,
+              to: LINKS.objectStorage,
               description: 'S3-compatible storage that branches',
             },
             {
+              title: 'Functions',
+              to: LINKS.functions,
+              description: 'Serverless compute next to your data',
+            },
+            {
+              title: 'Managed Better Auth',
+              to: LINKS.authPage,
+              description: 'Authentication built into your database',
+            },
+            {
               title: 'AI Gateway',
-              to: LINKS.aiGatewayOverview,
+              to: LINKS.aiGateway,
               description: 'One API for frontier and open-source models',
             },
           ],

@@ -9,7 +9,7 @@ summary: >-
   covering virtual environment setup, psycopg2-binary installation, schema
   migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"
@@ -122,7 +122,7 @@ Create a `.env` file in the root of your project directory to store your Neon co
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** in the Neon Console. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Update the rxconfig.py file
 

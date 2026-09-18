@@ -8,7 +8,7 @@ summary: >-
   when you want direct Postgrex access without an ORM; for Ecto-based
   integration see the Elixir Ecto guide.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 
@@ -69,7 +69,7 @@ For your Elixir project, create a project directory using `mix` and add the requ
 You'll configure your application to connect to Neon using the `config/config.exs` file. This method securely separates your credentials from your source code.
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select the **Parameters only** tab to view the connection string parameters.
     ![Connection modal](/docs/connect/connection_details_parameters_only.png)
 4.  Copy the connection string parameters (user, password, host, and database name).

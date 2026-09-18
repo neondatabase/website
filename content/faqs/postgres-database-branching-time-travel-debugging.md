@@ -47,12 +47,12 @@ If you'd rather rewind production itself, [instant restore](https://neon.com/doc
 
 ## How other managed Postgres services compare
 
-| Provider           | History window                              | Operation                                                     |
-| ------------------ | ------------------------------------------- | ------------------------------------------------------------- |
-| Neon               | 6 hours (Free plan) to 30 days (Scale plan) | Create a writable branch at a timestamp or LSN, metadata-only |
+| Provider         | History window                              | Operation                                                     |
+| ---------------- | ------------------------------------------- | ------------------------------------------------------------- |
+| Neon             | 6 hours (Free plan) to 30 days (Scale plan) | Create a writable branch at a timestamp or LSN, metadata-only |
 | Aurora Postgres  | Backup retention (1 to 35 days)             | Restore to a new DB cluster at a chosen timestamp             |
 | RDS for Postgres | Backup retention (0 to 35 days)             | Restore to a new DB instance at a chosen timestamp            |
-| Supabase           | Add-on, 7, 14, or 28 days                   | PITR restore overwrites the existing project                  |
+| Supabase         | Add-on, 7, 14, or 28 days                   | PITR restore overwrites the existing project                  |
 
 Aurora and RDS PITR creates a brand-new DB cluster or instance. Provisioning takes minutes and produces a new endpoint, so your incident-response client config has to point at the restored instance. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
 

@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -46,7 +46,7 @@ The Neon serverless driver is also available as a [JavaScript Registry (JSR)](ht
 
 ## Configure your Neon database connection
 
-You can obtain a connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Your Neon connection string will look something like this:
+You can obtain a connection string for your database by clicking the **Connect** button in the Console nav. Your Neon connection string will look something like this:
 
 ```shell
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]

@@ -192,4 +192,4 @@ _Note: The Node.js application was hosted in SFO. The Neon Postgres database was
 
 ## Conclusion
 
-Neon’s serverless Postgres can be used with both traditional long-running applications and serverless architectures. If you have long-running applications implementing robust connection handling, you can use Neon’s scale to zero feature to reduce your database bill, especially for non-production environments. [Sign up to try Neon](https://console.neon.tech/signup) with your existing applications, and join us on [Discord](https://neon.tech/discord) to share your experiences, suggestions, and challenges with us.
+Neon’s serverless Postgres can be used with both traditional long-running applications and serverless architectures. If you have long-running applications implementing robust connection handling, you can use Neon’s scale to zero feature to reduce your database bill, especially for non-production environments. [Sign up to try Neon](https://console.neon.tech/signup) with your existing applications, and join us on [Discord](https://neon.com/discord) to share your experiences, suggestions, and challenges with us.

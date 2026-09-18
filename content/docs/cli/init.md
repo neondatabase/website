@@ -9,12 +9,12 @@ summary: >-
   MCP server), links a Neon project, and optionally writes a neon.ts config. It runs
   interactively by default; pass -y and --agent for an unattended agent setup.
 enableTableOfContents: true
-updatedOn: '2026-09-11T17:10:38.159Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
 
-The `init` command sets up the current directory to use Neon with your AI coding assistant. It's a thin wrapper that runs Neon's other setup commands for you: it installs agent tooling (either the [Neon plugin](/docs/cli/plugins), or [agent skills](/docs/cli/skills) and the [Neon MCP server](/docs/cli/mcp)), [links a Neon project](/docs/cli/link), and can write a [`neon.ts` config](/docs/cli/config). In an empty directory, it also [scaffolds a starter template](/docs/cli/bootstrap): pick one interactively, name one with `--template`, or skip scaffolding with `--skip-template`.
+The `init` command sets up the current directory to use Neon with your AI coding assistant. It's a thin wrapper that runs Neon's other setup commands for you: it installs agent tooling, [links a Neon project](/docs/cli/link), and can write a [`neon.ts` config](/docs/cli/config). In an empty directory, it also [scaffolds a starter template](/docs/cli/bootstrap).
 
 `init` is interactive, so run it from a terminal. It asks how coding agents should get Neon, and prompts you to pick a project to link. If you don't have the CLI installed, run it with `npx`:
 
@@ -23,6 +23,10 @@ npx neon@latest init
 ```
 
 For agents, CI, or scripts that can't answer prompts, see [Run it non-interactively](#run-it-non-interactively).
+
+<Admonition type="note" title="Behavior changed in Neon CLI 5.0.0">
+Before 5.0.0, `init -y` prompted for a project and left the branch unpinned. From 5.0.0, the [`neon link`](/docs/cli/link) step writes a complete context (org, project, and branch), and `-y` uses your only org and project or, when you have several, prints the IDs and exits. Pass `--org-id`/`--project-id` in unattended runs.
+</Admonition>
 
 ## Usage
 
@@ -63,7 +67,7 @@ It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply 
 
 <CliOptions command="init" />
 
-Pass `-y` (alias `--yes`) to run each step with its defaults instead of prompting. In an empty directory it scaffolds the default template. Otherwise it sets up agent tooling, then links and writes `neon.ts`. With `-y`, `init` detects the target agent from the project folders, else the host CLI agent you're running inside. It installs the plugin for a plugin-capable agent (Cursor, Claude Code, or Codex), or skills and MCP for any other agent. If it detects no agent, it exits and asks you to pass `--agent`. Even with `-y`, first-time sign-in still opens a browser, and `link` still asks which project to use unless the directory is already linked.
+Pass `-y` (alias `--yes`) to run each step with its defaults instead of prompting. In an empty directory it scaffolds the default template. Otherwise it sets up agent tooling, then links and writes `neon.ts`. With `-y`, `init` detects the target agent from the project folders, else the host CLI agent you're running inside. It installs the plugin for a plugin-capable agent (Cursor, Claude Code, or Codex), or skills and MCP for any other agent. If it detects no agent, it exits and asks you to pass `--agent`. Even with `-y`, first-time sign-in still opens a browser. With `-y`, `link` selects your only organization and project, or prints the IDs and exits when you have several (pass `--org-id`/`--project-id` to choose).
 
 Pass `--agent` (alias `-a`) to name the coding agents to set up, which skips both detection and the picker. It's repeatable (`neon init --agent cursor --agent claude-code`) and works with `-y`. `init` sets up one family per run, so it forwards the names to the plugin, or to skills and the MCP server, not both. Run `neon init --help` to see which agents each family supports. Passing `--agent` with no value returns an error.
 

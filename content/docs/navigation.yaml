@@ -225,6 +225,8 @@
       items:
         - title: The object model
           slug: concepts/the-object-model
+        - title: Branch your backend
+          slug: concepts/branch-your-backend
     - section: Backend behavior
       icon: settings
       items:
@@ -281,6 +283,39 @@
                   slug: connect/connection-errors
                 - title: Latency and timeouts
                   slug: connect/connection-latency
+        - section: Data API
+          icon: api
+          items:
+            - title: Overview
+              slug: data-api/overview
+            - title: Get started
+              slug: data-api/get-started
+            - title: Guides
+              items:
+                - title: Access control & security
+                  slug: data-api/access-control
+                - title: Secure your app with RLS
+                  slug: guides/rls-tutorial
+                - title: Custom authentication providers
+                  slug: data-api/custom-authentication-providers
+                - title: Data API Advisors
+                  slug: data-api/database-advisor
+            - title: Tools
+              items:
+                - title: Auth and Data API SDK
+                  slug: reference/javascript-sdk
+                - title: SQL to REST API Translator
+                  slug: data-api/sql-to-rest
+                - title: Generate TypeScript types
+                  slug: data-api/generate-types
+            - title: Using the Data API
+              items:
+                - title: Building a note-taking app
+                  slug: data-api/demo
+                - title: Managing the Data API
+                  slug: data-api/manage
+                - title: Troubleshooting
+                  slug: data-api/troubleshooting
         - section: Compute & scaling
           icon: features
           items:
@@ -349,8 +384,6 @@
                   slug: guides/reset-from-parent
             - title: Automate & workflows
               items:
-                - title: Get started with branching
-                  slug: guides/branching-intro
                 - title: Branching workflows
                   slug: guides/branching-test-queries
                 - title: Branching with the CLI
@@ -559,7 +592,7 @@
                 - title: Run RLS queries with Drizzle ORM
                   slug: guides/rls-query-execution
             - title: Version support
-              slug: postgresql/postgres-version-policy
+              slug: postgresql/postgres-version-support
               icon: version
             - title: Upgrade
               slug: postgresql/postgres-upgrade
@@ -794,42 +827,6 @@
                   slug: auth/legacy/overview
                 - title: Database integration
                   slug: auth/legacy/database-integration
-    - title: Data API
-      icon: api
-      slug: data-api/overview
-      items:
-        - section: Introduction
-          items:
-            - title: Overview
-              slug: data-api/overview
-            - title: Get started
-              slug: data-api/get-started
-        - section: Guides
-          items:
-            - title: Access control & security
-              slug: data-api/access-control
-            - title: Secure your app with RLS
-              slug: guides/rls-tutorial
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
-            - title: Data API Advisors
-              slug: data-api/database-advisor
-        - section: Tools
-          items:
-            - title: Auth and Data API SDK
-              slug: reference/javascript-sdk
-            - title: SQL to REST API Translator
-              slug: data-api/sql-to-rest
-            - title: Generate TypeScript types
-              slug: data-api/generate-types
-        - section: Using the Data API
-          items:
-            - title: Building a note-taking app
-              slug: data-api/demo
-            - title: Managing the Data API
-              slug: data-api/manage
-            - title: Troubleshooting
-              slug: data-api/troubleshooting
     - title: Neon Functions
       icon: features
       slug: compute/functions/overview
@@ -840,12 +837,22 @@
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Custom domains
+          slug: compute/functions/custom-domains
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
+        - section: Function Triggers
+          items:
+            - title: Overview
+              slug: compute/functions/triggers/overview
+            - title: Schedule a function
+              slug: compute/functions/triggers/schedule
+            - title: Trigger on object upload
+              slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
             - title: AI agents
@@ -916,10 +923,6 @@
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
-            - title: Anthropic Messages API
-              slug: ai-gateway/anthropic-messages
-              tag: new
-              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference

@@ -81,4 +81,4 @@ stripe projects build
 
 Once your app is created, you can hand off instructions to your agent to build out your app. The template even comes with a markdown file that you can pass to your agent to help it get your app from template to production.
 
-We're incredibly excited to support this massive step toward zero-dashboard infrastructure setups. Spin up your first template, and let us know what you're building over on the [Neon Discord](https://neon.tech/discord) or on X [@neondatabase](https://x.com/neondatabase).
+We're incredibly excited to support this massive step toward zero-dashboard infrastructure setups. Spin up your first template, and let us know what you're building over on the [Neon Discord](https://neon.com/discord) or on X [@neondatabase](https://x.com/neondatabase).

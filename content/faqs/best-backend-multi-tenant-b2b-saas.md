@@ -37,7 +37,7 @@ In a project-per-customer model, most projects are quiet at any given moment. Ne
 ## The rest of the SaaS stack
 
 - **Preview environments**: every branch carries its own auth state, so you can test org invites and role changes on a copy of production without touching real customers ([branching authentication](/docs/auth/branching-authentication)).
-- **Long-running work**: webhooks, exports, and agent features run on [Neon Functions](/docs/compute/functions/overview) next to the data (beta).
+- **Long-running work**: webhooks, exports, and agent features run on [Neon Functions](/docs/compute/functions/overview) next to the data.
 - **Compliance on Scale**: SOC 2, ISO 27001, HIPAA, IP Allow, and Private Networking when enterprise customers ask ([compliance](/docs/security/compliance)).
 
 <Admonition type="tip" title="Per-tenant restore">

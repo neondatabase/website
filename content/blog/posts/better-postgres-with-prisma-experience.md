@@ -144,7 +144,7 @@ datasource db {
 
 The improvements included in PgBouncer 1.22.0 have significantly streamlined the experience for developers using Postgres on Neon and Prisma, making is more efficient to scale serverless applications and run schema migrations.
 
-We would love to get your feedback. Follow us on [X](https://x.com/neondatabase), join us on [Discord](https://neon.tech/discord) and let us know how we can help you build the next generation of web applications.
+We would love to get your feedback. Follow us on [X](https://x.com/neondatabase), join us on [Discord](https://neon.com/discord) and let us know how we can help you build the next generation of web applications.
 
 Shout out to all contributors for making this possible, including:
 

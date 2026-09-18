@@ -64,7 +64,7 @@ On the **Free plan**, updates are scheduled and applied automatically. You can c
 To view planned updates:
 
 1. Go to the Neon project dashboard.
-2. Select **Settings** > **Updates**.
+2. Select **Settings** > **Postgres**.
 
    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
 
@@ -82,7 +82,7 @@ You can specify an update window in your Neon project's settings or using the Ne
 In the Neon Console:
 
 1. Go to the Neon project dashboard.
-2. Select **Settings** > **Updates**.
+2. Select **Settings** > **Postgres**.
 3. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 
    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)

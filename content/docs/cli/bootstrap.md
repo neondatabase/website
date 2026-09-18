@@ -9,7 +9,11 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). Requires neon 2.25.0 or later; check your version with `neon --version`.
+The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project).
+
+<Admonition type="note" title="Behavior changed in Neon CLI 5.0.0">
+Before 5.0.0, `bootstrap --default` prompted for a project and left the branch unpinned. From 5.0.0, the [`neon link`](/docs/cli/link) step writes a complete context (org, project, and branch), and `--default` uses your only org and project or, when you have several, prints the IDs and exits. Pass `--org-id`/`--project-id` in unattended runs.
+</Admonition>
 
 ## Usage
 
@@ -30,7 +34,7 @@ The post-scaffold steps all default to on. In interactive mode, bootstrap asks a
 - `--agent-setup` / `--no-agent-setup`: install agent tooling, either the Neon plugin, or agent skills and the MCP server. Pass `--agent` (alias `-a`, repeatable) to name the agents and skip the picker, for example `neon bootstrap my-app --agent cursor`.
 - `--link` / `--no-link`: run [`neon link`](/docs/cli/link) in the scaffolded directory.
 
-Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs dependency install, git init, agent tooling, and `neon link --yes` without prompting. `link --yes` still asks which project to use unless the directory is already linked.
+Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs dependency install, git init, agent tooling, and `neon link --yes` without prompting. `link --yes` selects your only organization and project, or prints the IDs and exits when you have several (pass `--org-id`/`--project-id` to choose).
 
 ## Examples
 

@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-firebase
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to migrate data from Firebase Firestore to Lakebase Postgres.
@@ -200,7 +200,7 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 ### Retrieve Neon connection details
 
 1. In the Neon Console, go to your project dashboard.
-2. Click **Connect** to open the **Connect to your database** modal, and select your database.
+2. Click **Connect** to open the **Connect to your branch** modal, and select your database.
 3. Copy the connection string. It will look similar to this:
 
    ```

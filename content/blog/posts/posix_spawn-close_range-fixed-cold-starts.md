@@ -229,7 +229,7 @@ As we are preparing our infrastructure to support heavier workloads, the _qualit
 - define internal SLOs & monitoring conformance, and
 - allocate more developer time to performance investigations.
 
-Thanks for reading. What applications are you currently building? [Try Neon](https://console.neon.tech) today, join us on [Discord](https://neon.tech/discord), and let us know how we can improve your experience with serverless PostgreSQL.
+Thanks for reading. What applications are you currently building? [Try Neon](https://console.neon.tech) today, join us on [Discord](https://neon.com/discord), and let us know how we can improve your experience with serverless PostgreSQL.
 
 ---
 

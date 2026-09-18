@@ -13,7 +13,7 @@ summary: >-
   active while Bemi is connected, which prevents scale-to-zero.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-04T04:41:00.271Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
@@ -44,7 +44,7 @@ To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
@@ -62,7 +62,7 @@ The following instructions assume you are connecting with a Postgres role create
 
 To connect your database to Bemi:
 
-1. Retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
+1. Retrieve your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
@@ -123,7 +123,7 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your database to Bemi, as described [above](#connect-your-database-to-bemi).
+After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Use this role when connecting your database to Bemi, as described [above](#connect-your-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic

@@ -111,4 +111,4 @@ Need to create a dump of your database from a previous point in time using `pg_d
 
 Another great thing about ephemeral branches is that they disappear when you’re finished using them, limiting the impact on your compute and storage spend.
 
-Join us in [Discord](https://neon.tech/discord), follow us on [X](https://x.com/neondatabase), and let us know what observability tools you’d like us to integrate with so you can scale your applications to millions of users.
+Join us in [Discord](https://neon.com/discord), follow us on [X](https://x.com/neondatabase), and let us know what observability tools you’d like us to integrate with so you can scale your applications to millions of users.

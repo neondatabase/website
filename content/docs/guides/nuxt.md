@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -100,7 +100,7 @@ neon env pull --file .env    # writes DATABASE_URL from your default branch into
 Notes:
 
 - Not signed in yet? Run `neon login` first.
-- `neon link` prompts for an org and project. To skip the prompts, pass `--project-id <id>` (find IDs with `neon projects list`).
+- `neon link` prompts for an org and project. To skip the prompts, pass `--org-id <id>` and `--project-id <id>` (find IDs with `neon orgs list` and `neon projects list`), plus `--branch <name>` to pin a branch, or `-y` to pin the default branch.
 - For Nuxt, pass in `--file .env` to `neon env pull` as it writes to `.env.local` by default, and `nuxt dev` only reads `.env` by default.
 - Which branch? `neon env pull` uses your project's default branch: `main` for CLI-created projects, `production` for Console-created ones (`neon branches list` shows yours). To use a different branch, run `neon checkout <branch>` first; it re-pins the branch in `.neon` so the next `env pull` reads from it.
 
@@ -108,7 +108,7 @@ Notes:
 
 <TabItem>
 
-Add a `.env` file and paste your connection string, which you can copy from the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file and paste your connection string, which you can copy from the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell filename=".env" shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech/<dbname>?sslmode=require&channel_binding=require"

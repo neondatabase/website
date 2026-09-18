@@ -35,12 +35,12 @@ There's no separate permission system to learn. The Data API selects a Postgres 
 [Managed Better Auth](/docs/auth/overview) runs as a managed REST API in the same region as your database and stores users and sessions in the `neon_auth` schema. It issues the JWTs the Data API validates, and it works with bring-your-own providers too: Auth0, Clerk, Firebase Auth, and others can issue the tokens instead ([custom providers](/docs/data-api/custom-authentication-providers)). The Free plan includes up to 60,000 monthly active users ([plans](/docs/introduction/plans#auth)).
 
 <Admonition type="note" title="Where the SDKs stand">
-Neon's client SDK for Auth and the Data API is JavaScript and TypeScript (`@neondatabase/neon-js`). Native Swift, Kotlin, and Dart apps use the HTTP endpoints directly. Managed Better Auth and the Data API are in beta.
+Neon's client SDK for Auth and the Data API is JavaScript and TypeScript (`@neondatabase/neon-js`). Native Swift, Kotlin, and Dart apps use the HTTP endpoints directly.
 </Admonition>
 
 ## Custom endpoints and push logic
 
-For anything the REST API shouldn't do directly, such as validating a purchase receipt or fanning out a notification, deploy a [Neon Function](/docs/compute/functions/get-started). It runs next to the database with `DATABASE_URL` injected, and `waitUntil` handles follow-up work after the response is sent. Functions are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
+For anything the REST API shouldn't do directly, such as validating a purchase receipt or fanning out a notification, deploy a [Neon Function](/docs/compute/functions/get-started). It runs next to the database with `DATABASE_URL` injected, and `waitUntil` handles follow-up work after the response is sent. Functions are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## How other options compare
 

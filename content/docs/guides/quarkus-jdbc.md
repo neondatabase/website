@@ -10,7 +10,7 @@ summary: >-
   datasource configuration with SSL required, and a working HTTP endpoint that
   queries the Postgres version.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"
@@ -55,7 +55,7 @@ QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=r
 ```
 
 <Admonition type="note">
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button in the Console nav. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 ## Use the PostgreSQL JDBC Driver

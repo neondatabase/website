@@ -6,7 +6,7 @@ The shape mirrors any other Node integration (see [sentry.md](sentry.md)): insta
 
 ## 1. Define the agent against the Neon AI Gateway
 
-With `@mastra/core` 1.47+, use a `neon/<model>` magic string — Mastra reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment (injected by `neon deploy` / `neon env pull` when `preview.aiGateway` is enabled in `neon.ts`). No manual `url`/`apiKey` or MLflow dialect swap is needed; Mastra routes each model to the correct gateway endpoint.
+With `@mastra/core` 1.47+, use a `neon/<model>` magic string — Mastra reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment (injected by `neon deploy` / `neon env pull` when `aiGateway` is enabled in `neon.ts`). No manual `url`/`apiKey` or MLflow dialect swap is needed; Mastra routes each model to the correct gateway endpoint.
 
 ```typescript
 // src/mastra/agents/pricing.ts

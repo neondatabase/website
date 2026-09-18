@@ -3,7 +3,7 @@ title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
 summary: >-
   Connecting to Neon uses a standard PostgreSQL connection string retrieved from
-  the Project Dashboard. Code examples cover JavaScript (Neon serverless driver,
+  the Neon Console. Code examples cover JavaScript (Neon serverless driver,
   Next.js, Drizzle, Prisma), Python (psycopg2), Go, .NET, Ruby, Rust, and psql.
   Use a pooled connection string when your application opens many concurrent
   connections; use a direct connection for migrations or session-level features.
@@ -11,16 +11,16 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
 
 ## Get your connection string
 
-From your Neon **Project Dashboard**, click the **Connect** button to open the **Connection Details** modal. Select your branch, database, and role. Your connection string appears automatically.
+Click **Connect** in the Console nav to open the **Connect to your branch** modal. Select your branch, database, and role. Your connection string appears automatically.
 
-![Connection details modal](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connect_to_branch_modal.png)
 
 The connection string includes everything you need to connect:
 

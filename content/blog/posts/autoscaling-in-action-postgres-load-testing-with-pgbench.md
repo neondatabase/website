@@ -171,6 +171,6 @@ Establishing this connection took approximately 3.7 seconds before any operation
 
 If you’re running an application that can be subject to varying workloads, autoscaling offers you the confidence that your database will always under the stress of real-world demands.
 
-Thanks for reading. If you are curious about autoscaling, [give Neon a try](https://console.neon.tech) and join our [Discord](https://neon.tech/discord). We look forward to seeing you there and hearing your feedback.
+Thanks for reading. If you are curious about autoscaling, [give Neon a try](https://console.neon.tech) and join our [Discord](https://neon.com/discord). We look forward to seeing you there and hearing your feedback.
 
 Happy scaling!

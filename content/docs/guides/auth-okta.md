@@ -11,7 +11,7 @@ summary: >-
   issuer URI and client credentials, defining a user_messages schema, and
   running drizzle-kit push:pg migrations against a Lakebase database.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -73,7 +73,7 @@ touch .env.local
 
 ### Retrieve your Neon database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

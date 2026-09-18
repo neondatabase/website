@@ -21,8 +21,8 @@ Neon, if the reason you're leaving is that you want SQL. Firestore is a NoSQL do
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Firestore       | Postgres, with the [Firebase migration guide](/docs/import/migrate-from-firebase) for moving collections into tables                                       |
 | Firebase Auth   | [Managed Better Auth](/docs/auth/overview), or keep Firebase Auth and let the [Data API](/docs/data-api/custom-authentication-providers) validate its JWTs |
-| Cloud Storage   | [Object Storage](/docs/storage/overview), S3-compatible, beta                                                                                              |
-| Cloud Functions | [Neon Functions](/docs/compute/functions/overview), Node.js 24, beta                                                                                       |
+| Cloud Storage   | [Object Storage](/docs/storage/overview), S3-compatible                                                                                                    |
+| Cloud Functions | [Neon Functions](/docs/compute/functions/overview), Node.js 24                                                                                             |
 | Client SDK      | [`@neondatabase/neon-js`](/docs/reference/javascript-sdk) for Auth and Data API, or any Postgres driver server-side                                        |
 
 ## Move the data in stages

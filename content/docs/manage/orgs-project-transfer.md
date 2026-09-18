@@ -36,7 +36,7 @@ To automate this flow, see [Claimable database integration](/docs/workflows/clai
 
 <TabItem>
 
-1. Use the organization switcher to select the source organization.
+1. Use the profile menu in the top-right of the console to select the source organization.
 2. Open **Settings** > **Transfer projects**.
 3. Select the projects to transfer, then click **Next**.
 

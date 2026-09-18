@@ -1,4 +1,4 @@
-text: '"A quarter of work, done in 6 days".  How a solo founder built isolated Postgres per tenant on Neon'
+text: 'The Neon backend is GA: a complete set of primitives so agents can build'
 link:
-  url: 'https://neon.com/blog/inside-lubots-database-per-tenant-architecture'
+  url: 'https://neon.com/blog/neon-backend-is-ga'
   target: '_blank'

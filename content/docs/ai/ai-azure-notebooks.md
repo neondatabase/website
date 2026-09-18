@@ -10,7 +10,7 @@ summary: >-
   the pgvector extension with CREATE EXTENSION, inserting 3-dimensional vector
   embeddings, and querying nearest neighbors with the <-> distance operator.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 A Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. Azure Data Studio supports Jupyter Notebooks, enabling users to combine SQL queries, Python code, and markdown text in a single interactive document.
@@ -27,9 +27,9 @@ To perform the steps in this guide, you will require:
 
 ## Retrieve your Neon database connection string
 
-Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** in the Console nav to open the **Connect to your branch** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection modal](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Create a notebook
 

@@ -4,7 +4,7 @@ subtitle: Learn how to setup Managed Better Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 This guide walks you through building a demo todo application with **Next.js**, [Managed Better Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Managed Better Auth into your Next.js projects and manage database interactions with Drizzle ORM.
@@ -35,7 +35,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
     - **Auth URL:** Found on the **Auth** page under Configuration (e.g., `https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth`).
       ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
-      ![Connection modal](/docs/connect/connection_details.png)
+      ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
 ## Set up the Next.js project
 

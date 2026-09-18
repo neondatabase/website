@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.18.0",
+  "neonctlVersion": "5.0.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -267,7 +267,7 @@
         },
         "default": {
           "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link with defaults. Project selection may still be required",
+          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link with defaults. If several organizations or projects exist, link prints IDs and exits",
           "default": false,
           "alias": "y"
         },
@@ -319,7 +319,7 @@
         },
         {
           "command": "$0 bootstrap my-app --default",
-          "description": "Skip the pickers; project selection may still be required"
+          "description": "Skip the pickers; if several orgs or projects exist, link prints IDs and exits"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
@@ -2009,7 +2009,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link with defaults and create the bare neon.ts policy. Project selection may still be required",
+          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link with defaults and create the bare neon.ts policy. If several organizations or projects exist, link prints IDs and exits",
           "default": false,
           "alias": "y"
         }
@@ -2272,7 +2272,7 @@
         },
         "checks": {
           "type": "boolean",
-          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
+          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id, --project-id, and --branch, and skips env pull.",
           "default": true
         },
         "clear": {
@@ -2312,7 +2312,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip the \"already linked\" confirmation, and pin the project's default branch when linking a project that has more than one.",
+          "describe": "Skip prompts. Select the only organization and project, or print IDs and the flag to pass. Pin the default branch when several exist. Does not create a project unless --project-name and --region-id are set.",
           "default": false,
           "alias": "y"
         }
@@ -2326,7 +2326,7 @@
           "description": "Forget the current org/project/branch context"
         },
         {
-          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678",
+          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678 --branch main",
           "description": "Write the context offline (no API calls, no verification)"
         },
         {
@@ -2343,7 +2343,11 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY"
+          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY, or -y pins the default"
+        },
+        {
+          "command": "$0 link -y",
+          "description": "Select the only organization and project, or print the --org-id / --project-id to pass"
         }
       ]
     },
@@ -4113,10 +4117,13 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
             "cron": {
               "type": "string",
-              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'",
-              "required": true
+              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'"
             },
             "enabled": {
               "type": "boolean",
@@ -4135,10 +4142,14 @@
               "type": "string",
               "describe": "Trigger name (unique per branch)",
               "required": true
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match (requires --bucket on create)"
             }
           },
           "commands": {},
-          "describe": "Create a trigger that invokes a function on a cron schedule"
+          "describe": "Create a trigger that invokes a function on a cron schedule or when an object is created"
         },
         "delete": {
           "name": "delete",
@@ -4220,6 +4231,10 @@
             }
           ],
           "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
             "cron": {
               "type": "string",
               "describe": "Five-field UTC cron expression"
@@ -4239,6 +4254,10 @@
             "name": {
               "type": "string",
               "describe": "Trigger name (unique per branch)"
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match"
             }
           },
           "commands": {},
