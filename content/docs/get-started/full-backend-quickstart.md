@@ -391,7 +391,8 @@ app.post('/generate', async (c) => {
   const { topic, author = 'anonymous' } = await c.req.json();
 
   const { text } = await generateText({
-    model: neon('gpt-5-nano'),
+    // Open-weight models are enabled by default. Frontier models (for example OpenAI GPT) need access requested in the Console first.
+    model: neon('gpt-oss-20b'),
     prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
 
@@ -409,7 +410,7 @@ app.post('/assistant', async (c) => {
   const { messages } = await c.req.json();
 
   const result = streamText({
-    model: neon('gpt-5-mini'),
+    model: neon('meta-llama-3-3-70b-instruct'),
     system:
       "You are a helpful assistant that answers questions about the user's blog posts. Use the queryPosts tool to look them up.",
     messages: await convertToModelMessages(messages),
@@ -420,8 +421,10 @@ app.post('/assistant', async (c) => {
           limit: z.number().default(10).describe('How many posts to fetch.'),
         }),
         execute: async ({ limit }) => {
+          // Cast created_at to text: a raw Date in the tool result fails the AI SDK
+          // message schema when the result is fed back to the model on the next step.
           const { rows } = await pool.query(
-            'select author, content, created_at from posts where is_published = true order by created_at desc limit $1',
+            'select author, content, created_at::text from posts where is_published = true order by created_at desc limit $1',
             [limit],
           );
           return rows;
