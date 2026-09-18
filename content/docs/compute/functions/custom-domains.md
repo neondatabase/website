@@ -34,7 +34,7 @@ You need:
 - A deployed Neon Function.
 - A domain you control, and access to its DNS settings.
 - Optional: The latest [Neon CLI](/docs/cli), if you want to manage the domain from the command line.
-- Optional: `@neon/sdk` 3.1.0 or later, if you want to manage the domain with the SDK.
+- Optional: `@neon/sdk` 5.0.0 or later, if you want to manage the domain with the SDK.
 
 ## Register a custom domain
 
