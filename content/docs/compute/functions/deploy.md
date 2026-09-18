@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-09-18T18:35:42.057Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -29,7 +29,7 @@ neon deploy
 
 `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
-You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) in the same `neon.ts` config, so they deploy alongside the function.
+You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 
 Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
 

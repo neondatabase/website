@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-09-18T18:35:42.057Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
@@ -232,5 +232,6 @@ The response is a JSON object with your branch's Postgres version:
 - [Function Triggers](/docs/compute/functions/triggers/overview): invoke a function on a cron schedule or an object upload instead of over HTTP
 - [Deploy and manage](/docs/compute/functions/deploy): the CLI and API for managing deployed functions
 - [Authentication](/docs/compute/functions/authentication): verify callers before a function runs
+- [Custom domains](/docs/compute/functions/custom-domains): serve a function from a domain you own
 
 <NeedHelp/>
