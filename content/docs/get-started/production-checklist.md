@@ -156,7 +156,7 @@ Keep reading:
 
 ## Size the history window for instant restore
 
-**[Instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll a branch's database timeline back in time. How far back you can go depends on the **history window** you configure (under **Settings → Instant restore**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
+**[Instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll a branch's database timeline back in time. How far back you can go depends on the **history window** you configure (under **Settings → Postgres**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
 
 A longer history window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer windows retain more change history, which increases **History** usage on your bill. Choose a window that balances recovery needs with predictable storage costs.
 

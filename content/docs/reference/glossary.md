@@ -521,7 +521,7 @@ Selling the Neon service as part of another service offering.
 
 ## History window
 
-The Neon Console setting (under **Settings → Instant restore**) that controls how long Neon retains change history for your branches. It defines how far back **[instant restore](#instant-restore)** can reach and how far back you can run [Time Travel](#time-travel) queries or branch from past states. It is configurable per project and affects **History** usage (instant restore storage) on your bill. See [History window](/docs/introduction/history-window).
+The Neon Console setting (under **Settings → Postgres**) that controls how long Neon retains change history for your branches. It defines how far back **[instant restore](#instant-restore)** can reach and how far back you can run [Time Travel](#time-travel) queries or branch from past states. It is configurable per project and affects **History** usage (instant restore storage) on your bill. See [History window](/docs/introduction/history-window).
 
 ## root branch
 
