@@ -85,7 +85,9 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
 const { data: domain, error } =
-  await neon.functions.customDomains.register(projectId, branchId, {
+  await neon.functions.customDomains.register({
+    projectId,
+    branchId,
     domain: 'api.example.com',
     entity_type: 'function',
     entity_id: 'api',
@@ -225,7 +227,7 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 
 const { data: domains, error } =
-  await neon.functions.customDomains.list(projectId, branchId).all();
+  await neon.functions.customDomains.list({ projectId, branchId }).all();
 
 if (error) throw error;
 console.log(domains);

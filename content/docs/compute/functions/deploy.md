@@ -143,7 +143,10 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 const zipBytes = await readFile('function.zip');
 
-const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+const { data: deployment } = await neon.functions.deploy({
+  projectId,
+  branchId,
+  slug: 'hello',
   zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
   runtime: 'nodejs24',
   environment: JSON.stringify({ MY_SECRET: 'value' }),

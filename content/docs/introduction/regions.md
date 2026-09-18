@@ -56,7 +56,6 @@ You can select the region for your Neon project during project creation. See [Cr
 
 All branches and databases created in a Neon project are created in the region selected for the project.
 
-![Select region image](/docs/introduction/project_creation_regions.png)
 
 <Admonition type="note">
 After you select a region for a Neon project, it cannot be changed for that project. To run your database in a different region, create a **new** project there and migrate your data. See [Region migration](/docs/import/region-migration).

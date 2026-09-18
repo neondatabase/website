@@ -80,7 +80,6 @@ Keep reading: [Neon plans](/docs/introduction/plans)
 
 Network latency is one of the most common contributors to database response time: even a well-tuned database will feel slow if it's geographically far from your application servers. When creating a Neon project, choose the region that is closest to where your application runs.
 
-![Region selection](/docs/introduction/project_creation_regions.png)
 
 Keep reading: [Neon regions](/docs/introduction/regions)
 

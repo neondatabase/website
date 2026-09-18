@@ -67,7 +67,6 @@ We'll verify the following:
 
 Click the **Create new Neon project** button, specify your project settings including the **Postgres version** and **region**, and click **Create**.
 
-![Import Data Assistant create project](/docs/import/import_data_assistant_create_project.png)
 
 ## Start import process
 
