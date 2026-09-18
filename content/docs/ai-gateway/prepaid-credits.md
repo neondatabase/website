@@ -6,7 +6,7 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-09-17T09:58:15.444Z'
+updatedOn: '2026-09-17T19:54:50.720Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -63,6 +63,11 @@ appears in your credit history as **Manual purchase**, with the date and amount.
 Only **one purchase can be open at a time** per account. You can't start a second
 purchase until the first completes.
 </Admonition>
+
+**If a purchase fails.** If the payment card on file is declined, the purchase
+fails and no credits are added to your balance. Neon doesn't leave a payable
+invoice behind, and failed attempts don't appear in your credit history. Update
+your card in **Billing** and try again.
 
 ## View your balance and usage history
 

@@ -117,7 +117,7 @@ For capabilities declared in `neon.ts`, the setup follows the same three steps: 
 | **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
 
 <Admonition type="note" title="Reading the snippets">
-The `neon.ts` fragments below show only the key being added. `auth` and `dataApi` go at the top level of `defineConfig({ ... })`; the backend features marked `// inside preview` go inside a single `preview` block. That block is deprecated on `@neon/config` 1.6.0 and later, where these are top-level keys, but it still works, so this page uses it for the widest compatibility (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
+The `neon.ts` fragments below show only the key being added. `auth`, `dataApi`, and the backend features (`buckets`, `functions`, `aiGateway`) are all top-level keys of `defineConfig({ ... })` (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
 </Admonition>
 
 ## Postgres: the notes
@@ -144,7 +144,7 @@ Use it directly or behind an ORM like Drizzle. Schema, migrations, and route han
 Declare an `attachments` bucket (private by default) and deploy. `neon deploy` provisions it and injects AWS-standard credentials, so any S3 client works unchanged:
 
 ```typescript filename="neon.ts"
-// inside preview
+// top level
 buckets: { attachments: {} },
 ```
 
@@ -169,7 +169,7 @@ const url = await files.url(key, { expiresIn: 3600 }); // short-lived download U
 Declare the `chat` function and deploy. `neon deploy` bundles it, deploys it, prints its URL, and injects `DATABASE_URL` at runtime (plus the AI Gateway vars once you enable it below):
 
 ```typescript filename="neon.ts"
-// inside preview
+// top level
 functions: {
   chat: { name: "notes chat", source: "./functions/chat.ts" },
 },
@@ -204,7 +204,7 @@ Run it locally with [`neon dev`](/docs/cli/dev), which serves the function with 
 Enable it and deploy; `neon deploy` and `neon dev` inject the gateway URL and token:
 
 ```typescript filename="neon.ts"
-// inside preview
+// top level
 aiGateway: true,
 ```
 
@@ -294,13 +294,10 @@ import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true,
-  preview: {
-    // preview groups Object Storage, Functions, and the AI Gateway; deprecated on @neon/config 1.6.0+, where they're top-level keys
-    aiGateway: true,
-    buckets: { attachments: {} },
-    functions: {
-      chat: { name: "notes chat", source: "./functions/chat.ts" },
-    },
+  aiGateway: true,
+  buckets: { attachments: {} },
+  functions: {
+    chat: { name: "notes chat", source: "./functions/chat.ts" },
   },
   branch: (branch) => {
     if (branch.isDefault) return {};
@@ -310,7 +307,7 @@ export default defineConfig({
 });
 ```
 
-These services live under the `preview` block; `auth` is already top-level.
+These services are declared as top-level keys, alongside `auth`.
 
 Two ways to get it running:
 

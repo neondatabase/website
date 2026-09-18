@@ -8,7 +8,7 @@ summary: >-
   public function URL, verify Discord's Ed25519 request signatures, and store data in Postgres
   on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-17T21:40:25.774Z'
 isDraft: false
 ---
 
@@ -87,20 +87,18 @@ To start from the source instead, copy [bots/discord-bot-http](https://github.co
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    functions: {
-      discord: {
-        name: "Discord interactions",
-        source: "./functions/discord.ts",
-        env: {
-          DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
-          DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID!,
-          DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
-          ...(process.env.DISCORD_GUILD_ID ? { DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID } : {}),
-        },
-        dev: {
-          port: 8787,
-        },
+  functions: {
+    discord: {
+      name: "Discord interactions",
+      source: "./functions/discord.ts",
+      env: {
+        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
+        DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID!,
+        DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
+        ...(process.env.DISCORD_GUILD_ID ? { DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID } : {}),
+      },
+      dev: {
+        port: 8787,
       },
     },
   },
