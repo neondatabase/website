@@ -10,13 +10,13 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-08-27T23:52:24.570Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
 ---
 
-The `branches` command lists, creates, renames, deletes, and retrieves details about branches in your Neon project. It also sets the default branch, adds a compute or [read replica](/docs/introduction/read-replicas) to a branch, restores a branch to an earlier point in time, and runs a [schema diff](/docs/guides/schema-diff) between branches. For information about branches in Neon, see [Manage branches](/docs/manage/branches). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
+The `branches` command lists, creates, renames, deletes, and retrieves details about branches in your Neon project. It also sets the default branch, adds a compute or [read replica](/docs/introduction/read-replicas) to a branch, restores a branch to an earlier point in time, and runs a [schema diff](/docs/guides/schema-diff) between branches. For information about branches in Neon, see [Manage branches](/docs/manage/branches). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/link), auto-selects when your account has only one project, and otherwise asks you to pass `--project-id`.
 
 <Admonition type="tip" title="Switch the active branch">
 To pin a branch in your local `.neon` context file so subsequent commands target it, use [`neon checkout`](/docs/cli/checkout).
