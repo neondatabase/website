@@ -4,4 +4,4 @@ A `404` includes a `reason` field explaining why the gateway is unavailable.
 
 Authenticating to the gateway uses a scoped [credential](/docs/reference/api/credentials) with the `ai_gateway:invoke` scope, not your Neon API key.
 
-AI Gateway requires a paid plan and is currently available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Support is expanding toward [all regions](/docs/introduction/regions). AI Gateway is in beta. See [AI Gateway](/docs/ai-gateway/overview) for supported models and [Chat completions](/docs/ai-gateway/chat-completions) for the request format.
+AI Gateway requires a paid plan and is currently available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Support is expanding toward [all regions](/docs/introduction/regions). See [AI Gateway](/docs/ai-gateway/overview) for supported models and [Chat completions](/docs/ai-gateway/chat-completions) for the request format.
