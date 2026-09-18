@@ -40,7 +40,7 @@ If the user asks what doc AI tools are available (e.g. "what AI tools for docs?"
 ├── .claude/
 │   ├── agents/           # Specialized documentation agents
 │   └── commands/         # Custom slash commands
-└── CLAUDE.md             # Project-specific development guidelines
+└── AGENTS.md             # Project-specific development guidelines
 ```
 
 ### Build System
@@ -130,7 +130,7 @@ To load the golden corpus, use the `/golden-corpus` slash command.
 ### Content Structure and Navigation
 
 - **`content/docs/navigation.yaml`**: Primary documentation navigation hierarchy
-- **`CLAUDE.md`**: Project-specific development guidelines and Neon context
+- **`AGENTS.md`**: Project-specific development guidelines and Neon context
 
 ### Technical Configuration
 
