@@ -43,7 +43,7 @@ CREATE TABLE documents (
   body_tsv  TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', body)) STORED
 );
 
-CREATE INDEX ON documents
+CREATE INDEX documents_embedding_idx ON documents
   USING lakebase_ann (embedding vector_cosine_ops);
 ```
 
