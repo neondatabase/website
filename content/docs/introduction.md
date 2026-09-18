@@ -3,8 +3,8 @@ title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
-  Lakebase Postgres with branching and autoscaling, Managed Better Auth, Data API, and upcoming
-  Object Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  Lakebase Postgres with branching and autoscaling, Managed Better Auth, Data API,
+  Object Storage, Functions, and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 redirectFrom:
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-18T14:04:09.773Z'
+updatedOn: '2026-09-18T17:30:07.432Z'
 ---
 
 ## Getting started
@@ -53,9 +53,9 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database." icon="code">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database, with triggers and custom domains." icon="code">Functions</a>
 
-<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models at provider prices with no markup, built into your Neon project." icon="sparkle">AI Gateway</a>
 
 </DetailIconCards>
 
