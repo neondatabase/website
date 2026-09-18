@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the setup step by step following the guide's patterns. Create the Sentry project first (Node.js platform). Use the Neon CLI (`neon init`, `neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Initialize Sentry once at module load before the handler serves requests, and flush buffered telemetry before each request ends, since Neon Functions can suspend an idle process at any moment.
+7. Implement the setup step by step following the guide's patterns. Create the Sentry project first (Node.js platform). Use the Neon CLI (`neon init`, `neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Initialize Sentry once at module load before the handler serves requests, and flush buffered telemetry before each request ends, since Neon Functions can suspend an idle process at any moment.
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.

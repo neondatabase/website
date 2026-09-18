@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the proxy step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` region, where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Build the backend first and verify it with `neon dev` and `curl` before starting the frontend. Route model calls through the Neon AI Gateway with `@neon/ai-sdk-provider`; never put provider API keys in the frontend.
+7. Implement the proxy step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Build the backend first and verify it with `neon dev` and `curl` before starting the frontend. Route model calls through the Neon AI Gateway with `@neon/ai-sdk-provider`; never put provider API keys in the frontend.
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
