@@ -12,18 +12,18 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-08-18T16:41:42.467Z'
+updatedOn: '2026-09-18T14:04:09.773Z'
 ---
 
 ## Getting started
 
-Start with a quick setup prompt, or follow a guided tutorial to build the full Neon stack step by step.
+Start with a one-command setup, or follow a guided tutorial to build the full Neon stack step by step.
 
 <TwinPaths>
   <QuickPath
     title="One-command setup"
     command="npx neon@latest init"
-    description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step. Copy the prompt below and get started."
+    description="Sets up Neon for your AI coding agent, links a project, and writes your DATABASE_URL to .env. Copy the command below to get started."
   />
   <GuidedPath
     title="Build a full backend"
