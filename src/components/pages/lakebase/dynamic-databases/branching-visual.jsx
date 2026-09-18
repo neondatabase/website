@@ -11,7 +11,7 @@ const BranchingVisual = () => (
     </figcaption>
     <RiveAnimation
       className="pointer-events-none size-full select-none"
-      wrapperClassName="absolute inset-0 size-full"
+      wrapperClassName="pointer-events-none absolute inset-0 size-full"
       src="/animations/pages/lakebase/branching.riv?20260903"
       autoBind={false}
     />

@@ -43,7 +43,7 @@ const BuildAnimation = () => {
       ) : (
         <RiveAnimation
           className="pointer-events-none size-full"
-          wrapperClassName="size-full"
+          wrapperClassName="pointer-events-none size-full"
           src={RIVE_SOURCE}
           artboard="main"
           stateMachines="SM"
