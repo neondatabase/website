@@ -6,7 +6,7 @@ summary: >-
   or the Neon API: a Hono handler for the upload event, the bucket and prefix
   filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-17T12:24:58.811Z'
+updatedOn: '2026-09-21T05:29:37.104Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -176,6 +176,8 @@ neon logs query --source function
 ```
 
 Your `object created: ...` line appears with the `bucket_name` and `object_key` from the request body. See [Observability](#observability) for why that line matters.
+
+To iterate on the handler without uploading objects, replay the payload against `neon dev` locally. See [Test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally).
 
 <Admonition type="note">
 A newly created trigger takes a few seconds to become active. If your first test upload doesn't fire the function, wait a moment and upload again.

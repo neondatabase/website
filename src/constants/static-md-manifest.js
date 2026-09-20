@@ -64,6 +64,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/micronaut-kotlin-prompt.md',
   '/prompts/neon-api-prompt.md',
   '/prompts/neon-backend.md',
+  '/prompts/neon-function-triggers-cron-and-object-storage-prompt.md',
   '/prompts/neon-functions-github-actions-prompt.md',
   '/prompts/nestjs-prompt.md',
   '/prompts/nextjs-prompt.md',
