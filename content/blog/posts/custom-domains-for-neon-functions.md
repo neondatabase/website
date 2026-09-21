@@ -15,8 +15,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/custom-domains-for-neon-functions/cover.jpg
+  alt: 'Custom domains for Neon Functions'
 isFeatured: false
 seo:
   title: Custom domains for Neon Functions - Neon
@@ -25,7 +25,7 @@ seo:
   noindex: false
   ogTitle: Custom domains for Neon Functions - Neon
   ogDescription: Use branded URLs for MCP servers, APIs, and webhooks
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/custom-domains-for-neon-functions/social.jpg
 ---
 
 <Admonition type="note" title="Just shipped">
