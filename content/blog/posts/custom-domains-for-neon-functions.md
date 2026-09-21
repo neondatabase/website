@@ -74,9 +74,8 @@ export default defineConfig({
 
 ## What you can build with it
 
-A stable, branded hostname is what turns a Function from an internal endpoint into something you can ship to clients and other machines. For example:
+A stable, branded hostname is what turns a Function from an internal endpoint into something you can ship to clients and other machines. For example, **MCP servers**.
 
-**MCP servers**  
 Building MCP server was the main use case we had in mind when shipping custom domains. We’ll post more about this soon, [but the Neon backend is perfect to build MCPs](https://github.com/neondatabase/examples/tree/main/with-mcp):
 
 - Host it on a Function and it sits next to Lakebase Postgres, with `DATABASE_URL` injected, so tool calls query your data in the same region
