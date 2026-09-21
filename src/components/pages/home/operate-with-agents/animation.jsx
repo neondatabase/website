@@ -27,14 +27,13 @@ const MOBILE_VISUAL_GAP = 32;
 const MOBILE_VIEWPORT_QUERY = '(max-width: 47.9375rem)';
 const PRE_SEND_PAUSE_DURATION = 100;
 const MESSAGE_REVEAL_DURATION = 250;
-const PAUSE_DURATION = 1000;
-const RESULT_PAUSE_DURATION = 600;
+const RESULT_PAUSE_DURATION = 500;
 const TYPING_EASE = cubicBezier(0.2, 0.07, 0.3, 1);
 
 const PROMPT_STEPS = [
-  { prompt: CHAT_PROMPTS[0], typeDuration: 0, riveState: 1, riveDuration: 5000 },
-  { prompt: CHAT_PROMPTS[1], typeDuration: 900, riveState: 2, riveDuration: 2500 },
-  { prompt: CHAT_PROMPTS[2], typeDuration: 1000, riveState: 3, riveDuration: 3000 },
+  { prompt: CHAT_PROMPTS[0], typeDuration: 0, riveState: 1, riveDelay: 250, riveDuration: 4000 },
+  { prompt: CHAT_PROMPTS[1], typeDuration: 900, riveState: 2, riveDelay: 200, riveDuration: 2500 },
+  { prompt: CHAT_PROMPTS[2], typeDuration: 1000, riveState: 3, riveDelay: 200, riveDuration: 1750 },
 ];
 
 const buildAnimationSequence = () => {
@@ -46,7 +45,7 @@ const buildAnimationSequence = () => {
   let elapsed = 0;
   let currentRiveState = 0;
 
-  PROMPT_STEPS.forEach(({ prompt, typeDuration, riveState, riveDuration }, index) => {
+  PROMPT_STEPS.forEach(({ prompt, typeDuration, riveState, riveDelay, riveDuration }, index) => {
     if (typeDuration > 0) {
       const typingStartsAt = elapsed;
       const typingEndsAt = typingStartsAt + typeDuration;
@@ -58,7 +57,7 @@ const buildAnimationSequence = () => {
       timeline.push({ at: elapsed, riveState: currentRiveState, visibleMessages: index * 2 + 1 });
     }
 
-    elapsed += MESSAGE_REVEAL_DURATION + PAUSE_DURATION;
+    elapsed += riveDelay;
     currentRiveState = riveState;
     timeline.push({ at: elapsed, riveState, visibleMessages: index * 2 + 1 });
 
@@ -120,7 +119,7 @@ const Animation = () => {
     rive,
     RiveComponent,
   } = useRiveAnimation({
-    src: '/animations/pages/home/branching-new.riv?20260821',
+    src: '/animations/pages/home/branching-new.riv?20260921',
     artboard: 'main',
     stateMachines: 'SM',
     autoBind: true,
