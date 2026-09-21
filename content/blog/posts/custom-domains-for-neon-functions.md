@@ -28,6 +28,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/custom-domains-for-neon-functions/social.jpg
 ---
 
+![Custom domains for Neon Functions](https://cdn.neonapi.io/public/images/pages/blog/custom-domains-for-neon-functions/cover.jpg)
+
 <Admonition type="note" title="Just shipped">
 [Neon Functions](https://neon.com/docs/compute/functions/overview) just reached GA. They run Node.js code on the same branch and in the same region as your Lakebase Postgres database, with `DATABASE_URL` and your Object Storage and AI Gateway credentials injected for you. [Get the full picture.](https://neon.com/blog/neon-functions-backend-logic-next-to-your-data)
 </Admonition>
