@@ -347,26 +347,24 @@ Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access
 
 The `neon link` command created a `neon.ts` file in your project root. Replace its contents with the following:
 
-```ts filename="neon.ts" {4-13}
+```ts filename="neon.ts" {4-11}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      }
-    },
-    aiGateway: true
-  }
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
+    }
+  },
+  aiGateway: true
 });
 ```
 
 Here's what each property does:
 
-- **`preview.functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
+- **`functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
 - **`externalPackages: ['sharp']`**: Ships Sharp's files with the deploy instead of bundling them into the function bundle. See the note below for why this matters.
 - **`aiGateway: true`**: Enables the Neon AI Gateway on the branch. This is what injects the `NEON_AI_GATEWAY_*` credentials your `/caption` route uses.
 
@@ -565,24 +563,22 @@ The `/store` route is similar to `/resize`, but instead of returning the process
 
 ### Declare the bucket
 
-Add the bucket to the `preview` block in `neon.ts`, next to the function and the AI Gateway:
+Add the bucket to `neon.ts`, next to the function and the AI Gateway:
 
-```ts filename="neon.ts" {13-15}
+```ts filename="neon.ts" {12-14}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      },
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
     },
-    aiGateway: true,
-    buckets: {
-      'processed-images': {},
-    },
+  },
+  aiGateway: true,
+  buckets: {
+    'processed-images': {},
   },
 });
 ```

@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-09-21T04:43:47.114Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -130,10 +130,8 @@ The `neon link` command generated a `neon.ts` file in your project root. Replace
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    buckets: {
-      uploads: {}
-    },
+  buckets: {
+    uploads: {}
   },
   branch: (branch) => {
     if (branch.isDefault) { return {}; }
@@ -141,7 +139,6 @@ export default defineConfig({
     return {};
   },
 });
-
 ```
 
 Apply the configuration by running:

@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -185,7 +185,7 @@ The above code does the following:
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to add the Discord bot function and configure the environment variables:
 
-```ts {10-23}
+```ts {10-21}
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -195,22 +195,19 @@ export default defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      bot: {
-        name: "Discord Bot",
-        source: "./index.ts",
-        env: {
-          DISCORD_APP_ID: process.env.DISCORD_APP_ID!,
-          DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
-          DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
-        },
+  functions: {
+    bot: {
+      name: "Discord Bot",
+      source: "./index.ts",
+      env: {
+        DISCORD_APP_ID: process.env.DISCORD_APP_ID!,
+        DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY!,
+        DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN!,
       },
     },
-    aiGateway: true,
   },
+  aiGateway: true,
 });
-
 ```
 
 Apply the configuration to activate the AI Gateway for your project:

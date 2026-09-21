@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-09-21T04:43:47.114Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -484,7 +484,7 @@ With three Sentry calls and one piece of middleware, every request now produces 
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to register the function and pass the Sentry variables as [deploy-time environment variables](/docs/compute/functions/environment-variables):
 
-```ts filename="neon.ts" {12-24}
+```ts filename="neon.ts" {10-20}
 import { defineConfig } from "@neon/config/v1";
 
 export const config = defineConfig({
@@ -493,19 +493,17 @@ export const config = defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-        },
-      }
-    },
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        SENTRY_DSN: process.env.SENTRY_DSN!,
+        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+      },
+    }
   },
 });
 
@@ -514,7 +512,7 @@ export default config;
 
 Here's what each property does:
 
-- **`preview.functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
+- **`functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
 - **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
 - **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
@@ -706,22 +704,20 @@ In the trace, the request root span now carries a `gen_ai` hierarchy (agent → 
 Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway: true`:
 
 ```ts filename="neon.ts"
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
-        },
-      }
-    },
-    aiGateway: true // [!code ++]
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        SENTRY_DSN: process.env.SENTRY_DSN!,
+        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+        AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
+      },
+    }
   },
+  aiGateway: true // [!code ++]
 ```
 
 ```bash

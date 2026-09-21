@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-09-17T04:00:06.054Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -335,29 +335,27 @@ To confirm the state of your current branch at any time you can run `neon config
 
 </Steps>
 
-## Preview services
+## Additional services
 
-Neon is expanding into a broader serverless platform. If you are part of the platform private preview, you can use `neon.ts` to provision additional primitives, such as running Node.js **Functions**, S3-compatible **Storage**, and an **AI Gateway**.
+Neon is expanding into a broader serverless platform. You can use `neon.ts` to provision additional primitives, such as running Node.js **Functions**, S3-compatible **Storage**, and an **AI Gateway**.
 
-You can declare these under a `preview` block in your `neon.ts` (deprecated on `@neon/config` 1.6.0 and later, where they're top-level keys; the block still works):
+You can declare these as top-level keys in your `neon.ts` file. For example, to enable the AI Gateway, provision two storage buckets (one public, one private), and deploy a serverless function, you would add the following:
 
 ```typescript
-preview: {
-  aiGateway: true,
-  buckets: {
-    dev_assets: {},                          // private (default)
-    blog_posts: { access: "public_read" },   // public
+aiGateway: true,
+buckets: {
+  dev_assets: {},                          // private (default)
+  blog_posts: { access: "public_read" },   // public
+},
+functions: {
+  api: {
+    name: "My API",
+    source: "./functions/api.ts",
   },
-  functions: {
-    api: {
-      name: "My API",
-      source: "./functions/api.ts",
-    },
-  },
-}
+},
 ```
 
-Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
+Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.storage` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
 
 _Neon Functions and Storage are currently available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions)._
 
