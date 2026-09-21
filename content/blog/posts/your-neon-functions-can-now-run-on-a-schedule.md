@@ -19,7 +19,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/function-triggers-schedules/cover.jpg
   alt: 'Your Neon Functions can now run on a schedule'
-isFeatured: false
+isFeatured: true
 seo:
   title: Your Neon Functions can now run on a schedule - Neon
   description: >-
