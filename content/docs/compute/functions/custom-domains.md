@@ -5,6 +5,8 @@ summary: >-
   Register a custom domain for a Neon Function, configure its DNS CNAME record,
   verify TLS and routing, troubleshoot domain status, and remove it safely.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/custom-domains
 ---
 
 Each Neon Function has a native invocation URL. You can also serve it from a
