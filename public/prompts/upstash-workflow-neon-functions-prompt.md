@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the workflow step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` or `aws-eu-central-1` region since Neon Functions are only available in these regions during beta. Wrap every discrete task in `context.run` and use `context.sleep` for delays so QStash can checkpoint and retry at the step level. Return each step's result so later steps can reuse it; never rely on variables assigned inside a step, and don't call `Date.now()` or `Math.random()` outside steps. Create tables as a separate migration or `neon psql` step; `neon deploy` provisions services, not schema. Remember the double deploy: after the first `neon deploy`, `NEON_FUNCTION_WORKFLOW_BASE_URL` lands in `.env.local`, and you must deploy a second time so the running function receives it.
+7. Implement the workflow step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, or `aws-ap-southeast-1` region. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Wrap every discrete task in `context.run` and use `context.sleep` for delays so QStash can checkpoint and retry at the step level. Return each step's result so later steps can reuse it; never rely on variables assigned inside a step, and don't call `Date.now()` or `Math.random()` outside steps. Create tables as a separate migration or `neon psql` step; `neon deploy` provisions services, not schema. Build the workflow callback URL from `env.functions.workflow.baseUrl` (for example, `` `${env.functions.workflow.baseUrl}/api/workflow` `` with `parseEnv(config, "workflow")`).
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
@@ -38,7 +38,6 @@ Before writing code:
     - run the workflow locally with the QStash dev server (`npx @upstash/qstash-cli dev`) and the Neon Functions dev server (`neon dev`),
     - trigger a run against the trigger route
     - verify the rows transition in Postgres with `neon psql`,
-    - deploy with `neon deploy` (twice, so the function receives `NEON_FUNCTION_WORKFLOW_BASE_URL`),
     - and make a step fail on purpose to watch the retry and the run land in the Dead Letter Queue.
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.

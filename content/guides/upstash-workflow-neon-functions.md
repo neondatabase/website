@@ -4,7 +4,7 @@ subtitle: 'Learn how to build reliable, long-running multi-step pipelines by com
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-09T00:00:00.000Z'
-updatedOn: '2026-09-09T12:42:37.395Z'
+updatedOn: '2026-09-21T17:34:26.747Z'
 ---
 
 If you're building a backend that runs long jobs, you need a way to execute each step reliably and keep track of state between them. Maybe it's a sequence of onboarding emails spread over a few days, an AI pipeline where each model call depends on the previous one's output, or a weekly report that takes minutes to generate. If the request times out or the server restarts halfway through, the job can stop, and restarting it often means repeating steps that already succeeded.
@@ -109,20 +109,31 @@ The `neon init` command sets up your project. It installs the Neon plugin into y
 
 Follow the prompts to configure your project:
 
-1. **Coding agents**: Choose **Plugin (recommended)**, then select the agents you use (for example, Claude Code, Codex, or Cursor). The plugin lets these agents assist you in building and working with Neon.
-2. **Project**: `neon init` runs `neon link` automatically and asks which project to link. **Create a new project** named `neon-upstash-workflow` (or pick an existing one).
-3. **Region**: Choose **AWS US East 2 (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions during beta. Support is expanding toward all regions.
-4. **Setup as code**: Confirm that you want to manage your setup as code, then select **Functions** and **AI Gateway** as the services `neon.ts` should declare.
+1. **Coding agents**: Choose **Neon plugin (recommended)**, then select the agents you use (for example, Claude Code, Codex, or Cursor). The plugin lets these agents assist you in building and working with Neon.
+2. **Project**: Confirm that you want to link this project now. `neon init` runs `neon link` automatically and asks which project to link. **Create a new project** named `neon-upstash-workflow` (or pick an existing one).
+3. **Region**: Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions).
+4. **Setup as code**: Confirm that you want to create `neon.ts` to manage your setup as code, then select **Functions** and **AI Gateway** as the services `neon.ts` should declare.
 
 The full initialization looks like this:
 
 ```text
 $ neon init
-✔ How should coding agents get Neon in this project? › Plugin (recommended)
+✔ How would you like to set up your coding agents? › Neon plugin (recommended)
 ✔ Which coding agents should get the Neon plugin? (space to toggle, enter to confirm) › Claude Code, Codex, Cursor
 
+Scope   project
+Agents  Claude Code, Codex, Cursor
+Plugin  neon-postgres
+
+✔ Install the Neon plugin into these agents? … yes
+
+Plugins
+Scope    Plugin         Agent        Status
+project  neon-postgres  claude-code  installed
+project  neon-postgres  codex        installed
+project  neon-postgres  cursor       installed
 INFO: Installed the Neon plugin (project).
-INFO: Running `neon link`
+✔ Link this project to a Neon project now? … yes
 INFO: Linking organization MyOrg (org-example-12345678).
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-upstash-workflow
@@ -133,21 +144,29 @@ Linked ~/neon-upstash-workflow/.neon:
   projectId: cool-darkness-12345678
   branch:    main
 
-INFO: Pulled 3 Neon variables into ~/neon-upstash-workflow/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
-✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
+INFO: Pulled 3 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+✔ Create neon.ts to manage this project's Neon setup as code? … yes
+INFO: Setting up neon.ts…
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
 INFO: Created neon.ts declaring functions, ai-gateway.
 INFO: Created hello.ts — the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
-INFO: Pulled 5 Neon variables into ~/neon-upstash-workflow/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
+INFO: Refreshing Neon env vars…
+INFO: Pulled 6 Neon variables into ~/neon-upstash-workflow/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL, NEON_FUNCTION_HELLO_BASE_URL
 
-Configured this directory for Neon.
------------------------------------
+Neon setup complete.
+--------------------
 
   Agents   plugin
   Project  linked
-  Config   neon.ts
+  Config   neon.ts created
+```
+
+Add the Neon Functions and AI Gateway skills to your coding agents so they can help you build the workflow:
+
+```bash
+neon skills -s neon -s neon-functions -s neon-ai-gateway
 ```
 
 The `neon init` command also creates a placeholder function, `hello.ts`, at your project root, and a `.env.local` file with your project's variables, including `DATABASE_URL`. You'll build the workflow in your own `index.ts` file, so delete the placeholder:
@@ -340,7 +359,7 @@ app.post("/api/signup", async (c) => {
   const { subscriberId, email, name } = await c.req.json();
 
   const { workflowRunId } = await workflowClient.trigger({
-    url: `${env.function.NEON_FUNCTION_WORKFLOW_BASE_URL}/api/workflow`,
+    url: `${env.functions.workflow.baseUrl}/api/workflow`,
     body: { subscriberId, email, name },
     retries: 3,
   });
@@ -358,9 +377,7 @@ The Hono app exposes two routes:
 - **`/api/workflow`**: The workflow endpoint that QStash calls once per step. It delegates to the `workflowApp` defined in [`src/workflow.ts`](#define-the-workflow-endpoint).
 - **`/api/signup`**: The trigger route that starts a new workflow run.
 
-The trigger route reads `env.function.NEON_FUNCTION_WORKFLOW_BASE_URL` from the typed `env` object in [`src/env.ts`](#set-up-environment-variables-and-the-connection-pool) and appends `/api/workflow` to build the callback URL it hands to QStash. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment the same way, and the Upstash SDK reads them automatically.
-
-`NEON_FUNCTION_WORKFLOW_BASE_URL` is populated in `.env.local` with the function's own base URL after your first deploy, so you'll deploy twice, in [Configure `neon.ts` and deploy](#configure-neonts-and-deploy).
+The trigger route reads `env.functions.workflow.baseUrl` from the typed `env` object in [`src/env.ts`](#set-up-environment-variables-and-the-connection-pool) and appends `/api/workflow` to build the callback URL it hands to QStash. Neon derives this URL from the branch, so no extra configuration is needed, and `neon dev` points it at `http://localhost:8787` automatically. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment the same way, and the Upstash SDK reads them automatically.
 
 ## Configure Upstash credentials
 
@@ -376,7 +393,7 @@ QSTASH_NEXT_SIGNING_KEY="sig_..."
 
 ## Configure `neon.ts` and deploy
 
-The `neon init` command created a `neon.ts` file in your project root. Update it to register the workflow function and pass the function's environment variables at deploy time. The workflow function is declared under `preview.functions.workflow`, and the `env` object passes the Upstash credentials and `NEON_FUNCTION_WORKFLOW_BASE_URL` to the function:
+The `neon init` command created a `neon.ts` file in your project root. Update it to register the workflow function and pass the Upstash credentials at deploy time. The workflow function is declared under `functions.workflow`, and the `env` object passes the Upstash credentials to the function:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -387,22 +404,19 @@ export const config = defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      workflow: {
-        name: "Upstash Workflow Endpoint",
-        source: "./index.ts",
-        env: {
-          NEON_FUNCTION_WORKFLOW_BASE_URL: process.env.NEON_FUNCTION_WORKFLOW_BASE_URL || "http://localhost:8787",
-          QSTASH_URL: process.env.QSTASH_URL!,
-          QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
-          QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY!,
-          QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY!,
-        },
-      }
-    },
-    aiGateway: true
+  functions: {
+    workflow: {
+      name: "Upstash Workflow Endpoint",
+      source: "./index.ts",
+      env: {
+        QSTASH_URL: process.env.QSTASH_URL!,
+        QSTASH_TOKEN: process.env.QSTASH_TOKEN!,
+        QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY!,
+        QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY!,
+      },
+    }
   },
+  aiGateway: true
 });
 
 export default config;
@@ -431,19 +445,6 @@ neon functions get workflow
 slug           workflow
 name           workflow
 invocation_url https://br-damp-voice-xxx-workflow.compute.c-3.us-east-2.aws.neon.tech
-```
-
-With the function deployed, `NEON_FUNCTION_WORKFLOW_BASE_URL` is populated in `.env.local` with the function's invocation URL:
-
-```bash filename=".env.local"
-# ..other environment variables..
-NEON_FUNCTION_WORKFLOW_BASE_URL="https://br-damp-voice-xxx-workflow.compute.c-3.us-east-2.aws.neon.tech"
-```
-
-Deploy a second time so the deployed function receives `NEON_FUNCTION_WORKFLOW_BASE_URL`.
-
-```bash
-neon deploy --env .env.local
 ```
 
 Your workflow endpoint is now live at:
