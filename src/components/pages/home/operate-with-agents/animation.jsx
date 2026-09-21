@@ -119,7 +119,7 @@ const Animation = () => {
     rive,
     RiveComponent,
   } = useRiveAnimation({
-    src: '/animations/pages/home/branching-new.riv?20260921',
+    src: '/animations/pages/home/branching-new.riv?20260921-2',
     artboard: 'main',
     stateMachines: 'SM',
     autoBind: true,
