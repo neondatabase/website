@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-17T13:03:07.641Z'
+updatedOn: '2026-09-21T08:27:00.804Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -83,9 +83,10 @@ Declare services as top-level keys in `defineConfig`; declare only the ones you 
 | `aiGateway` | `true`, `false`, `{ enabled: bool }`         | `false` | [Neon AI Gateway](/docs/ai-gateway/overview). Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`                                                                                                                                      |
 | `functions` | Record of slug → [function def](#functions)  | (none)  | [Neon Functions](/docs/compute/functions/overview). Long-running Node.js compute. The branch's service variables (`DATABASE_URL` and more) are injected at runtime; see [Environment variables](/docs/compute/functions/environment-variables) |
 | `buckets`   | Record of name → [bucket def](#buckets)      | (none)  | [Neon Object Storage](/docs/storage/overview). S3-compatible object storage, branched with your database. Injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                                            |
+| `triggers`  | Record of name → [trigger def](#triggers)    | (none)  | [Function Triggers](/docs/compute/functions/triggers/overview). Invoke a function on a schedule or when an object is created in a bucket. Reconciled by `neon deploy`                                                                          |
 
 <Admonition type="note" title="preview is deprecated">
-`@neon/config` 1.6.0 and later accept `aiGateway`, `functions`, and `buckets` as the top-level keys shown here. Declaring them under a `preview` block still works but logs a deprecation warning on `neon deploy`, so keep `preview` only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
+`@neon/config` 1.6.0 and later accept `aiGateway`, `functions`, `buckets`, and `triggers` as the top-level keys shown here. Declaring them under a `preview` block still works but logs a deprecation warning on `neon deploy`, so keep `preview` only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
 </Admonition>
 
 ### dataApi (#dataapi)
@@ -124,14 +125,18 @@ functions: {
     dev?: {
       port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
     },
-    triggers?: Array<{    // cron schedule triggers; see below
-      type: "schedule",
-      name: string,
-      cron: string,
-      functionPath?: string,  // default "/"
-      enabled?: boolean,      // default true
-    }>,
     customDomains?: string[],  // hostnames to serve this function; default branch only
+  },
+},
+triggers: {             // separate top-level key; see below
+  "<name>": {
+    type: "schedule" | "storage_object_created",
+    function: string,   // slug of the function to invoke
+    cron?: string,      // schedule only: five-field UTC expression
+    bucket?: string,    // storage only: bucket to watch
+    prefix?: string,    // storage only: object-key prefix filter
+    functionPath?: string,  // default "/"
+    enabled?: boolean,      // default true
   },
 },
 ```
@@ -145,7 +150,6 @@ preview: {
       env?: Record<string, string>,
       bundler?: "esbuild" | "none" | ((fn) => Promise<FunctionBundle>),
       dev?: { port?: number },
-      triggers?: Array<{ type: "schedule", name: string, cron: string, functionPath?: string, enabled?: boolean }>,
       customDomains?: string[],  // hostnames to serve this function; default branch only
     },
   },
@@ -170,19 +174,55 @@ Use `neon deploy --env .env.production` to load a `.env` file before evaluation.
 
 `dev` settings apply only to `neon dev` and never affect deploy.
 
-`triggers` declares cron schedule triggers on the function, reconciled by `neon deploy` as the declarative counterpart to [`neon triggers`](/docs/cli/triggers). `cron` is a five-field UTC expression. See [Schedule a function](/docs/compute/functions/triggers/schedule).
+Triggers are declared in a separate top-level `triggers` record. Each key is the trigger's name, unique across the branch, and each entry's `function` field references a function slug declared under `functions`. `neon deploy` reconciles triggers as the declarative counterpart to [`neon triggers`](/docs/cli/triggers), applying them after the functions they target. `cron` is a five-field UTC expression. See [Schedule a function](/docs/compute/functions/triggers/schedule) and [Trigger on an object upload](/docs/compute/functions/triggers/object-storage).
 
 ```ts filename="neon.ts"
 functions: {
   reports: {
     name: "Reports",
     source: "./functions/reports.ts",
-    triggers: [{ type: "schedule", name: "nightly", cron: "0 6 * * *" }],
+  },
+},
+triggers: {
+  nightly: {
+    type: "schedule",
+    function: "reports",
+    cron: "0 6 * * *",
   },
 },
 ```
 
 `customDomains` lists hostnames you own that serve the function, such as `["api.example.com"]`. `neon deploy` registers them, and each hostname can point at only one function on one branch. Static `customDomains` apply on the default branch only. For DNS setup, per-branch domains, status checks, and TLS verification, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
+
+### triggers (#triggers)
+
+Each key is the trigger's name, unique across the branch. Each entry's `function` field references a function slug declared under `functions`.
+
+```ts
+triggers: {
+  "<name>": {
+    type: "schedule" | "storage_object_created",
+    function: string,       // slug of the function to invoke
+    cron?: string,          // schedule only: five-field UTC expression
+    bucket?: string,        // storage only: bucket name declared under buckets
+    prefix?: string,        // storage only: object-key prefix filter
+    functionPath?: string,  // request path sent to the function; default "/"
+    enabled?: boolean,      // default true
+  },
+},
+```
+
+| Field          | Required                 | Description                                                                                     |
+| -------------- | ------------------------ | ----------------------------------------------------------------------------------------------- |
+| `type`         | Yes                      | `"schedule"` or `"storage_object_created"`                                                      |
+| `function`     | Yes                      | Slug of the function to invoke. The API and CLI call this `function_slug`                       |
+| `cron`         | `schedule`               | Five-field UTC cron expression                                                                  |
+| `bucket`       | `storage_object_created` | Bucket to watch. The API and CLI call this `storage_object_created.bucket_name`                 |
+| `prefix`       | No                       | Only objects whose key starts with this prefix fire the trigger (`storage_object_created` only) |
+| `functionPath` | No                       | Request path sent to the function. Default `/`                                                  |
+| `enabled`      | No                       | Default `true`                                                                                  |
+
+Triggers that exist remotely but are omitted from `neon.ts` are left alone. Inherited triggers on a child branch start disabled; deploying a `neon.ts` that declares the same trigger enables the inherited copy. See [Function Triggers overview](/docs/compute/functions/triggers/overview) for branching behavior, delivery payloads, and the Console, CLI, and API alternatives.
 
 ### buckets (#buckets)
 

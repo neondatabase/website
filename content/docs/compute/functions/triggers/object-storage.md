@@ -2,16 +2,16 @@
 title: Trigger on an object upload
 subtitle: Run a function when an object is created in a bucket.
 summary: >-
-  Create and manage storage_object_created Function Triggers from the Neon Console
-  or the Neon API: a Hono handler for the upload event, the bucket and prefix
-  filter, what your function receives, and how to confirm a run in the logs.
+  Create and manage storage_object_created Function Triggers from the Neon Console,
+  the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
+  and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-21T05:29:37.104Z'
+updatedOn: '2026-09-21T08:27:00.804Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
 
-For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). The scheduled trigger type is covered in [Schedule a function](/docs/compute/functions/triggers/schedule); this page covers the object-created type. You can manage object-created triggers from the Neon Console or the Neon API.
+For what a trigger is and how it behaves across branches, see the [overview](/docs/compute/functions/triggers/overview). The scheduled trigger type is covered in [Schedule a function](/docs/compute/functions/triggers/schedule); this page covers the object-created type. You can manage object-created triggers from the Neon Console, the [`neon triggers`](/docs/cli/triggers) CLI, the Neon API, or declaratively in [`neon.ts`](/docs/reference/neon-ts#triggers); the steps below show each.
 
 Because the function is long-running, it can do real work on each upload, whatever the file size.
 
@@ -38,7 +38,7 @@ Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
 
 - Add one unauthenticated POST route (trigger invocations arrive without credentials). Read `data.bucket_name` and `data.object_key` from the JSON body; keep the handler idempotent.
 - If the task uses Postgres, connect with the injected DATABASE_URL.
-- Deploy it, then create a `storage_object_created` trigger via the Neon API with the bucket name, optionally scoped to a key prefix. Upload an object to confirm a run in the logs.
+- Deploy it, then create a `storage_object_created` trigger via the Console, CLI, API, or `neon.ts` with the bucket name, optionally scoped to a key prefix. Upload an object to confirm a run in the logs.
 - The route and trigger both default to `/`; set `function_path` on both if you want a different path.
 ```
 
@@ -103,7 +103,7 @@ neon functions deploy onupload --src functions/onupload.ts
 
 With the function deployed, create the trigger. It fires when an object is created in the bucket, optionally scoped to a key prefix.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API", "neon.ts"]}>
 
 <TabItem>
 
@@ -116,6 +116,18 @@ In the [Neon Console](https://console.neon.tech), open **Functions**, click the 
 - **Enable trigger**: on by default.
 
 Click **Create trigger** to save.
+
+</TabItem>
+
+<TabItem>
+
+[`neon triggers create`](/docs/cli/triggers#create) needs `--function-slug`, `--name`, and `--bucket`; `--prefix`, `--function-path`, and `--enabled` are optional. Object-created triggers require Neon CLI 4.21.0 or later.
+
+```bash
+neon triggers create --function-slug onupload --name record-uploads --bucket my-bucket --prefix 'uploads/'
+```
+
+The CLI resolves the project and branch from your [context file](/docs/cli/set-context), or pass `--project-id` and `--branch`. See [`neon triggers`](/docs/cli/triggers) for the full command reference.
 
 </TabItem>
 
@@ -162,6 +174,29 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 ```
 
 Unlike a scheduled trigger, an object-created trigger has no `schedule` or `next_run_at`: it fires on the event, not the clock.
+
+</TabItem>
+
+<TabItem>
+
+Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts#triggers), with `function` pointing at your function's slug, then apply it with `neon deploy`. `bucket` selects the bucket and `prefix` optionally scopes it to keys under that path.
+
+```ts filename="neon.ts"
+functions: {
+  onupload: {
+    name: "On upload",
+    source: "./functions/onupload.ts",
+  },
+},
+triggers: {
+  "record-uploads": {
+    type: "storage_object_created",
+    function: "onupload",
+    bucket: "my-bucket",
+    prefix: "uploads/",
+  },
+},
+```
 
 </TabItem>
 
@@ -221,11 +256,30 @@ The top-level `type`, `function_slug`, `name`, `function_path`, and `enabled` fi
 
 ## Manage triggers
 
-<Tabs labels={["Console", "API"]}>
+List, update, disable, and delete triggers from the Console, CLI, or API. Triggers declared in [`neon.ts`](/docs/reference/neon-ts#triggers) are managed by editing the declaration and re-running `neon deploy`.
+
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
 Manage object-created triggers from the same **Functions → ⋮ → Manage Triggers** panel: edit a trigger's fields, toggle **Enable trigger** on or off, or delete it.
+
+</TabItem>
+
+<TabItem>
+
+The [`neon triggers`](/docs/cli/triggers) command group manages triggers by ID. The commands are the same for both trigger types; for this type update the bucket or prefix with `--bucket` and `--prefix`:
+
+```bash
+neon triggers list
+neon triggers get <trigger-id>
+neon triggers update <trigger-id> --bucket my-bucket --prefix 'incoming/'
+neon triggers disable <trigger-id>
+neon triggers enable <trigger-id>
+neon triggers delete <trigger-id>
+```
+
+See [`neon triggers`](/docs/cli/triggers) for every subcommand and flag.
 
 </TabItem>
 
@@ -275,6 +329,7 @@ The request body is strict: any field not in the schema is rejected rather than 
 
 - [Function Triggers overview](/docs/compute/functions/triggers/overview)
 - [Schedule a function](/docs/compute/functions/triggers/schedule): the time-based trigger type
+- [Triggers in `neon.ts`](/docs/reference/neon-ts#triggers): declare triggers as code
 - [Object Storage](/docs/storage/overview) and [Upload and manage objects](/docs/storage/objects)
 - [Deploy and manage](/docs/compute/functions/deploy)
 - [Logs](/docs/compute/functions/logs)
