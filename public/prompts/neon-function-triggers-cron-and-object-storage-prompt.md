@@ -1,7 +1,10 @@
 I want to build an automated background-work pipeline using Neon Function Triggers, with both a cron schedule trigger and an Object Storage trigger invoking the same Neon Function.
 
-Use this guide as a reference:
-https://neon.com/guides/neon-function-triggers-cron-and-object-storage
+Use the guide and following docs as a reference:
+- https://neon.com/guides/neon-function-triggers-cron-and-object-storage
+- https://neon.com/docs/compute/functions/triggers/overview
+- https://neon.com/docs/compute/functions/triggers/schedule
+- https://neon.com/docs/compute/functions/triggers/object-storage
 
 Before writing any code:
 
@@ -17,12 +20,12 @@ Before writing any code:
 4. Ask only the questions you need to understand my requirements. For example:
    - What should run on a schedule, and at what cadence (in UTC)?
    - What bucket and key prefix should the object trigger watch?
-   - What should the handlers do on failure: record, retry, notify?
+   - What should the handlers do on failure: retry, log and continue, or alert?
    - Do I want both triggers on one function with separate routes, or separate functions?
 
 5. Wait for my confirmation before making significant changes.
 
-6. Implement it step by step following the guide's patterns. Use the Neon CLI (`neon init`, `neon link`) and select **Functions** and **Object Storage** as the services `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-object-storage -y`. Declare both triggers in the top-level `triggers` record in `neon.ts`, with `function` set to the function's slug and `functionPath` pointing at its route. Keep trigger handlers idempotent: upsert on natural keys and use `ON CONFLICT DO NOTHING`, because trigger invocations can be redelivered. Guard every trigger route by checking for the `X-Neon-Trigger-Invocation-Id` header, and read `data.scheduled_at`, `data.bucket_name`, and `data.object_key` from the JSON body. Create tables with Drizzle ORM: define the schema in `db/schema.ts`, configure `drizzle.config.ts`, and apply it with `npx drizzle-kit generate` and `npx drizzle-kit migrate`; `neon deploy` provisions services, not schema.
+6. Implement it step by step following the guide's patterns. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-object-storage -y`.
 
 7. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
@@ -33,10 +36,10 @@ Before writing any code:
 8. Keep the implementation as simple as possible. Don't introduce additional frameworks, services, or abstractions unless they are necessary.
 
 9. After implementation, show me how to:
-    - upload a test object with `neon buckets object put` and confirm the ingest run in the logs with `neon logs query --source function`,
+    - upload a test object with and confirm the ingest run in the logs.
     - verify the database rows with `neon psql`,
-    - test the schedule trigger temporarily at `* * * * *`, then move it back to the real cron and redeploy,
-    - and list and manage the triggers with `neon triggers list` and `neon triggers update`.
+    - test the schedule trigger.
+    - and list and manage the triggers.
 
 10. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes. Remember that a newly created trigger takes a few seconds to become active, and that a run already queued for the upcoming minute still fires after you change a schedule.
 
