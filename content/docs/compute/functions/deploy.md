@@ -6,10 +6,8 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:10:44.328Z'
+updatedOn: '2026-09-18T18:35:42.057Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Deploy with `neon.ts`
 
@@ -30,6 +28,8 @@ neon deploy
 | `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
 
 `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
+
+You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 
 Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
 
@@ -145,7 +145,10 @@ const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
 const zipBytes = await readFile('function.zip');
 
-const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+const { data: deployment } = await neon.functions.deploy({
+  projectId,
+  branchId,
+  slug: 'hello',
   zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
   runtime: 'nodejs24',
   environment: JSON.stringify({ MY_SECRET: 'value' }),

@@ -28,7 +28,7 @@ seo:
 ---
 
 <Admonition type="note" title="We're building backends">
-Neon started by building a serverless Postgres database that branches, but a database alone isn't enough for how apps get built today. When a coding agent ships an app, it needs Postgres, then files, then something to run long-lived logic next to that data, then a way to call models. That's the [Neon backend](https://neon.com/blog/neon-backend-is-beta): [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) at the center, with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview) around it.
+Neon started by building a serverless Postgres database that branches, but a database alone isn't enough for how apps get built today. When a coding agent ships an app, it needs Postgres, then files, then something to run long-lived logic next to that data, then a way to call models. That's the [Neon backend](https://neon.com/blog/neon-backend-is-ga): [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) at the center, with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview) around it.
 </Admonition>
 
 Once we decided to evolve Neon into a [complete set of cloud backend primitives](https://neon.com/docs/get-started/backend-overview), it was clear Functions should be one of the first tools we launch.  Most serverless handlers talk to the database over the public internet - and that's fine, but there are hiccups we were itching to fix. Every query pays a cross-network round trip, you wire secrets yourself, and runtimes often cap at a few seconds, so an agent mid-tool-loop or a WebSocket never gets a fair shot.
@@ -53,7 +53,7 @@ We recommend you keep the UI on Vercel, Netlify, or wherever you already host fr
 
 This is one thing we were sure about when designing Functions: they had to be long-running. Lambda-style caps are fine for CRUD, but [longer runtimes are needed in the age of agents](https://neon.com/docs/compute/functions/agents), since one agent request can stream for minutes while the agent calls models and tools.
 
-This is also relevant for [WebSockets and SSE](https://neon.com/docs/compute/functions/websockets). You can use functions to export an upgrade handler for WebSockets, or return text/event-stream for SSE, and fan out across isolates with Postgres LISTEN/NOTIFY instead of standing up Redis.
+This is also relevant for [WebSockets and SSE](https://neon.com/docs/compute/functions/websockets). You can use functions to accept a WebSocket with `upgradeWebSocket`, or return text/event-stream for SSE, and fan out across isolates with Postgres LISTEN/NOTIFY instead of standing up Redis.
 
 <Admonition type="note" title="Another important note">
 A function isn't a background job runner: it's always requested and always returns a web response (JSON, a stream, SSE, or a WebSocket upgrade). For queued work with its own lifecycle, [pair a function with something like Inngest today.](https://neon.com/guides/durable-workflow-on-neon-functions)
@@ -75,7 +75,7 @@ When you create a branch in Neon, functions follow that same branch_id:
 - Once you’re done, you delete the branch, and the function gets deleted with it.
 
 <Admonition type="note" title="Branch your entire backend">
-We started by making Postgres branchable, and now we’re expanding our branch semantics to the entire backend stack. Apart from functions, you can also deploy [Object Storage, Auth, and AI Gateway](https://neon.com/blog/neon-backend-is-beta) into your Neon projects, and every time you branch, your entire backend will duplicate instantly.
+We started by making Postgres branchable, and now we’re expanding our branch semantics to the entire backend stack. Apart from functions, you can also deploy [Object Storage, Auth, and AI Gateway](https://neon.com/blog/neon-backend-is-ga) into your Neon projects, and every time you branch, your entire backend will duplicate instantly.
 </Admonition>
 
 ## Declaring Functions
@@ -146,4 +146,4 @@ Browse them all at [Build on Neon](http://build-on-neon.vercel.app).
 
 ## Deploy one and poke it
 
-Functions are free during beta on any pricing plan. Start from the [Functions quickstart](https://neon.com/docs/compute/functions/get-started), and if something breaks, [tell us on Discord](https://discord.gg/92vNTzKDGp).
+Functions are free during beta on any pricing plan. Start from the [Functions quickstart](https://neon.com/docs/compute/functions/get-started), and if something breaks, [tell us on Discord](https://neon.com/discord).

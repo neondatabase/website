@@ -1,4 +1,4 @@
-text: 'Just shipped: @neon/tools turns the Neon SDK into typed agent tools'
+text: 'The Neon backend is GA: a complete set of primitives so agents can build'
 link:
-  url: 'https://neon.com/blog/give-your-agent-neon-tools'
+  url: 'https://neon.com/blog/neon-backend-is-ga'
   target: '_blank'

@@ -12,9 +12,9 @@
 // Generating public/md/ locally (so localhost matches production for /md/... fetches)
 // ---------------------------------------------------------------------------
 // Middleware serves markdown by fetching URLs like /md/changelog/2026-04-03.md, which
-// map to files under public/md/. Those files are produced from content/ by the LLM
-// markdown pipeline — they are not all committed, and `npm run dev` does not regenerate
-// them automatically (only prebuild icons + pricing run before dev).
+// map to files under public/md/. Those files are produced by the LLM Markdown pipeline
+// and are not all committed. `npm run dev` regenerates the dynamic AI Gateway and
+// backend-platform page mirrors; use `--generate` to refresh the complete docs mirror too.
 //
 // If tests such as "Changelog entry /docs/changelog/YYYY-MM-DD" fail on localhost with
 // agent-404 or 404 for the .md URL, regenerate public/md/ first — or pass --generate
@@ -43,8 +43,8 @@
 // Full production-like asset generation: npm run build  (postbuild runs copy-md-content,
 // generate-llms-index, generate-llms-full, then sitemaps)
 //
-// Optional: --generate runs copy-md-content + generate-llms-index + generate-llms-full
-// before HTTP checks (same order as postbuild, minus sitemaps).
+// Optional: --generate runs the full Markdown generation chain before HTTP checks
+// (same order as postbuild, minus sitemaps).
 //
 // Coverage notes (intentional limits of this QA tool)
 // ---------------------------------------------------------------------------
@@ -119,6 +119,8 @@ const REPO_ROOT = path.join(__dirname, '..');
 function runAssetGenerators() {
   const scripts = [
     'src/scripts/copy-md-content.js',
+    'src/scripts/generate-ai-gateway-model-markdown.js',
+    'src/scripts/generate-backend-platform-page-markdown.js',
     'src/scripts/generate-llms-index.js',
     'src/scripts/generate-llms-full.js',
   ];
@@ -232,6 +234,8 @@ function buildTests() {
     { path: '/branching/introduction', spotWord: null },
     { path: '/programs/agents', spotWord: null },
     { path: '/use-cases/ai-agents', spotWord: null },
+    { path: '/functions', spotWord: 'Long-running functions' },
+    { path: '/ai-gateway', spotWord: 'Call the latest models' },
     // API reference — static MDX pages (no generator required)
     { path: '/docs/reference/api', spotWord: 'Neon API' },
     { path: '/docs/reference/api/get-started', spotWord: 'API key' },
@@ -259,6 +263,7 @@ function buildTests() {
         (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
         (r) => expectHeader(r.headers, 'cache-control', 'public'),
         (r) => expectHeader(r.headers, 'vary', 'Accept'),
+        (r) => expectHeader(r.headers, 'vary', 'User-Agent'),
       ],
       { spotCheck: spotWord ? (r) => expectBodyContains(r.body, spotWord, true) : null }
     );
@@ -925,6 +930,23 @@ function buildTests() {
     { note: 'pitfall: agent UA on bare slug gets HTML/404; agents must request /blog/[slug].md' }
   );
 
+  // A post published after the blog moved into this repo. The pinned slug above
+  // is an older post that proves the mechanism; this proves recent posts are
+  // served too (catches a source that only leaves new posts 404ing). Update the
+  // slug if this post is removed.
+  add(
+    'Blog post .md (recent)',
+    '/blog/inside-lubots-database-per-tenant-architecture.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+      (r) => expectMarkdownBody(r.body),
+    ],
+    { note: 'recent post (published after the blog moved in-repo)' }
+  );
+
   // ── 9b. Non-docs marketing page (stays HTML for agents / Accept: markdown)
   // Tests that middleware does not serve markdown for pages outside CONTENT_ROUTES.
 
@@ -1160,15 +1182,15 @@ function buildTests() {
 
   // ── 11. redirectFrom for .md URLs ─────────────────────────────────────
   // A moved doc's .md URL must 308 to the target .md, matching the HTML redirect
-  // (see src/proxy.js). /docs/cli/login is a redirectFrom of content/docs/cli/auth.md.
+  // (see src/proxy.js). /docs/cli/auth is a redirectFrom of content/docs/cli/login.md.
 
   add(
     'redirectFrom .md',
-    '/docs/cli/login.md',
+    '/docs/cli/auth.md',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth.md'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login.md'),
     ],
     { note: 'redirectFrom source .md → 308 to target .md' }
   );
@@ -1177,11 +1199,11 @@ function buildTests() {
   // variant did not displace the original redirect).
   add(
     'redirectFrom HTML',
-    '/docs/cli/login',
+    '/docs/cli/auth',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth'),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/login'),
     ],
     { note: 'redirectFrom source → 308 to target' }
   );

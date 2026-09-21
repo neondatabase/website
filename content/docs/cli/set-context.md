@@ -11,15 +11,15 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-09-08T11:08:55.450Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
 
 The `set-context` command sets a background context for your CLI sessions, so you don't have to specify the project ID in every command. The context is saved to a default `.neon` file in the current directory, or to a [named context file](#using-a-named-context-file) of your choice, and stays in place until you reset it or remove the file.
 
-<Admonition type="important" title="Deprecated">
-`set-context` is deprecated in favor of [`neon link`](/docs/cli/link), which writes the same `.neon` context file. It still works but prints a deprecation warning when you run it, and may be removed in a future release. Use `neon link` to set project context; it verifies your inputs and infers your organization. For the same write-without-checks behavior `set-context` had (for example, in scripts), use `neon link --no-checks`. To switch branches, use [`neon checkout`](/docs/cli/checkout).
+<Admonition type="note" title="Deprecated">
+`set-context` is deprecated in favor of [`neon link`](/docs/cli/link), which writes the same `.neon` context file. It still works but prints a deprecation warning when you run it, and may be removed in a future release. Use `neon link` to set project context; it verifies your inputs and infers your organization. For a write-without-checks behavior like `set-context` (for example, in scripts), use `neon link --no-checks` with `--org-id`, `--project-id`, and `--branch`. To switch branches, use [`neon checkout`](/docs/cli/checkout).
 </Admonition>
 
 <Admonition type="tip" title="How the CLI finds your `.neon` file">

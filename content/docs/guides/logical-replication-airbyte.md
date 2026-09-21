@@ -9,7 +9,7 @@ summary: >-
   sets wal_level to logical for all databases in the project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -42,7 +42,7 @@ To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
 2. On the Neon **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
@@ -161,7 +161,7 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
 ## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
    <Admonition type="important">
    Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).

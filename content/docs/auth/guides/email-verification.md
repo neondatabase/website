@@ -9,10 +9,8 @@ summary: >-
   resent; verification can be configured as required or optional in the Neon
   Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Email verification ensures users own the email addresses they register with. The application name shown in these emails is configurable per branch. See [Application name](/docs/auth/production-checklist#application-name).
 

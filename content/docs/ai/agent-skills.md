@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -125,7 +125,7 @@ Pi reads the `skills/` directory directly, so there's no separate sync step. Thi
 
 ### neon init
 
-The `neon init` command sets up the current directory to use Neon with your AI coding assistant. Run it in a terminal: it installs agent tooling (either a plugin, or skills and the MCP server), links a Neon project, and writes a `neon.ts` config. In an empty directory, it scaffolds a starter template first.
+The `neon init` command sets up the current directory to use Neon with your AI coding assistant. Run it in a terminal: it installs agent tooling (either a plugin, or skills and the MCP server), links a Neon project, and optionally writes a `neon.ts` config. In an empty directory, it lets you pick a starter template, name one with `--template`, or skip scaffolding with `--skip-template`.
 
 ```bash
 npx neon@latest init
@@ -167,7 +167,7 @@ Branch and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in beta. See [Check your access](/docs/get-started/backend-beta#check-your-access) before using these skills in production workflows.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are available in AWS US East (Ohio) and AWS Europe (Frankfurt), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -209,13 +209,13 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 
-**Platform services (beta)**
+**Platform services**
 
 - **Neon Functions**: declare, deploy, and connect long-running compute next to your database
 - **Object Storage**: S3-compatible storage that branches with your data
 - **AI Gateway**: model routing, logging, and cost controls with a single Neon credential
 
-For example, ask your assistant to "set up Managed Better Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow beta constraints and the right SDK patterns.
+For example, ask your assistant to "set up Managed Better Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow the correct constraints and SDK patterns.
 
 ## Example prompts
 

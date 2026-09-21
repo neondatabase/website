@@ -10,7 +10,7 @@ summary: >-
   DATABASE_URL setup, the deployctl deploy command, and optional GitHub
   integration for automated deployments.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -31,7 +31,7 @@ To follow the instructions in this guide, you will need:
 
 ## Retrieve your Neon database connection string
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
 Your connection string should look something like this:
 

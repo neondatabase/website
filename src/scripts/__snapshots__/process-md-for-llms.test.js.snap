@@ -45,7 +45,7 @@ Schema tools accept schema-qualified table names, such as \`crm.contacts\`. An u
 
 The \`querying\` category includes \`inspect_database\`, which runs the same 15 read-only checks as [\`neon inspect db\`](https://neon.com/docs/cli/inspect): relation and index sizes, unused indexes, sequential scans, active queries and locks, stalled queries running longer than 30 seconds, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. Some checks need [\`pg_stat_statements\`](https://neon.com/docs/extensions/pg_stat_statements) or the [\`neon\`](https://neon.com/docs/extensions/neon) extension; the tool asks before suggesting \`CREATE EXTENSION\`.
 
-**Note:** The \`observability\` tools query [Neon Functions logs](https://neon.com/docs/compute/functions/logs) and [object storage logs](https://neon.com/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS US East (Ohio) (\`aws-us-east-2\`) and AWS Europe (Frankfurt) (\`aws-eu-central-1\`). Support is expanding toward all regions. Log querying returns results only for projects in a supported region. Database diagnostics via \`inspect_database\` are under \`querying\`, not \`observability\`.
+**Note:** The \`observability\` tools query [Neon Functions logs](https://neon.com/docs/compute/functions/logs) and [object storage logs](https://neon.com/docs/storage/logs), which are part of the Neon backend, currently available in AWS US East (Ohio) (\`aws-us-east-2\`), AWS US East (N. Virginia) (\`aws-us-east-1\`), AWS Europe (Frankfurt) (\`aws-eu-central-1\`), and AWS Asia Pacific (Singapore) (\`aws-ap-southeast-1\`). Support is expanding toward [all regions](https://neon.com/docs/introduction/regions). Log querying returns results only for projects in a supported region. Database diagnostics via \`inspect_database\` are under \`querying\`, not \`observability\`.
 
 ### LinkAPIKey
 
@@ -73,13 +73,13 @@ This feature is in private preview: it's not ready for production use, and it ma
 
 **Note: Public Preview**
 
-This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 ### LRBeta
 
 **Note: Beta**
 
-Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://discord.gg/92vNTzKDGp).
+Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://neon.com/discord).
 
 ### MigrationAssistant
 
@@ -368,13 +368,13 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 **Note: Beta**
 
-This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
 
-The **Autoscaling** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+The **Autoscaling** is in Beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 ### EarlyAccessProps (with prop)
 

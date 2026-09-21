@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-18T16:54:04.950Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -24,9 +24,11 @@ redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
 
-<FeatureBetaProps feature_name="Managed Better Auth" />
-
 Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+
+- **Identity lives in your database.** All authentication data is stored in the `neon_auth` schema, queryable with SQL and compatible with Row Level Security (RLS) policies.
+- **Zero server management.** It runs as a managed REST API service. Configure it in the Console and use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app.
+- **Auth that branches with your data.** Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Quick start guides
 
@@ -45,17 +47,6 @@ Choose your framework to get started:
 ## Set up with your AI editor
 
 <AuthAISetup />
-
-## Why Managed Better Auth?
-
-- **Identity lives in your database**  
-  All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
-
-- **Zero server management**  
-  Managed Better Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
-
-- **Auth that branches with your data**  
-  Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Built on Better Auth
 

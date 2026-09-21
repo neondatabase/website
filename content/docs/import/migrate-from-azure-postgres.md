@@ -14,7 +14,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -139,7 +139,7 @@ You need to allow inbound traffic from Neon servers so they can connect to your 
 
 This section describes how to prepare your destination database (the subscriber) to receive replicated data.
 
-You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection details for your database by clicking the **Connect** button in the Console nav. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 ### Create the Neon database
 

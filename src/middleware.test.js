@@ -33,11 +33,13 @@ process.env.NEXT_PUBLIC_DEFAULT_SITE_URL = 'https://neon.com';
 
 // Now import middleware after all mocks are set up
 let middleware;
+let middlewareConfig;
 
 describe('Middleware - AI Agent Integration Tests', () => {
   beforeAll(async () => {
     const middlewareModule = await import('./proxy.js');
     middleware = middlewareModule.proxy;
+    middlewareConfig = middlewareModule.config;
   });
   beforeEach(() => {
     vi.clearAllMocks();
@@ -54,6 +56,12 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['user-agent', userAgent],
       ['accept', accept],
     ]),
+  });
+
+  it('matches every generated marketing page for content negotiation', () => {
+    expect(middlewareConfig.matcher).toEqual(
+      expect.arrayContaining(['/functions', '/ai-gateway', '/lakebase'])
+    );
   });
 
   // Helper to mock a successful markdown fetch.
@@ -93,6 +101,11 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Use Cases bursty workloads', path: '/use-cases/bursty-workloads' },
       { name: 'Use Cases large databases', path: '/use-cases/large-databases' },
       { name: 'Pricing', path: '/pricing' },
+      { name: 'Functions', path: '/functions' },
+      { name: 'AI Gateway', path: '/ai-gateway' },
+      { name: 'Object Storage', path: '/object-storage' },
+      { name: 'Auth', path: '/auth' },
+      { name: 'Lakebase', path: '/lakebase' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
 
@@ -134,6 +147,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
         expect(global.fetch).not.toHaveBeenCalled();
         expect(response.type).toBe('next');
+        expect(response.headers.get('Vary')).toBe('Accept, User-Agent');
       });
     });
   });
@@ -173,7 +187,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(response.type).toBe('redirect');
       expect(response.url.toString()).toContain('/docs/introduction');
-      expect(response.headers.get('Vary')).toBe('Accept');
+      expect(response.headers.get('Vary')).toBe('Accept, User-Agent');
       expect(global.fetch).not.toHaveBeenCalled();
     });
   });
@@ -365,6 +379,27 @@ describe('Middleware - AI Agent Integration Tests', () => {
   // Direct .md URL requests (any UA). .md is agent-shaped traffic, so these are
   // served as markdown and tracked as LLM pageviews regardless of User-Agent.
   describe('Direct .md URL handling', () => {
+    it.each([
+      ['/functions.md', 'https://neon.com/md/functions.md'],
+      ['/ai-gateway.md', 'https://neon.com/md/ai-gateway.md'],
+      ['/object-storage.md', 'https://neon.com/md/object-storage.md'],
+      ['/lakebase.md', 'https://neon.com/md/lakebase.md'],
+    ])('should serve the generated marketing page for %s', async (pathname, markdownUrl) => {
+      const req = createMockRequest(pathname, 'Mozilla/5.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: true, text: () => Promise.resolve('# Generated marketing page') },
+      });
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenCalledWith(markdownUrl);
+      expect(response.status).toBe(200);
+      expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
+      expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
+      expect(await response.text()).toContain('# Generated marketing page');
+    });
+
     it('should serve markdown directly for existing .md URLs', async () => {
       const req = createMockRequest(
         '/docs/introduction/existing-doc.md',
@@ -543,6 +578,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it.each([
       ['real static file', '/pricing.md'],
+      ['Claimable Neon auth protocol', '/auth.md'],
       ['real skill SKILL.md', '/docs/ai/skills/neon-postgres/SKILL.md'],
       // Rewrite-backed skill-discovery aliases: no physical file at the request
       // path (next.config rewrites to a real SKILL.md), so the proxy must pass
@@ -599,7 +635,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       const response = await middleware(req);
 
-      expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600, s-maxage=86400');
+      // Short TTL so a cached hit re-enters the proxy and re-fires the LLM read beacon.
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
       expect(response.headers.get('X-Robots-Tag')).toBe('noindex');
     });
 

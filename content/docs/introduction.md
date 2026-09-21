@@ -3,8 +3,8 @@ title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
-  Lakebase Postgres with branching and autoscaling, Managed Better Auth, Data API, and upcoming
-  Object Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  Lakebase Postgres with branching and autoscaling, Managed Better Auth, Data API,
+  Object Storage, Functions, and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 redirectFrom:
@@ -12,18 +12,18 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-08-18T16:41:42.467Z'
+updatedOn: '2026-09-18T17:30:07.432Z'
 ---
 
 ## Getting started
 
-Start with a quick setup prompt, or follow a guided tutorial to build the full Neon stack step by step.
+Start with a one-command setup, or follow a guided tutorial to build the full Neon stack step by step.
 
 <TwinPaths>
   <QuickPath
     title="One-command setup"
     command="npx neon@latest init"
-    description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step. Copy the prompt below and get started."
+    description="Sets up Neon for your AI coding agent, links a project, and writes your DATABASE_URL to .env. Copy the command below to get started."
   />
   <GuidedPath
     title="Build a full backend"
@@ -51,15 +51,15 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Beta" tagTheme="orange-muted">Object Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database, with triggers and custom domains." icon="code">Functions</a>
 
-<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models at provider prices with no markup, built into your Neon project." icon="sparkle">AI Gateway</a>
 
 </DetailIconCards>
 
-New to Object Storage, Functions, or AI Gateway? Start with the [Neon backend beta guide](/docs/get-started/backend-beta).
+New to Object Storage, Functions, or AI Gateway? Start with the [Neon backend overview](/docs/get-started/backend-overview).
 
 ## Connect your framework
 
@@ -155,4 +155,4 @@ Neon integrates with AI coding tools and agents through MCP. Pick your editor fo
 
 </CompactCards>
 
-<CommunityBanner className="mt-14" buttonText="Join the server" buttonUrl="https://discord.gg/92vNTzKDGp">Questions about Neon or Postgres? Join our Discord</CommunityBanner>
+<CommunityBanner className="mt-14" buttonText="Join the server" buttonUrl="https://neon.com/discord">Questions about Neon or Postgres? Join our Discord</CommunityBanner>

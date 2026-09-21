@@ -6,10 +6,8 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-08-18T19:33:13.398Z'
+updatedOn: '2026-09-18T17:46:57.332Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 AI agents make several model and tool calls to answer a single request, then stream the result back. That work can run for minutes, but lambda-style serverless caps execution at roughly 10 to 60 seconds, so a multi-step tool loop or an image-generation run gets cut off mid-stream.
 
@@ -23,13 +21,11 @@ Declare the AI Gateway and the function in `neon.ts`. `neon deploy` provisions t
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-    functions: {
-      agent: {
-        name: 'AI agent',
-        source: './functions/agent.ts',
-      },
+  aiGateway: true,
+  functions: {
+    agent: {
+      name: 'AI agent',
+      source: './functions/agent.ts',
     },
   },
 });
@@ -63,7 +59,7 @@ export default {
     const { messages } = (await request.json()) as { messages: ModelMessage[] };
 
     const result = streamText({
-      model: neon('claude-sonnet-4-6'), // any model in the AI Gateway catalog
+      model: neon('gpt-5-mini'), // any model in the AI Gateway catalog
       system: 'You are a concise assistant. Use tools when relevant.',
       messages,
       tools: {
@@ -92,7 +88,7 @@ export default {
 };
 ```
 
-`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `claude-sonnet-4-6` for a different one without changing anything else.
+`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `gpt-5-mini` for a different one without changing anything else.
 
 Deploy and call it. `toUIMessageStreamResponse()` returns a stream the AI SDK's `useChat` hook consumes directly:
 
@@ -105,6 +101,10 @@ curl -N -X POST "$(neon functions get agent -o json | jq -r .invocation_url)" \
 ## Call the function directly from the client
 
 Call the function directly from the browser, not through your web app's backend. If you proxy the stream through a Vercel, Netlify, or Cloudflare host, it's bound by that host's serverless execution limit (often 10 to 60 seconds), so a long agent run gets cut off even though the function would keep going. A direct call keeps any host out of the stream's path, so the handler authenticates the request itself. See [Authentication](/docs/compute/functions/authentication#call-a-function-directly-from-the-client) for the JWT, CORS, and Vercel AI SDK transport pattern.
+
+## Run on a schedule
+
+An agent doesn't have to wait for a client call. A scheduled [Function Trigger](/docs/compute/functions/triggers/schedule) invokes the function on a cron schedule, so a summarization or cleanup agent runs on its own and fires even when the compute is scaled to zero.
 
 ## Persist what matters
 

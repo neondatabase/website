@@ -33,7 +33,7 @@ While there is no strict limit on the number of API keys you can create, we reco
 
 You create and manage API keys in the [Neon Console](https://console.neon.tech), and where you go depends on the key type:
 
-- **Personal keys:** open the user menu and select **Account settings** > **API keys**.
+- **Personal keys:** open the profile menu in the top-right and go to **Settings** > **API keys**.
 - **Organization and project-scoped keys:** switch to your organization, then go to **Settings** > **API keys**.
 
 Each page lists your existing keys with their name, ID, and creation details, plus a button to create a new key. You'll need to create your first API key from the Console, where you are already authenticated. You can then use that key to generate new keys from the API.

@@ -14,7 +14,7 @@ enableTableOfContents: true
 
 The `diff` command shows a git-style schema diff between two branches, in the same unified diff format `git diff` produces. The branch under review is the `+++` side; the branch you compare against is the `---` side. Omit the `compare-branch` argument to diff against the reviewed branch's parent, which answers "what did I change since branching?". See [Schema diff](/docs/guides/schema-diff) for more on comparing schemas in Neon.
 
-The `+++` branch comes from `--branch`, or the branch pinned in your [`.neon` context file](/docs/cli/set-context), or the project's default branch, in that order. `diff` covers every database on that branch unless you pass `--database`. Use `--output json` or `--output yaml` for a machine-readable diff, one entry per database.
+The `+++` branch comes from `--branch`, or the branch pinned in your [`.neon` context file](/docs/cli/link), or the project's default branch, in that order. `diff` covers every database on that branch unless you pass `--database`. Use `--output json` or `--output yaml` for a machine-readable diff, one entry per database.
 
 `neon diff` is a shortcut for comparing branch schemas. To compare against a historical point in time (by timestamp or LSN), use the [`neon branches schema-diff`](/docs/cli/branches#schema-diff) subcommand.
 

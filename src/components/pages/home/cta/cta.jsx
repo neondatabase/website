@@ -1,15 +1,18 @@
+import Image from 'next/image';
+
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 import CopyCodeButton from './copy-code-button';
+import mobileBackground from './images/mobile-bg.jpg';
 
 const CTA = () => (
   <section className="cta relative bg-[#151617] safe-paddings">
     <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
-        <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
+        <h2 className="text-[5rem] leading-none tracking-tighter 2xl:text-[4.5rem] xl:text-[3.5rem] lg:text-[2.75rem] md:text-[2rem]">
           The world&apos;s most advanced <br /> backend platform.
         </h2>
 
@@ -41,51 +44,37 @@ const CTA = () => (
     </div>
 
     <div className="pointer-events-none relative overflow-hidden">
-      {/*
-        Video optimization parameters:
-          mp4 av1: ffmpeg -i cta-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-av1.mp4
-          mp4: ffmpeg -i cta-origin.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
-          webm: ffmpeg -i cta-origin.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an cta.webm
-      */}
+      {/* Footer: 3840×1888, 30 FPS, 14 seconds, no audio. AV1 CRF 40 / HEVC CRF 30 / VP9 CRF 34. */}
       <PauseableVideo
-        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:left-1/2 lg:w-[1024px] lg:-translate-x-1/2 md:hidden"
         videoClassName="size-full object-cover"
         width={1920}
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4?updated=20260113`}
-          type="video/mp4; codecs=av01.0.05M.08,opus"
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20260918`}
+          type='video/mp4; codecs="av01.0.12M.08"'
         />
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4?updated=20260113`}
-          type="video/mp4"
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20260918`}
+          type='video/mp4; codecs="hvc1"'
         />
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta.webm?updated=20260113`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20260918`}
           type="video/webm"
         />
       </PauseableVideo>
 
-      {/*
-        Mobile video optimization parameters:
-          mp4 av1: ffmpeg -i cta-mob-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=1000:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-mob-av1.mp4
-          mp4: ffmpeg -i cta-mob-origin.mov -c:v libx265 -crf 26 -vf scale=1000:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta-mob.mp4
-          webm: ffmpeg -i cta-mob-origin.mov -c:v libvpx-vp9 -crf 35 -vf scale=1000:-2 -deadline best -an cta-mob.webm
-      */}
-      <PauseableVideo
-        className="hidden h-[500px] w-full md:block"
-        videoClassName="size-full object-cover"
-        width={767}
-        height={767}
-      >
-        <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-mob-av1.mp4`}
-          type="video/mp4; codecs=av01.0.05M.08,opus"
+      <div className="relative hidden h-170 w-full bg-[#484848] md:block">
+        <Image
+          className="absolute top-[52%] left-1/2 h-auto w-80 -translate-x-1/2 -translate-y-1/2"
+          src={mobileBackground}
+          alt=""
+          width={320}
+          height={598}
+          sizes="(max-width: 767px) 100vw, 1px"
         />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.mp4`} type="video/mp4" />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.webm`} type="video/webm" />
-      </PauseableVideo>
+      </div>
     </div>
   </section>
 );

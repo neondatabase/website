@@ -166,7 +166,7 @@ However, the difference in performance in our tests – with `gpt-3.5-turbo` out
 
 [Zephyr-7B-beta](https://huggingface.co/Trelis/zephyr-7b-beta-function-calling-v2), a fine-tuned version of `mistralai/Mistral-7B-v0.1` that was trained on a mix of publicly available and synthetic datasets, looks promising and could further reduce the gap.
 
-What about you? Which models do you use for your RAG pipelines? Join us on [Discord](https://neon.tech/discord) and tell us about your experience with AI models and what you think.
+What about you? Which models do you use for your RAG pipelines? Join us on [Discord](https://neon.com/discord) and tell us about your experience with AI models and what you think.
 
 Note: A special thanks to [Stan Girard](https://twitter.com/_StanGirard) for inspiring the topic of this article. His suggestion and enthusiasm for AI have been invaluable in shaping this discussion.
 

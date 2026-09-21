@@ -27,8 +27,8 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/building-neon-object-storage/social.jpg'
 ---
 
-<Admonition type="note" title="Neon Object Storage is in beta">
-It's available to all users free of charge during beta. [Deploy it](https://neon.com/docs/storage/overview) and [give us feedback](https://discord.gg/92vNTzKDGp) so we can take it to GA.
+<Admonition type="note" title="Neon Object Storage is generally available">
+It was available to all users free of charge during the [beta](https://neon.com/blog/neon-backend-is-beta); see [pricing](https://neon.com/pricing) for current costs. [Deploy it](https://neon.com/docs/storage/overview) and [give us feedback](https://neon.com/discord), or read the [GA announcement](https://neon.com/blog/neon-backend-is-ga).
 </Admonition>
 
 [We just launched Neon Object Storage](https://neon.com/blog/neon-backend-is-beta), a branch-aware, S3-compatible object store built into the Neon backend. If you've used [Neon branches](https://neon.com/docs/introduction/branching) before, you know the workflow: branch main into a child and get an isolated copy of your database in about a second. Object Storage adds files to that picture. When you create a branch, the child also inherits your buckets and objects at that point in time.
@@ -90,7 +90,7 @@ This branching economics has a huge effect for small and large teams alike. It c
 Much more clean, especially in a world where agents manage our workflows.
 
 <Admonition type="note" title="We're expanding the Neon branching experience to the entire backend">
-The ability to branch backends instantly changes the game for agent workflows. Just as we expanded the Neon branching experience to files, [we're doing the same thing with Functions, Auth, and AI Gateway](https://neon.com/blog/neon-backend-is-beta), so your agent can instantly duplicate your entire backend into a lightweight isolated environment.
+The ability to branch backends instantly changes the game for agent workflows. Just as we expanded the Neon branching experience to files, [we're doing the same thing with Functions, Auth, and AI Gateway](https://neon.com/blog/neon-backend-is-ga), so your agent can instantly duplicate your entire backend into a lightweight isolated environment.
 </Admonition>
 
 ## How it comes together
@@ -128,5 +128,5 @@ neon branches create --name preview/feature-x --parent main
 Start by [deploying an entire Neon backend](https://neon.com/docs/introduction) on the [Free plan](https://neon.com/pricing). You get up to 100 projects, with limits generous enough to actually build products.
 
 <Admonition type="note" title="Remember that Object Storage is still beta!">
-Use it with caution, expect rough edges, and [tell us what breaks](https://discord.gg/92vNTzKDGp).
+Use it with caution, expect rough edges, and [tell us what breaks](https://neon.com/discord).
 </Admonition>

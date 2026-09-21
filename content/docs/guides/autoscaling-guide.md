@@ -65,8 +65,8 @@ Changing your autoscaling default settings does not alter the autoscaling config
 To configure autoscaling defaults:
 
 1. Navigate to your Project Dashboard and select **Settings** from the sidebar.
-2. Select **Compute**.
-3. Select **Change** to open the **Change default compute settings** modal.
+2. Select **Postgres**.
+3. Under **Compute defaults**, select **Modify defaults** to open the compute settings modal.
 4. Use the slider to specify a minimum and maximum compute size and **Save** your changes.
 
 The next time you create a compute, these settings will be applied to it.

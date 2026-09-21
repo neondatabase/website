@@ -39,7 +39,7 @@ seo:
 
 ## Introduction
 
-I spend a lot of time interacting with developers on [Neon’s Discord Server](https://neon.tech/discord)—if you’re not already a member, you should join us! One recurring issue that I’ve seen developers ask for assistance with is identifying a reason for suboptimal response times from their application’s API endpoints.
+I spend a lot of time interacting with developers on [Neon’s Discord Server](https://neon.com/discord)—if you’re not already a member, you should join us! One recurring issue that I’ve seen developers ask for assistance with is identifying a reason for suboptimal response times from their application’s API endpoints.
 
 Various factors come into play when accounting for an API endpoint’s overall response time. The graphic below provides a simplified representation of the lifecycle of a request to an API endpoint. It illustrates that the user’s network latency, backend logic, and the network latency between the backend and database (database latency) all factor into the overall response time.
 
@@ -255,4 +255,4 @@ Placing your backend and database near one another is essential to minimize the 
 
 Using Neon’s Regional Latency dashboard can help you identify the best locations to deploy your backend and database and provide a clearer picture of what impact database queries will have on your API endpoint response times.
 
-To accelerate your development process and leverage the power of Neon Serverless Postgres, [sign up and try Neon for free](https://neon.com/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon%20for%20free). Stay updated by following us on [Twitter/X](https://twitter.com/neondatabase), and join our [Discord](https://neon.tech/discord) community to share your experiences and explore how we can support you in building the next generation of applications.
+To accelerate your development process and leverage the power of Neon Serverless Postgres, [sign up and try Neon for free](https://neon.com/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon%20for%20free). Stay updated by following us on [Twitter/X](https://twitter.com/neondatabase), and join our [Discord](https://neon.com/discord) community to share your experiences and explore how we can support you in building the next generation of applications.

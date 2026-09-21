@@ -11,7 +11,7 @@ summary: >-
   like `neon projects list`, `neon branches create`, and
   `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-09-08T10:51:23.316Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---
@@ -122,16 +122,16 @@ For more about authenticating, see [Neon CLI commands: login](/docs/cli/login).
 
 ## Link your project
 
-The easiest way to set up CLI context is with [`neon link`](/docs/cli/link). It guides you through organization and project selection and writes a `.neon` context file in your project directory. Requires **neon 2.22.2** or later.
+The easiest way to set up CLI context is with [`neon link`](/docs/cli/link). It guides you through organization and project selection and writes a `.neon` context file in your project directory.
 
 ```bash
 neon link
 ```
 
-You can also link non-interactively for scripts and CI:
+You can also link non-interactively for scripts and CI. `link` writes a complete context, so pin a branch with `--branch` (or pass `-y` to pin the project's default branch):
 
 ```bash
-neon link --org-id <your-org-id> --project-id <your-project-id>
+neon link --org-id <your-org-id> --project-id <your-project-id> --branch main
 ```
 
 <Admonition type="tip">
@@ -155,12 +155,13 @@ cat .neon
 ```json
 {
   "projectId": "broad-surf-52155946",
-  "orgId": "org-solid-base-83603457"
+  "orgId": "org-solid-base-83603457",
+  "branch": "main"
 }
 ```
 
-<Admonition type="important" title="Deprecated">
-Earlier versions of the CLI used [`neon set-context`](/docs/cli/set-context) to write the `.neon` file directly. That command is deprecated in favor of `neon link` and prints a deprecation warning when you run it. Use `neon link` for new workflows.
+<Admonition type="note" title="Deprecated">
+Earlier versions of the CLI used [`neon set-context`](/docs/cli/set-context) to write the `.neon` file directly. That command is deprecated in favor of `neon link`, prints a deprecation warning when you run it, and may be removed in a future release. Use `neon link` for new workflows.
 </Admonition>
 
 ## Enable shell completion

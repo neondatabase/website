@@ -35,6 +35,10 @@ seo:
 
 ![Neon backend products now in beta](https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-beta/neon-backend-beta.jpg)
 
+<Admonition type="note" title="Update, September 2026">
+The Neon backend is now generally available. Read the [GA announcement](https://neon.com/blog/neon-backend-is-ga) for the latest on Object Storage, Functions, and AI Gateway. The post below is the original beta announcement.
+</Admonition>
+
 **Storage, Functions, and AI Gateway are now in beta and available to all users: object storage that branches with your data, long-running compute that lives next to your database, and one API with one bill for seven model providers backed by Databricks. Let your agent deploy a full Neon backend by declaring it in a single `neon.ts` file and running `neon deploy`.**
 
 [In June, we announced we were building a suite of backend tools around the database](https://neon.com/blog/were-building-backends) — tools that agents also need to deploy full backends autonomously. After scaling and refining them in private preview, we're ready to open them up as beta for everyone to try!

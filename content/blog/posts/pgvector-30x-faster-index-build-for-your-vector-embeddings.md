@@ -133,4 +133,4 @@ pgvector 0.6.0 represents a significant leap forward, proving that Postgres is a
 
 Neon’s flexible and scalable serverless Postgres offering complements pg vector’s capabilities perfectly. Users can scale their database resources according to their specific needs for index building and then scale down to optimize costs, ensuring an economical yet powerful solution.
 
-What AI applications are you currently building? [Try pgvector on Neon today](https://console.neon.tech), join us on [Discord](https://neon.tech/discord), and let us know how we can improve your experience with serverless PostgreSQL.
+What AI applications are you currently building? [Try pgvector on Neon today](https://console.neon.tech), join us on [Discord](https://neon.com/discord), and let us know how we can improve your experience with serverless PostgreSQL.

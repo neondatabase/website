@@ -52,7 +52,7 @@ Each of these returns the new resource's metadata, and `neon connection-string <
 Because every action has an API equivalent, the same calls fit into GitHub Actions, GitLab pipelines, or any script. The [Neon GitHub Actions](https://neon.com/docs/guides/branching-github-actions) for branching are a good starting point: open a PR, get an ephemeral branch with its own connection string injected into your test job, delete it on close.
 
 <Callout title="Tip">
-For local work, run `neon link` once to save org and project context. In CI, set `NEON_API_KEY` in secrets and use `neon set-context --project-id <id>` (or `neon link --org-id ... --project-id ...`) at the start of a job so you can drop the `--project-id` flag from later commands.
+For local work, run `neon link` once to save org and project context. In CI, set `NEON_API_KEY` in secrets and run `neon link --org-id ... --project-id ... --branch ...` at the start of a job so you can drop the `--project-id` flag from later commands. `neon link` writes a complete context, so pin a branch with `--branch` (or pass `-y` to pin the default branch).
 </Callout>
 
 For the full command reference, including options for `--expires-at`, `--schema-only`, and read-replica computes, see the [Neon CLI docs](https://neon.com/docs/cli).

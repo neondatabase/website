@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 ## access token
@@ -130,7 +130,7 @@ Neon creates a primary read-write compute for the project's default branch. Neon
 
 ## compute cache
 
-The compute cache is a layer of caching that stores frequently accessed data from the storage layer in the local memory of the compute. This cache helps to reduce latency and improve query performance by minimizing the need to fetch data from the storage layer repeatedly. Like Postgres [shared buffers](#shared-buffers), it caches your most recently accessed data. In Neon, up to 75% of your compute's RAM is used for data caching.
+The compute cache is a layer of caching on the compute that stores frequently accessed data from the storage layer, reducing latency and improving query performance by avoiding repeated fetches from storage. Exposed as a single cache, it can span two tiers: Postgres [shared buffers](#shared-buffers), which are held in memory, and a larger secondary file cache on the compute's local disk. It provides up to 75% of your compute's RAM in capacity. For details, see [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache).
 
 ## compute endpoint
 
@@ -172,7 +172,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/
 
 The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (for example, `c-2`) in the region slug to support scalability in Neon's high-demand regions.
 
-Connection strings for a Neon databases can be obtained by clicking the **Connect** button on your **Project Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
+Connection strings for a Neon databases can be obtained by clicking the **Connect** button in the Console nav. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## console
 
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview). Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -415,7 +415,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 A pooled connection can support a high number of concurrent users and is recommended for use with serverless and edge functions. For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-You can obtain a pooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
+You can obtain a pooled connection string for your database by clicking the **Connect** button in the Console nav. Select the **Connection pooling** option to add the `-pooler` option to the connection string. For further instructions, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
 
 ## PostgreSQL
 
@@ -521,7 +521,7 @@ Selling the Neon service as part of another service offering.
 
 ## History window
 
-The Neon Console setting (under **Settings → Instant restore**) that controls how long Neon retains change history for your branches. It defines how far back **[instant restore](#instant-restore)** can reach and how far back you can run [Time Travel](#time-travel) queries or branch from past states. It is configurable per project and affects **History** usage (instant restore storage) on your bill. See [History window](/docs/introduction/history-window).
+The Neon Console setting (under **Settings → Postgres**) that controls how long Neon retains change history for your branches. It defines how far back **[instant restore](#instant-restore)** can reach and how far back you can run [Time Travel](#time-travel) queries or branch from past states. It is configurable per project and affects **History** usage (instant restore storage) on your bill. See [History window](/docs/introduction/history-window).
 
 ## root branch
 
@@ -570,7 +570,7 @@ A cloud-based development model that enables developing and running applications
 
 ## shared buffers
 
-A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size), and up to 75% of your compute's RAM is used for data caching. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. In Neon, `shared_buffers` is the in-memory tier of the [compute cache](#compute-cache), and its value [differs by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
 
 ## Snapshot
 
@@ -634,7 +634,7 @@ An unpooled connection string connects to your Neon database directly. It does n
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-You can obtain an unpooled connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+You can obtain an unpooled connection string for your database by clicking the **Connect** button in the Console nav. Ensure that the **Connection pooling** option is **not** selected. A direct connection is subject to the `max_connections` limit for your compute. For more information, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
 
 ## Time Travel
 

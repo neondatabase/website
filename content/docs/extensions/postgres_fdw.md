@@ -12,7 +12,7 @@ summary: >-
   tables, but does not support `ON CONFLICT DO UPDATE`; unpooled connection
   strings are required when the foreign server is also a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This lets you use Neon's features while adhering to data storage policies, simplifying data integration and enabling cross-database querying across different Postgres deployments.
@@ -58,7 +58,7 @@ OPTIONS (host '<remote_host>', port '<remote_port>', dbname '<remote_database>')
 ```
 
 <Admonition type="important">
-When setting up `postgres_fdw` with a Neon database as the foreign server, make sure to use the hostname from an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string). Pooled connection strings will result in connection errors. You can find the unpooled connection string in your project dashboard by clicking the **Connect** button and ensuring the **Connection pooling** toggle is disabled.
+When setting up `postgres_fdw` with a Neon database as the foreign server, make sure to use the hostname from an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string). Pooled connection strings will result in connection errors. You can find the unpooled connection string by clicking **Connect** in the Console nav and ensuring the **Connection pooling** toggle is disabled.
 </Admonition>
 
 Replace the placeholders with the actual details of your remote Postgres server:

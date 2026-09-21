@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.14.2",
+  "neonctlVersion": "5.0.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -267,7 +267,7 @@
         },
         "default": {
           "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link --yes. Skips those pickers; link --yes still asks for a project unless one is already linked",
+          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link with defaults. If several organizations or projects exist, link prints IDs and exits",
           "default": false,
           "alias": "y"
         },
@@ -288,7 +288,7 @@
         },
         "link": {
           "type": "boolean",
-          "describe": "Run `neon link` after scaffolding. Templates with neon.ts link after install so env pull works; otherwise link runs before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "describe": "Link a Neon project after scaffolding. Templates with neon.ts link after install so env pull works; otherwise linking happens before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
           "default": true
         },
         "list-templates": {
@@ -319,7 +319,7 @@
         },
         {
           "command": "$0 bootstrap my-app --default",
-          "description": "Skip the pickers; link --yes still asks for a project unless one is already linked"
+          "description": "Skip the pickers; if several orgs or projects exist, link prints IDs and exits"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
@@ -899,6 +899,11 @@
         }
       ],
       "options": {
+        "create": {
+          "type": "boolean",
+          "describe": "Create the named branch if it does not exist, then check it out",
+          "default": false
+        },
         "env": {
           "type": "string",
           "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
@@ -922,8 +927,12 @@
           "description": "Pin a branch by id for an explicit project"
         },
         {
-          "command": "$0 checkout feat --env .env.local",
+          "command": "$0 checkout feat --create --env .env.local",
           "description": "Create feat from neon.ts, loading Function env from .env.local first"
+        },
+        {
+          "command": "$0 checkout dev --create",
+          "description": "Create and pin a missing branch named dev"
         },
         {
           "command": "$0 checkout main",
@@ -976,11 +985,11 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to walking up from the current directory"
             },
             "env-pull": {
               "type": "boolean",
-              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "describe": "Write the same Neon env vars `env pull` would",
               "default": true
             },
             "file": {
@@ -1232,6 +1241,103 @@
           "description": "Get connection string for the main branch at a specific LSN"
         }
       ]
+    },
+    "credentials": {
+      "aliases": [
+        "credential"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Label for the credential"
+            },
+            "scope": {
+              "type": "string",
+              "describe": "Capability to grant. Repeatable. Values: storage:read, storage:write, ai_gateway:invoke, functions:invoke",
+              "required": true,
+              "choices": [
+                "storage:read",
+                "storage:write",
+                "ai_gateway:invoke",
+                "functions:invoke"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Issue a scoped credential on the branch"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List credentials on the branch"
+        },
+        "reveal": {
+          "name": "reveal",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a credential's api_token and s3_secret_access_key"
+        },
+        "revoke": {
+          "name": "revoke",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Revoke a credential"
+        },
+        "rotate": {
+          "name": "rotate",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Replace a credential's secrets in place. The token id is unchanged."
+        }
+      },
+      "describe": "Manage branch credentials",
+      "usage": "$0 credentials <sub-command> [options]"
     },
     "data-api": {
       "aliases": [],
@@ -1615,6 +1721,10 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+            },
             "env": {
               "type": "array",
               "alias": "e"
@@ -1746,6 +1856,61 @@
           "commands": {},
           "describe": "Deploy a function from a local directory"
         },
+        "domains": {
+          "name": "domains",
+          "aliases": [
+            "domain"
+          ],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Custom domain",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a custom domain from the branch"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List custom domains on the branch"
+            },
+            "register": {
+              "name": "register",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain you already own (for example docs.example.com)",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "slug": {
+                  "type": "string",
+                  "describe": "Function slug this domain should point at",
+                  "required": true
+                }
+              },
+              "commands": {},
+              "describe": "Point a domain you already own at a function on the branch"
+            }
+          },
+          "describe": "Manage custom domains on the branch (beta)"
+        },
         "get": {
           "name": "get",
           "aliases": [],
@@ -1789,6 +1954,15 @@
           "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
           "alias": "a"
         },
+        "branch": {
+          "type": "string",
+          "describe": "Forwarded to link: branch name or ID to pin",
+          "alias": "branch-id"
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Existing app or --skip-template: create neon.ts after linking. Use --no-config to skip. Omitted in a terminal: you will be asked. Scaffolding a template keeps that template's neon.ts"
+        },
         "context-file": {
           "type": "unknown",
           "hidden": true
@@ -1797,30 +1971,64 @@
           "type": "string",
           "hidden": true
         },
+        "link": {
+          "type": "boolean",
+          "describe": "Link a Neon project during setup. Use --no-link to skip without being asked",
+          "default": true
+        },
+        "org-id": {
+          "type": "string",
+          "describe": "Forwarded to link: organization ID to link to"
+        },
         "output": {
           "type": "unknown",
           "describe": "Not supported; the commands init runs print their own output",
           "alias": "o",
           "hidden": true
         },
+        "project-id": {
+          "type": "string",
+          "describe": "Forwarded to link: existing project ID to link to"
+        },
+        "project-name": {
+          "type": "string",
+          "describe": "Forwarded to link: name for a new project"
+        },
+        "region-id": {
+          "type": "string",
+          "describe": "Forwarded to link: region for a new project"
+        },
+        "skip-template": {
+          "type": "boolean",
+          "describe": "Do not scaffold a template. Set up agents, link a project, and optionally neon.ts in this directory",
+          "default": false
+        },
+        "template": {
+          "type": "string",
+          "describe": "Template to scaffold into an empty directory. Conflicts with --skip-template"
+        },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: bootstrap --default. Otherwise plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
+          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link with defaults and create the bare neon.ts policy. If several organizations or projects exist, link prints IDs and exits",
           "default": false,
           "alias": "y"
         }
       },
       "commands": {},
-      "describe": "Set up this directory for Neon: agent tooling, a linked project, and neon.ts. In an empty directory, scaffolds a template first. Skills needs Node.js 22.20 or newer.",
+      "describe": "Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts. In an empty directory, pick a template or skip scaffolding.",
       "usage": "$0 init [options]",
       "examples": [
         {
           "command": "$0 init",
-          "description": "Empty dir: bootstrap (scaffold, agent tooling, link). Existing app: agent tooling, link, config init"
+          "description": "Set up this directory (template picker if empty)"
+        },
+        {
+          "command": "$0 init --skip-template",
+          "description": "Empty dir: agents, link, and neon.ts — no template files"
         },
         {
           "command": "$0 init -y",
-          "description": "Same steps, using each child's defaults"
+          "description": "Default template, or existing-app defaults"
         },
         {
           "command": "$0 init --agent cursor --agent claude-code",
@@ -2064,13 +2272,18 @@
         },
         "checks": {
           "type": "boolean",
-          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
+          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id, --project-id, and --branch, and skips env pull.",
           "default": true
         },
         "clear": {
           "type": "boolean",
           "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
           "default": false
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Offer to create neon.ts after interactive linking. Use --no-config to skip the offer",
+          "default": true
         },
         "env-pull": {
           "type": "boolean",
@@ -2099,7 +2312,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip the \"already linked\" confirmation, and pin the project's default branch when linking a project that has more than one.",
+          "describe": "Skip prompts. Select the only organization and project, or print IDs and the flag to pass. Pin the default branch when several exist. Does not create a project unless --project-name and --region-id are set.",
           "default": false,
           "alias": "y"
         }
@@ -2113,7 +2326,7 @@
           "description": "Forget the current org/project/branch context"
         },
         {
-          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678",
+          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678 --branch main",
           "description": "Write the context offline (no API calls, no verification)"
         },
         {
@@ -2130,7 +2343,11 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY"
+          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY, or -y pins the default"
+        },
+        {
+          "command": "$0 link -y",
+          "description": "Select the only organization and project, or print the --org-id / --project-id to pass"
         }
       ]
     },
@@ -3878,6 +4095,177 @@
       "commands": {},
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
+    },
+    "triggers": {
+      "aliases": [
+        "trigger"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'"
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs (default true)"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to (default '/')"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke",
+              "required": true
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)",
+              "required": true
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match (requires --bucket on create)"
+            }
+          },
+          "commands": {},
+          "describe": "Create a trigger that invokes a function on a cron schedule or when an object is created"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a trigger"
+        },
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Disable a trigger without deleting it"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Enable a trigger"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a trigger"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List triggers on the branch"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression"
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke"
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)"
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match"
+            }
+          },
+          "commands": {},
+          "describe": "Update a trigger"
+        }
+      },
+      "describe": "Manage function triggers",
+      "usage": "$0 triggers <sub-command> [options]"
     },
     "vpc": {
       "aliases": [],

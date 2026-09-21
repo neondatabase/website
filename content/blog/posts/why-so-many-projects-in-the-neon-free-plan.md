@@ -79,4 +79,4 @@ Put simply, the Neon platform is very good at running millions of projects with 
 
 We believe you should never run out of projects on the Free plan. If you want to spin up five ideas in a week, great. If you want to prototype something at midnight on a Saturday, go for it. If you want to use Neon as your dev environment, fantastic. We want to make Neon the place you go to every time you need Postgres, no matter what for.
 
-If you’re patiently hoping for expansions in other limits or in the paid plans, yes, those are coming too. In the meantime, we’d love to hear your suggestions – tell us on [Discord](https://discord.gg/92vNTzKDGp) or X.
+If you’re patiently hoping for expansions in other limits or in the paid plans, yes, those are coming too. In the meantime, we’d love to hear your suggestions – tell us on [Discord](https://neon.com/discord) or X.

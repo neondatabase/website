@@ -10,10 +10,8 @@ summary: >-
   Security policies via the Data API. All auth state lands directly in your
   Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
 

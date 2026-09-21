@@ -35,6 +35,31 @@ CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
 
 `lakebase_vector` relies on a preloaded library that Neon enables by default. If you've customized your project's [preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries), make sure `lakebase_vector` is in the list.
 
+### Upgrade the extension and indexes
+
+A new Lakebase Search release can add features, fixes, and performance improvements. Although Lakebase Search is released as part of Neon updates, it does not upgrade everything automatically. In `lakebase_vector`, two things upgrade separately and carry version numbers that are unrelated to each other:
+
+- **The extension version** is the version of the SQL objects that `CREATE EXTENSION lakebase_vector` creates, including its data types, functions, operators, and the `lakebase_ann` index access method. This version is reported by `SELECT installed_version FROM pg_available_extensions WHERE name = 'lakebase_vector'`. `ALTER EXTENSION lakebase_vector UPDATE` updates this version.
+- **The index storage format** is the on-disk layout of a `lakebase_ann` index. The extension may introduce updated index storage formats in an update, unlocking more features and delivering better performance. All newly created indexes automatically use the latest storage format, while existing indexes can be upgraded to the new format using `REINDEX INDEX CONCURRENTLY` after a newer storage format is available.
+
+Upgrading is not urgent. The extension is compatible with SQL objects and index storage formats from older versions, but staying current keeps you on the supported, best-performing path and avoids a larger migration later, so upgrade when convenient rather than deferring indefinitely.
+
+<Admonition type="note">
+The latest available extension version is reported by `SELECT default_version FROM pg_available_extensions WHERE name = 'lakebase_vector'`.
+</Admonition>
+
+The latest storage format version is `_2`. The following query finds all indexes that use an older storage format. You can then rebuild them to the latest storage format with `REINDEX INDEX` or `REINDEX INDEX CONCURRENTLY`:
+
+```sql title="PostgreSQL"
+SELECT oid::regclass AS index, lakebase_ann_index_info(oid::regclass)::json ->> 'version' AS storage_format_version
+FROM pg_class
+WHERE relam = (SELECT oid FROM pg_am WHERE amname = 'lakebase_ann') AND relkind = 'i';
+```
+
+<Admonition type="note">
+`REINDEX INDEX CONCURRENTLY` allows reads and writes to continue, but it takes longer.
+</Admonition>
+
 ## Quick start
 
 Create a table with a `vector` column and insert some data:
@@ -50,7 +75,8 @@ FROM generate_series(1, 1000);
 Create a `lakebase_ann` index on the embedding column:
 
 ```sql
-CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops);
+CREATE INDEX items_embedding_idx ON items
+  USING lakebase_ann (embedding vector_l2_ops);
 ```
 
 Query using the standard `pgvector` syntax:
@@ -98,7 +124,7 @@ On a small dataset, `lakebase_ann` uses exact (flat) search instead of IVF parti
 
 ```sql
 -- Check your index's lists array first
-SELECT lakebase_ann_index_info('items_embedding_ann');
+SELECT lakebase_ann_index_info('items_embedding_idx');
 
 -- Then set probes to match the shape of lists.
 -- One-level index (single-value lists): set one value.
@@ -156,13 +182,28 @@ SET max_parallel_maintenance_workers = 15;
 
 ### Concurrent index updates
 
-For large, frequently changing datasets, use `CREATE INDEX CONCURRENTLY` to build or rebuild an index without blocking reads and writes:
+`CREATE INDEX CONCURRENTLY` and `REINDEX INDEX CONCURRENTLY` allow reads and writes to continue while an index is built or rebuilt:
 
-```sql
-CREATE INDEX CONCURRENTLY items_embedding_ann ON items
+```sql title="PostgreSQL"
+CREATE INDEX CONCURRENTLY items_embedding_idx_concurrent ON items
   USING lakebase_ann (embedding vector_l2_ops);
 
-REINDEX INDEX CONCURRENTLY items_embedding_ann;
+REINDEX INDEX CONCURRENTLY items_embedding_idx_concurrent;
+```
+
+## Prewarm an index
+
+Use `lakebase_ann_prewarm` after a compute starts to load the frequently accessed parts of an index into memory. The `scope` argument accepts the following values:
+
+- `search` (default): Prewarms the full hot portion used for search.
+- `routing`: Prewarms only the routing structures. This option is faster and provides a better cost-performance tradeoff for large indexes.
+
+```sql title="PostgreSQL"
+-- Prewarm the full search scope
+SELECT lakebase_ann_prewarm('items_embedding_idx');
+
+-- Prewarm only routing structures
+SELECT lakebase_ann_prewarm('items_embedding_idx', scope => 'routing');
 ```
 
 ## Reference
@@ -210,6 +251,13 @@ Pick the operator class that matches how your embeddings were trained, and use t
 - **Inner product** (`vector_ip_ops`, `<#>`) is for vectors pre-normalized to unit length; for unit vectors it matches cosine and is typically faster.
 
 The `halfvec`, `rabitq8`, and `rabitq4` families provide the same three metrics with smaller, quantized storage.
+
+### Functions
+
+| Function                                                    | Returns | Description                                                                                         |
+| :---------------------------------------------------------- | :------ | :-------------------------------------------------------------------------------------------------- |
+| `lakebase_ann_prewarm(regclass, scope text DEFAULT 'search')` | void    | Loads frequently accessed index data into memory. Valid `scope` values are `search` and `routing`.  |
+| `lakebase_ann_index_info(regclass)`                         | text    | Returns index metadata as JSON text, including `version`, `lists`, `default_probes`, and `default_epsilon`. |
 
 ### Index options
 

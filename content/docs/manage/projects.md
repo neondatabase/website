@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-17T20:16:14.131Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -41,8 +41,9 @@ You can create a project from the Console or the Neon CLI. To create one with th
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Project Name**, **Postgres version**, **Cloud service provider**, and **Region**. Project names are limited to 64 characters.
-4. Click **Create Project**.
+3. Enter a **Project name** and choose a **Region** (the cloud provider is part of the region). Project names are limited to 64 characters.
+4. Under **Services**, choose what to enable. **Postgres database** is on by default (expand it to set the **Postgres version**). Where the selected region supports them, you can also enable **Object storage**, **Functions**, **AI gateway**, and **Neon Auth**. Services that aren't available in the selected region aren't shown.
+5. Click **Create project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
 
@@ -67,28 +68,23 @@ The output includes the new project ID and the default connection string. For al
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
+1. From the profile menu in the top-right of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
 ## Project settings
 
-Once you open a project, you can use the **Settings** page to manage your project and configure any defaults.
+Once you open a project, you use the **Settings** page to manage the project and configure its defaults. Settings are grouped into tabs, and project-wide settings are labeled **Applies to all branches** to distinguish them from branch-level settings.
 
-![Project Settings page](/docs/manage/settings_page.png)
+The **Settings** page includes these tabs:
 
-The **Settings** page includes these sub-pages:
-
-- **General**: Change the name of your project or copy the project ID.
-- **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore**: Under **Settings → Instant restore**, set the **history window** to control how far back **instant restore**, Time Travel queries, and branching from past states can reach.
-- **Updates**: Schedule a time for Postgres and Neon updates.
-- **Project permissions**: Grant organization members access to this project, and review who can already reach it. See [User permissions](/docs/manage/user-permissions).
-- **Collaborators**: Invite external collaborators to join your Neon project.
-- **Network security**: Configure Neon's IP and Private Networking features for secure access.
-- **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
-- **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer**: Transfer your project from the current organization to another organization you belong to. Transferring a project out of an organization requires the **Admin** organization role.
-- **Delete**: Use with care. This action deletes your entire project and all its objects. You can recover it within seven days; after that, deletion is permanent.
+- **General**: View the project and branch IDs, rename the project or branch, protect a branch, set branch expiration, change the project's default branch, and transfer or delete the project.
+- **Postgres**: Configure project-wide database defaults (all labeled **Applies to all branches**): compute defaults (size and scale to zero) for new computes, the history window for [instant restore](/docs/introduction/branch-restore) and [Time Travel](/docs/guides/time-travel-assist), your [update schedule](/docs/manage/updates), [logical replication](/docs/guides/logical-replication-guide), and the [Data API](/docs/data-api/overview).
+- **Networking**: Control **Public internet access** (allow any IP address or restrict to an [IP allowlist](/docs/introduction/ip-allow)) and **VPC access** ([Private Networking](/docs/guides/neon-private-networking)).
+- **Credentials**: Manage branch-scoped, per-service credentials, used as S3 access keys for [Object Storage](/docs/storage/overview) and as Bearer API tokens for the [AI Gateway](/docs/ai-gateway/overview).
+- **Auth**: Configure [Neon Auth](/docs/auth/overview): application info and URLs, trusted redirect domains, email sign-up and sign-in, OAuth providers, the email provider, and webhooks.
+- **Functions**: Manage [custom domains](/docs/compute/functions/custom-domains) for your [Neon Functions](/docs/compute/functions/overview).
+- **HIPAA compliance**: Enable [HIPAA compliance](/docs/security/hipaa) for the project.
+- **Sharing** and **Project permissions**: Invite external collaborators and grant organization members per-project access. See [User permissions](/docs/manage/user-permissions).
 
 ### General project settings
 
@@ -96,9 +92,7 @@ On the **General** page, you are permitted to change the name of your project or
 
 ### Change your project's default compute settings
 
-You can change your project's default compute settings on the **Compute** page. These settings determine the compute resources allocated to any new branches or read replicas you create.
-
-![default_compute_settings](/docs/manage/default_compute_settings.png)
+You can change your project's default compute settings on the **Postgres** tab, under **Compute defaults**. These settings determine the compute resources allocated to any new branches or read replicas you create.
 
 <Admonition type="important">
 Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
@@ -132,9 +126,8 @@ To configure the history window:
 
 1. Select a project in the Neon Console.
 2. On your **Project Dashboard**, select **Settings**.
-3. Select **Instant restore**.
+3. Select **Postgres**.
 4. Under **History window**, use the slider to choose how long to keep change history.
-   ![History window configuration](/docs/manage/instant_restore_setting.png)
 5. Click **Save**.
 
 ### Schedule updates for your project
@@ -145,7 +138,7 @@ On the Free plan, updates are automatically scheduled. On paid plans, you can se
 
 To set your project's update schedule or view currently scheduled updates:
 
-1. Go to **Settings** > **Updates**.
+1. Go to **Settings** > **Postgres** and find **Updates**.
 1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 
 For more information, see [Updates](/docs/manage/updates).
@@ -171,7 +164,7 @@ To invite collaborators to a Neon project:
 
 1. In the Neon Console, select a project.
 1. Select **Settings**.
-1. Select **Collaborators**.
+1. Select **Sharing**.
 1. Select **Invite** and enter the email address of the account you want to collaborate with.
 1. Click **Invite**.
 
@@ -201,10 +194,9 @@ To configure an allowlist:
 
 1. Select a project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
-3. Select **Network security**.
-   ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, under **Branch access**, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
+3. Select **Networking**.
+4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
 6. Click **Save changes**.
 
 </TabItem>
@@ -325,8 +317,8 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 1. Select a project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
-3. Select **IP Allow**.
-4. Clear the **Allowed IP addresses and ranges** field.
+3. Select **Networking**.
+4. Under **Public internet access**, clear the allowlisted IP addresses.
 5. If applicable, clear the **Restrict IP Access to protected branches only** checkbox.
 6. Click **Save changes**.
 
@@ -390,7 +382,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 1. Select your project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
-3. Select **Logical replication**.
+3. Select **Postgres**, then find **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 </TabItem>

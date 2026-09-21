@@ -16,7 +16,6 @@ Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plan
 
 You can configure **IP Allow** in your Neon project's settings. To get started, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-![IP Allow configuration](/docs/manage/ip_allow.png)
 
 ## Neon services to allowlist
 

@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Convex with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) improves the self-hosted experience, removing limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a scalable database option.
@@ -47,7 +47,7 @@ To get started with your Postgres database, create a new Neon project in the [Ne
   CREATE DATABASE convex_self_hosted;
   ```
 
-- Once the database is created, you can retrieve the connection string by clicking on "Connect" in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Lakebase Postgres.
+- Once the database is created, you can retrieve the connection string by clicking **Connect** in the Console nav. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Lakebase Postgres.
 
   ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
 

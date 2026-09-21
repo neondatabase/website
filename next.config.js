@@ -2,7 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const { CONTENT_ROUTES } = require('./src/constants/content');
+const { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
@@ -30,6 +30,15 @@ const defaultConfig = {
       './src/fonts/inter/Inter-Regular.ttf',
       './public/images/og-image/logo.png',
       './public/images/og-image/docs-background.jpg',
+    ],
+    // The blog `.md` route handler reads the blog snapshot from disk at request
+    // time (unlike the blog pages, which are statically generated at build).
+    // Its read path is dynamic (process.cwd() + join), so nft can't detect the
+    // dependency — trace the content in explicitly or the route 502s in prod.
+    '/blog/[slug]/md': [
+      './content/blog/posts/**/*.md',
+      './content/blog/authors/data.json',
+      './content/blog/categories/data.json',
     ],
   },
   images: {
@@ -63,6 +72,17 @@ const defaultConfig = {
           { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
         ],
       }));
+    const generatedPageMarkdownHeaders = Object.entries(GENERATED_PAGE_MARKDOWN_PATHS).flatMap(
+      ([route, destination]) =>
+        [`/${route}.md`, destination].map((source) => ({
+          source,
+          headers: [
+            { key: 'Content-Disposition', value: 'inline' },
+            { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+            { key: 'X-Robots-Tag', value: 'noindex' },
+          ],
+        }))
+    );
 
     return [
       {
@@ -187,6 +207,7 @@ const defaultConfig = {
         ],
       },
       ...mdIndexHeaders,
+      ...generatedPageMarkdownHeaders,
     ];
   },
   async redirects() {
@@ -2281,7 +2302,7 @@ const defaultConfig = {
       },
       {
         source: '/discord',
-        destination: 'https://discord.gg/92vNTzKDGp',
+        destination: 'https://discord.gg/N8kvBm7qH5',
         permanent: false,
       },
       {
@@ -2772,6 +2793,14 @@ const defaultConfig = {
         // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
         { source: '/docs.md', destination: '/docs/llms.txt' },
         { source: '/blog.md', destination: '/blog/llms.txt' },
+        ...Object.entries(GENERATED_PAGE_MARKDOWN_PATHS)
+          // /auth.md is the existing Claimable Neon protocol. The Auth product
+          // page exposes its separate Markdown mirror at /md/auth-page.md.
+          .filter(([route]) => route !== 'auth')
+          .map(([route, destination]) => ({
+            source: `/${route}.md`,
+            destination,
+          })),
         // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
         // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
         ...indexRewrites,
@@ -2831,6 +2860,27 @@ const defaultConfig = {
           source: '/demos/regional-latency/:path*',
           destination:
             'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
+        },
+        // Neon tools mounted under /tools/* (each app deployed with a matching
+        // basePath, so source and destination keep the prefix and assets resolve).
+        {
+          source: '/tools/postgres-major-version-assessment',
+          destination:
+            'https://neon-postgres-upgrade-assessment.vercel.app/tools/postgres-major-version-assessment',
+        },
+        {
+          source: '/tools/postgres-major-version-assessment/:path*',
+          destination:
+            'https://neon-postgres-upgrade-assessment.vercel.app/tools/postgres-major-version-assessment/:path*',
+        },
+        {
+          source: '/tools/postgres-migration',
+          destination: 'https://postgres-migration-assistant.vercel.app/tools/postgres-migration',
+        },
+        {
+          source: '/tools/postgres-migration/:path*',
+          destination:
+            'https://postgres-migration-assistant.vercel.app/tools/postgres-migration/:path*',
         },
         {
           source: '/ai-chat',

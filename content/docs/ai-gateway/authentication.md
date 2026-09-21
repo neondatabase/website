@@ -7,10 +7,8 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-08-17T23:18:55.558Z'
+updatedOn: '2026-09-17T04:58:47.512Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
@@ -18,7 +16,18 @@ AI Gateway uses Neon bearer credentials, the same scoped-credential system as [O
 
 A credential must include the `ai_gateway:invoke` scope.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
+<TabItem>
+
+Create a credential with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope ai_gateway:invoke --name my-app-credential
+```
+
+The `api_token` is printed once; set it as `NEON_AI_GATEWAY_TOKEN`. Run it in a directory [linked](/docs/cli/link) to your project, or pass `--project-id` and `--branch`.
+
+</TabItem>
 <TabItem>
 
 In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
@@ -60,7 +69,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta. Revoke credentials explicitly instead of relying on expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced. Revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 
@@ -109,13 +118,12 @@ Append the dialect path for the endpoint you need:
 ```
 NEON_AI_GATEWAY_BASE_URL + /v1            → chat completions (all providers)
 NEON_AI_GATEWAY_BASE_URL + /openai/v1     → OpenAI Responses API
-NEON_AI_GATEWAY_BASE_URL + /anthropic     → Anthropic Messages API
 NEON_AI_GATEWAY_BASE_URL + /gemini        → Gemini generateContent API
 ```
 
-The Anthropic and Gemini values are SDK base URLs: the Anthropic SDK appends `/v1/messages` and google-genai appends `/v1beta/models/...`, so don't add those segments yourself. Calling either endpoint directly takes the full path, `/anthropic/v1/messages` or `/gemini/v1beta/models/<model>:<action>`.
+The Gemini value is an SDK base URL: google-genai appends `/v1beta/models/...`, so don't add that segment yourself. Calling the endpoint directly takes the full path, `/gemini/v1beta/models/<model>:<action>`.
 
-Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/anthropic/v1` for Anthropic Messages, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated, but the shorter paths are what the docs and SDKs use. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full mapping.
+Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated, but the shorter paths are what the docs and SDKs use. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full mapping.
 
 To use an OpenAI SDK, set its `apiKey` and `baseURL` from these variables (see the examples below).
 
@@ -188,13 +196,19 @@ This design lets you use a single credential across your entire development work
 
 ## Rotating credentials
 
-To rotate a credential: create a new one, update your environment variables, then revoke the old one.
+To rotate a credential in place with the [Neon CLI](/docs/cli/credentials), run `neon credentials rotate <token_id>` (find the id with `neon credentials list`). The `token_id` stays the same and a new `api_token` is minted, so update `NEON_AI_GATEWAY_TOKEN` with it. Otherwise, create a new credential, update your environment variables, then revoke the old one.
 
 To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
   -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+Or with the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials revoke <token_id>
 ```
 
 <NeedHelp/>

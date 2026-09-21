@@ -5,10 +5,8 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-08-17T22:56:05.062Z'
+updatedOn: '2026-09-17T09:17:59.291Z'
 ---
-
-<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 ## Authentication errors
 
@@ -75,7 +73,7 @@ The model exists in the catalog, but your account can't call it yet. This is a p
 }
 ```
 
-**Fix:** Check which models your account can call by listing `GET /v1/models` and filtering on `enabled` (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). To get access to more models, [request early access](/docs/ai-gateway/overview#foundation-model-access).
+**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan and still can't call a model, it's a foundation model you haven't been granted yet. See [Model access](/docs/ai-gateway/overview#model-access) to request access.
 
 ---
 
@@ -121,7 +119,7 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap, which is a separate, account-level limit that can block requests even while inference is free during beta. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
+Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap, which is a separate, account-level limit that can block requests. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
 
 ```json
 {

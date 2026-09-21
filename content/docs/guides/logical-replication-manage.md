@@ -11,7 +11,7 @@ summary: >-
   require manual intervention on the subscriber.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-22T19:54:54.241Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -97,7 +97,7 @@ PUBLICATION my_publication;
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication that it subscribes to.
 
-In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string. You can find your Neon connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+In the example above, `my_subscription` is the name of the subscription that connects to a publication named `my_publication`. In the example above, you would replace the connection details with your Neon database connection string. You can find your Neon connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal.
 
 ### Create a subscription with two publications
 

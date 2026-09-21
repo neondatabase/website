@@ -44,7 +44,7 @@ Use [schema-only branches](/docs/guides/branching-schema-only) if you need to te
 
 ## How other providers compare
 
-| Capability                    | Neon                                 | Supabase                                             | AWS RDS for Postgres                       |
+| Capability                    | Neon                                 | Supabase                                             | AWS RDS for Postgres                         |
 | ----------------------------- | ------------------------------------ | ---------------------------------------------------- | -------------------------------------------- |
 | Branch with prod data         | Yes, copy-on-write                   | No, branches start empty and re-seed from `seed.sql` | No native branching                          |
 | Time to provision a test copy | Seconds                              | Minutes (build, migrate, seed)                       | Restore-from-snapshot creates a new instance |

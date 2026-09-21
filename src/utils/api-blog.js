@@ -271,6 +271,23 @@ export const getAllPosts = async (options = {}) => {
   return [...featuredPosts, ...restPosts];
 };
 
+// Raw source of a single post (frontmatter + body), exactly as authored in the
+// blog content repo. This is what the `/blog/[slug].md` endpoint serves, read
+// from the same snapshot the HTML page renders from so the two never drift.
+// Returns null for an unknown slug, or a draft when running as production.
+export const getBlogPostRawBySlug = async (slug, options = {}) => {
+  const snapshot = options.previewBranch
+    ? await getBranchSnapshot(options.previewBranch, { postSlug: slug })
+    : await getResolvedBlogSnapshot(options);
+  const postEntry = snapshot.posts.find((entry) => entry.slug === slug);
+
+  if (!postEntry || (postEntry.data?.draft && isProductionWebsite())) {
+    return null;
+  }
+
+  return postEntry.raw;
+};
+
 export const getBlogPostBySlug = async (slug, options = {}) => {
   const snapshot = options.previewBranch
     ? await getBranchSnapshot(options.previewBranch, { postSlug: slug })
@@ -280,6 +297,8 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
   if (!postEntry || (postEntry.data?.draft && isProductionWebsite())) {
     return { post: null, relatedPosts: [] };
   }
+
+  const socialImage = postEntry.data.seo?.image || postEntry.data.cover?.image;
 
   const post = {
     ...mapPostToListShape(postEntry, snapshot.authorsData, snapshot.categoriesData),
@@ -296,9 +315,7 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
         postEntry.data.seo?.ogDescription ||
         postEntry.data.seo?.description ||
         postEntry.data.description,
-      twitterImage: postEntry.data.cover?.image
-        ? { mediaItemUrl: postEntry.data.cover.image }
-        : null,
+      twitterImage: socialImage ? { mediaItemUrl: socialImage } : null,
     },
   };
 
