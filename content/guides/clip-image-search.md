@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-24T00:00:00.000Z'
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 title: Build image search over CLIP embeddings with Lakebase Search
 subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Lakebase Postgres with Lakebase Search.
 ---
@@ -125,10 +125,8 @@ import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   // existing code
-  preview: {
-    buckets: {
-      'storage-test': {},
-    },
+  buckets: {
+    'storage-test': {},
   },
   // existing code
 });

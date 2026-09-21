@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -36,7 +36,7 @@ Before you start, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Sentry Account**: Sign up for a free account at [sentry.io](https://sentry.io/signup/).
 
 <Steps>
@@ -71,7 +71,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You’ll be prompted to select your organization. Once chosen, either pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project.
+You’ll be prompted to select your organization. Once chosen, either pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). Confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project. Then, when asked which Neon services you require, select **Functions**.
 
 ```text
 $ neon link
@@ -484,7 +484,7 @@ With three Sentry calls and one piece of middleware, every request now produces 
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to register the function and pass the Sentry variables as [deploy-time environment variables](/docs/compute/functions/environment-variables):
 
-```ts filename="neon.ts" {12-24}
+```ts filename="neon.ts" {10-20}
 import { defineConfig } from "@neon/config/v1";
 
 export const config = defineConfig({
@@ -493,19 +493,17 @@ export const config = defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-        },
-      }
-    },
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        SENTRY_DSN: process.env.SENTRY_DSN!,
+        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+      },
+    }
   },
 });
 
@@ -514,7 +512,7 @@ export default config;
 
 Here's what each property does:
 
-- **`preview.functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
+- **`functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
 - **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
 - **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
@@ -706,22 +704,20 @@ In the trace, the request root span now carries a `gen_ai` hierarchy (agent → 
 Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway: true`:
 
 ```ts filename="neon.ts"
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
-        },
-      }
-    },
-    aiGateway: true // [!code ++]
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        SENTRY_DSN: process.env.SENTRY_DSN!,
+        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+        AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
+      },
+    }
   },
+  aiGateway: true // [!code ++]
 ```
 
 ```bash

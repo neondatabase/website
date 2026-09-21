@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-21T05:07:13.900Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -167,7 +167,7 @@ Branch and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are available in AWS US East (Ohio) and AWS Europe (Frankfurt), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
