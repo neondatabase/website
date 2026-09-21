@@ -4,7 +4,7 @@ subtitle: 'Run scheduled jobs and react to object uploads with Neon Function Tri
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-19T00:00:00.000Z'
-updatedOn: '2026-09-21T07:30:08.188Z'
+updatedOn: '2026-09-21T10:42:19.078Z'
 ---
 
 If you're building a backend, you eventually need work that runs outside the request-response cycle. Some of it runs on the clock: nightly reports, cleanup jobs, periodic syncs. Some of it runs on events: a file lands in storage, and something needs to process it before anyone notices it's there.
@@ -19,8 +19,6 @@ A common example of this pattern is a data pipeline that ingests CSV files into 
 The two jobs are asynchronous, but they start differently: the ingest is set off by an event, the report by the clock. Either way, something has to watch for the moment and invoke your code when it happens.
 
 With [Neon Function Triggers](/docs/compute/functions/triggers/overview), you attach your function to a schedule or an event, and Neon invokes it when the moment arrives. This guide shows how to build a CSV ingestion pipeline with two triggers. One fires when an object is created in storage, and one fires on a nightly schedule. The function parses the CSV, inserts the rows into a Postgres table, and generates a daily report.
-
-This pipeline is a deliberately narrow example to keep the trigger mechanics clear. You can use the same pattern for more complex workflows, such as multi-step ETL, fan-out jobs, or chained function calls.
 
 <CopyPrompt
   src="/prompts/neon-function-triggers-cron-and-object-storage-prompt.md"
