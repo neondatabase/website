@@ -10,8 +10,6 @@ redirectFrom:
   - /docs/cli/function
 ---
 
-<FeatureBetaProps feature_name="Neon Functions" />
-
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev).
 
 <CliSubcommands command="functions" />
@@ -152,7 +150,7 @@ INFO: Function hello deleted from branch br-cool-darkness-123456
 
 ## neon functions domains (#domains)
 
-Manage custom domains for functions on the branch. Custom domains are in beta.
+Manage custom domains for functions on the branch.
 
 <CliSubcommands command="functions domains" anchorParts="domains" />
 
@@ -180,7 +178,7 @@ neon functions domains list --output json
     "domain": "docs.example.com",
     "entity_type": "function",
     "entity_id": "hello",
-    "cname_target": "fn-custom-domains.us-east-2.aws.neon.build",
+    "cname_target": "fn-custom-domains.us-east-2.aws.neon.tech",
     "status": "active",
     "dns_status": "ok",
     "binding_status": "present",
@@ -193,7 +191,7 @@ An `active` status confirms that DNS, CAA authorization, and routing are ready. 
 
 ### neon functions domains register (#domains-register)
 
-Points a domain you already own at a function on the branch. Both `--slug` and the domain are required. The command prints a CNAME target; create a CNAME record for the domain at your DNS provider pointing at that target.
+Points a domain you already own at a function on the branch. Both `--slug` and the domain are required. The command prints a CNAME target; create a CNAME record for the domain at your DNS provider pointing at that target. See [Custom domains](/docs/compute/functions/custom-domains) for DNS, CAA, and TLS details.
 
 <CliUsage command="functions domains register" />
 

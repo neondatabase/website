@@ -6,10 +6,8 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-09-09T11:24:52.979Z'
+updatedOn: '2026-09-17T21:40:25.774Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Neon-injected variables
 
@@ -83,14 +81,12 @@ Declare variables under the function's `env` field. Values are resolved when `ne
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    functions: {
-      hello: {
-        name: "My first function",
-        source: "./functions/hello.ts",
-        env: {
-          RESEND_API_KEY: process.env.RESEND_API_KEY!,
-        },
+  functions: {
+    hello: {
+      name: "My first function",
+      source: "./functions/hello.ts",
+      env: {
+        RESEND_API_KEY: process.env.RESEND_API_KEY!,
       },
     },
   },

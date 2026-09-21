@@ -7,10 +7,8 @@ summary: >-
   @neon/functions, server-sent events for one-way streams, and Postgres to
   broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-09-11T20:58:44.264Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend on the same branch as your Postgres database, using Postgres itself for cross-isolate messaging (polling, or `LISTEN/NOTIFY`) instead of a separate broker like Redis.
 

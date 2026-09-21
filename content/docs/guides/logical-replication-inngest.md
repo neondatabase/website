@@ -11,7 +11,7 @@ summary: >-
   credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -34,7 +34,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 
 The Inngest Integration relies on Neon’s Logical Replication feature to get notified upon database changes.
 
-Navigate to your Neon Project using the Neon Console and open the **Settings** > **Logical Replication** page. From here, follow the instructions to enable Logical Replication:
+Navigate to your Neon Project using the Neon Console and open the **Settings** > **Postgres** page. From here, follow the instructions to enable Logical Replication:
 
 ![Neon dashboard settings with option to enable logical replication](/docs/guides/neon-console-settings-logical-replication.png)
 
@@ -50,7 +50,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app). Use a direct connection, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
+You can find your admin Neon database connection credentials by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app). Use a direct connection, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
 
 ## Example: Replicating data to Amplitude
 

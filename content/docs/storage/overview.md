@@ -2,22 +2,23 @@
 title: Neon Object Storage
 subtitle: S3-compatible object storage that branches with your database
 summary: >-
-  Neon Object Storage is S3-compatible object storage built into the Neon backend.
+  Neon Object Storage is S3-compatible object storage built into your Neon project.
   Every branch gets its own isolated storage namespace. Use any AWS S3 SDK
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-10T09:15:52.922Z'
+updatedOn: '2026-09-18T17:46:57.332Z'
 ---
 
-Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
-
-> During the beta, object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), and is free to use, subject to usage limits. Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
+Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them. Point any S3 SDK at your branch endpoint and use your existing Neon credential.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
+- **Event-driven.** Run a function when an object is uploaded with [Function Triggers](/docs/compute/functions/triggers/object-storage).
+
+> Object storage is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions. See [plans and pricing](/docs/introduction/plans#object-storage) for storage and egress rates.
 
 ## Get started
 
@@ -28,6 +29,8 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 <a href="/docs/storage/buckets" description="Create and manage buckets, set access levels, and understand how buckets branch." icon="database">Buckets</a>
 
 <a href="/docs/storage/objects" description="Upload, download, list, delete, and generate presigned URLs for objects." icon="data">Objects</a>
+
+<a href="/docs/compute/functions/triggers/object-storage" description="Run a function when an object is uploaded to a bucket." icon="stopwatch">Triggers</a>
 
 <a href="/docs/storage/authentication" description="Understand how Neon credentials map to S3 access keys." icon="lock-landscape">Authentication</a>
 
@@ -53,7 +56,7 @@ neon bootstrap --template ai-sdk
 
 ## Limits
 
-During the beta, the following limits apply:
+The following limits apply:
 
 | Limit                    | Value                                                                                                          |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
@@ -62,10 +65,10 @@ During the beta, the following limits apply:
 
 Two limits are behavioral rather than fixed numbers:
 
-- **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
+- **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
 
-When billing begins, paid plans follow standard [S3 limits](https://aws.amazon.com/s3/faqs/): individual objects up to 5 TB, with a 5 GB maximum for a single-request upload. Use [multipart upload](/docs/storage/objects#multipart-upload) for larger objects; AWS recommends it for anything over 100 MB. Storage-volume limits apply to the Free plan only; paid plans have no fixed limit on total storage or number of objects, which is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)).
+Storage-volume limits apply to the Free plan only. Paid plans have no fixed limit on total storage or number of objects; storage is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)). For large objects, use [multipart upload](/docs/storage/objects#multipart-upload), which AWS recommends for anything over 100 MB.
 
 For S3 API and feature limitations (as opposed to usage limits), see [Known limitations](/docs/storage/s3-compatibility#known-limitations).
 

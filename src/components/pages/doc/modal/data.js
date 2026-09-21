@@ -38,8 +38,23 @@
  * @property {ModalDestination} destination Thumbnail and CTA destination.
  */
 
-/** @type {VideoModalConfig[]} */
-const MODALS = [
+/**
+ * Video modals are temporarily disabled: no videos pop up on doc pages for now.
+ *
+ * The modal capability is fully intact. To re-enable, move the entries below back into the
+ * `MODALS` array (or add new ones).
+ *
+ * @type {VideoModalConfig[]}
+ */
+const MODALS = [];
+
+/**
+ * Disabled modal configurations, kept for easy re-enabling.
+ *
+ * @type {VideoModalConfig[]}
+ */
+// eslint-disable-next-line no-unused-vars
+const DISABLED_MODALS = [
   {
     id: 'serverless-video',
     embedId: 'llSTZMVrbx8',

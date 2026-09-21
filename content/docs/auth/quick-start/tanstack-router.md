@@ -9,11 +9,9 @@ summary: >-
   auth UI. User profiles are stored automatically in the `neon_auth.user` table
   in your database.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 layout: wide
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 

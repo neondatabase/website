@@ -32,7 +32,7 @@ seo:
 ---
 
 <Admonition type="note" title="We're building backends">
-Neon started with a serverless Postgres database that branches. But a database alone isn't enough for how apps get built today. When a coding agent ships an app, it now deploys the [Neon backend](https://neon.com/blog/neon-backend-is-beta) - [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) plus [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Managed Better Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview).
+Neon started with a serverless Postgres database that branches. But a database alone isn't enough for how apps get built today. When a coding agent ships an app, it now deploys the [Neon backend](https://neon.com/blog/neon-backend-is-ga) - [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) plus [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Managed Better Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview).
 </Admonition>
 
 LLMs are part of the modern backend stack now. We think tokens sit next to storage and compute as one of the foundational primitives for apps and developer workflows - not an optional add-on you wire in later.
@@ -119,7 +119,7 @@ One branch, one deploy, one set of env vars. The Function already gets `DATABASE
 
 ## Neon AI Gateway = Databricks scale and performance
 
-Neon AI Gateway is the Neon access path onto Databricks [Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/)  - the infra already moving [more than 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-beta) (and counting). Open-weight models get the same serving work as frontier ones, [getting top performance (2.5x throughput and 3x lower latency) due to features like prompt caching](https://www.databricks.com/blog/accelerating-llm-inference-prompt-caching-open-source-models-databricks).
+Neon AI Gateway is the Neon access path onto Databricks [Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/)  - the infra already moving [more than 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-ga) (and counting). Open-weight models get the same serving work as frontier ones, [getting top performance (2.5x throughput and 3x lower latency) due to features like prompt caching](https://www.databricks.com/blog/accelerating-llm-inference-prompt-caching-open-source-models-databricks).
 
 <Admonition type="note" title="Coming soon">
 We'll go deeper on open-weight performance and prompt caching in a follow-up blog post.
@@ -171,4 +171,4 @@ neon bootstrap --template ai-sdk
 
 **Tokens are a backend primitive, and they should live where the rest of the backend lives. Neon AI Gateway puts frontier and open-weight models right on your branch, billed through Neon with no markup, with Databricks-scale performance.**
 
-AI Gateway is in beta, it is free to use during the beta period. Point your SDK at Neon, call a model, and [send us feedback](https://discord.gg/92vNTzKDGp) - we’re working hard to take AI Gateway to GA!
+AI Gateway is now generally available; it was free to use during the [beta](https://neon.com/blog/neon-backend-is-beta). Point your SDK at Neon, call a model, and [send us feedback](https://neon.com/discord), or read the [GA announcement](https://neon.com/blog/neon-backend-is-ga).

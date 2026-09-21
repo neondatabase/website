@@ -6,12 +6,12 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-09-10T21:19:42.305Z'
+updatedOn: '2026-09-18T04:16:26.638Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
 
-The `checkout` command pins a branch in the local context so subsequent commands target it. It's a focused helper over [`set-context`](/docs/cli/set-context) for the common "switch the branch I'm working on" case. The `checkout` command requires neon 2.22.2 or later; check your version with `neon --version`.
+The `checkout` command pins a branch in the local context so subsequent commands target it. It's a focused helper over [`set-context`](/docs/cli/set-context) for the common "switch the branch I'm working on" case.
 
 `checkout` resolves the branch (by name or ID) against the project, then heals the `.neon` file: it always (re)writes `projectId`, `branch`, and `orgId` (when the project has one), so a `.neon` that was missing fields or drifted ends up complete and consistent.
 

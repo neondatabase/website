@@ -9,14 +9,12 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
   - /docs/auth/quick-start/nextjs/
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 

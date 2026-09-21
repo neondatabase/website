@@ -42,12 +42,12 @@ For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs
 
 ## How other managed Postgres services compare
 
-| Provider           | Per-branch database                                         | Auto-cleanup                                                                       |
-| ------------------ | ----------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Neon               | Copy-on-write branch, metadata-only create                  | TTL via `expires_at` (1 hour to 30 days)                                           |
-| Supabase           | Preview branch per PR, full project (database, Auth, Storage)     | Branch deleted when PR closes                                                      |
-| Aurora Postgres  | Aurora clone, copy-on-write at the storage layer            | No built-in TTL; up to 15 copy-on-write clones before the next becomes a full copy |
-| RDS for Postgres | No native per-branch copy. Restore-from-snapshot or pg_dump | Manual cleanup                                                                     |
+| Provider         | Per-branch database                                           | Auto-cleanup                                                                       |
+| ---------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Neon             | Copy-on-write branch, metadata-only create                    | TTL via `expires_at` (1 hour to 30 days)                                           |
+| Supabase         | Preview branch per PR, full project (database, Auth, Storage) | Branch deleted when PR closes                                                      |
+| Aurora Postgres  | Aurora clone, copy-on-write at the storage layer              | No built-in TTL; up to 15 copy-on-write clones before the next becomes a full copy |
+| RDS for Postgres | No native per-branch copy. Restore-from-snapshot or pg_dump   | Manual cleanup                                                                     |
 
 Supabase ties preview branches to GitHub pull requests. Each branch is a full Supabase project with its own database, Auth, and Storage, and is removed when the PR closes. See [Supabase branching](https://supabase.com/docs/guides/deployment/branching).
 

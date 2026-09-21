@@ -13,7 +13,7 @@ summary: >-
   Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-09-01T21:19:48.000Z'
 ---
 
 <InfoBlock>
@@ -103,7 +103,7 @@ Neon is working with the Vercel team to transition Enterprise customers.
 
 ### Advanced features (Neon plan required)
 
-- **[Database branching](/docs/guides/branching-intro)** - Branch your database like Git
+- **[Database branching](/docs/concepts/branch-your-backend)** - Branch your database like Git
 - **[Instant restore](/docs/guides/branch-restore)** - Point-in-time recovery (was disabled in Vercel Postgres)
 - **[Autoscaling](/docs/introduction/autoscaling)** - Automatic performance scaling
 - **[Scale to zero](/docs/introduction/scale-to-zero)** - Cost-saving idle scaling

@@ -198,7 +198,7 @@ And for your agents, add a line to your `AGENTS.md` so they follow the same rule
 
 Our agents ship feature after feature (or even in parallel). Branching is key to isolating your infra per feature. Our goal is to give you the best primitives for branch-first development: use them as documented here or make them your own and build your own abstractions on top!
 
-This is the first of several DX improvements landing as we build toward the Neon Platform private preview, with more CLI commands and new SDKs on the way. If there's something you wish the Neon CLI did, drop into the [Neon Discord](https://discord.gg/tXC49r2M4q) and tell us.
+This is the first of several DX improvements landing as we build toward the Neon Platform private preview, with more CLI commands and new SDKs on the way. If there's something you wish the Neon CLI did, drop into the [Neon Discord](https://neon.com/discord) and tell us.
 
 And if the little Neon Platform teasers got you interested, sign up for the private preview [here](https://neon.com/blog/were-building-backends#access).
 

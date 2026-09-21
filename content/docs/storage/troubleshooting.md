@@ -6,10 +6,8 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-09-10T09:10:58.044Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
@@ -110,13 +108,13 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement isn't available in beta. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available yet. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ### `EntityTooLarge`
 
-The object exceeds the maximum size. During beta, Neon Object Storage allows objects up to 5 GiB, whether uploaded in a single request or via [multipart upload](/docs/storage/objects#multipart-upload). A single-request `PutObject` fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed the limit.
+The object exceeds the maximum size. Neon Object Storage currently allows objects up to 5 GiB, whether uploaded in a single request or via [multipart upload](/docs/storage/objects#multipart-upload). A single-request `PutObject` fails immediately; a multipart upload fails at `CompleteMultipartUpload` once the assembled object would exceed the limit.
 
-**Fix:** Split the data across multiple objects, or confirm the upload isn't unexpectedly large. Multipart upload makes large uploads more reliable but doesn't raise the per-object limit during beta. [Contact support](/docs/introduction/support) if you need to store larger objects.
+**Fix:** Split the data across multiple objects, or confirm the upload isn't unexpectedly large. Multipart upload makes large uploads more reliable but doesn't raise the per-object limit. [Contact support](/docs/introduction/support) if you need to store larger objects.
 
 ## Connection and performance errors
 

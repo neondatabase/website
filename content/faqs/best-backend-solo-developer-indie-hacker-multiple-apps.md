@@ -27,10 +27,10 @@ Each project can enable the same set of services, so you stop assembling a diffe
 
 - [Managed Better Auth](/docs/auth/overview): 60k MAU on Free, 1M on paid plans, with users in your own database.
 - [Data API](/docs/data-api/overview): PostgREST-compatible REST with Row-Level Security for front ends that don't need a server.
-- [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free during the beta.
-- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, free during the beta.
+- [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free.
+- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations a month included on Free.
 
-Functions, Object Storage, and AI Gateway are in beta and available in `aws-us-east-2` and `aws-eu-central-1`, with support expanding toward all regions.
+Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 ## Manage them all from the terminal
 

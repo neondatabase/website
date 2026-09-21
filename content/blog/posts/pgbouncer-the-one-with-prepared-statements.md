@@ -152,4 +152,4 @@ PgBouncer bridges the gap between the inherent connection limitations of Postgre
 
 Leveraging prepared statements can be a valuable asset to boost your Postgres query performance and adds a layer of security against potential SQL injection attacks when using pooled connections.
 
-You can try prepared statements in PgBouncer with Neon today. We can’t wait to see what you build using it. Happy querying.<br />If you have any questions or feedback, don’t hesitate to get in touch with us on [Discord](https://neon.tech/discord). We’d love to hear from you.
+You can try prepared statements in PgBouncer with Neon today. We can’t wait to see what you build using it. Happy querying.<br />If you have any questions or feedback, don’t hesitate to get in touch with us on [Discord](https://neon.com/discord). We’d love to hear from you.

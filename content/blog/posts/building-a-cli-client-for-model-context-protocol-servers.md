@@ -268,7 +268,7 @@ Luckily, both of these issues have been solved in the [MCP Client CLI](https://g
 
 ## Try it
 
-Use this tool with any MCP Server to see how it works or use it as a base to build your own MCP Client. You can check out our GitHub [repository](https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client), and give us any feedback on [our Discord server](https://neon.tech/discord)!
+Use this tool with any MCP Server to see how it works or use it as a base to build your own MCP Client. You can check out our GitHub [repository](https://github.com/neondatabase/mcp-server-neon/tree/main/mcp-client), and give us any feedback on [our Discord server](https://neon.com/discord)!
 
 ---
 

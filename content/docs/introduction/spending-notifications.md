@@ -55,7 +55,7 @@ Neon checks your spending every 15 minutes. Once spending crosses a threshold, a
 ## Enable spending notifications
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select your organization from the breadcrumb menu at the top-left.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. On the **Spending Notifications** card, select **Enable**.
 1. In the **Enable Spending Notifications** dialog, enter a whole-dollar amount.

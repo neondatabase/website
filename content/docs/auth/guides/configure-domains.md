@@ -8,10 +8,8 @@ summary: >-
   (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
   Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
 

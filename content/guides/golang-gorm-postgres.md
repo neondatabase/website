@@ -4,7 +4,7 @@ subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless P
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
@@ -118,7 +118,7 @@ In this code, we're performing several important steps:
 
 Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon database credentials. The `?sslmode=require&channel_binding=require` part of the connection string ensures secure communication with your Neon database.
 
-Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking the **Connect** button on your Neon **Project Dashboard**.
+Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking **Connect** in the Console nav.
 
 ### Connection Pooling and Configuration
 

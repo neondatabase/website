@@ -35,7 +35,7 @@ seo:
 ---
 ![cloning github in neon functions](https://cdn.neonapi.io/public/images/pages/blog/my-agent-cloned-github-using-the-neon-backend/neon-experiment.jpg)
 
-GitHub has been down a lot lately (ugh). During one of those episodes, I had the idea of asking my agent to use [our new backend suite (still in beta)](https://neon.com/blog/neon-backend-is-beta) to build a working Git host. This is genuinely outside of my comfort zone as I had no prior knowledge of Git server internals, so I didn't have much hopes, but it went surprisingly well:
+GitHub has been down a lot lately (ugh). During one of those episodes, I had the idea of asking my agent to use [our new backend suite (then in beta)](https://neon.com/blog/neon-backend-is-ga) to build a working Git host. This is genuinely outside of my comfort zone as I had no prior knowledge of Git server internals, so I didn't have much hopes, but it went surprisingly well:
 
 ## What I built: neon-git
 

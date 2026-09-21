@@ -7,11 +7,9 @@ summary: >-
   Host a WhatsApp bot on Neon Functions. Receive WhatsApp Cloud API webhooks, verify Meta's
   request signatures, reply through the Graph API, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-07T21:31:28.251Z'
+updatedOn: '2026-09-17T21:40:25.774Z'
 isDraft: false
 ---
-
-<FeatureBetaProps feature_name="Neon Functions" />
 
 WhatsApp Cloud API sends incoming messages to HTTP webhooks. In this guide, you deploy a [Neon Function](/docs/compute/functions/overview) as the webhook endpoint. The function verifies Meta's requests, handles bot commands and sends replies through the Graph API.
 
@@ -23,7 +21,7 @@ This example uses Meta's hosted WhatsApp Cloud API. It doesn't automate a person
 
 ## Prerequisites
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. See [Get started with Neon Functions](/docs/compute/functions/get-started).
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). See [Get started with Neon Functions](/docs/compute/functions/get-started).
 - The latest [Neon CLI](/docs/cli), installed and authenticated. Upgrade with `npm install -g neon@latest`, then see [CLI login](/docs/cli/login).
 - Node.js 24 (`node -v`). Deployed functions run on `nodejs24`, so 24 locally is the closest match. Node.js 20+ works.
 - A Meta developer account.
@@ -82,20 +80,18 @@ See [`neon bootstrap`](/docs/cli/bootstrap) for flags. Run the remaining command
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    functions: {
-      whatsapp: {
-        name: "WhatsApp webhook",
-        source: "./functions/whatsapp.ts",
-        env: {
-          WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN!,
-          WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID!,
-          WHATSAPP_VERIFY_TOKEN: process.env.WHATSAPP_VERIFY_TOKEN!,
-          WHATSAPP_APP_SECRET: process.env.WHATSAPP_APP_SECRET!,
-        },
-        dev: {
-          port: 8787,
-        },
+  functions: {
+    whatsapp: {
+      name: "WhatsApp webhook",
+      source: "./functions/whatsapp.ts",
+      env: {
+        WHATSAPP_ACCESS_TOKEN: process.env.WHATSAPP_ACCESS_TOKEN!,
+        WHATSAPP_PHONE_NUMBER_ID: process.env.WHATSAPP_PHONE_NUMBER_ID!,
+        WHATSAPP_VERIFY_TOKEN: process.env.WHATSAPP_VERIFY_TOKEN!,
+        WHATSAPP_APP_SECRET: process.env.WHATSAPP_APP_SECRET!,
+      },
+      dev: {
+        port: 8787,
       },
     },
   },

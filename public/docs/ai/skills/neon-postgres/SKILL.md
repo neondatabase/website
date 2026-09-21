@@ -1,19 +1,15 @@
 ---
 name: neon-postgres
 description: >-
-  Guides and best practices for working with Lakebase Postgres, the database
-  behind Neon. Covers setup, connection methods and drivers, pooled vs direct
-  connections, branching, schema migrations, autoscaling, scale-to-zero, instant
-  restore, read replicas, connection pooling, IP allow lists, and logical
-  replication. Also covers Lakebase Search: semantic vector search, full-text
-  search with BM25 ranking, and hybrid search.
-  Use when users ask about "Lakebase Postgres", "Neon setup", "connect to Neon",
-  "Neon project", "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
-  "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
-  "scale to zero", "Neon autoscaling", "Neon read replica",
-  "Neon connection pooling", "schema migrations", "database troubleshooting",
-  "Postgres performance", "neon inspect db", "semantic search", "vector
-  search", "full-text search", "BM25", or "hybrid search".
+  Guides and best practices for working with Lakebase Postgres on Neon:
+  connections, pooled vs direct, schema migrations, branching, autoscaling,
+  scale-to-zero, instant restore, read replicas, IP allow lists, logical
+  replication, and Lakebase Search. Use when the work is an existing
+  DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files,
+  Functions, and LLM calls go to the parent `neon` skill. Also use for
+  "@neondatabase/serverless", "@neondatabase/neon-js", "neon inspect db",
+  "semantic search", "vector search", "full-text search", "BM25", or
+  "hybrid search".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres
@@ -24,7 +20,7 @@ metadata:
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon
+neon skills -s neon -y
 ```
 
 # Lakebase Postgres
@@ -33,15 +29,21 @@ Lakebase Postgres is the database at the core of Neon. It runs on the lakebase a
 
 It is the same database whether you reach it through Neon or through Databricks; this skill covers the Neon access path.
 
+Login, users, sessions, and `@neondatabase/auth` belong in `neon-auth`.
+
 ## Setup Flow
 
 ### 1. Select the organization and project
 
-Use the CLI (default) or MCP server to list organizations and projects. Let the user select an existing project or create a new one. Check the `.neon` file for an existing linked project or branch.
+If a `DATABASE_URL` is already supplied (prompt, environment, or repo) or a `.neon` file points at a project, use it. Do not list organizations or create a second project for schema work.
+
+Otherwise use the CLI (default) or MCP server to list organizations and projects. Let the user select an existing project or create a new one.
 
 ### 2. Get the connection string
 
-Use the CLI (default), `neon env pull`, or the MCP server to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying it, to avoid overwriting existing values.
+If a `DATABASE_URL` is already supplied, use it. Do not fetch another through the CLI or MCP.
+
+Otherwise use the CLI (default), `neon env pull`, or the MCP server to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying it, to avoid overwriting existing values.
 
 #### When to use pooled vs direct connections
 
@@ -57,11 +59,10 @@ Use the CLI (default), `neon env pull`, or the MCP server to get the connection 
 
 ### 3. Pick the connection method and driver
 
-Always pair Neon with an ORM such as **Drizzle** for easy schema management and migrations. Refer to the connection methods guide to pick the correct driver based on how the runtime treats your code: https://neon.com/docs/connect/choose-connection.md.
+Preserve the existing ORM and driver. For new TypeScript schema work with no established choice, Drizzle is a suggestion: https://neon.com/docs/guides/drizzle.md. Refer to the connection methods guide to pick the correct driver based on how the runtime treats your code: https://neon.com/docs/connect/choose-connection.md.
 
-Recommendations:
+Driver notes:
 
-- Drizzle as ORM (see https://neon.com/docs/guides/drizzle.md)
 - On Vercel, use `node-postgres` (`npm install pg`) with Vercel Fluid compute and `import { attachDatabasePool } from "@vercel/functions";`
 - On Cloudflare, use `node-postgres` with Cloudflare Hyperdrive
 - On Neon Functions, use `node-postgres`, as the functions are long-running and reuse the pool across requests.
@@ -88,7 +89,7 @@ Link: https://neon.com/docs/introduction/branching.md
 For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill. If it isn't installed, fetch it from https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon-postgres-branches
+neon skills -s neon-postgres-branches -y
 ```
 
 ## Migrations

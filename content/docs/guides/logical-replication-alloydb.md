@@ -10,7 +10,7 @@ summary: >-
   pg_restore before starting the subscription.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This guide describes how to replicate data from AlloyDB Postgres to Neon using native Postgres logical replication. The steps in this guide follow those described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the _Google AlloyDB documentation_.
@@ -189,7 +189,7 @@ To comment out a single line, you can use `--` at the beginning of the line.
 After making any necessary modifications to the dump file, load the dumped schema using `pg_restore`.
 
 <Admonition type="tip">
-When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**.
+When you're restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find your database connection string by clicking the **Connect** button in the Console nav.
 </Admonition>
 
 ```sql
@@ -260,6 +260,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your AlloyDB source database connection details for your Neon destination database connection details.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

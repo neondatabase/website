@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-09-14T17:20:27.778Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -22,11 +22,11 @@ updatedOn: '2026-09-14T17:20:27.778Z'
 
 Neon supports Postgres 14, 15, 16, 17, and 18. You select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, see [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
-For the current latest minor version available on Neon for each major version, and for details on how minor and major version updates work, see the [Lakebase Postgres version support policy](/docs/postgresql/postgres-version-policy).
+For the current latest minor version available on Neon for each major version, and for details on how minor and major version updates work, see the [Lakebase Postgres version support policy](/docs/postgresql/postgres-version-support).
 
 ## Postgres extensions
 
-Neon supports numerous Postgres extensions, and we regularly add support for more. For the extensions that Neon supports, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://discord.gg/92vNTzKDGp). Please keep in mind that privilege requirements, local file system access, and functionality that is incompatible with Neon features such as Autoscaling and Scale to Zero may prevent Neon from being able to offer support for certain extensions.
+Neon supports numerous Postgres extensions, and we regularly add support for more. For the extensions that Neon supports, see [Postgres Extensions](/docs/extensions/pg-extensions). To request support for additional extensions, please reach out to us on our [Discord Server](https://neon.com/discord). Please keep in mind that privilege requirements, local file system access, and functionality that is incompatible with Neon features such as Autoscaling and Scale to Zero may prevent Neon from being able to offer support for certain extensions.
 
 ## Roles and permissions
 

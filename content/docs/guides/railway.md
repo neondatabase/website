@@ -11,7 +11,7 @@ summary: >-
   Postgres, which provisions a database instantly without signup and stays
   claimable for 72 hours.
 enableTableOfContents: true
-updatedOn: '2026-08-25T17:09:07.082Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
@@ -65,7 +65,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find the connection string for your database by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

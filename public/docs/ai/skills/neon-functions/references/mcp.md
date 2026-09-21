@@ -89,7 +89,7 @@ Key points:
 > [!WARNING]
 > A Neon Function has a **public HTTPS URL — anyone can reach it.** An unauthenticated MCP server hands every caller your tools (and the database behind them). Authenticate at the top of the handler before touching the transport, exactly as for [any client-facing function](../SKILL.md#functions-as-an-agent-backend-nextjs-and-similar-frameworks).
 
-[Better Auth](https://better-auth.com) (self-hostable, runs alongside your app) is a good fit, and it covers both common shapes. **Better Auth is evolving quickly** — the MCP plugin is moving out of `better-auth/plugins` into its own `@better-auth/mcp` package (built on the OAuth Provider plugin), which renames `withMcpAuth` → `requireMcpAuth` and `createMcpAuthClient` → `createMcpResourceClient`. Verify the current package and import paths against the [Better Auth MCP docs](https://better-auth.com/docs/plugins/mcp) before wiring it up.
+[Better Auth](https://better-auth.com) covers both common MCP shapes when you need an OAuth authorization server or API keys. Managed Auth does not. Keep existing app login (Clerk, Managed Auth, or Better Auth) unless the user asked to migrate it. Confirm the **installed** Better Auth version before copying imports: the MCP plugin is moving out of `better-auth/plugins` into `@better-auth/mcp` (`withMcpAuth` → `requireMcpAuth`, `createMcpAuthClient` → `createMcpResourceClient`). Docs: https://better-auth.com/docs/plugins/mcp
 
 ### Option 1 — OAuth via the Better Auth MCP plugin (best for third-party clients)
 

@@ -4,7 +4,7 @@ subtitle: Learn how to scale Laravel applications with Lakebase Postgres Read Re
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 ## Introduction
@@ -113,7 +113,7 @@ php artisan migrate
 ```
 
 <Admonition type="important">
-Neon supports both direct and pooled database connection strings, which can be copied from the **Connection Details** widget on your Neon Project Dashboard. A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
+Neon supports both direct and pooled database connection strings, which you can copy from the **Connect** modal (**Connect** in the Console nav). A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 #### Create the model

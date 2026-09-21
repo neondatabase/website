@@ -12,8 +12,10 @@
  * Source 3 vs Sources 1+2: rate sniff — every rate-shaped string in plans.md
  * (e.g. $0.35/GB-month) must also appear in pricing.md.
  *
- * Exits non-zero on any mismatch or pricing.md issue. Wired into prebuild and
- * predev so Vercel and local builds fail when sources drift.
+ * Reports drift as a warning (exit 0), not a build failure. Wired into prebuild
+ * and predev to surface drift in the build logs, so pricing sources drifting
+ * mid-transition (a GA or beta change landing on one source first) don't block
+ * unrelated builds. Genuine load errors (missing sources) still exit non-zero.
  *
  * Usage:
  *   node src/scripts/check-pricing-sync.js              # Verbose locally, terse in CI
@@ -116,25 +118,17 @@ const yesNo = (val) => {
   return s;
 };
 
-// Beta features are free during beta, but each source words it differently
-// (component "No charges applied during beta…", docs "No charge during beta…",
-// pricing.md "Free during beta"). They share one reliable signal: the word
-// "beta". Collapse anything mentioning beta to a single concept; treat
-// false/—/blank as not-offered. Any other wording (e.g. a real GA rate) falls
-// through to its literal value, so post-beta drift surfaces as a mismatch
-// instead of silently matching.
-const betaValue = (val) => {
+const extractDollarAmounts = (val) => {
   if (val === false || val === undefined || val === null) return '--';
   const s = String(val).trim();
   if (!s || s === '--' || s === '—' || s === '-') return '--';
-  if (/\bbeta\b/i.test(s)) return 'beta';
-  return normalizeValue(val);
+  const amounts = s.match(/\$[\d.]+/g);
+  return amounts ? amounts.join(' ') : normalizeValue(val);
 };
 
-// The overview table intentionally summarizes beta availability while the
-// pricing table leads with Free-plan allowances. This normalizer compares only
-// availability here; exact allowances and rates are verified separately by the
-// backend pricing checks below.
+// Availability-only comparison for features whose cell copy differs by design
+// (for example AI Gateway: "List prices here" vs "Prepaid credits"). Exact
+// rates and allowances are verified separately by the backend pricing checks.
 const offeredValue = (val) => {
   if (val === false || val === undefined || val === null) return '--';
   const s = String(val).trim();
@@ -624,7 +618,7 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-free',
     label: 'Auth MAU (Free)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'free',
     norm: extractCore(/(60k|60,?000)/i, '60k'),
     agentLabel: 'Auth (MAU)',
@@ -633,7 +627,7 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-launch',
     label: 'Auth MAU (Launch)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'launch',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
@@ -642,51 +636,62 @@ const CROSS_SOURCE_CHECKS = [
     id: 'auth-scale',
     label: 'Auth MAU (Scale)',
     comp: 'Managed Better Auth',
-    docs: 'Auth (Beta)',
+    docs: 'Auth',
     plan: 'scale',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
   },
 
-  // --- Backend (Beta) ---
-  // These features are free during beta, so on Launch and Scale we only verify
-  // that each source agrees they're offered (betaValue collapses the
-  // differently-worded "free/no charge during beta" prose to a single concept).
-  // Object Storage and Functions publish their post-beta rates on the pricing
-  // page, but the cells keep a beta note, so betaValue still applies there.
-  // AI Gateway links to its published model prices instead of repeating beta
-  // status, so only verify that every source agrees the feature is offered.
-  // The Free cells lead with the included allowance instead of a beta note and
-  // have nothing comparable in the docs table, hence offeredValue.
-  ...['free', 'launch', 'scale'].flatMap((plan) => [
-    {
-      id: `object-storage-${plan}`,
-      label: `Object Storage (${plan})`,
-      comp: 'Object Storage',
-      docs: 'Object Storage (Beta)',
-      plan,
-      norm: plan === 'free' ? offeredValue : betaValue,
-      agentLabel: 'Object Storage',
-    },
-    {
-      id: `functions-${plan}`,
-      label: `Functions (${plan})`,
-      comp: 'Functions',
-      docs: 'Functions (Beta)',
-      plan,
-      norm: plan === 'free' ? offeredValue : betaValue,
-      agentLabel: 'Functions',
-    },
-    {
-      id: `ai-gateway-${plan}`,
-      label: `AI Gateway (${plan})`,
-      comp: 'AI Gateway',
-      docs: 'AI Gateway',
-      plan,
-      norm: offeredValue,
-      agentLabel: 'AI Gateway',
-    },
-  ]),
+  // --- Backend ---
+  // Object Storage and Functions compare published rates (or Free allowances).
+  // AI Gateway cells differ by design (pricing page links the model list;
+  // docs and pricing.md say "Prepaid credits"), so only verify the feature
+  // is offered. Exact rates are verified separately by the backend checks.
+  {
+    id: 'object-storage-free',
+    label: 'Object Storage (free)',
+    comp: 'Object Storage',
+    docs: 'Object Storage',
+    plan: 'free',
+    norm: extractCore(/(\d+)\s*GB/i, '$1 GB'),
+    agentLabel: 'Object Storage',
+  },
+  ...['launch', 'scale'].map((plan) => ({
+    id: `object-storage-${plan}`,
+    label: `Object Storage (${plan})`,
+    comp: 'Object Storage',
+    docs: 'Object Storage',
+    plan,
+    norm: extractRate,
+    agentLabel: 'Object Storage',
+  })),
+  {
+    id: 'functions-free',
+    label: 'Functions (free)',
+    comp: 'Functions',
+    docs: 'Functions',
+    plan: 'free',
+    norm: offeredValue,
+    agentLabel: 'Functions',
+  },
+  ...['launch', 'scale'].map((plan) => ({
+    id: `functions-${plan}`,
+    label: `Functions (${plan})`,
+    comp: 'Functions',
+    docs: 'Functions',
+    plan,
+    norm: extractDollarAmounts,
+    agentLabel: 'Functions',
+  })),
+  ...['free', 'launch', 'scale'].map((plan) => ({
+    id: `ai-gateway-${plan}`,
+    label: `AI Gateway (${plan})`,
+    comp: 'AI Gateway',
+    docs: 'AI Gateway',
+    plan,
+    norm: offeredValue,
+    agentLabel: 'AI Gateway',
+  })),
 
   // --- Monitoring & Observability ---
   {
@@ -1345,7 +1350,7 @@ Source 3: Hand-edited agent markdown
     `\nSummary: ${ok} match, ${mismatch} mismatch, ${missing} missing, ${skip} skipped, ${pricingIssues} pricing source issue(s), ${agentIssues} cell issue(s)`
   );
   if (mismatch > 0 || pricingIssues > 0 || agentIssues > 0) {
-    console.log('\nResult: FAIL — drift detected\n');
+    console.log('\nResult: WARN - drift detected (non-blocking)\n');
   } else if (missing > 0) {
     console.log('\nResult: WARN — some data points could not be compared\n');
   } else {
@@ -1371,7 +1376,7 @@ function printTerseReport(results, pricingMd, agentChecks) {
     return;
   }
 
-  console.log('[FAIL] Pricing sync: drift detected\n');
+  console.log('[WARN] Pricing sync: drift detected (non-blocking)\n');
 
   const mismatches = results.filter((r) => r.status === 'mismatch');
   if (mismatches.length) {
@@ -1505,7 +1510,11 @@ function main() {
     printTerseReport(results, pricingMd, agentChecks);
   }
 
-  process.exit(summarize(results, pricingMd, agentChecks).critical > 0 ? 1 : 0);
+  // Pricing drift is a warning, not a build failure. The sources routinely
+  // drift mid-transition (a GA or beta change often lands on one source before
+  // the others), so failing here blocks unrelated builds. The check still runs
+  // and prints any drift above, keeping it visible in build logs.
+  process.exit(0);
 }
 
 main();

@@ -42,7 +42,7 @@ seo:
 ![We're building the boring backend for apps and agents](https://cdn.neonapi.io/public/images/pages/blog/were-building-backends/were-building-backends.jpg)
 
 <Admonition type="important" title="Update" >
-Object Storage, Functions, and AI Gateway are now in beta and open for everyone to try. [Read the launch post](https://neon.com/blog/neon-backend-is-beta).
+Object Storage, Functions, and AI Gateway are now generally available and open for everyone to try. [Read the GA announcement](https://neon.com/blog/neon-backend-is-ga).
 </Admonition>
 
 Everyone has been talking about throwing it all away and building entirely new magic sci-fi cloud infrastructure for agents.

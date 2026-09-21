@@ -103,7 +103,7 @@ const META = {
     examples: ['neon functions deploy api --src ./api.ts'],
   },
   triggers: {
-    desc: 'Invoke a Neon Function on a cron schedule.',
+    desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',
     examples: ["neon triggers create --function-slug api --name nightly --cron '0 6 * * *'"],
   },
   credentials: {

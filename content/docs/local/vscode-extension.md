@@ -13,7 +13,7 @@ summary: >-
   agents.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-08-27T15:07:41.821Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.
@@ -249,9 +249,9 @@ You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+S
 
 ## Next steps & resources
 
-- [Branching in Neon](/docs/guides/branching-intro).
+- [Branching in Neon](/docs/concepts/branch-your-backend).
 - [Neon MCP Server](/docs/ai/neon-mcp-server).
 - [Serverless driver](/docs/serverless/serverless-driver).
-- [Discord Community](https://discord.gg/92vNTzKDGp).
+- [Discord Community](https://neon.com/discord).
 
 <NeedHelp/>

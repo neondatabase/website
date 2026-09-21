@@ -10,10 +10,8 @@ summary: >-
   and rate-limited (exceeding attempts returns `TOO_MANY_ATTEMPTS`), and
   production deployments require a dedicated SMTP provider.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
 

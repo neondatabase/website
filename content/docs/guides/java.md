@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
@@ -100,7 +100,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
 1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
-2.  Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal.
+2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select **Java** as your programming language.
     ![Connection modal](/docs/connect/java_connection_details.png)
 4.  Copy the connection string, which includes your password.
