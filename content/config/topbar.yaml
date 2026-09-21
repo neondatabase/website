@@ -1,4 +1,4 @@
-text: 'The Neon backend is GA: a complete set of primitives so agents can build'
+text: 'Just shipped: Neon Functions can now run on a schedule'
 link:
-  url: 'https://neon.com/blog/neon-backend-is-ga'
+  url: 'https://neon.com/blog/your-neon-functions-can-now-run-on-a-schedule'
   target: '_blank'
