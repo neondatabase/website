@@ -42,6 +42,8 @@ During the beta phase, the only way to run a [Neon Function](https://neon.com/do
 
 Now, with [Function Triggers](https://neon.com/docs/compute/functions/triggers/overview), this is much smoother. A Function Trigger is a branch-scoped definition that tells Neon when to invoke a deployed function. You deploy the function as usual; the trigger is what calls it. Today we're discussing the first trigger type we’ve shipped: `schedule`, [a cron expression that is compatible with scale to zero.](https://neon.com/docs/compute/functions/triggers/schedule)
 
+**[ADD DIAGRAM]**
+
 <Admonition type="note" title="When to use Neon Functions">
 Neon Functions are meant for backend work that starts inside Neon, or whose main job is reading and writing Neon primitives:
 
