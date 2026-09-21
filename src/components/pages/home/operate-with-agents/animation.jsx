@@ -31,7 +31,7 @@ const RESULT_PAUSE_DURATION = 500;
 const TYPING_EASE = cubicBezier(0.2, 0.07, 0.3, 1);
 
 const PROMPT_STEPS = [
-  { prompt: CHAT_PROMPTS[0], typeDuration: 0, riveState: 1, riveDelay: 250, riveDuration: 4000 },
+  { prompt: CHAT_PROMPTS[0], typeDuration: 0, riveState: 1, riveDelay: 100, riveDuration: 4150 },
   { prompt: CHAT_PROMPTS[1], typeDuration: 900, riveState: 2, riveDelay: 200, riveDuration: 2500 },
   { prompt: CHAT_PROMPTS[2], typeDuration: 1000, riveState: 3, riveDelay: 200, riveDuration: 1750 },
 ];
