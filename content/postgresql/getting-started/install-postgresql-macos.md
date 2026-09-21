@@ -81,14 +81,21 @@ Third, right\-click the PostgreSQL 12 and select **Create \> Database..** to ope
 Fourth, enter dvdrental as the database, postgres as the owner, and click the Save button to create the dvdrental database.
 
 ![](/postgresqltutorial/Restore-Sample-Database-Step-2.png)
-Fifth, [download the sample database](postgresql-sample-database) and unzip it. You’ll get a directory with many files.
+Fifth, [download the sample database](sample-database) (`dvdrental.zip`).
+
+Sixth, unzip `dvdrental.zip`. The archive contains a single file, `dvdrental.tar`, which is a PostgreSQL archive in tar format. Note the path to this file. You don't need to extract the tar file itself.
 
 Seventh, right\-click the **dvdrental** database and select the **Restore…** menu item:
 
 ![](/postgresqltutorial/Restore-Sample-Database-Step-3.png)
-Eighth, select the directory as the Format (1\), the directory that contains sample database as the Filename (2\), and postgres as the Role name (3\), and click the Restore button.
+Eighth, select **Tar** as the Format (1\), the path to `dvdrental.tar` as the Filename (2\), and **postgres** as the Role name (3\), and click the Restore button (4\).
 
 ![](/postgresqltutorial/Restore-Sample-Database-Step-4.png)
+
+<Admonition type="note">
+The screenshot shows the **Directory** format. That option also works if you extract `dvdrental.tar` into a folder first and select that folder as the Filename. If you only unzipped `dvdrental.zip`, use the **Tar** format and select the `dvdrental.tar` file. Don't run the `restore.sql` file inside the tar with `psql`. It creates the tables but doesn't load any data.
+</Admonition>
+
 It will take few seconds to restore the sample database. Once the restoration completes, you will see a notification like this:
 
 ![](/postgresqltutorial/Restore-Sample-Database-Step-5.png)

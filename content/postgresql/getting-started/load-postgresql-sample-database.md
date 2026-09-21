@@ -26,7 +26,7 @@ Loading the dvdrental sample database with psql and pg_restore works the same wa
 Before going forward with this tutorial, you need to have:
 
 - A PostgreSQL database server.
-- A [PostgreSQL sample database](postgresql-sample-database) called `dvdrental`.
+- A [PostgreSQL sample database](sample-database) called `dvdrental`.
 
 ## Load the sample database using the psql \& pg_restore tool
 
@@ -186,7 +186,7 @@ Output:
 
 pgAdmin is a web\-based graphic user interface (GUI) for interacting with the PostgreSQL server.
 
-The following shows you step\-by\-step how to use the pgAdmin to restore the [sample database](postgresql-sample-database) from the database file:
+The following shows you step\-by\-step how to use the pgAdmin to restore the [sample database](sample-database) from the database file:
 
 First, launch the **pgAdmin** tool and [connect to the PostgreSQL server](../postgresql-python/connect).
 
