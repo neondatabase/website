@@ -45,6 +45,9 @@ describe('generateIndexText — Get started', () => {
     expect(apiKeyPath).toContain('neon projects create');
     expect(apiKeyPath).toContain('--set-context');
     expect(apiKeyPath).toContain('--no-secrets');
+    expect(apiKeyPath).toContain('--context-file "$PWD/.neon"');
+    expect(apiKeyPath).toContain('(`active` is `*`)');
+    expect(apiKeyPath).not.toContain('new directory');
     expect(apiKeyPath).toContain(
       'DATABASE_URL="$(neon connection-string --pooled --database-name neondb)"'
     );

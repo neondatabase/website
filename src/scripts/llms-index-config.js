@@ -20,7 +20,7 @@ module.exports = {
     'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
 
   getStarted: [
-    '**Get started.** If `NEON_API_KEY` is set or `neon profile list -o json` shows an account (`account` is not `-`), use the unattended quickstart below. Run it in a new directory so `neon projects create --set-context` does not replace an existing `.neon`. Set `NEON_ORG_ID` to the target organization. The CLI uses `NEON_API_KEY` or the active profile; do not run `neon auth` on this path.',
+    '**Get started.** If `NEON_API_KEY` is set, or `neon profile list -o json` shows the active profile (`active` is `*`) with an account (`account` is not `-`), use the unattended quickstart below. Set `NEON_ORG_ID` to the target organization. The CLI uses `NEON_API_KEY` or the active profile; do not run `neon auth` on this path.',
     '',
     '```bash',
     'set -e',
@@ -34,7 +34,8 @@ module.exports = {
     '  --region-id aws-us-east-2 \\',
     '  --database neondb \\',
     '  --set-context \\',
-    '  --no-secrets',
+    '  --no-secrets \\',
+    '  --context-file "$PWD/.neon"',
     '',
     '# 2. Get the pooled connection string.',
     'DATABASE_URL="$(neon connection-string --pooled --database-name neondb)"',
@@ -44,7 +45,7 @@ module.exports = {
     'npm install @neondatabase/serverless',
     '```',
     '',
-    'If no Neon account is available and the user cannot sign up now, follow [Claimable Neon](https://neon.com/auth.md). A human can claim the project later. Do not use Claimable when an API key or CLI profile already has an account.',
+    'If no Neon account is available and the user cannot sign up now, follow [Claimable Neon](https://neon.com/auth.md). A human can claim the project later. Do not use Claimable when an API key or the active CLI profile already has an account.',
   ].join('\n'),
 
   intro: [
