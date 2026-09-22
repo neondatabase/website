@@ -34,11 +34,29 @@ describe('generateIndexText — Get started', () => {
     const text = generateIndexText(organizedWithGetStarted(), []);
     expect(text).toContain(`> ${config.tagline}\n\n${config.getStarted}\n\n${config.intro}`);
     expect(text.split(config.getStarted)).toHaveLength(2);
+
+    const apiKeyPath = config.getStarted.slice(
+      0,
+      config.getStarted.indexOf('https://neon.com/auth.md')
+    );
+    expect(apiKeyPath).toContain('NEON_API_KEY');
+    expect(apiKeyPath).toContain('npm i -g neon');
+    expect(apiKeyPath).not.toMatch(/neon@\d/);
+    expect(apiKeyPath).toContain('neon projects create');
+    expect(apiKeyPath).toContain('--set-context');
+    expect(apiKeyPath).toContain('--no-secrets');
+    expect(apiKeyPath).toContain(
+      'DATABASE_URL="$(neon connection-string --pooled --database-name neondb)"'
+    );
+    expect(apiKeyPath).toContain('export DATABASE_URL');
+    expect(apiKeyPath).toContain('npm install @neondatabase/serverless');
+    expect(apiKeyPath).not.toMatch(/^neon auth$/m);
+    expect(apiKeyPath).not.toMatch(/^neon init$/m);
+
     expect(config.getStarted).toContain('https://neon.com/auth.md');
-    expect(config.getStarted).toContain('npm i -g neon');
-    expect(config.getStarted).toContain('neon auth');
-    expect(config.getStarted).toContain('neon init');
-    expect(config.getStarted).toContain('https://neon.com/docs/cli/init.md');
+    expect(config.getStarted.indexOf('neon projects create')).toBeLessThan(
+      config.getStarted.indexOf('https://neon.com/auth.md')
+    );
   });
 
   it('keeps a single "## Get Started" docs heading after the intro block', () => {
