@@ -1,7 +1,7 @@
 ---
 title: "A branch-first dev loop for Neon: link, checkout and env pull"
 description: >-
-  Three new Neon CLI commands - neonctl link, checkout and env pull - make
+  Three new Neon CLI commands - neon link, checkout and env pull - make
   branch-first development the default for you and your agents.
 excerpt: >-
   We're hard at work on the private preview of Neon Platform and along the way
@@ -9,7 +9,7 @@ excerpt: >-
   Neon CLI commands that turn branch-first development into a tight, repeatable
   loop for both humans and agents.
 date: "2026-06-10T12:00:00"
-updatedOn: "2026-06-10T12:00:00"
+updatedOn: "2026-09-22T12:00:00"
 category: product
 categories:
   - product
@@ -22,49 +22,49 @@ isFeatured: false
 seo:
   title: "A branch-first dev loop for Neon: link, checkout and env pull - Neon"
   description: >-
-    Three new Neon CLI commands - neonctl link, checkout and env pull - make
+    Three new Neon CLI commands - neon link, checkout and env pull - make
     branch-first development the default for you and your agents.
   keywords: []
   noindex: false
   ogTitle: "A branch-first dev loop for Neon: link, checkout and env pull - Neon"
   ogDescription: >-
-    Three new Neon CLI commands - neonctl link, checkout and env pull - make
+    Three new Neon CLI commands - neon link, checkout and env pull - make
     branch-first development the default for you and your agents.
   image: "https://cdn.neonapi.io/public/images/pages/blog/branch-first-dev-loop/cover.png"
 ---
 
 We're hard at work shipping the private preview of [Neon Platform](https://neon.com/blog/were-building-backends) and while we're at it we're rethinking Neon's developer experience from the ground up. A lot of that work is about making branch-first development the default, not something you have to wire up yourself.
 
-The first piece is shipping today: three new Neon CLI commands that make branch-first development easier than ever. `neonctl link`, `neonctl checkout` and `neonctl env pull`. They benefit you whether you only use Neon Serverless Postgres or you're reaching for more of the Neon Platform going forward. And they're especially useful once you hand the feature-dev loop to a coding agent.
+The first piece is shipping today: three new Neon CLI commands that make branch-first development easier than ever. `neon link`, `neon checkout` and `neon env pull`. They benefit you whether you only use Neon Serverless Postgres or you're reaching for more of the Neon Platform going forward. And they're especially useful once you hand the feature-dev loop to a coding agent.
 
 ## Link your workspace to a Neon project
 
-`neonctl link` connects your local dev workspace to a Neon project, the same way `vercel link` does for your Vercel project.
+`neon link` connects your local dev workspace to a Neon project, the same way `vercel link` does for your Vercel project.
 
 ```bash
-neonctl link
+neon link
 ```
 
 It's interactive: pick a Neon org, pick or create a project and branch, then the CLI writes the org, project and branch IDs into a local `.neon` file. That file is git-ignored by default, so it stays a per-developer pointer.
 
-And for agents that don't do interactive mode, there's `neonctl link --agent`.
+And for agents that don't do interactive mode, there's `neon link --agent`.
 
-If you're a long-time `neonctl` user, you'll know this was already possible through the lower-level `set-context` command. `link` is just an interactive wrapper on top of the lower-level primitive.
+If you're a long-time `neon` user, you'll know this was already possible through the lower-level `set-context` command. `link` is just an interactive wrapper on top of the lower-level primitive.
 
 Once a workspace is linked, project- and branch-scoped commands stop needing `--project-id` and `--branch` flags. For example, this lists every branch in the linked project, no arguments required:
 
 ```bash
-neonctl branch list
+neon branch list
 ```
 
 That's convenient on its own. It becomes a game-changer once you add `env pull`.
 
 ## Pull branch-scoped env vars with env pull
 
-`neonctl env pull` fetches the current branch's Neon environment variables into your existing `.env` file, or `.env.local` if you don't have one. You can also point it at any file with `--file`.
+`neon env pull` fetches the current branch's Neon environment variables into your existing `.env` file, or `.env.local` if you don't have one. You can also point it at any file with `--file`.
 
 ```bash
-neonctl env pull
+neon env pull
 ```
 
 It pulls the env variables based on your current branch's enabled services. You always get `DATABASE_URL` and `DATABASE_URL_UNPOOLED` (the pooled and direct Postgres connection strings), plus the Neon Auth and Data API secrets when those services are enabled on the branch. And as our preview features roll out (object storage and an AI gateway) you'll get those too if you're using them. Only the Neon-managed keys are written, so everything else in your file is left untouched.
@@ -78,43 +78,43 @@ In fact, you'll rarely run `env pull` yourself: as you'll see below, `link` and 
 The last ingredient is switching branches. Neon brings git-like branching to Postgres (and soon the full suite of Neon backend primitives), so inspired by git again, we added a quick utility command for it: `checkout`.
 
 ```bash
-neonctl checkout dev-add-search
+neon checkout dev-add-search
 ```
 
-`neonctl checkout <branch-name>` lets you create a branch or check out an existing one. Run it without a name and you get an interactive branch picker with a create option:
+`neon checkout <branch-name>` lets you create a branch or check out an existing one. Run it without a name and you get an interactive branch picker with a create option:
 
 ```bash
-neonctl checkout
+neon checkout
 ```
 
 Checkout updates the branch identifier in your `.neon` file so the next CLI commands target that branch.
 
 ## The branch-first dev loop
 
-Put them together and branching has never been easier to integrate tightly into your everyday dev workflow. Run `neonctl link` once when you start on a project:
+Put them together and branching has never been easier to integrate tightly into your everyday dev workflow. Run `neon link` once when you start on a project:
 
 ```bash
-neonctl link
+neon link
 ```
 
-Then run `neonctl checkout` whenever you'd reach for `git checkout -b`, at the start of every feature, fix or experiment, to give that work its own isolated Neon branch:
+Then run `neon checkout` whenever you'd reach for `git checkout -b`, at the start of every feature, fix or experiment, to give that work its own isolated Neon branch:
 
 ```bash
-neonctl checkout dev-add-search
+neon checkout dev-add-search
 ```
 
-And as I mentioned earlier, `neonctl env pull` already runs under the hood for both `link` and `checkout`, so your `.env` (or `.env.local`) already holds the right Neon environment variables for the branch you just checked out. Your app always points at the branch you're actually working on and nothing leaks between features.
+And as I mentioned earlier, `neon env pull` already runs under the hood for both `link` and `checkout`, so your `.env` (or `.env.local`) already holds the right Neon environment variables for the branch you just checked out. Your app always points at the branch you're actually working on and nothing leaks between features.
 
-You can still run `neonctl env pull` directly to refresh a branch's env or pull a different branch into a specific file with `--file`.
+You can still run `neon env pull` directly to refresh a branch's env or pull a different branch into a specific file with `--file`.
 
 ## Hand these commands to your agent
 
-Branching is great for devs but essential for agents (I make a ton of mistakes but my agents even more so). An agent can run `neonctl checkout` between tasks to give itself a fresh, isolated database per feature with no shared state to corrupt and no connection strings to copy around.
+Branching is great for devs but essential for agents (I make a ton of mistakes but my agents even more so). An agent can run `neon checkout` between tasks to give itself a fresh, isolated database per feature with no shared state to corrupt and no connection strings to copy around.
 
 I'd add a small paragraph to my own `AGENTS.md` (and `CLAUDE.md`) so my agents pick up the loop by default. Something like:
 
 ```md
-For every feature, whenever you run `git checkout -b`, also run `neonctl checkout <fitting-branch-name>` to create a matching Neon branch for that git branch. This also pulls the branch's Neon env variables into our local `.env`, so our database credentials are always branch scoped.
+For every feature, whenever you run `git checkout -b`, also run `neon checkout <fitting-branch-name>` to create a matching Neon branch for that git branch. This also pulls the branch's Neon env variables into our local `.env`, so our database credentials are always branch scoped.
 ```
 
 On top of that, install the new `neon` agent skill. It teaches your agent the full branch-first dev workflow with Neon plus other Neon Platform best practices:
@@ -127,13 +127,13 @@ Then prompt your agent to do branch-first feature development and let it drive t
 
 ## What if you don't want env vars on disk?
 
-Writing secrets into a local `.env` is the right default for most local dev. I bet you have a bunch of `.env` files on your machine even though you post about using [varlock](https://varlock.dev) on X! However, `neonctl env pull` is optional. You can opt out and we give you alternative ways to inject your Neon env variables for local dev.
+Writing secrets into a local `.env` is the right default for most local dev. I bet you have a bunch of `.env` files on your machine even though you post about using [varlock](https://varlock.dev) on X! However, `neon env pull` is optional. You can opt out and we give you alternative ways to inject your Neon env variables for local dev.
 
 First, pass `--no-env-pull` to opt out of the bundled pull:
 
 ```bash
-neonctl link --no-env-pull
-neonctl checkout dev-add-search --no-env-pull
+neon link --no-env-pull
+neon checkout dev-add-search --no-env-pull
 ```
 
 ### Inject it at runtime
@@ -142,7 +142,7 @@ Our new `@neondatabase/env` package gives you a few ways to inject your branch's
 
 - `neon-env run` to inject env into your dev command
 - `fetchEnv` to resolve env in code
-- `neonctl dev` (coming soon) for Neon Functions
+- `neon dev` (coming soon) for Neon Functions
 
 `neon-env run` fetches your branch's Neon variables and injects them into the child process, so nothing is written to disk:
 
@@ -162,10 +162,10 @@ const env = await fetchEnv(config, { projectId, branchId });
 console.log(env.postgres.databaseUrl);
 ```
 
-`neonctl dev` is coming soon for Neon Functions. It runs your local dev server with that same branch env injected, so the branch-first loop carries straight over to Neon Functions development:
+`neon dev` is coming soon for Neon Functions. It runs your local dev server with that same branch env injected, so the branch-first loop carries straight over to Neon Functions development:
 
 ```bash
-neonctl dev
+neon dev
 ```
 
 ### Pull it into your env manager
@@ -186,13 +186,13 @@ To make sure you never forget the flag, wrap the commands in your `package.json`
 ```json
 {
   "scripts": {
-    "neon:checkout": "neonctl checkout --no-env-pull",
+    "neon:checkout": "neon checkout --no-env-pull",
     "dev": "neon-env run -- next dev"
   }
 }
 ```
 
-And for your agents, add a line to your `AGENTS.md` so they follow the same rule. For example: _"Use `neonctl checkout <branch> --no-env-pull` and never run `neonctl env pull`; env is injected at runtime via `neon-env run`."_
+And for your agents, add a line to your `AGENTS.md` so they follow the same rule. For example: _"Use `neon checkout <branch> --no-env-pull` and never run `neon env pull`; env is injected at runtime via `neon-env run`."_
 
 ## Wrapping up
 
