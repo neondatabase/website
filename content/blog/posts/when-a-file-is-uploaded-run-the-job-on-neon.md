@@ -16,8 +16,8 @@ categories:
 authors:
   - mike-jerome
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/cover.jpg
+  alt: 'When a file is uploaded, run the job on Neon'
 isFeatured: false
 seo:
   title: When a file is uploaded, run the job on Neon - Neon
@@ -28,7 +28,7 @@ seo:
   ogTitle: When a file is uploaded, run the job on Neon - Neon
   ogDescription: >-
     Function Triggers can now invoke a Neon Function on Object Storage upload
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/social.jpg
 ---
 
 <Admonition type="note" title="Just shipped">
@@ -43,7 +43,7 @@ Let’s take a closer look:
 
 ## How storage_object_created works
 
-**[add diagram]**
+![Object Storage upload triggering a Neon Function](https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/diagram.jpg)
 
 The logic is simple:
 
@@ -176,7 +176,7 @@ A child branch gets its own view of the bucket and its objects, its own function
 
 If you want to test the upload pipeline, enable the trigger in that test branch. All test uploads and the resulting Postgres writes will then stay on the child, without changing the parent.
 
-**[add branching diagram]**
+![Branch-scoped Object Storage, Functions, and triggers isolating uploads and processing on a child branch](https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/branching.jpg)
 
 ## Start building
 
