@@ -52,15 +52,15 @@ const CTA = () => (
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20260918`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20260922`}
           type='video/mp4; codecs="av01.0.12M.08"'
         />
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20260918`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20260922`}
           type='video/mp4; codecs="hvc1"'
         />
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20260918`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20260922`}
           type="video/webm"
         />
       </PauseableVideo>
