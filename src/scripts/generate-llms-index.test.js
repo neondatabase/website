@@ -35,32 +35,16 @@ describe('generateIndexText — Get started', () => {
     expect(text).toContain(`> ${config.tagline}\n\n${config.getStarted}\n\n${config.intro}`);
     expect(text.split(config.getStarted)).toHaveLength(2);
 
-    const apiKeyPath = config.getStarted.slice(
-      0,
-      config.getStarted.indexOf('https://neon.com/auth.md')
-    );
-    expect(apiKeyPath).toContain('NEON_API_KEY');
-    expect(apiKeyPath).toContain('npm i -g neon');
-    expect(apiKeyPath).not.toMatch(/neon@\d/);
-    expect(apiKeyPath).toContain('neon projects create');
-    expect(apiKeyPath).toContain('--set-context');
-    expect(apiKeyPath).toContain('--no-secrets');
-    expect(apiKeyPath).toContain('--context-file "$PWD/.neon"');
-    expect(apiKeyPath).toContain('replacing that file if present');
-    expect(apiKeyPath).toContain('(`active` is `*`)');
-    expect(apiKeyPath).not.toContain('new directory');
-    expect(apiKeyPath).toContain(
-      'DATABASE_URL="$(neon connection-string --pooled --database-name neondb)"'
-    );
-    expect(apiKeyPath).toContain('export DATABASE_URL');
-    expect(apiKeyPath).toContain('npm install @neondatabase/serverless');
-    expect(apiKeyPath).not.toMatch(/^neon auth$/m);
-    expect(apiKeyPath).not.toMatch(/^neon init$/m);
-
     expect(config.getStarted).toContain('https://neon.com/auth.md');
-    expect(config.getStarted.indexOf('neon projects create')).toBeLessThan(
-      config.getStarted.indexOf('https://neon.com/auth.md')
-    );
+    expect(config.getStarted).toContain('npm i -g neon');
+    expect(config.getStarted).toContain('# oauth signup - use --help for other auth options');
+    expect(config.getStarted).toMatch(/^neon auth$/m);
+    expect(config.getStarted).toContain('# in the project folder init Neon');
+    expect(config.getStarted).toMatch(/^neon init$/m);
+    expect(config.getStarted).not.toContain('neon projects create');
+    expect(config.getStarted).not.toContain('DATABASE_URL');
+    expect(config.getStarted).not.toContain('NEON_ORG_ID');
+    expect(config.getStarted).not.toContain('@neondatabase/serverless');
   });
 
   it('keeps a single "## Get Started" docs heading after the intro block', () => {
