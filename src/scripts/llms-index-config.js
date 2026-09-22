@@ -26,7 +26,7 @@ module.exports = {
     'set -e',
     ': "${NEON_ORG_ID:?Set NEON_ORG_ID to the target organization ID}"',
     '',
-    '# 1. Create a project on Neon.',
+    '# 1. Create a project on Neon. Writes $PWD/.neon, replacing that file if present.',
     'npm i -g neon',
     'neon projects create \\',
     '  --name my-app \\',

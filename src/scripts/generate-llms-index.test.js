@@ -46,6 +46,7 @@ describe('generateIndexText — Get started', () => {
     expect(apiKeyPath).toContain('--set-context');
     expect(apiKeyPath).toContain('--no-secrets');
     expect(apiKeyPath).toContain('--context-file "$PWD/.neon"');
+    expect(apiKeyPath).toContain('replacing that file if present');
     expect(apiKeyPath).toContain('(`active` is `*`)');
     expect(apiKeyPath).not.toContain('new directory');
     expect(apiKeyPath).toContain(
