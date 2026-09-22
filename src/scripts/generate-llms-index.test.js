@@ -38,6 +38,7 @@ describe('generateIndexText — Get started', () => {
     expect(config.getStarted).toContain('npm i -g neon');
     expect(config.getStarted).toContain('neon auth');
     expect(config.getStarted).toContain('neon init');
+    expect(config.getStarted).toContain('https://neon.com/docs/cli/init.md');
   });
 
   it('keeps a single "## Get Started" docs heading after the intro block', () => {
