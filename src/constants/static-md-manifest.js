@@ -14,6 +14,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-functions/references/function-triggers.md',
   '/docs/ai/skills/neon-functions/references/mastra-studio.md',
   '/docs/ai/skills/neon-functions/references/mcp.md',
+  '/docs/ai/skills/neon-functions/references/production-hardening.md',
   '/docs/ai/skills/neon-functions/references/sentry.md',
   '/docs/ai/skills/neon-functions/references/sse.md',
   '/docs/ai/skills/neon-object-storage/SKILL.md',
