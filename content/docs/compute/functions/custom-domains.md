@@ -25,6 +25,8 @@ Custom domains are branch-scoped: a domain registered on one branch isn't
 inherited by its child branches, and each hostname can be registered only once.
 Use a distinct hostname for each preview or development branch.
 
+Neon Functions do not support hosting websites.
+
 <Admonition type="warning" title="Secure both function URLs">
 Adding a custom domain doesn't authenticate the function or disable its native Neon URL. Both URLs remain publicly reachable, so protect the function with [application-level authentication](/docs/compute/functions/authentication).
 </Admonition>
