@@ -1,4 +1,4 @@
-text: 'Just shipped: Neon Functions can now run on a schedule'
+text: 'Just shipped: Function Triggers - invoke a Neon Function when a file is uploaded to Object Storage'
 link:
-  url: 'https://neon.com/blog/your-neon-functions-can-now-run-on-a-schedule'
+  url: 'https://neon.com/blog/when-a-file-is-uploaded-run-the-job-on-neon'
   target: '_blank'
