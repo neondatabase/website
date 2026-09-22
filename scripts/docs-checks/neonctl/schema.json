@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "5.0.0",
+  "neonctlVersion": "5.0.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -4421,7 +4421,37 @@
         }
       },
       "commands": {},
-      "describe": "Authenticate"
+      "describe": "Sign in with a browser. See --help for API keys and profiles",
+      "examples": [
+        {
+          "command": "$0 auth",
+          "description": "Sign in with a browser"
+        },
+        {
+          "command": "$0 auth --profile work",
+          "description": "Save a browser session in profile work"
+        },
+        {
+          "command": "$0 projects list --api-key \"$KEY\"",
+          "description": "Use an existing API key for this command"
+        },
+        {
+          "command": "NEON_API_KEY=\"$KEY\" $0 projects list",
+          "description": "Use an existing API key from the environment"
+        },
+        {
+          "command": "$0 profile create agent --api-key \"$KEY\"",
+          "description": "Store an existing API key"
+        },
+        {
+          "command": "echo \"$KEY\" | $0 profile create agent --api-key -",
+          "description": "Store a key read from stdin"
+        },
+        {
+          "command": "$0 profile create ci --mint",
+          "description": "Sign in once in a browser and store a new API key"
+        }
+      ]
     }
   }
 }
