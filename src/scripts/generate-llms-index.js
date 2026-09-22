@@ -264,6 +264,10 @@ function generateIndexText(organized, collapsedEntries = []) {
     lines.push(`> ${config.tagline}`);
     lines.push('');
   }
+  if (config.getStarted) {
+    lines.push(config.getStarted);
+    lines.push('');
+  }
   if (config.intro) {
     lines.push(config.intro);
     lines.push('');
