@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-17T12:24:58.811Z'
+updatedOn: '2026-09-21T08:27:00.804Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -176,14 +176,20 @@ Neon responds `201` with the trigger wrapped in a `trigger` object:
 
 <TabItem>
 
-Declare the trigger on the function in [`neon.ts`](/docs/reference/neon-ts), then apply it with `neon deploy`. `cron` is a five-field UTC expression.
+Declare the trigger in the top-level `triggers` record in [`neon.ts`](/docs/reference/neon-ts), with `function` pointing at your function's slug, then apply it with `neon deploy`. `cron` is a five-field UTC expression.
 
 ```ts filename="neon.ts"
 functions: {
   uptime: {
     name: "Uptime",
     source: "./functions/uptime.ts",
-    triggers: [{ type: "schedule", name: "uptime-check", cron: "* * * * *" }],
+  },
+},
+triggers: {
+  "uptime-check": {
+    type: "schedule",
+    function: "uptime",
+    cron: "* * * * *",
   },
 },
 ```
@@ -202,6 +208,8 @@ neon logs query --source function
 
 Your `check ...` line appears with the `scheduled_at` value read from `data`. See [Observability](#observability) for why that line matters.
 
+To iterate on the handler without waiting for the clock, replay the payload against `neon dev` locally. See [Test triggers locally](/docs/compute/functions/triggers/overview#test-triggers-locally).
+
 Once you've seen a run, move the trigger to its real cadence (see [Manage triggers](#manage-triggers)). Left at `* * * * *`, it keeps invoking the function every minute.
 
 </Steps>
@@ -212,7 +220,7 @@ A schedule is a five-field numeric cron expression, always interpreted in **UTC*
 
 ![The five cron fields (minute, hour, day of month, month, day of week); 0 9 * * 1-5 means 09:00 Monday through Friday](/docs/compute/functions/triggers/cron-anatomy.png)
 
-To track local time, convert to UTC yourself, and account for daylight saving shifts.
+To track local time, convert to UTC yourself, and account for daylight saving shifts. You can test your expressions with [crontab.guru](https://crontab.guru/).
 
 | Expression     | Meaning (UTC)                     |
 | -------------- | --------------------------------- |
@@ -385,6 +393,7 @@ The request body is strict: any field not in the schema is rejected rather than 
 
 - [Function Triggers overview](/docs/compute/functions/triggers/overview)
 - [Trigger on an object upload](/docs/compute/functions/triggers/object-storage): the object-created trigger type
+- [Triggers in `neon.ts`](/docs/reference/neon-ts#triggers): declare triggers as code
 - [pg_cron](/docs/extensions/pg_cron): schedule SQL inside Postgres instead
 - [Deploy and manage](/docs/compute/functions/deploy)
 - [Authentication](/docs/compute/functions/authentication)
