@@ -43,6 +43,8 @@ Let’s take a closer look:
 
 ## How storage_object_created works
 
+**[add diagram]**
+
 The logic is simple:
 
 - You point the trigger at one Function and one bucket on the same branch.
@@ -82,7 +84,7 @@ We also shipped `schedule`, another trigger type you can already use today. It r
 
 This is a simple trigger conceptually but extremely useful in practice. These are just a few ways we’ve been using it recently, as we tested the beta:
 
-### Keep Postgres in sync with files
+### Keep track of new files in Postgres
 
 ```
 # Prompt you agent
@@ -164,7 +166,7 @@ Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
 
 Run content moderation as soon as a file arrives. If it violates your service policies, the function can quarantine or delete it and record the decision in Postgres.
 
-The function can also redact names, Social Security numbers, and email addresses from uploaded documents, or blur faces in images for privacy requirements. Keep unreviewed uploads in a private bucket or prefix while processing. An object-created trigger runs after the object is created, so it should not be treated as a gate that prevents the original upload from landing.
+The function could also redact names, Social Security numbers, and email addresses from uploaded documents, or blur faces in images for privacy requirements. Keep unreviewed uploads in a private bucket or prefix while processing. An object-created trigger runs after the object is created, so it should not be treated as a gate that prevents the original upload from landing.
 
 ## As everything in the Neon backend, triggers can branch
 
@@ -173,6 +175,8 @@ The entire [Neon backend](https://neon.com/blog/neon-backend-is-ga) is branch-sc
 A child branch gets its own view of the bucket and its objects, its own function URL, and an inherited copy of the trigger. But **inherited triggers are disabled on the child by default**; this prevents a dev branch from processing the same inherited files again as soon as it is created.
 
 If you want to test the upload pipeline, enable the trigger in that test branch. All test uploads and the resulting Postgres writes will then stay on the child, without changing the parent.
+
+**[add branching diagram]**
 
 ## Start building
 
