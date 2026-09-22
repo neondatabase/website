@@ -31,6 +31,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/social.jpg
 ---
 
+![When a file is uploaded, run the job on Neon](https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/cover.jpg)
+
 <Admonition type="note" title="Just shipped">
 [Neon Object Storage](https://neon.com/docs/storage/overview) and [Neon Functions](https://neon.com/docs/compute/functions/overview) just reached GA. Object Storage is S3-compatible file storage that branches with your data; functions are long-running Node.js on the same branch and in the same region as your database. [Get the full picture.](https://neon.com/blog/neon-backend-is-ga)
 </Admonition>
@@ -38,6 +40,8 @@ seo:
 A file in a bucket is just bytes; when you upload it, there is often a job to do next with that file, and that job usually involves Postgres - a `files` row, a status, a thumbnail key. That is a perfect [Neon Functions](https://neon.com/functions) job; the missing piece was something to start the Function when the object appeared, without extra application code watching the bucket.
 
 If you store the files in Neon Object Storage, [you can now create a `storage_object_created` function trigger](https://neon.com/docs/compute/functions/triggers/object-storage). It tells Neon: “when an object is created in this bucket, invoke this Function”. The Function runs next to your database and buckets, in the same region; it receives the bucket name and object key, and then does the job you wrote.
+
+<YoutubeIframe embedId="MUZrvlObbYQ" isDocPost={false} />
 
 Let’s take a closer look:
 
