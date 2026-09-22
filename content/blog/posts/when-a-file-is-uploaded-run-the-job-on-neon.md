@@ -134,7 +134,7 @@ Create a Neon Function that describes and tags uploaded images, then trigger it 
 Docs: https://neon.com/docs/compute/functions/triggers/object-storage.md
 
 - One unauthenticated POST route. Read data.bucket_name and data.object_key; keep it idempotent.
-- Fetch the image, call the Neon AI Gateway to generate alt text and a few tags, and write them to the file's row in Postgres.
+- Fetch the image, call the Neon AI Gateway to generate alt text and a few tags, and write them to the file row in Postgres.
 - Deploy it, then create a storage_object_created trigger on the bucket. Upload an image and check the row for alt text and tags.
 ```
 
