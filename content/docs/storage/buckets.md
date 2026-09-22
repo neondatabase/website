@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-09-22T11:35:44.667Z'
 ---
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
@@ -169,6 +169,8 @@ When you create a new branch, it inherits all buckets from its parent, including
 - The parent branch continues to see its own state unchanged.
 
 This makes it safe to test bucket changes in a preview branch without affecting production.
+
+When you [reset a branch from its parent](/docs/guides/reset-from-parent), its buckets and objects reset along with the database. The branch returns to the parent's current state, and any bucket changes you made on it are discarded. A [restore](/docs/postgres/backup-restore/branch-restore) behaves differently: it rolls back Postgres but leaves buckets and objects as they are.
 
 ## Next steps
 

@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-08-31T19:23:51.024Z'
+updatedOn: '2026-09-22T11:35:44.667Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -30,7 +30,8 @@ When you reset a branch to its parent, the data and schema is completely replace
 ### Key points
 
 - You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/postgres/backup-restore/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
-- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset, and there is no way to exclude `neon_auth`. Unlike instant restore, a reset leaves no backup branch, so keep any auth work you want to preserve on its own branch. Object Storage and Functions are not part of the database timeline, so a reset does not affect any local changes you've made to them.
+- This reset is a complete overwrite of the branch's databases, not a refresh or a merge. Any local changes to the branch's Postgres data or Managed Better Auth state are lost during the reset, and there is no way to exclude `neon_auth`. Unlike instant restore, a reset leaves no backup branch, so keep any auth work you want to preserve on its own branch.
+- Object Storage is reset along with the database. The branch's buckets and objects return to the parent's current state, so any uploads, overwrites, and deletes you made on the branch are discarded. This is different from [Instant restore](/docs/postgres/backup-restore/branch-restore), which leaves Object Storage untouched. Functions are not part of the database timeline, so a reset does not affect them.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
