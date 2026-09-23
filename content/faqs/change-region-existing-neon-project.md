@@ -3,7 +3,7 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,9 +14,7 @@ nextLink:
   slug: cheapest-ways-run-postgres-database-low-traffic
 ---
 
-## Quick answer
-
-You can't move an existing Neon project to a new region in place. Instead, create a new project in the target AWS region, copy the schema and data using `pg_dump` and `pg_restore` (or logical replication for larger datasets), update your connection strings, then delete the old project. The whole process takes minutes for small databases. New projects can only be created in AWS regions; Azure regions are deprecated.
+You can't move an existing Neon project to a new region in place ([Regions](/docs/introduction/regions)). Create a new project in the target AWS region, copy the schema and data with `pg_dump` and `pg_restore` (or logical replication when you can't afford a long cutover window), update your connection strings, then delete the old project. New projects can only be created in AWS regions; Neon's Azure regions are deprecated.
 
 ## Step-by-step migration
 
@@ -30,17 +28,17 @@ From the CLI:
 neon projects create --name myproject-us-east-1 --region-id aws-us-east-1
 ```
 
-For the full list of supported AWS region IDs, see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/cli/projects#create).
+If you omit `--region-id`, the CLI defaults to `aws-us-east-2`. The [Regions](/docs/introduction/regions) page lists every region ID, and the [`neon projects create`](/docs/cli/projects#create) reference covers the other flags.
 
 ### 2. Dump the source database
 
-Use an unpooled connection string for `pg_dump`. Pooled connections through PgBouncer don't support dump operations.
+Use unpooled connection strings for both the dump and the restore. Neon recommends against running `pg_dump` or `pg_restore` over a pooled (PgBouncer) connection ([docs](/docs/import/migrate-neon-to-another-region)).
 
 ```bash shouldWrap
 pg_dump -Fc -v -d "postgresql://[user]:[password]@[old-host]/[dbname]" -f neon_dump.bak
 ```
 
-For large databases, add `-j 4` to parallelize, and `-Z 1` for light compression. See [Advanced pg_dump options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
+For large databases, `-Z 1` gives light compression, and `pg_restore -j <njobs>` restores tables in parallel from a custom-format archive. Parallel dumps (`pg_dump -j`) require the directory format (`-Fd`) instead of `-Fc` ([pg_dump docs](https://www.postgresql.org/docs/current/app-pgdump.html)). See [Advanced pg_dump and pg_restore options](/docs/import/migrate-from-postgres#advanced-pg_dump-and-pg_restore-options).
 
 ### 3. Restore into the new project
 
@@ -52,18 +50,18 @@ The `--no-owner` flag avoids errors from `ALTER OWNER` statements, which `neon_s
 
 ### 4. Switch your applications over
 
-Copy the new connection string from the **Connect** button on the new project's dashboard and update environment variables in your deployment platform. Verify the application is healthy on the new database before going to the next step.
+Copy the new connection string from the **Connect** button on the new project's dashboard and update the environment variables where your app is deployed. Confirm the application works on the new database before you delete anything.
 
 ### 5. Delete the old project
 
-Once you've confirmed the cutover, delete the old project from **Project Settings → Delete** to stop accruing storage costs.
+Once the cutover is done, open the old project, select **Settings**, then **Delete**. The old project bills for storage until you delete it. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days.
 
 <Admonition type="important" title="Plan around the migration window">
-Writes to the source database during the dump and restore won't appear in the new project. Either accept a brief read-only window for the cutover, or use logical replication to keep the target current until you switch traffic. See the [Import Data Assistant](/docs/import/import-data-assistant) for databases under 10 GB and [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) for larger datasets.
+Writes to the source database during the dump and restore won't appear in the new project. Either stop writes for the cutover, or use [logical replication](/docs/guides/logical-replication-neon-to-neon) to keep the target current until you switch traffic. For databases under 10 GB, the [Import Data Assistant](/docs/import/import-data-assistant) runs the import from the Console. [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region) compares all three methods.
 </Admonition>
 
 ## Data transfer costs
 
-Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB per project per month of public network transfer, which is usually enough for a one-off migration.
+Data you read out of the source project, whether through `pg_dump` or logical replication, counts as [public network transfer](/docs/introduction/plans#public-network-transfer) on that project. The Free plan includes 5 GB per project per month, which covers a Free plan database (0.5 GB storage cap) several times over. The Launch and Scale plans include 500 GB per project per month, then $0.10/GB.
 
 <CTA title="Compare migration paths" description="The region migration guide compares the Import Data Assistant, dump and restore, and logical replication." buttonText="Region migration guide" buttonUrl="https://neon.com/docs/import/migrate-neon-to-another-region" />

@@ -13,7 +13,7 @@ nextLink:
   slug: debug-production-database-issues-safely
 ---
 
-Lakebase Postgres branches work well as disposable Postgres environments. You create a branch in seconds, run your tests against it, and delete it when you're done. Because branches use copy-on-write storage, you don't pay to duplicate data upfront.
+Neon. A Neon branch works as a disposable Postgres database: you create it in seconds, run your tests against it, and delete it when you're done. Branches use copy-on-write storage, so you don't pay to duplicate data upfront.
 
 ## Spin up, test, tear down
 
@@ -22,7 +22,7 @@ A typical CI flow creates a fresh branch per pull request:
 ```bash
 # In your CI job
 BRANCH_NAME="ci-pr-$PR_NUMBER"
-neon branches create --name "$BRANCH_NAME" --parent main
+neon branches create --name "$BRANCH_NAME"
 DATABASE_URL=$(neon connection-string "$BRANCH_NAME")
 
 # Run your tests
@@ -32,40 +32,39 @@ npm test
 neon branches delete "$BRANCH_NAME"
 ```
 
-The branch starts as a pointer to the parent's data, so creation takes seconds regardless of database size. The Neon [GitHub Action](https://neon.com/docs/guides/branching-github-actions) wraps this pattern and handles cleanup for you.
+Without `--parent`, the branch comes from your project's default branch (`production` for projects created in the Console, `main` for projects created with the CLI or API). The branch starts as a pointer to the parent's data, so creation takes seconds regardless of database size. The [Neon GitHub Actions](/docs/guides/branching-github-actions) wrap this pattern, with separate actions to create a branch and to delete it when the PR is merged or closed.
 
 ## Auto-expiring branches
 
-If you forget to delete a branch, you can set a TTL at creation time:
+In case a cleanup step never runs, set an expiration time when you create the branch:
 
 ```bash
 neon branches create --name preview-staging \
-  --parent main \
   --expires-at 2026-04-26T00:00:00Z
 ```
 
-The branch is deleted automatically at the expiration time. See [Branch expiration](https://neon.com/docs/guides/branch-expiration).
+Neon deletes the branch at that time. The timestamp uses RFC 3339 format and can be up to 30 days out. See [Branch expiration](/docs/guides/branch-expiration).
 
 ## What it costs
 
-Plan allowances ([Plans](https://neon.com/docs/introduction/plans)):
+Plan allowances ([Plans](/docs/introduction/plans)):
 
-- **Free plan**: 10 branches per project, 100 projects, 0.5 GB storage per project
-- **Launch plan**: 10 branches included, $1.50/branch-month for extras (prorated hourly)
-- **Scale plan**: 25 branches included, same overage rate
+- **Free plan**: 10 branches per project, 100 projects, 0.5 GB storage per project, no extra branches
+- **Launch plan**: 10 branches per project included, then $1.50/branch-month for extras, metered hourly
+- **Scale plan**: 25 branches per project included, with the same rate for extras
 
-A short-lived test branch that exists for an hour costs about $0.002 in branch fees, plus compute (suspended after 5 minutes of idle on Free and Launch) and any storage written during the test. You don't pay for compute while the branch is suspended; you continue to pay for storage the branch wrote.
+A test branch beyond your allowance that exists for an hour adds about $0.002 in branch fees. On top of that, you pay for the compute it uses and the storage it writes. Its compute suspends after 5 minutes idle by default, and suspended compute accrues no CU-hours.
 
 <Admonition type="tip">
-Pair branching with [Neon Local](https://neon.com/docs/local/neon-local) to run integration tests against a real Neon branch from a Docker container.
+Pair branching with [Neon Local](/docs/local/neon-local), a Docker proxy that can create a branch when the container starts and delete it when the container stops.
 </Admonition>
 
 ## How other options compare for disposable instances
 
-- **AWS RDS for Postgres**: each test database is a separate [database instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html), provisioned in minutes and billed per instance-hour while it exists. No copy-on-write storage, so seeding a 50 GB test database means paying for 50 GB of EBS until you delete it.
-- **Aurora Serverless v2**: starts faster than RDS and can scale to zero ACUs once provisioned, but creation is still cluster-level. Setting up one per PR is heavier than a Neon branch.
-- **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) per pull request are the closest analog. They don't carry data from your main project, so disposable test data has to come from a `seed.sql` file or your own migration scripts.
+- **AWS RDS for Postgres**: each test database is a separate [DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html), created in minutes and billed per instance-hour while it runs. There's no copy-on-write storage, so a 50 GB test database bills for 50 GB of storage until you delete it.
+- **Aurora (Postgres)**: [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) creates a copy-on-write copy of a cluster, up to 15 per source before new clones become full copies. Each clone is a separate cluster, and Aurora Serverless v2 instances can [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) at 0 ACU between runs.
+- **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) per pull request are the closest match. They start from migrations and `seed.sql` rather than production data, and they pause after inactivity and are deleted when the PR is merged or closed. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on.
 
-The Lakebase Postgres branch model fits the disposable-instance pattern because creation is fast, the test environment carries real data shapes from production, and an unused branch stops billing compute once it scales to zero.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Run disposable Postgres on Neon" description="Free plan, 10 branches per project, no credit card." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />
