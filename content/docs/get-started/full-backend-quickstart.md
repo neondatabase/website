@@ -644,6 +644,51 @@ npm run dev
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
+<TwoColumnLayout.Step title="Deploy to Vercel">
+<TwoColumnLayout.Block>
+
+With the app running locally, ship the front end to [Vercel](https://vercel.com), the recommended host for a Next.js App Router project like this one. Neon stays the backend: your Vercel deployment queries Postgres, reads and writes Object Storage, and calls the Neon Function directly for AI.
+
+Install the Vercel CLI and deploy, then add the same credentials the app used locally as Vercel environment variables:
+
+- `DATABASE_URL`
+- the four `AWS_*` Object Storage variables
+- `NEXT_PUBLIC_POSTS_FN_URL`
+
+The browser calls the Neon Function directly for the streaming assistant, so the long-running AI request never runs on Vercel and can't hit Vercel's serverless function timeout. Vercel serves the app and its Server Actions; the Function serves the stream.
+
+<Admonition type="tip" title="Give each preview its own database">
+Connect the [Neon Vercel integration](/docs/guides/vercel-overview) so every Vercel preview deployment gets its own Neon branch, and previews run against isolated data instead of production.
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+npm i -g vercel
+vercel        # deploy and link the project
+```
+
+Add each variable to the Production environment:
+
+```bash filename="Terminal"
+vercel env add DATABASE_URL production
+vercel env add AWS_ACCESS_KEY_ID production
+vercel env add AWS_SECRET_ACCESS_KEY production
+vercel env add AWS_ENDPOINT_URL_S3 production
+vercel env add AWS_REGION production
+vercel env add NEXT_PUBLIC_POSTS_FN_URL production
+```
+
+Redeploy so the variables take effect:
+
+```bash filename="Terminal"
+vercel --prod
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
 </TwoColumnLayout>
 
 ## What you built
@@ -654,7 +699,7 @@ You now have a Next.js app where:
 - Images upload to a Neon Storage bucket through a Server Action and the Files SDK
 - A Neon Function generates posts and runs a streaming, tool-calling AI assistant on compute next to your database
 - The whole backend is declared in one `neon.ts` and provisioned with `neon deploy`, which injects every credential into `.env.local`
-- The Next.js app deploys to any App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node, while the long-running AI lives on the Neon Function
+- The Next.js app deploys to [Vercel](https://vercel.com) (any App Router host that supports Server Actions also works, such as Netlify or self-hosted Node), while the long-running AI lives on the Neon Function, so the stream never hits the host's serverless timeout
 
 ## Next steps
 
