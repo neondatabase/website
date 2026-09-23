@@ -108,6 +108,18 @@ describe('validateCatalog', () => {
     expect(validateCatalog(CATALOG)).toEqual([]);
   });
 
+  it('does not confuse GPT image-generation tool support with image output', () => {
+    const gptModels = Object.values(CATALOG.neon.models).filter(
+      ({ provider, id }) =>
+        provider === 'openai' && id.startsWith('gpt-') && !id.startsWith('gpt-image-')
+    );
+
+    expect(gptModels.length).toBeGreaterThan(0);
+    for (const entry of gptModels) {
+      expect(entry.modalities.output, entry.id).not.toContain('image');
+    }
+  });
+
   it('rejects a map key that disagrees with the model id', () => {
     const errors = validateCatalog(catalog({ 'gpt-5': model({ id: 'gpt-5-mini' }) }));
 

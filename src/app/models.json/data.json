@@ -121,8 +121,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -167,8 +166,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -213,8 +211,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -259,8 +256,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -306,8 +302,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -354,8 +349,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -402,8 +396,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -465,8 +458,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -512,8 +504,7 @@
             "image"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -560,8 +551,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -622,8 +612,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -684,8 +673,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -752,8 +740,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -820,8 +807,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
@@ -887,8 +873,7 @@
             "pdf"
           ],
           "output": [
-            "text",
-            "image"
+            "text"
           ]
         },
         "limit": {
