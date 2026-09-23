@@ -218,5 +218,6 @@ Each search contributes its top 40 candidates. `RANK()` gives tied scores the sa
 
 - [lakebase_vector reference](/docs/extensions/lakebase-vector): index options, operator classes, tuning guide
 - [lakebase_text reference](/docs/extensions/lakebase-text): BM25 operators, functions, fallback parameters, prefilter
+- [lakebase_tokenizer reference](/docs/extensions/lakebase-tokenizer): optional configurable tokenization, stop words, synonyms, and stemming
 
 <NeedHelp />

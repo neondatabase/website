@@ -630,6 +630,8 @@
               slug: extensions/intarray
             - title: lakebase_text
               slug: extensions/lakebase-text
+            - title: lakebase_tokenizer
+              slug: extensions/lakebase-tokenizer
             - title: lakebase_vector
               slug: extensions/lakebase-vector
             - title: ltree
