@@ -244,6 +244,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dian-m-fay.jpg",
     "photoAlt": "Dian M Fay"
   },
+  "dmitrii-mokhnatkin": {
+    "name": "Dmitrii Mokhnatkin",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dmitrii-mokhnatkin.jpg",
+    "photoAlt": "Dmitrii Mokhnatkin"
+  },
   "dom-eccleston": {
     "name": "Dom Eccleston",
     "role": "Software Engineer @ Unkey",
