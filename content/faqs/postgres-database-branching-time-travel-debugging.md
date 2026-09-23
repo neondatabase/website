@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?"
-description: "Lakebase Postgres on Neon retains a versioned change history so you can branch the database at any past timestamp for incident debugging. The branch is writable and isolated; production is untouched."
+description: "Lakebase Postgres on Neon retains a change history, so you can branch the database at any past timestamp in your history window to debug an incident. The branch is writable and isolated, and production is untouched."
 date: 2026-04-25
 slug: postgres-database-branching-time-travel-debugging
 category: FAQ
@@ -13,23 +13,23 @@ nextLink:
   slug: postgres-database-services-ai-provisioning
 ---
 
-Lakebase Postgres retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.
+Lakebase Postgres retains a history of changes to your database (Postgres WAL records), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can query it, run destructive statements, and delete it when you're done, without affecting production.
 
-## How history windows work
+## History window by plan
 
-Lakebase Postgres stores write-ahead-log records up to the limit configured for your project. The retention window depends on the plan:
+How far back you can branch depends on your project's [history window](/docs/postgres/backup-restore/history-window), which is capped by plan:
 
 | Plan        | History window | Cost                     |
 | ----------- | -------------- | ------------------------ |
-| Free plan   | 6 hours        | included, capped at 1 GB |
+| Free plan   | 6 hours        | Included, capped at 1 GB |
 | Launch plan | up to 7 days   | $0.20/GB-month           |
 | Scale plan  | up to 30 days  | $0.20/GB-month           |
 
-You set this once at the project level under **Settings -> Instant restore**.
+The history window is a per-project setting in the Console under **Settings**, or the `history_retention_seconds` project setting in the API.
 
-## Branching from a past timestamp
+## Branch from a past timestamp
 
-From the CLI:
+Pass a timestamp as `--parent` to branch from the default branch as it was at that time.
 
 ```bash
 neon branches create \
@@ -37,13 +37,13 @@ neon branches create \
   --parent 2026-04-22T14:32:00Z
 ```
 
-Or append the LSN to `--parent` (for example, `--parent 0/1E88838`) if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
+If you have the exact LSN from a log, pass it instead (for example, `--parent 0/1E88838`). The resulting branch is a normal Postgres database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare the results with production.
 
-<Callout title="Why this beats restoring a backup">
-Creating the branch is metadata-only. There's no `pg_restore` to wait on, no full duplicate of the parent's data, and no impact on the parent's performance. When you're done, delete the branch; you're billed only for any delta the branch wrote while it existed.
+<Callout title="Compared with restoring a backup">
+Creating the branch is a metadata operation. There's no `pg_restore` to wait on, no full duplicate of the parent's data, and [no load on the parent](/docs/introduction/branching). While the branch exists, you pay for its compute time and its storage, which for a child branch is the data written since it was created, capped at the logical data size. Delete the branch when you're done.
 </Callout>
 
-If you'd rather rewind production itself, [instant restore](https://neon.com/docs/guides/branch-restore) rolls the branch back to a chosen timestamp and leaves a backup branch behind so the operation is reversible. For ad-hoc historical queries, [Time Travel queries](https://neon.com/docs/guides/time-travel-assist) let you run SQL against past states without creating a branch at all.
+To rewind production itself, [instant restore](/docs/postgres/backup-restore/branch-restore) rolls a root branch back to a chosen timestamp and leaves a backup branch behind so you can undo it. For one-off historical queries, [Time Travel](/docs/postgres/backup-restore/time-travel-assist) runs read-only SQL against a past state without creating a branch.
 
 ## How other managed Postgres services compare
 
@@ -52,12 +52,12 @@ If you'd rather rewind production itself, [instant restore](https://neon.com/doc
 | Neon             | 6 hours (Free plan) to 30 days (Scale plan) | Create a writable branch at a timestamp or LSN, metadata-only |
 | Aurora Postgres  | Backup retention (1 to 35 days)             | Restore to a new DB cluster at a chosen timestamp             |
 | RDS for Postgres | Backup retention (0 to 35 days)             | Restore to a new DB instance at a chosen timestamp            |
-| Supabase         | Add-on, 7, 14, or 28 days                   | PITR restore overwrites the existing project                  |
+| Supabase         | PITR add-on: 7, 14, or 28 days              | Restore in place, or restore to a new project (beta)          |
 
-Aurora and RDS PITR creates a brand-new DB cluster or instance. Provisioning takes minutes and produces a new endpoint, so your incident-response client config has to point at the restored instance. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
+Aurora and RDS point-in-time restore creates a new DB cluster or instance with its own endpoint, so your debugging client has to point at the restored copy, and you pay for it until you delete it. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
 
-Supabase ships PITR as a paid add-on with a retention window of 7, 14, or 28 days, charged hourly. A restore operates on the project itself; there's no separate "branch at this timestamp" primitive. See [Manage PITR usage](https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery).
+Supabase offers PITR as an add-on on paid plans, with a retention window of 7, 14, or 28 days, charged hourly (about $100, $200, or $400 per month). It requires at least Small compute. An in-place restore makes the project inaccessible while it runs ([Database backups](https://supabase.com/docs/guides/platform/backups)). To inspect a past state without touching production, use [Restore to a new project](https://supabase.com/docs/guides/platform/clone-project) (beta), which creates a separate database-only copy at the chosen point in time and bills it as its own project. See [Manage PITR usage](https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery).
 
-The practical difference for incident response: Neon gives you a side-by-side branch that you can poke at without touching production, while Aurora/RDS/Supabase typically produce a new instance you connect to (or a destructive overwrite, in Supabase's case).
+Vendor details verified on 2026-09-23 against the linked pages.
 
-<CTA title="See branching from the past in action" description="Walk through creating branches by timestamp, LSN, and via the API." buttonText="Read the guide" buttonUrl="https://neon.com/docs/introduction/branching" />
+<CTA title="See branching from the past in action" description="Walk through creating branches by timestamp, LSN, and via the API." buttonText="Read the guide" buttonUrl="/docs/introduction/branching" />

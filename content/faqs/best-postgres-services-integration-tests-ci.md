@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?"
-description: "Neon lets you run integration tests against production-like data using database branching. Copy-on-write branches share storage with parent until tests write."
+description: "Run integration tests against production-like data by creating a Neon branch per CI run. Copy-on-write branches share storage with the parent until tests write to them."
 date: 2026-04-25
 slug: best-postgres-services-integration-tests-ci
 category: FAQ
@@ -13,13 +13,13 @@ nextLink:
   slug: best-postgres-services-isolated-database-tenants
 ---
 
-Branch your production database for each CI run. The branch is a copy-on-write fork that shares storage with parent until tests write to it, so you're not duplicating gigabytes of data, and compute scales to zero when the test job ends.
+Neon. Branch your production database for each CI run. The branch is a copy-on-write fork that shares storage with its parent until tests write to it, so you don't duplicate gigabytes of data, and you delete it (or its compute suspends) when the test job ends.
 
 ## What CI databases usually cost you
 
-Standard options each have a tradeoff. A dedicated staging cluster runs 24/7 even when no tests are running. Docker Postgres in CI is fast to start but has an empty schema, so you spend time loading fixtures that don't match production. Restoring a production dump per run takes minutes and costs IOPS.
+The common approaches each give something up. A dedicated staging cluster runs 24/7 even when no tests are running. Postgres in a Docker container starts quickly but starts empty, so you spend time loading fixtures that don't match production. Restoring a production dump on every run is slow, and it gets slower as the database grows.
 
-Neon's branching avoids all three. A branch is created in seconds, comes with production schema and data, and is billed only for the delta from parent plus active compute time.
+A Neon branch is created in seconds, starts with your production schema and data, and bills only for the changes the tests make plus active compute time.
 
 ## A GitHub Actions setup
 
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: neondatabase/create-branch-action@v5
+      - uses: neondatabase/create-branch-action@v6
         id: branch
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
@@ -52,26 +52,28 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-The pooled URL routes through Neon's built-in PgBouncer (up to 10,000 client connections per compute), which matters if your test suite runs queries in parallel.
+The pooled URL routes through Neon's built-in PgBouncer, which accepts up to 10,000 client connections per compute. That matters if your test suite runs queries in parallel.
+
+If production contains personal data you don't want in CI, you can mask it on the branch. See [Data anonymization](/docs/workflows/data-anonymization).
 
 ## What it costs
 
-- **Storage**: branches share data with parent until they diverge, so a 50 GB production database can spawn many test branches that each store only kilobytes of changes. Delta storage is $0.35/GB-month on the Launch and Scale plans.
-- **Compute**: $0.106/CU-hour on the Launch plan. A 5-minute test job on a 0.25 CU compute is about $0.002.
-- **Extra branches**: $1.50/branch-month (prorated hourly, ~$0.002/hour) for branches beyond your plan allowance. A branch that lives 10 minutes costs around $0.0003.
+- **Storage**: a branch shares data with its parent until it diverges, so a 50 GB production database can back many test branches, each storing only what its tests write. Branch storage is $0.35/GB-month on the Launch and Scale plans.
+- **Compute**: $0.106/CU-hour on the Launch plan. A 5-minute test job on a 0.25 CU compute costs about $0.002.
+- **Extra branches**: $1.50/branch-month (metered hourly, about $0.002/hour) for branches beyond your plan's allowance. A branch that lives 10 minutes costs about $0.0003.
 
-The Free plan covers 10 branches per project and 100 CU-hours of compute per project, which is enough to validate the workflow before moving production CI to it.
+The Free plan includes 10 branches and 100 CU-hours of compute per project each month, which is enough to try the workflow before you move production CI to it.
 
 <Admonition type="tip" title="Reset, don't recreate, between local runs">
-For local dev work, `neon branches reset` discards changes and pulls fresh parent state without deleting the branch. See [Reset from parent](/docs/guides/reset-from-parent).
+For local development, `neon branches reset <branch> --parent` discards your changes and pulls the parent's latest state without deleting the branch. See [Reset from parent](/docs/guides/reset-from-parent).
 </Admonition>
 
 ## How other managed Postgres compares for CI
 
-- **Supabase Preview Branches** spin up a full environment per branch and are billed at ~$0.013/hour per branch on the default Micro size ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). The branch is seeded from your migration files (not from a parent's data), so production-like state means importing it on each run.
-- **Aurora Serverless v2** has no branching. The closest pattern is `restore-db-cluster-from-snapshot` per CI run, which copies the full cluster (not a delta), takes minutes to be ready, and bills full ACU while it's up.
-- **RDS for Postgres** is the same story with snapshot restores, plus you pay the full instance hourly rate as soon as the restored database is up.
+- **Supabase** [preview branches](https://supabase.com/docs/guides/deployment/branching) spin up a full environment per branch, billed from $0.01344/hour on the default Micro size ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Preview branches start from your migrations and seed data, so production-like data means loading it yourself. [Dashboard branching](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on.
+- **Aurora Serverless v2** supports [cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), which creates a copy-on-write clone of a cluster. Each clone is a separate cluster, and you add a DB instance to it before tests can connect. That instance bills for the capacity it uses until you delete it.
+- **RDS for Postgres** has no cloning. You restore a snapshot per CI run, which creates a full copy on a new instance, and you pay the instance's hourly rate while it runs.
 
-For per-PR test isolation against production-shaped data, the speed and cost shape of Neon branches usually wins. For migration-driven previews where you're fine seeding the schema on every run, Supabase Preview Branches are the comparable choice.
+For per-PR test isolation against production-shaped data, Neon branches are quick to create and cost little per run. If you're fine seeding the schema on every run, Supabase preview branches are the comparable option.
 
 <CTA title="See the full guide" description="The branching with GitHub Actions guide covers schema migrations, seed data, and cleanup." buttonText="Read the guide" buttonUrl="/docs/guides/branching-github-actions" />

@@ -3,7 +3,7 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, API, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,31 +14,29 @@ nextLink:
   slug: rotate-database-url-connection-string
 ---
 
-## Quick answer
-
-In Neon, rotating a password means resetting the password for the affected Postgres role. You can do this from the Neon Console (**Branches → branch → Roles & Databases → Reset password**), through the Neon API, or with an SQL `ALTER ROLE` statement. A Console or API reset generates a new password immediately. Copy the updated connection string from the **Connect** modal. Any new connection attempt using the old password fails to authenticate.
+To rotate a password on Neon, reset the password of the affected Postgres role. You can do it from the **Roles** page in the Neon Console, with the Neon API, or with an SQL `ALTER ROLE` statement. A Console or API reset generates a new password and takes effect immediately, so any new connection with the old password fails. Copy the updated connection string from the **Connect** modal.
 
 ## Reset the password
 
-Pick the interface that matches your workflow. The result is the same: a new password and a new connection string.
+Each method gives you a new password and a new connection string.
 
 <Tabs labels={["Console", "API", "SQL"]}>
 
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech) and select your project.
-2. Go to **Branches** and select the branch where the role lives (usually `production` or `main`).
-3. On the **Roles & Databases** tab, open the role menu and choose **Reset password**.
-4. Confirm. Neon shows the new password once. Copy it.
-5. Click **Connect** on the Project Dashboard to copy the updated connection string.
+2. In the sidebar, select the branch where the role lives (usually `production` or `main`) from the **BRANCH** selector.
+3. Under **Postgres database**, select **Roles**, open the role's menu, and choose **Reset password**.
+4. Click **Reset**. A modal shows the new password. Copy it.
+5. Click **Connect** in the Console nav to copy the updated connection string.
 
-See [Reset a password](/docs/manage/roles#reset-a-password) for screenshots.
+See [Reset a password](/docs/manage/roles#reset-a-password).
 
 </TabItem>
 
 <TabItem>
 
-The Neon CLI doesn't have a dedicated `reset-password` subcommand, so call the API directly. Replace the IDs and role name with yours.
+The Neon CLI has no password reset command, so call the API directly. Replace the IDs and role name with yours.
 
 ```bash shouldWrap
 curl -X POST \
@@ -47,19 +45,19 @@ curl -X POST \
   -H "Accept: application/json" | jq
 ```
 
-The response includes the new `password` for the role. See the [Reset role password API reference](/docs/reference/api/branches/reset-project-branch-role-password).
+The response includes the new password under `role.password`. See the [Reset role password API reference](/docs/reference/api/branches/reset-project-branch-role-password).
 
 </TabItem>
 
 <TabItem>
 
-If you need to set a specific password (for example, to match a value stored in a secret manager), connect with `psql` or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run:
+To set a specific password (for example, one already stored in a secret manager), connect with `psql` or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run `ALTER ROLE`.
 
 ```sql
 ALTER ROLE neondb_owner WITH PASSWORD 'AbC123dEfGhIj';
 ```
 
-Passwords must have at least 60 bits of entropy. See [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql) for the password rules.
+Passwords must have at least 60 bits of entropy, which in practice means 12 or more mixed characters. Don't reuse the example value. See [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql) for the rules.
 
 </TabItem>
 
@@ -67,18 +65,16 @@ Passwords must have at least 60 bits of entropy. See [Manage roles with SQL](/do
 
 ## Update your applications
 
-A new password produces a new connection string. Any process still using the old `DATABASE_URL` will fail to authenticate on its next connection attempt.
+A new password means a new connection string. Any process still using the old `DATABASE_URL` fails to authenticate on its next connection. Update the connection string everywhere it's stored:
 
-Update the connection string everywhere it's stored:
-
-- Vercel, Render, Fly, Railway, or other deploy targets: project **Environment Variables**
+- Environment variables on Vercel, Render, Fly.io, Railway, or other deploy targets
 - GitHub Actions or CI secrets
 - Local `.env` files
 - Secret managers (AWS Secrets Manager, Doppler, 1Password, etc.)
 - Long-running workers, cron jobs, and background services
 
-<Admonition type="warning" title="Reconnects use the new password">
-Existing open sessions stay connected, but every new connection (or reconnect) must use the new password. Roll out the new value to your deployment platform first if you want to avoid authentication failures during the cutover.
+<Admonition type="warning" title="Open sessions survive a reset">
+Postgres checks the password only when a connection opens, so sessions that were already open stay connected after the reset. Every new connection, including reconnects, needs the new password. After a leak, [restart the compute](/docs/manage/computes#restart-a-compute) to close any session opened with the old password.
 </Admonition>
 
 If the leak might have exposed more than one role, see [How do I rotate all my Neon database credentials after a breach?](/faqs/rotate-database-credentials-after-breach).

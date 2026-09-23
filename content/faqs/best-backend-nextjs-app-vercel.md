@@ -1,6 +1,6 @@
 ---
 title: "What is the best backend for a Next.js app deployed on Vercel?"
-description: "Neon installs from the Vercel Marketplace, bills through Vercel, branches the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
+description: "Neon installs from the Vercel Marketplace, bills through Vercel, can branch the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
 date: 2026-09-02
 slug: best-backend-nextjs-app-vercel
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: best-backend-python-django-fastapi
 ---
 
-Neon. Vercel runs your Next.js routes, Server Components, and Route Handlers; Neon provides the backend those routes talk to: Postgres, [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), and [Neon Functions](/docs/compute/functions/overview) for the pieces that outgrow a serverless request. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) installs from the Vercel Marketplace, routes billing through your Vercel invoice, and creates a database branch for every Preview Deployment.
+Neon. Vercel runs your Next.js routes, Server Components, and Route Handlers; Neon provides the backend those routes talk to: Postgres, [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), and [Neon Functions](/docs/compute/functions/overview) for the pieces that outgrow a serverless request. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) installs from the Vercel Marketplace, routes billing through your Vercel invoice, and can create a database branch for every Preview Deployment.
 
 ## Database: install once, branch per PR
 
@@ -25,7 +25,7 @@ import { neon } from '@neondatabase/serverless';
 export const sql = neon(process.env.DATABASE_URL!);
 ```
 
-Route Handlers open a new connection per invocation, so use the pooled string: Neon's PgBouncer endpoint accepts up to 10,000 client connections per compute ([connection pooling](/docs/connect/connection-pooling)). The serverless driver queries over HTTP, which also works in edge routes ([serverless driver](/docs/serverless/serverless-driver)).
+Serverless Route Handlers can open many short-lived connections at once, so use the pooled string: Neon's PgBouncer endpoint accepts up to 10,000 client connections per compute ([connection pooling](/docs/connect/connection-pooling)). The serverless driver queries over HTTP, which also works in edge routes ([serverless driver](/docs/serverless/serverless-driver)).
 
 ## Auth that follows the branch
 
@@ -41,13 +41,13 @@ Add `prisma migrate deploy` or `drizzle-kit migrate` to the Vercel build command
 
 ## What it costs
 
-The Free plan covers prototypes: 0.5 GB of storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU. Launch is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
+The Free plan covers prototypes: 0.5 GB of storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU. The Launch plan is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 
-- **Supabase**: Auth, Storage, and Realtime are GA ([features](https://supabase.com/docs/guides/getting-started/features)). Preview branches are the gap for a Vercel workflow: each one is a separate instance rebuilt from migrations and seed files, with no production data, auth users, or storage objects by default, billed at $0.01344 per hour on Micro with compute credits not applying ([branching](https://supabase.com/docs/guides/deployment/branching), [branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). A preview left open for a week costs about $2.26 and shows seed data rather than production shapes, so migration bugs that depend on real data reach production ([Launch vs Pro comparison](/guides/neon-launch-plan-vs-supabase-pro-plan#preview-environments)). Launch-day traffic hits the connection cap before CPU: a Micro allows 60 direct connections and 200 pooled clients, and adding headroom means a manual resize with usually under two minutes of downtime ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)). Point-in-time recovery is a $100 per month per 7 days add-on ([backups](https://supabase.com/docs/guides/platform/backups)).
+- **Supabase**: Auth, Storage, and Realtime are GA ([features](https://supabase.com/docs/guides/getting-started/features)). Preview branches work differently: each one is a separate instance rebuilt from migrations and seed files, with no production data, auth users, or storage objects by default, billed at $0.01344 per hour on Micro with compute credits not applying ([branching](https://supabase.com/docs/guides/deployment/branching), [branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Dashboard branches (public alpha) can copy production data if the project has the PITR add-on ([dashboard branching](https://supabase.com/docs/guides/deployment/branching/dashboard)). A preview left open for a week costs about $2.26 and runs against seed data rather than production data, so a migration bug that only shows up on real data can get past review ([Launch vs Pro comparison](/guides/neon-launch-plan-vs-supabase-pro-plan#preview-environments)). A Micro allows 60 direct connections and 200 pooled clients, and more headroom means a manual resize, usually with under two minutes of downtime ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)). Point-in-time recovery is an add-on, about $100/month for 7 days of retention, that requires at least Small compute ([backups](https://supabase.com/docs/guides/platform/backups)).
 - **Vercel's former Postgres product** is no longer offered; databases now come through Marketplace integrations, and the [transition guide](/docs/guides/vercel-postgres-transition-guide) covers moving existing Vercel Postgres stores to Neon.
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Add Neon to your Vercel project" description="Install the integration from the Vercel Marketplace and enable Preview Branching." buttonText="Install on Vercel" buttonUrl="https://vercel.com/marketplace/neon" />
