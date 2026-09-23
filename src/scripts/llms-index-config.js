@@ -22,7 +22,7 @@ module.exports = {
   getStarted: [
     '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
     '',
-    'Otherwise, use an existing account. Install the Neon CLI and agent skills:',
+    'If a Neon account is available, set things up locally by installing the Neon CLI and running the project init command to install the agent skills and creating/linking a Neon project:',
     '',
     '```bash',
     'npm i -g neon',
