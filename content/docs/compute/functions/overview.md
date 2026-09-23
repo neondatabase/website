@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-09-22T15:52:59.294Z'
 ---
 
 Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
@@ -94,6 +94,10 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 - **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
 - **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
+
+<Admonition type="note">
+Neon Functions do not support hosting websites.
+</Admonition>
 
 ## Starter templates
 

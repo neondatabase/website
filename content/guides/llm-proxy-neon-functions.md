@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -397,7 +397,7 @@ The `neon link` command created a `neon.ts` file in your project root. Update it
 
 <CodeTabs labels={['postgres', 'redis']}>
 
-```typescript {4,10-18} filename="neon.ts"
+```typescript {4,10-16} filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -407,19 +407,17 @@ export default defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      proxy: {
-        name: "LLM Proxy Server",
-        source: "./index.ts",
-      }
-    },
-    aiGateway: true
-  }
+  functions: {
+    proxy: {
+      name: "LLM Proxy Server",
+      source: "./index.ts",
+    }
+  },
+  aiGateway: true
 });
 ```
 
-```typescript {4,10-22} filename="neon.ts"
+```typescript {4,10-20} filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -429,19 +427,17 @@ export default defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      proxy: {
-        name: "LLM Proxy Server",
-        source: "./index.ts",
-        env: {
-          UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL!,
-          UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN!,
-        }
-      },
+  functions: {
+    proxy: {
+      name: "LLM Proxy Server",
+      source: "./index.ts",
+      env: {
+        UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL!,
+        UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN!,
+      }
     },
-    aiGateway: true
-  }
+  },
+  aiGateway: true
 });
 ```
 
@@ -450,7 +446,7 @@ export default defineConfig({
 Here's what each property does:
 
 - **`auth: true`**: Enables Managed Better Auth for this project, which provisions the JWKS endpoint your proxy uses to verify JWTs. Without this, the `NEON_AUTH_JWKS_URL` environment variable won't be available to your function.
-- **`preview.functions.proxy`**: Registers `index.ts` as a deployable Neon Function named "LLM Proxy Server". The `source` field tells Neon where to find the entry point for your function.
+- **`functions.proxy`**: Registers `index.ts` as a deployable Neon Function named "LLM Proxy Server". The `source` field tells Neon where to find the entry point for your function.
 - **`aiGateway: true`**: Activates the Neon AI Gateway, giving your function access to LLM endpoints without exposing provider keys.
 
 Apply the configuration and deploy your function to Neon. This builds and uploads your proxy code, making it available at a public URL:

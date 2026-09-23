@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Postgres Database, Authentication, and more backend primitives coming soon with three plans: Free, Launch, and Scale. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
+> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
 
 ## How billing works
 

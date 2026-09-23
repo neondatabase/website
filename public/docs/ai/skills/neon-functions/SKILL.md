@@ -13,8 +13,9 @@ description: >-
   "streaming agent", "SSE server", "WebSocket server", "webhook handler",
   "MCP server", "cron", "function trigger", "scheduled function", "cron job",
   "object storage trigger", "on upload", "run code next to my database",
-  "function that won't time out", "function logs", "Neon Functions", and
-  "Neon Compute".
+  "function that won't time out", "function logs", "Neon Functions",
+  "Neon Compute", "DDoS protection", "rate limiting", and
+  "production hardening".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-functions
@@ -46,7 +47,7 @@ Reach for Neon Functions when the workload is a request/response handler that be
 - **A backend that branches with your data.** Each branch runs its own version of the function at its own URL, against its own isolated database (and storage, and gateway) state. Preview deployments, CI, and dev environments each get a self-contained backend — deploying to a child never affects the parent.
 - **Query Postgres from the Function (or an existing framework handler).** Prefer that over the Data API. Use the Data API when the application already uses PostgREST or Supabase-js database calls, or is migrating that client.
 - **Webhooks, bots, and post-response work.** Webhook handlers that fan out into multiple DB writes, Discord/WebSocket bots, and fire-and-forget follow-ups via `waitUntil` (analytics, audit logs) all fit.
-- **Recurring HTTP work.** A Function Trigger POSTs to the function on a cron (`type: "schedule"`). Same `fetch` handler, same 15-minute time-to-first-byte limit. See [Function Triggers](#function-triggers).
+- **Recurring HTTP work.** A Function Trigger POSTs to the function on a cron (`type: "schedule"`) or when an object is created in Object Storage (`type: "storage_object_created"`). Same `fetch` handler, same 15-minute time-to-first-byte limit. See [Function Triggers](#function-triggers).
 
 If the workload is a pure static site, or something that must run outside the supported regions (`aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`) today, this isn't the right tool yet (see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits) and [Availability](#availability)).
 
@@ -57,7 +58,7 @@ If the workload is a pure static site, or something that must run outside the su
 - **Close to your database** — Runs in the branch's region; `DATABASE_URL` injected automatically when the branch has Postgres.
 - **Branchable** — Each branch runs its own function version at its own URL against its own isolated state.
 - **Same CLI/API** — Deploy and manage via `neon`, `neon.ts`, or the Neon API.
-- **Function Triggers** — Neon POSTs to the function on a cron. See [Function Triggers](#function-triggers).
+- **Function Triggers** — Neon POSTs to the function on a cron or an object-storage upload. See [Function Triggers](#function-triggers).
 
 ## Availability
 
@@ -67,12 +68,18 @@ Check this precondition before setting anything up: Neon Functions is currently 
 
 Neon (Functions included) is **backend primitives, not full-stack app hosting**. Host your app on **Vercel** (or Netlify, or another frontend/app host); Functions are the long-running, stateful slice of your backend that lives next to your data. They compose with that platform in two ways:
 
-- **Add a Function to a full-stack app.** Your Next.js / TanStack Start app on Vercel (or Netlify) owns UI, auth (Managed Auth, Better Auth, Clerk, or another IdP), and talks directly to Lakebase Postgres and Object Storage. When one workload outgrows the host's short serverless limits — a WebSocket or SSE server, or a long-running agent that would time out — move just that piece onto a Neon Function. (See [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the client-direct pattern.)
+- **Add a Function to a full-stack app.** Your Next.js / TanStack Start app on Vercel (or Netlify) owns UI, auth (Managed Auth, Better Auth, Clerk, or another IdP), and talks directly to Lakebase Postgres and Object Storage. Add a Function as a Hono API layer for the web app and other clients, or for one job next to the data: Object Storage uploads, AI agents, Discord bots, WebSocket or SSE servers. (See [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks) for the client-direct pattern.)
 - **Run the whole backend control plane on Functions.** Especially when the frontend is **client-only** — TanStack Router, React Router in client mode, and similar SPAs hosted on Vercel or Netlify — the client calls Functions **directly**. Build REST APIs and request/response agents, host **MCP servers**, and run anything stateful or that belongs close to Postgres and Object Storage.
 
-Either way, secure a Function like any standalone REST API: verify a JWT or API key at the top of the handler (see the WARNING under [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks)). Because a Function is just your backend, you can **move pieces between your host and Neon** — relocate an agent or a stateful WebSocket server onto a Function when it needs more runtime, and back if needed.
+Either way, authenticate by caller: JWT or API key for app and public HTTP (see the WARNING under [Functions as an Agent Backend](#functions-as-an-agent-backend-nextjs-and-similar-frameworks)); `parseTriggerDelivery` for Function Trigger routes; production hardening in [Production hardening](references/production-hardening.md). Because a Function is just your backend, you can **move pieces between your host and Neon** — relocate an agent or a stateful WebSocket server onto a Function when it needs more runtime, and back if needed.
 
 Prefer a Function, or an existing framework handler, that queries Postgres. Use Data API when the application already uses PostgREST/Supabase-js database calls or is migrating that client.
+
+## Production hardening
+
+Before exposing production routes, read [Production hardening](references/production-hardening.md).
+
+Pick by caller: trusted app server, Function Trigger, or public consumer. Keep long browser streams on the client-direct JWT path unless a verified streaming-compatible proxy is required. Authentication rejects application work; requests to the native URL still reach the Function.
 
 ## Setup
 
@@ -244,7 +251,7 @@ Functions are long-running but **still serverless** — they are a request/respo
 
 ## Functions as an Agent Backend (Next.js and Similar Frameworks)
 
-A Neon Function is a great home for an AI agent precisely because it **doesn't time out** the way lambda-style serverless does (15-minute budget, see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits)). But that advantage disappears the moment you **proxy the agent stream through your web app's backend** — a Next.js route handler, Remix/SvelteKit/Nuxt action, etc. hosted on Vercel, Netlify, Cloudflare, and the like. Those platforms cap serverless/edge execution at short windows (often ~10–60s, sometimes up to ~300s), so a long agent or image/video generation stream gets cut off mid-response even though the Neon Function would happily keep going.
+A Neon Function is a great home for an AI agent precisely because it **doesn't time out** the way lambda-style serverless does (15-minute budget, see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits)). Proxying that stream through a Next.js route handler, Remix/SvelteKit/Nuxt action, or similar hosted on Vercel, Netlify, and the like **cuts the stream when it exceeds that host's configured duration or transport limits**, even though the Function would keep going. Keep the client-direct JWT path below as the default. A streaming-compatible proxy (HTTP-triggered Cloudflare Worker, after you verify the stream) is the public-consumer exception in [Production hardening](references/production-hardening.md).
 
 **Building the agent itself.** The [Vercel AI SDK](https://ai-sdk.dev) and [Mastra](https://mastra.ai) are the recommended ways to build the agent — point either at the Neon AI Gateway (see the `neon-ai-gateway` skill) for one credential across every model, with no extra provider keys. For a complete AI SDK agent running as a Function (streaming `toUIMessageStreamResponse`, multi-step tool calling next to Postgres, and persisting generated images to Object Storage), see [references/ai-sdk.md](https://neon.com/docs/ai/skills/neon-functions/references/ai-sdk.md); for the Mastra equivalent with built-in tracing, see [references/mastra-studio.md](https://neon.com/docs/ai/skills/neon-functions/references/mastra-studio.md).
 
@@ -264,7 +271,7 @@ Browser ──▶ your app backend ──▶ Neon Function                      
 - Add **CORS** so the browser can reach it (handle `OPTIONS`, set `Access-Control-Allow-Origin`/`-Headers`).
 
 > [!WARNING]
-> A Neon Function has a **public HTTPS URL — it is reachable by anyone.** A direct client→function call means there is no app backend in front of it to gate access, so **you must authenticate the function yourself.** Verify a JWT against the caller's JWKS, check a shared secret / API key, or reject the request. Never deploy an unauthenticated agent.
+> A Neon Function has a **public HTTPS URL — it is reachable by anyone.** A direct client→function call means there is no app backend in front of it to gate access, so **you must authenticate the function yourself.** Verify a JWT against the caller's JWKS, check a shared secret / API key, or reject the request. Never deploy an unauthenticated agent. Browser callers use short-lived user tokens. Server or proxy origin secrets (`X-Secret`) stay server-side; see [Production hardening](references/production-hardening.md).
 
 ```typescript
 // src/index.ts — verify the caller before doing any work
@@ -592,9 +599,9 @@ The same rules as WebSockets apply. **Heartbeat:** a stream stays open only whil
 
 ## Function Triggers
 
-A Function Trigger POSTs JSON to your function on a cron. Declare it in `neon.ts`, apply with `neon deploy`, and authenticate the delivery with `parseTrigger` (Hono) or `parseTriggerInvocation` (a `fetch` handler). The only trigger type today is `schedule`. Prefer `neon.ts`; CLI and the Neon MCP trigger tools (`list_triggers`, `create_trigger`, …) are the backup.
+A Function Trigger POSTs JSON to your function on a cron (`schedule`) or when an object is created in Object Storage (`storage_object_created`). Declare it in `neon.ts`, apply with `neon deploy`, and authenticate the delivery with `parseTriggerDelivery` (`@neon/functions/triggers`). `parseTrigger` (Hono) and `parseTriggerInvocation` stay schedule-only. Prefer `neon.ts`; CLI and the Neon MCP trigger tools (`list_triggers`, `create_trigger`, …) are the backup.
 
-Full field list, CLI, MCP, payload, inheritance, and both handler shapes: [references/function-triggers.md](references/function-triggers.md).
+Trigger routes must not require a user JWT or `X-Secret`; Neon POSTs to the native URL without those. Production caller shapes: [references/production-hardening.md](references/production-hardening.md). Full field list, CLI, MCP, payload, inheritance, and both handler shapes: [references/function-triggers.md](references/function-triggers.md).
 
 ## MCP Servers
 
@@ -610,7 +617,7 @@ app.all("/mcp", async (c) => {
 });
 ```
 
-Because the function's URL is public, **authenticate before connecting the transport** — [Better Auth](https://better-auth.com) covers both OAuth (its MCP plugin makes your app the authorization server so third-party clients self-authorize per the MCP spec) and a simpler API-key / session-JWT check for your own callers. [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, both Better Auth auth options, and testing with `mcporter` / `add-mcp`.
+Because the function's URL is public, **authenticate before connecting the transport** — [Better Auth](https://better-auth.com) covers both OAuth (its MCP plugin makes your app the authorization server so third-party clients self-authorize per the MCP spec) and a simpler API-key / session-JWT check for your own callers. Public-consumer edge protection: [references/production-hardening.md](references/production-hardening.md). [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md) has the full pattern — server with Postgres-backed tools via Drizzle, both Better Auth auth options, and testing with `mcporter` / `add-mcp`.
 
 ## Integrations and Observability
 
@@ -641,5 +648,8 @@ The Neon documentation is the source of truth and Functions is evolving rapidly,
 - https://neon.com/docs/compute/functions/environment-variables.md
 - https://neon.com/docs/compute/functions/reference/neon-ts.md
 - https://neon.com/docs/compute/functions/reference/runtime-limits.md
+- https://neon.com/docs/compute/functions/authentication.md
+- https://neon.com/docs/compute/functions/custom-domains.md
 - https://neon.com/docs/cli/triggers.md
 - [references/function-triggers.md](references/function-triggers.md)
+- [references/production-hardening.md](references/production-hardening.md)

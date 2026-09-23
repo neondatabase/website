@@ -1,4 +1,4 @@
-text: 'The Neon backend is GA: a complete set of primitives so agents can build'
+text: 'Just shipped: Function Triggers - invoke a Neon Function when a file is uploaded to Object Storage'
 link:
-  url: 'https://neon.com/blog/neon-backend-is-ga'
+  url: 'https://neon.com/blog/when-a-file-is-uploaded-run-the-job-on-neon'
   target: '_blank'

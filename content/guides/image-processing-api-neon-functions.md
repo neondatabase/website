@@ -39,7 +39,7 @@ Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
-3. **The Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 
@@ -72,7 +72,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). When asked which Neon services you require, select **Functions** and **AI Gateway**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Functions** and **AI Gateway**:
 
 ```text
 $ neon link
@@ -347,26 +347,24 @@ Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access
 
 The `neon link` command created a `neon.ts` file in your project root. Replace its contents with the following:
 
-```ts filename="neon.ts" {4-13}
+```ts filename="neon.ts" {4-11}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      }
-    },
-    aiGateway: true
-  }
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
+    }
+  },
+  aiGateway: true
 });
 ```
 
 Here's what each property does:
 
-- **`preview.functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
+- **`functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
 - **`externalPackages: ['sharp']`**: Ships Sharp's files with the deploy instead of bundling them into the function bundle. See the note below for why this matters.
 - **`aiGateway: true`**: Enables the Neon AI Gateway on the branch. This is what injects the `NEON_AI_GATEWAY_*` credentials your `/caption` route uses.
 
@@ -565,24 +563,22 @@ The `/store` route is similar to `/resize`, but instead of returning the process
 
 ### Declare the bucket
 
-Add the bucket to the `preview` block in `neon.ts`, next to the function and the AI Gateway:
+Add the bucket to `neon.ts`, next to the function and the AI Gateway:
 
-```ts filename="neon.ts" {13-15}
+```ts filename="neon.ts" {12-14}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      },
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
     },
-    aiGateway: true,
-    buckets: {
-      'processed-images': {},
-    },
+  },
+  aiGateway: true,
+  buckets: {
+    'processed-images': {},
   },
 });
 ```

@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-09-21T05:00:58.992Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -347,7 +347,7 @@ INNGEST_EVENT_KEY="your-event-key"
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to configure the function and AI Gateway:
 
-```ts filename="neon.ts" {9-20}
+```ts filename="neon.ts" {9-19}
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -356,25 +356,23 @@ export default defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      inngest: {
-        name: "Inngest Workflow Endpoint",
-        source: "./index.ts",
-        env: {
-          INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY!,
-          INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY!,
-        },
-      }
-    },
-    aiGateway: true
+  functions: {
+    inngest: {
+      name: "Inngest Workflow Endpoint",
+      source: "./index.ts",
+      env: {
+        INNGEST_EVENT_KEY: process.env.INNGEST_EVENT_KEY!,
+        INNGEST_SIGNING_KEY: process.env.INNGEST_SIGNING_KEY!,
+      },
+    }
   },
+  aiGateway: true
 });
 ```
 
 Here's what each property does:
 
-- **`preview.functions.inngest`**: Registers `index.ts` as a deployable Neon Function named "Inngest Workflow Endpoint". The `source` field tells Neon where to find the entry point for your function.
+- **`functions.inngest`**: Registers `index.ts` as a deployable Neon Function named "Inngest Workflow Endpoint". The `source` field tells Neon where to find the entry point for your function.
 - **`env`**: Passes the Inngest keys from your `.env.local` file to the function at runtime. Other Neon specific environment variables (like `DATABASE_URL`) are automatically injected by Neon.
 - **`aiGateway: true`**: Activates the Neon AI Gateway, giving your function access to LLM endpoints.
 

@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-intro
-updatedOn: '2026-09-16T14:23:11.640Z'
+updatedOn: '2026-09-21T05:07:13.900Z'
 ---
 
 A **branch** is an isolated copy of your whole Neon backend. Like a Git branch, you create it from an existing branch and make changes freely on that child branch, without affecting the original.
@@ -127,7 +127,7 @@ This works because storage is separate from compute: durable data can start a ne
 - **A restore rolls back Postgres and Auth only.** Restoring a branch rolls back its Postgres timeline, including Managed Better Auth data stored in the `neon_auth` schema. It does not roll back Object Storage buckets or objects, and it does not roll back deployed functions. See [Backup & restore](/docs/guides/backup-restore).
 - **AI Gateway configuration is global.** Branches get their own AI Gateway endpoint and credentials, but the model catalog, routing, rate limits, and your organization's prepaid credit balance are shared. Usage on every branch draws down the same credit balance. A branch can call a different model by sending a different `model` value in the request; it cannot have its own model catalog.
 - **Logical replication is not copied.** A branch does not inherit logical replication slots or subscriptions. Set up replication again on the branch if it needs to publish or subscribe.
-- **Not every service is available in every region.** Object Storage, Functions, and the AI Gateway currently run in two regions. See [Product availability](/docs/introduction/regions#product-availability).
+- **Not every service is available in every region.** Object Storage, Functions, and the AI Gateway currently run in four regions. See [Product availability](/docs/introduction/regions#product-availability).
 
 ## Where to go next
 

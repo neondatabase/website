@@ -5,6 +5,8 @@ summary: >-
   Register a custom domain for a Neon Function, configure its DNS CNAME record,
   verify TLS and routing, troubleshoot domain status, and remove it safely.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/custom-domains
 ---
 
 Each Neon Function has a native invocation URL. You can also serve it from a
@@ -22,6 +24,8 @@ Custom:  https://api.example.com
 Custom domains are branch-scoped: a domain registered on one branch isn't
 inherited by its child branches, and each hostname can be registered only once.
 Use a distinct hostname for each preview or development branch.
+
+Neon Functions do not support hosting websites.
 
 <Admonition type="warning" title="Secure both function URLs">
 Adding a custom domain doesn't authenticate the function or disable its native Neon URL. Both URLs remain publicly reachable, so protect the function with [application-level authentication](/docs/compute/functions/authentication).
