@@ -11,10 +11,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-08-27T15:04:31.041Z'
+updatedOn: '2026-09-23T21:49:37.670Z'
 ---
 
-<Admonition type="comingSoon" title="Private Networking availability">
+<Admonition type="info" title="Private Networking availability">
 Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 

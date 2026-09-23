@@ -622,10 +622,12 @@ const componentHandlers = {
   Admonition(node) {
     const type = getAttr(node, 'type') || 'note';
     const title = getAttr(node, 'title');
-    // Convert camelCase to Title Case (e.g., comingSoon -> Coming Soon)
+    // Convert camelCase to sentence case (e.g., comingSoon -> Coming soon),
+    // matching how the Admonition component renders the label.
     const typeLabel = type
       .replace(/([A-Z])/g, ' $1') // Add space before capitals
-      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter
+      .toLowerCase()
+      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter only
       .trim();
     const label = title ? `${typeLabel}: ${title}` : `${typeLabel}:`;
 
