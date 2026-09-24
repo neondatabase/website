@@ -66,8 +66,8 @@ A full walkthrough:
 [Postgres at the center, setting up the stage for all workflows.](https://neon.com/lakebase)
 
 <video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Lakebase Postgres demo">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/lakebase.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/lakebase.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/lakebase.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/lakebase.mp4" type="video/mp4" />
 </video>
 
 ```
@@ -112,8 +112,8 @@ The Neon Free Plan comes with 100 projects. Every project gives you 100 CU-hours
 [S3-compatible object storage that branches with your data.](https://neon.com/object-storage)
 
 <video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Object Storage demo">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/storage.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/storage.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/storage.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/storage.mp4" type="video/mp4" />
 </video>
 
 ```
@@ -146,8 +146,8 @@ The Neon Free Plan includes 5 GB of Object Storage per project.
 [Long-running Node.js compute for those jobs touching Postgres.](https://neon.com/functions)
 
 <video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Functions demo">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/functions.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/functions.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/functions.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/functions.mp4" type="video/mp4" />
 </video>
 
 ```
@@ -183,8 +183,8 @@ The Free Plan comes with 10 active Capacity-Hours, 400 waiting Capacity-Hours, a
 [Auth that branches, with the Better Auth code you know.](https://neon.com/auth)
 
 <video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Managed Better Auth demo">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/auth.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/auth.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/auth.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/auth.mp4" type="video/mp4" />
 </video>
 
 ```
@@ -214,8 +214,8 @@ Managed Better Auth is included in the Free Plan, with up to 60,000 monthly acti
 [Frontier and open-weight models powered by Databricks Foundation APIs.](https://neon.com/ai-gateway)
 
 <video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon AI Gateway demo">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/ai-gateway.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/ai-gateway.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/ai-gateway.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/ai-gateway.mp4" type="video/mp4" />
 </video>
 
 ```
