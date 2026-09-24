@@ -4,25 +4,23 @@ subtitle: Send Neon metrics and Postgres logs to Better Stack using the OpenTele
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-08-13T00:00:00.000Z'
-updatedOn: '2025-09-11T17:37:55.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Better Stack](https://betterstack.com/) is an observability platform that unifies logging, monitoring, and alerting into a single dashboard. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) allows you to send your project's metrics and Postgres logs directly to Better Stack, giving you a centralized view of your database's performance and activity.
+[Better Stack](https://betterstack.com/) is an observability service that combines logging, monitoring, and alerting in one dashboard. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs directly to Better Stack, so you can view your database's performance and activity in one place.
 
-This guide will walk you through setting up the integration between Neon and Better Stack. You'll learn how to:
+This guide walks through setting up the integration between Neon and Better Stack. You'll learn how to:
 
 - Create and configure an OpenTelemetry source in Better Stack.
 - Set up the OpenTelemetry integration in your Neon project.
-- Verify that your Neon metrics and logs are successfully flowing into Better Stack.
+- Verify that your Neon metrics and logs are flowing into Better Stack.
 - Build an example dashboard in Better Stack to visualize your Neon metrics.
-
-By the end, you'll have a complete observability pipeline from your Neon database to your Better Stack dashboard.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the **Scale** or **Business** plan to use the OpenTelemetry integration.
+- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the **Scale plan** to use the OpenTelemetry integration, which is currently in beta.
 - **Better Stack account:** A free Better Stack account. You can sign up at [Better Stack](https://betterstack.com/users/sign-up).
 
 <Steps>
@@ -69,9 +67,9 @@ Now, you will use the credentials from Better Stack to configure the integration
     - **Authentication:** Select **Bearer**.
     - **Bearer Token:** Paste the **Source token** you copied from Better Stack.
     - **Resource attributes:** It's good practice to add a `service.name` attribute to identify your data source within Better Stack. For example, set the key to `service.name` and the value to `neon`.
-    - Click **Save**.
+    - Click **Add** to save the configuration.
 
-    <Admonition type="note" title="Data Scope">
+    <Admonition type="note" title="Data scope">
     The Neon OpenTelemetry integration sends data for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics and logs will be collected and sent for each one.
     </Admonition>
 
@@ -87,23 +85,23 @@ To confirm that your integration is working:
 2. Select the source you created for Neon (e.g., `neon`).
 3. Click **Logs** to open the **Live tail** view and monitor incoming logs in real time.
 
-You should see data from your Neon project appearing here, indicating a successful connection.
+Data from your Neon project should appear here.
 
 <Admonition type="note">
 It may take a few minutes for the first logs to appear after you enable the integration.
 </Admonition>
 
-You should see Postgres logs from your Neon compute streaming into the Live tail view. This confirms that the integration is working correctly.
+Postgres logs from your Neon compute stream into the Live tail view, which confirms the integration is working.
 
 ![Live tail view in Better Stack showing logs from Neon](/docs/guides/betterstack-live-tail.png)
 
-<Admonition type="info" title="Compute Activity">
-Neon computes only send logs and metrics when they are active. If you have the [Scale to Zero](/docs/manage/endpoints#scale-to-zero) feature enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon console.
+<Admonition type="info" title="Compute activity">
+Neon computes only send logs and metrics when they are active. If you have [scale to zero](/docs/introduction/scale-to-zero) enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon Console.
 </Admonition>
 
-## Visualizing Neon Metrics with Dashboards
+## Visualize Neon metrics with dashboards
 
-While the **Live tail** view is perfect for real-time log inspection, Better Stack's **Dashboards** are the best way to visualize your Neon metrics, track trends over time, and get a high-level overview of your database's health.
+The **Live tail** view works well for real-time log inspection. Better Stack's **Dashboards** let you visualize your Neon metrics, track trends over time, and get an overview of your database's health.
 
 ### Clean up default dashboards
 
@@ -115,7 +113,7 @@ These default dashboards are designed for a generic OpenTelemetry collector setu
 
 ### Delete default dashboards
 
-To avoid confusion, it is strongly recommended to delete these two default dashboards. Click on each dashboard, find the three-dot menu (...) in the top-right corner, and select **Remove**.
+To avoid confusion, delete these two default dashboards. Click on each dashboard, find the three-dot menu (...) in the top-right corner, and select **Remove**.
 
 ### Create a custom Neon dashboard
 
@@ -139,13 +137,13 @@ Add a chart to visualize a specific metric.
     - Click **Run query** to see the chart populated with data.
 4.  You can customize the chart's appearance using the panel on the right. Once you're happy, click **Save** in the top-right corner to add the chart to your dashboard.
 
-To view the metric on your dashboard, simply locate the chart you created and observe the visualized data in real time.
+The chart appears on your dashboard and updates as new data arrives.
 
 ![Neon connection counts chart](/docs/guides/betterstack-neon-connection-counts.png)
 
 ### Explore available Neon metrics
 
-Neon exports a rich set of metrics that you can use to build your dashboards. These include both Neon-specific metrics and general compute host metrics.
+Neon exports a set of metrics you can use to build your dashboards. These include both Neon-specific metrics and general compute host metrics.
 
 For example, you can build charts to visualize:
 
@@ -153,21 +151,19 @@ For example, you can build charts to visualize:
 - `neon_db_total_size`: To monitor the total size of all databases in your project, in bytes.
 - `host_cpu_seconds_total`: To track the number of CPU seconds accumulated in different operating modes (user, system, idle, etc.)
 
-For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon metrics and logs reference](/docs/reference/metrics-logs).
 
 </Steps>
 
 ## Summary
 
-You have configured Neon to send metrics and Postgres logs to Better Stack using the OpenTelemetry integration. You now have a centralized observability setup with real-time insight into your database's health and activity.
-
-With this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the Better Stack platform.
+You configured Neon to send metrics and Postgres logs to Better Stack using the OpenTelemetry integration. Next, add more charts from the metrics reference or set up Better Stack alerts on metrics like `neon_connection_counts`.
 
 ## Resources
 
-- [Neon OpenTelemetry Integration](/docs/guides/opentelemetry)
+- [Neon OpenTelemetry integration](/docs/guides/opentelemetry)
 - [Neon Metrics and logs reference](/docs/reference/metrics-logs)
-- [Better Stack Logs Documentation](https://betterstack.com/docs/logs/start/)
-- [OpenTelemetry Protocol (OTLP) Specification](https://opentelemetry.io/docs/specs/otlp/)
+- [Better Stack logs documentation](https://betterstack.com/docs/logs/start/)
+- [OpenTelemetry Protocol (OTLP) specification](https://opentelemetry.io/docs/specs/otlp/)
 
 <NeedHelp/>

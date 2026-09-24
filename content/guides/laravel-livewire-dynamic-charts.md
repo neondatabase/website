@@ -1,28 +1,28 @@
 ---
-title: Building Dynamic Charts with Laravel, Livewire, and Lakebase Postgres
+title: Building dynamic charts with Laravel, Livewire, and Lakebase Postgres
 subtitle: Learn how to build dynamic charts with Laravel, Livewire, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel is an amazing PHP framework for building web applications, while Livewire provides a simple way to build dynamic interfaces using PHP.
+Laravel is a PHP framework for building web applications, and Livewire lets you build dynamic interfaces in PHP.
 
-In this guide, we'll walk through the process of creating a dynamic analytics dashboard for a SaaS application using Laravel Breeze for authentication, Livewire Charts for data visualization, and Lakebase Postgres for data storage.
+In this guide, we'll create an analytics dashboard for a SaaS application using Laravel Breeze for authentication, Livewire Charts for data visualization, and a Postgres database on Neon for data storage.
 
 We'll build interactive charts that display key metrics such as daily active users, feature usage trends, and user signups vs. cancellations.
 
 ## Prerequisites
 
-Before we begin, make sure you have:
+Before you begin, you'll need:
 
 - PHP 8.1 or higher installed
 - Composer for managing PHP dependencies
-- A [Neon](https://console.neon.tech/signup) account for Postgres hosting
+- A [Neon](https://console.neon.tech/signup) account
 - Basic familiarity with Laravel, Livewire, and Postgres
 
-## Setting up the Project
+## Setting up the project
 
 1. Create a new Laravel project:
 
@@ -61,7 +61,7 @@ Before we begin, make sure you have:
    DB_PASSWORD=your_password
    ```
 
-6. Run the migrations to set up the users table and other Breeze-related tables in your Lakebase Postgres database:
+6. Run the migrations to set up the users table and other Breeze-related tables in your Neon database:
 
    ```bash
    php artisan migrate
@@ -69,7 +69,7 @@ Before we begin, make sure you have:
 
    This will create the necessary tables for user authentication and session management.
 
-## Additional Database Tables
+## Additional database tables
 
 Now that we have the `users` table set up by Breeze, let's create migrations for our additional SaaS analytics data.
 
@@ -82,7 +82,7 @@ For the purpose of this guide, we'll track feature usage and subscriptions. You 
    php artisan make:migration create_subscriptions_table
    ```
 
-   Note that the naming convention for the migration files is important to make sure that your migrations are named correctly with the `create_` prefix followed by the table name.
+   The naming convention matters: use the `create_` prefix followed by the table name so Laravel generates the correct migration.
 
 2. Update the migration files:
 
@@ -119,7 +119,7 @@ For the purpose of this guide, we'll track feature usage and subscriptions. You 
    }
    ```
 
-3. With the migrations in place, run the migrations to create the tables in your Lakebase Postgres database:
+3. With the migrations in place, run them to create the tables in your Neon database:
 
    ```bash
    php artisan migrate
@@ -127,15 +127,15 @@ For the purpose of this guide, we'll track feature usage and subscriptions. You 
 
    This will create the `feature_usage` and `subscriptions` tables in your database.
 
-## Creating Models
+## Creating models
 
 Laravel's Eloquent ORM provides a convenient way to interact with your database.
 
 By defining models, we can represent and manipulate the data in the `FeatureUsage` and `Subscription` tables, which we created earlier through migrations.
 
-In this step, we'll create models and set up relationships to ensure efficient data retrieval and interaction.
+In this step, we'll create models and set up relationships between them.
 
-### Step 1: Generate the Models
+### Step 1: Generate the models
 
 Start by creating the `FeatureUsage` and `Subscription` models using Laravel's Artisan command:
 
@@ -146,11 +146,11 @@ php artisan make:model Subscription
 
 This will generate two model files in the `app/Models` directory corresponding to the `feature_usage` and `subscriptions` tables in your database.
 
-### Step 2: Define Relationships in the Models
+### Step 2: Define relationships in the models
 
 Now, let's update the model classes to define relationships between the tables. The `FeatureUsage` and `Subscription` models will be connected to the `User` model via foreign keys.
 
-#### 2.1 `FeatureUsage` Model
+#### 2.1 `FeatureUsage` model
 
 In the `app/Models/FeatureUsage.php` file, define the relationship with the `User` model. Since each feature usage entry belongs to a specific user, we will use a `belongsTo` relationship:
 
@@ -191,9 +191,9 @@ The above defines the following:
 - `user()`: Defines a `belongsTo` relationship, meaning each `FeatureUsage` belongs to a single `User`.
 - `casts`: Automatically casts the `used_at` column to a `datetime` object for easier manipulation in PHP.
 
-#### 2.2 `Subscription` Model
+#### 2.2 `Subscription` model
 
-In the `app/Models/Subscription.php` file, define relationships with both the `User` model and handle timestamps (`started_at` and `ended_at`) correctly. This indicates that each subscription belongs to a user and includes a `plan`:
+In the `app/Models/Subscription.php` file, define the relationship with the `User` model and cast the timestamps (`started_at` and `ended_at`). This indicates that each subscription belongs to a user and includes a `plan`:
 
 ```php
 <?php
@@ -232,19 +232,19 @@ The above defines the following:
 - `user()`: Defines a `belongsTo` relationship where each `Subscription` is linked to a specific `User`.
 - `casts`: Automatically casts the `started_at` and `ended_at` columns to `datetime` objects.
 
-### Step 3: Database Relationships
+### Step 3: Database relationships
 
 Once these relationships are defined, Eloquent provides methods to interact with related data. For example:
 
 - Access a user's feature usages with `$user->featureUsages()`.
 - Retrieve a user's subscriptions with `$user->subscriptions()`.
-- Easily manipulate and retrieve data for timestamps (e.g., `started_at`, `ended_at`, and `used_at`).
+- Work with the timestamp fields (e.g., `started_at`, `ended_at`, and `used_at`).
 
-## Building the Dashboard
+## Building the dashboard
 
-We’ll create a simple SaaS dashboard that showcases our dynamic charts which will include daily active users, feature usage trends, and user signups vs. cancellations. This dashboard will use Livewire for interactivity and Tailwind CSS for styling along with the Livewire Charts package for creating the dynamic charts.
+We’ll create a simple SaaS dashboard with three charts: daily active users, feature usage trends, and user signups vs. cancellations. This dashboard will use Livewire for interactivity and Tailwind CSS for styling along with the Livewire Charts package for creating the dynamic charts.
 
-### Step 1: Create the Livewire Component
+### Step 1: Create the Livewire component
 
 First, generate a new Livewire component for the dashboard:
 
@@ -252,7 +252,7 @@ First, generate a new Livewire component for the dashboard:
 php artisan make:livewire Dashboard
 ```
 
-This will create both the `Dashboard` class in `app/Http/Livewire` and the a view in `resources/views/livewire/dashboard.blade.php`.
+This will create both the `Dashboard` class in `app/Http/Livewire` and a view in `resources/views/livewire/dashboard.blade.php`.
 
 ### Step 2: Update `Dashboard.php`
 
@@ -274,9 +274,9 @@ class Dashboard extends Component
 }
 ```
 
-Note that we're using the `layout('layouts.app')` method to specify the main layout file for the dashboard view. This layout file will contains the main structure of the dashboard.
+Note that we're using the `layout('layouts.app')` method to specify the main layout file for the dashboard view. This layout file contains the main structure of the dashboard.
 
-### Step 3: Create the Dashboard View
+### Step 3: Create the dashboard view
 
 Now, let’s update the `dashboard.blade.php` view with a grid layout that displays multiple charts, along with some Tailwind CSS styling to improve the design.
 
@@ -315,9 +315,9 @@ Now, let’s update the `dashboard.blade.php` view with a grid layout that displ
 </div>
 ```
 
-This view includes a header with a title and a refresh button, followed by a grid layout that displays the three charts: 'Daily Active Users', 'Feature Usage Trends', and 'User Signups vs. Cancellations'. We will create those charts components next.
+This view includes a header with a title and a refresh button, followed by a grid layout that displays the three charts: 'Daily Active Users', 'Feature Usage Trends', and 'User Signups vs. Cancellations'. We'll create those chart components next.
 
-## Setting up Routes
+## Setting up routes
 
 With the charts dashboard view and the Livewire component in place, let's set up the routes to display the dashboard.
 
@@ -327,17 +327,17 @@ use App\Livewire\Dashboard;
 Route::get('/charts', Dashboard::class)->middleware(['auth'])->name('dashboard');
 ```
 
-This route will display the dashboard view when the `/charts` URL is accessed. The `auth` middleware ensures that only authenticated users can access the dashboard.
+This route will display the dashboard view when the `/charts` URL is accessed. The `auth` middleware makes sure only authenticated users can access the dashboard.
 
-## Set Up Livewire Charts for the Dashboard
+## Set up Livewire Charts for the dashboard
 
 Now with everything in place, let's implement individual chart components.
 
-The Livewire Charts package provides a wide range of chart types, including area charts, radar charts, and treemaps, offering flexibility to create various data visualizations.
+The Livewire Charts package provides several chart types, including area charts, radar charts, and treemaps.
 
 We'll use `LivewireLineChart` for 'Daily Active Users', `LivewireColumnChart` for 'Feature Usage Trends', and `LivewirePieChart` for 'User Signups vs. Cancellations'. To get a full list of available chart types, check out the [Livewire Charts documentation](https://github.com/asantibanez/livewire-charts/).
 
-### 2.1 Daily Active Users Chart
+### 2.1 Daily active users chart
 
 Create a Livewire component for the daily active users chart:
 
@@ -393,7 +393,7 @@ Create the corresponding Blade view in `resources/views/livewire/daily-active-us
 </div>
 ```
 
-### 2.2 Feature Usage Trends Chart
+### 2.2 Feature usage trends chart
 
 Create another Livewire component for feature usage trends:
 
@@ -447,7 +447,7 @@ In `resources/views/livewire/feature-usage-trends-chart.blade.php`:
 </div>
 ```
 
-### 2.3 User Signups vs. Cancellations Chart
+### 2.3 User signups vs. cancellations chart
 
 Create a Livewire component for user signups vs. cancellations:
 
@@ -497,7 +497,7 @@ In `resources/views/livewire/user-signups-vs-cancellations-chart.blade.php`:
 </div>
 ```
 
-## Step 3: Add Chart Scripts
+## Step 3: Add chart scripts
 
 Include the chart scripts in your main layout file (`resources/views/layouts/app.blade.php`) by adding:
 
@@ -508,7 +508,7 @@ Include the chart scripts in your main layout file (`resources/views/layouts/app
 
 This will load the necessary JavaScript files for Livewire and Livewire Charts to render the interactive charts on the dashboard.
 
-## Step 4: Test the Dashboard
+## Step 4: Test the dashboard
 
 Run the server to access your charts dashboard if you haven't already:
 
@@ -516,9 +516,9 @@ Run the server to access your charts dashboard if you haven't already:
 php artisan serve
 ```
 
-Navigate to the `/charts` route, and you should see the real-time interactive charts displayed on your dashboard.
+Navigate to the `/charts` route, and you should see the interactive charts on your dashboard.
 
-### Seeding the Database with Sample Data
+### Seeding the database with sample data
 
 If you don't have any data yet, you can seed the database with sample data to test the charts. First, create a seeder that populates the `FeatureUsage` and `Subscription` tables with mock data:
 
@@ -578,19 +578,19 @@ If you don't have any data yet, you can seed the database with sample data to te
    php artisan db:seed --class=SampleDataSeeder
    ```
 
-Once the database is seeded, refresh the charts dashboard, and you should see the charts populated with real-time data.
+Once the database is seeded, refresh the charts dashboard, and you should see the charts populated with the sample data.
 
 For more information on seeding the database, check out the [Laravel documentation](https://laravel.com/docs/11.x/seeding).
 
-## Optimizing Performance
+## Optimizing performance
 
-When working with large datasets, you will have to make sure that your application is optimized for performance. This includes optimizing database queries, caching results, and using efficient algorithms.
+With large datasets, you'll need to optimize database queries and cache results.
 
-We will cover some optimization techniques for improving the performance of your application below but you should also check out the [Performance tips for Neon Postgres](/blog/performance-tips-for-neon-postgres) blog post for more specific tips.
+We'll cover two techniques below. For more, see the [Performance tips for Neon Postgres](/blog/performance-tips-for-neon-postgres) blog post.
 
-### 1. Database Indexing for Frequently Queried Columns
+### 1. Database indexing for frequently queried columns
 
-Database indexing is a key technique to speed up query execution, especially for columns used frequently in `WHERE`, `JOIN`, and `ORDER BY` clauses. With indexes in place, the database can find records faster, making your queries more efficient.
+Indexes speed up queries on columns used frequently in `WHERE`, `JOIN`, and `ORDER BY` clauses.
 
 This can be especially useful for tables like `FeatureUsage` and `Subscription`, where you might frequently query by `user_id`, `used_at`, `started_at`, and `ended_at`.
 
@@ -606,13 +606,13 @@ Schema::table('subscriptions', function (Blueprint $table) {
 });
 ```
 
-These indexes will optimize queries related to filtering or grouping by `user_id`, `used_at`, `started_at`, and `ended_at`, which are common in analytics.
+These indexes speed up queries that filter or group by `user_id`, `used_at`, `started_at`, and `ended_at`, which are common in analytics.
 
-To learn more about indexing in Lakebase Postgres, check out the [Neon documentation](/docs/postgresql/index-types) on indexes.
+To learn more about indexing in Postgres, see [Indexes](/docs/postgresql/index-types).
 
-### 2. Implement Caching for Expensive Queries
+### 2. Implement caching for expensive queries
 
-Caching is a great way to reduce the load on your database by storing the results of expensive queries and retrieving them from memory when needed. This avoids running the same query multiple times for data that doesn't change frequently.
+Caching reduces load on your database by storing the results of expensive queries and retrieving them from memory when needed. This avoids running the same query multiple times for data that doesn't change frequently.
 
 Here's how you can cache the results of a query for daily active users for a specific time period:
 
@@ -629,16 +629,14 @@ $dailyActiveUsers = Cache::remember('daily_active_users_' . $this->selectedDays,
 });
 ```
 
-Quick explanation of the code:
-
 - `Cache::remember`: Caches the query result for 5 minutes (`60 * 5` seconds). If the data is already cached, it retrieves the result from the cache; otherwise, it runs the query and stores the result.
 - This is useful for queries that don’t need real-time updates and can tolerate slight delays, such as historical data or reports.
 
-The `Cache::remember` method is a convenient way to cache query results in Laravel. You can adjust the cache duration based on your application's requirements. However, be cautious with caching, as it can lead to stale data if not managed properly.
+You can adjust the cache duration based on your application's requirements. Longer durations mean more stale data.
 
 ## Conclusion
 
-In this guide, we've built a simple dynamic SaaS dashboard using Laravel Breeze for authentication, Livewire Charts for data visualization, and Lakebase Postgres for data storage. This setup provides a good starting point for tracking key metrics in your SaaS or web application.
+You built a SaaS analytics dashboard with Laravel Breeze for authentication, Livewire Charts for data visualization, and a Postgres database on Neon for data storage.
 
 To go further, consider the following next steps:
 
@@ -646,11 +644,11 @@ To go further, consider the following next steps:
 2. Adding user-specific analytics for personalized insights.
 3. Implementing real-time updates using Livewire's polling feature or websockets.
 
-## Additional Resources
+## Additional resources
 
-- [Laravel Documentation](https://laravel.com/docs)
-- [Neon Documentation](/docs)
-- [Livewire Documentation](https://livewire.laravel.com/)
-- [Livewire Charts Documentation](https://github.com/asantibanez/livewire-charts/)
+- [Laravel documentation](https://laravel.com/docs)
+- [Neon documentation](/docs)
+- [Livewire documentation](https://livewire.laravel.com/)
+- [Livewire Charts documentation](https://github.com/asantibanez/livewire-charts/)
 
 <NeedHelp />

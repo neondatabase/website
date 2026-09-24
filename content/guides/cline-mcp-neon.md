@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cline and Neon MCP Se
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-08-21T02:09:26.597Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 This guide shows how to use [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -19,17 +19,17 @@ The Neon MCP Server grants broad database management capabilities. Always review
 
 Make sure you have:
 
-1.  **Cline extension and Setup:**
+1.  **Cline extension and setup:**
     - Download and install the Cline VS Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev).
     - Set up Cline by following the [Getting Started guide](https://docs.cline.bot/getting-started/getting-started-new-coders#setting-up-openrouter-api-key) which involves obtaining an [OpenRouter API key](https://openrouter.ai) to work with Cline.
-2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can create a new Neon project in the [Neon Console](https://console.neon.tech)
-3.  **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
-    <Admonition type="warning" title="Neon API Key Security">
+2.  **A Neon account and project:** You'll need a Neon account and a project. You can create a new Neon project in the [Neon Console](https://console.neon.tech).
+3.  **Neon API key (for API key authentication):** After signing up, get your Neon API key from the [Neon Console](https://console.neon.tech/app/settings/profile). Cline uses this key to authenticate with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+    <Admonition type="warning" title="Neon API key security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
     </Admonition>
-4.  **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
+4.  **Node.js (>= v18) and npm:** Make sure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
-### Option 1: Setting up the remote hosted Neon MCP Server
+### Option 1: OAuth authentication
 
 <Admonition type="note">
 By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#config-generator).
@@ -47,10 +47,10 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
    ![Cline Add Remote MCP Server](/docs/guides/cline-add-remote-mcp-server.png)
 
 5. Click **Add Server** to register the Neon MCP server.
-6. Cline will prompt you to authenticate with Neon via OAuth. Click **Authenticate**.
+6. Cline prompts you to authenticate with Neon via OAuth. Click **Authenticate**.
 7. A browser window will open asking you to sign in to your Neon account and authorize Cline to access your Neon projects.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
-8. Once authentication is complete, Cline will display a confirmation message, and **Neon** will appear under your list of available MCP servers.
+8. Once authentication is complete, Cline displays a confirmation message, and **Neon** appears under your list of available MCP servers.
 
 ### Option 2: API key authentication
 
@@ -83,15 +83,15 @@ This method uses the hosted Neon MCP Server with a Neon API key.
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
 8. Cline is now configured to use the hosted Neon MCP Server. You should see **neon** listed under available MCP servers.
 
-### Verifying the Integration
+### Verify the integration
 
-The Neon MCP server will appear in the Cline MCP Servers Installed section.
+The Neon MCP Server appears in the **Installed** section of Cline's MCP Servers view.
 
 ![Cline Available MCP Tools](/docs/guides/cline-available-mcp-tools.png)
 
 For a full list of available tools, see [available tools](/docs/ai/neon-mcp-server#available-tools) in the Neon MCP Server overview.
 
-## Development Workflow: Adding a Column with Cline and Neon MCP
+## Development workflow: add a column with Cline and Neon MCP
 
 Here's an example interaction adding a `created_at` column to a table:
 
@@ -136,15 +136,15 @@ You can verify the changes in your Neon Console or by querying the database dire
 ![Neon Console with added column](/docs/guides/neon-cursor-mcp-added-column.png)
 
 <Admonition type="note">
-While the Neon MCP server allows you to use all of Neon's functionalities, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+The Neon MCP Server exposes Neon-specific tools such as branching and migrations, but you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
 </Admonition>
 
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
-- [Cline Documentation](https://docs.cline.bot)
+- [Cline documentation](https://docs.cline.bot)
 - [Neon Docs](/docs)
-- [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
+- [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
 
 <NeedHelp/>

@@ -1,29 +1,29 @@
 ---
-title: Building Full Stack apps in minutes with Anything
-subtitle: Go from Text prompt to Full-Stack Database backed applications in minutes with Anything
+title: Build full-stack apps in minutes with Anything
+subtitle: Go from a text prompt to a full-stack, database-backed app in minutes with Anything
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-12T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-AI-powered tools let even non-technical users describe an app in a conversation and get a working version, database included, in seconds. One of these tools is [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder that works with out-of-the-box support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
+AI-powered tools let even non-technical users describe an app in a conversation and get a working version, database included, in seconds. One of these tools is [Anything](https://www.createanything.com) (formerly [Create](https://create.xyz)), a text-to-app builder with built-in support for 50+ integrations such as Stripe, ElevenLabs, Google Maps, Stable Diffusion, OpenAI, and more.
 
-This guide will introduce you to Anything and demonstrate how you can use it to build database-backed applications quickly. We'll walk through creating a simple AI Image Generator, showcasing how you can go from a text prompt to a functional, full-stack application.
+This guide introduces Anything and shows how to use it to build database-backed apps. You'll build a simple AI image generator, going from a text prompt to a working full-stack app.
 
 ## Anything & Neon
 
-Anything uses Neon as the database backend for its AI-powered app development platform. This integration delivers a fully managed database solution, which is fundamental to Anything's rapid app development experience. By abstracting away database complexities, Anything users can concentrate solely on their application's functionality and design.
+Anything uses Neon as the database backend for its AI app builder. Each app gets a fully managed Postgres database, so Anything users can focus on their app's functionality and design instead of database setup.
 
-This experience is immediately apparent during app creation. Neon's instant database provisioning lets users bypass database setup and focus on developing their application. Neon operates invisibly in the background. To learn more about how Anything uses Neon, see [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
+You'll see this during app creation: Neon provisions the database instantly, and it runs in the background without any setup on your part. To learn more about how Anything uses Neon, see [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create).
 
 ## Prerequisites
 
 Before you start, ensure you have an **Anything Account**. You can sign up for a free account at [createanything.com](https://createanything.com/). The free plan is sufficient to follow this guide.
 
-## Building an AI Image Generator app
+## Build an AI image generator app
 
-This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. We'll use Anything's AI capabilities to build this app in minutes without writing a single line of code.
+This app will allow users to generate images using Stable Diffusion, view them in a gallery, and track download counts for each image. You'll build it in minutes without writing code.
 
 ### Start a new project
 
@@ -38,13 +38,13 @@ In the chat window, describe your app idea. For example, you can say, "Create a 
 
 ![Describe Your App](/docs/guides/create_xyz_describe_app.png)
 
-Anything will immediately begin building your app based on your description. You'll see the AI agent working in real-time within the chat window, assembling all the necessary components and code for your application.
+Anything starts building your app from your description. You'll see the AI agent working in real time in the chat window, assembling the components and code for your app.
 
 ![Creating Your App](/docs/guides/create_xyz_initial_app.png)
 
-You can see that as requested, Anything has created a database for image generation history.
+As requested, Anything created a database for image generation history.
 
-You can verify the app's functionality by generating an image. Simply type your desired image description in the text field and click 'Generate.' You'll see your newly created image appear and automatically be added to the gallery display
+You can verify the app's functionality by generating an image. Type an image description in the text field and click 'Generate.' The new image appears and is added to the gallery.
 
 ![Testing the App](/docs/guides/create_xyz_test_app_working.png)
 
@@ -52,15 +52,15 @@ You can verify the app's functionality by generating an image. Simply type your 
 If the app doesn't work as expected, provide specific details in the chat window to help Anything understand the issue. For example, you can say, "The image generation is working, but the gallery is not displaying the images."
 </Admonition>
 
-### Database Schema
+### Database schema
 
-You can easily review your app's database schema directly from the Anything Dashboard at any point. Simply navigate to the **"Databases"** tab, then select your project's database to explore its schema, tables, columns, and relationships. This visual overview helps you understand how your app's data is structured.
+You can review your app's database schema from the Anything Dashboard at any point. Go to the **"Databases"** tab, then select your project's database to explore its schema, tables, columns, and relationships.
 
 ![Database Schema](/docs/guides/create_xyz_database_schema.png)
 
-### Continuous Iteration
+### Iterate on your app
 
-You may want to add new features or refine existing ones as you iterate on your app. Anything makes it easy to enhance your app by simply describing the new features you want to add. Let's add a download counter feature to track the number of downloads for each generated image.
+To add new features or refine existing ones, describe the change in the chat. Let's add a download counter feature to track the number of downloads for each generated image.
 
 In the chat window, you can say: "Allow users to download images and track the number of downloads for each image". Anything will start adding the necessary components to your app to support this feature.
 
@@ -72,14 +72,14 @@ To test the new feature, download an image. Click the 'Download' button on any i
 
 ![Final App with Download Feature](/docs/guides/create_xyz_final_app.png)
 
-You've built an AI Image Generator with download tracking. You can now customize it further by enhancing the UI, adding features like user authentication, or integrating services such as Stripe to charge $1 per generated image. To add user authentication, say something like: 'The app should allow users to sign in and sign up. Image generation should only be available to signed-in users.'
+You've built an AI image generator with download tracking. You can customize it further by improving the UI, adding features like user authentication, or integrating services such as Stripe to charge $1 per generated image. To add user authentication, say something like: 'The app should allow users to sign in and sign up. Image generation should only be available to signed-in users.'
 
 Anything will add the necessary components to your app to support user authentication.
 
 ![Adding User Authentication](/docs/guides/create_xyz_add_user_auth.png)
 
-<Admonition type="note" title="Configuring Authentication Providers for User Accounts">
-User accounts are built-in and fully supported in Anything. If you want to let users sign in with Google, Facebook, or other providers, simply visit your project's **Auth Providers** section in the Project Settings. There, you can enable additional sign-in options with just a few clicks. Learn more in the [Anything Docs: User Accounts](https://www.createanything.com/docs/builder/user-accounts).
+<Admonition type="note" title="Configure authentication providers for user accounts">
+User accounts are built into Anything. To let users sign in with Google, Facebook, or other providers, go to the **Auth Providers** section in your project's Project Settings and enable additional sign-in options. Learn more in the [Anything Docs: User Accounts](https://www.createanything.com/docs/builder/user-accounts).
 
 ![User Accounts](/docs/guides/create_xyz_user_accounts.png)
 </Admonition>
@@ -94,7 +94,7 @@ Finally, you can deploy the app by clicking on the "Publish" button. You can als
 
 <Admonition type="note" title="Version history for restoring a past version of your app">
 
-Anything keeps a version history. This feature enables instant restoration to any past version of your app, in case you need to rewind.
+Anything keeps a version history, so you can restore any past version of your app.
 
 To restore a past version:
 
@@ -109,23 +109,21 @@ Anything instantly switches your app back to that earlier state.
 
 ## Tips for building apps with Anything
 
-To make the most of Anything and build apps efficiently, consider the following tips:
-
-- **Prompting Best Practices**:
-  - **Context is key**: Start prompts with clear context. For example describe the app's purpose and main features. For example say, "I want to add a new feature to allow users to download images."
+- **Prompting best practices**:
+  - **Give context**: Start prompts with clear context, such as the app's purpose and main features. For example, "I want to add a new feature to allow users to download images."
   - **Iterate in small steps**: Break down complex changes. For a whole new page, start by describing the header, then the body, then the footer in separate prompts. This gives you more control.
   - **Show, don't just tell**: Use images. Paste screenshots or drag and drop images into the chat to show Anything exactly what you want the style or layout to be wherever possible.
   - **Pinpoint errors**: Be specific when things go wrong. Instead of saying "it's broken", paste error messages or describe exactly what you expected to happen vs. what did happen.
 
 - **Use Anything's integrations**:
-  - **Explore the Integration library**: Anything has many integrations ready to use. Type `/` in the chat to see them. Integrations include AI models, UI libraries, and services like Stripe.
-  - **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
+  - **Explore the integration library**: Anything has many integrations ready to use. Type `/` in the chat to see them. Integrations include AI models, UI libraries, and services like Stripe.
+  - **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI or Claude for text generation.
 
 ## Resources
 
 - [Anything](https://createanything.com)
-- [Anything Docs](https://www.createanything.com/docs/welcome)
+- [Anything docs](https://www.createanything.com/docs/welcome)
 - [From Idea to Full Stack App in One Conversation with Anything](/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
-- [Anything Templates](https://www.createanything.com/templates)
+- [Anything templates](https://www.createanything.com/templates)
 
 <NeedHelp />

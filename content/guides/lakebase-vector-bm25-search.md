@@ -1,10 +1,10 @@
 ---
-title: 'Building a knowledge base with Vector and BM25 search using Neon Lakebase extensions'
-subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text search application using Next.js and Neon’s lakebase_vector and lakebase_text extensions.'
+title: 'Build a knowledge base with vector and BM25 search using the Lakebase Search extensions'
+subtitle: 'Learn how to build a semantic and full-text search application with Next.js and the lakebase_vector and lakebase_text extensions.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
@@ -12,20 +12,20 @@ When building an AI application, like a knowledge base, a support agent, or a re
 1. **Semantic (vector) search:** To find documents based on meaning and context using AI embeddings.
 2. **Keyword (full-text) search:** To find documents based on exact keyword matches.
 
-Historically, doing this in Postgres meant using `pgvector` with an HNSW index for vectors, and built-in full-text search with a GIN index for keywords. While functional, this approach hits scaling limits. HNSW indexes consume massive amounts of memory and build slowly. Meanwhile, GIN indexes lack native BM25 relevance scoring and must scan every single match before applying a `LIMIT` (no top-K pushdown), making keyword search sluggish on large tables.
+Historically, doing this in Postgres meant using `pgvector` with an HNSW index for vectors, and built-in full-text search with a GIN index for keywords. This works, but it hits scaling limits. HNSW indexes must fit in memory and build slowly. GIN indexes lack native BM25 relevance scoring and must scan every match before applying a `LIMIT` (no top-K pushdown), so keyword search slows down on large tables.
 
-Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, solve these problems by introducing two new index types. Here’s how they work together:
+The Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, address these problems with two new index types:
 
 - **`lakebase_vector`**: A drop-in upgrade for `pgvector` that uses IVF (Inverted File) partitioning and [RaBitQ quantization](https://www.elastic.co/search-labs/blog/rabitq-explainer-101) to scale to over 1 billion vectors on a single index, with 50-100x faster index builds.
-- **`lakebase_text`**: A BM25 full-text search index that integrates with native Postgres `tsvector` types, providing true BM25 relevance scoring and rapid top-K pushdown.
+- **`lakebase_text`**: A BM25 full-text search index that integrates with native Postgres `tsvector` types, with true BM25 relevance scoring and top-K pushdown.
 
 Because these indexes live in storage rather than being bound to compute memory, they work with Neon's [scale-to-zero](/docs/introduction/scale-to-zero) compute and carry over when you [branch your database](/docs/introduction/branching).
 
-In this guide, you’ll build a simple knowledge base application with Next.js that showcases how to use the `lakebase_vector` and `lakebase_text` extensions to enable both semantic and keyword search. By the end, you’ll have a fully functional search interface powered entirely by Lakebase Postgres, no external search services or vector databases required.
+In this guide, you’ll build a small knowledge base application with Next.js that uses the `lakebase_vector` and `lakebase_text` extensions for semantic and keyword search. The search runs entirely in Lakebase Postgres, with no external search service or vector database.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - **Node.js:** Version `18` or later installed.
 - **Neon account:** A free Neon account. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
@@ -33,7 +33,7 @@ Before you begin, ensure you have the following:
 
 ## Core concepts
 
-You will be working with two main Lakebase Search extensions, each introducing new index types and operators to Postgres:
+You'll work with two Lakebase Search extensions. Each adds index types and operators to Postgres:
 
 ### Index types
 
@@ -98,15 +98,15 @@ For more detailed reference on these concepts, see [lakebase_vector extension](/
 You will need a Neon database to store your knowledge base articles and the associated vector and text indexes.
 
 1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click on **New Project**.
-3. Choose a name for your project and select the region closest to you. Ensure you chose Postgres 16 or later.
+2. Click **New Project**.
+3. Choose a name for your project and select the region closest to you. Choose Postgres 16 or later, which both extensions require.
 4. Click **Create**.
-5. You will be greeted with the connection details for your new database. Copy the `Connection string` as you will need it later to connect your Next.js application to the database.
+5. The Console shows the connection details for your new database. Copy the connection string. You'll need it later to connect your Next.js application to the database.
    ![Neon Console Connection String](/docs/connect/connect_to_branch_modal.png)
 
 ## Enable the Lakebase extensions
 
-Enable the `lakebase_vector` and `lakebase_text` extensions in your Neon database. These extensions will allow you to create the necessary indexes for vector and BM25 search.
+Enable the `lakebase_vector` and `lakebase_text` extensions in your database. They provide the index types for vector and BM25 search.
 
 1. Open the **SQL Editor** from the left sidebar in your Neon project dashboard.
 2. Run the following command to enable both extensions:
@@ -150,7 +150,7 @@ OPENAI_API_KEY="sk-..."
 You will need a table to store your knowledge base articles, along with columns for vector embeddings and full-text search.
 
 <Admonition type="tip" title="Create indexes after inserting data">
-Both `lakebase_ann` and `lakebase_bm25` compute statistics at index build time. Building the index *after* you populate your initial data ensures accurate BM25 scoring (which relies on corpus-wide statistics) and optimal vector partitioning.
+Both `lakebase_ann` and `lakebase_bm25` compute statistics at index build time. Building the index *after* you load your initial data gives accurate BM25 scoring (which relies on corpus-wide statistics) and better vector partitioning.
 </Admonition>
 
 Create a `scripts` folder in the root of your project, and add a `seed.ts` file:
@@ -313,7 +313,7 @@ export async function keywordSearch(query: string, limit = 3): Promise<SearchRes
 }
 ```
 
-### Understanding the Queries
+### How the queries work
 
 When a user submits a search query, the application decides whether to use `vectorSearch` or `keywordSearch` based on the selected option. Each search type works differently:
 
@@ -483,7 +483,7 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
 
 2. **Test BM25 keyword search:**
    Select _BM25 Keyword Search_ and search for: `"password reset"`
-   Keyword search excels at exact terminology matches. It will bypass unrelated articles and return the "How to reset your password" article with a strong BM25 score, while ignoring the branching and billing articles that don't contain those keywords.
+   Keyword search is good at exact term matches. It skips unrelated articles and return the "How to reset your password" article with a strong BM25 score, while ignoring the branching and billing articles that don't contain those keywords.
 
    ![BM25 Search Result](/docs/guides/lakebase-bm25-search-result.png)
 
@@ -491,19 +491,19 @@ Open `http://localhost:3000` in your browser. You can now test how the two diffe
 
 ## Extending this guide
 
-This guide covered the fundamentals: creating indexes, querying with cosine distance and BM25 scoring, and understanding the `<=>` and `<@>` operators. Both extensions offer significantly more tuning options that become important as your dataset grows:
+This guide covered creating indexes and querying with the `<=>` and `<@>` operators. Both extensions have more tuning options that matter as your dataset grows:
 
 - **Vector index tuning:** Use `build_mode = 'quality'` for better recall when you can allow a longer index build. The extension chooses the number of `lists` from the number of vectors by default, or you can set a value such as `lists = '16'`. Tune `lakebase_ann.probes` to meet your recall target, and leave `lakebase_ann.epsilon` set to `auto`. See [The `lakebase_vector` extension](/docs/extensions/lakebase-vector) for details.
 - **Text search tuning:** Adjust `lakebase_bm25.default_limit` to control how many results the index returns, enable `lakebase_bm25.prefilter` to prune the search space before BM25 scoring on filtered queries, and tune BM25 parameters (`k1`, `b`) stored directly in the index. See [The `lakebase_text` extension](/docs/extensions/lakebase-text) for details.
-- **Concurrent index management:** Both extensions support `CREATE INDEX CONCURRENTLY` and `REINDEX INDEX CONCURRENTLY` for rebuilding indexes without blocking reads and writes, important for production workloads with large, frequently changing datasets.
+- **Concurrent index management:** Both extensions support `CREATE INDEX CONCURRENTLY` and `REINDEX INDEX CONCURRENTLY` for rebuilding indexes without blocking reads and writes.
 
 ## Conclusion
 
-You've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Lakebase Postgres. As your application grows, the Lakebase Search extensions scale with it, handling over a billion vectors, surviving cold starts instantly, and carrying over when you branch your database.
+You've built semantic and keyword search that runs entirely inside Lakebase Postgres, without a separate search engine or vector database. Because the indexes live in storage, they're available right after a cold start and on every branch you create. Next, try the tuning options above on a larger dataset.
 
 ## Source code
 
-You can find the complete source code for this example on GitHub, which is adapted from the code in this guide with added styling and Shadcn UI components while preserving the core database interaction and search logic.
+The complete source code for this example is on GitHub. It adds styling and Shadcn UI components to the code in this guide but keeps the same database and search logic.
 
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/nextjs-lakebase-search-example" description="Complete source code for the Next.js Lakebase Search example" icon="github">Lakebase Search Example Repository</a>

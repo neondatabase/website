@@ -1,28 +1,31 @@
 ---
-title: Getting started with Neon Local and Neon Local Connect
-subtitle: Learn how to set up and use Neon Local and Neon Local Connect for local development with Neon
+title: Getting started with Neon Local and the Neon VS Code extension
+subtitle: Learn how to set up and use Neon Local and the Neon VS Code extension (formerly Neon Local Connect) for local development with Neon
 author: 'dhanush-reddy'
 enableTableOfContents: true
 createdAt: '2025-08-17T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Neon's database branching lets you instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. This eliminates environment drift, prevents developers from overwriting each other's work on shared staging databases, and ensures every development environment is a perfect, isolated replica of production.
+Neon's database branching lets you instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. Developers stop overwriting each other's work on a shared staging database, and each development environment starts from a copy of production data.
 
-But how do you bring branching into your local development workflow? Constantly switching connection strings for each branch is tedious and error-prone. This is the problem that **Neon Local** and the **Neon Local Connect** VS Code extension solve. They act as a smart local proxy to your Neon database in the cloud. Your application connects to a single, static `localhost` address, while the tools handle all the complexity of routing and branch management behind the scenes.
+Switching connection strings for each branch in local development is tedious and error-prone. Two tools help:
 
-This guide will walk you through setting up and using both Neon Local and Neon Local Connect in your development workflow. You'll learn how to:
+- **Neon Local** is a Docker-based proxy. Your application connects to a single, static `localhost` address, and Neon Local routes traffic to the Neon branch you choose, or to an ephemeral branch it creates and deletes for you.
+- The **Neon VS Code extension** (formerly Neon Local Connect) connects your editor directly to any Neon branch, with a schema explorer, SQL editor, and table data editor, and lets you create and switch branches without leaving the IDE.
 
-- Install and configure the Neon Local Connect extension in VS Code.
-- Use the built-in Schema Viewer, SQL Editor, and Table Editor.
-- Connect your local application to a Neon database using a single, static `localhost` connection string.
-- Manage database branches (create, switch, reset) directly from your IDE.
-- Use Neon Local with Docker Compose for CI/CD or non-VS Code environments.
+In this guide, you'll learn how to:
 
-<Admonition type="note" title="Neon Local vs. a Local Postgres Instance">
-This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Postgres database on Neon**. It lets you use Neon's branching features with a `localhost` connection, so you can switch between branches, create new branches, and manage them directly from your IDE.
+- Install the Neon VS Code extension and connect it to a branch.
+- Use the built-in schema view, SQL editor, and table data editor.
+- Create and switch database branches from your IDE.
+- Run Neon Local with Docker Compose to get a static `localhost` connection string and ephemeral branches.
+- Configure your application to use Neon Local in development and Neon directly in production.
 
-This is different from [Local Development with Neon](/guides/local-development-with-neon) guide, which shows you how to run a completely separate, **local instance of Postgres** for fully offline development.
+<Admonition type="note" title="Neon Local vs. a local Postgres instance">
+This guide focuses on tools that connect to your **cloud-hosted Postgres database on Neon**. Neon Local is a **local proxy**: it gives you a `localhost` connection to a Neon branch, so you can use branching without changing connection strings.
+
+This is different from the [Local development with Neon](/guides/local-development-with-neon) guide, which shows you how to run a completely separate, **local instance of Postgres** for fully offline development.
 
 For most workflows that use Neon's features, the proxy-based approach in this guide is recommended.
 </Admonition>
@@ -31,23 +34,23 @@ For most workflows that use Neon's features, the proxy-based approach in this gu
 
 Before you begin, ensure you have the following:
 
-- **Neon account:** A free Neon account. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
+- **Neon account:** A Neon account on any plan, including the Free plan. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
 - **VS Code:** Or any compatible editor based on VS Code, such as Cursor or Windsurf.
-- **Docker:** Docker Desktop must be installed and running on your machine. You can download it from [docker.com](https://www.docker.com/products/docker-desktop/).
+- **Docker:** Docker Desktop installed and running on your machine, for Neon Local. You can download it from [docker.com](https://www.docker.com/products/docker-desktop/).
 - **Node.js:** Version `18` or later to run the example application.
 
-## Neon Local Connect
+## Neon VS Code extension
 
-The easiest way to get started is with the Neon Local Connect VS Code extension. It manages the underlying Docker container for you, providing a full control panel for your Neon database within your editor.
+The Neon VS Code extension connects your editor to a Neon branch and gives you a control panel for your database inside the IDE. It connects directly to Neon, so it doesn't need Docker.
 
 ### Install the extension
 
 First, install the extension from the Visual Studio Marketplace or OpenVSX.
 
 1.  Open your editor and navigate to the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
-2.  Search for "Neon Local Connect".
+2.  Search for "Neon - Serverless Postgres".
 3.  Click **Install**.
-    ![Neon Local Connect Extension](/docs/local/extension-in-vs-code.png)
+    ![Neon VS Code extension](/docs/local/extension-in-vs-code.png)
 
 You can also install it directly from the marketplace:
 
@@ -63,31 +66,27 @@ You can also install it directly from the marketplace:
 
 Once installed, a new Neon icon will appear in your Activity Bar.
 
-1.  Click the Neon icon to open the Neon Local Connect panel.
-2.  Click **Sign in with Neon**. This will open a browser window to authenticate your Neon account using OAuth.
+1.  Click the Neon icon to open the Neon panel.
+2.  Click **Sign in**. This opens a browser window to authenticate your Neon account using OAuth.
     ![Sign in with your Neon account](/docs/local/sign-in.png)
 3.  Authorize the application to connect to your Neon account.
     ![Neon OAuth authorization in browser](/docs/local/authorize.png)
 
-### Connect to a Database branch
+Once you sign in, the extension also configures the [Neon MCP Server](/docs/ai/neon-mcp-server) for your coding agent.
 
-After authenticating, the extension fetches your Neon projects and branches.
+### Connect to a database branch
+
+After authenticating, the extension fetches your Neon projects and branches. It also scans your workspace for existing Neon connection strings and can detect your project and branch automatically.
 
 1.  Select your **Organization** and **Project**.
-2.  Choose the **Branch** you want to work on (e.g., `development`). You can connect to an **existing branch** or an **ephemeral branch** that is created on connection and destroyed on disconnection.
-    <Admonition type="note" title="Using ephemeral branches">
-    For using ephemeral branches, you need to authenticate using a Neon API key. This is recommended to ensure that temporary branches are automatically cleaned up when your session ends. To get started, see [Creating API keys](/docs/manage/api-keys). In the Neon Local Connect panel, click **Import API Key** to add your key.
-    </Admonition>
+2.  Choose the **Branch** you want to work on (for example, `development`).
 3.  Click **Connect**.
 
-The extension will now start a Neon Local Docker container in the background and establish a proxy connection to your selected branch. Once connected, the panel will display a static, local connection string.
-
-The connection string will always be the same, regardless of which branch you connect to:
-`postgres://neon:npg@localhost:5432/<database_name>`
+Once connected, the panel shows the branch's connection string. The extension connects to existing branches. For an ephemeral branch that's deleted when you're done, or a static `localhost` connection string that stays the same across branches, use [Neon Local](#neon-local).
 
 ### Extension features
 
-Neon Local Connect turns your IDE into a database management tool, so you don't need to switch contexts.
+The extension turns your IDE into a database management tool, so you don't need to switch contexts.
 
 #### Database schema view
 
@@ -118,32 +117,28 @@ For quick edits, right-click a table and select "View Table Data" to open a spre
 
 #### Branch management from the panel
 
-The Neon Local Connect panel also provides easy branch management:
+The Neon panel also handles branch management:
 
-- **Create a new branch:** Click the "Branch" dropdown, select "Create new branch...", give it a name, and choose a parent.
-- **Switch branches:** Simply select a different branch from the dropdown. Your `localhost` connection will now point to the new branch no code changes needed.
-- **Reset a branch:** Revert a branch to its parent's state to discard changes and get a clean slate. To reset a branch, right click the branch in **Database schema view** and select "Reset from Parent Branch".
-  ![Reset Branch](/docs/local/reset.png)
+- **Create a new branch:** Click the **Branch** dropdown, select **Create new branch...**, give it a name, and choose a parent. The extension creates the branch and connects you to it.
+- **Switch branches:** Select a different branch from the dropdown. The schema view updates to show the connected branch. Copy that branch's connection string into your `.env` file, or use [Neon Local](#neon-local) if you want one `localhost` string for every branch.
 
 ### Connect your application
 
-Add the static connection string from the extension panel to your project's `.env.local` file.
+Copy the connection string from the extension panel and add it to your project's `.env.local` file:
 
 ```ini
-DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-> Replace `<database_name>` with your actual database name
-
-Your app now connects to `localhost:5432`, and Neon Local securely routes traffic to the active cloud branch.
+Your app now connects directly to the selected Neon branch.
 
 Follow the [Typical development workflow](#typical-development-workflow) section to see how Neon Local fits into day-to-day work.
 
 ## Neon Local
 
-For non-VS Code users or CI/CD integration, you can use Neon Local directly. This gives you the same power, controlled in a programmatic way.
+Use Neon Local when you want a static `localhost` connection string, ephemeral branches, or a setup that works outside VS Code and in CI/CD.
 
-Neon Local is a Docker-based proxy that connects to your Neon database, allowing you to run a local instance of your cloud database. It provides a static connection string (`localhost:5432`) that routes to the active branch, making it easy to switch branches without changing your code.
+Neon Local is a Docker-based proxy that connects to your Neon database and exposes it on a local Postgres endpoint. It provides a static connection string (`localhost:5432`) that routes to the active branch, making it easy to switch branches without changing your code.
 
 ### Docker compose configuration
 
@@ -182,11 +177,11 @@ services:
 | `PARENT_BRANCH_ID` | Creates an ephemeral branch from a parent. If omitted, uses the project's default branch. | No       | Project's default branch |
 | `DELETE_BRANCH`    | Set to `false` to prevent branches from being deleted when the container stops.           | No       | `true`                   |
 
-If you need to use the `docker run` command instead of Docker Compose, you can checkout [Neon Local Docs](/docs/local/neon-local) for more information.
+If you need to use the `docker run` command instead of Docker Compose, see the [Neon Local docs](/docs/local/neon-local).
 
 ### Advanced configuration
 
-#### Persistent branches per Git Branch
+#### Persistent branches per Git branch
 
 For a workflow where a database branch's lifecycle matches a Git branch, you can configure Neon Local to persist its state.
 
@@ -219,11 +214,11 @@ If using Docker Desktop for Mac, ensure that your VM settings use **gRPC FUSE** 
 
 ## Typical development workflow
 
-Neon's branching is designed to fit Git-based development workflows. By pairing each Git branch with a corresponding database branch, you can ensure complete isolation, prevent conflicts, and maintain a clean production database.
+Neon's branching fits Git-based development workflows. When each Git branch has a matching database branch, changes stay isolated, developers don't collide, and production stays clean.
 
 Here’s a practical look at how to use Neon Local in your daily tasks.
 
-#### The scenario: Starting a new task
+#### The scenario: starting a new task
 
 You've just been assigned a ticket to build a new user profile page. The first step is always to create a new Git branch to isolate your code changes.
 
@@ -239,24 +234,24 @@ Now that your code is isolated, you need to isolate your database. You have two 
 
 **When to use it:** This is the standard approach for most feature work, bug fixes that require review, or any task that will span multiple sessions or involve collaboration. You create a persistent database branch that mirrors the lifecycle of your Git branch.
 
-<Tabs labels={["Using Neon Local Connect", "Using Neon Local (CLI)"]}>
+<Tabs labels={["Using the VS Code extension", "Using Neon Local (Docker)"]}>
 <TabItem>
 
-With the VS Code extension, creating a persistent branch is trivial:
+With the VS Code extension:
 
-1.  In the Neon Local Connect panel, click the **Branch** dropdown menu.
+1.  In the Neon panel, click the **Branch** dropdown menu.
 2.  Select **Create new branch...**.
 3.  Enter a name for your branch. It's good practice to match your Git branch name, like `feature/new-user-profile`.
 4.  Choose a parent branch to copy data and schema from (e.g., `production` or `development`).
-5.  The extension will instantly create the branch and connect you to it. Your `localhost` connection now points to this new, isolated environment.
+5.  The extension creates the branch and connects you to it. Copy the new branch's connection string into your `.env` file.
 
 </TabItem>
 <TabItem>
 
-When using the CLI, you create the branch in the Neon Console and then configure Neon Local to connect to it.
+With Neon Local, you create the branch in the Neon Console and then configure Neon Local to connect to it.
 
 1.  Navigate to your project in the **[Neon Console](https://console.neon.tech/)**.
-2.  Go to the **Branches** tab and click **New Branch**.
+2.  Go to the **Branches** page and click **New Branch**.
 3.  Name the branch (`feature/new-user-profile`) and select a parent.
 4.  Once created, copy the **Branch ID** from the branch details.
 5.  In your `docker-compose.yml`, ensure the `db` service is configured to use this specific `BRANCH_ID`.
@@ -278,26 +273,9 @@ When using the CLI, you create the branch in the Neon Console and then configure
 
 #### Option 2: Quick experiment or test
 
-**When to use it:** Perfect for quick bug fixes, running a single test suite, or experimenting with a schema change that you might throw away. An ephemeral branch is created on-the-fly and automatically deleted when you're done.
+**When to use it:** Quick bug fixes, running a single test suite, or experimenting with a schema change that you might throw away. Neon Local creates an ephemeral branch when the container starts and deletes it when the container stops. The VS Code extension connects to existing branches, so use Neon Local for this option.
 
-<Tabs labels={["Using Neon Local Connect", "Using Neon Local (CLI)"]}>
-<TabItem>
-
-1.  In the Neon Local Connect panel, click the **Connection Type** dropdown menu.
-2.  Instead of selecting "Connect to Neon Branch", choose **Connect to ephemeral Neon branch** option.
-3.  Under **Branch**, select a parent branch (e.g., `production`) to base the ephemeral branch on.
-4.  Click **Connect**.
-
-The extension creates a temporary branch for your session. When you click **Disconnect**, the branch and all its changes are automatically deleted from your Neon project, leaving no trace.
-
-<Admonition type="note">
-For using ephemeral branches, you need to authenticate using a Neon API key. To get started, see [Creating API keys](/docs/manage/api-keys).
-</Admonition>
-
-</TabItem>
-<TabItem>
-
-With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` instead of a `BRANCH_ID`.
+You create an ephemeral branch by specifying a `PARENT_BRANCH_ID` instead of a `BRANCH_ID`.
 
 1.  In the **[Neon Console](https://console.neon.tech/)**, find the **Branch ID** of the branch you want to use as a parent (e.g., your `production` or `development` branch).
 2.  In your `docker-compose.yml`, configure the `db` service to use this parent ID.
@@ -313,25 +291,20 @@ With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` 
     ```
 
 3.  Run `docker compose up`. Neon Local will create a new, temporary branch from this parent.
-4.  When you're finished, run `docker compose down`. The ephemeral branch will be automatically deleted from your Neon project.
-
-</TabItem>
-</Tabs>
+4.  When you're finished, run `docker compose down`. Neon Local deletes the ephemeral branch from your Neon project.
 
 ## Connecting your application conditionally
 
 Your application code needs to switch between connecting to Neon Local for development and your live Neon database for production. The standard way to manage this is by using the `NODE_ENV` environment variable.
 
-The core logic is straightforward: when `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Neon database URL, typically stored in your deployment environment's configuration or secrets on your cloud provider.
+When `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Neon database URL, typically stored in your deployment environment's configuration or secrets on your cloud provider.
 
 The implementation details vary slightly depending on the database driver or ORM you are using.
 
 <Tabs labels={["@neondatabase/serverless", "Drizzle ORM", "Prisma", "Other drivers"]}>
 <TabItem>
 
-The Neon serverless driver is designed to communicate with a Neon database over HTTP/WebSocket. To redirect this traffic to your local Neon Local proxy, you must override its default behavior in your development environment.
-
-This is done by reconfiguring `neonConfig` to point to `localhost`.
+The Neon serverless driver talks to a Neon database over HTTP or WebSocket. To send this traffic to the Neon Local proxy in development, reconfigure `neonConfig` to point to `localhost`.
 
 1. Install Dependencies
 
@@ -476,9 +449,9 @@ Using Prisma with Neon’s serverless adapters requires a similar setup to the o
 
    </CodeTabs>
 
-2. **Enable the Preview Flag**
+2. **Enable the preview flag (older Prisma versions only)**
 
-   To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
+   Driver adapters are generally available in current Prisma versions, so you don't need this flag. On older Prisma versions that still require it, enable the `driverAdapters` preview flag in your `schema.prisma` file.
 
    ```prisma
    // schema.prisma
@@ -528,7 +501,7 @@ Using Prisma with Neon’s serverless adapters requires a similar setup to the o
 
 <TabItem>
 
-Standard PostgreSQL drivers like `node-postgres` (`pg`) do not require major changes because they communicate over the standard Postgres wire protocol. Neon Local exposes a standard Postgres endpoint on `localhost:5432`.
+Standard Postgres drivers like `node-postgres` (`pg`) don't require major changes because they communicate over the standard Postgres wire protocol. Neon Local exposes a standard Postgres endpoint on `localhost:5432`.
 
 The only change needed is to switch the connection string and adjust the SSL setting. SSL is required for production connections to Neon but is not needed for the local proxy.
 
@@ -556,7 +529,7 @@ const client = new Client({
 export { pool, client };
 ```
 
-For **Drizzle ORM** using the standard Postgres driver is straightforward. You simply configure the connection string and SSL settings based on your environment:
+For **Drizzle ORM** with the standard Postgres driver, configure the connection string and SSL settings based on your environment:
 
 ```typescript
 import { drizzle } from 'drizzle-orm/node-postgres';
@@ -577,7 +550,7 @@ export const drizzleClient = drizzle({
 });
 ```
 
-For **Prisma** with the standard Postgres driver you again only need to set the database URL appropriately for your environment. Prisma will handle the rest:
+For **Prisma** with the standard Postgres driver, set the database URL for your environment:
 
 ```typescript
 import { PrismaClient } from './generated/prisma/client.js';
@@ -592,7 +565,7 @@ const prismaClient = new PrismaClient({
 ```
 
 - In any case, use the local Neon Local connection string for development and your production Neon connection string in deployed environments.
-- Conditionally disabling SSL for local development ensures compatibility with the Neon Local proxy, while production connections remain secure.
+- Relaxing SSL verification only in local development keeps the Neon Local proxy working while production connections stay fully verified.
 
 </TabItem>
 </Tabs>
@@ -600,7 +573,7 @@ const prismaClient = new PrismaClient({
 <Admonition type="note" title="Other languages and drivers">
 The `neonConfig` setup is **exclusive to the `@neondatabase/serverless` driver** and its wrappers (Drizzle, Prisma adapter) in Node.js environments.
 
-For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard PostgreSQL drivers, you can follow the same pattern as the `node-postgres (pg)` example:
+For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard Postgres drivers, you can follow the same pattern as the `node-postgres (pg)` example:
 
 1.  Read the database connection string from an environment variable.
 2.  In your local development environment, set this variable to `postgres://neon:npg@localhost:5432/<database_name>`.
@@ -612,12 +585,12 @@ No other code modifications are necessary.
 
 ## Summary
 
-You've now learned how to integrate Neon local and Neon Local Connect into your workflow. With Neon Local Connect, you get a full-featured database IDE that makes managing branches as easy as managing Git branches. For more advanced or automated setups, Neon Local with Docker provides the same capabilities for any environment, so you always have clean, isolated, and production-like databases for development and testing.
+You set up the Neon VS Code extension to browse, query, and branch your database from the IDE, and Neon Local with Docker Compose to give your app a static `localhost` connection and ephemeral branches. As a next step, try the [example application](https://github.com/neondatabase-labs/neon-local-example-react-express-application) that uses Neon Local.
 
 ## Resources
 
-- [Neon Local Documentation](/docs/local/neon-local)
-- [Neon Local Connect extension guide](/docs/local/neon-local-vscode)
+- [Neon Local documentation](/docs/local/neon-local)
+- [Neon VS Code extension](/docs/local/vscode-extension)
 - [Example application using Neon Local](https://github.com/neondatabase-labs/neon-local-example-react-express-application)
 
 <NeedHelp/>
