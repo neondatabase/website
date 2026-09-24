@@ -35,6 +35,8 @@ This team spent years working on realtime data sync on top of Postgres and I'm s
 <p><strong>“Sync is a backend primitive. Rather than building a product around it, it should speak the same semantics as the rest of your tooling”</strong></p>
 </blockquote>
 
+---
+
 **Quick question first: what's surprised you most since joining — the size of Databricks, the amount of Slack, or how many people have opinions about Postgres?**
 
 Yeah, I had no real idea what it would be like joining such a big company. I think the main surprise has been just how strong of an engineering culture it is. I've not had a boss for a long time but I can't really argue when my boss just happens to have built AWS Aurora.
@@ -72,5 +74,7 @@ We are solving this. We are taking all our expertise from academic research and 
 Modern apps and agents need realtime data and end-to-end reactivity. CTOs, tech leads, coding agents, they all know this. So, when you're choosing a backend stack, you typically want to know at least that you can have realtime as part of it. Even if you're not using it right away.
 
 By adding realtime to Neon, we're rounding out the backend platform and taking away any last reason not to choose it. And the way we're doing it aims to not just add realtime to Neon but to make it the best in the market. So developers and coding agents actively choose Neon as the best backend platform for realtime reactivity.
+
+---
 
 **We'll have a lot more to share on realtime in Neon soon.** In the meantime, if you're interested in following developments, or getting early access as an alpha or beta tester, join us in the [platform channel in the Neon Discord](https://discord.gg/MXNy77qBf4) and we'd love to connect and chat there.
