@@ -1,19 +1,19 @@
 ---
-title: Building Intelligent Search with AI Embeddings, Neon, and pgvector
+title: Building semantic search with AI embeddings, Neon, and pgvector
 subtitle: Learn how to create a semantic search system using AI embeddings, Neon, and pgvector.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Traditional text search relies on exact keyword matches, which often misses the semantic meaning behind queries.
 
 When someone searches for "car maintenance," they might also be interested in results about "vehicle servicing" or "auto repair", but keyword-based search won't make these connections.
 
-AI embeddings solve this problem by converting text into high-dimensional vectors that capture semantic meaning. Words and phrases with similar meanings cluster together in this vector space, enabling search systems that understand context and intent rather than just matching exact words.
+AI embeddings solve this problem by converting text into high-dimensional vectors that capture semantic meaning. Words and phrases with similar meanings cluster together in this vector space, so search can match on meaning rather than exact words.
 
-The pgvector extension brings vector similarity search directly into PostgreSQL, letting you store embeddings alongside your regular data and perform complex semantic searches with simple SQL queries. Combined with Neon's serverless PostgreSQL, you can build intelligent search systems that scale automatically with your application's needs.
+The pgvector extension adds vector similarity search to Postgres, so you can store embeddings alongside your regular data and run semantic searches with SQL. On Neon, the database's compute autoscales with query load.
 
 In this guide, you'll learn how to build a semantic search system that can power document search and content recommendations using OpenAI embeddings stored in Neon with pgvector.
 
@@ -38,7 +38,7 @@ To follow along with this guide, you'll need:
 
 ## Understanding AI embeddings and vector search
 
-Before diving into the implementation, let's understand how AI embeddings work and why they're great for search.
+Before the implementation, here's how AI embeddings work and why they help with search.
 
 ### What are embeddings?
 
@@ -56,11 +56,11 @@ const embedding1 = [-0.02, 0.15, -0.08, ...]; // 1,536 numbers
 const embedding2 = [-0.01, 0.16, -0.09, ...]; // Similar values
 ```
 
-The key insight is that semantically similar texts produce similar embedding vectors. This enables search systems that can find relevant content even when it doesn't share exact keywords with the query.
+Semantically similar texts produce similar embedding vectors, so a search can find relevant content even when it doesn't share exact keywords with the query.
 
 ### Why pgvector?
 
-pgvector extends PostgreSQL with vector data types and similarity search operations. Instead of moving your data to specialized vector databases, you can store embeddings alongside your existing relational data and perform vector similarity searches with SQL:
+pgvector extends Postgres with vector data types and similarity search operations. Instead of moving your data to specialized vector databases, you can store embeddings alongside your existing relational data and perform vector similarity searches with SQL:
 
 ```sql
 -- Find documents most similar to a query embedding
@@ -73,21 +73,20 @@ LIMIT 5;
 
 The `<->` operator calculates the distance between vectors, with smaller distances indicating higher similarity.
 
-Now let's build a system that puts these concepts to work.
-
 ## Setting up pgvector on Neon
 
 We'll start by enabling pgvector on your Neon database and creating the necessary tables for our search system.
 
-First, create a new Neon project optimized for vector operations:
+First, create a new Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech)
 2. Click "New Project"
 3. Name your project "semantic-search-system"
 4. Choose a region close to your users
-5. Select at least 1 CU for compute size (vector operations can be CPU-intensive)
+5. Click **Create project**
+6. After the project is created, consider [editing the compute](/docs/manage/computes#edit-a-compute) to use at least 1 CU (≈4 GB RAM), since vector operations can be CPU-intensive
 
-Once your project is created, we need to enable the pgvector extension. Connect to your database and run this SQL:
+Next, enable the pgvector extension. Connect to your database and run this SQL:
 
 ```sql
 -- Enable the pgvector extension
@@ -97,7 +96,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 SELECT extversion FROM pg_extension WHERE extname = 'vector';
 ```
 
-This command adds vector data types and similarity functions to your PostgreSQL database. You should see confirmation that the vector extension is now available.
+This command adds vector data types and similarity functions to your Postgres database. The second query returns the installed pgvector version.
 
 Next, we'll create the database schema for our semantic search system. This includes tables for documents and their embeddings, along with indexes for fast vector similarity search.
 
@@ -116,11 +115,11 @@ CREATE TABLE documents (
 CREATE INDEX documents_embedding_idx ON documents USING ivfflat (embedding vector_cosine_ops);
 ```
 
-The `vector(1536)` data type stores 1,536-dimensional vectors, matching OpenAI's embedding size. The `ivfflat` indexes enable fast approximate nearest neighbor searches using cosine similarity, which matters for performance when searching through thousands of embeddings.
+The `vector(1536)` data type stores 1,536-dimensional vectors, matching OpenAI's embedding size. The `ivfflat` index enables approximate nearest neighbor search using cosine distance, which speeds up searches across thousands of embeddings. See [Performance optimization](#performance-optimization) for tuning, and the [pgvector docs](/docs/extensions/pgvector#ivfflat) for why IVFFlat indexes work best when built after the table has data.
 
 ## Building an embedding generation service
 
-Now we'll create a Node.js service that handles the complexities of generating embeddings with [OpenAI's API](https://platform.openai.com/docs/guides/embeddings). This service will be the bridge between your text content and the vector representations stored in the database.
+Next, create a Node.js service that generates embeddings with [OpenAI's API](https://platform.openai.com/docs/guides/embeddings). It turns your text content into the vectors you store in the database.
 
 Let's set up the project structure and install the necessary dependencies:
 
@@ -131,14 +130,14 @@ npm init -y
 npm install openai pg dotenv express cors
 ```
 
-Create a `.env` file to securely store your API credentials:
+Create a `.env` file to store your API credentials:
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
 DATABASE_URL=postgresql://user:password@ep-abc123.region.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Now let's create an embedding service that handles OpenAI API interactions. This service will preprocess text, generate embeddings, and handle errors gracefully:
+Now let's create an embedding service that handles OpenAI API interactions. This service preprocesses text, generates embeddings, and handles errors:
 
 ```javascript
 // embedding.js
@@ -194,15 +193,13 @@ class EmbeddingService {
 module.exports = EmbeddingService;
 ```
 
-This service handles a few important tasks: it preprocesses text to ensure it fits within OpenAI's token limits, combines document fields into optimized text for better embeddings, and provides error handling for API calls. The `createDocumentText` method is particularly important because it structures the input text in a way that produces better semantic embeddings.
+This service preprocesses text so it fits within OpenAI's token limits, combines document fields into a single labeled string, and handles API errors. The `createDocumentText` method labels the title, category, and content so the embedding reflects all three.
 
-As of the time of writing, OpenAI's `text-embedding-3-small` model is the newest and most cost-effective for generating embeddings.
+At the time of writing, OpenAI's `text-embedding-3-small` model is its lowest-cost embedding model. Check [OpenAI's embeddings guide](https://platform.openai.com/docs/guides/embeddings) for current models.
 
 ## Creating a document management system
 
-Now we'll build a service that manages documents in our database and automatically generates embeddings for each document. This service will handle both individual documents and batch operations.
-
-Let's create the document service that ties together our database and embedding generation:
+Next, build a service that stores documents in the database and generates an embedding for each one:
 
 ```javascript
 // document-service.js
@@ -283,7 +280,7 @@ class DocumentService {
 
       // Add category filter if needed
       if (category) {
-        sql += ` WHERE category = $2`;
+        sql += ` AND category = $2`;
         params.push(category);
       }
 
@@ -327,17 +324,15 @@ class DocumentService {
 module.exports = DocumentService;
 ```
 
-This service provides the core functionality for our semantic search system. The `addDocument` method generates embeddings and stores them alongside the document data, while `searchDocuments` performs the actual semantic search by converting queries to embeddings and finding the most similar documents using pgvector's distance operators.
+The `addDocument` method generates embeddings and stores them alongside the document data, while `searchDocuments` performs the actual semantic search by converting queries to embeddings and finding the most similar documents using pgvector's distance operators.
 
-The key insight here is the `<=>` operator in the SQL query, this calculates cosine distance between vectors, with smaller values indicating higher similarity. We convert this to a similarity score between 0 and 1 for easier interpretation.
+The `<=>` operator in the SQL query calculates cosine distance between vectors, with smaller values indicating higher similarity. The query converts it to a similarity score (`1 - distance`) that's easier to read, where higher is more similar.
 
-The `getDocumentById` method retrieves a specific document by its ID, allowing applications to fetch full content when needed.
+The `getDocumentById` method retrieves a document by its ID so applications can fetch the full content.
 
 ## Building the search API
 
-With our document service in place, let's create an Express API that exposes our document search capabilities to applications.
-
-This API will provide endpoints for adding documents and performing semantic searches.
+With the document service in place, create an Express API with endpoints for adding documents and running semantic searches.
 
 ```javascript
 // server.js
@@ -446,13 +441,13 @@ app.listen(PORT, () => {
 });
 ```
 
-This API provides clean, RESTful endpoints for our semantic search functionality. The `/search` endpoint is the heart of the system, it takes natural language queries and returns semantically relevant documents, even when there are no exact keyword matches.
+The `/search` endpoint takes natural language queries and returns semantically relevant documents, even when there are no exact keyword matches.
 
-Notice how we measure and return the search time. This helps you monitor performance as your document collection grows.
+The endpoint also returns the search time, which you can use to monitor performance as your document collection grows.
 
 ## Testing the semantic search system
 
-With our API in place, now let's test our semantic search system to see how it finds relevant documents based on meaning rather than exact keywords. We'll add sample documents and run various search queries.
+With the API in place, add some sample documents and run a few queries to see how the search matches on meaning rather than exact keywords.
 
 Create a test script to populate your database with sample content and test the search functionality:
 
@@ -558,13 +553,11 @@ You should see output showing how the semantic search finds relevant documents e
 
 For example, searching for "artificial intelligence and computers" should return documents about machine learning and neural networks, because the search matches on meaning rather than keywords.
 
-The similarity scores help you understand how closely each result matches the query - scores closer to 1.0 indicate higher semantic similarity.
+Scores closer to 1.0 indicate higher semantic similarity.
 
 ## Performance optimization
 
-As your document collection grows, you'll want to optimize performance.
-
-First, let's properly configure the pgvector indexes. The default index settings work for small datasets, but you'll need to tune them for larger collections:
+As your document collection grows, tune the pgvector index. The default index settings work for small datasets, but larger collections need tuning:
 
 ```sql
 -- Drop existing indexes to recreate with optimal settings
@@ -580,23 +573,19 @@ WITH (lists = 100);  -- Adjust based on your document count
 ANALYZE documents;
 ```
 
-These indexes dramatically improve query speed by creating approximate nearest neighbor searches instead of comparing every vector.
+The index speeds up queries by running approximate nearest neighbor searches instead of comparing every vector.
 
-The `lists` parameter should be adjusted based on your data size, more documents need more lists for optimal performance.
+Adjust the `lists` parameter as your data grows. More documents need more lists. For other index types and tuning options, see [The pgvector extension](/docs/extensions/pgvector).
 
 ## Conclusion
 
-You now should have a solid foundation for a semantic search system that uses AI embeddings alongside `pgvector` in Neon.
+You've built a semantic search API that stores OpenAI embeddings in a Postgres database on Neon and queries them with `pgvector`. From here, you could add features like search suggestions or multilingual support.
 
-You've built a simple semantic search system using AI embeddings with Neon and `pgvector`.
+## Additional resources
 
-The foundation you've built can be extended with features like real-time search suggestions or multilingual support. The principles of semantic search and vector similarity will enable you to create intelligent applications that understand user intent and context.
-
-## Additional Resources
-
-- [pgvector Documentation](https://github.com/pgvector/pgvector)
-- [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
-- [Neon Serverless PostgreSQL](/docs)
-- [Vector Similarity Search Best Practices](https://github.com/pgvector/pgvector#best-practices)
+- [pgvector documentation](https://github.com/pgvector/pgvector)
+- [OpenAI embeddings guide](https://platform.openai.com/docs/guides/embeddings)
+- [Neon documentation](/docs)
+- [pgvector best practices](https://github.com/pgvector/pgvector#best-practices)
 
 <NeedHelp />

@@ -2,14 +2,14 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-24T00:00:00.000Z'
-updatedOn: '2026-09-21T05:00:58.992Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 title: Build image search over CLIP embeddings with Lakebase Search
 subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Lakebase Postgres with Lakebase Search.
 ---
 
-What if you tried to expand beyond the usual image search demos where you embed a few thousand photos, a text query, and then run `order by embedding <=> $1 limit 20` to display results? As the data corpus grows, the HNSW index builds that [stretch into hours on tens of millions of vectors](https://github.com/pgvector/pgvector/issues/807) become a common complaint in such setups.
+The usual image search demo embeds a few thousand photos and a text query, then runs `order by embedding <=> $1 limit 20` to display results. As the corpus grows, HNSW index builds [stretch into hours on tens of millions of vectors](https://github.com/pgvector/pgvector/issues/807), a common complaint in these setups.
 
-This is where [Lakebase Search](https://docs.databricks.com/aws/en/oltp/projects/lakebase-search) gets fun. Its `lakebase_ann` index uses IVF partitioning with RaBitQ quantisation instead of a graph, so it builds 50 to 100 times faster than HNSW on the same data. This guide searches a Flickr30k corpus three ways from one `vector(512)` column: by a phrase, by another photo, and by caption. The captions also get a BM25 index, so you can read a semantic ranking against a keyword one, plus a fourth shape, a radius scan, that pgvector cannot serve from an index.
+[Lakebase Search](https://docs.databricks.com/aws/en/oltp/projects/lakebase-search) takes a different approach. Its `lakebase_ann` index uses IVF partitioning with RaBitQ quantization instead of a graph, so it builds 50 to 100 times faster than HNSW on the same data. This guide searches a Flickr30k corpus three ways from one `vector(512)` column: by a phrase, by another photo, and by caption. The captions also get a BM25 index, so you can read a semantic ranking against a keyword one, plus a fourth shape, a radius scan, that pgvector cannot serve from an index.
 
 You will use Lakebase Postgres, the `lakebase_vector` and `lakebase_text` extensions, CLIP through transformers.js, and the [nlphuji/flickr30k](https://huggingface.co/datasets/nlphuji/flickr30k) dataset.
 
@@ -68,7 +68,7 @@ Try it at [neon-demo-lakebase-search-clip-embeddings.vercel.app](https://neon-de
 
 ## Create the Next.js application
 
-Since there's lot to cover in this application, the easier way is to clone the project, install its dependencies and then learn the core parts around vector and text search with Lakebase.
+There's a lot to cover in this application, so the easiest path is to clone the project, install its dependencies, and then walk through the core parts of vector and text search with Lakebase Search.
 
 Run the following commands to clone and install the project:
 
@@ -82,7 +82,7 @@ It installs the following important dependencies:
 
 - `@huggingface/transformers` to run the CLIP model on CPU in Node
 - `@neondatabase/serverless` to query Neon over HTTP (for the app) and over WebSocket (for the setup scripts)
-- `aws4fetch` to sign S3 requests to Neon Storage
+- `aws4fetch` to sign S3 requests to Neon Object Storage
 - `hyparquet` to read the dataset's parquet shards over HTTP range requests to avoid downloading a whole shard at once
 
 Then, copy the environment variable file with the following command:
@@ -91,7 +91,7 @@ Then, copy the environment variable file with the following command:
 cp .env.example .env
 ```
 
-Now, let's provision a serverless Postgres and a Neon Storage bucket so that you can use the keys to remotely manage the images and perform vector & text search, all within Neon infrastructure.
+Next, create a Postgres database and an Object Storage bucket on Neon. The bucket holds the images, and the database runs the vector and text search.
 
 ## Link the project with the Neon CLI
 
@@ -109,14 +109,14 @@ Now, run `neon link` to create the project and bind the application directory to
 neon link
 ```
 
-The CLI flow would prompt you for an organization and a project. Since you don't have one yet, choose **+ Create new project**, give it a name, and pick a region (`us-east-2` for this tutorial). It creates the Postgres with a default branch, writes a `neon.ts` and `.neon` context files, and pulls the new branch's `DATABASE_URL` into your `.env` file.
+The CLI prompts you for an organization and a project. Choose **+ Create new project**, give it a name, and pick a region (AWS US East (Ohio), `aws-us-east-2`, for this tutorial). It creates the project with a default branch, writes the `.neon` context file, offers to write a `neon.ts` config (accept it), and pulls the new branch's `DATABASE_URL` into your `.env` file.
 
 The app uses this in `src/db/index.ts`, and it opens two kinds of connection:
 
 - `neon()` sends each query as one HTTP `fetch`. It is for a serverless function where every request is a single self-contained statement. The deployed app uses only this.
 - `Client` opens one WebSocket session. The setup scripts need it for transactions, `create index concurrently`, and per-session settings like `set lakebase_ann.probes`.
 
-## Declare a Storage bucket in neon.ts
+## Declare an Object Storage bucket in neon.ts
 
 The photos in the dataset are stored in a bucket, and the browser loads them over presigned URLs. Declare the bucket in the [`neon.ts`](/docs/reference/neon-ts) file:
 
@@ -152,17 +152,17 @@ The one value `neon config apply` doesn't set is `S3_BUCKET`, which tells the ap
 
 The `src/lib/storage.ts` file in the codebase signs every request with SigV4 over `fetch`. The bucket can stay private, as the app presigns a short-lived public URL for each result, without routing images through the server.
 
-Once `.env` has your database and storage values, `npm run setup` runs the whole pipeline in order: `dataset:pull`, `dataset:embed`, `db:schema`, `dataset:load`, `db:index`, and `db:warm`. The following sections walk through each command and what it does. For now, let's move to learning about the two important Lakebase extensions for this use case.
+Once `.env` has your database and storage values, `npm run setup` runs the whole pipeline in order: `dataset:pull`, `dataset:embed`, `db:schema`, `dataset:load`, `db:index`, and `db:warm`. The following sections walk through each command and what it does. First, here are the two Lakebase Search extensions the app depends on.
 
 ## Understand lakebase_vector and lakebase_text
 
 [Lakebase Search](/docs/ai/lakebase-search) is powered by the following two Postgres extensions:
 
-<Admonition type="important" title="Enable the extensions first">
-Both extensions rely on preloaded libraries that aren't on by default. Follow [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) to enable the libraries.
+<Admonition type="note" title="Preloaded libraries">
+Both extensions rely on preloaded libraries that Neon enables by default. If you've customized your project's [preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries), make sure `lakebase_vector` and `lakebase_text` are in the list. See [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) for the full setup.
 </Admonition>
 
-- [`lakebase_vector`](https://docs.databricks.com/aws/en/oltp/projects/lakebase-vector): provides the `lakebase_ann` index for approximate nearest-neighbour search. It reuses pgvector's `vector` type and pgvector's distance operators, so `<->`, `<#>`, and `<=>` can be used as usual, and the opclasses are the same `vector_l2_ops`, `vector_ip_ops`, and `vector_cosine_ops`. Underneath, it uses [IVF partitioning with RaBitQ quantisation](/docs/extensions/lakebase-vector#why-lakebasevector), an architecture built to scale past what HNSW reaches. RaBitQ compresses the vectors 4 to 8 times and builds the index 50 to 100 times faster than HNSW at the same corpus size, and cold starts stay fast.
+- [`lakebase_vector`](https://docs.databricks.com/aws/en/oltp/projects/lakebase-vector): provides the `lakebase_ann` index for approximate nearest-neighbor search. It reuses pgvector's `vector` type and pgvector's distance operators, so `<->`, `<#>`, and `<=>` can be used as usual, and the opclasses are the same `vector_l2_ops`, `vector_ip_ops`, and `vector_cosine_ops`. Underneath, it uses [IVF partitioning with RaBitQ quantization](/docs/extensions/lakebase-vector#why-lakebasevector), an architecture built to scale past what HNSW reaches. RaBitQ compresses the vectors 4 to 8 times and builds the index 50 to 100 times faster than HNSW at the same corpus size, and cold starts stay fast.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
@@ -188,7 +188,7 @@ const rows = await parquetReadObjects({ file, compressors, rowStart, rowEnd, utf
 
 Using `utf8: false` stops the parquet reader from decoding every `BYTE_ARRAY` column as a string. The caption columns carry a UTF8 converted type, so they still come back as strings either way.
 
-The dataset pull runs in two passes: first decodes shards to disk and the second uploads images to the bucket.
+The dataset pull runs in two passes: the first decodes shards to disk and the second uploads images to the bucket.
 
 Run the dataset pull and push script with the following command:
 
@@ -196,7 +196,7 @@ Run the dataset pull and push script with the following command:
 npm run dataset:pull
 ```
 
-By default this would pull 2000 images. Pass `--limit` to change the count, or `--limit all` to pull every photo:
+By default, this pulls 2,000 images. Pass `--limit` to change the count, or `--limit all` to pull every photo:
 
 ```bash
 npm run dataset:pull -- --limit all
@@ -208,7 +208,7 @@ npm run dataset:pull -- --limit all
 
 That is the reason this project has one embedding column instead of two. Once you hold 512 floats, text-to-image search and image-to-image search are the same SQL statement with a different value bound to `$1`.
 
-The code uses [`Xenova/clip-vit-base-patch32`](https://huggingface.co/Xenova/clip-vit-base-patch32) through [transformers.js](https://github.com/huggingface/transformers.js), which runs the ONNX weights on CPU in Node. Both towers load lazily as singletons in `src/lib/clip.ts` file, so the weights download once and stay in memory for the life of the process.
+The code uses [`Xenova/clip-vit-base-patch32`](https://huggingface.co/Xenova/clip-vit-base-patch32) through [transformers.js](https://github.com/huggingface/transformers.js), which runs the ONNX weights on CPU in Node. Both towers load lazily as singletons in the `src/lib/clip.ts` file, so the weights download once and stay in memory for the life of the process.
 
 ```ts
 export const MODEL_ID = 'Xenova/clip-vit-base-patch32'
@@ -217,9 +217,9 @@ export const CLIP_DIMS = 512
 
 In the code, `WithProjection` model classes are used to read the projection head, the layer the contrastive loss operated on, so its 512-float output is the one that compares across towers.
 
-### Normalise vectors before you store them
+### Normalize vectors before you store them
 
-CLIP's projection heads do not emit unit vectors. Raw norms out of this checkpoint run somewhere around 8 to 12 and move with image content. Make sure to normalise them once, at the write time:
+CLIP's projection heads do not emit unit vectors. Raw norms out of this checkpoint run somewhere around 8 to 12 and move with image content. Normalize them once, at write time:
 
 ```ts
 function normalise(v: ArrayLike<number>): number[] {
@@ -236,7 +236,7 @@ function normalise(v: ArrayLike<number>): number[] {
 `vector_cosine_ops` already divides by the norms, so ranking would still work if you skip this step. But two other things need it:
 
 - The distances you read back only mean something on a unit sphere, so a radius like 0.18 has no fixed meaning when vectors have any length.
-- If you ever swap `vector_cosine_ops` for `vector_ip_ops`, an unnormalised index ranks by magnitude instead of angle, and the results fail to then measure similarity.
+- If you ever swap `vector_cosine_ops` for `vector_ip_ops`, an unnormalized index ranks by magnitude instead of angle, and the results no longer measure similarity.
 
 The embed step reads each photo from the bucket, runs both towers, and writes `data/embeddings.jsonl`. It skips any photo id it has already embedded. Run the embedding step with the following command:
 
@@ -276,7 +276,7 @@ In the schema:
 
 - `captions.tsv` is a generated column, and BM25 indexes it. It's built from the `body` column, so its words and the caption text stay in sync.
 
-There is also a small `query_embeddings` table keyed on the normalised query text. A repeated text search then costs one indexed primary-key lookup instead of a full model load. Run the schema creation with the following command:
+There is also a small `query_embeddings` table keyed on the normalized query text. A repeated text search then costs one indexed primary-key lookup instead of a full model load. Run the schema creation with the following command:
 
 ```bash
 npm run db:schema
@@ -284,7 +284,7 @@ npm run db:schema
 
 ## Load the corpus and build the indexes
 
-Each index created by both the extensions reads the corpus as it builds. `lakebase_ann` partitions the rows with IVF, so it needs them in place to form the partitions it later uses. `lakebase_bm25` computes its corpus statistics once, at build time, so it needs the full caption set to learn document frequencies and average document length. Load the rows first with the following command:
+The indexes from both extensions read the corpus as they build. `lakebase_ann` partitions the rows with IVF, so it needs them in place to form the partitions it later uses. `lakebase_bm25` computes its corpus statistics once, at build time, so it needs the full caption set to learn document frequencies and average document length. Load the rows first with the following command:
 
 ```bash
 npm run dataset:load
@@ -309,7 +309,7 @@ with (k1 = 1.2, b = 0.75);
 In the queries above:
 
 - `build_mode = 'quality'` improves recall but takes longer to build.
-- On the BM25 side, `k1` controls term-frequency saturation and `b` controls document-length normalisation. Flickr captions are short and even in length, so `b` does very little for this kind of dataset.
+- On the BM25 side, `k1` controls term-frequency saturation and `b` controls document-length normalization. Flickr captions are short and even in length, so `b` does very little for this kind of dataset.
 
 Now, run the following command to build all three indexes:
 
@@ -328,7 +328,7 @@ order by embedding <=> $1
 limit 24;
 ```
 
-See that this is the same statement you would write against pgvector's HNSW or IVFFlat. Swapping the index type changes the plan, the build time, and the recall profile. That is what makes `lakebase_vector` easy to adopt on an existing project. You keep using the pgvector query you already have and change only the index.
+This is the same statement you would write against pgvector's HNSW or IVFFlat. Swapping the index type changes the plan, the build time, and the recall profile. That is what makes `lakebase_vector` easy to adopt on an existing project. You keep using the pgvector query you already have and change only the index.
 
 In `src/lakebase/ann.ts` the vector binds as a parameter and casts, so the plan is reused and nothing user-supplied reaches the query text:
 
@@ -344,7 +344,7 @@ Try it: [dogs running in a grassy field](https://neon-demo-lakebase-search-clip-
 
 ## Search photos by image
 
-To search by photos by image, you simply embed the incoming image with the vision tower (instead of embedding a string with the text tower), and then you run the query above.
+To search photos by image, embed the incoming image with the vision tower (instead of embedding a string with the text tower), then run the query above.
 
 In the [demo](#demo), it's the upload image dialog box. Drop in any image, read the file bytes and embed them with the vision tower:
 
@@ -353,7 +353,7 @@ const bytes = new Uint8Array(await file.arrayBuffer())
 const { embedding } = await embedImage(new Blob([bytes], { type: file.type }))
 ```
 
-When the query image is already a row in your table, do not fetch its vector and send it back. A 512-dimension vector is about 8 KB of JSON in each direction. Instead, emit a subselect instead, and let Postgres resolve the vector inside the same statement:
+When the query image is already a row in your table, do not fetch its vector and send it back. A 512-dimension vector is about 8 KB of JSON in each direction. Use a subselect instead, and let Postgres resolve the vector inside the same statement:
 
 ```sql
 select p.id, p.filename,
@@ -364,7 +364,7 @@ order by p.embedding <=> (select embedding from photos where id = $1)
 limit 24;
 ```
 
-The `where p.id <> $1` is there because a photo is always its own nearest neighbour at distance zero.
+The `where p.id <> $1` is there because a photo is always its own nearest neighbor at distance zero.
 
 ## Rank captions against a photo
 
@@ -396,7 +396,7 @@ order by score
 limit 24;
 ```
 
-The following two parts in that query are new with lakebase extensions, even if you have written full-text search in Postgres before:
+The following two parts of that query are specific to `lakebase_text`, even if you have written full-text search in Postgres before:
 
 - `to_bm25query` takes the index name as its second argument. BM25 needs document frequencies and an average document length, both of which are properties of a corpus, and both of which are stored in the index. A plain `tsvector @@ tsquery` match has no equivalent, because it never consults the corpus at all.
 - `<@>` returns a negative score, so ascending order puts the most relevant row first.
@@ -405,7 +405,7 @@ Try [bicycle in keyword mode](https://neon-demo-lakebase-search-clip-embeddings.
 
 ## Run an indexed radius search
 
-Every query so far we've learnt has a pgvector equivalent. This one is different: pgvector can't serve it from an index.
+Every query so far has a pgvector equivalent. pgvector can't serve this one from an index.
 
 With pgvector, searching for every photo within 0.15 cosine of a given one would just be a filter: an HNSW or IVFFlat index sorts by distance but cannot seek by it, so Postgres reads the rows first and then applies the bound. `lakebase_ann` instead registers a radius operator, `<<=>>`, on `vector_cosine_ops`, so the bound goes into the index and only the matching region is read.
 
@@ -425,7 +425,7 @@ The `order by` still uses `<=>` because you usually want the matches sorted, eve
 
 ## Inspect and tune the ANN index
 
-`lakebase_vector` extension also has two helpful functions:
+The `lakebase_vector` extension also has two functions for inspecting and warming the index:
 
 ### lakebase_ann_index_info to report the index's partition layout, probe counts, and epsilon
 
@@ -440,13 +440,13 @@ Once `lists` is populated, two settings come into play:
 - `lakebase_ann.probes` takes one integer per partition level. Higher values read more of the index and raise recall at the cost of latency. It defaults to `auto`.
 - `lakebase_ann.epsilon` controls how many candidates are reranked using full-precision distances. Leave it set to its default value of `auto`.
 
-Both are session settings, so you set them per connection with `SET`, and they are only valid until the connection closes. Raise `probes` to read more of the index and gain recall at the cost of latency.
+Both are session settings, so you set them per connection with `SET`, and they last until the connection closes.
 
 ```sql
 set lakebase_ann.probes to '32';
 ```
 
-Because a serverless function on the HTTP driver has no session to hold these, use a pooled connection when you need non-default values at query time.
+A serverless function on the HTTP driver has no session to hold these. Pooled connections don't keep them either, because Neon's pooler runs PgBouncer in transaction mode, which drops `SET` values between transactions. When you need non-default values at query time, use a WebSocket `Client` session or a direct connection, or run `SET LOCAL` inside the same transaction as the query.
 
 ### lakebase_ann_prewarm to load the index into memory and cut first-query cold-start latency
 
@@ -464,7 +464,7 @@ npm run db:stats
 
 Embedding a string means loading the 242 MB CLIP weights, so on a cold deploy that first search would pay the full model download before it could return anything.
 
-`npm run db:warm` embeds few fixed queries once and writes them to the `query_embeddings` table from the schema step. A fresh deployment then serves them straight from Postgres with an indexed primary-key lookup, instead of loading the model just to answer the default query. It uses `on conflict do nothing`, so it's safe to run repeatedly.
+`npm run db:warm` embeds a few fixed queries once and writes them to the `query_embeddings` table from the schema step. A fresh deployment then serves them straight from Postgres with an indexed primary-key lookup, instead of loading the model just to answer the default query. It uses `on conflict do nothing`, so it's safe to run repeatedly.
 
 ```bash
 npm run db:warm
@@ -486,4 +486,4 @@ The repository is ready to deploy to Vercel. Use the following steps to deploy:
 
 ## Summary
 
-You now have image search over CLIP embeddings in Postgres, with three retrieval shapes coming out of one `vector(512)` column: text-to-image, image-to-image, and image-to-caption. The captions carry a `lakebase_bm25` index as well, so you can run the same query through a semantic ranking and a keyword ranking and see they don't match. The radius operator `<<=>>` then gives you an indexed near-duplicate search that pgvector cannot serve from an index.
+You now have image search over CLIP embeddings in Postgres, with three retrieval shapes coming out of one `vector(512)` column: text-to-image, image-to-image, and image-to-caption. The captions carry a `lakebase_bm25` index as well, so you can run the same query through a semantic ranking and a keyword ranking and compare the results. The radius operator `<<=>>` then gives you an indexed near-duplicate search that pgvector cannot serve from an index.

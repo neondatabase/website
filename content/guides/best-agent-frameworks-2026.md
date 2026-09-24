@@ -7,9 +7,9 @@ enableTableOfContents: true
 createdAt: '2026-09-01T00:00:00.000Z'
 ---
 
-In production, AI agents are expected to remember past sessions, resume reliably after crashes, and maintain a queryable audit trail. Without this, teams face failures like agents forgetting yesterday's tickets<sup><a href="#ref-1">[1]</a></sup> or looping endlessly, burning unexpected bills<sup><a href="#ref-2">[2]</a></sup>. Enter the fix: A durable state layer, Postgres.
+In production, AI agents are expected to remember past sessions, resume reliably after crashes, and maintain a queryable audit trail. Without this, teams face failures like agents forgetting yesterday's tickets<sup><a href="#ref-1">[1]</a></sup> or looping endlessly, burning unexpected bills<sup><a href="#ref-2">[2]</a></sup>. The fix is a durable state layer, and Postgres fits that role.
 
-And this is where Neon comes in. It branches a [full copy of your database per agent run](/docs/introduction/branching) in milliseconds, and [scales to zero](/docs/introduction/scale-to-zero) between runs, so an idle agent's compute costs nothing ([yes, really](/docs/introduction/cost-optimization#compute-cu-hours)).
+Neon branches a [full copy of your database per agent run](/docs/introduction/branching) in milliseconds, and [scales to zero](/docs/introduction/scale-to-zero) between runs, so an idle agent's compute costs nothing ([yes, really](/docs/introduction/cost-optimization#compute-cu-hours)). You still pay for storage.
 
 This guide ranks popular AI agent frameworks by how they handle memory and durable state, and how well they fit serverless Postgres.
 
@@ -28,7 +28,7 @@ The strongest frameworks add:
 - **Long-term memory:** Recall that carries across sessions, backed by a database you can query and back up.
 - **Native MCP:** The [Model Context Protocol](https://modelcontextprotocol.io/) is now the common way to expose tools and context to agents.
 - **Evals and tracing:** You can measure whether the agent is getting better and see what it did when it fails.
-- **Serverless deploy:** The agent runs in the edge and serverless runtimes where modern apps run.
+- **Serverless deploy:** The agent runs on the edge and serverless runtimes where modern apps run.
 
 Here's how some of the most popular AI agent frameworks compare:
 
@@ -66,7 +66,7 @@ TypeScript teams shipping stateful agents who want memory, workflows, evals, and
 
 ### 2. LangGraph
 
-[LangGraph](https://www.langchain.com/langgraph) is an open-source graph orchestration framework from the LangChain team. It enables you to model an agent as nodes and edges over a typed state object, making it the default choice when you need an explicit state machine. It's a mature option for control and recoverability, with production use presented by Uber, LinkedIn, and Replit.
+[LangGraph](https://www.langchain.com/langgraph) is an open-source graph orchestration framework from the LangChain team. You model an agent as nodes and edges over a typed state object, which makes it the default choice when you need an explicit state machine. It's a mature option for control and recoverability, with production use cited by Uber, LinkedIn, and Replit.
 
 To understand LangGraph's model, think of a graph. Each node reads and writes a shared, typed state. Edges decide what to run next. Because that state is checkpointed, LangGraph gives you crash-surviving execution, time-travel debugging, and resumable runs.
 
@@ -88,11 +88,11 @@ Python teams that need explicit, durable, resumable execution: long-running or m
 
 [CrewAI](https://crewai.com/) is role-based multi-agent orchestration in Python. You define a crew where each agent gets a persona, a set of tools, and a task, and the crew collaborates to get the job done.
 
-Using CrewAI is intuitive to assembling a team. You describe a researcher, a writer, and an editor, hand each one tools, and let them pass work between them.
+Using CrewAI feels like assembling a team. You describe a researcher, a writer, and an editor, hand each one tools, and let them pass work between them.
 
 CrewAI also has Flows, an event-driven orchestration layer where `@start`, `@listen`, and `@router` decorators wire steps together, carry typed state across them, and branch on each step's result, so you can chain several crews into one controlled process.
 
-CrewAI's native memory can't be swapped for Postgres, so you can persist crew outputs and Flow state to Neon yourself using the [CrewAI + Composio + Neon guide](/guides/composio-crewai-neon).
+CrewAI's native memory can't be swapped for Postgres, so you persist crew outputs and Flow state to Neon yourself, as shown in the [CrewAI + Composio + Neon guide](/guides/composio-crewai-neon).
 
 **Strengths:**
 
@@ -103,7 +103,7 @@ CrewAI's native memory can't be swapped for Postgres, so you can persist crew ou
 - MCP support to expose tools and context to the crew
 
 <Admonition type="tip" title="Best for">
-Setting up a role-based multi-agent prototype quickly, where a crew of personas clearly map to the work and you want to be running with minimal setup.
+Setting up a role-based multi-agent prototype quickly, where a crew of personas clearly maps to the work and you want to be running with minimal setup.
 </Admonition>
 
 ### 4. OpenAI Agents SDK
@@ -116,7 +116,7 @@ To persist conversation history, point a [`SQLAlchemySession`](https://openai.gi
 
 **Strengths:**
 
-- Running in just a few lines
+- An agent running in a few lines
 - Built-in tracing in the OpenAI dashboard (no separate vendor)
 - First-class voice and realtime agents
 - Guardrails as a first-class primitive
@@ -130,14 +130,14 @@ Teams that want the thinnest possible agent loop from the model vendor, are happ
 
 [Pydantic AI](https://pydantic.dev/docs/ai/overview/) is a type-safe, validation-first framework from the Pydantic team. If you want structured outputs, validated tool arguments, and a clean message-history model without heavy orchestration, this is the Python framework built around those guarantees.
 
-The framework ensures that a malformed field fails at the boundary, because it requires you to declare a typed output and typed tool arguments that are validated at runtime. It's model-agnostic and light on orchestration, which is why a team migrated a three-agent swarm from CrewAI for type safety at the database boundary<sup><a href="#ref-3">[3]</a></sup>.
+A malformed field fails at the boundary, because the framework requires you to declare a typed output and typed tool arguments that are validated at runtime. It's model-agnostic and light on orchestration, which is why a team migrated a three-agent swarm from CrewAI for type safety at the database boundary<sup><a href="#ref-3">[3]</a></sup>.
 
 To persist state on Neon, serialize Pydantic AI's message history into a Neon table and pair it with DBOS for durable execution, as covered in the [Pydantic AI + DBOS + Neon guide](/guides/pydantic-ai-dbos-neon).
 
 **Strengths:**
 
 - Type-safe, validated tool args and outputs
-- Dependency injection to pass and swap deps like DB connections and config
+- Dependency injection to pass and swap deps like database connections and config
 - First-party durable execution on Temporal, DBOS, or Prefect
 - Streaming with validated output, plus an optional Pydantic Graph for complex flows
 - Pydantic Logfire for OpenTelemetry tracing
@@ -211,7 +211,7 @@ Use the [PostgresSaver checkpointer](https://reference.langchain.com/python/lang
 
 <FaqItem question="Can I use Neon as the backend for these frameworks?">
 
-Yes. All five persist to standard Postgres, including Neon's serverless Postgres. Neon's ability to [branch object storage and database in milliseconds](/docs/introduction/branching) makes it a good fit for agentic workloads.
+Yes. All five persist to standard Postgres, including Lakebase Postgres on Neon. Neon [branches your database and object storage in milliseconds](/docs/introduction/branching), which gives each agent run its own isolated copy of state.
 
 </FaqItem>
 
@@ -229,7 +229,7 @@ Yes. All five covered in this guide are free and open source. Your only unavoida
 
 <FaqItem question="Which AI agent framework is cheapest to run?">
 
-Any of them, self-hosted with state on Postgres. Because the frameworks are free and tokens are fixed, the cheapest setup is one where you own the state layer instead of renting a managed platform. On Neon, [scale to zero](/docs/introduction/autoscaling) means an idle agent's memory database costs nearly nothing between runs, which keeps the bill low for bursty agent workloads.
+Any of them, self-hosted with state on Postgres. Because the frameworks are free and tokens are fixed, the cheapest setup is one where you own the state layer instead of renting a managed platform. On Neon, [scale to zero](/docs/introduction/scale-to-zero) means you don't pay for compute while an agent's memory database sits idle between runs (storage still bills), which keeps the bill low for bursty agent workloads.
 
 </FaqItem>
 
