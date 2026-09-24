@@ -18,7 +18,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/when-a-file-is-uploaded-run-the-job-on-neon/cover.jpg
   alt: 'When a file is uploaded, run the job on Neon'
-isFeatured: false
+isFeatured: true
 seo:
   title: When a file is uploaded, run the job on Neon - Neon
   description: >-
