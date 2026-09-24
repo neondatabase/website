@@ -27,6 +27,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/electrifying-neon-building-the-realtime-backend/social.jpg
 ---
 
+![Electrifying Neon: building the realtime backend](https://cdn.neonapi.io/public/images/pages/blog/electrifying-neon-building-the-realtime-backend/cover.jpg)
+
 **Now that we've [announced GA for Neon's complete backend](https://neon.com/blog/neon-backend-is-ga), one of the things we're most excited about coming next is adding realtime to the Neon platform.** Not least because it's being worked on by the team from [Electric](https://electric.ax/blog/2026/08/11/electric-joining-databricks), who [recently joined Neon at Databricks](https://neon.com/blog/electric-joins-neon).
 
 This team spent years working on realtime data sync on top of Postgres and I'm super excited by what they're planning to build now they're part of Neon. So, I grabbed Electric co-founder [James Arthur](https://linkedin.com/in/thruflo) to find out more: why they really joined Databricks, what they're working on now and what it means for the Neon platform.
