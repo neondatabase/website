@@ -1,5 +1,5 @@
 ---
-title: 'Electrifying Neon: Building the Realtime Backend'
+title: 'Electrifying Neon: building the realtime backend'
 description: What's next for realtime on Postgres
 excerpt: >-
   Now that we've announced GA for Neon's complete backend, one of the things
@@ -18,11 +18,11 @@ cover:
   alt: null
 isFeatured: false
 seo:
-  title: 'Electrifying Neon: Building the Realtime Backend - Neon'
+  title: 'Electrifying Neon: building the realtime backend - Neon'
   description: What's next for realtime on Postgres
   keywords: []
   noindex: false
-  ogTitle: 'Electrifying Neon: Building the Realtime Backend - Neon'
+  ogTitle: 'Electrifying Neon: building the realtime backend - Neon'
   ogDescription: What's next for realtime on Postgres
   image: null
 ---
