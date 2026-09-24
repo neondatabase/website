@@ -134,7 +134,7 @@ Field.propTypes = {
   labelClassName: PropTypes.string,
   textareaClassName: PropTypes.string,
   type: PropTypes.string,
-  tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
+  tag: PropTypes.elementType,
   inputClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
   error: PropTypes.string,

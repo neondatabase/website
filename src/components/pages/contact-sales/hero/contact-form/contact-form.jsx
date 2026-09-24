@@ -4,12 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
+import SelectField from 'components/shared/select-field';
 import { FORM_STATES } from 'constants/forms';
 import LINKS from 'constants/links';
 import CloseIcon from 'icons/close.inline.svg';
@@ -65,8 +66,22 @@ const schema = yup
 const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90 md:text-sm';
 const inputClassName =
   '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-white placeholder:!text-gray-new-50 focus:!border-white';
-const selectClassName = `${inputClassName} !pr-10 !bg-[url(/images/chevron-down-gray.svg)]`;
 const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px] focus:outline-offset-2 focus:outline-2 focus:outline-primary-1`;
+
+const CONTACT_REASONS = [
+  { value: 'Demo/POC', label: 'Demo/POC' },
+  { value: 'Enterprise Pricing', label: 'Enterprise Pricing' },
+  { value: 'HIPAA', label: 'HIPAA' },
+];
+
+const COMPANY_SIZES = [
+  { value: '0_1', label: '0-1 Employees' },
+  { value: '2_4', label: '2-4 Employees' },
+  { value: '5_19', label: '5-19 Employees' },
+  { value: '20_99', label: '20-99 Employees' },
+  { value: '100_499', label: '100-499 Employees' },
+  { value: '500', label: '≥ 500 Employees' },
+];
 
 const AZURE_MIGRATION_MESSAGE = "I'd like to migrate my Azure managed account.";
 
@@ -76,6 +91,7 @@ const ContactForm = () => {
 
   const {
     register,
+    control,
     reset,
     setValue,
     handleSubmit,
@@ -209,45 +225,44 @@ const ContactForm = () => {
         isDisabled={isDisabled}
         {...register('companyWebsite')}
       />
-      <Field
-        className="gap-y-2"
-        errorTheme="tooltip"
+      <Controller
         name="reasonForContact"
-        label="Reason for Contact*"
-        tag="select"
-        theme="transparent"
-        labelClassName={labelClassName}
-        inputClassName={selectClassName}
-        isDisabled={isDisabled}
-        error={errors.reasonForContact?.message}
-        {...register('reasonForContact')}
-      >
-        <option value="hidden" disabled hidden />
-        <option value="Demo/POC">Demo/POC</option>
-        <option value="Enterprise Pricing">Enterprise Pricing</option>
-        <option value="HIPAA">HIPAA</option>
-      </Field>
-      <Field
-        className="gap-y-2"
-        errorTheme="tooltip"
+        control={control}
+        render={({ field }) => (
+          <SelectField
+            {...field}
+            className="gap-y-2"
+            errorTheme="tooltip"
+            label="Reason for Contact*"
+            placeholder="Select a reason"
+            options={CONTACT_REASONS}
+            theme="transparent"
+            labelClassName={labelClassName}
+            inputClassName={inputClassName}
+            isDisabled={isDisabled}
+            error={errors.reasonForContact?.message}
+          />
+        )}
+      />
+      <Controller
         name="companySize"
-        label="Company Size"
-        tag="select"
-        theme="transparent"
-        labelClassName={labelClassName}
-        inputClassName={selectClassName}
-        isDisabled={isDisabled}
-        error={errors.companySize?.message}
-        {...register('companySize')}
-      >
-        <option value="hidden" disabled hidden />
-        <option value="0_1">0-1 Employees</option>
-        <option value="2_4">2-4 Employees</option>
-        <option value="5_19">5-19 Employees</option>
-        <option value="20_99">20-99 Employees</option>
-        <option value="100_499">100-499 Employees</option>
-        <option value="500">&ge; 500 Employees</option>
-      </Field>
+        control={control}
+        render={({ field }) => (
+          <SelectField
+            {...field}
+            className="gap-y-2"
+            errorTheme="tooltip"
+            label="Company Size"
+            placeholder="Select company size"
+            options={COMPANY_SIZES}
+            theme="transparent"
+            labelClassName={labelClassName}
+            inputClassName={inputClassName}
+            isDisabled={isDisabled}
+            error={errors.companySize?.message}
+          />
+        )}
+      />
       <Field
         className="relative z-10 col-span-full gap-y-2"
         errorTheme="tooltip"

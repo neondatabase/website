@@ -139,7 +139,7 @@ const LEAD_FORM_CONTRACTS = [
       message: 'Critical user flow monitoring',
     },
     selects: {
-      companySize: '0_1',
+      companySize: '0-1 Employees',
       reasonForContact: 'Demo/POC',
     },
     expectedEvents: [
