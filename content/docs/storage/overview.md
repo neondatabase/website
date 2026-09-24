@@ -7,12 +7,12 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-24T06:53:15.370Z'
+updatedOn: '2026-09-24T06:54:27.653Z'
 ---
 
 Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them. Point any S3 SDK at your branch endpoint and use your existing Neon credential.
 
-- **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data, and [reset a branch from its parent](/docs/guides/reset-from-parent) to return its storage to the parent's state. Object Storage rollback on reset is currently available in some backend regions.
+- **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data, and [reset a branch from its parent](/docs/guides/reset-from-parent) to return its storage to the parent's state. Object Storage reset is currently available in two of the four backend regions, with support for the other two coming soon.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
