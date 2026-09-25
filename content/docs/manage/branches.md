@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -47,7 +47,7 @@ If you do specify a custom branch name when creating or renaming a branch, it mu
 To create a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Click **New branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console) is selected, but you can choose any existing branch in your project.
@@ -234,7 +234,7 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
 To view the branches in a Neon project:
 
 1. In the Neon Console, select a project.
-1. Select **Branches** under **Project** to view all current branches in the project.
+1. Select **Branches** in the sidebar to view all current branches in the project.
 
    ![all branches](/docs/manage/branches_all_list.png)
 
@@ -387,7 +387,7 @@ Neon permits renaming a branch, including your project's default branch.
 To rename a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **More** drop-down menu and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
@@ -434,7 +434,7 @@ For more information, see [Default branch](#default-branch).
 To set a branch as the default branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **More** drop-down menu and select **Set as default**.
 5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
@@ -476,7 +476,7 @@ This feature is available on all Neon's paid plans, which supports up to five pr
 To set a branch as protected:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **More** drop-down menu and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
@@ -520,7 +520,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 <TabItem>
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
 5. Set a new expiration date and time, or toggle off "Automatically delete branch after" to remove expiration.
@@ -634,7 +634,7 @@ Deleting a branch is a permanent action. Deleting a branch also deletes the data
 To delete a branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Select a branch from the table.
 4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
