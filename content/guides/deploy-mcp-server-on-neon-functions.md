@@ -4,14 +4,14 @@ subtitle: 'Learn how to build a remote MCP server on Neon Functions, serve it fr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-22T00:00:00.000Z'
-updatedOn: '2026-09-25T11:01:51.701Z'
+updatedOn: '2026-09-25T11:17:28.147Z'
 ---
 
-For an AI assistant like Cursor or Claude to work with your APIs, your backend, or your data, it needs tools it can call over the internet. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
+An AI assistant like Cursor or Claude needs tools it can call over the internet to work with your APIs, your backend, or your data. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
 
 For example, you ask the assistant to "Add Ada Lovelace to my contacts." The assistant picks a tool named `create_contact`, fills in the values it can infer from your message, and sends the call to your server. Your server inserts the row in Postgres, replies with the created contact, and the assistant confirms it. The model never touches the database; it only sees the tool descriptions and the results.
 
-In this guide, you'll build a small contacts app served over MCP. The server is a [Neon Function](/docs/compute/functions/overview) running in the same region as your database on Neon, so queries stay fast.
+In this guide, you'll build a small contacts app served over MCP. The server is a [Neon Function](/docs/compute/functions/overview) running in the same region as your Lakebase Postgres database on Neon, so queries stay fast.
 
 Here's what you'll build:
 
@@ -186,7 +186,7 @@ attachDatabasePool(pool);
 export const db = drizzle(pool);
 ```
 
-The pool is created once at module scope, so requests on the same instance reuse its connections. Call `attachDatabasePool(pool)` once after creating the pool: when Postgres drops an idle client (scale-to-zero, pooler reclaim, a TCP reset), `pg` emits an `error` on the pool, and with no listener attached, that becomes an uncaught exception and the isolate exits. `attachDatabasePool` swallows expected idle disconnects and logs anything unexpected, so the next query opens a fresh connection. You don't need to drain the pool on shutdown: when the runtime evicts an isolate, Neon's pooler reclaims those connections for you. See [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres) for the full picture.
+The pool is created once at module scope, so requests on the same instance reuse its connections. Call `attachDatabasePool(pool)` once after creating the pool: when Postgres drops an idle client (scale-to-zero, pooler reclaim, a TCP reset), `pg` emits an `error` on the pool, and with no listener attached, that becomes an uncaught exception and the isolate exits. `attachDatabasePool` swallows expected idle disconnects and logs anything unexpected, so the next query opens a fresh connection. You don't need to drain the pool on shutdown. When the runtime evicts an isolate, Neon's pooler reclaims those connections for you. See [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres) for the full picture.
 
 ### Create the Hono app with the MCP endpoint
 
@@ -440,7 +440,7 @@ Open your AI agent and ask it to create a contact. It will pick the `create_cont
 
 For example in Claude Code, you can ask:
 
-```
+```text
 Create 10 random contacts with placeholder values
 ```
 
@@ -477,7 +477,7 @@ You should see the same three tools you registered locally, along with their des
 
 Your server is now live on the public internet.
 
-Connect it to your coding agent too. The local server entry you added earlier is still in your agent's `mcp.json`, so replace its URL with the deployed one, or just rerun the `add-mcp` command for your agent with the deployed URL.
+Connect it to your coding agent too. The local server entry you added earlier is still in your agent's `mcp.json`, so replace its URL with the deployed one, or rerun the `add-mcp` command for your agent with the deployed URL.
 
 Ask your agent to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
 
@@ -556,7 +556,7 @@ Contacts MCP server. Connect an MCP client to /mcp
 
 The first request can trigger certificate issuance, so it may take a few seconds. For the Console, CLI, and API ways to register domains, status codes, and troubleshooting, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
 
-Although the function is now available at your custom domain, the native URL remains functional. Update your agent’s `mcp.json` to use the custom domain, or rerun the `add-mcp` command with the new URL. Then, test that the agent can still successfully access and use the tools.
+Although the function is now available at your custom domain, the native URL remains functional. Update your agent's `mcp.json` to use the custom domain, or rerun the `add-mcp` command with the new URL. Then, test that the agent can still successfully access and use the tools.
 
 ## Secure the server
 
@@ -602,7 +602,9 @@ export const config = defineConfig({
 export default config;
 ```
 
-> The `parseEnv` function in `index.ts` requires the `NEON_FUNCTION_MCP_BASE_URL` environment variable (the base URL of your MCP function), which `neon link` automatically adds to your `.env.local` file.
+<Admonition type="note">
+The `parseEnv` function in `index.ts` requires the `NEON_FUNCTION_MCP_BASE_URL` environment variable (the base URL of your MCP function), which `neon link` automatically adds to your `.env.local` file.
+</Admonition>
 
 Add a check to the `/mcp` route in `index.ts` that reads the `Authorization` header and compares it to the secret. If the header is missing or doesn't match, return a `401 Unauthorized` response before calling the MCP handler.
 
@@ -816,7 +818,7 @@ export default app;
 
 Here's what changed:
 
-- **`legacy: 'reject'`**: With OAuth in place, the snippet pins the server to the MCP `2026-07-28` profile: `2025`-era protocol traffic gets a `400` unsupported-protocol-version on `POST` (and `405` on `GET`/`DELETE`, which are session operations). Only clients speaking the current profile — recent Cursor, Claude Code, and Claude Desktop — can connect. If you need to keep supporting older clients, omit this option; the default serves both protocol eras (statelessly, so `GET`/`DELETE` still answer `405`, which spec-compliant clients tolerate).
+- **`legacy: 'reject'`**: With OAuth in place, the snippet pins the server to the MCP `2026-07-28` profile: `2025`-era protocol traffic gets a `400` unsupported-protocol-version on `POST` (and `405` on `GET`/`DELETE`, which are session operations). Only clients speaking the current profile can connect: recent Cursor, Claude Code, and Claude Desktop. If you need to keep supporting older clients, omit this option; the default serves both protocol eras (statelessly, so `GET`/`DELETE` still answer `405`, which spec-compliant clients tolerate).
 - **`requireMcpAuth`**: Wraps the MCP handler. It reads the `Authorization` header, verifies the access token against Better Auth's JWKS, and checks the issuer, audience, and expiry. Unauthenticated requests get a JSON-RPC `401` with an RFC 9728 `WWW-Authenticate` header, which is the signal MCP clients use to start the authorization flow.
 - **`auth.handler`**: Mounted at `/api/auth/*`, it serves sign-in, sign-up, and every OAuth endpoint (`/oauth2/authorize`, `/oauth2/token`, and the authorization-server discovery document). Use `app.all`, not just `GET`/`POST`, so token, revocation, and metadata requests all reach it.
 - **`/.well-known/*`**: Forwards the domain-root discovery path to `auth.handler`. That's where the `mcp()` plugin answers `/.well-known/oauth-protected-resource/mcp`, the URL the `401` challenge points clients at. Hono returns its own plain-text `404` for unmounted paths, and clients surface that as `Invalid OAuth error response ... Raw body: 404 Not Found`, so this route has to exist.
@@ -824,7 +826,7 @@ Here's what changed:
 Now add the two page helpers at the bottom of `index.ts`, above the `export default app;` line. These are minimal pages the OAuth flow redirects the user through. Both forward the signed query parameters from the page URL back to Better Auth, so the server can resume the pending authorization after sign-in or consent:
 
 <Admonition type="note" title="Example pages only">
-The sign-in and sign-up pages here are simple inline examples for demonstrating this guide. In an actual scenario, you'd serve these from your own frontend with proper styling, and add typical sign-in options like third-party social sign-in providers, just as you would on your main frontend website. Better Auth supports all of this out of the box, including social sign-in providers, custom styled pages, and more. See the [Better Auth authentication docs](https://better-auth.com/docs/authentication/google) and the [MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for details.
+The sign-in and sign-up pages here are simple inline examples for demonstrating this guide. In an actual scenario, you'd serve these from your own frontend with proper styling, and add typical sign-in options like third-party social sign-in providers, just as you would on your main frontend website. Better Auth supports all of this by default, including social sign-in providers, custom styled pages, and more. See the [Better Auth authentication docs](https://better-auth.com/docs/authentication/google) and the [MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for details.
 </Admonition>
 
 ```typescript shouldWrap filename="index.ts"
@@ -950,14 +952,16 @@ export BETTER_AUTH_URL=https://mcp.example.com
 npx auth@latest migrate
 ```
 
-> Make sure to replace `mcp.example.com` with your actual custom domain.
+<Admonition type="note">
+Make sure to replace `mcp.example.com` with your actual custom domain.
+</Admonition>
 
 #### Create a user and verify the setup
 
 Register the user who will authorize MCP clients. The following `curl` command creates a user using the Better Auth email/password endpoint. Replace the email, password, and name with your desired values:
 
 <Admonition type="info">
-In a real deployment, your frontend would typically include a sign-up page that uses Better Auth’s user registration flow. The `curl` command performs the same operation as a sign-up form, but provides a quick and convenient way to create a user for testing.
+In a real deployment, your frontend would typically include a sign-up page that uses Better Auth's user registration flow. The `curl` command performs the same operation as a sign-up form, but provides a quick way to create a user for testing.
 </Admonition>
 
 ```bash
