@@ -63,7 +63,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
   const hasBorder = !isGuidesRoute;
 
-  if (isChangelogIndex) {
+  if (isChangelogIndex || (!menu && !sdkTOC)) {
     return null;
   }
 
