@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-09-25T10:52:19.537Z'
 ---
 
 <InfoBlock>
@@ -122,7 +122,7 @@ Neon includes **managed authentication**, so your app's users live in your Postg
 From the Neon Console sidebar, open the **Auth** page and toggle Managed Better Auth on for your project. You'll get:
 
 - A sign-up / sign-in flow ready to wire up to any framework
-- Users and sessions stored in your own Postgres database — query the `neon_auth.users_sync` table directly alongside your application data
+- Users and sessions stored in your own Postgres database — query the `neon_auth.user` table directly alongside your application data
 - Branch-aware auth: every preview or development branch you create gets its own isolated copy of users and sessions
 - OAuth providers, email and password, magic links, and more, all configurable from the console
 
