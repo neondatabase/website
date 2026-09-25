@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
-import CheckIcon from 'icons/check.inline.svg';
+import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
@@ -39,12 +39,12 @@ const CopyCommand = ({ command, className = '', trackingLabel = null }) => {
       <span
         className={cn(
           'flex shrink-0 items-center text-gray-new-60 transition-colors duration-150',
-          isCopied && 'text-[#00CC88] dark:text-[#00A86B]'
+          isCopied && 'text-white dark:text-gray-new-20'
         )}
         aria-live="polite"
       >
         {isCopied ? (
-          <CheckIcon className="size-4" aria-hidden />
+          <CopiedIcon className="size-4" aria-hidden />
         ) : (
           <CopyIcon className="size-3.5" aria-hidden />
         )}

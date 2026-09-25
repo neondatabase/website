@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 import Field from 'components/shared/field';
-import CheckIcon from 'icons/check.inline.svg';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
+import ChevronIcon from 'icons/chevron-down-select.inline.svg';
+import CheckIcon from 'icons/home/copied.inline.svg';
 import { cn } from 'utils/cn';
 
 const SelectField = forwardRef(
@@ -55,25 +55,22 @@ const SelectField = forwardRef(
           <span className={cn('truncate', !selectedOption && 'text-gray-new-50')}>
             {selectedOption?.label ?? placeholder}
           </span>
-          <ChevronIcon
-            className="size-4 shrink-0 text-gray-new-60 transition-transform duration-200 group-data-open:rotate-180"
-            aria-hidden
-          />
+          <ChevronIcon className="shrink-0" aria-hidden />
         </Field>
         <ListboxOptions
           anchor="bottom start"
           modal={false}
-          className="z-50 max-h-60! w-(--button-width) overflow-y-auto border border-gray-new-20 bg-black-pure p-1 text-base leading-snug tracking-tight text-white [--anchor-gap:4px] [--anchor-padding:12px] focus:outline-none"
+          className="z-50 no-scrollbars max-h-[143px]! w-(--button-width) overflow-y-auto border border-gray-new-20 bg-black-pure p-0.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-80 [--anchor-gap:4px] [--anchor-padding:12px] focus:outline-none"
         >
           {options.map((option) => (
             <ListboxOption
               key={option.value}
               value={option.value}
-              className="group flex min-h-10 cursor-pointer items-center justify-between gap-3 px-3 py-2 transition-colors select-none data-focus:bg-gray-new-10 data-selected:bg-gray-new-15 data-selected:data-focus:bg-gray-new-30"
+              className="group flex h-[35px] cursor-pointer items-center justify-between gap-3 px-3 transition-colors select-none data-focus:bg-gray-new-10 data-selected:bg-gray-new-15 data-selected:text-white data-selected:data-focus:bg-gray-new-15"
             >
               <span>{option.label}</span>
               <CheckIcon
-                className="size-4 shrink-0 text-green-45 opacity-0 group-data-selected:opacity-100"
+                className="shrink-0 text-white opacity-0 group-data-selected:opacity-100"
                 aria-hidden
               />
             </ListboxOption>
