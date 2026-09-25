@@ -21,7 +21,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 ## Get access
 
-You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which gives you the open-weight models. To request access to the full foundation model catalog, see [Model access](/docs/ai-gateway/overview#model-access).
+You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which gives you the open-weight models. To request access to foundation models, see [Model access](/docs/ai-gateway/overview#model-access).
 
 ## Create a credential
 
