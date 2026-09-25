@@ -70,6 +70,7 @@ const formatDate = (iso) => {
 
 const isImageCapable = (capability) =>
   capability?.entitled !== false && capability?.imageGeneration === true;
+const isEmbedding = (capability) => capability?.embeddings === true;
 
 // The gateway routes a model reaches. Conveyed to users mainly through the
 // quickstart snippet's base URL; surfaced here for the markdown mirror.
@@ -77,6 +78,11 @@ const deriveEndpoints = (capability) => {
   if (!capability || capability.entitled === false || capability.chat === 'not-entitled') {
     return [];
   }
+
+  // An embedding model's chat-shaped fields (`chat: 'not-served'`, no native dialect, no
+  // Responses) all read false, so the checks below would silently return an empty list. Its
+  // actual route is /v1/embeddings, not "no route at all".
+  if (capability.embeddings) return ['embeddings'];
 
   const endpoints = [];
   if (capability.chat !== 'not-served') endpoints.push('chat/completions');
@@ -112,6 +118,8 @@ const toRow = (model, capability) => {
     license: model.open_weights ? 'Open weights' : 'Proprietary',
     endpoints: deriveEndpoints(capability),
     isImageCapable: isImageCapable(capability),
+    isEmbedding: isEmbedding(capability),
+    dimensions: model.dimensions,
     hasMeasuredCapabilities: Boolean(capability),
   };
 };
@@ -162,6 +170,7 @@ module.exports = {
   formatPrice,
   formatDate,
   isImageCapable,
+  isEmbedding,
   deriveEndpoints,
   toRow,
   buildRows,

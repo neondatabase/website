@@ -14,6 +14,7 @@ import highlight from 'lib/shiki';
 import { ENV_EXAMPLE, getAvailableModes, getInitialMode } from './model-examples';
 
 const EMPTY_LANGUAGES = [];
+const MODE_LABELS = { text: 'Text', image: 'Image', embeddings: 'Embeddings' };
 
 const HighlightedCode = ({ code, language }) => {
   const [html, setHtml] = useState('');
@@ -139,8 +140,8 @@ const ModelDetailClient = ({ languagesByMode, initialMode }) => {
     setMode(nextMode);
 
     const url = new URL(window.location.href);
-    if (nextMode === 'image') url.searchParams.set('mode', 'image');
-    else url.searchParams.delete('mode');
+    if (nextMode === 'text') url.searchParams.delete('mode');
+    else url.searchParams.set('mode', nextMode);
     router.replace(`${url.pathname}${url.search}${url.hash}`, { scroll: false });
   };
 
@@ -165,7 +166,7 @@ const ModelDetailClient = ({ languagesByMode, initialMode }) => {
                 }
                 onClick={() => changeMode(modeKey)}
               >
-                {modeKey === 'text' ? 'Text' : 'Image'}
+                {MODE_LABELS[modeKey] ?? modeKey}
               </button>
             ))}
           </div>
@@ -209,8 +210,9 @@ ModelDetailClient.propTypes = {
   languagesByMode: PropTypes.shape({
     text: PropTypes.arrayOf(PropTypes.object).isRequired,
     image: PropTypes.arrayOf(PropTypes.object).isRequired,
+    embeddings: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  initialMode: PropTypes.oneOf(['text', 'image']).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings']).isRequired,
 };
 
 export default ModelDetailClient;

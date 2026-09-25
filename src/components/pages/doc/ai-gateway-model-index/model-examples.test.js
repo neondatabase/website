@@ -69,4 +69,17 @@ describe('AI Gateway model examples', () => {
     expect(getAvailableModes({ text: [], image: [] })).toEqual([]);
     expect(getInitialMode({ text: [], image: [] }, 'image')).toBe('text');
   });
+
+  it('renders TypeScript/Python/cURL only for an embedding model — no AI SDK or Mastra yet', () => {
+    const languages = getLanguagesForMode(
+      {
+        embeddings: resolveModel(modelsData, capabilities, 'gte-large-en', 'embeddings')?.examples,
+      },
+      'embeddings'
+    );
+
+    expect(languages.map(({ key }) => key)).toEqual(['ts', 'python', 'curl']);
+    expect(languages.find(({ key }) => key === 'ts')?.code).toContain('client.embeddings.create');
+    expect(languages.every(({ code }) => code.includes('encoding_format'))).toBe(true);
+  });
 });
