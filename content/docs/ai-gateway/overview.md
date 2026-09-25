@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-25T12:37:18.015Z'
+updatedOn: '2026-09-25T12:39:12.862Z'
 ---
 
 Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
@@ -21,7 +21,7 @@ Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your ex
 
 Neon AI Gateway serves open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time.
 
-To request access to the full foundation model catalog, drop your email below and we'll reach out as access opens up.
+To request access to foundation models that aren't enabled for your project yet, drop your email below and we'll reach out as access opens up.
 
 <RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
 
