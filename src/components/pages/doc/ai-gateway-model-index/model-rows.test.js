@@ -65,4 +65,29 @@ describe('AI Gateway model rows', () => {
     expect(row.isEmbedding).toBe(false);
     expect(row.dimensions).toBeUndefined();
   });
+
+  // The catalog is allowed to list a model before it is probed (see "does not advertise
+  // endpoints..." above). isEmbedding has to survive that same gap: it is a catalog fact
+  // (`model.type`), not something capability data confers.
+  it('still classifies an embedding model with no measured capabilities as embedding', () => {
+    const [row] = buildRows(
+      {
+        models: {
+          'unprobed-embedding': {
+            id: 'unprobed-embedding',
+            name: 'Unprobed Embedding',
+            type: 'embedding',
+            dimensions: 768,
+          },
+        },
+      },
+      { models: [] }
+    );
+
+    expect(row.hasMeasuredCapabilities).toBe(false);
+    expect(row.isEmbedding).toBe(true);
+    expect(row.dimensions).toBe(768);
+    // Whether it actually has a working route is still a capability fact, unverified here.
+    expect(row.endpoints).toEqual([]);
+  });
 });

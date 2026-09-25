@@ -70,7 +70,11 @@ const formatDate = (iso) => {
 
 const isImageCapable = (capability) =>
   capability?.entitled !== false && capability?.imageGeneration === true;
-const isEmbedding = (capability) => capability?.embeddings === true;
+// From the catalog (`model.type`), not measured capabilities: the catalog is allowed to list a
+// model before it has been probed, same as any other model, and an embedding model is still an
+// embedding model while unmeasured — it just has no known-working endpoint yet (see
+// `deriveEndpoints`, which stays capability-gated).
+const isEmbedding = (model) => model?.type === 'embedding';
 
 // The gateway routes a model reaches. Conveyed to users mainly through the
 // quickstart snippet's base URL; surfaced here for the markdown mirror.
@@ -118,7 +122,7 @@ const toRow = (model, capability) => {
     license: model.open_weights ? 'Open weights' : 'Proprietary',
     endpoints: deriveEndpoints(capability),
     isImageCapable: isImageCapable(capability),
-    isEmbedding: isEmbedding(capability),
+    isEmbedding: isEmbedding(model),
     dimensions: model.dimensions,
     hasMeasuredCapabilities: Boolean(capability),
   };
