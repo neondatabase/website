@@ -9,7 +9,7 @@ excerpt: >-
   pages. Hot pages stay in DRAM instead of falling through to a local disk
   cache, so the same working set is served faster and with less CPU.
 date: '2026-09-09T12:00:00'
-updatedOn: '2026-09-09T13:23:00'
+updatedOn: '2026-09-10T03:15:00'
 category: engineering
 categories:
   - engineering
@@ -127,7 +127,7 @@ In our benchmark tests, configuring Postgres with huge pages reduced tail read l
 
 Lakebase Postgres executes within lightweight guest virtual machines on bare-metal hosts. Memory address translation involves two virtualized layers. Capitalizing on huge pages requires a consistent implementation across the entire stack: from host-level reservation, through the hypervisor backing the VM's memory, to the guest kernel. A breakdown at any tier degrades the resulting performance benefits.
 
-We recently introduced dedicated huge-page backing across our VM infrastructure. We chose to use explicit 2 MB HugeTLB pages rather than rely on best-effort transparent huge pages. Now, VMs allocated for large fixed-size computes initialize with a predetermined volume of huge pages sufficient for Postgres startup. To optimize system resources, compute startup automatically releases any surplus huge pages beyond those required by Postgres.
+We recently introduced dedicated huge-page backing across our VM infrastructure. On the host, we tightened our existing use of transparent huge pages. In the guest, we use explicit 2 MB HugeTLB pages rather than transparent huge pages, for more predictable behavior under severe memory pressure. VMs allocated for large fixed-size computes now initialize with a predetermined volume of huge pages sufficient for Postgres startup. After compute startup, we automatically release any surplus huge pages to free resources on the host.
 
 <Admonition type="tip" title="Tip">
 To see if large explicit huge pages are enabled for your compute, run `show huge_pages` within a Postgres connection.  An 80 CU Lakebase endpoint should see a value of `"on"`
