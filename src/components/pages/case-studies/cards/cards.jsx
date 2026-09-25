@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 
+import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import SearchIcon from 'icons/search.inline.svg';
@@ -70,6 +71,9 @@ const getCategoryLabel = (slug) => (slug === 'all' ? 'All Stories' : null);
 const Cards = ({ items, categories }) => {
   const [activeCategory, setActiveCategory] = useState({ slug: 'all' });
   const [searchQuery, setSearchQuery] = useState('');
+  const mobileSearchRef = useRef(null);
+  const desktopSearchRef = useRef(null);
+  const categoriesRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -127,6 +131,17 @@ const Cards = ({ items, categories }) => {
     }
   }, []);
 
+  const handleClearFilters = (event) => {
+    setSearchQuery('');
+    handleCategoryClick(event, 'all');
+    categoriesRef.current?.scrollTo({ left: 0 });
+
+    const searchInput = [mobileSearchRef.current, desktopSearchRef.current].find(
+      (input) => input?.offsetWidth
+    );
+    searchInput?.focus();
+  };
+
   return (
     <section
       className="main mt-40 scroll-mt-20 safe-paddings xl:mt-[136px] lg:mt-[104px] md:mt-20"
@@ -141,6 +156,7 @@ const Cards = ({ items, categories }) => {
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
               <input
+                ref={mobileSearchRef}
                 type="search"
                 placeholder="Search stories..."
                 value={searchQuery}
@@ -161,6 +177,7 @@ const Cards = ({ items, categories }) => {
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
                 <input
+                  ref={desktopSearchRef}
                   type="search"
                   placeholder="Search stories..."
                   value={searchQuery}
@@ -172,6 +189,7 @@ const Cards = ({ items, categories }) => {
             </div>
 
             <nav
+              ref={categoriesRef}
               className="sticky top-24 flex flex-col gap-2 lg:static lg:no-scrollbars lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto md:-mx-5 md:flex-none md:px-5"
               aria-label="Case study categories"
             >
@@ -182,6 +200,7 @@ const Cards = ({ items, categories }) => {
                   <Link
                     key={slug}
                     href={`#${slug}`}
+                    aria-current={isActive ? 'true' : undefined}
                     className={cn(
                       'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm leading-snug tracking-tight uppercase transition-colors hover:text-white lg:shrink-0 lg:border-b-2 lg:py-[3px] lg:whitespace-nowrap',
                       isActive
@@ -200,12 +219,37 @@ const Cards = ({ items, categories }) => {
             </nav>
           </aside>
 
-          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 pt-px pl-px lt:grid-cols-2 sm:grid-cols-1">
-            {filteredItems.map((item) => {
-              const { id, title, caseStudyPost } = item;
-              return <Card key={id} title={title} {...caseStudyPost} />;
-            })}
-          </ul>
+          <div className="min-w-0 flex-1">
+            <p className="sr-only" role="status" aria-atomic="true">
+              {filteredItems.length} {filteredItems.length === 1 ? 'story' : 'stories'} found.
+            </p>
+            {filteredItems.length > 0 ? (
+              <ul className="grid grid-cols-3 gap-0 pt-px pl-px lt:grid-cols-2 sm:grid-cols-1">
+                {filteredItems.map((item) => {
+                  const { id, title, caseStudyPost } = item;
+                  return <Card key={id} title={title} {...caseStudyPost} />;
+                })}
+              </ul>
+            ) : (
+              <div className="flex flex-col items-center">
+                <h3 className="text-center text-xl font-medium tracking-tight text-white">
+                  No stories found
+                </h3>
+                <p className="mt-2 max-w-xs text-center text-base leading-snug text-pretty text-gray-new-60">
+                  Try another search or clear the filters to see all stories.
+                </p>
+                <Button
+                  className="mt-6"
+                  type="button"
+                  size="xs"
+                  theme="white-filled"
+                  onClick={handleClearFilters}
+                >
+                  Clear filters
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </Container>
     </section>
