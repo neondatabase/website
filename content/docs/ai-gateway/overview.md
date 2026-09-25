@@ -59,6 +59,8 @@ AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 
 See the [model catalog](/docs/ai-gateway/models#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
 
+Free inference doesn't mean unlimited requests. During the beta you can still hit two account-level limits: a per-minute token limit, and a daily spend cap that returns `429 Too Many Requests`. Both are covered on the models page under [Rate limits](/docs/ai-gateway/models#rate-limits) and [Pricing](/docs/ai-gateway/models#pricing).
+
 ## Starter templates
 
 Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Two templates use AI Gateway:
