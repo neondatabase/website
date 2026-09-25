@@ -1,19 +1,19 @@
 ---
-title: Scale your .NET application with Entity Framework and Lakebase Postgres Read Replicas
-subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Lakebase Postgres Read Replicas
+title: Scale your .NET application with Entity Framework and Lakebase Postgres read replicas
+subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Lakebase Postgres read replicas on Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only computes that perform read operations on the same data as your primary read-write compute. Replicas read from the same storage as the primary compute, so adding one doesn't duplicate your data or add storage costs.
 
-This guide shows how to use Neon read replicas to scale .NET applications using Entity Framework Core. You'll learn how to configure your DbContext to work with read replicas, enabling you to optimize your database operations and improve overall application performance.
+This guide shows how to use Neon read replicas to scale .NET applications using Entity Framework Core. You'll configure separate DbContexts so reads go to a replica and writes go to the primary compute.
 
 ## Prerequisites
 
-- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started/signing-up).
+- A Neon account and a project. If you don't have one, sign up and create a project by following [Sign up](/docs/get-started/signing-up).
 - Basic knowledge of .NET Core
 - .NET SDK installed on your local machine. You can download it from the [official .NET website](https://dotnet.microsoft.com/download).
 - .NET Entity Framework Core CLI tools installed. You can install them by running the following command:
@@ -24,7 +24,7 @@ This guide shows how to use Neon read replicas to scale .NET applications using 
 
 ## Build the Todo app
 
-To demonstrate how to use Neon read replicas with Entity Framework Core, we'll build a simple Todo application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability. This is just a simple example to demonstrate the concept, and you can apply the same principles to more complex applications.
+To demonstrate how to use Neon read replicas with Entity Framework Core, we'll build a simple Todo application that uses a Neon database. We'll then update the application to use a read replica for read operations. The same approach applies to larger applications.
 
 ### Part 1: Build the initial Todo app with a single database
 
@@ -49,8 +49,8 @@ rm WeatherForecast.cs Controllers/WeatherForecastController.cs
 
 Install Entity Framework Core Design and Npgsql packages:
 
-<Admonition type="tip" title="Best Practice">
-Ensure you install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
+<Admonition type="tip" title="Best practice">
+Install package versions that match your .NET version. You can verify your .NET version at any time by running `dotnet --version`.
 </Admonition>
 
 ```bash
@@ -220,9 +220,9 @@ else
 }
 ```
 
-This code configures the application to use Entity Framework Core with a PostgreSQL database. It registers `TodoDbContext` with the application's services and sets up the database connection using the connection string from `appsettings.json` / `appsettings.Development.json`.
+This code configures the application to use Entity Framework Core with a Postgres database. It registers `TodoDbContext` with the application's services and sets up the database connection using the connection string from `appsettings.json` / `appsettings.Development.json`.
 
-#### Create Migrations
+#### Create migrations
 
 Run the following commands to create and apply the initial migration:
 
@@ -249,8 +249,8 @@ Visit the Swagger UI at [`http://localhost:5001/swagger`](http://localhost:5001/
 
 To create a read replica:
 
-1. In the Neon Console, select **Branches**.
-2. Select the branch where your database resides.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
@@ -259,9 +259,9 @@ To create a read replica:
    </Admonition>
 6. When you finish making selections, click **Create**.
 
-Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
+Your read replica compute is provisioned and appears on the **Computes** tab under **Postgres database**.
 
-Navigate to the **Dashboard** page, select the branch where the read replica compute was provisioned, and set the compute option to **Replica** to obtain the read replica connection string:
+To get the read replica connection string, click the **Connect** button in the Console nav. On the **Connect to your branch** modal, select the branch where you created the replica, and under **Compute**, select the **Replica**:
 
 ![Read replica connection string](/docs/guides/read_replica_connection_string.png)
 
@@ -423,19 +423,19 @@ namespace TodoApi.Controllers
 ```
 
 <Admonition type="tip" title="Did you know?">
-You can use dotnet-ef migrations even with multiple db contexts. You can specify the context to use by passing the `--context` option to the `dotnet ef` command.
+You can use dotnet-ef migrations with multiple database contexts. You can specify the context to use by passing the `--context` option to the `dotnet ef` command.
 </Admonition>
 
-The Todo API is now set up to use separate read and write contexts backed by Neon's read replica feature. Read operations (`GET` requests) will use the read replica, while write operations (`POST`, `PUT`, `DELETE`) will use the primary database.
+The Todo API is now set up to use separate read and write contexts backed by a Neon read replica. Read operations (`GET` requests) will use the read replica, while write operations (`POST`, `PUT`, `DELETE`) will use the primary database.
 
 You can find the source code for the application described in this guide on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/neon-read-replica-entity-framework" description="Use read replicas with Entity Framework Core" icon="github">Read Replicas in .NET EF</a>
+<a href="https://github.com/dhanushreddy291/neon-read-replica-entity-framework" description="Use read replicas with Entity Framework Core" icon="github">Read replicas in .NET EF</a>
 </DetailIconCards>
 
 ## Conclusion
 
-This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements. With Neon, you can quickly scale out with as many read replicas as you need.
+You built a .NET Todo API that sends `GET` requests to a Neon read replica and writes to the primary compute through separate DbContexts. As a next step, monitor replica load and add replicas to the branch if your read traffic grows.
 
 <NeedHelp/>

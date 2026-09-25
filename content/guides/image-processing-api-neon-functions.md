@@ -8,9 +8,9 @@ createdAt: '2026-08-24T00:00:00.000Z'
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
 
-This guide shows you how to build a complete image processing API that handles all of that in one place. The API provides five endpoints to resize, crop, optimize, analyze, and caption images. You'll also learn how to store the processed images in your branch's [Neon Object Storage](/docs/storage/overview) bucket, so you can serve them directly from S3 instead of reprocessing on every request.
+This guide shows you how to build an image processing API that handles all of that in one place. The API provides five endpoints to resize, crop, optimize, analyze, and caption images. You'll also learn how to store the processed images in your branch's [Neon Object Storage](/docs/storage/overview) bucket, so you can serve them directly from S3 instead of reprocessing on every request.
 
-The API runs on [**Neon Functions**](/docs/compute/functions/overview) which provide a serverless compute environment in the same region as your Neon Postgres database. Image transformations run on [**Sharp**](https://sharp.pixelplumbing.com), a high-performance image processing library powered by libvips. And for captions, the [**Neon AI Gateway**](/docs/ai-gateway/overview) provides access to the latest vision models.
+The API runs on [**Neon Functions**](/docs/compute/functions/overview), which run your code on your Neon branch, in the same region as its Postgres database. Image transformations run on [**Sharp**](https://sharp.pixelplumbing.com), an image processing library built on libvips. For captions, the [**Neon AI Gateway**](/docs/ai-gateway/overview) provides access to vision models.
 
 <CopyPrompt
   src="/prompts/image-processing-api-neon-functions-prompt.md"
@@ -38,7 +38,7 @@ flowchart LR
 Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
+2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which requires a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits).
 3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
@@ -58,9 +58,9 @@ Run the Neon CLI initialization command:
 neon init
 ```
 
-Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
+Accept the default options. The recommended option installs the `neon-postgres` plugin, which bundles agent skills and the Neon MCP server so AI agents such as Claude Code and Cursor can help you build on Neon. See [`neon init`](/docs/cli/init) for the other setup choices.
 
-During initialization, **Neon Platform** and **Postgres** skills are installed automatically. You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
+You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
 
 ```bash
 neon skills -s neon-functions -s neon-ai-gateway -s neon-object-storage
@@ -338,9 +338,9 @@ The `/caption` route downscales the image and sends the thumbnail to `llama-4-ma
 Bad input throws `BadRequest`, mapped to a `400`; anything else becomes a `500`. The final line exports the app so Neon Functions can serve it.
 
 <Admonition type="note" title="Model access">
-For improved captioning, you can use frontier vision models like `claude-opus-5`, `gpt-5-6-sol` instead of `llama-4-maverick`.
+For better captions, you can use foundation vision models such as `claude-opus-5` or `gpt-5-6-sol` instead of `llama-4-maverick`.
 
-Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `claude-opus-5`, `gpt-5-6-sol` etc. aren't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are accessible immediately. Just swap the model ID in the `/caption` route. No other changes are required.
+Foundation models are [rolling out gradually](/docs/ai-gateway/overview#model-access). If `claude-opus-5` or `gpt-5-6-sol` isn't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are available right away with prepaid credits. To switch, change the model ID in the `/caption` route. No other changes are required.
 </Admonition>
 
 ## Configure neon.ts
@@ -400,7 +400,7 @@ curl -X POST "http://localhost:8787/optimize?format=webp&quality=70" -F "file=@s
 
 You can verify the images were processed correctly by opening `resized.webp` and `optimized.webp` in an image viewer.
 
-Test the `/caption` endpoint, which uses the `llama-4-maverick` from the Neon AI Gateway to generate a one-sentence alt text caption:
+Test the `/caption` endpoint, which uses `llama-4-maverick` through the Neon AI Gateway to generate a one-sentence alt text caption:
 
 ```bash shouldWrap
 curl -X POST "http://localhost:8787/caption" -H "Content-Type: image/jpeg" --data-binary @sample.jpg
@@ -502,7 +502,7 @@ You now have a working image processing API deployed on Neon Functions. The next
 
 ## Optional: Store processed images in your branch bucket
 
-The endpoints you've built return the processed bytes directly in the response. The `Cache-Control: immutable` header only helps clients cache the result, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket turns this into a real media pipeline: process once, store, and serve from the bucket.
+The endpoints you've built return the processed bytes directly in the response. The `Cache-Control: immutable` header only helps clients cache the result, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket lets you process an image once, store it, and serve it from the bucket.
 
 ### Install the AWS SDK
 
@@ -612,7 +612,7 @@ The URL is a presigned GET link that works for an hour. The object also lives in
 
 ## Next steps
 
-Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can easily extend it to store processed images and captions in your database. For example:
+Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can extend it to store processed images and captions in your database. For example:
 
 - **Cache transforms and captions in Postgres**: Image transforms are deterministic, so hash the image bytes plus the query parameters and cache the result location in a table. You can also store every caption and `/analyze` result alongside the image record, giving you a searchable media library with alt text included. `DATABASE_URL` is already injected into your function.
 - **Add authentication and rate limiting**: Image processing burns CPU, and AI captions burn tokens. Verify callers with a JWT and cap per-user usage using the pattern from [Build an LLM proxy with Neon Functions, Neon AI Gateway, and Managed Better Auth](/guides/llm-proxy-neon-functions).
@@ -625,6 +625,6 @@ Because the function runs on your Neon branch with Postgres and Object Storage c
 - [Sharp API documentation](https://sharp.pixelplumbing.com/)
 - [Vercel AI SDK: Generate Text with Image Prompt](https://ai-sdk.dev/cookbook/node/generate-text-with-image-prompt)
 - [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
-- [Hono Framework](https://hono.dev/)
+- [Hono](https://hono.dev/)
 
 <NeedHelp/>

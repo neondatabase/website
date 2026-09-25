@@ -175,7 +175,7 @@ const { text } = await generateText({
 });
 ```
 
-For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, image generation, persistence), see the `neon-functions` skill's `references/ai-sdk.md`.
+For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, image generation, persistence), see the `neon-functions` skill's [references/ai-sdk.md](https://neon.com/docs/ai/skills/neon-functions/references/ai-sdk.md).
 
 ## Build Agents with Mastra (Recommended)
 

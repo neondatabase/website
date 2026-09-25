@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-09-25T12:39:12.862Z'
+updatedOn: '2026-09-25T09:58:44.827Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -31,7 +31,7 @@ With the [Neon CLI](/docs/cli/credentials), run:
 neon credentials create --scope ai_gateway:invoke
 ```
 
-Or, in the Neon Console, select your branch, click **Credentials** under **Branch**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing, it's shown only once.
+Or, in the Neon Console, click **Connect** at the top of the sidebar and open the **AI Gateway** tab. Click **Reveal credential** to show `NEON_AI_GATEWAY_TOKEN`, or **Copy snippet** to copy it together with `NEON_AI_GATEWAY_BASE_URL`. Use **Rotate credential** to issue a new token.
 
 Or use the API:
 
@@ -54,7 +54,7 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 
 ## Find your branch host
 
-Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
+Your branch's AI Gateway host is available in the Neon Console from the **Connect** dialog's **AI Gateway** tab, or via the Neon API. It follows this format:
 
 ```
 br-<name>-api.ai.<cell>.<region>.aws.neon.tech

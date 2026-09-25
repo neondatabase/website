@@ -11,10 +11,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-08-27T15:04:31.041Z'
+updatedOn: '2026-09-23T21:49:37.670Z'
 ---
 
-<Admonition type="comingSoon" title="Private Networking availability">
+<Admonition type="info" title="Private Networking availability">
 Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
@@ -71,6 +71,8 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`

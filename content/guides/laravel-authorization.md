@@ -1,17 +1,15 @@
 ---
-title: Implementing Fine-Grained Authorization in Laravel with Lakebase Postgres
-subtitle: Learn how to set up and use Laravel's authorization features to create a secure and flexible application using Neon, the AI-native backend platform for apps and agents.
+title: Implementing fine-grained authorization in Laravel with Lakebase Postgres
+subtitle: Set up Laravel's authorization features and Spatie's Laravel Permission package on a Postgres database on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel provides an authorization system that allows developers to implement fine-grained access control in their applications. Laravel's built-in features cover most cases, but some projects require even more advanced role-based access control (RBAC). This is where third-party packages like Spatie's Laravel Permission come into play.
+Laravel's authorization system lets you implement fine-grained access control in your applications. The built-in features cover most cases, but some projects need more advanced role-based access control (RBAC), which third-party packages like Spatie's Laravel Permission provide.
 
-In this guide, we'll walk through the process of setting up fine-grained authorization in a Laravel application using Lakebase Postgres. We'll start with Laravel's native authorization features, including Gates and Policies, and then expand our implementation to incorporate Spatie's Laravel Permission package for more sophisticated RBAC capabilities.
-
-By the end of this tutorial, you'll have a good understanding of how to create a flexible and secure authorization system that can scale with your application's needs.
+In this guide, we'll walk through the process of setting up fine-grained authorization in a Laravel application using Lakebase Postgres. We'll start with Laravel's native authorization features, including Gates and Policies, and then add Spatie's Laravel Permission package for roles and permissions.
 
 ## Prerequisites
 
@@ -22,11 +20,11 @@ Before we begin, make sure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel and its authentication system
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new Laravel project and configuring it to use Lakebase Postgres.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -37,9 +35,9 @@ cd laravel-auth-demo
 
 This will create a new Laravel project in a directory named `laravel-auth-demo` and navigate you into the project directory.
 
-### Connecting to Neon Database
+### Connecting to your database on Neon
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with the details from your Neon connection string. Click **Connect** in the Neon Console nav to find them:
 
 ```env
 DB_CONNECTION=pgsql
@@ -50,29 +48,29 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-Make sure to replace the placeholders with your actual Neon database details.
+Replace the placeholders with your own values.
 
-## Understanding Laravel's Authorization System
+## Laravel's authorization system
 
 Laravel's authorization system is built on two main concepts: [Gates](https://laravel.com/docs/11.x/authorization#gates) and [Policies](https://laravel.com/docs/11.x/authorization#creating-policies).
 
-- **Gates** are Closure-based approaches to authorization. They provide a simple, Closure-based method of authorizing actions. Gates are ideal for simple checks that don't necessarily relate to a specific model or resource. They can be thought of as general-purpose authorization checks that can be used throughout your application.
+- **Gates** are Closure-based authorization checks. They suit simple checks that don't relate to a specific model or resource, and you can use them anywhere in your application.
 
-- **Policies** are classes that organize authorization logic around a particular model or resource. They encapsulate the logic for authorizing actions on a specific type of model. Policies are particularly useful when you have multiple authorization checks related to a single model, as they help keep your authorization logic organized and maintainable.
+- **Policies** are classes that organize authorization logic around a particular model or resource. They're useful when you have multiple authorization checks related to a single model.
 
-For fine-grained authorization, we'll primarily focus on Policies, as they provide a more structured and scalable approach for complex applications. Policies allow you to group related authorization logic together, making it easier to manage and understand the permissions associated with each model in your application.
+For fine-grained authorization, we'll focus on Policies, which group the authorization logic for each model in one place.
 
-That said, Gates can still play an important role in your authorization strategy. They're great for defining broader, application-wide permissions that aren't tied to a specific model. You might use Gates for actions like "access admin dashboard" or "manage site settings".
+Gates are still useful for broader, application-wide permissions that aren't tied to a specific model. You might use Gates for actions like "access admin dashboard" or "manage site settings".
 
-Laravel's authorization system is deeply integrated with its authentication system. This means you can easily check a user's permissions within your controllers, views, and even database queries. With both Gates and Policies, Laravel provides a consistent and intuitive API for performing authorization checks throughout your application.
+Laravel's authorization system is integrated with its authentication system, so you can check a user's permissions in your controllers, views, and database queries.
 
-## Implementing Fine-Grained Authorization
+## Implementing fine-grained authorization
 
 Let's implement a fine-grained authorization system for a blog application where users can create, read, update, and delete posts.
 
-### Setting up the Post Model and Migration
+### Setting up the Post model and migration
 
-For the purpose of this guide, we'll create a `Post` model with basic fields like `title`, `content`, and `is_published`. We'll also associate each post with a user.
+For this guide, we'll create a `Post` model with basic fields like `title`, `content`, and `is_published`. We'll also associate each post with a user.
 
 First, let's create a `Post` model with its migration:
 
@@ -104,7 +102,7 @@ php artisan migrate
 
 This will create a `posts` table in your Lakebase Postgres database.
 
-### Creating a Policy for Posts
+### Creating a policy for posts
 
 Now, let's create a policy for the `Post` model:
 
@@ -172,13 +170,13 @@ Rundown of the `PostPolicy` class:
 
 5. `delete` method: Similar to `update`, this method restricts deletion to the author of the post. This ensures that users can only delete their own posts.
 
-6. `publish` method: This introduces a more complex authorization rule. It allows either the author of the post or an admin user to publish the post. This is useful for blogs where posts might need approval before being made public.
+6. `publish` method: This method allows either the author of the post or an admin user to publish the post. This is useful for blogs where posts might need approval before being made public.
 
 Each method in this policy corresponds to a specific action that can be performed on a Post model. The methods return boolean values: `true` if the action is allowed, and `false` if it's not.
 
-This policy provides a fine-grained control over post-related actions, ensuring that users can only perform actions they're authorized to do. It's a good example of how policies can encapsulate complex authorization logic in a clean, readable way.
+This policy controls each post-related action, so users can only perform actions they're authorized to do.
 
-### Registering the Policy
+### Registering the policy
 
 By default, Laravel 11.x and later versions automatically discover policies. However, if you're using an older version, you might need to manually register the policy in the `AuthServiceProvider`.
 
@@ -198,7 +196,7 @@ public function boot(): void
 
 This line tells Laravel to use the `PostPolicy` class for authorization checks related to the `Post` model.
 
-### Implementing Role-Based Access Control
+### Implementing role-based access control
 
 To support our `is_admin` flag and implement basic role-based access control, let's update our `users` table.
 
@@ -234,7 +232,7 @@ php artisan migrate
 
 This column will allow us to differentiate between regular users and administrators.
 
-### Using Authorization in Controllers
+### Using authorization in controllers
 
 Now that we have our policy set up, let's use it in a controller. Create a new `PostController`:
 
@@ -332,7 +330,7 @@ $this->authorize('publish', $post);
 
 This line checks if the current user is authorized to publish the post. If not, Laravel will throw an `AuthorizationException` preventing the action from being executed.
 
-### Using Authorization in Views
+### Using authorization in views
 
 In your Blade views, you can use the `@can` directive to conditionally show or hide elements based on the user's permissions. For example, in `resources/views/posts/show.blade.php`:
 
@@ -371,13 +369,11 @@ Rundown of the Blade view:
 
 7. The delete form also includes `@method('DELETE')`, which is Laravel's way of spoofing HTTP methods that aren't supported by HTML forms (like DELETE, PUT, PATCH).
 
-By using these directives, you can conditionally display elements based on the user's permissions, providing a tailored experience for each user based on their role and authorization level.
+With these directives, each user only sees the actions their role allows.
 
-## Integrating Spatie's Laravel Permission for Advanced RBAC
+## Integrating Spatie's Laravel Permission for advanced RBAC
 
-While Laravel's built-in authorization system provides you with a good foundation for managing permissions and policies, you might require more complex role and permission structures.
-
-Spatie's Laravel Permission package provides a solution for implementing advanced RBAC (Role-Based Access Control) in your Laravel application.
+Laravel's built-in authorization system is a good foundation, but you might need more complex role and permission structures. Spatie's Laravel Permission package adds roles and permissions stored in your database.
 
 ### Installing Spatie Laravel Permission
 
@@ -403,11 +399,11 @@ php artisan migrate
 
 This will create the permissions, roles, and model_has_roles tables in your database.
 
-### Configuring the Package
+### Configuring the package
 
-The package's configuration file is located at `config/permission.php`. For most use cases, the default configuration works well. However, you can customize it based on your needs. For example, you can change the table names or add a cache expiration time.
+The package's configuration file is located at `config/permission.php`. The default configuration works for most use cases, but you can customize it based on your needs. For example, you can change the table names or add a cache expiration time.
 
-### Setting Up Roles and Permissions
+### Setting up roles and permissions
 
 Let's create some roles and permissions for our blog application. We'll do this in a seeder for easy setup and testing.
 
@@ -475,7 +471,7 @@ php artisan db:seed
 
 This will create roles for `writer`, `editor`, and `admin`, along with permissions for viewing, creating, editing, deleting, publishing, and unpublishing posts.
 
-### Updating the User Model
+### Updating the User model
 
 To use the package, your `User` model should use the `HasRoles` trait. Update your `app/Models/User.php`:
 
@@ -492,7 +488,7 @@ class User extends Authenticatable
 
 This trait provides methods for assigning and checking roles and permissions for users in your application.
 
-### Implementing RBAC in Controllers
+### Implementing RBAC in controllers
 
 Now, let's update our `PostController` to use the new permissions:
 
@@ -527,7 +523,7 @@ class PostController extends Controller
 
 The `__construct` method now uses middleware to check permissions for each controller action. This ensures that only users with the appropriate permissions can access the corresponding methods.
 
-### Using RBAC in Blade Templates
+### Using RBAC in Blade templates
 
 You can use the package's directives in your Blade templates to show or hide elements based on the user's roles and permissions:
 
@@ -552,7 +548,7 @@ You can also use the `@canany` directive to check if the user has any of the spe
 @endcanany
 ```
 
-### Dynamic Role and Permission Assignment
+### Dynamic role and permission assignment
 
 Besides seeding roles and permissions, you can also assign roles and permissions dynamically based on user actions. For example, you might assign the `writer` role to users who have published a certain number of posts.
 
@@ -584,7 +580,7 @@ public function revokeRole(User $user, Request $request)
 
 Besides the `removeRole` and `assignRole` methods, the package provides other methods for managing roles and permissions, such as `syncRoles`, `givePermissionTo`, and `revokePermissionTo` for more advanced use cases.
 
-### Optimizing RBAC Performance with Postgres on Neon
+### Optimizing RBAC performance
 
 When working with RBAC, especially in larger applications, you might encounter performance issues due to the increased number of database queries.
 
@@ -602,7 +598,7 @@ Here are some tips to optimize performance when using Spatie Laravel Permission 
    ],
    ```
 
-2. **Eager Loading**: When fetching users with their roles and permissions, use eager loading:
+2. **Eager loading**: When fetching users with their roles and permissions, use eager loading:
 
    ```php
    $users = User::with('roles', 'permissions')->get();
@@ -610,22 +606,20 @@ Here are some tips to optimize performance when using Spatie Laravel Permission 
 
 3. **Indexing**: Ensure that the `model_id` and `model_type` columns in the `model_has_roles` and `model_has_permissions` tables are properly indexed. For more information on indexing, refer to the [Postgres index types documentation](/docs/postgresql/index-types).
 
-4. **Minimize Permission Checks**: Instead of checking individual permissions, consider using roles or permission groups to reduce the number of checks you do on each request.
+4. **Minimize permission checks**: Instead of checking individual permissions, consider using roles or permission groups to reduce the number of checks you do on each request.
 
-5. **Use Database-Level Permissions**: For very large-scale applications, consider implementing some permissions at the database level using [Postgres's role-based access control features](/blog/the-non-obviousness-of-postgres-roles).
+5. **Use database-level permissions**: For very large-scale applications, consider implementing some permissions at the database level using [Postgres's role-based access control features](/blog/the-non-obviousness-of-postgres-roles).
 
 ## Conclusion
 
-In this guide, we've implemented a fine-grained authorization system in Laravel using Policies and Gates. We've covered creating and registering policies, implementing role-based access control, using authorization in controllers and views, and testing our authorization rules.
+You built authorization for a Laravel blog on Lakebase Postgres with Policies and Gates, then added roles and permissions with Spatie's Laravel Permission package.
 
-This implementation provides a solid foundation for a secure application, but there are always ways to enhance and expand its functionality.
+As a next step, write feature tests for each policy method and role so changes to your authorization rules don't break access.
 
-For more complex applications, Spatie's Laravel Permission package provides a flexible way to implement advanced RBAC in your Laravel application.
+## Additional resources
 
-## Additional Resources
-
-- [Laravel Authorization Documentation](https://laravel.com/docs/11.x/authorization)
+- [Laravel authorization documentation](https://laravel.com/docs/11.x/authorization)
 - [Laravel Policies](https://laravel.com/docs/11.x/authorization#creating-policies)
 - [Laravel Gates](https://laravel.com/docs/11.x/authorization#gates)
-- [Spatie Laravel Permission Documentation](https://spatie.be/docs/laravel-permission)
-- [Neon Documentation](/docs)
+- [Spatie Laravel Permission documentation](https://spatie.be/docs/laravel-permission)
+- [Neon documentation](/docs)

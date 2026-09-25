@@ -1,13 +1,13 @@
 ---
-title: Branch-per-PR Is Not the Same as a Staging Database
+title: Branch-per-PR is not the same as a staging database
 subtitle: Compare Neon database branches for every pull request with a classic shared staging database across data freshness, migrations, auth, and cost.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-10T00:00:00.000Z'
-updatedOn: '2026-08-27T23:52:24.570Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Before a database change reaches production, you want to test it in a hosted environment that is neither your local machine nor production itself. You have two ways to set that up: a shared staging database that all team members would use for testing, or a preview database created for each pull request. They may sound like interchangeable flows, but they differ in how long it takes to sync your production database with a preview environment, and how fast each developer can iterate against data (including authentication data) that looks like production.
+Before a database change reaches production, you want to test it in a hosted environment that is neither your local machine nor production itself. You have two ways to set that up: a shared staging database that all team members would use for testing, or a preview database created for each pull request. They sound interchangeable, but they differ in how long it takes to sync your production database with a preview environment, and how fast each developer can iterate against data (including authentication data) that looks like production.
 
 In this guide, you will learn what each approach is good for, how the two differ on data freshness, migrations, auth, and cost, how to set up branch-per-PR so it does not re-create the same staging problems, and when a shared staging database is still the right choice.
 
@@ -15,9 +15,9 @@ In this guide, you will learn what each approach is good for, how the two differ
 
 ![Two ways to test before production. On the left, three pull requests all point at one shared staging database, while on the right each pull request forks its own isolated copy from the production parent](/docs/guides/branch-vs-staging-models.svg 'no-border')
 
-Let's quickly see how the two compare across a few key factors before we go deeper:
+Here's how the two compare:
 
-| Factor                | Branch-per-PR (Neon)                           | Shared staging DB                      |
+| Factor                | Branch-per-PR (Neon)                           | Shared staging database                |
 | --------------------- | ---------------------------------------------- | -------------------------------------- |
 | Isolation             | One database per PR                            | Everyone shares one                    |
 | Starting data         | Snapshot of the parent at branch-create time   | Whatever the last refresh loaded       |
@@ -27,8 +27,6 @@ Let's quickly see how the two compare across a few key factors before we go deep
 | Migration experiments | Safe and isolated per PR                       | Conflicts serialize in human time      |
 | Lifecycle             | Auto-create on open, auto-delete on close      | Long-lived, manually reset             |
 | Cost model            | Scale-to-zero, pay per active branch           | One always-on instance sized near prod |
-
-Now let's look at each approach more closely, starting with the shared staging database.
 
 ## The role of a shared staging database
 
@@ -53,10 +51,8 @@ A shared staging database is helpful when a single, long-lived environment that 
 - **It is never quite current**: The restore runs on a schedule rather than on demand, and it can take hours depending on the production database size to sync.
 - **Everyone shares one database**: A single migration, seed, or destructive test lands on the same database the whole team is depending on.
 - **Migrations have to be coordinated**: There is one schema for everyone, so two people cannot reshape the same tables at the same time without taking turns.
-- **It runs around the clock**: A single instance sized close to production stays on whether or not anyone is testing, so it might nearly cost the same as a production workload.
-- **Risky changes have nowhere safe to run**: To try a breaking change, you have to copy the whole database into a separate snapshot, and duplicating a production-sized dataset is slow and time-consuming.
-
-Now, let's learn a different approach to managing staging databases.
+- **It runs around the clock**: A single instance sized close to production stays on whether or not anyone is testing, so it can cost nearly as much as a production workload.
+- **Risky changes have nowhere safe to run**: To try a breaking change, you have to copy the whole database into a separate snapshot, and duplicating a production-sized dataset is slow.
 
 ## How branch-per-PR works
 
@@ -74,7 +70,7 @@ neon branches create --name pr-1234 --parent production
 neon connection-string pr-1234 --role-name app_user --database-name dbname --pooled
 ```
 
-The most common way to set this up is that when a pull request opens, the CI environment would create the branch, run migrations against that endpoint, and inject the connection string into a preview deployment. Vercel's [Neon integration](/docs/guides/vercel-overview) can do this with minimal YAML, and [GitHub Actions](/guides/preview-deploys-netlify) can be used to do this with Netlify.
+The most common way to set this up is that when a pull request opens, the CI environment would create the branch, run migrations against that endpoint, and inject the connection string into a preview deployment. Vercel's [Neon integration](/docs/guides/vercel-overview) can do this without a workflow file, and [GitHub Actions](/guides/preview-deploys-netlify) can be used to do this with Netlify.
 
 A minimal preview workflow with Neon branching looks like this:
 
@@ -100,12 +96,12 @@ A minimal preview workflow with Neon branching looks like this:
 
 With that workflow, each PR gets:
 
-- Its own Postgres endpoint and schema state (with anonymized production data)
+- Its own Postgres endpoint and schema state (anonymize production data as described [below](#anonymize-sensitive-data-when-you-branch))
 - Data copied at branch-create time (copy-on-write, not a full duplicate on disk)
 - Freedom to run destructive tests without blocking other PRs
 - Automatic cleanup when the PR closes
 
-Now, let's go over the detailed practical differences in each approach.
+Here's how the two approaches differ in practice.
 
 ## Key differences in practice
 
@@ -148,11 +144,11 @@ neon connection-string pr-B --database-name dbname --pooled  # RENAME TABLE expe
 
 On a shared staging database, you would seed auth data with a script that inserts a handful of test users, but it rarely captures the edge cases you see in production. Such cases might be left out of the seed script on purpose, for privacy or to keep the seed simple.
 
-[Neon Auth](/docs/auth/branching-authentication) keeps identity data in Postgres, so when you branch from production, the users, sessions, and org tables come along with the rest of your data. A preview deployment can then log in as those copied accounts, and you can test moderation or [RLS policies](/guides/test-rls-on-neon-branches) against rows that are an anonymized version of your real customers.
+[Managed Better Auth](/docs/auth/branching-authentication) keeps identity data in your database's `neon_auth` schema, so when you branch from production, the users, sessions, and organization tables come along with the rest of your data. A preview deployment can then log in as those copied accounts, and you can test moderation or [RLS policies](/guides/test-rls-on-neon-branches) against rows that are an anonymized version of your real customers.
 
 Doing the same on a shared staging database means your refresh has to copy the auth tables reliably, and you have to manage secrets so preview cookies do not leak into production domains.
 
-### Cost and platform considerations
+### Cost
 
 A shared staging database usually runs 24/7 at close to production size whether or not anyone is testing. Branch-per-PR replaces that with many small, mostly idle branches. The cost usually favors branches, because previews [scale to zero](/docs/introduction/scale-to-zero) when no request is hitting them:
 
@@ -164,13 +160,13 @@ Branch-per-PR:   Many open branches, copy-on-write storage, compute active only
 
 Many open PRs mean an equal number of Neon branches, but with copy-on-write, you are not paying for that many full-size disks, and scale-to-zero means you do not pay for compute on branches nobody is actively using.
 
-Now, let's go over one important point about personal data before we learn how to implement branch-per-PR in your preview workflow.
+Before you implement branch-per-PR, plan for personal data.
 
 ## Anonymize sensitive data when you branch
 
 Branching from production makes a preview realistic, but it also means real emails, names, and other personal data would be in an environment that your whole team can access. For a lot of teams that is a non-starter, and under the [GDPR](https://www.aepd.es/en/prensa-y-comunicacion/blog/data-breaches-development-and-pre-production-enviroments), pseudonymized data that can still be re-identified is treated as personal data, so a preview branch has to protect it with the same care as production.
 
-Neon handles this with [anonymized branches](/docs/workflows/data-anonymization), which use the [PostgreSQL Anonymizer](/docs/extensions/postgresql-anonymizer) extension to statically mask columns you flag as sensitive. The masking runs during branch creation, so that the branch holds an actual masked copy of the data.
+Neon handles this with [anonymized branches](/docs/workflows/data-anonymization), which use the [PostgreSQL Anonymizer](/docs/extensions/postgresql-anonymizer) extension to statically mask columns you flag as sensitive. The masking runs during branch creation, so that the branch holds a masked copy of the data.
 
 You can define masking rules per column, and apply them right in the branch-creation step of your workflow:
 
@@ -207,11 +203,9 @@ A few things to keep in mind when you set this up:
 - Masking is static, so re-running it on the same branch masks the already-masked data, not fresh rows. To pick up new data from the parent, create a new anonymized branch.
 - Foreign key columns cannot be masked directly. Mask the primary key instead, and Neon keeps referential integrity intact across related tables.
 
-Now, let's learn how you can implement branch-per-PR in your workflow.
-
 ## Implement branch-per-PR correctly
 
-To use branching effectively in your development workflow, follow these steps:
+Follow these steps to set up branch-per-PR:
 
 <Steps>
 
@@ -244,15 +238,13 @@ npm run migrate && npm test
 
 ## Delete on close
 
-Delete the branch when the PR closes so inactive endpoints are regularly cleaned up:
+Delete the branch when the PR closes so inactive endpoints don't pile up:
 
 ```bash
 neon branches delete pr-${PR_NUMBER}
 ```
 
 </Steps>
-
-Now, let's look at when a shared staging database might still be the better choice.
 
 ## When shared staging is the better choice
 
@@ -264,7 +256,7 @@ A shared staging database can still be the right call in a few situations:
 
 - A stable target is also easier when external services need to reach your pre-production environment. Webhooks, payment sandboxes, and other third-party integrations usually expect one fixed callback URL that you register once.
 
-Even when a single shared staging is the right fit, it does not have to be a separate always-on server. You can run it on Neon as a long-lived branch off production, which keeps the one stable endpoint while still being a copy-on-write fork, so that you are not paying for a full duplicate of production storage.
+Even when a single shared staging is the right fit, it does not have to be a separate always-on server. You can run it on Neon as a long-lived branch off production, which keeps one stable endpoint while still being a copy-on-write fork, so you are not paying for a full duplicate of production storage.
 
 ## Conclusion
 

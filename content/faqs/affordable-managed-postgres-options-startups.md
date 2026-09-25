@@ -17,32 +17,32 @@ For early-stage startups with unpredictable load, the cheapest managed Postgres 
 
 ## Why fixed-size instances cost more for spiky traffic
 
-Fixed-size Postgres instances on AWS RDS, Cloud SQL, and similar providers bill you for the largest instance you ever expect to need, 24 hours a day. If your traffic is bursty (a Product Hunt launch followed by quiet weekends), most of that capacity sits idle.
+Fixed-size Postgres instances on AWS RDS, Cloud SQL, and similar providers bill by the instance-hour, 24 hours a day, so you size for your peak and pay for it all month. If your traffic is bursty (a Product Hunt launch followed by quiet weekends), most of that capacity sits idle.
 
 On Lakebase Postgres, the minimum compute is 0.25 CU (≈1 GB RAM) with associated CPU and local SSD ([Plans: Compute](/docs/introduction/plans#compute)). After 5 minutes of inactivity the compute suspends, and a query reactivates it within a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
 
 ## What you pay on Neon
 
-The [Free plan](/docs/introduction/plans) covers most prototypes:
+The [Free plan](/docs/introduction/plans) includes:
 
-- 100 projects, 10 branches/project
-- 100 CU-hours/project/month (enough to run a 0.25 CU compute for 400 hours)
-- 0.5 GB storage/project
+- 100 projects, 10 branches per project
+- 100 CU-hours per project per month (enough to run a 0.25 CU compute for 400 hours)
+- 0.5 GB of storage per project
 - 5 GB of public network transfer per project per month
 
 When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you-go with no minimum:
 
 - Compute: $0.106/CU-hour
 - Storage: $0.35/GB-month
-- 500 GB of public network transfer per project included, then $0.10/GB
+- 500 GB of public network transfer per project per month included, then $0.10/GB
 
-A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 20 billable days at 0.25 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
+One of the [Launch plan usage examples](/docs/introduction/plans#launch-plan) adds up 120 CU-hours of compute ($12.72), 20 GB of root branch storage ($7.00), 5 GB of child branch storage ($1.75), and 10 GB of instant restore history ($2.00) for **$23.47/month**. At 0.25 CU, 120 CU-hours is 480 hours of active compute.
 
 <Admonition type="tip" title="Set up spending notifications">
-On paid plans you can set [spending notifications](/docs/introduction/spending-notifications) so organization admins get email alerts at 80% and 100% of a threshold you choose. Notifications don't suspend compute today; for hard per-project caps, use [consumption limits](/docs/guides/consumption-limits).
+On paid plans, [spending notifications](/docs/introduction/spending-notifications) email organization admins at 80% and 100% of a threshold you choose. Notifications don't suspend compute. For hard per-project caps, use [consumption limits](/docs/guides/consumption-limits).
 </Admonition>
 
-If you eventually need SOC 2, HIPAA, private networking, or an uptime SLA, those features live on the [Scale plan](/docs/introduction/plans#compliance-and-security), not Free or Launch. Plan ahead if you're selling to regulated buyers.
+SOC 2, HIPAA, private networking, and the uptime SLA are on the [Scale plan](/docs/introduction/plans#compliance-and-security) only, so if you sell to regulated buyers, budget for Scale's $0.222/CU-hour compute rate.
 
 ## How this compares to other managed Postgres
 
@@ -53,6 +53,6 @@ If you eventually need SOC 2, HIPAA, private networking, or an uptime SLA, those
 | RDS for Postgres     | Billed 24/7                                                    | Smallest instance class  | Instance-hour pricing; reserved instances available for committed workloads ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.WorkingWith.html))                                                                                                |
 | Supabase             | Project compute billed hourly even when idle (paid plans)      | Micro: ~$10/month        | Free Plan pauses inactive projects; paid plans run a dedicated VM per project around the clock ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/compute))                                                                                                                     |
 
-Aurora Serverless v2 is the closest match for variable workloads. The main differences for a startup: Neon's 0.25 CU minimum (when active) bills at $0.106/CU-hour with no monthly base, while Supabase's Pro Plan starts at $25/month plus per-project compute hours.
+Aurora Serverless v2 is the only other option in the table that pauses compute after a short idle period, and only once you set the minimum to 0 ACUs. On Neon's Launch plan, a 0.25 CU compute bills $0.106/CU-hour only while active, with no monthly base fee. Supabase's Pro Plan is $25/month, which includes $10 of compute credits that cover one Micro project ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
 
-<CTA title="Start on the Free plan" description="No credit card required. Upgrade only when your workload demands it." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Start on the Free plan" description="Start with 100 CU-hours per project per month and upgrade when your workload needs more." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

@@ -1,15 +1,15 @@
 ---
-title: Building ASP.NET Core Applications with Neon and Entity Framework Core
-subtitle: Learn how to build a .NET application with Neon's serverless Postgres and Entity Framework Core
+title: Build ASP.NET Core applications with Neon and Entity Framework Core
+subtitle: Learn how to build a .NET application with Lakebase Postgres on Neon and Entity Framework Core
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-When building .NET applications, choosing the right database solution is an important step to good performance and scalability. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It's a great choice for .NET developers, thanks to features like automatic scaling, branching, and connection pooling that integrate well with .NET's ecosystem.
+Neon is a complete set of cloud backend primitives built around Lakebase Postgres, including Managed Better Auth, Object Storage, Functions, and an AI Gateway. For .NET developers, the database's autoscaling, branching, and connection pooling work with standard tools like Npgsql and Entity Framework Core.
 
-In this guide, we'll walk through setting up a Neon database with a .NET application and explore best practices for connecting and interacting with Lakebase Postgres and structuring your application using Entity Framework Core.
+In this guide, we'll set up a Neon database for a .NET application, connect to it, and structure the application using Entity Framework Core.
 
 ## Prerequisites
 
@@ -17,10 +17,10 @@ In this guide, we'll walk through setting up a Neon database with a .NET applica
 - A [Neon account](https://console.neon.tech/signup)
 - Basic familiarity with Entity Framework Core
 
-## Setting Up Your Neon Database
+## Set up your Neon database
 
 1. Create a new Neon project from the [Neon Console](https://console.neon.tech)
-2. Note your connection string from the connection details page
+2. Click **Connect** in the Console nav and copy your connection string
 
 Your connection string will look similar to this:
 
@@ -28,9 +28,9 @@ Your connection string will look similar to this:
 postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-## Creating a .NET Project with Neon Integration
+## Create a .NET project
 
-With your Neon database set up, let's create a sample inventory management system to demonstrate Neon integration.
+With your Neon database set up, let's create a sample inventory management API.
 
 1. Create a new .NET Web API project:
 
@@ -110,7 +110,6 @@ With your Neon database set up, let's create a sample inventory management syste
    - A unique identifier (`Id`)
    - Basic product information fields
    - Optimistic concurrency control (`Version`)
-   - Comments indicating where to add relationships
 
 4. Create a Data directory for your database context, this is where you will define your `DbContext` which represents your database schema:
 
@@ -175,11 +174,11 @@ With your Neon database set up, let's create a sample inventory management syste
 
 We've set up the basic structure for our application. Next, we'll configure the database connection and implement the repository pattern for database operations.
 
-## Configuring Database Connection
+## Configure the database connection
 
-With the database context in place, we need to configure the connection to our Neon database. Let's set this up securely.
+With the database context in place, configure the connection to your Neon database.
 
-### Basic Configuration
+### Basic configuration
 
 Update `Program.cs` to include the database context:
 
@@ -192,7 +191,7 @@ builder.Services.AddDbContext<InventoryContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("NeonConnection")));
 ```
 
-### Managing Connection Strings Securely
+### Manage connection strings securely
 
 There are two main approaches to storing your connection string securely:
 
@@ -214,11 +213,11 @@ var connectionString = Environment.GetEnvironmentVariable("NEON_CONNECTION_STRIN
     ?? builder.Configuration.GetConnectionString("NeonConnection");
 ```
 
-That way, you can set the `NEON_CONNECTION_STRING` environment variable in your production environment to securely store your connection string.
+You can then set the `NEON_CONNECTION_STRING` environment variable in production instead of storing the connection string in a file.
 
-As an alternative, you can use the `Azure Key Vault` to store your connection string securely. To learn more about this approach, check out the [Azure Key Vault documentation](https://learn.microsoft.com/en-us/azure/key-vault/general/basic-concepts).
+As an alternative, you can store your connection string in Azure Key Vault. To learn more about this approach, check out the [Azure Key Vault documentation](https://learn.microsoft.com/en-us/azure/key-vault/general/basic-concepts).
 
-### Testing the Configuration
+### Test the configuration
 
 To verify everything is working correctly, start your application:
 
@@ -228,9 +227,9 @@ dotnet run
 
 If everything is set up correctly, you should see a message indicating that the application is running and listening on a specific port.
 
-## Implementing Repository Pattern
+## Implement the repository pattern
 
-The repository pattern acts as an abstraction layer between your application logic and data access code. This pattern helps maintain clean separation of concerns and makes your code more testable and maintainable.
+The repository pattern is an abstraction layer between your application logic and data access code. It keeps data access in one place and makes your code easier to test.
 
 In our inventory system, we'll implement this pattern to handle all database operations related to products.
 
@@ -252,7 +251,7 @@ namespace NeonInventoryApi.Repositories
 }
 ```
 
-This interface defines the contract for our repository. That way all implementations will provide these basic CRUD (Create, Read, Update, Delete) operations. Using an interface allows us to easily swap implementations or create mock versions for testing.
+This interface defines the contract for the repository, so every implementation provides the same CRUD (Create, Read, Update, Delete) operations. Using an interface also lets you swap implementations or create mock versions for testing.
 
 Next, let's implement the repository, starting with the `ProductRepository` class in `Repositories/ProductRepository.cs`:
 
@@ -329,7 +328,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 This registration makes the repository available throughout your application.
 
-Then you can inject it into your controllers or services, create a new controller `Controllers/ProductsController.cs`:
+Then you can inject it into your controllers or services. Create a new controller `Controllers/ProductsController.cs`:
 
 ```csharp
 using Microsoft.AspNetCore.Mvc;
@@ -396,7 +395,7 @@ namespace NeonInventoryApi.Controllers
 
 The controller uses the repository to interact with the database. Each action corresponds to a CRUD operation and returns appropriate HTTP status codes based on the operation's success.
 
-The repository pattern is particularly useful when working with Postgres as it provides a single place to implement database-specific optimizations and connection handling strategies.
+The repository also gives you a single place to add Postgres-specific optimizations and connection handling.
 
 After implementing the repository pattern, make sure to register the controllers in `Program.cs`:
 
@@ -412,7 +411,7 @@ Similar to other web frameworks, Entity Framework Core uses migrations to keep t
 
 ### Installing `dotnet-ef`
 
-Before creating migrations, make sure you have the `dotnet-ef` tool is installed. This tool provides command-line capabilities for managing Entity Framework migrations and database updates.
+Before creating migrations, make sure the `dotnet-ef` tool is installed. This tool provides command-line capabilities for managing Entity Framework migrations and database updates.
 
 Install `dotnet-ef` globally by running:
 
@@ -426,7 +425,7 @@ dotnet tool install --global dotnet-ef
 export PATH="$PATH:$HOME/.dotnet/tools"
 ```
 
-### Creating and Applying Migrations
+### Create and apply migrations
 
 Once `dotnet-ef` is installed, you can create a migration to define your database schema based on your `DbContext` and entity classes.
 
@@ -446,15 +445,15 @@ Once `dotnet-ef` is installed, you can create a migration to define your databas
 
    This command executes the generated migration code against the database, creating the necessary tables and constraints based on your model definitions.
 
-After these steps, your database will be fully synchronized with your data model, and you're ready to start using it in your application.
+Your database schema now matches your data model.
 
 Now if you run your application and navigate to `http://localhost:5221/api/products`, you should see an empty array `[]` as we haven't added any products yet.
 
-## Testing CRUD Operations
+## Test CRUD operations
 
-With our API and database set up, we’re ready to test the CRUD operations. We’ll use simple HTTP requests to add, retrieve, update, and delete products from our Neon database.
+With the API and database set up, you can test the CRUD operations. We’ll use HTTP requests to add, retrieve, update, and delete products from our Neon database.
 
-### 1. Adding a New Product
+### 1. Add a new product
 
 To add a new product, send a `POST` request to `http://localhost:5221/api/products`. Here’s an example using `curl`:
 
@@ -474,7 +473,7 @@ curl -X POST http://localhost:5221/api/products \
 
 If the request is successful, the API will return the newly created product with an auto-generated `Id`.
 
-### 2. Retrieving All Products
+### 2. Retrieve all products
 
 To retrieve all products, send a `GET` request to `http://localhost:5221/api/products`:
 
@@ -484,7 +483,7 @@ curl -X GET http://localhost:5221/api/products
 
 This should return a list of all products in the database. If you just added one product, you’ll see an array with that single product.
 
-### 3. Retrieving a Product by ID
+### 3. Retrieve a product by ID
 
 To retrieve a specific product, send a `GET` request to `http://localhost:5221/api/products/{id}`, replacing `{id}` with the actual product ID. For example:
 
@@ -492,9 +491,9 @@ To retrieve a specific product, send a `GET` request to `http://localhost:5221/a
 curl -X GET http://localhost:5221/api/products/1
 ```
 
-This request will return the product with the specified `Id`. If no product is found, it may return a `404 Not Found`.
+This request will return the product with the specified `Id`. If no product is found, it returns `404 Not Found`.
 
-### 4. Updating a Product
+### 4. Update a product
 
 To update an existing product, send a `PUT` request to `http://localhost:5221/api/products/{id}`. Include the updated information in the request body. Here’s an example:
 
@@ -511,9 +510,9 @@ curl -X PUT http://localhost:5221/api/products/1 \
          }'
 ```
 
-This request updates the product with `Id = 1`. The API will return the updated product information if the operation succeeds.
+This request updates the product with `Id = 1`. If the update succeeds, the API returns `204 No Content`.
 
-### 5. Deleting a Product
+### 5. Delete a product
 
 To delete a product, send a `DELETE` request to `http://localhost:5221/api/products/{id}`, replacing `{id}` with the product’s actual ID:
 
@@ -521,18 +520,18 @@ To delete a product, send a `DELETE` request to `http://localhost:5221/api/produ
 curl -X DELETE http://localhost:5221/api/products/1
 ```
 
-If successful, the API will delete the product from the database and return a status code indicating success.
+If successful, the API deletes the product and returns `204 No Content`.
 
 ## Conclusion
 
-Connecting .NET applications to Neon gives you a strong and scalable database setup. By following these steps and using features like connection pooling and automatic scaling, you can create applications that perform well even as they grow.
+You built an ASP.NET Core API that stores products in a Neon database through Entity Framework Core, with migrations and a repository layer.
 
-As next steps, consider adding more features to your application, such as authentication and authorization. You can also explore advanced Neon features like branching and data replication to enhance your application's performance and reliability.
+As next steps, consider adding authentication and authorization. You can also use [branching](/docs/introduction/branching) for development and testing, and [read replicas](/docs/introduction/read-replicas) to offload read traffic.
 
 For more details, check out:
 
-- [Neon Documentation](/docs)
-- [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
-- [Npgsql Documentation](https://www.npgsql.org/doc/index.html)
+- [Neon documentation](/docs)
+- [Entity Framework Core documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [Npgsql documentation](https://www.npgsql.org/doc/index.html)
 
 <NeedHelp />

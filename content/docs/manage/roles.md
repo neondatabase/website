@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-09-14T21:34:48.957Z'
+updatedOn: '2026-09-25T09:40:59.046Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -72,7 +72,7 @@ You can create, list, delete, and reset passwords for roles using the Neon Conso
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add role**.
 6. In the role creation modal, specify a role name. The branch is pre-selected.
@@ -154,7 +154,7 @@ Role names cannot exceed 63 characters, and some names are not permitted. See [R
 
 <TabItem>
 
-In the Neon Console, select your branch from the **BRANCH** selector, then under **Postgres database** select **Roles** to see the roles on the branch.
+In the Neon Console, select your branch from the project/branch menu at the top of the sidebar, then under **Postgres database** select **Roles** to see the roles on the branch.
 
 </TabItem>
 
@@ -230,7 +230,7 @@ Deleting a role is a permanent action that cannot be undone, and you cannot dele
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Select **Delete role** from the role menu.
 6. On the confirmation modal, click **Delete**.
@@ -305,7 +305,7 @@ You can reset a role's password from the Neon Console or API. There's no CLI com
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Select **Reset password** from the role menu.
 6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.

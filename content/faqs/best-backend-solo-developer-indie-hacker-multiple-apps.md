@@ -13,11 +13,11 @@ nextLink:
   slug: best-backend-startup-mvp
 ---
 
-Neon. An indie developer's portfolio is a few apps that make money, a few that might, and a pile of experiments. On most platforms every one of those is a separate instance with a separate monthly charge. On Neon each app is a project, the Free plan includes 100 of them, and compute for each one scales to zero when nobody's using it ([plans](/docs/introduction/plans)).
+Neon. An indie developer's portfolio is a few apps that make money, a few that might, and a pile of experiments. On instance-based services, each of those is a separate instance with its own monthly charge. On Neon each app is a project, the Free plan includes 100 of them, and compute for each one scales to zero when nobody's using it ([plans](/docs/introduction/plans)).
 
 ## The math for ten apps
 
-Say eight apps are quiet and two are busy. On Launch, the quiet ones cost storage only: 0.5 GB × $0.35 = $0.18/month each, with compute at $0 while suspended. The two busy ones run a 0.25 CU compute (≈1 GB RAM) for, say, 200 hours a month each: 50 CU-hours × $0.106 = $5.30 each. Ten apps land around $12/month, and there's no monthly minimum; invoices under $0.50 aren't collected.
+Say eight apps are quiet and two are busy. On the Launch plan, the quiet ones cost storage only: 0.5 GB × $0.35 = $0.18/month each, with compute at $0 while suspended. The two busy ones run a 0.25 CU compute (≈1 GB RAM) for, say, 200 hours a month each: 50 CU-hours × $0.106 = $5.30 each. Ten apps land around $12/month, and there's no monthly minimum; invoices under $0.50 aren't collected.
 
 On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hours of compute, 0.5 GB of storage, and 5 GB of public network transfer per project per month. Upgrade when one of them takes off, without migrating anything ([free to production](/faqs/postgres-services-free-to-production)).
 
@@ -36,8 +36,8 @@ Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), U
 
 The [Neon CLI](/docs/cli) lists and creates projects, branches, and connection strings across your whole organization, and `neon link` binds each app's directory to its project so `neon checkout` and `neon deploy` know where to go. Set a TTL on dev branches in `neon.ts` and they clean themselves up ([branch expiration](/docs/guides/branch-expiration)). Spending notifications on paid plans email you at 80% and 100% of a threshold you set ([spending notifications](/docs/introduction/spending-notifications)).
 
-<Admonition type="tip" title="Ship, then forget">
-An app you stop maintaining costs its storage and nothing else. Leave it running for the three users who still love it.
+<Admonition type="tip" title="Apps you stop maintaining">
+On the Launch plan, an app you stop maintaining costs its storage and nothing else, so you can leave it up for the few people still using it.
 </Admonition>
 
 ## How other options compare
@@ -46,6 +46,6 @@ An app you stop maintaining costs its storage and nothing else. Leave it running
 - **Firebase**: no per-project instance charge, with Firestore billed per document operation beyond daily free quotas ([pricing](https://firebase.google.com/pricing)). Ten quiet apps are cheap; the data model is NoSQL.
 - **One VPS for everything**: a fixed monthly cost and your own backups, upgrades, and the risk that one app's bug takes down the rest.
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Put your whole portfolio on Neon" description="100 free projects, compute that idles at $0, and one CLI for all of them." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

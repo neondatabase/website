@@ -4,12 +4,12 @@ subtitle: 'Run scheduled jobs and react to object uploads with Neon Function Tri
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-19T00:00:00.000Z'
-updatedOn: '2026-09-21T10:42:19.078Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 If you're building a backend, you eventually need work that runs outside the request-response cycle. Some of it runs on the clock: nightly reports, cleanup jobs, periodic syncs. Some of it runs on events: a file lands in storage, and something needs to process it before anyone notices it's there.
 
-In a typical microservices setup, you'd deploy a scheduler, a queue, and a worker to handle these jobs. The scheduler fires on the clock, the queue receives events, and the worker does the work. Each of those is a separate deployment, and each has its own operational overhead.
+In a typical microservices setup, you'd deploy a scheduler, a queue, and a worker to handle these jobs. The scheduler fires on the clock, the queue receives events, and the worker does the work. Each of those is a separate deployment to run and monitor.
 
 A common example of this pattern is a data pipeline that ingests CSV files into a database. You want to:
 
@@ -46,11 +46,11 @@ flowchart LR
 
 ## Prerequisites
 
-Before starting, ensure you have:
+Before starting, you'll need:
 
 1. **Node.js**: Version 22 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+2. **Neon account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
+3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 
@@ -116,11 +116,11 @@ npm install --save-dev @types/node @types/pg drizzle-kit dotenv typescript esbui
 
 Here's what each package does:
 
-- `hono`: A lightweight web framework. Neon Functions support Hono by default, so you can use its routing and middleware features to organize your function.
+- `hono`: A lightweight web framework and the recommended framework for Neon Functions. You'll use its routing and middleware to organize your function.
 - `@neon/functions`: Neon's package for Postgres pool management in functions.
 - `pg`: The Node.js Postgres client Drizzle uses to connect to the database.
 - `drizzle-orm`: Drizzle's type-safe ORM for defining the schema and running queries.
-- `drizzle-kit`: Drizzle kit for generating and running migrations.
+- `drizzle-kit`: Drizzle's CLI for generating and running migrations.
 - `dotenv`: Loads `.env.local` into the environment when running migrations.
 - `@aws-sdk/client-s3`: The AWS SDK client for reading objects from the bucket.
 - `csv-parse`: Parses the CSV files into records.
@@ -144,7 +144,7 @@ You'll also need a `tsconfig.json` file to tell TypeScript how to compile the fu
 
 ## Define the schema
 
-To manage your database schema and migrations, you'll use [Drizzle ORM](https://orm.drizzle.team). Drizzle lets you define the schema in TypeScript, then generates SQL migrations for you. It also provides a type-safe query builder.
+To manage your database schema and migrations, you'll use [Drizzle ORM](https://orm.drizzle.team). You define the schema in TypeScript, Drizzle generates the SQL migrations, and its type-safe query builder runs the queries.
 
 You'll need three tables:
 
@@ -377,12 +377,12 @@ app.post('/report', async (c) => {
 export default app;
 ```
 
-The above code does the following:
+The code does the following:
 
 - **Sets up the app and clients**: Creates a Hono app, attaches a Postgres pool with Drizzle for type-safe queries, and creates an S3 client for downloading objects from the bucket.
 - **Guards the trigger routes**: The `requireTriggerCall` middleware rejects any request without an `X-Neon-Trigger-Invocation-Id` header, so only Neon's trigger system can call `/ingest` and `/report`.
 - **Handles uploads in `/ingest`**: Reads the bucket name and object key from the trigger body, upserts an `uploads` row, downloads and parses the CSV, and bulk-inserts the rows into `events`. Then it marks the upload as `processed` or `failed`. On failure, it records the error message on the upload row and returns a `500`, which is what the nightly report counts later. On success, it returns a `200` with the number of rows imported.
-- **Builds the nightly report in `/report`**: Aggregates the previous day's uploads by status and upserts the counts into `daily_reports`. Reading `data.scheduled_at` from the body ties the log line to the run that produced it. This makes it easier to trace scheduled invocations in the logs.
+- **Builds the nightly report in `/report`**: Aggregates the previous day's uploads by status and upserts the counts into `daily_reports`. Reading `data.scheduled_at` from the body ties the log line to the run that produced it, so you can trace scheduled invocations in the logs.
 
 ### The trigger payload
 
@@ -568,7 +568,7 @@ neon psql main -- -c "SELECT object_key, status, error FROM uploads WHERE status
  uploads/broken.csv | failed | Invalid time value
 ```
 
-The failed row is exactly what the nightly report picks up, which is the point of building the report into the same pipeline.
+The nightly report counts this failed row.
 
 ## Verify the nightly report
 
@@ -657,7 +657,7 @@ If you branch `main` for testing, both triggers arrive disabled so you don't dou
 
 ## Extending the pipeline
 
-This guide keeps the pipeline deliberately narrow so you can see how the two triggers work. The same pattern scales to more complex workflows. A few ways to take it further:
+This guide keeps the pipeline narrow so you can see how the two triggers work. A few ways to extend it:
 
 - **Multiple schedules on one function**: a function can have several triggers, each evaluated independently. Add a weekly deep-clean trigger with its own `functionPath`, and use `trigger.name` from the request body to tell them apart in the handler.
 - **Larger files**: the handler loads the whole CSV into memory. For files that don't fit, stream the object body and insert in batches inside a transaction.

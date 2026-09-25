@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-09-10T00:31:17.488Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 <InfoBlock>
@@ -174,7 +174,7 @@ This shows all branches with their names, states, and creation dates. Look for b
 
 To remove stale branches:
 
-- **Neon Console**: Go to the **Branches** page (under **Project**) and delete branches individually
+- **Neon Console**: Go to the **Branches** page and delete branches individually
 - **Neon CLI**: Use `neon branches delete <branch-id-or-name>` to remove specific branches. See [CLI branches reference](/docs/cli/branches#delete).
 - **Neon API**: Use `DELETE /projects/{project_id}/branches/{branch_id}`. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).
 

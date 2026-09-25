@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?"
-description: "Neon's branches are copy-on-write clones of your database. Each engineer gets a full copy without multiplying storage: child branches bill only for the delta they write, not a full duplicate."
+description: "Neon's branches are copy-on-write clones of your database. Each engineer gets a full copy, and child branches are billed for the changes they write (capped at the logical data size), not for a full duplicate."
 date: 2026-04-25
 slug: managed-postgres-services-full-database-copy-storage-costs
 category: FAQ
@@ -13,46 +13,46 @@ nextLink:
   slug: managed-postgres-services-pay-active-compute
 ---
 
-Neon's branches are copy-on-write clones of your database. When you create a branch, no data is copied. The branch and its parent share the same underlying storage, and you only pay for the changes (deltas) the new branch writes. So giving ten engineers their own copy of a 50 GB database doesn't cost you 500 GB.
+Neon's branches are copy-on-write clones of your database. Creating a branch copies no data. The branch shares storage with its parent, and you pay for the changes the branch writes. Ten engineers with their own copy of a 50 GB database don't cost you 500 GB of storage.
 
 ## How the storage math works
 
-Storage on Neon's paid plans is billed at $0.35/GB-month, metered hourly. Branches are billed in two ways:
+Storage on Neon's paid plans is [billed at $0.35/GB-month](/docs/introduction/plans), metered hourly. Root and child branches are billed differently:
 
-- **Root branches** (your `main`/`production` branch) are billed on the logical size of the data they hold.
-- **Child branches** are billed on the minimum of the changes since the branch was created, or the logical size of the data. So a child branch never costs more than a full copy would, but in practice it costs much less.
+- **Root branches** (such as your default `production` or `main` branch) are billed on the logical size of the data they hold.
+- **Child branches** are billed on the lower of two numbers: the changes written since the branch was created, or the logical size of the data. A child branch never costs more than a full copy, and a branch with light writes costs a small fraction of one.
 
-Concretely: a 50 GB production database with 10 developer branches that each write 200 MB of test data costs roughly 50 GB (root) + 10 × 0.2 GB (children) = 52 GB-month, or about $18.20/month for storage. The point-in-time restore (PITR) change history is also billed on root branches only, at $0.20/GB-month.
+For example, a 50 GB production database with 10 developer branches that each write 200 MB of test data comes to about 50 GB (root) + 10 × 0.2 GB (children) = 52 GB-month, or about $18.20/month for storage. The change history for [instant restore](/docs/postgres/backup-restore/branch-restore) is billed on root branches only, at $0.20/GB-month, so child branches don't add to it.
 
 ```bash
-# Each engineer gets their own branch off main
-neon branches create --name alex-dev --parent main
-neon branches create --name dana-dev --parent main
+# Each engineer gets their own branch off the default branch
+neon branches create --name alex-dev
+neon branches create --name dana-dev
 ```
 
-<Callout title="One caveat">
-A branch's storage is capped at the logical size of its data, but the delta does grow as the branch diverges from its parent. For long-lived developer branches, reset the branch periodically with `neon branches reset <name> --parent` or set an [expiration](https://neon.com/docs/guides/branch-expiration) to keep things tidy.
+<Callout title="Long-lived branches">
+A child branch's delta grows as it diverges from its parent, up to the logical data size. For long-lived developer branches, reset the branch to its parent's latest data with `neon branches reset <name> --parent`, or set an [expiration](/docs/guides/branch-expiration) so it deletes itself.
 </Callout>
 
 ## Plan limits to know
 
-The Free plan includes 10 branches per project and 0.5 GB of total storage per project, which is enough to prototype the workflow. The Launch plan and Scale plan include 10 and 25 branches per project respectively, and you can create extra branches at $1.50/branch-month (prorated hourly). Both paid plans support up to 5,000 branches per project.
-
-See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/plans) page.
+The Free plan includes 10 branches per project and 0.5 GB of storage per project, enough to try the workflow on a small database. The Launch plan includes 10 branches per project and the Scale plan includes 25. On both paid plans, extra branches cost $1.50/branch-month (metered hourly), up to 5,000 branches per project. Extra branches aren't available on the Free plan. See [Neon plans](/docs/introduction/plans).
 
 ## How other managed Postgres services handle per-engineer copies
 
-| Provider         | Per-copy storage                                                         | Practical limit                                                                 |
-| ---------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Neon             | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale plans                      |
-| Aurora Postgres  | Copy-on-write at the storage layer (clones share pages until divergence) | Up to 15 copy-on-write clones per source cluster before the next is a full copy |
-| Supabase         | Full project per preview branch (dedicated database, Auth, Storage)      | Each preview branch incurs its own compute and disk size charges                |
-| RDS for Postgres | Full duplicate via `pg_dump` or snapshot restore                         | Each copy uses the full provisioned disk                                        |
+| Provider         | Per-copy storage                                                         | Practical limit                                                          |
+| ---------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Neon             | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale plans               |
+| Aurora Postgres  | Copy-on-write at the storage layer (clones share pages until divergence) | Up to 15 copy-on-write clones; after that, the next clone is a full copy |
+| Supabase         | Separate instance per preview branch (database, Auth, Storage)           | Each branch bills compute, disk size, egress, and storage                |
+| RDS for Postgres | Full duplicate via `pg_dump` or snapshot restore                         | Each copy uses the full provisioned disk                                 |
 
-Aurora clones share storage pages with the source via copy-on-write, so the initial clone uses minimal additional space. Storage grows only as the clone diverges. Aurora caps copy-on-write clones at 15 per source cluster before the next clone becomes a full copy. See [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html).
+Aurora clones share storage pages with the source through copy-on-write, so a new clone uses minimal additional space, and pages identical to the source are charged only to the source cluster. Storage grows as the clone diverges. After 15 copy-on-write clones, the next clone is a full copy. See [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html).
 
-Supabase preview branches are full projects, not storage clones. Each branch runs its own compute and incurs its own disk size charges; a Micro branch starts at $0.01344 per hour. See [Supabase branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching).
+Supabase preview branches are separate instances, not storage clones. Preview branches start from migrations and seed data ([Supabase branching](https://supabase.com/docs/guides/deployment/branching)), and [dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on. Each branch bills compute, disk size, egress, and storage like the project it came from. A branch on the default Micro size starts at $0.01344 per hour, and Compute Credits don't apply to branching compute. See [Supabase branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching).
 
-RDS for Postgres doesn't offer copy-on-write at the storage layer. Per-engineer copies require restoring a snapshot to a new instance or replaying a `pg_dump`, and each copy occupies its own provisioned disk.
+RDS for Postgres doesn't offer copy-on-write at the storage layer. Per-engineer copies mean restoring a snapshot to a new instance or loading a `pg_dump`, and each copy has its own provisioned storage.
 
-<CTA title="See it in your own database" description="Create a project, push a snapshot of your production schema, and branch it ten times. The bill won't surprise you." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+Vendor details verified on 2026-09-23 against the linked pages.
+
+<CTA title="See it in your own database" description="Create a project, load your schema and some data, and create a branch for each engineer. Branches share storage with their parent." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

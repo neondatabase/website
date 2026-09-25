@@ -1,44 +1,42 @@
 ---
-title: Implementing Database Migrations in Go Applications with Neon
-subtitle: Learn how to manage database schema changes in Go applications using Neon's serverless Postgres
+title: Implementing database migrations in Go applications with Neon
+subtitle: Learn how to manage database schema changes in Go applications on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Database migrations are essential for managing schema evolution in applications as they grow and change over time. When working with Go applications and Neon's serverless Postgres, implementing a good migration strategy allows you to have smooth deployments and database changes without disruption.
-
-This guide will walk you through implementing and managing database migrations for Go applications using Lakebase Postgres, covering everything from basic concepts to advanced production deployment strategies.
+Database migrations let you change your schema in small, versioned steps as your application grows. This guide walks you through creating and running migrations for a Go application on Neon with golang-migrate, from your first migration file to testing migrations on a Neon branch in CI.
 
 ## Prerequisites
 
-Before diving into database migrations, make sure you have:
+Before you start, make sure you have:
 
 - [Go](https://golang.org/dl/) 1.18 or later installed
 - A [Neon](https://console.neon.tech/signup) account and project
 - Basic understanding of SQL and database schemas
 - Familiarity with Go programming
 
-## Understanding Database Migrations
+## Understanding database migrations
 
 Database migrations provide a structured approach to evolve your database schema over time. Each migration represents a discrete change to your database structure, such as adding a table, modifying a column, or creating an index.
 
 Some of the main benefits of using database migrations include:
 
 - Track changes to your schema alongside your application code.
-- Easily set up new development or production databases.
+- Set up new development or production databases from scratch.
 - Apply changes incrementally with the ability to roll back.
 - Multiple developers can make schema changes without conflicts.
 - Integrate database changes into your CI/CD pipeline.
 
-Without migrations, managing database schema changes becomes increasingly challenging as applications grow and team sizes increase.
+Without migrations, managing database schema changes gets harder as applications grow and team sizes increase.
 
-## Migration Tools for Go
+## Migration tools for Go
 
 As with many programming languages, Go has a rich ecosystem of tools for managing database migrations. These tools help you create, apply, and roll back migrations in a controlled and repeatable manner.
 
-Let's explore the most popular options:
+Here are the most popular options:
 
 ### golang-migrate
 
@@ -50,7 +48,7 @@ Let's explore the most popular options:
 - A Go library for programmatic migration control
 - Versioned migrations with up/down operations
 
-### Other Options
+### Other options
 
 While we'll focus on golang-migrate in this guide, other notable migration tools include:
 
@@ -59,13 +57,13 @@ While we'll focus on golang-migrate in this guide, other notable migration tools
 - **[atlas](https://github.com/ariga/atlas)**: A newer tool that provides declarative schema migrations
 - **[dbmate](https://github.com/amacneil/dbmate)**: A database migration tool that's language-agnostic
 
-## Setting Up golang-migrate
+## Setting up golang-migrate
 
-Let's set up golang-migrate to work with your Lakebase Postgres database. It can be used both from the command line and programmatically within your Go code. We'll cover both approaches in this guide.
+Let's set up golang-migrate to work with your Neon database. You can use it both from the command line and programmatically within your Go code. We'll cover both approaches in this guide.
 
 Let's start by installing the golang-migrate CLI.
 
-### Install the Migration Tool
+### Install the migration tool
 
 First, install the golang-migrate CLI. You can do this using `go install`:
 
@@ -73,9 +71,9 @@ First, install the golang-migrate CLI. You can do this using `go install`:
 go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 ```
 
-Or alternatively, you can also use a package manager or follow the [installation instructions](https://github.com/golang-migrate/migrate/blob/master/cmd/migrate/README.md) from the golang-migrate repository depending on your operating system.
+You can also use a package manager or follow the [installation instructions](https://github.com/golang-migrate/migrate/blob/master/cmd/migrate/README.md) from the golang-migrate repository depending on your operating system.
 
-### Project Structure
+### Project structure
 
 Create a structure for your migrations in your Go project:
 
@@ -98,7 +96,7 @@ The `migrations` directory will store all your migration files. Each migration c
 - `NNNNNN_name.up.sql`: Contains SQL to apply the migration
 - `NNNNNN_name.down.sql`: Contains SQL to revert the migration
 
-### Creating Your First Migration
+### Creating your first migration
 
 Next, let's create your first migration to establish a users table:
 
@@ -166,13 +164,13 @@ Notice how the down migration drops objects in reverse order compared to how the
 
 ## Connecting to your database on Neon
 
-To run migrations against your Neon database, you'll need to construct a proper connection string. Neon provides a secure, TLS-enabled connection:
+To run migrations against your Neon database, you'll need a connection string. Neon connections use TLS:
 
 ```
 postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-Replace the placeholders with your actual Neon connection details, which you can find in the Neon Console under your project's connection settings.
+Replace the placeholders with your actual Neon connection details, which you can find by clicking **Connect** in the Neon Console.
 
 For convenience, you might want to store this connection string in an environment variable:
 
@@ -180,11 +178,11 @@ For convenience, you might want to store this connection string in an environmen
 export NEON_DB_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
-## Running Migrations
+## Running migrations
 
 With your migration files created and your connection string ready, you can now run migrations against your Neon database.
 
-### Running Migrations from CLI
+### Running migrations from the CLI
 
 To apply all pending migrations:
 
@@ -210,9 +208,9 @@ To check the current migration version:
 migrate -database "${NEON_DB_URL}" -path ./migrations version
 ```
 
-Having the ability to run migrations from the command line is useful for local development and debugging. However, for production deployments, let's look at how to run migrations programmatically from your Go code.
+Running migrations from the command line is useful for local development and debugging. However, for production deployments, let's look at how to run migrations programmatically from your Go code.
 
-### Running Migrations from Go Code
+### Running migrations from Go code
 
 For many applications, you'll want to run migrations programmatically from your Go code, especially during application startup or as part of CI/CD processes.
 
@@ -283,7 +281,7 @@ func main() {
 
 This approach allows you to run migrations as part of your application's initialization process. You can also integrate this code into your CI/CD pipeline to ensure migrations are applied consistently across environments.
 
-## Creating Additional Migrations
+## Creating additional migrations
 
 As your application evolves, you'll need to create additional migrations to modify your database schema. Let's create a second migration to add user roles:
 
@@ -329,11 +327,11 @@ This migration shows a few common patterns:
 2. Seeding tables with initial data
 3. Migrating existing data to maintain consistency
 
-## Best Practices for Migrations
+## Best practices for migrations
 
-When working with migrations in Go applications and Lakebase Postgres, follow these best practices:
+When working with migrations in Go applications on Neon, follow these best practices:
 
-### 1. Keep Migrations Small and Focused
+### 1. Keep migrations small and focused
 
 Each migration should do one thing and do it well. Small, focused migrations are:
 
@@ -344,7 +342,7 @@ Each migration should do one thing and do it well. Small, focused migrations are
 
 For example, split adding a table and populating it with data into separate migrations when possible.
 
-### 2. Make Migrations Idempotent When Possible
+### 2. Make migrations idempotent when possible
 
 Idempotent migrations can be applied multiple times without changing the result. Use conditionals in your SQL to make migrations safer to re-run:
 
@@ -361,11 +359,11 @@ END
 $$;
 ```
 
-### 3. Use Transactions for Safety
+### 3. Use transactions
 
 Ensure your migrations run within transactions to maintain database consistency. If a migration fails partway through, all changes should be rolled back.
 
-The golang-migrate tool automatically wraps each migration in a transaction by default, but you can also explicitly include transactions in your SQL:
+The golang-migrate Postgres driver doesn't wrap each migration in an explicit transaction, so include one in your SQL:
 
 ```sql
 BEGIN;
@@ -375,15 +373,15 @@ BEGIN;
 COMMIT;
 ```
 
-There has been a feature request to add support for transactions in the golang-migrate tool, you can track the progress [here](https://github.com/golang-migrate/migrate/issues/196) but for now, you would need to handle transactions manually in your SQL.
+You can track the [feature request for built-in transaction support](https://github.com/golang-migrate/migrate/issues/196) in the golang-migrate repository.
 
-### 4. Test Migrations Before Applying to Production
+### 4. Test migrations before applying them to production
 
 Always test migrations in a non-production environment first. Ideally, have a staging environment that mirrors production as closely as possible.
 
-You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. You can learn more about Neon branches in the [Neon documentation](/docs/introduction/branching).
+You can achieve this by setting up a separate Neon branch to test migrations before applying them to your production branch. To learn more, see [Branching](/docs/introduction/branching).
 
-### 5. Version Control Your Migrations
+### 5. Version control your migrations
 
 Store migrations in version control alongside your application code to make sure that:
 
@@ -391,15 +389,15 @@ Store migrations in version control alongside your application code to make sure
 - Code reviewers can see database changes
 - Migration history is preserved
 
-### 6. Never Edit Existing Migrations
+### 6. Never edit existing migrations
 
 Once a migration has been applied to any environment, consider it immutable. If you need to change something, create a new migration. This avoids inconsistencies between environments.
 
-## Integrating with CI/CD Pipelines
+## Integrating with CI/CD pipelines
 
 Automating migrations as part of your CI/CD pipeline ensures database changes are applied consistently across environments.
 
-### Example GitHub Actions Workflow
+### Example GitHub Actions workflow
 
 Here's an example GitHub Actions workflow that runs migrations during deployment:
 
@@ -443,11 +441,11 @@ The workflow will trigger on pushes to the main branch, then perform the followi
 4. Apply migrations to the database using the connection string stored in a GitHub secret
 5. Continue with the deployment process
 
-Running your database migrations directly on your production database can be risky. For a safer approach, let's look at how to test migrations on a Neon branch before deploying them to production.
+Running migrations directly on your production database can be risky. The next section tests them on a Neon branch first.
 
-### Running Migrations on a Neon Branch
+### Running migrations on a Neon branch
 
-For a safer approach, you can use Neon's branching capabilities to test migrations before applying them to your production database.
+A Neon branch is a copy of your production database that you can run migrations against without touching production.
 
 Neon has a set of [GitHub Actions](/docs/guides/branching-github-actions) that allow you to create, delete, and compare branches programmatically. Here's an extended GitHub Actions workflow that uses Neon's branching actions to spin up a temporary branch for testing migrations:
 
@@ -514,7 +512,6 @@ jobs:
           base_branch: main
           api_key: ${{ secrets.NEON_API_KEY }}
           database: ${{ vars.NEON_DB_NAME || 'neondb' }}
-          username: ${{ vars.NEON_DB_USER }}
 
       # Clean up the test branch
       - name: Delete test branch
@@ -577,11 +574,11 @@ To use this workflow, you'll need to set up the following GitHub repository secr
 
 You can add more steps to this workflow depending on your specific deployment needs, such as building and deploying your application after successful migrations.
 
-## Working with Multiple Environments
+## Working with multiple environments
 
 Most applications require different database configurations for development, testing, staging, and production environments.
 
-### Environment-Specific Configurations
+### Environment-specific configurations
 
 Manage environment-specific database URLs using environment variables or configuration files:
 
@@ -615,15 +612,13 @@ func GetDatabaseURL() string {
 
 ## Conclusion
 
-Database migrations are a critical part of managing application evolution. When working with Go applications and Lakebase Postgres, a well-implemented migration strategy ensures that your schema changes are version-controlled and applied consistently across environments.
+You now have versioned golang-migrate migrations for a Go application on Neon, run from the CLI, from Go code, and from a GitHub Actions workflow that tests them on a temporary Neon branch. As a next step, add schema tests under `tests/db` so the workflow catches broken migrations before they reach production.
 
-The combination of Go's strong tooling, the flexibility of golang-migrate, and Neon's Postgres provides a solid foundation for managing database schema changes throughout your application's lifecycle.
-
-## Additional Resources
+## Additional resources
 
 - [golang-migrate documentation](https://github.com/golang-migrate/migrate)
-- [Neon Documentation](/docs)
-- [PostgreSQL Alter Table documentation](https://www.postgresql.org/docs/current/ddl-alter.html)
-- [PostgreSQL schema design best practices](https://www.postgresql.org/docs/current/ddl-schemas.html)
+- [Neon documentation](/docs)
+- [Postgres documentation: modifying tables](https://www.postgresql.org/docs/current/ddl-alter.html)
+- [Postgres documentation: schemas](https://www.postgresql.org/docs/current/ddl-schemas.html)
 
 <NeedHelp />

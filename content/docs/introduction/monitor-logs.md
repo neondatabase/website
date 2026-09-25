@@ -1,29 +1,31 @@
 ---
 title: Monitor logs
-subtitle: View, search, and download logs across your Neon services
+subtitle: View, search, and download logs for Functions and Object Storage
 summary: >-
-  The Logs tab on the Monitoring page shows logs from every service on a
-  branch (Functions, Object Storage, or both) in one view. Filter by level
-  (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service name, search log
-  bodies, poll for new lines with Go live, and download the current view as
-  a .log file. Logs are retained for 3 days.
+  Logs for Functions and Object Storage live on the Monitoring page, split
+  across the Functions and Storage tabs (one viewer per service, no combined
+  view). Filter by level (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service
+  name, search log bodies, poll for new lines with Go live, and download the
+  current view as a .log file. Logs are retained for 3 days.
 enableTableOfContents: true
 ---
 
-The **Logs** tab on the Monitoring page shows logs from every service on a branch in one place. It's the same view whether you land on it directly or jump to it from a specific function or storage bucket.
+The Monitoring page shows service logs in two tabs, **Functions** and **Storage**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The two tabs share the same controls, described below.
 
 ## View logs
 
 1. In the Neon Console, select a project and branch.
 2. Go to **Monitoring**.
-3. Select the **Logs** tab.
+3. Open the **Functions** or **Storage** tab.
 
-By default, the view shows logs from every service on the branch. Use the entity chips, **All**, **Functions**, and **Storage**, to scope the view to one kind of service, or narrow further with the service name field (see [Scope by service](#scope-by-service)).
+Each tab shows logs from every function or bucket on the branch. Narrow to a single service with the service name field (see [Scope by service](#scope-by-service)).
 
-You can also jump straight to a scoped view without visiting Monitoring first:
+You can also jump straight to a service's tab without visiting Monitoring first:
 
 - From the **Functions** list, open a function's menu and select **View logs**.
 - From the Object Storage **bucket** list, open a bucket's menu and select **View logs**.
+
+Both land you on the matching tab.
 
 Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`).
 

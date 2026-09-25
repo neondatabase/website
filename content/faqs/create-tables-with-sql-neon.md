@@ -3,7 +3,7 @@ title: 'How do I create tables in my Neon database using SQL?'
 subtitle: 'Use standard Postgres CREATE TABLE syntax from the SQL Editor, psql, or any driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T03:15:28.979Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,11 +14,11 @@ nextLink:
   slug: database-providers-pgvector-autoscaling-ai-applications
 ---
 
-Lakebase Postgres runs standard Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver. Pick column types and constraints exactly as you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control.
+Lakebase Postgres is standard Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver, and pick column types and constraints the same way you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control.
 
 ## Create a table
 
-A realistic example using common Postgres types and constraints:
+This example uses common Postgres types and constraints:
 
 ```sql
 CREATE TABLE users (
@@ -43,23 +43,23 @@ CREATE TABLE posts (
 CREATE INDEX posts_user_id_idx ON posts (user_id);
 ```
 
-A few notes on the choices above:
+Why these choices:
 
-- `BIGSERIAL` gives you an auto-incrementing 64-bit primary key. For newer projects, `GENERATED ALWAYS AS IDENTITY` is the modern equivalent.
-- Prefer `TEXT` over `VARCHAR(n)` unless you have a specific length constraint. Both store the same way in Postgres.
+- `BIGSERIAL` gives you an auto-incrementing 64-bit primary key. `BIGINT GENERATED ALWAYS AS IDENTITY` is the SQL-standard alternative and the better default for new schemas.
+- Use `TEXT` instead of `VARCHAR(n)` unless you need a length limit. Postgres stores both the same way.
 - `TIMESTAMPTZ` (timestamp with time zone) is almost always the right time type.
-- `JSONB` lets you store and index JSON. Use it for flexible attributes; use regular columns for anything you query often.
-- `REFERENCES` adds a foreign key. Add a regular index on the column too; Postgres doesn't create one automatically for the referencing side.
+- `JSONB` lets you store and index JSON. Use it for flexible attributes, and use regular columns for anything you query often.
+- `REFERENCES` adds a foreign key. Postgres doesn't index the referencing column for you, so add an index on it yourself, as the example does for `posts.user_id`.
 
-## Three places you can run it
+## Where to run it
 
 <Tabs labels={["SQL Editor", "psql", "Driver"]}>
 
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech) and select your project.
-2. Click **SQL Editor** in the sidebar.
-3. Pick the branch and database from the selectors at the top.
+2. Select **Postgres database** > **SQL Editor**.
+3. Select a branch and database.
 4. Paste the `CREATE TABLE` statement and click **Run**.
 
 The SQL Editor also supports meta-commands like `\dt` (list tables) and `\d users` (describe a table). See [Meta-commands](/docs/get-started/query-with-neon-sql-editor#meta-commands).
@@ -68,7 +68,7 @@ The SQL Editor also supports meta-commands like `\dt` (list tables) and `\d user
 
 <TabItem>
 
-Copy the `psql` command from the **Connection Details** modal (open it from **Connect** on the Project Dashboard), then run your DDL interactively or from a file:
+Click **Connect** in the Console nav to open the **Connect to your branch** modal and copy the connection string. Then run your DDL interactively or from a file:
 
 ```bash
 psql "$NEON_URL" -f schema.sql
@@ -94,7 +94,7 @@ await client.end();
 </Tabs>
 
 <Admonition type="tip" title="Use a migration tool for real schemas">
-Ad-hoc `CREATE TABLE` is fine for prototyping. For anything that needs to evolve, use a migration tool: Drizzle, Prisma Migrate, Alembic, dbmate, Flyway, or sqlx. Migrations keep your schema in version control, apply consistently across environments, and play well with Neon's [branching workflow](/docs/get-started/workflow-primer) (each branch can carry its own migrated schema).
+Ad-hoc `CREATE TABLE` is fine for prototyping. Once a schema needs to change over time, use a migration tool such as Drizzle, Prisma Migrate, Alembic, dbmate, Flyway, or sqlx. Migrations keep your schema in version control and apply the same changes in every environment. They also fit Neon's [branching workflow](/docs/get-started/workflow-primer): you can run a migration on a branch before you run it on production.
 </Admonition>
 
-<CTA title="Connect Neon to your ORM" description="Step-by-step guides for Drizzle, Prisma, SQLAlchemy, Knex, and more." buttonText="ORM guides" buttonUrl="/docs/get-started/orms" />
+<CTA title="Connect Neon to your ORM" description="Step-by-step guides for Drizzle, Prisma, SQLAlchemy, and more." buttonText="ORM guides" buttonUrl="/docs/get-started/orms" />

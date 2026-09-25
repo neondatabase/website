@@ -11,7 +11,7 @@ summary: >-
   independent root branches with plan-specific storage limits; reset-from-parent
   is not supported.
 enableTableOfContents: true
-updatedOn: '2026-09-02T21:17:48.434Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 <FeatureBeta />
@@ -29,7 +29,7 @@ You can create schema-only branches in the Neon Console or using the Neon API, i
 To create a schema-only branch from the Neon Console:
 
 1. Select your project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Click **New branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/guides/create_schema_only_branch.png)
 4. Select a **Parent branch**. The schema from this branch will be copied to your new schema-only branch. By default, your project's default branch is selected, but you can choose any existing branch in your project.

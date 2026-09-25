@@ -2,12 +2,12 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
-title: Building Real-Time Comments with a Serverless Postgres
-subtitle: A guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
+updatedOn: '2026-09-24T17:56:34.189Z'
+title: Building real-time comments with serverless Postgres
+subtitle: Build real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
 
-Can a serverless Postgres database really handle the demands of a real-time application? The answer lies in pairing it with the right publish-subscribe model. In this guide, you will learn how to combine the real-time capabilities of Ably LiveSync with the structured power of Lakebase Postgres to build a optimistic and scalable comment system in your Next.js application.
+A serverless Postgres database can back a real-time application when you pair it with a publish-subscribe service. In this guide, you'll combine Ably LiveSync with Lakebase Postgres on Neon to build a comment system with optimistic updates in a Next.js application.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ To follow this guide, you’ll need the following:
 
 ## Create the Next.js application
 
-Let’s get started by cloning the Next.js project with the following command:
+Clone the Next.js project with the following command:
 
 ```shell shouldWrap
 git clone https://github.com/neondatabase-labs/ably-livesync-neon
@@ -37,9 +37,9 @@ The libraries installed include:
 
 - `ws`: A WebSocket library for Node.js.
 - `ably`: A real-time messaging and data synchronization library.
-- `@neondatabase/serverless`: A serverless Postgres client designed for Neon.
+- `@neondatabase/serverless`: The Neon serverless driver for Postgres.
 - `@prisma/client`: Prisma’s auto-generated client for interacting with your database.
-- `@prisma/adapter-neon`: A Prisma adapter for connecting with Neon serverless Postgres.
+- `@prisma/adapter-neon`: A Prisma adapter that connects through the Neon serverless driver.
 - `@ably-labs/models`: A library for working with data models and real-time updates in Ably.
 
 The development-specific libraries include:
@@ -53,9 +53,9 @@ Once that's done, copy the `.env.example` to `.env` via the following command:
 cp .env.example .env
 ```
 
-## Provision a Serverless Postgres
+## Provision a Postgres database on Neon
 
-To set up a serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+Go to the [Neon Console](https://console.neon.tech/app/projects) and create a new project. Then click **Connect** on your project dashboard to open the **Connect to your branch** modal and copy the connection string for your database. It looks like this:
 
 ```bash shouldWrap
 postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
@@ -63,11 +63,11 @@ postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?ssl
 
 Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your specific details.
 
-Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
+Add this connection string to your `.env` file as `DATABASE_URL`.
 
 ## Set up Ably LiveSync with your database on Neon
 
-Sign in into the [Ably Dashboard](https://ably.com/login), and click on `+ Create new app`.
+Sign in to the [Ably Dashboard](https://ably.com/login) and click `+ Create new app`.
 
 ![](/guides/images/real-time-comments/create.png)
 
@@ -75,7 +75,7 @@ Next, name the application and select `Data Sync` as the type of application you
 
 ![](/guides/images/real-time-comments/name.png)
 
-Next, go to the **Integrations** tab and click on `+ New integration rule`.
+Next, go to the **Integrations** tab and click `+ New integration rule`.
 
 ![](/guides/images/real-time-comments/rule.png)
 
@@ -83,19 +83,19 @@ Next, click the `Choose` button in the **Postgres (Alpha)** card.
 
 ![](/guides/images/real-time-comments/postgres.png)
 
-Next, in the integration rule, enter the `DATABASE_URL` environment variable value obtained and proceed.
+Next, in the integration rule, enter your database connection string and proceed. The Ably integration listens for the `pg_notify` events sent by the outbox trigger (see the schema below), and Neon's connection pooler runs PgBouncer in transaction mode, which doesn't support `LISTEN`/`NOTIFY`. Use the direct connection string here: turn off the **Connection pooling** toggle in the **Connect to your branch** modal. See [Connection pooling](/docs/connect/connection-pooling).
 
 ![](/guides/images/real-time-comments/values.png)
 
-Finally, go to the **API Keys** tab and copy the API Key which has the capabilities as `channel metadata, history, presence, privileged headers, publish, push admin, push subscribe, statistics, subscribe`.
+Finally, go to the **API Keys** tab and copy the API key that has the capabilities `channel metadata, history, presence, privileged headers, publish, push admin, push subscribe, statistics, subscribe`.
 
 ![](/guides/images/real-time-comments/api_keys.png)
 
-Use this API Key as an environment variable designated as `NEXT_PUBLIC_ABLY_API_KEY` in the `.env` file.
+Add this API key to your `.env` file as `NEXT_PUBLIC_ABLY_API_KEY`.
 
-## Set up Database Schema
+## Set up the database schema
 
-In the file named `schema.tsx`, you would see the following code:
+The `schema.tsx` file contains the following code:
 
 ```tsx
 // File: schema.tsx
@@ -122,7 +122,7 @@ async function prepare() {
 prepare();
 ```
 
-The code above defines a function that connects to a Neon serverless Postgres database using a `DATABASE_URL` environment variable and sets up the necessary schema for the real-time application. It creates two tables, `nodes` and `outbox`, to store data and manage message processing, respectively. A trigger function, `outbox_notify`, is implemented to send notifications using `pg_notify` whenever new rows are inserted into the `outbox` table. This ensures the database is ready for real-time updates and WebSocket-based communication.
+The code above defines a function that connects to your Postgres database on Neon using the `DATABASE_URL` environment variable and sets up the necessary schema for the real-time application. It creates two tables, `nodes` and `outbox`, to store data and manage message processing, respectively. A trigger function, `outbox_notify`, sends a notification with `pg_notify` whenever a new row is inserted into the `outbox` table, which is how changes reach Ably.
 
 To run the schema against your database on Neon, execute the following command:
 
@@ -134,7 +134,7 @@ If it runs successfully, you should see `Database schema set up successfully.` i
 
 ## Set up Prisma for your database on Neon
 
-In the directory `lib/prisma`, you would see the following code in `index.ts` file:
+The `index.ts` file in the `lib/prisma` directory contains the following code:
 
 ```tsx
 // File: lib/prisma/index.ts
@@ -162,9 +162,9 @@ if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 export default prisma;
 ```
 
-The code above sets up a Prisma client for your database on Neon. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
+The code above sets up a Prisma client for your database on Neon. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter and reused in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
 
-In the same directory, you would see the following code in the `api.ts` file:
+The `api.ts` file in the same directory contains the following code:
 
 ```tsx
 // File: lib/prisma/api.ts
@@ -314,19 +314,19 @@ export async function withOutboxWrite(
 }
 ```
 
-The code above interacts with the Postgres database using Prisma to manage comments. It implements operations like fetching, adding, editing, and deleting comments, with an emphasis on ensuring these operations are recorded in the `outbox` table for the event-driven system to capturing changes and reflect them in rest of the web clients. Let's understand each function in the code above:
+The code above interacts with the Postgres database using Prisma to manage comments. It implements operations like fetching, adding, editing, and deleting comments, and records each operation in the `outbox` table so the event-driven system can capture the change and send it to the other web clients. Here's what each function does:
 
 - `withOutboxWrite()`: **This higher-order function wraps any operation that modifies the database (such as adding, editing, or deleting a comment) and ensures that the change is also written to the outbox table.** It first performs the operation, retrieves the necessary outbox details, and then writes the entry to the outbox table within the same transaction.
 
 - `getPosts()`: Fetches all posts from the database, along with their associated comments and the authors of those comments. The function returns a list of posts, each containing its comments and authors.
 
-- `getPost(id: number): Promise<[Post, number]>`: Fetches a single post by its ID, along with the associated comments and authors. It also executes a raw SQL query within a transaction to get the next value from a PostgreSQL sequence (`outbox_sequence_id_seq`), returning this value alongside the post. This ensures that the operation has both the requested post and sequence number, which may be used in event-driven systems for ordering.
+- `getPost(id: number): Promise<[Post, number]>`: Fetches a single post by its ID, along with the associated comments and authors. It also executes a raw SQL query within a transaction to get the next value from a Postgres sequence (`outbox_sequence_id_seq`), returning this value alongside the post. The sequence number lets the event-driven system order events relative to the post it returned.
 
-- `getPostTx(tx: TxClient, id: number)`: A helper function used by `getPost()` to retrieve a post within a transaction (`tx`). It ensures the post's comments are fetched in ascending order of their creation timestamp.
+- `getPostTx(tx: TxClient, id: number)`: A helper function used by `getPost()` to retrieve a post within a transaction (`tx`). It fetches the post's comments in ascending order of their creation timestamp.
 
 - `getRandomUser()`: Retrieves a random user from the database. The function first counts the total number of users and then selects one randomly based on the count.
 
-- `TxClient`: This type represents a transaction client, which is essentially a modified version of the PrismaClient excluding certain methods that are restricted during transactions (`ITXClientDenyList`).
+- `TxClient`: This type represents a transaction client: the PrismaClient without certain methods that are restricted during transactions (`ITXClientDenyList`).
 
 - `addComment()`: Adds a new comment to a post within a transaction. The function takes in several parameters, such as the transaction client (`tx`), mutation ID, post ID, author ID, and comment content. It returns an `outbox` entry that can be used in an event-driven system for tracking the mutation. The outbox entry includes details like the mutation ID, channel (based on the post), event name (`addComment`), and the newly created comment.
 
@@ -334,9 +334,9 @@ The code above interacts with the Postgres database using Prisma to manage comme
 
 - `deleteComment()`: Deletes a comment. It takes in the transaction client (`tx`), mutation ID, and the comment ID to be deleted. Like the other mutation functions, it returns an outbox entry, but with the event name `deleteComment`.
 
-## Create a Real-Time Data Model Client with Ably
+## Create a real-time data model client with Ably
 
-In the directory `lib/models`, you would see the following code in `modelsClient.ts` file:
+The `modelsClient.ts` file in the `lib/models` directory contains the following code:
 
 ```tsx
 // File: lib/models/modelsClient.ts
@@ -353,9 +353,9 @@ export const modelsClient = () => {
 };
 ```
 
-In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. It ensures that the client is only instantiated once, using the Ably API key stored in environment variables to create the Realtime connection.
+In the code above, a function `modelsClient` is defined which initializes and returns a singleton instance of the `ModelsClient` from the `@ably-labs/models` library, using an Ably Realtime connection. The client is only instantiated once, using the Ably API key stored in environment variables to create the Realtime connection.
 
-In the same directory, you would see the following code in the `mutations.ts` file:
+The `mutations.ts` file in the same directory contains the following code:
 
 ```tsx
 // File: lib/models/mutations.ts
@@ -439,15 +439,15 @@ export function merge(existingState: PostType, event: OptimisticEvent | Confirme
 }
 ```
 
-In the code above, three asynchronous functions to handle CRUD operations for comments are defined:
+The code above defines three asynchronous functions that handle comment operations:
 
 - **addComment**: Sends a POST request to add a new comment, including the author's details and content, identified by a `mutationId`.
 - **editComment**: Sends a PUT request to update an existing comment's content by its `id`.
 - **deleteComment**: Sends a DELETE request to remove a comment by its `id`.
 
-Each function validates the server response and throws an error for unsuccessful requests. The `merge` function handles state updates by applying optimistic or confirmed events, ensuring that the state reflects comment additions, edits, or deletions accurately.
+Each function validates the server response and throws an error for unsuccessful requests. The `merge` function applies optimistic or confirmed events to the state, so it reflects comment additions, edits, and deletions.
 
-In the same directory, you would see the following code in the `hook.ts` file:
+The `hook.ts` file in the same directory contains the following code:
 
 ```tsx
 // File: lib/models/hook.ts
@@ -521,11 +521,11 @@ In the code above, the following function and hook are defined:
    - Synchronizes the model with the latest data when the `id` changes.
    - Subscribes to real-time updates from the model, updating the component state accordingly.
 
-## API Routes for Comments and Real-Time Synchronization
+## API routes for comments and real-time sync
 
-To perform server-side operations as a result of user interaction on the webpage, a common pattern is to use API routes. In Next.js, API Routes (aka Endpoint Handlers) can be created by creating a file named `route.ts` in any directory in the `app` directory.
+The app runs server-side operations for user actions through API routes. In the Next.js App Router, you create one (a route handler) by adding a `route.ts` file to a directory in `app`.
 
-To allow dynamic updates and the ability to delete comments, you would see the following code in `route.ts` file in the `app/api/comments/[id]` directory:
+The `route.ts` file in the `app/api/comments/[id]` directory handles editing and deleting comments:
 
 ```tsx
 // File: app/api/comments/[id]/route.ts
@@ -565,9 +565,9 @@ export async function DELETE(
 }
 ```
 
-In the code above, there are two endpoints, `PUT` and `DELETE`, both of which parse the `id` param in the request. The `PUT` endpoint extracts the comment properties (`mutationId`, `content`) to edit the comment in Postgres and sync the changes to the rest of the web clients that are actively looking to stream comment changes in real-time.
+In the code above, there are two endpoints, `PUT` and `DELETE`, both of which parse the `id` param in the request. The `PUT` endpoint extracts the comment properties (`mutationId`, `content`) to edit the comment in Postgres and sync the change to the other web clients that are streaming comment changes in real time.
 
-To allow the ability to insert comments, you would see the following code in `route.ts` file in the `app/api/comments` directory:
+The `route.ts` file in the `app/api/comments` directory handles inserting comments:
 
 ```tsx
 // File: app/api/comments/route.ts
@@ -602,9 +602,9 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-In the code above, the endpoint parses the request's body to extract the comment properties (`mutationID`, `postId`, `authorId`, `content`). Further, it inserts into Postgres using the `withOutboxWrite` helper function which makes sure to sync it in Postgres and rest of the web clients that are actively looking to stream comments in real-time.
+In the code above, the endpoint parses the request's body to extract the comment properties (`mutationID`, `postId`, `authorId`, `content`). It then inserts the comment into Postgres using the `withOutboxWrite` helper, which also writes the outbox entry so the other web clients streaming comments receive it in real time.
 
-Similarly, you would see the following code in `route.ts` file in the `app/api/posts/[id]` directory:
+The `route.ts` file in the `app/api/posts/[id]` directory contains the following code:
 
 ```tsx
 // File: app/api/posts/[id]/route.ts
@@ -627,7 +627,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
 }
 ```
 
-In the code above, the endpoint parses the `id` param in the request and returns the `sequenceId` and the comment details associated with that ID in Postgres.
+In the code above, the endpoint parses the `id` param in the request and returns the `sequenceId` and the post with its comments from Postgres.
 
 ## Deploy to Vercel
 
@@ -641,12 +641,12 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 <DetailIconCards>
 
-<a target="_blank" href="https://github.com/neondatabase-labs/ably-livesync-neon" description="A Real-Time Comments Application" icon="github">Real-Time Comments Application</a>
+<a target="_blank" href="https://github.com/neondatabase-labs/ably-livesync-neon" description="A real-time comments application" icon="github">Real-time comments application</a>
 
 </DetailIconCards>
 
 ## Summary
 
-In this guide, you learned how to build a real-time comment system for a Next.js application by integrating Ably LiveSync with a serverless Lakebase Postgres database. The tutorial covered setting up the database schema, configuring Prisma for database access, and implementing Ably for real-time updates. You also explored how to handle optimistic updates, ensure data synchronization, and deploy the application to Vercel.
+You built a real-time comment system in Next.js that writes comments to Postgres on Neon through Prisma, records each change in an outbox table, and uses Ably LiveSync to push changes to every connected client with optimistic updates. You then deployed it to Vercel.
 
 <NeedHelp />
