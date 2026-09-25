@@ -55,6 +55,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/express-prompt.md',
   '/prompts/golang-prompt.md',
   '/prompts/hono-prompt.md',
+  '/prompts/deploy-mcp-server-on-neon-functions-prompt.md',
   '/prompts/image-processing-api-neon-functions-prompt.md',
   '/prompts/java-prompt.md',
   '/prompts/javascript-prompt.md',

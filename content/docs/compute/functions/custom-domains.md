@@ -171,6 +171,8 @@ Configure the record as DNS-only. If your provider proxies the record, Neon
 can't validate the domain. On Cloudflare, set the record to "DNS only" (grey
 cloud), not "Proxied" (orange cloud).
 
+![Cloudflare CNAME record example](/docs/guides/neon-functions-custom-domain-cloudflare.png)
+
 Remove conflicting `A`, `AAAA`, or CNAME records for the same hostname. DNS
 changes can take time to propagate according to the record's TTL.
 
