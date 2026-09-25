@@ -44,6 +44,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md',
   '/prompts/connection-issues-prompt.md',
   '/prompts/consumption-api-prompt.md',
+  '/prompts/deploy-mcp-server-on-neon-functions-prompt.md',
   '/prompts/discord-bot-on-neon-functions-prompt.md',
   '/prompts/django-prompt.md',
   '/prompts/dotnet-ef-prompt.md',
