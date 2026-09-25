@@ -935,7 +935,7 @@ const { data, error } = await client
 <TwoColumnLayout.Block>
 
 Filters rows based on whether a column is null or not null.
-Use `null` to find rows where the column is null, or `'not.null'` to find rows where it's not null.
+Use `.is(column, null)` to find rows where the column is null, or `.not(column, 'is', null)` to find rows where it's not null.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -946,7 +946,7 @@ const { data, error } = await client.from('todos').select('*').is('deleted_at', 
 ```
 
 ```typescript
-const { data, error } = await client.from('todos').select('*').is('completed_at', 'not.null');
+const { data, error } = await client.from('todos').select('*').not('completed_at', 'is', null);
 ```
 
 </CodeTabs>
@@ -991,10 +991,10 @@ const { data, error } = await client
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
 
-<TwoColumnLayout.Item title="Column value is between two values" method=".range(column, start, end)" id="range">
+<TwoColumnLayout.Item title="Column value is between two values" method=".gte(column, start).lte(column, end)" id="range">
 <TwoColumnLayout.Block>
 
-Range is inclusive (includes both start and end values).
+Use `.gte()` and `.lte()` to include both the start and end values.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -1003,7 +1003,8 @@ Range is inclusive (includes both start and end values).
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .range('priority', 5, 10)
+  .gte('priority', 5)
+  .lte('priority', 10)
 ```
 
 </TwoColumnLayout.Block>
