@@ -60,7 +60,12 @@ const SelectField = forwardRef(
         <ListboxOptions
           anchor="bottom start"
           modal={false}
-          className="z-50 no-scrollbars max-h-[143px]! w-(--button-width) overflow-y-auto border border-gray-new-20 bg-black-pure p-0.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-80 [--anchor-gap:4px] [--anchor-padding:12px] focus:outline-none"
+          className={cn(
+            'z-50 max-h-[143px]! w-(--button-width) overflow-y-auto border border-gray-new-20 bg-black-pure p-0.5 text-[15px] leading-snug tracking-extra-tight text-gray-new-80 [--anchor-gap:4px] [--anchor-padding:12px] focus:outline-none',
+            '[scrollbar-color:#494b50_transparent] [scrollbar-width:thin]',
+            'supports-[selector(::-webkit-scrollbar)]:pr-0 supports-[selector(::-webkit-scrollbar)]:[scrollbar-color:auto] supports-[selector(::-webkit-scrollbar)]:[scrollbar-width:auto]',
+            '[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-gray-new-30 [&::-webkit-scrollbar-thumb]:bg-clip-padding'
+          )}
         >
           {options.map((option) => (
             <ListboxOption
@@ -70,7 +75,7 @@ const SelectField = forwardRef(
             >
               <span>{option.label}</span>
               <CheckIcon
-                className="shrink-0 text-white opacity-0 group-data-selected:opacity-100"
+                className="shrink-0 text-white opacity-0 group-data-selected:opacity-100 [&_path]:stroke-[1.2]"
                 aria-hidden
               />
             </ListboxOption>
