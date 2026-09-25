@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-09-25T09:58:44.827Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -389,7 +389,7 @@ To rename a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Rename**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Rename**.
 5. Specify a new name for the branch and click **Save**.
 
 </TabItem>
@@ -436,7 +436,7 @@ To set a branch as the default branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Set as default**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set as default**.
 5. In the **Set as default** confirmation dialog, click **Set as default** to confirm your selection.
 
 </TabItem>
@@ -478,7 +478,7 @@ To set a branch as protected:
 1. In the Neon Console, select a project.
 2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Set as protected**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set as protected**.
 5. In the **Set as protected** confirmation dialog, click **Set as protected** to confirm your selection.
 
 </TabItem>
@@ -522,7 +522,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 1. In the Neon Console, select a project.
 2. Select **Branches** in the sidebar to view the branches for the project.
 3. Select a branch from the table.
-4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Set expiration**.
 5. Set a new expiration date and time, or toggle off "Automatically delete branch after" to remove expiration.
 6. Click **Save**.
 
@@ -636,7 +636,7 @@ To delete a branch:
 1. In the Neon Console, select a project.
 2. Select **Branches** in the sidebar.
 3. Select a branch from the table.
-4. On the branch overview page, click the **More** drop-down menu and select **Delete**.
+4. On the branch overview page, open the three-dot menu (⋮) and select **Delete**.
 5. On the confirmation dialog, click **Delete**.
 
 </TabItem>

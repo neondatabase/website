@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-09-25T09:58:44.827Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -168,6 +168,6 @@ After you've selected the protected branches option, click **Save changes** to a
 
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the three-dot menu (⋮) on the branch page.
 
 <NeedHelp/>
