@@ -6,7 +6,7 @@ summary: >-
   the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
   and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-21T08:50:29.160Z'
+updatedOn: '2026-09-25T10:09:58.688Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -309,7 +309,7 @@ In the platform logs, an object-created invocation looks like any other HTTP cal
 console.log(`object created: ${bucket}/${key}`);
 ```
 
-Your output appears under the `neon.function.app` scope, in the Console's Logs tab and in `neon logs query --source function` (not the `functions` command group). Standard Node instrumentation such as Sentry or OpenTelemetry also works, and the incoming `traceparent` header ties a run into an existing trace.
+Your output appears under the `neon.function.app` scope, in the Console's Functions tab and in `neon logs query --source function` (not the `functions` command group). Standard Node instrumentation such as Sentry or OpenTelemetry also works, and the incoming `traceparent` header ties a run into an existing trace.
 
 ## Common errors
 

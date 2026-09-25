@@ -10,7 +10,7 @@ summary: >-
   to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
   replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-25T09:40:59.046Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -35,7 +35,7 @@ The Free plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica by following these steps:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.

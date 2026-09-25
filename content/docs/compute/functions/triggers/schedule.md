@@ -7,7 +7,7 @@ summary: >-
   a five-field UTC cron reference, how to confirm a run in the logs, and the
   common errors.
 enableTableOfContents: true
-updatedOn: '2026-09-21T08:27:00.804Z'
+updatedOn: '2026-09-25T10:09:58.688Z'
 ---
 
 Schedule a function to run recurring work as your own code: a nightly report, a cleanup job, a periodic sync, or a health check. It runs next to your data and fires even when the compute is scaled to zero.
@@ -356,7 +356,7 @@ In the platform logs, a scheduled invocation looks like any other HTTP call: the
 console.log(`check ${scheduledAt}: ${res.status} in ${latencyMs}ms`);
 ```
 
-Your output appears under the `neon.function.app` scope, in the Console's Logs tab and in:
+Your output appears under the `neon.function.app` scope, in the Console's Functions tab and in:
 
 ```bash
 neon logs query --source function
