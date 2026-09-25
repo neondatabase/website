@@ -71,7 +71,7 @@ The classic thing about realtime is it tends to demo well but fall over in produ
 
 We are solving this. We are taking all our expertise from academic research and all our experience building and evolving Electric over the last five years and we are packing it into a next-generation realtime built natively into Neon. I can't tell you yet exactly how it works but I can say that it's going to work natively with Neon and Lakebase including native support for scale-to-zero and branching.
 
-### Neon's recently announced GA for it's backend platform. How does your work on realtime fit into Neon's strategy to build a complete backend around Postgres?
+### Neon's recently announced GA for its backend platform. How does your work on realtime fit into Neon's strategy to build a complete backend around Postgres?
 
 Modern apps and agents need realtime data and end-to-end reactivity. CTOs, tech leads, coding agents, they all know this. So, when you're choosing a backend stack, you typically want to know at least that you can have realtime as part of it. Even if you're not using it right away.
 
