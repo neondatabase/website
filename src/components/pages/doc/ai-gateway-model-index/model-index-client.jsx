@@ -25,6 +25,7 @@ const MODEL_TYPES = [
   { key: 'all', label: 'All' },
   { key: 'text', label: 'Text' },
   { key: 'image', label: 'Image' },
+  { key: 'embeddings', label: 'Embeddings' },
 ];
 
 const COLUMNS = [
@@ -325,7 +326,8 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
     const query = search.trim().toLowerCase();
     let list = rows.filter((row) => {
       if (mode === 'image') return row.isImageCapable;
-      if (mode === 'text') return row.inputs.includes('text');
+      if (mode === 'embeddings') return row.isEmbedding;
+      if (mode === 'text') return row.inputs.includes('text') && !row.isEmbedding;
       return true;
     });
     if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
@@ -361,8 +363,10 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
     });
   };
 
-  const getModelHref = (modelId) =>
-    `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${mode === 'image' ? '?mode=image' : ''}`;
+  const getModelHref = (modelId) => {
+    const query = mode === 'image' || mode === 'embeddings' ? `?mode=${mode}` : '';
+    return `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${query}`;
+  };
 
   const variantStyles = VARIANT_STYLES[variant];
 

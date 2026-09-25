@@ -62,7 +62,7 @@ describe('/models is additive over /models.json', () => {
 });
 
 describe('GET /models', () => {
-  it.each(['chat', 'image-generation', 'web-search'])(
+  it.each(['chat', 'image-generation', 'web-search', 'embeddings'])(
     'allows cross-origin requests for the %s use case',
     async (useCase) => {
       const res = await GET(request(`?use_case=${useCase}`));
@@ -105,11 +105,11 @@ describe('GET /models', () => {
   });
 
   it('400s an unknown use case', async () => {
-    const res = await GET(request('?use_case=embeddings'));
+    const res = await GET(request('?use_case=audio-transcription'));
     const payload = await body(res);
 
     expect(res.status).toBe(400);
-    expect(payload.supported).toEqual(['chat', 'image-generation', 'web-search']);
+    expect(payload.supported).toEqual(['chat', 'image-generation', 'web-search', 'embeddings']);
   });
 
   describe('example selection follows measured capability, not model family', () => {
@@ -242,6 +242,51 @@ describe('GET /models', () => {
         expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
         expect(mastra.files[0].content).toContain('model: "neon/gpt-5-nano"');
         expect(mastra.files[0].content).toContain('neon.tools.');
+      }
+    });
+  });
+
+  describe('embeddings', () => {
+    it('serves TypeScript/Python/cURL examples for an embedding model, no AI SDK or Mastra', async () => {
+      const res = await GET(request('?model=qwen3-embedding-0-6b&use_case=embeddings'));
+      const { model } = await body(res);
+      const ids = model.examples.map((e) => e.id);
+
+      expect(model.unsupported).toBeUndefined();
+      expect(ids).toEqual(['typescript', 'python', 'curl']);
+      for (const example of model.examples) {
+        expect(example.endpoint).toBe('/v1/embeddings');
+        expect(example.files[0].content).toContain('qwen3-embedding-0-6b');
+        expect(example.files[0].content).toContain('encoding_format');
+      }
+    });
+
+    it('refuses embeddings for a chat model rather than returning examples that would fail', async () => {
+      const res = await GET(request('?model=gpt-5-4-mini&use_case=embeddings'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/not an embedding model/);
+    });
+
+    it('refuses chat completions for an embedding model with a message pointing at the right use case', async () => {
+      const res = await GET(request('?model=gte-large-en'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/embedding model/);
+      expect(model.capabilities.chat).toBe('not-served');
+    });
+
+    // Embeddings bill on input tokens only — there is no completion to charge for, so
+    // neither model has an output rate.
+    it('carries dimensions and an input-only cost, no invented output rate', () => {
+      expect(catalog.neon.models['qwen3-embedding-0-6b'].cost).toEqual({ input: 0.02 });
+      expect(catalog.neon.models['gte-large-en'].cost).toEqual({ input: 0.13 });
+      for (const id of ['qwen3-embedding-0-6b', 'gte-large-en']) {
+        expect(catalog.neon.models[id].type).toBe('embedding');
+        expect(catalog.neon.models[id].dimensions).toBe(1024);
+        expect(catalog.neon.models[id].cost.output).toBeUndefined();
       }
     });
   });

@@ -42,4 +42,52 @@ describe('AI Gateway model rows', () => {
     expect(row.providerName).toBe('xAI');
     expect(row.endpoints).toEqual(['chat/completions', 'openai/responses']);
   });
+
+  // Embeddings is a different shape, not a chat model missing capabilities: its chat-shaped
+  // fields (`chat: 'not-served'`, no native dialect) all read false, so without special-casing
+  // it `deriveEndpoints` would report no route at all instead of the one it actually has.
+  it.each(['qwen3-embedding-0-6b', 'gte-large-en'])(
+    'marks %s as an embedding model on the /v1/embeddings route, not chat',
+    (id) => {
+      const row = rows.find((r) => r.id === id);
+
+      expect(row.isEmbedding).toBe(true);
+      expect(row.dimensions).toBe(1024);
+      expect(row.endpoints).toEqual(['embeddings']);
+      expect(row.isImageCapable).toBe(false);
+      expect(row.inputsLabel).toBe('—');
+    }
+  );
+
+  it('does not mark a chat model as an embedding model', () => {
+    const row = rows.find(({ id }) => id === 'gpt-5-4-mini');
+
+    expect(row.isEmbedding).toBe(false);
+    expect(row.dimensions).toBeUndefined();
+  });
+
+  // The catalog is allowed to list a model before it is probed (see "does not advertise
+  // endpoints..." above). isEmbedding has to survive that same gap: it is a catalog fact
+  // (`model.type`), not something capability data confers.
+  it('still classifies an embedding model with no measured capabilities as embedding', () => {
+    const [row] = buildRows(
+      {
+        models: {
+          'unprobed-embedding': {
+            id: 'unprobed-embedding',
+            name: 'Unprobed Embedding',
+            type: 'embedding',
+            dimensions: 768,
+          },
+        },
+      },
+      { models: [] }
+    );
+
+    expect(row.hasMeasuredCapabilities).toBe(false);
+    expect(row.isEmbedding).toBe(true);
+    expect(row.dimensions).toBe(768);
+    // Whether it actually has a working route is still a capability fact, unverified here.
+    expect(row.endpoints).toEqual([]);
+  });
 });
