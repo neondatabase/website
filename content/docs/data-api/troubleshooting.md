@@ -106,11 +106,12 @@ For step-by-step instructions, see [Testing with Managed Better Auth](/docs/data
 
 ### Why this happens
 
-The `authenticated` role doesn't have GRANT permissions on the table. This commonly occurs when:
+The role the request runs as doesn't have GRANT permissions on the table. This commonly occurs when:
 
 - The table was created before the Data API was enabled
 - The table was created after enabling the Data API, but default privileges weren't applied
 - You disabled the "Grant public schema access" option when enabling the Data API
+- You're using a custom authentication provider and the token has no `role` claim (or a role claim that doesn't name `authenticated`). The request then runs as the `anonymous` role, which has no table grants by default, so it can't read the table even though `authenticated` can.
 
 ### Fix
 
@@ -129,6 +130,8 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authentic
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
 ```
+
+If you use a custom authentication provider, also confirm the token carries a `role` claim that names a granted role. To use the `authenticated` role, issue `"role": "authenticated"`. If your provider puts the role under a different claim, point the Data API's JWT role claim key at that claim in the Data API settings. See [Required JWT claims](/docs/data-api/custom-authentication-providers#required-jwt-claims).
 
 ## I can see all rows in my table
 
