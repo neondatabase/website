@@ -278,9 +278,8 @@ describe('GET /models', () => {
       expect(model.capabilities.chat).toBe('not-served');
     });
 
-    // Cost is input-only, sourced from the AI Gateway pricing spreadsheet (Databricks FMAPI
-    // rate, no markup) — cross-checked against gpt-oss-120b's already-published $0.15/$0.60,
-    // which matches the sheet exactly. Neither model has an output rate to invent.
+    // Embeddings bill on input tokens only — there is no completion to charge for, so
+    // neither model has an output rate.
     it('carries dimensions and an input-only cost, no invented output rate', () => {
       expect(catalog.neon.models['qwen3-embedding-0-6b'].cost).toEqual({ input: 0.02 });
       expect(catalog.neon.models['gte-large-en'].cost).toEqual({ input: 0.13 });
