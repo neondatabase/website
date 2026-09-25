@@ -7,6 +7,7 @@ import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
+import SearchClearButton from 'components/shared/search-clear-button';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 import getLinkProps from 'utils/get-link-props';
@@ -131,15 +132,19 @@ const Cards = ({ items, categories }) => {
     }
   }, []);
 
-  const handleClearFilters = (event) => {
+  const handleClearSearch = () => {
     setSearchQuery('');
-    handleCategoryClick(event, 'all');
-    categoriesRef.current?.scrollTo({ left: 0 });
 
     const searchInput = [mobileSearchRef.current, desktopSearchRef.current].find(
       (input) => input?.offsetWidth
     );
     searchInput?.focus();
+  };
+
+  const handleClearFilters = (event) => {
+    handleClearSearch();
+    handleCategoryClick(event, 'all');
+    categoriesRef.current?.scrollTo({ left: 0 });
   };
 
   return (
@@ -152,7 +157,7 @@ const Cards = ({ items, categories }) => {
           <h2 className="max-w-[736px] text-[48px] leading-dense font-normal tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] sm:max-w-[430px] sm:text-[28px]">
             See how teams are building and scaling their applications on Neon.
           </h2>
-          <div className="hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
+          <div className="relative hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
               <input
@@ -160,11 +165,12 @@ const Cards = ({ items, categories }) => {
                 type="search"
                 placeholder="Search stories..."
                 value={searchQuery}
-                className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base"
+                className="min-w-0 flex-1 bg-transparent pr-7 text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base search-cancel:appearance-none"
                 aria-label="Search case studies"
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+            {searchQuery.length > 0 && <SearchClearButton onClick={handleClearSearch} />}
           </div>
         </div>
 
@@ -173,7 +179,7 @@ const Cards = ({ items, categories }) => {
           {/* Sidebar: search + vertical categories */}
           <aside className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
             {/* Search bar */}
-            <div className="flex flex-wrap items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:hidden">
+            <div className="relative flex flex-wrap items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:hidden">
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
                 <input
@@ -181,11 +187,12 @@ const Cards = ({ items, categories }) => {
                   type="search"
                   placeholder="Search stories..."
                   value={searchQuery}
-                  className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base"
+                  className="min-w-0 flex-1 bg-transparent pr-7 text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-hidden md:text-base search-cancel:appearance-none"
                   aria-label="Search case studies"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
+              {searchQuery.length > 0 && <SearchClearButton onClick={handleClearSearch} />}
             </div>
 
             <nav
