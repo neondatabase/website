@@ -1292,7 +1292,10 @@
         "dimensions": 1024,
         "open_weights": true,
         "release_date": "2025-06-03",
-        "last_updated": "2026-09-25"
+        "last_updated": "2026-09-25",
+        "cost": {
+          "input": 0.02
+        }
       },
       "gte-large-en": {
         "id": "gte-large-en",
@@ -1303,7 +1306,10 @@
         "dimensions": 1024,
         "open_weights": true,
         "release_date": "2023-07-27",
-        "last_updated": "2026-09-25"
+        "last_updated": "2026-09-25",
+        "cost": {
+          "input": 0.13
+        }
       }
     }
   }

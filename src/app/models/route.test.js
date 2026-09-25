@@ -278,13 +278,16 @@ describe('GET /models', () => {
       expect(model.capabilities.chat).toBe('not-served');
     });
 
-    // Pricing is not yet confirmed for either model (see the PR description) — `cost` is
-    // omitted rather than guessed. `dimensions` is the fact this shape actually reports.
-    it('carries dimensions and no invented cost', () => {
+    // Cost is input-only, sourced from the AI Gateway pricing spreadsheet (Databricks FMAPI
+    // rate, no markup) — cross-checked against gpt-oss-120b's already-published $0.15/$0.60,
+    // which matches the sheet exactly. Neither model has an output rate to invent.
+    it('carries dimensions and an input-only cost, no invented output rate', () => {
+      expect(catalog.neon.models['qwen3-embedding-0-6b'].cost).toEqual({ input: 0.02 });
+      expect(catalog.neon.models['gte-large-en'].cost).toEqual({ input: 0.13 });
       for (const id of ['qwen3-embedding-0-6b', 'gte-large-en']) {
         expect(catalog.neon.models[id].type).toBe('embedding');
         expect(catalog.neon.models[id].dimensions).toBe(1024);
-        expect(catalog.neon.models[id].cost).toBeUndefined();
+        expect(catalog.neon.models[id].cost.output).toBeUndefined();
       }
     });
   });
