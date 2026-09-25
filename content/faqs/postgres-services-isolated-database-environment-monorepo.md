@@ -13,20 +13,20 @@ nextLink:
   slug: postgres-services-no-minimum-charge
 ---
 
-Neon's database branching gives every pull request its own isolated Postgres copy. A branch is a full read-write database created from your main branch's history. Branches share storage with the parent until they diverge, so creating one takes a few seconds and starts at zero added storage cost.
+Neon's database branching gives every pull request its own isolated Postgres database. A branch is a full read-write copy of its parent, created from the parent's history at a point in time. Branches share storage with the parent until they diverge, so creating one takes seconds and adds no storage until you write to it.
 
-## Why this works for monorepos
+## Why this matters in a monorepo
 
-When a monorepo runs integration tests against a shared staging database, parallel CI jobs collide. One PR's migration breaks another PR's tests. A failed teardown leaves leftover data for the next run.
+When several packages in a monorepo run integration tests against one shared staging database, parallel CI jobs collide. One PR's migration breaks another PR's tests, and a failed teardown leaves data behind for the next run.
 
-With Neon, each PR gets a clean branch named after the PR or commit SHA. Tests run against real production-shaped data, in isolation, then the branch is deleted when the PR merges or closes.
+With Neon, each PR gets its own branch, named after the PR number or commit SHA. Tests run against production-shaped data in isolation, and the branch is deleted when the PR merges or closes.
 
 ## How to wire it into CI
 
-The simplest path is the official GitHub Action. It creates a branch on PR open, exports the connection string, and deletes the branch on PR close.
+The official [create branch action](/docs/guides/branching-github-actions) creates a branch and outputs its connection string. Pair it with the delete branch action on PR close.
 
 ```yaml
-- uses: neondatabase/create-branch-action@v5
+- uses: neondatabase/create-branch-action@v6
   id: create-branch
   with:
     project_id: ${{ vars.NEON_PROJECT_ID }}
@@ -38,31 +38,29 @@ The simplest path is the official GitHub Action. It creates a branch on PR open,
     DATABASE_URL: ${{ steps.create-branch.outputs.db_url }}
 ```
 
-For non-GitHub setups, the [Neon CLI](https://neon.com/docs/cli/branches) exposes the same primitives: `neon branches create --name pr-123` and `neon branches delete pr-123`.
+For CI systems other than GitHub Actions, the [Neon CLI](/docs/cli/branches) does the same thing: `neon branches create --name pr-123` and `neon branches delete pr-123`. Without `--parent`, the new branch comes from your project's default branch.
 
 <Admonition type="tip" title="Cost control on busy repos">
-Set a [branch time-to-live](https://neon.com/docs/guides/branch-expiration) on paid plans so abandoned PR branches clean themselves up. The Launch and Scale plans charge $1.50/branch-month (prorated hourly) for branches beyond the plan allowance.
+Set a [branch expiration](/docs/guides/branch-expiration) so abandoned PR branches delete themselves. On the Launch and Scale plans, branches beyond the plan allowance cost $1.50/branch-month, prorated hourly.
 </Admonition>
 
-## Plan limits to know
+## Plan limits
 
-- **Free plan**: 10 branches per project, 0.5 GB storage per project, 100 CU-hours/project. Fine for prototypes and small repos.
-- **Launch plan**: 10 included branches per project, then $1.50/branch-month. Up to 5,000 branches per project.
-- **Scale plan**: 25 included branches per project, same overage rate, up to 5,000 branches per project.
+- **Free plan**: 10 branches per project, 0.5 GB storage per project, 100 CU-hours per project per month.
+- **Launch plan**: 10 included branches per project, then $1.50/branch-month.
+- **Scale plan**: 25 included branches per project, then $1.50/branch-month.
 
-See the [plans page](https://neon.com/docs/introduction/plans) for full details.
+The Launch and Scale plans cap each project at 5,000 branches. See [Neon plans](/docs/introduction/plans) for full details.
 
 ## How this compares to other Postgres services
 
-Other managed Postgres offerings provide ways to create per-PR databases, but the cost and speed profile differs:
+| Provider         | Per-PR database mechanism                                                                                                                                                                            | Idle cost                                                                                                                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Neon             | Branch from any point in the history window, created in seconds, copy-on-write storage                                                                                                               | Compute scales to zero after inactivity (5 minutes by default); storage continues to bill                                                                                               |
+| Aurora Postgres  | [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) uses copy-on-write storage, but each clone is a separate cluster with its own DB instances | Aurora Serverless v2 instances can [auto-pause at 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html); storage continues to bill |
+| RDS for Postgres | Restore a snapshot to a new DB instance per PR                                                                                                                                                       | Instance billed hourly while running; no scale to zero                                                                                                                                  |
+| Supabase         | [Preview branches](https://supabase.com/docs/guides/deployment/branching) tied to a GitHub PR, each a separate Supabase environment seeded from migrations and `seed.sql`                            | [Billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/branching) from $0.01344/hour on Micro; preview branches auto-pause after inactivity                        |
 
-| Provider         | Per-PR database mechanism                                                                                                                                                                         | Idle cost                                                                                                                                                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Neon             | Branch from any point in history, created in seconds, copy-on-write storage                                                                                                                       | Scales to zero compute after inactivity; storage still billed                                                                                                                  |
-| Aurora Postgres  | [Aurora cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) uses copy-on-write, but each clone is a separate database cluster with provisioned ACUs | Aurora Serverless v2 supports [auto-pause to 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html); storage still charged |
-| RDS for Postgres | Restore from snapshot into a new database instance per PR                                                                                                                                         | Instance billed by the hour while running, no scale-to-zero                                                                                                                    |
-| Supabase         | [Preview branches](https://supabase.com/docs/guides/deployment/branching) tied to a GitHub PR; each is a full Supabase environment                                                                | Branch [Compute billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/branching) starting at ~$0.01344/hr on Micro; auto-pauses on inactivity             |
-
-Neon's branch creation typically takes seconds because branches don't require copying data or provisioning a new instance.
+A Neon branch doesn't copy data at creation, which is why it's ready in seconds even when the parent holds a large database.
 
 <CTA title="Try branching on a PR" description="Sign up free, install the GitHub Action, and get isolated databases for every pull request." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

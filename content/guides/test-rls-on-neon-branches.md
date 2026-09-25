@@ -1,19 +1,19 @@
 ---
-title: I Would Not Test RLS on Localhost Alone
+title: I would not test RLS on localhost alone
 subtitle: Validate row level security policies on production-like branches with restricted roles and preview auth.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-02T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Row level security (RLS) is a Postgres feature that attaches per-row access rules to a table, so a SELECT, INSERT, UPDATE, or DELETE only accesses the rows the current role is permitted to. You define this with a policy, and as that policy changes over time, it gets hard to prove on every change that it still runs for every caller you have in production. That includes your web app, but also cron jobs, serverless functions, background workers, and internal services, each connecting with its own role and level of access.
+Row level security (RLS) is a Postgres feature that attaches per-row access rules to a table, so a SELECT, INSERT, UPDATE, or DELETE only accesses the rows the current role is permitted to see or change. You define this with a policy, and as that policy changes over time, it gets hard to prove on every change that it still runs for every caller you have in production. That includes your web app, but also cron jobs, serverless functions, background workers, and internal services, each connecting with its own role and level of access.
 
-A local Postgres instance is a fine place to draft a policy and check its syntax, but it runs as one app on one connection with mock data. Production is the opposite where many callers connect at once with different access levels, the connection pool reuses connections across requests, and the auth layer sets the identity on each request.
+A local Postgres instance is a fine place to draft a policy and check its syntax, but it runs as one app on one connection with mock data. Production is the opposite: many callers connect at once with different access levels, the connection pool reuses connections across requests, and the auth layer sets the identity on each request.
 
-In this guide, you will learn how the owner role bypasses RLS, a production-shaped [Neon branch](/docs/introduction/branching) running the same restricted role as production helps you catch RLS issues, and that you can integrate a check into CI so a PR is well tested before its merged.
+In this guide, you'll learn how the owner role bypasses RLS, how a production-shaped [Neon branch](/docs/introduction/branching) running the same restricted role as production helps you catch RLS issues, and how to add a check to CI so a PR is tested before it's merged.
 
-## What localhost can not prove
+## What localhost cannot prove
 
 ![In production, callers like the web app, cron jobs, serverless functions, and internal services each connect with their own role and pass through one RLS policy into Postgres, while localhost is a single connection as the owner that skips the policy](/docs/guides/rls-callers-vs-localhost.svg 'no-border')
 
@@ -63,7 +63,7 @@ So here's a checklist to catch each of those gaps:
 
 ## What localhost actually proves
 
-Say you enable RLS on a `projects` table (in a local Postgres instance) and scope it reads to the caller's org with the following policy:
+Say you enable RLS on a `projects` table (in a local Postgres instance) and scope its reads to the caller's org with the following policy:
 
 ```sql
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
@@ -75,14 +75,14 @@ CREATE POLICY tenant_read ON projects
 
 Now you can test it locally: `SET app.current_org` in a psql session, insert a couple of orgs, and check that each `SELECT` returns only that org's rows.
 
-But that only holds while your local setup looks like production, and keeping it that way is either really hard or time consuming: the same extensions, the same data shape, and seed scripts you have to maintain. Over time those seed scripts fall out of sync and pick up bugs, so a passing local test might just mean **your test data is wrong** (and not that the updated policy works).
+But that only holds while your local setup looks like production, and keeping it that way is hard and time consuming: the same extensions, the same data shape, and seed scripts you have to maintain. Over time those seed scripts fall out of sync and pick up bugs, so a passing local test might just mean **your test data is wrong** (and not that the updated policy works).
 
 What localhost does not prove is everything that happens once a real app is in the loop. It cannot tell you:
 
 - whether your code sets `app.current_org` on **every pool checkout**
 - whether **background jobs** use the same restricted role as web requests
 - whether the preview **`DATABASE_URL`** points at `app_user` or `neondb_owner`
-- whether a user in **two orgs** sees only the active one when session variables changes
+- whether a user in **two orgs** sees only the active one when session variables change
 
 It also under-represents your real data. Synthetic seeds do not have the messy shapes that live in production:
 
@@ -91,13 +91,13 @@ It also under-represents your real data. Synthetic seeds do not have the messy s
 - **legacy rows** with a null `org_id`
 - **contractors** with cross-tenant access
 
-Eventually you realize that a local run only tells you the policy is shaped right, not whether it still holds in production, and it gives you no quick way to check.
+Eventually you realize that a local run only tells you the policy is shaped right, not whether it still holds in production, and gives you no quick way to check.
 
-## The owner bypass, the most expensive RLS mistake
+## The owner bypass
 
 ![The same count query on the same table returns every org's rows when you connect as the owner because the policy is skipped, but only the caller's org when you connect as app_user because the policy is enforced](/docs/guides/rls-owner-bypass.svg 'no-border')
 
-The most common mistake is connecting your app as a superuser or the table owner. Postgres applies RLS to normal roles, but owners and superusers skip it by default. Local `.env` files often use the owner URL from docker-compose, so the problem easily remains unnoticed locally.
+The most common mistake is connecting your app as a superuser or the table owner. Postgres applies RLS to normal roles, but owners and superusers skip it by default. Local `.env` files often use the owner URL from docker-compose, so the problem easily goes unnoticed locally.
 
 To test the difference, create two orgs, a policy on `projects`, and then connect as the owner:
 
@@ -107,7 +107,7 @@ SET app.current_org = '11111111-1111-1111-1111-111111111111';
 SELECT count(*) FROM projects;   -- returns every org's rows, not just org A
 ```
 
-Even though the policy is enabled and the GUC is set, and you would still be able to see everything, because the owner is exempt. Now connect with a restricted role:
+Even though the policy is enabled and the GUC is set, you still see everything, because the owner is exempt. Now connect with a restricted role:
 
 ```sql
 -- connected as app_user
@@ -131,7 +131,7 @@ Then point the application's connection string at that role, everywhere, includi
 DATABASE_URL=postgresql://app_user:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-To validate against the bypass, fail the application build when the app's connection string uses a privileged role. Here's a one-line guard that you may use:
+To validate against the bypass, fail the application build when the app's connection string uses a privileged role. Here's a short guard you can use:
 
 ```ts
 const role = new URL(process.env.DATABASE_URL!).username;
@@ -140,13 +140,13 @@ if (['neondb_owner', 'postgres'].includes(role)) {
 }
 ```
 
-Overall, you would want to keep the owner role for migrations only, and make every runtime path use the restricted role, including web requests, background jobs, schedulers, and internal services. This approach helps you make sure nothing in production ever connects as the owner at all. A superuser or `BYPASSRLS` role skips policies anyway, so the safest habit, both locally and in production, is to keep those roles off the runtime path.
+Keep the owner role for migrations only, and make every runtime path use the restricted role, including web requests, background jobs, schedulers, and internal services. That way, nothing in production connects as the owner. A superuser or `BYPASSRLS` role skips policies anyway, so the safest habit, both locally and in production, is to keep those roles off the runtime path.
 
 ## Test on a production-shaped Neon branch
 
-To test policy changes on real data locally, you would need to copy production, strip the sensitive parts, and reload it, then repeat every time the data changes. It only gets worse to maintain as the database grows, since a dump that is quick at a few gigabytes but is far too slow to run per pull request past 100GB.
+To test policy changes on real data locally, you would need to copy production, strip the sensitive parts, and reload it, then repeat every time the data changes. It only gets worse to maintain as the database grows, since a dump that is quick at a few gigabytes is far too slow to run per pull request past 100GB.
 
-A [Neon branch](/docs/introduction/branching) skips all of it. It is copy-on-write, so it is ready in a second or two whether the parent is 1GB or 1TB, and each PR gets its own anonymized copy of the production database. Each copy has the same schema, data, roles, and extensions from the parent. So your tests run against real data and the same restricted `app_user` you use in production, where it genuinely cannot bypass RLS.
+A [Neon branch](/docs/introduction/branching) skips all of it. It is copy-on-write, so it is ready in a second or two whether the parent is 1GB or 1TB, and each PR gets its own copy of the production database with the same schema, data, roles, and extensions as the parent. If you need to mask PII, use an [anonymized branch](/docs/workflows/data-anonymization) instead. Either way, your tests run against production-shaped data and the same restricted `app_user` you use in production, where it cannot bypass RLS.
 
 Here's the step-by-step workflow for testing an RLS change with a Neon branch:
 
@@ -170,7 +170,7 @@ neon connection-string pr-1234 --role-name app_user --database-name dbname --poo
 
 ## Run your migrations and RLS tests
 
-Point the preview app at that URL and run the checks (in the same way as on CI).
+Point the preview app at that URL and run the checks (the same way you do in CI).
 
 ```bash
 export DATABASE_URL="$(neon connection-string pr-1234 --role-name app_user --database-name dbname --pooled)"
@@ -211,7 +211,7 @@ Wire it into CI with the [Neon GitHub Actions](/docs/guides/branching-github-act
 
 ## Test through the real auth flow on previews
 
-RLS depends on who is calling, and in production that caller may come from your auth stack. Following is a [pg_session_jwt](/docs/extensions/pg_session_jwt) policy that reads the caller from the verified session token lets you scope rules per user (and limit them with short-lived tokens):
+RLS depends on who is calling, and in production that caller may come from your auth stack. The following [pg_session_jwt](/docs/extensions/pg_session_jwt) policy reads the caller from the verified session token, which lets you scope rules per user (and limit them with short-lived tokens):
 
 ```sql
 -- the caller comes from the validated session JWT
@@ -224,7 +224,7 @@ CREATE POLICY user_read ON documents
 
 Here the app connects through the restricted `authenticated` role, and the token decides which user that is. It is the same split from earlier applied to auth: migrations use the owner role, and requests use a role that cannot bypass RLS.
 
-Because the caller and their claims come from the token, you can separate roles inside a single workspace. Take an org of 100 employees where 2 are admins who manage it and 98 are regular members. The same policy keeps every read inside the org, lets a member touch only their own documents, and lets the 2 admins manage all of the org's documents:
+Because the caller and their claims come from the token, you can separate roles inside a single org. Take an org of 100 employees where 2 are admins who manage it and 98 are regular members. The same policy keeps every read inside the org, lets a member touch only their own documents, and lets the 2 admins manage all of the org's documents:
 
 ```sql
 -- one org, two roles: admins manage all docs, members only their own.
@@ -249,9 +249,9 @@ CREATE POLICY doc_access ON documents
   );
 ```
 
-Since `role` and `org_id` come from the verified token and the rule is defined in the policy, every route, worker, and service hits the same check. This approach also helps you de-duplicate the permission logic within each service or layer that accesses the database.
+Since `role` and `org_id` come from the verified token and the rule is defined in the policy, every route, worker, and service hits the same check. It also removes duplicated permission logic from each service or layer that accesses the database.
 
-Testing policy changes like these before deploying to production, which affect user-level access, needs real users and sessions in the preview database. While locally you may be able to seed data with few entries, replicating production like cases will be hard and time consuming for the reasons we learned earlier in this guide.
+Testing policy changes that affect user-level access needs real users and sessions in the preview database. Locally you can seed a few entries, but replicating production-like cases is hard and time consuming for the reasons covered earlier in this guide.
 
 [Managed Better Auth](/docs/auth/overview) keeps users and sessions in Postgres, so [branching with auth](/docs/auth/branching-authentication) copies them onto each preview branch. You sign in on the preview URL, hit real API routes, and let the stack set the session the same way production does.
 
@@ -278,13 +278,13 @@ await db.transaction(async (tx) => {
 
 ## Two test layers before merge
 
-To stop RLS from breaking a live application once you go from local testing to production, two of these checks should run on their own for every pull request:
+To stop RLS from breaking a live application when you go from local testing to production, run these two checks on every pull request:
 
 <Steps>
 
 ## Fast policy unit tests in CI
 
-Fast unit tests would help you catch the obvious failures, like syntax errors and basic allow or deny cases. You'd want to keep them as plain SQL checks against a throwaway database so they run on every commit:
+Fast unit tests catch the obvious failures, like syntax errors and basic allow or deny cases. Keep them as plain SQL checks against a throwaway database so they run on every commit:
 
 ```sql
 -- fails CI if any public table is missing RLS
@@ -299,7 +299,7 @@ If it returns a row or two, it's a table to fix, or to add to an explicit allowl
 
 ## Integration tests on the branch
 
-Integration tests help you catch the enforcement gaps with policy changes. Use them to connect with the preview branch (`DATABASE_URL` with `app_user`), log in through the real auth flow, and hit the API routes that read and write tenant data:
+Integration tests catch enforcement gaps in policy changes. Use them to connect to the preview branch (`DATABASE_URL` with `app_user`), log in through the real auth flow, and hit the API routes that read and write tenant data:
 
 ```ts
 // runs against the preview app, signed in as a member of org A
@@ -312,12 +312,12 @@ test('a tenant cannot read another org', async () => {
 });
 ```
 
-Then add the negative cases in the same file to cover tests like a user who should be denied or a worker with no tenant set.
+Then add the negative cases in the same file, such as a user who should be denied or a worker with no tenant set.
 
 </Steps>
 
-The fast unit tests catch cheap mistakes on every commit, and the branch tests prove the policy holds with a real login and real data. Together they show that your RLS actually runs before you merge a pull request.
+The fast unit tests catch cheap mistakes on every commit, and the branch tests prove the policy holds with a real login and real data. Together they show that your RLS runs before you merge a pull request.
 
 ## Conclusion
 
-The issue with testing RLS locally is that of a one app on one connection, while production is many services that connect with different levels of access. The owner role skips policies, the connection pool can hand one tenant's context to the next request, the login flow decides who the user is, and real data has messy rows. A Neon branch gives you all of that at once. So before you merge an RLS change, run it on a branch with the same restricted role and login flow you use in production, and check that both test layers pass. For the policy patterns themselves, see [Adopt Postgres RLS for Multi-Tenant Apps](/guides/rls-multi-tenant-apps).
+Testing RLS locally means one app on one connection, while production is many services that connect with different levels of access. The owner role skips policies, the connection pool can hand one tenant's context to the next request, the login flow decides who the user is, and real data has messy rows. A Neon branch gives you all of that at once. So before you merge an RLS change, run it on a branch with the same restricted role and login flow you use in production, and check that both test layers pass. For the policy patterns themselves, see [Adopt Postgres RLS for multi-tenant apps](/guides/rls-multi-tenant-apps).

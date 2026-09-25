@@ -56,7 +56,7 @@ export default function App() {
 The [React quick start](/docs/auth/quick-start/react) covers the API-method version if you want your own UI, and [TanStack Router](/docs/auth/quick-start/tanstack-router) has one with components.
 
 <Admonition type="note" title="Client versions">
-The single-URL `createClient(url)` form depends on a `@neondatabase/neon-js` release that may not be on npm yet; if `npm install` gives you `0.6.2-beta` or earlier, use the two-URL object form in the [JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
+The single-URL `createClient(url)` form requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the object form in the [JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 ## When you need server logic anyway
@@ -69,9 +69,9 @@ The Free plan includes Auth up to 60,000 monthly active users, 100 CU-hours of c
 
 ## How other options compare
 
-- **Supabase**: the same architecture, with `supabase-js`, PostgREST, Auth, and RLS all GA ([features](https://supabase.com/docs/guides/getting-started/features)). Both platforms make RLS the security boundary for a browser that queries tables directly, and both require it on exposed tables. The differences sit around it. The Free plan allows 2 active projects that pause after a week of inactivity, and includes no backups ([pricing](https://supabase.com/pricing), [backups](https://supabase.com/docs/guides/platform/backups)). The built-in email sender allows 2 auth emails per hour project-wide until you connect custom SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, against 60,000 on Neon Free and 1M on paid plans ([pricing](https://supabase.com/pricing), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). Paid projects are dedicated instances billed hourly ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
-- **Firebase**: Firestore's client SDK talks to the database directly with security rules, as a NoSQL document store ([Firestore](https://firebase.google.com/docs/firestore)). Choose it for offline sync; choose Postgres for relational queries.
+- **Supabase**: the same architecture, with `supabase-js`, PostgREST, Auth, and RLS all GA ([features](https://supabase.com/docs/guides/getting-started/features)). Both make RLS the security boundary for a browser that queries tables directly. Supabase's Free plan allows 2 active projects that pause after a week of inactivity, and includes no backups ([pricing](https://supabase.com/pricing), [backups](https://supabase.com/docs/guides/platform/backups)). The built-in email sender allows 2 auth emails per hour project-wide until you connect custom SMTP ([rate limits](https://supabase.com/docs/guides/auth/rate-limits)). Auth includes 50,000 MAU on Free and 100,000 on Pro, then $0.00325 per MAU, against 60,000 on Neon Free and 1M on paid plans ([pricing](https://supabase.com/pricing), [Neon vs Supabase](/guides/neon-vs-supabase#auth)). Paid projects are dedicated instances billed hourly ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **Firebase**: Firestore's client SDK talks to the database directly with security rules, as a NoSQL document store ([Firestore](https://firebase.google.com/docs/firestore)). It fits apps that need offline sync; Postgres fits apps that need relational queries.
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Query Postgres from the browser" description="Enable Auth and the Data API, add an RLS policy, and call it from your React app." buttonText="Data API quickstart" buttonUrl="/docs/data-api/get-started" />

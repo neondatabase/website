@@ -1,28 +1,28 @@
 ---
-title: Building a Multi-Step Form with Laravel Volt, Folio, and Lakebase Postgres
+title: Building a multi-step form with Laravel Volt, Folio, and Lakebase Postgres
 subtitle: Learn how to create a multi-step form with Laravel Volt, Folio, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-10-19T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, we'll walk through the process of building a multi-step form using Laravel [Volt](https://livewire.laravel.com/docs/volt), [Folio](https://laravel.com/docs/11.x/folio), and Lakebase Postgres.
+In this guide, we'll build a multi-step form using Laravel [Volt](https://livewire.laravel.com/docs/volt), [Folio](https://laravel.com/docs/11.x/folio), and a Postgres database on Neon.
 
-Laravel Volt provides reactivity for dynamic form interactions, Folio offers file-based routing for a clean project structure, and Lakebase Postgres serves as our scalable database solution.
+Laravel Volt provides reactivity for dynamic form interactions, Folio provides file-based routing, and Postgres stores the form data.
 
 Our example app will be a job application form with multiple steps, including personal information, education, and work experience.
 
 ## Prerequisites
 
-Before we begin, make sure you have:
+Before you begin, you'll need:
 
 - PHP 8.1 or higher installed
 - Composer for managing PHP dependencies
-- A [Neon](https://console.neon.tech/signup) account for Postgres hosting
+- A [Neon](https://console.neon.tech/signup) account
 - Basic familiarity with Laravel and Postgres
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new Laravel project and setting up the necessary components.
 
@@ -39,7 +39,7 @@ Let's start by creating a new Laravel project and setting up the necessary compo
    composer require laravel/folio
    ```
 
-3. Install the Volt Livewire adapter for Laravel, this will also install the Livewire package:
+3. Install the Volt Livewire adapter for Laravel. This also installs the Livewire package:
 
    ```bash
    composer require livewire/volt
@@ -51,9 +51,9 @@ Let's start by creating a new Laravel project and setting up the necessary compo
    php artisan volt:install
    ```
 
-## Configuring the Database Connection
+## Configuring the database connection
 
-Update your `.env` file with your Lakebase Postgres credentials:
+Update your `.env` file with your Neon database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -64,11 +64,11 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-Replace `your-neon-hostname.neon.tech`, `your_database_name`, `your_username`, and `your_password` with your Lakebase Postgres connection details.
+Replace `your-neon-hostname.neon.tech`, `your_database_name`, `your_username`, and `your_password` with your Neon connection details. You can find them by clicking **Connect** on your project dashboard in the Neon Console.
 
-## Database Design
+## Database design
 
-Let's create the database migrations for our job application form. We'll use separate tables for each section and use Postgres JSON columns for flexible data storage for additional information.
+Let's create the database migrations for our job application form. We'll use separate tables for each section and use Postgres JSONB columns to store additional information.
 
 First, let's create the migration for the applicants table using the following `artisan` command:
 
@@ -76,7 +76,7 @@ First, let's create the migration for the applicants table using the following `
 php artisan make:migration create_applicants_table
 ```
 
-Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating. That way, Laravel can automatically determine the table name from the migration name, and also it will be easier to identify the purpose of the migration file by its name for other developers.
+Note that the `create_applicants_table` migration name follows the Laravel convention of `create_{table_name}_table`, where `{table_name}` is the name of the table you're creating. That way, Laravel can determine the table name from the migration name, and other developers can tell what the migration does from its filename.
 
 This command generates a new migration file in the `database/migrations` directory. Open the newly created file and update its content as follows:
 
@@ -108,7 +108,7 @@ return new class extends Migration
 };
 ```
 
-This migration creates the `applicants` table with fields for `first_name`, `last_name`, and `email`. The `email` field is set as unique to prevent duplicate applications. We've also included a `jsonb` column called `additional_info` for storing any extra data that doesn't fit into the predefined columns. This flexibility is one of the advantages of using Postgres with Laravel.
+This migration creates the `applicants` table with fields for `first_name`, `last_name`, and `email`. The `email` field is set as unique to prevent duplicate applications. We've also included a `jsonb` column called `additional_info` for storing any extra data that doesn't fit into the predefined columns.
 
 Next, let's create the migration for the educations table:
 
@@ -199,15 +199,15 @@ php artisan migrate
 
 This command will execute all the migrations we've just created, setting up the database schema for our job application form.
 
-One thing to note is that we've used the `jsonb` column type for storing additional information in each table. This allows us to store flexible data structures without needing to define a fixed schema. Postgres' JSONB data type is ideal for this use case.
+Each table uses a `jsonb` column for additional information, so you can store flexible data structures without defining a fixed schema.
 
-For your Laravel migrations, you should not use the Lakebase Postgres Pooler. The Pooler is designed to manage connections for long-running processes, such as web servers, and is not necessary for short-lived processes like migrations.
+For your Laravel migrations, use a direct (non-pooled) connection string. Neon's pooler runs PgBouncer in transaction mode, which migration tools may not support. See [Connection pooling](/docs/connect/connection-pooling).
 
-## Creating Models
+## Creating models
 
 Next, let's create models for our `Applicant`, `Education`, and `WorkExperience` tables. Models in Laravel are used to interact with database tables and represent the data in your application in an object-oriented way.
 
-Laravel provides an easy way to generate models using the `artisan` command. To create the `Applicant` model run:
+You can generate models with the `artisan` command. To create the `Applicant` model run:
 
 ```bash
 php artisan make:model Applicant
@@ -337,14 +337,14 @@ class WorkExperience extends Model
 }
 ```
 
-Let's quickly note the most important parts in these model definitions:
+The main parts of these model definitions:
 
 - We've used the `$fillable` property to specify which attributes can be mass-assigned. This is a security feature to prevent unintended mass assignment vulnerabilities.
 - We've defined relationships between models. An `Applicant` has many `Education` and `WorkExperience` records, while `Education` and `WorkExperience` belong to an `Applicant`.
 - We've used the `$casts` property to automatically cast certain attributes to specific types. For example, we're casting the `additional_info` field to an array, which works well with Postgres' JSONB column type.
 - The `start_date` and `end_date` fields are cast to date objects, which allows for easy date manipulation in PHP.
 
-These models will allow us to easily interact with our database tables using Laravel's Eloquent ORM. They provide a convenient way to retrieve, create, update, and delete records, as well as define relationships between different tables.
+These models let you retrieve, create, update, and delete records through Laravel's Eloquent ORM, and define relationships between tables.
 
 ## Creating a layout for the multi-step form
 
@@ -386,13 +386,11 @@ npm install
 npm run build
 ```
 
-## Implementing File-based Routing with Folio
+## Implementing file-based routing with Folio
 
-Laravel Folio was introduced in 2023, and it offers a new approach to routing in Laravel applications.
+Laravel Folio, introduced in 2023, lets you create routes by adding Blade templates to a specific directory.
 
-It simplifies routing by allowing you to create routes simply by adding Blade templates to a specific directory. This file-based routing system makes your project structure cleaner and more intuitive.
-
-It is not a replacement for Laravel's built-in routing system but rather a complementary feature that simplifies routing for certain types of applications.
+It complements Laravel's built-in routing system rather than replacing it.
 
 First, let's set up the directory structure for our multi-step form. Create the following directory structure in your `resources/views/pages` folder:
 
@@ -421,7 +419,7 @@ To create a Folio page, you can use the `php artisan folio:page` command. For ex
 php artisan folio:page apply/personal-info
 ```
 
-The above will create a blade file for the in `resources/views/pages/apply/personal-info.blade.php`:
+This creates a Blade file at `resources/views/pages/apply/personal-info.blade.php`:
 
 ```blade
 <div>
@@ -446,15 +444,15 @@ php artisan folio:page apply/review
 
 We will update these files with the form components later in the guide.
 
-The main thing to remember here is that with Folio, you don't need to manually define routes in a separate routes file. The mere presence of a Blade file in the `pages` directory automatically creates a corresponding route.
+With Folio, you don't define routes in a separate routes file. A Blade file in the `pages` directory creates the corresponding route.
 
-## Building the Multi-Step Form with Volt
+## Building the multi-step form with Volt
 
-Volt is an addition to Laravel Livewire that lets you build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt lets you define your component's state and validation rules directly in the view file, eliminating the need for a separate component class.
+Volt is an addition to Laravel Livewire that lets you build reactive components without writing JavaScript. Unlike traditional Livewire components, Volt lets you define your component's state and validation rules directly in the view file, without a separate component class.
 
 Let's create Volt components for each step of our multi-step form.
 
-### Personal Information Form
+### Personal information form
 
 First, create the personal information form component:
 
@@ -531,7 +529,7 @@ $saveAndContinue = function () {
 </div>
 ```
 
-Quick explanation of the code above:
+How the code works:
 
 - We define the component's state using the `state` function, which initializes the form fields.
 - The `rules` function sets up validation rules for each field.
@@ -541,7 +539,7 @@ Quick explanation of the code above:
 
 In the same way, you can create components for the education, work experience, and review steps.
 
-### Education Form
+### Education form
 
 Next, create the education form component:
 
@@ -627,7 +625,7 @@ $saveAndContinue = function () {
 </div>
 ```
 
-### Work Experience Form
+### Work experience form
 
 Next, let's create the work experience form component:
 
@@ -723,7 +721,7 @@ $saveAndContinue = function () {
 </div>
 ```
 
-### Review Form
+### Review form
 
 Finally, create the review form component:
 
@@ -794,9 +792,9 @@ $submit = function () {
 </div>
 ```
 
-These Volt components handle the state management, validation, and submission logic for each step of the multi-step form. That way Volt simplifies the process of creating interactive components by allowing you to define both the logic and the template in a single file.
+These Volt components handle the state management, validation, and submission logic for each step of the form, with the logic and the template in a single file.
 
-To use these components in your Folio pages and make the routes named, you can include them like this. Named routes allow you to easily reference routes by name throughout your application. We also need to extend a layout for each page to ensure a consistent structure.
+Next, include these components in your Folio pages and give each route a name, so you can reference routes by name throughout your application. Each page also extends the layout for a consistent structure.
 
 First, in each file, you will define a named route using the `name` function and extend the layout.
 
@@ -882,7 +880,7 @@ We need to do the same for the other pages:
   @endsection
   ```
 
-### Confirmation Page
+### Confirmation page
 
 Finally, create a confirmation page for the application submission:
 
@@ -918,9 +916,9 @@ name('apply.confirmation');
 
 This page displays a success message after the application is submitted and provides a link to return to the homepage.
 
-## Testing the Multi-Step Form
+## Testing the multi-step form
 
-To manually verify that everything works as expected, follow these steps:
+To verify that everything works, follow these steps:
 
 1. If you haven't already, start the Laravel development server:
 
@@ -945,13 +943,13 @@ To manually verify that everything works as expected, follow these steps:
    - Check the `applicants`, `educations`, and `work_experiences` tables. You should see your submitted data.
    - Verify that the `applicant_id` in the `educations` and `work_experiences` tables matches the `id` in the `applicants` table for your submission.
 
-1. Try refreshing the page or closing and reopening your browser, then navigate back to `http://localhost:8000/apply/review`. You should still see your submitted data, demonstrating that the data persists across sessions.
+1. Try refreshing the page or closing and reopening your browser, then navigate back to `http://localhost:8000/apply/review`. You should still see your submitted data, which shows the data persists across sessions.
 
 ## Testing
 
 Besides manual testing, you can also write automated tests to make sure your multi-step form works correctly. Laravel provides a testing suite that allows you to write unit, feature, and browser tests.
 
-Create feature tests for your multi-step form to ensure each step works correctly. Here's an example for the personal info step:
+Create feature tests for each step of your form. Here's an example for the personal info step:
 
 ```php
 <?php
@@ -996,11 +994,11 @@ This test checks if:
 
 You can create similar tests for the education and work experience steps.
 
-To learn more about testing in Laravel, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch) guide.
+To learn more about testing in Laravel, see [Testing Laravel applications with Neon's database branching](/guides/laravel-test-on-branch).
 
 ## Conclusion
 
-In this guide, we've built a multi-step form using Laravel Volt, Folio, and Lakebase Postgres. We've covered form validation, data storage, and routing, demonstrating how these tools can be used together to create a dynamic and interactive form.
+You built a multi-step job application form with Laravel Volt for state and validation, Folio for routing, and a Postgres database on Neon for storage.
 
 To further improve this project, consider adding features like:
 
@@ -1008,12 +1006,12 @@ To further improve this project, consider adding features like:
 - Email notifications to applicants
 - An admin interface to review applications
 
-One thing to keep in mind is always to validate and sanitize user inputs, optimize your database queries, and thoroughly test your application before deploying to production.
+Before deploying to production, validate and sanitize user inputs and test your application.
 
-## Additional Resources
+## Additional resources
 
-- [Laravel Documentation](https://laravel.com/docs)
-- [Neon Documentation](/docs)
-- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions)
+- [Laravel documentation](https://laravel.com/docs)
+- [Neon documentation](/docs)
+- [Neon branching GitHub Actions guide](/docs/guides/branching-github-actions)
 
 <NeedHelp />

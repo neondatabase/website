@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services let you start free and scale to production without migrating to a different provider?"
-description: "Neon's Free, Launch, and Scale plans share the same Lakebase Postgres architecture and connection strings. Upgrading raises limits and unlocks features without a data migration."
+description: "Neon's Free, Launch, and Scale plans run on the same lakebase architecture with the same connection strings. Upgrading raises limits and unlocks features without a data migration."
 date: 2026-04-24
 slug: postgres-services-free-to-production
 category: FAQ
@@ -13,49 +13,47 @@ nextLink:
   slug: postgres-services-github-actions-fresh-database-pull-requests
 ---
 
-Neon's three plans share the same Lakebase Postgres architecture. Upgrading from the Free plan to the Launch plan to the Scale plan is a billing change, not a data migration. The connection string stays the same. The compute, storage layer, and Postgres version stay the same. What changes are the resource limits, the level of support, and access to compliance features.
+Neon's three plans run on the same lakebase architecture. Moving from the Free plan to the Launch plan or the Scale plan is a billing change, not a data migration. Your connection string, compute, storage, and Postgres version stay the same. The plan changes resource limits, support level, and access to compliance features.
 
 ## What you get on each plan
 
-|                  | **Free**                      | **Launch**         | **Scale**                      |
-| ---------------- | ----------------------------- | ------------------ | ------------------------------ |
-| Monthly fee      | $0                            | Pay per use        | Pay per use                    |
-| Compute price    | 100 CU-hours/project included | $0.106/CU-hour     | $0.222/CU-hour                 |
-| Storage          | 0.5 GB/project                | $0.35/GB-month     | $0.35/GB-month                 |
-| Autoscaling max  | 2 CU (≈8 GB RAM)              | 16 CU (≈64 GB RAM) | 16 CU autoscaling, 56 CU fixed |
-| Scale to zero    | 5 min, fixed                  | 5 min, can disable | 1 min to always-on             |
-| Branches/project | 10                            | 10                 | 25                             |
-| History window   | 6 hours (1 GB cap)            | Up to 7 days       | Up to 30 days                  |
-| Compliance       | None                          | Protected branches | SOC 2, ISO, HIPAA, GDPR        |
+|                  | **Free**                      | **Launch**         | **Scale**                                    |
+| ---------------- | ----------------------------- | ------------------ | -------------------------------------------- |
+| Monthly fee      | $0                            | Pay per use        | Pay per use                                  |
+| Compute price    | 100 CU-hours/project included | $0.106/CU-hour     | $0.222/CU-hour                               |
+| Storage          | 0.5 GB/project                | $0.35/GB-month     | $0.35/GB-month                               |
+| Autoscaling max  | 2 CU (≈8 GB RAM)              | 16 CU (≈64 GB RAM) | 16 CU autoscaling, 56 CU fixed (≈224 GB RAM) |
+| Scale to zero    | 5 min, fixed                  | 5 min, can disable | 1 min to always on                           |
+| Branches/project | 10                            | 10                 | 25                                           |
+| History window   | 6 hours (up to 1 GB-month)    | Up to 7 days       | Up to 30 days                                |
+| Compliance       | None                          | Protected branches | SOC 2, ISO, GDPR, HIPAA                      |
 
-See the [full plan comparison](https://neon.com/docs/introduction/plans) for support tiers, snapshots, and network transfer details.
+See the [full plan comparison](/docs/introduction/plans) for support tiers, snapshots, and network transfer.
 
 ## What "no migration" looks like
 
-When you upgrade in the Console, the change applies to the organization. Your existing project keeps its endpoint hostname, its branches, its data, and its roles. Application code doesn't change. You get higher limits and new features (longer history window, configurable scale-to-zero, protected branches) immediately.
+You upgrade in the Console, and the change applies to the whole organization. Existing projects keep their endpoint hostnames, branches, data, and roles, so application code doesn't change. The higher limits and paid features (longer history window, configurable scale to zero, protected branches) apply right away.
 
-The exception: if you want compliance features only available on the Scale plan (HIPAA, IP Allow, Private Networking, SLAs), you upgrade to Scale and configure them in your project settings. The project itself doesn't move.
+Some features are only on the Scale plan: HIPAA, IP Allow, Private Networking, and the uptime SLA. To use them, you upgrade to Scale and turn them on for the project. The project itself doesn't move.
 
 ## When to upgrade
 
-The most common signals:
+Common signals:
 
-- You're hitting the **100 CU-hours/project** Free plan compute allowance.
-- Your data is approaching **0.5 GB** on a single project.
-- You need to **disable scale-to-zero** for a production database.
-- You need more than the Free plan's **6-hour history window** (capped at 1 GB of changes) for instant restore.
-- You want **protected branches** to prevent accidental drops on production.
+- You're hitting the 100 CU-hours per project Free plan compute allowance.
+- A project's data is approaching 0.5 GB.
+- You need to turn off scale to zero for a production database.
+- You need more than the Free plan's 6-hour history window (up to 1 GB-month) for instant restore.
+- You want protected branches to guard production against accidental deletes and resets.
 
 <Admonition type="tip" title="Estimate before you upgrade">
-Run the [usage calculator](https://neon.com/docs/introduction/usage-calculations) against your current workload to see what your Launch or Scale plan bill would look like. On the Launch and Scale plans you can also set up [spending notifications](https://neon.com/docs/introduction/spending-notifications) to catch surprises.
+See [how usage is calculated](/docs/introduction/usage-calculations) to work out what your workload would cost on the Launch or Scale plan. After you upgrade, set up [spending notifications](/docs/introduction/spending-notifications) to get an email as your bill approaches a threshold.
 </Admonition>
 
 ## How this compares to other Postgres providers
 
-- **Supabase** has Free, Pro, Team, and Enterprise plans on the same platform. Upgrading is a plan change at the organization level, no migration. The notable Free-plan limitation: projects [pause after about a week of inactivity](https://supabase.com/docs/guides/troubleshooting/http-status-codes#540-project-paused), and you're capped at [two active free projects](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have).
-- **AWS RDS and Aurora** don't really have a "free plan." New accounts get sign-up credits on the [AWS Free Tier](https://aws.amazon.com/free/), and Aurora Postgres has a small standing allowance (4 ACUs and 1 GB per cluster, two clusters per account). RDS for Postgres has neither, so once the credits are gone you're paying per instance-hour. There's no shared-architecture story; you pick an instance type and stay there.
-- **Aurora Serverless v2** doesn't have a free plan. You pay per ACU-hour from the first query (down to zero ACU with [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), but there's still no included monthly allowance).
-
-Neon keeps the same Lakebase Postgres architecture across the Free, Launch, and Scale plans, with a Free plan sized for a real low-traffic app and a path to usage-based pricing without changing the connection string. Supabase has a similar plan-to-plan upgrade shape; AWS expects you to think in instance sizes from day one.
+- **Supabase** has Free, Pro, Team, and Enterprise plans, set per organization. Upgrading is a plan change, not a migration. On the Free plan, projects [pause after a week of low activity](https://supabase.com/docs/guides/platform/free-project-pausing), and you get [two active free projects](https://supabase.com/docs/guides/platform/billing-faq). Paid plans don't pause projects.
+- **AWS RDS and Aurora**: new AWS accounts get up to $200 in [Free Tier](https://aws.amazon.com/free/) credits over 6 months. The free plan covers [RDS for Postgres on db.t3.micro and db.t4g.micro instances](https://aws.amazon.com/rds/free/). Aurora Postgres is included only through express configuration, with [up to 4 ACUs and 1 GB of storage per cluster and at most 2 clusters per account](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html). After that, RDS bills by instance-hour for the instance class you choose.
+- **Aurora Serverless v2** outside the free plan bills per ACU-hour with no included monthly allowance. With [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) and a 0 ACU minimum, instance charges stop while paused. Storage still bills.
 
 <CTA title="Start on the Free plan" description="Build on the same Postgres you'll run in production. Upgrade when you need higher limits." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

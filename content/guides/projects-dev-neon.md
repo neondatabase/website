@@ -1,63 +1,57 @@
 ---
-title: 'AI-Native App Development with Stripe Projects and Neon'
+title: 'AI-native app development with Stripe Projects and Neon'
 subtitle: 'How AI agents can provision infrastructure and build real applications without manual setup'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-AI has made writing code insanely easy, but all the tiny setup tasks around it still kill your momentum.
+AI has made writing code easy, but the setup tasks around it still kill your momentum.
 
 You've likely been there: you open your laptop on a Friday night, thinking you’ll prototype a fun idea in an hour. You fire up your editor, and your AI agent is ready to write the code. But before you can actually build anything, you hit the setup wall.
 
-First, you need a database. So you open a new tab, sign up for a provider, verify your email, click through an onboarding flow, provision a database, and copy the connection string. Then you realize you need an LLM, so you go to [OpenRouter](https://openrouter.ai) to create an account and generate an API key. Your app needs to scrape websites? Time to go to [Firecrawl](https://firecrawl.dev), sign up, and copy _another_ API key. And if you hit a rate limit and need paid access, you're pulling out your credit card and entering your details separately on every single site.
+First, you need a database. So you open a new tab, sign up for a provider, verify your email, click through an onboarding flow, provision a database, and copy the connection string. Then you realize you need an LLM, so you go to [OpenRouter](https://openrouter.ai) to create an account and generate an API key. Your app needs to scrape websites? Time to go to [Firecrawl](https://firecrawl.dev), sign up, and copy _another_ API key. And if you hit a rate limit and need paid access, you're entering your credit card details separately on every site.
 
-None of these tasks are difficult on their own. But together, they pile up into a wall of friction. After 45 minutes of juggling dashboards, pasting API keys into `.env` files, and wrangling accounts, you start to wonder if this side project which might not even survive tomorrow is worth the grind. You’re stuck acting as human glue, shuffling secrets between half a dozen SaaS dashboards.
+None of these tasks is difficult on its own, but together they add up. After 45 minutes of juggling dashboards, pasting API keys into `.env` files, and wrangling accounts, you start to wonder if a side project that might not survive tomorrow is worth it. You're stuck shuffling secrets between half a dozen SaaS dashboards.
 
-Writing code got fast. Provisioning infrastructure didn’t. Until now.
-
-This is where AI-assisted development is headed next. The future isn’t just about generating code faster; it’s about removing the drag of setup, provisioning, and service management via ClickOps altogether. To tackle this exact pain point, Stripe recently introduced [Projects.dev](https://stripe.dev/blog/production-ready-dev-stack-from-terminal).
+Writing code got fast. Provisioning infrastructure didn't. Stripe introduced [Projects.dev](https://stripe.dev/blog/production-ready-dev-stack-from-terminal) to remove that setup and provisioning work.
 
 ## What is Projects.dev?
 
-[Projects.dev](https://projects.dev) is Stripe’s new platform for AI-native development. Think of it as an agent-friendly, simplified version of Terraform with a single bill built in. It offers a CLI and a growing ecosystem of [integrations](https://projects.dev/providers/) that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
+[Projects.dev](https://projects.dev) is Stripe's tool for provisioning third-party services from the terminal. Think of it as an agent-friendly, simplified version of Terraform with a single bill built in. It offers a CLI and a growing ecosystem of [integrations](https://projects.dev/providers/) that let you and your AI agents provision third-party services directly from the terminal, without leaving your editor.
 
-The core idea is simple: instead of asking you to go to a provider’s dashboard, create an account, and copy API keys, Projects.dev lets your AI agent run commands that automatically provision resources on your behalf. The credentials are securely retrieved and injected directly into your local environment, so you can start building immediately.
+Instead of going to a provider's dashboard, creating an account, and copying API keys, your AI agent runs commands that provision resources on your behalf. The CLI retrieves the credentials and writes them into your local environment.
 
 ## How does it work?
 
-To understand how this works, you need to know about [**Agent Skills**](https://agentskills.io/home#what-are-agent-skills). Agent Skills are a standardized, open format that gives AI agents new capabilities. Instead of relying solely on an LLM’s pre-training to guess how to configure a system, you can give your agent a “skill” (essentially a set of instructions and CLI tools) that teaches it how to interact with external platforms securely.
+To understand how this works, you need to know about [**Agent Skills**](https://agentskills.io/home#what-are-agent-skills). Agent Skills are an open format for giving AI agents new capabilities. Instead of relying on an LLM's pre-training to guess how to configure a system, you give your agent a "skill" (a set of instructions and CLI tools) that teaches it how to work with an external service.
 
-Stripe Projects provides a CLI and an Agent Skill that standardizes how third-party services are provisioned. The catalog includes providers like Neon (for Postgres), Vercel (for hosting), OpenRouter (for AI models), and Firecrawl (for web scraping) etc.
+Stripe Projects provides a CLI and an Agent Skill that standardizes how third-party services are provisioned. The catalog includes providers like Neon (for Postgres), Vercel (for hosting), OpenRouter (for AI models), and Firecrawl (for web scraping).
 
-When you give your AI agent the Stripe Projects skill, it gains the ability to run commands like `stripe projects add neon/database` to provision a Neon database, without you having to touch a single dashboard. The CLI handles the authentication, provisioning, and secure retrieval of credentials, which are then automatically synced to your local `.env` file for immediate use in your code.
-
-The AI handles the heavy lifting; you just guide the architecture.
+With the Stripe Projects skill, your AI agent can run commands like `stripe projects add neon/postgres` to provision a database on Neon without you opening a dashboard. The CLI handles authentication, provisioning, and credential retrieval, then syncs the credentials to your local `.env` file.
 
 <Admonition type="note" title="Bring your own agent">
-This guide uses **OpenCode** as the primary example because its shareable chat sessions make it easy to demonstrate the workflow. However, this approach works with any AI coding agent that supports Agent Skills (such as Cursor, Claude Code, or Windsurf). Focus on the *workflow*, not the specific agent.
+This guide uses **OpenCode** as the primary example because its shareable chat sessions make it easy to demonstrate the workflow. The same approach works with any AI coding agent that supports Agent Skills, such as Cursor, Claude Code, or Windsurf.
 </Admonition>
 
-## What you will build
+## What you'll build
 
-To demonstrate this, you will build an **AI-powered Travel Concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Lakebase Postgres database so it can be shared via a public link.
+You'll build an **AI travel concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Lakebase Postgres database so it can be shared via a public link.
 
-**The Stack:**
+**The stack:**
 
 - **Frontend and API:** Next.js
 - **Database:** Lakebase Postgres
-- **LLM Provider:** OpenRouter
-- **Data Gathering:** Firecrawl
+- **LLM provider:** OpenRouter
+- **Data gathering:** Firecrawl
 - **Deployment:** Vercel
 
-Let's look at how you can build this entire stack without opening a single provider dashboard.
+You'll build this stack without opening a provider dashboard.
 
 <Steps>
 
 ## Install the Stripe CLI and Projects plugin
-
-First, you need to install the Stripe CLI and the Projects plugin.
 
 Install the Stripe CLI by following the instructions in the [official Stripe documentation](https://docs.stripe.com/stripe-cli/install#install).
 
@@ -87,19 +81,19 @@ Then, initialize a new Stripe Projects workspace:
 stripe projects init
 ```
 
-When you initialize a project, Stripe Projects automatically writes the necessary Agent Skill context files and a `.projects` directory to your project. This includes the state of your provisioned resources.
+When you initialize a project, Stripe Projects writes Agent Skill context files and a `.projects` directory, which holds the state of your provisioned resources, to your project.
 
-The AI agent skills describe how to use the `stripe projects` CLI to provision resources. By giving your agent access to these skills, you enable it to manage your infrastructure directly from your code.
+The skills describe how to use the `stripe projects` CLI to provision resources, so your agent can manage your infrastructure from your project directory.
 
 ## Prompt your AI agent
 
-Now, launch your AI coding agent in your terminal. For example, if you're using OpenCode, simply run:
+Launch your AI coding agent in your terminal. For example, if you're using OpenCode, run:
 
 ```bash
 opencode
 ```
 
-For this guide, you will use the following prompt to instruct your agent to build the Travel Concierge app and provision the necessary infrastructure as needed (update the prompt as necessary to fit your specific app idea):
+This guide uses the following prompt to instruct your agent to build the travel concierge app and provision the necessary infrastructure as needed (update the prompt as necessary to fit your specific app idea):
 
 ```text shouldWrap
 Build an AI-powered travel concierge app using Next.js and Neon Postgres where users enter destinations, travel dates, budget, traveler count, travel style, interests, and preferences to generate personalized itineraries.
@@ -112,17 +106,17 @@ Make the app look modern. Do not add extra features and keep it simple as asked.
 Use free tier for all the services used via stripe projects.
 ```
 
-The prompt is intentionally kept high‑level. The AI agent decides on the exact architecture, provisions the necessary services, and connects everything together. Your role is simply to guide the agent with the functionality you want, while it takes care of the implementation details and provisioning behind the scenes.
+The prompt is intentionally high-level. The agent decides on the architecture, provisions the services, and connects everything. You describe the functionality you want, and it handles the implementation details and provisioning.
 
 ## Watch the AI agent build and provision
 
-Your AI agent begins by analyzing the prompt and determining which services are needed. From there, it uses the Stripe Projects CLI to provision those services automatically on your behalf.
+Your AI agent begins by analyzing the prompt and determining which services are needed. Then it uses the Stripe Projects CLI to provision those services on your behalf.
 
-You can inspect its logs to see the exact commands executed and the reasoning behind them. While the agent’s output won’t match this guide word‑for‑word, agents are inherently non‑deterministic but the overall workflow will be similar.
+You can inspect its logs to see the exact commands executed and the reasoning behind them. Agents are non-deterministic, so your output won't match this guide word for word, but the overall workflow will be similar.
 
-### 1. Provisioning the infrastructure
+### 1. Provision the infrastructure
 
-Instead of asking you to go generate API keys, the agent searches the `projects.dev` catalog and executes CLI commands to provision the required services on their free tiers:
+Instead of asking you to generate API keys, the agent searches the `projects.dev` catalog and runs CLI commands to provision the required services on their free plans:
 
 ```bash
 stripe projects add neon/postgres --no-interactive
@@ -130,40 +124,40 @@ stripe projects add firecrawl/api --no-interactive
 stripe projects add openrouter/api --no-interactive
 ```
 
-_Behind the scenes:_ Stripe Projects interacts directly with Neon, Firecrawl, and OpenRouter to provision these resources. Unlike traditional relational databases that can take minutes to spin up, Neon provisions in milliseconds, allowing the agent to iterate rapidly without waiting for infrastructure.
+_Behind the scenes:_ Stripe Projects calls Neon, Firecrawl, and OpenRouter directly to provision these resources. Traditional databases can take minutes to spin up; a Neon project comes up in under a second, so the agent doesn't wait on infrastructure.
 
-The CLI then securely retrieves the resulting credentials (like your `DATABASE_URL` and API keys) and writes them to a local `.projects/vault/vault.json` file, automatically syncing them to your `.env` file.
+The CLI then retrieves the resulting credentials (like your `DATABASE_URL` and API keys) and writes them to a local `.projects/vault/vault.json` file, syncing them to your `.env` file.
 
-### 2. Writing the application code
+### 2. Write the application code
 
-With the infrastructure provisioned and the `.env` populated, the agent begins writing the actual application:
+With the infrastructure provisioned and the `.env` populated, the agent writes the application:
 
-- It installs the required packages (`nextjs`, `pg`, etc.) as necessary for the application.
+- It installs the required packages (`next`, `pg`, and others).
 - It sets up the database schema for the trips.
 - It writes the Next.js API routes to handle user input, interact with Firecrawl to scrape data, call OpenRouter for itinerary generation, and save the results to Neon.
-- It builds a modern frontend interface.
+- It builds the frontend.
 
-You can explore the following OpenCode session to see the full terminal output - including the CLI commands executed and the agent’s reasoning as it built the app and provisioned the infrastructure:
+You can explore the following OpenCode session to see the full terminal output, including the CLI commands executed and the agent’s reasoning as it built the app and provisioned the infrastructure:
 
 [opncd.ai/share/QuK9345F](https://opncd.ai/share/QuK9345F)
 
-From the session log, it’s clear how a single prompt was enough for the agent to orchestrate the entire development process: provisioning infrastructure, writing code, and managing credentials - all without any manual setup.
+The session log shows a single prompt driving the whole process: provisioning infrastructure, writing code, and managing credentials, with no manual setup.
 
-### 3. Testing locally
+### 3. Test locally
 
-Once the agent finishes, you have a complete, fully configured codebase. You didn't have to copy a single connection string or manage a single dashboard.
+When the agent finishes, you have a configured codebase, and you didn't copy a connection string or open a dashboard.
 
-To test it, simply run:
+To test it, run:
 
 ```bash
 npm run dev
 ```
 
-Open your browser, and you will see a fully functional, AI-powered travel concierge app backed by a live Neon database.
+Open your browser to see the travel concierge app, backed by a live database on Neon.
 
-## Deploying to production
+## Deploy to production
 
-Your app is working locally, but what about getting it online? Because Vercel and Cloudflare are also part of the available providers in the Projects.dev integration catalog, your agent can deploy the app for you without any manual configuration.
+Vercel and Cloudflare are also providers in the Projects.dev catalog, so your agent can deploy the app for you.
 
 For example, you can instruct your agent:
 
@@ -177,51 +171,51 @@ The agent will execute:
 stripe projects add vercel/project
 ```
 
-It will link a Vercel project, sync the environment variables (your Neon `DATABASE_URL`, OpenRouter key, etc.) securely into Vercel, and trigger a deployment.
+It links a Vercel project, syncs the environment variables (your Neon `DATABASE_URL`, OpenRouter key, and so on) into Vercel, and triggers a deployment.
 
-You should see the deployment logs in your terminal, and within minutes, your app is live on the internet with zero manual setup.
+The deployment logs appear in your terminal, and within minutes your app is live.
 
 The app built in this guide is available here: [travel-concierge-app.vercel.app](https://travel-concierge-app.vercel.app)
 
-> Note: The link above relies entirely on free‑tier resources (OpenRouter, Firecrawl). Because of this, usage limits may be reached after a period of activity, which could cause the app to stop functioning until those limits reset. You can easily build this app yourself by following the steps in this guide, which will give you your own set of API keys and resources to work with.
+> Note: The app above runs on free resources (OpenRouter, Firecrawl), so it may stop working when usage limits are reached, until those limits reset. You can build this app yourself by following the steps in this guide, which will give you your own set of API keys and resources to work with.
 
 </Steps>
 
-## Maintenance and long-term benefits
+## Maintenance
 
-Building an MVP without leaving your editor is an incredible experience, but the real power of this workflow becomes obvious when you look at the long-term lifecycle of your app.
+This workflow also helps after the first build, as your app changes over time.
 
 ### 1. Upgrades with a single bill
 
-Eventually, your weekend project might gain traction. You hit the free-tier limits on Firecrawl, you need a larger compute size in Neon, or you want to use a more expensive AI model on OpenRouter.
+Eventually, your weekend project might gain traction. You hit the free limits on Firecrawl, you need a larger compute size in Neon, or you want to use a more expensive AI model on OpenRouter.
 
 Normally, upgrading means logging into three different provider dashboards, entering your credit card details three separate times, and navigating three different billing UIs.
 
-With `projects.dev`, billing is centralized. Because Stripe already handles your KYC (Know Your Customer) and payment details globally, upgrading takes a single command. First, configure your billing on Stripe by running:
+With `projects.dev`, billing is centralized. Stripe already holds your KYC (Know Your Customer) and payment details, so upgrading takes a single command. First, configure your billing on Stripe by running:
 
 ```bash
 stripe projects billing add
 ```
 
-Once configured, you just ask your agent to upgrade the resources:
+Then ask your agent to upgrade the resources:
 
 ```text shouldWrap
 Upgrade my Neon database and OpenRouter services to their paid tiers.
 ```
 
-Stripe uses a Shared Payment Token to handle the transaction securely in the background. Your resources are upgraded instantly, and you never have to enter your credit card details on multiple sites again.
+Stripe uses a Shared Payment Token to handle the transaction in the background. Your resources are upgraded, and you don't enter your credit card details on each provider's site.
 
-### 2. Painless credential rotation
+### 2. Credential rotation
 
-If you accidentally commit your `.env` file to GitHub or need to cycle your credentials for security reasons, the manual process is miserable. You have to log into every platform, revoke the old keys and generate new ones, then update your local `.env` file and redeploy your app.
+If you accidentally commit your `.env` file to GitHub or need to rotate your credentials, the manual process is slow. You have to log into every platform, revoke the old keys and generate new ones, then update your local `.env` file and redeploy your app.
 
-With this setup, replacing credentials across dozens of services is trivial. You can simply ask your AI agent to handle it:
+With this setup, you can ask your AI agent to rotate credentials across services:
 
 ```text shouldWrap
 Rotate all the secrets used via stripe projects.dev.
 ```
 
-The agent will then run the necessary commands on your behalf:
+The agent runs the commands on your behalf:
 
 ```bash
 stripe projects rotate neon-postgres --no-interactive --yes
@@ -230,25 +224,25 @@ stripe projects rotate firecrawl-api --no-interactive --yes
 stripe projects env --pull --no-interactive
 ```
 
-The CLI rotates the key at the provider level and updates your `.env` safely.
+The CLI rotates the key at the provider level and updates your `.env`.
 
-### 3. Zero-friction experimentation
+### 3. Cheap experimentation
 
-You no longer have to weigh the "cost of setup" against the value of an idea. You can spin up fully realized, full-stack applications with stateful databases, AI features, and hosting in minutes.
+Setup cost no longer weighs against the value of an idea. You can spin up full-stack apps with databases, AI features, and hosting in minutes.
 
-Because Neon is serverless and scales to zero, you can provision databases for dozens of AI side projects and forget about them. When you aren't using them, they consume zero compute. If one of those projects suddenly goes viral, Neon's autoscaling handles the traffic spikes without requiring you to manually provision larger instances. If you abandon a project a week later, you haven't cluttered your password manager or your credit card statement with orphaned accounts.
+Lakebase Postgres computes scale to zero when idle, so databases for side projects you aren't using don't bill for compute; you pay only for their storage. If one of those projects gets traffic, autoscaling adds compute without you provisioning larger instances. If you abandon a project a week later, you haven't cluttered your password manager or your credit card statement with orphaned accounts.
 
 ### 4. Direct dashboard access
 
-While CLI-driven provisioning eliminates setup friction, you are never locked out of traditional UI workflows. If you prefer to visually inspect your data or tweak configurations manually, you can still access the provider's specific dashboard at any time.
+You can still use each provider's dashboard to inspect your data or change configuration.
 
-Just ask your AI agent to open the provider's dashboard, or run the command manually. For example, to authenticate and open the Neon console, run:
+Ask your AI agent to open the provider's dashboard, or run the command yourself. For example, to authenticate and open the Neon console, run:
 
 ```bash
 stripe projects open neon
 ```
 
-You will then be provided with a secure link to access the Neon dashboard without needing to enter credentials:
+You get a link that opens the Neon Console without entering credentials:
 
 ```text
 
@@ -257,18 +251,16 @@ You will then be provided with a secure link to access the Neon dashboard withou
 Press Enter to open the browser or visit https://console.neon.tech/app-deeplink?token=ffcffc1fxxx
 ```
 
-This securely logs you into the auto-provisioned Neon account without needing a password, dropping you right into the console where you can visually browse your tables, run ad-hoc queries in the SQL Editor and manage your database.
+The link logs you into the auto-provisioned Neon account without a password, so you can browse your tables, run ad hoc queries in the SQL Editor, and manage your database.
 
 ## Conclusion
 
-The grind of juggling dashboards, API keys, and environment variables is finally ending. With services like OpenRouter, Firecrawl, and Neon provisioned automatically through Projects.dev, modern AI coding agents can handle the setup, billing, and integration work that used to slow developers down.
-
-That means you can focus entirely on what you want to build, while your AI assistant takes care of the tedious how. You can use other providers in the Projects.dev catalog to add features like user authentication, payment processing, analytics, and more - all without leaving your editor. Checkout the [Resources](#resources) section below for links to all the providers currently available.
+You built and deployed a travel concierge app with Neon, OpenRouter, Firecrawl, and Vercel, all provisioned by an AI agent through Projects.dev. To add features like authentication, payments, or analytics, browse the other providers in the [Projects.dev provider directory](https://projects.dev/providers).
 
 ## Resources
 
-- [Projects.dev Provider Directory](https://projects.dev/providers)
-- [Stripe Projects CLI Documentation](https://docs.stripe.com/cli)
+- [Projects.dev provider directory](https://projects.dev/providers)
+- [Stripe Projects CLI documentation](https://docs.stripe.com/cli)
 - [Neon documentation](/docs/introduction)
 - [OpenCode](https://opencode.ai/)
 - [Agent Skills](https://github.com/agentskills/agentskills)

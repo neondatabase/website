@@ -1,10 +1,10 @@
 ---
-title: Using Postgres as a Key-Value Store with hstore and JSONB
-subtitle: A step-by-step guide describing how to use hstore and JSONB for storing key-value pairs in Postgres
+title: Using Postgres as a key-value store with hstore and JSONB
+subtitle: How to use hstore and JSONB to store key-value pairs in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-04-15T13:24:36.612Z'
-updatedOn: '2025-04-18T18:52:41.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Postgres is well known for its relational features, but it also has tools for working with key-value pairs. If you want to store flexible, schema-less data in a Postgres column, you can use either the [`hstore` extension](https://www.postgresql.org/docs/current/hstore.html) or the built-in [JSONB type](https://www.postgresql.org/docs/current/datatype-json.html).
@@ -22,7 +22,7 @@ Postgres is well known for its relational features, but it also has tools for wo
 
 ### Install and enable `hstore`
 
-To create columns with the `hstore` type, you need to install the extension. In Neon, `hstore` is already installed, you just need to enable it with the following command.
+To create columns with the `hstore` type, you need the extension. On Neon, `hstore` is already available, so you only need to enable it with the following command.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS hstore;
@@ -50,7 +50,7 @@ VALUES ('Backpack', 'color => blue, size => large'),
        ('Jacket', 'color => red, waterproof => yes');
 ```
 
-You can then query based on the `attributes` row's keys and values using operators like `->` and `?` as follows.
+You can then query based on the `attributes` column's keys and values using operators like `->` and `?` as follows.
 
 ```sql
 -- Get products with a 'color' key
@@ -62,7 +62,7 @@ SELECT * FROM products WHERE attributes -> 'color' = 'blue';
 
 ### Using `JSONB`
 
-PostgreSQL’s `JSONB` type stores structured JSON data in a binary format. It supports indexing and nesting, making it great for more complex data structures.
+The Postgres `JSONB` type stores structured JSON data in a binary format. It supports indexing and nesting, so it fits more complex data structures better than `hstore`.
 
 ### Create a table with a `JSONB` column
 
@@ -86,7 +86,7 @@ VALUES ('Backpack', '{"color": "blue", "size": "large"}'),
        ('Jacket', '{"color": "red", "waterproof": true}');
 ```
 
-You can then query the `attributes` row by keys and values using operators like `?`, `@>`, and `->>`.
+You can then query the `attributes` column by keys and values using operators like `?`, `@>`, and `->>`.
 
 ```sql
 -- Get products with a 'waterproof' key
@@ -103,7 +103,7 @@ WHERE attributes->>'color' = 'blue';
 
 ### Index key-value data for performance
 
-[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) allow you to index `hstore` and `JSONB` properties, which can make your queries faster as your data grows. The following command shows how you can create a GIN index on the `attributes` property for both tables - GIN indexes work on both `hstore` and `JSONB` rows.
+[GIN indexes](https://www.postgresql.org/docs/current/gin-intro.html) let you index `hstore` and `JSONB` columns, which can make your queries faster as your data grows. The following command shows how you can create a GIN index on the `attributes` column in both tables. GIN indexes work on both `hstore` and `JSONB` columns.
 
 ```sql
 -- hstore
@@ -115,7 +115,7 @@ CREATE INDEX idx_jsonb_attrs ON products_json USING GIN (attributes);
 
 ### `hstore` vs `JSONB`
 
-Both `hstore` and `JSONB` offer an alternative to external key-value stores and enable you to keep your key-value data in the same place as the rest of your data. Whether you choose `hstore` or `JSONB` depends on your needs:
+Both `hstore` and `JSONB` are alternatives to an external key-value store and let you keep your key-value data in the same place as the rest of your data. Which one to choose depends on your data:
 
 - If you need nested data, arrays, or any data type beyond strings, use `JSONB`.
 - If you need extra performance and are certain you don't need more complex data types, `hstore` can be faster for very simple key-value lookups and use less disk space.

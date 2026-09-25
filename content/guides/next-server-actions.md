@@ -4,31 +4,31 @@ subtitle: Learn how to query Postgres in Next.js with Server Actions
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-13T13:24:36.612Z'
-updatedOn: '2024-10-25T17:21:52.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you will learn the process of creating a simple web application using Next.js Server Actions that allows you to capture user input via forms, and insert them into Postgres via `@neondatabase/serverless` and `pg`.
+In this guide, you'll build a Next.js app that uses Server Actions to capture user input from a form and insert it into Postgres with either `@neondatabase/serverless` or `pg`.
 
-To create a Neon project and access it from an Next.js application:
+To create a Neon project and access it from a Next.js application:
 
 - [Create a Neon project](#create-a-neon-project)
 - [Create a Next.js project and add dependencies](#create-a-nextjs-project-and-add-dependencies)
 - [Store your Neon credentials](#store-your-neon-credentials)
-- [Create a Form with Server Actions](#create-a-form-with-server-actions)
+- [Create a form with Server Actions](#create-a-form-with-server-actions)
 - [Implement Next.js Server Actions](#implement-nextjs-server-actions)
 - [Run the app](#run-the-app)
 
 ## Create a Neon project
 
-If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+If you don't have one already, create a Neon project. You'll need its connection string in a later step.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
+3. Specify your project settings and click **Create project**.
 
 ## Create a Next.js project and add dependencies
 
-1. Create an Next.js project if you do not have one. For instructions, see [Automatic Installation](https://nextjs.org/docs/getting-started/installation#automatic-installation) in the Next.js documentation.
+1. Create a Next.js project if you don't have one. For instructions, see [Automatic Installation](https://nextjs.org/docs/getting-started/installation#automatic-installation) in the Next.js documentation.
 
 2. Add project dependencies using one of the following commands:
 
@@ -46,15 +46,15 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. To find the connection string for your database, click **Connect** in the Neon Console to open the **Connect to your branch** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 DATABASE_URL="postgres://[user]:[password]@[neon_hostname]/[dbname]"
 ```
 
-## Create a Form with Server Actions
+## Create a form with Server Actions
 
-Create a simple form that allows users to input a comment. For now, add an action named `create` that you will create in next step with Next.js server actions.
+Create a form that lets users enter a comment. The form calls an action named `create`, which you'll implement in the next step with a Next.js Server Action.
 
 ```tsx
 // File: app/page.tsx
@@ -71,7 +71,7 @@ export default function Page() {
 
 ## Implement Next.js Server Actions
 
-Now, let's add the server action to insert the data into your Postgres.
+Now, add the Server Action that inserts the data into Postgres.
 
 <CodeTabs reverse={true} labels={["node-postgres", "Neon serverless driver"]}>
 
@@ -112,10 +112,10 @@ export default function Page() {
     // Create an instance of Neon's TS/JS driver
     const sql = neon(`${process.env.DATABASE_URL}`);
     // Create the comments table if it does not exist
-    await sql('CREATE TABLE IF NOT EXISTS comments (comment TEXT)');
+    await sql.query('CREATE TABLE IF NOT EXISTS comments (comment TEXT)');
     const comment = formData.get('comment');
     // Insert the comment from the form into the Postgres (powered by Neon)
-    await sql('INSERT INTO comments (comment) VALUES ($1)', [comment]);
+    await sql.query('INSERT INTO comments (comment) VALUES ($1)', [comment]);
   }
   return (
     <form action={create}>

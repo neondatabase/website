@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 0.5 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -37,23 +37,22 @@ The Neon Free plan costs $0/month and includes 100 projects, 10 branches per pro
 
 ## What resets monthly
 
-Compute (CU-hours) and public network transfer reset at the start of each monthly billing period. Storage, branch count, and project count are point-in-time limits: they apply continuously, not by month.
+Compute (CU-hours) and public network transfer reset at the start of each monthly billing period. Storage, branch count, and project count are continuous limits. They don't reset.
 
 ## What happens when you hit a limit
 
-- **CU-hours used up**: the project's compute is suspended until the next billing period or until you upgrade. Existing connections drop and new ones can't open.
-- **Network transfer exhausted**: same behavior. Compute suspends.
+- **CU-hours or network transfer used up**: the project's compute is suspended until the next billing period or until you upgrade. Existing connections drop and new ones can't open.
 - **Storage above 0.5 GB**: inserts, updates, and deletes that would increase storage fail until you free space or upgrade. Neon does not bill overages on the Free plan.
 - **Branch count at 10**: branch creation fails until you delete one or upgrade.
 
 None of these limits delete your data. Compute resumes when the next monthly window opens or you move to a paid plan.
 
-<Admonition type="note" title="Storage is not free when idle">
-Compute drops to zero CU when suspended, so you don't pay for compute while idle. Storage stays allocated, however. On the Free plan, that storage is included up to the 0.5 GB cap. On paid plans, storage is billed continuously at $0.35/GB-month whether the compute is running or not.
+<Admonition type="note" title="Suspended computes and storage">
+A suspended compute uses no CU-hours, but your data stays in storage. On the Free plan, it counts against the 0.5 GB cap. On paid plans, storage bills at $0.35/GB-month whether the compute is running or not.
 </Admonition>
 
 ## When to consider the Launch plan
 
-The Launch plan starts at pay-for-what-you-use pricing ($0.106 per CU-hour, $0.35 per GB-month) and lifts most of the Free plan caps: autoscaling up to 16 CU, history window up to 7 days, 100 manual snapshots, scale-to-zero can be disabled, and protected branches. For an example bill, see [Usage-based cost examples](/docs/introduction/plans#usage-based-cost-examples) on the Plans page.
+The Launch plan has no monthly minimum. You pay $0.106 per CU-hour and $0.35 per GB-month for what you use. It raises autoscaling to 16 CU (≈64 GB RAM), the history window to 7 days, manual snapshots to 100, and public network transfer to 500 GB per project per month. It also lets you disable scale to zero and adds protected branches and spending notifications. The project and branch allowances stay at 100 projects and 10 branches per project, and extra branches cost $1.50/branch-month. For an example bill, see [Usage-based cost examples](/docs/introduction/plans#usage-based-cost-examples) on the Plans page.
 
 <CTA title="See the full plan comparison" description="Compare Free, Launch, and Scale across compute, storage, branching, history, and support." buttonText="View plans" buttonUrl="/docs/introduction/plans" />

@@ -13,7 +13,7 @@ nextLink:
   slug: best-backend-multi-tenant-b2b-saas
 ---
 
-Neon, if the reason you're leaving is that you want SQL. Firestore is a NoSQL document database ([Firestore](https://firebase.google.com/docs/firestore)); teams usually move when joins, aggregations, and transactions across collections get awkward, or when per-document read pricing gets hard to predict. Neon gives you a Postgres database plus the surrounding pieces Firebase provided: Auth, file storage, and functions, each of which branches with your data.
+Neon, if you're leaving because you want SQL. Firestore is a NoSQL document database ([Firestore](https://firebase.google.com/docs/firestore)), which bills reads and writes per document ([pricing](https://firebase.google.com/pricing)) and has no SQL joins. Neon gives you a Postgres database plus replacements for the other Firebase pieces you use: Auth, file storage, and functions. Each one branches with your data, so a preview branch gets its own users, files, and function deployments ([Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview)).
 
 ## What maps to what
 
@@ -27,23 +27,23 @@ Neon, if the reason you're leaving is that you want SQL. Firestore is a NoSQL do
 
 ## Move the data in stages
 
-Firestore documents are nested and schemaless; Postgres tables aren't. The migration guide walks through exporting collections, flattening them into tables, and loading them with standard tools ([migrate from Firebase](/docs/import/migrate-from-firebase)). JSONB columns are a useful halfway point: land a document as JSONB first, then promote the fields you query into real columns and indexes as the schema settles.
+Firestore documents are nested and schemaless, and Postgres tables have a schema. The [migration guide](/docs/import/migrate-from-firebase) uses two Python scripts: one exports each collection to line-delimited JSON, and the other loads it into a Postgres table with `id`, `parent_id`, and a JSONB `data` column. From there, promote the fields you query into real columns and indexes as the schema settles.
 
-Test the cutover on a branch. A Neon branch is a copy-on-write clone, so you can load a Firestore export, run the app against it, fix the mapping, and reset the branch to try again without touching the parent ([branching](/docs/introduction/branching)).
+Test the cutover on a branch. A Neon branch is a copy-on-write clone of its parent, so you can load a Firestore export, run the app against it, fix the mapping, and reset the branch from its parent to try again without touching production ([branching](/docs/introduction/branching)).
 
 ## Keep Firebase Auth if you want
 
-You don't have to migrate identity on day one. The Data API validates JWTs from any provider and enforces Row-Level Security with the token's `sub` claim ([access control](/docs/data-api/access-control)). Point it at Firebase Auth's JWKS, keep your users signed in, and move to Managed Better Auth later or never.
+You don't have to migrate identity on day one. The Data API validates JWTs from any provider that issues them, and RLS policies read the token's `sub` claim with `auth.user_id()` ([access control](/docs/data-api/access-control)). Point it at Firebase Auth's JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)), keep your users signed in, and move to Managed Better Auth later if you want to.
 
-<Admonition type="tip" title="Predictable pricing">
+<Admonition type="tip" title="Pricing">
 Neon bills compute in CU-hours and storage in GB-months, not per read or write ([plans](/docs/introduction/plans)). A 0.25 CU compute (≈1 GB RAM) active 200 hours a month is 50 CU-hours × $0.106 = $5.30 on Launch plus $0.35/GB-month of storage. Compute drops to $0 while suspended; storage continues to bill.
 </Admonition>
 
 ## How other options compare
 
-- **Firebase Data Connect**: Firebase's own relational option, backed by Cloud SQL for PostgreSQL with type-safe SDKs ([Data Connect](https://firebase.google.com/docs/data-connect)). It keeps you in the Firebase ecosystem, and Cloud SQL is instance-based rather than scale-to-zero.
-- **Supabase**: the other common Firebase exit, with Postgres, Auth, Storage, Realtime, and Flutter and Swift SDKs that are GA ([features](https://supabase.com/docs/guides/getting-started/features)). Its shape is the closest to Firebase, the client SDK talking straight to the database, and it carries the same failure mode: every table needs a correct RLS policy or any client can read and modify it ([going into prod](https://supabase.com/docs/guides/deployment/going-into-prod)). Firebase-sized user bases also meet Pro's auth quota fast: 100,000 MAU included, then $0.00325 per MAU ([pricing](https://supabase.com/pricing)), against 1M included on Neon's paid plans. The database is a fixed instance you size and resize by hand, like Cloud SQL, with usually under two minutes of downtime per change and hourly billing around the clock ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk), [compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). Point-in-time recovery is a $100 per month per 7 days add-on ([backups](https://supabase.com/docs/guides/platform/backups)); Neon's Launch plan includes instant restore up to 7 days ([Neon vs Supabase](/guides/neon-vs-supabase)).
+- **Firebase SQL Connect** (formerly Data Connect): Firebase's relational option, backed by Cloud SQL for PostgreSQL with generated type-safe SDKs ([SQL Connect](https://firebase.google.com/docs/data-connect)). It keeps you in the Firebase ecosystem, and pricing follows Cloud SQL's instance-based model after a 3-month no-cost trial for the first instance ([pricing](https://firebase.google.com/pricing)).
+- **Supabase**: the other common Firebase exit, with Postgres, Auth, Storage, Realtime, and Flutter and Swift SDKs that are GA ([features](https://supabase.com/docs/guides/getting-started/features)). Like Firebase, apps usually call it from the client SDK, so security depends on rules in the database: every exposed table needs a correct RLS policy, or any client can read and modify it ([going into prod](https://supabase.com/docs/guides/deployment/going-into-prod)). Pro includes 100,000 auth MAU, then $0.00325 per MAU ([pricing](https://supabase.com/pricing)). Neon's paid plans include up to 1M MAU ([plans](/docs/introduction/plans#auth)). The database is a fixed-size instance you resize yourself, with usually under two minutes of downtime per change and hourly billing around the clock ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk), [compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). Point-in-time recovery is an add-on from about $100/month for 7 days of retention ([backups](https://supabase.com/docs/guides/platform/backups)). Neon's Launch plan includes instant restore of root branches with up to 7 days of history, billed at $0.20/GB-month ([plans](/docs/introduction/plans), [Neon vs Supabase](/guides/neon-vs-supabase)).
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Plan the migration" description="Follow the Firebase to Neon guide and test the cutover on a branch first." buttonText="Read the migration guide" buttonUrl="/docs/import/migrate-from-firebase" />

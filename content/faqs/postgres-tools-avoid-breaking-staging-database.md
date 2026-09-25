@@ -13,23 +13,23 @@ nextLink:
   slug: postgres-tools-edge-functions-node-backends
 ---
 
-Give every developer their own branch instead of sharing one staging database. A Neon branch is a full Postgres copy of staging (or production), created in seconds. If a developer drops a table, runs a bad migration, or seeds garbage data, only their branch breaks.
+Give every developer their own branch instead of sharing one staging database. A Neon branch is a full Postgres copy of staging (or production), created in seconds. If a developer drops a table, runs a bad migration, or seeds bad data, only their branch breaks.
 
 ## The pattern
 
-Most teams keep `main` as the shared staging branch and use it as the parent for personal branches:
+Keep one shared `staging` branch and have each developer create a personal branch from it:
 
 ```bash
-# Each developer creates their own branch off main
-neon branches create --name alex/feature-payments --parent main
+# Create your own branch off staging
+neon branches create --name alex/feature-payments --parent staging
 
-# Get a connection string for it
+# Get a connection string
 neon connection-string alex/feature-payments
 ```
 
-Point your local app at that connection string. You're now working against a copy of staging data, isolated from everyone else.
+Point your local app at that connection string. You're now working on an isolated copy of staging data.
 
-When you're done, delete the branch:
+When the change is ready, apply the same migration to `staging` through your normal migration tool. Neon doesn't merge branch data. Then delete the personal branch:
 
 ```bash
 neon branches delete alex/feature-payments
@@ -37,38 +37,36 @@ neon branches delete alex/feature-payments
 
 ## What it costs
 
-Branches share storage with the parent until they diverge. A branch that nobody writes to costs nothing in storage. Once you start writing, you're billed on the minimum of changes accumulated or the logical data size, at $0.35/GB-month.
+Branches share storage with the parent until they diverge, so a branch that nobody writes to adds almost no storage. Once you write to it, the branch is billed on the lower of its accumulated changes or its logical data size, at $0.35/GB-month.
 
-Compute on the branch scales to zero after 5 minutes of inactivity (configurable on paid plans), so an unused branch sitting overnight doesn't accumulate compute charges. Storage on the parent and any child delta still bills.
+Compute on the branch scales to zero after 5 minutes of inactivity by default, so a branch left alone overnight doesn't accrue compute charges. Storage on the parent and the child still bills.
 
 <Admonition type="tip" title="Auto-cleanup with TTL">
-On paid plans, set a [time-to-live](https://neon.com/docs/guides/branch-expiration) on dev branches so abandoned ones disappear. Useful when developers create branches and forget about them.
+Set a [branch expiration](/docs/guides/branch-expiration) on dev branches so forgotten ones delete themselves.
 </Admonition>
 
-## Restoring a branch you broke
+## Recover a branch you broke
 
-If you do break your own branch, you can reset it to its parent's current state without losing your project:
+If you break your own branch, [reset it from its parent](/docs/guides/reset-from-parent) to get a fresh copy of staging's current state:
 
 ```bash
 neon branches reset alex/feature-payments --parent
 ```
 
-Or, on a root branch, use [instant restore](https://neon.com/docs/introduction/branch-restore) to roll back to any point in the history window (6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan). Instant restore is only supported on root branches.
+To roll back the shared root branch itself, use [instant restore](/docs/postgres/backup-restore/branch-restore) to return it to any point in the history window: 6 hours on the Free plan (up to 1 GB-month), up to 7 days on the Launch plan, and up to 30 days on the Scale plan. Instant restore works on root branches only. If `staging` is a child branch, reset it from its parent instead.
 
 ## Plan limits
 
 - **Free plan**: 10 branches per project, 0.5 GB storage per project
-- **Launch plan**: 10 included branches per project, $1.50/branch-month for extras, up to 5,000 per project
-- **Scale plan**: 25 included branches per project, same overage rate, up to 5,000 per project
+- **Launch plan**: 10 included branches per project, then $1.50/branch-month
+- **Scale plan**: 25 included branches per project, then $1.50/branch-month
+
+The Launch and Scale plans cap each project at 5,000 branches.
 
 ## How this compares to other Postgres services
 
-Other managed Postgres services support per-developer environments, but the tradeoffs differ:
+- **Amazon RDS for Postgres** needs a separate DB instance per developer, each billed by the hour with no scale to zero.
+- **Aurora Postgres** has [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) with copy-on-write storage, which works much like Neon branching. Each clone is a separate cluster. With Aurora Serverless v2 instances and [auto-pause at 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), idle clones stop accruing instance charges.
+- **Supabase** has [preview branches](https://supabase.com/docs/guides/deployment/branching) that auto-pause after inactivity. Each branch is a separate Supabase environment [billed hourly](https://supabase.com/docs/guides/platform/manage-your-usage/branching) from $0.01344/hour on Micro. Preview branches start from migrations and seed data. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on.
 
-- **Amazon RDS for Postgres** requires standing up a separate database instance per developer, billed by the hour with no scale-to-zero. Cost adds up quickly across a team.
-- **Aurora Postgres** offers [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) using copy-on-write storage, which is similar in spirit to Neon's branching. Each clone is a separate database cluster; combined with Aurora Serverless v2 [auto-pause to 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), idle clones can stop accruing compute.
-- **Supabase** supports [preview branches](https://supabase.com/docs/guides/deployment/branching) that auto-pause on inactivity. Each branch is a full Supabase environment and is billed by the hour while active, starting at ~$0.01344/hr on Micro per [branching usage docs](https://supabase.com/docs/guides/platform/manage-your-usage/branching).
-
-Neon's branches are typically faster to create (seconds), share storage by default, and scale to zero per branch.
-
-<CTA title="Give every dev their own database" description="Set up branch-per-developer in your project and stop sharing staging." buttonText="Read the guide" buttonUrl="https://neon.com/docs/guides/branching-intro" />
+<CTA title="Give every dev their own database" description="Set up branch-per-developer in your project and stop sharing staging." buttonText="Read the guide" buttonUrl="https://neon.com/docs/introduction/branching" />

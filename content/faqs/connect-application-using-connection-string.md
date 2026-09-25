@@ -3,7 +3,7 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T03:15:28.979Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: create-new-database-neon-project
 ---
 
-Once you have a connection string from the **Connect** widget on your Neon **Project Dashboard**, save it as an environment variable (commonly `DATABASE_URL`) and pass it to a Postgres driver in your code. Lakebase Postgres speaks the standard Postgres wire protocol, so anything that talks to Postgres works: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and so on. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) adds HTTP and WebSocket access.
+Click **Connect** in the Neon Console to open the **Connect to your branch** modal and copy the connection string ([docs](/docs/connect/connect-from-any-app)). Save it as an environment variable (usually `DATABASE_URL`) and pass it to a Postgres driver in your code. Lakebase Postgres speaks the standard Postgres wire protocol, so standard clients and ORMs work: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and others. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) connects over HTTP or WebSockets instead of TCP.
 
 ## 1. Save the connection string in `.env`
 
@@ -22,7 +22,7 @@ Once you have a connection string from the **Connect** widget on your Neon **Pro
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-Add `.env` to `.gitignore`. Keep the `sslmode=require` and `channel_binding=require` parameters in place. Lakebase Postgres requires TLS.
+Add `.env` to `.gitignore`. Keep the `sslmode=require` and `channel_binding=require` parameters, because Lakebase Postgres requires TLS.
 
 ## 2. Connect from your code
 
@@ -68,15 +68,15 @@ For Prisma, Drizzle, SQLAlchemy, and other ORMs, see the [framework guides](/doc
 
 ## 3. Pick the right connection type
 
-Neon offers two flavors of the same connection string:
+Each connection string comes in two forms:
 
-- **Pooled** (hostname has `-pooler`): routes through PgBouncer in transaction mode and supports up to 10,000 concurrent client connections per compute. Use it for serverless functions, web apps, and high-concurrency clients.
-- **Direct**: opens a session straight to Postgres. Use it for migrations, `pg_dump`, `LISTEN`/`NOTIFY`, logical replication, and any session-level features. The number of direct connections you can hold open scales with compute size.
+- **Pooled** (hostname has `-pooler`): routes through PgBouncer in transaction mode and accepts up to 10,000 client connections per compute. Use it for serverless functions, web apps, and other high-concurrency clients.
+- **Direct**: connects straight to Postgres. Use it for migrations, `pg_dump`, `LISTEN`/`NOTIFY`, logical replication, and other session-level features. The `max_connections` limit for direct connections depends on compute size, from 104 at 0.25 CU to 4,000 at 9 CU and above.
 
-The Connect widget gives you either by toggling **Connection pooling**. Most apps set `DATABASE_URL` to the pooled URL and `DIRECT_URL` to the direct URL for migrations. See [Connection pooling](/docs/connect/connection-pooling) for when to use which.
+The **Connection pooling** toggle in the modal switches between them, and pooled is the default. A common setup is `DATABASE_URL` for the pooled string and a second variable, such as `DIRECT_URL`, for the direct string that migrations use. See [Connection pooling](/docs/connect/connection-pooling) for when to use which.
 
 <Admonition type="important" title="Always read the string from the environment">
-Hardcoding the URL in source code is a common source of credential leaks. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you're deploying to Vercel, Render, Fly, or similar, set `DATABASE_URL` in the platform's env settings. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) sets it automatically.
+The connection string includes your password, so a URL hardcoded in source code ends up in your Git history. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you deploy to Vercel, Render, Fly, or a similar host, set `DATABASE_URL` in its environment settings. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) sets it for you.
 </Admonition>
 
 <CTA title="Choose your connection method" description="Compare drivers and connection types based on where you're deploying." buttonText="Read the docs" buttonUrl="/docs/connect/choose-connection" />
