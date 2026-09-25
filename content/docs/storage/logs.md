@@ -28,7 +28,7 @@ body: {
 
 ## View logs
 
-Bucket logs live on the branch's [Monitoring page, in the Logs tab](/docs/introduction/monitor-logs), the same shared viewer used for every service on the branch. To jump straight to one bucket's logs, open the bucket list, open that bucket's menu, and select **View logs**. Or go to **Monitoring** > **Logs** and click the **Storage** chip to see every bucket's logs together.
+Bucket logs live on the branch's [Monitoring page, in the **Storage** tab](/docs/introduction/monitor-logs). To jump straight to one bucket's logs, open the bucket list, open that bucket's menu, and select **View logs**. Or go to **Monitoring** and open the **Storage** tab to see every bucket's logs together.
 
 Expand a row to see its full context: `timestamp`, `severity`, `entity_type` (`storage`), `scope_name`, and `service_name` (`neon-storage/<bucket>`). The message body carries per-request detail: `operation` (the HTTP method), `object_key`, `http_status`, `bytes`, `duration_ms`, `request_id`, and `remote_ip`. `access_key_id` is included for authenticated requests and omitted entirely for anonymous reads against a `public_read` bucket, which is expected, not a sign of broken auth.
 

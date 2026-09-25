@@ -4,23 +4,23 @@ subtitle: Use SST to provision Neon resources and build a serverless API with a 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-10-10T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[SST](https://sst.dev/) is an open-source framework that simplifies building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate and version-control your database provisioning alongside your serverless applications.
+[SST](https://sst.dev/) is an open-source framework for building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate and version-control your database provisioning alongside your serverless applications.
 
-In this guide, you’ll learn how to use SST to provision and manage Neon resources, then connect them to an [Hono](https://hono.dev/) API running on AWS Lambda.
+In this guide, you’ll learn how to use SST to provision and manage Neon resources, then connect them to a [Hono](https://hono.dev/) API running on AWS Lambda.
 
-This integration is powered by SST's support for over 150 Pulumi and Terraform providers - in this guide, we’ll be using the Pulumi provider for Neon.
+SST supports over 150 Pulumi and Terraform providers. This guide uses the Pulumi provider for Neon.
 
 ## Prerequisites
 
 Before you start, ensure you have the following:
 
 1.  **Node.js**: This guide uses Node.js. If you don't have it installed, download it from [nodejs.org](https://nodejs.org/).
-2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-3.  **Neon API key**: Generate an API key from the Neon Console by navigating to your Account Settings > API Keys. This key is necessary for the provider to authenticate with the Neon API.
-4.  **AWS Account**: An AWS account is required to deploy the Hono API to AWS Lambda. If you don't have one, you can create it at [aws.amazon.com](https://aws.amazon.com/).
+2.  **Neon account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
+3.  **Neon API key**: Generate an API key in the Neon Console under **Account settings** > **API keys** (or your organization's **Settings** > **API keys**). See [Manage API keys](/docs/manage/api-keys). This key is necessary for the provider to authenticate with the Neon API.
+4.  **AWS account**: An AWS account is required to deploy the Hono API to AWS Lambda. If you don't have one, you can create it at [aws.amazon.com](https://aws.amazon.com/).
 
 ## Create a new SST app
 
@@ -72,7 +72,7 @@ $ npx sst@latest init
 
 2.  **Configure authentication and organization ID**
 
-    The Neon provider requires your API key for authentication. The recommended approach is to set it as an environment variable. You will also need your organization ID, which can be found in the Neon Console under Account Settings > Organization.
+    The Neon provider requires your API key for authentication. The recommended approach is to set it as an environment variable. You also need your organization ID, which you'll find on your organization's **Settings** page under **General information** in the Neon Console.
     ![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
 
     Create a `.env` file in your project's root directory and add your Neon API key and organization ID:
@@ -86,7 +86,7 @@ $ npx sst@latest init
 
 ## Manage Neon resources
 
-You can define your Neon resources directly within the `run` function of your `sst.config.ts` file. This example demonstrates creating a complete Neon stack, including a project, a development branch, an endpoint, a role, and a database.
+You can define your Neon resources directly within the `run` function of your `sst.config.ts` file. This example creates a project, a development branch, an endpoint, a role, and a database.
 
 ```typescript title="sst.config.ts"
 /// <reference path="./.sst/platform/config.d.ts" />
@@ -169,11 +169,11 @@ SST 3.17.14  ready!
 
 After the deployment completes, you can visit your [Neon Console](https://console.neon.tech/) to see the newly created project and its associated resources.
 
-Now that you have understood how to manage Neon resources with SST, let's explore how to connect these resources to a serverless API using **Resource Linking**.
+Now that you know how to manage Neon resources with SST, the next step is to connect these resources to a serverless API using **Resource Linking**.
 
-## Example: Building an API with SST and Neon
+## Example: build an API with SST and Neon
 
-A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to a Lakebase Postgres database. The connection string for the database will be securely passed to the API using resource linking.
+A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to Lakebase Postgres on Neon. The connection string for the database will be securely passed to the API using resource linking.
 
 The Hono API will be deployed to AWS Lambda, and we’ll use SST to manage both the Neon database and the API.
 
@@ -281,7 +281,7 @@ The above code does the following:
 
 ### Install dependencies
 
-To connect to the Neon database you can use any Postgres client. In this example, we’ll use the Neon serverless driver. Install it using `npm`:
+To connect to the database, you can use any Postgres client. In this example, we’ll use the Neon serverless driver. Install it using `npm`:
 
 ```bash
 npm install @neondatabase/serverless
@@ -289,7 +289,7 @@ npm install @neondatabase/serverless
 
 ### Update the API code
 
-Replace the contents of `src/index.ts` with the following code. This code connects to the Neon database and responds with with postgres version.
+Replace the contents of `src/index.ts` with the following code. This code connects to the database and responds with the Postgres version.
 
 ```typescript title="src/index.ts"
 import { Hono } from 'hono';
@@ -356,7 +356,7 @@ You can test the API endpoint using `curl` or by visiting the URL in your browse
 curl https://qntxxx.lambda-url.us-east-1.on.aws/version
 ```
 
-You should see a response like this, confirming a successful connection to your Neon database:
+You should see a response like this, confirming that the API can reach your database:
 
 ```json
 {
@@ -364,11 +364,11 @@ You should see a response like this, confirming a successful connection to your 
 }
 ```
 
-You can also verify that a new project has been created in your [Neon Console](https://console.neon.tech/)
+You can also verify that a new project has been created in the [Neon Console](https://console.neon.tech/).
 
-_The Typescript error for `Resource.NeonDB` should now be resolved._
+_The TypeScript error for `Resource.NeonDB` should now be resolved._
 
-### Deploy to Production
+### Deploy to production
 
 To deploy your application to AWS, run:
 
@@ -402,9 +402,9 @@ SST 3.17.14  ready!
 curl https://qn2gxx.lambda-url.us-east-1.on.aws/version
 ```
 
-You should see the same response as before, confirming that your production deployment is working correctly and successfully connected to your Neon database.
+You should see the same response as before, confirming that the production deployment can reach your database.
 
-You have provisioned a Neon database and connected it to a serverless API using SST. You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
+You've provisioned a Neon project and connected it to a serverless API using SST. You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
 
 ## Import existing Neon resources
 
@@ -430,9 +430,9 @@ Similarly, you can import other resources like branches, endpoints, roles, and d
 
 ## Resources
 
-- [SST Documentation](https://sst.dev/docs/)
-- [SST Resource Linking](https://sst.dev/docs/linking/)
-- [Pulumi Neon Provider](https://www.pulumi.com/registry/packages/neon/)
+- [SST documentation](https://sst.dev/docs/)
+- [SST resource linking](https://sst.dev/docs/linking/)
+- [Pulumi Neon provider](https://www.pulumi.com/registry/packages/neon/)
 - [Manage Neon with Terraform](/docs/reference/terraform)
 - [Hono on AWS with SST](https://sst.dev/docs/start/aws/hono/)
 

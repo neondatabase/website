@@ -1,14 +1,14 @@
 ---
-title: Vector Search in Postgres
+title: Vector search in Postgres
 subtitle: A step-by-step guide describing how to use pgvector for vector search in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-04T13:24:36.612Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Vector search enables you to perform similarity searches on vectors stored in Postgres.
-With the [pgvector](https://github.com/pgvector/pgvector) extension, you can store and efficiently query vector embeddings, making Postgres a viable option for AI-driven applications like retrieval-augmented generation (RAG) and semantic search.
+Vector search lets you run similarity searches on vectors stored in Postgres.
+With the [pgvector](https://github.com/pgvector/pgvector) extension, you can store and query vector embeddings in Postgres for applications like retrieval-augmented generation (RAG) and semantic search.
 
 ## Steps
 
@@ -22,8 +22,8 @@ With the [pgvector](https://github.com/pgvector/pgvector) extension, you can sto
 ## Install and enable pgvector
 
 Before using vector search, you need to install the [`pgvector` extension](https://github.com/pgvector/pgvector).
-The `pgvector` extension adds a `vector` data type, operators for similarity search (`<->`, `<#>`, `<=>`) , and support for ANN indexes.
-In Neon, `pgvector` is already installed, you just need to enable it using the following command.
+The `pgvector` extension adds a `vector` data type, operators for similarity search (`<->`, `<#>`, `<=>`), and support for ANN indexes.
+On Neon, `pgvector` is already installed. You only need to enable it with the following command.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
@@ -115,7 +115,7 @@ CREATE TABLE embeddings (
 
 ### How to generate embeddings
 
-In most cases, embeddings are created using external services such as [OpenAI](https://platform.openai.com/docs/guides/embeddings) or [Gemini](https://ai.google.dev/gemini-api/docs/embeddings) etc. Once generated, they can be stored in Postgres for vector search with `pgvector`. The dimensionality of the embedding must match the model you use (for example, 512, 768, or 1536 dimensions), ensuring consistency between the stored vectors and the queries you run.
+In most cases, embeddings are created using external services such as [OpenAI](https://platform.openai.com/docs/guides/embeddings) or [Gemini](https://ai.google.dev/gemini-api/docs/embeddings). Once generated, they can be stored in Postgres for vector search with `pgvector`. The dimensionality of the `vector` column must match the model you use (for example, 512, 768, or 1536 dimensions), and your query vectors must use the same model.
 
 For this example, we will use embeddings generated from the [Nomic API](https://docs.nomic.ai/reference/api/embed-text-v-1-embedding-text-post).
 
@@ -157,5 +157,5 @@ Unsurprisingly, Postgres finds that the embedding for "i like to eat tacos" is t
 
 ## Resources
 
-- [pgvector GitHub Repository](https://github.com/pgvector/pgvector)
-- [Nomic API Documentation](https://docs.nomic.ai/)
+- [pgvector GitHub repository](https://github.com/pgvector/pgvector)
+- [Nomic API documentation](https://docs.nomic.ai/)

@@ -4,18 +4,18 @@ subtitle: Use Lakebase Postgres to orchestrate multi-node hyperparameter tuning 
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a bayesian optimization library, to fine-tune models built with popular libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
+In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a Bayesian optimization library, to tune models built with libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
 
-To orchestrate all the trials, you'll use Neon, a complete set of cloud backend primitives for apps and agents that spans Lakebase Postgres, Auth, Storage, Functions, and an AI Gateway. The combination of Lakebase Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
+To coordinate the trials, you'll use Lakebase Postgres on Neon as Optuna's shared storage backend. Kubernetes runs the trials in parallel Docker containers, and every worker reads and writes the same study in Postgres.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following tools and services set up:
+Before you begin, make sure you have the following tools and services set up:
 
-- `Neon Serverless Postgres`: To provision and manage your serverless PostgreSQL database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
+- `Neon`: A Neon account to host your Postgres database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 - `Minikube`: For running a local Kubernetes cluster. You can install it by following the official [Minikube installation guide](https://minikube.sigs.k8s.io/docs/start).
 - `kubectl`: Kubernetes command-line tool for interacting with your cluster. Follow the [kubectl installation instructions](https://kubernetes.io/docs/tasks/tools/) to get started.
 - `Docker`: For containerizing your applications. If you don't have it installed, check out the [Docker installation guide](https://docs.docker.com/engine/install/).
@@ -23,23 +23,23 @@ Before you begin, ensure you have the following tools and services set up:
 
 ## Overview
 
-Hyperparameters are essential to machine learning model performance. Unlike parameters learned during training, hyperparameters (like learning rates, batch sizes, or the number of layers in a neural network) need to be set in advance. Tuning these hyperparameters effectively can greatly improve model performance, squeezing out the last bit of accuracy or reducing training time.
+Hyperparameters have a large effect on machine learning model performance. Unlike parameters learned during training, hyperparameters (like learning rates, batch sizes, or the number of layers in a neural network) need to be set in advance. Tuning them can improve accuracy or reduce training time.
 
-Bayesian optimization offers an efficient method for hyperparameter tuning. Unlike traditional approaches like grid or random search, Bayesian optimization builds a probabilistic model of the objective function to help it sample which hyperparameters to test next, which reduces the number of experiments needed, saving time and compute.
+Bayesian optimization is an efficient method for hyperparameter tuning. Unlike traditional approaches like grid or random search, Bayesian optimization builds a probabilistic model of the objective function to help it sample which hyperparameters to test next, which reduces the number of experiments needed, saving time and compute.
 
-Distributing hyperparameter tuning across multiple nodes allows each trial to run independently on its own machine, enabling multiple configurations to be tested simultaneously and speeding up the search process. However, these nodes need to be coordinated, and a serverless database like Lakebase Postgres is perfect. Neon offers a pay-as-you-go model that minimizes costs during idle periods,but scales when the workload demands it. This database will maintain the state of the hyperparameter tuning process, storing the results of each trial and coordinating the distribution of new trials to available nodes.
+Distributing hyperparameter tuning across multiple nodes allows each trial to run independently on its own machine, enabling multiple configurations to be tested simultaneously and speeding up the search process. The nodes need a shared place to coordinate, and Lakebase Postgres works well for this. Compute autoscales with the workload and scales to zero when idle, so you don't pay for compute between tuning runs (storage is still billed). The database maintains the state of the hyperparameter tuning process, storing the results of each trial and coordinating the distribution of new trials to available nodes.
 
-These nodes are managed using Kubernetes, a container orchestration platform, which enables the same task to run concurrently across multiple nodes, allowing each node to handle a separate trial independently. It can also manage resources per node, and reboot nodes that fail, allowing for a fault tolerant training process.
+Kubernetes, a container orchestration platform, runs the same task concurrently across multiple nodes, so each node handles a separate trial. It also manages resources per node and restarts failed workloads, which makes the training process fault tolerant.
 
-In this guide, you will combine Optuna, Kubernetes, and Lakebase Postgres to create a scalable and cost-effective system for distributed tuning of your PyTorch, TensorFlow/Keras, scikit-learn, and XGBoost models.
+In this guide, you'll combine Optuna, Kubernetes, and Lakebase Postgres to build a system for distributed tuning of your PyTorch, TensorFlow/Keras, scikit-learn, and XGBoost models.
 
-## Hyperparameter Tuning
+## Hyperparameter tuning
 
 Optuna organizes hyperparameter tuning into studies, which are collections of trials. A study represents a single optimization run, and each trial within the study corresponds to a set of hyperparameters to be evaluated. Optuna uses a study to manage the optimization process, keeping track of the trials, their results, and the best hyperparameters found so far.
 
 When you create a study, you can specify various parameters like the study name, the direction of optimization (minimize or maximize), and the storage backend. The storage backend is where Optuna stores the study data, including the trials and their results. By using a persistent storage backend like Lakebase Postgres, you can save the state of the optimization process, allowing all nodes to access the same study and coordinate the tuning process.
 
-A study is created like so :
+A study is created like so:
 
 ```python {4,5}
 if __name__ == "__main__":
@@ -54,13 +54,13 @@ if __name__ == "__main__":
 
 In the case of the distributed training, the `load_if_exists` parameter is set to `True` to load an existing study if it already exists, allowing nodes to join the optimization process.
 
-Based on your machine learning library of choice, you can define an `objective` function that takes a `trial` object as input and returns a metric to optimize. Let's go through each library and see how to define the `objective` function for scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models using test datasets.
+Based on your machine learning library of choice, you can define an `objective` function that takes a `trial` object as input and returns a metric to optimize. The sections below show how to define the `objective` function for scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models using test datasets.
 
-To follow along, name your python script `hyperparam_optimization.py`.
+To follow along, name your Python script `hyperparam_optimization.py`.
 
 ### sklearn
 
-ScikitLearn has a very wide range of models in its library, but in this you will be comparing a Support Vector Classifier and a Random Forest Classifier, and their hyperparameter configurations. For the SVC, you will optimize the strength of the regularization parameter `C`, while for the RF, you will optimize the maximum depth of the trees `max_depth`.
+scikit-learn has a wide range of models, but in this example you'll compare a Support Vector Classifier and a Random Forest Classifier, and their hyperparameter configurations. For the SVC, you will optimize the strength of the regularization parameter `C`, while for the RF, you will optimize the maximum depth of the trees `max_depth`.
 
 ```python
 import os
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
 ### xgboost
 
-Gradient Boosting is the standard choice for tabular data, and XGBoost is one of the most popular libraries for this task. However, these models are especially sensitive to hyperparameter choice. In this example, you will optimize the booster type, regularization weights, sampling ratios, and tree complexity parameters.
+Gradient boosting is a common choice for tabular data, and XGBoost is a widely used library for it. These models are sensitive to hyperparameter choice. In this example, you will optimize the booster type, regularization weights, sampling ratios, and tree complexity parameters.
 
 ```python
 import numpy as np
@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
 ### PyTorch
 
-PyTorch is now the de facto library for deep learning research, and its flexibility makes it a popular choice for many machine learning tasks. In this example, you will optimize the number of layers, hidden units, and dropout ratios in a feedforward neural network for the FashionMNIST dataset, a popular benchmark for image classification.
+PyTorch is widely used for deep learning research and many other machine learning tasks. In this example, you will optimize the number of layers, hidden units, and dropout ratios in a feedforward neural network for the FashionMNIST dataset, a popular benchmark for image classification.
 
 ```python
 import os
@@ -283,7 +283,7 @@ if __name__ == "__main__":
 
 ### tf.keras
 
-While PyTorch is the go-to library for research, Keras with the TensorFlow backend is popular for its simplicity and ease of use. In this example, you will optimize the number of filters, kernel size, strides, activation functions, and learning rate in a convolutional neural network for the MNIST dataset.
+Keras with the TensorFlow backend is popular for its simple API. In this example, you will optimize the number of filters, kernel size, strides, activation functions, and learning rate in a convolutional neural network for the MNIST dataset.
 
 ```python
 import urllib
@@ -359,7 +359,7 @@ if __name__ == "__main__":
     study.optimize(objective, n_trials=100, timeout=600)
 ```
 
-## Creating the Docker Image
+## Creating the Docker image
 
 To run the hyperparameter tuning process in a Kubernetes cluster, you'll need to containerize your application using Docker by creating a Docker image. The Docker image will contain your Python code, dependencies, and the necessary configuration files to run.
 
@@ -373,7 +373,7 @@ RUN pip install --no-cache-dir optuna psycopg2-binary OTHER_DEPENDENCIES
 COPY hyperparam_optimization.py .
 ```
 
-Depending on the machine learning library you're using, you'll need to install the appropriate dependencies in the Docker image. Each of the examples above requires the `optuna`, and `psycopg2-binary` packages, but you will need additional dependencies for each of the examples :
+Depending on the machine learning library you're using, you'll need to install the appropriate dependencies in the Docker image. Each of the examples above requires the `optuna`, and `psycopg2-binary` packages, but you'll need additional dependencies for each example:
 
 - For scikit-learn, you'll need to install `scikit-learn`
 - For XGBoost, you'll need to install `xgboost`
@@ -384,7 +384,7 @@ You'll want to build the Docker image later, once the Kubernetes cluster is set 
 
 ## Setting up Kubernetes
 
-To run distributed hyperparameter tuning across multiple nodes, you'll need a Kubernetes cluster. For this guide, you'll use Minikube to set up a local Kubernetes cluster on your machine. Minikube is a lightweight Kubernetes distribution, making it easy to get started with Kubernetes development.
+To run distributed hyperparameter tuning across multiple nodes, you'll need a Kubernetes cluster. For this guide, you'll use Minikube to set up a local Kubernetes cluster on your machine. Minikube is a lightweight Kubernetes distribution for local development.
 
 To start Minikube, run the following command:
 
@@ -402,7 +402,7 @@ kubectl cluster-info
 
 This command will display information about the Kubernetes cluster, including the API server address and the cluster services.
 
-Now that minikube is running, you can build your Docker using:
+Now that Minikube is running, build your Docker image:
 
 ```bash
 eval "$(minikube docker-env)"
@@ -419,7 +419,7 @@ To allow the Job to access the Lakebase Postgres database, you'll need to create
 kubectl create secret generic optuna-postgres-secrets --from-env-file=.env
 ```
 
-where your `.env` file contains the database URL from the Neon Console:
+where your `.env` file contains the connection string from the **Connect** modal in the Neon Console:
 
 ```bash
 DATABASE_URL=YOUR_DATABASE_URL
@@ -491,11 +491,11 @@ Likewise, you can monitor logs of the running pods to monitor using a tool like 
 stern .
 ```
 
-Here, you can see that the first pod creates a new study, and the other pods join the existing study. Then, each pods runs its trial, logs the result, and creates new a trial based on the results of the previous ones in the database.
+The first pod creates a new study, and the other pods join it. Each pod then runs a trial, logs the result, and creates a new trial based on the previous results stored in the database.
 
 ![Stern Logs](/guides/images/optuna-hyperprameter-kubernetes/k8s-example-logs.png)
 
-To see Kubernetes fault tolerance in action, you can delete one of the pods, and see that the job is automatically restarted on a new pod. First, find all the running pods and chose one to delete:
+To see Kubernetes fault tolerance in action, you can delete one of the pods, and see that the job is automatically restarted on a new pod. First, find the running pods and choose one to delete:
 
 ```bash
 kubectl get pods
@@ -513,6 +513,6 @@ In the stern logs, you can see the pod getting removed, and a new pod being crea
 
 ## Conclusion
 
-Now, you have successfully set up distributed hyperparameter tuning using Optuna, Lakebase Postgres, and Kubernetes. By using Kubernetes to manage multiple nodes running hyperparameter tuning jobs, you can speed up the optimization process and find the best hyperparameters for your machine learning models more efficiently. This kind of task, which sees bursts of database activity followed by long periods of inactivity, is well-suited to a serverless database like Lakebase Postgres, which can scale dynamically to any workload, then back to zero.
+You set up distributed hyperparameter tuning with Optuna, Lakebase Postgres, and Kubernetes, with multiple pods sharing one study. This workload has bursts of database activity followed by long idle periods, which suits Lakebase Postgres: compute autoscales during a run and scales to zero afterward.
 
-As a next step, you can use managed Kubernetes services like Azure Kubernetes Service (AKS) or Amazon Elastic Kubernetes Service (EKS). These services offer managed Kubernetes clusters that can scale to hundreds of nodes to run your jobs at scale. You can also integrate with cloud storage services like Azure Blob Storage or Amazon S3 to store your training data and model checkpoints, making it easier to manage large datasets and distributed training workflows.
+As a next step, you can use managed Kubernetes services like Azure Kubernetes Service (AKS) or Amazon Elastic Kubernetes Service (EKS). These services can scale to hundreds of nodes. You can also store training data and model checkpoints in object storage such as Amazon S3, Azure Blob Storage, or [Neon Object Storage](/docs/storage/overview).

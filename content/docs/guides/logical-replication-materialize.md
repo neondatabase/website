@@ -11,7 +11,7 @@ summary: >-
   scale-to-zero and increases compute billing.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-25T09:40:59.046Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -99,7 +99,7 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add Role**.
 6. In the role creation dialog, specify a role name.

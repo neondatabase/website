@@ -13,16 +13,16 @@ nextLink:
   slug: postgres-services-isolated-database-environment-monorepo
 ---
 
-Neon publishes [official GitHub Actions](https://neon.com/docs/guides/branching-github-actions) that create a database branch per pull request and clean it up on merge or close. Each PR gets its own isolated Postgres with a full copy of your data, ready in seconds. Branch creation doesn't copy data from the parent; it starts as a copy-on-write pointer.
+Neon publishes [official GitHub Actions](/docs/guides/branching-github-actions) that create a database branch for each pull request and delete it on merge or close. Each PR gets its own isolated Postgres database with the parent's schema and data. The branch is copy-on-write, so no data is copied when it's created and it's ready in seconds.
 
 ## The actions
 
-| Action                                                                                   | What it does                                             |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [Create branch](https://github.com/marketplace/actions/neon-create-branch-github-action) | Spins up a new branch from the parent (usually `main`)   |
-| [Delete branch](https://github.com/marketplace/actions/neon-database-delete-branch)      | Removes a branch on PR close or merge                    |
-| [Reset branch](https://github.com/marketplace/actions/neon-database-reset-branch-action) | Resets a branch to match its parent's latest state       |
-| [Schema diff](https://github.com/marketplace/actions/neon-schema-diff-github-action)     | Posts a schema diff between two branches as a PR comment |
+| Action                                                                                   | What it does                                                   |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Create branch](https://github.com/marketplace/actions/neon-create-branch-github-action) | Creates a new branch from a parent (default branch unless set) |
+| [Delete branch](https://github.com/marketplace/actions/neon-database-delete-branch)      | Deletes a branch on PR close or merge                          |
+| [Reset branch](https://github.com/marketplace/actions/neon-database-reset-branch-action) | Resets a branch to its parent's latest state                   |
+| [Schema diff](https://github.com/marketplace/actions/neon-schema-diff-github-action)     | Posts a schema diff between two branches as a PR comment       |
 
 ## A minimal workflow
 
@@ -39,7 +39,7 @@ jobs:
     if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
-      - uses: neondatabase/create-branch-action@v5
+      - uses: neondatabase/create-branch-action@v6
         id: branch
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
@@ -59,26 +59,24 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
-You need `NEON_API_KEY` in your repository secrets and `NEON_PROJECT_ID` as a variable. The [Neon GitHub integration](https://neon.com/docs/guides/neon-github-integration) sets both up for you.
+The workflow needs `NEON_API_KEY` as a repository secret and `NEON_PROJECT_ID` as a repository variable. The [Neon GitHub integration](/docs/guides/neon-github-integration) adds both for you. The create action also outputs `db_url_pooled` if your tests should use the pooled connection.
 
 ## Why branch instead of seed
 
-A branch starts as a pointer to the parent's storage. No data is copied at creation. You're billed only for changes you make on the branch, capped at the parent's logical data size. For a PR that runs a few test queries against production-shaped data, storage cost is close to $0.
+A new branch points at the parent's storage, so creating it copies nothing. You're billed for the changes written on the branch, capped at the branch's logical data size. For a PR that runs a few test queries against production-shaped data, the branch adds little storage cost. Its compute bills in CU-hours while tests run and scales to zero afterward.
 
 <Admonition type="tip" title="Set a TTL on preview branches">
-Use [branch expiration](https://neon.com/docs/guides/branch-expiration) to auto-delete branches that outlive their PR. Combined with the delete action on close, you won't accumulate stale branches.
+Use [branch expiration](/docs/guides/branch-expiration) to auto-delete branches that outlive their PR. Combined with the delete action on close, stale branches don't pile up.
 </Admonition>
 
 ## Plan limits
 
-The Free and Launch plans allow 10 branches per project. The Scale plan allows 25. Beyond that, extra branches on paid plans are billed at $1.50/branch-month (prorated hourly). For teams with many open PRs, [request a higher per-project limit](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
+The Free and Launch plans include 10 branches per project, and the Scale plan includes 25. On paid plans, extra branches cost $1.50/branch-month, prorated hourly. For teams with many open PRs, [request a higher per-project limit](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
 
 ## How other providers handle per-PR databases
 
-- **Supabase** has [GitHub integration for branching](https://supabase.com/docs/guides/deployment/branching/github-integration) that creates a preview branch when a PR is opened and tears it down on merge. Unlike Neon branches, Supabase preview branches don't copy production data; they apply your migration files and an optional `seed.sql`. Good for compliance, but you can't test against real production-shaped data.
-- **AWS Aurora** supports fast [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) via copy-on-write, which gets you the same "branch from production data" capability. There's no official AWS GitHub Action for per-PR cloning, so you wire it up yourself with the AWS CLI or SDK, and each clone provisions a new database cluster (compute you pay for).
-- **AWS RDS for Postgres** doesn't have copy-on-write clones. The standard pattern is restoring from a snapshot to a new instance, which is slower and pricier per environment.
-
-For a fresh database with production-shaped data, per PR, set up with one workflow file, Neon branching plus the official GitHub Actions is the closest match. Supabase covers the workflow piece; Aurora covers the storage model.
+- **Supabase** [branching](https://supabase.com/docs/guides/deployment/branching), which Supabase labels beta, has a [GitHub integration](https://supabase.com/docs/guides/deployment/branching/github-integration) that creates a preview branch when a PR opens and deletes it on merge or close. Preview branches start from your migrations and an optional `seed.sql`, not production data, which Supabase says is meant to protect sensitive data. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on. Each branch [bills for compute, disk, and egress](https://supabase.com/docs/guides/platform/manage-your-usage/branching), starting at $0.01344/hour on Micro.
+- **AWS Aurora** supports [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) with copy-on-write storage, so a clone can start from production data. AWS doesn't publish a GitHub Action for per-PR clones, so you script it with the AWS CLI or SDK. Each clone is a new cluster with its own DB instances to pay for.
+- **AWS RDS for Postgres** doesn't have copy-on-write clones. The usual approach is restoring a snapshot to a new instance for each environment, and each restored instance bills at its full instance-hour rate.
 
 <CTA title="Set up branch-per-PR" description="See ready-to-use starter repos for Vercel, Cloudflare Pages, and Fly.io preview deployments." buttonText="Open the guide" buttonUrl="https://neon.com/docs/guides/branching-github-actions" />

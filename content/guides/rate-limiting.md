@@ -1,15 +1,15 @@
 ---
-title: Rate Limiting in Postgres
+title: Rate limiting in Postgres
 subtitle: A step-by-step guide describing how to implement rate limiting in Postgres using advisory locks and counters
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-05-09T13:24:36.612Z'
-updatedOn: '2025-06-03T09:24:33.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Rate limiting means limiting the number of requests that can happen in a given time window, like 5 requests per minute or 100 requests per hour.
-While rate limiting is often implemented in the application layer, you can actually build effective rate limiting systems directly in Postgres.
-You can rate limit a certain Postgres query using a combination of advisory locks and counters.
+Rate limiting usually lives in the application layer, but you can also build it directly in Postgres.
+This guide rate limits a Postgres query with a counter table and advisory locks.
 
 ## Steps
 
@@ -21,7 +21,7 @@ You can rate limit a certain Postgres query using a combination of advisory lock
 
 ### Use advisory locks to synchronize access
 
-Advisory locks in Postgres are application-level, user-defined locks that help coordinate access to shared resources without blocking unrelated operations.
+Advisory locks in Postgres are application-defined locks that coordinate access to a shared resource without blocking unrelated operations.
 The advantage of using advisory locks over transactions for rate limiting is that they allow you to synchronize access to a shared key (like a user's counter) without locking rows.
 
 You can grab an exclusive lock on a given key like this:
@@ -30,7 +30,7 @@ You can grab an exclusive lock on a given key like this:
 SELECT pg_advisory_xact_lock(hashtext('user_123_rate_limit'));
 ```
 
-This ensures that only one transaction at a time can modify the counter for `user_123`.
+Only one transaction at a time can hold this lock, so only one can modify the counter for `user_123`.
 
 ### Create a counter table for rate tracking
 
@@ -50,7 +50,7 @@ Each row represents a rate limit bucket.
 
 ### Upsert into the rate_limits table
 
-The key idea behind the `rate_limits` table is to ensure each request either starts a new rate limiting window or increments the count within the current one, if there is a current window.
+Each request either starts a new rate limiting window or increments the count within the current one.
 The logic looks like the following.
 
 1. Try to insert a new counter. If the key doesn't exist yet, insert it with `count = 1` and `window_start = now`.
@@ -84,7 +84,7 @@ That's where advisory locks come in.
 
 ### Implement a basic rate limiter with SQL
 
-Below is an implementation of a rate limiter that allows up to 5 requests per minute using advisory locks to avoid any race conditions.
+Below is an implementation of a rate limiter that allows up to 5 requests per minute using an advisory lock to avoid race conditions.
 Running the below code 6 times within 1 minute will result in an error: `ERROR: Rate limit exceeded for user_123`
 
 ```sql
@@ -125,8 +125,8 @@ END $$;
 
 ### Wrap rate limiting in an SQL function
 
-The above SQL query hard-codes the rate limit key, `max_requests`, and other parameters, making it difficult to reuse.
-To make this logic reusable, you can put the logic in an SQL function as follows.
+The above SQL query hard-codes the rate limit key, `max_requests`, and other parameters, which makes it hard to reuse.
+To reuse it, put the logic in an SQL function:
 
 ```sql
 CREATE OR REPLACE FUNCTION check_rate_limit(rate_key TEXT, max_requests INTEGER, window_seconds INTEGER)
@@ -162,7 +162,7 @@ $$ LANGUAGE plpgsql;
 ```
 
 Then you can call the function as follows.
-The following query checks whether `user_123` has made more than 5 requests in the last minute.
+The following query checks whether `user_123` has made more than 5 requests in the current one-minute window.
 
 ```sql
 SELECT check_rate_limit('user_123', 5, 60);

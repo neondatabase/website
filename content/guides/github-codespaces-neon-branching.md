@@ -1,15 +1,15 @@
 ---
-title: Setting up GitHub Codespaces with Neon Database Branching for Pull Requests
-subtitle: Learn how to create separate development environments for each pull request using GitHub Codespaces and Neon's Postgres branching
+title: Setting up GitHub Codespaces with Neon database branching for pull requests
+subtitle: Create a separate development environment for each pull request with GitHub Codespaces and Neon branching
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-18T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-When working on a team project, it's useful to have separate environments for each new feature or bug fix. This helps prevent conflicts and makes it easier to test changes. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Neon's Postgres branching for the database.
+On a team project, separate environments for each feature or bug fix prevent conflicts and make changes easier to test. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Neon branching for the database.
 
-By the end of this guide, you'll have a setup that automatically creates a new Codespace and a new database branch for each pull request. This means each change can be tested separately, making it easier to find and fix problems.
+By the end of this guide, each pull request automatically gets its own database branch, and any Codespace you open for that pull request connects to it, so each change is tested separately.
 
 ## What you'll need
 
@@ -45,7 +45,7 @@ git commit -m "First commit: New Laravel project"
 
 The above commands will initialize a new Git repository, add all the project files to it, and create the first commit.
 
-3. Now, create a new repository on GitHub and upload your code:
+3. Create a new repository on GitHub and push your code:
 
 ```bash
 git remote add origin https://github.com/<yourusername>/codespaces-neon-demo.git
@@ -104,7 +104,7 @@ Now let's connect our project to a database on Neon.
 
 1. Go to the [Neon Console](https://console.neon.tech) and create a new project.
 
-2. After creating the project, you'll see a connection string. Copy the details as you'll need them later.
+2. Click **Connect** in the Console nav to view your connection string. Copy the details for the next step.
 
 3. Open the `.env` file in your Laravel project and update the database settings:
 
@@ -127,18 +127,18 @@ php artisan migrate
 
 This command creates the necessary tables in your Neon database.
 
-## Setting up GitHub Actions for Neon Branching
+## Setting up GitHub Actions for Neon branching
 
 Now we'll set up GitHub Actions to create and delete Neon database branches automatically. First, we need to add your Neon API key to your GitHub repository:
 
-1. In your GitHub repository, go to "Settings", then "Secrets and variables", then "Actions".
-2. Click "New repository secret".
+1. In your GitHub repository, go to **Settings**, then **Secrets and variables**, then **Actions**.
+2. Click **New repository secret**.
 3. Name it `NEON_API_KEY` and paste your [Neon API key](/docs/manage/api-keys#create-an-api-key) as the value.
-4. Click "Add secret".
+4. Click **Add secret**.
 
 Next, we'll create two GitHub Actions workflows: one to create a new Neon branch when a pull request is opened, and another to delete the branch when the pull request is closed.
 
-### Workflow to Create a Branch
+### Workflow to create a branch
 
 If you don't already have a `.github/workflows` directory, create one:
 
@@ -179,11 +179,9 @@ This workflow does the following:
 - The branch name is based on the pull request number.
 - It outputs the new branch's database URL and ID.
 
-### Workflow to Delete a Branch
+### Workflow to delete a branch
 
-With the workflow to create a branch set up, let's create another one to delete the branch when the pull request is closed.
-
-Create another file at `.github/workflows/delete-neon-branch.yml`:
+Next, add a workflow that deletes the branch when the pull request is closed. Create another file at `.github/workflows/delete-neon-branch.yml`:
 
 ```yaml
 name: Delete Neon Branch
@@ -210,7 +208,7 @@ This workflow:
 - Runs when a pull request is closed.
 - Uses Neon's action to delete the database branch associated with the pull request.
 
-## Configuring Codespaces to Use Neon Branches
+## Configuring Codespaces to use Neon branches
 
 Now we need to tell Codespaces how to connect to the right database branch. Create a file called `setup-db.sh` in the `.devcontainer` directory:
 
@@ -273,9 +271,9 @@ git push origin main
 
 With everything set up, you can now create a new branch in your project, open a pull request, and see the new Codespace and database branch in action.
 
-## How to Use This Setup
+## How to use this setup
 
-With everything set up, here's how you would use this in your development process:
+Here's how to use this setup day to day:
 
 1. Create a new branch in your project and make your changes:
    - Create and switch to a new branch: `git checkout -b feature-branch-name`
@@ -293,7 +291,7 @@ With everything set up, here's how you would use this in your development proces
 3. GitHub Actions will automatically create a new Neon database branch for your pull request:
    - This happens automatically when the pull request is opened
    - You can check the "Actions" tab in your GitHub repository to see the progress
-   - Once complete, you'll see a new branch in your Neon console named `pr-[number]`
+   - Once complete, you'll see a new branch in the Neon Console named `pr-[number]`
 
 4. Open a Codespace for this pull request:
    - On the pull request page, click the "Code" dropdown
@@ -314,11 +312,9 @@ With everything set up, here's how you would use this in your development proces
 
 7. Automatic cleanup:
    - When the pull request is closed (either merged or declined), GitHub Actions will automatically delete the associated Neon database branch
-   - You can verify this in your Neon console
+   - You can verify this in the Neon Console
 
-## Keeping Things Secure
-
-It's important to keep your project and its data safe:
+## Security
 
 1. Never share your Neon API key. Always use GitHub Secrets to store it.
 2. Be careful about what information you put in public repositories.
@@ -326,14 +322,14 @@ It's important to keep your project and its data safe:
 
 ## Conclusion
 
-By setting up GitHub Codespaces with Neon database branching, you've created a system that gives each pull request its own complete development environment. This can help your team work more effectively by making it easier to test changes and avoid conflicts.
+You set up GitHub Actions that create and delete a Neon branch for each pull request, and a Codespaces configuration that connects to that branch.
 
-This workflow can be adapted to work with other languages and frameworks. You can also add more steps to the GitHub Actions workflows to suit your specific needs like running tests, deploying to staging environments, or sending notifications.
+The same workflow works with other languages and frameworks. As a next step, add steps to the GitHub Actions workflows to run tests, deploy previews, or send notifications.
 
-## Where to Learn More
+## Where to learn more
 
-- [GitHub Codespaces Documentation](https://docs.github.com/en/codespaces)
-- [Neon Documentation](/docs)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [GitHub Codespaces documentation](https://docs.github.com/en/codespaces)
+- [Neon documentation](/docs)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
 
 <NeedHelp />

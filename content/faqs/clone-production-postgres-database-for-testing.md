@@ -1,6 +1,6 @@
 ---
 title: "Which database services let you instantly clone a production Postgres database so developers can test independently?"
-description: "Branches on Neon are instant Postgres database clones. Each branch shares storage with the parent until you write to it, so cloning a 100 GB database doesn't take 100 GB of new storage."
+description: "A Neon branch is an instant copy-on-write clone of your production database. It shares storage with the parent until you write to it, so cloning a 100 GB database doesn't add 100 GB of storage."
 date: 2026-04-25
 slug: clone-production-postgres-database-for-testing
 category: FAQ
@@ -13,22 +13,21 @@ nextLink:
   slug: cloud-postgres-services-scale-zero-data
 ---
 
-Neon does this with branching. A branch is a full Postgres database that starts as a pointer to the parent's data. No bytes are copied at branch time, so cloning a 50 GB production database takes a second or two regardless of size. Each developer can have their own branch and write to it without affecting production.
+Neon does this with branching. A branch is a copy-on-write clone of its parent: no data is copied when you create it, so a branch of a 50 GB production database is ready as fast as a branch of an empty one. Each developer can have their own branch and write to it without affecting production.
 
 ## How a branch differs from a backup restore
 
-A branch shares storage with its parent until you change something. Once you write to the branch, Lakebase Postgres records a delta. You're billed for the smaller of the delta or the branch's logical data size, so a child branch never costs more than a full copy. Production reads aren't affected by branch creation. See [Branching](/docs/introduction/branching).
+A restore from a backup copies data into a new database. A branch shares storage with its parent until you change something, and then only the changes are stored. You're billed for the smaller of those changes or the branch's logical data size, so a child branch never costs more than a full copy. Each branch also gets its own compute, so queries on the branch don't use production's CPU or memory. See [Branching](/docs/introduction/branching).
 
-Create a branch from the CLI:
+Create a branch from the CLI. Without `--parent`, the branch is created from the project's default branch:
 
 ```bash
 neon branches create \
   --name testing-payment-bug \
-  --parent main \
   --project-id <project-id>
 ```
 
-You can also branch from a specific point in time, which is useful for reproducing a bug from yesterday's data:
+You can also branch from a point in time within your [history window](/docs/postgres/backup-restore/branch-restore), which helps when you need to reproduce a bug against yesterday's data:
 
 ```bash
 neon branches create \
@@ -38,18 +37,16 @@ neon branches create \
 
 ## Keep dev branches short-lived
 
-Branches can auto-delete after 1 hour, 1 day, 7 days, or a custom timestamp. The console checks the 1-day box by default. Use this on CI and per-developer branches so storage doesn't accumulate. See [Branch expiration](/docs/guides/branch-expiration).
+Branches can delete themselves at an expiration time up to 30 days out. When you create a branch in the Console, **Automatically delete branch after** is checked with 1 day selected, and you can pick 1 hour or 7 days instead. Set expiration on CI and per-developer branches so storage doesn't accumulate. See [Branch expiration](/docs/guides/branch-expiration).
 
 <Admonition type="warning" title="Production data needs care">
-A clone of production is still production data. If you're testing against real customer rows, use [protected branches](/docs/guides/protected-branches) on the Launch plan and Scale plan, or anonymize the data on the branch before sharing it broadly.
+A clone of production is still production data. If you're testing against real customer rows, use [protected branches](/docs/guides/protected-branches) (Launch and Scale plans) to limit who can reach production, or create an [anonymized branch](/docs/workflows/data-anonymization) (beta) that masks PII with PostgreSQL Anonymizer.
 </Admonition>
 
-## How other Postgres services compare
+## How other providers compare
 
-- **Supabase** branches create a separate environment with its own Postgres instance, but new branches are data-less by default ([docs](https://supabase.com/docs/guides/deployment/branching)). To start a branch with data, you ship a seed file with the GitHub integration. That's safer for production privacy but doesn't give you a true production clone for reproducing bugs against real rows.
-- **Aurora Serverless v2** can create a clone of a cluster via the `RestoreDBClusterToPointInTime` API, which is fast because the cloned cluster initially shares storage with the source. Auto-pause on supported engine versions keeps the clone's idle compute cost low ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for Postgres** supports point-in-time recovery to a new instance, which copies the full snapshot. Clones aren't instant and storage is duplicated, so cloning a 100 GB database costs 100 GB more.
+- **Supabase** branches are separate environments, each with its own Supabase instance. Preview branches start from your migrations and a seed file, not production data ([docs](https://supabase.com/docs/guides/deployment/branching)). Dashboard branches (public alpha) have an **Include data** option that copies production data, which requires the PITR add-on ([docs](https://supabase.com/docs/guides/deployment/branching/dashboard)).
+- **Aurora (Postgres)** [cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) creates a new cluster that shares data pages with the source through copy-on-write. Each clone is its own cluster and needs its own DB instance. After 15 copy-on-write clones of a source, the next clone is a full copy. With Aurora Serverless v2 instances and a minimum capacity of 0 ACUs, an idle clone auto-pauses ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+- **RDS for Postgres** has no copy-on-write cloning. [Point-in-time recovery](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) or a snapshot restore creates a new DB instance with its own storage, so a copy of a 100 GB database adds 100 GB of storage and another instance to pay for.
 
-If your test workflow depends on real production data, copy-on-write branches on Neon and Aurora's cluster clones are the two architectures designed for this. Neon bills child branches for the delta only (capped at logical size), which keeps short-lived dev branches inexpensive.
-
-<CTA title="Clone production in a second" description="Branching is available on every plan, including the Free plan." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Branch your production database" description="Branching is available on every plan, including the Free plan." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

@@ -1,10 +1,10 @@
 ---
-title: 'Build your own Full-Stack Cloud Agents with Cloudflare Sandboxes and Neon Database Branching'
-subtitle: 'Learn how to build Full-Stack Cloud Agents using Cloudflare Sandboxes for ephemeral compute and Neon Database Branching for ephemeral data.'
+title: 'Build your own full-stack cloud agents with Cloudflare Sandboxes and Neon branching'
+subtitle: 'Build full-stack cloud agents using Cloudflare Sandboxes for ephemeral compute and Neon branching for ephemeral data.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-08-27T18:03:21.795Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
@@ -13,15 +13,15 @@ AI coding assistants are rapidly transitioning to the cloud. Platforms like [Cur
 
 For full‑stack development, however, raw compute power isn’t enough. Tasks such as updating database schemas, running migrations, or testing API routes require access to a database environment that mirrors production. Typically, developers configure cloud agents by setting environment variables in [dashboards](https://code.claude.com/docs/en/claude-code-on-the-web#environment-configuration) or [project settings](https://cursor.com/docs/cloud-agent/setup#environment-variables-and-secrets). The drawback is that these variables are defined at the workspace or environment level, meaning every agent instance inherits the same credentials (for example, a single `DATABASE_URL`).
 
-When all agents connect to one shared staging database, isolation is lost. This shared setup introduces risk: a buggy migration from one agent could corrupt the database and block all others. If another agent is simultaneously running tests, cascading failures can occur. Because of these limitations, most cloud agents today remain confined to stateless or front‑end tasks. The limitation arises from state management. Cloud agents have access to ephemeral compute, but not ephemeral data.
+When all agents connect to one shared staging database, isolation is lost. This shared setup introduces risk: a buggy migration from one agent could corrupt the database and block all others. If another agent is simultaneously running tests, cascading failures can occur. Because of this, most cloud agents today stick to stateless or front‑end tasks. Cloud agents have access to ephemeral compute, but not ephemeral data.
 
-This guide explains how to address that gap by building a custom Full-Stack Cloud Agent runner. By combining [Cloudflare Sandboxes](https://sandbox.cloudflare.com/) (for compute) with [Neon Database Branching](/docs/introduction/branching) (for data), you can create isolated, production‑like environments for each agent task, provisioned safely and on demand.
+This guide addresses that gap by building a custom full-stack cloud agent runner. By combining [Cloudflare Sandboxes](https://sandbox.cloudflare.com/) (for compute) with [Neon branching](/docs/introduction/branching) (for data), you can create isolated, production‑like environments for each agent task, provisioned safely and on demand.
 
-Each time you issue a prompt, the runner forks a copy‑on‑write branch of your database, launches a secure Cloudflare Sandbox, and runs the agent (Codex, Claude code, GitHub Copilot, etc.) of your choice in this controlled environment. The agent can then perform migrations, implement backend logic, and test its work without risk to staging or production systems. Once complete, you can review and merge its output with confidence.
+Each time you issue a prompt, the runner forks a copy‑on‑write branch of your database, launches a secure Cloudflare Sandbox, and runs the agent (Codex, Claude Code, GitHub Copilot, etc.) of your choice in this controlled environment. The agent can then perform migrations, implement backend logic, and test its work without risk to staging or production systems. When it finishes, you review the pull request and merge it.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - **Cloudflare account:** A [Cloudflare](https://cloudflare.com/) account on a **Workers Paid Plan** or higher, which is required to use Cloudflare Sandboxes.
 - **Claude API key:** An Anthropic API key to run Claude Code in the sandbox. Create an API key in the [Anthropic Developer Console](https://platform.claude.com).
@@ -34,7 +34,7 @@ Before you begin, ensure you have the following:
 
 ## Step 1: Initialize the Cloudflare Sandbox project
 
-Cloudflare provides a template for setting up a Worker configured with the Claude Code using Sandbox SDK. Open your terminal and run the following command to create a new project:
+Cloudflare provides a template for a Worker that runs Claude Code with the Sandbox SDK. Open your terminal and run the following command to create a new project:
 
 ```bash
 npm create cloudflare@latest -- cloudflare-sandbox-neon-branching --template=cloudflare/sandbox-sdk/examples/claude-code
@@ -47,14 +47,14 @@ If you inspect the `Dockerfile`, you'll see it includes the necessary setup to r
 
 Learn more about the project structure and configuration in [Cloudflare Docs: Run Claude Code on a Sandbox](https://developers.cloudflare.com/sandbox/tutorials/claude-code/).
 
-## Step 2: Generate a Neon API key and get your project id
+## Step 2: Generate a Neon API key and get your project ID
 
-To allow programmatic access to Neon for branch creation, you need a Neon API key and your Neon project id. The Cloudflare Worker uses these values to call the Neon API and create branches on demand.
+To allow programmatic access to Neon for branch creation, you need a Neon API key and your Neon project ID. The Cloudflare Worker uses these values to call the Neon API and create branches on demand.
 
-1. In Neon Console, open your organization settings and select **API Keys**.
-2. Click **Create new API Key** and give it a name (for example, "Cloudflare sandbox").
+1. In the Neon Console, switch to your organization, open **Settings**, and select **API keys**.
+2. Click **Create new** and give the key a name (for example, "Cloudflare sandbox").
    ![Create Neon API Key](/docs/manage/org_api_keys.png)
-   > Choose a **project-scoped** API key to restrict the agent's access to this specific project.
+   > Choose a **Project-scoped** API key to restrict the agent's access to this specific project. Only organization admins can create project-scoped keys.
 3. Copy the generated API key.
 4. Open the Neon project you use for your application. The AI agent will create branches in this project to run tasks against for development and testing.
 5. Go to **Settings** > **General**, then copy the **Project ID**.
@@ -63,11 +63,11 @@ To allow programmatic access to Neon for branch creation, you need a Neon API ke
 
 ## Step 3: Generate a GitHub Personal Access Token
 
-To allow the Sandbox to clone repositories, create git branches, commit changes, and open Pull Requests on your behalf, you need a GitHub Personal Access Token.
+To allow the Sandbox to clone repositories, create git branches, commit changes, and open pull requests on your behalf, you need a GitHub Personal Access Token.
 
 1. Navigate to your GitHub **Settings**, then go to **Developer settings** > **Personal access tokens** > **Tokens (classic)**.
 2. Click **Generate new token (classic)**.
-3. Give the token a descriptive name (e.g., "Full-Stack Cloud Agent Runner") and select the `repo` scope to allow full control of your repositories.
+3. Give the token a descriptive name (e.g., "Full-stack cloud agent runner") and select the `repo` scope to allow full control of your repositories.
    > If you are accessing an organization repository, you may also grant the admin:org scope to allow the token to access organization resources.
 4. Click **Generate token** and copy it to your clipboard.
 
@@ -91,7 +91,7 @@ Regenerate the Wrangler types to include the new environment variables:
 npx wrangler types
 ```
 
-To interact with the Neon API from the Worker, install the [Neon Typescript SDK](/docs/reference/typescript-sdk):
+To interact with the Neon API from the Worker, install the [Neon TypeScript SDK](/docs/reference/typescript-sdk):
 
 ```bash
 npm install @neon/sdk
@@ -99,7 +99,7 @@ npm install @neon/sdk
 
 ## Step 5: Update the Dockerfile to install GitHub CLI
 
-The default template Dockerfile does not include the GitHub CLI, which is necessary for the agent to create Pull Requests. Update the Dockerfile to install the GitHub CLI in the sandbox environment.
+The default template Dockerfile does not include the GitHub CLI, which the agent needs to create pull requests. Update the Dockerfile to install the GitHub CLI in the sandbox environment.
 
 Replace the contents of `Dockerfile` with:
 
@@ -185,7 +185,8 @@ async function createNeonBranch(
     throwOnError: true
   })
 
-  const { connectionString } = await neon.branches.createAndConnect(projectId, {
+  const { connectionString } = await neon.branches.createAndConnect({
+    projectId,
     name: branchName
   })
 
@@ -336,7 +337,7 @@ This code implements the full workflow of the cloud agent runner. The main compo
 - **`fetch(request, env)`:** Main controller. It validates input, creates IDs, and runs the full workflow.
 - **`createNeonBranch(...)`:** Provisions an isolated Neon branch and returns a branch-specific `DATABASE_URL`.
 - **`runClaude(...)`:** Executes Claude Code inside the sandbox with your task and guardrail system prompt. In this example, `haiku` is used as the model, but you can choose any [supported model](https://code.claude.com/docs/en/model-config) like `sonnet` or `opus` depending on your needs. Change the `--model` flag accordingly.
-- **`IS_SANDBOX` environment variable:** Setting `IS_SANDBOX` to `"1"` grants Claude Code permission to execute commands that are normally restricted. Because the sandbox and database branch are entirely isolated, the agent can safely perform destructive actions with full autonomy, posing zero risk to your production environment.
+- **`IS_SANDBOX` environment variable:** Setting `IS_SANDBOX` to `"1"` grants Claude Code permission to execute commands that are normally restricted. Because the sandbox and database branch are isolated, destructive actions the agent takes don't reach your production environment.
 - **`createPR(...)`:** Uses GitHub CLI to open a PR and returns the PR URL.
 
 End-to-end flow (**HTTP request -> PR**):
@@ -346,7 +347,7 @@ End-to-end flow (**HTTP request -> PR**):
 3. Clone the repository and create a git branch named after `agentId`.
 4. Inject environment variables (`ANTHROPIC_API_KEY`, branch `DATABASE_URL`) and run Claude.
 5. Commit and push the agent's changes.
-6. Create a Pull Request and return a JSON response with logs plus the PR link.
+6. Create a pull request and return a JSON response with logs plus the PR link.
 
 ## Step 7: Deploy the cloud agent runner to Cloudflare
 
@@ -367,11 +368,11 @@ npx wrangler secret put NEON_PROJECT_ID
 npx wrangler secret put GITHUB_TOKEN
 ```
 
-You now have your own Full-Stack Cloud Agent runner deployed on Cloudflare. You can send `POST` requests to the Worker URL with a JSON body containing a `repoUrl` and a `task` to see it in action.
+You now have your own full-stack cloud agent runner deployed on Cloudflare. You can send `POST` requests to the Worker URL with a JSON body containing a `repoUrl` and a `task` to see it in action.
 
 ## Step 8: Test the full workflow end-to-end
 
-Now that your runner is deployed, test it with a real task and confirm that it creates an isolated database branch, pushes code to a new Git branch, and opens a Pull Request.
+Now that your runner is deployed, test it with a real task and confirm that it creates an isolated database branch, pushes code to a new Git branch, and opens a pull request.
 
 1. Copy your Worker URL from the Wrangler deploy output (for example, `https://cloudflare-sandbox-neon-branching.<subdomain>.workers.dev`).
 2. Send a test request using `curl`:
@@ -392,17 +393,17 @@ You can send any repository URL that you have write access to. The agent will cl
 3. Inspect the JSON response. You should see the following fields:
    - `agentId` (unique run identifier)
    - `databaseUrl` (branch-specific Neon connection string)
-   - `prUrl` (URL of the generated Pull Request)
-4. Open the Pull Request and verify:
+   - `prUrl` (URL of the generated pull request)
+4. Open the pull request and verify:
    - The changes match the requested task.
    - CI and tests pass.
-5. In Neon Console, confirm a new branch was created for that run.
+5. In the Neon Console, confirm a new branch was created for that run.
 
-For example, here is an example request and response:
+Here is an example request and response:
 
 ![Example request and response](/docs/guides/cloudflare_sandbox_neon_branching_response.png)
 
-The JSON response provides the newly provisioned Neon branch URL and a direct link to the resulting Pull Request, giving you everything needed to review the agent's changes. The `agentOutput` and `agentErrors` fields contain the raw logs from the agent's execution, which can be helpful for debugging or auditing its behavior.
+The JSON response provides the newly provisioned Neon branch URL and a direct link to the resulting pull request. The `agentOutput` and `agentErrors` fields contain the raw logs from the agent's run, which help with debugging or auditing its behavior.
 
 For local testing during development, you can run the Worker with `npm run dev` and send requests to `http://localhost:8787` instead of the deployed URL.
 
@@ -410,11 +411,11 @@ For local testing during development, you can run the Worker with `npm run dev` 
 
 ## Benefits of this architecture
 
-Building your own AI agent runner pairs ephemeral compute with ephemeral data, solving the state management limitations of standard cloud agents:
+Building your own AI agent runner pairs ephemeral compute with ephemeral data:
 
-- **True full-stack autonomy:** Agents can safely test schema migrations and backend logic against a real Postgres branch prior to submitting a PR.
-- **Infinite parallelization:** Spin up multiple sandboxes and branches instantly to run concurrent agent tasks without state collisions.
-- **Zero risk:** A destructive agent action only affects its disposable branch, keeping staging and production databases entirely safe.
+- **Full-stack changes:** Agents can test schema migrations and backend logic against a real Postgres branch prior to submitting a PR.
+- **Parallel runs:** Spin up multiple sandboxes and branches to run concurrent agent tasks without state collisions.
+- **Contained failures:** A destructive agent action only affects its disposable branch, not your staging or production databases.
 - **Programmatic environment control:** Inject runtime configuration (like a dynamic `DATABASE_URL`) directly into each sandbox.
 - **No vendor lock-in:** Swap out Claude Code for any other CLI-based agent (e.g., Codex, OpenCode, GitHub Copilot CLI) while retaining the same execution architecture.
 
@@ -424,19 +425,17 @@ Because the runner is a standard Cloudflare Worker, you can extend it to build m
 
 - **Custom triggers:** Launch agents asynchronously via Slack commands, MS Teams, or GitHub Issue webhooks.
 - **Resource cleanup:** Automatically delete branches when a PR merges using webhooks, or configure [auto-expiring branches](/docs/guides/branch-expiration).
-- **Fallback and recovery:** If an agent breaks its environment, [reset the branch](/docs/guides/reset-from-parent) or use Time Travel before instructing the agent to retry.
+- **Fallback and recovery:** If an agent breaks its environment, [reset the branch](/docs/guides/reset-from-parent) or use [Time Travel](/docs/guides/time-travel-tutorial) before instructing the agent to retry.
 
-For more details on programmatic database management, explore the [Neon API Reference](/docs/reference/api) and the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
+For more on programmatic database management, see the [Neon API Reference](/docs/reference/api) and the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
 
 ## Conclusion
 
-Standard cloud AI agents are often limited by a lack of ephemeral state. By pairing Cloudflare sandboxes with Neon's instant database branching, you bridge this gap - providing agents with the disposable, production-like environments they need to function as true full-stack developers.
-
-You have built a custom execution layer that lets AI agents write, test, and validate codebase and schema changes autonomously. With this architecture, you can scale AI-driven development workflows without putting production at risk.
+You built a runner that gives each agent task its own Cloudflare Sandbox and Neon branch, so agents can change code and schema, run tests, and open a pull request without touching production. A good next step is to add branch cleanup on merge or set an [expiration time](/docs/guides/branch-expiration) on each branch the runner creates.
 
 ## Resources
 
-- [Neon Database Branching](/branching)
+- [Neon branching](/branching)
 - [Neon for AI Agent Platforms](/use-cases/ai-agents)
 - [Cloudflare Sandbox SDK Documentation](https://developers.cloudflare.com/sandbox/)
 - [Anthropic Claude Code](https://code.claude.com/docs/en/overview)

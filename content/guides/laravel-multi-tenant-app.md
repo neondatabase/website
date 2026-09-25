@@ -1,17 +1,17 @@
 ---
-title: Creating a Multi-Tenant Application with Laravel and Neon
-subtitle: Learn how to build a scalable multi-tenant application using Laravel and Neon's database features
+title: Creating a multi-tenant application with Laravel and Neon
+subtitle: Learn how to build a multi-tenant application with Laravel and a database per tenant on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Multi-tenancy is a software architecture where a single instance of an application serves multiple tenants or clients.
 
 Each tenant's data is isolated and remains invisible to other tenants. This approach is commonly used in Software as a Service (SaaS) applications. In this tutorial, we'll build the foundation for a multi-tenant SaaS application using Laravel and Neon.
 
-By the end of this tutorial, you'll have a fully functional multi-tenant SaaS application where tenants can manage their own books, users, and settings, all while maintaining data isolation between tenants.
+By the end of this tutorial, you'll have a multi-tenant Laravel application where each tenant registers its own subdomain, gets its own database, and onboards its own users.
 
 ## Prerequisites
 
@@ -23,11 +23,11 @@ Before we start, make sure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel and Livewire
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new Laravel project and setting up the necessary components.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -36,11 +36,11 @@ composer create-project laravel/laravel laravel-multi-tenant-saas
 cd laravel-multi-tenant-saas
 ```
 
-### Installing Required Packages
+### Installing required packages
 
-For our multi-tenant SaaS application, we'll use the following package:
+For our multi-tenant SaaS application, we'll use the following packages:
 
-- `stancl/tenancy`: A flexible multi-tenancy package for Laravel
+- `stancl/tenancy`: A multi-tenancy package for Laravel
 - Laravel Breeze: A minimal authentication starter kit for Laravel
 
 Start by installing the `stancl/tenancy` package:
@@ -78,7 +78,7 @@ npm install
 npm run dev
 ```
 
-### Setting up the Database
+### Setting up the database
 
 Update your `.env` file with your Neon database credentials:
 
@@ -97,11 +97,11 @@ After updating the `.env` file, run the database migrations:
 php artisan migrate
 ```
 
-## Implementing Multi-Tenancy
+## Implementing multi-tenancy
 
 Now that we have our basic setup, let's implement multi-tenancy in our application.
 
-### Creating the Tenant Model
+### Creating the tenant model
 
 Create a `Tenant` model:
 
@@ -129,13 +129,13 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 }
 ```
 
-This model extends the base `Tenant` model provided by the tenancy package and implements the `TenantWithDatabase` interface. We've also defined the fillable attributes and custom columns for our tenant.
+This model extends the base `Tenant` model provided by the tenancy package and implements the `TenantWithDatabase` interface.
 
-The `HasDatabase` and `HasDomains` traits provided by the tenancy package allow us to manage tenant-specific databases and domains. This essentially means that each tenant will have its own database and domain providing data isolation between tenants.
+The `HasDatabase` and `HasDomains` traits provided by the tenancy package manage tenant-specific databases and domains. Each tenant gets its own database and domain, which isolates tenant data.
 
 To learn more about the tenancy package event system and how to customize the tenant model, refer to the [stancl/tenancy documentation](https://tenancyforlaravel.com/docs/v3/event-system).
 
-### Configuring Tenancy
+### Configuring tenancy
 
 Update the `config/tenancy.php` file to use our custom `Tenant` model:
 
@@ -155,11 +155,11 @@ Also, update the central domains configuration:
 
 Replace the default central domains with your own domain names.
 
-This is an important part as this is how the tenancy package will determine which domain belongs to which tenant and load the tenant-specific data accordingly.
+The tenancy package treats central domains as your main application and any other domain as a tenant domain, so this setting controls when tenant-specific data is loaded.
 
 Feel free to review the other configuration options in the `config/tenancy.php` file to customize the tenancy behavior based on your requirements.
 
-### Creating Tenant Migrations
+### Creating tenant migrations
 
 The tenancy package has built-in event listeners that automatically run tenant-specific migrations when a tenant is created. For this we need to make sure that all of the tenant-specific migrations are in the `database/migrations/tenant` directory.
 
@@ -173,7 +173,7 @@ cp database/migrations/0001_01_01_000000_create_users_table.php database/migrati
 
 This will be the base migration for tenant-specific tables.
 
-### Implementing Tenant Routes
+### Implementing tenant routes
 
 The tenancy package provides middleware to handle tenant-specific routes. This allows you to define routes that are accessible only to tenants and not to central domains.
 
@@ -215,7 +215,7 @@ These routes will be loaded by the `TenantRouteServiceProvider` and will be acce
 
 For more information on how to customize the tenancy routes, refer to the [stancl/tenancy documentation](https://tenancyforlaravel.com/docs/v3/routes).
 
-### Implementing Tenant Creation
+### Implementing tenant creation
 
 Create a controller for tenant registration, this would usually be done by the admin users of the application:
 
@@ -267,7 +267,7 @@ In a nutshell, the controller has three methods:
 - `register()`: Registers a new tenant, which creates a new tenant record and domain
 - `registered()`: Displays a success message after registration
 
-This controller will be used to manage tenant registration in our application. Allowing new tenants to register and create their own subdomain and database for their account.
+New tenants use this controller to register and get their own subdomain and database.
 
 Add routes for tenant registration in `routes/web.php`:
 
@@ -331,11 +331,11 @@ Then create the `resources/views/tenant/registered.blade.php` file to display th
 
 This completes the tenant registration process. Tenants can now register and create their own subdomain and database for their account. In a real-world scenario, you would protect the registration routes with authentication middleware to ensure that only authorized admin users can create new tenants.
 
-### Verifying Tenant Registration
+### Verifying tenant registration
 
 To verify that the registration process works, visit `http://laravel-multi-tenant-saas.test/register` and register a new tenant. After registration, you should see the success message with the tenant's domain.
 
-Next go to your Neon dashboard and verify that the new tenant's database has been created:
+Next, open the **SQL Editor** in the Neon Console and check that the tenant record was created:
 
 ```sql
 SELECT * FROM tenants;
@@ -347,7 +347,7 @@ You should see the newly created tenant in the `tenants` table. You can also che
 SELECT * FROM domains;
 ```
 
-And to verify that you actually have a separate database for the new tenant, use the `\l` command in the `psql` console to list all databases or the following SQL query:
+To verify that the new tenant has its own database, use the `\l` command in the `psql` console to list all databases or the following SQL query:
 
 ```sql
 SELECT datname FROM pg_database WHERE datistemplate = false;
@@ -355,11 +355,11 @@ SELECT datname FROM pg_database WHERE datistemplate = false;
 
 The tenant's database should be listed in the results and it should be named `tenant{tenant_id}`.
 
-> The tenancy package allows you to configure the database naming convention for tenants. By default, the database name is `tenant{tenant_id}` where `{tenant_id}` is the ID of the tenant. You can also configure the package to use separate schemas instead of separate databases for tenants.
+> The tenancy package lets you configure the database naming convention for tenants. By default, the database name is `tenant{tenant_id}` where `{tenant_id}` is the ID of the tenant. You can also configure the package to use separate schemas instead of separate databases for tenants. Neon allows up to 500 databases per branch, so consider schemas or a [project per tenant](/docs/guides/multitenancy) if you expect more tenants than that.
 
-With that done, you've successfully implemented tenant registration in your multi-tenant SaaS application. Next let's implement the tenant onboarding process.
+With tenant registration working, the next step is tenant onboarding.
 
-### Implementing Tenant Onboarding
+### Implementing tenant onboarding
 
 Now that you can register new tenants, let's create an onboarding process.
 
@@ -503,7 +503,7 @@ For simplicity, we're extending the Breeze guest layout for the onboarding form.
 
 To test the onboarding process, visit `http://tenant1.example.com/onboarding` and complete the onboarding form. After submitting the form, you should be redirected to the tenant dashboard which we'll implement next.
 
-### Implementing Tenant Dashboard
+### Implementing the tenant dashboard
 
 Create a new controller for the tenant dashboard:
 
@@ -584,22 +584,22 @@ In this tutorial, we've built a simple multi-tenant application using Laravel an
 3. Implementing tenant onboarding
 4. Adding a tenant dashboard for individual tenants
 
-This implementation provides a foundation for building more complex SaaS applications with Laravel and Neon. You can further expand on this system by:
+From here, you can extend the application by:
 
 - Adding more features to the tenant dashboard
 - Implementing billing and subscription management
-- Enhancing security with two-factor authentication
+- Adding two-factor authentication
 - Adding more tenant-specific customizations
 
-Using the `stancl/tenancy` package along with Neon, each tenant will have its own database. Thanks to Neon's autoscaling feature, you can easily scale your application as you onboard more tenants.
+With `stancl/tenancy`, each tenant gets its own database. All of those databases live on the same Neon branch and share its compute, which autoscales with load as you onboard more tenants.
 
-There are other packages and tools available to help you build multi-tenant applications with Laravel. You can explore these options based on your requirements and choose the one that best fits your needs. Some of the popular packages include:
+There are other packages and tools available to help you build multi-tenant applications with Laravel. Popular options include:
 
 - [spatie/laravel-multitenancy](https://spatie.be/docs/laravel-multitenancy/v3/introduction)
 - [tenancy/tenancy](https://github.com/tenancy/tenancy)
 
-## Additional Resources
+## Additional resources
 
-- [Laravel Documentation](https://laravel.com/docs)
-- [stancl/tenancy Documentation](https://tenancyforlaravel.com/)
-- [Neon Documentation](/docs/)
+- [Laravel documentation](https://laravel.com/docs)
+- [stancl/tenancy documentation](https://tenancyforlaravel.com/)
+- [Neon documentation](/docs/)

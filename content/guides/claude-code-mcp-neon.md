@@ -4,7 +4,7 @@ subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -20,15 +20,15 @@ The Neon MCP Server grants broad database management capabilities. Always review
 Make sure you have:
 
 1. **Claude Code:** Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
-2. **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+2. **Neon API key (for API key authentication):** After signing up, get your Neon API key from the [Neon Console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
-   <Admonition type="important" title="Neon API Key Security">
+   <Admonition type="important" title="API key security">
    Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
    </Admonition>
 
-3. **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
+3. **Node.js and npm:** The Neon CLI (`npx neon@latest`) requires Node.js 20.19.0 or later, and installing agent skills requires Node.js 22.20 or later. Download them from [nodejs.org](https://nodejs.org).
 
-### Quick Setup (Recommended)
+### Quick setup (recommended)
 
 The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which sets up the current directory for Neon, including the MCP server for Claude Code:
 
@@ -38,10 +38,10 @@ npx neon@latest init
 
 Run it in a terminal. It installs agent tooling (either the Neon plugin, or agent skills and the MCP server) and links a Neon project. Once complete, restart Claude Code and ask your AI assistant **"Get started with Neon"**.
 
-### Option 1: Setting up the Remote Hosted Neon MCP Server (OAuth)
+### Set up the remote Neon MCP Server (OAuth)
 
 <Admonition type="note">
-By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#config-generator).
+By default, the remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#config-generator).
 </Admonition>
 
 1. Open your terminal.
@@ -84,7 +84,7 @@ Verify the connection:
 
 For a full list of available tools, see [available tools](/docs/ai/neon-mcp-server#available-tools) in the Neon MCP Server overview.
 
-## Development Workflow: Adding a Column with Claude Code and Neon MCP
+## Example workflow: add a column
 
 Here's an example interaction adding a `created_at` column to a table:
 
@@ -127,15 +127,15 @@ Claude Code: I'll complete the migration and apply the changes to the production
 You can verify the changes in your Neon Console or by querying the database directly.
 
 <Admonition type="note">
-While the Neon MCP server allows you to use all of Neon's functionalities, you can also use a [generic Postgres MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/postgres) to connect to Neon.
+The Neon MCP server manages projects, branches, and other Neon resources. To only run queries, you can also connect to Neon with a generic Postgres MCP server, such as the [archived reference Postgres server](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres).
 </Admonition>
 
 ## Resources
 
-- [MCP Protocol](https://modelcontextprotocol.org)
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [Neon Docs](/docs)
-- [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
+- [Model Context Protocol](https://modelcontextprotocol.io)
+- [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Neon documentation](/docs)
+- [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
 
 <NeedHelp/>

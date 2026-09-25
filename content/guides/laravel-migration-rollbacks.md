@@ -1,17 +1,15 @@
 ---
 title: Reverting a failed deployment and schema migration in Laravel
-subtitle: Learn how to revert a failed deployment and schema migration in Laravel using built-in tools like `migrate:rollback` and Neon's backup and restore capabilities.
+subtitle: Learn how to revert a failed deployment and schema migration in Laravel using built-in tools like `migrate:rollback` and Neon's instant restore.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2026-02-01T13:23:47.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Deploying new features and updates is an essential part of maintaining a modern web application. However, not every deployment goes as planned.
+Not every deployment goes as planned. When something goes wrong, especially with schema migrations, the consequences can range from data inconsistencies to extended application downtime.
 
-When something goes wrong, especially with schema migrations, the consequences can range from data inconsistencies to extended application downtime.
-
-In this guide, you'll learn how to revert a failed deployment and schema migration in Laravel using built-in tools like `migrate:rollback` and the backup and restore capabilities of Neon. We'll cover practical steps and best practices for deployment and recovery, helping you prevent future deployment issues.
+In this guide, you'll learn how to revert a failed deployment and schema migration in Laravel using built-in tools like `migrate:rollback` and Neon's instant restore. We'll also cover practices for deployment and recovery that help prevent future deployment issues.
 
 ## Rolling back migrations in Laravel
 
@@ -38,12 +36,12 @@ Here's how to use it:
 
    This command will only roll back the most recent migration file.
 
-3. **Rolling back to a specific point in time:**
-   For more granular control over the rollback process, use the `--date` option with a date string.
+3. **Roll back a specific batch:**
+   To roll back a single batch of migrations, use the `--batch` option with the batch number from the `migrations` table.
    ```bash
-   php artisan migrate:rollback --date="2024-05-01 12:00:00"
+   php artisan migrate:rollback --batch=3
    ```
-   This command will roll back all migrations that were executed after the specified date.
+   This command rolls back only the migrations in batch 3.
 
 ### Troubleshooting rollback issues
 
@@ -99,28 +97,26 @@ After rolling back migrations, verify the database schema and data to ensure the
 - **Inspect database directly:**
   Use your database management tool to directly inspect the schema and data.
 
-> **Note:** `migrate:rollback` can lead to data loss if not used carefully. Ensure you have a backup strategy in place.
+> **Note:** `migrate:rollback` can lead to data loss if not used carefully. Make sure you have a backup strategy in place.
 
 ## Restoring your data using Neon
 
-If rolling back migrations doesn't solve the issue, [Neon's backup and restore](/docs/manage/backups) capabilities can quickly restore your database to a previous state.
+If rolling back migrations doesn't solve the issue, Neon's [instant restore](/docs/postgres/backup-restore/branch-restore) can return your database to a previous state.
 
-### Key benefits of using Neon for restoration
+### Restore options on Neon
 
-1. **Point-in-Time Restoration:** Restore to a specific moment before the failed deployment.
-2. **Restore from another Branch:** Use Neon's branching feature to restore from a stable branch.
+1. **Point-in-time restore:** Restore a branch to a specific moment before the failed deployment, within your project's history window.
+2. **Restore from another branch:** Restore your branch from the data in another, stable branch.
 
 ### Restoration steps
 
-To restore your database using Neon, you can either use the Neon dashboard or the Neon CLI or API. Follow the steps outlined in [Neon's Branch Restore Guide](/docs/introduction/branch-restore#how-to-use-instant-restore):
+You can restore your database from the Neon Console, the Neon CLI, or the Neon API. Follow the steps in [Instant restore](/docs/postgres/backup-restore/branch-restore#how-to-use-instant-restore).
 
-After restoring the database, align your codebase with the restored data to ensure consistency.
-
-For detailed steps, refer to the [Neon Branch Restore Guide](/docs/introduction/branch-restore#how-to-use-instant-restore).
+After restoring the database, roll your code back to the version that matches the restored schema.
 
 ## Best practices for deployment and recovery
 
-No deployment process is foolproof, but following best practices can help you recover quickly and prevent future issues.
+No deployment process is foolproof, but these practices help you recover quickly and prevent future issues.
 
 ### Use a staging environment
 
@@ -142,7 +138,7 @@ Replicate your production environment for testing before deploying features to p
 
 Smaller, manageable migrations make rollbacks simpler.
 
-- **Reduce extensive issues:**
+- **Limit the scope of each change:**
   Break changes into smaller, logical batches.
 
 - **Example workflow:**
@@ -161,15 +157,15 @@ Smaller, manageable migrations make rollbacks simpler.
 
 ### Implement a backup strategy
 
-1. **Daily Full Backups:** Schedule daily full backups.
-2. **Incremental Backups:** Use frequent snapshots throughout the day.
-3. **Retention Policies:** Keep backups long enough for compliance and audits.
+1. **Daily full backups:** Schedule daily full backups, for example with [automated `pg_dump` backups](/docs/postgres/backup-restore/backups#automated-backups-with-pg_dump).
+2. **Incremental backups:** Use frequent snapshots throughout the day.
+3. **Retention policies:** Keep backups long enough for compliance and audits.
 
-It is important to test your backup and restore process regularly to ensure it works as expected.
+Test your backup and restore process regularly to confirm it works.
 
 ## Preventing future deployment issues
 
-Even with a solid recovery plan, preventing deployment issues in the first place is the best approach. There are several strategies to minimize deployment problems:
+Even with a solid recovery plan, it's better to prevent deployment issues in the first place. These strategies help:
 
 ### Automate and validate deployments
 
@@ -177,7 +173,7 @@ Implement a CI/CD pipeline to automate the deployment process and add safeguards
 
 **Example CI/CD pipeline:**
 
-1. **Build Stage:** Install dependencies and compile assets.
+1. **Build stage:** Install dependencies and compile assets.
 
    ```yaml
    - name: Install Dependencies
@@ -195,14 +191,14 @@ Implement a CI/CD pipeline to automate the deployment process and add safeguards
      run: php artisan lint
    ```
 
-3. **Deployment Stage:** Deploy to staging, run health checks, and promote to production if all tests pass.
+3. **Deployment stage:** Deploy to staging, run health checks, and promote to production if all tests pass.
 
 ### Use Neon's branching feature
 
 Create isolated environments for testing and staging using [Neon's branching feature](/docs/introduction/branching).
 
 1. **Create a branch:**
-   Create a branch from your production database in the Neon dashboard.
+   Create a branch from your production branch in the Neon Console.
 
 2. **Deploy code to staging:**
    Point your staging environment to the new branch.
@@ -213,19 +209,17 @@ Create isolated environments for testing and staging using [Neon's branching fea
 4. **Merge to production:**
    Deploy your changes to production after successful testing.
 
-For a detailed guide on using Neon's branching feature with Laravel for testing and staging, refer to the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch).
+For a detailed guide on using Neon's branching feature with Laravel for testing and staging, refer to [Testing Laravel applications with Neon's database branching](/guides/laravel-test-on-branch).
 
 ### Set up monitoring and alerts
 
-Proactively monitor your application and database. That way, you can catch issues early and respond quickly.
+Monitor your application and database so you can catch issues early and respond quickly. Tools to consider include New Relic, Sentry, and Datadog.
 
-Some monitoring tools to consider can include tools like New Relic, Sentry, or Datadog.
-
-On the database monitoring side, you can use [Neon's built-in monitoring capabilities](/docs/introduction/monitoring-page) to track performance metrics and receive alerts for potential issues.
+On the database monitoring side, you can use the [Neon monitoring dashboard](/docs/introduction/monitoring-page) to track performance metrics such as CPU, RAM, and connections.
 
 ## Conclusion
 
-By using Laravel's built-in `migrate:rollback` command and Neon's backup and restore capabilities, you can revert a failed deployment quickly and safely. Follow best practices like testing in staging environments, breaking down database changes, and automating deployments to minimize future issues and maintain a smooth deployment process.
+With Laravel's `migrate:rollback` command and Neon's instant restore, you can revert a failed deployment and its schema changes. To reduce future failures, test migrations on a branch, keep database changes small, and automate your deployments.
 
 - [Laravel Migrations Documentation](https://laravel.com/docs/11.x/migrations)
 - [Neon documentation](/docs)

@@ -20,7 +20,7 @@ redirectFrom:
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
   - /docs/introduction/branch-restore
-updatedOn: '2026-08-31T19:23:51.024Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 <InfoBlock>
@@ -285,7 +285,7 @@ Backup branches are deletable except in two cases:
 
 To delete a backup branch:
 
-1. Navigate to the **Branches** page (under **Project**).
+1. Navigate to the **Branches** page.
 2. Find the backup branch you want to delete. It will have a name with the following format:
 
    ```
