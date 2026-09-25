@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a remote MCP server on Neon Functions, serve it fr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-22T00:00:00.000Z'
-updatedOn: '2026-09-25T11:17:28.147Z'
+updatedOn: '2026-09-25T12:08:22.916Z'
 ---
 
 An AI assistant like Cursor or Claude needs tools it can call over the internet to work with your APIs, your backend, or your data. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
@@ -665,9 +665,14 @@ npx add-mcp https://mcp.example.com/mcp -a cursor \
 
 ### Option 2: OAuth with Better Auth
 
-The MCP authorization spec expects your server to act as an OAuth resource server: clients discover your authorization server, sign the user in through a browser, and send an access token with every JSON-RPC request. [Neon's Managed Better Auth](/docs/auth/overview) doesn't support the OAuth provider plugin yet, so you'll self-host [Better Auth](https://www.better-auth.com) inside the same Neon Function using its [MCP plugin](https://www.better-auth.com/docs/plugins/mcp). Better Auth stores its data in your database on Neon, so you don't need to run a separate service.
+With OAuth, each client signs the user in through a browser and sends an access token with every request. [Neon's Managed Better Auth](/docs/auth/overview) doesn't support the OAuth provider plugin yet, so you'll self-host [Better Auth](https://www.better-auth.com) inside the same Neon Function using its [MCP plugin](https://www.better-auth.com/docs/plugins/mcp). Better Auth stores its data in your database on Neon, so you don't need to run a separate service.
 
-The plugin turns your app into both an OAuth authorization server and a protected resource in one process. It builds on the OAuth 2.1 provider and serves protected resource metadata that MCP clients use for discovery, so clients can register and authorize on their own. The flow looks like this:
+Before you write the OAuth code, there are two terms you'll see throughout this section. Both are roles your one function plays:
+
+- **Authorization server**: the service that signs the user in and hands out tokens. Think of it as the ID office.
+- **Protected resource**: the API that checks tokens before doing anything. That's your `/mcp` endpoint, the thing being protected.
+
+The MCP plugin sets both up in one process. The flow looks like this:
 
 ```mermaid
 sequenceDiagram
@@ -695,18 +700,11 @@ sequenceDiagram
 
 Three values move through that flow, and you never handle any of the user's credentials directly:
 
-- **Authorization code**: issued when the user clicks Allow. The client exchanges it once at the token endpoint; it's never sent with a tool call.
-- **Access token**: a JWT Better Auth issues at that endpoint, with `MCP_RESOURCE` as its audience. The client sends it as `Authorization: Bearer` on every `/mcp` request.
-- **PKCE pair**: the client generates a verifier and challenge before opening the browser. Better Auth checks they match at the token endpoint, so the code can't be stolen and reused by a malicious party.
+- **Authorization code**: a one-time ticket issued when the user clicks Allow. The client trades it at the token endpoint for an access token.
+- **Access token**: a JWT, which is a signed string the server can verify without asking a database. It names `MCP_RESOURCE` as its audience, meaning "this token is only valid for the `/mcp` endpoint". The client sends it as `Authorization: Bearer` on every `/mcp` request.
+- **PKCE pair**: two related strings (a verifier and a challenge) the client generates before opening the browser. Better Auth checks they match when the code is exchanged, so someone who steals the code can't use it.
 
-Better Auth serves the OAuth endpoints under `/api/auth/*`, including the authorization-server discovery document (`/api/auth/.well-known/oauth-authorization-server`) and the `/api/auth/jwks` endpoint token verification uses. The protected-resource metadata (`/.well-known/oauth-protected-resource`, plus the `/mcp`-suffixed variant naming your endpoint) is served at the domain root by the `mcp()` plugin, so the wiring below forwards `/.well-known/*` to `auth.handler` as well. That root route is load-bearing: without it, clients fail discovery with a plain-text `404` before a browser ever opens. You serve `/sign-in`, `/consent`, and `/mcp` yourself.
-
-Clients register with your server in one of two ways:
-
-- **CIMD (Client ID Metadata Document)**: the mechanism the `2026-07-28` profile recommends. The client's ID is an HTTPS URL serving a JSON document (name, redirect URIs); the `cimd()` plugin fetches it.
-- **Dynamic client registration**: the fallback, where the client `POST`s a registration body and gets a `client_id` back. The two flags in the config below allow it, even before anyone is signed in, so the first connection can register itself.
-
-Install the auth packages:
+Install the auth packages you'll need for Better Auth and the MCP plugin:
 
 ```bash
 npm install better-auth @better-auth/mcp @better-auth/cimd
@@ -753,15 +751,12 @@ export const auth = betterAuth({
 
 Here's what each piece does:
 
-- **`database`**: A `pg` pool pointing at your Neon database. Better Auth stores users, sessions, and OAuth records (clients, tokens, consents) in tables it manages in the same database.
-- **`jwt()`**: Required by the MCP plugin. It provides the signing keys behind the `/api/auth/jwks` endpoint that access token verification uses.
-- **`mcp({...})`**: The OAuth provider configured for MCP. `resource` is the protected resource identifier. It must be the exact URL clients connect to, path included, and access tokens carry it as their audience. `loginPage` and `consentPage` are the browser pages you'll add next. A mismatch here is the usual reason a client signs in and then fails every tool call.
-- **`allowDynamicClientRegistration` and `allowUnauthenticatedClientRegistration`**: Enable the fallback registration endpoint, including for a client that doesn't have a user session yet. CIMD, configured by `cimd()`, is the preferred path. Leave both flags on while you follow this guide so Cursor can connect on the first try.
-- **`dotenv`**: Loads `.env.local` so the Better Auth CLI can read `DATABASE_URL` when you run the migration later in this guide. In the deployed function, `.env.local` doesn't exist and the call is a no-op; Neon injects the variables instead.
+- **`database`**: A `pg` pool pointing at your Neon database. Better Auth stores users, sessions, and OAuth records (clients, tokens) in tables it manages in the same database.
+- **`jwt()`**: Required by the MCP plugin. It provides the signing keys behind the `/api/auth/jwks` endpoint. JWKS is just a public list of the keys the server uses to sign tokens; anyone verifying a token can fetch that list and check the signature themselves, no shared secret needed.
+- **`mcp({...})`**: The OAuth provider configured for MCP. `resource` is the protected resource identifier, the exact URL clients connect to, path included. Every access token carries this URL as its audience, so a token meant for some other API is rejected here. The `loginPage` and `consentPage` are the HTML pages you serve for sign-in and consent.
+- **`allowDynamicClientRegistration` and `allowUnauthenticatedClientRegistration`**: Let a client `POST` a registration body and get a `client_id` back, even before anyone is signed in, so the first connection can register itself. Clients can also register with CIMD, where the client publishes a small JSON document at an HTTPS URL and that URL acts as its ID; the `cimd()` plugin fetches and checks it. The MCP spec requires one of these two methods for client registration, and the MCP plugin supports both.
 
-The `dotenv` call sits between the imports and the `betterAuth` call on purpose: ESM hoists imports, but `process.env` is only read when `betterAuth()` runs, which happens after `config()` runs.
-
-Add the auth variables to your `.env.local` file. First generate a secret:
+Better Auth needs a secret to sign access tokens. Generate one with the following command and add it to your `.env.local` file as `BETTER_AUTH_SECRET`:
 
 ```bash
 openssl rand -base64 32
@@ -769,16 +764,14 @@ openssl rand -base64 32
 
 ```bash filename=".env.local"
 BETTER_AUTH_SECRET=<the-value-you-generated>
-BETTER_AUTH_URL=http://localhost:8787
+BETTER_AUTH_URL=https://mcp.example.com
 ```
 
-`BETTER_AUTH_URL` is the base URL Better Auth uses to build issuer URLs and to check browser origins. The value in `.env.local` is what `neon dev` and the auth CLI see. The deployed function gets a different value from `neon.ts` below, `https://mcp.example.com`, because that's the origin clients will use.
-
-`MCP_RESOURCE` in `auth.ts` is already the public URL, so leave it there. If you verify OAuth against `http://localhost:8787/mcp`, the issuer (`BETTER_AUTH_URL`) and the audience (`MCP_RESOURCE`) won't match, and `requireMcpAuth` rejects the token. This guide verifies OAuth on the custom domain after deploy. To exercise the browser flow locally, point both values at the local origin for that session, then put the public origin back before you deploy.
+`BETTER_AUTH_URL` is the base URL of your MCP function. The MCP plugin uses it to build the `aud` (audience) claim in access tokens, and the client checks that claim against the URL it connects to.
 
 #### Wire auth into the function
 
-Update `index.ts` to mount the Better Auth handler, add the sign-in and consent pages, and protect `/mcp` with `requireMcpAuth`. The new imports and routes go at the top of the file:
+Update `index.ts` to mount the Better Auth handler, add the sign-in and consent pages, and protect `/mcp` with `requireMcpAuth`:
 
 ```typescript shouldWrap filename="index.ts" {1-2,13,15-17,23,25,27,29,31}
 import { auth, MCP_RESOURCE } from './auth';
@@ -816,17 +809,18 @@ app.all('/mcp', (c) => protectedMcp(c.req.raw));
 export default app;
 ```
 
-Here's what changed:
+Here's the idea behind each change:
 
-- **`legacy: 'reject'`**: With OAuth in place, the snippet pins the server to the MCP `2026-07-28` profile: `2025`-era protocol traffic gets a `400` unsupported-protocol-version on `POST` (and `405` on `GET`/`DELETE`, which are session operations). Only clients speaking the current profile can connect: recent Cursor, Claude Code, and Claude Desktop. If you need to keep supporting older clients, omit this option; the default serves both protocol eras (statelessly, so `GET`/`DELETE` still answer `405`, which spec-compliant clients tolerate).
-- **`requireMcpAuth`**: Wraps the MCP handler. It reads the `Authorization` header, verifies the access token against Better Auth's JWKS, and checks the issuer, audience, and expiry. Unauthenticated requests get a JSON-RPC `401` with an RFC 9728 `WWW-Authenticate` header, which is the signal MCP clients use to start the authorization flow.
-- **`auth.handler`**: Mounted at `/api/auth/*`, it serves sign-in, sign-up, and every OAuth endpoint (`/oauth2/authorize`, `/oauth2/token`, and the authorization-server discovery document). Use `app.all`, not just `GET`/`POST`, so token, revocation, and metadata requests all reach it.
-- **`/.well-known/*`**: Forwards the domain-root discovery path to `auth.handler`. That's where the `mcp()` plugin answers `/.well-known/oauth-protected-resource/mcp`, the URL the `401` challenge points clients at. Hono returns its own plain-text `404` for unmounted paths, and clients surface that as `Invalid OAuth error response ... Raw body: 404 Not Found`, so this route has to exist.
+- **`legacy: 'reject'`**: Tells the MCP SDK to only serve modern clients that support OAuth. An older client gets an error saying the server requires OAuth.
+- **`requireMcpAuth`**: This is the gate in front of `/mcp`. On every request it checks the access token: is the signature valid, is it meant for this server, and has it expired? If anything fails, it returns `401` with a header that tells the client where to sign in. The client handles the rest: it opens a browser and runs the flow from the diagram.
+- **`/api/auth/*`**: Hands these paths to Better Auth. It serves sign-in, sign-up, and the OAuth endpoints where clients trade codes for tokens.
+- **`/.well-known/*`**: Also hands these paths to Better Auth. This is where clients look first to find out who issues tokens for your server. It's a small JSON document, served automatically by the `mcp()` plugin, so clients can connect with no configuration on your side.
+- **`/sign-in` and `/consent`**: The two pages the user sees in the browser. You serve them yourself; the next snippet shows them.
 
-Now add the two page helpers at the bottom of `index.ts`, above the `export default app;` line. These are minimal pages the OAuth flow redirects the user through. Both forward the signed query parameters from the page URL back to Better Auth, so the server can resume the pending authorization after sign-in or consent:
+Next, add the two HTML pages the user sees in the browser: one to sign in, one to approve the client. When the OAuth flow sends the user here, it passes along a signed query string (`oauth_query`). Both pages send it back with their request so Better Auth knows which authorization to continue.
 
 <Admonition type="note" title="Example pages only">
-The sign-in and sign-up pages here are simple inline examples for demonstrating this guide. In an actual scenario, you'd serve these from your own frontend with proper styling, and add typical sign-in options like third-party social sign-in providers, just as you would on your main frontend website. Better Auth supports all of this by default, including social sign-in providers, custom styled pages, and more. See the [Better Auth authentication docs](https://better-auth.com/docs/authentication/google) and the [MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for details.
+These pages are minimal examples for this guide. In a real app, you'd serve them from your own frontend with your own styling, and add the sign-in options you normally offer, like social providers (Google, GitHub, etc.). Better Auth supports all of this out of the box. See the [Better Auth authentication docs](https://better-auth.com/docs/authentication/google) and the [MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for details.
 </Admonition>
 
 ```typescript shouldWrap filename="index.ts"
@@ -906,15 +900,11 @@ function consentPage() {
 }
 ```
 
-Those two pages are the sign-in and consent hops in the diagram above. They forward the signed query string (`oauth_query`) back to Better Auth so it can resume the authorization that sent the user here. When that query is present, the sign-in response includes a `redirect` URL: first `/consent`, and after Allow, the MCP client's redirect URL with an authorization code. The client exchanges the code for an access token whose audience is `MCP_RESOURCE`, then calls `/mcp`.
-
-If the response has no `redirect` field, the sign-in happened outside an OAuth flow (someone opened `/sign-in` directly), and the page says so. Start from the MCP client so the redirect carries the signed query.
+The sign-in page posts the email and password to Better Auth's `/sign-in/email` endpoint, along with the signed query string from the URL. If the credentials are valid, Better Auth sets a session cookie and returns a `redirect` field with the URL to continue the OAuth flow. The consent page posts to `/oauth2/consent` with the same query string, and if the user clicks Allow, Better Auth issues an authorization code and redirects back to the client.
 
 #### Pass the custom domain to the deployment
 
-Update `neon.ts` to inject the auth environment variables. `BETTER_AUTH_URL` is the issuer that access tokens are checked against, and the origin Better Auth compares browser requests against. It must be the custom domain, with `https` and no path. `MCP_RESOURCE` is that same origin plus `/mcp`. The two values are different strings on purpose: the issuer identifies the authorization server, and the resource identifies the MCP endpoint that tokens are allowed to call.
-
-`BETTER_AUTH_SECRET` is read from `.env.local` when `neon deploy` evaluates this file, and only the keys inside `env` are stored on the function. Don't put `DATABASE_URL` here; Neon injects it.
+Update `neon.ts` to inject the `BETTER_AUTH_URL` and `BETTER_AUTH_SECRET` environment variables into the function.
 
 ```typescript filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
@@ -937,7 +927,7 @@ export const config = defineConfig({
 export default config;
 ```
 
-Redeploy:
+Redeploy the function to apply the changes:
 
 ```bash
 neon deploy --env .env.local
@@ -960,7 +950,7 @@ Make sure to replace `mcp.example.com` with your actual custom domain.
 
 Register the user who will authorize MCP clients. The following `curl` command creates a user using the Better Auth email/password endpoint. Replace the email, password, and name with your desired values:
 
-<Admonition type="info">
+<Admonition type="note">
 In a real deployment, your frontend would typically include a sign-up page that uses Better Auth's user registration flow. The `curl` command performs the same operation as a sign-up form, but provides a quick way to create a user for testing.
 </Admonition>
 
@@ -1046,8 +1036,9 @@ The dynamic registration flags keep this guide simple, but on a production serve
 
 ## Extending this workflow
 
-The server you built is a complete, secured MCP deployment. The contacts table is still shared by every caller. Here's where to take it next:
+The server you built is a complete, secured MCP deployment. The contacts table is still shared by every caller: anyone who connects can see and edit all contacts, not just their own. Here's where to take it next:
 
+- **Per-user data**: Add a `user_id` column to the `contacts` table with a foreign key to Better Auth's `user` table. Read the user's id from the verified token (`requireMcpAuth` exposes it as the `sub` claim) inside each handler, and filter every query with `where(eq(contacts.userId, userId))`. Then one user's contacts stay invisible to everyone else, even though they share the same table.
 - **Scopes per tool**: The `mcp()` plugin supports OAuth scopes, and `requireMcpAuth` accepts `requiredScopes` to enforce them at the route level. For per-tool requirements, throw `createInsufficientScopeError` inside the handler; MCP clients handle the resulting challenge by re-authorizing with the missing scopes.
 - **Audit logging**: Record tool name, arguments, user id, and latency to a Postgres table from the handlers. With OAuth, each row has a verified `sub` claim from the access token, so you know which user made the call.
 

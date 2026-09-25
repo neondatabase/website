@@ -23,13 +23,13 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the MCP server step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Declare the function under top-level `functions` in `neon.ts`, not under the deprecated `preview` block. Install the agent skills the guide lists: `neon skills -s neon -s neon-postgres -s neon-functions -y`. Build the server first and verify it with `neon dev` and `mcporter` before deploying. Use the MCP TypeScript SDK with `createMcpHandler`, and serve the endpoint at `/mcp` from a Hono app.
+7. Implement the MCP server step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Declare the function under top-level `functions` in `neon.ts`. Install the agent skills the guide lists: `neon skills -s neon -s neon-postgres -s neon-functions -y`. Build the server first and verify it with `neon dev` and `mcporter` before deploying. Use the MCP TypeScript SDK with `createMcpHandler`, and serve the endpoint at `/mcp` from a Hono app.
 
 8. If I choose a custom domain, declare it under `customDomains` in `neon.ts`, walk me through creating the CNAME record at my DNS provider, and verify HTTPS with `curl` before moving on. Never proceed to OAuth configuration until the custom domain serves the function successfully, because the OAuth issuer and resource identifiers depend on it.
 
-9. If I choose authentication, ask me which tier:
-   - **API key**: generate a secret, store it in `.env.local`, pass it through `neon.ts` env config, and check it in the `/mcp` route.
-   - **OAuth with Better Auth**: install `better-auth`, `@better-auth/mcp`, and `@better-auth/cimd`; configure the `mcp()` plugin with `resource` set to my custom domain's `/mcp` URL; run `npx auth@latest migrate` to create the auth tables; mount `auth.handler` at `/api/auth/*` in the same function; wrap the MCP handler with `requireMcpAuth`; and add the sign-in and consent pages from the guide.
+9. If I choose authentication, ask me which method I want to use:
+   - **API key**: When I have a single user or a small number of users who can share a key.
+   - **OAuth with Better Auth**: When I have multiple users accessing the MCP server.
 
 10. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
     - Tell me exactly what it is used for.
