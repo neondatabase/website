@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "5.0.1",
+  "neonctlVersion": "6.2.3",
   "binaries": [
     "neonctl",
     "neon"
@@ -1945,23 +1945,108 @@
       "describe": "Manage Neon Functions",
       "usage": "$0 function <sub-command> [options]"
     },
+    "git": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "cleanup": {
+          "name": "cleanup",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "prune-neon-branches": {
+              "type": "boolean",
+              "describe": "Also delete the orphaned Neon branches (never the default or a protected branch).",
+              "default": false
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt before deleting Neon branches.",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Prune git → Neon mappings whose local git branch is gone; optionally delete the orphaned Neon branches"
+        },
+        "install": {
+          "name": "install",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Install a git post-checkout hook that syncs the Neon branch on `git checkout`"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Show the git context, hook state, and current git → Neon mapping"
+        },
+        "sync": {
+          "name": "sync",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Pull the branch's Neon env vars into a local .env after sync. On by default.",
+              "default": true
+            },
+            "pull": {
+              "type": "boolean",
+              "describe": "Run `git pull --ff-only` before syncing so local files (incl. migration files) match the branch before any checkout.after migration runs. Without the flag, prompts when run manually in a TTY and skips in the hook / CI."
+            },
+            "quiet": {
+              "type": "boolean",
+              "describe": "Suppress sync's own routine status lines (git pull result, detached HEAD notice). Warnings and the delegated checkout's own output are unaffected. Used by the installed git hook.",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Check out the Neon branch mapped to the current git branch (run by the hook)"
+        },
+        "uninstall": {
+          "name": "uninstall",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Remove the git post-checkout hook installed by `git install`"
+        }
+      },
+      "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
+      "usage": "$0 git <sub-command> [options]"
+    },
     "init": {
       "aliases": [],
       "positionals": [],
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
+          "describe": "Coding agent to install into (repeatable). Skips agent selection. Values listed below",
           "alias": "a"
+        },
+        "agent-setup": {
+          "type": "boolean",
+          "describe": "Install Neon into coding agents. Use --no-agent-setup to skip. Plugin vs skills is inferred from --skill and MCP flags",
+          "default": true
         },
         "branch": {
           "type": "string",
           "describe": "Forwarded to link: branch name or ID to pin",
           "alias": "branch-id"
         },
+        "claimable": {
+          "type": "boolean",
+          "describe": "Create a claimable project that expires in 72 hours unless claimed. Selects Custom",
+          "default": false
+        },
         "config": {
           "type": "boolean",
-          "describe": "Existing app or --skip-template: create neon.ts after linking. Use --no-config to skip. Omitted in a terminal: you will be asked. Scaffolding a template keeps that template's neon.ts"
+          "describe": "Create neon.ts after linking. Use --no-config to skip. Omitted in Custom: you will be asked"
         },
         "context-file": {
           "type": "unknown",
@@ -1976,6 +2061,27 @@
           "describe": "Link a Neon project during setup. Use --no-link to skip without being asked",
           "default": true
         },
+        "mcp-auth": {
+          "type": "string",
+          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth",
+          "choices": [
+            "oauth",
+            "api-key"
+          ]
+        },
+        "mcp-config-location": {
+          "type": "string",
+          "describe": "Where to configure the Neon MCP server: global (user config, same as neon mcp) or project (this directory, same as neon mcp --project). Selects skills and MCP setup",
+          "choices": [
+            "global",
+            "project"
+          ]
+        },
+        "mcp-project-scoped": {
+          "type": "boolean",
+          "describe": "Limit MCP tools to the linked project, same as neon mcp --project-id. Selects skills and MCP setup",
+          "default": false
+        },
         "org-id": {
           "type": "string",
           "describe": "Forwarded to link: organization ID to link to"
@@ -1985,6 +2091,16 @@
           "describe": "Not supported; the commands init runs print their own output",
           "alias": "o",
           "hidden": true
+        },
+        "package-manager": {
+          "type": "string",
+          "describe": "Package manager for neon.ts dependencies. -y uses this without asking. Custom asks only when none is detected",
+          "choices": [
+            "npm",
+            "pnpm",
+            "yarn",
+            "bun"
+          ]
         },
         "project-id": {
           "type": "string",
@@ -1998,41 +2114,40 @@
           "type": "string",
           "describe": "Forwarded to link: region for a new project"
         },
-        "skip-template": {
-          "type": "boolean",
-          "describe": "Do not scaffold a template. Set up agents, link a project, and optionally neon.ts in this directory",
-          "default": false
-        },
-        "template": {
-          "type": "string",
-          "describe": "Template to scaffold into an empty directory. Conflicts with --skip-template"
+        "skill": {
+          "type": "array",
+          "describe": "Neon skill to install (repeatable). Selects skills setup (not the plugin) and skips the skills picker. With MCP flags, also configures MCP. Values listed below"
         },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: scaffold the default template. --skip-template: plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link with defaults and create the bare neon.ts policy. If several organizations or projects exist, link prints IDs and exits",
+          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, default neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
           "default": false,
           "alias": "y"
         }
       },
       "commands": {},
-      "describe": "Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts. In an empty directory, pick a template or skip scaffolding.",
+      "describe": "Set up coding agents and this directory for Neon. -y is Recommended. -y with Custom flags applies those answers without prompts.",
       "usage": "$0 init [options]",
       "examples": [
         {
           "command": "$0 init",
-          "description": "Set up this directory (template picker if empty)"
-        },
-        {
-          "command": "$0 init --skip-template",
-          "description": "Empty dir: agents, link, and neon.ts — no template files"
+          "description": "Recommended or Custom setup"
         },
         {
           "command": "$0 init -y",
-          "description": "Default template, or existing-app defaults"
+          "description": "Recommended setup without prompts"
+        },
+        {
+          "command": "$0 init -y --skill neon --mcp-auth oauth --mcp-config-location project",
+          "description": "Custom: those skills and MCP, Recommended defaults for the rest"
+        },
+        {
+          "command": "$0 init --no-agent-setup --claimable",
+          "description": "Skip agent setup and create a claimable project"
         },
         {
           "command": "$0 init --agent cursor --agent claude-code",
-          "description": "Skip agent selection; install the plugin for those agents"
+          "description": "Skip agent selection; install tooling for those agents"
         }
       ]
     },
@@ -2567,7 +2682,7 @@
       "examples": [
         {
           "command": "$0 mcp",
-          "description": "Interactive: config location, agents, auth, then confirm"
+          "description": "Interactive: config location, agents, then auth"
         },
         {
           "command": "$0 mcp -y",
@@ -3262,7 +3377,7 @@
       "examples": [
         {
           "command": "$0 plugins",
-          "description": "Interactive: agents, then confirm"
+          "description": "Interactive: pick agents, then install"
         },
         {
           "command": "$0 plugins -y",
@@ -3789,7 +3904,7 @@
       "examples": [
         {
           "command": "$0 skills",
-          "description": "Interactive: this directory, agents, skills, then confirm"
+          "description": "Interactive: this directory, then agents, then skills"
         },
         {
           "command": "$0 skills -y",
@@ -3843,6 +3958,10 @@
               "type": "string",
               "describe": "A name for the snapshot"
             },
+            "slug": {
+              "type": "string",
+              "describe": "User-defined resource ID, unique in the project (1-63 characters: start with a lowercase letter, then lowercase letters, digits, or hyphens, ending with a letter or digit). Omit to let the API generate one. It cannot be changed later."
+            },
             "timestamp": {
               "type": "string",
               "describe": "Take the snapshot at this point in time (RFC 3339, e.g. 2025-01-01T00:00:00Z). Must fall within the branch's restore window. Mutually exclusive with --lsn."
@@ -3858,6 +3977,10 @@
             {
               "command": "$0 snapshots create --branch main --timestamp 2025-01-01T00:00:00Z",
               "description": "Snapshot main at a point in time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --name \"Before migration\" --slug before-migration",
+              "description": "Snapshot main with a display name and a slug"
             },
             {
               "command": "$0 snapshots create --branch main --name pre-migration",
@@ -3880,7 +4003,7 @@
           ],
           "options": {},
           "commands": {},
-          "describe": "Delete a snapshot by id or name"
+          "describe": "Delete a snapshot by id, unique name, or slug"
         },
         "finalize": {
           "name": "finalize",
@@ -3911,7 +4034,7 @@
           ],
           "options": {},
           "commands": {},
-          "describe": "Get a snapshot by id or name"
+          "describe": "Get a snapshot by id, unique name, or slug"
         },
         "list": {
           "name": "list",
@@ -3946,7 +4069,7 @@
             }
           },
           "commands": {},
-          "describe": "Restore a snapshot into a branch",
+          "describe": "Restore a snapshot (id, unique name, or slug) into a branch",
           "examples": [
             {
               "command": "$0 snapshots restore snap-1234 --target-branch main",
@@ -4063,7 +4186,7 @@
             }
           },
           "commands": {},
-          "describe": "Update a snapshot's name or expiration"
+          "describe": "Update a snapshot's name or expiration by id, unique name, or slug"
         }
       },
       "describe": "Manage snapshots",

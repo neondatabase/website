@@ -1278,6 +1278,10 @@
                   slug: cli/link
                 - title: checkout
                   slug: cli/checkout
+                - title: git
+                  slug: cli/git
+                  tag: new
+                  tagTheme: green
                 - title: env
                   slug: cli/env
                 - title: set-context

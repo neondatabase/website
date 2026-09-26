@@ -9,7 +9,7 @@ summary: >-
   a snapshot into a new or existing branch, and configure an automatic backup
   schedule.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-09-26T07:10:22.076Z'
 ---
 
 The `snapshots` command creates, lists, updates, deletes, and restores snapshots of your Neon branches, and manages the automatic backup schedule of a branch. A snapshot captures the state of a branch at a point in time, so you can restore it later. For background on the feature, plans, and limits, see [Backup and restore](/docs/guides/backup-restore).
@@ -44,7 +44,27 @@ Snapshot a branch at a point in time:
 neon snapshots create --branch main --timestamp 2025-01-01T00:00:00Z
 ```
 
-Timestamps and expiration times use RFC 3339 format. `--timestamp` must be in the past and `--expires-at` in the future. Omit `--expires-at` to keep the snapshot until you delete it; a manual snapshot's expiration has no maximum, unlike the 35-day cap on [scheduled snapshots](#schedule-set). Snapshot names must be unique within a project.
+Set a slug to give the snapshot a stable ID you choose, which you can then pass to `get`, `delete`, `update`, and `restore` in place of the generated ID:
+
+```bash
+neon snapshots create --branch main --name "Before migration" --slug before-migration
+```
+
+```text filename="Output"
+Id                snap-crimson-pond-12345678
+Name              Before migration
+Slug              before-migration
+Source Branch Id  br-sweet-dew-12345678
+Created At        2026-09-26T01:40:01Z
+```
+
+You can then reference the snapshot by that slug:
+
+```bash
+neon snapshots get before-migration
+```
+
+Timestamps and expiration times use RFC 3339 format. `--timestamp` must be in the past and `--expires-at` in the future. Omit `--expires-at` to keep the snapshot until you delete it; a manual snapshot's expiration has no maximum, unlike the 35-day cap on [scheduled snapshots](#schedule-set). Snapshot names must be unique within a project. A `--slug` is also unique within a project: it must be 1-63 characters, start with a lowercase letter, contain only lowercase letters, digits, or hyphens, end with a letter or digit, and can't be changed after creation. Omit it to let the API generate one.
 
 ## neon snapshots list (#list)
 
@@ -60,7 +80,7 @@ neon snapshots list
 
 ## neon snapshots get (#get)
 
-Retrieves a snapshot by ID or name.
+Retrieves a snapshot by ID, name, or slug.
 
 <CliUsage command="snapshots get" />
 
@@ -92,7 +112,7 @@ neon snapshots update snap-1234 --clear-expiration
 
 ## neon snapshots delete (#delete)
 
-Deletes a snapshot by ID or name.
+Deletes a snapshot by ID, name, or slug.
 
 <CliUsage command="snapshots delete" />
 
