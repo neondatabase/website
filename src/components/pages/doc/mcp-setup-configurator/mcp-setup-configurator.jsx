@@ -453,8 +453,8 @@ const McpSetupConfigurator = () => {
               </button>
             </div>
             <p className={clsx('mt-2 mb-3', HELPER_TEXT_CLASS)}>
-              All tools are available by default; select categories to narrow the agent's access
-              through the{' '}
+              All tools are available by default; select categories to narrow the agent&apos;s
+              access through the{' '}
               <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
                 category
               </code>{' '}

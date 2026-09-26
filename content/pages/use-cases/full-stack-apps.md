@@ -11,7 +11,15 @@ updatedOn: '2026-08-14T13:30:00.000Z'
 image: '/images/social-previews/use-cases/full-stack-apps.jpg'
 ---
 
-![Running npx neon init in a code editor to add Neon Rules and the Neon MCP server](/use-cases/full-stack-apps/neon-init.jpg 'square priority')
+<ImageWithCommand
+  src="/use-cases/full-stack-apps/neon-init-editor.jpg"
+  alt="Running neon init in a code editor to add Neon Rules and the Neon MCP server"
+  width={1416}
+  height={956}
+  description="Try for yourself, start building with Neon now."
+  command="npx neon@latest init"
+  loading="eager"
+/>
 
 <Admonition type="note" title="Summary">
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres. You can deploy the database, auth, object storage, serverless functions, and model access from one project, then wire it into your app with your editor or a coding agent.
@@ -60,9 +68,9 @@ What's included when you deploy Neon:
 
 ## Lakebase Postgres
 
-<video autoPlay playsInline muted loop width="260" height="260" style={{ marginLeft: 0, marginRight: 'auto' }}>
-  <source src="/videos/pages/home/hero/postgres-database.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/postgres-database.mp4?updated=20260709" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Lakebase Postgres demo">
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/lakebase.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/lakebase.mp4" type="video/mp4" />
 </video>
 
 Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview): fully managed Postgres on the [lakebase architecture](/docs/introduction/architecture-overview), with compute and storage separated. Compute is where queries run. Storage is where data lives, on a copy-on-write engine versioned by WAL, so a branch can point at a particular page without duplicating the dataset underneath.
@@ -81,9 +89,9 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 
 ## Managed Better Auth
 
-<video autoPlay playsInline muted loop width="260" height="198" style={{ marginLeft: 0, marginRight: 'auto' }}>
-  <source src="/videos/pages/home/hero/authentication.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/authentication.mp4?updated=20260709" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Managed Better Auth demo">
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/auth.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/auth.mp4" type="video/mp4" />
 </video>
 
 [Managed Better Auth](/docs/auth/overview) stores users, sessions, and OAuth configuration in your Postgres database under the `neon_auth` schema. Auth state branches with your data, so preview branches get isolated sign-up and login flows.
@@ -94,9 +102,9 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 
 ## Neon Object Storage
 
-<video autoPlay playsInline muted loop width="230" height="313" style={{ marginLeft: 0, marginRight: 'auto' }}>
-  <source src="/videos/pages/home/hero/storage.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Object Storage demo">
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/storage.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/storage.mp4" type="video/mp4" />
 </video>
 
 Apps need files: uploads, attachments, generated assets. Wired to a separate bucket vendor, those files sit outside your database environments. Preview branches point at production objects, or you invent path conventions and cleanup jobs to keep things apart.
@@ -116,9 +124,9 @@ Declare buckets in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy`, and 
 
 ## Neon Functions
 
-<video autoPlay playsInline muted loop width="260" height="156" style={{ marginLeft: 0, marginRight: 'auto' }}>
-  <source src="/videos/pages/home/hero/compute.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon Functions demo">
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/functions.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/functions.mp4" type="video/mp4" />
 </video>
 
 Most serverless handlers talk to the database over the public internet. Every query pays a cross-network round trip, you wire secrets yourself, and runtimes often cap at a few seconds, so an agent mid-tool-loop or a WebSocket never gets a fair shot.
@@ -140,9 +148,9 @@ Declare functions in [`neon.ts`](/docs/reference/neon-ts) and deploy with `neon 
 
 ## Neon AI Gateway
 
-<video autoPlay playsInline muted loop width="260" height="115" style={{ marginLeft: 0, marginRight: 'auto' }}>
-  <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="372" aria-label="Neon AI Gateway demo">
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/ai-gateway.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/shared/backend/ai-gateway.mp4" type="video/mp4" />
 </video>
 
 Most apps end up calling a model somewhere. Wired directly, that means a separate account, key, and invoice for every lab, and a new integration every time a better model ships.

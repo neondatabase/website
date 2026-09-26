@@ -20,8 +20,8 @@ const content = {
     },
     {
       id: 3,
-      href: '/blog/databutton-neon-integration',
-      label: 'Databutton Just Made Their Agent Smarter, with Postgres and Auth Built In',
+      href: '/blog/riff-neon-integration',
+      label: 'Riff Just Made Their Agent Smarter, with Postgres and Auth Built In',
       type: 'Case Study',
     },
     {

@@ -534,6 +534,10 @@
   .prose-static {
     @apply prose-ol:list-none;
 
+    a {
+      @apply xs:wrap-anywhere;
+    }
+
     ol {
       counter-reset: item;
       @apply m-0 p-0;

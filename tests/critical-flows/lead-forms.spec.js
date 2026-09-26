@@ -23,8 +23,9 @@ async function fillLeadForm(form, contract, fieldOverrides = {}) {
     await form.locator(`[name="${name}"]`).fill(value);
   }
 
-  for (const [name, value] of Object.entries(contract.selects)) {
-    await form.locator(`[name="${name}"]`).selectOption(value);
+  for (const [name, label] of Object.entries(contract.selects)) {
+    await form.locator(`button[name="${name}"]`).click();
+    await form.page().getByRole('option', { name: label, exact: true }).click();
   }
 }
 
@@ -53,7 +54,11 @@ for (const contract of LEAD_FORM_CONTRACTS) {
     await fillLeadForm(form, contract);
     await submitLeadForm(form, contract);
 
-    await expect(form.getByRole('button')).toHaveText(contract.successText);
+    await expect(form.locator('button[type="submit"]')).toHaveText(contract.successText);
+    for (const name of Object.keys(contract.selects)) {
+      await expect(form.locator(`button[name="${name}"]`)).toBeDisabled();
+      await expect(form.locator(`input[name="${name}"]`)).toHaveValue('hidden');
+    }
     await expectAnalyticsEvents(page, contract.expectedEvents);
     await expectHealthyPage(applicationErrors);
   });

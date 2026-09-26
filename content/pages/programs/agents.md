@@ -23,7 +23,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 'replit',
 'same',
 'solar',
-'databutton',
+'riff',
 ]} />
 
 <QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Anything" />
@@ -64,7 +64,7 @@ Agent plan pricing and limits differ from [Scale](/docs/introduction/plans). You
 
 For the full comparison, see the [Agent Plan docs](/docs/introduction/agent-plan#agent-vs-scale).
 
-<QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
+<QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Riff app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Riff" />
 
 ## How It Works
 

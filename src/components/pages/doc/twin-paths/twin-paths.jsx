@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 import Button from 'components/shared/button';
+import CopyCommand from 'components/shared/copy-command';
 import LabelArrowGreen from 'icons/arrow-label-green.inline.svg';
 import LabelArrow from 'icons/arrow-label.inline.svg';
-import CheckIcon from 'icons/check.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -47,64 +45,23 @@ PathLabel.propTypes = {
   eta: PropTypes.string.isRequired,
 };
 
-const QuickPath = ({ title, command, description, eta = '~5 min' }) => {
-  const [isCopied, setIsCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(command);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 1500);
-      sendGtagEvent('Button Clicked', { text: `Twin path copy - ${title}` });
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
-  return (
-    <article
-      className={cn(
-        'flex min-h-[282px] w-full flex-col border border-green-44/70 bg-[#E4F1EB]/40 p-5 text-left md:min-h-[260px]',
-        'dark:border-green-44/38 dark:bg-[#101815]'
-      )}
-    >
-      <PathLabel label="Quick" eta={eta} />
-      <div className="mt-auto w-full">
-        <h3 className="text-xl leading-snug font-medium text-black-pure dark:text-white">
-          {title}
-        </h3>
-        <p className="mt-1.5 text-base leading-snug text-gray-new-40 dark:text-gray-new-60">
-          {description}
-        </p>
-        <button
-          type="button"
-          onClick={handleCopy}
-          className={cn(
-            'mt-5 flex h-11 w-full cursor-pointer items-center gap-1.5 px-4 text-left font-mono text-base leading-none transition-colors duration-150',
-            'bg-[#24282A] text-white hover:bg-[#1A1D1F]',
-            'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00CC88]',
-            'dark:bg-[#E4F1EB] dark:text-black-pure dark:hover:bg-white',
-            'dark:focus-visible:outline-[#00E599]'
-          )}
-          aria-label={`Copy command: ${command}`}
-        >
-          <span className="text-gray-new-60">$</span>
-          <span className="flex-1 truncate">{command}</span>
-          <span
-            className={cn(
-              'flex shrink-0 items-center text-gray-new-60 transition-colors duration-150',
-              isCopied && 'text-[#00CC88] dark:text-[#00A86B]'
-            )}
-            aria-live="polite"
-          >
-            {isCopied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-3.5" />}
-            <span className="sr-only">{isCopied ? 'Copied' : 'Copy command'}</span>
-          </span>
-        </button>
-      </div>
-    </article>
-  );
-};
+const QuickPath = ({ title, command, description, eta = '~5 min' }) => (
+  <article
+    className={cn(
+      'flex min-h-[282px] w-full flex-col border border-green-44/70 bg-[#E4F1EB]/40 p-5 text-left md:min-h-[260px]',
+      'dark:border-green-44/38 dark:bg-[#101815]'
+    )}
+  >
+    <PathLabel label="Quick" eta={eta} />
+    <div className="mt-auto w-full">
+      <h3 className="text-xl leading-snug font-medium text-black-pure dark:text-white">{title}</h3>
+      <p className="mt-1.5 text-base leading-snug text-gray-new-40 dark:text-gray-new-60">
+        {description}
+      </p>
+      <CopyCommand className="mt-5" command={command} trackingLabel={`Twin path copy - ${title}`} />
+    </div>
+  </article>
+);
 
 QuickPath.propTypes = {
   title: PropTypes.string.isRequired,

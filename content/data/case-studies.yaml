@@ -195,20 +195,20 @@
     - slug: 'fast-moving-teams'
       name: 'Fast-moving teams'
 
-- id: 'databutton'
-  title: 'Databutton'
+- id: 'riff'
+  title: 'Riff'
   isFeatured: false
   logo:
-    mediaItemUrl: '/images/case-studies/databutton.svg'
+    mediaItemUrl: '/images/case-studies/riff.svg'
     mediaDetails:
-      width: 157
-      height: 32
-  quote: 'Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead'
+      width: 267
+      height: 75
+  quote: 'Integrating Neon was a no-brainer. It gives every Riff app a production-grade Postgres database in seconds, with zero overhead'
   author:
     name: 'Martin Skow Røed'
-    post: 'CTO and co-founder of Databutton'
+    post: 'CTO and co-founder of Riff'
   isInternal: true
-  internalPostSlug: 'databutton-neon-integration'
+  internalPostSlug: 'riff-neon-integration'
   externalUrl: ''
   categories:
     - slug: 'ai'
