@@ -921,6 +921,8 @@
           items:
             - title: Chat completions
               slug: ai-gateway/chat-completions
+            - title: Embeddings
+              slug: ai-gateway/embeddings
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
             - title: Gemini API

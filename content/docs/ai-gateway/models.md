@@ -6,7 +6,7 @@ summary: >-
   behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-25T17:52:29.027Z'
+updatedOn: '2026-09-26T00:49:26.569Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -31,7 +31,7 @@ Browse the full catalog below. Switch between the **Text**, **Image**, and **Emb
 
 <AiGatewayModelIndex/>
 
-For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use).
+For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings).
 
 ## Rate limits
 
