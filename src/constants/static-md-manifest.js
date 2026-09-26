@@ -30,6 +30,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-postgres/SKILL.md',
   '/docs/ai/skills/neon-postgres/references/full-text-search.md',
   '/docs/ai/skills/neon-postgres/references/hybrid-search.md',
+  '/docs/ai/skills/neon-postgres/references/lakebase-search-drizzle.md',
   '/docs/ai/skills/neon-postgres/references/vector-search.md',
   '/docs/ai/skills/neon/SKILL.md',
   '/docs/ai/skills/neon/references/auth.md',

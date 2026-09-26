@@ -260,6 +260,7 @@ Use Lakebase Search for semantic, full-text, and hybrid search:
 - For semantic search, read [Vector search](references/vector-search.md).
 - For full-text search with BM25 ranking, read [Full-text search](references/full-text-search.md).
 - For combining semantic and lexical results, read [Hybrid search](references/hybrid-search.md).
+- For managing any of the above through Drizzle ORM, read [Managing Lakebase Search with Drizzle](references/lakebase-search-drizzle.md).
 
 Links:
 
