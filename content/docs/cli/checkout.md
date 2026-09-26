@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-09-26T07:10:22.076Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -87,3 +87,5 @@ neon checkout dev --create --project-id polished-snowflake-12345678
 ```
 
 After checking out a branch, commands such as [`connection-string`](/docs/cli/connection-string) and [`psql`](/docs/cli/psql) use the pinned branch by default.
+
+To run this checkout automatically whenever you switch git branches, see [`neon git`](/docs/cli/git) (Preview), which installs a git hook that checks out the mapped Neon branch on `git checkout`.
