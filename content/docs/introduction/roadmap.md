@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-09-18T16:22:18.336Z'
+updatedOn: '2026-09-27T23:19:01.102Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -214,7 +214,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Archive storage on the Free plan**: Archive storage is now available on the Free plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
 - **Neon RLS**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](/blog/introducing-neon-authorize) and check out the docs.
 - **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap. Many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](/blog/first-azure-region-available-in-neon).
-- **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
+- **End-to-end RAG pipelines in Postgres**: Shipped the open source [pgrag](/docs/extensions/pgrag) extension for RAG in SQL. Now deprecated; see [Lakebase Search](/docs/ai/lakebase-search).
 - **Support for analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://www.mooncake.dev/blog/pgmooncake-neon).
 - **Datadog integration**: Scale users can now export Neon metrics to Datadog.
 - **Deletion of backup branches created by restore operations**: To help minimize storage and keep your Neon project organized, we added support for deleting obsolete backup branches created by [restore](/docs/guides/branch-restore) operations. Previously, these backup branches could not be removed. [Learn more](/docs/guides/branch-restore#deleting-backup-branches).
