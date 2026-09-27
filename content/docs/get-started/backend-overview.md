@@ -42,6 +42,10 @@ So when you see a `notes` table, an `attachments` bucket, or a `chat` function b
 
 The sixth capability is the [Data API](/docs/data-api/overview), which exposes Postgres through a PostgREST-compatible HTTPS endpoint. This example doesn't enable it because the `chat` Function queries Postgres directly.
 
+<Admonition type="note" title="Where your app runs">
+This page covers the backend. The app itself, the Next.js front end and Server Actions the browser talks to, deploys to a host like [Vercel](https://vercel.com); Neon is the backend behind it. Long-running work such as streaming, agents, or background jobs goes to a [Function](#functions-the-chat-endpoint) instead, so it isn't cut off by the host's serverless timeout. Connect the [Neon Vercel integration](/docs/guides/vercel-overview) to give each Vercel preview deployment its own Neon branch.
+</Admonition>
+
 <Admonition type="info" title="Region and access requirements">
 Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to try them. Support is expanding toward [all regions](/docs/introduction/regions). Postgres and Managed Better Auth work in any region. Object Storage and Functions are available on any plan, subject to usage limits; the AI Gateway requires a paid plan.
 </Admonition>
@@ -164,7 +168,7 @@ const url = await files.url(key, { expiresIn: 3600 }); // short-lived download U
 
 ## Functions: the chat endpoint
 
-**What it is:** long-running serverless compute that runs next to your database and gets a public URL. In the notes app, it's the `chat` endpoint the browser calls. **When to use it:** work that outlasts a short serverless or edge request, streaming responses, background jobs, or an AI agent that makes several model calls. **When not:** a quick query that fits in a Next.js route handler, which serverless and edge hosts serve fine.
+**What it is:** long-running serverless compute that runs next to your database and gets a public URL. In the notes app, it's the `chat` endpoint the browser calls. **When to use it:** work that outlasts a short serverless or edge request, streaming responses, background jobs, or an AI agent that makes several model calls. **When not:** a quick query that fits in a Next.js route handler, which serverless and edge hosts like Vercel serve fine.
 
 Declare the `chat` function and deploy. `neon deploy` bundles it, deploys it, prints its URL, and injects `DATABASE_URL` at runtime (plus the AI Gateway vars once you enable it below):
 
