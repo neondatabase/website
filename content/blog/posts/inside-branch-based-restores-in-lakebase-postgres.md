@@ -107,13 +107,13 @@ In the lakebase, compute and durable storage are split apart and connected by th
 
 - Compute runs Postgres - it runs SQL, plans queries, applies MVCC, manages locks, and generates WAL - all the regular Postgres tasks. What it does *not* do is own the durable copy of your data.
 - Storage is what owns durability and history, and the job is divided in three parts executed by three distinct components:
-  - *Safekeepers* receive WAL from compute. A transaction is durable once a quorum of safekeepers has acknowledged its WAL record
-  - The *pageserver* turns WAL into the pages Postgres reads. It can reconstruct any page for a given key at a given LSN.
-  - *Object storage* keeps the immutable, long-term history. Compute never reads it directly; the pageserver sits in between.
+  - Safekeepers receive WAL from compute. A transaction is durable once a quorum of safekeepers has acknowledged its WAL record
+  - The pageserver turns WAL into the pages Postgres reads. It can reconstruct any page for a given key at a given LSN.
+  - Object storage keeps the immutable, long-term history. Compute never reads it directly; the pageserver sits in between.
  
   ![Compute, safekeepers, pageserver, and object storage in Lakebase](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-3.jpg)
 
-[When a write comes in:](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents)
+[When a write comes in,](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents)
 
 1. Postgres changes rows in memory and generates WAL
 2. Compute streams that WAL to the safekeepers
@@ -179,13 +179,4 @@ Traditional PITR is too slow and too heavy to support live workflows, but a bran
 
 Traditional restores get slower and heavier as the database grows. Branch-based restores do not: history already lives outside compute, so a past point is something you can open as a branch, not something you rebuild. 10 GB or 100 TB, restores looks the same: pick a timestamp, create the branch, attach compute. Failures at scale are no longer scary.
 
-But experiencing it is better than words. Create a Lakebase Postgres database, load a good chunk of data, run a restore, and wonder how you’ve been living without this for so long.
-
----
-
-You can run Lakebase Postgres in two places, on the same infrastructure and with the same core feature set. What differs is what surrounds it:
-
-- On [Neon](https://neon.com/), it anchors a [complete set of cloud backend primitives](https://neon.com/blog/neon-backend-is-ga) for developers, startups, and agent platforms
-- On [Databricks](https://www.databricks.com/product/lakebase), it is integrated with the rest of the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows
-
-Ask your agent to deploy either of those, and put autoscaling to the test.
+But experiencing it is better than words. Ask your agent to deploy a Lakebase Postgres database, run a restore, and wonder how you’ve been living without this for so long.
