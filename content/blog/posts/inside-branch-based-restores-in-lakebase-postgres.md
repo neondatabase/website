@@ -14,8 +14,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/cover.jpg
+  alt: Inside branch-based restores in Lakebase Postgres
 isFeatured: false
 seo:
   title: Inside branch-based restores in Lakebase Postgres - Neon
@@ -24,10 +24,13 @@ seo:
   noindex: false
   ogTitle: Inside branch-based restores in Lakebase Postgres - Neon
   ogDescription: How to make a past database state queryable without rebuilding it first
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/social.jpg
 ---
 
-**[ADD CLIP 1]**
+<video autoPlay muted loop playsInline width="708" height="326" aria-label="Branch-based restores in Lakebase Postgres">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-1.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-1.mp4" type="video/mp4" />
+</video>
 
 Restores are broken in managed OLTP, and they have been broken for a long time. They are slow, and they get slower with scale. The databases that need recovery most, the large production ones, are the ones left waiting the longest.
 
@@ -39,7 +42,7 @@ The lakebase architecture breaks the monolith and changes the restore mechanics.
 
 In practical terms: time to restore drops to seconds, even if the database is 100 TB, and it’s as simple that even an agent can do it.
 
-**[ADD IMAGE 1]**
+![Branch-based restores in Lakebase Postgres](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-1.jpg)
 
 ## The traditional restore path
 
@@ -75,7 +78,10 @@ For that whole window you are in downtime, or something very close to it. A heal
 
 ## Slow restores cause pains across the board
 
-**[ADD CLIP 2]**
+<video autoPlay muted loop playsInline width="708" height="316" aria-label="Database restore challenges">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.mp4" type="video/mp4" />
+</video>
 
 To put some numbers to that pain: [we asked 50 developers running production Postgres](https://neon.com/restores-survey) about their experience with restores:
 
@@ -91,7 +97,7 @@ In we zoom out to the potential business impact,
 
 ## The alternative: branch-based restores
 
-**[ADD IMAGE 2]**
+![The branch-based restore architecture](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-2.jpg)
 
 In the lakebase, a different architecture enables a different path for restores.
 
@@ -105,7 +111,7 @@ In the lakebase, compute and durable storage are split apart and connected by th
   - The *pageserver* turns WAL into the pages Postgres reads. It can reconstruct any page for a given key at a given LSN.
   - *Object storage* keeps the immutable, long-term history. Compute never reads it directly; the pageserver sits in between.
  
-  **[ADD IMAGE 3]**
+  ![Compute, safekeepers, pageserver, and object storage in Lakebase](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-3.jpg)
 
 [When a write comes in:](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents)
 
@@ -140,7 +146,7 @@ This restore method completely eliminates data copies. The restored branch doesn
 - In a copy-and-replay system, a restore is a data-movement job. The database isn't “there” until the copy and the WAL replay are done.
 - In the lakebase, the “database” is already there. A restore is metadata: a pointer to a point in history. All that's left is to expose that point as a branch, with its own compute.
 
-**[ADD IMAGE 4]**
+![A restored branch references existing database history](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-4.jpg)
 
 ### Restoring 100 TB is as fast as restoring 10 GB
 
@@ -155,7 +161,7 @@ A human or an agent can always reach a queryable past state right away after an 
 
 ### Restores become something agents can build on
 
-**[ADD IMAGE 5]**
+![Branch-based restores for agent workflows](https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-image-5.jpg)
 
 Restores in the lakebase are a simple operation: create a branch at a timestamp. The loop is short enough that agents can treat it as an ordinary tool call, not only to resolve incidents.
 
