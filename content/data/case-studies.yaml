@@ -1,3 +1,22 @@
+- id: 'skydive'
+  title: 'Skydive'
+  isFeatured: false
+  logo:
+    mediaItemUrl: ''
+    mediaDetails:
+      width: 0
+      height: 0
+  quote: 'Our agents create their own infrastructure. That only works if a database is as cheap and as fast to make as a file'
+  author:
+    name: 'Dhruv Amin'
+    post: 'Co-founder and CEO at Skydive'
+  isInternal: true
+  internalPostSlug: 'inside-skydive-building-virtual-coworkers-powered-by-neon'
+  externalUrl: ''
+  categories:
+    - slug: 'ai'
+      name: 'AI & Agents'
+
 - id: 'lubot'
   title: 'LuBot'
   isFeatured: false
