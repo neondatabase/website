@@ -644,6 +644,69 @@ npm run dev
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
+<TwoColumnLayout.Step title="Add Function Triggers">
+<TwoColumnLayout.Block>
+
+Your app calls the function on request. A [Function Trigger](/docs/compute/functions/triggers/overview) lets Neon call it for you, so work runs on a schedule or on an event, even when the compute is scaled to zero. Add two, both pointing at the same `posts` function:
+
+- A **schedule** trigger writes a post every day, like a cron job.
+- A **`storage_object_created`** trigger runs when an image is uploaded to your `images` bucket.
+
+The function has no root route, so each trigger targets its own path (`/daily`, `/on-upload`) that matches a new route. Neon sends a `POST` with a JSON envelope; each handler reads what it needs from `data` and checks the `X-Neon-Trigger-Invocation-Id` header to confirm the call came from Neon. See the [overview](/docs/compute/functions/triggers/overview) for the payload and branching behavior, and [Schedule a function](/docs/compute/functions/triggers/schedule) for cron syntax.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+Add two routes to `functions/posts.ts`, before `export default app`:
+
+```typescript filename="functions/posts.ts"
+// Schedule trigger: generate and publish a post. Reuses the pool and model above.
+app.post('/daily', async (c) => {
+  if (!c.req.header('x-neon-trigger-invocation-id')) return c.json({ error: 'not a trigger call' }, 403);
+
+  const { text } = await generateText({
+    model: neon('kimi-k3'),
+    prompt: 'Write a 2 sentence post sharing a Postgres tip. Send only the post content.',
+  });
+  await pool.query(
+    'insert into posts (author, content, is_published) values ($1, $2, true)',
+    ['scheduler', text],
+  );
+  return c.json({ ok: true });
+});
+
+// Object-storage trigger: runs when an image is uploaded.
+app.post('/on-upload', async (c) => {
+  if (!c.req.header('x-neon-trigger-invocation-id')) return c.json({ error: 'not a trigger call' }, 403);
+
+  const { data } = await c.req.json();
+  console.log(`image uploaded: ${data.bucket_name}/${data.object_key}`);
+  return c.json({ ok: true });
+});
+```
+
+Declare both triggers in `neon.ts`:
+
+```typescript filename="neon.ts"
+// add to your existing defineConfig({ ... })
+triggers: {
+  'daily-post': { type: 'schedule', function: 'posts', cron: '0 9 * * *', functionPath: '/daily' },
+  'on-upload': { type: 'storage_object_created', function: 'posts', bucket: 'images', functionPath: '/on-upload' },
+},
+```
+
+Deploy, then read the function logs:
+
+```bash filename="Terminal"
+neon deploy
+neon logs query --source function
+```
+
+The upload trigger fires right away, so upload an image through `/upload` and watch the log line. The scheduled post runs at the next 09:00 UTC; set the cron to `* * * * *` to see it sooner. To stop the daily post, set `enabled: false` in `neon.ts` and redeploy, or manage it from the Console, CLI, or API.
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
 </TwoColumnLayout>
 
 ## What you built
@@ -655,6 +718,7 @@ You now have a Next.js app where:
 - A Neon Function generates posts and runs a streaming, tool-calling AI assistant on compute next to your database
 - The whole backend is declared in one `neon.ts` and provisioned with `neon deploy`, which injects every credential into `.env.local`
 - The Next.js app deploys to any App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node, while the long-running AI lives on the Neon Function
+- Scheduled and event-driven work run as the same function code through Function Triggers, with no scheduler or queue to operate
 
 ## Next steps
 
@@ -662,5 +726,6 @@ You now have a Next.js app where:
 - **Go deeper on Functions:** hold open [WebSockets and SSE](/docs/compute/functions/websockets) or build a fuller [AI agent](/docs/compute/functions/agents) on the same function.
 - **Branch your whole backend:** [`neon checkout`](/docs/cli/checkout) forks the database, buckets, and function together for preview environments. See [Branching](/docs/introduction/branching).
 - **Generated migrations:** for tracked schema changes, switch from a direct push to generated migrations. If you're using Drizzle, that means moving from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations); other ORMs and migration tools offer an equivalent.
+- **Run work on a schedule or an event:** the [Function Triggers overview](/docs/compute/functions/triggers/overview) covers cron syntax, object-key prefixes, and how triggers branch with your project.
 
 <NeedHelp/>
