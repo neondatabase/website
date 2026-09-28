@@ -27,6 +27,8 @@ seo:
   image: null
 ---
 
+**[ADD CLIP 1]**
+
 Restores are broken in managed OLTP, and they have been broken for a long time. They are slow, and they get slower with scale. The databases that need recovery most, the large production ones, are the ones left waiting the longest.
 
 The usual ways around this are hard and expensive. Extra replicas, extra environments, a DBA on the restore - and even then, you are not fully protected. Failover to a healthy replica helps when a machine dies, but it does not help when the bad write is already on the standby. That still means a restore, and a restore still means hours of downtime or something very close to it.
@@ -37,7 +39,9 @@ The lakebase architecture breaks the monolith and changes the restore mechanics.
 
 In practical terms: time to restore drops to seconds, even if the database is 100 TB, and it’s as simple that even an agent can do it.
 
-## The traditional restore path (and where it breaks)
+**[ADD IMAGE 1]**
+
+## The traditional restore path
 
 Traditional Postgres point-in-time recovery is built from two ingredients: a base backup of the files, and archived WAL for everything after that backup. In managed Postgres, that backup is usually a snapshot sitting in object storage.
 
@@ -63,13 +67,15 @@ These types of queries come with a latency that’s fine for an internal checkup
 
 The snapshot is only consistent as of snapshot time. To reach T, Postgres still has to replay the transaction logs archived after that snapshot. How long replay takes depends on how much happened between the snapshot and T. A snapshot from an hour ago will be much faster than a snapshot from last night, plus a heavy write day - that’ll be a lot of WAL to replay. This, once again, means a long wait (on top of the instance still hydrating from S3).
 
-### What you are left with
+## What you are left with
 
 Unless the database is small, PITR is almost always a multi-hour operation. You have to provision the monolith, pull a snapshot out of S3, replay WAL, and wait until enough of the volume is local to take traffic.
 
 For that whole window you are in downtime, or something very close to it. A healthy HA replica can save you if the primary died and the replica still has good data, but it may not save you from PITR - e.g. dropped tables and bad writes might already be on the standby.
 
 ## Slow restores cause pains across the board
+
+**[ADD CLIP 2]**
 
 To put some numbers to that pain: [we asked 50 developers running production Postgres](https://neon.com/restores-survey) about their experience with restores:
 
@@ -85,11 +91,11 @@ In we zoom out to the potential business impact,
 
 ## The alternative: branch-based restores
 
+**[ADD IMAGE 2]**
+
 In the lakebase, a different architecture enables a different path for restores.
 
-### Architectural requirements
-
-**Compute and storage as separate systems**
+### Compute and storage as separate systems
 
 In the lakebase, compute and durable storage are split apart and connected by the WAL:
 
@@ -98,6 +104,8 @@ In the lakebase, compute and durable storage are split apart and connected by th
   - *Safekeepers* receive WAL from compute. A transaction is durable once a quorum of safekeepers has acknowledged its WAL record
   - The *pageserver* turns WAL into the pages Postgres reads. It can reconstruct any page for a given key at a given LSN.
   - *Object storage* keeps the immutable, long-term history. Compute never reads it directly; the pageserver sits in between.
+ 
+  **[ADD IMAGE 3]**
 
 [When a write comes in:](https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents)
 
@@ -107,11 +115,9 @@ In the lakebase, compute and durable storage are split apart and connected by th
 4. The pageserver later turns that WAL into page versions
 5. Those versions land in object storage as immutable history
 
-**History is stored as an addressable timeline**
-
 In this design, the write path takes an interesting shape. The architecture above separates committing a transaction from materializing pages, which in simpler terms means: old page versions are never overwritten. Your database's history piles up as a timeline you can point at, not a single copy you mutate.
 
-### The mechanism: a restore in the lakebase = a branch at a point in time
+### A restore in the lakebase = a branch at a point in time
 
 In the traditional path, a restore mostly means rebuilding that past state into a separate instance. But in the lakebase, since there’s an immutable storage history to reference, that step is unnecessary, and is replaced by a different primitive: a branch.
 
@@ -134,7 +140,9 @@ This restore method completely eliminates data copies. The restored branch doesn
 - In a copy-and-replay system, a restore is a data-movement job. The database isn't “there” until the copy and the WAL replay are done.
 - In the lakebase, the “database” is already there. A restore is metadata: a pointer to a point in history. All that's left is to expose that point as a branch, with its own compute.
 
-### The consequence: restoring 100 TB is as fast as restoring 10 GB
+**[ADD IMAGE 4]**
+
+### Restoring 100 TB is as fast as restoring 10 GB
 
 The benefit is that scaling is not operationally scary anymore. If a restore is metadata work, how long it takes does not grow with the size of your data, and the mechanism stays the same.
 
@@ -145,7 +153,9 @@ Independent of how large your database is,
 
 A human or an agent can always reach a queryable past state right away after an incident, even on a huge Postgres database.
 
-### Plus, restores become something agents can build on
+### Restores become something agents can build on
+
+**[ADD IMAGE 5]**
 
 Restores in the lakebase are a simple operation: create a branch at a timestamp. The loop is short enough that agents can treat it as an ordinary tool call, not only to resolve incidents.
 
@@ -167,9 +177,9 @@ But experiencing it is better than words. Create a Lakebase Postgres database, l
 
 ---
 
-You can Lakebase Postgres this in two places, on the same infrastructure and with the same core feature set. What differs is what surrounds it:
+You can run Lakebase Postgres in two places, on the same infrastructure and with the same core feature set. What differs is what surrounds it:
 
-- On Neon, it anchors a complete set of cloud backend primitives for developers, startups, and agent platforms
-- On Databricks, it is integrated with the rest of the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows
+- On [Neon](https://neon.com/), it anchors a [complete set of cloud backend primitives](https://neon.com/blog/neon-backend-is-ga) for developers, startups, and agent platforms
+- On [Databricks](https://www.databricks.com/product/lakebase), it is integrated with the rest of the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows
 
 Ask your agent to deploy either of those, and put autoscaling to the test.
