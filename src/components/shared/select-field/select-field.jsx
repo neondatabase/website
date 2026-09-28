@@ -1,13 +1,22 @@
 'use client';
 
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
+import {
+  Description,
+  Field as HeadlessField,
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from '@headlessui/react';
 import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
+import { forwardRef, Fragment } from 'react';
 
 import Field from 'components/shared/field';
 import ChevronIcon from 'icons/chevron-down-select.inline.svg';
 import CheckIcon from 'icons/home/copied.inline.svg';
 import { cn } from 'utils/cn';
+
+const ErrorDescription = (props) => <Description as="div" {...props} />;
 
 const SelectField = forwardRef(
   (
@@ -36,27 +45,30 @@ const SelectField = forwardRef(
         disabled={isDisabled}
         invalid={!!error}
       >
-        <Field
-          {...fieldProps}
-          ref={ref}
-          name={name}
-          label={label}
-          tag={ListboxButton}
-          type="button"
-          onBlur={onBlur}
-          aria-label={label}
-          isDisabled={isDisabled}
-          error={error}
-          inputClassName={cn(
-            'group flex cursor-pointer items-center justify-between gap-3 text-left',
-            inputClassName
-          )}
-        >
-          <span className={cn('truncate', !selectedOption && 'text-gray-new-50')}>
-            {selectedOption?.label ?? placeholder}
-          </span>
-          <ChevronIcon className="shrink-0" aria-hidden />
-        </Field>
+        <HeadlessField as={Fragment}>
+          <Field
+            {...fieldProps}
+            ref={ref}
+            name={name}
+            label={label}
+            tag={ListboxButton}
+            type="button"
+            onBlur={onBlur}
+            aria-label={label}
+            isDisabled={isDisabled}
+            error={error}
+            errorTag={ErrorDescription}
+            inputClassName={cn(
+              'group flex cursor-pointer items-center justify-between gap-3 text-left',
+              inputClassName
+            )}
+          >
+            <span className={cn('truncate', !selectedOption && 'text-gray-new-50')}>
+              {selectedOption?.label ?? placeholder}
+            </span>
+            <ChevronIcon className="shrink-0" aria-hidden />
+          </Field>
+        </HeadlessField>
         <ListboxOptions
           anchor="bottom start"
           modal={false}

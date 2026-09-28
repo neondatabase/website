@@ -252,7 +252,7 @@ const ContactForm = () => {
             {...field}
             className="gap-y-2"
             errorTheme="tooltip"
-            label="Company Size"
+            label="Company Size*"
             placeholder="Select company size"
             options={COMPANY_SIZES}
             theme="transparent"
