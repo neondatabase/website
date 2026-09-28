@@ -880,8 +880,6 @@
           title: Call a Stored Procedure using C#
         - slug: csharp/csharp-call-postgresql-function
           title: Call PostgreSQL Functions using C#
-        - slug: csharp/csharp-connect
-          title: Connect to PostgreSQL using C#
         - slug: csharp/csharp-create-table
           title: Create Tables using C#
         - slug: csharp/csharp-delete
