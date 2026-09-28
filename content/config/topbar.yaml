@@ -1,4 +1,4 @@
-text: "In Neon, restoring 100 TB takes as long as restoring 10 GB (seconds) - See how"
+text: "In Neon, restoring 100 TB takes as long as restoring 10 GB (seconds). See how"
 link:
   url: 'https://neon.com/blog/inside-branch-based-restores-in-lakebase-postgres'
   target: '_blank'
