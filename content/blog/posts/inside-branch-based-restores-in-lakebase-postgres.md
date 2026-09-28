@@ -103,7 +103,7 @@ In the lakebase, a different architecture enables a different path for restores.
 
 ### Compute and storage as separate systems
 
-In the lakebase, compute and durable storage are split apart and connected by the WAL:
+Compute and durable storage are split apart and connected by the WAL:
 
 - Compute runs Postgres - it runs SQL, plans queries, applies MVCC, manages locks, and generates WAL - all the regular Postgres tasks. What it does *not* do is own the durable copy of your data.
 - Storage is what owns durability and history, and the job is divided in three parts executed by three distinct components:
@@ -127,7 +127,7 @@ In this design, the write path takes an interesting shape. The architecture abov
 
 In the traditional path, a restore mostly means rebuilding that past state into a separate instance. But in the lakebase, since there’s an immutable storage history to reference, that step is unnecessary, and is replaced by a different primitive: a branch.
 
-Where traditional restores provision a new instance and copy data into it, a restore in the lakebase is *a branch at a point in history*. This new branch has its own independent compute, its own connection string, and it can be queried completely independently of production. It is not a replica of the original instance, but it can feel just like it.
+Where traditional restores provision a new instance and copy data into it, a restore in the lakebase is **a branch at a point in history**. This new branch has its own independent compute, its own connection string, and it can be queried completely independently of production. It is not a replica of the original instance, but it can feel just like it.
 
 It's probably already evident how to use this primitive for a restore:
 
@@ -165,7 +165,7 @@ A human or an agent can always reach a queryable past state right away after an 
 
 Restores in the lakebase are a simple operation: create a branch at a timestamp. The loop is short enough that agents can treat it as an ordinary tool call, not only to resolve incidents.
 
-That is the piece agent platforms like Replit or v0 actually productize to build versioning or undo features. A typical loop looks like this:
+That is the piece [agent platforms](https://neon.com/use-cases/ai-agents) actually productize to build versioning or undo features. A typical loop looks like this:
 
 1. The agent changes the app, which changes the database
 2. The platform saves a checkpoint as a [snapshot](https://neon.com/docs/guides/backup-restore) of main. It stores the checkpoint ID next to the code version
