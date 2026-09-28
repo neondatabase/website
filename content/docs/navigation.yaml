@@ -600,6 +600,57 @@
             - title: Compatibility
               slug: reference/compatibility
               icon: info
+        - section: Search
+          items:
+            - title: Lakebase Search
+              icon: sparks
+              slug: ai/lakebase-search
+              items:
+                - title: Overview
+                  slug: ai/lakebase-search
+                - title: Get started
+                  slug: ai/lakebase-search-get-started
+                - title: Vector search (lakebase_vector)
+                  slug: extensions/lakebase-vector
+                - title: Full-text / BM25 search (lakebase_text)
+                  slug: extensions/lakebase-text
+                - title: Migrate from pg_search
+                  slug: extensions/migrate-pg-search-to-lakebase-text
+        - section: AI app development
+          items:
+            - title: AI App Starter Kit
+              icon: sparks
+              slug: ai/ai-intro
+              items:
+                - section: Core concepts
+                  icon: info
+                  items:
+                    - title: Introduction
+                      slug: ai/ai-intro
+                    - title: Embeddings
+                      slug: ai/ai-concepts
+                    - title: Pgvector
+                      slug: extensions/pgvector
+                - section: AI frameworks
+                  icon: frameworks
+                  items:
+                    - title: LangChain
+                      slug: ai/langchain
+                    - title: LlamaIndex
+                      slug: ai/llamaindex
+                    - title: Semantic Kernel
+                      slug: ai/semantic-kernel
+                    - title: Inngest
+                      slug: ai/inngest
+                - section: Optimize & scale
+                  icon: features
+                  items:
+                    - title: Optimize vector search
+                      slug: ai/ai-vector-search-optimization
+                    - title: Scale with Neon
+                      slug: ai/ai-scale-with-neon
+                - title: Google Colab
+                  slug: ai/ai-google-colab
         - title: Extensions
           slug: extensions/pg-extensions
           icon: extension
@@ -700,51 +751,6 @@
               slug: extensions/wal2json
             - title: xml2
               slug: extensions/xml2
-            - section: AI & Search
-              items:
-                - title: AI App Starter Kit
-                  icon: sparks
-                  slug: ai/ai-intro
-                  items:
-                    - section: Core concepts
-                      icon: info
-                      items:
-                        - title: Introduction
-                          slug: ai/ai-intro
-                        - title: Embeddings
-                          slug: ai/ai-concepts
-                        - title: Pgvector
-                          slug: extensions/pgvector
-                    - section: AI frameworks
-                      icon: frameworks
-                      items:
-                        - title: LangChain
-                          slug: ai/langchain
-                        - title: LlamaIndex
-                          slug: ai/llamaindex
-                        - title: Semantic Kernel
-                          slug: ai/semantic-kernel
-                        - title: Inngest
-                          slug: ai/inngest
-                    - section: Optimize & scale
-                      icon: features
-                      items:
-                        - title: Optimize vector search
-                          slug: ai/ai-vector-search-optimization
-                        - title: Scale with Neon
-                          slug: ai/ai-scale-with-neon
-                    - title: Google Colab
-                      slug: ai/ai-google-colab
-                - title: Lakebase Search
-                  icon: sparks
-                  slug: ai/lakebase-search
-                  items:
-                    - title: Overview
-                      slug: ai/lakebase-search
-                    - title: Get started
-                      slug: ai/lakebase-search-get-started
-                    - title: Migrate from pg_search
-                      slug: extensions/migrate-pg-search-to-lakebase-text
     - title: Auth
       icon: auth
       slug: auth/overview
