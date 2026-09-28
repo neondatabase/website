@@ -78,9 +78,9 @@ For that whole window you are in downtime, or something very close to it. A heal
 
 ## Slow restores cause pains across the board
 
-<video autoPlay muted loop playsInline width="708" height="316" aria-label="Database restore challenges">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.mp4" type="video/mp4" />
+<video autoPlay muted loop playsInline width="708" height="305" aria-label="Database restore challenges">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.webm?v=2" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/inside-branch-based-restores-in-lakebase-postgres/restores-clip-2.mp4?v=2" type="video/mp4" />
 </video>
 
 To put some numbers to that pain: [we asked 50 developers running production Postgres](https://neon.com/restores-survey) about their experience with restores:
