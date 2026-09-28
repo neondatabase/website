@@ -58,4 +58,22 @@ describe('AI Gateway model Markdown index', () => {
       'Verified code examples are not currently available for: <code>model&#124;&#96;next</code>.'
     );
   });
+
+  it('gives embedding models their own section, out of Text and Other', () => {
+    const embeddingRow = {
+      ...createRow({ id: 'qwen3-embedding-0-6b', inputs: [], isImageCapable: false }),
+      dimensions: 1024,
+      isEmbedding: true,
+      endpoints: ['embeddings'],
+    };
+    const markdown = renderAiGatewayModelIndex([
+      createRow({ id: 'text-model', inputs: ['text'], isImageCapable: false }),
+      embeddingRow,
+    ]);
+    const [textSection, embeddingSection] = markdown.split('### Embedding models');
+
+    expect(textSection).not.toContain('qwen3-embedding-0-6b');
+    expect(embeddingSection).toContain('qwen3-embedding-0-6b');
+    expect(embeddingSection).toContain('| 1024 |');
+  });
 });

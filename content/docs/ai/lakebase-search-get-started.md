@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-07-14T23:16:53.813Z'
+updatedOn: '2026-09-26T00:49:26.569Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -17,7 +17,10 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 - A Neon project. You enable Lakebase Search on it in the first step below.
 - Postgres 16 or later (Lakebase Search requires PG16+)
 - Node.js 18 or later
-- An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings (this guide uses OpenAI, but any embedding provider works)
+- Choose an embedding provider to turn text into vectors:
+  - **Neon AI Gateway** (this guide's default): set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` (see [Get started](/docs/ai-gateway/get-started)) and use the [`qwen3-embedding-0-6b`](/docs/ai-gateway/embeddings) model (1024 dimensions). Requires a paid plan in a [Neon AI Gateway region](/docs/ai-gateway/overview).
+  - **OpenAI directly**: set `OPENAI_API_KEY` and drop both client overrides so it's just `new OpenAI()`, then change the model to `text-embedding-3-small` (1536 dimensions).
+  - **Any other provider**: generate the vector with its SDK and match the `VECTOR` column to its dimensions.
 
 <Steps>
 
@@ -39,7 +42,7 @@ CREATE TABLE documents (
   id        SERIAL PRIMARY KEY,
   title     TEXT NOT NULL,
   body      TEXT NOT NULL,
-  embedding VECTOR(1536),
+  embedding VECTOR(1024),
   body_tsv  TSVECTOR GENERATED ALWAYS AS (to_tsvector('english', body)) STORED
 );
 
@@ -57,11 +60,16 @@ The remaining steps run from a local TypeScript project. Install dependencies:
 npm install @neondatabase/serverless openai dotenv
 ```
 
-Create a `.env` file with your Neon connection string and OpenAI API key:
+<Admonition type="note">
+This guide uses the `openai` SDK pointed at the Neon AI Gateway. Version 6 of the SDK requires `encoding_format: 'float'` on embedding calls (included below); on v7 and later it's optional. See [Embeddings](/docs/ai-gateway/embeddings) for details.
+</Admonition>
+
+Create a `.env` file with your Neon connection string and AI Gateway credentials. See [Get started with AI Gateway](/docs/ai-gateway/get-started) for how to obtain the gateway values:
 
 ```ini filename=".env"
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
-OPENAI_API_KEY=your-openai-api-key
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://[branch-host]
 ```
 
 ## Run the demo
@@ -74,7 +82,12 @@ import { neon } from '@neondatabase/serverless';
 import OpenAI from 'openai';
 
 const sql = neon(process.env.DATABASE_URL!);
-const openai = new OpenAI();
+
+// Point the OpenAI SDK at the Neon AI Gateway.
+const openai = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+});
 
 const documents = [
   {
@@ -102,8 +115,9 @@ const documents = [
 async function embedAndInsert() {
   for (const doc of documents) {
     const { data } = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
+      model: 'qwen3-embedding-0-6b',
       input: doc.body,
+      encoding_format: 'float', // required on the openai SDK v6; harmless on v7+
     });
 
     await sql`
@@ -115,8 +129,9 @@ async function embedAndInsert() {
 
 async function vectorSearch(query: string, limit = 5) {
   const { data } = await openai.embeddings.create({
-    model: 'text-embedding-3-small',
+    model: 'qwen3-embedding-0-6b',
     input: query,
+    encoding_format: 'float',
   });
 
   return sql`
@@ -178,8 +193,9 @@ Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `text
 ```typescript filename="search.ts"
 async function hybridSearch(query: string, limit = 5) {
   const { data } = await openai.embeddings.create({
-    model: 'text-embedding-3-small',
+    model: 'qwen3-embedding-0-6b',
     input: query,
+    encoding_format: 'float',
   });
   const queryVector = JSON.stringify(data[0].embedding);
 

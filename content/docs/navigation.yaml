@@ -648,6 +648,8 @@
               slug: extensions/pgvector
             - title: pgrag
               slug: extensions/pgrag
+              tag: deprecated
+              tagTheme: gray
             - title: pg_cron
               slug: extensions/pg_cron
             - title: pg_graphql
@@ -666,6 +668,8 @@
               slug: extensions/pg_repack
             - title: pg_search
               slug: extensions/pg_search
+              tag: deprecated
+              tagTheme: gray
             - title: pg_tiktoken
               slug: extensions/pg_tiktoken
             - title: pg_trgm
@@ -923,6 +927,8 @@
           items:
             - title: Chat completions
               slug: ai-gateway/chat-completions
+            - title: Embeddings
+              slug: ai-gateway/embeddings
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
             - title: Gemini API
@@ -1278,6 +1284,10 @@
                   slug: cli/link
                 - title: checkout
                   slug: cli/checkout
+                - title: git
+                  slug: cli/git
+                  tag: new
+                  tagTheme: green
                 - title: env
                   slug: cli/env
                 - title: set-context

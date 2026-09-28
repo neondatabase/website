@@ -68,10 +68,35 @@ const renderProviderTables = (rows, headingDepth) =>
     )
     .join('\n\n');
 
+const EMBEDDING_TABLE_HEADER =
+  '| Model | Model ID | Dimensions | Released | Input /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- |';
+
+const renderEmbeddingTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.dimensions),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        escapeTableCell(row.endpoints.join(' · ') || '—'),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
 const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
-  const textRows = rows.filter((row) => row.inputs.includes('text'));
+  const embeddingRows = rows.filter((row) => row.isEmbedding);
+  const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
   const imageRows = rows.filter((row) => row.isImageCapable);
-  const otherRows = rows.filter((row) => !row.inputs.includes('text') && !row.isImageCapable);
+  const otherRows = rows.filter(
+    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding
+  );
   const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
   const sections = ['### Text models', renderProviderTables(textRows, '####')];
 
@@ -102,6 +127,15 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     sections.push(renderProviderTables(otherRows, '####'));
   }
 
+  if (embeddingRows.length > 0) {
+    sections.push('### Embedding models');
+    sections.push(
+      'These models return a fixed-length vector on `POST /v1/embeddings` rather than generating text — a different endpoint from every model above:'
+    );
+    sections.push(`${EMBEDDING_TABLE_HEADER}\n${renderEmbeddingTableRows(embeddingRows)}`);
+    sections.push('Select a linked model for embeddings-specific code examples.');
+  }
+
   sections.push(modelRows.MODEL_CATALOG_NOTE);
 
   return sections.join('\n\n');
@@ -109,10 +143,12 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
 
 module.exports = {
   MODEL_TABLE_HEADER,
+  EMBEDDING_TABLE_HEADER,
   escapeTableCell,
   escapeLinkLabel,
   renderCodeCell,
   renderModelTableRows,
+  renderEmbeddingTableRows,
   renderProviderTables,
   renderAiGatewayModelIndex,
 };

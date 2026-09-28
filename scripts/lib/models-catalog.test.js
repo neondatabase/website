@@ -30,6 +30,19 @@ const catalog = (models) => ({
   neon: { id: 'neon', name: 'Neon', api: 'x', env: [], doc: 'x', models },
 });
 
+const embeddingModel = (over = {}) => ({
+  id: 'a',
+  name: 'A',
+  provider: 'alibaba',
+  family: 'text-embedding',
+  type: 'embedding',
+  dimensions: 1024,
+  open_weights: true,
+  release_date: '2026-01-01',
+  last_updated: '2026-01-01',
+  ...over,
+});
+
 describe('classifyDrift', () => {
   it('reports no drift when the mirror matches', () => {
     const both = { a: model() };
@@ -387,5 +400,51 @@ describe('validateCatalog', () => {
   it('rejects a catalog with no models rather than passing vacuously', () => {
     expect(validateCatalog(catalog({}))).toEqual([expect.stringContaining('empty')]);
     expect(validateCatalog({})).toEqual([expect.stringContaining('missing the top-level')]);
+  });
+
+  describe('type: "embedding"', () => {
+    it('accepts a well-formed embedding model with none of the chat fields', () => {
+      expect(validateCatalog(catalog({ a: embeddingModel() }))).toEqual([]);
+    });
+
+    it('rejects an unknown type', () => {
+      const errors = validateCatalog(catalog({ a: embeddingModel({ type: 'vision' }) }));
+
+      expect(errors).toEqual(
+        expect.arrayContaining([expect.stringContaining('a.type must be one of embedding')])
+      );
+    });
+
+    it('requires dimensions instead of the chat-shaped fields', () => {
+      const { dimensions: _dimensions, ...withoutDimensions } = embeddingModel();
+      const errors = validateCatalog(catalog({ a: withoutDimensions }));
+
+      expect(errors).toEqual([expect.stringContaining('a.dimensions is missing')]);
+    });
+
+    it('does not require reasoning, tool_call, attachment, modalities, or limit', () => {
+      expect(validateCatalog(catalog({ a: embeddingModel() }))).toEqual([]);
+    });
+
+    it('rejects a non-positive dimensions value', () => {
+      const errors = validateCatalog(catalog({ a: embeddingModel({ dimensions: 0 }) }));
+
+      expect(errors).toEqual([expect.stringContaining('a.dimensions must be a positive integer')]);
+    });
+
+    it('accepts input-only cost — there is no completion to charge for', () => {
+      expect(validateCatalog(catalog({ a: embeddingModel({ cost: { input: 0.02 } }) }))).toEqual(
+        []
+      );
+    });
+
+    it('still rejects an empty cost block — and a cost with only an output rate', () => {
+      expect(validateCatalog(catalog({ a: embeddingModel({ cost: {} }) }))).toEqual([
+        expect.stringContaining('needs an input rate'),
+      ]);
+      expect(validateCatalog(catalog({ a: embeddingModel({ cost: { output: 0 } }) }))).toEqual([
+        expect.stringContaining('needs an input rate'),
+      ]);
+    });
   });
 });

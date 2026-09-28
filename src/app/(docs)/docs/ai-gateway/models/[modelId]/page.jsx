@@ -24,11 +24,13 @@ const getLanguagesByMode = (modelId) => {
   const examplesByMode = {
     text: resolveModel(modelsData, capabilities, modelId, 'chat')?.examples ?? [],
     image: resolveModel(modelsData, capabilities, modelId, 'image-generation')?.examples ?? [],
+    embeddings: resolveModel(modelsData, capabilities, modelId, 'embeddings')?.examples ?? [],
   };
 
   return {
     text: getLanguagesForMode(examplesByMode, 'text'),
     image: getLanguagesForMode(examplesByMode, 'image'),
+    embeddings: getLanguagesForMode(examplesByMode, 'embeddings'),
   };
 };
 

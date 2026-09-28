@@ -6,7 +6,7 @@ summary: >-
   behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-17T09:58:15.444Z'
+updatedOn: '2026-09-26T00:49:26.569Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -23,15 +23,15 @@ The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/
 
 Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
 
-Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to the full catalog.
+Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to foundation models.
 
 ## Available models
 
-Browse the full catalog below. Switch between the **Text** and **Image** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart (AI SDK, Mastra, Python, TypeScript, or cURL). The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions, `/openai/v1` for the Responses API (image generation).
+Browse the full catalog below. Switch between the **Text**, **Image**, and **Embeddings** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation).
 
 <AiGatewayModelIndex/>
 
-For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use).
+For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings).
 
 ## Rate limits
 
@@ -61,13 +61,15 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                                | Recommended endpoint   | Notes                                                                         |
-| ------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------- |
-| OpenAI (most models)                                    | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                         |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)                 | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions   |
-| Google Gemini                                           | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B                                      | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                |
-| Meta, Alibaba, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                         |
+| Provider                                       | Recommended endpoint   | Notes                                                                         |
+| ---------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------- |
+| OpenAI (most models)                           | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                         |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions   |
+| Google Gemini                                  | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B                             | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                |
+| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                         |
+| Alibaba (chat models)                          | `/v1/chat/completions` | Chat completions only                                                         |
+| Alibaba (embedding models)                     | `/v1/embeddings`       | No chat completions — returns a vector, not text                              |
 
 ## Shorter paths
 

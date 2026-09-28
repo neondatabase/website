@@ -1,5 +1,5 @@
 {
-  "$comment": "Measured behaviour of every model the Neon AI Gateway serves. Produced by calling each model on /v1/chat/completions, its provider-native dialect, and /openai/v1/responses with the web_search and image_generation tools. This is what the gateway DID; models.json is what each model CLAIMS. /models needs both to know which code examples are correct.",
+  "$comment": "Measured behaviour of every model the Neon AI Gateway serves. Produced by calling each model on /v1/chat/completions, its provider-native dialect, and /openai/v1/responses with the web_search and image_generation tools. This is what the gateway DID; models.json is what each model CLAIMS. /models needs both to know which code examples are correct. The two `embeddings: true` entries (qwen3-embedding-0-6b, gte-large-en) are a different shape — POST /v1/embeddings, not chat — and were verified by hand against a live gateway branch on 2026-09-25, not by probe:conformance, which only exercises the chat-shaped routes above. `chat: \"not-served\"` / `nativeDialect: \"none\"` on those two is accurate (chat_completions and openai_responses both reject them by name), not a placeholder.",
   "$howToRegenerate": "Generated from the conformance record in neondatabase/neon-console-code-examples: run `bun run probe:conformance` there, then copy its conformance.json into the shape below. One probe feeds both repos so the console and /models cannot disagree. Fields per model: id, owner, entitled, chat (conforms | array-content | not-served | not-entitled), deviations[], nativeDialect (anthropic | openai-responses | gemini | none), responses, webSearch, imageGeneration. Conformance MUST be measured with a prompt that makes the model reason as well as a trivial one, taking the worse shape: claude-opus-5, claude-sonnet-5 and claude-fable-5 return a compliant string for a trivial prompt and an array of {reasoning, text} parts once they think, and an easy-prompt-only probe is what published all three as `conforms`. CI checks completeness, not freshness - see the models-rest validator in scripts/verify-agent-endpoints.mjs.",
   "probedAt": "2026-09-15T00:34:44.698Z",
   "models": [
@@ -376,6 +376,30 @@
       "responses": true,
       "webSearch": false,
       "imageGeneration": false
+    },
+    {
+      "id": "qwen3-embedding-0-6b",
+      "owner": "databricks",
+      "entitled": true,
+      "chat": "not-served",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false,
+      "embeddings": true
+    },
+    {
+      "id": "gte-large-en",
+      "owner": "databricks",
+      "entitled": true,
+      "chat": "not-served",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false,
+      "embeddings": true
     }
   ]
 }

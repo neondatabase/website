@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching, autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Also use for \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"neon inspect db\", \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:9964c0b291d5261d823cd268c75ed595d3aa63ad9a6dc6f59a1f94ef0c0e7cd8"
+      "digest": "sha256:83d3c75651bd81f06e5e8c47ffc306936cc4d2a1ac84d288e8f6a15fcfb724b4"
     },
     {
       "name": "neon-postgres-egress-optimizer",
@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, resetting a branch from its parent, branch expiration and CI/CD branch lifecycles, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\", \"branch per PR\" and \"sensitive data testing\".",
       "url": "/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
-      "digest": "sha256:362df87a6c768e67cdd3decfefa9dce8f9706f6b012b2a5ce95d9a0d88ae5d72"
+      "digest": "sha256:9f47d5a49553a465837c1e8b2d90a90aac72a5313a996c081027290f259a8d71"
     },
     {
       "name": "neon",

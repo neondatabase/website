@@ -25,6 +25,10 @@ const META = {
     desc: 'Pin a branch in .neon; auto-pulls its env vars.',
     examples: ['neon checkout feat/auth'],
   },
+  git: {
+    desc: 'Sync the checked-out Neon branch to your git branch on checkout (Preview).',
+    examples: ['neon git install', 'neon git status'],
+  },
   env: {
     desc: "Write the branch's DATABASE_URL + Neon vars to .env.",
     examples: ['neon env pull'],
