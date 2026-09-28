@@ -89,7 +89,7 @@ To put some numbers to that pain: [we asked 50 developers running production Pos
 - 30% were down for 3+ hours, some went past half a day
 - only 21% recovered in under 60 minutes
 
-In we zoom out to the potential business impact,
+If we zoom out to the potential business impact,
 
 - 40% reported significant business interruption
 - 52% saw negative customer feedback from the incident
