@@ -40,7 +40,6 @@ The following example creates a dictionary from the `tokenizer_wholeword` templa
 CREATE TEXT SEARCH DICTIONARY documents_dict (
   TEMPLATE          = tokenizer_ext.tokenizer_wholeword,
   Lowercase         = 'true',
-  EnglishPossessive = 'true',
   StripAccents      = 'true',
   Stemmer           = 'english'
 );
