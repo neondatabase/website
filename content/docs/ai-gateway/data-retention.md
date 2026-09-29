@@ -1,20 +1,26 @@
 ---
-title: AI Gateway data retention
-subtitle: What Databricks and model providers retain when you use the gateway
+title: Neon AI Gateway data retention
+subtitle: What is retained when you use the gateway, and by whom
 summary: >-
-  Neon AI Gateway serves models hosted by Databricks. Databricks may store
-  inputs and outputs for up to 30 days for security and abuse detection only,
-  and does not train on them. Model providers do not retain your data, except
-  for the providers identified in Databricks' partner model provider retention
-  policy.
+  When you call a model through Neon AI Gateway, your prompts and responses are
+  handled by the platform that runs the gateway and by the model provider. This
+  page explains what each retains, how long, and for what purpose, and where the
+  authoritative policies live.
 enableTableOfContents: true
 ---
 
-Neon AI Gateway serves models hosted by [Databricks](https://docs.databricks.com/aws/en/machine-learning/model-serving). Two parties handle your prompts and responses: the Databricks platform that runs the gateway, and the model provider that serves the model you call. This page explains what each one retains.
+Neon AI Gateway gives you access to many models through a single Neon credential. Behind the gateway, those models are hosted and served by [Databricks Model Serving](https://docs.databricks.com/aws/en/machine-learning/model-serving): Neon AI Gateway is powered by Databricks, so a request you send to the gateway is processed by Databricks and then by the provider of the model you call.
+
+That means two parties handle your prompts and responses:
+
+- **Databricks**, the platform that runs the models behind the gateway.
+- **The model provider**, such as OpenAI or Google, that serves the specific model you call.
+
+This page explains what each one retains.
 
 ## Databricks retention
 
-Databricks may store the inputs and outputs of your requests in the same region as your workspace for up to 30 days. This data is isolated per customer and is accessible only to detect and respond to security or abuse concerns. Your inputs and outputs are not used to train models or improve services.
+Databricks may store the inputs and outputs of your requests for up to 30 days, within the region where the request is processed. This data is isolated per customer and is accessible only to detect and respond to security or abuse concerns. Your inputs and outputs are not used to train models or improve services.
 
 For the authoritative and latest policy, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving).
 
