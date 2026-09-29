@@ -23,7 +23,7 @@ One Compute Unit (CU) allocates ≈4 GB of RAM, along with CPU and local SSD. A 
 compute size (CU) × hours running = CU-hours
 ```
 
-On the [Launch plan](/docs/introduction/plans), compute costs $0.106 per CU-hour, and on the Scale plan $0.222 per CU-hour. Storage is $0.35/GB-month on both. The Free plan includes 100 CU-hours per project per month and 0.5 GB of storage per project.
+On the [Launch plan](/docs/introduction/plans), compute costs $0.106 per CU-hour, and on the Scale plan $0.222 per CU-hour. Storage is $0.35/GB-month on both. The Free plan includes 100 CU-hours per project per month and 1 GB of storage per project.
 
 For example, a small app on a 0.25 CU (≈1 GB RAM) compute that's active 9 hours a day uses:
 

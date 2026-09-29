@@ -35,7 +35,7 @@ Every engineer works on their own branch with a copy of production data, created
 
 ## What it costs
 
-- **Free plan**: 100 projects, 0.5 GB of storage per project, 100 CU-hours per project per month, 10 branches per project, Auth up to 60k MAU, no credit card.
+- **Free plan**: 100 projects, 1 GB of storage per project, 100 CU-hours per project per month, 10 branches per project, Auth up to 60k MAU, no credit card.
 - **Launch plan**: $0.106/CU-hour and $0.35/GB-month, autoscaling to 16 CU, 7-day restore window, spending notifications, no monthly minimum.
 - **Scale plan**: $0.222/CU-hour with SOC 2, HIPAA, IP Allow, Private Networking, and an uptime SLA for the enterprise deals that come later ([plans](/docs/introduction/plans)).
 

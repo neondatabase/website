@@ -35,7 +35,7 @@ If you'd rather use your own stack, Lakebase Postgres is standard Postgres. Copy
 If a coding agent is doing the build and you haven't signed up, [Claimable Neon](/docs/reference/claimable-neon) creates a project immediately and hands you a claim link. `neon claim create --env-pull` writes credentials to `.env`. Unclaimed projects expire in 72 hours and are capped at 100 MB of storage and 1 GB of transfer. That covers a weekend demo, and you can claim the project if you want to keep it.
 
 <Admonition type="tip" title="What the Free plan includes">
-100 projects, 0.5 GB of storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU, and Free allowances for Object Storage and Functions ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you stop working on stops using CU-hours ([scale to zero](/docs/introduction/scale-to-zero)).
+100 projects, 1 GB of storage per project, 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 10 branches per project, 5 GB of public network transfer per project per month, Auth up to 60k MAU, and Free allowances for Object Storage and Functions ([plans](/docs/introduction/plans)). Compute scales to zero after 5 minutes idle, so a project you stop working on stops using CU-hours ([scale to zero](/docs/introduction/scale-to-zero)).
 </Admonition>
 
 ## How other options compare

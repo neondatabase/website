@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-09-17T20:16:14.131Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -27,7 +27,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), there's no hard per-branch size limit**; your storage grows with your usage, and you pay only for the storage you use. The Free plan includes 0.5 GB per project, shared across all branches.
+- Storage depends on your [Neon plan](/docs/introduction/plans). **On paid plans (Launch and Scale), there's no hard per-branch size limit**; your storage grows with your usage, and you pay only for the storage you use. The Free plan includes 1 GB per project, shared across all branches.
 
 ## Create a project
 

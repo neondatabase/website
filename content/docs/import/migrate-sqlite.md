@@ -6,11 +6,11 @@ summary: >-
   when moving an existing SQLite or Turso database to Neon and needing control
   over type casting via pgloader CAST clauses, as distinct from guides covering
   MySQL, CSV, or logical replication imports. Neon's Free plan supports up to
-  0.5 GB; the guide also covers sequence verification after import and a Docker
+  1 GB; the guide also covers sequence verification after import and a Docker
   SSL workaround.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 This guide describes how to migrate your SQLite database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
@@ -24,7 +24,7 @@ Before you begin, ensure you have the following:
 - A Neon account and a project. If you don't have one, see [Sign up](/docs/get-started/signing-up).
 - A database created in your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - The file path to your source SQLite database file. If you don't have one, you can create a sample database in the next step.
-- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 1 GB of data. If your data size is more than 1 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities.
 

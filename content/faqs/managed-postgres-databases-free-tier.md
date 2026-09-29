@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?"
-description: "Neon's Free plan includes 100 projects, 0.5 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
+description: "Neon's Free plan includes 100 projects, 1 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
 date: 2026-04-25
 slug: managed-postgres-databases-free-tier
 category: FAQ
@@ -13,19 +13,19 @@ nextLink:
   slug: managed-postgres-options-ten-databases-cost
 ---
 
-Neon's Free plan has no time limit, and it fits a real, low-traffic app: up to 100 projects, 0.5 GB of storage per project, and 100 CU-hours of compute per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero CU-hours of compute.
+Neon's Free plan has no time limit, and it fits a real, low-traffic app: up to 100 projects, 1 GB of storage per project, and 100 CU-hours of compute per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero CU-hours of compute.
 
 ## What the Free plan includes
 
 Each project on the Free plan includes:
 
-- **Storage:** 0.5 GB per project
+- **Storage:** 1 GB per project
 - **Compute:** 100 CU-hours/month, with autoscaling up to 2 CU (≈8 GB RAM)
 - **Branches:** up to 10 per project, useful for previews and migrations
 - **Instant restore:** 6-hour history window (capped at 1 GB of change history)
 - **Egress:** 5 GB per project per month of public network transfer
 
-Hitting the monthly CU-hour or network transfer limit suspends compute until the next billing cycle. Exceeding 0.5 GB storage causes writes that increase storage to fail until you free space or upgrade. If you need spend alerts on a paid plan, set up [spending notifications](/docs/introduction/spending-notifications).
+Hitting the monthly CU-hour or network transfer limit suspends compute until the next billing cycle. Exceeding 1 GB storage causes writes that increase storage to fail until you free space or upgrade. If you need spend alerts on a paid plan, set up [spending notifications](/docs/introduction/spending-notifications).
 
 See the full list on the [Plans page](/docs/introduction/plans).
 
@@ -43,7 +43,7 @@ When you outgrow the Free plan limits, the Launch plan is pay-as-you-go with no 
 
 | Provider         | Always free?         | Storage          | Compute                            | Project / database limit                   |
 | ---------------- | -------------------- | ---------------- | ---------------------------------- | ------------------------------------------ |
-| Neon Free plan   | Yes, no expiration   | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                               |
+| Neon Free plan   | Yes, no expiration   | 1 GB / project   | 100 CU-hours, autoscale up to 2 CU | 100 projects                               |
 | Supabase Free    | Yes, with caveat     | 500 MB / project | Nano compute (0.5 GB RAM)          | 2 active projects, paused after inactivity |
 | Aurora Postgres  | On the AWS Free Tier | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances                    |
 | RDS for Postgres | Sign-up credits only | Paid per GB      | Paid per instance-hour             | Account quotas                             |

@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -104,7 +104,7 @@ For free-tier users, create projects in your Free organization (sponsored by Neo
 | ----------------- | ------------------ | ---------------------------------------- |
 | **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units  |
 | **Active time**   | `360000` seconds   | 100 hours of compute activity per month  |
-| **Storage**       | `536870912` bytes  | 512 MB total storage limit               |
+| **Storage**       | `1073741824` bytes | 1 GB total storage limit                 |
 | **Data transfer** | `5368709120` bytes | 5 GB data transfer per project per month |
 
 Example API request:
@@ -122,7 +122,7 @@ curl --request POST \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },
@@ -315,7 +315,7 @@ curl --request PATCH \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },
