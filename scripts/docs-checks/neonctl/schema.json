@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "6.3.0",
+  "neonctlVersion": "7.0.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1065,6 +1065,164 @@
         }
       },
       "commands": {
+        "add": {
+          "name": "add",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "ai-gateway": {
+              "name": "ai-gateway",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable the AI Gateway (aiGateway: true)"
+            },
+            "auth": {
+              "name": "auth",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable Neon Auth (auth: true)"
+            },
+            "bucket": {
+              "name": "bucket",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "describe": "Bucket name",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "access": {
+                  "type": "string",
+                  "describe": "Anonymous access: private requires credentials, public_read allows anonymous reads",
+                  "default": "private",
+                  "choices": [
+                    "private",
+                    "public_read"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Declare an Object Storage bucket",
+              "examples": [
+                {
+                  "command": "$0 config add bucket assets --access public_read",
+                  "description": "Declares a bucket that allows anonymous reads"
+                }
+              ]
+            },
+            "data-api": {
+              "name": "data-api",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable the Data API (dataApi: true) and Neon Auth, which the default provider requires"
+            },
+            "function": {
+              "name": "function",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "slug",
+                  "required": true,
+                  "describe": "Function slug: 1-20 lowercase letters and digits",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "name": {
+                  "type": "string",
+                  "describe": "Display name. Defaults to the slug"
+                },
+                "source": {
+                  "type": "string",
+                  "describe": "Handler file, relative to neon.ts. Defaults to functions/<slug>.ts. Created when missing, left alone when it exists"
+                }
+              },
+              "commands": {},
+              "describe": "Declare a Neon Function and create its handler file",
+              "examples": [
+                {
+                  "command": "$0 config add function sendemail",
+                  "description": "Creates functions/sendemail.ts and declares it"
+                },
+                {
+                  "command": "$0 config add function sendemail --source src/send.ts",
+                  "description": "Declares an existing handler"
+                }
+              ]
+            }
+          },
+          "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
+        },
         "apply": {
           "name": "apply",
           "aliases": [],
@@ -3958,10 +4116,6 @@
               "type": "string",
               "describe": "A name for the snapshot"
             },
-            "slug": {
-              "type": "string",
-              "describe": "User-defined resource ID, unique in the project (1-63 characters: start with a lowercase letter, then lowercase letters, digits, or hyphens, ending with a letter or digit). Omit to let the API generate one. It cannot be changed later."
-            },
             "timestamp": {
               "type": "string",
               "describe": "Take the snapshot at this point in time (RFC 3339, e.g. 2025-01-01T00:00:00Z). Must fall within the branch's restore window. Mutually exclusive with --lsn."
@@ -3977,10 +4131,6 @@
             {
               "command": "$0 snapshots create --branch main --timestamp 2025-01-01T00:00:00Z",
               "description": "Snapshot main at a point in time"
-            },
-            {
-              "command": "$0 snapshots create --branch main --name \"Before migration\" --slug before-migration",
-              "description": "Snapshot main with a display name and a slug"
             },
             {
               "command": "$0 snapshots create --branch main --name pre-migration",
@@ -4003,7 +4153,7 @@
           ],
           "options": {},
           "commands": {},
-          "describe": "Delete a snapshot by id, unique name, or slug"
+          "describe": "Delete a snapshot by id or name"
         },
         "finalize": {
           "name": "finalize",
@@ -4034,7 +4184,7 @@
           ],
           "options": {},
           "commands": {},
-          "describe": "Get a snapshot by id, unique name, or slug"
+          "describe": "Get a snapshot by id or name"
         },
         "list": {
           "name": "list",
@@ -4069,7 +4219,7 @@
             }
           },
           "commands": {},
-          "describe": "Restore a snapshot (id, unique name, or slug) into a branch",
+          "describe": "Restore a snapshot into a branch",
           "examples": [
             {
               "command": "$0 snapshots restore snap-1234 --target-branch main",
@@ -4186,7 +4336,7 @@
             }
           },
           "commands": {},
-          "describe": "Update a snapshot's name or expiration by id, unique name, or slug"
+          "describe": "Update a snapshot's name or expiration"
         }
       },
       "describe": "Manage snapshots",
