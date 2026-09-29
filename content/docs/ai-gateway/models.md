@@ -6,7 +6,7 @@ summary: >-
   behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-29T11:44:20.855Z'
+updatedOn: '2026-09-29T11:51:40.506Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -154,13 +154,6 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
 | Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
 
-### Data retention
-
-Prompts and responses are processed by Databricks Model Serving. Databricks may store inputs and outputs in the same region as your workspace for up to 30 days, isolated per customer and accessible only to detect and respond to security or abuse concerns. Inputs and outputs are not used to train models or improve services. See [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving) for the authoritative and latest policy.
-
-Third-party model providers do not retain your data, except for the providers and models identified in Databricks' partner model provider retention policy:
-
-- **OpenAI**: may retain content that its classifiers flag as potentially violating usage policies for certain coding and routing customers. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data#safety-retention).
-- **Anthropic**: subject to data retention for safety purposes. See [Anthropic data retention practices](https://support.claude.com/en/articles/15425996-data-retention-practices-for-mythos-class-models).
+For what Databricks and the model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
 
 <NeedHelp/>
