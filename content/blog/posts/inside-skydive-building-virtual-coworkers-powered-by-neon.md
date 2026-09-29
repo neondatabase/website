@@ -26,6 +26,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/social.jpg
 ---
 
+![Skydive virtual coworkers powered by Neon](https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/cover.jpg)
+
 <blockquote>
 <p>“Our agents create their own infrastructure. That only works if a database is as cheap and as fast to make as a file”</p>
 <cite>Dhruv Amin, co-founder and CEO, Skydive</cite>
