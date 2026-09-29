@@ -15,7 +15,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/cover.jpg
   alt: Skydive virtual coworkers powered by Neon
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Inside Skydive: building virtual coworkers, powered by Neon - Neon'
   description: Their specialized agents can instantly deploy backends when the task demands it
