@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-08-31T17:42:21.786Z'
+updatedOn: '2026-09-29T21:04:10.398Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -25,7 +25,7 @@ This guide walks you through enabling the Data API, creating a table with RLS, a
 ## Enable the Data API
 
 <Admonition type="tip" title="Enable programmatically">
-You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_data_api` tool).
+You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), declaratively in `neon.ts` with [`neon config add data-api`](/docs/cli/config#add), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page

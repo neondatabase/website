@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-21T08:50:29.160Z'
+updatedOn: '2026-09-29T21:04:10.398Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -75,6 +75,8 @@ export default defineConfig({
 ## Services
 
 Declare services as top-level keys in `defineConfig`; declare only the ones you use. Every branch always has Postgres, so `DATABASE_URL` is injected without being declared here. After `neon deploy`, `neon env pull` writes any injected URLs and credentials to your local `.env` file automatically.
+
+To add any of these to an existing `neon.ts` without editing the file by hand, use [`neon config add`](/docs/cli/config#add); for a function it also creates the handler file.
 
 | Field       | Values / type                                | Default | What it enables                                                                                                                                                                                                                                |
 | ----------- | -------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
