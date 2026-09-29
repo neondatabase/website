@@ -42,6 +42,8 @@ seo:
 
 Each agent gets its own Slack account, email inbox, and phone number, so people can message it directly as if it was a human coworker. It also gets its own computer in the cloud, with a browser, terminal, and file system. Skydive agents can fill out websites, run code, build apps, download reports, and move between tools until a job is done.
 
+**[ADD IMAGE]**
+
 Anyone on a human team can deploy a Skydive agent in under a minute. Once they’re deployed, agents will run on their own. When a job spans several agents, you can even put them in a group chat and they hand work off to each other.
 
 To successfully deliver this experience, Skydive agents have to be able to move at agent speed - Skydive agents are set up to reach for tools that can keep up. That is especially true for infrastructure, which is often the slow part of the loop.
