@@ -52,11 +52,14 @@ To successfully deliver this experience, Skydive agents have to be able to move 
 
 But not with Neon. When a Skydive agent needs a durable state, it deploys an isolated Neon backend mid-task, with no human in the path, and it takes it around a second.
 
+<figure>
+
 | 0.7 seconds | 1.13 seconds |
 | :---: | :---: |
 | Average time it takes a Skydive agent to deploy a Neon backend | Average cold start time to first row |
 
-*Cross-fleet measurements provided by Skydive*
+<figcaption><em>Cross-fleet measurements provided by Skydive</em></figcaption>
+</figure>
 
 ## When agents need durable state
 
