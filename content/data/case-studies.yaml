@@ -2,10 +2,10 @@
   title: 'Skydive'
   isFeatured: false
   logo:
-    mediaItemUrl: ''
+    mediaItemUrl: '/images/case-studies/skydive.svg'
     mediaDetails:
-      width: 0
-      height: 0
+      width: 150
+      height: 32
   quote: 'Our agents create their own infrastructure. That only works if a database is as cheap and as fast to make as a file'
   author:
     name: 'Dhruv Amin'

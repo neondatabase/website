@@ -13,8 +13,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/cover.jpg
+  alt: Skydive virtual coworkers powered by Neon
 isFeatured: false
 seo:
   title: 'Inside Skydive: building virtual coworkers, powered by Neon - Neon'
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: 'Inside Skydive: building virtual coworkers, powered by Neon - Neon'
   ogDescription: Their specialized agents can instantly deploy backends when the task demands it
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/social.jpg
 ---
 
 <blockquote>
@@ -42,7 +42,7 @@ seo:
 
 Each agent gets its own Slack account, email inbox, and phone number, so people can message it directly as if it was a human coworker. It also gets its own computer in the cloud, with a browser, terminal, and file system. Skydive agents can fill out websites, run code, build apps, download reports, and move between tools until a job is done.
 
-**[ADD IMAGE]**
+![Skydive virtual coworkers](https://cdn.neonapi.io/public/images/pages/blog/inside-skydive-building-virtual-coworkers-powered-by-neon/skydive-image-1.jpg)
 
 Anyone on a human team can deploy a Skydive agent in under a minute. Once they’re deployed, agents will run on their own. When a job spans several agents, you can even put them in a group chat and they hand work off to each other.
 
