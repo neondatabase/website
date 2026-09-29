@@ -195,7 +195,23 @@ export default app;
 
 Run it locally with [`neon dev`](/docs/cli/dev), which serves the function with the same injected Neon variables it gets in production.
 
-**Reference:** [Functions get-started](/docs/compute/functions/get-started) (local dev, deploy, invoke, connection-pool guidance) · [Overview](/docs/compute/functions/overview)
+Beyond the `chat` endpoint the browser calls, Neon can invoke a function for you: [Function Triggers](/docs/compute/functions/triggers/overview) run it on a schedule or when an object is uploaded, so background work runs as the same function code and branches with your project. For example, run the function whenever a file is attached:
+
+```typescript filename="neon.ts"
+// top level
+triggers: {
+  "process-attachment": {
+    type: "storage_object_created",
+    function: "chat",
+    bucket: "attachments",
+    functionPath: "/on-upload",
+  },
+},
+```
+
+The function answers a `POST` at `/on-upload` with the bucket and object key, so it processes each new attachment. A `type: "schedule"` trigger with a `cron` field runs it on a timer instead.
+
+**Reference:** [Functions get-started](/docs/compute/functions/get-started) (local dev, deploy, invoke, connection-pool guidance) · [Overview](/docs/compute/functions/overview) · [Function Triggers](/docs/compute/functions/triggers/overview) (schedule or object-upload invocation)
 
 ## AI Gateway: the model call
 
