@@ -1,8 +1,7 @@
 ---
 title: How we systematically improved our reliability
 description: >-
-  From rigorous postmortems to risk-scored changes, here's what we changed and
-  why
+  Here's what we changed and why
 excerpt: >-
   Earlier this year, we had two incidents in one week. After those incidents,
   we doubled down on reliability. This post summarizes the reliability work
