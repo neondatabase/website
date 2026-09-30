@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-09-30T02:43:53.568Z'
+updatedOn: '2026-09-30T14:42:50.221Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -136,7 +136,7 @@ ALTER EXTENSION vector UPDATE TO '0.7.0';
 ```
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior or when Neon applies a regular compute [update](/docs/manage/updates) for Postgres upgrades, security patches, and similar changes. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
 
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
 </Admonition>
