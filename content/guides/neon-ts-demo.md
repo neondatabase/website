@@ -4,14 +4,14 @@ subtitle: Provision your entire Neon backend from a single TypeScript config fro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-09-30T07:16:41.489Z'
+updatedOn: '2026-09-30T07:23:52.517Z'
 ---
 
-[`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file for full-stack TypeScript projects. Traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), require learning a new DSL, managing state files, and wiring outputs into your application by hand. `neon.ts` is part of your local development loop instead. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables in your application code with TypeScript types.
+[`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file for full-stack TypeScript projects. Traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon) require learning a new DSL, managing state files, and wiring outputs into your application by hand. `neon.ts` is part of your local development loop instead. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables in your application code with TypeScript types.
 
 With `neon.ts`, you can:
 
-- **Provision every Neon backend service** in one file: [Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), the [Data API](/docs/data-api/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), and the [AI Gateway](/docs/ai-gateway/overview).
+- **Provision every Neon backend service** in one file: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), the [Data API](/docs/data-api/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), and the [AI Gateway](/docs/ai-gateway/overview).
 - **Declare event-driven work** with [Function Triggers](/docs/compute/functions/triggers/overview), so a function runs on a cron schedule or when a file lands in a bucket.
 - **Configure branch policies** in code, for example, capping compute on preview branches or setting TTLs so they're deleted automatically.
 - **Generate type-safe environment variables** so your application knows which services are available, with IDE autocomplete.
@@ -23,7 +23,7 @@ Every service you declare in `neon.ts` is provisioned on every branch. So a prev
 The GA release moved `aiGateway`, `functions`, and `buckets` to top-level keys in `defineConfig`, alongside `auth` and `dataApi`. Declaring them under a `preview` block still works but logs a deprecation warning. This guide uses the top-level form. If you're on `@neon/config` earlier than 1.6.0, upgrade with `npm install @neon/config@latest`. See the [`neon.ts` reference](/docs/reference/neon-ts#services).
 </Admonition>
 
-This guide walks through a full-stack example app called Receipts, that uses every Neon service, so you can see how `neon.ts` provisions them and how your code consumes the injected credentials. The workflow is simple:
+This guide walks through a full-stack example app called Receipts that uses every Neon service, so you can see how `neon.ts` provisions them and how your code consumes the injected credentials. It demonstrates the following workflow:
 
 - **Declare** every service you use, plus per-branch policy, in one `neon.ts`.
 - **Preview** a change with `neon config plan`, then **apply** it with `neon deploy`.
@@ -35,7 +35,7 @@ This guide walks through a full-stack example app called Receipts, that uses eve
 
 ## The example app
 
-The Receipts app has a simple workflow for uploading receipts, categorizing them with the AI Gateway, and rolling up weekly totals. It uses every Neon service:
+The Receipts app has a workflow for uploading receipts, categorizing them with the AI Gateway, and rolling up weekly totals. It uses every Neon service:
 
 ```mermaid
 flowchart LR
@@ -85,7 +85,11 @@ Link the directory to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`). Functions, Object Storage, and the AI Gateway are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Managed Better Auth**, **Data API**, **Functions**, **Object Storage** and **AI Gateway**.
+You'll be prompted to select your organization, then a project. **Create a new project** (or pick an existing one). Next:
+
+- Select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`). Functions, Object Storage, and the AI Gateway are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions).
+- Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root.
+- When asked which Neon services you require, select **Managed Better Auth**, **Data API**, **Functions**, **Object Storage**, and **AI Gateway**.
 
 The CLI creates a `neon.ts` file which declares the services you selected. It also creates a `.env.local` file with the connection strings and credentials for those services.
 
@@ -197,12 +201,12 @@ The `neon.ts` above declares the services, triggers, and branch policies for the
 
 - **Services**: `auth`, `dataApi`, `aiGateway`, a `receipts` bucket, and a `receipts` function are declared once and exist on every branch. Every branch also has Postgres with the default compute profile.
 - **Triggers**: `process-receipt` fires when an object is created under the `receipts/` prefix, and `weekly-summary` fires every Monday at 06:00 UTC. Both invoke the `receipts` function at a specific path.
-- **Production**: Allows scaling up to 2 Compute Units (CU). You can also mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
+- **Production**: Allows scaling up to 2 compute units (CU). You can also mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
 - **Development branches** (`dev*`): New branches whose name starts with `dev` are capped at 1 CU and scheduled for deletion after 7 days.
 - **Other new branches**: Get an even more minimal profile with a 2-day TTL and a fixed 0.25 CU ceiling.
 - **Existing branches**: Left untouched. Returning `{}` for branches that already exist avoids overwriting settings on branches already in use. `neon checkout` only applies policy when _creating_ a new branch, never when checking out an existing one.
 
-The above config is a simple example. You can customize compute limits, idle suspend behavior (`suspendTimeout`), branch lifetime (`ttl`), protected status, `parent`, and per-function options such as `env` and `customDomains`. See the [`neon.ts` reference](/docs/reference/neon-ts) for the complete list of available options.
+The above config is an example. You can customize compute limits, idle suspend behavior (`suspendTimeout`), branch lifetime (`ttl`), protected status, `parent`, and per-function options such as `env` and `customDomains`. See the [`neon.ts` reference](/docs/reference/neon-ts) for the complete list of available options.
 
 The config declares a function whose `source` points at `./functions/receipts.ts`, so that file must exist before you deploy. Create a minimal placeholder now; you'll replace it with the full implementation later in the guide:
 
@@ -392,7 +396,7 @@ npx drizzle-kit pull
 
 This command connects to your database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. Move them to `lib/db/schema.ts` and `lib/db/relations.ts`:
 
-```
+```text
  ├ 📂 drizzle
  │ ├ 📂 meta
  │ ├ 📜 migration.sql
@@ -486,7 +490,7 @@ export const weeklyReports = pgTable(
 
 The `receipts` table has a foreign key to `userInNeonAuth`, which is the Drizzle representation of the `neon_auth.user` table. The `weekly_reports` table has a composite primary key of `(user_id, week_start)` and a foreign key to `receipts.user_id`. Both tables have RLS policies that restrict access to the row's owner.
 
-- `crudPolicy` generates SELECT, INSERT, UPDATE, and DELETE policies for the `authenticated` role in one declaration. The `read` and `modify` conditions compare `auth.user_id()` against the row's `user_id`, so each user can only read and modify their own rows.
+- `crudPolicy` generates SELECT, INSERT, UPDATE, and DELETE policies for the `authenticated` role in one declaration. See [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) for the full parameter reference. The `read` and `modify` conditions compare `auth.user_id()` against the row's `user_id`, so each user can only read and modify their own rows.
 - `auth.user_id()` reads the JWT `sub` claim that the Data API passes to Postgres. It returns `text`, so the `uuid` `user_id` column is cast to `text` for the comparison.
 - `auth.uid()` parses the same claim as a UUID. It's the default for `receipts.user_id`, so a Data API insert automatically attributes the new row to the signed-in user.
 - `.enableRLS()` turns on Row-Level Security for the table. Without it, any authenticated user could read every row.
@@ -514,10 +518,10 @@ This step is separate from the migration you just ran. Drizzle's `crudPolicy` ge
 ```sql filename="lib/db/grants.sql"
 GRANT USAGE ON SCHEMA public TO authenticated;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
-  GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO authenticated;
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
 
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 ```
@@ -755,7 +759,7 @@ The above code does the following:
 
 - **JWT verification**: `jose` fetches and caches Managed Better Auth's public keys from `NEON_AUTH_JWKS_URL`, then verifies the token's signature and issuer. The `sub` claim is the user ID.
 - **CORS**: The browser calls the function directly from another origin, so the app enables CORS on every route and allows the `Authorization` header through.
-- **Trigger guard**: Both trigger routes reject any request without the `X-Neon-Trigger-Invocation-Id` header. Neon strips client-supplied `X-Neon-*` headers at the edge, so a request that carries one came from Neon's trigger system. See [Confirming a request came from Neon](/docs/compute/functions/triggers/overview#confirming-a-request-came-from-neon).
+- **Trigger guard**: Both trigger routes reject any request without the `X-Neon-Trigger-Invocation-Id` header. Neon strips client-supplied `X-Neon-*` headers at the edge, so a request that carries one came from Neon's trigger system. See [Confirming a request came from Neon](/docs/compute/functions/triggers/overview#confirming-a-request-came-from-neon) for details.
 - **Rollback on failed upload**: The handler inserts the row first, then uploads the file. If the upload fails, it deletes the row, so you never end up with a receipt pointing at an object that doesn't exist.
 - **AI Gateway**: `neonAI("glm-5-3-flash")` reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment and routes the model to the right endpoint. Swap the model ID to use a different provider with no other changes. Open-weight models are enabled by default; frontier models need access requested in the Console.
 - **Object Storage**: the `files-sdk/neon` adapter reads the injected `AWS_*` variables and configures the branch's S3-compatible endpoint. There's no client setup.
@@ -1197,7 +1201,7 @@ trigger-8f7e6d5c-4b3a-2190-fedc-ba9876543210  weekly-summary   schedule         
 
 </Steps>
 
-### Add a custom domain (optional)
+## Add a custom domain (optional)
 
 A function has a native Neon URL. You can also serve it from a domain you own, such as `api.example.com`, and Neon provisions the TLS certificate automatically. Add `customDomains` to the function in `neon.ts` and deploy:
 
@@ -1217,9 +1221,9 @@ neon deploy
 
 `neon deploy` registers the domain and prints a CNAME target. At your DNS provider, create a CNAME record for `api.example.com` pointing at that target. Configure it as DNS-only: if your provider proxies the record, Neon can't validate the domain. Once the domain reports `active`, make an HTTPS request to confirm certificate issuance.
 
-Static `customDomains` apply on the default branch only, since a hostname is globally unique and can't be inherited by child branches. Adding a custom domain doesn't authenticate the function or disable its native URL; both remain publicly reachable, so keep the JWT check on `/receipts` and `/assistant`. See [Custom domains for Neon Functions](/docs/compute/functions/custom-domains) for the full DNS and status details.
+Static `customDomains` apply on the default branch only, since a hostname is globally unique and can't be inherited by child branches. Adding a custom domain doesn't authenticate the function or disable its native URL; both remain publicly reachable, so keep the JWT check on `/receipts` and `/assistant`. For the full DNS setup, status codes, and deletion steps, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
 
-### The branch-first dev loop
+## The branch-first dev loop
 
 The branch-first dev loop is where `neon.ts` is most useful. Say you're building a new feature called "shared receipts". Start a new git branch:
 
@@ -1264,7 +1268,7 @@ A child branch inherits its parent's triggers, but they arrive disabled so you d
 
 ## Verify
 
-A fast sanity check after deploy. Each service's get-started has the full testing guidance.
+Run these quick checks after deploying. Each service's get-started has the full testing guidance.
 
 | Capability     | Quick check                                                                                           |
 | -------------- | ----------------------------------------------------------------------------------------------------- |
@@ -1289,7 +1293,9 @@ A fast sanity check after deploy. Each service's get-started has the full testin
 
 ## Conclusion
 
-You built the Receipts app on a backend defined entirely in `neon.ts`: Postgres, Managed Better Auth, the Data API, a function, a bucket, and the AI Gateway, plus two triggers and an optional custom domain. The same `neon config plan` / `neon deploy` loop that provisioned it also forked the whole backend onto a feature branch with `neon checkout` and compared it with `neon diff`.
+You built the Receipts app on a backend defined entirely in `neon.ts`: Postgres, Managed Better Auth, the Data API, a function, a bucket, and the AI Gateway, plus two triggers and an optional custom domain.
+
+The same `neon config plan` / `neon deploy` loop that provisioned it also forked the whole backend onto a feature branch with `neon checkout` and compared it with `neon diff`.
 
 From here, you could:
 
