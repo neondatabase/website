@@ -284,6 +284,7 @@
                 - title: Latency and timeouts
                   slug: connect/connection-latency
         - section: Search
+          icon: search
           items:
             - title: Lakebase Search
               icon: sparks
@@ -1149,41 +1150,6 @@
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
-        - section: AI app development
-          items:
-            - title: AI App Starter Kit
-              icon: sparks
-              slug: ai/ai-intro
-              items:
-                - section: Core concepts
-                  icon: info
-                  items:
-                    - title: Introduction
-                      slug: ai/ai-intro
-                    - title: Embeddings
-                      slug: ai/ai-concepts
-                    - title: Pgvector
-                      slug: extensions/pgvector
-                - section: AI frameworks
-                  icon: frameworks
-                  items:
-                    - title: LangChain
-                      slug: ai/langchain
-                    - title: LlamaIndex
-                      slug: ai/llamaindex
-                    - title: Semantic Kernel
-                      slug: ai/semantic-kernel
-                    - title: Inngest
-                      slug: ai/inngest
-                - section: Optimize & scale
-                  icon: features
-                  items:
-                    - title: Optimize vector search
-                      slug: ai/ai-vector-search-optimization
-                    - title: Scale with Neon
-                      slug: ai/ai-scale-with-neon
-                - title: Google Colab
-                  slug: ai/ai-google-colab
         - title: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
@@ -1238,6 +1204,41 @@
                   slug: https://neon.com/guides/composio-crewai-neon
                 - title: LangGraph
                   slug: https://neon.com/guides/langgraph-neon
+        - section: AI app development
+          items:
+            - title: AI App Starter Kit
+              icon: sparks
+              slug: ai/ai-intro
+              items:
+                - section: Core concepts
+                  icon: info
+                  items:
+                    - title: Introduction
+                      slug: ai/ai-intro
+                    - title: Embeddings
+                      slug: ai/ai-concepts
+                    - title: Pgvector
+                      slug: extensions/pgvector
+                - section: AI frameworks
+                  icon: frameworks
+                  items:
+                    - title: LangChain
+                      slug: ai/langchain
+                    - title: LlamaIndex
+                      slug: ai/llamaindex
+                    - title: Semantic Kernel
+                      slug: ai/semantic-kernel
+                    - title: Inngest
+                      slug: ai/inngest
+                - section: Optimize & scale
+                  icon: features
+                  items:
+                    - title: Optimize vector search
+                      slug: ai/ai-vector-search-optimization
+                    - title: Scale with Neon
+                      slug: ai/ai-scale-with-neon
+                - title: Google Colab
+                  slug: ai/ai-google-colab
 
 - nav: Reference
   title: Reference
