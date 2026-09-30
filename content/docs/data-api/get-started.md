@@ -10,10 +10,14 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## Before you begin
 

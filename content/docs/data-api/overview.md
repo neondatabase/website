@@ -11,7 +11,7 @@ summary: >-
   request is stateless, so the API scales to thousands of concurrent users
   without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-09-18T16:54:04.950Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 ---
 
 The Neon Data API is the HTTP query service in the Neon backend for apps and agents. It provides a secure, stateless interface to your database, letting you access and manage your data directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods. Key benefits include:
@@ -20,6 +20,10 @@ The Neon Data API is the HTTP query service in the Neon backend for apps and age
 - **Connectionless scalability.** Short-lived HTTP requests replace persistent TCP connections, so you avoid connection pool exhaustion and scale to thousands of concurrent users.
 - **Secure by default.** The API validates JWTs from any authentication provider and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so users only access data they're permitted to see. Use [Managed Better Auth](/docs/auth/overview), or bring your own provider like [Auth0, Clerk, or Firebase](/docs/data-api/custom-authentication-providers).
 - **CI/CD integration.** Test integrations in isolated branch environments with the [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action), which retrieves branch-specific Data API URLs for your workflows.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## PostgREST compatibility
 
