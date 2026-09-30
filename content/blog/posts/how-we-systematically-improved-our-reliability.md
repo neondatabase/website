@@ -48,6 +48,8 @@ What started as a database problem is now a global operations problem.
 
 In Lakebase Postgres, a set of services manages the fleet. We call them the control plane. They provision and configure databases, monitor health, recover databases when needed, and manage high availability, branch creation, scale to zero, and other features. Control-plane failures can prevent database creation, waking, and recovery. When those paths fail, affected customers may be unable to connect. The control plane itself has to stay resilient to failure at fleet scale.
 
+**[ADD IMAGE 1]**
+
 Earlier this year, we had two incidents in one week. Both started with an external dependency failing; that failure triggered a self-reinforcing loop that took down the control plane and kept it from recovering on its own.
 
 After those incidents, we doubled down on reliability. This post summarizes the reliability work we've been rolling out since then to keep uptime high as our fleet, product, and customer base grow.
@@ -62,6 +64,8 @@ Our postmortems are now structured around these two general principles:
 
 - An effective postmortem exists to reduce future customer harm. It should work as a risk-reduction tool vs just a record of events.
 - A reviewer who was not involved in the response should be able to understand what customers experienced, trace that outcome through the system, check the evidence, and decide whether the proposed actions are proportionate and complete.
+
+**[ADD IMAGE 2]**
 
 ### We start with the impact
 
@@ -93,6 +97,8 @@ Next, we look at how we responded. We record three timelines:
 - **Time to mitigation**: the time from detection to the moment customer harm actually stopped. We break this into smaller steps (reaching the right engineer, figuring out the problem, deciding what to do, doing it, and waiting for it to take effect) so we can see where the time went.
 - **Time of recovery:** we confirm recovery from the customer's side
 
+**[ADD IMAGE 3]**
+
 **For each of these time spans, we ask ourselves: what would it take to cut this time in half?** The answer should be specific - e.g. we may need a new signal, alert, runbook, permission, or piece of automation.
 
 ### We find the root cause
@@ -112,6 +118,8 @@ When the evidence can't settle which explanation is right, we label the options 
 
 1. The evidence doesn't exist - for example because the logs weren't kept. We say what's missing and add an action item so we have the data next time.
 2. A full answer would take far too much work. We only stop if we can show our fixes cover the worst realistic outcome.
+
+**[ADD IMAGE 4]**
 
 <Admonition type="note" title="Dependency failures are also our problem">
 When something we depend on fails, "the vendor had an outage" is not a cause we can act on. To our customers, that dependency is part of our product. So we look for the missing safeguard on our side, such as a timeout, a fallback, a cache, or isolation from the failing service.
@@ -160,7 +168,7 @@ The last group of fixes was architectural, and these problems showed up most cle
 - Our backpressure mechanisms, which slow down incoming work when the system is overloaded, didn't work as they should
 - Under load, we had starvation and fairness issues: some work kept making progress while other work waited
 
-## And we also built a process to find failures earlier
+## We also built a process to find failures earlier
 
 Those 30+ fixes addressed what went wrong in the two incidents. But fixes that come out of a postmortem arrive late - by the time we write them, customers have already been affected.
 
@@ -174,8 +182,10 @@ We discover that they come from three places:
 
 Knowing where failures come from, we built a system around two ideas:
 
-- Every change gets a risk score
-- The higher the score, the more reliability checks the change has to pass as it moves through design, build, release, and operation
+1. Every change gets a risk score
+2. The higher the score, the more reliability checks the change has to pass as it moves through design, build, release, and operation
+
+**[ADD IMAGE 5]**
 
 ### Risk decides how much rigor a change gets
 
@@ -194,7 +204,7 @@ The score decides how many reliability checks a change has to pass. High-risk ch
 
 Every change already goes through the same four stages: design, build, release, and operate. We added reliability checks to each one, scaled to the change's risk score, so that all three sources of failure get looked at before a change reaches customers.
 
-**Design**
+### Design
 
 Before we write much code, we ask how the change could fail:
 
@@ -202,7 +212,7 @@ Before we write much code, we ask how the change could fail:
 - We give the change its risk score
 - For high-risk changes, we run a premortem: we imagine the feature has already caused an incident, then work out how that could have happened and how to prevent it
 
-**Build**
+### Build
 
 While we write the code, we make sure the likely failures are tested and that we can undo the change:
 
@@ -210,7 +220,7 @@ While we write the code, we make sure the likely failures are tested and that we
 - We run load and failure tests
 - We check that rollback works
 
-**Release**
+### Release
 
 As we roll out, we watch the fleet and stop if the change misbehaves:
 
@@ -218,7 +228,7 @@ As we roll out, we watch the fleet and stop if the change misbehaves:
 - The feature owner watches an SLO during the rollout
 - High-risk changes go through an operational readiness review
 
-**Operate**
+### Operate
 
 Once the change is live, the team that gets paged has to be able to run it:
 
