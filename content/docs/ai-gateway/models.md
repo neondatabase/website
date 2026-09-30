@@ -19,6 +19,12 @@ Model availability may vary by region, and the catalog expands over time, so che
 
 The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon).
 
+Every model in the catalog carries a `released` boolean. `false` marks a model listed ahead of its announcement: it stays in `neon.com/models.json` and `neon.com/models`, and an app that shows a model list should leave it out:
+
+```js
+const models = Object.values(catalog.neon.models).filter((model) => model.released);
+```
+
 ## Model access
 
 Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
