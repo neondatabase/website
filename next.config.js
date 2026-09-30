@@ -243,6 +243,12 @@ const defaultConfig = {
     }, []);
 
     return [
+      // Temporary until the raffle page has its own form.
+      {
+        source: '/pg-us-conf-raffle',
+        destination: 'https://forms.gle/C7TgUq7nPLA2L5d76',
+        permanent: false,
+      },
       // Common paths from the logs with no page of their own; send them to the closest real page.
       {
         source: '/about',
