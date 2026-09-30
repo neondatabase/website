@@ -41,6 +41,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andreas-scherbaum.jpg",
     "photoAlt": "Andreas Scherbaum"
   },
+  "andrei-stolbovskii": {
+    "name": "Andrei Stolbovskii",
+    "role": "Engineering Manager, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andrei-stolbovskii.jpg",
+    "photoAlt": "Andrei Stolbovskii"
+  },
   "andrew-hamilton": {
     "name": "Andrew Hamilton",
     "role": "Chief Technology Officer at Layer",
@@ -54,13 +61,6 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andrew-tate.jpg",
     "photoAlt": "Andrew Tate"
-  },
-  "andrey-stolbovsky": {
-    "name": "Andrey Stolbovsky",
-    "role": "Software Engineer, Databricks",
-    "url": null,
-    "photo": "/apple-touch-icon.png",
-    "photoAlt": "Andrey Stolbovsky"
   },
   "andy-claremont": {
     "name": "Andy Claremont",
@@ -255,7 +255,7 @@
     "name": "Dmitrii Mokhnatkin",
     "role": "Software Engineer, Databricks",
     "url": null,
-    "photo": "/apple-touch-icon.png",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dmitrii-mokhnatkin.jpg",
     "photoAlt": "Dmitrii Mokhnatkin"
   },
   "dom-eccleston": {

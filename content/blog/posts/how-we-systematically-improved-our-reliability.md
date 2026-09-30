@@ -14,10 +14,13 @@ categories:
   - engineering
 authors:
   - dmitrii-mokhnatkin
-  - andrey-stolbovsky
+  - andrei-stolbovskii
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/cover.jpg
+  alt: >-
+    The title beside a hanging LED sign reading UP, framed by callouts for risk
+    score and lifecycle gates
 isFeatured: false
 seo:
   title: How we systematically improved our reliability - Neon
@@ -30,7 +33,8 @@ seo:
   ogDescription: >-
     From rigorous postmortems to risk-scored changes, here's what we changed and
     why
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/cover.jpg
 ---
 
 <Admonition type="note" title="Neon is a complete set of cloud backend primitives">
@@ -47,7 +51,7 @@ What started as a database problem is now a global operations problem.
 
 In Lakebase Postgres, a set of services manages the fleet. We call them the control plane. They provision and configure databases, monitor health, recover databases when needed, and manage high availability, branch creation, scale to zero, and other features. Control-plane failures can prevent database creation, waking, and recovery. When those paths fail, affected customers may be unable to connect. The control plane itself has to stay resilient to failure at fleet scale.
 
-**[ADD IMAGE 1]**
+![The control plane provisions, configures, monitors, recovers, and manages high availability, branch creation, and scale to zero across many cells, each holding databases that are running or failing](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/control-plane-cells.png)
 
 Earlier this year, we had two incidents in one week. Both started with an external dependency failing; that failure triggered a self-reinforcing loop that took down the control plane and kept it from recovering on its own.
 
@@ -64,7 +68,7 @@ Our postmortems are now structured around these two general principles:
 - An effective postmortem exists to reduce future customer harm. It should work as a risk-reduction tool vs just a record of events.
 - A reviewer who was not involved in the response should be able to understand what customers experienced, trace that outcome through the system, check the evidence, and decide whether the proposed actions are proportionate and complete.
 
-**[ADD IMAGE 2]**
+![Postmortem structure in eight sections: executive summary (written last), impact (written first), detection, mitigation and recovery, root cause, insights, action items, and timeline](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/postmortem-structure.png)
 
 ### We start with the impact
 
@@ -96,7 +100,7 @@ Next, we look at how we responded. We record three timelines:
 - **Time to mitigation**: the time from detection to the moment customer harm actually stopped. We break this into smaller steps (reaching the right engineer, figuring out the problem, deciding what to do, doing it, and waiting for it to take effect) so we can see where the time went.
 - **Time of recovery:** we confirm recovery from the customer's side
 
-**[ADD IMAGE 3]**
+![Incident timeline from impact starts to someone reacts (time to detection), to harm stops (time to mitigation), to recovery confirmed (recovery check), with the question: what would cut each time in half?](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/incident-response-timeline.png)
 
 **For each of these time spans, we ask ourselves: what would it take to cut this time in half?** The answer should be specific - e.g. we may need a new signal, alert, runbook, permission, or piece of automation.
 
@@ -118,7 +122,7 @@ When the evidence can't settle which explanation is right, we label the options 
 1. The evidence doesn't exist - for example because the logs weren't kept. We say what's missing and add an action item so we have the data next time.
 2. A full answer would take far too much work. We only stop if we can show our fixes cover the worst realistic outcome.
 
-**[ADD IMAGE 4]**
+![5 Whys as a tree: the impact question branches into why it failed, why so many customers, why it lasted so long, and why it was slow to detect and stop, each ending at a missing or failed safeguard](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/five-whys-tree.png)
 
 <Admonition type="note" title="Dependency failures are also our problem">
 When something we depend on fails, "the vendor had an outage" is not a cause we can act on. To our customers, that dependency is part of our product. So we look for the missing safeguard on our side, such as a timeout, a fallback, a cache, or isolation from the failing service.
@@ -184,7 +188,7 @@ Knowing where failures come from, we built a system around two ideas:
 1. Every change gets a risk score
 2. The higher the score, the more reliability checks the change has to pass as it moves through design, build, release, and operation
 
-**[ADD IMAGE 5]**
+![Failures come from the environment, changes we make, and client workload; each change gets a risk score of probability times impact, which sets the reliability checks it must pass across design, build, release, and operate](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/risk-scored-lifecycle.png)
 
 ### Risk decides how much rigor a change gets
 
