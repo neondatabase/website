@@ -33,6 +33,7 @@ export const COMPARE_KEYS = [
 ];
 
 const BOOLEAN_KEYS = [
+  'released',
   'attachment',
   'reasoning',
   'tool_call',
@@ -47,6 +48,7 @@ const REQUIRED_KEYS = [
   'name',
   'provider',
   'family',
+  'released',
   'attachment',
   'reasoning',
   'tool_call',
@@ -67,6 +69,7 @@ const EMBEDDING_REQUIRED_KEYS = [
   'name',
   'provider',
   'family',
+  'released',
   'dimensions',
   'open_weights',
   'release_date',
@@ -174,6 +177,10 @@ export function classifyDrift(website, modelsDev) {
  * The checks are the invariants every consumer already assumes — `/models.json`,
  * `/models`, the docs model index, and the generated per-model markdown — stated
  * once here instead of each reader defaulting around a missing value.
+ *
+ * `released` is required on every model, with no default: `false` marks a model cataloged
+ * ahead of its announcement, which consumers that list models to users (the console model
+ * picker) hide. An absent flag would force each consumer to guess.
  *
  * Deliberately not required: `cost`, `knowledge`, `structured_output`. Real
  * entries legitimately omit them, and demanding them would force a placeholder,
