@@ -61,6 +61,43 @@ describe('/models is additive over /models.json', () => {
   });
 });
 
+// The fields consumers read without guarding (the console model picker, Orbit's AI Gateway
+// page). A row missing one breaks them after deploy, so a change to this shape has to fail
+// here and be announced to them first. Embedding rows swap `modalities` for `dimensions`.
+describe('/models keeps the shape consumers read', () => {
+  const shapeProblems = (model) => {
+    const problems = [];
+    const expectType = (path, value, type) => {
+      const actual = Array.isArray(value) ? 'array' : typeof value;
+      if (actual !== type) problems.push(`${model.id}.${path} is ${actual}, expected ${type}`);
+    };
+    expectType('id', model.id, 'string');
+    expectType('name', model.name, 'string');
+    expectType('provider', model.provider, 'string');
+    expectType('released', model.released, 'boolean');
+    expectType('examples', model.examples, 'array');
+    expectType('capabilities.chat', model.capabilities?.chat, 'string');
+    expectType('capabilities.deviations', model.capabilities?.deviations, 'array');
+    expectType('capabilities.native_dialect', model.capabilities?.native_dialect, 'string');
+    if (model.type === 'embedding') {
+      expectType('dimensions', model.dimensions, 'number');
+    } else {
+      expectType('modalities.input', model.modalities?.input, 'array');
+    }
+    return problems;
+  };
+
+  it.each(['chat', 'image-generation', 'web-search', 'embeddings'])(
+    'every model on use_case=%s carries them',
+    async (useCase) => {
+      const { total, models } = await body(await GET(request(`?use_case=${useCase}`)));
+
+      expect(total).toBe(models.length);
+      expect(models.flatMap(shapeProblems)).toEqual([]);
+    }
+  );
+});
+
 describe('GET /models', () => {
   it.each(['chat', 'image-generation', 'web-search', 'embeddings'])(
     'allows cross-origin requests for the %s use case',
