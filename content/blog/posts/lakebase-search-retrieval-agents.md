@@ -60,7 +60,25 @@ Together, they provide the search engine for the retrieval pipeline while keepin
 
 Standard HNSW indexes perform best when their working set remains in memory. As the corpus grows, this ties search capacity to the memory available on the serving compute.
 
-`lakebase_vector` is designed for Lakebase Postgres's separated compute and storage architecture. Its durable index lives in object storage, while RAM and local storage cache frequently accessed data. RaBitQ quantization compresses vectors so more index data fits in those cache layers.
+`lakebase_vector` is designed for Lakebase Postgres's separated compute and storage architecture. Its durable index lives in object storage, while RAM and local storage cache frequently accessed data.
+
+<figure>
+<video autoPlay muted loop playsInline width="708" height="398" aria-label="Lakebase Postgres cache and storage hierarchy">
+<source src="https://cdn.neonapi.io/public/videos/pages/blog/lakebase-search-on-neon/cache-data-tiers-1416.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/videos/pages/blog/lakebase-search-on-neon/cache-data-tiers-1416.mp4" type="video/mp4" />
+</video>
+<figcaption className="wp-element-caption"><em>The durable index lives in object storage. Frequently accessed pages move through the cache hierarchy into local NVMe and RAM, while compute can come and go independently.</em></figcaption>
+</figure>
+
+To work efficiently with this storage hierarchy, `lakebase_vector` combines hierarchical IVF with RaBitQ quantization. IVF narrows the search to a small set of relevant clusters, while RaBitQ compresses vectors so more index data fits in the faster cache layers.
+
+<figure>
+<video autoPlay muted loop playsInline width="708" height="282" aria-label="Hierarchical IVF and RaBitQ on object storage">
+<source src="https://cdn.neonapi.io/public/videos/pages/blog/lakebase-search-on-neon/ivf-rabitq-object-store-1416.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/videos/pages/blog/lakebase-search-on-neon/ivf-rabitq-object-store-1416.mp4" type="video/mp4" />
+</video>
+<figcaption className="wp-element-caption"><em>Hierarchical IVF narrows each query to a small set of relevant clusters. Those clusters map to contiguous blocks that can be read in parallel, while RaBitQ reduces how much data each block contains.</em></figcaption>
+</figure>
 
 When compute suspends, the index remains in storage. When traffic returns, compute reattaches to the same index instead of rebuilding it. You pay for storage continuously, but not for compute while it is suspended.
 
