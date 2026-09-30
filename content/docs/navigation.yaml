@@ -1204,42 +1204,43 @@
                   slug: https://neon.com/guides/composio-crewai-neon
                 - title: LangGraph
                   slug: https://neon.com/guides/langgraph-neon
-        - section: AI app development
+    - title: AI app development
+      slug: ai/ai-intro
+      icon: sparks
+      items:
+        - title: AI App Starter Kit
           icon: sparks
+          slug: ai/ai-intro
           items:
-            - title: AI App Starter Kit
-              icon: sparks
-              slug: ai/ai-intro
+            - section: Core concepts
+              icon: info
               items:
-                - section: Core concepts
-                  icon: info
-                  items:
-                    - title: Introduction
-                      slug: ai/ai-intro
-                    - title: Embeddings
-                      slug: ai/ai-concepts
-                    - title: Pgvector
-                      slug: extensions/pgvector
-                - section: AI frameworks
-                  icon: frameworks
-                  items:
-                    - title: LangChain
-                      slug: ai/langchain
-                    - title: LlamaIndex
-                      slug: ai/llamaindex
-                    - title: Semantic Kernel
-                      slug: ai/semantic-kernel
-                    - title: Inngest
-                      slug: ai/inngest
-                - section: Optimize & scale
-                  icon: features
-                  items:
-                    - title: Optimize vector search
-                      slug: ai/ai-vector-search-optimization
-                    - title: Scale with Neon
-                      slug: ai/ai-scale-with-neon
-                - title: Google Colab
-                  slug: ai/ai-google-colab
+                - title: Introduction
+                  slug: ai/ai-intro
+                - title: Embeddings
+                  slug: ai/ai-concepts
+                - title: Pgvector
+                  slug: extensions/pgvector
+            - section: AI frameworks
+              icon: frameworks
+              items:
+                - title: LangChain
+                  slug: ai/langchain
+                - title: LlamaIndex
+                  slug: ai/llamaindex
+                - title: Semantic Kernel
+                  slug: ai/semantic-kernel
+                - title: Inngest
+                  slug: ai/inngest
+            - section: Optimize & scale
+              icon: features
+              items:
+                - title: Optimize vector search
+                  slug: ai/ai-vector-search-optimization
+                - title: Scale with Neon
+                  slug: ai/ai-scale-with-neon
+            - title: Google Colab
+              slug: ai/ai-google-colab
 
 - nav: Reference
   title: Reference
