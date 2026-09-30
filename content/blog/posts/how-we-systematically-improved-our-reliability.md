@@ -37,8 +37,10 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/cover.jpg
 ---
 
+![The title beside a hanging LED sign reading UP, framed by callouts for risk score and lifecycle gates](https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/cover.jpg)
+
 <Admonition type="note" title="Neon is a complete set of cloud backend primitives">
-We just announced that Object Storage, Managed Better Auth, Functions, and AI Gateway are now generally available. But even as our toolset grows, Lakebase Postgres remains the core of the backend, and the rest of the primitives depend on it. We'll continue to double down on database work, not only on new features but in reliability improvements as well.
+[We just announced](https://neon.com/blog/neon-backend-is-ga) that Object Storage, Managed Better Auth, Functions, and AI Gateway are now generally available. But even as our toolset grows, Lakebase Postgres remains the core of the backend, and the rest of the primitives depend on it. We'll continue to double down on database work, not only on new features but in reliability improvements as well.
 </Admonition>
 
 Let's start with a simple problem: one database, one process, one host. That is a reliability problem we understand. We know how to connect, inspect, restart, and read logs.
