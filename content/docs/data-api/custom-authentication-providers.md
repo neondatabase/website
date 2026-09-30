@@ -10,7 +10,7 @@ summary: >-
   uses an existing auth provider and you need provider-specific configuration
   details rather than the default Managed Better Auth setup.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---
@@ -27,6 +27,10 @@ redirectFrom:
 </InfoBlock>
 
 The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Managed Better Auth](/docs/auth/overview) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## How it works
 

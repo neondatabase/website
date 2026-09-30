@@ -1,4 +1,4 @@
-text: 'The Neon backend is GA: a complete set of primitives so agents can build'
+text: "Skydive's agents deploy their own Neon backends in 0.7 seconds. Read the story"
 link:
-  url: 'https://neon.com/blog/neon-backend-is-ga'
+  url: 'https://neon.com/blog/inside-skydive-building-virtual-coworkers-powered-by-neon'
   target: '_blank'

@@ -11,7 +11,7 @@ summary: >-
   `createRetrievalChain`, and links to Next.js starter apps for chatbot, RAG,
   semantic search, and PDF chat.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
 LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.
@@ -20,7 +20,34 @@ LangChain is a popular framework for working with AI, Vectors, and embeddings. L
 
 LangChain handles document insertion and embedding generation through its vector store methods.
 
-Here's how you can initialize Postgres Vector with LangChain:
+Here's how you can initialize Postgres Vector with LangChain. `OpenAIEmbeddings` works against either OpenAI directly or the [Neon AI Gateway](/docs/ai-gateway/embeddings), which serves embedding models on an OpenAI-compatible endpoint using the same Neon credential as the rest of your project:
+
+<CodeTabs labels={["Neon AI Gateway", "OpenAI"]}>
+
+```tsx shouldWrap
+// File: vectorStore.ts
+
+import { NeonPostgres } from '@langchain/community/vectorstores/neon';
+import { OpenAIEmbeddings } from '@langchain/openai';
+
+const embeddings = new OpenAIEmbeddings({
+  model: 'qwen3-embedding-0-6b', // 1024-dimensional; supports the `dimensions` parameter
+  dimensions: 512,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  configuration: {
+    baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+  },
+});
+
+export async function loadVectorStore() {
+  return await NeonPostgres.initialize(embeddings, {
+    connectionString: process.env.POSTGRES_URL as string,
+  });
+}
+
+// Use in your code (say, in API routes)
+const vectorStore = await loadVectorStore();
+```
 
 ```tsx
 // File: vectorStore.ts
@@ -42,6 +69,12 @@ export async function loadVectorStore() {
 // Use in your code (say, in API routes)
 const vectorStore = await loadVectorStore();
 ```
+
+</CodeTabs>
+
+<Admonition type="note">
+Set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` from your branch (`neon env pull`, or the Neon Console's **Connect** panel). On the `openai` JavaScript SDK v6, embedding calls need `encoding_format: 'float'`, or upgrade to v7 or later. See [Embeddings](/docs/ai-gateway/embeddings) for model IDs, dimensions, and this SDK caveat.
+</Admonition>
 
 ## Generate Embeddings with OpenAI
 
