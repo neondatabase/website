@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-09-30T16:31:52.319Z'
 ---
 
 ## Getting started
@@ -49,13 +49,13 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
-<a href="/docs/ai/lakebase-search" description="Vector, keyword, and hybrid search built into Postgres, so agent retrieval and RAG need no separate vector store." icon="search">Lakebase Search</a>
-
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
 <a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database, with triggers and custom domains." icon="code">Functions</a>
 
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models at provider prices with no markup, built into your Neon project." icon="sparkle">AI Gateway</a>
+
+<a href="/docs/ai/lakebase-search" description="Vector, keyword, and hybrid search built into Postgres, so agent retrieval and RAG need no separate vector store." icon="search">Lakebase Search</a>
 
 </DetailIconCards>
 
