@@ -30,7 +30,7 @@ const RaffleHero = () => (
               your next big idea to life, one brick at a time.
             </p>
           </div>
-          <div className="mt-8 lg:order-3 lg:mt-0">
+          <div className="mt-8 border-t border-gray-new-20 pt-7 lg:order-3 lg:mt-0 lg:border-t-0 lg:pt-0">
             <p className="mb-4 text-sm leading-normal tracking-tight text-gray-new-60">
               Brought to you by Databricks and Neon
             </p>
