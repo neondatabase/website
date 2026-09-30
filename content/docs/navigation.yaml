@@ -1150,7 +1150,7 @@
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
-        - title: AI for Agents
+        - section: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
           items:
@@ -1205,6 +1205,7 @@
                 - title: LangGraph
                   slug: https://neon.com/guides/langgraph-neon
         - section: AI app development
+          icon: sparks
           items:
             - title: AI App Starter Kit
               icon: sparks
