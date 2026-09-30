@@ -2,7 +2,7 @@
 title: 'Lakebase Search: The retrieval primitive for agents on Neon'
 description: >-
   High-performance vector and BM25 search, integrated with the Neon primitives
-  for the rest of the retrieval pipeline.
+  for the rest of the retrieval pipeline
 excerpt: >-
   Build the search engine, ingestion layer, and serving layer for agent
   retrieval with Lakebase Search, Functions, Object Storage, and AI Gateway.
@@ -32,7 +32,7 @@ seo:
 ---
 
 <Admonition type="note" title="Lakebase Search is now generally available">
-Lakebase Search just reached GA. Read the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
+Lakebase Search just reached GA. Read the [announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
 </Admonition>
 
 High-quality search was once limited to companies such as Google and Amazon. Building it required search specialists and dedicated infrastructure. It was hard to get right, but small improvements in recall could materially affect the quality of the results.
@@ -64,9 +64,13 @@ Standard HNSW indexes perform best when their working set remains in memory. As 
 
 When compute suspends, the index remains in storage. When traffic returns, compute reattaches to the same index instead of rebuilding it. You pay for storage continuously, but not for compute while it is suspended.
 
-In our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance. The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) includes the results and methodology.
+And if you already use pgvector, `lakebase_vector` does not require a data or query migration. It adds the `lakebase_ann` index type while preserving the same vector types, distance operators, and query syntax.
 
-If you already use pgvector, `lakebase_vector` does not require a data or query migration. It adds the `lakebase_ann` index type while preserving the same vector types, distance operators, and query syntax.
+On our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance:
+
+**[ADD CHART]**
+
+Check out the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) for more details on results and methodology. 
 
 ### Full-text search with lakebase_text
 
