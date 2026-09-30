@@ -14,7 +14,7 @@ categories:
   - engineering
 authors:
   - dmitrii-mokhnatkin
-  - andrey-stolbovsky
+  - andrei-stolbovskii
 cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/how-we-systematically-improved-our-reliability/cover.jpg
