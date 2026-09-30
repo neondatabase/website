@@ -1,10 +1,10 @@
 ---
 title: Manage Neon projects with neon.ts
-subtitle: Provision your entire Neon backend from a single TypeScript config: Postgres, auth, functions, storage, AI Gateway, and triggers.
+subtitle: 'Provision your entire Neon backend from a single TypeScript config: Postgres, auth, functions, storage, AI Gateway, and triggers.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-09-30T12:30:43.430Z'
+updatedOn: '2026-09-30T12:39:17.064Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file for full-stack TypeScript projects. Traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon) require learning a new DSL, managing state files, and wiring outputs into your application by hand. `neon.ts` is part of your local development loop instead. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli) and syncs connection strings directly into `.env.local`.
