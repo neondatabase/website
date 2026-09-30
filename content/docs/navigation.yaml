@@ -616,41 +616,6 @@
                   slug: data-api/manage
                 - title: Troubleshooting
                   slug: data-api/troubleshooting
-        - section: AI app development
-          items:
-            - title: AI App Starter Kit
-              icon: sparks
-              slug: ai/ai-intro
-              items:
-                - section: Core concepts
-                  icon: info
-                  items:
-                    - title: Introduction
-                      slug: ai/ai-intro
-                    - title: Embeddings
-                      slug: ai/ai-concepts
-                    - title: Pgvector
-                      slug: extensions/pgvector
-                - section: AI frameworks
-                  icon: frameworks
-                  items:
-                    - title: LangChain
-                      slug: ai/langchain
-                    - title: LlamaIndex
-                      slug: ai/llamaindex
-                    - title: Semantic Kernel
-                      slug: ai/semantic-kernel
-                    - title: Inngest
-                      slug: ai/inngest
-                - section: Optimize & scale
-                  icon: features
-                  items:
-                    - title: Optimize vector search
-                      slug: ai/ai-vector-search-optimization
-                    - title: Scale with Neon
-                      slug: ai/ai-scale-with-neon
-                - title: Google Colab
-                  slug: ai/ai-google-colab
         - section: Extensions
           slug: extensions/pg-extensions
           icon: extension
@@ -1184,6 +1149,41 @@
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
+        - section: AI app development
+          items:
+            - title: AI App Starter Kit
+              icon: sparks
+              slug: ai/ai-intro
+              items:
+                - section: Core concepts
+                  icon: info
+                  items:
+                    - title: Introduction
+                      slug: ai/ai-intro
+                    - title: Embeddings
+                      slug: ai/ai-concepts
+                    - title: Pgvector
+                      slug: extensions/pgvector
+                - section: AI frameworks
+                  icon: frameworks
+                  items:
+                    - title: LangChain
+                      slug: ai/langchain
+                    - title: LlamaIndex
+                      slug: ai/llamaindex
+                    - title: Semantic Kernel
+                      slug: ai/semantic-kernel
+                    - title: Inngest
+                      slug: ai/inngest
+                - section: Optimize & scale
+                  icon: features
+                  items:
+                    - title: Optimize vector search
+                      slug: ai/ai-vector-search-optimization
+                    - title: Scale with Neon
+                      slug: ai/ai-scale-with-neon
+                - title: Google Colab
+                  slug: ai/ai-google-colab
         - title: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
