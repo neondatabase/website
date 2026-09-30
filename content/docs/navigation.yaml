@@ -1150,7 +1150,7 @@
               slug: introduction/agent-plan
             - title: AI Agent integration
               slug: guides/ai-agent-integration
-        - section: AI for Agents
+        - title: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
           items:
