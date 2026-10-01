@@ -301,6 +301,25 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
 
 For more, see [Get started with Cursor and Neon MCP Server](/guides/cursor-mcp-neon).
 
+## FLUJO
+
+Connect [FLUJO](https://github.com/mario-andreschak/FLUJO) directly to the hosted Neon MCP Server using Streamable HTTP and a Neon API key.
+
+1. Create a [Neon API key](/docs/manage/api-keys#creating-api-keys) and copy the ID of the development project you want to connect.
+2. In FLUJO, open **Connected Apps** and click **Connect App**. Select **I have connection details**, then **At a remote URL**.
+3. Enter this **Server URL**, replacing `<YOUR_PROJECT_ID>` with your project ID:
+
+   ```text
+   https://mcp.neon.tech/mcp?readonly=true&projectId=<YOUR_PROJECT_ID>
+   ```
+
+   This limits the connection to [read-only operations in one project](/docs/ai/neon-mcp-server#access-control).
+
+4. Click **Connect**. When FLUJO detects that authentication is required, click **Continue to setup** to open **Configure & Test**. Confirm that **Streamable HTTP** is selected.
+5. Under **Custom HTTP headers**, click **Add header**. Enter `Authorization` as the header and `Bearer <YOUR_NEON_API_KEY>` as its value. Select **Secret** to mask the value. Leave the optional OAuth client credentials blank for this API-key setup.
+6. Click **3) Test run**. After the connection succeeds, save the server and open the connected app to inspect its tools.
+7. To verify database access, use `run_sql` on your development database with `SELECT 1 AS connected;`.
+
 ## fx
 
 [fx](https://fx.sh) reads MCP servers only from **`~/.fx/mcp.json`**. A project file cannot add a server. add-mcp always writes that global file; `-g` is not required.
