@@ -39,7 +39,7 @@ On Wednesday, I joined the Effect team's meetup in San Francisco, where the Effe
 
 ![Attendees sit on couches watching a presenter's terminal on a TV during the Effect 4.0 launch talk in San Francisco.](https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/effect-4-meetup.jpg)
 
-The launch prompted us to finally create Effect bindings for `@neon/sdk`. On the ride home, I asked my agent to create a draft PR for `@neon/effect`.
+The launch prompted us to finally create Effect bindings for `@neon/sdk`. On the ride home, I asked my agent to create a draft PR for `@neon/effect`, and Opus 5.5 did just that ([the now-merged PR](https://github.com/neondatabase/neon-pkgs/pull/693)).
 
 <EmbedTweet url="https://twitter.com/andrelandgraf/status/2105514776290119718?ref_src=twsrc%5Etfw" />
 
