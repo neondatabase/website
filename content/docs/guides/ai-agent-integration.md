@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-29T17:10:40.931Z'
+updatedOn: '2026-10-01T15:44:50.010Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -141,12 +141,12 @@ For paid users, create projects in your paid organization with higher resource q
 
 #### Example: Pro tier
 
-| Resource          | Pro Tier Quota      | Description                             |
-| ----------------- | ------------------- | --------------------------------------- |
-| **Compute**       | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
-| **Active time**   | `2700000` seconds   | 750 hours of compute activity per month |
-| **Storage**       | `10737418240` bytes | 10 GB storage limit                     |
-| **Data transfer** | `53687091200` bytes | 50 GB data transfer per month           |
+| Resource             | Pro Tier Quota      | Description                             |
+| -------------------- | ------------------- | --------------------------------------- |
+| **Compute**          | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
+| **Active time**      | `2700000` seconds   | 750 hours of compute activity per month |
+| **Postgres storage** | `10737418240` bytes | 10 GB Postgres storage limit            |
+| **Data transfer**    | `53687091200` bytes | 50 GB data transfer per month           |
 
 Example API request:
 

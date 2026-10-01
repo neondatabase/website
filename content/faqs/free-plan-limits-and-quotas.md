@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 1 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-10-01T14:05:14.904Z'
+updatedOn: '2026-10-01T15:44:50.010Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: import-csv-into-database
 ---
 
-The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 1 GB of database storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
+The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 1 GB of Postgres storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
 
 ## What's included
 
@@ -25,7 +25,7 @@ The Neon Free plan costs $0/month and includes 100 projects, 10 branches per pro
 | Compute                 | 100 CU-hours per project per month          |
 | Autoscaling             | Up to 2 CU (≈8 GB RAM)                      |
 | Scale to zero           | After 5 min inactivity, cannot be disabled  |
-| Database storage        | 1 GB per project, 20 GB across all projects |
+| Postgres storage        | 1 GB per project, 20 GB across all projects |
 | Public network transfer | 5 GB per project per month                  |
 | Instant restore history | 6 hours, capped at 1 GB of change history   |
 | Manual snapshots        | 1                                           |
@@ -42,8 +42,8 @@ Compute (CU-hours) and public network transfer reset at the start of each monthl
 ## What happens when you hit a limit
 
 - **CU-hours or network transfer used up**: the project's compute is suspended until the next billing period or until you upgrade. Existing connections drop and new ones can't open.
-- **Database storage above 1 GB in a project**: inserts, updates, and deletes that would increase storage fail in that project until you free space or upgrade. Neon does not bill overages on the Free plan.
-- **Database storage above 20 GB across all projects**: once your total database storage reaches the 20 GB account-wide cap, operations that would increase storage fail until you free space in some project or upgrade, even if no single project has reached its 1 GB limit.
+- **Postgres storage above 1 GB in a project**: inserts, updates, and deletes that would increase storage fail in that project until you free space or upgrade. Neon does not bill overages on the Free plan.
+- **Postgres storage above 20 GB across all projects**: once your total Postgres storage reaches the 20 GB account-wide cap, operations that would increase storage fail until you free space in some project or upgrade, even if no single project has reached its 1 GB limit.
 - **Branch count at 10**: branch creation fails until you delete one or upgrade.
 
 None of these limits delete your data. Compute resumes when the next monthly window opens or you move to a paid plan.
