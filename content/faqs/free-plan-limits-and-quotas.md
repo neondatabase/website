@@ -3,7 +3,7 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 1 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-29T17:10:40.931Z'
+updatedOn: '2026-10-01T10:40:27.199Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,24 +14,24 @@ nextLink:
   slug: import-csv-into-database
 ---
 
-The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 1 GB of storage per project, and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
+The Neon Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, 1 GB of storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. Computes scale to zero after 5 minutes of inactivity and can scale up to 2 CU (≈8 GB RAM) when active. See the [Plans page](/docs/introduction/plans) for the full table.
 
 ## What's included
 
-| Resource                | Free plan allowance                        |
-| ----------------------- | ------------------------------------------ |
-| Projects                | 100                                        |
-| Branches                | 10 per project                             |
-| Compute                 | 100 CU-hours per project per month         |
-| Autoscaling             | Up to 2 CU (≈8 GB RAM)                     |
-| Scale to zero           | After 5 min inactivity, cannot be disabled |
-| Storage                 | 1 GB per project                           |
-| Public network transfer | 5 GB per project per month                 |
-| Instant restore history | 6 hours, capped at 1 GB of change history  |
-| Manual snapshots        | 1                                          |
-| Managed Better Auth     | Up to 60,000 MAU                           |
-| Monitoring history      | 1 day                                      |
-| Support                 | Community                                  |
+| Resource                | Free plan allowance                         |
+| ----------------------- | ------------------------------------------- |
+| Projects                | 100                                         |
+| Branches                | 10 per project                              |
+| Compute                 | 100 CU-hours per project per month          |
+| Autoscaling             | Up to 2 CU (≈8 GB RAM)                      |
+| Scale to zero           | After 5 min inactivity, cannot be disabled  |
+| Storage                 | 1 GB per project, 20 GB across all projects |
+| Public network transfer | 5 GB per project per month                  |
+| Instant restore history | 6 hours, capped at 1 GB of change history   |
+| Manual snapshots        | 1                                           |
+| Managed Better Auth     | Up to 60,000 MAU                            |
+| Monitoring history      | 1 day                                       |
+| Support                 | Community                                   |
 
 100 CU-hours is enough to run a 0.25 CU (≈1 GB RAM) compute for about 400 hours per project per month. Compute quotas are measured per project, so 100 projects each get their own 100 CU-hour bucket.
 
@@ -42,7 +42,8 @@ Compute (CU-hours) and public network transfer reset at the start of each monthl
 ## What happens when you hit a limit
 
 - **CU-hours or network transfer used up**: the project's compute is suspended until the next billing period or until you upgrade. Existing connections drop and new ones can't open.
-- **Storage above 1 GB**: inserts, updates, and deletes that would increase storage fail until you free space or upgrade. Neon does not bill overages on the Free plan.
+- **Storage above 1 GB in a project**: inserts, updates, and deletes that would increase storage fail in that project until you free space or upgrade. Neon does not bill overages on the Free plan.
+- **Storage above 20 GB across all projects**: once your total storage reaches the 20 GB account-wide cap, operations that would increase storage fail until you free space in some project or upgrade, even if no single project has reached its 1 GB limit.
 - **Branch count at 10**: branch creation fails until you delete one or upgrade.
 
 None of these limits delete your data. Compute resumes when the next monthly window opens or you move to a paid plan.
