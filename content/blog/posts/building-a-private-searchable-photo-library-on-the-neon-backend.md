@@ -66,6 +66,8 @@ Atlas deliberately does not use all the primitives in the Neon suite: APIs are h
 
 Atlas is a [TanStack Start](https://tanstack.com/start) app on [Vercel](https://vercel.com/). The sections below cover how it declares the backend, uploads and stores the photos in a private bucket, searches from them based on face, image or text.
 
+![Atlas architecture: the browser, TanStack Start server functions and API routes on Vercel, and Managed Better Auth, Lakebase Postgres, Lakebase Search, and Object Storage on one Neon branch](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/architecture.svg)
+
 ### Declare the backend in neon.ts
 
 Atlas declares Auth and the private `photos` bucket in `neon.ts`. The Neon CLI provisions both on any branch you link:
