@@ -55,9 +55,11 @@ With agents writing the code, the syntax and learning curve aren't a barrier any
 
 ## Neon with Effect
 
-Our [`@neon/sdk`](https://neon.com/blog/neon-sdk) is used by developers to automate Neon infrastructure management via dev setup scripts, automations and in CI/CD. It's also built for and used by platforms that offer Postgres to their customers, the way Replit, v0, the Vercel Marketplace, Laravel Cloud and Netlify DB do.
+Developers use our [`@neon/sdk`](https://neon.com/blog/neon-sdk) to automate Neon infrastructure management in dev setup scripts, automations and CI/CD. It's also built for platforms that provide Postgres to their own users through Neon, the way Replit, v0, the Vercel Marketplace, Laravel Cloud and Netlify DB do.
 
-Those platforms run distributed systems with several providers and Neon downstream. Provisioning infrastructure, waiting for operations and recovering from failures are a good fit for Effect.
+A platform can use the Neon API to [create a dedicated project for each user, app or agent](https://neon.com/docs/guides/ai-agent-integration#project-per-tenant-architecture). Each gets isolated data and resources with its own usage limits. The platform can offer Lakebase Postgres alongside Auth, the Data API, Object Storage and Functions, provisioning the backend its users need as part of its own product.
+
+The platform's backend coordinates Neon alongside its other providers. That's a distributed system with Neon downstream. Provisioning operations finish asynchronously, so the SDK polls until resources are ready. Calls can hit rate limits or transient failures, and polling and retries should stop when a user cancels or a request times out. Effect's typed errors, retries, timeouts and interruption are a good fit for coordinating that work.
 
 [`@neon/effect`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/effect) wraps the SDK's ergonomic client with the same method names and parameters. API calls return Effects and paginated lists return Streams. It requires Effect 4:
 
