@@ -1,8 +1,6 @@
 ---
-title: 'Lakebase Search: The retrieval primitive for agents on Neon'
-description: >-
-  High-performance vector and BM25 search, integrated with the Neon primitives
-  for the rest of the retrieval pipeline.
+title: 'Lakebase Search: the retrieval primitive for agents on Neon'
+description: High-performance vector and BM25 search to build fast, scalable agents.
 excerpt: >-
   Build the search engine, ingestion layer, and serving layer for agent
   retrieval with Lakebase Search, Functions, Object Storage, and AI Gateway.
@@ -18,13 +16,11 @@ cover:
 isFeatured: false
 draft: false
 seo:
-  title: 'Lakebase Search: The retrieval primitive for agents on Neon'
-  description: >-
-    High-performance vector and BM25 search, integrated with the Neon primitives
-    for the rest of the retrieval pipeline.
+  title: 'Lakebase Search: the retrieval primitive for agents on Neon'
+  description: High-performance vector and BM25 search to build fast, scalable agents.
   keywords: []
   noindex: false
-  ogTitle: 'Lakebase Search: The retrieval primitive for agents on Neon'
+  ogTitle: 'Lakebase Search: the retrieval primitive for agents on Neon'
   ogDescription: >-
     Build the search engine, ingestion layer, and serving layer for agent
     retrieval with Lakebase Search and Neon.
