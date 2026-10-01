@@ -1,6 +1,6 @@
 ---
 title: 'Lakebase Search: the retrieval primitive for agents on Neon'
-description: High-performance vector and BM25 search to build fast, scalable agents.
+description: High-performance vector and BM25 search to build fast, scalable agents
 excerpt: >-
   Build the search engine, ingestion layer, and serving layer for agent
   retrieval with Lakebase Search, Functions, Object Storage, and AI Gateway.
