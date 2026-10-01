@@ -10,7 +10,7 @@ summary: >-
   DATABASE_URL setup, the deployctl deploy command, and optional GitHub
   integration for automated deployments.
 enableTableOfContents: true
-updatedOn: '2026-10-01T18:09:35.185Z'
+updatedOn: '2026-10-01T18:19:15.279Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
@@ -66,7 +66,7 @@ This will create or update your `deno.json` file with the necessary dependency:
 ```json
 {
   "imports": {
-    "@neondatabase/serverless": "npm:@neondatabase/serverless@^1.0.0"
+    "@neondatabase/serverless": "npm:@neondatabase/serverless@^1.2.0"
   }
 }
 ```
