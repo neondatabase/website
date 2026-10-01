@@ -14,8 +14,8 @@ categories:
 authors:
   - rishi-raj-jain
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/pg-redact-content-aware-pii-redaction-with-jev-enforced-in-postgres/cover.jpg
+  alt: Content-aware PII redaction with Jev and Postgres
 isFeatured: false
 seo:
   title: 'pg_redact: Content-aware PII redaction with Jev, enforced in Postgres - Neon'
@@ -24,7 +24,7 @@ seo:
   noindex: false
   ogTitle: 'pg_redact: Content-aware PII redaction with Jev, enforced in Postgres - Neon'
   ogDescription: Jev detects the PII and a SQL function enforces who can see it
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/pg-redact-content-aware-pii-redaction-with-jev-enforced-in-postgres/social.jpg
 ---
 
 <EmbedTweet url="https://twitter.com/rishi_raj_jain_/status/2100606501501169726?ref_src=twsrc%5Etfw" />
@@ -49,7 +49,10 @@ To test this out, I built pg_redact. It's a support inbox with three roles (Gues
 
 The live demo: [https://pg-redact.vercel.app](https://pg-redact.vercel.app/)
 
-**[ADD CLIP]**
+<video autoPlay muted loop playsInline width="708" height="423" aria-label="pg_redact demo showing role-based PII redaction">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/pg-redact-content-aware-pii-redaction-with-jev-enforced-in-postgres/pg-redact.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/pg-redact-content-aware-pii-redaction-with-jev-enforced-in-postgres/pg-redact.mp4" type="video/mp4" />
+</video>
 
 Under the hood, pg_redact has three pieces:
 
@@ -61,7 +64,7 @@ In this post, I'll walk you through each piece of the pg_redact's architecture. 
 
 ## How pg_redact works
 
-**[ADD DIAGRAM]**
+![pg_redact workflow for PII detection with Jev and role-based redaction in Postgres](https://cdn.neonapi.io/public/images/pages/blog/pg-redact-content-aware-pii-redaction-with-jev-enforced-in-postgres/neon-diagrams-pg-redact.jpg)
 
 ### 1. Generating candidates
 
