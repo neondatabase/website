@@ -6,7 +6,7 @@ summary: >-
   behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-10-01T22:38:59.908Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -29,7 +29,7 @@ const models = Object.values(catalog.neon.models).filter((model) => model.releas
 
 Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
 
-Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to foundation models.
+Using the AI Gateway requires a paid plan with prepaid credits, which gives you every model in the catalog. See [Model access](/docs/ai-gateway/overview#model-access) for details.
 
 ## Available models
 
@@ -134,7 +134,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. See [Model access](/docs/ai-gateway/overview#model-access) for what determines access and how to request more models.
+- `enabled` is whether the model is currently callable. Any paid account with prepaid credits can call every model in the catalog. See [Model access](/docs/ai-gateway/overview#model-access) for details.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
 - `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.
