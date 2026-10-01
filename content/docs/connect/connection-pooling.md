@@ -280,6 +280,136 @@ query_wait_timeout=120
 
 These settings are not user-configurable.
 
+## Troubleshooting connection pool exhaustion
+
+Even with connection pooling enabled, applications can hit pool limits. This section helps you diagnose and fix common pool exhaustion issues.
+
+### Symptoms
+
+You may be experiencing pool exhaustion if:
+
+- API endpoints return 500 errors intermittently
+- Requests time out at 28–32 seconds
+- Multiple unrelated endpoints fail simultaneously
+- You see errors like:
+  - `"no more connections allowed"`
+  - `"too many connections for role"`
+  - `"query_wait_timeout"`
+  - `"remaining connection slots are reserved"`
+
+### Step 1: Check your current connection count
+
+Start by checking how many connections are active:
+
+```sql
+SELECT count(*) FROM pg_stat_activity WHERE datname = '<your_database>';
+```
+
+You can also view active connections on the [Monitoring page](/docs/introduction/monitoring-page#connections) in the Neon Console, which provides a visual graph of connection usage over time.
+
+If this count is approaching your `max_connections` limit (see the table above), you're hitting pool exhaustion.
+
+### Step 2: Determine which limit you're hitting
+
+Different errors point to different limits:
+
+| Error | Limit Hit | What It Means |
+|-------|-----------|---------------|
+| `"no more connections allowed"` | `max_client_conn` (10,000) | Too many client connections to PgBouncer |
+| `"query_wait_timeout"` or timeouts | `default_pool_size` (~90% of max_connections) | Pool is full, new connections are waiting |
+| `"too many connections"` | `max_connections` (varies by compute) | Direct connections to Postgres exceed limit |
+
+**Quick check:** Are you using a pooled or direct connection string?
+
+- **Pooled** (`-pooler` in hostname) → You're hitting `default_pool_size` or `max_client_conn`
+- **Direct** (no `-pooler`) → You're hitting `max_connections`
+
+Switch to a pooled connection string if you're using direct connections and seeing `"too many connections"`.
+
+### Step 3: Identify the cause
+
+| Cause | What to check | How to check |
+|-------|---------------|--------------|
+| Connection leaks | Connections aren't being released after use | Review your code: are you calling `pool.end()`, `client.release()`, or closing connections? |
+| Client-side pool too small | Your ORM/driver's pool size is too small for your workload | Check connection pool settings in your application (see below) |
+| Serverless functions | Each invocation opens a new connection, leading to rapid exhaustion | Use the `@neondatabase/serverless` driver with connection pooling |
+| Multiple user/database pools | Each user/database combination creates a separate pool | Identify all users and databases connecting to Neon |
+| Compute size too small | Your compute's `max_connections` is insufficient | Consider upgrading to a larger compute size |
+
+### Step 4: Fix common issues
+
+**Fix connection leaks**
+
+```javascript
+// ❌ Bad: Connection never released
+const client = await pool.connect();
+const result = await client.query('SELECT * FROM users');
+
+// ✅ Good: Connection released
+const client = await pool.connect();
+try {
+  const result = await client.query('SELECT * FROM users');
+} finally {
+  client.release();
+}
+```
+
+**Use pooled connection string**
+
+For serverless functions and high-connection workloads, always use the pooled connection string (hostname with `-pooler` suffix):
+
+```
+postgresql://user1:password@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+```
+
+**Configure client-side connection pooling**
+
+| ORM/Driver | Setting | Recommended Value |
+|------------|---------|-------------------|
+| **node-postgres (pg-pool)** | `max` | 20–50 (adjust based on workload) |
+| **Prisma** | `connection_limit` | 20–50 |
+| **HikariCP (Java)** | `maximumPoolSize` | 20–50 |
+| **SQLAlchemy** | `pool_size` | 20–50 |
+
+**Prisma users:** Use `directUrl` for migrations and pooled URL for queries:
+
+```prisma
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")      // pooled URL (for queries)
+  directUrl  = env("DIRECT_URL")        // direct URL (for migrations)
+}
+```
+
+**Increase compute size**
+
+Larger compute sizes have higher `max_connections` and `default_pool_size` limits. See the table above for limits by compute size.
+
+**Check all user/database pools**
+
+Remember: PgBouncer creates separate pools for each user/database combination. Monitor connections for all combinations:
+
+```sql
+SELECT usename, datname, count(*)
+FROM pg_stat_activity
+WHERE datname = '<your_database>'
+GROUP BY usename, datname;
+```
+
+### Prevention
+
+To avoid pool exhaustion in the future:
+
+1. **Use pooled connection strings** for all application connections
+2. **Monitor connections** regularly on the [Monitoring page](/docs/introduction/monitoring-page) in the Neon Console
+3. **Set up alerts** for high connection counts (available via Neon's OpenTelemetry or Datadog integrations)
+4. **Use a client-side connection pool** with appropriate limits
+5. **Release connections** properly after use
+6. **Use `directUrl`** for migrations when using Prisma
+7. **Consider compute size** when scaling your application
+
+For more guidance on building resilient applications, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+
 ## Pool lifecycle and compute restarts
 
 Connection pools help minimize disruption during compute restarts (maintenance, updates, or scaling):
