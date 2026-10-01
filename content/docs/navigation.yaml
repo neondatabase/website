@@ -937,7 +937,7 @@
           items:
             - title: Authentication
               slug: ai-gateway/authentication
-            - title: Data retention
+            - title: Data retention (ZDR)
               slug: ai-gateway/data-retention
             - title: Troubleshooting
               slug: ai-gateway/troubleshooting
