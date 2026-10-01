@@ -27,6 +27,11 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-on-neon/cover.png'
 ---
 
+<video autoPlay muted loop playsInline width="708" height="390" aria-label="VectorDBBench price-performance comparison on LAION-100M">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/lakebase-search-clip.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/lakebase-search-clip.mp4" type="video/mp4" />
+</video>
+
 <Admonition type="note" title="Lakebase Search is now generally available">
 Lakebase Search just reached GA. Read the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
 </Admonition>
