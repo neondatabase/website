@@ -51,7 +51,7 @@ With [Effect 4.0](https://effect.website/blog/releases/effect/40), the team brou
 
 I've looked at Effect many times over the years and always postponed learning it. The syntax looks intimidating. Effects, Layers and the other concepts are a lot to pick up when you're used to regular TypeScript.
 
-With agents writing the code, that syntax is less of a barrier. Effect's promise to humans holds for agents too: make error cases explicit and provide tools for the production logic that otherwise gets scattered across an application. That pitch is very appealing to me.
+With agents writing the code, the syntax and learning curve aren't a barrier anymore. Effect's promise to humans holds for agents too: make error cases explicit and provide tools for the production logic that otherwise gets scattered across an application. That pitch is very appealing to me.
 
 ## Neon with Effect
 
