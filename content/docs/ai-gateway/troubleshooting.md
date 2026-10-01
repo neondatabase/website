@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-10-01T22:56:44.613Z'
 ---
 
 ## Authentication errors
@@ -60,6 +60,20 @@ See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
+
+### `403 model requires a verified account`
+
+The model exists in the catalog, but your account can't call it yet. This is a per-model access gate, separate from the credential-scope and branch-lineage `403`s above. It's the same condition the `enabled` field reports in `GET /v1/models`: a model with `"enabled": false` returns this error when called. The response body looks like this:
+
+```json
+{
+  "error": {
+    "message": "model requires a verified account"
+  }
+}
+```
+
+**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan with prepaid credits and still can't call a model, [contact Support](/docs/introduction/support).
 
 ---
 
