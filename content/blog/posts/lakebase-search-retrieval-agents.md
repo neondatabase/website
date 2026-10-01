@@ -84,7 +84,7 @@ To work efficiently with this storage hierarchy, `lakebase_vector` combines hier
 
 **Built for better price-performance.** Because the durable index lives in object storage and compute scales independently, you do not have to size always-on compute around the full index. In our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance:
 
-**ADD GRAPH**
+![VectorDBBench price-performance comparison on LAION-100M](https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/chart.png)
 
 The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) includes the results and methodology.
 
