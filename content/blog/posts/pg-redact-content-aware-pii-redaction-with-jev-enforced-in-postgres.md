@@ -2,9 +2,9 @@
 title: 'pg_redact: Content-aware PII redaction with Jev, enforced in Postgres'
 description: Jev detects the PII and a SQL function enforces who can see it
 excerpt: >-
-  PII redaction in Postgres today works column by column. The limitation of
-  that is that it only works when each piece of personal data has its own
-  column, which is rarely the case with free text.
+  PII redaction in Postgres today works column by column. Its limitation is
+  that it only works when each piece of personal data has its own column,
+  which is rarely the case with free text.
 date: '2026-10-01T12:00:00'
 updatedOn: '2026-10-01T14:34:00.000Z'
 category: community
@@ -29,7 +29,7 @@ seo:
 
 <EmbedTweet url="https://twitter.com/rishi_raj_jain_/status/2100606501501169726?ref_src=twsrc%5Etfw" />
 
-PII redaction in Postgres today works column by column. You can revoke a role's access to a column, or use an extension like [PostgreSQL Anonymizer](https://neon.com/docs/extensions/postgresql-anonymizer) to attach a masking rule to it with SECURITY LABEL, so customers.email or customers.ssn are masked for anyone who isn't cleared to see them. The limitation of that is that it only works when each piece of personal data has its own column, which is rarely the case with free text. Take this support ticket for example: "Please credit invoice 88213 back to Daniel Brooks at daniel.brooks@acme.co, whose SSN on file is 402-11-9931." It's stored in a single body text column, so a column rule can either hide the whole message or show all of it, including the name, the email, and the SSN.
+PII redaction in Postgres today works column by column. You can revoke a role's access to a column, or use an extension like [PostgreSQL Anonymizer](https://neon.com/docs/extensions/postgresql-anonymizer) to attach a masking rule to it with SECURITY LABEL, so customers.email or customers.ssn are masked for anyone who isn't cleared to see them. Its limitation is that it only works when each piece of personal data has its own column, which is rarely the case with free text. Take this support ticket for example: "Please credit invoice 88213 back to Daniel Brooks at daniel.brooks@acme.co, whose SSN on file is 402-11-9931." It's stored in a single body text column, so a column rule can either hide the whole message or show all of it, including the name, the email, and the SSN.
 
 Running regex over the text doesn't get you much further. A pattern that flags every run of digits would end up masking the invoice number along with the SSN, even though the support agent needs the invoice number to issue the refund. Whether a snippet is personal data depends on what it means in the sentence, so you need something that reads the text in its own context.
 
