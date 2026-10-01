@@ -35,7 +35,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/cover.png'
 ---
 
-On Wednesday, I joined the Effect team's meetup in San Francisco, where the maintainers and founders launched Effect 4.0 live. It's a big milestone for the team and community.
+On Wednesday, I joined the Effect team's meetup in San Francisco, where the Effect team launched Effect 4.0 live on stage. It's a big milestone for the team and community.
 
 ![Attendees sit on couches watching a presenter's terminal on a TV during the Effect 4.0 launch talk in San Francisco.](https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/effect-4-meetup.jpg)
 
