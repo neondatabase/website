@@ -88,13 +88,15 @@ The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-st
 
 ### Full-text search with lakebase_text
 
+Agents also need another type of search: full-text search. Vector search finds similar meaning, while full-text search finds exact words and phrases.
+
 `lakebase_text` adds the `lakebase_bm25` index type for BM25 keyword search. It preserves standard Postgres `tsvector` types and query operators while adding corpus-wide BM25 ranking and top-K pushdown.
 
 Applications can combine vector and keyword results in one SQL query, giving agents both semantic matches and exact-term results.
 
-## Build the ingestion pipeline with Functions
+## Build the ingestion pipeline with Neon Functions
 
-Before data can be searched, it must be parsed, chunked, embedded, and indexed. A TypeScript Function can run these steps next to the data in Lakebase Postgres.
+Before data can be searched, it must be parsed, chunked, embedded, and indexed. A TypeScript [Neon Function](https://neon.com/docs/compute/functions/overview) can run these steps next to the data in Lakebase Postgres.
 
 AI Gateway provides an OpenAI-compatible embeddings endpoint, so the Function can generate embeddings without configuring a separate model provider:
 
@@ -158,7 +160,7 @@ export default app;
 
 ## Expose retrieval as one tool
 
-The final layer determines how the agent reaches your data. A Function can wrap the hybrid query and expose it as one tool call.
+The final layer determines how the agent reaches your data. Another [Neon Function](https://neon.com/docs/compute/functions/overview) can wrap the hybrid query and expose it as one tool call.
 
 That call runs vector and keyword search in Postgres and returns ranked passages with their sources:
 
@@ -196,6 +198,12 @@ export default app;
 
 Agents change the retrieval pattern. Instead of relying on one hand-tuned query, the agent can search, inspect the results, and decide whether to proceed or try again with a sharper query, tighter filters, or a different angle.
 
+The loop has three steps:
+
+- **Search:** Run a vector, keyword, or hybrid query.
+- **Evaluate:** Let the agent inspect the returned passages.
+- **Retry:** Rewrite the query or adjust its filters when the results are not good enough.
+
 ```ts
 let hits = await searchDocs({ query });
 
@@ -209,6 +217,6 @@ This pattern depends on search that can handle repeated queries without requirin
 
 ## Build the retrieval stack around your data
 
-Neon brings together the primitives needed for retrieval: Lakebase Postgres, Object Storage, Functions, and AI Gateway. Applications can store operational data, build vector and BM25 indexes, run ingestion code, and expose retrieval tools from the same backend.
+Neon brings together the primitives needed for retrieval: [Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase), [Object Storage](https://neon.com/docs/storage/overview), [Neon Functions](https://neon.com/docs/compute/functions/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview). Applications can store operational data, build vector and BM25 indexes, run ingestion code, and expose retrieval tools from the same backend.
 
-The result is a retrieval stack built with familiar tools: Postgres for data and search, and TypeScript for ingestion and serving.
+The result is a retrieval stack built with familiar tools: Postgres for data and search, and TypeScript for ingestion and serving. Lakebase Search also preserves the price-performance benefits described above: the durable index lives in object storage while compute scales with query demand and can suspend when idle.
