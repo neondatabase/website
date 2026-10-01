@@ -34,9 +34,9 @@ seo:
 
 <Admonition type="note" title="Lakebase Search is now generally available">
 Lakebase Search just reached GA. Read the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
-</Admonition>
 
-**[Lakebase Search](https://neon.com/docs/ai/lakebase-search) gives agents fast vector and BM25 search inside [Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase), without moving data to a separate search system. Combined with [Neon Functions](https://neon.com/docs/compute/functions/overview), [Object Storage](https://neon.com/docs/storage/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview), it supports the full path from ingesting documents to serving hybrid search, with compute that scales independently of the index.**
+[Lakebase Search](https://neon.com/docs/ai/lakebase-search) gives agents fast vector and BM25 search inside [Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase), without moving data to a separate search system. Combined with [Neon Functions](https://neon.com/docs/compute/functions/overview), [Object Storage](https://neon.com/docs/storage/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview), it supports the full path from ingesting documents to serving hybrid search, with compute that scales independently of the index.
+</Admonition>
 
 High-quality search was once limited to companies such as Google and Amazon. Building it required search specialists and dedicated infrastructure. It was hard to get right, but small improvements in recall could materially affect the quality of the results.
 
@@ -59,7 +59,7 @@ Neon [provides the primitives](https://neon.com/blog/neon-backend-is-ga) to buil
 
 You can use them together to build fast, scalable agents while keeping search alongside your operational data in Lakebase Postgres.
 
-### Vector search with lakebase_vector
+## Vector search with lakebase_vector
 
 Standard HNSW indexes perform best when their working set remains in memory. As the corpus grows, this ties search capacity to the memory available on the serving compute.
 
@@ -91,9 +91,9 @@ To work efficiently with this storage hierarchy, `lakebase_vector` combines hier
 
 ![VectorDBBench price-performance comparison on LAION-100M](https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/chart.png)
 
-The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) includes the results and methodology.
+For more details on results and methodology, see the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
 
-### Full-text search with lakebase_text
+## Full-text search with lakebase_text
 
 Agents also need another type of search: full-text search. Vector search finds similar meaning, while full-text search finds exact words and phrases.
 
