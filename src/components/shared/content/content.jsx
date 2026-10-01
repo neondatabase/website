@@ -245,6 +245,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  // `AgentPrompt` is the task-titled, collapsible treatment of CopyPrompt
+  // (opt-in via its `title` prop). Same component, aliased so authors can use
+  // the name from the design handoff.
+  AgentPrompt: CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
   StatBlock,
