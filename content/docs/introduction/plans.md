@@ -3,7 +3,7 @@ title: Neon plans
 summary: >-
   Storage on Neon is unlimited on paid plans (Launch and Scale): there is no
   hard per-branch size limit and your storage grows with your usage. The Free
-  plan includes 1 GB of database storage per project, up to 20 GB across all projects.
+  plan includes 1 GB of Postgres storage per project, up to 20 GB across all projects.
   Free, Launch, and Scale also differ in compute rates, branch counts, storage
   pricing, and autoscaling limits. Compare per-unit pricing, feature
   availability, and billing examples to choose a plan or estimate monthly costs.
@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-10-01T14:05:14.904Z'
+updatedOn: '2026-10-01T15:44:50.010Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -91,7 +91,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 1 GB database storage per project (up to 20 GB total across all projects), and 5 GB of egress per project. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 1 GB Postgres storage per project (up to 20 GB total across all projects), and 5 GB of egress per project. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -235,11 +235,11 @@ Even though child branch storage is capped at your logical data size, it's still
 
 </Admonition>
 
-> **Free** plan users get 1 GB of database storage per project, up to 20 GB total across all projects
+> **Free** plan users get 1 GB of Postgres storage per project, up to 20 GB total across all projects
 
 #### Unlimited storage
 
-**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 1 GB of database storage per project, and to 20 GB in total across all your projects. These two limits are enforced independently: the total database storage across all your Free projects can't exceed 20 GB, even though each project is also individually capped at 1 GB. This limit applies to Postgres database storage and is separate from [Object Storage](#object-storage), which has its own Free allowance.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your storage grows with your usage.** The Free plan is limited to 1 GB of Postgres storage per project, and to 20 GB in total across all your projects. These two limits are enforced independently: the total Postgres storage across all your Free projects can't exceed 20 GB, even though each project is also individually capped at 1 GB. This limit applies to Postgres storage and is separate from [Object Storage](#object-storage), which has its own Free allowance.
 
 ### Public network transfer
 
@@ -561,7 +561,7 @@ Your plan's compute price per CU-hour depends on whether you are on Launch or Sc
 <FaqItem question="How is storage usage billed in Neon?">
 Storage is billed based on actual usage, measured in **GB-months**:  
 1 GB-month = 1 GB stored for 1 month  
-Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size; capped at your actual data size. On the Free plan, you get 1 GB of database storage per project, up to 20 GB total across all projects.
+Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size; capped at your actual data size. On the Free plan, you get 1 GB of Postgres storage per project, up to 20 GB total across all projects.
 </FaqItem>
 
 <FaqItem question="How do branches affect storage?">
@@ -608,7 +608,7 @@ Only available on Scale: $0.01/GB, bidirectional, between Neon and private netwo
 </FaqItem>
 
 <FaqItem question="What are the limits and quotas for the Free plan?">
-The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 1 GB of database storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 1 GB of Postgres storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">

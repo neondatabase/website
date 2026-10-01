@@ -7,7 +7,7 @@ summary: >-
   autoscaling up to 16 CU, and horizontal scaling via read replicas for
   offloading vector similarity search workloads at no extra storage cost.
 enableTableOfContents: true
-updatedOn: '2026-10-01T14:53:26.464Z'
+updatedOn: '2026-10-01T15:44:50.010Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.
@@ -77,7 +77,7 @@ To learn more about Neon's autoscaling feature and how to enable it, refer to ou
 
 ## Storage
 
-On the Free plan, you get 1 GB of database storage per project. Storage on paid plans is usage based. See [Neon plans](/docs/introduction/plans) for details.
+On the Free plan, you get 1 GB of Postgres storage per project. Storage on paid plans is usage based. See [Neon plans](/docs/introduction/plans) for details.
 
 ## Read replicas
 
