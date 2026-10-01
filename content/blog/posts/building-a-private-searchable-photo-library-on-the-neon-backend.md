@@ -12,7 +12,7 @@ categories:
 authors:
   - rishi-raj-jain
 cover:
-  image: https://raw.githubusercontent.com/neondatabase/examples/main/with-tanstack-ai-starter-full-backend/assets/library.png
+  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
   alt: 'Atlas photo library with the People row and photo grid'
 isFeatured: false
 draft: true
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: Building a private, searchable photo library on the Neon backend - Neon
   ogDescription: Private uploads, user authentication, and search by text, image, or face
-  image: https://raw.githubusercontent.com/neondatabase/examples/main/with-tanstack-ai-starter-full-backend/assets/library.png
+  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
 ---
 
 {/_ TODO: embed a clip of the site with the sign-up flow _/}
