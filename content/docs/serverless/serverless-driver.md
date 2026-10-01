@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-01T18:09:35.185Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -40,8 +40,8 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
-<Admonition type="note">
-The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+<Admonition type="important" title="JSR package is deprecated">
+The [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless) publication of the driver is deprecated and no longer updated. Install from npm instead. Runtimes that consume JSR packages, including Deno, can install the npm package directly (for example, `deno add npm:@neondatabase/serverless`).
 </Admonition>
 
 ## Configure your Neon database connection
