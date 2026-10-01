@@ -41,7 +41,7 @@ Building retrieval for agents requires three components:
 - **The ingestion layer:** Turns raw data and documents into searchable indexes.
 - **The serving layer:** Exposes the right query tools to agents through a consistent interface.
 
-Neon provides the primitives to build this pipeline around your data: Lakebase Postgres for storage and search, Functions for TypeScript ingestion and serving, Object Storage for raw files, and AI Gateway for generating embeddings.
+Neon [provides the primitives](https://neon.com/blog/neon-backend-is-ga) to build this pipeline around your data: [Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase) for storage and search, [Functions](https://neon.com/docs/compute/functions/overview) for TypeScript ingestion and serving, [Object Storage](https://neon.com/docs/storage/overview) for raw files, and [AI Gateway](https://neon.com/docs/ai-gateway/overview) for generating embeddings.
 
 ## Fast, scalable search in Postgres
 
@@ -50,7 +50,7 @@ Neon provides the primitives to build this pipeline around your data: Lakebase P
 - `lakebase_vector` for semantic search
 - `lakebase_text` for BM25 full-text search
 
-Together, they provide the search engine for the retrieval pipeline while keeping search alongside your operational data in Lakebase Postgres.
+You can use them together to build fast, scalable agents while keeping search alongside your operational data in Lakebase Postgres.
 
 ### Vector search with lakebase_vector
 
@@ -76,11 +76,15 @@ To work efficiently with this storage hierarchy, `lakebase_vector` combines hier
 <figcaption className="wp-element-caption"><em>Hierarchical IVF narrows each query to a small set of relevant clusters. Those clusters map to contiguous blocks that can be read in parallel, while RaBitQ reduces how much data each block contains.</em></figcaption>
 </figure>
 
-When compute suspends, the index remains in storage. When traffic returns, compute reattaches to the same index instead of rebuilding it. You pay for storage continuously, but not for compute while it is suspended.
+**Fully compatible with scale to zero.** The index stays in object storage when compute suspends. When traffic returns, compute reconnects to the same index instead of rebuilding it. This keeps idle compute costs down without making you rebuild the index before search can resume.
 
-In our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance. The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) includes the results and methodology.
+**Compatible with pgvector.** If you already use pgvector, switching to `lakebase_vector` does not require migrating data or changing queries. You add a `lakebase_ann` index while keeping the same vector types, distance operators, and query syntax.
 
-If you already use pgvector, `lakebase_vector` does not require a data or query migration. It adds the `lakebase_ann` index type while preserving the same vector types, distance operators, and query syntax.
+**Built for better price-performance.** Because the durable index lives in object storage and compute scales independently, you do not have to size always-on compute around the full index. In our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance:
+
+**ADD GRAPH**
+
+The [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres) includes the results and methodology.
 
 ### Full-text search with lakebase_text
 
