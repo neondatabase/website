@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-10-01T23:01:30.001Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -21,7 +21,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 ## Get access
 
-You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which gives you the open-weight models. To request access to foundation models, see [Model access](/docs/ai-gateway/overview#model-access).
+You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which lets you call every model in the catalog.
 
 ## Create a credential
 

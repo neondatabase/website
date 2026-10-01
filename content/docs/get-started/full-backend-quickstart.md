@@ -391,7 +391,7 @@ app.post('/generate', async (c) => {
   const { topic, author = 'anonymous' } = await c.req.json();
 
   const { text } = await generateText({
-    // Open-weight models are enabled by default. Frontier models (for example OpenAI GPT) need access requested in the Console first.
+    // On a paid plan with prepaid credits you can call every model in the catalog; gpt-oss-20b is a small, low-cost default.
     model: neon('gpt-oss-20b'),
     prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
