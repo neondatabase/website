@@ -10,6 +10,7 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
+import P5Sketch from 'components/pages/blog-post/p5-sketch';
 import SocialShare from 'components/pages/blog-post/social-share';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import Admonition from 'components/shared/admonition';
@@ -20,6 +21,7 @@ import EmbedTweet from 'components/shared/embed-tweet';
 import ImageZoom from 'components/shared/image-zoom';
 import RequestForm from 'components/shared/request-form';
 import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
+import remarkP5Sketch from 'lib/remark-p5-sketch';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
 
@@ -83,6 +85,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
+  P5Sketch,
   RequestForm: renderBlogRequestForm,
   YoutubeIframe,
 };
@@ -148,7 +151,7 @@ const BlogPostPage = ({
               <MDXRemote
                 source={content}
                 components={mdxComponents}
-                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm, remarkP5Sketch] } }}
               />
             }
           />
