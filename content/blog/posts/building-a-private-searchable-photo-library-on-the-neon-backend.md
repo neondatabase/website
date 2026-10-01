@@ -26,8 +26,6 @@ seo:
   image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
 ---
 
-{/_ TODO: embed a clip of the site with the sign-up flow _/}
-
 A photo library has basically four kinds of data:
 
 - **Files:** the original photos and face crops, kept in a private object storage bucket and shown through short-lived presigned URLs.
@@ -280,6 +278,10 @@ The `faces` table has no ANN index, so Postgres runs an exact scan over one user
 
 The application becomes truly interesting when it has more than one environment. **If we wanted a preview for Atlas, creating a Neon branch (it’s [one API call](https://neon.com/docs/guides/branching-neon-api)) branches the whole backend in seconds**, without copying data up front:
 
+```bash
+neon checkout dev-atlas
+```
+
 - Lakebase Postgres branches with copy-on-write, so the preview has a full copy of the data (without actually duplicating the database).
 - Object Storage also branches with copy-on-write, giving the preview an isolated view of the buckets and objects where you can change files without affecting production.
 - Managed Better Auth branches with the database, including the users and sessions in the `neon_auth` schema.
@@ -293,7 +295,9 @@ For Atlas, each preview therefore contains:
 - the users and sessions needed to test sign-in and access
 - the `lakebase_ann` index used by text and image search
 
-{/_ TODO: add a visual of the app deployed on a preview branch, or the branch in the Console _/}
+<video controls autoPlay muted loop playsInline width="3840" height="2160">
+<source src="/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.mp4" type="video/mp4" />
+</video>
 
 ## Run Atlas and start building
 
