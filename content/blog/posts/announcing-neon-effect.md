@@ -55,7 +55,7 @@ With agents writing the code, the syntax and learning curve aren't a barrier any
 
 ## Neon with Effect
 
-Our [`@neon/sdk`](https://neon.com/blog/neon-sdk) manages Neon from scripts, automations and CI/CD. It's also built for platforms that offer Postgres to their customers, the way Replit, v0, the Vercel Marketplace, Laravel Cloud and Netlify DB do.
+Our [`@neon/sdk`](https://neon.com/blog/neon-sdk) is used by developers to automate Neon infrastructure management via dev setup scripts, automations and in CI/CD. It's also built for and used by platforms that offer Postgres to their customers, the way Replit, v0, the Vercel Marketplace, Laravel Cloud and Netlify DB do.
 
 Those platforms run distributed systems with several providers and Neon downstream. Provisioning infrastructure, waiting for operations and recovering from failures are a good fit for Effect.
 
