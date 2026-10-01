@@ -43,7 +43,7 @@ Restore creates a backup branch (`{branch_name}_old_{head_timestamp}`) at the pr
 Both operations work from the [Neon CLI](/docs/cli/branches) and the [API](/docs/reference/api/branches/restore-project-branch). In CI, you can create a test branch with a TTL using `--expires-at`, run the test suite, and then delete or reset the branch.
 </Callout>
 
-The Free plan includes 10 branches per project and 0.5 GB of storage per project, enough to try reset from parent in a CI pipeline.
+The Free plan includes 10 branches per project and 1 GB of storage per project, enough to try reset from parent in a CI pipeline.
 
 ## How other managed Postgres services compare
 

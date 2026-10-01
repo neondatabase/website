@@ -39,7 +39,7 @@ To skip sign-up entirely, [Claimable Neon](/claimable-neon) creates a working pr
 - A database on the root branch (`production` for projects created in the Console, `main` via the API or CLI)
 - Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale to zero after 5 minutes of inactivity
-- 100 CU-hours per project per month and 0.5 GB of storage per project
+- 100 CU-hours per project per month and 1 GB of storage per project
 - 5 GB of public network transfer per project per month
 - Up to 10 branches per project and 100 projects
 

@@ -168,7 +168,7 @@ You can start building on the [Neon Free plan](/docs/introduction/plans). It com
 
 - **$0/month** with no credit card required
 - **100 projects** and **100 CU-hours per project** (enough to run a 0.25 CU compute for 400 active hours)
-- **0.5 GB storage per project** and **5 GB of public network transfer per project per month**
+- **1 GB database storage per project** and **5 GB of public network transfer per project per month**
 - **Autoscaling** up to 2 CU (≈8 GB RAM) with scale to zero after 5 minutes of inactivity
 - **Managed Better Auth** up to 60,000 MAU
 

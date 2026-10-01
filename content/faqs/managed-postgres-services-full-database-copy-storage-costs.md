@@ -36,7 +36,7 @@ A child branch's delta grows as it diverges from its parent, up to the logical d
 
 ## Plan limits to know
 
-The Free plan includes 10 branches per project and 0.5 GB of storage per project, enough to try the workflow on a small database. The Launch plan includes 10 branches per project and the Scale plan includes 25. On both paid plans, extra branches cost $1.50/branch-month (metered hourly), up to 5,000 branches per project. Extra branches aren't available on the Free plan. See [Neon plans](/docs/introduction/plans).
+The Free plan includes 10 branches per project and 1 GB of storage per project, enough to try the workflow on a small database. The Launch plan includes 10 branches per project and the Scale plan includes 25. On both paid plans, extra branches cost $1.50/branch-month (metered hourly), up to 5,000 branches per project. Extra branches aren't available on the Free plan. See [Neon plans](/docs/introduction/plans).
 
 ## How other managed Postgres services handle per-engineer copies
 

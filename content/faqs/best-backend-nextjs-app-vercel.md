@@ -41,7 +41,7 @@ Add `prisma migrate deploy` or `drizzle-kit migrate` to the Vercel build command
 
 ## What it costs
 
-The Free plan covers prototypes: 0.5 GB of storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU. The Launch plan is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
+The Free plan covers prototypes: 1 GB of database storage per project, 100 CU-hours of compute per project per month, 10 branches per project, and Auth up to 60k MAU. The Launch plan is usage-based at $0.106/CU-hour and $0.35/GB-month with no monthly minimum; compute scales to zero after 5 minutes idle while storage continues to bill ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 

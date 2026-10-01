@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-09-15T18:26:27.284Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production backends, without forcing you to rethink your architecture along the way.
@@ -20,7 +20,7 @@ Neon fits into every stage of growth, from the first side project to operating l
 
 When you’re looking for a free plan to start building, what you want is simplicity and enough room to work. Neon’s Free plan abstracts most backend configuration, delivers real-world performance, and gives you branching and autoscaling. And you get more than a database: alongside Lakebase Postgres, you can deploy Managed Better Auth, Object Storage for your files, and Functions, all on the same plan.
 
-- A [Free plan with real resources](/docs/introduction/plans): up to 100 projects, each project with its own 100 CU-hours of database compute (autoscaling between 0.25 and 2 CU), 0.5 GB of database storage, and 5 GB of egress, enough to build and test real applications
+- A [Free plan with real resources](/docs/introduction/plans): up to 100 projects, each project with its own 100 CU-hours of database compute (autoscaling between 0.25 and 2 CU), 1 GB of database storage, and 5 GB of egress, enough to build and test real applications
 - Plus the rest of the backend: [Managed Better Auth](/docs/auth/overview) (up to 60,000 MAU), [Object Storage](/docs/storage/overview) (5 GB per project), and [Functions](/docs/compute/functions/overview) (1 million invocations per month)
 - [Scale to zero](/docs/introduction/scale-to-zero) means idle projects don’t eat into your compute allowance: only active time counts
 - [Instant branching](/docs/introduction/branching) gives each experiment its own copy of the whole backend, data and buckets included, so you can try changes without risk

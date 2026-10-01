@@ -46,7 +46,7 @@ The CLI command branches from the project's default branch unless you pass `--pa
 
 ## Plan limits
 
-- **Free plan**: 10 branches per project, 0.5 GB storage cap
+- **Free plan**: 10 branches per project, 1 GB storage cap
 - **Launch plan**: 10 branches included, extra at $1.50/branch-month (metered hourly), up to 5,000 per project
 - **Scale plan**: 25 branches included, same overage rate, up to 5,000 per project
 
