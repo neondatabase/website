@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "7.0.0",
+  "neonctlVersion": "7.0.3",
   "binaries": [
     "neonctl",
     "neon"
@@ -734,12 +734,7 @@
         "object": {
           "name": "object",
           "aliases": [],
-          "positionals": [
-            {
-              "name": "sub-command",
-              "required": true
-            }
-          ],
+          "positionals": [],
           "options": {},
           "commands": {
             "delete": {
