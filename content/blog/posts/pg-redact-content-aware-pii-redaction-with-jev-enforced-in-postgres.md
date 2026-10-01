@@ -49,6 +49,8 @@ To test this out, I built pg_redact. It's a support inbox with three roles (Gues
 
 The live demo: [https://pg-redact.vercel.app](https://pg-redact.vercel.app/)
 
+**[ADD CLIP]**
+
 Under the hood, pg_redact has three pieces:
 
 - Candidate generation, which uses simple regex and tokenization rules to find snippets that could be PII
@@ -58,6 +60,8 @@ Under the hood, pg_redact has three pieces:
 In this post, I'll walk you through each piece of the pg_redact's architecture. You can check out all the code here: [https://github.com/rishi-raj-jain/pg-redact](https://github.com/rishi-raj-jain/pg-redact).
 
 ## How pg_redact works
+
+**[ADD DIAGRAM]**
 
 ### 1. Generating candidates
 
