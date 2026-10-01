@@ -18,7 +18,7 @@ cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/cover.png'
   alt: >-
     Blog cover on a dark charcoal-to-navy dotted background with the Neon logo,
-    the headline "Announcing @neon/effect for Effect 4" on white bars, and a
+    the headline "Announcing @neon/effect for Effect 4" on white bars and a
     wireframe illustration of three stacked plates labeled "Effect.gen".
 isFeatured: false
 seo:
@@ -34,6 +34,16 @@ seo:
     and Streams for paginated lists.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/cover.png'
 ---
+
+On Wednesday, I joined the Effect team's meetup in San Francisco, where the maintainers and founders launched Effect 4.0 live. It's a big milestone for the team and community.
+
+![Attendees sit on couches watching a presenter's terminal on a TV during the Effect 4.0 launch talk in San Francisco.](https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-effect/effect-4-meetup.jpg)
+
+<EmbedTweet url="https://twitter.com/andrelandgraf/status/2105474023287341382?ref_src=twsrc%5Etfw" />
+
+The launch prompted us to finally create Effect bindings for `@neon/sdk`. On the ride home, I asked my agent to create a draft PR for `@neon/effect`.
+
+<EmbedTweet url="https://twitter.com/andrelandgraf/status/2105514776290119718?ref_src=twsrc%5Etfw" />
 
 [Effect](https://effect.website) has been getting more attention among TypeScript developers as agents write more of our code. The pitch makes sense: give agents type-safe tools for retries, cancellation and timeouts that are otherwise easy to miss or get wrong.
 
