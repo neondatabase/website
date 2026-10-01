@@ -31,6 +31,8 @@ seo:
 Lakebase Search just reached GA. Read the [Databricks announcement](https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres).
 </Admonition>
 
+**[Lakebase Search](https://neon.com/docs/ai/lakebase-search) gives agents fast vector and BM25 search inside [Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase), without moving data to a separate search system. Combined with [Neon Functions](https://neon.com/docs/compute/functions/overview), [Object Storage](https://neon.com/docs/storage/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview), it supports the full path from ingesting documents to serving hybrid search, with compute that scales independently of the index.**
+
 High-quality search was once limited to companies such as Google and Amazon. Building it required search specialists and dedicated infrastructure. It was hard to get right, but small improvements in recall could materially affect the quality of the results.
 
 Today, search is a core primitive for apps and AI agents. It connects operational data to models and underpins memory, personalization, and context. The quality of an agentic experience often depends on how well the agent can query that data.
