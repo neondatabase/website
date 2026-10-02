@@ -27,7 +27,7 @@ Following [Databricks' partner model provider retention policy](https://docs.dat
 - **OpenAI**: for certain coding and routing customers, OpenAI may retain content its classifiers flag as potentially policy-violating. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data#safety-retention).
 - **Anthropic**: for its frontier models (currently Fable 5 and later Mythos-class models), data is retained for safety purposes for all customers. See [Anthropic data retention](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
 
-Providers that Databricks does not list as exceptions operate under zero data retention. The catalog expands over time, so Databricks' partner model provider retention policy is the source of truth for which providers retain data.
+The catalog expands over time and these terms can change, so Databricks' partner model provider retention policy is the authoritative source of truth for which providers and models retain data.
 
 ## Databricks retention
 
