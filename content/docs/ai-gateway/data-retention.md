@@ -20,23 +20,14 @@ This page explains what each one retains. For most models the answer is nothing:
 
 ## Model provider retention
 
-Most models served through the gateway operate under **zero data retention (ZDR)**: the provider does not retain or train on your prompts and responses. The only exceptions are certain frontier models from OpenAI and Anthropic, which Databricks' partner model provider retention policy requires to retain data for safety purposes.
+Most models served through the gateway operate under **zero data retention (ZDR)**: the provider does not retain or train on your prompts and responses.
 
-The table below shows, for each provider served through the gateway, whether it retains or trains on your data.
+Following [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving#partner-model-provider-data-retention), some partner providers may retain data for safety purposes. This retention relies on automated scanning before any limited human review, and the retained data is not used for training. Databricks documents the following exceptions:
 
-| Provider          | Retains your data                                                                                                                                                                                                                                       | Trains on your data |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| OpenAI            | For certain coding and routing customers, content its classifiers flag as potentially policy-violating. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data#safety-retention).                                           | No                  |
-| Anthropic         | For its frontier models (currently Fable 5 and later Mythos-class models), retained for safety purposes for all customers. See [Anthropic data retention](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). | No                  |
-| Google            | No                                                                                                                                                                                                                                                      | No                  |
-| Meta              | No                                                                                                                                                                                                                                                      | No                  |
-| Alibaba           | No                                                                                                                                                                                                                                                      | No                  |
-| Zhipu AI          | No                                                                                                                                                                                                                                                      | No                  |
-| Thinking Machines | No                                                                                                                                                                                                                                                      | No                  |
-| Moonshot AI       | No                                                                                                                                                                                                                                                      | No                  |
-| xAI               | No                                                                                                                                                                                                                                                      | No                  |
+- **OpenAI**: for certain coding and routing customers, OpenAI may retain content its classifiers flag as potentially policy-violating. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data#safety-retention).
+- **Anthropic**: for its frontier models (currently Fable 5 and later Mythos-class models), data is retained for safety purposes for all customers. See [Anthropic data retention](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
 
-The catalog expands over time. [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving#partner-model-provider-data-retention) is the source of truth for which providers retain data.
+Providers that Databricks does not list as exceptions operate under zero data retention. The catalog expands over time, so Databricks' partner model provider retention policy is the source of truth for which providers retain data.
 
 ## Databricks retention
 
