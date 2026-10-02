@@ -27,7 +27,10 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-free-plan-1-gb-per-project/social.jpg
 ---
 
-**[ADD PRICING PAGE CLIP]**
+<video autoPlay muted loop playsInline width="708" height="507" aria-label="Neon pricing page showing 1 GB of storage per Free plan project">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-free-plan-1-gb-per-project/pricing-page-clip-1gb.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-free-plan-1-gb-per-project/pricing-page-clip-1gb.mp4" type="video/mp4" />
+</video>
 
 <Admonition type="note" title="Just shipped">
 Database storage on the Neon Free plan is now 1 GB per project, up from 0.5 GB. You still get 100 projects, with existing projects getting the new limit automatically.
