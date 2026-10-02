@@ -30,7 +30,7 @@ That's about $1.96 for the month, with no base fee on top.
 If the database sits idle all month with scale to zero on, the compute line is $0 and you pay only for storage and restore history.
 
 <Callout title="Free plan baseline">
-The Free plan costs $0/month and includes 100 projects, 100 CU-hours per project, 0.5 GB of storage per project, and autoscaling up to 2 CU (≈8 GB RAM).
+The Free plan costs $0/month and includes 100 projects, 100 CU-hours per project, 1 GB of storage per project, and autoscaling up to 2 CU (≈8 GB RAM).
 </Callout>
 
 ## What changes on the Scale plan

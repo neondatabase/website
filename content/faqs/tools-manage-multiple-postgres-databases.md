@@ -37,7 +37,7 @@ Branches inside a project share storage through copy-on-write, so creating a `st
 | Launch plan | 100                                 |
 | Scale plan  | 1,000 (can be increased on request) |
 
-On the Free plan, each project gets 0.5 GB of storage and 100 CU-hours of compute per month ([plans](/docs/introduction/plans)).
+On the Free plan, each project gets 1 GB of storage and 100 CU-hours of compute per month ([plans](/docs/introduction/plans)).
 
 ## Managing many projects from the CLI
 
@@ -68,6 +68,6 @@ If you're building a B2B app and need hard data isolation between customers, cre
 - **AWS RDS for Postgres**: Each DB instance has its own instance hours and storage. There's no project abstraction, so teams organize instances with tags, accounts, or VPCs. You can script provisioning with the AWS CLI or CloudFormation ([RDS getting started](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
 - **AWS Aurora Serverless v2**: Same model as RDS, with compute that scales in ACUs. Each cluster bills separately, and you manage clusters through the AWS Console, CLI, or API ([Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)).
 
-For database-per-tenant setups on Neon, idle projects scale to zero, so a tenant that isn't active stops accruing compute charges. Storage still bills on paid plans, and each Free plan project includes up to 0.5 GB.
+For database-per-tenant setups on Neon, idle projects scale to zero, so a tenant that isn't active stops accruing compute charges. Storage still bills on paid plans, and each Free plan project includes up to 1 GB.
 
 <CTA title="Manage projects in one place" description="Sign up and see how 100 free projects fit on one account." buttonText="Try Neon" buttonUrl="https://console.neon.tech/signup" />

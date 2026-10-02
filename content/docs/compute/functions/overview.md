@@ -8,7 +8,9 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-22T15:52:59.294Z'
+  - /docs/functions
+  - /docs/functions/overview
+updatedOn: '2026-10-02T11:22:16.421Z'
 ---
 
 Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.

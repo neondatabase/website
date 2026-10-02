@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-02T13:12:04.123Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -40,8 +40,8 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
-<Admonition type="note">
-The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+<Admonition type="important" title="JSR package is deprecated">
+The [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless) publication of the driver is deprecated and no longer updated. Install from npm instead. Runtimes that consume JSR packages, including Deno, can install the npm package directly (for example, `deno add npm:@neondatabase/serverless`).
 </Admonition>
 
 ## Configure your Neon database connection
@@ -259,6 +259,38 @@ You can customize the return format using the configuration options `fullResults
   ```
 
 For additional details, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+
+### Connection parameters
+
+The usual way to configure the connection is a full connection string:
+
+```javascript
+const sql = neon(process.env.DATABASE_URL);
+```
+
+You can also pass individual connection parameters in the options object. The supported parameters are `user` (or `username`), `password`, `host` (or `hostname`), `port`, `database`, and `connectionString`. They can supplement a connection string, override parts of it, or fully replace it:
+
+```javascript
+// No connection string: pass the parts individually
+const sql = neon({ user, password, host, database });
+
+// Override part of a connection string
+const sql = neon(process.env.DATABASE_URL, { host: readReplicaHost });
+```
+
+Each parameter can be a string (or a number, for `port`), or a **sync or async function that's resolved on every query**. Resolving on every query is useful for short-lived credentials that must be fetched fresh, such as an OIDC token used as the password:
+
+```javascript
+const sql = neon(DATABASE_URL_WITHOUT_PASSWORD, {
+  password: async () => await getAccessToken(),
+});
+```
+
+The same connection parameters are accepted by the `query` and `transaction` functions.
+
+<Admonition type="note">
+Connection parameters require `@neondatabase/serverless` 1.2.0 or later. For the `Client` and `Pool` classes, a sync or async `password` function is supported when `pipelineConnect` is enabled.
+</Admonition>
 
 ### Issue multiple queries with the transaction() function
 

@@ -46,7 +46,7 @@ Set a [branch expiration](/docs/guides/branch-expiration) so abandoned PR branch
 
 ## Plan limits
 
-- **Free plan**: 10 branches per project, 0.5 GB storage per project, 100 CU-hours per project per month.
+- **Free plan**: 10 branches per project, 1 GB storage per project, 100 CU-hours per project per month.
 - **Launch plan**: 10 included branches per project, then $1.50/branch-month.
 - **Scale plan**: 25 included branches per project, then $1.50/branch-month.
 

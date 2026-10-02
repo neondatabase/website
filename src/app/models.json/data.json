@@ -12,6 +12,7 @@
         "name": "GPT OSS 120B",
         "provider": "openai",
         "family": "gpt-oss",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
@@ -44,6 +45,7 @@
         "name": "GPT OSS 20B",
         "provider": "openai",
         "family": "gpt-oss",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
@@ -76,6 +78,7 @@
         "name": "GPT-5",
         "provider": "openai",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -111,6 +114,7 @@
         "name": "GPT-5 Mini",
         "provider": "openai",
         "family": "gpt-mini",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -146,6 +150,7 @@
         "name": "GPT-5 Nano",
         "provider": "openai",
         "family": "gpt-nano",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -181,6 +186,7 @@
         "name": "GPT-5.1",
         "provider": "openai",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -216,6 +222,7 @@
         "name": "GPT-5.2",
         "provider": "openai",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -251,6 +258,7 @@
         "name": "GPT-5.3 Codex",
         "provider": "openai",
         "family": "gpt-codex",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -286,6 +294,7 @@
         "name": "GPT-5.4",
         "provider": "openai",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -337,6 +346,7 @@
         "name": "GPT-5.4 mini",
         "provider": "openai",
         "family": "gpt-mini",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -372,6 +382,7 @@
         "name": "GPT-5.4 nano",
         "provider": "openai",
         "family": "gpt-nano",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -407,6 +418,7 @@
         "name": "GPT-5.5",
         "provider": "openai",
         "family": "gpt",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -458,6 +470,7 @@
         "name": "GPT-5.5 Pro",
         "provider": "openai",
         "family": "gpt-pro",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -506,6 +519,7 @@
         "name": "GPT-5.6 Luna",
         "provider": "openai",
         "family": "gpt-luna",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -560,6 +574,7 @@
         "name": "GPT-5.6 Sol",
         "provider": "openai",
         "family": "gpt-sol",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -614,6 +629,7 @@
         "name": "GPT-5.6 Terra",
         "provider": "openai",
         "family": "gpt-terra",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -668,6 +684,7 @@
         "name": "GPT-6 Astra",
         "provider": "openai",
         "family": "gpt-astra",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -722,6 +739,7 @@
         "name": "Gemini 3 Flash Preview",
         "provider": "google",
         "family": "gemini-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -757,6 +775,7 @@
         "name": "Gemini 3.1 Flash Lite Preview",
         "provider": "google",
         "family": "gemini-flash-lite",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -792,6 +811,7 @@
         "name": "Gemini 3.1 Pro Preview Custom Tools",
         "provider": "google",
         "family": "gemini-pro",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -842,6 +862,7 @@
         "name": "Gemini 3.5 Flash",
         "provider": "google",
         "family": "gemini-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -877,6 +898,7 @@
         "name": "Gemini 3.5 Flash Lite",
         "provider": "google",
         "family": "gemini-flash-lite",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -911,6 +933,7 @@
         "name": "Gemini 3.6 Flash",
         "provider": "google",
         "family": "gemini-flash",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -946,6 +969,7 @@
         "name": "Gemma 3 12B",
         "provider": "google",
         "family": "gemma",
+        "released": true,
         "attachment": true,
         "reasoning": false,
         "tool_call": true,
@@ -973,6 +997,7 @@
         "name": "Llama 3.1 8B Instruct",
         "provider": "meta",
         "family": "llama",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1000,6 +1025,7 @@
         "name": "Llama 4 Maverick 17B Instruct",
         "provider": "meta",
         "family": "llama",
+        "released": true,
         "attachment": true,
         "reasoning": false,
         "tool_call": true,
@@ -1027,6 +1053,7 @@
         "name": "Llama-3.3-70B-Instruct",
         "provider": "meta",
         "family": "llama",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1054,6 +1081,7 @@
         "name": "Qwen3-Next 80B-A3B Instruct",
         "provider": "alibaba",
         "family": "qwen",
+        "released": true,
         "attachment": false,
         "reasoning": false,
         "tool_call": true,
@@ -1081,6 +1109,7 @@
         "name": "Qwen3.5 122B-A10B",
         "provider": "alibaba",
         "family": "qwen",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
@@ -1113,6 +1142,7 @@
         "name": "GLM-5.2",
         "provider": "zhipuai",
         "family": "glm",
+        "released": true,
         "attachment": false,
         "reasoning": true,
         "reasoning_options": [
@@ -1149,6 +1179,7 @@
         "name": "GLM-5.3 Flash",
         "provider": "zhipuai",
         "family": "glm",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -1182,6 +1213,7 @@
         "name": "Inkling",
         "provider": "thinkingmachines",
         "family": "ling",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -1218,6 +1250,7 @@
         "name": "Kimi K3",
         "provider": "moonshotai",
         "family": "kimi-k3",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -1254,6 +1287,7 @@
         "name": "Grok 4.6",
         "provider": "xai",
         "family": "grok",
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
@@ -1288,6 +1322,7 @@
         "name": "Qwen3 Embedding 0.6B",
         "provider": "alibaba",
         "family": "text-embedding",
+        "released": true,
         "type": "embedding",
         "dimensions": 1024,
         "open_weights": true,
@@ -1302,6 +1337,7 @@
         "name": "GTE Large EN",
         "provider": "alibaba",
         "family": "text-embedding",
+        "released": true,
         "type": "embedding",
         "dimensions": 1024,
         "open_weights": true,

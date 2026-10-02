@@ -588,6 +588,24 @@ function walkBuilder(builderNode, node, consts) {
             ]);
             Object.assign(node.options, parseOptionsObject(synth, consts));
           }
+        } else if (method === 'demandOption') {
+          // .demandOption('name' | ['a', 'b']) marks options required. Record the
+          // names; resolveDemandedOptions resolves them against the built tree
+          // (the option may be declared here or on a parent). yargs's optional
+          // boolean second arg toggles the demand, so skip a literal `false`.
+          const toggle = unwrapExpression(e.arguments[1]);
+          const demanded = !toggle || toggle.kind !== ts.SyntaxKind.FalseKeyword;
+          const arg = unwrapExpression(e.arguments[0]);
+          const names = [];
+          const single = stringLiteralValue(arg);
+          if (single) names.push(single);
+          else {
+            const arr = arrayLiteralStrings(arg);
+            if (arr) names.push(...arr);
+          }
+          if (demanded && names.length) {
+            (node._demandOption || (node._demandOption = [])).push(...names);
+          }
         } else if (method === 'command') {
           const sub = parseCommandCall(e.arguments, consts);
           if (sub) node.commands[sub.name] = sub;
@@ -897,6 +915,34 @@ function inheritParentOptions(node, inherited = {}) {
   }
 }
 
+// Turns the `_demandOption` names recorded by walkBuilder into `required` flags.
+// A name demanded on the node that declares the option is required outright; a
+// name declared on a group but demanded by EVERY direct subcommand is required
+// group-wide (vpc_endpoints.ts: `region-id` is on `endpoint`, demanded on each
+// leaf). The renderer shows one shared `required` per inherited option, so a
+// mixed demand (not all subcommands) can only err toward optional.
+function resolveDemandedOptions(node) {
+  const children = Object.values(node.commands || {});
+  const options = node.options || {};
+  for (const name of node._demandOption || []) {
+    if (options[name]) options[name].required = true;
+  }
+  if (children.length > 0) {
+    for (const [name, spec] of Object.entries(options)) {
+      if (spec.required) continue;
+      if (children.every((c) => (c._demandOption || []).includes(name))) {
+        spec.required = true;
+      }
+    }
+  }
+  children.forEach(resolveDemandedOptions);
+}
+
+function stripDemandedOptions(node) {
+  delete node._demandOption;
+  for (const sub of Object.values(node.commands || {})) stripDemandedOptions(sub);
+}
+
 // Deep-merges `overrides.json` (if present) into the schema. Overrides are
 // the escape hatch for terse or missing upstream descriptions — same shape
 // as the schema itself, merged key-by-key with overrides winning.
@@ -996,6 +1042,12 @@ function buildSchema({ src } = {}) {
     },
     src
   );
+  // Resolve `.demandOption(...)` into `required` flags across the full tree
+  // (so group demands reach the declaring ancestor), then drop the transient
+  // field. Before overrides so a hand-written override still wins.
+  const root = { commands: schema.commands };
+  resolveDemandedOptions(root);
+  stripDemandedOptions(root);
   return applyOverrides(schema);
 }
 

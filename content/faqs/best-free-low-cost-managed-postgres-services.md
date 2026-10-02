@@ -22,7 +22,7 @@ The Neon [Free plan](/docs/introduction/plans) includes:
 - 100 projects
 - 10 branches per project
 - 100 CU-hours per project per month
-- 0.5 GB storage per project
+- 1 GB storage per project
 - Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes of inactivity
 - 6-hour instant restore window, up to 1 GB-month of change history
@@ -37,7 +37,7 @@ When traffic goes from zero to a burst, two things happen automatically:
 1. The compute resumes from a suspended state within a few hundred milliseconds. The first query waits for that resume.
 2. Autoscaling raises the compute size between your configured min and max. On the Free plan, max is 2 CU. On the Launch plan, it's up to 16 CU. See [Autoscaling](/docs/introduction/autoscaling) for the mechanics.
 
-A suspended compute doesn't accumulate CU-hours. Storage is metered separately at $0.35/GB-month on paid plans (and capped at 0.5 GB/project on Free).
+A suspended compute doesn't accumulate CU-hours. Storage is metered separately at $0.35/GB-month on paid plans (and capped at 1 GB/project on Free).
 
 ## When you outgrow Free
 
@@ -57,7 +57,7 @@ Each project gets 10 branches on the Free plan. Use them to test schema changes 
 
 | Provider         | Free projects                                                                                                                                                                                                                                                      | Idle behavior                                                                                                                                     | Storage                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Neon Free        | 100 projects                                                                                                                                                                                                                                                       | Auto-suspend after 5 minutes, resume in a few hundred ms                                                                                          | 0.5 GB per project                                                                      |
+| Neon Free        | 100 projects                                                                                                                                                                                                                                                       | Auto-suspend after 5 minutes, resume in a few hundred ms                                                                                          | 1 GB per project                                                                        |
 | Supabase Free    | 2 active projects across every org where you're Owner or Admin; paused projects don't count ([docs](https://supabase.com/docs/guides/platform/billing-on-supabase))                                                                                                | Paused after a week of low activity; restore manually from the dashboard ([docs](https://supabase.com/docs/guides/platform/free-project-pausing)) | 500 MB per project ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) |
 | AWS RDS / Aurora | Aurora only: 4 ACUs and 2 clusters on the AWS Free Tier ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html)). RDS runs on [Free Tier credits](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier.html) | RDS instances run 24/7 unless stopped; Aurora Serverless v2 can auto-pause at 0 ACUs                                                              | 1 GB per Aurora cluster; otherwise pay-per-GB                                           |
 

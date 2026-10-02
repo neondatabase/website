@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -29,7 +29,7 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Branch naming requirements
 
-Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (for example, `br-curly-wave-af4i4oeu`).
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (for example, `br-curly-wave-123456`).
 
 If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
 
@@ -110,14 +110,14 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
 ```json
 {
   "branch": {
-    "id": "br-curly-wave-af4i4oeu",
+    "id": "br-curly-wave-123456",
     "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_id": "br-morning-meadow-123456",
     "parent_lsn": "0/1FA22C0",
-    "name": "br-curly-wave-af4i4oeu",
+    "name": "br-curly-wave-123456",
     "current_state": "init",
     "pending_state": "ready",
-    "state_changed_at": "2025-08-04T07:13:09Z",
+    "state_changed_at": "2026-08-04T07:13:09Z",
     "creation_source": "console",
     "primary": false,
     "default": false,
@@ -127,8 +127,8 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:13:09Z",
+    "created_at": "2026-08-04T07:13:09Z",
+    "updated_at": "2026-08-04T07:13:09Z",
     "created_by": {
       "name": "your@email.com",
       "image": ""
@@ -140,7 +140,7 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
       "host": "ep-cool-darkness-123456.c-2.us-west-2.aws.neon.tech",
       "id": "ep-cool-darkness-123456",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "autoscaling_limit_min_cu": 0.25,
       "autoscaling_limit_max_cu": 0.25,
       "region_id": "aws-us-west-2",
@@ -153,8 +153,8 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
       "disabled": false,
       "passwordless_access": true,
       "creation_source": "console",
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
       "proxy_host": "c-2.us-west-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
@@ -164,44 +164,44 @@ For attribute definitions, find the [Create branch](/docs/reference/api/branches
     {
       "id": "8289b00a-4341-48d2-b3f1-d0c8dbb7e806",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "action": "create_branch",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
       "total_duration_ms": 0
     },
     {
       "id": "a3c9baa4-6732-4774-a141-9d03396babce",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:13:09Z",
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:13:09Z",
       "total_duration_ms": 0
     }
   ],
   "roles": [
     {
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "name": "alex",
       "protected": false,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:07:55Z"
     }
   ],
   "databases": [
     {
       "id": 2886327,
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "name": "dbname",
       "owner_name": "alex",
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:07:55Z"
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:07:55Z"
     }
   ],
   "connection_uris": [
@@ -274,13 +274,9 @@ neon branches list --project-id dry-heart-13671059
 ```
 
 ```text filename="Output"
-┌────────────────────────────┬────────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name                   │ Created At           │ Updated At           │
-├────────────────────────────┼────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-morning-meadow-afu2s1jl │ main [default]         │ 2025-08-04T07:07:55Z │ 2025-08-04T07:13:11Z │
-├────────────────────────────┼────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-curly-wave-af4i4oeu     │ br-curly-wave-af4i4oeu │ 2025-08-04T07:13:09Z │ 2025-08-04T07:18:15Z │
-└────────────────────────────┴────────────────────────┴──────────────────────┴──────────────────────┘
+Name                  Id                        Current State  Created At
+[default] main        br-morning-meadow-123456  ready          2026-08-04T07:07:55Z
+br-curly-wave-123456  br-curly-wave-123456      ready          2026-08-04T07:13:09Z
 ```
 
 </TabItem>
@@ -304,14 +300,14 @@ For attribute definitions, find the [List branches](/docs/reference/api/branches
 {
   "branches": [
     {
-      "id": "br-curly-wave-af4i4oeu",
+      "id": "br-curly-wave-123456",
       "project_id": "dry-heart-13671059",
-      "parent_id": "br-morning-meadow-afu2s1jl",
+      "parent_id": "br-morning-meadow-123456",
       "parent_lsn": "0/1FA22C0",
-      "parent_timestamp": "2025-08-04T07:08:48Z",
-      "name": "br-curly-wave-af4i4oeu",
+      "parent_timestamp": "2026-08-04T07:08:48Z",
+      "name": "br-curly-wave-123456",
       "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:13:09Z",
+      "state_changed_at": "2026-08-04T07:13:09Z",
       "creation_source": "console",
       "primary": false,
       "default": false,
@@ -321,8 +317,8 @@ For attribute definitions, find the [List branches](/docs/reference/api/branches
       "active_time_seconds": 0,
       "written_data_bytes": 0,
       "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:13:09Z",
-      "updated_at": "2025-08-04T07:18:15Z",
+      "created_at": "2026-08-04T07:13:09Z",
+      "updated_at": "2026-08-04T07:18:15Z",
       "created_by": {
         "name": "your@email.com",
         "image": ""
@@ -330,11 +326,11 @@ For attribute definitions, find the [List branches](/docs/reference/api/branches
       "init_source": "parent-data"
     },
     {
-      "id": "br-morning-meadow-afu2s1jl",
+      "id": "br-morning-meadow-123456",
       "project_id": "dry-heart-13671059",
       "name": "main",
       "current_state": "ready",
-      "state_changed_at": "2025-08-04T07:07:58Z",
+      "state_changed_at": "2026-08-04T07:07:58Z",
       "logical_size": 30777344,
       "creation_source": "console",
       "primary": true,
@@ -345,8 +341,8 @@ For attribute definitions, find the [List branches](/docs/reference/api/branches
       "active_time_seconds": 0,
       "written_data_bytes": 0,
       "data_transfer_bytes": 0,
-      "created_at": "2025-08-04T07:07:55Z",
-      "updated_at": "2025-08-04T07:13:11Z",
+      "created_at": "2026-08-04T07:07:55Z",
+      "updated_at": "2026-08-04T07:13:11Z",
       "created_by": {
         "name": "your@email.com",
         "image": ""
@@ -399,7 +395,7 @@ To rename a branch:
 Rename a branch with [`neon branches rename`](/docs/cli/branches#rename), passing the current name or ID and the new name:
 
 ```bash
-neon branches rename br-rough-sky-158193 teambranch
+neon branches rename br-rough-sky-123456 teambranch
 ```
 
 </TabItem>
@@ -410,7 +406,7 @@ Rename a branch with the [Update branch](/docs/reference/api/branches/update-pro
 
 ```bash
 curl -X 'PATCH' \
-  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-rough-sky-158193' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-rough-sky-123456' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -446,7 +442,7 @@ To set a branch as the default branch:
 Set the default branch with [`neon branches set-default`](/docs/cli/branches#set-default):
 
 ```bash
-neon branches set-default br-curly-wave-af4i4oeu
+neon branches set-default br-curly-wave-123456
 ```
 
 </TabItem>
@@ -456,7 +452,7 @@ neon branches set-default br-curly-wave-af4i4oeu
 Set the default branch with the [Set default branch](/docs/reference/api/branches/set-default-project-branch) endpoint:
 
 ```bash
-curl -X POST 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu/set_as_default' \
+curl -X POST 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456/set_as_default' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -488,7 +484,7 @@ To set a branch as protected:
 No dedicated command sets protection, so use the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials:
 
 ```bash
-neon api /projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu -X PATCH -F branch.protected=true
+neon api /projects/dry-heart-13671059/branches/br-curly-wave-123456 -X PATCH -F branch.protected=true
 ```
 
 </TabItem>
@@ -498,7 +494,7 @@ neon api /projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu -X PATCH -
 Mark a branch as protected with the [Update branch](/docs/reference/api/branches/update-project-branch) endpoint:
 
 ```bash
-curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -533,7 +529,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 Set an expiration with [`neon branches set-expiration`](/docs/cli/branches#set-expiration). Omit `--expires-at` to remove it:
 
 ```bash
-neon branches set-expiration br-curly-wave-af4i4oeu --expires-at 2025-08-15T18:00:00Z
+neon branches set-expiration br-curly-wave-123456 --expires-at 2025-08-15T18:00:00Z
 ```
 
 </TabItem>
@@ -543,7 +539,7 @@ neon branches set-expiration br-curly-wave-af4i4oeu --expires-at 2025-08-15T18:0
 Set an expiration with the [Update branch](/docs/reference/api/branches/update-project-branch) endpoint:
 
 ```bash
-curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -575,13 +571,13 @@ Click **Connect** in the Console nav, then select the branch, database, and role
 Connect directly with [`neon psql`](/docs/cli/psql):
 
 ```bash
-neon psql br-curly-wave-af4i4oeu
+neon psql br-curly-wave-123456
 ```
 
 Or print the connection string to use elsewhere with [`neon connection-string`](/docs/cli/connection-string) (add `--pooled` or `--prisma` as needed):
 
 ```bash
-neon connection-string br-curly-wave-af4i4oeu --database-name neondb --role-name alex
+neon connection-string br-curly-wave-123456 --database-name neondb --role-name alex
 ```
 
 </TabItem>
@@ -591,7 +587,7 @@ neon connection-string br-curly-wave-af4i4oeu --database-name neondb --role-name
 Retrieve the connection string with the [Get connection URI](/docs/reference/api/projects/get-connection-uri) endpoint (`database_name` and `role_name` are required):
 
 ```bash shouldWrap
-curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/connection_uri?branch_id=br-curly-wave-af4i4oeu&database_name=neondb&role_name=alex' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/connection_uri?branch_id=br-curly-wave-123456&database_name=neondb&role_name=alex' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
@@ -646,7 +642,7 @@ To delete a branch:
 Delete a branch with [`neon branches delete`](/docs/cli/branches#delete), passing the branch name or ID:
 
 ```bash
-neon branches delete br-curly-wave-af4i4oeu
+neon branches delete br-curly-wave-123456
 ```
 
 </TabItem>
@@ -657,7 +653,7 @@ Delete a branch with the [Delete branch](/docs/reference/api/branches/delete-pro
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-123456' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
@@ -670,15 +666,15 @@ For attribute definitions, find the [Delete branches](/docs/reference/api/branch
 ```json
 {
   "branch": {
-    "id": "br-curly-wave-af4i4oeu",
+    "id": "br-curly-wave-123456",
     "project_id": "dry-heart-13671059",
-    "parent_id": "br-morning-meadow-afu2s1jl",
+    "parent_id": "br-morning-meadow-123456",
     "parent_lsn": "0/1FA22C0",
-    "parent_timestamp": "2025-08-04T07:08:48Z",
-    "name": "br-curly-wave-af4i4oeu",
+    "parent_timestamp": "2026-08-04T07:08:48Z",
+    "name": "br-curly-wave-123456",
     "current_state": "ready",
     "pending_state": "storage_deleted",
-    "state_changed_at": "2025-08-04T07:13:09Z",
+    "state_changed_at": "2026-08-04T07:13:09Z",
     "logical_size": 30851072,
     "creation_source": "console",
     "primary": false,
@@ -689,8 +685,8 @@ For attribute definitions, find the [Delete branches](/docs/reference/api/branch
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T07:13:09Z",
-    "updated_at": "2025-08-04T07:21:55Z",
+    "created_at": "2026-08-04T07:13:09Z",
+    "updated_at": "2026-08-04T07:21:55Z",
     "created_by": {
       "name": "your@email.com",
       "image": ""
@@ -701,24 +697,24 @@ For attribute definitions, find the [Delete branches](/docs/reference/api/branch
     {
       "id": "eb85073d-53fc-4d37-a32a-ca9e9ea1eeb1",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
-      "endpoint_id": "ep-soft-art-af5jvg5j",
+      "branch_id": "br-curly-wave-123456",
+      "endpoint_id": "ep-soft-art-123456",
       "action": "suspend_compute",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
+      "created_at": "2026-08-04T07:21:55Z",
+      "updated_at": "2026-08-04T07:21:55Z",
       "total_duration_ms": 0
     },
     {
       "id": "586af342-1ffe-4e0a-9e11-326db1164ad7",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-curly-wave-af4i4oeu",
+      "branch_id": "br-curly-wave-123456",
       "action": "delete_timeline",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:21:55Z",
-      "updated_at": "2025-08-04T07:21:55Z",
+      "created_at": "2026-08-04T07:21:55Z",
+      "updated_at": "2026-08-04T07:21:55Z",
       "total_duration_ms": 0
     }
   ]
@@ -749,7 +745,7 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 Data size is your logical data size.
 
 <Admonition type="note" title="Storage is unlimited on paid plans">
-**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan is limited to 0.5 GB per project.
+**Storage is unlimited on paid plans (Launch and Scale): there's no hard per-branch size limit, and your branch storage grows with your usage.** The Free plan is limited to 1 GB per project.
 </Admonition>
 
 ## Branch types

@@ -58,6 +58,7 @@ const KEY_ORDER = [
   'name',
   'provider',
   'family',
+  'released',
   'attachment',
   'reasoning',
   'reasoning_options',
@@ -229,13 +230,23 @@ async function main() {
 
   const merged = { ...current };
   const noProvider = [];
+  const unreleased = [];
   for (const id of ids) {
     const { model, error } = shape(id, upstream[id]);
     if (error) {
       noProvider.push(error);
       continue;
     }
-    merged[id] = model;
+    // models.dev has no `released`. A re-import keeps the catalog's flag; a model new to the
+    // catalog starts unreleased, because importing it is not announcing it.
+    const isNew = !(id in current);
+    if (isNew) unreleased.push(id);
+    merged[id] = orderKeys({ ...model, released: isNew ? false : current[id].released });
+  }
+  if (unreleased.length) {
+    console.error(
+      `Imported as released: false: ${unreleased.join(', ')}. Set it to true once announced.`
+    );
   }
   if (noProvider.length) {
     console.error(`Could not derive provider for: ${noProvider.join(', ')}`);

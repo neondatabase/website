@@ -43,7 +43,7 @@ The [`@neondatabase/serverless`](/docs/serverless/serverless-driver) driver's `n
 
 ## What it costs
 
-The Free plan covers prototypes: 0.5 GB of storage per project, 100 CU-hours of compute per project per month (enough to run a 0.25 CU compute for about 400 hours), 5 GB of public network transfer per project per month, and 10 branches per project, with [no credit card required](https://neon.com/pricing).
+The Free plan covers prototypes: 1 GB of storage per project, 100 CU-hours of compute per project per month (enough to run a 0.25 CU compute for about 400 hours), 5 GB of public network transfer per project per month, and 10 branches per project, with [no credit card required](https://neon.com/pricing).
 
 On the Launch plan, you pay for usage with no monthly minimum: compute at $0.106/CU-hour and storage at $0.35/GB-month. Compute can [scale to zero](/docs/introduction/scale-to-zero) when idle, which stops CU-hour charges; storage continues to bill. See [plans](/docs/introduction/plans) for the full breakdown.
 

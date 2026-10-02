@@ -29,7 +29,7 @@ The Free plan covers a lot of early use cases at $0/month:
 
 - 100 projects, 10 branches per project
 - 100 CU-hours per project per month (enough to run a 0.25 CU compute for 400 hours)
-- 0.5 GB storage per project
+- 1 GB storage per project
 
 The Launch plan is usage-based, with no monthly minimum. Compute is $0.106/CU-hour and storage is $0.35/GB-month. A small app that averages 0.25 CU for 4 hours a day (about 30 CU-hours/month) with 2 GB of storage comes to about $3.18 in compute and $0.70 in storage.
 

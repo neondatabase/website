@@ -103,7 +103,7 @@ export default {
         title: 'Database storage',
         subtitle: 'Root and child branches',
       },
-      free: 'Free<span>0.5 GB per Project</span>',
+      free: 'Free<span>1 GB per Project</span>',
       launch: '$0.35 per GB-month',
       scale: '$0.35 per GB-month',
     },
