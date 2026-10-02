@@ -111,6 +111,8 @@ The [Embeddings guide](/docs/ai-gateway/embeddings) covers the request and respo
 
 ## Build a complete retrieval pipeline on a Neon branch
 
+**[ADD DIAGRAM]**
+
 If you think about the features teams are constantly shipping these days (a support bot that answers from your docs, search across the files your users upload, an agent with memory), under the hood, they all have a similar shape. Content comes in → gets turned into vectors → gets stored → gets searched when a question arrives → the best matches go to a model that writes the answer.
 
 Now that AI Gateway serves embeddings, every step is backed by a Neon primitive:
