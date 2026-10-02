@@ -46,15 +46,10 @@ neon inspect db table-sizes
 ```
 
 ```text
-┌────────┬───────────┬─────────┐
-│ Schema │ Name      │ Size    │
-├────────┼───────────┼─────────┤
-│ public │ events    │ 16 MB   │
-├────────┼───────────┼─────────┤
-│ public │ orders    │ 4752 kB │
-├────────┼───────────┼─────────┤
-│ public │ customers │ 1616 kB │
-└────────┴───────────┴─────────┘
+Schema  Name       Size
+public  events     16 MB
+public  orders     4752 kB
+public  customers  1616 kB
 ```
 
 ### neon inspect db index-sizes (#db-index-sizes)
@@ -74,17 +69,11 @@ neon inspect db unused-indexes
 ```
 
 ```text
-┌──────────────────┬────────────────────────┬────────────┬─────────────┐
-│ Table            │ Index                  │ Index Size │ Index Scans │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.events    │ events_created_at_idx  │ 1368 kB    │ 0           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.orders    │ orders_customer_id_idx │ 1024 kB    │ 2           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.customers │ customers_email_idx    │ 808 kB     │ 0           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.orders    │ orders_status_idx      │ 560 kB     │ 20          │
-└──────────────────┴────────────────────────┴────────────┴─────────────┘
+Table             Index                   Index Size  Index Scans
+public.events     events_created_at_idx   1368 kB     0
+public.orders     orders_customer_id_idx  1024 kB     2
+public.customers  customers_email_idx     808 kB      0
+public.orders     orders_status_idx       560 kB      20
 ```
 
 ### neon inspect db seq-scans (#db-seq-scans)
@@ -151,15 +140,10 @@ neon inspect db outliers
 <summary>Show output</summary>
 
 ```text
-┌─────────────────┬────────────────┬────────┬───────────────────────────────────────────────────────────────────────┐
-│ Total Exec Time │ Prop Exec Time │ Ncalls │ Query                                                                 │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.875831 │ 57.0%          │ 250    │ SELECT * FROM orders WHERE customer_id = $1                           │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.439406 │ 28.6%          │ 400    │ SELECT * FROM customers WHERE email = $1                              │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.220669 │ 14.4%          │ 15     │ SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status │
-└─────────────────┴────────────────┴────────┴───────────────────────────────────────────────────────────────────────┘
+Total Exec Time  Prop Exec Time  Ncalls  Query
+00:00:00.875831  57.0%           250     SELECT * FROM orders WHERE customer_id = $1
+00:00:00.439406  28.6%           400     SELECT * FROM customers WHERE email = $1
+00:00:00.220669  14.4%           15      SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
 ```
 
 </details>
@@ -176,15 +160,10 @@ neon inspect db calls
 <summary>Show output</summary>
 
 ```text
-┌────────┬─────────────────┬────────────────┬───────────────────────────────────────────────────────────────────────┐
-│ Ncalls │ Total Exec Time │ Prop Exec Time │ Query                                                                 │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 400    │ 00:00:00.439406 │ 59.8%          │ SELECT * FROM customers WHERE email = $1                              │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 250    │ 00:00:00.875831 │ 37.4%          │ SELECT * FROM orders WHERE customer_id = $1                           │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 15     │ 00:00:00.220669 │ 2.2%           │ SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status │
-└────────┴─────────────────┴────────────────┴───────────────────────────────────────────────────────────────────────┘
+Ncalls  Total Exec Time  Prop Exec Time  Query
+400     00:00:00.439406  59.8%           SELECT * FROM customers WHERE email = $1
+250     00:00:00.875831  37.4%           SELECT * FROM orders WHERE customer_id = $1
+15      00:00:00.220669  2.2%            SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
 ```
 
 </details>
@@ -206,17 +185,11 @@ neon inspect db working-set
 ```
 
 ```text
-┌────────┬─────────────┬──────────┬─────────────┐
-│ Window │ Working Set │ Lfc Size │ Exceeds Lfc │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 1m     │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 5m     │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 15m    │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 1h     │ 48 MB       │ 607 MB   │ no          │
-└────────┴─────────────┴──────────┴─────────────┘
+Window  Working Set  Lfc Size  Exceeds Lfc
+1m      48 MB        607 MB    no
+5m      48 MB        607 MB    no
+15m     48 MB        607 MB    no
+1h      48 MB        607 MB    no
 ```
 
 ### neon inspect db vacuum-stats (#db-vacuum-stats)

@@ -9,7 +9,7 @@ summary: >-
   names are capped at 63 bytes; commands require the Neon CLI and either
   browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-roles
   - /docs/cli/role
@@ -34,11 +34,8 @@ neon roles list
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────────┐
-│ Name   │ Created At           │
-├────────┼──────────────────────┤
-│ daniel │ 2023-06-19T18:27:19Z │
-└────────┴──────────────────────┘
+Name          Created At
+neondb_owner  2026-06-19T18:27:19Z
 ```
 
 List roles with the `--output` format set to `json`:
@@ -53,11 +50,11 @@ neon roles list --output json
 ```json
 [
   {
-    "branch_id": "br-odd-frog-703504",
-    "name": "daniel",
+    "branch_id": "br-odd-frog-123456",
+    "name": "neondb_owner",
     "protected": false,
-    "created_at": "2023-06-28T10:17:28Z",
-    "updated_at": "2023-06-28T10:17:28Z"
+    "created_at": "2026-06-28T10:17:28Z",
+    "updated_at": "2026-06-28T10:17:28Z"
   }
 ]
 ```
@@ -77,11 +74,8 @@ neon roles create --name sally
 ```
 
 ```text filename="Output"
-┌───────┬──────────────────────┐
-│ Name  │ Created At           │
-├───────┼──────────────────────┤
-│ sally │ 2023-06-20T00:43:17Z │
-└───────┴──────────────────────┘
+Name   Created At
+sally  2026-06-20T00:43:17Z
 ```
 
 ## neon roles delete (#delete)
@@ -97,9 +91,6 @@ neon roles delete sally
 ```
 
 ```text filename="Output"
-┌───────┬──────────────────────┐
-│ Name  │ Created At           │
-├───────┼──────────────────────┤
-│ sally │ 2023-06-20T00:43:17Z │
-└───────┴──────────────────────┘
+Name   Created At
+sally  2026-06-20T00:43:17Z
 ```

@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
@@ -55,13 +55,9 @@ neon branches list
 ```
 
 ```text filename="Output"
-┌──────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                       │ Name        │ Default │ Created At           │ Updated At           │
-├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-raspy-meadow-26349337 │ development │ false   │ 2023-11-28T19:19:11Z │ 2023-12-01T00:18:21Z │
-├──────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-curly-bar-82389180    │ main        │ true    │ 2023-10-23T12:49:41Z │ 2023-12-01T00:18:21Z │
-└──────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+Name            Id                      Current State  Created At
+development     br-raspy-meadow-123456  ready          2026-11-28T19:19:11Z
+[default] main  br-curly-bar-123456     ready          2026-10-23T12:49:41Z
 ```
 
 ## Using a named context file (#using-a-named-context-file)
@@ -79,15 +75,10 @@ neon branches list --context-file Documents/MyContext
 ```
 
 ```text filename="Output"
-┌─────────────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                          │ Name        │ Default │ Created At           │ Updated At           │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-soft-base-86343042       │ development │ false   │ 2023-11-21T18:41:47Z │ 2023-12-01T00:00:14Z │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-young-bush-89857627      │ main        │ true    │ 2023-11-21T18:00:10Z │ 2023-12-01T03:33:53Z │
-├─────────────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-billowing-union-41102466 │ staging     │ false   │ 2023-11-21T18:44:22Z │ 2023-12-01T08:32:40Z │
-└─────────────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+Name            Id                         Current State  Created At
+development     br-soft-base-123456        ready          2026-11-21T18:41:47Z
+[default] main  br-young-bush-123456       ready          2026-11-21T18:00:10Z
+staging         br-billowing-union-123456  ready          2026-11-21T18:44:22Z
 ```
 
 <Admonition type="note">

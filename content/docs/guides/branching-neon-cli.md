@@ -10,7 +10,7 @@ summary: >-
   Console and API equivalents for these operations are covered on separate
   pages.
 enableTableOfContents: true
-updatedOn: '2026-08-27T23:52:24.570Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -34,24 +34,19 @@ You can use the `--name` option with a `neon branches create` command to specify
 ```bash
 neon branches create
 
-branch
-┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name                  │ Default │ Created At           │ Updated At           │
-├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:22:42Z │
-└───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
-endpoints
-┌────────────────────────┬──────────────────────┐
-│ Id                     │ Created At           │
-├────────────────────────┼──────────────────────┤
-│ ep-mute-voice-52609794 │ 2023-07-24T20:22:42Z │
-└────────────────────────┴──────────────────────┘
-connection_uris
-┌───────────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                        │
-├───────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://[user]:[password]@[neon_hostname]/[dbname]                               │
-└───────────────────────────────────────────────────────────────────────────────────────┘
+Branch
+Name           br-lucky-mud-123456
+Id             br-lucky-mud-123456
+Current State  ready
+Created At     2026-07-24T20:22:42Z
+
+Compute
+Id                    Created At
+ep-mute-voice-123456  2026-07-24T20:22:42Z
+
+Connection string
+Connection Uri
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">
@@ -68,24 +63,19 @@ In this example, we're creating a hotfix branch called `hotfix/critical-fix` usi
 
 ```bash shouldWrap
 neon branches create --name hotfix/critical-fix --parent development --project-id crimson-voice-12345678
-branch
-┌───────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name        │ Default │ Created At           │ Updated At           │
-├───────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-misty-mud-a5poo34s │ hotfix/critical-fix │ false   │ 2024-04-23T17:04:10Z │ 2024-04-23T17:04:10Z │
-└───────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
-endpoints
-┌──────────────────────────┬──────────────────────┐
-│ Id                       │ Created At           │
-├──────────────────────────┼──────────────────────┤
-│ ep-orange-heart-123456 │ 2024-04-23T17:04:10Z │
-└──────────────────────────┴──────────────────────┘
-connection_uris
-┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                                               │
-├──────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://neondb_owner:123456@ep-orange-heart-a54grm9j.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require     │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Branch
+Name           hotfix/critical-fix
+Id             br-misty-mud-123456
+Current State  ready
+Created At     2026-04-23T17:04:10Z
+
+Compute
+Id                      Created At
+ep-orange-heart-123456  2026-04-23T17:04:10Z
+
+Connection string
+Connection Uri
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 ## List branches with the CLI
@@ -97,34 +87,22 @@ First, list your projects to get your project ID:
 ```bash
 neon projects list
 Projects
-┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name               │ Region Id     │ Created At           │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
-├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-│ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
-└────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+Id                      Name      Region Id      Created At
+crimson-voice-12345678  frontend  aws-us-east-2  2026-04-15T11:17:30Z
+calm-thunder-12121212   backend   aws-us-east-2  2026-04-10T15:21:01Z
+nameless-hall-87654321  billing   aws-us-east-2  2026-04-10T14:35:17Z
 Shared with you
-┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
-│ Id                │ Name               │ Region Id        │ Created At           │
-├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
-│ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
-└───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
+Id                 Name  Region Id         Created At
+noisy-fire-212121  API   aws-eu-central-1  2026-04-22T18:41:13Z
 ```
 
 Now list your branches using your project ID:
 
 ```bash
 neon branches list --project-id crimson-voice-12345678
-┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
-│ Name         │ Id                         │ Current State │ Created At           │
-├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-│ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2024-04-23T21:05:05Z │
-├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-│ ✱ main       │ br-bold-wind-a4p92kpx      │ ready         │ 2024-04-23T21:04:57Z │
-└──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+Name                      Id                   Current State  Created At
+development               br-calm-sky-123456   ready          2026-04-23T21:05:05Z
+[default] [current] main  br-bold-wind-123456  ready          2026-04-23T21:04:57Z
 ```
 
 <Admonition type="tip">
@@ -136,12 +114,11 @@ To avoid specifying `--project-id` with each command, use `neon set-context` to 
 The following Neon CLI command deletes the specified branch. This command requires a `--project-id` option unless you've set a default project with `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/cli/branches#delete). You can delete a branch by its ID or name.
 
 ```bash
-neon branches delete br-rough-sky-158193 --project-id crimson-voice-12345678
-┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name                  │ Default │ Created At           │ Updated At           │
-├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-lucky-mud-08878834 │ br-lucky-mud-08878834 │ false   │ 2023-07-24T20:22:42Z │ 2023-07-24T20:44:51Z │
-└───────────────────────┴───────────────────────┴─────────┴──────────────────────┴──────────────────────┘
+neon branches delete br-lucky-mud-123456 --project-id crimson-voice-12345678
+Name           br-lucky-mud-123456
+Id             br-lucky-mud-123456
+Current State  ready
+Created At     2026-07-24T20:22:42Z
 ```
 
 ## Branching automation with the Neon CLI
@@ -203,10 +180,11 @@ This example resets a feature branch to match the latest state of its parent bra
 
 ```bash
 neon branches reset feature/user-auth --parent --project-id crimson-voice-12345678
-┌────────────────────────────┬───────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name              │ Default │ Created At           │ Last Reset At        │
-├────────────────────────────┼───────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-twilight-smoke-123456   │ feature/user-auth │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
+Name           feature/user-auth
+Id             br-twilight-smoke-123456
+Current State  ready
+Created At     2026-04-23T17:01:49Z
+Last Reset At  2026-04-23T17:57:35Z
 ```
 
 <Admonition type="note">
@@ -219,10 +197,11 @@ For example, here we are resetting `feature/user-auth` to its parent while prese
 
 ```bash
 neon branches reset feature/user-auth --parent --preserve-under-name feature/user-auth-backup --project-id crimson-voice-12345678
-┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
-├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-twilight-smoke-a5ofkxry │ feature/user-auth │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T18:02:36Z │
+Name           feature/user-auth
+Id             br-twilight-smoke-123456
+Current State  ready
+Created At     2026-04-23T17:01:49Z
+Last Reset At  2026-04-23T18:02:36Z
 ```
 
 For more details, see [Reset from parent](/docs/guides/reset-from-parent).
@@ -235,28 +214,24 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2024-05-06`:
+This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2026-05-06`:
 
 ```bash shouldWrap
-neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06 --project-id crimson-voice-12345678
+neon branches restore production ^self@2026-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2026-05-06 --project-id crimson-voice-12345678
 ```
 
 Results of the operation:
 
 ```bash shouldWrap
-INFO: Restoring branch br-purple-dust-a5hok5mk to the branch br-purple-dust-a5hok5mk timestamp 2024-05-06T10:00:00.000Z
+INFO: Restoring production to production at timestamp 2026-05-06T10:00:00.000Z
 Restored branch
-┌─────────────────────────┬──────┬──────────────────────┐
-│ Id                      │ Name │ Last Reset At        │
-├─────────────────────────┼──────┼──────────────────────┤
-│ br-purple-dust-a5hok5mk │ main │ 2024-05-07T09:45:21Z │
-└─────────────────────────┴──────┴──────────────────────┘
+Id             br-purple-dust-123456
+Name           production
+Last Reset At  2026-05-07T09:45:21Z
+
 Backup branch
-┌─────────────────────────┬────────────────────────────────┐
-│ Id                      │ Name                           │
-├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ production_restore_backup_2024-05-06 │
-└─────────────────────────┴────────────────────────────────┘
+Id    br-flat-forest-123456
+Name  production_restore_backup_2026-05-06
 ```
 
 For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/introduction/branch-restore#how-to-use-instant-restore).

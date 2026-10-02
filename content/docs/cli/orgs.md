@@ -7,7 +7,7 @@ summary: >-
   or JSON output. Use this command to identify which organizations your account
   belongs to before running project or branch commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-orgs
   - /docs/cli/org
@@ -33,11 +33,8 @@ neon orgs list
 
 ```text filename="Output"
 Organizations
-┌────────────────────────┬──────────────────┐
-│ Id                     │ Name             │
-├────────────────────────┼──────────────────┤
-│ org-xxxxxxxx-xxxxxxxx  │ Example Org      │
-└────────────────────────┴──────────────────┘
+Id                     Name
+org-xxxxxxxx-xxxxxxxx  Example Org
 ```
 
 List your organizations with `--output json`, which also shows the `created_at` and `updated_at` timestamps omitted from the `table` output:
@@ -55,8 +52,8 @@ neon orgs list -o json
     "id": "org-xxxxxxxx-xxxxxxxx",
     "name": "Example Org",
     "handle": "example-org-xxxxxxxx",
-    "created_at": "2024-04-22T16:50:41Z",
-    "updated_at": "2024-06-28T15:38:26Z"
+    "created_at": "2026-04-22T16:50:41Z",
+    "updated_at": "2026-06-28T15:38:26Z"
   }
 ]
 ```
