@@ -27,6 +27,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/generate-embeddings-with-neon-ai-gateway/social.jpg
 ---
 
+![Generate embeddings with Neon AI Gateway](https://cdn.neonapi.io/public/images/pages/blog/generate-embeddings-with-neon-ai-gateway/cover.jpg)
+
 <Admonition type="note" title="We're building backends">
 When a coding agent ships an app today, it deploys the [Neon backend](/blog/neon-backend-is-ga) - [Lakebase Postgres](/docs/postgres/overview) (our database) plus [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [Managed Better Auth](/docs/auth/overview), and [AI Gateway](/docs/ai-gateway/overview). Every primitive branches with your data.
 </Admonition>
