@@ -1403,6 +1403,8 @@
               slug: reference/javascript-sdk
             - title: Neon Management SDK
               slug: reference/typescript-sdk
+            - title: Effect bindings
+              slug: reference/effect-sdk
             - title: Migrate to @neon/sdk
               slug: reference/migrate-api-client-to-sdk
             - title: Python SDK (Neon API)
