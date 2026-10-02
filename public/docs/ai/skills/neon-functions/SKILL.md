@@ -154,6 +154,16 @@ To deploy a single function without applying `neon.ts`: `neon functions deploy <
 
 When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically. Pass `--env <file>` on that create so Function env that reads `process.env` resolves (`neon checkout feat --create --env .env.local`). Existing process env wins over the file. Checking out an existing branch never reconciles it — apply config changes with `neon deploy --env <file>` (add `--update-existing` only after reviewing those changes).
 
+### Native binaries and custom builds
+
+The default deploy bundles `source` into one `index.mjs`, which cannot hold a compiled binary. Ship one as a separate archive file:
+
+- npm package with a Node addon (`sharp`): `externalPackages: ["sharp"]`. The deploy installs its linux-arm64 glibc build and copies the files in.
+- Your own build output (`.node`, `.so`, `.wasm`, data files): `bundler: "none"` with a prebuilt directory, or an inline `bundler: async (fn) => ({ "index.mjs": …, "bin/tool": … })`.
+- A standalone executable you spawn: ship it as above, then copy it to `/run` and `chmod 755` it at startup. Files in `/opt/function` arrive as mode `644` on a read-only filesystem, and `/tmp` is `noexec`.
+
+Runtime target, pros and cons, working snippets, and size limits: [references/native-binaries.md](references/native-binaries.md).
+
 ## Neon Infrastructure as Code (`neon.ts`)
 
 The `functions` block from [Setup](#setup) is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares every function (its `source`, display `name`, and `env`) alongside any other branch services, in version control (see the `neon` skill for the full reference). Treat it like Terraform for your branch:
@@ -652,4 +662,5 @@ The Neon documentation is the source of truth and Functions is evolving rapidly,
 - https://neon.com/docs/compute/functions/custom-domains.md
 - https://neon.com/docs/cli/triggers.md
 - [references/function-triggers.md](references/function-triggers.md)
+- [references/native-binaries.md](references/native-binaries.md)
 - [references/production-hardening.md](references/production-hardening.md)
