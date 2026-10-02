@@ -31,11 +31,9 @@ seo:
 When a coding agent ships an app today, it deploys the [Neon backend](/blog/neon-backend-is-ga) - [Lakebase Postgres](/docs/postgres/overview) (our database) plus [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [Managed Better Auth](/docs/auth/overview), and [AI Gateway](/docs/ai-gateway/overview). Every primitive branches with your data.
 </Admonition>
 
-We just shipped LLM calls into the Neon backend with [AI Gateway](/blog/llms-belong-in-your-backend) - you can directly call frontier and open-weight models, hosted by Databricks and billed through Neon with no markup vs the labs' pricing. A few examples we've shared so far have been for [streaming chat](/guides/llm-proxy-neon-functions) and [agents](/docs/compute/functions/agents), e.g. an [image-generation agent](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) built with the AI SDK and a [personal assistant with Postgres-backed memory](https://github.com/neondatabase/examples/tree/main/with-mastra) built with Mastra.
+Neon now includes [AI Gateway](/blog/llms-belong-in-your-backend), our primitive for calling LLMs directly from Neon. It gives you frontier and open-weight models hosted by Databricks, billed through Neon at the labs' own prices. A few examples we've shared so far have been for [streaming chat](/guides/llm-proxy-neon-functions) and [agents](/docs/compute/functions/agents), e.g. an [image-generation agent](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) built with the AI SDK and a [personal assistant with Postgres-backed memory](https://github.com/neondatabase/examples/tree/main/with-mastra) built with Mastra.
 
-Retrieval needs a second kind of model call. Before you can search your data by meaning, something has to turn each chunk of text into a vector, and until now that step usually meant one more provider account and one more API key sitting next to your Neon credentials. Postgres could store and search the vectors, but it couldn't generate them.
-
-**[Neon AI Gateway now serves embedding models](/docs/ai-gateway/embeddings) on the same OpenAI-compatible endpoint and with the same credential you already use for chat.** Point your SDK at `/v1/embeddings`, write the vectors into [Lakebase Postgres](/lakebase), and query them with [Lakebase Search](/docs/ai/lakebase-search). The whole retrieval pipeline, from the uploaded file to the generated answer, runs inside one Neon branch.
+**The latest addition to AI Gateway: it now [serves embedding models](/docs/ai-gateway/embeddings) on the same OpenAI-compatible endpoint and with the same credential you already use for chat.** Point your SDK at `/v1/embeddings`, write the vectors into [Lakebase Postgres](/lakebase), and query them with [Lakebase Search](/docs/ai/lakebase-search). The whole retrieval pipeline, from the uploaded file to the generated answer, runs inside one Neon branch.
 
 Ask your agent to set it up:
 
@@ -64,7 +62,7 @@ console.log(response.data[0].embedding.length); // 1024
 
 ## Quick intro on the primitives
 
-The pipeline above involves three pieces of the Neon backend: Lakebase Postgres (our database), AI Gateway, and Lakebase Search. In case you're new here, here's a quick primer on each.
+The pipeline above involves three pieces of the Neon backend: [Lakebase Postgres](/docs/postgres/overview) (our database), [AI Gateway](/docs/ai-gateway/overview), and [Lakebase Search](/docs/ai/lakebase-search). In case you're new here, here's a quick primer on each.
 
 ### Lakebase Postgres
 
@@ -96,12 +94,14 @@ Both indexes live in the same Postgres as your app data, so one query can combin
 
 AI Gateway now exposes `POST /v1/embeddings`. It accepts a single string or a batch of up to 150 strings in one request, and returns vectors in the standard OpenAI response shape. Two models are available at launch:
 
-| Model                  | Dimensions          | Normalized              | Price                     |
+| Model                  | Dimensions          | Normalized              | Price (as of Oct 2026)    |
 | ---------------------- | ------------------- | ----------------------- | ------------------------- |
 | `qwen3-embedding-0-6b` | 1024 (configurable) | Yes                     | $0.02 per 1M input tokens |
 | `gte-large-en`         | 1024                | No, use cosine distance | $0.13 per 1M input tokens |
 
-You pay for input tokens only. At $0.02 per 1M tokens, embedding a 10M-token corpus with `qwen3-embedding-0-6b` costs $0.20. AI Gateway is available on the Launch and Scale plans, paid with [prepaid credits](/docs/ai-gateway/prepaid-credits).
+<Admonition type="note" title="Availability">
+AI Gateway is available on the Launch and Scale plans, paid with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you'd like to try it for free, [tell us on Discord](https://discord.gg/92vNTzKDGp): we have credits to give.
+</Admonition>
 
 <Admonition type="tip" title="Choosing a model">
 If you're unsure what to choose, start with `qwen3-embedding-0-6b`, since it's the cheapest option. Use `gte-large-en` if you already have vectors produced by it and need new embeddings to match.
@@ -113,6 +113,8 @@ The [Embeddings guide](/docs/ai-gateway/embeddings) covers the request and respo
 
 **[ADD DIAGRAM]**
 
+Having embeddings in AI Gateway is useful on its own, but it gets more interesting when you zoom out and look at the whole pipeline they're part of.
+
 If you think about the features teams are constantly shipping these days (a support bot that answers from your docs, search across the files your users upload, an agent with memory), under the hood, they all have a similar shape. Content comes in → gets turned into vectors → gets stored → gets searched when a question arrives → the best matches go to a model that writes the answer.
 
 Now that AI Gateway serves embeddings, every step is backed by a Neon primitive:
@@ -123,7 +125,7 @@ Now that AI Gateway serves embeddings, every step is backed by a Neon primitive:
 4. **Retrieve → Lakebase Search:** when a question arrives, Lakebase Search finds the most relevant chunks with vector, keyword, or hybrid search
 5. **Generate → AI Gateway:** the matches go to a chat model through the same gateway and credential, and the model writes the answer
 
-To build it, hand this to your agent:
+To build something like this, hand a prompt like this to your agent:
 
 ```text
 Build a retrieval pipeline on my Neon branch, using the Neon skills and docs:
@@ -137,7 +139,9 @@ Build a retrieval pipeline on my Neon branch, using the Neon skills and docs:
 Docs: https://neon.com/docs/ai-gateway/embeddings.md, https://neon.com/docs/ai/lakebase-search-get-started.md, https://neon.com/docs/compute/functions/triggers/object-storage.md
 ```
 
-**Branching is the connective tissue of this experience.** Create a Neon branch and the whole pipeline follows: it reflects production exactly, it's ready immediately, and it stays lightweight, because none of your rows or files are duplicated.
+### Branching is the connective tissue of this experience
+
+Create a Neon branch and the whole pipeline follows: it reflects production exactly, it's ready immediately, and it stays lightweight, because none of your rows or files are duplicated.
 
 For a retrieval pipeline, this makes it safe and easy to switch embedding models or vector sizes. On a branch, you can re-embed, run your evals against real production data, and keep the change only if it wins. The same loop works for all kinds of experiments: a new chunking strategy, a different hybrid-search weighting, or a different chat model.
 
