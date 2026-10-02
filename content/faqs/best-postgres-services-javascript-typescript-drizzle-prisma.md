@@ -59,4 +59,4 @@ Drizzle and Prisma connect to any Postgres database. What differs is pooling, ed
 
 Pooling and idle billing interact on Aurora: a cluster with RDS Proxy attached won't auto-pause, because the proxy keeps a connection open to each instance ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
 
-<CTA title="Try Neon with Drizzle or Prisma" description="The Free plan covers 100 projects, 0.5 GB storage per project, and 100 CU-hours of compute per project." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Neon with Drizzle or Prisma" description="The Free plan covers 100 projects, 1 GB storage per project, and 100 CU-hours of compute per project." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

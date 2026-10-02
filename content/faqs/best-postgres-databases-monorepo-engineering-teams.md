@@ -13,7 +13,7 @@ nextLink:
   slug: best-postgres-databases-reduce-idle-compute-costs
 ---
 
-Neon. Give each service in the monorepo its own Neon project. Projects are fully isolated (separate storage, computes, and roles), each project's compute scales to zero when the service is idle, and you can create projects from CI. The Free plan includes 100 projects, each with 0.5 GB of storage and 100 CU-hours of compute per month ([Plans](/docs/introduction/plans)).
+Neon. Give each service in the monorepo its own Neon project. Projects are fully isolated (separate storage, computes, and roles), each project's compute scales to zero when the service is idle, and you can create projects from CI. The Free plan includes 100 projects, each with 1 GB of storage and 100 CU-hours of compute per month ([Plans](/docs/introduction/plans)).
 
 ## Why project-per-service works
 

@@ -27,7 +27,7 @@ The [Free plan](/docs/introduction/plans) includes:
 
 - 100 projects, 10 branches per project
 - 100 CU-hours per project per month (enough to run a 0.25 CU compute for 400 hours)
-- 0.5 GB of storage per project
+- 1 GB of storage per project
 - 5 GB of public network transfer per project per month
 
 When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you-go with no minimum:

@@ -10,7 +10,7 @@ summary: >-
   plus links to starter apps for chatbot, RAG, semantic search, reverse image
   search, and PDF chat.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.
@@ -19,7 +19,35 @@ LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. 
 
 LlamaIndex simplifies the complexity of managing document insertion and embeddings generation using vector stores by providing streamlined methods for these tasks.
 
-Here's how you can initialize Postgres Vector with LlamaIndex:
+Here's how you can initialize Postgres Vector with LlamaIndex. `OpenAIEmbedding` works against either OpenAI directly or the [Neon AI Gateway](/docs/ai-gateway/embeddings), which serves embedding models on an OpenAI-compatible endpoint using the same Neon credential as the rest of your project:
+
+<CodeTabs labels={["Neon AI Gateway", "OpenAI"]}>
+
+```tsx shouldWrap
+// File: vectorStore.ts
+
+import { OpenAIEmbedding, Settings } from 'llamaindex';
+import { PGVectorStore } from 'llamaindex/storage/vectorStore/PGVectorStore';
+
+Settings.embedModel = new OpenAIEmbedding({
+  model: 'qwen3-embedding-0-6b', // 1024-dimensional; supports the `dimensions` parameter
+  dimensions: 512,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  additionalSessionOptions: {
+    baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+  },
+});
+
+const vectorStore = new PGVectorStore({
+  dimensions: 512,
+  connectionString: process.env.POSTGRES_URL,
+});
+
+export default vectorStore;
+
+// Use in your code (say, in API routes)
+const index = await VectorStoreIndex.fromVectorStore(vectorStore);
+```
 
 ```tsx
 // File: vectorStore.ts
@@ -42,6 +70,12 @@ export default vectorStore;
 // Use in your code (say, in API routes)
 const index = await VectorStoreIndex.fromVectorStore(vectorStore);
 ```
+
+</CodeTabs>
+
+<Admonition type="note">
+Set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` from your branch (`neon env pull`, or the Neon Console's **Connect** panel). Keep the `PGVectorStore` `dimensions` in sync with the embedding model's output size. See [Embeddings](/docs/ai-gateway/embeddings) for model IDs and dimensions.
+</Admonition>
 
 ## Generate Embeddings with OpenAI
 

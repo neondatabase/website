@@ -29,7 +29,7 @@ The [Free plan](/docs/introduction/plans) covers most early development:
 
 - 100 projects, 10 branches each
 - 100 CU-hours per project per month
-- 0.5 GB storage per project
+- 1 GB storage per project
 - Autoscaling up to 2 CU (≈8 GB RAM)
 - Scale-to-zero after 5 minutes
 

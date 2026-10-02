@@ -1,4 +1,4 @@
-text: "In Neon, restoring 100 TB takes as long as restoring 10 GB (seconds). See how"
+text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
 link:
-  url: 'https://neon.com/blog/inside-branch-based-restores-in-lakebase-postgres'
+  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
   target: '_blank'

@@ -7,10 +7,10 @@ summary: >-
   Postgres. Read this page to understand how embeddings work before building AI
   features such as semantic search, recommendations, or anomaly detection on
   Neon. Topics include distance metrics (Euclidean, Manhattan, cosine),
-  generating embeddings with OpenAI models, and storing vectors in Postgres
-  using the pgvector extension.
+  generating embeddings with the Neon AI Gateway or OpenAI, storing vectors with
+  the pgvector extension, and searching them at scale with Lakebase Search.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
@@ -63,9 +63,58 @@ Different distance metrics can be more appropriate for different tasks, dependin
 
 ## Generating embeddings
 
-A common approach to generating embeddings is to use an LLM API, such as [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). This API allows you to input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" is a simplistic example with 3 dimensions. Most embedding models generate embeddings with a much larger number of dimensions. OpenAI's newest and most performant embedding models, `text-embedding-3-small` and `text-embedding-3-large`, generate embeddings with 1536 and 3072 dimensions by default, respectively.
+A common approach to generating embeddings is to use an embeddings API, such as the [Neon AI Gateway](/docs/ai-gateway/embeddings) or [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings). These APIs let you input a text string into an API endpoint, which then returns the corresponding embedding. The "cow jumped over the moon" is a simplistic example with 3 dimensions, but most embedding models generate vectors with many more.
 
-Here's an example of how to use OpenAI's `text-embedding-3-small` model to generate an embedding:
+The examples below send the same text to each API and get a vector back. Size your `vector` column to match the model you choose.
+
+<Tabs labels={["Neon AI Gateway", "OpenAI"]}>
+
+<TabItem>
+
+The [Neon AI Gateway](/docs/ai-gateway/embeddings) serves embedding models on an OpenAI-compatible endpoint, using the same Neon credential as the rest of your project instead of a separate provider key. Its `qwen3-embedding-0-6b` and `gte-large-en` models return 1024-dimensional vectors.
+
+```bash
+curl "$NEON_AI_GATEWAY_BASE_URL/v1/embeddings" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+  -d '{
+    "input": "Your text string goes here",
+    "model": "qwen3-embedding-0-6b",
+    "encoding_format": "float"
+  }'
+```
+
+The `model` field in the response reports the resolved, versioned model name that served the request:
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "embedding",
+      "index": 0,
+      "embedding": [
+        -0.00520731508731842,
+        -0.01622946560382843,
+        -0.011803247034549713,
+        -0.06526501476764679,
+        ... (1024 values total, omitted for spacing)
+      ]
+    }
+  ],
+  "model": "qwen3-embedding-0-6b-112025",
+  "usage": {
+    "prompt_tokens": 6,
+    "total_tokens": 6
+  }
+}
+```
+
+</TabItem>
+
+<TabItem>
+
+OpenAI's `text-embedding-3-small` and `text-embedding-3-large` models generate 1536- and 3072-dimensional vectors by default. Generating an embedding requires an API key from [OpenAI](https://platform.openai.com/).
 
 ```bash
 curl https://api.openai.com/v1/embeddings \
@@ -73,13 +122,10 @@ curl https://api.openai.com/v1/embeddings \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d '{
     "input": "Your text string goes here",
-    "model": "text-embedding-3-small"
+    "model": "text-embedding-3-small",
+    "encoding_format": "float"
   }'
 ```
-
-<Admonition type="note">
-Running the command above requires an OpenAI API key, which must be obtained from [OpenAI](https://platform.openai.com/).
-</Admonition>
 
 If it works, you'll get a response like this:
 
@@ -96,7 +142,7 @@ If it works, you'll get a response like this:
         ... (omitted for spacing)
         -4.547132266452536e-05,
         -0.024047505110502243
-      ],
+      ]
     }
   ],
   "model": "text-embedding-3-small",
@@ -107,13 +153,19 @@ If it works, you'll get a response like this:
 }
 ```
 
+</TabItem>
+
+</Tabs>
+
+See [Embeddings](/docs/ai-gateway/embeddings) for the full gateway model list and options.
+
 To learn more about OpenAI's embeddings, see [Embeddings](https://platform.openai.com/docs/guides/embeddings). Here, you'll find an example of obtaining embeddings from an [Amazon fine-food reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews) dataset supplied as a CSV file. See [Obtaining the embeddings](https://platform.openai.com/docs/guides/embeddings/use-cases).
 
 There are many embedding models you can use, such as those provided by Mistral AI, Cohere, Hugging Face, etc. AI tools like [LangChain](https://www.langchain.com/) provide interfaces and integrations for working with a variety of models. See [LangChain: Text embedding models](https://js.langchain.com/v0.1/docs/integrations/text_embedding/). You'll also find a [Neon Postgres guide](https://js.langchain.com/v0.1/docs/integrations/vectorstores/neon/) on the LangChain site and [Class NeonPostgres](https://v02.api.js.langchain.com/classes/langchain_community_vectorstores_neon.NeonPostgres.html), which provides an interface for working with a Lakebase Postgres database.
 
 ## Storing vector embeddings in Postgres
 
-Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enables the storage and retrieval of vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension simply requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your Lakebase Postgres database.
+Neon supports the [pgvector](/docs/extensions/pgvector) Postgres extension, which enables the storage and retrieval of vector embeddings directly within your Postgres database. When building AI applications, installing this extension eliminates the need to extend your architecture to include a separate vector store. Installing the `pgvector` extension requires running the following `CREATE EXTENSION` statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your Lakebase Postgres database.
 
 ```sql
 CREATE EXTENSION vector;
@@ -138,3 +190,9 @@ INSERT INTO items(embedding) VALUES ('[
 ```
 
 For detailed information about using `pgvector`, refer to our guide: [The pgvector extension](/docs/extensions/pgvector).
+
+## Searching vector embeddings at scale
+
+`pgvector` gives you the `vector` type and similarity operators. To index and search embeddings at scale, Neon offers [Lakebase Search](/docs/ai/lakebase-search). Its [`lakebase_vector`](/docs/extensions/lakebase-vector) extension adds the `lakebase_ann` index for approximate nearest-neighbor search on your existing `pgvector` columns, with no schema or query changes, and scales to over a billion vectors on a single index. Pair it with `lakebase_text` for BM25 keyword search and hybrid results.
+
+For an end-to-end walkthrough that generates embeddings with the AI Gateway, stores them in Postgres, and runs vector, keyword, and hybrid searches, see [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started).

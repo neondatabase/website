@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-09-14T11:31:53.481Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 ---
 
 <InfoBlock>
@@ -21,6 +21,10 @@ updatedOn: '2026-09-14T11:31:53.481Z'
 </InfoBlock>
 
 This page covers managing the Data API after it is enabled. To enable via the Console, see [Getting started with Data API](/docs/data-api/get-started). To enable programmatically, see [Enable via the Neon API](#enable) or [Enable via the CLI](#enable-via-the-cli). To disable from the Console, scroll to **Disable** at the bottom of the **Settings** tab.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial), and run the [Data API advisors](/docs/data-api/database-advisor) to catch misconfigurations.
+</Admonition>
 
 ## Manage authentication providers
 

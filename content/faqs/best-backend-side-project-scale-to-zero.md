@@ -19,7 +19,7 @@ Neon. A side project gets a burst of traffic when you share it and then sits qui
 
 Compute drops to $0 while suspended. Storage continues to bill, so the idle cost of a paid-plan side project is its data size: 0.5 GB × $0.35 = $0.18/month on Launch. When someone uses the app, a 0.25 CU compute (≈1 GB RAM) bills $0.106 per active hour. Ten active hours a month is 2.5 CU-hours, or $0.27 ([plans](/docs/introduction/plans)).
 
-On the Free plan there's no bill at all within the allowances: 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 0.5 GB of storage per project, 5 GB of public network transfer per project per month, and 10 branches per project. Past the 0.5 GB storage cap, operations that grow storage fail until you free space or upgrade, so going over the cap stops writes instead of adding charges ([plans](/docs/introduction/plans)).
+On the Free plan there's no bill at all within the allowances: 100 CU-hours of compute per project per month (a 0.25 CU compute for 400 hours), 1 GB of Postgres storage per project, 5 GB of public network transfer per project per month, and 10 branches per project. Past the 1 GB storage cap, operations that grow storage fail until you free space or upgrade, so going over the cap stops writes instead of adding charges ([plans](/docs/introduction/plans)).
 
 ## More than a database
 

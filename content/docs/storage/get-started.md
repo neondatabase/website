@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-09-29T21:04:10.398Z'
 ---
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
@@ -43,6 +43,8 @@ export default defineConfig({
   },
 });
 ```
+
+To declare a bucket without editing `neon.ts` by hand, run `neon config add bucket my-bucket` (add `--access public_read` for anonymous reads). See [`neon config add`](/docs/cli/config#add).
 
 ```bash
 neon deploy          # provisions buckets and writes AWS_* vars to .env.local

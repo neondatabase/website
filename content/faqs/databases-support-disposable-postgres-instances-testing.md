@@ -49,7 +49,7 @@ Neon deletes the branch at that time. The timestamp uses RFC 3339 format and can
 
 Plan allowances ([Plans](/docs/introduction/plans)):
 
-- **Free plan**: 10 branches per project, 100 projects, 0.5 GB storage per project, no extra branches
+- **Free plan**: 10 branches per project, 100 projects, 1 GB storage per project, no extra branches
 - **Launch plan**: 10 branches per project included, then $1.50/branch-month for extras, metered hourly
 - **Scale plan**: 25 branches per project included, with the same rate for extras
 

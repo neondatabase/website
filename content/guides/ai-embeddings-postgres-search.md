@@ -4,7 +4,7 @@ subtitle: Learn how to create a semantic search system using AI embeddings, Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
 Traditional text search relies on exact keyword matches, which often misses the semantic meaning behind queries.
@@ -196,6 +196,21 @@ module.exports = EmbeddingService;
 This service preprocesses text so it fits within OpenAI's token limits, combines document fields into a single labeled string, and handles API errors. The `createDocumentText` method labels the title, category, and content so the embedding reflects all three.
 
 At the time of writing, OpenAI's `text-embedding-3-small` model is its lowest-cost embedding model. Check [OpenAI's embeddings guide](https://platform.openai.com/docs/guides/embeddings) for current models.
+
+<Admonition type="tip" title="Generate embeddings with the Neon AI Gateway">
+The [Neon AI Gateway](/docs/ai-gateway/embeddings) serves embedding models on the same OpenAI-compatible API, so you can generate embeddings with the same Neon credential you use for the rest of your project, no separate OpenAI key required. Point the client at your branch's gateway URL and pick a gateway model:
+
+```javascript shouldWrap
+const openai = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+});
+// ...then set this.model = 'qwen3-embedding-0-6b' in the service, and pass
+// encoding_format: 'float' on the create() call for the openai SDK v6.
+```
+
+The gateway's `qwen3-embedding-0-6b` model returns **1024-dimensional** vectors, so change the schema's `embedding vector(1536)` to `embedding vector(1024)` to match. See [Embeddings](/docs/ai-gateway/embeddings) for the model list and options.
+</Admonition>
 
 ## Creating a document management system
 

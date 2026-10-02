@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-09-26T07:10:22.076Z'
+updatedOn: '2026-10-02T15:33:41.229Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -169,11 +169,12 @@ Branch and optimize Postgres projects.
 
 Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
 
-| Skill                                                                                    | Description                                                                                                     | Docs                                               |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [`neon-functions`](https://skills.sh/neondatabase/agent-skills/neon-functions)           | Long-running serverless Node.js HTTP functions on your branch, with `DATABASE_URL` injected automatically       | [Neon Functions](/docs/compute/functions/overview) |
-| [`neon-object-storage`](https://skills.sh/neondatabase/agent-skills/neon-object-storage) | S3-compatible object storage that branches with your project                                                    | [Object Storage](/docs/storage/overview)           |
-| [`neon-ai-gateway`](https://skills.sh/neondatabase/agent-skills/neon-ai-gateway)         | One API and credential for frontier and open-source LLMs; compatible with OpenAI, Anthropic, and Vercel AI SDKs | [AI Gateway](/docs/ai-gateway/overview)            |
+| Skill                                                                                    | Description                                                                                                         | Docs                                               |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [`neon-functions`](https://skills.sh/neondatabase/agent-skills/neon-functions)           | Long-running serverless Node.js HTTP functions on your branch, with `DATABASE_URL` injected automatically           | [Neon Functions](/docs/compute/functions/overview) |
+| [`neon-object-storage`](https://skills.sh/neondatabase/agent-skills/neon-object-storage) | S3-compatible object storage that branches with your project                                                        | [Object Storage](/docs/storage/overview)           |
+| [`neon-ai-gateway`](https://skills.sh/neondatabase/agent-skills/neon-ai-gateway)         | One API and credential for frontier and open-source LLMs; compatible with OpenAI, Anthropic, and Vercel AI SDKs     | [AI Gateway](/docs/ai-gateway/overview)            |
+| [`neon-auth`](https://skills.sh/neondatabase/agent-skills/neon-auth)                     | Add authentication with Managed Better Auth: sign-up, sign-in, OAuth, magic links, OTP, passkeys, and organizations | [Neon Auth](/docs/auth/overview)                   |
 
 ### Agent platforms
 

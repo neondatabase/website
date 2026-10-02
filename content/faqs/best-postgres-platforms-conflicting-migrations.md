@@ -39,7 +39,7 @@ When the PR merges, apply the same migration to production through your normal d
 
 ## Plan limits
 
-- **Free plan**: 100 projects, 10 branches per project, 0.5 GB storage per project.
+- **Free plan**: 100 projects, 10 branches per project, 1 GB storage per project.
 - **Launch and Scale plans**: 10 and 25 branches per project, plus extra branches at $1.50/branch-month (metered hourly).
 
 A feature branch that adds a column or two stays cheap because you're billed only for the changes on the branch plus compute time ([Plans](/docs/introduction/plans#storage)). Compute [scales to zero](/docs/introduction/scale-to-zero) after 5 minutes of inactivity by default, so branches nobody is using don't bill for compute.

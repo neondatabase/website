@@ -14,6 +14,7 @@ const model = (over = {}) => ({
   name: 'A',
   provider: 'openai',
   family: 'gpt',
+  released: true,
   attachment: false,
   reasoning: false,
   tool_call: true,
@@ -35,6 +36,7 @@ const embeddingModel = (over = {}) => ({
   name: 'A',
   provider: 'alibaba',
   family: 'text-embedding',
+  released: true,
   type: 'embedding',
   dimensions: 1024,
   open_weights: true,
@@ -294,6 +296,28 @@ describe('validateCatalog', () => {
     const errors = validateCatalog(catalog({ a: withoutLimit }));
 
     expect(errors).toEqual([expect.stringContaining('a.limit is missing')]);
+  });
+
+  describe('released', () => {
+    it('is required on chat and embedding models alike', () => {
+      const { released: _chat, ...chat } = model();
+      const { released: _embedding, ...embedding } = embeddingModel({ id: 'b' });
+
+      expect(validateCatalog(catalog({ a: chat, b: embedding }))).toEqual([
+        'a.released is missing',
+        'b.released is missing',
+      ]);
+    });
+
+    it('accepts false for a model cataloged ahead of its announcement', () => {
+      expect(validateCatalog(catalog({ a: model({ released: false }) }))).toEqual([]);
+    });
+
+    it('rejects a non-boolean', () => {
+      expect(validateCatalog(catalog({ a: model({ released: 'yes' }) }))).toEqual([
+        'a.released must be a boolean',
+      ]);
+    });
   });
 
   it('rejects an unknown modality or limit key', () => {

@@ -8,7 +8,7 @@ summary: >-
   additional account and quota fields, including plan type, branches limit,
   max autoscaling limit, billing_account, and auth_accounts.
 enableTableOfContents: true
-updatedOn: '2026-07-10T14:13:44.798Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-me
 ---
@@ -30,11 +30,10 @@ neon me
 ```
 
 ```text filename="Output"
-┌────────────────┬──────────────────────────┬─────────────┬────────────────┐
-│ Login          │ Email                    │ Name        │ Projects Limit │
-├────────────────┼──────────────────────────┼─────────────┼────────────────┤
-│ sally          │ sally@example.com        │ Sally Smith │       1        │
-└────────────────┴──────────────────────────┴─────────────┴────────────────┘
+Login           sally
+Email           sally@example.com
+Name            Sally Smith
+Projects Limit  1
 ```
 
 Show details with `--output json`, which includes data omitted from the `table` output:
@@ -54,7 +53,7 @@ neon me -o json
       "type": ""
     },
     "subscription_type": "free",
-    "quota_reset_at_last": "2023-07-01T00:00:00Z",
+    "quota_reset_at_last": "2026-07-01T00:00:00Z",
     "email": "sally@example.com",
     "address_city": "",
     "address_country": "",

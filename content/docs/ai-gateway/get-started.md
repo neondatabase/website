@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-01T22:38:59.908Z'
 ---
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
@@ -21,7 +21,7 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 ## Get access
 
-You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which gives you the open-weight models. To request access to foundation models, see [Model access](/docs/ai-gateway/overview#model-access).
+You need a project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Using the AI Gateway requires a paid Neon plan with prepaid credits, which gives you every model in the catalog. See [Model access](/docs/ai-gateway/overview#model-access) for details.
 
 ## Create a credential
 
@@ -43,7 +43,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 ```
 
 <Callout title="Using neon.ts?">
-If your project has a `neon.ts` file, declare `aiGateway: true` and run `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically, with no manual creation step. See [Authentication](/docs/ai-gateway/authentication) for details.
+If your project has a `neon.ts` file, run [`neon config add ai-gateway`](/docs/cli/config#add) (or declare `aiGateway: true` yourself) and then `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically, with no manual creation step. See [Authentication](/docs/ai-gateway/authentication) for details.
 </Callout>
 
 Store the credential as an environment variable:

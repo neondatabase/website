@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-09-25T10:52:19.537Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 <InfoBlock>
@@ -171,24 +171,17 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    Projects
-   ┌─────────────────────┬────────────┬───────────────┬──────────────────────┐
-   │ Id                  │ Name       │ Region Id     │ Created At           │
-   ├─────────────────────┼────────────┼───────────────┼──────────────────────┤
-   │ cool-forest-12345678│ myproject  │ aws-us-east-2 │ 2025-10-14T14:33:43Z │
-   └─────────────────────┴────────────┴───────────────┴──────────────────────┘
+   Id                    Name       Region Id      Created At
+   cool-forest-12345678  myproject  aws-us-east-2  2026-10-14T14:33:43Z
    ```
 
    Now list your branches using your project ID:
 
    ```bash
    neon branches list --project-id cool-forest-12345678
-   ┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
-   │ Name         │ Id                         │ Current State │ Created At           │
-   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-   │ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2025-12-23T21:05:05Z │
-   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-   │ ✱ production │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
-   └──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+   Name                            Id                   Current State  Created At
+   development                     br-calm-sky-123456   ready          2026-12-23T21:05:05Z
+   [default] [current] production  br-bold-wind-123456  ready          2026-12-23T21:04:57Z
    ```
 
    This command shows your existing branches, including the `production` branch and the `development` branch you just created.

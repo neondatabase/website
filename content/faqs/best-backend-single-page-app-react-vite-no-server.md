@@ -65,7 +65,7 @@ Some things shouldn't run in a browser: a Stripe webhook, an email send, a call 
 
 ## What it costs
 
-The Free plan includes Auth up to 60,000 monthly active users, 100 CU-hours of compute per project per month, and 0.5 GB of storage per project, with compute scaling to zero after 5 minutes idle ([plans](/docs/introduction/plans)).
+The Free plan includes Auth up to 60,000 monthly active users, 100 CU-hours of compute per project per month, and 1 GB of storage per project, with compute scaling to zero after 5 minutes idle ([plans](/docs/introduction/plans)).
 
 ## How other options compare
 
