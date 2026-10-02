@@ -90,6 +90,10 @@ The pipeline above involves three pieces of the Neon backend: [Lakebase Postgres
 
 Both indexes live in the same Postgres as your app data, so one query can combine them, join your tables, and filter by tenant. **Lakebase Search is also built for scale to zero:** indexes live in storage, so they're ready after a cold start and available on every branch with no rebuild.
 
+<Admonition type="tip" title="Leading on price-performance">
+We recently ran VectorDBBench on LAION-100M, and Lakebase Search led the tested systems on price-performance. See the results in [Lakebase Search: the retrieval primitive for agents on Neon](/blog/lakebase-search-retrieval-agents).
+</Admonition>
+
 ## What's new: embeddings on AI Gateway
 
 AI Gateway now exposes `POST /v1/embeddings`. It accepts a single string or a batch of up to 150 strings in one request, and returns vectors in the standard OpenAI response shape. Two models are available at launch:
