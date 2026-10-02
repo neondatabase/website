@@ -40,7 +40,7 @@ We don't want you hitting limits on Neon. We know you're building more than ever
 
 The Neon Free plan assumes the agent workflow: lots of projects, lots of experiments, most of them idle most of the time. You get 100 projects, each with its own compute allowance, and as of today each with 1 GB of Postgres storage.
 
-More storage per project was one of the most requested changes to the Free plan. We can ship it because Neon gets more efficient as it grows, and there are now 3 million developers building on Neon ([more on why our architecture makes this possible](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan)).
+More storage per project was one of the most requested changes to the Free plan. We can ship it because Neon gets more efficient as it grows - we're creating new projects at a rate of more than one per second.
 
 If there's something else you'd like to see, tell us on [Discord](https://neon.com/discord). We really listen.
 
