@@ -115,7 +115,7 @@ The [Embeddings guide](/docs/ai-gateway/embeddings) covers the request and respo
 
 ## Build a complete retrieval pipeline on a Neon branch
 
-**[ADD DIAGRAM]**
+![Retrieval pipeline on a Neon branch: ingest files, generate embeddings, store vectors, retrieve matches, and generate answers](https://cdn.neonapi.io/public/images/pages/blog/generate-embeddings-with-neon-ai-gateway/diagram.jpg)
 
 Having embeddings in AI Gateway is useful on its own, but it gets more interesting when you zoom out and look at the whole pipeline they're part of.
 
