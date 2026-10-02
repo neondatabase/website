@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -114,24 +114,24 @@ For attribute definitions, find the [Create role](/docs/reference/api/branches/c
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "password": "npg_A9xYoejTz6iQ",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:47:05Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:47:05Z"
   },
   "operations": [
     {
       "id": "9c61fc28-c89e-4b25-ad5c-8777742e66a3",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:47:05Z",
-      "updated_at": "2025-08-04T07:47:05Z",
+      "created_at": "2026-08-04T07:47:05Z",
+      "updated_at": "2026-08-04T07:47:05Z",
       "total_duration_ms": 0
     }
   ]
@@ -167,13 +167,9 @@ neon roles list
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────────┐
-│ Name   │ Created At           │
-├────────┼──────────────────────┤
-│ daniel │ 2023-06-19T18:27:19Z │
-├────────┼──────────────────────┤
-│ alex   │ 2023-07-13T06:42:55Z │
-└────────┴──────────────────────┘
+Name          Created At
+neondb_owner  2026-06-19T18:27:19Z
+alex          2026-07-13T06:42:55Z
 ```
 
 </TabItem>
@@ -197,18 +193,18 @@ For attribute definitions, find the [List roles](/docs/reference/api/branches/li
 {
   "roles": [
     {
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "name": "daniel",
+      "branch_id": "br-morning-meadow-123456",
+      "name": "neondb_owner",
       "protected": false,
-      "created_at": "2023-07-09T17:01:34Z",
-      "updated_at": "2023-07-09T17:01:34Z"
+      "created_at": "2026-07-09T17:01:34Z",
+      "updated_at": "2026-07-09T17:01:34Z"
     },
     {
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "alex",
       "protected": false,
-      "created_at": "2023-07-13T06:42:55Z",
-      "updated_at": "2023-07-13T14:48:29Z"
+      "created_at": "2026-07-13T06:42:55Z",
+      "updated_at": "2026-07-13T14:48:29Z"
     }
   ]
 }
@@ -266,23 +262,23 @@ For attribute definitions, find the [Delete role](/docs/reference/api/branches/d
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:51:10Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:51:10Z"
   },
   "operations": [
     {
       "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:53:22Z",
-      "updated_at": "2025-08-04T07:53:22Z",
+      "created_at": "2026-08-04T07:53:22Z",
+      "updated_at": "2026-08-04T07:53:22Z",
       "total_duration_ms": 0
     }
   ]
@@ -331,24 +327,24 @@ For attribute definitions, find the [Reset role password](/docs/reference/api/br
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "password": "npg_iDKnwMW7bUg5",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:51:10Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:51:10Z"
   },
   "operations": [
     {
       "id": "23b3db33-d36a-45bf-9fda-0e73b5b272e5",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:51:10Z",
-      "updated_at": "2025-08-04T07:51:10Z",
+      "created_at": "2026-08-04T07:51:10Z",
+      "updated_at": "2026-08-04T07:51:10Z",
       "total_duration_ms": 0
     }
   ]

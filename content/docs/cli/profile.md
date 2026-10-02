@@ -26,11 +26,10 @@ neon me --profile work
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────┬────────────┬────────────────┐
-│ Login  │ Email            │ Name       │ Projects Limit │
-├────────┼──────────────────┼────────────┼────────────────┤
-│ alex   │ alex@domain.com  │ Alex Lopez │ 0              │
-└────────┴──────────────────┴────────────┴────────────────┘
+Login           alex
+Email           alex@domain.com
+Name            Alex Lopez
+Projects Limit  0
 ```
 
 Naming a profile that doesn't exist is an error, not a silent fall back to `DEFAULT`.
@@ -105,21 +104,13 @@ neon profile list
 
 ```text filename="Output"
 Profiles
-┌────────┬─────────┬──────────────────────────────────────┬─────────┬────────────────────────────────┬──────┬─────────┬──────────────────────────┐
-│ Active │ Name    │ Account                              │ Auth    │ Scope                          │ File │ Storage │ Credentials              │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│ *      │ DEFAULT │ 3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53 │ oauth   │ -                              │ ok   │ file    │ credentials.json         │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│        │ work    │ alex@example.com                     │ oauth   │ -                              │ ok   │ file    │ credentials.work.json    │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│        │ ci      │ alex@example.com                     │ api key │ account                        │ ok   │ file    │ credentials.ci.json      │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│        │ org     │ org-example-12345678                 │ api key │ org org-example-12345678       │ ok   │ file    │ credentials.org.json     │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│        │ project │ org-example-12345678                 │ api key │ project cool-darkness-12345678 │ ok   │ file    │ credentials.project.json │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
-│        │ laptop  │ alex@example.com                     │ oauth   │ -                              │ ok   │ keyring │ keyring                  │
-└────────┴─────────┴──────────────────────────────────────┴─────────┴────────────────────────────────┴──────┴─────────┴──────────────────────────┘
+Active  Name     Account                               Auth     Scope                           File  Storage  Credentials
+*       DEFAULT  3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53  oauth    -                               ok    file     credentials.json
+        work     alex@example.com                      oauth    -                               ok    file     credentials.work.json
+        ci       alex@example.com                      api key  account                         ok    file     credentials.ci.json
+        org      org-example-12345678                  api key  org org-example-12345678        ok    file     credentials.org.json
+        project  org-example-12345678                  api key  project cool-darkness-12345678  ok    file     credentials.project.json
+        laptop   alex@example.com                      oauth    -                               ok    keyring  keyring
 ```
 
 `Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key), and `Scope` shows what a minted key is limited to: `account`, `org <org-id>`, or `project <project-id>`. `File` reports whether the credential could be read: `ok` when it's present and readable, otherwise `missing`, `invalid`, or `unreadable`. `Storage` shows where the credential lives, `file` or `keyring`, and `Credentials` gives the file's name, or `keyring` when it's kept in the OS keyring.

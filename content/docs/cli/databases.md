@@ -9,7 +9,7 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-databases
   - /docs/cli/database
@@ -33,11 +33,8 @@ neon databases list --branch br-autumn-dust-190886
 ```
 
 ```text filename="Output"
-┌────────┬────────────┬──────────────────────┐
-│ Name   │ Owner Name │ Created At           │
-├────────┼────────────┼──────────────────────┤
-│ neondb │ daniel     │ 2023-06-19T18:27:19Z │
-└────────┴────────────┴──────────────────────┘
+Name    Owner Name    Created At
+neondb  neondb_owner  2026-06-19T18:27:19Z
 ```
 
 ## neon databases create (#create)
@@ -49,15 +46,12 @@ Creates a database. If you don't specify `--owner-name`, the current user become
 <CliOptions command="databases create" />
 
 ```bash
-neon databases create --name mynewdb --owner-name john
+neon databases create --name mynewdb --owner-name alex
 ```
 
 ```text filename="Output"
-┌─────────┬────────────┬──────────────────────┐
-│ Name    │ Owner Name │ Created At           │
-├─────────┼────────────┼──────────────────────┤
-│ mynewdb │ john       │ 2023-06-19T23:45:45Z │
-└─────────┴────────────┴──────────────────────┘
+Name     Owner Name  Created At
+mynewdb  alex        2026-06-19T23:45:45Z
 ```
 
 ## neon databases delete (#delete)
@@ -73,9 +67,6 @@ neon databases delete mydb
 ```
 
 ```text filename="Output"
-┌─────────┬────────────┬──────────────────────┐
-│ Name    │ Owner Name │ Created At           │
-├─────────┼────────────┼──────────────────────┤
-│ mydb    │ daniel     │ 2023-06-19T23:45:45Z │
-└─────────┴────────────┴──────────────────────┘
+Name  Owner Name    Created At
+mydb  neondb_owner  2026-06-19T23:45:45Z
 ```

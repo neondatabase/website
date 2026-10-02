@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -207,12 +207,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Protected Only      │
-├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
-│                     │                     │ 203.0.113.1  │                     │
-└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+Id              wispy-haze-123456
+Name            wispy-haze-123456
+IP Addresses    203.0.113.0, 203.0.113.1
+Protected Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
@@ -541,8 +539,8 @@ For attribute definitions, find the [Create project](/docs/reference/api/project
     "store_passwords": true,
     "creation_source": "console",
     "history_retention_seconds": 86400,
-    "created_at": "2025-08-04T05:15:41Z",
-    "updated_at": "2025-08-04T05:15:41Z",
+    "created_at": "2026-08-04T05:15:41Z",
+    "updated_at": "2026-08-04T05:15:41Z",
     "consumption_period_start": "0001-01-01T00:00:00Z",
     "consumption_period_end": "0001-01-01T00:00:00Z",
     "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca"
@@ -561,56 +559,56 @@ For attribute definitions, find the [Create project](/docs/reference/api/project
   ],
   "roles": [
     {
-      "branch_id": "br-gentle-salad-ad7v90qq",
+      "branch_id": "br-gentle-salad-123456",
       "name": "neondb_owner",
       "password": "npg_Se0ECYqaJ5jA",
       "protected": false,
-      "created_at": "2025-08-04T05:15:41Z",
-      "updated_at": "2025-08-04T05:15:41Z"
+      "created_at": "2026-08-04T05:15:41Z",
+      "updated_at": "2026-08-04T05:15:41Z"
     }
   ],
   "databases": [
     {
       "id": 5140981,
-      "branch_id": "br-gentle-salad-ad7v90qq",
+      "branch_id": "br-gentle-salad-123456",
       "name": "neondb",
       "owner_name": "neondb_owner",
-      "created_at": "2025-08-04T05:15:41Z",
-      "updated_at": "2025-08-04T05:15:41Z"
+      "created_at": "2026-08-04T05:15:41Z",
+      "updated_at": "2026-08-04T05:15:41Z"
     }
   ],
   "operations": [
     {
       "id": "cacca1d4-ad0e-46dc-ae82-886ffb96889d",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-gentle-salad-ad7v90qq",
+      "branch_id": "br-gentle-salad-123456",
       "action": "create_timeline",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T05:15:41Z",
-      "updated_at": "2025-08-04T05:15:41Z",
+      "created_at": "2026-08-04T05:15:41Z",
+      "updated_at": "2026-08-04T05:15:41Z",
       "total_duration_ms": 0
     },
     {
       "id": "1df43d11-5c07-4de1-9440-ac09d305fdf3",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-gentle-salad-ad7v90qq",
+      "branch_id": "br-gentle-salad-123456",
       "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2025-08-04T05:15:41Z",
-      "updated_at": "2025-08-04T05:15:41Z",
+      "created_at": "2026-08-04T05:15:41Z",
+      "updated_at": "2026-08-04T05:15:41Z",
       "total_duration_ms": 0
     }
   ],
   "branch": {
-    "id": "br-gentle-salad-ad7v90qq",
+    "id": "br-gentle-salad-123456",
     "project_id": "ep-cool-darkness-123456",
     "name": "main",
     "current_state": "init",
     "pending_state": "ready",
-    "state_changed_at": "2025-08-04T05:15:41Z",
+    "state_changed_at": "2026-08-04T05:15:41Z",
     "creation_source": "console",
     "primary": true,
     "default": true,
@@ -620,8 +618,8 @@ For attribute definitions, find the [Create project](/docs/reference/api/project
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2025-08-04T05:15:41Z",
-    "updated_at": "2025-08-04T05:15:41Z",
+    "created_at": "2026-08-04T05:15:41Z",
+    "updated_at": "2026-08-04T05:15:41Z",
     "init_source": "parent-data"
   },
   "endpoints": [
@@ -629,7 +627,7 @@ For attribute definitions, find the [Create project](/docs/reference/api/project
       "host": "ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech",
       "id": "ep-cool-darkness-123456",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-gentle-salad-ad7v90qq",
+      "branch_id": "br-gentle-salad-123456",
       "autoscaling_limit_min_cu": 0.25,
       "autoscaling_limit_max_cu": 0.25,
       "region_id": "aws-us-east-1",
@@ -642,8 +640,8 @@ For attribute definitions, find the [Create project](/docs/reference/api/project
       "disabled": false,
       "passwordless_access": true,
       "creation_source": "console",
-      "created_at": "2025-08-04T05:15:41Z",
-      "updated_at": "2025-08-04T05:15:41Z",
+      "created_at": "2026-08-04T05:15:41Z",
+      "updated_at": "2026-08-04T05:15:41Z",
       "proxy_host": "c-2.us-east-1.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
@@ -712,12 +710,12 @@ For attribute definitions, find the [List projects](/docs/reference/api/projects
       "active_time": 1260,
       "cpu_used_sec": 319,
       "creation_source": "console",
-      "created_at": "2024-11-08T17:20:01Z",
-      "updated_at": "2025-08-03T01:16:18Z",
+      "created_at": "2026-11-08T17:20:01Z",
+      "updated_at": "2026-08-03T01:16:18Z",
       "synthetic_storage_size": 96929448,
-      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "quota_reset_at": "2026-09-01T00:00:00Z",
       "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
-      "compute_last_active_at": "2025-08-03T01:16:18Z",
+      "compute_last_active_at": "2026-08-03T01:16:18Z",
       "history_retention_seconds": 86400
     },
     {
@@ -754,12 +752,12 @@ For attribute definitions, find the [List projects](/docs/reference/api/projects
       "active_time": 0,
       "cpu_used_sec": 0,
       "creation_source": "console",
-      "created_at": "2024-10-28T16:26:49Z",
-      "updated_at": "2025-08-01T00:34:48Z",
+      "created_at": "2026-10-28T16:26:49Z",
+      "updated_at": "2026-08-01T00:34:48Z",
       "synthetic_storage_size": 31082816,
-      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "quota_reset_at": "2026-09-01T00:00:00Z",
       "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
-      "compute_last_active_at": "2025-02-14T09:51:30Z",
+      "compute_last_active_at": "2026-02-14T09:51:30Z",
       "history_retention_seconds": 86400
     }
   ],
@@ -846,13 +844,13 @@ For attribute definitions, find the [Update project](/docs/reference/api/project
     "store_passwords": true,
     "creation_source": "console",
     "history_retention_seconds": 86400,
-    "created_at": "2025-08-04T05:15:41Z",
-    "updated_at": "2025-08-04T05:55:58Z",
+    "created_at": "2026-08-04T05:15:41Z",
+    "updated_at": "2026-08-04T05:55:58Z",
     "synthetic_storage_size": 35697544,
     "consumption_period_start": "0001-01-01T00:00:00Z",
     "consumption_period_end": "0001-01-01T00:00:00Z",
     "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
-    "compute_last_active_at": "2025-08-04T05:15:47Z"
+    "compute_last_active_at": "2026-08-04T05:15:47Z"
   },
   "operations": []
 }
@@ -923,13 +921,13 @@ For attribute definitions, find the [Delete project](/docs/reference/api/project
     "store_passwords": true,
     "creation_source": "console",
     "history_retention_seconds": 86400,
-    "created_at": "2025-08-04T05:15:41Z",
-    "updated_at": "2025-08-04T06:10:55Z",
+    "created_at": "2026-08-04T05:15:41Z",
+    "updated_at": "2026-08-04T06:10:55Z",
     "synthetic_storage_size": 35697544,
     "consumption_period_start": "0001-01-01T00:00:00Z",
     "consumption_period_end": "0001-01-01T00:00:00Z",
     "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
-    "compute_last_active_at": "2025-08-04T05:15:47Z"
+    "compute_last_active_at": "2026-08-04T05:15:47Z"
   }
 }
 ```
@@ -992,11 +990,10 @@ The command returns details about the recovered project.
 
 ```bash
 neon projects recover crimson-voice-12345678
-┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name      │ Region Id     │ Created At           │
-├────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
-└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+Id          crimson-voice-12345678
+Name        myproject
+Region Id   aws-us-east-2
+Created At  2026-04-15T11:17:30Z
 ```
 
 For more information about the Neon CLI, see [Neon CLI — projects](/docs/cli/projects).

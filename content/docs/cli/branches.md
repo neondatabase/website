@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -39,13 +39,9 @@ neon branches list --project-id solitary-leaf-288182
 ```
 
 ```text filename="Output"
-┌────────────────────────┬──────────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name                     │ Created At           │ Updated At           │
-├────────────────────────┼──────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ production [default]     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
-├────────────────────────┼──────────────────────────┼──────────────────────┼──────────────────────┤
-│ br-round-queen-335380  │ development [current]    │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-└────────────────────────┴──────────────────────────┴──────────────────────┴──────────────────────┘
+Name                   Id                     Current State  Created At
+[default] production   br-wispy-cloud-123456  ready          2026-09-30T13:15:12Z
+[current] development  br-cool-forest-123456  ready          2026-09-30T14:45:50Z
 ```
 
 Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, `[anon]` marks an anonymized branch, and `[current]` marks the branch pinned in your local `.neon` context file.
@@ -62,7 +58,7 @@ neon branches list --project-id solitary-leaf-288182 --output json
 ```json
 [
   {
-    "id": "br-wild-boat-648259",
+    "id": "br-wild-boat-123456",
     "project_id": "solitary-leaf-288182",
     "name": "production",
     "current_state": "ready",
@@ -74,13 +70,13 @@ neon branches list --project-id solitary-leaf-288182 --output json
     "active_time_seconds": 312,
     "written_data_bytes": 107816,
     "data_transfer_bytes": 0,
-    "created_at": "2023-07-09T17:01:34Z",
-    "updated_at": "2023-07-09T17:15:13Z"
+    "created_at": "2026-07-09T17:01:34Z",
+    "updated_at": "2026-07-09T17:15:13Z"
   },
   {
-    "id": "br-shy-cake-201321",
+    "id": "br-shy-cake-123456",
     "project_id": "solitary-leaf-288182",
-    "parent_id": "br-wild-boat-648259",
+    "parent_id": "br-wild-boat-123456",
     "parent_lsn": "0/1E88838",
     "name": "development",
     "current_state": "ready",
@@ -91,8 +87,8 @@ neon branches list --project-id solitary-leaf-288182 --output json
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-07-09T17:37:10Z",
-    "updated_at": "2023-07-09T17:37:10Z"
+    "created_at": "2026-07-09T17:37:10Z",
+    "updated_at": "2026-07-09T17:37:10Z"
   }
 ]
 ```
@@ -118,23 +114,19 @@ neon branches create
 ```
 
 ```text filename="Output"
-┌─────────────────────────┬─────────────────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                      │ Name                    │ Default │ Created At           │ Updated At           │
-├─────────────────────────┼─────────────────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-mute-sunset-67218628 │ br-mute-sunset-67218628 │ false   │ 2023-08-03T20:07:27Z │ 2023-08-03T20:07:27Z │
-└─────────────────────────┴─────────────────────────┴─────────┴──────────────────────┴──────────────────────┘
-endpoints
-┌───────────────────────────┬──────────────────────┐
-│ Id                        │ Created At           │
-├───────────────────────────┼──────────────────────┤
-│ ep-floral-violet-94096438 │ 2023-08-03T20:07:27Z │
-└───────────────────────────┴──────────────────────┘
-connection_uris
-┌──────────────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                           │
-├──────────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://[user]:[password]@[neon_hostname]/[dbname]                                  │
-└──────────────────────────────────────────────────────────────────────────────────────────┘
+Branch
+Name           br-mute-sunset-123456
+Id             br-mute-sunset-123456
+Current State  ready
+Created At     2026-09-30T20:07:27Z
+
+Compute
+Id                       Created At
+ep-floral-violet-123456  2026-09-30T20:07:27Z
+
+Connection string
+Connection Uri
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="note">
@@ -161,11 +153,11 @@ neon branches create --output json
 ```json
 {
   "branch": {
-    "id": "br-frosty-art-30264288",
+    "id": "br-frosty-art-123456",
     "project_id": "polished-shape-60485499",
-    "parent_id": "br-polished-fire-02083731",
+    "parent_id": "br-polished-fire-123456",
     "parent_lsn": "0/1E887C8",
-    "name": "br-frosty-art-30264288",
+    "name": "br-frosty-art-123456",
     "current_state": "init",
     "pending_state": "ready",
     "creation_source": "neon",
@@ -175,15 +167,15 @@ neon branches create --output json
     "active_time_seconds": 0,
     "written_data_bytes": 0,
     "data_transfer_bytes": 0,
-    "created_at": "2023-08-03T20:12:24Z",
-    "updated_at": "2023-08-03T20:12:24Z"
+    "created_at": "2026-08-03T20:12:24Z",
+    "updated_at": "2026-08-03T20:12:24Z"
   },
   "endpoints": [
     {
       "host": "ep-cool-darkness-123456.us-east-2.aws.neon.tech",
       "id": "ep-cool-darkness-123456",
       "project_id": "polished-shape-60485499",
-      "branch_id": "br-frosty-art-30264288",
+      "branch_id": "br-frosty-art-123456",
       "autoscaling_limit_min_cu": 1,
       "autoscaling_limit_max_cu": 1,
       "region_id": "aws-us-east-2",
@@ -196,8 +188,8 @@ neon branches create --output json
       "disabled": false,
       "passwordless_access": true,
       "creation_source": "neon",
-      "created_at": "2023-08-03T20:12:24Z",
-      "updated_at": "2023-08-03T20:12:24Z",
+      "created_at": "2026-08-03T20:12:24Z",
+      "updated_at": "2026-08-03T20:12:24Z",
       "proxy_host": "us-east-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-pod"
@@ -293,11 +285,11 @@ neon branches reset development --parent
 ```
 
 ```text filename="Output"
-┌──────────────────────┬─────────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                   │ Name        │ Default │ Created At           │ Last Reset At        │
-├──────────────────────┼─────────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-aged-sun-a5qowy01 │ development │ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
-└──────────────────────┴─────────────┴─────────┴──────────────────────┴──────────────────────┘
+Name           development
+Id             br-cool-forest-123456
+Current State  ready
+Created At     2026-09-30T14:45:50Z
+Last Reset At  2026-09-30T15:36:32Z
 ```
 
 ## neon branches restore (#restore)
@@ -314,26 +306,22 @@ Restores a branch to a specified point in time in its own or another branch's hi
 
 The `--preserve-under-name` option is required when restoring to `^self`.
 
-Restore `main` to an earlier point in its own history, saving the previous state to a backup branch named `main_restore_backup_2024-05-06`:
+Restore `main` to an earlier point in its own history, saving the previous state to a backup branch named `main_restore_backup_2026-09-29`:
 
 ```bash shouldWrap
-neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
+neon branches restore main ^self@2026-09-29T10:00:00.000Z --preserve-under-name main_restore_backup_2026-09-29
 ```
 
 ```text filename="Output"
-INFO: Restoring branch br-purple-dust-a5hok5mk to the branch br-purple-dust-a5hok5mk timestamp 2024-05-06T10:00:00.000Z
+INFO: Restoring main to main at timestamp 2026-09-29T10:00:00.000Z
 Restored branch
-┌─────────────────────────┬──────┬──────────────────────┐
-│ Id                      │ Name │ Last Reset At        │
-├─────────────────────────┼──────┼──────────────────────┤
-│ br-purple-dust-a5hok5mk │ main │ 2024-05-07T09:45:21Z │
-└─────────────────────────┴──────┴──────────────────────┘
+Id             br-purple-dust-123456
+Name           main
+Last Reset At  2026-09-30T09:45:21Z
+
 Backup branch
-┌─────────────────────────┬────────────────────────────────┐
-│ Id                      │ Name                           │
-├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
-└─────────────────────────┴────────────────────────────────┘
+Id    br-flat-forest-123456
+Name  main_restore_backup_2026-09-29
 ```
 
 Restore the target branch `feature/user-auth` to the head of the source branch `main`:
@@ -343,29 +331,25 @@ neon branches restore feature/user-auth main
 ```
 
 ```text filename="Output"
-INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
+INFO: Restoring feature/user-auth to the head of main
 Restored branch
-┌────────────────────────────┬───────────────────┬──────────────────────┐
-│ Id                         │ Name              │ Last Reset At        │
-├────────────────────────────┼───────────────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:42:34Z │
-└────────────────────────────┴───────────────────┴──────────────────────┘
+Id             br-restless-frost-123456
+Name           feature/user-auth
+Last Reset At  2026-09-30T15:42:34Z
 ```
 
 Restore `feature/user-auth` to an earlier point in time from its parent branch:
 
 ```bash
-neon branches restore feature/user-auth ^parent@2024-02-21T10:30:00.000Z
+neon branches restore feature/user-auth ^parent@2026-09-29T10:30:00.000Z
 ```
 
 ```text filename="Output"
-INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
+INFO: Restoring feature/user-auth to main at timestamp 2026-09-29T10:30:00.000Z
 Restored branch
-┌────────────────────────────┬───────────────────┬──────────────────────┐
-│ Id                         │ Name              │ Last Reset At        │
-├────────────────────────────┼───────────────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:55:04Z │
-└────────────────────────────┴───────────────────┴──────────────────────┘
+Id             br-restless-frost-123456
+Name           feature/user-auth
+Last Reset At  2026-09-30T15:55:04Z
 ```
 
 ## neon branches rename (#rename)
@@ -383,11 +367,10 @@ neon branches rename mybranch teambranch
 ```
 
 ```text filename="Output"
-┌───────────────────────┬────────────┬──────────────────────┬──────────────────────┐
-│ Id                    │ Name       │ Created At           │ Updated At           │
-├───────────────────────┼────────────┼──────────────────────┼──────────────────────┤
-│ br-rough-sound-590393 │ teambranch │ 2023-07-09T20:46:58Z │ 2023-07-09T21:02:27Z │
-└───────────────────────┴────────────┴──────────────────────┴──────────────────────┘
+Name           teambranch
+Id             br-rough-sound-123456
+Current State  ready
+Created At     2026-09-30T20:46:58Z
 ```
 
 ## neon branches schema-diff (#schema-diff)
@@ -465,11 +448,10 @@ neon branches set-default mybranch
 ```
 
 ```text filename="Output"
-┌────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                 │ Name     │ Default │ Created At           │ Updated At           │
-├────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
-└────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
+Name           [default] mybranch
+Id             br-odd-frog-123456
+Current State  ready
+Created At     2026-09-30T12:22:12Z
 ```
 
 ## neon branches set-expiration (#set-expiration)
@@ -509,11 +491,8 @@ neon branches add-compute mybranch --type read_only
 ```
 
 ```text filename="Output"
-┌─────────────────────┬──────────────────────────────────────────────────┐
-│ Id                  │ Host                                             │
-├─────────────────────┼──────────────────────────────────────────────────┤
-│ ep-rough-lab-865061 │ ep-rough-lab-865061.ap-southeast-1.aws.neon.tech │
-└─────────────────────┴──────────────────────────────────────────────────┘
+Id    ep-rough-lab-123456
+Host  ep-rough-lab-123456.us-east-2.aws.neon.tech
 ```
 
 Set the compute size when adding a compute to a branch:
@@ -537,15 +516,14 @@ Deletes a branch in a Neon project.
 <CliOptions command="branches delete" />
 
 ```bash
-neon branches delete br-rough-sky-158193
+neon branches delete br-rough-sky-123456
 ```
 
 ```text filename="Output"
-┌─────────────────────┬─────────────────┬──────────────────────┬──────────────────────┐
-│ Id                  │ Name            │ Created At           │ Updated At           │
-├─────────────────────┼─────────────────┼──────────────────────┼──────────────────────┤
-│ br-rough-sky-158193 │ my_child_branch │ 2023-07-09T20:57:39Z │ 2023-07-09T21:06:41Z │
-└─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
+Name           my_child_branch
+Id             br-rough-sky-123456
+Current State  ready
+Created At     2026-09-30T20:57:39Z
 ```
 
 ## neon branches get (#get)
@@ -563,11 +541,11 @@ neon branches get production
 ```
 
 ```text filename="Output"
-┌────────────────────────┬────────────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name       │ Created At           │ Updated At           │
-├────────────────────────┼────────────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ production │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
-└────────────────────────┴────────────┴──────────────────────┴──────────────────────┘
+Name           [default] production
+Id             br-wispy-cloud-123456
+Current State  ready
+Created At     2026-09-30T13:15:12Z
+Logical Size   30.6 MiB
 ```
 
 Get a branch with the `--output` format option set to `json`:
@@ -581,7 +559,7 @@ neon branches get production --output json
 
 ```json
 {
-  "id": "br-lingering-bread-896475",
+  "id": "br-lingering-bread-123456",
   "project_id": "noisy-rain-039137",
   "name": "production",
   "current_state": "ready",
@@ -593,8 +571,8 @@ neon branches get production --output json
   "active_time_seconds": 2088,
   "written_data_bytes": 174433,
   "data_transfer_bytes": 20715,
-  "created_at": "2023-06-28T10:17:28Z",
-  "updated_at": "2023-07-11T12:22:59Z"
+  "created_at": "2026-06-28T10:17:28Z",
+  "updated_at": "2026-07-11T12:22:59Z"
 }
 ```
 

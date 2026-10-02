@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -102,12 +102,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Protected Only      │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
-│                     │                     │ 203.0.113.1  │                     │
-└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+Id              wispy-haze-123456
+Name            wispy-haze-123456
+IP Addresses    203.0.113.0, 203.0.113.1
+Protected Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
