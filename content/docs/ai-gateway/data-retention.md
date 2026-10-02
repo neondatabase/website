@@ -36,12 +36,12 @@ The table below shows, for each provider served through the gateway, whether it 
 | Moonshot AI       | No                                                                                                                                                                                                                                                      | No                  |
 | xAI               | No                                                                                                                                                                                                                                                      | No                  |
 
-The catalog expands over time. [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving) is the source of truth for which providers retain data.
+The catalog expands over time. [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving#partner-model-provider-data-retention) is the source of truth for which providers retain data.
 
 ## Databricks retention
 
 Databricks may store the inputs and outputs of your requests for up to 30 days, within the region where the request is processed. This data is isolated per customer and is accessible only to detect and respond to security or abuse concerns. Your inputs and outputs are not used to train models or improve services.
 
-For the authoritative and latest policy, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving).
+For the authoritative and latest policy, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving#data-retention).
 
 <NeedHelp/>
