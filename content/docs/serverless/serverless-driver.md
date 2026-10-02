@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-01T18:09:35.185Z'
+updatedOn: '2026-10-02T13:12:04.123Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -259,6 +259,38 @@ You can customize the return format using the configuration options `fullResults
   ```
 
 For additional details, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+
+### Connection parameters
+
+The usual way to configure the connection is a full connection string:
+
+```javascript
+const sql = neon(process.env.DATABASE_URL);
+```
+
+You can also pass individual connection parameters in the options object. The supported parameters are `user` (or `username`), `password`, `host` (or `hostname`), `port`, `database`, and `connectionString`. They can supplement a connection string, override parts of it, or fully replace it:
+
+```javascript
+// No connection string: pass the parts individually
+const sql = neon({ user, password, host, database });
+
+// Override part of a connection string
+const sql = neon(process.env.DATABASE_URL, { host: readReplicaHost });
+```
+
+Each parameter can be a string (or a number, for `port`), or a **sync or async function that's resolved on every query**. Resolving on every query is useful for short-lived credentials that must be fetched fresh, such as an OIDC token used as the password:
+
+```javascript
+const sql = neon(DATABASE_URL_WITHOUT_PASSWORD, {
+  password: async () => await getAccessToken(),
+});
+```
+
+The same connection parameters are accepted by the `query` and `transaction` functions.
+
+<Admonition type="note">
+Connection parameters require `@neondatabase/serverless` 1.2.0 or later. For the `Client` and `Pool` classes, a sync or async `password` function is supported when `pipelineConnect` is enabled.
+</Admonition>
 
 ### Issue multiple queries with the transaction() function
 
