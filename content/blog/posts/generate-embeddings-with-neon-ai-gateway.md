@@ -31,7 +31,7 @@ seo:
 When a coding agent ships an app today, it deploys the [Neon backend](/blog/neon-backend-is-ga) - [Lakebase Postgres](/docs/postgres/overview) (our database) plus [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [Managed Better Auth](/docs/auth/overview), and [AI Gateway](/docs/ai-gateway/overview). Every primitive branches with your data.
 </Admonition>
 
-Neon now includes [AI Gateway](/blog/llms-belong-in-your-backend), our primitive for calling LLMs directly from Neon. It gives you frontier and open-weight models hosted by Databricks, billed through Neon at the labs' own prices. A few examples we've shared so far have been for [streaming chat](/guides/llm-proxy-neon-functions) and [agents](/docs/compute/functions/agents), e.g. an [image-generation agent](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) built with the AI SDK and a [personal assistant with Postgres-backed memory](https://github.com/neondatabase/examples/tree/main/with-mastra) built with Mastra.
+Neon now includes [AI Gateway](/blog/llms-belong-in-your-backend), our primitive for calling LLMs. You get frontier and open-weight models hosted by Databricks, billed through Neon at the labs' own prices (no markup).
 
 **The latest addition to AI Gateway: it now [serves embedding models](/docs/ai-gateway/embeddings) on the same OpenAI-compatible endpoint and with the same credential you already use for chat.** Point your SDK at `/v1/embeddings`, write the vectors into [Lakebase Postgres](/lakebase), and query them with [Lakebase Search](/docs/ai/lakebase-search). The whole retrieval pipeline, from the uploaded file to the generated answer, runs inside one Neon branch.
 
