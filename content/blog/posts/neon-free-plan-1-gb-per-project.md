@@ -40,9 +40,7 @@ We don't want you hitting limits on Neon. We know you're building more than ever
 
 The Neon Free plan assumes the agent workflow: lots of projects, lots of experiments, most of them idle most of the time. You get 100 projects, each with its own compute allowance, and as of today each with 1 GB of Postgres storage.
 
-More storage per project was one of the most requested changes to the Free plan. We can ship it because Neon gets more efficient as it grows - we're creating new projects at a rate of more than one per second.
-
-If there's something else you'd like to see, tell us on [Discord](https://neon.com/discord). We really listen.
+More storage per project was one of the most requested changes to the Free plan. We can ship it because Neon gets more efficient as it grows - we're creating new projects at a rate of more than one per second!
 
 ## What the Free plan gives you now
 
@@ -129,4 +127,5 @@ Run `npx neon@latest bootstrap --list-templates` to see every starter.
 
 ## Bring your projects over
 
-If you have a project stuck at its free limit somewhere else, point your agent to our [migration docs](https://neon.com/docs/import/migrate-intro) and ask it to move your project to Neon. Share what you're building with us on [Discord](https://neon.com/discord).
+If you have a project stuck at its free limit somewhere else, point your agent to our [migration docs](https://neon.com/docs/import/migrate-intro) and ask it to move your project to Neon. Share what you're building with us on [Discord](https://neon.com/discord), and if there's something else you'd like to see, tell us - we really listen.
+
