@@ -1,4 +1,4 @@
-text: 'Lakebase Search is GA: vector and full-text search in Postgres, with top price-performance'
+text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
 link:
-  url: 'https://neon.com/blog/lakebase-search-retrieval-agents'
+  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
   target: '_blank'
