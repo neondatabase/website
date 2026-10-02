@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:56:44.613Z'
+updatedOn: '2026-10-02T11:16:18.672Z'
 ---
 
 ## Authentication errors
@@ -119,34 +119,57 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap, which is a separate, account-level limit that can block requests. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
+Your account's AI Gateway quota is blocked. This happens when you exceed a token-per-minute (TPM) rate limit or your account's daily spend limit. Both return `REQUEST_LIMIT_EXCEEDED`, and the message names the limit that was hit and how to recover.
+
+An account-wide TPM limit:
 
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway daily token limit exceeded"
+  "message": "ai gateway account token rate limit exceeded (<N> tokens per minute across all models in this region). Retry after the current minute resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
 }
 ```
 
-If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway per-minute token limit exceeded for model "<model-id>"` instead.
+A per-model TPM limit names the model instead: `ai gateway account token rate limit exceeded for model "<model-id>" (<N> tokens per minute in this region). Retry after the current minute resets, ...`
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current per-minute quota values.
+A daily spend limit:
+
+```json
+{
+  "error_code": "REQUEST_LIMIT_EXCEEDED",
+  "message": "ai gateway account daily spend limit exceeded. Retry after the daily spend limit resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+}
+```
+
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved. [Contact Support](/docs/introduction/support) to request a higher limit. See [Rate limits](/docs/ai-gateway/models#rate-limits).
 
 ---
 
 ## Upstream errors
 
-### `502 upstream request failed`
+When the upstream model provider or Databricks returns an error, the AI Gateway replaces the upstream response body with its own `{"error_code","message"}` envelope and preserves the upstream status code. Upstream internal details, such as endpoints, workspace IDs, Unity Catalog objects, principals, and internal headers, are never exposed to the caller.
 
-The gateway could not reach the upstream Databricks workspace, or the upstream returned an unexpected error.
+The message identifies the condition:
 
-**Fix:** Retry the request. If the error persists, check the [Neon status page](https://neonstatus.com).
+| Condition               | Message                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Endpoint disabled       | `ai gateway upstream model endpoint is temporarily disabled. Contact Neon support`                                                                                     |
+| Timeout                 | `ai gateway upstream model timed out. Retry, or reduce the input size`                                                                                                 |
+| Request too large       | `ai gateway upstream rejected the request: body too large`                                                                                                             |
+| Model unavailable       | `ai gateway upstream model is not available. Contact Neon support`                                                                                                     |
+| Access denied           | `ai gateway upstream denied the request. Contact Neon support`                                                                                                         |
+| Over capacity           | `ai gateway upstream model is temporarily over capacity. Retry later`                                                                                                  |
+| Upstream internal error | `ai gateway upstream model error. Retry later, or contact Neon support if it persists`                                                                                 |
+| Invalid request         | `ai gateway upstream model rejected the request: <provider message>` (redacted to `...rejected the request as invalid` when the provider detail can't be shown safely) |
+| Unknown                 | `ai gateway upstream request failed. Contact Neon support if it persists`                                                                                              |
+
+**Fix:** Follow the guidance in the message. Retry transient conditions (timeout, over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. If an error persists, check the [Neon status page](https://neonstatus.com) or [contact Support](/docs/introduction/support).
 
 ---
 
 ## Error response formats
 
-Most AI Gateway errors use the standard OpenAI error envelope:
+Errors the gateway generates itself (authentication, model validation, workspace resolution) use the standard OpenAI error envelope:
 
 ```json
 {
@@ -156,12 +179,12 @@ Most AI Gateway errors use the standard OpenAI error envelope:
 }
 ```
 
-The quota block error uses a different shape:
+Quota blocks and all upstream (non-2xx) errors use a flat envelope, with the upstream status code preserved:
 
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway daily token limit exceeded"
+  "message": "ai gateway account daily spend limit exceeded. Request a higher limit through Neon support: https://neon.com/docs/introduction/support"
 }
 ```
 
