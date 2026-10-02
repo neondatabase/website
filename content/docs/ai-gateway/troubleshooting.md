@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-02T11:16:18.672Z'
+updatedOn: '2026-10-02T13:41:36.830Z'
 ---
 
 ## Authentication errors
@@ -141,7 +141,7 @@ A daily spend limit:
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved. [Contact Support](/docs/introduction/support) to request a higher limit. See [Rate limits](/docs/ai-gateway/models#rate-limits).
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and lifts at that time; retry with exponential backoff. If absent, the block is permanent until resolved; requesting a higher limit requires a paid plan. See [Support](/docs/introduction/support) for your plan's support options and [Rate limits](/docs/ai-gateway/models#rate-limits) for current values.
 
 ---
 
@@ -163,7 +163,7 @@ The message identifies the condition:
 | Invalid request         | `ai gateway upstream model rejected the request: <provider message>` (redacted to `...rejected the request as invalid` when the provider detail can't be shown safely) |
 | Unknown                 | `ai gateway upstream request failed. Contact Neon support if it persists`                                                                                              |
 
-**Fix:** Follow the guidance in the message. Retry transient conditions (timeout, over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. If an error persists, check the [Neon status page](https://neonstatus.com) or [contact Support](/docs/introduction/support).
+**Fix:** Follow the guidance in the message. Retry transient conditions (timeout, over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. If an error persists, check the [Neon status page](https://neonstatus.com). For paid plan support options, see [Support](/docs/introduction/support).
 
 ---
 
