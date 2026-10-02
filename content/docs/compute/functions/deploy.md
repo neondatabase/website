@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-09-18T18:35:42.057Z'
+updatedOn: '2026-10-02T11:27:16.808Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -234,5 +234,11 @@ DELETE /projects/{project_id}/branches/{branch_id}/functions/{slug}
 
 </TabItem>
 </Tabs>
+
+#### Functions and branches
+
+A child branch inherits its parent's functions. They appear in the child's function list and serve from the child's own branch-specific URLs, against the child's data.
+
+Deletion is branch-local. Deleting an inherited function on a child branch removes it from that branch only; the parent and any sibling branches keep their copies. Deleting a function on the parent doesn't remove copies already inherited by existing child branches.
 
 <NeedHelp/>
