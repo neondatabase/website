@@ -107,19 +107,19 @@ This installs the Neon plugin, which bundles agent skills and the [Neon MCP serv
 
 Each of these starter apps runs on Free plan primitives. Scaffold one with `neon bootstrap`, then hand it to your agent:
 
-- **[Realtime chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat)**: a Next.js chat where signed-in users talk over WebSockets to a Hono server running on Functions, with every message stored in Postgres. Uses Lakebase Postgres, Managed Better Auth, and Functions.
+**[Realtime chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat)**: a Next.js chat where signed-in users talk over WebSockets to a Hono server running on Functions, with every message stored in Postgres. Uses Lakebase Postgres, Managed Better Auth, and Functions.
 
   ```bash
   npx neon@latest bootstrap my-chat --template realtime-chat
   ```
 
-- **[File indexer](https://github.com/neondatabase/examples/tree/main/with-files-sdk)**: a script uploads files to an Object Storage bucket with the Files SDK, and a storage trigger in `neon.ts` calls a Function that indexes each new object in Postgres. Uses Lakebase Postgres, Object Storage, and Functions.
+**[File indexer](https://github.com/neondatabase/examples/tree/main/with-files-sdk)**: a script uploads files to an Object Storage bucket with the Files SDK, and a storage trigger in `neon.ts` calls a Function that indexes each new object in Postgres. Uses Lakebase Postgres, Object Storage, and Functions.
 
   ```bash
   npx neon@latest bootstrap my-files --template files-sdk
   ```
 
-- **[Discord bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)**: a Discord bot hosted on Functions, with slash commands and interactive buttons, that stores user profiles and per-user command usage in Postgres. Uses Lakebase Postgres and Functions.
+**[Discord bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)**: a Discord bot hosted on Functions, with slash commands and interactive buttons, that stores user profiles and per-user command usage in Postgres. Uses Lakebase Postgres and Functions.
 
   ```bash
   npx neon@latest bootstrap my-bot --template discord-bot-http
