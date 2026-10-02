@@ -3,9 +3,9 @@ title: Neon AI Gateway data retention
 subtitle: Zero data retention (ZDR) and what each party retains
 summary: >-
   Most models served through Neon AI Gateway operate under zero data retention
-  (ZDR): the provider does not store or train on your prompts and responses.
-  This page lists the per-provider retention terms and explains what Databricks,
-  the platform behind the gateway, retains.
+  (ZDR): the provider does not store your prompts and responses. This page
+  explains the model provider retention terms and what Databricks, the platform
+  behind the gateway, retains.
 enableTableOfContents: true
 ---
 
@@ -20,9 +20,9 @@ This page explains what each one retains. For most models the answer is nothing:
 
 ## Model provider retention
 
-Most models served through the gateway operate under **zero data retention (ZDR)**: the provider does not retain or train on your prompts and responses.
+Most models served through the gateway operate under **zero data retention (ZDR)**: the provider does not retain your prompts and responses.
 
-Following [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving#partner-model-provider-data-retention), some partner providers may retain data for safety purposes. This retention relies on automated scanning before any limited human review, and the retained data is not used for training. Databricks documents the following exceptions:
+Following [Databricks' partner model provider retention policy](https://docs.databricks.com/aws/en/machine-learning/model-serving#partner-model-provider-data-retention), some partner providers may retain data for safety purposes. This retention relies on automated scanning before any limited human review. Databricks documents the following exceptions:
 
 - **OpenAI**: for certain coding and routing customers, OpenAI may retain content its classifiers flag as potentially policy-violating. See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data#safety-retention).
 - **Anthropic**: for its frontier models (currently Fable 5 and later Mythos-class models), data is retained for safety purposes for all customers. See [Anthropic data retention](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
