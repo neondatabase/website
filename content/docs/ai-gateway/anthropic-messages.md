@@ -59,7 +59,9 @@ const message = await client.messages.create({
   messages: [{ role: 'user', content: 'What is Neon?' }],
 });
 
-console.log(message.content[0].text);
+for (const block of message.content) {
+  if (block.type === 'text') console.log(block.text);
+}
 ```
 
 ```python shouldWrap
