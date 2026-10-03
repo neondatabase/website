@@ -39,7 +39,7 @@ describe('DropdownMenu', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Copy page' }));
     await waitFor(() => expect(global.fetch).toHaveBeenCalledWith(markdownPath));
 
-    fireEvent.click(screen.getAllByRole('button')[1]);
+    fireEvent.click(screen.getByRole('button', { name: 'More page actions' }));
 
     for (const name of ['ChatGPT', 'Claude']) {
       expect(screen.getByRole('link', { name: new RegExp(`Open in ${name}`) })).toHaveAttribute(

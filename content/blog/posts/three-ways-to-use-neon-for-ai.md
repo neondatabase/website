@@ -87,10 +87,10 @@ To get started, explore our [MCP server](https://neon.com/docs/ai/neon-mcp-serve
 
 ## Backend for agents
 
-Whether deploying a new app, testing an idea, or executing user prompts, modern agents need to provision a database at runtime, use it briefly, and discard it. Neon makes this pattern successful with serverless Postgres that can be controlled entirely via API, and it’s already powering agents like Replit, Databutton, [Create.xyz](https://create.xyz), same.new, and many others.
+Whether deploying a new app, testing an idea, or executing user prompts, modern agents need to provision a database at runtime, use it briefly, and discard it. Neon makes this pattern successful with serverless Postgres that can be controlled entirely via API, and it’s already powering agents like Replit, Riff, [Create.xyz](https://create.xyz), same.new, and many others.
 
 <blockquote>
-<p><strong>“Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead” </strong><em>(<a href="https://www.linkedin.com/in/martinsroed/overlay/about-this-profile/">Martin Skow Røed</a>, CTO and co-founder of Databutton)</em></p>
+<p><strong>“Integrating Neon was a no-brainer. It gives every Riff app a production-grade Postgres database in seconds, with zero overhead” </strong><em>(<a href="https://www.linkedin.com/in/martinsroed/overlay/about-this-profile/">Martin Skow Røed</a>, CTO and co-founder of Riff)</em></p>
 </blockquote>
 
 Why does Neon fit so well with agentic workflows?
