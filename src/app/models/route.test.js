@@ -174,7 +174,7 @@ describe('GET /models', () => {
       expect(curl.variantReason).toBeTruthy();
     });
 
-    it.skip('keeps cURL on chat completions for a conforming Claude model', async () => {
+    it('keeps cURL on chat completions for a conforming Claude model', async () => {
       const res = await GET(request('?model=claude-haiku-4-5'));
       const { model } = await body(res);
       const curl = model.examples.find((e) => e.id === 'curl');

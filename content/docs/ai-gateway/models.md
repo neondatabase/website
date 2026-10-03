@@ -67,21 +67,22 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                       | Recommended endpoint   | Notes                                                                         |
-| ---------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------- |
-| OpenAI (most models)                           | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                         |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions   |
-| Google Gemini                                  | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B                             | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                |
-| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                         |
-| Alibaba (chat models)                          | `/v1/chat/completions` | Chat completions only                                                         |
-| Alibaba (embedding models)                     | `/v1/embeddings`       | No chat completions — returns a vector, not text                              |
+| Provider                                       | Recommended endpoint   | Notes                                                                                        |
+| ---------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
+| OpenAI (most models)                           | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                        |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions                  |
+| Anthropic Claude                               | `/v1/chat/completions` | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching |
+| Google Gemini                                  | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                |
+| Google Gemma 3 12B                             | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                               |
+| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                                        |
+| Alibaba (chat models)                          | `/v1/chat/completions` | Chat completions only                                                                        |
+| Alibaba (embedding models)                     | `/v1/embeddings`       | No chat completions — returns a vector, not text                                             |
 
 ## Shorter paths
 
 Each inference dialect is reachable at two equivalent paths: a shorter top-level path (recommended, and what most examples and the `@neon/ai-sdk-provider` use) and a longer `/ai-gateway/<dialect>/v1` path. Both forms behave identically, using the same branch host, bearer token, request body, response body, model routing, rate limits, and quota, and **neither is deprecated**. The longer `/ai-gateway/...` paths keep working indefinitely.
 
-The shorter form isn't a uniform `/v1/<dialect>` rule. The unified chat completions endpoint is a bare `/v1/chat/completions`, matching the OpenAI and OpenRouter convention. The native dialects are prefixed by provider instead, and each keeps its own upstream version segment so the path matches what that provider's SDK expects: `/openai/v1/...` and `/gemini/v1beta/...`.
+The shorter form isn't a uniform `/v1/<dialect>` rule. The unified chat completions endpoint is a bare `/v1/chat/completions`, matching the OpenAI and OpenRouter convention. The native dialects are prefixed by provider instead, and each keeps its own upstream version segment so the path matches what that provider's SDK expects: `/openai/v1/...`, `/anthropic/v1/...`, and `/gemini/v1beta/...`.
 
 Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
@@ -89,6 +90,7 @@ Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-g
 | ---------------------------------------------------- | ---------------------------------------------------------- |
 | `POST /v1/chat/completions`                          | `/ai-gateway/mlflow/v1/chat/completions`                   |
 | `POST /openai/v1/responses`                          | `/ai-gateway/openai/v1/responses`                          |
+| `POST /anthropic/v1/messages`                        | `/ai-gateway/anthropic/v1/messages`                        |
 | `POST /gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models

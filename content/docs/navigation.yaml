@@ -934,6 +934,10 @@
               slug: ai-gateway/embeddings
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
+            - title: Anthropic Messages API
+              slug: ai-gateway/anthropic-messages
+              tag: new
+              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
