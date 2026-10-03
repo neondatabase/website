@@ -63,6 +63,10 @@ const META = {
     examples: ['neon claim create --env-pull', 'neon claim accept'],
   },
   completion: { desc: 'Generate a shell completion script.' },
+  feedback: {
+    desc: 'Send feedback about the CLI to the Neon team; no login required.',
+    examples: ['neon feedback --message "The branch docs were unclear"'],
+  },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {
     desc: 'Create, diff, reset, restore, and manage branches.',

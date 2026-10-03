@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `ask` command sends a question to the Neon assistant and prints the answer to your terminal: `neon ask --prompt "<question>"`. The assistant answers from Neon's documentation, so keep questions scoped to Neon and Lakebase Postgres rather than general chat. No login is required, and it doesn't touch your projects or account.
+The `ask` command sends a question to the Neon assistant and prints the answer to your terminal: `neon ask --prompt "<question>"`. The assistant answers from Neon's documentation, so keep questions scoped to Neon and Lakebase Postgres rather than general chat. No login is required, and it doesn't touch your projects or account. To send feedback to the Neon team instead, use [`neon feedback`](/docs/cli/feedback).
 
 The answer is natural-language text, not structured data. By default it streams as markdown, use `--output json` to get the answer back as a single `text` field you can parse.
 

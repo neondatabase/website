@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -44,6 +44,8 @@ Lists projects that belong to your Neon account, as well as any projects that we
   Id                 Name  Region Id         Created At
   noisy-fire-212121  API   aws-eu-central-1  2026-04-22T18:41:13Z
   ```
+
+  In the default table, your currently linked project (the one recorded in `.neon`) is marked `[current]` next to its name.
 
 List all projects belonging to a specific organization:
 
@@ -281,8 +283,16 @@ neon projects get muddy-wood-123456
 ```
 
 ```text filename="Output"
-Id          muddy-wood-123456
-Name        dev_project_1
-Region Id   aws-us-west-2
-Created At  2026-07-09T17:04:29Z
+Project
+Name               dev_project_1
+Id                 muddy-wood-123456
+Region Id          aws-us-west-2
+Postgres Version   18
+Organization       org-xxxxxxxx-xxxx
+Default Compute    0.25 CU
+History Retention  6 hours
+Created At         2026-07-09T17:04:29Z
+Updated At         2026-07-09T17:04:29Z
 ```
+
+The table shows a detail view: Postgres version, organization, default compute range, and history retention alongside the identifiers. For the complete project record, including all settings and quotas, use `--output json`.

@@ -1317,6 +1317,8 @@
                   slug: cli/api-keys
                 - title: completion
                   slug: cli/completion
+                - title: feedback
+                  slug: cli/feedback
             - title: Projects and branches
               items:
                 - title: snapshots
