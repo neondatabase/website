@@ -178,4 +178,6 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
 | Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
 
+For what Databricks and the model providers retain, including zero data retention (ZDR), see [Data retention](/docs/ai-gateway/data-retention).
+
 <NeedHelp/>
