@@ -6,7 +6,7 @@ summary: >-
   behind one credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-10-03T17:33:03.999Z'
 ---
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
@@ -77,6 +77,18 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                                        |
 | Alibaba (chat models)                          | `/v1/chat/completions` | Chat completions only                                                                        |
 | Alibaba (embedding models)                     | `/v1/embeddings`       | No chat completions — returns a vector, not text                                             |
+
+<Admonition type="warning" title="Content shape varies by model">
+For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+
+```typescript
+const { content } = response.choices[0].message;
+const text = typeof content === 'string'
+  ? content
+  : content.find((block) => block.type === 'text')?.text ?? '';
+```
+
+</Admonition>
 
 ## Shorter paths
 
