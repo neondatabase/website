@@ -29,7 +29,7 @@ neon me --profile work
 Login           alex
 Email           alex@domain.com
 Name            Alex Lopez
-Projects Limit  0
+Authentication  OAuth (profile work)
 ```
 
 Naming a profile that doesn't exist is an error, not a silent fall back to `DEFAULT`.

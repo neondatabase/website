@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -167,6 +167,7 @@ neon roles list
 ```
 
 ```text filename="Output"
+Roles on main
 Name          Created At
 neondb_owner  2026-06-19T18:27:19Z
 alex          2026-07-13T06:42:55Z

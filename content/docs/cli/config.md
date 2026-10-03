@@ -86,7 +86,7 @@ Declares a service, function, or bucket in your `neon.ts`, creating the file if 
 
 `config add` runs entirely locally: it edits files, and never authenticates or resolves a project. Provisioning stays a separate [`neon config apply`](#apply) step.
 
-It finds your config by walking up from the current directory, stopping at a `.git` directory or your home directory. When it finds none, it creates `neon.ts` in the current directory and installs the `@neon/config` and `@neon/env` packages; pass `--no-install` to print the install command instead. Editing an existing file never installs packages. Pass `--config <path>` to target a specific file; a path that doesn't exist is an error.
+It looks for your config in the project directory: the directory holding the nearest `.neon` file (found by searching up from the current directory), or the current directory when there's no `.neon`. A `neon.ts` in a parent directory no longer applies. When it finds none, it creates `neon.ts` there and installs the `@neon/config` and `@neon/env` packages; pass `--no-install` to print the install command instead. Editing an existing file never installs packages. Pass `--config <path>` to target a specific file; a path that doesn't exist is an error.
 
 It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as a service declared under the deprecated `preview` block, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
 

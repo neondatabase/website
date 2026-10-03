@@ -9,7 +9,7 @@ summary: >-
   default branch. Each subcommand accepts `--project-id` (required only for
   accounts with multiple projects) and `--context-file` for reusable context.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 redirectFrom:
   - /docs/reference/cli-databases
   - /docs/cli/database
@@ -29,13 +29,16 @@ Lists databases. If you don't specify a branch ID or name with `--branch`, the c
 <CliOptions command="databases list" />
 
 ```bash
-neon databases list --branch br-autumn-dust-190886
+neon databases list
 ```
 
 ```text filename="Output"
+Databases on main
 Name    Owner Name    Created At
 neondb  neondb_owner  2026-06-19T18:27:19Z
 ```
+
+The table is titled with the branch the databases belong to. Pass `--branch <id-or-name>` to list another branch's databases.
 
 ## neon databases create (#create)
 
@@ -50,8 +53,10 @@ neon databases create --name mynewdb --owner-name alex
 ```
 
 ```text filename="Output"
-Name     Owner Name  Created At
-mynewdb  alex        2026-06-19T23:45:45Z
+Database created on main
+Name        mynewdb
+Owner Name  alex
+Created At  2026-06-19T23:45:45Z
 ```
 
 ## neon databases delete (#delete)
@@ -67,6 +72,8 @@ neon databases delete mydb
 ```
 
 ```text filename="Output"
-Name  Owner Name    Created At
-mydb  neondb_owner  2026-06-19T23:45:45Z
+Database deleted from main
+Name        mydb
+Owner Name  neondb_owner
+Created At  2026-06-19T23:45:45Z
 ```

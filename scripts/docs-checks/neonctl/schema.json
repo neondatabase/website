@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "7.0.5",
+  "neonctlVersion": "8.0.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -980,7 +980,7 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to walking up from the current directory"
+              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to the neon.ts in the project directory (next to .neon, or cwd without one)"
             },
             "env-pull": {
               "type": "boolean",
@@ -1078,7 +1078,7 @@
                 },
                 "config": {
                   "type": "string",
-                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
                 },
                 "install": {
                   "type": "boolean",
@@ -1106,7 +1106,7 @@
                 },
                 "config": {
                   "type": "string",
-                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
                 },
                 "install": {
                   "type": "boolean",
@@ -1165,7 +1165,7 @@
                 },
                 "config": {
                   "type": "string",
-                  "describe": "Path to the neon.ts to edit (defaults to walking up from cwd; created in cwd when there is none)"
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
                 },
                 "install": {
                   "type": "boolean",
@@ -1230,7 +1230,7 @@
             },
             "config": {
               "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
             },
             "env": {
               "type": "string",
@@ -1279,7 +1279,7 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
             },
             "env": {
               "type": "string",
@@ -1752,7 +1752,7 @@
         },
         "config": {
           "type": "string",
-          "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+          "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
         },
         "env": {
           "type": "string",
@@ -1876,7 +1876,7 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
             },
             "env": {
               "type": "array",
@@ -1884,7 +1884,7 @@
             },
             "file": {
               "type": "string",
-              "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+              "describe": "Target .env file to write, relative to cwd. Defaults to an existing .env, otherwise .env.local, in the project directory (next to .neon, or cwd without one). Only Neon variables are updated; other lines are preserved."
             },
             "service": {
               "type": "array",
@@ -1928,6 +1928,31 @@
       },
       "describe": "Manage a branch's Neon env variables locally",
       "usage": "$0 env <sub-command> [options]"
+    },
+    "feedback": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "message": {
+          "type": "string",
+          "describe": "The feedback to send. Do not include passwords, API keys, or connection strings",
+          "required": true
+        },
+        "url": {
+          "type": "string",
+          "describe": "Override the feedback URL",
+          "hidden": true
+        }
+      },
+      "commands": {},
+      "describe": "Send feedback to Neon",
+      "usage": "$0 feedback --message <feedback>",
+      "examples": [
+        {
+          "command": "$0 feedback --message \"The branch docs were unclear\"",
+          "description": ""
+        }
+      ]
     },
     "functions": {
       "aliases": [
@@ -2202,7 +2227,8 @@
           "describe": "Create neon.ts after linking. Use --no-config to skip. Omitted in Custom: you will be asked"
         },
         "context-file": {
-          "type": "unknown",
+          "type": "string",
+          "default": ".neon",
           "hidden": true
         },
         "data": {
