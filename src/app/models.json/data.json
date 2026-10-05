@@ -361,7 +361,7 @@
         "name": "Claude Opus 5.5",
         "provider": "anthropic",
         "family": "claude-opus",
-        "released": false,
+        "released": true,
         "attachment": true,
         "reasoning": true,
         "reasoning_options": [
