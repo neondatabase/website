@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-02T13:12:04.123Z'
+updatedOn: '2026-10-05T12:27:24.167Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -40,8 +40,16 @@ npm install @neondatabase/serverless
 
 The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
 
-<Admonition type="important" title="JSR package is deprecated">
-The [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless) publication of the driver is deprecated and no longer updated. Install from npm instead. Runtimes that consume JSR packages, including Deno, can install the npm package directly (for example, `deno add npm:@neondatabase/serverless`).
+<Admonition type="important" title="Install from npm, not JSR">
+The driver is no longer published to the [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless). The JSR package, `@neon/serverless`, stays at version 1.0.1 and won't get new releases. This only affects JSR: the driver itself is actively maintained on npm as `@neondatabase/serverless`.
+
+If you installed the JSR package (for example, with `deno add jsr:@neon/serverless`), switch to the npm package:
+
+```shell
+deno add npm:@neondatabase/serverless
+```
+
+Then change your imports from `@neon/serverless` to `@neondatabase/serverless`.
 </Admonition>
 
 ## Configure your Neon database connection
@@ -252,7 +260,7 @@ You can customize the return format using the configuration options `fullResults
   const sql = neon(process.env.DATABASE_URL);
   const abortController = new AbortController();
   const timeout = setTimeout(() => abortController.abort('timed out'), 10000);
-  const rows = await sql('SELECT * FROM posts WHERE id = $1', [postId], {
+  const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], {
     fetchOptions: { signal: abortController.signal },
   }); // throws an error if no result received within 10s
   clearTimeout(timeout);
@@ -288,8 +296,19 @@ const sql = neon(DATABASE_URL_WITHOUT_PASSWORD, {
 
 The same connection parameters are accepted by the `query` and `transaction` functions.
 
+The `Client` and `Pool` classes also accept a sync or async `password` function. To combine one with a connection string, use the exported `parseIntoClientConfig` helper:
+
+```javascript
+import { Pool, parseIntoClientConfig } from '@neondatabase/serverless';
+
+const pool = new Pool({
+  ...parseIntoClientConfig(process.env.DATABASE_URL),
+  password: async () => await getAccessToken(),
+});
+```
+
 <Admonition type="note">
-Connection parameters require `@neondatabase/serverless` 1.2.0 or later. For the `Client` and `Pool` classes, a sync or async `password` function is supported when `pipelineConnect` is enabled.
+Connection parameters, password functions with `pipelineConnect` enabled (the default), and `parseIntoClientConfig` require `@neondatabase/serverless` 1.2.0 or later.
 </Admonition>
 
 ### Issue multiple queries with the transaction() function
@@ -325,7 +344,11 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 
 The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationLevel`, `readOnly` and `deferrable`.
 
-Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
+Pass query and transaction options as the second argument of `transaction()`, not on the individual queries inside it. The TypeScript types don't accept options on individual queries, and `fetchOptions` can't apply per query because the whole transaction is sent as a single `fetch` request. For example:
+
+```javascript
+const [rows] = await sql.transaction([sql`SELECT now()`], { arrayMode: true });
+```
 
 - `isolationLevel`
 
@@ -443,7 +466,7 @@ export default async () => {
   const db = drizzle(pool);
   const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
 
-  ctx.waitUntil(pool.end());
+  await pool.end();
 
   return new Response(JSON.stringify({ post: onePost }));
 };
@@ -457,8 +480,6 @@ export default async (req: Request, ctx: any) => {
   if (!postId) return new Response('Missing id', { status: 400 });
 
   const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  await pool.connect();
-
   const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
   const post = posts.rows[0];
 
