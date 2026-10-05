@@ -15,7 +15,6 @@ cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/cover.jpg
   alt: 'Building a smart photo library with TanStack and the Neon backend'
 isFeatured: false
-draft: true
 seo:
   title: Building a searchable photo library on the Neon backend - Neon
   description: Private uploads, user authentication, and search by text, image, or face
