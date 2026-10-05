@@ -9,24 +9,24 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
 updatedOn: '2026-09-22T15:52:59.294Z'
+layout: wide
+hideCopyPage: true
 ---
 
-Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-What makes Neon Functions different from lambda-style serverless?
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Your own code at an HTTP URL, with no servers to manage, running on your Neon branch right next to your Postgres data.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/functions-landing.md" buttonText="Copy prompt" />
+</div>
 
-- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
-- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
-- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
-- **Event-driven.** Invoke a function on a cron schedule or an object upload with [Function Triggers](/docs/compute/functions/triggers/overview), no external scheduler.
+<img
+  src="/docs/compute/functions/hero-functions.svg"
+  alt="Your function runs at an HTTP URL and queries the Postgres database right next to it."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
 
-Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
-
-> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
-
-<Admonition type="important" title="JavaScript and TypeScript only">
-Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
-</Admonition>
+</div>
 
 ## Get started
 
@@ -53,6 +53,25 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 
 </DetailIconCards>
+
+## About Neon Functions
+
+Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
+
+What makes Neon Functions different from lambda-style serverless?
+
+- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
+- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
+- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
+- **Event-driven.** Invoke a function on a cron schedule or an object upload with [Function Triggers](/docs/compute/functions/triggers/overview), no external scheduler.
+
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
+
+> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
+
+<Admonition type="important" title="JavaScript and TypeScript only">
+Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
+</Admonition>
 
 ## Request/response, not background jobs
 

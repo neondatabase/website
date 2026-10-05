@@ -54,6 +54,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/elixir-ecto-prompt.md',
   '/prompts/elixir-prompt.md',
   '/prompts/express-prompt.md',
+  '/prompts/functions-landing.md',
   '/prompts/golang-prompt.md',
   '/prompts/hono-prompt.md',
   '/prompts/image-processing-api-neon-functions-prompt.md',
