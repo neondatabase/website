@@ -11,11 +11,11 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-05T12:39:12.446Z'
+updatedOn: '2026-10-05T12:46:48.440Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
-description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
+description= "Pre-built prompt for setting up the Neon serverless driver (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
