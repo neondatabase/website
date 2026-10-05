@@ -26,6 +26,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/social.jpg
 ---
 
+![Building a smart photo library with TanStack and the Neon backend](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/cover.jpg)
+
 A photo library has basically four kinds of data:
 
 - **Files:** the original photos and face crops, kept in a private object storage bucket and shown through short-lived presigned URLs.
