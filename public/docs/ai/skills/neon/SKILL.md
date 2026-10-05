@@ -194,24 +194,26 @@ Then inspect credentials without printing secrets. `NEON_API_KEY` or a `neon pro
 
 ### Combined setup: `neon init`
 
-When both agent tooling and project setup are needed, use authenticated `neon init`. `--agent` takes the coding-agent name. `-y` skips prompts but does not supply project selection or credentials. `--skip-template` skips scaffolding a starter app.
+When both agent tooling and project setup are needed, use authenticated `neon init`. It sets up the current directory in place. `--agent` takes the coding-agent name. `-y` skips prompts but does not supply project selection or credentials.
 
 Link an existing project:
 
 ```bash
-neon init --skip-template --agent cursor \
+neon init --agent cursor \
   --org-id <org-id> --project-id <project-id> -y
 ```
 
 Create and link a project:
 
 ```bash
-neon init --skip-template --agent cursor \
+neon init --agent cursor \
   --org-id <org-id> --project-name my-app \
   --region-id aws-us-east-2 -y
 ```
 
 `--services` may declare `auth`, `data-api`, `functions`, `object-storage`, and `ai-gateway` (repeat the flag or comma-separate). Pass `none` for the bare starter policy. It writes `neon.ts`; it does not deploy or wire the app. Selecting `data-api` also declares Auth (the default Data API provider requires it). Use `data-api` only for PostgREST / Supabase database-client compatibility.
+
+With `-y`, `init` installs the Neon plugin globally where the agent supports it (its MCP server signs in with OAuth). Other agents get skills and the MCP server globally, with an API key when the CLI is signed in. `--mcp-auth` and `--mcp-config-location` change the MCP setup; see `neon init --help`.
 
 If `init` already installed the Neon plugin, do not also run `neon mcp` and `neon skills` for the same agent.
 
@@ -223,11 +225,21 @@ Use the install check above. Do not run `neon login` unattended. MCP remains the
 
 ### 2. Install the Neon MCP Server
 
+Install globally, the CLI default. One install serves every project:
+
 ```bash
-neon mcp --oauth --project --agent cursor -y
+neon mcp --agent <agent> -y
 ```
 
-`--oauth` writes the server URL and leaves sign-in to the MCP client. That is not an authenticated MCP session. `--project` means project-level agent config, not a Neon project ID; the agent must support project-level installs (`cursor` does). Bare `neon mcp -y` installs globally and can reuse or mint an account-wide API key — do not treat it as the unattended default.
+This writes an API key into the agent's user config, reusing an existing Neon MCP key or minting one (needs `neon auth` or a personal API key). Always pass `--agent`; without it, `-y` writes to every installed agent.
+
+Add `--oauth` to store only the server URL instead; the user signs in from the agent and picks scopes on the consent page. For a project-level install, always use OAuth so no key lands in a file git can commit:
+
+```bash
+neon mcp --oauth --project --agent <agent> -y
+```
+
+`neon mcp --help` lists the other flags (`--read-only`, `--project-id`, `--category`) and supported agents.
 
 For all available plugins and IDE integrations, see: https://neon.com/docs/ai/ai-agents-tools.md
 
