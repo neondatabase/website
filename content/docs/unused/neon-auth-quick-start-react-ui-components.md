@@ -288,4 +288,4 @@ SELECT * FROM neon_auth.user;
 
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Learn how to branch your auth](/docs/auth/branching-authentication)
-- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
+- [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
