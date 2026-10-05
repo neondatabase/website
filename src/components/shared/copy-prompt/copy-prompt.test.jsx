@@ -65,12 +65,14 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
     expect(screen.queryByRole('button', { name: /expand prompt/i })).not.toBeInTheDocument();
   });
 
-  it('clamps a long prompt and toggles expand/collapse', () => {
-    setScrollHeight(300); // taller than the ~102px / 4-line threshold
+  it('puts the chevron on its own row and toggles expand/collapse', () => {
+    setScrollHeight(300); // taller than the ~95px / 4-line threshold
 
     render(<CopyPrompt title="Long task">A very long prompt that overflows.</CopyPrompt>);
 
     const expandButton = screen.getByRole('button', { name: 'Expand prompt' });
+    expect(expandButton.parentElement).toHaveClass('pt-2');
+    expect(expandButton).toHaveClass('size-7', 'bg-transparent', 'border-gray-new-80');
     expect(expandButton).toHaveAttribute('aria-expanded', 'false');
 
     const prompt = screen.getByText('A very long prompt that overflows.');
@@ -84,7 +86,7 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
     expect(prompt.className).not.toContain('overflow-hidden');
   });
 
-  it('still copies the full prompt while collapsed', () => {
+  it('still copies the full prompt while collapsed', async () => {
     setScrollHeight(300);
 
     render(<CopyPrompt title="Long task">The entire prompt text.</CopyPrompt>);
@@ -94,6 +96,9 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /copy prompt/i }));
     expect(writeText).toHaveBeenCalledWith('The entire prompt text.');
+    await waitFor(() =>
+      expect(screen.getByRole('button', { name: /copied/i })).toBeInTheDocument()
+    );
   });
 });
 

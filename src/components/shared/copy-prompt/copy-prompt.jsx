@@ -15,10 +15,10 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const DEFAULT_DISPLAY_TEXT = 'Use this pre-built prompt to get started faster.';
 const DEFAULT_BUTTON_TEXT = 'Copy prompt';
 
-// Collapse threshold from the design handoff: about 4 lines of the 15px/1.7
-// prompt text (15 * 1.7 * 4 ≈ 102px), measured against the prompt's rendered
+// Collapse threshold from the design handoff: about 4 lines of the 14px/1.7
+// prompt text (14 * 1.7 * 4 ≈ 95px), measured against the prompt's rendered
 // height after fonts load.
-const COLLAPSED_MAX_HEIGHT = 102;
+const COLLAPSED_MAX_HEIGHT = 95;
 
 const ChevronIcon = (props) => (
   <svg
@@ -212,8 +212,8 @@ const CopyPrompt = (props) => {
           ref={promptRef}
           id={promptId}
           className={cn(
-            'm-0 font-mono text-[15px] leading-[1.7] tracking-snug [text-wrap:pretty] whitespace-pre-wrap text-black dark:text-gray-new-94',
-            isClamped && 'max-h-[102px] overflow-hidden'
+            'm-0 font-mono text-[14px] leading-[1.7] tracking-snug [text-wrap:pretty] whitespace-pre-wrap text-black dark:text-gray-new-94',
+            isClamped && 'max-h-[95px] overflow-hidden'
           )}
         >
           {promptText}
@@ -224,7 +224,7 @@ const CopyPrompt = (props) => {
       </div>
 
       {collapsible && (
-        <div className="relative -mt-2.5 flex justify-center pb-3">
+        <div className="flex justify-center pt-2 pb-3">
           <button
             type="button"
             onClick={() => setExpanded((value) => !value)}
@@ -232,9 +232,9 @@ const CopyPrompt = (props) => {
             aria-controls={promptId}
             aria-label={expanded ? 'Collapse prompt' : 'Expand prompt'}
             className={cn(
-              'flex size-8 items-center justify-center rounded-full border transition-colors',
-              'border-gray-new-85 bg-white text-gray-new-40 hover:border-green-44 hover:text-green-44',
-              'dark:border-gray-new-20 dark:bg-black-fog dark:text-gray-new-60 dark:hover:border-green-52 dark:hover:text-green-52',
+              'flex size-7 items-center justify-center rounded-full border bg-transparent transition-colors',
+              'border-gray-new-80 text-gray-new-50 hover:border-green-44 hover:text-green-44',
+              'dark:border-gray-new-20 dark:text-gray-new-60 dark:hover:border-green-52 dark:hover:text-green-52',
               'focus-visible:ring-2 focus-visible:ring-green-44 focus-visible:ring-offset-2 focus-visible:ring-offset-white focus-visible:outline-none dark:focus-visible:ring-green-52 dark:focus-visible:ring-offset-black-fog'
             )}
           >
