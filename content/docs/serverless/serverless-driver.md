@@ -11,17 +11,13 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-05T12:27:24.167Z'
+updatedOn: '2026-10-05T12:39:12.446Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
 description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
-
-<Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
-The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](/blog/serverless-driver-ga).
-</Admonition>
 
 When to query over HTTP vs WebSockets:
 
@@ -38,7 +34,7 @@ You can install the driver with your preferred JavaScript package manager. For e
 npm install @neondatabase/serverless
 ```
 
-The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
+The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required. In Node.js, the driver requires version 19 or later.
 
 <Admonition type="important" title="Install from npm, not JSR">
 The driver is no longer published to the [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless). The JSR package, `@neon/serverless`, stays at version 1.0.1 and won't get new releases. This only affects JSR: the driver itself is actively maintained on npm as `@neondatabase/serverless`.
@@ -519,7 +515,7 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 
 ### Pool and Client usage notes
 
-- In Node.js and some other environments, there's no built-in WebSocket support. In these cases, supply a WebSocket constructor function.
+- Node.js 21 and earlier, and some other environments, have no built-in WebSocket support. In these cases, supply a WebSocket constructor function, such as the one from the [ws](https://www.npmjs.com/package/ws) package. Node.js 22 and later include a built-in `WebSocket`, so this step is optional.
 
   ```javascript
   import { Pool, neonConfig } from '@neondatabase/serverless';
@@ -564,6 +560,68 @@ const result = await retry(
     randomize: true,
   }
 );
+```
+
+## Troubleshooting
+
+### This function can now be called only as a tagged-template function
+
+```text
+This function can now be called only as a tagged-template function: sql`SELECT ${value}`, not sql("SELECT $1", [value], options). For a conventional function call with value placeholders ($1, $2, etc.), use sql.query("SELECT $1", [value], options).
+```
+
+Since version 1.0.0, the query function returned by `neon()` only works as a tagged template, which protects against SQL injection. Code written for earlier versions that calls it as a conventional function, such as `sql('SELECT * FROM posts WHERE id = $1', [postId])`, throws this error. Use a tagged template or `sql.query()` instead:
+
+```javascript
+const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+// or
+const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+```
+
+For details, see the [1.0.0 release notes](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md#100-2025-03-25).
+
+### Wrong URL scheme or missing user, host or database
+
+```text
+Wrong URL scheme or missing user, host or database in connection parameters
+```
+
+```text
+Database connection string provided to neon() is not a valid URL (connection string: )
+```
+
+The connection string passed to `neon()` is missing or malformed. This usually means the `DATABASE_URL` environment variable isn't set where your code runs, so `neon()` receives `undefined` or an empty string. Check that the variable is defined in that environment (for example, in your hosting platform's environment settings), and that its value is a full connection string that starts with `postgresql://`.
+
+### No database host or connection string was set
+
+```text
+No database host or connection string was set, and key parameters have default values (host: localhost, user: ..., db: ..., password: null). Is an environment variable missing?
+```
+
+This is the `Pool` and `Client` version of the previous error. The `connectionString` you passed is `undefined`, usually because `DATABASE_URL` isn't set in that environment.
+
+### All attempts to open a WebSocket to connect to the database failed
+
+```text
+All attempts to open a WebSocket to connect to the database failed. Please refer to https://github.com/neondatabase/serverless/blob/main/CONFIG.md#websocketconstructor-typeof-websocket--undefined.
+```
+
+`Pool` and `Client` connect over WebSockets, and your runtime has no built-in `WebSocket`. This happens in Node.js 21 and earlier. Upgrade to Node.js 22 or later, or supply a WebSocket constructor, as described in [Pool and Client usage notes](#pool-and-client-usage-notes). If you only need one-shot queries or non-interactive transactions, you can use the [HTTP](#use-the-driver-over-http) `neon()` function instead, which doesn't need WebSockets.
+
+### Security warning in the browser console
+
+```text
+WARNING: Running SQL directly from the browser can have security implications.
+```
+
+The driver prints this warning when it connects from a web browser, because running SQL from client-side code can expose your database to misuse. If you've assessed the risks (for example, you're prototyping, or your data is protected by [Row-Level Security](/docs/guides/row-level-security)), you can suppress the warning:
+
+```javascript
+// HTTP
+const sql = neon(process.env.DATABASE_URL, { disableWarningInBrowsers: true });
+
+// WebSockets
+neonConfig.disableWarningInBrowsers = true;
 ```
 
 ## Example applications
