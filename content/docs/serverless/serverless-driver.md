@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-05T12:59:42.154Z'
+updatedOn: '2026-10-05T13:31:38.055Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -23,6 +23,8 @@ When to query over HTTP vs WebSockets:
 
 - **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
 - **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
+
+The driver works with its defaults. For optional settings such as result formats, `fetch` timeouts, connection parameters, and transaction options, see [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration).
 
 <AgentSkillsTip skill_topic="the Neon Serverless Driver, general connection advice," />
 
@@ -366,6 +368,16 @@ For examples that demonstrate these points, see [Pool and Client](https://github
 ### Advanced configuration options
 
 For `Pool` and `Client` settings such as a custom WebSocket constructor, pipelining, and proxy options, see [neonConfig options](/docs/serverless/serverless-driver-configuration#neonconfig-options).
+
+## Configuration options
+
+The driver works with its defaults, so these options are optional. They're documented on the [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration) page:
+
+- [Query result and fetch options](/docs/serverless/serverless-driver-configuration#query-result-and-fetch-options): return rows as arrays or with full metadata, and pass `fetch` options such as a timeout
+- [Connection parameters](/docs/serverless/serverless-driver-configuration#connection-parameters): pass the user, password, host, or database individually, including as functions for short-lived credentials
+- [Transaction options](/docs/serverless/serverless-driver-configuration#transaction-options): set the isolation level, read-only mode, and deferrable mode
+- [Using transactions with JWT self-verification](/docs/serverless/serverless-driver-configuration#using-transactions-with-jwt-self-verification): set JWT claims for Row-Level Security inside a transaction
+- [neonConfig options](/docs/serverless/serverless-driver-configuration#neonconfig-options): configure `Pool` and `Client` WebSocket connections
 
 ## Developing locally with the Neon serverless driver
 

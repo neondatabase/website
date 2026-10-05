@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-This page covers configuration options for the Neon serverless driver. For installation, a quick start, and basic HTTP and WebSocket usage, see [Neon serverless driver](/docs/serverless/serverless-driver).
+This page covers configuration options for the Neon serverless driver. The driver works with its defaults, so all of these options are optional. For installation, a quick start, and basic HTTP and WebSocket usage, see [Neon serverless driver](/docs/serverless/serverless-driver).
 
 ## Query result and fetch options
 
