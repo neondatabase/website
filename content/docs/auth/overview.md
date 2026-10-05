@@ -22,13 +22,24 @@ redirectFrom:
   - /docs/guides/neon-auth-claim-project
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
+layout: wide
+hideCopyPage: true
 ---
 
-Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-- **Identity lives in your database.** All authentication data is stored in the `neon_auth` schema, queryable with SQL and compatible with Row Level Security (RLS) policies.
-- **Zero server management.** It runs as a managed REST API service. Configure it in the Console and use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app.
-- **Auth that branches with your data.** Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Neon's managed Better Auth keeps your users and sessions in your own Postgres database, so your auth state branches with your data.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/auth-landing.md" buttonText="Copy prompt" />
+</div>
+
+<img
+  src="/docs/auth/hero-auth.svg"
+  alt="Neon's managed Better Auth stores users and sessions in a neon_auth schema inside your Postgres database, next to your tables."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
+
+</div>
 
 ## Quick start guides
 
@@ -43,6 +54,14 @@ Choose your framework to get started:
 <a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
 
 </TechCards>
+
+## About Managed Better Auth
+
+Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+
+- **Identity lives in your database.** All authentication data is stored in the `neon_auth` schema, queryable with SQL and compatible with Row Level Security (RLS) policies.
+- **Zero server management.** It runs as a managed REST API service. Configure it in the Console and use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app.
+- **Auth that branches with your data.** Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Set up with your AI editor
 
