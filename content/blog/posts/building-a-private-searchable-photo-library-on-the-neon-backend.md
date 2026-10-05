@@ -12,8 +12,8 @@ categories:
 authors:
   - rishi-raj-jain
 cover:
-  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
-  alt: 'Atlas photo library with the People row and photo grid'
+  image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/cover.jpg
+  alt: 'Building a smart photo library with TanStack and the Neon backend'
 isFeatured: false
 draft: true
 seo:
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: Building a private, searchable photo library on the Neon backend - Neon
   ogDescription: Private uploads, user authentication, and search by text, image, or face
-  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
+  image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/social.jpg
 ---
 
 A photo library has basically four kinds of data:
@@ -45,7 +45,7 @@ I built [Atlas](https://with-tanstack-ai-starter-full-backend.vercel.app) to dem
 
 Check out the code [in this repository](https://github.com/neondatabase/examples/tree/main/with-tanstack-ai-starter-full-backend).
 
-![Atlas library view](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png)
+![Atlas library view](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.jpg?v=2)
 
 Atlas uses four primitives from the [Neon backend](https://neon.com/blog/neon-backend-is-ga):
 
@@ -64,7 +64,7 @@ Atlas deliberately does not use all the primitives in the Neon suite: APIs are h
 
 Atlas is a [TanStack Start](https://tanstack.com/start) app on [Vercel](https://vercel.com/). The sections below cover how it declares the backend, uploads and stores the photos in a private bucket, searches from them based on face, image or text.
 
-![Atlas architecture: the browser, TanStack Start server functions and API routes on Vercel, and Managed Better Auth, Lakebase Postgres, Lakebase Search, and Object Storage on one Neon branch](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/architecture.svg)
+![Atlas architecture: the browser, TanStack Start server functions and API routes on Vercel, and Managed Better Auth, Lakebase Postgres, Lakebase Search, and Object Storage on one Neon branch](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/architecture.svg)
 
 ### Declare the backend in neon.ts
 
@@ -247,17 +247,17 @@ const { rows } = await db.execute(sql`
 
 Drizzle's query builder can't express `<=>`, so ranking queries use a raw `sql` fragment. Image search runs the same query with a different vector. Atlas passes an uploaded image through CLIP's vision model, and **Find similar** reuses a stored photo's embedding.
 
-![Atlas results for the text search "people laughing together", ranked by cosine distance](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-text.png)
+![Atlas results for the text search "people laughing together", ranked by cosine distance](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-text.jpg?v=2)
 
-![A photo opened in Atlas with its caption, cosine distance, and the Find similar button](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/photo-detail.png)
+![A photo opened in Atlas with its caption, cosine distance, and the Find similar button](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/photo-detail.jpg?v=2)
 
-![Atlas Find similar results for the opened photo](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-similar.png)
+![Atlas Find similar results for the opened photo](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-similar.jpg?v=2)
 
 ### Find people by face
 
 Face search requires a different vector than scene search. CLIP describes the contents of a whole photo, while a face descriptor identifies the person in it. Atlas detects faces in the browser with [`@vladmandic/human`](https://github.com/vladmandic/human) on WebGL. On upload, the browser crops each face, computes a 1024-d descriptor, and posts both to `/api/faces`. The server stores the crops in the bucket, inserts the face rows, and regroups that user's faces into people with [Chinese Whispers](<https://en.wikipedia.org/wiki/Chinese_whispers_(clustering_method)>) clustering.
 
-![Atlas showing the nine photos grouped under one person](/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/person.png)
+![Atlas showing the nine photos grouped under one person](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/person.jpg?v=2)
 
 To search by face, Atlas ranks each photo by its closest face to the query descriptor:
 
@@ -295,8 +295,9 @@ For Atlas, each preview therefore contains:
 - the users and sessions needed to test sign-in and access
 - the `lakebase_ann` index used by text and image search
 
-<video controls autoPlay muted loop playsInline width="3840" height="2160">
-<source src="/images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.mp4" type="video/mp4" />
+<video controls autoPlay muted loop playsInline width="708" height="398">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.webm?v=2" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.mp4?v=2" type="video/mp4" />
 </video>
 
 ## Run Atlas and start building
