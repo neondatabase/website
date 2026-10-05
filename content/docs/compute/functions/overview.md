@@ -22,7 +22,7 @@ hideCopyPage: true
 
 <img
   src="/docs/compute/functions/hero-functions.svg"
-  alt="Your function runs at an HTTP URL and queries the Postgres database right next to it."
+  alt="Your function runs at an HTTP URL, queries the Postgres database next to it, and reaches more of your backend such as storage and AI Gateway."
   className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
 />
 
