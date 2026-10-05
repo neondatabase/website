@@ -12,8 +12,8 @@ categories:
 authors:
   - rishi-raj-jain
 cover:
-  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
-  alt: 'Atlas photo library with the People row and photo grid'
+  image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/cover.jpg
+  alt: 'Building a smart photo library with TanStack and the Neon backend'
 isFeatured: false
 draft: true
 seo:
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: Building a private, searchable photo library on the Neon backend - Neon
   ogDescription: Private uploads, user authentication, and search by text, image, or face
-  image: /images/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.png
+  image: https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/social.jpg
 ---
 
 A photo library has basically four kinds of data:
