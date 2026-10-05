@@ -111,7 +111,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     testCases.forEach(({ name, path }) => {
       it(`should serve markdown for ${name} (${path}) with AI User-Agent`, async () => {
-        const req = createMockRequest(path, 'Claude/1.0', 'text/html');
+        const req = createMockRequest(path, 'Claude/1.0', '*/*');
         mockMarkdownFetch(`# ${name} Content`);
 
         const response = await middleware(req);
@@ -136,6 +136,19 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(text).toContain(`# ${name} Content`);
       });
 
+      it(`should NOT serve markdown for ${name} (${path}) with AI User-Agent that accepts HTML`, async () => {
+        const req = createMockRequest(
+          path,
+          'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot',
+          'text/html,application/xhtml+xml,*/*;q=0.8'
+        );
+
+        const response = await middleware(req);
+
+        expect(global.fetch).not.toHaveBeenCalled();
+        expect(response.type).toBe('next');
+      });
+
       it(`should NOT serve markdown for ${name} (${path}) with regular browser request`, async () => {
         const req = createMockRequest(
           path,
@@ -154,7 +167,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
   describe('Bare /docs root', () => {
     it('serves llms.txt markdown for AI User-Agent', async () => {
-      const req = createMockRequest('/docs', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs', 'Claude/1.0', '*/*');
       mockMarkdownFetch('# Neon Postgres');
 
       const response = await middleware(req);
@@ -202,7 +215,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     excludedCases.forEach(({ name, path, reason }) => {
       it(`should return HTML for ${name} (${path}) even with AI User-Agent - ${reason}`, async () => {
-        const req = createMockRequest(path, 'Claude/1.0', 'text/html');
+        const req = createMockRequest(path, 'Claude/1.0', '*/*');
 
         const response = await middleware(req);
 
@@ -230,7 +243,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
   describe('Error handling', () => {
     it('should return agent-friendly 404 markdown when markdown fetch returns 404', async () => {
-      const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/non-existent', 'Claude/1.0', '*/*');
 
       // Non-.md path: markdown 404, no redirect probe (bare moved paths are
       // handled by next.config before middleware).
@@ -249,7 +262,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should use shorter cache TTL for agent 404 responses', async () => {
-      const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/non-existent', 'Claude/1.0', '*/*');
 
       // Non-.md path: no redirect probe (bare moved paths are handled by
       // next.config before middleware).
@@ -262,7 +275,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should track an agent .md request only once when the backend errors (5xx)', async () => {
-      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', '*/*');
 
       // Markdown backend returns 500: the agent branch tracks once and falls
       // through to the .md content branch, which must NOT track again.
@@ -277,7 +290,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should redirect agents to the target .md when a moved page 404s', async () => {
-      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', '*/*');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
@@ -298,7 +311,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should not redirect when the moved page targets an off-origin URL', async () => {
-      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', '*/*');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
@@ -317,7 +330,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should not mirror a temporary (307) redirect as a permanent .md redirect', async () => {
-      const req = createMockRequest('/docs/temporary.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/temporary.md', 'Claude/1.0', '*/*');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
@@ -332,7 +345,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should mirror a permanent 301 redirect (not just 308)', async () => {
-      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/cli/auth.md', 'Claude/1.0', '*/*');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
@@ -346,7 +359,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should not redirect when the moved page targets the site root', async () => {
-      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', '*/*');
 
       mockFetchByUrl({
         md: { ok: false, status: 404 },
@@ -361,7 +374,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should fallback to next() when markdown fetch throws error', async () => {
-      const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/introduction', 'Claude/1.0', '*/*');
       const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       global.fetch
@@ -513,7 +526,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       const req = createMockRequest(
         '/docs/ai/skills/neon-functions/references/sentry.md',
         'Claude/1.0',
-        'text/html'
+        '*/*'
       );
 
       const response = await middleware(req);
@@ -617,7 +630,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
         return Promise.resolve({ ok: true, status: 200, text: () => Promise.resolve('# Doc') });
       });
 
-      const req = createMockRequest('/docs/introduction.md', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/introduction.md', 'Claude/1.0', '*/*');
       const response = await middleware(req);
 
       const beacons = global.fetch.mock.calls.filter(([url]) => url === 'https://neonapi.io/t.js');
@@ -630,7 +643,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
   describe('Response headers validation', () => {
     it('should include correct cache headers for markdown responses', async () => {
-      const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/introduction', 'Claude/1.0', '*/*');
       mockMarkdownFetch('# Test');
 
       const response = await middleware(req);
@@ -641,7 +654,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
 
     it('should set correct content type for markdown', async () => {
-      const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
+      const req = createMockRequest('/docs/introduction', 'Claude/1.0', '*/*');
       mockMarkdownFetch('# Test');
 
       const response = await middleware(req);
@@ -698,7 +711,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     aiAgents.forEach((agent) => {
       it(`should detect ${agent} as AI agent`, async () => {
-        const req = createMockRequest('/docs/introduction', agent, 'text/html');
+        const req = createMockRequest('/docs/introduction', agent, '*/*');
         mockMarkdownFetch('# Test');
 
         const response = await middleware(req);
