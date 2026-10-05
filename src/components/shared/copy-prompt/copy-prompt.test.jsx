@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import AgentPrompt from './agent-prompt';
 import CopyPrompt from './copy-prompt';
 
 // The module imports these at the top; mock them so the file loads under
@@ -27,7 +28,7 @@ const setScrollHeight = (value) => {
   });
 };
 
-describe('CopyPrompt (agent-prompt mode via `title`)', () => {
+describe('CopyPrompt (agent variant)', () => {
   let writeText;
 
   beforeEach(() => {
@@ -46,7 +47,11 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
   it('renders the title and copies the prompt, flipping to the copied state', async () => {
     setScrollHeight(50); // short prompt, not collapsible
 
-    render(<CopyPrompt title="Create a Neon project">Build me a project.</CopyPrompt>);
+    render(
+      <CopyPrompt variant="agent" title="Create a Neon project">
+        Build me a project.
+      </CopyPrompt>
+    );
 
     expect(screen.getByText('Create a Neon project')).toBeInTheDocument();
 
@@ -60,7 +65,11 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
   it('does not render an expand control for a short prompt', () => {
     setScrollHeight(50);
 
-    render(<CopyPrompt title="Short task">A short prompt.</CopyPrompt>);
+    render(
+      <CopyPrompt variant="agent" title="Short task">
+        A short prompt.
+      </CopyPrompt>
+    );
 
     expect(screen.queryByRole('button', { name: /expand prompt/i })).not.toBeInTheDocument();
   });
@@ -68,7 +77,11 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
   it('puts the chevron on its own row and toggles expand/collapse', () => {
     setScrollHeight(300); // taller than the ~95px / 4-line threshold
 
-    render(<CopyPrompt title="Long task">A very long prompt that overflows.</CopyPrompt>);
+    render(
+      <CopyPrompt variant="agent" title="Long task">
+        A very long prompt that overflows.
+      </CopyPrompt>
+    );
 
     const expandButton = screen.getByRole('button', { name: 'Expand prompt' });
     expect(expandButton.parentElement).toHaveClass('pt-2');
@@ -78,6 +91,7 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
     const prompt = screen.getByText('A very long prompt that overflows.');
     expect(expandButton).toHaveAttribute('aria-controls', prompt.getAttribute('id'));
     expect(prompt.className).toContain('overflow-hidden');
+    expect(prompt.nextElementSibling).toHaveAttribute('aria-hidden', 'true');
 
     fireEvent.click(expandButton);
 
@@ -89,7 +103,11 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
   it('still copies the full prompt while collapsed', async () => {
     setScrollHeight(300);
 
-    render(<CopyPrompt title="Long task">The entire prompt text.</CopyPrompt>);
+    render(
+      <CopyPrompt variant="agent" title="Long task">
+        The entire prompt text.
+      </CopyPrompt>
+    );
 
     // Collapsed by default (expand control present).
     expect(screen.getByRole('button', { name: 'Expand prompt' })).toBeInTheDocument();
@@ -100,9 +118,18 @@ describe('CopyPrompt (agent-prompt mode via `title`)', () => {
       expect(screen.getByRole('button', { name: /copied/i })).toBeInTheDocument()
     );
   });
+
+  it('renders the agent card through AgentPrompt', () => {
+    setScrollHeight(50);
+
+    render(<AgentPrompt title="Agent task">Run this agent prompt.</AgentPrompt>);
+
+    expect(screen.getByText('Agent task')).toBeInTheDocument();
+    expect(screen.getByText('Run this agent prompt.')).toHaveClass('font-mono');
+  });
 });
 
-describe('CopyPrompt (legacy mode, no `title`)', () => {
+describe('CopyPrompt (legacy mode)', () => {
   beforeEach(() => {
     global.fetch = vi.fn().mockResolvedValue({ text: () => Promise.resolve('# Prompt body') });
   });
@@ -120,5 +147,21 @@ describe('CopyPrompt (legacy mode, no `title`)', () => {
       screen.getByText('Use this pre-built prompt to get started faster.')
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /copy prompt/i })).toBeInTheDocument();
+  });
+
+  it('keeps the legacy layout when title and description are provided', async () => {
+    render(
+      <CopyPrompt
+        src="/prompts/example.md"
+        title="AI prompt: Get started with the Neon API"
+        description="Copy into your AI assistant."
+      />
+    );
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+
+    expect(screen.getByText('Copy into your AI assistant.')).toBeInTheDocument();
+    expect(screen.queryByText('AI prompt: Get started with the Neon API')).not.toBeInTheDocument();
+    expect(screen.getByTestId('pattern-image')).toBeInTheDocument();
   });
 });

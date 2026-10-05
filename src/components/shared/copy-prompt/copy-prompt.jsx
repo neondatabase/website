@@ -62,6 +62,7 @@ const CopyPrompt = (props) => {
     buttonText = DEFAULT_BUTTON_TEXT,
     title = null,
     children = null,
+    variant = 'legacy',
   } = props;
   const [markdown, setMarkdown] = useState('');
   const [copied, setCopied] = useState(false);
@@ -90,7 +91,7 @@ const CopyPrompt = (props) => {
   // to collapse (taller than ~4 lines). scrollHeight reports the full content
   // height even while the element is clamped, so re-measuring stays accurate.
   useEffect(() => {
-    if (!title) return undefined;
+    if (variant !== 'agent') return undefined;
     const el = promptRef.current;
     if (!el) return undefined;
 
@@ -115,9 +116,9 @@ const CopyPrompt = (props) => {
       if (observer) observer.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [title, promptText]);
+  }, [variant, promptText]);
 
-  // ---- Legacy layout: no `title`. Unchanged, so existing callers render as before. ----
+  // ---- Legacy layout. Unchanged, so existing callers render as before. ----
   const handleCopy = async () => {
     await navigator.clipboard.writeText(markdown);
     setCopied(true);
@@ -125,7 +126,7 @@ const CopyPrompt = (props) => {
     sendGtagEvent('Button Clicked', { text: 'Copy prompt' });
   };
 
-  if (!title) {
+  if (variant !== 'agent') {
     return (
       <figure
         className={cn(
@@ -157,7 +158,7 @@ const CopyPrompt = (props) => {
     );
   }
 
-  // ---- Agent-prompt layout: `title` present (header strip + collapsible body). ----
+  // ---- Agent-prompt layout: explicit opt-in (header strip + collapsible body). ----
   const handleAgentCopy = async () => {
     try {
       if (
@@ -212,14 +213,17 @@ const CopyPrompt = (props) => {
           ref={promptRef}
           id={promptId}
           className={cn(
-            'm-0 font-mono text-[14px] leading-[1.7] tracking-snug [text-wrap:pretty] whitespace-pre-wrap text-black dark:text-gray-new-94',
+            'm-0 font-mono text-[14px] leading-[1.7] tracking-snug [text-wrap:pretty] whitespace-pre-wrap text-black-pure dark:text-gray-new-94',
             isClamped && 'max-h-[95px] overflow-hidden'
           )}
         >
           {promptText}
         </p>
         {isClamped && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-b from-transparent to-white dark:to-black-fog" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-b from-transparent to-white dark:to-black-fog"
+          />
         )}
       </div>
 
@@ -257,6 +261,7 @@ CopyPrompt.propTypes = {
   buttonText: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  variant: PropTypes.oneOf(['legacy', 'agent']),
 };
 
 export default CopyPrompt;
