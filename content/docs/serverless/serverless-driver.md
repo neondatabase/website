@@ -13,7 +13,7 @@ summary: >-
   and troubleshooting for common errors. Optional settings are on the Neon
   serverless driver configuration page. Install with
   `npm install @neondatabase/serverless`; TypeScript types are bundled.
-updatedOn: '2026-10-05T13:42:27.789Z'
+updatedOn: '2026-10-05T14:01:57.998Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -140,7 +140,7 @@ const rows = await sql`SELECT * FROM posts ${whereClause} ${limitClause}`;
 
 You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
-<CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Drizzle-ORM", "Next.js on Vercel", "Vercel Functions"]}>
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -156,48 +156,45 @@ const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 ```
 
 ```typescript
-import { drizzle } from 'drizzle-orm/neon-http';
-import { eq } from 'drizzle-orm';
 import { neon } from '@neondatabase/serverless';
-import { posts } from './schema';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { eq } from 'drizzle-orm';
 
-export default async () => {
-  const postId = 12;
-  const sql = neon(process.env.DATABASE_URL!);
-  const db = drizzle(sql);
-  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
-  return new Response(JSON.stringify({ post: onePost }));
-};
+// Schema (usually in its own file, such as schema.ts)
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+});
+
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle(sql);
+
+const postId = 12;
+const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
 ```
 
 ```typescript
+// app/api/posts/route.ts (Next.js App Router route handler)
 import { neon } from '@neondatabase/serverless';
 
-export default async (req: Request) => {
-  const postId = new URL(req.url).searchParams.get('id');
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
   const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries:
-  // const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  return new Response(JSON.stringify(posts));
+  return Response.json(posts);
 }
-
-export const config = {
-  runtime: 'edge',
-};
 ```
 
-```ts
+```typescript
+// api/posts.ts (Vercel Function, no framework)
 import { neon } from '@neondatabase/serverless';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(request: NextApiRequest, res: NextApiResponse) {
-  const postId = request.query.id;
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
   const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries:
-  // const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  return res.status(200).json(posts);
+  return Response.json(posts);
 }
 ```
 
@@ -256,7 +253,7 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
-<CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Next.js on Vercel", "Vercel Functions"]}>
 
 ```javascript
 import { Pool } from '@neondatabase/serverless';
@@ -268,85 +265,73 @@ await pool.end();
 ```
 
 ```typescript
-import { Pool, neonConfig } from '@neondatabase/serverless';
+// Prisma ORM 7, with the default `prisma-client` generator (output = "../generated/prisma")
+// and a `Post` model in prisma/schema.prisma
+import 'dotenv/config';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import dotenv from 'dotenv';
-import ws from 'ws';
+import { PrismaClient } from './generated/prisma/client';
 
-dotenv.config();
-neonConfig.webSocketConstructor = ws;
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-async function main() {
-  const posts = await prisma.post.findMany();
-}
-
-main();
+const posts = await prisma.post.findMany();
 ```
 
 ```typescript
+import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
-import { Pool } from '@neondatabase/serverless';
-import { posts } from './schema';
 
-export default async () => {
-  const postId = 12;
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  const db = drizzle(pool);
-  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+// Schema (usually in its own file, such as schema.ts)
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+});
 
-  await pool.end();
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle(pool);
 
-  return new Response(JSON.stringify({ post: onePost }));
-};
+const postId = 12;
+const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+await pool.end();
 ```
 
 ```typescript
+// app/api/posts/route.ts (Next.js App Router route handler)
 import { Pool } from '@neondatabase/serverless';
+import { after } from 'next/server';
 
-export default async (req: Request, ctx: any) => {
-  const postId = new URL(req.url).searchParams.get('id');
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
   if (!postId) return new Response('Missing id', { status: 400 });
 
-  const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  const post = posts.rows[0];
+  // Create, use, and close the pool inside the request handler
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  after(() => pool.end());
 
-  ctx.waitUntil(pool.end());
-
-  if (!post) return new Response('Not found', { status: 404 });
-  return new Response(JSON.stringify(post), {
-    headers: { 'content-type': 'application/json' }
-  });
+  if (!rows[0]) return new Response('Not found', { status: 404 });
+  return Response.json(rows[0]);
 }
-
-export const config = {
-  runtime: 'edge',
-};
 ```
 
-```ts
+```typescript
+// api/posts.ts (Vercel Function, no framework)
 import { Pool } from '@neondatabase/serverless';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { waitUntil } from '@vercel/functions';
 
-export default async function handler(request: NextApiRequest, res: NextApiResponse) {
-  const postId = Array.isArray(request.query.id) ? request.query.id[0] : request.query.id;
-  if (!postId) return res.status(400).send('Missing id');
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
+  if (!postId) return new Response('Missing id', { status: 400 });
 
+  // Create, use, and close the pool inside the request handler
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  waitUntil(pool.end());
 
-  await pool.end();
-
-  const post = posts.rows[0];
-  if (!post) return res.status(404).send('Not found');
-  return res.status(200).json(post);
+  if (!rows[0]) return new Response('Not found', { status: 404 });
+  return Response.json(rows[0]);
 }
 ```
 
@@ -362,7 +347,7 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
   neonConfig.webSocketConstructor = ws;
   ```
 
-- In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
+- In edge runtimes such as Cloudflare Workers and the Vercel Edge runtime, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 
 For examples that demonstrate these points, see [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client).
 
@@ -397,6 +382,7 @@ import { neon } from '@neondatabase/serverless';
 import retry from 'async-retry';
 
 const sql = neon(process.env.DATABASE_URL);
+const userId = 1;
 
 const result = await retry(
   async () => {
@@ -485,7 +471,7 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
-- [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
+- [Vercel Functions](https://vercel.com/docs/functions)
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 - [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers)
 
