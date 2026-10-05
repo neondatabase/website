@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-05T12:46:48.440Z'
+updatedOn: '2026-10-05T12:55:47.525Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -56,7 +56,7 @@ You can obtain a connection string for your database by clicking the **Connect**
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
-The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file.
+The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file (for example, `.env`). Frameworks such as Next.js load `.env` automatically. For a plain Node.js script, load it with `node --env-file=.env index.js`, or add `import 'dotenv/config';` at the top of the script after installing the `dotenv` package. If `DATABASE_URL` isn't loaded, you'll see [this error](#wrong-url-scheme-or-missing-user-host-or-database).
 
 ## Use the driver over HTTP
 
@@ -68,32 +68,33 @@ For example:
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 const id = 1;
+const useArchive = false;
 
 // Safe and convenient template function usage
-const result = await sql`SELECT * FROM table WHERE id = ${id}`;
+const rows = await sql`SELECT * FROM posts WHERE id = ${id}`;
 
 // For manually parameterized queries, use the query() function
-const result = await sql.query('SELECT * FROM table WHERE id = $1', [id]);
+const queryRows = await sql.query('SELECT * FROM posts WHERE id = $1', [id]);
 
 // For interpolating trusted strings (like column or table names), use the unsafe() function
-const table = condition ? 'table1' : 'table2'; // known-safe string values
-const result = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${id}`;
+const tableName = useArchive ? 'archived_posts' : 'posts'; // known-safe string values
+const unsafeRows = await sql`SELECT * FROM ${sql.unsafe(tableName)} WHERE id = ${id}`;
 
 // Alternatively, use template literals for known-safe values
-const table = condition ? sql`table1` : sql`table2`;
-const result = await sql`SELECT * FROM ${table} WHERE id = ${id}`;
+const table = useArchive ? sql`archived_posts` : sql`posts`;
+const templateRows = await sql`SELECT * FROM ${table} WHERE id = ${id}`;
 ```
 
 SQL template queries are fully composable, including those with parameters:
 
 ```javascript
-const name = 'Olivia';
+const title = 'My post';
 const limit = 1;
-const whereClause = sql`WHERE name = ${name}`;
+const whereClause = sql`WHERE title = ${title}`;
 const limitClause = sql`LIMIT ${limit}`;
 
 // Parameters are numbered appropriately at query time
-const result = await sql`SELECT * FROM table ${whereClause} ${limitClause}`;
+const rows = await sql`SELECT * FROM posts ${whereClause} ${limitClause}`;
 ```
 
 You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
@@ -104,10 +105,13 @@ You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.t
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
+const postId = 12;
+
+await sql`INSERT INTO posts (id, title) VALUES (${postId}, ${'My post'})`;
 const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-// or using query() for parameterized queries
-const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-// `posts` is now [{ id: 12, title: 'My post', ... }] (or undefined)
+// or using query() for parameterized queries:
+// const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+// `posts` is now [{ id: 12, title: 'My post' }]
 ```
 
 ```typescript
@@ -125,14 +129,15 @@ export default async () => {
 };
 ```
 
-```javascript
+```typescript
 import { neon } from '@neondatabase/serverless';
 
 export default async (req: Request) => {
-  const sql = neon(process.env.DATABASE_URL);
+  const postId = new URL(req.url).searchParams.get('id');
+  const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries
-  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  // or using query() for parameterized queries:
+  // const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
   return new Response(JSON.stringify(posts));
 }
 
@@ -146,10 +151,11 @@ import { neon } from '@neondatabase/serverless';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(request: NextApiRequest, res: NextApiResponse) {
+  const postId = request.query.id;
   const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries
-  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  // or using query() for parameterized queries:
+  // const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
   return res.status(200).json(posts);
 }
 ```
@@ -167,16 +173,17 @@ The `neon(...)` function returns a query function that can be used as a template
 ```javascript
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
+const postId = 12;
 
 // Use as a template function (recommended)
 const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
 
 // Use query() for manually parameterized queries
-const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+const queryRows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
 
 // Use unsafe() for trusted string interpolation
 const table = 'posts'; // trusted value
-const rows = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${postId}`;
+const unsafeRows = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${postId}`;
 ```
 
 By default, the query function returns only the rows resulting from the provided SQL query, and it returns them as an array of objects where the keys are column names. For example:
@@ -424,8 +431,9 @@ You can use the Neon serverless driver in the same way you would use `node-postg
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
-pool.end();
+const postId = 12;
+const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+await pool.end();
 ```
 
 ```typescript
@@ -468,7 +476,7 @@ export default async () => {
 };
 ```
 
-```javascript
+```typescript
 import { Pool } from '@neondatabase/serverless';
 
 export default async (req: Request, ctx: any) => {
