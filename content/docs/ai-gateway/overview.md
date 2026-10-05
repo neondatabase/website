@@ -7,25 +7,25 @@ summary: >-
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
 updatedOn: '2026-09-26T00:49:26.569Z'
+layout: wide
+hideCopyPage: true
 ---
 
-Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-- **One credential across all providers.** Call models like GPT-6 Astra, Grok 4.6, Kimi K3, and Gemini 3.6 Flash with no separate account for each.
-- **Keep your SDK.** Point your existing AI SDK at the branch endpoint, with no new client to learn.
-- **Scoped to your branch.** Each branch has its own gateway endpoint.
-- **Streaming built in.** Stream responses with no extra setup.
-- **Familiar paths.** The same short paths OpenAI and OpenRouter use, plus native provider paths when you need them. See [Shorter paths](/docs/ai-gateway/models#shorter-paths).
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-4 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">One endpoint and one Neon credential for models from many providers, scoped to your branch the same way your data is.</p>
+<p className="mt-0 mb-6 max-w-2xl text-sm leading-[1.6] tracking-tight text-gray-new-30 [text-wrap:pretty] dark:text-gray-new-70"><strong className="font-medium text-black-pure dark:text-white">Before you start:</strong> AI Gateway requires a <a className="underline underline-offset-2 hover:text-green-45" href="#pricing">paid plan</a> with <a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/prepaid-credits">prepaid credits</a>, and your project must be in a <a className="underline underline-offset-2 hover:text-green-45" href="#overview">supported region</a>. Set that up first, then run the prompt below.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/ai-gateway-landing.md" buttonText="Copy prompt" />
+</div>
 
-## Model access
+<img
+  src="/docs/ai-gateway/hero-ai-gateway.svg"
+  alt="One AI Gateway endpoint for your app reaches many model providers."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
 
-Neon AI Gateway serves open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time.
-
-To request access to foundation models that aren't enabled for your project yet, drop your email below and we'll reach out as access opens up.
-
-<RequestForm type="backend-platform" title="Request access to foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request access" confirmation="You're on the list. We'll be in touch as access opens up." />
-
-**See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).** See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) to add credits.
+</div>
 
 ## Get started
 
@@ -42,6 +42,26 @@ To request access to foundation models that aren't enabled for your project yet,
 <a href="/docs/ai-gateway/authentication" description="Understand how Neon credentials work with AI Gateway." icon="lock-landscape">Authentication</a>
 
 </DetailIconCards>
+
+## About Neon AI Gateway
+
+Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
+
+- **One credential across all providers.** Call models from many providers with no separate account for each.
+- **Keep your SDK.** Point your existing AI SDK at the branch endpoint, with no new client to learn.
+- **Scoped to your branch.** Each branch has its own gateway endpoint.
+- **Streaming built in.** Stream responses with no extra setup.
+- **Familiar paths.** The same short paths OpenAI and OpenRouter use, plus native provider paths when you need them. See [Shorter paths](/docs/ai-gateway/models#shorter-paths).
+
+## Model access
+
+Neon AI Gateway serves open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time.
+
+To request access to foundation models that aren't enabled for your project yet, drop your email below and we'll reach out as access opens up.
+
+<RequestForm type="backend-platform" title="Request access to foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request access" confirmation="You're on the list. We'll be in touch as access opens up." />
+
+**See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).** See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) to add credits.
 
 ## Overview
 
