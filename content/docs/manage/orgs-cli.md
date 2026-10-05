@@ -7,7 +7,7 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-05T17:20:55.439Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -29,8 +29,8 @@ Example:
 ```bash
 neon orgs list
 Organizations
-Id                      Name
-org-ocean-art-12345678  Example Org
+Id                      Name         Plan
+org-ocean-art-12345678  Example Org  Launch
 ```
 
 See [Orgs - CLI](/docs/cli/orgs) to learn more.
