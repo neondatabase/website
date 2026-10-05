@@ -13,7 +13,7 @@ summary: >-
   and troubleshooting for common errors. Optional settings are on the Neon
   serverless driver configuration page. Install with
   `npm install @neondatabase/serverless`; TypeScript types are bundled.
-updatedOn: '2026-10-05T14:01:57.998Z'
+updatedOn: '2026-10-05T14:13:05.152Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -336,6 +336,8 @@ export async function GET(request: Request) {
 ```
 
 </CodeTabs>
+
+For a complete Prisma setup, including `schema.prisma`, `prisma.config.ts`, and generating the client, see [Connect from Prisma to Neon](/docs/guides/prisma).
 
 ### Pool and Client usage notes
 
