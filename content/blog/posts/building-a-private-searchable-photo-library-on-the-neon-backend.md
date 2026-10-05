@@ -1,5 +1,5 @@
 ---
-title: Building a private, searchable photo library on the Neon backend with TanStack
+title: Building a searchable photo library on the Neon backend with TanStack
 description: Private uploads, user authentication, and search by text, image, or face
 excerpt: >-
   A photo library looks simple, but each photo carries files, metadata, vectors,
@@ -17,7 +17,7 @@ cover:
 isFeatured: false
 draft: true
 seo:
-  title: Building a private, searchable photo library on the Neon backend - Neon
+  title: Building a searchable photo library on the Neon backend - Neon
   description: Private uploads, user authentication, and search by text, image, or face
   keywords: []
   noindex: false
