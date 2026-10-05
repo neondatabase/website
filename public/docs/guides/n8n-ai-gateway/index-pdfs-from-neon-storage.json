@@ -1,0 +1,230 @@
+{
+  "name": "Index PDFs from Neon Storage (pgvector)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f882b0a0-066e-4c5d-821a-6b34b6e33df7",
+      "name": "Run Indexing",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "bucketName": "n8n",
+        "returnAll": true,
+        "options": {}
+      },
+      "id": "d00f681c-aeac-4b96-b0c2-caba4c92162c",
+      "name": "List PDFs",
+      "type": "n8n-nodes-base.s3",
+      "typeVersion": 1,
+      "position": [
+        224,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "bucketName": "n8n",
+        "fileKey": "={{ $json.Key }}"
+      },
+      "id": "0ad0625b-0cbb-46a2-82bb-d4eb780bd806",
+      "name": "Download PDF",
+      "type": "n8n-nodes-base.s3",
+      "typeVersion": 1,
+      "position": [
+        672,
+        144
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": "pdf_chunks",
+        "embeddingBatchSize": 100,
+        "options": {}
+      },
+      "id": "d33ed376-b3d8-48b2-b366-9c9d173b139b",
+      "name": "Store in pgvector",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        896,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "model": "qwen3-embedding-0-6b",
+        "options": {
+          "batchSize": 100,
+          "encodingFormat": "float"
+        }
+      },
+      "id": "8aad7c83-000d-4bec-b62f-70dd4912b4d1",
+      "name": "Neon AI Gateway Embeddings",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "loader": "pdfLoader",
+        "textSplittingMode": "custom",
+        "options": {
+          "splitPages": true,
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "source_file",
+                "value": "={{ $('List PDFs').item.json.Key }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "3a3916f7-4ff7-4330-babc-43fff35eb6c1",
+      "name": "PDF Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1040,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 100,
+        "options": {}
+      },
+      "id": "c86aa42c-8822-49b8-9603-18c98ce96b26",
+      "name": "Chunk Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "43e67fd0-d145-44db-aa42-be9eef48de18",
+      "name": "Loop Over Files",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        448,
+        208
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Run Indexing": {
+      "main": [
+        [
+          {
+            "node": "List PDFs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List PDFs": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "Store in pgvector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store in pgvector": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neon AI Gateway Embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Store in pgvector",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Store in pgvector",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunk Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "PDF Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Files": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "tags": []
+}
