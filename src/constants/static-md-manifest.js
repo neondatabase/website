@@ -72,6 +72,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/nextjs-prompt.md',
   '/prompts/nuxt-neon-prompt.md',
   '/prompts/phoenix-prompt.md',
+  '/prompts/postgres-landing.md',
   '/prompts/prisma-prompt.md',
   '/prompts/python-prompt.md',
   '/prompts/quarkus-jdbc-prompt.md',
