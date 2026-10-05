@@ -45,7 +45,7 @@ I built [Atlas](https://with-tanstack-ai-starter-full-backend.vercel.app) to dem
 
 Check out the code [in this repository](https://github.com/neondatabase/examples/tree/main/with-tanstack-ai-starter-full-backend).
 
-![Atlas library view](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.jpg)
+![Atlas library view](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/library.jpg?v=2)
 
 Atlas uses four primitives from the [Neon backend](https://neon.com/blog/neon-backend-is-ga):
 
@@ -247,17 +247,17 @@ const { rows } = await db.execute(sql`
 
 Drizzle's query builder can't express `<=>`, so ranking queries use a raw `sql` fragment. Image search runs the same query with a different vector. Atlas passes an uploaded image through CLIP's vision model, and **Find similar** reuses a stored photo's embedding.
 
-![Atlas results for the text search "people laughing together", ranked by cosine distance](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-text.jpg)
+![Atlas results for the text search "people laughing together", ranked by cosine distance](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-text.jpg?v=2)
 
-![A photo opened in Atlas with its caption, cosine distance, and the Find similar button](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/photo-detail.jpg)
+![A photo opened in Atlas with its caption, cosine distance, and the Find similar button](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/photo-detail.jpg?v=2)
 
-![Atlas Find similar results for the opened photo](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-similar.jpg)
+![Atlas Find similar results for the opened photo](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/search-similar.jpg?v=2)
 
 ### Find people by face
 
 Face search requires a different vector than scene search. CLIP describes the contents of a whole photo, while a face descriptor identifies the person in it. Atlas detects faces in the browser with [`@vladmandic/human`](https://github.com/vladmandic/human) on WebGL. On upload, the browser crops each face, computes a 1024-d descriptor, and posts both to `/api/faces`. The server stores the crops in the bucket, inserts the face rows, and regroups that user's faces into people with [Chinese Whispers](<https://en.wikipedia.org/wiki/Chinese_whispers_(clustering_method)>) clustering.
 
-![Atlas showing the nine photos grouped under one person](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/person.jpg)
+![Atlas showing the nine photos grouped under one person](https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/person.jpg?v=2)
 
 To search by face, Atlas ranks each photo by its closest face to the query descriptor:
 
@@ -296,8 +296,8 @@ For Atlas, each preview therefore contains:
 - the `lakebase_ann` index used by text and image search
 
 <video controls autoPlay muted loop playsInline width="708" height="398">
-<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.webm" type="video/webm" />
-<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.mp4" type="video/mp4" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.webm?v=2" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/building-a-private-searchable-photo-library-on-the-neon-backend/clip-dev-atlas.mp4?v=2" type="video/mp4" />
 </video>
 
 ## Run Atlas and start building
