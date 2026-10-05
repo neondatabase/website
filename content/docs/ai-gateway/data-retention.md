@@ -13,7 +13,7 @@ Neon AI Gateway gives you one credential for many models, all served through [Da
 
 This page summarizes that policy. For the authoritative and latest terms, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving#data-retention).
 
-## Databricks data retention
+## Data retention
 
 For all Model Serving workloads, Databricks retains container build logs for up to 30 days and metrics data for up to 14 days.
 
