@@ -947,6 +947,8 @@
           items:
             - title: Authentication
               slug: ai-gateway/authentication
+            - title: Data retention
+              slug: ai-gateway/data-retention
             - title: Troubleshooting
               slug: ai-gateway/troubleshooting
     - title: Lakebase Search
