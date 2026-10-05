@@ -4,14 +4,16 @@ enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
 summary: >-
   The Neon serverless driver (`@neondatabase/serverless`) is a JavaScript
-  and TypeScript Postgres driver that replaces TCP with HTTP or WebSockets,
-  enabling Postgres queries from serverless and edge runtimes such as Vercel
-  Edge Functions and Cloudflare Workers. Use the `neon()` function over HTTP
-  for single or non-interactive batched queries, or the `Pool`/`Client`
-  constructors over WebSockets when sessions, interactive transactions, or
-  node-postgres drop-in compatibility are required. TypeScript types are
-  bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-10-05T13:31:38.055Z'
+  and TypeScript Postgres driver that queries Neon over HTTP or WebSockets
+  instead of TCP, so it works in serverless and edge runtimes. Use the
+  `neon()` function over HTTP by default, for single queries and
+  non-interactive transactions. Use `Pool` or `Client` over WebSockets only
+  for interactive transactions, sessions, or node-postgres (`pg`)
+  compatibility. Includes a runnable quick start, how to load `DATABASE_URL`,
+  and troubleshooting for common errors. Optional settings are on the Neon
+  serverless driver configuration page. Install with
+  `npm install @neondatabase/serverless`; TypeScript types are bundled.
+updatedOn: '2026-10-05T13:42:27.789Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -19,10 +21,9 @@ description= "Pre-built prompt for setting up the Neon serverless driver (JS/TS)
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
-When to query over HTTP vs WebSockets:
+Use the driver over **HTTP** by default. The `neon()` function sends each query as an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request, which is the fastest option for single queries and for [multiple queries in one non-interactive transaction](#issue-multiple-queries-with-the-transaction-function). See [Use the driver over HTTP](#use-the-driver-over-http).
 
-- **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
-- **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
+Switch to **WebSockets**, with the `Pool` or `Client` constructors, only if you need interactive transactions, sessions, or compatibility with [node-postgres](https://node-postgres.com/) (the `pg` package). See [Use the driver over WebSockets](#use-the-driver-over-websockets).
 
 The driver works with its defaults. For optional settings such as result formats, `fetch` timeouts, connection parameters, and transaction options, see [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration).
 
@@ -471,36 +472,6 @@ const sql = neon(process.env.DATABASE_URL, { disableWarningInBrowsers: true });
 // WebSockets
 neonConfig.disableWarningInBrowsers = true;
 ```
-
-## Example applications
-
-Explore the example applications that use the Neon serverless driver.
-
-### UNESCO World Heritage sites app
-
-Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
-
-![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
-
-There are different implementations of the application to choose from.
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/neon-vercel-rawsql" description="Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions" icon="github">Raw SQL + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-http" description="Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions" icon="github">Raw SQL via https + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
-<a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
-</DetailIconCards>
-
-### Ping Thing
-
-The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](/blog/how-to-use-postgres-at-the-edge)
-
-<DetailIconCards>
-<a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
-</DetailIconCards>
 
 ## Neon serverless driver GitHub repository and changelog
 
