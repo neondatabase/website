@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -27,7 +27,7 @@ Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This g
 ## Prerequisites
 
 - A [Neon account and project](/docs/get-started-with-neon/signing-up)
-- Node.js 18+ installed
+- Node.js 20.19+, 22.12+, or 24+ installed (required by Prisma ORM 7)
 - A Node.js or TypeScript project (or create a new one)
 
 ## Setup
@@ -35,9 +35,13 @@ Prisma is an open-source, next-generation ORM for Node.js and TypeScript. This g
 ### Step 1: Install dependencies
 
 ```bash
-npm install @prisma/client @prisma/adapter-neon dotenv
-npm install prisma tsx --save-dev
+npm install @prisma/client@7 @prisma/adapter-neon@7 dotenv
+npm install prisma@7 tsx --save-dev
 ```
+
+<Admonition type="note">
+This guide uses Prisma ORM 7. Install the `prisma` CLI, `@prisma/client`, and `@prisma/adapter-neon` at the same major version (`@7`). The `prisma` package's `latest` npm tag currently points to a Prisma 8 prerelease, so an unpinned `npm install prisma` installs a CLI that doesn't match the rest of this setup.
+</Admonition>
 
 ### Step 2: Get your connection strings
 
