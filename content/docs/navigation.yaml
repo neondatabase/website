@@ -257,6 +257,9 @@
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
                   slug: serverless/serverless-driver
+                  items:
+                    - title: Configuration
+                      slug: serverless/serverless-driver-configuration
                 - title: Neon SQL Editor
                   slug: get-started/query-with-neon-sql-editor
                 - title: psql
