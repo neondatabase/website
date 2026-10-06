@@ -35,7 +35,7 @@ const faqItems = [
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Yes. Alongside our serverless Postgres database, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway - a full backend suite that runs alongside your database and branches with it.</p>
+      <p>Yes. Alongside Lakebase Postgres, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway. Together they form a full backend suite that runs alongside your database and branches with it.</p>
     `,
   },
   {
@@ -48,7 +48,7 @@ const faqItems = [
   {
     question: 'What is a CU?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Neon databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment - with each CU allocating approximately 1 vCPU and 4 GB of RAM.</p>
+      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Neon databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment. Each CU allocates approximately 4 GB of RAM, along with associated CPU.</p>
     `,
   },
   {
@@ -57,11 +57,11 @@ const faqItems = [
     answer: `
       <p>A CU-hour is Neon's unit for measuring <strong>Postgres database compute usage</strong>. Because Neon databases scale to zero and autoscale, you're billed only for the database compute resources you actually use. In other words, your monthly database compute usage depends on:</p>
       <ul>
-        <li>How many compute endpoints are you running</li>
+        <li>How many compute endpoints you're running</li>
         <li>How large your compute endpoints are (in CUs)</li>
         <li>How long they run (in hours)</li>
       </ul>
-      <p>For a single compute, the calculation works similar to this:</p>
+      <p>For a single compute, the calculation works like this:</p>
       <code>Monthly CU-hours = [average CU size] × [number of hours the compute runs in the month]</code>
       <code>Monthly compute cost = [monthly CU-hours] × [CU-hour price]</code>
       <p>The CU-hour price depends on your pricing plan:</p>
@@ -87,7 +87,7 @@ const faqItems = [
         <li>Over a month, this uses roughly 90 CU-hours (0.25 CU × 12 hours × 30 days), staying within the Free plan limits for that project</li>
         <li>At 0.25 CU, 100 CU-hours covers about 400 hours of active compute, more than half the hours in a month</li>
       </ul>
-      <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
+      <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free plan philosophy.</a></p>
     `,
   },
   {
@@ -102,7 +102,7 @@ const faqItems = [
     question: 'How are the workload cost estimates calculated?',
     id: 'workload-cost-estimates',
     answer: `
-      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately.</strong></p>
+      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only. They don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately.</strong></p>
       <p>Each estimate combines two components:</p>
       <ul>
         <li><strong>Database compute cost:</strong> Based on the specified CU-hours per month. </li>
@@ -110,30 +110,30 @@ const faqItems = [
       </ul>
       <p>These estimates help you compare typical workloads across plans.</p>
       <p>Here's a detailed breakdown of each of the workload sizes and what they represent:</p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Intermittent Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">Intermittent load</h3>
       <p>
         140 CU-hours compute, 1 GB-month of storage. Typical of a small database that doesn't need to run 24/7.
         <img class="my-4" src="/images/pricing/140-CU-Hours.webp" />
-        A databse using 140 CU-hours compute per month can scale to zero when idle, and start back up in 350ms when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2CU when needed.</p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Low Load:</h3>
+        A database using 140 CU-hours compute per month can scale to zero when idle, and start back up within a few hundred milliseconds when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2 CU when needed.</p>
+      <h3 class="mt-6 text-lg text-white font-semibold">Low load</h3>
       <p>
         190 CU-hours compute, 5 GB-month of storage. A small database that <em>does</em> need to run 24/7.
         <img class="my-4" src="/images/pricing/190-CU-Hours.webp" />
-        Once scale to zero is disabled, the minimum CU-hours a database can use in a month is 187.5 <em>(750 hours in a month x 0.25 minimum CU size = 187.5)</em> so this example represents a database that has scale to zero disable but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
+        Once scale to zero is disabled, the minimum CU-hours a database can use in a month is about 182.5 <em>(about 730 hours in a month × 0.25 minimum CU size ≈ 182.5)</em>, so this example represents a database that has scale to zero disabled but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">Medium Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">Medium load</h3>
       <p>
         720 CU-hours compute, 10 GB-month of storage. Representative of a constant-load application database.
         <img class="my-4" src="/images/pricing/720-CU-Hours.webp" />
         As you can see from the autoscaling chart above, 720 CU hours translates to a database that scales between 0.5 and 4 CU based on load. 
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">High Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">High load</h3>
       <p>
         3,000 CU-hours compute, 100 GB-month of storage.
         <img class="my-4" src="/images/pricing/3000-CU-Hours.webp" />
         As an example, a database that is scaling between 3 CU and 7 CU will often use around 3000 CU hours in a month. This level represents production applications with sustained traffic, higher data volumes, and more complex queries requiring consistent compute resources.
       </p>
-      <h3 class="mt-6 text-lg text-white font-semibold">XL Load:</h3>
+      <h3 class="mt-6 text-lg text-white font-semibold">XL load</h3>
       <p>
         6,000 CU-hours compute, 1,000 GB-month of storage.
         <img class="my-4" src="/images/pricing/6000-CU-Hours.webp" />
@@ -168,7 +168,7 @@ const faqItems = [
     `,
   },
   {
-    question: 'Are the Free Plan quotas for database usage included in the paid plans?',
+    question: 'Are the Free plan quotas for database usage included in the paid plans?',
     answer: `
       <p>No. When you're on a paid plan, database usage starts metering from zero for both compute and storage. Free plan quotas don't apply once you upgrade. Instead, you're billed purely based on actual usage, at the rates of your paid plan.</p>
       <p>You should consider a paid plan if:</p>
@@ -176,7 +176,7 @@ const faqItems = [
         <li>You expect higher or more sustained usage than what's included per project on the Free plan</li>
         <li>You care about production guarantees, such as consistent availability, predictable performance, and never having your database paused due to usage limits</li>
       </ul>
-      <p>If your usage fits comfortably within the Free plan and you're not running a production workload, there's no reason to upgrade. The Free plan is designed to be genuinely useful for development and prototyping. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
+      <p>If your usage fits comfortably within the Free plan and you're not running a production workload, there's no reason to upgrade. The Free plan is designed to be genuinely useful for development and prototyping. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free plan philosophy.</a></p>
     `,
   },
   {
@@ -186,7 +186,7 @@ const faqItems = [
       <p>In Neon, you don't provision or manage database storage in advance. It scales automatically and invisibly as your data grows. At the end of each month, you're billed for the database storage actually consumed per project, measured in GB-months.</p>
       <p>Neon bills storage usage using two separate metrics:</p>
       <p><strong>History storage (or instant restore storage)</strong></p>
-      <p><strong>Instant restore</strong> relies on Neon retaining a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run Time Travel queries, and more. How long that history is kept is controlled by the <strong>history window</strong> on <strong>Settings → Instant restore</strong>—see <a href="${LINKS.docs}/introduction/history-window">History window</a> (1 day by default on paid plans).</p>
+      <p><strong>Instant restore</strong> relies on Neon retaining a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run Time Travel queries, and more. How long that history is kept is controlled by the <strong>history window</strong> on <strong>Settings → Instant restore</strong> (1 day by default on paid plans). See <a href="${LINKS.docs}/introduction/history-window">History window</a>.</p>
       <p><strong>History</strong> storage is billed based on the amount of Write-Ahead Log (WAL) retained within that history window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
       <p>If you don't need deep recovery or long Time Travel, shorten the history window to reduce costs.</p>
       <p><strong>Database storage (root and child branches)</strong></p>
@@ -195,21 +195,21 @@ const faqItems = [
         <li>Root branches are billed based on their actual data size (for example, 5 GB)</li>
         <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the history window used for instant restore (in this case, the child branch effectively shares storage with its parent).</li>
       </ul>
-      <p>The SUM of both components will be billed as your database storage at $0.35 per GB-month.</p>
+      <p>The sum of both components will be billed as your database storage at $0.35 per GB-month.</p>
       <p>What this implies:</p>
       <ul>
         <li>A child branch that has no data changes compared to its parent and is still within the <a href="${LINKS.docs}/introduction/history-window">history window</a> does not incur additional database storage costs.</li>
         <li>As a child branch accumulates changes over time, its storage usage increases.</li>
         <li>If a child branch falls out of the history window, it becomes as expensive as a root branch, since it no longer shares storage with its parent.</li>
       </ul>
-      <p>To keep database storage costs low, child branches are best kept short-lived - for example, by setting <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">resetting them</a> frequently, or deleting branches when they're no longer needed.</p>
+      <p>To keep database storage costs low, keep child branches short-lived: set <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">reset them</a> frequently, or delete branches when they're no longer needed.</p>
     `,
   },
   {
     question: 'How are extra branches billed?',
     id: 'additional-branches-billing',
     answer: `
-      <p>Each Neon plan includes a set number of branches per project at no additional cost (10 branches per project in Launch, 25 branches per project in Scale) but you can create and delete branches freely within your plan's included allowance:</p>
+      <p>Each paid plan includes a set number of branches per project at no additional cost (10 branches per project on Launch, 25 branches per project on Scale). You can create and delete branches freely within that allowance:</p>
       <ul>
         <li>If the total number of concurrent branches in a project exceeds your plan's allowance, the extra branches are billed as branch-months, prorated hourly.</li>
         <li>The price is $1.50 per extra branch-month (≈ $0.002 per hour)</li>
@@ -226,7 +226,7 @@ const faqItems = [
   {
     question: 'How is Managed Better Auth billed?',
     answer: `
-      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
+      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you need more, you can request an increase in the Neon Console.</p>
       <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU.</p>
     `,
   },
@@ -235,7 +235,7 @@ const faqItems = [
     answer: `
       <p>Database compute is often the most variable part of a monthly bill. For Neon databases, the most effective way to control compute costs is to configure maximum autoscaling limits and scale-to-zero.</p>
       <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
-      <p>Another effective way to control database compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
+      <p>Another effective way to control database compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you don't pay for compute while it's idle. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
       <p>To manage database storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining a large history window for instant restore if your use case does not require it. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
     `,
   },
