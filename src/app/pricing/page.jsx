@@ -83,8 +83,9 @@ const faqItems = [
       </ul>
       <p>A realistic example for a single project:</p>
       <ul>
-        <li>The database runs at an average of 1 CU for ~3 hours per day. It scales down to zero the rest of the time</li>
-        <li>Over a month, this uses roughly 90 CU-hours, staying within the Free plan limits for that project</li>
+        <li>The database runs at 0.25 CU, the default compute size for Free plan projects, for ~12 hours per day. It scales down to zero the rest of the time</li>
+        <li>Over a month, this uses roughly 90 CU-hours (0.25 CU × 12 hours × 30 days), staying within the Free plan limits for that project</li>
+        <li>At 0.25 CU, 100 CU-hours covers about 400 hours of active compute, more than half the hours in a month</li>
       </ul>
       <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
     `,
