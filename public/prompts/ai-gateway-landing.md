@@ -1,6 +1,6 @@
-Help me get set up with Neon AI Gateway, based on my project:
+Help me get set up with the Neon AI Gateway, based on my project:
 
-1. Set up Neon for this project and agent: `npx neon@latest init`. If I'm not signed in to Neon, stop and ask me to sign in. If I don't have a Neon account, stop and point me to sign-up.
-2. If my plan doesn't include AI Gateway, stop and tell me. Otherwise, configure the right AI SDK or client for this project and add a small, useful AI feature.
-3. Prove it works: make a real model request and show me the response, not just "done." Don't print credentials.
-4. Suggest the most relevant next steps for my project.
+1. Install the Neon CLI with `npm install -g neon@latest`.
+2. Read Neon's skill at https://neon.com/.well-known/agent-skills/neon/SKILL.md and use it to guide this setup.
+3. Run `neon init` to link a project on a paid Neon plan, in a region that supports the AI Gateway, and install Neon's agent tooling.
+4. Make one simple model call through the gateway with Neon's AI SDK provider, then prove it works: list the models available on my branch and show me a short reply from one of them. Don't print secrets.
