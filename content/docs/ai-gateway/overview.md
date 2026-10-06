@@ -15,7 +15,7 @@ hideCopyPage: true
 
 <div className="[&>div]:my-0!">
 <p className="mt-0 mb-4 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">One endpoint and one Neon credential for models from many providers, scoped to your branch the same way your data is.</p>
-<p className="mt-0 mb-6 max-w-2xl text-sm leading-[1.6] tracking-tight text-gray-new-30 [text-wrap:pretty] dark:text-gray-new-70"><strong className="font-medium text-black-pure dark:text-white">Before you start:</strong> AI Gateway needs a paid Neon plan (<a className="underline underline-offset-2 hover:text-green-45" href="#pricing">Launch or Scale</a>) with <a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/prepaid-credits">prepaid credits</a> ($5 minimum). Without both, setup stops at the plan or credits step.</p>
+<p className="mt-0 mb-6 max-w-2xl text-sm leading-[1.6] tracking-tight text-gray-new-30 [text-wrap:pretty] dark:text-gray-new-70"><strong className="font-medium text-black-pure dark:text-white">Before you start:</strong> AI Gateway needs a paid Neon plan (<a className="underline underline-offset-2 hover:text-green-45" href="#pricing">Launch or Scale</a>) with <a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/prepaid-credits">prepaid credits</a> ($5 minimum).</p>
 <AgentPrompt title="Set up with your agent" src="/prompts/ai-gateway-landing.md" buttonText="Copy prompt" />
 </div>
 
