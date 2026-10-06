@@ -89,8 +89,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
        - **eu-west-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
