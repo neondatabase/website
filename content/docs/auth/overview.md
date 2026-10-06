@@ -29,7 +29,7 @@ hideCopyPage: true
 
 <img
   src="/docs/auth/hero-auth.svg"
-  alt="Neon's managed Better Auth stores users and sessions in a neon_auth schema inside your Postgres database, next to your tables."
+  alt="Neon's managed Better Auth stores users and sessions in auth tables inside your Postgres database, next to your tables."
   className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
 />
 
