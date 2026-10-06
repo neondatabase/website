@@ -3,6 +3,12 @@ import LINKS from 'constants/links';
 
 const { objectStorage, functions } = BACKEND_PRICING;
 
+const realtimeFeature = {
+  title: 'Realtime (Beta)',
+  info: '<p>Free during beta</p><p>Database compute and egress are billed as usual</p>',
+  moreLink: { text: 'Read more', href: '/docs/live/overview' },
+};
+
 export default [
   {
     planId: 'free',
@@ -47,6 +53,7 @@ export default [
             title: 'Functions',
             info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
           },
+          { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
       },
     },
@@ -105,6 +112,7 @@ export default [
               href: '/docs/ai-gateway/models#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
@@ -163,6 +171,7 @@ export default [
               href: '/docs/ai-gateway/models#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
