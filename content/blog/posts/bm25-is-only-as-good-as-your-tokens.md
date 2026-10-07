@@ -34,6 +34,8 @@ The new `lakebase_tokenizer` extension, [now packaged with Lakebase Search](http
 
 Like everything in the Neon universe, it branches. If you branch your database, all its Lakebase Search configuration comes along - tokenizer included - so for example, you can test a new synonym set on a branch before shipping it.
 
+**[ADD CLIP]**
+
 ## A quick refresher on Lakebase Search
 
 [Lakebase Search](https://neon.com/docs/ai/lakebase-search) adds vector, keyword, and hybrid search to Lakebase Postgres through Postgres extensions:
