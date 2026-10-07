@@ -15,6 +15,14 @@ import {
 
 // Test actual file conversion - the important stuff
 describe('MDX to Markdown Conversion', () => {
+  it('uses a dated changelog URL as the source publication date', async () => {
+    const { content } = await processFile(
+      'content/changelog/2025-02-14.md',
+      'https://neon.com/docs/changelog/2025-02-14'
+    );
+    expect(content).toContain('<!-- neon-content-updated-at: 2025-02-14T00:00:00.000Z -->');
+  });
+
   it.each([
     ["updatedOn: '2026-09-01T21:19:48.000Z'", '2026-09-01T21:19:48.000Z'],
     ['createdAt: 2025-01-01', '2025-01-01T00:00:00.000Z'],

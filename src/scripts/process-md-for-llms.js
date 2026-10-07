@@ -2245,7 +2245,10 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // Build output with frontmatter-based header
   let output = '';
   // Publish source content time for search tie-breaking; never use build time.
-  const sourceDate = frontmatter.updatedOn || frontmatter.createdAt || frontmatter.date;
+  // Changelog entries encode their original publication date in the page URL.
+  const changelogDate = /\/docs\/changelog\/(\d{4}-\d{2}-\d{2})$/.exec(pageUrl || '')?.[1];
+  const sourceDate =
+    frontmatter.updatedOn || frontmatter.createdAt || frontmatter.date || changelogDate;
   if (sourceDate) {
     const timestamp = new Date(sourceDate);
     if (!Number.isNaN(timestamp.getTime())) {
