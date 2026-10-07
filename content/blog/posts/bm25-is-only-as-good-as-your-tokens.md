@@ -44,6 +44,14 @@ Like everything in the Neon universe, it [branches](https://neon.com/docs/introd
 - `lakebase_text` adds the `lakebase_bm25` index for full text search. It works on standard `tsvector` columns and adds BM25 ranking and top-K pushdown, which GIN with `ts_rank` doesn't have.
 - `lakebase_tokenizer` is the newest piece we're discussing. It controls how text becomes the terms that `lakebase_bm25` (and GIN) index.
 
+<figure>
+<video autoPlay muted loop playsInline width="708" height="390" aria-label="VectorDBBench price-performance comparison on LAION-100M">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/lakebase-search-clip.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/lakebase-search-retrieval-agents/lakebase-search-clip.mp4" type="video/mp4" />
+</video>
+<figcaption>In our VectorDBBench tests on LAION-100M, Lakebase Search led the tested systems on price-performance. <a href="https://www.databricks.com/blog/lakebase-search-state-art-full-text-and-vector-search-postgres">Read the full story</a></figcaption>
+</figure>
+
 Lakebase Search introduces new indexes specifically designed for the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), where compute is ephemeral and storage is durable and shared. A Lakebase Search index lives in storage rather than in compute memory, it's available right after a cold start with no warmup, and it shows up on every new branch without a rebuild.
 
 This post is about the full text search piece of Lakebase Search - specifically, about the step that runs before any ranking happens.
