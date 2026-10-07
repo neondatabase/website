@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-06T10:15:14.219Z'
+updatedOn: '2026-10-07T12:24:01.696Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -171,7 +171,7 @@ For information about disabling HIPAA compliance, see [Disabling HIPAA](#disabli
 
 4. Subcontractors and agents
    - Any subcontractors that handle PHI on our behalf are bound by restrictions and conditions that provide the same material level of protection for PHI as the BAA.
-   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors) and notifying customers of any changes if you sign up to notifications [here](https://share-eu1.hsforms.com/1XjUD9QeKQw-RSAgQtWUBfAfm9ld).
+   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors).
 
 5. Customer responsibilities
    - Customers are responsible for configuring and using Neon in a way that complies with HIPAA.
