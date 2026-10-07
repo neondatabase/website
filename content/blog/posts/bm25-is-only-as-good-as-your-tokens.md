@@ -13,8 +13,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/cover.jpg
+  alt: 'BM25 is only as good as your tokens'
 isFeatured: false
 seo:
   title: BM25 is only as good as your tokens - Neon
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: BM25 is only as good as your tokens - Neon
   ogDescription: Shipping custom dictionaries for Lakebase Search, managed as SQL tables
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/social.jpg
 ---
 
 [Lakebase Search](https://neon.com/docs/ai/lakebase-search) is the search primitive of the Neon backend. [One of the best things about it](https://neon.com/blog/lakebase-search-retrieval-agents) is that it ranks keyword results with BM25; that said, BM25 can only score the terms it's given. What a search can find is decided earlier, when the text is split into terms - a step called tokenization.
@@ -34,7 +34,10 @@ The new `lakebase_tokenizer` extension, [now packaged with Lakebase Search](http
 
 Like everything in the Neon universe, it [branches](https://neon.com/docs/introduction/branching). If you branch your database, all its Lakebase Search configuration comes along, tokenizer included - so for example, you can test a new synonym set on a branch before shipping it.
 
-**[ADD CLIP]**
+<video autoPlay muted loop playsInline width="708" height="382" aria-label="Custom synonym dictionaries in Lakebase Search managed through SQL tables">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/lakebase-tokenizer.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/lakebase-tokenizer.mp4" type="video/mp4" />
+</video>
 
 ## A quick refresher on Lakebase Search
 
