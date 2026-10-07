@@ -26,6 +26,8 @@ seo:
   image: https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/social.jpg
 ---
 
+![BM25 is only as good as your tokens](https://cdn.neonapi.io/public/images/pages/blog/bm25-is-only-as-good-as-your-tokens/cover.jpg)
+
 [Lakebase Search](https://neon.com/docs/ai/lakebase-search) is the search primitive of the Neon backend. [One of the best things about it](https://neon.com/blog/lakebase-search-retrieval-agents) is that it ranks keyword results with BM25; that said, BM25 can only score the terms it's given. What a search can find is decided earlier, when the text is split into terms - a step called tokenization.
 
 Postgres lets you customize that step, but not from SQL. Its synonym and stop-word dictionaries read their entries from text files in a folder on the database server - teaching Postgres that "k8s" means "kubernetes" means putting a file on that machine. The limitation is that a managed Postgres service you connect to the database, not the server, so you can't add those files and you're limited to the lists that ship with Postgres.
