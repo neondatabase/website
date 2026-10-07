@@ -258,13 +258,16 @@ BM25 scores a document using three things:
 
 That shows up in three ways:
 
-**Spelling variants distort rarity** 
+### Spelling variants distort rarity
+
 When one concept is split across `kubernet`, `k8s`, and `kube`, each variant looks rarer than the concept really is. A query that uses one variant finds only a fraction of the relevant documents, and it gives them an inflated rarity score. Mapping the variants to one token gives BM25 one term with accurate statistics.
 
-**Filler words break match filters**
+### Filler words break match filters
+
 Many search setups pair BM25 ranking with an `@@` match filter, so a query with no real matches returns nothing instead of a ranked list of weak results. `plainto_tsquery` combines every term with AND, so one stray word sinks the query. With the built-in configuration, "please help, kube pods crashing" becomes `'pleas' & 'help' & 'kube' & 'pod' & 'crash'` and matches zero tickets. With `support_cfg`, it becomes `'kubernetes' & 'pod' & 'crash'` and matches two. This matters more now that many queries come from agents and chat interfaces, where people write in full sentences.
 
-**Accents block matches entirely**
+### Accents block matches entirely
+
 A query for `zurich` and a ticket containing `zürich` share no token, so there's nothing for any ranking function to score.
 
 ## Get started
