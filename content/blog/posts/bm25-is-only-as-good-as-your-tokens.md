@@ -100,9 +100,9 @@ Adding a dictionary takes four steps, all in SQL:
 3. **Create a text-search configuration** that sends words to your dictionary
 4 **Use it:** Pass the configuration to `to_tsvector`, and index the result with GIN or `lakebase_bm25` as usual
 
-## Example: building a tokenizer to search through support tickets
+## Example: searching through support tickets
 
-Say you run a developer tool, and you want your support engineers (or an AI agent triaging the queue) to search past tickets. Your users write those tickets in their own words:
+Say you run a developer tool, and you want your support engineers (or agents) to search past tickets. Your users write those tickets in their own words:
 
 | id  | body                                                          |
 | --- | ------------------------------------------------------------- |
@@ -113,7 +113,7 @@ Say you run a developer tool, and you want your support engineers (or an AI agen
 | 5   | PostgreSQL connection pool exhausted during the nightly batch |
 | 10  | PG creds expired, cannot connect from CI                      |
 
-Here's what happens when a support engineer searches using the built-in `english` configuration:
+So here's what happens when a support engineer searches using the built-in `english` configuration:
 
 | Query             | Should find | Matches? |
 | ----------------- | ----------- | -------- |
@@ -178,7 +178,7 @@ ALTER TEXT SEARCH CONFIGURATION support_cfg
 
 **4. Use it in a column and index it**
 
-Generate a `tsvector` column with the new configuration, and index it with `lakebase_bm25`. The BM25 index computes its corpus statistics when it's built, so create it after loading your data:
+You would now gnerate a `tsvector` column with the new configuration and index it with `lakebase_bm25`.
 
 ```sql
 CREATE TABLE tickets (
@@ -201,7 +201,7 @@ The Zürich ticket from earlier now produces these tokens:
 
 ## Before and after, ranked by BM25
 
-To compare the two approaches, we loaded all ten tickets (the six above plus four unrelated ones) and gave the table a second column that uses the built-in `english` configuration, with its own BM25 index:
+To compare the two approaches, we loaded all ten tickets (the six above plus four unrelated ones) and gave the table a second column that uses Postgres' built-in english configuration, with its own BM25 index:
 
 ```sql
 ALTER TABLE tickets
@@ -218,15 +218,13 @@ ORDER BY tsv <@> to_bm25query(to_tsvector('support_cfg', 'pg creds zurich'), 'ti
 LIMIT 5;
 ```
 
-The `<@>` operator returns the negative BM25 score, so lower is more relevant. Unlike the `@@` check in the earlier table, which requires every query word to match, BM25 also ranks documents that match only some of the words.
-
 With the built-in `english` configuration, one ticket matches:
 
 | Rank | Ticket                                   | BM25 score |
 | ---- | ---------------------------------------- | ---------- |
 | 1    | PG creds expired, cannot connect from CI | -4.012     |
 
-With `support_cfg`, three tickets match, and the Zürich ticket the engineer was looking for ranks first:
+With `support_cfg`, three tickets match:
 
 | Rank | Ticket                                                        | BM25 score |
 | ---- | ------------------------------------------------------------- | ---------- |
@@ -235,7 +233,7 @@ With `support_cfg`, three tickets match, and the Zürich ticket the engineer was
 | 3    | PostgreSQL connection pool exhausted during the nightly batch | -1.132     |
 
 <Admonition type="note" title="Reading BM25 scores">
-BM25 gives each document a positive relevance score: 0 means no query terms matched, and higher means more relevant. The `<@>` operator returns that score with a minus sign, so you can sort with `ORDER BY ... ASC`, the same way you sort by distance. A score of -5.180 is a stronger match than -1.132, and 0 means no match. Scores depend on the query and on statistics computed across all the documents in the index, so compare them within a single result list, not across different queries.
+BM25 gives each document a positive relevance score: 0 means no query terms matched, and higher means more relevant. The `<@>` operator returns that score with a minus sign, so you can sort with `ORDER BY ... ASC`, the same way you sort by distance. A score of -5.180 is a stronger match than -1.132, and 0 means no match.
 </Admonition>
 
 The query `k8s pods crashing` shows a subtler effect. Both configurations return the same Kubernetes tickets, but the scores change:
@@ -246,19 +244,27 @@ The query `k8s pods crashing` shows a subtler effect. Both configurations return
 
 ## Why dictionaries matter so much to BM25
 
-BM25 scores a document using three things: how often each query term appears in it (term frequency), how long the document is, and how rare each term is across all your documents (inverse document frequency, or IDF). `lakebase_bm25` computes those statistics from the tokens in your `tsvector` column ([lakebase_text](https://neon.com/docs/extensions/lakebase-text)), so whatever your dictionary produces is what BM25 works with.
+BM25 scores a document using three things: 
+1. how often each query term appears in it (term frequency)
+2. how long the document is
+3. and how rare each term is across all your documents (inverse document frequency, or IDF)
+
+`lakebase_bm25` computes those statistics from the tokens in your `tsvector` column, so whatever your dictionary produces is what BM25 works with.
 
 That shows up in three ways:
 
-- **Spelling variants distort rarity.** When one concept is split across `kubernet`, `k8s`, and `kube`, each variant looks rarer than the concept really is. A query that uses one variant finds only a fraction of the relevant documents, and it gives them an inflated rarity score. Mapping the variants to one token gives BM25 one term with accurate statistics.
-- **Filler words break match filters.** Many search setups pair BM25 ranking with an `@@` match filter, so a query with no real matches returns nothing instead of a ranked list of weak results. `plainto_tsquery` combines every term with AND, so one stray word sinks the query. With the built-in configuration, "please help, kube pods crashing" becomes `'pleas' & 'help' & 'kube' & 'pod' & 'crash'` and matches zero tickets. With `support_cfg`, it becomes `'kubernetes' & 'pod' & 'crash'` and matches two. This matters more now that many queries come from agents and chat interfaces, where people write in full sentences.
-- **Accents block matches entirely.** A query for `zurich` and a ticket containing `zürich` share no token, so there's nothing for any ranking function to score.
+**Spelling variants distort rarity** 
+When one concept is split across `kubernet`, `k8s`, and `kube`, each variant looks rarer than the concept really is. A query that uses one variant finds only a fraction of the relevant documents, and it gives them an inflated rarity score. Mapping the variants to one token gives BM25 one term with accurate statistics.
+
+**Filler words break match filters**
+Many search setups pair BM25 ranking with an `@@` match filter, so a query with no real matches returns nothing instead of a ranked list of weak results. `plainto_tsquery` combines every term with AND, so one stray word sinks the query. With the built-in configuration, "please help, kube pods crashing" becomes `'pleas' & 'help' & 'kube' & 'pod' & 'crash'` and matches zero tickets. With `support_cfg`, it becomes `'kubernetes' & 'pod' & 'crash'` and matches two. This matters more now that many queries come from agents and chat interfaces, where people write in full sentences.
+
+**Accents block matches entirely**
+A query for `zurich` and a ticket containing `zürich` share no token, so there's nothing for any ranking function to score.
 
 ## Get started
 
-Point your agent to the [Lakebase Search docs](https://neon.com/docs/ai/lakebase-search) and ask it to set up a dictionary for your app's vocabulary.
-
-If your agent uses the Neon agent skill, it already includes Lakebase Search guidance:
+Point your agent to the [Lakebase Search docs](https://neon.com/docs/ai/lakebase-search) and ask it to set up a dictionary for your app's vocabulary. If your agent uses the Neon [agent skill](https://neon.com/docs/ai/agent-skills), it already knows all about Lakebase Search:
 
 ```bash
 neon skills -s neon-postgres
