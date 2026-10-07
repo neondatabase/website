@@ -2244,6 +2244,14 @@ async function processFile(inputPath, pageUrl, rootDir) {
 
   // Build output with frontmatter-based header
   let output = '';
+  // Publish source content time for search tie-breaking; never use build time.
+  const sourceDate = frontmatter.updatedOn || frontmatter.createdAt || frontmatter.date;
+  if (sourceDate) {
+    const timestamp = new Date(sourceDate);
+    if (!Number.isNaN(timestamp.getTime())) {
+      output += `<!-- neon-content-updated-at: ${timestamp.toISOString()} -->\n\n`;
+    }
+  }
   if (frontmatter.summary) {
     output += `> Summary: ${frontmatter.summary}\n\n`;
   }

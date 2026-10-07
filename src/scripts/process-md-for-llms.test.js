@@ -1,4 +1,6 @@
 import fs from 'fs/promises';
+import os from 'os';
+import path from 'path';
 
 import { describe, it, expect, vi } from 'vitest';
 
@@ -13,6 +15,27 @@ import {
 
 // Test actual file conversion - the important stuff
 describe('MDX to Markdown Conversion', () => {
+  it.each([
+    ["updatedOn: '2026-09-01T21:19:48.000Z'", '2026-09-01T21:19:48.000Z'],
+    ['createdAt: 2025-01-01', '2025-01-01T00:00:00.000Z'],
+    ['', null],
+    ['updatedOn: invalid', null],
+  ])('publishes source time without substituting build time: %s', async (field, expected) => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-source-time-'));
+    try {
+      const inputPath = path.join(dir, 'page.md');
+      await fs.writeFile(inputPath, `---\ntitle: Example\n${field}\n---\nContent.\n`);
+      const { content } = await processFile(inputPath, 'https://neon.com/docs/example');
+      if (expected) {
+        expect(content).toContain(`<!-- neon-content-updated-at: ${expected} -->`);
+      } else {
+        expect(content).not.toContain('neon-content-updated-at');
+      }
+    } finally {
+      await fs.rm(dir, { recursive: true, force: true });
+    }
+  });
+
   // Test a real file from the repo
   describe('Real file conversion', () => {
     it('should convert prisma.md without errors', async () => {
@@ -23,6 +46,13 @@ describe('MDX to Markdown Conversion', () => {
 
       // Should have title from frontmatter
       expect(result).toContain('# Connect from Prisma to Neon');
+
+      const raw = await fs.readFile(inputPath, 'utf8');
+      const sourceUpdatedOn = /^updatedOn: ['"]?([^'"\r\n]+)['"]?$/m.exec(raw)?.[1];
+      expect(sourceUpdatedOn).toBeTruthy();
+      expect(result).toContain(
+        `<!-- neon-content-updated-at: ${new Date(sourceUpdatedOn).toISOString()} -->`
+      );
 
       // Should have converted Admonitions
       expect(result).toContain('**Tip:**');
