@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-03T12:43:38.865Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -191,7 +191,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions/{slug}
 </TabItem>
 </Tabs>
 
-The response includes `invocation_url`, the public URL for your function:
+The output includes the function's public URL (`URL` in the CLI table, `invocation_url` in JSON and the API):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/

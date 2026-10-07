@@ -80,16 +80,17 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … image-api
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-fog-09491284 ("image-api") in aws-us-east-2.
-Linked ~/image-api/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-fog-09491284
-  branch:    main
+Created project image-api in aws-us-east-2
+Linked .neon
+  Project         image-api (quiet-fog-09491284)
+  Branch          main
+  Org             org-example-12345678
 
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
-
-INFO: Pulled 5 Neon variables into ~/image-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
 INFO: Created neon.ts declaring functions, ai-gateway.
 INFO: Created hello.ts - the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…

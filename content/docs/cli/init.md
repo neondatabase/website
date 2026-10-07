@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-09-26T07:10:22.076Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -123,12 +123,14 @@ npx neon@latest init
 Choose your agent setup, then pick a project to link. Linking writes the context and pulls your environment variables:
 
 ```text
-Linked /path/to/your/app/.neon:
-  orgId:     org-example-12345678
-  projectId: polished-snowflake-12345678
-  branch:    main
+Linked .neon
+  Project         my-app (polished-snowflake-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-Pulled 3 Neon variables into /path/to/your/app/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ```
 
 After setup, restart your editor and ask your assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can connect to your database and use Neon features as you build.
@@ -159,7 +161,9 @@ Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
 INFO: → Pulling env from branch main (br-restless-wildflower-a1b2c3d4)
-INFO: Pulled 3 Neon variables into /path/to/your/app/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 
 Neon setup complete.
 --------------------

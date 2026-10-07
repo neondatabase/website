@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -79,13 +79,15 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-sentry-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-mist-12345678 ("neon-sentry-demo") in aws-us-east-2.
-Linked ~/neon-sentry-demo/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-mist-12345678
-  branch:    main
+Created project neon-sentry-demo in aws-us-east-2
+Linked .neon
+  Project         neon-sentry-demo (quiet-mist-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-INFO: Pulled 3 Neon variables into ~/neon-sentry-demo/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 INFO: Created neon.ts declaring functions.
