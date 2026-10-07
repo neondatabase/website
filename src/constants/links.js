@@ -52,6 +52,7 @@ export default {
   objectStorageOverview: '/docs/storage/overview',
   aiGatewayOverview: '/docs/ai-gateway/overview',
   aiGatewayGetStarted: '/docs/ai-gateway/get-started',
+  realtimeOverview: '/docs/realtime/overview',
   autoscaling: '/docs/introduction/autoscaling',
   billing: '/docs/introduction/about-billing',
   branchRestore: '/docs/introduction/branch-restore',

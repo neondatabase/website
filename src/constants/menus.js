@@ -33,6 +33,11 @@ export default {
               to: LINKS.aiGateway,
               description: 'One API for frontier and open-source models',
             },
+            {
+              title: 'Realtime',
+              to: LINKS.realtimeOverview,
+              description: 'Live SQL queries, built into Postgres',
+            },
           ],
         },
         {
