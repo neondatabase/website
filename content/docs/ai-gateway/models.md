@@ -1,10 +1,10 @@
 ---
-title: AI Gateway models
-subtitle: Available models and how to specify them
+title: Model reference
+subtitle: Which models exist, how to call them, and the rules that apply
 summary: >-
-  Neon AI Gateway serves Databricks-hosted open-weight and foundation models
-  behind one credential. Use short model IDs like gpt-5-mini or
-  gemini-3-flash. The databricks- prefix is also accepted.
+  Reference for Neon AI Gateway: model access and how to request foundation
+  models, which endpoint to use, shorter and longer request paths, the
+  /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
 updatedOn: '2026-09-26T00:49:26.569Z'
 ---
@@ -17,6 +17,8 @@ Models are hosted by Databricks and served through Neon AI Gateway. By using the
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
 
+> AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It requires a paid Neon plan. See [Pricing](#pricing) for details.
+
 The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon).
 
 Every model in the catalog carries a `released` boolean. `false` marks a model listed ahead of its announcement: it stays in `neon.com/models.json` and `neon.com/models`, and an app that shows a model list should leave it out:
@@ -27,17 +29,11 @@ const models = Object.values(catalog.neon.models).filter((model) => model.releas
 
 ## Model access
 
-Neon AI Gateway gives you one credential for both open-weight and foundation models. The catalog grows continuously as new models roll out, so the [table below](#available-models) is always the source of truth for what you can call today.
+Neon AI Gateway gives you one credential for both open-weight and foundation models. Any paid project with prepaid credits can use the open-weight models right away. Foundation models are rolled out gradually, so the full catalog opens up over time. The [model catalog](/docs/ai-gateway/overview#available-models) is always the source of truth for what you can call today.
 
-Using the AI Gateway requires a paid plan with prepaid credits, which gives you the open-weight models. Foundation models are rolled out gradually. See [Model access](/docs/ai-gateway/overview#model-access) for what's included and how to request access to foundation models.
+To request access to foundation models that aren't enabled for your project yet, drop your email below and we'll reach out as access opens up.
 
-## Available models
-
-Browse the full catalog below. Switch between the **Text**, **Image**, and **Embeddings** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation).
-
-<AiGatewayModelIndex/>
-
-For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings).
+<RequestForm type="backend-platform" title="Request access to foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request access" confirmation="You're on the list. We'll be in touch as access opens up." />
 
 ## Rate limits
 
@@ -57,7 +53,13 @@ A separate account-level daily spend cap also applies and can block AI Gateway r
 
 ## Pricing
 
-See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
+AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
+
+- **Paid plans only.** AI Gateway is available on Neon's Launch and Scale plans, with no difference in pricing or model access between the two. Any paid customer with prepaid credits can use the open-weight models. See [Model access](#model-access) for the full foundation model catalog.
+- **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
+- **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
+
+See the [model catalog](/docs/ai-gateway/overview#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
 
 Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 
@@ -134,10 +136,10 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 The response returns one object per model. Key fields:
 
-- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. See [Model access](/docs/ai-gateway/overview#model-access) for what determines access and how to request more models.
+- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. See [Model access](#model-access) for what determines access and how to request more models.
 - `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
 - `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
-- `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.
+- `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the [model catalog](/docs/ai-gateway/overview#available-models) for context windows and model details.
 
 ### Check what your account can call
 
@@ -159,5 +161,9 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
 | Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
+
+<Admonition type="important">
+Use of AI Gateway is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
+</Admonition>
 
 <NeedHelp/>

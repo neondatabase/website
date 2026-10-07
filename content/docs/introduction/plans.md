@@ -380,7 +380,7 @@ See [Neon Functions](/docs/compute/functions/overview) for what's included and c
 
 ### AI Gateway
 
-Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
+Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/models#model-access) to request access to the full catalog.
 
 Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 

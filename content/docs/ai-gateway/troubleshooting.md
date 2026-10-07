@@ -73,7 +73,7 @@ The model exists in the catalog, but your account can't call it yet. This is a p
 }
 ```
 
-**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan and still can't call a model, it's a foundation model you haven't been granted yet. See [Model access](/docs/ai-gateway/overview#model-access) to request access.
+**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan and still can't call a model, it's a foundation model you haven't been granted yet. See [Model access](/docs/ai-gateway/models#model-access) to request access.
 
 ---
 

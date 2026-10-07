@@ -156,7 +156,7 @@ const faqItems = [
       <p>Each is billed separately from Postgres compute (CU-hours).</p>
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per month.</p>
-      <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/models#available-models">per-model rates</a>.</p>
+      <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
     `,
   },
   {

@@ -340,7 +340,7 @@ Bad input throws `BadRequest`, mapped to a `400`; anything else becomes a `500`.
 <Admonition type="note" title="Model access">
 For better captions, you can use foundation vision models such as `claude-opus-5` or `gpt-5-6-sol` instead of `llama-4-maverick`.
 
-Foundation models are [rolling out gradually](/docs/ai-gateway/overview#model-access). If `claude-opus-5` or `gpt-5-6-sol` isn't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are available right away with prepaid credits. To switch, change the model ID in the `/caption` route. No other changes are required.
+Foundation models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `claude-opus-5` or `gpt-5-6-sol` isn't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are available right away with prepaid credits. To switch, change the model ID in the `/caption` route. No other changes are required.
 </Admonition>
 
 ## Configure neon.ts

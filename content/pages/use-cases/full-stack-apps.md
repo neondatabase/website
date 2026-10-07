@@ -152,7 +152,7 @@ Most apps end up calling a model somewhere. Wired directly, that means a separat
 The gateway runs on the Databricks AI infrastructure that already serves [more than 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-beta), hardened by enterprise requirements: day-0 coverage of new models, high availability, deep metrics, logging, and granular cost controls.
 
 - **One credential, one bill** - No separate accounts, keys, or invoices per provider
-- **No markup** - Neon charges the same per-token rate as the model provider, with no margin on top ([pricing](/docs/ai-gateway/overview#pricing))
+- **No markup** - Neon charges the same per-token rate as the model provider, with no margin on top ([pricing](/docs/ai-gateway/models#pricing))
 - **Inference that branches with your app** - Each branch gets its own gateway endpoint, so model calls from a preview branch stay isolated from production
 - **Wired into Functions automatically** - Gateway credentials are injected into [Neon Functions](/docs/compute/functions/overview), so a model-backed handler runs next to Postgres and Object Storage on the same branch
 
