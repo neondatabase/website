@@ -72,24 +72,20 @@ SELECT to_tsvector('english', 'Rotating Postgres credentials in the Zürich regi
 
 A few things happened here:
 
-- Words were lowercased.
-- "in" and "the" were dropped as stop words.
-- The remaining words were stemmed ("credentials" became `credenti`).
-- The accent in "Zürich" was kept.
+- Words were lowercased
+- "in" and "the" were dropped as stop words
+- The remaining words were stemmed ("credentials" became `credenti`)
+- The accent in "Zürich" was kept
 
-Queries go through the same process. A document matches when its tokens match the query's tokens, and BM25 then scores that overlap.
-
-So if a document and a query describe the same thing with different tokens, no ranking function can connect them. However good BM25 is, it never sees a match.
+Queries go through the same process. A document matches when its tokens match the query's tokens, and BM25 then scores that overlap. So if a document and a query describe the same thing with different tokens, no ranking function can connect them. However good BM25 is, it never sees a match.
 
 ## Adding your own dictionary to Postgres
 
-The changes in the previous example (lowercasing, dropping stop words, stemming) don't come from the `tsvector` type itself: they come from Postgres' [dictionaries](https://www.postgresql.org/docs/current/textsearch-dictionaries.html). A text-search configuration in Postgres is a chain of dictionaries: the parser splits text into tokens, and each token is passed to a dictionary that decides what to store.
-
-These built-in dictionaries handle general language well, but they can't know your application's vocabulary. E.g. your users might use "k8s," "kube," and "Kubernetes" for the same thing.
+The changes in the previous example (lowercasing, dropping stop words, stemming) don't come from the `tsvector` type itself - they come from Postgres' [dictionaries](https://www.postgresql.org/docs/current/textsearch-dictionaries.html). These built-in dictionaries handle general language well, but they can't know your application's vocabulary. E.g. your users might use "k8s," "kube," and "Kubernetes" for the same thing.
 
 On a self-managed server, adding your own dictionary would be easy - you'd simply copy a file into that directory. On a hosted service like Neon, you connect to the database, not the server, so you can't add files to its disk.
 
-The lakebase architecture makes this stricter. In Lakebase Postgres, [compute nodes don't hold durable state - they scale to zero, restart, and get replaced.](https://neon.com/docs/introduction/architecture-overview) A file on one compute's disk would disappear with that compute and wouldn't exist on a new branch, so search configuration needs to live in the database itself.
+The lakebase architecture makes this even stricter. In Lakebase Postgres, [compute nodes don't hold durable state - they scale to zero, restart, and get replaced.](https://neon.com/docs/introduction/architecture-overview) A file on one compute's disk would disappear with that compute and wouldn't exist on a new branch, so search configuration needs to live in the database itself.
 
 ## How lakebase_tokenizer works
 
