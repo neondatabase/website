@@ -754,8 +754,8 @@
       items:
         - section: Introduction
           items:
-            - title: Overview
-              slug: auth/overview
+            - title: About Managed Better Auth
+              slug: auth/about
             - title: Authentication Flow
               slug: auth/authentication-flow
             - title: Branching Authentication

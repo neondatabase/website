@@ -1,0 +1,15 @@
+<?xml version="1.0"?><svg viewBox="0 0 364 350" xmlns="http://www.w3.org/2000/svg" data-name="auth" width="364" height="350">
+<defs></defs>
+<rect x="1" y="1" width="362" height="100" rx="2" fill="none" stroke="#18936B" stroke-width="1.5"></rect>
+<text x="22" y="44" fill="#16855F" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">Managed Better Auth</text>
+<text x="22" y="72" fill="#5D6168" font-family="'Geist Mono', monospace" font-size="14.5" letter-spacing="-0.2">sign-in for your app</text>
+<line x1="110" y1="101" x2="110" y2="216" stroke="#6E727A" stroke-width="2"></line>
+<polygon points="110,228 104,216 116,216" fill="#6E727A"></polygon>
+<text x="124" y="170" fill="#5D6168" font-family="'Geist Mono', monospace" font-size="14.5" letter-spacing="-0.2">stores users and sessions</text>
+<rect x="1" y="228" width="362" height="120" rx="2" fill="none" stroke="#6E727A" stroke-width="1.5"></rect>
+<text x="22" y="266" fill="#71757B" font-family="'Geist Mono', monospace" font-size="18" font-weight="500" letter-spacing="-0.3">Postgres database</text>
+<rect x="22" y="286" width="150" height="42" rx="2" fill="none" stroke="#B4B7BC" stroke-width="1.25"></rect>
+<text x="97" y="312" text-anchor="middle" fill="#5D6168" font-family="'Geist Mono', monospace" font-size="14.5" letter-spacing="-0.2">your tables</text>
+<rect x="190" y="286" width="152" height="42" rx="2" fill="none" stroke="#18936B" stroke-width="1.25"></rect>
+<text x="266" y="312" text-anchor="middle" fill="#16855F" font-family="'Geist Mono', monospace" font-size="14.5" letter-spacing="-0.2">auth tables</text>
+</svg>

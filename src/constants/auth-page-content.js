@@ -22,12 +22,12 @@ const authPageContent = {
     {
       question: 'Is this the same as self-hosting Better Auth?',
       answer:
-        '<p>Managed Better Auth uses the Better Auth foundation, with Neon operating the auth service and integrating it with database branching. Self-hosting gives you full control over your auth code and infrastructure, including custom plugins and hooks that the managed service may not support. See the <a href="/docs/auth/overview#when-to-use-managed-better-auth-vs-self-hosting-better-auth">comparison in the docs</a>.</p>',
+        '<p>Managed Better Auth uses the Better Auth foundation, with Neon operating the auth service and integrating it with database branching. Self-hosting gives you full control over your auth code and infrastructure, including custom plugins and hooks that the managed service may not support. See the <a href="/docs/auth/about#when-to-use-managed-better-auth-vs-self-hosting-better-auth">comparison in the docs</a>.</p>',
     },
     {
       question: 'Can my coding agent set this up?',
       answer:
-        '<p>Yes. Use the AI editor setup in the docs to add Managed Better Auth to your app. Your agent can enable auth, configure the SDK and environment variables, and test sign-up and login on an isolated branch using test credentials. <a href="/docs/auth/overview#set-up-with-your-ai-editor">Set up with your AI editor</a>.</p>',
+        '<p>Yes. Use the AI editor setup in the docs to add Managed Better Auth to your app. Your agent can enable auth, configure the SDK and environment variables, and test sign-up and login on an isolated branch using test credentials. <a href="/docs/auth/about#set-up-with-your-ai-editor">Set up with your AI editor</a>.</p>',
     },
     {
       question: 'How does pricing work?',
