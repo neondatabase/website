@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-06T10:15:14.219Z'
+updatedOn: '2026-10-07T20:00:28.755Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -171,7 +171,7 @@ For information about disabling HIPAA compliance, see [Disabling HIPAA](#disabli
 
 4. Subcontractors and agents
    - Any subcontractors that handle PHI on our behalf are bound by restrictions and conditions that provide the same material level of protection for PHI as the BAA.
-   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors) and notifying customers of any changes if you sign up to notifications [here](https://share-eu1.hsforms.com/1XjUD9QeKQw-RSAgQtWUBfAfm9ld).
+   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors).
 
 5. Customer responsibilities
    - Customers are responsible for configuring and using Neon in a way that complies with HIPAA.
@@ -348,6 +348,9 @@ The following features are not currently HIPAA-compliant and should not be used 
 
 - [Managed Better Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
 - [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
+- [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 
