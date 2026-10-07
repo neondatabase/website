@@ -1597,6 +1597,15 @@ const componentHandlers = {
   },
 
   /**
+   * AgentPrompt -> same as CopyPrompt. The component is just CopyPrompt with
+   * variant="agent" hardcoded, so the markdown export stays identical and in
+   * sync if CopyPrompt changes.
+   */
+  AgentPrompt(node) {
+    return componentHandlers.CopyPrompt.call(this, node);
+  },
+
+  /**
    * RequestForm -> emit actionable text so markdown stays in parity with HTML.
    * Descriptions are rewritten to remove "select below" phrasing (no form exists
    * in markdown) and replaced with links to support and Discord.
