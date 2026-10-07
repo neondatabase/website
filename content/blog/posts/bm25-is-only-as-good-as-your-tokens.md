@@ -1,5 +1,5 @@
 ---
-title: BM25 is only as good as your dictionaries
+title: BM25 is only as good as your tokens
 description: Shipping custom dictionaries for Lakebase Search, managed as SQL tables
 excerpt: >-
   Lakebase Search is the search primitive of the Neon backend. One of the best
@@ -17,11 +17,11 @@ cover:
   alt: null
 isFeatured: false
 seo:
-  title: BM25 is only as good as your dictionaries - Neon
+  title: BM25 is only as good as your tokens - Neon
   description: Shipping custom dictionaries for Lakebase Search, managed as SQL tables
   keywords: []
   noindex: false
-  ogTitle: BM25 is only as good as your dictionaries - Neon
+  ogTitle: BM25 is only as good as your tokens - Neon
   ogDescription: Shipping custom dictionaries for Lakebase Search, managed as SQL tables
   image: null
 ---
