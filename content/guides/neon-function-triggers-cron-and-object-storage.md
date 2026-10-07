@@ -4,7 +4,7 @@ subtitle: 'Run scheduled jobs and react to object uploads with Neon Function Tri
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-19T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 If you're building a backend, you eventually need work that runs outside the request-response cycle. Some of it runs on the clock: nightly reports, cleanup jobs, periodic syncs. Some of it runs on events: a file lands in storage, and something needs to process it before anyone notices it's there.
@@ -85,16 +85,17 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … csv-pipeline
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-fog-09491284 ("csv-pipeline") in aws-us-east-2.
-Linked ~/csv-pipeline/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-fog-09491284
-  branch:    main
+Created project csv-pipeline in aws-us-east-2
+Linked .neon
+  Project         csv-pipeline (quiet-fog-09491284)
+  Branch          main
+  Org             org-example-12345678
 
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, Object Storage
-
-INFO: Pulled 5 Neon variables into ~/csv-pipeline/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 INFO: Created neon.ts declaring functions, buckets.
 INFO: Created hello.ts - the source of the hello function.
 ```
@@ -472,8 +473,12 @@ Function URLs
   • pipeline: https://br-xxx.compute.c-6.us-east-2.aws.neon.tech
 
 Utilized services: Postgres, Object Storage, Functions
-INFO: Pulled 8 Neon variables into /home/ubuntu/codes/guides/csv-pipeline/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL_S3, AWS_REGION, NEON_FUNCTION_PIPELINE_BASE_URL
-INFO: Wrote credential secrets, these now hold fresh values: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+Pulled 8 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
+  Functions       NEON_FUNCTION_PIPELINE_BASE_URL
+  Object Storage  AWS_ACCESS_KEY_ID*, AWS_SECRET_ACCESS_KEY*, AWS_ENDPOINT_URL_S3, AWS_REGION
+  * new credential value
 ```
 
 List the triggers to confirm both are in place:

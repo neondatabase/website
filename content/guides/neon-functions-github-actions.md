@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That fits a workflow where every environment gets its own isolated function.
@@ -72,13 +72,15 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-functions-api
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-mist-12345678 ("neon-functions-api") in aws-us-east-2.
-Linked ~/neon-functions-api/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-mist-12345678
-  branch:    main
+Created project neon-functions-api in aws-us-east-2
+Linked .neon
+  Project         neon-functions-api (quiet-mist-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-INFO: Pulled 3 Neon variables into ~/neon-functions-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 INFO: Created neon.ts declaring functions.

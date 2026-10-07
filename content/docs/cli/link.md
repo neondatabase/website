@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive and non-interactive
   workflows for CI, scripts, and AI agents.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -48,11 +48,11 @@ neon link
 ? Which project would you like to link? › + Create new project
 ? Name for the new project: › my-app
 ? Which region should the new project run in? › AWS US East (Ohio) (aws-us-east-2)
-Created project polished-snowflake-12345678 ("my-app") in aws-us-east-2.
-Linked .neon:
-  orgId:     org-abc123
-  projectId: polished-snowflake-12345678
-  branch:    br-steep-math-aiu3vve7
+Created project my-app in aws-us-east-2
+Linked .neon
+  Project         my-app (polished-snowflake-12345678)
+  Branch          br-steep-math-aiu3vve7
+  Org             org-abc123
 ```
 
 ## Non-interactive mode
