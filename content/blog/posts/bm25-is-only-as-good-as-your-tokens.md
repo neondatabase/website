@@ -26,13 +26,13 @@ seo:
   image: null
 ---
 
-[Lakebase Search](https://neon.com/docs/ai/lakebase-search) is the search primitive of the Neon backend. [One of the best things about it](https://neon.com/blog/lakebase-search-retrieval-agents) is that it ranks keyword results with BM25. That said, BM25 can only score the terms it's given. What a search can find is decided earlier, when the text is split into terms - a step called tokenization.
+[Lakebase Search](https://neon.com/docs/ai/lakebase-search) is the search primitive of the Neon backend. [One of the best things about it](https://neon.com/blog/lakebase-search-retrieval-agents) is that it ranks keyword results with BM25; that said, BM25 can only score the terms it's given. What a search can find is decided earlier, when the text is split into terms - a step called tokenization.
 
-Postgres lets you customize that step, but not from SQL. Its synonym and stop-word dictionaries read their entries from text files in a folder on the database server; teaching Postgres that "k8s" means "kubernetes" means putting a file on that machine. The limitation is that a managed Postgres service you connect to the database, not the server, so you can't add those files and you're limited to the lists that ship with Postgres.
+Postgres lets you customize that step, but not from SQL. Its synonym and stop-word dictionaries read their entries from text files in a folder on the database server - teaching Postgres that "k8s" means "kubernetes" means putting a file on that machine. The limitation is that a managed Postgres service you connect to the database, not the server, so you can't add those files and you're limited to the lists that ship with Postgres.
 
 The new `lakebase_tokenizer` extension, [now packaged with Lakebase Search](https://neon.com/docs/extensions/lakebase-tokenizer), moves that configuration into SQL tables. You define synonyms and stop words with `INSERT`, and they flow into GIN and `lakebase_bm25` indexes like any other `tsvector`.
 
-Like everything in the Neon universe, it branches. If you branch your database, all its Lakebase Search configuration comes along - tokenizer included - so for example, you can test a new synonym set on a branch before shipping it.
+Like everything in the Neon universe, it [branches](https://neon.com/docs/introduction/branching). If you branch your database, all its Lakebase Search configuration comes along, tokenizer included - so for example, you can test a new synonym set on a branch before shipping it.
 
 **[ADD CLIP]**
 
