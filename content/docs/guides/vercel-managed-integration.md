@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-09-08T15:58:09.171Z'
+updatedOn: '2026-10-07T12:31:44.811Z'
 ---
 
 <InfoBlock>
@@ -189,6 +189,8 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 - If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time [history window](/docs/introduction/history-window), etc.), you'll be prompted to upgrade.
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
+
+This is separate from Neon's [project transfer](/docs/manage/orgs-project-transfer) feature, which doesn't support Vercel-managed organizations as a source or destination.
 
 ---
 
