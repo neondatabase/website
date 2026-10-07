@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-10-07T12:31:44.811Z'
+updatedOn: '2026-10-07T23:19:08.476Z'
 ---
 
 <InfoBlock>
@@ -255,6 +255,7 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 - You cannot use this integration with the **Neon-Managed integration** in the same Vercel project
 - **Neon CLI access**: Requires API key authentication (the `neon login` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
+- **Project transfer**: Neon's [project transfer](/docs/manage/orgs-project-transfer) doesn't work into or out of a Vercel-managed organization. Instead, [transfer the Vercel project to another team](#project-transfers-between-teams).
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
 ## Frequently asked questions
