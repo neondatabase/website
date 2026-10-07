@@ -95,19 +95,10 @@ Your words live in two tables that the extension creates: `lakebase_tokenizer_sy
 
 Adding a dictionary takes four steps, all in SQL:
 
-- **Add your words.** `INSERT` synonyms (`k8s` → `kubernetes`) and stop words into a named set.
-- **Create a dictionary.** Build it from the extension's `tokenizer_wholeword` template, and choose your sets plus options such as accent stripping and stemming.
-- **Create a text-search configuration** that sends words to your dictionary.
-- **Use it.** Pass the configuration to `to_tsvector`, and index the result with GIN or `lakebase_bm25` as usual.
-
-Once it's in place, the dictionary applies these steps, in order, to each token it receives:
-
-- Lowercase, so `K8s` becomes `k8s`
-- Normalize Unicode, so the different ways of encoding `é` compare as equal
-- Strip accents, so `zürich` becomes `zurich`
-- Drop stop words. If the token is in your stop-word set, it's removed
-- Apply synonyms. If the token is in your synonym set, the replacement is stored and processing stops
-- Stem with the bundled Snowball English stemmer, if no synonym matched
+1. **Add your words:** `INSERT` synonyms (`k8s` → `kubernetes`) and stop words into a named set.
+2. **Create a dictionary:** Build it from the extension's `tokenizer_wholeword` template, and choose your sets plus options such as accent stripping and stemming.
+3. **Create a text-search configuration** that sends words to your dictionary
+4 **Use it:** Pass the configuration to `to_tsvector`, and index the result with GIN or `lakebase_bm25` as usual
 
 ## Example: building a tokenizer to search through support tickets
 
