@@ -21,6 +21,14 @@ const sharedMdxComponents = {
   AzureRegionsDeprecation: 'shared-content/azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'shared-content/consumption-account-api-deprecation',
   NextjsProxyNote: 'shared-content/nextjs-proxy-note',
+  // Realtime SDK reference components
+  RealtimeSdkBackend: 'shared-content/realtime-sdk-backend',
+  RealtimeSdkClient: 'shared-content/realtime-sdk-client',
+  RealtimeSdkReact: 'shared-content/realtime-sdk-react',
+  RealtimeSdkTanstackDb: 'shared-content/realtime-sdk-tanstack-db',
+  RealtimeSdkDrizzle: 'shared-content/realtime-sdk-drizzle',
+  RealtimeSdkDrizzleClient: 'shared-content/realtime-sdk-drizzle-client',
+  RealtimeSdkKysely: 'shared-content/realtime-sdk-kysely',
   // Common Neon Auth content
   GetStarted: 'shared-content/neon-auth-sdk-shared/get-started',
   // Types
