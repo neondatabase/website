@@ -321,6 +321,18 @@ function normalizeQuotes(text) {
 }
 
 /**
+ * Normalize non-breaking spaces to regular spaces
+ *
+ * Markdown parsing already decodes an authored &nbsp; to U+00A0, so matching the
+ * character alone covers prose. A literal &nbsp; only ever survives inside a code
+ * span or fence, where it is source the reader copies and must be left alone.
+ */
+function normalizeNonBreakingSpaces(text) {
+  if (!text) return text;
+  return text.replace(/\u00A0/g, ' ');
+}
+
+/**
  * Convert MDAST children to markdown string
  */
 function childrenToMarkdown(children) {
@@ -2267,6 +2279,9 @@ async function processFile(inputPath, pageUrl, rootDir) {
 
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
+
+  // Non-breaking spaces are web typography only, so agents get plain spaces
+  output = normalizeNonBreakingSpaces(output);
 
   return { content: output, title: frontmatter.title || null };
 }
