@@ -1,6 +1,7 @@
 name: Unit Tests
 
 on:
+  pull_request:
   schedule:
     # Runs every Monday at 9:00 AM UTC
     - cron: '0 9 * * 1'
@@ -12,9 +13,9 @@ permissions:
 
 jobs:
   test:
-    runs-on:
-      group: neondatabase-protected-runner-group
-      labels: linux-ubuntu-latest
+    # Fork PRs cannot mint the JFrog OIDC token or use the protected runner group, so they
+    # run on a GitHub-hosted runner and install from public npm.
+    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || fromJSON('{"group":"neondatabase-protected-runner-group","labels":"linux-ubuntu-latest"}') }}
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
@@ -28,6 +29,7 @@ jobs:
       # can only reach the Databricks JFrog mirror. Mint a short-lived token via
       # OIDC and point npm at the mirror before anything fetches packages.
       - name: Setup JFrog CLI with OIDC
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         id: setup-jfrog
         uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
         env:
@@ -35,6 +37,7 @@ jobs:
         with:
           oidc-provider-name: github-actions
       - name: Configure npm registry (Databricks JFrog mirror)
+        if: ${{ !github.event.pull_request.head.repo.fork }}
         run: |
           cat > ~/.npmrc <<EOF
           registry=https://databricks.jfrog.io/artifactory/api/npm/db-npm/
