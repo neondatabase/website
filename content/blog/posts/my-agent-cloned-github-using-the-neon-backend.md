@@ -171,7 +171,7 @@ GitHub being down is still not fixed :) but this was a good excuse to see what t
 
 To one-shot your backend with an agent,
 
-- First, install the beta agent skills: `npx neon@latest init --preview`
+- First, install the Neon agent skills: `npx neon@latest init`
 - Then build your backend from a single prompt, e.g. `set up a Neon backend for my app with Postgres, auth, object storage, functions, and AI gateway`
 
 Your agent will provision the services, declare them in [neon.ts](https://neon.com/docs/reference/neon-ts), and wire them into your app.
