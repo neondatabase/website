@@ -146,6 +146,11 @@ module.exports = {
       description: 'PostgREST-style REST interface for your Neon database.',
     },
     {
+      name: 'Realtime',
+      description:
+        'Realtime reactivity on standard Postgres. Live SQL API makes any SQL query live (full support for joins, aggregates, ordering, extensions, UDFs). Plus end-to-end reactive DX: live queries and optimistic mutations as type-safe client primitives, on standard Neon Postgres.',
+    },
+    {
       name: 'Branching',
       description:
         'Instant copy-on-write database environments for dev, CI, previews, and recovery.',
@@ -299,6 +304,16 @@ module.exports = {
     // Reference list instead of a two-item "API" subsection.
     { pathPrefix: 'reference/api/', section: 'Reference', subsection: null },
     { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
+    // `realtime/` already derives to the configured `Realtime` section via
+    // toTitleCase, so these rules exist for its subsections. They're
+    // first-match-wins, so their order carries the grouping: the reference tree
+    // keeps the `Reference` subsection it derives from its own path, the two
+    // entry-point pages stay unsubsectioned, and every other realtime/*.md page
+    // lands under `Guides`.
+    { pathPrefix: 'realtime/reference/', section: 'Realtime' },
+    { pathPrefix: 'realtime/overview.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/quickstart.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/', section: 'Realtime', subsection: 'Guides' },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
     { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },
