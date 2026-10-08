@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-30T16:31:52.319Z'
+updatedOn: '2026-10-08T19:30:40.839Z'
 ---
 
 ## Getting started
@@ -30,13 +30,20 @@ Start with a one-command setup, or follow a guided tutorial to build the full Ne
     description="Next.js on the full Neon backend: Lakebase Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
+  <GuidedPath
+    title="Tour the Neon backend"
+    description="Learn how Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
+    href="/docs/get-started/backend-overview"
+    cta="Start the tour"
+    eta="~15 min"
+  />
+  <GuidedPath
+    title="Build a fully reactive app"
+    description="Learn how to build reactive apps and agents on standard Postgres with Realtime."
+    href="/docs/realtime/overview"
+    cta="Explore Realtime"
+  />
 </TwinPaths>
-
-<TourCallout
-  title="Tour the Neon backend"
-  description="Learn how Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
-  href="/docs/get-started/backend-overview"
-/>
 
 ## Products
 
@@ -48,6 +55,8 @@ Every service is agent-ready: instant, branchable, and serverless.
 <a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Lakebase Postgres</a>
 
 <a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
+
+<a href="/docs/realtime/overview" description="Realtime makes any SQL query live and supports full reactivity on standard Postgres." icon="zap" tag="Beta" tagTheme="orange-muted">Realtime</a>
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
