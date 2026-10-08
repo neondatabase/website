@@ -13,7 +13,7 @@ summary: >-
   Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-01T21:19:48.000Z'
+updatedOn: '2026-10-08T10:32:30.501Z'
 ---
 
 <InfoBlock>
@@ -68,14 +68,16 @@ In Neon, a "Database" in Vercel is called a "Project." Everything else works the
 
 ### Cost comparison (Pro Plan)
 
-| Resource                 | Vercel Pro | Neon Launch ($19/mo)   |
-| :----------------------- | :--------- | :--------------------- |
-| **Included compute**     | 100 hours  | 300 hours              |
-| **Included storage**     | 256 MB     | 10 GB                  |
-| **Extra compute**        | $0.10/hour | $0.16/hour             |
-| **Extra storage**        | $0.12/GB   | $1.75/GB (after 10 GB) |
-| **Data transfer**        | $0.10/GB   | Free                   |
-| **Additional databases** | $1.00 each | Free (up to 100)       |
+Neon's Launch plan is usage-based, with no monthly minimum. You pay only for the compute, storage, and data transfer you use.
+
+| Resource                 | Vercel Pro | Neon Launch                                |
+| :----------------------- | :--------- | :----------------------------------------- |
+| **Compute**              | $0.10/hour | $0.106/CU-hour                             |
+| **Storage**              | $0.12/GB   | $0.35/GB-month                             |
+| **Data transfer**        | $0.10/GB   | 500 GB per project included, then $0.10/GB |
+| **Additional databases** | $1.00 each | Free (up to 100 projects)                  |
+
+For current rates and plan details, see [Neon plans](/docs/introduction/plans).
 
 <Admonition type="tip" title="Upgrade to unlock features">
 Pro Plan users can stay on legacy limits or upgrade to a Neon plan to access branching, instant restore, and higher limits. [See how to upgrade](/docs/guides/vercel-managed-integration#changing-your-plan).
