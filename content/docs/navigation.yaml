@@ -1463,6 +1463,8 @@
               slug: reference/sdk
             - title: Auth and Data API SDK
               slug: reference/javascript-sdk
+            - title: Live SQL API SDK
+              slug: realtime/sdks/typescript
             - title: Neon Management SDK
               slug: reference/typescript-sdk
             - title: Effect bindings
