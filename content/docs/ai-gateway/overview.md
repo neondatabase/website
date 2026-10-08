@@ -27,8 +27,6 @@ hideCopyPage: true
 
 </div>
 
-Neon AI Gateway is the LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call models from many providers with one credential, with no separate account for each provider and your AI requests scoped to a branch the same way your data is.
-
 ## Available models
 
 Browse the full catalog below. Switch between the **Text**, **Image**, and **Embeddings** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation).

@@ -160,7 +160,7 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
+| Meta          | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                                                              |
 
 <Admonition type="important">
 Use of AI Gateway is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
