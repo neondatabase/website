@@ -24,6 +24,11 @@ export default {
               description: 'Serverless compute next to your data',
             },
             {
+              title: 'Realtime',
+              to: LINKS.realtime,
+              description: 'Live SQL queries and reactive DX',
+            },
+            {
               title: 'Managed Better Auth',
               to: LINKS.authPage,
               description: 'Authentication built into your database',
