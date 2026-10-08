@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -165,5 +165,6 @@ Then open `localhost:3000/api/version`. The route returns your Postgres version,
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/quickstart): Build realtime apps with end-to-end reactivity &raquo;
 
 <NeedHelp/>
