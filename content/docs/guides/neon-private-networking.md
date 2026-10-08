@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-08T21:05:46.821Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -326,7 +326,7 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ## Private Networking limits
 
-The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
 
 ## Limitations
 
