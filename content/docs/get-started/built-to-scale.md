@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-10-08T19:31:47.306Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production backends, without forcing you to rethink your architecture along the way.
@@ -36,6 +36,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 
 - [Autoscaling](/docs/introduction/autoscaling) adapts automatically to unpredictable workloads: you don’t have to plan capacity in advance
 - [Branching](https://neon.com/branching) lets you spin up development, preview, and test environments instantly, matching the latest production state, without manual work
+- [Realtime](/docs/realtime/overview) is built-in, so you can build fast, modern, collaborative apps
 - [Out-of-the-box integrations](/docs/guides/integrations) with platforms like Vercel further simplify previews and deployments
 - [API-first workflows](/docs/reference/api) make it easy to automate almost all database operations
 - AI-coding support via [MCP](/docs/ai/neon-mcp-server) and [Agent Skills](/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
@@ -73,5 +74,11 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - A mature API exposes [fleet management and cost-control capabilities](/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](/blog/promoting-postgres-changes-safely-production)
 - Backend primitives such as [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), the PostgREST-compatible [Data API](/docs/data-api/overview), and the [AI Gateway](/docs/ai-gateway/overview) let you hook up full-stack applications by default
+
+### Realtime that doesn't explode at scale
+
+Realtime systems famously demo well but explode at scale. Most sync engines compromise between query expressivity, latency and write throughput.
+
+[Realtime is different](/docs/realtime/how-it-works). It's a live SQL system designed from the ground up for Lakebase scale. With 1:1 query expressivity with standard interactive queries, high write throughput and a design that scales with flat latency to millions of concurrent subscribers.
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance." buttonText="Check it out" buttonUrl="/programs/agents" />
