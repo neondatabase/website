@@ -12,8 +12,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
+
+<Callout title="Realtime with TanStack">
+Build full-stack reactive apps with SSR and end-to-end type-safety using [Neon Realtime with TanStack Start + DB](/docs/realtime/examples/tanstack).
+</Callout>
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
 description="Pre-built prompt for connecting TanStack Start applications to Lakebase Postgres"/>
@@ -253,5 +257,6 @@ You can find the source code for the applications described in this guide on Git
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/tanstack): Build fully-reactive realtime TanStack apps on Neon with SSR, end-to-end type-safety and reactive client-side development using TanStack DB &raquo;
 
 <NeedHelp/>
