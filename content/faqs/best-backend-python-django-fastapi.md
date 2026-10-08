@@ -47,7 +47,7 @@ Presigned URLs let a browser upload straight to the bucket while your Django mod
 
 ## Models through the OpenAI SDK
 
-The AI Gateway serves open-weight models and foundation models from providers such as OpenAI and Google through one Neon credential. Open-weight models are available as soon as you add prepaid credits; foundation model access is rolling out gradually ([model access](/docs/ai-gateway/overview#model-access)). Point the OpenAI Python client at your branch endpoint:
+The AI Gateway serves open-weight models and foundation models from providers such as OpenAI and Google through one Neon credential. Open-weight models are available as soon as you add prepaid credits; foundation model access is rolling out gradually ([model access](/docs/ai-gateway/models#model-access)). Point the OpenAI Python client at your branch endpoint:
 
 ```python
 from openai import OpenAI
@@ -58,7 +58,7 @@ client = OpenAI(
 )
 ```
 
-AI Gateway requires a paid plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)).
+AI Gateway requires a paid plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/models#pricing)).
 
 <Admonition type="note" title="Functions are JavaScript only for now">
 Neon Functions run JavaScript and TypeScript on Node.js 24 ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.

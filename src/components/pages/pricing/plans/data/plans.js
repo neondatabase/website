@@ -231,9 +231,9 @@ export default {
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
     },
     {
       rows: '1',

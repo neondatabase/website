@@ -116,7 +116,7 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 A paid account with prepaid credits can use the open-weight AI Gateway models.
 Foundation models are rolled out gradually and require requesting access.
-See [Model access](/docs/ai-gateway/overview#model-access) for what's included and
+See [Model access](/docs/ai-gateway/models#model-access) for what's included and
 how to apply.
 
 The model list is subject to change. See
@@ -154,7 +154,7 @@ usable again when you upgrade to a paid plan.
 <Faq>
 
 <FaqItem question="Who can use AI Gateway?">
-AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to foundation models.
+AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/models#model-access) to request access to foundation models.
 </FaqItem>
 
 <FaqItem question="How much do AI Gateway credits cost?">
