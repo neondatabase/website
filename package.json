@@ -29,6 +29,7 @@
     "generate:api-ref": "node scripts/generate-api-ref.mjs",
     "check:api-ref-generated": "node scripts/check-api-ref-generated.mjs",
     "generate:realtime-sdk-reference": "node scripts/generate-realtime-sdk-reference.mjs",
+    "update:realtime-sdk": "node scripts/update-realtime-sdk.mjs",
     "check:docs-api-consistency": "node scripts/check-docs-api-consistency.mjs",
     "check:skills-sync": "node scripts/check-skills-sync.mjs",
     "check:mcp-categories": "node scripts/check-mcp-categories-sync.mjs",
