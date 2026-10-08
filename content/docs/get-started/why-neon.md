@@ -5,20 +5,20 @@ summary: >-
   Neon is a complete set of cloud backend primitives built around Lakebase
   Postgres, for developers, startups, and agent platforms, from Databricks.
   Lakebase Postgres runs on the lakebase architecture, making instant branching,
-  autoscaling, scale-to-zero, and point-in-time restore intrinsic rather than
-  add-ons. Neon also includes Managed Better Auth, Object Storage, Functions,
-  and AI Gateway.
+  autoscaling, scale-to-zero, realtime reactivity and point-in-time restore
+  intrinsic rather than add-ons. Neon also includes Managed Better Auth,
+  Object Storage, Functions, and AI Gateway.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-09-15T18:26:27.284Z'
+updatedOn: '2026-10-08T19:31:47.306Z'
 ---
 
 ## Our mission
 
-**Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Neon includes Lakebase Postgres, Managed Better Auth, Object Storage, Functions, the Data API, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless, designed to help developers build scalable applications faster than ever.**
+**Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Neon includes Lakebase Postgres, Managed Better Auth, Realtime, Object Storage, Functions, the Data API, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless, designed to help developers build scalable applications faster than ever.**
 
 Neon started with a mission: to deliver Postgres as a cloud service that gets out of developers' way, from their first side project to millions of users in production. Postgres should be as universal and accessible as object storage, something every developer can rely on without thinking about infrastructure.
 
@@ -39,6 +39,7 @@ At the center of Neon is Lakebase Postgres. It isn’t “Postgres-like”: it i
 - **Scale-to-zero.** Inactive databases shut down automatically to save costs. Ideal for side projects, development environments, and agent-generated apps.
 - **Autoscaling.** For production, Lakebase Postgres resizes compute up and down automatically based on traffic, so performance stays steady without capacity planning.
 - **Branching.** Clone your entire database (data and schema) instantly to create dev environments, run migrations safely, automate previews, and build versioning and checkpoints for agents.
+- **Realtime.** Subscribe to live SQL queries and build fast, modern apps with end-to-end reactivity and type safety.
 - **Instant restores.** Go back to any point in time in seconds, no matter how large your database, or instantly revert to a saved snapshot.
 - **Usage-based pricing.** Pay only for what you use, without provisioning storage or compute in advance and without expensive add-ons.
 - **A Free plan developers can actually use.** The lakebase architecture makes it efficient for Neon to run a large Free plan with many projects per account and enough resources to build real apps.
@@ -84,6 +85,7 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - The lakebase architecture removes most database administration, and agents can handle the tasks that remain
 - Autoscaling takes care of unpredictable traffic without overprovisioning or planning compute sizes
 - Branching speeds up building: entire dev backend environments get deployed instantly with minimal costs
+- Realtime reactivity is built directly into the database and platform, avoiding silos and separate realtime systems
 - Neon's straightforward and feature-complete [API](/docs/reference/api)
 - Usage-based pricing means no waste, no upfront commitments
 - Managed Better Auth, Object Storage, the Data API, and Functions are built in, so the team ships features without stitching together separate services
@@ -100,6 +102,7 @@ Full-stack codegen platforms spin up thousands of independent applications insta
 - Agents and APIs create and delete thousands of short-lived, low-usage databases
 - Scale-to-zero makes this setup economically viable at scale
 - Branching makes it simple to build versioning, rollbacks, and checkpoints
+- Realtime makes it simple to build fast, modern apps with end-to-end reactivity
 
 <Admonition type="tip" title="Join the Agent Program">
   Building a full-stack agent that deploys backends? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, features, and support from the team.

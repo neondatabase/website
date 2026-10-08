@@ -354,4 +354,6 @@ A fast sanity check after deploy; each capability's get-started has the real tes
 
 **Reference for each capability:** [Storage](/docs/storage/get-started) · [Functions](/docs/compute/functions/get-started) · [AI Gateway](/docs/ai-gateway/get-started) · [Auth](/docs/auth/quick-start/nextjs-api-only) · [Postgres](/docs/serverless/serverless-driver)
 
+**Realtime:** [Realtime](/docs/realtime/overview). Live SQL and reactive DX on standard Postgres.
+
 <NeedHelp/>
