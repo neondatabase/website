@@ -883,7 +883,7 @@
           items:
             - title: 'API'
               slug: realtime/reference/api
-    - title: Neon Functions
+    - title: Functions
       icon: features
       slug: compute/functions/overview
       items:
