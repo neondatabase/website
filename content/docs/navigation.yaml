@@ -1482,8 +1482,6 @@
                       slug: guides/vercel-manual
                     - title: Connecting to Neon from Vercel
                       slug: guides/vercel-connection-methods
-                    - title: Migrating from Vercel Postgres
-                      slug: guides/vercel-postgres-transition-guide
             - title: Develop
               items:
                 - title: Convex
