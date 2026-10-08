@@ -91,6 +91,7 @@ import Wallet from './images/wallet.inline.svg';
 import Warning from './images/warning.inline.svg';
 import Wrench from './images/wrench.inline.svg';
 import X from './images/x.inline.svg';
+import Zap from './images/zap.inline.svg';
 
 const icons = {
   'a-chart': AChart,
@@ -170,6 +171,7 @@ const icons = {
   warning: Warning,
   wrench: Wrench,
   x: X,
+  zap: Zap,
 };
 
 // const monochromeIcons = ['github'];
