@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-10-08T19:31:34.830Z'
 ---
 
 ## access token
@@ -315,6 +315,14 @@ A feature provided by some hypervisors, such as QEMU, that allows the transfer o
 
 For a Postgres database, it is the size of the database, including all tables, indexes, views, and stored procedures. In Neon, a branch can have multiple databases. The logical data size for a branch is therefore equal to the total logical size of all databases on the branch.
 
+## Live SQL
+
+Live SQL queries are queries that can be subscribed to live, in realtime. You can use Live SQL with [Realtime](/docs/realtime/overview) to subscribe to data changes and build apps with full reactivity on standard Postgres. See [Live SQL queries](/docs/introduction/live-sql-queries).
+
+## Live SQL API
+
+The primary web service API provided to clients by [Realtime](/docs/realtime/overview) to subscribe to [Live SQL](/docs/introduction/live-sql-queries) queries.
+
 ## logical replication
 
 A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. See [Logical replication](/docs/guides/logical-replication-guide).
@@ -503,9 +511,17 @@ A free and open-source emulator and virtualizer that performs hardware virtualiz
 
 Random Access Memory, a type of computer memory used to store data that is being actively processed.
 
+## reactive DX
+
+The development model of building reactive apps with live data bindings between the client and the server. Application code typically defines declarative data bindings (aka live queries) and mutations and the system takes care of handling data transfer and synchronization. You can build reactive apps with a fully reactive, end-to-end, type-safe DX on standard Postgres using [Realtime](/docs/realtime/overview). See [Reactivity](/docs/introduction/reactivity).
+
 ## read replica
 
 A read replica in Neon is a read-only compute that connects to the same underlying storage as the primary read-write compute but operates in read-only mode. It lets you offload read queries from your primary compute to improve performance and scalability, especially for analytical or reporting workloads. Read replica computes can be added to a branch or removed without affecting the primary compute.
+
+## Realtime
+
+Neon's realtime service, with [live SQL](#live-sql) and [reactive DX](#reactive-dx) for building apps and agents on standard Postgres. See [Realtime](/docs/realtime/overview).
 
 ## region
 
@@ -605,6 +621,10 @@ Represents the downstream side of logical replication, establishing a connection
 ## suspend_compute
 
 A Neon Control Plane operation that suspends a compute after a period of inactivity. See [System operations](/docs/manage/operations) for more information. For information about how Neon manages compute resources, see [Compute lifecycle](/docs/introduction/compute-lifecycle).
+
+## sync
+
+Data synchronization: keeping data consistent and in sync between Postgres and client applications.
 
 ## technical preview
 
