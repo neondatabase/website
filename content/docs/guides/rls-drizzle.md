@@ -12,7 +12,7 @@ summary: >-
   running queries that respect those policies at runtime, see the companion page
   on RLS query execution with Drizzle.
 enableTableOfContents: true
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
@@ -429,5 +429,9 @@ Once your RLS policies are defined in your Drizzle schema, you can choose the ap
 
 - Use the [Data API client](/docs/data-api/get-started#connect-and-query) for frontend applications
 - Use the Neon serverless driver for backend applications. For a deeper dive, see [Run RLS queries with Drizzle ORM](/docs/guides/rls-query-execution).
+
+## Next steps
+
+- [TBC](/docs/realtime/examples/drizzle): TBC
 
 <NeedHelp/>

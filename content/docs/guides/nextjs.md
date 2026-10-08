@@ -14,8 +14,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
+
+<Callout title="Realtime with Next.js">
+Build full-stack reactive apps with SSR and end-to-end type-safety using [Neon Realtime with Next.js](/docs/realtime/examples/nextjs).
+</Callout>
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
 description="Pre-built prompt for connecting Next.js applications to Neon"/>
@@ -450,5 +454,6 @@ Neon does not provide a built-in file storage service. For managing binary file 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/nextjs): Build fully-reactive realtime Next.js apps on Neon with SSR and end-to-end type-safety &raquo;
 
 <NeedHelp/>
