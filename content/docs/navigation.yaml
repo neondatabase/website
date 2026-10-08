@@ -839,6 +839,50 @@
                   slug: auth/legacy/overview
                 - title: Database integration
                   slug: auth/legacy/database-integration
+    - title: Realtime
+      icon: zap
+      slug: realtime/overview
+      items:
+        - section: Introduction
+          items:
+            - title: 'Overview'
+              slug: realtime/overview
+            - title: 'Quickstart'
+              slug: realtime/quickstart
+            - title: 'How it works'
+              slug: realtime/how-it-works
+        - section: Guides
+          items:
+            - title: 'Defining queries'
+              slug: realtime/guides/queries
+            - title: 'Subscribing to queries'
+              slug: realtime/guides/subscribing
+            - title: 'Client-side reactivity'
+              slug: realtime/guides/reactivity
+            - title: 'Optimistic mutations'
+              slug: realtime/guides/mutations
+            - title: 'Server-side rendering'
+              slug: realtime/guides/ssr
+        #- section: Examples
+        #  items:
+        #    - title: 'Next.js'
+        #      slug: realtime/examples/nextjs
+        #    - title: 'TanStack'
+        #      slug: realtime/examples/tanstack
+        #    - title: 'Mastra'
+        #      slug: realtime/examples/mastra
+        #    - title: 'Drizzle'
+        #      slug: realtime/examples/drizzle
+        #    - title: 'Kysely'
+        #      slug: realtime/examples/kysely
+        - section: SDKs
+          items:
+            - title: 'TypeScript'
+              slug: realtime/sdks/typescript
+        - section: Reference
+          items:
+            - title: 'API'
+              slug: realtime/reference/api
     - title: Neon Functions
       icon: features
       slug: compute/functions/overview
