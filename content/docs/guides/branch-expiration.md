@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:36:22.797Z'
+updatedOn: '2026-10-08T03:44:40.920Z'
 ---
 
 ## Overview
@@ -106,13 +106,13 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 
 **Requirements:**
 
-- Time zone is required: use either `Z` for UTC or a numeric offset like `+05:00`
+- Time zone is required in API requests: use either `Z` for UTC or a numeric offset like `+05:00`. The Neon CLI accepts a timestamp without one and reads it as your local time, so include it to be explicit.
 - Fractional seconds are optional but only second precision is stored
 - Timestamp must be in the future
 - Maximum expiration is 30 days from the current time
 
 <Admonition type="note">
-Common errors include missing timezone (`2025-07-15T18:02:16`), past timestamps, or combining `Z` with offset (`2025-07-15T18:02:16Z-05:00`).
+Common errors include past timestamps, combining `Z` with an offset (`2025-07-15T18:02:16Z-05:00`), and, in API requests, a missing time zone (`2025-07-15T18:02:16`).
 </Admonition>
 
 ## Restrictions
@@ -227,7 +227,7 @@ curl --request POST \
 
 <TabItem>
 
-```bash {4,12,18}
+```bash {4,12}
 # Update expiration to new timestamp
 neon branches set-expiration \
   <branch-id> \
@@ -242,10 +242,9 @@ neon branches set-expiration \
   --expires-at "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
   --project-id <project-id>
 
-# Remove expiration from a branch
+# Remove expiration from a branch (omit --expires-at)
 neon branches set-expiration \
   <branch-id> \
-  --expires-at null \
   --project-id <project-id>
 ```
 
