@@ -1,10 +1,12 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
+import ICONS_CONFIG from 'config/docs-icons-config';
 import СhevronIcon from 'icons/arrow-label.inline.svg';
 import { cn } from 'utils/cn';
 
@@ -245,7 +247,18 @@ const DetailIconCards = ({
           tagTheme = 'gray',
           theme: childTheme,
         } = child.props ?? {};
+        // The local monochrome map wins, so no existing icon name changes
+        // behaviour. A name it does not hold falls back to the shared logo
+        // config, the same source `TechCards` and `CompactCards` read.
         const Icon = icons[icon];
+        const logoIconConfig = Icon ? null : ICONS_CONFIG[icon];
+
+        // Mirrors the `CompactCards` guard: an unknown name warns and drops the
+        // card instead of reaching the render as an undefined element type.
+        if (!withNumbers && !Icon && !logoIconConfig) {
+          console.warn(`Icon "${icon}" not found in ICONS_CONFIG`);
+          return null;
+        }
 
         const cardThemeName = childTheme || (tag && isFlatGroupTheme ? 'grey' : theme);
         const isGhost = !withNumbers && !!tag && cardThemeName === 'green-dotted';
@@ -295,7 +308,7 @@ const DetailIconCards = ({
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
-              ) : (
+              ) : Icon ? (
                 <Icon
                   className={cn(
                     'mb-8 size-7',
@@ -303,6 +316,30 @@ const DetailIconCards = ({
                     forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
                   )}
                 />
+              ) : (
+                <span className="mb-8 flex h-7 items-center">
+                  <img
+                    className={cn(
+                      'h-7 w-auto shrink-0',
+                      logoIconConfig.darkIconPath && 'dark:hidden'
+                    )}
+                    src={logoIconConfig.lightIconPath}
+                    width={28}
+                    height={28}
+                    alt={`${icon} logo`}
+                    loading={index > 3 ? 'lazy' : 'eager'}
+                  />
+                  {logoIconConfig.darkIconPath && (
+                    <img
+                      className="hidden h-7 w-auto shrink-0 dark:block"
+                      src={logoIconConfig.darkIconPath}
+                      width={28}
+                      height={28}
+                      alt={`${icon} logo`}
+                      loading={index > 3 ? 'lazy' : 'eager'}
+                    />
+                  )}
+                </span>
               )}
               <div className="flex flex-col gap-1.5">
                 <h3
