@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-30T16:31:52.319Z'
+updatedOn: '2026-10-08T13:49:26.698Z'
 ---
 
 ## Getting started
@@ -23,7 +23,7 @@ Start with a one-command setup, or follow a guided tutorial to build the full Ne
   <QuickPath
     title="One-command setup"
     command="npx neon@latest init"
-    description="Sets up Neon for your AI coding agent, links a project, and writes your DATABASE_URL to .env. Copy the command below to get started."
+    description="Sets up Neon for your AI coding agent, links a project, and writes your DATABASE_URL to .env.local (or .env if you have one). Copy the command below to get started."
   />
   <GuidedPath
     title="Build a full backend"
