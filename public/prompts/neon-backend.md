@@ -19,6 +19,7 @@ Then build the backend, using only the capabilities the app needs:
 - AI Gateway for LLM calls through one credential. Check the model catalog for the model and modality you need (text, image, etc.).
 - Managed Better Auth if the app is multi-user; scope every query to the signed-in user.
 - Data API if the app needs a PostgREST-compatible HTTPS interface to Postgres.
+- Realtime for collaboration, multi-user, multi-device, with live SQL and end-to-end type-safe reactivity with live queries and optimistic mutations.
 
 Declare what you need in a single `neon.ts` (see the docs below; these APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch in one step with `neon checkout <name> --create`; when a `neon.ts` is present it builds the branch from your policy, so the declared services come up with it (always pass a name — bare `neon checkout` opens an interactive picker, which this workflow avoids). Then run `neon deploy --update-existing` to reconcile the services on the branch and refresh branch-specific credentials. The database, buckets, and Functions follow the branch together through service-specific lifecycle mechanics.
 
@@ -33,3 +34,4 @@ Read the current docs for exact package names, config syntax, injected env var n
 - AI Gateway models, endpoints, and modality: https://neon.com/docs/ai-gateway/models.md
 - Managed Better Auth (sign-in flow, JWT, and verifying the caller): https://neon.com/docs/auth/authentication-flow.md
 - Data API: https://neon.com/docs/data-api/overview.md
+- Realtime (TBC): https://neon.com/docs/realtime/overview.md

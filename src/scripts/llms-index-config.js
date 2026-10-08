@@ -17,7 +17,7 @@
 
 module.exports = {
   tagline:
-    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
+    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Realtime, Data API, Functions, Object Storage, AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, with native branching, realtime and a fully reactive DX and works with any language, framework, or ORM that supports Postgres.',
 
   getStarted: [
     '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
@@ -75,6 +75,23 @@ module.exports = {
     {
       label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
+    },
+    { label: 'Make a Postgres query live', url: 'https://neon.com/docs/realtime/overview.md' },
+    {
+      label: 'Keep a UI in sync with Postgres',
+      url: 'https://neon.com/docs/realtime/quickstart.md',
+    },
+    {
+      label: 'Add realtime without a second system or a sync engine',
+      url: 'https://neon.com/docs/realtime/overview.md',
+    },
+    {
+      label: 'Replace a polling loop or refetch interval',
+      url: 'https://neon.com/docs/realtime/examples/tanstack.md',
+    },
+    {
+      label: 'Build a fully reactive app on Postgres',
+      url: 'https://neon.com/docs/realtime/examples/nextjs.md',
     },
   ],
 
