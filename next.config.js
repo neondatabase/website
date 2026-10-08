@@ -2240,6 +2240,93 @@ const defaultConfig = {
         destination: '/docs/postgres/index',
         permanent: true,
       },
+      // Section roots. Each `/docs/<section>` path prefix is a directory under
+      // `content/docs/`, not a page, so it 404s unless it is redirected here.
+      // Destinations are taken from `content/docs/navigation.yaml`: the section's
+      // own landing slug where the nav declares one, otherwise its first child.
+      // `/docs/guides` and `/docs/workflows` are deliberately absent: neither has a
+      // single landing page in the nav. `/docs/cli`, `/docs/changelog` and
+      // `/docs/introduction` are absent because they have real root pages.
+      {
+        source: '/docs/ai',
+        destination: '/docs/ai/ai-agents-tools',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai-gateway',
+        destination: '/docs/ai-gateway/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/auth',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/community',
+        destination: '/docs/community/community-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute',
+        destination: '/docs/compute/functions/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/connect',
+        destination: '/docs/connect/connect-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/data-api',
+        destination: '/docs/data-api/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/data-types',
+        destination: '/docs/data-types/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/extensions',
+        destination: '/docs/extensions/pg-extensions',
+        permanent: true,
+      },
+      {
+        source: '/docs/get-started',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/import',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/local',
+        destination: '/docs/local/neon-local',
+        permanent: true,
+      },
+      {
+        source: '/docs/manage',
+        destination: '/docs/manage/platform',
+        permanent: true,
+      },
+      {
+        source: '/docs/postgresql',
+        destination: '/docs/postgresql/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/serverless',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: true,
+      },
+      {
+        source: '/docs/storage',
+        destination: '/docs/storage/overview',
+        permanent: true,
+      },
       {
         source: '/early-access',
         destination: '/',
