@@ -39,6 +39,7 @@ const Post = ({
     tag = null,
     tagTheme = 'gray',
     layout = null,
+    titleWidth = null,
     contentLayout = null,
   },
   content,
@@ -120,7 +121,8 @@ const Post = ({
                   className={cn(
                     !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
                     !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
-                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
+                    titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
                   )}
                 >
                   {eyebrow && (
@@ -205,6 +207,7 @@ Post.propTypes = {
     tagTheme: PropTypes.string,
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
+    titleWidth: PropTypes.oneOf(['530', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
   }).isRequired,
   content: PropTypes.string.isRequired,
