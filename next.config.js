@@ -2240,6 +2240,11 @@ const defaultConfig = {
         destination: '/docs/postgres/index',
         permanent: true,
       },
+      {
+        source: '/docs/realtime',
+        destination: '/docs/realtime/overview',
+        permanent: true,
+      },
       // Section roots. Each `/docs/<section>` path prefix is a directory under
       // `content/docs/`, not a page, so it 404s unless it is redirected here.
       // Destinations are taken from `content/docs/navigation.yaml`: the section's
