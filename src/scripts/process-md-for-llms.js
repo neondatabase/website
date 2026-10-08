@@ -121,6 +121,13 @@ const SHARED_CONTENT_COMPONENTS = {
   NextjsProxyNote: 'nextjs-proxy-note',
   AuthAISetup: 'auth-ai-setup',
   AuthAISetupTip: 'auth-ai-setup-tip',
+  RealtimeSdkBackend: 'realtime-sdk-backend',
+  RealtimeSdkClient: 'realtime-sdk-client',
+  RealtimeSdkReact: 'realtime-sdk-react',
+  RealtimeSdkTanstackDb: 'realtime-sdk-tanstack-db',
+  RealtimeSdkDrizzle: 'realtime-sdk-drizzle',
+  RealtimeSdkDrizzleClient: 'realtime-sdk-drizzle-client',
+  RealtimeSdkKysely: 'realtime-sdk-kysely',
 };
 
 /**
