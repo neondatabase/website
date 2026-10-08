@@ -248,6 +248,21 @@
         @apply p-3 leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-85;
       }
 
+      /* First-column cells that hold only code chips (optionally linked),
+         e.g. the name column of an API or settings table. The global
+         inline-code rule's `overflow-wrap: anywhere` lets the table's auto
+         layout shrink this column until identifiers break mid-word; keep
+         each chip's words whole so the column fits its longest identifier.
+         Chips can still wrap at spaces. Applies above the `sm` breakpoint
+         only; below it, chips keep the default breaking so tables stay as
+         narrow as possible. */
+      @media (min-width: 640px) {
+        td:first-child:has(> code, > a > code):not(:has(> :not(code, a))) code {
+          overflow-wrap: normal;
+          word-break: normal;
+        }
+      }
+
       thead {
         @apply sticky top-0 z-10 bg-white dark:bg-black-pure;
 
