@@ -10,8 +10,12 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
+
+<Callout title="Realtime with Drizzle">
+See how to subscribe to live SQL queries with [Neon Realtime + Drizzle](/docs/realtime/examples/drizzle)
+</Callout>
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
 description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
@@ -398,5 +402,6 @@ Each branch has its own connection string, available in the Neon Console or via 
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Realtime](/docs/realtime/examples/drizzle): Build fully-reactive realtime Drizzle apps on Neon using your existing schema and queries &raquo;
 
 <NeedHelp/>
