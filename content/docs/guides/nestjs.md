@@ -9,7 +9,7 @@ summary: >-
   cover Neon project creation, DATABASE_URL configuration in .env, and wiring
   a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-05T12:27:24.167Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
@@ -183,7 +183,7 @@ export class AppService {
   constructor(@Inject('POSTGRES_POOL') private readonly sql: any) {}
 
   async getTable(name: string): Promise<any[]> {
-    return await this.sql(`SELECT * FROM ${name}`);
+    return await this.sql.query(`SELECT * FROM ${name}`);
   }
 }
 ```

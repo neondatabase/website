@@ -282,7 +282,7 @@ export default defineConfig({
 
 ```bash filename="Terminal"
 neon deploy
-npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
 ```
 
 ```typescript filename="app/upload/actions.ts"
@@ -451,7 +451,7 @@ export default app;
 
 Declare the function and the AI Gateway in `neon.ts`, then `neon deploy`. Neon builds the function, gives it a public URL, and injects the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`) so the `@neon/ai-sdk-provider` inside the function needs no configuration.
 
-Copy the `invocation_url` from the `neon functions get posts` output into `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly). `NEXT_PUBLIC_` variables are read at build time, so restart the dev server if it's already running.
+Copy the `URL` from the `neon functions get posts` output into `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly). `NEXT_PUBLIC_` variables are read at build time, so restart the dev server if it's already running.
 
 A Neon Function has its own URL, so the browser calls it directly. That keeps a long stream off your host's serverless timeout.
 
@@ -479,13 +479,14 @@ export default defineConfig({
 
 ```bash filename="Terminal"
 neon deploy
-neon functions get posts   # prints the invocation_url
+neon functions get posts   # prints the function URL
 ```
 
 ```
-slug           posts
-name           posts assistant
-invocation_url https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
+Function
+Slug        posts
+Name        posts assistant
+URL         https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 ```bash filename=".env.local"

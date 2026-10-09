@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the setup step by step following the guide's patterns. Create the Sentry project first (Node.js platform). Use the Neon CLI (`neon init`, `neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Initialize Sentry once at module load before the handler serves requests, and flush buffered telemetry before each request ends, since Neon Functions can suspend an idle process at any moment.
+7. Implement the setup step by step following the guide's patterns. Create the Sentry project first (Node.js platform). Use the Neon CLI without its interactive pickers. To create and link a new project, run `neon init -y --no-agent-setup --services functions --org-id <org-id> --project-name <name> --region-id aws-us-east-2`. It also writes a `neon.ts` that declares the service. To reuse an existing project in a supported region, pass `--project-id <id>` instead of the org, name, and region flags. `aws-us-east-2` is one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Initialize Sentry once at module load before the handler serves requests, and flush buffered telemetry before each request ends, since Neon Functions can suspend an idle process at any moment.
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
@@ -42,6 +42,6 @@ Before writing code:
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
 
-When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.
 
 Show me where to find each signal in the Sentry UI. Never print DSNs, tokens, connection strings, or other secrets back to me. If the guide and my repo state ever disagree, trust the guide and tell me what you changed.

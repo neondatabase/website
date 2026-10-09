@@ -7,7 +7,7 @@ createdAt: '2024-10-28T00:00:00.000Z'
 updatedAt: '2024-10-28T00:00:00.000Z'
 ---
 
-Vercel transitioned all Vercel Postgres stores to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace) (see the [Vercel Postgres transition guide](/docs/guides/vercel-postgres-transition-guide)). This guide shows how to migrate your code from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/neondatabase/serverless).
+Vercel transitioned all Vercel Postgres stores to Neon's native integration in the [Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace). This guide shows how to migrate your code from the Vercel Postgres SDK [(@vercel/postgres)](https://vercel.com/docs/storage/vercel-postgres/sdk) to the [Neon serverless driver](https://github.com/neondatabase/serverless).
 
 ## Why migrate?
 

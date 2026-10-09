@@ -116,6 +116,20 @@ describe('classifyDrift', () => {
     expect(drift.missingFromWebsite).toEqual(['z']);
     expect(drift.hasFault).toBe(true);
   });
+
+  it('skips a model we have not released, whether or not models.dev lists it', () => {
+    const drift = classifyDrift(
+      {
+        a: model(),
+        b: model({ id: 'b', name: 'B', released: false }),
+        c: model({ id: 'c', name: 'C', released: false, cost: { input: 1 } }),
+      },
+      { a: model(), c: model({ id: 'c', name: 'C', cost: { input: 2 } }) }
+    );
+
+    expect(drift.inSync).toBe(true);
+    expect(drift.unreleased).toEqual(['b', 'c']);
+  });
 });
 
 describe('validateCatalog', () => {

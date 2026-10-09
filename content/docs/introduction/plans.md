@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-10-06T12:59:52.763Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -136,7 +136,7 @@ On paid plans, you can create extra child branches. Extra branches beyond your p
 
 Cost: **$1.50/branch-month** (~$0.002/hour).
 
-Example: The Launch plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.20 total.
+Example: The Launch plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.02 total.
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 

@@ -91,12 +91,12 @@ neon mcp --oauth --project --agent cursor
 ```
 
 ```text
-INFO: Wrote /home/user/my-app/.cursor/mcp.json
-INFO: URL: https://mcp.neon.tech/mcp
+Wrote /home/user/my-app/.cursor/mcp.json
+URL: https://mcp.neon.tech/mcp
 MCP
 Agent   Status
 cursor  installed
-INFO: The agent will prompt for Neon sign-in on first use.
+The agent will prompt for Neon sign-in on first use.
 ```
 
 Give the agent read-only access:

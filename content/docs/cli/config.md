@@ -11,8 +11,8 @@ summary: >-
   apply would change, and `neon config apply` (or its top-level alias
   `neon deploy`) to apply the policy to the branch. Supports --config to
   point at a neon.ts file, --env to load environment variables before
-  evaluating it, and --allow-protected and --update-existing confirmation flags
-  for non-interactive use.
+  evaluating it, and --allow-protected, --update-existing, or -y to answer
+  the apply confirmation prompts in non-interactive use.
 enableTableOfContents: true
 ---
 
@@ -141,10 +141,11 @@ neon config add function sendemail
 ```
 
 ```text
-INFO: Created functions/sendemail.ts.
-INFO: Created neon.ts: added functions.sendemail.
-INFO: Install the Neon config packages to use neon.ts: npm install @neon/config @neon/env
-INFO: Next: `neon dev` to run it locally, `neon config apply` to deploy.
+Created functions/sendemail.ts.
+Created neon.ts: added functions.sendemail.
+Created package.json.
+Installing @neon/config, @neon/env with npm…
+Next: `neon dev` to run it locally, `neon config apply` to deploy.
 ```
 
 ### neon config add bucket (#add-bucket)
@@ -238,8 +239,10 @@ Applies a `neon.ts` policy to the branch.
 
 <CliOptions command="config apply" />
 
-For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
+In a terminal, `apply` asks before it overrides branch settings that differ from `neon.ts` or applies to a branch marked protected on Neon. Declining applies nothing.
+
+Without a terminal, there's no prompt. This covers CI, runs with no TTY, and `-o json` or `-o yaml` output. In those cases, `apply` stops before changing anything and names the flag to re-run with. For scripts, CI, and agents, pass `--update-existing` to allow the overrides, `--allow-protected` to allow a protected branch, or `-y` for both:
 
 ```bash
-neon config apply --branch feature/auth --update-existing --allow-protected
+neon config apply --branch feature/auth -y
 ```

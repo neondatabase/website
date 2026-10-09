@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-09-25T10:52:19.537Z'
+updatedOn: '2026-10-09T09:39:55.552Z'
 ---
 
 Managed Better Auth lets you add authentication to your app in seconds. User data is stored directly in your database, so you can query and join it just like any other table.
@@ -10,7 +10,7 @@ Managed Better Auth lets you add authentication to your app in seconds. User dat
 
 Go to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 
-Once your project is ready, open your project's **Auth** page and click **Enable Managed Better Auth** to get started.
+Once your project is ready, open your project's **Better Auth** page and click **Enable Managed Better Auth** to get started.
 
 ![Managed Better Auth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
 

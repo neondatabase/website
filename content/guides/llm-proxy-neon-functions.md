@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -88,19 +88,20 @@ Select **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (
 
 ```bash
 $ neon link
-INFO: Linking organization XXX (org-round-sun-33472318).
+Linking organization MyOrg (org-example-12345678).
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … llm-proxy-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project winter-breeze-65209364 ("llm-proxy-demo") in aws-us-east-2.
-Linked <project-directory>/llm-proxy-backend/.neon:
-  orgId:     org-round-sun-33472318
-  projectId: winter-breeze-65209364
-  branch:    main
+Created project llm-proxy-demo in aws-us-east-2
+Linked .neon
+  Project         llm-proxy-demo (winter-breeze-12345678)
+  Branch          main
+  Org             org-example-12345678
 
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
-
-INFO: Pulled 3 Neon variables into <project-directory>/llm-proxy-backend/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 ```
 
 When prompted whether to manage setup as code, select **Yes** to generate a `neon.ts` file. This file will configure your project's services and function deployment.
@@ -459,7 +460,7 @@ The terminal will log your public function URL upon completion:
 
 ```bash
 Function URLs
-  • proxy: https://br-damp-voice-xxx-proxy.compute.c-3.us-east-2.aws.neon.tech
+  • proxy: https://br-damp-voice-a1b2c3d4-proxy.compute.c-3.us-east-2.aws.neon.tech
 ```
 
 Copy this function endpoint URL. You will use it in your React frontend to connect to the proxy. Your `.env.local` file should now also include the `NEON_AUTH_JWKS_URL` and other necessary environment variables for the proxy to verify JWTs and connect to the AI Gateway.
@@ -565,7 +566,7 @@ Create a `.env` file in the `llm-proxy-frontend/` directory and add the followin
 
 ```env filename=".env"
 VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
-VITE_PROXY_API_URL="https://br-damp-voice-xxx-proxy.compute.c-3.us-east-2.aws.neon.tech/api/chat"
+VITE_PROXY_API_URL="https://br-damp-voice-a1b2c3d4-proxy.compute.c-3.us-east-2.aws.neon.tech/api/chat"
 ```
 
 Replace `VITE_PROXY_API_URL` with your deployed Neon Function URL and `VITE_NEON_AUTH_URL` with your Managed Better Auth endpoint (`NEON_AUTH_BASE_URL`) from your `.env.local` file in the backend. The proxy URL points to the function you just deployed; the auth URL points to the service that issues JWTs. (Optionally, you can link the frontend folder to the same Neon project using `neon link` to automatically keep the env variables in sync.)

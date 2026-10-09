@@ -12,7 +12,7 @@ summary: >-
   prevent scale-to-zero and may increase billing.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -44,7 +44,7 @@ Enabling logical replication modifies the PostgreSQL `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 

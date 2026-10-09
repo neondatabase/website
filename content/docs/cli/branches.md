@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -39,9 +39,9 @@ neon branches list --project-id solitary-leaf-288182
 ```
 
 ```text filename="Output"
-Name                   Id                     Current State  Created At
-[default] production   br-wispy-cloud-123456  ready          2026-09-30T13:15:12Z
-[current] development  br-cool-forest-123456  ready          2026-09-30T14:45:50Z
+Name                   ID                     Current State  Expires At  Created At
+[default] production   br-wispy-cloud-123456  ready          never       2026-09-30T13:15:12Z
+[current] development  br-cool-forest-123456  ready          never       2026-09-30T14:45:50Z
 ```
 
 Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, `[anon]` marks an anonymized branch, and `[current]` marks the branch pinned in your local `.neon` context file.
@@ -116,16 +116,16 @@ neon branches create
 ```text filename="Output"
 Branch
 Name           br-mute-sunset-123456
-Id             br-mute-sunset-123456
+ID             br-mute-sunset-123456
 Current State  ready
 Created At     2026-09-30T20:07:27Z
 
 Compute
-Id                       Created At
+ID                       Created At
 ep-floral-violet-123456  2026-09-30T20:07:27Z
 
 Connection string
-Connection Uri
+Connection URI
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
@@ -286,7 +286,7 @@ neon branches reset development --parent
 
 ```text filename="Output"
 Name           development
-Id             br-cool-forest-123456
+ID             br-cool-forest-123456
 Current State  ready
 Created At     2026-09-30T14:45:50Z
 Last Reset At  2026-09-30T15:36:32Z
@@ -313,14 +313,14 @@ neon branches restore main ^self@2026-09-29T10:00:00.000Z --preserve-under-name 
 ```
 
 ```text filename="Output"
-INFO: Restoring main to main at timestamp 2026-09-29T10:00:00.000Z
+Restoring main to main at timestamp 2026-09-29T10:00:00.000Z
 Restored branch
-Id             br-purple-dust-123456
+ID             br-purple-dust-123456
 Name           main
 Last Reset At  2026-09-30T09:45:21Z
 
 Backup branch
-Id    br-flat-forest-123456
+ID    br-flat-forest-123456
 Name  main_restore_backup_2026-09-29
 ```
 
@@ -331,9 +331,9 @@ neon branches restore feature/user-auth main
 ```
 
 ```text filename="Output"
-INFO: Restoring feature/user-auth to the head of main
+Restoring feature/user-auth to the head of main
 Restored branch
-Id             br-restless-frost-123456
+ID             br-restless-frost-123456
 Name           feature/user-auth
 Last Reset At  2026-09-30T15:42:34Z
 ```
@@ -345,9 +345,9 @@ neon branches restore feature/user-auth ^parent@2026-09-29T10:30:00.000Z
 ```
 
 ```text filename="Output"
-INFO: Restoring feature/user-auth to main at timestamp 2026-09-29T10:30:00.000Z
+Restoring feature/user-auth to main at timestamp 2026-09-29T10:30:00.000Z
 Restored branch
-Id             br-restless-frost-123456
+ID             br-restless-frost-123456
 Name           feature/user-auth
 Last Reset At  2026-09-30T15:55:04Z
 ```
@@ -368,7 +368,7 @@ neon branches rename mybranch teambranch
 
 ```text filename="Output"
 Name           teambranch
-Id             br-rough-sound-123456
+ID             br-rough-sound-123456
 Current State  ready
 Created At     2026-09-30T20:46:58Z
 ```
@@ -449,7 +449,7 @@ neon branches set-default mybranch
 
 ```text filename="Output"
 Name           [default] mybranch
-Id             br-odd-frog-123456
+ID             br-odd-frog-123456
 Current State  ready
 Created At     2026-09-30T12:22:12Z
 ```
@@ -491,7 +491,7 @@ neon branches add-compute mybranch --type read_only
 ```
 
 ```text filename="Output"
-Id    ep-rough-lab-123456
+ID    ep-rough-lab-123456
 Host  ep-rough-lab-123456.us-east-2.aws.neon.tech
 ```
 
@@ -521,7 +521,7 @@ neon branches delete br-rough-sky-123456
 
 ```text filename="Output"
 Name           my_child_branch
-Id             br-rough-sky-123456
+ID             br-rough-sky-123456
 Current State  ready
 Created At     2026-09-30T20:57:39Z
 ```
@@ -542,7 +542,7 @@ neon branches get production
 
 ```text filename="Output"
 Name           [default] production
-Id             br-wispy-cloud-123456
+ID             br-wispy-cloud-123456
 Current State  ready
 Created At     2026-09-30T13:15:12Z
 Logical Size   30.6 MiB

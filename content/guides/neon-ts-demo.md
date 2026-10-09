@@ -4,7 +4,7 @@ subtitle: 'Provision your entire Neon backend from a single TypeScript config: P
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-09-30T12:39:17.064Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file for full-stack TypeScript projects. Traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon) require learning a new DSL, managing state files, and wiring outputs into your application by hand. `neon.ts` is part of your local development loop instead. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli) and syncs connection strings directly into `.env.local`.
@@ -231,7 +231,7 @@ You should see output like this, showing the services that will be created:
 
 ```bash
 $ neon config plan
-INFO: → Planning against branch main (br-cool-forest-a1b2c3d4)
+→ Planning against branch main (br-cool-forest-a1b2c3d4)
 Planned changes
   + Neon Auth
   + bucket uploads
@@ -257,13 +257,13 @@ neon deploy
 </Admonition>
 
 <Admonition type="note" title="Conflicting remote state">
-If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), `neon deploy` may fail with:
+If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), the CLI won't silently overwrite them. In a terminal, `neon deploy` shows the settings it would change and asks before overriding them. Without a terminal, such as in CI, it stops with:
 
 ```text
-ERROR: pushConfig refused to apply: local config conflicts with remote state.
+ERROR: Branch settings conflict with the policy. Re-run with --update-existing (or -y) to apply the changes shown above.
 ```
 
-The CLI won't silently overwrite existing remote settings. To override and apply your `neon.ts` configuration, pass the `--update-existing` flag:
+To override and apply your `neon.ts` configuration without the prompt, pass `--update-existing`:
 
 ```bash
 neon deploy --update-existing
@@ -285,8 +285,15 @@ Function URLs
   • api: https://br-cool-forest-a1b2c3d4-api.compute.c-13.us-east-1.aws.neon.tech/
 
 Utilized services: Postgres, Neon Auth, Data API, Object Storage, Functions, AI Gateway
-INFO: Pulled 13 Neon variables into .env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH, NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL, NEON_DATA_API_URL, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_ENDPOINT_URL_S3, AWS_REGION, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL, NEON_FUNCTION_API_BASE_URL
-INFO: Wrote credential secrets (these now hold fresh values): AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NEON_AI_GATEWAY_TOKEN
+Pulled 13 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
+  Neon Auth       NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL
+  Data API        NEON_DATA_API_URL
+  Functions       NEON_FUNCTION_API_BASE_URL
+  Object Storage  AWS_ACCESS_KEY_ID*, AWS_SECRET_ACCESS_KEY*, AWS_ENDPOINT_URL_S3, AWS_REGION
+  AI Gateway      NEON_AI_GATEWAY_TOKEN*, NEON_AI_GATEWAY_BASE_URL
+  * new credential value
 ```
 
 After the deploy completes, `neon` updates `.env.local` with the connection strings and credentials for the services you provisioned, so you don't have to copy them by hand. The CLI also prints the function's invocation URL, which you can hit to confirm the function is live.
@@ -394,7 +401,7 @@ neon triggers list
 ```
 
 ```text
-Trigger Id                                    Name            Type                    Function Slug  Function Path         Schedule   Storage   Enabled
+Trigger ID                                    Name            Type                    Function Slug  Function Path         Schedule   Storage   Enabled
 trigger-1a2b3c4d-5e6f-7890-abcd-ef1234567890  process-upload  storage_object_created  api            /tasks/upload-created            uploads uploads/  true
 trigger-8f7e6d5c-4b3a-2190-fedc-ba9876543210  daily-report    schedule                api            /tasks/daily          0 6 * * 1            true
 ```
@@ -472,7 +479,7 @@ Run these quick checks after deploying:
 | Capability | Quick check                                                                                        |
 | ---------- | -------------------------------------------------------------------------------------------------- |
 | Postgres   | `neon psql main -- -c "select 1;"` connects                                                        |
-| Functions  | `neon functions get api` prints an `invocation_url` that responds                                  |
+| Functions  | `neon functions get api` prints a function URL that responds                                       |
 | Triggers   | `neon triggers list` shows both triggers, and `neon logs query --source function` shows their runs |
 | Branching  | `neon checkout dev-new-feature --create` gives the branch its own `DATABASE_URL` and function URL  |
 

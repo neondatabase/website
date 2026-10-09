@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 <InfoBlock>
@@ -119,14 +119,14 @@ For a detailed guide on how to interact with your data using the **Tables** page
 
 Neon includes **managed authentication**, so your app's users live in your Postgres database and branch with the rest of your data.
 
-From the Neon Console sidebar, open the **Auth** page and toggle Managed Better Auth on for your project. You'll get:
+From the Neon Console sidebar, open the **Better Auth** page and toggle Managed Better Auth on for your project. You'll get:
 
 - A sign-up / sign-in flow ready to wire up to any framework
 - Users and sessions stored in your own Postgres database — query the `neon_auth.user` table directly alongside your application data
 - Branch-aware auth: every preview or development branch you create gets its own isolated copy of users and sessions
 - OAuth providers, email and password, magic links, and more, all configurable from the console
 
-For framework-specific setup, see the [Managed Better Auth quickstarts](/docs/auth/overview) (Next.js, React, TanStack Router) or open the **Auth** tab in the console and follow the prompts.
+For framework-specific setup, see the [Managed Better Auth quickstarts](/docs/auth/overview) (Next.js, React, TanStack Router) or open the **Better Auth** page in the console and follow the prompts.
 
 ## Working with your development branch
 
@@ -171,7 +171,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    Projects
-   Id                    Name       Region Id      Created At
+   ID                    Name       Region ID      Created At
    cool-forest-12345678  myproject  aws-us-east-2  2026-10-14T14:33:43Z
    ```
 
@@ -179,9 +179,9 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    neon branches list --project-id cool-forest-12345678
-   Name                            Id                   Current State  Created At
-   development                     br-calm-sky-123456   ready          2026-12-23T21:05:05Z
-   [default] [current] production  br-bold-wind-123456  ready          2026-12-23T21:04:57Z
+   Name                            ID                   Current State  Expires At  Created At
+   development                     br-calm-sky-123456   ready          never       2026-12-23T21:05:05Z
+   [default] [current] production  br-bold-wind-123456  ready          never       2026-12-23T21:04:57Z
    ```
 
    This command shows your existing branches, including the `production` branch and the `development` branch you just created.

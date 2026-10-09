@@ -33,14 +33,14 @@ neon functions deploy hello --src functions/hello.ts
 ```
 
 ```text filename="Output"
-INFO: Function deployment triggered for function hello.
-Id              1
-Status          completed
-Invocation Url  https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
-Runtime         nodejs24
-Memory Mib      2048
-Created At      2026-06-12T00:14:58.044690Z
-INFO: Function deployment hello/1 completed.
+Function deployment triggered for function hello.
+Function hello
+URL            https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
+Deployment ID  1
+Status         completed
+Runtime        nodejs24
+Memory         2048 MiB
+Created At     2026-06-12T00:14:58.044690Z
 ```
 
 Deploy with environment variables and wait for the build:
@@ -62,7 +62,7 @@ neon functions list
 ```
 
 ```text filename="Output"
-Slug   Name   Status     Invocation Url                                                              Created At
+Slug   Name   Status     URL                                                                         Created At
 hello  hello  completed  https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/  2026-06-12T00:14:57.942988Z
 ```
 
@@ -116,18 +116,18 @@ neon functions get hello
 ```
 
 ```text filename="Output"
-function
-Slug            hello
-Name            hello
-Invocation Url  https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
-Created At      2026-06-12T00:14:57.942988Z
+Function
+Slug        hello
+Name        hello
+URL         https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
+Created At  2026-06-12T00:14:57.942988Z
 
-deployment (current, active)
-Id          1
-Status      completed
-Runtime     nodejs24
-Memory Mib  2048
-Created At  2026-06-12T00:14:58.044690Z
+Deployment (current, active)
+Deployment ID  1
+Status         completed
+Runtime        nodejs24
+Memory         2048 MiB
+Created At     2026-06-12T00:14:58.044690Z
 ```
 
 ## neon functions delete (#delete)
@@ -143,7 +143,7 @@ neon functions delete hello
 ```
 
 ```text filename="Output"
-INFO: Function hello deleted from branch br-cool-darkness-123456
+Function hello deleted from branch br-cool-darkness-123456
 ```
 
 ## neon functions domains (#domains)

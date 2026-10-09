@@ -6,7 +6,7 @@ summary: >-
   directory to a Neon project, including interactive and non-interactive
   workflows for CI, scripts, and AI agents.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
@@ -31,7 +31,7 @@ For most workflows, use `neon link` instead of manually running `neon set-contex
 
 <CliOptions command="link" />
 
-By default, linking pulls the linked branch's environment variables (such as `DATABASE_URL`) into a local `.env` file. Use `--no-env-pull` to skip this step, for example when you inject environment variables at runtime instead.
+By default, linking pulls the linked branch's environment variables (such as `DATABASE_URL`) into `.env.local` (or `.env` if present). Use `--no-env-pull` to skip this step, for example when you inject environment variables at runtime instead.
 
 After an interactive link, `link` also prompts you to create a [`neon.ts` config](/docs/cli/config) when the directory doesn't already have one, so you can manage the project's Neon setup as code. Accept the prompt to write `neon.ts`, or pass `--no-config` to skip it. This applies to interactive linking only; non-interactive runs never prompt.
 
@@ -48,11 +48,11 @@ neon link
 ? Which project would you like to link? › + Create new project
 ? Name for the new project: › my-app
 ? Which region should the new project run in? › AWS US East (Ohio) (aws-us-east-2)
-Created project polished-snowflake-12345678 ("my-app") in aws-us-east-2.
-Linked .neon:
-  orgId:     org-abc123
-  projectId: polished-snowflake-12345678
-  branch:    br-steep-math-aiu3vve7
+Created project my-app in aws-us-east-2
+Linked .neon
+  Project         my-app (polished-snowflake-12345678)
+  Branch          br-steep-math-aiu3vve7
+  Org             org-abc123
 ```
 
 ## Non-interactive mode

@@ -13,7 +13,7 @@ summary: >-
   active while Bemi is connected, which prevents scale-to-zero.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
@@ -43,7 +43,7 @@ Enabling logical replication modifies the Postgres `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 

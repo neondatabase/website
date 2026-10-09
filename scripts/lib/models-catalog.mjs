@@ -135,10 +135,17 @@ function comparable(model) {
  * A field that differs cannot be attributed to either side from a comparison
  * alone — we may have corrected a price, or upstream may have edited our entry —
  * so it is reported for review rather than blamed.
+ *
+ * A model with `released: false` is cataloged ahead of its announcement, so the mirror is
+ * not expected to match it yet. It is left out of every comparison, on both sides.
  */
 export function classifyDrift(website, modelsDev) {
-  const ours = new Set(Object.keys(website));
-  const theirs = new Set(Object.keys(modelsDev));
+  const unreleased = Object.keys(website)
+    .filter((id) => website[id].released === false)
+    .sort();
+  const skipped = new Set(unreleased);
+  const ours = new Set(Object.keys(website).filter((id) => !skipped.has(id)));
+  const theirs = new Set(Object.keys(modelsDev).filter((id) => !skipped.has(id)));
 
   const awaitingUpstream = [...ours].filter((id) => !theirs.has(id)).sort();
   const missingFromWebsite = [...theirs].filter((id) => !ours.has(id)).sort();
@@ -161,6 +168,7 @@ export function classifyDrift(website, modelsDev) {
     awaitingUpstream,
     missingFromWebsite,
     fieldDrift,
+    unreleased,
     inSync:
       awaitingUpstream.length === 0 && missingFromWebsite.length === 0 && fieldDrift.length === 0,
     /** Expected while an upstream PR is open. Reported, never failed on. */
