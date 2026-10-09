@@ -9,7 +9,7 @@ summary: >-
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-10-09T10:21:18.858Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
@@ -27,7 +27,7 @@ This guide shows you how to integrate Managed Better Auth into a [Next.js](https
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Better Auth** page in your project dashboard and click **Enable Auth**, then copy your Auth URL from **Settings** > **Better Auth** > **Project Info**.
+In the Neon Console, open the **Better Auth** page and click **Enable Auth**, then copy your Auth URL from **Settings** > **Better Auth** > **Project Info**.
 
 **Console path:** Project → Branch → Auth → Configuration
 
