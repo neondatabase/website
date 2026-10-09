@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { isDeepStrictEqual } from 'util';
 
 import { buildCatalog, fetchAiGatewayModels } from './lib/ai-gateway-models.mjs';
 import { validateCatalog } from './lib/models-catalog.mjs';
@@ -46,10 +47,21 @@ async function main() {
     return;
   }
 
+  // A no-op refresh must not reformat the prettier-formatted committed file.
+  if (isDeepStrictEqual(catalog, committed)) {
+    console.log(`${PREFIX} no changes; keeping committed models data`);
+    return;
+  }
+
   // Write-then-rename: a crash mid-write must not leave a truncated catalog.
   const tmp = `${OUT_PATH}.tmp`;
-  fs.writeFileSync(tmp, `${JSON.stringify(catalog, null, 2)}\n`);
-  fs.renameSync(tmp, OUT_PATH);
+  try {
+    fs.writeFileSync(tmp, `${JSON.stringify(catalog, null, 2)}\n`);
+    fs.renameSync(tmp, OUT_PATH);
+  } catch (error) {
+    fs.rmSync(tmp, { force: true });
+    throw error;
+  }
 
   const models = catalog.neon.models;
   const ids = Object.keys(models);
@@ -66,5 +78,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.warn(`${PREFIX} ${error.message}; keeping committed models data`);
+  const code = error.cause?.code ? ` (${error.cause.code})` : '';
+  console.warn(`${PREFIX} ${error.message}${code}; keeping committed models data`);
 });
