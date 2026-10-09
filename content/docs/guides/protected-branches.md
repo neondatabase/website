@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-10-09T10:01:16.476Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -156,11 +156,9 @@ For details about specifying IP addresses, see [How to specify IP addresses](/do
 
 ### Restrict IP access to protected branches only
 
-After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
+After defining an IP allowlist, go to **Restricted branches** and select **Protected branches only**.
 
-![IP Allow configuration](/docs/guides/ip_allow_protected_branches.png)
-
-This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only.
+This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only. Every other branch keeps accepting any address.
 
 After you've selected the protected branches option, click **Save changes** to apply the new configuration.
 

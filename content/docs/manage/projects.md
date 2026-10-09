@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-10-09T10:01:16.476Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -196,7 +196,7 @@ To configure an allowlist:
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Networking**.
 4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
+5. Optionally, under **Restricted branches**, select **Protected branches only** to enforce the allowlist only on branches you've designated as protected. Every other branch keeps accepting any address.
 6. Click **Save changes**.
 
 </TabItem>
@@ -316,9 +316,8 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 1. Select a project in the Neon Console.
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Networking**.
-4. Under **Public internet access**, clear the allowlisted IP addresses.
-5. If applicable, clear the **Restrict IP Access to protected branches only** checkbox.
-6. Click **Save changes**.
+4. Under **Public internet access**, select **Any IP address**.
+5. Click **Save changes**.
 
 </TabItem>
 
