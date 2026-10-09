@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:41:16.035Z'
+updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -42,7 +42,7 @@ In the Neon Console, select your project and select **Postgres database** > **Da
 
 The Data API uses JWTs for access control. Configure a provider now or later from the **Settings** tab. For public data that doesn't require login, use the [`anonymous` role](/docs/data-api/access-control#2-the-anonymous-role) instead.
 
-- **Managed Better Auth**: Check the **Use Managed Better Auth** checkbox to enable [Managed Better Auth](/docs/auth/overview) as your provider. Managed Better Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
+- **Managed Better Auth**: Check the **Use Neon Auth** checkbox to enable [Managed Better Auth](/docs/auth/overview) as your provider. Managed Better Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 - **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.
 
 ### 3. Configure schema access (optional)

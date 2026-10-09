@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -29,7 +29,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 <TabItem>
 
 1. Select your project in the Neon Console.
-2. On the **Project Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 

@@ -6,7 +6,7 @@ summary: >-
   credits, how to check your balance, and how usage limits and metering affect
   access.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-10-09T11:04:29.203Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -116,6 +116,10 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 A paid account with prepaid credits can use every AI Gateway model.
 See [Model access](/docs/ai-gateway/overview#model-access) for details.
+
+After you buy credits, locked models unlock once Neon confirms access. If a
+model still shows a padlock on the **AI Gateway** page, reload the page. See
+[Some models are restricted in the Console](/docs/ai-gateway/troubleshooting#some-models-are-restricted-in-the-console).
 
 The model list is subject to change. See
 [Supported models](/docs/ai-gateway/models) for the current catalog.

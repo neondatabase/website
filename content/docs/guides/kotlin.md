@@ -11,7 +11,7 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/kotlin-prompt.md"
@@ -100,7 +100,7 @@ Create a project using the Gradle `init` command. This sets up a standard Kotlin
 
 Create a file named `.env` in the `app` directory. This file will securely store your database connection string. Place it next to the application module so `dotenv-kotlin` can load it when you run the app with Gradle.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select **Java** as your programming language. Kotlin uses the same JDBC connection string format.
     ![Connection modal](/docs/connect/java_connection_details.png)

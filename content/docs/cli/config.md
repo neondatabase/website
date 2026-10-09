@@ -141,10 +141,10 @@ neon config add function sendemail
 ```
 
 ```text
-INFO: Created functions/sendemail.ts.
-INFO: Created neon.ts: added functions.sendemail.
-INFO: Install the Neon config packages to use neon.ts: npm install @neon/config @neon/env
-INFO: Next: `neon dev` to run it locally, `neon config apply` to deploy.
+Created functions/sendemail.ts.
+Created neon.ts: added functions.sendemail.
+Install the Neon config packages to use neon.ts: npm install @neon/config @neon/env
+Next: `neon dev` to run it locally, `neon config apply` to deploy.
 ```
 
 ### neon config add bucket (#add-bucket)
@@ -238,7 +238,7 @@ Applies a `neon.ts` policy to the branch.
 
 <CliOptions command="config apply" />
 
-For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
+For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts, or pass `-y` (`--yes`) to confirm both.
 
 ```bash
 neon config apply --branch feature/auth --update-existing --allow-protected

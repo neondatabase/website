@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-02T13:41:36.830Z'
+updatedOn: '2026-10-09T11:04:29.203Z'
 ---
 
 ## Authentication errors
@@ -60,6 +60,20 @@ See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
+
+### Some models are restricted in the Console
+
+On your project's **AI Gateway** page, locked models show a padlock, and the **Some models are restricted** section lists them grouped by reason. Each reason links to the fix:
+
+| Message                                                  | What to do                                                                                  |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **A paid plan is required to use these models**          | Select **Upgrade plan**. The AI Gateway is available on paid plans only.                    |
+| **AI Gateway credits are required to use these models**  | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
+| **Account verification is required to use these models** | Select **Complete verification**, or [contact Support](/docs/introduction/support).         |
+| **Your account is restricted from using these models**   | [Contact Support](/docs/introduction/support).                                              |
+| **Some models are not available to your account**        | [Contact Support](/docs/introduction/support).                                              |
+
+After you upgrade or buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
 
 ### `403 model requires a verified account`
 
