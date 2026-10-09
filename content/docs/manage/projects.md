@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-09T11:33:56.423Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -439,6 +439,10 @@ To delete a project:
 2. Select the project that you want to delete.
 3. Select **Settings**.
 4. On the **General** tab, under **Delete project**, select **Delete project**.
+
+<Admonition type="note">
+Deleting a project doesn't release its [custom domains](/docs/compute/functions/custom-domains#delete-a-custom-domain). Delete any domains you want to reuse before you delete the project.
+</Admonition>
 
 <Admonition type="note">
 For HIPAA-compliant projects, see [HIPAA Compliance](/docs/security/hipaa#delete-a-hipaa-compliant-project) before deleting a project—for example, to export audit logs you may need.

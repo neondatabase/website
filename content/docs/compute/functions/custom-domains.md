@@ -324,7 +324,7 @@ dangling CNAME from continuing to point at Neon's custom-domain edge.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-Under **Settings → Functions → Custom Domains** in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
+Under **Settings** > **Functions** > **Custom domains** in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
 
 </TabItem>
 <TabItem>
@@ -376,5 +376,10 @@ no longer serves it before reassigning the hostname.
 
 Deleting a function doesn't remove its custom-domain registration. Remove the
 domain explicitly when deleting a function.
+
+Deleting a project doesn't release its custom domains either. If you want to
+reuse a hostname, delete its custom-domain registration before you delete the
+project. If you've already deleted the project, [contact Support](/docs/introduction/support)
+to release the domain.
 
 <NeedHelp/>
