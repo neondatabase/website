@@ -19,6 +19,20 @@ module.exports = {
   tagline:
     'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
 
+  getStarted: [
+    '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
+    '',
+    'If a Neon account is available, set things up locally by installing the Neon CLI and running the project init command to install the agent skills and creating/linking a Neon project:',
+    '',
+    '```bash',
+    'npm i -g neon',
+    '# oauth signup - use --help for other auth options',
+    'neon auth',
+    '# in the project folder init Neon',
+    'neon init',
+    '```',
+  ].join('\n'),
+
   intro: [
     'Neon docs are available as markdown.',
     'Append `.md` to any doc URL or set `Accept: text/markdown`.',

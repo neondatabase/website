@@ -1,15 +1,15 @@
 ---
 title: Using GORM with Lakebase Postgres
-subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless Postgres for efficient database operations
+subtitle: Learn how to use GORM, Go's most popular ORM, with Lakebase Postgres on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
+[GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. Paired with a Postgres database on Neon, it gives you a Go data layer without a database server to manage.
 
-This guide walks you through the process of integrating GORM with Lakebase Postgres, we will cover everything that you need to know to get started with GORM and Lakebase Postgres.
+This guide walks through integrating GORM with Lakebase Postgres, from connecting and defining models to migrations and performance tips.
 
 ## Prerequisites
 
@@ -19,23 +19,23 @@ Before getting started, make sure you have:
 - A [Neon](https://console.neon.tech/signup) account
 - Basic familiarity with Go and SQL
 
-## Setting Up Your Environment
+## Set up your environment
 
-### Create a Neon Project
+### Create a Neon project
 
 If you don't have one already, create a Neon project:
 
 1. Navigate to the [Projects page](https://console.neon.tech/app/projects) in the Neon Console
 2. Click **New Project**
-3. Specify your project settings and click **Create Project**
+3. Specify your project settings and click **Create project**
 
 Save your connection details including your password. You'll need these when configuring your Go application.
 
-### Initialize Your Go Project
+### Initialize your Go project
 
-Let's begin by setting up your project structure. In Go, projects are organized as modules, which manage dependencies and package versioning. A module is initialized with a unique module path that distinguishes your project in the Go ecosystem.
+Start by setting up your project structure. In Go, projects are organized as modules, which manage dependencies and package versioning. A module is initialized with a unique module path that distinguishes your project in the Go ecosystem.
 
-Start by creating a new directory for your project and initializing a Go module:
+Create a new directory for your project and initialize a Go module:
 
 ```bash
 mkdir neon-gorm-example
@@ -45,12 +45,12 @@ go mod init example.com/neon-gorm
 
 This creates a `go.mod` file that will track your project's dependencies. The `example.com/neon-gorm` is the module path and should be replaced with your own domain or GitHub repository if you plan to publish your code.
 
-### Install Required Packages
+### Install required packages
 
-Now we need to install the packages our application will depend on. For this guide, we'll need two main packages:
+This guide uses two packages:
 
 1. **GORM** - The ORM library that provides a developer-friendly interface to interact with the database
-2. **GORM Postgres Driver** - The database driver that allows GORM to connect to Postgres databases
+2. **GORM Postgres driver** - The database driver that allows GORM to connect to Postgres databases
 
 Run the following commands to install these packages:
 
@@ -61,11 +61,11 @@ go get -u gorm.io/driver/postgres
 
 These commands fetch the latest versions of the packages and add them to your project's `go.mod` file. The `-u` flag ensures you get the most recent version of each package.
 
-## Connecting to Neon with GORM
+## Connect to Neon with GORM
 
-### Basic Connection Setup
+### Basic connection setup
 
-Now let's establish a connection to your Lakebase Postgres database using GORM. This is an essential step that initializes the database connection that we'll use throughout our application.
+Next, connect to your database on Neon using GORM. The rest of the guide uses this connection.
 
 Create a new file named `main.go` with the following code:
 
@@ -108,43 +108,41 @@ func main() {
 }
 ```
 
-In this code, we're performing several important steps:
+This code:
 
-1. Defining a DSN - this is the connection string that contains all the information needed to connect to your Neon database
-2. Using `gorm.Open()` to establish a connection with the Postgres driver
-3. Configuring GORM's logger to show SQL queries during development, which helps with debugging
-4. Getting the underlying `*sql.DB` object to access lower-level database functions
-5. Verifying the connection is active by pinging the database
+1. Defines a DSN, the connection string that contains all the information needed to connect to your Neon database
+2. Uses `gorm.Open()` to establish a connection with the Postgres driver
+3. Configures GORM's logger to show SQL queries during development, which helps with debugging
+4. Gets the underlying `*sql.DB` object to access lower-level database functions
+5. Verifies the connection is active by pinging the database
 
-Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon database credentials. The `?sslmode=require&channel_binding=require` part of the connection string ensures secure communication with your Neon database.
+Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking **Connect** in the Console nav. The `?sslmode=require&channel_binding=require` part of the connection string enforces an encrypted connection to your database.
 
-Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking **Connect** in the Console nav.
+### Connection pooling and configuration
 
-### Connection Pooling and Configuration
+Connection pooling maintains a set of reusable database connections, which avoids the overhead of opening a new connection for each operation.
 
-Connection pooling is a technique that maintains a set of reusable database connections. This significantly improves performance by avoiding the overhead of establishing a new database connection for each operation.
+#### Neon connection pooling
 
-#### Neon Connection Pooling
+Neon provides a **built-in connection pooler**, powered by PgBouncer, that accepts up to 10,000 client connections per compute while reusing a smaller number of Postgres connections.
 
-Neon provides a **built-in connection pooler**, powered by PgBouncer, to efficiently manage database connections. This pooler reduces connection overhead by reusing a limited number of persistent Postgres connections while supporting thousands of client sessions.
+Instead of each request opening a new database connection, the pooler distributes queries across existing backend connections. To use it, use the pooled connection string, which has `-pooler` in the hostname. In the Neon Console, click **Connect** and turn on the **Connection pooling** toggle to copy it.
 
-Instead of each request opening a new database connection, the pooler transparently distributes queries across existing backend connections, improving performance and scalability. To use it, simply enable connection pooling in the Neon console and update your connection string to include `-pooler` in the hostname.
+Neon's pooler runs in **transaction pooling mode**, so session-based features like `LISTEN/NOTIFY`, `SET search_path`, and SQL-level `PREPARE`/`EXECUTE` aren't supported on pooled connections. Protocol-level prepared statements, which most drivers use, are supported. For operations that require session state, use a direct (non-pooled) connection. For details, see [Connection pooling](/docs/connect/connection-pooling).
 
-This approach helps applications handle high concurrency while minimizing latency and resource consumption. However, since Neon's pooler operates in **transaction pooling mode**, session-based features like `LISTEN/NOTIFY`, `SET search_path`, and server-side prepared statements are not supported. For operations that require session persistence, it's best to use a direct (non-pooled) connection. You can find more details in the [Neon connection pooling documentation](/docs/connect/connection-pooling).
+#### Configure connection pooling in GORM
 
-#### Configuring Connection Pooling in GORM
+GORM uses the connection pool from Go's `database/sql`, which works alongside Neon's pooler. Settings like `SetMaxOpenConns` and `SetConnMaxIdleTime` control how your application manages connections before they reach the database.
 
-When using Go with Neon, GORM offers built-in connection pooling that works with Neon's pooler. By configuring settings like `SetMaxOpenConns` and `SetConnMaxIdleTime`, developers can fine-tune how connections are managed within their application before they reach the database layer.
-
-Since Neon already optimizes pooling on the database side, applications should maintain a moderate number of open connections to avoid excessive connection churn.
+Because Neon's pooler already handles pooling on the database side, keep a moderate number of open connections in your application to avoid excessive connection churn.
 
 The recommended approach is to use a pooled connection string for normal queries and switch to a direct connection for migration tasks that require session state. For guidance on configuring connection pooling in Go, refer to the [GORM connection documentation](https://gorm.io/docs/generic_interface.html#Connection-Pool).
 
-## Defining Models
+## Define models
 
 In GORM, models are Go structs that represent tables in your database. Each field in the struct maps to a column in the table, and GORM uses struct tags (annotations enclosed in backticks) to configure how these fields are handled in the database.
 
-Let's create a simple blogging application with `User` and `Post` models. These models will define the structure of our database tables and establish relationships between them.
+Here's a simple blogging application with `User` and `Post` models. These models define the structure of the database tables and the relationships between them.
 
 ```go
 package main
@@ -179,11 +177,11 @@ type Post struct {
 }
 ```
 
-Let's examine the key components of these models:
+The key components of these models:
 
-1. **Basic Fields**: `ID`, `CreatedAt`, `UpdatedAt`, and `DeletedAt` are standard fields in GORM models. They handle primary keys, timestamps, and soft deletion.
+1. **Basic fields**: `ID`, `CreatedAt`, `UpdatedAt`, and `DeletedAt` are standard fields in GORM models. They handle primary keys, timestamps, and soft deletion.
 
-2. **Field Tags**: The struct tags like `gorm:"size:255;not null"` define constraints and properties for each field:
+2. **Field tags**: The struct tags like `gorm:"size:255;not null"` define constraints and properties for each field:
    - `primaryKey`: Designates a field as the table's primary key
    - `size:255`: Sets the column's maximum length
    - `not null`: Ensures the field cannot be empty
@@ -192,15 +190,13 @@ Let's examine the key components of these models:
 
 3. **Relationships**: The `Posts` field in the User model and the `User` field in the Post model establish a one-to-many relationship. The `foreignKey` tag specifies which field serves as the foreign key.
 
-By default, GORM will pluralize struct names to create table names (e.g., "User" becomes "users"), but you can customize this using the `TableName` method or the `gorm:"tableName:custom_name"` tag. This is similar to how other ORMs like Sequelize and Eloquent work.
+By default, GORM pluralizes struct names to create table names (for example, `User` becomes `users`) and converts field names to snake_case column names. You can customize table names with a `TableName` method and column names with the `gorm:"column:custom_name"` tag. This is similar to how other ORMs like Sequelize and Eloquent work.
 
-GORM provides sensible defaults for table names (pluralized struct names) and column names (field names), but you can customize these using struct tags.
-
-## Automatic Migrations
+## Automatic migrations
 
 Migrations are a way to manage database schema changes over time. GORM provides a convenient `AutoMigrate` feature that automatically creates tables, indexes, constraints, and foreign keys based on your model definitions.
 
-This automation is useful during development, but for production environments you'll typically want more control over schema changes. We'll cover structured migrations for production later in this guide, but for now, let's see how to use GORM's automatic migrations for development.
+This automation is useful during development, but for production environments you'll typically want more control over schema changes. We'll cover structured migrations for production later in this guide, but first, here's how to use GORM's automatic migrations for development.
 
 Here's how to set up automatic migrations:
 
@@ -227,19 +223,15 @@ When you run this code, GORM will:
 
 The `AutoMigrate` function works by comparing your Go struct definitions to the actual database schema and making necessary changes to align them. It accepts a list of model struct pointers and returns an error if something goes wrong.
 
-Note that `AutoMigrate` only adds things that are missing; it won't delete columns or tables that exist in the database but not in your models. This is a safety feature to prevent accidental data loss.
+`AutoMigrate` only adds things that are missing. It won't delete columns or tables that exist in the database but not in your models, which prevents accidental data loss.
 
-This will create the necessary tables if they don't exist and update them to match your model definitions.
+## Basic CRUD operations
 
-## Basic CRUD Operations
+With the models and database connection set up, you can perform basic Create, Read, Update, and Delete (CRUD) operations.
 
-Now that we have our models and database connection set up, let's perform basic Create, Read, Update, and Delete (CRUD) operations:
+### Create records
 
-### Creating Records
-
-Now that we have our models defined and tables created, let's start adding data to our database. GORM makes it straightforward to create new records with the `Create` method.
-
-Let's add a user and a blog post to our database:
+GORM creates new records with the `Create` method. This code adds a user and a blog post:
 
 ```go
 // Create a new user
@@ -275,13 +267,11 @@ Here's what happens in this code:
 5. We then create a `Post` struct, setting the `UserID` field to establish the relationship with our user
 6. We insert the post into the database using the same `Create` method
 
-Notice how GORM returns a `result` object that contains an `Error` field. Always check this field to ensure your database operations succeeded. The result object also provides other useful information like the number of rows affected by the operation.
+GORM returns a `result` object that contains an `Error` field. Always check this field to ensure your database operations succeeded. The result object also provides other useful information like the number of rows affected by the operation.
 
-### Reading Records
+### Read records
 
-Reading data from the database is one of the most common operations in any application. GORM provides several methods for retrieving data, from simple lookups to complex queries.
-
-Let's look at different ways to retrieve data from our database:
+GORM provides several methods for retrieving data, from simple lookups to complex queries:
 
 ```go
 // Retrieve a user by ID
@@ -309,13 +299,13 @@ if result.Error != nil {
 fmt.Printf("Found %d users with 'John' in their name\n", len(users))
 ```
 
-Let's break down these query operations:
+These queries use:
 
-1. **Simple Retrieval**: The `First` method retrieves the first record that matches the condition. In our first example, we're finding a user by their ID, which should return exactly one record since IDs are unique.
+1. **Simple retrieval**: The `First` method retrieves the first record that matches the condition. In our first example, we're finding a user by their ID, which should return exactly one record since IDs are unique.
 
-2. **Eager Loading with Preload**: The `Preload` method allows us to load related records in a single query. In our second example, we load a user and all their posts in one go. This is more efficient than performing separate queries for the user and their posts.
+2. **Eager loading with Preload**: The `Preload` method loads related records along with the parent. In the second example, you load a user and all their posts in one call. GORM runs one extra query for the association instead of a separate query per post.
 
-3. **Conditional Queries with Where**: The `Where` method allows us to specify conditions for our queries. In our third example, we're using the SQL `LIKE` operator to find users whose names contain "John". The `?` is a placeholder that helps prevent SQL injection attacks.
+3. **Conditional queries with Where**: The `Where` method specifies conditions for a query. The third example uses the SQL `LIKE` operator to find users whose names contain "John". The `?` is a placeholder that helps prevent SQL injection attacks.
 
 GORM provides many other query methods that we haven't covered here, such as:
 
@@ -326,11 +316,9 @@ GORM provides many other query methods that we haven't covered here, such as:
 
 All these methods return a result object that contains an `Error` field, which should be checked to ensure the query was successful.
 
-### Updating Records
+### Update records
 
-GORM provides several methods for updating records in the database. You can update a single field, multiple fields, or even use more complex update operations.
-
-Let's look at how to update our user and post records:
+GORM can update a single field, multiple fields, or run more complex update operations:
 
 ```go
 // Update a user's email
@@ -349,11 +337,11 @@ if result.Error != nil {
 }
 ```
 
-Here's what's happening in these update operations:
+These update operations work as follows:
 
-1. **Single Field Update**: The `Update` method allows us to change a single column's value. In the first example, we're updating the user's email address. We use the `Model` method to specify which record to update (based on its primary key).
+1. **Single field update**: The `Update` method changes a single column's value. The first example updates the user's email address. We use the `Model` method to specify which record to update (based on its primary key).
 
-2. **Multiple Field Update**: The `Updates` method allows us to change multiple columns at once. We provide a struct with the fields we want to update. Note that GORM will only update non-zero fields by default, which means fields with their zero values (empty string, 0, false, etc.) won't be updated unless you use `Updates` with a map.
+2. **Multiple field update**: The `Updates` method changes multiple columns at once. We provide a struct with the fields we want to update. Note that GORM will only update non-zero fields by default, which means fields with their zero values (empty string, 0, false, etc.) won't be updated unless you use `Updates` with a map.
 
 GORM also offers other update methods:
 
@@ -361,13 +349,13 @@ GORM also offers other update methods:
 - **Batch updates**: `db.Table("users").Where("role = ?", "admin").Update("active", true)`
 - **Raw SQL updates**: `db.Exec("UPDATE users SET name = ? WHERE age > ?", "Jane", 20)`
 
-When updating records, GORM automatically sets the `UpdatedAt` field to the current time if your model includes this field. This helps track when records were last modified.
+When updating records, GORM automatically sets the `UpdatedAt` field to the current time if your model includes this field.
 
-### Deleting Records
+### Delete records
 
 GORM provides two types of deletion: soft deletion and hard deletion. Soft deletion marks records as deleted without actually removing them from the database, while hard deletion permanently removes records.
 
-Let's see how to perform both types of deletions:
+Here's how to perform both:
 
 ```go
 // Soft delete a post (with GORM's DeletedAt field)
@@ -383,13 +371,13 @@ if result.Error != nil {
 }
 ```
 
-Here's what's happening in these deletion operations:
+These deletion operations work as follows:
 
-1. **Soft Deletion**: When we call `Delete` on a model that has a `DeletedAt` field (like our models do thanks to `gorm.Model`), GORM performs a soft delete. This doesn't actually remove the record from the database; instead, it sets the `DeletedAt` field to the current time. Subsequent queries will automatically exclude these "deleted" records unless you explicitly include them.
+1. **Soft deletion**: When we call `Delete` on a model that has a `DeletedAt` field (like our models do thanks to `gorm.Model`), GORM performs a soft delete. This doesn't actually remove the record from the database; instead, it sets the `DeletedAt` field to the current time. Subsequent queries will automatically exclude these "deleted" records unless you explicitly include them.
 
-2. **Hard Deletion**: The `Unscoped` method tells GORM to ignore the soft delete mechanism and perform a true deletion, permanently removing the record from the database. This is used when you really want to delete data, not just hide it.
+2. **Hard deletion**: The `Unscoped` method tells GORM to ignore the soft delete mechanism and permanently remove the record from the database.
 
-Soft deletion is particularly useful for:
+Soft deletion is useful for:
 
 - Keeping an audit trail of records
 - Allowing data to be restored if deleted accidentally
@@ -398,15 +386,11 @@ Soft deletion is particularly useful for:
 
 By default, GORM queries won't return soft-deleted records. If you need to include them, you can use the `Unscoped` method: `db.Unscoped().Where("name = ?", "John").Find(&users)`.
 
-## Advanced GORM Features
-
-With the basics covered, let's explore some advanced features of GORM that can help you build more reliable and efficient applications.
+## Advanced GORM features
 
 ### Transactions
 
-Transactions are a way to group multiple database operations into a single unit of work. They ensure that either all operations succeed or none of them do, maintaining data consistency. This is especially important when you have multiple related changes that need to happen together.
-
-GORM supports database transactions:
+Transactions group multiple database operations into a single unit of work, so either all of them succeed or none do. GORM supports database transactions:
 
 ```go
 // Begin a transaction
@@ -435,19 +419,17 @@ if err := tx.Commit().Error; err != nil {
 }
 ```
 
-Let's break down how transactions work in GORM:
+Here's how transactions work in GORM:
 
-1. **Begin a Transaction**: The `Begin` method starts a new transaction and returns a transaction object.
-2. **Perform Operations**: Use the transaction object (instead of the regular db object) to perform database operations. All operations will be part of the transaction.
-3. **Rollback or Commit**: If any operation fails, call `Rollback` to cancel all changes. If all operations succeed, call `Commit` to permanently apply the changes to the database.
+1. **Begin a transaction**: The `Begin` method starts a new transaction and returns a transaction object.
+2. **Perform operations**: Use the transaction object (instead of the regular db object) to perform database operations. All operations will be part of the transaction.
+3. **Roll back or commit**: If any operation fails, call `Rollback` to cancel all changes. If all operations succeed, call `Commit` to permanently apply the changes to the database.
 
-Transactions are essential in scenarios like:
+Use transactions in scenarios like:
 
 - Creating a user and their profile simultaneously
 - Transferring funds between accounts
 - Processing an order with multiple line items
-
-They help maintain data integrity by ensuring that related operations either all succeed or all fail, preventing partial updates that could leave your database in an inconsistent state.
 
 For a more concise approach, GORM provides a transaction helper method that automatically handles the begin, commit, and rollback operations:
 
@@ -475,19 +457,17 @@ if err != nil {
 }
 ```
 
-This approach is generally preferred for several reasons:
+This approach is generally preferred because:
 
-1. **Simplified Error Handling**: You simply return an error from the closure function, and GORM automatically rolls back the transaction if an error is returned.
-2. **Cleaner Code**: The transaction logic is encapsulated in a single function, making the code more readable.
-3. **Automatic Resource Management**: GORM ensures that the transaction is properly closed whether it succeeds or fails, preventing resource leaks.
+1. **Simpler error handling**: You return an error from the closure function, and GORM automatically rolls back the transaction if an error is returned.
+2. **Cleaner code**: The transaction logic is encapsulated in a single function, making the code more readable.
+3. **Automatic resource management**: GORM ensures that the transaction is properly closed whether it succeeds or fails, preventing resource leaks.
 
 With this method, you focus on the business logic inside the transaction rather than managing the transaction lifecycle. If the function returns nil, the transaction is committed; if it returns an error, the transaction is rolled back automatically.
 
-### Raw SQL and Complex Queries
+### Raw SQL and complex queries
 
-While GORM's built-in query methods cover most common scenarios, sometimes you need more control or have complex requirements that are best expressed in raw SQL. GORM provides several ways to work with raw SQL while still benefiting from its safety features and result handling.
-
-Here are different approaches to executing raw SQL and complex queries:
+GORM's built-in query methods cover most common scenarios. When a query is easier to express in raw SQL, GORM still handles parameter binding and result mapping:
 
 ```go
 // Execute raw SQL
@@ -512,13 +492,13 @@ db.Table("users").
 	Find(&userStats)
 ```
 
-Let's examine these different approaches:
+These examples show three approaches:
 
-1. **Raw SQL with Generic Results**: The first example executes a raw SQL query and scans the results into a slice of maps. This is useful when you don't have a predefined struct for the result or need flexibility in handling different result shapes.
+1. **Raw SQL with generic results**: The first example executes a raw SQL query and scans the results into a slice of maps. This is useful when you don't have a predefined struct for the result or need flexibility in handling different result shapes.
 
-2. **Raw SQL with Model Mapping**: The second example shows how you can execute raw SQL but still map the results to your model structs. GORM handles the mapping between column names and struct fields.
+2. **Raw SQL with model mapping**: The second example shows how you can execute raw SQL but still map the results to your model structs. GORM handles the mapping between column names and struct fields.
 
-3. **Query Builder API**: The third example demonstrates GORM's query builder API, which provides a fluent interface for constructing complex queries. This approach offers:
+3. **Query builder API**: The third example demonstrates GORM's query builder API, which provides a fluent interface for constructing complex queries. This approach offers:
    - Type safety and IDE auto-completion
    - SQL injection protection with parameter placeholders
    - Readability for complex queries
@@ -529,13 +509,13 @@ When should you use raw SQL versus GORM's query builder?
 - **Use raw SQL when**: You have complex queries that are difficult to express with the query builder, or when you're optimizing performance with database-specific features.
 - **Use the query builder when**: You want type safety, need to build queries dynamically, or prefer a more Go-idiomatic approach.
 
-In either case, GORM handles parameter binding to protect against SQL injection, making both approaches secure when used correctly.
+In either case, GORM handles parameter binding to protect against SQL injection, so both approaches are safe when used correctly.
 
 ### Hooks
 
 Hooks (also known as callbacks) are functions that are called at specific stages of the database operation lifecycle. They allow you to inject custom logic before or after these operations, such as validation, data transformation, or triggering side effects.
 
-GORM provides hooks for various operations. You can find the full list of hooks in the [GORM documentation](https://gorm.io/docs/hooks.html). But let's look at a couple of common hooks:
+GORM provides hooks for various operations. You can find the full list of hooks in the [GORM documentation](https://gorm.io/docs/hooks.html). Here are a couple of common hooks:
 
 ```go
 // Define hooks in your model
@@ -558,13 +538,13 @@ func (u *User) AfterFind(tx *gorm.DB) (err error) {
 }
 ```
 
-Hooks are a great way to keep your business logic consistent and avoid duplicating code across your application. By defining these methods directly on your model structs, the behavior is encapsulated with the data it operates on.
+Hooks keep business logic in one place instead of duplicating it across your application. Because they're methods on your model structs, the behavior lives with the data it operates on.
 
-## Structured Migrations for Production
+## Structured migrations for production
 
-While `AutoMigrate` is convenient for development, production systems need more controlled migration management. In production environments, you need precise control over when and how database changes occur, with the ability to roll back changes if something goes wrong.
+`AutoMigrate` is convenient for development, but production systems need precise control over when and how schema changes happen, with the ability to roll them back.
 
-[Golang-migrate](https://github.com/golang-migrate/migrate) is a popular migration tool for Go applications that provides version-controlled, reversible database migrations. Let's set up proper migrations using this tool:
+[Golang-migrate](https://github.com/golang-migrate/migrate) is a popular migration tool for Go applications that provides version-controlled, reversible database migrations. To set up migrations with it:
 
 1. Install the migrate CLI:
 
@@ -621,7 +601,7 @@ While `AutoMigrate` is convenient for development, production systems need more 
    migrate create -ext sql -dir migrations -seq create_posts_table
    ```
 
-   Now we'll create the second migration for the posts table, which depends on the users table created in the first migration.
+   This second migration creates the posts table, which depends on the users table created in the first migration.
 
 7. Edit the up migration (`migrations/000002_create_posts_table.up.sql`):
 
@@ -647,7 +627,7 @@ While `AutoMigrate` is convenient for development, production systems need more 
    DROP TABLE IF EXISTS posts;
    ```
 
-   Again, the down migration simply drops the table to reverse the changes.
+   Again, the down migration drops the table to reverse the changes.
 
 9. Run the migrations:
 
@@ -660,11 +640,11 @@ While `AutoMigrate` is convenient for development, production systems need more 
 
 The migrate tool keeps track of which migrations have been applied in a special table called `schema_migrations` in your database. This ensures that migrations are only applied once and in the correct order.
 
-For more complex applications, you might want to create a Go function to run migrations programmatically. This approach offers several advantages:
+For more complex applications, you can run migrations programmatically from Go. This lets you:
 
-1. Migrations can be run as part of your application startup
-2. The same code can be used in different environments (development, staging, production)
-3. You can implement custom logic around migrations, like waiting for the database to be ready
+1. Run migrations as part of your application startup
+2. Use the same code in different environments (development, staging, production)
+3. Add custom logic around migrations, like waiting for the database to be ready
 
 Here's how to create a Go function to run migrations programmatically:
 
@@ -718,15 +698,15 @@ For more advanced scenarios, you might want to add features like:
 - Implementing a "migrate and seed" function for development environments
 - Adding version reporting to track which migrations have been applied
 
-## Performance Optimization with Neon
+## Performance optimization with Neon
 
 When working with Neon and GORM, consider these performance optimization techniques:
 
-### Efficient Querying
+### Efficient querying
 
-One of the most effective ways to improve performance is to be selective about what data you retrieve from the database. Fetching only the specific fields you need reduces the amount of data transferred between Neon and your application, resulting in faster queries and less memory usage.
+One of the most effective ways to improve performance is to retrieve only the data you need. Fetching only the specific fields you need reduces the amount of data transferred between Neon and your application, resulting in faster queries and less memory usage.
 
-Let's look at how to query efficiently with GORM:
+For example:
 
 ```go
 var users []struct {
@@ -739,13 +719,13 @@ db.Model(&User{}).Select("id", "name", "email").Where("id > ?", 10).Find(&users)
 
 In this example, instead of selecting all fields with `Find(&users)`, we're using the `Select` method to specify exactly which columns we want. This has several benefits:
 
-1. **Reduced Data Transfer**: Only the specified columns are fetched, reducing network bandwidth usage.
-2. **Improved Query Performance**: The database can optimize the query better when it knows exactly which columns to return.
-3. **Lower Memory Usage**: Your application only stores the data it actually needs.
+1. **Less data transfer**: Only the specified columns are fetched, reducing network bandwidth usage.
+2. **Better query performance**: The database can optimize the query better when it knows exactly which columns to return.
+3. **Lower memory usage**: Your application only stores the data it actually needs.
 
-Notice that we're also using an anonymous struct that contains only the fields we're interested in, rather than using the full `User` model. This is another optimization that ensures we're not allocating memory for fields we don't need.
+Notice that we're also using an anonymous struct that contains only the fields we're interested in, rather than using the full `User` model. This avoids allocating memory for fields you don't need.
 
-### Batch Processing
+### Batch processing
 
 When working with large datasets, processing all the data at once can lead to performance issues, including high memory usage and long-running queries. Instead, you can use batch processing to handle large datasets in smaller, more manageable chunks.
 
@@ -768,13 +748,13 @@ Here's what this code does:
 3. For each batch, GORM calls the provided callback function with the batch results
 4. Inside the callback, we process each result individually
 
-Batch processing is particularly important when dealing with operations that might affect millions of records, such as data migrations, report generation, or bulk updates. It's also useful when you need to perform complex processing on each record that might be resource-intensive.
+Batch processing matters most for operations that might affect millions of records, such as data migrations, report generation, or bulk updates. It's also useful when you need to perform complex processing on each record that might be resource-intensive.
 
 For more information on batch processing and other advanced querying techniques, refer to the [GORM documentation](https://gorm.io/docs/advanced_query.html#FindInBatches).
 
 ### Indexing
 
-Proper indexing is essential for query performance. With GORM, you can define indexes in your models:
+Indexes have a large effect on query performance. With GORM, you can define indexes in your models:
 
 ```go
 type User struct {
@@ -787,11 +767,11 @@ type User struct {
 
 For more complex indexing requirements, use migrations as shown in the previous section.
 
-For more information on indexing and optimizing database performance, refer to the [Neon indexing documentation](/postgresql/postgresql-indexes).
+For more information on indexing and optimizing database performance, see the [Postgres indexes tutorial](/postgresql/postgresql-indexes).
 
-## Complete Application Example
+## Complete application example
 
-Let's put everything together in a complete application example:
+Here's everything together in one application:
 
 ```go
 package main
@@ -940,19 +920,17 @@ func main() {
 }
 ```
 
-Save this code in a file named `main.go`, run `go mod tidy` to download the necessary dependencies, and run it with `go run main.go`. This application puts everything we've covered into practice: connecting to the database, defining models, performing CRUD operations, using transactions, and executing raw SQL queries.
+Save this code in a file named `main.go`, run `go mod tidy` to download the necessary dependencies, and run it with `go run main.go`. This application covers connecting to the database, defining models, performing CRUD operations, using transactions, and executing raw SQL queries.
 
 ## Conclusion
 
-GORM with Lakebase Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
+You connected a Go application to Lakebase Postgres with GORM, defined models, ran CRUD operations and transactions, and set up versioned migrations with golang-migrate. As your application grows, look at GORM plugins and more advanced query features, and use the pooled connection string for application traffic.
 
-By following the steps in this guide, you can build reliable applications that interact efficiently with your Neon database. As your application grows, you can use additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
+## Additional resources
 
-## Additional Resources
-
-- [GORM Documentation](https://gorm.io/docs/)
-- [Neon Documentation](/docs)
-- [Go Database/SQL Documentation](https://golang.org/pkg/database/sql/)
+- [GORM documentation](https://gorm.io/docs/)
+- [Neon documentation](/docs)
+- [Go database/sql documentation](https://golang.org/pkg/database/sql/)
 - [Effective Go](https://golang.org/doc/effective_go)
 
 <NeedHelp />

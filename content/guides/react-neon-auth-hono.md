@@ -1,27 +1,27 @@
 ---
-title: Building a secure React Backend with Managed Better Auth and Hono
+title: Build a secure React backend with Managed Better Auth and Hono
 subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a custom backend for your React app.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Managed Better Auth](/docs/auth/overview) to handle identity securely.
+This guide shows how to connect a **standalone React frontend** to a **custom backend API**, with [Managed Better Auth](/docs/auth/overview) handling identity.
 
-Unlike frameworks that blend frontend and backend logic (like Next.js), this guide follows a decoupled architecture pattern. You will build a React Single Page Application (SPA) that communicates with a separate Hono server via a REST API.
+Unlike frameworks that blend frontend and backend logic (like Next.js), this guide uses a decoupled architecture. You will build a React Single Page Application (SPA) that communicates with a separate Hono server via a REST API.
 
 1.  **Identity (Managed Better Auth):** Handles sign-ups, logins, and issues **JSON Web Tokens (JWTs)**.
 2.  **Frontend (React):** Manages the user interface and attaches the JWT to API requests as a Bearer token.
 3.  **Backend (Hono):** A lightweight Node.js server that verifies the token signature using Neon's **JWKS endpoint** before allowing access to the database.
 
-This approach is ideal when you need a dedicated backend for complex business rules, third-party integrations (like Stripe or OpenAI), or microservices, while still offloading user management complexities to Neon.
+This approach fits when you need a dedicated backend for complex business rules, third-party integrations (like Stripe or OpenAI), or microservices, but still want Neon to handle user management.
 
-In this tutorial, you will build a **Private Journal** application where users can securely log in, create, and view their journal entries. The backend will validate JWTs from Managed Better Auth to ensure that only authenticated users can access their data.
+In this tutorial, you'll build a **Private Journal** application where users log in, create, and view their journal entries. The backend validates JWTs from Managed Better Auth so that only authenticated users can access their data.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - **Node.js:** Version `18` or later installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
 - **Neon account:** A free Neon account. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
@@ -33,19 +33,19 @@ Before you begin, ensure you have the following:
 You'll need to create a Neon project and enable Managed Better Auth.
 
 1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `journal-app`.
-2.  **Enable Managed Better Auth:**
-    - In your project's dashboard, go to the **Managed Better Auth** tab.
-    - Click on the **Enable Managed Better Auth** button to set up authentication for your project.
+2.  **Enable Auth:**
+    - In your project dashboard, go to the **Auth** page.
+    - Click **Enable Auth** to set up authentication for your project.
 
 3.  **Copy your credentials:**
-    - **Managed Better Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+    - **Managed Better Auth URL:** Found on the **Configuration** tab of the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
-    - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
+    - **Database connection string:** Click **Connect** in the Console nav and copy the pooled connection string.
       ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
-## Setup the Backend (Hono)
+## Set up the backend (Hono)
 
-You will create a Hono backend that verifies JWTs from Managed Better Auth and persists journal entries to Neon database.
+You will create a Hono backend that verifies JWTs from Managed Better Auth and stores journal entries in your database.
 
 ### Initialize the backend
 
@@ -92,7 +92,7 @@ npm install -D drizzle-kit
 
 ### Configure environment variables
 
-Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Neon database connection string and Managed Better Auth URL that you copied in the [previous step](#create-a-neon-project-with-neon-auth).
+Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Neon database connection string and Managed Better Auth URL that you copied in the [previous step](#create-a-neon-project-with-managed-better-auth).
 
 ```env
 # From Neon Dashboard
@@ -104,7 +104,7 @@ NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 
 ### Set up Drizzle ORM
 
-Drizzle ORM will help you interact with your Neon Database.
+You'll use Drizzle ORM to work with your database.
 
 Create `drizzle.config.ts` in the root of your `journal-backend/` folder with the following content:
 
@@ -127,7 +127,7 @@ This config tells Drizzle Kit where to find your database schema and where to ou
 
 ### Pull Managed Better Auth schema
 
-A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+Managed Better Auth creates and maintains the Better Auth tables in the `neon_auth` schema. Because these tables live in your database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
@@ -140,7 +140,7 @@ This step makes Drizzle aware of the Managed Better Auth tables, allowing you to
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
+    This command connects to your database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. These files contain the Drizzle schema definitions for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
@@ -159,9 +159,9 @@ This step makes Drizzle aware of the Managed Better Auth tables, allowing you to
      └ …
     ```
 
-3.  **Add the Journals table to the schema:**
+3.  **Add the journal entries table to the schema:**
 
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g, `bigint`).
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing database schema. At the bottom of the file, append the `journalEntries` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g., `bigint`).
 
     ```typescript {9,39-46} shouldWrap
     import {
@@ -222,7 +222,7 @@ Now, generate the SQL migration file to create the `journal_entries` table.
 npx drizzle-kit generate
 ```
 
-This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
+This creates a new SQL file in the `drizzle` directory. Apply this migration to your database by running:
 
 <Admonition type="important" title="Issue with commented migrations">
 This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
@@ -234,7 +234,7 @@ To resolve this, manually delete the contents of the `0000_...sql` file or repla
 npx drizzle-kit migrate
 ```
 
-Your `journal_entries` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
+Your `journal_entries` table now exists in your database. You can verify this on the **Tables** page in the Neon Console.
 
 ### Create the Hono server
 
@@ -349,7 +349,7 @@ The code above does the following:
    - **POST `/api/entries`**  
      Accepts JSON input with `content`, creates a new journal entry tied to the authenticated user, and returns the newly created entry.
 
-This backend securely handles user authentication and data persistence, ensuring that only authenticated users can access and modify their journal entries.
+Only requests with a valid token can read or create journal entries, and each user sees only their own.
 
 ### Start the backend
 
@@ -359,7 +359,7 @@ npm run dev
 
 Your backend server should now be running at `http://localhost:3000`. Now that the backend is set up, you can proceed to create the React frontend.
 
-## Setup the Frontend (React)
+## Set up the frontend (React)
 
 Now you will build the React frontend that handles user authentication and interacts with the backend API.
 
@@ -437,7 +437,7 @@ VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 VITE_API_URL="http://localhost:3000/api"
 ```
 
-### Initialize Auth client
+### Initialize the auth client
 
 Create `src/neon.ts` with the following content to initialize the Managed Better Auth client:
 
@@ -499,9 +499,9 @@ body {
 
 This also includes Managed Better Auth's Tailwind styles required for the authentication components to render correctly.
 
-### Create Auth and Account pages
+### Create auth and account pages
 
-Neon provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+Managed Better Auth provides pre‑built UI components for the full authentication flow, including sign-in, sign-up, and account management.
 
 As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
@@ -690,13 +690,13 @@ npm run dev
 ## Test the application
 
 1.  Navigate to `http://localhost:5173`.
-2.  **Sign In:** You will be presented with the Managed Better Auth sign-in page. Create an account or log in using your preferred method (email or Google).
-3.  **Write a Journal Entry:** Write a new journal entry in the textarea and click "Save".
+2.  **Sign in:** You'll be presented with the Managed Better Auth sign-in page. Create an account or log in using your preferred method (email or Google).
+3.  **Write a journal entry:** Write a new journal entry in the textarea and click "Save".
 4.  **Verify flow:**
-    - The Frontend calls `authClient.getSession()` to grab the session data (which includes the JWT).
+    - The frontend calls `authClient.getSession()` to grab the session data (which includes the JWT).
     - It sends a `POST` request to `http://localhost:3000/api/entries` with `Authorization: Bearer <jwt>`.
     - The backend validates the signature using the JWKS from Neon.
-    - The backend extracts your User ID and saves the entry to Neon.
+    - The backend extracts your user ID and saves the entry to the database.
     - The entry appears in your list.
 
     ![Journal app demo](/docs/guides/journal-app-demo.png)
@@ -708,22 +708,20 @@ npm run dev
 - **Deploy the backend:** Host your Hono server on any Node.js‑compatible platform such as Render, Cloudflare, or Vercel.
 - **Deploy the frontend:** Publish your React application to platforms like Vercel, Netlify, or any static site host.
 - **Configure environment variables:** Update the environment variables in your frontend and backend deployments with the appropriate production URLs. Update the CORS settings in your backend to allow requests from your frontend's domain.
-- **Configure trusted domains:** Add your frontend’s production URL to the **Your trusted domains** section in Managed Better Auth to ensure authentication functions correctly.
-- **Finalize production setup:** Review the [Managed Better Auth production checklist](/docs/auth/production-checklist) to confirm your application is secure and optimized for deployment.
+- **Configure trusted domains:** Add your frontend’s production URL under **Auth** > **Configuration** > **Domains** in the Neon Console. See [Configure trusted domains](/docs/auth/guides/configure-domains).
+- **Finalize production setup:** Review the [Managed Better Auth production checklist](/docs/auth/production-checklist) before you deploy.
 
 ## Conclusion
 
 In this guide, you built a decoupled application with a **React** frontend and a **custom Hono backend**, secured by **Managed Better Auth**.
 
-By using JSON Web Tokens (JWTs) as the bridge between your client and server, you established a secure pattern that scales beyond this specific stack. While this guide used Node.js and Hono, the underlying architecture validating a standard JWT against a public JWKS endpoint works with **any backend language or framework**.
-
-You can apply these exact same steps to build secure backends in:
+The pattern isn't tied to this stack. Validating a standard JWT against a public JWKS endpoint works with **any backend language or framework**, so you can apply the same steps in:
 
 - **Python:** Using FastAPI or Flask with libraries like `PyJWT`.
 - **Go:** Using standard `net/http` or Gin with `golang-jwt`.
 - **Rust:** Using Axum or Actix with the `jsonwebtoken` crate.
 
-The core principle remains constant: authenticate the user on the client, pass the token in the header, and cryptographically verify it on the server before executing your business logic.
+In each case, the user authenticates on the client, the client passes the token in the header, and the server verifies the signature before running your business logic.
 
 ## Source code
 
@@ -735,8 +733,8 @@ The complete source code for this example is available on GitHub:
 
 ## Resources
 
-- [Managed Better Auth Overview](/docs/neon-auth/overview)
-- [Managed Better Auth JWT Plugin](/docs/auth/guides/plugins/jwt)
+- [Managed Better Auth overview](/docs/auth/overview)
+- [Managed Better Auth JWT plugin](/docs/auth/guides/plugins/jwt)
 - [UI components reference](/docs/auth/reference/ui-components)
 - [Use Managed Better Auth with React (API methods)](/docs/auth/quick-start/react)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)

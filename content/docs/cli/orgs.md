@@ -3,11 +3,12 @@ title: 'Neon CLI command: orgs'
 subtitle: List the Neon organizations you belong to
 summary: >-
   The `neon orgs` CLI command lists all Neon organizations associated with the
-  authenticated user, returning org ID, name, handle, and timestamps in table
-  or JSON output. Use this command to identify which organizations your account
-  belongs to before running project or branch commands scoped to a specific org.
+  authenticated user, returning org ID, name, and plan in table output, or the
+  full organization records in JSON output. Use this command to identify which
+  organizations your account belongs to before running project or branch
+  commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-10-05T17:20:55.439Z'
 redirectFrom:
   - /docs/reference/cli-orgs
   - /docs/cli/org
@@ -25,7 +26,7 @@ Lists all organizations associated with the authenticated Neon CLI user.
 
 <CliOptions command="orgs list" />
 
-List your organizations with the default `table` output format:
+List your organizations with the default `table` output format. The organization in your [`.neon` context file](/docs/cli/link#the-neon-context-file) is marked `[current]`:
 
 ```bash
 neon orgs list
@@ -33,14 +34,12 @@ neon orgs list
 
 ```text filename="Output"
 Organizations
-┌────────────────────────┬──────────────────┐
-│ Id                     │ Name             │
-├────────────────────────┼──────────────────┤
-│ org-xxxxxxxx-xxxxxxxx  │ Example Org      │
-└────────────────────────┴──────────────────┘
+Id                     Name                   Plan
+org-xxxxxxxx-xxxxxxxx  [current] Example Org  Launch
+org-yyyyyyyy-yyyyyyyy  Another Org            Free
 ```
 
-List your organizations with `--output json`, which also shows the `created_at` and `updated_at` timestamps omitted from the `table` output:
+List your organizations with `--output json`, which also shows the fields omitted from the `table` output, such as the handle and timestamps. JSON keeps the API's plan ID (for example, `launch`) rather than the display name:
 
 ```bash
 neon orgs list -o json
@@ -55,8 +54,11 @@ neon orgs list -o json
     "id": "org-xxxxxxxx-xxxxxxxx",
     "name": "Example Org",
     "handle": "example-org-xxxxxxxx",
-    "created_at": "2024-04-22T16:50:41Z",
-    "updated_at": "2024-06-28T15:38:26Z"
+    "plan": "launch",
+    "created_at": "2026-04-22T16:50:41Z",
+    "managed_by": "console",
+    "updated_at": "2026-06-28T15:38:26Z",
+    "require_mfa": false
   }
 ]
 ```

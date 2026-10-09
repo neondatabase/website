@@ -1,13 +1,13 @@
 ---
-title: Authentication and Authorization in ASP.NET Core with ASP.NET Identity and Neon
+title: Authentication and authorization in ASP.NET Core with ASP.NET Identity and Neon
 subtitle: Learn how to implement secure user authentication and authorization in ASP.NET Core applications using ASP.NET Identity with Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Lakebase Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
+This guide shows how to implement authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Lakebase Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Before we begin, ensure you have:
 - A [Neon account](https://console.neon.tech/signup)
 - Basic familiarity with ASP.NET Core and Entity Framework Core
 
-## Project Setup
+## Project setup
 
 First, create a new ASP.NET Core Web API project with authentication:
 
@@ -38,11 +38,11 @@ dotnet add package Microsoft.IdentityModel.Tokens
 dotnet add package System.IdentityModel.Tokens.Jwt
 ```
 
-The above packages provide support for ASP.NET Identity, JWT authentication, and PostgreSQL database integration.
+The above packages provide support for ASP.NET Identity, JWT authentication, and Postgres database access.
 
-### Configuring the Neon Database
+### Configuring the database on Neon
 
-Head over to your [Neon Dashboard](https://neon.tech) and create a new project.
+In the [Neon Console](https://console.neon.tech), create a new project.
 
 Once done, grab your database connection string and add it to your `appsettings.json`:
 
@@ -72,7 +72,7 @@ In order to store additional information about users, we need to create a custom
 
 This will allow us to add new properties, like `FirstName` and `LastName`, that are not included in the default `IdentityUser` class.
 
-### Custom User Model
+### Custom user model
 
 Let's create a new file named `ApplicationUser.cs` inside the `Models` folder with the following content:
 
@@ -93,9 +93,9 @@ In the code above:
 
 2. We added three new fields: `FirstName` and `LastName` allow us to store the user's personal details. And `CreatedAt` captures the date and time when the user was created, which can be helpful for tracking new sign-ups.
 
-Why extend the `IdentityUser`? Well, the default user model is quite limited, and many real-world applications need to store more information than just usernames and emails. By creating a custom `ApplicationUser`, you can add more fields as you need to fit your application's requirements.
+The default user model is limited, and many real-world applications need to store more than usernames and emails. A custom `ApplicationUser` lets you add the fields your application needs.
 
-### Database Context Configuration
+### Database context configuration
 
 A database context is a class that represents a session with the database, allowing us to query and save data. In our case, we're setting up a context specifically for handling ASP.NET Identity and our custom `ApplicationUser` model.
 
@@ -135,11 +135,9 @@ The `OnModelCreating` method provides us with a chance to further configure the 
 - **Users Table**: We rename the default user table to simply `Users` for clarity.
 - **Roles Table**: Similarly, we rename the default roles table to `Roles`.
 
-These configurations allow us to have simpler, more intuitive table names in the database, while still retaining all the built-in functionality of ASP.NET Identity.
+This gives the Identity tables simpler names and keeps all the built-in functionality of ASP.NET Identity. It's not required, but it makes the schema easier to read.
 
-This is not a requirement, but it can be helpful for keeping your database schema organized and easy to understand.
-
-### Registering Services
+### Registering services
 
 Now that we have our `ApplicationDbContext` and user model set up, it's time to configure our application's services in `Program.cs` to enable Identity and authentication.
 
@@ -231,7 +229,7 @@ We are doing quite a few things here:
 1. To make sure our application has the necessary roles, we include a piece of code that runs on startup to create roles like "Admin" and "User" if they don't already exist. This is done using a scoped service to access the `RoleManager`.
 1. Finally, we map our controllers to handle HTTP requests and add the necessary middleware for authentication and authorization.
 
-## Implementing Authentication Controllers
+## Implementing authentication controllers
 
 Now that we have configured our database and Identity services, let's create a controller to manage user registration and login. This controller will handle the core authentication flow for our application.
 
@@ -343,9 +341,9 @@ Here's how it works:
 - The `Login` method verifies if the email exists and checks the password. On success, a JWT token is generated and returned for authenticated access.
 - The `GenerateJwtToken` method creates a token with the user's ID and email as claims. It signs the token using the secret key from `appsettings.json` and sets it to expire in 3 hours.
 
-## Implementing Role-Based Authorization
+## Implementing role-based authorization
 
-To manage user roles effectively, we'll create a helper class that checks if the necessary roles are set up in your system. This is useful when you want to predefine certain roles like "Admin" or "User" and make them available as soon as the application starts instead of manually creating them.
+To manage user roles, we'll create a helper class that checks if the necessary roles are set up in your system. This is useful when you want to predefine certain roles like "Admin" or "User" and make them available as soon as the application starts instead of manually creating them.
 
 You can create this in a new file, `Helpers/RoleHelper.cs` as follows:
 
@@ -378,7 +376,7 @@ In the `RoleHelper` class, we define a method called `EnsureRolesCreated` which:
 
 This way, you only need to call this method once during application startup to ensure all required roles are available for assignment.
 
-## Authorization Policies
+## Authorization policies
 
 In this section, we're adding authorization to protect certain API endpoints, so that only authenticated users or users with specific roles can access them.
 
@@ -420,7 +418,7 @@ With the above, we created a new controller called `SecureController` with two e
 
 Using the same approach, you can create additional policies for different roles or permissions. This allows you to control access to your API endpoints based on user roles.
 
-## Database Migrations
+## Database migrations
 
 To set up your database schema, we need to run migrations. Migrations help keep your database in sync with your data models, allowing you to make changes to your schema without losing data.
 
@@ -438,13 +436,13 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-If you were to make changes to your data models in the future, you would create a new migration and apply it using the same commands. Via the Neon console, you will now see the tables created by ASP.NET Identity.
+If you were to make changes to your data models in the future, you would create a new migration and apply it using the same commands. The **Tables** page in the Neon Console now shows the tables created by ASP.NET Identity.
 
-## Testing Authentication
+## Testing authentication
 
-You can test your authentication endpoints using Postman or `curl` to actually verify that everything is working correctly. Let's quickly do that using `curl`.
+You can test your authentication endpoints using Postman or `curl` to verify that everything is working correctly. Let's quickly do that using `curl`.
 
-### 1. Register a New User
+### 1. Register a new user
 
 To create a new account, send a `POST` request to the `/api/auth/register` endpoint with the user details:
 
@@ -461,7 +459,7 @@ curl -X POST http://localhost:5241/api/auth/register \
 
 This should return a response confirming that the user was successfully registered. Make sure to use a strong password and valid email format as our password policy requires it.
 
-### 2. Log In and Get a JWT Token
+### 2. Log in and get a JWT token
 
 Once registered, log in using the credentials you just created. Send a `POST` request to the `/api/auth/login` endpoint:
 
@@ -476,7 +474,7 @@ curl -X POST http://localhost:5241/api/auth/login \
 
 If the login is successful, you'll receive a JSON response containing a JWT access token. Save this token securely, as it will be used to access protected routes.
 
-### 3. Access a Protected Endpoint
+### 3. Access a protected endpoint
 
 With the JWT token from the previous step, you can now access secured endpoints. Send a `GET` request to `/api/secure` and include the token in the `Authorization` header:
 
@@ -487,14 +485,14 @@ curl -X GET http://localhost:5241/api/secure \
 
 If the token is valid, you'll receive a response from the protected resource. If not, you'll get an authentication error, indicating the token has expired or is invalid.
 
-## User Session Management with Refresh Tokens
+## User session management with refresh tokens
 
 As an optional step, to improve user session management, we'll implement a two-token authentication system using both access tokens and refresh tokens:
 
 - An access token which is a short-lived JWT used to authenticate API requests
 - A longer-lived token used to obtain new access tokens without requiring re-login
 
-### Setting Up the Token System
+### Setting up the token system
 
 First, create a model for refresh tokens in `Models/RefreshToken.cs` with an ID, token, and expiry date:
 
@@ -518,7 +516,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-### Implementing Token Management
+### Implementing token management
 
 Modify the login endpoint to return both the access and the refresh tokens:
 
@@ -603,7 +601,7 @@ public class RefreshTokenDto
 
 Here we've added a new endpoint `/api/auth/refresh-token` that accepts a refresh token and returns new access and refresh tokens. The refresh token is stored in the user's `RefreshTokens` list and used to generate new tokens when needed. The refresh token is valid for 7 days, after which the user will need to log in again.
 
-### Using the Token System
+### Using the token system
 
 Unlike the standard login flow, the new flow involves three steps:
 
@@ -653,17 +651,17 @@ Unlike the standard login flow, the new flow involves three steps:
    }
    ```
 
-As a security measure, store refresh tokens securely in your Neon database while also making sure that clients use secure methods like HTTP-only cookies. Also, keep access tokens short-lived, rotate refresh tokens on refresh, and implement token expiration and revocation to enhance security.
+Store refresh tokens in your database, and have clients keep them in secure storage such as HTTP-only cookies. Keep access tokens short-lived, rotate refresh tokens on refresh, and implement token expiration and revocation.
 
-## Integrating Auth0 for Authentication and Authorization (Optional)
+## Integrating Auth0 for authentication and authorization (optional)
 
 If you're looking to add an extra layer of security and use external identity providers, integrating your ASP.NET Core application with Auth0 is a good option. This allows your users to authenticate using social accounts (like Google, GitHub, etc.) or enterprise identity providers.
 
-Auth0 offers a flexible platform for managing user authentication, with built-in JWT token support that integrates with your existing ASP.NET Core application.
+Auth0 manages user authentication and issues JWTs that your existing ASP.NET Core application can validate.
 
 Let's quickly walk through setting up Auth0 with ASP.NET Core for secure authentication and authorization.
 
-### Setting Up Auth0 with ASP.NET Core
+### Setting up Auth0 with ASP.NET Core
 
 To get started, follow these high-level steps:
 
@@ -720,7 +718,7 @@ To get started, follow these high-level steps:
    app.MapControllers();
    ```
 
-With all that in place, you can secure your API endpoints using Auth0, use the `[Authorize]` attribute:
+With that in place, secure your API endpoints with the `[Authorize]` attribute:
 
 ```csharp
 [ApiController]
@@ -745,11 +743,11 @@ public class ApiController : ControllerBase
 }
 ```
 
-For a more information on integrating Auth0 with ASP.NET Core, refer to the [Auth0 Documentation](https://auth0.com/docs/quickstart/backend/aspnet-core-webapi/01-authorization). The documentation covers everything from setting up your Auth0 tenant to configuring scopes and securing your APIs.
+For more information on integrating Auth0 with ASP.NET Core, refer to the [Auth0 Documentation](https://auth0.com/docs/quickstart/backend/aspnet-core-webapi/01-authorization). It covers setting up your Auth0 tenant, configuring scopes, and securing your APIs.
 
 ## Conclusion
 
-In this guide, we implemented a secure authentication and authorization system in an ASP.NET Core application using ASP.NET Identity with Lakebase Postgres as the backend. We walked through setting up user registration and login endpoints, securing API routes with JWT tokens, and implementing role-based authorization.
+You now have an ASP.NET Core API with user registration and login backed by ASP.NET Identity and Lakebase Postgres, JWT-protected routes, and role-based authorization. A good next step is to move the JWT key and connection string out of `appsettings.json` into environment variables or a secrets vault before you deploy.
 
 For more information, check out:
 

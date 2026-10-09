@@ -3,7 +3,7 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: download-database-backup-locally
 ---
 
-Open your project in the [Neon Console](https://console.neon.tech), go to **Databases**, select the branch, and click the delete icon on the database row. You can also delete a database with the Neon CLI, the API, or SQL (`DROP DATABASE`). Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. See [Delete a database](/docs/manage/databases#delete-a-database) for the full reference.
+Open your project in the [Neon Console](https://console.neon.tech), select the branch, go to **Databases**, and click the delete icon on the database row. You can also delete a database with the Neon CLI, the API, or SQL (`DROP DATABASE`). Deletion is permanent, and every schema, table, index, and other object in the database goes with it. See [Delete a database](/docs/manage/databases#delete-a-database) for the full reference.
 
 ## Delete a database
 
@@ -23,8 +23,8 @@ Open your project in the [Neon Console](https://console.neon.tech), go to **Data
 <TabItem>
 
 1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
-2. Click **Databases** in the sidebar.
-3. Select the branch containing the database.
+2. In the sidebar, select the branch that contains the database from the **BRANCH** selector.
+3. Under **Postgres database**, select **Databases**.
 4. For the database you want to delete, click the delete icon.
 5. In the confirmation dialog, click **Delete**.
 
@@ -36,7 +36,7 @@ Open your project in the [Neon Console](https://console.neon.tech), go to **Data
 neon databases delete <database_name> --branch <branch_id_or_name>
 ```
 
-If you omit `--branch`, the CLI assumes the project's default branch. See [Neon CLI command: databases](/docs/cli/databases#delete).
+If you omit `--branch`, the command targets the project's default branch. See [Neon CLI command: databases](/docs/cli/databases#delete).
 
 </TabItem>
 
@@ -48,7 +48,7 @@ curl -X DELETE \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-See [Delete a database with the API](/docs/manage/databases#delete-a-database-with-the-api).
+See the API tab under [Delete a database](/docs/manage/databases#delete-a-database).
 
 </TabItem>
 
@@ -75,16 +75,16 @@ WHERE datname = 'old_db_name'
 
 ## What gets removed
 
-Dropping a database removes all SQL objects inside it: schemas, tables, indexes, views, materialized views, functions, sequences, and any data. Roles aren't deleted; they live at the branch level and may own objects in other databases. The storage the database consumed stops counting against your project's storage usage once the drop completes.
+Dropping a database removes every SQL object inside it (schemas, tables, indexes, views, materialized views, functions, sequences) and all of its data. Postgres roles aren't dropped with it, because roles belong to the branch and can own objects in other databases. The dropped data no longer counts toward your branch's current data size, but the change history that records it stays in your [history window](/docs/postgres/backup-restore/history-window) until it ages out.
 
 The branch, compute, and any other databases on the branch aren't affected.
 
 <Admonition type="warning" title="Deletion is permanent">
-There's no undo on `DROP DATABASE`. If your project's [history window](/docs/introduction/history-window) still covers the moment before the drop, you can recover with [instant restore](/docs/introduction/branch-restore) on the root branch, which restores every database on that branch to the chosen point in time. Outside the history window (6 hours on the Free plan, up to 7 or 30 days on paid plans), the only recovery path is your own backups.
+There's no undo on `DROP DATABASE`. If your project's [history window](/docs/postgres/backup-restore/history-window) still covers the moment before the drop, you can recover with [instant restore](/docs/postgres/backup-restore/branch-restore) on the root branch. Instant restore rolls every database on that branch back to the point you choose. Once the drop falls outside the history window (up to 6 hours on the Free plan, 7 days on the Launch plan, or 30 days on the Scale plan), the only way to recover is from your own backups.
 </Admonition>
 
 ## Delete the whole project instead
 
-If you want to remove everything (every database, branch, snapshot, and the project itself), go to **Project settings** > **General** > **Delete project**. That action is also permanent and stops all billing for the project. See [Manage projects](/docs/manage/projects).
+To remove everything (the project with all of its computes, branches, databases, and roles), open the project, select **Settings**, and select **Delete**. You can [recover a deleted project](/docs/manage/projects#recover-a-deleted-project) within 7 days with the CLI or API. After that, deletion is permanent. On a paid plan, deleting projects doesn't stop the monthly plan billing; you also need to downgrade to the Free plan. See [Delete a project](/docs/manage/projects#delete-a-project).
 
 <CTA title="See all database management workflows" description="Create, view, update, and delete databases from the Console, CLI, API, and SQL." buttonText="Manage databases" buttonUrl="/docs/manage/databases" />

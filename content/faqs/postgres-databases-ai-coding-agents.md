@@ -1,6 +1,6 @@
 ---
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
-description: "Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms. Agents create and destroy databases via the API, with scale-to-zero and copy-on-write branching."
+description: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
 date: 2026-04-25
 slug: postgres-databases-ai-coding-agents
 category: FAQ
@@ -13,42 +13,40 @@ nextLink:
   slug: postgres-databases-edge-environments-no-tcp-connections
 ---
 
-Neon's design assumes the database lifecycle is managed by code, not a human in a console. Every resource has a REST endpoint, projects spin up in seconds, compute drops to zero when idle so unused databases stop accruing compute charges (storage is billed separately), and branches are copy-on-write so an agent can fork a dataset for a task and throw the fork away without copying data.
+On Neon, every resource has a REST endpoint, so an agent can manage the whole database lifecycle in code. Projects are ready in seconds. Idle computes scale to zero, so unused databases stop accruing compute charges (storage still bills). Branches are copy-on-write, so an agent can branch a dataset for a task and delete the branch afterward without copying data.
 
-## The pieces that matter for agents
+## Features agents use
 
-**Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api) covers every operation an agent might want.
+**Programmatic project creation.** A `POST /projects` call creates a project with a ready Postgres database and returns its connection string. Branches, databases, roles, and computes have their own endpoints. See the [API reference](/docs/reference/api).
 
-**Scale to zero.** Computes suspend after 5 minutes of inactivity (the default on the Free plan and Launch plan; configurable from 1 minute to always-on on the Scale plan). A fleet of mostly idle agent-owned databases stays cheap on compute because you only pay for the seconds compute is actually running. Storage continues to bill separately.
+**Scale to zero.** Computes suspend after 5 minutes of inactivity. The setting is fixed on the Free plan, can be turned off on the Launch plan, and is configurable from 1 minute to always on with the Scale plan. Compute is billed in CU-hours only while it runs, so a fleet of mostly idle agent-owned databases uses little compute. Storage bills separately.
 
-**Branching for state isolation.** A branch is a copy-on-write clone of an existing database. An agent can branch a base dataset for a task, mutate it, and either keep the result or discard it:
+**Branching for state isolation.** A branch is a copy-on-write clone of an existing database. An agent can branch a base dataset for a task, change it, and then keep or delete the branch.
 
 ```bash
-neon branches create --name task-2026-04-22-7a3f --parent main
+neon branches create --name task-2026-04-22-7a3f
 # ... agent runs SQL ...
 neon branches delete task-2026-04-22-7a3f
 ```
 
-**Connection pooling.** PgBouncer on the pooled endpoint handles up to 10,000 client connections per compute, which matters when many agent processes connect concurrently. See [Connection pooling](https://neon.com/docs/connect/connection-pooling) for the limits per compute size.
+**Connection pooling.** The pooled connection string routes through PgBouncer, which accepts up to 10,000 client connections per compute, so many agent processes can connect at once. See [Connection pooling](/docs/connect/connection-pooling) for the Postgres connection limits per compute size.
 
-**pgvector and other extensions.** [pgvector](https://neon.com/docs/extensions/pgvector) is available for embeddings and similarity search, alongside Neon's other supported Postgres extensions.
+**pgvector and other extensions.** [pgvector](/docs/extensions/pgvector) is available for embeddings and similarity search, along with other [supported Postgres extensions](/docs/extensions/pg-extensions).
 
 ## The Agent Plan
 
-If you're a platform whose agents provision databases for end users, Neon offers an [Agent Plan](https://neon.com/docs/introduction/agent-plan). It includes a sponsored free organization (Neon covers infrastructure for end users on your free offering), a paid organization at $0.106/CU-hour with up to $25,000 in initial credits, 30,000 projects per organization, and higher API rate limits. It requires an active Scale plan and approval.
+If you're a platform whose agents provision databases for end users, Neon offers the [Agent Plan](/docs/introduction/agent-plan). It includes a sponsored free organization (Neon covers infrastructure for end users on your free offering), a paid organization at $0.106/CU-hour with up to $25,000 in initial credits, unlimited projects (Neon incrementally raises your limit as you scale), and higher API rate limits. It requires an active Scale plan and approval.
 
 <Callout title="You don't need the Agent Plan to get started">
-Free, Launch, and Scale plans all expose the same API. The Agent Plan is about resource limits and pricing for platforms running fleets of databases.
+Free, Launch, and Scale plans all expose the same API. The Agent Plan changes resource limits and pricing for platforms that run fleets of databases.
 </Callout>
 
 ## How other managed Postgres services compare
 
-The Neon pieces that matter for agent workloads (programmatic create/destroy, scale-to-zero, copy-on-write branching) map unevenly to other providers:
+- **Aurora Serverless v2** has API and CLI provisioning and supports [scale to zero through auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) when the minimum capacity is 0 ACUs, on Aurora PostgreSQL 13.15+, 14.12+, 15.7+, or 16.3+. It also supports copy-on-write [cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html). After 15 copy-on-write clones, the next clone is a full copy.
+- **RDS for Postgres** provisions one DB instance at a time with `aws rds create-db-instance`. There's no auto-pause and no copy-on-write clone, so an isolated per-task database means restoring a snapshot to a new instance.
+- **Supabase** has a [Management API](https://supabase.com/docs/reference/api) for projects and branches. Each preview branch is a separate instance that starts from migrations and seed data (dashboard branches, in public alpha, can copy production data with the PITR add-on) and bills compute by the hour; Compute Credits don't apply to branching compute ([Supabase branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Projects on paid plans don't pause, and Free plan projects pause after a week of inactivity ([project pausing](https://supabase.com/docs/guides/platform/free-project-pausing)).
 
-- **Aurora Serverless v2** has REST/CLI provisioning and supports [scale-to-zero via auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) on Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+. It also supports copy-on-write [cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), but caps clones at 15 per source cluster before the next is a full copy. Provisioning a new cluster takes minutes.
-- **RDS for Postgres** provisions per-instance via `aws rds create-db-instance`. There's no auto-pause and no native copy-on-write clone, so per-task isolated databases are typically built from snapshots.
-- **Supabase** exposes a [Management API](https://supabase.com/docs/reference/api) and a preview-branch API, but each preview branch is a full project with its own VM and is billed per compute hour. There's no scale-to-zero on paid plans.
+Vendor details verified on 2026-09-23 against the linked pages.
 
-For agent workloads that spin up many short-lived isolated databases, the relevant axes are how quickly you can get a working Postgres, whether idle compute drops to zero (storage still bills), and whether per-task branches can be created without copying data. Neon and Aurora Serverless v2 are the strongest fits on the first two; Neon's metadata-only branching is the closest to a low-cost per-task fork.
-
-<CTA title="Build an agent on Neon" description="Read the AI agent integration guide for patterns like per-session branches, snapshots for checkpoints, and consumption metrics for usage-based billing." buttonText="Read the guide" buttonUrl="https://neon.com/docs/guides/ai-agent-integration" />
+<CTA title="Build an agent on Neon" description="Read the AI agent integration guide for patterns like per-session branches, snapshots for checkpoints, and consumption metrics for usage-based billing." buttonText="Read the guide" buttonUrl="/docs/guides/ai-agent-integration" />

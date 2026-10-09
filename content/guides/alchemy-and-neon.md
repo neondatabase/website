@@ -1,17 +1,17 @@
 ---
-title: Automate Database Branching with Alchemy and Lakebase Postgres
+title: Automate database branching with Alchemy and Lakebase Postgres
 subtitle: Learn how to use Alchemy Infrastructure-as-Code to programmatically create and manage Neon database branches
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-10T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Neon's database branching lets you create isolated database copies in seconds.
 
 [Alchemy](https://github.com/sam-goodwin/alchemy) is a TypeScript-native Infrastructure-as-Code tool that lets you automate cloud resources with simple async functions. Unlike traditional IaC tools like Terraform that require learning new languages and complex state management, Alchemy lets you manage infrastructure using the TypeScript you already know.
 
-In this guide, you'll learn how to use Alchemy to automatically create, manage, and clean up Neon database branches as part of your development workflow. Think of it as "Git for your database infrastructure", you'll define what branches you want in code, and Alchemy will make sure they exist.
+In this guide, you'll learn how to use Alchemy to automatically create, manage, and clean up Neon database branches as part of your development workflow. Think of it as "Git for your database infrastructure": you define the branches you want in code, and Alchemy makes sure they exist.
 
 ## Prerequisites
 
@@ -24,12 +24,12 @@ To follow along with this guide, you'll need:
 
 ## What you'll build
 
-By the end of this guide, you'll have:
+In this guide, you'll:
 
 - Learn what Alchemy is and how it differs from traditional Infrastructure-as-Code tools
-- Create custom Alchemy resources for managing Neon branches
-- Automated branch creation for feature development
-- Branch cleanup when features are merged
+- Create a custom Alchemy resource for managing Neon branches
+- Automate branch creation for feature development
+- Clean up branches when features are merged
 
 ## Understanding Alchemy basics
 
@@ -98,11 +98,11 @@ for (const pr of pullRequests) {
 
 When pull requests are merged or closed, the corresponding branches get cleaned up automatically on the next run.
 
-## Security and Encryption with Alchemy
+## Security and encryption with Alchemy
 
 Before building the Neon branch automation, you need to know how Alchemy handles sensitive data like API keys and connection strings.
 
-### Why Secret Management Matters
+### Why secret management matters
 
 When working with database infrastructure, you'll be dealing with sensitive information like:
 
@@ -112,7 +112,7 @@ When working with database infrastructure, you'll be dealing with sensitive info
 
 Without proper handling, these values would be stored as plain text in Alchemy's state files, creating a security risk.
 
-### How Alchemy Secrets Work
+### How Alchemy secrets work
 
 Alchemy provides built-in encryption for sensitive data through the `alchemy.secret()` function. When you wrap a value with this function, Alchemy automatically encrypts it before storing it in state files.
 
@@ -121,7 +121,7 @@ Here's what happens behind the scenes:
 - **Plain text in code**: `alchemy.secret(process.env.API_KEY)`
 - **Encrypted in state**: `{"@secret": "Tgz3e/WAscu4U1oanm5S4YXH..."}`
 
-### Encryption Password
+### Encryption password
 
 Secrets are encrypted using a password that you provide when initializing your Alchemy app. This password is used to encrypt and decrypt all secret values in your application.
 
@@ -187,7 +187,7 @@ Create a `tsconfig.json` file that tells TypeScript how to compile our code:
 }
 ```
 
-This configuration sets up modern TypeScript with ESM modules, which Alchemy requires. The settings ensure compatibility with Alchemy's async-native design.
+This configuration sets up TypeScript with ESM modules, which Alchemy requires.
 
 Finally, we need to store our credentials securely. Create a `.env` file in your project root:
 
@@ -205,9 +205,9 @@ Replace the values with:
 
 > **Security note**: The `ENCRYPTION_PASSWORD` is used by Alchemy to encrypt sensitive data like API keys and connection strings. Choose a strong, unique password and store it securely. Never commit this to source control.
 
-## Creating a Neon Branch resource
+## Creating a Neon branch resource
 
-Here's where Alchemy gets really handy. Alchemy resources are just async functions that create, update, or delete cloud resources. We're going to create a custom resource that knows how to manage Neon branches through the Neon API.
+Alchemy resources are just async functions that create, update, or delete cloud resources. We're going to create a custom resource that knows how to manage Neon branches through the Neon API.
 
 Think of this resource as a "blueprint" that Alchemy can use to create as many Neon branches as you need. Once we write this code, we can reuse it throughout our application.
 
@@ -357,9 +357,9 @@ Let's break down what this code does:
 - The API calls use the standard Neon REST API to create branches and get connection information. This is the same API you could call manually with curl, but now it's automated.
 - Notice how we use `ReturnType<typeof alchemy.secret>` to type sensitive values like API keys and connection strings. This ensures they're properly encrypted when stored in Alchemy's state files. When we create the connection string, we wrap it with `alchemy.secret()` to encrypt it before storage.
 
-The great thing about this approach is that you define the resource once, and then Alchemy handles all the complexity of tracking state, making API calls, and cleaning up resources while keeping your sensitive data secure.
+You define the resource once, and Alchemy handles tracking state, making API calls, and cleaning up resources, while keeping your sensitive data encrypted.
 
-## Using the Neon Branch resource
+## Using the Neon branch resource
 
 Now let's put our resource to work. We'll create a simple script that demonstrates how to use it. This script will create a couple of branches and show you how Alchemy manages them.
 
@@ -410,7 +410,7 @@ Here's what this script does step by step:
 - First, we initialize an Alchemy app with the name 'neon-demo' and provide an encryption password. This creates a local state file where Alchemy tracks what resources exist and encrypts sensitive data.
 - Next, we create a secret from our Neon API key using `alchemy.secret()`, ensuring it's encrypted before being passed to resources.
 - Then, we create a feature branch using our `NeonBranch` resource. The first parameter (`'feature-auth-system'`) is a unique ID that Alchemy uses to track this specific branch. The second parameter contains the branch configuration.
-- We create a testing branch that branches off from our feature branch. Notice how we pass `featureBranch.branchId` as the `parentBranchId` - this creates a branch hierarchy just like you'd have with git branches.
+- We create a testing branch that branches off from our feature branch. Notice how we pass `featureBranch.branchId` as the `parentBranchId`. This creates a branch hierarchy like the one you'd have with Git branches.
 - Finally, we call `app.finalize()` to tell Alchemy we're done. This is when Alchemy checks if there are any resources that need to be cleaned up.
 
 The connection strings returned by our resource are encrypted secrets. In a real application, you'd decrypt them when needed using Alchemy's mechanisms.
@@ -435,7 +435,7 @@ If you check your Neon Console now, you'll see two new branches have appeared in
 
 ## Automating branch cleanup
 
-Here's where Alchemy really can help compared to manual branch management. With Alchemy, cleanup is automatic. When you remove a resource from your code, Alchemy automatically deletes it on the next run. Let's see this in action with a more practical example.
+Compared to managing branches by hand, the main gain is that cleanup is automatic. When you remove a resource from your code, Alchemy automatically deletes it on the next run. Let's see this in action with a more practical example.
 
 Create a file called `feature-workflow.ts`:
 
@@ -474,7 +474,7 @@ for (const feature of activeFeatures) {
 await app.finalize();
 ```
 
-This script simulates a development workflow where you have multiple features being worked on simultaneously. Notice the commented-out line for 'email-notifications' - this represents a feature that was completed and merged in our fictitious project.
+This script simulates a development workflow where you have multiple features being worked on simultaneously. Notice the commented-out line for 'email-notifications'. It represents a feature that was completed and merged in our fictitious project.
 
 Here's what happens when you run this script:
 
@@ -490,7 +490,7 @@ npx tsx feature-workflow.ts
 
 You'll see output showing which branches were created. If you run it again, the existing branches won't be recreated (Alchemy is smart about this), but any branches that are no longer defined in your code will be deleted.
 
-This automatic cleanup means you never have to remember to delete old branches manually. Your database infrastructure stays clean, and you only pay for what you're actually using.
+This automatic cleanup means you never have to remember to delete old branches manually. Your project doesn't accumulate stale branches, and you don't keep paying storage and compute for branches you no longer need.
 
 ## Troubleshooting
 
@@ -550,8 +550,6 @@ Or by manually cleaning up resources in the Neon Console and starting fresh.
 
 ## Summary
 
-You've learned how to use Alchemy to automate Neon database branching with proper security practices.
-
-The combination of Alchemy's simple TypeScript approach and Neon's branching makes database infrastructure management almost invisible. You focus on building features, and the database branches you need just exist.
+You built a custom Alchemy resource that creates and deletes Neon branches through the Neon API, with API keys and connection strings encrypted in Alchemy's state. As a next step, drive the branch list from your open pull requests, as shown in [Why this works well for database branching](#why-this-works-well-for-database-branching).
 
 <NeedHelp />

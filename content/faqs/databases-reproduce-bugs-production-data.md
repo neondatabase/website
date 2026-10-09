@@ -13,29 +13,31 @@ nextLink:
   slug: databases-support-disposable-postgres-instances-testing
 ---
 
-Reproducing a production bug usually means running the bad request against the same data that caused it. Lakebase Postgres branching gives you a full copy of your production data in seconds, on its own compute, so you can investigate without affecting the live database.
+Neon. Reproducing a production bug usually means running the failing request against the data that caused it. A Neon branch gives you a copy of your production data in seconds, on its own compute, so you can investigate without affecting the live database.
 
 ## Branch from now, or from when the bug happened
 
-If you can still see the bad state in production, branch from `main`:
+If the bad state is still in production, branch from the current data:
 
 ```bash
-neon branches create --name repro-bug-1234 --parent main
+neon branches create --name repro-bug-1234
 neon connection-string repro-bug-1234
 ```
 
-If the bug only existed for a window, branch from a point in time inside your history window (6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan):
+Without `--parent`, the branch comes from your project's default branch (`production` for projects created in the Console, `main` for projects created with the CLI or API).
+
+If the bad state only existed for a while, branch from a point in time inside your history window (6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan):
 
 ```bash
 neon branches create --name repro-pre-deploy \
   --parent 2026-04-25T09:00:00Z
 ```
 
-Branch creation is copy-on-write: no data is copied at creation time, and the branch only diverges as you write. Reads pull from shared storage, so a 200 GB production database makes a 200 GB-equivalent test branch with no upfront storage cost. See [Branching](https://neon.com/docs/introduction/branching).
+Branch creation is copy-on-write. No data is copied when you create the branch, and it only diverges as you write. A branch of a 200 GB production database sees all 200 GB with no upfront storage cost ([Branching](/docs/introduction/branching)).
 
 ## Run the failing request against the branch
 
-Point your local app or staging environment at the branch's connection string and replay the failing request. Because the branch has its own compute, an expensive `EXPLAIN ANALYZE` or a forced full table scan won't slow down production.
+Point your local app or staging environment at the branch's connection string and replay the failing request. The branch has its own compute, so an expensive `EXPLAIN ANALYZE` or a forced full table scan won't slow down production.
 
 When you're done, delete the branch:
 
@@ -45,18 +47,18 @@ neon branches delete repro-bug-1234
 
 ## What it costs
 
-Branches included in your plan: 10 on Free and Launch, 25 on Scale. Extra branches are $1.50/branch-month, prorated hourly to roughly $0.002/hour ([Plans](https://neon.com/docs/introduction/plans)). A two-hour debugging branch on a 0.25-1 CU autoscaling compute typically costs a few cents, plus storage for whatever it writes.
+Branches included per project: 10 on the Free plan and Launch plan, 25 on the Scale plan. On paid plans, extra branches cost $1.50/branch-month, metered hourly (about $0.002/hour) ([Plans](/docs/introduction/plans#extra-branches)). Compute is the larger cost: two hours at 0.25 CU is 0.5 CU-hours, about $0.05 on the Launch plan. Add storage for whatever the branch writes.
 
 <Admonition type="tip">
-For sensitive data, use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) or pair branching with [data anonymization](https://neon.com/docs/workflows/data-anonymization) to keep PII out of dev environments.
+To keep PII out of dev environments, use [schema-only branches](/docs/guides/branching-schema-only) (beta) or [anonymize the branch's data](/docs/workflows/data-anonymization).
 </Admonition>
 
 ## How other providers compare
 
-- **AWS RDS / Aurora**: to reproduce a bug against real data, you [restore from a snapshot or PITR](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new database instance. Restore time scales with database size, and the new instance has its own full storage and instance-hour bill until you delete it.
-- **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) ship with no data from your main project by design, so reproducing a bug against real data means either seeding the branch from a `seed.sql` file or restoring PITR into a new project (PITR is a paid add-on).
-- **Neon**: branches share storage with the parent at creation time, so a 200 GB production database creates a 200 GB-equivalent branch in seconds with no upfront storage cost. Only the writes diverge.
+- **AWS RDS for Postgres**: you [restore to a point in time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) or from a snapshot into a new DB instance. That instance has its own storage and instance-hour bill until you delete it.
+- **Aurora (Postgres)**: an [Aurora clone](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) is a new cluster that shares data pages with the source through copy-on-write, so it's the closest AWS match to a branch. A source can have up to 15 copy-on-write clones before new clones become full copies. To get a past state instead of current data, you restore to a point in time into a new cluster.
+- **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) start from migrations and `seed.sql`, not production data. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on, and paid plans can [restore a backup to a new project](https://supabase.com/docs/guides/platform/clone-project) (beta).
 
-This is why Neon branches fit "branch from now, debug, throw away" workflows: the cost of trying something is essentially the cost of the writes you make.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Reproduce bugs on a Neon branch" description="Free plan, 10 branches per project, no credit card." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

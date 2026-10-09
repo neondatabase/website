@@ -4,12 +4,12 @@ subtitle: Use OpenTofu to provision and manage your Neon projects, branches, end
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
+[OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that lets you define and provision cloud resources in a declarative configuration language. Codifying infrastructure makes deployments repeatable and automatable, with fewer manual errors. OpenTofu is community-driven and governed by the Linux Foundation.
 
-This guide will show you how to use **OpenTofu to manage your Neon projects**, including your branches, databases, and compute endpoints. By using OpenTofu with Neon, you get better control, can track changes, and automate your database setup.
+This guide shows you how to use **OpenTofu to manage your Neon projects**, including your branches, databases, and compute endpoints, so you can track changes to your database setup and automate it.
 
 Neon can be managed using the following community-developed Terraform provider, which is compatible with OpenTofu:
 
@@ -31,17 +31,17 @@ This provider is a Terraform provider compatible with OpenTofu. It is not mainta
   - Run `tofu plan` before applying any changes to detect potential differences and review the behavior of resource updates.
   - Use [lifecycle protections](https://opentofu.org/docs/language/meta-arguments/lifecycle/) on critical resources to ensure they're not recreated unintentionally.
   - Explicitly define all critical resource parameters in your OpenTofu configurations, even if they had defaults previously.
-  - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
+  - On the Launch and Scale plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon updates existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 1.  **OpenTofu CLI installed:** If you don't have OpenTofu installed, download and install it from the [official OpenTofu website](https://opentofu.org/docs/intro/install/).
-2.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up at [neon.tech](https://console.neon.tech/signup).
-3.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
+2.  **Neon account:** You'll need a Neon account. If you don't have one, [sign up](https://console.neon.tech/signup).
+3.  **Neon API key:** Generate an API key in the Neon Console under **Account settings** > **API keys**. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
 ## Set up the OpenTofu Neon provider
 
@@ -78,7 +78,7 @@ Before you begin, ensure you have the following:
 
 The Neon provider needs your Neon API key to manage resources. You can configure it in two ways:
 
-1.  **Directly in the provider block (Less secure):**
+1.  **Directly in the provider block (less secure):**
     For quick testing, you can **hardcode your API key** directly within `provider "neon"` block. However, this method isn't recommended for production environments or shared configurations. A more secure alternative is to retrieve the API key from a secrets management service like [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) or [HashiCorp Vault](https://developer.hashicorp.com/vault), and then update your provider block to reflect this.
 
     ```terraform
@@ -101,7 +101,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
     ```
 
 <Admonition type="note">
-The following sections primarily detail the creation of Neon resources. To manage existing resources, use the `tofu import` command or `import` blocks. More information can be found in the [Import Existing Neon Resources](#import-existing-neon-resources-with-opentofu) section.
+The following sections primarily detail the creation of Neon resources. To manage existing resources, use the `tofu import` command or `import` blocks. For details, see [Import existing Neon resources](#import-existing-neon-resources-with-opentofu).
 </Admonition>
 
 ## Manage Neon resources with OpenTofu
@@ -111,11 +111,11 @@ This section provides examples of how to manage Neon resources using OpenTofu. Y
 ### Managing projects
 
 <Admonition type="warning">
-Always set the `org_id` attribute when creating a `neon_project`. You can find your Organization ID in the Neon Console under Account Settings → Organization settings.
+Always set the `org_id` attribute when creating a `neon_project`. You can find your organization ID on your organization's **Settings** page, under **General information**, in the Neon Console.
 
 ![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
 
-Omitting `orgId` can cause resources to be created in the wrong organization or produce duplicate projects, and subsequent `tofu plan` / `tofu apply` runs may attempt destructive changes (including deletions). To avoid this, explicitly provide `orgId` when defining your project as shown in the example below.
+Omitting `org_id` can cause resources to be created in the wrong organization or produce duplicate projects, and subsequent `tofu plan` / `tofu apply` runs may attempt destructive changes (including deletions). To avoid this, explicitly provide `org_id` when defining your project as shown in the example below.
 </Admonition>
 
 A Neon project is the top-level container for your Postgres databases, branches, and endpoints.
@@ -126,7 +126,7 @@ resource "neon_project" "my_app_project" {
   pg_version = 16
   org_id     = "your-organization-id" # Replace with your actual Org ID
   region_id  = "aws-us-east-1"
-  # free accounts have maximum retention window of 6 hours (21600 seconds)
+  # the Free plan has a maximum history window of 6 hours (21600 seconds)
   history_retention_seconds = 21600
 
   # Configure default branch settings (optional)
@@ -150,12 +150,12 @@ This configuration creates a new Neon project.
 **Key `neon_project` attributes:**
 
 - `name`: (Optional) Name of the project.
-- `pg_version`: (Optional) PostgreSQL version (e.g., 14, 15, 16, 17).
+- `pg_version`: (Optional) Postgres version (e.g., 14, 15, 16, 17).
 - `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
   > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
 - `org_id`: The Organization ID under which to create the project.
-- `history_retention_seconds`: (Optional) Duration in seconds to retain historical data for point-in-time recovery. Free plans have a maximum of 21600 seconds (6 hours). Default is 86400 seconds (24 hours) for paid plans.
-- `branch {}`: (Optional) Block to configure the default primary branch.
+- `history_retention_seconds`: (Optional) Duration in seconds to retain historical data for point-in-time recovery. The Free plan has a maximum of 21600 seconds (6 hours). The default on paid plans is 86400 seconds (24 hours).
+- `branch {}`: (Optional) Block to configure the project's default branch.
 
 **Output project details:**
 You can output computed values like the project ID or connection URI:
@@ -166,7 +166,7 @@ output "project_id" {
 }
 
 output "project_connection_uri" {
-  description = "Default connection URI for the primary branch (contains credentials)."
+  description = "Default connection URI for the default branch (contains credentials)."
   value       = neon_project.my_app_project.connection_uri
   sensitive   = true
 }
@@ -184,13 +184,13 @@ For more attributes and options on managing projects, refer to the [Provider's d
 
 ### Managing branches
 
-You can create branches from the primary branch or any other existing branch.
+You can create branches from the default branch or any other existing branch.
 
 ```terraform
 resource "neon_branch" "dev_branch" {
   project_id = neon_project.my_app_project.id
   name       = "feature-x-development"
-  parent_id  = neon_project.my_app_project.default_branch_id # Branch from the project's primary branch
+  parent_id  = neon_project.my_app_project.default_branch_id # Branch from the project's default branch
 
   # Optional: Create a protected branch
   # protected = "yes"
@@ -205,12 +205,12 @@ resource "neon_branch" "dev_branch" {
 
 - `project_id`: (Required) ID of the parent project.
 - `name`: (Optional) Name for the new branch.
-- `parent_id`: (Optional) ID of the parent branch. If not specified, defaults to the project's primary branch.
+- `parent_id`: (Optional) ID of the parent branch. If not specified, defaults to the project's default branch.
 - `protected`: (Optional, String: "yes" or "no") Set to protect the branch.
 - `parent_lsn`: (Optional) LSN of the parent branch to create from.
 - `parent_timestamp`: (Optional) Timestamp of the parent branch to create from.
 
-> `protected` attribute is only available for paid plans. It allows you to protect branches from deletion or modification.
+> The `protected` attribute is available on the Launch and Scale plans. It protects branches from deletion or modification.
 
 For more attributes and options on managing branches, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/branch.md).
 
@@ -245,18 +245,18 @@ output "dev_endpoint_host" {
 - `branch_id`: (Required) ID of the branch this endpoint connects to.
 - `type`: (Optional) `read_write` (default) or `read_only`. A branch can only have one `read_write` endpoint.
 - `autoscaling_limit_min_cu`/`autoscaling_limit_max_cu`: (Optional) Compute units for autoscaling.
-- `suspend_timeout_seconds`: (Optional) Inactivity period before suspension. Only available for paid plans.
+- `suspend_timeout_seconds`: (Optional) Inactivity period before suspension. Fully configurable on the Scale plan; on the Launch plan you can only disable scale to zero.
 - `pooler_enabled`: (Optional) Enable connection pooling.
 
 <Admonition type="note">
-It is not possible currently to change the endpoint type after creation. The `type` attribute is immutable, meaning you cannot modify it once the endpoint is created. This includes changing from `read_write` to `read_only` or vice versa. This is a limitation of the Neon API and the provider's current implementation. You must destroy the existing endpoint and create a new one with the desired type.
+You can't change the endpoint type after creation. The `type` attribute is immutable, so you can't switch from `read_write` to `read_only` or vice versa. This is a limitation of the Neon API and the provider's current implementation. To change it, destroy the existing endpoint and create a new one with the desired type.
 </Admonition>
 
 For more attributes and options on managing endpoints, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/endpoint.md)
 
 ### Managing roles
 
-Roles (users) are managed per branch. Before creating a role, ensure you have a branch created. Follow the [Managing Branches](#managing-branches) section for details.
+Roles (users) are managed per branch. Before creating a role, ensure you have a branch created. See [Managing branches](#managing-branches) for details.
 
 ```terraform
 resource "neon_role" "app_user" {
@@ -282,7 +282,7 @@ For more attributes and options on managing roles, refer to the [Provider's docu
 
 ### Managing databases
 
-Databases are also managed per branch. Follow the [Managing Branches](#managing-branches) section for details on creating a branch.
+Databases are also managed per branch. See [Managing branches](#managing-branches) for details on creating a branch.
 
 ```terraform
 resource "neon_database" "service_db" {
@@ -352,7 +352,7 @@ For more attributes and options on managing JWKS URLs, refer to the [Provider's 
 
 ### Advanced: VPC endpoint management (for Neon private networking)
 
-These resources are used for organizations with Scale or Enterprise plans requiring private networking.
+These resources are for organizations on the Scale plan that use [Private Networking](/docs/guides/neon-private-networking).
 
 #### Assign VPC endpoint to organization
 
@@ -404,11 +404,11 @@ Once you have defined your resources:
     ```
     OpenTofu will ask for confirmation. Type `yes` to confirm.
 
-You have created and managed Neon resources using OpenTofu. You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
+You've created Neon resources with OpenTofu. You can continue to modify your `main.tf` file to add, change, or remove resources as needed. After making changes, repeat the `tofu plan` and `tofu apply` steps to update your resources on Neon.
 
 ## Import existing Neon resources with OpenTofu
 
-If you have existing Neon resources that were created outside of OpenTofu (e.g., via the Neon Console or API directly), you can bring them under OpenTofu's management. This allows you to manage their lifecycle with code moving forward. OpenTofu supports both the CLI import command and declarative import blocks, similar to tofu 1.5.0+.
+If you have existing Neon resources that were created outside of OpenTofu (e.g., via the Neon Console or API directly), you can bring them under OpenTofu's management. This allows you to manage their lifecycle with code moving forward. OpenTofu supports both the CLI import command and declarative import blocks.
 
 Both methods involve telling OpenTofu about an existing resource and associating it with a `resource` block in your configuration.
 
@@ -435,7 +435,7 @@ Common formats:
 
 ### Order of import for dependent resources
 
-When importing resources that depend on each other, it's important to import them in the order of their dependencies:
+When importing resources that depend on each other, import them in dependency order:
 
 ```plaintext
 Project -> Branch -> Endpoint -> Role -> Database
@@ -450,11 +450,11 @@ For each Neon resource you want to import:
 
 #### Example: Importing resources using `tofu import` CLI
 
-In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources-with-opentofu) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new OpenTofu configuration.
+In this example, we'll import the resources defined earlier in [Manage Neon resources with OpenTofu](#manage-neon-resources-with-opentofu). You need a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will be imported into a new OpenTofu configuration.
 
 ##### Define the HCL resource blocks
 
-In your `main.tf` file, define the resource blocks for the existing resources. You can start with minimal definitions, as OpenTofu will populate the actual values during the import process. You primarily need to define the resource type and a name for OpenTofu to use. OpenTofu will populate the actual attribute values from the live resource into its state file during the import. You'll then use `tofu plan` to see these and update your HCL to match or to define your desired state.
+In your `main.tf` file, define the resource blocks for the existing resources. You can start with minimal definitions: you mainly need the resource type and a name for OpenTofu to use. OpenTofu reads the actual attribute values from the live resource into its state file during the import. You'll then use `tofu plan` to see these and update your HCL to match or to define your desired state.
 
 For required attributes (like `project_id` for a branch), you'll either need to hardcode the known ID or reference a resource that will also be imported.
 
@@ -676,11 +676,11 @@ All other configurable attributes will be populated into OpenTofu's state file f
 
     After importing all resources, your OpenTofu state file (`terraform.tfstate`) will now contain the imported resources, and you can manage them using OpenTofu. Follow the [Reconcile your HCL with the imported state](#reconcile-your-hcl-with-the-imported-state) section to update your HCL files with the attributes that were populated during the import.
 
-### Method 2: Using `import` Blocks
+### Method 2: Using `import` blocks
 
 OpenTofu also supports a declarative way to import existing resources using `import` blocks in your `.tf` files. This method is similar to the `tofu import` command but allows you to define the import process directly in your configuration file.
 
-**The process with `import` Blocks:**
+**The process with `import` blocks:**
 
 For each existing Neon resource you want to bring under OpenTofu management, you'll define two blocks in your `.tf` file:
 
@@ -691,7 +691,7 @@ For each existing Neon resource you want to bring under OpenTofu management, you
 
 **Example using `import` blocks:**
 
-In this example, we'll import the resources we defined earlier in the [Manage Neon Resources](#manage-neon-resources-with-opentofu) section. This needs a project, a branch, an endpoint, a role, and a database already created in your Neon account. These resources will now be imported into a new OpenTofu configuration.
+In this example, we'll import the resources defined earlier in [Manage Neon resources with OpenTofu](#manage-neon-resources-with-opentofu). You need a project, a branch, an endpoint, a role, and a database already created in your Neon account.
 
 Let's say we have the following existing Neon resources and their IDs:
 
@@ -783,7 +783,7 @@ You need to replace the IDs in the `import` blocks with the actual IDs of your e
 
 ### Reconcile your HCL with the imported state
 
-After importing your resources using either method, you need to ensure that your HCL configuration accurately reflects the current state of the imported resources. This is an iterative process where you will:
+After importing your resources using either method, make sure your HCL configuration reflects the current state of the imported resources. This is an iterative process where you will:
 
 1.  **Run `tofu plan`:**
 
@@ -813,7 +813,7 @@ OpenTofu has compared your real infrastructure against your configuration and fo
 differences, so no changes are needed.
 ```
 
-This confirms that your Neon resources are now successfully managed by OpenTofu.
+Your Neon resources are now managed by OpenTofu.
 
 ## Destroying resources with OpenTofu
 
@@ -827,7 +827,7 @@ OpenTofu will ask for confirmation.
 
 ## Resources
 
-- [OpenTofu Documentation](https://opentofu.org/docs/)
+- [OpenTofu documentation](https://opentofu.org/docs/)
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
 - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon)
 - [OpenTofu Registry](https://search.opentofu.org/provider/kislerdm/neon/latest)

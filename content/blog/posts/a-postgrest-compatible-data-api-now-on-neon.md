@@ -105,7 +105,7 @@ If you’re building a full-stack AI Agent, apply to our Agents Program for high
 
 Neon RLS (previously called Neon Authorize) was a project we launched in 2024 to make it easier to work with Postgres RLS by letting you query the database over HTTP with JWT + RLS.
 
-Going forward, we recommend users start using either the Neon Data API or Postgres RLS directly instead of Neon RLS. The Data API offers a PostgREST-compatible REST surface, while direct Postgres RLS can be used via the serverless driver with JWT self-verification ([docs here](https://neon.com/docs/serverless/serverless-driver#using-transactions-with-jwt-self-verification)).
+Going forward, we recommend users start using either the Neon Data API or Postgres RLS directly instead of Neon RLS. The Data API offers a PostgREST-compatible REST surface, while direct Postgres RLS can be used via the serverless driver with JWT self-verification ([docs here](https://neon.com/docs/serverless/serverless-driver-configuration#using-transactions-with-jwt-self-verification)).
 
 If you are currently using Neon RLS, we recommend you begin planning a migration. Depending on your setup, this may be very simple, but some setups require changes to your queries. [Here’s a SQL-to-PostgREST translation helper](https://neon.com/docs/data-api/sql-to-rest) to help you convert existing SQL into PostgREST syntax.
 

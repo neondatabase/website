@@ -145,9 +145,15 @@ async function main() {
   console.log(
     `  mirror:          ${mirror.source} — ${Object.keys(mirror.models).length} models\n`
   );
+  if (drift.unreleased.length) {
+    console.log(`Not compared, released: false (${drift.unreleased.length}):`);
+    drift.unreleased.forEach((id) => console.log(`  ~ ${id}`));
+    console.log('');
+  }
 
   if (drift.inSync) {
-    console.log(`[OK] models.dev mirrors all ${Object.keys(website.models).length} models.`);
+    const compared = Object.keys(website.models).length - drift.unreleased.length;
+    console.log(`[OK] models.dev mirrors all ${compared} released models.`);
     process.exit(0);
   }
 

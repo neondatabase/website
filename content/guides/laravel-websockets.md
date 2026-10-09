@@ -1,15 +1,15 @@
 ---
-title: Building a Real-Time Task Board with Laravel, Neon, and WebSockets
+title: Build a real-time task board with Laravel, Neon, and WebSockets
 subtitle: Learn how to create a collaborative task management system using Laravel, Lakebase Postgres, and WebSockets
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Real-time features can significantly improve user experience in web applications. They allow users to see updates immediately without refreshing the page. In this guide, we'll demonstrate how to add real-time functionality to a Laravel application using Lakebase Postgres and WebSockets.
+Real-time features let users see updates without refreshing the page. In this guide, we'll add real-time functionality to a Laravel application using a Neon database and WebSockets.
 
-We'll build a collaborative task board where team members can create, update, and move tasks in real-time. By the end of this guide, you'll understand how to set up WebSockets in Laravel, store and retrieve data using Lakebase Postgres, and broadcast updates to connected clients instantly.
+We'll build a collaborative task board where team members can create, update, and move tasks in real time. You'll set up WebSockets in Laravel, store and retrieve tasks in Postgres, and broadcast updates to connected clients.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before we begin, make sure you have the following:
 
 ## Setting up the Laravel project
 
-To get started we will need to create a new Laravel project and configuring it with Lakebase Postgres.
+To get started, create a new Laravel project and connect it to your Neon database.
 
 1. Create a new Laravel project:
 
@@ -30,7 +30,7 @@ To get started we will need to create a new Laravel project and configuring it w
    cd realtime-taskboard
    ```
 
-   This will create a new Laravel project in a directory named `realtime-taskboard`. And using the `cd` command, we'll navigate to the project directory.
+   This creates a new Laravel project in a directory named `realtime-taskboard` and moves into it.
 
 2. Configure the Neon database connection. Open your `.env` file and update the database settings:
 
@@ -43,7 +43,7 @@ To get started we will need to create a new Laravel project and configuring it w
    DB_PASSWORD=your_password
    ```
 
-   Replace the placeholders with your Neon database details which you can find in the Neon console.
+   Replace the placeholders with your Neon database details. You can find them by clicking **Connect** in the Neon Console.
 
 3. Laravel provides a few starter kits for authentication. We'll use Laravel Breeze for this project to set up authentication:
 
@@ -55,11 +55,11 @@ To get started we will need to create a new Laravel project and configuring it w
    npm run dev
    ```
 
-   This will install Laravel Breeze, set up authentication views using Blade, run the migrations to create the necessary tables. The `npm install` and `npm run dev` commands install the frontend dependencies and compile the assets.
+   This installs Laravel Breeze, sets up authentication views using Blade, and runs the migrations to create the necessary tables. The `npm install` and `npm run dev` commands install the frontend dependencies and compile the assets.
 
-Now that we've set up the Laravel project and connected it to Lakebase Postgres, let's create the task board.
+With the Laravel project connected to your database, you can create the task board.
 
-## Creating the Task model and migration
+## Create the Task model and migration
 
 Laravel uses models to interact with the database and migrations to create database tables. The task board will consist of tasks that users can create, update, and move between different statuses (e.g., 'To Do', 'In Progress', 'Done').
 
@@ -97,7 +97,7 @@ Let's create a model and migration for our tasks table.
    php artisan migrate
    ```
 
-   This will create the `tasks` table in your Lakebase Postgres database with the specified columns and constraints in the migration file.
+   This creates the `tasks` table in your database with the columns and constraints from the migration file.
 
 4. Update the `Task` model in `app/Models/Task.php`:
 
@@ -122,9 +122,9 @@ Let's create a model and migration for our tasks table.
    }
    ```
 
-   This model defines the relationship between tasks and users. Each task belongs to a user thanks to the `user()` method defined in the model. The `fillable` property specifies which attributes can be mass-assigned. Laravel then makes it easy to create, update, and retrieve tasks using the `Task` model.
+   This model defines the relationship between tasks and users. Each task belongs to a user thanks to the `user()` method defined in the model. The `fillable` property specifies which attributes can be mass-assigned.
 
-5. One more thing that we will have to do is to update the `User` model in `app/Models/User.php` to define the relationship between users and tasks:
+5. Update the `User` model in `app/Models/User.php` to define the relationship between users and tasks:
 
    ```php
    public function tasks()
@@ -133,21 +133,21 @@ Let's create a model and migration for our tasks table.
    }
    ```
 
-   This defines the relationship between users and tasks. Each user can have multiple tasks and can be retrieved using the `tasks()` method on the `User` model.
+   Each user can have multiple tasks, which you retrieve with the `tasks()` method on the `User` model.
 
-## Setting up WebSockets
+## Set up WebSockets
 
-Laravel provides built-in support for broadcasting events using WebSockets. We'll use WebSockets to broadcast task creation and updates in real-time to connected clients using Pusher.
+Laravel has built-in support for broadcasting events over WebSockets. We'll use Pusher to broadcast task creation and updates to connected clients in real time.
 
 Instead of using Pusher, there are other options like [Laravel WebSockets](https://beyondco.de/docs/laravel-websockets) by Beyond Code, which is a self-hosted WebSockets server for Laravel applications. However, for this guide, we'll use Pusher, as it takes care of the WebSockets infrastructure for us.
 
-With Laravel 11 to install broadcasting, you can run the following command:
+In Laravel 11, install broadcasting with the following command:
 
 ```bash
 php artisan install:broadcasting
 ```
 
-Follow the prompts to set up broadcasting and when asked for `reverb`, select "No" as we are going to use Pusher instead.
+Follow the prompts to set up broadcasting. When asked about `reverb`, select "No", since we're using Pusher instead.
 
 To set up Pusher, you need to do the following:
 
@@ -184,7 +184,7 @@ To set up Pusher, you need to do the following:
    npm install --save-dev laravel-echo pusher-js
    ```
 
-   Laravel Echo is a JavaScript library that makes it easy to work with WebSockets and listen for events. Pusher JS is the JavaScript client library for Pusher that Laravel Echo uses to communicate with the Pusher service where our events are broadcasted to.
+   Laravel Echo is a JavaScript library for subscribing to channels and listening for broadcast events. Pusher JS is the Pusher client library that Laravel Echo uses to talk to the Pusher service, which relays the events.
 
 4. Open `resources/js/echo.js` and update it with your Pusher credentials:
 
@@ -202,9 +202,9 @@ To set up Pusher, you need to do the following:
    });
    ```
 
-   Make sure that you still have the `npm run dev` command running in the background to compile the assets and make the changes available in the browser.
+   Keep the `npm run dev` command running in the background to compile the assets and make the changes available in the browser.
 
-## Creating the task board interface
+## Create the task board interface
 
 Now that we've set up the database, models, and WebSockets, let's create the task board interface where users can view, create, and update tasks.
 
@@ -367,9 +367,9 @@ Create a new blade file at `resources/views/taskboard.blade.php` where we'll bui
 </x-app-layout>
 ```
 
-The majority of the code is HTML and JavaScript that creates the task board interface and handles task creation and updates. The real-time functionality of our task board is powered by WebSockets, implemented using Laravel Echo and Pusher. Here's a breakdown of how it works:
+Most of the code is HTML and JavaScript that renders the task board and handles task creation and updates. The real-time updates use Laravel Echo and Pusher. Here's how it works:
 
-1. **Channel Setup**: We create a channel named 'taskboard' for our real-time communications:
+1. **Channel setup**: We create a channel named 'taskboard' for our real-time communications:
 
    ```javascript
    Echo.channel('taskboard');
@@ -377,7 +377,7 @@ The majority of the code is HTML and JavaScript that creates the task board inte
 
    This channel will be used for broadcasting and listening to task-related events.
 
-2. **Event Listening**: We set up listeners for two types of events:
+2. **Event listening**: We set up listeners for two types of events:
 
    ```javascript
    .listen('TaskCreated', (e) => {
@@ -395,9 +395,9 @@ The majority of the code is HTML and JavaScript that creates the task board inte
    - `TaskCreated`: When a new task is created, we add it to the appropriate column.
    - `TaskUpdated`: When a task is updated, we remove the old task element and add the updated one.
 
-   For more information on how events are broadcasted and listened to, check out the [Getting Started with Laravel Events and Listeners](/guides/laravel-events-and-listeners) guide.
+   For more information on how events are broadcasted and listened to, check out the [Get started with Laravel events and listeners](/guides/laravel-events-and-listeners) guide.
 
-3. **Server-Side Broadcasting**: For the above to work, in our Laravel controllers, we will broadcast these events after creating or updating a task:
+3. **Server-side broadcasting**: The Laravel controllers broadcast these events after creating or updating a task:
 
    ```php
    broadcast(new TaskCreated($task))->toOthers();
@@ -406,11 +406,9 @@ The majority of the code is HTML and JavaScript that creates the task board inte
 
    The `toOthers()` method ensures that the event is not sent back to the user who initiated the action.
 
-4. **Real-Time Updates**: When these events are received, the task board updates instantly for all connected users, providing a collaborative, real-time experience.
+4. **Real-time updates**: When these events arrive, the task board updates for all other connected users, without polling or page refreshes.
 
-This WebSockets implementation allows for immediate synchronization across all clients without the need for polling or page refreshes, creating a smooth and responsive user experience.
-
-## Handling tasks
+## Handle tasks
 
 As mentioned earlier, we'll use Laravel controllers to handle task creation and updates and broadcast events to connected clients.
 
@@ -473,7 +471,7 @@ As mentioned earlier, we'll use Laravel controllers to handle task creation and 
    php artisan make:event TaskUpdated
    ```
 
-   These commands will create two event classes in the `app/Events` directory. We'll update these classes to broadcast the task data to the 'taskboard' channel.
+   These commands create two event classes in the `app/Events` directory. We'll update these classes to broadcast the task data to the 'taskboard' channel.
 
 4. Update `app/Events/TaskCreated.php`:
 
@@ -509,9 +507,9 @@ As mentioned earlier, we'll use Laravel controllers to handle task creation and 
 
    This class defines the `TaskCreated` event, which broadcasts the newly created task to the 'taskboard' channel, allowing all connected clients to receive the update.
 
-   If you need to broadcast the event to a specific user, you can use the `private` channel instead of the `public` channel.
+   To broadcast the event to a specific user, use a `PrivateChannel` instead of a public `Channel`.
 
-5. Update `app/Events/TaskUpdated.php` similarly, just change the class name to `TaskUpdated`:
+5. Update `app/Events/TaskUpdated.php` the same way, changing the class name to `TaskUpdated`:
 
    ```php
    <?php
@@ -561,11 +559,11 @@ As mentioned earlier, we'll use Laravel controllers to handle task creation and 
 
    These routes allow users to view the task board, retrieve tasks, create new tasks, and update existing tasks.
 
-   For more information on Laravel routing, check out the [Laravel's Routes, Middleware, and Validation guide](/guides/laravel-routes-middleware-validation).
+   For more information on Laravel routing, check out the [Laravel's routes, middleware, and validation](/guides/laravel-routes-middleware-validation) guide.
 
-## Testing the real-time task board
+## Test the real-time task board
 
-Now that everything is set up, let's test our real-time task board.
+With everything set up, test the task board.
 
 1. Start your Laravel development server:
 
@@ -573,7 +571,7 @@ Now that everything is set up, let's test our real-time task board.
    php artisan serve
    ```
 
-   This will start the Laravel development server on `http://localhost:8000`. If you already have a server running, you can skip this step.
+   This starts the Laravel development server on `http://localhost:8000`. If you already have a server running, you can skip this step.
 
 2. In another terminal, start the Laravel queue worker to process the broadcast events:
 
@@ -581,9 +579,9 @@ Now that everything is set up, let's test our real-time task board.
    php artisan queue:work
    ```
 
-   This will ensure that the broadcast events are processed and sent to connected clients.
+   The worker processes the broadcast events and sends them to connected clients.
 
-   To learn more about Laravel queues, check out the [Implementing Queue Workers and Job Processing in Laravel with Lakebase Postgres](/guides/laravel-queue-workers-job-processing) guide.
+   To learn more about Laravel queues, check out the [Implementing queue workers and job processing in Laravel with Lakebase Postgres](/guides/laravel-queue-workers-job-processing) guide.
 
 3. Open two different browsers and visit `http://localhost:8000/taskboard`.
 
@@ -591,15 +589,15 @@ Now that everything is set up, let's test our real-time task board.
 
 5. Start creating and moving tasks in one browser. You should see the tasks appear and move in real-time in the other browser.
 
-6. If you were to visit your Pusher dashboard, you should see the events being broadcasted.
+6. In your Pusher dashboard, you should see the events being broadcast.
 
 ## How it works
 
-Here's how the whole process of the real-time updates work:
+Here's how the real-time updates work:
 
 1. When a user creates or updates a task, it's sent to the server.
 
-2. The server saves the task in the Lakebase Postgres database.
+2. The server saves the task in your Neon database.
 
 3. After saving the task, the server broadcasts a `TaskCreated` or `TaskUpdated` event using Pusher.
 
@@ -607,7 +605,7 @@ Here's how the whole process of the real-time updates work:
 
 5. The JavaScript code listening for these events receives the new or updated task and adds or moves it on the task board.
 
-This process happens very quickly, giving the appearance of real-time updates.
+The round trip is fast enough that other users see changes almost immediately.
 
 ## Optimizing for larger applications
 
@@ -617,20 +615,20 @@ As your task board grows, you might need to optimize it for better performance:
 
 2. **Caching**: Use Laravel's caching features to cache frequently accessed data, reducing database queries.
 
-3. **Database Indexing**: Add indexes to frequently queried columns in your Lakebase Postgres database to speed up queries. For more information, check out the Lakebase Postgres documentation on [Indexes](/docs/postgresql/index-types).
+3. **Database indexing**: Add indexes to frequently queried columns to speed up queries. For more information, see [Postgres index types](/docs/postgresql/index-types).
 
-4. **Queue Workers**: Use multiple queue workers to process broadcast events concurrently, especially in high-traffic applications. Also, consider using Laravel Horizon for monitoring and managing your queue workers.
+4. **Queue workers**: Use multiple queue workers to process broadcast events concurrently, especially in high-traffic applications. Also, consider using Laravel Horizon for monitoring and managing your queue workers.
 
-5. **Private Channels**: If you need to broadcast events to specific users or groups, use private channels to ensure data privacy. This is useful for applications with user-specific data or private conversations between users where data should not be shared with others.
+5. **Private channels**: To broadcast events to specific users or groups, use private channels so only authorized users receive the data. This applies to user-specific data or private conversations between users.
 
 ## Conclusion
 
-In this guide, we've built a simple real-time collaborative task board using Laravel, Lakebase Postgres, and WebSockets. This example shows how you can create interactive, real-time web applications that update instantly across multiple users using Laravel's broadcasting feature.
+You built a collaborative task board that stores tasks in a Neon database and uses Laravel broadcasting with Pusher to push changes to other users. As a next step, try the pagination and private channel changes above.
 
-## Additional Resources
+## Additional resources
 
-- [Laravel Broadcasting Documentation](https://laravel.com/docs/broadcasting)
-- [Pusher Documentation](https://pusher.com/docs)
-- [Neon Documentation](/docs)
+- [Laravel broadcasting documentation](https://laravel.com/docs/broadcasting)
+- [Pusher documentation](https://pusher.com/docs)
+- [Neon documentation](/docs)
 
 <NeedHelp />

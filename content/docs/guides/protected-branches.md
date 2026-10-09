@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -35,7 +35,7 @@ This example sets a branch as protected.
 To set a branch as protected:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** under **Project** to view the branches for the project.
+2. Select **Branches** in the sidebar to view the branches for the project.
 
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
@@ -102,12 +102,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Protected Only      │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
-│                     │                     │ 203.0.113.1  │                     │
-└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+Id              wispy-haze-123456
+Name            wispy-haze-123456
+IP Addresses    203.0.113.0, 203.0.113.1
+Protected Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
@@ -168,6 +166,6 @@ After you've selected the protected branches option, click **Save changes** to a
 
 ## Remove branch protection
 
-Removing a protected branch designation can be performed by selecting **Set as unprotected** from the **More** drop-down menu on the branch page.
+Removing a protected branch designation can be performed by selecting **Set as unprotected** from the three-dot menu (⋮) on the branch page.
 
 <NeedHelp/>

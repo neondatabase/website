@@ -265,7 +265,7 @@ const aiGatewayPageContent = {
     {
       question: 'Who can use AI Gateway after GA?',
       answer:
-        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Model access can also depend on region, availability, and any verification required by provider policies.</p>',
+        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Any paid account with prepaid credits can use every model in the catalog, subject to regional availability.</p>',
     },
     {
       question: 'How does AI Gateway pricing work?',
@@ -300,7 +300,7 @@ const aiGatewayPageContent = {
     {
       question: "Why can't I access a model in the catalog?",
       answer:
-        '<p>Model access can vary by region and account. Proprietary models may require account verification to meet provider requirements. Use the authenticated <code>GET /v1/models</code> endpoint and check for <code>enabled: true</code> to see which models your account can call.</p>',
+        '<p>Model availability can vary by region, and the catalog changes as models are added or retired. Use the authenticated <code>GET /v1/models</code> endpoint to see the models available to you.</p>',
     },
   ],
 };

@@ -4,12 +4,12 @@ subtitle: Learn how to connect Metabase to your Lakebase Postgres database for i
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-25T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Lakebase Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
+[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization tool. By connecting Metabase to your Lakebase Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
 
-This guide will walk you through the steps to set up Metabase with Neon. You'll learn how to:
+This guide walks you through setting up Metabase with Neon. You'll learn how to:
 
 - Connect Metabase to your Neon database
 - Load a sample dataset for analytics
@@ -17,17 +17,17 @@ This guide will walk you through the steps to set up Metabase with Neon. You'll 
 - Apply governance controls using collections and data permissions
 - Scale your analytics with Neon connection pooling and read replicas
 
-By the end of this guide, you'll have a fully functional Metabase setup connected to Neon, ready for exploring and analyzing your data.
+By the end of this guide, you'll have a Metabase instance connected to Neon with a working dashboard.
 
 ## Prerequisites
 
 To follow along with this guide, you'll need the following:
 
 - **Neon account and project:** A Neon account with a project containing a running Postgres database. You can create one in the [Neon Console](https://console.neon.tech).
-- **Metabase instance:** You can use [Metabase Cloud](https://www.metabase.com/cloud/), run Metabase locally via [Docker](/docs/guides/metabase-neon#option-2-run-metabase-locally), or deploy to your preferred hosting platform. This guide covers both Metabase Cloud and local Docker setups.
+- **Metabase instance:** You can use [Metabase Cloud](https://www.metabase.com/cloud/), run Metabase locally via [Docker](#option-2-run-metabase-locally), or deploy to your preferred hosting platform. This guide covers both Metabase Cloud and local Docker setups.
 
-<Admonition type="important" title="Latency Considerations">
-For optimal performance, ensure that your Metabase instance is hosted in the same region as your Neon database to minimize latency.
+<Admonition type="important" title="Latency">
+Host your Metabase instance in the same region as your Neon database to minimize latency.
 </Admonition>
 
 ## Connecting Metabase to Neon
@@ -42,7 +42,7 @@ If you're using Metabase Cloud, follow these steps to connect to your Neon datab
    - If your Metabase Cloud instance is already running, go to **Settings** > **Admin** > **Databases** and click **Add database**.
 3. **Enter your Neon connection details**:
    - Choose **PostgreSQL** as the database type.
-   - Paste the connection string from the Neon Console (**Connection** tab). It should look like:
+   - Paste the connection string from the **Connect** modal on your project dashboard in the Neon Console. It should look like:
 
      ```text shouldWrap
      postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -50,11 +50,11 @@ If you're using Metabase Cloud, follow these steps to connect to your Neon datab
 
      ![Neon connection string](/docs/connect/connect_to_branch_modal.png)
 
-   - Make sure **Use a secure connection (SSL)** is enabled - Neon requires SSL by default.
+   - Make sure **Use a secure connection (SSL)** is enabled. Neon requires SSL by default.
 
 4. **Save the connection** by clicking **Connect database**.
 
-### Option 2: Run Metabase Locally
+### Option 2: Run Metabase locally
 
 You can also run Metabase locally with Docker:
 
@@ -193,15 +193,15 @@ Once the tables are created and populated:
 
 ![Metabase database sync](/docs/guides/metabase-database-sync.png)
 
-<Admonition type="note" title="Sync Frequency">
+<Admonition type="note" title="Sync frequency">
 Metabase automatically syncs your database schema on a regular schedule (1 hour by default). You can adjust the sync frequency in the database settings if needed. Learn more in the [Metabase docs: Syncing and scanning databases](https://www.metabase.com/docs/latest/databases/sync-scan).
 </Admonition>
 
-## Building Interactive Dashboards
+## Building dashboards
 
 With your data loaded and synced, you can start creating visualizations and dashboards.
 
-### Creating your First Question
+### Creating your first question
 
 In Metabase, _Questions_ are saved queries that can be visualized and added to dashboards.
 
@@ -221,14 +221,14 @@ In Metabase, _Questions_ are saved queries that can be visualized and added to d
 
 5. Click **Save** and name the question _Orders by Status_.
 
-### Exploring SQL Queries
+### Exploring SQL queries
 
-You can inspect the SQL that Metabase generates by clicking **View SQL**. This lets you see and understand the underlying query behind your visualization.
+You can inspect the SQL that Metabase generates by clicking **View SQL**. This shows the query behind your visualization.
 ![Metabase view SQL](/docs/guides/metabase-view-sql.png)
 
 If you need more control, click **Convert to SQL** to switch into SQL mode and edit the query directly.
 
-### Building an Analytics Dashboard
+### Building an analytics dashboard
 
 Now, create a dashboard to combine multiple questions and visualizations.
 
@@ -270,7 +270,7 @@ Now, create a dashboard to combine multiple questions and visualizations.
    - Click **Group by** and select **Created At** by **Month**.
 4. Save the question as _Customer Acquisition_.
 
-#### Creating the Dashboard
+#### Creating the dashboard
 
 1. Click **+ New** > **Dashboard**.
 2. Name the dashboard _E-commerce Analytics_.
@@ -286,7 +286,7 @@ Now, create a dashboard to combine multiple questions and visualizations.
 
 ### Adding filters to dashboards
 
-You can enhance dashboards with filters that apply across multiple questions:
+You can add filters that apply across multiple questions on a dashboard:
 
 1. Click **Edit** on your dashboard.
 2. Click **Filters** in the top-right corner.
@@ -299,11 +299,11 @@ You can enhance dashboards with filters that apply across multiple questions:
    - Select the column to filter on.
 5. Click **Save** to apply the filter.
 
-## Applying Governance with Collections and Permissions
+## Governance with collections and permissions
 
 Metabase provides a permission system to control who can view, edit, or query your data. Governance is primarily managed through **Groups**.
 
-### Organizing People into Groups
+### Organizing people into groups
 
 Permissions are assigned to groups, not individual users.
 
@@ -311,13 +311,13 @@ Permissions are assigned to groups, not individual users.
 2. Create groups that map to your organizational structure (e.g., _Executive Team_, _Support_, _Data Analysts_).
 3. Add users to these groups.
 
-<Admonition type="note" title="The 'All Users' Group">
-Every user is automatically a member of the "All Users" group. To enforce strict governance, it is best practice to set "All Users" permissions to **No access** (for collections) and **Blocked** (for databases), and then granularly grant permissions to specific groups.
+<Admonition type="note" title="The 'All Users' group">
+Every user is automatically a member of the "All Users" group. For strict governance, set "All Users" permissions to **No access** (for collections) and **Blocked** (for databases), then grant permissions to specific groups.
 </Admonition>
 
 Once groups are set up, you can define permissions at two levels: **Collections** and **Databases (Data Permissions)**.
 
-### Controlling Content with Collections
+### Controlling content with collections
 
 Collections organize questions, dashboards, and models. You can control access levels for each group per collection.
 
@@ -329,10 +329,10 @@ Collections organize questions, dashboards, and models. You can control access l
    - **No access:** The collection and its contents are hidden.
 
 <Admonition type="important" title="Requires Metabase Pro or Enterprise">
-Advanced data permissions - including **Row and Column Security**, **User Attributes**, and granular **View Data** settings are available only in Metabase Pro and Enterprise editions. If you are using the free or open-source version, these options will not be visible in your Admin settings.
+Advanced data permissions, including **Row and Column Security**, **User Attributes**, and granular **View Data** settings, are available only in Metabase Pro and Enterprise editions. If you are using the free or open-source version, these options will not be visible in your Admin settings.
 </Admonition>
 
-### Controlling Database Access (Data Permissions)
+### Controlling database access (data permissions)
 
 Data permissions control how users interact with the raw data in your Neon database.
 
@@ -351,7 +351,7 @@ Data permissions control how users interact with the raw data in your Neon datab
    - **Query builder only:** Users can use the visual builder but **cannot** write raw SQL. This is recommended for non-technical users to prevent expensive queries or accidental data exposure.
    - **No:** Users cannot create new queries.
 
-### Advanced Governance (Row-Level Security)
+### Row-level security
 
 For multi-tenant applications or strict data controls, you can restrict which rows a user sees based on their attributes (like `customer_id` or `department`). Metabase offers two ways to handle this with Neon.
 
@@ -359,8 +359,8 @@ For multi-tenant applications or strict data controls, you can restrict which ro
 
 _Best for: Managing restrictions entirely within Metabase._
 
-1. **Add User Attributes:** In **Admin settings** > **People**, add an attribute to your users (e.g., `country` = `USA`).
-2. **Configure Permissions:**
+1. **Add user attributes:** In **Admin settings** > **People**, add an attribute to your users (e.g., `country` = `USA`).
+2. **Configure permissions:**
    - Go to **Permissions** > **Data** and select a group.
    - Change **View Data** to **Row and Column Security**.
    - Select the table (e.g., `customers`).
@@ -369,11 +369,11 @@ _Best for: Managing restrictions entirely within Metabase._
 
 Now, when a user in this group views the `customers` table (or charts based on it), Metabase automatically adds a filter (e.g., `WHERE country = 'USA'`).
 
-#### Option B: Connection Impersonation
+#### Option B: Connection impersonation
 
 _Best for: Using Postgres Row-Level Security (RLS) defined in Neon._
 
-Since Neon is built on Postgres, you can define RLS policies directly in your database and force Metabase to respect them.
+Because Lakebase Postgres is Postgres, you can define RLS policies directly in your database and have Metabase respect them.
 
 1. **In Neon:** Create Postgres roles (e.g., `manager_role`, `analyst_role`) and define RLS policies.
 2. **In Metabase:**
@@ -381,29 +381,29 @@ Since Neon is built on Postgres, you can define RLS policies directly in your da
    - In **Permissions** > **Data**, set **View Data** to **Impersonation**.
    - Select the User Attribute (`db_role`) to use for the connection.
 
-When a user runs a query, Metabase connects to Neon and sets the Postgres role to the value in their attribute. Neon then applies the underlying RLS policies, ensuring the user only sees permitted data.
+When a user runs a query, Metabase connects to Neon and sets the Postgres role to the value in their attribute. Postgres then applies the RLS policies, so the user only sees permitted data.
 
-## Scaling your Analytics
+## Scaling your analytics
 
-As your data volume grows and analytics workloads increase, you can use Neon's scaling features to maintain performance and reliability.
+As your data volume and analytics workloads grow, connection pooling and read replicas help keep queries fast without affecting your application.
 
-### Connection Pooling
+### Connection pooling
 
-Metabase opens multiple connections to your database when running concurrent queries. Without pooling, you may quickly hit connection limits.
+Metabase opens multiple connections to your database when running concurrent queries. Neon's pooled connections (via PgBouncer) support up to 10,000 client connections per compute, while direct connection limits scale with compute size.
 
-Ensure you enable **Connection pooling** in the Neon Console (**Connect** modal) and use the provided pooled host and port when configuring Metabase. This ensures efficient connection management and prevents resource exhaustion.
+Enable **Connection pooling** in the **Connect** modal in the Neon Console and use the pooled connection string (the hostname includes `-pooler`) when configuring Metabase. PgBouncer runs in transaction mode, so session-level `SET` commands don't persist. If you use connection impersonation (Option B above), which sets the role per session, use a direct connection instead. See [Connection pooling](/docs/connect/connection-pooling).
 
 ![Neon connection string](/docs/connect/connect_to_branch_modal.png)
 
-### Read replicas for Analytics
+### Read replicas for analytics
 
-For heavy analytics workloads, create a **read replica** to offload queries from your primary database. Point Metabase to the read replica so analytics queries do not interfere with transactional operations. As a security best practice, consider connecting Metabase with a **read-only user** or using read replicas to ensure analytics queries cannot modify production data.
+For heavy analytics workloads, create a **read replica** to offload queries from your primary database. Point Metabase to the read replica so analytics queries do not interfere with transactional operations. As a security practice, connect Metabase with a **read-only user** or through a read replica so analytics queries can't modify production data.
 
-Learn more in the [Neon Read Replicas guide](/docs/introduction/read-replicas#how-do-you-create-read-replicas). Optionally, disable _scale to zero_ on the read replica to keep it always available for analytics.
+Learn more in [Read replicas](/docs/introduction/read-replicas#how-do-you-create-read-replicas). On paid plans, you can optionally disable _scale to zero_ on the read replica to keep it always available for analytics.
 
 ### Query performance optimization
 
-Beyond infrastructure scaling, optimize your schema and queries for analytics:
+You can also optimize your schema and queries for analytics:
 
 1. **Add indexes** on frequently filtered or joined columns:
 
@@ -433,11 +433,11 @@ Beyond infrastructure scaling, optimize your schema and queries for analytics:
 
 3. **Partition large tables** (e.g., by date) to improve query efficiency and maintenance.
 
-## Moving to Production (Self-Hosted Metabase)
+## Moving to production (self-hosted Metabase)
 
-By default, self-hosted Metabase uses an internal H2 database to store its application data (users, settings, saved questions, dashboards). The H2 database is not suitable for production environments.
+By default, self-hosted Metabase uses an internal H2 database to store its application data (users, settings, saved questions, dashboards). Metabase doesn't recommend H2 for production.
 
-To run Metabase in production, configure it to use Neon as the backing database:
+To run Metabase in production, configure it to use a Neon database as its application database:
 
 1. **Create a separate database** in Neon (e.g., `metabaseappdb`) to store Metabase’s internal data.
 2. **Run Metabase with Lakebase Postgres** by starting the container with the following command:
@@ -455,18 +455,16 @@ To run Metabase in production, configure it to use Neon as the backing database:
 
    > Replace `name`, `password`, and `my-database-host` with your Neon database credentials and host.
 
-This configuration ensures Metabase uses Lakebase Postgres for its application database, making your deployment production-ready.
+Metabase now stores its application data in Lakebase Postgres instead of H2.
 
 ## Conclusion
 
-You have successfully connected Metabase to Neon, loaded sample data, built interactive dashboards, and learned how to govern access and scale your analytics infrastructure. This setup provides a solid foundation for business intelligence and data exploration.
-
-Metabase's intuitive interface allows business users to explore data without SQL knowledge, while the combination of Neon's connection pooling and read replicas ensures your analytics workloads don't impact production performance.
+You connected Metabase to Neon, loaded sample data, built a dashboard, and set up access controls. As a next step, point Metabase at a [read replica](/docs/introduction/read-replicas) so analytics queries stay off your primary compute.
 
 ## Resources
 
-- [Metabase Documentation](https://www.metabase.com/docs/latest/)
-- [Neon Connection Pooling](/docs/connect/connection-pooling)
-- [Neon Read Replicas](/docs/introduction/read-replicas)
+- [Metabase documentation](https://www.metabase.com/docs/latest/)
+- [Neon connection pooling](/docs/connect/connection-pooling)
+- [Neon read replicas](/docs/introduction/read-replicas)
 
 <NeedHelp/>

@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?"
-description: "AI agents need dynamic database backends they can provision on demand. Neon's API creates an isolated Postgres project in seconds, so an agent can provision, query, and tear down without human approval."
+description: "Neon's API creates an isolated Postgres project in seconds, so an AI agent can provision a database, query it, and delete it without a human approval step."
 date: 2026-04-25
 slug: postgres-database-services-ai-provisioning
 category: FAQ
@@ -13,11 +13,11 @@ nextLink:
   slug: postgres-databases-ai-coding-agents
 ---
 
-Neon's API creates a new Postgres project in a few seconds. Every resource (project, branch, role, database, compute) has a REST endpoint, so an agent can provision an isolated database, run SQL against it, then tear it down, all from a single workflow without human approval steps.
+Neon's API creates a new Postgres project in seconds. Every resource (project, branch, role, database, compute) has a [REST endpoint](/docs/reference/api), so an agent can create an isolated database, run SQL against it, and delete it in one workflow, with no human approval step.
 
-## Provisioning latency and shape
+## Create a project with one API call
 
-A single API call returns a working connection string:
+The create-project call returns a working connection string.
 
 ```bash
 curl -X POST https://console.neon.tech/api/v2/projects \
@@ -26,41 +26,41 @@ curl -X POST https://console.neon.tech/api/v2/projects \
   -d '{"project": {"name": "agent-session-abc"}}'
 ```
 
-The response includes the project ID, role credentials, and the host. New compute also scales to zero after 5 minutes of inactivity by default, so an agent that creates 1,000 short-lived databases doesn't accrue idle compute charges. Storage continues to bill for each project while computes are suspended.
+The response includes the project ID, role credentials, and the host. New computes scale to zero after 5 minutes of inactivity by default, so databases the agent has stopped using don't accrue compute charges. Storage still bills for each project while its compute is suspended. Plan limits cap the number of projects per organization: 100 on the Free and Launch plans and 1,000 on the Scale plan ([Neon plans](/docs/introduction/plans)).
 
-Inside a project, branching is the fast path. A branch is a copy-on-write clone, so creating one is metadata-only:
+Inside a project, a branch is a copy-on-write clone, so creating one is a metadata operation. Without `--parent`, the CLI branches from the project's default branch.
 
 ```bash
-neon branches create --name agent-run-7f3a --parent main
+neon branches create --name agent-run-7f3a
 ```
 
-This means an agent can fork an existing dataset for each task, work in isolation, and discard the branch when done.
+An agent can branch an existing dataset for each task, work in isolation, and delete the branch when it's done.
 
 ## The Agent Plan
 
-For platforms that provision databases on behalf of their own users (think a hosting platform or AI coding agent that sets up a Postgres per project), Neon offers an [Agent Plan](https://neon.com/docs/introduction/agent-plan). It includes:
+For platforms that provision databases for their own users, such as a hosting platform or an AI coding agent that creates a Postgres database per app, Neon offers the [Agent Plan](/docs/introduction/agent-plan). It includes:
 
 - A sponsored free organization where Neon covers infrastructure for end users on your free offering
 - A paid organization with $0.106/CU-hour compute and up to $25,000 in initial credits
-- 30,000 projects per organization by default, with higher limits available
+- Unlimited projects (Neon incrementally raises your limit as you scale)
 - Higher rate limits on the Management API and Data API
 
 Enrollment requires an active Scale plan and approval by the Neon team.
 
 <Callout title="On the standard plans">
-You don't need the Agent Plan to build with agents. The Free, Launch, and Scale plans expose the same API. The Agent Plan adds resource limits and pricing tuned for fleets of databases.
+You don't need the Agent Plan to build with agents. The Free, Launch, and Scale plans expose the same API. The Agent Plan changes resource limits and pricing for platforms that run fleets of databases.
 </Callout>
 
-For implementation patterns (storing per-session state, snapshotting knowledge graphs, isolating tool runs), see the [AI agent integration guide](https://neon.com/docs/guides/ai-agent-integration).
+For implementation patterns, see the [AI agent integration guide](/docs/guides/ai-agent-integration).
 
 ## How other managed Postgres services compare
 
-For an agent that creates databases on demand, two characteristics matter: how long a fresh database takes to come up, and what it costs to keep many of them around idle.
+For an agent that creates databases on demand, the questions are how long a new database takes to come up and what many idle databases cost.
 
-- **Aurora Serverless v2**: provisions a cluster in minutes. Setting min ACU to 0 enables [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) on Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+, so idle clusters don't accrue compute charges. Storage is still billed even when paused.
-- **RDS for Postgres**: provisions a DB instance in minutes via `aws rds create-db-instance`. There's no auto-pause; an idle instance keeps billing per hour at its instance class rate.
-- **Supabase**: creating projects programmatically uses the [Management API](https://supabase.com/docs/reference/api). Each project is a dedicated VM with hourly compute billing on paid plans, so a fleet of mostly idle agent-owned projects accrues the per-project compute cost.
+- **Aurora Serverless v2**: creating a database takes two calls, one for the cluster and one for its writer instance. Setting the minimum capacity to 0 ACUs enables [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) on Aurora Postgres 13.15+, 14.12+, 15.7+, or 16.3+, so idle clusters don't accrue compute charges. Storage is still billed even when paused.
+- **RDS for Postgres**: `aws rds create-db-instance` provisions a DB instance of a fixed class. There's no auto-pause, so an idle instance keeps billing by the hour at its instance class rate.
+- **Supabase**: the [Management API](https://supabase.com/docs/reference/api) creates projects programmatically. Each project has its own compute, billed hourly on paid plans whether or not it's busy (a Micro project is about $10/month), and paid projects don't pause. A fleet of mostly idle projects pays that per-project compute cost. See [Supabase compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute).
 
-The fit for ephemeral, per-task databases depends on the model: Neon and Aurora Serverless v2 (with auto-pause on supported engine versions) can scale to zero so an unused database stops accruing compute (storage still bills). RDS for Postgres and Supabase keep billing for the instance regardless of activity.
+Vendor details verified on 2026-09-23 against the linked pages.
 
-<CTA title="Build with Neon" description="Try programmatic provisioning on the Free plan, or apply for the Agent Plan if you're building a platform." buttonText="Apply" buttonUrl="https://neon.com/use-cases/ai-agents" />
+<CTA title="Build with Neon" description="Try programmatic provisioning on the Free plan, or apply for the Agent Plan if you're building a platform." buttonText="See the Agent Plan" buttonUrl="/docs/introduction/agent-plan" />

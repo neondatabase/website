@@ -70,7 +70,13 @@ const EmbedTweet = (props) => {
 
   return (
     <figure ref={containerRef} className={className}>
-      <blockquote className="twitter-tweet" data-width="500" data-dnt="true" data-theme="dark">
+      <blockquote
+        className="twitter-tweet"
+        data-width="500"
+        data-dnt="true"
+        data-theme="dark"
+        data-conversation="none"
+      >
         <a href={url}>{url}</a>
       </blockquote>
     </figure>

@@ -1,35 +1,38 @@
 ---
-title: Building a Usage Dashboard with Neon's Consumption API
+title: Build a usage dashboard with Neon's consumption API
 subtitle: Learn how to track and visualize your Neon usage programmatically using the Project Consumption metrics API.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-15T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Neon's usage-based pricing plans (**Launch, Scale, Agent, and Enterprise**) ensure you only pay for the resources you actually consume. To help you monitor these costs programmatically, Neon provides the [Project Consumption metrics API](/docs/reference/api/consumption/get-consumption-history-per-project-v2). This API allows you to query detailed usage data for your projects, including compute time, storage, and data transfer.
+On Neon's usage-based plans (**Launch, Scale, Agent, and Enterprise**), you pay for the resources you consume. To monitor that usage programmatically, use the [project consumption metrics API](/docs/reference/api/consumption/get-consumption-history-per-project-v2). It returns usage data for your projects, including compute, storage, and data transfer.
 
-In this guide, you'll learn how to build an internal usage dashboard using Next.js and the Neon Consumption API. By the end, you'll have a dashboard that visualizes your compute usage trends and provides insights into your resource consumption.
+In this guide, you'll build an internal usage dashboard with Next.js and the consumption API. The dashboard shows summary totals for the period and a chart of daily compute usage.
 
-## Understanding the Metrics
+## Metrics
 
-The Consumption API provides a variety of metrics that will help you understand your usage patterns. It includes detailed information about compute time, storage, data transfer, and more:
+The consumption API returns the following metrics:
 
-| Metric                           | Unit    | Description                                                                         |
-| :------------------------------- | :------ | :---------------------------------------------------------------------------------- |
-| `compute_unit_seconds`           | Seconds | Total active compute time. This is the primary driver of compute costs.             |
-| `root_branch_bytes_month`        | Bytes   | Storage consumed by your primary (root) branches.                                   |
-| `child_branch_bytes_month`       | Bytes   | Storage consumed by child branches (only the delta/changes from the parent).        |
-| `instant_restore_bytes_month`    | Bytes   | Storage used by the Write-Ahead Log (WAL) to support Point-in-Time Recovery (PITR). |
-| `public_network_transfer_bytes`  | Bytes   | Data egress sent over the public internet.                                          |
-| `private_network_transfer_bytes` | Bytes   | Data transfer over private networks (e.g., AWS PrivateLink).                        |
-| `extra_branches_month`           | Count   | The number of active branches beyond your plan's included allowance.                |
+| Metric                           | Raw unit     | Description                                                                                    |
+| :------------------------------- | :----------- | :--------------------------------------------------------------------------------------------- |
+| `compute_unit_seconds`           | CU-seconds   | Active compute time weighted by compute size. This is the primary driver of compute costs.     |
+| `root_branch_bytes_month`        | byte-hours   | Storage consumed by your root branches.                                                        |
+| `child_branch_bytes_month`       | byte-hours   | Storage consumed by child branches (only the delta from the parent).                           |
+| `instant_restore_bytes_month`    | byte-hours   | Instant restore (PITR) history storage.                                                        |
+| `snapshot_storage_bytes_month`   | byte-hours   | Storage for [branch snapshots](/docs/guides/backup-restore).                                   |
+| `public_network_transfer_bytes`  | bytes        | Data transfer over the public internet.                                                        |
+| `private_network_transfer_bytes` | bytes        | Data transfer over private networks (e.g., AWS PrivateLink).                                   |
+| `extra_branches_month`           | branch-hours | All child branches per hour. Subtract your plan's branch allowance to get the billable amount. |
+
+For billing units and conversions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ## Prerequisites
 
 - **Node.js:** Version `20` or later.
 - **Neon account and project:** A Neon account on a usage-based plan (Launch, Scale, Agent, or Enterprise) with a project. Create one in the [Neon Console](https://console.neon.tech/app/projects).
-- **API Key:** A valid Neon API Key. Create one in the [Neon Console](https://console.neon.tech/app/settings/api-keys).
+- **API key:** A Neon API key. Create one in the [Neon Console](https://console.neon.tech/app/settings/api-keys).
 - **Organization ID:** Your Organization ID, found under your Organization settings in the Neon Console.
   ![Neon Organization ID location](/docs/manage/orgs_id.png)
 
@@ -37,7 +40,7 @@ The Consumption API provides a variety of metrics that will help you understand 
 
 ## Query usage with curl
 
-To get a quick look at your consumption data, you can use the following `curl` command. This will fetch your usage metrics for the last month, aggregated daily.
+For a quick look at your consumption data, use the following `curl` command. It fetches your usage metrics for one month, aggregated daily.
 
 1.  **Set environment variables:**
 
@@ -46,11 +49,11 @@ To get a quick look at your consumption data, you can use the following `curl` c
     export ORG_ID=your_org_id_here
     ```
 
-    > Replace `your_api_key_here` and `your_org_id_here` with your actual Neon API Key and Organization ID.
+    > Replace `your_api_key_here` and `your_org_id_here` with your Neon API key and Organization ID.
 
 2.  **Run the request:**
 
-    Run the following command to fetch your consumption data for the last month. This will show you all the metrics available.
+    Run the following command to fetch your consumption data for the month.
 
     ```bash shouldWrap
     curl --request GET \
@@ -61,10 +64,10 @@ To get a quick look at your consumption data, you can use the following `curl` c
 
     > Adjust the dates to your desired range. Timestamps must be in RFC 3339 format (e.g., `2026-02-01T00:00:00Z`).
 
-    The response will contain nested `periods` and `consumption` arrays for each project, with the requested metrics included in the `metrics` array.
+    The response contains nested `periods` and `consumption` arrays for each project, with the requested metrics included in the `metrics` array.
 
     <details>
-    <summary>Example Response</summary>
+    <summary>Example response</summary>
 
     ```json
     {
@@ -136,9 +139,9 @@ To get a quick look at your consumption data, you can use the following `curl` c
 
 The `granularity` parameter controls how the data is aggregated. The available options are:
 
-- **Hourly:** Last 7 days (Best for debugging spikes)
-- **Daily:** Last 60 days (Best for billing dashboards)
-- **Monthly:** Last 12 months (Best for long-term trending)
+- **Hourly:** up to the last 168 hours (7 days). Useful for debugging spikes.
+- **Daily:** up to the last 60 days. Useful for billing dashboards.
+- **Monthly:** up to the last year. Useful for long-term trends.
 
 In this guide, you will build a dashboard using daily granularity to visualize trends over the last month.
 
@@ -184,7 +187,7 @@ NEON_API_KEY="your_api_key_here"
 NEXT_PUBLIC_ORG_ID="your_org_id_here"
 ```
 
-> Replace `your_api_key_here` and `your_org_id_here` with your actual Neon API Key and Organization ID.
+> Replace `your_api_key_here` and `your_org_id_here` with your Neon API key and Organization ID.
 
 ## Create the data fetching logic
 
@@ -356,8 +359,8 @@ export async function getNeonUsage(orgId: string, projectIds?: string[]): Promis
 
 The code above exports two functions:
 
-- **`getProjects`** fetches the list of projects in your organization using the [Neon Projects API](/docs/reference/api/projects/list-projects). This allows you to display project names in the UI and filter usage data by project.
-- **`getNeonUsage`** fetches usage data from the Consumption API, transforms the nested response into a flat structure, and aggregates the metrics by day. When `projectIds` are provided, only consumption data for those projects is returned - the API's `project_ids` query parameter handles this server-side.
+- **`getProjects`** fetches the list of projects in your organization using the [Neon Projects API](/docs/reference/api/projects/list-projects). The UI uses it to display project names and filter usage data by project.
+- **`getNeonUsage`** fetches usage data from the Consumption API, transforms the nested response into a flat structure, and aggregates the metrics by day. When `projectIds` are provided, the API's `project_ids` query parameter limits the results to those projects.
 
 ## Create a server action for filtering
 
@@ -381,8 +384,8 @@ This server action calls `getNeonUsage` with the selected project IDs. When the 
 
 Now that you have the data fetching logic and server action in place, you can create a dashboard component to visualize this data. The dashboard will consist of:
 
-1.  **Project Filter:** A multi-select dropdown to scope usage data to specific projects.
-2.  **Summary Cards:** To show total usage for the period.
+1.  **Project filter:** A multi-select dropdown to scope usage data to specific projects.
+2.  **Summary cards:** To show total usage for the period.
 3.  **Chart:** To visualize the daily compute trend.
 
 Create `components/usage-dashboard.tsx`:
@@ -689,7 +692,7 @@ export default async function DashboardPage() {
     npm run dev
     ```
 
-2.  Open `http://localhost:3000` in your browser to see your Neon usage dashboard in action.
+2.  Open `http://localhost:3000` in your browser to see your usage dashboard.
     ![Example Neon Usage Dashboard Consumption API](/docs/guides/neon-usage-dashboard-consumption-api.png)
 
 You should see a summary of your total compute time, average storage usage, data transfer, and peak extra branches, along with a bar chart showing your daily compute usage over the last month. Use the project filter dropdown to scope the dashboard to specific projects.
@@ -706,8 +709,8 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Neon API Reference: project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)
-- [Neon API Reference: branch consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-branch-v2): extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
+- [Neon API reference: project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)
+- [Neon API reference: branch consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-branch-v2): extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
 - [Query consumption metrics](/docs/guides/consumption-metrics)
 - [Recharts Documentation](https://recharts.org/)
 - [Shadcn/ui Components](https://ui.shadcn.com/)

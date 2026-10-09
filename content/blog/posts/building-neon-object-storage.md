@@ -7,7 +7,7 @@ excerpt: >-
   know the workflow: branch main into a child and get an isolated copy of your
   database in about a second. Object Storage adds files to that picture.
 date: '2026-08-06T12:00:00'
-updatedOn: '2026-08-05T18:50:00'
+updatedOn: '2026-09-21T13:00:00'
 category: product
 categories:
   - product
@@ -31,7 +31,7 @@ seo:
 It was available to all users free of charge during the [beta](https://neon.com/blog/neon-backend-is-beta); see [pricing](https://neon.com/pricing) for current costs. [Deploy it](https://neon.com/docs/storage/overview) and [give us feedback](https://neon.com/discord), or read the [GA announcement](https://neon.com/blog/neon-backend-is-ga).
 </Admonition>
 
-[We just launched Neon Object Storage](https://neon.com/blog/neon-backend-is-beta), a branch-aware, S3-compatible object store built into the Neon backend. If you've used [Neon branches](https://neon.com/docs/introduction/branching) before, you know the workflow: branch main into a child and get an isolated copy of your database in about a second. Object Storage adds files to that picture. When you create a branch, the child also inherits your buckets and objects at that point in time.
+[We just launched Neon Object Storage](https://neon.com/blog/neon-backend-is-ga), a branch-aware, S3-compatible object store built into the Neon backend. If you've used [Neon branches](https://neon.com/docs/introduction/branching) before, you know the workflow: branch main into a child and get an isolated copy of your database in about a second. Object Storage adds files to that picture. When you create a branch, the child also inherits your buckets and objects at that point in time.
 
 We made Object Storage branchable because that's our core operating philosophy. Neon isn't shipping a database with extras bolted on. We're building a [backend for apps and agents](https://neon.com/docs/get-started/backend-overview) where Postgres, files, Functions, Auth, and the AI Gateway share the same branch semantics.
 
@@ -126,7 +126,3 @@ neon branches create --name preview/feature-x --parent main
 **This is the era of branchable backends.** We're extending Lakebase Postgres branching to files with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI models](https://neon.com/docs/ai-gateway/overview). Tell your agent to instantly branch your entire backend to create isolated environments, with minimal costs and no maintenance overhead, and delete them just as quickly.
 
 Start by [deploying an entire Neon backend](https://neon.com/docs/introduction) on the [Free plan](https://neon.com/pricing). You get up to 100 projects, with limits generous enough to actually build products.
-
-<Admonition type="note" title="Remember that Object Storage is still beta!">
-Use it with caution, expect rough edges, and [tell us what breaks](https://neon.com/discord).
-</Admonition>

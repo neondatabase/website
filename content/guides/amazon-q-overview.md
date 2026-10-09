@@ -1,17 +1,17 @@
 ---
-title: Querying Lakebase Postgres with Natural Language via Amazon Q Business
+title: Querying Lakebase Postgres with natural language via Amazon Q Business
 subtitle: Learn how to set up Amazon Q Business to query your Lakebase Postgres database using natural language
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-23T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Amazon Q Business enables you to build an interactive chat application that combines your Lakebase Postgres data with large language model capabilities.
 
 Rather than querying your database directly, Amazon Q Business creates an index of your data which users can then interact with through a natural language interface.
 
-In this guide, you'll learn how to set up Amazon Q Business to query your Lakebase Postgres database using natural language. We'll cover the following topics:
+In this guide, you'll set up Amazon Q Business to query a database on Neon using natural language.
 
 ## Prerequisites
 
@@ -22,23 +22,23 @@ Before starting, you'll need:
 - [AWS IAM Identity Center](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/idc-setup.html) configured (recommended) or Identity Federation through IAM
 - Basic understanding of databases and SQL
 
-## Setting Up Your Environment
+## Setting up your environment
 
-In order to use Amazon Q, you will need to have an AWS Organization set up with the IAM Identity Center enabled. This will allow you to manage your users and permissions across multiple AWS accounts.
+To use Amazon Q, you will need to have an AWS Organization set up with the IAM Identity Center enabled. This will allow you to manage your users and permissions across multiple AWS accounts.
 
 ### Configure IAM Identity Center
 
-To begin setting up the AWS Q Business application, you will have to configure the application environment to enable end-user access by integrating AWS IAM Identity Center for user management.
+To set up the Amazon Q Business application, first configure the application environment to enable end-user access by integrating AWS IAM Identity Center for user management.
 
 If you haven't set up IAM Identity Center yet, complete the setup process first following AWS's [detailed guide](https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html).
 
-The exact steps may vary depending on your organization's requirements, existing identity sources, security policies, and other factors. It's recommended to work with your organization's IT or security team to ensure a smooth setup.
+The exact steps may vary depending on your organization's requirements, existing identity sources, security policies, and other factors. Work with your organization's IT or security team on this step.
 
 You can follow the [IAM Identity Center setup guide](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-application.html) for detailed steps.
 
-### Create Your Application Environment
+### Create your application environment
 
-Once IAM Identity Center is configured, next you will have to create your Amazon Q Business application:
+Once IAM Identity Center is configured, create your Amazon Q Business application:
 
 1. Navigate to the [Amazon Q Business Console](https://us-east-1.console.aws.amazon.com/amazonq/business/welcome) and choose "Create application". You must add, assign, and subscribe at least one user to your Amazon Q Business application environment for it to work as intended.
 
@@ -53,7 +53,7 @@ Once IAM Identity Center is configured, next you will have to create your Amazon
 
 Now that your environment is set up, you can proceed to connecting your Neon database as a data source and configuring the natural language interface.
 
-## Database Setup
+## Database setup
 
 If you already have data in your Lakebase Postgres database, you can skip this section. Otherwise, follow these steps to create a sample database and set up data syncing with Amazon Q Business.
 
@@ -79,9 +79,9 @@ INSERT INTO customers (name, email, subscription_tier, monthly_spend) VALUES
 ('UrbanTech Solutions', 'services@example.com', 'Basic', 300.00);
 ```
 
-The above SQL script creates a `customers` table. The table stores customer information which we will use demonstrate data syncing with Amazon Q Business and querying through natural language.
+The above SQL script creates a `customers` table. The table stores customer information which you'll use to demonstrate data syncing with Amazon Q Business and querying through natural language.
 
-## Configuring Data Source
+## Configuring the data source
 
 Once your Neon database is set up, you can configure it as a data source in Amazon Q Business.
 
@@ -135,21 +135,21 @@ Once you've configured your data source, click the '**Sync**' button and Amazon 
 
 It can take from a few minutes to a few hours depending on the size of your database and the sync frequency you've set.
 
-## Web Experience Setup
+## Web experience setup
 
 Once your data source is synced, you can access and share the Amazon Q Business web interface. The web experience provides a chat interface out of the box where users can query your Neon database using natural language.
 
-### Finding Your Web Experience URL
+### Finding your web experience URL
 
 The web experience URL is automatically generated by Amazon Q Business. To find it:
 
 1. Navigate to your application in the Amazon Q Business Console
 2. Look for the '**Web experience settings**' section
-3. Find the '**Deployed URL**' - this is the URL you'll share with your authorized users
+3. Find the '**Deployed URL**'. This is the URL you'll share with your authorized users
 
 Once you have the URL, visit it in your browser to access the Amazon Q Business web interface. You will be prompted to log in using your IAM Identity Center credentials and then you can start querying your Neon database using natural language.
 
-### Customizing the Experience
+### Customizing the experience
 
 Before sharing with users, you can customize the web interface:
 
@@ -159,15 +159,15 @@ Before sharing with users, you can customize the web interface:
    - Subtitle: Query your database using natural language
    - Welcome message: Ask questions about your data in plain English
 
-### Example Queries
+### Example queries
 
 Once users access the web experience, they can select the '**Company Knowledge**' tab and ask questions like:
 
-- "Show me all enterprise customers"
+- "Show me all Premium customers"
 - "What's our total monthly spend by subscription tier?"
 - "Who are our top customers by monthly spend?"
 
-### Access Control
+### Access control
 
 Only users who have been granted access through IAM Identity Center can access the web experience. Make sure to add users to the appropriate groups and configure permissions correctly based on your organization's policies.
 
@@ -177,11 +177,11 @@ Keep in mind that Amazon Q Business is optimized for English language queries, s
 
 ## Conclusion
 
-Amazon Q provides a natural language interface to query your Lakebase Postgres database, making it easier for team members who aren't SQL experts to access data.
+You now have an Amazon Q Business chat interface over your Neon database, so team members who don't write SQL can ask questions about the data.
 
-Amazon Q Business also provides several methods to add data to your application beyond your primary Neon database connection, you can upload files like documentation, guides, or data dictionaries directly through the AWS Q console. Or use a Web Crawler to index web pages and documents directly from your website or the internet.
+Amazon Q Business also provides several methods to add data to your application beyond your Neon database connection. You can upload files like documentation, guides, or data dictionaries directly through the Amazon Q Business console, or use a Web Crawler to index web pages and documents directly from your website or the internet.
 
-## Additional Resources
+## Additional resources
 
 - [Neon Documentation](/docs)
 - [Amazon Q Business Documentation](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html)

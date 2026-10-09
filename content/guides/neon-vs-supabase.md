@@ -5,7 +5,7 @@ author: neon-team
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-05-06T00:00:00.000Z'
-updatedOn: '2026-08-13T23:11:27.333Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 <Admonition type="note">
@@ -110,7 +110,7 @@ The two runtimes are built for different work.
 | Runtime                   | Node.js 24                                                                                                                                                                                   | Deno-compatible TypeScript runtime                                                                                                                                 |
 | Placement                 | Deployed onto a branch, same region as its data, `DATABASE_URL` and service credentials injected                                                                                             | Distributed at the edge, close to users, integrated with platform secrets and logs                                                                                 |
 | Execution                 | Long-running: 15 minutes to first byte, streams stay open while data flows, 2 GiB memory, 100 concurrent invocations by default ([source](/docs/compute/functions/reference/runtime-limits)) | Short handlers: 256 MB memory, 2s CPU per invocation, 150s wall clock on Free and 400s on paid plans ([source](https://supabase.com/docs/guides/functions/limits)) |
-| Included usage            | Usage limits ([source](/docs/introduction/plans))                                                                                                                                            | 500,000 invocations Free; 2M Pro ([source](https://supabase.com/pricing))                                                                                          |
+| Included usage            | Free: 10 active and 400 waiting Capacity-Hours, 1M invocations; paid plans metered per Capacity-Hour ([source](/docs/introduction/plans#functions))                                          | 500,000 invocations Free; 2M Pro ([source](https://supabase.com/pricing))                                                                                          |
 | Scheduled and queued work | `pg_cron` for scheduling (runs only while compute is active), or pair Functions with an external queue ([source](/docs/extensions/pg_cron))                                                  | Managed [Cron](https://supabase.com/docs/guides/cron) and [Queues](https://supabase.com/docs/guides/queues/quickstart), built on `pg_cron` and `pgmq`              |
 
 <Callout title="How to choose">
@@ -119,13 +119,13 @@ The two runtimes are built for different work.
 
 ### Storage
 
-Both are S3-compatible, which matters because your existing SDKs and tools work.
+Both are S3-compatible, so your existing S3 SDKs and tools work.
 
 | Key difference | [Neon Object Storage](/docs/storage/overview)                                                                            | [Supabase Storage](https://supabase.com/docs/guides/storage)                                                |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | Model          | Isolated namespace per branch; scales independently from your Postgres database; authenticated with your Neon credential | Project buckets with an [S3-compatible protocol](https://supabase.com/docs/guides/storage/s3/compatibility) |
 | Delivery       | Branch environments get isolated file storage automatically                                                              | CDN, image optimization, resumable uploads                                                                  |
-| Included usage | Usage limits ([source](/docs/introduction/plans))                                                                        | 1 GB Free; 100 GB Pro, then $0.0213/GB ([source](https://supabase.com/pricing))                             |
+| Included usage | 5 GB per project Free; $0.023/GB-month on paid plans ([source](/docs/introduction/plans#object-storage))                 | 1 GB Free; 100 GB Pro, then $0.0213/GB ([source](https://supabase.com/pricing))                             |
 
 <Callout title="How to choose">
 **Pick Neon** if file storage should follow your environments, with an isolated namespace per branch. **Pick Supabase** if you need CDN delivery and image optimization on the bucket today.
@@ -163,7 +163,7 @@ Both integrate with pull requests. For the workflow-level comparison, see [Branc
 
 ## Pricing models
 
-**Neon meters usage across the backend.** No monthly minimum. Compute bills in CU-hours (a CU is ≈4 GB RAM; suspended computes accrue none), storage in GB-months, and Object Storage and Functions are included with usage limits ([source](/docs/introduction/plans)). Database storage bills even while compute is suspended.
+**Neon meters usage across the backend.** No monthly minimum. Compute bills in CU-hours (a CU is ≈4 GB RAM; suspended computes accrue none), storage in GB-months, Object Storage in GB-months, and Functions in Capacity-Hours and invocations, with Free plan allowances for each ([source](/docs/introduction/plans)). Database storage bills even while compute is suspended.
 
 **Supabase bundles services into a subscription plus compute.** The base fee ($25/month Pro, $599/month Team) includes quotas for Auth MAU, Storage, Realtime, and Edge Functions, plus a $10 compute credit; each running project bills its instance hourly regardless of traffic, and quota overages bill per unit ([source](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
 
@@ -171,7 +171,7 @@ The stage guides work through the dollars: [free plans](/guides/neon-vs-supabase
 
 ## Using both, and migrating
 
-Neon and Supabase aren't mutually exclusive: some teams run Supabase's services next to Neon databases for workloads that need elastic compute or many isolated databases. If you're consolidating, [Migrate from Supabase to Neon Postgres](/docs/import/migrate-from-supabase) covers the database, [Migrate from Supabase Auth](/docs/auth/migrate/from-supabase) covers auth, and the [complete Supabase migration guide](/guides/complete-supabase-migration) covers the full backend.
+Neon and Supabase aren't mutually exclusive: some teams run Supabase's services next to Neon databases for workloads that need elastic compute or many isolated databases. If you're consolidating, [Migrate from Supabase to Lakebase Postgres](/docs/import/migrate-from-supabase) covers the database, [Migrate from Supabase Auth](/docs/auth/migrate/from-supabase) covers auth, and the [complete Supabase migration guide](/guides/complete-supabase-migration) covers the full backend.
 
 ## Resources
 

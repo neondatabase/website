@@ -15,7 +15,7 @@ The API endpoint has been deprecated.
 - Step two
 - Step three
 
-**Coming Soon:** This feature is coming soon.
+**Coming soon:** This feature is coming soon.
 "
 `;
 
@@ -59,13 +59,13 @@ We have temporarily paused new enrollments in our Logical Replication Beta progr
 
 ### PrivatePreview
 
-**Coming Soon: Private Preview**
+**Coming soon: Private Preview**
 
 This feature is currently accessible in Private Preview only.
 
 ### PrivatePreviewEnquire
 
-**Coming Soon: Private Preview**
+**Coming soon: Private Preview**
 
 This feature is in private preview: it's not ready for production use, and it may be briefly unavailable as we deploy updates. To get access, [sign up here](https://neon.com/blog/were-building-backends#access).
 
@@ -319,7 +319,7 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 ### NewPricing
 
-**Coming Soon: New pricing plans**
+**Coming soon: New pricing plans**
 
 On February 19th, 2024, Neon will launch new, simplified pricing plans. You can see the [details of all the plans here](https://neon.com/2024-plan-updates).
 
@@ -378,7 +378,7 @@ The **Autoscaling** is in Beta. Share your feedback on [Discord](https://neon.co
 
 ### EarlyAccessProps (with prop)
 
-**Coming Soon: Early access**
+**Coming soon: Early access**
 
 **Schema Diff** is currently in early access.
 

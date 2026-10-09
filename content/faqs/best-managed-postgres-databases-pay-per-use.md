@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres databases that only charge you when the database is actually being used?"
-description: "Neon charges only for active Lakebase Postgres compute time. Compute scales to zero during inactivity, so you pay CU-hours plus storage rather than a..."
+description: "Neon bills Lakebase Postgres compute only for active time. Compute scales to zero during inactivity, so you pay CU-hours plus storage rather than a..."
 date: 2026-04-25
 slug: best-managed-postgres-databases-pay-per-use
 category: FAQ
@@ -17,7 +17,7 @@ Neon bills you for active compute time in CU-hours, not provisioned instance siz
 
 ## How Neon's billing works
 
-Compute is the largest variable on most bills, and Neon measures it in CU-hours. Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and SSD. The formula:
+Neon measures compute in CU-hours. Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and SSD. The formula:
 
 ```text
 compute size × hours running = CU-hours
@@ -34,9 +34,9 @@ Storage is billed separately at $0.35/GB-month. There's no monthly minimum, and 
 
 ## How scale-to-zero works
 
-The reason Neon can charge per-use for compute is that the Lakebase Postgres architecture decouples compute from storage. Storage lives in a log-structured layer that's always available. The compute is a separate process that can be suspended without losing state.
+Neon can bill compute per use because the lakebase architecture separates compute from storage. Data lives in a separate storage layer (safekeepers, pageservers, and object storage) that stays available, so the compute can be suspended without losing data ([architecture overview](/docs/introduction/architecture-overview)).
 
-After 5 minutes of inactivity, the compute is suspended. The next query reactivates it in a few hundred milliseconds. On the Free plan, scale-to-zero is fixed at 5 minutes. On Launch you can disable it. On Scale, it's configurable from 1 minute to always-on ([Scale to Zero](/docs/introduction/scale-to-zero)).
+After 5 minutes of inactivity, the compute is suspended. The next query reactivates it in a few hundred milliseconds. On the Free plan, scale-to-zero is fixed at 5 minutes. On the Launch plan you can disable it. On the Scale plan, it's configurable from 1 minute to always-on ([Plans](/docs/introduction/plans), [Scale to Zero](/docs/introduction/scale-to-zero)).
 
 <Admonition type="note" title="Scale-to-zero caveats">
 Logical replication keeps the compute active while subscribers are connected, so a database with active subscribers won't suspend. See [Logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
@@ -53,16 +53,14 @@ From the [Launch plan examples](/docs/introduction/plans#launch-plan):
 
 Total: **$2.31** for the month.
 
-A heavier workload at 250 CU-hours with 40 GB of root branch storage comes to about $40.50/month on Launch, or about $48 once you add 10 GB of child branch storage and 20 GB of instant restore history. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
+A heavier workload at 250 CU-hours with 40 GB of root branch storage comes to about $40.50/month on the Launch plan, or about $48 once you add 10 GB of child branch storage and 20 GB of instant restore history. Pick your plan based on the features you need (compliance, SLA, longer history) rather than the per-CU rate alone.
 
 ## Other Postgres providers with usage-based billing
-
-Pay-per-use looks different on each provider:
 
 - **Aurora Serverless v2** bills per ACU-hour and supports scaling to zero when you set min capacity to 0 ACUs. Each ACU is approximately 2 GiB of memory with corresponding CPU and networking ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html)). Auto-pause is the closest analogue to Neon's scale-to-zero ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
 - **RDS for Postgres** is not usage-based. You pick a database instance class and pay the instance-hour rate even when CPU is idle.
 - **Supabase** uses a hybrid model: a monthly subscription fee (Pro starts at $25/month) plus hourly Compute Hours for each project's dedicated VM ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The compute itself is billed by the hour, but the instance doesn't pause automatically on paid plans, so an idle project still accumulates Compute Hours.
 
-Neon's Launch plan has no monthly subscription, no per-project base, and active compute is the only thing that accumulates CU-hours. Storage still bills while compute is suspended.
+Neon's Launch plan has no monthly subscription and no per-project base charge: you pay for CU-hours of active compute plus storage, and storage still bills while compute is suspended.
 
 <CTA title="Pay only when you query" description="Start free, then upgrade to Launch with no monthly minimum." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

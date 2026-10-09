@@ -13,14 +13,12 @@ nextLink:
   slug: managed-postgres-platforms-free-development-staging-environments
 ---
 
-If you need code to create and tear down Postgres databases, look for managed Postgres with a first-class API, fast provisioning, and per-second billing. Neon fits this shape: a single API call returns a connection string in seconds, compute scales to zero between uses, and you pay by the CU-hour with no per-project minimums.
+If code creates and tears down your Postgres databases, look for a documented API, provisioning that doesn't copy data, and compute billing that stops when a database is idle. On Neon, a single API call returns a connection string, compute scales to zero between uses, and you pay by the CU-hour with no monthly minimum.
 
 ## What code-driven provisioning needs
 
-Three things tend to matter for automated provisioning:
-
-1. **A real API.** A stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
-2. **Provisioning that returns in seconds.** [Branching](/docs/introduction/branching) on Neon uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
+1. **A documented API.** Neon exposes a REST API at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
+2. **Provisioning that doesn't copy data.** [Branching](/docs/introduction/branching) on Neon uses copy-on-write, so a new branch is created without copying data, whatever the size of the parent. The create-branch response includes the connection string.
 3. **Compute billing that stops when a database is idle.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges. Storage continues to bill on paid plans.
 
 ## Example: create a branch from a script
@@ -43,17 +41,15 @@ The response includes a connection string you can inject into a preview deploy, 
 
 ## How other providers handle programmatic provisioning
 
-| Provider             | API style                                               | New database ready in             | Billing model                    |
-| -------------------- | ------------------------------------------------------- | --------------------------------- | -------------------------------- |
-| Neon                 | REST `/api/v2`, TS/Python SDKs, Terraform               | Seconds (copy-on-write branch)    | Per CU-hour, scales to zero      |
-| Supabase             | Management API (`POST /v1/projects`), Terraform (alpha) | Minutes (full project provision)  | Per-project compute hours        |
-| RDS for Postgres     | AWS SDK / CloudFormation / Terraform                    | Minutes (full instance + storage) | Per instance-hour                |
-| Aurora Serverless v2 | AWS SDK / CloudFormation / Terraform                    | Minutes (cluster provision)       | Per ACU-hour, can scale to 0 ACU |
+| Provider             | API style                                               | What a new database is               | Billing model                    |
+| -------------------- | ------------------------------------------------------- | ------------------------------------ | -------------------------------- |
+| Neon                 | REST `/api/v2`, TS/Python SDKs, Terraform               | Copy-on-write branch or new project  | Per CU-hour, scales to zero      |
+| Supabase             | Management API (`POST /v1/projects`), Terraform (alpha) | New project on its own VM            | Per-project compute hours        |
+| RDS for Postgres     | AWS SDK / CloudFormation / Terraform                    | New DB instance with its own storage | Per instance-hour                |
+| Aurora Serverless v2 | AWS SDK / CloudFormation / Terraform                    | New cluster and instance             | Per ACU-hour, can scale to 0 ACU |
 
-A few specifics worth knowing if you're comparing:
-
-- **Supabase** exposes a `POST /v1/projects` endpoint that creates a full project (database, auth, storage, edge functions). Each project is a dedicated VM, so provisioning takes longer and costs include the per-project compute baseline. See [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).
-- **Aurora Serverless v2** clusters can be created via the AWS API or Terraform, but new cluster creation takes minutes. Once running, it can scale to 0 ACU with auto-pause for idle workloads.
-- **RDS for Postgres** is the slowest of the four: provisioning a new instance involves attaching EBS volumes and starting a VM, which is fine for long-lived databases but not for per-PR or per-tenant workflows.
+- **Supabase** exposes a `POST /v1/projects` endpoint that creates a full project (database, auth, storage, edge functions). Each project runs its own Postgres instance on a [dedicated VM](https://supabase.com/docs/guides/platform/compute-and-disk), and on paid plans each project bills compute hourly. See the [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).
+- **Aurora Serverless v2** clusters can be created with the AWS API or Terraform. With the minimum capacity set to 0 ACUs, an idle cluster [pauses automatically](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
+- **RDS for Postgres** provisions a new DB instance with its own EBS storage for each database, billed by the instance-hour while it runs. That suits long-lived databases better than short-lived per-PR databases.
 
 <CTA title="Browse the Neon API Reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api" />

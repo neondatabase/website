@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-26T00:49:26.569Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
@@ -79,7 +79,7 @@ This command generates a table named `items` with an `embedding` column capable 
 
 ## Storing embeddings
 
-After generating embeddings using a service like [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings), you can store them in your database. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
+After generating embeddings using a service like the [Neon AI Gateway](/docs/ai-gateway/embeddings) or [OpenAI’s Embeddings API](https://platform.openai.com/docs/api-reference/embeddings), you can store them in your database. The gateway serves embedding models with the same Neon credential you use for the rest of your project. Using a Postgres client library in your preferred programming language, you can execute an `INSERT` statement similar to the following to store embeddings.
 
 - Insert two new rows into the `items` table with the provided embeddings.
 

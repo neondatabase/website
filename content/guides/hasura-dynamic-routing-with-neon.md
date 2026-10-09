@@ -1,39 +1,39 @@
 ---
-title: Dynamic Routing with Hasura and Neon
+title: Dynamic routing with Hasura and Neon
 subtitle: Use Neon's branching with Hasura's dynamic routing for development, testing, and preview environments.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-20T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Managing different database environments for development, testing, staging, and production can be complex. Traditional methods often involve provisioning separate database instances, managing complex data synchronization scripts, or dealing with slow snapshot restores. Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, brings efficient, Git-like branching to your database, while Hasura provides an instant GraphQL API layer.
+Running separate database environments for development, testing, staging, and production usually means provisioning separate database instances, maintaining data synchronization scripts, or waiting on snapshot restores. Neon gives Lakebase Postgres Git-like branching, and Hasura provides an instant GraphQL API layer on top.
 
-This guide shows how to combine [Neon's database branching](/docs/introduction/branching) with [Hasura's Dynamic Database Routing](https://hasura.io/docs/2.0/databases/database-config/dynamic-db-connection/) feature. This combination allows you to create isolated database environments instantly using Neon branches and dynamically route GraphQL requests from Hasura to the appropriate branch based on request context (like HTTP headers or session variables). Together, they let you consolidate your infrastructure, serving multiple development, testing, or preview environments from only one Neon project and one Hasura instance.
+This guide shows how to combine [Neon's database branching](/docs/introduction/branching) with [Hasura's Dynamic Database Routing](https://hasura.io/docs/2.0/databases/database-config/dynamic-db-connection/) feature. Neon branches give you isolated database environments, and Hasura routes GraphQL requests to the appropriate branch based on request context (like HTTP headers or session variables). Together, they let you serve multiple development, testing, or preview environments from only one Neon project and one Hasura instance.
 
 ## Prerequisites
 
 Before you start, ensure you have the following:
 
-- **A Neon Account:** Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-- **A Neon Project:** You need to have a Neon project. If you do not have one, create it in the [Neon Console](https://console.neon.tech)
-- **A Hasura Instance:** A running Hasura instance (v2.x or later). This can be Hasura Cloud Professional or Enterprise tiers, or a self-hosted Enterprise instance. Dynamic routing is not available in the free tier.
+- **A Neon account:** Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
+- **A Neon project:** If you don't have one, create it in the [Neon Console](https://console.neon.tech).
+- **A Hasura instance:** A running Hasura instance (v2.x or later). This can be Hasura Cloud Professional or Enterprise tiers, or a self-hosted Enterprise instance. Dynamic routing is not available in the free tier.
 
 ## Understanding the core concepts
 
-### Neon Branching
+### Neon branching
 
-Neon allows you to create branches of your Postgres database almost instantly. Key features include:
+Neon lets you create branches of your Postgres database instantly. Key properties:
 
 - **Copy-on-write:** Branches are lightweight clones. They initially share the parent's data without duplication. Storage costs only increase for the _changes_ (deltas) made within a branch.
-- **Isolation:** Each branch operates independently. Changes made in one branch do not affect the parent or other branches. This is perfect for development, testing, or running experiments without impacting production data.
-- **Speed:** Creating a branch takes only a few seconds.
+- **Isolation:** Each branch operates independently. Changes made in one branch do not affect the parent or other branches. Use branches for development, testing, or experiments without touching production data.
+- **Speed:** Branch creation is near-instant because no data is copied up front.
 - **Management:** Branches can be created and managed via the Neon Console, Neon API, or Neon CLI.
 - **Connection string:** Each branch gets its own unique connection string, allowing applications to connect directly to it.
 
 Think of Neon branching like Git branching, but for your database.
 
-### Hasura Dynamic Database Routing
+### Hasura dynamic database routing
 
 Available in Hasura Cloud Professional/Enterprise and Self-Hosted Enterprise, this feature allows Hasura to route GraphQL requests to different database connections based on request parameters. It uses two main components:
 
@@ -61,21 +61,19 @@ Here's a high-level overview of how to set up dynamic routing with Neon and Hasu
 2.  **Configure Hasura data source:** Add your _primary_ Neon database as a data source in Hasura.
 3.  **Define connection set:** In the Hasura data source configuration, add the connection strings of your Neon branches to the Connection set, giving each a unique, descriptive name (e.g., `dev_branch`, `staging_branch`, `feature_x_branch`).
 4.  **Implement connection template:** Write a Kriti template that inspects the incoming GraphQL request (e.g., checks for a specific header like `x-hasura-branch-name`) and resolves to the appropriate member name in the Connection set (e.g., `$.connection_set.dev_branch`).
-5.  **Route Requests:** Send GraphQL requests to Hasura with the necessary context (e.g., the `x-hasura-branch-name` header) to route them to the desired Neon branch.
-
-We shall discuss the implementation in detail in the next section.
+5.  **Route requests:** Send GraphQL requests to Hasura with the necessary context (e.g., the `x-hasura-branch-name` header) to route them to the desired Neon branch.
 
 ## Step-by-step implementation
 
 ### Create Neon branches
 
-You can create branches using the [Neon Console](/docs/introduction/branching/#create-a-branch), [API](/docs/guides/branching-neon-api), or [CLI](/docs/guides/branching-neon-cli). For detailed instructions, follow [Neon's Create a branch guide](/docs/manage/branches#create-a-branch) to set up branches for your development and feature environments.
+You can create branches using the [Neon Console](/docs/manage/branches#create-a-branch), [API](/docs/guides/branching-neon-api), or [CLI](/docs/guides/branching-neon-cli). For detailed instructions, follow [Neon's Create a branch guide](/docs/manage/branches#create-a-branch) to set up branches for your development and feature environments.
 
 Copy the connection strings for each branch you create; you will need them later.
 
 ### Configure Hasura data source
 
-If you haven't already, add your Neon database as a data source in Hasura. Follow the step by-step guide on [Connect from Hasura Cloud to Neon](/docs/guides/hasura) to set up the primary connection.
+If you haven't already, add your Neon database as a data source in Hasura. Follow the step-by-step guide in [Connect from Hasura Cloud to Neon](/docs/guides/hasura) to set up the primary connection.
 
 ### Define the connection set in Hasura
 
@@ -97,11 +95,11 @@ Now, add your Neon branches to the connection set for the data source you just c
     - Click `Add Connection`.
 
       <Admonition type="tip">
-      To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL_DEV_BRANCH`) with your connection string as its value.
+      To keep connection strings out of your data source configuration, use environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL_DEV_BRANCH`) with your connection string as its value.
           
           ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
 
-      Then, in the connection modal, select **Connect database via Environment variable** and enter the variable name you created. This approach keeps your connection string secure and simplifies future updates.
+      Then, in the connection modal, select **Connect database via Environment variable** and enter the variable name you created. You can then rotate the connection string by updating the variable.
       </Admonition>
 
 6.  Repeat step 5 for other branches, e.g., `staging_branch`, `feature_x_branch`, etc., using their respective connection strings.
@@ -165,7 +163,7 @@ For more advanced routing logic, or for information on dynamically creating and 
 
 ### Testing the connection template with Hasura Validate
 
-Hasura provides a convenient way to test your connection template directly within the Console. This simulates a GraphQL request based on the context you provide (headers, session variables, etc.).
+You can test your connection template directly in the Hasura Console. Validation simulates a GraphQL request based on the context you provide (headers, session variables, etc.).
 
 1.  You can find the **Validate** button in the **Dynamic Routing** tab of your data source configuration.
     ![Validate Dynamic Routing](/docs/guides/hasura/validate-dynamic-routing.png)
@@ -185,21 +183,21 @@ Hasura provides a convenient way to test your connection template directly withi
       - Click `► Validate`.
       - **Expected Result:** Based on our template's fallback logic, this should show `Routing to: $.default`.
 
-This validation provides a quick and safe way to confirm your routing logic works as expected under different conditions before applying it to live traffic.
+Use validation to confirm your routing logic under different conditions before applying it to live traffic.
 
 ### Update your application code
 
-Now that the connection template is validated, you're ready to use Hasura's dynamic routing with your Neon branches. Send the `x-hasura-branch-name` header along with your GraphQL requests, setting its value to match the target branch identifier (e.g., `dev`, `feature-x`, `staging`). This mechanism provides precise control and can be incorporated into your application code or automated in CI/CD.
+Now that the connection template is validated, you're ready to use Hasura's dynamic routing with your Neon branches. Send the `x-hasura-branch-name` header along with your GraphQL requests, setting its value to match the target branch identifier (e.g., `dev`, `feature-x`, `staging`). You can set this header in your application code or automate it in CI/CD.
 
 ## Read replicas and routing
 
-Neon allows you to create [Read Replicas](/docs/introduction/read-replicas) for your database branches, which are separate compute endpoints designed for handling read-only traffic. Hasura's Dynamic Routing feature lets you route to these replicas using connection templates.
+You can create [read replicas](/docs/introduction/read-replicas) for your Neon branches. A read replica is a separate compute for read-only traffic. Hasura's Dynamic Routing feature lets you route to these replicas using connection templates.
 
 ### Creating read replicas in Neon
 
-First, create the necessary read replicas for your Neon branches by following the [Create and manage Read Replicas guide](/docs/guides/read-replica-guide).
+First, create the necessary read replicas for your Neon branches by following the [Create and manage read replicas guide](/docs/guides/read-replica-guide).
 
-Note that replicas can be added to any branch, including the primary. Once a replica is created, copy its connection string, which you'll need for the next step.
+You can add replicas to any branch, including your default branch. Once a replica is created, copy its connection string, which you'll need for the next step.
 
 ### Configuring read replicas in Hasura
 
@@ -252,7 +250,7 @@ Here's an example of how you might implement this in your Kriti template:
 
 1.  **Mutations:** Always directed to `{{$.primary}}` for write capability.
 2.  **Fresh reads:** If the `no-stale-read: true` header is present (for queries/subscriptions), route to `{{$.primary}}` to bypass potential replication lag on replicas.
-3.  **Standard reads:** For all other queries/subscriptions in the fallback scenario, route to `{{$.default}}`. This directs Hasura to use one of the read replicas configured in the main connection settings. If no replicas are configured there, Hasura falls back gracefully to the primary connection.
+3.  **Standard reads:** For all other queries/subscriptions in the fallback scenario, route to `{{$.default}}`. This directs Hasura to use one of the read replicas configured in the main connection settings. If no replicas are configured there, Hasura falls back to the primary connection.
 4.  **Branch-specific reads:** If a specific branch is targeted via the `x-hasura-branch-name` header, route to that branch connection.
 
 ## Considerations and limitations
@@ -263,12 +261,12 @@ Here's an example of how you might implement this in your Kriti template:
 
 ## Conclusion
 
-Combining Neon's instant database branching with Hasura's dynamic routing gives you a flexible way to manage multiple database environments for development, testing, and previews. By creating isolated Neon branches and using Hasura's connection templates to route requests based on context, you get safer testing without managing multiple full databases and GraphQL instances.
+You now have one Hasura instance routing GraphQL requests to different Neon branches based on a request header, with a fallback to the primary connection and read replicas. To extend this, route by session variables, or automate branch creation and connection set updates in CI/CD.
 
 ## Resources
 
 - [Neon Branching](/docs/introduction/branching)
-- [Neon Read Replica](/docs/introduction/read-replicas)
+- [Neon read replicas](/docs/introduction/read-replicas)
 - [Hasura Dynamic Database Connection Routing](https://hasura.io/docs/2.0/databases/database-config/dynamic-db-connection/)
 - [Hasura Kriti Templating Specification](https://hasura.io/docs/2.0/api-reference/kriti-templating/)
 - [Hasura Read Replicas](https://hasura.io/docs/2.0/databases/database-config/read-replicas/)

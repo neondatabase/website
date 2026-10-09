@@ -11,7 +11,7 @@ summary: >-
   automatic synchronization of max_connections and related Postgres parameters
   between primary and replica computes.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-25T09:40:59.046Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -42,7 +42,7 @@ The Free plan is limited to a maximum of 3 read replica computes per project.
 <TabItem>
 To create a read replica from the Neon Console:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
@@ -116,7 +116,7 @@ You can view read replicas using the Neon Console or [Neon API](/docs/reference/
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
-To view read replicas for a branch, in the Neon Console select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. Read replicas are listed on the **Computes** tab.
+To view read replicas for a branch, in the Neon Console select your branch from the project/branch menu at the top of the sidebar, then select **Postgres database** > **Computes**. Read replicas are listed on the **Computes** tab.
 
 ![View read replicas](/docs/guides/view_read_replica.png)
 </TabItem>
@@ -147,7 +147,7 @@ You can edit a read replica using the Neon Console or [Neon API](/docs/reference
 <TabItem>
 To edit a read replica compute using the Neon Console:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Identify the read replica compute you want to modify, and click **Edit**.
 1. Make the changes to your compute settings, and click **Save**.
@@ -190,7 +190,7 @@ You can delete a read replica using the Neon Console or [Neon API](/docs/referen
 <TabItem>
 To delete a read replica using the Neon Console:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Find the read replica you want to delete.
 1. Click **Edit** &#8594; **Delete**.

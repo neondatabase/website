@@ -2,12 +2,12 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-17T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
-title: Building a Real-Time AI Voice Assistant with ElevenLabs
-subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next.js application with ElevenLabs and Postgres
+updatedOn: '2026-09-24T17:56:34.189Z'
+title: Building a real-time AI voice assistant with ElevenLabs
+subtitle: A step-by-step guide to building your own AI voice assistant in a Next.js application with ElevenLabs and Postgres
 ---
 
-In this guide, you will learn how to build your very own real-time AI voice assistant using ElevenLabs, store each conversation in a Postgres database, and index them for faster retrieval.
+In this guide, you'll build a real-time AI voice assistant using ElevenLabs, store each conversation in a Postgres database, and index the conversations for faster retrieval.
 
 <Admonition type="note" title="Deal alert">
 Take advantage of the [AI Engineer Starter Pack](https://www.aiengineerpack.com) by ElevenLabs to get discounts for the tools used in this guide.
@@ -19,7 +19,7 @@ To follow this guide, you’ll need the following:
 
 - [Node.js 18](https://nodejs.org/en) or later
 - A [Neon](https://console.neon.tech/signup) account
-- A [ElevenLabs](https://elevenlabs.io/) account
+- An [ElevenLabs](https://elevenlabs.io/) account
 - A [Vercel](https://vercel.com) account
 
 ## Create a new Next.js application
@@ -55,15 +55,15 @@ The libraries installed include:
 - `motion`: A library to create animations in React applications.
 - `sonner`: A notification library for React to display toast notifications.
 - `@11labs/react`: A React library to interact with [ElevenLabs API](https://elevenlabs.io/api).
-- `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
+- `@neondatabase/serverless`: The Neon serverless driver, used to connect to and query your Postgres database on Neon.
 
 The development-specific libraries include:
 
-- `tsx`: To execute and rebuild TypeScript efficiently.
+- `tsx`: To execute and rebuild TypeScript files.
 
-## Provision a Serverless Postgres
+## Provision a Postgres database on Neon
 
-To set up a serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+To set up a database, go to the [Neon Console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you'll receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
 
 ```bash shouldWrap
 postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
@@ -73,13 +73,13 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
-## Create an AI Agent with ElevenLabs
+## Create an AI agent with ElevenLabs
 
-To create a customizable agent, go to ElevenLabs' [AI Agents](https://elevenlabs.io/app/conversational-ai) and then click on `Create an AI agent` button.
+To create a customizable agent, go to ElevenLabs' [AI Agents](https://elevenlabs.io/app/conversational-ai) and click the `Create an AI agent` button.
 
 ![](/guides/images/pulse/agent-1.png)
 
-Next, give it a personalized name and select the kind of Agent you would want. For demonstration purposes, let's start with a `Blank template`.
+Next, give it a name and select the kind of agent you want. For this guide, start with a `Blank template`.
 
 ![](/guides/images/pulse/agent-2.png)
 
@@ -93,7 +93,7 @@ Next, go to `Advanced > Client Events` in your Agent settings, and add two event
 
 Finally, go to [API Keys](https://elevenlabs.io/app/settings/api-keys), create an API key and use the value obtained as `XI_API_KEY` environment variable in your application.
 
-## Database Schema Setup
+## Database schema setup
 
 Create a file named `schema.tsx` at the root of your project directory with the following code:
 
@@ -107,10 +107,10 @@ const createMessagesTable = async () => {
   if (!process.env.DATABASE_URL) throw new Error(`DATABASE_URL environment variable not found.`);
   const sql = neon(process.env.DATABASE_URL);
   try {
-    await sql(
+    await sql.query(
       `CREATE TABLE IF NOT EXISTS messages (created_at SERIAL, id TEXT PRIMARY KEY, session_id TEXT, content_type TEXT, content_transcript TEXT, object TEXT, role TEXT, status TEXT, type TEXT);`
     );
-    await sql(
+    await sql.query(
       `CREATE INDEX IF NOT EXISTS idx_session_created_at ON messages (session_id, created_at);`
     );
     console.log('Setup schema successfully.');
@@ -123,7 +123,7 @@ const createMessagesTable = async () => {
 createMessagesTable();
 ```
 
-The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
+The code above defines an asynchronous function `createMessagesTable` that connects to your Neon database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
 
 To run the migrations, execute the following command:
 
@@ -133,11 +133,11 @@ npx tsx schema.tsx
 
 If it runs successfully, you should see `Setup schema successfully.` in the terminal.
 
-## Build Reusable React Components and Hooks
+## Build reusable React components and hooks
 
-### 1. Typing Effect Animation
+### 1. Typing effect animation
 
-To enhance the user experience by simulating real-time interactions, implement a typing effect in the UI to render AI responses incrementally. Create a file named `useTypingEffect.ts` in the `components` directory with the following code:
+To make AI responses feel real-time, implement a typing effect in the UI that renders them incrementally. Create a file named `useTypingEffect.ts` in the `components` directory with the following code:
 
 ```tsx
 // File: components/useTypingEffect.ts
@@ -163,11 +163,11 @@ export const useTypingEffect = (text: string, duration: number = 50, isTypeByLet
 };
 ```
 
-The provided code exports a custom React hook called `useTypingEffect`. This hook simulates a typing effect for a specified text over a given duration, enhancing the user interface by rendering text incrementally.
+The provided code exports a custom React hook called `useTypingEffect`. This hook renders a specified text incrementally over a given duration to simulate typing.
 
-### 2. Conversation Message
+### 2. Conversation message
 
-To render each message in the conversation history, you need to dynamically indicate whether the message is from the User or the AI. Create a file named `Message.tsx` in the `components` directory with the following code:
+To render each message in the conversation history, you need to indicate whether the message is from the user or the AI. Create a file named `Message.tsx` in the `components` directory with the following code:
 
 ```tsx
 // File: components/Message.tsx
@@ -192,7 +192,7 @@ export default function ({
 
 The code above exports a React component that renders a message. It conditionally displays a `Cpu` icon for messages from the AI and a `User` icon for messages from the user, along with the message content.
 
-### 3. Various States During AI Interaction
+### 3. States during AI interaction
 
 Create a file named `TextAnimation.tsx` in the `components` directory with the following code:
 
@@ -315,9 +315,9 @@ export default function AiTalkingAnimation({
 
 The code above exports a React component that creates an interactive UI for the AI voice assistant. It uses the `useTypingEffect` hook to simulate a typing effect for the AI's responses and displays different states of interaction, such as "idle," "listening," and "speaking." The component also includes a clickable circle that toggles between starting and stopping the listening state, providing visual feedback through animations.
 
-## Generate a Signed URL for private conversations with ElevenLabs
+## Generate a signed URL for private conversations with ElevenLabs
 
-To create a secure access between user and AI (powered by ElevenLabs), create a new file named `route.ts` in the `app/api/i` directory with the following code:
+To give the user secure access to the ElevenLabs agent, create a new file named `route.ts` in the `app/api/i` directory with the following code:
 
 ```tsx
 // File: app/api/i/route.ts
@@ -352,9 +352,9 @@ export async function POST(request: Request) {
 }
 ```
 
-The code above defines an API route that generates a signed URL using ElevenLabs API. You will want to use signed URL instead of connecting to a fixed point server so as to allow connection to your personalized, private agents created in ElevenLabs.
+The code above defines an API route that generates a signed URL using ElevenLabs API. Use a signed URL instead of a fixed public endpoint so users can connect to the private agents you created in ElevenLabs.
 
-## Sync Conversations to a Postgres database
+## Sync conversations to a Postgres database
 
 Create a file named `route.ts` in the `app/api/c` directory with the following code:
 
@@ -376,8 +376,8 @@ export async function POST(request: Request) {
   const { id, item } = await request.json();
   if (!id || !item || !process.env.DATABASE_URL) return NextResponse.json({}, { status: 400 });
   const sql = neon(process.env.DATABASE_URL);
-  const rows = await sql('SELECT COUNT(*) from messages WHERE session_id = $1', [id]);
-  await sql(
+  const rows = await sql.query('SELECT COUNT(*) from messages WHERE session_id = $1', [id]);
+  await sql.query(
     'INSERT INTO messages (created_at, id, session_id, content_type, content_transcript, object, role, status, type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT DO NOTHING',
     [
       rows[0].count,
@@ -398,7 +398,7 @@ export async function GET(request: Request) {
   const id = new URL(request.url).searchParams.get('id');
   if (!id || !process.env.DATABASE_URL) return NextResponse.json([]);
   const sql = neon(process.env.DATABASE_URL);
-  const rows = await sql('SELECT * from messages WHERE session_id = $1', [id]);
+  const rows = await sql.query('SELECT * from messages WHERE session_id = $1', [id]);
   return NextResponse.json(rows);
 }
 ```
@@ -409,7 +409,7 @@ The code above defines two endpoint handlers on `/api/c`:
 
 - A `GET` endpoint that retrieves all messages associated with a specific session ID. It extracts the session ID from the request URL and queries the `messages` table, returning the results as a JSON response. If the session ID is not provided, it returns an empty array.
 
-## Create the UI for Starting Conversations and Synchronizing Chat History
+## Create the UI for starting conversations and syncing chat history
 
 Create a file named `page.tsx` in the `app/c/[slug]` directory with the following code:
 
@@ -512,7 +512,7 @@ The code above does the following:
 - Defines a `disconnectConversation` function that disconnects the ongoing conversation with the agent.
 - Creates a `useEffect` handler which on unmount, ends the ongoing conversation with the agent.
 
-Next, import the `TextAnimation` component which displays different state of the conversation, whether AI is listening or speaking (and what if so).
+Next, import the `TextAnimation` component, which displays the state of the conversation: whether the AI is listening or speaking, and what it's saying.
 
 ```tsx ins={4,10-15}
 'use client';
@@ -600,6 +600,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-In this guide, you learned how to build a real-time AI voice assistant using ElevenLabs and Next.js, integrating it with a Postgres database to store and retrieve conversation histories. You explored the process of setting up a serverless database, creating a customizable AI agent, and implementing a user-friendly interface with animations and message handling. By the end, you gained hands-on experience connecting various technologies to create a fully functional AI voice assistant application.
+You built a real-time AI voice assistant with ElevenLabs and Next.js that stores each conversation in Postgres on Neon and shows the transcript on demand.
 
 <NeedHelp />

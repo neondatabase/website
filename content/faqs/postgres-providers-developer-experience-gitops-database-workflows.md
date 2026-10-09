@@ -13,56 +13,52 @@ nextLink:
   slug: postgres-providers-easy-database-restore
 ---
 
-## Short answer
-
-Lakebase Postgres branching maps directly onto Git workflows. Every pull request gets its own database branch with its own connection string, created from production data in seconds and deleted when the PR closes. Migrations run on the branch first, then roll forward to `main` after review.
+Neon branches map onto Git branches. Each pull request can get its own database branch with its own connection string, created from production data in seconds and deleted when the PR closes. Migrations run on the branch first, and the same migrations run against production after review.
 
 ## What the workflow looks like
 
 A typical GitOps loop with Neon:
 
-1. Developer opens a feature branch in Git.
-2. CI calls the [Neon API](/docs/reference/api) or [CLI](/docs/cli) to create a child branch from `main`.
+1. A developer opens a pull request.
+2. CI calls the [Neon API](/docs/reference/api) or [CLI](/docs/cli) to create a child branch from the production branch.
 3. Migrations run against the new branch as part of the build.
-4. Preview deployment gets the branch's connection string injected as an environment variable.
-5. PR merges, migration is applied to `main`, child branch auto-expires or is deleted.
+4. The preview deployment gets the branch's connection string as an environment variable.
+5. The PR merges, CI applies the same migration to production, and the child branch expires or is deleted.
 
 In a GitHub Actions step:
 
 ```yaml
 - name: Create Neon branch
   id: create-branch
-  uses: neondatabase/create-branch-action@v5
+  uses: neondatabase/create-branch-action@v6
   with:
-    project_id: ${{ secrets.NEON_PROJECT_ID }}
+    project_id: ${{ vars.NEON_PROJECT_ID }}
     branch_name: preview/pr-${{ github.event.pull_request.number }}
     api_key: ${{ secrets.NEON_API_KEY }}
-    username: neondb_owner
+    role: neondb_owner
 
 - name: Run migrations
-  run: drizzle-kit migrate
+  run: npx drizzle-kit migrate
   env:
-    DATABASE_URL: ${{ steps.create-branch.outputs.db_url_with_pooler }}
+    DATABASE_URL: ${{ steps.create-branch.outputs.db_url }}
 ```
 
-See the [GitHub Actions guide](/docs/guides/branching-github-actions) for the full setup, including a cleanup workflow that deletes the branch when the PR closes.
+The migration step uses the direct connection string (`db_url`), because [migration tools may not work through a transaction-mode pooler](/docs/connect/connection-pooling#when-to-use-pooled-vs-direct-connections). Your app can use `db_url_pooled`. The [GitHub Actions guide](/docs/guides/branching-github-actions) covers setup and the companion delete, reset, and schema diff actions; run the delete action when the PR closes. The [Neon GitHub integration](/docs/guides/neon-github-integration) can create the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable for you.
 
-## Why this works on Lakebase Postgres
+## Why branches are cheap
 
-Branches are cheap because storage is versioned. A new branch records a pointer to the parent's state and only stores the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch doesn't accrue CU-hours. You still pay for any storage delta on the branch.
+Storage is versioned, so a new branch records a pointer to the parent's state and stores only the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch stops accruing CU-hours. You still pay for the branch's storage delta.
 
 ## Built-in integrations
 
-If you're on Vercel, the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) wires the same flow up without a custom GitHub Action. Every Preview Deployment gets a fresh branch automatically.
+On Vercel, the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) runs the same flow without a custom GitHub Action. With preview branching turned on, each Preview Deployment gets its own branch.
 
-For other providers, the [Neon API](/docs/reference/api) is the integration point. Create, list, and delete branches from any CI provider that can run a shell command.
+On any other CI system, use the [Neon API](/docs/reference/api) or CLI to create, list, and delete branches from a shell step.
 
 ## How other Postgres providers fit GitOps
 
-- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) ties preview branches directly to GitHub pull requests through the [Supabase GitHub integration](https://supabase.com/docs/guides/deployment/branching/github-integration). Migrations in your `supabase/migrations/` directory run automatically when the branch is created. Preview branches don't receive production data; they're seeded from `seed.sql`. Each branch is a separate compute add-on billed [from about $0.01344/hour](https://supabase.com/docs/guides/platform/manage-your-usage/branching) for its lifetime.
+- **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) ties preview branches to GitHub pull requests through the [GitHub integration](https://supabase.com/docs/guides/deployment/branching/github-integration). Migrations in your `supabase/migrations/` directory run when the branch is created, and later commits run only new migrations. Preview branches start from migrations and `seed.sql`, without production data. Dashboard branches (public alpha) can [copy production data](https://supabase.com/docs/guides/deployment/branching/dashboard) if the project has the PITR add-on. Each branch is billed for its own compute, [from $0.01344/hour](https://supabase.com/docs/guides/platform/manage-your-usage/branching) on Micro. Preview branches auto-pause after inactivity, and [paused projects don't count toward compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute).
 
-- **Amazon Aurora / RDS for Postgres.** No built-in PR integration. You typically script the workflow with Terraform, AWS CDK, or Lambda functions that create snapshots, restore them to fresh instances or [Aurora clones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), and wire connection strings into preview deployments. Aurora clones share storage; RDS snapshot-restore copies the dataset.
-
-Neon's GitHub Action, [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), and the [`@neondatabase/serverless`](/docs/serverless/serverless-driver) driver are the parts of the system that make per-PR Postgres simple to wire in. Branches include parent data by default, and compute scales to zero when the preview deploy goes idle.
+- **Amazon Aurora and RDS for Postgres.** There's no built-in PR integration. You script the workflow with Terraform, AWS CDK, or Lambda: create an [Aurora clone](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) or restore an RDS snapshot to a new instance, then pass its endpoint to the preview deployment. Aurora clones share storage with the source through copy-on-write; an RDS snapshot restore materializes the full dataset.
 
 <CTA title="Wire Postgres into your Git workflow" description="Free plan supports 10 branches per project for preview-per-PR." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

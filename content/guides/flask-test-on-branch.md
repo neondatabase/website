@@ -1,59 +1,57 @@
 ---
-title: Testing Flask Applications with Neon's Database Branching
+title: Testing Flask applications with Neon branching
 subtitle: Testing with realistic production data using Flask and Neon branching
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2026-08-27T23:52:24.570Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes tools for automated testing, with [pytest](https://docs.pytest.org/) being a preferred option due to its simplicity and effectiveness.
+[Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes tools for automated testing, and [pytest](https://docs.pytest.org/) is a common choice for writing tests.
 
-Testing with realistic data shows how your application performs under real-world conditions. Neon's database branching lets you test with actual production data without affecting your live database, thus maintaining data integrity and security.
+Testing with realistic data shows how your application performs under real-world conditions. Neon branching lets you test with a copy of your production data without affecting your live database.
 
-## Understanding Flask Testing Approaches
+## Flask testing approaches
 
-In Flask applications, you would commonly use an in-memory SQLite database for testing. This method is favored because it allows for starting with a clean state for each test run by applying all database migrations and seeders. This setup is also great for parallel testing, as tests run quickly and do not interfere with each other.
+Flask applications commonly use an in-memory SQLite database for testing. Each test run starts from a clean state by applying all database migrations and seeders. This setup also works well for parallel testing, because tests run quickly and don't interfere with each other.
 
-However, testing with SQLite can differ significantly from your production environment, which might use a different database system, such as PostgreSQL. These differences can affect your application's behavior and lead to unexpected issues in production. This is one of the reasons why testing with real data can provide a more accurate finding of how your application will perform in its live environment.
+But SQLite can behave differently from your production database, such as Postgres. Those differences can change your application's behavior and cause unexpected issues in production. Testing against a copy of your real database gives a more accurate picture of how your application will perform.
 
-## Neon Branching
+## Neon branching
 
-Neon offers a database [branching feature](/docs/introduction/branching) that allows you to create isolated branches of your database for development, testing, and more.
+Neon [branching](/docs/introduction/branching) lets you create isolated branches of your database for development, testing, and more.
 
 A branch in Neon is a copy-on-write clone of your data that can be made from the current database state or any past state. This means you can have an exact copy of your production data at a specific point in time to use for testing.
 
-Neon's branching is particularly useful in continuous integration and delivery pipelines, helping you be more productive by reducing the setup time needed for test environments.
+Branching is useful in continuous integration and delivery pipelines because it cuts the setup time for test environments. You get realistic test data without maintaining multiple separate databases. For more information, see [Branching](/docs/introduction/branching).
 
-This allows you to test with realistic data scenarios without the overhead of maintaining multiple separate databases. For more information on how to use Neon branching, refer to the [Neon documentation](/docs/introduction/branching).
+## Setting up your testing environment
 
-## Setting Up Your Testing Environment
-
-Now that we've covered the benefits of testing Flask applications with Neon's database branching, let's walk through setting up a Flask project with a PostgreSQL database and writing tests using pytest.
+Next, you'll set up a Flask project with a Postgres database and write tests using pytest.
 
 ### Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - Python 3.8 or higher installed on your machine
 - A [Neon account](https://console.neon.tech/signup) with a project created
 - Basic familiarity with Flask and SQLAlchemy
 
-### Installation and Configuration
+### Installation and configuration
 
 To set up your testing environment with Neon and Flask, follow these steps:
 
-1. Configure Database Connection:
+1. Configure the database connection:
 
-   After creating your Neon account and a new database branch, obtain the connection details from the Neon dashboard. Create a `.env` file with the Neon database connection parameters:
+   After creating your Neon project, click **Connect** on your project dashboard to get the connection details. Create a `.env` file with the Neon database connection parameters:
 
    ```env
-   DATABASE_URL=postgresql://user:password@your-neon-hostname.neon.tech:5432/dbname
+   DATABASE_URL=postgresql://user:password@your-neon-hostname.neon.tech:5432/dbname?sslmode=require&channel_binding=require
    ```
 
    Replace `user`, `password`, `your-neon-hostname`, and `dbname` with your Neon database details.
 
-2. Install Required Packages:
+2. Install required packages:
 
    Install Flask, SQLAlchemy, pytest, and other necessary packages:
 
@@ -61,17 +59,17 @@ To set up your testing environment with Neon and Flask, follow these steps:
    pip install flask flask-sqlalchemy psycopg2-binary python-dotenv pytest
    ```
 
-   Freeze the requirements for easy replication:
+   Freeze the requirements so others can reproduce your environment:
 
    ```bash
    pip freeze > requirements.txt
    ```
 
-### Creating a Migration and Model
+### Creating a migration and model
 
-As we briefly mentioned earlier, you can use SQLAlchemy for database operations in Flask applications. Along with Flask-Migrate, you can manage database migrations effectively.
+You can use SQLAlchemy for database operations in Flask applications, and Flask-Migrate to manage database migrations.
 
-1. Set Up Flask-Migrate:
+1. Set up Flask-Migrate:
 
    Install and initialize Flask-Migrate:
 
@@ -89,7 +87,7 @@ As we briefly mentioned earlier, you can use SQLAlchemy for database operations 
 
    This setup allows you to manage database migrations using Flask-Migrate.
 
-2. Create a Model:
+2. Create a model:
 
    In `models.py`, define a `Question` model:
 
@@ -104,7 +102,7 @@ As we briefly mentioned earlier, you can use SQLAlchemy for database operations 
        description = db.Column(db.Text, nullable=False)
    ```
 
-3. Generate and Run Migrations:
+3. Generate and run migrations:
 
    Create and apply the initial migration:
 
@@ -114,7 +112,7 @@ As we briefly mentioned earlier, you can use SQLAlchemy for database operations 
    flask db upgrade
    ```
 
-### Creating a Questions Route
+### Creating a questions route
 
 In your main Flask application file, add a route to handle fetching questions from the database:
 
@@ -144,7 +142,7 @@ flask run
 
 If everything is set up correctly, you should be able to access the `/questions` route and see the questions returned as JSON.
 
-### Writing a pytest Test for the Questions Route
+### Writing a pytest test for the questions route
 
 The standard convention for naming test files is to prefix them with `test_`. This allows pytest to automatically discover and run the tests.
 
@@ -178,11 +176,11 @@ def test_get_questions(client):
     assert data[0]['title'] == 'Test Question'
 ```
 
-Here we define a test fixture to set up and tear down the test environment. The `test_get_questions` function tests the `/questions` route by adding a test question to the database, making a request to the route, and asserting the response. This simple test verifies that the route returns the expected data.
+Here we define a test fixture to set up and tear down the test environment. The `test_get_questions` function tests the `/questions` route by adding a test question to the database, making a request to the route, and asserting the response. The test checks that the route returns the expected data.
 
-### Running the Tests
+### Running the tests
 
-With the simple test in place, you can now run the tests using pytest:
+With the test in place, run it using pytest:
 
 ```bash
 pytest
@@ -190,41 +188,39 @@ pytest
 
 This setup provides a foundation for testing Flask applications with Lakebase Postgres, which you can expand for more complex applications and larger test suites.
 
-## Using Neon Branching with Flask
+## Using Neon branching with Flask
 
-You should never run tests against your production database, as it can lead to data corruption and security risks. This is where Neon branching comes in handy.
+Don't run tests against your production database. The fixture above drops all tables after each test, and tests can corrupt data or create security risks.
 
-Neon's branching feature enables you to create isolated database environments, which is ideal for testing changes without impacting the production database.
+A Neon branch gives you an isolated copy of your production database to test against instead. This is most useful for schema changes and data migrations, where you want to validate your application's behavior on real data.
 
-This can be particularly useful when testing complex features or changes that require realistic data scenarios. Especially when there are schema changes or data migrations involved, Neon branching provides a safe and efficient way to validate your application's behavior on a copy of your production data.
+### Creating a Neon branch
 
-### Creating a Neon Branch
+1. **Log in to the Neon Console:**
+   - Log in at [console.neon.tech](https://console.neon.tech).
 
-1. **Log In to Neon Dashboard:**
-   - Access your Neon dashboard by logging in at [Neon's official website](https://neon.tech).
+2. **Select your project:**
+   - Select the project you use for your production environment.
 
-2. **Select Your Database:**
-   - Navigate to the database project that you are using for your production environment.
+3. **Create a new branch:**
+   - Select **Branches** under **Project**.
+   - Click **New branch**.
+   - Name your new branch (for example, `testing-branch`) and choose whether to include current data or data from a past point in time. This creates a copy-on-write clone of your database.
+   - The branch is ready within a few seconds.
 
-3. **Create a New Branch:**
-   - Click on "Branches" in the sidebar menu.
-   - Click on "Create Branch."
-   - Name your new branch (e.g., "testing-branch") and specify if it should be created from the current state of the database or from a specific point in time. This creates a copy-on-write clone of your database.
-   - Wait for the branch to be fully provisioned, which usually takes just a few seconds.
-
-### Integrating Neon Branching with Flask Testing
+### Integrating Neon branching with Flask testing
 
 Go back to your Flask project and integrate the Neon branch into your testing setup:
 
-1. **Update Environment Configuration:**
-   - Once your branch is created, obtain the get details (hostname, database name, username, and password) from the Neon dashboard.
+1. **Update environment configuration:**
+   - Once your branch is created, get its connection details (hostname, database name, username, and password) by clicking **Connect** and selecting the branch.
    - Create a new environment file for testing, such as `.env.test`, and configure it to use the Neon testing branch:
 
      ```env
-     DATABASE_URL=postgresql://user:password@your-neon-testing-hostname.neon.tech:5432/dbname
+     DATABASE_URL=postgresql://user:password@your-neon-testing-hostname.neon.tech:5432/dbname?sslmode=require&channel_binding=require
      ```
 
-2. **Update Test Configuration:**
+2. **Update test configuration:**
    - Modify your `test_app.py` file to use the testing environment:
 
      ```python
@@ -238,30 +234,30 @@ Go back to your Flask project and integrate the Neon branch into your testing se
      app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
      ```
 
-3. **Run Tests:**
+3. **Run tests:**
    - With the testing branch configured, you can run your tests against the isolated database environment:
 
      ```bash
      pytest
      ```
 
-   - Examine the output from pytest to ensure your application behaves as expected against the testing branch. This approach allows you to test changes in a controlled environment that mirrors your production setup instead of using an in-memory SQLite database.
+   - Examine the output from pytest to ensure your application behaves as expected against the testing branch. You're testing against a copy of your production setup instead of an in-memory SQLite database.
 
-In addition to running tests locally, you can automate the testing process by integrating Neon branching with your CI/CD pipeline. Neon provides a GitHub Actions workflow that simplifies the process of creating and managing database branches for testing. For more information, refer to the [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions).
+In addition to running tests locally, you can automate the testing process by integrating Neon branching with your CI/CD pipeline. Neon provides GitHub Actions for creating and managing database branches in CI. For more information, see the [Neon branching GitHub Actions guide](/docs/guides/branching-github-actions).
 
-## Managing Neon Branches with `neon` CLI
+## Managing Neon branches with the `neon` CLI
 
-With the `neon` CLI tool, managing your Neon database branches becomes more efficient and straightforward. You can create, list, obtain connection strings, and delete branches using simple commands.
+With the `neon` CLI, you can create and list branches, get connection strings, and delete branches from your terminal.
 
 ### Installing `neon`
 
 Before you can start using `neon`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/cli/install) to set up `neon` on your system.
 
-### Using `neon` to Manage Branches
+### Using `neon` to manage branches
 
-Once `neon` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
+Once `neon` is installed, here are the basic commands for managing branches:
 
-#### 1. [Creating a Branch](/docs/cli/branches#create)
+#### 1. [Creating a branch](/docs/cli/branches#create)
 
 To create a new branch, use the `neon branches create` command:
 
@@ -271,7 +267,7 @@ neon branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BR
 
 Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch. `--no-secrets` (Neon CLI 4.9.0+) keeps the connection string out of CI logs; you fetch it next with `neon connection-string`.
 
-#### 2. [Listing Branches](/docs/cli/branches#list)
+#### 2. [Listing branches](/docs/cli/branches#list)
 
 To list all branches in your Neon project, use the `neon branches list` command:
 
@@ -281,17 +277,17 @@ neon branches list --project-id PROJECT_ID
 
 Replace `PROJECT_ID` with your Neon project ID. This command will display a list of all branches along with their IDs, names, and other relevant information.
 
-#### 3. [Obtaining Connection String](/docs/cli/connection-string)
+#### 3. [Getting a connection string](/docs/cli/connection-string)
 
-Once you've created a branch, you'll need to obtain the connection string to configure your Laravel application. Use the `neon connection-string` command:
+Once you've created a branch, you'll need its connection string to configure your Flask application. Use the `neon connection-string` command:
 
 ```bash
 neon connection-string BRANCH_ID
 ```
 
-Replace `BRANCH_ID` with the ID of the branch you want to connect to. This command will output the connection string that you can use to configure your Laravel `.env` file.
+Replace `BRANCH_ID` with the ID of the branch you want to connect to. This command will output the connection string that you can use in your `.env.test` file.
 
-#### 4. [Deleting a Branch](/docs/cli/branches#delete)
+#### 4. [Deleting a branch](/docs/cli/branches#delete)
 
 After you've finished testing with a branch, you can delete it using the `neon branches delete` command:
 
@@ -299,21 +295,17 @@ After you've finished testing with a branch, you can delete it using the `neon b
 neon branches delete BRANCH_ID
 ```
 
-Replace `BRANCH_ID` with the ID of the branch you want to delete. This command will remove the branch from your Neon project, ensuring that resources are not left unused.
+Replace `BRANCH_ID` with the ID of the branch you want to delete. This command removes the branch from your Neon project so it doesn't keep using storage.
 
 ## Conclusion
 
-Testing Flask applications with Neon's database branching offers a solution that lets you test changes with realistic production data without affecting your live database.
+You set up a Flask app with pytest and ran its tests against a Neon branch, a copy of your production data that's isolated from your live database. As a next step, automate branch creation and cleanup in CI with the [Neon branching GitHub Actions guide](/docs/guides/branching-github-actions).
 
-By using realistic production data in a controlled testing environment, you can confidently validate your changes without risking your live application's integrity.
+## Additional resources
 
-Neon's branching feature provides isolation, efficiency, flexibility, and simplicity, making it a useful tool for testing.
-
-## Additional Resources
-
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [pytest Documentation](https://docs.pytest.org/)
-- [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
-- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions)
+- [Flask documentation](https://flask.palletsprojects.com/)
+- [pytest documentation](https://docs.pytest.org/)
+- [SQLAlchemy documentation](https://docs.sqlalchemy.org/)
+- [Neon branching GitHub Actions guide](/docs/guides/branching-github-actions)
 
 <NeedHelp />

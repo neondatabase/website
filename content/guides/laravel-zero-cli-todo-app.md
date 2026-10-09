@@ -1,19 +1,19 @@
 ---
-title: Building a Todo CLI App with Laravel Zero and Lakebase Postgres
-subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Lakebase Postgres for efficient task management.
+title: Build a Todo CLI app with Laravel Zero and Lakebase Postgres
+subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Lakebase Postgres to manage tasks.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 [Laravel Zero](https://laravel-zero.com/) is a micro-framework that provides a starting point for your console application.
 
-Combined with Neon's serverless Postgres database, you can create CLI tools with persistent storage.
+Paired with a Lakebase Postgres database on Neon, it gives your CLI tools persistent storage.
 
-In this guide, we'll build a Todo CLI app that allows users to manage their tasks efficiently from the command line.
+In this guide, we'll build a Todo CLI app for managing tasks from the command line.
 
-By the end of this tutorial, you'll have a fully functional Todo CLI app where users can add, list, update, and delete tasks. We'll also implement task prioritization and due dates to enhance the app's functionality.
+By the end of this tutorial, you'll have a Todo CLI app where users can add, list, update, and delete tasks. We'll also add task prioritization and due dates.
 
 ## Prerequisites
 
@@ -24,11 +24,11 @@ Before we start, make sure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of PHP and Laravel
 
-## Setting up the Project
+## Set up the project
 
 Let's start by creating a new Laravel Zero project and setting up the necessary components.
 
-### Creating a New Laravel Zero Project
+### Create a new Laravel Zero project
 
 Open your terminal and run the following command to create a new Laravel Zero project:
 
@@ -53,9 +53,9 @@ php todo inspire
 
 This command should display an inspirational quote from Laravel as a confirmation that the application is set up correctly.
 
-### Installing Required Add-Ons
+### Install required add-ons
 
-Out of the box Laravel Zero provides a basic structure for CLI applications. Laravel Zero offers a variety of add-ons to extend the functionality of your CLI app which includes database support, testing, logging, file system, scheduler, and more.
+Out of the box, Laravel Zero provides a basic structure for CLI applications. Add-ons extend it with database support, testing, logging, file system, scheduler, and more.
 
 To install the database package, run:
 
@@ -71,9 +71,9 @@ We can also install the `fakerphp/faker` package to generate sample data for tes
 composer require fakerphp/faker --dev
 ```
 
-### Configuring the Database
+### Configure the database
 
-The `config/database.php` file will include the database configuration for your application looking like this:
+The `config/database.php` file holds the database configuration for your application. Add a `neon` connection like this:
 
 ```php
 'connections' => [
@@ -96,7 +96,7 @@ The `config/database.php` file will include the database configuration for your 
 ],
 ```
 
-Rather than hardcoding the database credentials in the configuration file, we can use environment variables to store sensitive information securely. Create a `.env` file in the root of your project and add your Neon database credentials:
+Rather than hardcoding the database credentials in the configuration file, store them in environment variables. Create a `.env` file in the root of your project and add your Neon database credentials:
 
 ```env
 DB_CONNECTION=neon
@@ -110,11 +110,11 @@ DB_PASSWORD=your-password
 
 Make sure to replace the placeholders with your actual Neon database details.
 
-## Creating the Todo App Structure
+## Create the app structure
 
 Now that we have our basic setup, let's create the structure for our Todo CLI app, including models, migrations, and commands.
 
-### Creating the Task Model and Migration
+### Create the Task model and migration
 
 Just like a standard Laravel application, we'll create a `Task` model to represent the tasks in our Todo app.
 
@@ -168,11 +168,11 @@ php todo migrate
 
 This command will create the `tasks` table in your Neon database.
 
-### Creating Commands
+### Create commands
 
 Laravel Zero uses commands to define the CLI functionality. Let's create commands for adding, listing, updating, and deleting tasks.
 
-#### Add Task Command
+#### Add task command
 
 Create a new command to add tasks:
 
@@ -180,7 +180,7 @@ Create a new command to add tasks:
 php todo make:command AddTaskCommand
 ```
 
-Update the `app/Commands/AddTaskCommand.php` the file to define the command signature and functionality:
+Update the `app/Commands/AddTaskCommand.php` file to define the command signature and functionality:
 
 ```php
 <?php
@@ -210,7 +210,7 @@ class AddTaskCommand extends Command
 }
 ```
 
-This command allows users to add a new task with a title, description, priority, and due date.
+This command lets users add a new task with a title, description, priority, and due date.
 
 Rundown of the command signature:
 
@@ -229,7 +229,7 @@ php todo task:add "Complete Laravel Zero guide" --description="Write a guide on 
 
 You should see a success message with the ID of the newly created task.
 
-#### List Tasks Command
+#### List tasks command
 
 Next, let's create a command to list tasks so we can view all tasks or filter them by status or priority:
 
@@ -311,9 +311,9 @@ To filter tasks by status or priority, you can use the `--status` and `--priorit
 php todo task:list --status=pending
 ```
 
-#### Update Task Command
+#### Update task command
 
-Now that we have the ability to add and list tasks, let's create a command to update tasks:
+Now that we can add and list tasks, let's create a command to update tasks:
 
 ```bash
 php todo make:command UpdateTaskCommand
@@ -410,9 +410,9 @@ Now you should see the updated status of the task:
 
 Try to also update other fields like the title, description, priority, or due date.
 
-#### Delete Task Command
+#### Delete task command
 
-Finally to complete the basic CRUD operations, let's create a command to delete tasks:
+Finally, to complete the basic CRUD operations, let's create a command to delete tasks:
 
 ```bash
 php todo make:command DeleteTaskCommand
@@ -469,11 +469,11 @@ php todo task:delete 2
 
 This will display a `Task not found!` error message.
 
-## Implementing Additional Features
+## Add more features
 
-To enhance our Todo CLI app, let's implement some additional features like task prioritization and due date reminders.
+Next, let's add task prioritization and due date reminders.
 
-### Task Prioritization
+### Task prioritization
 
 We've already included a priority field in our tasks table. Let's update the `ListTasksCommand` to sort tasks by priority:
 
@@ -506,7 +506,7 @@ public function handle()
 
 This modification sorts the tasks by priority, with high priority tasks appearing first.
 
-### Due Date Reminders
+### Due date reminders
 
 Let's create a new command to show tasks that are due soon:
 
@@ -572,9 +572,9 @@ To show tasks due within the next 14 days, run:
 php todo task:due 14
 ```
 
-## Testing the Todo CLI App
+## Test the app
 
-Now that we have implemented our Todo CLI app, let's try the complete workflow to ensure everything works as expected.
+Now let's run through the complete workflow to check that everything works.
 
 1. Add a task:
 
@@ -606,15 +606,15 @@ php todo task:due 14
 php todo task:delete 1
 ```
 
-## Building the Application
+## Build the application
 
-Rather than having to run the `php todo` command each time, Laravel Zero allows you to build your application into a single executable file. To do this, run:
+Rather than running the `php todo` command each time, you can have Laravel Zero build your application into a single executable file. To do this, run:
 
 ```bash
 php todo app:build
 ```
 
-This command will generate a standalone executable in the `builds` directory, which you can distribute and run on other systems without requiring PHP or Composer to be installed.
+This command generates a PHAR executable in the `builds` directory. You can distribute it and run it on any system with PHP installed, without Composer or the project source.
 
 You will be prompted to choose the version of the application you want to build. Select the version that best suits your needs.
 
@@ -628,9 +628,7 @@ To handle your database environment variables, you can create a `.env` file in t
 
 ## Conclusion
 
-In this tutorial, we've built a fully functional Todo CLI app using Laravel Zero and Lakebase Postgres. We've implemented features such as adding, listing, updating, and deleting tasks, as well as task prioritization and due date reminders.
-
-This implementation provides a solid foundation for a CLI-based task management system, but there are always ways to improve and expand its functionality:
+You've built a Todo CLI app with Laravel Zero that stores tasks in Lakebase Postgres, with prioritization and due date reminders. From here, you could:
 
 - Implement task categories or tags
 - Add support for recurring tasks
@@ -638,9 +636,7 @@ This implementation provides a solid foundation for a CLI-based task management 
 - Add user authentication for multi-user support
 - Implement task dependencies (subtasks)
 
-By combining Laravel Zero and Lakebase Postgres, you can quickly create CLI applications with persistent storage.
-
-## Additional Resources
+## Additional resources
 
 - [Laravel Zero Documentation](https://laravel-zero.com/docs/introduction)
 - [Illuminate Database Documentation](https://laravel.com/docs/database)

@@ -9,7 +9,7 @@ summary: >-
   names are capped at 63 bytes; commands require the Neon CLI and either
   browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 redirectFrom:
   - /docs/reference/cli-roles
   - /docs/cli/role
@@ -34,12 +34,12 @@ neon roles list
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────────┐
-│ Name   │ Created At           │
-├────────┼──────────────────────┤
-│ daniel │ 2023-06-19T18:27:19Z │
-└────────┴──────────────────────┘
+Roles on main
+Name          Created At
+neondb_owner  2026-06-19T18:27:19Z
 ```
+
+The table is titled with the branch the roles belong to, so you can tell at a glance which branch you're looking at.
 
 List roles with the `--output` format set to `json`:
 
@@ -53,11 +53,11 @@ neon roles list --output json
 ```json
 [
   {
-    "branch_id": "br-odd-frog-703504",
-    "name": "daniel",
+    "branch_id": "br-odd-frog-123456",
+    "name": "neondb_owner",
     "protected": false,
-    "created_at": "2023-06-28T10:17:28Z",
-    "updated_at": "2023-06-28T10:17:28Z"
+    "created_at": "2026-06-28T10:17:28Z",
+    "updated_at": "2026-06-28T10:17:28Z"
   }
 ]
 ```
@@ -77,12 +77,13 @@ neon roles create --name sally
 ```
 
 ```text filename="Output"
-┌───────┬──────────────────────┐
-│ Name  │ Created At           │
-├───────┼──────────────────────┤
-│ sally │ 2023-06-20T00:43:17Z │
-└───────┴──────────────────────┘
+Role created on main
+Name        sally
+Password    npg_aBcDeFgH1234
+Created At  2026-06-20T00:43:17Z
 ```
+
+The create output includes the password Neon generated for the new role. Neon returns it only once, so copy it now. A `--no-login` role has no password, so no `Password` row appears.
 
 ## neon roles delete (#delete)
 
@@ -97,9 +98,7 @@ neon roles delete sally
 ```
 
 ```text filename="Output"
-┌───────┬──────────────────────┐
-│ Name  │ Created At           │
-├───────┼──────────────────────┤
-│ sally │ 2023-06-20T00:43:17Z │
-└───────┴──────────────────────┘
+Role deleted from main
+Name        sally
+Created At  2026-06-20T00:43:17Z
 ```

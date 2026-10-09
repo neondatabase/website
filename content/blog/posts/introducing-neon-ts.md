@@ -11,7 +11,7 @@ excerpt: >-
   type-safe environment variables and program your branch settings, all in
   TypeScript. And you can try it today.
 date: "2026-06-15T12:00:00"
-updatedOn: "2026-06-15T12:00:00"
+updatedOn: "2026-09-22T12:00:00"
 category: product
 categories:
   - product
@@ -41,7 +41,7 @@ As Neon turns into a platform with backend primitives for apps and agents, inclu
 
 Using the Neon MCP and CLI you can already create projects and branches and pull the associated database connection string into your local `.env` file. That's a pretty good developer (and agent) experience on its own. In fact, our open REST API exposes enough endpoints to [rebuild the Neon Console from scratch](https://neon.com/blog/slop-fork-neon)!
 
-But as you add more Neon services to a project, managing them one CLI command at a time with `neonctl bucket list` and friends stops scaling. Your dev workflow needs a higher-order primitive that sits above those per-primitive commands. This is where infrastructure as code comes in.
+But as you add more Neon services to a project, managing them one CLI command at a time with `neon bucket list` and friends stops scaling. Your dev workflow needs a higher-order primitive that sits above those per-primitive commands. This is where infrastructure as code comes in.
 
 IaC has always been a great idea, just a bit cumbersome to manage in practice. As Dax [put it on X](https://x.com/thdxr/status/2064114820295618808):
 
@@ -54,7 +54,7 @@ We started building it because Neon Functions needs a config file for declaring 
 Install the Neon CLI globally:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 ```
 
 Add the config package to your project:
@@ -66,7 +66,7 @@ npm i @neondatabase/config
 Link your project root to a Neon project:
 
 ```bash
-neonctl link
+neon link
 ```
 
 And create a `neon.ts` file:
@@ -80,7 +80,7 @@ export default defineConfig({});
 
 So what does it do? There are three main use cases:
 
-- **Declare your Neon services** in your `neon.ts` and run `neonctl config` commands to provision them.
+- **Declare your Neon services** in your `neon.ts` and run `neon config` commands to provision them.
 - **Type-safe environment variables** for your Neon services (`DATABASE_URL`, the Neon Auth URL and more).
 - **Branch configuration**: declare the settings new branches should get (TTL, autoscaling limits, scale to zero) with your own TypeScript logic.
 
@@ -98,10 +98,10 @@ export default defineConfig({
 });
 ```
 
-Then `neonctl config plan` shows you what would change and `neonctl config apply` provisions it:
+Then `neon config plan` shows you what would change and `neon config apply` provisions it:
 
 ```bash
-% neonctl config plan
+% neon config plan
 Planned changes
 ┌────────┬─────────┬────────────┐
 │ Action │ Kind    │ Identifier │
@@ -113,7 +113,7 @@ Planned changes
 
 Utilized services: Postgres, Neon Auth, Data API
 
-% neonctl config apply
+% neon config apply
 Applied changes
 ┌────────┬─────────┬────────────┐
 │ Action │ Kind    │ Identifier │
@@ -148,17 +148,17 @@ These preview primitives are rolling out gradually, so [sign up for the Neon Pla
 
 ### The neon.ts CLI commands
 
-`neonctl deploy` is shorthand for `neonctl config apply` when you just want to push your changes:
+`neon deploy` is shorthand for `neon config apply` when you just want to push your changes:
 
 ```bash
-neonctl deploy
+neon deploy
 ```
 
-`neonctl link` and `neonctl checkout` set up the branch you work against - link your project root to a Neon project or switch to (and create) a branch:
+`neon link` and `neon checkout` set up the branch you work against - link your project root to a Neon project or switch to (and create) a branch:
 
 ```bash
-neonctl link               # link your project root to a Neon project
-neonctl checkout my-branch # switch to (or create) a branch
+neon link               # link your project root to a Neon project
+neon checkout my-branch # switch to (or create) a branch
 ```
 
 We shipped `link` and `checkout` recently as part of our [branch-first dev loop](https://neon.com/blog/branch-first-dev-loop); that post walks through the full flow.
@@ -166,11 +166,11 @@ We shipped `link` and `checkout` recently as part of our [branch-first dev loop]
 And two more for inspecting state:
 
 ```bash
-neonctl config status   # print the branch's live config to the CLI
-neonctl config plan     # dry run of apply
+neon config status   # print the branch's live config to the CLI
+neon config plan     # dry run of apply
 ```
 
-Anytime you provision or switch branches (`neonctl config apply` / `neonctl deploy`, `neonctl link` and `neonctl checkout`), Neon pulls that branch's environment variables into your local `.env.local`, so your env always matches the branch you're working against.
+Anytime you provision or switch branches (`neon config apply` / `neon deploy`, `neon link` and `neon checkout`), Neon pulls that branch's environment variables into your local `.env.local`, so your env always matches the branch you're working against.
 
 Which brings us to type-safe env management and the new `@neondatabase/env` package, built on top of the config.
 
@@ -247,13 +247,13 @@ Here's what this does. The `branch` function runs whenever Neon evaluates a bran
 
 In this example, existing branches are left alone (`branch.exists` is `true`, so we return an empty object). New branches whose name starts with `dev` get a 7-day TTL so they clean themselves up, plus a cheap compute profile: autoscaling from 0.25 CU (scale to zero) up to 1 CU, suspending after 5 minutes of inactivity. Every other branch falls through to the defaults.
 
-Right now, branch policies apply when you create a branch with `neonctl checkout`:
+Right now, branch policies apply when you create a branch with `neon checkout`:
 
 ```bash
-neonctl checkout dev-add-auth
+neon checkout dev-add-auth
 ```
 
-This creates a new branch named `dev-add-auth` and, if you have a `neon.ts`, runs your branch policy as part of the checkout, so the branch comes up with these settings and services already in place, no extra step. Checking out an *existing* branch never reconciles it; for those you apply config changes explicitly with `neonctl config apply` (or `neonctl config plan` for a dry run first).
+This creates a new branch named `dev-add-auth` and, if you have a `neon.ts`, runs your branch policy as part of the checkout, so the branch comes up with these settings and services already in place, no extra step. Checking out an *existing* branch never reconciles it; for those you apply config changes explicitly with `neon config apply` (or `neon config plan` for a dry run first).
 
 ## A bit of TypeScript magic
 
@@ -289,6 +289,6 @@ Here's the part I'm proud of. The default way TypeScript communicates "these two
 
 `neon.ts` is the config layer for Neon as a platform. Declare your services and provision them with `config apply`, get type-safe environment variables with `parseEnv` and program your branch settings in plain TypeScript. It composes with the [branch-first dev loop](https://neon.com/blog/branch-first-dev-loop), so the same `link` and `checkout` commands that set up a branch (pulling its env for you) also keep it in sync with your config.
 
-This is just the start. More primitives (functions, buckets, the AI gateway) are landing under `preview` soon. To try `neon.ts` today, install `neonctl` and `@neondatabase/config`, run `neonctl link` and drop a `defineConfig({})` into a `neon.ts` file. If there's something you wish it did, drop into the [Neon Discord](https://neon.com/discord) and tell us.
+This is just the start. More primitives (functions, buckets, the AI gateway) are landing under `preview` soon. To try `neon.ts` today, install `neon` and `@neondatabase/config`, run `neon link` and drop a `defineConfig({})` into a `neon.ts` file. If there's something you wish it did, drop into the [Neon Discord](https://neon.com/discord) and tell us.
 
 Happy coding!

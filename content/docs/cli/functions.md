@@ -34,12 +34,13 @@ neon functions deploy hello --src functions/hello.ts
 
 ```text filename="Output"
 INFO: Function deployment triggered for function hello.
-┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
-│ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
-├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
-│ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
-└────┴───────────┴──────────┴────────────┴─────────────────────────────┘
-INFO: Function deployment hello/1 completed.
+Function hello
+URL            https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
+Deployment Id  1
+Status         completed
+Runtime        nodejs24
+Memory         2048 MiB
+Created At     2026-06-12T00:14:58.044690Z
 ```
 
 Deploy with environment variables and wait for the build:
@@ -61,11 +62,8 @@ neon functions list
 ```
 
 ```text filename="Output"
-┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
-│ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
-├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
-│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/ │ 2026-06-12T00:14:57.942988Z │
-└───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
+Slug   Name   Status     URL                                                                         Created At
+hello  hello  completed  https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/  2026-06-12T00:14:57.942988Z
 ```
 
 List with full deployment details for scripts and agents:
@@ -118,18 +116,18 @@ neon functions get hello
 ```
 
 ```text filename="Output"
-function
-┌───────┬───────┬─────────────────────────────────────────────────────────────────────────────┬─────────────────────────────┐
-│ Slug  │ Name  │ Invocation Url                                                              │ Created At                  │
-├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
-│ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/ │ 2026-06-12T00:14:57.942988Z │
-└───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
-deployment (current, active)
-┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
-│ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
-├────┼───────────┼──────────┼────────────┼─────────────────────────────┤
-│ 1  │ completed │ nodejs24 │ 2048       │ 2026-06-12T00:14:58.044690Z │
-└────┴───────────┴──────────┴────────────┴─────────────────────────────┘
+Function
+Slug        hello
+Name        hello
+URL         https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
+Created At  2026-06-12T00:14:57.942988Z
+
+Deployment (current, active)
+Deployment Id  1
+Status         completed
+Runtime        nodejs24
+Memory         2048 MiB
+Created At     2026-06-12T00:14:58.044690Z
 ```
 
 ## neon functions delete (#delete)

@@ -17,7 +17,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-backend-is-ga/cover.jpg
   alt: 'The Neon backend is GA'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'The Neon backend is GA: a complete set of primitives so agents can build - Neon'
   description: We started with Postgres, now we expand to the backend

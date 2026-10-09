@@ -1,10 +1,10 @@
 ---
 title: 'Production RAG in Postgres: a blueprint for coding agents'
-subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and session-aware context on Neon Postgres with copy-paste SQL and TypeScript patterns.
+subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and session-aware context on Lakebase Postgres on Neon with copy-paste SQL and TypeScript patterns.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-08-25T00:00:00.000Z'
-updatedOn: '2026-08-25T00:00:00.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows:
@@ -38,7 +38,7 @@ Limit to 5 pages. Make sure to use relevant python libraries like langchain if r
 
 ## Demo
 
-The [agent prompt](#agent-prompt) above was used to generate a full reference app: hybrid retrieval, session-aware chat, live doc ingestion, and eval. The seed script fetches five pages from [Neon documentation](https://neon.com/docs/introduction) (introduction, Postgres overview, pgvector, full-backend quickstart, and the Cursor MCP guide), chunks them with LangChain, embeds with OpenAI, and upserts into Neon Postgres.
+The [agent prompt](#agent-prompt) above was used to generate a full reference app: hybrid retrieval, session-aware chat, live doc ingestion, and eval. The seed script fetches five pages from [Neon documentation](https://neon.com/docs/introduction) (introduction, Postgres overview, pgvector, full-backend quickstart, and the Cursor MCP guide), chunks them with LangChain, embeds with OpenAI, and upserts the chunks into Postgres on Neon.
 
 <DetailIconCards>
 
@@ -66,7 +66,7 @@ If you leave out one of these layers, your model has to compensate. This leads t
 
 ![Entity diagram showing rag_documents one-to-many rag_chunks, and chat_sessions one-to-many chat_messages, with the chunk table holding tsvector and vector columns](/guides/images/hybrid-rag-postgres-agent/hybrid-rag-schema.svg 'no-border')
 
-Neon is standard Postgres, so enable the `vector` extension with the following:
+Lakebase Postgres supports standard Postgres extensions, so enable the `vector` extension with the following:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
@@ -163,7 +163,7 @@ A chunk's metadata might look like this:
 }
 ```
 
-When you split a document into chunks again, it's important to keep each chunk's identity stable. You can do this using a `UNIQUE` constraint on `(document_id, chunk_index)` and by storing a `content_hash` for each chunk. If the source document changes, upsert the chunks and update only those rows where the content_hash is different. This approach avoids re-embedding text that hasn't changed and keeps your results up to date. The next section covers how to perform this upsert.
+When you split a document into chunks again, keep each chunk's identity stable. You can do this using a `UNIQUE` constraint on `(document_id, chunk_index)` and by storing a `content_hash` for each chunk. If the source document changes, upsert the chunks and update only those rows where the content_hash is different. This approach avoids re-embedding text that hasn't changed and keeps your results up to date. The next section covers how to perform this upsert.
 
 ## Ingest documents: chunk, embed, and upsert
 
@@ -218,7 +218,7 @@ async function ingestDocument(opts: {
 }
 ```
 
-The code above hashes each chunk up front and compares it against the hashes already stored for the document, so `embedMany` runs only for chunks whose content is new or changed. This helps save the additional cost that occurs during re-ingestion.
+The code above hashes each chunk up front and compares it against the hashes already stored for the document, so `embedMany` runs only for chunks whose content is new or changed. This avoids paying to re-embed unchanged text when you re-ingest a document.
 
 ## Baseline: vector-only retrieval (understand what you are improving)
 
@@ -416,4 +416,4 @@ After your basic recall is working well, try expanding the candidate pool to 50 
 
 ## Conclusion
 
-Postgres on Neon brings all the essential pieces for a production-ready RAG system together in one place. It stores your chunks, indexes, vectors, and session data and gives you the flexibility to try out improvements in isolation before shipping to production. As you move from a prototype to a production system, the real work is in designing your schema, building strong retrieval logic, and making sure your queries account for things like keyword accuracy and session context.
+Lakebase Postgres on Neon stores your chunks, keyword indexes, vectors, and session data in one database, and branches let you test retrieval changes in isolation before you ship them. As you move from a prototype to production, most of the work is in the schema, the retrieval logic, and making sure your queries handle exact keywords and session context. A good next step is to build the eval set above and compare vector-only against hybrid retrieval on a branch with production-sized data.

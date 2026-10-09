@@ -12,19 +12,18 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-09-18T16:22:18.336Z'
+updatedOn: '2026-10-02T15:16:45.480Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## New backend primitives for apps and agents
 
-We're expanding the platform with [a branchable stack of backend primitives](/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
+We're expanding Neon with [a branchable stack of backend primitives](/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
 
 - **Managed Better Auth general availability**: Managed Better Auth is moving toward general availability with additional plugins and features on the way. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for details.
-- **Functions**: Node.js functions deployed alongside your database.
-- **Object Storage**: S3-compatible object storage that branches with your projects.
-- **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
+
+Functions, Object Storage, and AI Gateway are now generally available. See [What we've shipped recently](#what-weve-shipped-recently-).
 
 ## Core Postgres database features and improvements
 
@@ -81,6 +80,16 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **More storage on the Free plan**: The Neon Free plan now includes 1 GB of database storage per project, up from 0.5 GB, applied automatically to existing projects. [Learn more](/docs/introduction/plans).
+- **Embedding models in the AI Gateway**: Turn text into vectors through the same OpenAI-compatible endpoint and Neon credential you use for chat, with `/v1/embeddings` support for `qwen3-embedding-0-6b` and `gte-large-en`. [Learn more](/docs/ai-gateway/embeddings).
+- **Effect bindings for the Neon SDK**: The new `@neon/effect` package wraps the Neon Management SDK in Effect v4, so API calls return typed `Effect` values and paginated lists return a `Stream`. [Learn more](/docs/reference/effect-sdk).
+- **Reset Object Storage from parent**: Reset from parent now rolls back a branch's Object Storage along with its Postgres data, reverting uploads, overwrites, and deletes made on the branch. [Learn more](/docs/guides/reset-from-parent).
+- **Function Triggers**: Invoke a deployed Function on a UTC cron schedule or when a file lands in an Object Storage bucket, even when the compute is scaled to zero. [Learn more](/docs/compute/functions/triggers/overview).
+- **Custom domains for Functions**: Serve a Function's public API or webhook on a domain you own, with Neon provisioning the TLS certificate automatically. [Learn more](/docs/compute/functions/custom-domains).
+- **Prepaid credits for the AI Gateway**: Buy prepaid credits for the AI Gateway from the Console and draw them down as you send inference requests, at provider list prices with no markup. [Learn more](/docs/ai-gateway/prepaid-credits).
+- **Neon tools for agents with `@neon/tools`**: Hand your AI agent typed, function-calling tools for managing Neon that stay in sync with the API, with adapters for MCP, Mastra, and Eve. [Read the announcement](/blog/give-your-agent-neon-tools).
+- **Faster queries on large computes**: On fixed-size computes of 18 CU and above, shared buffers now expand to use up to 75% of memory backed by huge pages, so cache-heavy workloads can see up to 2x throughput with no restart. [Read the blog post](/blog/improving-lakebase-compute-cache-part-1).
+- **Neon in Grok Bot**: The Neon plugin is now available in Grok Bot, pairing Neon agent skills with the Neon MCP server so you can create projects and branches and run SQL from a Grok bot. [Learn more](/docs/ai/ai-grok-bot-plugin).
 - **Neon MCP server as a Claude connector**: The Neon MCP server is now listed in Claude's connector directory, so you can create projects and branches, run SQL, change schemas, and diagnose slow queries from Claude.ai or Claude Desktop. [Learn more](/docs/ai/neon-mcp-server#claude-connector).
 - **AI Gateway as a Vercel AI SDK provider**: The Neon AI Gateway is now a community provider for the Vercel AI SDK, so you can reach frontier and open-source models through one credential built into your branch and swap models without per-provider SDKs or keys. [Learn more](/docs/ai-gateway/overview).
 - **Project-level permissions**: Grant people and agents Viewer, Editor, or Admin access on individual projects instead of across your whole organization, on top of four organization roles (Admin, Editor, Viewer, Collaborator). Now available to all organizations. [Learn more](/docs/manage/user-permissions).
@@ -214,7 +223,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Archive storage on the Free plan**: Archive storage is now available on the Free plan for automatically archiving inactive branches. This feature helps minimize storage costs, allowing us to expand the Free plan even further. Learn more in [Branch Archiving](/docs/guides/branch-archiving).
 - **Neon RLS**: This feature integrates with third-party **authentication providers** like Auth0, Clerk, and Stack Auth to bring authorization to your code base by leveraging Postgres [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html). [Read the announcement](/blog/introducing-neon-authorize) and check out the docs.
 - **Neon on Azure**: You can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our Azure roadmap. Many more exciting updates are on the way, including deeper integrations with the Azure ecosystem. [Read the announcement](/blog/first-azure-region-available-in-neon).
-- **End-to-end RAG pipelines in Postgres**: Our new and open source [pgrag](/docs/extensions/pgrag) extension lets you create end-to-end Retrieval-Augmented Generation (RAG) pipelines in Postgres. There's no need for additional programming languages or libraries. With the functions provided by `pgrag`, you can build a complete RAG pipeline directly within your SQL client.
+- **End-to-end RAG pipelines in Postgres**: Shipped the open source [pgrag](/docs/extensions/pgrag) extension for RAG in SQL. Now deprecated; see [Lakebase Search](/docs/ai/lakebase-search).
 - **Support for analytics with pg_mooncake**: This new extension, brought to the community by [mooncake.dev](https://mooncake.dev/), introduces native columnstore tables with DuckDB execution for _fast_ analytics directly in Postgres. [Read the announcement](https://www.mooncake.dev/blog/pgmooncake-neon).
 - **Datadog integration**: Scale users can now export Neon metrics to Datadog.
 - **Deletion of backup branches created by restore operations**: To help minimize storage and keep your Neon project organized, we added support for deleting obsolete backup branches created by [restore](/docs/guides/branch-restore) operations. Previously, these backup branches could not be removed. [Learn more](/docs/guides/branch-restore#deleting-backup-branches).

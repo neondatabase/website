@@ -1,13 +1,13 @@
 ---
-title: Using Payload CMS with Lakebase Postgres to Build an E-commerce Store in Next.js
-subtitle: Build your own E-commerce Store in a Next.js application with Payload CMS and Postgres (powered by Neon).
+title: Using Payload CMS with Lakebase Postgres to build an e-commerce store in Next.js
+subtitle: Build your own e-commerce store in a Next.js application with Payload CMS and Postgres on Neon.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Payload CMS with Postgres, and seed the Postgres database using the pre-populated information in Payload CMS Ecommerce template.
+In this guide, you will learn how to set up a Postgres database on Neon, configure Payload CMS with Postgres, and seed the database using the pre-populated data in the Payload CMS ecommerce template.
 
 ## Prerequisites
 
@@ -18,19 +18,19 @@ To follow the steps in this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a Serverless Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
+- [Provision a Postgres database on Neon](#provision-a-postgres-database-on-neon)
 - [Create a new Payload CMS application with Next.js](#create-a-new-payload-cms-application-with-nextjs)
 - [Seed your Postgres database](#seed-your-postgres-database)
-- [Build and Test your E-commerce Store (locally)](#build-and-test-your-e-commerce-store-locally)
-- [Scale-to-zero with Postgres (powered by Neon)](#scale-to-zero-with-postgres-powered-by-neon)
+- [Build and test your e-commerce store locally](#build-and-test-your-e-commerce-store-locally)
+- [Scale to zero on Neon](#scale-to-zero-on-neon)
 
-## Provisioning a Serverless Postgres database powered by Neon
+## Provision a Postgres database on Neon
 
-Using a serverless Postgres database powered by Neon lets you scale down to zero, which helps you save on compute costs.
+A Neon compute scales to zero when it's idle, so you don't pay for compute while the database isn't in use. Storage is still billed.
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
+To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
-Enable the **Connection pooling** toggle on the **Connection Details** panel to obtain the Postgres connection string.
+Click **Connect** on your project dashboard to open the **Connect to your branch** modal, and copy the connection string. The **Connection pooling** toggle is enabled by default, which gives you a pooled connection string.
 
 ![](/guides/images/payload/98592ce7-3b8a-411b-a769-a0b89eaac8a3.png)
 
@@ -47,7 +47,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `<dbname>` is the name of the database. **neondb** is the default database created with each Neon project if you do not define your own.
 - `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
 
-Save the connecting string somewhere safe. You will use it later to configure the `POSTGRES_URL` variable.
+Save the connection string somewhere safe. You will use it later to configure the `POSTGRES_URL` variable.
 
 ## Create a new Payload CMS application with Next.js
 
@@ -57,7 +57,7 @@ Let's begin with creating a Payload CMS backend to serve all the content for you
 npx create-payload-app@latest payload-neon-ecommerce-store
 ```
 
-`npx create-payload-app` is the recommended way to scaffold a Payload CMS + Next.js project quickly.
+`npx create-payload-app` scaffolds a Payload CMS and Next.js project.
 
 When prompted, choose the following:
 
@@ -65,7 +65,7 @@ When prompted, choose the following:
 
 - `ecommerce` as the project template.
 - `PostgreSQL (beta)` as the database.
-- The connection string you obtained earlier as the PostgreSQL connection string: `postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require` .
+- The connection string you obtained earlier as the Postgres connection string: `postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require` .
 
 Once that's done, change to the project directory and start the app:
 
@@ -78,7 +78,7 @@ yarn && yarn dev
 
 The app should be running on [localhost:3000](http://localhost:3000). Let's keep the development server running as we work through the next steps.
 
-Next, let's move on to adding e-commerce seed data to your Lakebase Postgres database.
+Next, let's add e-commerce seed data to your database.
 
 ## Seed your Postgres database
 
@@ -98,7 +98,7 @@ INFO (payload): Seeded database successfully!
 
 Now, let's move on to building the application and previewing it in action.
 
-## Build and Test your E-commerce Store (Locally)
+## Build and test your e-commerce store locally
 
 To test the e-commerce store in action, prepare a build and run the preview server using the following command:
 
@@ -112,14 +112,14 @@ The app should now be running on [localhost:3000](http://localhost:3000). Naviga
 
 You have now built your own e-commerce store.
 
-## Scale-to-zero with Postgres (powered by Neon)
+## Scale to zero on Neon
 
-Interestingly, during the entire process of setting up this app, you were using Neon's **Scale-to-zero** feature, which places your Postgres compute endpoint into an idle state when the database is inactive for more than 5 minutes. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+While you set up this app, your Neon compute used [scale to zero](/docs/introduction/scale-to-zero), which suspends the compute after 5 minutes of inactivity. Open the **Monitoring** page in the Neon Console and view **System operations** to see when the compute started and when it was suspended.
 
 ![Neon Monitoring page](/guides/images/payload/74a2aa54-6d28-4f47-b181-077957df6779.png)
 
 ## Summary
 
-In this guide, you learned how to build an e-commerce store in Next.js using Payload CMS and a serverless Postgres database (powered by Neon). Using Postgres on Neon also allowed you to save on cloud compute resources when the compute endpoint that runs Postgres was idle for more than 5 minutes.
+You built an e-commerce store in Next.js using Payload CMS and a Postgres database on Neon. While the app was idle for more than 5 minutes, the compute scaled to zero, so you weren't billed for compute during that time.
 
 <NeedHelp />

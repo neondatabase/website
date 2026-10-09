@@ -55,6 +55,8 @@ const GROUP_OF = {
   ask: 'setup',
   credentials: 'surfaces',
   triggers: 'surfaces',
+  git: 'setup',
+  feedback: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a

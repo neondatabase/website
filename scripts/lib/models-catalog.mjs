@@ -14,6 +14,7 @@
 export const COMPARE_KEYS = [
   'name',
   'family',
+  'type',
   'attachment',
   'reasoning',
   'reasoning_options',
@@ -26,11 +27,13 @@ export const COMPARE_KEYS = [
   'last_updated',
   'modalities',
   'limit',
+  'dimensions',
   'cost',
   'status',
 ];
 
 const BOOLEAN_KEYS = [
+  'released',
   'attachment',
   'reasoning',
   'tool_call',
@@ -39,12 +42,13 @@ const BOOLEAN_KEYS = [
   'structured_output',
 ];
 const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
-/** Every field a published model must carry. */
+/** Every field a published chat model must carry. */
 const REQUIRED_KEYS = [
   'id',
   'name',
   'provider',
   'family',
+  'released',
   'attachment',
   'reasoning',
   'tool_call',
@@ -55,6 +59,23 @@ const REQUIRED_KEYS = [
   'release_date',
   'last_updated',
 ];
+/**
+ * `type: "embedding"` is a different shape, not a chat model with gaps: no reasoning, no tool
+ * calls, no attachment/modalities/limit — those describe chat-completion behavior. `dimensions`
+ * (the vector length) replaces them as the one fact that matters.
+ */
+const EMBEDDING_REQUIRED_KEYS = [
+  'id',
+  'name',
+  'provider',
+  'family',
+  'released',
+  'dimensions',
+  'open_weights',
+  'release_date',
+  'last_updated',
+];
+const MODEL_TYPES = new Set(['embedding']);
 /** `limit.output` is required upstream; `limit.context` is not, but every entry has it. */
 const REQUIRED_LIMIT_KEYS = ['output'];
 const MODALITIES = new Set(['text', 'image', 'audio', 'video', 'pdf']);
@@ -114,10 +135,17 @@ function comparable(model) {
  * A field that differs cannot be attributed to either side from a comparison
  * alone — we may have corrected a price, or upstream may have edited our entry —
  * so it is reported for review rather than blamed.
+ *
+ * A model with `released: false` is cataloged ahead of its announcement, so the mirror is
+ * not expected to match it yet. It is left out of every comparison, on both sides.
  */
 export function classifyDrift(website, modelsDev) {
-  const ours = new Set(Object.keys(website));
-  const theirs = new Set(Object.keys(modelsDev));
+  const unreleased = Object.keys(website)
+    .filter((id) => website[id].released === false)
+    .sort();
+  const skipped = new Set(unreleased);
+  const ours = new Set(Object.keys(website).filter((id) => !skipped.has(id)));
+  const theirs = new Set(Object.keys(modelsDev).filter((id) => !skipped.has(id)));
 
   const awaitingUpstream = [...ours].filter((id) => !theirs.has(id)).sort();
   const missingFromWebsite = [...theirs].filter((id) => !ours.has(id)).sort();
@@ -140,6 +168,7 @@ export function classifyDrift(website, modelsDev) {
     awaitingUpstream,
     missingFromWebsite,
     fieldDrift,
+    unreleased,
     inSync:
       awaitingUpstream.length === 0 && missingFromWebsite.length === 0 && fieldDrift.length === 0,
     /** Expected while an upstream PR is open. Reported, never failed on. */
@@ -157,9 +186,17 @@ export function classifyDrift(website, modelsDev) {
  * `/models`, the docs model index, and the generated per-model markdown — stated
  * once here instead of each reader defaulting around a missing value.
  *
+ * `released` is required on every model, with no default: `false` marks a model cataloged
+ * ahead of its announcement, which consumers that list models to users (the console model
+ * picker) hide. An absent flag would force each consumer to guess.
+ *
  * Deliberately not required: `cost`, `knowledge`, `structured_output`. Real
  * entries legitimately omit them, and demanding them would force a placeholder,
  * which is worse than an absent field.
+ *
+ * `type: "embedding"` swaps the required set entirely (see `EMBEDDING_REQUIRED_KEYS`) — a model
+ * on `/v1/embeddings` has no reasoning, tool calls, attachments, or generation limit to report,
+ * and `dimensions` (the vector length) is the fact that actually describes it.
  */
 export function validateCatalog(data) {
   const errors = [];
@@ -192,8 +229,20 @@ export function validateCatalog(data) {
     }
     if (model.id !== key) fail(`${at('id')} is ${JSON.stringify(model.id)}, expected ${key}`);
 
-    for (const field of REQUIRED_KEYS) {
+    if (model.type !== undefined && !MODEL_TYPES.has(model.type)) {
+      fail(`${at('type')} must be one of ${[...MODEL_TYPES].join(', ')}`);
+    }
+    const isEmbedding = model.type === 'embedding';
+    for (const field of isEmbedding ? EMBEDDING_REQUIRED_KEYS : REQUIRED_KEYS) {
       if (model[field] === undefined) fail(`${at(field)} is missing`);
+    }
+    if (
+      model.dimensions !== undefined &&
+      (!Number.isInteger(model.dimensions) || model.dimensions <= 0)
+    ) {
+      fail(
+        `${at('dimensions')} must be a positive integer, got ${JSON.stringify(model.dimensions)}`
+      );
     }
     for (const field of ['id', 'name', 'provider', 'family']) {
       if (
@@ -254,7 +303,12 @@ export function validateCatalog(data) {
       }
     }
 
-    if (model.cost !== undefined) errors.push(...costErrors(model.cost, at('cost')));
+    if (model.cost !== undefined) {
+      // Embedding billing is input-only — there is no completion to charge for, so unlike a
+      // chat model, an embedding model's `cost` block is not missing an `output` rate; it never
+      // had one.
+      errors.push(...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding }));
+    }
 
     if (model.reasoning_options !== undefined) {
       if (!Array.isArray(model.reasoning_options)) {
@@ -290,8 +344,14 @@ function costErrors(cost, at, { requireRates = true } = {}) {
   if (!isPlainObject(cost)) return [`${at} must be an object`];
 
   const rateKeys = Object.keys(cost).filter((k) => k !== 'tiers');
-  if (requireRates && (typeof cost.input !== 'number' || typeof cost.output !== 'number')) {
-    errors.push(`${at} needs both an input and an output rate; omit cost entirely if unknown`);
+  if (requireRates) {
+    if (typeof cost.input !== 'number' || typeof cost.output !== 'number') {
+      errors.push(`${at} needs both an input and an output rate; omit cost entirely if unknown`);
+    }
+    // `requireRates: false` is embedding billing, not "rates are optional" — there is still no
+    // such thing as a model whose input rate is unknown but priced anyway.
+  } else if (typeof cost.input !== 'number') {
+    errors.push(`${at} needs an input rate; omit cost entirely if unknown`);
   }
 
   for (const field of rateKeys) {

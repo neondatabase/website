@@ -1,10 +1,10 @@
 ---
 title: Building a RESTful API with ASP.NET Core, Swagger, and Neon
-subtitle: Learn how to connect your .NET applications to Neon's serverless Postgres database
+subtitle: Learn how to connect your .NET applications to a Postgres database on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Lakebase Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
@@ -19,7 +19,7 @@ Before we start, make sure you have the following:
 - Basic knowledge of C# and ASP.NET Core
 - Familiarity with Entity Framework Core
 
-## Setting Up Your ASP.NET Core Project
+## Setting up your ASP.NET Core project
 
 First, create a new ASP.NET Core Web API project:
 
@@ -41,16 +41,16 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 The above packages include:
 
 - `Microsoft.EntityFrameworkCore` - Entity Framework Core for database operations
-- `Npgsql.EntityFrameworkCore.PostgreSQL` - PostgreSQL provider for EF Core
+- `Npgsql.EntityFrameworkCore.PostgreSQL` - Postgres provider for EF Core
 - `Swashbuckle.AspNetCore` - Swagger for API documentation
 - `Microsoft.AspNetCore.Authentication.JwtBearer` - JWT authentication for securing endpoints
 - `Microsoft.EntityFrameworkCore.Design` - EF Core design tools for migrations
 
-### Configuring the Neon Database
+### Configuring the Neon database
 
-Head over to your [Neon Dashboard](https://neon.tech) and create a new project.
+Open the [Neon Console](https://console.neon.tech) and create a new project.
 
-Once done, grab your database connection string and add it to your `appsettings.json`:
+Click **Connect** to open the **Connect to your branch** modal, copy your connection details, and add it to your `appsettings.json`:
 
 ```json
 "ConnectionStrings": {
@@ -134,12 +134,12 @@ In the above, we configure the necessary services directly within `Program.cs` t
 
 4. For the JWT authentication setup, we are implementing the following:
    - Here, we set up JWT authentication to protect your API routes. We use `AddJwtBearer` to validate tokens sent by clients.
-   - The `TokenValidationParameters` section allows us to make sure that the token is signed with the specified key. Replace `"your-secret-key"` in `appsettings.json` with a secure key unique to your application.
+   - The `TokenValidationParameters` section allows us to make sure that the token is signed with the specified key. Replace `"your-very-secure-secret-key"` in `appsettings.json` with a secure key unique to your application.
    - For simplicity, `ValidateIssuer` and `ValidateAudience` are set to `false`, which means the API won't check who issued the token or its intended audience. This is useful for local development but should be tightened for production environments.
 
 To avoid hardcoding sensitive information like the secret key, consider using environment variables or a configuration management system to securely store secrets.
 
-## Creating the Entity Framework Core Models
+## Creating the Entity Framework Core models
 
 Data models define the structure of your database tables and the relationships between them. Here, we'll create a simple `Product` model to represent products in our Neon database.
 
@@ -167,7 +167,7 @@ Here, we define a simple `Product` model with four properties:
 
 Each property corresponds to a column in the database table that Entity Framework will generate for us.
 
-### Creating the Database Context
+### Creating the database context
 
 Next, we need to create a database context class, which serves as a bridge between our C# code and the Neon database.
 
@@ -192,7 +192,7 @@ The above code snippet does the following:
 - We pass `DbContextOptions` to the constructor to configure the connection to our Neon database.
 - The `DbSet<Product>` property represents the `Products` table. This allows us to perform CRUD operations on the `Product` model directly through this context.
 
-### Running Migrations to Create the Database Schema
+### Running migrations to create the database schema
 
 Now that we have defined our model and context, let's generate the database schema using migrations. Open your terminal and run the following commands:
 
@@ -214,7 +214,7 @@ The `dotnet ef database update` command applies the migration to your Neon datab
 
 At this point, your database is set up and ready to store product data.
 
-## Building the API Endpoints
+## Building the API endpoints
 
 With the database schema in place, let's create the API endpoints to perform CRUD operations on the `Products` table.
 
@@ -301,7 +301,7 @@ In the code above, we define a `ProductsController` to handle all CRUD operation
 
 1. The `GetProducts` method handles `GET /api/products` requests, fetching all products stored in the Neon database.
 
-2. The `GetProduct` method handles `GET /api/products/{id}` requests to retrieve a single product by its unique ID. If no product with the given ID is found, it responds with a `404 Not Found`. This ensures the client is notified when attempting to access a non-existent product.
+2. The `GetProduct` method handles `GET /api/products/{id}` requests to retrieve a single product by its unique ID. If no product with the given ID is found, it responds with a `404 Not Found`.
 
 3. The `CreateProduct` method handles `POST /api/products` requests to add a new product. The response uses `CreatedAtAction` to include a link to the newly created resource, following REST best practices.
 
@@ -311,7 +311,7 @@ In the code above, we define a `ProductsController` to handle all CRUD operation
 
 Each endpoint is fully asynchronous and interacts with the Neon database through the `NeonDbContext` context.
 
-## Setting Up Swagger for API Documentation
+## Setting up Swagger for API documentation
 
 To document our API and provide an interactive interface for testing, we'll integrate Swagger into our ASP.NET Core project.
 
@@ -319,7 +319,7 @@ Swagger automatically generates OpenAPI documentation, making it easy to explore
 
 ### Enabling Swagger in `Program.cs`
 
-To set up Swagger, add the following code in the `Configure` method of your `Program.cs` file:
+To serve the Swagger UI at the root URL, replace the `app.UseSwagger()` and `app.UseSwaggerUI()` calls in `Program.cs` with the following:
 
 ```csharp
 app.UseSwagger();
@@ -333,7 +333,7 @@ app.UseSwaggerUI(c =>
 
 The `UseSwagger` middleware generates the OpenAPI documentation for your API, while `UseSwaggerUI` sets up the Swagger interface for interacting with your endpoints.
 
-### Running Your Application
+### Running your application
 
 Now that Swagger is set up, start your application using:
 
@@ -341,7 +341,7 @@ Now that Swagger is set up, start your application using:
 dotnet run
 ```
 
-Once the application is running, you will see the port where your API is hosted (usually `https://localhost:5229`), for example:
+Once the application is running, the output shows the URL where your API is hosted, for example:
 
 ```
 Building...
@@ -349,15 +349,15 @@ info: Microsoft.Hosting.Lifetime[14]
       Now listening on: http://localhost:5229
 ```
 
-Visit `https://localhost:5229/swagger` in your browser to access the Swagger UI.
+Visit that URL (here, `http://localhost:5229`) in your browser to open the Swagger UI. Because `RoutePrefix` is set to an empty string, the UI is served at the root URL rather than at `/swagger`.
 
-The Swagger UI will appear, displaying all your API endpoints with detailed documentation. You can test the endpoints by sending requests directly from the UI and viewing the responses, making it easy to verify that everything works as expected.
+The Swagger UI lists your API endpoints with their documentation. You can send requests directly from the UI and view the responses.
 
-## Testing Your API with Postman
+## Testing your API with Postman
 
 Now that your API is running, you can use Postman or any other API testing tool to interact with your endpoints. You can even use the Swagger UI to test the endpoints, but Postman is better suited to testing complex scenarios.
 
-In this section, we'll walk through testing the CRUD operations using Postman but feel free to use any tool you're comfortable with like Insomnia or cURL.
+In this section, we'll walk through testing the CRUD operations using Postman, but you can use any tool you're comfortable with, like Insomnia or curl. The examples use `https://localhost:5001`; replace it with the URL your app is listening on.
 
 Download and launch [Postman](https://www.postman.com/downloads/). Create a new request to interact with your API.
 
@@ -402,7 +402,7 @@ Open Postman and create the following requests:
 
 After testing, check that all changes are reflected in your Neon database. Use both Postman and Swagger UI to confirm the endpoints are functioning correctly.
 
-## Securing Your API with JWT Authentication (Bonus)
+## Securing your API with JWT authentication (bonus)
 
 To protect your API endpoints, we’ll use [JWT](https://jwt.io/) (JSON Web Token) authentication. By adding the `[Authorize]` attribute to specific controller actions, you can ensure that only authenticated users have access. Here’s how to secure the `GetProducts` endpoint:
 
@@ -415,9 +415,9 @@ public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
 }
 ```
 
-Now, any requests to `GetProducts` will require a valid JWT token, if you try to access the endpoint without a token, you will receive a `401 Unauthorized` response.
+Now, any requests to `GetProducts` will require a valid JWT token. If you try to access the endpoint without a token, you will receive a `401 Unauthorized` response.
 
-### Generating and Using JWT Tokens
+### Generating and using JWT tokens
 
 When a user successfully logs in, the server generates a JWT token containing the user's authentication details. This token typically includes claims such as the user's ID, email, and a unique identifier. The token is then signed with a secret key to ensure its integrity and prevent tampering. For example:
 
@@ -463,14 +463,12 @@ With this header in place, the server can authenticate the user without requirin
 
 ## Conclusion
 
-In this guide, we covered the process of building a RESTful API with ASP.NET Core, connecting it to a Lakebase Postgres database, and securing it with JWT authentication. We explored CRUD operations using Entity Framework Core, generated interactive API documentation with Swagger, and tested our endpoints using Postman.
-
-As a next step, consider expanding your API with additional features, such as pagination, filtering, or sorting. You can also explore adding testing frameworks like xUnit or NUnit to write unit tests for your API endpoints.
+You built an ASP.NET Core API that stores products in a Postgres database on Neon through EF Core, documents its endpoints with Swagger, and protects routes with JWT authentication. As a next step, add pagination, filtering, or sorting, or write unit tests for your endpoints with xUnit or NUnit.
 
 For more information, check out:
 
-- [Neon Documentation](/docs)
-- [Npgsql Documentation](https://www.npgsql.org/doc/index.html)
-- [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [Neon documentation](/docs)
+- [Npgsql documentation](https://www.npgsql.org/doc/index.html)
+- [Entity Framework Core documentation](https://docs.microsoft.com/en-us/ef/core/)
 
 <NeedHelp />

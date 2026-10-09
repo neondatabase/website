@@ -4,41 +4,41 @@ subtitle: A step-by-step guide to integrating Convex with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) improves the self-hosted experience, removing limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a scalable database option.
 
-Convex lets developers create dynamic, live-updating applications. Self-hosting retains these core features while granting you greater control over your deployment environment. While SQLite remains the default for simplicity, Postgres integration adds scalability and resilience for production applications.
+Convex lets developers create dynamic, live-updating applications. Self-hosting retains these core features while granting you greater control over your deployment environment. While SQLite remains the default for simplicity, Postgres is the better fit for production applications.
 
 This guide provides a step-by-step walkthrough of integrating Convex with Lakebase Postgres. You will learn how to:
 
 - Set up Convex for self-hosting using Docker Compose.
 - Configure Convex to use Lakebase Postgres for persistent data storage.
 - Run the Convex [chat application tutorial](https://docs.convex.dev/tutorial) as a practical example.
-- Test the integration to ensure everything functions correctly.
+- Test the integration.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed and configured:
 
-- **Neon Account:** Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one already. Neon will provide a managed Postgres database for your Convex chat application.
-- **Docker:** Docker is essential for running the Convex backend and dashboard locally. If Docker is not installed, download and install Docker Desktop from [docker.com](https://www.docker.com/get-started). Make sure Docker is running before proceeding.
+- **Neon account:** Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one already. Neon will provide a managed Postgres database for your Convex chat application.
+- **Docker:** Docker runs the Convex backend and dashboard locally. If Docker is not installed, download and install Docker Desktop from [docker.com](https://www.docker.com/get-started). Make sure Docker is running before proceeding.
 - **Node.js v18+:** Node.js (version 18 or higher) is required to run the Convex chat application example. Download and install it from [nodejs.org](https://nodejs.org).
 
-<Admonition type="note" title="Database Location and Latency Considerations">
+<Admonition type="note" title="Database location and latency">
 
     Remember that the physical distance between your Neon database and your self-hosted Convex backend can impact your application's performance due to latency.  Increased distance generally means higher latency and potentially slower response times.
 
-    For optimal performance, especially in production, it's highly recommended to locate your Neon database and Convex backend in the same geographical region. Convex's cloud-hosted platform achieves extremely low query times because the database and backend are co-located within their infrastructure.
+    For the best performance, especially in production, put your Neon database and Convex backend in the same region. Convex's cloud-hosted platform achieves extremely low query times because the database and backend are co-located within their infrastructure.
 
-    While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Lakebase Postgres and Convex Backend server to minimize latency.
+    While this guide focuses on setup and integration specifically for local development, for production applications, place your Neon database close to your Convex backend server to minimize latency.
 
 </Admonition>
 
-## Setting up Neon Database
+## Setting up a Neon database
 
-To get started with your Postgres database, create a new Neon project in the [Neon Console](https://console.neon.tech). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted` – this is the specific database Convex is configured to use for storing chat messages. Follow these steps to set up your Lakebase Postgres database:
+To get started with your Postgres database, create a new Neon project in the [Neon Console](https://console.neon.tech). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted`. This is the database Convex is configured to use for storing chat messages. Follow these steps to set up your Lakebase Postgres database:
 
 - Navigate to the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
 - Execute the following SQL command to create the database:
@@ -51,18 +51,18 @@ To get started with your Postgres database, create a new Neon project in the [Ne
 
   ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
 
-## Setting up Self-Hosted Convex with Docker Compose
+## Setting up self-hosted Convex with Docker Compose
 
 Now, you'll set up the self-hosted Convex backend using Docker Compose, configuring it to use your Lakebase Postgres database.
 
-1.  **Create a Project Directory:** Open your terminal and create a new directory for your Convex project. Navigate into it:
+1.  **Create a project directory:** Open your terminal and create a new directory for your Convex project. Navigate into it:
 
     ```bash
     mkdir convex-neon-integration
     cd convex-neon-integration
     ```
 
-2.  **Download Docker Compose Configuration:** Download the default `docker-compose.yml` file provided by Convex directly into your project directory:
+2.  **Download the Docker Compose configuration:** Download the default `docker-compose.yml` file provided by Convex directly into your project directory:
 
     ```bash
     npx degit get-convex/convex-backend/self-hosted/docker/docker-compose.yml docker-compose.yml
@@ -104,17 +104,17 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
 
     The `-d` flag runs the containers in detached mode (in the background). Docker Compose will download the necessary images, create containers, and start the Convex services.
 
-5.  **Access the Convex Dashboard:** Once `docker compose up -d` completes, the Convex dashboard should be accessible in your browser at [http://localhost:6791](http://localhost:6791). It might take a few moments for the services to fully start. If it's not immediately available, wait a short time and refresh the page.
+5.  **Access the Convex dashboard:** Once `docker compose up -d` completes, the Convex dashboard should be accessible in your browser at [http://localhost:6791](http://localhost:6791). It might take a few moments for the services to fully start. If it's not immediately available, wait a short time and refresh the page.
 
     You should see the Convex dashboard login screen:
 
     ![Convex Dashboard](/docs/guides/convex-dashboard.png)
 
-    **Login to the Convex Dashboard:**
+    **Log in to the Convex dashboard:**
     - When you access the dashboard for the first time, you will be prompted to log in.
     - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 
-6.  **Verify Lakebase Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Lakebase Postgres database by checking the Docker container logs. This verifies that the `POSTGRES_URL` environment variable was correctly processed.
+6.  **Verify the Postgres connection (optional):** You can confirm that Convex is using your Lakebase Postgres database by checking the Docker container logs. This verifies that the `POSTGRES_URL` environment variable was correctly processed.
 
     Run this command in your terminal within the `convex-neon-integration` directory:
 
@@ -126,13 +126,13 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
 
     ![Convex Postgres Logs](/docs/guides/convex-postgres-logs.png)
 
-7.  **Retrieve the Admin Key:** You need the `CONVEX_SELF_HOSTED_ADMIN_KEY` to log into the Convex dashboard and configure your chat application. Execute this command to retrieve it:
+7.  **Retrieve the admin key:** You need the `CONVEX_SELF_HOSTED_ADMIN_KEY` to log into the Convex dashboard and configure your chat application. Execute this command to retrieve it:
 
     ```bash
     docker compose exec backend ./generate_admin_key.sh
     ```
 
-    The output will display the generated admin key. **Copy this key carefully.** You'll need it in the next steps to log in to the dashboard and configure the chat application.
+    The output will display the generated admin key. Copy this key. You'll need it in the next steps to log in to the dashboard and configure the chat application.
 
     ```
     convex-self-hosted|01xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -157,7 +157,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     npm install
     ```
 
-3.  **Update Convex library version:** It is required to update the `convex` npm package to the latest version within the `convex-tutorial` project. This is needed as the existing version present in the tutorial repository is not the latest and will cause issues with the self-hosted Convex backend.
+3.  **Update Convex library version:** Update the `convex` npm package to the latest version in the `convex-tutorial` project. The version in the tutorial repository is older and causes issues with the self-hosted Convex backend.
 
     ```bash
     npm install convex@latest
@@ -173,7 +173,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
     - `VITE_CONVEX_URL`: Specifies the URL of your self-hosted Convex backend. In this case, it's set to `http://localhost:3210`, the default for local Convex backends.
     - `CONVEX_SELF_HOSTED_URL`: Also set to the same URL, `http://localhost:3210`.
-    - `CONVEX_SELF_HOSTED_ADMIN_KEY`: This key is essential for authenticating development operations against your self-hosted Convex instance. Replace `<your_generated_admin_key>` with the admin key you generated in the previous step [Setting up self-hosted Convex with Docker Compose](#setting-up-self-hosted-convex-with-docker-compose).
+    - `CONVEX_SELF_HOSTED_ADMIN_KEY`: Authenticates development operations against your self-hosted Convex instance. Replace `<your_generated_admin_key>` with the admin key you generated in the previous step [Setting up self-hosted Convex with Docker Compose](#setting-up-self-hosted-convex-with-docker-compose).
 
 5.  **Initialize Convex project:** Run the following command to initialize the Convex project and generate the necessary TypeScript files for the chat application:
 
@@ -183,7 +183,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
     This starts the Convex server and generates the necessary TypeScript files for the chat application.
 
-6.  **Implement the `sendMessage` Mutation:** Following the [Convex tutorial - Your first mutation](https://docs.convex.dev/tutorial/#your-first-mutation) section, create a new file `convex/chat.ts` in your `convex-tutorial` project. Add the following code to this file. This code defines a Convex mutation function to insert new messages into the database:
+6.  **Implement the `sendMessage` mutation:** Following the [Convex tutorial - Your first mutation](https://docs.convex.dev/tutorial/#your-first-mutation) section, create a new file `convex/chat.ts` in your `convex-tutorial` project. Add the following code to this file. This code defines a Convex mutation function to insert new messages into the database:
 
     ```typescript
     // convex/chat.ts
@@ -205,7 +205,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     });
     ```
 
-7.  **Update `src/App.tsx` to use `sendMessage` mutation:** Now, update the `src/App.tsx` file. Modify the `src/App.tsx` file to include the `useMutation` hook and call the `sendMessage` mutation when a user submits a message. Replace the relevant section in `src/App.tsx` with the following code:
+7.  **Update `src/App.tsx` to use `sendMessage` mutation:** Modify the `src/App.tsx` file to include the `useMutation` hook and call the `sendMessage` mutation when a user submits a message. Replace the relevant section in `src/App.tsx` with the following code:
 
     ```tsx
     // src/App.tsx
@@ -253,7 +253,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
     }); // [!code ++]
     ```
 
-9.  **Update `src/App.tsx` to Use `getMessages` query:** Finally, update `src/App.tsx` to fetch and display messages using the `useQuery` hook and the `getMessages` query function. Replace the relevant section in `src/App.tsx` with the following code:
+9.  **Update `src/App.tsx` to use `getMessages` query:** Finally, update `src/App.tsx` to fetch and display messages using the `useQuery` hook and the `getMessages` query function. Replace the relevant section in `src/App.tsx` with the following code:
 
     ```tsx
     // src/App.tsx
@@ -383,7 +383,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
 With the Convex chat application running and connected to your self-hosted Convex backend powered by Lakebase Postgres, you can now test the chat functionality.
 
-1.  **Access the Chat application in your browser:** Open your web browser and navigate to[http://localhost:5173](http://localhost:5173). You should see the Convex chat application interface.
+1.  **Access the chat application in your browser:** Open your web browser and navigate to [http://localhost:5173](http://localhost:5173). You should see the Convex chat application interface.
 
 2.  **Open a second browser window:** Open a second browser window and navigate to [http://localhost:5173](http://localhost:5173).
 

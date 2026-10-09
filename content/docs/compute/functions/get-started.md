@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-09-18T18:35:42.057Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
@@ -114,6 +114,8 @@ export default defineConfig({
 
 The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add).
+
 Install dependencies:
 
 ```bash
@@ -207,7 +209,7 @@ Once the deployment reaches `completed`, retrieve the invocation URL:
 neon functions get hello
 ```
 
-The `invocation_url` field contains the public URL for your function:
+The `URL` field contains the public URL for your function (`invocation_url` in `--output json`):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/

@@ -9,7 +9,7 @@ summary: >-
   a snapshot into a new or existing branch, and configure an automatic backup
   schedule.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-09-29T21:04:10.398Z'
 ---
 
 The `snapshots` command creates, lists, updates, deletes, and restores snapshots of your Neon branches, and manages the automatic backup schedule of a branch. A snapshot captures the state of a branch at a point in time, so you can restore it later. For background on the feature, plans, and limits, see [Backup and restore](/docs/guides/backup-restore).
@@ -60,7 +60,7 @@ neon snapshots list
 
 ## neon snapshots get (#get)
 
-Retrieves a snapshot by ID or name.
+Retrieves a snapshot by ID or name. An ID match wins over a name.
 
 <CliUsage command="snapshots get" />
 

@@ -1,15 +1,15 @@
 ---
-title: Building a Blog with Laravel, Livewire, and Laravel Breeze
-subtitle: Learn how to create a dynamic blog application using Laravel, Livewire, and Laravel Breeze for authentication and Neon.
+title: Building a blog with Laravel, Livewire, and Laravel Breeze
+subtitle: Create a dynamic blog application using Laravel, Livewire, Laravel Breeze for authentication, and a Postgres database on Neon.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel is a PHP framework for building web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Lakebase Postgres.
+Laravel is a PHP framework for building web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, with Laravel Breeze handling authentication and a Postgres database on Neon storing the data.
 
-By the end of this tutorial, you'll have a fully functional blog where users can create, read, update, and delete posts. We'll also implement comments and a simple tagging system.
+By the end of this tutorial, you'll have a blog where users can create, read, update, and delete posts. We'll also implement comments and a simple tagging system.
 
 ## Prerequisites
 
@@ -21,11 +21,11 @@ Before we start, make sure you have the following:
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel, Livewire, and Tailwind CSS
 
-## Setting up the Project
+## Setting up the project
 
 Let's start by creating a new Laravel project and setting up the necessary components. We'll use Laravel Breeze for authentication, Livewire for building interactive components, and Tailwind CSS for styling.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -38,7 +38,7 @@ This command creates a new Laravel project in a directory named `laravel-livewir
 
 ### Installing Laravel Breeze
 
-[Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) provides a minimal and simple starting point for building a Laravel application with authentication.
+[Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) provides a minimal starting point for building a Laravel application with authentication.
 
 An alternative to Laravel Breeze is Laravel Jetstream, which provides more features out of the box, such as team management and two-factor authentication. However, for this tutorial, we'll use Laravel Breeze for its simplicity.
 
@@ -57,7 +57,7 @@ While in the terminal, also install the Livewire package:
 composer require livewire/livewire
 ```
 
-### Setting up the Database
+### Setting up the database
 
 Update your `.env` file with your Neon database credentials:
 
@@ -72,7 +72,7 @@ DB_PASSWORD=your_password
 
 Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`, and `your_password` with your actual database details and save the file.
 
-### Compiling Assets
+### Compiling assets
 
 Laravel Breeze uses Tailwind CSS for styling, so we need to compile the assets to generate the CSS file.
 
@@ -83,13 +83,13 @@ npm install
 npm run dev
 ```
 
-Keep the Vite development server running in the background as you continue with the next steps. This will automatically compile the assets when changes are made so you can see the updates in real-time.
+Keep the Vite development server running in the background as you continue with the next steps. This will automatically compile the assets when changes are made so you can see the updates in real time.
 
-## Creating the Blog Structure
+## Creating the blog structure
 
 Now that we have our basic setup, we are ready to create the structure for our blog, including models, migrations, and Livewire components, routes, policies, and views.
 
-### Creating the Post Model and Migration
+### Creating the Post model and migration
 
 Models in Laravel are used to interact with the database using the Eloquent ORM. We'll create models for posts, comments, and tags, along with their respective migrations.
 
@@ -119,7 +119,7 @@ public function up()
 
 This migration creates a `posts` table with columns for the post title, content, publication status, and publication date. It also includes a foreign key to the `users` table for the post author. The `slug` column will be used to generate SEO-friendly URLs.
 
-### Creating the Comment Model and Migration
+### Creating the Comment model and migration
 
 Now, let's create a `Comment` model and its migration:
 
@@ -144,7 +144,7 @@ public function up()
 }
 ```
 
-### Creating the Tag Model and Migration
+### Creating the Tag model and migration
 
 To take this a step further, we can add a tagging system to our blog. This will allow us to categorize posts based on different topics.
 
@@ -190,9 +190,9 @@ Now, run the migrations to create all the tables in the Neon database:
 php artisan migrate
 ```
 
-This command will create the `posts`, `comments`, `tags`, and `post_tag` tables in your database and keep track of the migrations that have been run. If you need to rollback the migrations, you can run `php artisan migrate:rollback` or if you were to add a new migration, you can run `php artisan migrate` and it will only run the new migrations.
+This command will create the `posts`, `comments`, `tags`, and `post_tag` tables in your database and keep track of the migrations that have been run. If you need to roll back the migrations, you can run `php artisan migrate:rollback` or if you were to add a new migration, you can run `php artisan migrate` and it will only run the new migrations.
 
-### Updating the Models
+### Updating the models
 
 Let's update our models to define the relationships. What we want to achieve is:
 
@@ -306,9 +306,9 @@ public function comments()
 }
 ```
 
-With these relationships defined, we can now easily access the related models and data using Eloquent.
+With these relationships defined, we can now access the related models and data using Eloquent.
 
-### Seeding the Database
+### Seeding the database
 
 To populate the database with some sample data, let's create seeders for `Tag` models so we can associate tags with posts.
 
@@ -356,7 +356,7 @@ class TagSeeder extends Seeder
 }
 ```
 
-Now, update the main `DatabaseSeeder` in `database/seeders/DatabaseSeeder.php` to include these new seeder:
+Now, update the main `DatabaseSeeder` in `database/seeders/DatabaseSeeder.php` to include the new seeder:
 
 ```php
 <?php
@@ -384,7 +384,7 @@ php artisan db:seed
 
 This command will run the `TagSeeder` and populate the `tags` table with the sample tags which we can associate with posts later on when users create new posts.
 
-## Implementing the Blog Functionality
+## Implementing the blog functionality
 
 Now that we have our models and migrations set up, we can go ahead and implement the blog functionality using Livewire components.
 
@@ -393,7 +393,7 @@ We will start by creating two Livewire components:
 - `PostList` to display a list of blog posts
 - `PostForm` to create and edit posts
 
-### Creating the Post List Component
+### Creating the post list component
 
 First, let's create a Livewire component to display the list of blog posts:
 
@@ -445,7 +445,7 @@ class PostList extends Component
 
 In the `render` method, we fetch the posts that are published and match the search query.
 
-An important thing to note here is that we also eager load the `user` and `tags` relationships to avoid additional queries when accessing these relationships in the view.
+We also eager load the `user` and `tags` relationships to avoid additional queries when accessing these relationships in the view.
 
 To learn more about how to implement search functionality in Livewire, check out the [Building a Simple Real-Time Search with Laravel, Livewire, and Neon guide](/guides/laravel-livewire-simple-search).
 
@@ -489,7 +489,7 @@ Now, update the view in `resources/views/livewire/post-list.blade.php` to displa
 
 This view displays the list of posts along with the post title, author, publication date, content, and tags. It also includes a search input field to filter the posts based on the search query.
 
-### Creating the Post Form Component
+### Creating the post form component
 
 Now, let's create a Livewire component for creating and editing posts.
 
@@ -635,7 +635,7 @@ After that, update the `resources/views/livewire/post-form.blade.php` view to di
 
 This view includes form fields for the post title, content, and tags. The tags are displayed as checkboxes, allowing the user to select multiple tags for the post when creating or editing it.
 
-### Creating Routes and Controllers
+### Creating routes and controllers
 
 Now that we have our Livewire components ready, let's create the necessary routes and controllers to handle the blog functionality.
 
@@ -707,7 +707,7 @@ class PostController extends Controller
 
 For all the methods, we return the corresponding views. The `edit` method also includes an authorization gate to check if the current user is authorized to edit the post which we will define later.
 
-### Creating the Views
+### Creating the views
 
 With the routes and controllers in place, let's create the views for the blog functionality. The views will include the layout, navigation, and content for the blog posts.
 
@@ -813,11 +813,11 @@ With the same structure, create the `resources/views/posts/edit.blade.php` view:
 
 This view includes the `PostForm` component with the post data passed as a parameter to edit the post. The form fields will be pre-filled with the existing post data when users edit one of their posts.
 
-### Adding Authorization
+### Adding authorization
 
 As this will be a multi-user blog, we need to implement authorization to ensure that users can only edit their own posts. Our goal is to allow users to edit posts only if they are the authors of those posts.
 
-Laravel provides a simple way to define authorization policies using policies and gates. Policies are classes that define the authorization logic for a particular model, while gates are more general-purpose authorization checks.
+Laravel handles authorization with policies and gates. Policies are classes that define the authorization logic for a particular model, while gates are more general-purpose authorization checks.
 
 Let's create a policy for the `Post` model:
 
@@ -854,9 +854,9 @@ class PostPolicy
 
 In the `PostPolicy` class, we define the `update` and `delete` methods to check if the current user is the author of the post. If the user is the author, the method returns `true`, allowing the user to update or delete the post. Otherwise, it returns `false` to deny access and prevent unauthorized actions.
 
-### Implementing Comments
+### Implementing comments
 
-By now we have the basic functionality of our blog in place. If you were to visit the blog, you would see a list of posts, be able to view individual posts, and create new posts. However, a blog wouldn't be complete without the ability to add comments to posts.
+By now we have the basic functionality of our blog in place. If you were to visit the blog, you would see a list of posts, be able to view individual posts, and create new posts. The next piece is comments.
 
 Let's add the comment system to our blog posts. First, create a new Livewire component:
 
@@ -918,7 +918,7 @@ class CommentSection extends Component
 }
 ```
 
-Here, we have the `CommentSection` Livewire component with methods to add and delete comments. The `addComment` method creates a new comment for the post, while the `deleteComment` method deletes a comment if the current user is the author of the comment. You can also see the `rules` property defining the validation rules for the comment content and create a policy for the `Comment` model to handle authorization instead of checking it in the component itself.
+Here, we have the `CommentSection` Livewire component with methods to add and delete comments. The `addComment` method creates a new comment for the post, while the `deleteComment` method deletes a comment if the current user is the author of the comment. The `rules` property defines the validation rules for the comment content. You could also create a policy for the `Comment` model to handle authorization instead of checking it in the component itself.
 
 Next, update the view in `resources/views/livewire/comment-section.blade.php` to display comments and allow users to add new comments:
 
@@ -974,9 +974,9 @@ After that, go back to the `resources/views/posts/show.blade.php` view and updat
 <div class="mt-8">@livewire('comment-section', ['post' => $post])</div>
 ```
 
-### Adding Navigation Links
+### Adding navigation links
 
-Laravel Breeze provides a simple layout with a navigation menu that includes links for logging in and registering. Let's add links for creating new posts and logging out.
+Laravel Breeze provides a simple layout with a navigation menu that includes links for logging in and registering. Let's add links for creating new posts and viewing the blog.
 
 Update the existing `resources/views/layouts/navigation.blade.php` view to include links for creating new posts:
 
@@ -992,29 +992,25 @@ Update the existing `resources/views/layouts/navigation.blade.php` view to inclu
 
 ## Testing
 
-To ensure our blog functionality works as expected, it's important to test the application.
+Test the application to make sure the blog works as expected.
 
-To learn more about testing in Laravel along Neon, check out the [Testing Laravel Applications with Neon's Database Branching guide](/guides/laravel-test-on-branch).
+To learn more about testing Laravel with Neon, see [Testing Laravel applications with Neon branching](/guides/laravel-test-on-branch).
 
 ## Conclusion
 
-In this tutorial, we've built a fully functional blog application using Laravel, Livewire, and Laravel Breeze. We've implemented features such as user authentication, creating and editing blog posts, adding comments, and basic authorization.
-
-This implementation provides a solid foundation for a blog, but there are always ways to improve and expand its functionality:
+We built a blog with Laravel, Livewire, and Laravel Breeze, with user authentication, post creation and editing, comments, and basic authorization, backed by a Postgres database on Neon. Some ways to extend it:
 
 - Implement a more advanced authorization system with roles and permissions
 - Add a rich text editor for post content
 - Implement a fuller tagging system with the ability to create new tags
-- Add a search functionality for posts
+- Add full-text search for posts
 - Implement social sharing features
 - Add an admin panel for managing posts, users, and comments
 
-By combining Laravel, Livewire, and the authentication scaffolding provided by Laravel Breeze, you can quickly create dynamic and interactive web applications that meet your users' needs.
-
-## Additional Resources
+## Additional resources
 
 - [Laravel Documentation](https://laravel.com/docs)
-- [Livewire Documentation](https://laravel-livewire.com/docs)
-- [Laravel Breeze Documentation](https://laravel.com/docs/8.x/starter-kits#laravel-breeze)
+- [Livewire Documentation](https://livewire.laravel.com/docs)
+- [Laravel Breeze Documentation](https://laravel.com/docs/11.x/starter-kits#laravel-breeze)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Neon Documentation](/docs)

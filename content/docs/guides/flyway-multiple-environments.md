@@ -11,7 +11,7 @@ summary: >-
   environments and want to integrate Neon branch creation with Flyway migration
   ordering.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-25T09:36:22.797Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -49,7 +49,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 
 <TabItem>
 1. In the Neon Console, select your project.
-2. Select **Branches** under **Project**.
+2. Select **Branches** in the sidebar.
 3. Click **New Branch** to open the branch creation dialog.
 4. Enter a name for the branch. For example, name the branch for the environment (_development_ or _staging_).
 5. Select a parent branch. This should be the branch where you created the `person` table.

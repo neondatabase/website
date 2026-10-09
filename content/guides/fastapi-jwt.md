@@ -1,17 +1,17 @@
 ---
-title: Implementing Secure User Authentication in FastAPI using JWT Tokens and Lakebase Postgres
+title: Implementing secure user authentication in FastAPI using JWT tokens and Lakebase Postgres
 subtitle: Learn how to build a secure user authentication system in FastAPI using JSON Web Tokens (JWT) and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, we'll walk through the process of implementing secure user authentication in a FastAPI application using JSON Web Tokens (JWT) and Lakebase Postgres.
+In this guide, we'll implement secure user authentication in a FastAPI application using JSON Web Tokens (JWT) and Lakebase Postgres.
 
 We'll cover user registration, login, and protecting routes with authentication, using PyJWT for handling JWT operations.
 
-By the end of this guide, you'll have a FastAPI application with an authentication system that uses JWT tokens for secure user management.
+By the end of this guide, you'll have a FastAPI application with an authentication system that uses JWT tokens to authenticate users and protect routes.
 
 ## Prerequisites
 
@@ -19,14 +19,14 @@ Before we begin, make sure you have the following:
 
 - Python 3.9 or later installed on your system
 - [pip](https://pip.pypa.io/en/stable/installation/) for managing Python packages
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account
 - Basic knowledge of [FastAPI, SQLAlchemy, and Pydantic](/guides/fastapi-overview)
 
-## How JWT Works
+## How JWT works
 
 Before building the API, let's look at how JWT works. If you're already familiar with JWT, feel free to skip ahead to the next section.
 
-JSON Web Tokens or JWT for short provide a secure way to authenticate and authorize users in web applications.
+JSON Web Tokens (JWT) are a way to authenticate and authorize users in web applications.
 
 A JWT consists of three parts, each separated by a dot (`.`):
 
@@ -42,12 +42,12 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 Let's break down each part of the JWT:
 
-### JWT Header
+### JWT header
 
 The header typically consists of two parts:
 
 - The type of token (JWT)
-- The hashing algorithm being used (e.g., HMAC SHA256 or RSA)
+- The signing algorithm being used (e.g., HMAC SHA256 or RSA)
 
 Example:
 
@@ -96,44 +96,44 @@ HMACSHA256(
 
 This signature is then Base64Url encoded to form the third part of the JWT.
 
-### The Process of Using JWTs
+### The process of using JWTs
 
 The overall process of using JWTs for authentication and authorization typically involves the following steps:
 
-1. **User Authentication**:
+1. **User authentication**:
    - The process begins when a user logs in with their credentials (e.g., username and password).
    - The server verifies these credentials against the stored user information.
 
-2. **JWT Creation**:
+2. **JWT creation**:
    - Upon successful authentication, the server creates a JWT.
    - It generates the header and payload, encoding the necessary information.
    - Using a secret key (kept secure on the server), it creates the signature.
    - The three parts (header, payload, signature) are combined to form the complete JWT.
 
-3. **Sending the Token**:
+3. **Sending the token**:
    - The server sends this token back to the client in the response.
    - The client stores this token, often in local storage or a secure cookie.
 
-4. **Subsequent Requests**:
+4. **Subsequent requests**:
    - For any subsequent requests to protected routes or resources, the client includes this token in the Authorization header.
    - The format is: `Authorization: Bearer <token>`
 
-5. **Server-side Token Validation**:
+5. **Server-side token validation**:
    - When the server receives a request with a JWT, it first splits the token into its three parts.
-   - It base64 decodes the header and payload.
+   - It Base64Url-decodes the header and payload.
    - The server then recreates the signature using the header, payload, and its secret key.
    - If this newly created signature matches the signature in the token, the server knows the token is valid and hasn't been tampered with.
 
-6. **Accessing Protected Resources**:
+6. **Accessing protected resources**:
    - If the token is valid, the server can use the information in the payload without needing to query the database.
    - This allows the server to authenticate the user and know their permissions for each request without needing to store session data.
 
-7. **Token Expiration**:
+7. **Token expiration**:
    - JWTs typically have an expiration time specified in the payload.
    - The server checks this expiration time with each request.
    - If the token has expired, the server will reject the request, requiring the client to authenticate again.
 
-## Setting up the Project
+## Setting up the project
 
 With the theory out of the way, let's start by creating a new project directory and setting up a virtual environment:
 
@@ -170,7 +170,7 @@ This command installs:
 
 - FastAPI: Our web framework
 - SQLAlchemy: An ORM for database interactions
-- psycopg2-binary: PostgreSQL adapter for Python
+- psycopg2-binary: Postgres adapter for Python
 - PyJWT: For working with JWT tokens instead of handling them manually
 - bcrypt: For secure password hashing
 - python-dotenv: To load environment variables from a .env file
@@ -193,7 +193,7 @@ Create a `.env` file in your project root and add the following configuration:
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your Neon connection string, which you can copy by clicking **Connect** on your project dashboard in the Neon Console.
 
 While editing the `.env` file, add the following configuration for JWT token signing:
 
@@ -203,7 +203,7 @@ ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-Choose a secure secret key for signing the JWT tokens. The `ALGORITHM` specifies the hashing algorithm to use, and `ACCESS_TOKEN_EXPIRE_MINUTES` sets the token expiration time.
+Choose a secure secret key for signing the JWT tokens. The `ALGORITHM` specifies the signing algorithm to use, and `ACCESS_TOKEN_EXPIRE_MINUTES` sets the token expiration time.
 
 Now, create a `database.py` file to manage the database connection:
 
@@ -233,13 +233,13 @@ def get_db():
 
 This script sets up the database connection using SQLAlchemy and provides a `get_db` function to manage database sessions.
 
-The `DATABASE_URL` is read from the `.env` file for security, and the Lakebase Postgres connection string is used to connect to the database.
+The `DATABASE_URL` is read from the `.env` file, which keeps the connection string out of your code.
 
 The `SessionLocal` object is a factory for creating new database sessions, and the `get_db` function ensures that sessions are properly closed after use.
 
-## User Model and Schema
+## User model and schema
 
-We will be using SQLAlchemy for database interactions and Pydantic for data validation. SQLAlchemy provides an ORM for working with databases, while Pydantic is used for defining data models. These models will be used to interact with the database and validate user input.
+We'll use SQLAlchemy for database interactions and Pydantic for data validation. SQLAlchemy provides an ORM for working with databases, while Pydantic is used for defining data models. These models will be used to interact with the database and validate user input.
 
 Start by creating a `models.py` file for the SQLAlchemy User model:
 
@@ -256,7 +256,7 @@ class User(Base):
     hashed_password = Column(String)
 ```
 
-This defines a `User` model with fields for `id`, `username`, `email`, and `hashed_password`. The `unique=True` constraint ensures that usernames and emails are unique across all users. The `index=True` constraint creates an index on these fields for faster lookups.
+This defines a `User` model with fields for `id`, `username`, `email`, and `hashed_password`. The `unique=True` constraint ensures that usernames and emails are unique across all users. The `index=True` option creates an index on these fields for faster lookups.
 
 The `Base` object is imported from the `database` module and is used to create the database schema.
 
@@ -285,9 +285,9 @@ class Token(BaseModel):
 
 These Pydantic models define the structure for user creation, user representation, and JWT tokens. The `EmailStr` type ensures that the email is in a valid format.
 
-One of the benefits of using Pydantic models is that they can be used for data validation and serialization. The `orm_mode = True` configuration allows Pydantic to work with SQLAlchemy models directly.
+One of the benefits of using Pydantic models is that they can be used for data validation and serialization. The `from_attributes = True` configuration lets Pydantic read data directly from SQLAlchemy models.
 
-## Authentication Utilities
+## Authentication utilities
 
 Now that we have the database models and schemas in place, let's add some utility functions for authentication.
 
@@ -341,7 +341,7 @@ This file includes functions for:
 
 The `bcrypt` library is used for secure password hashing, while `PyJWT` is used for JWT token creation and verification. PyJWT provides a simpler and more focused API for JWT operations compared to `python-jose`.
 
-## API Endpoints
+## API endpoints
 
 With all the necessary components in place, we can now create the API endpoints for user registration, login, and protected routes.
 
@@ -415,7 +415,7 @@ Let's break down the key components of this file:
 
 4. The `/users/me` endpoint is an example of a protected route. It returns the current user's information, but only if a valid JWT token is provided.
 
-The tables will be created in your Neon database when the application starts, thanks to the `Base.metadata.create_all(bind=engine)` line in the `main.py` file.
+The tables are created in your database on Neon when the application starts, thanks to the `Base.metadata.create_all(bind=engine)` line in the `main.py` file.
 
 ## Running the API
 
@@ -425,9 +425,9 @@ To run the API, use the following command:
 python -m uvicorn main:app --reload
 ```
 
-This starts the Uvicorn server with hot-reloading enabled for development. This means that the server will automatically restart when you make changes to the code thanks to the `--reload` flag.
+This starts the Uvicorn server for development. The `--reload` flag restarts the server automatically when you change the code.
 
-## Testing the Authentication System
+## Testing the authentication system
 
 You can test the authentication system using tools like `curl`, `httpie`, or the FastAPI Swagger UI at `http://127.0.0.1:8000/docs`.
 
@@ -441,7 +441,7 @@ Here are some example requests using the `httpie` command-line HTTP client to go
 
    You should receive a response with the new user's details in JSON format if the registration is successful.
 
-2. Login and get an access token using the registered user's credentials:
+2. Log in and get an access token using the registered user's credentials:
 
    ```bash
    http --form POST http://127.0.0.1:8000/token username=testuser password=securepassword
@@ -466,9 +466,9 @@ Replace `<your_access_token>` with the token received from the login request.
 
 You would see a `401 Unauthorized` response if the token is invalid or has expired. This is because the `get_current_user` dependency checks the token validity before allowing access to the protected route.
 
-## Dockerizing the Application
+## Dockerizing the application
 
-In many cases, you may want to containerize your FastAPI application for deployment. You can use Docker to create a container image for your FastAPI application.
+To deploy your FastAPI application, you may want to containerize it with Docker.
 
 Let's create a Dockerfile to package the application into a Docker container:
 
@@ -508,9 +508,9 @@ This command starts the container in detached mode, maps port 8000 on the host t
 
 ## Conclusion
 
-In this guide, we've implemented a secure user authentication system in FastAPI using JWT tokens (with PyJWT) and Lakebase Postgres. This provides a good start for building secure web applications with user accounts and protected routes which can be integrated with other microservices or front-end applications.
+You've built user registration, login, and JWT-protected routes in FastAPI with PyJWT, with user data stored in Lakebase Postgres on Neon. From here, you can connect the API to front-end applications or other microservices.
 
-## Additional Resources
+## Additional resources
 
 - [FastAPI Security](https://fastapi.tiangolo.com/tutorial/security/)
 - [JSON Web Tokens](https://jwt.io/introduction)

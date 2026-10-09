@@ -19,7 +19,7 @@ Every deployed function streams its logs to the Neon Console: standard output an
 
 ## View logs
 
-Function logs live on the branch's [Monitoring page, in the Logs tab](/docs/introduction/monitor-logs), the same shared viewer used for every service on the branch. To jump straight to one function's logs, open the **Functions** list, open that function's menu, and select **View logs**. Or go to **Monitoring** > **Logs** and click the **Functions** chip to see every function's logs together.
+Function logs live on the branch's [Monitoring page, in the **Functions** tab](/docs/introduction/monitor-logs). To jump straight to one function's logs, open the **Functions** list, open that function's menu, and select **View logs**. Or go to **Monitoring** and open the **Functions** tab to see every function's logs together.
 
 Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`.
 
@@ -57,7 +57,7 @@ It's a `pg` (node-postgres) deprecation warning, not a connection problem: the i
 
 **Requests not showing up in your logs at all? Check the invocation URL and branch, not the logs.** A wrong branch, a typo'd slug, or a momentary control-plane hiccup returns a 404 or 503 straight to the caller and never reaches your function's log stream, because the platform hasn't resolved which function to attribute logs to yet. If you expect traffic and see nothing, the request likely never reached your function.
 
-**Function not starting after a deploy? Read the response body, not the logs.** A missing entry point, an import that throws at load time, or a default export of the wrong shape returns a `function_load_failed` error with your actual error message in the response body of the failed request, not as a log line. Check the response you got back from calling the function, not the Logs tab.
+**Function not starting after a deploy? Read the response body, not the logs.** A missing entry point, an import that throws at load time, or a default export of the wrong shape returns a `function_load_failed` error with your actual error message in the response body of the failed request, not as a log line. Check the response you got back from calling the function, not the Functions tab.
 
 ## Application instrumentation
 

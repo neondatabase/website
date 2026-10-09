@@ -4,64 +4,62 @@ subtitle: A step-by-step guide to building AI agents with LangGraph and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-21T00:00:00.000Z'
-updatedOn: '2026-07-20T17:23:33.079Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-This guide demonstrates how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem that simplifies the development of complex, multi-agent LLM applications by using a directed graph structure for efficient coordination and state management.
+This guide shows how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem for building multi-agent LLM applications. It models the application as a directed graph, which handles coordination and state management between steps.
 
 This guide walks through building a simple [ReAct (Reason + Act)](https://arxiv.org/abs/2210.03629) agent using LangGraph that interacts with Neon to create a database and perform SQL queries. It builds upon the concepts demonstrated in the [prebuilt ReAct agent from LangGraph](https://langchain-ai.github.io/langgraph/how-tos/create-react-agent).
 
 ## Prerequisites
 
-Before you begin, make sure you have the following prerequisites:
+Before you begin, make sure you have:
 
 - **Python 3.10 or higher:** This guide requires Python 3.10 or a later version. If you don't have it installed, download it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API key:**
-  - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-  - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
+  - Sign up for a free Neon account at [neon.com](https://console.neon.tech/signup).
+  - After signing up, create a Neon API key in the Neon Console under **Account settings** > **API keys**. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key). Your application uses this key to authenticate with Neon.
 
 - **Google API key:**
   - This guide uses the `gemini-3.5-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
-  - The free tier is sufficient for the example in this guide.
+  - Google's free tier is sufficient for the example in this guide.
 
 ## LangGraph basics
 
-Before building your AI agent workflows, it's important to understand the core concepts behind LangGraph.
+Here are the core concepts behind LangGraph.
 
 ### What is LangGraph?
 
-LangGraph is an open‐source orchestration framework for building stateful, multi-actor applications with large language models (LLMs). It enables you to create complex agentic workflows by modeling your application as a graph of interconnected nodes. With LangGraph, you can:
+LangGraph is an open‐source orchestration framework for building stateful, multi-actor applications with large language models (LLMs). You build agent workflows by modeling your application as a graph of connected nodes. With LangGraph, you can:
 
 - **Manage state:** Persist and update the conversation and workflow state across interactions.
 - **Customize workflows:** Design flexible control flows (including conditional branching, loops, and hierarchical structures) to suit your specific use case.
-- **Stream agent reasoning:** Deliver real-time, token-by-token streaming of agent actions to enhance user experience.
+- **Stream agent reasoning:** Stream agent actions token by token in real time.
 
 ### Key components of LangGraph
 
 - **Nodes:** The fundamental units of work. Each node represents a distinct operation (such as an LLM call or tool execution) that processes inputs and updates the application state.
 - **Edges:** These define the transitions between nodes, enabling the workflow to branch conditionally or iterate as needed.
 - **State persistence:** A central persistence layer that saves the state of your workflow, allowing you to resume or “time-travel” across interactions.
-- **Tools:** Integration points for external functionalities (like web search, code execution, or API calls) that extend the agent’s capabilities beyond simple text generation.
-- **Human-in-the-loop workflows:** Built-in mechanisms that allow human oversight, ensuring that agent decisions can be validated, corrected, or enhanced before proceeding.
+- **Tools:** Integration points for external functions (like web search, code execution, or API calls) that let the agent do more than generate text.
+- **Human-in-the-loop workflows:** Built-in mechanisms for human oversight, so a person can validate or correct agent decisions before the workflow proceeds.
 
-With these components, LangGraph lets you build reliable, customizable AI agent applications, from prototyping to production.
+## Why Neon for AI agents
 
-## Why Neon for AI Agents?
+A few properties of Neon matter for agents that create and use databases:
 
-Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
+- **Sub-second provisioning:** Neon projects come up in under a second, so an agent can create a database as part of a task. Traditional databases often take minutes to provision.
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **Scale to zero and usage-based pricing:** Lakebase Postgres computes scale to zero when idle, and you pay for active compute time plus storage. Agent workloads are often bursty and involve many short-lived databases, so this makes "database-per-agent" or "database-per-session" patterns affordable.
 
-- **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time. This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances. It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
-
-- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, roles, branches, and various other Neon platform operations. This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
+- **API:** Neon provides a REST API for managing projects, databases, roles, branches, and other resources. Agents (and developers) can call it directly to manage their own database infrastructure.
 
 ## Building a LangGraph agent with Neon tools integration
 
-Let's build a LangGraph agent that can provision a Neon database and interact with it using SQL queries. This agent will use the LangGraph framework to manage the agent's state and workflow, while functions derived from Neon's API will handle the database operations.
+Next, build a LangGraph agent that can provision a Neon database and query it with SQL. LangGraph manages the agent's state and workflow, and functions built on the Neon API handle the database operations.
 
-### Setting up the project
+### Set up the project
 
 Create a new Python project directory and navigate to it:
 
@@ -70,14 +68,14 @@ mkdir langgraph-neon-example
 cd langgraph-neon-example
 ```
 
-Creating a virtual environment is strongly recommended to manage project dependencies in isolation. Use `venv` to create a virtual environment within your project directory:
+Use a virtual environment to keep project dependencies isolated. Use `venv` to create a virtual environment within your project directory:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate   # For macOS/Linux. On Windows, use `venv\Scripts\activate`
 ```
 
-### Installing required libraries
+### Install required libraries
 
 Next, install the necessary Python libraries for this project. Create a file named `requirements.txt` in your project directory and add the following dependencies:
 
@@ -100,7 +98,7 @@ Install these libraries using pip:
 pip install -r requirements.txt
 ```
 
-### Configuring API keys in `.env`
+### Configure API keys in `.env`
 
 For secure API key management, create a `.env` file in your project directory and add your API keys as environment variables:
 
@@ -115,9 +113,9 @@ NEON_API_KEY=YOUR_NEON_API_KEY
     Add `.env` to your `.gitignore` file if you are using Git for version control. This prevents your API keys from being inadvertently exposed in your code repository.
 </Admonition>
 
-### Creating the `main.py` script
+### Create the `main.py` script
 
-Now, let's create the `main.py` script that defines the LangGraph agent and its interactions with Neon.
+Create the `main.py` script that defines the LangGraph agent and its interactions with Neon.
 
 ```python
 import os
@@ -214,7 +212,7 @@ for message in result["messages"]:
     print(message.pretty_repr())
 ```
 
-Let's examine the code step by step to understand each component.
+Here's what each part of the code does.
 
 #### Import necessary libraries
 
@@ -237,7 +235,7 @@ neon_client = NeonAPI(
 )
 ```
 
-This section imports all the required Python libraries such as `os`, `psycopg2`, `dotenv`, and LangChain modules. These libraries are essential for interacting with Neon, managing environment variables, and creating LangGraph agents.
+This section imports all the required Python libraries such as `os`, `psycopg2`, `dotenv`, and LangChain modules. These libraries handle the Neon API, environment variables, and LangGraph agents.
 
 #### Define `create_database` tool
 
@@ -328,7 +326,7 @@ for message in result["messages"]:
     print(message.pretty_repr())
 ```
 
-This is the core part of the script where the LangGraph agent is set up and invoked. Let's break down this section:
+This is where the LangGraph agent is set up and invoked:
 
 - `available_tools = [create_database, run_sql_query]`: Creates a list of tools that will be made available to the agent. This list includes the `create_database` and `run_sql_query` functions defined earlier.
 - `system_prompt = SystemMessage(...)`: Defines the system message for the AI agent. This message sets the agent's persona and provides instructions on how to use the available tools. It dynamically lists the tools and their descriptions in the prompt, instructing the agent on its capabilities.
@@ -341,7 +339,7 @@ This is the core part of the script where the LangGraph agent is set up and invo
 - `result = agent_graph.invoke(inputs)`: Invokes the LangGraph agent with the specified input. This starts the agent's execution, processing the user's request and orchestrating the use of tools to fulfill the task. The `invoke` method runs the agent and returns the final state, which includes the conversation history and the outcomes of the agent's actions.
 - `for message in result["messages"]: print(message.pretty_repr())`: Iterates through the messages in the `result["messages"]` list, which contains the history of the agent's conversation and actions. `message.pretty_repr()` is used to print each message in a human-readable format, showing the step-by-step execution of the agent's thought process and actions.
 
-#### Visualizing the agent's graph (optional)
+#### Visualize the agent's graph (optional)
 
 You can visualize the agent's graph using LangGraph's built-in visualization tools. To do this, add the following code snippet at the end of the `main.py` script:
 
@@ -352,22 +350,22 @@ with open("graph.png", "wb") as f:
 
 <img width="200" height="200" src="/docs/guides/langgraph-graph.png" alt="LangGraph Agent Graph" />
 
-The graph visually represents the cyclical workflow of the LangGraph agent. Let's break down the key components of the graph:
+The graph shows the agent's cyclical workflow. Its components are:
 
-- **`__start__` Node:** This is the entry point of the graph. Execution begins here when a task is initiated. It represents the starting point of the agent's workflow.
+- **`__start__` node:** The entry point of the graph. Execution begins here when a task starts.
 
-- **`agent` Node:** This node represents the core reasoning component of the agent, powered by the Gemini model.
-  - **Decision Point:** The `agent` node is responsible for processing user input and deciding the next course of action. It determines whether to:
+- **`agent` node:** This node represents the core reasoning component of the agent, powered by the Gemini model.
+  - **Decision point:** The `agent` node is responsible for processing user input and deciding the next course of action. It determines whether to:
     - **Engage tools:** If the task requires database operations (like creating a project or running SQL queries), the agent decides to use the available tools. This is represented by the dotted line leading to the `tools` node.
     - **Respond directly:** If the agent can directly answer the user or has completed the task without needing further tool use, it can proceed to the `__end__` node. This is represented by the dotted line leading directly to the `__end__` node.
 
-- **`tools` Node:** This node is activated when the `agent` node decides to use a tool.
+- **`tools` node:** This node is activated when the `agent` node decides to use a tool.
   - **Tool execution:** Within the `tools` node, the appropriate tool (either `create_database` or `run_sql_query` in this example) is executed based on the agent's decision.
-  - **Feedback loop:** After executing the tool and obtaining results, the workflow loops back to the `agent` node (solid line). This allows the agent to process the tool's output, reason further, and decide on the next step based on the new information. This loop is central to the ReAct (Reason and Act) pattern, enabling iterative problem-solving.
+  - **Feedback loop:** After executing the tool and obtaining results, the workflow loops back to the `agent` node (solid line). This allows the agent to process the tool's output, reason further, and decide on the next step based on the new information. This loop is the core of the ReAct (Reason and Act) pattern.
 
-- **`__end__` Node:** This is the termination point of the graph. When the workflow reaches this node, it signifies that the agent has completed its task or conversation according to the defined termination conditions.
+- **`__end__` node:** The termination point of the graph. Reaching it means the agent has completed its task.
 
-### Running the agent
+### Run the agent
 
 You can now run the `main.py` script to execute the LangGraph agent. Run the following command in your terminal:
 
@@ -449,11 +447,11 @@ Query result: [RealDictRow({'id': 1, 'name': 'John Doe', 'email': 'john.doe@exam
 | 10 | Brittany Miller     | brittany.miller@example.com    |
 ```
 
-Notice how with just a single user input, the agent orchestrates multiple tools to create a Neon project, provision a database, create a table, insert records, and query the records. The agent finally formats the query results as a markdown table as requested.
+From a single user input, the agent orchestrates multiple tools to create a Neon project, provision a database, create a table, insert records, and query the records. The agent finally formats the query results as a markdown table as requested.
 
-### Verifying the agent's actions
+### Verify the agent's actions
 
-You can verify the successful completion of the task by checking the [Neon Console](https://console.neon.tech/). The `langgraph` project should have been created, and the `users` table should contain 10 sample records.
+You can confirm the task completed by checking the [Neon Console](https://console.neon.tech/). The `langgraph` project should have been created, and the `users` table should contain 10 sample records.
 
 ![Output in Neon console](/docs/guides/langgraph-neon-console.png)
 
@@ -467,20 +465,24 @@ You can find the source code for the application described in this guide on GitH
 
 ## Conclusion
 
-This guide has provided an introductory exploration into building AI agents using LangGraph and Neon. You have now seen how to construct an agent capable of performing database operations within Neon, driven by natural language commands. This example illustrates the fundamental structure of LangGraph, demonstrating its approach to managing workflows through interconnected [Nodes](https://langchain-ai.github.io/langgraph/concepts/low_level/#nodes) and [Edges](https://langchain-ai.github.io/langgraph/concepts/low_level/#edges).
+You built a LangGraph agent that creates a Neon project and runs SQL against it from natural language commands, using LangGraph's [nodes](https://langchain-ai.github.io/langgraph/concepts/low_level/#nodes) and [edges](https://langchain-ai.github.io/langgraph/concepts/low_level/#edges).
 
-While this guide covers the basics, LangGraph offers a range of features for developing more advanced applications. To expand your understanding and capabilities, it is recommended to further investigate several key aspects of the framework. [Checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence) provide a mechanism for state persistence, enabling agents to retain context across sessions and resume operations. The use of [Command](https://langchain-ai.github.io/langgraph/how-tos/command) objects allows for control over workflow and state updates within nodes, enhancing agent responsiveness.
+To go further, look at these LangGraph features:
 
-For optimizing application performance and user experience, LangGraph supports [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming), which can provide real-time outputs and token-by-token updates during agent execution. Understanding the [Recursion Limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) is important for managing the execution depth of complex workflows and ensuring predictable behavior. [Human-in-the-Loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows, facilitated by the `interrupt` function and `Command` objects, offer options for integrating human oversight into agent processes, which may be necessary for applications requiring validation or control. Consider adding it for `DELETE` and `UPDATE` operations to the `run_sql_query` tool.
+- [Checkpointers](https://langchain-ai.github.io/langgraph/concepts/persistence) persist state so agents can keep context across sessions and resume work.
+- [Command](https://langchain-ai.github.io/langgraph/how-tos/command) objects control workflow and state updates from within nodes.
+- [Streaming](https://langchain-ai.github.io/langgraph/concepts/streaming) returns outputs and token-by-token updates during execution.
+- The [recursion limit](https://langchain-ai.github.io/langgraph/concepts/low_level/#recursion-limit) caps the execution depth of complex workflows.
+- [Human-in-the-loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop) workflows use the `interrupt` function and `Command` objects to add human review. Consider adding it to the `run_sql_query` tool for `DELETE` and `UPDATE` operations.
 
 ## Resources
 
 - [LangGraph GitHub](https://github.com/langchain-ai/langgraph)
-- [LangGraph Documentation](https://python.langchain.com/docs/langgraph)
-- [LangGraph Conceptual Guide](https://langchain-ai.github.io/langgraph/concepts)
-- [LangGraph Glossary](https://langchain-ai.github.io/langgraph/concepts/low_level/#langgraph-glossary)
-- [Neon Documentation](/docs)
-- [Neon API Reference](/docs/reference/api)
+- [LangGraph documentation](https://python.langchain.com/docs/langgraph)
+- [LangGraph conceptual guide](https://langchain-ai.github.io/langgraph/concepts)
+- [LangGraph glossary](https://langchain-ai.github.io/langgraph/concepts/low_level/#langgraph-glossary)
+- [Neon documentation](/docs)
+- [Neon API reference](/docs/reference/api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 
 <NeedHelp/>

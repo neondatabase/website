@@ -1,54 +1,54 @@
 ---
-title: Using DBeaver with a Hosted Postgres
+title: Using DBeaver with hosted Postgres
 subtitle: A guide on how to manage your Postgres database using DBeaver.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-21T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-DBeaver is a versatile database management tool that allows you to interact with a wide range of databases, including PostgreSQL. This guide will walk you through the steps to set up and use DBeaver with a hosted Postgres database, enabling you to perform various database operations efficiently.
+DBeaver is a database management tool that works with many databases, including Postgres. This guide shows you how to set up DBeaver, connect it to a Postgres database on Neon, and run common database operations.
 
-## Table of Contents
+## Table of contents
 
-- [Setting Up DBeaver](#setting-up-dbeaver)
-- [Connecting to Your Hosted Postgres Database](#connecting-to-your-hosted-postgres-database)
-- [Basic Operations in DBeaver](#basic-operations-in-dbeaver)
+- [Set up DBeaver](#set-up-dbeaver)
+- [Provision a Postgres database on Neon](#provision-a-postgres-database-on-neon)
+- [Connect to your hosted Postgres database](#connect-to-your-hosted-postgres-database)
+- [Basic operations in DBeaver](#basic-operations-in-dbeaver)
 
-## Setting Up DBeaver
+## Set up DBeaver
 
-1. **Download and Install DBeaver**: If you haven't already, download DBeaver from the [official website](https://dbeaver.io/download/). Choose the version suitable for your operating system and follow the installation instructions.
+1. **Download and install DBeaver**: If you haven't already, download DBeaver from the [official website](https://dbeaver.io/download/). Choose the version suitable for your operating system and follow the installation instructions.
 
-2. **Launch DBeaver**: Open DBeaver from your applications menu and ensure it is running.
+2. **Launch DBeaver**: Open DBeaver from your applications menu.
 
-## Provisioning a Serverless Postgres
+## Provision a Postgres database on Neon
 
 1. To get started, go to the [Neon Console](https://console.neon.tech/) and create a new project by entering a project name of your choice.
 
-2. Retrieve connection details for your Lakebase Postgres database:
-   - Navigate to the **Dashboard** of your Neon project.
-   - Click on the **Connect** button which opens a modal.
-   - Select your database and branch.
+2. Retrieve connection details for your database:
+   - Click the **Connect** button in the Console nav to open the **Connect to your branch** modal.
+   - Select your branch, database, and role.
    - Select **Parameters only** to view the connection details.
      ![Neon Connection Details](/docs/connect/connection_details_parameters_only.png)
 
    You will be provided with the following details:
-   - `PGHOST`: The hostname of your Lakebase Postgres database.
+   - `PGHOST`: The hostname of your database.
    - `PGDATABASE`: The name of your database
    - `PGUSER`: Your database username.
    - `PGPASSWORD`: Your database password.
 
-Save the connection details as you will need them in the next steps.
+Save the connection details. You'll need them in the next steps.
 
-## Connecting to Your Hosted Postgres Database
+## Connect to your hosted Postgres database
 
-1. **Open DBeaver**: Ensure DBeaver is running. You will see the main dashboard.
+1. **Open DBeaver**: Make sure DBeaver is running. You'll see the main dashboard.
 
-2. **Create a New Database Connection**:
-   - Click on the "New Database Connection" button (usually a plug icon or from the "Database" menu).
+2. **Create a new database connection**:
+   - Click the "New Database Connection" button (usually a plug icon or from the "Database" menu).
    - In the "Connect to Database" wizard, select "PostgreSQL" from the list of database types and click "Next".
 
-3. **Enter Connection Details**:
+3. **Enter connection details**:
 
    ![Connection Details in DBeaver](/guides/images/dbeaver/conn-1.png)
    - Fill in the required fields based on your Neon connection string:
@@ -57,12 +57,12 @@ Save the connection details as you will need them in the next steps.
      - **Database**: The database name. Enter the value of `PGDATABASE`.
      - **Username**: Your database username. Enter the value of `PGUSER`.
      - **Password**: Your database password. Enter the value of `PGPASSWORD`.
-   - Enable "Show all databases" to ensure all databases in your Neon project are listed.
+   - Enable "Show all databases" to list all databases in your Neon project.
 
    ![](/guides/images/dbeaver/conn-2.png)
-   - Click "Edit Driver Settings" if needed to ensure SSL is enabled. Under the "Driver Properties" tab, set `sslmode` to `require`.
+   - Click "Edit Driver Settings" if needed to enable SSL. Under the "Driver Properties" tab, set `sslmode` to `require`.
 
-4. **Test the Connection**:
+4. **Test the connection**:
    - Click the "Test Connection" button to verify the connection details.
    - If successful, click "Finish" to save the connection. Your new database connection will appear in the left sidebar.
 
@@ -70,20 +70,20 @@ Save the connection details as you will need them in the next steps.
 To prevent Neon's scale-to-zero feature from interrupting an idle connection, configure a keepalive ping in DBeaver. Right-click your connection, select **Edit Connection**, go to **Connection Settings** > **Initialization**, and set **Keep-Alive (seconds)** to `60`. This sends a periodic ping to keep the connection active.
 </Admonition>
 
-## Basic Operations in DBeaver
+## Basic operations in DBeaver
 
-### 1. Running SQL Queries
+### 1. Run SQL queries
 
 - Right-click on your database connection in the left sidebar and select "SQL Editor" > "New SQL Script".
 - Enter your SQL queries in the editor and click the "Execute" button (play icon) to run them.
 - View the results in the results pane below the editor.
 
-### 2. Managing Tables
+### 2. Manage tables
 
 - Expand your database connection in the left sidebar, then navigate to "Databases" > "neondb" > "Schemas" > "public" > "Tables".
 - Right-click on "Tables" to create a new table or manage existing ones (e.g., view, edit, or drop tables).
 
-### 3. Importing and Exporting Data
+### 3. Import and export data
 
 - To import data:
   - Right-click on a table and select "Import Data".
@@ -94,6 +94,6 @@ To prevent Neon's scale-to-zero feature from interrupting an idle connection, co
 
 ## Conclusion
 
-DBeaver is a tool for managing your hosted Postgres database. With it, you can create tables, run queries, and visualize data. This guide covered the setup you need to use DBeaver with Neon.
+You've connected DBeaver to a Postgres database on Neon and used it to run queries, manage tables, and move data in and out. For settings for other GUI tools, see [Connect a GUI application](/docs/connect/connect-postgres-gui).
 
 <NeedHelp />

@@ -1,13 +1,13 @@
 ---
 title: Using Strapi CMS with Lakebase Postgres and Astro to build a blog
-subtitle: A step-by-step guide for building your own blog in an Astro application with Strapi CMS and Postgres powered by Neon
+subtitle: A step-by-step guide for building your own blog in an Astro application with Strapi CMS and a Postgres database on Neon
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.
+In this guide, you will set up a Postgres database on Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ To follow the steps in this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a serverless Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
+- [Provisioning a Postgres database on Neon](#provisioning-a-postgres-database-on-neon)
 - [Setting up Strapi locally with Postgres](#setting-up-strapi-locally-with-postgres)
 - [Configure a blog schema in Strapi CMS](#configure-a-blog-schema-in-strapi-cms)
 - [Configure API read permissions in Strapi CMS](#configure-api-read-permissions-in-strapi-cms)
@@ -26,17 +26,17 @@ To follow the steps in this guide, you will need the following:
 - [Integrate Tailwind CSS in your Astro application](#integrate-tailwind-css-in-your-astro-application)
 - [Create dynamic blog routes in Astro](#create-dynamic-blog-routes-in-astro)
 - [Build and test your Astro application locally](#build-and-test-your-astro-application-locally)
-- [Scale-to-zero with Postgres (powered by Neon)](#scale-to-zero-with-postgres-powered-by-neon)
+- [Scale to zero on Neon](#scale-to-zero-on-neon)
 
-## Provisioning a serverless Postgres database powered by Neon
+## Provisioning a Postgres database on Neon
 
-Using a serverless Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
+A Neon compute scales down to zero when it's idle, so you don't pay for compute while nobody is using the database. Storage is still billed.
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
+To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
+Click **Connect** to open the **Connect to your branch** modal, which shows your database connection string. The **Connection pooling** toggle is on by default, so the string is a pooled connection string (with `-pooler` in the hostname).
 
-![Neon Connection Details](/guides/images/strapi-cms/20b94d5f-aff4-4594-b60b-3a65d4fc884c.png)
+![Connect to your branch modal](/guides/images/strapi-cms/20b94d5f-aff4-4594-b60b-3a65d4fc884c.png)
 
 All Neon connection strings have the following format:
 
@@ -46,16 +46,16 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 
 - `<user>` is the database user.
 - `<password>` is the database user’s password.
-- `<endpoint_hostname>.neon.tech` is the host with `neon.tech` as the [top-level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
+- `<endpoint_hostname>.neon.tech` is the host, on the `neon.tech` domain.
 - `<port>` is the Neon port number. The default port number is 5432.
 - `<dbname>` is the name of the database. **neondb** is the default database created with each Neon project if you do not define your own.
-- `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding when connecting to the Postgres instance.
 
-Each of the above values (except `sslmode`) is used in the next step &#8212; creating a local instance of the Strapi CMS application with Postgres.
+Each of the above values (except `sslmode`) is used in the next step, where you create a local instance of the Strapi CMS application with Postgres.
 
 ## Setting up Strapi locally with Postgres
 
-Let's begin with creating a Strapi CMS backend to serve the content for blog posts. Open your terminal and run the following command:
+Start by creating a Strapi CMS backend to serve the content for blog posts. Open your terminal and run the following command:
 
 ```bash
 npx create-strapi-app@latest blog-api
@@ -84,7 +84,7 @@ cd blog-api
 yarn develop
 ```
 
-The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Lakebase Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS makes sure to store the credentials (and all other data) in your Lakebase Postgres database.
+The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Lakebase Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS stores the credentials (and all other data) in your Lakebase Postgres database.
 
 ![](/guides/images/strapi-cms/52fbde59-04bd-4af0-9e85-5bb33694d7a5.png)
 
@@ -92,7 +92,7 @@ To proceed, click the **Let's start** button to access the admin dashboard. Now,
 
 ## Configure a blog schema in Strapi CMS
 
-Once you have logged into the admin dashboard, it will by default, take you to the **Content-Type Builder** section. Here's where you can start to create the Blog schema. Click on **+ Create new collection type** to get started.
+After you log in, the admin dashboard opens the **Content-Type Builder** section by default. This is where you create the Blog schema. Click on **+ Create new collection type** to get started.
 
 ![Content-Type Builder](/guides/images/strapi-cms/55407bd1-68d4-4251-af02-571ef400f943.png)
 
@@ -136,13 +136,13 @@ Click on the **Content Manager** button in the sidebar to start adding your firs
 
 ![Content Manager](/guides/images/strapi-cms/c735741c-1b1d-49f0-8f61-4ba210f799a6.png)
 
-Enter the **Title**, select the **Image**, and input the markdown associated with the blog. You are now done writing your first post in the local Strapi CMS instance. All the data is synchronized in Postgres (powered by Neon). To finish off the content creation process, click **Save** and **Publish**.
+Enter the **Title**, select the **Image**, and input the markdown associated with the blog. You are now done writing your first post in the local Strapi CMS instance. All the data is stored in your Postgres database on Neon. To finish off the content creation process, click **Save** and **Publish**.
 
 ![Create an entry](/guides/images/strapi-cms/045777e9-a898-490a-bf2b-271858e7ba6a.png)
 
 With that done, let's move on to configuring read permissions for connected clients to access the data corresponding to the blog schema via an API.
 
-## Configure API Read Permissions in Strapi CMS
+## Configure API read permissions in Strapi CMS
 
 To be able to fetch the data authored in your local Strapi CMS instance, you will need to configure what is readable and writeable using APIs. Navigate to **Settings > API Tokens** in your admin dashboard. Click on **Create new API Token** to start creating a new API token.
 
@@ -169,8 +169,8 @@ npm create astro@latest blog-ui
 When prompted, choose:
 
 - `Empty` when prompted on how to start the new project.
-- `Yes` when prompted if plan to write Typescript.
-- `Strict` when prompted how strict Typescript should be.
+- `Yes` when prompted if you plan to write TypeScript.
+- `Strict` when prompted how strict TypeScript should be.
 - `Yes` when prompted to install dependencies.
 - `Yes` when prompted to initialize a git repository.
 
@@ -310,7 +310,7 @@ Let's understand the code above in two parts:
 
 - The HTML section represents the content of a particular blog page. The blog data attributes such as Title, Image URL, and markdown are obtained from `Astro.props` (passed in `getStaticPaths` as props). Further, the markdown is parsed into HTML using the `marked` library, and injected into the DOM using `set:html` template directive of Astro.
 
-## Build and Test your Astro application locally
+## Build and test your Astro application locally
 
 To test the Astro application in action, prepare a build and run the preview server using the following command:
 
@@ -318,14 +318,14 @@ To test the Astro application in action, prepare a build and run the preview ser
 npm run build && npm run preview
 ```
 
-## Scale-to-zero with Postgres (powered by Neon)
+## Scale to zero on Neon
 
-Interestingly, during the entire process of building this application, you have used Neon's **Scale-to-zero** feature which places your Postgres compute endpoint into an idle state after 5 minutes of inactivity. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+While you built this application, Neon's [scale to zero](/docs/introduction/scale-to-zero) feature suspended your Postgres compute after 5 minutes of inactivity. To see when the compute started and suspended, open the **Monitoring** page in the Neon Console and view the system operations ([System operations](/docs/manage/operations)).
 
 ![Neon Monitoring page](/guides/images/strapi-cms/ee753f7d-3da8-4a4c-84c5-be7b6cdce486.png)
 
 ## Summary
 
-In this guide, you learned how to build a blog in an Astro application using Strapi CMS and a serverless Postgres database (powered by Neon). You also learned how to create content collections in Strapi CMS and dynamic blog routes in an Astro application.
+You built a blog in an Astro application, with Strapi CMS storing its content in a Postgres database on Neon and dynamic Astro routes rendering each post. As a next step, deploy the Strapi backend and point it at the same Neon database.
 
 <NeedHelp />

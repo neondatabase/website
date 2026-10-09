@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -66,11 +66,8 @@ neon api-keys create --name development
 
 ```text shouldWrap
 API key
-┌─────────┬─────────────┐
-│ Id      │ Name        │
-├─────────┼─────────────┤
-│ 3225999 │ development │
-└─────────┴─────────────┘
+Id    3225999
+Name  development
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
@@ -138,11 +135,8 @@ neon api-keys create --name orgkey --org-id org-example-12345678
 
 ```text shouldWrap
 API key
-┌─────────┬────────┐
-│ Id      │ Name   │
-├─────────┼────────┤
-│ 3243302 │ orgkey │
-└─────────┴────────┘
+Id    3243302
+Name  orgkey
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
@@ -208,11 +202,9 @@ neon api-keys create --name only-this-project --project-id some-project-123
 
 ```text shouldWrap
 API key
-┌─────────┬───────────────────┬───────────────────┐
-│ Id      │ Name              │ Project           │
-├─────────┼───────────────────┼───────────────────┤
-│ 3243162 │ only-this-project │ some-project-123  │
-└─────────┴───────────────────┴───────────────────┘
+Id       3243162
+Name     only-this-project
+Project  some-project-123
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
@@ -247,7 +239,7 @@ curl --request POST \
   "id": 1904821,
   "key": "neon_project_key_1234567890abcdef1234567890abcdef",
   "name": "test-project-scope",
-  "created_at": "2024-12-11T21:34:58Z",
+  "created_at": "2026-12-11T21:34:58Z",
   "created_by": "user_01h84bfr2npa81rn8h8jzz8mx4",
   "project_id": "project-id-123"
 }
@@ -291,8 +283,8 @@ For attribute definitions, find the [Retrieve project details](/docs/reference/a
       "provisioner": "k8s-pod",
       "pg_version": 15,
       "locked": false,
-      "created_at": "2023-01-03T18:22:56Z",
-      "updated_at": "2023-01-03T18:22:56Z",
+      "created_at": "2026-01-03T18:22:56Z",
+      "updated_at": "2026-01-03T18:22:56Z",
       "proxy_host": "us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 3072
     }

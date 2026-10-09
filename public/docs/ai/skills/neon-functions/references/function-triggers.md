@@ -111,6 +111,8 @@ The Neon MCP server (`?category=functions`) exposes `list_triggers`, `get_trigge
 
 Neon POSTs JSON. The Functions proxy drops client-supplied `x-neon-*` headers, so a present `x-neon-trigger-invocation-id` is from a trigger delivery. It must match `invocation_id` in the body.
 
+A Function that also serves app or public HTTP must not apply JWT or `X-Secret` middleware to the trigger path. Neon trigger POSTs do not send those. Caller shapes: [production-hardening.md](production-hardening.md).
+
 Schedule wire JSON (snake_case):
 
 ```json

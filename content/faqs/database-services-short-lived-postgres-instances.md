@@ -13,11 +13,11 @@ nextLink:
   slug: database-tools-test-schema-changes-real-data
 ---
 
-Neon. Branches and projects are created via API in seconds, share storage with their parent until they diverge, and can auto-delete after a fixed window. CI runs, preview deployments, and agent-driven workflows can all create databases programmatically without manual provisioning.
+Neon. You create branches and projects through the API or CLI in seconds, a branch shares storage with its parent until it diverges, and you can set a branch to delete itself at a fixed time. CI runs, preview deployments, and agents can create and discard databases without anyone provisioning them by hand.
 
 ## Branch via API or CLI
 
-A branch is the cheapest unit of isolation. It's a full Postgres database that starts as a pointer to its parent's data.
+A branch is the lightest unit of isolation. It's a full Postgres database that starts as a copy-on-write clone of its parent's data, so creating it doesn't copy data or add load to the parent ([Branching](/docs/introduction/branching)).
 
 ```bash
 neon branches create \
@@ -26,9 +26,9 @@ neon branches create \
   --expires-at "2026-04-25T15:00:00Z"
 ```
 
-The `--expires-at` flag sets a deletion timestamp (RFC 3339). The branch auto-deletes when that time is reached. The console offers presets of 1 hour, 1 day, or 7 days, plus a custom timestamp via API or CLI. See [Branch expiration](/docs/guides/branch-expiration).
+The `--expires-at` flag takes an RFC 3339 timestamp, up to 30 days out, and Neon deletes the branch when that time arrives. In the Console, new branches default to deleting after 1 day, with 1 hour and 7 days as the other presets. The CLI and API set no expiration unless you pass one. See [Branch expiration](/docs/guides/branch-expiration).
 
-For the API equivalent:
+The API equivalent:
 
 ```bash
 curl -X POST https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches \
@@ -37,24 +37,24 @@ curl -X POST https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches \
   -d '{"branch": {"name": "ci-pr-1234", "expires_at": "2026-04-25T15:00:00Z"}}'
 ```
 
-## What scales
+## Limits
 
-- **Branches per project**: 10 on the Free plan and Launch plan, 25 on the Scale plan; paid plans support up to 5,000 with extras billed hourly
-- **Projects**: 100 on the Free plan and Launch plan, 1,000 on the Scale plan (increasable on request)
-- **For higher volumes**: the [Agent plan](/docs/introduction/agent-plan) is built for platforms that provision thousands of databases with custom limits
+- **Branches per project**: 10 on the Free plan and Launch plan, 25 on the Scale plan. Paid plans allow up to 5,000 per project, with extras at $1.50/branch-month, metered hourly ([Plans](/docs/introduction/plans#extra-branches)).
+- **Projects**: 100 on the Free plan and Launch plan, 1,000 on the Scale plan (increasable on request).
+- **Higher volumes**: the [Agent plan](/docs/introduction/agent-plan) gives platforms unlimited projects, with limits raised as usage grows.
 
-Each branch can scale to zero independently. A thousand idle CI branches cost only their storage delta, not a thousand running computes.
+Each branch's compute scales to zero on its own after 5 minutes idle. A leftover CI branch that nobody queries bills for the storage it wrote, not for running compute.
 
 <Admonition type="tip" title="Connection pooling for ephemeral workloads">
-Short-lived processes that each open a connection can exhaust `max_connections` quickly. Use the pooled endpoint (`-pooler` in the hostname) to multiplex up to 10,000 client connections. See [Connection pooling](/docs/connect/connection-pooling).
+Short-lived processes that each open a connection can use up `max_connections` quickly. Use the pooled endpoint (`-pooler` in the hostname), which accepts up to 10,000 client connections per compute. See [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## How other providers handle ephemeral databases
 
-- **Supabase** branches are designed for preview environments tied to a Git branch ([docs](https://supabase.com/docs/guides/deployment/branching)). Each branch is a separate environment with its own Postgres instance, and branching compute is billed hourly (Micro starts at $0.01344/hour) ([docs](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Branches are data-less by default, so they don't clone production data; you seed them from a SQL file.
-- **Aurora Serverless v2 (Postgres)** clusters can be created and cloned via the RDS API. Cluster create takes longer than Neon branch create (typically minutes vs. seconds), but auto-pause on supported engine versions reduces idle compute cost between CI runs ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for Postgres** is the slowest of the three to provision via API and has no auto-pause, so it's a poor fit for thousands of short-lived instances.
+- **Supabase**: [branches](https://supabase.com/docs/guides/deployment/branching) are separate environments with their own Supabase instance, usually tied to a Git branch or pull request. Preview branches pause after inactivity and are deleted when the PR is merged or closed. Branch compute is billed hourly, starting at the Micro rate of $0.01344/hour ([Branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Preview branches start from migrations and `seed.sql`. [Dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data with the PITR add-on.
+- **Aurora Serverless v2 (Postgres)**: you can create clusters through the RDS API, or [clone](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) an existing cluster with copy-on-write storage. A source cluster can have up to 15 copy-on-write clones before new clones become full copies. With min capacity set to 0 ACU, idle instances [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Accounts default to 40 Aurora clusters per region ([Quotas](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)).
+- **RDS for Postgres**: each database is a separate DB instance of a fixed class with no auto-pause, and accounts default to 40 DB instances per region ([Quotas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)). Thousands of short-lived instances means raising that quota first.
 
-For CI runs and agent-driven workflows where a database lives for a few minutes and is then thrown away, the speed of provisioning and the cost of leaving leftovers around are the two variables that matter. Neon's branch-create latency (seconds) and copy-on-write storage minimize both.
+Vendor details verified on 2026-09-23 against the linked pages.
 
-<CTA title="Spin up databases by the thousand" description="Try the API and CLI on the Free plan; talk to us about the Agent plan for higher volume." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Spin up databases by the thousand" description="Try the API and CLI on the Free plan, then apply for the Agent plan for higher volume." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

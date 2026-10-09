@@ -4,24 +4,24 @@ subtitle: Learn how to handle database migrations and schema changes in a Flask 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-14T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Flask is a lightweight and flexible web framework for Python that makes it easy to build web applications. When working with databases in [Flask](https://flask.palletsprojects.com/), [SQLAlchemy](https://www.sqlalchemy.org/) is a popular choice for an ORM.
+[Flask](https://flask.palletsprojects.com/) is a lightweight web framework for Python, and [SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM to use with it.
 
-As your Flask application grows, so does your database schema and its complexity. Managing these changes effectively is important for maintaining data integrity and smooth deployments.
+As your Flask application grows, so does your database schema. Managing those changes carefully protects your data and keeps deployments predictable.
 
-This guide will walk you through the process of handling database migrations and schema changes in a Flask application using Flask-Migrate and Lakebase Postgres.
+This guide walks you through handling database migrations and schema changes in a Flask application using Flask-Migrate and Lakebase Postgres.
 
 ## Prerequisites
 
 Before we begin, make sure you have:
 
-- Python 3.7 or later installed
-- A [Neon](https://console.neon.tech/signup) account for Postgres hosting
+- Python 3.9 or later installed
+- A [Neon](https://console.neon.tech/signup) account
 - Basic familiarity with Flask and SQLAlchemy
 
-## Setting up the Project
+## Setting up the project
 
 1. Create a new directory for your project and navigate into it:
 
@@ -47,13 +47,13 @@ Before we begin, make sure you have:
 
    We are installing Flask, Flask-SQLAlchemy, Flask-Migrate, psycopg2-binary (Postgres driver), and python-dotenv (for managing environment variables).
 
-   An additional thing that you might want to do is to create a `requirements.txt` file with the installed packages:
+   You might also want to create a `requirements.txt` file with the installed packages:
 
    ```bash
    pip freeze > requirements.txt
    ```
 
-   This will allow you to easily install the required packages on another machine by running:
+   This lets you install the same packages on another machine by running:
 
    ```bash
    pip install -r requirements.txt
@@ -67,11 +67,11 @@ Before we begin, make sure you have:
 
    Replace the placeholders with your actual Neon database credentials.
 
-   Note that you should never commit your `.env` file to version control. Add it to your `.gitignore` file to prevent accidental commits.
+   Never commit your `.env` file to version control. Add it to your `.gitignore` file to prevent accidental commits.
 
    Instead, you can have a `.env.example` file with the required variables and commit that to your repository. Then, each developer can create their own `.env` file based on the `.env.example` template including their own credentials.
 
-## Creating the Flask Application
+## Creating the Flask application
 
 With the project set up, let's create the Flask application and set up database migrations.
 
@@ -127,25 +127,25 @@ This sets up a basic Flask application with SQLAlchemy and Flask-Migrate, and de
 
 1. **Imports**: We import necessary modules including Flask, SQLAlchemy, Flask-Migrate, os (for environment variables), and dotenv (for loading .env files).
 
-2. **Environment Variables**: We use `load_dotenv()` to load environment variables from a .env file, which will include our database URL.
+2. **Environment variables**: We use `load_dotenv()` to load environment variables from a .env file, which will include our database URL.
 
-3. **Flask App Initialization**: We create a Flask application instance.
+3. **Flask app initialization**: We create a Flask application instance.
 
-4. **Database Configuration**: We configure the SQLAlchemy database URI using the `DATABASE_URL` environment variable.
+4. **Database configuration**: We configure the SQLAlchemy database URI using the `DATABASE_URL` environment variable.
 
-5. **SQLAlchemy and Flask-Migrate Setup**: We initialize SQLAlchemy and Flask-Migrate with our Flask app. This sets up our ORM and migration capabilities.
+5. **SQLAlchemy and Flask-Migrate setup**: We initialize SQLAlchemy and Flask-Migrate with our Flask app. This sets up our ORM and migration capabilities.
 
-6. **User Model**: We define a `User` model that represents the structure of our `user` table in the database. It includes:
+6. **User model**: We define a `User` model that represents the structure of our `user` table in the database. It includes:
    - An `id` field as the primary key
    - A `name` field that's required and has a maximum length of 100 characters
    - An `email` field that's required, unique, and has a maximum length of 120 characters
    - A `__repr__` method that provides a string representation of the User object
 
-7. **Application Run**: Finally, we include a conditional to run the application in debug mode if the script is executed directly.
+7. **Application run**: Finally, we include a conditional to run the application in debug mode if the script is executed directly.
 
-This setup provides a foundation for building a Flask application with database integration and migration capabilities. The `User` model can be expanded or additional models can be added as the application grows.
+You can expand the `User` model or add more models as the application grows.
 
-## Initializing Migrations
+## Initializing migrations
 
 To start using Flask-Migrate, you need to initialize it in your project. Run the following command in your terminal:
 
@@ -157,7 +157,7 @@ This creates a `migrations` directory in your project that will store migration 
 
 Make sure to add the `migrations` directory to your Git repository so that you can track changes to your database schema over time.
 
-## Creating the Initial Migration
+## Creating the initial migration
 
 Now, let's create our first migration to set up the initial database schema. Run the following command:
 
@@ -167,11 +167,11 @@ flask db migrate -m "Initial migration"
 
 This command generates a new migration script in the `migrations/versions` directory and the `-m` flag allows you to provide a message describing the migration. The message is useful for tracking changes and understanding the purpose of each migration.
 
-Open the generated file and review the changes. It should contain the SQL to create the `user` table based on our `User` model. This is possible because Flask-Migrate uses SQLAlchemy's reflection capabilities to generate the migration script based on the model definitions instead of writing raw SQL or manually creating the schema.
+Open the generated file and review the changes. It should contain the operations to create the `user` table based on our `User` model. Alembic's autogenerate feature compares your model definitions with the current database schema and writes the migration for you, so you don't have to write raw SQL.
 
-It is a good practice to review the generated migration script before applying it to your database. This way, you can ensure that the changes are correct and will not cause any issues as in some cases Alembic might not generate the migration script as expected and you might need to modify it manually, so remember to always review the generated migration scripts.
+Always review the generated migration script before applying it. Autogenerate doesn't detect every kind of change, and sometimes you'll need to edit the script by hand.
 
-## Applying the Migration
+## Applying the migration
 
 After reviewing the migration script, to apply the migration and create the table in your Lakebase Postgres database, run:
 
@@ -181,7 +181,7 @@ flask db upgrade
 
 This command executes the migration script and creates the `user` table in your database.
 
-The output that you should see after running the `flask db upgrade` command should look something like this:
+The output should look something like this:
 
 ```
 INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
@@ -191,7 +191,7 @@ INFO  [alembic.runtime.migration] Running upgrade  -> 1e48b6167844, Initial migr
 
 This indicates that the migration was successful and the `user` table was created in your database.
 
-## Making Schema Changes
+## Making schema changes
 
 Now that the initial migration is complete, let's make some changes to the schema. We'll add a new field to the `User` model and create a new migration to apply the changes.
 
@@ -224,21 +224,21 @@ flask db upgrade
 
 The `age` column should now be added to the `user` table in your database. If you want to revert the changes, you can run `flask db downgrade` to roll back the last migration.
 
-If you were to check the `user` table in your database, you should see that the `age` column has been added:
+If you check the `user` table in your database, you should see the new `age` column. Because `user` is a reserved word in Postgres, quote the table name:
 
 ```sql
-SELECT * FROM user;
+SELECT * FROM "user";
 ```
 
 This will return the data from the `user` table including the new `age` column.
 
-## Renaming Columns
+## Renaming columns
 
 As your application evolves, you may need to rename columns in your database schema.
 
-Such changes need to be handled carefully to avoid data loss or corruption. You also need to make sure that the application code is updated to reflect the new column names otherwise it might not be backwards compatible leading to issues.
+Handle renames carefully to avoid data loss. You also need to update the application code to use the new column name, or queries that reference the old name will break.
 
-To rename a column, you'll need to use SQLAlchemy's `alter_column` operation. Let's rename the `age` column to `years_old`:
+To rename a column, use Alembic's `alter_column` operation. Let's rename the `age` column to `years_old`:
 
 1. Create a new migration:
 
@@ -246,7 +246,7 @@ To rename a column, you'll need to use SQLAlchemy's `alter_column` operation. Le
 flask db migrate -m "Rename age to years_old"
 ```
 
-2. As the `alter_column` operation is not directly supported by Flask-Migrate, you'll need to modify the generated migration script manually.
+2. Autogenerate can't detect a column rename (it sees a dropped column and a new one), so you'll need to edit the generated migration script manually.
 
 Open the generated migration file and modify it:
 
@@ -269,21 +269,20 @@ flask db upgrade
 
 The `age` column should now be renamed to `years_old` in your database. Remember to be cautious when renaming columns, as it can have implications on your application code and queries.
 
-## Working with Indexes
+## Working with indexes
 
-Adding indexes can improve query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgresql/index-types).
+Adding indexes can improve query performance. To learn more about indexing, see [Postgres index types](/docs/postgresql/index-types).
 
 Let's add an index to the `email` column.
 
 Open the `User` model in `app.py` and add the `index=True` parameter to the `email` column:
 
-```python {6}
+```python {4}
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    age = db.Column(db.Integer)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
+    age = db.Column(db.Integer)
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -312,11 +311,11 @@ flask db upgrade
 
 The `email` column should now have an index in your database, which can improve query performance when searching by email.
 
-## Migrations in CI/CD Pipeline
+## Migrations in a CI/CD pipeline
 
-Automating database migrations in your Continuous Integration pipeline can help with catching potential issues early.
+Running database migrations in your Continuous Integration pipeline catches problems early.
 
-By using Neon's branching feature, you can test your migrations safely without affecting your production database while ensuring that your application code and database schema changes are always in sync.
+With Neon branching, you can test your migrations on a copy of your data without touching your production database, and test schema changes together with the code that depends on them.
 
 Here's an example of how you can automate migration testing using GitHub Actions and Neon branches:
 
@@ -384,24 +383,22 @@ This workflow does the following:
 
 6. Executes your test suite against the updated database schema in the Neon branch.
 
-7. Deletes the temporary Neon branch after the workflow completes, regardless of success or failure to make sure that no resources are left behind.
+7. Deletes the temporary Neon branch after the workflow completes, whether it succeeded or failed, so no branches are left behind.
 
-Using Neon's branching feature in your CI pipeline offers several advantages:
+With this setup:
 
-- You can test your migrations and schema changes in a separate branch without affecting your production or staging databases.
-- Catch migration issues before they reach your production branch or production environment.
-- Ensures that your database schema changes are always tested alongside your application code changes.
-- Allows you to run your full test suite against the updated schema without risk to existing data.
+- Migrations and schema changes run on a separate branch, not your production or staging databases.
+- Migration issues surface before they reach your production branch.
+- Schema changes are tested alongside the application code changes in the same pull request.
+- Your full test suite runs against the updated schema without risk to existing data.
 
 ## Conclusion
 
-Managing database migrations is an important part of maintaining and evolving your Flask application. With Flask-Migrate and Lakebase Postgres, you have the tools to handle schema changes safely. Remember to always test your migrations thoroughly and have a solid backup strategy in place.
+You now have a Flask app whose schema changes are managed by Flask-Migrate and tested on a Neon branch in CI. Keep reviewing each generated migration script before you apply it, and give migrations descriptive messages so you can tell what each one does.
 
-One thing that you should get in the habit of doing is to always review the generated migration scripts before applying them to your database. This way you can ensure that the changes that are about to be applied are correct and that they will not cause any issues. As well as that, you should use meaningful names for your migrations so that you can easily identify what each migration does.
+## Additional resources
 
-## Additional Resources
-
-- [Flask-Migrate Documentation](https://flask-migrate.readthedocs.io/en/latest/)
+- [Flask-Migrate documentation](https://flask-migrate.readthedocs.io/en/latest/)
 - [SQLAlchemy Migrations](https://docs.sqlalchemy.org/en/20/)
-- [Alembic Documentation](https://alembic.sqlalchemy.org/en/latest/)
-- [Neon Documentation](/docs)
+- [Alembic documentation](https://alembic.sqlalchemy.org/en/latest/)
+- [Neon documentation](/docs)

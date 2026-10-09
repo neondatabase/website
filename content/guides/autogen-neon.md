@@ -4,10 +4,10 @@ subtitle: A step-by-step guide to building AI agents using AutoGen and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-12T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks.
+This guide shows how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). With AutoGen and Neon, AI agents can create databases, run SQL queries, and automate data tasks.
 
 In this guide, we'll walk through building an AI agent with a practical example: creating a system that retrieves recent machine learning papers from arXiv and stores them in a Neon database. Following this example, you will learn how to:
 
@@ -17,13 +17,13 @@ In this guide, we'll walk through building an AI agent with a practical example:
 
 ## Prerequisites
 
-Before you begin, make sure you have the following prerequisites:
+Before you begin, make sure you have the following:
 
 - **Python 3.10 or higher:** This guide requires Python 3.10 or a later version. If you don't have it installed, download it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API key:**
-  - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-  - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
+  - Sign up for a Neon account on the Free plan at [neon.com](https://console.neon.tech/signup).
+  - After signing up, create a Neon API key in the [Neon Console](https://console.neon.tech/app/settings/profile) under **Account settings** > **API keys**. Your application uses this key to authenticate with the Neon API.
 
 - **OpenAI account and API key:**
   - This guide uses the `gpt-4o` model from OpenAI to power the AI agent. If you don't have an OpenAI account, sign up at [platform.openai.com](https://platform.openai.com/).
@@ -37,7 +37,7 @@ Before we start building your AI agent, let's understand some fundamental concep
 
 ### What is AutoGen?
 
-AutoGen is a framework designed to simplify the development of applications using LLMs. It allows you to construct AI workflows by creating **conversational agents** that are capable of:
+AutoGen is a framework for building applications with LLMs. You build AI workflows from **conversational agents** that are capable of:
 
 - **Conversation:** Engaging in multi-agent dialogues to solve tasks collaboratively.
 - **Planning:** Developing and executing strategic plans to achieve goals.
@@ -49,35 +49,35 @@ AutoGen is a framework designed to simplify the development of applications usin
   - **Receive and process messages:** Accept and understand messages from users or other agents.
   - **Act autonomously:** Perform tasks, use tools, or generate responses based on their programmed logic and received messages.
   - **Agent types:** AutoGen offers various agent types, including:
-    - **`AssistantAgent`:** A versatile agent powered by an LLM, capable of using tools and designed to be helpful and able to follow instructions. Ideal for general tasks and complex reasoning.
+    - **`AssistantAgent`:** A general-purpose agent powered by an LLM that can use tools and follow instructions. Use it for general tasks and multi-step reasoning.
     - **`CodeExecutorAgent`:** A specialized agent designed to execute code snippets. Useful for tasks requiring script execution or interacting with system commands.
     - **`UserProxyAgent`:** An agent that serves as an interface for human users. It can relay communications between the user and other agents and can be configured to request human input at specific workflow stages.
 
-- **Teams (Group chat):** AutoGen facilitates forming agent teams to tackle complex problems collaboratively. Key team configurations include:
+- **Teams (Group chat):** AutoGen lets you group agents into teams that work on a problem together. Key team configurations include:
   - **`RoundRobinGroupChat`:** A straightforward team setup where agents communicate in turns, following a round-robin approach to ensure balanced contribution from each member.
   - **`SelectorGroupChat`:** A team configuration with more control over agent selection, including LLM-driven speaker selection for dynamic conversation flow.
 
 - **Tools:** AutoGen agents can use tools to interact with external environments or perform specialized functions. Tools can be:
   - **Python functions:** Custom Python functions that agents can call to execute specific actions or computations.
-  - **External APIs:** Integrations with external services, allowing agents to access a wide range of functionalities like web searching.
+  - **External APIs:** Integrations with external services, such as web search.
 
-- **Code execution:** AutoGen equips agents with code execution capabilities, enabling them to perform tasks involving computation, data manipulation, or system interactions, enhancing their problem-solving abilities.
+- **Code execution:** AutoGen agents can execute code, so they can handle computation, data manipulation, or system interactions.
 
-- **Termination conditions:** To effectively manage conversations and workflows, AutoGen allows defining termination conditions. These conditions specify criteria for ending a conversation or task, ensuring efficient resource use and task completion. Examples include:
+- **Termination conditions:** AutoGen lets you define criteria for ending a conversation or task. Examples include:
   - **`TextMentionTermination`:** Ends the conversation when a predefined text or phrase is detected in the dialogue (e.g., "TERMINATE").
   - **`MaxMessageTermination`:** Automatically stops the conversation after a set number of messages have been exchanged, preventing infinite loops.
 
-With these components, AutoGen gives you a framework for building AI applications, from simple chatbots to collaborative multi-agent systems.
+With these components, you can build anything from a simple chatbot to a multi-agent system.
 
-## Why Neon for AI Agents?
+## Why Neon for AI agents
 
-Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
+A few properties of Neon matter for AI agent development:
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **One-second provisioning:** Neon databases can be provisioned in about a second, so agents that create databases on the fly don't wait. Traditional databases often take minutes to provision.
 
-- **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time. This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances. It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
+- **Scale to zero and usage-based pricing:** Lakebase Postgres computes scale to zero when idle, so you don't pay for compute while they're suspended (storage still bills). This keeps costs down for agent workflows with unpredictable load and many short-lived databases, and makes "database-per-agent" or "database-per-session" patterns affordable.
 
-- **Agent-Friendly API:** Neon provides a simple REST API for managing databases, roles, branches, and various other Neon platform operations. This API is easy for AI agents (and human developers) to interact with programmatically, allowing agents to manage their own database infrastructure without complex tooling.
+- **Agent-friendly API:** Neon provides a REST API for managing projects, databases, roles, branches, and other Neon resources. Agents (and developers) can call it directly to manage their own database infrastructure without extra tooling.
 
 ## Building the AI agent
 
@@ -85,7 +85,7 @@ Let's start building your AI agent. First, create a new directory for your proje
 
 ### Setting up a virtual environment
 
-Creating a virtual environment is strongly recommended to manage project dependencies in isolation. Use `venv` to create a virtual environment within your project directory:
+Use a virtual environment to keep project dependencies isolated. Use `venv` to create a virtual environment within your project directory:
 
 ```bash
 cd autogen-neon-example
@@ -267,7 +267,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-Let's take a closer look at the code. While it might seem lengthy at first, we'll break it down into sections to make it easier for you to understand.
+The following sections walk through the code.
 
 ### Import necessary libraries
 
@@ -295,7 +295,7 @@ neon_client = NeonAPI(
 
 This section imports all the Python libraries required for the script. These include libraries for AutoGen agents, Neon API interaction, SQL execution, environment variable management, and asynchronous operations. It also initializes the Neon API client using your API key loaded from the `.env` file.
 
-### Define the tools for Agent interaction
+### Define the tools for agent interaction
 
 To enable agents to interact with the Neon database, we define specific tools. In this example, we create two primary tools: `create_database` and `run_sql_query`.
 
@@ -326,8 +326,8 @@ This Python function defines a tool that allows agents to create new Neon projec
 - It accepts `project_name: str` as an argument, which specifies the name for the new Neon project.
 - It uses `neon_client.project_create()` to send a request to the Neon API to create a new project.
 - Upon successful project creation, it retrieves the connection URI for the newly created Neon database using `neon_client.connection_uri()`.
-- It returns a formatted string that confirms the project and database creation and includes the connection URI, which is essential for connecting to the database.
-- In case of any errors during project creation, it catches the exception and returns an error message, aiding in debugging and error handling.
+- It returns a formatted string that confirms the project and database creation and includes the connection URI.
+- If project creation fails, it catches the exception and returns an error message.
 
 #### Define `run_sql_query` tool
 
@@ -365,7 +365,7 @@ def run_sql_query(connection_uri: str, query: str) -> str:
 This Python function is defined as a tool for agents to execute SQL queries directly against a Neon database.
 
 - It takes two arguments: `connection_uri: str`, which is the URI string required to establish a database connection, and `query: str`, the SQL query intended for execution.
-- It establishes a connection to the Neon database using `psycopg2.connect(connection_uri)`
+- It connects to the Neon database using `psycopg2.connect(connection_uri)`.
 - It creates a cursor object using `conn.cursor(cursor_factory=RealDictCursor)`. The `RealDictCursor` is specified to fetch query results as dictionaries, which is often more convenient for data manipulation in Python.
 - It executes the provided SQL query using `cur.execute(query)`.
 - It includes error handling for SQL query execution. If any exception occurs, it rolls back the transaction using `conn.rollback()` and returns an error message.
@@ -407,7 +407,7 @@ async def main() -> None:
     await Console(stream)
 ```
 
-This `async def main() -> None:` function is the core of your script, where you set up and orchestrate the AutoGen agents to perform the desired task. Let's break down what happens inside:
+The `async def main() -> None:` function sets up and runs the AutoGen agents. Here's what happens inside:
 
 - **Initialize model client:**
 
@@ -427,7 +427,7 @@ This `async def main() -> None:` function is the core of your script, where you 
   )
   ```
 
-  Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is designed to be the main problem solver. The `system_message` is the key part of its configuration. It defines its role, capabilities, and instructions on how to interact with other agents and tools. It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
+  Here, we instantiate the primary agent, `assistant`, using `AssistantAgent`. This agent is the main problem solver. The `system_message` is the most important part of its configuration. It defines its role, capabilities, and instructions on how to interact with other agents and tools. It emphasizes task planning, delegation, and using the specialized `code_executor` and `db_admin` agents for specific sub-tasks.
 
 - **Create `code_executor` agent:**
 
@@ -452,7 +452,7 @@ This `async def main() -> None:` function is the core of your script, where you 
   )
   ```
 
-  Next, you create another `AssistantAgent`, `db_admin`, which is specifically designed for database administration tasks. Critically, we equip this agent with the `tools=[create_database, run_sql_query]` we defined earlier. The `system_message` for `db_admin` instructs it on its role as a database admin assistant and how to use the provided tools.
+  Next, you create another `AssistantAgent`, `db_admin`, which is specifically designed for database administration tasks. We give this agent the `tools=[create_database, run_sql_query]` defined earlier. The `system_message` for `db_admin` instructs it on its role as a database admin assistant and how to use the provided tools.
 
 - **Define termination conditions:**
 
@@ -460,7 +460,7 @@ This `async def main() -> None:` function is the core of your script, where you 
   termination = TextMentionTermination("TERMINATE") | MaxMessageTermination(20)
   ```
 
-  This sets up termination conditions for your group chat. The conversation will end if either the phrase "TERMINATE" is mentioned by any agent (`TextMentionTermination`) or if the conversation reaches 20 messages (`MaxMessageTermination(20)`), whichever comes first. This is important to prevent conversations from running indefinitely.
+  This sets up termination conditions for your group chat. The conversation will end if either the phrase "TERMINATE" is mentioned by any agent (`TextMentionTermination`) or if the conversation reaches 20 messages (`MaxMessageTermination(20)`), whichever comes first. This keeps conversations from running indefinitely.
 
 - **Create `group_chat`:**
 
@@ -484,11 +484,11 @@ This `async def main() -> None:` function is the core of your script, where you 
   Finally, we initiate and run the group chat using `group_chat.run_stream()`. We provide the initial `task` for the agents: to retrieve the 10 most recent Machine Learning papers from arXiv, display their titles and links, and then store this information in a database named `arxiv_papers`. `Console(stream)` is used to provide a real-time, streaming output of the conversation to the console, making it easy for you to follow along with the agent's interactions.
 
     <Admonition type="warning">
-        This guide uses `LocalCommandLineCodeExecutor` for simplicity, which allows AI agents to execute commands directly on your local machine. **This setup is highly insecure and is strictly NOT recommended for production environments.**  Agents could potentially perform harmful actions on your system.
+        This guide uses `LocalCommandLineCodeExecutor` for simplicity, which allows AI agents to execute commands directly on your local machine. **This setup is insecure and not recommended for production environments.** Agents could perform harmful actions on your system.
 
-        For production deployments, we strongly advise using `DockerCommandLineCodeExecutor`. This executor runs code within isolated Docker containers, which limits the agent's access to your system.
+        For production deployments, use `DockerCommandLineCodeExecutor`. This executor runs code within isolated Docker containers, which limits the agent's access to your system.
 
-        Setting up `DockerCommandLineCodeExecutor` involves additional configuration steps, including Docker setup and image management, which are beyond the scope of this getting started guide.  Please refer to the [AutoGen documentation](https://microsoft.github.io/autogen/stable/reference/python/autogen_ext.code_executors.docker.html#autogen_ext.code_executors.docker.DockerCommandLineCodeExecutor) for detailed instructions on how to configure and use `DockerCommandLineCodeExecutor` securely.
+        Setting up `DockerCommandLineCodeExecutor` involves additional configuration steps, including Docker setup and image management, which are beyond the scope of this guide. See the [AutoGen documentation](https://microsoft.github.io/autogen/stable/reference/python/autogen_ext.code_executors.docker.html#autogen_ext.code_executors.docker.DockerCommandLineCodeExecutor) for detailed instructions on how to configure and use `DockerCommandLineCodeExecutor` securely.
 
     </Admonition>
 
@@ -507,12 +507,12 @@ Executing this command will:
 - Launch the `main.py` script, initiating the AutoGen agent team.
 - Start the collaborative process as the agents begin to interact to achieve the defined task.
 - Display a real-time, step-by-step conversation between the agents directly in your console.
-- Showcase the `assistant` agent's role in planning and delegating sub-tasks to the `code_executor` (for coding needs) and `db_admin` (for database operations).
-- Ultimately, lead to the retrieval of recent ML papers from arXiv and their storage in a Neon database named `arxiv_papers`, demonstrating a complete workflow.
+- Show the `assistant` agent planning and delegating sub-tasks to the `code_executor` (for coding needs) and `db_admin` (for database operations).
+- Retrieve recent ML papers from arXiv and store them in a Neon database named `arxiv_papers`.
 
 ### Expected output
 
-Upon running `python main.py`, you will see a detailed, turn-based conversation unfold in your console. This output will illustrate the dynamic interaction between your agents.
+When you run `python main.py`, you'll see a turn-based conversation between your agents in your console.
 
 ![Autogen-Neon example output 1](/docs/guides/autogen-neon-output-1.png)
 ![Autogen-Neon example output 2](/docs/guides/autogen-neon-output-2.png)
@@ -522,7 +522,7 @@ You can verify the successful completion of the task by checking the [Neon Conso
 
 ![Output in Neon console](/docs/guides/autogen-neon-console.png)
 
-You have built and run an AutoGen agent team that interacts with Neon for database management. You can extend this example into more complex agents and workflows.
+You've built an AutoGen agent team that creates a Neon project and stores data in it. From here, you can add more tools, such as branch creation, or swap in `DockerCommandLineCodeExecutor` for safer code execution.
 
 You can find the source code for the application described in this guide on GitHub.
 
@@ -537,6 +537,6 @@ You can find the source code for the application described in this guide on GitH
 - [neon_api: Python API wrapper for the Neon API](https://github.com/neondatabase/neon-api-python)
 - [Neon API Reference](/docs/reference/api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
-- [Postgres for AI Agents](/use-cases/ai-agents)
+- [Postgres for AI agents](/use-cases/ai-agents)
 
 <NeedHelp/>

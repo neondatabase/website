@@ -1,28 +1,26 @@
 ---
-title: 'Generate type-safe client schemas with Hey API from a Fastify, Neon, and Zod Backend'
-subtitle: 'Learn how to set up a CRUD backend using Fastify and Lakebase Postgres with Zod validation and generate matching runtime Zod validation schemas for client-side forms using Hey API.'
+title: 'Generate type-safe client schemas with Hey API from a Fastify, Neon, and Zod backend'
+subtitle: 'Set up a CRUD backend with Fastify, Lakebase Postgres, and Zod validation, then use Hey API to generate matching Zod validation schemas for client-side forms.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-13T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Ensuring end-to-end type safety between your backend and frontend is one of the most common challenges in modern web development.
+Keeping types and validation in sync between your backend and frontend usually takes manual work. Developers typically define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. The copies drift: as soon as an API endpoint changes, frontend types or schemas can fall out of sync and fail at runtime.
 
-Traditionally, developers define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. This repetitive process is highly prone to code drift, and as soon as an API endpoint changes, frontend types or schemas can fall out of sync, leading to runtime failures.
+In this guide, you will build a single type-safe pipeline that generates the frontend pieces from the backend, using:
 
-In this guide, you will build a single, type-safe pipeline that automatically solves this problem using:
-
-1. **Backend database**: Lakebase Postgres for scalable, zero-config relational storage.
+1. **Backend database**: Lakebase Postgres on Neon.
 2. **Backend API**: A [Fastify](https://fastify.dev/) server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
-3. **OpenAPI generation**: `@fastify/swagger` to automatically translate backend Zod schemas into an OpenAPI schema (`openapi.json`).
-4. **Code generation**: [Hey API](https://heyapi.dev/) to parse the exported OpenAPI schema and generate a completely typed client SDK alongside matching **Zod validation schemas** for client-side forms.
+3. **OpenAPI generation**: `@fastify/swagger` to translate backend Zod schemas into an OpenAPI schema (`openapi.json`).
+4. **Code generation**: [Hey API](https://heyapi.dev/) to parse the exported OpenAPI schema and generate a typed client SDK alongside matching **Zod validation schemas** for client-side forms.
 
-By deriving the client-side validation schemas directly from the backend's Zod schemas, you establish a single source of truth for validations across the entire application stack.
+Because the client-side validation schemas are derived from the backend's Zod schemas, the backend is the single source of truth for validation across the stack.
 
 ## Architecture overview
 
-The workflow relies on a single flow of schema representation, moving from server to client:
+Schemas flow in one direction, from server to client:
 
 ```mermaid
 flowchart TD
@@ -37,7 +35,7 @@ flowchart TD
 To follow this guide, you will need:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/en/download/).
-2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
+2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The Free plan works for this guide.
 
 <Steps>
 
@@ -46,14 +44,14 @@ To follow this guide, you will need:
 You will need a Lakebase Postgres database to store your data.
 
 1. Log in to the [Neon Console](https://console.neon.tech).
-2. Click on **New Project**.
+2. Click **New Project**.
 3. Choose a name for your project and select the region closest to you. Click **Create**.
 4. Click **Connect** in the Console nav and copy your database connection string. It will look like this:
    ```text
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
    ![Neon Console Connection String](/docs/connect/connect_to_branch_modal.png)
-5. Save this connection string. You will be using it later in the backend configuration.
+5. Save this connection string. You will use it later in the backend configuration.
 
 ## Set up the Fastify backend with Zod validation
 
@@ -148,9 +146,9 @@ export default fp(async function dbPlugin(app: FastifyInstance) {
 });
 ```
 
-The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Neon database. Learn more about the [Fastify Postgres Plugin](https://github.com/fastify/fastify-postgres).
+The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Neon database. Learn more about the [Fastify Postgres plugin](https://github.com/fastify/fastify-postgres).
 
-## Build the Fastify server with Zod Type Provider
+## Build the Fastify server with the Zod type provider
 
 Now, build the Fastify application. The file below looks lengthy, but most of it is setup: registering plugins, configuring Swagger, and defining Zod schemas.
 
@@ -347,7 +345,7 @@ Your console will log the server starting up and confirm that the table was init
 📝 OpenAPI schema exported to backend/openapi.json
 ```
 
-Navigate to `http://localhost:3000/docs` in your browser to view the generated Swagger UI showing the fully documented endpoints.
+Navigate to `http://localhost:3000/docs` in your browser to view the generated Swagger UI with your documented endpoints.
 
 You also now have a static `openapi.json` document in the `backend` folder that describes your API, which will be used to generate the client SDK and Zod validation schemas.
 
@@ -575,9 +573,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 ```
 
-The `TaskForm` component accepts an optional `onCreated` callback. When a task is created successfully, the app automatically refreshes the task list. The "Get all tasks" button calls the auto-generated `getTasks()` SDK function to fetch and display all tasks from the backend.
+The `TaskForm` component accepts an optional `onCreated` callback. When a task is created successfully, the app refreshes the task list. The "Get all tasks" button calls the auto-generated `getTasks()` SDK function to fetch and display all tasks from the backend.
 
-By binding your form validation directly to `zPostTasksBody` generated from your schema, you guarantee that any change to the database constraints instantly trickles down to the UI upon code regeneration.
+Because the form validation is bound to `zPostTasksBody`, which is generated from the backend's Zod schema, any change to that schema reaches the UI the next time you regenerate the client.
 
 You can now run the frontend application:
 
@@ -585,7 +583,7 @@ You can now run the frontend application:
 npm run dev
 ```
 
-In other terminal, ensure the backend server is running.
+In another terminal, make sure the backend server is running:
 
 ```bash
 cd backend
@@ -598,31 +596,31 @@ Open your browser to `http://localhost:5173` to see the application in action. Y
 
 ## Neon uses Hey API too
 
-The pattern you followed in this guide is the same one Neon uses for its own tooling. The official [`@neon/sdk`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk) TypeScript client is generated from the Neon API's OpenAPI spec using Hey API. So if you use the Neon SDK in your projects, you are already using a Hey API-generated client under the hood.
+The pattern you followed in this guide is the same one Neon uses for its own tooling. The raw layer and all request, response, and error types of the official [`@neon/sdk`](/docs/reference/typescript-sdk) TypeScript client are generated from the Neon API's OpenAPI spec using Hey API, with hand-written namespaces on top. If you use the Neon SDK in your projects, you are already using Hey API-generated code under the hood.
 
-Neon is also a sponsor of [Hey API](https://heyapi.dev), supporting the project that makes this kind of end-to-end type safety possible.
+Neon also sponsors [Hey API](https://heyapi.dev).
 
-## Why this architecture matters
+## Why this setup helps
 
-Implementing this automated pipeline provides critical improvements to full-stack application lifecycle:
+The generated pipeline gives you two things:
 
-- **Single source of truth**: Backend Zod definitions govern the database, API route inputs, and client inputs leaving no room for manual definition errors or stale typing.
-- **Immediate structural alignment**: If you add, delete, or modify a field in Fastify (e.g. changing the minimum description length from optional to required), rebuilding simply involves re-spinning Fastify and regenerating the Hey API client. The frontend code will immediately reflect validation changes.
+- **Single source of truth**: Backend Zod definitions govern API route inputs, responses, and client inputs, so there are no hand-copied definitions to go stale.
+- **Structural alignment**: If you add, delete, or modify a field in Fastify (for example, making `description` required), restart Fastify and regenerate the Hey API client. The frontend picks up the validation change.
 
 ## Extending this guide
 
-In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better option is a modern ORM that integrates with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
+In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and brings back the duplication this pipeline removes. An ORM that integrates with both TypeScript and Zod removes that last copy. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
 
-With Drizzle, you define your schema once in TypeScript using its `pgTable` API. The [`drizzle-zod`](https://orm.drizzle.team/docs/zod) package then generates Zod schemas directly from those table definitions, so your validation logic is always derived from a single source of truth. Feed these generated Zod schemas into `fastify-type-provider-zod` and the rest of the pipeline (OpenAPI export via Swagger, client SDK and Zod schema generation via Hey API) carries on as before. The result is an unbroken chain of type safety from the database column all the way to the frontend form, with no hand-written schemas to maintain in between.
+With Drizzle, you define your schema once in TypeScript using its `pgTable` API. The [`drizzle-zod`](https://orm.drizzle.team/docs/zod) package then generates Zod schemas directly from those table definitions, so your validation logic is always derived from a single source of truth. Feed these generated Zod schemas into `fastify-type-provider-zod` and the rest of the pipeline (OpenAPI export via Swagger, client SDK and Zod schema generation via Hey API) carries on as before. The result is type safety from the database column to the frontend form, with no hand-written schemas to maintain in between.
 
 ## Resources
 
 - [Fastify Type Provider Zod GitHub](https://github.com/fastify/fastify-type-provider-zod)
 - [Fastify Postgres Plugin GitHub](https://github.com/fastify/fastify-postgres)
-- [Hey API Documentation](https://heyapi.dev/docs/openapi/typescript/get-started)
-- [Drizzle ORM Documentation](https://orm.drizzle.team/)
+- [Hey API documentation](https://heyapi.dev/docs/openapi/typescript/get-started)
+- [Drizzle ORM documentation](https://orm.drizzle.team/)
 - [Drizzle Zod Integration](https://orm.drizzle.team/docs/zod)
 - [Neon TypeScript SDK (`@neon/sdk`) - built with Hey API](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk)
-- [Zod Official Documentation](https://zod.dev/)
+- [Zod documentation](https://zod.dev/)
 
 <NeedHelp />

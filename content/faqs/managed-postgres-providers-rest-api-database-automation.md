@@ -13,14 +13,14 @@ nextLink:
   slug: managed-postgres-services-auto-resize-compute
 ---
 
-Most managed Postgres providers expose a REST or gRPC API for cluster lifecycle management, but they differ in how fast a created database becomes usable. Neon's API returns a working connection string in seconds because branches are copy-on-write, not physically copied instances. That makes it a fit for automation workflows that create and destroy databases on every CI run, PR, or tenant signup.
+Most managed Postgres providers have an API for creating and deleting databases. They differ in what a new database is and when it becomes usable. On Neon, creating a project or a copy-on-write branch returns a connection string in the API response, so a CI run, PR, or tenant signup can create a database and use it in the same job.
 
 ## What the Neon API gives you
 
 The [Neon API](/docs/reference/api) covers:
 
 - Projects: create, list, update, delete
-- Branches: create from any point in time, reset from parent, restore, delete
+- Branches: create (including from a past point in the history window), reset from parent, restore, delete
 - Computes: create, resize, suspend, delete
 - Databases and roles: create, drop, rotate passwords
 
@@ -40,30 +40,28 @@ curl -X POST "https://console.neon.tech/api/v2/projects" \
   }'
 ```
 
-The response includes the project ID, default branch, default role with password, and a connection string. You can pipe that straight into your tenant onboarding flow or a Terraform plan. Regions are AWS-only.
+The response includes the project ID, default branch, default role with password, and a connection string, which your tenant onboarding flow can store. All Neon regions are on AWS ([Regions](/docs/introduction/regions)).
 
 ## Delete on a schedule
 
 For per-PR or per-tenant trial databases, use [branch expiration](/docs/guides/branch-expiration) to auto-delete:
 
 ```bash
-neon branches create --name pr-1234 --expires-at 2026-05-24T00:00:00Z
+# Expire the branch in 7 days (GNU date; on macOS use: date -u -v+7d +%Y-%m-%dT%H:%M:%SZ)
+neon branches create --name pr-1234 \
+  --expires-at "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-Neon deletes the branch automatically at the timestamp, so your CI doesn't need a cleanup step.
+Neon deletes the branch automatically at that time (up to 30 days out), so your CI doesn't need a cleanup step.
 
-<Admonition type="note" title="Hard limits to plan around">
-Free plan: 100 projects, 10 branches per project. Launch plan: 100 projects, 10 branches included (more at $1.50/branch-month). Scale plan: 1,000 projects (raisable on request), 25 branches included.
+<Admonition type="note" title="Project and branch limits">
+Free plan: 100 projects, 10 branches per project. Launch plan: 100 projects, 10 branches per project included (extra branches $1.50/branch-month). Scale plan: 1,000 projects (can be increased on request), 25 branches per project included. See [Plans](/docs/introduction/plans).
 </Admonition>
 
 ## How other Postgres providers compare on REST APIs
 
-Providers differ in API granularity and provisioning latency.
-
-- **AWS (RDS / Aurora)** uses the AWS API (and SDKs / CloudFormation / Terraform) for `CreateDBInstance` and `CreateDBCluster`. The API call returns quickly but the database isn't usable until the instance reaches `available` state, which takes minutes. Per-PR or per-CI workflows aren't a great fit because billing is per instance-hour.
-- **Supabase Management API** exposes `POST /v1/projects` to create a new project programmatically, and `POST /v1/projects/{ref}/branches` to create preview branches. Project creation includes the full Supabase stack (database, auth, storage, edge functions) and the deploy workflow waits for health checks. See [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).
-- **DigitalOcean Managed Databases** has a REST API for creating clusters, but provisioning is also per-cluster (minutes) and there's no copy-on-write branching primitive.
-
-Neon's distinction is that the `POST /branches` endpoint returns a working connection string in seconds because branches are a metadata pointer to existing storage, not a physical clone. That's what makes per-PR, per-CI, and per-tenant flows practical.
+- **AWS (RDS / Aurora)** uses the AWS API (and SDKs / CloudFormation / Terraform) for `CreateDBInstance` and `CreateDBCluster`. The calls are asynchronous: the database accepts connections once the instance reaches the `available` state. Each instance bills by the instance-hour while it runs.
+- **Supabase Management API** exposes `POST /v1/projects` to create a new project programmatically, and `POST /v1/projects/{ref}/branches` to create preview branches. Each project gets the full Supabase stack (database, auth, storage, edge functions), and branch deployments include a health step that waits up to 2 minutes for services to be running ([Supabase branching](https://supabase.com/docs/guides/deployment/branching)). See [Supabase Management API](https://supabase.com/docs/reference/api/v1-create-a-project).
+- **DigitalOcean Managed Databases** has a REST API for creating clusters. Each database is a cluster, and [forking a cluster](https://docs.digitalocean.com/products/databases/postgresql/how-to/fork-clusters/) creates a new cluster that copies the source's data during provisioning.
 
 <CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api" />

@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -36,22 +36,16 @@ Lists projects that belong to your Neon account, as well as any projects that we
 
   ```text
   Projects
-  ┌────────────────────────┬────────────────────┬───────────────┬──────────────────────┐
-  │ Id                     │ Name               │ Region Id     │ Created At           │
-  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-  │ crimson-voice-12345678 │ frontend           │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
-  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-  │ calm-thunder-12121212  │ backend            │ aws-us-east-2 │ 2024-04-10T15:21:01Z │
-  ├────────────────────────┼────────────────────┼───────────────┼──────────────────────┤
-  │ nameless-hall-87654321 │ billing            │ aws-us-east-2 │ 2024-04-10T14:35:17Z │
-  └────────────────────────┴────────────────────┴───────────────┴──────────────────────┘
+  Id                      Name      Region Id      Created At
+  crimson-voice-12345678  frontend  aws-us-east-2  2026-04-15T11:17:30Z
+  calm-thunder-12121212   backend   aws-us-east-2  2026-04-10T15:21:01Z
+  nameless-hall-87654321  billing   aws-us-east-2  2026-04-10T14:35:17Z
   Shared with you
-  ┌───────────────────┬────────────────────┬──────────────────┬──────────────────────┐
-  │ Id                │ Name               │ Region Id        │ Created At           │
-  ├───────────────────┼────────────────────┼──────────────────┼──────────────────────┤
-  │ noisy-fire-212121 │ API                │ aws-eu-central-1 │ 2023-04-22T18:41:13Z │
-  └───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
+  Id                 Name  Region Id         Created At
+  noisy-fire-212121  API   aws-eu-central-1  2026-04-22T18:41:13Z
   ```
+
+  In the default table, your currently linked project (the one recorded in `.neon`) is marked `[current]` next to its name.
 
 List all projects belonging to a specific organization:
 
@@ -67,11 +61,8 @@ neon projects list --recoverable-only
 
 ```text filename="Output"
 Projects
-┌─────────────────────┬───────────┬───────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
-│ Id                  │ Name      │ Region Id     │ Created At           │ Deleted At           │ Recoverable Until    │
-├─────────────────────┼───────────┼───────────────┼──────────────────────┼──────────────────────┼──────────────────────┤
-│ crimson-voice-12345 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │ 2024-04-16T14:22:15Z │ 2024-04-23T14:22:15Z │
-└─────────────────────┴───────────┴───────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
+Id                   Name       Region Id      Created At            Deleted At            Recoverable Until
+crimson-voice-12345  myproject  aws-us-east-2  2026-04-15T11:17:30Z  2026-04-16T14:22:15Z  2026-04-23T14:22:15Z
 ```
 
 ## neon projects create (#create)
@@ -101,17 +92,15 @@ neon projects create --name mynewproject --region-id aws-us-west-2
 ```
 
 ```text filename="Output"
-┌───────────────────┬──────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name         │ Region Id     │ Created At           │
-├───────────────────┼──────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ mynewproject │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴──────────────┴───────────────┴──────────────────────┘
+Project
+Id          muddy-wood-123456
+Name        mynewproject
+Region Id   aws-us-west-2
+Created At  2026-07-09T17:04:29Z
 
-┌──────────────────────────────────────────────────────────────────────────────────────┐
-│ Connection Uri                                                                       │
-├──────────────────────────────────────────────────────────────────────────────────────┤
-│ postgresql://[user]:[password]@[neon_hostname]/[dbname]                              │
-└──────────────────────────────────────────────────────────────────────────────────────┘
+Connection URIs
+Connection Uri
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 <Admonition type="tip">
@@ -167,8 +156,8 @@ Needs Neon CLI 4.9.0+; older versions ignore `--no-secrets` and still print the 
       "store_passwords": true,
       "creation_source": "neon",
       "history_retention_seconds": 604800,
-      "created_at": "2023-08-04T16:16:45Z",
-      "updated_at": "2023-08-04T16:16:45Z",
+      "created_at": "2026-08-04T16:16:45Z",
+      "updated_at": "2026-08-04T16:16:45Z",
       "consumption_period_start": "0001-01-01T00:00:00Z",
       "consumption_period_end": "0001-01-01T00:00:00Z",
       "owner_id": "e56ad68e-7f2f-4d74-928c-9ea25d7e9864"
@@ -217,15 +206,14 @@ Updates a Neon project. The `<id>` is the project ID, which you can obtain by li
 Update the project name:
 
 ```bash
-neon projects update muddy-wood-859533 --name dev_project_1
+neon projects update muddy-wood-123456 --name dev_project_1
 ```
 
 ```text filename="Output"
-┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name          │ Region Id     │ Created At           │
-├───────────────────┼───────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴───────────────┴───────────────┴──────────────────────┘
+Id          muddy-wood-123456
+Name        dev_project_1
+Region Id   aws-us-west-2
+Created At  2026-07-09T17:04:29Z
 ```
 
 Block connections from the public internet (see [restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access)):
@@ -249,15 +237,14 @@ Deletes a Neon project. The `<id>` is the project ID.
 <CliOptions command="projects delete" />
 
 ```bash
-neon projects delete muddy-wood-859533
+neon projects delete muddy-wood-123456
 ```
 
 ```text filename="Output"
-┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name          │ Region Id     │ Created At           │
-├───────────────────┼───────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴───────────────┴───────────────┴──────────────────────┘
+Id          muddy-wood-123456
+Name        dev_project_1
+Region Id   aws-us-west-2
+Created At  2026-07-09T17:04:29Z
 ```
 
 Verify the deletion with `neon projects list`.
@@ -275,11 +262,10 @@ neon projects recover crimson-voice-12345678
 ```
 
 ```text filename="Output"
-┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name      │ Region Id     │ Created At           │
-├────────────────────────┼───────────┼───────────────┼──────────────────────┤
-│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
-└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+Id          crimson-voice-12345678
+Name        myproject
+Region Id   aws-us-east-2
+Created At  2026-04-15T11:17:30Z
 ```
 
 For details on what's recovered and what requires reconfiguration after recovery, see [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
@@ -293,13 +279,20 @@ Retrieves details about a Neon project. The `<id>` is the project ID.
 <CliOptions command="projects get" />
 
 ```bash
-neon projects get muddy-wood-859533
+neon projects get muddy-wood-123456
 ```
 
 ```text filename="Output"
-┌───────────────────┬───────────────┬───────────────┬──────────────────────┐
-│ Id                │ Name          │ Region Id     │ Created At           │
-├───────────────────┼───────────────┼───────────────┼──────────────────────┤
-│ muddy-wood-859533 │ dev_project_1 │ aws-us-west-2 │ 2023-07-09T17:04:29Z │
-└───────────────────┴───────────────┴───────────────┴──────────────────────┘
+Project
+Name               dev_project_1
+Id                 muddy-wood-123456
+Region Id          aws-us-west-2
+Postgres Version   18
+Organization       org-xxxxxxxx-xxxx
+Default Compute    0.25 CU
+History Retention  6 hours
+Created At         2026-07-09T17:04:29Z
+Updated At         2026-07-09T17:04:29Z
 ```
+
+The table shows a detail view: Postgres version, organization, default compute range, and history retention alongside the identifiers. For the complete project record, including all settings and quotas, use `--output json`.

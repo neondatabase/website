@@ -1,4 +1,4 @@
-text: 'The Neon backend is GA: a complete set of primitives so agents can build'
+text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
 link:
-  url: 'https://neon.com/blog/neon-backend-is-ga'
+  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
   target: '_blank'

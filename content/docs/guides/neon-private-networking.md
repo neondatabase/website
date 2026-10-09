@@ -11,10 +11,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-08-27T15:04:31.041Z'
+updatedOn: '2026-10-08T21:05:46.821Z'
 ---
 
-<Admonition type="comingSoon" title="Private Networking availability">
+<Admonition type="info" title="Private Networking availability">
 Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
@@ -71,6 +71,8 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0b676a43303caf7d8`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0bef3dbe6e4a2df49`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
@@ -87,8 +89,10 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-0575a0aedec0492b8`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a5b03b56954593a`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-07617c7fc17794cc7`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0fef417ecf84ed325`
        - **eu-west-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
@@ -258,11 +262,10 @@ After adding a restriction, you can check the status of the VPC endpoint to view
 
 ```bash
 neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
-┌────────────────────────┬───────┬─────────────────────────┬─────────────────────────────┐
-│ Vpc Endpoint Id        │ State │ Num Restricted Projects │ Example Restricted Projects │
-├────────────────────────┼───────┼─────────────────────────┼─────────────────────────────┤
-│ vpce-1234567890abcdef0 │ new   │ 1                       │ orange-credit-12345678      │
-└────────────────────────┴───────┴─────────────────────────┴─────────────────────────────┘
+Vpc Endpoint Id              vpce-1234567890abcdef0
+State                        new
+Num Restricted Projects      1
+Example Restricted Projects  orange-credit-12345678
 ```
 
 </TabItem>
@@ -323,7 +326,7 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ## Private Networking limits
 
-The Private Networking feature supports a maximum of **10 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
+The Private Networking feature supports a maximum of **20 private networking configurations per AWS region**. Supported AWS regions are listed [above](#create-an-aws-vpc-endpoint).
 
 ## Limitations
 

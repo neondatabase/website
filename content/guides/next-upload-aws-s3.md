@@ -4,21 +4,21 @@ subtitle: Let users upload files directly to S3 by creating presigned URLs in Ne
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-16T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you will learn how to add a feature to a Next.js app that allows users to upload files to Amazon S3, and insert the references to them in Postgres (powered by Neon) via `pg` and `@neondatabase/serverless`.
+In this guide, you will learn how to add a feature to a Next.js app that allows users to upload files to Amazon S3, and insert references to them in a Postgres database on Neon via `pg` and `@neondatabase/serverless`.
 
 ## Steps
 
 - [Create a Neon project](#create-a-neon-project)
 - [Store your Neon credentials](#store-your-neon-credentials)
-- [Create an Amazon S3 Bucket](#create-an-amazon-s3-bucket)
+- [Create an Amazon S3 bucket](#create-an-amazon-s3-bucket)
 - [Create access keys for IAM users (in AWS)](#create-access-keys-for-iam-users-in-aws)
 - [Create a new Next.js application](#create-a-new-nextjs-application)
-- [Create a Presigned URL with Amazon S3 SDK](#create-a-presigned-url-with-amazon-s3-sdk)
-- [Save Reference to S3 objects in Postgres](#save-reference-to-s3-objects-in-postgres)
-- [Upload to Presigned URL with in-browser JavaScript](#upload-to-presigned-url-with-in-browser-javascript)
+- [Create a presigned URL with Amazon S3 SDK](#create-a-presigned-url-with-amazon-s3-sdk)
+- [Save reference to S3 objects in Postgres](#save-reference-to-s3-objects-in-postgres)
+- [Upload to presigned URL with in-browser JavaScript](#upload-to-presigned-url-with-in-browser-javascript)
 - [Run the app](#run-the-app)
 
 ## Create a Neon project
@@ -27,16 +27,16 @@ If you do not have one already, create a Neon project.
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click **New Project**.
-3. Specify your project settings and click **Create Project**.
-4. Copy the database connection string to add to your Next.js app later. The connection string looks like `postgres://[user]:[password]@[neon_hostname]/[dbname]` and can be found in the **Connection Details** widget on the Neon **Dashboard**.
+3. Enter a project name, choose a region, and click **Create project**.
+4. Copy the database connection string to add to your Next.js app later. Click **Connect** in the Console nav to open the **Connect to your branch** modal, where you'll find a connection string that looks like `postgres://[user]:[password]@[neon_hostname]/[dbname]`.
 
-## Create an Amazon S3 Bucket
+## Create an Amazon S3 bucket
 
-Open the [Amazon S3 Bucket](https://console.aws.amazon.com/s3), and click **Create bucket**.
+Open the [Amazon S3 console](https://console.aws.amazon.com/s3), and click **Create bucket**.
 
 ![](/guides/images/s3-1.png)
 
-Enter a repository name, say `my-custom-bucket-0` for example. Copy the bucket name to be used as **AWS_S3_BUCKET_NAME** in your application.
+Enter a bucket name, for example `my-custom-bucket-0`. Copy the bucket name to be used as **AWS_S3_BUCKET_NAME** in your application.
 
 ```shell shouldWrap
 AWS_S3_BUCKET_NAME="my-custom-bucket-0"
@@ -44,7 +44,7 @@ AWS_S3_BUCKET_NAME="my-custom-bucket-0"
 
 ![](/guides/images/s3-2.png)
 
-In the **Policy** section, use the following json to define the actions allowed with the bucket:
+In the **Policy** section, use the following JSON to define the actions allowed with the bucket:
 
 ```json
 {
@@ -61,7 +61,7 @@ In the **Policy** section, use the following json to define the actions allowed 
 }
 ```
 
-In the **CORS** section, use the following json to define the actions allowed with the bucket:
+In the **CORS** section, use the following JSON to define the cross-origin requests allowed on the bucket:
 
 ```json
 [
@@ -75,15 +75,15 @@ In the **CORS** section, use the following json to define the actions allowed wi
 ]
 ```
 
-Finally, complete the bucket creation process by clicking the **Create bucket** at the end.
+Finally, complete the bucket creation process by clicking **Create bucket** at the end.
 
 ## Create access keys for IAM users (in AWS)
 
-In the navigation bar on the upper right in your AWS account, click on your name, and then choose **Security credentials**.
+In the navigation bar on the upper right in your AWS account, click your name, and then choose **Security credentials**.
 
 ![](/guides/images/iam-1.png)
 
-Scroll down to **Access keys** and click on **Create access key**.
+Scroll down to **Access keys** and click **Create access key**.
 
 ![](/guides/images/iam-2.png)
 
@@ -91,7 +91,7 @@ Again, click on **Create access key**.
 
 ![](/guides/images/iam-3.png)
 
-Copy the Access key and Secret access key, you will add them to your Next.js project later.
+Copy the access key and secret access key. You'll add them to your Next.js project later.
 
 ```shell shouldWrap
 AWS_KEY_ID="..."
@@ -134,7 +134,7 @@ The command installed the following libraries:
 
 - `@aws-sdk/client-s3`: AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native.
 - `@aws-sdk/s3-request-presigner`: SDK to generate signed url for S3.
-- `@neondatabase/serverless`: Neon's PostgreSQL driver for JavaScript and TypeScript.
+- `@neondatabase/serverless`: Neon's Postgres driver for JavaScript and TypeScript.
 
 Now, create a `.env` file at the root of your project. You are going to add the credentials you obtained earlier.
 
@@ -152,16 +152,16 @@ DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/n
 
 Now, let's move on to creating an API route to obtain a presigned URL to upload objects to.
 
-## Create a Presigned URL with Amazon S3 SDK
+## Create a presigned URL with Amazon S3 SDK
 
 [Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html) allow you to upload large chunks of data directly at the source (here, `Amazon S3`).
 
-This saves you from a couple limitations of a server-based upload operation:
+This avoids two limits of uploading through your server:
 
 - maximum request payload restrictions (on a hosting service, especially in serverless)
 - huge RAM required to process multiple large file buffers at the same time
 
-You will create an API endpoint that accepts the file name and it's content type to be uploaded via a presigned URL. In Next.js, you can create an API endpoint by creating a `route.ts` file at any directory level inside the `app` directory. To use `/api/presigned` as the desired API route, create a file `app/api/presigned/route.ts` with the following code:
+You will create an API endpoint that accepts the file name and its content type to be uploaded via a presigned URL. In Next.js, you can create an API endpoint by creating a `route.ts` file at any directory level inside the `app` directory. To use `/api/presigned` as the desired API route, create a file `app/api/presigned/route.ts` with the following code:
 
 ```tsx
 // File: app/api/presigned/route.ts
@@ -184,7 +184,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-The code above defines a `GET` handler that validates the presence of all the environment variables required, and the file name and it's content type.
+The code above defines a `GET` handler that validates the presence of all the environment variables required, and the file name and its content type.
 
 Next, append the following code to return a JSON from the endpoint containing the presigned URL as `signedUrl`:
 
@@ -230,7 +230,7 @@ The code above creates an S3 client using the `@aws-sdk/client-s3` SDK. Then, it
 
 Now, let's move on to building an endpoint to insert the reference to the uploaded object in Postgres.
 
-## Save Reference to S3 objects in Postgres
+## Save reference to S3 objects in Postgres
 
 You will create an API endpoint that accepts the URL to the publicly accessible object. In this example, we'll create a table in Postgres, and associate the object URL with a user, for demonstration purposes. To use `/api/user/image` as the desired API route, create a file `app/api/user/image/route.ts` with the following code:
 
@@ -305,11 +305,11 @@ export async function POST(request: NextRequest) {
   const sql = neon(process.env.DATABASE_URL);
   try {
     // Create the user table if it does not exist
-    await sql('CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)');
+    await sql`CREATE TABLE IF NOT EXISTS "user" (name TEXT, image TEXT)`;
     // Mock call to get the user
     const user = 'rishi'; // getUser();
     // Insert the user name and the reference to the image into the user table
-    await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [user, objectUrl]);
+    await sql`INSERT INTO "user" (name, image) VALUES (${user}, ${objectUrl})`;
     return NextResponse.json({ code: 1 });
   } catch (e) {
     return NextResponse.json({
@@ -326,9 +326,9 @@ The code above defines a POST endpoint, which first validates the presence of `D
 
 Now, let's move on to learning how to call these APIs in the front-end built with React.
 
-## Upload to Presigned URL with in-browser JavaScript
+## Upload to presigned URL with in-browser JavaScript
 
-With the API routes defined, the flow to upload the objects and save references to it in the database, is in three steps:
+With the API routes defined, uploading an object and saving a reference to it in the database takes three steps:
 
 ### 1. Accept a file from the user
 
@@ -358,7 +358,7 @@ export default function Home() {
 }
 ```
 
-### 2. Fetch the Presigned URL using the file name and type
+### 2. Fetch the presigned URL using the file name and type
 
 Perform a GET call to `/api/presigned` API route with the file name and type as the query params. Obtain the presigned URL, and then upload the file as a Blob to it.
 
@@ -399,7 +399,7 @@ export default function Home() {
 }
 ```
 
-### 3. Insert the reference to the object in the Postgres
+### 3. Insert the reference to the object in Postgres
 
 Perform a `POST` to the `/api/user/image` route, with the presigned URL configured to **not contain the query parameters**. The stripped URL is an absolute reference to the publicly available object uploaded.
 

@@ -4,32 +4,30 @@ subtitle: Send Neon metrics and Postgres logs to New Relic using the OpenTelemet
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-11T00:00:00.000Z'
-updatedOn: '2025-09-11T17:37:55.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[New Relic](https://newrelic.com/) is an observability platform that helps you visualize, analyze, and troubleshoot your entire software stack. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) allows you to send your project's metrics and Postgres logs directly to New Relic, giving you a centralized view of your database's performance and activity.
+[New Relic](https://newrelic.com/) is an observability platform that helps you visualize, analyze, and troubleshoot your entire software stack. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs directly to New Relic, so you can see your database's performance and activity alongside the rest of your stack. The integration is currently in beta.
 
-This guide will walk you through setting up the integration between Neon and New Relic. You'll learn how to:
+This guide walks you through setting up the integration between Neon and New Relic. You'll learn how to:
 
 - Find the required credentials in New Relic to set up an OTLP endpoint.
 - Set up the OpenTelemetry integration in your Neon project.
-- Verify that your Neon metrics and logs are successfully flowing into New Relic.
+- Verify that your Neon metrics and logs are reaching New Relic.
 - Build an example dashboard in New Relic to visualize your Neon metrics.
-
-By the end, you'll have a complete observability pipeline from your Neon database to your New Relic dashboard.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the **Scale** or **Business** plan to use the OpenTelemetry integration.
-- **New Relic account:** A New Relic account with access to your Ingest License Key. A free-tier account is sufficient to start. You can sign up at [New Relic](https://newrelic.com/signup).
+- **Neon account and project:** If you don't have one, sign up at [Neon](https://console.neon.tech/signup). Your Neon project must be on the [Scale plan](/docs/introduction/plans) to use the OpenTelemetry integration.
+- **New Relic account:** A New Relic account with access to your Ingest License Key. A free New Relic account is enough to start. You can sign up at [New Relic](https://newrelic.com/signup).
 
 <Steps>
 
 ## Set up the New Relic OTLP endpoint
 
-First, you need the correct credentials from New Relic to send OpenTelemetry data. This involves getting your Ingest License Key and the correct OTLP endpoint URL.
+First, get the credentials Neon needs to send OpenTelemetry data to New Relic: an Ingest License Key and the OTLP endpoint URL for your account's region.
 
 1.  Log in to your [New Relic account](https://one.newrelic.com/).
 2.  Create a New Relic License Key:
@@ -65,9 +63,9 @@ Now, you will use the credentials from New Relic to configure the integration in
     - **Authentication:** Select **Bearer**.
     - **Bearer Token:** Paste the **Ingest License Key** you copied from New Relic.
     - **Resource attributes:** It's a best practice to add a `service.name` attribute to identify your data source within New Relic. For example, set the key to `service.name` and the value to `neon`.
-    - Click **Save**.
+    - Click **Add**.
 
-    <Admonition type="note" title="Data Scope">
+    <Admonition type="note" title="Data scope">
     The Neon OpenTelemetry integration sends data for all computes in your Neon project. For example, if you have multiple branches, each with an attached compute, metrics and logs will be collected and sent for each one.
     </Admonition>
 
@@ -79,29 +77,29 @@ Now, you will use the credentials from New Relic to configure the integration in
 
 To confirm that your integration is working:
 
-1.  Go back to your New Relic One platform.
+1.  Go back to New Relic.
 2.  From the left navigation menu, select **Logs**.
 3.  You should see log data from your Neon project appearing in the log stream. You can use the filter bar to query for your specific service, for example: `service.name: 'neon'`.
     <Admonition type="note">
     It may take a few minutes for the first logs and metrics to appear after you enable the integration.
     </Admonition>
 
-    You should see Postgres logs from your Neon compute streaming into the New Relic Logs UI. This confirms that the integration is working correctly.
+    You should see Postgres logs from your Neon compute streaming into the New Relic Logs UI. This confirms that the integration is working.
     ![New Relic Logs UI showing Postgres logs from Neon](/docs/guides/neon-logs-in-newrelic.png)
-    <Admonition type="info" title="Compute Activity">
-    Neon computes only send logs and metrics when they are active. If you have the [Scale to Zero](/docs/manage/endpoints#scale-to-zero) feature enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon console.
+    <Admonition type="info" title="Compute activity">
+    Neon computes only send logs and metrics when they are active. If you have [scale to zero](/docs/introduction/scale-to-zero) enabled and a compute is suspended due to inactivity, no telemetry data will be sent. If you notice gaps in your data, check your compute's status on the **Branches** page in the Neon Console.
     </Admonition>
 
-## Visualizing Neon Metrics with Dashboards
+## Visualize Neon metrics with dashboards
 
-While the Logs UI is perfect for real-time log inspection, New Relic's **Dashboards** are the best way to visualize your Neon metrics, track trends over time, and get a high-level overview of your database's health.
+The Logs UI works well for inspecting logs as they arrive. To chart your Neon metrics and track trends over time, use New Relic **Dashboards**.
 
-<Admonition type="info" title="A Note on APM & Services">
+<Admonition type="info" title="APM & Services entities">
 After setting up the integration, you may notice New Relic automatically creates entities like `compute-host-metrics`, `sql-metrics` and `neon` in the **APM & Services** section. This is expected behavior.
 
 However, the APM & Services view is designed for application performance monitoring (APM) trace data, which follows a different set of semantic conventions than Neon's metrics. As a result, these service pages will appear empty or show "Required metrics are missing" warnings.
 
-These auto-created service entities can be safely ignored. The correct way to visualize and analyze your Neon data is by querying it directly in the Logs UI and building custom Dashboards, as shown in this guide.
+You can ignore these auto-created service entities. Query your Neon data in the Logs UI and build custom dashboards instead, as shown in this guide.
 </Admonition>
 
 ### Create a custom Neon dashboard
@@ -117,7 +115,7 @@ You'll create a new dashboard from scratch to visualize your Neon metrics using 
 
 Add a chart to visualize a specific metric.
 
-1.  On your blank dashboard, click on **+ Add a new chart** button by hovering over the empty space.
+1.  On your blank dashboard, hover over the empty space and click the **+ Add a new chart** button.
     ![New Relic dashboard with Add a new chart button](/docs/guides/newrelic-create-new-chart.png)
 2.  Select **Add a chart**.
 3.  In the query builder, you will use NRQL to select and visualize your metric data.
@@ -133,12 +131,12 @@ Add a chart to visualize a specific metric.
     This query selects the maximum value of the `neon_connection_counts` metric, which represents the number of active connections to your database, and displays it as a time series over the last 10 minutes with data points every minute.
 
 5.  Click **Run** to see the chart populated with data.
-6.  You can customize the chart's appearance (e.g., line chart, area chart) using the panel on the right. Chose the style that best represents your data.
+6.  You can customize the chart's appearance (e.g., line chart, area chart) using the panel on the right. Choose the style that best represents your data.
 
     > For example, select the **Line** chart type for a clear view of connection trends over time as shown below.
     > ![New Relic query builder with NRQL example](/docs/guides/newrelic-nrql-example.png)
 
-7.  To view the metric on your dashboard, simply click on **Add to dashboard** on the bottom right of the query builder.
+7.  To view the metric on your dashboard, click **Add to dashboard** on the bottom right of the query builder.
 8.  Your chart will now appear on your dashboard. You can resize and rearrange it as needed.
 9.  To add a title, click the three-dot menu (...) in the chart's corner, select Edit, and enter a descriptive name like **Max Active Connections**. Click **Apply changes** to apply the new title. This menu also allows for other customizations, such as colors and thresholds.
     ![New Relic chart with Edit option](/docs/guides/newrelic-edit-chart.png)
@@ -150,7 +148,7 @@ Add a chart to visualize a specific metric.
 
 ### Explore available Neon metrics
 
-Neon exports a rich set of metrics that you can use to build your dashboards. These include both Neon-specific metrics and general compute host metrics.
+Neon exports a set of metrics that you can use to build your dashboards. These include both Neon-specific metrics and general compute host metrics.
 
 Here are some example NRQL queries for other useful metrics:
 
@@ -174,21 +172,19 @@ Here are some example NRQL queries for other useful metrics:
   WHERE host_memory_active_bytes is NOT NULL TIMESERIES 1 minute since 10 minutes ago
   ```
 
-For a full list of the metrics you can use in your dashboards, see the [Neon Metrics and Logs Reference](/docs/reference/metrics-logs).
+For a full list of the metrics you can use in your dashboards, see the [Neon metrics and logs reference](/docs/reference/metrics-logs).
 
 </Steps>
 
-Now that Neon's database metrics and logs are flowing into New Relic alongside your application telemetry, you can correlate them to debug issues. For instance, you can directly correlate a spike in `neon_connection_counts` with error logs from a specific microservice, allowing you to quickly identify which application is causing database strain.
+Now that Neon's database metrics and logs are flowing into New Relic alongside your application telemetry, you can correlate them to debug issues. For instance, you can line up a spike in `neon_connection_counts` with error logs from a specific microservice to find which application is opening the connections.
 
 ## Summary
 
-You have configured Neon to send metrics and Postgres logs to New Relic using the OpenTelemetry integration. You now have a centralized observability setup with real-time insight into your database's health and activity.
-
-With this integration, you can build dashboards, set up alerts, and troubleshoot issues more effectively, all from within the New Relic platform.
+You have configured Neon to send metrics and Postgres logs to New Relic using the OpenTelemetry integration. As a next step, set up New Relic alerts on metrics such as `neon_connection_counts` or `neon_db_total_size`.
 
 ## Resources
 
-- [Neon OpenTelemetry Integration](/docs/guides/opentelemetry)
+- [Neon OpenTelemetry integration](/docs/guides/opentelemetry)
 - [Neon Metrics and logs reference](/docs/reference/metrics-logs)
 - [New Relic OTLP endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol)
 - [Introduction to NRQL](https://docs.newrelic.com/docs/query-your-data/nrql-new-relic-query-language/get-started/introduction-nrql-new-relics-query-language/)

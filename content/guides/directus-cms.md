@@ -2,12 +2,12 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 title: Using Directus CMS with Lakebase Postgres and Astro to build a blog
-subtitle: A step-by-step guide for building your own blog in an Astro application with Directus CMS and Postgres powered by Neon
+subtitle: Build a blog in an Astro application with Directus CMS and a Postgres database on Neon
 ---
 
-In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Directus CMS with Postgres, define a blog schema, and author content using Directus CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages fetched from the Directus CMS instance.
+In this guide, you will learn how to set up a Postgres database on Neon, configure Directus CMS with Postgres, define a blog schema, and author content using Directus CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages fetched from the Directus CMS instance.
 
 ## Prerequisites
 
@@ -17,15 +17,15 @@ To follow the steps in this guide, you will need the following:
 - A [Neon](https://console.neon.tech/signup) account
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) set up locally
 
-## Provisioning a serverless Postgres database
+## Provision a Postgres database on Neon
 
-Using a serverless Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
+Lakebase Postgres scales compute to zero when your database is idle, so you don't pay for compute while nobody is using it.
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project. You will then be presented with a dialog that provides a connection string for your database. You will be using the connection string to connect the Directus CMS instance to your Postgres database.
+To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project. Click **Connect** in the Console nav to copy the connection string for your database. You'll use the connection string to connect the Directus CMS instance to your Postgres database.
 
 ## Setting up Directus locally with Postgres
 
-Let's begin with creating a Directus CMS backend to serve the content for blog posts. Open your terminal and run the following command:
+Start by creating a Directus CMS backend to serve the content for blog posts. Open your terminal and run the following commands:
 
 ```bash
 mkdir directus-cms
@@ -56,13 +56,13 @@ services:
       CORS_ORIGIN: '*'
 ```
 
-Now, set the `DB_CONNECTION_STRING` value to the connection string you obtained previously. Finally, run the following command to start the local Directus CMS instance:
+Set the `DB_CONNECTION_STRING` value to the connection string you obtained previously. Finally, run the following command to start the local Directus CMS instance:
 
 ```shell
 docker-compose up -d
 ```
 
-Once the migrations are run successfully, the Directus CMS instance will be accessible at [localhost:8055/admin](http://localhost:8055/admin/). Sign in with the credentials set in the `docker-compose.yml` file.
+Once the migrations run, the Directus CMS instance will be accessible at [localhost:8055/admin](http://localhost:8055/admin/). Sign in with the credentials set in the `docker-compose.yml` file.
 
 ## Configure the authors schema in Directus CMS
 
@@ -100,29 +100,27 @@ Then, follow the same process as earlier to add the following fields to the `pos
 - A **Datetime** field called **published_date**.
 - A **Many to One** field called **author** with the **Related Collection** set to **authors**.
 
-## Configure API Read Permissions in Directus CMS
+## Configure API read permissions in Directus CMS
 
-To be able to fetch the data authored in your local Directus CMS instance, you will need to configure what is readable and writeable using APIs. Navigate to [Settings > Access Policies](http://localhost:8055/admin/settings/policies), click on **Public**, and add the permissions for the `authors`, `posts` and `directus_files` to be read publicly.
+To fetch the data authored in your local Directus CMS instance, configure what is readable and writeable using APIs. Navigate to [Settings > Access Policies](http://localhost:8055/admin/settings/policies), click on **Public**, and add the permissions for the `authors`, `posts` and `directus_files` to be read publicly.
 
 ![](/guides/images/directus-cms/public-api.png)
 
-Now, let's move on to creating an Astro application to create dynamic blog pages based on blog data that's accessible via your locally hosted instance of Directus CMS.
+Next, create an Astro application that builds blog pages from the data in your local Directus CMS instance.
 
 ## Create a new Astro application
 
-Let’s get started by creating a new Astro project. Open your terminal and run the following command:
+Create a new Astro project. Open your terminal and run the following command:
 
 ```bash
 npm create astro@latest blog-ui
 ```
 
-`npm create astro` is the recommended way to scaffold an Astro project quickly.
-
 When prompted, choose:
 
 - `Empty` when prompted on how to start the new project.
-- `Yes` when prompted if plan to write Typescript.
-- `Strict` when prompted how strict Typescript should be.
+- `Yes` when prompted if you plan to write TypeScript.
+- `Strict` when prompted how strict TypeScript should be.
 - `Yes` when prompted to install dependencies.
 - `Yes` when prompted to initialize a git repository.
 
@@ -146,7 +144,7 @@ The commands above install the packages, with the `-D` flag specifying the libra
 
 The libraries installed include:
 
-- [@directus/sdk](https://npmjs.com/package/@directus/sdk): Typescript SDK to query from your Directus CMS instance.
+- [@directus/sdk](https://npmjs.com/package/@directus/sdk): TypeScript SDK to query your Directus CMS instance.
 
 The development-specific libraries include:
 
@@ -168,9 +166,7 @@ Then, add the following lines to your `tsconfig.json` file to make relative impo
 }
 ```
 
-Now, create a `.env` file. You are going to add the API token obtained earlier.
-
-The `.env` file should contain the following keys:
+Now, create a `.env` file with the URL of your Directus CMS instance:
 
 ```bash
 # .env
@@ -180,7 +176,7 @@ DIRECTUS_URL="http://localhost:8055"
 
 ## Create dynamic blog routes in Astro
 
-To programmatically create pages as you keep authoring more content in your locally hosted Directus CMS, you are going to use [dynamic routes](https://docs.astro.build/en/guides/routing/#dynamic-routes) in Astro. With dynamic routes, you create a single file with a name like `[slug].astro`, where slug represents a [unique and dynamic variable](https://docs.astro.build/en/reference/api-reference/#contextparams) for each blog. Using [getStaticPaths](https://docs.astro.build/en/reference/api-reference/#getstaticpaths), you can programmatically create multiple blog pages with custom data using Directus CMS as your data source. Let's see this in action. Create a file named `[slug].astro` in the `src/pages` directory with the following code:
+To programmatically create pages as you keep authoring more content in your locally hosted Directus CMS, you are going to use [dynamic routes](https://docs.astro.build/en/guides/routing/#dynamic-routes) in Astro. With dynamic routes, you create a single file with a name like `[slug].astro`, where slug represents a [unique and dynamic variable](https://docs.astro.build/en/reference/api-reference/#contextparams) for each blog. Using [getStaticPaths](https://docs.astro.build/en/reference/api-reference/#getstaticpaths), you can programmatically create multiple blog pages with custom data using Directus CMS as your data source. Create a file named `[slug].astro` in the `src/pages` directory with the following code:
 
 ```astro
 ---
@@ -210,13 +206,13 @@ const post = Astro.props;
 </Layout>
 ```
 
-Let's understand the code above in two parts:
+The code above has two parts:
 
 - Inside `getStaticPaths` function, a fetch call is made to the locally hosted Directus CMS API to get all the blogs with their **title**, **image** and **content** values. Looping over each blog item, an array is created that passes all the data obtained as the [props](https://docs.astro.build/en/reference/api-reference/#contextprops), and its **slug** as the unique variable to be associated with each blog.
 
 - The HTML section represents the content of a particular blog page. The blog data attributes such as Title, Image URL, and the blog content in HTML are obtained from `Astro.props` (passed in `getStaticPaths` as props).
 
-## Build and Test your Astro application locally
+## Build and test your Astro application locally
 
 To test the Astro application in action, prepare a build and run the preview server using the following command:
 
@@ -226,6 +222,6 @@ npm run build && npm run preview
 
 ## Summary
 
-In this guide, you learned how to build a blog in an Astro application using Directus CMS and a serverless Postgres database (powered by Neon). You also learned how to create content collections in Directus CMS and dynamic blog routes in an Astro application.
+You built a blog in Astro that reads content from Directus CMS, with Directus storing its data in a Postgres database on Neon. From here, add more collections in Directus and matching dynamic routes in Astro.
 
 <NeedHelp />

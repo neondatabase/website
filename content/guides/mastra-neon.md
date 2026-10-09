@@ -1,41 +1,41 @@
 ---
-title: 'Building stateful AI Agents with Mastra and Lakebase Postgres'
-subtitle: 'Learn how to give your Mastra AI agents long-term memory by integrating them with Lakebase Postgres for scalable, persistent storage.'
+title: 'Building stateful AI agents with Mastra and Lakebase Postgres'
+subtitle: 'Give your Mastra AI agents long-term memory by storing it in Lakebase Postgres on Neon.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-30T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 AI agents are increasingly used to create conversational assistants, customer support bots, and productivity tools. A common limitation, however, is their lack of memory. Most agents are stateless, meaning each interaction begins without awareness of past conversations or user preferences. Without the ability to recall prior exchanges, agents struggle to manage multi-turn dialogues or maintain continuity across sessions.
 
-[Mastra](https://mastra.ai/) is an unopinionated TypeScript framework for building full‑stack AI applications. To address the challenge of statelessness, it includes a native Memory module. By default, Mastra uses local file‑based storage (such as libSQL) to support rapid prototyping. For production environments, however, applications require a storage backend that is scalable, durable, and cloud‑native.
+[Mastra](https://mastra.ai/) is an unopinionated TypeScript framework for building full‑stack AI applications. To handle statelessness, it includes a built-in Memory module. By default, Mastra uses local file‑based storage (such as libSQL) for prototyping. In production, you need a durable, hosted storage backend instead.
 
-This guide explains how to integrate Mastra’s Memory component with Lakebase Postgres. By connecting Mastra to Neon, you can build AI assistants that remember user interactions across threads and sessions.
+This guide connects Mastra’s Memory module to a Postgres database on Neon, so your agents remember user interactions across threads and sessions.
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - **Node.js:** Version `18` or later installed on your machine.
 - **Neon account:** A free Neon project. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
-- **OpenRouter API key**: An API key from [OpenRouter](https://openrouter.ai/) (or any another provider supported by [Mastra](https://mastra.ai/models) such as OpenAI, Anthropic, etc.) to power your AI agent.
+- **OpenRouter API key**: An API key from [OpenRouter](https://openrouter.ai/) (or any other provider supported by [Mastra](https://mastra.ai/models) such as OpenAI, Anthropic, etc.) to power your AI agent.
 
 <Steps>
 
 ## Create a Neon project
 
-You need a Lakebase Postgres database to store your agent's memory. Mastra will automatically create the necessary tables for you on its first interaction.
+You need a Postgres database on Neon to store your agent's memory. Mastra automatically creates the necessary tables for you on its first interaction.
 
 1. Log in to the [Neon Console](https://console.neon.tech) and select your project.
-2. Click **Connect** in the Console nav to view your connection details.
+2. Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3. Copy the Postgres connection string (it should look like `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/postgres?sslmode=require&channel_binding=require`).
 
 ![Connection details in Neon Console](/docs/connect/connect_to_branch_modal.png)
 
 ## Initialize a new Mastra project
 
-Open your terminal and create a new directory for your agent project. Initialize a standard Node.js project and install Mastra's core packages alongside the PostgreSQL adapter and Memory module.
+Open your terminal and create a new directory for your agent project. Initialize a standard Node.js project and install Mastra's core packages along with the Postgres adapter and Memory module.
 
 ```bash
 mkdir mastra-neon-agent && cd mastra-neon-agent
@@ -103,7 +103,7 @@ mkdir -p src/mastra
 touch src/mastra/index.ts
 ```
 
-Add the following code to `src/mastra/index.ts` to configure Mastra to use Neon as the storage backend:
+Add the following code to `src/mastra/index.ts` to configure Mastra to use your Neon database as the storage backend:
 
 ```typescript
 import { Mastra } from '@mastra/core';
@@ -225,7 +225,7 @@ main().then(() => {
 });
 ```
 
-Execute the script using `tsx` (which automatically loads your `.env` and executes TypeScript):
+Run the script with `tsx`. The `--env-file` flag loads your `.env` file:
 
 ```bash
 npx tsx --env-file=.env src/test.ts
@@ -268,9 +268,9 @@ Agent: Of course! Here's a summary of our conversation so far:
 Is there anything else you'd like to discuss?
 ```
 
-You can see that the agent successfully recalls the user's favorite color and can answer questions based on that memory. It can also provide a summary of the conversation, showing that it retains and uses context across multiple interactions.
+The agent recalls the user's favorite color and can summarize the whole conversation, so it's keeping context across multiple turns.
 
-If you log into the [Neon Console](https://console.neon.tech) and inspect your database tables, you will now see tables like `mastra_messages` and `mastra_threads` populated with these interactions.
+If you log in to the [Neon Console](https://console.neon.tech) and inspect your database tables, you will now see tables like `mastra_messages` and `mastra_threads` populated with these interactions.
 
 ![Mastra Memory tables in Neon Console](/docs/guides/mastra-tables-neon.png)
 
@@ -278,15 +278,13 @@ If you log into the [Neon Console](https://console.neon.tech) and inspect your d
 
 ## Conclusion
 
-You’ve successfully built a stateful AI agent using Mastra and Lakebase Postgres. Your agent can now retain context across sessions, supporting more natural and consistent interactions over time.
+You built a Mastra agent that stores its memory in Lakebase Postgres, so it keeps context across turns and sessions.
 
-To go further, you can explore Mastra’s advanced memory features:
+To go further, look at Mastra’s other memory features:
 
 - [Observational Memory](https://mastra.ai/docs/memory/observational-memory): enables long‑context, continuously evolving agent memory.
 - [Semantic Recall](https://mastra.ai/docs/memory/semantic-recall): retrieves relevant past interactions using vector similarity.
 - [Custom Templates](https://mastra.ai/docs/memory/working-memory#custom-templates): define what information to store or discard for finer control.
-
-Together, these tools allow you to design agents with richer memory management, tailored to the needs of your application.
 
 ## Resources
 

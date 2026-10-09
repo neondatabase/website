@@ -4,14 +4,14 @@ subtitle: "Learn how to build a Slack-based database assistant with Eve that pro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-08-27T18:03:21.795Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
 
 That durability makes Eve a natural fit for database agents, those that explore schemas, run migrations, and test queries on behalf of developers. But giving an AI agent direct access to a production database is risky. A single misfired `DROP TABLE` or an unoptimized `SELECT` can corrupt data or degrade performance for real users. You need an environment where the agent can work freely, without any risk to production.
 
-Neon's copy‑on‑write Postgres branching solves this problem. Instead of connecting your agent to a fragile production instance, every Eve session can automatically spin up its own isolated database branch in seconds. Because branches share data at the storage layer, they cost nothing extra and create no overhead. The agent gets a full, realistic dataset to explore, run queries and migrations without fear of breaking production.
+Neon's copy‑on‑write Postgres branching solves this problem. Instead of connecting your agent to your production database, every Eve session can automatically spin up its own isolated database branch in seconds. Because branches share data with their parent at the storage layer, a new branch doesn't copy your data; you pay for the data that changes on the branch and the compute it uses. The agent gets a full, realistic dataset to explore, query, and migrate without breaking production.
 
 At first glance, wiring up an agent that handles Slack messages, provisions databases, manages durable state, and gates dangerous operations behind human approval sounds like a lot of plumbing. But Eve's filesystem-first approach keeps it organized. Here is what the finished project looks like:
 
@@ -72,7 +72,7 @@ Before you begin, ensure you have the following:
 - **Node.js:** Version `20` or later installed on your machine.
 - **Vercel CLI:** Installed globally (`npm i -g vercel`) for linking and deployment.
 - **Neon account:** A free account at [console.neon.tech](https://console.neon.tech) with a project created.
-- **Neon API Key:** Generate a project-scoped API key in your [Neon Account Settings](/docs/manage/api-keys#create-project-scoped-organization-api-keys).
+- **Neon API key:** Generate a [project-scoped API key](/docs/manage/api-keys#create-project-scoped-organization-api-keys) in your organization's **Settings** > **API keys** page.
   ![Neon API Key](/docs/manage/project_scoped_select.png)
   > Copy the key and store it securely. You'll need it for your `.env.local` file in the next step.
 
@@ -175,13 +175,13 @@ NEON_PROJECT_ID="your_neon_project_id"
 
 > Replace `your_neon_api_key` and `your_neon_project_id` with your actual Neon API key and project ID.
 
-You can find your Neon project ID in the Neon Console under **Project Settings > General > Project ID**.
+You can find your Neon project ID on your project's **Settings** page, under **General**.
 
 ![Neon Project ID](/docs/manage/settings_page.png)
 
 ## Build the Neon branching wrapper
 
-Your Eve agent needs a way to create and delete database branches programmatically. Create a small wrapper around the Neon API that exposes a function: `createBranch`. The wrapper uses your Neon API key and project ID from the environment variables. This is the only file that talks to the Neon control plane. Every branch is created with a 24-hour expiry as a safety net. You can adjust the expiry duration according to your development and testing needs.
+Your Eve agent needs a way to create database branches programmatically. Create a small wrapper around the Neon API that exposes a function: `createBranch`. The wrapper uses your Neon API key and project ID from the environment variables. This is the only file that talks to the Neon control plane. Every branch is created with a 24-hour expiry as a safety net. You can adjust the expiry duration according to your development and testing needs.
 
 Create `agent/lib/neon.ts`:
 
@@ -204,7 +204,8 @@ export interface Branch {
 export async function createBranch(name: string): Promise<Branch> {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
-  const branch = await neon.branches.create(projectId, {
+  const branch = await neon.branches.create({
+    projectId,
     name,
     expires_at: expiresAt,
   });
@@ -241,7 +242,7 @@ export const dbBranch = defineState<BranchState | null>(
 
 ## Provision branches with hooks
 
-This is the heart of the integration. [Eve hooks](https://eve.dev/docs/guides/hooks) subscribe to the runtime event stream, letting you run code at key lifecycle moments. You'll subscribe to `session.started` to create a branch as soon as a conversation begins. This means every Slack thread, local dev session, or eval run automatically gets its own isolated database.
+[Eve hooks](https://eve.dev/docs/guides/hooks) subscribe to the runtime event stream, letting you run code at key lifecycle moments. You'll subscribe to `session.started` to create a branch as soon as a conversation begins. Every Slack thread, local dev session, or eval run gets its own isolated database.
 
 Since long-lived sessions like Slack threads may stay open indefinitely, the branch is created with a 24-hour `expires_at`.
 
@@ -276,7 +277,7 @@ With the branch lifecycle handled, you now need to expose database operations as
 
 You'll create two tools that serve distinct purposes:
 
-- **`run_sql`**: Executes SQL against the branch. Uses a predicate-based `needsApproval` that auto-approves read-only queries (`SELECT`, `SHOW`, `EXPLAIN`) but gates any data-modifying statement (`ALTER`, `CREATE`, `DROP`, `INSERT`, `UPDATE`, `DELETE`) on human approval. This is the Eve-native way to handle mixed-safety operations in a single tool. The approval decision is driven by the input, not by a blanket policy. Checkout [Customize the approval predicate](#customize-the-approval-predicate) for more details on a production-ready approval flow.
+- **`run_sql`**: Executes SQL against the branch. Uses a predicate-based `needsApproval` that auto-approves read-only queries (`SELECT`, `SHOW`, `EXPLAIN`) but gates any data-modifying statement (`ALTER`, `CREATE`, `DROP`, `INSERT`, `UPDATE`, `DELETE`) on human approval. This is the Eve-native way to handle mixed-safety operations in a single tool. The approval decision is driven by the input, not by a blanket policy. See [Customize the approval predicate](#customize-the-approval-predicate) for more details on a production-ready approval flow.
 - **`list_objects`**: A lightweight, always-safe tool that queries `information_schema` and `pg_catalog` to list tables, columns, and indexes. Giving the agent a dedicated schema-exploration tool keeps its discovery queries clean and separate from arbitrary SQL execution.
 
 ### The `run_sql` tool
@@ -326,7 +327,7 @@ Learn more about [Approvals in Human-In-The-Loop](https://eve.dev/docs/human-in-
 
 ### The schema exploration tool
 
-The `list_objects` tool lets the agent discover what tables, columns, and indexes exist on the branch before writing any SQL. It queries PostgreSQL's catalog views, so it's always safe and never needs approval.
+The `list_objects` tool lets the agent discover what tables, columns, and indexes exist on the branch before writing any SQL. It queries Postgres catalog views, so it's always safe and never needs approval.
 
 Create `agent/tools/list_objects.ts`:
 
@@ -401,11 +402,11 @@ You might wonder why `list_objects` exists as a separate tool instead of relying
 
 There are two key reasons:
 
-1. **Ease of correct usage** - A dedicated tool with a structured `kind` enum is far simpler for the model to invoke reliably than expecting it to recall and construct raw catalog queries. This reduces friction and improves accuracy.
+1. **Ease of correct usage:** A dedicated tool with a structured `kind` enum is simpler for the model to invoke reliably than recalling and constructing raw catalog queries.
 
-2. **Separation of responsibilities** - `run_sql` should remain focused on user-driven tasks like queries and migrations, while `list_objects` handles the agent’s internal discovery needs. This clean division minimizes confusion, prevents tool misuse, and leads to more consistent results.
+2. **Separation of responsibilities:** `run_sql` stays focused on user-driven tasks like queries and migrations, while `list_objects` handles the agent’s internal discovery. Keeping them apart makes it less likely the model misuses either tool.
 
-For database agents, narrowly scoped, well-defined tools outperform a single catch‑all tool. Specialization reduces errors, improves tool-call precision, and makes the agent’s behavior more predictable.
+For database agents, narrowly scoped tools tend to produce more precise tool calls and more predictable behavior than a single catch‑all tool.
 </Admonition>
 
 ## Write the agent instructions
@@ -425,7 +426,7 @@ You are a database assistant working inside Slack. Developers ask you to explore
 
 ## Test locally with `eve dev`
 
-Before connecting Slack, you can exercise the entire agent in the `eve dev` TUI. This lets you verify the branch provisioning, tool execution, and human-in-the-loop approval flow all work end-to-end on your machine.
+Before connecting Slack, you can exercise the entire agent in the `eve dev` TUI. This lets you check branch provisioning, tool execution, and the human-in-the-loop approval flow end-to-end on your machine.
 
 ```bash
 npm run dev
@@ -536,11 +537,11 @@ Each Slack thread gets its own Neon branch. So if you ask the agent in a new mes
 
 ![Slack thread: eve agent new thread](/docs/guides/eve_slack_new_thread.png)
 
-### Turning your agent into a junior developer
+### Extending the agent beyond the database
 
-The database agent in this guide is intentionally minimal, but Eve's filesystem-first architecture makes it easy to expand its capabilities. Since Eve also gives each agent a [sandbox](https://eve.dev/docs/sandbox) with shell access (`bash`, `read_file`, `write_file`, `glob`, `grep`), your database assistant can inspect codebases, run scripts, and interact with files alongside its database work.
+The database agent in this guide is intentionally minimal, but Eve's filesystem-first architecture makes it easy to add capabilities. Since Eve also gives each agent a [sandbox](https://eve.dev/docs/sandbox) with shell access (`bash`, `read_file`, `write_file`, `glob`, `grep`), your database assistant can inspect codebases, run scripts, and interact with files alongside its database work.
 
-You can turn this agent into a capable junior developer by connecting it to the tools your team already uses. For example:
+You can connect this agent to the tools your team already uses. For example:
 
 - **GitHub**: Give the agent access to read pull requests, apply labels, post triage comments, and even propose code changes. See the [PR Triage Agent template](https://github.com/vercel-labs/eve-pr-triage-agent-template) for a production-ready example of an Eve agent that reads diffs and labels PRs automatically. Follow the same pattern mentioned in this guide to wire it up to your Neon database.
 - **Linear**: Connect the agent to [Linear](https://linear.app) via Eve's [connections](https://eve.dev/docs/connections) so it can create and update issues and keep your project board in sync.
@@ -552,11 +553,11 @@ Each of these integrations is just a file. Drop a new tool into `agent/tools/` o
 
 ## Agent evals with ephemeral databases
 
-Building AI agents requires rigorous testing. A common hurdle when evaluating database agents is state management: if your eval tells an agent to "delete inactive users," your staging database is now mutated. Run the test again and it fails because the users are already gone. You end up manually resetting state between runs, which is error-prone and doesn't scale.
+A common problem when evaluating database agents is state management: if your eval tells an agent to "delete inactive users," your staging database is now mutated. Run the test again and it fails because the users are already gone. You end up manually resetting state between runs, which is error-prone and doesn't scale.
 
-Eve's `eve eval` framework solves this by running every eval against the agent's real session. Because each session automatically provisions its own Neon branch via the `session.started` hook, every eval run gets its own isolated database branch. A hundred concurrent eval runs will never experience race conditions or data pollution, because each one operates in its own ephemeral branch.
+Eve's `eve eval` framework runs every eval against the agent's real session. Because each session automatically provisions its own Neon branch via the `session.started` hook, every eval run gets its own isolated database branch. A hundred concurrent eval runs will never experience race conditions or data pollution, because each one operates in its own ephemeral branch.
 
-The same branching mechanism that isolates Slack sessions and local dev also isolates eval runs. No extra setup is needed: just write your evals and run them. Neon branches are created and cleaned up automatically.
+The same branching mechanism that isolates Slack sessions and local dev also isolates eval runs. No extra setup is needed. Write your evals and run them. Neon branches are created and cleaned up automatically.
 
 To learn more about writing and running evals with Eve, see the [Eve Evals documentation](https://eve.dev/docs/evals/overview).
 
@@ -596,20 +597,18 @@ Neon's disposable branches reinforce this boundary. Even if the model generates 
 
 ## Conclusion
 
-Standard cloud AI agents are fundamentally limited by shared state. When multiple agents share a staging database, isolation is lost. When an agent writes to production without testing, the risk is immense. Neither scenario is acceptable for agents that need to modify schemas or run migrations.
-
-By pairing Vercel Eve's durable workflows and HITL approvals with Neon's instant database branching, you bridge this gap. Every session gets its own disposable database branch. Migrations require human approval before they execute. Branches are cleaned up automatically via Neon's branch expiry. And eval runs are fully isolated, so you can test confidently in CI/CD. You now have a reusable pattern for building safe, reliable database agents across every surface Eve supports.
+You built a Slack database agent where every Eve session gets its own disposable Neon branch, migrations wait for human approval, branches expire automatically, and eval runs don't share state. As a next step, add an `eve eval` suite for your most common requests and run it in CI.
 
 ## Resources
 
-- [Vercel Eve Framework Documentation](https://eve.dev/docs)
+- [Vercel Eve documentation](https://eve.dev/docs)
 - [Eve Connections](https://eve.dev/docs/connections)
 - [Eve Skills](https://eve.dev/docs/skills)
-- [Eve Security Model](https://eve.dev/docs/concepts/security-model)
-- [Neon Database Branching](/docs/introduction/branching)
+- [Eve security model](https://eve.dev/docs/concepts/security-model)
+- [Neon branching](/docs/introduction/branching)
 - [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Neon Agent Skills](/docs/ai/agent-skills)
-- [Neon API Reference](/docs/reference/api)
+- [Neon API reference](/docs/reference/api)
 - [Vercel Connect for Slack](https://vercel.com/docs/connect)
 
 <NeedHelp />

@@ -1,18 +1,18 @@
 ---
-title: Track Schema Changes in Production with Postgres Event Triggers
+title: Track schema changes in production with Postgres event triggers
 subtitle: Log every schema change with metadata in your Neon database
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2025-07-15T00:00:00.000Z'
 ---
 
-Event triggers are now fully supported in Lakebase Postgres databases, and allow you to automatically respond to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statements that define or modify the structure of the database. In this post, we'll show how you can use this feature to build a simple schema audit trail that can record who made schema changes in your production database, what those changes were, and when they occurred.
+Lakebase Postgres supports event triggers, which run automatically in response to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statement that defines or modifies the structure of the database. On Neon, roles with `neon_superuser` privileges (roles created in the Console, CLI, or API) can create event triggers. See [Manage roles](/docs/manage/roles). In this guide, you'll use event triggers to build a schema audit trail that records who changed the schema of your production database, what changed, and when.
 
-## Set Up Schema Auditing in Postgres
+## Set up schema auditing in Postgres
 
-### Set Up the Audit Schema and Tables
+### Set up the audit schema and tables
 
-First, we need two tables to store the audit log. To keep our auditing mechanism separate from the main application schema and to simplify permissions later, we'll place it in its own `audit` schema. Here, we have one table for the transactions containing the DDL changes, along with their metadata, then another table for all the DDL changes which reference the transaction they were a part of.
+First, we need two tables to store the audit log. To keep our auditing mechanism separate from the main application schema and to simplify permissions later, we'll place it in its own `audit` schema. One table stores each transaction that contains DDL changes, along with its metadata. The other stores each DDL change and references the transaction it was part of.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS audit;
@@ -37,11 +37,11 @@ CREATE TABLE audit.ddl_audit (
 );
 ```
 
-### Create the Event Trigger Function
+### Create the event trigger function
 
-In Postgres, event triggers are executed using functions, so we need to create a function that returns the `event_trigger` type. This function will create the transaction entry if it does not already exist, then insert the DDL record. Given each DDL change within the same transaction will fire the trigger, we handle the case where the transaction has already been logged.
+In Postgres, event triggers are executed using functions, so we need to create a function that returns the `event_trigger` type. This function will create the transaction entry if it does not already exist, then insert the DDL record. Because each DDL change in a transaction fires the trigger, the function handles the case where the transaction has already been logged.
 
-The `usr_name` and `usr_email` values are taken from the connection's context using `current_setting()`, though more on these later.
+The `usr_name` and `usr_email` values come from the connection's context using `current_setting()`. The CI section below shows how they're set.
 
 ```sql
 CREATE OR REPLACE FUNCTION audit.log_schema_changes()
@@ -86,7 +86,7 @@ END;
 $$;
 ```
 
-### Attach the Trigger to DDL Events
+### Attach the trigger to DDL events
 
 Now, we can attach this function to an event trigger, and have it run after the DDL commands complete.
 
@@ -96,13 +96,15 @@ CREATE EVENT TRIGGER track_schema_changes
   EXECUTE FUNCTION audit.log_schema_changes();
 ```
 
-## Integrate Audit Logging in Production Workflows
+## Integrate audit logging in production workflows
 
-In a production environment, you would rarely apply database migrations manually. Changes would instead be managed through a CI pipeline, which typically require passing a test suite, a staging environment, and review before being able to be merged.
+In a production environment, you would rarely apply database migrations manually. Changes usually go through a CI pipeline, which requires passing a test suite, a staging environment, and review before they can be merged.
 
-### Create a CI-Only Role
+### Create a CI-only role
 
-Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the Managed Better Auth schema (if you’re using auth for your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
+Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the `neon_auth` schema (if you use auth in your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
+
+The `neon_auth.users_sync` grant below applies to legacy Neon Auth. With Managed Better Auth, users are stored in the `neon_auth.user` table, so grant on that table instead. Skip both lines if you don't use auth.
 
 ```sql
 CREATE ROLE ci_user WITH LOGIN PASSWORD '<some-strong-password>';
@@ -118,7 +120,7 @@ GRANT USAGE ON ALL SEQUENCES IN SCHEMA audit TO ci_user;
 
 ### Configure GitHub Actions
 
-Then, in a `.github/workflows/migrate.yml` file we can define the steps to apply the migration in the pipeline. Likewise, we need to add the `DATABASE_URL` environment variable in the GitHub repo’s Secrets and Variables section.
+Then, in a `.github/workflows/migrate.yml` file we can define the steps to apply the migration in the pipeline. Add the `DATABASE_URL` secret in the GitHub repo's **Secrets and variables** settings. Use the direct (unpooled) connection string, without `-pooler` in the hostname. PgBouncer rejects unsupported startup parameters like the ones `PGOPTIONS` sets below, and runs in transaction mode, which some migration tools don't support. See [Connection pooling](/docs/connect/connection-pooling).
 
 ```yaml
 name: Migrate Database
@@ -155,13 +157,13 @@ jobs:
         run: npx drizzle-kit migrate
 ```
 
-The key part of this workflow is setting the `PGOPTIONS` environment variable which allows us to set connection parameters and easily pass context from GitHub Actions to our database. Here, we use it to pass `audit.user_name` and `audit.user_email`, and supply information on who the last committer was.
+The key part of this workflow is the `PGOPTIONS` environment variable, which sets connection parameters and passes context from GitHub Actions to the database. Here, we use it to pass `audit.user_name` and `audit.user_email`, and supply information on who the last committer was.
 
-Realistically, schema migrations in production often involve multiple commits, possibly from different authors, and merged by reviewers. Ideally, your audit log should include information about all of these, though this can easily be added based on your needs.
+In practice, a production migration often spans multiple commits from different authors, merged by a reviewer. You can extend the audit log to record all of them.
 
-## Visualize the Audit Log Safely with Read-Only Access
+## Visualize the audit log with read-only access
 
-Once audit data is collected, you'll want a straightforward way to visualize it. Using the Neon internal tool template seen in a previous blog post, you can quickly build, secure, and host a UI to display these audit entries. Though, given the audit data lives in our production database, it’s a good idea to create a new read-only role that only has access to the `audit` schema to avoid exposing the entire production database to this tool.
+Once audit data is collected, you'll want a way to view it. You can build a small internal UI to display the audit entries. Because the audit data lives in your production database, create a read-only role that only has access to the `audit` schema, so the tool can't read the rest of the database.
 
 ```sql
 CREATE ROLE audit_reader WITH LOGIN PASSWORD '<some-strong-password>';
@@ -172,6 +174,6 @@ GRANT USAGE ON SCHEMA audit TO audit_reader;
 GRANT SELECT ON ALL TABLES IN SCHEMA audit TO audit_reader;
 ```
 
-From this dashboard, we now have a clear view of who made what changes, and when. DDLs are grouped by transaction, and you can easily search for keywords in the raw SQL.
+The dashboard shows who made which changes, and when. DDL statements are grouped by transaction, and you can search for keywords in the raw SQL.
 
 ![Audit log dashboard](/guides/images/schema-change-log/audit_log_frontend.gif)

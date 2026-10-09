@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-09-18T18:35:42.057Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -17,15 +17,15 @@ If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the r
 neon deploy
 ```
 
-| Flag                | Default           | Description                                                                                          |
-| ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
-| `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
-| `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
-| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
-| `--branch`          | linked branch     | Target branch ID or name                                                                             |
-| `--project-id`      | linked project    | Project ID                                                                                           |
-| `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
-| `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
+| Flag                | Default                   | Description                                                                                          |
+| ------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `--config`          | next to `.neon`, else cwd | Path to the `neon.ts` policy                                                                         |
+| `--env`             | (none)                    | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`                    | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
+| `--branch`          | linked branch             | Target branch ID or name                                                                             |
+| `--project-id`      | linked project            | Project ID                                                                                           |
+| `--update-existing` | `false`                   | Auto-confirm overriding existing remote settings on the branch                                       |
+| `--allow-protected` | `false`                   | Auto-confirm applying to a branch marked protected on Neon                                           |
 
 `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
@@ -191,7 +191,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions/{slug}
 </TabItem>
 </Tabs>
 
-The response includes `invocation_url`, the public URL for your function:
+The output includes the function's public URL (`URL` in the CLI table, `invocation_url` in JSON and the API):
 
 ```
 https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/

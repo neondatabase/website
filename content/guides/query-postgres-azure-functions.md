@@ -1,12 +1,12 @@
 ---
-title: Query your Postgres Database Using Azure Functions
+title: Query your Postgres database using Azure Functions
 subtitle: Learn how to query your Postgres database using Azure Functions
 author: adalbert-pungu
 enableTableOfContents: true
 createdAt: '2024-10-19T21:00:00.000Z'
 ---
 
-In this guide, we will explore how to query a **Postgres** database hosted on **Neon** using **Azure Functions**. This combination allows you to take advantage of a flexible, high-performance infrastructure without worrying about server management.
+In this guide, you'll query a **Postgres** database hosted on **Neon** using **Azure Functions**. Neither side requires you to manage servers.
 
 ## Prerequisites
 
@@ -19,33 +19,29 @@ You will need:
 
 ## Why Neon?
 
-Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Its Postgres database separates compute and storage. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scalability without directly managing the infrastructure. In other words, Neon allows you to accelerate project delivery by focusing solely on development, while having an infrastructure that scales on demand.
+Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Lakebase Postgres separates compute from storage, so compute autoscales with your application's load and scales to zero when idle, without you managing the infrastructure.
 
-> Neon Database is cloud-native Serverless Postgres, meaning it has completely separated storage from compute. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scaling without directly managing the infrastructure. In other words, Neon Database is a fully managed database service that allows you to focus on building your application without worrying about the underlying infrastructure.
+Azure Functions is a serverless compute service that runs event-driven code, such as handlers for **HTTP requests**, without you deploying or managing servers. It works well for microservices and APIs, and pairs naturally with a database that also scales on demand.
 
-Azure Functions are also a serverless compute service, which enables you to run event-driven code without having to manage infrastructure. It is a great choice for building serverless applications, microservices, and APIs. By combining Neon Database with Azure Functions, you can create a scalable application without managing servers.
-
-At the same time, Azure Functions enables you to run code in response to events without worrying about the underlying infrastructure. It will create microservices that respond to events, such as **HTTP requests**, without the need to deploy or manage servers.
-
-To illustrate this, we will discuss an example of client management (hotel reservation management), which is a common use case in application development. We will use the technologies mentioned above to query and process data.
+To illustrate this, you'll build a hotel reservation management example that queries and processes data with both services.
 
 ## Context
 
-Imagine you are developing a solution to manage hotel reservations. You want to allow users (via an app or website) to view available reservations and interact with a Postgres database hosted on **Neon**.
+Imagine you're building an application to manage hotel reservations. You want to allow users (via an app or website) to view available reservations and interact with a Postgres database hosted on **Neon**.
 
 The application's features will include:
 
 - **View available rooms**: The application will allow users to check available hotel rooms for booking.
-- **Add a new reservation**: When a customer makes a reservation, their information will be stored in the Neon.
+- **Add a new reservation**: When a customer makes a reservation, their information is stored in the Neon database.
 - **Cancel a reservation**: Customers can cancel a reservation by deleting the corresponding record from the database.
 
 ---
 
-## Step 1: Create and Configure the Database on Neon
+## Step 1: Create and configure the database on Neon
 
 **Sign up and create the database**
 
-Sign up on [Neon](https://neon.com/) and follow the steps to create a Postgres database. The database will be named **neondb**.
+Sign up on [Neon](https://console.neon.tech/signup) and follow the steps to create a project. The database will be named **neondb**.
 
 After creating the database, make sure to copy the connection details (such as **host**, **user**, **password**, **database**) somewhere safe, as they will be used to configure **Azure Functions** to connect to **Neon**.
 
@@ -89,7 +85,7 @@ After creating the database, make sure to copy the connection details (such as *
 
 2. **Inserting test data**
 
-   You can insert some example data into the database to ensure that everything is working fine up to this point.
+   Insert some example data into the database to check that everything works so far.
 
    Here is the SQL script to insert data into the `clients` table:
 
@@ -118,7 +114,7 @@ After creating the database, make sure to copy the connection details (such as *
    (3, 3, '2024-12-01', '2024-12-10', 4);
    ```
 
-## Step 2: Create an Azure Function to Manage Products
+## Step 2: Create an Azure Function to manage reservations
 
 1.  **Sign in to Azure**
 
@@ -131,7 +127,7 @@ After creating the database, make sure to copy the connection details (such as *
     - Go to the extensions tab or press `Ctrl+Shift+X`.
     - Search for "Azure Functions" and install the official extension.
 
-3.  **Create an Azure Functions Project**
+3.  **Create an Azure Functions project**
 
     Open the command palette or press `Ctrl+Shift+P` to open the command palette.
     - Type `Azure Functions: Create New Project...` and select that option.
@@ -167,9 +163,9 @@ After creating the database, make sure to copy the connection details (such as *
     npm install -g azure-functions-core-tools@4 --unsafe-perm true
     ```
 
-    <Admonition type="note" title="suggested folder structure">
+    <Admonition type="note" title="Suggested folder structure">
 
-    Since there are three tables in the database (`Clients`, `Hotels`, and `Reservations`), using a separate file for each feature or interaction with the database is a good practice to maintain clear and organized code.
+    Since there are three tables in the database (`Clients`, `Hotels`, and `Reservations`), use a separate file for each feature or interaction with the database to keep the code organized.
 
     ```
     src/
@@ -186,23 +182,23 @@ After creating the database, make sure to copy the connection details (such as *
 
     </Admonition>
 
-6.  **Configure Environment Variables**
+6.  **Configure environment variables**
 
-    On the Neon dashboard, go to `Connection string`, select `Node.js`, and click `.env`. Then, click `show password` and copy the database connection string. If you don't click `show password`, you'll copy a connection string without the password (which is masked).
+    In the Neon Console, click **Connect** in the Console nav to open the **Connect to your branch** modal and copy the database connection string. Make sure the copied string includes the password; if the password is masked, reveal it before copying.
 
-    Create a `.env` file at the root of the project to store your database connection information from the Neon.
+    Create a `.env` file at the root of the project to store your Neon connection string.
 
     Here's an example of the connection string you'll copy:
 
     ```bash shouldWrap
-    DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
+    DATABASE_URL='postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
     ```
 
 7.  **Modify the `local.settings.json` file**
 
     The `local.settings.json` file is used by Azure Functions for **local executions**. Azure Functions does not directly read the `.env` file. Instead, it relies on `local.settings.json` to inject environment variable values during local execution. In production, you will define the same settings through `App Settings` in the Azure portal.
 
-    Here's an example of the `local.settings.json` file :
+    Here's an example of the `local.settings.json` file:
 
     ```JSON
     {
@@ -210,7 +206,7 @@ After creating the database, make sure to copy the connection details (such as *
       "Values": {
         "AzureWebJobsStorage": "",
         "FUNCTIONS_WORKER_RUNTIME": "node",
-        "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require"
+        "DATABASE_URL": "postgresql://neondb_owner:************@ep-quiet-leaf-a85k5wbg.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
       }
     }
     ```
@@ -221,7 +217,7 @@ After creating the database, make sure to copy the connection details (such as *
     npm install dotenv
     ```
 
-8.  **Manage Each Table**
+8.  **Manage each table**
 
     a. Create a separate file for each table in the `database/` folder.
 
@@ -514,11 +510,11 @@ After creating the database, make sure to copy the connection details (such as *
     });
     ```
 
-    Feel free to extend this structure to include features such as adding new clients, creating new reservations, or even updating and deleting data, each with **its own file** and **its own logic**.
+    You can extend this structure with features such as adding new clients, creating new reservations, or even updating and deleting data, each with **its own file** and **its own logic**.
 
-## Step 3: Test the Function Locally
+## Step 3: Test the function locally
 
-1. **Run the Function Locally**:
+1. **Run the function locally**:
    - Open the integrated terminal in VS Code.
    - Run the following command `npm run start`, which will execute `func start` to start the project and launch the functions:
 
@@ -526,17 +522,17 @@ After creating the database, make sure to copy the connection details (such as *
      npm run start
      ```
 
-2. **Test with a Browser or Postman**:
+2. **Test with a browser or Postman**:
    - Open a browser and navigate to `http://localhost:7071/api/manageClients` to test your function.
    - You can also use a tool like **Postman** to send **HTTP requests**.
 
-## Step 4: Test and Deploy the Function to Azure
+## Step 4: Deploy and test the function on Azure
 
-1. **Deploy Your Function**:
+1. **Deploy your function**:
    - Open the command palette with `Ctrl+Shift+P` and type `Azure Functions: Deploy to Function App...`.
    - Follow the instructions to select your Azure subscription and choose or create a Function App, then complete the deployment process.
 
-2. **Test the Function**:
+2. **Test the function**:
 
    Use a tool like Postman to send an HTTP request to the Azure Function, for example:
 
@@ -548,11 +544,11 @@ After creating the database, make sure to copy the connection details (such as *
 
 ## Conclusion
 
-We have demonstrated how combining Neon and Azure Functions enables the development of fast, scalable applications while reducing the complexity associated with managing infrastructure. With this combination, you can efficiently query your Postgres database without worrying about server maintenance. Neon also handles scaling for you.
+You built Azure Functions that read and write hotel reservation data in a Postgres database on Neon, tested them locally, and deployed them to Azure. As a next step, add functions for creating and updating reservations, each in its own file.
 
-## Additional Resources
+## Additional resources
 
-- [Neon Documentation](/docs) - Documentation for Neon's database services, including guides, tutorials, and API references.
-- [Azure Functions Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
+- [Neon documentation](/docs): guides, tutorials, and API references for Neon.
+- [Azure Functions documentation](https://learn.microsoft.com/en-us/azure/azure-functions/)
 
 <NeedHelp />

@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
-description: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi users can wrap the Neon REST API."
+description: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi can use the same provider through a Terraform bridge."
 date: 2026-04-25
 slug: postgres-services-terraform-pulumi-infrastructure-as-code
 category: FAQ
@@ -13,11 +13,11 @@ nextLink:
   slug: postgres-services-wire-protocol-compatible
 ---
 
-Neon has a [community-maintained Terraform provider](https://neon.com/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.
+Neon sponsors a [community-maintained Terraform provider](/docs/reference/terraform), `kislerdm/neon`, that manages projects, branches, compute endpoints, roles, databases, API keys, and VPC endpoints. It isn't officially supported by Neon. Pulumi can use the same provider through a Terraform bridge, or you can call the [Neon API](/docs/reference/api) directly.
 
 ## Terraform setup
 
-The provider is on the Terraform Registry under `kislerdm/neon`. Authenticate with a `NEON_API_KEY` environment variable, then declare resources like any other:
+Install the provider from the [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon/latest). It reads your API key from the `NEON_API_KEY` environment variable. Then declare resources:
 
 ```hcl
 terraform {
@@ -53,15 +53,17 @@ resource "neon_endpoint" "staging_rw" {
 }
 ```
 
-`terraform apply` provisions the project, branch, and pooled endpoint. The connection string is available as `neon_project.app.connection_uri` (marked sensitive).
+`terraform apply` creates the project, the branch, and a compute endpoint on that branch. The project's connection string is available as `neon_project.app.connection_uri`; mark any output that uses it as sensitive.
 
 <Admonition type="warning" title="Always set org_id">
-Omitting `org_id` on `neon_project` can place resources in the wrong organization and cause subsequent applies to destroy and recreate them. See the [Terraform guide](https://neon.com/docs/reference/terraform) for details.
+Without `org_id`, `neon_project` can create resources in the wrong organization or create duplicate projects, and later `terraform plan` or `terraform apply` runs may try destructive changes. See the [Terraform guide](/docs/reference/terraform).
 </Admonition>
 
-## Pulumi via the REST API
+## Pulumi
 
-Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API Reference](https://neon.com/docs/reference/api) documents every endpoint.
+The [Pulumi Registry lists a Neon package](https://www.pulumi.com/registry/packages/neon/) that bridges the same community `kislerdm/neon` Terraform provider. Add it with `pulumi package add terraform-provider kislerdm/neon`, and you get the same resources as in Terraform.
+
+If you'd rather not depend on the bridge, call the Neon API from a `Command` resource or a small `dynamic.ResourceProvider`. The [Neon API reference](/docs/reference/api) documents every endpoint.
 
 ```typescript
 import * as command from "@pulumi/command";
@@ -77,20 +79,16 @@ const createProject = new command.local.Command("neon-project", {
 ## What's manageable as code
 
 - Projects, branches, endpoints (compute), roles, databases
-- Autoscaling min/max, scale-to-zero timeout
-- Pooler enable/disable, endpoint type (read-write or read-only)
-- Branch protection on paid plans
-- VPC endpoints for private networking on the Scale plan
+- Autoscaling min and max, and the scale-to-zero timeout (`suspend_timeout_seconds`)
+- Endpoint type (read-write or read-only)
+- Branch protection, on paid plans
+- VPC endpoints for Private Networking, on the Scale plan
 
-API keys and JWKS URLs can be created but not imported.
+You can bring existing Console-created resources under Terraform with `terraform import` or import blocks. The `neon_api_key` and `neon_jwks_url` resources don't support import.
 
 ## How this compares to other Postgres services
 
-Most managed Postgres services expose IaC via official or community providers, but coverage varies:
-
-- **Amazon RDS for Postgres** and **Aurora Postgres** are first-class in the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbclusterparametergroup.html), with broad resource coverage (clusters, instances, parameter groups, subnet groups, snapshots, IAM auth).
-- **Supabase** ships an official [Terraform provider](https://supabase.com/docs/guides/platform/terraform) currently in [public alpha](https://supabase.com/docs/guides/getting-started/features) per their feature status page. It manages projects, branches, and settings via the Supabase Management API.
-
-The Neon Terraform provider is community-maintained but covers the full set of project, branch, endpoint, and role resources. Pulumi users on any of these services can fall back to wrapping the provider's REST API.
+- **Amazon RDS for Postgres** and **Aurora Postgres** have resources in the HashiCorp-maintained [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and in [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbcluster.html), covering clusters, instances, parameter groups, subnet groups, and snapshots.
+- **Supabase** has its own [Terraform provider](https://supabase.com/docs/guides/platform/terraform), which the [Supabase features page](https://supabase.com/docs/guides/getting-started/features) lists as public alpha. It manages projects and settings through the Supabase Management API.
 
 <CTA title="Read the Terraform guide" description="Step-by-step setup, import patterns, and examples for every resource type." buttonText="Open the guide" buttonUrl="https://neon.com/docs/reference/terraform" />

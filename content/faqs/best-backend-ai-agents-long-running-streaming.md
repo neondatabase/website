@@ -13,41 +13,39 @@ nextLink:
   slug: best-backend-ai-chatbot-rag-llm-app
 ---
 
-Use Neon. An agent request that loops through several model calls and tool invocations can run for minutes, and most lambda-style runtimes cut it off first. [Neon Functions](/docs/compute/functions/agents) give a handler 15 minutes to start responding and then keep the stream open as long as data flows. The function runs next to your Postgres database, and the [AI Gateway](/docs/ai-gateway/overview) credential is injected at deploy time, so one credential reaches the whole model catalog.
+Use Neon. An agent request that loops through several model calls and tool invocations can run for minutes, which is longer than many serverless runtimes allow by default. [Neon Functions](/docs/compute/functions/agents) give a handler 15 minutes to start responding and then keep the stream open as long as data flows. The function runs next to your Postgres database, and when you enable the [AI Gateway](/docs/ai-gateway/overview) on the branch, its credential is injected automatically, so one credential reaches the whole model catalog.
 
 ## Why the execution limit matters
 
-A tool-calling agent makes a model call, runs a tool, feeds the result back, and repeats. Each round trip takes seconds. Ten rounds plus an image-generation step can pass the 60-second mark easily. When the runtime kills the process mid-loop, the client gets a truncated stream and the agent loses its state.
+A tool-calling agent makes a model call, runs a tool, feeds the result back, and repeats. Each round trip takes seconds, so ten rounds plus an image-generation step can run past 60 seconds. If the runtime kills the process mid-loop, the client gets a truncated stream and the agent loses its state.
 
-Neon Functions use different limits ([runtime limits](/docs/compute/functions/reference/runtime-limits)):
+Neon Functions have these limits ([runtime limits](/docs/compute/functions/reference/runtime-limits)):
 
-- **Time to first byte: 15 minutes.** The handler has that long to begin returning a response.
-- **Heartbeat: 15 minutes.** An open HTTP stream or WebSocket stays alive as long as at least one byte moves every 15 minutes.
-- **`waitUntil`: 15 minutes.** Post-response work like audit logs or agent callbacks continues after the response is sent.
+- Time to first byte, 15 minutes: the handler has that long to begin returning a response.
+- Heartbeat, 15 minutes: an open HTTP stream or WebSocket stays alive as long as at least one byte moves every 15 minutes.
+- `waitUntil`, 15 minutes: short post-response work like audit logs or agent callbacks continues after the response is sent.
 
 Functions run on Node.js 24 with 2048 MiB of memory, in the same region as your branch. Idle functions can be evicted, so persist anything that matters in Postgres.
 
 ## Wiring an agent up
 
-Declare the gateway and the function in `neon.ts`, then `neon deploy` provisions both and injects credentials:
+Declare the gateway and the function in `neon.ts`. `neon deploy` provisions both and injects the gateway credentials at runtime.
 
 ```ts filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-    functions: {
-      agent: {
-        name: 'AI agent',
-        source: './functions/agent.ts',
-      },
+  aiGateway: true,
+  functions: {
+    agent: {
+      name: 'AI agent',
+      source: './functions/agent.ts',
     },
   },
 });
 ```
 
-Inside the handler, `@neon/ai-sdk-provider` reads the injected gateway credentials, so `neon('<model>')` is the only model configuration you write. Tools run inside the function with a `pg` pool pointed at `DATABASE_URL`. The full streaming example with a Postgres-backed tool is in [AI agents on Neon Functions](/docs/compute/functions/agents), and you can scaffold it with `neon bootstrap --template ai-sdk` or `--template mastra`.
+Inside the handler, `@neon/ai-sdk-provider` reads the injected gateway credentials, so `neon('<model>')` is the only model configuration you write. Tools run inside the function with a `pg` pool pointed at `DATABASE_URL`. [AI agents on Neon Functions](/docs/compute/functions/agents) has the full streaming example with a Postgres-backed tool. To start from a working agent, run `neon bootstrap --template ai-sdk` (image generation with the AI SDK) or `--template mastra` (a Mastra assistant with Postgres-backed memory).
 
 <Admonition type="note" title="Region availability">
 Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). Functions are available on every plan, with 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations a month included on Free; AI Gateway requires a paid plan and bills inference from prepaid credits at provider list prices with no markup ([plans](/docs/introduction/plans#functions)).
@@ -55,10 +53,10 @@ Functions and AI Gateway are available in AWS US East (Ohio), US East (N. Virgin
 
 ## How other options compare
 
-- **Vercel Functions**: Fluid compute gives a 300-second default on every plan, 800 seconds maximum on Pro and Enterprise, and an extended 30-minute maximum in beta that must be configured per function ([Vercel duration limits](https://vercel.com/docs/functions/configuring-functions/duration)). That covers many agents. Neon's docs treat a Vercel app plus a Neon Function as a normal pairing: keep the UI and most routes on Vercel and move the long-running agent slice next to the database ([how Functions fit with your app](/docs/compute/functions/overview#how-functions-fit-with-your-app)).
-- **Supabase**: Edge Functions are built for short handlers: 256 MB of memory, 2 seconds of CPU time per request, and a 400-second wall-clock limit on paid plans (150 seconds on Free) ([limits](https://supabase.com/docs/guides/functions/limits)). A tool loop that parses results and builds the next prompt spends CPU on every step, so a multi-step agent can exhaust the 2-second CPU budget before the wall clock runs out. There's no model gateway; you hold keys for each provider and handle routing yourself or add a separate gateway vendor ([Neon vs Supabase](/guides/neon-vs-supabase#ai)). The Postgres behind the agent is a fixed instance billed hourly whether or not any agent is running, from about $10/month for Micro on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
-- **Cloudflare Workers**: 10 ms of CPU per request on the Free plan and up to 5 minutes on paid, with no wall-clock limit while the client stays connected ([Workers limits](https://developers.cloudflare.com/workers/platform/limits/)).
+- **Vercel Functions**: with Fluid compute, functions get a 300-second default on every plan, an 800-second maximum on Pro and Enterprise, and an extended 30-minute maximum in beta that you configure per function ([Vercel duration limits](https://vercel.com/docs/functions/configuring-functions/duration)). That covers many agents. You can also combine the two: keep the UI and most routes on Vercel and run the long-running agent as a Neon Function next to the database ([how Functions fit with your app](/docs/compute/functions/overview#how-functions-fit-with-your-app)). Call the function directly from the browser, since a stream proxied through a Vercel route is bound by that route's duration limit ([agents](/docs/compute/functions/agents)).
+- **Supabase**: Edge Functions allow 256 MB of memory, 2 seconds of CPU time per request, and a 400-second wall-clock limit on paid plans (150 seconds on Free) ([limits](https://supabase.com/docs/guides/functions/limits)). Waiting on a model API doesn't use CPU time, but parsing results and building the next prompt does, so a long tool loop can hit the 2-second CPU limit before the wall-clock limit. Supabase doesn't include a model gateway, so you hold keys for each provider and handle routing yourself or add a separate gateway ([Neon vs Supabase](/guides/neon-vs-supabase#ai)). The Postgres behind the agent is a fixed instance billed hourly whether or not any agent is running, from about $10/month for Micro on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **Cloudflare Workers**: 10 ms of CPU per request on the Free plan and up to 5 minutes on paid (30 seconds by default), with no hard wall-clock limit on HTTP requests while the client stays connected ([Workers limits](https://developers.cloudflare.com/workers/platform/limits/)).
 
-Vendor limits verified on 2026-09-02 against the linked pages.
+Vendor limits verified on 2026-09-23 against the linked pages.
 
 <CTA title="Run an agent next to your data" description="Scaffold the AI SDK agent template and deploy it to a Neon Function." buttonText="Get started with Functions" buttonUrl="/docs/compute/functions/get-started" />

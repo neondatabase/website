@@ -1,15 +1,15 @@
 ---
-title: Implementing Feature Flags with Go, Lakebase Postgres, and Server-Side Rendering
+title: Implementing feature flags with Go, Lakebase Postgres, and server-side rendering
 subtitle: Learn how to create a feature flag system using Go, Lakebase Postgres, and server-side rendering for controlled feature rollouts
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Feature flags are a technique that allows developers to modify system behavior without changing code. They enable you to control when features are visible to specific users, perform A/B testing, and implement kill switches for problematic features.
 
-In this guide, you'll learn how to implement a feature flag system using Go, Lakebase Postgres, and server-side rendering. This approach allows for feature visibility decisions to happen on the server, providing better security and performance compared to client-side feature flags.
+In this guide, you'll learn how to implement a feature flag system using Go, Lakebase Postgres, and server-side rendering. With this approach, feature visibility decisions happen on the server, so users never download flag rules or the markup for features they can't see.
 
 ## Prerequisites
 
@@ -22,24 +22,24 @@ To follow the steps in this guide, you will need the following:
 
 ## Create a Neon project
 
-First, let's create a Neon project to store our feature flag configurations.
+First, create a Neon project to store the feature flag configuration.
 
-1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and click "New Project".
+1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and click **New Project**.
 2. Give your project a name, such as "feature-flags".
 3. Choose your preferred region.
-4. Click "Create Project".
+4. Click **Create project**.
 
-After your project is created, you'll receive a connection string that looks like this:
+After your project is created, click **Connect** on the Project Dashboard to get a connection string that looks like this:
 
 ```
 postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-Save this connection string, you'll need it to connect your Go application to the Neon database.
+Save this connection string. You'll need it to connect your Go application to the Neon database.
 
 ## Set up the database schema
 
-Now that we have our Neon project, let's create the database schema for our feature flag system. We'll need tables to store feature flags, their rules, and user segments.
+Now that you have a Neon project, create the database schema for our feature flag system. We'll need tables to store feature flags, their rules, and user segments.
 
 Connect to your database using your preferred SQL client or the Neon SQL Editor in the console, and execute the following SQL:
 
@@ -84,7 +84,7 @@ CREATE TABLE segment_conditions (
 );
 ```
 
-This schema gives us a flexible feature flag setup that can:
+This schema supports the following:
 
 - Define named feature flags
 - Create user segments based on attributes
@@ -123,7 +123,7 @@ With our database schema and sample data in place, we're ready to create our Go 
 
 ## Create the Go application
 
-Let's set up a new Go application for our feature flag system. We'll use standard Go modules and a clean project structure.
+Let's set up a new Go application for our feature flag system. It uses standard Go modules.
 
 Create a new directory for your project and initialize a Go module:
 
@@ -136,7 +136,7 @@ go mod init github.com/yourusername/feature-flag-system
 Now let's install the required dependencies:
 
 ```bash
-go get github.com/jackc/pgx/v5          # PostgreSQL driver
+go get github.com/jackc/pgx/v5          # Postgres driver
 go get github.com/gorilla/mux           # HTTP router
 go get github.com/joho/godotenv         # Environment variable management
 go get github.com/google/uuid           # For generating unique IDs
@@ -153,7 +153,7 @@ mkdir -p internal/handlers
 mkdir -p web/templates
 ```
 
-This structure follows an essential Go project layout:
+This structure follows a common Go project layout:
 
 - `cmd/server`: Entry point for the server application
 - `internal`: Internal packages that aren't meant to be imported by other projects
@@ -162,7 +162,7 @@ This structure follows an essential Go project layout:
 Now, let's create a configuration file to store our database connection details. Create a new file named `.env` in the project root:
 
 ```
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require&channel_binding=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 SERVER_PORT=8080
 ```
 
@@ -170,7 +170,7 @@ Replace the placeholder values in `DATABASE_URL` with your actual Neon connectio
 
 ## Implement the feature flag service
 
-Now we'll create the core of our feature flag system, the service that checks if features should be enabled for specific users.
+Next, create the core of the feature flag system: the service that checks if features should be enabled for specific users.
 
 First, let's create the database connection layer. Create a file at `internal/db/db.go`:
 
@@ -417,7 +417,7 @@ The `Service` provides a set of methods to interact with the feature flags in th
 - Get all feature flags in the system
 - Update a feature flag's enabled status
 
-The `IsEnabled` method is the core of our feature flag system. It:
+The `IsEnabled` method does the main work. It:
 
 1. Checks if the flag exists and is globally enabled
 2. Gets all rules for the flag
@@ -502,7 +502,7 @@ Here we are setting up the server with the following features:
 - Setting up routes with the `gorilla/mux` router
 - Serving static files from the `web/static` directory
 
-Next, let's create the HTML templates for our application.
+Next, create the handlers and templates.
 
 ## Implement server-side rendering with feature flags
 
@@ -965,13 +965,13 @@ Each user should see different features based on the rules we set up:
 
 - Premium users should see the new dashboard
 - Beta testers should see the beta API
-- 50% of internal staff should see dark mode (based on the user ID hash)
+- 50% of internal staff should see dark mode (based on the user ID hash), once you enable the `dark_mode` flag in the admin interface, since the sample data creates it disabled
 
 You can also visit the admin interface at `http://localhost:8080/admin` to toggle features on and off.
 
 ## Deploy the application
 
-To deploy the application, we'll package it in a Docker container and prepare it for deployment to your preferred platform.
+To deploy the application, package it in a Docker container.
 
 Create a `Dockerfile` in the project root:
 
@@ -1027,11 +1027,9 @@ Remember to set the `DATABASE_URL` environment variable in your deployment envir
 
 ## Summary
 
-In this guide, you built a server-rendered feature flag system using Go and Lakebase Postgres. You implemented a way to define flags and user segments in the database, control feature visibility based on user attributes, and gradually roll out features using percentage-based targeting.
+You built a server-rendered feature flag system with Go and Lakebase Postgres. Flags and user segments live in the database, feature visibility depends on user attributes, and percentage rules let you roll features out gradually. Because the server evaluates the flags, users only receive the features they're meant to see.
 
-By handling feature flag logic on the server, you ensure that users only see what they're meant to, making the system both secure and performant. This approach gives you full control over feature exposure without relying on client-side logic.
-
-## Additional Resources
+## Additional resources
 
 - [Neon Documentation](/docs)
 - [Go Documentation](https://golang.org/doc/)

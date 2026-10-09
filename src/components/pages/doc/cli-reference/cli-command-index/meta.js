@@ -25,6 +25,10 @@ const META = {
     desc: 'Pin a branch in .neon; auto-pulls its env vars.',
     examples: ['neon checkout feat/auth'],
   },
+  git: {
+    desc: 'Sync the checked-out Neon branch to your git branch on checkout (Preview).',
+    examples: ['neon git install', 'neon git status'],
+  },
   env: {
     desc: "Write the branch's DATABASE_URL + Neon vars to .env.",
     examples: ['neon env pull'],
@@ -59,6 +63,10 @@ const META = {
     examples: ['neon claim create --env-pull', 'neon claim accept'],
   },
   completion: { desc: 'Generate a shell completion script.' },
+  feedback: {
+    desc: 'Send feedback about the CLI to the Neon team; no login required.',
+    examples: ['neon feedback --message "The branch docs were unclear"'],
+  },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {
     desc: 'Create, diff, reset, restore, and manage branches.',

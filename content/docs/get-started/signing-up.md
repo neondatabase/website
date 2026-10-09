@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-10-02T04:38:24.068Z'
 ---
 
 <InfoBlock>
@@ -122,7 +122,7 @@ Neon includes **managed authentication**, so your app's users live in your Postg
 From the Neon Console sidebar, open the **Auth** page and toggle Managed Better Auth on for your project. You'll get:
 
 - A sign-up / sign-in flow ready to wire up to any framework
-- Users and sessions stored in your own Postgres database — query the `neon_auth.users_sync` table directly alongside your application data
+- Users and sessions stored in your own Postgres database — query the `neon_auth.user` table directly alongside your application data
 - Branch-aware auth: every preview or development branch you create gets its own isolated copy of users and sessions
 - OAuth providers, email and password, magic links, and more, all configurable from the console
 
@@ -134,7 +134,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 1. **Create a development branch**
 
-   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **New Branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
+   From the Neon Console, navigate to the **Branches** page and click **New Branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
 
 2. **Install CLI with Brew or NPM**
 
@@ -171,24 +171,17 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    Projects
-   ┌─────────────────────┬────────────┬───────────────┬──────────────────────┐
-   │ Id                  │ Name       │ Region Id     │ Created At           │
-   ├─────────────────────┼────────────┼───────────────┼──────────────────────┤
-   │ cool-forest-12345678│ myproject  │ aws-us-east-2 │ 2025-10-14T14:33:43Z │
-   └─────────────────────┴────────────┴───────────────┴──────────────────────┘
+   Id                    Name       Region Id      Created At
+   cool-forest-12345678  myproject  aws-us-east-2  2026-10-14T14:33:43Z
    ```
 
    Now list your branches using your project ID:
 
    ```bash
    neon branches list --project-id cool-forest-12345678
-   ┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
-   │ Name         │ Id                         │ Current State │ Created At           │
-   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-   │ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2025-12-23T21:05:05Z │
-   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
-   │ ✱ production │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
-   └──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+   Name                            Id                   Current State  Created At
+   development                     br-calm-sky-123456   ready          2026-12-23T21:05:05Z
+   [default] [current] production  br-bold-wind-123456  ready          2026-12-23T21:04:57Z
    ```
 
    This command shows your existing branches, including the `production` branch and the `development` branch you just created.

@@ -4,8 +4,10 @@ subtitle: A step-by-step guide for building a RAG chatbot in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
+
+This guide builds a RAG chatbot in Astro that uses LlamaIndex to store and query vector embeddings in a Postgres database on Neon, then deploys it to Amazon ECS with GitHub Actions.
 
 ## Prerequisites
 
@@ -19,28 +21,28 @@ To follow the steps in this guide, you will need the following:
 ## Steps
 
 - [Generate the OpenAI API token](#generate-the-openai-api-token)
-- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
+- [Provision a Postgres database on Neon](#provision-a-postgres-database-on-neon)
 - [Create a new Astro application](#create-a-new-astro-application)
   - [Add Tailwind CSS to the application](#add-tailwind-css-to-the-application)
   - [Integrate React in your Astro project](#integrate-react-in-your-astro-project)
-  - [Enabling Server Side Rendering in Astro using Node.js Adapter](#enabling-server-side-rendering-in-astro-using-nodejs-adapter)
+  - [Enable server-side rendering with the Node.js adapter](#enable-server-side-rendering-with-the-nodejs-adapter)
 - [Setting up a Postgres database connection](#setting-up-a-postgres-database-connection)
 - [Define the Astro application routes](#define-the-astro-application-routes)
-  - [Build Conversation User Interface using Vercel AI SDK](#build-conversation-user-interface-using-vercel-ai-sdk)
-  - [Build UI to update Chabot’s Knowledge](#build-ui-to-update-chabots-knowledge)
+  - [Build the chat UI with the Vercel AI SDK](#build-the-chat-ui-with-the-vercel-ai-sdk)
+  - [Build the UI to update the chatbot's knowledge](#build-the-ui-to-update-the-chatbots-knowledge)
   - [Build an entrypoint React component](#build-an-entrypoint-react-component)
-  - [Initialize Postgres Vector Store in LlamaIndex](#initialize-postgres-vector-store-in-llamaindex)
-  - [Build the Chat API Endpoint](#build-the-chat-api-endpoint)
-  - [Build the Learn API Endpoint](#build-the-learn-api-endpoint)
+  - [Initialize the Postgres vector store in LlamaIndex](#initialize-the-postgres-vector-store-in-llamaindex)
+  - [Build the chat API endpoint](#build-the-chat-api-endpoint)
+  - [Build the learn API endpoint](#build-the-learn-api-endpoint)
 - [Dockerize your Astro application](#dockerize-your-astro-application)
 - [Deploy your Astro application to Amazon ECS](#deploy-your-astro-application-to-amazon-ecs)
   - [Create Amazon ECR private repository](#create-amazon-ecr-private-repository)
-  - [Configure your IAM Roles](#configure-your-iam-roles)
-  - [Create an Amazon ECS Task Definition](#create-an-amazon-ecs-task-definition)
-  - [Create an Amazon ECS Cluster](#create-an-amazon-ecs-cluster)
-  - [Create an Amazon ECS Service](#create-an-amazon-ecs-service)
-  - [Create Access Keys for IAM users](#create-access-keys-for-iam-users)
-- [Configure GitHub Actions for Continuous Deployment (CD) Workflow](#configure-github-actions-for-continuous-deployment-cd-workflow)
+  - [Configure your IAM roles](#configure-your-iam-roles)
+  - [Create an Amazon ECS task definition](#create-an-amazon-ecs-task-definition)
+  - [Create an Amazon ECS cluster](#create-an-amazon-ecs-cluster)
+  - [Create an Amazon ECS service](#create-an-amazon-ecs-service)
+  - [Create access keys for IAM users](#create-access-keys-for-iam-users)
+- [Configure GitHub Actions for Continuous Deployment (CD) workflow](#configure-github-actions-for-continuous-deployment-cd-workflow)
 
 ## Generate the OpenAI API token
 
@@ -51,13 +53,13 @@ To create vector embeddings, you will use OpenAI API with LlamaIndex. To set up 
 - Enter a name for your token and click the **Create new secret key** button to generate a new key.
 - Copy and securely store this token for later use as the **OPENAI_API_KEY** environment variable.
 
-## Provisioning a Serverless Postgres
+## Provision a Postgres database on Neon
 
-Using a serverless Postgres database lets you scale compute resources down to zero, which helps you save on compute costs.
+Neon can scale your compute down to zero when the database is idle, so you don't pay for compute while it's suspended (storage is still billed).
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. You can enable the **Connection pooling** toggle for a pooled connection string.
+Click the **Connect** button on your project dashboard to open the **Connect to your branch** modal, which shows the connection string for your database. The **Connection pooling** toggle is on by default, which gives you a pooled connection string.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c200c4ed-f62d-469c-9690-c572c482c536.png)
 
@@ -72,13 +74,13 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `endpoint_hostname` is the host with `neon.tech` as the [top-level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. `neondb` is the default database created with a Neon project if you do not define your own database.
-- `?sslmode=require&channel_binding=require` optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to Postgres.
 
 Save the connection string somewhere safe. It will be used to set the **POSTGRES_URL** variable later.
 
 ## Create a new Astro application
 
-Let’s get started by creating a new Astro project. Open your terminal and run the following command:
+Create a new Astro project. Open your terminal and run the following command:
 
 ```bash
 npm create astro@latest my-app
@@ -101,9 +103,9 @@ cd my-app
 npm run dev
 ```
 
-The app should be running on [localhost:4321](http://localhost:4321/). Let's close the development server for now.
+The app should be running on [localhost:4321](http://localhost:4321/). Stop the development server for now.
 
-Next, execute the command in your terminal window below to install the necessary libraries and packages for building the application:
+Next, run the following command to install the packages the application needs:
 
 ```bash
 npm install dotenv ai llamaindex@0.3.4
@@ -143,8 +145,6 @@ Then, add the following code to your `tsconfig.json` file to make relative impor
 }
 ```
 
-Let's move on to integrating Tailwind CSS into the Astro application.
-
 ### Add Tailwind CSS to the application
 
 For styling the app, you will be using Tailwind CSS. Install and set up Tailwind at the root of our project's directory by running:
@@ -164,8 +164,6 @@ After making the selections outlined above, the command finishes integrating Tai
 - `tailwindcss`: TailwindCSS as a package to scan your project files and generate corresponding styles.
 - `@astrojs/tailwind`: An adapter that brings Tailwind's utility CSS classes to every `.astro` file and framework component in your project.
 
-Let's move on to integrating React into the Astro application.
-
 ### Integrate React in your Astro project
 
 To prototype the reactive user interface quickly, you will use React as the library with Astro. In your terminal window, execute the following command:
@@ -182,9 +180,7 @@ When prompted, choose the following:
 - `Yes` to make changes to Astro configuration file.
 - `Yes` to make changes to `tsconfig.json` file.
 
-Let's move on to enabling server-side rendering in the Astro application.
-
-### Enabling Server Side Rendering in Astro using Node.js Adapter
+### Enable server-side rendering with the Node.js adapter
 
 To interact with the chatbot over a server-side API, you will enable server-side rendering in your Astro application. Execute the following command in your terminal:
 
@@ -201,8 +197,6 @@ After making the selections outlined above, the command finishes integrating the
 
 - `@astrojs/node`: The adapter that allows your Astro SSR site to deploy to Node targets.
 
-Let's move on to loading the Postgres URL through an environment variable in the Astro application.
-
 ## Setting up a Postgres database connection
 
 Create an `.env` file in the root directory of your project with the following environment variable to initiate the setup of a database connection:
@@ -210,10 +204,10 @@ Create an `.env` file in the root directory of your project with the following e
 ```bash
 # Neon Postgres Pooled Connection URL
 
-POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require"
+POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-The file, `.env`, should be kept secret and not included in your Git history. Ensure that `.env` is added to the `.gitignore` file in your project.
+Keep the `.env` file secret and out of your Git history by adding it to your project's `.gitignore` file.
 
 ## Define the Astro application routes
 
@@ -230,7 +224,7 @@ The structure below is what our `src/pages` directory will look like at the end 
 - `api/chat.ts` will serve responses as an API Endpoint to incoming requests at `/api/chat`.
 - `api/learn.ts` will serve responses as an API Endpoint to incoming requests at `/api/learn`.
 
-### Build Conversation User Interface using Vercel AI SDK
+### Build the chat UI with the Vercel AI SDK
 
 Inside the `src` directory, create a `Chat.jsx` file with the following code:
 
@@ -270,13 +264,13 @@ export default function () {
 
 The code above does the following:
 
-- Imports the `useChat` hook by `ai` SDK to manage the conversation between the user and the chatbot. It simplifies the management of the conversation between the user and the chatbot. By default, it posts to the `/api/chat` endpoint to obtain responses from the chatbot.
+- Imports the `useChat` hook from the `ai` SDK to manage the conversation between the user and the chatbot. By default, it posts to the `/api/chat` endpoint to obtain responses from the chatbot.
 - Exports a React component that returns a form containing an `<input>` element to allow users to enter their query.
 - Creates a conversation UI looping over the set of messages (managed by the AI SDK).
 
 Now, let’s create a component that will allow the user to add text to the chatbot's knowledge.
 
-### Build UI to update Chabot’s Knowledge
+### Build the UI to update the chatbot's knowledge
 
 Inside the `src` directory, create a `Learn.jsx` file with the following code:
 
@@ -373,9 +367,7 @@ import App from "../App"; // [!code ++]
 
 The changes above import the App component. Using Astro's [`client:load` directive](https://docs.astro.build/en/reference/directives-reference/#clientload) the code makes sure that the React application is hydrated immediately on the page.
 
-Let's move on to using Postgres as the vector store for your chatbot.
-
-### Initialize Postgres Vector Store in LlamaIndex
+### Initialize the Postgres vector store in LlamaIndex
 
 To query and add documents to the Postgres vector store, you are going to use `PGVectorStore` class to communicate. Inside the `src` directory, create `vectorStore.ts` with the following code:
 
@@ -392,9 +384,7 @@ export default new PGVectorStore({
 
 The code above begins with importing the `dotenv/config`, loading all the environment variables into the scope. It also exports an instance of `PGVectorStore` initialized using the Postgres pooled connection URL obtained earlier.
 
-Let's move on to building the chat API endpoint.
-
-### Build the Chat API Endpoint
+### Build the chat API endpoint
 
 The Vercel AI SDK uses `/api/chat` by default to obtain the chatbot responses. Create a file `src/pages/api/chat.ts` with the following code:
 
@@ -438,14 +428,12 @@ The code above does the following:
 - Imports the vector store instance that is using Postgres.
 - Imports the VectorStoreIndex helper by LlamaIndex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/chat`.
-- Destructs messages array from the request body.
+- Destructures the messages array from the request body.
 - Creates the LlamaIndex's query engine using Postgres as the vector store.
 - Creates a stream handler that streams the response from LlamaIndex's query engine.
 - Returns the stream handler as a standard Web Response.
 
-Let's move on to building the endpoint to update chatbot's knowledge.
-
-### Build the Learn API Endpoint
+### Build the learn API endpoint
 
 As you saw earlier, with LlamaIndex you do not need to manually create context and pass it to an external API. The vector store is searched for similar vector embeddings based on the user query, internally. To keep the knowledge of the chatbot up-to-date, create a file `src/pages/api/learn.ts` with the following code:
 
@@ -478,11 +466,9 @@ The code above does the following:
 - Imports the vector store instance that is using Postgres.
 - Imports the VectorStoreIndex and storageContextFromDefaults helpers by LlamaIndex.
 - Exports a POST HTTP Handler which responds to incoming POST requests on `/api/learn`.
-- Destructs the text message from the request body.
+- Destructures the text message from the request body.
 - Creates a LlamaIndex document with text as its sole data.
 - Pushes the vector embeddings generated for the text along with the document metadata to the Postgres database.
-
-Let's move on to dockerizing the Astro application.
 
 ## Dockerize your Astro application
 
@@ -560,13 +546,13 @@ The Dockerfile above defines the following set of actions:
 
 - Sets up Node.js 20.11.0.
 - Sets the environment to `production` with `NODE_ENV` environment variable.
-- Install the dependencies of your Astro project.
+- Installs the dependencies of your Astro project.
 - Builds the application with `astro build`.
 - Sets the `PORT` environment variable to `80` (default port on Amazon ECS).
 - Sets the `HOST` environment variable to `0.0.0.0` to listen to all incoming requests on the host.
 - Runs the production server with `node ./dist/server/entry.mjs` command.
 
-Now, let's create a file that creates Amazon ECS Task definition during the deployment via GitHub Actions. This is useful as it protects the secrets stored in the GitHub repo. Create an `env.mjs` file at the root of your Astro application with the following code:
+Now, let's create a file that creates Amazon ECS Task definition during the deployment via GitHub Actions. This keeps the secrets stored in the GitHub repo out of your source code. Create an `env.mjs` file at the root of your Astro application with the following code:
 
 ```tsx
 // File: env.mjs
@@ -640,9 +626,9 @@ In this section, you will learn how to create an Amazon ECR repository for your 
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/9c566960-540a-448e-880e-97ec16ba4f0f.png)
 
-You are now done setting up an Amazon ECR repository. Let’s move on to configuring IAM roles for your account.
+You are now done setting up an Amazon ECR repository.
 
-### Configure your IAM Roles
+### Configure your IAM roles
 
 - Open the [IAM console](https://console.aws.amazon.com/iam/), and click **Create role**.
 
@@ -676,9 +662,9 @@ You are now done setting up an Amazon ECR repository. Let’s move on to configu
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c6f45124-7441-4562-81d4-d45e93f9a567.png)
 
-You are now done setting up IAM Roles for your account. Let’s move on to creating an Amazon ECS task definition.
+You are now done setting up IAM roles for your account.
 
-### Create an Amazon ECS Task Definition
+### Create an Amazon ECS task definition
 
 - Open the [Amazon ECS Console](https://console.aws.amazon.com/ecs/v2) and choose **Task Definitions**. Further, select **Create new task definition with JSON**.
 
@@ -715,9 +701,9 @@ You are now done setting up IAM Roles for your account. Let’s move on to creat
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/b812ef9a-df98-4d46-aa0a-71711a967eeb.png)
 
-You are now done setting up an Amazon ECS task definition for your service. Let's move on to creating an Amazon ECS Cluster.
+You are now done setting up an Amazon ECS task definition for your service.
 
-### Create an Amazon ECS Cluster
+### Create an Amazon ECS cluster
 
 - Open [Amazon ECS Console](https://console.aws.amazon.com/ecs/v2) and click **Create cluster**.
 
@@ -727,13 +713,11 @@ You are now done setting up an Amazon ECS task definition for your service. Let'
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/cb8e6d74-5745-4c2a-88c7-2598ac85e286.png)
 
-You are now done setting up an Amazon ECS Cluster for your service.
+You are now done setting up an Amazon ECS cluster for your service.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/9a88a385-3ff9-496c-8ec0-7389fc4c69b0.png)
 
-Let's move on to creating an Amazon ECS Service.
-
-### Create an Amazon ECS Service
+### Create an Amazon ECS service
 
 - Click on the Cluster created in the section earlier, and click on **Create** in the Services section.
 
@@ -752,9 +736,9 @@ Let's move on to creating an Amazon ECS Service.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/7dc7a5ea-e593-40a0-adb3-f9519536bdea.png)
 
-You are now done creating an ECS Service in your ECS Cluster. Let's move on to creating access keys for IAM users for your account.
+You are now done creating an ECS service in your ECS cluster.
 
-### Create Access Keys for IAM users
+### Create access keys for IAM users
 
 - In the navigation bar in your AWS account, choose your user name, and then choose **Security credentials**.
 
@@ -772,11 +756,9 @@ You are now done creating an ECS Service in your ECS Cluster. Let's move on to c
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/8586ea3d-d5b2-43dc-b81c-38c1a991b593.png)
 
-Let's move on to configuring GitHub Workflows for continuous deployments.
+## Configure GitHub Actions for Continuous Deployment (CD) workflow
 
-## Configure GitHub Actions for Continuous Deployment (CD) Workflow
-
-First, let's add all the required environment variables obtained in the AWS steps above to your GitHub repo as repository Secrets. Go to your GitHub repository's Settings, and click on **Secrets and Variables**. Then, click on **New repository secret**.
+First, add the required environment variables obtained in the AWS steps above to your GitHub repo as repository Secrets. Go to your GitHub repository's Settings, and click on **Secrets and Variables**. Then, click on **New repository secret**.
 
 ![](/guides/images/chatbot-astro-postgres-llamaindex/c95dacdf-987c-4a78-97e3-68668f0e1ad5.png)
 
@@ -891,17 +873,17 @@ jobs:
 The workflow above does the following:
 
 - Allows itself to be triggered manually or when a git push is done to the master branch.
-- Sets global environment variables as per your AWS setup variables (we obtained earlier during the setup).
+- Sets global environment variables from the AWS setup values you obtained earlier.
 - Loads the environment variables added to the GitHub repo as secrets into the scope.
 - Writes the task definition including the environment variables.
 - Builds and pushes the Docker image to Amazon ECR.
-- Loads the updated (if) task definition to Amazon ECS.
+- Deploys the updated task definition to Amazon ECS.
 
 Now, push the added GitHub workflow file to your GitHub repo. Follow the steps below to trigger the deployment:
 
 - Go to your GitHub repository's **Actions** tab.
 
-- Select **Deploy to Amazon ECS** workflow.
+- Select the **Deploy Astro to Amazon ECS on AWS Fargate** workflow.
 
 - Click **Run workflow**.
 
@@ -923,6 +905,6 @@ Now, push the added GitHub workflow file to your GitHub repo. Follow the steps b
 
 ## Summary
 
-In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Lakebase Postgres. You also learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
+You built a RAG chatbot with LlamaIndex, Astro, and Postgres on Neon, and set up GitHub Actions to deploy it to Amazon ECS on AWS Fargate.
 
 <NeedHelp />

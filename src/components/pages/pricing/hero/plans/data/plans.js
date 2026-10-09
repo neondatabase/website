@@ -25,7 +25,7 @@ export default [
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
-            title: '0.5 GB of storage per project',
+            title: '1 GB of storage per project',
           },
           {
             title: 'Sizes up to 2 CU (8 GB RAM)',

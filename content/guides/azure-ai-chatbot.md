@@ -1,13 +1,13 @@
 ---
-title: Building AI-Powered Chatbots with Azure AI Studio and Neon
-subtitle: Learn how to create AI powered chatbot using Azure AI Studio with Lakebase Postgres as the backend database
+title: Building AI-powered chatbots with Azure AI Studio and Neon
+subtitle: Learn how to create an AI-powered chatbot using Azure AI Studio with Lakebase Postgres as the backend database
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-24T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, we'll walk through creating an AI-powered chatbot from scratch. We will be using Azure AI Studio, Lakebase Postgres as the backend database, React for the frontend interface and Express for the backend API.
+In this guide, we'll walk through creating an AI-powered chatbot from scratch. We'll use Azure AI Studio, Lakebase Postgres as the backend database, React for the frontend interface, and Express for the backend API.
 
 We'll deploy a GPT-4 model to Azure AI Studio, which we will then use to build a support chatbot that can answer questions, store conversations, and learn from interactions over time.
 
@@ -20,24 +20,25 @@ Before we begin, make sure you have:
 - Basic familiarity with SQL and JavaScript/TypeScript
 - [Node.js](https://nodejs.org/) 18.x or later installed
 
-## Setting up Your Development Environment
+## Setting up your development environment
 
 If you haven't already, follow these steps to set up your development environment:
 
-### Create a Neon Project
+### Create a Neon project
 
 1. Navigate to the [Neon Console](https://console.neon.tech)
 2. Click "New Project"
-3. Select Azure as your cloud provider
-4. Choose East US 2 as your region
-5. Give your project a name (e.g., "chatbot-db")
-6. Click "Create Project"
+3. Give your project a name (e.g., "chatbot-db")
+4. Choose an AWS region close to your Azure OpenAI resource, such as AWS US East (N. Virginia) if your Azure resource is in East US 2
+5. Click "Create Project"
 
-Save your connection details - you'll need these to configure your chatbot's database connection.
+Neon runs on AWS, and new projects can't be created in Neon's deprecated Azure regions. If you need your Postgres data to stay in Azure, see [Azure regions deprecation](/docs/import/azure-regions-deprecation) for the Databricks Lakebase option.
 
-### Create the Database Schema
+Save your connection details. You'll need them to configure your chatbot's database connection.
 
-A standard chatbot needs to store conversations and track how users interact with it. We'll create a database schema in Lakebase Postgres that stores messages, tracks user data, and helps us understand how well the chatbot is performing.
+### Create the database schema
+
+A chatbot needs to store conversations and track how users interact with it. We'll create a schema that stores messages and user data, plus feedback that shows how well the chatbot is performing.
 
 Our schema will include 4 tables:
 
@@ -97,11 +98,11 @@ With our 4 tables in place, we have a schema which allows us to:
 - Store messages between users and the bot
 - Collect feedback on messages to improve the chatbot
 
-### Set Up Azure AI Studio Project
+### Set up an Azure AI Studio project
 
 With your Neon database ready, let's set up Azure AI Studio to deploy our own GPT-4 model.
 
-In order to access the Azure OpenAI Studio, you need to create an Azure OpenAI resource. Here's how you can do that:
+To access Azure OpenAI Studio, you need to create an Azure OpenAI resource. Here's how you can do that:
 
 1. Go to [the Azure OpenAI resources portal](https://oai.azure.com/portal)
 1. Click the "Create new Azure OpenAI resource" button
@@ -114,7 +115,7 @@ This will create a new Azure OpenAI resource for you. The deployment might take 
 
 Once the deployment is completed, you can again visit the [Azure OpenAI portal](https://oai.azure.com/portal), and you should see your newly created resource there with type "OpenAI".
 
-### Deploy the Azure OpenAI Model
+### Deploy the Azure OpenAI model
 
 With the Azure OpenAI resource set up, we can now deploy the GPT-4 model. To deploy the Azure OpenAI model:
 
@@ -123,7 +124,7 @@ With the Azure OpenAI resource set up, we can now deploy the GPT-4 model. To dep
 1. Click on the "Model catalog" tab
 1. Find and click on the "gpt-4" model from the list
 1. Click the "Deploy" button
-1. Wait for deployment to complete - you'll receive an Endpoint URL and API key
+1. Wait for deployment to complete. You'll receive an Endpoint URL and API key
 
 There are other models available in the Azure OpenAI Studio, but for this guide, we'll use the GPT-4 model for our chatbot.
 
@@ -136,11 +137,11 @@ After deployment, click "Open in playground" to test the model. The playground i
    - Temperature (higher = more creative, lower = more focused)
    - Top P and Presence Penalty (control response variety)
 
-Feel free to experiment with these settings to see how they affect the model's responses.
+Experiment with these settings to see how they affect the model's responses.
 
-#### Setting Up Model Instructions
+#### Setting up model instructions
 
-You can give the model instructions about how it should behave. Think of this like training a new colleague - you're telling them:
+You can give the model instructions about how it should behave. Think of this like training a new colleague. You're telling them:
 
 - What they should do
 - What they shouldn't do
@@ -160,7 +161,7 @@ You are a customer service agent for a tech company.
 
 These instructions will be included with every message to the model. The model will follow these instructions for all conversations.
 
-#### Testing Your Instructions
+#### Testing your instructions
 
 After setting up instructions for the model, you can test them in the playground, for example:
 
@@ -171,13 +172,13 @@ After setting up instructions for the model, you can test them in the playground
 
 You can also add training data to help the model understand your specific needs. To learn more about training data, check the [Azure OpenAI Studio documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/fine-tuning).
 
-## Building the Backend
+## Building the backend
 
 With the Azure OpenAI model deployed, we can now build the backend API that will interact with the model and store chat data in our Neon database.
 
-But before we start building our backend, let's quickly look at how to get the API code from Azure OpenAI Studio. This will help us make sure that we're using the correct API format.
+Before building the backend, get the sample API code from Azure OpenAI Studio so you use the correct request format.
 
-### Getting the API Code from Azure OpenAI Studio
+### Getting the API code from Azure OpenAI Studio
 
 1. In the Azure OpenAI Studio playground, click "View code"
 2. From the dropdown menu, select "JSON"
@@ -204,7 +205,7 @@ But before we start building our backend, let's quickly look at how to get the A
 
 This shows us the exact format we need to use when making API calls to Azure OpenAI.
 
-### Setting Up the Project
+### Setting up the project
 
 First, let's create a new Node.js project and install the dependencies that we'll need for our chatbot backend.
 
@@ -225,14 +226,14 @@ npm install express pg dotenv cors axios
 The packages we're installing are:
 
 - `express`: Web framework for building our API endpoints
-- `pg`: PostgreSQL client for connecting to Neon
+- `pg`: Postgres client for connecting to Neon
 - `dotenv`: Environment variable management
 - `cors`: Handles Cross-Origin Resource Sharing for our frontend
 - `axios`: Makes HTTP requests to Azure OpenAI API
 
-### Project Structure
+### Project structure
 
-Before we start, let's organize our project files in a way that makes our code easy to maintain and update. We'll use a standard Node.js project structure that separates our code into different directories based on functionality:
+We'll use a standard Node.js project structure that separates code into directories by function:
 
 - `config`: Holds configuration files, including database connection settings
 - `services`: Contains the core business logic for chat functionality and OpenAI integration
@@ -258,17 +259,13 @@ azure-neon-chatbot/
 └── server.js
 ```
 
-This structure will help us keep our code organized and makes it easier for other developers to understand and work with the project.
-
-### Environment Configuration
-
-Before we start coding, let's set up our environment configuration.
+### Environment configuration
 
 Create a `.env` file in your project root with the following configuration:
 
 ```env
 # Database Configuration
-DATABASE_URL='postgresql://neondb_owner:<your_password>@<your_host>.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require'
+DATABASE_URL='postgresql://neondb_owner:<your_password>@<your_host>.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
 
 # Azure OpenAI Configuration
 AZURE_OPENAI_ENDPOINT=https://<your-resource-name>.openai.azure.com
@@ -284,7 +281,7 @@ You'll need to replace `<your_password>`, `<your_host>`, `<your-resource-name>`,
 
 You can get your Azure OpenAI API key from the Azure OpenAI Studio portal under the Chat playground.
 
-### Database Configuration
+### Database configuration
 
 Next, let's set up the database connection. We'll use the `pg` package to connect to our Lakebase Postgres database.
 
@@ -318,7 +315,7 @@ module.exports = {
 
 This sets up a connection to the Lakebase Postgres database using the `pg` package. We use the `DATABASE_URL` environment variable to connect to the database.
 
-### OpenAI Service
+### OpenAI service
 
 Next, let's create a service to interact with the Azure OpenAI API. This service will handle sending messages to the GPT-4 model that we deployed earlier.
 
@@ -408,9 +405,9 @@ This creates a service that handles all communication with Azure OpenAI. It does
 
 The service includes the bot's base instructions (as a marketing assistant in this example) and error handling for common issues like authentication problems.
 
-Feel free to adjust the instructions and settings to match your chatbot's needs.
+Adjust the instructions and settings to match your chatbot's needs.
 
-### Chat Service
+### Chat service
 
 Next, let's create a service to manage chat interactions. This service will handle user messages, conversation history, and saving messages to the database.
 
@@ -537,20 +534,20 @@ module.exports = new ChatService();
 This chat service manages all our conversations and messages. There is a lot going on in this service, so let's break it down:
 
 1. Creates or finds users in our database
-1. Message Handling:
+1. Message handling:
    - Saves messages from both users and the bot
    - Retrieves conversation history
-1. Conversation Flow:
+1. Conversation flow:
    - Starts new conversations
    - Processes incoming messages
    - Gets responses from Azure OpenAI
    - Stores everything in our Neon database
 
-We are also using database transactions to make sure that all related data (messages, user info, and conversations) is saved correctly, with rollback support if anything fails. This helps maintain data consistency in our chat application.
+We are also using database transactions to make sure that all related data (messages, user info, and conversations) is saved correctly, with rollback if anything fails.
 
-For this service you can think of it as the coordinator between our database, the Azure AI model, and our chat interface which we'll build next.
+This service coordinates between the database, the Azure AI model, and the chat interface, which we'll build next.
 
-### Chat API Routes Implementation
+### Chat API routes
 
 With our services in place, let's create the API routes that will handle incoming requests from our chat interface.
 
@@ -609,7 +606,7 @@ The above are our API endpoints that our chat interface will use to communicate 
 
 Each route connects to our chat service to perform its specific task. We'll use these routes to build our chat interface in the next section.
 
-### Server Setup
+### Server setup
 
 Finally, let's set up our Express server to run our chatbot API. We'll also add a health check endpoint and error handling middleware.
 
@@ -664,9 +661,9 @@ The above is our main application file that brings everything together. It sets 
 
 We also include an error handling middleware to catch any unhandled exceptions and log them to the console for easier debugging.
 
-### Running the Application
+### Running the application
 
-Starting the server is straightforward - just run `node server.js`. Once started, the server will:
+To start the server, run `node server.js`. Once started, the server will:
 
 - Connect to your Neon database
 - Listen for chat requests
@@ -674,11 +671,11 @@ Starting the server is straightforward - just run `node server.js`. Once started
 
 You can now send requests to `http://localhost:3000/api/chat` (or whichever port you configured) to interact with your chatbot.
 
-## Creating the React Frontend
+## Creating the React frontend
 
 With our backend API ready, let's create a React frontend for our chatbot using Tailwind CSS for styling. We'll use TypeScript for type safety and Vite for faster development.
 
-### Create React Project
+### Create a React project
 
 First, let's create a new React project using Vite:
 
@@ -714,7 +711,7 @@ The `clsx` package is used to conditionally apply CSS classes, `@heroicons/react
 
 ### Configure Tailwind CSS
 
-With Tailwind CSS installed, let's set it up in our project. Start by initializing a Tailwind CSS:
+With Tailwind CSS installed, let's set it up in our project. Start by initializing Tailwind CSS:
 
 ```bash
 npx tailwindcss init -p
@@ -760,7 +757,7 @@ After that, add the Tailwind directives to the `src/index.css` file:
 
 This will apply the Tailwind CSS styles to our project, so we can use them in our components.
 
-### Create Environment Configuration
+### Create environment configuration
 
 Our chatbot interface will need to connect to the backend API to send and receive messages. Let's set up the API URL in our environment configuration.
 
@@ -772,16 +769,14 @@ VITE_API_URL=http://localhost:3000/api
 
 Make sure to replace the `VITE_API_URL` with the actual URL of your backend API. This will allow our chatbot interface to communicate with the backend application.
 
-### Project Structure
+### Frontend project structure
 
-For our chat interface, let's organize our React components into a maintainable structure:
+Organize the React components like this:
 
 - `components/Chat`: Contains all chat-related components like message bubbles and input fields
 - `components/Layout`: Holds reusable layout components
 - `hooks`: Stores custom React hooks for managing chat functionality
 - `types`: Defines TypeScript interfaces for our chat data
-
-This structure will allow us to separate our code into logical pieces, so that it will be easier to find and update specific parts of the application.
 
 The project structure will look like this:
 
@@ -802,7 +797,7 @@ src/
 
 With our project structure in place, let's start building our chatbot interface. We will create the components for our chat interface starting with the types and basic components, then bringing it all together.
 
-### 1. Define Message Types
+### 1. Define message types
 
 First, let's define TypeScript types for our chat messages:
 
@@ -823,9 +818,9 @@ This defines a `Message` interface that tracks:
 
 We'll use this type to manage chat messages in our application.
 
-### 2. Create the Layout Container
+### 2. Create the layout container
 
-Next, let's create a container component which will provide a consistent spacing and width for our chat interface:
+Next, create a container component that provides consistent spacing and width for the chat interface:
 
 ```typescript
 // src/components/Layout/Container.tsx
@@ -838,7 +833,7 @@ export const Container = ({ children }: { children: React.ReactNode }) => (
 
 The container is a simple component that wraps all our chat components in a centered, responsive layout.
 
-### 3. Build the Message Bubble Component
+### 3. Build the message bubble component
 
 Each chat message will be displayed as a bubble with different styles for user and bot messages:
 
@@ -892,7 +887,7 @@ The chat bubble component:
 
 We are going to use this component to render chat messages in the chat interface.
 
-### 4. Create the Message Input Component
+### 4. Create the message input component
 
 Next, let's build an input field for users to type messages and a submit button:
 
@@ -947,11 +942,11 @@ This component includes:
 
 - A text input field for messages
 - A submit button with loading state
-- A simple form handling with `preventDefault()`
+- Simple form handling with `preventDefault()`
 
 The input field will allow users to type messages and submit them to the chatbot over the Azure OpenAI API that we set up earlier.
 
-### 5. Create the Chat Hook
+### 5. Create the chat hook
 
 After building the basic components, let's create a custom hook to manage chat state and interactions. This hook will handle sending messages, loading states, and API calls to the backend:
 
@@ -1017,7 +1012,7 @@ The hook handles:
 
 This hook will be used in the main chat interface component to manage chat interactions and state updates.
 
-### 6. Build the Main Chat Interface
+### 6. Build the main chat interface
 
 Finally, let's combine everything into the main chat interface component:
 
@@ -1070,7 +1065,7 @@ The main interface component:
 
 This component will display the chat interface with message bubbles, input field, and submit button for users to interact with the chatbot.
 
-### 7. Update App Component
+### 7. Update the App component
 
 Finally, we can update the main App component to use our chat interface and wrap it in a container for layout:
 
@@ -1102,19 +1097,15 @@ Visit `http://localhost:5173` to test the chatbot interface. It will automatical
 
 ## Conclusion
 
-In this guide, we've built a simple AI-powered chatbot widget that combines Azure AI Studio with Neon's serverless Postgres database. This implementation works well for documentation websites and help systems, where the chatbot can be embedded as a widget to provide immediate assistance to users.
+You've built a chatbot widget that uses a GPT-4 model deployed in Azure AI Studio and stores users, conversations, messages, and feedback in Lakebase Postgres. It fits documentation sites and help systems, where you can embed it as a widget.
 
-When the Azure OpenAI model is trained on your specific documentation or knowledge base, the chatbot can provide accurate, relevant responses about your product or service. Anonymous users can get quick answers without searching through documentation.
+Because every query, response, and rating lands in your database, you can query it to find where users get stuck and which docs need work. As a next step, fine-tune the model on your own documentation to improve its answers.
 
-Also, by capturing chat interactions, user queries, bot responses, and feedback in your database, you can analyze where users face challenges and identify areas for documentation improvement.
+## Additional resources
 
-As a next step, you can further train your Azure OpenAI model with more specific data to improve its accuracy and relevance and extend the chatbot's functionality to handle more complex queries and tasks.
-
-## Additional Resources
-
-- [Azure Bot Service Documentation](https://docs.microsoft.com/en-us/azure/bot-service/)
-- [LUIS Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Neon Documentation](/docs)
+- [Azure Bot Service documentation](https://docs.microsoft.com/en-us/azure/bot-service/)
+- [LUIS documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Neon documentation](/docs)
 - [Bot Framework SDK](https://learn.microsoft.com/en-us/azure/bot-service/index-bf-sdk)
 
 <NeedHelp />

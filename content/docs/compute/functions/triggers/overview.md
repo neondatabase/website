@@ -7,7 +7,7 @@ summary: >-
   object-created), what an invocation sends your function, and how triggers behave across
   branches.
 enableTableOfContents: true
-updatedOn: '2026-09-17T12:24:58.811Z'
+updatedOn: '2026-09-21T05:29:37.104Z'
 ---
 
 A Function Trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) in response to an event, so recurring or event-driven work runs as your own code next to your data. There's no scheduler or queue to operate and no compute kept running to watch for the event. Functions are long-running, so one trigger handles a quick health check or a table-scanning batch, and it fires even when the compute is scaled to zero.
@@ -76,6 +76,38 @@ A trigger invocation can be slower on a cold start: if the function's runtime wa
 Neon delivers trigger calls to the function's public URL. To confirm a request is a genuine trigger invocation and not an arbitrary caller, check for the `X-Neon-Trigger-Invocation-Id` header: Neon strips any client-supplied `X-Neon-*` header at the edge, so a request that carries one is sent by Neon's trigger system. A handler that only serves triggers can reject requests that lack it, as the [worked handler](/docs/compute/functions/triggers/schedule#write-a-handler-for-the-scheduled-call) does.
 
 The `invocation_id` is a correlation ID, not a secret. It's a digest of the trigger and its occurrence, stable across retries, so it ties your logs to a specific run. What proves the request came from Neon is the presence of the header, not its value, so matching the header against the body is only a consistency check. Keep the handler idempotent and guard destructive actions regardless.
+
+## Test triggers locally
+
+Triggers only fire from Neon's side against the deployed function, so a trigger never calls your local machine. To iterate on the handler, serve the function with [`neon dev`](/docs/compute/functions/get-started#develop-locally) and replay the trigger payload yourself with `curl`.
+
+1. Start the dev server:
+
+   ```bash
+   neon dev
+   ```
+
+   It serves the functions declared in `neon.ts` with hot reload, injects `DATABASE_URL` and other Neon variables from the linked branch, and prints a local URL for each function (by default `http://localhost:8787`).
+
+2. Send a `POST` to the local URL plus the trigger's `function_path`, with the same JSON envelope the trigger would send. Include an `X-Neon-Trigger-Invocation-Id` header if your handler checks for it. A schedule replay carries `data.scheduled_at`:
+
+   ```bash shouldWrap
+   curl -X POST http://localhost:8787/ \
+     -H "Content-Type: application/json" \
+     -H "X-Neon-Trigger-Invocation-Id: local-test" \
+     -d '{"version":1,"invocation_id":"local-1","trigger":{"type":"schedule","id":"trigger-local","name":"local-schedule"},"data":{"scheduled_at":"2026-09-08T19:30:00Z"}}'
+   ```
+
+   An object-created replay carries `data.bucket_name` and `data.object_key`:
+
+   ```bash shouldWrap
+   curl -X POST http://localhost:8787/ \
+     -H "Content-Type: application/json" \
+     -H "X-Neon-Trigger-Invocation-Id: local-test" \
+     -d '{"version":1,"invocation_id":"local-2","trigger":{"type":"storage_object_created","id":"trigger-local","name":"local-upload"},"data":{"bucket_name":"my-bucket","object_key":"uploads/report.csv"}}'
+   ```
+
+Handler output appears in the `neon dev` terminal rather than in `neon logs query`. Leave off the `X-Neon-Trigger-Invocation-Id` header to confirm a guarded handler returns `403`. If the handler reads from Object Storage, the bucket and object live on the branch, so deploy first and make sure the object you replay exists there.
 
 ## Triggers and branching
 
