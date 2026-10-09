@@ -372,7 +372,7 @@ If you're using [Managed Better Auth](/docs/auth/overview) and want to test the 
 
 The Auth API reference UI is an interactive browser-based tool for exploring and testing all Managed Better Auth endpoints. It is powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage).
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console.
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** under **Settings** > **Better Auth** > **Project Info** in the Neon Console.
 
 2. **Create a test user:** Use the UI to call `POST /sign-up/email` with a JSON body:
 
@@ -407,7 +407,7 @@ The Auth API reference UI is an interactive browser-based tool for exploring and
 
 <TabItem>
 
-The following steps walk through signing up, obtaining a JWT, and querying the Data API from the terminal. You can find your **Auth URL** on the **Auth** page and your **Data API URL** on the **Data API** page in the Neon Console.
+The following steps walk through signing up, obtaining a JWT, and querying the Data API from the terminal. You can find your **Auth URL** under **Settings** > **Better Auth** > **Project Info** and your **Data API URL** on the **Data API** page in the Neon Console.
 
 **1. Sign up (or sign in)**
 

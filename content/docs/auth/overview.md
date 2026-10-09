@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-10-09T11:46:19.949Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -52,7 +52,7 @@ Choose your framework to get started:
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth currently supports Better Auth version **1.4.18**.
+Managed Better Auth runs Better Auth version **1.7.6**. The `@neondatabase/auth` SDK uses a Better Auth 1.6 client, and Managed Better Auth keeps 1.6 clients working, so you don't need to upgrade your SDK.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 

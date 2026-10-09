@@ -10,7 +10,7 @@ summary: >-
   which are covered in separate guides. The `revokeOtherSessions` flag in
   `changePassword()` lets you sign out all other devices in the same call.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T11:46:19.949Z'
 ---
 
 Manage user profiles and account settings after users sign in. This guide covers:
@@ -61,6 +61,8 @@ Email address changes are not currently supported. To reset a forgotten password
 </Admonition>
 
 ## Change password
+
+Passwords can be up to 128 characters. Sign-up and sign-in reject longer passwords with a `400` `PASSWORD_TOO_LONG` error.
 
 Change a user's password while they are logged in using `changePassword()`. This requires the current password for security:
 

@@ -10,7 +10,7 @@ summary: >-
   and rate-limited (exceeding attempts returns `TOO_MANY_ATTEMPTS`), and
   production deployments require a dedicated SMTP provider.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T09:46:45.817Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
@@ -26,7 +26,7 @@ Managed Better Auth UI and Neon SDK are client-side SDKs, so you only invoke the
 ## Prerequisites
 
 - A Neon project with **Auth enabled**
-- **Sign-up and Sign-in with Email** enabled in your project's **Settings** → **Auth**.
+- **Sign-up and Sign-in with Email** enabled in your project's **Settings** → **Better Auth**.
 
   <Admonition type="note" title="Email verification during sign-up">
   To use Email OTP for sign-up verification, enable **Verify at Sign-up** and select **Verification code** under **Verification method**.
