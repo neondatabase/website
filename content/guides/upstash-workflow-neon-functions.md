@@ -175,7 +175,7 @@ The `neon init` command also creates a placeholder function, `hello.ts`, at your
 rm hello.ts
 ```
 
-You now have a project linked to Neon with a `neon.ts` config file and the dependencies needed to build the workflow.
+You now have a project linked to Neon with a `neon.ts` config file.
 
 Install the dependencies by running:
 
@@ -187,7 +187,7 @@ npm install --save-dev esbuild @types/node @types/pg typescript dotenv
 - `hono`: A lightweight web framework for serving the workflow endpoint and the trigger route.
 - `@upstash/workflow`: The Upstash Workflow SDK. It includes a Hono adapter and a client for starting workflow runs.
 - `pg`: Postgres client for Node.js.
-- `ai`: The [Vercel AI SDK](https://ai-sdk.dev/), which provides a unified interface for calling LLMs.
+- `ai`: The [Vercel AI SDK](https://ai-sdk.dev/), which provides a single interface for calling LLMs.
 - `@neon/ai-sdk-provider`: [Neon's AI SDK provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider), which routes model calls through the Neon AI Gateway.
 
 TypeScript needs a `tsconfig.json` to resolve types correctly. Create one in your project root:
@@ -208,7 +208,7 @@ TypeScript needs a `tsconfig.json` to resolve types correctly. Create one in you
 
 ## Create the subscribers table
 
-In this example workflow, you'll be implementing a simple subscriber onboarding workflow. The first step is to create the `subscribers` table in Lakebase Postgres using either the Neon CLI or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
+You'll build a subscriber onboarding workflow. Start by creating the `subscribers` table in Lakebase Postgres using either the Neon CLI or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 <CodeTabs labels={["Use Neon CLI", "Raw SQL"]}>
 
