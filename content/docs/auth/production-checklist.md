@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-10-09T09:41:16.035Z'
 ---
 
 Complete these steps before taking your application to production with Managed Better Auth.
@@ -110,9 +110,8 @@ Managed Better Auth uses the application name in user-facing auth messages, such
 
 To set a custom application name:
 
-1. Go to **Auth** in your Neon project
-2. Select the **Configuration** tab
-3. In the **Project Info** panel, edit the **Application Name** field
+1. Go to **Settings** → **Better Auth** in your Neon project
+2. In the **Project Info** section, edit the **Application Name** field
 
 Each branch manages its own application name independently, so preview and development branches can use different names than production.
 
