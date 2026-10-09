@@ -6,7 +6,7 @@ page_description: >-
   a list of values. It also shows you how to use the IN operator in a subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-in/'
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-10-08T04:23:12.133Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FETCH
@@ -61,7 +61,7 @@ SELECT
 FROM
   film
 WHERE
-  film_id in (1, 2, 3);
+  film_id IN (1, 2, 3);
 ```
 
 Output:
