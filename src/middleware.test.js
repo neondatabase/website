@@ -681,7 +681,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
         );
         const event = { waitUntil: vi.fn() };
         const response = await middleware(
-          createMockRequest('/docs/introduction', 'ChatGPT-User', 'text/html'),
+          createMockRequest('/docs/introduction', 'ChatGPT-User', '*/*'),
           event
         );
 
@@ -708,7 +708,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       );
       const event = { waitUntil: vi.fn() };
       const response = await middleware(
-        createMockRequest('/docs/introduction', 'ChatGPT-User', 'text/html'),
+        createMockRequest('/docs/introduction', 'ChatGPT-User', '*/*'),
         event
       );
       expect(response.status).toBe(200);
@@ -728,7 +728,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
         )
       );
       const response = await middleware(
-        createMockRequest('/docs/introduction', 'ChatGPT-User', 'text/html')
+        createMockRequest('/docs/introduction', 'ChatGPT-User', '*/*')
       );
       expect(response.type).toBe('next');
       expect(
