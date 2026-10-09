@@ -84,7 +84,7 @@ sequenceDiagram
 Before you start, make sure you have:
 
 1. **Node.js**: Version 22 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account**: Sign up at [console.neon.tech](https://console.neon.tech/signup).
+2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The [Neon AI Gateway](/docs/ai-gateway/overview) is available on the Launch and Scale plans with [prepaid credits](/docs/ai-gateway/prepaid-credits), so the welcome-message step needs a paid plan.
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Upstash account**: Sign up for a free account at [console.upstash.com](https://console.upstash.com).
 
@@ -240,13 +240,13 @@ The table will be used to store subscriber information, including their email, n
 
 ## Set up environment variables and the connection pool
 
-Create `src/env.ts` and export a typed `env` object with the Neon config. The `parseEnv` function reads the variables from the environment and ensures they match the types declared in `neon.ts`. This gives you type-safe access to your environment variables throughout your code:
+Create `src/env.ts` and export a typed `env` object with the Neon config. The `parseEnv` function reads the variables from the environment and ensures they match the types declared in `neon.ts`. Passing `["DATABASE_URL"]` limits validation to the one variable this function uses, which Neon injects into the deployed function at runtime:
 
 ```ts filename="src/env.ts"
 import { parseEnv } from "@neon/env";
 import { config } from "../neon";
 
-export const env = parseEnv(config, "workflow");
+export const env = parseEnv(config, ["DATABASE_URL"]);
 ```
 
 <Admonition type="note">
@@ -344,7 +344,6 @@ Create the entry point for your Neon Function at `index.ts`. It registers the Ho
 ```ts filename="index.ts"
 import { Hono } from "hono";
 import { Client } from "@upstash/workflow";
-import { env } from "./src/env";
 import workflowApp from "./src/workflow";
 
 const app = new Hono();
@@ -359,7 +358,7 @@ app.post("/api/signup", async (c) => {
   const { subscriberId, email, name } = await c.req.json();
 
   const { workflowRunId } = await workflowClient.trigger({
-    url: `${env.functions.workflow.baseUrl}/api/workflow`,
+    url: new URL("/api/workflow", c.req.url).toString(),
     body: { subscriberId, email, name },
     retries: 3,
   });
@@ -377,7 +376,7 @@ The Hono app exposes two routes:
 - **`/api/workflow`**: The workflow endpoint that QStash calls once per step. It delegates to the `workflowApp` defined in [`src/workflow.ts`](#define-the-workflow-endpoint).
 - **`/api/signup`**: The trigger route that starts a new workflow run.
 
-The trigger route reads `env.functions.workflow.baseUrl` from the typed `env` object in [`src/env.ts`](#set-up-environment-variables-and-the-connection-pool) and appends `/api/workflow` to build the callback URL it hands to QStash. Neon derives this URL from the branch, so no extra configuration is needed, and `neon dev` points it at `http://localhost:8787` automatically. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment the same way, and the Upstash SDK reads them automatically.
+The trigger route builds the callback URL it hands to QStash from the incoming request, so it always points at the function that received the signup: your public function URL in production, or `http://localhost:8787` under `neon dev`. The `NEON_FUNCTION_<SLUG>_BASE_URL` variables that `neon env pull` writes to `.env.local` are local-only and aren't injected into a deployed function, so don't read the callback URL from them. The `QSTASH_*` credentials you declare in `neon.ts` are injected into the function's environment at deploy time, and the Upstash SDK reads them automatically.
 
 ## Configure Upstash credentials
 
@@ -460,10 +459,13 @@ You can run the workflow locally with the Upstash QStash CLI. This is useful for
 npx @upstash/qstash-cli dev
 ```
 
-This prints a local `QSTASH_URL` (typically `http://127.0.0.1:8080`) and a development `QSTASH_TOKEN`. Add both to `.env.local`, then start the Neon Functions dev server:
+This prints a local `QSTASH_URL` (typically `http://127.0.0.1:8080`), a development `QSTASH_TOKEN`, and local signing keys. Replace the four `QSTASH_*` values in `.env.local` with them.
+
+`neon dev` doesn't load `.env.local` before evaluating `neon.ts`, so export the file into your shell first, then start the Neon Functions dev server:
 
 ```bash
-# Terminal 2: start the Neon Functions dev server
+# Terminal 2: load .env.local, then start the Neon Functions dev server
+set -a && . ./.env.local && set +a
 neon dev
 ```
 
