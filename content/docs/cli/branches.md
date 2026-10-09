@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -39,9 +39,9 @@ neon branches list --project-id solitary-leaf-288182
 ```
 
 ```text filename="Output"
-Name                   ID                     Current State  Created At
-[default] production   br-wispy-cloud-123456  ready          2026-09-30T13:15:12Z
-[current] development  br-cool-forest-123456  ready          2026-09-30T14:45:50Z
+Name                   ID                     Current State  Expires At  Created At
+[default] production   br-wispy-cloud-123456  ready          never       2026-09-30T13:15:12Z
+[current] development  br-cool-forest-123456  ready          never       2026-09-30T14:45:50Z
 ```
 
 Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, `[anon]` marks an anonymized branch, and `[current]` marks the branch pinned in your local `.neon` context file.
@@ -125,7 +125,7 @@ ID                       Created At
 ep-floral-violet-123456  2026-09-30T20:07:27Z
 
 Connection string
-Connection Uri
+Connection URI
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 

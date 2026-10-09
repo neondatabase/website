@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-10-09T09:39:55.552Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 <InfoBlock>
@@ -171,7 +171,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    Projects
-   Id                    Name       Region Id      Created At
+   ID                    Name       Region ID      Created At
    cool-forest-12345678  myproject  aws-us-east-2  2026-10-14T14:33:43Z
    ```
 
@@ -179,9 +179,9 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
    ```bash
    neon branches list --project-id cool-forest-12345678
-   Name                            Id                   Current State  Created At
-   development                     br-calm-sky-123456   ready          2026-12-23T21:05:05Z
-   [default] [current] production  br-bold-wind-123456  ready          2026-12-23T21:04:57Z
+   Name                            ID                   Current State  Expires At  Created At
+   development                     br-calm-sky-123456   ready          never       2026-12-23T21:05:05Z
+   [default] [current] production  br-bold-wind-123456  ready          never       2026-12-23T21:04:57Z
    ```
 
    This command shows your existing branches, including the `production` branch and the `development` branch you just created.

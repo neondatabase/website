@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -88,7 +88,7 @@ Select **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (
 
 ```bash
 $ neon link
-INFO: Linking organization MyOrg (org-example-12345678).
+Linking organization MyOrg (org-example-12345678).
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … llm-proxy-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)

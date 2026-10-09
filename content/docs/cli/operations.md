@@ -10,7 +10,7 @@ summary: >-
   to be installed and authenticated; scope to a specific project with
   `--project-id` when your account has multiple projects.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-operations
   - /docs/cli/operation

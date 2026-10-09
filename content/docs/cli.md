@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-10-09T12:09:27.220Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Managed Better Auth from the terminal, with branch-scoped workflows built in.

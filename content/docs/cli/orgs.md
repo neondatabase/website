@@ -8,7 +8,7 @@ summary: >-
   organizations your account belongs to before running project or branch
   commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-orgs
   - /docs/cli/org

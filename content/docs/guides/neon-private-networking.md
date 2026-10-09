@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-10-08T21:05:46.821Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 <Admonition type="info" title="Private Networking availability">
@@ -262,7 +262,7 @@ After adding a restriction, you can check the status of the VPC endpoint to view
 
 ```bash
 neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
-Vpc Endpoint Id              vpce-1234567890abcdef0
+VPC Endpoint ID              vpce-1234567890abcdef0
 State                        new
 Num Restricted Projects      1
 Example Restricted Projects  orange-credit-12345678

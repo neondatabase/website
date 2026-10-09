@@ -7,7 +7,7 @@ summary: >-
   list existing keys and when they were last used, and revoke a key you no
   longer trust.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 The `api-keys` command creates, lists, and revokes the API keys that authenticate requests to the Neon API. Keys belong to your account unless you pass `--org-id` or `--project-id`.

@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-09T11:33:56.423Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -207,7 +207,7 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-Id              wispy-haze-123456
+ID              wispy-haze-123456
 Name            wispy-haze-123456
 IP Addresses    203.0.113.0, 203.0.113.1
 Protected Only  false
@@ -993,9 +993,9 @@ The command returns details about the recovered project.
 
 ```bash
 neon projects recover crimson-voice-12345678
-Id          crimson-voice-12345678
+ID          crimson-voice-12345678
 Name        myproject
-Region Id   aws-us-east-2
+Region ID   aws-us-east-2
 Created At  2026-04-15T11:17:30Z
 ```
 

@@ -91,9 +91,9 @@ Pulled 3 Neon variables into .env.local
   Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
-INFO: Created neon.ts declaring functions, ai-gateway.
-INFO: Created hello.ts - the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions, ai-gateway.
+Created hello.ts - the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function: `hello.ts`, at your project root. You'll build the image API in your own `index.ts` file, so delete the placeholder:

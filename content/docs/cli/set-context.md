@@ -11,7 +11,7 @@ summary: >-
   tree to the project root, supports multiple independent named files, and
   persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
@@ -55,9 +55,9 @@ neon branches list
 ```
 
 ```text filename="Output"
-Name            ID                      Current State  Created At
-development     br-raspy-meadow-123456  ready          2026-11-28T19:19:11Z
-[default] main  br-curly-bar-123456     ready          2026-10-23T12:49:41Z
+Name            ID                      Current State  Expires At  Created At
+development     br-raspy-meadow-123456  ready          never       2026-11-28T19:19:11Z
+[default] main  br-curly-bar-123456     ready          never       2026-10-23T12:49:41Z
 ```
 
 ## Using a named context file (#using-a-named-context-file)
@@ -75,10 +75,10 @@ neon branches list --context-file Documents/MyContext
 ```
 
 ```text filename="Output"
-Name            ID                         Current State  Created At
-development     br-soft-base-123456        ready          2026-11-21T18:41:47Z
-[default] main  br-young-bush-123456       ready          2026-11-21T18:00:10Z
-staging         br-billowing-union-123456  ready          2026-11-21T18:44:22Z
+Name            ID                         Current State  Expires At  Created At
+development     br-soft-base-123456        ready          never       2026-11-21T18:41:47Z
+[default] main  br-young-bush-123456       ready          never       2026-11-21T18:00:10Z
+staging         br-billowing-union-123456  ready          never       2026-11-21T18:44:22Z
 ```
 
 <Admonition type="note">

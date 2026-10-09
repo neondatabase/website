@@ -26,7 +26,7 @@
     "config-dir": {
       "type": "string",
       "describe": "Path to config directory",
-      "defaultText": "~/.config/neonctl (or $XDG_CONFIG_HOME/neonctl)"
+      "defaultText": "~/.config/neon (or $XDG_CONFIG_HOME/neon)"
     },
     "context-file": {
       "type": "string",
@@ -992,7 +992,12 @@
               "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
             },
             "service": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). Passed as `.option(\"service\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against claim.ts at neonctl 8.3.4.",
               "type": "array",
+              "alias": [
+                "s",
+                "services"
+              ],
               "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
             }
           },
@@ -1272,7 +1277,11 @@
             },
             "services": {
               "type": "array",
-              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
+              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
+              "alias": [
+                "s",
+                "service"
+              ]
             }
           },
           "commands": {},
@@ -1900,7 +1909,11 @@
             },
             "service": {
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
+              "alias": [
+                "s",
+                "services"
+              ]
             }
           },
           "commands": {},
@@ -2304,6 +2317,15 @@
         "region-id": {
           "type": "string",
           "describe": "Forwarded to link: region for a new project"
+        },
+        "services": {
+          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.3.4.",
+          "type": "array",
+          "alias": [
+            "s",
+            "service"
+          ],
+          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
         },
         "skill": {
           "type": "array",

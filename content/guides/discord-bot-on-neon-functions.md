@@ -4,7 +4,7 @@ subtitle: 'Build a Discord bot with AI chat and image generation using Neon Func
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -100,8 +100,8 @@ Pulled 3 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
   Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
-INFO: Created neon.ts with a starter policy.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts with a starter policy.
+Installing @neon/config, @neon/env with npm…
 
 added 15 packages, and audited 42 packages in 3s
 
@@ -109,7 +109,7 @@ added 15 packages, and audited 42 packages in 3s
   `npm run fund` for details
 
 found 0 vulnerabilities
-INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
+Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
 Pulled 3 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
   Branch          NEON_BRANCH
@@ -248,7 +248,7 @@ The CLI will output something like this:
 
 ```bash
 neon deploy --env .env.local
-INFO: → Applying to branch main (br-damp-voice-a1b2c3d4)
+→ Applying to branch main (br-damp-voice-a1b2c3d4)
 Applied changes
 ┌────────┬─────────┬──────────────┐
 │ Action │ Kind    │ Identifier   │

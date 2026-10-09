@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -101,6 +101,8 @@ neon init -y --skill neon --mcp-auth oauth --mcp-config-location project
 
 Authenticate without a browser by setting `NEON_API_KEY` or passing `--api-key`. Agents can find the IDs with `neon orgs list --output json` and `neon projects list --org-id <org-id> --output json`. To control `neon.ts` in the same run, add `--config`, `--no-config`, or `--services`.
 
+When `-y` can't authenticate, it finishes every step it can and lists what's left under `Next`. With no credential at all, it skips the environment pull. If you also pass `--org-id`, `--project-id`, and `--branch`, it writes `.neon` without contacting Neon (like [`neon link --no-checks`](/docs/cli/link)), and Neon checks those IDs on the first command that reaches it. With fewer IDs, it skips linking and prints the `neon login` and `neon link` commands to run. A project-scoped or organization API key can link and pull, but it can't mint the API key the Neon MCP server uses. In that case, `init` configures MCP with OAuth instead. If you asked for `--mcp-auth api-key`, it skips MCP, finishes the other steps, and exits with an error that names the retry command.
+
 ## What gets created
 
 The files created depend on the flags you pass. Each one is written by the command `init` runs, so see that command's page for details.
@@ -160,8 +162,7 @@ Granted Capabilities  postgres
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-→ Pulling env from branch main (br-restless-wildflower-a1b2c3d4)
-Pulled 3 Neon variables into .env.local
+Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
   Branch          NEON_BRANCH
 

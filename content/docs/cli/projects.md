@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-10-09T12:00:08.310Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -99,7 +99,7 @@ Region ID   aws-us-west-2
 Created At  2026-07-09T17:04:29Z
 
 Connection URIs
-Connection Uri
+Connection URI
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
