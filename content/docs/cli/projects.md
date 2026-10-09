@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-10-03T12:43:38.865Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -36,12 +36,12 @@ Lists projects that belong to your Neon account, as well as any projects that we
 
   ```text
   Projects
-  Id                      Name      Region Id      Created At
+  ID                      Name      Region ID      Created At
   crimson-voice-12345678  frontend  aws-us-east-2  2026-04-15T11:17:30Z
   calm-thunder-12121212   backend   aws-us-east-2  2026-04-10T15:21:01Z
   nameless-hall-87654321  billing   aws-us-east-2  2026-04-10T14:35:17Z
   Shared with you
-  Id                 Name  Region Id         Created At
+  ID                 Name  Region ID         Created At
   noisy-fire-212121  API   aws-eu-central-1  2026-04-22T18:41:13Z
   ```
 
@@ -61,7 +61,7 @@ neon projects list --recoverable-only
 
 ```text filename="Output"
 Projects
-Id                   Name       Region Id      Created At            Deleted At            Recoverable Until
+ID                   Name       Region ID      Created At            Deleted At            Recoverable Until
 crimson-voice-12345  myproject  aws-us-east-2  2026-04-15T11:17:30Z  2026-04-16T14:22:15Z  2026-04-23T14:22:15Z
 ```
 
@@ -93,9 +93,9 @@ neon projects create --name mynewproject --region-id aws-us-west-2
 
 ```text filename="Output"
 Project
-Id          muddy-wood-123456
+ID          muddy-wood-123456
 Name        mynewproject
-Region Id   aws-us-west-2
+Region ID   aws-us-west-2
 Created At  2026-07-09T17:04:29Z
 
 Connection URIs
@@ -210,9 +210,9 @@ neon projects update muddy-wood-123456 --name dev_project_1
 ```
 
 ```text filename="Output"
-Id          muddy-wood-123456
+ID          muddy-wood-123456
 Name        dev_project_1
-Region Id   aws-us-west-2
+Region ID   aws-us-west-2
 Created At  2026-07-09T17:04:29Z
 ```
 
@@ -241,9 +241,9 @@ neon projects delete muddy-wood-123456
 ```
 
 ```text filename="Output"
-Id          muddy-wood-123456
+ID          muddy-wood-123456
 Name        dev_project_1
-Region Id   aws-us-west-2
+Region ID   aws-us-west-2
 Created At  2026-07-09T17:04:29Z
 ```
 
@@ -262,9 +262,9 @@ neon projects recover crimson-voice-12345678
 ```
 
 ```text filename="Output"
-Id          crimson-voice-12345678
+ID          crimson-voice-12345678
 Name        myproject
-Region Id   aws-us-east-2
+Region ID   aws-us-east-2
 Created At  2026-04-15T11:17:30Z
 ```
 
@@ -285,8 +285,8 @@ neon projects get muddy-wood-123456
 ```text filename="Output"
 Project
 Name               dev_project_1
-Id                 muddy-wood-123456
-Region Id          aws-us-west-2
+ID                 muddy-wood-123456
+Region ID          aws-us-west-2
 Postgres Version   18
 Organization       org-xxxxxxxx-xxxx
 Default Compute    0.25 CU

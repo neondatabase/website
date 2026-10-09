@@ -8,7 +8,7 @@ summary: >-
   organizations your account belongs to before running project or branch
   commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-10-05T17:20:55.439Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 redirectFrom:
   - /docs/reference/cli-orgs
   - /docs/cli/org
@@ -34,7 +34,7 @@ neon orgs list
 
 ```text filename="Output"
 Organizations
-Id                     Name                   Plan
+ID                     Name                   Plan
 org-xxxxxxxx-xxxxxxxx  [current] Example Org  Launch
 org-yyyyyyyy-yyyyyyyy  Another Org            Free
 ```

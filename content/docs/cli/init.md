@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -146,21 +146,21 @@ neon init -y --claimable --agent cursor
 
 ```text
 Installing the Neon plugin...
-INFO: Installing the Neon plugin for Cursor (1/1)...
+Installing the Neon plugin for Cursor (1/1)...
 Plugins
 Scope    Plugin         Agent   Status
 project  neon-postgres  cursor  installed
-INFO: Installed the Neon plugin (project).
+Installed the Neon plugin (project).
 Creating a claimable project...
-Project Id            sweet-breeze-12345678
-Branch Id             br-restless-wildflower-a1b2c3d4
+Project ID            sweet-breeze-12345678
+Branch ID             br-restless-wildflower-a1b2c3d4
 State                 unclaimed
 Project Expires At    2026-09-29T01:51:07.360Z
 Granted Capabilities  postgres
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-INFO: → Pulling env from branch main (br-restless-wildflower-a1b2c3d4)
+→ Pulling env from branch main (br-restless-wildflower-a1b2c3d4)
 Pulled 3 Neon variables into .env.local
   Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
   Branch          NEON_BRANCH

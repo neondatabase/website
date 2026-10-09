@@ -33,10 +33,10 @@ neon functions deploy hello --src functions/hello.ts
 ```
 
 ```text filename="Output"
-INFO: Function deployment triggered for function hello.
+Function deployment triggered for function hello.
 Function hello
 URL            https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/
-Deployment Id  1
+Deployment ID  1
 Status         completed
 Runtime        nodejs24
 Memory         2048 MiB
@@ -123,7 +123,7 @@ URL         https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon
 Created At  2026-06-12T00:14:57.942988Z
 
 Deployment (current, active)
-Deployment Id  1
+Deployment ID  1
 Status         completed
 Runtime        nodejs24
 Memory         2048 MiB
@@ -143,7 +143,7 @@ neon functions delete hello
 ```
 
 ```text filename="Output"
-INFO: Function hello deleted from branch br-cool-darkness-123456
+Function hello deleted from branch br-cool-darkness-123456
 ```
 
 ## neon functions domains (#domains)
