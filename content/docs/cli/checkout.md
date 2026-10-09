@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-09-26T07:10:22.076Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -55,7 +55,7 @@ neon checkout main --project-id polished-snowflake-12345678
 ```
 
 ```text filename="Output"
-INFO: Checked out branch br-steep-math-aiu3vve7 on project polished-snowflake-12345678. Updated /path/to/cwd/.neon.
+Checked out branch br-steep-math-aiu3vve7 on project polished-snowflake-12345678. Updated /path/to/cwd/.neon.
 ```
 
 The updated `.neon` file:

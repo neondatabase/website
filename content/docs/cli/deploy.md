@@ -14,7 +14,7 @@ The `deploy` command applies a `neon.ts` policy to a branch. It is a top-level a
 
 <CliOptions command="deploy" />
 
-For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
+For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts, or pass `-y` (`--yes`) to confirm both.
 
 ```bash
 neon deploy --branch feature/auth --update-existing

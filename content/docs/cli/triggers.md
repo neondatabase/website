@@ -29,7 +29,7 @@ neon triggers list --project-id solitary-heart-93902637 --branch main
 The `Type` column shows each trigger's type, currently `schedule` or `storage_object_created`. `Schedule` holds the cron for schedule triggers; `Storage` holds the bucket (and prefix, if set) for storage triggers.
 
 ```text filename="Output" shouldWrap
-Trigger Id                                    Name            Type                    Function Slug  Function Path  Schedule   Storage        Enabled  Inherited  Next Run At
+Trigger ID                                    Name            Type                    Function Slug  Function Path  Schedule   Storage        Enabled  Inherited  Next Run At
 trigger-12345678-90ab-cdef-1234-567890abcdef  nightly-report  schedule                child404       /              0 6 * * *                 true     false      2026-09-11T06:00:00.000000Z
 trigger-abcdef12-3456-7890-abcd-ef1234567890  on-upload       storage_object_created  ingest         /object                       assets logos/  true     false
 ```
@@ -116,7 +116,7 @@ neon triggers create --function-slug child404 --name nightly-report --cron '0 6 
 ```
 
 ```text filename="Output"
-Trigger Id     trigger-12345678-90ab-cdef-1234-567890abcdef
+Trigger ID     trigger-12345678-90ab-cdef-1234-567890abcdef
 Name           nightly-report
 Type           schedule
 Function Slug  child404
@@ -190,5 +190,5 @@ neon triggers delete trigger-12345678-90ab-cdef-1234-567890abcdef --project-id s
 ```
 
 ```text filename="Output"
-INFO: Trigger trigger-12345678-90ab-cdef-1234-567890abcdef deleted
+Trigger trigger-12345678-90ab-cdef-1234-567890abcdef deleted
 ```

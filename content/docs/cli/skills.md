@@ -10,7 +10,7 @@ summary: >-
   agents and skip the prompts. Use `neon skills update` to refresh installed
   skills to their latest versions.
 enableTableOfContents: true
-updatedOn: '2026-09-01T16:04:17.197Z'
+updatedOn: '2026-10-09T12:00:08.310Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
@@ -95,7 +95,7 @@ Skills
 Scope           Skills                 Agents  Status
 this directory  neon, neon-ai-gateway  cursor  installed
 
-INFO: Wrote skills in this directory.
+Wrote skills in this directory.
 ```
 
 Install user-level skills that apply across your projects:
