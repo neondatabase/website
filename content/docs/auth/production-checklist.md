@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
 
 Complete these steps before taking your application to production with Managed Better Auth.
@@ -38,7 +38,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="6. Disable localhost access" href="/docs/auth/production-checklist#localhost-access">
-  Disable the "Allow Localhost" setting in your project's **Settings** → **Auth** page. This setting is enabled by default for development but should be disabled in production to improve security.
+  Disable the "Allow Localhost" setting in your project's **Settings** → **Better Auth** page. This setting is enabled by default for development but should be disabled in production to improve security.
 </CheckItem>
 
 </CheckList>
@@ -55,7 +55,7 @@ A custom SMTP provider uses your sender address but still sends Neon's default e
 
 <TabItem>
 
-In your project's **Settings** → **Auth** page, configure your email provider:
+In your project's **Settings** → **Better Auth** page, configure your email provider:
 
 1. Select **Custom SMTP provider**
 2. Enter your SMTP credentials:
@@ -120,13 +120,13 @@ You can also update the application name via the API. See [Update auth configura
 
 ## Localhost access (#localhost-access)
 
-The "Allow Localhost" setting in your project's **Settings** → **Auth** page is enabled by default to allow authentication requests from localhost during development.
+The "Allow Localhost" setting in your project's **Settings** → **Better Auth** page is enabled by default to allow authentication requests from localhost during development.
 
 ### Disable for production
 
 For production environments, disable this setting to improve security:
 
-1. Go to **Settings** → **Auth** in your Neon project
+1. Go to **Settings** → **Better Auth** in your Neon project
 2. Find the **Allow Localhost** toggle
 3. Disable the toggle
 
