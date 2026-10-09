@@ -11,7 +11,7 @@ updatedOn: '2026-09-21T10:11:50.241Z'
 
 But this kind of agent needs two things that are risky to hand out: a place to run code, and a database it can explore freely. You don't want the agent executing arbitrary code on your production server, or querying and modifying your production database directly.
 
-This guide solves both problems with a Slack-based data-analysis agent. Every question runs in a fresh, disposable workspace, so the agent can execute code and explore your data without touching production. You'll implement:
+This guide solves both problems with a Slack-based data-analysis agent. Every question runs in a fresh, disposable sandbox and database branch, so the agent can execute code and explore your data without touching production. You'll implement:
 
 - A Mastra agent hosted on a [Neon Function](/docs/compute/functions/overview), whose tools run Python, shell commands, and file operations inside an isolated [Upstash Box](https://upstash.com/docs/box)
 - A fresh [branch](/docs/introduction/branching) on Neon per session, deleted when the session ends, so production stays untouched
@@ -25,7 +25,7 @@ This guide solves both problems with a Slack-based data-analysis agent. Every qu
 
 ## Architecture overview
 
-The runner has four components, each with a clear role:
+The runner has four components:
 
 - **Slack:** Users ask questions by @mentioning the bot in a thread.
 - **Branch on Neon:** A disposable branch of your database, created per session so the agent can query and modify it without touching production.
@@ -50,7 +50,7 @@ Before you begin, ensure you have the following:
 - **Upstash credentials:** An API key from the [Upstash Console](https://console.upstash.com) for Box.
 
 <Admonition type="note" title="AI model access">
-This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which is only available on paid Neon plans. If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
+This guide uses the [Neon AI Gateway](/docs/ai-gateway/overview) to access the AI model, which requires a Launch or Scale plan with [prepaid credits](/docs/ai-gateway/prepaid-credits). If you prefer to use your own model provider, you can bring your own API key (for example, an [Anthropic API key](https://platform.claude.com/settings/keys)) and configure Mastra to use it directly as described in the [Mastra Anthropic provider docs](https://mastra.ai/models/providers/anthropic).
 </Admonition>
 
 <Steps>
@@ -685,7 +685,7 @@ The session runner does three things in order: provision, run, and clean up. Pro
 
 The `Box.fromSnapshot` call restores the snapshot you prepared earlier with the branch connection string injected as `DATABASE_URL`, and sets `MPLBACKEND=Agg` so matplotlib can render charts without a display.
 
-Inside the `try` block, the box ID goes into the Mastra request context rather than into the prompt. The tools read it from there on every call, so the model never sees the ID and can't leak or tamper with it. `maxSteps: 25` bounds the run so the agent can't loop forever, and the `generate` call returns the final text answer.
+Inside the `try` block, the box ID goes into the Mastra request context rather than into the prompt. The tools read it from there on every call, so the model never sees the ID and can't leak or tamper with it. `maxSteps: 25` bounds the run so the agent can't loop indefinitely, and the `generate` call returns the final text answer.
 
 Cleanup runs in a `finally` block, so the box and the branch are deleted whether the session succeeded, failed, or threw. Anything worth keeping leaves the box before that happens: the report is read from `/work/out/report.md`, and the chart is read as base64 from `/work/out/chart.png` through a shell command.
 
@@ -857,7 +857,7 @@ If the bot doesn't reply, check [function logs](/docs/compute/functions/logs) fi
 
 Slack retries events when your endpoint doesn't return a `2xx` response. The adapter deduplicates retried deliveries automatically, but if you add side effects of your own, make them safe to run more than once.
 
-If successful, the session runner provisions a branch and a box, the agent runs in the box, and the bot posts the answer back to Slack. The branch and box are deleted when the session ends, so production data is never at risk.
+If successful, the session runner provisions a branch and a box, the agent runs in the box, and the bot posts the answer back to Slack. The branch and box are deleted when the session ends, so the agent never touches your production data.
 
 ![Mastra data analyst responding in Slack](/docs/guides/mastra-data-analyst-slack-response.png)
 
@@ -873,7 +873,7 @@ Test another question:
 
 ## Conclusion
 
-You built a data-analysis agent that answers questions with real query results, right where your team asks them. Mastra owns the reasoning loop and the policy layer, the Chat SDK adapter handles the Slack connectivity, Upstash Box runs the agent's Python in an isolated sandbox, and every session gets its own disposable branch on Neon so production data is never at risk.
+You built a data-analysis agent that answers questions with real query results, right where your team asks them. Mastra owns the reasoning loop and the policy layer, the Chat SDK adapter handles the Slack connectivity, Upstash Box runs the agent's Python in an isolated sandbox, and every session gets its own disposable branch on Neon so the agent never touches your production data.
 
 The same pattern extends beyond data analysis. Any agent that needs to run code against a database, whether for report generation, ETL experiments, or exploratory work, can follow this shape: branch the data, sandbox the compute, and tear both down when the session ends.
 
