@@ -95,7 +95,7 @@ jobs:
       # regression in either could merge unnoticed.
       - name: Test the catalog rules
         shell: bash
-        run: npx vitest run scripts/lib/models-catalog.test.js
+        run: npx vitest run scripts/lib/models-catalog.test.js scripts/lib/ai-gateway-models.test.js
 
       - name: Verify (offline)
         if: github.event_name == 'pull_request'
