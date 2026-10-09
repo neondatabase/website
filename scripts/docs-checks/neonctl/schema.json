@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.3.4",
+  "neonctlVersion": "8.3.5",
   "binaries": [
     "neonctl",
     "neon"
@@ -1378,7 +1378,7 @@
         },
         "role-name": {
           "type": "string",
-          "describe": "Role name"
+          "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
         },
         "ssl": {
           "type": "string",
@@ -2394,7 +2394,7 @@
             },
             "role-name": {
               "type": "string",
-              "describe": "Role name"
+              "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
             }
           },
           "commands": {
