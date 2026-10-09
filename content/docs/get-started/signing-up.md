@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T09:39:55.552Z'
 ---
 
 <InfoBlock>
@@ -119,14 +119,14 @@ For a detailed guide on how to interact with your data using the **Tables** page
 
 Neon includes **managed authentication**, so your app's users live in your Postgres database and branch with the rest of your data.
 
-From the Neon Console sidebar, open the **Auth** page and toggle Managed Better Auth on for your project. You'll get:
+From the Neon Console sidebar, open the **Better Auth** page and toggle Managed Better Auth on for your project. You'll get:
 
 - A sign-up / sign-in flow ready to wire up to any framework
 - Users and sessions stored in your own Postgres database — query the `neon_auth.user` table directly alongside your application data
 - Branch-aware auth: every preview or development branch you create gets its own isolated copy of users and sessions
 - OAuth providers, email and password, magic links, and more, all configurable from the console
 
-For framework-specific setup, see the [Managed Better Auth quickstarts](/docs/auth/overview) (Next.js, React, TanStack Router) or open the **Auth** tab in the console and follow the prompts.
+For framework-specific setup, see the [Managed Better Auth quickstarts](/docs/auth/overview) (Next.js, React, TanStack Router) or open the **Better Auth** page in the console and follow the prompts.
 
 ## Working with your development branch
 
