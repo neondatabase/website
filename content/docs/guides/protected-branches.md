@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -91,7 +91,7 @@ To configure an allowlist:
 1. Select a project in the Neon Console.
 2. On the Project Dashboard, select **Settings**.
 3. Select **Networking**.
-4. Under **Public internet access**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>

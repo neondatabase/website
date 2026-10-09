@@ -45,7 +45,7 @@ You need:
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-1. In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**.
+1. In the Neon Console, open your project's **Settings**, then **Functions** > **Custom domains**.
 2. Enter the domain you own.
 3. Select **Function**, then select the function to serve from the domain.
 4. Select **Add custom domain**.
@@ -190,7 +190,7 @@ Encrypt.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**. The table lists each domain, its target function, and its CNAME target.
+In the Neon Console, open your project's **Settings**, then **Functions** > **Custom domains**. The table lists each domain, its target function, and its CNAME target.
 
 </TabItem>
 <TabItem>

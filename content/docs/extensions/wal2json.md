@@ -11,7 +11,7 @@ summary: >-
   enabling logical replication in Neon, REPLICA IDENTITY settings for tables
   without primary keys, and replication slot management.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
 
 The `wal2json` plugin is a logical replication decoding output plugin for Postgres. It lets you convert the Write-Ahead Log (WAL) changes into JSON format, making it easier to consume and process database changes in various applications, such as data replication, auditing, event-driven services, and real-time analytics.
@@ -30,7 +30,7 @@ The `wal2json` plugin is available in all Postgres versions supported by Neon. F
 
 ## Enable logical replication
 
-Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. Navigate to the **Settings** page in your Neon Project Dashboard, and select **Beta** from the list of options. Click **Enable** to enable logical replication.
+Before using the `wal2json` plugin, you need to enable logical replication for your Neon project. In the Neon Console, go to your project's **Settings** > **Postgres** page, find **Logical Replication**, and click **Enable**.
 
 <Admonition type="note">
 Once enabled for a project, logical replication cannot be reverted. This action triggers a restart of all active compute endpoints in your Neon project. Any active connections will be dropped and have to reconnect.
