@@ -493,6 +493,24 @@
     - title: "Update project"
       slug: reference/api/projects/update-project
       method: PATCH
+- title: "Realtime"
+  slug: reference/api/realtime
+  items:
+    - title: "Disable Realtime"
+      slug: reference/api/realtime/disable-project-branch-realtime
+      method: DELETE
+    - title: "Enable Realtime"
+      slug: reference/api/realtime/enable-project-branch-realtime
+      method: POST
+    - title: "Retrieve Realtime state"
+      slug: reference/api/realtime/get-project-branch-realtime
+      method: GET
+    - title: "Retrieve the Realtime shared secret"
+      slug: reference/api/realtime/get-project-branch-realtime-secret
+      method: GET
+    - title: "Rotate the Realtime shared secret"
+      slug: reference/api/realtime/rotate-project-branch-realtime-secret
+      method: POST
 - title: "Regions"
   slug: reference/api/regions
   items:

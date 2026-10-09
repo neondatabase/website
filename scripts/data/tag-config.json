@@ -400,6 +400,29 @@
       ]
     },
     {
+      "slug": "realtime",
+      "specName": "realtime",
+      "display": "Realtime",
+      "description": "Enable and manage Realtime on a branch",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "enable-project-branch-realtime",
+            "get-project-branch-realtime",
+            "disable-project-branch-realtime"
+          ]
+        },
+        {
+          "label": "Shared secret",
+          "slugs": [
+            "get-project-branch-realtime-secret",
+            "rotate-project-branch-realtime-secret"
+          ]
+        }
+      ]
+    },
+    {
       "slug": "regions",
       "specName": "region",
       "display": "Regions",
