@@ -68,7 +68,7 @@ We're focusing our infrastructure investment where our customers want to run Neo
 
 You can check from the Console, the CLI, or the API:
 
-- **Console.** Open your project, then check the **Project settings** widget on the project dashboard. The region is shown in the **Region** row.
+- **Console.** Open your project, then check the **Project** panel on the **Overview** page. The region is shown in the **Region** row.
 - **CLI.** Run `neon projects list`. The `Region ID` column shows each project's region.
 - **API.** Call `GET /projects` and check the `region_id` field on each project.
 

@@ -11,7 +11,7 @@ summary: >-
   and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
   Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
@@ -112,7 +112,7 @@ Following successful registration, you will be redirected to the Medusa Admin da
 
 After the installation is complete, you can optionally verify the tables in the Neon Console:
 
-1.  Navigate to your Neon Project dashboard.
+1.  Open your project in the Neon Console.
 2.  In the sidebar, select **Postgres database** > **Tables**.
 3.  You should see all the Medusa tables created in your database.
 

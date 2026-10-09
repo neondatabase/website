@@ -89,9 +89,9 @@ On plans that support it, you can use the protected branches feature in combinat
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Project Dashboard, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Networking**.
-4. Under **Public internet access**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>
@@ -156,11 +156,9 @@ For details about specifying IP addresses, see [How to specify IP addresses](/do
 
 ### Restrict IP access to protected branches only
 
-After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
+After defining an IP allowlist, go to **Restricted branches** and select **Protected branches only**.
 
-![IP Allow configuration](/docs/guides/ip_allow_protected_branches.png)
-
-This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only.
+This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only. Every other branch keeps accepting any address.
 
 After you've selected the protected branches option, click **Save changes** to apply the new configuration.
 

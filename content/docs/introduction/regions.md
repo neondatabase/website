@@ -10,7 +10,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-10-08T17:22:05.475Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon offers project deployment in multiple AWS regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -64,7 +64,7 @@ After you select a region for a Neon project, it cannot be changed for that proj
 
 To find the region an existing project runs in, use any of these:
 
-- **Console:** open the project and check the **Settings** widget on the **Project Dashboard**. The region is listed alongside the cloud provider.
+- **Console:** open the project and check the **Project** panel on the **Overview** page. The region is listed in the **Region** row.
 - **CLI:** run `neon projects list` or `neon projects get <project_id>`. The output includes the region ID (for example, `aws-us-east-2`).
 - **Connection string:** the region is the segment before `.aws.neon.tech` in the hostname. For example, `us-east-2.aws.neon.tech` is AWS US East (Ohio).
 - **API:** read the `region_id` field from `GET /projects/{project_id}`.

@@ -67,7 +67,7 @@ More about global options:
 - **Output:** table output may omit fields. Use `--output json` or `--output yaml` to see all data.
 - **Authentication:** the CLI checks credentials in this order: the `--api-key` option, the `NEON_API_KEY` environment variable (`export NEON_API_KEY=<neon_api_key>`), the `credentials.json` file that `neon login` creates in the config directory (override its location with `--config-dir`), then interactive web authentication. To get a key, see [Create an API key](/docs/manage/api-keys#creating-api-keys).
 - **Context file:** sets a default organization, project, or branch so you don't repeat IDs in every command. Create one with [`neon link`](/docs/cli/link) (preferred) or [`set-context`](/docs/cli/set-context).
-- **Analytics:** Neon collects anonymous data about which commands and options are used, never user-defined data such as project IDs or command payloads. When the CLI hits an unexpected internal error, it also sends a crash report. The report shortens local file paths and drops any error message that could include your input. Opt out of both with `--no-analytics`.
+- **Analytics:** Neon collects anonymous data about which commands and options are used, never user-defined data such as project IDs or command payloads. If the CLI crashes on an internal bug, it also sends an error report with the error type and a sanitized stack trace, without your arguments, environment variables, or file contents. Opt out of both with `--no-analytics`.
 - **Help:** `--help` works at every level: `neon --help`, `neon branches --help`, `neon branches create --help`.
 
 ## GitHub repository

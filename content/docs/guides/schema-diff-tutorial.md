@@ -37,7 +37,7 @@ First, create a new database called `people` on the `production` branch and add 
 
 1. Create the database.
 
-   In the **Neon Console**, go to **Postgres database** > **Databases** &#8594; **New Database**. Make sure your `production` branch is selected, then create the new database called `people`.
+   In the **Neon Console**, go to **Postgres database** > **Databases** &#8594; **Add database**. Make sure your `production` branch is selected, then create the new database called `people`.
 
 2. Add the schema.
 
