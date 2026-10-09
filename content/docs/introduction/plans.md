@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-10-06T12:59:52.763Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -640,7 +640,7 @@ For more detailed strategies, see our [Cost optimization](/docs/introduction/cos
 </FaqItem>
 
 <FaqItem question="Do you offer credits for startups?">
-Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startups)
 </FaqItem>
 
 <FaqItem question="How is storage charged for snapshots?">

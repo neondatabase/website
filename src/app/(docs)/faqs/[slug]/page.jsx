@@ -3,12 +3,14 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import ProgrammaticCTA from 'components/pages/faqs/programmatic-cta';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { FAQS_DIR_PATH } from 'constants/content';
 import { FAQS_BASE_PATH } from 'constants/faqs';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllFaqSlugs } from 'utils/api-faqs';
+import getArticleSchema from 'utils/get-article-schema';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -56,22 +58,18 @@ const FaqPost = async (props) => {
     nextLink: data.nextLink,
   };
   const tableOfContents = getTableOfContents(content);
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.title,
-    author: {
-      '@type': 'Organization',
-      name: 'Neon',
-    },
-  };
+  const jsonLd = getArticleSchema({
+    title: data.title,
+    description: data.summary || data.subtitle || postBySlug.excerpt,
+    datePublished: data.createdAt || data.date,
+    dateModified: data.updatedOn,
+    url: `${VERCEL_URL}${LINKS.faqs}/${slug}`,
+    image: `${VERCEL_URL}/api/og?title=${Buffer.from(data.title).toString('base64')}`,
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

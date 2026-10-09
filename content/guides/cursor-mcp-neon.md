@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cursor and the Neon M
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-20T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 This guide shows how to use [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -42,7 +42,7 @@ Run it in a terminal. It installs agent tooling (the recommended `neon-postgres`
 <Admonition type="tip" title="One-click alternative for Cursor">
 Cursor offers a deep link for quick OAuth setup:
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="/docs/local/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="/docs/local/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" width="144" loading="lazy" /></a>
 
 Note: This uses OAuth (not API key), so you'll need to approve each MCP action. For fewer prompts, use Quick setup above.
 </Admonition>

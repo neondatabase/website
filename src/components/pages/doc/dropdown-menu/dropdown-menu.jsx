@@ -2,7 +2,7 @@
 
 import copyToClipboard from 'copy-to-clipboard';
 import PropTypes from 'prop-types';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useId } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronDownIcon from 'icons/chevron-down.inline.svg';
@@ -148,6 +148,7 @@ const AI_CHATBOTS = [
 ];
 
 const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className }) => {
+  const optionsId = useId();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -184,6 +185,9 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
         <CopyMarkdownButton markdownPath={markdownPath} variant="sm" />
         <button
           className="flex h-8 items-center px-1 hover:bg-gray-new-98 dark:hover:bg-gray-new-8"
+          aria-label="Page options"
+          aria-expanded={isOpen}
+          aria-controls={isOpen ? optionsId : undefined}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <ChevronDownIcon
@@ -195,7 +199,10 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
+        <div
+          id={optionsId}
+          className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0"
+        >
           <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
           {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
             <DropdownItem

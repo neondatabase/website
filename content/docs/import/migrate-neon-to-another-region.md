@@ -10,7 +10,7 @@ summary: >-
   minimal-downtime cutover on busy databases).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T18:39:13.799Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 redirectFrom:
   - /docs/guides/migrate-neon-to-another-region
 ---
@@ -22,8 +22,6 @@ You can't change the region of an existing Neon project in place. A project's re
 ## Choose a migration method
 
 Each option below is a different way to move your database into a new Neon project in a different region. Choose the option that matches your requirements.
-
-<a id="import-data-assistant" aria-hidden="true"></a>
 
 ### Import Data Assistant
 

@@ -11,7 +11,7 @@ summary: >-
   full-stack app without a dedicated CI/CD pipeline or DevOps setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
@@ -328,6 +328,6 @@ If you had trouble with any of the steps outlined above, refer to the video guid
 
 ## Neon with WunderGraph video guide
 
-<YoutubeIframe embedId="JqOADpG5q-s" />
+<YoutubeIframe embedId="JqOADpG5q-s" title="Build with WunderGraph and Neon" />
 
 <NeedHelp/>

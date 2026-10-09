@@ -130,7 +130,7 @@ Customers on a legacy Enterprise plan can view support plan details in the follo
 <details>
 <summary>**Enterprise support (legacy)**</summary>
 
-### General support policy
+### General support policy (#general-support-policy-2)
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
@@ -138,11 +138,11 @@ Unless described otherwise, defined terms mentioned in this policy shall have th
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
-### Issue resolution
+### Issue resolution (#issue-resolution-2)
 
 Neon will make commercially reasonable efforts to resolve any Issues submitted by Enterprise customers. Such efforts may (at our discretion) include helping with diagnosis, suggesting workarounds, or changing the Product in a new release. An "Issue" is a material and verifiable failure of the Product to conform to its Documentation. Support will not be provided for the following: (1) use of the Products in a manner inconsistent with the applicable Documentation, (2) modifications to the Products not provided by or approved in writing by Neon, (3) use of the Products with third-party software not provided or approved by Neon. The Customer shall not submit Issues arising from any products other than the Products or otherwise use Support for unsupported products; this includes issues caused by third-party integrations.
 
-### Billing issues
+### Billing issues (#billing-issues-2)
 
 If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Where available in the Neon Console, paid plans can use **Request billing support** on the **Billing** page; see [Request billing support](/docs/introduction/manage-billing#request-billing-support). Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
 

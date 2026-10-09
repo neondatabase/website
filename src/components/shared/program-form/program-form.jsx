@@ -2,7 +2,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -35,7 +35,8 @@ const fieldProps = {
   labelClassName: 'text-sm !text-gray-new-30 dark:!text-gray-new-90',
 };
 
-const ProgramForm = ({ type }) => {
+const ProgramForm = ({ type, id = `${type}-form` }) => {
+  const formId = useId();
   const { title, description, placeholder, buttonText, showGithubUrl } = DATA[type];
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
@@ -83,7 +84,7 @@ const ProgramForm = ({ type }) => {
   return (
     <figure
       className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
-      id={`${type}-form`}
+      id={id}
       data-test={`${type}-program-form`}
     >
       <h2 className="p-0 text-2xl leading-snug font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
@@ -98,6 +99,7 @@ const ProgramForm = ({ type }) => {
             <Field
               {...fieldProps}
               name="url"
+              id={`${formId}-url`}
               label="Website URL *"
               placeholder={placeholder}
               error={errors.url?.message}
@@ -109,6 +111,7 @@ const ProgramForm = ({ type }) => {
               <Field
                 {...fieldProps}
                 name="githubUrl"
+                id={`${formId}-github-url`}
                 label="GitHub Project Link *"
                 type="url"
                 placeholder="Enter a link to your GitHub project"
@@ -121,6 +124,7 @@ const ProgramForm = ({ type }) => {
             <Field
               {...fieldProps}
               name="email"
+              id={`${formId}-email`}
               label="Contact Email *"
               type="email"
               placeholder="Enter your email address"
@@ -155,6 +159,7 @@ const ProgramForm = ({ type }) => {
 };
 
 ProgramForm.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.oneOf(Object.keys(DATA)).isRequired,
 };
 

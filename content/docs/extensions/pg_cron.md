@@ -11,7 +11,7 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -106,7 +106,7 @@ Additionally, `pg_cron` supports:
 - Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
 
-Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](http://crontab.guru/) and adjust for the UTC timezone.
+Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](https://crontab.guru/) and adjust for the UTC timezone.
 
 ## Schedule a job
 
@@ -283,6 +283,6 @@ You have successfully learned how to enable and use the `pg_cron` extension with
 ## Resources
 
 - [pg_cron GitHub Repository](https://github.com/citusdata/pg_cron)
-- [crontab.guru](http://crontab.guru/)
+- [crontab.guru](https://crontab.guru/)
 
 <NeedHelp/>

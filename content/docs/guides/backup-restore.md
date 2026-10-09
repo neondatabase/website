@@ -10,7 +10,7 @@ summary: >-
   $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
   limit.
 enableTableOfContents: true
-updatedOn: '2026-09-11T12:15:20.212Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -221,7 +221,7 @@ The parameters used in the example above:
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format). Omit it to keep the snapshot until you delete it. Manual snapshots have no maximum expiration.
 
-#### Update a snapshot's expiration
+#### Update a snapshot's expiration (#update-a-snapshots-expiration-2)
 
 You can change a snapshot's expiration after it is created using the [Update snapshot](/docs/reference/api/snapshots/update-snapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
 

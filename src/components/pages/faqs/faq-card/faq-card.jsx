@@ -9,9 +9,9 @@ const FaqCard = ({ title, subtitle, slug }) => (
     <Link className="group" to={`${LINKS.faqs}/${slug}`}>
       <div className="flex flex-col gap-y-[18px] sm:gap-y-4">
         <div className="max-w-[832px]">
-          <h1 className="line-clamp-2 text-[20px] leading-tight font-semibold tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
+          <h2 className="line-clamp-2 text-[20px] leading-tight font-semibold tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
             {title}
-          </h1>
+          </h2>
           <p className="mt-1.5 leading-snug tracking-tighter text-gray-new-40 dark:text-gray-new-50 sm:mt-1">
             {subtitle}
           </p>
