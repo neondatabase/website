@@ -41,7 +41,7 @@ const CTA = () => (
     </div>
 
     <div className="pointer-events-none relative overflow-hidden">
-      {/* Footer: 3840×1888, 30 FPS, 14 seconds, no audio. AV1 CRF 40 / HEVC CRF 30 / VP9 CRF 34. */}
+      {/* Footer: 3840×1888, 30 FPS, 26.1 seconds, no audio. AV1 CRF 42 / HEVC CRF 30 / VP9 CRF 40. */}
       <PauseableVideo
         className="aspect-[1920/944] max-h-[944px] w-full lg:left-1/2 lg:w-[1024px] lg:-translate-x-1/2 md:hidden"
         videoClassName="size-full object-cover"
@@ -49,15 +49,15 @@ const CTA = () => (
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20260922`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new-av1.mp4?updated=20261009`}
           type='video/mp4; codecs="av01.0.12M.08"'
         />
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20260922`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.mp4?updated=20261009`}
           type='video/mp4; codecs="hvc1"'
         />
         <source
-          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20260922`}
+          src={`${LINKS.cdn}/public/images/pages/home/cta/cta-new.webm?updated=20261009`}
           type="video/webm"
         />
       </PauseableVideo>
@@ -70,15 +70,15 @@ const CTA = () => (
           height={680}
         >
           <source
-            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new-av1.mp4`}
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new-av1.mp4?updated=20261009`}
             type='video/mp4; codecs="av01.0.08M.08"'
           />
           <source
-            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.mp4`}
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.mp4?updated=20261009`}
             type='video/mp4; codecs="hvc1"'
           />
           <source
-            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.webm`}
+            src={`${LINKS.cdn}/public/images/pages/home/cta/cta-mob-new.webm?updated=20261009`}
             type="video/webm"
           />
         </PauseableVideo>
