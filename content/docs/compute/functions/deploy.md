@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -24,10 +24,11 @@ neon deploy
 | `--env-pull`        | `true`                    | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch             | Target branch ID or name                                                                             |
 | `--project-id`      | linked project            | Project ID                                                                                           |
-| `--update-existing` | `false`                   | Auto-confirm overriding existing remote settings on the branch                                       |
-| `--allow-protected` | `false`                   | Auto-confirm applying to a branch marked protected on Neon                                           |
+| `--update-existing` | `false`                   | Override branch settings that differ from `neon.ts` without asking                                   |
+| `--allow-protected` | `false`                   | Apply to a branch marked protected on Neon without asking                                            |
+| `--yes`, `-y`       | `false`                   | Answer yes to both confirmations: `--update-existing` and `--allow-protected`                        |
 
-`neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
+In a terminal, `neon deploy` asks before it overrides branch settings or applies to a protected branch. In CI, or anywhere without a terminal, it stops and names the flag to pass instead. `neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
 You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 

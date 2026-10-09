@@ -7,7 +7,7 @@ summary: >-
   list existing keys and when they were last used, and revoke a key you no
   longer trust.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 The `api-keys` command creates, lists, and revokes the API keys that authenticate requests to the Neon API. Keys belong to your account unless you pass `--org-id` or `--project-id`.
@@ -34,7 +34,7 @@ neon api-keys list
 
 ```text filename="Output"
 Account API keys
-Id       Name       Created At            Last Used At          Last Used From Addr
+ID       Name       Created At            Last Used At          Last Used From Addr
 3225782  ci-deploy  2026-07-29T00:50:26Z  2026-07-29T18:06:55Z  192.0.2.10
 ```
 
@@ -48,7 +48,7 @@ This covers both scopes, since a project-scoped key is owned by the project's or
 
 ```text filename="Output"
 API keys in org-example-12345678
-Id       Name         Project                Created At            Last Used At          Last Used From Addr
+ID       Name         Project                Created At            Last Used At          Last Used From Addr
 3243240  preview-bot  green-breeze-12345678  2026-08-04T18:51:36Z  2026-08-05T18:51:36Z  192.0.2.10
 3177950  org-key      (all projects)         2026-07-08T01:28:49Z  2026-07-08T01:31:20Z  192.0.2.10
 ```
@@ -89,7 +89,7 @@ neon api-keys create --name ci-deploy
 
 ```text filename="Output"
 API key
-Id    3225782
+ID    3225782
 Name  ci-deploy
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
@@ -105,7 +105,7 @@ neon api-keys create --name org-key --org-id org-example-12345678
 
 ```text filename="Output"
 API key
-Id    3177950
+ID    3177950
 Name  org-key
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
@@ -121,13 +121,13 @@ neon api-keys create --name preview-bot --project-id green-breeze-12345678
 
 ```text filename="Output"
 API key
-Id       3243240
+ID       3243240
 Name     preview-bot
 Project  green-breeze-12345678
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
-INFO: Limited to green-breeze-12345678: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
+Limited to green-breeze-12345678: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
 ```
 
 <Admonition type="important">
@@ -158,7 +158,7 @@ neon api-keys revoke 3225782
 
 ```text filename="Output"
 API key
-Id            3225782
+ID            3225782
 Name          ci-deploy
 Revoked       true
 Last Used At  2026-07-29T18:06:55Z

@@ -4,7 +4,7 @@ subtitle: 'Run scheduled jobs and react to object uploads with Neon Function Tri
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-09-19T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 If you're building a backend, you eventually need work that runs outside the request-response cycle. Some of it runs on the clock: nightly reports, cleanup jobs, periodic syncs. Some of it runs on events: a file lands in storage, and something needs to process it before anyone notices it's there.
@@ -96,8 +96,8 @@ Pulled 3 Neon variables into .env.local
   Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, Object Storage
-INFO: Created neon.ts declaring functions, buckets.
-INFO: Created hello.ts - the source of the hello function.
+Created neon.ts declaring functions, buckets.
+Created hello.ts - the source of the hello function.
 ```
 
 The `neon link` command also creates a placeholder function, `hello.ts`, at your project root. You'll build the pipeline in your own `index.ts` file, so delete the placeholder:
@@ -462,7 +462,7 @@ You'll see output like this:
 
 ```bash
 $ neon deploy
-INFO: → Applying to branch main (br-delicate-surf-b4o4haqi)
+→ Applying to branch main (br-delicate-surf-b4o4haqi)
 Applied changes
   + bucket pipeline-data
   + function pipeline
@@ -488,7 +488,7 @@ neon triggers list
 ```
 
 ```text filename="Output"
-Trigger Id                                    Name            Type                    Function Slug  Function Path  Schedule   Storage                 Enabled  Inherited  Next Run At
+Trigger ID                                    Name            Type                    Function Slug  Function Path  Schedule   Storage                 Enabled  Inherited  Next Run At
 trigger-1a2b3c4d-5e6f-7890-abcd-ef1234567890  ingest-uploads  storage_object_created  pipeline       /ingest                   pipeline-data uploads/  true     false
 trigger-8f7e6d5c-4b3a-2190-fedc-ba9876543210  nightly-report  schedule                pipeline       /report        0 4 * * *                          true     false      2026-09-22T04:00:00.000000Z
 ```

@@ -10,7 +10,7 @@ summary: >-
   Console and API equivalents for these operations are covered on separate
   pages.
 enableTableOfContents: true
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -36,16 +36,16 @@ neon branches create
 
 Branch
 Name           br-lucky-mud-123456
-Id             br-lucky-mud-123456
+ID             br-lucky-mud-123456
 Current State  ready
 Created At     2026-07-24T20:22:42Z
 
 Compute
-Id                    Created At
+ID                    Created At
 ep-mute-voice-123456  2026-07-24T20:22:42Z
 
 Connection string
-Connection Uri
+Connection URI
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
@@ -65,16 +65,16 @@ In this example, we're creating a hotfix branch called `hotfix/critical-fix` usi
 neon branches create --name hotfix/critical-fix --parent development --project-id crimson-voice-12345678
 Branch
 Name           hotfix/critical-fix
-Id             br-misty-mud-123456
+ID             br-misty-mud-123456
 Current State  ready
 Created At     2026-04-23T17:04:10Z
 
 Compute
-Id                      Created At
+ID                      Created At
 ep-orange-heart-123456  2026-04-23T17:04:10Z
 
 Connection string
-Connection Uri
+Connection URI
 postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
@@ -87,12 +87,12 @@ First, list your projects to get your project ID:
 ```bash
 neon projects list
 Projects
-Id                      Name      Region Id      Created At
+ID                      Name      Region ID      Created At
 crimson-voice-12345678  frontend  aws-us-east-2  2026-04-15T11:17:30Z
 calm-thunder-12121212   backend   aws-us-east-2  2026-04-10T15:21:01Z
 nameless-hall-87654321  billing   aws-us-east-2  2026-04-10T14:35:17Z
 Shared with you
-Id                 Name  Region Id         Created At
+ID                 Name  Region ID         Created At
 noisy-fire-212121  API   aws-eu-central-1  2026-04-22T18:41:13Z
 ```
 
@@ -100,9 +100,9 @@ Now list your branches using your project ID:
 
 ```bash
 neon branches list --project-id crimson-voice-12345678
-Name                      Id                   Current State  Created At
-development               br-calm-sky-123456   ready          2026-04-23T21:05:05Z
-[default] [current] main  br-bold-wind-123456  ready          2026-04-23T21:04:57Z
+Name                      ID                   Current State  Expires At  Created At
+development               br-calm-sky-123456   ready          never       2026-04-23T21:05:05Z
+[default] [current] main  br-bold-wind-123456  ready          never       2026-04-23T21:04:57Z
 ```
 
 <Admonition type="tip">
@@ -116,7 +116,7 @@ The following Neon CLI command deletes the specified branch. This command requir
 ```bash
 neon branches delete br-lucky-mud-123456 --project-id crimson-voice-12345678
 Name           br-lucky-mud-123456
-Id             br-lucky-mud-123456
+ID             br-lucky-mud-123456
 Current State  ready
 Created At     2026-07-24T20:22:42Z
 ```
@@ -181,7 +181,7 @@ This example resets a feature branch to match the latest state of its parent bra
 ```bash
 neon branches reset feature/user-auth --parent --project-id crimson-voice-12345678
 Name           feature/user-auth
-Id             br-twilight-smoke-123456
+ID             br-twilight-smoke-123456
 Current State  ready
 Created At     2026-04-23T17:01:49Z
 Last Reset At  2026-04-23T17:57:35Z
@@ -198,7 +198,7 @@ For example, here we are resetting `feature/user-auth` to its parent while prese
 ```bash
 neon branches reset feature/user-auth --parent --preserve-under-name feature/user-auth-backup --project-id crimson-voice-12345678
 Name           feature/user-auth
-Id             br-twilight-smoke-123456
+ID             br-twilight-smoke-123456
 Current State  ready
 Created At     2026-04-23T17:01:49Z
 Last Reset At  2026-04-23T18:02:36Z
@@ -223,14 +223,14 @@ neon branches restore production ^self@2026-05-06T10:00:00.000Z --preserve-under
 Results of the operation:
 
 ```bash shouldWrap
-INFO: Restoring production to production at timestamp 2026-05-06T10:00:00.000Z
+Restoring production to production at timestamp 2026-05-06T10:00:00.000Z
 Restored branch
-Id             br-purple-dust-123456
+ID             br-purple-dust-123456
 Name           production
 Last Reset At  2026-05-07T09:45:21Z
 
 Backup branch
-Id    br-flat-forest-123456
+ID    br-flat-forest-123456
 Name  production_restore_backup_2026-05-06
 ```
 

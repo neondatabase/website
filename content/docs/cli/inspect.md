@@ -178,14 +178,14 @@ neon inspect db lfc-hit-rate
 
 ### neon inspect db working-set (#db-working-set)
 
-Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
+Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds LFC` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db working-set
 ```
 
 ```text
-Window  Working Set  Lfc Size  Exceeds Lfc
+Window  Working Set  LFC Size  Exceeds LFC
 1m      48 MB        607 MB    no
 5m      48 MB        607 MB    no
 15m     48 MB        607 MB    no
