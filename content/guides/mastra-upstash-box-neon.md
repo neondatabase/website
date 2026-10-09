@@ -249,7 +249,7 @@ node prepare-snapshot.js
 You'll see output like this:
 
 ```text
-Snapshot ID: exxx-xxxx-xxxx-xxxx-xxxxxxxx
+Snapshot ID: 00000000-0000-0000-0000-000000000000
 ```
 
 Copy the printed Snapshot ID and add it to `.env.local` as `UPSTASH_BOX_SNAPSHOT_ID`. The snapshot is now ready to restore for each session.
@@ -269,12 +269,12 @@ Your `.env.local` now contains the Neon API key, project ID, Upstash Box API key
 NEON_API_KEY=napi_your_neon_api_key
 NEON_PROJECT_ID=your_project_id
 UPSTASH_BOX_API_KEY=box_your_upstash_api_key
-UPSTASH_BOX_SNAPSHOT_ID=snap_your_snapshot_id
+UPSTASH_BOX_SNAPSHOT_ID=your_snapshot_id
 ```
 
 Now update the function declaration. `neon link` generated a starter `neon.ts`; update the `functions` block to point to the `analyst.ts` source file you'll create later and inject the secrets from `.env.local`:
 
-```ts filename="neon.ts" {5-18}
+```ts filename="neon.ts" {5-19}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
@@ -290,6 +290,7 @@ export default defineConfig({
         UPSTASH_BOX_SNAPSHOT_ID: process.env.UPSTASH_BOX_SNAPSHOT_ID!,
         SLACK_BOT_TOKEN: process.env.SLACK_BOT_TOKEN ?? '',
         SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET ?? '',
+        NEON_FUNCTION_ANALYST_BASE_URL: process.env.NEON_FUNCTION_ANALYST_BASE_URL!,
       }
     }
   },
@@ -301,7 +302,9 @@ export default defineConfig({
 });
 ```
 
-The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed. You'll redeploy with the real values right after.
+The `env` block injects your secrets into the function at deploy time. The two Slack values use `?? ''` because you won't have them until you create the Slack app in a later step. The empty fallback lets this first deploy succeed and gives you the function URL, but the function won't load until both Slack values are set. You'll redeploy with the real values right after.
+
+`NEON_FUNCTION_ANALYST_BASE_URL` is the function's public URL, which `neon link` writes to `.env.local`. Neon doesn't inject it into a deployed function, but `parseEnv(config, 'analyst')` in the next step requires it, so pass it through here.
 
 You also don't list `DATABASE_URL` as Neon injects it automatically, because the function is deployed onto your branch. The per-session branch connection comes from the Neon SDK at runtime instead.
 
@@ -708,12 +711,17 @@ chat.onNewMention(async (thread, message) => {
   await thread.post('On it!');
 
   const question = message.text.replace(/@\S+\s*/, '').trim();
-  const { answer, chart } = await runSession(question);
 
-  await thread.post({
-    markdown: answer,
-    files: chart ? [{ data: chart, filename: 'chart.png' }] : undefined,
-  });
+  try {
+    const { answer, chart } = await runSession(question);
+    await thread.post({
+      markdown: answer,
+      files: chart ? [{ data: chart, filename: 'chart.png' }] : undefined,
+    });
+  } catch (err) {
+    console.error('Session failed', err);
+    await thread.post('Sorry, something went wrong while analyzing your question. Check the function logs for details.');
+  }
 });
 
 export async function handleSlackWebhook(request: Request): Promise<Response> {
@@ -721,7 +729,7 @@ export async function handleSlackWebhook(request: Request): Promise<Response> {
 }
 ```
 
-The above code creates a `Chat` instance with the Slack adapter and registers an `onNewMention` handler that fires whenever a user @mentions the bot. The handler posts an acknowledgment, strips the bot's own mention from the message text to get the question, calls `runSession` to provision the branch and box and run the agent, and posts the answer back into the thread with the chart attached if the agent produced one.
+The above code creates a `Chat` instance with the Slack adapter and registers an `onNewMention` handler that fires whenever a user @mentions the bot. The handler posts an acknowledgment, strips the bot's own mention from the message text to get the question, calls `runSession` to provision the branch and box and run the agent, and posts the answer back into the thread with the chart attached if the agent produced one. If the session throws, the handler logs the error and posts a short failure message instead, because the Chat SDK only logs handler errors and doesn't post anything to the thread on its own.
 
 The `concurrency: 'queue'` option makes a second mention in the same thread wait for the running session to finish instead of being dropped or run in parallel, so two agent runs never share a branch or a box. `waitUntil` keeps the function invocation alive after the `200` response is sent to Slack, so the session can finish in the background.
 
@@ -812,7 +820,7 @@ With these two values added, `.env.local` now holds every secret the function ne
 NEON_API_KEY=napi_your_neon_api_key
 NEON_PROJECT_ID=your_project_id
 UPSTASH_BOX_API_KEY=box_your_upstash_api_key
-UPSTASH_BOX_SNAPSHOT_ID=snap_your_snapshot_id
+UPSTASH_BOX_SNAPSHOT_ID=your_snapshot_id
 SLACK_BOT_TOKEN=xoxb-your-bot-token
 SLACK_SIGNING_SECRET=your_slack_signing_secret
 ```
@@ -831,6 +839,8 @@ Redeploy the function so the Slack credentials are injected into the environment
 neon deploy --env .env.local
 ```
 
+The new deployment can take a minute or two to start serving requests. Because the function couldn't answer Slack's verification request before this redeploy, open **Event Subscriptions** in your Slack app settings and re-verify the Request URL if Slack shows it as unverified.
+
 You can now test the bot in Slack. The next section shows how to ask a question and get an answer.
 
 ## Ask a question end to end
@@ -843,7 +853,7 @@ Try the Slack path first. In a channel with the bot invited, send:
 
 The bot replies immediately with a status message, then runs the session in the background. When the agent finishes, it posts a Markdown report with the answer and attaches a chart if it produced one.
 
-If the bot doesn't reply, check [function logs](/docs/compute/functions/logs) first. A failed signature check or a session error shows up there. (The `SLACK_SIGNING_SECRET` must match **Basic Information** > **App Credentials**.) The adapter posts an error message to the thread when a session fails, so a silent thread usually means the event never arrived. In that case, check that the bot is in the channel and that the manifest's `request_url` points at your function URL with `/slack/events` appended. Also check for stale env: deployed env is a snapshot at apply time, so redeploy after editing `.env.local`.
+If the bot doesn't reply, check [function logs](/docs/compute/functions/logs) first. A failed signature check or a session error shows up there. (The `SLACK_SIGNING_SECRET` must match **Basic Information** > **App Credentials**.) If the session fails, the mention handler posts a failure message to the thread, so a silent thread usually means the event never arrived or the bot couldn't post. In that case, check that the bot is in the channel and that the manifest's `request_url` points at your function URL with `/slack/events` appended. Also check for stale env: deployed env is a snapshot at apply time, so redeploy after editing `.env.local`.
 
 Slack retries events when your endpoint doesn't return a `2xx` response. The adapter deduplicates retried deliveries automatically, but if you add side effects of your own, make them safe to run more than once.
 
