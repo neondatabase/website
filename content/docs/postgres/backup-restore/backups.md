@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/backups
-updatedOn: '2026-09-03T10:41:39.496Z'
+updatedOn: '2026-10-09T17:27:37.841Z'
 ---
 
 <InfoBlock>
@@ -84,7 +84,8 @@ To keep offsite backups current, automate nightly `pg_dump` exports to an S3 buc
 
 1. [Create an S3 bucket to store Postgres backups](/docs/manage/backups-aws-s3-backup-part-1)
 2. [Set up a GitHub Action to perform nightly Postgres backups](/docs/manage/backups-aws-s3-backup-part-2)
-   </FaqItem>
+
+</FaqItem>
 
 <FaqItem question="Does the Free plan include automatic backups?">
 Yes, in part. [Instant restore](/docs/postgres/backup-restore/branch-restore) is on for every plan, including Free, with a 6-hour history window (capped at 1 GB), so you can roll back to any moment in the last 6 hours. Free projects also get one manual [snapshot](/docs/guides/backup-restore).
