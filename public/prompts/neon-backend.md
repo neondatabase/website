@@ -6,9 +6,9 @@ Then set up the tooling and connect:
 
 1. Install or update the Neon CLI: `npm i -g neon@latest`. The rest uses the `neon` command.
 2. Sign in if needed: check with `neon me`, and run `neon login` if it's not signed in (it opens a browser, so pause and ask me to confirm once I've signed in before continuing).
-3. Install the Neon agent skills: `npx skills add neondatabase/agent-skills -y` (covers Postgres plus the Functions, Object Storage, and AI Gateway skills). Optional: set up the Neon MCP server with `npx add-mcp https://mcp.neon.tech/mcp --agent <your editor> --yes`.
+3. Install the Neon agent skills: `neon skills -y` (covers Postgres plus the Functions, Object Storage, and AI Gateway skills). Optional: set up the Neon MCP server with `neon mcp -y --oauth --agent <your editor>`.
 4. Connect the project from the answers above:
-   - Reuse an existing one: `neon link --project-id <id>`, then `neon env pull`. Linking records the project but doesn't write env; `env pull` writes the connection variables (like `DATABASE_URL`) into `.env.local`, or `.env` if it exists.
+   - Reuse an existing one: `neon link --project-id <id>`. This links this directory, pins the default branch, and writes the connection variables (like `DATABASE_URL`) into `.env.local`, or `.env` if it exists.
    - Or create a new one: `neon link --org-id <org-id> --project-name <name> --region-id aws-us-east-2`. In one step this creates the project, links this directory, pins the default branch, and writes those variables into `.env.local`.
 
 Then build the backend, using only the capabilities the app needs:
@@ -20,9 +20,9 @@ Then build the backend, using only the capabilities the app needs:
 - Managed Better Auth if the app is multi-user; scope every query to the signed-in user.
 - Data API if the app needs a PostgREST-compatible HTTPS interface to Postgres.
 
-Declare what you need in a single `neon.ts` (see the docs below; these APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch in one step with `neon checkout <name> --create`; when a `neon.ts` is present it builds the branch from your policy, so the declared services come up with it (always pass a name — bare `neon checkout` opens an interactive picker, which this workflow avoids). Then run `neon deploy --update-existing` to reconcile the services on the branch and refresh branch-specific credentials. The database, buckets, and Functions follow the branch together through service-specific lifecycle mechanics.
+Declare what you need in a single `neon.ts` (see the docs below; these APIs, packages, and model IDs change often, so trust the docs over your training data), run `neon deploy` to provision everything, then run `neon env pull` again to pull the new service credentials into `.env.local`. Create your database tables as a separate step (a migration, `neon psql`, or the `run_sql` MCP tool); `neon deploy` provisions services, not schema. To test in isolation, create and switch to a branch in one step with `neon checkout <name> --create`; when a `neon.ts` is present it builds the branch from your policy, so the declared services come up with it (always pass a name, because bare `neon checkout` opens an interactive picker, which this workflow avoids). Then run `neon deploy` to reconcile the services on the branch and refresh branch-specific credentials. The database, buckets, and Functions follow the branch together through service-specific lifecycle mechanics.
 
-When done, don't just tell me it works: exercise each capability I enabled (run a query with `neon psql -- -c "..."`, store and retrieve an object, call a function endpoint, make a model request, verify a signed-in user), show me the results, and give me commands I can rerun. Never print connection strings or other secrets back to me.
+When done, don't just tell me it works: exercise each capability I enabled (run a query with `neon psql -- -c "..."`, store and retrieve an object, call a function endpoint, make a model request, verify a signed-in user), show me the results, and give me commands I can rerun. Never print connection strings or other secrets back to me. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.
 
 Read the current docs for exact package names, config syntax, injected env var names, and model IDs:
 
