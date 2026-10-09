@@ -9,7 +9,7 @@ summary: >-
   injection, and credential storage in appsettings.json. For ORM-based
   alternatives, see the Entity Framework guide.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 
@@ -69,7 +69,7 @@ For your .NET project, you will create a project directory and add the required 
 
 Create a file named `appsettings.json` in your project's root directory. This is the standard .NET approach for storing configuration data like connection strings.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
 3.  Select **.NET** as your connection method.
     ![Connection modal](/docs/connect/dotnet_connection_details.png)

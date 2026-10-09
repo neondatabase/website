@@ -10,7 +10,7 @@ summary: >-
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -88,7 +88,7 @@ For your Python project, create a project directory, set up a virtual environmen
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
     ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Copy the connection string, which includes your password.

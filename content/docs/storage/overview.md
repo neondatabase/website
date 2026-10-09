@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-10-09T10:41:50.089Z'
 ---
 
 Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them. Point any S3 SDK at your branch endpoint and use your existing Neon credential.
@@ -67,6 +67,8 @@ Two limits are behavioral rather than fixed numbers:
 
 - **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
 - **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
+
+To see how much Object Storage your project uses, check the **Object storage** row in the **Project** panel on your branch's **Overview** page. The value covers all branches in the project.
 
 Storage-volume limits apply to the Free plan only. Paid plans have no fixed limit on total storage or number of objects; storage is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)). For large objects, use [multipart upload](/docs/storage/objects#multipart-upload), which AWS recommends for anything over 100 MB.
 
