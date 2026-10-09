@@ -38,7 +38,7 @@ seo:
 
 Different database systems provide different ways to list or describe the things they hold. For instance, to find a particular table and column in MySQL, you run `SHOW TABLES` followed by `SHOW COLUMNS FROM my_table`. In SQLite, you do `.tables` and then `.schema my_table`. And in Postgres, the commands are `\d` (for describe) followed by `\d mytable`.
 
-# \d wasn’t working
+## \d wasn’t working
 
 When I got access to my first Neon Postgres database, almost the first thing I did was go to the web-based SQL Editor and type `\d`. I was a little sad when the response I got back was: `ERROR: syntax error at or near "\" (SQLSTATE 42601)`.
 
@@ -50,7 +50,7 @@ It turns out that `\d`, `\l`, and their relatives are a psql feature. That is, t
 
 Of course, it’s not just `\d` and `\l`: there are lots of other useful backslash commands. You can get a brief cheat-sheet with `\? `, or look up [more details in the Postgres docs](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Some personal favourites are `\dconfig`, which lists configuration parameter values; `\du` and `\dx`, which list users and installed extensions; `\sf` and `\sv`, which display the source of functions and views; and `\h`, which provides a syntax reference for SQL commands.
 
-# \d **works now**
+## \d **works now**
 
 Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
 
@@ -74,7 +74,7 @@ That second approach — translating C to JavaScript — was the approach I ende
 
 I can’t promise that this is the only or necessarily even the best approach to the problem, and it would of course be nice in the long run to have an automated process to bring updates across from the psql C code. But it works, and I think it’s a good start.
 
-# Significant semicolons
+## Significant semicolons
 
 Once I had the introspection commands working from JavaScript, the other challenge in bringing them to the SQL Editor was to pick them out of a line-up of SQL queries.
 

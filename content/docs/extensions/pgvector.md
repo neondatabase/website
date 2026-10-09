@@ -455,7 +455,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
-#### Check indexing progress
+#### Check indexing progress (#check-indexing-progress-2)
 
 You can check indexing progress with the following query:
 

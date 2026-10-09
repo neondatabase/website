@@ -112,7 +112,7 @@ Additionally, `pg_cron` supports:
 - Interval scheduling using `'[1-59] seconds'` (for example, `'5 seconds'`).
 - `'$'` to indicate the last day of the month.
 
-Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](http://crontab.guru/) and adjust for the UTC timezone.
+Remember that all schedules in `pg_cron` are interpreted in UTC. When scheduling jobs, ensure your cron expressions are set accordingly. You can use tools like [crontab.guru](https://crontab.guru/) and adjust for the UTC timezone.
 
 ## Schedule a job
 
@@ -289,6 +289,6 @@ You have successfully learned how to enable and use the `pg_cron` extension with
 ## Resources
 
 - [pg_cron GitHub Repository](https://github.com/citusdata/pg_cron)
-- [crontab.guru](http://crontab.guru/)
+- [crontab.guru](https://crontab.guru/)
 
 <NeedHelp/>

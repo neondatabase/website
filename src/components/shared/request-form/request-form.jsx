@@ -188,9 +188,13 @@ const RequestForm = ({
                       displayValue={(option) => option?.name}
                       autoComplete="off"
                       placeholder={placeholder}
+                      aria-label={placeholder}
                       onChange={(event) => setQuery(event.target.value)}
                     />
-                    <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
+                    <ComboboxButton
+                      aria-label={`Show options: ${placeholder}`}
+                      className="group absolute inset-y-0 right-0 px-2.5"
+                    >
                       <ChevronIcon className="size-4 stroke-black-new dark:stroke-white" />
                     </ComboboxButton>
                   </div>
@@ -252,6 +256,7 @@ const RequestForm = ({
               >
                 <input
                   type="email"
+                  aria-label="Email address"
                   name="email"
                   value={email}
                   className={cn(

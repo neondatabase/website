@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 <InfoBlock>
@@ -290,7 +290,7 @@ Provision the Data API for a database. The `--auth-provider` option accepts `neo
 neon data-api create --database neondb --auth-provider neon_auth
 ```
 
-### Get Data API details
+### Get Data API details (#get-data-api-details-2)
 
 Show the current status and configuration:
 
@@ -298,7 +298,7 @@ Show the current status and configuration:
 neon data-api get --database neondb
 ```
 
-### Update configuration
+### Update configuration (#update-configuration-2)
 
 Update settings using [settings flags](/docs/cli/data-api#settings-flags). By default, flags are merged with the current configuration. Pass `--replace` to overwrite all settings with only the provided flags:
 
@@ -312,7 +312,7 @@ To refresh the schema cache without changing settings:
 neon data-api refresh-schema --database neondb
 ```
 
-### Disable
+### Disable (#disable-2)
 
 Remove the Data API from a database:
 

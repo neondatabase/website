@@ -79,7 +79,7 @@ Plus,
 - Project and branch resolve from your CLI context, same as other branch-scoped commands. Pass `--project-id` and `--branch` when you need to target something else.
 - Table output is the default. Use `--output json` or `--output yaml` when you want the full records (and the pagination cursor) for scripts or an agent.
 
-[Review our docs](http://neon.com/docs/cli/logs) for all the info.
+[Review our docs](https://neon.com/docs/cli/logs) for all the info.
 
 ## Same logs in MCP, the API, and Loki
 

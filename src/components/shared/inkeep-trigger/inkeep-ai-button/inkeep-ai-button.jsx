@@ -25,7 +25,7 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
       className
     )}
     type="button"
-    aria-label="Open Neon AI"
+    aria-label="Ask AI about Neon"
     onClick={() => handleClick('AI_CHAT')}
   >
     {isDocsHeader ? (
