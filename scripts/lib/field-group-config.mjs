@@ -61,7 +61,8 @@ export const FIELD_GROUPS = {
         id: 'branch',
         label: 'Branch & database',
         object: 'project.branch',
-        blurb: 'The default branch and the first role and database created on it.',
+        extra: ['project.realtime'], // enables Realtime on the default branch
+        blurb: 'The default branch, its first role and database, and Realtime.',
       },
       {
         id: 'settings',
