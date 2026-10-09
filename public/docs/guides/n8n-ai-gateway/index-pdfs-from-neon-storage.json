@@ -1,5 +1,5 @@
 {
-  "name": "Index PDFs from Neon Storage (pgvector)",
+  "name": "Index PDFs from Neon Object Storage (pgvector)",
   "nodes": [
     {
       "parameters": {},

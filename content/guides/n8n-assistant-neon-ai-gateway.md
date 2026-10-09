@@ -7,7 +7,7 @@ createdAt: '2026-10-01T00:00:00.000Z'
 updatedOn: '2026-10-05T18:14:46.820Z'
 ---
 
-Neon is now more than Postgres. [Neon Object Storage](/docs/storage/overview) gives you S3-compatible file storage that branches with your database. The [Neon AI Gateway](/docs/ai-gateway/overview) serves embedding and chat models through one credential and an OpenAI-compatible endpoint, and [Lakebase Postgres](/docs/postgres/overview) with [`pgvector`](/docs/extensions/pgvector) handles vector storage and similarity search. They all run alongside your database in the same project.
+Neon is a complete set of cloud backend primitives built around Lakebase Postgres. [Neon Object Storage](/docs/storage/overview) gives you S3-compatible file storage that branches with your database. The [Neon AI Gateway](/docs/ai-gateway/overview) serves embedding and chat models through one credential and an OpenAI-compatible endpoint, and [Lakebase Postgres](/docs/postgres/overview) with [`pgvector`](/docs/extensions/pgvector) handles vector storage and similarity search. They all run alongside your database in the same project.
 
 In this guide, you'll use those three services with **n8n** to build a RAG chatbot over your PDFs. You'll configure the n8n Assistant to use the models served through the Neon AI Gateway, and let it build the workflows for you.
 
@@ -52,7 +52,7 @@ You'll need a Neon project with Object Storage and the AI Gateway enabled. Creat
 
 This guide uses a self-hosted n8n deployment with Docker Compose. You'll set up the n8n editor, code sandbox, task runners, and SearXNG for web search. This is the official [recommended setup](https://docs.n8n.io/deploy/host-n8n/install-options/install-using-docker-compose) for the n8n Assistant.
 
-Alternatively, you can use [n8n Cloud](https://app.n8n.cloud/) for a fully hosted solution. If you already have n8n running with the Assistant set up, skip to the next section.
+Alternatively, you can use [n8n Cloud](https://app.n8n.cloud/) if you'd rather not self-host. If you already have n8n running with the Assistant set up, skip to the next section.
 
 1. Create a project folder and move into it:
 
@@ -349,7 +349,7 @@ For example, copy and paste the following prompt into the Assistant:
 ```text
 Build a RAG system in n8n that allows me to chat with PDF documents stored in my S3 bucket.
 
-Use Postgres with pgvector as the vector database. Use Neon services such as Storage and AI Gateway wherever applicable.
+Use Postgres with pgvector as the vector database. Use Neon services such as Object Storage and AI Gateway wherever applicable.
 
 Refer to the following documentation:
 - https://neon.com/docs/extensions/pgvector
@@ -381,7 +381,7 @@ The generated workflows use the Neon services you configured earlier:
 
 If you'd rather start from the exact workflows used in this guide instead of building your own with the Assistant, download the JSON exports:
 
-- [Index PDFs from Neon Storage (pgvector)](/docs/guides/n8n-ai-gateway/index-pdfs-from-neon-storage.json)
+- [Index PDFs from Neon Object Storage (pgvector)](/docs/guides/n8n-ai-gateway/index-pdfs-from-neon-storage.json)
 - [Chat with PDFs (Neon pgvector RAG)](/docs/guides/n8n-ai-gateway/chat-with-pdfs.json)
 
 To import either file, create a new workflow in n8n, open the three-dot menu at the top left, and select **Import from File**. You can also copy a file's contents and paste them directly onto an empty canvas. Imported workflows carry no credentials, so nodes show a warning until you fill them in. The example chat workflow uses `gpt-5-mini` for its chat model; you can switch it to `glm-5-3-flash` or any other catalog model. Continue with [Fill in the Neon credentials](#fill-in-the-neon-credentials).
@@ -400,8 +400,8 @@ The first two cards configure `List PDFs` and `Download PDF`. Pick your S3 crede
 
 Fill in the following fields with your S3 credentials:
 
-- **S3 Endpoint**: Your branch's storage endpoint. This is the value of `AWS_ENDPOINT_URL_S3` from the credential you saved in [Create a Neon credential](#create-a-neon-credential). For example: `https://br-example-branch-123456.storage.c-6.us-east-2.aws.neon.tech`
-- **Region**: Your storage region. This is the value of `AWS_REGION` from the same credential. For example: `us-east-2`
+- **S3 Endpoint**: Your branch's Object Storage endpoint. This is the value of `AWS_ENDPOINT_URL_S3` from the credential you saved in [Create a Neon credential](#create-a-neon-credential). For example: `https://br-example-branch-123456.storage.c-6.us-east-2.aws.neon.tech`
+- **Region**: Your Object Storage region. This is the value of `AWS_REGION` from the same credential. For example: `us-east-2`
 - **Access Key ID**: Enter your `AWS_ACCESS_KEY_ID`.
 - **Secret Access Key**: Enter your `AWS_SECRET_ACCESS_KEY`.
 - **Force Path Style**: Turn this **on**. Neon Object Storage requires path-style addressing.
@@ -414,7 +414,7 @@ The next card configures the `Store in pgvector` node.
 
 Fill in the following fields with your Lakebase Postgres credentials. To find them, navigate to your Neon project in the Neon Console, select your branch, and click **Connect**. The Postgres tab shows the connection details.
 
-![Connect to Neon Postgres in the Neon Console](/docs/connect/connection_details_parameters_only.png)
+![Connection details for Lakebase Postgres in the Neon Console](/docs/connect/connection_details_parameters_only.png)
 
 - **Host**: Your Neon host (`PGHOST` in the Neon Console).
 - **Database**: Your database name, such as `neondb` (`PGDATABASE` in the Neon Console).
@@ -470,16 +470,16 @@ In the run below, the indexing workflow turned 3 PDFs into **174 chunks** in the
 
 Open the chat workflow in the editor and click **Open chat** to try it yourself. You can also continue asking the Assistant to modify the workflows to fit your needs.
 
-You now have a RAG system that lets you chat with your PDFs, powered by the n8n Assistant and Neon services. Best of all, you built it without writing a single line of code or manually selecting and connecting nodes. The Assistant handled the setup for you, and you can keep refining the workflows by describing what you want to change.
+You now have a RAG system that lets you chat with your PDFs, powered by the n8n Assistant and Neon services. You built it without writing workflow code or wiring nodes by hand. The Assistant handled the setup for you, and you can keep refining the workflows by describing what you want to change.
 
 </Steps>
 
 ## Next steps
 
-This RAG setup is only one example. You can build any other workflow the same way: describe what you want in the Assistant, approve the plan, and fill in the same Neon credentials when it asks. The Assistant picks the nodes and wires them together, then walks you through setup, so you never have to build workflows by hand. Here's where to go from here:
+This RAG setup is only one example. You can build any other workflow the same way: describe what you want in the Assistant, approve the plan, and fill in the same Neon credentials when it asks. The Assistant picks the nodes and wires them together, then walks you through setup. Here's where to go from here:
 
 - **Use a frontier model:** This guide uses `glm-5-3-flash`. For more accurate workflows and better answers, swap it for a frontier model such as `gpt-6-astra` or `claude-fable-5` in the Assistant setup and in your AI nodes. See [AI Gateway models](/docs/ai-gateway/models).
-- **Keep building with the Assistant:** Ask it to schedule the indexing workflow on a cron trigger, add Slack or email output to the chat workflow, or start something new entirely. If you can describe it, the Assistant can build it.
+- **Keep building with the Assistant:** Ask it to schedule the indexing workflow on a cron trigger, add Slack or email output to the chat workflow, or start something new entirely.
 - **Prefer to wire nodes yourself?** Read [Build an AI-powered knowledge base chatbot using n8n and Lakebase Postgres](/guides/n8n-neon) for the manual version of this same RAG setup.
 
 ## Use Lakebase Postgres as the n8n database
@@ -498,7 +498,7 @@ DB_POSTGRESDB_SSL_ENABLED=true
 DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=true
 ```
 
-Then restart the stack with `docker compose up -d`. n8n migrates itself to Lakebase Postgres on startup. For details, see [Use PostgreSQL instead of SQLite](https://docs.n8n.io/deploy/host-n8n/install-options/install-using-docker-compose#optional-use-postgresql-instead-of-sqlite) in the n8n docs.
+Then restart the stack with `docker compose up -d`. On startup, n8n creates its tables in Lakebase Postgres. It doesn't copy existing data from SQLite. For details, see [Use PostgreSQL instead of SQLite](https://docs.n8n.io/deploy/host-n8n/install-options/install-using-docker-compose#optional-use-postgresql-instead-of-sqlite) in the n8n docs.
 
 ## Resources
 
