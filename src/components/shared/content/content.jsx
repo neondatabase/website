@@ -52,7 +52,7 @@ import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
-import CopyPrompt from 'components/shared/copy-prompt';
+import CopyPrompt, { AgentPrompt } from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
@@ -245,6 +245,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  AgentPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
   StatBlock,
