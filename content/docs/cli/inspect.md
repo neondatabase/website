@@ -25,6 +25,8 @@ Run a single diagnostic query against a branch's Postgres. Pick the query with a
 
 By default the command resolves the project, branch, database, and role from your [context](/docs/cli/link) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon without being logged in to Neon.
 
+Without `--role-name`, `inspect` connects as the same role as [`neon connection-string`](/docs/cli/connection-string): the branch's only role, or `neondb_owner` on branches with several roles, including branches with the Data API or Managed Better Auth enabled.
+
 When you omit `--database-name`, `inspect` covers every database on the branch and adds a `database` column so you can tell the rows apart. Pass `--database-name` to inspect a single database, which also scopes `locks` and `long-running-queries` to that database so lock and relation names resolve correctly. Database-scoped checks such as `table-sizes`, `locks`, and `outliers` run against each database, while compute-wide checks (`lfc-hit-rate`, `working-set`, and `replication-slots`) run once. If any database fails, the whole run fails, so pass `--database-name` to narrow to one when that happens. `--db-url` always inspects the single database in the connection string and never adds the `database` column.
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
