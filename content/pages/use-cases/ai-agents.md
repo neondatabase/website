@@ -16,7 +16,7 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 'replit',
 'same',
 'solar',
-'databutton',
+'riff',
 ]} />
 
 <ProgramForm type="agent" />
@@ -72,11 +72,11 @@ The Snapshots API builds on this foundation to create [agent-friendly, restorabl
 
 ## Managed Better Auth
 
-Every app needs authentication, and agents shouldn’t have to reinvent it. **[Managed Better Auth](https://neon.com/docs/auth/overview) lets you build secure, multi-tenant systems [without extra glue code](https://neon.com/blog/databutton-neon-integration)**.
+Every app needs authentication, and agents shouldn’t have to reinvent it. **[Managed Better Auth](https://neon.com/docs/auth/overview) lets you build secure, multi-tenant systems [without extra glue code](https://neon.com/blog/riff-neon-integration)**.
 
 It issues JWTs that your agent or front-end can use directly in database queries or through the [Neon Data API](https://neon.com/docs/data-api/get-started). Each token maps to a Postgres role, enforcing granular access at the data level. And because Managed Better Auth supports standard JWKS configuration, you can also plug in external providers. Auth state lives in Postgres and branches with the database, so preview and agent environments get isolated users and sessions without touching production.
 
-<QuoteBlock quote="Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
+<QuoteBlock quote="Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Riff" />
 
 ## Neon Data API
 
@@ -117,7 +117,7 @@ To get inspired, explore how others are building and scaling their agents on top
 - [Replit](https://neon.com/blog/replit-app-history-powered-by-neon-branches)
 - [Retool](https://neon.com/blog/retool-becomes-the-platform-for-enterprise-appgen)
 - [Anything](https://neon.com/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
-- [Databutton](https://neon.com/blog/databutton-neon-integration)
+- [Riff](https://neon.com/blog/riff-neon-integration)
 - [Vapi](https://neon.com/blog/vapi-voice-agents-neon)
 - [Dyad](https://neon.com/blog/dyad-brings-postgres-to-local-ai-app-building-powered-by-neon)
 - [xpander.ai](https://neon.com/blog/xpander-ai-agents-slack-neon-backend)

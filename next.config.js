@@ -2266,6 +2266,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/blog/databutton-neon-integration',
+        destination: '/blog/riff-neon-integration',
+        permanent: true,
+      },
+      {
         source: '/blog/postgres-autoscaling',
         destination: '/blog/scaling-serverless-postgres',
         permanent: false,
