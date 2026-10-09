@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active. On the Scale plan, you can configure the scale to zero threshold.
@@ -114,7 +114,7 @@ Configuring the scale to zero setting in your project's settings sets the projec
 To configure the scale to zero default for an existing project:
 
 1. Select a project in the Neon Console.
-1. On the **Dashboard**, select **Settings**.
+1. Select **Settings** in the sidebar.
 1. Select **Postgres** and find the **Compute defaults** section.
 1. Select **Modify defaults**.
 1. Enable or disable the scale to zero setting, and save your selection.
@@ -125,7 +125,7 @@ You can monitor scale to zero on the **Branches** page in the Neon Console. A co
 
 ![Compute status](/docs/introduction/compute_state.png)
 
-You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
+You can also see each branch's compute status and when it was last active on the **Branches** page.
 
 User actions that activate an idle compute include [connecting from a client such as psql](/docs/connect/query-with-psql-editor), running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](/docs/reference/api).
 

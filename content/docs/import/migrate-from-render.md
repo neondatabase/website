@@ -14,7 +14,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 This guide describes how to migrate a database from Render to Lakebase Postgres.
@@ -113,7 +113,7 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 
 ### Retrieve Neon connection details
 
-1. In the Neon Console, go to your **Project Dashboard**.
+1. Open your project in the Neon Console.
 2. Select **Connect** to open the **Connect to your branch** modal.
 3. Select the user and database as needed for your connection. Make sure the **Connection pooling** toggle is disabled to get an unpooled connection string.
 4. Copy the connection string. It will look similar to this:

@@ -13,7 +13,7 @@ summary: >-
   project and the change cannot be reverted.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -64,7 +64,7 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 

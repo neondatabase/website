@@ -10,7 +10,7 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -40,7 +40,7 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 1. Click the **New Project** button to create a new project.
 
-2. From the Neon **Dashboard**, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
+2. In the Neon Console, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
    ```sql
    CREATE TABLE books_to_read (
@@ -79,12 +79,10 @@ To use Hyperdrive with Neon, you'll need to create a dedicated database role for
 
 ### Get your Neon connection string for Hyperdrive
 
-1. In the Neon Console, select **Dashboard** from the sidebar.
-2. Go to the **Connection Details** pane.
-3. Select the **branch**, **database**, and **role** (for example, `hyperdrive-user`) that Hyperdrive will connect through.
-4. Select **Connection String** from the dropdown menu.
-5. **Important**: Uncheck the **Pooled connection** checkbox. Hyperdrive manages connection pooling, so you need the direct connection string.
-6. Copy the connection string, which should look like this:
+1. In the Neon Console, click **Connect** at the top of the sidebar.
+2. Select the **branch**, **database**, and **role** (for example, `hyperdrive-user`) that Hyperdrive will connect through.
+3. **Important**: Toggle **Connection pooling** off. Hyperdrive manages connection pooling, so you need the direct connection string.
+4. Copy the connection string, which should look like this:
 
    ```bash
    postgres://hyperdrive-user:PASSWORD@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
