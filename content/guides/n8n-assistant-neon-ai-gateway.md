@@ -34,7 +34,7 @@ The AI Gateway and Object Storage are currently available in AWS US East (Ohio) 
 </Admonition>
 
 <Admonition type="important" title="AI Gateway model access">
-The AI Gateway is available on paid plans with prepaid credits. This guide uses `glm-5-3-flash`. If a model isn't enabled for your project yet, swap it for one that is. See [Model access](/docs/ai-gateway/overview#model-access).
+The AI Gateway is available on paid plans with prepaid credits, and any paid project with credits can use every model in the catalog. This guide uses `glm-5-3-flash`. See [Model access](/docs/ai-gateway/overview#model-access).
 </Admonition>
 
 <Steps>
@@ -176,6 +176,8 @@ Alternatively, you can use [n8n Cloud](https://app.n8n.cloud/) for a fully hoste
    N8N_SANDBOX_VERSION=1.6.0
 
    # n8n Runner config
+   N8N_RUNNERS_MODE=external
+   N8N_RUNNERS_BROKER_LISTEN_ADDRESS=0.0.0.0
    N8N_RUNNERS_AUTH_TOKEN=change-me-runner-auth-token
 
    # n8n Sandbox config
@@ -382,7 +384,7 @@ If you'd rather start from the exact workflows used in this guide instead of bui
 - [Index PDFs from Neon Storage (pgvector)](/docs/guides/n8n-ai-gateway/index-pdfs-from-neon-storage.json)
 - [Chat with PDFs (Neon pgvector RAG)](/docs/guides/n8n-ai-gateway/chat-with-pdfs.json)
 
-To import either file, create a new workflow in n8n, open the three-dot menu at the top left, and select **Import from File**. You can also copy a file's contents and paste them directly onto an empty canvas. Imported workflows carry no credentials, so nodes show a warning until you fill them in. Continue with [Fill in the Neon credentials](#fill-in-the-neon-credentials).
+To import either file, create a new workflow in n8n, open the three-dot menu at the top left, and select **Import from File**. You can also copy a file's contents and paste them directly onto an empty canvas. Imported workflows carry no credentials, so nodes show a warning until you fill them in. The example chat workflow uses `gpt-5-mini` for its chat model; you can switch it to `glm-5-3-flash` or any other catalog model. Continue with [Fill in the Neon credentials](#fill-in-the-neon-credentials).
 
 ## Fill in the Neon credentials
 
@@ -399,7 +401,7 @@ The first two cards configure `List PDFs` and `Download PDF`. Pick your S3 crede
 Fill in the following fields with your S3 credentials:
 
 - **S3 Endpoint**: Your branch's storage endpoint. This is the value of `AWS_ENDPOINT_URL_S3` from the credential you saved in [Create a Neon credential](#create-a-neon-credential). For example: `https://br-example-branch-123456.storage.c-6.us-east-2.aws.neon.tech`
-- **Region**: Your storage region. This is the value of `AWS_REGION` from the same credential. For example: `aws-us-east-2`
+- **Region**: Your storage region. This is the value of `AWS_REGION` from the same credential. For example: `us-east-2`
 - **Access Key ID**: Enter your `AWS_ACCESS_KEY_ID`.
 - **Secret Access Key**: Enter your `AWS_SECRET_ACCESS_KEY`.
 - **Force Path Style**: Turn this **on**. Neon Object Storage requires path-style addressing.
@@ -476,7 +478,7 @@ You now have a RAG system that lets you chat with your PDFs, powered by the n8n 
 
 This RAG setup is only one example. You can build any other workflow the same way: describe what you want in the Assistant, approve the plan, and fill in the same Neon credentials when it asks. The Assistant picks the nodes and wires them together, then walks you through setup, so you never have to build workflows by hand. Here's where to go from here:
 
-- **Use a frontier model:** This guide uses `glm-5-3-flash` so everyone can follow along without extra access. If your project has frontier models enabled, swap it for `gpt-6-astra` or `claude-fable-5` in the Assistant setup and in your AI nodes. They build more accurate workflows and answer better. See [AI Gateway models](/docs/ai-gateway/models).
+- **Use a frontier model:** This guide uses `glm-5-3-flash`. For more accurate workflows and better answers, swap it for a frontier model such as `gpt-6-astra` or `claude-fable-5` in the Assistant setup and in your AI nodes. See [AI Gateway models](/docs/ai-gateway/models).
 - **Keep building with the Assistant:** Ask it to schedule the indexing workflow on a cron trigger, add Slack or email output to the chat workflow, or start something new entirely. If you can describe it, the Assistant can build it.
 - **Prefer to wire nodes yourself?** Read [Build an AI-powered knowledge base chatbot using n8n and Lakebase Postgres](/guides/n8n-neon) for the manual version of this same RAG setup.
 
@@ -493,7 +495,7 @@ DB_POSTGRESDB_DATABASE="<your-database-name>"
 DB_POSTGRESDB_USER="<your-database-user>"
 DB_POSTGRESDB_PASSWORD="<your-database-password>"
 DB_POSTGRESDB_SSL_ENABLED=true
-DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=false
+DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED=true
 ```
 
 Then restart the stack with `docker compose up -d`. n8n migrates itself to Lakebase Postgres on startup. For details, see [Use PostgreSQL instead of SQLite](https://docs.n8n.io/deploy/host-n8n/install-options/install-using-docker-compose#optional-use-postgresql-instead-of-sqlite) in the n8n docs.
