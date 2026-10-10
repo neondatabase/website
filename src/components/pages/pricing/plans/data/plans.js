@@ -236,6 +236,16 @@ export default {
         "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
     },
     {
+      rows: '2',
+      feature: {
+        title: 'Realtime',
+        subtitle: 'Beta',
+      },
+      free: 'Free during beta',
+      launch: 'Free during beta<span>Compute and egress billed as usual</span>',
+      scale: 'Free during beta<span>Compute and egress billed as usual</span>',
+    },
+    {
       rows: '1',
       feature: 'Network',
     },
