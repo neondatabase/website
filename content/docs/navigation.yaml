@@ -1652,6 +1652,9 @@
         - title: Support
           slug: introduction/support
           icon: support
+        - title: Send feedback
+          slug: introduction/feedback
+          icon: info
         - title: Community
           slug: community/community-intro
           icon: community
