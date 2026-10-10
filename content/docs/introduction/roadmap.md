@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-10-10T11:23:41.183Z'
+updatedOn: '2026-10-10T11:32:57.046Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -81,7 +81,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ## What we've shipped recently 🚢
 
 - **All AI Gateway models with prepaid credits**: Paid plan users with prepaid credits can now call every model in the AI Gateway catalog, including frontier models from OpenAI, Anthropic, and Google, without requesting access. [Learn more](/docs/ai-gateway/models#available-models).
-- **Send feedback from the CLI and MCP server**: Send feedback to Neon with `neon feedback` in the Neon CLI or the `send_feedback` tool in the Neon MCP server. Only your message is sent, with no account or project details. [Learn more](/docs/cli/feedback).
+- **Send feedback from the CLI and MCP server**: Send feedback to Neon with `neon feedback` in the Neon CLI or the `send_feedback` tool in the Neon MCP server. Only your message is sent, with no account or project details. [Learn more](/docs/introduction/feedback).
 - **Enable backend services at project creation**: Turn on Object Storage, Functions, AI Gateway, and Auth alongside Postgres when you create a project, so it comes up with your whole stack ready. [Learn more](/docs/manage/projects#create-a-project).
 - **More storage on the Free plan**: The Neon Free plan now includes 1 GB of database storage per project, up from 0.5 GB, applied automatically to existing projects. [Learn more](/docs/introduction/plans).
 - **Embedding models in the AI Gateway**: Turn text into vectors through the same OpenAI-compatible endpoint and Neon credential you use for chat, with `/v1/embeddings` support for `qwen3-embedding-0-6b` and `gte-large-en`. [Learn more](/docs/ai-gateway/embeddings).
