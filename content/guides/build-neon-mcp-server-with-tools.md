@@ -9,7 +9,7 @@ updatedOn: '2026-09-14T06:50:40.725Z'
 
 If you're embedding Neon operations into your own agent runtime, you need a way to expose them as tools: an MCP server for your team, an agent built with a framework like Mastra or Eve, or a dev tool that resets test data. The Model Context Protocol (MCP) lets you publish a catalog of tools with input validation, approval metadata, and auto-pagination for lists. You can then connect your agent to the catalog over stdio or HTTP.
 
-The hosted [Neon MCP Server](/docs/ai/neon-mcp-server) already gives you this by default. It pairs 19 workflow tools for SQL, migrations, diagnostics, docs, and search with 85 Management API tools across projects, branches, endpoints, snapshots, auth, storage, and more. It adds OAuth, category filtering, readonly mode, and project scoping, so you can connect Claude Code, Cursor, or any MCP client.
+The hosted [Neon MCP Server](/docs/ai/neon-mcp-server) already gives you this by default. It pairs workflow tools for SQL, migrations, diagnostics, docs, and search with Management API tools across projects, branches, endpoints, snapshots, auth, storage, functions, and more. It adds OAuth, category filtering, readonly mode, and project scoping, so you can connect Claude Code, Cursor, or any MCP client.
 
 [`@neon/tools`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools) gives you the same building blocks for your own server. You pick the SDK operations to expose, such as `projects.list` for listing projects or `branches.createAndConnect` for creating a ready-to-use branch, and customize how each one appears to the model. Each selection becomes a tool with a Zod schema, flat snake-case inputs, auto-pagination for lists, readiness polling for writes, and approval metadata. The MCP adapter then publishes that catalog with model-facing IDs like `list_projects` and `create_and_connect_branches`.
 
@@ -17,7 +17,7 @@ Choose the approach that fits your workflow:
 
 | Approach                                      | When to use it                       | What you get                                                                                                     |
 | --------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Hosted Neon MCP Server                        | Connect your own agent to Neon       | Full catalog with 19 workflow plus 85 API tools, OAuth, readonly mode, and project scoping. No code to maintain. |
+| Hosted Neon MCP Server                        | Connect your own agent to Neon       | Full catalog of workflow and API tools, OAuth, readonly mode, and project scoping. No code to maintain.           |
 | Custom server with `@neon/tools` (this guide) | Embed Neon tools in your own runtime | Subset catalog, project injection, custom names and descriptions, logging, and multi-tenant HTTP.                |
 
 In this tutorial, you'll build a minimal MCP server with five project and branch tools, run it over stdio, and connect it to Claude Code. You'll then customize it with project injection, custom names and descriptions, and logging. Finally, you'll serve the same catalog remotely over HTTP so multiple agents can call it with their own credentials. The same pattern scales when you add snapshots, endpoints, auth, storage, and functions that the `@neon/tools` package already exposes.
@@ -34,7 +34,7 @@ Before you start, decide how your server will handle Neon credentials. There are
 
 Before you begin, make sure you have the following:
 
-- **Node.js:** Version `22` or later. Download from [Node.js](https://nodejs.org/en/download/).
+- **Node.js:** Version `20.19` or later (version `22` or later recommended). Download from [Node.js](https://nodejs.org/en/download/).
 - **Neon account and project:** A Neon account with at least one project. Sign up at [Neon](https://console.neon.tech/signup) if you do not have one.
 
 <Steps>
@@ -43,12 +43,12 @@ Before you begin, make sure you have the following:
 
 To allow programmatic access to Neon, you need a Neon API key. Your server uses it to call the Neon API and manage branches on demand.
 
-1. In the Neon Console, open your organization settings and select **API keys**.
-2. Click **Create new API key** and give it a name (for example, "custom MCP server").
+1. In the Neon Console, switch to your organization, then go to **Settings** > **API keys**.
+2. Click **Create new** and give the key a name (for example, "custom MCP server").
    ![Create Neon API key](/docs/manage/org_api_keys.png)
 
-   <Admonition type="tip" title="Use an org-wide key">
-   Choose **org-wide** for the key type, which allows the server to manage branches across all projects in your organization.
+   <Admonition type="tip" title="Use an organization key">
+   Create an organization API key rather than a project-scoped key, so the server can manage branches across all projects in your organization.
    </Admonition>
 
 3. Copy the generated API key.
@@ -447,7 +447,7 @@ curl -X POST http://127.0.0.1:3000/mcp \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2026-07-28","capabilities":{},"clientInfo":{"name":"curl","version":"1.0.0"}}}'
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"curl","version":"1.0.0"}}}'
 ```
 
 A successful initialize response advertises your server and protocol version.
