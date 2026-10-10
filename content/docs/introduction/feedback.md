@@ -15,7 +15,7 @@ Don't include passwords, API keys, connection strings, or other secrets in your 
 
 ## Neon Console
 
-Open the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console, write your message, and submit it.
+In the [Neon Console](https://console.neon.tech), select **Feedback** at the bottom of the left sidebar. Enter your message under **Share your thoughts** and select **Send**. You can also open the form directly with this [Feedback](https://console.neon.tech/app/projects?modal=feedback) link.
 
 ## Neon CLI
 
@@ -46,5 +46,7 @@ Join the [feedback channel](https://discord.com/channels/1176467419317940276/117
 ## What gets sent
 
 The Neon CLI and the Neon MCP Server send only your message. No account, project, or connection details come with it.
+
+Feedback from the Neon Console is linked to your Neon user ID, so the Neon team can see which account sent it.
 
 <NeedHelp/>
