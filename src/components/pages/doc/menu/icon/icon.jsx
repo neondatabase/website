@@ -53,6 +53,7 @@ import UseCaseIcon from 'icons/docs/sidebar/use-case.inline.svg';
 import VerceIcon from 'icons/docs/sidebar/vercel.inline.svg';
 import VersionIcon from 'icons/docs/sidebar/version.inline.svg';
 import WorkflowsIcon from 'icons/docs/sidebar/workflows.inline.svg';
+import ZapIcon from 'icons/docs/sidebar/zap.inline.svg';
 
 const icons = {
   'ai-agent': AiAgentIcon,
@@ -108,6 +109,7 @@ const icons = {
   vercel: VerceIcon,
   version: VersionIcon,
   workflows: WorkflowsIcon,
+  zap: ZapIcon,
 };
 
 const Icon = ({ title, className = null }) => {
