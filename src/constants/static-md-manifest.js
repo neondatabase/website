@@ -69,6 +69,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/neon-backend.md',
   '/prompts/neon-function-triggers-cron-and-object-storage-prompt.md',
   '/prompts/neon-functions-github-actions-prompt.md',
+  '/prompts/neon-realtime.md',
   '/prompts/nestjs-prompt.md',
   '/prompts/nextjs-prompt.md',
   '/prompts/nuxt-neon-prompt.md',

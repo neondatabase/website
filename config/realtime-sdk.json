@@ -1,0 +1,39 @@
+{
+  "modules": [
+    {
+      "name": "Backend",
+      "entryPoint": "packages/realtime/src/server.ts",
+      "importSpecifier": "@neon/realtime/server"
+    },
+    {
+      "name": "Client",
+      "entryPoint": "packages/realtime/src/client.ts",
+      "importSpecifier": "@neon/realtime/client"
+    },
+    {
+      "name": "React",
+      "entryPoint": "packages/realtime-react/src/index.ts",
+      "importSpecifier": "@neon/realtime-react"
+    },
+    {
+      "name": "TanStack DB",
+      "entryPoint": "packages/realtime-tanstack/src/index.ts",
+      "importSpecifier": "@neon/realtime-tanstack"
+    },
+    {
+      "name": "Drizzle",
+      "entryPoint": "packages/realtime-drizzle/src/index.ts",
+      "importSpecifier": "@neon/realtime-drizzle"
+    },
+    {
+      "name": "Drizzle client",
+      "entryPoint": "packages/realtime-drizzle/src/client.ts",
+      "importSpecifier": "@neon/realtime-drizzle/client"
+    },
+    {
+      "name": "Kysely",
+      "entryPoint": "packages/realtime-kysely/src/index.ts",
+      "importSpecifier": "@neon/realtime-kysely"
+    }
+  ]
+}
