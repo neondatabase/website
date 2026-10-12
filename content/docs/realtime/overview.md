@@ -18,7 +18,7 @@ Realtime makes [any SQL query](./guides/queries) live. [Subscribe in realtime](.
 [Get started](./quickstart) with Realtime and learn about [how it works](./how-it-works).
 
 ```bash filename="Terminal"
-npx neon@latest init --realtime
+npx neon@latest bootstrap my-app --template realtime-react
 ```
 
 <DetailIconCards cols={2} theme="green-flat">
@@ -282,7 +282,9 @@ See [Defining live queries](./guides/queries#defining-live-queries) for the deta
 
 No. You enable it per project and branch. Child branches created from a Realtime-enabled branch have it enabled automatically.
 
-Use `neon init --realtime` to create a new project with Realtime enabled. Or `neon realtime enable` to enable Realtime on an existing project. See the [Quickstart](./quickstart) for more details.
+Enable it on a branch with [`neon realtime enable`](/docs/cli/realtime#enable). Or, if you manage your project with `neon.ts`, declare it with `neon config add realtime` and apply it with `neon deploy`. You can also enable it in the Neon Console. See the [Quickstart](./quickstart) for more details.
+
+Realtime isn't available on [Claimable projects](/docs/reference/claimable-neon) until they're claimed.
 
 </FaqItem>
 

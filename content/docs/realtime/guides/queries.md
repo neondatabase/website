@@ -39,6 +39,8 @@ Install [Neon Auth](/docs/auth/overview)'s client for the frontend:
 npm install @neondatabase/auth
 ```
 
+Run `neon env pull --service postgres --service auth --service realtime` to write the server variables below to `.env.local` (or to an existing `.env`), or copy them from the Neon Console. Set the `VITE_` copies yourself from the same values.
+
 Set these environment variables on the server:
 
 - `DATABASE_URL`: your Lakebase Postgres [connection string](/docs/connect/connect-intro)

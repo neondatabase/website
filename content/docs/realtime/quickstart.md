@@ -6,15 +6,17 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Enable Realtime, run your first live SQL queries and build an app with realtime&nbsp;reactivity.
+[Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app).
 
 <Admonition type="important" title="Create your project in a supported region">
 Realtime is currently [available in limited regions](./overview#which-regions-is-it-enabled-in). Support is expanding toward [all regions](/docs/introduction/regions).
+
+Realtime isn't available on [Claimable projects](/docs/reference/claimable-neon) until they're claimed.
 </Admonition>
 
-## Before you start
+## Get started
 
-You'll need [Node.js 20.19+](https://nodejs.org/) and the [Neon CLI](/docs/cli/install) installed:
+You'll need [Node.js 22 or later](https://nodejs.org/) and the [Neon CLI](/docs/cli/install):
 
 ```bash filename="Terminal"
 npm i -g neon
@@ -22,13 +24,24 @@ npm i -g neon
 
 <Steps>
 
+## Link a project
+
+Log in to Neon, then link a new, empty directory to a Neon project:
+
+```bash filename="Terminal"
+neon login
+neon link
+```
+
+[`neon link`](/docs/cli/link) asks which project to use. Pick an existing project or create a new one. Either way, it needs to be in a supported region.
+
 ## Enable Realtime
 
-<Admonition type="tip" title="Enable programmatically">
-Create a new project using [`neon init --realtime`](/docs/cli/init) or enable Realtime in an existing project with [`neon realtime enable`](/docs/cli/realtime#enable). You can also use the [Neon API](/docs/reference/api) and the [Neon MCP Server](/docs/ai/neon-mcp-server).
-</Admonition>
+You can enable Realtime in the Neon Console or using the CLI.
 
-In the Neon Console, select your project and select **Postgres database** > **Realtime** to navigate to the Realtime page.
+### In the Neon Console
+
+In the Neon Console, select your project and then **Postgres database** > **Realtime** to navigate to the Realtime page.
 
 ![Realtime page with enable button](/docs/realtime/realtime-sidebar.png)
 
@@ -38,20 +51,28 @@ Click **Enable Realtime**. Once enabled, you'll see the Realtime page:
 
 The page shows your:
 
-- **URL**: your [Live SQL API](./how-it-works#live-sql-api) endpoint URL
-- **Secret**: the `NEON_REALTIME_SECRET` to use when [sealing queries](./guides/queries#sealing-queries)
+- **NEON_REALTIME_URL**: your [Live SQL API](./how-it-works#live-sql-api) endpoint URL
+- **NEON_REALTIME_SECRET**: to use when [sealing queries](./guides/queries#sealing-queries)
 
-## Subscribe using the CLI
+### Using the CLI
 
-The simplest way to test live queries is [using the Neon CLI](/docs/cli). Make sure you're [logged in and have linked your project](/docs/cli/install#connect).
-
-Copy your secret to set `NEON_REALTIME_SECRET` locally in your shell:
+Run [`neon realtime enable`](/docs/cli/realtime#enable) to enable Realtime for the currently linked project and branch:
 
 ```bash filename="Terminal"
-export NEON_REALTIME_SECRET=<your-secret>
+neon realtime enable
 ```
 
-Then, if you need to, create a table to query and insert some data into it:
+To get the URL and secret that the Console shows, you can run:
+
+```bash filename="Terminal"
+neon env pull --service realtime
+```
+
+It writes them to `.env.local` as `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`.
+
+## Subscribe to a live query
+
+The simplest way to try live queries is with the [Neon CLI](/docs/cli). First, if you need to, create a table to query and insert some data into it:
 
 ```bash filename="Terminal"
 neon psql -- -c "CREATE TABLE items (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), value TEXT)"
@@ -59,29 +80,55 @@ neon psql -- -c "ALTER TABLE items REPLICA IDENTITY FULL"
 neon psql -- -c "INSERT INTO items (value) VALUES ('foo')"
 ```
 
-Use the CLI to subscribe to a live query:
+Then [`subscribe`](/docs/cli/subscribe) to a live query:
 
 ```bash filename="Terminal"
-neon realtime subscribe "SELECT * FROM items"
+neon subscribe "SELECT * FROM items"
 ```
 
-You'll see the initial data and if you insert more data, for example using `neon psql -- -c "INSERT INTO ..."` in another terminal tab, you'll see the live query results update.
-
-By default `neon realtime subscribe` shows the full query result. You can also subscribe to the raw changes to see the underlying delta sync:
+This keeps running until you stop it with `Ctrl+C`. To see the result update, open a second terminal in the same directory and insert another row:
 
 ```bash filename="Terminal"
-neon realtime subscribe --changes "SELECT * FROM items"
+neon psql -- -c "INSERT INTO items (value) VALUES ('bar')"
 ```
 
-## Develop a realtime app
-
-If you bootstrap a new project using `neon bootstrap --template realtime`, this scaffolds a basic web app for you using Hono and React:
+By default, `neon subscribe` prints the full query result every time it changes. To see the underlying delta sync instead, subscribe to the raw changes:
 
 ```bash filename="Terminal"
-neon bootstrap my-realtime-app --template realtime
+neon subscribe --changes "SELECT * FROM items"
 ```
+
+See [`neon subscribe`](/docs/cli/subscribe) for JSON output and the other options.
 
 </Steps>
+
+## Build a realtime app
+
+The `realtime-react` starter template is a shared todo app built with React, Vite, a Hono API and Drizzle, with optimistic updates.
+
+Scaffold it with [`neon bootstrap`](/docs/cli/bootstrap):
+
+```bash filename="Terminal"
+neon bootstrap my-app --template realtime-react
+```
+
+Bootstrap scaffolds the app, installs the dependencies and links the new `my-app` directory to a Neon project via `neon.ts` config.
+
+Run [`neon deploy`](/docs/cli/deploy) to apply the generated config, enabling Realtime for your project and branch:
+
+```bash filename="Terminal"
+cd my-app
+neon deploy
+```
+
+This automatically writes your `DATABASE_URL`, `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to `.env.local`. You can then run migrations and start the app:
+
+```bash filename="Terminal"
+npm run db:setup
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser. If you open two windows or tabs, as you change data in one, you'll see it update in realtime in the other.
 
 ## Next steps
 
