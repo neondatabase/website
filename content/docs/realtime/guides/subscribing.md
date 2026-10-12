@@ -55,7 +55,7 @@ process.once("SIGTERM", () => realtime.close())
 Never fill a direct subscription's parameters from untrusted input.
 </Admonition>
 
-`NEON_REALTIME_URL` is the URL from the [Realtime page](../quickstart#enable-realtime) in the Neon Console. Note the `await`: the direct server's `subscribe()` is async, because it seals the query locally before it subscribes. The browser client's `subscribe()` is synchronous. Otherwise it's the same subscription, with the same options and [callbacks](#listen-for-changes) as the client's.
+`NEON_REALTIME_URL` is written by `neon env pull --service realtime`, or shown on the [Realtime page](../quickstart#enable-realtime) in the Neon Console. Note the `await`: the direct server's `subscribe()` is async, because it seals the query locally before it subscribes. The browser client's `subscribe()` is synchronous. Otherwise it's the same subscription, with the same options and [callbacks](#listen-for-changes) as the client's.
 
 The direct server renews its own sealed queries and recovers from outages until you close the subscription or it moves to `error`. An error is final, so a long-running worker should watch for it with `onStateChange` and subscribe again. `realtime.close()` closes every subscription and the shared WebSocket. The direct server needs a global `WebSocket`, which Node.js 22 and later have built in.
 
