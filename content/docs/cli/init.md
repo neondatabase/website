@@ -68,6 +68,8 @@ After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directo
 
 It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with `neon config apply`. In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
 
+`--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
+
 ## Options
 
 <CliOptions command="init" />

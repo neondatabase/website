@@ -23,7 +23,7 @@ Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an a
 
 ## neon claim create (#create)
 
-Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service` for Data API, Managed Better Auth, or other services. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically.
+Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service` for Data API, Managed Better Auth, or other services. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically. [Realtime](/docs/cli/realtime) isn't available until the project is claimed, so `--service` doesn't accept it and a `neon.ts` Realtime declaration isn't requested.
 
 <CliUsage command="claim create" />
 
