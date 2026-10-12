@@ -91,8 +91,13 @@ describe('toCatalogEntry', () => {
     });
   });
 
-  it('carries last_updated and input_audio over from the committed entry', () => {
-    const entry = toCatalogEntry(GPT, { last_updated: '2026-04-01', cost: { input_audio: 1.5 } });
+  it('carries released, last_updated and input_audio over from the committed entry', () => {
+    const entry = toCatalogEntry(GPT, {
+      released: false,
+      last_updated: '2026-04-01',
+      cost: { input_audio: 1.5 },
+    });
+    expect(entry.released).toBe(false);
     expect(entry.last_updated).toBe('2026-04-01');
     expect(entry.cost.input_audio).toBe(1.5);
     expect(Object.keys(entry.cost)).toEqual([
@@ -143,6 +148,14 @@ describe('buildCatalog', () => {
       last_updated: '2023-07-27',
       cost: { input: 0.13 },
     });
+  });
+
+  it('keeps the committed entry of an unlisted model in keepIds', () => {
+    const kept = { id: 'kept', name: 'Kept' };
+    const committed = { neon: { models: { kept, gone: { id: 'gone' } } } };
+    const out = buildCatalog([GPT], committed, ['kept']);
+    expect(Object.keys(out.neon.models)).toEqual(['kept', 'gpt-5-4']);
+    expect(out.neon.models.kept).toBe(kept);
   });
 });
 

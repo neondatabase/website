@@ -1,10 +1,10 @@
 /**
  * Pure logic for the AI Gateway model catalog published at /models.json.
  *
- * `src/app/models.json/data.json` is the source of truth for that catalog: it is
- * authored and reviewed here, not derived from anywhere else. The `neon` provider
- * on models.dev is a downstream mirror we keep in sync, which is why drift is
- * classified by direction rather than reported as a single equality failure.
+ * `src/app/models.json/data.json` is that catalog. Production builds refresh it
+ * from the Neon AI Gateway (scripts/update-models-from-ai-gateway.mjs). The `neon`
+ * provider on models.dev is a downstream mirror we keep in sync, which is why drift
+ * is classified by direction rather than reported as a single equality failure.
  *
  * Kept free of I/O so both the sync check and the offline validator can use it,
  * and so the classification rules can be tested without a network.

@@ -1,5 +1,5 @@
 // Server wrapper for the interactive AI Gateway model catalog. Reads the
-// committed /models.json data (the catalog we publish and own) and
+// /models.json data (refreshed from the gateway on production builds) and
 // derives table rows, and hands trimmed data to the client component — so the
 // raw catalog JSON never has to be authored by hand in the page.
 //

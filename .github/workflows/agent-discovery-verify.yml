@@ -32,6 +32,8 @@ on:
       - 'src/scripts/check-models-endpoint-sync.js'
       - 'src/scripts/import-models-from-models-dev.mjs'
       - 'scripts/lib/models-catalog.mjs'
+      - 'scripts/lib/ai-gateway-models.*'
+      - 'scripts/update-models-from-ai-gateway.mjs'
       - 'next.config.js'
   schedule:
     # Every day at 8:00 AM UTC (matches the old AI Gateway Models Sync cadence)
@@ -119,6 +121,8 @@ jobs:
         if: always() && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Production builds refresh the catalog from the gateway, so compare what is deployed.
+          NEON_MODELS_URL: https://neon.com/models.json
         shell: bash
         run: |
           set -o pipefail

@@ -16,6 +16,7 @@ dotenv.config({ path: '.env' });
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = path.resolve(DIRNAME, '../src/app/models.json/data.json');
+const CAPABILITIES_PATH = path.resolve(DIRNAME, '../src/app/models/capabilities.json');
 const PREFIX = 'AI Gateway models:';
 
 async function main() {
@@ -39,7 +40,20 @@ async function main() {
     return;
   }
 
-  const catalog = buildCatalog(items, committed);
+  // /models serves every id in capabilities.json with its data.json entry, so a
+  // model the listing dropped keeps its committed entry until it is re-probed out.
+  const capabilities = JSON.parse(fs.readFileSync(CAPABILITIES_PATH, 'utf8'));
+  const servedIds = capabilities.models.map((m) => m.id);
+  const listed = new Set(items.map((item) => item.id));
+  const retained = servedIds.filter((id) => id in committedModels && !listed.has(id));
+  if (retained.length) {
+    console.warn(
+      `${PREFIX} not in the listing but still in capabilities.json, kept as committed: ` +
+        retained.join(', ')
+    );
+  }
+
+  const catalog = buildCatalog(items, committed, servedIds);
   const errors = validateCatalog(catalog);
   if (errors.length > 0) {
     console.warn(`${PREFIX} generated catalog is invalid; keeping committed models data`);

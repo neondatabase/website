@@ -1,6 +1,6 @@
 // Maps the Neon AI Gateway models listing (GET /v1/models) to the entry shape of
-// src/app/models.json/data.json. Fields the listing can't supply (`last_updated`,
-// `cost.input_audio`) are carried over from the committed entry.
+// src/app/models.json/data.json. Fields the listing can't supply (`released`,
+// `last_updated`, `cost.input_audio`) are carried over from the committed entry.
 
 export const DEFAULT_TIMEOUT_MS = 15000;
 
@@ -64,7 +64,8 @@ export function toCatalogEntry(item, committedEntry = {}) {
     name: item.name,
     provider: item.owned_by,
     family: item.family,
-    released: true,
+    // Committed `released: false` holds a model back until it is announced.
+    released: committedEntry.released ?? true,
   };
   const lastUpdated = committedEntry.last_updated ?? item.release_date;
   const f = item.features;
@@ -105,15 +106,21 @@ export function toCatalogEntry(item, committedEntry = {}) {
 }
 
 // Committed ids keep their position; ids new to the listing are appended in
-// listing order; ids the listing no longer has are dropped.
-export function buildCatalog(items, committedCatalog) {
+// listing order; ids the listing no longer has are dropped, except those in
+// `keepIds`, which keep their committed entry unchanged.
+export function buildCatalog(items, committedCatalog, keepIds = []) {
   const committedModels = committedCatalog.neon.models;
   const byId = new Map(items.map((item) => [item.id, item]));
+  const keep = new Set(keepIds);
   const ids = [
-    ...Object.keys(committedModels).filter((id) => byId.has(id)),
+    ...Object.keys(committedModels).filter((id) => byId.has(id) || keep.has(id)),
     ...items.map((item) => item.id).filter((id) => !(id in committedModels)),
   ];
   const models = {};
-  for (const id of ids) models[id] = toCatalogEntry(byId.get(id), committedModels[id]);
+  for (const id of ids) {
+    models[id] = byId.has(id)
+      ? toCatalogEntry(byId.get(id), committedModels[id])
+      : committedModels[id];
+  }
   return { ...committedCatalog, neon: { ...committedCatalog.neon, models } };
 }
