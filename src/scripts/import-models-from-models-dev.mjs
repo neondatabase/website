@@ -58,6 +58,7 @@ const KEY_ORDER = [
   'name',
   'provider',
   'family',
+  'released',
   'attachment',
   'reasoning',
   'reasoning_options',
@@ -83,6 +84,7 @@ const PROVIDER_ORDER = [
   'zhipuai',
   'thinkingmachines',
   'moonshotai',
+  'xai',
 ];
 
 // The organisation that made the model, matching models.dev provider ids — not
@@ -105,9 +107,11 @@ function providerFor(model) {
                 ? 'zhipuai'
                 : s.startsWith('kimi')
                   ? 'moonshotai'
-                  : s === 'ling' || s.startsWith('inkling')
-                    ? 'thinkingmachines'
-                    : undefined;
+                  : s.startsWith('grok')
+                    ? 'xai'
+                    : s === 'ling' || s.startsWith('inkling')
+                      ? 'thinkingmachines'
+                      : undefined;
   const family = typeof model.family === 'string' ? model.family : '';
   const id = typeof model.id === 'string' ? model.id : '';
   return match(family) || match(id) || (id.includes('llama') ? 'meta' : undefined);
@@ -226,13 +230,23 @@ async function main() {
 
   const merged = { ...current };
   const noProvider = [];
+  const unreleased = [];
   for (const id of ids) {
     const { model, error } = shape(id, upstream[id]);
     if (error) {
       noProvider.push(error);
       continue;
     }
-    merged[id] = model;
+    // models.dev has no `released`. A re-import keeps the catalog's flag; a model new to the
+    // catalog starts unreleased, because importing it is not announcing it.
+    const isNew = !(id in current);
+    if (isNew) unreleased.push(id);
+    merged[id] = orderKeys({ ...model, released: isNew ? false : current[id].released });
+  }
+  if (unreleased.length) {
+    console.error(
+      `Imported as released: false: ${unreleased.join(', ')}. Set it to true once announced.`
+    );
   }
   if (noProvider.length) {
     console.error(`Could not derive provider for: ${noProvider.join(', ')}`);

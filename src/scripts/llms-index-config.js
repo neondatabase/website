@@ -19,6 +19,20 @@ module.exports = {
   tagline:
     'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
 
+  getStarted: [
+    '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
+    '',
+    'If a Neon account is available, set things up locally by installing the Neon CLI and running the project init command to install the agent skills and creating/linking a Neon project:',
+    '',
+    '```bash',
+    'npm i -g neon',
+    '# oauth signup - use --help for other auth options',
+    'neon auth',
+    '# in the project folder init Neon',
+    'neon init',
+    '```',
+  ].join('\n'),
+
   intro: [
     'Neon docs are available as markdown.',
     'Append `.md` to any doc URL or set `Accept: text/markdown`.',
@@ -197,6 +211,11 @@ module.exports = {
         'API reference, SDKs, Terraform provider, Postgres compatibility, and platform-level tooling.',
       extraEntries: [
         {
+          title: 'Neon API endpoint index',
+          url: 'https://neon.com/docs/reference/api/llms.txt',
+          description: 'Index of every Neon API endpoint, grouped by resource',
+        },
+        {
           title: 'Neon API OpenAPI Spec',
           url: 'https://neon.com/api_spec/release/v2.json',
           description: 'Machine-readable OpenAPI 3.0 specification for the Neon API',
@@ -221,7 +240,7 @@ module.exports = {
     {
       name: 'Security',
       description:
-        'Compliance certifications, acceptable use policies, HIPAA, and security reporting.',
+        'Compliance certifications (SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA), acceptable use policies, HIPAA, and security reporting.',
     },
     {
       name: 'Extensions',
@@ -276,6 +295,9 @@ module.exports = {
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
     { pathPrefix: 'cli/', section: 'Neon CLI' },
+    // Fold the hand-written API intro pages (reference/api/*.md) into the main
+    // Reference list instead of a two-item "API" subsection.
+    { pathPrefix: 'reference/api/', section: 'Reference', subsection: null },
     { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
@@ -321,6 +343,26 @@ module.exports = {
       title: 'Blog',
       url: 'https://neon.com/blog.md',
       description: 'Engineering, product, and community posts from the Neon team',
+    },
+  ],
+
+  // Indexes written at build time that are not linked from public/docs/llms.txt.
+  // Site search ingest walks these URLs; the official docs catalog walk stays on the parent index.
+  unlinkedIndexes: [
+    {
+      route: 'guides',
+      publicPath: 'guides',
+      outputPath: 'public/guides/llms.txt',
+      title: 'Neon Community Guides',
+      intro:
+        'Step-by-step tutorials for frameworks, ORMs, auth providers, and deployment platforms.',
+    },
+    {
+      route: 'docs/changelog',
+      publicPath: 'docs/changelog',
+      outputPath: 'public/docs/changelog/llms.txt',
+      title: 'Neon Changelog',
+      intro: 'Latest updates and releases.',
     },
   ],
 

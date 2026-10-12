@@ -11,7 +11,7 @@ summary: >-
   Wrangler, and adding DATABASE_URL as a Cloudflare environment variable for
   production deployment.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
@@ -36,7 +36,7 @@ To follow along with this guide, you will need:
 
 2. Click the **New Project** button to create a new project.
 
-3. From your project dashboard, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
+3. In the Neon Console, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
    ```sql
    CREATE TABLE books_to_read (
@@ -59,7 +59,7 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. It should look similar to this:
+In the Neon Console, click **Connect** in the nav to open the **Connect to your branch** modal to find your database connection string. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

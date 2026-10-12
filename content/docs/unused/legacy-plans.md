@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-01T21:19:48.000Z'
 summary: >-
   Neon legacy plans (Free, Launch, Scale, Business, and Enterprise) are
   discontinued pricing tiers no longer available to new signups. Existing paid
@@ -250,7 +250,7 @@ This section describes [Storage](#storage), [Archive storage](#archive-storage),
 
 ### Storage
 
-Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
+Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/concepts/branch-your-backend). For this reason, storage in Neon differs somewhat from other database services.
 
 In Neon, storage consists of your total **data size** and **history**.
 

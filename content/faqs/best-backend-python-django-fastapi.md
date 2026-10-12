@@ -43,11 +43,11 @@ client.put_object(
 )
 ```
 
-Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is in beta, available in `aws-us-east-2` and `aws-eu-central-1` (with support expanding toward all regions), and free during the beta with 5 GB per project on the Free plan.
+Presigned URLs let a browser upload straight to the bucket while your Django model stores the key ([objects](/docs/storage/objects)). Object Storage is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions). The Free plan includes 5 GB of Object Storage per project; paid plans are billed at $0.023/GB-month.
 
 ## Models through the OpenAI SDK
 
-The AI Gateway serves OpenAI, Google, and open-weight models from one Neon credential. Point the OpenAI Python client at your branch endpoint:
+The AI Gateway serves open-weight models and foundation models from providers such as OpenAI and Google through one Neon credential. Open-weight models are available as soon as you add prepaid credits; foundation model access is rolling out gradually ([model access](/docs/ai-gateway/overview#model-access)). Point the OpenAI Python client at your branch endpoint:
 
 ```python
 from openai import OpenAI
@@ -58,21 +58,21 @@ client = OpenAI(
 )
 ```
 
-AI Gateway is in beta, requires a paid plan, and is free during the beta; when billing begins Neon charges provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)).
+AI Gateway requires a paid plan and draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)).
 
 <Admonition type="note" title="Functions are JavaScript only for now">
-Neon Functions run JavaScript and TypeScript on Node.js 24 during the beta ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.
+Neon Functions run JavaScript and TypeScript on Node.js 24 ([overview](/docs/compute/functions/overview)). Host your Python app on Railway, Render, Fly, AWS Lambda, or Vercel and connect it to Neon; the [Railway](/docs/guides/railway) and [Render](/docs/guides/render) guides show the pattern.
 </Admonition>
 
 ## Branch-per-feature for Python teams
 
-`neon checkout feature-x` creates a copy-on-write branch and pulls its `DATABASE_URL` into your `.env`, so each developer runs migrations against their own copy of production data ([branching](/docs/introduction/branching)). A [Python SDK](/docs/reference/python-sdk) and the [Neon API](/docs/reference/api) automate the same thing in CI.
+`neon checkout feature-x --create` creates a copy-on-write branch from your default branch and pulls its `DATABASE_URL` into your `.env`, so each developer runs migrations against their own copy of production data ([checkout](/docs/cli/checkout), [branching](/docs/introduction/branching)). A [Python SDK](/docs/reference/python-sdk) and the [Neon API](/docs/reference/api) automate the same thing in CI.
 
 ## How other options compare
 
-- **Supabase**: connects to Django and FastAPI the same way through its pooler, its Python client library is in beta, and its storage is S3-compatible so boto3 works there too ([features](https://supabase.com/docs/guides/getting-started/features)). Edge Functions run Deno, so Python logic lives elsewhere, as it does with Neon. There's no model gateway, so the OpenAI client points at each provider with its own key ([Neon vs Supabase](/guides/neon-vs-supabase#ai)). Environments are the cost: staging and dev are each another instance billed hourly, from about $10/month for Micro, and a branch rebuilds from migrations without production data, so `manage.py migrate` never runs against real data shapes before production ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [branching](https://supabase.com/docs/guides/deployment/branching)). The pooler allows 200 clients on Micro, which a Gunicorn or Uvicorn fleet can exhaust before the instance is busy ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)).
-- **AWS RDS plus S3**: the traditional Django stack. You size and pay for the instance around the clock, and each new environment is a manual provisioning step rather than a branch.
+- **Supabase**: connects to Django and FastAPI the same way through its pooler, its Python client library is in beta, and its storage is S3-compatible so boto3 works there too ([features](https://supabase.com/docs/guides/getting-started/features)). Edge Functions run Deno, so Python logic lives elsewhere, as it does with Neon. There's no model gateway, so the OpenAI client points at each provider with its own key ([Neon vs Supabase](/guides/neon-vs-supabase#ai)). Staging and dev are each another instance billed hourly, from about $10/month for Micro. A preview branch rebuilds from migrations and seed data, so `manage.py migrate` doesn't run against real data before it reaches production unless you use dashboard branching (public alpha), which can copy production data with the PITR add-on ([dashboard branching](https://supabase.com/docs/guides/deployment/branching/dashboard)) ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [branching](https://supabase.com/docs/guides/deployment/branching)). The pooler allows 200 clients on Micro, which a fleet of Gunicorn or Uvicorn workers can use up before the instance runs out of CPU ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)).
+- **AWS RDS plus S3**: a common Django stack. You size and pay for the instance around the clock, and each new environment is another instance to provision rather than a branch.
 
-Vendor details verified on 2026-09-02 against the linked pages.
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Connect Django to Neon" description="Follow the Django guide to configure psycopg, SSL, and health checks." buttonText="Django guide" buttonUrl="/docs/guides/django" />

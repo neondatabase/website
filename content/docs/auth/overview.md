@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-10-09T11:46:19.949Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -24,9 +24,11 @@ redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
 
-<FeatureBetaProps feature_name="Managed Better Auth" />
-
 Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+
+- **Identity lives in your database.** All authentication data is stored in the `neon_auth` schema, queryable with SQL and compatible with Row Level Security (RLS) policies.
+- **Zero server management.** It runs as a managed REST API service. Configure it in the Console and use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app.
+- **Auth that branches with your data.** Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Quick start guides
 
@@ -46,22 +48,11 @@ Choose your framework to get started:
 
 <AuthAISetup />
 
-## Why Managed Better Auth?
-
-- **Identity lives in your database**  
-  All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
-
-- **Zero server management**  
-  Managed Better Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
-
-- **Auth that branches with your data**  
-  Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
-
 ## Built on Better Auth
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth currently supports Better Auth version **1.4.18**.
+Managed Better Auth runs Better Auth version **1.7.6**. The `@neondatabase/auth` SDK uses a Better Auth 1.6 client, and Managed Better Auth keeps 1.6 clients working, so you don't need to upgrade your SDK.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
@@ -83,7 +74,7 @@ As Managed Better Auth evolves, more Better Auth integrations and features will 
 
 ## Basic usage
 
-Enable Auth in the Neon Console, from the terminal with [`neon neon-auth enable`](/docs/cli/neon-auth#enable), or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
+Enable Auth in the Neon Console, from the terminal with [`neon neon-auth enable`](/docs/cli/neon-auth#enable) or declaratively with [`neon config add auth`](/docs/cli/config#add), or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
 
 **For Next.js (server-side):**
 

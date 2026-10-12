@@ -63,4 +63,4 @@ Dual-stack devices that support communicating over both IPv4 and IPv6 will often
 
 Adding IPv6 support to Neon allows you to overcome IPv4 limitations and build highly scalable architectures while maintaining backward compatibility with your existing IPv4 workloads. This is particularly useful for large-scale and containerized applications, allowing you to focus on migrating and scaling applications without devoting effort towards overcoming IPv4 limits.
 
-Thanks for reading. We would love to get your feedback. Follow us on [X](https://x.com/neondatabase), join us on [Discord](https://neon.tech/discord), and let us know how we can help you build secure, reliable, and scalable applications.
+Thanks for reading. We would love to get your feedback. Follow us on [X](https://x.com/neondatabase), join us on [Discord](https://neon.com/discord), and let us know how we can help you build secure, reliable, and scalable applications.

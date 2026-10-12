@@ -95,4 +95,4 @@ stripe projects init my-app
 stripe projects add neon
 ```
 
-If you’re building agent-assisted workflows or just want a faster path from local code to a real Postgres database, we’d like to hear what you think. Share feedback in the [Neon Discord](https://neon.tech/discord) or reach out on X.
+If you’re building agent-assisted workflows or just want a faster path from local code to a real Postgres database, we’d like to hear what you think. Share feedback in the [Neon Discord](https://neon.com/discord) or reach out on X.

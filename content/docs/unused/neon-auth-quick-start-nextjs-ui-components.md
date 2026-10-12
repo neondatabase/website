@@ -6,11 +6,9 @@ summary: >-
   components, including enabling authentication, installing the SDK, configuring
   environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 layout: wide
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <Admonition type="note" title="Archived copy">
 This quick start is kept in the repo for reference but is not published on [neon.com/docs](/docs). Use the [Next.js quick start (API methods)](/docs/auth/quick-start/nextjs-api-only) and the [UI components reference](/docs/auth/reference/ui-components) instead.

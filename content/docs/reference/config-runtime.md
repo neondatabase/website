@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-`@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, and bundle and deploy Neon Functions. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
+`@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.
 
 If you just want to run `neon.ts` from the command line, use the [`neon config` / `neon deploy` commands](/docs/cli/config) instead. Reach for this package only when you need to call the same logic from your own Node.js code.
 
@@ -63,7 +63,7 @@ const result = await apply(config, target); // apply the policy for real
 
 ## Authentication
 
-None of the functions on this page take a Neon session or browser login. [Create a Neon API key in the Console](https://console.neon.tech/app/settings/api-keys), then pass it in the `apiKey` option, or inject your own `NeonApi` adapter with `api`. The package doesn't read `NEON_API_KEY` or the credentials written by `neon auth`. If you omit both `apiKey` and `api`, the operation throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY`.
+None of the functions on this page take a Neon session or browser login. [Create a Neon API key in the Console](https://console.neon.tech/app/settings/api-keys), then pass it in the `apiKey` option, or inject your own `NeonApi` adapter with `api`. The package doesn't read `NEON_API_KEY` or the credentials written by `neon login`. If you omit both `apiKey` and `api`, the operation throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY`.
 
 For `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`, the optional `apiHost` selects a non-production API host. If you omit it, the package uses Neon's production API. The package doesn't read `NEON_API_HOST`. `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call to `createBranch`.
 
@@ -139,6 +139,7 @@ Returns a `PushResult`:
 | `dryRun`     | `boolean`          | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                          |
 | `applied`    | `AppliedChange[]`  | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field. |
 | `conflicts`  | `ConflictReport[]` | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                          |
+| `customDomains` | `Array<{ domain, slug, cnameTarget? }>?` | Custom domains declared for the branch after the push, or what `apply` would leave in place on a dry run. `cnameTarget` is absent for a not-yet-registered domain on a dry run, and is an empty string when the region has no custom-domains front door. |
 
 ### `createBranch`
 

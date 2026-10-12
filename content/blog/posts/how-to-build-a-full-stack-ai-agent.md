@@ -272,7 +272,7 @@ Every generated app gets its own serverless Postgres on Neon, which idles automa
 
 **Use Aileen as your reference template for building your agent.** You can fork the repo, run it locally, or adapt it to your own setup [: github.com/andrelandgraf/aileen](https://github.com/andrelandgraf/aileen?utm_source=chatgpt.com)
 
-If you have any questions, you can find us in [Discord](https://discord.com/invite/92vNTzKDGp)!
+If you have any questions, you can find us in [Discord](https://neon.com/discord)!
 
 <Admonition type="important" title="Neon's Agent Plan">
 If you're building your own agent platform and need a backend, [take a look at Neon's Agent Plan.](https://neon.com/use-cases/ai-agents) You can get special pricing, resource limits, and assistance to get your platform up and running.

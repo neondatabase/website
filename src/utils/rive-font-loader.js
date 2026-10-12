@@ -3,7 +3,11 @@ import { decodeFont } from '@rive-app/react-canvas';
 const fontCache = new Map();
 const pendingFonts = new Map();
 
-const getFontUrl = (fontName) => {
+const getFontUrl = (fontName, fontUrls = {}) => {
+  if (fontUrls[fontName]) {
+    return fontUrls[fontName];
+  }
+
   if (fontName === 'Geist Mono') {
     return '/fonts/geist-mono/GeistMono-Regular.ttf';
   }
@@ -40,30 +44,36 @@ const loadAndDecodeFont = async (fontUrl) => {
   return fontPromise;
 };
 
-const cachedFontLoader = (asset, bytes) => {
-  if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
+const createCachedFontLoader =
+  (fontUrls = {}) =>
+  (asset, bytes) => {
+    if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
+      return false;
+    }
+
+    if (asset?.isFont) {
+      const assetName = asset.name || '';
+      const fontUrl = getFontUrl(assetName, fontUrls);
+
+      loadAndDecodeFont(fontUrl)
+        .then((font) => {
+          asset.setFont(font);
+        })
+        .catch((error) => {
+          console.error(`Error setting font for asset "${assetName}":`, error);
+        });
+
+      return true;
+    }
+
     return false;
-  }
+  };
 
-  if (asset?.isFont) {
-    const assetName = asset.name || '';
-    const fontUrl = getFontUrl(assetName);
-
-    loadAndDecodeFont(fontUrl)
-      .then((font) => {
-        asset.setFont(font);
-      })
-      .catch((error) => {
-        console.error(`Error setting font for asset "${assetName}":`, error);
-      });
-
-    return true;
-  }
-
-  return false;
-};
+const cachedFontLoader = createCachedFontLoader();
 
 export const getCachedFontLoader = () => cachedFontLoader;
+
+export const createRiveFontLoader = (fontUrls) => createCachedFontLoader(fontUrls);
 
 export const preloadRiveFonts = async () => {
   const fontUrls = [

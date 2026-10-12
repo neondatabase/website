@@ -5,13 +5,28 @@ on:
     branches:
       - main
     paths:
-      - 'content/**'
+      # Official docs catalog. Guides and changelog are site-reindex.yml.
+      - 'content/docs/**'
+      - 'content/branching/**'
+      # Catalog membership can change without a markdown edit.
+      - 'src/constants/content.js'
+      - 'src/scripts/llms-index-config.js'
+      - 'src/scripts/generate-llms-index.js'
+      - 'scripts/generate-api-ref.mjs'
+      - 'scripts/lib/api-ref-output.mjs'
+      - 'scripts/lib/openapi-spec-source.mjs'
   workflow_dispatch:
     inputs:
       urls:
         description: Space-separated https://neon.com/**.md URLs to reindex (upsert)
-        required: true
+        required: false
         type: string
+        default: ''
+      sync:
+        description: Diff the live docs catalog against indexed pages (add missing, drop extras)
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -73,10 +88,11 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           (async () => {
-            const urls = process.env.URLS.trim().split(/\s+/).filter(Boolean);
-            if (urls.length === 0) {
+            const urls = (process.env.URLS ?? '').trim().split(/\s+/).filter(Boolean);
+            const sync = process.env.SYNC === 'true';
+            if (urls.length === 0 && !sync) {
               throw new Error(
-                'workflow_dispatch requires at least one https://neon.com/**.md URL with no port, userinfo, query, or hash',
+                'workflow_dispatch requires https://neon.com/**.md URLs and/or sync',
               );
             }
             for (const url of urls) {
@@ -102,14 +118,37 @@ jobs:
                   `Not a neon.com markdown url: ${url} (expected https://neon.com/**.md with no port, userinfo, query, or hash)`,
                 );
               }
+              if (
+                parsed.pathname.startsWith('/guides/') ||
+                parsed.pathname.startsWith('/docs/changelog/')
+              ) {
+                throw new Error(
+                  `Guide and changelog URLs go to the Site reindex workflow: ${url}`,
+                );
+              }
             }
-            const payload = JSON.stringify({
+            const { toWebhookPayload } = require('./src/scripts/docs-reindex-map.js');
+            const payloadObj = toWebhookPayload({
               pages: urls.map((url) => ({ url, deleted: false })),
+              sync,
             });
+            if (!payloadObj) {
+              throw new Error(
+                'workflow_dispatch requires https://neon.com/**.md URLs and/or sync',
+              );
+            }
+            const payload = JSON.stringify(payloadObj);
             if (process.env.GITHUB_STEP_SUMMARY) {
+              const parts = [];
+              if (urls.length > 0) {
+                parts.push(`Queued **${urls.length}** page(s) for reindex`);
+              }
+              if (sync) {
+                parts.push(urls.length > 0 ? 'plus catalog sync' : 'Catalog sync queued');
+              }
               await fs.promises.appendFile(
                 process.env.GITHUB_STEP_SUMMARY,
-                `## Docs reindex map\n\nQueued **${urls.length}** page(s) for reindex.\n`,
+                `## Docs reindex map\n\n${parts.join(' ')}.\n`,
               );
             }
             await fs.promises.appendFile(
@@ -123,6 +162,7 @@ jobs:
           NODE
         env:
           URLS: ${{ inputs.urls }}
+          SYNC: ${{ inputs.sync }}
 
       - name: POST reindex
         if: steps.map.outputs.payload != '' || steps.dispatch.outputs.payload != ''

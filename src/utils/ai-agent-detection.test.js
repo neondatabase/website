@@ -141,6 +141,21 @@ describe('isAIAgentRequest', () => {
 
 describe('getMarkdownPath', () => {
   describe('Valid content routes', () => {
+    it.each([
+      ['/functions', '/md/functions.md'],
+      ['/functions.md', '/md/functions.md'],
+      ['/ai-gateway', '/md/ai-gateway.md'],
+      ['/ai-gateway.md', '/md/ai-gateway.md'],
+      ['/object-storage', '/md/object-storage.md'],
+      ['/object-storage.md', '/md/object-storage.md'],
+      ['/auth', '/md/auth-page.md'],
+      ['/auth.md', '/auth.md'],
+      ['/lakebase', '/md/lakebase.md'],
+      ['/lakebase.md', '/md/lakebase.md'],
+    ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
+      expect(getMarkdownPath(pagePath)).toBe(markdownPath);
+    });
+
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
       expect(result).toBe('/md/docs/introduction.md');

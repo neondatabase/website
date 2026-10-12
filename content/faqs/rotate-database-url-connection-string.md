@@ -3,7 +3,7 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,27 +14,25 @@ nextLink:
   slug: rotate-neon-api-keys
 ---
 
-## Quick answer
+A Neon `DATABASE_URL` is built from the role, password, hostname, and database name. To rotate it, you change the credential behind it, in one of two ways:
 
-In Neon, your `DATABASE_URL` is built from the role, password, hostname, and database name. To rotate the URL, you change the credential that backs it. There are two reasonable approaches:
+1. **Reset the role password.** Every consumer switches at once, and any consumer still on the old password fails on its next connection.
+2. **Create a new role.** You move consumers over one at a time while the old role keeps working, then cut off the old role at the end.
 
-1. **Reset the role password.** Fast, but every consumer needs the new password before its next reconnect, or it will fail to authenticate.
-2. **Create a new role.** Slower setup, but lets you migrate consumers one by one and keep the old role active during the transition.
-
-Pick the approach that matches your deployment situation.
+See [Rotate credentials](/docs/security/security-overview#rotate-credentials) for both approaches.
 
 ## Option 1: Reset the role password
 
-This is the right choice for most rotations: routine credential hygiene, suspected leaks, or planned key cycling. The whole flow takes a minute.
+Use this for routine rotation or a suspected leak, when you can update every consumer right away.
 
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
-1. Open the [Neon Console](https://console.neon.tech), select your project, then **Branches → branch → Roles & Databases**.
-2. From the role's menu, click **Reset password**.
-3. Copy the new password, then click **Connect** on the Project Dashboard to copy the new `DATABASE_URL`.
-4. Push the value to your deployment platform.
+1. Open the [Neon Console](https://console.neon.tech), select your project, and pick your branch from the **BRANCH** selector in the sidebar.
+2. Under **Postgres database**, select **Roles**. From the role's menu, choose **Reset password**, then click **Reset**.
+3. Click **Connect** in the Console nav to copy the new `DATABASE_URL`.
+4. Update the value on your deploy targets.
 
 </TabItem>
 
@@ -55,39 +53,37 @@ See [Reset a password](/docs/manage/roles#reset-a-password) for details.
 
 ## Option 2: Create a new role and migrate consumers
 
-If you have many consumers and want zero downtime, create a parallel role. Both connection strings keep working while you migrate, then you invalidate the old credentials at the end.
+If you have many consumers and can't update them all at once, create a parallel role. Both connection strings work while you migrate, and you invalidate the old credentials at the end.
+
+The simplest way is to create the role in the Console (**Roles → Add role**), with [`neon roles create`](/docs/cli/roles#create), or with the API. Roles created that way are members of `neon_superuser`, like the default role. A role created in SQL starts with only basic `public` schema privileges, so grant what it needs:
 
 ```sql
--- Create the new role (or use the Console UI under Roles & Databases)
 CREATE ROLE app_v2 WITH LOGIN PASSWORD 'AbC123dEfGhIj';
 
--- Grant it the same access as the old role
-GRANT neon_superuser TO app_v2;
--- Or grant just the specific privileges you want it to have:
--- GRANT CONNECT ON DATABASE neondb TO app_v2;
--- GRANT USAGE ON SCHEMA public TO app_v2;
--- GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_v2;
+GRANT CONNECT ON DATABASE neondb TO app_v2;
+GRANT USAGE ON SCHEMA public TO app_v2;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_v2;
 ```
 
-Create new roles in the Console (**Branches → branch → Roles & Databases → Add role**) to get automatic `neon_superuser` membership, or with [`neon roles create`](/docs/cli/roles#create). See [Manage roles](/docs/manage/roles) for the differences between Console-created and SQL-created roles.
+See [Manage roles](/docs/manage/roles#the-neonsuperuser-role) for the differences between the two.
 
 Then:
 
 1. Build the new `DATABASE_URL` using `app_v2` and its password.
 2. Roll it out to your deploy targets one service at a time.
-3. Monitor connection counts to confirm nothing still uses the old role.
+3. Confirm nothing still connects as the old role, for example with `SELECT count(*) FROM pg_stat_activity WHERE usename = 'old_role_name';` over a few days.
 4. **Reset the old role's password** to invalidate the leaked credentials:
 
    ```sql
    ALTER ROLE old_role_name WITH PASSWORD 'a-strong-random-value-no-one-keeps';
    ```
 
-   This is the step that actually closes the breach. You can also reset it from the Console under **Roles & Databases**. Do not skip this step, even if no service uses the old role anymore.
+   This step is what invalidates the leaked credentials, so don't skip it even when no service uses the old role anymore. You can also reset the password from the Console **Roles** page.
 
 <Admonition type="important" title="Why you usually can't drop the old role">
-In most projects, the original role owns the database, schemas, and tables. `DROP ROLE` fails if the role owns any objects, and during an incident is the wrong time to reassign ownership across your schema. Resetting the password is the realistic path in nearly every case: the role stays as the owner of its objects, but the leaked credentials no longer authenticate.
+In most projects, the original role owns the database, schemas, and tables, and `DROP ROLE` fails while a role owns objects. Resetting the password leaves the role as the owner but stops the leaked credentials from authenticating.
 
-If you do want to remove the role later (outside of incident pressure), you'll need to [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of every object it owns, then drop it. See [Delete a role](/docs/manage/roles#delete-a-role).
+To remove the role later, when you're not in the middle of an incident, [reassign ownership](https://www.postgresql.org/docs/current/sql-reassign-owned.html) of every object it owns, then drop it. See [Delete a role](/docs/manage/roles#delete-a-role).
 </Admonition>
 
-Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx` portion of your URL is the compute endpoint ID. If you need a new hostname, recreate the compute (or the project).
+Rotation doesn't change the hostname. The `ep-xxx` part of your URL is the compute's endpoint ID, so the only way to get a new hostname is to replace the branch's compute (or create a new project). See [Manage computes](/docs/manage/computes).

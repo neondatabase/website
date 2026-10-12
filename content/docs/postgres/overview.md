@@ -12,11 +12,11 @@ enableTableOfContents: true
 
 Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
 
-- **Autoscaling** — compute scales up and down automatically with your workload
-- **Scale to zero** — idle databases suspend so you only pay for what you use
-- **Branching** — create isolated, instant copies of your database for development, testing, and CI
-- **Instant restore** — restore to any point in time within your history window
-- **Read replicas** — scale your app by offloading read traffic to read replicas
+- **Autoscaling.** Compute scales up and down automatically with your workload.
+- **Scale to zero.** Idle databases suspend, so you only pay for what you use.
+- **Branching.** Create isolated, instant copies of your database for development, testing, and CI.
+- **Instant restore.** Restore to any point in time within your history window.
+- **Read replicas.** Scale your app by offloading read traffic to read replicas.
 
 ## Get started
 

@@ -31,6 +31,10 @@ The release spans six areas:
 
 ## SQL/PGQ Property Graph Queries
 
+<Admonition type="important" title="SQL/PGQ has been reverted from PostgreSQL 19">
+On September 7, 2026, the SQL/PGQ property graph query feature was [reverted from PostgreSQL 19](https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h=b1f106c80cbeb18d3a0219994d98a51a6eca8ede) ahead of the final release. `CREATE PROPERTY GRAPH` and `GRAPH_TABLE` will not ship in PostgreSQL 19. The earliest the feature could return is PostgreSQL 20, expected in September 2027. The examples below reflect the implementation that was in the PostgreSQL 19 beta and may change if the feature lands in a future release.
+</Admonition>
+
 PostgreSQL 19 brings native graph query capabilities into core via the SQL:2023 SQL/PGQ standard. Existing relational tables can be exposed as property graphs and traversed with pattern matching syntax, removing the need for a separate graph database for most workloads.
 
 ### [SQL/PGQ: Graph Queries on Existing Tables](/postgresql/postgresql-19/sql-pgq-graph-queries)

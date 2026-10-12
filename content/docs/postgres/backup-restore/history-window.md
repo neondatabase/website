@@ -19,7 +19,7 @@ redirectFrom:
 updatedOn: '2026-08-24T17:32:35.016Z'
 ---
 
-**Instant restore** is Neon's point-in-time recovery feature: you can roll a root branch's database timeline back to an earlier state without copying the whole database. Instant restore (and Time Travel queries, branching from past states, and snapshots) rely on Neon retaining a **history** of changes. The **history window** is the Console control—on **Settings → Instant restore**—that sets how long that change history is kept, which defines how far back instant restore and the other features can reach.
+**Instant restore** is Neon's point-in-time recovery feature: you can roll a root branch's database timeline back to an earlier state without copying the whole database. Instant restore (and Time Travel queries, branching from past states, and snapshots) rely on Neon retaining a **history** of changes. The **history window** is the Console control—on **Settings → Postgres**—that sets how long that change history is kept, which defines how far back instant restore and the other features can reach.
 
 ## Defaults and plan limits
 
@@ -70,9 +70,8 @@ Changing the history window affects **all branches** in your project.
 <TabItem>
 
 1. Select your project.
-2. Go to **Settings** > **Instant restore**.
+2. Go to **Settings** > **Postgres**.
 
-   ![History window configuration](/docs/manage/instant_restore_setting.png)
 
 3. Under **History window**, use the slider to choose how long to keep change history (used for instant restore, Time Travel, and branching from past states). You can open **history storage** from the description on that page for details.
 4. Click **Save**.

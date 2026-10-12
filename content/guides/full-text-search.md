@@ -4,10 +4,10 @@ subtitle: A step-by-step guide describing how to implement full text search with
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-09-17T13:24:36.612Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search allows you to search text content in a more flexible way than using `LIKE`. Full text search also supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
+The `tsvector` type enables you to use full text search on your text content in Postgres. Full text search is more flexible than `LIKE` and supports features like _stemming_, which means searching for the word "run" will match variations like "ran" and "running".
 
 ## Steps
 
@@ -19,7 +19,7 @@ The `tsvector` type enables you to use full text search on your text content in 
 
 ## Set up a table with a `tsvector` column
 
-To set up full text search, you need to create a column of type `tsvector` that will enable full text search. You can run the following `CREATE TABLE` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon. This statement will create a table with a column `searchable` of type `tsvector`.
+To set up full text search, create a column of type `tsvector`. You can run the following `CREATE TABLE` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that's connected to Neon. This statement creates a table with a column `searchable` of type `tsvector`.
 
 ```sql
 CREATE TABLE documents (
@@ -30,7 +30,7 @@ CREATE TABLE documents (
 );
 ```
 
-Next, insert two new rows into the `documents` table. The [to_tsvector()] (https://www.postgresql.org/docs/current/textsearch-controls.html) function takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
+Next, insert two new rows into the `documents` table. The [to_tsvector()](https://www.postgresql.org/docs/current/textsearch-controls.html) function takes in a language and the text content to tokenize. In the following example, the text content is the `title` and `body` columns concatenated together.
 
 ```sql
 INSERT INTO documents (title, body, searchable)
@@ -67,7 +67,7 @@ SELECT
   WHERE searchable @@ to_tsquery('english', 'flavorful');
 ```
 
-Similarly, the following query returns the "PostgeSQL" row, even though the word "searching" does not appear in that row's text content, but "search" does.
+Similarly, the following query returns the "PostgreSQL" row because, although the word "searching" doesn't appear in that row's text content, the word "search" does.
 
 ```sql
 SELECT
@@ -76,7 +76,7 @@ SELECT
   WHERE searchable @@ to_tsquery('english', 'searching');
 ```
 
-The `@@` operator is a special operator which compares the `tsvector` value stored in the `searchable` column with the `tsquery` value provided in the query. The `tsquery` type is different from the `tsvector` type. For example, if you run the following command, Postgres will return the string "searching".
+The `@@` operator compares the `tsvector` value stored in the `searchable` column with the `tsquery` value provided in the query. The `tsquery` type is different from the `tsvector` type. For example, if you run the following command, Postgres will return the string "searching".
 
 ```sql
 SELECT to_tsquery('english', 'searching');
@@ -131,7 +131,7 @@ SELECT
   ORDER BY rank DESC;
 ```
 
-To see how sorting works in practice, insert two more rows as follows. The first row contains 6 tokens that match "search" and "text", so that row should show up first.
+To see how sorting works in practice, insert another row as follows. This row contains 6 tokens that match "search" and "text", so that row should show up first.
 
 ```sql
 INSERT INTO documents (title, body, searchable)
@@ -142,14 +142,14 @@ INSERT INTO documents (title, body, searchable)
   );
 ```
 
-Running the `ts_rank()` `SELECT` statement with these two new rows outputs rows in the following order. "PostgreSQL Text Search" appears first because it has the most occurrences of tokens that match "search" and "text".
+Running the `ts_rank()` `SELECT` statement with this new row outputs rows in the following order. "PostgreSQL Text Search" appears first because it has the most occurrences of tokens that match "search" and "text".
 
 ```sql
-2	PostgreSQL Text Search	0.34941113
+3	PostgreSQL Text Search	0.34941113
 1	PostgreSQL Full-Text Search	0.3054688
 ```
 
-Postgres also has a `ts_rank_cd()` function which uses an alternative ranking algorithm based on _cover density_. `ts_rank_cd()` also takes proximity of matching tokens into consideration, so the "PostgreSQL Text Search" row will rank slightly lower with `ts_rank_cd()` because there's more words between the matching tokens.
+Postgres also has a `ts_rank_cd()` function which uses an alternative ranking algorithm based on _cover density_. `ts_rank_cd()` also takes proximity of matching tokens into consideration, so the "PostgreSQL Text Search" row will rank slightly lower with `ts_rank_cd()` because there are more words between the matching tokens.
 
 ```sql
 SELECT
@@ -163,7 +163,7 @@ SELECT
 
 ```
 1	PostgreSQL Full-Text Search	0.21666667
-2	PostgreSQL Text Search	0.21428572
+3	PostgreSQL Text Search	0.21428572
 ```
 
 ## Create a GIN index
@@ -174,7 +174,7 @@ SELECT
 CREATE INDEX searchable_idx ON documents USING GIN(searchable);
 ```
 
-To test out the GIN index, let's first insert 100 copies of the "mashed potatoes" document. Sometimes Postgres decides to skip using indexes and use a sequential scan instead when a query matches most of the table.
+To test the GIN index, first insert 100 copies of the "mashed potatoes" document. Postgres sometimes skips the index and uses a sequential scan when a table is small or a query matches most of its rows, so the extra rows make an index scan more likely.
 
 ```sql
 DO $$

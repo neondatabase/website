@@ -71,4 +71,4 @@ Visit a site such as [ipinfo.io](https://ipinfo.io/) to obtain your public IP ad
 
 ## Conclusion
 
-Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.com/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.tech/discord) if you’d like to share your feedback and ideas or to hang out.
+Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.com/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.com/discord) if you’d like to share your feedback and ideas or to hang out.

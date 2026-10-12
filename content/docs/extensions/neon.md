@@ -12,7 +12,7 @@ summary: >-
   ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query cache
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-09-10T13:38:23.543Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -26,7 +26,11 @@ The `neon_stat_file_cache` view provides insights into how effectively your Neon
 
 ## What is the compute cache?
 
-Neon uses up to 75% of your compute's RAM for data caching. This cache stores frequently accessed data in the local memory of the Neon compute, which reduces latency and improves query performance by minimizing the need to fetch data from database storage. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), it caches your most recently accessed data. To view the compute cache size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Neon caches frequently accessed data on the compute, which reduces latency and improves query performance by minimizing reads from database storage. This compute cache provides up to 75% of your compute's RAM in capacity and can span two tiers: Postgres [shared buffers](/docs/reference/glossary#shared-buffers), which are held in memory and are the fastest to read, and a larger secondary file cache on the compute's local disk that holds more data but requires disk I/O. A read checks shared buffers first, then the file cache, and only then falls through to database storage. The `neon_stat_file_cache` view reports the file-cache tier. To view the compute cache size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+
+<Admonition type="note" title="Large fixed-size computes">
+On large fixed-size computes (18 CU and above), Neon sets `shared_buffers` to 75% of RAM (backed by huge pages) and disables the secondary file cache, so the entire compute cache is held in memory as shared buffers. The capacity is unchanged; what differs is that hot pages stay in the fastest tier instead of falling through to disk, and how you measure the cache. Because the file cache is off, `neon_stat_file_cache`, [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate), and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set) no longer report it on these computes. Run `SHOW shared_buffers` and `SHOW huge_pages` to confirm the configuration, and use the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph, which works on every compute size. For background, see [Improving Postgres compute cache on Neon](https://neon.com/blog/improving-lakebase-compute-cache-part-1).
+</Admonition>
 
 ## Monitoring compute cache usage
 

@@ -183,4 +183,4 @@ You can start streaming data from your Neon database right now:
 - Create a [Neon project](https://neon.tech/)
 - Create a [Sequin account](https://sequinstream.com/)
 
-If you have any questions, we’ll be happy to help on the [Neon](https://discord.gg/92vNTzKDGp) or [Sequin](https://discord.gg/BV8wFXvNtY) Discord servers.
+If you have any questions, we’ll be happy to help on the [Neon](https://neon.com/discord) or [Sequin](https://discord.gg/BV8wFXvNtY) Discord servers.

@@ -6,10 +6,8 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-10-09T17:51:53.586Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
 
@@ -21,13 +19,13 @@ Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s n
 
 To follow this guide, you need:
 
-- A Neon project in AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions).
 - The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
 - A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
 ## Recommended: enable storage with neon.ts
 
-The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Install the config package, link your local app to the Neon project and branch you want to target, declare buckets under `preview.buckets`, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Install the config package, link your local app to the Neon project and branch you want to target, declare buckets under the top-level `buckets` key, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
 
 ```bash
 npm install @neon/config
@@ -39,14 +37,14 @@ neon branches list  # confirm the linked target branch before deploy
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    buckets: {
-      'my-bucket': {},                          // private (default)
-      'public-assets': { access: 'public_read' },
-    },
+  buckets: {
+    'my-bucket': {},                          // private (default)
+    'public-assets': { access: 'public_read' },
   },
 });
 ```
+
+To declare a bucket without editing `neon.ts` by hand, run `neon config add bucket my-bucket` (add `--access public_read` for anonymous reads). See [`neon config add`](/docs/cli/config#add).
 
 ```bash
 neon deploy          # provisions buckets and writes AWS_* vars to .env.local
@@ -93,11 +91,17 @@ export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2
 export AWS_REGION=us-east-2
 ```
 
-A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in a supported region: AWS US East (Ohio) (`aws-us-east-2`) or AWS Europe (Frankfurt) (`aws-eu-central-1`).
+A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in a supported region: AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), or AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`).
 
 ## Create a credential
 
-Use the Neon API to create a credential with storage access:
+Create a credential with storage access. With the [Neon CLI](/docs/cli/credentials):
+
+```bash
+neon credentials create --scope storage:read --scope storage:write
+```
+
+Or use the Neon API:
 
 ```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -129,7 +133,7 @@ export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 
 ```bash shouldWrap
 # files-sdk uses @aws-sdk/* packages as peer dependencies; install them alongside it
-npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post dotenv
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post dotenv
 ```
 
 ```bash

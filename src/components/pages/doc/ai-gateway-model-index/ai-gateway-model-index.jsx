@@ -6,17 +6,23 @@
 // The llms .md mirror renders the same rows as static grouped tables (see the
 // AiGatewayModelIndex handler in src/scripts/process-md-for-llms.js), so the web
 // table and the agent-facing markdown can never disagree.
+import PropTypes from 'prop-types';
+
 import capabilities from '../../../../app/models/capabilities.json';
 import modelsData from '../../../../app/models.json/data.json';
 
 import ModelIndexClient from './model-index-client';
 import * as modelRows from './model-rows';
 
-const AiGatewayModelIndex = () => {
+const AiGatewayModelIndex = ({ variant = 'docs' }) => {
   const provider = modelsData.neon;
   const rows = modelRows.buildRows(provider, capabilities);
 
-  return <ModelIndexClient rows={rows} />;
+  return <ModelIndexClient rows={rows} variant={variant} />;
+};
+
+AiGatewayModelIndex.propTypes = {
+  variant: PropTypes.oneOf(['docs', 'landing']),
 };
 
 export default AiGatewayModelIndex;

@@ -15,12 +15,10 @@ The agent needs the AI Gateway (and, for the image example, an Object Storage bu
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    aiGateway: true,
-    buckets: { images: {} },
-    functions: {
-      agent: { name: "ai agent", source: "src/index.ts" },
-    },
+  aiGateway: true,
+  buckets: { images: {} },
+  functions: {
+    agent: { name: "ai agent", source: "src/index.ts" },
   },
 });
 ```

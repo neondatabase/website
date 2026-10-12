@@ -61,7 +61,9 @@ import {
   sdkRawOperationNames,
 } from './lib/api-coverage.mjs';
 import { defaultSpecCachePath, loadOpenApiSpec } from './lib/openapi-spec-source.mjs';
+import { EXCLUDED_OPERATION_IDS, withoutExcludedOperations } from './lib/excluded-operations.mjs';
 import { findMissingSpecTags, readTagConfig } from './lib/tag-config.mjs';
+import { toSdkMethodName } from '../src/utils/api-ref.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -300,7 +302,9 @@ async function main() {
         cachePath: defaultSpecCachePath(ROOT),
         log: () => {},
       });
-      specOps = [...operationIdsFromSpec(spec)];
+      // Drop intentionally-hidden ops (scripts/lib/excluded-operations.mjs) so
+      // they are not reported as `specNotDocumented` drift by the weekly job.
+      specOps = withoutExcludedOperations(operationIdsFromSpec(spec));
       // Spec tags with no entry in tag-config.json render with auto-generated
       // display/order in the API reference (the [tag-config] build warning). The
       // build only logs it; surface it here so the weekly issue flags it too.
@@ -310,9 +314,17 @@ async function main() {
     }
   }
 
+  // Ops in EXCLUDED_OPERATION_IDS are dropped from the rendered docs, so don't
+  // report them as raw-layer coverage drift either — mirror the spec-side
+  // withoutExcludedOperations filter. Without this, any SDK that exposes an
+  // excluded op shows up as "raw layer exposes operations the docs do not cover"
+  // noise on every PR run. The exclusion set is operationIds; project it into
+  // SDK-method space to subtract from rawOperations.
+  const excludedMethods = new Set([...EXCLUDED_OPERATION_IDS].map(toSdkMethodName));
+  const rawForCoverage = new Set([...rawOperations].filter((m) => !excludedMethods.has(m)));
   const coverage = computeCoverage({
     documentedOps,
-    rawOps: rawOperations,
+    rawOps: rawForCoverage,
     specOps,
   });
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.14.0",
+  "neonctlVersion": "8.3.5",
   "binaries": [
     "neonctl",
     "neon"
@@ -14,7 +14,7 @@
     },
     "api-key": {
       "type": "string",
-      "describe": "Neon API key, authenticates without `neon auth`",
+      "describe": "Neon API key, authenticates without `neon login`",
       "default": "",
       "defaultText": "NEON_API_KEY environment variable"
     },
@@ -26,7 +26,7 @@
     "config-dir": {
       "type": "string",
       "describe": "Path to config directory",
-      "defaultText": "~/.config/neonctl (or $XDG_CONFIG_HOME/neonctl)"
+      "defaultText": "~/.config/neon (or $XDG_CONFIG_HOME/neon)"
     },
     "context-file": {
       "type": "string",
@@ -245,24 +245,6 @@
         }
       ]
     },
-    "auth": {
-      "aliases": [
-        "login"
-      ],
-      "positionals": [],
-      "options": {
-        "context-file": {
-          "type": "unknown",
-          "hidden": true
-        },
-        "keyring": {
-          "type": "boolean",
-          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
-        }
-      },
-      "commands": {},
-      "describe": "Authenticate"
-    },
     "bootstrap": {
       "aliases": [],
       "positionals": [
@@ -285,7 +267,7 @@
         },
         "default": {
           "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link --yes. Skips those pickers; link --yes still asks for a project unless one is already linked",
+          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link with defaults. If several organizations or projects exist, link prints IDs and exits",
           "default": false,
           "alias": "y"
         },
@@ -306,7 +288,7 @@
         },
         "link": {
           "type": "boolean",
-          "describe": "Run `neon link` after scaffolding. Templates with neon.ts link after install so env pull works; otherwise link runs before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "describe": "Link a Neon project after scaffolding. Templates with neon.ts link after install so env pull works; otherwise linking happens before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
           "default": true
         },
         "list-templates": {
@@ -337,7 +319,7 @@
         },
         {
           "command": "$0 bootstrap my-app --default",
-          "description": "Skip the pickers; link --yes still asks for a project unless one is already linked"
+          "description": "Skip the pickers; if several orgs or projects exist, link prints IDs and exits"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
@@ -752,12 +734,7 @@
         "object": {
           "name": "object",
           "aliases": [],
-          "positionals": [
-            {
-              "name": "sub-command",
-              "required": true
-            }
-          ],
+          "positionals": [],
           "options": {},
           "commands": {
             "delete": {
@@ -917,6 +894,11 @@
         }
       ],
       "options": {
+        "create": {
+          "type": "boolean",
+          "describe": "Create the named branch if it does not exist, then check it out",
+          "default": false
+        },
         "env": {
           "type": "string",
           "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment. Used when this checkout creates a branch from neon.ts; ignored for an existing branch."
@@ -940,8 +922,12 @@
           "description": "Pin a branch by id for an explicit project"
         },
         {
-          "command": "$0 checkout feat --env .env.local",
+          "command": "$0 checkout feat --create --env .env.local",
           "description": "Create feat from neon.ts, loading Function env from .env.local first"
+        },
+        {
+          "command": "$0 checkout dev --create",
+          "description": "Create and pin a missing branch named dev"
         },
         {
           "command": "$0 checkout main",
@@ -994,11 +980,11 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+              "describe": "Path to neon.ts for registration and the bundled env pull. Defaults to the neon.ts in the project directory (next to .neon, or cwd without one)"
             },
             "env-pull": {
               "type": "boolean",
-              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "describe": "Write the same Neon env vars `env pull` would",
               "default": true
             },
             "file": {
@@ -1006,7 +992,12 @@
               "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
             },
             "service": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). Passed as `.option(\"service\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against claim.ts at neonctl 8.3.4.",
               "type": "array",
+              "alias": [
+                "s",
+                "services"
+              ],
               "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
             }
           },
@@ -1074,6 +1065,164 @@
         }
       },
       "commands": {
+        "add": {
+          "name": "add",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "ai-gateway": {
+              "name": "ai-gateway",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable the AI Gateway (aiGateway: true)"
+            },
+            "auth": {
+              "name": "auth",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable Neon Auth (auth: true)"
+            },
+            "bucket": {
+              "name": "bucket",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "name",
+                  "required": true,
+                  "describe": "Bucket name",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "access": {
+                  "type": "string",
+                  "describe": "Anonymous access: private requires credentials, public_read allows anonymous reads",
+                  "default": "private",
+                  "choices": [
+                    "private",
+                    "public_read"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Declare an Object Storage bucket",
+              "examples": [
+                {
+                  "command": "$0 config add bucket assets --access public_read",
+                  "description": "Declares a bucket that allows anonymous reads"
+                }
+              ]
+            },
+            "data-api": {
+              "name": "data-api",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "config": {
+                  "type": "string",
+                  "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
+                },
+                "install": {
+                  "type": "boolean",
+                  "describe": "Install @neon/config and @neon/env when creating neon.ts. On by default; use --no-install to just print the command.",
+                  "default": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Enable the Data API (dataApi: true) and Neon Auth, which the default provider requires"
+            },
+            "function": {
+              "name": "function",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "slug",
+                  "required": true,
+                  "describe": "Function slug: 1-20 lowercase letters and digits",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "name": {
+                  "type": "string",
+                  "describe": "Display name. Defaults to the slug"
+                },
+                "source": {
+                  "type": "string",
+                  "describe": "Handler file, relative to neon.ts. Defaults to functions/<slug>.ts. Created when missing, left alone when it exists"
+                }
+              },
+              "commands": {},
+              "describe": "Declare a Neon Function and create its handler file",
+              "examples": [
+                {
+                  "command": "$0 config add function sendemail",
+                  "description": "Creates functions/sendemail.ts and declares it"
+                },
+                {
+                  "command": "$0 config add function sendemail --source src/send.ts",
+                  "description": "Declares an existing handler"
+                }
+              ]
+            }
+          },
+          "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
+        },
         "apply": {
           "name": "apply",
           "aliases": [],
@@ -1081,12 +1230,12 @@
           "options": {
             "allow-protected": {
               "type": "boolean",
-              "describe": "Auto-confirm applying to a branch marked protected on Neon",
+              "describe": "Apply to a branch marked protected on Neon without asking",
               "default": false
             },
             "config": {
               "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
             },
             "env": {
               "type": "string",
@@ -1099,8 +1248,14 @@
             },
             "update-existing": {
               "type": "boolean",
-              "describe": "Auto-confirm overriding existing remote settings on the branch",
+              "describe": "Override branch settings that differ from neon.ts without asking",
               "default": false
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
+              "default": false,
+              "alias": "y"
             }
           },
           "commands": {},
@@ -1122,7 +1277,11 @@
             },
             "services": {
               "type": "array",
-              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
+              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
+              "alias": [
+                "s",
+                "service"
+              ]
             }
           },
           "commands": {},
@@ -1135,7 +1294,7 @@
           "options": {
             "config": {
               "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
             },
             "env": {
               "type": "string",
@@ -1219,7 +1378,7 @@
         },
         "role-name": {
           "type": "string",
-          "describe": "Role name"
+          "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
         },
         "ssl": {
           "type": "string",
@@ -1250,6 +1409,103 @@
           "description": "Get connection string for the main branch at a specific LSN"
         }
       ]
+    },
+    "credentials": {
+      "aliases": [
+        "credential"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Label for the credential"
+            },
+            "scope": {
+              "type": "string",
+              "describe": "Capability to grant. Repeatable. Values: storage:read, storage:write, ai_gateway:invoke, functions:invoke",
+              "required": true,
+              "choices": [
+                "storage:read",
+                "storage:write",
+                "ai_gateway:invoke",
+                "functions:invoke"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Issue a scoped credential on the branch"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List credentials on the branch"
+        },
+        "reveal": {
+          "name": "reveal",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a credential's api_token and s3_secret_access_key"
+        },
+        "revoke": {
+          "name": "revoke",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Revoke a credential"
+        },
+        "rotate": {
+          "name": "rotate",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "tokenId",
+              "required": true,
+              "describe": "Credential token id (nak_live_<32hex>)",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Replace a credential's secrets in place. The token id is unchanged."
+        }
+      },
+      "describe": "Manage branch credentials",
+      "usage": "$0 credentials <sub-command> [options]"
     },
     "data-api": {
       "aliases": [],
@@ -1502,7 +1758,7 @@
       "options": {
         "allow-protected": {
           "type": "boolean",
-          "describe": "Auto-confirm applying to a branch marked protected on Neon",
+          "describe": "Apply to a branch marked protected on Neon without asking",
           "default": false
         },
         "branch": {
@@ -1511,7 +1767,7 @@
         },
         "config": {
           "type": "string",
-          "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+          "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
         },
         "env": {
           "type": "string",
@@ -1528,8 +1784,14 @@
         },
         "update-existing": {
           "type": "boolean",
-          "describe": "Auto-confirm overriding existing remote settings on the branch",
+          "describe": "Override branch settings that differ from neon.ts without asking",
           "default": false
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
+          "default": false,
+          "alias": "y"
         }
       },
       "commands": {},
@@ -1633,17 +1895,25 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to the neon.ts next to .neon, or in cwd without one)"
+            },
             "env": {
               "type": "array",
               "alias": "e"
             },
             "file": {
               "type": "string",
-              "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+              "describe": "Target .env file to write, relative to cwd. Defaults to an existing .env, otherwise .env.local, in the project directory (next to .neon, or cwd without one). Only Neon variables are updated; other lines are preserved."
             },
             "service": {
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
+              "alias": [
+                "s",
+                "services"
+              ]
             }
           },
           "commands": {},
@@ -1683,6 +1953,31 @@
       },
       "describe": "Manage a branch's Neon env variables locally",
       "usage": "$0 env <sub-command> [options]"
+    },
+    "feedback": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "message": {
+          "type": "string",
+          "describe": "The feedback to send. Do not include passwords, API keys, or connection strings",
+          "required": true
+        },
+        "url": {
+          "type": "string",
+          "describe": "Override the feedback URL",
+          "hidden": true
+        }
+      },
+      "commands": {},
+      "describe": "Send feedback to Neon",
+      "usage": "$0 feedback --message <feedback>",
+      "examples": [
+        {
+          "command": "$0 feedback --message \"The branch docs were unclear\"",
+          "description": ""
+        }
+      ]
     },
     "functions": {
       "aliases": [
@@ -1764,6 +2059,61 @@
           "commands": {},
           "describe": "Deploy a function from a local directory"
         },
+        "domains": {
+          "name": "domains",
+          "aliases": [
+            "domain"
+          ],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Custom domain",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a custom domain from the branch"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List custom domains on the branch"
+            },
+            "register": {
+              "name": "register",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain you already own (for example docs.example.com)",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "slug": {
+                  "type": "string",
+                  "describe": "Function slug this domain should point at",
+                  "required": true
+                }
+              },
+              "commands": {},
+              "describe": "Point a domain you already own at a function on the branch"
+            }
+          },
+          "describe": "Manage custom domains on the branch (beta)"
+        },
         "get": {
           "name": "get",
           "aliases": [],
@@ -1798,22 +2148,147 @@
       "describe": "Manage Neon Functions",
       "usage": "$0 function <sub-command> [options]"
     },
+    "git": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "cleanup": {
+          "name": "cleanup",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "prune-neon-branches": {
+              "type": "boolean",
+              "describe": "Also delete the orphaned Neon branches (never the default or a protected branch).",
+              "default": false
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt before deleting Neon branches.",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Prune git → Neon mappings whose local git branch is gone; optionally delete the orphaned Neon branches"
+        },
+        "install": {
+          "name": "install",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Install a git post-checkout hook that syncs the Neon branch on `git checkout`"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Show the git context, hook state, and current git → Neon mapping"
+        },
+        "sync": {
+          "name": "sync",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Pull the branch's Neon env vars into a local .env after sync. On by default.",
+              "default": true
+            },
+            "pull": {
+              "type": "boolean",
+              "describe": "Run `git pull --ff-only` before syncing so local files (incl. migration files) match the branch before any checkout.after migration runs. Without the flag, prompts when run manually in a TTY and skips in the hook / CI."
+            },
+            "quiet": {
+              "type": "boolean",
+              "describe": "Suppress sync's own routine status lines (git pull result, detached HEAD notice). Warnings and the delegated checkout's own output are unaffected. Used by the installed git hook.",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Check out the Neon branch mapped to the current git branch (run by the hook)"
+        },
+        "uninstall": {
+          "name": "uninstall",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Remove the git post-checkout hook installed by `git install`"
+        }
+      },
+      "describe": "Sync the checked-out Neon branch to your git branch (Preview)",
+      "usage": "$0 git <sub-command> [options]"
+    },
     "init": {
       "aliases": [],
       "positionals": [],
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
+          "describe": "Coding agent to install into (repeatable). Skips agent selection. Values listed below",
           "alias": "a"
         },
+        "agent-setup": {
+          "type": "boolean",
+          "describe": "Install Neon into coding agents. Use --no-agent-setup to skip. Plugin vs skills is inferred from --skill and MCP flags",
+          "default": true
+        },
+        "branch": {
+          "type": "string",
+          "describe": "Forwarded to link: branch name or ID to pin",
+          "alias": "branch-id"
+        },
+        "claimable": {
+          "type": "boolean",
+          "describe": "Create a claimable project that expires in 72 hours unless claimed. Selects Custom",
+          "default": false
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Create neon.ts after linking. Use --no-config to skip. Omitted in Custom: you will be asked"
+        },
         "context-file": {
-          "type": "unknown",
+          "type": "string",
+          "default": ".neon",
           "hidden": true
         },
         "data": {
           "type": "string",
           "hidden": true
+        },
+        "link": {
+          "type": "boolean",
+          "describe": "Link a Neon project during setup. Use --no-link to skip without being asked",
+          "default": true
+        },
+        "mcp-auth": {
+          "type": "string",
+          "describe": "MCP authentication. Selects skills and MCP setup. oauth is neon mcp --oauth",
+          "choices": [
+            "oauth",
+            "api-key"
+          ]
+        },
+        "mcp-config-location": {
+          "type": "string",
+          "describe": "Where to configure the Neon MCP server: global (user config, same as neon mcp) or project (this directory, same as neon mcp --project). Selects skills and MCP setup",
+          "choices": [
+            "global",
+            "project"
+          ]
+        },
+        "mcp-project-scoped": {
+          "type": "boolean",
+          "describe": "Limit MCP tools to the linked project, same as neon mcp --project-id. Selects skills and MCP setup",
+          "default": false
+        },
+        "org-id": {
+          "type": "string",
+          "describe": "Forwarded to link: organization ID to link to"
         },
         "output": {
           "type": "unknown",
@@ -1821,28 +2296,71 @@
           "alias": "o",
           "hidden": true
         },
+        "package-manager": {
+          "type": "string",
+          "describe": "Package manager for neon.ts dependencies. -y uses this without asking. Custom asks only when none is detected",
+          "choices": [
+            "npm",
+            "pnpm",
+            "yarn",
+            "bun"
+          ]
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Forwarded to link: existing project ID to link to"
+        },
+        "project-name": {
+          "type": "string",
+          "describe": "Forwarded to link: name for a new project"
+        },
+        "region-id": {
+          "type": "string",
+          "describe": "Forwarded to link: region for a new project"
+        },
+        "services": {
+          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.3.4.",
+          "type": "array",
+          "alias": [
+            "s",
+            "service"
+          ],
+          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
+        },
+        "skill": {
+          "type": "array",
+          "describe": "Neon skill to install (repeatable). Selects skills setup (not the plugin) and skips the skills picker. With MCP flags, also configures MCP. Values listed below"
+        },
         "yes": {
           "type": "boolean",
-          "describe": "Empty dir: bootstrap --default. Otherwise plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
+          "describe": "Skip prompts. Alone: Recommended (detected agents, link when authenticated, default neon.ts). With --skill, MCP flags, --no-agent-setup, or --claimable: Custom using those flags",
           "default": false,
           "alias": "y"
         }
       },
       "commands": {},
-      "describe": "Set up this directory for Neon: agent tooling, a linked project, and neon.ts. In an empty directory, scaffolds a template first. Skills needs Node.js 22.20 or newer.",
+      "describe": "Set up coding agents and this directory for Neon. -y is Recommended. -y with Custom flags applies those answers without prompts.",
       "usage": "$0 init [options]",
       "examples": [
         {
           "command": "$0 init",
-          "description": "Empty dir: bootstrap (scaffold, agent tooling, link). Existing app: agent tooling, link, config init"
+          "description": "Recommended or Custom setup"
         },
         {
           "command": "$0 init -y",
-          "description": "Same steps, using each child's defaults"
+          "description": "Recommended setup without prompts"
+        },
+        {
+          "command": "$0 init -y --skill neon --mcp-auth oauth --mcp-config-location project",
+          "description": "Custom: those skills and MCP, Recommended defaults for the rest"
+        },
+        {
+          "command": "$0 init --no-agent-setup --claimable",
+          "description": "Skip agent setup and create a claimable project"
         },
         {
           "command": "$0 init --agent cursor --agent claude-code",
-          "description": "Skip agent selection; install the plugin for those agents"
+          "description": "Skip agent selection; install tooling for those agents"
         }
       ]
     },
@@ -1876,7 +2394,7 @@
             },
             "role-name": {
               "type": "string",
-              "describe": "Role name"
+              "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
             }
           },
           "commands": {
@@ -2082,13 +2600,18 @@
         },
         "checks": {
           "type": "boolean",
-          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
+          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id, --project-id, and --branch, and skips env pull.",
           "default": true
         },
         "clear": {
           "type": "boolean",
           "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
           "default": false
+        },
+        "config": {
+          "type": "boolean",
+          "describe": "Offer to create neon.ts after interactive linking. Use --no-config to skip the offer",
+          "default": true
         },
         "env-pull": {
           "type": "boolean",
@@ -2117,7 +2640,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip the \"already linked\" confirmation, and pin the project's default branch when linking a project that has more than one.",
+          "describe": "Skip prompts. Select the only organization and project, or print IDs and the flag to pass. Pin the default branch when several exist. Does not create a project unless --project-name and --region-id are set.",
           "default": false,
           "alias": "y"
         }
@@ -2131,7 +2654,7 @@
           "description": "Forget the current org/project/branch context"
         },
         {
-          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678",
+          "command": "$0 link --no-checks --org-id org-… --project-id polished-snowflake-12345678 --branch main",
           "description": "Write the context offline (no API calls, no verification)"
         },
         {
@@ -2148,7 +2671,59 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY"
+          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY, or -y pins the default"
+        },
+        {
+          "command": "$0 link -y",
+          "description": "Select the only organization and project, or print the --org-id / --project-id to pass"
+        }
+      ]
+    },
+    "login": {
+      "aliases": [
+        "auth"
+      ],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; a later login without the flag stays there. See `neon profile list`."
+        }
+      },
+      "commands": {},
+      "describe": "Sign in with a browser. See --help for API keys and profiles",
+      "examples": [
+        {
+          "command": "$0 login",
+          "description": "Sign in with a browser"
+        },
+        {
+          "command": "$0 login --profile work",
+          "description": "Save a browser session in profile work"
+        },
+        {
+          "command": "$0 projects list --api-key \"$KEY\"",
+          "description": "Use an existing API key for this command"
+        },
+        {
+          "command": "NEON_API_KEY=\"$KEY\" $0 projects list",
+          "description": "Use an existing API key from the environment"
+        },
+        {
+          "command": "$0 profile create agent --api-key \"$KEY\"",
+          "description": "Store an existing API key"
+        },
+        {
+          "command": "echo \"$KEY\" | $0 profile create agent --api-key -",
+          "description": "Store a key read from stdin"
+        },
+        {
+          "command": "$0 profile create ci --mint",
+          "description": "Sign in once in a browser and store a new API key"
         }
       ]
     },
@@ -2368,7 +2943,7 @@
       "examples": [
         {
           "command": "$0 mcp",
-          "description": "Interactive: config location, agents, auth, then confirm"
+          "description": "Interactive: config location, agents, then auth"
         },
         {
           "command": "$0 mcp -y",
@@ -3063,7 +3638,7 @@
       "examples": [
         {
           "command": "$0 plugins",
-          "description": "Interactive: agents, then confirm"
+          "description": "Interactive: pick agents, then install"
         },
         {
           "command": "$0 plugins -y",
@@ -3129,7 +3704,7 @@
           "examples": [
             {
               "command": "$0 profile create work",
-              "description": "Sign in with the browser, like `neon auth --profile work`"
+              "description": "Sign in with the browser, like `neon login --profile work`"
             },
             {
               "command": "$0 profile create ci --mint --org-id org-abc-123",
@@ -3590,7 +4165,7 @@
       "examples": [
         {
           "command": "$0 skills",
-          "description": "Interactive: this directory, agents, skills, then confirm"
+          "description": "Interactive: this directory, then agents, then skills"
         },
         {
           "command": "$0 skills -y",
@@ -3896,6 +4471,177 @@
       "commands": {},
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
+    },
+    "triggers": {
+      "aliases": [
+        "trigger"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression, e.g. '*/15 * * * *'"
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs (default true)"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to (default '/')"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke",
+              "required": true
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)",
+              "required": true
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match (requires --bucket on create)"
+            }
+          },
+          "commands": {},
+          "describe": "Create a trigger that invokes a function on a cron schedule or when an object is created"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a trigger"
+        },
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Disable a trigger without deleting it"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Enable a trigger"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a trigger"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List triggers on the branch"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "Trigger ID",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "bucket": {
+              "type": "string",
+              "describe": "Object-storage bucket to watch (storage_object_created)"
+            },
+            "cron": {
+              "type": "string",
+              "describe": "Five-field UTC cron expression"
+            },
+            "enabled": {
+              "type": "boolean",
+              "describe": "Whether the trigger runs"
+            },
+            "function-path": {
+              "type": "string",
+              "describe": "Path the invocation is sent to"
+            },
+            "function-slug": {
+              "type": "string",
+              "describe": "Slug of the function to invoke"
+            },
+            "name": {
+              "type": "string",
+              "describe": "Trigger name (unique per branch)"
+            },
+            "prefix": {
+              "type": "string",
+              "describe": "Object-key prefix to match"
+            }
+          },
+          "commands": {},
+          "describe": "Update a trigger"
+        }
+      },
+      "describe": "Manage function triggers",
+      "usage": "$0 triggers <sub-command> [options]"
     },
     "vpc": {
       "aliases": [],

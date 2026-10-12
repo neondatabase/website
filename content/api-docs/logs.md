@@ -6,4 +6,4 @@ Give a time window as either `since` or `start_time`, not both; the default wind
 
 You can also query logs from the CLI with [`neon logs`](/docs/cli/logs).
 
-Logs are in beta. See [Monitor logs](/docs/introduction/monitor-logs) for the Console view and retention details.
+See [Monitor logs](/docs/introduction/monitor-logs) for the Console view and retention details.

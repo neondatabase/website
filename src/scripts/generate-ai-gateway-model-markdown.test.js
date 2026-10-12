@@ -35,7 +35,10 @@ describe('AI Gateway model Markdown', () => {
       'Neon AI Gateway provides Gemini 3.5 Flash by Google. The model supports text, image, video, audio, pdf inputs and a 1M context window.'
     );
     expect(markdown).toContain('## Command');
+    expect(markdown).toContain('#### TypeScript');
+    expect(markdown).toContain('#### Python');
     expect(markdown).toContain('model: neon("gemini-3-5-flash")');
+    expect(markdown).toContain('model: "neon/gemini-3-5-flash"');
     expect(markdown).toContain('## Model ID\n\ngemini-3-5-flash');
     expect(markdown).toContain('## Input /M');
     expect(markdown).toContain('## Output /M');

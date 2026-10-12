@@ -54,7 +54,7 @@ Today, we’ll explore two of our newest features, which will provide you with g
 
 Similar to diffs in Git, the Neon schema diff feature compares schemas between the current and past state of the branch. Schema diffs are important to development workflows as they allow you to easily track how your database schema has evolved for better debugging, code review, and cross-team collaboration. For example, you can compare schemas after your peer has merged their PR and applied migrations.
 
-Join us on [Discord](https://neon.tech/discord) and let us know what you think and how you use schema diff in your workflows.
+Join us on [Discord](https://neon.com/discord) and let us know what you think and how you use schema diff in your workflows.
 
 We detailed how Neon storage and ephemeral branches work in the [Point In Time Recovery Under the Hood in Serverless Postgres](https://neon.com/blog/point-in-time-recovery-in-postgres#ephemeral-branches) article. In short, Neon’s storage engine saves Write-Ahead-Log records and can reconstruct a Postgres page at any given timestamp or Log-Sequence Number, allowing for time travel queries.
 
@@ -121,7 +121,7 @@ Protected branches prevent unauthorized applications, users, and roles from acce
 
 The first feature that’s available in this release is “IP Allow”, which restricts database access exclusively to trusted IP addresses. We plan on introducing more rules in the future.
 
-If there are other ways we can protect your database branches, let us know on [Discord](https://neon.tech/discord) or [X](https://x.com/neondatabase).
+If there are other ways we can protect your database branches, let us know on [Discord](https://neon.com/discord) or [X](https://x.com/neondatabase).
 
 You have a limit of 5 protected branches in your project. To set your branch as protected, simply follow these steps:
 
@@ -140,4 +140,4 @@ Check out the documentation for [more details on protected branches](https://neo
 
 # Conclusion
 
-The addition of Schema Diff and Protected Branches to Neon allows developers to easily identify schema changes and safeguard sensitive data, and equipped to build with confidence.<br />[You can try Schema Diff and Protected Branches on Neon](https://console.neon.tech) today. Join us on [Discord](https://neon.tech/discord), and let us know how we can help you build better and ship faster with Neon.
+The addition of Schema Diff and Protected Branches to Neon allows developers to easily identify schema changes and safeguard sensitive data, and equipped to build with confidence.<br />[You can try Schema Diff and Protected Branches on Neon](https://console.neon.tech) today. Join us on [Discord](https://neon.com/discord), and let us know how we can help you build better and ship faster with Neon.

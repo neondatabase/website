@@ -240,7 +240,7 @@ There has never been a better time to develop AI-powered applications. With rapi
 
 If you are building a RAG application, or simply need a Postgres database that scales, Neon with its autoscaling capabilities offers elastic vector search and fast index build with pgvector, making your AI apps fast and scalable to millions of users.
 
-[Start building with Neon for free today](https://console.neon.tech), join us on [Discord](https://neon.tech/discord) and let us know what you’re working on and how we can help you build better apps.
+[Start building with Neon for free today](https://console.neon.tech), join us on [Discord](https://neon.com/discord) and let us know what you’re working on and how we can help you build better apps.
 
 ## Resources
 

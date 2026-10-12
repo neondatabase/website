@@ -115,4 +115,4 @@ You can try this workflow today from any AI-enabled editor that supports [MCP](h
 5. From there, you can give a prompt like, _“add Neon Auth to this app and set up sign-in and sign-up”_
 6. Start your dev server and try the flow
 
-If you have any questions, [ask us on Discord](https://discord.gg/92vNTzKDGp)!
+If you have any questions, [ask us on Discord](https://neon.com/discord)!

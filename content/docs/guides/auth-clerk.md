@@ -12,7 +12,7 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-09-23T21:49:37.670Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -21,8 +21,8 @@ Neon provides [Managed Better Auth](/docs/auth/overview), a managed authenticati
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
-<Admonition type="comingSoon">
-Looking to manage **authorization** along with authentication? [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+<Admonition type="note">
+Looking to manage **authorization** along with authentication? The [Neon Data API](/docs/data-api/custom-authentication-providers) validates Clerk JWTs and enforces Row-Level Security (RLS) policies directly in Postgres, so you can manage access at the database level.
 </Admonition>
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Lakebase Postgres database.
@@ -78,7 +78,7 @@ Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not
 
 ### Retrieve your Neon database connection string
 
-You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button in the Console nav. It should look similar to this:
 
 ```bash
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

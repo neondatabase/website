@@ -7,10 +7,12 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-08-13T12:40:58.627Z'
+updatedOn: '2026-09-25T09:58:44.827Z'
 ---
 
-The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
+The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console.
+
+The Monitoring page is organized into **Postgres**, **Storage**, and **Functions** tabs. This page describes the **Postgres** tab, which holds the metrics graphs below along with the **Active queries**, **Query performance**, **Data API Advisors**, and **System operations** views. The **Storage** and **Functions** tabs show [logs](/docs/introduction/monitor-logs) for Object Storage and Functions.
 
 Your Neon plan defines the range of data you can view.
 
@@ -22,7 +24,7 @@ Your Neon plan defines the range of data you can view.
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 
-The dashboard displays metrics for the selected **Branch** and **Compute**. Use the drop-down menus to view metrics for a different branch or compute. Use the **Refresh** button to update the displayed metrics.
+The dashboard displays metrics for the selected branch and compute. Choose the branch from the project/branch menu at the top of the sidebar, and use the **Compute** drop-down on the page to switch computes. Use the **Refresh** button to update the displayed metrics.
 
 If your compute was idle or there has not been much activity, graphs may display this message: `There is no data to display at the moment`. In this case, try selecting a different time period or returning later after more usage data has been collected.
 

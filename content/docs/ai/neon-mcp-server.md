@@ -47,7 +47,7 @@ Use the generator to build an MCP config for your editor and auth method, includ
 
 The Neon MCP server is an official Claude connector, so you don't need a custom connector URL. To add it in [Claude.ai](https://claude.ai) or Claude Desktop:
 
-1. Open **Settings** from your profile menu (bottom-left of the sidebar).
+1. Open **Settings** from the profile menu in the top-right of the console.
 2. Select **Connectors** (sometimes shown under **Customize > Connectors**).
 3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
 4. Authorize access to your Neon account.

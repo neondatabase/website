@@ -8,14 +8,12 @@ summary: >-
   own auth UI rather than dropping in ready-made components. Registered users are
   automatically synced to the `neon_auth.user` table in your database.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:21:18.858Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components
   - /docs/auth/quick-start/react-router-components/
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 
@@ -26,7 +24,7 @@ redirectFrom:
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Auth** page in your project dashboard and click **Enable Auth**.
+In the Neon Console, open the **Better Auth** page and click **Enable Auth**.
 
 You can then find your Auth **Base URL** on the Configuration tab. Copy this URL - you'll need it in the next step.
 

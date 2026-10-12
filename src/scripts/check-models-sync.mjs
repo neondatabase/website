@@ -36,7 +36,7 @@ const LOCAL_DATA_PATH = path.resolve(DIRNAME, '../app/models.json/data.json');
 
 const UPSTREAM_PR_HINT =
   'Open a PR on anomalyco/models.dev updating providers/neon/ to match. See the ' +
-  '`neon-ai-gateway-model-changes` skill for the entry format.';
+  '`add-model-to-ai-gateway` skill for the entry format.';
 
 async function fetchJson(url) {
   const res = await fetch(url, { headers: { accept: 'application/json' } });
@@ -145,9 +145,15 @@ async function main() {
   console.log(
     `  mirror:          ${mirror.source} — ${Object.keys(mirror.models).length} models\n`
   );
+  if (drift.unreleased.length) {
+    console.log(`Not compared, released: false (${drift.unreleased.length}):`);
+    drift.unreleased.forEach((id) => console.log(`  ~ ${id}`));
+    console.log('');
+  }
 
   if (drift.inSync) {
-    console.log(`[OK] models.dev mirrors all ${Object.keys(website.models).length} models.`);
+    const compared = Object.keys(website.models).length - drift.unreleased.length;
+    console.log(`[OK] models.dev mirrors all ${compared} released models.`);
     process.exit(0);
   }
 

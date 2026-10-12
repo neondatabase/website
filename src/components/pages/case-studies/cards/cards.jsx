@@ -22,13 +22,17 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
         <div
           className={cn('relative z-10 flex size-full flex-col', 'items-center justify-center p-6')}
         >
-          <Image
-            className="h-8 w-fit"
-            src={logo.mediaItemUrl}
-            alt={title}
-            width={logo.mediaDetails.width}
-            height={logo.mediaDetails.height}
-          />
+          {logo?.mediaItemUrl ? (
+            <Image
+              className="h-8 w-fit"
+              src={logo.mediaItemUrl}
+              alt={title}
+              width={logo.mediaDetails.width}
+              height={logo.mediaDetails.height}
+            />
+          ) : (
+            <span className="text-2xl font-medium tracking-tight text-white">{title}</span>
+          )}
         </div>
       </Link>
     </li>

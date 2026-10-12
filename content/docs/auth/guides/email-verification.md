@@ -9,10 +9,8 @@ summary: >-
   resent; verification can be configured as required or optional in the Neon
   Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Email verification ensures users own the email addresses they register with. The application name shown in these emails is configurable per branch. See [Application name](/docs/auth/production-checklist#application-name).
 
@@ -31,7 +29,7 @@ Verification links require a [custom email provider](/docs/auth/production-check
 
 <TabItem>
 
-In your project's **Settings** → **Auth** page, enable **Sign-up with Email** and **Verify at Sign-up**. Choose your verification method.
+In your project's **Settings** → **Better Auth** page, enable **Sign-up with Email** and **Verify at Sign-up**. Choose your verification method.
 
 ![Email verification settings in Neon Console](/docs/auth/email-verification-settings.png)
 

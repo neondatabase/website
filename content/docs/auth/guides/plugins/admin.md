@@ -10,10 +10,8 @@ summary: >-
   Admin operations require an authenticated session with HTTP-only cookies, and
   impersonation sessions are capped at 1 hour.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-16T15:38:57.808Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Admin plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Admin plugin.
 

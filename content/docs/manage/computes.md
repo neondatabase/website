@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-26T13:16:52.511Z'
+updatedOn: '2026-09-25T09:40:59.046Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -38,7 +38,7 @@ A compute is associated with a branch.
 
 <TabItem>
 
-In the Neon Console, select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
+In the Neon Console, select your branch from the project/branch menu at the top of the sidebar, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
 
 Compute details shown on the **Computes** tab include:
 
@@ -179,7 +179,7 @@ You can only create a single primary read-write compute for a branch that does n
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
 1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
@@ -275,7 +275,7 @@ You can edit a compute to change the [compute size](#compute-size-and-autoscalin
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Select **Edit** for the compute you want to edit.
 
@@ -440,6 +440,10 @@ The following table outlines the RAM, compute cache size (75% of RAM), and the `
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
+<Admonition type="note" title="Caching on large fixed-size computes">
+On fixed-size computes of 18 CU and above, Neon delivers this cache as Postgres `shared_buffers` set to 75% of RAM and backed by huge pages, and disables the secondary file cache that smaller and autoscaling computes rely on. This keeps hot data in memory rather than on the compute's local disk. Confirm the configuration with `SHOW shared_buffers` and `SHOW huge_pages`, and measure cache efficiency with the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph. See [What is the compute cache?](/docs/extensions/neon#what-is-the-compute-cache) for details.
+</Admonition>
+
 | Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
 | :---------------- | :------- | :---------------------- | :-------------- |
 | 0.25              | 1        | 0.75                    | 104             |
@@ -528,7 +532,7 @@ Restarting a compute interrupts any connections currently using the compute. To 
 
 <TabItem>
 
-Use the **Restart compute** option in the Neon Console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
+Use the **Restart compute** option in the Neon Console. Select your branch from the project/branch menu at the top of the sidebar, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
 
 ![Restart a compute in the console](/docs/manage/restart_compute.png)
 
@@ -573,7 +577,7 @@ A branch can have a single read-write compute and multiple read replica computes
 
 <TabItem>
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Edit** for the compute you want to delete.
 1. At the bottom of the **Edit compute** drawer, click **Delete compute**.

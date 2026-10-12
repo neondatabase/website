@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
@@ -63,7 +63,7 @@ You can also query the databases in a branch from the Neon SQL Editor. For instr
 To connect to your branch:
 
 1. In the Neon Console, select your project.
-2. Click **Connect** on the **Project Dashboard**, and select your `recovery_branch`, the database, and the role you want to connect with.
+2. Click **Connect** in the Console nav, and select your `recovery_branch`, the database, and the role you want to connect with.
    ![Connection details widget recovery branch](/docs/guides/data_recovery_connection_details.png)
 3. Copy the connection string. A connection string includes your role name, password, compute hostname, and database name.
 4. Connect with `psql`.

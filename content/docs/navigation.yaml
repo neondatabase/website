@@ -19,6 +19,8 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
+        - title: Connect your app
+          slug: connect/connect-hub
         - title: Tour the Neon backend
           slug: get-started/backend-overview
         - title: Tour the Neon Console
@@ -213,6 +215,24 @@
         - title: Sample data
           slug: import/import-sample-data
 
+- nav: Concepts
+  slug: concepts/the-object-model
+  title: Concepts
+  icon: glossary
+  items:
+    - section: Backend primitives
+      icon: book
+      items:
+        - title: The object model
+          slug: concepts/the-object-model
+        - title: Branch your backend
+          slug: concepts/branch-your-backend
+    - section: Backend behavior
+      icon: settings
+      items:
+        - title: Credentials & access
+          slug: concepts/credentials-access
+
 - nav: Products
   title: Products
   icon: features
@@ -237,6 +257,9 @@
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
                   slug: serverless/serverless-driver
+                  items:
+                    - title: Configuration
+                      slug: serverless/serverless-driver-configuration
                 - title: Neon SQL Editor
                   slug: get-started/query-with-neon-sql-editor
                 - title: psql
@@ -263,6 +286,359 @@
                   slug: connect/connection-errors
                 - title: Latency and timeouts
                   slug: connect/connection-latency
+        - section: Extensions & guides
+          icon: extension
+          items:
+            - title: Postgres extensions
+              slug: extensions/pg-extensions
+              icon: extension
+              items:
+                - title: Extension explorer
+                  slug: extensions/extension-explorer
+                - title: anon
+                  slug: extensions/postgresql-anonymizer
+                - title: btree_gin
+                  slug: extensions/btree_gin
+                - title: btree_gist
+                  slug: extensions/btree_gist
+                - title: citext
+                  slug: extensions/citext
+                - title: cube
+                  slug: extensions/cube
+                - title: dblink
+                  slug: extensions/dblink
+                - title: dict_int
+                  slug: extensions/dict_int
+                - title: earthdistance
+                  slug: extensions/earthdistance
+                - title: fuzzystrmatch
+                  slug: extensions/fuzzystrmatch
+                - title: hstore
+                  slug: extensions/hstore
+                - title: intarray
+                  slug: extensions/intarray
+                - title: lakebase_text
+                  slug: extensions/lakebase-text
+                - title: lakebase_tokenizer
+                  slug: extensions/lakebase-tokenizer
+                - title: lakebase_vector
+                  slug: extensions/lakebase-vector
+                - title: ltree
+                  slug: extensions/ltree
+                - title: neon
+                  slug: extensions/neon
+                - title: neon_utils
+                  slug: extensions/neon-utils
+                - title: online_advisor
+                  slug: extensions/online_advisor
+                - title: pgcrypto
+                  slug: extensions/pgcrypto
+                - title: pgvector
+                  slug: extensions/pgvector
+                - title: pgrag
+                  slug: extensions/pgrag
+                  tag: deprecated
+                  tagTheme: gray
+                - title: pg_cron
+                  slug: extensions/pg_cron
+                - title: pg_graphql
+                  slug: extensions/pg_graphql
+                - title: pg_mooncake
+                  slug: extensions/pg_mooncake
+                - title: pg_partman
+                  slug: extensions/pg_partman
+                - title: pg_prewarm
+                  slug: extensions/pg_prewarm
+                - title: pg_session_jwt
+                  slug: extensions/pg_session_jwt
+                - title: pg_stat_statements
+                  slug: extensions/pg_stat_statements
+                - title: pg_repack
+                  slug: extensions/pg_repack
+                - title: pg_search
+                  slug: extensions/pg_search
+                  tag: deprecated
+                  tagTheme: gray
+                - title: pg_tiktoken
+                  slug: extensions/pg_tiktoken
+                - title: pg_trgm
+                  slug: extensions/pg_trgm
+                - title: pg_uuidv7
+                  slug: extensions/pg_uuidv7
+                - title: pgrowlocks
+                  slug: extensions/pgrowlocks
+                - title: pgstattuple
+                  slug: extensions/pgstattuple
+                - title: plv8
+                  slug: extensions/plv8
+                - title: postgis
+                  slug: extensions/postgis
+                - title: postgis-related
+                  slug: extensions/postgis-related-extensions
+                - title: postgres_fdw
+                  slug: extensions/postgres_fdw
+                - title: tablefunc
+                  slug: extensions/tablefunc
+                - title: timescaledb
+                  slug: extensions/timescaledb
+                - title: unaccent
+                  slug: extensions/unaccent
+                - title: uuid-ossp
+                  slug: extensions/uuid-ossp
+                - title: wal2json
+                  slug: extensions/wal2json
+                - title: xml2
+                  slug: extensions/xml2
+                - section: AI & Search
+                  items:
+                    - title: AI App Starter Kit
+                      icon: sparks
+                      slug: ai/ai-intro
+                      items:
+                        - section: Core concepts
+                          icon: info
+                          items:
+                            - title: Introduction
+                              slug: ai/ai-intro
+                            - title: Embeddings
+                              slug: ai/ai-concepts
+                            - title: Pgvector
+                              slug: extensions/pgvector
+                        - section: AI frameworks
+                          icon: frameworks
+                          items:
+                            - title: LangChain
+                              slug: ai/langchain
+                            - title: LlamaIndex
+                              slug: ai/llamaindex
+                            - title: Semantic Kernel
+                              slug: ai/semantic-kernel
+                            - title: Inngest
+                              slug: ai/inngest
+                        - section: Optimize & scale
+                          icon: features
+                          items:
+                            - title: Optimize vector search
+                              slug: ai/ai-vector-search-optimization
+                            - title: Scale with Neon
+                              slug: ai/ai-scale-with-neon
+                        - title: Google Colab
+                          slug: ai/ai-google-colab
+                    - title: Lakebase Search
+                      icon: sparks
+                      slug: ai/lakebase-search
+                      items:
+                        - title: Overview
+                          slug: ai/lakebase-search
+                        - title: Get started
+                          slug: ai/lakebase-search-get-started
+                        - title: Migrate from pg_search
+                          slug: extensions/migrate-pg-search-to-lakebase-text
+            - title: Postgres guides
+              slug: postgresql/introduction
+              icon: book
+              items:
+                - title: Data types
+                  slug: data-types/introduction
+                  items:
+                    - title: Array
+                      slug: data-types/array
+                    - title: Boolean
+                      slug: data-types/boolean
+                    - title: Date and time
+                      slug: data-types/date-and-time
+                    - title: Character
+                      slug: data-types/character
+                    - title: JSON
+                      slug: data-types/json
+                    - title: Decimal
+                      slug: data-types/decimal
+                    - title: Floating point
+                      slug: data-types/floating-point
+                    - title: Integer
+                      slug: data-types/integer
+                    - title: Tsvector
+                      slug: data-types/tsvector
+                    - title: UUID
+                      slug: data-types/uuid
+                - title: Functions
+                  slug: functions/introduction
+                  items:
+                    - title: Aggregate functions
+                      slug: functions/array_agg
+                      items:
+                        - title: array_agg
+                          slug: functions/array_agg
+                        - title: avg
+                          slug: functions/avg
+                        - title: count
+                          slug: functions/count
+                        - title: max
+                          slug: functions/max
+                        - title: sum
+                          slug: functions/sum
+                    - title: Array functions
+                      slug: functions/array_length
+                      items:
+                        - title: array_length
+                          slug: functions/array_length
+                    - title: Date / Time functions
+                      slug: functions/age
+                      items:
+                        - title: age
+                          slug: functions/age
+                        - title: current_timestamp
+                          slug: functions/current_timestamp
+                        - title: date_trunc
+                          slug: functions/date_trunc
+                        - title: extract
+                          slug: functions/extract
+                        - title: now
+                          slug: functions/now
+                    - title: JSON functions
+                      slug: functions/array_to_json
+                      items:
+                        - title: array_to_json
+                          slug: functions/array_to_json
+                        - title: json
+                          slug: functions/json
+                        - title: json_agg
+                          slug: functions/json_agg
+                        - title: json_array_elements
+                          slug: functions/json_array_elements
+                        - title: json_build_object
+                          slug: functions/json_build_object
+                        - title: json_each
+                          slug: functions/json_each
+                        - title: json_exists
+                          slug: functions/json_exists
+                        - title: json_extract_path
+                          slug: functions/json_extract_path
+                        - title: json_extract_path_text
+                          slug: functions/json_extract_path_text
+                        - title: json_object
+                          slug: functions/json_object
+                        - title: json_populate_record
+                          slug: functions/json_populate_record
+                        - title: json_query
+                          slug: functions/json_query
+                        - title: json_scalar
+                          slug: functions/json_scalar
+                        - title: json_serialize
+                          slug: functions/json_serialize
+                        - title: json_table
+                          slug: functions/json_table
+                        - title: json_to_record
+                          slug: functions/json_to_record
+                        - title: json_value
+                          slug: functions/json_value
+                        - title: jsonb_array_elements
+                          slug: functions/jsonb_array_elements
+                        - title: jsonb_each
+                          slug: functions/jsonb_each
+                        - title: jsonb_extract_path
+                          slug: functions/jsonb_extract_path
+                        - title: jsonb_extract_path_text
+                          slug: functions/jsonb_extract_path_text
+                        - title: jsonb_object
+                          slug: functions/jsonb_object
+                        - title: jsonb_populate_record
+                          slug: functions/jsonb_populate_record
+                        - title: jsonb_to_record
+                          slug: functions/jsonb_to_record
+                    - title: Window functions
+                      slug: functions/dense_rank
+                      items:
+                        - title: dense_rank
+                          slug: functions/dense_rank
+                        - title: lag
+                          slug: functions/window-lag
+                        - title: lead
+                          slug: functions/window-lead
+                        - title: rank
+                          slug: functions/window-rank
+                    - title: String functions
+                      slug: functions/concat
+                      items:
+                        - title: concat
+                          slug: functions/concat
+                        - title: substring
+                          slug: functions/substring
+                        - title: lower
+                          slug: functions/lower
+                        - title: regexp_match
+                          slug: functions/regexp_match
+                        - title: regexp_replace
+                          slug: functions/regexp_replace
+                        - title: trim
+                          slug: functions/trim
+                    - title: Math functions
+                      slug: functions/math-abs
+                      items:
+                        - title: abs
+                          slug: functions/math-abs
+                        - title: random
+                          slug: functions/math-random
+                        - title: round
+                          slug: functions/math-round
+                - title: Indexes
+                  slug: postgresql/index-types
+                - title: Optimize queries
+                  slug: postgresql/query-performance
+                - title: Query reference
+                  slug: postgresql/query-reference
+                - title: Postgres RLS
+                  icon: lock
+                  slug: guides/row-level-security
+                  items:
+                    - title: RLS in Neon
+                      slug: guides/row-level-security
+                    - title: Simplify RLS with Drizzle
+                      slug: guides/rls-drizzle
+                    - title: Run RLS queries with Drizzle ORM
+                      slug: guides/rls-query-execution
+                - title: Version support
+                  slug: postgresql/postgres-version-support
+                  icon: version
+                - title: Upgrade
+                  slug: postgresql/postgres-upgrade
+                  icon: upgrade
+                - title: Compatibility
+                  slug: reference/compatibility
+                  icon: info
+        - section: Data API
+          icon: api
+          items:
+            - title: Overview
+              slug: data-api/overview
+            - title: Get started
+              slug: data-api/get-started
+            - title: Guides
+              items:
+                - title: Access control & security
+                  slug: data-api/access-control
+                - title: Secure your app with RLS
+                  slug: guides/rls-tutorial
+                - title: Custom authentication providers
+                  slug: data-api/custom-authentication-providers
+                - title: Data API Advisors
+                  slug: data-api/database-advisor
+            - title: Tools
+              items:
+                - title: Auth and Data API SDK
+                  slug: reference/javascript-sdk
+                - title: SQL to REST API Translator
+                  slug: data-api/sql-to-rest
+                - title: Generate TypeScript types
+                  slug: data-api/generate-types
+            - title: Using the Data API
+              items:
+                - title: Building a note-taking app
+                  slug: data-api/demo
+                - title: Managing the Data API
+                  slug: data-api/manage
+                - title: Troubleshooting
+                  slug: data-api/troubleshooting
         - section: Compute & scaling
           icon: features
           items:
@@ -331,8 +707,6 @@
                   slug: guides/reset-from-parent
             - title: Automate & workflows
               items:
-                - title: Get started with branching
-                  slug: guides/branching-intro
                 - title: Branching workflows
                   slug: guides/branching-test-queries
                 - title: Branching with the CLI
@@ -377,317 +751,6 @@
                   slug: manage/backups-aws-s3-backup-part-1
                 - title: Part 2 - Automate nightly backups
                   slug: manage/backups-aws-s3-backup-part-2
-        - title: Postgres guides
-          slug: postgresql/introduction
-          icon: book
-          items:
-            - title: Data types
-              slug: data-types/introduction
-              items:
-                - title: Array
-                  slug: data-types/array
-                - title: Boolean
-                  slug: data-types/boolean
-                - title: Date and time
-                  slug: data-types/date-and-time
-                - title: Character
-                  slug: data-types/character
-                - title: JSON
-                  slug: data-types/json
-                - title: Decimal
-                  slug: data-types/decimal
-                - title: Floating point
-                  slug: data-types/floating-point
-                - title: Integer
-                  slug: data-types/integer
-                - title: Tsvector
-                  slug: data-types/tsvector
-                - title: UUID
-                  slug: data-types/uuid
-            - title: Functions
-              slug: functions/introduction
-              items:
-                - title: Aggregate functions
-                  slug: functions/array_agg
-                  items:
-                    - title: array_agg
-                      slug: functions/array_agg
-                    - title: avg
-                      slug: functions/avg
-                    - title: count
-                      slug: functions/count
-                    - title: max
-                      slug: functions/max
-                    - title: sum
-                      slug: functions/sum
-                - title: Array functions
-                  slug: functions/array_length
-                  items:
-                    - title: array_length
-                      slug: functions/array_length
-                - title: Date / Time functions
-                  slug: functions/age
-                  items:
-                    - title: age
-                      slug: functions/age
-                    - title: current_timestamp
-                      slug: functions/current_timestamp
-                    - title: date_trunc
-                      slug: functions/date_trunc
-                    - title: extract
-                      slug: functions/extract
-                    - title: now
-                      slug: functions/now
-                - title: JSON functions
-                  slug: functions/array_to_json
-                  items:
-                    - title: array_to_json
-                      slug: functions/array_to_json
-                    - title: json
-                      slug: functions/json
-                    - title: json_agg
-                      slug: functions/json_agg
-                    - title: json_array_elements
-                      slug: functions/json_array_elements
-                    - title: json_build_object
-                      slug: functions/json_build_object
-                    - title: json_each
-                      slug: functions/json_each
-                    - title: json_exists
-                      slug: functions/json_exists
-                    - title: json_extract_path
-                      slug: functions/json_extract_path
-                    - title: json_extract_path_text
-                      slug: functions/json_extract_path_text
-                    - title: json_object
-                      slug: functions/json_object
-                    - title: json_populate_record
-                      slug: functions/json_populate_record
-                    - title: json_query
-                      slug: functions/json_query
-                    - title: json_scalar
-                      slug: functions/json_scalar
-                    - title: json_serialize
-                      slug: functions/json_serialize
-                    - title: json_table
-                      slug: functions/json_table
-                    - title: json_to_record
-                      slug: functions/json_to_record
-                    - title: json_value
-                      slug: functions/json_value
-                    - title: jsonb_array_elements
-                      slug: functions/jsonb_array_elements
-                    - title: jsonb_each
-                      slug: functions/jsonb_each
-                    - title: jsonb_extract_path
-                      slug: functions/jsonb_extract_path
-                    - title: jsonb_extract_path_text
-                      slug: functions/jsonb_extract_path_text
-                    - title: jsonb_object
-                      slug: functions/jsonb_object
-                    - title: jsonb_populate_record
-                      slug: functions/jsonb_populate_record
-                    - title: jsonb_to_record
-                      slug: functions/jsonb_to_record
-                - title: Window functions
-                  slug: functions/dense_rank
-                  items:
-                    - title: dense_rank
-                      slug: functions/dense_rank
-                    - title: lag
-                      slug: functions/window-lag
-                    - title: lead
-                      slug: functions/window-lead
-                    - title: rank
-                      slug: functions/window-rank
-                - title: String functions
-                  slug: functions/concat
-                  items:
-                    - title: concat
-                      slug: functions/concat
-                    - title: substring
-                      slug: functions/substring
-                    - title: lower
-                      slug: functions/lower
-                    - title: regexp_match
-                      slug: functions/regexp_match
-                    - title: regexp_replace
-                      slug: functions/regexp_replace
-                    - title: trim
-                      slug: functions/trim
-                - title: Math functions
-                  slug: functions/math-abs
-                  items:
-                    - title: abs
-                      slug: functions/math-abs
-                    - title: random
-                      slug: functions/math-random
-                    - title: round
-                      slug: functions/math-round
-            - title: Indexes
-              slug: postgresql/index-types
-            - title: Optimize queries
-              slug: postgresql/query-performance
-            - title: Query reference
-              slug: postgresql/query-reference
-            - title: Postgres RLS
-              icon: lock
-              slug: guides/row-level-security
-              items:
-                - title: RLS in Neon
-                  slug: guides/row-level-security
-                - title: Simplify RLS with Drizzle
-                  slug: guides/rls-drizzle
-                - title: Run RLS queries with Drizzle ORM
-                  slug: guides/rls-query-execution
-            - title: Version support
-              slug: postgresql/postgres-version-policy
-              icon: version
-            - title: Upgrade
-              slug: postgresql/postgres-upgrade
-              icon: upgrade
-            - title: Compatibility
-              slug: reference/compatibility
-              icon: info
-        - title: Extensions
-          slug: extensions/pg-extensions
-          icon: extension
-          items:
-            - title: Extension explorer
-              slug: extensions/extension-explorer
-            - title: anon
-              slug: extensions/postgresql-anonymizer
-            - title: btree_gin
-              slug: extensions/btree_gin
-            - title: btree_gist
-              slug: extensions/btree_gist
-            - title: citext
-              slug: extensions/citext
-            - title: cube
-              slug: extensions/cube
-            - title: dblink
-              slug: extensions/dblink
-            - title: dict_int
-              slug: extensions/dict_int
-            - title: earthdistance
-              slug: extensions/earthdistance
-            - title: fuzzystrmatch
-              slug: extensions/fuzzystrmatch
-            - title: hstore
-              slug: extensions/hstore
-            - title: intarray
-              slug: extensions/intarray
-            - title: lakebase_text
-              slug: extensions/lakebase-text
-            - title: lakebase_vector
-              slug: extensions/lakebase-vector
-            - title: ltree
-              slug: extensions/ltree
-            - title: neon
-              slug: extensions/neon
-            - title: neon_utils
-              slug: extensions/neon-utils
-            - title: online_advisor
-              slug: extensions/online_advisor
-            - title: pgcrypto
-              slug: extensions/pgcrypto
-            - title: pgvector
-              slug: extensions/pgvector
-            - title: pgrag
-              slug: extensions/pgrag
-            - title: pg_cron
-              slug: extensions/pg_cron
-            - title: pg_graphql
-              slug: extensions/pg_graphql
-            - title: pg_mooncake
-              slug: extensions/pg_mooncake
-            - title: pg_partman
-              slug: extensions/pg_partman
-            - title: pg_prewarm
-              slug: extensions/pg_prewarm
-            - title: pg_session_jwt
-              slug: extensions/pg_session_jwt
-            - title: pg_stat_statements
-              slug: extensions/pg_stat_statements
-            - title: pg_repack
-              slug: extensions/pg_repack
-            - title: pg_search
-              slug: extensions/pg_search
-            - title: pg_tiktoken
-              slug: extensions/pg_tiktoken
-            - title: pg_trgm
-              slug: extensions/pg_trgm
-            - title: pg_uuidv7
-              slug: extensions/pg_uuidv7
-            - title: pgrowlocks
-              slug: extensions/pgrowlocks
-            - title: pgstattuple
-              slug: extensions/pgstattuple
-            - title: plv8
-              slug: extensions/plv8
-            - title: postgis
-              slug: extensions/postgis
-            - title: postgis-related
-              slug: extensions/postgis-related-extensions
-            - title: postgres_fdw
-              slug: extensions/postgres_fdw
-            - title: tablefunc
-              slug: extensions/tablefunc
-            - title: timescaledb
-              slug: extensions/timescaledb
-            - title: unaccent
-              slug: extensions/unaccent
-            - title: uuid-ossp
-              slug: extensions/uuid-ossp
-            - title: wal2json
-              slug: extensions/wal2json
-            - title: xml2
-              slug: extensions/xml2
-            - section: AI & Search
-              items:
-                - title: AI App Starter Kit
-                  icon: sparks
-                  slug: ai/ai-intro
-                  items:
-                    - section: Core concepts
-                      icon: info
-                      items:
-                        - title: Introduction
-                          slug: ai/ai-intro
-                        - title: Embeddings
-                          slug: ai/ai-concepts
-                        - title: Pgvector
-                          slug: extensions/pgvector
-                    - section: AI frameworks
-                      icon: frameworks
-                      items:
-                        - title: LangChain
-                          slug: ai/langchain
-                        - title: LlamaIndex
-                          slug: ai/llamaindex
-                        - title: Semantic Kernel
-                          slug: ai/semantic-kernel
-                        - title: Inngest
-                          slug: ai/inngest
-                    - section: Optimize & scale
-                      icon: features
-                      items:
-                        - title: Optimize vector search
-                          slug: ai/ai-vector-search-optimization
-                        - title: Scale with Neon
-                          slug: ai/ai-scale-with-neon
-                    - title: Google Colab
-                      slug: ai/ai-google-colab
-                - title: Lakebase Search
-                  icon: sparks
-                  slug: ai/lakebase-search
-                  items:
-                    - title: Overview
-                      slug: ai/lakebase-search
-                    - title: Get started
-                      slug: ai/lakebase-search-get-started
-                    - title: Migrate from pg_search
-                      slug: extensions/migrate-pg-search-to-lakebase-text
     - title: Auth
       icon: auth
       slug: auth/overview
@@ -776,42 +839,6 @@
                   slug: auth/legacy/overview
                 - title: Database integration
                   slug: auth/legacy/database-integration
-    - title: Data API
-      icon: api
-      slug: data-api/overview
-      items:
-        - section: Introduction
-          items:
-            - title: Overview
-              slug: data-api/overview
-            - title: Get started
-              slug: data-api/get-started
-        - section: Guides
-          items:
-            - title: Access control & security
-              slug: data-api/access-control
-            - title: Secure your app with RLS
-              slug: guides/rls-tutorial
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
-            - title: Data API Advisors
-              slug: data-api/database-advisor
-        - section: Tools
-          items:
-            - title: Auth and Data API SDK
-              slug: reference/javascript-sdk
-            - title: SQL to REST API Translator
-              slug: data-api/sql-to-rest
-            - title: Generate TypeScript types
-              slug: data-api/generate-types
-        - section: Using the Data API
-          items:
-            - title: Building a note-taking app
-              slug: data-api/demo
-            - title: Managing the Data API
-              slug: data-api/manage
-            - title: Troubleshooting
-              slug: data-api/troubleshooting
     - title: Neon Functions
       icon: features
       slug: compute/functions/overview
@@ -822,12 +849,22 @@
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Custom domains
+          slug: compute/functions/custom-domains
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
+        - section: Function Triggers
+          items:
+            - title: Overview
+              slug: compute/functions/triggers/overview
+            - title: Schedule a function
+              slug: compute/functions/triggers/schedule
+            - title: Trigger on object upload
+              slug: compute/functions/triggers/object-storage
         - section: Use cases
           items:
             - title: AI agents
@@ -890,10 +927,14 @@
               slug: ai-gateway/get-started
             - title: Models
               slug: ai-gateway/models
+            - title: Prepaid credits
+              slug: ai-gateway/prepaid-credits
         - section: APIs
           items:
             - title: Chat completions
               slug: ai-gateway/chat-completions
+            - title: Embeddings
+              slug: ai-gateway/embeddings
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
             - title: Anthropic Messages API
@@ -906,8 +947,20 @@
           items:
             - title: Authentication
               slug: ai-gateway/authentication
+            - title: Data retention
+              slug: ai-gateway/data-retention
             - title: Troubleshooting
               slug: ai-gateway/troubleshooting
+    - title: Lakebase Search
+      icon: search
+      slug: ai/lakebase-search
+      items:
+        - title: Overview
+          slug: ai/lakebase-search
+        - title: Get started
+          slug: ai/lakebase-search-get-started
+        - title: Migrate from pg_search
+          slug: extensions/migrate-pg-search-to-lakebase-text
 
 - nav: Platform
   title: Platform
@@ -960,8 +1013,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
@@ -1225,8 +1276,8 @@
                   slug: cli/quickstart
             - title: Setup and context
               items:
-                - title: auth
-                  slug: cli/auth
+                - title: login
+                  slug: cli/login
                 - title: init
                   slug: cli/init
                 - title: ask
@@ -1255,6 +1306,10 @@
                   slug: cli/link
                 - title: checkout
                   slug: cli/checkout
+                - title: git
+                  slug: cli/git
+                  tag: new
+                  tagTheme: green
                 - title: env
                   slug: cli/env
                 - title: set-context
@@ -1271,6 +1326,8 @@
                   slug: cli/api-keys
                 - title: completion
                   slug: cli/completion
+                - title: feedback
+                  slug: cli/feedback
             - title: Projects and branches
               items:
                 - title: snapshots
@@ -1307,12 +1364,16 @@
               items:
                 - title: functions
                   slug: cli/functions
+                - title: triggers
+                  slug: cli/triggers
                 - title: buckets
                   slug: cli/buckets
                 - title: data-api
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: credentials
+                  slug: cli/credentials
             - title: Organizations and networking
               items:
                 - title: api
@@ -1353,6 +1414,8 @@
               slug: reference/javascript-sdk
             - title: Neon Management SDK
               slug: reference/typescript-sdk
+            - title: Effect bindings
+              slug: reference/effect-sdk
             - title: Migrate to @neon/sdk
               slug: reference/migrate-api-client-to-sdk
             - title: Python SDK (Neon API)
@@ -1419,8 +1482,6 @@
                       slug: guides/vercel-manual
                     - title: Connecting to Neon from Vercel
                       slug: guides/vercel-connection-methods
-                    - title: Migrating from Vercel Postgres
-                      slug: guides/vercel-postgres-transition-guide
             - title: Develop
               items:
                 - title: Convex
@@ -1495,8 +1556,6 @@
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres
-                - title: Prisma Pulse
-                  slug: guides/logical-replication-prisma-pulse
                 - title: Sequin
                   slug: guides/sequin
                 - title: Snowflake
@@ -1593,6 +1652,9 @@
         - title: Support
           slug: introduction/support
           icon: support
+        - title: Send feedback
+          slug: introduction/feedback
+          icon: info
         - title: Community
           slug: community/community-intro
           icon: community

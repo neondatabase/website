@@ -46,3 +46,9 @@ Pull only the variables for the services you name, ignoring `neon.ts`. Repeat `-
 ```bash
 neon env pull --service ai-gateway --service postgres
 ```
+
+Use a specific `neon.ts` policy instead of the one in the project directory (next to the nearest `.neon`, or the current directory when there's no `.neon`):
+
+```bash
+neon env pull --config ./config/neon.ts
+```

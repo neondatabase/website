@@ -113,7 +113,7 @@ See existing handlers in the code for examples of each pattern.
 
 | Component                                                                              | Output                                                                                           |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Admonition                                                                             | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming Soon`)                       |
+| Admonition                                                                             | `**Type:** content` (handles camelCase like `comingSoon` -> `Coming soon`)                       |
 | CodeTabs                                                                               | `Tab: label` + code blocks                                                                       |
 | Tabs/TabItem                                                                           | `Tab: label` + content (labels from parent Tabs)                                                 |
 | Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |

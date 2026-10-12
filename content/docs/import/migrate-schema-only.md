@@ -10,7 +10,7 @@ summary: >-
   defer index creation. Requires an unpooled Neon connection string; pooled
   connections are not supported for `pg_dump`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This topic shows how to perform a schema-only migration using the `pg_dump` and `pg_restore` Postgres utilities.
@@ -38,7 +38,7 @@ pg_dump --schema-only \
 - The `--no-privileges` option prevents dumping privileges. Neon may not support the privileges you've defined elsewhere, or if dumping a schema from Neon, there maybe Neon-specific privileges that cannot be restored to another database.
 
 <Admonition type="tip">
-- When you're dumping or restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
+- When you're dumping or restoring on Neon, you can input your Neon connection string in place of `postgresql://role:password@hostname:5432/dbname`. You can find the connection string for your database by clicking the **Connect** button in the Console nav.
 </Admonition>
 
 ## Review and modify the dumped schema

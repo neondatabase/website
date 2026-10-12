@@ -32,16 +32,15 @@ describe('AI Gateway model examples', () => {
     }
   );
 
-  it('uses model-specific Gemini examples and install commands', () => {
+  it('renders OpenAI SDK examples for conforming Gemini', () => {
     const languages = getLanguagesForMode(getExamplesByMode('gemini-3-5-flash'), 'text');
 
-    expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'curl']);
-    expect(languages.find(({ key }) => key === 'mastra')?.install).toBe(
-      'npm i @mastra/core ai @neondatabase/ai-sdk-provider'
+    expect(languages.map(({ key }) => key)).toEqual(['aisdk', 'mastra', 'ts', 'python', 'curl']);
+    expect(languages.find(({ key }) => key === 'mastra')?.code).toContain(
+      'model: "neon/gemini-3-5-flash"'
     );
-    expect(languages.find(({ key }) => key === 'curl')?.code).toContain(
-      '/gemini/v1beta/models/gemini-3-5-flash:generateContent'
-    );
+    expect(languages.find(({ key }) => key === 'curl')?.code).toContain('/v1/chat/completions');
+    expect(languages.find(({ key }) => key === 'curl')?.code).not.toContain('/gemini/v1beta');
   });
 
   it('keeps only supported image-generation languages', () => {
@@ -69,5 +68,18 @@ describe('AI Gateway model examples', () => {
   it('falls back to text when no code examples are available', () => {
     expect(getAvailableModes({ text: [], image: [] })).toEqual([]);
     expect(getInitialMode({ text: [], image: [] }, 'image')).toBe('text');
+  });
+
+  it('renders TypeScript/Python/cURL only for an embedding model — no AI SDK or Mastra yet', () => {
+    const languages = getLanguagesForMode(
+      {
+        embeddings: resolveModel(modelsData, capabilities, 'gte-large-en', 'embeddings')?.examples,
+      },
+      'embeddings'
+    );
+
+    expect(languages.map(({ key }) => key)).toEqual(['ts', 'python', 'curl']);
+    expect(languages.find(({ key }) => key === 'ts')?.code).toContain('client.embeddings.create');
+    expect(languages.every(({ code }) => code.includes('encoding_format'))).toBe(true);
   });
 });

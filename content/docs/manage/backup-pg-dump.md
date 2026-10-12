@@ -7,7 +7,7 @@ summary: >-
   regions. Always use a direct (unpooled) connection string for both
   operations; pooled connections are not supported and will cause errors.
 enableTableOfContents: true
-updatedOn: '2026-08-24T11:52:16.866Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
@@ -56,7 +56,7 @@ If you don't have the `pg_dump` and `pg_restore` utilities installed locally, yo
 
 Following this procedure will create a database backup locally, where you're running the `pg_dump` command.
 
-1. Retrieve the connection string for your Neon database by navigating to your Neon **Project Dashboard** and clicking the **Connect** button to open the **Connect to your database** modal.
+1. Retrieve the connection string for your Neon database by clicking **Connect** in the Console nav to open the **Connect to your branch** modal.
 
 2. Deselect the **Connection pooling** option. You need a direct connection string, not a pooled one.
 
@@ -96,7 +96,7 @@ This procedure shows how to restore a database using the `pg_restore` utility fr
 2. Create a database with the same name as the one you backed up. The `pg_dump` instructions above created a backup of a database named `neondb`. Your database name is likely different.
 3. Retrieve the connection string for your Neon database:
 
-   Go to your Neon project and click the **Connect** button to open the **Connect to your database** modal.
+   Go to your Neon project and click the **Connect** button to open the **Connect to your branch** modal.
 
    Deselect the **Connection pooling** option. You need a direct connection string, not a pooled one.
 

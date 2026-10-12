@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-09-02T15:10:53.712Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -27,11 +27,17 @@ The standard fix is a vacuum job: list every object in the bucket, load every `o
 
 Neon removes that trade-off with [Neon Object Storage](/docs/storage/overview). Buckets [branch with your database](/docs/storage/objects#object-branching), so creating a branch gives you an isolated copy of your data in both systems: the Postgres rows and the S3 objects. You can run the real vacuum, actual `DeleteObject` calls and all, against the branch, verify that rows and objects still agree, and only then run the same script against production with the safeguards described below.
 
-<Admonition type="info" title="Beta">
-Neon Object Storage is in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`). Support is expanding toward all regions. Create your project in one of these regions to follow along.
+<Admonition type="info" title="Region availability">
+Neon Object Storage is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Create your project in one of these regions to follow along.
 </Admonition>
 
 In this tutorial, you'll build a small demo app that simulates the drift problem, then write a vacuum job and test it on a Neon branch before promoting it to production. The workflow is identical for your own application: declare the bucket, measure drift with the checker, run the vacuum on a branch, and promote.
+
+<CopyPrompt
+  src="/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## Prerequisites
 
@@ -39,7 +45,7 @@ Before starting, make sure you have:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/).
 2. **Neon account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 
@@ -59,21 +65,21 @@ Run the Neon CLI initialization command:
 neon init
 ```
 
-Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
+`neon init` first asks how your coding agents should get Neon. Choose **Plugin (recommended)**, which installs the `neon-postgres` plugin with agent skills and the Neon MCP server, or **Skills and MCP separately**, which installs the default skill set (including `neon-object-storage`) and the MCP server. Either way, AI agents such as Claude Code and Cursor get the context they need to work with Neon.
 
-During initialization, **Neon Platform** and **Postgres** skills are installed automatically. You'll also need the **Neon Object Storage** skill so AI agents have the context to help you build and manage your S3 bucket. Install it with the following command:
+If you want to make sure the **Neon Object Storage** skill is installed, so AI agents can help you build and manage your S3 bucket, install it with the following command:
 
 ```bash
 npx skills add neondatabase/agent-skills --skill neon-object-storage
 ```
 
-Link your local workspace to a Neon project:
+After agent setup, `neon init` runs `neon link` to link your local workspace to a Neon project. If you skipped linking, run it yourself:
 
 ```bash
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `postgres-s3-drift-demo` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`) or **AWS Europe (Frankfurt)** (`aws-eu-central-1`); this guide uses US East (Ohio). Neon Object Storage is currently available in these regions during beta. Support is expanding toward all regions. When asked which Neon services you require, select **Object Storage**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `postgres-s3-drift-demo` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Object Storage is currently available in these regions. Support is expanding toward all regions. Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Object Storage**:
 
 ```text
 $ neon link
@@ -81,17 +87,17 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … postgres-s3-drift-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project cool-darkness-12345678 ("postgres-s3-drift-demo") in aws-us-east-2.
-Linked ~/postgres-s3-drift-demo/.neon:
-  orgId:     org-example-12345678
-  projectId: cool-darkness-12345678
-  branch:    main
+Created project postgres-s3-drift-demo in aws-us-east-2
+Linked .neon
+  Project         postgres-s3-drift-demo (cool-darkness-12345678)
+  Branch          main
+  Org             org-example-12345678
 
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Object Storage
 ```
 
-The `neon link` command also creates a `.env.local` file with your project's variables.
+Linking also creates a `.env.local` file with your project's variables.
 
 Install the dependencies for the scripts in this guide:
 
@@ -100,7 +106,7 @@ npm install @aws-sdk/client-s3 @aws-sdk/s3-request-presigner postgres dotenv
 npm install -D tsx @types/node
 ```
 
-This installs the AWS SDK for S3, the Postgres client, and `dotenv` for loading environment variables. The `tsx` package allows you to run TypeScript files directly without a separate compilation step.
+This installs the AWS SDK for S3, the Postgres client, and `dotenv` for loading environment variables. The `tsx` package runs TypeScript files directly without a separate compilation step.
 
 TypeScript needs a `tsconfig.json` for the linter to resolve types correctly. Create it in your project root:
 
@@ -118,16 +124,14 @@ TypeScript needs a `tsconfig.json` for the linter to resolve types correctly. Cr
 }
 ```
 
-The `neon link` command generated a `neon.ts` file in your project root. Replace its contents with the following configuration, which creates a bucket named `uploads` and sets a 7-day TTL on new branches, so any branches created by `neon checkout` are cleaned up automatically if you forget to delete them:
+Linking generated a `neon.ts` file in your project root. Replace its contents with the following configuration, which creates a bucket named `uploads` and sets a 7-day TTL on new branches, so any branches created by `neon checkout` are cleaned up automatically if you forget to delete them:
 
 ```typescript filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
-  preview: {
-    buckets: {
-      uploads: {}
-    },
+  buckets: {
+    uploads: {}
   },
   branch: (branch) => {
     if (branch.isDefault) { return {}; }
@@ -135,7 +139,6 @@ export default defineConfig({
     return {};
   },
 });
-
 ```
 
 Apply the configuration by running:
@@ -379,7 +382,7 @@ First orphaned objects:
   avatars/user-12@example.com.png
 ```
 
-You now have a reproducible drift scenario: three orphaned objects and zero dangling rows. The checker exits with a non-zero status code, which makes it a good fit for CI or a cron job to alert the team when drift occurs.
+You now have a reproducible drift scenario: three orphaned objects and zero dangling rows. The checker exits with a non-zero status code, so you can run it in CI or a cron job to alert the team when drift occurs.
 
 ## Write the vacuum job
 
@@ -594,15 +597,13 @@ Account purges, GDPR erasure pipelines, media re-keys, and bulk admin tools all 
 4. Promote only when both counts are zero.
 5. Delete the rehearsal branch.
 
-Because [object branching](/docs/storage/objects#object-branching) is copy-on-write, creating a branch is fast and cheap.
+Because [object branching](/docs/storage/objects#object-branching) is copy-on-write, creating a branch doesn't duplicate any objects upfront.
 
 ## Summary
 
-Orphaned objects are not a one-off bug. They're the inevitable result of splitting deletes across two systems that don't share a transaction. You can't fix that with a more careful delete function alone, because the failure modes are crashes, timeouts, and partial jobs by definition. What you can fix is how you detect and clean up the drift.
+Orphaned objects are not a one-off bug. They're the expected result of splitting deletes across two systems that don't share a transaction. You can't fix that with a more careful delete function alone, because the failure modes are crashes, timeouts, and partial jobs by definition. What you can fix is how you detect and clean up the drift.
 
-The checker measures the drift and exits non-zero, so CI or a cron job can catch it before it grows. The vacuum deletes only what the checker proves is unreferenced. And because Neon buckets branch with your database, the whole loop can be practiced on a branch before it touches production.
-
-Branch, vacuum, verify, promote. The same loop applies to any destructive job that rewrites both systems.
+The checker measures the drift and exits non-zero, so CI or a cron job can catch it before it grows. The vacuum deletes only what the checker proves is unreferenced. And because Neon buckets branch with your database, the whole loop can be practiced on a branch before it touches production. The same loop applies to any destructive job that rewrites both systems.
 
 ## Resources
 

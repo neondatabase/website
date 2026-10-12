@@ -97,7 +97,7 @@ I'll create documentation content using an interactive workflow with user confir
 
 ## Step 7: Style Guide Validation
 
-**Load and apply:** Neon documentation standards from CLAUDE.md and `/golden-corpus`
+**Load and apply:** Neon documentation standards from AGENTS.md and `/golden-corpus`
 
 **Check for:**
 

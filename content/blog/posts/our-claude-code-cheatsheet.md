@@ -186,4 +186,4 @@ I’ve even added cost to my status line so it’s always visible and I don’t 
 
 ## And That’s It
 
-This cheatsheet is still evolving, and I’m sure I’ll keep adding to it as new features land. If you’ve found other workflows that work for you, I’d love to hear them – share it with us on [Discord](https://discord.gg/92vNTzKDGp). And if you just want the raw reference, here’s the full [Claude Code Cheatsheet](https://gist.github.com/pffigueiredo/252bac8c731f7e8a2fc268c8a965a963).
+This cheatsheet is still evolving, and I’m sure I’ll keep adding to it as new features land. If you’ve found other workflows that work for you, I’d love to hear them – share it with us on [Discord](https://neon.com/discord). And if you just want the raw reference, here’s the full [Claude Code Cheatsheet](https://gist.github.com/pffigueiredo/252bac8c731f7e8a2fc268c8a965a963).

@@ -13,9 +13,9 @@ nextLink:
   slug: database-services-short-lived-postgres-instances
 ---
 
-Neon was built for this. You can call the [Neon API](/docs/reference/api) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale compute to zero, so you only pay CU-hours for users who are actively using the app. Storage continues to bill (or count against Free plan caps) while compute is suspended.
+Neon. Your backend calls the [Neon API](/docs/reference/api) at sign-up to create a project for the new user. Each project is an isolated Postgres database with its own connection string, and Neon recommends one project per user or tenant over a branch per user ([Multitenancy](/docs/guides/multitenancy)). Idle projects scale compute to zero, so you pay CU-hours only for users who are active. Storage still bills (or counts against Free plan limits) while compute is suspended.
 
-## Provision a database in a single API call
+## Provision a database in one API call
 
 To create a per-user project from your backend:
 
@@ -31,25 +31,26 @@ curl -X POST https://console.neon.tech/api/v2/projects \
   }'
 ```
 
-The response includes a connection string ready to use. Most apps run this in the sign-up handler. For higher-volume patterns, branch from a template project instead of creating a new project per user; branch creation is faster and shares storage with the parent until the tenant writes data.
+The response includes a connection string, so the sign-up handler can store it and hand it to the app right away. You can also give each user a branch inside one shared project. That keeps provisioning inside one project, but branch limits apply (see below), and a project per user keeps instant restore, compute settings, and deletion separate for each tenant.
 
-## Plan considerations for multi-tenant apps
+## Plan limits for per-user databases
 
-- **Free plan** and **Launch plan**: 100 projects; **Scale plan**: 1,000 projects (increasable on request)
-- **[Agent plan](/docs/introduction/agent-plan)**: built for platforms that provision thousands of databases, with custom limits and credits you can pass through to your end users' Free plan usage
-
-If you're running per-user _branches_ inside a single project instead of per-user _projects_, note the branch limits: 10 per project on the Free plan and Launch plan, 25 on the Scale plan, up to 5,000 per project on paid plans with extras billed hourly.
+- **Projects**: 100 on the Free plan and Launch plan, 1,000 on the Scale plan (increasable on request)
+- **Branches**, if you use a branch per user: 10 per project on the Free plan and Launch plan, 25 on the Scale plan. Paid plans allow up to 5,000 per project, with extras at $1.50/branch-month, metered hourly ([Plans](/docs/introduction/plans#extra-branches)).
+- **[Agent plan](/docs/introduction/agent-plan)**: for platforms that provision databases for their own users at scale. It includes unlimited projects across a sponsored free organization and a paid organization, Launch-rate compute, and credits for your users' free tier. It requires an active Scale plan and approval from the Neon team.
 
 <Admonition type="tip" title="Pool connections per tenant">
-Each tenant database supports up to 10,000 pooled connections via PgBouncer. Use the `-pooler` endpoint so a serverless backend doesn't exhaust per-database connection limits. See [Connection pooling](/docs/connect/connection-pooling).
+Each compute accepts up to 10,000 pooled client connections through PgBouncer. Use the `-pooler` hostname so a serverless backend doesn't run into the compute's `max_connections` limit. See [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
 ## How this works on other providers
 
-- **Supabase** projects are created via the Management API, but each project provisions a dedicated VM and Postgres instance. Compute is billed hourly per project (Micro starts at $0.01344/hour, ~$10/month), and projects don't pause on paid plans ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)). For thousands of tenants, this means thousands of always-on VMs.
-- **Aurora Serverless v2 (Postgres)** can be provisioned via the RDS API. Per-tenant clusters take longer to create than Neon branches and don't share storage with a template, but auto-pause on supported engine versions reduces idle compute cost ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for Postgres** is not designed for per-user provisioning at sign-up speed. Instance creation takes minutes and there's no idle-compute billing model.
+- **Supabase**: you can create projects through the Management API. Each project runs its own Postgres instance in a dedicated VM and bills compute hourly, starting with Micro at $0.01344/hour (about $10/month) ([Compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)). Paid projects don't pause ([Project pausing](https://supabase.com/docs/guides/platform/free-project-pausing)), so each tenant project bills compute around the clock.
+- **Aurora Serverless v2 (Postgres)**: you can create a cluster per tenant through the RDS API. With min capacity set to 0 ACU on a supported engine version, idle clusters pause and stop billing instance capacity ([Auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)). Accounts default to 40 Aurora clusters per region, adjustable through Service Quotas ([Quotas](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)).
+- **RDS for Postgres**: each tenant is a separate DB instance of a fixed class, billed while it runs, and accounts default to 40 DB instances per region ([Quotas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)).
 
-The architecture Neon optimizes for is many small databases, most of them idle most of the time. Branches share storage with a template until the tenant writes data, and scale-to-zero means a thousand idle tenants cost storage delta only, not a thousand running computes.
+With Neon, a tenant that isn't using the app costs its storage and nothing for compute, so a fleet of mostly idle tenants doesn't mean a fleet of running computes.
 
-<CTA title="Build a per-tenant database app" description="The Free plan covers prototyping; talk to us about the Agent plan when you're ready to scale." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+Vendor details verified on 2026-09-23 against the linked pages.
+
+<CTA title="Build a per-tenant database app" description="Prototype on the Free plan, then apply for the Agent plan when you're ready to scale." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

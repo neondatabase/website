@@ -141,7 +141,7 @@ GPTs and the GPT Store are a great way to create, monetize, and share your own c
 
 However, GPTs come with limitations and do not replace RAG apps for apps that require extensive private and custom datasets or a further customized experience at the moment.
 
-What about you? Are you thinking of a GPT? Let us know your thoughts and if you built a GPT or a RAG app. Join us and share your projects with us on our [Discord server](https://discord.gg/Uus74e8Y).
+What about you? Are you thinking of a GPT? Let us know your thoughts and if you built a GPT or a RAG app. Join us and share your projects with us on our [Discord server](https://neon.com/discord).
 
 ## References
 

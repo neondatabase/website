@@ -4,7 +4,7 @@ subtitle: Manage connection lifecycles and prevent connection exhaustion in high
 summary: >-
    Learn how to manage database connection lifecycles and prevent connection exhaustion when using Neon from highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel.
 enableTableOfContents: true
-updatedOn: '2026-07-08T13:03:28.664Z'
+updatedOn: '2026-09-16T20:12:32.981Z'
 ---
 
 Highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel can scale compute from zero to hundreds of concurrent instances within seconds. While Neon’s [lakebase architecture](/docs/introduction/architecture-overview) is designed for dynamic workloads, rapidly scaling out hundreds of workers can overwhelm your database unless connection lifecycles and local pool sizes are carefully managed.
@@ -103,7 +103,7 @@ Neon provides built-in connection pooling through PgBouncer in transaction mode.
 
 Use the pooled connection string with `-pooler` in the hostname for all your serverless app traffic:
 
-![Pooled Connection String](/docs/connect/connection_details.png)
+![Pooled Connection String](/docs/connect/connect_to_branch_modal.png)
 
 > Ensure **Connection pooling** is enabled when you copy the connection string from the Neon Console.
 

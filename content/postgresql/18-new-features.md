@@ -7,7 +7,7 @@ page_description: >-
   Discover how these changes will impact performance, development, and
   operations.
 ogImage: ''
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-09-16T13:05:58.588Z'
 enableTableOfContents: true
 nextLink:
   title: PostgreSQL 18 Asynchronous I/O
@@ -267,7 +267,7 @@ PostgreSQL 18 is now officially available for preview on Neon. It's an excellent
 - Experiment with UUIDv7 and virtual generated columns
 - Validate upgrade procedures
 
-Neon supports PostgreSQL 18 as a preview release. While fully functional, we recommend waiting until it exits preview status before upgrading production databases. For current limitations and preview status details, see our [PostgreSQL Version Support Policy](/docs/postgresql/postgres-version-policy#postgres-18-support).
+Neon supports PostgreSQL 18 as a preview release. While fully functional, we recommend waiting until it exits preview status before upgrading production databases. For current limitations and preview status details, see our [PostgreSQL Version Support Policy](/docs/postgresql/postgres-version-support#postgres-18-support).
 
 If you want to try it out locally right now, you can spin up a PostgreSQL 18 container using Docker:
 

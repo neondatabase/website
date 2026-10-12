@@ -248,6 +248,8 @@ Run `npm run audit:api-ref` to generate a Markdown report against the live OpenA
 npm run audit:api-ref > audit-report.md
 ```
 
+The run prints a coverage summary to stderr at the end, so it stays visible even when the report is redirected. Pass `--verbose` to expand the summarized sections (the full valid-examples list and the per-operation parameter gaps).
+
 ## Tag configuration
 
 Single source of truth: [`scripts/data/tag-config.json`](data/tag-config.json), loaded via [`scripts/lib/tag-config.mjs`](lib/tag-config.mjs). Each tag entry has:

@@ -36,10 +36,10 @@ seo:
 
 Neon’s user base and community continue to grow and, based on your feedback, we’ve created another avenue for you to connect and collaborate. Our Discord server will foster connection and collaboration between you and our team, support a Q&A forum, and enable you to provide us with feedback.
 
-We chose Discord as the platform for hosting this community space due to its feature set and the fact that many of you are already familiar with it. You can join now by visiting our [Discord invite link](https://neon.tech/discord).
+We chose Discord as the platform for hosting this community space due to its feature set and the fact that many of you are already familiar with it. You can join now by visiting our [Discord invite link](https://neon.com/discord).
 
 <figure className="image-with-link">
-<a href="https://neon.tech/discord">
+<a href="https://neon.com/discord">
 <img src="https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-on-discord/invite-1024x577-dee0f044.png" alt="Neon Discord invite dialog." />
 </a>
 </figure>

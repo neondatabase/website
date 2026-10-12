@@ -104,7 +104,7 @@ To make Launchpad even more extensible for this kind of projects, we’re open-s
 
 Launchpad is our first step toward making Postgres databases feel truly instant and programmable, but we’re just getting started. We’re already working on features like pushing an existing schema, seeding data, claiming databases from the CLI, and even bootstrapping your preferred Postgres client automatically.
 
-There’s a lot more to come, and we’d love your input! [Try Launchpad today,](https://neon.new/) build something with it, and tell us what you want to see next. You can [open an issue, submit a PR](https://github.com/neondatabase/neondb-cli), or [hang out with us in Discord](https://discord.gg/92vNTzKDGp).
+There’s a lot more to come, and we’d love your input! [Try Launchpad today,](https://neon.new/) build something with it, and tell us what you want to see next. You can [open an issue, submit a PR](https://github.com/neondatabase/neondb-cli), or [hang out with us in Discord](https://neon.com/discord).
 
 <Admonition type="info" title="building a platform or agent?">
 If you’re looking to add Postgres to your tool, we’re here to help. Even small teams today operate fleets of thousands of Neon databases. Let’s explore how Launchpad can power your ideal integration - [get in touch!](https://neon.com/contact-sales)

@@ -1,4 +1,4 @@
-text: "The average Neon production DB resizes every 81 seconds. Here's a deep dive on how our autoscaling is built"
+text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
 link:
-  url: 'https://neon.com/blog/autoscaling-lakebase-postgres'
+  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
   target: '_blank'

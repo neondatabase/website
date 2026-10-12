@@ -1,9 +1,9 @@
 ---
 title: 'Where can I find my DATABASE_URL in Neon?'
-subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
+subtitle: 'Copy it from the Connect modal in the Neon Console and add it to your .env file.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,14 +14,14 @@ nextLink:
   slug: find-or-generate-neon-api-keys
 ---
 
-Your `DATABASE_URL` is the Postgres connection string Neon builds for you. Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and copy the connection string from the **Connect to your database** modal. Paste it into your framework's `.env` file as `DATABASE_URL` and you're set.
+Your `DATABASE_URL` is the Postgres connection string Neon builds for you. Open your project in the [Neon Console](https://console.neon.tech), click **Connect** in the Console nav, and copy the connection string from the **Connect to your branch** modal. Save it in your app's `.env` file as `DATABASE_URL`.
 
 ## Get the URL
 
 1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
-2. On the **Project Dashboard**, click **Connect**.
+2. Click **Connect** in the Console nav.
 3. Pick a **Branch**, **Compute**, **Database**, and **Role**.
-4. Copy the connection string. Keep **Connection pooling** on unless you specifically need a direct connection.
+4. Copy the connection string. Leave **Connection pooling** on unless you need a direct connection (for example, for migrations or `pg_dump`).
 
 A Neon `DATABASE_URL` looks like:
 
@@ -29,17 +29,17 @@ A Neon `DATABASE_URL` looks like:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Lakebase Postgres requires SSL/TLS (`sslmode=require`). `channel_binding=require` adds SCRAM mutual authentication. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
+Lakebase Postgres requires SSL/TLS, which `sslmode=require` enforces on the client side. `channel_binding=require` makes the client and server authenticate each other with SCRAM-SHA-256-PLUS. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Use it in your app
 
-Save it as `DATABASE_URL` in your `.env`:
+Add it to `.env`:
 
 ```text filename=".env"
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-Then read it from your code:
+Then read it in your code:
 
 <CodeTabs labels={["Node.js", "Python", "Next.js"]}>
 
@@ -67,14 +67,14 @@ const rows = await sql`SELECT now()`;
 
 </CodeTabs>
 
-Common conventions in framework integrations:
+Some integrations and ORMs expect a second, direct connection string alongside `DATABASE_URL`:
 
-- **Vercel**: When you connect Neon through the Vercel integration, Neon writes `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) to your Vercel project's env vars. See the [Vercel managed integration](/docs/guides/vercel-managed-integration).
-- **Prisma**: Set `url = env("DATABASE_URL")` (pooled) and `directUrl = env("DIRECT_URL")` (direct) in `schema.prisma`. See [Connect from Prisma](/docs/guides/prisma).
-- **Drizzle**: A single `DATABASE_URL` (pooled) is usually enough. See [Connect from Drizzle](/docs/guides/drizzle).
+- **Vercel**: The [Vercel-managed integration](/docs/guides/vercel-managed-integration) adds `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct) to your Vercel project's environment variables.
+- **Prisma**: In Prisma 7 and later, your app connects through the Neon adapter with the pooled `DATABASE_URL`, and `prisma.config.ts` points the Prisma CLI at the direct string (`DATABASE_URL_UNPOOLED`) for migrations. In Prisma 6 and earlier, set `url` (pooled) and `directUrl` (direct) in `schema.prisma`. See [Connect from Prisma](/docs/guides/prisma).
+- **Drizzle**: Your app uses the pooled `DATABASE_URL`, and Drizzle Kit migrations use a direct `DATABASE_URL_UNPOOLED`. See [Connect from Drizzle](/docs/guides/drizzle).
 
 <Admonition type="warning" title="Treat DATABASE_URL as a secret">
-The URL contains the role's password in plain text. Never commit it to a repo, log it, or paste it in a chat. If it ever leaks, [reset the role's password](/docs/manage/roles#reset-a-password) right away. The old URL stops working as soon as the reset completes.
+The URL contains the role's password in plain text. Don't commit it to a repo, write it to logs, or paste it in a chat. If it leaks, [reset the role's password](/docs/manage/roles#reset-a-password) right away. The old URL stops working when the reset completes.
 </Admonition>
 
-<CTA title="Framework guides" description="Find your stack's guide for Next.js, Prisma, Drizzle, Django, FastAPI, and more." buttonText="See all guides" buttonUrl="/docs/get-started/frameworks" />
+<CTA title="Framework guides" description="Find your stack's guide for Next.js, Django, Laravel, Ruby on Rails, and more." buttonText="See all guides" buttonUrl="/docs/get-started/frameworks" />

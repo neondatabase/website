@@ -108,4 +108,4 @@ Monitoring will provide you with better insights into your Neon usage and help y
 
 Our new organizations feature is the next step for us in supporting our customers who are managing a fleet of Postgres databases and teams on Neon.
 
-Remember, contact our customer success team if you’d like early access to organizations! Join us in [Discord](https://neon.tech/discord), follow us on [X](https://x.com/neondatabase), and let us know what observability tools you’d like us to integrate with so you can scale your applications to millions of users.
+Remember, contact our customer success team if you’d like early access to organizations! Join us in [Discord](https://neon.com/discord), follow us on [X](https://x.com/neondatabase), and let us know what observability tools you’d like us to integrate with so you can scale your applications to millions of users.

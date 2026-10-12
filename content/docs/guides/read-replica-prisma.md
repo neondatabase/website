@@ -10,7 +10,7 @@ summary: >-
   to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
   replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -35,7 +35,7 @@ The Free plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica by following these steps:
 
-1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. In the Neon Console, select your branch from the project/branch menu at the top of the sidebar.
 2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
@@ -77,7 +77,7 @@ neon branches add-compute mybranch --type read_only
 
 Connecting to a read replica is the same as connecting to any branch in a Neon project, except you connect via a read replica compute instead of your primary read-write compute. The following steps describe how to retrieve the connection string (the URL) for a read replica from the Neon Console.
 
-1. Click the **Connect** button on your **Project Dashboard**. On the **Connect to your database modal**, select the branch, the database, and the role you want to connect with.
+1. Click the **Connect** button in the Console nav. On the **Connect to your branch** modal, select the branch, the database, and the role you want to connect with.
 1. Under **Compute**, select a **Replica** compute.
 1. Select the connection string and copy it. This is the information you need to connect to the read replica from your Prisma Client. The connection string appears similar to the following:
 
@@ -112,7 +112,7 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
    ```javascript
    import 'dotenv/config';
-   import { PrismaClient } from '@prisma/client';
+   import { PrismaClient } from './generated/prisma'; // path set by `output` in your schema.prisma generator
    import { PrismaNeon } from '@prisma/adapter-neon';
    import { readReplicas } from '@prisma/extension-read-replicas';
 

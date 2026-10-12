@@ -1,13 +1,13 @@
 ---
-title: Database Migrations with Entity Framework Core and Azure Pipelines for Neon
+title: Database migrations with Entity Framework Core and Azure Pipelines for Neon
 subtitle: Automating schema changes with EF Core and Azure Pipelines in Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-18T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a great migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can automate database migrations as part of a CI/CD pipeline, ensuring that schema changes are safely applied to your Lakebase Postgres database.
+[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can apply database migrations to your Lakebase Postgres database automatically as part of a CI/CD pipeline.
 
 In this guide, you'll learn how to use EF Core to create and apply database migrations in Neon and automate the process using Azure Pipelines.
 
@@ -15,16 +15,16 @@ In this guide, you'll learn how to use EF Core to create and apply database migr
 
 To follow along, you'll need the following:
 
-- A [Neon account](https://neon.tech) with an active project.
+- A [Neon account](https://console.neon.tech/signup) with an active project.
 - [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet) installed.
 - A [GitHub](https://github.com/) or [Azure DevOps](https://dev.azure.com/) repository for version control.
 - An active [Azure DevOps](https://azure.microsoft.com/en-us/products/devops/) account with access to Azure Pipelines.
 
-## Setting Up the Entity Framework Core Project
+## Setting up the Entity Framework Core project
 
 If you don't already have a .NET project, you can follow these steps to create a new one and set up EF Core for database migrations.
 
-### Create a New .NET Project
+### Create a new .NET project
 
 Start by creating a new .NET project:
 
@@ -33,9 +33,9 @@ dotnet new webapi -n NeonMigrations
 cd NeonMigrations
 ```
 
-### Install Required Packages
+### Install required packages
 
-Add the necessary EF Core and PostgreSQL packages:
+Add the EF Core and Postgres packages:
 
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore
@@ -48,7 +48,7 @@ The packages that we are installing are:
 
 - `Microsoft.EntityFrameworkCore`: The core EF package.
 - `Microsoft.EntityFrameworkCore.Design`: Required for EF Core CLI tools.
-- `Npgsql.EntityFrameworkCore.PostgreSQL`: The PostgreSQL provider for EF Core.
+- `Npgsql.EntityFrameworkCore.PostgreSQL`: The Postgres provider for EF Core.
 - `dotenv.net`: A library for loading environment variables from a `.env` file.
 
 Install the EF Core CLI tools:
@@ -57,9 +57,9 @@ Install the EF Core CLI tools:
 dotnet tool install --global dotnet-ef
 ```
 
-### Configure the Database Connection
+### Configure the database connection
 
-Retrieve your Neon database connection string from the [Neon Console](https://console.neon.tech) and store it in the `.env` file:
+Get a direct (non-pooled) connection string for your Neon database by clicking **Connect** in the [Neon Console](https://console.neon.tech), and store it in the `.env` file:
 
 ```bash
 DATABASE_URL=Host=<your-host>;Database=<your-database>;Username=<your-username>;Password=<your-password>;SSLMode=Require
@@ -83,11 +83,11 @@ public class ApplicationDbContext : DbContext
 }
 ```
 
-## Creating and Applying Migrations
+## Creating and applying migrations
 
 Migration files are used to define schema changes in your database. In this section, let's create a simple `Product` entity and apply a migration to your Neon database.
 
-### Define the Data Model
+### Define the data model
 
 Create a simple `Product` entity:
 
@@ -102,7 +102,7 @@ public class Product
 
 That represents a product table with an `Id`, `Name`, and `Price`.
 
-### Generate a Migration
+### Generate a migration
 
 Run the following command to create a migration:
 
@@ -110,7 +110,7 @@ Run the following command to create a migration:
 dotnet ef migrations add InitialCreate
 ```
 
-### Apply the Migration
+### Apply the migration
 
 Run the following command to apply the migration to your Neon database:
 
@@ -118,11 +118,11 @@ Run the following command to apply the migration to your Neon database:
 dotnet ef database update
 ```
 
-To learn more about migrations in Entity Framework Core, refer to the [Neon documentation](/docs/guides/entity-migrations) guide which provides a detailed explanation of the migration process.
+To learn more, see [Schema migration with Lakebase Postgres and Entity Framework](/docs/guides/entity-migrations), which covers the migration process in more detail.
 
 At this point, your database schema is set up. Next, we'll automate this process using Azure Pipelines.
 
-## Creating an Azure DevOps Project
+## Creating an Azure DevOps project
 
 If you don't already have a project set up, follow these steps:
 
@@ -132,9 +132,9 @@ If you don't already have a project set up, follow these steps:
 
 For more details, refer to the official [Azure DevOps documentation](https://learn.microsoft.com/en-us/azure/devops/organizations/projects/create-project?view=azure-devops&tabs=browser) and the [Azure Repos guide](https://learn.microsoft.com/en-us/azure/devops/repos/get-started/?view=azure-devops).
 
-## Automating Migrations with Azure Pipelines
+## Automating migrations with Azure Pipelines
 
-With your migrations set up and the project in Azure DevOps, you can now automate the process using [Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops). This way, any new migrations will be applied automatically when you push changes to your repository.
+With your migrations set up and the project in Azure DevOps, you can now automate the process using [Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops). New migrations are then applied automatically when you push changes to your repository.
 
 ### Create an Azure Pipeline
 
@@ -175,27 +175,27 @@ This pipeline configuration:
 - Sets the `DATABASE_URL` variable from the Azure DevOps pipeline.
 - Installs the EF Core CLI tools and applies the migrations.
 
-### Configure Pipeline Variables
+### Configure pipeline variables
 
 To securely store your database connection string, create a variable group in Azure DevOps:
 
 1. Go to **Pipelines** → **Library** → **+ Variable Group**.
 1. Set the name to `NeonMigrations`.
-1. Create a variable named `DATABASE_URL` and set it to your Neon database connection string.
+1. Create a variable named `DATABASE_URL` and set it to your direct (non-pooled) Neon connection string.
 1. Mark it as a **secret** to protect sensitive information.
 1. Save the variable group.
 
-### Run the Pipeline
+### Run the pipeline
 
 Commit the `azure-pipelines.yml` file to your repository. The pipeline will trigger on new commits to `main`, applying any pending migrations automatically.
 
-If you were to go to the Azure DevOps Pipelines section, you would see the pipeline running and applying the migrations. If the pipeline is not triggered automatically, you can manually run it from the Azure DevOps UI.
+In the Azure DevOps **Pipelines** section, you'll see the pipeline running and applying the migrations. If the pipeline is not triggered automatically, you can manually run it from the Azure DevOps UI.
 
-Note that if you've just created the pipeline, Azure DevOps might limit the number of parallel pipelines you can run. You can request additional pipelines parallelism via the form [here](https://aka.ms/azpipelines-parallelism-request) or upgrade your Azure DevOps plan.
+Note that if you've just created the pipeline, Azure DevOps might limit the number of parallel pipelines you can run. You can request additional parallelism with the [Azure Pipelines parallelism request form](https://aka.ms/azpipelines-parallelism-request) or upgrade your Azure DevOps plan.
 
-## Handling Migration Conflicts
+## Handling migration conflicts
 
-When working in a team, conflicts may arise due to multiple migration files being generated. You can check out the Entity [Framework Core documentation for some best practices](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/teams) but here are some general tips:
+When working in a team, conflicts may arise due to multiple migration files being generated. See the [Entity Framework Core documentation on migrations in team environments](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/teams) for best practices. Some general tips:
 
 1. Before adding a new migration, apply any existing ones using:
    ```bash
@@ -207,21 +207,19 @@ When working in a team, conflicts may arise due to multiple migration files bein
    dotnet ef migrations add NewMigration
    ```
 
-In addition, consider the following:
+Also consider the following:
 
-- When applying migrations, use a direct Neon connection instead of a [pooled one](/docs/connect/connection-pooling).
+- When applying migrations, use a direct Neon connection instead of a [pooled one](/docs/connect/connection-pooling). Migration tools may not support PgBouncer's transaction pooling mode.
 - Before applying changes to production, test them in a staging environment or using a [Neon branch](/docs/introduction/branching).
 
 ## Conclusion
 
-By integrating Entity Framework Core with Azure Pipelines, you can simplify database migrations and ensure schema changes are consistently applied to your Lakebase Postgres database. Automating migrations reduces the risk of human error and helps maintain database integrity across environments.
+You now have an Azure Pipeline that applies EF Core migrations to your Lakebase Postgres database on every push to `main`. As a next step, use [Neon branches](/docs/introduction/branching) to test migrations against a copy of production data before deploying.
 
-As a next step, make sure to explore [Neon branches](/docs/introduction/branching), so you can test your migrations in a staging environment before deploying to production.
+## Additional resources
 
-## Additional Resources
-
-- [Entity Framework Core Migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
-- [Azure Pipelines Overview](https://azure.microsoft.com/en-us/products/devops/pipelines#overview)
-- [Neon Documentation](/docs)
+- [Entity Framework Core migrations](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
+- [Azure Pipelines overview](https://azure.microsoft.com/en-us/products/devops/pipelines#overview)
+- [Neon documentation](/docs)
 
 <NeedHelp />

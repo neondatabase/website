@@ -13,52 +13,54 @@ nextLink:
   slug: databases-reproduce-bugs-production-data
 ---
 
-Postgres supports point-in-time recovery, but most managed offerings make you restore from a backup, which takes time and produces a new instance. Lakebase Postgres instant restore rolls a root branch back to a point in time in place, in seconds, without a separate restore job.
+Neon. Many managed Postgres services recover deleted data by restoring a backup, either into a new instance or into the existing one while it's offline. Neon's instant restore rewinds a root branch to an earlier point in time in a few seconds, and the connection string stays the same ([Instant restore](/docs/postgres/backup-restore/branch-restore)).
 
 ## How instant restore works
 
-Lakebase Postgres retains a log of changes to your data over a configurable history window. To recover from a bad `DELETE` or `UPDATE`, you pick a timestamp or LSN from before the incident and restore the root branch to that point. The database is back to its previous state in seconds. Instant restore applies to root branches only; child branches don't support it. See [Instant restore](https://neon.com/docs/introduction/branch-restore).
+Lakebase Postgres keeps a history of changes to your data, as write-ahead log (WAL) records, for a history window you configure. To recover from a bad `DELETE` or `UPDATE`, pick a timestamp or LSN from before the incident and restore the root branch to that point. The restore takes a few seconds and briefly interrupts existing connections, which can reconnect as soon as it finishes. It applies to every database on the branch. Instant restore works on root branches only; child branches can be reset from their parent instead.
 
-History window by plan ([History window](https://neon.com/docs/introduction/history-window)):
+History window by plan ([History window](/docs/postgres/backup-restore/history-window)):
 
-- **Free plan**: 6 hours (capped at 1 GB of change history, no History charge)
-- **Launch plan**: configurable up to 7 days
-- **Scale plan**: configurable up to 30 days
+- **Free plan**: 6 hours, capped at 1 GB of change history, at no charge
+- **Launch plan**: 1 day by default, configurable up to 7 days
+- **Scale plan**: 1 day by default, configurable up to 30 days
 
-On Launch and Scale, History is billed at $0.20/GB-month on root branches only.
+On the Launch plan and Scale plan, History (the retained change history) is billed at $0.20/GB-month, and only root branches add to it ([Plans](/docs/introduction/plans#instant-restore)).
 
 ## Restore a branch
 
-From the CLI, restore a root branch to its own history. When restoring to self, you must preserve the pre-restore state under a backup name:
+From the CLI, restore a root branch to a point in its own history. When you restore a branch to itself, you must name a backup of its pre-restore state:
 
 ```bash
-neon branches restore main ^self@2026-04-24T14:30:00Z --preserve-under-name main_old
+neon branches restore production ^self@2026-04-24T14:30:00Z --preserve-under-name production_old
 ```
 
-You can also create a new branch from the past, inspect it, then promote it. This is the safer pattern when you're not sure about the timestamp:
+If you're not sure of the timestamp, check first. You can run read-only queries against any point in the history window with [Time Travel Assist](/docs/postgres/backup-restore/time-travel-assist), or create a branch from that point and inspect it:
 
 ```bash
 neon branches create --name recovery --parent 2026-04-24T14:30:00Z
 ```
 
-Connect to the new branch, verify the data is what you expect, then either copy rows back to `main` or restore the root branch from that point. See [Instant restore](https://neon.com/docs/introduction/branch-restore).
+Once you've confirmed the data, either copy the rows you need back to the root branch or restore the root branch to that timestamp. Each restore also creates a backup branch of the pre-restore state, so you can undo it.
 
 ## Protect production from accidents
 
-On Launch and Scale, you can mark a branch as [protected](https://neon.com/docs/guides/protected-branches). Protected branches can't be deleted or reset, and projects that still have a protected branch can't be deleted.
+On the Launch plan and Scale plan, you can mark a branch as [protected](/docs/guides/protected-branches). Protected branches can't be deleted or reset, and a project with a protected branch can't be deleted.
 
 <Admonition type="warning">
-Storage for the history window grows with your write volume. A longer window gives you more recovery range but raises History usage on paid plans. Pick the shortest window that covers your typical incident detection time.
+History storage grows with your write volume. A longer window gives you more recovery range but raises History usage on paid plans. Pick the shortest window that covers the time it usually takes you to notice an incident.
 </Admonition>
 
 ## How other providers handle recovery
 
-| Provider         | Recovery model                                                                                                                                               | Retention                                                                   | Result of a restore                           |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- | --------------------------------------------- |
-| Neon             | Instant restore in place to any LSN/timestamp on a root branch                                                                                               | 6 hours (Free plan), up to 7 days (Launch plan), up to 30 days (Scale plan) | Same branch, rewound in seconds               |
-| AWS RDS / Aurora | [Point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/Latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html) from automated backups | 0-35 days (you set retention)                                               | A new database instance you cut over to       |
-| Supabase         | Daily backups; [PITR](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) as paid add-on                                               | Pro: 7 daily backups; PITR add-on starts at 7 days for ~$100/month          | Same project, inaccessible during the restore |
+| Provider         | Recovery model                                                                                                                 | Retention                                                                                                                                                      | Result of a restore                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Neon             | Instant restore of a root branch to any timestamp or LSN in the history window                                                 | 6 hours (Free plan), up to 7 days (Launch plan), up to 30 days (Scale plan)                                                                                    | Same branch and connection string, rewound in a few seconds |
+| AWS RDS / Aurora | [Point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) from automated backups           | Backup retention you set, up to 35 days ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html)) | A new DB instance or cluster you cut over to                |
+| Supabase         | Daily backups on paid plans; [PITR](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) as a paid add-on | Pro: last 7 days of daily backups; PITR from 7 days at about $100/month                                                                                        | Same project, inaccessible during the restore               |
 
-Both AWS and Supabase support point-in-time recovery, but the operational shape differs: AWS PITR provisions a new instance, and a Supabase restore takes the project offline during the operation. Lakebase Postgres instant restore rewinds the existing root branch in seconds, so connection strings stay the same.
+AWS and Supabase both support point-in-time recovery, but the restore works differently. AWS restores into a new instance or cluster that you then point your app at. Supabase restores into the existing project, which is offline for the duration, and the downtime grows with database size ([Backups](https://supabase.com/docs/guides/platform/backups)).
+
+Vendor details verified on 2026-09-23 against the linked pages.
 
 <CTA title="Try instant restore on Neon" description="Free plan includes a 6-hour history window for recovery." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

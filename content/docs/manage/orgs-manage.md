@@ -21,9 +21,8 @@ Organizations managed through the [Vercel-managed integration](/docs/guides/verc
 
 ## Create an organization
 
-To create a new org, use the **Create organization** button in the org switcher in the top navbar.
+To create a new org, use the **Create organization** button in the profile menu in the top-right of the console.
 
-![create organization button](/docs/manage/orgs_create_button.png)
 
 Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
@@ -87,7 +86,7 @@ The **Collaborator** organization role is not the same as a legacy project-shari
 
 ### Project sharing
 
-Project sharing invites an external Neon account by email to a single project, without adding them to your organization. It's still available from a project's **Settings** → **Collaborators** page, and if any project in your organization has collaborators, you'll also see them on the organization's **People** page.
+Project sharing invites an external Neon account by email to a single project, without adding them to your organization. It's still available from a project's **Settings** → **Sharing** page, and if any project in your organization has collaborators, you'll also see them on the organization's **People** page.
 
 Project-sharing collaborators _do not_ have access to the organization itself. They reach their shared projects by selecting **Projects shared with me** in the org switcher. When a project is transferred into an organization, sharing-based access is automatically removed for anyone who is already a member of that organization.
 

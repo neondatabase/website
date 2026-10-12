@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
-import { CONTENT_ROUTES } from 'constants/content';
+import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
-import {
-  isAIAgentRequest,
-  getMarkdownPath,
-  buildAgent404Response,
-} from './utils/ai-agent-detection';
-import { trackLLMPageview } from './utils/llm-analytics';
+import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import { createLLMAnalytics } from './utils/llm-analytics';
 import { markdownNotFoundResponse } from './utils/markdown-404';
 
 const SITE_URL =
@@ -21,20 +17,34 @@ const SITE_URL =
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
-  return Object.keys(CONTENT_ROUTES).some(
+  const isGeneratedPage = Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized);
+  const isContentPage = Object.keys(CONTENT_ROUTES).some(
     (route) => normalized === route || path.startsWith(`${route}/`)
   );
+
+  return isGeneratedPage || isContentPage;
+}
+
+function applyNegotiationVary(response) {
+  const vary = new Set(
+    (response.headers.get('Vary') || '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean)
+  );
+  vary.add('Accept');
+  vary.add('User-Agent');
+  response.headers.set('Vary', [...vary].join(', '));
+  return response;
 }
 
 function applyDocHeaders(response) {
-  response.headers.append('Vary', 'Accept');
+  applyNegotiationVary(response);
   response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
   response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
   response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
   return response;
 }
-
-const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
 
 // Resolve where a moved `.md` page should redirect. next.config `redirectFrom`
 // rules match only the non-`.md` source, so we probe the HTML sibling (which
@@ -149,8 +159,8 @@ const STATIC_MD = new Set(STATIC_MD_PATHS);
 // isContentRoute branch would otherwise apply (this short-circuit runs before it)
 // plus the LLM read beacon. Without this, static skill files would lose the
 // X-Robots-Tag: noindex they get on the isContentRoute path and become indexable.
-function servedStaticMarkdown(req) {
-  trackLLMPageview(req);
+function servedStaticMarkdown(analytics) {
+  analytics.track({ branch: 'static-markdown' });
   const response = applyDocHeaders(NextResponse.next());
   response.headers.set('X-Robots-Tag', 'noindex');
   return response;
@@ -168,7 +178,7 @@ function skillAliasTarget(pathname) {
   return match ? `/docs/ai/skills/${match[1]}/SKILL.md` : null;
 }
 
-function staticMarkdownResponse(req, pathname) {
+function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
 
   // Skill-discovery alias: no physical file here — a next.config rewrite maps it
@@ -177,79 +187,59 @@ function staticMarkdownResponse(req, pathname) {
   // falling through would fire again in the agent branch for agent UAs.
   const aliasTarget = skillAliasTarget(pathname);
   if (aliasTarget !== null) {
-    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(req);
-    trackLLMPageview(req, { is404: true });
+    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(analytics);
+    analytics.track({ is404: true, branch: 'missing-skill-alias' });
     return markdownNotFoundResponse(pathname, { source: 'agent-404' });
   }
 
   // Real static file (SKILL.md, references, prompts, /pricing.md): serve it as-is.
   // Checked before getMarkdownPath because some static files also have a
   // CUSTOM_MARKDOWN_PATHS mapping (e.g. /pricing.md) — the file is right here.
-  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(req);
+  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(analytics);
 
   // Has a generated /md sibling → let the existing fetch-based branch serve it
   // (or return its own markdown 404); both outcomes are tracked there.
   if (getMarkdownPath(pathname) !== null) return null;
 
   // No static file and no /md sibling → genuine miss.
-  trackLLMPageview(req, { is404: true });
+  analytics.track({ is404: true, branch: 'missing-static-markdown' });
   return markdownNotFoundResponse(pathname, { source: 'agent-404' });
 }
 
-export async function proxy(req) {
+export async function proxy(req, event) {
+  const analytics = createLLMAnalytics(req);
+  const response = await handleProxy(req, analytics);
+
+  if (analytics.beacon) {
+    if (event?.waitUntil) {
+      event.waitUntil(analytics.beacon);
+    } else {
+      // Direct callers without NextFetchEvent still complete the beacon safely.
+      await analytics.beacon;
+    }
+  }
+  analytics.logResponse(response);
+  return response;
+}
+
+async function handleProxy(req, analytics) {
   try {
     const { pathname } = req.nextUrl;
 
-    // /blog/[slug].md — serve raw markdown from CDN for any requester
+    // /blog/[slug].md — serve raw markdown from the in-repo blog snapshot (the
+    // same source the HTML post page renders from). Rewrite to
+    // the blog route handler at /blog/[slug]/md, which reads it and
+    // fires the LLM read beacon. (Previously this fetched an external CDN that
+    // stopped receiving new posts once the blog moved into this repo.)
     if (pathname.startsWith('/blog/') && pathname.endsWith('.md')) {
       const slug = pathname.slice('/blog/'.length, -'.md'.length);
-      try {
-        const res = await fetch(`${BLOG_CDN_BASE}/posts/${slug}.md`);
-        if (res.ok) {
-          trackLLMPageview(req);
-          const markdown = await res.text();
-          return new NextResponse(markdown, {
-            status: 200,
-            headers: {
-              'Content-Type': 'text/markdown; charset=utf-8',
-              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-              'X-Content-Source': 'markdown',
-              'X-Robots-Tag': 'noindex',
-              'X-LLMs-Txt': '/blog/llms.txt',
-            },
-          });
-        }
-        if (res.status === 404) {
-          trackLLMPageview(req, { is404: true });
-          return new NextResponse(
-            buildAgent404Response(pathname, {
-              context: 'Neon Blog',
-              extraLinks: [
-                { label: 'Blog index', href: '/blog/llms.txt', description: 'All Neon blog posts' },
-              ],
-            }),
-            {
-              status: 404,
-              headers: {
-                'Content-Type': 'text/markdown; charset=utf-8',
-                'Cache-Control': 'public, max-age=60, s-maxage=300',
-                'X-Content-Source': 'agent-404',
-                'X-LLMs-Txt': '/blog/llms.txt',
-              },
-            }
-          );
-        }
-        // Non-200/404 from CDN (5xx, etc.) — fall through to 502
-        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
-          status: 502,
-          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
-        });
-      } catch (error) {
-        console.error('[blog .md] Error fetching from CDN', { slug, error: error.message });
-        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
-          status: 502,
-          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
-        });
+      // Only real (single-segment) post slugs map to the handler. A nested path
+      // like /blog/a/b.md isn't a post; let it fall through to the generic .md
+      // handler below so it still returns a markdown 404, not an HTML one.
+      if (slug && !slug.includes('/')) {
+        const rewriteUrl = req.nextUrl.clone();
+        rewriteUrl.pathname = `/blog/${slug}/md`;
+        return NextResponse.rewrite(rewriteUrl);
       }
     }
 
@@ -261,7 +251,7 @@ export async function proxy(req) {
 
     // Missing `.md` with no generated /md sibling → markdown 404 (real static
     // files pass through). Covers skills, .well-known, and arbitrary paths.
-    const staticMd = staticMarkdownResponse(req, pathname);
+    const staticMd = staticMarkdownResponse(pathname, analytics);
     if (staticMd) return staticMd;
 
     const isAgent = isAIAgentRequest(req);
@@ -275,14 +265,15 @@ export async function proxy(req) {
           const response = await fetch(markdownUrl);
 
           if (response.ok) {
-            trackLLMPageview(req);
+            analytics.track({ branch: 'agent-markdown' });
             const markdown = await response.text();
             return applyDocHeaders(
               new NextResponse(markdown, {
                 status: 200,
                 headers: {
                   'Content-Type': 'text/markdown; charset=utf-8',
-                  'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                  // Preserve the existing short Markdown cache policy.
+                  'Cache-Control': 'public, max-age=60, s-maxage=300',
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
                 },
@@ -302,7 +293,7 @@ export async function proxy(req) {
         }
       }
 
-      trackLLMPageview(req, { is404: agentHit404 });
+      analytics.track({ is404: agentHit404, branch: 'agent-fallback' });
 
       if (agentHit404) {
         return markdownMovedOr404Response(req, pathname, 'agent-404');
@@ -318,13 +309,12 @@ export async function proxy(req) {
     if (pathname === '/docs') {
       const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
       // The /docs response is content-negotiated (agents/markdown get llms.txt above),
-      // so the redirect must vary on Accept to stay correct in shared caches.
-      res.headers.set('Vary', 'Accept');
-      return res;
+      // so the redirect must vary on both negotiation inputs to stay correct in shared caches.
+      return applyNegotiationVary(res);
     }
 
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
-    // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
+    // Negotiated Markdown responses vary on Accept and User-Agent (applyDocHeaders above).
     if (isContentRoute(pathname)) {
       if (pathname.endsWith('.md')) {
         const markdownPath = getMarkdownPath(pathname);
@@ -341,7 +331,7 @@ export async function proxy(req) {
             // double-count (a browser only ever reaches this branch).
             const isMarkdown404 = response.status === 404;
             if (!isAgent && (response.ok || isMarkdown404)) {
-              trackLLMPageview(req, { is404: isMarkdown404 });
+              analytics.track({ is404: isMarkdown404, branch: 'direct-markdown' });
             }
 
             if (response.ok) {
@@ -351,7 +341,8 @@ export async function proxy(req) {
                   status: 200,
                   headers: {
                     'Content-Type': 'text/markdown; charset=utf-8',
-                    'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                    // Preserve the existing short Markdown cache policy.
+                    'Cache-Control': 'public, max-age=60, s-maxage=300',
                     'X-Content-Source': 'markdown',
                     'X-Robots-Tag': 'noindex',
                   },
@@ -375,7 +366,7 @@ export async function proxy(req) {
       if (pathname.endsWith('.md')) {
         response.headers.set('X-Robots-Tag', 'noindex');
       }
-      return response;
+      return applyNegotiationVary(response);
     }
 
     // Check if the user is logged in
@@ -405,7 +396,8 @@ export async function proxy(req) {
       console.error('Error checking login indicator:', error);
     }
 
-    return NextResponse.next();
+    const response = NextResponse.next();
+    return getMarkdownPath(pathname) ? applyNegotiationVary(response) : response;
   } catch (error) {
     console.error('Middleware execution error:', error);
     // General error fallback
@@ -418,6 +410,11 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
+    '/functions', // Agent-friendly Functions page
+    '/ai-gateway', // Agent-friendly AI Gateway page
+    '/object-storage', // Agent-friendly Object Storage page
+    '/auth', // Agent-friendly Auth product page
+    '/lakebase', // Agent-friendly Lakebase page
     '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown

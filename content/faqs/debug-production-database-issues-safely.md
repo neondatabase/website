@@ -13,40 +13,40 @@ nextLink:
   slug: delete-database-neon
 ---
 
-The safe way to debug production is to put diagnostic queries on separate compute from the user-facing workload. Lakebase Postgres gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
+The safe way to debug production is to run diagnostic queries on compute that doesn't serve your users. Lakebase Postgres gives you two ways to do that: read replicas for read-only investigation against live data, and branches for experiments that write.
 
 ## Read replicas for live diagnostics
 
-A read replica is a separate compute that reads from the same storage as the primary. Open a long `EXPLAIN ANALYZE`, run an expensive aggregation, or attach a slow analytics query to a replica without touching the primary compute.
+A read replica is a separate read-only compute that reads from the same storage as the primary compute, so no data is copied. Run a long `EXPLAIN ANALYZE`, an expensive aggregation, or a slow analytics query on the replica, and the primary compute doesn't do the work.
 
-Create one from the console or CLI:
+Create one from the Console or the CLI. The examples on this page use `production`, the default branch name for projects created in the Console. Projects created with the CLI or API name it `main`.
 
 ```bash
-neon branches add-compute main --type read_only
+neon branches add-compute production --type read_only
 ```
 
-Replicas autoscale independently from the primary, so a heavy diagnostic query can run on a larger replica while production stays at a smaller size. See [Read replicas](https://neon.com/docs/introduction/read-replicas).
+Each replica has its own compute size and autoscaling settings, so a heavy diagnostic query can run on a larger replica while production stays at its usual size. The Free plan allows up to 3 read replicas per project. See [Read replicas](/docs/introduction/read-replicas).
 
 ## Branches for write-heavy debugging
 
-If you need to test a fix (apply a migration, rebuild an index, modify rows), branch from the current state of `main`:
+To test a fix (apply a migration, rebuild an index, modify rows), branch from the current state of production:
 
 ```bash
-neon branches create --name debug-slow-query --parent main
+neon branches create --name debug-slow-query --parent production
 ```
 
-The branch runs on its own compute and uses copy-on-write storage, so writes don't affect production. You can also branch from a point in the past if the bad state has already been overwritten:
+The branch runs on its own compute and uses copy-on-write storage, so writes on the branch don't touch production. If the bad state has already been overwritten, branch from a point in the past with an RFC 3339 timestamp:
 
 ```bash
 neon branches create --name pre-deploy \
   --parent 2026-04-25T08:00:00Z
 ```
 
-History window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan ([History window](https://neon.com/docs/introduction/history-window)).
+How far back you can go depends on your [history window](/docs/postgres/backup-restore/history-window): up to 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan.
 
 ## Inspect what's running right now
 
-Before reaching for a branch, the Neon Console's [Monitoring page](https://neon.com/docs/introduction/monitoring-page) shows live connection counts, CPU, and active sessions. For deeper query stats, install `pg_stat_statements` if it isn't already enabled:
+Before you create a branch, check the [Monitoring page](/docs/introduction/monitoring-page) in the Neon Console. It graphs CPU, active and idle connections, and other metrics for each compute. For per-query stats, install `pg_stat_statements` if it isn't already enabled:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
@@ -57,17 +57,19 @@ ORDER BY total_exec_time DESC
 LIMIT 10;
 ```
 
-See [Query performance](https://neon.com/docs/postgresql/query-performance).
+See [Optimize Postgres query performance](/docs/postgresql/query-performance).
 
 <Admonition type="tip">
-Mark production as a [protected branch](https://neon.com/docs/guides/protected-branches) on Launch and Scale to prevent accidental deletion or reset during debugging.
+On the Launch and Scale plans, mark production as a [protected branch](/docs/guides/protected-branches). Protected branches can't be deleted or reset, which guards against a wrong command during debugging.
 </Admonition>
 
-## How other providers compare for safe debugging
+## How other providers compare
 
-- **AWS RDS / Aurora**: read replicas are available and run on separate compute; see the [RDS read replica docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). For write-side debugging, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new instance, which takes minutes and adds full instance and storage cost until you tear it down.
-- **Supabase**: [read replicas](https://supabase.com/docs/guides/platform/read-replicas) are available for projects on Pro and above. Write-side debugging means restoring a PITR backup into the project (a paid add-on) or creating a [preview branch](https://supabase.com/docs/guides/deployment/branching), which won't include your production data.
+- **AWS RDS and Aurora**: [read replicas](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html) run on separate instances. For write-side debugging on RDS, you [restore to a point in time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html), which creates a new DB instance that you pay for until you delete it. Aurora also offers [cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), which uses copy-on-write storage to create a new cluster from production data.
+- **Supabase**: [read replicas](https://supabase.com/docs/guides/platform/read-replicas/getting-started) are available on the Pro, Team, and Enterprise plans for projects on at least a Small compute, and each replica inherits the primary's compute size. For write-side debugging, [Restore to a new project](https://supabase.com/docs/guides/platform/clone-project) (beta, paid plans) copies your data into a separate project. [Preview branches](https://supabase.com/docs/guides/deployment/branching) start from migrations and seed data, and [dashboard branches](https://supabase.com/docs/guides/deployment/branching/dashboard) (public alpha) can copy production data if you have the PITR add-on. An in-place [PITR restore](https://supabase.com/docs/guides/platform/backups) makes the project inaccessible while it runs.
 
-Lakebase Postgres combines read replicas (live, no separate storage cost) and copy-on-write branches (writable, full data shape, seconds to create), so you can cover both read-only diagnostics and write-side experiments without a separate restore workflow.
+In Lakebase Postgres, read replicas share storage with the primary, and branches carry a full copy-on-write view of production data, so both read-only diagnostics and write-side experiments run without a separate restore step.
 
-<CTA title="Debug Postgres safely with Neon" description="Branches and read replicas included on every plan." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />
+Vendor details verified on 2026-09-23 against the linked pages.
+
+<CTA title="Debug Postgres safely with Neon" description="Branches and read replicas are included on every plan." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

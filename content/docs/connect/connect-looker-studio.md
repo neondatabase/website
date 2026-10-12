@@ -10,7 +10,7 @@ summary: >-
   required server certificate is isrgrootx1.pem from Let's Encrypt; client
   authentication should be left disabled.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-09-16T19:45:35.340Z'
 ---
 
 [Looker Studio](https://lookerstudio.google.com/) is Google's data visualization and business intelligence platform. This guide explains how to connect your database to Looker Studio using a PostgreSQL data source.
@@ -20,7 +20,7 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 ## Get your database connection string
 
 1. In the Neon Console, select the **project** and **branch** you want to connect to.
-2. On the **Project dashboard**, click **Connect**.
+2. Click **Connect** in the Console nav.
 3. Click **Show Password** and copy the connection string.
 
 For more details, see [Connect from any application](/docs/connect/connect-from-any-app).

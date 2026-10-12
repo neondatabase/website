@@ -12,7 +12,7 @@ summary: >-
   sets wal_level=logical, which is permanent and keeps compute active while
   consumers are connected.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -44,8 +44,8 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication:
 
 1. Select your project in the Neon Console.
-2. On the **Dashboard**, select **Settings**.
-3. Select **Logical Replication**.
+2. Select **Settings** in the sidebar.
+3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
 You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
@@ -61,7 +61,7 @@ logical
 
 After enabling logical replication on Neon, you'll now connect your Neon database to Sequin. Follow these steps:
 
-1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button on your **Project Dashboard**. It will look similar to this:
+1. In Neon, copy your database connection string. You can find the it by clicking the **Connect** button in the Console nav. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require

@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -44,14 +44,14 @@ The following are common causes of increased network transfer in Neon. See [How 
 ## How to monitor network transfer
 
 <Admonition type="important">
-The Billing page only displays network transfer when usage exceeds the included allowance. To track usage before it results in charges, check the usage panel on the Organization or Project dashboard, or use the Consumption API.
+The Billing page only displays network transfer when usage exceeds the included allowance. To track usage before it results in charges, check the usage panel on the organization **Projects** page or the project **Overview** page, or use the Consumption API.
 </Admonition>
 
 Paid plans receive a weekly usage report by email that includes network transfer usage and cost.
 
 ### Console organization page
 
-The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Individual project dashboards show network transfer for that project.
+The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Each project's **Overview** page shows network transfer for that project.
 
 ![Organization page usage panel showing network transfer](/docs/introduction/dashboard_org_usage.png)
 

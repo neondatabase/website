@@ -168,6 +168,6 @@ Neon’s storage engine saves WAL records and snapshots of your database and can
 
 Ephemeral branches introduce a unique way to interact with your data’s history by allowing developers to access different timelines and perform Time Travel queries to provide the ability to review prior states and understand your data’s lifecycle.
 
-What about you? How often do you use PITR in your projects? Join us on [Discord](https://neon.tech/discord) and let us know how we can enhance your Postgres experience in the cloud.<br />
+What about you? How often do you use PITR in your projects? Join us on [Discord](https://neon.com/discord) and let us know how we can enhance your Postgres experience in the cloud.<br />
 
 Special thanks to [skeptrune](https://twitter.com/skeptrune) for reviewing and suggesting adding a mention to Barman.

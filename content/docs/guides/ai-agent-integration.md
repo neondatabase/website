@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-02T18:59:27.831Z'
+updatedOn: '2026-10-01T15:44:50.010Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -45,7 +45,7 @@ Keep your API keys secure. You'll use them for all API operations in this guide.
 
 ### Project-per-tenant architecture
 
-This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
+This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/concepts/the-object-model) (containing branches, databases, roles, computes, and backend services like object storage and functions). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
@@ -104,7 +104,7 @@ For free-tier users, create projects in your Free organization (sponsored by Neo
 | ----------------- | ------------------ | ---------------------------------------- |
 | **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units  |
 | **Active time**   | `360000` seconds   | 100 hours of compute activity per month  |
-| **Storage**       | `536870912` bytes  | 512 MB total storage limit               |
+| **Storage**       | `1073741824` bytes | 1 GB total storage limit                 |
 | **Data transfer** | `5368709120` bytes | 5 GB data transfer per project per month |
 
 Example API request:
@@ -122,7 +122,7 @@ curl --request POST \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },
@@ -141,12 +141,12 @@ For paid users, create projects in your paid organization with higher resource q
 
 #### Example: Pro tier
 
-| Resource          | Pro Tier Quota      | Description                             |
-| ----------------- | ------------------- | --------------------------------------- |
-| **Compute**       | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
-| **Active time**   | `2700000` seconds   | 750 hours of compute activity per month |
-| **Storage**       | `10737418240` bytes | 10 GB storage limit                     |
-| **Data transfer** | `53687091200` bytes | 50 GB data transfer per month           |
+| Resource             | Pro Tier Quota      | Description                             |
+| -------------------- | ------------------- | --------------------------------------- |
+| **Compute**          | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
+| **Active time**      | `2700000` seconds   | 750 hours of compute activity per month |
+| **Postgres storage** | `10737418240` bytes | 10 GB Postgres storage limit            |
+| **Data transfer**    | `53687091200` bytes | 50 GB data transfer per month           |
 
 Example API request:
 
@@ -315,7 +315,7 @@ curl --request PATCH \
     "settings": {
       "quota": {
         "active_time_seconds": 360000,
-        "logical_size_bytes": 536870912,
+        "logical_size_bytes": 1073741824,
         "data_transfer_bytes": 5368709120
       }
     },

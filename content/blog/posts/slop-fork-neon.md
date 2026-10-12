@@ -163,7 +163,7 @@ Maybe you want:
 - AI-native workflows
 - or a completely different UX philosophy
 
-Go build it! And if you think the official Neon console should work differently, tell us. We genuinely want that feedback — drop into the [Neon Discord](https://discord.gg/HjupxCjXXp) and let us know what's missing.
+Go build it! And if you think the official Neon console should work differently, tell us. We genuinely want that feedback — drop into the [Neon Discord](https://neon.com/discord) and let us know what's missing.
 
 But sometimes the best workflow for *you* is highly specific to your own projects and infrastructure. APIs make that possible. 
 

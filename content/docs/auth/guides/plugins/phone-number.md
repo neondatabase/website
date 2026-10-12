@@ -11,10 +11,8 @@ summary: >-
   configurable, requests are rate-limited per IP, and an OTP is invalidated
   after too many incorrect attempts.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and supports the [Phone Number](https://www.better-auth.com/docs/plugins/phone-number) plugin through the Neon SDK.
 
@@ -43,12 +41,10 @@ Managed Better Auth does **not** deliver SMS for you. The plugin requires a `sen
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech).
-2. Select your project and go to **Auth** > **Plugins**.
-3. Toggle **Phone Authentication** on.
+2. Select your project and go to **Settings** > **Better Auth**.
+3. In the **Phone Authentication** section, toggle **Enable Phone Authentication** on.
 4. Configure the options:
    - **OTP Expiry** (60-600 seconds, default: 300) controls how long a generated OTP stays valid.
-
-![Neon Console Auth Plugins tab with Phone Number settings](/docs/auth/neon_auth_plugins_phone_number.png)
 
 </TabItem>
 

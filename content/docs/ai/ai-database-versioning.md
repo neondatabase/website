@@ -11,11 +11,11 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-09-17T16:33:54.884Z'
 ---
 
 <Admonition type="note">
-Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
 
 **Limits and pricing:** The Free plan includes 1 manual snapshot, and paid plans (including the [Agent plan](https://neon.com/use-cases/ai-agents)) include 100 manual snapshots. On paid plans, snapshots created by backup schedules do not count toward this limit. Snapshot storage is billed at $0.09/GB-month. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>

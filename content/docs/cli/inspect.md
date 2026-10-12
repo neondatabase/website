@@ -23,11 +23,17 @@ Run a single diagnostic query against a branch's Postgres. Pick the query with a
 
 <CliOptions command="inspect db" />
 
-By default the command resolves the project, branch, database, and role from your [context](/docs/cli/set-context) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon.
+By default the command resolves the project, branch, database, and role from your [context](/docs/cli/link) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon without being logged in to Neon.
+
+Without `--role-name`, `inspect` connects as the same role as [`neon connection-string`](/docs/cli/connection-string): the branch's only role, or `neondb_owner` on branches with several roles. If there's no `neondb_owner`, it uses the only role left after skipping the Data API and Managed Better Auth roles (`authenticator`, `anonymous`, and `authenticated`).
 
 When you omit `--database-name`, `inspect` covers every database on the branch and adds a `database` column so you can tell the rows apart. Pass `--database-name` to inspect a single database, which also scopes `locks` and `long-running-queries` to that database so lock and relation names resolve correctly. Database-scoped checks such as `table-sizes`, `locks`, and `outliers` run against each database, while compute-wide checks (`lfc-hit-rate`, `working-set`, and `replication-slots`) run once. If any database fails, the whole run fails, so pass `--database-name` to narrow to one when that happens. `--db-url` always inspects the single database in the connection string and never adds the `database` column.
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
+
+<Admonition type="note">
+On large fixed-size computes (18 CU and above), Neon disables the file cache and serves the [compute cache](/docs/extensions/neon#what-is-the-compute-cache) from Postgres `shared_buffers`, so `lfc-hit-rate` and `working-set` return empty or misleading results on those computes. Use the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph or run `SHOW shared_buffers` instead.
+</Admonition>
 
 From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
 
@@ -42,15 +48,10 @@ neon inspect db table-sizes
 ```
 
 ```text
-┌────────┬───────────┬─────────┐
-│ Schema │ Name      │ Size    │
-├────────┼───────────┼─────────┤
-│ public │ events    │ 16 MB   │
-├────────┼───────────┼─────────┤
-│ public │ orders    │ 4752 kB │
-├────────┼───────────┼─────────┤
-│ public │ customers │ 1616 kB │
-└────────┴───────────┴─────────┘
+Schema  Name       Size
+public  events     16 MB
+public  orders     4752 kB
+public  customers  1616 kB
 ```
 
 ### neon inspect db index-sizes (#db-index-sizes)
@@ -70,17 +71,11 @@ neon inspect db unused-indexes
 ```
 
 ```text
-┌──────────────────┬────────────────────────┬────────────┬─────────────┐
-│ Table            │ Index                  │ Index Size │ Index Scans │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.events    │ events_created_at_idx  │ 1368 kB    │ 0           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.orders    │ orders_customer_id_idx │ 1024 kB    │ 2           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.customers │ customers_email_idx    │ 808 kB     │ 0           │
-├──────────────────┼────────────────────────┼────────────┼─────────────┤
-│ public.orders    │ orders_status_idx      │ 560 kB     │ 20          │
-└──────────────────┴────────────────────────┴────────────┴─────────────┘
+Table             Index                   Index Size  Index Scans
+public.events     events_created_at_idx   1368 kB     0
+public.orders     orders_customer_id_idx  1024 kB     2
+public.customers  customers_email_idx     808 kB      0
+public.orders     orders_status_idx       560 kB      20
 ```
 
 ### neon inspect db seq-scans (#db-seq-scans)
@@ -147,15 +142,10 @@ neon inspect db outliers
 <summary>Show output</summary>
 
 ```text
-┌─────────────────┬────────────────┬────────┬───────────────────────────────────────────────────────────────────────┐
-│ Total Exec Time │ Prop Exec Time │ Ncalls │ Query                                                                 │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.875831 │ 57.0%          │ 250    │ SELECT * FROM orders WHERE customer_id = $1                           │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.439406 │ 28.6%          │ 400    │ SELECT * FROM customers WHERE email = $1                              │
-├─────────────────┼────────────────┼────────┼───────────────────────────────────────────────────────────────────────┤
-│ 00:00:00.220669 │ 14.4%          │ 15     │ SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status │
-└─────────────────┴────────────────┴────────┴───────────────────────────────────────────────────────────────────────┘
+Total Exec Time  Prop Exec Time  Ncalls  Query
+00:00:00.875831  57.0%           250     SELECT * FROM orders WHERE customer_id = $1
+00:00:00.439406  28.6%           400     SELECT * FROM customers WHERE email = $1
+00:00:00.220669  14.4%           15      SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
 ```
 
 </details>
@@ -172,15 +162,10 @@ neon inspect db calls
 <summary>Show output</summary>
 
 ```text
-┌────────┬─────────────────┬────────────────┬───────────────────────────────────────────────────────────────────────┐
-│ Ncalls │ Total Exec Time │ Prop Exec Time │ Query                                                                 │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 400    │ 00:00:00.439406 │ 59.8%          │ SELECT * FROM customers WHERE email = $1                              │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 250    │ 00:00:00.875831 │ 37.4%          │ SELECT * FROM orders WHERE customer_id = $1                           │
-├────────┼─────────────────┼────────────────┼───────────────────────────────────────────────────────────────────────┤
-│ 15     │ 00:00:00.220669 │ 2.2%           │ SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status │
-└────────┴─────────────────┴────────────────┴───────────────────────────────────────────────────────────────────────┘
+Ncalls  Total Exec Time  Prop Exec Time  Query
+400     00:00:00.439406  59.8%           SELECT * FROM customers WHERE email = $1
+250     00:00:00.875831  37.4%           SELECT * FROM orders WHERE customer_id = $1
+15      00:00:00.220669  2.2%            SELECT status, count(*), sum(total_cents) FROM orders GROUP BY status
 ```
 
 </details>
@@ -195,24 +180,18 @@ neon inspect db lfc-hit-rate
 
 ### neon inspect db working-set (#db-working-set)
 
-Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
+Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds LFC` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db working-set
 ```
 
 ```text
-┌────────┬─────────────┬──────────┬─────────────┐
-│ Window │ Working Set │ Lfc Size │ Exceeds Lfc │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 1m     │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 5m     │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 15m    │ 48 MB       │ 607 MB   │ no          │
-├────────┼─────────────┼──────────┼─────────────┤
-│ 1h     │ 48 MB       │ 607 MB   │ no          │
-└────────┴─────────────┴──────────┴─────────────┘
+Window  Working Set  LFC Size  Exceeds LFC
+1m      48 MB        607 MB    no
+5m      48 MB        607 MB    no
+15m     48 MB        607 MB    no
+1h      48 MB        607 MB    no
 ```
 
 ### neon inspect db vacuum-stats (#db-vacuum-stats)

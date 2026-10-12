@@ -2,9 +2,10 @@
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
 summary: >-
-  On paid plans there's no hard per-branch size limit; storage grows with
-  your usage. The customer-set quotas described here are separate, hard limits
-  you choose. Per-project consumption quotas in Neon let you cap active_time_seconds,
+  Storage is unlimited on paid plans: there's no hard per-branch size limit
+  and storage grows with your usage. The customer-set quotas described here are
+  separate, hard limits you choose. Per-project consumption quotas in Neon let
+  you cap active_time_seconds,
   compute_time_seconds, written_data_bytes, data_transfer_bytes, and
   logical_size_bytes via the quota object in the Create or Update Project API
   endpoints. When any quota threshold is met, all active computes for that
@@ -17,7 +18,7 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-08-07T17:04:50.326Z'
+updatedOn: '2026-09-02T21:17:48.434Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).

@@ -12,9 +12,9 @@
 // each one against schema.json, so a CLI change that invalidates an
 // example fails the test suite.
 const META = {
-  auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
+  login: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon login'] },
   init: {
-    desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and optionally neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {
@@ -24,6 +24,10 @@ const META = {
   checkout: {
     desc: 'Pin a branch in .neon; auto-pulls its env vars.',
     examples: ['neon checkout feat/auth'],
+  },
+  git: {
+    desc: 'Sync the checked-out Neon branch to your git branch on checkout (Preview).',
+    examples: ['neon git install', 'neon git status'],
   },
   env: {
     desc: "Write the branch's DATABASE_URL + Neon vars to .env.",
@@ -59,6 +63,10 @@ const META = {
     examples: ['neon claim create --env-pull', 'neon claim accept'],
   },
   completion: { desc: 'Generate a shell completion script.' },
+  feedback: {
+    desc: 'Send feedback about the CLI to the Neon team; no login required.',
+    examples: ['neon feedback --message "The branch docs were unclear"'],
+  },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {
     desc: 'Create, diff, reset, restore, and manage branches.',
@@ -101,6 +109,14 @@ const META = {
   functions: {
     desc: 'Deploy and manage Neon Functions on a branch.',
     examples: ['neon functions deploy api --src ./api.ts'],
+  },
+  triggers: {
+    desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',
+    examples: ["neon triggers create --function-slug api --name nightly --cron '0 6 * * *'"],
+  },
+  credentials: {
+    desc: 'Issue and manage scoped credentials on a branch.',
+    examples: ['neon credentials create --scope storage:read'],
   },
   buckets: {
     desc: 'Branch-scoped object storage and its objects.',

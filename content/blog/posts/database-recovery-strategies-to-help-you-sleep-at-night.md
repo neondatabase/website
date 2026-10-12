@@ -108,4 +108,4 @@ Running this PITR in Neon doesn’t incur additional costs, and **it’s an extr
 
 When you’re getting your project to production, knowing you have a quick data recovery plan in case something goes wrong will help you sleep at night. In Neon, that’s instant PITR – we hope you never have to use it though 🙂
 
-If you’re concerned about a particular scenario, [don’t hesitate to reach out to us at the Neon team](https://discord.gg/92vNTzKDGp).
+If you’re concerned about a particular scenario, [don’t hesitate to reach out to us at the Neon team](https://neon.com/discord).

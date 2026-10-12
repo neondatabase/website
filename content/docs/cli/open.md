@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `open` command opens the linked project's dashboard in the [Neon Console](https://console.neon.tech) in your default browser. It resolves the project from your local `.neon` [context file](/docs/cli/set-context), so run [`neon link`](/docs/cli/link) or [`neon set-context`](/docs/cli/set-context) first, or pass `--project-id` to target a project directly. If no project is linked and you don't pass `--project-id`, the command tells you to run `neon link`.
+The `open` command opens the linked project's dashboard in the [Neon Console](https://console.neon.tech) in your default browser. It resolves the project from your local `.neon` [context file](/docs/cli/link), so run [`neon link`](/docs/cli/link) or [`neon set-context`](/docs/cli/set-context) first, or pass `--project-id` to target a project directly. If no project is linked and you don't pass `--project-id`, the command tells you to run `neon link`.
 
 ## Usage
 
@@ -30,7 +30,7 @@ neon open
 ```
 
 ```text
-INFO: Opening https://console.neon.tech/app/projects/cold-grass-40154007 in your browser.
+Opening https://console.neon.tech/app/projects/cold-grass-40154007 in your browser.
 ```
 
 Open a specific project without relying on the linked context:

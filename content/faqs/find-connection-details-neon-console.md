@@ -1,9 +1,9 @@
 ---
 title: 'Where can I find my database connection details in the Neon Console?'
-subtitle: 'Everything you need lives in the Connect widget on the Project Dashboard.'
+subtitle: 'Click Connect in the Neon Console to see every connection detail for a branch.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,27 +14,25 @@ nextLink:
   slug: find-database-connection-string-url
 ---
 
-Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. The **Connect to your database** modal lists every detail you need to connect: branch, compute, database, role, host, password, and a constructed connection string. See [Connect from any app](/docs/connect/connect-from-any-app).
+Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** in the Console nav. The **Connect to your branch** modal shows every connection detail for the branch, compute, database, and role you select, including the host, the password, and a ready-to-copy connection string. See [Connect from any app](/docs/connect/connect-from-any-app).
 
-## Open the Connect widget
+## Open the Connect modal
 
 1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
-2. On the **Project Dashboard**, click **Connect**.
+2. Click **Connect** in the Console nav.
+3. Select a **Branch**, **Compute**, **Database**, and **Role**. The connection string updates to match.
 
-The modal opens with everything wired up for the branch and role you select.
+## What the modal shows
 
-## What you'll see in the widget
-
-| Field                             | What it is                                                                                                             |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Branch**                        | The branch you're connecting to. Defaults to your project's root branch (`main` or `production`).                      |
-| **Compute**                       | The compute endpoint serving the branch. Each branch has at least one read-write compute.                              |
-| **Database**                      | The Postgres database on that branch. Defaults to `neondb` if you didn't pick a custom name.                           |
-| **Role**                          | The Postgres role you'll authenticate as. Defaults to the role created with the project (for example, `neondb_owner`). |
-| **Connection string**             | The full `postgresql://...` URL with role, password, host, and database name.                                          |
-| **Connection pooling** toggle     | Adds `-pooler` to the hostname for connection pooling through PgBouncer.                                               |
-| **Reset password** (in role menu) | Generates a new password for the selected role.                                                                        |
-| **Save in 1Password**             | Saves the connection details to 1Password if the browser extension is installed.                                       |
+| Field                         | What it is                                                                                                             |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Branch**                    | The branch you're connecting to. Defaults to your project's default branch (`production` or `main`).                   |
+| **Compute**                   | The compute serving the branch: its read-write compute, or a read replica if the branch has one.                       |
+| **Database**                  | The Postgres database on that branch. Defaults to `neondb` if you didn't pick a custom name.                           |
+| **Role**                      | The Postgres role you'll authenticate as. Defaults to the role created with the project (for example, `neondb_owner`). |
+| **Connection string**         | The full `postgresql://...` URL with role, password, host, and database name.                                          |
+| **Connection pooling** toggle | Adds `-pooler` to the hostname for connection pooling through PgBouncer.                                               |
+| **Save in 1Password**         | Saves the connection details to 1Password if the browser extension is installed.                                       |
 
 The pooled and direct hostnames differ only by the `-pooler` suffix. For example:
 
@@ -43,11 +41,11 @@ Direct: ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech
 Pooled: ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech
 ```
 
-The compute ID (the `ep-...` segment) is the same in both. Neon shows the pooled string by default. See [Connection pooling](/docs/connect/connection-pooling) for when to use each.
+The compute ID (the `ep-...` segment) is the same in both. The modal shows the pooled string by default. See [Connection pooling](/docs/connect/connection-pooling) for when to use each.
 
 ## Individual fields for a `.env` file
 
-If your app needs the components separately, copy them from the modal into your `.env`:
+If your app reads the parts separately, copy them from the modal into your `.env` file:
 
 ```text
 PGHOST=ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech
@@ -59,8 +57,8 @@ PGPORT=5432
 
 Neon uses the default Postgres port, `5432`.
 
-<Admonition type="tip" title="Looking for code snippets?">
-The Connect modal also shows ready-to-paste examples for Node.js, Python, Go, Java, Rust, and other languages, with the connection string baked in. Switch the **Connection examples** dropdown to your language of choice.
+<Admonition type="tip" title="Code snippets">
+The **Connect to your branch** modal also shows [connection examples](/docs/connect/connect-from-any-app#connection-examples-in-the-console) for different languages and frameworks, built for the branch, database, and role you select.
 </Admonition>
 
-<CTA title="See the full Connect reference" description="Learn about pooled vs direct connections, SNI workarounds, and language-specific notes." buttonText="Read the docs" buttonUrl="/docs/connect/connect-from-any-app" />
+<CTA title="See the full Connect reference" description="Learn about pooled and direct connections, the Neon CLI, and connection examples by language." buttonText="Read the docs" buttonUrl="/docs/connect/connect-from-any-app" />

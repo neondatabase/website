@@ -20,7 +20,7 @@ Review a documentation page against Neon standards and produce a structured find
 Read both of these before doing anything else:
 
 - `.claude/neon-terminology.md` — terminology rules, preferred terms, words to avoid
-- `CLAUDE.md` — writing style, MDX components, frontmatter fields
+- `AGENTS.md` — writing style, MDX components, frontmatter fields
 
 ---
 

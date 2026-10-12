@@ -36,7 +36,7 @@ seo:
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/monitor-your-neon-usage-via-slack-alerts/screenshot-2025-01-31-at-104751percente2percent80percentafam-1024x525-412d68b7.png)
 
 <Admonition type="warning" title="Update (November 2025)">
-This version of the Slack App is now deprecated. If you're looking for something similar, [tell us on Discord](https://discord.gg/92vNTzKDGp).
+This version of the Slack App is now deprecated. If you're looking for something similar, [tell us on Discord](https://neon.com/discord).
 </Admonition>
 
 We’ve shipped a Slack app to make it easier to monitor your Neon consumption metrics. By adding the app to your Slack, **you’ll receive automatic notifications when you reach your plan limits for compute hours, storage, or data transfer.** To install the app, follow the instructions [here](https://neon.com/docs/manage/slack-app#setup).

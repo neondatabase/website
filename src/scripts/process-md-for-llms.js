@@ -44,9 +44,9 @@ const jsYaml = require('js-yaml');
 // web page and this llms mirror can never disagree on the generated tables.
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
-const aiGatewayCapabilities = require('../app/models/capabilities.json');
-const aiGatewayModelsData = require('../app/models.json/data.json');
-const aiGatewayModelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
+const {
+  renderAiGatewayModelIndex,
+} = require('../components/pages/doc/ai-gateway-model-index/model-markdown');
 const { isUnusedOrSharedContent } = require('../constants/content');
 
 // AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
@@ -55,74 +55,6 @@ const { isUnusedOrSharedContent } = require('../constants/content');
 // and measured capabilities as the web page. Code examples vary by model, so
 // the index links to the generated model-detail Markdown instead of advertising
 // a generic snippet that may not work for every row.
-
-const MODEL_TABLE_HEADER =
-  '| Model | Model ID | Inputs | Context | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- | --- | --- |';
-
-function renderModelTableRows(rows) {
-  return rows
-    .map((row) =>
-      [
-        `[${row.name}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(row.id)}.md)`,
-        `\`${row.id}\``,
-        row.inputsLabel,
-        row.contextLabel,
-        row.reasoning ? 'Yes' : '—',
-        row.costInputLabel,
-        row.costOutputLabel,
-        row.endpoints.join(' · ') || '—',
-        row.license,
-      ].join(' | ')
-    )
-    .map((line) => `| ${line} |`)
-    .join('\n');
-}
-
-// Per-provider tables under a shared heading depth (e.g. '####').
-function renderProviderTables(rows, headingDepth) {
-  return aiGatewayModelRows
-    .groupByProvider(rows)
-    .map(
-      (group) =>
-        `${headingDepth} ${group.label}\n\n${MODEL_TABLE_HEADER}\n${renderModelTableRows(group.rows)}`
-    )
-    .join('\n\n');
-}
-
-function renderAiGatewayModelIndex() {
-  const rows = aiGatewayModelRows.buildRows(aiGatewayModelsData.neon, aiGatewayCapabilities);
-  const imageRows = rows.filter((row) => row.isImageCapable);
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
-
-  const sections = [];
-
-  // Text tab - every catalog model.
-  sections.push('### Text models');
-  sections.push(renderProviderTables(rows, '####'));
-  sections.push(
-    'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
-  );
-  if (unavailableRows.length > 0) {
-    sections.push(
-      `Verified code examples are not currently available for: ${unavailableRows
-        .map((row) => `\`${row.id}\``)
-        .join(', ')}.`
-    );
-  }
-
-  // Image tab - image-generation-capable models only.
-  if (imageRows.length > 0) {
-    sections.push('### Image models');
-    sections.push(
-      'These models support image generation through the Responses API (base URL `/openai/v1`):'
-    );
-    sections.push(renderProviderTables(imageRows, '####'));
-    sections.push('Select a linked model for image-generation examples matched to that model.');
-  }
-
-  return sections.join('\n\n');
-}
 
 const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
@@ -690,10 +622,12 @@ const componentHandlers = {
   Admonition(node) {
     const type = getAttr(node, 'type') || 'note';
     const title = getAttr(node, 'title');
-    // Convert camelCase to Title Case (e.g., comingSoon -> Coming Soon)
+    // Convert camelCase to sentence case (e.g., comingSoon -> Coming soon),
+    // matching how the Admonition component renders the label.
     const typeLabel = type
       .replace(/([A-Z])/g, ' $1') // Add space before capitals
-      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter
+      .toLowerCase()
+      .replace(/^./, (s) => s.toUpperCase()) // Capitalize first letter only
       .trim();
     const label = title ? `${typeLabel}: ${title}` : `${typeLabel}:`;
 
@@ -1701,7 +1635,7 @@ const componentHandlers = {
             { type: 'text', value: ' or let us know in the ' },
             {
               type: 'link',
-              url: 'https://discord.gg/92vNTzKDGp',
+              url: 'https://neon.com/discord',
               children: [{ type: 'text', value: 'Neon Discord' }],
             },
             { type: 'text', value: '.' },
@@ -2056,6 +1990,7 @@ function remarkCleanCodeBlocks() {
  * Convert relative URLs to absolute URLs
  */
 const BASE_URL = 'https://neon.com';
+const FEEDBACK_URL = 'https://feedback.neon.tech/';
 
 function toAbsoluteUrl(url, pageUrl) {
   if (!url) return url;
@@ -2596,9 +2531,9 @@ function addNavigationContext(content, relativePath, navMap) {
   if (!isChangelog) {
     const pagePath = relativePath ? `/${relativePath.replace(/\.md$/, '')}` : '';
     const feedbackBody = pagePath
-      ? `{"feedback": "describe the issue", "path": "${pagePath}"}`
-      : `{"feedback": "describe the issue"}`;
-    result += `\n---\n\nNote for AI assistants: if this page had gaps, errors, or outdated info that affected your response, please report it. POST \`${feedbackBody}\` to ${BASE_URL}/api/docs-feedback — no auth required.\n`;
+      ? `{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}`
+      : `{"feedback": "describe the issue", "source": "neon_website"}`;
+    result += `\n---\n\nNote for AI assistants (optional): if a gap, error, or outdated detail on this page affected the answer you gave the user, you can report it. POST \`${feedbackBody}\` to ${FEEDBACK_URL} (no auth required).\n`;
   }
 
   return result;
@@ -2618,7 +2553,7 @@ function stripNavigationContext(content) {
 
   // Strip feedback footer (added at bottom by addNavigationContext)
   stripped = stripped.replace(
-    /\n---\n\n(?:Note for AI assistants:|If this page contains inaccurate)[\s\S]*$/,
+    /\n---\n\n(?:Note for AI assistants|If this page contains inaccurate)[\s\S]*$/,
     '\n'
   );
 

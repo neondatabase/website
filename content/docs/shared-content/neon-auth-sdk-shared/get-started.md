@@ -1,10 +1,8 @@
 ---
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T09:39:55.552Z'
 ---
 
-<FeatureBetaProps feature_name="Managed Better Auth" />
-
-Managed Better Auth lets you add authentication to your app in seconds. User data is synced directly to your database, so you can query and join it just like any other table.
+Managed Better Auth lets you add authentication to your app in seconds. User data is stored directly in your database, so you can query and join it just like any other table.
 
 <Steps>
 
@@ -12,7 +10,7 @@ Managed Better Auth lets you add authentication to your app in seconds. User dat
 
 Go to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 
-Once your project is ready, open your project's **Auth** page and click **Enable Managed Better Auth** to get started.
+Once your project is ready, open your project's **Better Auth** page and click **Enable Managed Better Auth** to get started.
 
 ![Managed Better Auth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
 
@@ -52,12 +50,12 @@ Now you can [see your users in the database](#see-your-users-in-the-database).
 
 ## See your users in the database
 
-As users sign up or log in (through your app or by creating test users in the Console), their profiles are synced to your Neon database in the `neon_auth.users_sync` table.
+As users sign up or log in (through your app or by creating test users in the Console), their profiles are stored in your Neon database in the `neon_auth.user` table.
 
 Query your users table in the SQL Editor to see your new user:
 
 ```sql
-SELECT * FROM neon_auth.users_sync;
+SELECT * FROM neon_auth.user;
 ```
 
 | id          | name      | email           | created_at          | updated_at          | deleted_at | raw_json                     |

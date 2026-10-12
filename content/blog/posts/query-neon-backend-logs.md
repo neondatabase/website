@@ -34,13 +34,13 @@ seo:
   image: null
 ---
 
-We keep expanding our [backend](https://neon.com/blog/neon-backend-is-beta) observability. The most recent addition: you can now query backend logs outside the Console!
+We keep expanding our [backend](https://neon.com/blog/neon-backend-is-ga) observability. The most recent addition: you can now query backend logs outside the Console!
 
 `neon logs` reads what Neon Functions and Object Storage emit on a branch, with filters for source, severity, and message text. The same log stream is also available through the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server), the [Logs API](https://opentelemetry.io/docs/specs/otel/logs/api/), [@neon/sdk](https://neon.com/docs/reference/sdk), and raw [Loki](https://grafana.com/docs/loki/latest/) endpoints.
 
 ## A quick recap: Functions and Object Storage
 
-`neon logs` is in beta, and it currently covers Neon Functions and Object Storage on a branch. If you haven’t been following the progress of the [Neon backend beta](https://neon.com/blog/neon-backend-is-beta), these are the newer primitives sitting next to [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database):
+`neon logs` currently covers Neon Functions and Object Storage on a branch. If you haven’t been following the progress of the [Neon backend](https://neon.com/blog/neon-backend-is-ga), these are the newer primitives sitting next to [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database):
 
 - [Neon Functions](https://neon.com/docs/compute/functions/overview) are serverless Node.js compute you deploy onto your Neon branch, so your backend code runs next to your database. They’re long-running enough for streaming agents and realtime work.
 - [Neon Object Storage](https://neon.com/docs/storage/overview) is S3-compatible object storage built into a Neon branch, so you can deploy buckets that branch with your data. Point a standard S3 SDK or tool at your branch endpoint, authenticate with a Neon credential, and you’re done.
@@ -91,4 +91,4 @@ The CLI isn’t the only surface: the same log stream is also available for your
 
 ## Try it
 
-If you haven’t spun up the [Neon backend beta](https://neon.com/blog/neon-backend-is-beta) yet, this is a good moment! Create a project in AWS US East (Ohio), deploy a function and a bucket, then pull the logs from your terminal — or even better: [**ask your agent over MCP**](https://grafana.com/docs/loki/latest/).
+If you haven’t spun up the [Neon backend](https://neon.com/blog/neon-backend-is-ga) yet, this is a good moment! Create a project in a [supported region](https://neon.com/docs/introduction/regions), deploy a function and a bucket, then pull the logs from your terminal — or even better: [**ask your agent over MCP**](https://grafana.com/docs/loki/latest/).

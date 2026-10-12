@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { GUIDES_DIR_PATH } from 'constants/content';
+import SEO_DATA from 'constants/seo-data';
 
 import { getPostBySlug } from './api-content';
 import getMetadata from './get-metadata';
@@ -33,6 +34,18 @@ describe('getMetadata', () => {
 
     expect(metadata.alternates.canonical).toBe('https://neon.com/guides/sentry-neon-mcp');
     expect(metadata.openGraph.url).toBe('https://neon.com/guides/sentry-neon-mcp');
+  });
+
+  it.each([
+    [SEO_DATA.functions, 'https://neon.com/functions.md'],
+    [SEO_DATA.aiGateway, 'https://neon.com/ai-gateway.md'],
+    [SEO_DATA.objectStorage, 'https://neon.com/object-storage.md'],
+    [SEO_DATA.auth, 'https://neon.com/md/auth-page.md'],
+    [SEO_DATA.lakebase, 'https://neon.com/lakebase.md'],
+  ])('advertises the generated Markdown alternate', (pageSeo, markdownUrl) => {
+    const metadata = getMetadata(pageSeo);
+
+    expect(metadata.alternates.types['text/markdown']).toBe(markdownUrl);
   });
 
   it('uses an absolute external canonical and keeps og:url on Neon', () => {

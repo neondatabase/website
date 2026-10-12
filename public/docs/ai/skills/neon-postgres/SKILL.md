@@ -1,18 +1,15 @@
 ---
 name: neon-postgres
 description: >-
-  Guides and best practices for working with Lakebase Postgres, the database
-  behind Neon. Covers setup, connection methods and drivers, pooled vs direct
-  connections, branching, schema migrations, autoscaling, scale-to-zero, instant
-  restore, read replicas, connection pooling, IP allow lists, and logical
-  replication. Also covers Lakebase Search: semantic vector search, full-text
-  search with BM25 ranking, and hybrid search.
-  Use when users ask about "Lakebase Postgres", "Neon setup", "connect to Neon",
-  "Neon project", "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
-  "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
-  "scale to zero", "Neon autoscaling", "Neon read replica",
-  "Neon connection pooling", "schema migrations", "semantic search", "vector
-  search", "full-text search", "BM25", or "hybrid search".
+  Guides and best practices for working with Lakebase Postgres on Neon:
+  connections, pooled vs direct, schema migrations, branching, autoscaling,
+  scale-to-zero, instant restore, read replicas, IP allow lists, logical
+  replication, and Lakebase Search. Use when the work is an existing
+  DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files,
+  Functions, and LLM calls go to the parent `neon` skill. Also use for
+  "@neondatabase/serverless", "@neondatabase/neon-js", "neon inspect db",
+  "semantic search", "vector search", "full-text search", "BM25", or
+  "hybrid search".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres
@@ -23,7 +20,7 @@ metadata:
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon
+neon skills -s neon -y
 ```
 
 # Lakebase Postgres
@@ -32,15 +29,21 @@ Lakebase Postgres is the database at the core of Neon. It runs on the lakebase a
 
 It is the same database whether you reach it through Neon or through Databricks; this skill covers the Neon access path.
 
+Login, users, sessions, and `@neondatabase/auth` belong in `neon-auth`.
+
 ## Setup Flow
 
 ### 1. Select the organization and project
 
-Use the CLI (default) or MCP server to list organizations and projects. Let the user select an existing project or create a new one. Check the `.neon` file for an existing linked project or branch.
+If a `DATABASE_URL` is already supplied (prompt, environment, or repo) or a `.neon` file points at a project, use it. Do not list organizations or create a second project for schema work.
+
+Otherwise use the CLI (default) or MCP server to list organizations and projects. Let the user select an existing project or create a new one.
 
 ### 2. Get the connection string
 
-Use the CLI (default), `neon env pull`, or the MCP server to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying it, to avoid overwriting existing values.
+If a `DATABASE_URL` is already supplied, use it. Do not fetch another through the CLI or MCP.
+
+Otherwise use the CLI (default), `neon env pull`, or the MCP server to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying it, to avoid overwriting existing values.
 
 #### When to use pooled vs direct connections
 
@@ -56,11 +59,10 @@ Use the CLI (default), `neon env pull`, or the MCP server to get the connection 
 
 ### 3. Pick the connection method and driver
 
-Always pair Neon with an ORM such as **Drizzle** for easy schema management and migrations. Refer to the connection methods guide to pick the correct driver based on how the runtime treats your code: https://neon.com/docs/connect/choose-connection.md.
+Preserve the existing ORM and driver. For new TypeScript schema work with no established choice, Drizzle is a suggestion: https://neon.com/docs/guides/drizzle.md. Refer to the connection methods guide to pick the correct driver based on how the runtime treats your code: https://neon.com/docs/connect/choose-connection.md.
 
-Recommendations:
+Driver notes:
 
-- Drizzle as ORM (see https://neon.com/docs/guides/drizzle.md)
 - On Vercel, use `node-postgres` (`npm install pg`) with Vercel Fluid compute and `import { attachDatabasePool } from "@vercel/functions";`
 - On Cloudflare, use `node-postgres` with Cloudflare Hyperdrive
 - On Neon Functions, use `node-postgres`, as the functions are long-running and reuse the pool across requests.
@@ -87,7 +89,7 @@ Link: https://neon.com/docs/introduction/branching.md
 For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill. If it isn't installed, fetch it from https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon-postgres-branches
+neon skills -s neon-postgres-branches -y
 ```
 
 ## Migrations
@@ -95,6 +97,90 @@ npx skills add neondatabase/agent-skills --skill neon-postgres-branches
 Test a migration on a branch of production, against production-like data, before applying it to production.
 
 Use a **direct (non-pooled)** connection string when you run the migration, not a pooled one. `neon connection-string` returns the direct string by default; make sure the hostname does not include the `-pooler` suffix.
+
+## Troubleshooting and Neon-Specific Performance
+
+Use Neon's predefined, read-only diagnostics before writing catalog queries by hand. The Neon CLI `neon inspect db` subcommands and the Neon MCP server's `inspect_database` tool run the same checks.
+
+This section covers Neon-specific diagnostic tools, compute cache behavior, and platform signals. When the evidence points to generic Postgres work such as rewriting a query, choosing an index, changing a schema, or interpreting plan nodes, load the [`postgres-best-practices`](https://github.com/neondatabase/postgres-skills/tree/main/skills/postgres-best-practices) skill and carry the diagnostic evidence into that workflow.
+
+Docs:
+
+- CLI: https://neon.com/docs/cli/inspect.md
+- Query performance: https://neon.com/docs/postgresql/query-performance.md
+- `pg_stat_statements`: https://neon.com/docs/extensions/pg_stat_statements.md
+- Neon Local File Cache: https://neon.com/docs/extensions/neon.md
+
+### Choose CLI or MCP
+
+Prefer the Neon CLI when terminal access and authentication are available:
+
+```bash
+neon inspect db <check>
+```
+
+The CLI resolves the project and branch from the current Neon context. Use `--project-id`, `--branch`, and `--database-name` to override it. Omit `--database-name` to inspect every database on the branch. Use `--db-url` only when inspecting a Postgres database directly instead of resolving it through the Neon API.
+
+When using Neon MCP, call `inspect_database` with `projectId` and one `check`. Pass `branchId`, `databaseName`, or `computeId` only when needed. Omit `databaseName` to inspect all databases on the branch. Increase `limit` only when the result says it was truncated.
+
+### Pick the Diagnostic
+
+| Symptom or question                            | Checks                               |
+| ---------------------------------------------- | ------------------------------------ |
+| Which relations consume storage?               | `table-sizes`, `index-sizes`         |
+| Is an index unused or a table scanned heavily? | `unused-indexes`, `seq-scans`        |
+| What has run for 5+ minutes or holds locks?    | `long-running-queries`, `locks`      |
+| Which queries consume the most total time?     | `outliers`                           |
+| Which queries run most often?                  | `calls`                              |
+| Does the active data fit in compute cache?     | `lfc-hit-rate`, `working-set`        |
+| Is autovacuum behind or is space wasted?       | `vacuum-stats`, `bloat`              |
+| Is logical replication healthy?                | `replication-slots`, `subscriptions` |
+
+Do not confuse these checks:
+
+- `long-running-queries` reports statements running **right now** for more than five minutes.
+- `outliers` ranks the top queries by cumulative execution time since statistics were reset. It does not rank by mean latency.
+- `calls` ranks by execution count over the same statistics history.
+
+`outliers` and `calls` require `pg_stat_statements`. `lfc-hit-rate` and `working-set` require the `neon` extension. If a check reports a missing extension, ask before running the suggested `CREATE EXTENSION` statement because installing an extension modifies the database.
+
+### Interpret Results Safely
+
+- Treat `unused-indexes` as a candidate list, not permission to drop indexes. Confirm the observation window, constraints, and workload before removal.
+- A sequential scan can be correct for a small table or a query reading much of a table. Check table size, selectivity, and the query plan before adding an index.
+- `bloat` is a statistical estimate. Confirm the impact and plan locks or maintenance before `VACUUM FULL`, `REINDEX`, or similar remediation.
+- Cache and Postgres statistics reset when compute restarts, including scale-to-zero suspension. Run a representative workload before interpreting fresh `lfc-hit-rate`, `working-set`, `vacuum-stats`, or `pg_stat_statements` results.
+- Compute-wide checks (`lfc-hit-rate`, `working-set`, and `replication-slots`) run once even when inspecting every database.
+- One failing database can fail an all-databases inspection; retry the relevant check with an explicit `databaseName` to isolate it.
+
+### Inspect Neon Cache Behavior Per Query
+
+Standard `EXPLAIN (ANALYZE, BUFFERS)` reports Postgres shared-buffer activity, but it does not show Neon's Local File Cache (LFC) or page prefetching. For a safe read-only query, add Neon's `FILECACHE` and `PREFETCH` options:
+
+```sql
+EXPLAIN (ANALYZE, BUFFERS, PREFETCH, FILECACHE)
+SELECT ...;
+```
+
+- `File cache: hits` counts pages found in the compute's LFC.
+- `File cache: misses` counts pages not found in the LFC and fetched from database storage.
+- `Prefetch: hits`, `misses`, `expired`, and `duplicates` show how effectively Neon fetched pages before the executor requested them.
+
+`FILECACHE` and `PREFETCH` provide metrics for this query and do not require the `neon` extension. By contrast, `neon inspect db lfc-hit-rate` and `working-set` provide compute-wide statistics and do require the extension.
+
+The MCP `explain_sql_statement` tool can produce a standard plan but does not expose `FILECACHE` or `PREFETCH` options. To collect those Neon-specific metrics through MCP, use `run_sql` with the explicit, read-only `EXPLAIN` statement above.
+
+Because `ANALYZE` executes the statement, use it only when execution is safe; do not run it autonomously for mutating SQL. Compare cold- and warm-cache runs carefully because the first execution can populate the cache and materially change later results.
+
+### Performance Workflow
+
+1. Reproduce the symptom and note its time window.
+2. Run the smallest relevant `inspect` checks from the table above.
+3. Identify a specific query before changing schema or compute. Use MCP `explain_sql_statement` for a standard plan, or the Neon-specific `EXPLAIN` above when LFC or prefetch behavior matters.
+4. If the bottleneck is query shape, indexing, schema, locking, or vacuum behavior, load `postgres-best-practices` and carry forward the inspection results and query plan. Keep Neon compute, cache, connection, and platform decisions in this skill.
+5. Re-run the same check and workload to verify the change.
+
+Use MCP `list_slow_queries` instead of `inspect_database` when the user specifically needs queries ranked by average execution time with a custom threshold and limit. Outside the explicit `EXPLAIN` case above, use `run_sql` only for read-only diagnostic SQL when the predefined checks do not answer the question.
 
 ## Autoscaling
 
@@ -174,6 +260,7 @@ Use Lakebase Search for semantic, full-text, and hybrid search:
 - For semantic search, read [Vector search](references/vector-search.md).
 - For full-text search with BM25 ranking, read [Full-text search](references/full-text-search.md).
 - For combining semantic and lexical results, read [Hybrid search](references/hybrid-search.md).
+- For managing any of the above through Drizzle ORM, read [Managing Lakebase Search with Drizzle](references/lakebase-search-drizzle.md).
 
 Links:
 

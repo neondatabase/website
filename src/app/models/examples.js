@@ -15,8 +15,9 @@ const AI_SDK_DEPS = ['ai', '@neondatabase/ai-sdk-provider'];
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
 const IMAGE_PROMPT = 'A red apple on a wooden table.';
+const EMBEDDING_INPUT = 'Explain Serverless Postgres.';
 
-export const USE_CASES = ['chat', 'image-generation', 'web-search'];
+export const USE_CASES = ['chat', 'image-generation', 'web-search', 'embeddings'];
 
 const example = ({
   id,
@@ -371,6 +372,69 @@ print(response.output_text)
   }),
 ];
 
+/* ---------------------------------------------------------------- embeddings */
+
+// No AI SDK or Mastra variant: neither has an EmbeddingModelV2 implementation for the Neon
+// provider yet. `encoding_format: "float"` is not a style choice — the gateway always returns a
+// float array regardless of what is requested, and the OpenAI SDKs default that field to
+// "base64" and decode accordingly, silently producing a corrupt vector if it is left out.
+const embeddingExamples = (model) => [
+  tsExample({
+    id: 'typescript',
+    title: 'TypeScript',
+    dependencies: ['openai'],
+    endpoint: '/v1/embeddings',
+    content: `import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: \`\${process.env.NEON_AI_GATEWAY_BASE_URL}/v1\`,
+});
+
+const resp = await client.embeddings.create({
+  model: "${model}",
+  input: ["${EMBEDDING_INPUT}"],
+  encoding_format: "float",
+});
+console.log(resp.data[0].embedding.length, resp.usage);
+`,
+  }),
+  pyExample({
+    id: 'python',
+    title: 'Python',
+    endpoint: '/v1/embeddings',
+    content: `import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
+)
+
+resp = client.embeddings.create(
+    model="${model}",
+    input=["${EMBEDDING_INPUT}"],
+    encoding_format="float",
+)
+print(len(resp.data[0].embedding), resp.usage)
+`,
+  }),
+  shExample({
+    id: 'curl',
+    title: 'cURL',
+    endpoint: '/v1/embeddings',
+    content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/v1/embeddings" \\
+  -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "${model}",
+    "input": ["${EMBEDDING_INPUT}"],
+    "encoding_format": "float"
+  }'
+`,
+  }),
+];
+
 /* ------------------------------------------------------ image generation */
 
 // A generated image is ~3 MB of base64 and the gateway rejects buffered responses over 655,360
@@ -511,6 +575,21 @@ export function buildExamples(modelId, useCase, caps) {
           examples: [],
           unsupported: `${modelId} cannot use the image_generation tool. ${RESPONSES_ONLY_NOTE}`,
         };
+  }
+
+  if (useCase === 'embeddings') {
+    return caps.embeddings
+      ? { examples: embeddingExamples(modelId) }
+      : { examples: [], unsupported: `${modelId} is not an embedding model.` };
+  }
+
+  // An embedding model has no chat shape to fall back to — POST /v1/embeddings is its only
+  // route — so the generic "not reachable on any route" message below would be wrong for it.
+  if (caps.embeddings) {
+    return {
+      examples: [],
+      unsupported: `${modelId} does not serve chat completions. It is an embedding model — see the embeddings use case.`,
+    };
   }
 
   if (caps.chat === 'not-served' && caps.nativeDialect === 'none') {

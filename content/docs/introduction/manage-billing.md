@@ -41,7 +41,7 @@ You can view and manage billing from the **Billing** page in the Neon Console.
 To access your **Billing** page:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu to view the charges to date.
 
 The **Billing** page has a sidebar with **Billing summary** and **Payment info**. **Billing summary** shows **This month's summary**: your billing period, plan details (including **Change plan**), and **Charges to date**. **Payment info** shows how you pay, your billing email, and company or address details (see [Update your payment method](#update-your-payment-method) and [Update billing details](#update-billing-details-company-and-address)).
@@ -55,7 +55,7 @@ The **Payment info** view explains that **charges are applied to your card on th
 To update your payment method:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Payment method** card, select **Edit**.
@@ -77,7 +77,7 @@ Neon’s billing system uses **Stripe Checkout**, which does not currently suppo
 To update your billing email:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Billing email** card, select **Edit**.
@@ -89,7 +89,7 @@ If you are unable to update your billing email, please [contact support](/docs/i
 To update the company name, address, postal or ZIP code, country, or VAT or tax ID shown on your account:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. In the sidebar, select **Payment info**.
 1. In the **Billing Info** card, select **Edit**.
@@ -107,7 +107,7 @@ Invoices are charged automatically to your payment method on the first day of th
 To pay an invoice manually:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **View/Pay invoices**.
 1. On an unpaid invoice, select **Pay invoice** to open its secure payment page and complete the payment.
@@ -121,7 +121,7 @@ To pay an invoice manually:
 To download an invoice:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **View/Pay invoices**.
 1. Find the invoice you want and open its actions menu, then select **Download**.
@@ -137,7 +137,7 @@ If you have a question or problem with billing or an invoice, you can contact th
 #### From the Billing page header
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **Request billing support**.
 1. In the form, choose the **related invoice** (if you have invoices) and describe how we can help, then submit.
@@ -160,7 +160,7 @@ If you're upgrading your plan, your compute will only pick up the new plan limit
 To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
-1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select your organization from the profile menu in the top-right of the console.
 1. Select **Billing** from the menu.
 1. Select **Change plan**.
 

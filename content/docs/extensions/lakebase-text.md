@@ -38,6 +38,19 @@ CREATE EXTENSION IF NOT EXISTS lakebase_text;
 
 `lakebase_text` relies on a preloaded library that Neon enables by default. If you've customized your project's [preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries), make sure `lakebase_text` is in the list.
 
+### Upgrade the extension and indexes
+
+A new Lakebase Search release can add features, fixes, and performance improvements. Although Lakebase Search is released as part of Neon updates, it does not upgrade everything automatically. In `lakebase_text`, two things upgrade separately and carry version numbers that are unrelated to each other:
+
+- **The extension version** is the version of the SQL objects that `CREATE EXTENSION lakebase_text` creates, including its data types, functions, operators, and the `lakebase_bm25` index access method. This version is reported by `SELECT installed_version FROM pg_available_extensions WHERE name = 'lakebase_text'`. `ALTER EXTENSION lakebase_text UPDATE` updates this version.
+- **The index storage format** is the on-disk layout of a `lakebase_bm25` index. The extension may introduce updated index storage formats in an update, unlocking more features and delivering better performance. All newly created indexes automatically use the latest storage format, while existing indexes can be upgraded to the new format using `REINDEX INDEX CONCURRENTLY` after a newer storage format is available.
+
+Upgrading is not urgent. The extension is compatible with SQL objects and index storage formats from older versions, but staying current keeps you on the supported, best-performing path and avoids a larger migration later, so upgrade when convenient rather than deferring indefinitely.
+
+<Admonition type="note">
+The latest available extension version is reported by `SELECT default_version FROM pg_available_extensions WHERE name = 'lakebase_text'`.
+</Admonition>
+
 ## Quick start
 
 Create a table with a `tsvector` column and insert data:
@@ -83,6 +96,32 @@ LIMIT 5;
 The `<@>` operator calculates the negative BM25 score of a document against a query. Ordering by score ascending returns the most relevant documents first (lower negative score = higher relevance).
 
 `to_bm25query` constructs a `bm25query_tsvector` value by combining the query `tsvector` with the object identifier of the BM25 index. The index identifier is required because BM25 scoring depends on corpus-wide statistics stored in the index.
+
+<Admonition type="note">
+A `lakebase_bm25` index scan can omit any number of rows whose `<@>` value is exactly `0.0`. Do not rely on zero-distance rows being returned or on their order. To evaluate every row, set `lakebase_bm25.enable_scan` to `off` to use a sequential scan instead.
+</Admonition>
+
+## Keep the index accurate
+
+BM25 statistics are computed at index build time and updated by VACUUM. For most workloads, regular VACUUM keeps scores accurate. After bulk-loading a large amount of new data, run VACUUM manually:
+
+```sql title="PostgreSQL"
+VACUUM documents;
+```
+
+To maintain query and update performance, `VACUUM` must clean the index promptly. For a table dedicated to text search, Neon recommends setting `autovacuum_vacuum_insert_scale_factor` to `0` so the insert-triggered autovacuum threshold does not grow with the table:
+
+```sql title="PostgreSQL"
+ALTER TABLE documents SET (
+  autovacuum_vacuum_insert_scale_factor = 0
+);
+```
+
+With the scale factor set to `0`, `autovacuum_vacuum_insert_threshold` determines the fixed number of inserted tuples that triggers autovacuum. Tune that threshold based on your workload.
+
+<Admonition type="warning">
+BM25 global statistics are not MVCC-versioned. If `VACUUM` updates the statistics while a transaction is using an older MVCC snapshot, the transaction can calculate scores using statistics newer than its row snapshot. Row visibility remains MVCC-compliant, but scores, rankings, and top-K results can change within a `REPEATABLE READ` transaction. Do not rely on snapshot-stable BM25 rankings across a concurrent `VACUUM`, including autovacuum.
+</Admonition>
 
 ## Configure default_limit
 

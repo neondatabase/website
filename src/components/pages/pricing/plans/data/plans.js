@@ -103,7 +103,7 @@ export default {
         title: 'Database storage',
         subtitle: 'Root and child branches',
       },
-      free: 'Free<span>0.5 GB per Project</span>',
+      free: 'Free<span>1 GB per Project</span>',
       launch: '$0.35 per GB-month',
       scale: '$0.35 per GB-month',
     },
@@ -166,18 +166,16 @@ export default {
       rows: '2',
       feature: {
         title: 'Object Storage',
-        tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Stored volume',
       },
       free: `${objectStorage.freeAllowanceGb} GB included`,
-      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
-      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month`,
     },
     {
       fluid: true,
       feature: {
         title: 'Functions',
-        tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Compute and invocations',
       },
       free: {
@@ -208,10 +206,6 @@ export default {
             title: 'Invocations',
             details: [`$${functions.launch.invocationRatePerMillion} per 1M invocations`],
           },
-          {
-            title: 'Charges',
-            details: ['No charges during beta'],
-          },
         ],
       },
       scale: {
@@ -227,10 +221,6 @@ export default {
             title: 'Invocations',
             details: [`$${functions.scale.invocationRatePerMillion} per 1M invocations`],
           },
-          {
-            title: 'Charges',
-            details: ['No charges during beta'],
-          },
         ],
       },
     },
@@ -238,13 +228,12 @@ export default {
       rows: '2',
       feature: {
         title: 'AI Gateway',
-        tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
     },
     {
       rows: '1',

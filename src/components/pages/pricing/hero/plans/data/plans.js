@@ -25,7 +25,7 @@ export default [
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
-            title: '0.5 GB of storage per project',
+            title: '1 GB of storage per project',
           },
           {
             title: 'Sizes up to 2 CU (8 GB RAM)',
@@ -41,12 +41,10 @@ export default [
           { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
-            tag: { label: 'Beta', theme: 'orange-muted' },
             info: '<p>5 GB per project included</p>',
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
             info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
           },
         ],
@@ -93,18 +91,15 @@ export default [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
+            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
               href: '/docs/ai-gateway/models#available-models',
@@ -154,18 +149,15 @@ export default [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
           },
           {
             title: 'Functions',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
+            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p>`,
           },
           {
             title: 'AI Gateway',
-            tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'Pricing matches model provider list prices (no markup)',
+            info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
               href: '/docs/ai-gateway/models#available-models',

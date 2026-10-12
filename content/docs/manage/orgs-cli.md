@@ -7,18 +7,18 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-07-28T21:59:28.499Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
 
 ## Authorization
 
-Use the `auth` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neonctl/credentials.json`.
+Use the `login` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neon/credentials.json`.
 
 Authentication is tied to your Neon user account. Once authenticated, you can access and manage any organization you belong to. When running commands, you'll need to specify which organization to use via `--org-id`, a [context file](/docs/cli/set-context), or by responding to the interactive prompt.
 
-See [Auth - CLI](/docs/cli/auth) to learn more.
+See [Login - CLI](/docs/cli/login) to learn more.
 
 ## List Organizations
 
@@ -29,11 +29,8 @@ Example:
 ```bash
 neon orgs list
 Organizations
-┌────────────────────────┬──────────────────┐
-│ Id                     │ Name             │
-├────────────────────────┼──────────────────┤
-│ org-ocean-art-12345678 │ Example Org      │
-└────────────────────────┴──────────────────┘
+ID                      Name         Plan
+org-ocean-art-12345678  Example Org  Launch
 ```
 
 See [Orgs - CLI](/docs/cli/orgs) to learn more.
@@ -47,15 +44,10 @@ Example: Listing all projects in an organization:
 ```bash
 neon projects list --org-id org-xxxx-xxxx
 Projects
-┌───────────────────────────┬───────────────────────────┬────────────────────┬──────────────────────┐
-│ Id                        │ Name                      │ Region Id          │ Created At           │
-├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
-│ bright-moon-12345678      │ dev-backend-api           │ aws-us-east-2      │ 2024-07-26T11:43:37Z │
-├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
-│ silent-forest-87654321    │ test-integration-service  │ aws-eu-central-1   │ 2024-05-30T22:14:49Z │
-├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
-│ crystal-stream-23456789   │ staging-web-app           │ aws-us-east-2      │ 2024-05-17T13:47:35Z │
-└───────────────────────────┴───────────────────────────┴────────────────────┴──────────────────────┘
+ID                       Name                      Region ID         Created At
+bright-moon-12345678     dev-backend-api           aws-us-east-2     2026-07-26T11:43:37Z
+silent-forest-87654321   test-integration-service  aws-eu-central-1  2026-05-30T22:14:49Z
+crystal-stream-23456789  staging-web-app           aws-us-east-2     2026-05-17T13:47:35Z
 ```
 
 You can include the `org-id` to apply the following subcommands specifically to your organization:

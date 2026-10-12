@@ -821,12 +821,12 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // extensions/pgvector appears in both AI section and Extensions section;
-      // should prefer Extensions (siblings share extensions/ prefix)
+      // extensions/pgvector appears in both AI section and Postgres extensions section;
+      // should prefer Postgres extensions (siblings share extensions/ prefix)
       const pgvectorEntry = navMap.get('extensions/pgvector');
       expect(pgvectorEntry).toBeDefined();
       expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
-      expect(pgvectorEntry.sectionName).toBe('Extensions');
+      expect(pgvectorEntry.sectionName).toBe('Postgres extensions');
 
       // auth/overview appears in "Start with Neon" and the Auth section;
       // should prefer Auth section (siblings share auth/ prefix)
@@ -848,7 +848,7 @@ See [CONN_MAX_AGE](https://example.com).
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('Note for AI assistants');
-      expect(stripped).not.toContain('/api/docs-feedback');
+      expect(stripped).not.toContain('feedback.neon.tech');
     });
 
     it('should strip related docs and feedback footers together', () => {

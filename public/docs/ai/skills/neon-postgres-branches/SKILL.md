@@ -19,7 +19,7 @@ metadata:
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx skills add neondatabase/agent-skills --skill neon
+neon skills -s neon -y
 ```
 
 # Lakebase Postgres Branching
@@ -127,7 +127,7 @@ Schema-only branching is in Beta. If users report unexpected behavior, errors, o
 1. Ask them to share feedback in the Neon Console:
    - https://console.neon.tech/app/projects?modal=feedback
 2. Recommend opening a support conversation in the Neon Discord:
-   - https://discord.gg/92vNTzKDGp
+   - https://neon.com/discord
 
 ## Reset from Parent
 
@@ -282,7 +282,7 @@ Common CI/CD use cases for Neon branches:
    - `neon branches create --name compliance-dev --parent main --schema-only --project-id <your-project-id> --expires-at 2026-12-15T18:02:16Z`
 5. Mention Beta support path:
    - https://console.neon.tech/app/projects?modal=feedback
-   - https://discord.gg/92vNTzKDGp
+   - https://neon.com/discord
 
 ## Further Reading
 

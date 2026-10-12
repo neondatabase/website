@@ -11,10 +11,8 @@ summary: >-
   organizations, inviting and removing members, and checking role permissions
   client-side.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
-
-<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
@@ -50,9 +48,7 @@ The Organization plugin is enabled by default for each branch; you can disable i
 
 <TabItem>
 
-Open your project in the Neon Console, then go to **Auth** > **Plugins** (beta) and use the **Organizations** section (per branch). This tab is available when your project uses Managed Better Auth with **Better Auth**; other Auth settings, including your **Auth URL**, stay on the **Configuration** tab. From there you can customize:
-
-![Neon Console Auth Plugins tab with Organizations settings](/docs/changelog/neon_auth_plugins_organizations.png)
+Open your project in the Neon Console, then go to **Settings** > **Better Auth** and use the **Organizations** section (per branch). This section is available when your project uses **Managed Better Auth**. From there you can customize:
 
 - **Enable Organizations** (toggle): Turn the Organization plugin on or off for the branch. When off, all organization API calls are disabled and return an error.
 - **Limit:** Maximum total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10.

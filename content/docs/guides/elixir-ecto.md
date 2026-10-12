@@ -9,7 +9,7 @@ summary: >-
   Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
   autosuspend from triggering.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
@@ -33,11 +33,11 @@ To create the database:
 1. Select a project.
 1. Select **Postgres database** > **Databases**.
 1. Select the branch where you want to create the database.
-1. Click **New Database**.
+1. Click **Add database**.
 1. Enter a database name (`friends`), and select a database owner.
 1. Click **Create**.
 
-Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
+Find your database connection string by clicking the **Connect** button in the Console nav to open the **Connect to your branch** modal. Select a branch, a role, and the database you want to connect to. A connection string is constructed for you. Your connection string should look something like this:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-west-2.aws.neon.tech/friends?sslmode=require&channel_binding=require

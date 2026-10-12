@@ -22,7 +22,7 @@ npm i -g neon
 ```
 
 <Admonition type="important" title="Create your project in a supported region">
-Object Storage, Functions, and the AI Gateway are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`) and AWS Europe (Frankfurt) (`aws-eu-central-1`), on new or existing projects in those regions, so use a project in one of them to follow this guide. Support is expanding toward all regions. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
+Object Storage, Functions, and the AI Gateway are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`), on new or existing projects in those regions, so use a project in one of them to follow this guide. Support is expanding toward [all regions](/docs/introduction/regions). Postgres works in any region. Object Storage and Functions work on any plan, subject to usage limits; the AI Gateway requires a paid plan.
 </Admonition>
 
 <TwoColumnLayout>
@@ -32,7 +32,7 @@ Object Storage, Functions, and the AI Gateway are in beta and currently availabl
 
 If you don't have a Neon account, sign up at [console.neon.tech](https://console.neon.tech/signup).
 
-Create your project in **AWS US East (Ohio)** or **AWS Europe (Frankfurt)**. Any path below works; the rest of this guide uses the Neon CLI, which you'll also use in step 3 to link the project and pull its credentials automatically.
+Create your project in **AWS US East (Ohio)**, **US East (N. Virginia)**, **Europe (Frankfurt)**, or **Asia Pacific (Singapore)**. Any path below works; the rest of this guide uses the Neon CLI, which you'll also use in step 3 to link the project and pull its credentials automatically.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -44,7 +44,7 @@ Create your project in **AWS US East (Ohio)** or **AWS Europe (Frankfurt)**. Any
 Sign in and create the project:
 
 ```bash filename="Terminal"
-neon auth
+neon login
 neon projects create --name my-backend --region-id aws-us-east-2
 ```
 
@@ -99,18 +99,18 @@ A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code
 
 Work through the commands on the right:
 
-1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon auth` first.
-2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the `preview` blocks shown in later steps alongside it (those snippets omit the policy for brevity).
+1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon login` first. Run interactively, `neon link` prompts you to create `neon.ts`; the `--no-config` flag skips that prompt so the explicit `neon config init` in step 2 stays in control.
+2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the service keys shown in later steps alongside it (those snippets omit the policy for brevity).
 
-Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding any beta services.
+Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding the other services.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-neon link            # select the my-backend project
-neon checkout main   # pin the branch, pull env vars into .env.local
-neon config init     # scaffold neon.ts, install @neon/config and @neon/env
+neon link --no-config  # select the my-backend project; skip link's neon.ts prompt
+neon checkout main     # pin the branch, pull env vars into .env.local
+neon config init       # scaffold neon.ts, install @neon/config and @neon/env
 ```
 
 </TwoColumnLayout.Block>
@@ -274,17 +274,15 @@ import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   // branch policy omitted for brevity; keep the one from `neon config init`
-  preview: {
-    buckets: {
-      images: { access: 'public_read' },
-    },
+  buckets: {
+    images: { access: 'public_read' },
   },
 });
 ```
 
 ```bash filename="Terminal"
 neon deploy
-npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
 ```
 
 ```typescript filename="app/upload/actions.ts"
@@ -393,7 +391,8 @@ app.post('/generate', async (c) => {
   const { topic, author = 'anonymous' } = await c.req.json();
 
   const { text } = await generateText({
-    model: neon('claude-sonnet-4-6'),
+    // Open-weight models are enabled by default. Frontier models (for example OpenAI GPT) need access requested in the Console first.
+    model: neon('gpt-oss-20b'),
     prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
 
@@ -411,7 +410,7 @@ app.post('/assistant', async (c) => {
   const { messages } = await c.req.json();
 
   const result = streamText({
-    model: neon('claude-sonnet-4-6'),
+    model: neon('meta-llama-3-3-70b-instruct'),
     system:
       "You are a helpful assistant that answers questions about the user's blog posts. Use the queryPosts tool to look them up.",
     messages: await convertToModelMessages(messages),
@@ -422,8 +421,10 @@ app.post('/assistant', async (c) => {
           limit: z.number().default(10).describe('How many posts to fetch.'),
         }),
         execute: async ({ limit }) => {
+          // Cast created_at to text: a raw Date in the tool result fails the AI SDK
+          // message schema when the result is fed back to the model on the next step.
           const { rows } = await pool.query(
-            'select author, content, created_at from posts where is_published = true order by created_at desc limit $1',
+            'select author, content, created_at::text from posts where is_published = true order by created_at desc limit $1',
             [limit],
           );
           return rows;
@@ -450,7 +451,7 @@ export default app;
 
 Declare the function and the AI Gateway in `neon.ts`, then `neon deploy`. Neon builds the function, gives it a public URL, and injects the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`) so the `@neon/ai-sdk-provider` inside the function needs no configuration.
 
-Copy the `invocation_url` from the `neon functions get posts` output into `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly). `NEXT_PUBLIC_` variables are read at build time, so restart the dev server if it's already running.
+Copy the `URL` from the `neon functions get posts` output into `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly). `NEXT_PUBLIC_` variables are read at build time, so restart the dev server if it's already running.
 
 A Neon Function has its own URL, so the browser calls it directly. That keeps a long stream off your host's serverless timeout.
 
@@ -466,27 +467,26 @@ import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   // branch policy omitted for brevity; keep the one from `neon config init`
-  preview: {
-    aiGateway: true,
-    buckets: {
-      images: { access: 'public_read' },
-    },
-    functions: {
-      posts: { name: 'posts assistant', source: './functions/posts.ts' },
-    },
+  aiGateway: true,
+  buckets: {
+    images: { access: 'public_read' },
+  },
+  functions: {
+    posts: { name: 'posts assistant', source: './functions/posts.ts' },
   },
 });
 ```
 
 ```bash filename="Terminal"
 neon deploy
-neon functions get posts   # prints the invocation_url
+neon functions get posts   # prints the function URL
 ```
 
 ```
-slug           posts
-name           posts assistant
-invocation_url https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
+Function
+Slug        posts
+Name        posts assistant
+URL         https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 ```bash filename=".env.local"
@@ -645,6 +645,69 @@ npm run dev
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
+<TwoColumnLayout.Step title="Add Function Triggers">
+<TwoColumnLayout.Block>
+
+Your app calls the function on request. A [Function Trigger](/docs/compute/functions/triggers/overview) lets Neon call it for you, so work runs on a schedule or on an event, even when the compute is scaled to zero. Add two, both pointing at the same `posts` function:
+
+- A **schedule** trigger writes a post every day, like a cron job.
+- A **`storage_object_created`** trigger runs when an image is uploaded to your `images` bucket.
+
+The function has no root route, so each trigger targets its own path (`/daily`, `/on-upload`) that matches a new route. Neon sends a `POST` with a JSON envelope; each handler reads what it needs from `data` and checks the `X-Neon-Trigger-Invocation-Id` header to confirm the call came from Neon. See the [overview](/docs/compute/functions/triggers/overview) for the payload and branching behavior, and [Schedule a function](/docs/compute/functions/triggers/schedule) for cron syntax.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+Add two routes to `functions/posts.ts`, before `export default app`:
+
+```typescript filename="functions/posts.ts"
+// Schedule trigger: generate and publish a post. Reuses the pool and model above.
+app.post('/daily', async (c) => {
+  if (!c.req.header('x-neon-trigger-invocation-id')) return c.json({ error: 'not a trigger call' }, 403);
+
+  const { text } = await generateText({
+    model: neon('kimi-k3'),
+    prompt: 'Write a 2 sentence post sharing a Postgres tip. Send only the post content.',
+  });
+  await pool.query(
+    'insert into posts (author, content, is_published) values ($1, $2, true)',
+    ['scheduler', text],
+  );
+  return c.json({ ok: true });
+});
+
+// Object-storage trigger: runs when an image is uploaded.
+app.post('/on-upload', async (c) => {
+  if (!c.req.header('x-neon-trigger-invocation-id')) return c.json({ error: 'not a trigger call' }, 403);
+
+  const { data } = await c.req.json();
+  console.log(`image uploaded: ${data.bucket_name}/${data.object_key}`);
+  return c.json({ ok: true });
+});
+```
+
+Declare both triggers in `neon.ts`:
+
+```typescript filename="neon.ts"
+// add to your existing defineConfig({ ... })
+triggers: {
+  'daily-post': { type: 'schedule', function: 'posts', cron: '0 9 * * *', functionPath: '/daily' },
+  'on-upload': { type: 'storage_object_created', function: 'posts', bucket: 'images', functionPath: '/on-upload' },
+},
+```
+
+Deploy, then read the function logs:
+
+```bash filename="Terminal"
+neon deploy
+neon logs query --source function
+```
+
+The upload trigger fires right away, so upload an image through `/upload` and watch the log line. The scheduled post runs at the next 09:00 UTC; set the cron to `* * * * *` to see it sooner. To stop the daily post, set `enabled: false` in `neon.ts` and redeploy, or manage it from the Console, CLI, or API.
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
 </TwoColumnLayout>
 
 ## What you built
@@ -656,6 +719,7 @@ You now have a Next.js app where:
 - A Neon Function generates posts and runs a streaming, tool-calling AI assistant on compute next to your database
 - The whole backend is declared in one `neon.ts` and provisioned with `neon deploy`, which injects every credential into `.env.local`
 - The Next.js app deploys to any App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node, while the long-running AI lives on the Neon Function
+- Scheduled and event-driven work run as the same function code through Function Triggers, with no scheduler or queue to operate
 
 ## Next steps
 
@@ -663,5 +727,6 @@ You now have a Next.js app where:
 - **Go deeper on Functions:** hold open [WebSockets and SSE](/docs/compute/functions/websockets) or build a fuller [AI agent](/docs/compute/functions/agents) on the same function.
 - **Branch your whole backend:** [`neon checkout`](/docs/cli/checkout) forks the database, buckets, and function together for preview environments. See [Branching](/docs/introduction/branching).
 - **Generated migrations:** for tracked schema changes, switch from a direct push to generated migrations. If you're using Drizzle, that means moving from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations); other ORMs and migration tools offer an equivalent.
+- **Run work on a schedule or an event:** the [Function Triggers overview](/docs/compute/functions/triggers/overview) covers cron syntax, object-key prefixes, and how triggers branch with your project.
 
 <NeedHelp/>

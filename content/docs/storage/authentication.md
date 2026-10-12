@@ -6,10 +6,8 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-08-17T23:18:55.558Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
 
@@ -20,12 +18,23 @@ An object storage credential requires at minimum one of:
 - [`storage:read`](#read-vs-write-scopes): allows GetObject, HeadObject, ListObjects, and ListBuckets
 - [`storage:write`](#read-vs-write-scopes): allows all read operations plus PutObject and DeleteObject
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["CLI", "Console", "API"]}>
 <TabItem>
 
-In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check the storage scopes you need.
+Create a credential with the [Neon CLI](/docs/cli/credentials):
 
-After creation, the credentials are shown once. Copy the snippet or click **Download .env** before closing:
+```bash
+neon credentials create --scope storage:read --scope storage:write --name my-app-credential
+```
+
+The `api_token` and `s3_secret_access_key` are printed once, so store them right away. Map `token_id` to `AWS_ACCESS_KEY_ID` and `s3_secret_access_key` to `AWS_SECRET_ACCESS_KEY` (see [Mapping to your S3 SDK](#mapping-to-your-s3-sdk)). Run it in a directory [linked](/docs/cli/link) to your project, or pass `--project-id` and `--branch`.
+
+</TabItem>
+<TabItem>
+
+In the Neon Console, click **Connect** at the top of the sidebar and open the **Storage** tab. Use the client selector to pick **S3 client**, **Files SDK**, or **Python** for a ready-to-run snippet, or **Parameters only** for the raw `.env`. Click **Reveal credential** to show `AWS_SECRET_ACCESS_KEY`, **Copy credentials** to copy it, or **Rotate credentials** to issue new keys.
+
+To create a separate credential with only the scopes you need, open your project's **Settings** > **Credentials**, select **Create credential**, enter a name, and choose `storage:read`, `storage:write`, or both. The secret is shown only once, so copy it right away.
 
 ```text
 AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.tech
@@ -34,7 +43,7 @@ AWS_SECRET_ACCESS_KEY=nsk_live_...
 AWS_REGION=us-east-2
 ```
 
-To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
+The Connect dialog reveals and rotates the current credential. To list all credentials for the branch or revoke one, use the [Neon CLI](/docs/cli/credentials) or the API (below).
 
 </TabItem>
 <TabItem>
@@ -49,7 +58,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 The `name` and `expires_at` fields are optional.
 
 <Admonition type="warning">
-`expires_at` is not currently enforced during the beta. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control yet; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
+`expires_at` is not currently enforced. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
 </Admonition>
 
 The response includes these fields. Both secrets are returned once only, so store them immediately:
@@ -199,7 +208,7 @@ staging  ──── credential NOT valid here (different lineage)
 
 ## Listing credentials
 
-The **Credentials** page in the Console shows all credentials for the current branch: name, key ID, creation date, and last used time. To list via the API:
+To list all credentials for the current branch (name, key ID, creation date, and last used time), use the [Neon CLI](/docs/cli/credentials) (`neon credentials list`) or the API:
 
 ```bash shouldWrap
 curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
@@ -210,14 +219,20 @@ This returns credential metadata. Secrets are never returned after creation.
 
 ## Revoking credentials
 
-To revoke from the Console, open the **Credentials** page and use the action menu (⋮) next to the credential. To revoke via the API:
+To revoke, use the [Neon CLI](/docs/cli/credentials) (`neon credentials revoke <token_id>`) or the API:
 
 ```bash shouldWrap
 curl -X DELETE "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials/{token_id}" \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-To rotate a credential, create a new one, update your environment variables, then revoke the old one.
+With the [Neon CLI](/docs/cli/credentials), run `neon credentials list` to find a credential, then revoke it by its `token_id`:
+
+```bash
+neon credentials revoke <token_id>
+```
+
+To rotate a credential in place, run `neon credentials rotate <token_id>`. This mints a new `s3_secret_access_key` while keeping the `token_id` (your `AWS_ACCESS_KEY_ID`) the same, so you only update the secret. Otherwise, create a new credential, update your environment variables, then revoke the old one.
 
 ## Common errors
 
