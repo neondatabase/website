@@ -50,6 +50,12 @@ Scaffold a specific template into the current directory:
 neon bootstrap . --template hono
 ```
 
+Scaffold the [Realtime](/docs/realtime/overview) React starter, a todo app with live queries and optimistic updates. Its `neon.ts` declares Realtime, so run `neon deploy` in the new directory to enable it:
+
+```bash
+neon bootstrap my-app --template realtime-react
+```
+
 Quick start: scaffold the default template and run setup without prompting:
 
 ```bash
