@@ -10,7 +10,7 @@ enableTableOfContents: true
 updatedOn: '2026-10-13T14:12:17.432Z'
 ---
 
-The `subscribe` command runs a `SELECT` query as a live subscription with Neon Realtime and prints its results as they change. Use it to watch a table while you develop, or to check what a Realtime client would receive. The branch needs Realtime enabled first: run [`neon realtime enable`](/docs/cli/realtime#enable), or declare it in `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime) and apply.
+The `subscribe` command runs a `SELECT` query as a live subscription with [Neon Realtime](/docs/realtime/overview) and prints its results as they change. Use it to watch a table while you develop, or to check what a Realtime client would receive. For a guided walkthrough, see the [Realtime quickstart](/docs/realtime/quickstart). The branch needs Realtime enabled first: run [`neon realtime enable`](/docs/cli/realtime#enable), or declare it in `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime) and apply.
 
 <Admonition type="comingSoon" title="Coming soon">
 Neon Realtime isn't available yet. As of Neon CLI 8.4.1, the `realtime` and `subscribe` commands are included but stay hidden and print "Neon Realtime is coming soon!" until Realtime launches.
@@ -24,7 +24,7 @@ Neon Realtime isn't available yet. As of Neon CLI 8.4.1, the `realtime` and `sub
 
 <CliOptions command="subscribe" />
 
-The CLI resolves the branch's Realtime URL, secret, and database name for you, the same values [`neon env pull`](/docs/cli/env) writes. If `--project-id` is omitted, it reads it from your [context file](/docs/cli/link) or auto-selects your only project. If `--branch` is omitted, it uses the context file's branch, or the project's default branch.
+The CLI resolves the branch's Realtime URL, secret, and database name for you, the same values [`neon env pull`](/docs/cli/env) writes, so you don't need a `.env` file first. If Realtime is still provisioning, it waits until it's ready. Quote the query so your shell passes it as one argument. If `--project-id` is omitted, it reads it from your [context file](/docs/cli/link) or auto-selects your only project. If `--branch` is omitted, it uses the context file's branch, or the project's default branch.
 
 The subscription runs until you press Ctrl+C, or until the server closes it or reports an error.
 
