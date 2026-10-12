@@ -30,7 +30,7 @@ const realtime = createRealtime({ secret: process.env.NEON_REALTIME_SECRET!, db:
 const sealedQuery = await realtime.seal({ query: messagesQuery(userId, channelId) })
 ```
 
-`secret` is the secret from the Realtime page in the Neon Console, and `db` is the database your queries run against. [Setup](../guides/queries#setup) covers both, and [`RealtimeServerOptions`](#backend-realtimeserveroptions) lists the other options, including [`debugMode`](../guides/subscribing#show-full-database-errors).
+`secret` is your `NEON_REALTIME_SECRET`, written by `neon env pull --service realtime` or shown on the Realtime page in the Neon Console. `db` is the database your queries run against. [Setup](../guides/queries#setup) covers both, and [`RealtimeServerOptions`](#backend-realtimeserveroptions) lists the other options, including [`debugMode`](../guides/subscribing#show-full-database-errors).
 
 ### Direct subscriptions
 
