@@ -4,14 +4,12 @@ import {
   resolveRegistryPath,
 } from 'utils/function-registry';
 
-// Serves the Function Registry catalog and schemas (registry.json and
-// schemas/*.json) at https://neon.com/functions/registry/<path>, the way
-// bootstrap/templates.yaml serves the `neon bootstrap` manifest. Modules are
-// not served here. See utils/function-registry.js.
+// Serves the Function Registry catalog at
+// https://neon.com/functions/registry/<path>, the way
+// /bootstrap/templates.yaml serves the `neon bootstrap` manifest.
 //
-// There is deliberately no bundled fallback: a copy here would drift from the
-// examples repo. When GitHub is unreachable this answers 502 uncached, and the
-// CLI falls back to raw GitHub itself.
+// Source of truth is neondatabase/examples/registry on `main`, cached for an
+// hour. No bundled fallback: a copy here would drift from the examples repo.
 export const dynamic = 'force-dynamic';
 
 const notFound = () =>
