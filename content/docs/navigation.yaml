@@ -1414,6 +1414,10 @@
                   slug: cli/buckets
                 - title: data-api
                   slug: cli/data-api
+                - title: realtime
+                  slug: cli/realtime
+                - title: subscribe
+                  slug: cli/subscribe
                 - title: neon-auth
                   slug: cli/neon-auth
                 - title: credentials

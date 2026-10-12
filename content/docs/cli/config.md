@@ -61,7 +61,7 @@ If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `confi
 neon config init
 ```
 
-Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
@@ -88,7 +88,7 @@ Declares a service, function, or bucket in your `neon.ts`, creating the file if 
 
 It looks for your config in the project directory: the directory holding the nearest `.neon` file (found by searching up from the current directory), or the current directory when there's no `.neon`. A `neon.ts` in a parent directory no longer applies. When it finds none, it creates `neon.ts` there and installs the `@neon/config` and `@neon/env` packages; pass `--no-install` to print the install command instead. Editing an existing file never installs packages. Pass `--config <path>` to target a specific file; a path that doesn't exist is an error.
 
-It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as a service declared under the deprecated `preview` block, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
+It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as AI Gateway, a function, or a bucket declared under its deprecated `preview` home, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
 
 ### neon config add auth (#add-auth)
 
@@ -125,6 +125,22 @@ Enables the AI Gateway by setting `aiGateway: true`.
 ```bash
 neon config add ai-gateway
 ```
+
+### neon config add realtime (#add-realtime)
+
+Enables [Realtime](/docs/realtime/overview) by setting `preview.realtime: true`. Unlike AI Gateway, Functions, and buckets, Realtime is still declared under `preview`. If `neon.ts` already has a `preview` block, `config add realtime` adds the key inside it.
+
+<CliUsage command="config add realtime" />
+
+<CliOptions command="config add realtime" />
+
+Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect. This writes `preview.realtime: { allowedOrigins: [...] }` instead. The CLI checks each origin before it writes the file, using the [same rules](/docs/cli/realtime#allowed-origins) as `neon realtime enable`. Running it again with new origins replaces only `allowedOrigins`, and running it without `--allowed-origin` leaves existing origins alone.
+
+```bash
+neon config add realtime --allowed-origin https://app.example.com --allowed-origin http://localhost:3000
+```
+
+Then preview the change with [`neon config plan`](#plan) and enable Realtime on the branch with [`neon deploy`](/docs/cli/deploy). No `config add` command disables Realtime: to disable it declaratively, edit `neon.ts` to set `realtime: false` under `preview`, then deploy. To enable Realtime without `neon.ts`, use [`neon realtime enable`](/docs/cli/realtime#enable).
 
 ### neon config add function (#add-function)
 

@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-12T18:05:01.669Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -67,6 +67,8 @@ Recommended setup installs agent tooling globally for your detected agents, so i
 After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`. Pass `--no-link` to set up agent tooling and `neon.ts` without linking a project; you can link later with `neon link`.
 
 It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with `neon config apply`. In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
+
+`--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
 
 ## Options
 

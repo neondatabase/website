@@ -14,6 +14,8 @@ The `deploy` command applies a `neon.ts` policy to a branch. It is a top-level a
 
 <CliOptions command="deploy" />
 
+If `neon.ts` declares [Realtime](/docs/cli/realtime) under `preview.realtime`, `neon deploy` enables it on the branch, and the default env pull waits until it's ready and writes `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`.
+
 For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
 
 ```bash

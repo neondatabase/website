@@ -36,6 +36,8 @@ const GROUP_OF = {
   functions: 'surfaces',
   buckets: 'surfaces',
   'data-api': 'surfaces',
+  realtime: 'surfaces',
+  subscribe: 'surfaces',
   'neon-auth': 'surfaces',
   orgs: 'network',
   'ip-allow': 'network',
