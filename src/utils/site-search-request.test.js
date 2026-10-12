@@ -90,6 +90,14 @@ describe('parseSiteSearchHits', () => {
     ).toBe('functions are useful');
   });
 
+  it('strips markdown from headings', () => {
+    expect(
+      parseSiteSearchHits({
+        hits: [{ ...hit, heading: 'Available commands > `neon/create_branch`' }],
+      })[0].heading
+    ).toBe('Available commands > neon/create_branch');
+  });
+
   it('rejects a host that is not neon.com and an unknown collection', () => {
     expect(() =>
       parseSiteSearchHits({ hits: [{ ...hit, url: 'https://evil.com/docs/x' }] })

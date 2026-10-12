@@ -80,7 +80,7 @@ function parseSiteSearchHit(hit) {
     title,
     slug,
     collection,
-    heading,
+    heading: markdownToSearchPlainText(heading),
     excerpt: markdownToSearchPlainText(excerpt),
     score,
   };
