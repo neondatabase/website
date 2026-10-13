@@ -92,7 +92,7 @@ It edits the file in place, keeping your comments and formatting. It refuses edi
 
 ### neon config add auth (#add-auth)
 
-Enables Neon Auth by setting `auth: true`.
+Enables Managed Better Auth by setting `auth: true`.
 
 <CliUsage command="config add auth" />
 
@@ -104,7 +104,7 @@ neon config add auth
 
 ### neon config add data-api (#add-data-api)
 
-Enables the Data API by setting `dataApi: true`, and enables Neon Auth, which the default provider requires (it flips `auth: false` to `true`). An existing external auth provider is left unchanged.
+Enables the Data API by setting `dataApi: true`, and enables Managed Better Auth, which the default provider requires (it flips `auth: false` to `true`). An existing external auth provider is left unchanged.
 
 <CliUsage command="config add data-api" />
 

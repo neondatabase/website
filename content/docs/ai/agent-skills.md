@@ -174,7 +174,7 @@ Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and *
 | [`neon-functions`](https://skills.sh/neondatabase/agent-skills/neon-functions)           | Long-running serverless Node.js HTTP functions on your branch, with `DATABASE_URL` injected automatically           | [Neon Functions](/docs/compute/functions/overview) |
 | [`neon-object-storage`](https://skills.sh/neondatabase/agent-skills/neon-object-storage) | S3-compatible object storage that branches with your project                                                        | [Object Storage](/docs/storage/overview)           |
 | [`neon-ai-gateway`](https://skills.sh/neondatabase/agent-skills/neon-ai-gateway)         | One API and credential for frontier and open-source LLMs; compatible with OpenAI, Anthropic, and Vercel AI SDKs     | [AI Gateway](/docs/ai-gateway/overview)            |
-| [`neon-auth`](https://skills.sh/neondatabase/agent-skills/neon-auth)                     | Add authentication with Managed Better Auth: sign-up, sign-in, OAuth, magic links, OTP, passkeys, and organizations | [Neon Auth](/docs/auth/overview)                   |
+| [`neon-auth`](https://skills.sh/neondatabase/agent-skills/neon-auth)                     | Add authentication with Managed Better Auth: sign-up, sign-in, OAuth, magic links, OTP, passkeys, and organizations | [Managed Better Auth](/docs/auth/overview)                   |
 
 ### Agent platforms
 
