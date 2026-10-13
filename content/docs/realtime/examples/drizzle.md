@@ -7,14 +7,14 @@ enableTableOfContents: true
 isDraft: true
 ---
 
-This example shows how to use Neon Realtime with [Drizzle ORM](https://orm.drizzle.team), so the schema and select queries you already have become live queries. You'll see which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID. It follows the chat app from the [guides](../guides/queries#setup) and walks through each step once, in the order you'd build it: [the packages](#install-the-packages), [the schema](#define-the-schema), [migrations](#create-the-tables-with-drizzle-kit), [the Drizzle client](#create-the-drizzle-client), [the adapter](#add-the-drizzle-adapter), [live queries](#define-live-queries), [query parameters](#pass-query-parameters), [aliases](#alias-renamed-and-computed-fields), [rows in the browser](#decode-and-type-rows-in-the-browser) and [writes](#return-the-txid-from-drizzle-writes). It ends with [common pitfalls](#common-pitfalls).
+This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), so the schema and select queries you already have become live queries. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID. The snippets use the `messages` and `channel_members` tables from the [guides](../guides/queries#setup), and the steps follow the order you'd build in: [the packages](#install-the-packages), [the schema](#define-the-schema), [migrations](#create-the-tables-with-drizzle-kit), [the Drizzle client](#create-the-drizzle-client), [the adapter](#add-the-drizzle-adapter), [live queries](#define-live-queries), [query parameters](#pass-query-parameters), [aliases](#alias-renamed-and-computed-fields), [rows in the browser](#decode-and-type-rows-in-the-browser) and [writes](#return-the-txid-from-drizzle-writes). It ends with [common pitfalls](#common-pitfalls).
 
 <Admonition type="tip" title="Full examples on GitHub">
-Three apps in the `neondatabase/examples` repository use Drizzle with Realtime, and each README has the steps to run it:
+These apps in the `neondatabase/examples` repository use Drizzle with Realtime. Each README has the steps to run it:
 
-- [`realtime/guides-chat-app`](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app): the guides' chat app, with a snake_case schema. Most snippets on this page come from it
-- [`realtime/with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react): a Hono and React todo app with the smallest Drizzle setup
-- [`realtime/with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack): a TanStack&nbsp;Start todo app with a camelCase schema and an aliased column
+- [`realtime/guides-chat-app`](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app): the chat app the guides build, with a snake_case schema
+- [`realtime/with-react`](https://github.com/neondatabase/examples/tree/main/realtime/with-react): Hono and React, with a minimal Drizzle setup
+- [`realtime/with-tanstack`](https://github.com/neondatabase/examples/tree/main/realtime/with-tanstack): TanStack&nbsp;Start, with a camelCase schema and an aliased column
 
 </Admonition>
 
@@ -31,17 +31,17 @@ npm install -D drizzle-kit dotenv @types/ws
 
 - `@neon/realtime-drizzle` has two entry points. The main one, with `drizzleAdapter()`, runs on your server. `@neon/realtime-drizzle/client`, with `drizzleParsers`, runs in the browser and doesn't import Drizzle, so the ORM stays out of your browser bundle
 
-The queries guide's [setup](../guides/queries#setup) has the rest of the chat app's setup, including Neon Auth and the environment variables. For Drizzle on Neon in general, see [Connect from Drizzle to Neon](/docs/guides/drizzle).
+The queries guide's [setup](../guides/queries#setup) covers the rest, including Neon Auth, `neon.ts` and the environment variables. For Drizzle on Neon in general, see [Connect from Drizzle to Neon](/docs/guides/drizzle).
 
 ## Define the schema
 
-The schema is plain Drizzle, with no Realtime imports or options. The one choice made for Realtime is the snake_case keys:
+Your schema stays plain Drizzle, with no Realtime imports or options. The one choice that matters for Realtime is how you name the keys. Snake_case keys, the same as the column names, are the simplest:
 
 ```ts filename="backend/schema.ts"
 import { integer, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
 export const messages = pgTable("messages", {
-  // Generated in the browser, so an optimistic message already has its key
+  // No default: the client generates the ID, so an optimistic row already has its key
   id: uuid("id").primaryKey(),
   channel_id: integer("channel_id").notNull(),
   author_id: text("author_id").notNull(),
@@ -61,13 +61,13 @@ export const channelMembers = pgTable(
 export type Message = typeof messages.$inferSelect
 ```
 
-- the keys are snake_case, the same as the column names. The adapter needs every selected key to match the name Postgres returns for it, so with this schema no query needs an alias. For camelCase keys, see [Alias renamed and computed fields](#alias-renamed-and-computed-fields)
-- each table has a primary key, which is all Realtime needs from it. The queries guide covers the [table requirements](../guides/queries#table-requirements)
-- `Message` is the row type of a select of every `messages` column. The browser imports it as a type when it [decodes and types rows](#decode-and-type-rows-in-the-browser)
+- the adapter needs every selected key to match the name Postgres returns for it, so with snake_case keys no query needs an alias. For camelCase keys, see [Alias renamed and computed fields](#alias-renamed-and-computed-fields)
+- give each table a primary key. That's all Realtime needs from it. The queries guide covers the [table requirements](../guides/queries#table-requirements)
+- `Message` is the row type of a select of every `messages` column. Import it as a type in the browser when you [decode and type rows](#decode-and-type-rows-in-the-browser)
 
 ## Create the tables with drizzle-kit
 
-Your migrations don't need any Realtime-specific SQL: no publications, triggers or grants. The primary keys in the schema already meet the [table requirements](../guides/queries#table-requirements). The examples create their tables with plain drizzle-kit, and the config reads `DATABASE_URL` from the `.env.local` file that `neon deploy` writes:
+Your migrations don't need any Realtime-specific SQL: no publications, triggers or grants. The primary keys in the schema already meet the [table requirements](../guides/queries#table-requirements), so you create the tables with plain drizzle-kit. Point it at your schema, and read `DATABASE_URL` from the `.env.local` file that `neon deploy` writes:
 
 ```ts filename="drizzle.config.ts"
 import { config as loadEnv } from "dotenv"
@@ -85,7 +85,7 @@ export default defineConfig({
 })
 ```
 
-In development, the examples push the schema straight to the database:
+In development, push the schema straight to the database:
 
 ```bash filename="Terminal"
 npx drizzle-kit push
@@ -98,7 +98,7 @@ npx drizzle-kit generate
 npx drizzle-kit migrate
 ```
 
-- `push` applies the schema with no migration files, which suits development and is what the examples' `db:push` scripts run. `generate` and `migrate` give you versioned migrations to review and apply. Use one approach per database: the first migration fails on a database that `push` already created tables in. [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations) walks through them
+- `push` applies the schema with no migration files, which suits development. `generate` and `migrate` give you versioned migrations to review and apply. Use one approach per database: the first migration fails on a database that `push` already created tables in. [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations) walks through them
 
 ## Create the Drizzle client
 
@@ -120,7 +120,7 @@ export const db = drizzle(pool, { schema })
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-- the [`neon-serverless`](/docs/serverless/serverless-driver) driver runs interactive transactions, which the [writes](#return-the-txid-from-drizzle-writes) need to read their transaction ID. `drizzle-orm/node-postgres` with a `pg` pool, as `with-react` and `with-tanstack` use, works the same way. The `neon-http` driver can't run interactive transactions, so `db.transaction()` throws with it. Use `neon-serverless` or `node-postgres` for these writes
+- the [`neon-serverless`](/docs/serverless/serverless-driver) driver runs interactive transactions, which the [writes](#return-the-txid-from-drizzle-writes) need to read their transaction ID. `drizzle-orm/node-postgres` with a `pg` pool works the same way. The `neon-http` driver can't run interactive transactions, so `db.transaction()` throws with it. Use `neon-serverless` or `node-postgres` for these writes
 - `{ schema }` is only for Drizzle's relational `db.query` API, which [can't be sealed](#common-pitfalls). Live queries use the select builder
 
 ## Add the Drizzle adapter
@@ -166,13 +166,13 @@ export function messagesQuery(userId: string, channelId: number) {
 - `select(getTableColumns(messages))` keeps each row flat, with only the `messages` columns. A bare `select()` over a join [doesn't seal](#common-pitfalls)
 - the join is the authorization: a user only sees messages in channels they belong to, and the result stays correct as memberships change. See [live authorization](../guides/queries#live-authorization)
 - `orderBy` and `limit` work as they do in any Drizzle query, so the live result is the 50 newest messages
-- you can await the same function to read the rows on the server, as `with-tanstack` does for its server-rendered rows. See [return the sealed query and initial results](../guides/ssr#return-the-sealed-query-and-initial-results)
+- you can also await the same function to read the rows on the server, for example to server-render the first results. See [return the sealed query and initial results](../guides/ssr#return-the-sealed-query-and-initial-results)
 
 The adapter checks the query's shape when you seal it. The SQL itself is only checked when a client subscribes, so a query that writes or calls a non-deterministic function such as `now()` seals fine and then fails to subscribe. The queries guide covers the rules for [defining live queries](../guides/queries#defining-live-queries).
 
 ## Pass query parameters
 
-Drizzle has no special syntax for live query parameters. They're the ordinary values you pass to the query function. The chat app's [`/api/v1/messages/live` route](../guides/queries#exposing-an-endpoint) calls `messagesQuery(user.id, channelId)` with the user from the verified session and the validated `channelId` from the request body, then passes the result to `realtime.seal({ query })`.
+Drizzle has no special syntax for live query parameters. They're the ordinary values you pass to the query function. Fill them in on the server from context you trust: take the user ID from the verified session, validate anything that comes from the request, then seal the result with `realtime.seal({ query: messagesQuery(user.id, channelId) })`. The queries guide shows this in an [API endpoint](../guides/queries#exposing-an-endpoint) and a [server function](../guides/queries#using-server-functions).
 
 - Drizzle compiles each value to a bind parameter (`$1`, `$2` and so on), and the sealed query carries the values alongside the SQL. They're never spliced into the SQL text
 - each sealed query is for one set of values. To show another channel, the browser fetches a new sealed query. See [changing query parameters](../guides/reactivity#changing-query-parameters) and [renewing sealed queries](../guides/queries#renewing-sealed-queries)
@@ -206,42 +206,44 @@ The `timestamptz` column encodes `since` as an ISO string, and Postgres infers e
 
 ## Alias renamed and computed fields
 
-Realtime returns rows with the names Postgres gives each result column, not Drizzle's client-side mapping. So the adapter checks that every selected key matches its result name, and `seal()` throws if one doesn't. With snake_case keys, as in the chat app, they always match. With camelCase keys over snake_case columns, as in `with-tanstack`, a renamed field needs an SQL alias. Here's `with-tanstack`'s table, with camelCase keys:
+Realtime returns rows with the names Postgres gives each result column, not Drizzle's client-side mapping. So the adapter checks that every selected key matches its result name, and `seal()` throws if one doesn't. With snake_case keys, they always match. If your schema uses camelCase keys over snake_case columns, a renamed field needs an SQL alias. Here's the same `messages` table with camelCase keys:
 
-```ts filename="src/schema.ts"
-import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
+```ts filename="backend/schema.ts"
+import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
-export const todos = pgTable("realtime_todos", {
+export const messages = pgTable("messages", {
   id: uuid("id").primaryKey(),
-  userId: text("user_id").notNull(),
-  title: text("title").notNull(),
-  completed: boolean("completed").notNull().default(false),
+  channelId: integer("channel_id").notNull(),
+  authorId: text("author_id").notNull(),
+  body: text("body").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
 })
 ```
 
-```ts filename="src/todos.server.ts" {12}
+A query over it aliases `createdAt`, the one selected key whose name differs from its column:
+
+```ts filename="backend/queries.ts" {11}
 import { eq, sql } from "drizzle-orm"
 
-import { db } from "./db.server"
-import { todos } from "./schema"
+import { db } from "./db"
+import { messages } from "./schema"
 
-export const selectTodos = (userId: string) =>
-  db
+export function userMessagesQuery(userId: string) {
+  return db
     .select({
-      id: todos.id,
-      title: todos.title,
-      completed: todos.completed,
-      createdAt: sql<Date>`${todos.createdAt}`.mapWith(todos.createdAt).as("createdAt")
+      id: messages.id,
+      body: messages.body,
+      createdAt: sql<Date>`${messages.createdAt}`.mapWith(messages.createdAt).as("createdAt")
     })
-    .from(todos)
-    .where(eq(todos.userId, userId))
+    .from(messages)
+    .where(eq(messages.authorId, userId))
+}
 ```
 
-- `id`, `title` and `completed` have the same name in Drizzle and Postgres, so they need nothing
-- `createdAt: todos.createdAt` on its own would come back from Postgres as `created_at`, and `seal()` would throw an error saying that `createdAt` is returned as `created_at`. `` sql<Date>`${todos.createdAt}`.as("createdAt") `` selects `"created_at" as "createdAt"`, so the names match, and `sql<Date>` keeps the row type a `Date`
-- `.mapWith(todos.createdAt)` only has an effect when Drizzle runs the query itself, as `with-tanstack` does for its server-rendered rows. It decodes the value with the column's own decoder, so it's a `Date` there too. Live rows don't need it, because the Realtime client decodes them by Postgres type. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
-- the query filters on `userId` without selecting it. Only selected keys need to match
+- `id` and `body` have the same name in Drizzle and Postgres, so they need nothing
+- `createdAt: messages.createdAt` on its own would come back from Postgres as `created_at`, and `seal()` would throw an error saying that `createdAt` is returned as `created_at`. `` sql<Date>`${messages.createdAt}`.as("createdAt") `` selects `"created_at" as "createdAt"`, so the names match, and `sql<Date>` keeps the row type a `Date`
+- `.mapWith(messages.createdAt)` only has an effect when Drizzle runs the query itself, for example when you await it on the server to render the first rows. It decodes the value with the column's own decoder, so it's a `Date` there too. Live rows don't need it, because the Realtime client decodes them by Postgres type. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
+- the query filters on `authorId` without selecting it. Only selected keys need to match
 
 Computed fields, such as aggregates, follow the same rule: give each one an alias that matches its key, for example `` messageCount: sql<number>`count(*)::int`.as("messageCount") ``. Cast it with `::int` too, because Postgres returns `count(*)` as `int8`, which [arrives as a string](../guides/subscribing#subscribe-to-the-sealed-query).
 
@@ -275,15 +277,15 @@ The parsers work by Postgres type, so for the common column types a live row mat
 
 Per-column modes, such as `date({ mode: "date" })` or `timestamp({ mode: "string" })`, aren't carried over, and neither are custom types or columns that Drizzle maps to tuples or arrays, such as `point()`, `line()` and `vector()`. For those, and for `bigint` columns, register your own parser for the Postgres type with [`defineParsers`](../sdks/typescript#client-defineparsers), and decode server-rendered rows the same way so both sides match. The subscribing guide lists [every default parser](../guides/subscribing#subscribe-to-the-sealed-query).
 
-You don't write the row type yourself. [`seal()`](../sdks/typescript#backend-realtimeserverseal) infers it from the select, so `realtime.seal({ query: messagesQuery(userId, channelId) })` returns a `SealedLiveQuery<Message>` with no annotation or cast. A typed API client carries that type to the browser, as `with-react` does with Hono's `hc` client. Hono types the response as JSON, though, so there a `Date` column such as `created_at` shows up as a `string`, while `drizzleParsers` decodes it to a `Date` in live rows. The subscribing guide covers this when it [fetches the sealed query](../guides/subscribing#fetch-from-an-api-endpoint).
+You don't write the row type yourself. [`seal()`](../sdks/typescript#backend-realtimeserverseal) infers it from the select, so `realtime.seal({ query: messagesQuery(userId, channelId) })` returns a `SealedLiveQuery<Message>` with no annotation or cast. A typed API client, such as Hono's `hc` client, carries that type to the browser. Hono types the response as JSON, though, so a `Date` column such as `created_at` shows up as a `string`, while `drizzleParsers` decodes it to a `Date` in live rows. The subscribing guide covers this when it [fetches the sealed query](../guides/subscribing#fetch-from-an-api-endpoint).
 
 - if you name the row type in the browser, import it with `import type`, as in `import type { Message } from "../backend/schema"`. TypeScript erases the import, so the schema module never reaches the browser bundle
-- `$inferSelect` fits `messagesQuery` because it selects every column. For a narrower or aliased selection, derive the row type from the query instead, for example `` type Todo = Awaited<ReturnType<typeof selectTodos>>[number] ``
+- `$inferSelect` fits `messagesQuery` because it selects every column. For a narrower or aliased selection, derive the row type from the query instead, for example `` type UserMessage = Awaited<ReturnType<typeof userMessagesQuery>>[number] ``
 - the subscribing guide covers the rest of [subscribing to the sealed query](../guides/subscribing#subscribe-to-the-sealed-query), and the reactivity guide covers the [React and TanStack&nbsp;DB bindings](../guides/reactivity)
 
 ## Return the txid from Drizzle writes
 
-With Drizzle, run the write in `db.transaction()` and read the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) inside it, with the same `currentTxId()` helper as the mutations guide. Here's the chat app's message edit, taken out of its route as a plain function:
+With Drizzle, run the write in `db.transaction()` and read the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) inside it, with the same `currentTxId()` helper as the mutations guide. For example, a function that edits a message:
 
 ```ts filename="backend/server.ts"
 import { and, eq, ne, sql } from "drizzle-orm"
@@ -324,7 +326,7 @@ export function editMessage(userId: string, id: string, body: string): Promise<M
 - `Transaction` is the type of `tx` in your `db.transaction()` callback, so `currentTxId()` works with the `neon-serverless` and `node-postgres` drivers. With `postgres-js`, `tx.execute()` returns the rows themselves, so read `result[0]!.txid`
 - `tx.execute()` runs `pg_current_xact_id()` inside the write's transaction, so it returns the ID of the transaction that made the change. It's cast to `text`, so the 64-bit ID arrives as an exact decimal string, the form the client waits for
 - `.returning({ id: messages.id })` gives you the changed rows. When there are none, nothing comes back over Realtime, so the function returns `unchanged` and the client has nothing to wait for. `ne(messages.body, body)` skips an edit that wouldn't change the row
-- the mutations guide has the chat app's three write routes and explains [how optimistic mutations work](../guides/mutations#how-optimistic-mutations-work)
+- the mutations guide shows how to [call these writes from the frontend](../guides/mutations#calling-the-routes-from-the-frontend) and explains [how optimistic mutations work](../guides/mutations#how-optimistic-mutations-work)
 
 </Steps>
 
