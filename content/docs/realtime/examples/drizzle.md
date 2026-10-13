@@ -1,5 +1,5 @@
 ---
-title: 'Drizzle'
+title: 'Drizzle example'
 subtitle: 'Using Realtime with your Drizzle schema, queries, types and writes.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: add the Drizzle adapter, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
