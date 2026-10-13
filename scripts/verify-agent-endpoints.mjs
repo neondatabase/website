@@ -358,10 +358,9 @@ const VALIDATORS = {
     return checks;
   },
 
-  // /models.json is the source of truth for the gateway catalog, not a copy of
-  // anything, so offline verification validates the catalog on its own terms.
-  // That used to be implied by the file being machine-generated from models.dev;
-  // now that it is authored, the invariants have to be stated and checked.
+  // /models.json is not a copy of models.dev, so offline verification validates
+  // the catalog on its own terms: the invariants are stated and checked here.
+  // The build-time refresh from the gateway runs the same validateCatalog.
   'models-json'(payload, entry, sot, { live }) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.modelsJson, payload)];
 
