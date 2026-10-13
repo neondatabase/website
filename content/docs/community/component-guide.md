@@ -8,7 +8,7 @@ summary: >-
   Use this page when choosing between similar components or looking up correct
   prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-08-26T16:06:50.814Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -351,12 +351,12 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 ```mdx
 <DetailIconCards>
   <a
-    href="/docs/ai/openai"
-    title="OpenAI integration"
-    description="Build AI features with OpenAI"
+    href="/docs/ai/ai-intro"
+    title="AI integrations"
+    description="Build AI features with Neon"
     icon="openai"
   >
-    OpenAI Integration
+    AI Integrations
   </a>
   <a
     href="/docs/ai/langchain"
@@ -367,20 +367,20 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
     LangChain Integration
   </a>
   <a
-    href="/docs/development"
-    title="Code development"
-    description="Development tools and practices"
+    href="/docs/guides/branching-github-actions"
+    title="GitHub Actions"
+    description="Automate development with database branches"
     icon="code"
   >
-    Code Development
+    GitHub Actions
   </a>
   <a
-    href="/docs/cloud/aws"
-    title="AWS integration"
-    description="Deploy and scale with AWS"
+    href="/docs/guides/aws-lambda"
+    title="AWS Lambda integration"
+    description="Connect AWS Lambda functions to Neon"
     icon="aws"
   >
-    AWS Integration
+    AWS Lambda Integration
   </a>
 </DetailIconCards>
 ```
@@ -388,10 +388,10 @@ Alternative layout using [DetailIconCards icons](/docs/community/component-icon-
 **Live preview:**
 
 <DetailIconCards>
-<a href="/docs/ai/openai" title="OpenAI integration" description="Build AI features with OpenAI" icon="openai">OpenAI Integration</a>
+<a href="/docs/ai/ai-intro" title="AI integrations" description="Build AI features with Neon" icon="openai">AI Integrations</a>
 <a href="/docs/ai/langchain" title="LangChain integration" description="Create AI workflows with LangChain" icon="langchain">LangChain Integration</a>
-<a href="/docs/development" title="Code development" description="Development tools and practices" icon="code">Code Development</a>
-<a href="/docs/cloud/aws" title="AWS integration" description="Deploy and scale with AWS" icon="aws">AWS Integration</a>
+<a href="/docs/guides/branching-github-actions" title="GitHub Actions" description="Automate development with database branches" icon="code">GitHub Actions</a>
+<a href="/docs/guides/aws-lambda" title="AWS Lambda integration" description="Connect AWS Lambda functions to Neon" icon="aws">AWS Lambda Integration</a>
 </DetailIconCards>
 
 ---
@@ -467,7 +467,7 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 <DocsList title="Related documentation">
   <a href="/docs/guides/node">Node.js Connection Guide</a>
   <a href="/docs/guides/python">Python Connection Guide</a>
-  <a href="/docs/api-reference">API Reference</a>
+  <a href="/docs/reference/api">API Reference</a>
   <a href="/docs/cli">CLI Documentation</a>
 </DocsList>
 ```
@@ -477,7 +477,7 @@ Simple, clean lists for documentation links with optional theming. DocsList prov
 <DocsList title="Related documentation">
 <a href="/docs/guides/node">Node.js Connection Guide</a>
 <a href="/docs/guides/python">Python Connection Guide</a>
-<a href="/docs/api-reference">API Reference</a>
+<a href="/docs/reference/api">API Reference</a>
 <a href="/docs/cli">CLI Documentation</a>
 </DocsList>
 
@@ -826,7 +826,7 @@ Embed code from an external URL with syntax highlighting. Always use raw GitHub 
 Embeds a YouTube video player.
 
 ```mdx
-<YoutubeIframe embedId="IcoOpnAcO1Y" />
+<YoutubeIframe embedId="IcoOpnAcO1Y" title="Create anonymized database previews with Neon and Neosync" />
 ```
 
 Pass the video ID from the YouTube URL (the part after `v=`).

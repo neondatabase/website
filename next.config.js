@@ -243,6 +243,11 @@ const defaultConfig = {
     }, []);
 
     return [
+      {
+        source: '/docs/guides/cloudflare_sandbox_neon_branching.png',
+        destination: '/docs/guides/cloudflare_sandbox_neon_branching.jpg',
+        permanent: true,
+      },
       // Common paths from the logs with no page of their own; send them to the closest real page.
       {
         source: '/about',

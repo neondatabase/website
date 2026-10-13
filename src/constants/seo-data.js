@@ -184,7 +184,7 @@ export default {
   startups: {
     title: 'Neon Credits for Startups',
     description:
-      'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For venture-backed companies and startup accelerator programs.',
+      'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For self-funded and venture-backed startups, including startup accelerator programs.',
     pathname: LINKS.startups,
   },
   tools: {
@@ -210,7 +210,7 @@ export default {
 export const getBlogCategoryDescription = (category) => {
   switch (category) {
     case 'company':
-      return 'Stay updated on the latest Neon company new and partnership announcements. Explore our blog posts for valuable insights and stay ahead in the world of serverless Postgres.';
+      return 'Stay updated on the latest Neon company news and partnership announcements. Explore our blog posts for valuable insights and stay ahead in the world of serverless Postgres.';
     case 'engineering':
       return 'Dive into the technical depths of Neon serverless Postgres. Optimize performance, scalability, and reliability. Explore our cutting-edge approach.';
     case 'community':

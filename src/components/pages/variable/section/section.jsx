@@ -1,3 +1,4 @@
+import he from 'he';
 import { PropTypes } from 'prop-types';
 
 import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
@@ -12,6 +13,7 @@ const Section = ({ className = null, title, children }) => (
       <a
         className="anchor inline-flex items-center justify-center px-2.5 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 sm:hidden"
         href={`#${title.id}`}
+        aria-label={`Link to ${he.decode(title.title.replace(/<[^>]*>/g, ''))}`}
       >
         <HashIcon className="size-5 text-green-45" />
       </a>

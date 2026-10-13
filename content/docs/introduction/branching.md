@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/concepts/branching
   - /docs/guides/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-09-01T21:19:48.000Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -23,7 +23,7 @@ You can also rewind your data or create branches from the past to recover from m
 
 This page covers branching in Lakebase Postgres. For what one branch action does across the whole backend, see [Branch your backend](/docs/concepts/branch-your-backend).
 
-<YoutubeIframe embedId="UuHnFlg66Io" />
+<YoutubeIframe embedId="UuHnFlg66Io" title="Database branching in Neon" />
 
 ## What is a branch?
 

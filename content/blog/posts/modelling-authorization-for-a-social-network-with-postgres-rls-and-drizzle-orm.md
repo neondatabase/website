@@ -295,7 +295,7 @@ We have two policies:
 2. We use `pgPolicy` to generate a single RLS policy for `INSERT`. This policy dictates that you can only insert chat messages of which you are the author, and in chats where you are a participant.
 3. Editing or deleting chat messages is not possible in this model (since we don’t have any policies for the UPDATE or DELETE operations).
 
-# Summing up
+## Summing up
 
 I have a few takeaways from having worked on this project:
 

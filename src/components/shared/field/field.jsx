@@ -37,6 +37,7 @@ const Field = forwardRef(
       theme = 'default',
       errorTheme = 'default',
       name,
+      id,
       value,
       label,
       labelClassName,
@@ -61,7 +62,7 @@ const Field = forwardRef(
           isDisabled && 'cursor-default!',
           labelClassName
         )}
-        htmlFor={theme === 'checkbox' ? value : name}
+        htmlFor={id ?? (theme === 'checkbox' ? value : name)}
       >
         {label}
       </label>
@@ -86,7 +87,7 @@ const Field = forwardRef(
             inputClassName
           )}
           ref={ref}
-          id={theme === 'checkbox' ? value : name}
+          id={id ?? (theme === 'checkbox' ? value : name)}
           name={name}
           value={theme === 'checkbox' ? value : undefined}
           type={type}
@@ -129,6 +130,7 @@ Field.propTypes = {
   theme: PropTypes.oneOf(Object.values(FIELD_TAGS)),
   errorTheme: PropTypes.oneOf(Object.values(errorThemes)),
   name: PropTypes.string.isRequired,
+  id: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string.isRequired,
   labelClassName: PropTypes.string,

@@ -2,11 +2,13 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
+import getArticleSchema from 'utils/get-article-schema';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -101,22 +103,18 @@ const DocPost = async (props) => {
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.title,
-    author: {
-      '@type': 'Organization',
-      name: 'Neon',
-    },
-  };
+  const jsonLd = getArticleSchema({
+    title: data.title,
+    description: data.summary || data.subtitle || post.excerpt,
+    datePublished: data.createdAt,
+    dateModified: data.updatedOn,
+    url: `${VERCEL_URL}${LINKS.docs}/${currentSlug}`,
+    image: `${VERCEL_URL}/docs/og?title=${Buffer.from(data.title).toString('base64')}`,
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

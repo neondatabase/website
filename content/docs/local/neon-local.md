@@ -9,7 +9,7 @@ summary: >-
   ephemeral branches with PARENT_BRANCH_ID that are deleted when the container
   stops. Both the standard postgres driver and the Neon serverless driver are
   supported through the same Docker configuration.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:
@@ -52,7 +52,7 @@ db:
 
 To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database, without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
 
-### Docker run
+### Docker run (#docker-run-2)
 
 ```shell
 docker run \
@@ -64,7 +64,7 @@ docker run \
   neondatabase/neon_local:latest
 ```
 
-### Docker Compose
+### Docker Compose (#docker-compose-2)
 
 ```yaml
 db:
@@ -112,13 +112,13 @@ The Neon Local container now supports both the `postgres` and Neon `serverless` 
 
 Connect to Neon Local using a standard Postgres connection string.
 
-### Docker run
+### Docker run (#docker-run-3)
 
 ```shell
 postgres://neon:npg@localhost:5432/<database_name>?sslmode=require
 ```
 
-### Docker compose
+### Docker compose (#docker-compose-3)
 
 ```shell
 postgres://neon:npg@${db}$:5432/<database_name>?sslmode=require
@@ -144,7 +144,7 @@ Connect using the Neon [serverless driver](/docs/serverless/serverless-driver).
 The Neon Local container only supports HTTP-based communication using the Neon Serverless driver, not websockets. The following configurations will enable your app to communicate using only HTTP traffic with your Neon database.
 </Admonition>
 
-### Docker run
+### Docker run (#docker-run-4)
 
 ```javascript
 import { neon, neonConfig } from '@neondatabase/serverless';
@@ -156,7 +156,7 @@ neonConfig.poolQueryViaFetch = true;
 const sql = neon('postgres://neon:npg@localhost:5432/<database_name>');
 ```
 
-### Docker compose
+### Docker compose (#docker-compose-4)
 
 ```javascript
 import { neon, neonConfig } from '@neondatabase/serverless';

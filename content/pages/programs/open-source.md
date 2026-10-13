@@ -40,7 +40,7 @@ This is a new program, if you're not sure whether your project is eligible, just
 
 Get in touch below, we typically respond within 1-3 business days.
 
-<ProgramForm type="openSource" />
+<ProgramForm type="openSource" id="open-source-apply" />
 
 ## FAQ
 

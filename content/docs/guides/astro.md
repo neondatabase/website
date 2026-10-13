@@ -9,7 +9,7 @@ summary: >-
   node-postgres, postgres.js, and the Neon serverless driver, and shows query
   patterns for both .astro page components and server endpoint API routes.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
@@ -221,7 +221,7 @@ export async function GET() {
 
 </CodeTabs>
 
-#### Run the app
+#### Run the app (#run-the-app-2)
 
 When you run `npm run dev` you can expect to see something like the following when you visit the `localhost:4321/api` route:
 

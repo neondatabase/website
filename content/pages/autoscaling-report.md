@@ -210,7 +210,7 @@ This pattern shows up mostly in **non-production databases**: Dev and staging DB
 
 If we tally up the compute used by small non-production databases that scale to zero on Neon and compare it with the compute required to run the same databases continually on a provisioned platform like RDS, we find that the savings are even more extreme than production databases.
 
-#### Compute
+#### Compute (#compute-2)
 
 A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
 This is using the same P99.5 + 20% methodology as before.
@@ -234,7 +234,7 @@ That drives the cost down to <span className="bg-green-45/20 text-green-45 p-1">
 Provisioned platforms cannot scale to zero, so your best option for this workload is to buy the smallest instance that fits the workload (zero over-provisioning).
 Using that approach, running a similar workload on RDS would use <span className="bg-secondary-1/20 text-secondary-1 p-1">7.1x more compute</span> and <span className="bg-secondary-1/20 text-secondary-1 p-1">cost 4.4x more</span>.
 
-#### Checking the math with actual RDS instances
+#### Checking the math with actual RDS instances (#checking-the-math-with-actual-rds-instances-2)
 
 The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs `$11.68` per month.
 

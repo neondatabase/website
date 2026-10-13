@@ -1,12 +1,14 @@
 'use client';
 
 import PropTypes from 'prop-types';
+import { useId } from 'react';
 import slugify from 'slugify';
 
 import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
 
 const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherProps }) => {
+  const inputId = useId();
   const id = slugify(title, {
     lower: true,
     strict: true,
@@ -15,14 +17,14 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
 
   const isChecked = checklist.includes(id);
   const WrapperTag = href ? 'div' : 'label';
-  const TitleTag = href ? Link : 'label';
-  const titleProps = href ? { href } : { htmlFor: id };
+  const TitleTag = href ? Link : 'span';
+  const titleProps = href ? { to: href } : {};
 
   return (
     <li className="!m-0 before:hidden">
       <WrapperTag
         className={cn('relative block pl-[30px]', !href && 'cursor-pointer')}
-        htmlFor={!href ? id : null}
+        htmlFor={!href ? inputId : undefined}
       >
         <input
           className={cn(
@@ -35,7 +37,8 @@ const CheckItem = ({ title, href, children, checklist = [], onToggle, ...otherPr
             'dark:before:invert dark:checked:border-gray-new-30'
           )}
           type="checkbox"
-          id={id}
+          id={inputId}
+          aria-label={href ? title : undefined}
           checked={isChecked}
           onChange={() => onToggle(id)}
         />

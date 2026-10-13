@@ -12,7 +12,7 @@ summary: >-
   `btree_gist`, scalar types cannot participate in a GiST index, so overlap
   exclusion constraints cannot be enforced at the database level.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The `btree_gist` extension for Postgres provides a specialized set of **GiST operator classes**. These allow common, "B-tree-like" data types (such as integers, text, or timestamps) to be included in **GiST (Generalized Search Tree) indexes**. This is especially useful when you need to create **multicolumn GiST indexes** that combine GiST-native types (like geometric data or range types) with these simpler B-tree types. `btree_gist` also plays a key role in defining **exclusion constraints** involving standard data types.
@@ -129,7 +129,7 @@ The `idx_map_events_geom_date` index allows Postgres to efficiently process both
 
 Room bookings are a classic example: you need to ensure no two bookings overlap for the same room.
 
-#### Table schema
+#### Table schema (#table-schema-2)
 
 ```sql
 CREATE TABLE room_bookings (

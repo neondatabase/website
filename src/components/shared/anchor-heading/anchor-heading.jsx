@@ -81,7 +81,7 @@ const AnchorHeading = (Tag) => {
         <a
           className="rounded-full px-2 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-offset-0 sm:hidden"
           href={`#${id}`}
-          aria-label={`Link to ${extractText(children)}`}
+          aria-label={`Link to ${cleanText}`}
         >
           <HashIcon
             className={cn('inline text-green-44 dark:text-green-52', {
