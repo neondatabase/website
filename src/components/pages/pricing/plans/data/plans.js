@@ -183,13 +183,13 @@ export default {
           {
             title: 'Compute',
             details: [
-              `${functions.free.activeCapacityHours} active capacity-hours`,
-              `${functions.free.waitingCapacityHours} waiting capacity-hours`,
+              `${functions.free.activeCapacityHours} active capacity-hours per project`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours per project`,
             ],
           },
           {
             title: 'Invocations',
-            details: [`${functions.free.invocations} invocations`],
+            details: [`${functions.free.invocations} invocations per project`],
           },
         ],
       },
