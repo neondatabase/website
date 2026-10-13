@@ -123,7 +123,7 @@ export const db = drizzle(pool, { schema })
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-Great, that's the main setup to follow along with the guides. Or for the full boilterplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
+Great, that's the main setup to follow along with the guides. Or for the full boilerplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
 
 </details>
 
@@ -279,7 +279,7 @@ See the [Drizzle](../examples/drizzle) and [Kysely](../examples/kysely) examples
 <Admonition type="tip" title="Column name casing">
 The Drizzle adapter needs each selected key to match its column name. That's why the schema uses snake_case keys and the join selects `getTableColumns(messages)`.
 
-The [Drizzle example](../examples/drizzle) shows how to alias fields to match the column name.
+The [Drizzle example](../examples/drizzle) shows how to alias fields to match the column key.
 </Admonition>
 
 ## Sealing queries
