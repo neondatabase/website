@@ -67,49 +67,6 @@ describe('parseSiteSearchHits', () => {
     expect(parseSiteSearchHits({ hits: [{ ...hit, extra: 'nope' }] })).toEqual([hit]);
   });
 
-  it('strips markdown from excerpts so the modal shows plain text', () => {
-    expect(
-      parseSiteSearchHits({
-        hits: [
-          {
-            ...hit,
-            excerpt:
-              '- [Learn about branching](https://neon.com/docs/introduction/branching): Learn about Neon branching',
-          },
-        ],
-      })[0].excerpt
-    ).toBe('Learn about branching: Learn about Neon branching');
-    expect(
-      parseSiteSearchHits({
-        hits: [
-          {
-            ...hit,
-            excerpt: 'before\n~~~\nconst x = 1\n~~~\nafter',
-          },
-        ],
-      })[0].excerpt
-    ).toBe('before after');
-    expect(
-      parseSiteSearchHits({
-        hits: [
-          {
-            ...hit,
-            excerpt:
-              '[functions](https://en.wikipedia.org/wiki/Function_(computer_programming)) are useful',
-          },
-        ],
-      })[0].excerpt
-    ).toBe('functions are useful');
-  });
-
-  it('strips markdown from headings', () => {
-    expect(
-      parseSiteSearchHits({
-        hits: [{ ...hit, heading: 'Available commands > `neon/create_branch`' }],
-      })[0].heading
-    ).toBe('Available commands > neon/create_branch');
-  });
-
   it('rejects a host that is not neon.com and an unknown collection', () => {
     expect(() =>
       parseSiteSearchHits({ hits: [{ ...hit, url: 'https://evil.com/docs/x' }] })

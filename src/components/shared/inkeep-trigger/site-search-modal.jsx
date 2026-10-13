@@ -10,6 +10,7 @@ import SearchIcon from 'icons/search.inline.svg';
 import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
+import { siteSearchHighlightRanges } from 'utils/site-search-highlight';
 import {
   parseSiteSearchHits,
   hrefFromSearchHit,
@@ -27,45 +28,23 @@ const COLLECTION_LABEL = {
 
 const SEARCH_DEBOUNCE_MS = 250;
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 function HighlightedText({ text, query }) {
-  const terms = [
-    ...new Set(
-      query
-        .trim()
-        .split(/\s+/)
-        .filter((term) => term.length > 0)
-    ),
-  ];
-  if (terms.length === 0) {
+  const ranges = siteSearchHighlightRanges(text, query);
+  if (ranges.length === 0) {
     return text;
   }
-  const pattern = new RegExp(`(${terms.map(escapeRegExp).join('|')})`, 'gi');
   const nodes = [];
   let lastIndex = 0;
-  let match = pattern.exec(text);
-  while (match) {
-    if (match[0] === '') {
-      pattern.lastIndex += 1;
-      match = pattern.exec(text);
-      continue;
-    }
-    if (match.index > lastIndex) {
-      nodes.push(text.slice(lastIndex, match.index));
+  for (const { start, end } of ranges) {
+    if (start > lastIndex) {
+      nodes.push(text.slice(lastIndex, start));
     }
     nodes.push(
-      <mark
-        key={match.index}
-        className="rounded-[2px] bg-green-45/20 text-inherit dark:bg-green-45/15"
-      >
-        {match[0]}
+      <mark key={start} className="rounded-[2px] bg-green-45/20 text-inherit dark:bg-green-45/15">
+        {text.slice(start, end)}
       </mark>
     );
-    lastIndex = match.index + match[0].length;
-    match = pattern.exec(text);
+    lastIndex = end;
   }
   if (lastIndex < text.length) {
     nodes.push(text.slice(lastIndex));

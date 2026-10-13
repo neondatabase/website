@@ -85,67 +85,8 @@ function parseSiteSearchHit(hit) {
     title,
     slug,
     collection,
-    heading: markdownToSearchPlainText(heading),
-    excerpt: markdownToSearchPlainText(excerpt),
+    heading,
+    excerpt,
     score,
   };
-}
-
-function markdownToSearchPlainText(markdown) {
-  const withoutFences = markdown.replace(/(?:`{3,}|~{3,})[\s\S]*?(?:`{3,}|~{3,}|$)/g, ' ');
-  const withoutLinks = stripInlineLinksAndImages(withoutFences);
-  const withoutRefLinks = withoutLinks.replace(/\[([^\]]+)\]\[[^\]]*\]/g, '$1');
-  const withoutRefDefs = withoutRefLinks.replace(/^\s*\[[^\]]+\]:\s+\S+/gm, ' ');
-  const withoutInlineCode = withoutRefDefs.replace(/`([^`]+)`/g, '$1');
-  const withoutBold = withoutInlineCode
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/__([^_]+)__/g, '$1');
-  const withoutStrike = withoutBold.replace(/~~([^~]+)~~/g, '$1');
-  const withoutItalic = withoutStrike.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '$1');
-  const withoutHeadings = withoutItalic.replace(/^\s{0,3}#{1,6}\s+/gm, '');
-  const withoutLists = withoutHeadings.replace(/^\s{0,3}(?:[-*+]|\d+\.)\s+/gm, '');
-  const withoutQuotes = withoutLists.replace(/^\s{0,3}>\s?/gm, '');
-  const withoutHtml = withoutQuotes.replace(/<[^>]+>/g, ' ');
-  return withoutHtml.replace(/\s+/g, ' ').trim();
-}
-
-function stripInlineLinksAndImages(text) {
-  let out = '';
-  let i = 0;
-  while (i < text.length) {
-    const open = text.indexOf('[', i);
-    if (open === -1) {
-      out += text.slice(i);
-      break;
-    }
-    const isImage = open > 0 && text[open - 1] === '!';
-    const labelEnd = text.indexOf(']', open + 1);
-    if (labelEnd === -1 || text[labelEnd + 1] !== '(') {
-      out += text.slice(i, open + 1);
-      i = open + 1;
-      continue;
-    }
-    let depth = 1;
-    let j = labelEnd + 2;
-    while (j < text.length && depth > 0) {
-      if (text[j] === '(') {
-        depth += 1;
-      } else if (text[j] === ')') {
-        depth -= 1;
-      }
-      j += 1;
-    }
-    if (depth !== 0) {
-      out += text.slice(i, open + 1);
-      i = open + 1;
-      continue;
-    }
-    const start = isImage ? open - 1 : open;
-    out += text.slice(i, start);
-    if (!isImage) {
-      out += text.slice(open + 1, labelEnd);
-    }
-    i = j;
-  }
-  return out;
 }
