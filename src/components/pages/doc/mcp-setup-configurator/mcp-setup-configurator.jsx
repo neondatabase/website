@@ -450,7 +450,11 @@ const McpSetupConfigurator = () => {
                     value={roleName}
                     placeholder="app_reader"
                     aria-invalid={roleNameInvalid}
-                    aria-describedby="mcp-role-name-help"
+                    aria-describedby={
+                      roleNameInvalid
+                        ? 'mcp-role-name-error mcp-role-name-help'
+                        : 'mcp-role-name-help'
+                    }
                     className={clsx(
                       'w-full rounded-lg border bg-white px-3 py-2 font-mono text-sm text-gray-new-20 transition-colors outline-none focus:ring-2 dark:bg-gray-new-10 dark:text-gray-new-90',
                       roleNameInvalid
@@ -462,6 +466,7 @@ const McpSetupConfigurator = () => {
                 </label>
                 {roleNameInvalid && (
                   <span
+                    id="mcp-role-name-error"
                     className="mt-2 block text-[13px] text-secondary-1 dark:text-secondary-4"
                     role="alert"
                   >
