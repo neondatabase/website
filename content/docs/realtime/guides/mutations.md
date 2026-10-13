@@ -186,7 +186,7 @@ Each route also checks what the user can change. Sending looks up the sender's `
 When an edit or a delete matches no rows, the route returns `{ kind: "unchanged" }` instead of a txid. That happens when an edit leaves the text as it was, when the message doesn't exist or when someone else wrote it. Nothing changed, so there's nothing to wait for.
 
 <Admonition type="important" title="Always pass a timeout">
-`awaitTxId()` doesn't reject when the subscription errors, so without a timeout it keeps waiting until you unsubscribe. With one, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed.
+`awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, and it never settles if the txid doesn't reach the query. With a timeout, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed. The write may still have committed. It also rejects if the subscription errors or closes.
 </Admonition>
 
 ### Calling the routes from the frontend
@@ -298,9 +298,9 @@ Pick [without a framework](#without-a-framework) to see the mechanism or for app
 
 ### Without a framework
 
-Without a framework, you keep the optimistic state yourself. `frontend/messages.ts` keeps an overlay of pending mutations on top of the subscription's synced rows, and merges the two every time either side changes:
+Without a framework, you keep the optimistic state yourself. `frontend/optimistic-messages.ts` keeps an overlay of pending mutations on top of the subscription's synced rows, and merges the two every time either side changes:
 
-```ts filename="frontend/messages.ts"
+```ts filename="frontend/optimistic-messages.ts"
 import type { LiveQueryState, MaterializedLiveQuerySubscription } from "@neon/realtime/client"
 
 import type { Message } from "../backend/schema"
@@ -364,7 +364,7 @@ export function optimisticMessages(
 
 Each mutation leaves the overlay once its txid arrives, or once it fails. Either way, the list falls back to the synced rows, which by then either include the change or show that it didn't happen.
 
-Call `optimisticMessages()` with the subscription you created in the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) and a function that draws the list. It replaces `subscription.onChange(render)` from that guide, and passes the subscription's state through, so the page can show its status line as before. Call `mutate()` from your UI, with `newMessage()` for a send. It needs the signed-in user's id, which you read from the [Neon Auth](/docs/auth/overview) session, as `frontend/main.tsx` does in the [TanStack&nbsp;DB section](#with-tanstack-db-collections). Show Edit and Delete only on the user's own messages, and disable them on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet. The routes still enforce authorship. Call `stop()` before you unsubscribe.
+Call `optimisticMessages()` with the subscription you created in the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) and a function that draws the list. It replaces `subscription.onChange(render)` from that guide, and passes the subscription's state through, so the page can show its status line as before. Call `mutate()` from your UI, with `newMessage()` for a send. It needs the signed-in user's id, which you read from the [Neon Auth](/docs/auth/overview) session, as `frontend/main.tsx` does in [render the app](#render-the-app). Show Edit and Delete only on the user's own messages, and disable them on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet. The routes still enforce authorship. Call `stop()` before you unsubscribe.
 
 ### With React's `useOptimistic` hook
 
@@ -406,8 +406,10 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
   const [mutationError, setMutationError] = useState<string>()
 
   useEffect(() => {
-    return utils.onBatch((changes, batch) => {
-      console.debug(`Applied ${changes.length} changes from transactions ${batch.txids.join(", ")}`)
+    return utils.onUpdate((update) => {
+      if (update.type === "changes") {
+        console.debug(`Applied ${update.changes.length} changes from transactions ${update.batch.txids.join(", ")}`)
+      }
     })
   }, [utils])
 
@@ -498,7 +500,7 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
 
 Edit and Delete show only on the user's own messages, and the routes still enforce authorship. They're disabled on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet.
 
-In `frontend/Channel.tsx` from the [reactivity guide](./reactivity#changing-query-parameters), give `Channel` a `userId` prop and pass it to `Messages` with `channelId`. Read `userId` from the [Neon Auth](/docs/auth/overview) session where you render `Channel`, as `frontend/main.tsx` does in the [TanStack&nbsp;DB section](#with-tanstack-db-collections):
+In `frontend/Channel.tsx` from the [reactivity guide](./reactivity#changing-query-parameters), give `Channel` a `userId` prop and pass it to `Messages` with `channelId`. Read `userId` from the [Neon Auth](/docs/auth/overview) session where you render `Channel`, as `frontend/main.tsx` does in [render the app](#render-the-app):
 
 ```tsx filename="frontend/Channel.tsx"
 // ...imports and useSealedQuery() as in the reactivity guide
@@ -671,32 +673,46 @@ export function Inbox({ messagesCollection, channelId, userId }: Props) {
 
 `$synced` is `false` while a row has a pending optimistic change, which disables its buttons, so you don't start a new change on a message whose last change isn't confirmed yet. Edit and Delete show only on the user's own messages, and the routes still enforce authorship. Each call returns a TanStack&nbsp;DB transaction, and its `isPersisted.promise` rejects if the write fails, so you can await it to show an error.
 
-An optimistic insert needs a whole `Message`, so the component also takes the signed-in user's id. It only fills in the optimistic row, because the server takes the author from the verified token. Read it from the [Neon Auth](/docs/auth/overview) session in `frontend/main.tsx`, where the app creates the collection:
+An optimistic insert needs a whole `Message`, so the component also takes the signed-in user's id. It only fills in the optimistic row, because the server takes the author from the verified token. Read it from the [Neon Auth](/docs/auth/overview) session where the app creates the collection, as `frontend/main.tsx` does in [render the app](#render-the-app).
+
+The [TanStack example](../examples/tanstack) puts these handlers into a full app with server-side rendering, and the [Next.js example](../examples/nextjs) shows the React binding in a server-rendered app.
+
+## Render the app
+
+`frontend/main.tsx` from the [reactivity guide](./reactivity#query-the-collection) renders both views inside `RealtimeProvider`. Read the signed-in user's id from the session and pass it to `Channel` and `Inbox`:
 
 ```tsx filename="frontend/main.tsx"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
+import { RealtimeProvider } from "@neon/realtime-react"
 
 import { fetchSealedInbox } from "./api"
 import { authClient } from "./auth"
+import { Channel } from "./Channel"
+import { client } from "./client"
 import { createMessagesCollection } from "./collections"
 import { Inbox } from "./Inbox"
 
+const root = createRoot(document.getElementById("root")!)
 const { data: session } = await authClient.getSession()
 
 if (!session) {
-  throw new Error("Sign in before loading messages")
+  root.render(<p>Sign in to see the messages.</p>)
+} else {
+  const userId = session.user.id
+  const messagesCollection = createMessagesCollection(await fetchSealedInbox())
+
+  root.render(
+    <StrictMode>
+      <RealtimeProvider client={client}>
+        <Channel channelId={2} userId={userId} />
+        <Inbox messagesCollection={messagesCollection} channelId={2} userId={userId} />
+      </RealtimeProvider>
+    </StrictMode>
+  )
 }
-
-const messagesCollection = createMessagesCollection(await fetchSealedInbox())
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Inbox messagesCollection={messagesCollection} channelId={2} userId={session.user.id} />
-  </StrictMode>
-)
 ```
 
-The [TanStack example](../examples/tanstack) puts these handlers into a full app with server-side rendering, and the [Next.js example](../examples/nextjs) shows the React binding in a server-rendered app.
+Signed out, it renders a message instead of the views. Sign-in isn't part of these guides: the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) shows one way to add it.
 
 <NeedHelp/>
