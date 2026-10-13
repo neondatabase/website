@@ -9,7 +9,7 @@ The Realtime SDK is split into modules:
 
 - [Backend](#backend) provides a [`RealtimeServer`](#backend-realtimeserver) that [seals queries](../guides/queries#sealing-queries)
 - [Client](#client) provides a [`RealtimeClient`](#client-realtimeclient) that subscribes to live queries and materializes results
-- [React](#react) provides a [`RealtimeProvider`](#react-realtimeprovider) and the [`useLiveQuery`](#react-uselivequery) and [`useRealtimeClient`](#react-userealtimeclient) hooks
+- [React](#react) provides a [`RealtimeProvider`](#react-realtimeprovider) and the [`useLiveQuery`](#react-uselivequery) hook
 - [TanStack DB](#tanstack-db) provides [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions) to create a [TanStack DB collection](https://tanstack.com/db/latest/docs/overview#defining-collections)
 - [Drizzle](#drizzle) and [Kysely](#kysely) provide [live query adapters](../guides/queries#using-a-query-builder-or-orm)
 
@@ -66,7 +66,7 @@ Most apps pass a `refreshQuery` function to the [React or TanStack DB bindings](
 
 ## React
 
-Import the React bindings from `@neon/realtime-react`. They run in your React frontend: [`RealtimeProvider`](#react-realtimeprovider) shares one client, [`useLiveQuery`](#react-uselivequery) subscribes a component to a sealed query, and [`useRealtimeClient`](#react-userealtimeclient) returns the shared client. They're taught in the [React section](../guides/reactivity#react) of the reactivity guide.
+Import the React bindings from `@neon/realtime-react`. They run in your React frontend: [`RealtimeProvider`](#react-realtimeprovider) shares one client, and [`useLiveQuery`](#react-uselivequery) subscribes a component to a sealed query. They're taught in the [React section](../guides/reactivity#react) of the reactivity guide.
 
 <RealtimeSdkReact />
 

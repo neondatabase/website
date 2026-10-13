@@ -163,11 +163,11 @@ function render(snapshot: LiveQuerySnapshot<Message>) {
 function describe(state: LiveQueryState): string {
   switch (state.status) {
     case "connecting":
-      return "Loading messages"
+      return "Connecting"
     case "live":
       return "Up to date"
     case "stale":
-      return "Updating. Messages may be out of date."
+      return "Waiting for fresh authorization. Messages may be out of date."
     case "error":
       return `Stopped: ${state.error.message}`
     case "closed":
@@ -206,35 +206,32 @@ When you're done with a subscription, call `unsubscribe()`. It moves the subscri
 
 ## Listen for changes
 
-A subscription has four callbacks. Each one takes a listener and returns a function that removes it:
+A subscription has three callbacks. Each one takes a listener and returns a function that removes it:
 
-| Callback        | Listener arguments                                                         | Fires                                                                                                                                  |
-| --------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `onChange`      | `snapshot: LiveQuerySnapshot<Row>`                                         | After every reset, batch and state change, with the current rows and state. Materialized subscriptions only.                           |
-| `onStateChange` | `state: LiveQueryState`                                                    | When the status changes.                                                                                                               |
-| `onReset`       | `rows: readonly RawLiveQueryRow<Row>[]`, each `{ rowId, row }`             | When a complete, authoritative result replaces the previous one.                                                                       |
-| `onBatch`       | `changes: readonly LiveQueryChange<Row>[]` and `batch: LiveQueryBatchInfo` | When committed transactions change the result. Each change is an `upsert` with a `rowId` and `row`, or a `remove` with only a `rowId`. |
+| Callback        | Listener arguments                 | Fires                                                                                                                                                                                                                                 |
+| --------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onChange`      | `snapshot: LiveQuerySnapshot<Row>` | After every complete-row replacement, incremental change and state transition, with the current rows and state. Materialized subscriptions only.                                                                                      |
+| `onStateChange` | `state: LiveQueryState`            | When the status changes.                                                                                                                                                                                                              |
+| `onUpdate`      | `update: RawLiveQueryUpdate<Row>`  | For one ordered stream of complete `rows` results and incremental `changes`. A `rows` update replaces the complete result. A `changes` update contains `upsert` and `remove` changes plus the transactions represented by the update. |
 
-Listeners run in the order you add them, and one that throws doesn't stop the others. Each initial result and each committed transaction becomes visible atomically. Outside a listener, `getSnapshot()` and `getState()` return the current values.
+Listeners run in the order you add them, and one that throws doesn't stop the others. Each complete result and each committed transaction becomes visible atomically. A complete result received during normal operation replaces the rows without moving a `live` subscription out of `live`. Outside a listener, `getSnapshot()` and `getState()` return the current values.
 
 The status tells you how far to trust the rows:
 
-| Status       | Meaning                                                                                                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `connecting` | Waiting for the first result. With `initialData` from a [server render](./ssr), a subscription starts in `stale` instead.                                                           |
-| `live`       | The rows are authoritative and changes are streaming.                                                                                                                               |
-| `stale`      | The rows are usable but not yet confirmed current: after a [server render](./ssr), while the client reconnects, or while it recovers an expired sealed query. Render them normally. |
-| `error`      | Automatic recovery has stopped. See [handle errors](#handle-errors).                                                                                                                |
-| `closed`     | Closed by `unsubscribe()` or `client.close()`. It doesn't reopen.                                                                                                                   |
+| Status       | Meaning                                                                                                                                                                                        |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `connecting` | Actively establishing, reconnecting or resubscribing. Existing rows, including `initialData` from a [server render](./ssr), remain available while the client synchronizes.                    |
+| `live`       | The rows are authoritative and changes are streaming.                                                                                                                                          |
+| `stale`      | The capability has expired and the subscription is waiting for a replacement. Retained rows remain available but may be out of date. Calling `renew()` moves the subscription to `connecting`. |
+| `error`      | Automatic recovery has stopped. See [handle errors](#handle-errors).                                                                                                                           |
+| `closed`     | Closed by `unsubscribe()` or `client.close()`. It doesn't reopen.                                                                                                                              |
 
-By default, subscriptions are materialized. The client keeps the rows and applies each batch before `onBatch` fires, so `getSnapshot()` in a batch listener already includes it. If your code keeps its own rows, as TanStack&nbsp;DB does, pass `{ materialize: false }` for a raw subscription. It has the same callbacks except `onChange`, and no `getSnapshot()`. Keep the rows in a map keyed by `rowId`, replace them on each reset and apply each batch's upserts and removes:
+By default, subscriptions are materialized. The client keeps the rows and applies each update before `onUpdate` fires, so `getSnapshot()` in an update listener already includes it. If your code keeps its own rows, as TanStack&nbsp;DB does, pass `{ materialize: false }` for a raw subscription. It has `onUpdate`, `onStateChange` and `getState()`, but no `onChange` or `getSnapshot()`. Keep the rows in a map keyed by `rowId`, replace them on a `rows` update and apply each `changes` update's upserts and removes:
 
 ```ts filename="frontend/raw-messages.ts"
 import type {
-  LiveQueryBatchInfo,
-  LiveQueryChange,
   LiveQueryState,
-  RawLiveQueryRow
+  RawLiveQueryUpdate
 } from "@neon/realtime/client"
 
 import type { Message } from "../backend/schema"
@@ -243,29 +240,29 @@ import { client } from "./client"
 
 const channelId = 2
 
-// Keyed by rowId, which is only valid until the next reset
+// Keyed by rowId, which is only valid until the next complete rows update
 const rows = new Map<string, Message>()
 
 const subscription = client.subscribe(await fetchSealedMessages(channelId), { materialize: false })
 
-subscription.onReset((reset: readonly RawLiveQueryRow<Message>[]) => {
-  rows.clear()
+subscription.onUpdate((update: RawLiveQueryUpdate<Message>) => {
+  if (update.type === "rows") {
+    rows.clear()
 
-  for (const { rowId, row } of reset) {
-    rows.set(rowId, row)
-  }
-})
-
-subscription.onBatch((changes: readonly LiveQueryChange<Message>[], batch: LiveQueryBatchInfo) => {
-  for (const change of changes) {
-    if (change.type === "upsert") {
-      rows.set(change.rowId, change.row)
-    } else {
-      rows.delete(change.rowId)
+    for (const { rowId, row } of update.rows) {
+      rows.set(rowId, row)
     }
-  }
+  } else {
+    for (const change of update.changes) {
+      if (change.type === "upsert") {
+        rows.set(change.rowId, change.row)
+      } else {
+        rows.delete(change.rowId)
+      }
+    }
 
-  console.log(`${rows.size} messages after transactions ${batch.txids.join(", ")}`)
+    console.log(`${rows.size} messages after transactions ${update.batch.txids.join(", ")}`)
+  }
 })
 
 subscription.onStateChange((state: LiveQueryState) => {
@@ -273,9 +270,9 @@ subscription.onStateChange((state: LiveQueryState) => {
 })
 ```
 
-A `rowId` is opaque and scoped to its subscription, and each reset invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A reset can arrive at any time, for example after a reconnect, and it always replaces the whole result.
+A `rowId` is opaque and scoped to its subscription, and each complete `rows` update invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A complete result can arrive at any time, for example after a reconnect, and it always replaces the whole result.
 
-Each batch also carries the ids of the Postgres transactions it covers, in `batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
+Each `changes` update also carries the ids of the Postgres transactions it covers, in `batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
 
 ## Renew the sealed query
 
@@ -371,11 +368,11 @@ function render(snapshot: LiveQuerySnapshot<Message>) {
 function describe(state: LiveQueryState): string {
   switch (state.status) {
     case "connecting":
-      return "Loading messages"
+      return "Connecting"
     case "live":
       return "Up to date"
     case "stale":
-      return "Updating. Messages may be out of date."
+      return "Waiting for fresh authorization. Messages may be out of date."
     case "error":
       return `Stopped: ${state.error.message}`
     case "closed":
@@ -394,8 +391,8 @@ function renderMessage(message: Message): HTMLLIElement {
 
 `renew()` replaces the sealed query for the same exact query, and it keeps the subscription object, its listeners and its rows:
 
-- Before expiry, the subscription stays `live`, with no reset.
-- After expiry, for example when a laptop wakes from sleep, the subscription stays `stale`. The client subscribes again behind the same object, and the next reset makes it `live` again.
+- Before expiry, the subscription stays `live`, with no replacement result.
+- After expiry, for example when a laptop wakes from sleep, the subscription stays `stale` until you call `renew()`. It then becomes `connecting` while the client subscribes again behind the same object, and the next authoritative result makes it `live` again.
 
 If the replacement's `queryFingerprint` doesn't match, the promise that `renew()` returns rejects. A changed parameter, like a different channel, makes a different query, so subscribe to the new one and unsubscribe from the old.
 

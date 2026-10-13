@@ -53,8 +53,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. TBC.
 // TBC. This fence must show:
 // - import specifier: @neon/realtime-tanstack
 // - a live query over the collection
-// - the state mapping: connecting is loading, live is ready, stale stays ready, error is error
-// - version 1 exposes no extra stale flag through the collection
+// - the state mapping: connecting is loading until the first result, then connecting and stale stay ready; error is error
+// - version 1 exposes no extra recovery flag through the collection
 ```
 
 ## [TBC] write-optimistically

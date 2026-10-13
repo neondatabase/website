@@ -2,7 +2,7 @@
 title: 'Server-side rendering'
 subtitle: 'Render sealed queries and initial query results on the server.'
 summary: >-
-  Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first reset bring the page live.
+  Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first authoritative result bring the page live.
 enableTableOfContents: true
 ---
 
@@ -284,9 +284,9 @@ Anyone with the page source holds the sealed query until it expires, because [se
 
 ## Render the initial rows straight away
 
-Pass the initial rows to [`useLiveQuery()`](./reactivity) as `initialData`. The hook renders them immediately with the status `stale`. When the subscription's first reset arrives, it replaces them atomically and the status becomes `live`. Any change committed between the server read and the subscription is in that reset, so nothing falls into the gap.
+Pass the initial rows to [`useLiveQuery()`](./reactivity) as `initialData`. The hook renders them immediately with the status `connecting`. When the subscription's first authoritative result arrives, it replaces them atomically and the status becomes `live`. Any change committed between the server read and the subscription is in that result, so nothing falls into the gap.
 
-Stale rows are real rows. Render them as you would live ones, without a spinner, a loading state or a `stale` indicator. `HydratedMessages` shows the server's rows straight away and swaps in the live rows when the first reset arrives:
+Preloaded rows are real rows. Render them as you would live ones, without a spinner or a loading state. `HydratedMessages` shows the server's rows straight away and swaps in the live rows when the first authoritative result arrives:
 
 ```tsx filename="frontend/HydratedMessages.tsx"
 "use client"
@@ -372,7 +372,7 @@ Render `RealtimeRoot` around everything that calls `useLiveQuery()`, for example
 
 ## Keep row shapes identical
 
-The initial rows and the live rows have to have the same shape. If they don't, the page renders one shape until the first reset and another after it.
+The initial rows and the live rows have to have the same shape. If they don't, the page renders one shape until the first authoritative result and another after it.
 
 In the running example, `created_at` is a `Date` on both sides: Drizzle reads `timestamptz` columns as `Date` objects, and so does the Realtime client. The hydration payload has to keep it that way. React Server Component props and TanStack Start's serializer both preserve `Date` values. Plain `JSON.stringify` turns them into strings, so if your payload goes through it, revive the dates in the browser or keep your row types JSON-safe.
 
@@ -386,7 +386,7 @@ The sealed query in the payload expires, so pass `refreshQuery`, and the hook re
 
 The renewal runs in the browser, so it goes through something that authenticates the user, like the Route Handler or server function above. It has to seal the same query with the same parameters, because a different fingerprint is rejected. Building both from `messagesQuery()` keeps them in step.
 
-If the user has signed out and the renewal fails, the hook keeps retrying and the status stays `stale`. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe.
+If the user has signed out and the renewal fails, the hook keeps retrying. Once the current capability expires, the status stays `stale` while it waits for a replacement. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe.
 
 ## With TanStack DB
 
@@ -394,7 +394,7 @@ With [TanStack&nbsp;DB](./reactivity#tanstack-db), the collection carries the in
 
 1. on the server, create a request-scoped `DbClient`, seed the collection with the initial rows and dehydrate it into the payload, next to the sealed query
 2. in the browser, create the collection with the same collection id and hydrate it
-3. the collection starts its live subscription in the browser, and the first reset takes over from the seeded rows
+3. the collection starts its live subscription in the browser, and the first complete result takes over from the seeded rows
 
 The code below does this with TanStack&nbsp;Start. It syncs the inbox from the [reactivity guide](./reactivity#seal-a-broader-query) into one collection and shows one channel from it. As well as the packages from that guide, it uses TanStack's router integration:
 
@@ -599,7 +599,7 @@ function ChannelRoute() {
 }
 ```
 
-Render `data` straight away, without waiting for `isReady`. The hydrated rows are there for the first render, but the collection only becomes ready when the first reset arrives.
+Render `data` straight away, without waiting for `isReady`. The hydrated rows are there for the first render, but the collection only becomes ready when the first complete result arrives.
 
 ## Keep secrets on the server
 

@@ -18,7 +18,7 @@ This page continues the running example from the [queries](./queries) and [subsc
 
 ## React
 
-The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), a [`useLiveQuery()` hook](../sdks/typescript#react-uselivequery) and a [`useRealtimeClient()` hook](../sdks/typescript#react-userealtimeclient) that returns the provider's client. It works with React 18 and 19.
+The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider) and a [`useLiveQuery()` hook](../sdks/typescript#react-uselivequery). It works with React 18 and 19.
 
 Install it alongside the client SDK:
 
@@ -72,8 +72,12 @@ export function Messages({ sealedQuery, refreshQuery, initialData }: Props) {
   const { data, status, error, utils } = useLiveQuery(sealedQuery, { refreshQuery, initialData })
 
   useEffect(() => {
-    return utils.onBatch((changes, batch) => {
-      console.debug(`Applied ${changes.length} changes from transactions ${batch.txids.join(", ")}`)
+    return utils.onUpdate((update) => {
+      if (update.type === "changes") {
+        console.debug(
+          `Applied ${update.changes.length} changes from transactions ${update.batch.txids.join(", ")}`
+        )
+      }
     })
   }, [utils])
 
@@ -87,7 +91,7 @@ export function Messages({ sealedQuery, refreshQuery, initialData }: Props) {
 
   return (
     <section>
-      {status === "stale" && <p role="status">Updating</p>}
+      {status !== "live" && <p role="status">Updating</p>}
       <ul>
         {data.map((message) => (
           <li key={message.id}>
@@ -116,7 +120,7 @@ export function LocalTime({ date }: { date: Date }) {
 
 `useLiveQuery` subscribes when the component mounts, re-renders it whenever the results change and unsubscribes when it unmounts.
 
-In this example, the sealed query is a `SealedLiveQuery<Message>`, so `data` is a `readonly Message[]`, with `created_at` decoded to a `Date`. It's `undefined` until the first result arrives. `status` is the subscription's [state](./subscribing#listen-for-changes): the component shows a loading line until the first result and a small indicator while it's `stale`.
+In this example, the sealed query is a `SealedLiveQuery<Message>`, so `data` is a `readonly Message[]`, with `created_at` decoded to a `Date`. It's `undefined` until the first result arrives. `status` is the subscription's [state](./subscribing#listen-for-changes): the component shows a loading line until the first result and a small indicator while existing rows are `connecting` or `stale`.
 
 #### refreshQuery
 
@@ -132,9 +136,9 @@ The hook also accepts an optional `initialData` parameter, for example from a se
 
 The `utils` in the return value give you access to the hook's underlying [materialized subscription](../sdks/typescript#react-uselivequeryutils).
 
-This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onReset`, `onBatch` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onBatch` listener does.
+This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onUpdate` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onUpdate` listener does.
 
-Note that a batch has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
+A raw update has already been applied by the time its listener runs. A `changes` update [carries the txids](../sdks/typescript#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
 
 `utils` omits `unsubscribe()`, because React owns cleanup. The hook unsubscribes when the component unmounts or its sealed query changes. `getState()` and the listeners report the state of the underlying subscription, so they can differ from the hook's `status`.
 
@@ -205,7 +209,7 @@ When the channel changes, `sealed` still holds the previous channel's sealed que
 
 `useLiveQuery()` doesn't throw for subscription errors, and it doesn't suspend. It reports everything through `status`. Render loading and error states from it, as `Messages` does. The hook throws only when it's used outside a `<RealtimeProvider>`, when the sealed query is malformed or when the client is closed. Those errors reach the nearest error boundary, not `status`.
 
-A failed renewal doesn't end in `error`. If your endpoint can't return a sealed query, for example because the user has signed out and it answers 401, the hook keeps retrying and the status stays `stale`. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe. The status becomes `error` only when a renewal returns a malformed response or a sealed query for a different query. To recover, fetch a new sealed query and pass it in.
+A failed renewal doesn't end in `error`. If your endpoint can't return a sealed query, for example because the user has signed out and it answers 401, the hook keeps retrying. Once the current capability expires, the status stays `stale` while the hook waits for a replacement. It becomes `connecting` once a replacement starts resubscription. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe. The status becomes `error` only when a renewal returns a malformed response or a sealed query for a different query. To recover, fetch a new sealed query and pass it in.
 
 As with a parameter change, the new sealed query restarts the subscription. The [subscribing guide](./subscribing#handle-errors) covers recovery at the subscription level.
 
@@ -293,7 +297,7 @@ export type MessagesCollection = ReturnType<typeof createMessagesCollection>
 
 `getKey` returns each message's primary key. TanStack&nbsp;DB keys rows by it, so use a stable, unique column, never a subscription's `rowId`. `refreshQuery` renews the sealed query the same way [the React hook does](#refreshquery). While renewals fail, the collection stays `ready` with its last rows. See the [`realtimeCollectionOptions()` reference](../sdks/typescript#tanstack-db-realtimecollectionoptions) for the rest of the options.
 
-The collection starts syncing as soon as a live query using it is mounted. It's in the `loading` state until the first result arrives, and `ready` from then on, with each committed transaction applied atomically. A `ready` collection stays ready while the subscription is `stale`, so there's no stale flag to render. If the subscription ends in `error`, so does the collection.
+The collection starts syncing as soon as a live query using it is mounted. It's in the `loading` state until the first result arrives, and `ready` from then on, with each committed transaction applied atomically. A `ready` collection stays ready while the subscription is `connecting` or `stale`, so there's no separate recovery flag to render. If the subscription ends in `error`, so does the collection.
 
 ### Query the collection
 

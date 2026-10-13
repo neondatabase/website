@@ -406,8 +406,12 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
   const [mutationError, setMutationError] = useState<string>()
 
   useEffect(() => {
-    return utils.onBatch((changes, batch) => {
-      console.debug(`Applied ${changes.length} changes from transactions ${batch.txids.join(", ")}`)
+    return utils.onUpdate((update) => {
+      if (update.type === "changes") {
+        console.debug(
+          `Applied ${update.changes.length} changes from transactions ${update.batch.txids.join(", ")}`
+        )
+      }
     })
   }, [utils])
 
@@ -464,7 +468,7 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
         <button type="submit">Send</button>
       </form>
 
-      {status === "stale" && <p role="status">Updating</p>}
+      {status !== "live" && <p role="status">Updating</p>}
       {mutationError && <p role="alert">{mutationError}</p>}
 
       <ul>

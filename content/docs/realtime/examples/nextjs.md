@@ -78,7 +78,7 @@ export function Root({ children }: { children: React.ReactNode }) {
 ## [TBC] read-in-a-component
 
 For SSR, pass the server-executed rows as `initialData`. React renders them
-immediately as stale data and Realtime's first authoritative reset reconciles
+immediately with status `connecting`, and Realtime's first authoritative result reconciles
 changes made since the server read.
 
 ```tsx
@@ -94,8 +94,10 @@ export function Messages(props: MessagesProps) {
     refreshQuery: () => sealMessages(props.channelId)
   })
 
-  useEffect(() => utils.onBatch((_changes, batch) => {
-    console.debug("Applied transaction", batch.txids)
+  useEffect(() => utils.onUpdate((update) => {
+    if (update.type === "changes") {
+      console.debug("Applied transaction", update.batch.txids)
+    }
   }), [utils])
 
   if (data === undefined) return <p>Loading…</p>
@@ -103,7 +105,7 @@ export function Messages(props: MessagesProps) {
 
   return (
     <>
-      {status === "stale" && <p>Updating…</p>}
+      {status !== "live" && <p>Updating…</p>}
       <ul>{data.map((message) => <li key={message.id}>{message.body}</li>)}</ul>
     </>
   )
@@ -130,7 +132,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
 // - one server render pass that produces both the sealedQuery and the initial rows
 // - the same query reused for both
 // - a client component reading the live rows with useLiveQuery
-// - the initialData rows reporting status stale until the first reset makes it live
+// - the initialData rows reporting status connecting until the first authoritative result makes it live
 ```
 
 ## Next steps
