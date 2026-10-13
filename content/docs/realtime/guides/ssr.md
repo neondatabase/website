@@ -2,7 +2,7 @@
 title: 'Server-side rendering'
 subtitle: 'Render sealed queries and initial query results on the server.'
 summary: >-
-  Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first reset bring the page live.
+  Server-render pages that use live queries. Read and seal the same query for each request, send both to the browser, render the initial rows straight away and let the first result bring the page live.
 enableTableOfContents: true
 ---
 
@@ -77,7 +77,14 @@ export default async function MessagesPage({ params }: Props) {
 
   const { initialData, sealedQuery } = await loadMessagesPage(session.user.id, channelId)
 
-  return <ChannelMessages channelId={channelId} initialData={initialData} sealedQuery={sealedQuery} />
+  return (
+    <ChannelMessages
+      key={sealedQuery.queryFingerprint}
+      channelId={channelId}
+      initialData={initialData}
+      sealedQuery={sealedQuery}
+    />
+  )
 }
 ```
 
@@ -144,9 +151,9 @@ export async function POST(_request: Request, { params }: Context) {
 }
 ```
 
-A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new sealed query and initial rows, and the hook restarts its subscription from them.
+A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new object for the same query. `useLiveQuery()` restarts on each new object, which rejects pending `awaitTxId()` calls. So `HydratedMessages` keeps the first sealed query, and renewals go through `refreshQuery`. Callers key it on `queryFingerprint`, so another channel or user remounts it.
 
-Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The queries guide's [bearer-token `authMiddleware`](./queries#using-server-functions) only works for calls from the browser, and Neon Auth's official TanStack&nbsp;Start adapter isn't out yet, so set up the session yourself:
+Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. Neon Auth's official TanStack&nbsp;Start adapter isn't out yet, so set up the session yourself. `sessionMiddleware` reads the cookie during SSR and for calls from the browser:
 
 <details>
   <summary>Read the Neon Auth session in TanStack Start</summary>
@@ -180,6 +187,12 @@ export const auth = createAuthServer({
 })
 ```
 
+`NEON_AUTH_COOKIE_SECRET` signs the session cookie and must be at least 32 characters. Generate it once:
+
+```bash filename="Terminal"
+echo "NEON_AUTH_COOKIE_SECRET=$(openssl rand -base64 32)" >> .env.local
+```
+
 Mount Neon Auth's proxy at `/api/auth`, so the session cookie lives on your app's origin:
 
 ```ts filename="src/routes/api/auth/$.ts"
@@ -198,10 +211,11 @@ export const Route = createFileRoute("/api/auth/$")({
 })
 ```
 
-`sessionMiddleware` only has a server half, so it reads the session the same way during SSR and for calls from the browser. It puts the user's id on `context`:
+`sessionMiddleware` only has a server half. It puts the user's id on `context`, and throws without a session, so it guards your data. `getSessionUser` reads the session without throwing, for route guards:
 
 ```ts filename="src/session-middleware.ts"
-import { createMiddleware } from "@tanstack/react-start"
+import { createMiddleware, createServerFn } from "@tanstack/react-start"
+import { setResponseHeader } from "@tanstack/react-start/server"
 
 import { auth } from "./backend/auth"
 
@@ -213,6 +227,13 @@ export const sessionMiddleware = createMiddleware({ type: "function" }).server(a
   }
 
   return next({ context: { user: { id: data.user.id } } })
+})
+
+export const getSessionUser = createServerFn({ method: "GET" }).handler(async () => {
+  setResponseHeader("Cache-Control", "private, no-store")
+  const { data } = await auth.getSession()
+
+  return data?.user ? { id: data.user.id } : null
 })
 ```
 
@@ -226,11 +247,28 @@ export const authClient = createAuthClient("") // same origin: /api/auth
 
 </details>
 
-Both server functions use `sessionMiddleware`, so they take the user from the session and only `channelId` from the request:
+The root route puts the user on the router context for every navigation. During SSR, `getSessionUser` runs in the same process, with the request's cookies. The route's `headers` keep every page out of shared caches:
+
+```tsx filename="src/routes/__root.tsx"
+import { createRootRoute } from "@tanstack/react-router"
+
+import { getSessionUser } from "../session-middleware"
+
+export const Route = createRootRoute({
+  beforeLoad: async () => ({ user: await getSessionUser() }),
+  // Pages carry one user's rows and sealed query, so no shared cache may store them
+  headers: () => ({ "Cache-Control": "private, no-store", Vary: "Cookie" })
+  // … shell unchanged
+})
+```
+
+The redirects below go to the sign-in route from the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router), `src/routes/auth.$pathname.tsx`.
+
+Both server functions use `sessionMiddleware`, so they take the user from the session and only `channelId` from the request. The route's `beforeLoad` sends signed-out visitors to sign-in before the loader runs. The router reuses the component when only `$channelId` changes, so the route keys `HydratedMessages` on the query's fingerprint:
 
 ```tsx filename="src/routes/channels.$channelId.tsx"
 import { useCallback } from "react"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 import { createServerFn } from "@tanstack/react-start"
 
 import { loadMessagesPage } from "../backend/messages-page"
@@ -260,6 +298,11 @@ const sealMessages = createServerFn({ method: "POST" })
   )
 
 export const Route = createFileRoute("/channels/$channelId")({
+  beforeLoad: ({ context }) => {
+    if (!context.user) {
+      throw redirect({ to: "/auth/$pathname", params: { pathname: "sign-in" } })
+    }
+  },
   loader: ({ params }) => loadMessages({ data: { channelId: Number(params.channelId) } }),
   component: MessagesRoute
 })
@@ -274,7 +317,14 @@ function MessagesRoute() {
     [channelId]
   )
 
-  return <HydratedMessages initialData={initialData} sealedQuery={sealedQuery} refreshQuery={refreshQuery} />
+  return (
+    <HydratedMessages
+      key={sealedQuery.queryFingerprint}
+      initialData={initialData}
+      sealedQuery={sealedQuery}
+      refreshQuery={refreshQuery}
+    />
+  )
 }
 ```
 
@@ -284,13 +334,14 @@ Anyone with the page source holds the sealed query until it expires, because [se
 
 ## Render the initial rows straight away
 
-Pass the initial rows to [`useLiveQuery()`](./reactivity) as `initialData`. The hook renders them immediately with the status `stale`. When the subscription's first reset arrives, it replaces them atomically and the status becomes `live`. Any change committed between the server read and the subscription is in that reset, so nothing falls into the gap.
+Pass the initial rows to [`useLiveQuery()`](./reactivity) as `initialData`. The hook renders them immediately with the status `connecting`. When the subscription's first result arrives, it replaces them atomically and the status becomes `live`. Any change committed between the server read and the subscription is in that result, so nothing falls into the gap.
 
-Stale rows are real rows. Render them as you would live ones, without a spinner, a loading state or a `stale` indicator. `HydratedMessages` shows the server's rows straight away and swaps in the live rows when the first reset arrives:
+The initial rows are real rows. Render them as you would live ones, without a spinner or a loading state, while the status is `connecting`. `HydratedMessages` shows the server's rows straight away and swaps in the live rows when the first result arrives:
 
 ```tsx filename="frontend/HydratedMessages.tsx"
 "use client"
 
+import { useState } from "react"
 import { useLiveQuery } from "@neon/realtime-react"
 import type { SealedLiveQuery } from "@neon/realtime/client"
 
@@ -304,7 +355,8 @@ interface HydratedMessagesProps {
 }
 
 export function HydratedMessages({ sealedQuery, refreshQuery, initialData }: HydratedMessagesProps) {
-  const { data, error } = useLiveQuery(sealedQuery, { refreshQuery, initialData })
+  const [query] = useState(sealedQuery) // renewals go through refreshQuery
+  const { data, error } = useLiveQuery(query, { refreshQuery, initialData })
 
   return (
     <>
@@ -337,11 +389,15 @@ So create the client once, inside the React tree, in a `useState` initializer. I
 
 import { useState, type ReactNode } from "react"
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 import { RealtimeProvider } from "@neon/realtime-react"
 
 export function RealtimeRoot({ children }: { children: ReactNode }) {
   const [client] = useState(() =>
-    createRealtimeClient({ url: process.env.NEXT_PUBLIC_NEON_REALTIME_URL! })
+    createRealtimeClient({
+      url: process.env.NEXT_PUBLIC_NEON_REALTIME_URL!,
+      parsers: { ...drizzleParsers }
+    })
   )
 
   return <RealtimeProvider client={client}>{children}</RealtimeProvider>
@@ -353,11 +409,15 @@ export function RealtimeRoot({ children }: { children: ReactNode }) {
 
 import { useState, type ReactNode } from "react"
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 import { RealtimeProvider } from "@neon/realtime-react"
 
 export function RealtimeRoot({ children }: { children: ReactNode }) {
   const [client] = useState(() =>
-    createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL })
+    createRealtimeClient({
+      url: import.meta.env.VITE_NEON_REALTIME_URL,
+      parsers: { ...drizzleParsers }
+    })
   )
 
   return <RealtimeProvider client={client}>{children}</RealtimeProvider>
@@ -366,15 +426,23 @@ export function RealtimeRoot({ children }: { children: ReactNode }) {
 
 </CodeTabs>
 
+With Next.js, add the browser's copy of the Realtime URL. Next.js expands `$VAR` in env files, so it follows `neon env pull`:
+
+```bash filename="Terminal"
+echo 'NEXT_PUBLIC_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
+```
+
+With TanStack&nbsp;Start, use the `VITE_NEON_REALTIME_URL` line from the [setup](./queries#setup).
+
 The [subscribing guide](./subscribing#subscribe-to-the-sealed-query) creates the client at module level in `frontend/client.ts`, which suits a single-page app. In a server-rendered app, create it inside the React tree instead, which keeps browser-only setup out of module scope. Keep the client stable, too. `useLiveQuery()` subscribes per client and sealed query, so a new client on every render means a new subscription on every render.
 
 Render `RealtimeRoot` around everything that calls `useLiveQuery()`, for example in your root layout. `RealtimeRoot`, `ChannelMessages` and `HydratedMessages` start with `"use client"` so that Next.js renders them as Client Components. TanStack&nbsp;Start ignores the directive.
 
 ## Keep row shapes identical
 
-The initial rows and the live rows have to have the same shape. If they don't, the page renders one shape until the first reset and another after it.
+The initial rows and the live rows have to have the same shape. If they don't, the page renders one shape until the first result and another after it.
 
-In the running example, `created_at` is a `Date` on both sides: Drizzle reads `timestamptz` columns as `Date` objects, and so does the Realtime client. The hydration payload has to keep it that way. React Server Component props and TanStack Start's serializer both preserve `Date` values. Plain `JSON.stringify` turns them into strings, so if your payload goes through it, revive the dates in the browser or keep your row types JSON-safe.
+In the running example, `created_at` is a `Date` on both sides: Drizzle reads `timestamptz` columns as `Date` objects, and so does the Realtime client. The Realtime clients on this page spread `drizzleParsers`, so the live rows match Drizzle's types for other columns too. The [subscribing guide](./subscribing#subscribe-to-the-sealed-query) explains what the parsers change. The hydration payload has to keep it that way. React Server Component props and TanStack Start's serializer both preserve `Date` values. Plain `JSON.stringify` turns them into strings, so if your payload goes through it, revive the dates in the browser or keep your row types JSON-safe.
 
 Watch numeric types too: `int8` and `numeric` columns [arrive as strings](./subscribing#subscribe-to-the-sealed-query) on the live side, so read them as strings on the server.
 
@@ -386,15 +454,15 @@ The sealed query in the payload expires, so pass `refreshQuery`, and the hook re
 
 The renewal runs in the browser, so it goes through something that authenticates the user, like the Route Handler or server function above. It has to seal the same query with the same parameters, because a different fingerprint is rejected. Building both from `messagesQuery()` keeps them in step.
 
-If the user has signed out and the renewal fails, the hook keeps retrying and the status stays `stale`. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe.
+If the user has signed out and the renewal fails, the hook keeps retrying, and once the sealed query expires the status is `stale` until a renewal succeeds. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe.
 
 ## With TanStack DB
 
 With [TanStack&nbsp;DB](./reactivity#tanstack-db), the collection carries the initial rows instead of the hook's `initialData`:
 
-1. on the server, create a request-scoped `DbClient`, seed the collection with the initial rows and dehydrate it into the payload, next to the sealed query
-2. in the browser, create the collection with the same collection id and hydrate it
-3. the collection starts its live subscription in the browser, and the first reset takes over from the seeded rows
+1. a route loader reads and seals the inbox and seeds the collection in the router's `DbClient`
+2. `routerWithDbClient()` carries the seeded rows to the browser
+3. the collection subscribes in the browser, and the first result takes over from the seeded rows
 
 The code below does this with TanStack&nbsp;Start. It syncs the inbox from the [reactivity guide](./reactivity#seal-a-broader-query) into one collection and shows one channel from it. As well as the packages from that guide, it uses TanStack's router integration:
 
@@ -404,33 +472,37 @@ npm install @tanstack/react-router-with-db
 
 ### Create a `DbClient` per router
 
-TanStack&nbsp;Start calls `getRouter()` once per request on the server and once in the browser, so a `DbClient` created with the router belongs to one request or one browser app. Create the Realtime client next to it and add both to the router context. The server-side Realtime client never connects, because nothing subscribes there. `routerWithDbClient()` wraps the app in `DbProvider`:
+TanStack&nbsp;Start calls `getRouter()` once per request on the server and once per page load in the browser, so a `DbClient` created with the router belongs to one request or one page load. Create the Realtime client next to it and pass it to the `DbClient` as a dependency, so collections can read it. The server-side Realtime client never connects, because nothing subscribes there. `routerWithDbClient()` wraps the app in `DbProvider`, snapshots the collections that loaders seeded on the server into the HTML, and restores them in the browser before the first render:
 
 ```tsx filename="src/router.tsx"
 import { DbClient } from "@tanstack/react-db"
 import { createRouter } from "@tanstack/react-router"
 import { routerWithDbClient } from "@tanstack/react-router-with-db"
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 
 import { routeTree } from "./routeTree.gen"
 
 export function getRouter() {
-  const dbClient = new DbClient()
-  const realtimeClient = createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL })
-  const router = createRouter({ routeTree, context: { dbClient, realtimeClient } })
+  // Collections read it with db.requireDependency("realtime"). Nothing subscribes on the server, so it never connects there
+  const realtime = createRealtimeClient({
+    url: import.meta.env.VITE_NEON_REALTIME_URL,
+    parsers: { ...drizzleParsers }
+  })
+  const dbClient = new DbClient({ realtime })
+  const router = createRouter({ routeTree, context: { dbClient } })
 
   return routerWithDbClient(router, dbClient)
 }
 ```
 
-`routerWithDbClient()` requires `dbClient` in the router's context type, so create the root route with `createRootRouteWithContext<{ dbClient: DbClient; realtimeClient: RealtimeClient }>()`. If the app also uses `useLiveQuery()` from `@neon/realtime-react`, pass the same Realtime client to `RealtimeProvider`.
+`routerWithDbClient()` requires `dbClient` in the router's context type, so create the root route from [Send both to the browser](#send-both-to-the-browser) with `createRootRouteWithContext<{ dbClient: DbClient }>()` instead of `createRootRoute()`, and keep its `beforeLoad` and `headers`. If the app also uses `useLiveQuery()` from `@neon/realtime-react`, pass the same Realtime client to `RealtimeProvider`. Get it with `useDbClient().requireDependency<RealtimeClient>("realtime")`.
 
 ### Define the collection
 
-Define the collection as a descriptor with `collectionOptions()` around [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions), so that each `DbClient` creates its own instance of it, and give it a stable id. Unlike `createMessagesCollection()` in the reactivity guide, it takes the Realtime client as a parameter: in the browser, that's the one from the router context. `MessagesContext` hands the collection from the layout route to the channel pages:
+Define the collection as a descriptor with the two-argument `collectionOptions(id, factory)` around [`realtimeCollectionOptions()`](../sdks/typescript#tanstack-db-realtimecollectionoptions), and give it a stable id. Each `DbClient` runs the factory once, to create its own instance of the collection. Unlike `createMessagesCollection()` in the reactivity guide, it doesn't take a Realtime client: the factory reads the one from its `DbClient`. The descriptor is cheap to build, so the loader and the channel page each build it, and the id resolves both to the same collection:
 
 ```ts filename="src/collections.ts"
-import { createContext, useContext } from "react"
 import { collectionOptions } from "@tanstack/react-db"
 import { realtimeCollectionOptions } from "@neon/realtime-tanstack"
 import type { RealtimeClient, SealedLiveQuery } from "@neon/realtime/client"
@@ -438,35 +510,17 @@ import type { RealtimeClient, SealedLiveQuery } from "@neon/realtime/client"
 import type { Message } from "./backend/schema"
 import { sealInbox } from "./server-functions"
 
-export function messagesCollectionOptions(client: RealtimeClient, sealedQuery: SealedLiveQuery<Message>) {
-  return collectionOptions(
+export function messagesCollection(sealedQuery: SealedLiveQuery<Message>) {
+  return collectionOptions("messages", (db) =>
     realtimeCollectionOptions({
       id: "messages",
-      client,
+      client: db.requireDependency<RealtimeClient>("realtime"),
       query: sealedQuery,
       refreshQuery: () => sealInbox(),
-      getKey: (message) => message.id
+      getKey: (message) => message.id,
+      gcTime: 0 // never collect it while the page is open: a rebuilt collection would reuse an expired sealed query
     })
   )
-}
-
-export interface MessagesDbState {
-  collections: {
-    collectionId: string
-    rows: { key: number; value: Message }[]
-  }[]
-}
-
-export const MessagesContext = createContext<ReturnType<typeof messagesCollectionOptions> | null>(null)
-
-export function useMessages() {
-  const messages = useContext(MessagesContext)
-
-  if (!messages) {
-    throw new Error("useMessages() must be called inside the channels layout")
-  }
-
-  return messages
 }
 ```
 
@@ -484,23 +538,17 @@ export const sealInbox = createServerFn({ method: "POST" })
   .handler(({ context }) => realtime.seal({ query: inboxQuery(context.user.id) }))
 ```
 
-### Seed on the server and hydrate in the browser
+### Seed the collection in a loader
 
-A layout route, `src/routes/channels.tsx`, loads the inbox for every channel page. Its loader reads and seals the inbox, seeds the collection in a request-scoped `DbClient` and dehydrates it. It passes the rows to `dbClient.collection()` as `initialData`, which is TanStack&nbsp;DB's option for seeding a collection in one `DbClient`. The collection id is what connects the server's rows to the browser's collection.
-
-The layout's component hydrates the router's `DbClient` during its first render and creates the collection with the Realtime client from the router context. Then it provides the collection to the channel pages, which render in its `<Outlet />`:
+A layout route, `src/routes/channels.tsx`, loads the inbox for every channel page. Its loader calls a server function that reads and seals the inbox. Then it seeds the collection in the router's `DbClient`, passing the rows to `dbClient.collection()` as `initialData`, which is TanStack&nbsp;DB's option for seeding a collection in one `DbClient`. It returns only the sealed query. Its `beforeLoad` sends signed-out visitors to sign-in, so the channel pages, which render in its outlet, don't need to:
 
 ```tsx filename="src/routes/channels.tsx"
-import { useState } from "react"
-import { DbClient } from "@tanstack/react-db"
-import type { DehydratedDbState } from "@tanstack/react-db"
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 import { createServerFn } from "@tanstack/react-start"
-import { createRealtimeClient } from "@neon/realtime/client"
 
 import { inboxQuery } from "../backend/queries"
 import { realtime } from "../backend/realtime"
-import { MessagesContext, messagesCollectionOptions, type MessagesDbState } from "../collections"
+import { messagesCollection } from "../collections"
 import { sessionMiddleware } from "../session-middleware"
 
 const loadInbox = createServerFn({ method: "POST" })
@@ -509,65 +557,38 @@ const loadInbox = createServerFn({ method: "POST" })
     const query = inboxQuery(context.user.id)
     const [initialData, sealedQuery] = await Promise.all([query, realtime.seal({ query })])
 
-    const client = createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL })
-    const dbClient = new DbClient()
-
-    try {
-      dbClient.collection(messagesCollectionOptions(client, sealedQuery), { initialData })
-
-      return { sealedQuery, dbState: dbClient.dehydrate() as MessagesDbState }
-    } finally {
-      await dbClient.cleanup()
-      client.close()
-    }
+    return { initialData, sealedQuery }
   })
-
-const hydratedDbClients = new WeakSet<DbClient>()
 
 export const Route = createFileRoute("/channels")({
-  loader: () => loadInbox(),
   staleTime: Infinity,
-  component: ChannelsLayout
-})
-
-function ChannelsLayout() {
-  const { dbClient, realtimeClient } = Route.useRouteContext()
-  const { sealedQuery, dbState } = Route.useLoaderData()
-
-  const [messages] = useState(() => {
-    if (!hydratedDbClients.has(dbClient)) {
-      dbClient.hydrate(dbState as DehydratedDbState)
-      hydratedDbClients.add(dbClient)
+  beforeLoad: ({ context }) => {
+    if (!context.user) {
+      throw redirect({ to: "/auth/$pathname", params: { pathname: "sign-in" } })
     }
+  },
+  loader: async ({ context }) => {
+    const { initialData, sealedQuery } = await loadInbox()
+    context.dbClient.collection(messagesCollection(sealedQuery), { initialData }) // a no-op if it already exists
 
-    return messagesCollectionOptions(realtimeClient, sealedQuery)
-  })
-
-  return (
-    <MessagesContext.Provider value={messages}>
-      <Outlet />
-    </MessagesContext.Provider>
-  )
-}
+    return { sealedQuery }
+  }
+})
 ```
 
-`MessagesDbState` is the dehydrated state, narrowed to this collection's rows. `dehydrate()` types row metadata as `unknown`, and TanStack&nbsp;Start won't type-check a loader result that it can't prove serializable, so `loadInbox` casts the state to `MessagesDbState`.
+The layout's loader runs once, because `staleTime: Infinity` keeps its data fresh, so switching channels makes no server round trip. On the first load, the loader and the channel page both run on the server, so the HTML has the rows. If the loader runs again in the browser, the collection already exists, so seeding it again does nothing and the live rows stay.
 
-The layout's loader runs once, because `staleTime: Infinity` keeps its data fresh, so switching channels makes no server round trip. On the first load, the loader and the channel page both run on the server, so the HTML has the rows.
+One collection id is enough, because each `DbClient` belongs to one request or one page load. On sign-out, do a full page load, for example to your sign-in page. That drops the browser's `DbClient`, and the previous user's rows with it.
 
-The layout hydrates in a `useState` initializer, during its first render, so the rows are there before anything reads the collection. An effect would run too late. `hydratedDbClients` makes it hydrate only once per `DbClient`, because if you navigate away and back, the layout mounts again with the cached loader rows, and hydrating those into the live collection would bring back rows it has since deleted. It doesn't use TanStack&nbsp;DB's `HydrationBoundary`, which hydrates again whenever the loader data changes, because a syncing collection doesn't need the loader's rows again.
-
-The descriptor needs a Realtime client on the server too, but nothing subscribes there, so it never opens a connection. The loader closes it and cleans up its `DbClient` before returning. Never share that `DbClient` between requests, because each one holds one user's rows.
-
-On sign-out, do a full page load, for example to your sign-in page. That drops the browser's `DbClient`, and the previous user's rows with it.
-
-The channel route reads only `channelId`. It queries the collection with TanStack's `useLiveQuery()`, under the same alias as in the reactivity guide:
+The channel route builds the same descriptor from the layout's sealed query, so it gets the collection the loader seeded. It queries the collection with TanStack's `useLiveQuery()`, under the same alias as in the reactivity guide:
 
 ```tsx filename="src/routes/channels.$channelId.tsx"
 import { eq, useLiveQuery as useCollectionQuery } from "@tanstack/react-db"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, getRouteApi } from "@tanstack/react-router"
 
-import { useMessages } from "../collections"
+import { messagesCollection } from "../collections"
+
+const channels = getRouteApi("/channels")
 
 export const Route = createFileRoute("/channels/$channelId")({
   component: ChannelRoute
@@ -575,7 +596,7 @@ export const Route = createFileRoute("/channels/$channelId")({
 
 function ChannelRoute() {
   const { channelId } = Route.useParams()
-  const messages = useMessages()
+  const messages = messagesCollection(channels.useLoaderData().sealedQuery) // same id, so the seeded collection
 
   const { data, isError } = useCollectionQuery({
     query: (q) =>
@@ -599,7 +620,7 @@ function ChannelRoute() {
 }
 ```
 
-Render `data` straight away, without waiting for `isReady`. The hydrated rows are there for the first render, but the collection only becomes ready when the first reset arrives.
+Render `data` straight away, without waiting for `isReady`. The seeded rows are there for the first render, but the collection only becomes ready when the first result arrives.
 
 ## Keep secrets on the server
 
@@ -609,13 +630,13 @@ Mark those modules as server-only, so a client import fails the build. In Next.j
 
 ## Examples
 
-The examples put these principles into framework code. The Next.js example uses `force-dynamic` and splits the page into a Server Component that reads and seals and a Client Component that subscribes. The TanStack example dehydrates a `DbClient` in a route loader and hydrates it in the browser.
+The examples put these principles into framework code. The Next.js example uses `force-dynamic` and splits the page into a Server Component that reads and seals and a Client Component that subscribes. The TanStack example seeds the router's TanStack&nbsp;DB client in a route loader.
 
 <DetailIconCards cols={2} theme="green-dotted">
 
 <a href="/docs/realtime/examples/nextjs" description="Read and seal in a Server Component, then subscribe in a Client Component." icon="next-js">Next.js</a>
 
-<a href="/docs/realtime/examples/tanstack" description="Dehydrate a TanStack DB collection on the server and hydrate it in the browser." icon="tanstack">TanStack</a>
+<a href="/docs/realtime/examples/tanstack" description="Seed the router's TanStack DB client in a route loader." icon="tanstack">TanStack</a>
 
 </DetailIconCards>
 

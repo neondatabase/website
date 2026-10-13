@@ -12,9 +12,7 @@ Define live queries using [raw SQL](#using-raw-sql) or a [query builder or ORM](
 
 ## Setup
 
-Make sure you've [enabled Realtime](../quickstart#enable-realtime).
-
-The guides all share one running example: a chat app where users read the messages in the channels they belong to. You can see the [source code in the examples repo](https://github.com/neondatabase/examples/tree/main/realtime/realtime-guides-chat-app) or expand the steps below.
+The guides all share one running example: a chat app where users read the messages in the channels they belong to. You can see the [source code in the examples repo](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) or expand the steps below.
 
 <details>
   <summary>Expand the setup steps</summary>
@@ -39,9 +37,30 @@ Install [Neon Auth](/docs/auth/overview)'s client for the frontend:
 npm install @neondatabase/auth
 ```
 
-Run `neon env pull --service postgres --service auth --service realtime` to write the server variables below to `.env.local` (or to an existing `.env`), or copy them from the Neon Console. Set the `VITE_` copies yourself from the same values.
+Add a `neon.ts` file that enables Neon Auth and [Realtime](../quickstart#enable-realtime) on your branch:
 
-Set these environment variables on the server:
+```ts filename="neon.ts"
+import { defineConfig } from "@neon/config/v1"
+
+export default defineConfig({
+  auth: true,
+  preview: { realtime: { allowedOrigins: ["http://localhost:5173"] } }
+})
+```
+
+List every origin your browser app runs on in `allowedOrigins`, for example `http://localhost:3000` for the SSR frameworks.
+
+Install the config package, link the directory to your Neon project and deploy the config:
+
+```bash filename="Terminal"
+npm install -D @neon/config
+neon link
+neon deploy
+```
+
+`neon deploy` enables Neon Auth and Realtime, waits until they're ready, and writes the four server variables below to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
+
+These are the environment variables on the server:
 
 - `DATABASE_URL`: your Lakebase Postgres [connection string](/docs/connect/connect-intro)
 - `NEON_REALTIME_SECRET`: the secret from the [Realtime page](../quickstart#enable-realtime) in the Neon Console
@@ -52,6 +71,13 @@ And these in the frontend, with the same values as `NEON_AUTH_BASE_URL` and `NEO
 
 - `VITE_NEON_AUTH_URL`
 - `VITE_NEON_REALTIME_URL`
+
+Vite expands `$VAR` in env files, and `neon env pull` keeps lines it doesn't manage, so point them at the server variables:
+
+```bash filename="Terminal"
+echo 'VITE_NEON_AUTH_URL=$NEON_AUTH_BASE_URL' >> .env.local
+echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
+```
 
 Define the example schema and apply your usual [Drizzle migrations](/docs/guides/drizzle-migrations):
 
@@ -92,9 +118,12 @@ neonConfig.webSocketConstructor = ws
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL! })
 export const db = drizzle(pool, { schema })
+
+// So an idle connection error, for example when the compute scales to zero, doesn't crash the API
+pool.on("error", (error) => console.error(error))
 ```
 
-Great, that's the setup needed to follow along with the guides.
+Great, that's the main setup to follow along with the guides. Or for the full boilterplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
 
 </details>
 
@@ -345,6 +374,8 @@ There are two main ways to expose a [sealed](#sealing-queries), [authorized](#au
 
 These are both **request handlers**. They run in a trusted environment in your backend with [auth context available](#sealing-authorized-queries) from the request.
 
+With Vite and Hono, the browser's auth client talks to Neon Auth directly, so its session cookie never reaches your API. The browser sends the session's JWT as a bearer token, and the API verifies it. Next.js and TanStack Start mount Neon Auth on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Either way, the Realtime connection carries no user credential: the sealed query is the authorization.
+
 ### Exposing an endpoint
 
 Expose the `sealedQuery` from an API endpoint, using any web framework.
@@ -434,43 +465,17 @@ The `validator()` middleware checks the JSON body before the handler runs and ty
 
 If you're using a framework that supports [server functions](https://react.dev/reference/rsc/server-functions), you can return the `sealedQuery` from one. For example, with [TanStack Start](../examples/tanstack) you can [create a server function](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions).
 
-The server function uses a [function middleware](https://tanstack.com/start/latest/docs/framework/react/guide/middleware) that sends the Neon Auth token from the browser and checks it on the server with the `getUser()` helper from `backend/auth.ts`:
-
-```ts filename="src/auth-middleware.ts"
-import { createMiddleware } from "@tanstack/react-start"
-import { getRequest } from "@tanstack/react-start/server"
-
-import { getUser } from "./backend/auth"
-import { authClient } from "./frontend/auth"
-
-export const authMiddleware = createMiddleware({ type: "function" })
-  .client(async ({ next }) => {
-    const { data } = await authClient.token()
-
-    return next({ headers: data?.token ? { Authorization: `Bearer ${data.token}` } : {} })
-  })
-  .server(async ({ next }) => {
-    const user = await getUser(getRequest().headers)
-
-    if (!user) {
-      throw new Error("Unauthorized")
-    }
-
-    return next({ context: { user } })
-  })
-```
-
-The server function then seals the query for `context.user.id`:
+The server function reads the session from the Neon Auth cookie with a server-only `sessionMiddleware`. The [SSR guide](./ssr#send-both-to-the-browser) sets it up. The server function then seals the query for `context.user.id`:
 
 ```ts filename="src/server-functions.ts"
 import { createServerFn } from "@tanstack/react-start"
 
-import { authMiddleware } from "./auth-middleware"
 import { messagesQuery } from "./backend/queries"
 import { realtime } from "./backend/realtime"
+import { sessionMiddleware } from "./session-middleware"
 
 export const sealMessages = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
+  .middleware([sessionMiddleware])
   .validator((data: { channelId: number }) => {
     if (!Number.isInteger(data.channelId)) {
       throw new Error("channelId must be an integer")

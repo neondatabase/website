@@ -14,7 +14,7 @@ Realtime [currently](#other-frameworks) has integrations for [React](#react) and
 The [React binding](#react) keeps a component's state in step with a live query, and the [TanStack&nbsp;DB binding](#tanstack-db) syncs live queries into a [reactive client-side store](https://tanstack.com/db).
 </Admonition>
 
-This page continues the running example from the [queries](./queries) and [subscribing](./subscribing) guides. It uses the `client` from `frontend/client.ts` and `fetchSealedMessages()` from `frontend/api.ts`.
+This page continues the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) from the [queries](./queries) and [subscribing](./subscribing) guides. It uses the `client` from `frontend/client.ts` and `fetchSealedMessages()` from `frontend/api.ts`.
 
 ## React
 
@@ -72,8 +72,10 @@ export function Messages({ sealedQuery, refreshQuery, initialData }: Props) {
   const { data, status, error, utils } = useLiveQuery(sealedQuery, { refreshQuery, initialData })
 
   useEffect(() => {
-    return utils.onBatch((changes, batch) => {
-      console.debug(`Applied ${changes.length} changes from transactions ${batch.txids.join(", ")}`)
+    return utils.onUpdate((update) => {
+      if (update.type === "changes") {
+        console.debug(`Applied ${update.changes.length} changes from transactions ${update.batch.txids.join(", ")}`)
+      }
     })
   }, [utils])
 
@@ -132,9 +134,9 @@ The hook also accepts an optional `initialData` parameter, for example from a se
 
 The `utils` in the return value give you access to the hook's underlying [materialized subscription](../sdks/typescript#react-uselivequeryutils).
 
-This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onReset`, `onBatch` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onBatch` listener does.
+This provides `getSnapshot()`, `getState()`, `awaitRows()`, the `onChange`, `onUpdate` and `onStateChange` listeners, `renew()` and `awaitTxId()`. It's stable for the life of the subscription, so register listeners in an effect and return the remover, as the `onUpdate` listener does.
 
-Note that a batch has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
+Note that a `changes` update has already been applied by the time its listener runs, and it [carries the txids](../sdks/typescript#client-livequerybatchinfo) of the transactions in it, which the [mutations guide](./mutations#how-optimistic-mutations-work) uses to confirm optimistic writes.
 
 `utils` omits `unsubscribe()`, because React owns cleanup. The hook unsubscribes when the component unmounts or its sealed query changes. `getState()` and the listeners report the state of the underlying subscription, so they can differ from the hook's `status`.
 
@@ -205,7 +207,7 @@ When the channel changes, `sealed` still holds the previous channel's sealed que
 
 `useLiveQuery()` doesn't throw for subscription errors, and it doesn't suspend. It reports everything through `status`. Render loading and error states from it, as `Messages` does. The hook throws only when it's used outside a `<RealtimeProvider>`, when the sealed query is malformed or when the client is closed. Those errors reach the nearest error boundary, not `status`.
 
-A failed renewal doesn't end in `error`. If your endpoint can't return a sealed query, for example because the user has signed out and it answers 401, the hook keeps retrying and the status stays `stale`. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe. The status becomes `error` only when a renewal returns a malformed response or a sealed query for a different query. To recover, fetch a new sealed query and pass it in.
+A failed renewal doesn't end in `error`. If your endpoint can't return a sealed query, for example because the user has signed out and it answers 401, the hook keeps retrying, and once the sealed query expires the status is `stale` until a renewal succeeds. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe. The status becomes `error` only when a renewal returns a malformed response or a sealed query for a different query. To recover, fetch a new sealed query and pass it in.
 
 As with a parameter change, the new sealed query restarts the subscription. The [subscribing guide](./subscribing#handle-errors) covers recovery at the subscription level.
 
@@ -297,26 +299,42 @@ The collection starts syncing as soon as a live query using it is mounted. It's 
 
 ### Query the collection
 
-Create the collection once, when the app starts. It takes the Realtime client directly, so this version of `frontend/main.tsx` doesn't need `<RealtimeProvider>`:
+Create the collection once, when the app starts. The collection takes the client directly, but `Channel` still calls `useLiveQuery()`, so keep both views inside `RealtimeProvider`:
 
 ```tsx filename="frontend/main.tsx"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
+import { RealtimeProvider } from "@neon/realtime-react"
 
 import { fetchSealedInbox } from "./api"
+import { authClient } from "./auth"
+import { Channel } from "./Channel"
+import { client } from "./client"
 import { createMessagesCollection } from "./collections"
 import { Inbox } from "./Inbox"
 
-const messagesCollection = createMessagesCollection(await fetchSealedInbox())
+const root = createRoot(document.getElementById("root")!)
+const { data: session } = await authClient.getSession()
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Inbox messagesCollection={messagesCollection} channelId={2} />
-  </StrictMode>
-)
+if (!session) {
+  root.render(<p>Sign in to see the messages.</p>)
+} else {
+  const messagesCollection = createMessagesCollection(await fetchSealedInbox())
+
+  root.render(
+    <StrictMode>
+      <RealtimeProvider client={client}>
+        <Channel channelId={2} />
+        <Inbox messagesCollection={messagesCollection} channelId={2} />
+      </RealtimeProvider>
+    </StrictMode>
+  )
+}
 ```
 
-Then read from it with TanStack's own `useLiveQuery()`. It shares a name with the Realtime hook, so import it under an alias that won't clash in an app that uses both. This view shows one channel, newest first:
+Sign-in isn't part of these guides: build the page with the [Neon Auth UI components](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `AuthView` on `/auth/*` before it checks the session.
+
+Then read from the collection with TanStack's own `useLiveQuery()`. It shares a name with the Realtime hook, so import it under an alias that won't clash in an app that uses both. This view shows one channel, newest first:
 
 ```tsx filename="frontend/Inbox.tsx"
 import { eq, useLiveQuery as useCollectionQuery } from "@tanstack/react-db"
