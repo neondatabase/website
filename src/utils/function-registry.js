@@ -1,4 +1,7 @@
-const SOURCE_BASE = 'https://raw.githubusercontent.com/neondatabase/examples/main/registry/';
+export const REGISTRY_SOURCE_BASE =
+  'https://raw.githubusercontent.com/neondatabase/examples/main/registry/';
+export const REGISTRY_CACHE_SECONDS = 3600;
+
 const JSON_TYPE = 'application/json; charset=utf-8';
 
 // Allowlist before GitHub: catalog and schemas only.
@@ -17,4 +20,4 @@ export const resolveRegistryPath = (segments) => {
   return { path, contentType };
 };
 
-export const registrySourceUrl = (path) => new URL(path, SOURCE_BASE).href;
+export const registrySourceUrl = (path) => new URL(path, REGISTRY_SOURCE_BASE).href;

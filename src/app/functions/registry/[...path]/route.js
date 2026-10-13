@@ -1,8 +1,10 @@
-import { registrySourceUrl, resolveRegistryPath } from 'utils/function-registry';
+import {
+  REGISTRY_CACHE_SECONDS,
+  registrySourceUrl,
+  resolveRegistryPath,
+} from 'utils/function-registry';
 
-const CACHE_SECONDS = 3600;
-
-export const revalidate = 3600;
+export const revalidate = REGISTRY_CACHE_SECONDS;
 
 const notFound = () =>
   new Response('Not found\n', {
@@ -10,7 +12,7 @@ const notFound = () =>
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Access-Control-Allow-Origin': '*',
-      'Cache-Control': `public, s-maxage=${CACHE_SECONDS}`,
+      'Cache-Control': `public, s-maxage=${REGISTRY_CACHE_SECONDS}`,
     },
   });
 
@@ -33,7 +35,7 @@ export async function GET(_request, { params }) {
   try {
     const response = await fetch(registrySourceUrl(resolved.path), {
       headers: { 'User-Agent': 'neon-website-function-registry' },
-      next: { revalidate: CACHE_SECONDS },
+      next: { revalidate: REGISTRY_CACHE_SECONDS },
     });
     if (!response.ok) return unavailable();
     const text = await response.text();
@@ -42,7 +44,7 @@ export async function GET(_request, { params }) {
       headers: {
         'Content-Type': resolved.contentType,
         'Access-Control-Allow-Origin': '*',
-        'Cache-Control': `public, s-maxage=${CACHE_SECONDS}, stale-while-revalidate=86400`,
+        'Cache-Control': `public, s-maxage=${REGISTRY_CACHE_SECONDS}, stale-while-revalidate=86400`,
       },
     });
   } catch {
