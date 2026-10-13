@@ -468,7 +468,9 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
         <button type="submit">Send</button>
       </form>
 
-      {status !== "live" && <p role="status">Updating</p>}
+      {(status === "connecting" || status === "stale") && (
+        <p role="status">Updating</p>
+      )}
       {mutationError && <p role="alert">{mutationError}</p>}
 
       <ul>

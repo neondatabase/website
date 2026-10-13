@@ -217,15 +217,15 @@ A batch carries the IDs of its transactions (txids). [`awaitTxId()`](./guides/mu
 
 ## Packages and guides
 
-| Package                         | What it gives you                                | Guide                                                                                                            |
-| ------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `@neon/realtime/server`         | `createRealtime`, `rawSql`, `seal`               | [Defining queries](./guides/queries)                                                                             |
-| `@neon/realtime/client`         | `createRealtimeClient`, `subscribe`, `awaitTxId` | [Subscribing](./guides/subscribing), [Optimistic mutations](./guides/mutations)                                  |
-| `@neon/realtime-drizzle`        | `drizzleAdapter`                                 | [Query builder or ORM](./guides/queries#using-a-query-builder-or-orm), [Drizzle example](./examples/drizzle)     |
-| `@neon/realtime-drizzle/client` | `drizzleParsers`                                 | [Drizzle example](./examples/drizzle)                                                                            |
-| `@neon/realtime-kysely`         | `kyselyAdapter`                                  | [Query builder or ORM](./guides/queries#using-a-query-builder-or-orm), [Kysely example](./examples/kysely)       |
-| `@neon/realtime-react`          | `RealtimeProvider`, `useLiveQuery`               | [React reactivity](./guides/reactivity#react), [SSR](./guides/ssr)                                               |
-| `@neon/realtime-tanstack`       | `realtimeCollectionOptions`                      | [TanStack DB reactivity](./guides/reactivity#tanstack-db), [SSR with TanStack DB](./guides/ssr#with-tanstack-db) |
+| Package                         | What it gives you                                       | Guide                                                                                                            |
+| ------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `@neon/realtime/server`         | `createRealtime`, `rawSql`, `seal`                      | [Defining queries](./guides/queries)                                                                             |
+| `@neon/realtime/client`         | `createRealtimeClient`, `subscribe`, `awaitTxId`        | [Subscribing](./guides/subscribing), [Optimistic mutations](./guides/mutations)                                  |
+| `@neon/realtime-drizzle`        | `drizzleAdapter`                                        | [Query builder or ORM](./guides/queries#using-a-query-builder-or-orm), [Drizzle example](./examples/drizzle)     |
+| `@neon/realtime-drizzle/client` | `drizzleParsers`                                        | [Drizzle example](./examples/drizzle)                                                                            |
+| `@neon/realtime-kysely`         | `kyselyAdapter`                                         | [Query builder or ORM](./guides/queries#using-a-query-builder-or-orm), [Kysely example](./examples/kysely)       |
+| `@neon/realtime-react`          | `RealtimeProvider`, `useLiveQuery`, `useRealtimeClient` | [React reactivity](./guides/reactivity#react), [SSR](./guides/ssr)                                               |
+| `@neon/realtime-tanstack`       | `realtimeCollectionOptions`                             | [TanStack DB reactivity](./guides/reactivity#tanstack-db), [SSR with TanStack DB](./guides/ssr#with-tanstack-db) |
 
 Start with the [quickstart](./quickstart), then read the guides in this order: [defining queries](./guides/queries), [subscribing](./guides/subscribing), [reactivity](./guides/reactivity), [optimistic mutations](./guides/mutations) and [server-side rendering](./guides/ssr).
 

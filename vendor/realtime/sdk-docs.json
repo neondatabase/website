@@ -9136,14 +9136,14 @@
       },
       "children": [
         {
-          "id": 498,
+          "id": 500,
           "name": "drizzleAdapter",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 499,
+              "id": 501,
               "name": "drizzleAdapter",
               "variant": "signature",
               "kind": 4096,
@@ -9209,7 +9209,7 @@
         {
           "title": "Functions",
           "children": [
-            498
+            500
           ]
         }
       ]
@@ -9303,14 +9303,14 @@
       },
       "children": [
         {
-          "id": 500,
+          "id": 502,
           "name": "kyselyAdapter",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 501,
+              "id": 503,
               "name": "kyselyAdapter",
               "variant": "signature",
               "kind": 4096,
@@ -9368,7 +9368,7 @@
         {
           "title": "Functions",
           "children": [
-            500
+            502
           ]
         }
       ]
@@ -9389,7 +9389,7 @@
       },
       "children": [
         {
-          "id": 431,
+          "id": 433,
           "name": "RealtimeProviderProps",
           "variant": "declaration",
           "kind": 256,
@@ -9414,7 +9414,7 @@
           },
           "children": [
             {
-              "id": 433,
+              "id": 435,
               "name": "children",
               "variant": "declaration",
               "kind": 1024,
@@ -9431,7 +9431,17 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useLiveQuery",
-                    "target": 446
+                    "target": 448
+                  },
+                  {
+                    "kind": "text",
+                    "text": " or\n"
+                  },
+                  {
+                    "kind": "inline-tag",
+                    "tag": "@link",
+                    "text": "useRealtimeClient",
+                    "target": 431
                   },
                   {
                     "kind": "text",
@@ -9452,7 +9462,7 @@
               }
             },
             {
-              "id": 432,
+              "id": 434,
               "name": "client",
               "variant": "declaration",
               "kind": 1024,
@@ -9479,14 +9489,14 @@
             {
               "title": "Properties",
               "children": [
-                433,
-                432
+                435,
+                434
               ]
             }
           ]
         },
         {
-          "id": 434,
+          "id": 436,
           "name": "UseLiveQueryOptions",
           "variant": "declaration",
           "kind": 256,
@@ -9501,7 +9511,7 @@
                 "kind": "inline-tag",
                 "tag": "@link",
                 "text": "useLiveQuery",
-                "target": 446
+                "target": 448
               },
               {
                 "kind": "text",
@@ -9511,7 +9521,7 @@
           },
           "children": [
             {
-              "id": 436,
+              "id": 438,
               "name": "initialData",
               "variant": "declaration",
               "kind": 1024,
@@ -9534,7 +9544,7 @@
                   "type": "array",
                   "elementType": {
                     "type": "reference",
-                    "target": 435,
+                    "target": 437,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "qualifiedName": "UseLiveQueryOptions.Row",
@@ -9544,7 +9554,7 @@
               }
             },
             {
-              "id": 437,
+              "id": 439,
               "name": "refreshQuery",
               "variant": "declaration",
               "kind": 1024,
@@ -9563,14 +9573,14 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 438,
+                  "id": 440,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 439,
+                      "id": 441,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -9589,7 +9599,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 435,
+                                "target": 437,
                                 "name": "Row",
                                 "package": "@neon/realtime-react",
                                 "qualifiedName": "UseLiveQueryOptions.Row",
@@ -9613,14 +9623,14 @@
             {
               "title": "Properties",
               "children": [
-                436,
-                437
+                438,
+                439
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 435,
+              "id": 437,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -9637,7 +9647,7 @@
           ]
         },
         {
-          "id": 440,
+          "id": 442,
           "name": "UseLiveQueryResult",
           "variant": "declaration",
           "kind": 2097152,
@@ -9660,7 +9670,7 @@
           },
           "typeParameters": [
             {
-              "id": 443,
+              "id": 445,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -9684,7 +9694,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 443,
+                    "target": 445,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -9696,14 +9706,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 441,
+                  "id": 443,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 442,
+                      "id": 444,
                       "name": "utils",
                       "variant": "declaration",
                       "kind": 1024,
@@ -9720,11 +9730,11 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 444,
+                        "target": 446,
                         "typeArguments": [
                           {
                             "type": "reference",
-                            "target": 443,
+                            "target": 445,
                             "name": "Row",
                             "package": "@neon/realtime-react",
                             "refersToTypeParameter": true
@@ -9739,7 +9749,7 @@
                     {
                       "title": "Properties",
                       "children": [
-                        442
+                        444
                       ]
                     }
                   ]
@@ -9749,7 +9759,7 @@
           }
         },
         {
-          "id": 444,
+          "id": 446,
           "name": "UseLiveQueryUtils",
           "variant": "declaration",
           "kind": 2097152,
@@ -9772,7 +9782,7 @@
           },
           "typeParameters": [
             {
-              "id": 445,
+              "id": 447,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -9801,7 +9811,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 445,
+                    "target": 447,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -9842,11 +9852,21 @@
                     "kind": "inline-tag",
                     "tag": "@link",
                     "text": "useLiveQuery",
-                    "target": 446
+                    "target": 448
                   },
                   {
                     "kind": "text",
-                    "text": "\nhooks.\n\nCreate the client once for the browser application. The provider does not\nfetch query sealed queries or close the client when it unmounts."
+                    "text": " and\n"
+                  },
+                  {
+                    "kind": "inline-tag",
+                    "tag": "@link",
+                    "text": "useRealtimeClient",
+                    "target": 431
+                  },
+                  {
+                    "kind": "text",
+                    "text": " hooks.\n\nCreate the client once for the browser application. The provider does not\nfetch sealed queries or close the client when it unmounts."
                   }
                 ],
                 "blockTags": [
@@ -9878,7 +9898,7 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 431,
+                    "target": 433,
                     "name": "RealtimeProviderProps",
                     "package": "@neon/realtime-react"
                   }
@@ -9899,14 +9919,14 @@
           ]
         },
         {
-          "id": 446,
+          "id": 448,
           "name": "useLiveQuery",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 447,
+              "id": 449,
               "name": "useLiveQuery",
               "variant": "signature",
               "kind": 4096,
@@ -9951,7 +9971,7 @@
               },
               "typeParameters": [
                 {
-                  "id": 448,
+                  "id": 450,
                   "name": "Row",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -9968,7 +9988,7 @@
               ],
               "parameters": [
                 {
-                  "id": 449,
+                  "id": 451,
                   "name": "query",
                   "variant": "param",
                   "kind": 32768,
@@ -9987,7 +10007,7 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 448,
+                        "target": 450,
                         "name": "Row",
                         "package": "@neon/realtime-react",
                         "refersToTypeParameter": true
@@ -9998,7 +10018,7 @@
                   }
                 },
                 {
-                  "id": 450,
+                  "id": 452,
                   "name": "options",
                   "variant": "param",
                   "kind": 32768,
@@ -10013,11 +10033,11 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 434,
+                    "target": 436,
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 448,
+                        "target": 450,
                         "name": "Row",
                         "package": "@neon/realtime-react",
                         "refersToTypeParameter": true
@@ -10031,11 +10051,11 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 440,
+                "target": 442,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 448,
+                    "target": 450,
                     "name": "Row",
                     "package": "@neon/realtime-react",
                     "refersToTypeParameter": true
@@ -10046,28 +10066,158 @@
               }
             }
           ]
+        },
+        {
+          "id": 431,
+          "name": "useRealtimeClient",
+          "variant": "declaration",
+          "kind": 64,
+          "flags": {},
+          "signatures": [
+            {
+              "id": 432,
+              "name": "useRealtimeClient",
+              "variant": "signature",
+              "kind": 4096,
+              "flags": {},
+              "comment": {
+                "summary": [
+                  {
+                    "kind": "text",
+                    "text": "Read the shared Realtime client from the nearest "
+                  },
+                  {
+                    "kind": "inline-tag",
+                    "tag": "@link",
+                    "text": "RealtimeProvider",
+                    "target": 428
+                  },
+                  {
+                    "kind": "text",
+                    "text": ".\n\nUse it alongside "
+                  },
+                  {
+                    "kind": "inline-tag",
+                    "tag": "@link",
+                    "text": "useLiveQuery",
+                    "target": 448
+                  },
+                  {
+                    "kind": "text",
+                    "text": " when a component needs the client\nitself: to pass it to "
+                  },
+                  {
+                    "kind": "code",
+                    "text": "`realtimeCollectionOptions()`"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " from\n"
+                  },
+                  {
+                    "kind": "code",
+                    "text": "`@neon/realtime-tanstack`"
+                  },
+                  {
+                    "kind": "text",
+                    "text": ", or to call "
+                  },
+                  {
+                    "kind": "code",
+                    "text": "`subscribe()`"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " with a sealed query\ndirectly. Subscriptions opened through "
+                  },
+                  {
+                    "kind": "code",
+                    "text": "`subscribe()`"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " are not owned by React,\nso call "
+                  },
+                  {
+                    "kind": "code",
+                    "text": "`unsubscribe()`"
+                  },
+                  {
+                    "kind": "text",
+                    "text": " when they are no longer needed."
+                  }
+                ],
+                "blockTags": [
+                  {
+                    "tag": "@returns",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "text": "The client passed to the nearest provider."
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "@throws",
+                    "content": [
+                      {
+                        "kind": "text",
+                        "text": "If used outside a "
+                      },
+                      {
+                        "kind": "inline-tag",
+                        "tag": "@link",
+                        "text": "RealtimeProvider",
+                        "target": 428
+                      },
+                      {
+                        "kind": "text",
+                        "text": "."
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "@example",
+                    "content": [
+                      {
+                        "kind": "code",
+                        "text": "```tsx\nimport type { SealedLiveQuery } from \"@neon/realtime/client\";\nimport { useRealtimeClient } from \"@neon/realtime-react\";\nimport { realtimeCollectionOptions } from \"@neon/realtime-tanstack\";\nimport { createCollection } from \"@tanstack/db\";\nimport { useMemo } from \"react\";\n\ninterface Todo {\n  id: string;\n  title: string;\n}\n\nfunction useTodos(query: SealedLiveQuery<Todo>) {\n  const client = useRealtimeClient();\n  return useMemo(\n    () =>\n      createCollection(realtimeCollectionOptions({\n        client,\n        query,\n        getKey: (todo) => todo.id,\n      })),\n    [client, query],\n  );\n}\n```"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "type": {
+                "type": "reference",
+                "target": 404,
+                "name": "RealtimeClient",
+                "package": "@neon/realtime"
+              }
+            }
+          ]
         }
       ],
       "groups": [
         {
           "title": "Interfaces",
           "children": [
-            431,
-            434
+            433,
+            436
           ]
         },
         {
           "title": "Type Aliases",
           "children": [
-            440,
-            444
+            442,
+            446
           ]
         },
         {
           "title": "Functions",
           "children": [
             428,
-            446
+            448,
+            431
           ]
         }
       ]
@@ -10088,7 +10238,7 @@
       },
       "children": [
         {
-          "id": 451,
+          "id": 453,
           "name": "RealtimeCollectionConfig",
           "variant": "declaration",
           "kind": 256,
@@ -10111,7 +10261,7 @@
           },
           "children": [
             {
-              "id": 469,
+              "id": 471,
               "name": "autoIndex",
               "variant": "declaration",
               "kind": 1024,
@@ -10169,7 +10319,7 @@
               }
             },
             {
-              "id": 455,
+              "id": 457,
               "name": "client",
               "variant": "declaration",
               "kind": 1024,
@@ -10192,7 +10342,7 @@
               }
             },
             {
-              "id": 471,
+              "id": 473,
               "name": "compare",
               "variant": "declaration",
               "kind": 1024,
@@ -10223,7 +10373,7 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 472,
+                  "id": 474,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
@@ -10232,7 +10382,7 @@
                   },
                   "signatures": [
                     {
-                      "id": 473,
+                      "id": 475,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -10255,7 +10405,7 @@
                       },
                       "parameters": [
                         {
-                          "id": 474,
+                          "id": 476,
                           "name": "x",
                           "variant": "param",
                           "kind": 32768,
@@ -10272,7 +10422,7 @@
                           },
                           "type": {
                             "type": "reference",
-                            "target": 452,
+                            "target": 454,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10280,7 +10430,7 @@
                           }
                         },
                         {
-                          "id": 475,
+                          "id": 477,
                           "name": "y",
                           "variant": "param",
                           "kind": 32768,
@@ -10297,7 +10447,7 @@
                           },
                           "type": {
                             "type": "reference",
-                            "target": 452,
+                            "target": 454,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10321,7 +10471,7 @@
               }
             },
             {
-              "id": 470,
+              "id": 472,
               "name": "defaultIndexType",
               "variant": "declaration",
               "kind": 1024,
@@ -10359,7 +10509,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 453,
+                    "target": 455,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -10377,7 +10527,7 @@
               }
             },
             {
-              "id": 478,
+              "id": 480,
               "name": "defaultStringCollation",
               "variant": "declaration",
               "kind": 1024,
@@ -10412,7 +10562,7 @@
               }
             },
             {
-              "id": 467,
+              "id": 469,
               "name": "gcTime",
               "variant": "declaration",
               "kind": 1024,
@@ -10441,7 +10591,7 @@
               }
             },
             {
-              "id": 460,
+              "id": 462,
               "name": "getKey",
               "variant": "declaration",
               "kind": 1024,
@@ -10459,28 +10609,28 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 461,
+                  "id": 463,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 462,
+                      "id": 464,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
                       "flags": {},
                       "parameters": [
                         {
-                          "id": 463,
+                          "id": 465,
                           "name": "row",
                           "variant": "param",
                           "kind": 32768,
                           "flags": {},
                           "type": {
                             "type": "reference",
-                            "target": 452,
+                            "target": 454,
                             "name": "Row",
                             "package": "@neon/realtime-tanstack",
                             "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10490,7 +10640,7 @@
                       ],
                       "type": {
                         "type": "reference",
-                        "target": 453,
+                        "target": 455,
                         "name": "Key",
                         "package": "@neon/realtime-tanstack",
                         "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -10508,7 +10658,7 @@
               }
             },
             {
-              "id": 464,
+              "id": 466,
               "name": "id",
               "variant": "declaration",
               "kind": 1024,
@@ -10529,7 +10679,7 @@
               }
             },
             {
-              "id": 477,
+              "id": 479,
               "name": "onDelete",
               "variant": "declaration",
               "kind": 1024,
@@ -10613,7 +10763,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 452,
+                    "target": 454,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10621,7 +10771,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 453,
+                    "target": 455,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -10629,7 +10779,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 485,
+                    "target": 487,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
                   },
@@ -10649,7 +10799,7 @@
               }
             },
             {
-              "id": 476,
+              "id": 478,
               "name": "onInsert",
               "variant": "declaration",
               "kind": 1024,
@@ -10733,7 +10883,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 452,
+                    "target": 454,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10741,7 +10891,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 453,
+                    "target": 455,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -10749,7 +10899,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 485,
+                    "target": 487,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
                   },
@@ -10769,7 +10919,7 @@
               }
             },
             {
-              "id": 465,
+              "id": 467,
               "name": "onUpdate",
               "variant": "declaration",
               "kind": 1024,
@@ -10853,7 +11003,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 452,
+                    "target": 454,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10861,7 +11011,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 453,
+                    "target": 455,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -10869,7 +11019,7 @@
                   },
                   {
                     "type": "reference",
-                    "target": 485,
+                    "target": 487,
                     "name": "RealtimeCollectionUtils",
                     "package": "@neon/realtime-tanstack"
                   },
@@ -10889,7 +11039,7 @@
               }
             },
             {
-              "id": 456,
+              "id": 458,
               "name": "query",
               "variant": "declaration",
               "kind": 1024,
@@ -10910,7 +11060,7 @@
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 452,
+                    "target": 454,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10922,7 +11072,7 @@
               }
             },
             {
-              "id": 457,
+              "id": 459,
               "name": "refreshQuery",
               "variant": "declaration",
               "kind": 1024,
@@ -10941,14 +11091,14 @@
               "type": {
                 "type": "reflection",
                 "declaration": {
-                  "id": 458,
+                  "id": 460,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "signatures": [
                     {
-                      "id": 459,
+                      "id": 461,
                       "name": "__type",
                       "variant": "signature",
                       "kind": 4096,
@@ -10967,7 +11117,7 @@
                             "typeArguments": [
                               {
                                 "type": "reference",
-                                "target": 452,
+                                "target": 454,
                                 "name": "Row",
                                 "package": "@neon/realtime-tanstack",
                                 "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -10987,7 +11137,7 @@
               }
             },
             {
-              "id": 466,
+              "id": 468,
               "name": "schema",
               "variant": "declaration",
               "kind": 1024,
@@ -10998,7 +11148,7 @@
               },
               "type": {
                 "type": "reference",
-                "target": 454,
+                "target": 456,
                 "name": "Schema",
                 "package": "@neon/realtime-tanstack",
                 "qualifiedName": "RealtimeCollectionConfig.Schema",
@@ -11012,7 +11162,7 @@
               }
             },
             {
-              "id": 468,
+              "id": 470,
               "name": "startSync",
               "variant": "declaration",
               "kind": 1024,
@@ -11056,27 +11206,27 @@
             {
               "title": "Properties",
               "children": [
-                469,
-                455,
                 471,
-                470,
+                457,
+                473,
+                472,
+                480,
+                469,
+                462,
+                466,
+                479,
                 478,
                 467,
-                460,
-                464,
-                477,
-                476,
-                465,
-                456,
-                457,
-                466,
-                468
+                458,
+                459,
+                468,
+                470
               ]
             }
           ],
           "typeParameters": [
             {
-              "id": 452,
+              "id": 454,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -11095,7 +11245,7 @@
               }
             },
             {
-              "id": 453,
+              "id": 455,
               "name": "Key",
               "variant": "typeParam",
               "kind": 131072,
@@ -11144,7 +11294,7 @@
               }
             },
             {
-              "id": 454,
+              "id": 456,
               "name": "Schema",
               "variant": "typeParam",
               "kind": 131072,
@@ -11192,7 +11342,7 @@
                   "typeArguments": [
                     {
                       "type": "reference",
-                      "target": 452,
+                      "target": 454,
                       "name": "Row",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Row",
@@ -11200,7 +11350,7 @@
                     },
                     {
                       "type": "reference",
-                      "target": 453,
+                      "target": 455,
                       "name": "Key",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Key",
@@ -11208,7 +11358,7 @@
                     },
                     {
                       "type": "reference",
-                      "target": 454,
+                      "target": 456,
                       "name": "Schema",
                       "package": "@neon/realtime-tanstack",
                       "qualifiedName": "RealtimeCollectionConfig.Schema",
@@ -11216,7 +11366,7 @@
                     },
                     {
                       "type": "reference",
-                      "target": 485,
+                      "target": 487,
                       "name": "RealtimeCollectionUtils",
                       "package": "@neon/realtime-tanstack"
                     },
@@ -11248,7 +11398,7 @@
           ]
         },
         {
-          "id": 485,
+          "id": 487,
           "name": "RealtimeCollectionUtils",
           "variant": "declaration",
           "kind": 256,
@@ -11263,14 +11413,14 @@
           },
           "children": [
             {
-              "id": 486,
+              "id": 488,
               "name": "awaitTxId",
               "variant": "declaration",
               "kind": 2048,
               "flags": {},
               "signatures": [
                 {
-                  "id": 487,
+                  "id": 489,
                   "name": "awaitTxId",
                   "variant": "signature",
                   "kind": 4096,
@@ -11305,7 +11455,7 @@
                   },
                   "parameters": [
                     {
-                      "id": 488,
+                      "id": 490,
                       "name": "txid",
                       "variant": "param",
                       "kind": 32768,
@@ -11324,7 +11474,7 @@
                       }
                     },
                     {
-                      "id": 489,
+                      "id": 491,
                       "name": "timeout",
                       "variant": "param",
                       "kind": 32768,
@@ -11369,20 +11519,20 @@
             {
               "title": "Methods",
               "children": [
-                486
+                488
               ]
             }
           ],
           "indexSignatures": [
             {
-              "id": 490,
+              "id": 492,
               "name": "__index",
               "variant": "signature",
               "kind": 8192,
               "flags": {},
               "parameters": [
                 {
-                  "id": 491,
+                  "id": 493,
                   "name": "key",
                   "variant": "param",
                   "kind": 32768,
@@ -11413,7 +11563,7 @@
           ]
         },
         {
-          "id": 479,
+          "id": 481,
           "name": "RealtimeCollectionOptions",
           "variant": "declaration",
           "kind": 2097152,
@@ -11428,7 +11578,7 @@
                 "kind": "inline-tag",
                 "tag": "@link",
                 "text": "realtimeCollectionOptions",
-                "target": 492
+                "target": 494
               },
               {
                 "kind": "text",
@@ -11438,7 +11588,7 @@
           },
           "typeParameters": [
             {
-              "id": 482,
+              "id": 484,
               "name": "Row",
               "variant": "typeParam",
               "kind": 131072,
@@ -11457,7 +11607,7 @@
               }
             },
             {
-              "id": 483,
+              "id": 485,
               "name": "Key",
               "variant": "typeParam",
               "kind": 131072,
@@ -11485,7 +11635,7 @@
               }
             },
             {
-              "id": 484,
+              "id": 486,
               "name": "Schema",
               "variant": "typeParam",
               "kind": 131072,
@@ -11531,28 +11681,28 @@
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 482,
+                        "target": 484,
                         "name": "Row",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 483,
+                        "target": 485,
                         "name": "Key",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 484,
+                        "target": 486,
                         "name": "Schema",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 485,
+                        "target": 487,
                         "name": "RealtimeCollectionUtils",
                         "package": "@neon/realtime-tanstack"
                       }
@@ -11571,14 +11721,14 @@
               {
                 "type": "reflection",
                 "declaration": {
-                  "id": 480,
+                  "id": 482,
                   "name": "__type",
                   "variant": "declaration",
                   "kind": 65536,
                   "flags": {},
                   "children": [
                     {
-                      "id": 481,
+                      "id": 483,
                       "name": "utils",
                       "variant": "declaration",
                       "kind": 1024,
@@ -11595,7 +11745,7 @@
                       },
                       "type": {
                         "type": "reference",
-                        "target": 485,
+                        "target": 487,
                         "name": "RealtimeCollectionUtils",
                         "package": "@neon/realtime-tanstack"
                       }
@@ -11605,7 +11755,7 @@
                     {
                       "title": "Properties",
                       "children": [
-                        481
+                        483
                       ]
                     }
                   ]
@@ -11615,14 +11765,14 @@
           }
         },
         {
-          "id": 492,
+          "id": 494,
           "name": "realtimeCollectionOptions",
           "variant": "declaration",
           "kind": 64,
           "flags": {},
           "signatures": [
             {
-              "id": 493,
+              "id": 495,
               "name": "realtimeCollectionOptions",
               "variant": "signature",
               "kind": 4096,
@@ -11656,7 +11806,7 @@
               },
               "typeParameters": [
                 {
-                  "id": 494,
+                  "id": 496,
                   "name": "Row",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -11675,7 +11825,7 @@
                   }
                 },
                 {
-                  "id": 495,
+                  "id": 497,
                   "name": "Key",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -11724,7 +11874,7 @@
                   }
                 },
                 {
-                  "id": 496,
+                  "id": 498,
                   "name": "Schema",
                   "variant": "typeParam",
                   "kind": 131072,
@@ -11765,7 +11915,7 @@
               ],
               "parameters": [
                 {
-                  "id": 497,
+                  "id": 499,
                   "name": "config",
                   "variant": "param",
                   "kind": 32768,
@@ -11780,25 +11930,25 @@
                   },
                   "type": {
                     "type": "reference",
-                    "target": 451,
+                    "target": 453,
                     "typeArguments": [
                       {
                         "type": "reference",
-                        "target": 494,
+                        "target": 496,
                         "name": "Row",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 495,
+                        "target": 497,
                         "name": "Key",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
                       },
                       {
                         "type": "reference",
-                        "target": 496,
+                        "target": 498,
                         "name": "Schema",
                         "package": "@neon/realtime-tanstack",
                         "refersToTypeParameter": true
@@ -11811,25 +11961,25 @@
               ],
               "type": {
                 "type": "reference",
-                "target": 479,
+                "target": 481,
                 "typeArguments": [
                   {
                     "type": "reference",
-                    "target": 494,
+                    "target": 496,
                     "name": "Row",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
                   },
                   {
                     "type": "reference",
-                    "target": 495,
+                    "target": 497,
                     "name": "Key",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
                   },
                   {
                     "type": "reference",
-                    "target": 496,
+                    "target": 498,
                     "name": "Schema",
                     "package": "@neon/realtime-tanstack",
                     "refersToTypeParameter": true
@@ -11846,20 +11996,20 @@
         {
           "title": "Interfaces",
           "children": [
-            451,
-            485
+            453,
+            487
           ]
         },
         {
           "title": "Type Aliases",
           "children": [
-            479
+            481
           ]
         },
         {
           "title": "Functions",
           "children": [
-            492
+            494
           ]
         }
       ]

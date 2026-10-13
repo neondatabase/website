@@ -105,7 +105,7 @@ export function Messages(props: MessagesProps) {
 
   return (
     <>
-      {status !== "live" && <p>Updating…</p>}
+      {(status === "connecting" || status === "stale") && <p>Updating…</p>}
       <ul>{data.map((message) => <li key={message.id}>{message.body}</li>)}</ul>
     </>
   )

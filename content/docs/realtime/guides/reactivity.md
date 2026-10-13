@@ -18,7 +18,7 @@ This page continues the running example from the [queries](./queries) and [subsc
 
 ## React
 
-The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider) and a [`useLiveQuery()` hook](../sdks/typescript#react-uselivequery). It works with React 18 and 19.
+The `@neon/realtime-react` binding exports a [`RealtimeProvider`](../sdks/typescript#react-realtimeprovider), a [`useLiveQuery()` hook](../sdks/typescript#react-uselivequery) and a [`useRealtimeClient()` hook](../sdks/typescript#react-userealtimeclient) that returns the provider's client. It works with React 18 and 19.
 
 Install it alongside the client SDK:
 
@@ -91,7 +91,9 @@ export function Messages({ sealedQuery, refreshQuery, initialData }: Props) {
 
   return (
     <section>
-      {status !== "live" && <p role="status">Updating</p>}
+      {(status === "connecting" || status === "stale") && (
+        <p role="status">Updating</p>
+      )}
       <ul>
         {data.map((message) => (
           <li key={message.id}>
