@@ -90,4 +90,26 @@ describe('AI Gateway model rows', () => {
     // Whether it actually has a working route is still a capability fact, unverified here.
     expect(row.endpoints).toEqual([]);
   });
+
+  it('classifies a judge model from the catalog, with no inputs, context or output price', () => {
+    const [row] = buildRows(
+      {
+        models: {
+          'judge-4b': {
+            id: 'judge-4b',
+            name: 'Judge 4B',
+            type: 'judge',
+            cost: { input: 0.1 },
+          },
+        },
+      },
+      { models: [] }
+    );
+
+    expect(row.isJudge).toBe(true);
+    expect(row.isEmbedding).toBe(false);
+    expect(row.inputs).toEqual([]);
+    expect(row.costInputLabel).toBe('$0.10');
+    expect(row.costOutputLabel).toBe('—');
+  });
 });
