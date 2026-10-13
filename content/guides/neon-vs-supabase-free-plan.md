@@ -1,11 +1,11 @@
 ---
 title: 'In-Depth: Neon vs Supabase Free Plan'
 subtitle: Compare Neon and Supabase free plans on projects, storage, branches, backups, functions, auth, and egress to see which fits your prototypes and AI agents.
-author: neon-team
+author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-07-15T00:00:00.000Z'
-updatedOn: '2026-10-13T17:36:31.362Z'
+updatedOn: '2026-10-13T19:35:11.209Z'
 ---
 
 <Admonition type="note">
@@ -14,31 +14,31 @@ Plan limits in this guide were checked against the Neon and Supabase documentati
 
 Neon and Supabase both give you a Postgres backend for $0 a month, with a database, managed authentication, serverless functions, and S3-compatible file storage. The free plans differ in how many projects you get, what happens when a project sits idle, and whether you can branch your backend or undo a mistake.
 
-This guide compares the two free plans feature by feature, so you can see what each one includes. For a service-by-service comparison beyond the free plans, read [Neon vs Supabase](/guides/neon-vs-supabase).
+This guide compares the two free plans feature by feature. For a service-by-service comparison beyond the free plans, read [Neon vs Supabase](/guides/neon-vs-supabase).
 
 ## How is Neon unique?
 
 ### 1. 100 projects that scale to zero instead of pausing
 
-Supabase Free allows only 2 active projects, and the limit applies to you across every organization where you're an Owner or Administrator. When a project is inactive for a week, Supabase pauses it, and it stays offline until you resume it from the dashboard.
+Neon Free includes 100 projects ([source](/docs/introduction/plans#projects)). After 5 minutes of inactivity, a project's compute scales to zero, and it wakes within a few hundred milliseconds on the next query ([source](/docs/introduction/scale-to-zero)). A demo you built months ago still loads when someone opens it.
 
-Neon Free includes 100 projects ([source](/docs/introduction/plans#projects)). When a project is idle, its compute scales to zero after 5 minutes and wakes within a few hundred milliseconds on the next query ([source](/docs/introduction/scale-to-zero)). A demo you built months ago still loads when someone opens it.
+Supabase Free allows only 2 active projects, and that limit covers every organization where you're an Owner or Administrator. When a project is inactive for a week, Supabase pauses it, and it stays offline until you manually resume it from the dashboard.
 
 ### 2. Every project gets its own free allowances
 
-On Neon Free, each project gets its own 100 CU-hours of compute, 1 GB of Postgres storage, 5 GB of Object Storage, 5 GB of egress, and a Functions allowance of 1M invocations and 10 active and 400 waiting Capacity-Hours every month ([source](/docs/introduction/plans)). A new project brings a new allowance instead of splitting the existing one. Postgres storage has one extra limit: 20 GB in total across all your projects.
+On Neon Free, each project gets its own monthly allowance: 100 CU-hours of compute, 1 GB of Postgres storage, 5 GB of Object Storage, 5 GB of egress, and 1M function invocations with 10 active and 400 waiting Capacity-Hours ([source](/docs/introduction/plans)). A new project brings a new allowance instead of splitting the existing one. Postgres storage has one extra limit: 20 GB in total across all your projects.
 
-Supabase applies most Free quotas, including egress, file storage, and Edge Function invocations, to the whole organization, no matter how many projects it has.
+Supabase applies most Free quotas, including egress, file storage, and Edge Function invocations, to the whole organization, however many projects it has.
 
 ### 3. Branches and a 6-hour undo, even on Free (#ai-assisted-development)
 
-Neon Free includes 10 branches per project. A branch is a copy-on-write copy of your whole backend: the database, [Managed Better Auth](/docs/auth/overview) users and sessions, [Object Storage](/docs/storage/overview) buckets and objects, and [Functions](/docs/compute/functions/overview). An AI agent or a preview deployment can work against real data without touching production ([branching](/docs/introduction/branching)). If a migration or a `DROP TABLE` goes wrong, you can restore a branch to any point in the last 6 hours ([instant restore](/docs/postgres/backup-restore/branch-restore)).
+Neon Free includes 10 branches per project. A branch is a copy-on-write copy of your whole backend: the database, [Managed Better Auth](/docs/auth/overview) users and sessions, [Object Storage](/docs/storage/overview) buckets and objects, and [Functions](/docs/compute/functions/overview). An AI agent or a preview deployment can work against real data without touching production ([branching](/docs/introduction/branching)). If a migration or a `DROP TABLE` goes wrong, you can restore your production branch to any point in the last 6 hours ([instant restore](/docs/postgres/backup-restore/branch-restore)).
 
 Supabase Free doesn't include branching, backups, or point-in-time recovery. Instead, Supabase recommends that Free projects export their data regularly with the Supabase CLI.
 
 ### 4. Functions that run for 15 minutes in its free plan
 
-Neon Functions can take up to 15 minutes to send the first byte, and streams stay open while data flows. Each function gets 2,048 MiB of memory, and each project gets 1M invocations a month ([source](/docs/compute/functions/reference/runtime-limits)). On Supabase Free, Edge Functions stop after 150 seconds, get 256 MB of memory, and share 500K invocations across the whole organization. That leaves room for AI agents that chain several model calls, and for WebSocket or SSE servers that hold a connection open.
+Neon Functions can take up to 15 minutes to send the first byte, and streams stay open while data flows. Each function gets 2,048 MiB of memory ([source](/docs/compute/functions/reference/runtime-limits)), and each project gets 1M invocations a month ([source](/docs/introduction/plans#functions)). On Supabase Free, Edge Functions stop after 150 seconds, get 256 MB of memory, and share 500K invocations across the whole organization. That leaves room for AI agents that chain several model calls, and for WebSocket or SSE servers that hold a connection open.
 
 ## Neon vs Supabase Free plan at a glance
 
@@ -90,7 +90,7 @@ Neon Free gives each project twice the database storage, and up to 20 times as m
 | When the app is idle | Scales to zero after 5 minutes                        | Paused after 1 week of inactivity            |
 | When traffic returns | Wakes automatically within a few hundred milliseconds | You resume the project from the dashboard    |
 
-When load arrives, a Neon Free compute scales up to 8 GB of RAM, while a Supabase Free project stays on its fixed instance until you upgrade. A suspended Neon compute doesn't use CU-hours, and 100 CU-hours run a 0.25 CU compute for 400 hours a month ([source](/docs/introduction/plans#compute)). Neon's connection pooler accepts up to 10K client connections, which helps serverless apps that open a connection per request ([source](/docs/connect/connection-pooling)).
+When load arrives, a Neon Free compute can scale up to 8 GB of RAM, while a Supabase Free project stays on its fixed instance until you upgrade. A suspended Neon compute doesn't use CU-hours, and 100 CU-hours run a 0.25 CU compute for 400 hours a month ([source](/docs/introduction/plans#compute)). Neon's connection pooler accepts up to 10K client connections, which helps serverless apps that open a connection per request ([source](/docs/connect/connection-pooling)).
 
 The bigger difference shows up on a low-traffic application: a Neon project never pauses, while a Supabase Free project with low activity over 7 days is paused until you manually resume it from the dashboard.
 
@@ -118,7 +118,7 @@ Neon keeps logs three times as long, so you can pull a wider window with `neon l
 | Point-in-time restore | Any point in the last 6 hours (up to 1 GB of change history) | Not included                             |
 | Snapshots and backups | 1 manual snapshot                                            | Not included, so you export with the CLI |
 
-On Neon Free, you can rewind a branch to the moment before a bad migration, or keep a snapshot of a known good state ([source](/docs/introduction/plans#instant-restore)). If you delete a whole project by mistake, you can recover it within 7 days ([source](/docs/manage/projects#recover-a-deleted-project)). On Supabase, backups start on the Pro plan, and point-in-time recovery is a paid add-on.
+On Neon Free, you can rewind your production branch to the moment before a bad migration, or keep a snapshot of a known good state ([source](/docs/introduction/plans#instant-restore)). If you delete a whole project by mistake, you can recover it within 7 days ([source](/docs/manage/projects#recover-a-deleted-project)). On Supabase, backups start on the Pro plan, and point-in-time recovery is a paid add-on.
 
 ### 7. Functions
 
@@ -133,7 +133,7 @@ Both free plans include serverless functions: [Neon Functions](/docs/compute/fun
 | Scheduled runs             | [Function Triggers](/docs/compute/functions/triggers/overview) on a cron schedule | `pg_cron` and `pg_net`           |
 | Branches with the database | Yes, each branch runs its own deployment against its own data                     | Branching isn't included on Free |
 
-Neon Free includes twice as many invocations in every project, 8 times the memory, and requests that can run for 15 minutes instead of 150 seconds. Each project also gets its own 10 active and 400 waiting Capacity-Hours of function compute, so a second app doesn't share the first app's allowance ([source](/docs/introduction/plans#functions)). Long requests matter for AI agents that chain several model calls, and for WebSocket or SSE servers that hold a connection open ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
+Neon Free includes twice as many invocations in every project, 8 times the memory, and requests that can run for 15 minutes instead of 150 seconds. Each project also gets its own 10 active and 400 waiting Capacity-Hours of function compute, so a second app doesn't share the first app's allowance ([source](/docs/introduction/plans#functions)). Longer requests let you run AI agents that chain several model calls, and WebSocket or SSE servers that hold a connection open ([runtime limits](/docs/compute/functions/reference/runtime-limits)).
 
 <Admonition type="note">
 Neon Functions and Object Storage run in four AWS regions today: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create your project in one of them to use both.
@@ -153,7 +153,7 @@ Both free plans include S3-compatible file storage: [Neon Object Storage](/docs/
 | Read size and ETag in one call (`GetObjectAttributes`)           | Supported                                                  | Not supported                                                            |
 | Branches with the database                                       | Yes, every bucket and object, copy-on-write                | Branching isn't included on Free                                         |
 
-Neon Free includes 5 times the storage, and each new project adds another 5 GB. Files can be up to 5 GiB, so videos, datasets, and model outputs fit in one upload, while Supabase Free caps each file at 50 MB. Neon also supports more of the S3 API. You can limit browser uploads and downloads to your own site with a CORS rule, tag a file (for example `status=pending-review`) without a database write, and read a file's size and ETag in one call ([S3 compatibility](/docs/storage/s3-compatibility)). And Neon branches your files with the database, so a preview branch's rows and files come from the same point in time.
+Neon Free includes 5 times the storage, and each new project adds another 5 GB. Files can be up to 5 GiB, so videos, datasets, and model outputs fit in one upload, while Supabase Free caps each file at 50 MB. Neon also supports more of the S3 API, so you can limit browser uploads and downloads to your own site with a CORS rule, tag a file (for example `status=pending-review`) without a database write, and read a file's size and ETag in one call ([S3 compatibility](/docs/storage/s3-compatibility)). And Neon branches your files with the database, so a preview branch's rows and files come from the same point in time.
 
 ### 9. Managed authentication
 
@@ -165,7 +165,7 @@ Both free plans include managed authentication: [Managed Better Auth](/docs/auth
 | Branches with the database          | Yes, each branch gets its own users, sessions, and auth settings                       | Branching isn't included on Free                   |
 | Organizations, members, invitations | Built in with the [Organization plugin](/docs/auth/guides/plugins/organization) (Beta) | Not built in, so you model them in your own tables |
 
-Neon Free covers 10K more monthly active users. Because auth branches with the database, you can test sign-up, password reset, and OAuth flows on a preview branch without creating test users in production. For multi-tenant apps, the Organization plugin adds organizations, roles, and invitation flows without extra tables. Neon also includes shared Google OAuth credentials for testing, so Google sign-in works before you register your own OAuth app ([source](/docs/auth/overview)).
+Neon Free covers 10K more monthly active users. Because auth branches with the database, you can test sign-up, password reset, and OAuth flows on a preview branch without creating test users in production. For multi-tenant apps, the Organization plugin adds organizations, roles, and invitation flows. Neon also includes shared Google OAuth credentials for testing, so Google sign-in works before you register your own OAuth app ([source](/docs/auth/overview)).
 
 ### 10. Egress
 
@@ -207,7 +207,7 @@ Take a developer who runs three small apps at the same time: a habit tracker wit
 <summary>Curious how each total is calculated?</summary>
 
 - **Neon:** the Free plan includes 100 projects, so each app gets its own project with its own 100 CU-hours, 1 GB of Postgres storage, and 5 GB of egress. The quiet waitlist page scales to zero between visits and wakes on the next one, so all three apps cost $0.
-- **Supabase:** not supported on the Free plan, which allows 2 active projects, so the third app needs the Pro plan. Pro costs $25 a month and covers the first project, and the other two run on Micro compute at about $10 a month each: $25 + (2 × $10) = about $45. Staying on Free would also mean the waitlist page pauses after a quiet week until someone resumes it.
+- **Supabase:** not supported on the Free plan, which allows only 2 active projects, so the third app needs the Pro plan. Pro costs $25 a month and covers the first project, and the other two run on Micro compute at about $10 a month each: $25 + (2 × $10) = about $45. Staying on Free would also mean the waitlist page pauses after a quiet week until someone resumes it.
 
 </details>
 
@@ -240,12 +240,12 @@ Take an AI coding agent that works on its own branch for 10 hours a month, on a 
 <details>
 <summary>Curious how each total is calculated?</summary>
 
-- **Neon:** the agent's branches run at 0.25 CU for 10 hours, which is 2.5 CU-hours, leaving 97.5 of the project's 100 CU-hours for the main branch. The agent can keep up to 9 branches next to the main branch, within the Free plan's 10 per project. Restoring to any point in the last 6 hours is included.
+- **Neon:** the agent's branches run at 0.25 CU for 10 hours, which is 2.5 CU-hours, leaving 97.5 of the project's 100 CU-hours for the production branch. The agent can keep up to 9 branches next to the production branch, within the Free plan's 10 per project. Restoring the production branch to any point in the last 6 hours is included.
 - **Supabase:** not supported on the Free plan, which doesn't include branching or point-in-time recovery. The Pro plan costs $25. Point-in-time recovery requires at least a Small compute (about $15 a month, minus the $10 compute credit = $5) and costs about $100 a month for 7 days of history. 10 branch-hours on the default Micro compute cost 10 × $0.01344 = $0.13. Total: $25 + $5 + $100 + $0.13 = about $130.
 
 </details>
 
-## When to choose Neon vs Supabase
+## When to choose Neon Free vs Supabase Free
 
 Choose **Neon Free** if:
 
@@ -259,15 +259,19 @@ Choose **Supabase Free** if:
 
 - You run one or two projects and use them at least once a week, so pausing never applies.
 - Your team already builds on Supabase and its client libraries.
-- Most of your traffic is served from the CDN cache, where the separate 5 GB of cached egress helps.
+- Your app writes to the database every few minutes around the clock, like a home sensor or IoT logger, so it needs compute all month.
+- Your site serves a lot of public images or downloads, and the separate 5 GB of cached egress covers more of that traffic.
+- Your functions are small and should run close to users around the world, like redirects or link previews.
 
 ### Recommendations by use case
 
-- **For vibe coding and prototypes:** Neon, for 100 projects that scale to zero and never need a manual resume.
-- **For a portfolio of side projects:** Neon, because every project gets its own compute, storage, egress, and Functions allowance.
-- **For AI agents:** Neon, for copy-on-write branches of the whole backend and a 6-hour restore window.
-- **For apps with file uploads:** Neon, for 5 GB of Object Storage per project and files up to 5 GiB.
-- **For one app you already run on Supabase and use every week:** Supabase, since the Free plan covers one or two active projects.
+- **For vibe coding and quick prototypes:** Neon, since each experiment can have its own project, and idle ones wake on the next request instead of waiting for a manual resume.
+- **For several side projects at once:** Neon, since each new project brings its own compute, storage, egress, and Functions allowance instead of sharing one.
+- **For coding agents that change your database:** Neon, since an agent can work on its own branch of the whole backend, and you can restore production to any point in the last 6 hours.
+- **For apps where users upload files:** Neon, since each project gets 5 GB of file storage and accepts single files up to 5 GiB.
+- **For apps that need the database running around the clock:** Supabase, since the Free instance keeps running all month without an hour limit.
+- **For media-heavy public sites:** Supabase, since files served from the CDN cache use a separate 5 GB allowance.
+- **For apps with users around the world:** Supabase, since Edge Functions run in the location closest to each user.
 
 ## Frequently asked questions
 
@@ -281,7 +285,7 @@ No. Neon scales an idle compute to zero after 5 minutes and wakes it automatical
 
 <FaqItem question="How many free projects can I create on Neon and Supabase?">
 
-Neon Free includes 100 projects. Supabase Free allows 2 active projects per user, across every organization where you're an Owner or Administrator. Paused Supabase projects don't count toward the limit.
+Neon Free includes 100 projects. Supabase Free allows only 2 active projects per user, across every organization where you're an Owner or Administrator. Paused Supabase projects don't count toward the limit.
 
 </FaqItem>
 
@@ -293,7 +297,7 @@ Neon. Each Neon Free project includes 1 GB of Postgres storage, up to 20 GB acro
 
 <FaqItem question="Do the free plans include backups?">
 
-Neon Free lets you restore a branch to any point in the last 6 hours and keep 1 manual snapshot. Supabase Free doesn't include backups or point-in-time recovery, and Supabase recommends exporting Free projects regularly with the Supabase CLI.
+Neon Free lets you restore your production branch to any point in the last 6 hours and keep 1 manual snapshot. Supabase Free doesn't include backups or point-in-time recovery, and Supabase recommends exporting Free projects regularly with the Supabase CLI.
 
 </FaqItem>
 
@@ -311,7 +315,7 @@ On Neon, egress is per project: each project gets 5 GB a month, shared by Postgr
 
 <FaqItem question="Which free plan is better for AI agents?">
 
-Neon. An agent can create a copy-on-write branch of the whole backend for each experiment, restore a branch to any point in the last 6 hours, and spread its work across up to 100 projects. Neon Functions can also run for up to 15 minutes before responding, which leaves room for agents that chain several model calls.
+Neon. An agent can create a copy-on-write branch of the whole backend for each experiment, restore the production branch to any point in the last 6 hours, and spread its work across up to 100 projects. Neon Functions can also run for up to 15 minutes before responding, which leaves room for agents that chain several model calls.
 
 </FaqItem>
 
