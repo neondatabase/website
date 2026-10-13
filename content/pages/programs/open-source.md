@@ -1,6 +1,6 @@
 ---
 title: 'Neon Open Source Program'
-subtitle: Neon commits at least $200,000 a year to cash sponsorships for open source maintainers, paid monthly through GitHub Sponsors.
+subtitle: Neon commits a minimum of $200,000 a year to cash sponsorships for open source maintainers, paid monthly through GitHub Sponsors.
 enableTableOfContents: true
 updatedOn: '2026-10-13T19:00:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
@@ -8,7 +8,7 @@ image: '/images/social-previews/programs/open-source.jpg'
 
 <ProgramForm type="openSource" />
 
-Developers build on open source that a small number of maintainers keep running. Neon commits at least $200,000 a year to sponsoring those maintainers in cash. Each sponsored project receives a monthly amount from that pool through GitHub Sponsors. In return, your project shows the Neon logo, labeled as a sponsorship, in one place you choose.
+Developers build on open source that a small number of maintainers keep running. Neon commits a minimum of $200,000 a year to sponsoring those maintainers in cash. Each sponsored project receives a monthly amount from that pool through GitHub Sponsors. In return, your project shows the Neon logo, labeled as a sponsorship, in one place you choose.
 
 Your project doesn't need to use Neon or Postgres to apply.
 
