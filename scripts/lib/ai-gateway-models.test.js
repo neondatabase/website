@@ -59,7 +59,37 @@ const EMBEDDING = {
   features: { open_weights: true, chat: false, embeddings: true },
 };
 
+// A System One judge: takes a state and questions, returns scored answers, generates no text.
+const JUDGE = {
+  id: 'judge-4b',
+  owned_by: 'alibaba',
+  name: 'Judge 4B',
+  family: 'judge',
+  model_type: 'language',
+  dialects: ['systemone'],
+  release_date: '2026-09-01',
+  architecture: { input_modalities: ['text'], output_modalities: ['text'] },
+  pricing: { prompt: '0.0000001', completion: '0' },
+  supported_parameters: [],
+  features: { open_weights: true },
+};
+
 describe('toCatalogEntry', () => {
+  it('maps a System One judge to an input-only entry without chat fields', () => {
+    expect(toCatalogEntry(JUDGE)).toEqual({
+      id: 'judge-4b',
+      name: 'Judge 4B',
+      provider: 'alibaba',
+      family: 'judge',
+      released: true,
+      type: 'judge',
+      open_weights: true,
+      release_date: '2026-09-01',
+      last_updated: '2026-09-01',
+      cost: { input: 0.1 },
+    });
+  });
+
   it('maps a listing item to a data.json entry', () => {
     expect(toCatalogEntry(GPT)).toEqual({
       id: 'gpt-5-4',

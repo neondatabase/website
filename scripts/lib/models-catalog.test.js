@@ -45,6 +45,20 @@ const embeddingModel = (over = {}) => ({
   ...over,
 });
 
+const judgeModel = (over = {}) => ({
+  id: 'a',
+  name: 'A',
+  provider: 'alibaba',
+  family: 'judge',
+  released: true,
+  type: 'judge',
+  open_weights: true,
+  release_date: '2026-01-01',
+  last_updated: '2026-01-01',
+  cost: { input: 0.1 },
+  ...over,
+});
+
 describe('classifyDrift', () => {
   it('reports no drift when the mirror matches', () => {
     const both = { a: model() };
@@ -492,6 +506,25 @@ describe('validateCatalog', () => {
       ]);
       expect(validateCatalog(catalog({ a: embeddingModel({ cost: { output: 0 } }) }))).toEqual([
         expect.stringContaining('needs an input rate'),
+      ]);
+    });
+  });
+
+  describe('type: "judge"', () => {
+    it('accepts a judge with input-only cost and no chat fields, limits or dimensions', () => {
+      expect(validateCatalog(catalog({ a: judgeModel() }))).toEqual([]);
+    });
+
+    it('still rejects an empty cost block', () => {
+      expect(validateCatalog(catalog({ a: judgeModel({ cost: {} }) }))).toEqual([
+        expect.stringContaining('needs an input rate'),
+      ]);
+    });
+
+    it('requires the identifying fields', () => {
+      const { open_weights: _openWeights, ...without } = judgeModel();
+      expect(validateCatalog(catalog({ a: without }))).toEqual([
+        expect.stringContaining('a.open_weights is missing'),
       ]);
     });
   });
