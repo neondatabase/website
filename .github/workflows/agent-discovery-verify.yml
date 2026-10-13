@@ -51,6 +51,10 @@ jobs:
     runs-on:
       group: neondatabase-protected-runner-group
       labels: linux-ubuntu-latest
+    env:
+      # Production builds refresh the catalog from the gateway, so the live models.dev
+      # comparison reads what is deployed rather than the committed fallback.
+      NEON_MODELS_URL: https://neon.com/models.json
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
@@ -121,8 +125,6 @@ jobs:
         if: always() && github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Production builds refresh the catalog from the gateway, so compare what is deployed.
-          NEON_MODELS_URL: https://neon.com/models.json
         shell: bash
         run: |
           set -o pipefail
