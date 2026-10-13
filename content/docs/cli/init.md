@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-09-26T07:10:22.076Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -101,6 +101,8 @@ neon init -y --skill neon --mcp-auth oauth --mcp-config-location project
 
 Authenticate without a browser by setting `NEON_API_KEY` or passing `--api-key`. Agents can find the IDs with `neon orgs list --output json` and `neon projects list --org-id <org-id> --output json`. To control `neon.ts` in the same run, add `--config`, `--no-config`, or `--services`.
 
+When `-y` can't authenticate, it finishes every step it can and lists what's left under `Next`. With no credential at all, it skips the environment pull. If you also pass `--org-id`, `--project-id`, and `--branch`, it writes `.neon` without contacting Neon (like [`neon link --no-checks`](/docs/cli/link)), and Neon checks those IDs on the first command that reaches it. With fewer IDs, it skips linking and prints the `neon login` and `neon link` commands to run. A project-scoped or organization API key can link and pull, but it can't mint the API key the Neon MCP server uses. In that case, `init` configures MCP with OAuth instead. If you asked for `--mcp-auth api-key`, it skips MCP, finishes the other steps, and exits with an error that names the retry command.
+
 ## What gets created
 
 The files created depend on the flags you pass. Each one is written by the command `init` runs, so see that command's page for details.
@@ -123,12 +125,14 @@ npx neon@latest init
 Choose your agent setup, then pick a project to link. Linking writes the context and pulls your environment variables:
 
 ```text
-Linked /path/to/your/app/.neon:
-  orgId:     org-example-12345678
-  projectId: polished-snowflake-12345678
-  branch:    main
+Linked .neon
+  Project         my-app (polished-snowflake-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-Pulled 3 Neon variables into /path/to/your/app/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ```
 
 After setup, restart your editor and ask your assistant to "Get started with Neon." The installed [Neon MCP server](/docs/ai/neon-mcp-server) points your assistant to the right docs, so it can connect to your database and use Neon features as you build.
@@ -144,22 +148,23 @@ neon init -y --claimable --agent cursor
 
 ```text
 Installing the Neon plugin...
-INFO: Installing the Neon plugin for Cursor (1/1)...
+Installing the Neon plugin for Cursor (1/1)...
 Plugins
 Scope    Plugin         Agent   Status
 project  neon-postgres  cursor  installed
-INFO: Installed the Neon plugin (project).
+Installed the Neon plugin (project).
 Creating a claimable project...
-Project Id            sweet-breeze-12345678
-Branch Id             br-restless-wildflower-a1b2c3d4
+Project ID            sweet-breeze-12345678
+Branch ID             br-restless-wildflower-a1b2c3d4
 State                 unclaimed
 Project Expires At    2026-09-29T01:51:07.360Z
 Granted Capabilities  postgres
 Creating neon.ts...
 Installing Neon dependencies with npm...
 Pulling Neon environment variables...
-INFO: → Pulling env from branch main (br-restless-wildflower-a1b2c3d4)
-INFO: Pulled 3 Neon variables into /path/to/your/app/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+Pulled 3 Neon variables into .env.local from branch main (br-restless-wildflower-a1b2c3d4)
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 
 Neon setup complete.
 --------------------

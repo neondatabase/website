@@ -91,9 +91,9 @@ async function main() {
   const catalogIds = new Set(Object.keys(catalogModels));
   const restIds = new Set(restModels.keys());
 
-  // /models lists what the gateway serves; /models.json lists the published catalog. The published
-  // catalog is allowed to be a superset — a model can be catalogued before it is enabled — but a
-  // model the gateway serves and the catalog has never heard of is a real problem.
+  // /models lists what the gateway serves; /models.json lists the published catalog. The committed
+  // catalog is allowed to be a superset (the build-time refresh then drops ids the gateway does not
+  // list), but a model the gateway serves and the catalog has never heard of is a real problem.
   const servedButUncatalogued = [...restIds].filter((id) => !catalogIds.has(id));
   const cataloguedButUnserved = [...catalogIds].filter((id) => !restIds.has(id));
 
@@ -150,7 +150,9 @@ async function main() {
 
   if (!inSync) {
     console.error(
-      '\nEdit src/app/models.json/data.json, then re-probe capabilities if the model set changed.'
+      '\nFix the model in the gateway (production builds refresh src/app/models.json/data.json from' +
+        ' it; run scripts/update-models-from-ai-gateway.mjs to refresh locally), then re-probe' +
+        ' capabilities if the model set changed.'
     );
     process.exit(1);
   }

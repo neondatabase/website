@@ -63,6 +63,10 @@ const META = {
     examples: ['neon claim create --env-pull', 'neon claim accept'],
   },
   completion: { desc: 'Generate a shell completion script.' },
+  feedback: {
+    desc: 'Send feedback about the CLI to the Neon team; no login required.',
+    examples: ['neon feedback --message "The branch docs were unclear"'],
+  },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {
     desc: 'Create, diff, reset, restore, and manage branches.',
@@ -125,6 +129,14 @@ const META = {
   'neon-auth': {
     desc: 'Manage Neon Auth on a branch.',
     examples: ['neon neon-auth enable'],
+  },
+  realtime: {
+    desc: 'Enable or disable Neon Realtime on a branch.',
+    examples: ['neon realtime enable --allowed-origin https://app.example.com'],
+  },
+  subscribe: {
+    desc: 'Stream a live SQL query with Neon Realtime.',
+    examples: ['neon subscribe "SELECT * FROM items"'],
   },
   orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
   'ip-allow': {

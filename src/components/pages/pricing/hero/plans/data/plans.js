@@ -45,7 +45,7 @@ export default [
           },
           {
             title: 'Functions',
-            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
           },
         ],
       },

@@ -3,19 +3,19 @@ title: Use Neon with Deno Deploy
 subtitle: Connect a Lakebase Postgres database to your Deno Deploy application
 summary: >-
   Guide to connecting a Lakebase Postgres database to a Deno application using the
-  Neon serverless driver (@neon/serverless on JSR) for both local Deno Runtime
+  Neon serverless driver (@neondatabase/serverless from npm) for both local Deno Runtime
   and production edge deployment on Deno Deploy via deployctl. Use this page
   when building a TypeScript or JavaScript app on Deno's serverless platform
   and need to query Postgres over HTTP without a persistent connection. Covers
   DATABASE_URL setup, the deployctl deploy command, and optional GitHub
   integration for automated deployments.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-01T18:19:15.279Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
 
-This guide demonstrates how to connect to a Lakebase Postgres database from a simple Deno application using the Neon serverless driver on JSR.
+This guide demonstrates how to connect to a Lakebase Postgres database from a simple Deno application using the Neon serverless driver from npm. Deno installs the npm package directly, so no JSR package is required.
 
 The guide covers two deployment options:
 
@@ -51,17 +51,14 @@ Follow the [Install Deno and deployctl](https://docs.deno.com/deploy/manual/#ins
 
 ### Set up the Neon serverless driver
 
-First, install the Neon serverless driver using the `deno add` command:
+First, install the Neon serverless driver from npm using the `deno add` command:
 
 ```bash
-deno add jsr:@neon/serverless
+deno add npm:@neondatabase/serverless
 ```
 
 <Admonition type="note">
-   You can also use npm to install the Neon serverless driver
-   ```bash
-   npx jsr add @neon/serverless
-  ```
+The JSR publication of the driver (`@neon/serverless`) is deprecated. Install the npm package (`@neondatabase/serverless`) instead, as shown above.
 </Admonition>
 
 This will create or update your `deno.json` file with the necessary dependency:
@@ -69,7 +66,7 @@ This will create or update your `deno.json` file with the necessary dependency:
 ```json
 {
   "imports": {
-    "@neon/serverless": "jsr:@neon/serverless@^0.10.1"
+    "@neondatabase/serverless": "npm:@neondatabase/serverless@^1.2.0"
   }
 }
 ```
@@ -81,7 +78,7 @@ Next, create the `server.ts` script on your local machine.
 ```ts
 // server.ts
 
-import { neon } from '@neon/serverless';
+import { neon } from '@neondatabase/serverless';
 
 const databaseUrl = Deno.env.get('DATABASE_URL')!;
 const sql = neon(databaseUrl);
@@ -272,7 +269,7 @@ To delete your Neon project, refer to [Delete a project](/docs/manage/projects#d
 - [Deno Deploy](https://deno.com/deploy)
 - [Deno Runtime Quickstart](https://docs.deno.com/runtime/manual)
 - [Deno Deploy Quickstart](https://docs.deno.com/deploy/manual/)
-- [Neon Serverless Driver](https://jsr.io/@neon/serverless)
-- [JSR](https://jsr.io/)
+- [Neon serverless driver](https://github.com/neondatabase/serverless)
+- [Neon serverless driver on npm](https://www.npmjs.com/package/@neondatabase/serverless)
 
 <NeedHelp/>

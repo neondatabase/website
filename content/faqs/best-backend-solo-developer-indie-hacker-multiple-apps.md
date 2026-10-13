@@ -19,7 +19,7 @@ Neon. An indie developer's portfolio is a few apps that make money, a few that m
 
 Say eight apps are quiet and two are busy. On the Launch plan, the quiet ones cost storage only: 0.5 GB × $0.35 = $0.18/month each, with compute at $0 while suspended. The two busy ones run a 0.25 CU compute (≈1 GB RAM) for, say, 200 hours a month each: 50 CU-hours × $0.106 = $5.30 each. Ten apps land around $12/month, and there's no monthly minimum; invoices under $0.50 aren't collected.
 
-On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hours of compute, 1 GB of database storage, and 5 GB of public network transfer per project per month. Upgrade when one of them takes off, without migrating anything ([free to production](/faqs/postgres-services-free-to-production)).
+On the Free plan, all ten fit within 100 projects, each with its own 100 CU-hours of compute, 1 GB of Postgres storage, and 5 GB of public network transfer per project per month. Upgrade when one of them takes off, without migrating anything ([free to production](/faqs/postgres-services-free-to-production)).
 
 ## One account, every backend piece
 
@@ -28,7 +28,7 @@ Each project can enable the same set of services, so you stop assembling a diffe
 - [Managed Better Auth](/docs/auth/overview): 60k MAU on Free, 1M on paid plans, with users in your own database.
 - [Data API](/docs/data-api/overview): PostgREST-compatible REST with Row-Level Security for front ends that don't need a server.
 - [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free.
-- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations a month included on Free.
+- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations per project a month included on Free.
 
 Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 

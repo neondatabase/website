@@ -4,29 +4,28 @@ enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
 summary: >-
   The Neon serverless driver (`@neondatabase/serverless`) is a JavaScript
-  and TypeScript Postgres driver that replaces TCP with HTTP or WebSockets,
-  enabling Postgres queries from serverless and edge runtimes such as Vercel
-  Edge Functions and Cloudflare Workers. Use the `neon()` function over HTTP
-  for single or non-interactive batched queries, or the `Pool`/`Client`
-  constructors over WebSockets when sessions, interactive transactions, or
-  node-postgres drop-in compatibility are required. TypeScript types are
-  bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-09-16T19:45:35.340Z'
+  and TypeScript Postgres driver that queries Neon over HTTP or WebSockets
+  instead of TCP, so it works in serverless and edge runtimes. Use the
+  `neon()` function over HTTP by default, for single queries and
+  non-interactive transactions. Use `Pool` or `Client` over WebSockets only
+  for interactive transactions, sessions, or node-postgres (`pg`)
+  compatibility. Includes a runnable quick start, how to load `DATABASE_URL`,
+  and troubleshooting for common errors. Optional settings are on the Neon
+  serverless driver configuration page. Install with
+  `npm install @neondatabase/serverless`; TypeScript types are bundled.
+updatedOn: '2026-10-05T14:13:05.152Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
-description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
+description= "Pre-built prompt for setting up the Neon serverless driver (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
-<Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
-The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](/blog/serverless-driver-ga).
-</Admonition>
+Use the driver over **HTTP** by default. The `neon()` function sends each query as an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request, which is the fastest option for single queries and for [multiple queries in one non-interactive transaction](#issue-multiple-queries-with-the-transaction-function). See [Use the driver over HTTP](#use-the-driver-over-http).
 
-When to query over HTTP vs WebSockets:
+Switch to **WebSockets**, with the `Pool` or `Client` constructors, only if you need interactive transactions, sessions, or compatibility with [node-postgres](https://node-postgres.com/) (the `pg` package). See [Use the driver over WebSockets](#use-the-driver-over-websockets).
 
-- **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
-- **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
+The driver works with its defaults. For optional settings such as result formats, `fetch` timeouts, connection parameters, and transaction options, see [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration).
 
 <AgentSkillsTip skill_topic="the Neon Serverless Driver, general connection advice," />
 
@@ -38,10 +37,18 @@ You can install the driver with your preferred JavaScript package manager. For e
 npm install @neondatabase/serverless
 ```
 
-The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required.
+The driver includes TypeScript types (the equivalent of `@types/pg`). No additional installation is required. In Node.js, the driver requires version 19 or later.
 
-<Admonition type="note">
-The Neon serverless driver is also available as a [JavaScript Registry (JSR)](https://jsr.io/docs/introduction) package: [https://jsr.io/@neon/serverless](https://jsr.io/@neon/serverless). The JavaScript Registry (JSR) is a package registry for JavaScript and TypeScript. JSR works with many runtimes (Node.js, Deno, browsers, and more) and is backward compatible with `npm`.
+<Admonition type="important" title="Install from npm, not JSR">
+The driver is no longer published to the [JavaScript Registry (JSR)](https://jsr.io/@neon/serverless). The JSR package, `@neon/serverless`, stays at version 1.0.1 and won't get new releases. This only affects JSR: the driver itself is actively maintained on npm as `@neondatabase/serverless`.
+
+If you installed the JSR package (for example, with `deno add jsr:@neon/serverless`), switch to the npm package:
+
+```shell
+deno add npm:@neondatabase/serverless
+```
+
+Then change your imports from `@neon/serverless` to `@neondatabase/serverless`.
 </Admonition>
 
 ## Configure your Neon database connection
@@ -52,7 +59,45 @@ You can obtain a connection string for your database by clicking the **Connect**
 DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
-The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file.
+The examples that follow assume that your database connection string is assigned to a `DATABASE_URL` variable in your application's environment file (for example, `.env`). Frameworks such as Next.js load `.env` automatically. For a plain Node.js script, load it with `node --env-file=.env index.js`, or add `import 'dotenv/config';` at the top of the script after installing the `dotenv` package. If `DATABASE_URL` isn't loaded, you'll see [this error](#wrong-url-scheme-or-missing-user-host-or-database).
+
+## Quick start
+
+This complete example creates a table, writes rows over HTTP, and reads them back over WebSockets. Save it as `index.js` in a project with `"type": "module"` in its `package.json`, then run it with `node --env-file=.env index.js`.
+
+```javascript filename="index.js"
+import { neon, Pool } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+// HTTP: one-shot queries
+await sql`CREATE TABLE IF NOT EXISTS posts (id serial PRIMARY KEY, title text NOT NULL)`;
+await sql`INSERT INTO posts (title) VALUES (${'First post'})`;
+
+// HTTP: multiple queries in one non-interactive transaction
+await sql.transaction([
+  sql`INSERT INTO posts (title) VALUES (${'Second post'})`,
+  sql`INSERT INTO posts (title) VALUES (${'Third post'})`,
+]);
+
+// WebSockets: a node-postgres-compatible Pool (Node.js 22 and later have a built-in WebSocket)
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const { rows } = await pool.query('SELECT * FROM posts ORDER BY id');
+console.log(rows);
+await pool.end();
+```
+
+On the first run, the output is:
+
+```text
+[
+  { id: 1, title: 'First post' },
+  { id: 2, title: 'Second post' },
+  { id: 3, title: 'Third post' }
+]
+```
+
+The sections that follow explain each part in more detail.
 
 ## Use the driver over HTTP
 
@@ -64,89 +109,92 @@ For example:
 import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 const id = 1;
+const useArchive = false;
 
 // Safe and convenient template function usage
-const result = await sql`SELECT * FROM table WHERE id = ${id}`;
+const rows = await sql`SELECT * FROM posts WHERE id = ${id}`;
 
 // For manually parameterized queries, use the query() function
-const result = await sql.query('SELECT * FROM table WHERE id = $1', [id]);
+const queryRows = await sql.query('SELECT * FROM posts WHERE id = $1', [id]);
 
 // For interpolating trusted strings (like column or table names), use the unsafe() function
-const table = condition ? 'table1' : 'table2'; // known-safe string values
-const result = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${id}`;
+const tableName = useArchive ? 'archived_posts' : 'posts'; // known-safe string values
+const unsafeRows = await sql`SELECT * FROM ${sql.unsafe(tableName)} WHERE id = ${id}`;
 
 // Alternatively, use template literals for known-safe values
-const table = condition ? sql`table1` : sql`table2`;
-const result = await sql`SELECT * FROM ${table} WHERE id = ${id}`;
+const table = useArchive ? sql`archived_posts` : sql`posts`;
+const templateRows = await sql`SELECT * FROM ${table} WHERE id = ${id}`;
 ```
 
 SQL template queries are fully composable, including those with parameters:
 
 ```javascript
-const name = 'Olivia';
+const title = 'My post';
 const limit = 1;
-const whereClause = sql`WHERE name = ${name}`;
+const whereClause = sql`WHERE title = ${title}`;
 const limitClause = sql`LIMIT ${limit}`;
 
 // Parameters are numbered appropriately at query time
-const result = await sql`SELECT * FROM table ${whereClause} ${limitClause}`;
+const rows = await sql`SELECT * FROM posts ${whereClause} ${limitClause}`;
 ```
 
 You can use raw SQL queries or tools such as [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon), [kysely](https://github.com/kysely-org/kysely), [Zapatos](https://jawj.github.io/zapatos/), and others for type safety.
 
-<CodeTabs labels={["Node.js", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Drizzle-ORM", "Next.js on Vercel", "Vercel Functions"]}>
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
+const postId = 12;
+
+await sql`INSERT INTO posts (id, title) VALUES (${postId}, ${'My post'})`;
 const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-// or using query() for parameterized queries
-const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-// `posts` is now [{ id: 12, title: 'My post', ... }] (or undefined)
+// or using query() for parameterized queries:
+// const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+// `posts` is now [{ id: 12, title: 'My post' }]
 ```
 
 ```typescript
+import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
-import { neon } from '@neondatabase/serverless';
-import { posts } from './schema';
 
-export default async () => {
-  const postId = 12;
-  const sql = neon(process.env.DATABASE_URL!);
-  const db = drizzle(sql);
-  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
-  return new Response(JSON.stringify({ post: onePost }));
-};
+// Schema (usually in its own file, such as schema.ts)
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+});
+
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle(sql);
+
+const postId = 12;
+const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
 ```
 
-```javascript
+```typescript
+// app/api/posts/route.ts (Next.js App Router route handler)
 import { neon } from '@neondatabase/serverless';
 
-export default async (req: Request) => {
-  const sql = neon(process.env.DATABASE_URL);
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
+  const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries
-  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  return new Response(JSON.stringify(posts));
+  return Response.json(posts);
 }
-
-export const config = {
-  runtime: 'edge',
-};
 ```
 
-```ts
+```typescript
+// api/posts.ts (Vercel Function, no framework)
 import { neon } from '@neondatabase/serverless';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(request: NextApiRequest, res: NextApiResponse) {
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
   const sql = neon(process.env.DATABASE_URL!);
   const posts = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // or using query() for parameterized queries
-  const posts = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  return res.status(200).json(posts);
+  return Response.json(posts);
 }
 ```
 
@@ -156,109 +204,7 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
 The maximum request size and response size for queries over HTTP is 64 MB.
 </Admonition>
 
-### neon function configuration options
-
-The `neon(...)` function returns a query function that can be used as a template function, with additional properties for special cases:
-
-```javascript
-import { neon } from '@neondatabase/serverless';
-const sql = neon(process.env.DATABASE_URL);
-
-// Use as a template function (recommended)
-const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-
-// Use query() for manually parameterized queries
-const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
-
-// Use unsafe() for trusted string interpolation
-const table = 'posts'; // trusted value
-const rows = await sql`SELECT * FROM ${sql.unsafe(table)} WHERE id = ${postId}`;
-```
-
-By default, the query function returns only the rows resulting from the provided SQL query, and it returns them as an array of objects where the keys are column names. For example:
-
-```javascript
-const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-// -> [{ id: 12, title: "My post", ... }]
-```
-
-You can customize the return format using the configuration options `fullResults` and `arrayMode`. These options are available both on the `neon(...)` function and on the query function it returns.
-
-- `arrayMode: boolean`, `false` by default
-
-  The default `arrayMode` value is `false`. When it is true, rows are returned as an array of arrays instead of an array of objects:
-
-  ```javascript
-  const sql = neon(process.env.DATABASE_URL, { arrayMode: true });
-  const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  // -> [[12, "My post", ...]]
-  ```
-
-  Or, with the same effect when using query():
-
-  ```javascript
-  const sql = neon(process.env.DATABASE_URL);
-  const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], { arrayMode: true });
-  // -> [[12, "My post", ...]]
-  ```
-
-- `fullResults: boolean`
-
-  The default `fullResults` value is `false`. When it is `true`, additional metadata is returned alongside the result rows, which are then found in the `rows` property of the return value. The metadata matches what would be returned by `node-postgres`:
-
-  ```javascript
-  const sql = neon(process.env.DATABASE_URL, { fullResults: true });
-  const results = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  /* -> {
-    rows: [{ id: 12, title: "My post", ... }],
-    fields: [
-      { name: "id", dataTypeID: 23, ... },
-      { name: "title", dataTypeID: 25, ... },
-      ...
-    ],
-    rowCount: 1,
-    rowAsArray: false,
-    command: "SELECT"
-  }
-  */
-  ```
-
-  Or, with the same effect when using query():
-
-  ```javascript
-  const sql = neon(process.env.DATABASE_URL);
-  const results = await sql.query('SELECT * FROM posts WHERE id = $1', [postId], {
-    fullResults: true,
-  });
-  // -> { ... same as above ... }
-  ```
-
-- `fetchOptions: Record<string, any>`
-
-  The `fetchOptions` option can also be passed to either `neon(...)` or the `query` function. This option takes an object that is merged with the options to the `fetch` call.
-
-  For example, to increase the priority of every database `fetch` request:
-
-  ```javascript
-  import { neon } from '@neondatabase/serverless';
-  const sql = neon(process.env.DATABASE_URL, { fetchOptions: { priority: 'high' } });
-  const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
-  ```
-
-  Or to implement a `fetch` timeout:
-
-  ```javascript
-  import { neon } from '@neondatabase/serverless';
-  const sql = neon(process.env.DATABASE_URL);
-  const abortController = new AbortController();
-  const timeout = setTimeout(() => abortController.abort('timed out'), 10000);
-  const rows = await sql('SELECT * FROM posts WHERE id = $1', [postId], {
-    fetchOptions: { signal: abortController.signal },
-  }); // throws an error if no result received within 10s
-  clearTimeout(timeout);
-  ```
-
-For additional details, see [Options and configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#options-and-configuration).
+To change the result format, set `fetch` options such as a timeout, or pass individual connection parameters, see [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration).
 
 ### Issue multiple queries with the transaction() function
 
@@ -291,67 +237,7 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 ]);
 ```
 
-The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationLevel`, `readOnly` and `deferrable`.
-
-Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
-
-- `isolationLevel`
-
-  This option selects a Postgres [transaction isolation mode](https://www.postgresql.org/docs/current/transaction-iso.html). If present, it must be one of `ReadUncommitted`, `ReadCommitted`, `RepeatableRead`, or `Serializable`.
-
-- `readOnly`
-
-  If `true`, this option ensures that a `READ ONLY` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
-
-- `deferrable`
-
-  If `true` (and if `readOnly` is also `true`, and `isolationLevel` is `Serializable`), this option ensures that a `DEFERRABLE` transaction is used to execute the queries passed. This is a boolean option. The default value is `false`.
-
-For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
-
-### Using transactions with JWT self-verification
-
-When using Row-Level Security (RLS) to secure backend SQL with the Neon serverless driver, you may need to set JWT claims within a transaction context. Use this for custom JWT verification flows in backend APIs, where you want to ensure user-specific access to rows according to RLS policies.
-
-Here's an example of how to use the `transaction()` function with self-verified JWT claims:
-
-```javascript
-import { neon } from '@neondatabase/serverless';
-
-// Example JWT verification function, typically in a separate auth utilitiy file (implement according to your auth provider)
-async function verifyJWT(jwtToken, jwksURL) {
-  // Your JWT verification logic here
-  // This should return the decoded payload
-  return { payload: { sub: 'user123', email: 'user@example.com' } };
-}
-
-const sql = neon(process.env.DATABASE_URL);
-
-// Get JWT token from request headers or context
-const jwtToken = req.headers.authorization?.replace('Bearer ', '');
-const jwksURL = process.env.JWKS_URL; // Your JWKS endpoint
-
-// Verify the JWT and extract claims
-const { payload } = await verifyJWT(jwtToken, jwksURL);
-const claims = JSON.stringify(payload);
-
-// Use transaction to set JWT claims and query data
-const [, my_table] = await sql.transaction([
-  sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
-  sql`SELECT * FROM my_table`,
-]);
-```
-
-<Admonition type="important">
-When using JWT self-verification with RLS, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role in your connection string, as it bypasses Row-Level Security policies.
-</Admonition>
-
-This pattern allows you to:
-
-- Verify JWTs using your own authentication logic
-- Set the JWT claims in the database session context
-- Access JWT claims in your RLS policies
-- Execute multiple queries within a single transaction while maintaining the auth context
+To set the isolation level, read-only mode, or result format for a transaction, see [Transaction options](/docs/serverless/serverless-driver-configuration#transaction-options). To set JWT claims for Row-Level Security inside a transaction, see [Using transactions with JWT self-verification](/docs/serverless/serverless-driver-configuration#using-transactions-with-jwt-self-verification).
 
 ## Use the driver over WebSockets
 
@@ -367,106 +253,95 @@ Consider using the driver with `Pool` or `Client` in the following scenarios:
 
 You can use the Neon serverless driver in the same way you would use `node-postgres` with `Pool` and `Client`. Where you usually import `pg`, import `@neondatabase/serverless` instead.
 
-<CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Vercel Edge Function", "Vercel Serverless Function"]}>
+<CodeTabs labels={["Node.js", "Prisma", "Drizzle-ORM", "Next.js on Vercel", "Vercel Functions"]}>
 
 ```javascript
 import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const posts = await pool.query('SELECT * FROM posts WHERE id =$1', [postId]);
-pool.end();
+const postId = 12;
+const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+await pool.end();
 ```
 
 ```typescript
-import { Pool, neonConfig } from '@neondatabase/serverless';
+// Prisma ORM 7, with the default `prisma-client` generator (output = "../generated/prisma")
+// and a `Post` model in prisma/schema.prisma
+import 'dotenv/config';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import dotenv from 'dotenv';
-import ws from 'ws';
+import { PrismaClient } from './generated/prisma/client';
 
-dotenv.config();
-neonConfig.webSocketConstructor = ws;
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-async function main() {
-  const posts = await prisma.post.findMany();
-}
-
-main();
+const posts = await prisma.post.findMany();
 ```
 
 ```typescript
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { eq } from 'drizzle-orm';
 import { Pool } from '@neondatabase/serverless';
-import { posts } from './schema';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { eq } from 'drizzle-orm';
 
-export default async () => {
-  const postId = 12;
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  const db = drizzle(pool);
-  const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+// Schema (usually in its own file, such as schema.ts)
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+});
 
-  ctx.waitUntil(pool.end());
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle(pool);
 
-  return new Response(JSON.stringify({ post: onePost }));
-};
+const postId = 12;
+const [onePost] = await db.select().from(posts).where(eq(posts.id, postId));
+await pool.end();
 ```
 
-```javascript
+```typescript
+// app/api/posts/route.ts (Next.js App Router route handler)
 import { Pool } from '@neondatabase/serverless';
+import { after } from 'next/server';
 
-export default async (req: Request, ctx: any) => {
-  const postId = new URL(req.url).searchParams.get('id');
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
   if (!postId) return new Response('Missing id', { status: 400 });
 
-  const pool = new Pool({connectionString: process.env.DATABASE_URL});
-  await pool.connect();
+  // Create, use, and close the pool inside the request handler
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  after(() => pool.end());
 
-  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
-  const post = posts.rows[0];
-
-  ctx.waitUntil(pool.end());
-
-  if (!post) return new Response('Not found', { status: 404 });
-  return new Response(JSON.stringify(post), {
-    headers: { 'content-type': 'application/json' }
-  });
+  if (!rows[0]) return new Response('Not found', { status: 404 });
+  return Response.json(rows[0]);
 }
-
-export const config = {
-  runtime: 'edge',
-};
 ```
 
-```ts
+```typescript
+// api/posts.ts (Vercel Function, no framework)
 import { Pool } from '@neondatabase/serverless';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { waitUntil } from '@vercel/functions';
 
-export default async function handler(request: NextApiRequest, res: NextApiResponse) {
-  const postId = Array.isArray(request.query.id) ? request.query.id[0] : request.query.id;
-  if (!postId) return res.status(400).send('Missing id');
+export async function GET(request: Request) {
+  const postId = new URL(request.url).searchParams.get('id');
+  if (!postId) return new Response('Missing id', { status: 400 });
 
+  // Create, use, and close the pool inside the request handler
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  const posts = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  const { rows } = await pool.query('SELECT * FROM posts WHERE id = $1', [postId]);
+  waitUntil(pool.end());
 
-  await pool.end();
-
-  const post = posts.rows[0];
-  if (!post) return res.status(404).send('Not found');
-  return res.status(200).json(post);
+  if (!rows[0]) return new Response('Not found', { status: 404 });
+  return Response.json(rows[0]);
 }
 ```
 
 </CodeTabs>
 
+For a complete Prisma setup, including `schema.prisma`, `prisma.config.ts`, and generating the client, see [Connect from Prisma to Neon](/docs/guides/prisma).
+
 ### Pool and Client usage notes
 
-- In Node.js and some other environments, there's no built-in WebSocket support. In these cases, supply a WebSocket constructor function.
+- Node.js 21 and earlier, and some other environments, have no built-in WebSocket support. In these cases, supply a WebSocket constructor function, such as the one from the [ws](https://www.npmjs.com/package/ws) package. Node.js 22 and later include a built-in `WebSocket`, so this step is optional.
 
   ```javascript
   import { Pool, neonConfig } from '@neondatabase/serverless';
@@ -474,13 +349,23 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
   neonConfig.webSocketConstructor = ws;
   ```
 
-- In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
+- In edge runtimes such as Cloudflare Workers and the Vercel Edge runtime, WebSocket connections can't outlive a single request. That means `Pool` or `Client` objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them.
 
 For examples that demonstrate these points, see [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client).
 
 ### Advanced configuration options
 
-For advanced configuration options, see [neonConfig configuration](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#neonconfig-configuration), in the Neon serverless driver GitHub readme.
+For `Pool` and `Client` settings such as a custom WebSocket constructor, pipelining, and proxy options, see [neonConfig options](/docs/serverless/serverless-driver-configuration#neonconfig-options).
+
+## Configuration options
+
+The driver works with its defaults, so these options are optional. They're documented on the [Neon serverless driver configuration](/docs/serverless/serverless-driver-configuration) page:
+
+- [Query result and fetch options](/docs/serverless/serverless-driver-configuration#query-result-and-fetch-options): return rows as arrays or with full metadata, and pass `fetch` options such as a timeout
+- [Connection parameters](/docs/serverless/serverless-driver-configuration#connection-parameters): pass the user, password, host, or database individually, including as functions for short-lived credentials
+- [Transaction options](/docs/serverless/serverless-driver-configuration#transaction-options): set the isolation level, read-only mode, and deferrable mode
+- [Using transactions with JWT self-verification](/docs/serverless/serverless-driver-configuration#using-transactions-with-jwt-self-verification): set JWT claims for Row-Level Security inside a transaction
+- [neonConfig options](/docs/serverless/serverless-driver-configuration#neonconfig-options): configure `Pool` and `Client` WebSocket connections
 
 ## Developing locally with the Neon serverless driver
 
@@ -499,6 +384,7 @@ import { neon } from '@neondatabase/serverless';
 import retry from 'async-retry';
 
 const sql = neon(process.env.DATABASE_URL);
+const userId = 1;
 
 const result = await retry(
   async () => {
@@ -513,35 +399,67 @@ const result = await retry(
 );
 ```
 
-## Example applications
+## Troubleshooting
 
-Explore the example applications that use the Neon serverless driver.
+### This function can now be called only as a tagged-template function
 
-### UNESCO World Heritage sites app
+```text
+This function can now be called only as a tagged-template function: sql`SELECT ${value}`, not sql("SELECT $1", [value], options). For a conventional function call with value placeholders ($1, $2, etc.), use sql.query("SELECT $1", [value], options).
+```
 
-Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
+Since version 1.0.0, the query function returned by `neon()` only works as a tagged template, which protects against SQL injection. Code written for earlier versions that calls it as a conventional function, such as `sql('SELECT * FROM posts WHERE id = $1', [postId])`, throws this error. Use a tagged template or `sql.query()` instead:
 
-![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
+```javascript
+const rows = await sql`SELECT * FROM posts WHERE id = ${postId}`;
+// or
+const rows = await sql.query('SELECT * FROM posts WHERE id = $1', [postId]);
+```
 
-There are different implementations of the application to choose from.
+For details, see the [1.0.0 release notes](https://github.com/neondatabase/serverless/blob/main/CHANGELOG.md#100-2025-03-25).
 
-<DetailIconCards>
-<a href="https://github.com/neondatabase/neon-vercel-rawsql" description="Demonstrates using raw SQL with Neon's serverless driver on Vercel Edge Functions" icon="github">Raw SQL + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-http" description="Demonstrates Neon's serverless driver over HTTP on Vercel Edge Functions" icon="github">Raw SQL via https + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/serverless-cfworker-demo" description="Demonstrates using the Neon serverless driver on Cloudflare Workers and employs caching for high performance." icon="github">Raw SQL + Cloudflare Workers</a>
-<a href="https://github.com/neondatabase/neon-vercel-kysely" description="Demonstrates using kysely and kysely-codegen with Neon's serverless driver on Vercel Edge Functions" icon="github">Kysely + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-zapatos" description="Demonstrates using Zapatos with Neon's serverless driver on Vercel Edge Functions" icon="github">Zapatos + Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-pgtyped" description="Demonstrates using pgTyped with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + pgTyped on Vercel Edge Functions</a>
-<a href="https://github.com/neondatabase/neon-vercel-knex" description="Demonstrates using Knex with Neon's serverless driver on Vercel Edge Functions" icon="github">Neon + Knex on Vercel Edge Functions</a>
-</DetailIconCards>
+### Wrong URL scheme or missing user, host or database
 
-### Ping Thing
+```text
+Wrong URL scheme or missing user, host or database in connection parameters
+```
 
-The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](/blog/how-to-use-postgres-at-the-edge)
+```text
+Database connection string provided to neon() is not a valid URL (connection string: )
+```
 
-<DetailIconCards>
-<a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>
-</DetailIconCards>
+The connection string passed to `neon()` is missing or malformed. This usually means the `DATABASE_URL` environment variable isn't set where your code runs, so `neon()` receives `undefined` or an empty string. Check that the variable is defined in that environment (for example, in your hosting platform's environment settings), and that its value is a full connection string that starts with `postgresql://`.
+
+### No database host or connection string was set
+
+```text
+No database host or connection string was set, and key parameters have default values (host: localhost, user: ..., db: ..., password: null). Is an environment variable missing?
+```
+
+This is the `Pool` and `Client` version of the previous error. The `connectionString` you passed is `undefined`, usually because `DATABASE_URL` isn't set in that environment.
+
+### All attempts to open a WebSocket to connect to the database failed
+
+```text
+All attempts to open a WebSocket to connect to the database failed. Please refer to https://github.com/neondatabase/serverless/blob/main/CONFIG.md#websocketconstructor-typeof-websocket--undefined.
+```
+
+`Pool` and `Client` connect over WebSockets, and your runtime has no built-in `WebSocket`. This happens in Node.js 21 and earlier. Upgrade to Node.js 22 or later, or supply a WebSocket constructor, as described in [Pool and Client usage notes](#pool-and-client-usage-notes). If you only need one-shot queries or non-interactive transactions, you can use the [HTTP](#use-the-driver-over-http) `neon()` function instead, which doesn't need WebSockets.
+
+### Security warning in the browser console
+
+```text
+WARNING: Running SQL directly from the browser can have security implications.
+```
+
+The driver prints this warning when it connects from a web browser, because running SQL from client-side code can expose your database to misuse. If you've assessed the risks (for example, you're prototyping, or your data is protected by [Row-Level Security](/docs/guides/row-level-security)), you can suppress the warning:
+
+```javascript
+// HTTP
+const sql = neon(process.env.DATABASE_URL, { disableWarningInBrowsers: true });
+
+// WebSockets
+neonConfig.disableWarningInBrowsers = true;
+```
 
 ## Neon serverless driver GitHub repository and changelog
 
@@ -555,7 +473,7 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
-- [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)
+- [Vercel Functions](https://vercel.com/docs/functions)
 - [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 - [Use Neon with Cloudflare Workers](/docs/guides/cloudflare-workers)
 

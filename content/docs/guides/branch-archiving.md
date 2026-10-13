@@ -10,7 +10,7 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 <InfoBlock>
@@ -119,11 +119,8 @@ The Neon CLI [branches list](/docs/cli/branches#list) command shows a branch's `
 
       ```bash
       neon branches list --project-id green-hat-46829796
-      ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
-      │ Id                        │ Name │ Default │ Current State │ Created At           │
-      ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
-      └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
+      Name            ID                       Current State  Expires At  Created At
+      [default] main  br-muddy-firefly-123456  ready          never       2026-10-30T14:59:57Z
       ```
 
 </TabItem>

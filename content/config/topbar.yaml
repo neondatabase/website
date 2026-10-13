@@ -1,4 +1,4 @@
-text: "Skydive's agents deploy their own Neon backends in 0.7 seconds. Read the story"
+text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
 link:
-  url: 'https://neon.com/blog/inside-skydive-building-virtual-coworkers-powered-by-neon'
+  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
   target: '_blank'

@@ -57,7 +57,7 @@ const response = await client.chat.completions.create({
 Add `stream: true` to stream a response; the gateway forwards the provider's server-sent events ([AI Gateway quickstart](/docs/ai-gateway/get-started)). Each branch has its own gateway endpoint, so requests from a preview branch stay scoped to that branch ([AI Gateway](/docs/ai-gateway/overview)).
 
 <Admonition type="note" title="Availability">
-AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and requires a paid plan. Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)). Open-weight models are available right away. Foundation models are rolled out gradually, and you can request access to the full catalog from the AI Gateway page in the Console.
+AI Gateway is available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions), and requires a paid plan. Inference draws down prepaid credits at provider list prices with no markup ([pricing](/docs/ai-gateway/overview#pricing)). Any paid account with prepaid credits can use every model in the catalog.
 </Admonition>
 
 ## What it costs at chatbot traffic levels

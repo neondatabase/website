@@ -1,66 +1,76 @@
-# LLM/Agent Prompt: Migrate to Neon Serverless Driver with Drizzle ORM (JavaScript/TypeScript)
+# LLM/Agent Prompt: Set up the Neon serverless driver (JavaScript/TypeScript)
 
 **Role:**
-You are an expert software agent responsible for migrating this project to use Neon as the database, with the Neon Serverless Driver and Drizzle ORM.
+You are an expert software agent responsible for connecting this project to a Neon Postgres database using the Neon serverless driver (`@neondatabase/serverless`).
 
 **Follow these precise, step-by-step instructions.**
 
 **Constraints:**
 - Do not output the contents of the `.env` file or the database connection string in any response.
-- Do not invent, infer, or guess sensitive values; use only the provided connection string.
+- Do not invent, infer, or guess sensitive values; use only the connection string the user provides.
 - Preserve all unrelated configuration and file contents.
 - Do not modify unrelated files or settings.
 - Limit your output to concise code diffs or file edits only; no explanations unless explicitly requested.
 
 ---
 
-## 1. Provision a Neon Database
+## 1. Configure the connection string
 
-- Provision a Neon Postgres database using `npx neondb --yes`
-- If that fails, prompt the user to run `npx neondb --yes` instead
-- If the database is claimable (i.e., a claim URL is provided):
-  - Add a comment with the claim URL directly above the `DATABASE_URL` line in the environment file (e.g., `.env`):  
-    ```
-    # To keep your Neon database permanently, claim it here: https://neon.tech/claim/abc123
-    DATABASE_URL=postgres://...
-    ```
-- Store the Neon connection string in the environment variable `DATABASE_URL` in the project's environment file (e.g., `.env`).
-- If `DATABASE_URL` exists, replace its value. If it does not exist, add it to the end of the file. Preserve all other `.env` entries.
+- Search all code, environment files, and deployment configs for the database connection string variable.
+- If the project uses a variable other than `DATABASE_URL` (e.g., `POSTGRES_URL`), replace it with `DATABASE_URL` in code, `.env` files, and deployment configs.
+- If no Neon connection string is set, ask the user for one and stop. They can copy it from the **Connect** button in the Neon Console. It looks like `postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require`.
+- Store the connection string as `DATABASE_URL` in the project's environment file (e.g., `.env`). If `DATABASE_URL` exists, replace its value. Otherwise, add it to the end of the file. Preserve all other entries.
+- Confirm the environment file is listed in `.gitignore`. Add it if it isn't.
 
 ---
 
-## 2. Install Required Packages
-
-- Ensure the following packages are installed at the specified versions (or higher, if compatible):
-  - `drizzle-orm@0.44.2`
-  - `@neondatabase/serverless@1.0.1`
-  - `drizzle-kit@0.31.4`
-- Use the project's package manager (`pnpm`, `yarn`, or `npm`) in the correct workspace/package directory.
-- Example (for pnpm):
-  ```bash
-  pnpm add drizzle-orm@0.44.2 @neondatabase/serverless@1.0.1 drizzle-kit@0.31.4
-  ```
-
----
-
-## 3. Node.js Version Requirement
+## 2. Install the driver
 
 - Ensure the project uses Node.js v19 or higher.
+- Install the latest version of `@neondatabase/serverless` (1.0.0 or later) with the project's package manager (`pnpm`, `yarn`, or `npm`) in the correct workspace/package directory. For example:
+  ```bash
+  npm install @neondatabase/serverless
+  ```
+- The driver includes TypeScript types. Don't install `@types/pg` for it.
 
 ---
 
-## 4. Environment Variable Standardization
+## 3. Choose HTTP or WebSockets
 
-- Search all code, environment files, and deployment configs for any database connection string variable other than `DATABASE_URL` (e.g., `POSTGRES_URL`).
-- Replace all such variables with `DATABASE_URL` in code, `.env` files, and deployment configs.
-- Ensure the Neon connection string is stored in `DATABASE_URL`.
+- Use the `neon()` function over HTTP for single queries and non-interactive transactions. This is the default choice, and it works in serverless and edge runtimes (Vercel, Cloudflare Workers, Netlify, Deno):
+  ```typescript
+  import { neon } from '@neondatabase/serverless';
+
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = await sql`SELECT * FROM todos WHERE id = ${id}`;
+  ```
+- Use `Pool` or `Client` over WebSockets only if the project needs interactive transactions, sessions, or a `node-postgres` (`pg`) compatible API. Replace `pg` imports with `@neondatabase/serverless`:
+  ```typescript
+  import { Pool } from '@neondatabase/serverless';
+
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const { rows } = await pool.query('SELECT * FROM todos WHERE id = $1', [id]);
+  ```
+- In serverless and edge functions, create, use, and close `Pool` and `Client` inside a single request handler. Don't reuse them across requests.
+- On Node.js 21 and earlier, WebSockets need a constructor. Install `ws` and set `neonConfig.webSocketConstructor = ws`. Node.js 22 and later don't need this.
+- Make sure scripts that run outside a framework load environment variables, for example with `import 'dotenv/config';`.
 
 ---
 
-## 5. Update Drizzle ORM and Neon Integration
+## 4. Query usage
 
-- Search the project for the file(s) where Drizzle ORM is initialized (look for imports from `drizzle-orm`, `@neondatabase/serverless`, or database connection setup).
-- Update the code in those file(s) to use the Neon serverless driver as follows:
+- Use the `neon()` query function as a tagged template. Template values are sent as query parameters, so they're safe from SQL injection.
+- For queries written with `$1`, `$2` placeholders, use `sql.query('SELECT * FROM todos WHERE id = $1', [id])`.
+- Use `sql.unsafe()` only for trusted values that aren't user input, such as known table names.
+- For multiple queries in one non-interactive transaction, use `sql.transaction([sql`...`, sql`...`])`.
+- Replace any calls to `sql` as a conventional function, such as `sql('SELECT ...', [id])`. They throw an error in version 1.0.0 and later.
+
+---
+
+## 5. If the project uses Drizzle ORM
+
+- Skip this step if the project doesn't use Drizzle.
+- Use the Drizzle adapter that matches the transport:
   ```typescript
   import { neon } from '@neondatabase/serverless';
   import { drizzle } from 'drizzle-orm/neon-http';
@@ -69,59 +79,35 @@ You are an expert software agent responsible for migrating this project to use N
   const sql = neon(process.env.DATABASE_URL!);
   export const db = drizzle(sql, { schema });
   ```
-- If no such file exists, create a new file (e.g., `db.ts`) with the above code and update imports throughout the project to use this new setup.
-- Ensure all references to the database connection use this updated integration.
-
----
-
-## 6. Update Migration Runner
-
-- Search for migration scripts or files (e.g., those that run Drizzle migrations).
-- Ensure migrations use a Drizzle database object created with the Neon driver, not just `sql`.
-- Update the code as needed to use the correct integration pattern.
-- Ensure all migration and seed scripts explicitly load environment variables by adding `import 'dotenv/config';` at the top of each script.
-- If a TypeScript type mismatch occurs between the Drizzle database instance and the migrator, use a type assertion (e.g., `as any`) to suppress the error.
-
----
-
-## 7. Query Usage
-
-- Search for all SQL query usage in the codebase.
-- Ensure the `neon` function is used as a template function for SQL queries:
+  For WebSockets, use `drizzle-orm/neon-serverless` with a `Pool` instead.
+- Run migrations with the matching migrator and a Drizzle database object, not just `sql`:
   ```typescript
-  const result = await sql`SELECT * FROM todos WHERE id = ${id}`;
+  import 'dotenv/config';
+  import { migrate } from 'drizzle-orm/neon-http/migrator';
+  import { db } from './db';
+
+  await migrate(db, { migrationsFolder: './drizzle' });
   ```
-- For parameterized queries, use `.query()`. Use `.unsafe()` only for trusted, non-user input values.
-- Remove any deprecated or pre-1.0.0 usage patterns (e.g., calling `sql` as a conventional function).
 
 ---
 
-## 8. Checklist (Enforce All)
+## 6. Checklist (Enforce All)
 
 - All code, environment files, and deployment configs use `DATABASE_URL` for the connection string.
-- All required packages are at compatible, up-to-date versions.
-- Node.js v19 or higher is used.
-- The code uses the latest `@neondatabase/serverless` package and v1.0.0+ patterns.
-- The `neon` function is used as a template function for SQL queries.
-- All queries are parameterized or use `.unsafe()` only for trusted values.
-- The connection string is stored in an environment variable, not hardcoded.
-- For migrations, a Drizzle database object is used, not just `sql`.
-- No deprecated/pre-1.0.0 patterns are present.
+- The connection string is stored in an environment variable, not hardcoded, and the environment file is listed in `.gitignore`.
+- `@neondatabase/serverless` 1.0.0 or later is installed, and Node.js v19 or higher is used.
+- HTTP (`neon()`) is used unless the project needs interactive transactions, sessions, or `pg` compatibility.
+- All queries use tagged templates or `sql.query()` with placeholders, and `sql.unsafe()` only for trusted values.
+- No pre-1.0.0 patterns (calling `sql` as a conventional function) are present.
 - Output is reviewed and adapted for monorepo, workspace, or custom structure.
 
 ---
 
-## 9. Run Migrations and Seed Database
+## 7. Troubleshooting
 
-- After provisioning a new database, determine if the project defines migration and/or seed scripts (e.g., by checking `package.json`).
-- If such scripts exist, output instructions to the user to run them (e.g., `pnpm db:migrate`, `pnpm db:seed`) to initialize the schema and data.
-- If no migration or seed scripts are found, skip this step.
-
----
-
-## 10. Troubleshooting
-
-- If error: "This function can now be called only as a tagged-template function: sql`SELECT ...`", update all dependencies and ensure correct driver usage.
+- If error: "This function can now be called only as a tagged-template function": find the call that uses `sql(...)` as a conventional function and change it to a tagged template or `sql.query(...)`.
+- If error: "Wrong URL scheme or missing user, host or database in connection parameters": `DATABASE_URL` isn't loaded. Check that the environment file exists and that the script loads it (for example, with `import 'dotenv/config';`).
+- If error: "All attempts to open a WebSocket to connect to the database failed": the runtime has no built-in `WebSocket`. Set `neonConfig.webSocketConstructor` (see step 3), or use `neon()` over HTTP.
 - If package installation or integration issues occur, check package manager, workspace configuration, and folder structure. Only output solutions that pass all checklist items. If any check fails, revise the output until full compliance is achieved.
 
 ---

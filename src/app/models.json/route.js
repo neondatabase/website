@@ -11,11 +11,12 @@ export const dynamic = 'force-static';
 // `modalities`, `limit`, and `cost`, so the same code that reads models.dev can
 // read this endpoint.
 //
-// Every entry is live-verified against the Neon AI Gateway (text output +
-// image-input + tool-calling probed directly). ./data.json is authored and
-// reviewed in this repo rather than derived from anywhere, so publishing a model
-// never waits on a third party; the `neon` provider on models.dev is a mirror
-// kept in sync afterwards. Served at /models.json.
+// ./data.json is refreshed at build time from the Neon AI Gateway's
+// GET /v1/models (scripts/update-models-from-ai-gateway.mjs); the committed copy
+// is the fallback when the gateway is unset or unreachable, and the place for
+// fields the gateway lacks (`released`, `last_updated`, `cost.input_audio`). The
+// `neon` provider on models.dev is a mirror kept in sync afterwards. Served at
+// /models.json.
 export function GET() {
   return new Response(JSON.stringify(data), {
     headers: {

@@ -116,6 +116,20 @@ describe('classifyDrift', () => {
     expect(drift.missingFromWebsite).toEqual(['z']);
     expect(drift.hasFault).toBe(true);
   });
+
+  it('skips a model we have not released, whether or not models.dev lists it', () => {
+    const drift = classifyDrift(
+      {
+        a: model(),
+        b: model({ id: 'b', name: 'B', released: false }),
+        c: model({ id: 'c', name: 'C', released: false, cost: { input: 1 } }),
+      },
+      { a: model(), c: model({ id: 'c', name: 'C', cost: { input: 2 } }) }
+    );
+
+    expect(drift.inSync).toBe(true);
+    expect(drift.unreleased).toEqual(['b', 'c']);
+  });
 });
 
 describe('validateCatalog', () => {
@@ -137,6 +151,16 @@ describe('validateCatalog', () => {
     const errors = validateCatalog(catalog({ a: model(over) }));
 
     expect(errors).toEqual([expect.stringContaining(`a.${field}`)]);
+  });
+
+  it.each([
+    ['name', { name: "{[]['constructor']['constructor']('return 1')()}" }],
+    ['provider', { provider: '<script>' }],
+    ['family', { family: 'gpt}' }],
+  ])('rejects MDX syntax in %s, which the detail page would evaluate', (field, over) => {
+    const errors = validateCatalog(catalog({ a: model(over) }));
+
+    expect(errors).toEqual([`a.${field} must not contain {, }, < or >`]);
   });
 
   it('rejects a non-boolean capability flag', () => {

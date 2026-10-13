@@ -286,6 +286,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/blog/neon-serverless-driver-on-jsr',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: true,
+      },
+      {
         source: '/backend',
         destination: '/docs/introduction#products',
         permanent: false,

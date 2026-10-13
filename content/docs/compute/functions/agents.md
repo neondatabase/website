@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-09-18T17:46:57.332Z'
+updatedOn: '2026-10-09T17:51:53.586Z'
 ---
 
 AI agents make several model and tool calls to answer a single request, then stream the result back. That work can run for minutes, but lambda-style serverless caps execution at roughly 10 to 60 seconds, so a multi-step tool loop or an image-generation run gets cut off mid-stream.
@@ -109,6 +109,12 @@ An agent doesn't have to wait for a client call. A scheduled [Function Trigger](
 ## Persist what matters
 
 Module memory is wiped when an isolate is evicted, and several isolates can run in parallel, so keep anything that must last in Postgres: conversation history, run metadata, results. For generated assets like images, declare a bucket in `neon.ts` (`buckets: { images: {} }`) and write them to [Object Storage](/docs/storage/objects), which branches with your database. When a bucket is declared, `neon deploy` injects `AWS_*` credentials automatically. For example, using the [Files SDK](https://files-sdk.dev):
+
+```bash
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner
+```
+
+Install `@aws-sdk/lib-storage` even though the Files SDK lists it as optional. `neon deploy` bundles your function, and the bundle fails without it.
 
 ```typescript
 import { Files } from 'files-sdk';

@@ -257,6 +257,9 @@
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
                   slug: serverless/serverless-driver
+                  items:
+                    - title: Configuration
+                      slug: serverless/serverless-driver-configuration
                 - title: Neon SQL Editor
                   slug: get-started/query-with-neon-sql-editor
                 - title: psql
@@ -934,12 +937,18 @@
               slug: ai-gateway/embeddings
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
+            - title: Anthropic Messages API
+              slug: ai-gateway/anthropic-messages
+              tag: new
+              tagTheme: green
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
           items:
             - title: Authentication
               slug: ai-gateway/authentication
+            - title: Data retention
+              slug: ai-gateway/data-retention
             - title: Troubleshooting
               slug: ai-gateway/troubleshooting
     - title: Lakebase Search
@@ -1317,6 +1326,8 @@
                   slug: cli/api-keys
                 - title: completion
                   slug: cli/completion
+                - title: feedback
+                  slug: cli/feedback
             - title: Projects and branches
               items:
                 - title: snapshots
@@ -1361,6 +1372,10 @@
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: realtime
+                  slug: cli/realtime
+                - title: subscribe
+                  slug: cli/subscribe
                 - title: credentials
                   slug: cli/credentials
             - title: Organizations and networking
@@ -1403,6 +1418,8 @@
               slug: reference/javascript-sdk
             - title: Neon Management SDK
               slug: reference/typescript-sdk
+            - title: Effect bindings
+              slug: reference/effect-sdk
             - title: Migrate to @neon/sdk
               slug: reference/migrate-api-client-to-sdk
             - title: Python SDK (Neon API)
@@ -1469,8 +1486,6 @@
                       slug: guides/vercel-manual
                     - title: Connecting to Neon from Vercel
                       slug: guides/vercel-connection-methods
-                    - title: Migrating from Vercel Postgres
-                      slug: guides/vercel-postgres-transition-guide
             - title: Develop
               items:
                 - title: Convex
@@ -1545,8 +1560,6 @@
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres
-                - title: Prisma Pulse
-                  slug: guides/logical-replication-prisma-pulse
                 - title: Sequin
                   slug: guides/sequin
                 - title: Snowflake
@@ -1643,6 +1656,9 @@
         - title: Support
           slug: introduction/support
           icon: support
+        - title: Send feedback
+          slug: introduction/feedback
+          icon: info
         - title: Community
           slug: community/community-intro
           icon: community

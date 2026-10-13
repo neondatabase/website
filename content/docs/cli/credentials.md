@@ -38,7 +38,7 @@ neon credentials list --project-id solitary-heart-93902637 --branch main
 ```
 
 ```text filename="Output"
-Token Id                                   Name                               Principal Type  Scopes                       Created At
+Token ID                                   Name                               Principal Type  Scopes                       Created At
 nak_live_aaaa1111bbbb2222cccc3333dddd4444  Default AI gateway credential      user            ai_gateway:invoke            2026-09-10T20:02:49Z
 nak_live_eeee5555ffff6666aaaa7777bbbb8888  Default object storage credential  user            storage:read, storage:write  2026-09-10T20:02:50Z
 ```
@@ -56,7 +56,7 @@ neon credentials create --name uploads --scope storage:read --scope storage:writ
 ```
 
 ```text filename="Output"
-Token Id  nak_live_0123456789abcdef0123456789abcdef
+Token ID  nak_live_0123456789abcdef0123456789abcdef
 Name      uploads
 Scopes    storage:read, storage:write
 api_token: <api_token>
@@ -97,7 +97,7 @@ neon credentials reveal nak_live_0123456789abcdef0123456789abcdef --project-id s
 ```
 
 ```text filename="Output"
-Token Id  nak_live_0123456789abcdef0123456789abcdef
+Token ID  nak_live_0123456789abcdef0123456789abcdef
 api_token: <api_token>
 s3_secret_access_key: <s3_secret_access_key>
 WARNING: These are live secrets. Treat them like a password.
@@ -116,7 +116,7 @@ neon credentials rotate nak_live_0123456789abcdef0123456789abcdef --project-id s
 ```
 
 ```text filename="Output"
-Token Id  nak_live_0123456789abcdef0123456789abcdef
+Token ID  nak_live_0123456789abcdef0123456789abcdef
 Name      uploads
 Scopes    storage:read, storage:write
 api_token: <new api_token>
@@ -137,5 +137,5 @@ neon credentials revoke nak_live_0123456789abcdef0123456789abcdef --project-id s
 ```
 
 ```text filename="Output"
-INFO: Credential nak_live_0123456789abcdef0123456789abcdef revoked
+Credential nak_live_0123456789abcdef0123456789abcdef revoked
 ```

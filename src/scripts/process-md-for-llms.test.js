@@ -848,7 +848,7 @@ See [CONN_MAX_AGE](https://example.com).
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('Note for AI assistants');
-      expect(stripped).not.toContain('/api/docs-feedback');
+      expect(stripped).not.toContain('feedback.neon.tech');
     });
 
     it('should strip related docs and feedback footers together', () => {

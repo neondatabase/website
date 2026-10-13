@@ -9,14 +9,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-10-13T00:38:52.280Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
 
 Specifically:
 
-- **Declares services**: which Neon services (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`) exist on the project and are available on every branch.
+- **Declares services**: which Neon services (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`, and `preview.realtime`) exist on the project and are available on every branch.
 - **Configures branches**: optional per-branch tuning (TTLs, compute sizing, protected status) via a `branch` closure.
 
 Services and branch policy are independent. Use one, the other, or both.
@@ -69,7 +69,7 @@ export default defineConfig({
 
 `defineConfig` takes two optional parts:
 
-- **Static fields** (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`): declare which services exist. Same set on every branch.
+- **Static fields** (`auth`, `dataApi`, `aiGateway`, `functions`, `buckets`, `preview.realtime`): declare which services exist. Same set on every branch.
 - **`branch` closure**: receives a read-only `BranchTarget` and returns per-branch tuning. It can adjust settings, but can't add or remove services.
 
 ## Services
@@ -78,17 +78,18 @@ Declare services as top-level keys in `defineConfig`; declare only the ones you 
 
 To add any of these to an existing `neon.ts` without editing the file by hand, use [`neon config add`](/docs/cli/config#add); for a function it also creates the handler file.
 
-| Field       | Values / type                                | Default | What it enables                                                                                                                                                                                                                                |
-| ----------- | -------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `auth`      | `true`, `false`, `{ enabled: bool }`         | `false` | [Managed Better Auth](/docs/auth/overview). Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                                                                                                                                 |
-| `dataApi`   | `true`, `false`, [`DataApiConfig`](#dataapi) | `false` | [Neon Data API](/docs/data-api/overview). Injects `NEON_DATA_API_URL`                                                                                                                                                                          |
-| `aiGateway` | `true`, `false`, `{ enabled: bool }`         | `false` | [Neon AI Gateway](/docs/ai-gateway/overview). Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`                                                                                                                                      |
-| `functions` | Record of slug → [function def](#functions)  | (none)  | [Neon Functions](/docs/compute/functions/overview). Long-running Node.js compute. The branch's service variables (`DATABASE_URL` and more) are injected at runtime; see [Environment variables](/docs/compute/functions/environment-variables) |
-| `buckets`   | Record of name → [bucket def](#buckets)      | (none)  | [Neon Object Storage](/docs/storage/overview). S3-compatible object storage, branched with your database. Injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                                            |
-| `triggers`  | Record of name → [trigger def](#triggers)    | (none)  | [Function Triggers](/docs/compute/functions/triggers/overview). Invoke a function on a schedule or when an object is created in a bucket.                                                                                                      |
+| Field              | Values / type                                      | Default | What it enables                                                                                                                                                                                                                                |
+| ------------------ | -------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `auth`             | `true`, `false`, `{ enabled: bool }`               | `false` | [Managed Better Auth](/docs/auth/overview). Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                                                                                                                                 |
+| `dataApi`          | `true`, `false`, [`DataApiConfig`](#dataapi)       | `false` | [Neon Data API](/docs/data-api/overview). Injects `NEON_DATA_API_URL`                                                                                                                                                                          |
+| `aiGateway`        | `true`, `false`, `{ enabled: bool }`               | `false` | [Neon AI Gateway](/docs/ai-gateway/overview). Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`                                                                                                                                      |
+| `functions`        | Record of slug → [function def](#functions)        | (none)  | [Neon Functions](/docs/compute/functions/overview). Long-running Node.js compute. The branch's service variables (`DATABASE_URL` and more) are injected at runtime; see [Environment variables](/docs/compute/functions/environment-variables) |
+| `buckets`          | Record of name → [bucket def](#buckets)            | (none)  | [Neon Object Storage](/docs/storage/overview). S3-compatible object storage, branched with your database. Injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                                            |
+| `triggers`         | Record of name → [trigger def](#triggers)          | (none)  | [Function Triggers](/docs/compute/functions/triggers/overview). Invoke a function on a schedule or when an object is created in a bucket.                                                                                                      |
+| `preview.realtime` | `true`, `false`, [`{ allowedOrigins }`](#realtime) | (none)  | [Neon Realtime](/docs/cli/realtime). Live SQL query subscriptions. Injects `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET`                                                                                                                         |
 
-<Admonition type="note" title="preview is deprecated">
-`@neon/config` 1.6.0 and later accept `aiGateway`, `functions`, and `buckets` as the top-level keys shown here. Declaring them under a `preview` block still works but logs a deprecation warning on `neon deploy`, so keep `preview` only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
+<Admonition type="note" title="aiGateway, functions, and buckets moved out of preview">
+The `preview` block holds features that are still in preview, currently [`realtime`](#realtime). `aiGateway`, `functions`, and `buckets` used to live there too; `@neon/config` 1.6.0 and later accept them as the top-level keys shown here. Declaring those three under `preview` still works but logs a deprecation warning on `neon deploy`, so keep them there only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
 </Admonition>
 
 ### dataApi (#dataapi)
@@ -115,7 +116,7 @@ dataApi: {
 
 Each key is the function's slug, the permanent identifier used in CLI commands and the invocation URL:
 
-<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "preview (deprecated)"]}>
+<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "Under preview (deprecated alias)"]}>
 
 ```ts
 functions: {
@@ -201,7 +202,7 @@ Triggers that exist remotely but are omitted from `neon.ts` are left alone. Inhe
 
 ### buckets (#buckets)
 
-<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "preview (deprecated)"]}>
+<CodeTabs labels={["Top level (@neon/config 1.6.0+)", "Under preview (deprecated alias)"]}>
 
 ```ts
 buckets: {
@@ -224,6 +225,22 @@ preview: {
 </CodeTabs>
 
 Bucket names follow S3 naming rules. `public_read` makes objects accessible without credentials at the branch's storage endpoint.
+
+### preview.realtime (#realtime)
+
+Enables [Neon Realtime](/docs/cli/realtime) on the branch, so clients can subscribe to live SQL queries. Requires `@neon/config` 1.9.0 or later. Pass `true`, or an object to set the browser origins allowed to connect:
+
+```ts
+preview: {
+  realtime: {
+    allowedOrigins?: string[],  // "*", or http(s) origins with no path; max 16
+  },
+},
+```
+
+Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, such as `https://app.example.com`. `*` allows every origin and can't be combined with others. `defineConfig` rejects invalid values before anything is sent. With `true`, any browser origin can connect unless the branch already has an origin list, which is kept. Allowed origins only restrict browsers, not server clients.
+
+On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon subscribe`](/docs/cli/subscribe).
 
 ## Branch policy
 
@@ -345,6 +362,8 @@ env.storage.accessKeyId;          // AWS_ACCESS_KEY_ID        (env.storage when 
 env.storage.secretAccessKey;      // AWS_SECRET_ACCESS_KEY
 env.storage.endpoint;             // AWS_ENDPOINT_URL_S3
 env.storage.region;               // AWS_REGION
+env.realtime.url;                 // NEON_REALTIME_URL        (env.realtime when preview.realtime enabled)
+env.realtime.secret;              // NEON_REALTIME_SECRET
 env.functions['<slug>'].baseUrl;  // a deployed function's URL, keyed by slug (env.functions when functions declared)
 ```
 
@@ -430,6 +449,9 @@ export default defineConfig({
       source: "./functions/api.ts",
     },
   },
+  preview: {
+    realtime: { allowedOrigins: ["https://app.example.com"] },
+  },
 
   branch: (branch) => {
     if (branch.isDefault) {
@@ -471,7 +493,7 @@ export default defineConfig({
 These neon.ts keys are now GA and can be lifted out of preview: preview.aiGateway → aiGateway, preview.functions → functions, preview.buckets → buckets.
 ```
 
-Informational, not an error: your services still deploy. You're declaring GA services under the deprecated `preview` block on `@neon/config` 1.6.0 or later. Move those keys to the top level to clear it, or keep `preview` if you also run on installs older than 1.6.0.
+Informational, not an error: your services still deploy. You're declaring GA services under `preview`, where they're deprecated aliases, on `@neon/config` 1.6.0 or later. Move those keys to the top level to clear it, or keep `preview` if you also run on installs older than 1.6.0.
 
 ### "unknown keys" error
 

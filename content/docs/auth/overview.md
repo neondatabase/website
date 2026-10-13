@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-10-09T11:46:19.949Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -52,7 +52,7 @@ Choose your framework to get started:
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth currently supports Better Auth version **1.4.18**.
+Managed Better Auth runs Better Auth version **1.7.6**. The `@neondatabase/auth` SDK uses a Better Auth 1.6 client, and Managed Better Auth keeps 1.6 clients working, so you don't need to upgrade your SDK.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
@@ -97,7 +97,7 @@ export const { GET, POST } = auth.handler();
 
 **For React/Vite (client-side):**
 
-See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Neon Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Managed Better Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -161,6 +161,6 @@ See [Neon plans](/docs/introduction/plans#auth) for more details.
 
 ## Migration from Stack Auth
 
-If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
+If you're using legacy Neon Auth (Stack Auth), your version will continue to work. When you're ready to migrate to Managed Better Auth, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
 
 <NeedHelp/>

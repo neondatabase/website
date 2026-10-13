@@ -5,7 +5,7 @@ author: neon-team
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-05-06T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-13T07:55:06.255Z'
 ---
 
 <Admonition type="note">
@@ -110,7 +110,7 @@ The two runtimes are built for different work.
 | Runtime                   | Node.js 24                                                                                                                                                                                   | Deno-compatible TypeScript runtime                                                                                                                                 |
 | Placement                 | Deployed onto a branch, same region as its data, `DATABASE_URL` and service credentials injected                                                                                             | Distributed at the edge, close to users, integrated with platform secrets and logs                                                                                 |
 | Execution                 | Long-running: 15 minutes to first byte, streams stay open while data flows, 2 GiB memory, 100 concurrent invocations by default ([source](/docs/compute/functions/reference/runtime-limits)) | Short handlers: 256 MB memory, 2s CPU per invocation, 150s wall clock on Free and 400s on paid plans ([source](https://supabase.com/docs/guides/functions/limits)) |
-| Included usage            | Free: 10 active and 400 waiting Capacity-Hours, 1M invocations; paid plans metered per Capacity-Hour ([source](/docs/introduction/plans#functions))                                          | 500,000 invocations Free; 2M Pro ([source](https://supabase.com/pricing))                                                                                          |
+| Included usage            | Free: 10 active and 400 waiting Capacity-Hours, 1M invocations per project; paid plans metered per Capacity-Hour ([source](/docs/introduction/plans#functions))                              | 500,000 invocations Free; 2M Pro ([source](https://supabase.com/pricing))                                                                                          |
 | Scheduled and queued work | `pg_cron` for scheduling (runs only while compute is active), or pair Functions with an external queue ([source](/docs/extensions/pg_cron))                                                  | Managed [Cron](https://supabase.com/docs/guides/cron) and [Queues](https://supabase.com/docs/guides/queues/quickstart), built on `pg_cron` and `pgmq`              |
 
 <Callout title="How to choose">

@@ -154,7 +154,7 @@ Configured in `getMarkdownOptions()`: GFM table serialization via `gfmToMarkdown
 
 ## Middleware & Agent Detection
 
-`src/utils/ai-agent-detection.js` detects AI agents by Accept header (`text/markdown`) and User-Agent patterns (`chatgpt`, `openai`, `claude`, `anthropic`, `cursor`, `windsurf`, `perplexity`, `copilot`, `axios`, `got`). The middleware has layered error handling (outer try-catch, inner try-catch for fetch, 404 fallback to HTML).
+`src/utils/ai-agent-detection.js` detects AI agents by Accept header (`text/markdown`) and User-Agent patterns (`chatgpt`, `openai`, `claude`, `anthropic`, `cursor`, `windsurf`, `perplexity`, `copilot`, `axios`, `got`, `curl`). User-Agent patterns only apply when the Accept header doesn't include `text/html`, so agents and crawlers that explicitly accept HTML get HTML. The middleware has layered error handling (outer try-catch, inner try-catch for fetch, 404 fallback to HTML).
 
 Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/content.js`): `guides` (index only), `branching` (index only), and specific use-cases. These are **exact matches** -- `/guides` is excluded but `/guides/metabase-neon` is not. `docs/changelog` is handled via `CUSTOM_MARKDOWN_PATHS` and serves the full generated changelog markdown.
 
