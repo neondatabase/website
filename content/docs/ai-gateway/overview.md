@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-10-01T22:38:59.908Z'
+updatedOn: '2026-10-13T12:11:05.423Z'
 ---
 
 Neon AI Gateway is an LLM gateway built into your Postgres branch. Point your existing OpenAI SDK at the branch endpoint and call many models with one credential, and AI requests scope to a branch the same way your data does.
@@ -58,6 +58,8 @@ AI Gateway usage draws down a prepaid credit balance. Here's how pricing works:
 - **Prepaid credits.** Inference draws down a prepaid credit balance. 1 credit equals $1 USD, with a $5 minimum purchase, and credits are valid for 12 months from purchase. You buy credits from the **Billing** page in the [Neon Console](https://console.neon.tech/app/billing).
 
 See the [model catalog](/docs/ai-gateway/models#available-models) for per-model rates, and [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits) for how to buy credits and manage your balance.
+
+Your credit balance isn't the only limit on requests. A per-minute token limit and an account-level daily spend cap also apply, and both return `429 Too Many Requests` when exceeded. See [Rate limits](/docs/ai-gateway/models#rate-limits) and [Pricing](/docs/ai-gateway/models#pricing) on the models page.
 
 ## Starter templates
 
