@@ -1,66 +1,95 @@
 ---
 title: 'Neon Open Source Program'
-subtitle: Eligible projects receive up to $5,000 yearly in credits and promotional support.
+subtitle: Neon sponsors open source maintainers with monthly cash, paid through Open Collective.
 enableTableOfContents: true
-updatedOn: '2025-10-16T09:00:00.000Z'
+updatedOn: '2026-10-13T19:00:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
 ---
 
 <ProgramForm type="openSource" />
 
-<QuoteBlock quote="With Neon's serverless Postgres and the support from the Open Source Program, integrating a scalable database into Medusa was straightforward and fast. The developer experience has been outstanding, and it's helped us deliver a frictionless experience to our users." author="oli-juhl" role="CTO MedusaJS" />
+Developers build on open source that a small number of maintainers keep running. The Neon Open Source Program pays those maintainers a fixed monthly amount through Open Collective. In return, your project shows the Neon logo, labeled as a sponsorship, in one place you choose.
 
-If you're building open source tools that use Postgres, we want to help you scale. Selected projects receive up to $5,000 yearly in platform credits and marketing support to expand your project's visibility.
+Your project doesn't need to use Neon or Postgres to apply.
 
-## What You'll Get
+## What you get
 
-The Neon Open Source Program provides financial support, promotional opportunities, and partnership benefits to help your project grow.
+<FeatureList>
 
-<FeatureList icons={['dollar', 'megaphone']}>
+### Monthly cash sponsorship
 
-### Neon Credits
+Neon pays a fixed amount every month for a six-month term. Payments go to your project's Open Collective, or to your fiscal host, such as Open Source Collective. You set up payouts and tax details with Open Collective or your fiscal host, so Neon doesn't need your bank details.
 
-Neon will grant eligible open-source software up to $5,000 in platform credits yearly.
+### Renewable terms
 
-### Promotion Support
+Near the end of each six-month term, we review the sponsorship with you and decide whether to renew it. Sponsorships don't renew automatically.
 
-We'll help promote your work to Neon's 1M+ developer community through blog posts, social media, case studies, and co-marketing initiatives.
+### A relationship if you want one
+
+We're happy to work with maintainers on content, events, integrations, or product feedback when it makes sense for both sides. None of it is a condition of the sponsorship.
 
 </FeatureList>
 
-## Who's It For?
+## What we ask in return
 
-This is a new program, if you're not sure whether your project is eligible, just reach out. But here is our initial criteria:
+- Show the Neon logo with a link in one agreed place: your README, the sponsors section of your repository, your project homepage, your documentation site, or a sponsors page.
+- Label it as a sponsorship, for example "Sponsored by Neon."
+- Keep the placement live for the full term, and tell us if it moves or if the project's ownership changes.
 
-1. **Open Source** - Your work must be open source and publicly available under a recognized open-source license. Developers should be able to self-host the software.
-2. **Runs on Postgres** - Open-source software that uses Postgres is an ideal fit for this program. This could be anything from using Postgres as a component in a larger stack to Postgres extensions.
-3. **Using Neon** - Provide documentation, CLI tools, and code examples that teach your users how to build with your software and Neon.
+Neon doesn't ask for exclusivity, product endorsements, editorial control, or a say in your roadmap or license. A shared sponsor grid next to other sponsors is fine.
 
-## How to Apply
+## Who's it for
 
-Get in touch below, we typically respond within 1-3 business days.
+Your project is a fit if it meets these criteria:
+
+1. **Open source:** The project is public and released under an OSI-approved open source license.
+2. **Actively maintained:** The project has had releases, commits, issue triage, or community activity in the last six months.
+3. **Used by developers:** Application, backend, data, AI, or cloud developers rely on it.
+4. **Maintained by you:** You control the repository and can decide where the Neon logo goes.
+5. **Able to receive funds:** Your project has an active Open Collective, or can receive payouts through a fiscal host such as Open Source Collective.
+
+## How we choose projects
+
+We look at:
+
+- How much your project's users overlap with the developers Neon builds for
+- Project health: steady maintenance, responsive issue handling, and healthy governance
+- Reach, measured by usage, downloads, dependents, and community size rather than GitHub stars alone
+- Where the logo would appear and how many people see it
+- Whether you're interested in working together beyond the sponsorship
+
+## How to apply
+
+Fill out the form below with your project's website and GitHub repository. We'll follow up by email.
 
 <ProgramForm type="openSource" />
 
 ## FAQ
 
 <details>
-<summary>**Is Commercial Open Source Software eligible?**</summary>
+<summary>**Do I need to use Neon or Postgres?**</summary>
 
-Yes! As long as you give developers a way of running the software themselves
-
-</details>
-<br/>
-<details>
-<summary>**Do I need to be using Neon already to apply?**</summary>
-
-No, you don't need to be using Neon yet. However, we prioritize projects that have already integrated Neon or have a clear plan to make Neon a default option for their users. If you're planning to integrate Neon, tell us about your plans in the application.
+No. The program supports open source that developers rely on, whatever database it uses, if any.
 
 </details>
 <br/>
 <details>
-<summary>**What happens after the first year?**</summary>
+<summary>**Is commercial open source eligible?**</summary>
 
-After the first year, we'll review your project's progress and impact. If your project continues to meet the program criteria and has been actively using the credits and promoting Neon, we can renew your benefits for another year. Our goal is to support projects throughout their growth journey.
+Yes, as long as the open source project and its community are substantial, developers can self-host it, and the sponsorship supports maintaining the open source project.
+
+</details>
+<br/>
+<details>
+<summary>**How do payments work?**</summary>
+
+Neon sends a recurring monthly contribution to your project through Open Collective for the length of the term. If your project doesn't have an Open Collective yet, you can create one and apply to a fiscal host such as [Open Source Collective](https://oscollective.org/).
+
+</details>
+<br/>
+<details>
+<summary>**What happens after six months?**</summary>
+
+We review each sponsorship near the end of its term. If the placement is still live and the project is healthy, we can renew it for another six months.
 
 </details>

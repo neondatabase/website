@@ -107,6 +107,6 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 - Get started: https://neon.com/signup
 - Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
 - Get up to $100k in credits for your startup: https://neon.com/startups
-- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Get monthly sponsorship for maintaining open source: https://neon.com/programs/open-source.md
 - Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
 - More plan details: https://neon.com/docs/introduction/plans.md
