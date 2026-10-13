@@ -14,6 +14,7 @@ const INIT_COMMAND = 'npx neon@latest init';
 test.describe('critical documentation onboarding', () => {
   test(`[${DOCS_ONBOARDING_CONTRACT.id}] docs onboarding exposes search, copy, and guided setup`, async ({
     page,
+    hasTouch,
   }) => {
     await installClipboardMock(page);
     const applicationErrors = await openCriticalPage(page, DOCS_ONBOARDING_CONTRACT.pagePath);
@@ -39,9 +40,34 @@ test.describe('critical documentation onboarding', () => {
     await expectReactHandlerReady(searchTrigger, 'onClick');
     await searchTrigger.click();
 
-    const searchDialog = page.getByRole('dialog').filter({ visible: true });
-    await expect(searchDialog).toBeVisible();
-    await expect(searchDialog.getByRole('combobox')).toBeVisible();
+    const searchInput = page.getByRole('dialog', { name: 'Search Neon' }).getByRole('combobox');
+    await expect(searchInput).toBeVisible();
+
+    // Headless UI skips initial focus on touch devices so the keyboard stays closed.
+    if (hasTouch) {
+      await searchInput.tap();
+    } else {
+      await expect(searchInput).toBeFocused();
+      await page.keyboard.press('Escape');
+      await expect(searchInput).toBeHidden();
+      await page.keyboard.press('ControlOrMeta+k');
+      await expect(searchInput).toBeFocused();
+    }
+    await page.keyboard.type('branching');
+    await expect(searchInput).toHaveValue('branching');
+
+    const composingArrowPrevented = await searchInput.evaluate((input) => {
+      const event = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        keyCode: 229,
+        isComposing: true,
+        bubbles: true,
+        cancelable: true,
+      });
+      input.dispatchEvent(event);
+      return event.defaultPrevented;
+    });
+    expect(composingArrowPrevented).toBe(false);
 
     await page.keyboard.press('Escape');
     await expectHealthyPage(applicationErrors);

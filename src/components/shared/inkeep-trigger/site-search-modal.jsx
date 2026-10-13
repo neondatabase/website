@@ -174,6 +174,8 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
   };
 
   const onInputKeyDown = (event) => {
+    // Enter and arrow keys confirm or move an IME candidate while composing.
+    if (event.nativeEvent.isComposing || event.keyCode === 229) return;
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (hits.length === 0) return;
@@ -215,22 +217,23 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
               placeholder="Search docs, guides, changelog, and blog…"
               value={query}
               data-test="docs-search-input"
+              data-autofocus
               onChange={(event) => setQuery(event.target.value)}
               onKeyDown={onInputKeyDown}
             />
-            <kbd className="hidden shrink-0 border border-gray-new-80 px-1.5 py-0.5 font-sans text-xs tracking-extra-tight text-gray-new-50 dark:border-gray-new-20 sm:inline">
+            <kbd className="hidden shrink-0 border border-gray-new-80 px-1.5 py-0.5 font-sans text-xs tracking-extra-tight text-gray-new-40 dark:border-gray-new-20 dark:text-gray-new-60 sm:inline">
               esc
             </kbd>
           </div>
           <div className="max-h-[min(60vh,28rem)] overflow-y-auto">
             {trimmedQuery === '' && (
-              <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
+              <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
                 Search official docs, community guides, the changelog, and the blog.
               </p>
             )}
             <div aria-live="polite" aria-atomic="true" role="status">
               {status === 'loading' && hits.length === 0 && (
-                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
+                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
                   Searching…
                 </p>
               )}
@@ -238,7 +241,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
                 <p className="px-4 py-6 text-sm tracking-extra-tight text-secondary-1">{error}</p>
               )}
               {status === 'ok' && hits.length === 0 && (
-                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-50">
+                <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
                   {`No results for "${trimmedQuery}".`}
                 </p>
               )}
@@ -276,7 +279,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
                         <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
                           <HighlightedText text={hit.title} query={trimmedQuery} />
                         </span>
-                        <span className="text-[11px] tracking-extra-tight text-gray-new-50 uppercase">
+                        <span className="text-[11px] tracking-extra-tight text-gray-new-40 uppercase dark:text-gray-new-60">
                           {COLLECTION_LABEL[hit.collection] ?? hit.collection}
                         </span>
                       </span>
@@ -286,7 +289,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
                         </span>
                       )}
                       {hit.excerpt && (
-                        <span className="line-clamp-2 text-[13px] leading-snug tracking-extra-tight text-gray-new-50 dark:text-gray-new-60">
+                        <span className="line-clamp-2 text-[13px] leading-snug tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
                           <HighlightedText text={hit.excerpt} query={trimmedQuery} />
                         </span>
                       )}

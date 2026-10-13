@@ -102,7 +102,6 @@ export function normalizePinnedQuery(query) {
     .trim();
 }
 
-/** The pinned hits for this query, or null when it should go to search. */
 export function pinnedSiteSearchHits(query) {
   const hits = PINNED_BY_QUERY.get(normalizePinnedQuery(query));
   return hits ? hits.map((hit) => ({ ...hit })) : null;
