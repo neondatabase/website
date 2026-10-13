@@ -77,7 +77,20 @@ The single-URL form shown above, `createClient(url)`, requires a version of `@ne
 
 ### 3. Custom roles
 
-`authenticated` and `anonymous` are the two roles Neon sets up for you, but the `role` claim can name any Postgres role. This is the general rule behind both roles above: the API always runs `SET ROLE` to whatever the claim says. If you issue tokens with a different role (for example, `"role": "admin"`), the API switches to a role named `admin`. That role must exist in your database and hold the right privileges, or the request fails: a claim naming a role that doesn't exist returns a "role does not exist" error, and a role that exists but lacks the table grant returns `42501 permission denied`.
+`authenticated` and `anonymous` are the two roles Neon sets up for you, but the `role` claim can name any Postgres role. This is the general rule behind both roles above: the API always runs `SET ROLE` to whatever the claim says. If you issue tokens with a different role (for example, `"role": "admin"`), the API switches to a role named `admin`. For this to work, the role must exist in your database, be granted to the `authenticator` role (the role the Data API connects as), and hold the privileges the request needs:
+
+```sql
+CREATE ROLE admin NOLOGIN;
+GRANT admin TO authenticator;
+GRANT USAGE ON SCHEMA public TO admin;
+GRANT SELECT ON your_table_name TO admin;
+```
+
+If any of these is missing, the request fails:
+
+- The role doesn't exist: `22023 role "admin" does not exist`
+- The role isn't granted to `authenticator`: `42501 permission denied to set role "admin"`
+- The role lacks the table grant: `42501 permission denied for table ...`
 
 The sections below explain how to configure these roles.
 

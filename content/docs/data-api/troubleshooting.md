@@ -111,7 +111,7 @@ The role the request runs as doesn't have GRANT permissions on the table. This c
 - The table was created before the Data API was enabled
 - The table was created after enabling the Data API, but default privileges weren't applied
 - You disabled the "Grant public schema access" option when enabling the Data API
-- You're using a custom authentication provider and the token has no `role` claim (or a role claim that doesn't name `authenticated`). The request then runs as the `anonymous` role, which has no table grants by default, so it can't read the table even though `authenticated` can.
+- You're using a custom authentication provider and the token has no `role` claim. The request then runs as the `anonymous` role, which has no table grants by default, so it can't read the table even though `authenticated` can.
 
 ### Fix
 
@@ -131,7 +131,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
 ```
 
-If you use a custom authentication provider, also confirm the token carries a `role` claim that names a granted role. To use the `authenticated` role, issue `"role": "authenticated"`. If your provider puts the role under a different claim, point the Data API's JWT role claim key at that claim in the Data API settings. See [Required JWT claims](/docs/data-api/custom-authentication-providers#required-jwt-claims).
+If you use a custom authentication provider, also confirm the token carries a `role` claim that names a granted role. To use the `authenticated` role, issue `"role": "authenticated"`. If the claim names a custom role, see [Custom roles](/docs/data-api/access-control#3-custom-roles) for the grants it needs. See also [Required JWT claims](/docs/data-api/custom-authentication-providers#required-jwt-claims).
 
 ## I can see all rows in my table
 
