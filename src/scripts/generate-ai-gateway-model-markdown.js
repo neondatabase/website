@@ -62,7 +62,7 @@ const resolveExamplesByMode = (resolveModel, modelId) => ({
 
 const renderModelDetailMarkdown = (row, examplesByMode) => {
   const about = row.isJudge
-    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}, a System One judge model. It scores answers to questions about a state and does not generate text.`
+    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}, a System One judge model. It evaluates a given state against a set of questions and returns scored answers; it does not generate text.`
     : row.isEmbedding
       ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. It returns ${row.dimensions}-dimensional embeddings on \`POST /v1/embeddings\`.`
       : row.hasMeasuredCapabilities

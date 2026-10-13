@@ -138,6 +138,23 @@ describe('ModelIndexClient', () => {
     expect(screen.getByText('Showing 1 model.')).toBeInTheDocument();
   });
 
+  it('lists judge models only under the Judge tab, not Text', () => {
+    const judge = createRow({
+      id: 'example-judge',
+      name: 'Example Judge',
+      inputs: [],
+      inputsLabel: '—',
+      isJudge: true,
+    });
+    render(<ModelIndexClient rows={[...rows, judge]} variant="landing" />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Judge' }));
+    expect(getVisibleModelNames()).toEqual(['Example Judge']);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Text' }));
+    expect(getVisibleModelNames()).not.toContain('Example Judge');
+  });
+
   it('closes the provider listbox when focus leaves the control', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 

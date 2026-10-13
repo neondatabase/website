@@ -12,7 +12,8 @@ const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
     {row.isJudge ? (
       <p>
         Neon AI Gateway provides {row.name} by {row.providerName}, a System One judge model. It
-        scores answers to questions about a state and does not generate text.
+        evaluates a given state against a set of questions and returns scored answers; it does not
+        generate text.
       </p>
     ) : row.isEmbedding ? (
       <p>

@@ -117,7 +117,7 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
   const otherRows = rows.filter(
     (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isJudge
   );
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isJudge);
   const sections = ['### Text models', renderProviderTables(textRows, '####')];
 
   sections.push(
@@ -159,7 +159,7 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
   if (judgeRows.length > 0) {
     sections.push('### Judge models');
     sections.push(
-      'These System One models score answers to questions about a state rather than generating text:'
+      'These System One models evaluate a given state against a set of questions and return scored answers rather than generating text:'
     );
     sections.push(`${JUDGE_TABLE_HEADER}\n${renderJudgeTableRows(judgeRows)}`);
   }

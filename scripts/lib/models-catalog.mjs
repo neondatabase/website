@@ -208,6 +208,9 @@ export function classifyDrift(website, modelsDev) {
  * `type: "embedding"` swaps the required set entirely (see `EMBEDDING_REQUIRED_KEYS`) — a model
  * on `/v1/embeddings` has no reasoning, tool calls, attachments, or generation limit to report,
  * and `dimensions` (the vector length) is the fact that actually describes it.
+ *
+ * `type: "judge"` (see `JUDGE_REQUIRED_KEYS`) is the same idea without `dimensions`: a judge
+ * generates no text, so it has no chat fields or limits and is billed on input only.
  */
 export function validateCatalog(data) {
   const errors = [];

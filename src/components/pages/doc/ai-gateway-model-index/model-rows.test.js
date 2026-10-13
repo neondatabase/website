@@ -95,9 +95,9 @@ describe('AI Gateway model rows', () => {
     const [row] = buildRows(
       {
         models: {
-          'judge-4b': {
-            id: 'judge-4b',
-            name: 'Judge 4B',
+          'example-judge': {
+            id: 'example-judge',
+            name: 'Example Judge',
             type: 'judge',
             cost: { input: 0.1 },
           },
