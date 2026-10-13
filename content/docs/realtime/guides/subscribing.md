@@ -19,7 +19,7 @@ Workers, trusted agents and other backend processes can [subscribe to a query&nb
 However, to subscribe to a live query in an untrusted environment, you'll need to [expose a sealed query from your backend](./queries#exposing-queries), either a [standard API endpoint](#fetch-from-an-api-endpoint) or [using a server function](#fetch-from-a-server-function) (where [SSR](./ssr) can embed the sealed query and the initial results).
 
 <Admonition type="tip" title="Running example">
-The guide continues the [running example](https://github.com/neondatabase/examples/tree/main/realtime/realtime-guides-chat-app) introduced in the [Defining&nbsp;queries](./queries#setup)&nbsp;guide.
+The guide continues the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) introduced in the [Defining&nbsp;queries](./queries#setup)&nbsp;guide.
 </Admonition>
 
 ### Subscribe in trusted backend code
@@ -57,25 +57,23 @@ Never fill a direct subscription's parameters from untrusted input.
 
 `NEON_REALTIME_URL` is written by `neon env pull --service realtime`, or shown on the [Realtime page](../quickstart#enable-realtime) in the Neon Console. Note the `await`: the direct server's `subscribe()` is async, because it seals the query locally before it subscribes. The browser client's `subscribe()` is synchronous. Otherwise it's the same subscription, with the same options and [callbacks](#listen-for-changes) as the client's.
 
-The direct server renews its own sealed queries and recovers from outages until you close the subscription or it moves to `error`. An error is final, so a long-running worker should watch for it with `onStateChange` and subscribe again. `realtime.close()` closes every subscription and the shared WebSocket. The direct server needs a global `WebSocket`, which Node.js 22 and later have built in.
+The direct server renews its own sealed queries and recovers from outages until you close the subscription or it moves to `error`. An error is final, so a long-running worker should watch for it with `onStateChange` and subscribe again. `realtime.close()` closes every subscription and the shared WebSocket. The direct server opens its WebSocket with the `ws` package, which you installed in [setup](./queries#setup), even on Node.js 22 and later.
 
 Use direct subscriptions for workers, trusted agents and server-side fan-out. The [Mastra example](../examples/mastra) uses them to drive agent workflows.
 
 ### Fetch from an API endpoint
 
-Most queries depend on who's asking, and often on what they're asking for.
+Most queries depend on who's asking and what they're asking for.
 
 If you've [exposed your sealed query via an API endpoint](./queries#exposing-an-endpoint), you can provide this context via the request data using your standard auth machinery, such as [Neon Auth](/docs/auth/overview):
 
 ```ts filename="frontend/auth.ts"
 import { createAuthClient } from "@neondatabase/auth"
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
-  fetchOptions: { credentials: "include" }
-})
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
 ```
 
-In our running example, we create a typed client for the API with Hono's `hc`. It takes its routes from `AppType`, so every call is checked against the backend:
+In our [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app), we create a typed client for the API with Hono's `hc`. It takes its routes from `AppType`, so every call is checked against the backend:
 
 ```ts filename="frontend/api.ts"
 import type { SealedLiveQuery } from "@neon/realtime/client"
@@ -87,9 +85,10 @@ import { authClient } from "./auth"
 
 export const server = hc<AppType>(window.location.origin, {
   headers: async (): Promise<Record<string, string>> => {
-    const { data } = await authClient.token()
+    const { data } = await authClient.getSession()
+    const token = data?.session.token
 
-    return data?.token ? { Authorization: `Bearer ${data.token}` } : {}
+    return token ? { Authorization: `Bearer ${token}` } : {}
   }
 })
 
@@ -106,13 +105,15 @@ export async function fetchSealedMessages(channelId: number): Promise<SealedLive
 
 Hono's client types the response body as JSON, so the `Date` in `created_at` shows up as a `string`. The `as` restores the row type that the Realtime client decodes at runtime.
 
-The `headers` function runs before each request and adds a fresh token, because Neon Auth tokens only last about 15 minutes. Without a session there's no token, so the API answers 401.
+`getSession()` returns the cached session until its JWT is about to expire, then fetches a new one, so each request carries a valid token. Neon Auth tokens only last about 15 minutes. Without a session there's no token, so the API answers 401.
+
+`window.location.origin` assumes your dev server proxies `/api` to the API, as the [example's Vite config](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app/vite.config.ts) does.
 
 ### Fetch from a server function
 
 If your framework supports [server functions](https://react.dev/reference/rsc/server-functions), you can expose the sealed query from one instead of an API endpoint. Client code calls a server function like a local async function, so it can take the place of `fetchSealedMessages()` [above](#fetch-from-an-api-endpoint). With [SSR](./ssr), the page can also embed the sealed query and the initial query results on the server.
 
-See [Using server functions](./queries#using-server-functions), the [Server-side rendering](./ssr) guide and the [TanStack](../examples/tanstack) example for more details.
+Server functions run on your app's origin, so they read the session from its cookie. See [Exposing queries](./queries#exposing-queries), [Using server functions](./queries#using-server-functions), the [Server-side rendering](./ssr) guide and the [TanStack](../examples/tanstack) example for more details.
 
 <Admonition type="important" title="Next.js uses Route Handlers">
 In Next.js, server functions are server actions, which run one at a time, so renew through a [Route Handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) instead, as the [Next.js](../examples/nextjs) example shows.
@@ -124,8 +125,12 @@ Create one client for the whole app, because every subscription shares its conne
 
 ```ts filename="frontend/client.ts"
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 
-export const client = createRealtimeClient({ url: import.meta.env.VITE_NEON_REALTIME_URL })
+export const client = createRealtimeClient({
+  url: import.meta.env.VITE_NEON_REALTIME_URL,
+  parsers: { ...drizzleParsers }
+})
 ```
 
 The client opens its WebSocket lazily, on the first subscription, and multiplexes every subscription over that one connection. The first sealed query binds the connection to its database, so every subscription on a client must target the same `db`. The connection carries no user identity. Each subscription brings its own sealed query.
@@ -202,40 +207,36 @@ Rows arrive decoded, so `created_at` is a `Date`, as Drizzle's `Message` type sa
 
 `NULL` arrives as `null`, and arrays of built-in types decode element by element.
 
+The client above spreads `drizzleParsers`, so rows match Drizzle's types: `date` stays a string and `timestamp` is read as UTC.
+
 When you're done with a subscription, call `unsubscribe()`. It moves the subscription to `closed`, so any listeners get a final `closed` update, and then stops all further callbacks. `client.close()` does the same for every subscription on the client, and closes the WebSocket.
 
 ## Listen for changes
 
-A subscription has four callbacks. Each one takes a listener and returns a function that removes it:
+A subscription has three callbacks. Each one takes a listener and returns a function that removes it:
 
-| Callback        | Listener arguments                                                         | Fires                                                                                                                                  |
-| --------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `onChange`      | `snapshot: LiveQuerySnapshot<Row>`                                         | After every reset, batch and state change, with the current rows and state. Materialized subscriptions only.                           |
-| `onStateChange` | `state: LiveQueryState`                                                    | When the status changes.                                                                                                               |
-| `onReset`       | `rows: readonly RawLiveQueryRow<Row>[]`, each `{ rowId, row }`             | When a complete, authoritative result replaces the previous one.                                                                       |
-| `onBatch`       | `changes: readonly LiveQueryChange<Row>[]` and `batch: LiveQueryBatchInfo` | When committed transactions change the result. Each change is an `upsert` with a `rowId` and `row`, or a `remove` with only a `rowId`. |
+| Callback        | Listener arguments                 | Fires                                                                                                                                                                                                                                                                                                                            |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onChange`      | `snapshot: LiveQuerySnapshot<Row>` | After each state change, after each `changes` update while `live`, and when a new result is complete. Materialized subscriptions only.                                                                                                                                                                                           |
+| `onStateChange` | `state: LiveQueryState`            | When the status changes.                                                                                                                                                                                                                                                                                                         |
+| `onUpdate`      | `update: RawLiveQueryUpdate<Row>`  | With `type: "rows"` and `rows`, each `{ rowId, row }`, when a complete, authoritative result replaces the previous one. With `type: "changes"`, `changes` and `batch: LiveQueryBatchInfo` when committed transactions change the result. Each change is an `upsert` with a `rowId` and `row`, or a `remove` with only a `rowId`. |
 
 Listeners run in the order you add them, and one that throws doesn't stop the others. Each initial result and each committed transaction becomes visible atomically. Outside a listener, `getSnapshot()` and `getState()` return the current values.
 
 The status tells you how far to trust the rows:
 
-| Status       | Meaning                                                                                                                                                                             |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `connecting` | Waiting for the first result. With `initialData` from a [server render](./ssr), a subscription starts in `stale` instead.                                                           |
-| `live`       | The rows are authoritative and changes are streaming.                                                                                                                               |
-| `stale`      | The rows are usable but not yet confirmed current: after a [server render](./ssr), while the client reconnects, or while it recovers an expired sealed query. Render them normally. |
-| `error`      | Automatic recovery has stopped. See [handle errors](#handle-errors).                                                                                                                |
-| `closed`     | Closed by `unsubscribe()` or `client.close()`. It doesn't reopen.                                                                                                                   |
+| Status       | Meaning                                                                                                                                                                                      |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `connecting` | Waiting for a result: when it starts, including with `initialData` from a [server render](./ssr), after a reconnect, and after renewing an expired sealed query. Rows you already have stay. |
+| `live`       | The rows are authoritative and changes are streaming. It stays `live` while the server replaces the whole result.                                                                            |
+| `stale`      | The sealed query expired and the subscription is waiting for a renewed one. The rows are usable but may be out of date. Render them normally.                                                |
+| `error`      | Automatic recovery has stopped. See [handle errors](#handle-errors).                                                                                                                         |
+| `closed`     | Closed by `unsubscribe()` or `client.close()`. It doesn't reopen.                                                                                                                            |
 
-By default, subscriptions are materialized. The client keeps the rows and applies each batch before `onBatch` fires, so `getSnapshot()` in a batch listener already includes it. If your code keeps its own rows, as TanStack&nbsp;DB does, pass `{ materialize: false }` for a raw subscription. It has the same callbacks except `onChange`, and no `getSnapshot()`. Keep the rows in a map keyed by `rowId`, replace them on each reset and apply each batch's upserts and removes:
+By default, subscriptions are materialized. The client keeps the rows and applies each update before `onUpdate` fires, so `getSnapshot()` in an update listener already includes it. If your code keeps its own rows, as TanStack&nbsp;DB does, pass `{ materialize: false }` for a raw subscription. It has the same callbacks except `onChange`, and no `getSnapshot()`. Keep the rows in a map keyed by `rowId`, replace them on each `rows` update and apply each `changes` update's upserts and removes:
 
 ```ts filename="frontend/raw-messages.ts"
-import type {
-  LiveQueryBatchInfo,
-  LiveQueryChange,
-  LiveQueryState,
-  RawLiveQueryRow
-} from "@neon/realtime/client"
+import type { LiveQueryState, RawLiveQueryUpdate } from "@neon/realtime/client"
 
 import type { Message } from "../backend/schema"
 import { fetchSealedMessages } from "./api"
@@ -243,21 +244,21 @@ import { client } from "./client"
 
 const channelId = 2
 
-// Keyed by rowId, which is only valid until the next reset
+// Keyed by rowId, which is only valid until the next `rows` update
 const rows = new Map<string, Message>()
 
 const subscription = client.subscribe(await fetchSealedMessages(channelId), { materialize: false })
 
-subscription.onReset((reset: readonly RawLiveQueryRow<Message>[]) => {
-  rows.clear()
-
-  for (const { rowId, row } of reset) {
-    rows.set(rowId, row)
+subscription.onUpdate((update: RawLiveQueryUpdate<Message>) => {
+  if (update.type === "rows") {
+    rows.clear()
+    for (const { rowId, row } of update.rows) {
+      rows.set(rowId, row)
+    }
+    return
   }
-})
 
-subscription.onBatch((changes: readonly LiveQueryChange<Message>[], batch: LiveQueryBatchInfo) => {
-  for (const change of changes) {
+  for (const change of update.changes) {
     if (change.type === "upsert") {
       rows.set(change.rowId, change.row)
     } else {
@@ -265,7 +266,7 @@ subscription.onBatch((changes: readonly LiveQueryChange<Message>[], batch: LiveQ
     }
   }
 
-  console.log(`${rows.size} messages after transactions ${batch.txids.join(", ")}`)
+  console.log(`${rows.size} messages after transactions ${update.batch.txids.join(", ")}`)
 })
 
 subscription.onStateChange((state: LiveQueryState) => {
@@ -273,9 +274,9 @@ subscription.onStateChange((state: LiveQueryState) => {
 })
 ```
 
-A `rowId` is opaque and scoped to its subscription, and each reset invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A reset can arrive at any time, for example after a reconnect, and it always replaces the whole result.
+A `rowId` is opaque and scoped to its subscription, and each `rows` update invalidates every earlier one. It isn't a primary key, so don't store it or match it against your own ids. A `rows` update can arrive at any time, for example after a reconnect, and it always replaces the whole result.
 
-Each batch also carries the ids of the Postgres transactions it covers, in `batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
+Each `changes` update also carries the ids of the Postgres transactions it covers, in `update.batch.txids`. The [mutations guide](./mutations) uses them to confirm optimistic&nbsp;mutations.
 
 ## Renew the sealed query
 
@@ -394,8 +395,8 @@ function renderMessage(message: Message): HTMLLIElement {
 
 `renew()` replaces the sealed query for the same exact query, and it keeps the subscription object, its listeners and its rows:
 
-- Before expiry, the subscription stays `live`, with no reset.
-- After expiry, for example when a laptop wakes from sleep, the subscription stays `stale`. The client subscribes again behind the same object, and the next reset makes it `live` again.
+- Before expiry, the subscription stays `live`, with no new `rows` update.
+- After expiry, for example when a laptop wakes from sleep, the subscription is `stale`. `renew()` moves it to `connecting` while the client subscribes again behind the same object, and to `live` when the new result arrives.
 
 If the replacement's `queryFingerprint` doesn't match, the promise that `renew()` returns rejects. A changed parameter, like a different channel, makes a different query, so subscribe to the new one and unsubscribe from the old.
 
@@ -423,11 +424,13 @@ If the connection itself fails, for example because of a fatal protocol error or
 
 The client is silent by default. To see what it's doing, pass a `logLevel` to [`createRealtimeClient()`](../sdks/typescript#client-createrealtimeclient): `"error"`, `"warn"`, `"info"` or `"debug"`. Each level includes the ones before it.
 
-```ts filename="frontend/client.ts" {5}
+```ts filename="frontend/client.ts" {7}
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 
 export const client = createRealtimeClient({
   url: import.meta.env.VITE_NEON_REALTIME_URL,
+  parsers: { ...drizzleParsers },
   logLevel: import.meta.env.DEV ? "debug" : "warn"
 })
 ```
