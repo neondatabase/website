@@ -12,8 +12,8 @@
 | [`MaterializedLiveQueryOptions`](#client-materializedlivequeryoptions)           | Interface  | Options for the default materialized subscription.                                                                                                                                                                                                                                                                                                                                                                         |
 | [`MaterializedLiveQuerySubscription`](#client-materializedlivequerysubscription) | Interface  | A live-query subscription that also retains and publishes the current rows.                                                                                                                                                                                                                                                                                                                                                |
 | [`RawLiveQueryOptions`](#client-rawlivequeryoptions)                             | Interface  | Options for a raw, non-materializing subscription.                                                                                                                                                                                                                                                                                                                                                                         |
-| [`RawLiveQueryRow`](#client-rawlivequeryrow)                                     | Interface  | A row in a raw reset, paired with its opaque Realtime identity.                                                                                                                                                                                                                                                                                                                                                            |
-| [`RawLiveQuerySubscription`](#client-rawlivequerysubscription)                   | Interface  | A live-query subscription that exposes raw reset and publication events.                                                                                                                                                                                                                                                                                                                                                   |
+| [`RawLiveQueryRow`](#client-rawlivequeryrow)                                     | Interface  | A row in a complete raw result, paired with its opaque Realtime identity.                                                                                                                                                                                                                                                                                                                                                  |
+| [`RawLiveQuerySubscription`](#client-rawlivequerysubscription)                   | Interface  | A live-query subscription that exposes ordered raw result updates.                                                                                                                                                                                                                                                                                                                                                         |
 | [`RealtimeClient`](#client-realtimeclient)                                       | Interface  | A client that multiplexes independently disposable subscriptions.                                                                                                                                                                                                                                                                                                                                                          |
 | [`RealtimeClientOptions`](#client-realtimeclientoptions)                         | Interface  | Configuration for a reusable Realtime browser client.                                                                                                                                                                                                                                                                                                                                                                      |
 | [`LiveQueryChange`](#client-livequerychange)                                     | Type alias | A row upsert or removal in an atomic publication batch.                                                                                                                                                                                                                                                                                                                                                                    |
@@ -23,6 +23,7 @@
 | [`PostgreSQLParserForOid`](#client-postgresqlparserforoid)                       | Type alias | Parser input selected by the fixed Realtime protocol v1 OID/codec mapping.                                                                                                                                                                                                                                                                                                                                                 |
 | [`PostgreSQLParsers`](#client-postgresqlparsers)                                 | Type alias | A sparse collection of result parsers keyed by PostgreSQL type OID.                                                                                                                                                                                                                                                                                                                                                        |
 | [`PostgreSQLTextParser`](#client-postgresqltextparser)                           | Type alias | A parser for a PostgreSQL value transported with the `pg_text` codec.                                                                                                                                                                                                                                                                                                                                                      |
+| [`RawLiveQueryUpdate`](#client-rawlivequeryupdate)                               | Type alias | One authoritative raw query-result update. `rows` replaces the complete preceding result and invalidates its row-ID namespace. `changes` applies incrementally to the current result.                                                                                                                                                                                                                                      |
 | [`RealtimeLogEntry`](#client-realtimelogentry)                                   | Type alias | Structured client diagnostic passed to a configured logger. Narrowing on `event` also narrows the metadata available on the entry.                                                                                                                                                                                                                                                                                         |
 | [`RealtimeLogEvent`](#client-realtimelogevent)                                   | Type alias | Stable name for one client diagnostic event.                                                                                                                                                                                                                                                                                                                                                                               |
 | [`RealtimeLogger`](#client-realtimelogger)                                       | Type alias | Receives structured Realtime client diagnostics.                                                                                                                                                                                                                                                                                                                                                                           |
@@ -184,10 +185,10 @@ Options for the default materialized subscription.
 
 #### Members (#client-materializedlivequeryoptions-members)
 
-| Name           | Type             | Description                                                               |
-| -------------- | ---------------- | ------------------------------------------------------------------------- |
-| `initialData?` | `readonly Row[]` | Preloaded rows exposed as stale data until the first authoritative reset. |
-| `materialize?` | `readonly true`  | Select materialization; omitted and `true` are equivalent.                |
+| Name           | Type             | Description                                                          |
+| -------------- | ---------------- | -------------------------------------------------------------------- |
+| `initialData?` | `readonly Row[]` | Preloaded rows exposed while connecting to the authoritative result. |
+| `materialize?` | `readonly true`  | Select materialization; omitted and `true` are equivalent.           |
 
 ### MaterializedLiveQuerySubscription (#client-materializedlivequerysubscription)
 
@@ -199,18 +200,17 @@ A live-query subscription that also retains and publishes the current rows.
 
 #### Members (#client-materializedlivequerysubscription-members)
 
-| Name                                                                      | Type                                                                                                      | Description                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`awaitRows`](#client-materializedlivequerysubscriptionawaitrows)         | `(matches: (rows: readonly Row[]) => boolean, timeout?: number) => Promise<void>`                         | Wait until the materialized rows satisfy a predicate. The current snapshot is inspected before waiting for later changes, so this also succeeds when matching rows arrived before the call.                                                                                                    |
-| [`awaitTxId`](#client-materializedlivequerysubscriptionawaittxid)         | `(txid: string, timeout?: number) => Promise<void>`                                                       | Wait until this subscription has applied a PostgreSQL transaction. Recently applied transaction IDs are retained so this also succeeds when the batch arrives before the caller receives the mutation response.                                                                                |
-| `getSnapshot`                                                             | `() => LiveQuerySnapshot<Row>`                                                                            | Return the current rows and lifecycle state atomically.                                                                                                                                                                                                                                        |
-| `getState`                                                                | `() => LiveQueryState`                                                                                    | Return the complete current lifecycle state.                                                                                                                                                                                                                                                   |
-| [`onBatch`](#client-materializedlivequerysubscriptiononbatch)             | `(listener: (changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void) => () => void` | Observe changes from one atomic publication and its transaction IDs. Every affected materialized subscription has already applied the batch before any batch listener runs.                                                                                                                    |
-| [`onChange`](#client-materializedlivequerysubscriptiononchange)           | `(listener: (snapshot: LiveQuerySnapshot<Row>) => void) => () => void`                                    | Observe row or lifecycle changes as complete snapshots. The listener runs after resets, publication batches, and state transitions.                                                                                                                                                            |
-| [`onReset`](#client-materializedlivequerysubscriptiononreset)             | `(listener: (rows: readonly RawLiveQueryRow<Row>[]) => void) => () => void`                               | Observe authoritative full-result resets. A reset replaces the preceding row-ID namespace in its entirety.                                                                                                                                                                                     |
-| [`onStateChange`](#client-materializedlivequerysubscriptiononstatechange) | `(listener: (state: LiveQueryState) => void) => () => void`                                               | Observe lifecycle transitions.                                                                                                                                                                                                                                                                 |
-| [`renew`](#client-materializedlivequerysubscriptionrenew)                 | `(query: SealedLiveQuery<Row>) => Promise<void>`                                                          | Renew this logical subscription with a capability for the same exact query. If the preceding subscription has expired, the client creates a new wire subscription while preserving this object, its listeners, and any retained rows. The replacement then produces a new authoritative reset. |
-| `unsubscribe`                                                             | `() => void`                                                                                              | Permanently close this subscription and remove its listeners.                                                                                                                                                                                                                                  |
+| Name                                                                      | Type                                                                              | Description                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`awaitRows`](#client-materializedlivequerysubscriptionawaitrows)         | `(matches: (rows: readonly Row[]) => boolean, timeout?: number) => Promise<void>` | Wait until the materialized rows satisfy a predicate. The current snapshot is inspected before waiting for later changes, so this also succeeds when matching rows arrived before the call.                                                                                                     |
+| [`awaitTxId`](#client-materializedlivequerysubscriptionawaittxid)         | `(txid: string, timeout?: number) => Promise<void>`                               | Wait until this subscription has applied a PostgreSQL transaction. Recently applied transaction IDs are retained so this also succeeds when the batch arrives before the caller receives the mutation response.                                                                                 |
+| `getSnapshot`                                                             | `() => LiveQuerySnapshot<Row>`                                                    | Return the current rows and lifecycle state atomically.                                                                                                                                                                                                                                         |
+| `getState`                                                                | `() => LiveQueryState`                                                            | Return the complete current lifecycle state.                                                                                                                                                                                                                                                    |
+| [`onChange`](#client-materializedlivequerysubscriptiononchange)           | `(listener: (snapshot: LiveQuerySnapshot<Row>) => void) => () => void`            | Observe row or lifecycle changes as complete snapshots. The listener runs after complete-row replacements, incremental changes, and state transitions.                                                                                                                                          |
+| [`onStateChange`](#client-materializedlivequerysubscriptiononstatechange) | `(listener: (state: LiveQueryState) => void) => () => void`                       | Observe lifecycle transitions.                                                                                                                                                                                                                                                                  |
+| [`onUpdate`](#client-materializedlivequerysubscriptiononupdate)           | `(listener: (update: RawLiveQueryUpdate<Row>) => void) => () => void`             | Observe complete-row replacements and incremental changes through one ordered update stream. Every affected materialized subscription has already applied an update before its listener runs.                                                                                                   |
+| [`renew`](#client-materializedlivequerysubscriptionrenew)                 | `(query: SealedLiveQuery<Row>) => Promise<void>`                                  | Renew this logical subscription with a capability for the same exact query. If the preceding subscription has expired, the client creates a new wire subscription while preserving this object, its listeners, and any retained rows. The replacement then produces a new authoritative result. |
+| `unsubscribe`                                                             | `() => void`                                                                      | Permanently close this subscription and remove its listeners.                                                                                                                                                                                                                                   |
 
 #### MaterializedLiveQuerySubscription.awaitRows (#client-materializedlivequerysubscriptionawaitrows)
 
@@ -248,32 +248,14 @@ the batch arrives before the caller receives the mutation response.
 from transactions known to have committed.
 
 **Throws:** If the timeout elapses, the transaction ID is invalid, or the
-subscription closes before applying the transaction.
+subscription fails or closes before applying the transaction.
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                                             |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                          |
-| `timeout?` | `number` | Optional maximum wait in milliseconds. By default the promise remains pending until the transaction arrives or the subscription closes. |
-
-#### MaterializedLiveQuerySubscription.onBatch (#client-materializedlivequerysubscriptiononbatch)
-
-```ts
-onBatch(listener: (changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void): () => void
-```
-
-Observe changes from one atomic publication and its transaction IDs.
-Every affected materialized subscription has already applied the batch
-before any batch listener runs.
-
-**Returns:** A function that removes this listener.
-
-**Parameters**
-
-| Name       | Type                                                                            | Description |
-| ---------- | ------------------------------------------------------------------------------- | ----------- |
-| `listener` | `(changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void` |             |
+| Name       | Type     | Description                                                                                                                                                      |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                                                   |
+| `timeout?` | `number` | Optional maximum wait in milliseconds. By default the promise remains pending until the transaction arrives, the subscription fails, or the subscription closes. |
 
 #### MaterializedLiveQuerySubscription.onChange (#client-materializedlivequerysubscriptiononchange)
 
@@ -282,7 +264,8 @@ onChange(listener: (snapshot: LiveQuerySnapshot<Row>) => void): () => void
 ```
 
 Observe row or lifecycle changes as complete snapshots.
-The listener runs after resets, publication batches, and state transitions.
+The listener runs after complete-row replacements, incremental changes,
+and state transitions.
 
 **Returns:** A function that removes this listener.
 
@@ -291,23 +274,6 @@ The listener runs after resets, publication batches, and state transitions.
 | Name       | Type                                         | Description |
 | ---------- | -------------------------------------------- | ----------- |
 | `listener` | `(snapshot: LiveQuerySnapshot<Row>) => void` |             |
-
-#### MaterializedLiveQuerySubscription.onReset (#client-materializedlivequerysubscriptiononreset)
-
-```ts
-onReset(listener: (rows: readonly RawLiveQueryRow<Row>[]) => void): () => void
-```
-
-Observe authoritative full-result resets.
-A reset replaces the preceding row-ID namespace in its entirety.
-
-**Returns:** A function that removes this listener.
-
-**Parameters**
-
-| Name       | Type                                              | Description |
-| ---------- | ------------------------------------------------- | ----------- |
-| `listener` | `(rows: readonly RawLiveQueryRow<Row>[]) => void` |             |
 
 #### MaterializedLiveQuerySubscription.onStateChange (#client-materializedlivequerysubscriptiononstatechange)
 
@@ -325,6 +291,24 @@ Observe lifecycle transitions.
 | ---------- | --------------------------------- | ----------- |
 | `listener` | `(state: LiveQueryState) => void` |             |
 
+#### MaterializedLiveQuerySubscription.onUpdate (#client-materializedlivequerysubscriptiononupdate)
+
+```ts
+onUpdate(listener: (update: RawLiveQueryUpdate<Row>) => void): () => void
+```
+
+Observe complete-row replacements and incremental changes through one
+ordered update stream. Every affected materialized subscription has
+already applied an update before its listener runs.
+
+**Returns:** A function that removes this listener.
+
+**Parameters**
+
+| Name       | Type                                        | Description |
+| ---------- | ------------------------------------------- | ----------- |
+| `listener` | `(update: RawLiveQueryUpdate<Row>) => void` |             |
+
 #### MaterializedLiveQuerySubscription.renew (#client-materializedlivequerysubscriptionrenew)
 
 ```ts
@@ -334,10 +318,11 @@ renew(query: SealedLiveQuery<Row>): Promise<void>
 Renew this logical subscription with a capability for the same exact query.
 If the preceding subscription has expired, the client creates a new
 wire subscription while preserving this object, its listeners, and any
-retained rows. The replacement then produces a new authoritative reset.
+retained rows. The replacement then produces a new authoritative result.
 
 **Returns:** A promise that resolves after the proxy accepts the replacement.
-A subsequent authoritative reset returns the subscription to `live`.
+Calling this while `stale` moves the subscription to `connecting`; a
+subsequent authoritative result returns it to `live`.
 
 **Throws:** If the replacement query fingerprint differs or renewal is rejected.
 
@@ -359,7 +344,7 @@ Options for a raw, non-materializing subscription.
 
 | Name          | Type             | Description                                                          |
 | ------------- | ---------------- | -------------------------------------------------------------------- |
-| `materialize` | `readonly false` | Disable SDK materialization and consume resets and batches directly. |
+| `materialize` | `readonly false` | Disable SDK materialization and consume raw result updates directly. |
 
 ### RawLiveQueryRow (#client-rawlivequeryrow)
 
@@ -367,14 +352,14 @@ Options for a raw, non-materializing subscription.
 interface RawLiveQueryRow<Row>
 ```
 
-A row in a raw reset, paired with its opaque Realtime identity.
+A row in a complete raw result, paired with its opaque Realtime identity.
 
 #### Members (#client-rawlivequeryrow-members)
 
-| Name    | Type              | Description                                                          |
-| ------- | ----------------- | -------------------------------------------------------------------- |
-| `row`   | `readonly Row`    | Decoded query row.                                                   |
-| `rowId` | `readonly string` | Opaque identity scoped to the subscription and invalidated by reset. |
+| Name    | Type              | Description                                                     |
+| ------- | ----------------- | --------------------------------------------------------------- |
+| `row`   | `readonly Row`    | Decoded query row.                                              |
+| `rowId` | `readonly string` | Opaque identity invalidated by the next complete `rows` update. |
 
 ### RawLiveQuerySubscription (#client-rawlivequerysubscription)
 
@@ -382,19 +367,18 @@ A row in a raw reset, paired with its opaque Realtime identity.
 interface RawLiveQuerySubscription<Row>
 ```
 
-A live-query subscription that exposes raw reset and publication events.
+A live-query subscription that exposes ordered raw result updates.
 
 #### Members (#client-rawlivequerysubscription-members)
 
-| Name                                                             | Type                                                                                                      | Description                                                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`awaitTxId`](#client-rawlivequerysubscriptionawaittxid)         | `(txid: string, timeout?: number) => Promise<void>`                                                       | Wait until this subscription has applied a PostgreSQL transaction. Recently applied transaction IDs are retained so this also succeeds when the batch arrives before the caller receives the mutation response.                                                                                |
-| `getState`                                                       | `() => LiveQueryState`                                                                                    | Return the complete current lifecycle state.                                                                                                                                                                                                                                                   |
-| [`onBatch`](#client-rawlivequerysubscriptiononbatch)             | `(listener: (changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void) => () => void` | Observe changes from one atomic publication and its transaction IDs. Every affected materialized subscription has already applied the batch before any batch listener runs.                                                                                                                    |
-| [`onReset`](#client-rawlivequerysubscriptiononreset)             | `(listener: (rows: readonly RawLiveQueryRow<Row>[]) => void) => () => void`                               | Observe authoritative full-result resets. A reset replaces the preceding row-ID namespace in its entirety.                                                                                                                                                                                     |
-| [`onStateChange`](#client-rawlivequerysubscriptiononstatechange) | `(listener: (state: LiveQueryState) => void) => () => void`                                               | Observe lifecycle transitions.                                                                                                                                                                                                                                                                 |
-| [`renew`](#client-rawlivequerysubscriptionrenew)                 | `(query: SealedLiveQuery<Row>) => Promise<void>`                                                          | Renew this logical subscription with a capability for the same exact query. If the preceding subscription has expired, the client creates a new wire subscription while preserving this object, its listeners, and any retained rows. The replacement then produces a new authoritative reset. |
-| `unsubscribe`                                                    | `() => void`                                                                                              | Permanently close this subscription and remove its listeners.                                                                                                                                                                                                                                  |
+| Name                                                             | Type                                                                  | Description                                                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`awaitTxId`](#client-rawlivequerysubscriptionawaittxid)         | `(txid: string, timeout?: number) => Promise<void>`                   | Wait until this subscription has applied a PostgreSQL transaction. Recently applied transaction IDs are retained so this also succeeds when the batch arrives before the caller receives the mutation response.                                                                                 |
+| `getState`                                                       | `() => LiveQueryState`                                                | Return the complete current lifecycle state.                                                                                                                                                                                                                                                    |
+| [`onStateChange`](#client-rawlivequerysubscriptiononstatechange) | `(listener: (state: LiveQueryState) => void) => () => void`           | Observe lifecycle transitions.                                                                                                                                                                                                                                                                  |
+| [`onUpdate`](#client-rawlivequerysubscriptiononupdate)           | `(listener: (update: RawLiveQueryUpdate<Row>) => void) => () => void` | Observe complete-row replacements and incremental changes through one ordered update stream. Every affected materialized subscription has already applied an update before its listener runs.                                                                                                   |
+| [`renew`](#client-rawlivequerysubscriptionrenew)                 | `(query: SealedLiveQuery<Row>) => Promise<void>`                      | Renew this logical subscription with a capability for the same exact query. If the preceding subscription has expired, the client creates a new wire subscription while preserving this object, its listeners, and any retained rows. The replacement then produces a new authoritative result. |
+| `unsubscribe`                                                    | `() => void`                                                          | Permanently close this subscription and remove its listeners.                                                                                                                                                                                                                                   |
 
 #### RawLiveQuerySubscription.awaitTxId (#client-rawlivequerysubscriptionawaittxid)
 
@@ -411,49 +395,14 @@ the batch arrives before the caller receives the mutation response.
 from transactions known to have committed.
 
 **Throws:** If the timeout elapses, the transaction ID is invalid, or the
-subscription closes before applying the transaction.
+subscription fails or closes before applying the transaction.
 
 **Parameters**
 
-| Name       | Type     | Description                                                                                                                             |
-| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                          |
-| `timeout?` | `number` | Optional maximum wait in milliseconds. By default the promise remains pending until the transaction arrives or the subscription closes. |
-
-#### RawLiveQuerySubscription.onBatch (#client-rawlivequerysubscriptiononbatch)
-
-```ts
-onBatch(listener: (changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void): () => void
-```
-
-Observe changes from one atomic publication and its transaction IDs.
-Every affected materialized subscription has already applied the batch
-before any batch listener runs.
-
-**Returns:** A function that removes this listener.
-
-**Parameters**
-
-| Name       | Type                                                                            | Description |
-| ---------- | ------------------------------------------------------------------------------- | ----------- |
-| `listener` | `(changes: readonly LiveQueryChange<Row>[], batch: LiveQueryBatchInfo) => void` |             |
-
-#### RawLiveQuerySubscription.onReset (#client-rawlivequerysubscriptiononreset)
-
-```ts
-onReset(listener: (rows: readonly RawLiveQueryRow<Row>[]) => void): () => void
-```
-
-Observe authoritative full-result resets.
-A reset replaces the preceding row-ID namespace in its entirety.
-
-**Returns:** A function that removes this listener.
-
-**Parameters**
-
-| Name       | Type                                              | Description |
-| ---------- | ------------------------------------------------- | ----------- |
-| `listener` | `(rows: readonly RawLiveQueryRow<Row>[]) => void` |             |
+| Name       | Type     | Description                                                                                                                                                      |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `txid`     | `string` | PostgreSQL transaction ID as a decimal string.                                                                                                                   |
+| `timeout?` | `number` | Optional maximum wait in milliseconds. By default the promise remains pending until the transaction arrives, the subscription fails, or the subscription closes. |
 
 #### RawLiveQuerySubscription.onStateChange (#client-rawlivequerysubscriptiononstatechange)
 
@@ -471,6 +420,24 @@ Observe lifecycle transitions.
 | ---------- | --------------------------------- | ----------- |
 | `listener` | `(state: LiveQueryState) => void` |             |
 
+#### RawLiveQuerySubscription.onUpdate (#client-rawlivequerysubscriptiononupdate)
+
+```ts
+onUpdate(listener: (update: RawLiveQueryUpdate<Row>) => void): () => void
+```
+
+Observe complete-row replacements and incremental changes through one
+ordered update stream. Every affected materialized subscription has
+already applied an update before its listener runs.
+
+**Returns:** A function that removes this listener.
+
+**Parameters**
+
+| Name       | Type                                        | Description |
+| ---------- | ------------------------------------------- | ----------- |
+| `listener` | `(update: RawLiveQueryUpdate<Row>) => void` |             |
+
 #### RawLiveQuerySubscription.renew (#client-rawlivequerysubscriptionrenew)
 
 ```ts
@@ -480,10 +447,11 @@ renew(query: SealedLiveQuery<Row>): Promise<void>
 Renew this logical subscription with a capability for the same exact query.
 If the preceding subscription has expired, the client creates a new
 wire subscription while preserving this object, its listeners, and any
-retained rows. The replacement then produces a new authoritative reset.
+retained rows. The replacement then produces a new authoritative result.
 
 **Returns:** A promise that resolves after the proxy accepts the replacement.
-A subsequent authoritative reset returns the subscription to `live`.
+Calling this while `stale` moves the subscription to `connecting`; a
+subsequent authoritative result returns it to `live`.
 
 **Throws:** If the replacement query fingerprint differs or renewal is rejected.
 
@@ -616,6 +584,17 @@ type PostgreSQLTextParser<Value = unknown> = (value: string) => Value
 ```
 
 A parser for a PostgreSQL value transported with the `pg_text` codec.
+
+### RawLiveQueryUpdate (#client-rawlivequeryupdate)
+
+```ts
+type RawLiveQueryUpdate<Row> = { rows: readonly RawLiveQueryRow<Row>[]; readonly type: "rows" } | { readonly batch: LiveQueryBatchInfo; changes: readonly LiveQueryChange<Row>[]; readonly type: "changes" }
+```
+
+One authoritative raw query-result update.
+
+`rows` replaces the complete preceding result and invalidates its row-ID
+namespace. `changes` applies incrementally to the current result.
 
 ### RealtimeLogEntry (#client-realtimelogentry)
 
