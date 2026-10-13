@@ -66,7 +66,7 @@ Create a `.env` file in the project root:
 # Neon database URL for the client (no username, password, or query parameters)
 # Start from the Data API URL in Neon Console → Data API or `neon data-api get`;
 # remove the `.apirest` hostname label and trailing `/rest/v1` path.
-# The SDK derives the Neon Auth and Data API URLs from this value.
+# The SDK derives the Managed Better Auth and Data API URLs from this value.
 VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
 # Database Connection String (for migrations)

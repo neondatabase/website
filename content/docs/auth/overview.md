@@ -97,7 +97,7 @@ export const { GET, POST } = auth.handler();
 
 **For React/Vite (client-side):**
 
-See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Neon Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Managed Better Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -161,6 +161,6 @@ See [Neon plans](/docs/introduction/plans#auth) for more details.
 
 ## Migration from Stack Auth
 
-If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
+If you're using legacy Neon Auth (Stack Auth), your version will continue to work. When you're ready to migrate to Managed Better Auth, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
 
 <NeedHelp/>

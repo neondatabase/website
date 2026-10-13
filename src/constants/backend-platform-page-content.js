@@ -137,7 +137,7 @@ const functionsPageContent = {
     {
       question: 'Is there a free allowance for Functions?',
       answer:
-        '<p>The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month. Custom domains and triggers are part of Functions and don&apos;t carry a separate charge.</p>',
+        '<p>The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month. Custom domains and triggers are part of Functions and don&apos;t carry a separate charge.</p>',
     },
     {
       question: 'Which languages and runtimes do Functions support?',

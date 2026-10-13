@@ -81,7 +81,7 @@ The **Settings** page includes these tabs:
 - **Postgres**: Configure project-wide database defaults (all labeled **Applies to all branches**): compute defaults (size and scale to zero) for new computes, the history window for [instant restore](/docs/introduction/branch-restore) and [Time Travel](/docs/guides/time-travel-assist), your [update schedule](/docs/manage/updates), [logical replication](/docs/guides/logical-replication-guide), and the [Data API](/docs/data-api/overview).
 - **Networking**: Control **Public internet access** (allow any IP address or restrict to an [IP allowlist](/docs/introduction/ip-allow)) and **VPC access** ([Private Networking](/docs/guides/neon-private-networking)).
 - **Credentials**: Manage branch-scoped, per-service credentials, used as S3 access keys for [Object Storage](/docs/storage/overview) and as Bearer API tokens for the [AI Gateway](/docs/ai-gateway/overview).
-- **Auth**: Configure [Neon Auth](/docs/auth/overview): application info and URLs, trusted redirect domains, email sign-up and sign-in, OAuth providers, the email provider, and webhooks.
+- **Auth**: Configure [Managed Better Auth](/docs/auth/overview): application info and URLs, trusted redirect domains, email sign-up and sign-in, OAuth providers, the email provider, and webhooks.
 - **Functions**: Manage [custom domains](/docs/compute/functions/custom-domains) for your [Neon Functions](/docs/compute/functions/overview).
 - **HIPAA compliance**: Enable [HIPAA compliance](/docs/security/hipaa) for the project.
 - **Sharing** and **Project permissions**: Invite external collaborators and grant organization members per-project access. See [User permissions](/docs/manage/user-permissions).

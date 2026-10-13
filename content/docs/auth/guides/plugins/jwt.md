@@ -117,7 +117,7 @@ Your Managed Better Auth JWKS endpoint is located at:
 <YOUR_NEON_AUTH_URL>/.well-known/jwks.json
 ```
 
-If you verify Neon Auth JWTs inside [Neon Functions](/docs/compute/functions/overview), the platform injects `NEON_AUTH_BASE_URL` and `NEON_AUTH_JWKS_URL` when Neon Auth is provisioned on the branch. Use `NEON_AUTH_JWKS_URL` directly instead of deriving it yourself. See [Functions environment variables](/docs/compute/functions/environment-variables#neon-injected-variables).
+If you verify Managed Better Auth JWTs inside [Neon Functions](/docs/compute/functions/overview), the platform injects `NEON_AUTH_BASE_URL` and `NEON_AUTH_JWKS_URL` when Managed Better Auth is provisioned on the branch. Use `NEON_AUTH_JWKS_URL` directly instead of deriving it yourself. See [Functions environment variables](/docs/compute/functions/environment-variables#neon-injected-variables).
 
 ### Verification example
 
