@@ -18,6 +18,7 @@ import {
   getTools,
   getToolsPreviewErrorMessage,
   getToolsPreviewResource,
+  isValidRoleName,
 } from './utils';
 
 const AUTH_MODES = [
@@ -303,19 +304,22 @@ const McpSetupConfigurator = () => {
   const [installGlobally, setInstallGlobally] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
   const [projectId, setProjectId] = useState('');
+  const [roleName, setRoleName] = useState('');
   const [selectedScopes, setSelectedScopes] = useState(SCOPE_IDS);
   const [toolsReloadNonce, setToolsReloadNonce] = useState(0);
+  const roleNameInvalid = roleName.trim() !== '' && !isValidRoleName(roleName.trim());
 
   const queryParams = useMemo(
     () =>
       buildQueryParams({
         projectId,
         readOnly,
+        roleName,
         scopeIds: SCOPE_IDS,
         scopeIdSet: SCOPE_ID_SET,
         selectedScopes,
       }),
-    [readOnly, projectId, selectedScopes]
+    [readOnly, projectId, roleName, selectedScopes]
   );
   const queryString = queryParams.toString();
 
@@ -436,6 +440,42 @@ const McpSetupConfigurator = () => {
                 </label>
                 <span className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
                   Scopes the agent to a single project. Hides project-wide management tools.
+                </span>
+              </div>
+              <div>
+                <label className="block">
+                  <span className={FIELD_LABEL_CLASS}>Postgres role (optional)</span>
+                  <input
+                    type="text"
+                    value={roleName}
+                    placeholder="app_reader"
+                    aria-invalid={roleNameInvalid}
+                    aria-describedby="mcp-role-name-help"
+                    className={clsx(
+                      'w-full rounded-lg border bg-white px-3 py-2 font-mono text-sm text-gray-new-20 transition-colors outline-none focus:ring-2 dark:bg-gray-new-10 dark:text-gray-new-90',
+                      roleNameInvalid
+                        ? 'border-secondary-1 focus:border-secondary-1 focus:ring-secondary-1/20'
+                        : 'border-gray-new-90 focus:border-secondary-8 focus:ring-secondary-8/20 dark:border-gray-new-20 dark:focus:border-primary-1 dark:focus:ring-primary-1/20'
+                    )}
+                    onChange={(event) => setRoleName(event.target.value)}
+                  />
+                </label>
+                {roleNameInvalid && (
+                  <span
+                    className="mt-2 block text-[13px] text-secondary-1 dark:text-secondary-4"
+                    role="alert"
+                  >
+                    Use one Postgres role name: letters, digits, _ or $, starting with a letter or
+                    _, at most 63 characters. It is left out of the URL until it is valid.
+                  </span>
+                )}
+                <span id="mcp-role-name-help" className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
+                  SQL tools log in as this role instead of the database owner, so its Postgres
+                  grants decide what the agent can read and change. Hides{' '}
+                  <code className="rounded bg-gray-new-94 px-1 py-0.5 text-[12px] dark:bg-gray-new-15">
+                    get_connection_string
+                  </code>
+                  .
                 </span>
               </div>
             </div>
