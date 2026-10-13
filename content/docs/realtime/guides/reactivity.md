@@ -295,7 +295,7 @@ export type MessagesCollection = ReturnType<typeof createMessagesCollection>
 
 `getKey` returns each message's primary key. TanStack&nbsp;DB keys rows by it, so use a stable, unique column, never a subscription's `rowId`. `refreshQuery` renews the sealed query the same way [the React hook does](#refreshquery). While renewals fail, the collection stays `ready` with its last rows. See the [`realtimeCollectionOptions()` reference](../sdks/typescript#tanstack-db-realtimecollectionoptions) for the rest of the options.
 
-The collection starts syncing as soon as a live query using it is mounted. It's in the `loading` state until the first result arrives, and `ready` from then on, with each committed transaction applied atomically. A `ready` collection stays ready while the subscription is `stale`, so there's no stale flag to render. If the subscription ends in `error`, so does the collection.
+The collection starts syncing as soon as a live query using it is mounted. It's in the `loading` state until the first result arrives, and `ready` from then on, with each committed transaction applied atomically. A `ready` collection stays ready while the subscription is `connecting` or `stale`, so there's no separate recovery flag to render. If the subscription ends in `error`, so does the collection.
 
 ### Query the collection
 
