@@ -56,9 +56,7 @@ Meeting the checklist makes a project eligible. We then review each application 
 
 ## How to apply
 
-Fill out the form below with your project's website and GitHub repository. We'll follow up by email.
-
-<ProgramForm type="openSource" />
+Fill out the form at the top of this page with your project's website and GitHub repository. We'll follow up by email.
 
 ## FAQ
 
