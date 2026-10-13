@@ -1,13 +1,17 @@
 ---
-title: 'Drizzle ORM'
-subtitle: 'Use your Drizzle schema and select queries as live queries, from the table definition to writes that return a txid.'
+title: 'Drizzle'
+subtitle: 'Using Realtime with your Drizzle schema, queries, types and writes.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: create tables with drizzle-kit, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
 enableTableOfContents: true
 isDraft: true
 ---
 
-This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), so the schema and select queries you already have become live queries. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID. The snippets use the `messages` and `channel_members` tables from the [guides](../guides/queries#setup), and the steps follow the order you'd build in: [the packages](#install-the-packages), [the schema](#define-the-schema), [migrations](#create-the-tables-with-drizzle-kit), [the Drizzle client](#create-the-drizzle-client), [the adapter](#add-the-drizzle-adapter), [live queries](#define-live-queries), [query parameters](#pass-query-parameters), [aliases](#alias-renamed-and-computed-fields), [rows in the browser](#decode-and-type-rows-in-the-browser) and [writes](#return-the-txid-from-drizzle-writes). It ends with [common pitfalls](#common-pitfalls).
+This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), so the schema and queries you already have become live queries.
+
+You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID.
+
+The snippets use the `messages` and `channel_members` tables from the [guides](../guides/queries#setup), and the steps follow the order you'd build in: [the packages](#install-the-packages), [the schema](#define-the-schema), [migrations](#create-the-tables-with-drizzle-kit), [the Drizzle client](#create-the-drizzle-client), [the adapter](#add-the-drizzle-adapter), [live queries](#define-live-queries), [query parameters](#pass-query-parameters), [aliases](#alias-renamed-and-computed-fields), [rows in the browser](#decode-and-type-rows-in-the-browser) and [writes](#return-the-txid-from-drizzle-writes). It ends with [common pitfalls](#common-pitfalls).
 
 <Admonition type="tip" title="Full examples on GitHub">
 These apps in the `neondatabase/examples` repository use Drizzle with Realtime. Each README has the steps to run it:
