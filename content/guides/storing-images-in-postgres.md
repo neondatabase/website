@@ -155,7 +155,7 @@ The gap grows as you store more images:
 | 50 GB         | $17.50/month          | $1.15/month       | **$196.20**                    |
 | 500 GB        | $175.00/month         | $11.50/month      | **$1,962.00**                  |
 
-Here's 50 GB of images on Neon and Supabase:
+For 50 GB of images on Neon and Supabase, here's the how the cost compares:
 
 | Where the images are stored | Neon (Launch)           | Supabase (Pro)                         |
 | :-------------------------- | :---------------------- | :------------------------------------- |
@@ -166,7 +166,7 @@ So keeping 50 GB of images in Neon Object Storage, uploaded with presigned URLs 
 
 ### 2. Query result size
 
-Many pages show a list with an image on each row, like the members of a team with their avatars, or your customers with their logos. When those images are stored in `bytea`, the query that lists the rows also returns every image. Listing 50 photos from `photos_bytea` returns about 8 MB of images along with the rows. The same list from `photos` returns only titles and keys, a few kilobytes, and the browser downloads each image from its own URL when required.
+Many pages show a list with an image on each row, like the members of a team with their avatars, or your customers with their logos. When those images are stored in `bytea`, the query that lists the rows also returns every image. Listing 50 photos from `photos_bytea` returns about 8 MB of images along with the rows. The same list from `photos` returns only titles and keys, a few kilobytes, and the browser downloads each image from its own URL when needed.
 
 ### 3. Backup and replication size
 
