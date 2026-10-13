@@ -32,12 +32,12 @@ Let's return to our running example, flesh out the backend server, call its new 
 
 ### Returning the `txid` from your backend
 
-Each write route runs its write in a Drizzle transaction and reads the transaction's id before it commits. That's why the [queries guide](./queries#setup) set up `backend/db.ts` with the `neon-serverless` driver, which can run interactive transactions.
+Each write route takes a batch of changes, writes the whole batch in one Drizzle transaction and reads the transaction's id before it commits, so there's one txid to wait for however many rows change. That's why the [queries guide](./queries#setup) set up `backend/db.ts` with the `neon-serverless` driver, which can run interactive transactions.
 
 Add the three write routes to `backend/server.ts`, chained onto the same app so `AppType` carries them to the frontend. They follow the `/api/v1/messages/live` route from the [queries guide](./queries#exposing-an-endpoint) and the `/api/v1/inbox/live` route from the [reactivity guide](./reactivity#seal-a-broader-query):
 
 ```ts filename="backend/server.ts"
-import { and, eq, ne, sql } from "drizzle-orm"
+import { and, eq, inArray, ne, sql } from "drizzle-orm"
 import { Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
 import { validator } from "hono/validator"
@@ -65,54 +65,48 @@ function isUuid(value: unknown): value is string {
   return typeof value === "string" && UUID.test(value)
 }
 
-const messageId = validator("param", (value, c) => {
-  const id: unknown = value.id
-
-  if (!isUuid(id)) {
-    return c.json({ error: "id must be a uuid" }, 400)
-  }
-
-  return { id }
-})
+function isBody(value: unknown): value is string {
+  return typeof value === "string" && value.trim() !== ""
+}
 
 const app = new Hono()
   // ...the sealing routes: /api/v1/messages/live and /api/v1/inbox/live
   .post(
     "/api/v1/messages",
     validator("json", (value, c) => {
-      const id: unknown = value?.id
-      const channelId: unknown = value?.channelId
-      const body: unknown = value?.body
+      const batch: unknown = value?.batch
 
-      if (!isUuid(id)) {
-        return c.json({ error: "id must be a uuid" }, 400)
+      if (
+        !Array.isArray(batch) ||
+        batch.length === 0 ||
+        !batch.every(
+          (item): item is { id: string; channelId: number; body: string } =>
+            isUuid(item?.id) && Number.isInteger(item?.channelId) && isBody(item?.body)
+        )
+      ) {
+        return c.json({ error: "batch must be a non-empty array of { id, channelId, body }" }, 400)
       }
 
-      if (typeof channelId !== "number" || !Number.isInteger(channelId)) {
-        return c.json({ error: "channelId must be an integer" }, 400)
-      }
-
-      if (typeof body !== "string" || body.trim() === "") {
-        return c.json({ error: "body must be a non-empty string" }, 400)
-      }
-
-      return { id, channelId, body }
+      return { batch }
     }),
     async (c) => {
       const user = await requireUser(c)
-      const { id, channelId, body } = c.req.valid("json")
+      const { batch } = c.req.valid("json")
+      const channelIds = [...new Set(batch.map((message) => message.channelId))]
 
       const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const [membership] = await tx
-          .select({ user_id: channelMembers.user_id })
+        const memberships = await tx
+          .select({ channel_id: channelMembers.channel_id })
           .from(channelMembers)
-          .where(and(eq(channelMembers.channel_id, channelId), eq(channelMembers.user_id, user.id)))
+          .where(and(inArray(channelMembers.channel_id, channelIds), eq(channelMembers.user_id, user.id)))
 
-        if (!membership) {
+        if (memberships.length < channelIds.length) {
           throw new HTTPException(403, { message: "Not a member of this channel" })
         }
 
-        await tx.insert(messages).values({ id, channel_id: channelId, author_id: user.id, body })
+        await tx
+          .insert(messages)
+          .values(batch.map(({ id, channelId, body }) => ({ id, channel_id: channelId, author_id: user.id, body })))
 
         return { kind: "committed", txid: await currentTxId(tx) }
       })
@@ -121,30 +115,38 @@ const app = new Hono()
     }
   )
   .patch(
-    "/api/v1/messages/:id",
-    messageId,
+    "/api/v1/messages",
     validator("json", (value, c) => {
-      const body: unknown = value?.body
+      const batch: unknown = value?.batch
 
-      if (typeof body !== "string" || body.trim() === "") {
-        return c.json({ error: "body must be a non-empty string" }, 400)
+      if (
+        !Array.isArray(batch) ||
+        batch.length === 0 ||
+        !batch.every((item): item is { id: string; body: string } => isUuid(item?.id) && isBody(item?.body))
+      ) {
+        return c.json({ error: "batch must be a non-empty array of { id, body }" }, 400)
       }
 
-      return { body }
+      return { batch }
     }),
     async (c) => {
       const user = await requireUser(c)
-      const { id } = c.req.valid("param")
-      const { body } = c.req.valid("json")
+      const { batch } = c.req.valid("json")
 
       const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const updated = await tx
-          .update(messages)
-          .set({ body })
-          .where(and(eq(messages.id, id), eq(messages.author_id, user.id), ne(messages.body, body)))
-          .returning({ id: messages.id })
+        let count = 0
 
-        if (updated.length === 0) {
+        for (const { id, body } of batch) {
+          const updated = await tx
+            .update(messages)
+            .set({ body })
+            .where(and(eq(messages.id, id), eq(messages.author_id, user.id), ne(messages.body, body)))
+            .returning({ id: messages.id })
+
+          count += updated.length
+        }
+
+        if (count === 0) {
           return { kind: "unchanged" }
         }
 
@@ -154,25 +156,37 @@ const app = new Hono()
       return c.json(result)
     }
   )
-  .delete("/api/v1/messages/:id", messageId, async (c) => {
-    const user = await requireUser(c)
-    const { id } = c.req.valid("param")
+  .delete(
+    "/api/v1/messages",
+    validator("json", (value, c) => {
+      const batch: unknown = value?.batch
 
-    const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-      const deleted = await tx
-        .delete(messages)
-        .where(and(eq(messages.id, id), eq(messages.author_id, user.id)))
-        .returning({ id: messages.id })
-
-      if (deleted.length === 0) {
-        return { kind: "unchanged" }
+      if (!Array.isArray(batch) || batch.length === 0 || !batch.every(isUuid)) {
+        return c.json({ error: "batch must be a non-empty array of uuids" }, 400)
       }
 
-      return { kind: "committed", txid: await currentTxId(tx) }
-    })
+      return { batch }
+    }),
+    async (c) => {
+      const user = await requireUser(c)
+      const { batch } = c.req.valid("json")
 
-    return c.json(result)
-  })
+      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
+        const deleted = await tx
+          .delete(messages)
+          .where(and(inArray(messages.id, batch), eq(messages.author_id, user.id)))
+          .returning({ id: messages.id })
+
+        if (deleted.length === 0) {
+          return { kind: "unchanged" }
+        }
+
+        return { kind: "committed", txid: await currentTxId(tx) }
+      })
+
+      return c.json(result)
+    }
+  )
 
 export type AppType = typeof app
 
@@ -181,9 +195,9 @@ export default app
 
 Call [`pg_current_xact_id()`](https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SNAPSHOT) inside the write's transaction. The `::text` cast returns the txid as a decimal string, so its 64-bit value stays exact in JavaScript.
 
-Each route also checks what the user can change. Sending looks up the sender's `channel_members` row inside the transaction and throws a 403 without one. Editing and deleting restrict the write to messages the user wrote, so only the author can change a message.
+Each route also checks what the user can change. Sending looks up the sender's `channel_members` rows for every channel in the batch inside the transaction, and throws a 403 if one is missing, so none of the batch is written. Editing and deleting restrict the write to messages the user wrote, so only the author can change a message.
 
-When an edit or a delete matches no rows, the route returns `{ kind: "unchanged" }` instead of a txid. That happens when an edit leaves the text as it was, when the message doesn't exist or when someone else wrote it. Nothing changed, so there's nothing to wait for.
+When an edit or a delete batch matches no rows, the route returns `{ kind: "unchanged" }` instead of a txid. That happens when every edit leaves the text as it was, or when every message is already gone or someone else wrote it. Nothing changed, so there's nothing to wait for.
 
 <Admonition type="important" title="Always pass a timeout">
 `awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, and it never settles if the txid doesn't reach the query. With a timeout, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed. The write may still have committed. It also rejects if the subscription errors or closes.
@@ -196,51 +210,51 @@ Add a helper for each route to `frontend/api.ts`, next to `fetchSealedMessages()
 ```ts filename="frontend/api.ts"
 import type { AppType, MutationResponse } from "../backend/server"
 
-export async function sendMessage({
-  id,
-  channel_id,
-  body
-}: Pick<Message, "id" | "channel_id" | "body">): Promise<MutationResponse> {
-  const res = await server.api.v1.messages.$post({ json: { id, channelId: channel_id, body } })
+export async function sendMessages(
+  batch: Pick<Message, "id" | "channel_id" | "body">[]
+): Promise<MutationResponse> {
+  const res = await server.api.v1.messages.$post({
+    json: { batch: batch.map(({ id, channel_id, body }) => ({ id, channelId: channel_id, body })) }
+  })
 
   if (!res.ok) {
-    throw new Error(`Could not send the message (${res.status})`)
+    throw new Error(`Could not send the messages (${res.status})`)
   }
 
   return res.json()
 }
 
-export async function editMessage(id: string, body: string): Promise<MutationResponse> {
-  const res = await server.api.v1.messages[":id"].$patch({ param: { id }, json: { body } })
+export async function editMessages(batch: { id: string; body: string }[]): Promise<MutationResponse> {
+  const res = await server.api.v1.messages.$patch({ json: { batch } })
 
   if (!res.ok) {
-    throw new Error(`Could not edit the message (${res.status})`)
+    throw new Error(`Could not edit the messages (${res.status})`)
   }
 
   return res.json()
 }
 
-export async function deleteMessage(id: string): Promise<MutationResponse> {
-  const res = await server.api.v1.messages[":id"].$delete({ param: { id } })
+export async function deleteMessages(ids: string[]): Promise<MutationResponse> {
+  const res = await server.api.v1.messages.$delete({ json: { batch: ids } })
 
   if (!res.ok) {
-    throw new Error(`Could not delete the message (${res.status})`)
+    throw new Error(`Could not delete the messages (${res.status})`)
   }
 
   return res.json()
 }
 ```
 
-The `hc` client types each call from its route's validators, so a wrong field or a missing param is a compile error.
+Each helper takes an array, so one call can send any number of changes. The `hc` client types each call from its route's validators, so a wrong field is a compile error.
 
 ### Shared mutation helpers
 
-All three approaches below share the helpers in `frontend/mutations.ts`: the mutation and message types, `newMessage()`, the `applyMutation()` reducer and `writeMutation()`, which calls the route helpers you just added to `frontend/api.ts`:
+All three approaches below share the helpers in `frontend/mutations.ts`: the mutation and message types, `newMessage()`, the `applyMutation()` reducer and `writeMutation()`, which sends one mutation through the route helpers you just added to `frontend/api.ts`, as a batch of one:
 
 ```ts filename="frontend/mutations.ts"
 import type { Message } from "../backend/schema"
 import type { MutationResponse } from "../backend/server"
-import { deleteMessage, editMessage, sendMessage } from "./api"
+import { deleteMessages, editMessages, sendMessages } from "./api"
 
 export type MessageMutation =
   | { readonly type: "send"; readonly message: Message }
@@ -281,11 +295,11 @@ export function applyMutation(
 export function writeMutation(mutation: MessageMutation): Promise<MutationResponse> {
   switch (mutation.type) {
     case "send":
-      return sendMessage(mutation.message)
+      return sendMessages([mutation.message])
     case "edit":
-      return editMessage(mutation.id, mutation.body)
+      return editMessages([{ id: mutation.id, body: mutation.body }])
     case "delete":
-      return deleteMessage(mutation.id)
+      return deleteMessages([mutation.id])
   }
 }
 ```
@@ -533,7 +547,7 @@ export function Channel({ channelId, userId }: { channelId: number; userId: stri
 
 For more control, keep optimistic state in a [TanStack&nbsp;DB](https://tanstack.com/db/latest/docs/overview) collection. Every query and component that reads the collection then sees the same optimistic changes, and they stay consistent across client-side joins. Failed writes roll back automatically, and one transaction can span several collections.
 
-Add mutation handlers to `createMessagesCollection()` in `frontend/collections.ts`, from the [reactivity guide](./reactivity#create-the-collection). Each handler calls your backend and, if the write committed, waits for its txid before it returns, so TanStack&nbsp;DB keeps the optimistic state until the change has synced:
+Add mutation handlers to `createMessagesCollection()` in `frontend/collections.ts`, from the [reactivity guide](./reactivity#create-the-collection). TanStack&nbsp;DB calls each handler once per transaction, with all of its mutations, so each handler sends them to your backend in one request. If the write committed, the handler waits for its txid before it returns, so TanStack&nbsp;DB keeps the optimistic state until the change has synced:
 
 ```ts filename="frontend/collections.ts"
 import { createCollection } from "@tanstack/react-db"
@@ -541,7 +555,7 @@ import { realtimeCollectionOptions } from "@neon/realtime-tanstack"
 import type { SealedLiveQuery } from "@neon/realtime/client"
 
 import type { Message } from "../backend/schema"
-import { deleteMessage, editMessage, fetchSealedInbox, sendMessage } from "./api"
+import { deleteMessages, editMessages, fetchSealedInbox, sendMessages } from "./api"
 import { client } from "./client"
 
 export function createMessagesCollection(sealedQuery: SealedLiveQuery<Message>) {
@@ -553,22 +567,21 @@ export function createMessagesCollection(sealedQuery: SealedLiveQuery<Message>) 
       refreshQuery: fetchSealedInbox,
       getKey: (message) => message.id,
       onInsert: async ({ transaction, collection }) => {
-        const result = await sendMessage(transaction.mutations[0].modified)
+        const result = await sendMessages(transaction.mutations.map(({ modified }) => modified))
 
         if (result.kind === "committed") {
           await collection.utils.awaitTxId(result.txid, 10_000)
         }
       },
       onUpdate: async ({ transaction, collection }) => {
-        const { id, body } = transaction.mutations[0].modified
-        const result = await editMessage(id, body)
+        const result = await editMessages(transaction.mutations.map(({ modified: { id, body } }) => ({ id, body })))
 
         if (result.kind === "committed") {
           await collection.utils.awaitTxId(result.txid, 10_000)
         }
       },
       onDelete: async ({ transaction, collection }) => {
-        const result = await deleteMessage(transaction.mutations[0].original.id)
+        const result = await deleteMessages(transaction.mutations.map(({ original }) => original.id))
 
         if (result.kind === "committed") {
           await collection.utils.awaitTxId(result.txid, 10_000)
@@ -647,15 +660,15 @@ export function Inbox({ messagesCollection, channelId, userId }: Props) {
 
       <ul>
         {data.map((message) => (
-          <li key={message.id} aria-busy={!message.$synced}>
+          <li key={message.id} aria-busy={message.$hasPendingWrites}>
             {message.body}
             {message.author_id === userId && (
               <>
-                <button disabled={!message.$synced} onClick={() => edit(message)} type="button">
+                <button disabled={message.$hasPendingWrites} onClick={() => edit(message)} type="button">
                   Edit
                 </button>
                 <button
-                  disabled={!message.$synced}
+                  disabled={message.$hasPendingWrites}
                   onClick={() => messagesCollection.delete(message.id)}
                   type="button"
                 >
@@ -671,7 +684,7 @@ export function Inbox({ messagesCollection, channelId, userId }: Props) {
 }
 ```
 
-`$synced` is `false` while a row has a pending optimistic change, which disables its buttons, so you don't start a new change on a message whose last change isn't confirmed yet. Edit and Delete show only on the user's own messages, and the routes still enforce authorship. Each call returns a TanStack&nbsp;DB transaction, and its `isPersisted.promise` rejects if the write fails, so you can await it to show an error.
+`$hasPendingWrites` is `true` while a row has a pending optimistic change, which disables its buttons, so you don't start a new change on a message whose last change isn't confirmed yet. Edit and Delete show only on the user's own messages, and the routes still enforce authorship. Each call returns a TanStack&nbsp;DB transaction, and its `when("settled")` promise rejects with the handler's error if the write fails and the change rolls back, so you can await it to show an error.
 
 An optimistic insert needs a whole `Message`, so the component also takes the signed-in user's id. It only fills in the optimistic row, because the server takes the author from the verified token. Read it from the [Neon Auth](/docs/auth/overview) session where the app creates the collection, as `frontend/main.tsx` does in [render the app](#render-the-app).
 
