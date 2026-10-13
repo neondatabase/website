@@ -4,14 +4,6 @@ import {
   resolveRegistryPath,
 } from 'utils/function-registry';
 
-// Serves the Function Registry catalog at
-// https://neon.com/functions/registry/<path>, the way
-// /bootstrap/templates.yaml serves the `neon bootstrap` manifest.
-//
-// Source of truth is neondatabase/examples/registry on `main`, cached for an
-// hour. No bundled fallback: a copy here would drift from the examples repo.
-
-// Re-generate (and re-fetch the upstream) at most once an hour.
 export const revalidate = 3600;
 
 const notFound = () =>
@@ -24,6 +16,7 @@ const notFound = () =>
     },
   });
 
+// 502s must not be cached.
 const unavailable = () =>
   new Response('The Function Registry is temporarily unavailable.\n', {
     status: 502,
@@ -46,7 +39,7 @@ export async function GET(_request, { params }) {
     });
     if (!response.ok) return unavailable();
     const text = await response.text();
-    JSON.parse(text);
+    JSON.parse(text); // reject non-JSON before serving
     return new Response(text, {
       headers: {
         'Content-Type': resolved.contentType,

@@ -4,7 +4,7 @@ export const REGISTRY_CACHE_SECONDS = 3600;
 
 const JSON_TYPE = 'application/json; charset=utf-8';
 
-// Catalog and schemas only. Anything else 404s before GitHub is contacted.
+// Allowlist before GitHub: catalog and schemas only.
 const ALLOWED = new Map([
   ['registry.json', JSON_TYPE],
   ['schemas/registry.schema.json', JSON_TYPE],
