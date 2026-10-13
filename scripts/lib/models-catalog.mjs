@@ -75,7 +75,12 @@ const EMBEDDING_REQUIRED_KEYS = [
   'release_date',
   'last_updated',
 ];
-const MODEL_TYPES = new Set(['embedding']);
+/**
+ * `type: "judge"` (a System One model: takes a state and questions, returns scored answers) is
+ * likewise its own shape: no chat fields or limits, input-only billing, and no `dimensions`.
+ */
+const JUDGE_REQUIRED_KEYS = EMBEDDING_REQUIRED_KEYS.filter((key) => key !== 'dimensions');
+const MODEL_TYPES = new Set(['embedding', 'judge']);
 /**
  * These strings are interpolated into the MDX of each model's detail page, where `{…}` is
  * evaluated as JavaScript at build time and `<…>` as JSX. The build-time refresh takes them from
@@ -239,7 +244,13 @@ export function validateCatalog(data) {
       fail(`${at('type')} must be one of ${[...MODEL_TYPES].join(', ')}`);
     }
     const isEmbedding = model.type === 'embedding';
-    for (const field of isEmbedding ? EMBEDDING_REQUIRED_KEYS : REQUIRED_KEYS) {
+    const isJudge = model.type === 'judge';
+    const requiredKeys = isEmbedding
+      ? EMBEDDING_REQUIRED_KEYS
+      : isJudge
+        ? JUDGE_REQUIRED_KEYS
+        : REQUIRED_KEYS;
+    for (const field of requiredKeys) {
       if (model[field] === undefined) fail(`${at(field)} is missing`);
     }
     if (
@@ -312,10 +323,11 @@ export function validateCatalog(data) {
     }
 
     if (model.cost !== undefined) {
-      // Embedding billing is input-only — there is no completion to charge for, so unlike a
-      // chat model, an embedding model's `cost` block is not missing an `output` rate; it never
-      // had one.
-      errors.push(...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding }));
+      // Embedding and judge billing is input-only — there is no completion to charge for, so
+      // unlike a chat model, their `cost` block is not missing an `output` rate; it never had one.
+      errors.push(
+        ...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding && !isJudge })
+      );
     }
 
     if (model.reasoning_options !== undefined) {

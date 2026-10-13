@@ -43,9 +43,13 @@ function rates(pricing) {
   return out;
 }
 
+// A System One judge scores answers to questions about a state and generates no text, so it is
+// billed on input only. The gateway lists it with `completion: "0"`.
+const isJudge = (item) => item.dialects?.includes('systemone') === true;
+
 function toCost(item, committedCost = {}) {
   const cost = rates(item.pricing);
-  if (item.model_type === 'embedding') delete cost.output;
+  if (item.model_type === 'embedding' || isJudge(item)) delete cost.output;
   if (committedCost.input_audio != null) cost.input_audio = committedCost.input_audio;
   const overrides = item.pricing.overrides ?? [];
   if (overrides.length) {
@@ -75,6 +79,17 @@ export function toCatalogEntry(item, committedEntry = {}) {
       ...entry,
       type: 'embedding',
       dimensions: item.dimensions,
+      open_weights: f.open_weights,
+      release_date: item.release_date,
+      last_updated: lastUpdated,
+      cost: toCost(item, committedEntry.cost),
+    };
+  }
+
+  if (isJudge(item)) {
+    return {
+      ...entry,
+      type: 'judge',
       open_weights: f.open_weights,
       release_date: item.release_date,
       last_updated: lastUpdated,
