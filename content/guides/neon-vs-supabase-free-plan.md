@@ -20,7 +20,7 @@ This guide compares the two free plans feature by feature, so you can see what e
 
 ### 1. 100 projects that scale to zero instead of pausing
 
-Supabase Free allows 2 active projects, and the limit applies to you across every organization where you're an Owner or Administrator. When a project is inactive for a week, Supabase pauses it, and it stays offline until you resume it from the dashboard.
+Supabase Free allows only 2 active projects, and the limit applies to you across every organization where you're an Owner or Administrator. When a project is inactive for a week, Supabase pauses it, and it stays offline until you resume it from the dashboard.
 
 Neon Free includes 100 projects ([source](/docs/introduction/plans#projects)). When a project is idle, its compute scales to zero after 5 minutes and wakes within a few hundred milliseconds on the next query ([source](/docs/introduction/scale-to-zero)). A demo you built months ago still loads when someone opens it.
 
