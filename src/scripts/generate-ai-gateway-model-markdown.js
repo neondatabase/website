@@ -61,11 +61,13 @@ const resolveExamplesByMode = (resolveModel, modelId) => ({
 });
 
 const renderModelDetailMarkdown = (row, examplesByMode) => {
-  const about = row.isEmbedding
-    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. It returns ${row.dimensions}-dimensional embeddings on \`POST /v1/embeddings\`.`
-    : row.hasMeasuredCapabilities
-      ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
-      : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
+  const about = row.isJudge
+    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}, a System One judge model. It scores answers to questions about a state and does not generate text.`
+    : row.isEmbedding
+      ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. It returns ${row.dimensions}-dimensional embeddings on \`POST /v1/embeddings\`.`
+      : row.hasMeasuredCapabilities
+        ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
+        : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
   const primaryMode = row.isEmbedding ? 'embeddings' : 'text';
   const commands = [renderCommandSection(examplesByMode, primaryMode)];
   const hasExamples = ['text', 'image', 'embeddings'].some(

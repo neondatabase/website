@@ -76,4 +76,21 @@ describe('AI Gateway model Markdown index', () => {
     expect(embeddingSection).toContain('qwen3-embedding-0-6b');
     expect(embeddingSection).toContain('| 1024 |');
   });
+
+  it('gives judge models their own section, out of Text and Other', () => {
+    const judgeRow = {
+      ...createRow({ id: 'judge-4b', inputs: [], isImageCapable: false }),
+      isJudge: true,
+      endpoints: [],
+    };
+    const markdown = renderAiGatewayModelIndex([
+      createRow({ id: 'text-model', inputs: ['text'], isImageCapable: false }),
+      judgeRow,
+    ]);
+    const [beforeJudge, judgeSection] = markdown.split('### Judge models');
+
+    expect(beforeJudge).not.toContain('judge-4b');
+    expect(beforeJudge).not.toContain('### Other models');
+    expect(judgeSection).toContain('judge-4b');
+  });
 });

@@ -9,7 +9,12 @@ const CommandHeading = AnchorHeading('h2');
 const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
   <div className="prose-doc post-content prose mt-8 max-w-none dark:prose-invert xs:prose-code:break-words">
     <div id="about" className="anchor-heading scroll-mt-32" aria-hidden />
-    {row.isEmbedding ? (
+    {row.isJudge ? (
+      <p>
+        Neon AI Gateway provides {row.name} by {row.providerName}, a System One judge model. It
+        scores answers to questions about a state and does not generate text.
+      </p>
+    ) : row.isEmbedding ? (
       <p>
         Neon AI Gateway provides {row.name} by {row.providerName}. It returns {row.dimensions}
         -dimensional embeddings on <code>POST /v1/embeddings</code>.

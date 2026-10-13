@@ -90,12 +90,32 @@ const renderEmbeddingTableRows = (rows) =>
     .map((line) => `| ${line} |`)
     .join('\n');
 
+const JUDGE_TABLE_HEADER =
+  '| Model | Model ID | Released | Input /M | License |\n' + '| --- | --- | --- | --- | --- |';
+
+const renderJudgeTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
 const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
   const embeddingRows = rows.filter((row) => row.isEmbedding);
+  const judgeRows = rows.filter((row) => row.isJudge);
   const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
   const imageRows = rows.filter((row) => row.isImageCapable);
   const otherRows = rows.filter(
-    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding
+    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isJudge
   );
   const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
   const sections = ['### Text models', renderProviderTables(textRows, '####')];
@@ -134,6 +154,14 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     );
     sections.push(`${EMBEDDING_TABLE_HEADER}\n${renderEmbeddingTableRows(embeddingRows)}`);
     sections.push('Select a linked model for embeddings-specific code examples.');
+  }
+
+  if (judgeRows.length > 0) {
+    sections.push('### Judge models');
+    sections.push(
+      'These System One models score answers to questions about a state rather than generating text:'
+    );
+    sections.push(`${JUDGE_TABLE_HEADER}\n${renderJudgeTableRows(judgeRows)}`);
   }
 
   sections.push(modelRows.MODEL_CATALOG_NOTE);
