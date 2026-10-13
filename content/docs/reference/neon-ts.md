@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-10-13T00:11:48.345Z'
+updatedOn: '2026-10-13T00:38:52.280Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -238,7 +238,7 @@ preview: {
 },
 ```
 
-Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, such as `https://app.example.com`. `*` allows every origin and can't be combined with others. `defineConfig` rejects invalid values before anything is sent.
+Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, such as `https://app.example.com`. `*` allows every origin and can't be combined with others. `defineConfig` rejects invalid values before anything is sent. With `true`, any browser origin can connect unless the branch already has an origin list, which is kept. Allowed origins only restrict browsers, not server clients.
 
 On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon subscribe`](/docs/cli/subscribe).
 
