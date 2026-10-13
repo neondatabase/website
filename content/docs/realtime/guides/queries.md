@@ -120,7 +120,7 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL! })
 export const db = drizzle(pool, { schema })
 
 // So an idle connection error, for example when the compute scales to zero, doesn't crash the API
-pool.on("error", (error) => console.error(error))
+pool.on("error", (error: Error) => console.error(error))
 ```
 
 Great, that's the main setup to follow along with the guides. Or for the full boilterplate, see the [example source code](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) on GitHub.
