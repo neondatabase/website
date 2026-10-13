@@ -144,7 +144,7 @@ Options for [`useLiveQuery`](/docs/realtime/sdks/typescript#react-uselivequery).
 
 | Name            | Type                                           | Description                                                                                                                                        |
 | --------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `initialData?`  | `readonly Row[]`                               | Server-rendered or otherwise preloaded rows exposed initially as stale.                                                                            |
+| `initialData?`  | `readonly Row[]`                               | Server-rendered or otherwise preloaded rows exposed while connecting.                                                                              |
 | `refreshQuery?` | `readonly () => Promise<SealedLiveQuery<Row>>` | Obtain a replacement capability for the same exact query before expiry. Transient failures are retried while the current capability remains valid. |
 
 ### UseLiveQueryResult (#react-uselivequeryresult)

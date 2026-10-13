@@ -2,12 +2,12 @@
 
 ### Symbols (#tanstack-db-symbols)
 
-| Symbol                                                                  | Kind       | Summary                                                                                                                                                     |
-| ----------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions)   | Function   | Create TanStack DB collection options backed by a raw live-query subscription. Resets and committed publication batches are applied atomically.             |
-| [`RealtimeCollectionConfig`](#tanstack-db-realtimecollectionconfig)     | Interface  | Configuration for a Realtime-backed TanStack DB collection. The adapter owns `sync`, uses eager synchronization, and supplies its own collection utilities. |
-| [`RealtimeCollectionUtils`](#tanstack-db-realtimecollectionutils)       | Interface  | Utilities attached to a Realtime-backed TanStack DB collection.                                                                                             |
-| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).             |
+| Symbol                                                                  | Kind       | Summary                                                                                                                                                       |
+| ----------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`realtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions)   | Function   | Create TanStack DB collection options backed by a raw live-query subscription. Complete-row replacements and committed change batches are applied atomically. |
+| [`RealtimeCollectionConfig`](#tanstack-db-realtimecollectionconfig)     | Interface  | Configuration for a Realtime-backed TanStack DB collection. The adapter owns `sync`, uses eager synchronization, and supplies its own collection utilities.   |
+| [`RealtimeCollectionUtils`](#tanstack-db-realtimecollectionutils)       | Interface  | Utilities attached to a Realtime-backed TanStack DB collection.                                                                                               |
+| [`RealtimeCollectionOptions`](#tanstack-db-realtimecollectionoptions-2) | Type alias | TanStack DB collection options produced by [`realtimeCollectionOptions`](/docs/realtime/sdks/typescript#tanstack-db-realtimecollectionoptions).               |
 
 ### realtimeCollectionOptions (#tanstack-db-realtimecollectionoptions)
 
@@ -16,7 +16,7 @@ function realtimeCollectionOptions<Row extends object, Key extends string | numb
 ```
 
 Create TanStack DB collection options backed by a raw live-query subscription.
-Resets and committed publication batches are applied atomically.
+Complete-row replacements and committed change batches are applied atomically.
 
 **Returns:** Collection options to pass to TanStack DB's `createCollection()`.
 
