@@ -64,9 +64,9 @@ describe('getModelDetailPageData', () => {
 
   it('reports only identity, release and input price for a judge model', () => {
     const { content, tableOfContents } = getModelDetailPageData({
-      id: 'judge-4b',
-      name: 'Judge 4B',
-      providerName: 'Alibaba',
+      id: 'example-judge',
+      name: 'Example Judge',
+      providerName: 'Example',
       endpoints: [],
       isJudge: true,
       releaseLabel: 'Sep 2026',

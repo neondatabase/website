@@ -6,7 +6,7 @@ const BASE_TABLE_OF_CONTENTS = [
 const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 const getProviderDescription = (row) =>
   row.isJudge
-    ? `${row.providerName} provides ${row.name}, a System One judge model. It scores answers to questions about a state and does not generate text.`
+    ? `${row.providerName} provides ${row.name}, a System One judge model. It evaluates a given state against a set of questions and returns scored answers; it does not generate text.`
     : row.isEmbedding
       ? `${row.providerName} provides ${row.name}. Access it through the Neon AI Gateway's \`POST /v1/embeddings\` endpoint.`
       : row.endpoints.length > 0

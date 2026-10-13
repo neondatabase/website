@@ -79,7 +79,7 @@ describe('AI Gateway model Markdown index', () => {
 
   it('gives judge models their own section, out of Text and Other', () => {
     const judgeRow = {
-      ...createRow({ id: 'judge-4b', inputs: [], isImageCapable: false }),
+      ...createRow({ id: 'example-judge', inputs: [], isImageCapable: false }),
       isJudge: true,
       endpoints: [],
     };
@@ -89,8 +89,8 @@ describe('AI Gateway model Markdown index', () => {
     ]);
     const [beforeJudge, judgeSection] = markdown.split('### Judge models');
 
-    expect(beforeJudge).not.toContain('judge-4b');
+    expect(beforeJudge).not.toContain('example-judge');
     expect(beforeJudge).not.toContain('### Other models');
-    expect(judgeSection).toContain('judge-4b');
+    expect(judgeSection).toContain('example-judge');
   });
 });

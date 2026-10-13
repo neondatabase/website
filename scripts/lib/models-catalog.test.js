@@ -48,7 +48,7 @@ const embeddingModel = (over = {}) => ({
 const judgeModel = (over = {}) => ({
   id: 'a',
   name: 'A',
-  provider: 'alibaba',
+  provider: 'example',
   family: 'judge',
   released: true,
   type: 'judge',

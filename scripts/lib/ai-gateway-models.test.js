@@ -61,9 +61,9 @@ const EMBEDDING = {
 
 // A System One judge: takes a state and questions, returns scored answers, generates no text.
 const JUDGE = {
-  id: 'judge-4b',
-  owned_by: 'alibaba',
-  name: 'Judge 4B',
+  id: 'example-judge',
+  owned_by: 'example',
+  name: 'Example Judge',
   family: 'judge',
   model_type: 'language',
   dialects: ['systemone'],
@@ -77,9 +77,9 @@ const JUDGE = {
 describe('toCatalogEntry', () => {
   it('maps a System One judge to an input-only entry without chat fields', () => {
     expect(toCatalogEntry(JUDGE)).toEqual({
-      id: 'judge-4b',
-      name: 'Judge 4B',
-      provider: 'alibaba',
+      id: 'example-judge',
+      name: 'Example Judge',
+      provider: 'example',
       family: 'judge',
       released: true,
       type: 'judge',
