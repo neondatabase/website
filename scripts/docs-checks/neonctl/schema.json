@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.0.11",
+  "neonctlVersion": "8.4.3",
   "binaries": [
     "neonctl",
     "neon"
@@ -1214,6 +1214,18 @@
                   "description": "Declares an existing handler"
                 }
               ]
+            },
+            "realtime": {
+              "name": "realtime",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "allowed-origin": {
+                  "type": "array",
+                  "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+                }
+              },
+              "commands": {}
             }
           },
           "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
@@ -1225,7 +1237,7 @@
           "options": {
             "allow-protected": {
               "type": "boolean",
-              "describe": "Auto-confirm applying to a branch marked protected on Neon",
+              "describe": "Apply to a branch marked protected on Neon without asking",
               "default": false
             },
             "config": {
@@ -1243,8 +1255,14 @@
             },
             "update-existing": {
               "type": "boolean",
-              "describe": "Auto-confirm overriding existing remote settings on the branch",
+              "describe": "Override branch settings that differ from neon.ts without asking",
               "default": false
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
+              "default": false,
+              "alias": "y"
             }
           },
           "commands": {},
@@ -1363,7 +1381,7 @@
         },
         "role-name": {
           "type": "string",
-          "describe": "Role name"
+          "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
         },
         "ssl": {
           "type": "string",
@@ -1743,7 +1761,7 @@
       "options": {
         "allow-protected": {
           "type": "boolean",
-          "describe": "Auto-confirm applying to a branch marked protected on Neon",
+          "describe": "Apply to a branch marked protected on Neon without asking",
           "default": false
         },
         "branch": {
@@ -1769,8 +1787,14 @@
         },
         "update-existing": {
           "type": "boolean",
-          "describe": "Auto-confirm overriding existing remote settings on the branch",
+          "describe": "Override branch settings that differ from neon.ts without asking",
           "default": false
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Answer yes to every confirmation: --update-existing and --allow-protected",
+          "default": false,
+          "alias": "y"
         }
       },
       "commands": {},
@@ -2360,7 +2384,7 @@
             },
             "role-name": {
               "type": "string",
-              "describe": "Role name"
+              "describe": "Role name. Defaults to neondb_owner, else the only role besides the Data API and Neon Auth roles"
             }
           },
           "commands": {
@@ -2642,6 +2666,54 @@
         {
           "command": "$0 link -y",
           "description": "Select the only organization and project, or print the --org-id / --project-id to pass"
+        }
+      ]
+    },
+    "login": {
+      "aliases": [
+        "auth"
+      ],
+      "positionals": [],
+      "options": {
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; a later login without the flag stays there. See `neon profile list`."
+        }
+      },
+      "commands": {},
+      "describe": "Sign in with a browser. See --help for API keys and profiles",
+      "examples": [
+        {
+          "command": "$0 login",
+          "description": "Sign in with a browser"
+        },
+        {
+          "command": "$0 login --profile work",
+          "description": "Save a browser session in profile work"
+        },
+        {
+          "command": "$0 projects list --api-key \"$KEY\"",
+          "description": "Use an existing API key for this command"
+        },
+        {
+          "command": "NEON_API_KEY=\"$KEY\" $0 projects list",
+          "description": "Use an existing API key from the environment"
+        },
+        {
+          "command": "$0 profile create agent --api-key \"$KEY\"",
+          "description": "Store an existing API key"
+        },
+        {
+          "command": "echo \"$KEY\" | $0 profile create agent --api-key -",
+          "description": "Store a key read from stdin"
+        },
+        {
+          "command": "$0 profile create ci --mint",
+          "description": "Sign in once in a browser and store a new API key"
         }
       ]
     },
@@ -3933,6 +4005,45 @@
         }
       ]
     },
+    "realtime": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Disable Realtime on a branch"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "allowed-origin": {
+              "type": "array",
+              "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+            }
+          },
+          "commands": {},
+          "describe": "Enable Realtime on a branch"
+        }
+      },
+      "describe": "Manage Neon Realtime for a branch",
+      "usage": "$0 realtime <sub-command> [options]"
+    },
     "roles": {
       "aliases": [
         "role"
@@ -4390,6 +4501,45 @@
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
     },
+    "subscribe": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "query",
+          "required": true,
+          "describe": "SELECT query to subscribe to",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "changes": {
+          "type": "boolean",
+          "describe": "Show raw resets and transaction batches",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Subscribe to a live SQL query with Neon Realtime",
+      "usage": "$0 subscribe \"<query>\" [options]",
+      "examples": [
+        {
+          "command": "$0 subscribe \"SELECT * FROM items\"",
+          "description": "Print the initial result followed by a readable transaction log"
+        },
+        {
+          "command": "$0 subscribe --changes \"SELECT * FROM items\"",
+          "description": "Print raw reset and delta events"
+        }
+      ]
+    },
     "triggers": {
       "aliases": [
         "trigger"
@@ -4698,54 +4848,6 @@
       },
       "describe": "Manage VPC endpoints and project VPC restrictions",
       "usage": "$0 vpc <sub-command> [options]"
-    },
-    "login": {
-      "aliases": [
-        "auth"
-      ],
-      "positionals": [],
-      "options": {
-        "context-file": {
-          "type": "unknown",
-          "hidden": true
-        },
-        "keyring": {
-          "type": "boolean",
-          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
-        }
-      },
-      "commands": {},
-      "describe": "Sign in with a browser. See --help for API keys and profiles",
-      "examples": [
-        {
-          "command": "$0 auth",
-          "description": "Sign in with a browser"
-        },
-        {
-          "command": "$0 auth --profile work",
-          "description": "Save a browser session in profile work"
-        },
-        {
-          "command": "$0 projects list --api-key \"$KEY\"",
-          "description": "Use an existing API key for this command"
-        },
-        {
-          "command": "NEON_API_KEY=\"$KEY\" $0 projects list",
-          "description": "Use an existing API key from the environment"
-        },
-        {
-          "command": "$0 profile create agent --api-key \"$KEY\"",
-          "description": "Store an existing API key"
-        },
-        {
-          "command": "echo \"$KEY\" | $0 profile create agent --api-key -",
-          "description": "Store a key read from stdin"
-        },
-        {
-          "command": "$0 profile create ci --mint",
-          "description": "Sign in once in a browser and store a new API key"
-        }
-      ]
     }
   }
 }
