@@ -1,6 +1,5 @@
 export const REGISTRY_SOURCE_BASE =
   'https://raw.githubusercontent.com/neondatabase/examples/main/registry/';
-export const REGISTRY_CACHE_SECONDS = 3600;
 
 const JSON_TYPE = 'application/json; charset=utf-8';
 
