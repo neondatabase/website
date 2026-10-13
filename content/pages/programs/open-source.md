@@ -1,6 +1,6 @@
 ---
 title: 'Neon Open Source Program'
-subtitle: Neon sponsors open source maintainers with monthly cash, paid through Open Collective.
+subtitle: Neon commits at least $200,000 a year to cash sponsorships for open source maintainers, paid monthly through Open Collective.
 enableTableOfContents: true
 updatedOn: '2026-10-13T19:00:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
@@ -8,7 +8,7 @@ image: '/images/social-previews/programs/open-source.jpg'
 
 <ProgramForm type="openSource" />
 
-Developers build on open source that a small number of maintainers keep running. The Neon Open Source Program pays those maintainers a fixed monthly amount through Open Collective. In return, your project shows the Neon logo, labeled as a sponsorship, in one place you choose.
+Developers build on open source that a small number of maintainers keep running. Neon commits at least $200,000 a year to sponsoring those maintainers in cash. Each sponsored project receives a fixed monthly amount from that pool through Open Collective. In return, your project shows the Neon logo, labeled as a sponsorship, in one place you choose.
 
 Your project doesn't need to use Neon or Postgres to apply.
 
@@ -18,11 +18,15 @@ Your project doesn't need to use Neon or Postgres to apply.
 
 ### Monthly cash sponsorship
 
-Neon pays a fixed amount every month for a six-month term. Payments go to your project's Open Collective, or to your fiscal host, such as Open Source Collective. You set up payouts and tax details with Open Collective or your fiscal host, so Neon doesn't need your bank details.
+Neon pays a fixed amount every month for a six-month term, from its annual sponsorship pool. Payments go to your project's Open Collective, or to your fiscal host, such as Open Source Collective. You set up payouts and tax details with Open Collective or your fiscal host, so Neon doesn't need your bank details.
 
 ### Renewable terms
 
 Near the end of each six-month term, we review the sponsorship with you and decide whether to renew it. Sponsorships don't renew automatically.
+
+### Neon and AI Gateway credits
+
+Accepted projects can also claim $5,000 in Neon credits and $5,000 in Neon AI Gateway credits, if they want them. The credits are optional and don't affect the cash sponsorship.
 
 ### A relationship if you want one
 
@@ -69,7 +73,7 @@ Fill out the form below with your project's website and GitHub repository. We'll
 <details>
 <summary>**Do I need to use Neon or Postgres?**</summary>
 
-No. The program supports open source that developers rely on, whatever database it uses, if any.
+No. The program supports open source that developers rely on, whatever database it uses, if any. If you do want to build on Neon, accepted projects can claim $5,000 in Neon credits and $5,000 in Neon AI Gateway credits.
 
 </details>
 <br/>
