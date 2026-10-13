@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.3.5",
+  "neonctlVersion": "8.4.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -1219,6 +1219,18 @@
                   "description": "Declares an existing handler"
                 }
               ]
+            },
+            "realtime": {
+              "name": "realtime",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "allowed-origin": {
+                  "type": "array",
+                  "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+                }
+              },
+              "commands": {}
             }
           },
           "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
@@ -1277,7 +1289,7 @@
             },
             "services": {
               "type": "array",
-              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
+              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
               "alias": [
                 "s",
                 "service"
@@ -1909,7 +1921,7 @@
             },
             "service": {
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
               "alias": [
                 "s",
                 "services"
@@ -2319,13 +2331,13 @@
           "describe": "Forwarded to link: region for a new project"
         },
         "services": {
-          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.3.4.",
+          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.4.1, which added realtime (see config init services override).",
           "type": "array",
           "alias": [
             "s",
             "service"
           ],
-          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
+          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
         },
         "skill": {
           "type": "array",
@@ -4015,6 +4027,45 @@
         }
       ]
     },
+    "realtime": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Disable Realtime on a branch"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "allowed-origin": {
+              "type": "array",
+              "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
+            }
+          },
+          "commands": {},
+          "describe": "Enable Realtime on a branch"
+        }
+      },
+      "describe": "Manage Neon Realtime for a branch",
+      "usage": "$0 realtime <sub-command> [options]"
+    },
     "roles": {
       "aliases": [
         "role"
@@ -4471,6 +4522,45 @@
       "commands": {},
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
+    },
+    "subscribe": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "query",
+          "required": true,
+          "describe": "SELECT query to subscribe to",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "changes": {
+          "type": "boolean",
+          "describe": "Show raw resets and transaction batches instead of full query results",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Subscribe to a live SQL query with Neon Realtime",
+      "usage": "$0 subscribe \"<query>\" [options]",
+      "examples": [
+        {
+          "command": "$0 subscribe \"SELECT * FROM items\"",
+          "description": "Print the full result whenever it changes"
+        },
+        {
+          "command": "$0 subscribe --changes \"SELECT * FROM items\"",
+          "description": "Print raw reset and delta events"
+        }
+      ]
     },
     "triggers": {
       "aliases": [

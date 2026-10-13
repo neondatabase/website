@@ -88,7 +88,7 @@ Declares a service, function, or bucket in your `neon.ts`, creating the file if 
 
 It looks for your config in the project directory: the directory holding the nearest `.neon` file (found by searching up from the current directory), or the current directory when there's no `.neon`. A `neon.ts` in a parent directory no longer applies. When it finds none, it creates `neon.ts` there and installs the `@neon/config` and `@neon/env` packages; pass `--no-install` to print the install command instead. Editing an existing file never installs packages. Pass `--config <path>` to target a specific file; a path that doesn't exist is an error.
 
-It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as a service declared under the deprecated `preview` block, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
+It edits the file in place, keeping your comments and formatting. It refuses edits it can't make safely, such as a graduated service still declared under the `preview` block, where it's a deprecated alias, and prints the lines to add by hand instead. Re-adding an already-enabled service exits `0` with "nothing to change"; a duplicate function slug or bucket name exits `1`; a bare `neon config add` exits `1` and lists what you can add.
 
 ### neon config add auth (#add-auth)
 
@@ -124,6 +124,25 @@ Enables the AI Gateway by setting `aiGateway: true`.
 
 ```bash
 neon config add ai-gateway
+```
+
+### neon config add realtime (#add-realtime)
+
+Enables Neon Realtime by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
+
+<CliUsage command="config add realtime" />
+
+<CliOptions command="config add realtime" />
+
+With an existing `neon.ts`, setting an allowed origin updates it in place:
+
+```bash
+neon config add realtime --allowed-origin https://app.example.com
+```
+
+```text
+Updated neon.ts: set preview.realtime to { allowedOrigins: ["https://app.example.com"] }.
+Next: `neon config plan` to preview, `neon config apply` to provision.
 ```
 
 ### neon config add function (#add-function)
