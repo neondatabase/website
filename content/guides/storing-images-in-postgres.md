@@ -25,7 +25,7 @@ Here's how storing images in Postgres compares to storing them in object storage
 | **Max size per image**  | 1 GB per `bytea` value                                           | 5 GiB per object on Neon Object Storage                             |
 | **Atomic with the row** | Yes, the image commits or rolls back with the row                | No, an upload and an `INSERT` are two separate steps                |
 | **Serving an image**    | Your app queries Postgres, then streams the bytes to the browser | The browser downloads directly from a presigned URL                 |
-| **Query results**       | Listing rows also returns their images                           | Rows stay small, only keys travel                                   |
+| **Query results**       | Listing complete rows also returns their images                           | Rows stay small, only keys travel                                   |
 | **Backups and dumps**   | Grow with every image                                            | Stay small, files are stored separately                             |
 | **Best for**            | A few very small images that must commit with their row          | Everything else: user uploads, galleries, media, AI-generated files |
 
@@ -357,7 +357,7 @@ const photos = await Promise.all(
 
 ### Keeping files and rows in sync
 
-With two systems, the row and the file can get out of sync. On Neon, [buckets and objects branch with the database](#branching-with-images), so a branch's rows and files always match. To clean up files whose rows were deleted, see the [orphaned objects guide](/guides/clean-up-orphaned-s3-objects-neon-branching).
+With two systems, the row and the file can get out of sync. On Neon, [buckets and objects branch with the database](#branching-with-images), so a branch's rows and files start from the same point in time. To clean up files whose rows were deleted, see the [orphaned objects guide](/guides/clean-up-orphaned-s3-objects-neon-branching).
 
 ## Choosing between Neon and Supabase for image storage
 
