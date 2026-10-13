@@ -155,8 +155,8 @@ export const messagesCollection = createCollection(
     query: sealedQuery,
     ...,
     onUpdate: async ({ transaction, collection }) => {
-      const { original, changes } = transaction.mutations[0]
-      const { txid } = await api.messages.update(original.id, changes)
+      const updates = transaction.mutations.map(({ original, changes }) => ({ id: original.id, changes }))
+      const { txid } = await api.messages.update(updates)
 
       await collection.utils.awaitTxId(txid)
     }

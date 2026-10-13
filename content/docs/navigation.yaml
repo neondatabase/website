@@ -863,12 +863,12 @@
               slug: realtime/guides/mutations
             - title: 'Server-side rendering'
               slug: realtime/guides/ssr
-        #- section: Examples
-        #  items:
-        #    - title: 'Next.js'
-        #      slug: realtime/examples/nextjs
-        #    - title: 'TanStack'
-        #      slug: realtime/examples/tanstack
+        - section: Examples
+          items:
+            - title: 'Next.js'
+              slug: realtime/examples/nextjs
+            - title: 'TanStack'
+              slug: realtime/examples/tanstack
         #    - title: 'Mastra'
         #      slug: realtime/examples/mastra
         #    - title: 'Drizzle'
