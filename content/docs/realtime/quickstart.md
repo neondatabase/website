@@ -76,7 +76,6 @@ The simplest way to try live queries is with the [Neon CLI](/docs/cli). First, i
 
 ```bash filename="Terminal"
 neon psql -- -c "CREATE TABLE items (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), value TEXT)"
-neon psql -- -c "ALTER TABLE items REPLICA IDENTITY FULL"
 neon psql -- -c "INSERT INTO items (value) VALUES ('foo')"
 ```
 

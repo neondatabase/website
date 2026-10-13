@@ -115,11 +115,14 @@ So, for example, you can't `SELECT` over updated rows and you can't use function
 
 Tables need a [stable replica identity](https://www.postgresql.org/docs/current/sql-altertable.html#SQL-ALTERTABLE-REPLICA-IDENTITY). If your tables have a primary key, they're fine.
 
-Live queries are faster (saves the engine a lookup when handling updates and deletes) if you set `REPLICA IDENTITY FULL`.
+<Callout title="Optional: REPLICA IDENTITY FULL">
+Setting `REPLICA IDENTITY FULL` can make live queries marginally faster, at the cost of writing the whole old row to the Postgres WAL on every update and delete. That may save Realtime a lookup when it processes those changes. If latency matters for a write-heavy table, benchmark both settings with your own workload before you switch.
 
 ```sql
 ALTER TABLE messages REPLICA IDENTITY FULL;
 ```
+
+</Callout>
 
 ### Using raw SQL
 

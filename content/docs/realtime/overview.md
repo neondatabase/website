@@ -256,7 +256,7 @@ The BETA waiver applies to the Realtime service itself. It does not waive databa
 
 Realtime switches the cost of queries from "query-execution on read" to "incremental cost on write". However that cost is incurred on a replica, which means Realtime has zero impact on the write-latency, write-throughput or write-compute of your primary database.
 
-Realtime does require logical replication to be enabled. Technically, this adds a small metadata overhead to the Postgres WAL. Note that setting `REPLICA IDENTITY FULL` on the tables your live queries read will result in better performance.
+Realtime does require logical replication to be enabled. Technically, this adds a small metadata overhead to the Postgres WAL. For more information, see [Table requirements](./guides/queries#table-requirements).
 
 </FaqItem>
 
