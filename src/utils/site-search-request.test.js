@@ -38,6 +38,18 @@ describe('hrefFromSearchHit', () => {
   it('rejects another host', () => {
     expect(() => hrefFromSearchHit('https://evil.com/docs/x')).toThrow(/neon.com url/);
   });
+
+  it('keeps the query string and anchor', () => {
+    expect(hrefFromSearchHit('https://neon.com/docs/auth/overview?tab=next#setup')).toBe(
+      '/docs/auth/overview?tab=next#setup'
+    );
+  });
+
+  it('rejects a path that would resolve to another host', () => {
+    expect(() => hrefFromSearchHit('https://neon.com//example.com/#sign-in')).toThrow(
+      /neon.com url/
+    );
+  });
 });
 
 describe('parseSiteSearchHits', () => {

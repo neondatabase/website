@@ -42,7 +42,11 @@ export function parseSiteSearchRequest(body) {
 
 export function hrefFromSearchHit(url) {
   const parsed = new URL(url);
-  if (parsed.protocol !== 'https:' || parsed.hostname !== 'neon.com') {
+  if (
+    parsed.protocol !== 'https:' ||
+    parsed.hostname !== 'neon.com' ||
+    parsed.pathname.startsWith('//')
+  ) {
     throw new Error(`Search hit is not a neon.com url: ${url}`);
   }
   return `${parsed.pathname}${parsed.search}${parsed.hash}`;
