@@ -1,6 +1,7 @@
 export const SEARCH_QUERY_MAX_CHARS = 500;
 
-const SEARCH_COLLECTIONS = new Set(['docs', 'guides', 'changelog', 'blog']);
+// `page` and `tutorial` only come from pinned results (site-search-pinned.js).
+const SEARCH_COLLECTIONS = new Set(['docs', 'guides', 'changelog', 'blog', 'page', 'tutorial']);
 
 export function composeServerTiming(upstream, proxyMs) {
   const proxy = `proxy;dur=${proxyMs.toFixed(1)}`;

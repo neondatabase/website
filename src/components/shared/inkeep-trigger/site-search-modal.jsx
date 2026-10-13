@@ -21,6 +21,8 @@ const COLLECTION_LABEL = {
   guides: 'Guides',
   changelog: 'Changelog',
   blog: 'Blog',
+  page: 'Page',
+  tutorial: 'Tutorial',
 };
 
 const SEARCH_DEBOUNCE_MS = 250;

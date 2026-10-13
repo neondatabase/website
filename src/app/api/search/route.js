@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { pinnedSiteSearchHits } from 'utils/site-search-pinned';
 import {
   composeServerTiming,
   parseSiteSearchHits,
@@ -27,6 +28,14 @@ export async function POST(request) {
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Invalid JSON body';
     return NextResponse.json({ error: message }, { status: 400 });
+  }
+
+  const pinned = pinnedSiteSearchHits(body.query);
+  if (pinned) {
+    return NextResponse.json(
+      { hits: pinned.slice(0, body.limit ?? pinned.length) },
+      { headers: { 'Server-Timing': 'pinned;dur=0' } }
+    );
   }
 
   let response;
