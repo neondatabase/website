@@ -39,7 +39,7 @@ Invoices under $0.50 are not collected.
 | Private network transfer         | -                                                      | -                                                     | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU                                          | Up to 1M MAU                                          | Up to 1M MAU                                                     |
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
-| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
+| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
 | AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
 | Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
 | Metrics/logs export              | -                                                      | -                                                     | Yes                                                              |
@@ -68,7 +68,7 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Private Networking** ($0.01/GB on Scale) counts traffic in **both directions**.
 - **HIPAA** is self-serve on Scale (BAA required), currently at no additional cost. See [HIPAA](https://neon.com/docs/security/hipaa.md) for details.
 - **Object Storage** and **Functions**: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
-- **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per month.
+- **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per project per month.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
 
