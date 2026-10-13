@@ -153,6 +153,16 @@ describe('validateCatalog', () => {
     expect(errors).toEqual([expect.stringContaining(`a.${field}`)]);
   });
 
+  it.each([
+    ['name', { name: "{[]['constructor']['constructor']('return 1')()}" }],
+    ['provider', { provider: '<script>' }],
+    ['family', { family: 'gpt}' }],
+  ])('rejects MDX syntax in %s, which the detail page would evaluate', (field, over) => {
+    const errors = validateCatalog(catalog({ a: model(over) }));
+
+    expect(errors).toEqual([`a.${field} must not contain {, }, < or >`]);
+  });
+
   it('rejects a non-boolean capability flag', () => {
     const errors = validateCatalog(catalog({ a: model({ tool_call: 'yes' }) }));
 

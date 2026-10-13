@@ -76,6 +76,12 @@ const EMBEDDING_REQUIRED_KEYS = [
   'last_updated',
 ];
 const MODEL_TYPES = new Set(['embedding']);
+/**
+ * These strings are interpolated into the MDX of each model's detail page, where `{…}` is
+ * evaluated as JavaScript at build time and `<…>` as JSX. The build-time refresh takes them from
+ * the gateway listing, so they are refused here rather than trusted.
+ */
+const MDX_SYNTAX = /[{}<>]/;
 /** `limit.output` is required upstream; `limit.context` is not, but every entry has it. */
 const REQUIRED_LIMIT_KEYS = ['output'];
 const MODALITIES = new Set(['text', 'image', 'audio', 'video', 'pdf']);
@@ -250,6 +256,8 @@ export function validateCatalog(data) {
         (typeof model[field] !== 'string' || model[field].trim() === '')
       ) {
         fail(`${at(field)} must be a non-empty string`);
+      } else if (typeof model[field] === 'string' && MDX_SYNTAX.test(model[field])) {
+        fail(`${at(field)} must not contain {, }, < or >`);
       }
     }
     if (model.status !== undefined && !STATUSES.has(model.status)) {
