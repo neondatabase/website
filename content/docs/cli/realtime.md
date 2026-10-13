@@ -6,7 +6,7 @@ summary: >-
   database branch. Use `enable` to provision Realtime and set the browser
   origins allowed to connect, and `disable` to remove it.
 enableTableOfContents: true
-updatedOn: '2026-10-13T00:11:48.345Z'
+updatedOn: '2026-10-13T00:38:52.280Z'
 ---
 
 The `realtime` command enables and disables Neon Realtime on a branch. Once Realtime is on, you can stream a live SQL query's results with [`neon subscribe`](/docs/cli/subscribe), and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
@@ -28,6 +28,8 @@ Requests Realtime provisioning for a branch. Provisioning finishes in the backgr
 <CliOptions command="realtime enable" />
 
 `--allowed-origin` sets the browser origins allowed to connect. Repeat the flag for each origin, up to 16. Each value must be `*`, which allows every origin, or an `http` or `https` origin with no path, query, or fragment, such as `https://app.example.com`. `*` can't be combined with other origins. The CLI checks the values before it sends the request.
+
+By default, any browser origin can connect. Pass `--allowed-origin` to limit connections to the origins you list. A new branch starts with its parent's list. A new list can take about a minute to apply after the change finishes. Allowed origins only restrict browsers: a client that sends no `Origin` header, such as a server, can connect either way.
 
 ```bash
 neon realtime enable --allowed-origin https://app.example.com --allowed-origin http://localhost:3000
