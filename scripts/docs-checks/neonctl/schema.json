@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.4.1",
+  "neonctlVersion": "8.4.3",
   "binaries": [
     "neonctl",
     "neon"
@@ -4540,7 +4540,7 @@
         },
         "changes": {
           "type": "boolean",
-          "describe": "Show raw resets and transaction batches instead of full query results",
+          "describe": "Show raw resets and transaction batches",
           "default": false
         },
         "project-id": {
@@ -4554,7 +4554,7 @@
       "examples": [
         {
           "command": "$0 subscribe \"SELECT * FROM items\"",
-          "description": "Print the full result whenever it changes"
+          "description": "Print the initial result followed by a readable transaction log"
         },
         {
           "command": "$0 subscribe --changes \"SELECT * FROM items\"",
