@@ -138,6 +138,7 @@
           items:
             - title: Import Data Assistant
               slug: import/import-data-assistant
+              tag: beta
             - title: pg_dump / pg_restore
               slug: import/migrate-from-postgres
             - title: pgcopydb

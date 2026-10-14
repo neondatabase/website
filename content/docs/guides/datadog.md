@@ -6,11 +6,11 @@ summary: >-
   project computes to Datadog, available on Scale plan projects. Use this page
   to set up monitoring of CPU, memory, connection counts, replication lag,
   database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
-  error and activity visibility. Postgres log export is a preview feature.
+  error and activity visibility. Postgres log export is in beta.
   Log transmission counts toward network egress billed after 500 GB per project
   on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 <InfoBlock>

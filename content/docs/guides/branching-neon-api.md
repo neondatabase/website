@@ -8,9 +8,9 @@ summary: >-
   script branch workflows or integrate branch lifecycle into CI/CD pipelines,
   as opposed to using the Neon Console or CLI. Branch expiration accepts an
   RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
-  via init_source=schema-only is available as a preview feature.
+  via init_source=schema-only is in beta.
 enableTableOfContents: true
-updatedOn: '2026-10-14T10:50:40.535Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).

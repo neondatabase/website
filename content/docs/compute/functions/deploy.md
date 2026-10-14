@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -135,7 +135,7 @@ The API returns immediately for code deploys. Poll the get endpoint (see [Check 
 
 ### Deploy with `@neon/sdk`
 
-The beta [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
+The [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
 
 ```ts
 import { createNeonClient } from '@neon/sdk';
