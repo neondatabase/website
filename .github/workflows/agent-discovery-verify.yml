@@ -49,8 +49,8 @@ jobs:
   verify:
     name: 'Verify agent-discovery endpoints'
     runs-on:
-      group: databricks-ghec-public-repos-runner-group-small
-      labels: linux-ubuntu-latest-public-2core-8gb
+      group: databricks-ghec-untrusted-runner-group
+      labels: linux-ubuntu-latest-untrusted-2core-8gb
     env:
       # Production builds refresh the catalog from the gateway, so the live models.dev
       # comparison reads what is deployed rather than the committed fallback.
