@@ -454,7 +454,48 @@ The sealed query in the payload expires, so pass `refreshQuery`, and the hook re
 
 The renewal runs in the browser, so it goes through something that authenticates the user, like the Route Handler or server function above. It has to seal the same query with the same parameters, because a different fingerprint is rejected. Building both from `messagesQuery()` keeps them in step.
 
-If the user has signed out and the renewal fails, the hook keeps retrying, and once the sealed query expires the status is `stale` until a renewal succeeds. So drive sign-out from your auth state: when the user signs out, unmount the components that subscribe.
+## When the session changes
+
+A page can outlive its session. The user signs out in another tab, or another tab signs in as someone else, and the page still holds the first user's sealed query and rows.
+
+Stop renewing once a renewal fails as signed out, and leave the page. The hook retries a failed renewal every second without limit, and once the sealed query expires the status stays `stale`.
+
+Check on every renewal and write that the session's user is the one the page was loaded for. Have the page send its user id, and treat a mismatch as signed out, with the same 401 as no session. Otherwise a write from the old page lands in the new user's account.
+
+Leave with a full page load. It drops the previous user's Realtime client, collections and optimistic rows. Then the page's redirect sends a signed-out visitor to sign-in, and a different user gets their own rows. With Next.js, pass `session.user.id` to `ChannelMessages` as `userId`, and have the Route Handler return its 401 when the body's `userId` isn't `session.user.id`:
+
+```tsx filename="app/channels/[channelId]/ChannelMessages.tsx"
+// A full page load resets this
+let signedOut = false
+
+export function ChannelMessages({ channelId, userId, initialData, sealedQuery }: Props) {
+  const refreshQuery = useCallback(async () => {
+    if (signedOut) {
+      throw new Error("Signed out")
+    }
+
+    // The page's user, so the Route Handler can refuse anyone else's session
+    const res = await fetch(`/api/messages/${channelId}/live`, {
+      method: "POST",
+      body: JSON.stringify({ userId })
+    })
+
+    if (res.status === 401) {
+      signedOut = true // the hook retries every second, so stop calling the server
+      window.location.reload()
+      throw new Error("Signed out")
+    }
+
+    // … check res.ok and return the sealed query, as above
+  }, [channelId, userId])
+
+  // … render HydratedMessages, as above
+}
+```
+
+With TanStack&nbsp;Start, have the server functions also take a `userId`, and make `requireUser` throw when it isn't the session's user. Leave the same way when a write fails as signed out.
+
+Make sign-in and sign-out full page loads too. With Neon Auth's UI components, have the provider's `onSessionChange` call `window.location.assign("/")` and return a promise that never settles, so the components don't also navigate in the client.
 
 ## With TanStack DB
 
@@ -578,7 +619,7 @@ export const Route = createFileRoute("/channels")({
 
 The layout's loader runs once, because `staleTime: Infinity` keeps its data fresh, so switching channels makes no server round trip. On the first load, the loader and the channel page both run on the server, so the HTML has the rows. If the loader runs again in the browser, the collection already exists, so seeding it again does nothing and the live rows stay.
 
-One collection id is enough, because each `DbClient` belongs to one request or one page load. On sign-out, do a full page load, for example to your sign-in page. That drops the browser's `DbClient`, and the previous user's rows with it.
+One collection id is enough, because each `DbClient` belongs to one request or one page load, and the [full page load when the session changes](#when-the-session-changes) drops it.
 
 The channel route builds the same descriptor from the layout's sealed query, so it gets the collection the loader seeded. It queries the collection with TanStack's `useLiveQuery()`, under the same alias as in the reactivity guide:
 
