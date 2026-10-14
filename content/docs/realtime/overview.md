@@ -223,7 +223,7 @@ Functionally, Realtime already supports:
 
 - arbitrary live SQL (any [read-only, deterministic `SELECT`](./guides/queries#defining-live-queries))
 - [end-to-end, type-safe reactivity](./guides/reactivity)
-- [SSR](./guides/ssr) and [Neon Auth](./guides/queries#authorization) support
+- [SSR](./guides/ssr) and [Managed Better Auth](./guides/queries#authorization) support
 - initial [ORM, query builder](guides/queries#using-a-query-builder-or-orm) and [framework integrations](./guides/reactivity#react)
 - support for branching and scale-to-zero
 

@@ -65,7 +65,7 @@ Use direct subscriptions for workers, trusted agents and server-side fan-out.
 
 Most queries depend on who's asking and what they're asking for.
 
-If you've [exposed your sealed query via an API endpoint](./queries#exposing-an-endpoint), you can provide this context via the request data using your standard auth machinery, such as [Neon Auth](/docs/auth/overview):
+If you've [exposed your sealed query via an API endpoint](./queries#exposing-an-endpoint), you can provide this context via the request data using your standard auth machinery, such as Neon's [Managed Better Auth](/docs/auth/overview):
 
 ```ts filename="frontend/auth.ts"
 import { createAuthClient } from "@neondatabase/auth"
@@ -105,7 +105,7 @@ export async function fetchSealedMessages(channelId: number): Promise<SealedLive
 
 Hono's client types the response body as JSON, so the `Date` in `created_at` shows up as a `string`. The `as` restores the row type that the Realtime client decodes at runtime.
 
-`getSession()` returns the cached session until its JWT is about to expire, then fetches a new one, so each request carries a valid token. Neon Auth tokens only last about 15 minutes. Without a session there's no token, so the API answers 401.
+`getSession()` returns the cached session until its JWT is about to expire, then fetches a new one, so each request carries a valid token. Managed Better Auth tokens only last about 15 minutes. Without a session there's no token, so the API answers 401.
 
 `window.location.origin` assumes your dev server proxies `/api` to the API, as the [example's Vite config](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app/vite.config.ts) does.
 
