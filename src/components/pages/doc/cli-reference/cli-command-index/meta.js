@@ -131,12 +131,11 @@ const META = {
     examples: ['neon neon-auth enable'],
   },
   realtime: {
-    desc: 'Enable or disable Neon Realtime on a branch.',
-    examples: ['neon realtime enable --allowed-origin https://app.example.com'],
-  },
-  subscribe: {
-    desc: 'Stream a live SQL query with Neon Realtime.',
-    examples: ['neon subscribe "SELECT * FROM items"'],
+    desc: 'Manage Neon Realtime and subscribe to live queries.',
+    examples: [
+      'neon realtime enable --allowed-origin https://app.example.com',
+      'neon realtime subscribe "SELECT * FROM items"',
+    ],
   },
   orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
   'ip-allow': {

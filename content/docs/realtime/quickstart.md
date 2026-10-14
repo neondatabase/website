@@ -79,10 +79,10 @@ neon psql -- -c "CREATE TABLE items (id UUID PRIMARY KEY DEFAULT gen_random_uuid
 neon psql -- -c "INSERT INTO items (value) VALUES ('foo')"
 ```
 
-Then [`subscribe`](/docs/cli/subscribe) to a live query:
+Then use [`neon realtime subscribe`](/docs/cli/subscribe) to start a live query:
 
 ```bash filename="Terminal"
-neon subscribe "SELECT * FROM items"
+neon realtime subscribe "SELECT * FROM items"
 ```
 
 This keeps running until you stop it with `Ctrl+C`. To see the result update, open a second terminal in the same directory and insert another row:
@@ -91,13 +91,13 @@ This keeps running until you stop it with `Ctrl+C`. To see the result update, op
 neon psql -- -c "INSERT INTO items (value) VALUES ('bar')"
 ```
 
-By default, `neon subscribe` prints the full query result every time it changes. To see the underlying delta sync instead, subscribe to the raw changes:
+By default, `neon realtime subscribe` prints the full query result every time it changes. To see the underlying delta sync instead, subscribe to the raw changes:
 
 ```bash filename="Terminal"
-neon subscribe --changes "SELECT * FROM items"
+neon realtime subscribe --changes "SELECT * FROM items"
 ```
 
-See [`neon subscribe`](/docs/cli/subscribe) for JSON output and the other options.
+See [`neon realtime subscribe`](/docs/cli/subscribe) for JSON output and the other options.
 
 </Steps>
 

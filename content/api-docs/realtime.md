@@ -6,4 +6,4 @@ Changes return `202` and finish in the background, so poll the state endpoint un
 
 Your backend issues Realtime tokens with the branch's shared secret, so keep it server-side. After a rotation, the previous secret keeps working until `pending` is `false`.
 
-You can also manage Realtime with [`neon realtime`](/docs/cli/realtime), stream a query with [`neon subscribe`](/docs/cli/subscribe), or declare it in `neon.ts` with [`preview.realtime`](/docs/reference/neon-ts#realtime).
+You can also manage Realtime with [`neon realtime`](/docs/cli/realtime), stream a query with [`neon realtime subscribe`](/docs/cli/subscribe), or declare it in `neon.ts` with [`preview.realtime`](/docs/reference/neon-ts#realtime).
