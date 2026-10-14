@@ -117,8 +117,9 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should render both AI Gateway model groups with links to accurate quickstarts', async () => {
-      const inputPath = 'content/docs/ai-gateway/models.md';
-      const pageUrl = 'https://neon.com/docs/ai-gateway/models';
+      // The interactive catalog lives on the AI Gateway landing page (overview).
+      const inputPath = 'content/docs/ai-gateway/overview.md';
+      const pageUrl = 'https://neon.com/docs/ai-gateway/overview';
       const projectRoot = process.cwd();
 
       const { content: result } = await processFile(inputPath, pageUrl, projectRoot);

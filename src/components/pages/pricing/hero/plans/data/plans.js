@@ -102,7 +102,7 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
         ],
@@ -160,7 +160,7 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
         ],

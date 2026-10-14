@@ -55,7 +55,7 @@ sequenceDiagram
 Before starting, ensure you have:
 
 1. **Node.js**: Version `20` or higher installed. Download from [nodejs.org](https://nodejs.org/).
-2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). AI Gateway requires a Launch or Scale plan and a prepaid credit balance. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing).
+2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). AI Gateway requires a Launch or Scale plan and a prepaid credit balance. See [AI Gateway pricing](/docs/ai-gateway/models#pricing).
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI quickstart](/docs/cli/quickstart) for details.
 
 <Steps>

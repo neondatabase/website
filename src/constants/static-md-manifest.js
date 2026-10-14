@@ -42,6 +42,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon/references/sdk.md',
   '/index.md',
   '/pricing.md',
+  '/prompts/ai-gateway-landing.md',
   '/prompts/astro-serverless-prompt.md',
   '/prompts/auth-landing.md',
   '/prompts/clean-up-orphaned-s3-objects-neon-branching-prompt.md',

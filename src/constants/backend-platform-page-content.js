@@ -235,7 +235,7 @@ const aiGatewayPageContent = {
     {
       question: 'Which models can I call?',
       answer:
-        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/models#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
+        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/overview#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
     },
     {
       question: 'What is the difference between Neon AI Gateway and Databricks Unity AI Gateway?',
@@ -270,7 +270,7 @@ const aiGatewayPageContent = {
     {
       question: 'How does AI Gateway pricing work?',
       answer:
-        '<p>Inference is billed per token at the published rate for each model, with no additional Neon markup. One AI Gateway credit equals $1 USD. The minimum credit purchase is $5, and purchased credits are valid for 12 months. Check the <a href="/docs/ai-gateway/models#available-models">model catalog</a> for current per-model rates.</p>',
+        '<p>Inference is billed per token at the published rate for each model, with no additional Neon markup. One AI Gateway credit equals $1 USD. The minimum credit purchase is $5, and purchased credits are valid for 12 months. Check the <a href="/docs/ai-gateway/overview#available-models">model catalog</a> for current per-model rates.</p>',
     },
     {
       question: 'What are the rate limits?',
