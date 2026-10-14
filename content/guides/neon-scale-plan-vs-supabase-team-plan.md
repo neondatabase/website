@@ -1,11 +1,11 @@
 ---
-title: 'In-Depth: Neon Scale vs Supabase Team Plan'
-subtitle: Compare Neon Scale and Supabase Team on pricing, compliance, backups, replicas, private networking, observability, and AI Gateway for production apps.
+title: 'Neon Scale vs Supabase Team: Pricing and Compliance (2026)'
+subtitle: Neon Scale includes SOC 2 and HIPAA with no monthly minimum, and Supabase Team starts at $599 a month. Compare compliance, backups, replicas, and costs.
 author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-07-15T00:00:00.000Z'
-updatedOn: '2026-10-14T09:42:15.709Z'
+updatedOn: '2026-10-14T09:49:03.958Z'
 ---
 
 <Admonition type="note">
