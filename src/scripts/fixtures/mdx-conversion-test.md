@@ -243,7 +243,7 @@ Scale compute up and down based on demand.
 
 ### FeatureBetaProps (with prop)
 
-<FeatureBetaProps feature_name="Autoscaling" />
+<FeatureBetaProps feature_name="Example feature" />
 
 ### EarlyAccessProps (with prop)
 
