@@ -59,7 +59,38 @@ const EMBEDDING = {
   features: { open_weights: true, chat: false, embeddings: true },
 };
 
+// A System One decision model: takes a state and questions, returns a choice, a probability, or a
+// score per question, generates no text.
+const DECISION = {
+  id: 'example-decision',
+  owned_by: 'example',
+  name: 'Example Decision',
+  family: 'decision',
+  model_type: 'language',
+  dialects: ['systemone'],
+  release_date: '2026-09-01',
+  architecture: { input_modalities: ['text'], output_modalities: ['text'] },
+  pricing: { prompt: '0.0000001', completion: '0' },
+  supported_parameters: [],
+  features: { open_weights: true },
+};
+
 describe('toCatalogEntry', () => {
+  it('maps a System One decision model to an input-only entry without chat fields', () => {
+    expect(toCatalogEntry(DECISION)).toEqual({
+      id: 'example-decision',
+      name: 'Example Decision',
+      provider: 'example',
+      family: 'decision',
+      released: true,
+      type: 'decision',
+      open_weights: true,
+      release_date: '2026-09-01',
+      last_updated: '2026-09-01',
+      cost: { input: 0.1 },
+    });
+  });
+
   it('maps a listing item to a data.json entry', () => {
     expect(toCatalogEntry(GPT)).toEqual({
       id: 'gpt-5-4',

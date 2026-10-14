@@ -26,6 +26,7 @@ const MODEL_TYPES = [
   { key: 'text', label: 'Text' },
   { key: 'image', label: 'Image' },
   { key: 'embeddings', label: 'Embeddings' },
+  { key: 'decisions', label: 'Decisions' },
 ];
 
 const COLUMNS = [
@@ -327,7 +328,9 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
     let list = rows.filter((row) => {
       if (mode === 'image') return row.isImageCapable;
       if (mode === 'embeddings') return row.isEmbedding;
-      if (mode === 'text') return row.inputs.includes('text') && !row.isEmbedding;
+      if (mode === 'decisions') return row.isDecision;
+      if (mode === 'text')
+        return row.inputs.includes('text') && !row.isEmbedding && !row.isDecision;
       return true;
     });
     if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));

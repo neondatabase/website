@@ -83,6 +83,29 @@ describe('AI Gateway model Markdown', () => {
     expect(markdown).not.toContain('chat.completions');
   });
 
+  it('does not label a decision model command section as text generation', () => {
+    const [row] = modelRows.buildRows(
+      {
+        models: {
+          'example-decision': {
+            id: 'example-decision',
+            name: 'Example Decision',
+            type: 'decision',
+            cost: { input: 0.1 },
+          },
+        },
+      },
+      { models: [] }
+    );
+    const markdown = renderModelDetailMarkdown(row, { text: [], image: [], embeddings: [] });
+
+    expect(markdown).toContain('a System One decision model');
+    expect(markdown).toContain(
+      '## Command\n\nCode examples are not currently available for this model.'
+    );
+    expect(markdown).not.toContain('### Text generation');
+  });
+
   it('writes one file per model to the public Markdown mirror', async () => {
     const rootDir = await fs.mkdtemp(path.join(os.tmpdir(), 'neon-model-markdown-'));
     tempDirs.push(rootDir);
