@@ -153,7 +153,7 @@ export async function POST(_request: Request, { params }: Context) {
 
 A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new object for the same query. `useLiveQuery()` restarts on each new object, which rejects pending `awaitTxId()` calls. So `HydratedMessages` keeps the first sealed query, and renewals go through `refreshQuery`. Callers key it on `queryFingerprint`, so another channel or user remounts it.
 
-Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. Neon Auth's official TanStack&nbsp;Start adapter isn't out yet, so set up the session yourself. `sessionMiddleware` reads the cookie during SSR and for calls from the browser:
+Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. Neon Auth's official TanStack&nbsp;Start adapter isn't out yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
 
 <details>
   <summary>Read the Neon Auth session in TanStack Start</summary>
@@ -190,7 +190,7 @@ export const auth = createAuthServer({
 `NEON_AUTH_COOKIE_SECRET` signs the session cookie and must be at least 32 characters. Generate it once:
 
 ```bash filename="Terminal"
-echo "NEON_AUTH_COOKIE_SECRET=$(openssl rand -base64 32)" >> .env.local
+printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
 ```
 
 Mount Neon Auth's proxy at `/api/auth`, so the session cookie lives on your app's origin:
@@ -211,7 +211,7 @@ export const Route = createFileRoute("/api/auth/$")({
 })
 ```
 
-`sessionMiddleware` only has a server half. It puts the user's id on `context`, and throws without a session, so it guards your data. `getSessionUser` reads the session without throwing, for route guards:
+`requireUser` only has a server half. It puts the user's id on `context`, and throws without a session, so it guards your data. `getSessionUser` reads the session without throwing, for route guards:
 
 ```ts filename="src/session-middleware.ts"
 import { createMiddleware, createServerFn } from "@tanstack/react-start"
@@ -219,7 +219,7 @@ import { setResponseHeader } from "@tanstack/react-start/server"
 
 import { auth } from "./backend/auth"
 
-export const sessionMiddleware = createMiddleware({ type: "function" }).server(async ({ next }) => {
+export const requireUser = createMiddleware({ type: "function" }).server(async ({ next }) => {
   const { data } = await auth.getSession()
 
   if (!data?.user) {
@@ -264,7 +264,7 @@ export const Route = createRootRoute({
 
 The redirects below go to the sign-in route from the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router), `src/routes/auth.$pathname.tsx`.
 
-Both server functions use `sessionMiddleware`, so they take the user from the session and only `channelId` from the request. The route's `beforeLoad` sends signed-out visitors to sign-in before the loader runs. The router reuses the component when only `$channelId` changes, so the route keys `HydratedMessages` on the query's fingerprint:
+Both server functions use `requireUser`, so they take the user from the session and only `channelId` from the request. The route's `beforeLoad` sends signed-out visitors to sign-in before the loader runs. The router reuses the component when only `$channelId` changes, so the route keys `HydratedMessages` on the query's fingerprint:
 
 ```tsx filename="src/routes/channels.$channelId.tsx"
 import { useCallback } from "react"
@@ -275,7 +275,7 @@ import { loadMessagesPage } from "../backend/messages-page"
 import { messagesQuery } from "../backend/queries"
 import { realtime } from "../backend/realtime"
 import { HydratedMessages } from "../frontend/HydratedMessages"
-import { sessionMiddleware } from "../session-middleware"
+import { requireUser } from "../session-middleware"
 
 function validateChannel(data: { channelId: number }) {
   if (!Number.isInteger(data.channelId)) {
@@ -286,12 +286,12 @@ function validateChannel(data: { channelId: number }) {
 }
 
 const loadMessages = createServerFn({ method: "POST" })
-  .middleware([sessionMiddleware])
+  .middleware([requireUser])
   .validator(validateChannel)
   .handler(({ data, context }) => loadMessagesPage(context.user.id, data.channelId))
 
 const sealMessages = createServerFn({ method: "POST" })
-  .middleware([sessionMiddleware])
+  .middleware([requireUser])
   .validator(validateChannel)
   .handler(({ data, context }) =>
     realtime.seal({ query: messagesQuery(context.user.id, data.channelId) })
@@ -531,10 +531,10 @@ import { createServerFn } from "@tanstack/react-start"
 
 import { inboxQuery } from "./backend/queries"
 import { realtime } from "./backend/realtime"
-import { sessionMiddleware } from "./session-middleware"
+import { requireUser } from "./session-middleware"
 
 export const sealInbox = createServerFn({ method: "POST" })
-  .middleware([sessionMiddleware])
+  .middleware([requireUser])
   .handler(({ context }) => realtime.seal({ query: inboxQuery(context.user.id) }))
 ```
 
@@ -549,10 +549,10 @@ import { createServerFn } from "@tanstack/react-start"
 import { inboxQuery } from "../backend/queries"
 import { realtime } from "../backend/realtime"
 import { messagesCollection } from "../collections"
-import { sessionMiddleware } from "../session-middleware"
+import { requireUser } from "../session-middleware"
 
 const loadInbox = createServerFn({ method: "POST" })
-  .middleware([sessionMiddleware])
+  .middleware([requireUser])
   .handler(async ({ context }) => {
     const query = inboxQuery(context.user.id)
     const [initialData, sealedQuery] = await Promise.all([query, realtime.seal({ query })])
