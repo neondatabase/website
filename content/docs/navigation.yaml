@@ -872,8 +872,8 @@
               slug: realtime/examples/tanstack
         #    - title: 'Mastra'
         #      slug: realtime/examples/mastra
-        #    - title: 'Drizzle'
-        #      slug: realtime/examples/drizzle
+            - title: 'Drizzle'
+              slug: realtime/examples/drizzle
         #    - title: 'Kysely'
         #      slug: realtime/examples/kysely
         - section: SDKs
