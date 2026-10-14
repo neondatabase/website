@@ -1,8 +1,8 @@
 ---
-title: 'Neon CLI command: subscribe'
+title: 'Neon CLI command: realtime subscribe'
 subtitle: Stream a live SQL query's results from the terminal with Neon Realtime
 summary: >-
-  The Neon CLI `neon subscribe` command subscribes to a live SQL query with Neon
+  The Neon CLI `neon realtime subscribe` command subscribes to a live SQL query with Neon
   Realtime and prints the initial result followed by a log of each transaction's
   changes, or the raw reset and transaction batch events with `--changes`. Output
   is a table, newline-delimited JSON, or YAML.
@@ -10,15 +10,15 @@ enableTableOfContents: true
 updatedOn: '2026-10-14T02:37:05.711Z'
 ---
 
-The `subscribe` command runs a `SELECT` query as a live subscription with [Neon Realtime](/docs/realtime/overview) and prints its results as they change. Use it to watch a table while you develop, or to check what a Realtime client would receive. For a guided walkthrough, see the [Realtime quickstart](/docs/realtime/quickstart). The branch needs Realtime enabled first: run [`neon realtime enable`](/docs/cli/realtime#enable), or declare it in `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime) and apply.
+The `realtime subscribe` command runs a `SELECT` query as a live subscription with [Neon Realtime](/docs/realtime/overview) and prints its results as they change. Use it to watch a table while you develop, or to check what a Realtime client would receive. For a guided walkthrough, see the [Realtime quickstart](/docs/realtime/quickstart). The branch needs Realtime enabled first: run [`neon realtime enable`](/docs/cli/realtime#enable), or declare it in `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime) and apply.
 
 ## Usage
 
-<CliUsage command="subscribe" />
+<CliUsage command="realtime subscribe" />
 
 ## Options
 
-<CliOptions command="subscribe" />
+<CliOptions command="realtime subscribe" />
 
 The CLI resolves the branch's Realtime URL, secret, and database name for you, the same values [`neon env pull`](/docs/cli/env) writes, so you don't need a `.env` file first. If Realtime is still provisioning, it waits until it's ready. Quote the query so your shell passes it as one argument. If `--project-id` is omitted, it reads it from your [context file](/docs/cli/link) or auto-selects your only project. If `--branch` is omitted, it uses the context file's branch, or the project's default branch.
 
@@ -32,7 +32,7 @@ The default table output is an append-only log, so it doesn't take over your ter
 - One entry per transaction, labeled with its transaction ID and a `+inserted ~updated -deleted` count, listing each changed row with its change type. A deleted row shows its last known values.
 - Connection state changes, such as connecting, live, and stale.
 
-Every entry starts with a UTC timestamp. The server can send a reset instead of a transaction at any point, and then `subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a reset instead of a transaction for a change.
+Every entry starts with a UTC timestamp. The server can send a reset instead of a transaction at any point, and then `realtime subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a reset instead of a transaction for a change.
 
 With `--changes`, it prints the raw events instead: a reset with the current rows, each with a row ID, and then one batch per transaction listing each change's type (`upsert` or `remove`), row ID, and row. A reset replaces the full row set and invalidates earlier row IDs.
 
@@ -43,7 +43,7 @@ With `--output json`, each event is one JSON object per line. With `--output yam
 Print the initial result, then a log of each transaction:
 
 ```bash
-neon subscribe "SELECT * FROM items"
+neon realtime subscribe "SELECT * FROM items"
 ```
 
 Here, a row is inserted, another is renamed, the new row is deleted, and then one transaction inserts a row and renames another:
@@ -89,7 +89,7 @@ Change    ID  Name
 Print the raw reset and transaction batch events:
 
 ```bash
-neon subscribe --changes "SELECT * FROM items"
+neon realtime subscribe --changes "SELECT * FROM items"
 ```
 
 Here, a row is inserted, updated, and then deleted, one transaction each:
@@ -130,7 +130,7 @@ remove  1257d5759a0894512f6859dd60b504e69cbf6f8d9d4d977ee9b3b396661928bf
 Stream events as newline-delimited JSON, for example to pipe into another tool. Each event is a full snapshot of the result:
 
 ```bash
-neon subscribe "SELECT * FROM items ORDER BY id" --output json
+neon realtime subscribe "SELECT * FROM items ORDER BY id" --output json
 ```
 
 ```json

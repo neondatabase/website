@@ -1429,7 +1429,7 @@
                   slug: cli/neon-auth
                 - title: realtime
                   slug: cli/realtime
-                - title: subscribe
+                - title: realtime subscribe
                   slug: cli/subscribe
                 - title: credentials
                   slug: cli/credentials
