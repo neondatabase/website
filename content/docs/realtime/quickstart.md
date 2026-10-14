@@ -134,6 +134,6 @@ Open [http://localhost:5173](http://localhost:5173) in your browser. If you open
 - learn [how Realtime works](./how-it-works) and how the layers fit together
 - read the guides on [defining](./guides/queries) and [subscribing](./guides/subscribing) to queries, [reactivity](./guides/reactivity), [optimistic mutations](./guides/mutations) and [server-side rendering](./guides/ssr)
 - see the [Next.js](./examples/nextjs) and [TanStack](./examples/tanstack) examples showing how to build full-stack reactive apps with auth and SSR support
-- see the [Mastra](./examples/mastra) example showing how to drive reactive agent workflows directly from Postgres
+- see the [Mastra](./examples/mastra) example showing how users and background agents work on the same data in real time
 
 <NeedHelp/>

@@ -29,7 +29,7 @@ npx neon@latest bootstrap my-app --template realtime-react
 
 </DetailIconCards>
 
-See examples of how to build full-stack, reactive apps with [Next.js](./examples/nextjs) and [TanStack](./examples/tanstack) and how to [drive live agent workflows](./examples/mastra) with Mastra.
+See examples of how to build full-stack, reactive apps with [Next.js](./examples/nextjs) and [TanStack](./examples/tanstack) and how to [keep users and agents in sync](./examples/mastra) with Mastra.
 
 <DetailIconCards cols={3} theme="green-dotted">
 
@@ -37,7 +37,7 @@ See examples of how to build full-stack, reactive apps with [Next.js](./examples
 
 <a href="/docs/realtime/examples/tanstack" description="Build a realtime, reactive app using TanStack Start and DB." icon="tanstack">TanStack</a>
 
-<a href="/docs/realtime/examples/mastra" description="Drive agent workflows directly from Lakebase Postgres." icon="mastra">Mastra</a>
+<a href="/docs/realtime/examples/mastra" description="Keep users and agents in sync on the same data." icon="mastra">Mastra</a>
 
 </DetailIconCards>
 
