@@ -25,8 +25,8 @@ These apps in the `neondatabase/examples` repository use Drizzle:
 Install the Realtime SDK, its Drizzle adapter, Drizzle and a Postgres driver:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-drizzle drizzle-orm @neondatabase/serverless ws
-npm install -D @types/ws
+npm install @neon/realtime @neon/realtime-drizzle drizzle-orm pg
+npm install -D @types/pg
 ```
 
 `@neon/realtime-drizzle` has two entry points. The main one exports `drizzleAdapter()` for your server. `@neon/realtime-drizzle/client` exports `drizzleParsers` for the browser and doesn't import Drizzle, so the ORM stays out of your browser bundle.
@@ -95,22 +95,21 @@ Create the tables with your usual Drizzle workflow. Realtime needs nothing extra
 You build live queries with your usual Drizzle `db`, but Realtime never runs them through it: the adapter only compiles them to SQL. `db` still runs your writes and any reads on the server, such as server-rendered rows:
 
 ```ts filename="backend/db.ts"
-import { drizzle } from "drizzle-orm/neon-serverless"
-import { Pool, neonConfig } from "@neondatabase/serverless"
-import ws from "ws"
+import { drizzle } from "drizzle-orm/node-postgres"
+import { Pool } from "pg"
 import * as schema from "./schema"
 
-// Node.js versions older than v22 need a WebSocket constructor
-neonConfig.webSocketConstructor = ws
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL! })
+const pool = new Pool({
+  // Neon URLs say sslmode=require. Asking pg for verify-full keeps today's checks and skips its warning
+  connectionString: process.env.DATABASE_URL!.replace("sslmode=require", "sslmode=verify-full")
+})
 export const db = drizzle(pool, { schema })
 
 // So an idle connection error, for example when the compute scales to zero, doesn't crash the API
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-- the [`neon-serverless`](/docs/serverless/serverless-driver) driver runs interactive transactions, which [writes](#return-the-txid-from-drizzle-writes) need to read their transaction ID. `drizzle-orm/node-postgres` with a `pg` pool works too. `neon-http` can't, so `db.transaction()` throws with it
+- any Drizzle Postgres driver works, `neon-http` included, because each [write](#return-the-txid-from-drizzle-writes) returns its transaction ID in one statement. This page uses `drizzle-orm/node-postgres` with a `pg` pool
 - `{ schema }` is only for Drizzle's relational `db.query` API, which [can't be sealed](#common-pitfalls). Live queries use the select builder
 
 ### Define the live query
@@ -272,7 +271,7 @@ The client holds each optimistic change until the write's transaction ID comes b
 
 ### Return the txid from Drizzle writes
 
-Run the write in `db.transaction()` and read the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) inside it, with the mutations guide's `currentTxId()` helper. For example, a function that edits a message:
+Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write itself, by adding `pg_current_xact_id()` to its `RETURNING`. For example, a function that edits a message:
 
 ```ts filename="backend/server.ts"
 import { and, eq, ne, sql } from "drizzle-orm"
@@ -284,35 +283,26 @@ export type MutationResponse =
   | { readonly kind: "committed"; readonly txid: string }
   | { readonly kind: "unchanged" }
 
-type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0]
+// The id of the transaction that made the change, read in the write's own RETURNING
+const txid = sql<string>`pg_current_xact_id()::text`
 
-// Must run inside the write transaction, so it returns that transaction's id
-async function currentTxId(tx: Transaction): Promise<string> {
-  const result = await tx.execute<{ txid: string }>(sql`select pg_current_xact_id()::text as txid`)
+const mutationResponse = (row?: { txid: string }): MutationResponse =>
+  row ? { kind: "committed", txid: row.txid } : { kind: "unchanged" }
 
-  return result.rows[0]!.txid
-}
+export async function editMessage(userId: string, id: string, body: string): Promise<MutationResponse> {
+  const [row] = await db
+    .update(messages)
+    .set({ body })
+    .where(and(eq(messages.id, id), eq(messages.author_id, userId), ne(messages.body, body)))
+    .returning({ txid })
 
-export function editMessage(userId: string, id: string, body: string): Promise<MutationResponse> {
-  return db.transaction(async (tx): Promise<MutationResponse> => {
-    const updated = await tx
-      .update(messages)
-      .set({ body })
-      .where(and(eq(messages.id, id), eq(messages.author_id, userId), ne(messages.body, body)))
-      .returning({ id: messages.id })
-
-    if (updated.length === 0) {
-      return { kind: "unchanged" }
-    }
-
-    return { kind: "committed", txid: await currentTxId(tx) }
-  })
+  return mutationResponse(row)
 }
 ```
 
-- `Transaction` is the type of `tx` in your `db.transaction()` callback. `currentTxId()` works with `neon-serverless` and `node-postgres`. With `postgres-js`, `tx.execute()` returns the rows directly, so read `result[0]!.txid`
-- `pg_current_xact_id()` runs inside the write's transaction, so it returns the ID of the transaction that made the change. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
-- `.returning({ id: messages.id })` returns the changed rows. With none, nothing comes over Realtime, so the function returns `unchanged` and the client has nothing to wait for. `ne(messages.body, body)` skips edits that change nothing
+- a single statement runs in its own transaction, so `RETURNING` gives you the ID of the transaction that made the change, in one round trip. Don't wrap the write in `db.transaction()` just to read the ID: that adds three more round trips and holds a connection
+- the `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
+- with no changed row, nothing comes over Realtime, so `mutationResponse()` returns `unchanged` and the client has nothing to wait for. `ne(messages.body, body)` skips edits that change nothing
 - see how to [call these writes from the frontend](../guides/mutations#calling-the-routes-from-the-frontend)
 
 ## Common pitfalls
