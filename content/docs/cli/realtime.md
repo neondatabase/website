@@ -77,11 +77,11 @@ The default table output is an append-only log, so it doesn't take over your ter
 - One entry per transaction, labeled with its transaction ID and a `+inserted ~updated -deleted` count, listing each changed row with its change type. A deleted row shows its last known values.
 - Connection state changes, such as connecting, live, and stale.
 
-Every entry starts with a UTC timestamp. The server can send a reset instead of a transaction at any point, and then `realtime subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a reset instead of a transaction for a change.
+Every entry starts with a UTC timestamp. The server can send a complete `rows` replacement instead of incremental `changes` at any point, and then `realtime subscribe` prints the full result again. Some queries, such as ones with `ORDER BY`, can get a complete replacement for a change.
 
-With `--changes`, it prints the raw events instead: a reset with the current rows, each with a row ID, and then one batch per transaction listing each change's type (`upsert` or `remove`), row ID, and row. A reset replaces the full row set and invalidates earlier row IDs.
+With `--changes`, it prints the raw events instead: a `rows` event with the complete current result, each row carrying a row ID, followed by `changes` events that list each change's type (`upsert` or `remove`), row ID, and row. A `rows` event replaces the full row set and invalidates earlier row IDs.
 
-With `--output json`, each event is one JSON object per line. With `--output yaml`, each event is a separate YAML document. Each event has a `type` of `snapshot` (the default mode), or `reset` or `batch` (with `--changes`). Machine-readable output carries only the events: the header and connection states are terminal-only.
+With `--output json`, each event is one JSON object per line. With `--output yaml`, each event is a separate YAML document. Each event has a `type` of `snapshot` (the default mode), or `rows` or `changes` (with `--changes`). Machine-readable output carries only the events: the header and connection states are terminal-only.
 
 ### Examples
 
@@ -131,7 +131,7 @@ Change    ID  Name
 
 </details>
 
-Print the raw reset and transaction batch events:
+Print the raw `rows` and `changes` events:
 
 ```bash
 neon realtime subscribe --changes "SELECT * FROM items"
@@ -151,7 +151,7 @@ Mode      Raw changes
 Query     SELECT * FROM items
 [2026-10-13T13:48:40.801Z] Connecting…
 
-[2026-10-13T13:48:41.461Z] Reset · 2 rows
+[2026-10-13T13:48:41.461Z] Rows · 2 rows
 Row ID                                                            Row
 97254c8a1b75b7e21a05f98973614ea5af20ae9f4d481389eddb304c9b331ecf  {"id":1,"name":"apple"}
 3045adcead9109b462b3c0e501e1c78c48b6cdbeb28bd3d3e01b83a61eaee302  {"id":2,"name":"banana"}
