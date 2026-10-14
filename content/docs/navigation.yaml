@@ -1429,8 +1429,6 @@
                   slug: cli/neon-auth
                 - title: realtime
                   slug: cli/realtime
-                - title: realtime subscribe
-                  slug: cli/subscribe
                 - title: credentials
                   slug: cli/credentials
             - title: Organizations and networking

@@ -4063,7 +4063,6 @@
           "describe": "Enable Realtime on a branch"
         },
         "subscribe": {
-          "_comment": "Registered from the imported subscribe command module in realtime.ts. The static parser does not follow command modules across files; values verified against subscribe.ts at neon 8.4.4.",
           "name": "subscribe",
           "aliases": [],
           "positionals": [
