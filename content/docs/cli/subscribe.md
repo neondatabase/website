@@ -7,14 +7,10 @@ summary: >-
   changes, or the raw reset and transaction batch events with `--changes`. Output
   is a table, newline-delimited JSON, or YAML.
 enableTableOfContents: true
-updatedOn: '2026-10-13T14:12:17.432Z'
+updatedOn: '2026-10-14T02:37:05.711Z'
 ---
 
 The `subscribe` command runs a `SELECT` query as a live subscription with [Neon Realtime](/docs/realtime/overview) and prints its results as they change. Use it to watch a table while you develop, or to check what a Realtime client would receive. For a guided walkthrough, see the [Realtime quickstart](/docs/realtime/quickstart). The branch needs Realtime enabled first: run [`neon realtime enable`](/docs/cli/realtime#enable), or declare it in `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime) and apply.
-
-<Admonition type="comingSoon" title="Coming soon">
-Neon Realtime isn't available yet. As of Neon CLI 8.4.1, the `realtime` and `subscribe` commands are included but stay hidden and print "Neon Realtime is coming soon!" until Realtime launches.
-</Admonition>
 
 ## Usage
 
