@@ -9,7 +9,7 @@ enableTableOfContents: true
 [Enable Realtime](#enable-realtime), run your [first live SQL queries](#subscribe-to-a-live-query) and [build an app with realtime&nbsp;reactivity](#build-a-realtime-app).
 
 <Admonition type="important" title="Create your project in a supported region">
-Realtime is currently [available in limited regions](./overview#which-regions-is-it-enabled-in). Support is expanding toward [all regions](/docs/introduction/regions).
+Realtime is currently [available in limited regions](./overview#which-regions-is-it-enabled-in). Support is expanding toward [all regions](/docs/introduction/regions#product-availability).
 
 Realtime isn't available on [Claimable projects](/docs/reference/claimable-neon) until they're claimed.
 </Admonition>
