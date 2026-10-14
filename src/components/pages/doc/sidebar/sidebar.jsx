@@ -61,9 +61,12 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
 
   const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
-  const hasBorder = !isGuidesRoute;
 
-  if (isChangelogIndex || (!menu && !sdkTOC)) {
+  // FAQ pages still use the empty sidebar column for their desktop alignment.
+  const isFaqsRoute = /^\/faqs(?:\/|$)/.test(pathname);
+  const hasBorder = !isGuidesRoute && !isFaqsRoute;
+
+  if (isChangelogIndex || (!menu && !sdkTOC && !isFaqsRoute)) {
     return null;
   }
 
