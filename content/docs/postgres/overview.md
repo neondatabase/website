@@ -8,15 +8,24 @@ summary: >-
   restore, and read replicas. Use this page as a starting point to create a
   project, connect an application, or explore Neon-specific features.
 enableTableOfContents: true
+layout: wide
+hideCopyPage: true
 ---
 
-Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-- **Autoscaling.** Compute scales up and down automatically with your workload.
-- **Scale to zero.** Idle databases suspend, so you only pay for what you use.
-- **Branching.** Create isolated, instant copies of your database for development, testing, and CI.
-- **Instant restore.** Restore to any point in time within your history window.
-- **Read replicas.** Scale your app by offloading read traffic to read replicas.
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Serverless Postgres with storage and compute separated, so your database branches instantly, scales up with demand, and down to zero when idle.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/postgres-landing.md" buttonText="Copy prompt" />
+</div>
+
+<img
+  src="/docs/postgres/hero-postgres.svg"
+  alt="Stateless Postgres compute reads from and writes to separate, durable Postgres storage."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
+
+</div>
 
 ## Get started
 
@@ -49,5 +58,15 @@ Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM,
 <a href="/docs/serverless/serverless-driver" description="Optimized driver for serverless and edge runtimes using HTTP or WebSockets." icon="audio-jack">Serverless driver</a>
 
 </DetailIconCards>
+
+## About Lakebase Postgres
+
+Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
+
+- **Autoscaling.** Compute scales up and down automatically with your workload.
+- **Scale to zero.** Idle databases suspend, so you only pay for what you use.
+- **Branching.** Create isolated, instant copies of your database for development, testing, and CI.
+- **Instant restore.** Restore to any point in time within your history window.
+- **Read replicas.** Scale your app by offloading read traffic to read replicas.
 
 <NeedHelp/>
