@@ -47,7 +47,7 @@ Two more variables come from you. The browser needs the Realtime URL, and Vite o
 
 ```bash filename="Terminal"
 echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
-echo "NEON_AUTH_COOKIE_SECRET=$(openssl rand -base64 32)" >> .env.local
+printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
 ```
 
 Vite expands `$NEON_REALTIME_URL` when it loads the file, so the browser URL follows the server variable after each `neon env pull`. It also inlines the value into the server build, so server rendering and the browser create the client with the same URL. `NEON_REALTIME_SECRET` never gets a `VITE_` prefix. The browser only ever sees the URL and sealed queries.
@@ -135,50 +135,30 @@ The `.server.ts` suffix keeps the file out of the browser bundle, as [the SSR gu
 
 TanStack&nbsp;Start mounts [Neon Auth](/docs/auth/overview) on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Check the session in middleware, on the server, before you read, seal or write anything:
 
-```ts filename="src/auth.functions.ts"
-import { createMiddleware, createServerFn } from "@tanstack/react-start"
-import { setResponseHeader, setResponseStatus } from "@tanstack/react-start/server"
-
-import { auth } from "./auth.server"
-
-// Only what the UI needs. The root `beforeLoad` result is serialized into the HTML.
-export type SessionUser = { id: string; email: string; name: string }
-
-// Reads the session from the request's cookies. Signed out is `user: null`.
-export const sessionMiddleware = createMiddleware({ type: "function" }).server(async ({ next }) => {
-  const { data, error } = await auth.getSession()
-  // If Neon Auth can't be reached, treat the request as signed out.
-  if (error) console.warn("[auth] getSession failed", error.code)
-  const user: SessionUser | null = data?.user ? { id: data.user.id, email: data.user.email, name: data.user.name } : null
-  return next({ context: { user } })
-})
+```ts filename="src/auth/auth.functions.ts"
+import { createMiddleware } from "@tanstack/react-start"
+import { setResponseStatus } from "@tanstack/react-start/server"
+import { z } from "zod"
 
 // The data boundary: every todo server function uses this, whatever the
-// route guards do.
+// route guards do. The page sends the user id it was loaded for, so a session
+// for another user (signed in from another tab) counts as signed out. The
+// schema is loose, so the function's own fields reach its validator.
 export const requireUser = createMiddleware({ type: "function" })
   .middleware([sessionMiddleware])
-  .server(({ next, context }) => {
-    if (!context.user) {
+  .validator(z.looseObject({ userId: z.string() }))
+  .server(({ next, context, data }) => {
+    if (context.user?.id !== data.userId) {
       setResponseStatus(401)
-      throw new Error("UNAUTHORIZED")
+      throw new Error("UNAUTHENTICATED")
     }
     return next({ context: { user: context.user } })
   })
-
-// The one GET server function, so it sets its own Cache-Control.
-export const getSessionUser = createServerFn({ method: "GET" })
-  .middleware([sessionMiddleware])
-  .handler(({ context }) => {
-    setResponseHeader("Cache-Control", "private, no-store")
-    return context.user
-  })
 ```
 
-`sessionMiddleware` reads the session from the request's cookies. `auth` comes from `src/auth.server.ts`, a small TanStack&nbsp;Start adapter for Neon Auth's server SDK. `src/routes/api/auth/$.ts` proxies Neon Auth so the session cookie lives on your app's origin. The SSR guide shows both in [send both to the browser](../guides/ssr#send-both-to-the-browser).
+Every server function that reads, seals or writes todos uses `requireUser`. Signed out or signed in as someone else, it responds with a 401 and throws `UNAUTHENTICATED`, which the collection [handles in the browser](#define-the-collection). `sessionMiddleware`, in the same file, reads the session from the request's cookies, and `getSessionUser` gives the [route guards](#keep-signed-in-pages-private) the user or `null`.
 
-`requireUser` is the data boundary. Every server function that reads, seals or writes todos uses it. Without a session, it responds with a 401 and throws `UNAUTHORIZED`, which the collection [handles in the browser](#define-the-collection).
-
-`getSessionUser` is for route guards, and returns the user or `null`. The routes use it to [keep server-rendered pages private](#keep-server-rendered-pages-private).
+The rest of `src/auth/` is Neon Auth setup: the server, the `/api/auth` proxy, the browser client and the prebuilt sign-in UI, as in the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router). `auth.server.ts` stands in for Neon Auth's TanStack&nbsp;Start adapter, which isn't out yet. The SSR guide [builds the same server](../guides/ssr#send-both-to-the-browser) in `src/backend/auth.ts`.
 
 ### Seal in a server function
 
@@ -187,36 +167,18 @@ Expose the sealed query from a server function, as in [using server functions](.
 ```ts filename="src/todos.functions.ts"
 import { createServerFn } from "@tanstack/react-start"
 
-import { requireUser, type SessionUser } from "./auth.functions"
+import { requireUser } from "./auth/auth.functions"
 import { realtime } from "./realtime.server"
 import { selectTodos } from "./todos.server"
-import { pageUserInput } from "./todos.schemas"
 
 // Every function requires a signed-in user and only touches that user's rows.
 // Anything that returns rows or a sealed query is POST, so it's never cached.
-//
-// Start applies its default CSRF middleware to server functions as long as
-// there's no `src/start.ts`. If you add one, re-add
-// `createCsrfMiddleware({ filter: (c) => c.handlerType === "serverFn" })`.
-
-// The browser sends the user id its page was loaded for. If another tab has
-// since signed in as someone else, the page has to reload: its writes would go
-// to the new user, and Realtime rejects a refreshed query for a different user.
-function requireSameUser(userId: string, user: SessionUser) {
-  if (userId !== user.id) throw new Error("SESSION_CHANGED")
-}
 
 // Re-seals the live query before it expires.
 export const refreshTodosQuery = createServerFn({ method: "POST" })
   .middleware([requireUser])
-  .validator(pageUserInput)
-  .handler(({ data, context }) => {
-    requireSameUser(data.userId, context.user)
-    return realtime.seal({ query: selectTodos(context.user.id) })
-  })
+  .handler(({ context }) => realtime.seal({ query: selectTodos(context.user.id) }))
 ```
-
-`pageUserInput` is a zod schema for `{ userId }`, in `src/todos.schemas.ts`. When `requireSameUser` throws `SESSION_CHANGED`, the collection [leaves the page](#define-the-collection).
 
 ## Server-side rendering
 
@@ -247,21 +209,21 @@ export const loadTodos = createServerFn({ method: "POST" })
 
 [`realtime.seal()`](../sdks/typescript#backend-realtimeserverseal) returns a typed [`SealedLiveQuery<Todo>`](../sdks/typescript#backend-sealedlivequery), so the row type flows through to the collection and the page.
 
-### Keep server-rendered pages private
+### Keep signed-in pages private
 
 A server-rendered page carries the user's rows and a sealed query, which is a [bearer token](../guides/queries#sealing-queries). So load the session in the root route, and stop shared caches from storing the page:
 
 ```tsx filename="src/routes/__root.tsx"
 import { createRootRouteWithContext } from "@tanstack/react-router"
 
-import { getSessionUser } from "../auth.functions"
+import { getSessionUser } from "../auth/auth.functions"
 import type { RouterContext } from "../router"
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   // Runs on every navigation, so the signed-in user is always current. During
   // SSR it runs in-process with the request's cookies.
   beforeLoad: async () => ({ user: await getSessionUser() }),
-  // Pages carry user specific data, so don't cache them.
+  // Pages carry the user's rows, so no shared cache may store them.
   headers: () => ({ "Cache-Control": "private, no-store", Vary: "Cookie" })
 })
 ```
@@ -271,15 +233,13 @@ Then put the signed-in pages under a layout route that sends signed-out visitors
 ```tsx filename="src/routes/_authed.tsx"
 import { createFileRoute, redirect } from "@tanstack/react-router"
 
-// Signed-in pages. The redirect is for the user experience only: every server
-// function checks the session again with `requireUser`.
+// Signed-in pages. UX only: every server function checks `requireUser` too.
 export const Route = createFileRoute("/_authed")({
-  beforeLoad: ({ context, location }) => {
+  beforeLoad: ({ context }) => {
     if (!context.user) {
       throw redirect({
         to: "/auth/$path",
         params: { path: "sign-in" },
-        search: { redirect: location.href },
         // An SSR redirect skips the root route's `headers`.
         headers: { "Cache-Control": "private, no-store", Vary: "Cookie" }
       })
@@ -289,7 +249,7 @@ export const Route = createFileRoute("/_authed")({
 })
 ```
 
-`beforeLoad` returns the signed-in `user`, so the routes below it get a user that's never `null`. The sign-in route renders Neon Auth's prebuilt UI, as in the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router).
+`beforeLoad` returns the signed-in `user`, so the routes below it get a user that's never `null`.
 
 ### Create a `DbClient` per router
 
@@ -335,7 +295,7 @@ export function getRouter() {
 }
 ```
 
-- no collection is shared between users, because each request and each page load gets its own `DbClient`. Make sign-in and sign-out full page loads, so they drop the browser's `DbClient` and the previous user's rows with it. The SSR guide explains why you [create a `DbClient` per router](../guides/ssr#create-a-dbclient-per-router)
+- no collection is shared between users, because each request and each page load gets its own `DbClient`, as in [create a `DbClient` per router](../guides/ssr#create-a-dbclient-per-router). Sign-in and sign-out are full page loads, which drop the browser's `DbClient` and the previous user's rows with it. See [when the session changes](../guides/ssr#when-the-session-changes)
 - [`drizzleParsers`](../sdks/typescript#drizzle-client-drizzleparsers) parses live values the way Drizzle does, so live rows have the same types as the rows the server rendered. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical)
 - `routerWithDbClient()` wraps the app in TanStack&nbsp;DB's provider, so components get this `DbClient` from `useDbClient()`. It also snapshots the collections that loaders seeded on the server into the HTML, and restores them in the browser before the first render
 - `RouterContext` puts `dbClient` on route context, where the route loader reads it
@@ -357,7 +317,7 @@ export const Route = createFileRoute("/_authed/")({
   // Fills the router's DbClient. On the server, routerWithDbClient snapshots
   // these rows into the HTML and restores them in the browser before render.
   loader: async ({ context }) => {
-    const { rows, query } = await loadTodos()
+    const { rows, query } = await loadTodos({ data: { userId: context.user.id } })
     // A no-op if this user's collection already exists.
     context.dbClient.collection(todosCollection(context.user.id, query), { initialData: rows })
     return { query }
@@ -383,6 +343,7 @@ import type { RealtimeClient, SealedLiveQuery } from "@neon/realtime/client"
 import { realtimeCollectionOptions } from "@neon/realtime-tanstack"
 import { collectionOptions } from "@tanstack/react-db"
 
+import { leaveIfSignedOut } from "./auth/session-lost"
 import { refreshTodosQuery } from "./todos.functions"
 import type { Todo } from "./todos.server"
 
@@ -400,25 +361,17 @@ export function todosCollection(userId: string, query: SealedLiveQuery<Todo>) {
       // later would start empty, from this long-expired sealed query, and stay
       // `stale` until a refresh replaced it.
       gcTime: 0,
-      refreshQuery: () => refreshTodosQuery({ data: { userId } }).catch(leaveOnAuthLoss)
+      refreshQuery: () => refreshTodosQuery({ data: { userId } }).catch(leaveIfSignedOut)
     })
   )
-}
-
-// Signed out, or signed in as someone else: this page's rows and live query
-// no longer apply, so go to sign-in with a full page load. Browser only.
-function leaveOnAuthLoss(error: unknown): never {
-  if (/UNAUTHORIZED|SESSION_CHANGED/.test(String(error))) {
-    window.location.assign("/auth/sign-in")
-  }
-  throw error
 }
 ```
 
 - `realtimeCollectionOptions()` takes the sealed `query`, the Realtime `client` and `getKey`, and syncs the collection from the subscription. Other TanStack&nbsp;DB options, like `gcTime`, pass through. The [config reference](../sdks/typescript#tanstack-db-realtimecollectionconfig) lists them all
 - `refreshQuery` returns a fresh sealed query for the same query. The collection calls it before the current one expires and renews the subscription in place, keeping its rows. See [`refreshQuery`](../guides/reactivity#refreshquery)
 - `gcTime: 0` turns off garbage collection in TanStack&nbsp;DB, which differs from TanStack&nbsp;Query, where `0` collects at once
-- when the session is gone, the server function throws, and `leaveOnAuthLoss` loads the sign-in page. The full page load drops the collection, the connection and the cached rows
+
+If the session is gone or belongs to another user, the server function fails with `UNAUTHENTICATED`, and `leaveIfSignedOut`, from `src/auth/session-lost.ts`, does a full page load of `/`. The SSR guide explains [when the session changes](../guides/ssr#when-the-session-changes).
 
 ### Render the collection
 
@@ -587,7 +540,7 @@ function TodosPage() {
 Add `onInsert`, `onUpdate` and `onDelete` handlers to `realtimeCollectionOptions()` in `src/todos.collection.ts`, after `refreshQuery`. TanStack&nbsp;DB calls each one once per transaction, with all of its mutations, so each handler sends one batch to its server function. If the write changed rows, the handler waits for its transaction ID:
 
 ```ts filename="src/todos.collection.ts"
-refreshQuery: () => refreshTodosQuery({ data: { userId } }).catch(leaveOnAuthLoss),
+refreshQuery: () => refreshTodosQuery({ data: { userId } }).catch(leaveIfSignedOut),
 // One server call per transaction, with all of its mutations. Each also
 // sends `userId`, so the server refuses writes from a page loaded for
 // another user.
@@ -597,7 +550,7 @@ onInsert: async ({ transaction, collection }) => {
       userId,
       batch: transaction.mutations.map(({ modified: { id, title, completed } }) => ({ id, title, completed }))
     }
-  }).catch(leaveOnAuthLoss)
+  }).catch(leaveIfSignedOut)
   if (txid) await collection.utils.awaitTxId(txid, ECHO_TIMEOUT_MS).catch(notSyncedYet)
 },
 onUpdate: async ({ transaction, collection }) => {
@@ -607,13 +560,13 @@ onUpdate: async ({ transaction, collection }) => {
       // The server keeps only `title` and `completed` from `changes`.
       batch: transaction.mutations.map(({ key, changes }) => ({ id: key, changes }))
     }
-  }).catch(leaveOnAuthLoss)
+  }).catch(leaveIfSignedOut)
   if (txid) await collection.utils.awaitTxId(txid, ECHO_TIMEOUT_MS).catch(notSyncedYet)
 },
 onDelete: async ({ transaction, collection }) => {
   const { txid } = await deleteTodos({
     data: { userId, batch: transaction.mutations.map(({ key }) => key) }
-  }).catch(leaveOnAuthLoss)
+  }).catch(leaveIfSignedOut)
   if (txid) await collection.utils.awaitTxId(txid, ECHO_TIMEOUT_MS).catch(notSyncedYet)
 }
 ```
@@ -645,7 +598,7 @@ function notSyncedYet(cause: unknown): never {
 
 ### Return the txid from the server
 
-Add one server function per mutation type to `src/todos.functions.ts`, with the imports they add (merge the schemas into the existing `./todos.schemas` import). Each function writes its whole batch in one SQL statement, and the statement's `RETURNING` clause includes `pg_current_xact_id()`, so it returns the transaction ID without another database round trip:
+Add one server function per mutation type to `src/todos.functions.ts`, with the imports they add. Each function writes its whole batch in one SQL statement, and the statement's `RETURNING` clause includes `pg_current_xact_id()`, so it returns the transaction ID without another database round trip:
 
 ```ts filename="src/todos.functions.ts"
 import { and, eq, inArray, sql } from "drizzle-orm"
@@ -668,8 +621,7 @@ const writeResult = (row?: { txid: string }): WriteResult => ({
 export const createTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(newTodosInput)
-  .handler(async ({ data: { userId, batch }, context }) => {
-    requireSameUser(userId, context.user)
+  .handler(async ({ data: { batch }, context }) => {
     const [created] = await db
       .insert(todos)
       .values(batch.map((todo) => ({ ...todo, userId: context.user.id })))
@@ -680,9 +632,7 @@ export const createTodos = createServerFn({ method: "POST" })
 export const updateTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(todoUpdatesInput)
-  .handler(async ({ data: { userId, batch }, context }) => {
-    requireSameUser(userId, context.user)
-
+  .handler(async ({ data: { batch }, context }) => {
     const changed = batch.filter(({ changes }) =>
       Object.values(changes).some((value) => value !== undefined)
     )
@@ -721,8 +671,7 @@ export const updateTodos = createServerFn({ method: "POST" })
 export const deleteTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(todoIdsInput)
-  .handler(async ({ data: { userId, batch }, context }) => {
-    requireSameUser(userId, context.user)
+  .handler(async ({ data: { batch }, context }) => {
     const [deleted] = await db
       .delete(todos)
       .where(and(inArray(todos.id, batch), eq(todos.userId, context.user.id)))
@@ -734,7 +683,7 @@ export const deleteTodos = createServerFn({ method: "POST" })
 - each call writes one TanStack&nbsp;DB transaction's batch in one SQL statement, so there's one txid to wait for. A single statement is its own Postgres transaction, so `pg_current_xact_id()` returns the ID of the transaction that made the change. See [returning the txid from your backend](../guides/mutations#returning-the-txid-from-your-backend)
 - the query casts `txid` to `text`, because the collection waits for a decimal string. Every row a statement returns carries the same txid, so `writeResult` reads the first one. If no row changed, there's nothing to wait for and nothing to roll back, so it returns `{ txid: null }`
 - `updateTodos` sets each column with a `CASE` on the row's `id`, so a batch of different changes is still one `UPDATE`. It leaves out a column no change touches, and skips the query when nothing changed, because Drizzle rejects an empty `set`
-- the server functions take the user from the session, never from the browser. The zod input schemas in `src/todos.schemas.ts` strip unknown keys, so a row's `userId` can't come from the browser, and the `userId` the browser sends is only compared with the session's
+- the server functions take the user from the session, never from the browser. `requireUser` only compares the browser's `userId` with the session's, and the zod input schemas in `src/todos.schemas.ts` strip unknown keys, so a row's `userId` can't come from the browser
 - `updateTodos` and `deleteTodos` scope their `WHERE` to the session's user, so one user can't change another's rows
 
 ## Next steps
