@@ -46,7 +46,7 @@ author={{
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them to create ephemeral environments for development, testing, and preview environments.
 
 - **Branch creation is instant** - Independent of DB size. Storage is not duplicated for each branch.
-- **Branches are cost-efficient** - You can deploy thousands of branches for $19 /month.
+- **Branches are cost-efficient** - Child branches are billed only for the data that changes, capped at your data size, so you can run thousands of branches without duplicating storage costs.
 - **Branch compute can scale to zero when idle** - to further reduce cost.
 
 How branches can be used to increase development velocity:

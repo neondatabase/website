@@ -14,6 +14,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-functions/references/function-triggers.md',
   '/docs/ai/skills/neon-functions/references/mastra-studio.md',
   '/docs/ai/skills/neon-functions/references/mcp.md',
+  '/docs/ai/skills/neon-functions/references/native-binaries.md',
   '/docs/ai/skills/neon-functions/references/production-hardening.md',
   '/docs/ai/skills/neon-functions/references/sentry.md',
   '/docs/ai/skills/neon-functions/references/sse.md',
@@ -91,4 +92,5 @@ export const STATIC_MD_PATHS = [
   '/prompts/tanstack-start-prompt.md',
   '/prompts/tortoise-orm-prompt.md',
   '/prompts/typeorm-prompt.md',
+  '/prompts/upstash-workflow-neon-functions-prompt.md',
 ];

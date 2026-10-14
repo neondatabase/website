@@ -11,7 +11,7 @@ summary: >-
   expose a `<link rel="alternate" type="text/markdown">` tag and an `X-LLMs-Txt`
   header so agents can discover Markdown URLs automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T21:23:05.862Z'
 ---
 
 Neon provides its documentation in plain Markdown so that LLMs, API clients, and scripts can consume it easily. We follow the [llms.txt](https://llmstxt.org/) approach: same URLs as the website, with Markdown available when requested.
@@ -20,7 +20,7 @@ Neon provides its documentation in plain Markdown so that LLMs, API clients, and
 
 You can get Markdown by requesting it explicitly: use the same docs URL with an `Accept` header, or append `.md` to the path.
 
-1. **Same URL, request Markdown:** Use the same path you would use in a browser (for example, `/docs/connect/choose-connection`). Send an `Accept: text/markdown` or `Accept: text/plain` header, or make the request with a user agent string associated with ChatGPT, Claude, Cursor, etc. We respond with the Markdown version of that page. For example:
+1. **Same URL, request Markdown:** Use the same path you would use in a browser (for example, `/docs/connect/choose-connection`). Send an `Accept: text/markdown` or `Accept: text/plain` header, or make the request with a user agent string associated with ChatGPT, Claude, Cursor, etc., as long as the `Accept` header doesn't include `text/html`. We respond with the Markdown version of that page. For example:
 
    ```bash
    curl -H "Accept: text/markdown" https://neon.com/docs/connect/choose-connection

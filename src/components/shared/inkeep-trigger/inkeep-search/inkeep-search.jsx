@@ -17,10 +17,12 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
       )}
       data-test="docs-search-trigger"
       type="button"
+      aria-label={isNotFoundPage ? 'Search for another page' : 'Search'}
       onClick={() => handleClick('SEARCH')}
     >
       <span className={cn('flex items-center', isNotFoundPage ? 'gap-x-2.5' : 'gap-x-1.5')}>
         <SearchIcon
+          aria-hidden="true"
           className={cn(
             'text-gray-new-30 dark:text-gray-new-70',
             isNotFoundPage ? 'h-5 w-5' : 'size-3.5 lg:size-6 lg:text-black-new lg:dark:text-white'

@@ -10,6 +10,7 @@ Contents:
 - [Extensions](#extensions): custom migration required to create extensions (Drizzle can't)
 - [Schema](#schema): columns, generated `tsvector`, and the ANN index
 - [BM25 Index](#bm25-index): created after the corpus is seeded
+- [Generate and Store Embeddings](#generate-and-store-embeddings): call the AI Gateway and insert vectors with Drizzle
 - [Query](#query): vector, BM25, and hybrid reads
 - [Tune Per Query](#tune-per-query): per-query GUCs
 
@@ -22,18 +23,22 @@ Rules:
 
 ## Config
 
-`drizzle-kit generate` and `migrate` read `drizzle.config.ts`. Point `dbCredentials.url` at the **direct (unpooled)** connection string:
+`drizzle-kit generate` and `migrate` read `drizzle.config.ts`. If the connection string is in `.env`, install `dotenv` (`npm install dotenv`) and load it here. Point `dbCredentials.url` at the **direct (unpooled)** connection string:
 
 ```typescript
 // drizzle.config.ts
+import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
+
+const databaseUrl = process.env.DATABASE_URL_UNPOOLED;
+if (!databaseUrl) throw new Error("Missing DATABASE_URL_UNPOOLED");
 
 export default defineConfig({
   schema: "./src/schema.ts",
   out: "./drizzle",
   dialect: "postgresql",
   // Direct (unpooled) URL. Neon exposes it as DATABASE_URL_UNPOOLED.
-  dbCredentials: { url: process.env.DATABASE_URL_UNPOOLED },
+  dbCredentials: { url: databaseUrl },
 });
 ```
 
@@ -57,7 +62,14 @@ The columns, the generated `tsvector`, and the `lakebase_ann` index all go in `s
 
 ```typescript
 // src/schema.ts
-import { pgTable, bigint, text, vector, index, customType } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  bigint,
+  text,
+  vector,
+  index,
+  customType,
+} from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
 const tsvector = customType<{ data: string }>({
@@ -69,10 +81,12 @@ const tsvector = customType<{ data: string }>({
 export const documents = pgTable(
   "documents",
   {
-    id: bigint("id", { mode: "number" }).generatedByDefaultAsIdentity().primaryKey(),
+    id: bigint("id", { mode: "number" })
+      .generatedByDefaultAsIdentity()
+      .primaryKey(),
     title: text("title").notNull(),
     body: text("body").notNull(),
-    embedding: vector("embedding", { dimensions: 1536 }),
+    embedding: vector("embedding", { dimensions: 1024 }),
     bodyTsv: tsvector("body_tsv").generatedAlwaysAs(
       sql`to_tsvector('english', "body")`,
     ),
@@ -86,7 +100,7 @@ export const documents = pgTable(
 );
 ```
 
-Set the dimension to match your embedding model. Postgres maintains `body_tsv`, so never write it from the app. Generate and apply the migration after the extensions migration above:
+The 1024-dimensional column is an example; set it to the output dimension of your selected embedding model. Use the same model and dimensions for stored documents and queries. Postgres maintains `body_tsv`, so never write it from the app. Generate and apply the migration after the extensions migration above:
 
 ```bash
 npx drizzle-kit generate --name=lakebase_search
@@ -106,6 +120,66 @@ npx drizzle-kit generate --custom --name=bm25_index
 CREATE INDEX documents_body_bm25 ON documents USING lakebase_bm25 (body_tsv);
 ```
 
+## Generate and Store Embeddings
+
+Use the [Vercel AI SDK](https://ai-sdk.dev) (`ai`, 6+) with Neon's `@neon/ai-sdk-provider` 1.0.0+. Follow the [gateway setup](vector-search.md#prepare-embeddings), then install the packages with `npm install @neon/ai-sdk-provider ai dotenv`:
+
+```typescript
+import "dotenv/config";
+import { neon } from "@neon/ai-sdk-provider";
+import { embed, embedMany } from "ai";
+
+const embeddingModel = neon.embeddingModel("qwen3-embedding-0-6b");
+const providerOptions = { neon: { dimensions: 1024 } };
+// Qwen3 query prompt adapted for Neon documentation search; documents stay unprefixed.
+const queryPrompt =
+  "Instruct: Given a question about Neon, retrieve documentation passages that answer the question\nQuery: ";
+```
+
+Generate a document vector, then insert it with Drizzle:
+
+```typescript
+const { embedding } = await embed({
+  model: embeddingModel,
+  value: body,
+  providerOptions,
+});
+await db.insert(documents).values({
+  title,
+  body,
+  embedding,
+});
+```
+
+For bulk imports, skip blank rows and embed/insert one batch at a time:
+
+```typescript
+const batchSize = 64;
+const nonBlankRows = rows.filter((row) => row && row.body.trim().length > 0);
+
+for (let offset = 0; offset < nonBlankRows.length; offset += batchSize) {
+  const batch = nonBlankRows.slice(offset, offset + batchSize);
+  const { embeddings: vectors } = await embedMany({
+    model: embeddingModel,
+    values: batch.map((row) => row.body),
+    providerOptions,
+    maxParallelCalls: 1,
+  });
+  await db.insert(documents).values(
+    batch.map((row, index) => {
+      const embedding = vectors[index];
+      if (!embedding)
+        throw new Error(`Missing embedding for batch row ${index}`);
+      return { ...row, embedding };
+    }),
+  );
+}
+```
+
+`embedMany` splits embedding requests using the provider's per-request input limit. This loop also bounds database inserts and memory; tune `batchSize` for your workload. Chunk long documents before embedding. Earlier batches stay committed if a later batch fails.
+
+Apply `queryPrompt` only to queries, keeping the original text for BM25. Use the same model and dimensions for documents and queries; re-embed documents when switching models.
+
 ## Query
 
 Use the query builder with Drizzle's `cosineDistance` helper for vector search. It emits the `<=>` operator, so keep the index on `vector_cosine_ops`:
@@ -114,7 +188,11 @@ Use the query builder with Drizzle's `cosineDistance` helper for vector search. 
 import { cosineDistance } from "drizzle-orm";
 import { documents } from "./schema";
 
-// queryEmbedding: number[] from the same model used for stored documents
+const { embedding: queryEmbedding } = await embed({
+  model: embeddingModel,
+  value: `${queryPrompt}${queryText}`,
+  providerOptions,
+});
 const distance = cosineDistance(documents.embedding, queryEmbedding);
 
 const rows = await db
@@ -130,16 +208,22 @@ BM25 has no Drizzle helper: `<@>` and `to_bm25query` require raw SQL. Reference 
 import { sql } from "drizzle-orm";
 
 const rows = await db.execute(sql`
-  SELECT id, title,
-    body_tsv <@> to_bm25query(
-      to_tsvector('english', ${queryText}),
-      'documents_body_bm25'::regclass
-    ) AS score
-  FROM documents
+  SELECT id, title, score
+  FROM (
+    SELECT id, title,
+      body_tsv <@> to_bm25query(
+        to_tsvector('english', ${queryText}),
+        'documents_body_bm25'::regclass
+      ) AS score
+    FROM documents
+  ) AS keyword_scored
+  WHERE score < 0
   ORDER BY score
   LIMIT ${k}
 `);
 ```
+
+Filter `score < 0` before the candidate cutoff: scalar BM25 scoring returns zero for non-matches, which must not become keyword hits. Partial query-term matches remain eligible.
 
 Run the [hybrid search](hybrid-search.md) RRF query the same way: raw SQL through `db.execute`.
 
@@ -168,5 +252,6 @@ const rows = await db.transaction(async (tx) => {
 
 Sources:
 
+- [AI Gateway embeddings](https://neon.com/docs/ai-gateway/embeddings)
 - [Get started with Lakebase Search](https://neon.com/docs/ai/lakebase-search-get-started)
 - [Schema migration with Lakebase Postgres and Drizzle ORM](https://neon.com/docs/guides/drizzle-migrations)

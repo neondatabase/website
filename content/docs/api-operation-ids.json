@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 179,
+  "count": 184,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -57,6 +57,8 @@
     "deleteProjectVPCEndpoint",
     "deleteSnapshot",
     "disableNeonAuth",
+    "disableProjectBranchRealtime",
+    "enableProjectBranchRealtime",
     "finalizeRestoreBranch",
     "getActiveRegions",
     "getAnonymizedBranchStatus",
@@ -91,6 +93,8 @@
     "getProjectBranchDataAPI",
     "getProjectBranchDatabase",
     "getProjectBranchFunction",
+    "getProjectBranchRealtime",
+    "getProjectBranchRealtimeSecret",
     "getProjectBranchRole",
     "getProjectBranchRolePassword",
     "getProjectBranchSchema",
@@ -147,6 +151,7 @@
     "revokeOrgApiKey",
     "revokePermissionFromProject",
     "rotateCredential",
+    "rotateProjectBranchRealtimeSecret",
     "sendNeonAuthEmailProviderTest",
     "sendNeonAuthTestEmail",
     "setDefaultProjectBranch",

@@ -24,7 +24,7 @@ Before writing code:
 
 6. Wait for my confirmation before making significant changes.
 
-7. Implement the proxy step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** and **AI Gateway** as the services `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Build the backend first and verify it with `neon dev` and `curl` before starting the frontend. Route model calls through the Neon AI Gateway with `@neon/ai-sdk-provider`; never put provider API keys in the frontend.
+7. Implement the proxy step by step following the guide's patterns. Use the Neon CLI without its interactive pickers. To create and link a new project, run `neon init -y --no-agent-setup --services functions,ai-gateway --org-id <org-id> --project-name <name> --region-id aws-us-east-2`. It also writes a `neon.ts` that declares the services. To reuse an existing project in a supported region, pass `--project-id <id>` instead of the org, name, and region flags. `aws-us-east-2` is one of the regions where Neon Functions are available. Install the agent skills the guide lists: `neon skills -s neon -s neon-functions -s neon-ai-gateway -y`. Build the backend first and verify it with `neon dev` and `curl` before starting the frontend. Route model calls through the Neon AI Gateway with `@neon/ai-sdk-provider`; never put provider API keys in the frontend.
 
 8. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
    - Tell me exactly what it is used for.
@@ -42,6 +42,6 @@ Before writing code:
 
 11. If something fails, explain the likely cause and help me troubleshoot it before making unrelated changes.
 
-When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval.
+When you need to inspect or query my database, use `neon psql` and pass the correct branch name; run `neon branches list` or ask me if you're not sure which branch to target. Never run destructive commands against my database or storage (`DELETE`, `UPDATE`, `DROP`, `TRUNCATE`, deleting objects, and similar) without showing me the exact command first and getting my explicit approval. If `neon deploy` stops and asks for `--allow-protected`, `--update-existing`, or `-y`, show me the changes it printed and ask me before re-running with any of them.
 
 Never print connection strings, JWTs, tokens, or other secrets back to me. If the guide and my repo state ever disagree, trust the guide and tell me what you changed.

@@ -67,7 +67,7 @@ describe('MDX to Markdown Conversion', () => {
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
-      expect(result).toContain('This feature is in Beta');
+      expect(result).toContain('This feature is in beta');
       expect(result).not.toContain('<FeatureBeta');
     });
 
@@ -1049,11 +1049,9 @@ See [CONN_MAX_AGE](https://example.com).
         'AgentSkillsTip',
         'MCPTools',
         'LinkAPIKey',
-        'LRNotice',
         'PrivatePreview',
         'PrivatePreviewEnquire',
         'PublicPreview',
-        'LRBeta',
         'MigrationAssistant',
         'NextSteps',
         'NewPricing',

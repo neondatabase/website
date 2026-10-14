@@ -160,8 +160,8 @@ describe('GET /models', () => {
       expect(stranded.map((m) => m.id)).toEqual([]);
     });
 
-    it.skip('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
-      const res = await GET(request('?model=claude-opus-5'));
+    it('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
+      const res = await GET(request('?model=claude-opus-5-5'));
       const { model } = await body(res);
       const ids = model.examples.map((e) => e.id);
       const curl = model.examples.find((e) => e.id === 'curl');
@@ -174,7 +174,7 @@ describe('GET /models', () => {
       expect(curl.variantReason).toBeTruthy();
     });
 
-    it.skip('keeps cURL on chat completions for a conforming Claude model', async () => {
+    it('keeps cURL on chat completions for a conforming Claude model', async () => {
       const res = await GET(request('?model=claude-haiku-4-5'));
       const { model } = await body(res);
       const curl = model.examples.find((e) => e.id === 'curl');
@@ -185,8 +185,8 @@ describe('GET /models', () => {
       expect(curl.endpoint).toBe('/v1/chat/completions');
     });
 
-    it.skip('gives Mastra a provider instance when the neon/ string cannot work', async () => {
-      const res = await GET(request('?model=claude-opus-5'));
+    it('gives Mastra a provider instance when the neon/ string cannot work', async () => {
+      const res = await GET(request('?model=claude-opus-5-5'));
       const { model } = await body(res);
       const mastra = model.examples.find((e) => e.id === 'mastra');
 
