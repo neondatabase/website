@@ -17,7 +17,7 @@ This guide covers `public_read` buckets only. Presigned URLs for private buckets
 
 ## Prerequisites
 
-- A Neon project with [Object Storage](/docs/storage/overview) available on your branch and your branch's storage endpoint, for example `https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech`. See [Get started](/docs/storage/get-started) for how to find it.
+- A Neon project with [Object Storage](/docs/storage/overview) available on your branch, and your branch's S3 endpoint. The **Connect** dialog in the Neon Console shows it as `AWS_ENDPOINT_URL_S3`. See [Get started](/docs/storage/get-started).
 - A [Cloudflare account](https://dash.cloudflare.com/sign-up). The free plan is enough for `workers.dev`. A custom domain requires a domain on Cloudflare.
 - Node.js and [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/), the Cloudflare Workers CLI.
 
@@ -45,8 +45,10 @@ main = "src/index.js"
 compatibility_date = "2026-10-01"
 
 [vars]
-NEON_STORAGE_ORIGIN = "https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech"
+NEON_STORAGE_ORIGIN = "<AWS_ENDPOINT_URL_S3>"
 ```
+
+Replace `<AWS_ENDPOINT_URL_S3>` with the `AWS_ENDPOINT_URL_S3` value from the **Connect** dialog in the Neon Console.
 
 ```js
 export default {
@@ -173,7 +175,7 @@ A cached copy is served until its TTL expires, even if you overwrite or delete t
 
 - **Version your keys.** Upload changed content under a new key, such as `logo.v2.png`, and combine it with a long `max-age`. This is the most reliable option and needs no purge.
 - **Use a short `max-age`** for objects that change in place.
-- **Purge the cache.** Cloudflare caches the URL that the Worker fetches, so purge the storage URL (`https://<branch-id>.storage.../my-public-bucket/logo.png`) from the zone that the Worker runs on (the storage hostname isn't a zone you own), not the URL that visitors request. See [How the Cache works](https://developers.cloudflare.com/workers/reference/how-the-cache-works/#single-file-purge-assets-cached-by-a-worker) in the Cloudflare docs. Cloudflare documents purging from a zone you own, so if you need to purge, run the Worker on a custom domain. For `workers.dev`, rely on versioned keys or a short `max-age`.
+- **Purge the cache.** Cloudflare caches the URL that the Worker fetches, so purge the storage URL (`<AWS_ENDPOINT_URL_S3>/my-public-bucket/logo.png`) from the zone that the Worker runs on (the storage hostname isn't a zone you own), not the URL that visitors request. See [How the Cache works](https://developers.cloudflare.com/workers/reference/how-the-cache-works/#single-file-purge-assets-cached-by-a-worker) in the Cloudflare docs. Cloudflare documents purging from a zone you own, so if you need to purge, run the Worker on a custom domain. For `workers.dev`, rely on versioned keys or a short `max-age`.
 
 ## Range requests
 
