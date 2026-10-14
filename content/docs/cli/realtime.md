@@ -6,14 +6,10 @@ summary: >-
   database branch. Use `enable` to provision Realtime and set the browser
   origins allowed to connect, and `disable` to remove it.
 enableTableOfContents: true
-updatedOn: '2026-10-13T14:12:17.432Z'
+updatedOn: '2026-10-14T02:37:05.711Z'
 ---
 
 The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch. Once Realtime is on, you can stream a live SQL query's results with [`neon subscribe`](/docs/cli/subscribe), and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
-
-<Admonition type="comingSoon" title="Coming soon">
-Neon Realtime isn't available yet. As of Neon CLI 8.4.1, the `realtime` and `subscribe` commands are included but stay hidden and print "Neon Realtime is coming soon!" until Realtime launches.
-</Admonition>
 
 <CliSubcommands command="realtime" />
 
