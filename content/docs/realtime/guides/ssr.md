@@ -47,7 +47,7 @@ export async function loadMessagesPage(userId: string, channelId: number): Promi
 
 Both values are serializable, so they go into the hydration payload with the rest of the page's props or loader data. The framework serializes them into the HTML it sends, and the browser picks them up when it hydrates.
 
-For example with [Next.js](../examples/nextjs), call `loadMessagesPage()` from a Server Component and pass the results to a Client Component as props. `auth` is the Neon Auth server instance in `lib/auth/server.ts`, set up as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only). Neon Auth needs `force-dynamic`, because `auth.getSession()` [reads cookies](/docs/auth/troubleshooting#missing-force-dynamic-on-server-components). If your app enables `cacheComponents`, remove the `dynamic` export and read the session inside a `<Suspense>` boundary instead.
+For example with [Next.js](../examples/nextjs), call `loadMessagesPage()` from a Server Component and pass the results to a Client Component as props. `auth` is the Neon Auth server instance in `lib/auth/server.ts`, set up as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only). The page must render per request, because `auth.getSession()` [reads cookies](/docs/auth/troubleshooting#missing-force-dynamic-on-server-components), so it sets `force-dynamic`. If your app enables `cacheComponents`, remove the `dynamic` export and read the session inside a `<Suspense>` boundary instead.
 
 ```tsx filename="app/channels/[channelId]/page.tsx"
 import { notFound, redirect } from "next/navigation"
@@ -630,7 +630,7 @@ Mark those modules as server-only, so a client import fails the build. In Next.j
 
 ## Examples
 
-The examples put these principles into framework code. The Next.js example uses `force-dynamic` and splits the page into a Server Component that reads and seals and a Client Component that subscribes. The TanStack example seeds the router's TanStack&nbsp;DB client in a route loader.
+The examples put these principles into framework code. The Next.js example splits the page into a Server Component that reads and seals and a Client Component that subscribes. Instead of `force-dynamic`, it calls `connection()` in that Server Component and renders it inside `<Suspense>`, so the rest of the page renders at once and the list streams in. The TanStack example seeds the router's TanStack&nbsp;DB client in a route loader.
 
 <DetailIconCards cols={2} theme="green-dotted">
 
