@@ -38,7 +38,7 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 ## Example application
 
-**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Managed Better Auth apps, see [Example applications](/docs/auth/overview#example-applications).
+**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Managed Better Auth apps, see [Example applications](/docs/auth/about#example-applications).
 
 ## Configure the organization plugin
 

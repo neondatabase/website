@@ -843,9 +843,9 @@ See [CONN_MAX_AGE](https://example.com).
       expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
       expect(pgvectorEntry.sectionName).toBe('Postgres extensions');
 
-      // auth/overview appears in "Start with Neon" and the Auth section;
+      // auth/about appears in "Start with Neon" and the Auth section;
       // should prefer Auth section (siblings share auth/ prefix)
-      const authEntry = navMap.get('auth/overview');
+      const authEntry = navMap.get('auth/about');
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
       expect(authEntry.breadcrumbs).toContain('Auth');
