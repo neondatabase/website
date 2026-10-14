@@ -30,7 +30,7 @@ npm install -D @types/pg
 
 `@neon/realtime-drizzle` has two entry points. The main one exports `drizzleAdapter()` for your server. `@neon/realtime-drizzle/client` exports `drizzleParsers` for the browser and doesn't import Drizzle, so the ORM stays out of your browser bundle.
 
-The queries guide's [setup](../guides/queries#setup) covers the rest: Neon Auth, `neon.ts` and the environment variables. For Drizzle on Neon in general, see [Connect from Drizzle to Neon](/docs/guides/drizzle).
+The queries guide's [setup](../guides/queries#setup) covers the rest: Neon's [Managed Better Auth](/docs/auth/overview), `neon.ts` and the environment variables. For Drizzle on Neon in general, see [Connect from Drizzle to Neon](/docs/guides/drizzle).
 
 ### Create the Realtime server
 

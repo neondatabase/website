@@ -27,7 +27,7 @@ npm install -D @types/pg
 
 `@neon/realtime-kysely` exports `kyselyAdapter()` for your server. The browser needs nothing from it.
 
-The queries guide's [setup](../guides/queries#setup) covers the rest: Neon Auth, `neon.ts` and the environment variables. For Kysely on Neon in general, see [Connect from Kysely to Neon](/docs/guides/kysely).
+The queries guide's [setup](../guides/queries#setup) covers the rest: Neon's [Managed Better Auth](/docs/auth/overview), `neon.ts` and the environment variables. For Kysely on Neon in general, see [Connect from Kysely to Neon](/docs/guides/kysely).
 
 ### Create the Realtime server
 
