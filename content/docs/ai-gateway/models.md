@@ -2,17 +2,17 @@
 title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
-  Neon AI Gateway serves Databricks-hosted open-weight and foundation models
-  behind one credential. Use short model IDs like gpt-5-mini or
+  Neon AI Gateway serves open-weight and foundation models behind one
+  credential. Use short model IDs like gpt-5-mini or
   gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-10-05T19:21:27.285Z'
+updatedOn: '2026-10-14T20:48:19.742Z'
 ---
 
-Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
+Neon AI Gateway serves open-weight and foundation models behind one credential. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
-Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
+Neon AI Gateway serves models hosted by Databricks and models hosted by third-party providers. Each model's hosting arrangement and applicable provider terms are identified in [Provider terms](#provider-terms). By using these models, regardless of where they're hosted, you are responsible for complying with each provider's applicable terms of use.
 </Admonition>
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
@@ -169,14 +169,17 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 ## Provider terms
 
-Models are hosted by Databricks and served through Neon AI Gateway. You are responsible for complying with each provider's applicable terms of use.
+Models available through Neon AI Gateway may be hosted by Databricks or by the model provider. Review the applicable provider terms before using a model. You are responsible for complying with those terms, including any acceptable-use restrictions and license requirements.
 
-| Provider      | Terms                                                                                                                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
-| Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
-| Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
+| Provider      | Terms                                                                                                                                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                                                            |
+| Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy)                                            |
+| Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                                                                     |
+| Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                                                                         |
+| TypeSafe AI   | Hosted by TypeSafe AI, Inc. [Terms of use](https://typesafe.ai/legal/terms) (including the [data processing addendum](https://typesafe.ai/legal/data-processing)) · [Privacy policy](https://typesafe.ai/legal/privacy-policy) |
+
+Jev is hosted by TypeSafe AI, Inc. and served through Neon AI Gateway. Neon provides access, authentication, and routing; TypeSafe AI operates the model-hosting environment.
 
 For what Databricks and partner model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
 
