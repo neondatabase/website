@@ -9,7 +9,7 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-10-08T19:32:37.797Z'
+updatedOn: '2026-10-14T02:43:52.455Z'
 ---
 
 ## The Neon platform, in brief
@@ -30,7 +30,7 @@ Neon is a full backend platform for apps and agents, not just a database. For an
 
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle">AI Gateway</a>
 
-<a href="/docs/realtime/overview" description="TBC" icon="zap">Realtime</a>
+<a href="/docs/realtime/overview" description="Realtime live SQL and reactive DX for building apps and agents." icon="zap">Realtime</a>
 
 </DetailIconCards>
 
