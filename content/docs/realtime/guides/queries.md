@@ -17,7 +17,7 @@ The guides all share one running example: a chat app where users read the messag
 <details>
   <summary>Expand the setup steps</summary>
 
-Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose` to validate [Neon Auth](/docs/auth/overview) tokens:
+Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose`, which validates [Neon Auth](/docs/auth/overview) tokens:
 
 ```bash filename="Terminal"
 npm install drizzle-orm pg hono jose ws
@@ -292,13 +292,13 @@ Anyone with `NEON_REALTIME_SECRET` can seal any query. Treat it like your `DATAB
 
 To seal a query you pass your query instance, e.g.:
 
-```ts filename="backend/queries.ts"
+```ts filename="backend/server.ts"
 const query = messagesQuery(userId, channelId)
 ```
 
 To the [`seal`](../sdks/typescript#backend-realtimeserverseal) method of the `RealtimeServer` instance you created above:
 
-```ts filename="backend/queries.ts"
+```ts filename="backend/server.ts"
 const sealedQuery = await realtime.seal({ query })
 ```
 

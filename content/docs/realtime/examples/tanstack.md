@@ -732,7 +732,7 @@ export const deleteTodos = createServerFn({ method: "POST" })
 ```
 
 - each call writes one TanStack&nbsp;DB transaction's batch in one SQL statement, so there's one txid to wait for. A single statement is its own Postgres transaction, so `pg_current_xact_id()` returns the ID of the transaction that made the change. See [returning the txid from your backend](../guides/mutations#returning-the-txid-from-your-backend)
-- `txid` is cast to `text`, because the collection waits for a decimal string. Every row a statement returns carries the same txid, so `writeResult` reads the first one. If no row changed, there's nothing to wait for and nothing to roll back, so it returns `{ txid: null }`
+- the query casts `txid` to `text`, because the collection waits for a decimal string. Every row a statement returns carries the same txid, so `writeResult` reads the first one. If no row changed, there's nothing to wait for and nothing to roll back, so it returns `{ txid: null }`
 - `updateTodos` sets each column with a `CASE` on the row's `id`, so a batch of different changes is still one `UPDATE`. It leaves out a column no change touches, and skips the query when nothing changed, because Drizzle rejects an empty `set`
 - the server functions take the user from the session, never from the browser. The zod input schemas in `src/todos.schemas.ts` strip unknown keys, so a row's `userId` can't come from the browser, and the `userId` the browser sends is only compared with the session's
 - `updateTodos` and `deleteTodos` scope their `WHERE` to the session's user, so one user can't change another's rows
