@@ -1,15 +1,15 @@
 ---
 title: 'In-Depth: Neon Launch vs Supabase Pro Plan'
-subtitle: Compare Neon Launch and Supabase Pro on pricing, compute, projects, branches, backups, auth, functions, storage, and egress for your MVP or startup.
+subtitle: Compare Neon Launch and Supabase Pro on pricing, compute, branches, backups, auth, functions, storage, AI Gateway, and egress for your MVP or startup.
 author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-07-15T00:00:00.000Z'
-updatedOn: '2026-10-13T19:35:11.209Z'
+updatedOn: '2026-10-14T06:17:52.440Z'
 ---
 
 <Admonition type="note">
-Plan limits and prices in this guide were checked against the Neon and Supabase documentation and pricing pages on October 13, 2026. Confirm the current rates on the [Neon pricing](/pricing) page and on Supabase's pricing page before you decide.
+Plan limits and prices in this guide were checked against the Neon and Supabase documentation and pricing pages on October 14, 2026. Confirm the current rates on the [Neon pricing](/pricing) page and on Supabase's pricing page before you decide.
 </Admonition>
 
 Neon's Launch plan and Supabase's Pro plan are the entry-level paid plans for an MVP or early-stage startup. The biggest difference is how they bill: Launch has no monthly minimum and charges only for what your app uses, while Pro is a $25 monthly subscription plus an always-on instance for every project you run.
@@ -22,13 +22,13 @@ This guide compares the two paid plans feature by feature. For a service-by-serv
 
 Neon Launch has no base fee. You pay for the compute, storage, and services your app uses, and the plan includes 100 projects with no per-project charge ([source](/docs/introduction/plans#price)). An idle project doesn't use compute, so a staging environment or side app costs only its storage between uses.
 
-Supabase Pro costs $25 a month, which includes $10 of compute credits for one project. Every additional project runs on its own always-on instance, starting at about $10 a month for Micro compute.
+Supabase Pro costs at least $25 a month, which includes $10 of compute credits for one project. Every additional project runs on its own always-on instance, starting at about $10 a month for Micro compute.
 
 ### 2. Compute that autoscales and scales to zero
 
 A Neon compute autoscales within a range you set, up to 16 CU (64 GB RAM), so you pay for the compute you use instead of a fixed size ([source](/docs/introduction/autoscaling)). On Launch, it scales to zero after 5 minutes of inactivity, and you can turn that off for an always-on database ([source](/docs/introduction/scale-to-zero)).
 
-A Supabase Pro project runs on a fixed instance that's billed every hour of the month, and handling more load means resizing it manually, usually with less than 2 minutes of downtime (<a href="https://supabase.com/docs/guides/platform/compute-and-disk" target="_blank" rel="nofollow noopener noreferrer">source</a>).
+A Supabase Pro project runs on a fixed instance that's billed every hour of the month, and handling more load means resizing it manually, usually with **some downtime** (<a href="https://supabase.com/docs/guides/platform/compute-and-disk" target="_blank" rel="nofollow noopener noreferrer">source</a>).
 
 ### 3. 1M monthly active users included
 
@@ -36,28 +36,21 @@ Neon Launch includes [Managed Better Auth](/docs/auth/overview) for up to 1M mon
 
 ### 4. Branches and point-in-time restore without add-ons
 
-Neon Launch includes 10 branches per project. Each branch is a copy-on-write copy of the whole backend, including the database, auth, Object Storage, and Functions, so it's usually ready in under a second because no data is copied ([source](/docs/get-started/dev-experience#agents-first)). You can also restore your production branch to any point in a history window of up to 7 days ([instant restore](/docs/postgres/backup-restore/branch-restore)).
+Neon Launch includes 10 branches per project. Each branch is a copy-on-write copy of the whole backend, including the database, auth, Object Storage, and Functions, so it starts with your production data and is usually ready in under a second ([source](/docs/get-started/dev-experience#agents-first)). You can also restore your production branch to any point in a history window of up to 7 days ([instant restore](/docs/postgres/backup-restore/branch-restore)).
 
 On Supabase Pro, each branch is a separate instance billed by the hour, and it starts without your production data. Copying that data into a branch takes longer as your database grows, and it needs the point-in-time recovery add-on, which costs $100 a month and also needs at least a Small compute.
 
-## Neon Launch vs Supabase Pro plan at a glance
+### 5. Functions that run for up to 15 minutes
 
-| Feature                | Neon Launch                                                                 | Supabase Pro                                                                    |
-| :--------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| Monthly price          | No minimum, pay for usage                                                   | $25, including $10 of compute credits                                           |
-| Projects               | 100, with no per-project fee                                                | First project included, then from about $10 a month each                        |
-| Database compute       | $0.106/CU-hour, autoscales up to 16 CU (64 GB RAM), optional scale to zero  | Fixed instance per project, from Micro (1 GB RAM, about $10 a month), always on |
-| Database storage       | $0.35/GB-month on the data you store                                        | 8 GB of disk per project, then $0.125/GB-month on provisioned disk              |
-| Branches               | 10 per project, then $1.50/branch-month, plus compute while a branch runs   | Each branch billed hourly, from $0.01344/hour on Micro compute                  |
-| History retention      | Restore to any point in up to 7 days ($0.20/GB-month), 100 manual snapshots | Daily backups kept 7 days, point-in-time recovery from $100/month               |
-| Functions              | $0.60/M invocations, 15 minutes to the first byte, 2,048 MiB of memory      | 2M invocations, then $2/M, 400-second limit, 256 MB of memory                   |
-| Object storage         | $0.023/GB-month, no request charges, files up to 5 GiB                      | 100 GB per organization, then $0.0213/GB-month, files up to 500 GB              |
-| Managed authentication | Up to 1M MAU                                                                | 100K MAU, then $0.00325/MAU                                                     |
-| Data API               | PostgREST-compatible REST API                                               | REST plus GraphQL                                                               |
-| Egress                 | 500 GB per project, then $0.10/GB                                           | 250 GB uncached and 250 GB cached per organization, then $0.09/GB and $0.03/GB  |
-| Team members           | Unlimited, with Admin, Editor, Viewer, and Collaborator roles               | Unlimited, with Owner, Admin, and Developer roles                               |
+A Neon Function has 2,048 MiB of memory and can run for up to 15 minutes before it sends its first byte, then keep streaming while data flows ([source](/docs/compute/functions/reference/runtime-limits)). That covers AI agents that chain several model calls, and WebSocket or SSE servers that hold connections open.
 
-Sources: [Neon plans](/docs/introduction/plans), [Neon Functions limits](/docs/compute/functions/reference/runtime-limits), [Neon Data API](/docs/data-api/overview), [Neon Object Storage](/docs/storage/overview), [Neon user permissions](/docs/manage/user-permissions).
+A Supabase Edge Function on Pro stops after 400 seconds and has 256 MB of memory.
+
+### 6. One credential for models from several AI providers
+
+Neon AI Gateway lets your app call models from OpenAI, Google, and other providers with your Neon credential, at each provider's list price with no markup ([source](/docs/ai-gateway/overview)). Each branch has its own gateway endpoint, so a preview branch can test a new model without changing production.
+
+Supabase doesn't offer an AI gateway, so you sign up with each provider and manage a separate API key and bill for each one.
 
 ## Comparing the paid plans feature by feature
 
@@ -82,12 +75,12 @@ Neon bills only the data you actually store, measured hourly, and a child branch
 
 ### 3. Database compute and idle behavior
 
-|                      | Neon Launch                                               | Supabase Pro                                                |
-| :------------------- | :-------------------------------------------------------- | :---------------------------------------------------------- |
-| Billing              | $0.106/CU-hour, only while the compute runs               | A fixed instance, billed every hour of the month            |
-| Scaling              | Autoscales up to 16 CU (64 GB RAM) with no restart        | Manual resize, usually with less than 2 minutes of downtime |
-| When the app is idle | Scales to zero after 5 minutes, or stays on if you prefer | Keeps running and billing                                   |
-| Pooled connections   | Up to 10K                                                 | 200 on Micro, 1K on XL                                      |
+|                      | Neon Launch                                               | Supabase Pro                                     |
+| :------------------- | :-------------------------------------------------------- | :----------------------------------------------- |
+| Billing              | $0.106/CU-hour, only while the compute runs               | A fixed instance, billed every hour of the month |
+| Scaling              | Autoscales up to 16 CU (64 GB RAM) with no restart        | Manual resize, usually with **some downtime**    |
+| When the app is idle | Scales to zero after 5 minutes, or stays on if you prefer | Keeps running and billing                        |
+| Pooled connections   | Up to 10K                                                 | 200 on Micro, 1K on XL                           |
 
 A Neon compute scales up when traffic increases and down when it drops, so you pay for your average usage instead of your peak ([source](/docs/introduction/autoscaling)). A Supabase instance runs at one size, so you either pay for your peak all month or resize it manually. Neon's connection pooler also accepts up to 10K client connections on any compute size, while a Supabase Micro instance accepts 200 pooled clients ([source](/docs/connect/connection-pooling)).
 
@@ -103,14 +96,26 @@ A Neon branch is usually ready in under a second with your production data, and 
 
 ### 5. History retention
 
-|                       | Neon Launch                                                   | Supabase Pro                                                   |
-| :-------------------- | :------------------------------------------------------------ | :------------------------------------------------------------- |
-| Point-in-time restore | Up to 7 days, billed at $0.20/GB-month of change history      | $100/month add-on for 7 days, which also needs a Small compute |
-| Backups and snapshots | 100 manual snapshots, plus scheduled backups ($0.09/GB-month) | Daily backups kept 7 days                                      |
+|                       | Neon Launch                                               | Supabase Pro                                                   |
+| :-------------------- | :-------------------------------------------------------- | :------------------------------------------------------------- |
+| Point-in-time restore | Up to 7 days, billed at $0.20/GB-month of change history  | $100/month add-on for 7 days, which also needs a Small compute |
+| During a restore      | Takes a few seconds, and a backup branch lets you undo it | **Downtime** until the restore finishes                        |
 
-On Neon Launch, you can restore your production branch to any point before a bad migration, and you pay only for the change history you keep. The history window starts at 1 day, and you can raise it to 7 days ([source](/docs/postgres/backup-restore/history-window)). Deleted projects can also be recovered within 7 days ([source](/docs/manage/projects#recover-a-deleted-project)). On Supabase Pro, daily backups are included, but restoring to a specific point in time costs at least $105 a month more: $100 for the add-on, plus $5 to move from Micro to Small compute.
+On Neon Launch, you can restore your production branch to any point before a bad migration, and you pay only for the change history you keep. The history window starts at 1 day, and you can raise it to 7 days ([source](/docs/postgres/backup-restore/history-window)). The restore also keeps your previous state in a backup branch, so you can undo it ([source](/docs/postgres/backup-restore/branch-restore)), and deleted projects can be recovered within 7 days ([source](/docs/manage/projects#recover-a-deleted-project)). On Supabase Pro, restoring to a specific point in time costs at least $105 a month more: $100 for the add-on, plus $5 to move from Micro to Small compute. The project is also unavailable until a restore finishes, so every restore means **downtime** for your app.
 
-### 6. Functions
+### 6. Snapshots and scheduled backups
+
+|                               | Neon Launch                                                                        | Supabase Pro                                                   |
+| :---------------------------- | :--------------------------------------------------------------------------------- | :------------------------------------------------------------- |
+| Manual snapshots              | Up to 100, kept until you delete them or until the expiration you set              | No snapshots, so you export with `pg_dump` or the Supabase CLI |
+| Scheduled backups             | Daily, weekly, or monthly, and you can combine them in one schedule                | Daily                                                          |
+| Retention                     | Up to 35 days for scheduled snapshots                                              | 7 days                                                         |
+| Price                         | $0.09/GB-month, and each scheduled snapshot after the first bills only its changes | Included                                                       |
+| With point-in-time restore on | Backup schedules keep running                                                      | Daily backups stop                                             |
+
+A Neon snapshot saves the state of your production branch before a risky migration or a major release, and a manual snapshot stays until you delete it or until the expiration you set ([source](/docs/guides/backup-restore)). Backup schedules take snapshots on the days and at the times you choose, and keep each one for up to 35 days. Scheduled snapshots don't count toward the 100 manual snapshots ([source](/docs/introduction/plans#snapshots)). On Supabase Pro, daily backups are kept for 7 days, and **when you turn on point-in-time recovery, Supabase stops taking daily backups**.
+
+### 7. Functions
 
 |                  | Neon Launch                                                                 | Supabase Pro           |
 | :--------------- | :-------------------------------------------------------------------------- | :--------------------- |
@@ -121,10 +126,10 @@ On Neon Launch, you can restore your production branch to any point before a bad
 A Neon Function can run for 15 minutes with 8 times the memory of a Supabase Edge Function, so it can run AI agents that chain several model calls, and WebSocket or SSE servers that hold connections open ([runtime limits](/docs/compute/functions/reference/runtime-limits)). Neon's invocation rate is less than a third of Supabase's, and Neon also bills the compute time each request uses. Supabase Pro includes 2M invocations before its rate applies.
 
 <Admonition type="note">
-Neon Functions and Object Storage run in four AWS regions today: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create your project in one of them to use both.
+Neon Functions, Object Storage, and AI Gateway run in four AWS regions today: US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore). Create your project in one of them to use all three.
 </Admonition>
 
-### 7. Object storage
+### 8. Object storage
 
 |                                                                  | Neon Launch                                                | Supabase Pro                                                             |
 | :--------------------------------------------------------------- | :--------------------------------------------------------- | :----------------------------------------------------------------------- |
@@ -137,7 +142,7 @@ Neon Functions and Object Storage run in four AWS regions today: US East (Ohio),
 
 Neon supports more of the S3 API, so you can limit browser uploads to your own site, tag files without a database write, and read a file's size and ETag in one call ([S3 compatibility](/docs/storage/s3-compatibility)). A Neon preview branch also gets your production files along with your production rows. Neon bills storage from the first GB, and downloads come out of each project's 500 GB egress allowance instead of one shared organization quota ([source](/docs/introduction/plans#object-storage)). Supabase Pro includes 100 GB of storage for the whole organization and doesn't branch storage, but it accepts files up to 500 GB, which suits apps that store raw video or large backups.
 
-### 8. Managed authentication
+### 9. Managed authentication
 
 |                                      | Neon Launch (Managed Better Auth)                                                      | Supabase Pro (Supabase Auth)                       |
 | :----------------------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------- |
@@ -147,7 +152,16 @@ Neon supports more of the S3 API, so you can limit browser uploads to your own s
 
 Neon Launch includes 10 times as many monthly active users. At 300K users, like the photo app below, Supabase Pro adds $650 a month, and at 1M users it adds $2,925 a month, while both stay inside Neon's 1M allowance ([source](/docs/introduction/plans#auth)). For multi-tenant apps, the Organization plugin adds organizations, roles, and invitation flows.
 
-### 9. Egress
+### 10. AI Gateway
+
+|               | Neon Launch                                                              | Supabase Pro                                                |
+| :------------ | :----------------------------------------------------------------------- | :---------------------------------------------------------- |
+| Hosted models | Models from OpenAI, Google, and other providers with one Neon credential | No AI gateway, so you sign up with each provider separately |
+| Price         | Each provider's list price, with no markup, paid from prepaid credits    | Each provider's own pricing and bill                        |
+
+Neon AI Gateway lets your app call models from several providers with your Neon credential and your existing OpenAI SDK, so you don't need a separate account, API key, and bill for each provider ([source](/docs/ai-gateway/overview)). Because each branch has its own gateway endpoint, a preview branch can test a new model or prompt without changing production. Inference costs the provider's list price, paid from prepaid credits that you buy in the Neon Console ([source](/docs/ai-gateway/prepaid-credits)).
+
+### 11. Public network transfer (egress)
 
 |                   | Neon Launch                                            | Supabase Pro                                        |
 | :---------------- | :----------------------------------------------------- | :-------------------------------------------------- |
@@ -156,16 +170,16 @@ Neon Launch includes 10 times as many monthly active users. At 300K users, like 
 | Shared by         | Postgres, Object Storage, and Functions in the project | Every service in every project in the organization  |
 | Adding a project  | Adds another 500 GB                                    | Shares the same allowance                           |
 
-On Neon, every project gets its own 500 GB, so a second app or a dedicated customer project doesn't use up the first project's allowance ([source](/docs/introduction/plans#public-network-transfer)). On Supabase, one allowance covers the whole organization, so it shrinks with every project you add.
+On Neon, every project gets its own 500 GB, so a second app or a dedicated customer project doesn't use up the first project's allowance ([source](/docs/introduction/plans#public-network-transfer)). For example, three apps that each send 400 GB a month stay inside their allowances on Neon Launch. On Supabase Pro, one allowance covers the whole organization, so the same 1.2 TB of uncached egress costs (1,200 − 250) × $0.09 = $85.50 a month.
 
-### 10. Team members
+### 12. Team members
 
 |                                  | Neon Launch                                    | Supabase Pro                |
 | :------------------------------- | :--------------------------------------------- | :-------------------------- |
 | Members                          | Unlimited                                      | Unlimited                   |
 | Roles                            | Admin, Editor, Viewer, and Collaborator        | Owner, Admin, and Developer |
-| Read-only access                 | Viewer role                                    | Team plan ($599/month)      |
-| Access to selected projects only | Collaborator role with per-project permissions | Team plan ($599/month)      |
+| Read-only access                 | Viewer role                                    | Team plan (from $599/month) |
+| Access to selected projects only | Collaborator role with per-project permissions | Team plan (from $599/month) |
 
 Neon Launch lets you give a teammate read-only access, or give a contractor access to a single project ([source](/docs/manage/user-permissions)). On Supabase, read-only and project-scoped access start on the Team plan. Both plans allow unlimited members.
 
@@ -224,7 +238,7 @@ Take a tax-filing assistant with 50K users from February to April, and about 2K 
 
 - **Assumptions:** 10 GB of Postgres data (tables and indexes), about 2 CU (8 GB RAM) for 12 hours a day during the season, and about 0.25 CU for 2 hours a day for the rest of the year.
 - **Neon:** in season, 2 CU × 12 hours × 30 days = 720 CU-hours × $0.106 = $76.32, plus 10 GB × $0.35 = $3.50, for about $80 a month. Off season, 0.25 CU × 2 hours × 30 days = 15 CU-hours × $0.106 = $1.59, plus $3.50, for about $5 a month. Over a year: (3 × $79.82) + (9 × $5.09) = about $285. Autoscaling and scale to zero handle the change in traffic without any resizing.
-- **Supabase, resized twice a year:** a Large instance (8 GB RAM, 2 vCPUs) for the 3-month season at about $125.25 a month ($110, minus the $10 compute credit, plus the $25 subscription and $0.25 for disk beyond the included 8 GB), and Micro for the other 9 months at $25.25 a month, since the $10 compute credit covers Micro. That's about $603 a year, but it takes a manual resize before and after the season, each usually with less than 2 minutes of downtime.
+- **Supabase, resized twice a year:** a Large instance (8 GB RAM, 2 vCPUs) for the 3-month season at about $125.25 a month ($110, minus the $10 compute credit, plus the $25 subscription and $0.25 for disk beyond the included 8 GB), and Micro for the other 9 months at $25.25 a month, since the $10 compute credit covers Micro. That's about $603 a year, but it takes a manual resize before and after the season, each usually with **some downtime**.
 - **Supabase, Large all year:** a Large instance (8 GB RAM, 2 vCPUs) handles the season's peaks. It costs about $110 a month, minus the $10 compute credit = $100, plus the $25 subscription = $125, plus (10 − 8) × $0.125 = $0.25 for disk beyond the included 8 GB. That's about $125.25 a month, or about $1,503 a year.
 
 </details>
@@ -256,8 +270,35 @@ Choose **Supabase Pro** if:
 - **For consumer apps:** Neon, since auth covers up to 1M monthly active users without per-user charges.
 - **For teams that use preview environments:** Neon, since each pull request can get a copy-on-write branch with production data that's usually ready in under a second.
 - **For archives and other storage-heavy databases:** Supabase, since disk costs $0.125/GB-month after the included 8 GB.
-- **For apps that store large media or backups:** Supabase, since Pro accepts files up to 500 GB.
-- **For integrations that receive webhooks:** Supabase, since Pro includes 2M function invocations a month before charging for them.
+- **For apps that store very large media or backups:** Supabase, since Pro accepts files up to 500 GB.
+- **For integrations that receive up to 2M short-lived webhooks:** Supabase, since Pro includes 2M function invocations a month before charging for them.
+
+## Neon Launch vs Supabase Pro plan at a glance
+
+<details>
+<summary>Per-feature comparison</summary>
+
+| Feature                          | Neon Launch                                                                      | Supabase Pro                                                                    |
+| :------------------------------- | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| Monthly price                    | No minimum, pay for usage                                                        | From $25, including $10 of compute credits                                      |
+| Projects                         | 100, with no per-project fee                                                     | First project included, then from about $10 a month each                        |
+| Database compute                 | $0.106/CU-hour, autoscales up to 16 CU (64 GB RAM), optional scale to zero       | Fixed instance per project, from Micro (1 GB RAM, about $10 a month), always on |
+| Database storage                 | $0.35/GB-month on the data you store                                             | 8 GB of disk per project, then $0.125/GB-month on provisioned disk              |
+| Branches                         | 10 per project, then $1.50/branch-month, plus compute while a branch runs        | Each branch billed hourly, from $0.01344/hour on Micro compute                  |
+| History retention                | Restore to any point in up to 7 days ($0.20/GB-month)                            | Point-in-time recovery from $100/month, plus at least a Small compute           |
+| Snapshots                        | 100 manual snapshots, kept until you delete them ($0.09/GB-month)                | Not offered                                                                     |
+| Scheduled backups                | Daily, weekly, or monthly, kept up to 35 days ($0.09/GB-month)                   | Daily, kept 7 days                                                              |
+| Functions                        | $0.60/M invocations, 15 minutes to the first byte, 2,048 MiB of memory           | 2M invocations, then $2/M, 400-second limit, 256 MB of memory                   |
+| Object storage                   | $0.023/GB-month, no request charges, files up to 5 GiB                           | 100 GB per organization, then $0.0213/GB-month, files up to 500 GB              |
+| Managed authentication           | Up to 1M MAU                                                                     | 100K MAU, then $0.00325/MAU                                                     |
+| AI Gateway                       | Models from multiple providers with one Neon credential, at provider list prices | Not offered                                                                     |
+| Data API                         | PostgREST-compatible REST API                                                    | REST plus GraphQL                                                               |
+| Public network transfer (egress) | 500 GB per project, then $0.10/GB                                                | 250 GB uncached and 250 GB cached per organization, then $0.09/GB and $0.03/GB  |
+| Team members                     | Unlimited, with Admin, Editor, Viewer, and Collaborator roles                    | Unlimited, with Owner, Admin, and Developer roles                               |
+
+Sources: [Neon plans](/docs/introduction/plans), [Neon backup and restore](/docs/guides/backup-restore), [Neon Functions limits](/docs/compute/functions/reference/runtime-limits), [Neon AI Gateway](/docs/ai-gateway/overview), [Neon Data API](/docs/data-api/overview), [Neon Object Storage](/docs/storage/overview), [Neon user permissions](/docs/manage/user-permissions).
+
+</details>
 
 ## Frequently asked questions
 
