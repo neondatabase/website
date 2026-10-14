@@ -138,21 +138,21 @@ describe('ModelIndexClient', () => {
     expect(screen.getByText('Showing 1 model.')).toBeInTheDocument();
   });
 
-  it('lists judge models only under the Judge tab, not Text', () => {
-    const judge = createRow({
-      id: 'example-judge',
-      name: 'Example Judge',
+  it('lists decision models only under the Decisions tab, not Text', () => {
+    const decision = createRow({
+      id: 'example-decision',
+      name: 'Example Decision',
       inputs: [],
       inputsLabel: '—',
-      isJudge: true,
+      isDecision: true,
     });
-    render(<ModelIndexClient rows={[...rows, judge]} variant="landing" />);
+    render(<ModelIndexClient rows={[...rows, decision]} variant="landing" />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Judge' }));
-    expect(getVisibleModelNames()).toEqual(['Example Judge']);
+    fireEvent.click(screen.getByRole('button', { name: 'Decisions' }));
+    expect(getVisibleModelNames()).toEqual(['Example Decision']);
 
     fireEvent.click(screen.getByRole('button', { name: 'Text' }));
-    expect(getVisibleModelNames()).not.toContain('Example Judge');
+    expect(getVisibleModelNames()).not.toContain('Example Decision');
   });
 
   it('closes the provider listbox when focus leaves the control', () => {

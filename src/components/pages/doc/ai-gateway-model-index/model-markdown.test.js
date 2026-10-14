@@ -77,20 +77,20 @@ describe('AI Gateway model Markdown index', () => {
     expect(embeddingSection).toContain('| 1024 |');
   });
 
-  it('gives judge models their own section, out of Text and Other', () => {
-    const judgeRow = {
-      ...createRow({ id: 'example-judge', inputs: [], isImageCapable: false }),
-      isJudge: true,
+  it('gives decision models their own section, out of Text and Other', () => {
+    const decisionRow = {
+      ...createRow({ id: 'example-decision', inputs: [], isImageCapable: false }),
+      isDecision: true,
       endpoints: [],
     };
     const markdown = renderAiGatewayModelIndex([
       createRow({ id: 'text-model', inputs: ['text'], isImageCapable: false }),
-      judgeRow,
+      decisionRow,
     ]);
-    const [beforeJudge, judgeSection] = markdown.split('### Judge models');
+    const [beforeDecision, decisionSection] = markdown.split('### Decision models');
 
-    expect(beforeJudge).not.toContain('example-judge');
-    expect(beforeJudge).not.toContain('### Other models');
-    expect(judgeSection).toContain('example-judge');
+    expect(beforeDecision).not.toContain('example-decision');
+    expect(beforeDecision).not.toContain('### Other models');
+    expect(decisionSection).toContain('example-decision');
   });
 });

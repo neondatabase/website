@@ -90,10 +90,10 @@ const renderEmbeddingTableRows = (rows) =>
     .map((line) => `| ${line} |`)
     .join('\n');
 
-const JUDGE_TABLE_HEADER =
+const DECISION_TABLE_HEADER =
   '| Model | Model ID | Released | Input /M | License |\n' + '| --- | --- | --- | --- | --- |';
 
-const renderJudgeTableRows = (rows) =>
+const renderDecisionTableRows = (rows) =>
   rows
     .map((row) =>
       [
@@ -111,13 +111,14 @@ const renderJudgeTableRows = (rows) =>
 
 const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
   const embeddingRows = rows.filter((row) => row.isEmbedding);
-  const judgeRows = rows.filter((row) => row.isJudge);
+  const decisionRows = rows.filter((row) => row.isDecision);
   const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
   const imageRows = rows.filter((row) => row.isImageCapable);
   const otherRows = rows.filter(
-    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isJudge
+    (row) =>
+      !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isDecision
   );
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isJudge);
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isDecision);
   const sections = ['### Text models', renderProviderTables(textRows, '####')];
 
   sections.push(
@@ -156,12 +157,12 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     sections.push('Select a linked model for embeddings-specific code examples.');
   }
 
-  if (judgeRows.length > 0) {
-    sections.push('### Judge models');
+  if (decisionRows.length > 0) {
+    sections.push('### Decision models');
     sections.push(
-      'These System One models evaluate a given state against a set of questions and return scored answers rather than generating text:'
+      'These System One models answer questions about a given state with a choice, a probability, or a score rather than generating text:'
     );
-    sections.push(`${JUDGE_TABLE_HEADER}\n${renderJudgeTableRows(judgeRows)}`);
+    sections.push(`${DECISION_TABLE_HEADER}\n${renderDecisionTableRows(decisionRows)}`);
   }
 
   sections.push(modelRows.MODEL_CATALOG_NOTE);

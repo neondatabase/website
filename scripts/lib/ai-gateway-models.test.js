@@ -59,12 +59,13 @@ const EMBEDDING = {
   features: { open_weights: true, chat: false, embeddings: true },
 };
 
-// A System One judge: takes a state and questions, returns scored answers, generates no text.
-const JUDGE = {
-  id: 'example-judge',
+// A System One decision model: takes a state and questions, returns a choice, a probability, or a
+// score per question, generates no text.
+const DECISION = {
+  id: 'example-decision',
   owned_by: 'example',
-  name: 'Example Judge',
-  family: 'judge',
+  name: 'Example Decision',
+  family: 'decision',
   model_type: 'language',
   dialects: ['systemone'],
   release_date: '2026-09-01',
@@ -75,14 +76,14 @@ const JUDGE = {
 };
 
 describe('toCatalogEntry', () => {
-  it('maps a System One judge to an input-only entry without chat fields', () => {
-    expect(toCatalogEntry(JUDGE)).toEqual({
-      id: 'example-judge',
-      name: 'Example Judge',
+  it('maps a System One decision model to an input-only entry without chat fields', () => {
+    expect(toCatalogEntry(DECISION)).toEqual({
+      id: 'example-decision',
+      name: 'Example Decision',
       provider: 'example',
-      family: 'judge',
+      family: 'decision',
       released: true,
-      type: 'judge',
+      type: 'decision',
       open_weights: true,
       release_date: '2026-09-01',
       last_updated: '2026-09-01',

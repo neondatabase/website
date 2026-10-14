@@ -5,8 +5,8 @@ const BASE_TABLE_OF_CONTENTS = [
 
 const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 const getProviderDescription = (row) =>
-  row.isJudge
-    ? `${row.providerName} provides ${row.name}, a System One judge model. It evaluates a given state against a set of questions and returns scored answers; it does not generate text.`
+  row.isDecision
+    ? `${row.providerName} provides ${row.name}, a System One decision model. It answers questions about a given state with a choice, a probability, or a score; it does not generate text.`
     : row.isEmbedding
       ? `${row.providerName} provides ${row.name}. Access it through the Neon AI Gateway's \`POST /v1/embeddings\` endpoint.`
       : row.endpoints.length > 0
@@ -15,9 +15,9 @@ const getProviderDescription = (row) =>
 
 // Embeddings has no inputs/context/output-cost to report — a fixed vector length replaces them,
 // and there is no completion to charge for.
-// A judge reports the same minus `dimensions`: it has no vector length either.
+// A decision model reports the same minus `dimensions`: it has no vector length either.
 const getSections = (row) =>
-  row.isJudge
+  row.isDecision
     ? [
         { title: 'Model ID', id: 'model-id', value: row.id },
         { title: 'Provider', id: 'provider', value: getProviderDescription(row) },
