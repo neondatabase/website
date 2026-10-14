@@ -35,9 +35,7 @@
     "realtime": {
       "commands": {
         "subscribe": {
-          "_comment": "Registered from the imported subscribe command module in realtime.ts. The static parser does not follow command modules across files; values verified against subscribe.ts at neon 8.4.4.",
-          "name": "subscribe",
-          "aliases": [],
+          "_comment": "The static parser finds the subcommand in realtime.ts but cannot follow its imported builder into subscribe.ts. These builder-defined values are verified against subscribe.ts at neon 8.4.4.",
           "positionals": [
             {
               "name": "query",
@@ -61,8 +59,6 @@
               "describe": "Project ID"
             }
           },
-          "commands": {},
-          "describe": "Subscribe to a live SQL query with Neon Realtime",
           "usage": "$0 realtime subscribe \"<query>\" [options]",
           "examples": [
             {
