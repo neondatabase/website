@@ -872,8 +872,8 @@
               slug: realtime/examples/nextjs
             - title: 'TanStack'
               slug: realtime/examples/tanstack
-        #    - title: 'Mastra'
-        #      slug: realtime/examples/mastra
+            - title: 'Mastra'
+              slug: realtime/examples/mastra
             - title: 'Drizzle'
               slug: realtime/examples/drizzle
             - title: 'Kysely'
