@@ -11,7 +11,7 @@ summary: >-
   independent root branches with plan-specific storage limits; reset-from-parent
   is not supported.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-14T10:50:40.535Z'
 ---
 
 <FeatureBeta />
@@ -55,7 +55,7 @@ If you have more than one project, you'll need to specify the `--project-id` opt
 <TabItem>
 
 <Admonition type="note">
-The API is in Beta and subject to change.
+The API is in beta and subject to change.
 </Admonition>
 
 To create a schema-only branch using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:

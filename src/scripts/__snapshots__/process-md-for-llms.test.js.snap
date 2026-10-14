@@ -53,9 +53,9 @@ The \`querying\` category includes \`inspect_database\`, which runs the same 15 
 
 ### LRNotice
 
-**Important: Enrollment Pause for Logical Replication Beta**
+**Important: Enrollment pause for logical replication beta**
 
-We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
+We have temporarily paused new enrollments in our logical replication beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
 
 ### PrivatePreview
 
@@ -79,7 +79,7 @@ This feature is in Public Preview. Please provide [Feedback](https://console.neo
 
 **Note: Beta**
 
-Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://neon.com/discord).
+Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://neon.com/discord).
 
 ### MigrationAssistant
 
@@ -368,13 +368,13 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 **Note: Beta**
 
-This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord). For more ways to reach us, see [Send feedback](https://neon.com/docs/introduction/feedback).
+This feature is in beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord). For more ways to reach us, see [Send feedback](https://neon.com/docs/introduction/feedback).
 
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
 
-The **Autoscaling** is in Beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+The **Autoscaling** is in beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 ### EarlyAccessProps (with prop)
 
