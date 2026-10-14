@@ -261,10 +261,6 @@ Scale compute up and down based on demand.
 
 <LinkAPIKey />
 
-### LRNotice
-
-<LRNotice />
-
 ### PrivatePreview
 
 <PrivatePreview />
@@ -276,10 +272,6 @@ Scale compute up and down based on demand.
 ### PublicPreview
 
 <PublicPreview />
-
-### LRBeta
-
-<LRBeta />
 
 ### MigrationAssistant
 
