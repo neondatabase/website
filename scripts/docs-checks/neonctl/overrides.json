@@ -32,6 +32,51 @@
         }
       }
     },
+    "realtime": {
+      "commands": {
+        "subscribe": {
+          "_comment": "Registered from the imported subscribe command module in realtime.ts. The static parser does not follow command modules across files; values verified against subscribe.ts at neon 8.4.4.",
+          "name": "subscribe",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "required": true,
+              "describe": "SELECT query to subscribe to",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "changes": {
+              "type": "boolean",
+              "describe": "Show raw resets and transaction batches",
+              "default": false
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {},
+          "describe": "Subscribe to a live SQL query with Neon Realtime",
+          "usage": "$0 realtime subscribe \"<query>\" [options]",
+          "examples": [
+            {
+              "command": "$0 realtime subscribe \"SELECT * FROM items\"",
+              "description": "Print the initial result followed by a readable transaction log"
+            },
+            {
+              "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
+              "description": "Print raw reset and delta events"
+            }
+          ]
+        }
+      }
+    },
     "env": {
       "commands": {
         "pull": {

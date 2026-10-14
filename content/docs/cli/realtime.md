@@ -1,15 +1,14 @@
 ---
 title: 'Neon CLI command: realtime'
-subtitle: Enable and disable Neon Realtime on a branch from the CLI
+subtitle: Manage Neon Realtime and subscribe to live queries from the CLI
 summary: >-
   The Neon CLI `neon realtime` command enables and disables Neon Realtime on a
-  database branch. Use `enable` to provision Realtime and set the browser
-  origins allowed to connect, and `disable` to remove it.
+  database branch and subscribes to live SQL queries.
 enableTableOfContents: true
 updatedOn: '2026-10-14T02:37:05.711Z'
 ---
 
-The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch. Once Realtime is on, you can stream a live SQL query's results with [`neon subscribe`](/docs/cli/subscribe), and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
+The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch. Once Realtime is on, you can stream a live SQL query's results with [`neon realtime subscribe`](/docs/cli/subscribe), and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
 
 <CliSubcommands command="realtime" />
 
@@ -53,4 +52,12 @@ Realtime disable requested for branch br-cool-darkness-123456.
 
 Disabling also discards the branch's Realtime secret, so apps using that branch's `NEON_REALTIME_SECRET` stop working. If you enable Realtime again later, the branch gets a new secret, so pull the env vars again.
 
-After you disable Realtime, `neon subscribe` on that branch fails with an error that points you back to `neon realtime enable`.
+After you disable Realtime, `neon realtime subscribe` on that branch fails with an error that points you back to `neon realtime enable`.
+
+## neon realtime subscribe (#subscribe)
+
+Streams a live SQL query's results until interrupted. See the [`neon realtime subscribe` reference](/docs/cli/subscribe) for its output modes and examples.
+
+<CliUsage command="realtime subscribe" />
+
+<CliOptions command="realtime subscribe" />

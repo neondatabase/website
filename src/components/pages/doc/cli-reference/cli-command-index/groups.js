@@ -58,7 +58,6 @@ const GROUP_OF = {
   git: 'setup',
   feedback: 'setup',
   realtime: 'surfaces',
-  subscribe: 'surfaces',
 };
 
 // Commands documented as a section of another command's page instead of a

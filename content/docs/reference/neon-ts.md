@@ -249,7 +249,7 @@ Each origin must be `*` or an `http` or `https` origin with no path, query, or f
 
 Realtime is a static field, so the `branch` closure can't set it per branch.
 
-On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon subscribe`](/docs/cli/subscribe).
+On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon realtime subscribe`](/docs/cli/subscribe).
 
 ## Branch policy
 
