@@ -37,6 +37,19 @@ describe('siteSearchHighlightRanges', () => {
     expect(highlighted('Größe of pg16 and pg17', 'größe pg16')).toEqual(['Größe', 'pg16']);
   });
 
+  it('keeps combining marks inside a word', () => {
+    expect(highlighted('cafe\u0301teria', 'ter')).toEqual([]);
+    expect(highlighted('cafe\u0301teria', 'cafe\u0301')).toEqual(['cafe\u0301']);
+  });
+
+  it('matches letters whose lowercase form has a different length', () => {
+    expect(highlighted('İstanbul region', 'İstanbul')).toEqual(['İstanbul']);
+  });
+
+  it('treats a letter outside the BMP as one letter', () => {
+    expect(highlighted('𐐀bc and 𐐀', '𐐀')).toEqual(['𐐀']);
+  });
+
   it('returns no ranges for a query with no words', () => {
     expect(siteSearchHighlightRanges('Branching', '  -- ')).toEqual([]);
   });
