@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 
 import warningIcon from 'icons/input-warning.svg';
 import { cn } from 'utils/cn';
@@ -48,78 +48,92 @@ const Field = forwardRef(
       wrapperClassName,
       error,
       errorClassName,
+      errorTag: ErrorTag = 'div',
       isDisabled,
+      'aria-describedby': ariaDescribedBy,
       ...otherProps
     },
     ref
-  ) => (
-    <div className={cn('relative flex flex-col items-start', className)}>
-      <label
-        className={cn(
-          'leading-none text-gray-new-80',
-          theme === 'checkbox' && 'w-fit cursor-pointer pl-7',
-          isDisabled && 'cursor-default!',
-          labelClassName
-        )}
-        htmlFor={theme === 'checkbox' ? value : name}
-      >
-        {label}
-      </label>
-      <div className={cn('w-full rounded', wrapperClassName)}>
-        <Tag
-          className={cn(
-            baseStyles,
-            themes[theme],
-            {
-              'block min-h-[112px] py-3.5': Tag === FIELD_TAGS.TEXTAREA,
-              'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8':
-                Tag === FIELD_TAGS.SELECT,
-            },
-            Tag === FIELD_TAGS.TEXTAREA && textareaClassName,
-            {
-              'focus:border-primary-1': !error,
-              'border-[#FF3621]/50!': !!error && errorTheme === 'tooltip',
-              'border-secondary-1!': !!error && errorTheme !== 'tooltip',
-            },
-            !error && '',
-            isDisabled && 'cursor-default!',
-            inputClassName
-          )}
-          ref={ref}
-          id={theme === 'checkbox' ? value : name}
-          name={name}
-          value={theme === 'checkbox' ? value : undefined}
-          type={type}
-          disabled={isDisabled}
-          {...otherProps}
-        >
-          {children}
-        </Tag>
-      </div>
+  ) => {
+    const errorId = useId();
+    const describedBy =
+      [ariaDescribedBy, error ? errorId : undefined].filter(Boolean).join(' ') || undefined;
 
-      {error && (
-        <div className={cn(errorThemes[errorTheme], errorClassName)}>
-          {errorTheme === 'tooltip' && (
-            <>
-              <span className="absolute top-0 left-2.5 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-t border-l border-[#FF3621]/50 bg-[linear-gradient(135deg,var(--error-tooltip-bg)_0%,var(--error-tooltip-bg)_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />
-              <Image
-                className="relative top-px size-4 shrink-0"
-                src={warningIcon}
-                alt=""
-                width={16}
-                height={16}
-              />
-            </>
+    return (
+      <div className={cn('relative flex flex-col items-start', className)}>
+        <label
+          className={cn(
+            'leading-none text-gray-new-80',
+            theme === 'checkbox' && 'w-fit cursor-pointer pl-7',
+            isDisabled && 'cursor-default!',
+            labelClassName
           )}
-          <p
-            className="error-message"
-            data-test="error-field-message"
-            dangerouslySetInnerHTML={{ __html: error }}
-          />
+          htmlFor={theme === 'checkbox' ? value : name}
+        >
+          {label}
+        </label>
+        <div className={cn('w-full rounded', wrapperClassName)}>
+          <Tag
+            className={cn(
+              baseStyles,
+              themes[theme],
+              {
+                'block min-h-[112px] py-3.5': Tag === FIELD_TAGS.TEXTAREA,
+                'cursor-pointer truncate bg-[url(/images/chevron-down.svg)] bg-[length:12px] bg-[center_right_1rem] bg-no-repeat pr-8':
+                  Tag === FIELD_TAGS.SELECT,
+              },
+              Tag === FIELD_TAGS.TEXTAREA && textareaClassName,
+              {
+                'focus:border-primary-1': !error,
+                'border-[#FF3621]/50!': !!error && errorTheme === 'tooltip',
+                'border-secondary-1!': !!error && errorTheme !== 'tooltip',
+              },
+              !error && '',
+              isDisabled && 'cursor-default!',
+              inputClassName
+            )}
+            ref={ref}
+            id={theme === 'checkbox' ? value : name}
+            name={name}
+            value={theme === 'checkbox' ? value : undefined}
+            type={type}
+            disabled={isDisabled}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={describedBy}
+            {...otherProps}
+          >
+            {children}
+          </Tag>
         </div>
-      )}
-    </div>
-  )
+
+        {error && (
+          <ErrorTag
+            id={errorId}
+            className={cn(errorThemes[errorTheme], errorClassName)}
+            role="alert"
+          >
+            {errorTheme === 'tooltip' && (
+              <>
+                <span className="absolute top-0 left-2.5 z-40 h-2.5 w-2.5 -translate-y-1.5 rotate-45 border-t border-l border-[#FF3621]/50 bg-[linear-gradient(135deg,var(--error-tooltip-bg)_0%,var(--error-tooltip-bg)_60%,rgba(0,0,0,0)_60%)] before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgba(255,54,33,.06)_0%,rgba(255,54,33,.06)_60%,rgba(0,0,0,0)_60%)]" />
+                <Image
+                  className="relative top-px size-4 shrink-0"
+                  src={warningIcon}
+                  alt=""
+                  width={16}
+                  height={16}
+                />
+              </>
+            )}
+            <p
+              className="error-message"
+              data-test="error-field-message"
+              dangerouslySetInnerHTML={{ __html: error }}
+            />
+          </ErrorTag>
+        )}
+      </div>
+    );
+  }
 );
 
 Field.displayName = 'Field';
@@ -134,13 +148,15 @@ Field.propTypes = {
   labelClassName: PropTypes.string,
   textareaClassName: PropTypes.string,
   type: PropTypes.string,
-  tag: PropTypes.oneOf(Object.values(FIELD_TAGS)),
+  tag: PropTypes.elementType,
   inputClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
   error: PropTypes.string,
   errorClassName: PropTypes.string,
+  errorTag: PropTypes.elementType,
   children: PropTypes.node,
   isDisabled: PropTypes.bool,
+  'aria-describedby': PropTypes.string,
 };
 
 export default Field;

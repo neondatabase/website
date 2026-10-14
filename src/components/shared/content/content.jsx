@@ -57,6 +57,7 @@ import CopyPrompt from 'components/shared/copy-prompt';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
+import ImageWithCommand from 'components/shared/image-with-command';
 import ImageZoom from 'components/shared/image-zoom';
 import InlineSvg from 'components/shared/inline-svg';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -245,6 +246,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  ImageWithCommand,
   McpSetupConfigurator,
   SqlToRestConverter,
   StatBlock,

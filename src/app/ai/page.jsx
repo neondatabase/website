@@ -130,7 +130,7 @@ const AiPage = () => (
       items={AGENT_FEATURES}
       link={LINKS.useCasesAI}
       linkText="Read more"
-      logos={['anything', 'replit', 'same', 'solar', 'databutton']}
+      logos={['anything', 'replit', 'same', 'solar', 'riff']}
     />
     <TestimonialNew
       className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"

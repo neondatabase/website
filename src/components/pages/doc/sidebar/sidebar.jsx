@@ -10,6 +10,8 @@ import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Menu from '../menu';
 
+import syncNavigation from './sync-navigation';
+
 const containsActiveSlug = (menu, slug) => {
   if (menu.slug === slug) return true;
 
@@ -45,22 +47,23 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   const navigationSlug = normalizeDocNavigationPath(currentSlug);
   const menu = getActiveMenu(navigation, navigationSlug);
   const navRef = useRef(null);
+  const navigationPath = `${basePath}${navigationSlug}`;
+  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
 
   // Get SDK TOC for current page from pre-loaded data
   const sdkTOC = sdkNavigation?.[currentSlug] || null;
 
   useEffect(() => {
     if (navRef.current) {
-      navRef.current.scrollTop = 0;
+      return syncNavigation(navRef.current, navigationPath);
     }
-  }, [menu]);
+  }, [pathname, navigationPath, menu, sdkTOC, isChangelogIndex]);
 
-  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
   const hasBorder = !isGuidesRoute;
 
-  if (isChangelogIndex) {
+  if (isChangelogIndex || (!menu && !sdkTOC)) {
     return null;
   }
 
