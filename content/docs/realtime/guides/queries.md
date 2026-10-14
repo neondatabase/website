@@ -15,7 +15,7 @@ Define live queries using [raw SQL](#using-raw-sql) or a [query builder or ORM](
 The guides all share one running example: a chat app where users read the messages in the channels they belong to. You can see the [source code in the examples repo](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) or expand the steps below.
 
 <details>
-  <summary>Expand the setup steps</summary>
+  <summary>Setup steps</summary>
 
 Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose`, which validates [Neon Auth](/docs/auth/overview) tokens:
 

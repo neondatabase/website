@@ -81,7 +81,7 @@ const realtime = createRealtime({
   adapter: drizzleAdapter(),
   secret,
   db: "neondb",
-  url: "wss://realtime.neon.tech/..."
+  url: process.env.NEON_REALTIME_URL!
 })
 
 const subscription = await realtime.subscribe(query)
