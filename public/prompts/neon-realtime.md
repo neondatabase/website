@@ -11,5 +11,5 @@ For more information, see:
 - Overview https://neon.com/docs/realtime/overview.md
 - How to get started https://neon.com/docs/realtime/quickstart.md
 - How Realtime works  https://neon.com/docs/realtime/how-it-works.md
-- Live SQL API endpoint: https://neon.com/docs/realtime/reference/api.md
+- Live queries: https://neon.com/docs/realtime/guides/queries.md
 - SDK: https://neon.com/docs/realtime/sdks/typescript.md
