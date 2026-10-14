@@ -17,18 +17,17 @@ The guides all share one running example: a chat app where users read the messag
 <details>
   <summary>Expand the setup steps</summary>
 
-Install [Drizzle](https://orm.drizzle.team), [Hono](https://hono.dev), `ws`, and `jose` to validate [Neon Auth](/docs/auth/overview) tokens:
+Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose` to validate [Neon Auth](/docs/auth/overview) tokens:
 
 ```bash filename="Terminal"
-npm install drizzle-orm hono jose ws
-npm install -D @types/ws
+npm install drizzle-orm pg hono jose ws
+npm install -D @types/pg @types/ws
 ```
 
-Install the Realtime [TypeScript&nbsp;SDK](../sdks/typescript) and its [Drizzle&nbsp;adapter](../sdks/typescript#drizzle). Plus we'll also use the [Neon&nbsp;serverless&nbsp;driver](/docs/serverless/serverless-driver) to write data to Postgres:
+Install the Realtime [TypeScript&nbsp;SDK](../sdks/typescript) and its [Drizzle&nbsp;adapter](../sdks/typescript#drizzle):
 
 ```bash filename="Terminal"
 npm install @neon/realtime @neon/realtime-drizzle
-npm install @neondatabase/serverless
 ```
 
 Install [Neon Auth](/docs/auth/overview)'s client for the frontend:
@@ -108,15 +107,14 @@ export type Message = typeof messages.$inferSelect
 Configure your Drizzle client (`db`):
 
 ```ts filename="backend/db.ts"
-import { drizzle } from "drizzle-orm/neon-serverless"
-import { Pool, neonConfig } from "@neondatabase/serverless"
-import ws from "ws"
+import { drizzle } from "drizzle-orm/node-postgres"
+import { Pool } from "pg"
 import * as schema from "./schema"
 
-// Node.js versions older than v22 need a WebSocket constructor
-neonConfig.webSocketConstructor = ws
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL! })
+const pool = new Pool({
+  // Neon URLs say sslmode=require. Asking pg for verify-full keeps today's checks and skips its warning
+  connectionString: process.env.DATABASE_URL!.replace("sslmode=require", "sslmode=verify-full")
+})
 export const db = drizzle(pool, { schema })
 
 // So an idle connection error, for example when the compute scales to zero, doesn't crash the API
