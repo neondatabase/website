@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-10-10T11:32:57.046Z'
+updatedOn: '2026-10-14T10:50:40.535Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -181,7 +181,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
 - **Neon snapshots**: Create and manage point-in-time snapshots of your database with our new unified Backup & Restore experience.
 - **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
-- **Postgres logs in Datadog (Beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability.
+- **Postgres logs in Datadog (beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability.
 - **GitHub Secret Scanning**: Neon joined GitHub's Secret Scanning Partner Program to automatically detect and protect against exposed database credentials in public repositories.
 - **HIPAA compliance**: You can [enable HIPAA compliance](/docs/security/hipaa) on any Neon project. Learn more about Neon's compliance milestones on our [Compliance page](/docs/security/compliance).
 - **Scheduled updates**: You can now check for update notices and choose preferred update windows for Postgres updates, security patches, and Neon feature enhancements.
@@ -218,7 +218,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Neon in the Azure Marketplace**: Neon is now available as an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Lakebase Postgres databases directly from the Azure portal. [Read the announcement](/blog/neon-is-now-available-as-an-azure-native-integration).
 - **Archive storage**: To minimize storage costs, we now support automatic archiving of inactive branches (snapshots of your data) in cost-efficient object storage. For more about this feature, see [Branch archiving](/docs/guides/branch-archiving).
 - **Organizations GA**: Organization Accounts are now generally available. Create a new organization, transfer over your projects, invite your team and get started collaborating. Refer to our [Organizations docs](/docs/manage/organizations) to learn more.
-- **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [Public Beta](/docs/guides/neon-private-networking).
+- **Private Networking**: Private and secure network access to your compute resources without traversing public networks. Support for AWS PrivateLink is available in [public beta](/docs/guides/neon-private-networking).
 - **Schema Diff GitHub Action**: This action uses our [Schema Diff](/docs/guides/schema-diff) feature to compare database schemas across branches and post the differences as a comment on your pull request, streamlining the review process. It's also supported with our [Neon GitHub integration](/docs/guides/neon-github-integration).
 - **Import Data Assistant**: Helps you migrate data to Neon from other Postgres databases. All you need to get started is a connection string for your existing database. See [Import Data Assistant](/docs/import/import-data-assistant) for instructions.
 - **Python SDK**: Our new [Python SDK](https://pypi.org/project/neon-api/) wraps the [Neon API](/docs/reference/api), allowing you to manage Neon directly from your Python applications.

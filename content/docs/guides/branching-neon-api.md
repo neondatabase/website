@@ -10,7 +10,7 @@ summary: >-
   RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
   via init_source=schema-only is available as a preview feature.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-10-14T10:50:40.535Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).
@@ -252,7 +252,7 @@ For details on how to use this endpoint to restore a branch to its own or anothe
 ## Creating a schema-only branch using the API
 
 <Admonition type="note">
-The API is in Beta and subject to change.
+The API is in beta and subject to change.
 </Admonition>
 
 To create a schema-only branch using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
