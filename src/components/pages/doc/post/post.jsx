@@ -40,6 +40,7 @@ const Post = ({
     tagTheme = 'gray',
     layout = null,
     contentLayout = null,
+    hideCopyPage = false,
   },
   content,
   breadcrumbs,
@@ -92,9 +93,11 @@ const Post = ({
           <article>
             {isFaq ? (
               <>
-                <div className="mb-5 flex justify-end sm:mb-3">
-                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
-                </div>
+                {!hideCopyPage && (
+                  <div className="mb-5 flex justify-end sm:mb-3">
+                    <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                  </div>
+                )}
                 <div>
                   <h1
                     className={cn(
@@ -153,7 +156,7 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && (
+                {!isChangelog && !isDocsIndex && !hideCopyPage && (
                   <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 )}
               </div>
@@ -206,6 +209,7 @@ Post.propTypes = {
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
+    hideCopyPage: PropTypes.bool,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),

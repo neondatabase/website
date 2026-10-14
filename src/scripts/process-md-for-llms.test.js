@@ -230,6 +230,21 @@ More content.
       expect(result).not.toContain('NeedHelp');
     });
 
+    it('should convert AgentPrompt like CopyPrompt (clean View prompt link)', async () => {
+      const result = await processInlineMdx(`
+Some content here.
+
+<AgentPrompt src="/prompts/test.md" title="Set up with your agent" buttonText="Copy prompt" />
+
+More content.
+`);
+      expect(result).toContain('Some content here.');
+      expect(result).toContain('More content.');
+      expect(result).toContain('[View prompt](https://neon.com/prompts/test.md)');
+      expect(result).not.toContain('<AgentPrompt');
+      expect(result).not.toContain('[AgentPrompt]');
+    });
+
     it('should preserve details/summary as HTML', async () => {
       const result = await processInlineMdx(`
 <details>
