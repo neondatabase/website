@@ -145,12 +145,12 @@ export const getRealtime = () => (realtime ??= create())
 
 Get the user from the [Neon Auth](/docs/auth/overview) session before you read, seal or write anything:
 
-```ts filename="src/lib/auth/server.ts"
+```ts filename="src/auth/server.ts"
 import "server-only"
 
 import { createNeonAuth } from "@neondatabase/auth/next/server"
 
-import { getEnv } from "../env"
+import { getEnv } from "../lib/env"
 
 let auth: ReturnType<typeof createNeonAuth> | undefined
 /** Lazy: createNeonAuth checks the cookie secret when constructed, and throws without it. */
@@ -163,19 +163,21 @@ export function getAuth() {
 
 /**
  * The signed-in user, or null. Call it first in every Server Component data path, Server Action and
- * Route Handler: proxy.ts is not the security boundary. Never accept a user id from the client.
+ * Route Handler: proxy.ts is not the security boundary. Pass the user id the page was loaded for, and a
+ * different signed-in user counts as signed out. That id is only compared, never used to scope a query.
  */
-export async function getUser() {
+export async function getUser(pageUserId?: string) {
   const { data, error } = await getAuth().getSession() // returns { data, error }; doesn't throw on HTTP errors
   // If Neon Auth can't be reached, treat the request as signed out.
   if (error) console.warn("[auth] getSession failed", error.code)
-  return data?.user ?? null
+  const user = data?.user ?? null
+  return pageUserId === undefined || user?.id === pageUserId ? user : null
 }
 ```
 
-`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession), and treats the request as signed out if Neon Auth can't be reached. Mount [`auth.handler()`](/docs/auth/reference/nextjs-server#auth-handler) in a catch-all Route Handler, such as `src/app/api/auth/[...path]/route.ts`. Render Neon Auth's [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router) inside `NeonAuthUIProvider`, as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
+`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession). The rest of `src/auth/` is Neon Auth setup: the auth route, the client and the [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router), as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
 
-Make sign-in and sign-out full page loads, so they drop the browser's Realtime client and the previous user's rows. In `NeonAuthUIProvider`, set a flag in `onSessionChange`, and once it's set, have `navigate` call `window.location.assign()` instead of `router.push()`.
+Make every session change a full page load to `/`, which drops the Realtime client and the previous user's rows. In `NeonAuthUIProvider`, `onSessionChange` calls `window.location.assign("/")`. After Sign out, or a renewal or write the server refuses, `leaveSession()` in `src/auth/session-lost.ts` does the same. The SSR guide explains why in [when the session changes](../guides/ssr#when-the-session-changes).
 
 ### Seal in a Route Handler
 
@@ -192,20 +194,21 @@ export const sealTodos = (userId: string) => getRealtime().seal({ query: todosQu
 Then call it from the Route Handler, for the user in the session:
 
 ```ts filename="src/app/api/todos/live-query/route.ts"
-import { getUser } from "../../../../lib/auth/server"
+import { getUser } from "../../../../auth/server"
 import { sealTodos } from "../../../../lib/todos"
 
-const noStore = { "Cache-Control": "no-store" }
+const noStore = { "Cache-Control": "private, no-store" }
 
-// A cross-site POST carries no SameSite=Lax session cookie, so it gets a 401.
-export async function POST() {
-  const user = await getUser()
+// Renewal is a read, so it's a Route Handler. A Server Action would queue behind pending writes.
+export async function POST(request: Request) {
+  const { userId } = await request.json() // the user the page was loaded for
+  const user = await getUser(userId)
   if (!user) return Response.json({ error: "UNAUTHENTICATED" }, { status: 401, headers: noStore })
   return Response.json(await sealTodos(user.id), { headers: noStore })
 }
 ```
 
-Next.js runs server actions one at a time, so renew through a Route Handler rather than a server action, as the [subscribing guide](../guides/subscribing#fetch-from-a-server-function) recommends. The handler takes no input, because the user comes from the session cookie. `Cache-Control: no-store` keeps the sealed query, a [bearer token](../guides/queries#sealing-queries), out of caches.
+Next.js runs server actions one at a time, so renew through a Route Handler rather than a server action, as the [subscribing guide](../guides/subscribing#fetch-from-a-server-function) recommends. The browser sends the user id the page was loaded for, and the handler answers 401 if the session has no user or a different one. `Cache-Control: private, no-store` keeps the sealed query, a [bearer token](../guides/queries#sealing-queries), out of caches.
 
 ## Server-side rendering
 
@@ -244,7 +247,8 @@ Call `loadTodos()` from an async Server Component, for the user in the session, 
 import { redirect } from "next/navigation"
 import { connection } from "next/server"
 
-import { getUser } from "../lib/auth/server"
+import { getUser } from "../auth/server"
+import { UserMenu } from "../auth/user-menu"
 import { getEnv } from "../lib/env"
 import { loadTodos } from "../lib/todos"
 
@@ -260,18 +264,22 @@ export async function Todos() {
   if (!user) redirect("/auth/sign-in")
   const { rows, sealedQuery } = await loadTodos(user.id)
   return (
-    // Keyed on the query's identity. A re-render for the same query (router.refresh(), a cookie refresh)
-    // keeps the subscription. Another user, or a deploy that changed the SQL, remounts the list (see todo-list.tsx).
-    <RealtimeRoot key={sealedQuery.queryFingerprint} url={getEnv().realtimeUrl}>
-      <TodoList initialTodos={rows} sealedQuery={sealedQuery} />
-    </RealtimeRoot>
+    <>
+      {/* Here rather than in page.tsx, which has no data access. */}
+      <UserMenu email={user.email} />
+      {/* Keyed on the query's identity. A re-render for the same query (router.refresh(), a cookie refresh)
+          keeps the subscription. A deploy that changed the SQL remounts the list. */}
+      <RealtimeRoot key={sealedQuery.queryFingerprint} url={getEnv().realtimeUrl}>
+        <TodoList initialTodos={rows} sealedQuery={sealedQuery} userId={user.id} />
+      </RealtimeRoot>
+    </>
   )
 }
 ```
 
 [`connection()`](https://nextjs.org/docs/app/api-reference/functions/connection) waits for an incoming request, so the component never prerenders and its output, which belongs to one user and one request, is never cached. The SSR guide uses `force-dynamic` for the same reason. `connection()` also works when your app enables `cacheComponents`, inside a `<Suspense>` boundary.
 
-The key on `queryFingerprint` keeps the subscription across re-renders for the same query, and remounts the list when the query changes, for example when another user signs in.
+The key on `queryFingerprint` keeps the subscription across re-renders for the same query, and remounts the list when a deploy changes the SQL. `TodoList` gets the user id to send with each renewal and write.
 
 Render the component inside a `<Suspense>` boundary, so the rest of the page renders at once and the list streams in:
 
@@ -292,20 +300,19 @@ export default function Page() {
 }
 ```
 
-### Redirect signed-out visitors
+### Keep signed-in pages private
 
 Inside `<Suspense>`, `redirect()` only takes effect in the browser, after the page has started streaming. To send signed-out page loads a real HTTP redirect, check the session in the [proxy](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) too:
 
 ```ts filename="src/proxy.ts"
 import type { NextRequest } from "next/server"
 
-import { getAuth } from "./lib/auth/server"
+import { getAuth } from "./auth/server"
 
 let middleware: ReturnType<ReturnType<typeof getAuth>["middleware"]> | undefined
 
 export default function proxy(request: NextRequest) {
-  // Server Actions check the session themselves and return { kind: "rejected", reason: "UNAUTHENTICATED" }.
-  // A redirect here would reach the client as an unexplained failure.
+  // Signed-out page loads get an HTTP redirect. Server Actions skip it and return UNAUTHENTICATED themselves.
   if (request.headers.has("next-action")) return
   middleware ??= getAuth().middleware({ loginUrl: "/auth/sign-in" })
   return middleware(request)
@@ -354,52 +361,40 @@ Render the server's rows straight away, and keep them live. This is the start of
 import type { SealedLiveQuery } from "@neon/realtime/client"
 // @neon/realtime-react's build has no "use client" directive: import it only from client modules.
 import { useLiveQuery } from "@neon/realtime-react"
-import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useState } from "react"
 
+import { renewOrLeave } from "../auth/session-lost"
 import type { TodoRow } from "../lib/todos" // type-only: erased at build, so no server code reaches the browser
 
 export function TodoList({
   initialTodos,
-  sealedQuery
+  sealedQuery,
+  userId
 }: {
   initialTodos: TodoRow[]
   sealedQuery: SealedLiveQuery<TodoRow>
+  userId: string
 }) {
-  const router = useRouter()
-
   // Keep the first sealed query. useLiveQuery restarts its subscription whenever it gets a new object, and
   // every server re-render (router.refresh(), a Server Action that sets a cookie) sends one for the same
   // query. Renewals go through refreshQuery. A different query remounts this list through the key in todos.tsx.
   const [query] = useState(sealedQuery)
 
-  const signedOut = useRef(false)
-  const refreshQuery = useCallback(async (): Promise<SealedLiveQuery<TodoRow>> => {
-    // The hook retries a failed renewal every second until one succeeds. After a 401, stop calling the
-    // server and go to sign-in with a full page load, which drops the Realtime client and this user's rows.
-    if (signedOut.current) throw new Error("Signed out")
-    const response = await fetch("/api/todos/live-query", { method: "POST", cache: "no-store" })
-    if (response.status === 401) {
-      signedOut.current = true
-      window.location.assign("/auth/sign-in")
-      throw new Error("Signed out")
-    }
-    if (!response.ok) throw new Error(`Live query renewal failed: ${response.status}`)
-    return (await response.json()) as SealedLiveQuery<TodoRow>
-  }, [])
+  // Sends the page's user id: a 401 means signed out or signed in as someone else, and the page leaves.
+  const refreshQuery = useCallback(
+    () =>
+      renewOrLeave<SealedLiveQuery<TodoRow>>(() =>
+        fetch("/api/todos/live-query", { method: "POST", cache: "no-store", body: JSON.stringify({ userId }) })
+      ),
+    [userId]
+  )
 
-  const { data, status, error, utils } = useLiveQuery(query, { initialData: initialTodos, refreshQuery })
-
-  useEffect(() => {
-    // The renewal came back for a different query: another user signed in on this browser, or a deploy
-    // changed the SQL. Re-render, and the new fingerprint remounts this list (todos.tsx).
-    if (error?.code === "QUERY_REFRESH_FAILED") router.refresh()
-  }, [error, router])
+  const { data, status, utils } = useLiveQuery(query, { initialData: initialTodos, refreshQuery })
 ```
 
 Server re-renders are routine in Next.js: `router.refresh()` and server actions that set cookies both cause them. Each one sends a new sealed-query object for the same query, so keep the first one in state, as [send both to the browser](../guides/ssr#send-both-to-the-browser) explains, and renew through [`refreshQuery`](../guides/reactivity#refreshquery), which posts to the [Route Handler](#seal-in-a-route-handler).
 
-A 401 from the Route Handler means the user has signed out. `refreshQuery` stops calling the server and goes to sign-in with a full page load. That unmounts the list, as [handling errors](../guides/reactivity#handling-errors) recommends, and drops the Realtime client and the user's rows. A `QUERY_REFRESH_FAILED` error usually means the renewal came back for a different query, so refresh the route, and the new fingerprint remounts the list. The `error` status is final for a subscription, and there's no client API to restart one, so while the status is `error`, offer a button that calls `window.location.reload()`.
+After a 401, `renewOrLeave()` stops renewing and leaves the page, which unmounts the list, as [handling errors](../guides/reactivity#handling-errors) recommends. The `error` status is final for a subscription, and there's no client API to restart one, so while the status is `error`, offer a button that calls `window.location.reload()`.
 
 On the first request, the rows go from the server's query to the live subscription in four steps:
 
@@ -414,7 +409,7 @@ Apply each change to local, optimistic state at once, and send it to a server ac
 
 ### Apply writes optimistically
 
-Run each write in a transition with `startTransition`, apply it with `useOptimistic`, and keep the transition open until [`utils.awaitTxId()`](../sdks/typescript#react-uselivequeryutils) sees the write's txid. At the top level of `src/app/todo-list.tsx`, add `FormEvent`, `startTransition`, `useMemo` and `useOptimistic` to the `react` import, then add:
+Run each write in a transition with `startTransition`, apply it with `useOptimistic`, and keep the transition open until [`utils.awaitTxId()`](../sdks/typescript#react-uselivequeryutils) sees the write's txid. At the top level of `src/app/todo-list.tsx`, add `FormEvent`, `startTransition`, `useMemo` and `useOptimistic` to the `react` import and `leaveSession` to the `session-lost` import, then add:
 
 ```tsx filename="src/app/todo-list.tsx"
 import { addTodo, deleteTodo, setTodoCompleted, type WriteResult } from "./actions"
@@ -449,11 +444,11 @@ const newestFirst = (a: OptimisticTodo, b: OptimisticTodo) =>
   b.created_at.getTime() - a.created_at.getTime() || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)
 
 // How long a write stays pending while it waits for its transaction to arrive on the stream. Keep it short:
-// React holds every transition started meanwhile (router.refresh(), navigations, sign-out) until it settles.
+// React holds every transition started meanwhile (router.refresh(), navigations) until it settles.
 const SYNC_TIMEOUT_MS = 10_000
 ```
 
-Inside `TodoList`, after the `QUERY_REFRESH_FAILED` effect, layer the optimistic state over `data` and send every write through `mutate()`:
+Inside `TodoList`, after the `useLiveQuery()` call, layer the optimistic state over `data` and send every write through `mutate()`:
 
 ```tsx filename="src/app/todo-list.tsx"
   const [optimisticTodos, updateOptimistically] = useOptimistic<readonly OptimisticTodo[], OptimisticAction>(
@@ -478,7 +473,7 @@ Inside `TodoList`, after the `QUERY_REFRESH_FAILED` effect, layer the optimistic
       }
       if (result.kind === "rejected") {
         if (result.reason === "UNAUTHENTICATED")
-          window.location.assign("/auth/sign-in") // a full page load, like the 401 above
+          leaveSession() // signed out or another user, like a renewal 401
         else setNotice({ tone: "error", text: failure })
         return
       }
@@ -508,7 +503,7 @@ Inside `TodoList`, after the `QUERY_REFRESH_FAILED` effect, layer the optimistic
       completed: false,
       created_at: new Date()
     }
-    mutate({ type: "add", todo }, () => addTodo({ id: todo.id, title }), `Couldn't add "${title}".`)
+    mutate({ type: "add", todo }, () => addTodo(userId, { id: todo.id, title }), `Couldn't add "${title}".`)
   }
 ```
 
@@ -526,7 +521,7 @@ On the server, each write is a server action that returns the transaction ID:
 import { sql } from "kysely"
 import { z } from "zod"
 
-import { getUser } from "../lib/auth/server"
+import { getUser } from "../auth/server"
 import { getDb } from "../lib/db"
 
 // Typed results rather than throws: in production Next.js hides a thrown error's message.
@@ -544,8 +539,8 @@ const txid = sql<string>`pg_current_xact_id()::text`.as("txid")
 const toResult = (row?: { txid: string }): WriteResult =>
   row ? { kind: "committed", txid: row.txid } : { kind: "unchanged" }
 
-export async function addTodo(raw: z.input<typeof addInput>): Promise<WriteResult> {
-  const user = await getUser() // every action checks the session itself: proxy.ts skips actions
+export async function addTodo(pageUserId: string, raw: z.input<typeof addInput>): Promise<WriteResult> {
+  const user = await getUser(pageUserId) // every action checks the session itself: proxy.ts skips actions
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = addInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
@@ -558,8 +553,8 @@ export async function addTodo(raw: z.input<typeof addInput>): Promise<WriteResul
   return toResult(row)
 }
 
-export async function setTodoCompleted(raw: z.input<typeof setCompletedInput>): Promise<WriteResult> {
-  const user = await getUser()
+export async function setTodoCompleted(pageUserId: string, raw: z.input<typeof setCompletedInput>): Promise<WriteResult> {
+  const user = await getUser(pageUserId)
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = setCompletedInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
@@ -573,8 +568,8 @@ export async function setTodoCompleted(raw: z.input<typeof setCompletedInput>): 
   return toResult(row)
 }
 
-export async function deleteTodo(raw: z.input<typeof deleteInput>): Promise<WriteResult> {
-  const user = await getUser()
+export async function deleteTodo(pageUserId: string, raw: z.input<typeof deleteInput>): Promise<WriteResult> {
+  const user = await getUser(pageUserId)
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = deleteInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
@@ -590,7 +585,7 @@ export async function deleteTodo(raw: z.input<typeof deleteInput>): Promise<Writ
 
 `RETURNING pg_current_xact_id()::text` runs in the same statement as the write, so it returns the ID of the transaction that made the change, with no explicit transaction. It's cast to `text`, because `awaitTxId()` waits for a decimal string. See [returning the txid from your backend](../guides/mutations#returning-the-txid-from-your-backend).
 
-Each action takes the user from the session, never from the browser, and zod validates everything else the browser sends. The `user_id` in each `WHERE` means one user can't change another's rows. Next.js runs server actions one at a time, so writes reach the server in the order you make them, each with its own optimistic change.
+Each action takes the user from the session. The page's user id is only compared with it, so a write from a page loaded for someone else gets `UNAUTHENTICATED`, and zod validates everything else the browser sends. The `user_id` in each `WHERE` means one user can't change another's rows. Next.js runs server actions one at a time, so writes reach the server in the order you make them, each with its own optimistic change.
 
 Don't revalidate after a write. The live query already delivers it, and a revalidation only re-renders the page to read and seal the same query again.
 
