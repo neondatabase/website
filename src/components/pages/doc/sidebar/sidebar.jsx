@@ -62,11 +62,11 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
 
-  // FAQ pages still use the empty sidebar column for their desktop alignment.
-  const isFaqsRoute = /^\/faqs(?:\/|$)/.test(pathname);
-  const hasBorder = !isGuidesRoute && !isFaqsRoute;
+  // Community pages still use the empty sidebar column for their desktop alignment.
+  const isCommunityRoute = /^\/(?:faqs|guides)(?:\/|$)/.test(pathname);
+  const hasBorder = !isGuidesRoute && !isCommunityRoute;
 
-  if (isChangelogIndex || (!menu && !sdkTOC && !isFaqsRoute)) {
+  if (isChangelogIndex || (!menu && !sdkTOC && !isCommunityRoute)) {
     return null;
   }
 
