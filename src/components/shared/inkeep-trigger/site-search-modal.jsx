@@ -17,15 +17,6 @@ import {
   SEARCH_QUERY_MAX_CHARS,
 } from 'utils/site-search-request';
 
-const COLLECTION_LABEL = {
-  docs: 'Docs',
-  guides: 'Guides',
-  changelog: 'Changelog',
-  blog: 'Blog',
-  page: 'Page',
-  tutorial: 'Tutorial',
-};
-
 const SEARCH_DEBOUNCE_MS = 250;
 
 function HighlightedText({ text, query }) {
@@ -40,7 +31,10 @@ function HighlightedText({ text, query }) {
       nodes.push(text.slice(lastIndex, start));
     }
     nodes.push(
-      <mark key={start} className="rounded-[2px] bg-green-45/20 text-inherit dark:bg-green-45/15">
+      <mark
+        key={start}
+        className="rounded-[2px] bg-green-45/20 text-black-new dark:bg-green-45/15 dark:text-white"
+      >
         {text.slice(start, end)}
       </mark>
     );
@@ -51,6 +45,23 @@ function HighlightedText({ text, query }) {
   }
   return nodes;
 }
+
+// The heading path starts with the page H1, which usually repeats the title.
+function sectionPath(heading, title) {
+  const parts = heading.split(' > ');
+  const rest = parts[0] === title ? parts.slice(1) : parts;
+  return rest.join(' › ');
+}
+
+const Breadcrumb = ({ labels }) => (
+  <span className="truncate text-[11px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
+    {labels.join(' › ')}
+  </span>
+);
+
+Breadcrumb.propTypes = {
+  labels: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 HighlightedText.propTypes = {
   text: PropTypes.string.isRequired,
@@ -236,7 +247,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
             >
               {hits.map((hit, index) => {
                 const href = hrefFromSearchHit(hit.url);
-                const showHeading = hit.heading && hit.heading !== hit.title;
+                const section = sectionPath(hit.heading, hit.title);
                 return (
                   <li key={`${hit.url}-${hit.heading}`} role="presentation">
                     <Link
@@ -254,17 +265,13 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
                       onMouseEnter={() => setActiveIndex(index)}
                       onClick={onClose}
                     >
-                      <span className="flex items-baseline gap-2">
-                        <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
-                          <HighlightedText text={hit.title} query={trimmedQuery} />
-                        </span>
-                        <span className="text-[11px] tracking-extra-tight text-gray-new-40 uppercase dark:text-gray-new-60">
-                          {COLLECTION_LABEL[hit.collection] ?? hit.collection}
-                        </span>
+                      {hit.breadcrumb.length > 0 && <Breadcrumb labels={hit.breadcrumb} />}
+                      <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
+                        <HighlightedText text={hit.title} query={trimmedQuery} />
                       </span>
-                      {showHeading && (
+                      {section && (
                         <span className="text-[12px] tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
-                          <HighlightedText text={hit.heading} query={trimmedQuery} />
+                          <HighlightedText text={section} query={trimmedQuery} />
                         </span>
                       )}
                       {hit.excerpt && (

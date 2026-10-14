@@ -58,6 +58,7 @@ describe('parseSiteSearchHits', () => {
     title: 'Branching',
     slug: 'docs/introduction/branching',
     collection: 'docs',
+    breadcrumb: ['Docs', 'Postgres', 'Branching'],
     heading: 'How branching works',
     excerpt: 'Copy-on-write branches.',
     score: 1.2,
@@ -65,6 +66,15 @@ describe('parseSiteSearchHits', () => {
 
   it('keeps only the documented hit fields', () => {
     expect(parseSiteSearchHits({ hits: [{ ...hit, extra: 'nope' }] })).toEqual([hit]);
+  });
+
+  it('accepts an empty breadcrumb and rejects a malformed one', () => {
+    expect(parseSiteSearchHits({ hits: [{ ...hit, breadcrumb: [] }] })[0].breadcrumb).toEqual([]);
+    for (const breadcrumb of [undefined, 'Docs', ['Docs', ''], ['Docs', 1], Array(11).fill('x')]) {
+      expect(() => parseSiteSearchHits({ hits: [{ ...hit, breadcrumb }] })).toThrow(
+        /Search failed/
+      );
+    }
   });
 
   it('rejects a host that is not neon.com and an unknown collection', () => {

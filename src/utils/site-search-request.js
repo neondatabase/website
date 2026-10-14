@@ -52,6 +52,16 @@ export function hrefFromSearchHit(url) {
   return `${parsed.pathname}${parsed.search}${parsed.hash}`;
 }
 
+const BREADCRUMB_MAX_LABELS = 10;
+
+function isBreadcrumb(value) {
+  return (
+    Array.isArray(value) &&
+    value.length <= BREADCRUMB_MAX_LABELS &&
+    value.every((label) => typeof label === 'string' && label !== '')
+  );
+}
+
 export function parseSiteSearchHits(payload) {
   if (typeof payload !== 'object' || payload === null || Array.isArray(payload)) {
     throw new Error('Search failed.');
@@ -66,11 +76,12 @@ function parseSiteSearchHit(hit) {
   if (typeof hit !== 'object' || hit === null || Array.isArray(hit)) {
     throw new Error('Search failed.');
   }
-  const { url, title, slug, collection, heading, excerpt, score } = hit;
+  const { url, title, slug, collection, breadcrumb, heading, excerpt, score } = hit;
   if (
     typeof url !== 'string' ||
     typeof title !== 'string' ||
     typeof slug !== 'string' ||
+    !isBreadcrumb(breadcrumb) ||
     typeof heading !== 'string' ||
     typeof excerpt !== 'string' ||
     typeof score !== 'number' ||
@@ -85,6 +96,7 @@ function parseSiteSearchHit(hit) {
     title,
     slug,
     collection,
+    breadcrumb,
     heading,
     excerpt,
     score,
