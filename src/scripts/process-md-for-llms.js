@@ -19,6 +19,7 @@
  * - Steps -> extracts children
  * - DetailIconCards -> bullet list with links
  * - CompactCards -> bullet list with links or prompt links
+ * - DemoCards -> bullet list of demos with live demo and GitHub links
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
@@ -897,6 +898,46 @@ const componentHandlers = {
 
     return links.length > 0
       ? { type: 'list', ordered: false, spread: false, children: links }
+      : null;
+  },
+
+  /**
+   * DemoCards -> bullet list of demos with description, stack and links
+   * <DemoCards><DemoCard title="1 Million Boxes" description="..." stack="Postgres, Realtime" demo="https://..." github="https://..." /></DemoCards>
+   */
+  DemoCards(node) {
+    const cards = findJsxElements(node, 'DemoCard');
+
+    if (cards.length === 0) {
+      return node.children?.length > 0 ? node.children : null;
+    }
+
+    const items = cards
+      .map((card) => {
+        const title = getAttr(card, 'title');
+        if (!title) return null;
+
+        const description = getAttr(card, 'description');
+        const stack = getAttr(card, 'stack');
+        const links = [
+          ['Live demo', getAttr(card, 'demo')],
+          ['GitHub', getAttr(card, 'github')],
+        ].filter(([, url]) => url);
+
+        const children = [{ type: 'strong', children: [{ type: 'text', value: title }] }];
+        if (description) children.push({ type: 'text', value: `: ${description}` });
+        if (stack) children.push({ type: 'text', value: ` Uses ${stack}.` });
+        links.forEach(([label, url], index) => {
+          children.push({ type: 'text', value: index === 0 ? ' ' : ' · ' });
+          children.push({ type: 'link', url, children: [{ type: 'text', value: label }] });
+        });
+
+        return { type: 'listItem', children: [{ type: 'paragraph', children }] };
+      })
+      .filter(Boolean);
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
       : null;
   },
 
