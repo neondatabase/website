@@ -32,13 +32,15 @@ const MODE_HEADINGS = {
   embeddings: 'Embeddings',
 };
 
+const NO_EXAMPLES = 'Code examples are not currently available for this model.';
+
 const renderCommandSection = (examplesByMode, mode) => {
   const languages = getLanguagesForMode(examplesByMode, mode);
   const heading = MODE_HEADINGS[mode] ?? mode;
   const blocks = [`### ${heading}`];
 
   if (languages.length === 0) {
-    blocks.push('Code examples are not currently available for this model.');
+    blocks.push(NO_EXAMPLES);
     return blocks.join('\n\n');
   }
 
@@ -69,7 +71,9 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
         ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
         : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
   const primaryMode = row.isEmbedding ? 'embeddings' : 'text';
-  const commands = [renderCommandSection(examplesByMode, primaryMode)];
+  const commands = row.isDecision
+    ? [NO_EXAMPLES]
+    : [renderCommandSection(examplesByMode, primaryMode)];
   const hasExamples = ['text', 'image', 'embeddings'].some(
     (mode) => getLanguagesForMode(examplesByMode, mode).length > 0
   );
