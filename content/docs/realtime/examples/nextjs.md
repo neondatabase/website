@@ -2,11 +2,11 @@
 title: 'Next.js example'
 subtitle: 'Full-stack example app using Realtime with Next.js.'
 summary: >-
-  Build a per-user todo app with Next.js, Kysely and Neon Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
+  Build a per-user todo app with Next.js, Kysely and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
 enableTableOfContents: true
 ---
 
-This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Kysely](https://kysely.dev) and Neon Auth, with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
+This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Kysely](https://kysely.dev) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
 
 The sections follow the same order as the guides, from [defining](#defining-queries) and [sealing](#sealing-queries) queries to writing to them, and show the Next.js code for each step.
 
@@ -22,7 +22,7 @@ Install the Realtime SDK with its Kysely adapter and React bindings:
 npm install @neon/realtime @neon/realtime-kysely @neon/realtime-react
 ```
 
-Add a `neon.ts` that enables Neon Auth and Realtime on your branch:
+Add a `neon.ts` that enables Managed Better Auth and Realtime on your branch:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1"
@@ -41,7 +41,7 @@ export default defineConfig({
 
 Link the directory and run `neon deploy`, as in the [queries guide's setup](../guides/queries#setup). It writes `DATABASE_URL`, `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET` and `NEON_AUTH_BASE_URL` to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
 
-Neon Auth's server SDK also needs a cookie secret of at least 32 characters, which comes from you:
+The Managed Better Auth server SDK also needs a cookie secret of at least 32 characters, which comes from you:
 
 ```bash filename="Terminal"
 printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
@@ -64,7 +64,7 @@ import type { Generated } from "kysely"
 // result-transforming plugin such as CamelCasePlugin would give live rows different keys from server rows.
 export interface TodosTable {
   id: string; // uuid, created in the browser, so the optimistic row and the live row share it
-  user_id: string; // uuid, the Neon Auth user id; only ever set from the session
+  user_id: string; // uuid, the Managed Better Auth user id; only ever set from the session
   title: string;
   completed: Generated<boolean>;
   created_at: Generated<Date>; // timestamptz: pg and the Realtime client both parse it to a Date
@@ -143,7 +143,7 @@ export const getRealtime = () => (realtime ??= create())
 
 ### Authorize with the session
 
-Get the user from the [Neon Auth](/docs/auth/overview) session before you read, seal or write anything:
+Get the user from the [Managed Better Auth](/docs/auth/overview) session before you read, seal or write anything:
 
 ```ts filename="src/auth/server.ts"
 import "server-only"
@@ -168,14 +168,14 @@ export function getAuth() {
  */
 export async function getUser(pageUserId?: string) {
   const { data, error } = await getAuth().getSession() // returns { data, error }; doesn't throw on HTTP errors
-  // If Neon Auth can't be reached, treat the request as signed out.
+  // If Managed Better Auth can't be reached, treat the request as signed out.
   if (error) console.warn("[auth] getSession failed", error.code)
   const user = data?.user ?? null
   return pageUserId === undefined || user?.id === pageUserId ? user : null
 }
 ```
 
-`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession). The rest of `src/auth/` is Neon Auth setup: the auth route, the client and the [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router), as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
+`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession). The rest of `src/auth/` is Managed Better Auth setup: the auth route, the client and the [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router), as in the [Managed Better Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
 
 Make every session change a full page load to `/`, which drops the Realtime client and the previous user's rows. In `NeonAuthUIProvider`, `onSessionChange` calls `window.location.assign("/")`. After Sign out, or a renewal or write the server refuses, `leaveSession()` in `src/auth/session-lost.ts` does the same. The SSR guide explains why in [when the session changes](../guides/ssr#when-the-session-changes).
 
