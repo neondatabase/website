@@ -1,17 +1,19 @@
 ---
 name: neon-ai-gateway
 description: >-
-  One API and one credential for frontier and open-source LLMs, built into your
-  Neon branch and powered by Databricks. Use when a user wants to call an LLM,
-  add AI/chat/an agent to their app, route between model providers (OpenAI,
-  Anthropic, Google/Gemini, Meta, Alibaba, and more), or avoid juggling
-  separate provider API keys and accounts — especially when they already use
-  Neon and want AI requests to branch with their project. Works with the OpenAI
-  SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing
-  only the base URL. Triggers include "call an LLM", "add AI to my app",
-  "chat completion", "model routing", "LLM proxy/gateway", "one API for all
+  One API and one credential for frontier and open-source LLMs and
+  embedding models, built into your Neon branch and powered by Databricks.
+  Use when a user wants to call an LLM, generate embeddings, add AI/chat/an
+  agent to their app, route between model providers (OpenAI, Anthropic,
+  Google/Gemini, Meta, Alibaba, and more), or avoid juggling separate
+  provider API keys and accounts — especially when they already use Neon
+  and want AI requests to branch with their project. Works with the OpenAI
+  SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by
+  changing only the base URL. Triggers include "call an LLM",
+  "add AI to my app", "chat completion", "model routing", "LLM proxy/gateway",
+  "one API for all
   models", "use Claude/GPT/Gemini", "AI SDK", "Mastra agent", "Neon AI
-  Gateway", and "log/rate-limit AI calls".
+  Gateway", "generate embeddings", and "log/rate-limit AI calls".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-ai-gateway
@@ -29,13 +31,13 @@ neon skills -s neon -y
 
 Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
-The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from many providers (Anthropic, OpenAI, Google, Meta, and more), all hosted and powered by Databricks. The catalog shifts over time, so treat `/v1/models` and the [models.dev Neon page](https://models.dev/providers/neon) as the source of truth rather than a fixed provider list. Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
+The Neon AI Gateway brings LLM and embedding inference to your Neon branch. One API and one Neon credential give you access to frontier and open-source models from many providers (Anthropic, OpenAI, Google, Meta, and more), plus embedding models, all hosted and powered by Databricks. The catalog shifts over time, so treat `/v1/models` and the [models.dev Neon page](https://models.dev/providers/neon) as the source of truth rather than a fixed provider list. For embedding model IDs and dimensions, see the [embeddings guide](https://neon.com/docs/ai-gateway/embeddings). Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
 
 Use this skill to help the user send model calls through the gateway, wire it into the AI SDK or Mastra, and switch providers without rewiring code. Deliver a working inference request, a configured agent, or a precise answer from the official Neon docs.
 
 ## When to Use
 
-Reach for the AI Gateway whenever an app or agent needs to call an LLM and the user would rather not manage model providers themselves:
+Reach for the AI Gateway whenever an app or agent needs to call an LLM or generate text embeddings and the user would rather not manage model providers themselves:
 
 - **One credential instead of many provider accounts.** A single Neon credential reaches the entire model catalog across every provider Databricks hosts. No separate OpenAI / Anthropic / Google billing, keys, or signups to provision and rotate.
 - **Switch models without rewiring.** The unified endpoint is OpenAI-compatible and works with every model in the catalog — change one `model` field to move between Claude, GPT, and Gemini. Standard SDKs (OpenAI, Anthropic, google-genai) work with just a base-URL change.
@@ -49,7 +51,8 @@ If the user already has a deep, single-provider integration and no interest in N
 - **One API for all models** — Frontier and open-source models behind a single endpoint, addressed by their catalog ID (e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-3-flash`).
 - **Standard SDKs, one URL change** — OpenAI SDK and AI SDK (OpenAI-compatible MLflow/Responses routes), Anthropic SDK (native Messages), google-genai (native Gemini).
 - **Branch-scoped** — Each branch gets its own gateway host; the Neon credential authorizes requests for that branch and its descendants.
-- **Streaming** — Server-sent events work on all endpoints with no extra configuration.
+- **Streaming** — Chat generation supports server-sent events with no extra configuration.
+- **Embeddings** — Generate vectors for semantic search.
 
 ## Availability
 
@@ -101,7 +104,7 @@ When `aiGateway` is enabled, Neon injects the gateway credentials as **Neon-bran
 
 | Variable                   | Meaning                                                                                                                             |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `NEON_AI_GATEWAY_TOKEN`    | Gateway bearer token (a Neon credential, `nt_live_...`)                                                                              |
+| `NEON_AI_GATEWAY_TOKEN`    | Gateway bearer token (a Neon credential, `nt_live_...`)                                                                             |
 | `NEON_AI_GATEWAY_BASE_URL` | **Bare branch gateway host** (`scheme://host`, **no path** — no `/ai-gateway`): `https://<branch-id>-api.ai.<region>.aws.neon.tech` |
 
 > Neon injects **only** these two vars — it does **not** set `OPENAI_API_KEY` / `OPENAI_BASE_URL`. The `@neon/ai-sdk-provider` and Mastra's `neon/<model>` read `NEON_AI_GATEWAY_*` directly (zero config); for the plain OpenAI SDK / `@ai-sdk/openai`, build the client's `apiKey` + `baseURL` from them (shown below), or set your own `OPENAI_*` by hand (`env pull` leaves user-set vars untouched).
@@ -176,6 +179,31 @@ const { text } = await generateText({
 ```
 
 For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, image generation, persistence), see the `neon-functions` skill's [references/ai-sdk.md](https://neon.com/docs/ai/skills/neon-functions/references/ai-sdk.md).
+
+## Generate Embeddings with the AI SDK
+
+Use `@neon/ai-sdk-provider` 1.0.0+ with AI SDK 6+ for embedding calls. `neon.embeddingModel()` reads the same injected gateway variables as the language models:
+
+```typescript
+import { neon } from "@neon/ai-sdk-provider";
+import { embed, embedMany } from "ai";
+
+const model = neon.embeddingModel("qwen3-embedding-0-6b");
+const providerOptions = { neon: { dimensions: 1024 } };
+const { embeddings } = await embedMany({
+  model,
+  values: documentBodies, // unprefixed document text
+  providerOptions,
+  maxParallelCalls: 1,
+});
+const { embedding } = await embed({
+  model,
+  value: `Instruct: Given a question about Neon, retrieve documentation passages that answer the question\nQuery: ${queryText}`,
+  providerOptions,
+});
+```
+
+The query instruction is specific to Qwen3 and Neon documentation search; adapt it to the corpus. Documents stay unprefixed. Keep the same model and dimensions for documents and queries, and keep the original query text for BM25. For schema, storage, batch limits, and an OpenAI SDK alternative, follow the `neon-postgres` skill's [vector search guide](https://neon.com/docs/ai/skills/neon-postgres/references/vector-search.md).
 
 ## Build Agents with Mastra (Recommended)
 
@@ -261,6 +289,7 @@ Any Neon credential (`nt_live_...`) valid for the branch works as the bearer tok
 
 **Response shape** — OpenAI/OpenRouter-compatible list:
 
+<!-- prettier-ignore -->
 ```jsonc
 {
   "object": "list",
