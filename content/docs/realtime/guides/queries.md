@@ -463,17 +463,17 @@ The `validator()` middleware checks the JSON body before the handler runs and ty
 
 If you're using a framework that supports [server functions](https://react.dev/reference/rsc/server-functions), you can return the `sealedQuery` from one. For example, with [TanStack Start](../examples/tanstack) you can [create a server function](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions).
 
-The server function reads the session from the Neon Auth cookie with a server-only `sessionMiddleware`. The [SSR guide](./ssr#send-both-to-the-browser) sets it up. The server function then seals the query for `context.user.id`:
+The server function reads the session from the Neon Auth cookie with `requireUser`, a server-only middleware. The [SSR guide](./ssr#send-both-to-the-browser) sets it up. The server function then seals the query for `context.user.id`:
 
 ```ts filename="src/server-functions.ts"
 import { createServerFn } from "@tanstack/react-start"
 
 import { messagesQuery } from "./backend/queries"
 import { realtime } from "./backend/realtime"
-import { sessionMiddleware } from "./session-middleware"
+import { requireUser } from "./session-middleware"
 
 export const sealMessages = createServerFn({ method: "POST" })
-  .middleware([sessionMiddleware])
+  .middleware([requireUser])
   .validator((data: { channelId: number }) => {
     if (!Number.isInteger(data.channelId)) {
       throw new Error("channelId must be an integer")
