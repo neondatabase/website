@@ -79,7 +79,7 @@ neon psql -- -c "CREATE TABLE items (id UUID PRIMARY KEY DEFAULT gen_random_uuid
 neon psql -- -c "INSERT INTO items (value) VALUES ('foo')"
 ```
 
-Then use [`neon realtime subscribe`](/docs/cli/subscribe) to start a live query:
+Then use [`neon realtime subscribe`](/docs/cli/realtime#subscribe) to start a live query:
 
 ```bash filename="Terminal"
 neon realtime subscribe "SELECT * FROM items"
@@ -97,7 +97,7 @@ By default, `neon realtime subscribe` prints the full query result every time it
 neon realtime subscribe --changes "SELECT * FROM items"
 ```
 
-See [`neon realtime subscribe`](/docs/cli/subscribe) for JSON output and the other options.
+See [`neon realtime subscribe`](/docs/cli/realtime#subscribe) for JSON output and the other options.
 
 </Steps>
 
