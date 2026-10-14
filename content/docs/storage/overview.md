@@ -63,6 +63,40 @@ Neon Object Storage is file storage built into your Neon project, reached throug
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
 - **Event-driven.** Run a function when an object is uploaded with [Function Triggers](/docs/compute/functions/triggers/object-storage).
 
+## Starter templates
+
+The [examples repository](https://github.com/neondatabase/examples) includes templates that use Neon Object Storage. Each declares its bucket in `neon.ts` and provisions it with `neon deploy`, which also injects the S3 credentials, so there are no secrets to copy. A couple to start with:
+
+[files-sdk](https://github.com/neondatabase/examples/tree/main/with-files-sdk) is a standalone script that uploads local files to a `public_read` bucket with the [Files SDK](https://files-sdk.dev) and its `neon` adapter, then prints presigned URLs. A minimal example of the storage API on its own:
+
+```bash
+neon bootstrap --template files-sdk
+```
+
+[ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) is a chat agent on a Neon Function that generates images, stores each one in a private bucket with the AWS S3 SDK, records its key and metadata in Postgres, and serves it back through a presigned URL. Shows object storage and the database branching together:
+
+```bash
+neon bootstrap --template ai-sdk
+```
+
+## Limits
+
+The following limits apply:
+
+| Limit                    | Value                                                                                                          |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| Object size (maximum)    | 5 GiB, whether uploaded in a single request or with [multipart upload](/docs/storage/objects#multipart-upload) |
+| Free plan object storage | 5 GB per project ([rates](/docs/introduction/plans#object-storage))                                            |
+
+Two limits are behavioral rather than fixed numbers:
+
+- **Region**: object storage is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward all regions.
+- **Rate limiting**: requests may be throttled during heavy use, returning a `503 SlowDown` response. Back off and retry. See [Connection and performance errors](/docs/storage/troubleshooting#connection-and-performance-errors).
+
 To see how much Object Storage your project uses, check the **Object storage** row in the **Project** panel on your branch's **Overview** page. The value covers all branches in the project.
+
+Storage-volume limits apply to the Free plan only. Paid plans have no fixed limit on total storage or number of objects; storage is metered per GB (see [plans and pricing](/docs/introduction/plans#object-storage)). For large objects, use [multipart upload](/docs/storage/objects#multipart-upload), which AWS recommends for anything over 100 MB.
+
+For S3 API and feature limitations (as opposed to usage limits), see [Known limitations](/docs/storage/s3-compatibility#known-limitations).
 
 <NeedHelp/>
