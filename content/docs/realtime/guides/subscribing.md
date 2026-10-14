@@ -416,7 +416,7 @@ A subscription never leaves `error` by itself, and `renew()` can't bring it back
 
 Errors stay with their own subscription. A row that fails to decode, for example, puts only its own subscription into `error`, and the others on the client carry on.
 
-If the connection itself fails, for example because of a fatal protocol error or a transaction that's larger than the client's 16 MiB limit, every subscription on the client moves to `error` at once and the client can't reconnect. Create a new client with `createRealtimeClient()` before you subscribe again.
+If the connection itself fails, for example because of a fatal protocol error, every subscription on the client moves to `error` at once and the client can't reconnect. Create a new client with `createRealtimeClient()` before you subscribe again.
 
 ## Debug subscriptions
 
