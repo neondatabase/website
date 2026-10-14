@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-06-10T15:22:41.769Z'
+updatedOn: '2026-10-14T18:31:47.915Z'
 ---
 
 <InfoBlock>
@@ -66,7 +66,7 @@ If you are unable to update your payment method, please [contact support](/docs/
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. You can also pay an outstanding invoice manually at any time from **View/Pay invoices** (see [Pay an invoice](#pay-an-invoice)). Late fees and payment policies are described in the [Neon Platform Terms](/platform-terms).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. You can also pay an outstanding invoice manually at any time from **View/Pay invoices** (see [Pay an invoice](#pay-an-invoice)). Late fees and payment policies are described in the [Product Specific Schedule (Neon)](/platform-terms).
 
 ### Failing payments for Indian customers
 

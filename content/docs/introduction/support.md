@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-10-10T11:06:03.886Z'
+updatedOn: '2026-10-14T18:31:47.915Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
@@ -97,7 +97,7 @@ A dedicated engineer can develop in-depth knowledge of your systems, leading to 
 
 Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in the [Neon Platform Terms](/platform-terms).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in the [Product Specific Schedule (Neon)](/platform-terms).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
@@ -134,7 +134,7 @@ Customers on a legacy Enterprise plan can view support plan details in the follo
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in the [Neon Platform Terms](/platform-terms).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in the [Product Specific Schedule (Neon)](/platform-terms).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
