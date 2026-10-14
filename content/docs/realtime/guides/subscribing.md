@@ -59,7 +59,7 @@ Never fill a direct subscription's parameters from untrusted input.
 
 The direct server renews its own sealed queries and recovers from outages until you close the subscription or it moves to `error`. An error is final, so a long-running worker should watch for it with `onStateChange` and subscribe again. `realtime.close()` closes every subscription and the shared WebSocket. The direct server opens its WebSocket with the `ws` package, which you installed in [setup](./queries#setup), even on Node.js 22 and later.
 
-Use direct subscriptions for workers, trusted agents and server-side fan-out. The [Mastra example](../examples/mastra) uses them to drive agent workflows.
+Use direct subscriptions for workers, trusted agents and server-side fan-out.
 
 ### Fetch from an API endpoint
 
