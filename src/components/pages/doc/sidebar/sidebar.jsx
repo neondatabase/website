@@ -61,9 +61,12 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
 
   const routePath = `/${currentSlug.replace(/^\/+/, '')}`;
   const isGuidesRoute = /^\/guides(?:\/|$)/.test(routePath);
-  const hasBorder = !isGuidesRoute;
 
-  if (isChangelogIndex || (!menu && !sdkTOC)) {
+  // Community pages still use the empty sidebar column for their desktop alignment.
+  const isCommunityRoute = /^\/(?:faqs|guides)(?:\/|$)/.test(pathname);
+  const hasBorder = !isGuidesRoute && !isCommunityRoute;
+
+  if (isChangelogIndex || (!menu && !sdkTOC && !isCommunityRoute)) {
     return null;
   }
 
