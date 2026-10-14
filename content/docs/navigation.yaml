@@ -907,6 +907,8 @@
               slug: storage/objects
             - title: Authentication
               slug: storage/authentication
+            - title: Serve through a CDN
+              slug: storage/cdn-cloudflare
             - title: Logs
               slug: storage/logs
         - section: Reference
