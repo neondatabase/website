@@ -105,14 +105,16 @@ import { Pool } from "pg"
 
 import type { Database } from "./schema"
 
-export const db = new Kysely<Database>({
-  dialect: new PostgresDialect({
-    pool: new Pool({
-      // Neon URLs say sslmode=require. Asking pg for verify-full keeps today's checks and skips its warning
-      connectionString: process.env.DATABASE_URL!.replace("sslmode=require", "sslmode=verify-full")
-    })
-  })
+const pool = new Pool({
+  // Neon URLs say sslmode=require. Asking pg for verify-full keeps today's checks and skips its warning
+  connectionString: process.env.DATABASE_URL!.replace("sslmode=require", "sslmode=verify-full")
 })
+export const db = new Kysely<Database>({
+  dialect: new PostgresDialect({ pool })
+})
+
+// So an idle connection error, for example when the compute scales to zero, doesn't crash the API
+pool.on("error", (error: Error) => console.error(error))
 ```
 
 ### Define the live query
