@@ -4,7 +4,6 @@ subtitle: 'Using Realtime with Mastra to keep users and agents in sync.'
 summary: >-
   Use Mastra with Neon Realtime: start agents from your writes, store their memory and traces in Postgres, sync them to the browser and restart them when users edit.
 enableTableOfContents: true
-isDraft: true
 ---
 
 To Realtime, a [Mastra](https://mastra.ai) agent is one more writer on your data. This example [triggers agents when users write data](#start-agents-from-your-writes) and [syncs agent activity](#sync-agent-activity-to-the-browser) and [agent sessions](#store-mastras-data-in-your-database) through the database.
@@ -12,9 +11,6 @@ To Realtime, a [Mastra](https://mastra.ai) agent is one more writer on your data
 <Admonition type="tip" title="Full example on GitHub">
 The complete app is in the [`thruflo/livebase`](https://github.com/thruflo/livebase) repository.
 </Admonition>
-
-{// Video
-}
 
 ## Store Mastra's data in your database
 
