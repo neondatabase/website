@@ -11,12 +11,12 @@ summary: >-
   organizations, inviting and removing members, and checking role permissions
   client-side.
 enableTableOfContents: true
-updatedOn: '2026-10-14T10:50:40.535Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
-<Admonition type="note" title="Preview Feature">
+<Admonition type="note" title="Beta">
 The Organization plugin is currently in **beta**. Support for JWT token claims is available.
 </Admonition>
 

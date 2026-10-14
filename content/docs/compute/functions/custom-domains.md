@@ -7,7 +7,10 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/custom-domains
+tag: beta
 ---
+
+<FeatureBetaProps feature_name="Custom domains for Neon Functions" />
 
 Each Neon Function has a native invocation URL. You can also serve it from a
 domain you own, such as `api.example.com`. Neon routes the custom domain to one

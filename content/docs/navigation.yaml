@@ -138,6 +138,7 @@
           items:
             - title: Import Data Assistant
               slug: import/import-data-assistant
+              tag: beta
             - title: pg_dump / pg_restore
               slug: import/migrate-from-postgres
             - title: pgcopydb
@@ -851,6 +852,7 @@
           slug: compute/functions/deploy
         - title: Custom domains
           slug: compute/functions/custom-domains
+          tag: beta
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
