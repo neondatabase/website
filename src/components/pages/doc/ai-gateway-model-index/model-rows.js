@@ -75,8 +75,9 @@ const isImageCapable = (capability) =>
 // embedding model while unmeasured — it just has no known-working endpoint yet (see
 // `deriveEndpoints`, which stays capability-gated).
 const isEmbedding = (model) => model?.type === 'embedding';
-// A System One judge: scores answers, generates no text, so it has no inputs/context/output price.
-const isJudge = (model) => model?.type === 'judge';
+// A System One decision model answers questions, generates no text, so it has no
+// inputs/context/output price.
+const isDecision = (model) => model?.type === 'decision';
 
 // The gateway routes a model reaches. Conveyed to users mainly through the
 // quickstart snippet's base URL; surfaced here for the markdown mirror.
@@ -125,7 +126,7 @@ const toRow = (model, capability) => {
     endpoints: deriveEndpoints(capability),
     isImageCapable: isImageCapable(capability),
     isEmbedding: isEmbedding(model),
-    isJudge: isJudge(model),
+    isDecision: isDecision(model),
     dimensions: model.dimensions,
     hasMeasuredCapabilities: Boolean(capability),
   };
@@ -178,7 +179,7 @@ module.exports = {
   formatDate,
   isImageCapable,
   isEmbedding,
-  isJudge,
+  isDecision,
   deriveEndpoints,
   toRow,
   buildRows,

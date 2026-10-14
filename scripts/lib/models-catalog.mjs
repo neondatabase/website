@@ -76,11 +76,12 @@ const EMBEDDING_REQUIRED_KEYS = [
   'last_updated',
 ];
 /**
- * `type: "judge"` (a System One model: takes a state and questions, returns scored answers) is
- * likewise its own shape: no chat fields or limits, input-only billing, and no `dimensions`.
+ * `type: "decision"` (a System One model: takes a state and questions, returns a choice, a
+ * probability, or a score per question) is likewise its own shape: no chat fields or limits,
+ * input-only billing, and no `dimensions`.
  */
-const JUDGE_REQUIRED_KEYS = EMBEDDING_REQUIRED_KEYS.filter((key) => key !== 'dimensions');
-const MODEL_TYPES = new Set(['embedding', 'judge']);
+const DECISION_REQUIRED_KEYS = EMBEDDING_REQUIRED_KEYS.filter((key) => key !== 'dimensions');
+const MODEL_TYPES = new Set(['embedding', 'decision']);
 /**
  * These strings are interpolated into the MDX of each model's detail page, where `{…}` is
  * evaluated as JavaScript at build time and `<…>` as JSX. The build-time refresh takes them from
@@ -209,8 +210,8 @@ export function classifyDrift(website, modelsDev) {
  * on `/v1/embeddings` has no reasoning, tool calls, attachments, or generation limit to report,
  * and `dimensions` (the vector length) is the fact that actually describes it.
  *
- * `type: "judge"` (see `JUDGE_REQUIRED_KEYS`) is the same idea without `dimensions`: a judge
- * generates no text, so it has no chat fields or limits and is billed on input only.
+ * `type: "decision"` (see `DECISION_REQUIRED_KEYS`) is the same idea without `dimensions`: a
+ * decision model generates no text, so it has no chat fields or limits and is billed on input only.
  */
 export function validateCatalog(data) {
   const errors = [];
@@ -247,11 +248,11 @@ export function validateCatalog(data) {
       fail(`${at('type')} must be one of ${[...MODEL_TYPES].join(', ')}`);
     }
     const isEmbedding = model.type === 'embedding';
-    const isJudge = model.type === 'judge';
+    const isDecision = model.type === 'decision';
     const requiredKeys = isEmbedding
       ? EMBEDDING_REQUIRED_KEYS
-      : isJudge
-        ? JUDGE_REQUIRED_KEYS
+      : isDecision
+        ? DECISION_REQUIRED_KEYS
         : REQUIRED_KEYS;
     for (const field of requiredKeys) {
       if (model[field] === undefined) fail(`${at(field)} is missing`);
@@ -326,10 +327,10 @@ export function validateCatalog(data) {
     }
 
     if (model.cost !== undefined) {
-      // Embedding and judge billing is input-only — there is no completion to charge for, so
+      // Embedding and decision billing is input-only — there is no completion to charge for, so
       // unlike a chat model, their `cost` block is not missing an `output` rate; it never had one.
       errors.push(
-        ...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding && !isJudge })
+        ...costErrors(model.cost, at('cost'), { requireRates: !isEmbedding && !isDecision })
       );
     }
 

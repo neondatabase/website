@@ -91,14 +91,14 @@ describe('AI Gateway model rows', () => {
     expect(row.endpoints).toEqual([]);
   });
 
-  it('classifies a judge model from the catalog, with no inputs, context or output price', () => {
+  it('classifies a decision model from the catalog, with no inputs, context or output price', () => {
     const [row] = buildRows(
       {
         models: {
-          'example-judge': {
-            id: 'example-judge',
-            name: 'Example Judge',
-            type: 'judge',
+          'example-decision': {
+            id: 'example-decision',
+            name: 'Example Decision',
+            type: 'decision',
             cost: { input: 0.1 },
           },
         },
@@ -106,7 +106,7 @@ describe('AI Gateway model rows', () => {
       { models: [] }
     );
 
-    expect(row.isJudge).toBe(true);
+    expect(row.isDecision).toBe(true);
     expect(row.isEmbedding).toBe(false);
     expect(row.inputs).toEqual([]);
     expect(row.costInputLabel).toBe('$0.10');

@@ -45,13 +45,13 @@ const embeddingModel = (over = {}) => ({
   ...over,
 });
 
-const judgeModel = (over = {}) => ({
+const decisionModel = (over = {}) => ({
   id: 'a',
   name: 'A',
   provider: 'example',
-  family: 'judge',
+  family: 'decision',
   released: true,
-  type: 'judge',
+  type: 'decision',
   open_weights: true,
   release_date: '2026-01-01',
   last_updated: '2026-01-01',
@@ -510,19 +510,19 @@ describe('validateCatalog', () => {
     });
   });
 
-  describe('type: "judge"', () => {
-    it('accepts a judge with input-only cost and no chat fields, limits or dimensions', () => {
-      expect(validateCatalog(catalog({ a: judgeModel() }))).toEqual([]);
+  describe('type: "decision"', () => {
+    it('accepts a decision model with input-only cost and no chat fields, limits or dimensions', () => {
+      expect(validateCatalog(catalog({ a: decisionModel() }))).toEqual([]);
     });
 
     it('still rejects an empty cost block', () => {
-      expect(validateCatalog(catalog({ a: judgeModel({ cost: {} }) }))).toEqual([
+      expect(validateCatalog(catalog({ a: decisionModel({ cost: {} }) }))).toEqual([
         expect.stringContaining('needs an input rate'),
       ]);
     });
 
     it('requires the identifying fields', () => {
-      const { open_weights: _openWeights, ...without } = judgeModel();
+      const { open_weights: _openWeights, ...without } = decisionModel();
       expect(validateCatalog(catalog({ a: without }))).toEqual([
         expect.stringContaining('a.open_weights is missing'),
       ]);
