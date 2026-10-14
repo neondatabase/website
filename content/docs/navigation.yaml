@@ -852,6 +852,7 @@
           slug: compute/functions/deploy
         - title: Custom domains
           slug: compute/functions/custom-domains
+          tag: beta
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
