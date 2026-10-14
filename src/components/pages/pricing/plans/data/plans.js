@@ -183,13 +183,13 @@ export default {
           {
             title: 'Compute',
             details: [
-              `${functions.free.activeCapacityHours} active capacity-hours`,
-              `${functions.free.waitingCapacityHours} waiting capacity-hours`,
+              `${functions.free.activeCapacityHours} active capacity-hours per project`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours per project`,
             ],
           },
           {
             title: 'Invocations',
-            details: [`${functions.free.invocations} invocations`],
+            details: [`${functions.free.invocations} invocations per project`],
           },
         ],
       },
@@ -231,9 +231,9 @@ export default {
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
     },
     {
       rows: '1',

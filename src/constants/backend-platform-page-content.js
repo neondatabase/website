@@ -137,7 +137,7 @@ const functionsPageContent = {
     {
       question: 'Is there a free allowance for Functions?',
       answer:
-        '<p>The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month. Custom domains and triggers are part of Functions and don&apos;t carry a separate charge.</p>',
+        '<p>The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month. Custom domains and triggers are part of Functions and don&apos;t carry a separate charge.</p>',
     },
     {
       question: 'Which languages and runtimes do Functions support?',
@@ -235,7 +235,7 @@ const aiGatewayPageContent = {
     {
       question: 'Which models can I call?',
       answer:
-        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/models#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
+        '<p>AI Gateway includes frontier and open-weight models from Anthropic, OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, Thinking Machines, and others. The catalog changes as models are added or retired, and availability can vary by region. Check the <a href="/docs/ai-gateway/overview#available-models">live model catalog</a> for current models, prices, and supported endpoints.</p>',
     },
     {
       question: 'What is the difference between Neon AI Gateway and Databricks Unity AI Gateway?',
@@ -265,12 +265,12 @@ const aiGatewayPageContent = {
     {
       question: 'Who can use AI Gateway after GA?',
       answer:
-        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Model access can also depend on region, availability, and any verification required by provider policies.</p>',
+        '<p>AI Gateway is available on the Neon Launch and Scale plans. Both plans have the same AI Gateway pricing. You need prepaid AI Gateway credits before you can make inference requests. Any paid account with prepaid credits can use every model in the catalog, subject to regional availability.</p>',
     },
     {
       question: 'How does AI Gateway pricing work?',
       answer:
-        '<p>Inference is billed per token at the published rate for each model, with no additional Neon markup. One AI Gateway credit equals $1 USD. The minimum credit purchase is $5, and purchased credits are valid for 12 months. Check the <a href="/docs/ai-gateway/models#available-models">model catalog</a> for current per-model rates.</p>',
+        '<p>Inference is billed per token at the published rate for each model, with no additional Neon markup. One AI Gateway credit equals $1 USD. The minimum credit purchase is $5, and purchased credits are valid for 12 months. Check the <a href="/docs/ai-gateway/overview#available-models">model catalog</a> for current per-model rates.</p>',
     },
     {
       question: 'What are the rate limits?',
@@ -300,7 +300,7 @@ const aiGatewayPageContent = {
     {
       question: "Why can't I access a model in the catalog?",
       answer:
-        '<p>Model access can vary by region and account. Proprietary models may require account verification to meet provider requirements. Use the authenticated <code>GET /v1/models</code> endpoint and check for <code>enabled: true</code> to see which models your account can call.</p>',
+        '<p>Model availability can vary by region, and the catalog changes as models are added or retired. Use the authenticated <code>GET /v1/models</code> endpoint to see the models available to you.</p>',
     },
   ],
 };

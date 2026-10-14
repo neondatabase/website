@@ -66,7 +66,7 @@ Managed Better Auth is a **managed authentication service** that stores users, s
 
 When you use Managed Better Auth, your authentication data is stored in your database on Neon under [the `neon_auth` schema](/docs/auth/overview). This makes all auth state accessible with standard SQL queries, and fully compatible with patterns like [Row Level Security](/docs/guides/row-level-security). Because the auth data lives alongside your application data, branching a Neon database [also branches the auth state](/docs/auth/branching-authentication). Preview environments and end-to-end authentication tests behave just like your production setup.
 
-Managed Better Auth builds on Better Auth, so if you’ve worked with Better Auth before, many of the APIs and overall concepts will feel familiar. Unlike running your own instance of Better Auth, [Managed Better Auth is a managed service](/docs/auth/overview#when-to-use-managed-better-auth-vs-self-hosting-better-auth). Your app communicates with it using SDKs provided by Neon, so you don’t have to host or operate your own authentication service.
+Managed Better Auth builds on Better Auth, so if you’ve worked with Better Auth before, many of the APIs and overall concepts will feel familiar. Unlike running your own instance of Better Auth, [Managed Better Auth is a managed service](/docs/auth/about#when-to-use-managed-better-auth-vs-self-hosting-better-auth). Your app communicates with it using SDKs provided by Neon, so you don’t have to host or operate your own authentication service.
 
 Below is a basic example of how you might set up Managed Better Auth in a Next.js application using the [Managed Better Auth SDK](/docs/reference/javascript-sdk):
 

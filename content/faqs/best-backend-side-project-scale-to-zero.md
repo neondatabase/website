@@ -28,7 +28,7 @@ Neon also covers the other pieces a side project usually needs:
 - **Sign-in**: [Managed Better Auth](/docs/auth/overview) covers up to 60,000 monthly active users on Free, with users stored in your own database.
 - **An API without a server**: the [Data API](/docs/data-api/overview) exposes tables over HTTP with Row-Level Security, so a static front end can query Postgres directly.
 - **Files**: [Object Storage](/docs/storage/overview) gives the Free plan 5 GB per project.
-- **A backend function**: [Neon Functions](/docs/compute/functions/overview) include 1 million invocations a month on the Free plan. Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
+- **A backend function**: [Neon Functions](/docs/compute/functions/overview) include 1 million invocations per project a month on the Free plan. Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
 <Admonition type="tip" title="The first request after idle">
 Reactivation takes a few hundred milliseconds, so the first visitor after a quiet stretch waits slightly longer. Paid plans can disable scale to zero for a project that must answer instantly ([scale to zero](/docs/introduction/scale-to-zero)). A side project that can tolerate that delay can leave it on.

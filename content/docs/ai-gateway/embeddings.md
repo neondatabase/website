@@ -7,7 +7,7 @@ summary: >-
   gte-large-en, both 1024-dimensional, with the same Neon credential you use for
   chat completions.
 enableTableOfContents: true
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-10-02T13:49:53.586Z'
 ---
 
 Embeddings turn text into vectors that capture meaning, so you can match text by what it means rather than by the exact words. They power semantic search, recommendations, clustering, and retrieval-augmented generation (RAG).
@@ -117,6 +117,24 @@ The response is OpenAI-compatible: a list of embedding objects, one per input, e
 ```
 
 The `model` field reports the resolved, versioned name that served the request (`qwen3-embedding-0-6b-112025` here), which is handy for logging. Keep sending the short model ID (`qwen3-embedding-0-6b` or `gte-large-en`) in your requests.
+
+## Use with the Vercel AI SDK
+
+For TypeScript apps and agents, [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) exposes the gateway's embedding models to the [Vercel AI SDK](https://ai-sdk.dev). It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` (the same variables from [Setup](#setup)), so no extra configuration is needed. Install it with `npm install @neon/ai-sdk-provider ai`.
+
+```typescript shouldWrap
+import { neon } from '@neon/ai-sdk-provider';
+import { embed } from 'ai';
+
+const { embedding } = await embed({
+  model: neon.embeddingModel('qwen3-embedding-0-6b'),
+  value: 'The quick brown fox jumps over the lazy dog.',
+});
+
+console.log(embedding.length); // 1024
+```
+
+Use `embedMany()` to embed a batch in one call. The gateway accepts up to 150 inputs per request (see [Batch input](#batch-input)).
 
 ## Batch input
 

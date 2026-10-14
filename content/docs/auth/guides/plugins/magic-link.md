@@ -11,7 +11,7 @@ summary: >-
   event (`send.magic_link`) to bypass the built-in mailer and deliver links
   through a custom email provider.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T09:36:23.504Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for the [Magic Link](https://www.better-auth.com/docs/plugins/magic-link) plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Magic Link plugin.
@@ -34,13 +34,11 @@ Magic Link lets users sign in by clicking a link sent to their email. No passwor
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech).
-2. Select your project and go to **Auth** > **Plugins**.
-3. Toggle **Magic Link** on.
+2. Select your project and go to **Settings** > **Better Auth**.
+3. In the **Magic Link** section, toggle **Enable Magic Link** on.
 4. Configure the options:
    - **Link Expiration** (5-1440 minutes, default: 5) controls how long a magic link stays valid.
    - **Allow New User Registration** controls whether magic links can be used to create new accounts. When off, magic links only work for existing users.
-
-![Neon Console Auth Plugins tab with Magic Link settings](/docs/auth/neon_auth_plugins_magic_link.png)
 
 </TabItem>
 

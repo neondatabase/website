@@ -9,14 +9,14 @@ summary: >-
   subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams. Routine
   maintenance and compute updates are not posted here.
 enableTableOfContents: true
-updatedOn: '2026-07-22T13:21:50.559Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Real-time uptime and incident status live on the Neon status page, not on this page. Open it to see current platform status and bookmark it for quick access during incidents.
 
 <CTA title="Check live Neon status" description="View real-time uptime and incident status for all Neon platform components." buttonText="Open status page" buttonUrl="https://neonstatus.com/" />
 
-To monitor the status for your specific Neon project, check the region where your project is located. You can find your project's region on the **Project Dashboard** in the Neon Console, in the **Project settings** widget.
+To monitor the status for your specific Neon project, check the region where your project is located. You can find your project's region on the **Overview** page in the Neon Console, in the **Project** panel.
 
 The Neon status page tracks the following components:
 

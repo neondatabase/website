@@ -14,7 +14,11 @@ const {
   isLikelyCommand,
   buildTopLevelCommands,
 } = require('../extract-examples.js');
-const { parseCommandFile, enumerateConstEntries, inheritParentOptions } = require('../generate-schema.js');
+const {
+  parseCommandFile,
+  enumerateConstEntries,
+  inheritParentOptions,
+} = require('../generate-schema.js');
 const { loadSchema, resolvePath, resolveValidOptions } = require('../schema.js');
 
 // Writes `source` to a temp .ts file and returns its path, for exercising the

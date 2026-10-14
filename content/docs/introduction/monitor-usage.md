@@ -12,14 +12,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 You can monitor usage and costs in the Neon Console or programmatically with the Neon API. For what each metric means and how it maps to your invoice, see [Usage metrics](/docs/introduction/plans#usage-metrics) and [Invoice metrics](/docs/introduction/plans#invoice-metrics) on the Plans page.
 
 ## View usage in the Neon Console
 
-Neon exposes usage in three places in the Console: the **Billing** page (account-level charges and plan summary), the **Projects** page (org-level usage metrics), and the **Project dashboard** (project-level usage metrics when you are inside a project).
+Neon exposes usage in three places in the Console: the **Billing** page (account-level charges and plan summary), the **Projects** page (org-level usage metrics), and the project's **Overview** page (project-level usage metrics when you are inside a project).
 
 ### Billing page
 
@@ -35,9 +35,9 @@ To open the Billing page:
 
 From the **Projects** page (Organization → **Projects**) you see an org-level summary of four metrics across all projects: **Compute**, **Storage**, **History**, and **Network transfer**.
 
-### Project dashboard
+### Project overview
 
-When you open a project, the **Project dashboard** (Project → **Dashboard**) shows the same four metrics for that project only: **Compute**, **Storage**, **History**, and **Network transfer**.
+When you open a project, the **Usage** panel on the **Overview** page shows the same four metrics for that project only: **Compute**, **Storage**, **History**, and **Network transfer**.
 
 Usage is shown since the start of the current billing period. Metrics may be delayed by about an hour and are not updated for inactive projects.
 

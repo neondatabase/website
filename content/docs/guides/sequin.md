@@ -12,7 +12,7 @@ summary: >-
   sets wal_level=logical, which is permanent and keeps compute active while
   consumers are connected.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
@@ -44,7 +44,7 @@ Enabling logical replication modifies the Postgres `wal_level` configuration par
 To enable logical replication:
 
 1. Select your project in the Neon Console.
-2. On the **Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
