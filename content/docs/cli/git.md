@@ -9,7 +9,7 @@ summary: >-
   (status), and prune stale branch mappings (cleanup).
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-09-26T07:10:22.076Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 The `git` command connects your git workflow to Neon branching. After you install its git hook, switching git branches with `git checkout` also checks out the Neon branch mapped to that git branch, so your application code and its database branch stay in sync. Under the hood it delegates to [`neon checkout`](/docs/cli/checkout) and records the git-to-Neon mapping in your local [context file](/docs/cli/link).
@@ -77,7 +77,9 @@ neon git sync --no-pull
 
 ```text filename="Output"
 Checked out branch br-billing-a1b2c3d4 on project polished-snowflake-12345678 (org org-example-12345678). Updated /path/to/your/app/.neon.
-Pulled 3 Neon variables into /path/to/your/app/.env.local: DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_BRANCH
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ```
 
 ## neon git cleanup (#cleanup)

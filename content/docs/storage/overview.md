@@ -7,6 +7,7 @@ summary: >-
   its own view of storage. Point an S3 SDK at your branch endpoint and
   authenticate with your Neon credential.
 enableTableOfContents: true
+updatedOn: '2026-10-09T10:41:50.089Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -61,5 +62,7 @@ Neon Object Storage is file storage built into your Neon project, reached throug
 - **S3-style access.** Point the AWS SDKs, boto3, the AWS CLI, or the [Files SDK](https://files-sdk.dev) at your branch endpoint. Neon implements a subset of the S3 API.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
 - **Event-driven.** Run a function when an object is uploaded with [Function Triggers](/docs/compute/functions/triggers/object-storage).
+
+To see how much Object Storage your project uses, check the **Object storage** row in the **Project** panel on your branch's **Overview** page. The value covers all branches in the project.
 
 <NeedHelp/>

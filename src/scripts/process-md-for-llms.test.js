@@ -67,7 +67,7 @@ describe('MDX to Markdown Conversion', () => {
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
-      expect(result).toContain('This feature is in Beta');
+      expect(result).toContain('This feature is in beta');
       expect(result).not.toContain('<FeatureBeta');
     });
 
@@ -117,8 +117,9 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should render both AI Gateway model groups with links to accurate quickstarts', async () => {
-      const inputPath = 'content/docs/ai-gateway/models.md';
-      const pageUrl = 'https://neon.com/docs/ai-gateway/models';
+      // The interactive catalog lives on the AI Gateway landing page (overview).
+      const inputPath = 'content/docs/ai-gateway/overview.md';
+      const pageUrl = 'https://neon.com/docs/ai-gateway/overview';
       const projectRoot = process.cwd();
 
       const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
@@ -843,9 +844,9 @@ See [CONN_MAX_AGE](https://example.com).
       expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
       expect(pgvectorEntry.sectionName).toBe('Postgres extensions');
 
-      // auth/overview appears in "Start with Neon" and the Auth section;
+      // auth/about appears in "Start with Neon" and the Auth section;
       // should prefer Auth section (siblings share auth/ prefix)
-      const authEntry = navMap.get('auth/overview');
+      const authEntry = navMap.get('auth/about');
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
       expect(authEntry.breadcrumbs).toContain('Auth');
@@ -1048,11 +1049,9 @@ See [CONN_MAX_AGE](https://example.com).
         'AgentSkillsTip',
         'MCPTools',
         'LinkAPIKey',
-        'LRNotice',
         'PrivatePreview',
         'PrivatePreviewEnquire',
         'PublicPreview',
-        'LRBeta',
         'MigrationAssistant',
         'NextSteps',
         'NewPricing',

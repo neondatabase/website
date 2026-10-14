@@ -30,7 +30,7 @@ neon open
 ```
 
 ```text
-INFO: Opening https://console.neon.tech/app/projects/cold-grass-40154007 in your browser.
+Opening https://console.neon.tech/app/projects/cold-grass-40154007 in your browser.
 ```
 
 Open a specific project without relying on the linked context:

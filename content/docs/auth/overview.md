@@ -15,20 +15,25 @@ redirectFrom:
   - /docs/neon-auth/overview
   - /docs/neon-auth/claim-project
   - /docs/neon-auth/create-users
-  - /docs/neon-auth/how-it-works
-  - /docs/neon-auth/best-practices
-  - /docs/neon-auth/concepts/backend-integration
-  - /docs/neon-auth/concepts/custom-user-data
   - /docs/guides/neon-auth-claim-project
-  - /docs/guides/neon-auth-how-it-works
-  - /docs/guides/neon-auth-best-practices
+layout: wide
+hideCopyPage: true
 ---
 
-Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-- **Identity lives in your database.** All authentication data is stored in the `neon_auth` schema, queryable with SQL and compatible with Row Level Security (RLS) policies.
-- **Zero server management.** It runs as a managed REST API service. Configure it in the Console and use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app.
-- **Auth that branches with your data.** Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Neon's managed Better Auth keeps your users and sessions in your own Postgres database, so your auth state branches with your data.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/auth-landing.md" buttonText="Copy prompt" />
+</div>
+
+<img
+  src="/docs/auth/hero-auth.svg"
+  alt="Neon's managed Better Auth stores users and sessions in auth tables inside your Postgres database, next to your tables."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
+
+</div>
 
 ## Quick start guides
 
@@ -44,123 +49,22 @@ Choose your framework to get started:
 
 </TechCards>
 
-## Set up with your AI editor
+## Explore Managed Better Auth
 
-<AuthAISetup />
+<DetailIconCards>
 
-## Built on Better Auth
+<a href="/docs/auth/about" description="How Neon's managed Better Auth works, when to use it instead of self-hosting, pricing, and availability." icon="lock-landscape">About Managed Better Auth</a>
 
-Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
+<a href="/docs/auth/branching-authentication" description="Every database branch gets its own isolated users, sessions, and auth configuration." icon="split-branch">Branching authentication</a>
 
-Managed Better Auth currently supports Better Auth version **1.4.18**.
+<a href="/docs/auth/authentication-flow" description="Follow a request from sign-in to session through the SDK and the auth service." icon="network">Authentication flow</a>
 
-### When to use Managed Better Auth vs. self-hosting Better Auth
+<a href="/docs/auth/guides/setup-oauth" description="Add Google, GitHub, and other OAuth providers to your app." icon="setup">Set up OAuth</a>
 
-Managed Better Auth is a managed authentication service built into Lakebase Postgres on Neon:
+<a href="/docs/auth/production-checklist" description="Check domains, email, and OAuth credentials before you go live." icon="todo">Production checklist</a>
 
-- **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
-- **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed Better Auth.
-- **No infrastructure to manage**: Managed Better Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
-- **Shared OAuth credentials for testing**: Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
+<a href="/docs/auth/roadmap" description="See which frameworks and Better Auth plugins are supported today." icon="research">Roadmap</a>
 
-Self-hosting Better Auth makes sense if you need:
-
-- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Managed Better Auth.
-- Full control over your auth code and the ability to run it inside your own infrastructure.
-
-For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
-
-As Managed Better Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
-
-## Basic usage
-
-Enable Auth in the Neon Console, from the terminal with [`neon neon-auth enable`](/docs/cli/neon-auth#enable) or declaratively with [`neon config add auth`](/docs/cli/config#add), or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
-
-**For Next.js (server-side):**
-
-See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
-
-```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/auth/next/server';
-
-export const auth = createNeonAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
-});
-```
-
-```typescript filename="app/api/auth/[...path]/route.ts"
-import { auth } from '@/lib/auth/server';
-
-export const { GET, POST } = auth.handler();
-```
-
-**For React/Vite (client-side):**
-
-See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Neon Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
-
-```typescript filename="src/auth.ts"
-import { createAuthClient } from '@neondatabase/neon-js/auth';
-
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
-```
-
-```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
-
-export default function App() {
-  return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" />
-    </NeonAuthUIProvider>
-  );
-}
-```
-
-## Use cases
-
-- **Production authentication**  
-  Use Managed Better Auth as the identity system for your app. Store users, sessions, and OAuth configuration directly in Postgres, and pair with RLS for secure, database-centric access control.
-
-- **Preview environments**  
-  Test full authentication flows in Vercel previews with real users and sessions
-
-- **Multi-tenant SaaS**  
-  Test complex org and role hierarchies safely in isolated branches
-
-- **CI/CD workflows**  
-  Run end-to-end auth tests without touching production. The [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action) supports retrieving branch-specific auth URLs for testing authentication flows in GitHub Actions workflows.
-
-- **Development workflows**  
-  Spin up complete environments instantly with database and auth together
-
-See [Branching authentication](/docs/auth/branching-authentication) for details on how auth branches with your database.
-
-## Example applications
-
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Managed Better Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
-
-## Availability
-
-Managed Better Auth is currently available for AWS regions only. Azure support is not yet available.
-
-Managed Better Auth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
-
-## Pricing
-
-Managed Better Auth is included in all Neon plans based on Monthly Active Users (MAU):
-
-- **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU
-- **Scale**: Up to 1M MAU
-
-An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, request an increase in the [console feedback form](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22).
-
-See [Neon plans](/docs/introduction/plans#auth) for more details.
-
-## Migration from Stack Auth
-
-If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
+</DetailIconCards>
 
 <NeedHelp/>

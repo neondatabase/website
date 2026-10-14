@@ -5,7 +5,7 @@ summary: >-
   connection strings, via the Console or API. The destination organization's
   plan must be the same tier or higher than the source.
 enableTableOfContents: true
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
 
 Move projects between organizations you belong to in the Neon Console or via the Neon API. You can also hand a project to a different Neon account with a claim link.
@@ -21,7 +21,7 @@ Before you transfer, review [Limits and requirements](#limits-and-requirements).
 <TabItem>
 
 1. Open the project's **Settings** page.
-2. Select **Transfer** from the sidebar.
+2. On the **General** tab, under **Transfer project**, select **Transfer project**.
 3. Choose the destination organization.
 
 ![transfer single project to another org](/docs/manage/transfer_project.png)

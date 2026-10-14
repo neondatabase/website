@@ -8,8 +8,10 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-02T11:22:16.421Z'
 ---
+
+_Looking for serverless functions on your Neon branch? See [Neon Functions](/docs/compute/functions/overview)._
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
 
