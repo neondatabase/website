@@ -277,6 +277,22 @@ Hidden content here.
       expect(result).not.toContain('<TechCards');
     });
 
+    it('should convert DemoCards to a list of demos with links', async () => {
+      const result = await processInlineMdx(`
+<DemoCards>
+<DemoCard title="1 Million Boxes" description="A multiplayer game." stack="Postgres, Realtime" demo="https://one-million-boxes.vercel.app" github="https://github.com/samwillis/one-million-boxes" image="/docs/realtime/examples/one-million-boxes.png" />
+<DemoCard title="Image jobs" description="Live image processing." github="https://github.com/msfstef/neon-realtime-image-jobs" />
+</DemoCards>
+`);
+      expect(result).toContain(
+        '- **1 Million Boxes**: A multiplayer game. Uses Postgres, Realtime. [Live demo](https://one-million-boxes.vercel.app) · [GitHub](https://github.com/samwillis/one-million-boxes)'
+      );
+      expect(result).toContain(
+        '- **Image jobs**: Live image processing. [GitHub](https://github.com/msfstef/neon-realtime-image-jobs)'
+      );
+      expect(result).not.toContain('<DemoCard');
+    });
+
     it('should extract InfoBlock children', async () => {
       const result = await processInlineMdx(`
 <InfoBlock>

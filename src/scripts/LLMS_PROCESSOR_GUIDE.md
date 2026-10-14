@@ -119,6 +119,7 @@ See existing handlers in the code for examples of each pattern.
 | Steps, InfoBlock, DefinitionList, TestimonialsWrapper, QuoteBlocksWrapper, FeatureList | Container -- extracts children                                                                   |
 | DetailIconCards                                                                        | Bullet list with links and descriptions                                                          |
 | TechCards                                                                              | Bullet list using `title` attribute (self-closing `<a>` elements)                                |
+| DemoCards/DemoCard                                                                     | Bullet list: **title**: description, stack, then Live demo and GitHub links                      |
 | DocsList                                                                               | Title + bullet list (handles nested `<a>` and `<p>`)                                             |
 | CheckList/CheckItem                                                                    | Heading + checkbox items (CheckList collects items into single list via `buildCheckItem` helper) |
 | ExternalCode                                                                           | Fetches from GitHub, wrapped in code block (5s timeout, 1 retry, graceful fallback)              |
