@@ -377,7 +377,7 @@ export function optimisticMessages(
 
 Each mutation leaves the overlay once its txid arrives, or once it fails. Either way, the list falls back to the synced rows, which by then either include the change or show that it didn't happen.
 
-Call `optimisticMessages()` with the subscription you created in the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) and a function that draws the list. It replaces `subscription.onChange(render)` from that guide, and passes the subscription's state through, so the page can show its status line as before. Call `mutate()` from your UI, with `newMessage()` for a send. It needs the signed-in user's id, which you read from the [Neon Auth](/docs/auth/overview) session, as `frontend/main.tsx` does in [render the app](#render-the-app). Show Edit and Delete only on the user's own messages, and disable them on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet. The routes still enforce authorship. Call `stop()` before you unsubscribe.
+Call `optimisticMessages()` with the subscription you created in the [subscribing guide](./subscribing#subscribe-to-the-sealed-query) and a function that draws the list. It replaces `subscription.onChange(render)` from that guide, and passes the subscription's state through, so the page can show its status line as before. Call `mutate()` from your UI, with `newMessage()` for a send. It needs the signed-in user's id, which you read from the [Managed Better Auth](/docs/auth/overview) session, as `frontend/main.tsx` does in [render the app](#render-the-app). Show Edit and Delete only on the user's own messages, and disable them on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet. The routes still enforce authorship. Call `stop()` before you unsubscribe.
 
 ### With React's `useOptimistic` hook
 
@@ -513,7 +513,7 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
 
 Edit and Delete show only on the user's own messages, and the routes still enforce authorship. They're disabled on pending messages, so you don't start a new change on a message whose last change isn't confirmed yet.
 
-In `frontend/Channel.tsx` from the [reactivity guide](./reactivity#changing-query-parameters), give `Channel` a `userId` prop and pass it to `Messages` with `channelId`. Read `userId` from the [Neon Auth](/docs/auth/overview) session where you render `Channel`, as `frontend/main.tsx` does in [render the app](#render-the-app):
+In `frontend/Channel.tsx` from the [reactivity guide](./reactivity#changing-query-parameters), give `Channel` a `userId` prop and pass it to `Messages` with `channelId`. Read `userId` from the [Managed Better Auth](/docs/auth/overview) session where you render `Channel`, as `frontend/main.tsx` does in [render the app](#render-the-app):
 
 ```tsx filename="frontend/Channel.tsx"
 // ...imports and useSealedQuery() as in the reactivity guide
@@ -685,7 +685,7 @@ export function Inbox({ messagesCollection, channelId, userId }: Props) {
 
 `$hasPendingWrites` is `true` while a row has a pending optimistic change, which disables its buttons, so you don't start a new change on a message whose last change isn't confirmed yet. Edit and Delete show only on the user's own messages, and the routes still enforce authorship. Each call returns a TanStack&nbsp;DB transaction, and its `when("settled")` promise rejects with the handler's error if the write fails and the change rolls back, so you can await it to show an error.
 
-An optimistic insert needs a whole `Message`, so the component also takes the signed-in user's id. It only fills in the optimistic row, because the server takes the author from the verified token. Read it from the [Neon Auth](/docs/auth/overview) session where the app creates the collection, as `frontend/main.tsx` does in [render the app](#render-the-app).
+An optimistic insert needs a whole `Message`, so the component also takes the signed-in user's id. It only fills in the optimistic row, because the server takes the author from the verified token. Read it from the [Managed Better Auth](/docs/auth/overview) session where the app creates the collection, as `frontend/main.tsx` does in [render the app](#render-the-app).
 
 The [TanStack example](../examples/tanstack) puts these handlers into a full app with server-side rendering, and the [Next.js example](../examples/nextjs) shows the React binding in a server-rendered app.
 

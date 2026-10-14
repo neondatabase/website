@@ -17,7 +17,7 @@ The guides all share one running example: a chat app where users read the messag
 <details>
   <summary>Setup steps</summary>
 
-Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose`, which validates [Neon Auth](/docs/auth/overview) tokens:
+Install [Drizzle](https://orm.drizzle.team) with the [node-postgres](https://node-postgres.com) driver (`pg`), [Hono](https://hono.dev), `ws`, and `jose`, which validates [Better Auth](/docs/auth/overview) tokens:
 
 ```bash filename="Terminal"
 npm install drizzle-orm pg hono jose ws
@@ -30,13 +30,13 @@ Install the Realtime [TypeScript&nbsp;SDK](../sdks/typescript) and its [Drizzle&
 npm install @neon/realtime @neon/realtime-drizzle
 ```
 
-Install [Neon Auth](/docs/auth/overview)'s client for the frontend:
+Install the [Managed Better Auth](/docs/auth/overview) client for the frontend:
 
 ```bash filename="Terminal"
 npm install @neondatabase/auth
 ```
 
-Add a `neon.ts` file that enables Neon Auth and [Realtime](../quickstart#enable-realtime) on your branch:
+Add a `neon.ts` file that enables Managed Better Auth and [Realtime](../quickstart#enable-realtime) on your branch:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1"
@@ -57,13 +57,13 @@ neon link
 neon deploy
 ```
 
-`neon deploy` enables Neon Auth and Realtime, waits until they're ready, and writes the four server variables below to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
+`neon deploy` enables Managed Better Auth and Realtime, waits until they're ready, and writes the four server variables below to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
 
 These are the environment variables on the server:
 
 - `DATABASE_URL`: your Lakebase Postgres [connection string](/docs/connect/connect-intro)
 - `NEON_REALTIME_SECRET`: the secret from the [Realtime page](../quickstart#enable-realtime) in the Neon Console
-- `NEON_AUTH_BASE_URL`: your [Neon Auth](/docs/auth/overview) URL
+- `NEON_AUTH_BASE_URL`: your [Managed Better Auth](/docs/auth/overview) URL
 - `NEON_REALTIME_URL`: the URL from the same Realtime page
 
 And these in the frontend, with the same values as `NEON_AUTH_BASE_URL` and `NEON_REALTIME_URL`:
@@ -372,13 +372,13 @@ There are two main ways to expose a [sealed](#sealing-queries), [authorized](#au
 
 These are both **request handlers**. They run in a trusted environment in your backend with [auth context available](#sealing-authorized-queries) from the request.
 
-With Vite and Hono, the browser's auth client talks to Neon Auth directly, so its session cookie never reaches your API. The browser sends the session's JWT as a bearer token, and the API verifies it. Next.js and TanStack Start mount Neon Auth on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Either way, the Realtime connection carries no user credential: the sealed query is the authorization.
+With Vite and Hono, the browser's auth client talks to Managed Better Auth directly, so its session cookie never reaches your API. The browser sends the session's JWT as a bearer token, and the API verifies it. Next.js and TanStack Start mount Managed Better Auth on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Either way, the Realtime connection carries no user credential: the sealed query is the authorization.
 
 ### Exposing an endpoint
 
 Expose the `sealedQuery` from an API endpoint, using any web framework.
 
-Our running example uses [Hono](https://hono.dev) and [Neon Auth](/docs/auth/overview). The client [sends its auth token](./subscribing#fetch-from-an-api-endpoint) in an `Authorization: Bearer` header. The JWT is verified against your [Neon Auth JWKS](/docs/auth/guides/plugins/jwt#verify-a-token) in a `requireUser` helper:
+Our running example uses [Hono](https://hono.dev) and [Managed Better Auth](/docs/auth/overview). The client [sends its auth token](./subscribing#fetch-from-an-api-endpoint) in an `Authorization: Bearer` header. The JWT is verified against your [Managed Better Auth JWKS](/docs/auth/guides/plugins/jwt#verify-a-token) in a `requireUser` helper:
 
 ```ts filename="backend/auth.ts"
 import type { Context } from "hono"
@@ -463,7 +463,7 @@ The `validator()` middleware checks the JSON body before the handler runs and ty
 
 If you're using a framework that supports [server functions](https://react.dev/reference/rsc/server-functions), you can return the `sealedQuery` from one. For example, with [TanStack Start](../examples/tanstack) you can [create a server function](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions).
 
-The server function reads the session from the Neon Auth cookie with `requireUser`, a server-only middleware. The [SSR guide](./ssr#send-both-to-the-browser) sets it up. The server function then seals the query for `context.user.id`:
+The server function reads the session from the Managed Better Auth cookie with `requireUser`, a server-only middleware. The [SSR guide](./ssr#send-both-to-the-browser) sets it up. The server function then seals the query for `context.user.id`:
 
 ```ts filename="src/server-functions.ts"
 import { createServerFn } from "@tanstack/react-start"

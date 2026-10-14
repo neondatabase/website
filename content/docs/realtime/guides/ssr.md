@@ -47,7 +47,7 @@ export async function loadMessagesPage(userId: string, channelId: number): Promi
 
 Both values are serializable, so they go into the hydration payload with the rest of the page's props or loader data. The framework serializes them into the HTML it sends, and the browser picks them up when it hydrates.
 
-For example with [Next.js](../examples/nextjs), call `loadMessagesPage()` from a Server Component and pass the results to a Client Component as props. `auth` is the Neon Auth server instance in `lib/auth/server.ts`, set up as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only). The page must render per request, because `auth.getSession()` [reads cookies](/docs/auth/troubleshooting#missing-force-dynamic-on-server-components), so it sets `force-dynamic`. If your app enables `cacheComponents`, remove the `dynamic` export and read the session inside a `<Suspense>` boundary instead.
+For example with [Next.js](../examples/nextjs), call `loadMessagesPage()` from a Server Component and pass the results to a Client Component as props. `auth` is the Managed Better Auth server instance in `lib/auth/server.ts`, set up as in the [Managed Better Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only). The page must render per request, because `auth.getSession()` [reads cookies](/docs/auth/troubleshooting#missing-force-dynamic-on-server-components), so it sets `force-dynamic`. If your app enables `cacheComponents`, remove the `dynamic` export and read the session inside a `<Suspense>` boundary instead.
 
 ```tsx filename="app/channels/[channelId]/page.tsx"
 import { notFound, redirect } from "next/navigation"
@@ -153,12 +153,12 @@ export async function POST(_request: Request, { params }: Context) {
 
 A server re-render, for example from `router.refresh()` or `revalidatePath()`, sends a new object for the same query. `useLiveQuery()` restarts on each new object, which rejects pending `awaitTxId()` calls. So `HydratedMessages` keeps the first sealed query, and renewals go through `refreshQuery`. Callers key it on `queryFingerprint`, so another channel or user remounts it.
 
-Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. Neon Auth's official TanStack&nbsp;Start adapter isn't out yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
+Or with [TanStack Start](../examples/tanstack), [create server functions](https://tanstack.com/start/latest/docs/framework/react/guide/server-functions) for the loader and the renewal. During SSR, a route loader needs the session from the request's cookies on the server. The official Managed Better Auth adapter for TanStack&nbsp;Start isn't out yet, so set up the session yourself. `requireUser` reads the cookie during SSR and for calls from the browser:
 
 <details>
-  <summary>Read the Neon Auth session in TanStack Start</summary>
+  <summary>Read the Managed Better Auth session in TanStack Start</summary>
 
-This setup is built on Neon Auth's beta server toolkit, `@neondatabase/auth/server`. Swap in the official adapter when it ships.
+This setup is built on the beta Managed Better Auth server toolkit, `@neondatabase/auth/server`. Swap in the official adapter when it ships.
 
 Create the auth server. It reads and sets the session cookies through TanStack&nbsp;Start's request helpers:
 
@@ -193,7 +193,7 @@ export const auth = createAuthServer({
 printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
 ```
 
-Mount Neon Auth's proxy at `/api/auth`, so the session cookie lives on your app's origin:
+Mount the Managed Better Auth proxy at `/api/auth`, so the session cookie lives on your app's origin:
 
 ```ts filename="src/routes/api/auth/$.ts"
 import { handleAuthProxyRequest } from "@neondatabase/auth/server"
@@ -262,7 +262,7 @@ export const Route = createRootRoute({
 })
 ```
 
-The redirects below go to the sign-in route from the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router), `src/routes/auth.$pathname.tsx`.
+The redirects below go to the sign-in route from the [Managed Better Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router), `src/routes/auth.$pathname.tsx`.
 
 Both server functions use `requireUser`, so they take the user from the session and only `channelId` from the request. The route's `beforeLoad` sends signed-out visitors to sign-in before the loader runs. The router reuses the component when only `$channelId` changes, so the route keys `HydratedMessages` on the query's fingerprint:
 
@@ -495,7 +495,7 @@ export function ChannelMessages({ channelId, userId, initialData, sealedQuery }:
 
 With TanStack&nbsp;Start, have the server functions also take a `userId`, and make `requireUser` throw when it isn't the session's user. Leave the same way when a write fails as signed out.
 
-Make sign-in and sign-out full page loads too. With Neon Auth's UI components, have the provider's `onSessionChange` call `window.location.assign("/")` and return a promise that never settles, so the components don't also navigate in the client.
+Make sign-in and sign-out full page loads too. With the Managed Better Auth UI components, have the provider's `onSessionChange` call `window.location.assign("/")` and return a promise that never settles, so the components don't also navigate in the client.
 
 ## With TanStack DB
 

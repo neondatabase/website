@@ -2,11 +2,11 @@
 title: 'TanStack example'
 subtitle: 'Full-stack example app using Realtime with TanStack.'
 summary: >-
-  Build a per-user todo app with TanStack Start, TanStack DB, Drizzle and Neon Auth on Neon Realtime: seal live queries in server functions, seed a Realtime collection in a route loader, and settle optimistic writes by txid.
+  Build a per-user todo app with TanStack Start, TanStack DB, Drizzle and Managed Better Auth on Neon Realtime: seal live queries in server functions, seed a Realtime collection in a route loader, and settle optimistic writes by txid.
 enableTableOfContents: true
 ---
 
-This example shows how to use Neon Realtime with [TanStack&nbsp;Start](https://tanstack.com/start), [TanStack&nbsp;DB](https://tanstack.com/db), Drizzle and Neon Auth, with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
+This example shows how to use Neon Realtime with [TanStack&nbsp;Start](https://tanstack.com/start), [TanStack&nbsp;DB](https://tanstack.com/db), Drizzle and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
 
 The sections follow the same order as the guides, from [defining](#defining-queries) and [sealing](#sealing-queries) queries to writing to them, and show the TanStack code for each step.
 
@@ -23,13 +23,13 @@ npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-tanstack
 npm install @tanstack/react-db @tanstack/react-router-with-db
 ```
 
-Add a `neon.ts` that enables Neon Auth and Realtime on your branch:
+Add a `neon.ts` that enables Managed Better Auth and Realtime on your branch:
 
 ```ts filename="neon.ts"
 import { defineConfig } from "@neon/config/v1"
 
 export default defineConfig({
-  // Neon Auth signs users in. Each user's todos are scoped by their user id.
+  // Managed Better Auth signs users in. Each user's todos are scoped by their user id.
   auth: true,
   preview: {
     realtime: {
@@ -43,7 +43,7 @@ export default defineConfig({
 
 Link the directory and run `neon deploy`, as in the [queries guide's setup](../guides/queries#setup). It writes `DATABASE_URL`, `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET` and `NEON_AUTH_BASE_URL` to `.env.local`. If Realtime isn't ready before the deploy stops waiting, run `neon env pull` once it is.
 
-Two more variables come from you. The browser needs the Realtime URL, and Vite only exposes variables that start with `VITE_`. Neon Auth's server SDK needs a cookie secret of at least 32 characters:
+Two more variables come from you. The browser needs the Realtime URL, and Vite only exposes variables that start with `VITE_`. The Managed Better Auth server SDK needs a cookie secret of at least 32 characters:
 
 ```bash filename="Terminal"
 echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
@@ -68,7 +68,7 @@ export const todos = pgTable(
   {
     // Generated in the browser, so an optimistic insert already has its key.
     id: uuid("id").primaryKey(),
-    // The Neon Auth user id. Set on the server only; never sent to the browser.
+    // The Managed Better Auth user id. Set on the server only; never sent to the browser.
     userId: text("user_id").notNull(),
     title: text("title").notNull(),
     completed: boolean("completed").notNull().default(false),
@@ -133,7 +133,7 @@ The `.server.ts` suffix keeps the file out of the browser bundle, as [the SSR gu
 
 ### Authorize with the session
 
-TanStack&nbsp;Start mounts [Neon Auth](/docs/auth/overview) on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Check the session in middleware, on the server, before you read, seal or write anything:
+TanStack&nbsp;Start mounts [Managed Better Auth](/docs/auth/overview) on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Check the session in middleware, on the server, before you read, seal or write anything:
 
 ```ts filename="src/auth/auth.functions.ts"
 import { createMiddleware } from "@tanstack/react-start"
@@ -158,7 +158,7 @@ export const requireUser = createMiddleware({ type: "function" })
 
 Every server function that reads, seals or writes todos uses `requireUser`. Signed out or signed in as someone else, it responds with a 401 and throws `UNAUTHENTICATED`, which the collection [handles in the browser](#define-the-collection). `sessionMiddleware`, in the same file, reads the session from the request's cookies, and `getSessionUser` gives the [route guards](#keep-signed-in-pages-private) the user or `null`.
 
-The rest of `src/auth/` is Neon Auth setup: the server, the `/api/auth` proxy, the browser client and the prebuilt sign-in UI, as in the [Neon Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router). `auth.server.ts` stands in for Neon Auth's TanStack&nbsp;Start adapter, which isn't out yet. The SSR guide [builds the same server](../guides/ssr#send-both-to-the-browser) in `src/backend/auth.ts`.
+The rest of `src/auth/` is Managed Better Auth setup: the server, the `/api/auth` proxy, the browser client and the prebuilt sign-in UI, as in the [Managed Better Auth TanStack Router quick start](/docs/auth/quick-start/tanstack-router). `auth.server.ts` stands in for the Managed Better Auth adapter for TanStack&nbsp;Start, which isn't out yet. The SSR guide [builds the same server](../guides/ssr#send-both-to-the-browser) in `src/backend/auth.ts`.
 
 ### Seal in a server function
 
