@@ -9,7 +9,7 @@ summary: >-
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T09:41:16.035Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -64,7 +64,7 @@ NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead. The <code>NEON_AUTH_COOKIE_SECRET</code> is only needed for Next.js (generate with <code>openssl rand -base64 32</code>).
 </Admonition>
 
-You can find your Auth URL in the Neon Console under **Auth** → **Configuration**.
+You can find your Auth URL in the Neon Console under **Settings** > **Better Auth** > **Project Info**.
 
 **What changed**  
 You replace multiple Stack Auth-specific keys with a single Better Auth URL that points at your Neon project. For Next.js, you also need a cookie secret for session caching.

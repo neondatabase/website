@@ -3,7 +3,7 @@ title: 'How can I check which region my Neon project is running in?'
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-09-23T21:00:25.204Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -34,7 +34,7 @@ neon projects list
 
 ```text
 ┌────────────────────────┬──────────┬───────────────┬──────────────────────┐
-│ Id                     │ Name     │ Region Id     │ Created At           │
+│ ID                     │ Name     │ Region ID     │ Created At           │
 ├────────────────────────┼──────────┼───────────────┼──────────────────────┤
 │ crimson-voice-12345678 │ frontend │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
 └────────────────────────┴──────────┴───────────────┴──────────────────────┘

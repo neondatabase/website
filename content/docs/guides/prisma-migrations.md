@@ -9,7 +9,7 @@ summary: >-
   migration files, then shows how iterative schema changes work and when to
   switch to `prisma migrate deploy` for production.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -24,7 +24,7 @@ If you just need to connect Prisma to Neon without a full tutorial, see [Connect
 ## Prerequisites
 
 - A [Neon account and project](/docs/get-started-with-neon/signing-up)
-- [Node.js 18+](https://nodejs.org/) installed
+- [Node.js](https://nodejs.org/) 20.19+, 22.12+, or 24+ installed (required by Prisma ORM 7)
 - Both connection strings from your Neon Console (pooled and direct)
 
 ## Create the project
@@ -35,8 +35,8 @@ Set up a new Node.js project with Express and Prisma:
 mkdir neon-prisma-migrations && cd neon-prisma-migrations
 npm init -y
 npm pkg set type="module"
-npm install express dotenv @prisma/client @prisma/adapter-neon
-npm install prisma typescript tsx @types/node --save-dev
+npm install express dotenv @prisma/client@7 @prisma/adapter-neon@7
+npm install prisma@7 typescript tsx @types/node --save-dev
 npx prisma init
 ```
 

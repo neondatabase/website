@@ -286,6 +286,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/blog/neon-serverless-driver-on-jsr',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: true,
+      },
+      {
         source: '/backend',
         destination: '/docs/introduction#products',
         permanent: false,
@@ -2259,6 +2264,11 @@ const defaultConfig = {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
+      },
+      {
+        source: '/blog/databutton-neon-integration',
+        destination: '/blog/riff-neon-integration',
+        permanent: true,
       },
       {
         source: '/blog/postgres-autoscaling',

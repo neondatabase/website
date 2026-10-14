@@ -28,7 +28,7 @@ Each project can enable the same set of services, so you stop assembling a diffe
 - [Managed Better Auth](/docs/auth/overview): 60k MAU on Free, 1M on paid plans, with users in your own database.
 - [Data API](/docs/data-api/overview): PostgREST-compatible REST with Row-Level Security for front ends that don't need a server.
 - [Object Storage](/docs/storage/overview): S3-compatible, 5 GB per project on Free.
-- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations a month included on Free.
+- [Neon Functions](/docs/compute/functions/overview): APIs, bots, and webhooks next to the data, with 1 million invocations per project a month included on Free.
 
 Functions, Object Storage, and AI Gateway are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with support expanding toward [all regions](/docs/introduction/regions).
 
@@ -42,7 +42,7 @@ On the Launch plan, an app you stop maintaining costs its storage and nothing el
 
 ## How other options compare
 
-- **Supabase**: the Free plan allows 2 active projects, and they pause after a week of low activity ([pricing](https://supabase.com/pricing), [project pausing](https://supabase.com/docs/guides/platform/free-project-pausing)). On Pro, each project is a dedicated instance billed hourly, about $10/month for Micro, with $10 in monthly compute credits covering one of them, so ten small apps run about $115/month against about $11.50 on Neon's Launch plan ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [Launch vs Pro comparison](/guides/neon-launch-plan-vs-supabase-pro-plan#cost-scenarios)). Egress is 250 GB shared across all services on Pro, then $0.09 per GB, where Neon includes 500 GB per project ([egress](https://supabase.com/docs/guides/platform/manage-your-usage/egress)). The spend cap doesn't cover compute, branching, read replicas, or point-in-time recovery, so those lines grow with use even with the cap on ([cost control](https://supabase.com/docs/guides/platform/cost-control)).
+- **Supabase**: the Free plan allows 2 active projects, and they pause after a week of low activity ([pricing](https://supabase.com/pricing), [project pausing](https://supabase.com/docs/guides/platform/free-project-pausing)). On Pro, each project is a dedicated instance billed hourly, about $10/month for Micro, with $10 in monthly compute credits covering one of them, so ten small apps run about $115/month against about $11.50 on Neon's Launch plan ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute), [Launch vs Pro comparison](/guides/neon-launch-plan-vs-supabase-pro-plan#projects-per-organization)). Egress is 250 GB shared across all services on Pro, then $0.09 per GB, where Neon includes 500 GB per project ([egress](https://supabase.com/docs/guides/platform/manage-your-usage/egress)). The spend cap doesn't cover compute, branching, read replicas, or point-in-time recovery, so those lines grow with use even with the cap on ([cost control](https://supabase.com/docs/guides/platform/cost-control)).
 - **Firebase**: no per-project instance charge, with Firestore billed per document operation beyond daily free quotas ([pricing](https://firebase.google.com/pricing)). Ten quiet apps are cheap; the data model is NoSQL.
 - **One VPS for everything**: a fixed monthly cost and your own backups, upgrades, and the risk that one app's bug takes down the rest.
 

@@ -3,10 +3,16 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
+import SearchClearButton from 'components/shared/search-clear-button';
 import { cn } from 'utils/cn';
 
 const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
   const inputRef = useRef(null);
+
+  const handleClear = () => {
+    onChange('');
+    inputRef.current?.focus();
+  };
 
   /**
    * Handle keyboard shortcuts for search box
@@ -31,7 +37,7 @@ const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
 
   return (
     <div className={cn('absolute top-1 right-0 md:w-full', className)}>
-      <div className="ais-SearchBox">
+      <div className="ais-SearchBox relative">
         <input
           ref={inputRef}
           className={cn('ais-SearchBox-input', asPlaceholder && 'pointer-events-none')}
@@ -41,6 +47,12 @@ const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
+        {!asPlaceholder && value?.length > 0 && (
+          <SearchClearButton
+            className="text-gray-new-50 hover:text-black-new dark:text-gray-new-60 dark:hover:text-white"
+            onClick={handleClear}
+          />
+        )}
       </div>
     </div>
   );

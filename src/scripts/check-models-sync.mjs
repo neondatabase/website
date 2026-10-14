@@ -2,9 +2,11 @@
 /**
  * models.dev mirror sync check
  *
- * `src/app/models.json/data.json` is the source of truth for the Neon AI Gateway
- * catalog. The `neon` provider on models.dev is a mirror of it that we maintain
- * in a repo we do not control, so it lags by however long an upstream PR takes.
+ * neon.com/models.json is the Neon AI Gateway catalog; production builds refresh
+ * it from the gateway, so the committed `src/app/models.json/data.json` can lag
+ * it. Set NEON_MODELS_URL to compare what is deployed. The `neon` provider on
+ * models.dev is a mirror of it that we maintain in a repo we do not control, so
+ * it lags by however long an upstream PR takes.
  *
  * This reports that lag. It does not fail on it — a model we publish before the
  * upstream PR merges is an in-flight change, not a fault. Two things do fail:
@@ -145,9 +147,15 @@ async function main() {
   console.log(
     `  mirror:          ${mirror.source} — ${Object.keys(mirror.models).length} models\n`
   );
+  if (drift.unreleased.length) {
+    console.log(`Not compared, released: false (${drift.unreleased.length}):`);
+    drift.unreleased.forEach((id) => console.log(`  ~ ${id}`));
+    console.log('');
+  }
 
   if (drift.inSync) {
-    console.log(`[OK] models.dev mirrors all ${Object.keys(website.models).length} models.`);
+    const compared = Object.keys(website.models).length - drift.unreleased.length;
+    console.log(`[OK] models.dev mirrors all ${compared} released models.`);
     process.exit(0);
   }
 

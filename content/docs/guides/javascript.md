@@ -10,7 +10,7 @@ summary: >-
   suits serverless and edge runtimes. Bun and Deno users are directed to
   separate guides.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -97,7 +97,7 @@ For your Node.js project, create a project directory, initialize it with `npm`, 
 
 Create a file named `.env` in your project's root directory. This file will securely store your database connection string, keeping your credentials separate from your source code.
 
-1.  In the [Neon Console](https://console.neon.tech), select your project on the **Dashboard**.
+1.  In the [Neon Console](https://console.neon.tech), open your project.
 2.  Click **Connect** in the Console nav to open the **Connect to your branch** modal.
     ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 3.  Select **Node.js** from the connection string dropdown and copy the full connection string.
