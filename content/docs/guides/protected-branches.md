@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -89,9 +89,9 @@ On plans that support it, you can use the protected branches feature in combinat
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Project Dashboard, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Networking**.
-4. Under **Public internet access**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
 5. Click **Save changes**.
 
 </TabItem>
@@ -102,12 +102,10 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Protected Only      │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
-│ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
-│                     │                     │ 203.0.113.1  │                     │
-└─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
+ID              wispy-haze-123456
+Name            wispy-haze-123456
+IP Addresses    203.0.113.0, 203.0.113.1
+Protected Only  false
 ```
 
 To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
@@ -158,11 +156,9 @@ For details about specifying IP addresses, see [How to specify IP addresses](/do
 
 ### Restrict IP access to protected branches only
 
-After defining an IP allowlist, the next step is to select the **Restrict access to protected branches only** option.
+After defining an IP allowlist, go to **Restricted branches** and select **Protected branches only**.
 
-![IP Allow configuration](/docs/guides/ip_allow_protected_branches.png)
-
-This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only.
+This option removes IP restrictions from _all branches_ in your Neon project and applies them to protected branches only. Every other branch keeps accepting any address.
 
 After you've selected the protected branches option, click **Save changes** to apply the new configuration.
 

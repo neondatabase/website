@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-10-01T15:44:50.010Z'
+updatedOn: '2026-10-13T07:55:06.255Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -41,33 +41,33 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with unlimited projects, Launch-rate compute, and credits for **your** free tier. Agent limits differ from Scale. [Learn more](/docs/introduction/agent-plan)
 </Admonition>
 
-| Plan feature                                          | **Free**                                               | **Launch**                                 | **Scale**                                                                                         |
-| ----------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| [Price](#price)                                       | $0/month                                               | Pay for what you use                       | Pay for what you use                                                                              |
-| [Who it's for](#who-its-for)                          | Prototypes, side projects, and small teams             | Startups and growing teams                 | Production-grade workloads and larger companies                                                   |
-| [Organization members](#organization-members)         | Unlimited                                              | Unlimited                                  | Unlimited                                                                                         |
-| [Projects](#projects)                                 | 100                                                    | 100                                        | 1,000 (can be increased on request)                                                               |
-| [Branches](#branches)                                 | 10/project                                             | 10/project                                 | 25/project                                                                                        |
-| [Extra branches](#extra-branches)                     | —                                                      | $1.50/branch-month (prorated hourly)       | $1.50/branch-month (prorated hourly)                                                              |
-| [Compute](#compute)                                   | 100 CU-hours/project                                   | $0.106/CU-hour                             | $0.222/CU-hour                                                                                    |
-| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                                  | Up to 16 CU (64 GB RAM)                    | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
-| [Scale to zero](#scale-to-zero)                       | After 5 min                                            | After 5 min, can be disabled               | Configurable (1 minute to always on)                                                              |
-| [Storage](#storage)                                   | 1 GB/project, 20 GB account total                      | $0.35/GB-month                             | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB per project included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
-| [Monitoring](#monitoring)                             | 1 day                                                  | 3 days                                     | 14 days                                                                                           |
-| [Metrics/logs export](#metricslogs-export)            | —                                                      | —                                          | ✅                                                                                                |
-| [Spending notifications](#spending-notifications)     | —                                                      | ✅                                         | ✅                                                                                                |
-| [Instant restore](#instant-restore)                   | —                                                      | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
-| [History window](#history-window)                     | 6 hours, up to 1 GB-month                              | Up to 7 days                               | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 manual snapshot                                      | 100 manual snapshots                       | 100 manual snapshots                                                                              |
-| [Auth](#auth)                                         | Up to 60k MAU                                          | Up to 1M MAU                               | Up to 1M MAU                                                                                      |
-| [Object Storage](#object-storage)                     | 5 GB included                                          | $0.023/GB-month                            | $0.023/GB-month                                                                                   |
-| [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M        | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
-| [AI Gateway](#ai-gateway)                             | —                                                      | Prepaid credits                            | Prepaid credits                                                                                   |
-| [Private network transfer](#private-network-transfer) | —                                                      | —                                          | $0.01/GB                                                                                          |
-| [Compliance and security](#compliance-and-security)   | —                                                      | Protected branches                         | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
-| [Uptime SLA](#uptime-sla)                             | —                                                      | —                                          | ✅                                                                                                |
-| [Support](#support)                                   | Community                                              | Billing support                            | Standard (additional options for higher-volume customers)                                         |
+| Plan feature                                          | **Free**                                                           | **Launch**                                 | **Scale**                                                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [Price](#price)                                       | $0/month                                                           | Pay for what you use                       | Pay for what you use                                                                              |
+| [Who it's for](#who-its-for)                          | Prototypes, side projects, and small teams                         | Startups and growing teams                 | Production-grade workloads and larger companies                                                   |
+| [Organization members](#organization-members)         | Unlimited                                                          | Unlimited                                  | Unlimited                                                                                         |
+| [Projects](#projects)                                 | 100                                                                | 100                                        | 1,000 (can be increased on request)                                                               |
+| [Branches](#branches)                                 | 10/project                                                         | 10/project                                 | 25/project                                                                                        |
+| [Extra branches](#extra-branches)                     | —                                                                  | $1.50/branch-month (prorated hourly)       | $1.50/branch-month (prorated hourly)                                                              |
+| [Compute](#compute)                                   | 100 CU-hours/project                                               | $0.106/CU-hour                             | $0.222/CU-hour                                                                                    |
+| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                                              | Up to 16 CU (64 GB RAM)                    | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
+| [Scale to zero](#scale-to-zero)                       | After 5 min                                                        | After 5 min, can be disabled               | Configurable (1 minute to always on)                                                              |
+| [Storage](#storage)                                   | 1 GB/project, 20 GB account total                                  | $0.35/GB-month                             | $0.35/GB-month                                                                                    |
+| [Public network transfer](#public-network-transfer)   | 5 GB per project included                                          | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
+| [Monitoring](#monitoring)                             | 1 day                                                              | 3 days                                     | 14 days                                                                                           |
+| [Metrics/logs export](#metricslogs-export)            | —                                                                  | —                                          | ✅                                                                                                |
+| [Spending notifications](#spending-notifications)     | —                                                                  | ✅                                         | ✅                                                                                                |
+| [Instant restore](#instant-restore)                   | —                                                                  | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
+| [History window](#history-window)                     | 6 hours, up to 1 GB-month                                          | Up to 7 days                               | Up to 30 days                                                                                     |
+| [Snapshots](#snapshots)                               | 1 manual snapshot                                                  | 100 manual snapshots                       | 100 manual snapshots                                                                              |
+| [Auth](#auth)                                         | Up to 60k MAU                                                      | Up to 1M MAU                               | Up to 1M MAU                                                                                      |
+| [Object Storage](#object-storage)                     | 5 GB included                                                      | $0.023/GB-month                            | $0.023/GB-month                                                                                   |
+| [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M        | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
+| [AI Gateway](#ai-gateway)                             | —                                                                  | Prepaid credits                            | Prepaid credits                                                                                   |
+| [Private network transfer](#private-network-transfer) | —                                                                  | —                                          | $0.01/GB                                                                                          |
+| [Compliance and security](#compliance-and-security)   | —                                                                  | Protected branches                         | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
+| [Uptime SLA](#uptime-sla)                             | —                                                                  | —                                          | ✅                                                                                                |
+| [Support](#support)                                   | Community                                                          | Billing support                            | Standard (additional options for higher-volume customers)                                         |
 
 ## Plan features
 
@@ -136,7 +136,7 @@ On paid plans, you can create extra child branches. Extra branches beyond your p
 
 Cost: **$1.50/branch-month** (~$0.002/hour).
 
-Example: The Launch plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.20 total.
+Example: The Launch plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.02 total.
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 
@@ -370,17 +370,15 @@ Compute is measured in **Capacity-Hours**. Functions run at a fixed size, so one
 | Waiting compute | $0.025/Capacity-Hour | $0.03/Capacity-Hour |
 | Invocations     | $0.60/M              | $0.60/M             |
 
-On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
+On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month. Each project gets its own allowance, and it isn't shared with your other projects. The [concurrency limit](/docs/compute/functions/reference/runtime-limits#concurrency) is separate: it caps in-flight invocations across your account to prevent abuse and isn't a usage allowance.
 
-These Free allowances are enforced at two levels: an account-wide total across all your projects, and an independent per-project limit.
-
-Egress (data a function sends out) counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
+Egress (data a function sends out) counts toward the project's [public network transfer](#public-network-transfer) allowance, which is also per project and shared across all products in that project.
 
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
 ### AI Gateway
 
-Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
+Neon AI Gateway provides access to open-weight and foundation models from multiple providers through a single Neon credential. It's available on paid plans (Launch and Scale). Any paid customer with prepaid credits can use every model in the catalog; see [Model access](/docs/ai-gateway/models#model-access) for details.
 
 Prices match each provider's published list prices, with no additional markup, and draw down a prepaid credit balance you buy from the **Billing** page in the Neon Console.
 

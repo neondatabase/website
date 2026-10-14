@@ -12,7 +12,7 @@ summary: >-
   environment variable configuration, and local testing with the Grafbase CLI.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -96,7 +96,7 @@ npm install @neondatabase/serverless
 
 A database connection string is required to forward queries to your Neon database. You can find your database connection string by clicking the **Connect** button in the Console nav.
 
-1. Navigate to the Neon **Project Dashboard**.
+1. Open your project in the Neon Console.
 2. Click **Connect** and copy the connection string for your database. The connection string should appear similar to the following:
 
    ```text shouldWrap

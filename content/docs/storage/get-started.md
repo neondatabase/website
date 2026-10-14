@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-29T21:04:10.398Z'
+updatedOn: '2026-10-09T17:51:53.586Z'
 ---
 
 To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
@@ -133,7 +133,7 @@ export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 
 ```bash shouldWrap
 # files-sdk uses @aws-sdk/* packages as peer dependencies; install them alongside it
-npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post dotenv
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post dotenv
 ```
 
 ```bash

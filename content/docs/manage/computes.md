@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-10-14T11:24:29.508Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -419,7 +419,7 @@ _Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. 
 
 Neon supports fixed-size and autoscaling compute configurations.
 
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand.
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs. A fixed-size compute does not scale to meet workload demand. Fixed sizes larger than 16 CU are in beta.
 - **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of .25 CU to 16 CU. The maximum permitted autoscaling range is 8 CU, meaning the difference between your maximum and minimum cannot exceed 8 CU. The .25 CU and .5 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 <Admonition type="info" title="monitoring autoscaling">
@@ -437,7 +437,7 @@ The Postgres `max_connections` setting defines your compute's maximum simultaneo
 The following table outlines the RAM, compute cache size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
-Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
+Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for compute sizes larger than 16 CU. These larger fixed sizes are in beta.
 </Admonition>
 
 <Admonition type="note" title="Caching on large fixed-size computes">

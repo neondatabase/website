@@ -39,9 +39,11 @@ export function isAIAgentRequest(request) {
     'curl', // Common CLI HTTP client used to fetch docs as markdown
   ];
 
-  const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
-    userAgent.toLowerCase().includes(pattern)
-  );
+  // User-Agent sniffing only applies when the client doesn't explicitly accept HTML.
+  // Some fetchers (ChatGPT web fetch) reject text/markdown, and search crawlers
+  // (OAI-SearchBot, PerplexityBot) need indexable HTML, not noindex markdown.
+  const hasAIAgentUserAgent =
+    !hasHtml && aiAgentPatterns.some((pattern) => userAgent.toLowerCase().includes(pattern));
 
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }

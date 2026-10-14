@@ -49,7 +49,7 @@ neon diff main --branch feature/checkout
 ```
 
 ```diff filename="Output" shouldWrap
-INFO: → Comparing schema main → feature/checkout
+→ Comparing schema main → feature/checkout
 diff --neon database neondb
 --- main (br-solitary-block-atxzqx8a)
 +++ feature/checkout (br-wandering-bar-atq2lw6c)
