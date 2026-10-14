@@ -9,6 +9,17 @@ import {
 } from './site-search-request';
 
 describe('parseSiteSearchRequest', () => {
+  it('accepts categories, dedupes them, and rejects empty or unknown ones', () => {
+    expect(
+      parseSiteSearchRequest({ query: 'branching', categories: ['docs', 'api', 'docs'] })
+    ).toEqual({ query: 'branching', categories: ['docs', 'api'] });
+    for (const categories of [[], ['faq'], 'docs']) {
+      expect(() => parseSiteSearchRequest({ query: 'branching', categories })).toThrow(
+        /categories must list/
+      );
+    }
+  });
+
   it('trims query and accepts an optional limit', () => {
     expect(parseSiteSearchRequest({ query: '  branches  ', limit: 10 })).toEqual({
       query: 'branches',
@@ -58,6 +69,7 @@ describe('parseSiteSearchHits', () => {
     title: 'Branching',
     slug: 'docs/introduction/branching',
     collection: 'docs',
+    category: 'docs',
     breadcrumb: ['Docs', 'Postgres', 'Branching'],
     heading: 'How branching works',
     excerpt: 'Copy-on-write branches.',
@@ -66,6 +78,12 @@ describe('parseSiteSearchHits', () => {
 
   it('keeps only the documented hit fields', () => {
     expect(parseSiteSearchHits({ hits: [{ ...hit, extra: 'nope' }] })).toEqual([hit]);
+  });
+
+  it('rejects an unknown category', () => {
+    expect(() => parseSiteSearchHits({ hits: [{ ...hit, category: 'faq' }] })).toThrow(
+      /Search failed/
+    );
   });
 
   it('accepts an empty breadcrumb and rejects a malformed one', () => {
@@ -81,7 +99,7 @@ describe('parseSiteSearchHits', () => {
     expect(() =>
       parseSiteSearchHits({ hits: [{ ...hit, url: 'https://evil.com/docs/x' }] })
     ).toThrow(/neon.com url/);
-    expect(() => parseSiteSearchHits({ hits: [{ ...hit, collection: 'faqs' }] })).toThrow(
+    expect(() => parseSiteSearchHits({ hits: [{ ...hit, collection: 'nope' }] })).toThrow(
       /Search failed/
     );
   });

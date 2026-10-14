@@ -42,6 +42,15 @@ test.describe('critical documentation onboarding', () => {
 
     const searchInput = page.getByRole('dialog', { name: 'Search Neon' }).getByRole('combobox');
     await expect(searchInput).toBeVisible();
+    const searchDialog = page.getByRole('dialog', { name: 'Search Neon' });
+    await expect(searchDialog.getByRole('button', { name: 'Docs', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(searchDialog.getByRole('button', { name: 'All', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
 
     // Headless UI skips initial focus on touch devices so the keyboard stays closed.
     if (hasTouch) {

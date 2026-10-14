@@ -30,8 +30,10 @@ export async function POST(request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 
-  const pinned = pinnedSiteSearchHits(body.query);
-  if (pinned) {
+  const pinned = pinnedSiteSearchHits(body.query)?.filter(
+    (hit) => !body.categories || body.categories.includes(hit.category)
+  );
+  if (pinned && pinned.length > 0) {
     return NextResponse.json(
       { hits: pinned.slice(0, body.limit ?? pinned.length) },
       { headers: { 'Server-Timing': 'pinned;dur=0' } }

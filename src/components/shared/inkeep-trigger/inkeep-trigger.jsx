@@ -17,7 +17,13 @@ const InkeepModalChat = dynamic(
   { ssr: false }
 );
 
-const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
+// Each section searches its own content by default; the modal's filter widens it.
+const SECTION_CATEGORIES = {
+  postgres: ['postgresql'],
+};
+const DOCS_CATEGORIES = ['docs'];
+
+const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
@@ -110,6 +116,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false }) => {
       )}
       <SiteSearchModal
         isOpen={isSearchOpen}
+        defaultCategories={SECTION_CATEGORIES[docPageType] ?? DOCS_CATEGORIES}
         onClose={() => setIsSearchOpen(false)}
         onAskAi={
           isNotFoundPage

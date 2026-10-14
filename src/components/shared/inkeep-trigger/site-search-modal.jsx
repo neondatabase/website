@@ -15,6 +15,7 @@ import {
   parseSiteSearchHits,
   hrefFromSearchHit,
   SEARCH_QUERY_MAX_CHARS,
+  SITE_SEARCH_CATEGORIES,
 } from 'utils/site-search-request';
 
 const SEARCH_DEBOUNCE_MS = 250;
@@ -68,7 +69,62 @@ HighlightedText.propTypes = {
   query: PropTypes.string.isRequired,
 };
 
-const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
+function categoryLabels(categories) {
+  return SITE_SEARCH_CATEGORIES.filter((category) => categories.includes(category.id))
+    .map((category) => category.label)
+    .join(', ');
+}
+
+const CategoryFilter = ({ selected, onChange }) => {
+  const toggle = (id) =>
+    onChange(
+      SITE_SEARCH_CATEGORIES.map((category) => category.id).filter((candidate) =>
+        candidate === id ? !selected.includes(id) : selected.includes(candidate)
+      )
+    );
+  const chip = (pressed) =>
+    cn(
+      'shrink-0 rounded-full border px-2.5 py-1 text-[12px] leading-none tracking-extra-tight transition-colors',
+      pressed
+        ? 'border-green-45/60 bg-green-45/15 text-black-new dark:text-white'
+        : 'border-gray-new-80 text-gray-new-30 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-70 dark:hover:border-gray-new-40'
+    );
+  return (
+    <div
+      className="flex gap-1.5 overflow-x-auto border-b border-gray-new-90 px-4 py-2 dark:border-gray-new-15"
+      role="group"
+      aria-label="Search in"
+    >
+      <button
+        className={chip(selected.length === 0)}
+        type="button"
+        aria-pressed={selected.length === 0}
+        onClick={() => onChange([])}
+      >
+        All
+      </button>
+      {SITE_SEARCH_CATEGORIES.map((category) => (
+        <button
+          key={category.id}
+          className={chip(selected.includes(category.id))}
+          type="button"
+          aria-pressed={selected.includes(category.id)}
+          data-test={`search-category-${category.id}`}
+          onClick={() => toggle(category.id)}
+        >
+          {category.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+CategoryFilter.propTypes = {
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = [] }) => {
   const router = useRouter();
   const inputId = useId();
   const listId = useId();
@@ -77,17 +133,22 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
+  const [categories, setCategories] = useState(defaultCategories);
   const trimmedQuery = query.trim();
+  const categoriesKey = categories.join(',');
+  const defaultCategoriesKey = defaultCategories.join(',');
+  const searchScope = categories.length === 0 ? 'all of neon.com' : categoryLabels(categories);
 
   useEffect(() => {
     if (isOpen) {
+      setCategories(defaultCategoriesKey === '' ? [] : defaultCategoriesKey.split(','));
       setQuery('');
       setHits([]);
       setStatus('idle');
       setError('');
       setActiveIndex(0);
     }
-  }, [isOpen]);
+  }, [isOpen, defaultCategoriesKey]);
 
   useEffect(() => {
     const trimmed = query.trim();
@@ -103,12 +164,15 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
       setActiveIndex(0);
       setStatus('loading');
       setError('');
-      sendGtagEvent('Search Query Submitted', { text: trimmed });
+      sendGtagEvent('Search Query Submitted', { text: trimmed, categories: categoriesKey });
       try {
         const response = await fetch('/api/search', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ query: trimmed }),
+          body: JSON.stringify({
+            query: trimmed,
+            ...(categoriesKey === '' ? {} : { categories: categoriesKey.split(',') }),
+          }),
           signal: controller.signal,
         });
         const payload = await response.json().catch(() => null);
@@ -140,7 +204,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [isOpen, query]);
+  }, [isOpen, query, categoriesKey]);
 
   const activeHit = hits[activeIndex];
   const showAskAi =
@@ -204,7 +268,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
               autoComplete="off"
               spellCheck="false"
               maxLength={SEARCH_QUERY_MAX_CHARS}
-              placeholder="Search docs, guides, changelog, and blog…"
+              placeholder={`Search ${searchScope}…`}
               value={query}
               data-test="docs-search-input"
               data-autofocus
@@ -215,10 +279,11 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
               esc
             </kbd>
           </div>
+          <CategoryFilter selected={categories} onChange={setCategories} />
           <div className="max-h-[min(60vh,28rem)] overflow-y-auto">
             {trimmedQuery === '' && (
               <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
-                Search official docs, community guides, the changelog, and the blog.
+                {`Searching ${searchScope}. Pick categories above to widen or narrow the search.`}
               </p>
             )}
             <div aria-live="polite" aria-atomic="true" role="status">
@@ -232,7 +297,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null }) => {
               )}
               {status === 'ok' && hits.length === 0 && (
                 <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
-                  {`No results for "${trimmedQuery}".`}
+                  {`No results for "${trimmedQuery}" in ${searchScope}.`}
                 </p>
               )}
             </div>
@@ -309,6 +374,7 @@ SiteSearchModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onAskAi: PropTypes.func,
+  defaultCategories: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default SiteSearchModal;

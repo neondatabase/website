@@ -1,7 +1,28 @@
 export const SEARCH_QUERY_MAX_CHARS = 500;
 
 // `page` and `tutorial` only come from pinned results (site-search-pinned.js).
-const SEARCH_COLLECTIONS = new Set(['docs', 'guides', 'changelog', 'blog', 'page', 'tutorial']);
+const SEARCH_COLLECTIONS = new Set([
+  'docs',
+  'guides',
+  'changelog',
+  'blog',
+  'postgresql',
+  'faqs',
+  'page',
+  'tutorial',
+]);
+
+export const SITE_SEARCH_CATEGORIES = [
+  { id: 'docs', label: 'Docs' },
+  { id: 'postgresql', label: 'PostgreSQL Tutorial' },
+  { id: 'guides', label: 'Guides' },
+  { id: 'faqs', label: 'FAQs' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'changelog', label: 'Changelog' },
+  { id: 'api', label: 'API Docs' },
+];
+
+const CATEGORY_IDS = new Set(SITE_SEARCH_CATEGORIES.map((category) => category.id));
 
 export function composeServerTiming(upstream, proxyMs) {
   const proxy = `proxy;dur=${proxyMs.toFixed(1)}`;
@@ -16,7 +37,7 @@ export function parseSiteSearchRequest(body) {
     throw new Error('Invalid JSON body');
   }
   const keys = Object.keys(body);
-  if (keys.some((key) => key !== 'query' && key !== 'limit')) {
+  if (keys.some((key) => key !== 'query' && key !== 'limit' && key !== 'categories')) {
     throw new Error('Unexpected field');
   }
   if (typeof body.query !== 'string') {
@@ -34,9 +55,19 @@ export function parseSiteSearchRequest(body) {
       throw new Error('limit must be an integer from 1 to 40');
     }
   }
+  if (body.categories !== undefined) {
+    if (
+      !Array.isArray(body.categories) ||
+      body.categories.length === 0 ||
+      !body.categories.every((category) => CATEGORY_IDS.has(category))
+    ) {
+      throw new Error('categories must list one or more known categories');
+    }
+  }
   return {
     query,
     ...(body.limit === undefined ? {} : { limit: body.limit }),
+    ...(body.categories === undefined ? {} : { categories: [...new Set(body.categories)] }),
   };
 }
 
@@ -76,11 +107,12 @@ function parseSiteSearchHit(hit) {
   if (typeof hit !== 'object' || hit === null || Array.isArray(hit)) {
     throw new Error('Search failed.');
   }
-  const { url, title, slug, collection, breadcrumb, heading, excerpt, score } = hit;
+  const { url, title, slug, collection, category, breadcrumb, heading, excerpt, score } = hit;
   if (
     typeof url !== 'string' ||
     typeof title !== 'string' ||
     typeof slug !== 'string' ||
+    !CATEGORY_IDS.has(category) ||
     !isBreadcrumb(breadcrumb) ||
     typeof heading !== 'string' ||
     typeof excerpt !== 'string' ||
@@ -96,6 +128,7 @@ function parseSiteSearchHit(hit) {
     title,
     slug,
     collection,
+    category,
     breadcrumb,
     heading,
     excerpt,
