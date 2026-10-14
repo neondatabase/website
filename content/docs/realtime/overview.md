@@ -299,6 +299,8 @@ aws-us-east-1
 aws-us-east-2
 ```
 
+See [product availability](/docs/introduction/regions#product-availability) for every region.
+
 </FaqItem>
 
 <FaqItem question="Does Realtime support RLS?">
