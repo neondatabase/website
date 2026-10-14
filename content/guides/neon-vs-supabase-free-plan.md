@@ -1,6 +1,6 @@
 ---
-title: 'In-Depth: Neon vs Supabase Free Plan'
-subtitle: Compare Neon and Supabase free plans on projects, storage, branches, backups, functions, auth, and egress to see which fits your prototypes and AI agents.
+title: 'Neon vs Supabase Free Tier: Which Free Postgres Gives You More? (2026)'
+subtitle: Neon Free includes 100 projects that scale to zero, and Supabase Free allows 2 that pause after a week. Compare storage, branches, backups, and auth.
 author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
