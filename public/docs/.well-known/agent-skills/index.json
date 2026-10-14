@@ -27,7 +27,7 @@
       "type": "skill-md",
       "description": "Overview of Neon, a complete set of cloud backend primitives around Lakebase Postgres: Auth, Object Storage, Functions, and the AI Gateway. Start here to choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or MCP server, and follow the branch-first workflow. Use when building an app or backend on Neon, or when \"Neon\" or \"Lakebase Postgres\" is mentioned. Child skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect, or search. Child skill neon-auth wins for login, users, sessions, identity routing, and Managed Better Auth setup. Also use for object storage, S3, buckets, serverless functions, function triggers, cron, AI gateway, LLM calls, logs, Loki, Grafana, observability, postgres, database, backend, Claimable Neon, neon.new, or a no-signup database.",
       "url": "/docs/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:1071b8789dea0cb41c795059e728821756181ce55ae34f3f904120bfbfa8ff22"
+      "digest": "sha256:e3d7835b2a6443f52972c033b267fa12467f5d9d19cfad4f102969d05c14434f"
     },
     {
       "name": "neon-auth",
@@ -62,7 +62,7 @@
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Also use for Function Triggers: a cron or an object-storage event that POSTs to a function. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"cron\", \"function trigger\", \"scheduled function\", \"cron job\", \"object storage trigger\", \"on upload\", \"run code next to my database\", \"function that won't time out\", \"function logs\", \"Neon Functions\", \"Neon Compute\", \"DDoS protection\", \"rate limiting\", and \"production hardening\".",
       "url": "/docs/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:f7cc659147e999f62d214de87c320aa6cccbfc46ad1aa9ccab4c9183474db018"
+      "digest": "sha256:ef17cab6c81fba6e5545037205889dcb1b2dcd9748d5fbbf50465ee0a8a88d8d"
     }
   ]
 }

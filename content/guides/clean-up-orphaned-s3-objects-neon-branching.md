@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-07T03:48:49.832Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -87,11 +87,11 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … postgres-s3-drift-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project cool-darkness-12345678 ("postgres-s3-drift-demo") in aws-us-east-2.
-Linked ~/postgres-s3-drift-demo/.neon:
-  orgId:     org-example-12345678
-  projectId: cool-darkness-12345678
-  branch:    main
+Created project postgres-s3-drift-demo in aws-us-east-2
+Linked .neon
+  Project         postgres-s3-drift-demo (cool-darkness-12345678)
+  Branch          main
+  Org             org-example-12345678
 
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Object Storage

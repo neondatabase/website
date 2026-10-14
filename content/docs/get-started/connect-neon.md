@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-05T14:25:23.981Z'
 ---
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
@@ -82,14 +82,11 @@ const result = await db.select().from(...);
 ```
 
 ```javascript
-// Prisma example with the Neon serverless driver
-import { neon } from '@neondatabase/serverless';
-import { PrismaNeonHTTP } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
+// Prisma ORM 7 example with the Neon serverless driver adapter
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from './generated/prisma'; // path set by `output` in your schema.prisma generator
 
-const sql = neon(process.env.DATABASE_URL);
-
-const adapter = new PrismaNeonHTTP(sql);
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
 
 const prisma = new PrismaClient({ adapter });
 ```

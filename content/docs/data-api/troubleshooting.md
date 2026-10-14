@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-09-30T16:23:41.172Z'
+updatedOn: '2026-10-09T09:41:16.035Z'
 ---
 
 <InfoBlock>
@@ -93,7 +93,7 @@ The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represen
 
 If you're using Managed Better Auth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
 
-Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console. From there, you can:
+Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** under **Settings** > **Better Auth** > **Project Info** in the Neon Console. From there, you can:
 
 1. Create a test user with `POST /sign-up/email`.
 2. Sign in with `POST /sign-in/email`.

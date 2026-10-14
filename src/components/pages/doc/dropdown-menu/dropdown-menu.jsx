@@ -184,9 +184,13 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
         <CopyMarkdownButton markdownPath={markdownPath} variant="sm" />
         <button
           className="flex h-8 items-center px-1 hover:bg-gray-new-98 dark:hover:bg-gray-new-8"
+          type="button"
+          aria-label="More page actions"
+          aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <ChevronDownIcon
+            aria-hidden="true"
             className={cn(
               'size-3.5 text-gray-new-50 transition-transform duration-200 dark:text-gray-new-50',
               isOpen && 'rotate-180'

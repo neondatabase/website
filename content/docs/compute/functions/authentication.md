@@ -130,6 +130,6 @@ Managed Better Auth handles user sign-in and issues JWTs you verify as above. A 
 
 ## Example
 
-[with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) authenticates a WebSocket connection with a Managed Better Auth JWT end to end.
+[with-websockets-function](https://github.com/neondatabase/examples/tree/main/with-websockets-function) authenticates a WebSocket connection with a Managed Better Auth JWT end to end.
 
 <NeedHelp/>

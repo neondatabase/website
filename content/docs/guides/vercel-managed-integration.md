@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-09-08T15:58:09.171Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 <InfoBlock>
@@ -73,7 +73,7 @@ After creation you'll land on Vercel's **Storage** tab that includes status, pla
 
 ## Optionally open the project in the Neon Console
 
-From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
+From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
 
 </Steps>
 

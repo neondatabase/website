@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2026-09-25T09:58:44.827Z'
+updatedOn: '2026-10-09T10:18:46.317Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
@@ -52,7 +52,7 @@ VALUES
 
 1. In the Neon Console, select your project.
 2. Select **Branches** in the sidebar.
-3. Click **Create branch** to open the branch creation dialog.
+3. Click **New Branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. This guide uses the name `my_test_branch`.
 5. Select a parent branch. Select the branch defined as your default branch, such as production or main.

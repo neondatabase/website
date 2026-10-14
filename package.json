@@ -7,7 +7,7 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && node src/scripts/generate-static-md-manifest.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "prebuild": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && node src/scripts/generate-static-md-manifest.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js && node scripts/update-models-from-ai-gateway.mjs",
     "predev": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && node src/scripts/generate-static-md-manifest.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js && npm run generate:ai-gateway-model-markdown && npm run generate:backend-platform-page-markdown",
     "dev": "next dev",
     "build": "next build",
@@ -131,7 +131,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.0.0",
-    "@neon/sdk": "^4.1.0",
+    "@neon/sdk": "^7.2.0",
     "@next/eslint-plugin-next": "16.3.3",
     "@playwright/test": "1.61.1",
     "@scalar/openapi-parser": "^0.28.2",
