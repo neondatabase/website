@@ -110,7 +110,7 @@ export const db = drizzle(pool, { schema })
 pool.on("error", (error: Error) => console.error(error))
 ```
 
-- the [`neon-serverless`](/docs/serverless/serverless-driver) driver runs interactive transactions, which [writes](#return-the-txid-from-drizzle-writes) need to read their transaction ID. `drizzle-orm/node-postgres` with a `pg` pool works too. `neon-http` can't, so `db.transaction()` throws with it
+- writes return their [transaction ID](#return-the-txid-from-drizzle-writes) from the same statement. This works with `neon-serverless`, `node-postgres`, `postgres-js` and `neon-http`; an explicit transaction is only needed when a write itself spans several statements
 - `{ schema }` is only for Drizzle's relational `db.query` API, which [can't be sealed](#common-pitfalls). Live queries use the select builder
 
 ### Define the live query
@@ -272,7 +272,7 @@ The client holds each optimistic change until the write's transaction ID comes b
 
 ### Return the txid from Drizzle writes
 
-Run the write in `db.transaction()` and read the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) inside it, with the mutations guide's `currentTxId()` helper. For example, a function that edits a message:
+Return the [transaction ID](../guides/mutations#returning-the-txid-from-your-backend) from the write's own statement. For example, a function that edits a message:
 
 ```ts filename="backend/server.ts"
 import { and, eq, ne, sql } from "drizzle-orm"
@@ -284,35 +284,22 @@ export type MutationResponse =
   | { readonly kind: "committed"; readonly txid: string }
   | { readonly kind: "unchanged" }
 
-type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0]
+const txid = sql<string>`pg_current_xact_id()::text`
 
-// Must run inside the write transaction, so it returns that transaction's id
-async function currentTxId(tx: Transaction): Promise<string> {
-  const result = await tx.execute<{ txid: string }>(sql`select pg_current_xact_id()::text as txid`)
+export async function editMessage(userId: string, id: string, body: string): Promise<MutationResponse> {
+  const [updated] = await db
+    .update(messages)
+    .set({ body })
+    .where(and(eq(messages.id, id), eq(messages.author_id, userId), ne(messages.body, body)))
+    .returning({ txid })
 
-  return result.rows[0]!.txid
-}
-
-export function editMessage(userId: string, id: string, body: string): Promise<MutationResponse> {
-  return db.transaction(async (tx): Promise<MutationResponse> => {
-    const updated = await tx
-      .update(messages)
-      .set({ body })
-      .where(and(eq(messages.id, id), eq(messages.author_id, userId), ne(messages.body, body)))
-      .returning({ id: messages.id })
-
-    if (updated.length === 0) {
-      return { kind: "unchanged" }
-    }
-
-    return { kind: "committed", txid: await currentTxId(tx) }
-  })
+  return updated ? { kind: "committed", txid: updated.txid } : { kind: "unchanged" }
 }
 ```
 
-- `Transaction` is the type of `tx` in your `db.transaction()` callback. `currentTxId()` works with `neon-serverless` and `node-postgres`. With `postgres-js`, `tx.execute()` returns the rows directly, so read `result[0]!.txid`
-- `pg_current_xact_id()` runs inside the write's transaction, so it returns the ID of the transaction that made the change. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
-- `.returning({ id: messages.id })` returns the changed rows. With none, nothing comes over Realtime, so the function returns `unchanged` and the client has nothing to wait for. `ne(messages.body, body)` skips edits that change nothing
+- `pg_current_xact_id()` runs in the write's `RETURNING` clause, so it returns the ID of the transaction that made the change without another database round trip. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
+- `.returning({ txid })` returns a row only when the write changed one. With none, nothing comes over Realtime, so the function returns `unchanged` and the client has nothing to wait for. `ne(messages.body, body)` skips edits that change nothing
+- for writes that span several statements, use `db.transaction()` and include `pg_current_xact_id()` in the final write's `RETURNING` clause
 - see how to [call these writes from the frontend](../guides/mutations#calling-the-routes-from-the-frontend)
 
 ## Common pitfalls

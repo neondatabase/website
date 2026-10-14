@@ -32,14 +32,13 @@ Let's return to our running example, flesh out the backend server, call its new 
 
 ### Returning the `txid` from your backend
 
-Each write route takes a batch of changes, writes the whole batch in one Drizzle transaction and reads the transaction's id before it commits, so there's one txid to wait for however many rows change. That's why the [queries guide](./queries#setup) set up `backend/db.ts` with the `neon-serverless` driver, which can run interactive transactions.
+Each write route sends its whole batch in one SQL statement and adds `pg_current_xact_id()` to the statement's `RETURNING` clause. The write and its txid come back in one database round trip, with one txid to wait for however many rows change. You don't need an explicit transaction unless the write itself spans several SQL statements.
 
 Add the three write routes to `backend/server.ts`, chained onto the same app so `AppType` carries them to the frontend. They follow the `/api/v1/messages/live` route from the [queries guide](./queries#exposing-an-endpoint) and the `/api/v1/inbox/live` route from the [reactivity guide](./reactivity#seal-a-broader-query):
 
 ```ts filename="backend/server.ts"
 import { and, eq, inArray, ne, sql } from "drizzle-orm"
 import { Hono } from "hono"
-import { HTTPException } from "hono/http-exception"
 import { validator } from "hono/validator"
 
 import { requireUser } from "./auth"
@@ -50,14 +49,10 @@ export type MutationResponse =
   | { readonly kind: "committed"; readonly txid: string }
   | { readonly kind: "unchanged" }
 
-type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0]
+const txid = sql<string>`pg_current_xact_id()::text`
 
-// Must run inside the write transaction, so it returns that transaction's id
-async function currentTxId(tx: Transaction): Promise<string> {
-  const result = await tx.execute<{ txid: string }>(sql`select pg_current_xact_id()::text as txid`)
-
-  return result.rows[0]!.txid
-}
+const mutationResponse = (row?: { txid: string }): MutationResponse =>
+  row ? { kind: "committed", txid: row.txid } : { kind: "unchanged" }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -92,26 +87,27 @@ const app = new Hono()
     async (c) => {
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
-      const channelIds = [...new Set(batch.map((message) => message.channelId))]
+      const values = sql.join(
+        batch.map(({ id, channelId, body }) => sql`(${id}::uuid, ${channelId}::integer, ${body}::text)`),
+        sql`, `
+      )
+      const result = await db.execute<{ txid: string }>(sql`
+        WITH input (id, channel_id, body) AS (VALUES ${values})
+        INSERT INTO ${messages} (id, channel_id, author_id, body)
+        SELECT input.id, input.channel_id, ${user.id}, input.body
+        FROM input
+        WHERE NOT EXISTS (
+          SELECT 1
+          FROM input
+          LEFT JOIN ${channelMembers}
+            ON ${channelMembers.channel_id} = input.channel_id
+            AND ${channelMembers.user_id} = ${user.id}
+          WHERE ${channelMembers.channel_id} IS NULL
+        )
+        RETURNING pg_current_xact_id()::text AS txid
+      `)
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const memberships = await tx
-          .select({ channel_id: channelMembers.channel_id })
-          .from(channelMembers)
-          .where(and(inArray(channelMembers.channel_id, channelIds), eq(channelMembers.user_id, user.id)))
-
-        if (memberships.length < channelIds.length) {
-          throw new HTTPException(403, { message: "Not a member of this channel" })
-        }
-
-        await tx
-          .insert(messages)
-          .values(batch.map(({ id, channelId, body }) => ({ id, channel_id: channelId, author_id: user.id, body })))
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(result.rows[0]))
     }
   )
   .patch(
@@ -132,28 +128,26 @@ const app = new Hono()
     async (c) => {
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
+      const body = sql<string>`CASE ${sql.join(
+        batch.map(({ id, body }) => sql`WHEN ${messages.id} = ${id} THEN ${body}`),
+        sql` `
+      )} ELSE ${messages.body} END`
+      const [updated] = await db
+        .update(messages)
+        .set({ body })
+        .where(
+          and(
+            inArray(
+              messages.id,
+              batch.map(({ id }) => id)
+            ),
+            eq(messages.author_id, user.id),
+            ne(messages.body, body)
+          )
+        )
+        .returning({ txid })
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        let count = 0
-
-        for (const { id, body } of batch) {
-          const updated = await tx
-            .update(messages)
-            .set({ body })
-            .where(and(eq(messages.id, id), eq(messages.author_id, user.id), ne(messages.body, body)))
-            .returning({ id: messages.id })
-
-          count += updated.length
-        }
-
-        if (count === 0) {
-          return { kind: "unchanged" }
-        }
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(updated))
     }
   )
   .delete(
@@ -170,21 +164,12 @@ const app = new Hono()
     async (c) => {
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
+      const [deleted] = await db
+        .delete(messages)
+        .where(and(inArray(messages.id, batch), eq(messages.author_id, user.id)))
+        .returning({ txid })
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const deleted = await tx
-          .delete(messages)
-          .where(and(inArray(messages.id, batch), eq(messages.author_id, user.id)))
-          .returning({ id: messages.id })
-
-        if (deleted.length === 0) {
-          return { kind: "unchanged" }
-        }
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(deleted))
     }
   )
 
@@ -193,9 +178,11 @@ export type AppType = typeof app
 export default app
 ```
 
-Call [`pg_current_xact_id()`](https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SNAPSHOT) inside the write's transaction. The `::text` cast returns the txid as a decimal string, so its 64-bit value stays exact in JavaScript.
+Call [`pg_current_xact_id()`](https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SNAPSHOT) in the write's `RETURNING` clause. It runs in the same statement, so it returns the ID of the transaction that made the change without another database round trip. The `::text` cast returns the txid as a decimal string, so its 64-bit value stays exact in JavaScript.
 
-Each route also checks what the user can change. Sending looks up the sender's `channel_members` rows for every channel in the batch inside the transaction, and throws a 403 if one is missing, so none of the batch is written. Editing and deleting restrict the write to messages the user wrote, so only the author can change a message.
+Each route also checks what the user can change. The insert selects from the input only when every channel has a matching `channel_members` row, so none of the batch is written when membership is missing. Editing and deleting restrict the write to messages the user wrote, so only the author can change a message.
+
+When a send batch includes a channel the user can't access, the route returns `{ kind: "unchanged" }` and inserts none of it. This doesn't reveal which channel failed the membership check.
 
 When an edit or a delete batch matches no rows, the route returns `{ kind: "unchanged" }` instead of a txid. That happens when every edit leaves the text as it was, or when every message is already gone or someone else wrote it. Nothing changed, so there's nothing to wait for.
 

@@ -468,7 +468,7 @@ On the first request, the rows go from the server's query to the live subscripti
 
 ## Optimistic mutations
 
-Write to the collection, and TanStack&nbsp;DB applies each change at once and calls your mutation handler. The handler sends the change to a server function, which writes it in a Postgres transaction and returns the transaction ID. The handler then waits for that ID to come back on the subscription, so the optimistic row hands over to the synced one in one step. The mutations guide explains [how optimistic mutations work](../guides/mutations#how-optimistic-mutations-work).
+Write to the collection, and TanStack&nbsp;DB applies each change at once and calls your mutation handler. The handler sends the change to a server function, which writes it in one SQL statement and returns the transaction ID from the same statement. The handler then waits for that ID to come back on the subscription, so the optimistic row hands over to the synced one in one step. The mutations guide explains [how optimistic mutations work](../guides/mutations#how-optimistic-mutations-work).
 
 ### Write to the collection
 
@@ -643,87 +643,96 @@ function notSyncedYet(cause: unknown): never {
 
 ### Return the txid from the server
 
-On the server, write each batch in one Postgres transaction and return the transaction's ID. Next to `selectTodos` in `src/todos.server.ts`, which already imports `db` and `sql`, add a helper that does both:
+On the server, write each batch in one SQL statement and include `pg_current_xact_id()` in its `RETURNING` clause. That returns the write's transaction ID without another database round trip. Inserts and deletes already accept a batch. For updates, one `CASE` expression per field applies each row's own change in the same statement.
 
-```ts filename="src/todos.server.ts"
-type Tx = Parameters<Parameters<typeof db.transaction>[0]>[0]
-
-// Runs `write` in a transaction and returns its transaction id, which the
-// browser waits to see come back over Realtime. A write that changes no rows
-// returns `{ txid: null }`: there's nothing to wait for and nothing to roll back.
-export const writeTodos = (write: (tx: Tx) => Promise<number>) =>
-  db.transaction(async (tx): Promise<{ txid: string | null }> => {
-    if ((await write(tx)) === 0) return { txid: null }
-    const { rows } = await tx.execute<{ txid: string }>(sql`select pg_current_xact_id()::text as txid`)
-    return { txid: rows[0]!.txid }
-  })
-```
-
-`pg_current_xact_id()` runs inside the same transaction as the write, so it returns the ID of the transaction that made the change. It's cast to `text`, because the collection waits for a decimal string. See [returning the txid from your backend](../guides/mutations#returning-the-txid-from-your-backend).
-
-Then add one server function per mutation type to `src/todos.functions.ts`, with the imports they add (merge them into the existing `./todos.server` and `./todos.schemas` imports):
+Add one server function per mutation type to `src/todos.functions.ts`, with the imports they add:
 
 ```ts filename="src/todos.functions.ts"
-import { and, eq, inArray } from "drizzle-orm"
+import { and, eq, inArray, sql } from "drizzle-orm"
 
+import { db } from "./db.server"
 import { todos } from "./schema"
-import { writeTodos } from "./todos.server"
 import { newTodosInput, todoIdsInput, todoUpdatesInput } from "./todos.schemas"
 
-// Each write takes a whole batch of changes from one TanStack DB transaction
-// and returns its Postgres transaction id, or `null` if no row changed (for
-// example, an id that's already gone).
+type WriteResult = { readonly txid: string | null }
+
+const txid = sql<string>`pg_current_xact_id()::text`
+
+const writeResult = (row?: { txid: string }): WriteResult => ({
+  txid: row?.txid ?? null
+})
+
+// Each write sends a whole TanStack DB batch in one SQL statement and returns
+// its Postgres transaction id, or `null` if no row changed (for example, an id
+// that's already gone).
 export const createTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(newTodosInput)
-  .handler(({ data: { userId, batch }, context }) => {
+  .handler(async ({ data: { userId, batch }, context }) => {
     requireSameUser(userId, context.user)
-    return writeTodos(async (tx) => {
-      const inserted = await tx
-        .insert(todos)
-        .values(batch.map((todo) => ({ ...todo, userId: context.user.id })))
-        .returning({ id: todos.id })
-      return inserted.length
-    })
+    const [created] = await db
+      .insert(todos)
+      .values(batch.map((todo) => ({ ...todo, userId: context.user.id })))
+      .returning({ txid })
+    return writeResult(created)
   })
 
 export const updateTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(todoUpdatesInput)
-  .handler(({ data: { userId, batch }, context }) => {
+  .handler(async ({ data: { userId, batch }, context }) => {
     requireSameUser(userId, context.user)
-    return writeTodos(async (tx) => {
-      let count = 0
-      for (const { id, changes } of batch) {
-        // Drizzle rejects an empty `set`.
-        if (Object.values(changes).every((v) => v === undefined)) continue
-        const updated = await tx
-          .update(todos)
-          .set(changes)
-          .where(and(eq(todos.id, id), eq(todos.userId, context.user.id)))
-          .returning({ id: todos.id })
-        count += updated.length
-      }
-      return count
-    })
+
+    const changed = batch.filter(({ changes }) =>
+      Object.values(changes).some((value) => value !== undefined)
+    )
+    if (changed.length === 0) return writeResult()
+
+    const titleCases = changed.flatMap(({ id, changes }) =>
+      changes.title === undefined ? [] : [sql`WHEN ${todos.id} = ${id} THEN ${changes.title}`]
+    )
+    const completedCases = changed.flatMap(({ id, changes }) =>
+      changes.completed === undefined ? [] : [sql`WHEN ${todos.id} = ${id} THEN ${changes.completed}`]
+    )
+
+    const [updated] = await db
+      .update(todos)
+      .set({
+        ...(titleCases.length > 0
+          ? { title: sql<string>`CASE ${sql.join(titleCases, sql.raw(" "))} ELSE ${todos.title} END` }
+          : {}),
+        ...(completedCases.length > 0
+          ? { completed: sql<boolean>`CASE ${sql.join(completedCases, sql.raw(" "))} ELSE ${todos.completed} END` }
+          : {})
+      })
+      .where(
+        and(
+          inArray(
+            todos.id,
+            changed.map(({ id }) => id)
+          ),
+          eq(todos.userId, context.user.id)
+        )
+      )
+      .returning({ txid })
+    return writeResult(updated)
   })
 
 export const deleteTodos = createServerFn({ method: "POST" })
   .middleware([requireUser])
   .validator(todoIdsInput)
-  .handler(({ data: { userId, batch }, context }) => {
+  .handler(async ({ data: { userId, batch }, context }) => {
     requireSameUser(userId, context.user)
-    return writeTodos(async (tx) => {
-      const deleted = await tx
-        .delete(todos)
-        .where(and(inArray(todos.id, batch), eq(todos.userId, context.user.id)))
-        .returning({ id: todos.id })
-      return deleted.length
-    })
+    const [deleted] = await db
+      .delete(todos)
+      .where(and(inArray(todos.id, batch), eq(todos.userId, context.user.id)))
+      .returning({ txid })
+    return writeResult(deleted)
   })
 ```
 
-- each call writes one TanStack&nbsp;DB transaction's batch in one Postgres transaction, so there's one txid to wait for
+- each call writes one TanStack&nbsp;DB transaction's batch in one SQL statement, so there's one txid to wait for and no extra round trip to retrieve it
+- `pg_current_xact_id()` is cast to `text`, because the collection waits for a decimal string. See [returning the txid from your backend](../guides/mutations#returning-the-txid-from-your-backend)
 - the server functions take the user from the session, never from the browser. The zod input schemas in `src/todos.schemas.ts` strip unknown keys, so a row's `userId` can't come from the browser, and the `userId` the browser sends is only compared with the session's
 - `updateTodos` and `deleteTodos` scope their `WHERE` to the session's user, so one user can't change another's rows
 

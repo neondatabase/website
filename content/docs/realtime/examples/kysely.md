@@ -214,7 +214,7 @@ export async function setTodoCompleted(userId: string, id: string, completed: bo
 - `pg_current_xact_id()` runs in the write's statement, so it returns the ID of the transaction that made the change, with any driver. The `text` cast keeps the 64-bit ID exact, as the decimal string the client waits for
 - `executeTakeFirst()` returns `undefined` when no row matched. Nothing comes over Realtime, so the function returns `unchanged` and the client has nothing to wait for
 - take `userId` from the verified session, never from the request: the `user_id` condition stops one user changing another's todos
-- for writes that span several statements, run them all on `trx` in `db.transaction().execute(async (trx) => ...)`, and read the txid there with `trx.selectNoFrom(txid).executeTakeFirstOrThrow()`
+- for writes that span several statements, run them all on `trx` in `db.transaction().execute(async (trx) => ...)`, and include the txid in the final write's `.returning(txid)`
 - call it from a route or server function, and see how the frontend [calls these writes](../guides/mutations#calling-the-routes-from-the-frontend)
 
 ## Common pitfalls

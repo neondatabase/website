@@ -50,11 +50,11 @@ This server function creates a record, then starts its agent:
 
 ```ts filename="src/functions/leads.ts" {16,18}
 import { createServerFn } from "@tanstack/react-start"
+import { sql } from "drizzle-orm"
 import { z } from "zod"
 import { leadInputs, leads } from "~/db/schema"
 import { db } from "~/server/db.server"
 import { startLead } from "~/server/runner.server"
-import { transactionId } from "~/server/txid.server"
 import { requireWorkspace } from "~/server/workspace.server"
 
 export const createLead = createServerFn({ method: "POST" })
@@ -63,8 +63,11 @@ export const createLead = createServerFn({ method: "POST" })
     const { workspaceId } = await requireWorkspace()
     const result = await db.transaction(async (tx) => {
       await tx.insert(leads).values({ id: leadId, workspaceId })
-      await tx.insert(leadInputs).values({ id: inputId, workspaceId, leadId, rawText })
-      return transactionId(tx)
+      const [created] = await tx
+        .insert(leadInputs)
+        .values({ id: inputId, workspaceId, leadId, rawText })
+        .returning({ txid: sql<string>`pg_current_xact_id()::text` })
+      return created
     })
     startLead({ leadId, workspaceId })
     return result
@@ -72,7 +75,7 @@ export const createLead = createServerFn({ method: "POST" })
 ```
 
 - `requireWorkspace()` stands in for your auth check
-- `transactionId(tx)` reads `pg_current_xact_id()` inside the transaction, and the client waits for that txid to [confirm its optimistic insert](../guides/mutations#returning-the-txid-from-your-backend)
+- the final insert returns `pg_current_xact_id()` in the same statement, and the client waits for that txid to [confirm its optimistic insert](../guides/mutations#returning-the-txid-from-your-backend). The explicit transaction is still needed because creating a lead spans two writes
 - `startLead()` runs after the commit, so the agent reads committed rows, and returns without holding up the response
 
 ## Run the agent on a thread
