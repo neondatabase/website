@@ -48,7 +48,7 @@ export const mastra = new Mastra({
 
 This server function creates a record, then starts its agent:
 
-```ts filename="src/functions/leads.ts" {16,18}
+```ts filename="src/functions/leads.ts" {18,21}
 import { createServerFn } from "@tanstack/react-start"
 import { sql } from "drizzle-orm"
 import { z } from "zod"
