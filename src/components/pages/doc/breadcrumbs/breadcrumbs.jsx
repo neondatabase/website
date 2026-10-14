@@ -28,6 +28,8 @@ const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
         href = LINKS.guides;
       } else if (slug === 'faqs') {
         href = LINKS.faqs;
+      } else if (slug?.startsWith('/')) {
+        href = slug;
       } else {
         href = `${baseUrl}${slug}`;
       }

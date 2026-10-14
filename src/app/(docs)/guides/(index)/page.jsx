@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import BlogHeader from 'components/pages/blog/blog-header';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
-import GuideCard from 'components/pages/guides/guide-card';
+import GuidesList from 'components/pages/guides/guides-list';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 import SEO_DATA from 'constants/seo-data';
 import { getAllGuides } from 'utils/api-guides';
@@ -19,7 +19,7 @@ const GuidesPage = async () => {
   if (!posts) return notFound();
 
   return (
-    <div className="min-w-0 pb-32 xl:mx-auto xl:max-w-208 lg:max-w-none lg:pb-24 md:pb-20">
+    <div className="mx-auto w-full max-w-304 min-w-0 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       <Breadcrumbs
         breadcrumbs={[
           {
@@ -32,11 +32,7 @@ const GuidesPage = async () => {
         ]}
       />
       <BlogHeader title="Guides" rssTitle="Guides" basePath={GUIDES_BASE_PATH} />
-      <div className="guides">
-        {posts.map((post) => (
-          <GuideCard key={post.slug} {...post} />
-        ))}
-      </div>
+      <GuidesList posts={posts} />
     </div>
   );
 };

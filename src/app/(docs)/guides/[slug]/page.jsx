@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/doc/post';
+import GuidePost from 'components/pages/guides/guide-post';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
-import { GUIDES_BASE_PATH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import {
@@ -53,7 +52,7 @@ export async function generateMetadata(props) {
   });
 }
 
-const GuidePost = async (props) => {
+const GuidePage = async (props) => {
   const params = await props.params;
   const { slug } = params;
   const posts = await getGuideNavigationItems();
@@ -81,7 +80,7 @@ const GuidePost = async (props) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Post
+      <GuidePost
         content={content}
         data={data}
         breadcrumbs={[
@@ -95,7 +94,6 @@ const GuidePost = async (props) => {
           },
         ]}
         navigationLinks={navigationLinks}
-        navigationLinksBasePath={GUIDES_BASE_PATH}
         currentSlug={slug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
@@ -105,4 +103,4 @@ const GuidePost = async (props) => {
   );
 };
 
-export default GuidePost;
+export default GuidePage;

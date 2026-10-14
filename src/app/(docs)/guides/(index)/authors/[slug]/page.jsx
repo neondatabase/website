@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 
 import BlogHeader from 'components/pages/blog/blog-header';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
-import GuideCard from 'components/pages/guides/guide-card';
+import GuidesList from 'components/pages/guides/guides-list';
 import { GUIDES_BASE_PATH } from 'constants/guides';
+import LINKS from 'constants/links';
 import { getAllGuides, getAuthors } from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 
@@ -21,6 +22,8 @@ export async function generateMetadata(props) {
   if (!authorsData[params.slug]) return notFound();
   return getMetadata({
     title: `Neon guides by ${authorsData[params.slug].name}`,
+    description: `Guides written by ${authorsData[params.slug].name} on building with Neon.`,
+    pathname: `${LINKS.guides}/authors/${params.slug}`,
     rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
 }
@@ -38,7 +41,7 @@ const GuidesPage = async (props) => {
     return <div className="w-full text-center text-lg">No guides yet</div>;
 
   return (
-    <div className="min-w-0 pb-32 xl:mx-auto xl:max-w-208 lg:max-w-none lg:pb-24 md:pb-20">
+    <div className="mx-auto w-full max-w-304 min-w-0 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       <Breadcrumbs
         breadcrumbs={[
           {
@@ -50,7 +53,11 @@ const GuidesPage = async (props) => {
             slug: 'guides',
           },
           {
-            title: `Guides by ${author.name}`,
+            title: 'Authors',
+            slug: `${LINKS.guides}/authors`,
+          },
+          {
+            title: author.name,
           },
         ]}
       />
@@ -59,11 +66,7 @@ const GuidesPage = async (props) => {
         rssTitle={`Guides by ${author.name}`}
         basePath={GUIDES_BASE_PATH}
       />
-      <div className="guides">
-        {posts.map((post) => (
-          <GuideCard key={post.slug} {...post} />
-        ))}
-      </div>
+      <GuidesList posts={posts} />
     </div>
   );
 };
