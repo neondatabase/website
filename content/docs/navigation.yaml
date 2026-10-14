@@ -865,6 +865,8 @@
               slug: realtime/guides/ssr
         - section: Examples
           items:
+            - title: 'Overview'
+              slug: realtime/examples/overview
             - title: 'Next.js'
               slug: realtime/examples/nextjs
             - title: 'TanStack'

@@ -23,6 +23,7 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DefinitionList from 'components/pages/doc/definition-list';
+import DemoCards, { DemoCard } from 'components/pages/doc/demo-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
@@ -201,6 +202,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Callout,
   CodeTabs,
   DetailIconCards,
+  DemoCards,
+  DemoCard,
   Faq,
   FaqItem,
   TechCards,
