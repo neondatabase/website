@@ -1,5 +1,5 @@
 ---
-title: Serve objects through a CDN (Cloudflare)
+title: Serve objects through Cloudflare CDN
 subtitle: Cache public bucket objects at the edge with a Cloudflare Worker
 summary: >-
   Put Cloudflare in front of a public_read Neon Object Storage bucket with a small
@@ -9,7 +9,7 @@ enableTableOfContents: true
 
 Neon Object Storage serves objects from your branch's storage endpoint. To serve them from Cloudflare's edge instead, deploy a small Cloudflare Worker that fetches objects from your bucket and caches them. Repeat requests are answered from the edge without reaching Neon.
 
-A plain DNS `CNAME` from your own domain to the storage endpoint doesn't work. The endpoint's TLS certificate is issued for the storage hostname, so the request has to reach it with that hostname intact, which is what the Worker's `fetch()` does.
+A plain DNS `CNAME` from your own domain to the storage endpoint doesn't work, for two reasons. The endpoint's TLS certificate is issued for the storage hostname, and the storage server identifies your branch from the `Host` header, so a request with your own hostname is rejected even if the certificate were valid. The request has to reach the endpoint with the storage hostname intact, which is what the Worker's `fetch()` does.
 
 <Admonition type="important">
 This guide covers `public_read` buckets only. Presigned URLs for private buckets carry a unique signature in every URL, so each URL is a separate cache entry and caching them gains you little. Leave private buckets on presigned URLs, or serve them from your own application.
@@ -63,21 +63,33 @@ export default {
     // Forward only what is needed for partial and conditional requests.
     // Authorization and cookies are never sent to the origin.
     const headers = new Headers();
-    for (const name of ['Range', 'If-None-Match']) {
+    for (const name of ['Range', 'If-None-Match', 'If-Modified-Since']) {
       const value = request.headers.get(name);
       if (value) headers.set(name, value);
     }
 
-    return fetch(upstream, {
+    const response = await fetch(upstream, {
       method: request.method,
       headers,
       cf: { cacheEverything: true },
+    });
+
+    // Remove the origin's x-amz-* headers (request and version IDs). The body is passed
+    // through as a stream.
+    const responseHeaders = new Headers(response.headers);
+    for (const name of [...responseHeaders.keys()]) {
+      if (name.startsWith('x-amz-')) responseHeaders.delete(name);
+    }
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: responseHeaders,
     });
   },
 };
 ```
 
-`cacheEverything` makes Cloudflare cache the response regardless of file extension, and it respects the `Cache-Control` header that the origin returns. See [Set Cache-Control when you upload](#set-cache-control-when-you-upload).
+`cacheEverything` makes Cloudflare cache the response regardless of file extension, and it respects the `Cache-Control` header that the origin returns. The Worker forwards `If-None-Match` and `If-Modified-Since`, so revalidation requests get a `304` from the origin. See [Set Cache-Control when you upload](#set-cache-control-when-you-upload).
 
 ## Deploy to workers.dev
 
@@ -161,7 +173,7 @@ A cached copy is served until its TTL expires, even if you overwrite or delete t
 
 - **Version your keys.** Upload changed content under a new key, such as `logo.v2.png`, and combine it with a long `max-age`. This is the most reliable option and needs no purge.
 - **Use a short `max-age`** for objects that change in place.
-- **Purge the cache.** Cloudflare caches the URL that the Worker fetches, so purge the storage URL (`https://<branch-id>.storage.../my-public-bucket/logo.png`) from the zone that the Worker runs on, not the URL that visitors request. See [How the Cache works](https://developers.cloudflare.com/workers/reference/how-the-cache-works/#single-file-purge-assets-cached-by-a-worker) in the Cloudflare docs. Purging requires a zone you own, so it isn't available on `workers.dev`.
+- **Purge the cache.** Cloudflare caches the URL that the Worker fetches, so purge the storage URL (`https://<branch-id>.storage.../my-public-bucket/logo.png`) from the zone that the Worker runs on (the storage hostname isn't a zone you own), not the URL that visitors request. See [How the Cache works](https://developers.cloudflare.com/workers/reference/how-the-cache-works/#single-file-purge-assets-cached-by-a-worker) in the Cloudflare docs. Cloudflare documents purging from a zone you own, so if you need to purge, run the Worker on a custom domain. For `workers.dev`, rely on versioned keys or a short `max-age`.
 
 ## Range requests
 
@@ -169,9 +181,10 @@ Object Storage returns `206 Partial Content` for a single-range `Range` header, 
 
 ## Caveats
 
-- **Update `NEON_STORAGE_ORIGIN` if the branch changes.** The branch ID is part of the storage hostname. If you reset or recreate the branch, update the variable and run `npx wrangler deploy` again. Publish URLs on your own domain so that public links don't change.
-- **Missing objects.** Cloudflare caches a `404` response for a few minutes by default. Upload an object before you publish its URL.
-- **The Worker serves every bucket on the branch.** Anonymous requests to private buckets are rejected by the origin, but you can restrict the Worker to one bucket by checking the first path segment.
+- **Update `NEON_STORAGE_ORIGIN` if the branch changes.** The branch ID is part of the storage hostname. If you recreate or delete the branch, update the variable and run `npx wrangler deploy` again. Publish URLs on your own domain so that public links don't change.
+- **Branch reset.** A reset keeps the branch ID and the hostname, so you don't need to update `NEON_STORAGE_ORIGIN`. A reset can change object contents, so cached copies may be stale until the TTL expires or you purge them.
+- **Missing objects.** Cloudflare caches a `404` response for 3 minutes by default. Upload an object before you publish its URL.
+- **The Worker serves every bucket on the branch.** Anonymous requests to private buckets are rejected by the origin with `403`, including for keys that don't exist, so the Worker never caches a `404` for a private bucket. You can restrict the Worker to one bucket by checking the first path segment.
 - **CORS.** The Worker doesn't forward `Origin`, so responses carry no CORS headers. If browsers load these objects from another origin, add `Access-Control-Allow-Origin` to the Worker's response.
 
 ## Next steps
