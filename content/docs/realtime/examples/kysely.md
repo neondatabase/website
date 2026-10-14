@@ -4,7 +4,6 @@ subtitle: 'Using Realtime with your Kysely schema and queries.'
 summary: >-
   Use Kysely with Neon Realtime: add the Kysely adapter, seal Kysely selects with parameters, keep live rows typed and return the txid from Kysely writes.
 enableTableOfContents: true
-isDraft: true
 ---
 
 This page shows how to build a Realtime app with [Kysely](https://kysely.dev), using your existing schema, queries, types and writes.

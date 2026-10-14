@@ -4,7 +4,6 @@ subtitle: 'Using Realtime with your Drizzle schema and queries.'
 summary: >-
   Use Drizzle ORM with Neon Realtime: add the Drizzle adapter, seal Drizzle selects with parameters and aliases, decode rows with drizzleParsers and return the txid from Drizzle writes.
 enableTableOfContents: true
-isDraft: true
 ---
 
 This page shows how to build a Realtime app with [Drizzle ORM](https://orm.drizzle.team), using your existing schema, queries, types and writes. You'll learn which Drizzle queries seal unchanged, when a field needs an SQL alias, how live rows keep Drizzle's types in the browser, and how a Drizzle write returns its transaction ID.
