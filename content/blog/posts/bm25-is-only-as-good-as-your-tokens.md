@@ -279,3 +279,5 @@ neon skills -s neon-postgres
 ```
 
 For the details, see the [lakebase_tokenizer reference](https://neon.com/docs/extensions/lakebase-tokenizer).
+
+<script src="https://article-reactions.vercel.app/embed.js" data-target=".post-content" data-theme="dark" defer></script>
