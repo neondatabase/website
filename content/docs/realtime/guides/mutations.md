@@ -32,7 +32,7 @@ Let's return to our running example, flesh out the backend server, call its new 
 
 ### Returning the `txid` from your backend
 
-Each write route takes a batch of changes, writes the whole batch in one Drizzle transaction and reads the transaction's id before it commits, so there's one txid to wait for however many rows change. That's why the [queries guide](./queries#setup) set up `backend/db.ts` with the `neon-serverless` driver, which can run interactive transactions.
+Each write route takes a batch of changes and writes the whole batch in one SQL statement, which returns the ID of its transaction. So there's one txid to wait for however many rows change, and you get it without another database round trip.
 
 Add the three write routes to `backend/server.ts`, chained onto the same app so `AppType` carries them to the frontend. They follow the `/api/v1/messages/live` route from the [queries guide](./queries#exposing-an-endpoint) and the `/api/v1/inbox/live` route from the [reactivity guide](./reactivity#seal-a-broader-query):
 
@@ -50,14 +50,11 @@ export type MutationResponse =
   | { readonly kind: "committed"; readonly txid: string }
   | { readonly kind: "unchanged" }
 
-type Transaction = Parameters<Parameters<typeof db.transaction>[0]>[0]
+// The id of the transaction that made the change, read in the write's own RETURNING
+const txid = sql<string>`pg_current_xact_id()::text`
 
-// Must run inside the write transaction, so it returns that transaction's id
-async function currentTxId(tx: Transaction): Promise<string> {
-  const result = await tx.execute<{ txid: string }>(sql`select pg_current_xact_id()::text as txid`)
-
-  return result.rows[0]!.txid
-}
+const mutationResponse = (row?: { txid: string }): MutationResponse =>
+  row ? { kind: "committed", txid: row.txid } : { kind: "unchanged" }
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
@@ -93,25 +90,38 @@ const app = new Hono()
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
       const channelIds = [...new Set(batch.map((message) => message.channelId))]
+      const rows = batch.map(({ id, channelId, body }) => ({ id, channel_id: channelId, body }))
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const memberships = await tx
-          .select({ channel_id: channelMembers.channel_id })
-          .from(channelMembers)
-          .where(and(inArray(channelMembers.channel_id, channelIds), eq(channelMembers.user_id, user.id)))
+      // One statement: the batch is written only if the user is a member of every channel in it
+      const [sent] = await db
+        .insert(messages)
+        .select(
+          db
+            .select({
+              id: sql`batch.id`.as("id"),
+              channel_id: sql`batch.channel_id`.as("channel_id"),
+              author_id: sql`${user.id}`.as("author_id"),
+              body: sql`batch.body`.as("body"),
+              created_at: sql`now()`.as("created_at"),
+            })
+            .from(sql`jsonb_to_recordset(${JSON.stringify(rows)}::jsonb) as batch(id uuid, channel_id integer, body text)`)
+            .where(
+              eq(
+                db.$count(
+                  channelMembers,
+                  and(eq(channelMembers.user_id, user.id), inArray(channelMembers.channel_id, channelIds))
+                ),
+                channelIds.length
+              )
+            )
+        )
+        .returning({ txid })
 
-        if (memberships.length < channelIds.length) {
-          throw new HTTPException(403, { message: "Not a member of this channel" })
-        }
+      if (!sent) {
+        throw new HTTPException(403, { message: "Not a member of this channel" })
+      }
 
-        await tx
-          .insert(messages)
-          .values(batch.map(({ id, channelId, body }) => ({ id, channel_id: channelId, author_id: user.id, body })))
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(sent))
     }
   )
   .patch(
@@ -133,27 +143,14 @@ const app = new Hono()
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        let count = 0
+      const [edited] = await db
+        .update(messages)
+        .set({ body: sql`edit.body` })
+        .from(sql`jsonb_to_recordset(${JSON.stringify(batch)}::jsonb) as edit(id uuid, body text)`)
+        .where(and(eq(messages.id, sql`edit.id`), eq(messages.author_id, user.id), ne(messages.body, sql`edit.body`)))
+        .returning({ txid })
 
-        for (const { id, body } of batch) {
-          const updated = await tx
-            .update(messages)
-            .set({ body })
-            .where(and(eq(messages.id, id), eq(messages.author_id, user.id), ne(messages.body, body)))
-            .returning({ id: messages.id })
-
-          count += updated.length
-        }
-
-        if (count === 0) {
-          return { kind: "unchanged" }
-        }
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(edited))
     }
   )
   .delete(
@@ -171,20 +168,12 @@ const app = new Hono()
       const user = await requireUser(c)
       const { batch } = c.req.valid("json")
 
-      const result = await db.transaction(async (tx): Promise<MutationResponse> => {
-        const deleted = await tx
-          .delete(messages)
-          .where(and(inArray(messages.id, batch), eq(messages.author_id, user.id)))
-          .returning({ id: messages.id })
+      const [deleted] = await db
+        .delete(messages)
+        .where(and(inArray(messages.id, batch), eq(messages.author_id, user.id)))
+        .returning({ txid })
 
-        if (deleted.length === 0) {
-          return { kind: "unchanged" }
-        }
-
-        return { kind: "committed", txid: await currentTxId(tx) }
-      })
-
-      return c.json(result)
+      return c.json(mutationResponse(deleted))
     }
   )
 
@@ -193,11 +182,19 @@ export type AppType = typeof app
 export default app
 ```
 
-Call [`pg_current_xact_id()`](https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SNAPSHOT) inside the write's transaction. The `::text` cast returns the txid as a decimal string, so its 64-bit value stays exact in JavaScript.
+Return the txid from the write itself. Each route adds the `txid` field, which reads [`pg_current_xact_id()`](https://www.postgresql.org/docs/current/functions-info.html#FUNCTIONS-INFO-SNAPSHOT), to its write's `RETURNING`. A single statement runs in its own transaction, so that's the ID of the transaction that made the change. It comes back with the write, in one round trip, and it works with any Postgres driver. The `::text` cast returns the txid as a decimal string, so its 64-bit value stays exact in JavaScript. Every row a statement returns carries the same txid, so each route takes the first.
 
-Each route also checks what the user can change. Sending looks up the sender's `channel_members` rows for every channel in the batch inside the transaction, and throws a 403 if one is missing, so none of the batch is written. Editing and deleting restrict the write to messages the user wrote, so only the author can change a message.
+Write each batch in one statement, so there's one txid:
 
-When an edit or a delete batch matches no rows, the route returns `{ kind: "unchanged" }` instead of a txid. That happens when every edit leaves the text as it was, or when every message is already gone or someone else wrote it. Nothing changed, so there's nothing to wait for.
+- **Send** passes the whole batch as one JSON parameter, and `jsonb_to_recordset()` turns it into typed rows (`id uuid, channel_id integer, body text`) that the insert selects from. The `WHERE` counts the user's `channel_members` rows for the batch's channels and compares the count with the number of distinct channels. If the user isn't a member of every channel, nothing's written and no row comes back, so the route throws a 403. It's all or nothing. Drizzle's `insert().select()` needs every column of the table, in table order, so the select lists `created_at` with its default, `now()`. Each `sql` field also needs an `.as()` alias, or TypeScript won't accept the select as the insert's source.
+- **Edit** runs `UPDATE … FROM jsonb_to_recordset(…)`, which joins each message to its new body. It only changes messages the user wrote, so only the author can edit a message, and the `<>` check skips edits that leave the text as it was.
+- **Delete** runs `DELETE … WHERE id IN (…)`, restricted to messages the user wrote, so only the author can delete a message.
+
+<Admonition type="warning" title="Don't open a transaction just to read the txid">
+Wrapping a write in `db.transaction()` and then running `select pg_current_xact_id()` costs four round trips (`BEGIN`, the write, the select and `COMMIT`) and holds a pooled connection for all of them. When a write genuinely needs several statements, keep the transaction and put the txid in the `RETURNING` of a write that always changes a row. Every statement in a transaction shares its txid, but a write that matches nothing returns no row, and so no txid. The [Mastra example](../examples/mastra#start-agents-from-your-writes) shows this with two inserts.
+</Admonition>
+
+When an edit or a delete batch matches no rows, the statement returns no row, so `mutationResponse()` returns `{ kind: "unchanged" }` instead of a txid. That happens when every edit leaves the text as it was, or when every message is already gone or someone else wrote it. Nothing changed, so there's nothing to wait for.
 
 <Admonition type="important" title="Always pass a timeout">
 `awaitTxId()` keeps waiting while the subscription reconnects or waits for a renewed sealed query, and it never settles if the txid doesn't reach the query. With a timeout, it rejects, the optimistic change drops and the UI shows that the change couldn't be confirmed. The write may still have committed. It also rejects if the subscription errors or closes.

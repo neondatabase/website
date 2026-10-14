@@ -107,7 +107,10 @@ import type { Database } from "./schema"
 
 export const db = new Kysely<Database>({
   dialect: new PostgresDialect({
-    pool: new Pool({ connectionString: process.env.DATABASE_URL })
+    pool: new Pool({
+      // Neon URLs say sslmode=require. Asking pg for verify-full keeps today's checks and skips its warning
+      connectionString: process.env.DATABASE_URL!.replace("sslmode=require", "sslmode=verify-full")
+    })
   })
 })
 ```
