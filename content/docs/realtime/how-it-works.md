@@ -124,7 +124,7 @@ const app = new Hono().post(
   "/api/v1/messages/live",
   async (c) => {
     const user = await requireUser(c)
-    const sealedQuery = await sealQuery(userId)
+    const sealedQuery = await sealQuery(user.id)
 
     return c.json(sealedQuery)
   }
