@@ -16,11 +16,10 @@ The complete app is in the [`realtime/with-nextjs`](https://github.com/neondatab
 
 ## Setup
 
-Install the Realtime SDK with its Kysely adapter and React bindings, plus Kysely, zod, Neon Auth's SDK, `@neon/config` and `server-only`:
+Install the Realtime SDK with its Kysely adapter and React bindings:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-kysely @neon/realtime-react kysely zod
-npm install @neondatabase/auth @neon/config server-only
+npm install @neon/realtime @neon/realtime-kysely @neon/realtime-react
 ```
 
 Add a `neon.ts` that enables Neon Auth and Realtime on your branch:
@@ -48,13 +47,11 @@ Neon Auth's server SDK also needs a cookie secret of at least 32 characters, whi
 printf '\nNEON_AUTH_COOKIE_SECRET=%s\n' "$(openssl rand -base64 32)" >> .env.local
 ```
 
-The browser needs the Realtime URL too. You can pass it from the server as a prop when you [render the page](#render-in-a-server-component), instead of adding a `NEXT_PUBLIC_` copy as the [SSR guide](../guides/ssr#open-the-connection-in-the-browser) does. `NEON_REALTIME_SECRET` never gets a `NEXT_PUBLIC_` prefix. The browser only ever sees the URL and sealed queries.
+The browser needs the Realtime URL too. You can pass it from the server as a prop when you [render the page](#render-in-a-server-component), instead of adding a `NEXT_PUBLIC_` copy as the [SSR guide](../guides/ssr#open-the-connection-in-the-browser) does.
 
 Create anything that needs a secret on first use, not at module scope, because `next build` imports your modules without the runtime secrets. The `get*()` helpers on this page all do this, starting with `getEnv()` in `src/lib/env.ts`, which reads and checks these variables.
 
-## Defining queries
-
-Define each live query once, in server code. You run it to render the page on the server and seal it for the browser to subscribe to, so both get the same rows.
+Note that `NEON_REALTIME_SECRET` never gets a `NEXT_PUBLIC_` prefix. The browser should only ever see the URL and sealed queries.
 
 ### Define the schema
 
@@ -79,6 +76,10 @@ export interface Database {
 ```
 
 Give the table a primary key, here `id`, and create it with a [Kysely migration](https://kysely.dev/docs/migrations) or your usual migration tool. A primary key is all Realtime needs from the table, as [table requirements](../guides/queries#table-requirements) explains.
+
+## Defining queries
+
+Define, run and seal your live queries on the server, both to provide `initialData` for SSR and to pass to the client to subscribe to.
 
 ### Define the live query
 
@@ -105,7 +106,7 @@ function todosQuery(userId: string) {
 export type TodoRow = InferResult<ReturnType<typeof todosQuery>>[number]
 ```
 
-`TodoRow` is the row type Kysely infers from the select. The browser imports it as a type only, so it gets the row type without any server code. `userId` always comes from the [server session](#authorize-with-the-session), never from the browser. This `WHERE` is what keeps each user's todos separate.
+`TodoRow` is the row type Kysely infers from the select. The browser imports it as a type only, so no server code reaches it. `userId` always comes from the [server session](#authorize-with-the-session), never from the browser, and this `WHERE` keeps each user's todos separate.
 
 Live rows don't keep the query's `ORDER BY` order, so the browser [sorts them](#apply-writes-optimistically) too.
 
@@ -142,7 +143,7 @@ export const getRealtime = () => (realtime ??= create())
 
 ### Authorize with the session
 
-[Neon Auth](/docs/auth/overview) runs on your app's own origin, so server code reads the session from its cookie and the browser holds no token. Get the user from the verified session before you read, seal or write anything:
+Get the user from the [Neon Auth](/docs/auth/overview) session before you read, seal or write anything:
 
 ```ts filename="src/lib/auth/server.ts"
 import "server-only"
@@ -166,17 +167,21 @@ export function getAuth() {
  */
 export async function getUser() {
   const { data, error } = await getAuth().getSession() // returns { data, error }; doesn't throw on HTTP errors
-  // An Auth outage is an error, not "signed out".
-  if (error && (error.status ?? 0) >= 500) throw new Error(`Neon Auth is unavailable: ${error.message}`)
+  // If Neon Auth can't be reached, treat the request as signed out.
+  if (error) console.warn("[auth] getSession failed", error.code)
   return data?.user ?? null
 }
 ```
 
-`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession). Mount [`auth.handler()`](/docs/auth/reference/nextjs-server#auth-handler) in a catch-all Route Handler, such as `src/app/api/auth/[...path]/route.ts`, and render Neon Auth's [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router) inside `NeonAuthUIProvider`, as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
+`getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession), and treats the request as signed out if Neon Auth can't be reached. Mount [`auth.handler()`](/docs/auth/reference/nextjs-server#auth-handler) in a catch-all Route Handler, such as `src/app/api/auth/[...path]/route.ts`. Render Neon Auth's [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router) inside `NeonAuthUIProvider`, as in the [Neon Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
+
+Make sign-in and sign-out full page loads, so they drop the browser's Realtime client and the previous user's rows. In `NeonAuthUIProvider`, set a flag in `onSessionChange`, and once it's set, have `navigate` call `window.location.assign()` instead of `router.push()`.
 
 ### Seal in a Route Handler
 
-Expose the sealed query from a POST [Route Handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers), as in [exposing an endpoint](../guides/queries#exposing-an-endpoint). The browser calls it to [renew the sealed query](../guides/queries#renewing-sealed-queries) before it expires, so it has to seal exactly the same query. Add a helper to `src/lib/todos.ts`, and put its import at the top of the file:
+Expose the sealed query from a POST [Route Handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers), as in [exposing an endpoint](../guides/queries#exposing-an-endpoint).
+
+The browser calls it to [renew the sealed query](../guides/queries#renewing-sealed-queries) before it expires, so it has to seal exactly the same query. Add a helper to `src/lib/todos.ts`, and put its import at the top of the file:
 
 ```ts filename="src/lib/todos.ts"
 import { getRealtime } from "./realtime"
@@ -207,14 +212,14 @@ Next.js runs server actions one at a time, so renew through a Route Handler rath
 Next.js renders the first request on the server. To put the user's rows in that HTML and keep them live in the browser:
 
 1. read and seal the query in one function
-2. call it from a Server Component at request time, and pass the rows and the sealed query to a Client Component as props
+2. call it from a Server Component at request time, and pass the initial query results and the sealed query to a Client Component as props
 3. create the Realtime client in the browser, where the Client Component subscribes after hydration
 
 The SSR guide covers the pattern in [send both to the browser](../guides/ssr#send-both-to-the-browser).
 
 ### Read and seal together
 
-Run the query and seal it in the same function, so the rows and the sealed query match. This is [return the sealed query and initial results](../guides/ssr#return-the-sealed-query-and-initial-results) for a Server Component. Add it to `src/lib/todos.ts`, which already imports everything it uses:
+Run the query and seal it in the same function, so the rows and the sealed query match, as in [return the sealed query and initial results](../guides/ssr#return-the-sealed-query-and-initial-results). Add it to `src/lib/todos.ts`, which already imports everything it uses:
 
 ```ts filename="src/lib/todos.ts"
 // Read and seal the same query. The stream's first full result replaces these rows, so nothing is missed
@@ -264,9 +269,9 @@ export async function Todos() {
 }
 ```
 
-[`connection()`](https://nextjs.org/docs/app/api-reference/functions/connection) waits for an incoming request, so the component never prerenders at build time and its output is never cached. That matters because the session and the sealed query belong to one user and one request. The SSR guide uses `force-dynamic` for the same reason. `connection()` also works when your app enables `cacheComponents`, inside a `<Suspense>` boundary.
+[`connection()`](https://nextjs.org/docs/app/api-reference/functions/connection) waits for an incoming request, so the component never prerenders and its output, which belongs to one user and one request, is never cached. The SSR guide uses `force-dynamic` for the same reason. `connection()` also works when your app enables `cacheComponents`, inside a `<Suspense>` boundary.
 
-The key on `queryFingerprint` keeps the subscription across re-renders for the same query, and remounts the list when the query changes, for example when another user signs in. `url` passes the Realtime URL from server env to the browser.
+The key on `queryFingerprint` keeps the subscription across re-renders for the same query, and remounts the list when the query changes, for example when another user signs in.
 
 Render the component inside a `<Suspense>` boundary, so the rest of the page renders at once and the list streams in:
 
@@ -331,7 +336,7 @@ export function RealtimeRoot({ url, children }: { url: string; children: ReactNo
 }
 ```
 
-Creating the client doesn't connect, so it's safe during the server render. It connects on the first subscribe and disconnects after the last one ends, so you don't need an effect that closes it. With the default parsers, live rows have the same types as the rows Kysely reads on the server, and Server Component props keep `created_at` a `Date`. See [keep row shapes identical](../guides/ssr#keep-row-shapes-identical).
+Creating the client doesn't connect, so it's safe during the server render. It connects on the first subscribe and disconnects after the last one ends, so you don't need an effect that closes it. With the default parsers, live rows have the same types as the rows Kysely reads on the server, and Server Component props keep `created_at` a `Date`, as [keep row shapes identical](../guides/ssr#keep-row-shapes-identical) explains.
 
 Render `RealtimeRoot` around the components that subscribe. With one live query on the page, it can wrap that component and share its key, as `Todos` does. With several, render it higher up, for example in your root layout, and key each subscribing component on its own `queryFingerprint`.
 
@@ -341,7 +346,7 @@ In the browser, [`useLiveQuery()`](../sdks/typescript#react-uselivequery) subscr
 
 ### Subscribe with `useLiveQuery()`
 
-Render the server's rows straight away, and keep them live. These lines open the `TodoList` Client Component in `src/app/todo-list.tsx`:
+Render the server's rows straight away, and keep them live. This is the start of the `TodoList` Client Component:
 
 ```tsx filename="src/app/todo-list.tsx"
 "use client"
@@ -370,18 +375,18 @@ export function TodoList({
 
   const signedOut = useRef(false)
   const refreshQuery = useCallback(async (): Promise<SealedLiveQuery<TodoRow>> => {
-    // The hook retries a failed renewal every second. After a 401, stop calling
-    // the server. router.refresh() lets proxy.ts redirect to sign-in, which unmounts this list.
+    // The hook retries a failed renewal every second until one succeeds. After a 401, stop calling the
+    // server and go to sign-in with a full page load, which drops the Realtime client and this user's rows.
     if (signedOut.current) throw new Error("Signed out")
     const response = await fetch("/api/todos/live-query", { method: "POST", cache: "no-store" })
     if (response.status === 401) {
       signedOut.current = true
-      router.refresh()
+      window.location.assign("/auth/sign-in")
       throw new Error("Signed out")
     }
     if (!response.ok) throw new Error(`Live query renewal failed: ${response.status}`)
     return (await response.json()) as SealedLiveQuery<TodoRow>
-  }, [router])
+  }, [])
 
   const { data, status, error, utils } = useLiveQuery(query, { initialData: initialTodos, refreshQuery })
 
@@ -392,11 +397,11 @@ export function TodoList({
   }, [error, router])
 ```
 
-Server re-renders are routine in a Next.js app. `router.refresh()` and server actions that set cookies cause them, and so does `NeonAuthUIProvider` when you pass it `onSessionChange={() => router.refresh()}`. Each one sends a new sealed-query object for the same query, so keep the first one in state, as [send both to the browser](../guides/ssr#send-both-to-the-browser) explains. Renewals go through [`refreshQuery`](../guides/reactivity#refreshquery), which posts to the [Route Handler](#seal-in-a-route-handler).
+Server re-renders are routine in Next.js: `router.refresh()` and server actions that set cookies both cause them. Each one sends a new sealed-query object for the same query, so keep the first one in state, as [send both to the browser](../guides/ssr#send-both-to-the-browser) explains, and renew through [`refreshQuery`](../guides/reactivity#refreshquery), which posts to the [Route Handler](#seal-in-a-route-handler).
 
-A 401 from the Route Handler means the user has signed out. `refreshQuery` stops calling the server and refreshes the route, so the proxy redirects to sign-in and the list unmounts, as [handling errors](../guides/reactivity#handling-errors) recommends. A `QUERY_REFRESH_FAILED` error usually means the renewal came back for a different query, so refresh the route, and the new fingerprint remounts the list. The `error` status is final for a subscription, and there's no client API to restart one, so while the status is `error`, offer a button that calls `window.location.reload()`.
+A 401 from the Route Handler means the user has signed out. `refreshQuery` stops calling the server and goes to sign-in with a full page load. That unmounts the list, as [handling errors](../guides/reactivity#handling-errors) recommends, and drops the Realtime client and the user's rows. A `QUERY_REFRESH_FAILED` error usually means the renewal came back for a different query, so refresh the route, and the new fingerprint remounts the list. The `error` status is final for a subscription, and there's no client API to restart one, so while the status is `error`, offer a button that calls `window.location.reload()`.
 
-Together with the server render, the first request takes the rows from the server's query to the live subscription in four steps:
+On the first request, the rows go from the server's query to the live subscription in four steps:
 
 1. on the server, the Server Component reads and seals the query, and the Client Component renders the rows with the status `connecting`. Nothing subscribes on the server
 2. in the browser, React hydrates the same rows from the props, so the markup matches with no loading flash
@@ -437,8 +442,8 @@ function applyOptimisticAction(todos: readonly OptimisticTodo[], action: Optimis
   }
 }
 
-// The live stream doesn't keep ORDER BY order, so sort here. The server render and
-// hydration run the same sort, so the markup matches.
+// The live rows don't follow the query's ORDER BY, so sort here. The server render and hydration run the
+// same sort, so the markup matches.
 // Newest first, optimistic rows included (they carry the browser's created_at until the live row replaces them).
 const newestFirst = (a: OptimisticTodo, b: OptimisticTodo) =>
   b.created_at.getTime() - a.created_at.getTime() || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)
@@ -472,7 +477,8 @@ Inside `TodoList`, after the `QUERY_REFRESH_FAILED` effect, layer the optimistic
         return
       }
       if (result.kind === "rejected") {
-        if (result.reason === "UNAUTHENTICATED") router.refresh() // proxy.ts redirects to sign-in
+        if (result.reason === "UNAUTHENTICATED")
+          window.location.assign("/auth/sign-in") // a full page load, like the 401 above
         else setNotice({ tone: "error", text: failure })
         return
       }
@@ -508,13 +514,11 @@ Inside `TodoList`, after the `QUERY_REFRESH_FAILED` effect, layer the optimistic
 
 Toggles and deletes call `mutate()` the same way, with `setTodoCompleted()` and `deleteTodo()`. Render `todos`, `status` and `notice`, with a form that calls `addTodoFromForm`. The [full component](https://github.com/neondatabase/examples/blob/main/realtime/with-nextjs/src/app/todo-list.tsx) is on GitHub.
 
-`mutate()` holds each write's transition open until its txid comes back, so the optimistic change hands over to the synced row without a flicker. `SYNC_TIMEOUT_MS` is 10 seconds, as in the guides.
-
-The browser generates each new todo's `id`, so the optimistic row and the live row share a key, and the `add` case doesn't add a row that's already there.
+The browser generates each new todo's `id`, so the optimistic row and the live row share a key, and the `add` case doesn't add a row that's already there. `SYNC_TIMEOUT_MS` is 10 seconds, as in the guides.
 
 ### Return the txid from a server action
 
-On the server, each write is a server action. It checks the session, validates its input, writes for the user in the session and returns the transaction ID:
+On the server, each write is a server action that returns the transaction ID:
 
 ```ts filename="src/app/actions.ts"
 "use server"
