@@ -4080,7 +4080,7 @@
             },
             "changes": {
               "type": "boolean",
-              "describe": "Show raw resets and transaction batches",
+              "describe": "Show raw rows and changes events",
               "default": false
             },
             "project-id": {
@@ -4098,7 +4098,7 @@
             },
             {
               "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
-              "description": "Print raw reset and delta events"
+              "description": "Print raw rows and changes events"
             }
           ]
         }
