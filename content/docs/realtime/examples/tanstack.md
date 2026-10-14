@@ -76,9 +76,6 @@ export const todos = pgTable(
   },
   (t) => [index("realtime_todos_user_id_idx").on(t.userId)]
 )
-
-// The row shape the browser sees: the same columns `selectTodos` selects.
-export type Todo = Omit<typeof todos.$inferSelect, "userId">
 ```
 
 ### Define the live query
@@ -104,6 +101,9 @@ export const selectTodos = (userId: string) =>
     })
     .from(todos)
     .where(eq(todos.userId, userId))
+
+// The row shape the browser sees, inferred from the query.
+export type Todo = Awaited<ReturnType<typeof selectTodos>>[number]
 ```
 
 The query has no `ORDER BY`, because the collection stores rows by key and doesn't keep their order. The page sorts them when it [queries the collection](#render-the-collection). `userId` always comes from the server session, never from the browser. This `WHERE` is what keeps each user's todos separate.
@@ -381,8 +381,8 @@ import type { RealtimeClient, SealedLiveQuery } from "@neon/realtime/client"
 import { realtimeCollectionOptions } from "@neon/realtime-tanstack"
 import { collectionOptions } from "@tanstack/react-db"
 
-import type { Todo } from "./schema"
 import { refreshTodosQuery } from "./todos.functions"
+import type { Todo } from "./todos.server"
 
 // A cheap descriptor, built by the loader and the page alike. The factory runs
 // once per DbClient, with the Realtime client `getRouter` gave that DbClient.
