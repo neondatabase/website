@@ -129,6 +129,19 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) in your browser. If you open two windows or tabs, as you change data in one, you'll see it update in realtime in the other.
 
+## Agent skills and MCP
+
+Install the [Neon MCP server](/docs/ai/neon-mcp-server). Or [use the CLI](/docs/cli) to install the Realtime skill:
+
+```bash filename="Terminal"
+neon skills -s neon-realtime
+```
+
+<CopyPrompt src="/prompts/neon-realtime.md"
+    description="Copy this to your coding agent to get started with Realtime."
+    buttonText="Copy prompt"
+/>
+
 ## Next steps
 
 - learn [how Realtime works](./how-it-works) and how the layers fit together
