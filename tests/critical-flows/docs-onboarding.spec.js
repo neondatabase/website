@@ -15,6 +15,7 @@ test.describe('critical documentation onboarding', () => {
   test(`[${DOCS_ONBOARDING_CONTRACT.id}] docs onboarding exposes search, copy, and guided setup`, async ({
     page,
     hasTouch,
+    isMobile,
   }) => {
     await installClipboardMock(page);
     const applicationErrors = await openCriticalPage(page, DOCS_ONBOARDING_CONTRACT.pagePath);
@@ -43,14 +44,33 @@ test.describe('critical documentation onboarding', () => {
     const searchInput = page.getByRole('dialog', { name: 'Search Neon' }).getByRole('combobox');
     await expect(searchInput).toBeVisible();
     const searchDialog = page.getByRole('dialog', { name: 'Search Neon' });
-    await expect(searchDialog.getByRole('button', { name: 'Docs', exact: true })).toHaveAttribute(
-      'aria-pressed',
-      'true'
-    );
-    await expect(searchDialog.getByRole('button', { name: 'All', exact: true })).toHaveAttribute(
-      'aria-pressed',
-      'false'
-    );
+    // Phone widths collapse the category chips into a single menu.
+    if (isMobile) {
+      const categoryMenu = searchDialog.locator('[data-test="search-category-menu"]');
+      await expect(categoryMenu).toHaveText('Search in: Docs');
+      await categoryMenu.click();
+      const options = page.getByRole('listbox', { name: 'Search in: Docs' });
+      await expect(options.getByRole('option', { name: 'Docs', exact: true })).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+      await expect(options.getByRole('option', { name: 'All', exact: true })).toHaveAttribute(
+        'aria-selected',
+        'false'
+      );
+      await page.keyboard.press('Escape');
+      await expect(options).toBeHidden();
+      await expect(searchInput).toBeVisible();
+    } else {
+      await expect(searchDialog.getByRole('button', { name: 'Docs', exact: true })).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      );
+      await expect(searchDialog.getByRole('button', { name: 'All', exact: true })).toHaveAttribute(
+        'aria-pressed',
+        'false'
+      );
+    }
 
     // Headless UI skips initial focus on touch devices so the keyboard stays closed.
     if (hasTouch) {
