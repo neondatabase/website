@@ -4066,7 +4066,13 @@
           "name": "rotate-secret",
           "aliases": [],
           "positionals": [],
-          "options": {},
+          "options": {
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait for the Realtime secret rotation to finish",
+              "default": true
+            }
+          },
           "commands": {},
           "describe": "Replace a branch's Realtime shared secret"
         },

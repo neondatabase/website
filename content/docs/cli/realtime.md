@@ -60,7 +60,7 @@ After you disable Realtime, `neon realtime subscribe` on that branch fails with 
 
 ## neon realtime rotate-secret (#rotate-secret)
 
-Requests replacement of a branch's Realtime shared secret. Rotation finishes in the background. The existing secret keeps working while the change is pending and stops working after the new secret is active.
+Requests replacement of a branch's Realtime shared secret. By default, the command waits for the new secret to become active. The existing secret keeps working while the change is pending and stops working after the new secret is active.
 
 <CliUsage command="realtime rotate-secret" />
 
@@ -72,9 +72,13 @@ neon realtime rotate-secret
 
 ```text
 Realtime secret rotation requested for branch br-cool-darkness-123456.
+Realtime secret rotation completed for branch br-cool-darkness-123456.
+Run neon env pull --service realtime to update NEON_REALTIME_SECRET.
 ```
 
-The command doesn't print the new secret. Run `neon env pull --service realtime` after requesting rotation. The env pull waits for the pending change to finish, then writes the new `NEON_REALTIME_SECRET` to your env file. Update every backend that seals Realtime queries with the old secret.
+The command doesn't print the new secret. After rotation completes, run `neon env pull --service realtime` to write the replacement `NEON_REALTIME_SECRET` to your env file. Update every backend that seals Realtime queries with the old secret.
+
+Pass `--no-wait` to request rotation and return immediately. The command then prints only the requested message. Rotation continues in the background, and `neon env pull --service realtime` waits for it to finish before retrieving the replacement secret.
 
 Each successful `rotate-secret` request replaces the secret again, so don't repeat the command unless you intend to start another rotation.
 
