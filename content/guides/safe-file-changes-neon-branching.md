@@ -1,10 +1,10 @@
 ---
-title: 'Safely test file changes with branchable storage'
+title: 'Safely test file changes with Neon Object Storage branching'
 subtitle: 'Test uploads, replacements, and deletions on a Neon branch, verify the result in your frontend, and keep production untouched'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-13T00:00:00.000Z'
-updatedOn: '2026-10-15T11:55:48.364Z'
+updatedOn: '2026-10-15T12:00:02.839Z'
 ---
 
 If you're building an app with file uploads (product photos, avatars, invoices, or PDF exports), you eventually have to change files that are already live. Maybe you're replacing a product image, moving objects to a new key prefix, or cleaning up attachments for accounts that were deleted. Whatever the change, one thing makes it different from the rest of your deploys: there's no undo. You can roll back code, but you can't roll back a file deletion or an overwrite. If you make a mistake, your users see it immediately.
