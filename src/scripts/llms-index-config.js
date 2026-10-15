@@ -93,6 +93,10 @@ module.exports = {
       label: 'Build a fully reactive app on Postgres',
       url: 'https://neon.com/docs/realtime/examples/nextjs.md',
     },
+    {
+      label: 'Send feedback to the Neon team (CLI, HTTP, or MCP)',
+      url: 'https://neon.com/feedback.md',
+    },
   ],
 
   // Sections in display order. Unlisted sections append alphabetically at the end.
