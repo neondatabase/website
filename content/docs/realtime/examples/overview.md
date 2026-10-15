@@ -53,7 +53,7 @@ These apps use Realtime alongside other parts of the Neon platform, such as Auth
   image="/docs/realtime/examples/hackernews-realtime.png"
   stack="Postgres, Realtime, Functions, Vercel"
   demo="https://hackernews-realtime.vercel.app"
-  github="https://github.com/sam-willis_data/hackernews-realtime"
+  github="https://github.com/samwillis/hackernews-realtime"
 />
 
 <DemoCard
@@ -62,7 +62,7 @@ These apps use Realtime alongside other parts of the Neon platform, such as Auth
   image="/docs/realtime/examples/neonbricks.png"
   stack="Postgres, Realtime, Functions, AI Gateway, Vercel"
   demo="https://neonbricks-app.vercel.app"
-  github="https://github.com/sam-willis_data/neonbricks"
+  github="https://github.com/samwillis/neonbricks"
 />
 
 <DemoCard
@@ -71,7 +71,7 @@ These apps use Realtime alongside other parts of the Neon platform, such as Auth
   image="/docs/realtime/examples/carriage.png"
   stack="Postgres, Realtime, Auth, Functions, Vercel"
   demo="https://carriage-neon.vercel.app"
-  github="https://github.com/sam-willis_data/carriage"
+  github="https://github.com/samwillis/carriage"
 />
 
 </DemoCards>
