@@ -208,6 +208,14 @@ const defaultConfig = {
       },
       ...mdIndexHeaders,
       ...generatedPageMarkdownHeaders,
+      {
+        source: '/feedback.md',
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -2895,6 +2903,9 @@ const defaultConfig = {
         // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
         { source: '/docs.md', destination: '/docs/llms.txt' },
         { source: '/blog.md', destination: '/blog/llms.txt' },
+        // /feedback.md is the agent feedback discovery URL; it serves the Send feedback
+        // docs page mirror. Keep in sync with CUSTOM_MARKDOWN_PATHS in ai-agent-detection.js.
+        { source: '/feedback.md', destination: '/md/docs/introduction/feedback.md' },
         ...Object.entries(GENERATED_PAGE_MARKDOWN_PATHS)
           // /auth.md is the existing Claimable Neon protocol. The Auth product
           // page exposes its separate Markdown mirror at /md/auth-page.md.

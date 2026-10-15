@@ -174,6 +174,12 @@ describe('getMarkdownPath', () => {
       expect(getMarkdownPath(pagePath)).toBe(markdownPath);
     });
 
+    it('should alias /feedback.md to the Send feedback docs page mirror', () => {
+      expect(getMarkdownPath('/feedback.md')).toBe('/md/docs/introduction/feedback.md');
+      // Bare /feedback is a redirectFrom redirect to the docs page, not a markdown alias.
+      expect(getMarkdownPath('/feedback')).toBeNull();
+    });
+
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
       expect(result).toBe('/md/docs/introduction.md');
