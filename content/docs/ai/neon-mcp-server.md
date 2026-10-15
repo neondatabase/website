@@ -6,7 +6,9 @@ summary: >-
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+redirectFrom:
+  - /docs/ai/mcp
+updatedOn: '2026-10-15T20:24:27.880Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
