@@ -4,9 +4,10 @@ subtitle: Manage Neon Realtime and subscribe to live queries from the CLI
 summary: >-
   The Neon CLI `neon realtime` command manages Neon Realtime on a database
   branch. Use `enable` to provision Realtime and set the browser origins allowed
-  to connect, `disable` to remove it, and `subscribe` to stream a live SQL query.
+  to connect, `disable` to remove it, `rotate-secret` to replace its shared
+  secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-10-15T00:31:32.385Z'
+updatedOn: '2026-10-15T18:37:33.228Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
@@ -56,6 +57,32 @@ Realtime disable requested for branch br-cool-darkness-123456.
 Disabling also discards the branch's Realtime secret, so apps using that branch's `NEON_REALTIME_SECRET` stop working. If you enable Realtime again later, the branch gets a new secret, so pull the env vars again.
 
 After you disable Realtime, `neon realtime subscribe` on that branch fails with an error that points you back to `neon realtime enable`.
+
+## neon realtime rotate-secret (#rotate-secret)
+
+Requests a new Realtime shared secret for a branch. Rotation runs in the background: until it finishes, the current secret keeps working. Once it finishes, the new secret takes over and the old one stops working, so update every app that uses it.
+
+<CliUsage command="realtime rotate-secret" />
+
+<CliOptions command="realtime rotate-secret" />
+
+By default, the command waits up to a minute for the rotation to finish, then reminds you to pull the new secret. If the wait times out, the command exits with an error, but the rotation may still be in progress. With `--no-wait`, it returns as soon as the rotation is requested. If the rotation is still running, `neon env pull` waits for it to finish, then writes the new secret.
+
+```bash
+neon realtime rotate-secret
+```
+
+```text
+Realtime secret rotation requested for branch br-cool-darkness-123456.
+Realtime secret rotation completed for branch br-cool-darkness-123456.
+Run neon env pull --service realtime to update NEON_REALTIME_SECRET.
+```
+
+Then write the new `NEON_REALTIME_SECRET` to your env file with [`neon env pull`](/docs/cli/env):
+
+```bash
+neon env pull --service realtime
+```
 
 ## neon realtime subscribe (#subscribe)
 
