@@ -4,7 +4,7 @@ subtitle: 'Test uploads, replacements, and deletions on a Neon branch, verify th
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-13T00:00:00.000Z'
-updatedOn: '2026-10-15T12:00:02.839Z'
+updatedOn: '2026-10-15T12:19:24.138Z'
 ---
 
 If you're building an app with file uploads (product photos, avatars, invoices, or PDF exports), you eventually have to change files that are already live. Maybe you're replacing a product image, moving objects to a new key prefix, or cleaning up attachments for accounts that were deleted. Whatever the change, one thing makes it different from the rest of your deploys: there's no undo. You can roll back code, but you can't roll back a file deletion or an overwrite. If you make a mistake, your users see it immediately.
@@ -246,6 +246,8 @@ export async function deleteAsset(formData: FormData) {
 }
 ```
 
+`app/actions.ts` defines the three write operations the gallery needs. All of them run on the server, so your access keys never reach the browser. `putObject` is the shared helper: it reads the uploaded file into a buffer and sends it with `PutObjectCommand`, using the key you supply. `uploadAsset` and `replaceAsset` both call it, while `deleteAsset` uses `DeleteObjectCommand`. Each action calls `revalidatePath('/')` to refresh the gallery after a change.
+
 Replace `app/page.tsx` with the gallery. It lists the bucket on every request, so the view always reflects the current branch:
 
 ```tsx filename="app/page.tsx"
@@ -366,6 +368,8 @@ export default function Home() {
 }
 ```
 
+`app/page.tsx` renders the gallery in two parts. `AssetGallery` is an async server component. The `await io()` call marks a point that suspends during prerendering so the listing is excluded from the static shell and streams in at request time. The listing re-runs on every request because no cache scope wraps it. It lists the bucket with `ListObjectsV2Command`, sorts the keys, and renders each one as a tile with an image and caption. The three forms below it call the server actions you defined in `app/actions.ts`.
+
 <Admonition type="tip" title="Increase the request body limit for large files">
 Server actions cap the request body at 1 MB by default, so large files will fail to upload. You can increase the limit in `next.config.ts`:
 
@@ -451,9 +455,9 @@ products/vertex-side-table.svg  (269 bytes)
 
 With the app pointed at the branch, test all three file changes: the upload, the replacement, and the deletion. Use the gallery forms for each one.
 
-**Upload a new file.** In the **Upload a file** form, enter `products/lumen-desk-lamp.png` and choose any image or SVG from your machine. Submit the form.
+**Upload a new file.** In the **Upload a file** form, enter `products/<your-file-name>`, select an image file, and submit the form. The newly uploaded file will appear as a tile in the gallery.
 
-**Replace an existing file.** In the **Replace a file** form, select `products/nimbus-chair.svg`, choose a visibly different image, and submit. The gallery image updates in place because the object key is overwritten. The `?v=` query parameter tracks the object's `LastModified` value, so it changes when the file is overwritten and makes the browser fetch the new bytes instead of reusing a cached copy.
+**Replace an existing file.** In the **Replace a file** form, select `products/nimbus-chair.svg`, choose a visibly different image, and submit. The gallery image updates to the new file, and the URL remains the same.
 
 **Delete a file.** In the **Delete a file** form, select `products/oculus-wall-clock.svg` and submit. The tile disappears from the gallery.
 
@@ -508,7 +512,7 @@ The test run is done. You can either throw the branch away or apply the change t
 2. Open the three-dot menu (⋮) for `test-file-changes` and select **Delete branch**.
 
 <Admonition type="warning">
-Files that exist only on the branch, such as `products/lumen-desk-lamp.png`, are lost when you delete it.
+Files that exist only on the branch, such as new uploads, are deleted when the branch is deleted.
 </Admonition>
 
 **To promote it,** repeat the same operations against production. Point `AWS_ENDPOINT_URL_S3` back at production, restart the app, and run the upload, replacement, and deletion again. This applies a change you've already verified end to end, instead of trying it for the first time against live files. If the change also lives in code, such as a new key layout, deploy the version you validated on the branch.
@@ -525,6 +529,8 @@ This workflow is especially useful for testing file changes that would be costly
 - **Overwriting an existing object key.** Re-encode images, regenerate thumbnails or watermarks, or correct a bad upload without changing the key that other systems and deployed clients already reference.
 - **Migrating to a new object key layout.** When moving thousands of objects to a new naming scheme, verify the migration script, database updates, and frontend changes together before applying them to production.
 
+The same isolation applies to AI agents. An agent that uploads generated assets, rewrites keys, or deletes stale files is doing exactly the kind of irreversible work that makes branching useful, and it can do that work on a branch instead of against live files. If you're wiring this up programmatically, declare buckets in a [`neon.ts`](/docs/reference/neon-ts#buckets) policy so `neon deploy` provisions them and injects the `AWS_*` credentials, or use the [`neon buckets`](/docs/cli/buckets) CLI commands to create a bucket on a branch as part of an automated flow. Both give an agent a throwaway environment it can write to and discard, with production untouched.
+
 Because branching also forks your Postgres data, you can test changes that span both database rows and stored objects in the same environment. For example, you can validate a new `thumbnail_url` column or a migration to a new key prefix alongside the corresponding object changes. This also makes branches useful as per-PR preview environments, where the database records and assets your tests depend on are consistent with production.
 
 Whenever overwriting or deleting live files could be expensive to get wrong, test the operation on a branch first. Learn more about [Neon branching](/docs/introduction/branching) and the [GitHub integration](/docs/guides/neon-github-integration) for creating branches automatically for pull requests.
@@ -534,5 +540,7 @@ Whenever overwriting or deleting live files could be expensive to get wrong, tes
 - [Neon Object Storage overview](/docs/storage/overview)
 - [Get started with Object Storage](/docs/storage/get-started)
 - [Object branching](/docs/storage/objects#object-branching)
+- [neon.ts reference](/docs/reference/neon-ts#buckets)
+- [Neon CLI: buckets](/docs/cli/buckets)
 
 <NeedHelp/>
