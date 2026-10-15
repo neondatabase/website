@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.4.4",
+  "neonctlVersion": "8.6.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1230,7 +1230,8 @@
                   "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
                 }
               },
-              "commands": {}
+              "commands": {},
+              "describe": "Enable Realtime (preview.realtime: true)"
             }
           },
           "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
@@ -1814,6 +1815,10 @@
       "aliases": [],
       "positionals": [],
       "options": {
+        "env": {
+          "type": "string",
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+        },
         "port": {
           "type": "number",
           "describe": "Port to listen on (single-function mode only, with --source). Fails if taken. Without it (and without a PORT env var) a free port is chosen automatically."

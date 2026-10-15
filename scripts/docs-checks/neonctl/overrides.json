@@ -23,7 +23,7 @@
         "init": {
           "options": {
             "services": {
-              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from an array join). See generate-schema.js parseOptionSpec for the limitation. type, alias, and describe verified against config.ts and neon_services.ts at neonctl 8.3.4, which replaced `none` with `postgres` for the starter policy. 8.4.1 added realtime to NEON_SERVICES; listedServices() shows it in help only on the staging API host, but the docs list it as generally available.",
+              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from an array join). See generate-schema.js parseOptionSpec for the limitation. type, alias, and describe verified against config.ts and neon_services.ts at neonctl 8.3.4, which replaced `none` with `postgres` for the starter policy. 8.4.1 added realtime to NEON_SERVICES, and 8.5.0 removed the staging-only gate, so help lists it on every API host.",
               "type": "array",
               "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
               "alias": ["s", "service"]

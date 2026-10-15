@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-10-13T00:38:52.280Z'
+updatedOn: '2026-10-15T16:33:34.223Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -152,15 +152,23 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
 
-`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
+`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string, so set each variable before you deploy and mark the read with `!`:
 
 ```ts
 env: {
-  API_KEY: process.env.API_KEY ?? "",
+  API_KEY: process.env.API_KEY!,
 }
 ```
 
-Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+Skip empty-string fallbacks like `?? ""`, because deploying an empty value deletes that variable from the live function. If you don't want to set a variable, remove its key from `neon.ts`. For an optional variable, declare it only when it has a value:
+
+```ts
+env: {
+  ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+}
+```
+
+Use `neon deploy --env .env.production` to load a `.env` file before evaluation. Commands that evaluate `neon.ts`, such as `neon deploy` and [`neon dev`](/docs/cli/dev#environment-variables), check that every `env` value is set and report any missing variable by name. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
 `bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
