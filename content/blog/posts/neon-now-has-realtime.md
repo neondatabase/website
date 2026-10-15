@@ -75,13 +75,13 @@ Neon Realtime adds live queries to Lakebase Postgres. Here's what you get:
 - **A TypeScript SDK for your backend and frontend.** Define queries on your backend with raw SQL, Drizzle, or Kysely, and subscribe to them from a browser, a server, or an agent. It works with Next.js, TanStack Start and TanStack DB, and Mastra.
 - **Built for coding agents.** Your agent can enable Realtime in one command, test a live query from the terminal, and use the Realtime skill (`neon skills -s neon-realtime`) or the [Neon MCP server](https://neon.com/docs/ai/connect-mcp-clients-to-neon) to build the app. The Neon API and Console work too.
 
-The fastest way to see it is from the terminal. Enable Realtime on your project (`neon realtime enable`, or `neon bootstrap realtime` or `neon init --service realtime` for a new one), then subscribe to a query.
+The fastest way to see it is from the terminal. Enable Realtime on a linked branch with `neon realtime enable`, or declare it while setting up an app with `neon bootstrap my-app --template realtime-react` or `neon init --services realtime`, then run `neon deploy` from that app's directory. Once Realtime is enabled, subscribe to a query.
 
 With a schema like this:
 
 ```sh
 neon psql -- -c "CREATE TABLE items (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), value TEXT)"
-neon psql -- -c "INSERT INTO items VALUES ('foo')"
+neon psql -- -c "INSERT INTO items (value) VALUES ('foo')"
 ```
 
 You can subscribe to it like this:
@@ -93,7 +93,7 @@ neon realtime subscribe "SELECT * FROM items"
 You'll see the current rows. Insert a row from another terminal and the result updates in place:
 
 ```sh
-neon psql -- -c "INSERT INTO items VALUES ('bar')"
+neon psql -- -c "INSERT INTO items (value) VALUES ('bar')"
 ```
 
 Add `--changes` to see the raw delta stream underneath.
@@ -127,7 +127,7 @@ In React, that's [`useLiveQuery`](/docs/realtime/guides/reactivity):
 
 ```tsx
 // frontend/Sidebar.tsx
-import { useLiveQuery } from "@neon/live-react"
+import { useLiveQuery } from "@neon/realtime-react"
 
 export function Sidebar({ sealedQuery }) {
   const { data } = useLiveQuery(sealedQuery)
@@ -142,7 +142,7 @@ export function Sidebar({ sealedQuery }) {
 }
 ```
 
-You can have instant local writes too. Apply the change on screen with React's `useOptimistic`, send it to your API, and [wait for the matching Postgres transaction to come back on the live stream](/docs/realtime/guides/mutations) with `waitForTxId`. Until then, the screen shows the optimistic state. Once the transaction arrives, it shows the confirmed state.
+You can have instant local writes too. Apply the change on screen with React's `useOptimistic`, send it to your API, and [wait for the matching Postgres transaction to come back on the live stream](/docs/realtime/guides/mutations) with `awaitTxId`. Until then, the screen shows the optimistic state. Once the transaction arrives, it shows the confirmed state.
 
 If you use [TanStack DB](https://tanstack.com/db), sync the live query into a collection and TanStack DB [manages the optimistic state for you](/docs/realtime/guides/mutations#with-tanstack-db-collections). [SSR works as well](/docs/realtime/guides/ssr): the page arrives with data from the server, and live updates take over from there.
 
@@ -162,19 +162,19 @@ The SDK splits the work between your backend and whatever is subscribing. You de
 
 ```ts
 // backend/queries.ts
-import { createNeonLive, rawSql } from "@neon/live/server"
-import { drizzleAdapter } from "@neon/live-drizzle"
+import { createRealtime, rawSql } from "@neon/realtime/server"
+import { drizzleAdapter } from "@neon/realtime-drizzle"
 
-const live = createNeonLive({
+const realtime = createRealtime({
   adapter: drizzleAdapter(),
   db: "app",
-  secret: process.env.NEON_LIVE_SECRET!,
+  secret: process.env.NEON_REALTIME_SECRET!,
 })
 
 export async function sealUnreadCounts(userId: string) {
   const query = rawSql<UnreadCount>(UNREAD_COUNTS_SQL, [userId])
 
-  return live.seal(query)
+  return realtime.seal(query)
 }
 ```
 
@@ -214,16 +214,19 @@ To enable Realtime on an existing project:
 neon realtime enable
 ```
 
-Or create a new project with Realtime already on:
+Or set up the current directory and declare Realtime in `neon.ts`, then apply that config:
 
 ```sh
-neon init --service realtime
+neon init --services realtime
+neon deploy
 ```
 
 Or to bootstrap a Neon project with a realtime template:
 
 ```sh
-neon bootstrap realtime
+neon bootstrap my-app --template realtime-react
+cd my-app
+neon deploy
 ```
 
 Then give your agent context by installing the Realtime skill:
