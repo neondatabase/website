@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-15T16:33:34.223Z'
+updatedOn: '2026-10-15T17:31:55.753Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -66,9 +66,11 @@ Recommended setup installs agent tooling globally for your detected agents, so i
 
 After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch. `init` then pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`. Pass `--no-link` to set up agent tooling and `neon.ts` without linking a project; you can link later with `neon link`.
 
-It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with `neon config apply`. In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
+It can also write a [`neon.ts` config](/docs/cli/config) you can edit and apply with [`neon deploy`](/docs/cli/deploy). In a terminal, `init` asks whether to create it. Pass `--config` to create it without asking, `--no-config` to skip it, or `--services` to create it with specific services declared (which implies `--config`). Pass `--package-manager` (`npm`, `pnpm`, `yarn`, or `bun`) to choose which package manager installs the `neon.ts` dependencies.
 
 When `init` creates a new `neon.ts`, it pulls environment variables once, after the file is written. If `neon.ts` declares only services that need no deploy (the AI Gateway or Functions), the pull includes all of them. If it declares Managed Better Auth, the Data API, Object Storage, or Realtime, `init` pulls Postgres (plus the AI Gateway and the scaffolded function's URL when declared), and [`neon deploy`](/docs/cli/deploy) provisions the rest and pulls their variables. With `--claimable`, `init` skips the pull when `neon.ts` declares services beyond Postgres.
+
+When `init` writes a new `neon.ts` for a linked project, it lists next steps under `Next`. Preview the changes with [`neon config plan`](/docs/cli/config#plan), then apply them with [`neon deploy`](/docs/cli/deploy). It also suggests [`neon checkout dev --create`](/docs/cli/checkout) to work on a development branch once you've deployed. These steps appear even for the default Postgres-only `neon.ts`. For a claimable project, `init` lists `neon claim accept` instead, followed by the plan and deploy steps when `neon.ts` declares services beyond Postgres. If you skip `neon.ts` (for example, with `--no-config`) and the directory doesn't have one, `init` suggests [`neon config init`](/docs/cli/config#init) to create it later.
 
 `--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
 
