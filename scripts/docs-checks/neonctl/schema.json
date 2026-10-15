@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.4.4",
+  "neonctlVersion": "8.4.5",
   "binaries": [
     "neonctl",
     "neon"
@@ -4061,6 +4061,14 @@
           },
           "commands": {},
           "describe": "Enable Realtime on a branch"
+        },
+        "rotate-secret": {
+          "name": "rotate-secret",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Replace a branch's Realtime shared secret"
         },
         "subscribe": {
           "name": "subscribe",

@@ -4,14 +4,15 @@ subtitle: Manage Neon Realtime and subscribe to live queries from the CLI
 summary: >-
   The Neon CLI `neon realtime` command manages Neon Realtime on a database
   branch. Use `enable` to provision Realtime and set the browser origins allowed
-  to connect, `disable` to remove it, and `subscribe` to stream a live SQL query.
+  to connect, `rotate-secret` to replace its shared secret, `disable` to remove
+  it, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
 updatedOn: '2026-10-15T00:31:32.385Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
 
-The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
+The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch, rotates its shared secret, and subscribes to live queries. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
 
 <CliSubcommands command="realtime" />
 
@@ -56,6 +57,26 @@ Realtime disable requested for branch br-cool-darkness-123456.
 Disabling also discards the branch's Realtime secret, so apps using that branch's `NEON_REALTIME_SECRET` stop working. If you enable Realtime again later, the branch gets a new secret, so pull the env vars again.
 
 After you disable Realtime, `neon realtime subscribe` on that branch fails with an error that points you back to `neon realtime enable`.
+
+## neon realtime rotate-secret (#rotate-secret)
+
+Requests replacement of a branch's Realtime shared secret. Rotation finishes in the background. The existing secret keeps working while the change is pending and stops working after the new secret is active.
+
+<CliUsage command="realtime rotate-secret" />
+
+<CliOptions command="realtime rotate-secret" />
+
+```bash
+neon realtime rotate-secret
+```
+
+```text
+Realtime secret rotation requested for branch br-cool-darkness-123456.
+```
+
+The command doesn't print the new secret. Run `neon env pull --service realtime` after requesting rotation. The env pull waits for the pending change to finish, then writes the new `NEON_REALTIME_SECRET` to your env file. Update every backend that seals Realtime queries with the old secret.
+
+Each successful `rotate-secret` request replaces the secret again, so don't repeat the command unless you intend to start another rotation.
 
 ## neon realtime subscribe (#subscribe)
 
