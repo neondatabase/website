@@ -1,10 +1,8 @@
 ---
 title: 'Neon now has realtime'
-description: Live SQL queries inside Postgres that you and your agent can build on
-excerpt: >-
-  Neon Realtime is live in public beta. Any SQL query can now be a live query.
-  Subscribe to it and the result stays up to date as your data changes, with no
-  polling or refetch logic.
+subtitle: Live SQL queries inside Postgres with full end-to-end reactivity
+description: >-
+  Neon Realtime is live in public beta. Any SQL query can now be a live query. Subscribe to it and the result stays up to date as your data changes. That makes your whole app reactive, with no polling or refetch logic.
 date: '2026-10-15T12:00:00'
 updatedOn: '2026-10-15T12:00:00.000Z'
 category: product
@@ -18,11 +16,13 @@ cover:
 isFeatured: false
 seo:
   title: 'Neon now has realtime - Neon'
-  description: Live SQL queries inside Postgres that you and your agent can build on
+  description: >-
+    Neon Realtime is live in public beta. Any SQL query can now be a live query. Subscribe to it and the result stays up to date as your data changes. That makes your whole app reactive, with no polling or refetch logic.
   keywords: []
   noindex: false
   ogTitle: 'Neon now has realtime - Neon'
-  ogDescription: Live SQL queries inside Postgres that you and your agent can build on
+  ogDescription: >-
+    Neon Realtime is live in public beta. Any SQL query can now be a live query. Subscribe to it and the result stays up to date as your data changes. That makes your whole app reactive, with no polling or refetch logic.
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-now-has-realtime/neon-realtime.jpg
 ---
 
