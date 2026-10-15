@@ -2,23 +2,24 @@
 name: neon
 description: >-
   Overview of Neon, a complete set of cloud backend primitives around Lakebase
-  Postgres: Auth, Object Storage, Functions, and the AI Gateway. Start here to
+  Postgres: Auth, Object Storage, Functions, the AI Gateway, and Realtime. Start here to
   choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or
   MCP server, and follow the branch-first workflow. Use when building an app or
   backend on Neon, or when "Neon" or "Lakebase Postgres" is mentioned. Child
   skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect,
   or search. Child skill neon-auth wins for login, users, sessions, identity
-  routing, and Managed Better Auth setup. Also use for object storage, S3, buckets, serverless functions,
-  function triggers, cron, AI gateway, LLM calls, logs, Loki, Grafana,
-  observability, postgres, database, backend, Claimable Neon, neon.new, or a
-  no-signup database.
+  routing, and Managed Better Auth setup. Child skill neon-realtime wins for
+  live queries in reactive apps and agents. Also use for object storage, S3,
+  buckets, serverless functions, function triggers, cron, AI gateway, LLM calls,
+  realtime, logs, Loki, Grafana, observability,
+  postgres, database, backend, Claimable Neon, neon.new, or a no-signup database.
 metadata:
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
 
 # Neon
 
-Neon is a complete set of cloud backend primitives around Lakebase Postgres, from Databricks — Lakebase Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, and an AI Gateway, all instant, branchable, and serverless.
+Neon is a complete set of cloud backend primitives around Lakebase Postgres, from Databricks — Lakebase Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, an AI Gateway, and Realtime live queries, all instant, branchable, and serverless.
 
 **Lakebase Postgres** is the database itself. It is one product, reached two ways: through Neon, with a free plan and the full set of backend primitives above, or through Databricks, alongside the rest of the Databricks suite. Same infrastructure, same features, same engineering team. Call the database Lakebase Postgres, and use "Neon" for the brand and for this access path — not as a name for the database.
 
@@ -35,11 +36,12 @@ Neon bundles several backend primitives for building apps and agents that all br
 - **Object Storage** — S3-compatible object storage that branches with your projects.
 - **Functions** — Neon's compute offering: long-running serverless functions that run close to your database, for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. A Function Trigger POSTs to a function on a cron.
 - **AI Gateway** — One API for frontier and open-source models, supporting the chat completions API and the responses API, powered by Databricks Unity AI Gateway.
+- **Realtime** (beta) — Makes any SQL query live. Subscribe in realtime to Lakebase Postgres and build reactive apps and agents with type-safe live queries and optimistic mutations.
 - **Data API** — Optional PostgREST-compatible HTTP interface. Use it only when the app already uses PostgREST or a Supabase database client, or is migrating that client. New apps query Postgres from Functions or existing handlers. There is no `neon-data-api` skill; configuration is `dataApi` in `neon.ts` (see [Type-safe config](#type-safe-config-invalid-setups-dont-compile) when you have chosen it).
 
 ### Region availability
 
-Object Storage, Functions, and AI Gateway are currently available on projects in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Before guiding a user through any of these services, confirm they are working in one of these regions. If not, they will need to create a new project in a supported region.
+Object Storage, Functions, AI Gateway, and Realtime are currently available on projects in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`. Before guiding a user through any of these services, confirm they are working in one of these regions. If not, they will need to create a new project in a supported region.
 
 ## Architecture: How to Use Neon
 
@@ -63,7 +65,7 @@ Functions have public HTTPS URLs. Verify a JWT or API key at the top of the hand
 
 Inspect the repo before provisioning.
 
-1. Map requested capabilities: login, files, HTTP APIs, LLM calls, SQL.
+1. Map requested capabilities: login, files, HTTP APIs, LLM calls, live data, SQL.
 2. Reuse what is already there: a supplied `DATABASE_URL`, an existing ORM or driver, Better Auth, Clerk or another auth provider, S3 or another object store, an existing `.neon` / `neon.ts`, an existing Data API or PostgREST client.
 3. Select Neon primitives for capabilities that are still undecided.
 4. Provision only when infrastructure is missing: `neon init` / `neon link` / Claimable, then `neon.ts`, then `neon deploy`.
@@ -81,7 +83,8 @@ New projects are created in AWS regions. Prefer pooled `DATABASE_URL` for applic
 | Existing Better Auth, Clerk, Supabase Auth, or another working IdP | Keep it. `neon-auth` only if they ask to migrate |
 | User asked to migrate from Supabase Auth | `neon-auth` (Managed Better Auth; keep `SupabaseAuthAdapter()` call shapes) |
 | Files, uploads, blobs (no existing object store) | Object Storage |
-| HTTP APIs, cron, WebSocket, SSE, long-running agents | Functions querying Postgres |
+| HTTP APIs, cron, custom WebSocket or SSE push, long-running agents | Functions querying Postgres |
+| Live queries for realtime, reactive apps and agents; optimistic mutations | `neon-realtime` (`preview.realtime` in `neon.ts`). Not available on Claimable projects until claimed |
 | LLM calls | AI Gateway |
 | SQL, schema, inspect, search | `neon-postgres` |
 | Existing PostgREST / Supabase database client | Data API (`dataApi` in `neon.ts`) |
@@ -124,6 +127,7 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 | `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
 | `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                                     |
 | `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
+| `neon-realtime`                  | Realtime makes any SQL query live, for realtime, reactive apps and agents: enabling Realtime, sealing queries, React and TanStack DB bindings, SSR, and optimistic mutations.      |
 | `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase.                                                                                          |
 
 There is no `neon-data-api` skill. Configure `dataApi` in `neon.ts` only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
@@ -327,7 +331,7 @@ export default defineConfig({
 
 ### Provision services with neon config
 
-Every project ships with Lakebase Postgres; `neon.ts` also declares Auth, Functions, buckets, and the AI Gateway. Data API is a compatibility toggle, not part of a default backend:
+Every project ships with Lakebase Postgres; `neon.ts` also declares Auth, Functions, buckets, and the AI Gateway. Realtime is declared under `preview`. Data API is a compatibility toggle, not part of a default backend:
 
 ```typescript
 // neon.ts
@@ -336,6 +340,7 @@ export default defineConfig({
   functions: {},
   buckets: {},
   aiGateway: true, // see the neon-ai-gateway skill
+  preview: { realtime: true }, // see the neon-realtime skill
 });
 ```
 
