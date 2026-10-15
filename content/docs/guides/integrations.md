@@ -109,6 +109,8 @@ updatedOn: '2026-10-05T14:29:40.590Z'
 
 <a href="/docs/guides/cloudflare-hyperdrive" title="Cloudflare Hyperdrive" description="Use Neon with Cloudflare Hyperdrive" icon="cloudflare"></a>
 
+<a href="/docs/guides/dot" title="Dot" description="Ask questions about Lakebase Postgres data with Dot" icon="dot"></a>
+
 <a href="/docs/guides/draxlr" title="Draxlr" description="Connect Draxlr to Neon" icon="draxlr"></a>
 
 <a href="/docs/guides/exograph" title="Exograph" description="Use Exograph with Neon" icon="exograph"></a>
