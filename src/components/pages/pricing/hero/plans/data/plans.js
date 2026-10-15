@@ -6,7 +6,7 @@ const { objectStorage, functions } = BACKEND_PRICING;
 const realtimeFeature = {
   title: 'Realtime (Beta)',
   info: '<p>Free during beta</p><p>Database compute and egress are billed as usual</p>',
-  moreLink: { text: 'Read more', href: '/docs/live/overview' },
+  moreLink: { text: 'Read more', href: LINKS.realtime },
 };
 
 export default [
