@@ -62,7 +62,10 @@ npm run cli-docs -- refresh
 That downloads the latest release tarball, regenerates `schema.json`,
 prints added/removed commands and options, and runs the test suite. Review
 the diff and commit `schema.json` — pages and the mirror pick it up at the
-next build with no page edits. New top-level commands additionally need a
+next build with no page edits. Finding the latest release calls the GitHub
+API; set `GITHUB_TOKEN` (for example, `GITHUB_TOKEN=$(gh auth token)`) to
+avoid the 60-requests-per-hour anonymous limit. New top-level commands
+additionally need a
 doc page (`content/docs/cli/<name>.md`), a `navigation.yaml` entry, and a
 group mapping in
 `src/components/pages/doc/cli-reference/cli-command-index/groups.js` — all
