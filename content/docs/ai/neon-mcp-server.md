@@ -96,6 +96,26 @@ See [Available tools](#available-tools) for the full category list. To verify wh
 curl "https://mcp.neon.tech/api/list-tools?readonly=true&category=querying"
 ```
 
+### Postgres role
+
+By default, SQL tools connect as the database owner. Set `?roleName=<role>` to make every SQL tool log in as that Postgres role instead, so the role's grants decide what the agent can read and change:
+
+```
+https://mcp.neon.tech/mcp?readonly=true&roleName=app_reader
+```
+
+The role must exist on each branch you query and be able to log in. For example, a role that can only read one table:
+
+```sql
+CREATE ROLE app_reader LOGIN PASSWORD '<password>';
+GRANT SELECT ON public.orders TO app_reader;
+```
+
+- `role_name` arguments that name a different role are rejected, and a role that cannot log in fails the call without falling back to the owner.
+- `get_connection_string` is not available on a pinned connection.
+- The role applies to SQL only. Combine it with `readonly=true` and `category` to limit Management API tools too.
+- With OAuth, `roleName` on the URL is fixed when you authorize. With the plain `https://mcp.neon.tech/mcp` URL, enter the role in the optional **Postgres role** field on the authorization page instead.
+
 ## MCP security guidance
 
 We recommend MCP for **development and testing only**, not production environments.
