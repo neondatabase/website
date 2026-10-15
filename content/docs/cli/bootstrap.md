@@ -11,10 +11,6 @@ enableTableOfContents: true
 
 The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project).
 
-<Admonition type="note" title="Behavior changed in Neon CLI 5.0.0">
-Before 5.0.0, `bootstrap --default` prompted for a project and left the branch unpinned. From 5.0.0, the [`neon link`](/docs/cli/link) step writes a complete context (org, project, and branch), and `--default` uses your only org and project or, when you have several, prints the IDs and exits. Pass `--org-id`/`--project-id` in unattended runs.
-</Admonition>
-
 ## Usage
 
 <CliUsage command="bootstrap" />
@@ -34,7 +30,15 @@ The post-scaffold steps all default to on. In interactive mode, bootstrap asks a
 - `--agent-setup` / `--no-agent-setup`: install agent tooling, either the Neon plugin, or agent skills and the MCP server. Pass `--agent` (alias `-a`, repeatable) to name the agents and skip the picker, for example `neon bootstrap my-app --agent cursor`.
 - `--link` / `--no-link`: run [`neon link`](/docs/cli/link) in the scaffolded directory.
 
-Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs dependency install, git init, agent tooling, and `neon link --yes` without prompting. `link --yes` selects your only organization and project, or prints the IDs and exits when you have several (pass `--org-id`/`--project-id` to choose).
+Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs git init, agent tooling, dependency install, and `neon link --yes` without prompting.
+
+`link --yes` picks your only organization and project and writes a `.neon` context file. If you have several, the other steps still finish, then the command lists the IDs and exits with an error. Bootstrap doesn't accept `--org-id` or `--project-id`, so link from the new directory:
+
+```bash
+neon link --yes --org-id <org-id> --project-id <project-id>
+```
+
+Outside an interactive terminal (no TTY, or in CI), bootstrap only scaffolds the template. It skips every post-scaffold step, even one you pass explicitly like `--install`, and its summary lists the commands to run next. Use `--default` to run the steps unattended.
 
 ## Examples
 
@@ -42,6 +46,24 @@ Create `./my-app` from an interactively chosen template:
 
 ```bash
 neon bootstrap my-app
+```
+
+When the steps finish, bootstrap prints a summary. This run linked a project and skipped agent tooling:
+
+```text
+Project scaffolded.
+-------------------
+
+  Template      REST API
+  Directory     my-app
+  Dependencies  installed with npm
+  Git           initialized
+  Agents        skipped
+  Project       linked
+
+Next:
+  cd my-app
+  See the README to run it.
 ```
 
 Scaffold a specific template into the current directory:

@@ -113,6 +113,8 @@ neon bootstrap my-app --template realtime-react
 
 Bootstrap scaffolds the app, installs the dependencies and links the new `my-app` directory to a Neon project via `neon.ts` config.
 
+If the branch doesn't have Realtime yet, the link step can't pull the env vars and prints a warning to run `neon deploy`. That's the next step.
+
 Run [`neon deploy`](/docs/cli/deploy) to apply the generated config, enabling Realtime for your project and branch:
 
 ```bash filename="Terminal"
