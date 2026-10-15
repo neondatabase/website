@@ -1,11 +1,21 @@
 'use client';
 
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from '@headlessui/react';
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useState } from 'react';
 
 import Link from 'components/shared/link';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
@@ -90,33 +100,89 @@ const CategoryFilter = ({ selected, onChange }) => {
         : 'border-gray-new-80 text-gray-new-30 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-70 dark:hover:border-gray-new-40'
     );
   return (
-    <div
-      className="flex gap-1.5 overflow-x-auto border-b border-gray-new-90 px-4 py-2 dark:border-gray-new-15"
-      role="group"
-      aria-label="Search in"
-    >
-      <button
-        className={chip(selected.length === 0)}
-        type="button"
-        aria-pressed={selected.length === 0}
-        onClick={() => onChange([])}
-      >
-        All
-      </button>
-      {SITE_SEARCH_CATEGORIES.map((category) => (
+    <div className="border-b border-gray-new-90 px-4 py-2 dark:border-gray-new-15">
+      <div className="flex flex-wrap gap-1.5 sm:hidden" role="group" aria-label="Search in">
         <button
-          key={category.id}
-          className={chip(selected.includes(category.id))}
+          className={chip(selected.length === 0)}
           type="button"
-          aria-pressed={selected.includes(category.id)}
-          data-test={`search-category-${category.id}`}
-          onClick={() => toggle(category.id)}
+          aria-pressed={selected.length === 0}
+          onClick={() => onChange([])}
         >
-          {category.label}
+          All
         </button>
-      ))}
+        {SITE_SEARCH_CATEGORIES.map((category) => (
+          <button
+            key={category.id}
+            className={chip(selected.includes(category.id))}
+            type="button"
+            aria-pressed={selected.includes(category.id)}
+            data-test={`search-category-${category.id}`}
+            onClick={() => toggle(category.id)}
+          >
+            {category.label}
+          </button>
+        ))}
+      </div>
+      <CategoryMenu selected={selected} onChange={onChange} />
     </div>
   );
+};
+
+const ALL = 'all';
+
+// Phones get one menu instead of a row of chips that would wrap or scroll.
+const CategoryMenu = ({ selected, onChange }) => {
+  const value = selected.length === 0 ? [ALL] : selected;
+  const change = (next) => {
+    const pickedAll = next.includes(ALL) && !value.includes(ALL);
+    onChange(pickedAll ? [] : next.filter((id) => id !== ALL));
+  };
+  const options = [{ id: ALL, label: 'All' }, ...SITE_SEARCH_CATEGORIES];
+  return (
+    <Listbox value={value} onChange={change} multiple>
+      <ListboxButton
+        className="group hidden w-full items-center justify-between gap-2 text-left text-[13px] tracking-extra-tight text-gray-new-30 dark:text-gray-new-70 sm:flex"
+        data-test="search-category-menu"
+      >
+        <span className="truncate">
+          Search in:{' '}
+          <span className="text-black-new dark:text-white">
+            {selected.length === 0 ? 'All' : categoryLabels(selected)}
+          </span>
+        </span>
+        <ChevronIcon className="size-3.5 shrink-0 transition-transform duration-200 group-data-open:rotate-180" />
+      </ListboxButton>
+      <ListboxOptions
+        anchor="bottom start"
+        className="z-[110] w-(--button-width) border border-gray-new-80 bg-white p-1 text-[13px] text-gray-new-20 shadow-lg [--anchor-gap:var(--spacing-2)] focus:outline-none dark:border-gray-new-20 dark:bg-black-new dark:text-gray-new-90"
+      >
+        {options.map((option) => (
+          <ListboxOption
+            key={option.id}
+            value={option.id}
+            className="group flex min-h-9 cursor-pointer items-center gap-3 px-2.5 py-1.5 select-none data-focus:bg-gray-new-94 dark:data-focus:bg-gray-new-15"
+          >
+            <span>{option.label}</span>
+            <svg
+              viewBox="0 0 10 10"
+              className="ml-auto size-2.5 shrink-0 text-secondary-8 opacity-0 group-data-selected:opacity-100 dark:text-primary-1"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              aria-hidden
+            >
+              <path d="M1.5 5 L4 7.5 L8.5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </ListboxOption>
+        ))}
+      </ListboxOptions>
+    </Listbox>
+  );
+};
+
+CategoryMenu.propTypes = {
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 CategoryFilter.propTypes = {
@@ -275,7 +341,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
               onChange={(event) => setQuery(event.target.value)}
               onKeyDown={onInputKeyDown}
             />
-            <kbd className="hidden shrink-0 border border-gray-new-80 px-1.5 py-0.5 font-sans text-xs tracking-extra-tight text-gray-new-40 dark:border-gray-new-20 dark:text-gray-new-60 sm:inline">
+            <kbd className="shrink-0 border border-gray-new-80 px-1.5 py-0.5 font-sans text-xs tracking-extra-tight text-gray-new-40 dark:border-gray-new-20 dark:text-gray-new-60 sm:hidden">
               esc
             </kbd>
           </div>
@@ -349,21 +415,21 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
                 );
               })}
             </ul>
-            {showAskAi && (
-              <button
-                className="flex w-full items-center gap-2 border-t border-gray-new-90 px-4 py-3 text-left text-[13px] tracking-extra-tight text-gray-new-30 hover:bg-gray-new-94 dark:border-gray-new-15 dark:text-gray-new-70 dark:hover:bg-white/5"
-                type="button"
-                onClick={askAi}
-              >
-                <SparksIcon className="size-3.5 shrink-0" />
-                <span>
-                  {`Ask Neon AI about "${
-                    trimmedQuery.length > 80 ? `${trimmedQuery.slice(0, 77)}…` : trimmedQuery
-                  }"`}
-                </span>
-              </button>
-            )}
           </div>
+          {showAskAi && (
+            <button
+              className="flex w-full items-center gap-2 border-t border-gray-new-90 px-4 py-3 text-left text-[13px] tracking-extra-tight text-gray-new-30 hover:bg-gray-new-94 dark:border-gray-new-15 dark:text-gray-new-70 dark:hover:bg-white/5"
+              type="button"
+              onClick={askAi}
+            >
+              <SparksIcon className="size-3.5 shrink-0" />
+              <span>
+                {`Ask Neon AI about "${
+                  trimmedQuery.length > 80 ? `${trimmedQuery.slice(0, 77)}…` : trimmedQuery
+                }"`}
+              </span>
+            </button>
+          )}
         </DialogPanel>
       </div>
     </Dialog>
