@@ -471,7 +471,7 @@ const McpSetupConfigurator = () => {
                     role="alert"
                   >
                     Use one Postgres role name: letters, digits, _ or $, starting with a letter or
-                    _, at most 63 characters. It is left out of the URL until it is valid.
+                    _, at most 63 characters.
                   </span>
                 )}
                 <span id="mcp-role-name-help" className={clsx('mt-2 block', HELPER_TEXT_CLASS)}>
@@ -562,42 +562,50 @@ const McpSetupConfigurator = () => {
             <p className={SECTION_LABEL_CLASS}>Result</p>
           </div>
 
-          <ToolsPreviewCard
-            filteredUrl={filteredToolsUrl}
-            reloadNonce={toolsReloadNonce}
-            onRetry={() => setToolsReloadNonce((prev) => prev + 1)}
-          />
+          {roleNameInvalid ? (
+            <p className={HELPER_TEXT_CLASS}>
+              Fix the Postgres role to generate the configuration.
+            </p>
+          ) : (
+            <>
+              <ToolsPreviewCard
+                filteredUrl={filteredToolsUrl}
+                reloadNonce={toolsReloadNonce}
+                onRetry={() => setToolsReloadNonce((prev) => prev + 1)}
+              />
 
-          <div>
-            <span className={FIELD_LABEL_CLASS}>add-mcp command</span>
-            <CodeBlockWrapper
-              className="!my-0 overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:!pt-2 [&>pre]:!pb-3 [&>pre]:dark:!bg-gray-new-10"
-              as="div"
-              copyCode={addMcpCommand}
-            >
-              <HighlightedCode code={addMcpCommand} language="bash" />
-            </CodeBlockWrapper>
-            {authMode === 'apiKey' && (
-              <div className="mt-3">
-                <Toggle
-                  checked={installGlobally}
-                  label="Install globally"
-                  onChange={setInstallGlobally}
-                />
+              <div>
+                <span className={FIELD_LABEL_CLASS}>add-mcp command</span>
+                <CodeBlockWrapper
+                  className="!my-0 overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:!pt-2 [&>pre]:!pb-3 [&>pre]:dark:!bg-gray-new-10"
+                  as="div"
+                  copyCode={addMcpCommand}
+                >
+                  <HighlightedCode code={addMcpCommand} language="bash" />
+                </CodeBlockWrapper>
+                {authMode === 'apiKey' && (
+                  <div className="mt-3">
+                    <Toggle
+                      checked={installGlobally}
+                      label="Install globally"
+                      onChange={setInstallGlobally}
+                    />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          <div>
-            <span className={FIELD_LABEL_CLASS}>MCP JSON config</span>
-            <CodeBlockWrapper
-              className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10"
-              as="div"
-              copyCode={generatedConfig}
-            >
-              <HighlightedCode code={generatedConfig} language="json" />
-            </CodeBlockWrapper>
-          </div>
+              <div>
+                <span className={FIELD_LABEL_CLASS}>MCP JSON config</span>
+                <CodeBlockWrapper
+                  className="overflow-hidden rounded-xl border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10"
+                  as="div"
+                  copyCode={generatedConfig}
+                >
+                  <HighlightedCode code={generatedConfig} language="json" />
+                </CodeBlockWrapper>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
