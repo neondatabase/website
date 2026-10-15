@@ -287,7 +287,7 @@ Once you've defined a query, if you're using it in trusted backend code, you can
 This is where **sealing** comes in. Sealing signs and encrypts the exact query, its parameters and the target database into a short-lived capability (similar to a JWT), so it can be used safely in an untrusted environment.
 
 <Admonition type="warning" title="Keep your Realtime secret on the server">
-Anyone with `NEON_REALTIME_SECRET` can seal any query. Treat it like your `DATABASE_URL`, and never ship it in a browser bundle. In a Vite app, that means never giving it a `VITE_` prefix.
+Anyone with `NEON_REALTIME_SECRET` can seal any query. Treat it like your `DATABASE_URL`, and never ship it in a browser bundle. In a Vite app, that means never giving it a `VITE_` prefix. To replace it, run [`neon realtime rotate-secret`](/docs/cli/realtime#rotate-secret).
 </Admonition>
 
 To seal a query you pass your query instance, e.g.:
