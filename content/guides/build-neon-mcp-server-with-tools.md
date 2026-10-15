@@ -7,9 +7,9 @@ createdAt: '2026-09-04T00:00:00.000Z'
 updatedOn: '2026-09-14T06:50:40.725Z'
 ---
 
-If you're embedding Neon operations into your own agent runtime, you need a way to expose them as tools: an MCP server for your team, an agent built with a framework like Mastra or Eve, or a dev tool that resets test data. The Model Context Protocol (MCP) lets you publish a catalog of tools with input validation, approval metadata, and auto-pagination for lists. You can then connect your agent to the catalog over stdio or HTTP.
+If you're embedding Neon operations into your own agent runtime, you need a way to expose them as tools: an MCP server for your team, an agent built with a framework like Mastra or Eve, or a dev tool that resets test data. The Model Context Protocol (MCP) lets you publish a catalog of tools that any MCP client can call over stdio or HTTP.
 
-The hosted [Neon MCP Server](/docs/ai/neon-mcp-server) already gives you this by default. It pairs workflow tools for SQL, migrations, diagnostics, docs, and search with Management API tools across projects, branches, endpoints, snapshots, auth, storage, functions, and more. It adds OAuth, category filtering, readonly mode, and project scoping, so you can connect Claude Code, Cursor, or any MCP client.
+The hosted [Neon MCP Server](/docs/ai/neon-mcp-server) already gives you this by default. It pairs workflow tools for SQL, migrations, diagnostics, docs, and search with Management API tools across projects, branches, endpoints, snapshots, auth, storage, functions, and more. It adds OAuth, category filtering, read-only mode, and project scoping, so you can connect Claude Code, Cursor, or any MCP client.
 
 [`@neon/tools`](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools) gives you the same building blocks for your own server. You pick the SDK operations to expose, such as `projects.list` for listing projects or `branches.createAndConnect` for creating a ready-to-use branch, and customize how each one appears to the model. Each selection becomes a tool with a Zod schema, flat snake-case inputs, auto-pagination for lists, readiness polling for writes, and approval metadata. The MCP adapter then publishes that catalog with model-facing IDs like `list_projects` and `create_and_connect_branches`.
 
@@ -17,7 +17,7 @@ Choose the approach that fits your workflow:
 
 | Approach                                      | When to use it                       | What you get                                                                                                     |
 | --------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| Hosted Neon MCP Server                        | Connect your own agent to Neon       | Full catalog of workflow and API tools, OAuth, readonly mode, and project scoping. No code to maintain.           |
+| Hosted Neon MCP Server                        | Connect your own agent to Neon       | Full catalog of workflow and API tools, OAuth, read-only mode, and project scoping. No code to maintain.          |
 | Custom server with `@neon/tools` (this guide) | Embed Neon tools in your own runtime | Subset catalog, project injection, custom names and descriptions, logging, and multi-tenant HTTP.                |
 
 In this tutorial, you'll build a minimal MCP server with five project and branch tools, run it over stdio, and connect it to Claude Code. You'll then customize it with project injection, custom names and descriptions, and logging. Finally, you'll serve the same catalog remotely over HTTP so multiple agents can call it with their own credentials. The same pattern scales when you add snapshots, endpoints, auth, storage, and functions that the `@neon/tools` package already exposes.
@@ -28,7 +28,7 @@ Before you start, decide how your server will handle Neon credentials. There are
 
 **Single credential, held by the server.** You set `NEON_API_KEY` once, and every tool call runs against that account. This is the stdio pattern covered in the first part of this guide: one user, one agent, one key. It fits a personal coding agent or an internal tool where the operator owns the Neon account.
 
-**Per-request credential, brought by the client.** The server holds no key at all. Each client sends its own token with every request, and tools execute against that client's account. This is the HTTP pattern covered in the final section. The token is the tenant boundary: your server never sees or stores a Neon credential, and a client can only reach projects its token grants.
+**Per-request credential, brought by the client.** The server holds no key at all. Each client sends its own token with every request, and tools execute against that client's account. This is the HTTP pattern covered in the final section. The token is the tenant boundary: your server never stores a Neon credential, and a client can only reach projects its token grants.
 
 ## Prerequisites
 
@@ -81,7 +81,7 @@ npm install -D typescript @types/node tsx
 npx tsc --init
 ```
 
-The `@neon/tools` package is the SDK adapter that builds a catalog of tools. The MCP server package publishes that catalog over stdio or HTTP. Zod is the schema library used for input validation. TypeScript and `tsx` are for building and running the server.
+The `@neon/tools` package is the SDK adapter that builds a catalog of tools. The MCP server package publishes that catalog over stdio or HTTP. `@neon/tools` uses Zod for input validation. TypeScript and `tsx` are for building and running the server.
 
 Update `tsconfig.json` for ESM and strict validation:
 
@@ -130,7 +130,7 @@ export const tools = createNeonTools({
 });
 ```
 
-The `createNeonTools()` function builds a catalog with Zod schemas, input validation, and approval metadata. The `tools` record is keyed by the SDK path you selected, so `tools["projects.list"]` maps directly to the client method. Each entry has an `execute()` method that takes a flat input object and returns a promise with the result. The catalog has two important behaviors:
+The `createNeonTools()` function builds a catalog with Zod schemas, input validation, and approval metadata. The `tools` record is keyed by the SDK path you selected, so `tools["projects.list"]` maps directly to the client method. Each entry has an `execute()` method that takes a flat input object and returns a promise with the result. The catalog has two behaviors worth knowing:
 
 - **Flat inputs with auto-pagination:** List tools take `limit` and return the item array with pagination handled for you.
 - **Readiness waits on writes:** Write tools run with `waitForReadiness: true`, so a branch create waits for its operations before it resolves. The default deadline is five minutes. Here it is capped at 30 seconds so it stays below typical host timeouts.
@@ -377,7 +377,7 @@ This package sends no analytics on its own. Add your own logger here if you need
 
 The stdio server works when one client launches your server locally. Agent platforms usually need the opposite shape: one deployed server that many agents call over HTTP, each with their own credentials. Streamable HTTP in the MCP 2.x SDK handles this with a per-request factory, and `registerNeonTools()` supports it without changing your catalog.
 
-The key change: the server no longer holds a Neon API key. Each client supplies its own as a bearer token, and `registerNeonTools()` picks it up from the MCP request's `authInfo`. Your deployed server becomes credential-free.
+The server no longer holds a Neon API key. Each client supplies its own as a bearer token, and `registerNeonTools()` picks it up from the MCP request's `authInfo`. Your deployed server doesn't hold any Neon credentials of its own.
 
 ### Install dependencies
 
@@ -490,12 +490,12 @@ Add a remote entry to `opencode.jsonc`:
 }
 ```
 
+> Replace `$NEON_API_KEY` with your Neon API key.
+
 </TabItem>
 </Tabs>
 
-> Replace `$NEON_API_KEY` with your Neon API key
-
-If either client fails to connect, check the server logs for the request: a missing or malformed `Authorization` header means the header wasn't passed, and a `403` means the Host or Origin guards rejected the client's request rather than the token check.
+If either client fails to connect, check the response status: a `401` means the `Authorization` header wasn't passed, and a `403` means the Host or Origin guards rejected the request.
 
 ### Deploy it
 
@@ -509,7 +509,7 @@ Keep the server behind TLS and mount the token verification in front of the hand
 
 ## Conclusion
 
-You built a custom Neon MCP server, both locally over stdio and remotely over HTTP. You picked the SDK operations your agent requires, shaped how each tool appears to the model, kept naming, inputs, and logging in your own code, and deployed a credential-free server where each client brings its own key. Reach for this pattern when the hosted server's fixed catalog doesn't fit and you're comfortable owning the auth layer yourself. For example: a team exposing only the few operations its workflow needs, or a runtime that already has its own user model and needs Neon operations behind it. If you need Neon-issued tokens and per-user project access without building that layer, the hosted [Neon MCP Server](/docs/ai/neon-mcp-server) is the better fit.
+Reach for this pattern when the hosted server's fixed catalog doesn't fit and you're comfortable owning the auth layer yourself, for example a team exposing only the few operations its workflow needs, or a runtime that already has its own user model and needs Neon operations behind it. If you need Neon-issued tokens and per-user project access without building that layer, the hosted [Neon MCP Server](/docs/ai/neon-mcp-server) is the better fit.
 
 From here you can add snapshots, endpoints, Data API config, Functions, Object Storage, or Managed Better Auth by extending the `tools` array. The complete selector list is exported as `toolIds` from `@neon/tools` (see the [`toolIds` source](https://github.com/neondatabase/neon-pkgs/blob/main/packages/tools/src/lib/ergonomic/ids.ts)), and adapter examples are in the [`@neon/tools` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/tools).
 
