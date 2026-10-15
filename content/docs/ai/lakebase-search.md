@@ -33,7 +33,7 @@ Lakebase Search is built on three Postgres extensions:
 
 - **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
 - **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from Postgres full-text search required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
-- **[`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer)**: adds configurable whole-word tokenization through Postgres's text-search dictionary interface. It produces standard `tsvector` values that work with GIN and `lakebase_bm25` indexes.
+- **[`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer)**: adds configurable whole-word tokenization and Chinese, Japanese, and Korean (CJK) morphological analysis through Postgres's text-search dictionary interface. It produces standard `tsvector` values that work with GIN and `lakebase_bm25` indexes.
 
 ## How `lakebase_ann` scales
 
@@ -56,7 +56,7 @@ It uses IVF (Inverted File) partitioning to divide the vector space into lists a
 
 <a href="/docs/extensions/lakebase-text" description="BM25 operators, functions, fallback parameters, and prefilter reference for lakebase_text" icon="openai">lakebase_text reference</a>
 
-<a href="/docs/extensions/lakebase-tokenizer" description="Whole-word tokenization options, custom stop words, synonyms, and stemming" icon="openai">lakebase_tokenizer reference</a>
+<a href="/docs/extensions/lakebase-tokenizer" description="Whole-word and CJK tokenization, built-in language configurations, custom stop words, synonyms, and stemming" icon="openai">lakebase_tokenizer reference</a>
 
 </DetailIconCards>
 
