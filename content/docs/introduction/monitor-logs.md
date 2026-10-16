@@ -1,22 +1,22 @@
 ---
 title: Monitor logs
-subtitle: View, search, and download logs for Functions and Object Storage
+subtitle: View, search, and download logs for Functions, Object Storage, and Realtime
 summary: >-
-  Logs for Functions and Object Storage live on the Monitoring page, split
-  across the Functions and Storage tabs (one viewer per service, no combined
-  view). Filter by level (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service
+  Logs for Functions, Object Storage, and Realtime live on the Monitoring
+  page, split across the Functions, Storage, and Realtime tabs (one viewer per
+  service, no combined view). Filter by level (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL) or service
   name, search log bodies, poll for new lines with Go live, and download the
   current view as a .log file. Logs are retained for 3 days.
 enableTableOfContents: true
 ---
 
-The Monitoring page shows service logs in two tabs, **Functions** and **Storage**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The two tabs share the same controls, described below.
+The Monitoring page shows service logs in three tabs: **Functions**, **Storage**, and **Realtime**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available.
 
 ## View logs
 
 1. In the Neon Console, select a project and branch.
 2. Go to **Monitoring**.
-3. Open the **Functions** or **Storage** tab.
+3. Open the **Functions**, **Storage**, or **Realtime** tab.
 
 Each tab shows logs from every function or bucket on the branch. Narrow to a single service with the service name field (see [Scope by service](#scope-by-service)).
 
@@ -27,7 +27,7 @@ You can also jump straight to a service's tab without visiting Monitoring first:
 
 Both land you on the matching tab.
 
-Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`).
+Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`). Realtime lines have the `service_name` `neon-function/neonrealtimesocket`.
 
 For what these fields mean for a given service, and how each service maps its own output onto the shared level set, see [Function logs](/docs/compute/functions/logs) or [Object Storage logs](/docs/storage/logs).
 

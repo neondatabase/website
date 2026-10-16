@@ -150,5 +150,6 @@ neon skills -s neon-realtime
 - read the guides on [defining](./guides/queries) and [subscribing](./guides/subscribing) to queries, [reactivity](./guides/reactivity), [optimistic mutations](./guides/mutations) and [server-side rendering](./guides/ssr)
 - see the [Next.js](./examples/nextjs) and [TanStack](./examples/tanstack) examples showing how to build full-stack reactive apps with auth and SSR support
 - see the [Mastra](./examples/mastra) example showing how users and background agents work on the same data in real time
+- view Realtime logs in the **Realtime** tab of the [Monitoring page](/docs/introduction/monitor-logs)
 
 <NeedHelp/>
