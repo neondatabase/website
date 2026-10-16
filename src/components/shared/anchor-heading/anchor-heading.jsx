@@ -1,7 +1,7 @@
 import React from 'react';
-import slugify from 'slugify';
 
 import { cn } from 'utils/cn';
+import { headingId } from 'utils/heading-id';
 
 import HashIcon from './images/hash.inline.svg';
 
@@ -51,14 +51,8 @@ const AnchorHeading = (Tag) => {
 
     const customId = extractCustomId(text);
     const cleanText = stripCustomId(text);
-
-    const id =
-      customId ||
-      slugify(cleanText, {
-        lower: true,
-        strict: true,
-        remove: /[*+~.()'"!:@]/g,
-      }).replace(/_/g, '');
+    const textId = headingId(cleanText);
+    const id = customId || textId;
 
     // Remove the custom ID from children if it exists
     const cleanedChildren = React.Children.map(children, (child) => {
@@ -77,6 +71,10 @@ const AnchorHeading = (Tag) => {
           className
         )}
       >
+        {/* Site search links to the text-derived id; the served .md drops custom ids. */}
+        {customId && textId && textId !== customId && (
+          <span id={textId} className="absolute top-0 [scroll-margin-top:inherit]" aria-hidden />
+        )}
         <span>{cleanedChildren}</span>
         <a
           className="rounded-full px-2 no-underline opacity-0 transition-opacity duration-200 group-hover:opacity-100 hover:border-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-offset-0 sm:hidden"

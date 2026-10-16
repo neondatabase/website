@@ -23,7 +23,7 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import { siteSearchHighlightRanges } from 'utils/site-search-highlight';
 import {
   parseSiteSearchHits,
-  hrefFromSearchHit,
+  searchHitHref,
   SEARCH_QUERY_MAX_CHARS,
   SITE_SEARCH_CATEGORIES,
 } from 'utils/site-search-request';
@@ -286,7 +286,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
 
   const goToHit = (hit) => {
     onClose();
-    router.push(hrefFromSearchHit(hit.url));
+    router.push(searchHitHref(hit));
   };
 
   const askAi = () => {
@@ -377,7 +377,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
               )}
             >
               {hits.map((hit, index) => {
-                const href = hrefFromSearchHit(hit.url);
+                const href = searchHitHref(hit);
                 const section = sectionPath(hit.heading, hit.title);
                 return (
                   <li key={`${hit.url}-${hit.heading}`} role="presentation">
