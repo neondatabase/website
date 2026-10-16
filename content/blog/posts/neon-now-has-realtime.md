@@ -13,7 +13,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-now-has-realtime/neon-realtime.jpg
   alt: 'Neon now has realtime'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Neon now has realtime - Neon'
   description: >-
