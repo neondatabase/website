@@ -19,6 +19,13 @@ export function scrollToSection(sections) {
   );
   if (index === -1) return false;
   const element = elements[index];
+  for (
+    let details = element.closest('details');
+    details;
+    details = details.parentElement?.closest('details')
+  ) {
+    details.open = true;
+  }
   element.scrollIntoView();
   if (element.id) {
     window.history.replaceState(null, '', `#${element.id}`);
