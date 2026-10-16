@@ -209,7 +209,7 @@ Turn off **Allow MCP clients to dynamically register themselves** (`mcp.dynamic_
 While DCR is on, anyone can register a client with any name and redirect URI. Show the client name and redirect URI clearly on your consent page so users can tell what they're approving.
 </Admonition>
 
-Clients that redirect to a custom URI scheme (for example, `cursor://`) can only connect through DCR, because [managed clients](#create-and-manage-oauth-clients) accept only `https` and loopback `http` redirect URIs.
+Custom URI schemes such as `cursor://` are rejected. DCR drops those redirect URIs and accepts only `https`, loopback `http`, and reverse-domain private-use schemes for native clients (for example, `com.example.app:/callback`). A client such as Cursor connects through its `https` or loopback redirect URIs. [Managed clients](#create-and-manage-oauth-clients) accept only `https` and loopback `http` redirect URIs.
 
 ## Sign in users to your own apps and APIs
 
@@ -318,7 +318,7 @@ Update accepts `name`, `redirect_uris`, `resources`, `skip_consent`, and `disabl
 ### Redirect URI rules
 
 - Redirect URIs must use `https`, or `http` on a loopback host (such as `localhost` or `127.0.0.1`) when localhost access is enabled for the branch.
-- Custom URI schemes (for example, `myapp://`) aren't accepted for managed clients. Apps that need one can only connect through [DCR](#dynamic-client-registration) on the MCP server resource.
+- Custom URI schemes (for example, `myapp://`) aren't accepted for managed clients. Use an `https` or loopback redirect URI instead.
 - Register only the redirect URIs the app uses. A broad redirect URI lets another app receive the authorization code.
 
 ### Skip consent
@@ -339,6 +339,6 @@ Update accepts `name`, `redirect_uris`, `resources`, `skip_consent`, and `disabl
 - Dynamic client registration is available for the MCP server resource only. Other resources need managed clients.
 - Managed clients: up to 100 per project, 10 redirect URIs each, and links to up to 11 resources.
 - Scopes, token lifetimes, and other provider options aren't configurable.
-- Custom URI scheme redirects work only through dynamic client registration.
+- Custom URI schemes (for example, `myapp://` or `cursor://`) are rejected for managed clients. Dynamic client registration accepts only reverse-domain private-use schemes, such as `com.example.app:/callback`.
 
 <NeedHelp/>
