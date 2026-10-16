@@ -49,10 +49,10 @@ Click **Enable Realtime**. Once enabled, you'll see the Realtime page:
 
 ![Realtime enabled view](/docs/realtime/realtime-enabled.png)
 
-The page shows your:
+The page gives you the two values your app needs:
 
-- **NEON_REALTIME_URL**: your [Live SQL API](./how-it-works#live-sql-api) endpoint URL
-- **NEON_REALTIME_SECRET**: to use when [sealing queries](./guides/queries#sealing-queries)
+- **Realtime SQL API endpoint URL**: your [Live SQL API](./how-it-works#live-sql-api) endpoint. Use it as the value for `NEON_REALTIME_URL`.
+- **Copy secret**: copies the branch's shared secret, which you use when [sealing queries](./guides/queries#sealing-queries). The Console doesn't display the secret. Use it as the value for `NEON_REALTIME_SECRET`.
 
 ### Using the CLI
 
@@ -143,6 +143,15 @@ neon skills -s neon-realtime
     description="Copy this to your coding agent to get started with Realtime."
     buttonText="Copy prompt"
 />
+
+## Manage Realtime
+
+On the Realtime page in the Neon Console:
+
+- **Rotate secret** replaces the branch's shared secret. Once rotation finishes, the old secret stops working, so click **Copy secret** and update `NEON_REALTIME_SECRET` in every app that uses it.
+- **Disable Realtime** disconnects all Realtime clients on the branch and discards its shared secret.
+
+To do the same from the CLI, and for details on how rotation and disabling work, see [`neon realtime rotate-secret`](/docs/cli/realtime#rotate-secret) and [`neon realtime disable`](/docs/cli/realtime#disable).
 
 ## Next steps
 
