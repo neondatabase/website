@@ -25,15 +25,23 @@ CREATE EXTENSION IF NOT EXISTS lakebase_tokenizer WITH SCHEMA tokenizer_ext;
 
 ### Upgrade the extension
 
-A new Lakebase Search release can add features, fixes, and performance improvements. Although Lakebase Search is released as part of Neon updates, it does not upgrade everything automatically.
+Neon ships new Lakebase Search releases as part of its regular updates, but it doesn't upgrade the extension in your database for you. To see which version you have and which is available:
 
-Upgrading is not urgent. The extension is compatible with SQL objects from older versions, but staying current keeps you on the supported, best-performing path and avoids a larger migration later, so upgrade when convenient rather than deferring indefinitely.
+```sql
+SELECT installed_version, default_version
+FROM pg_available_extensions
+WHERE name = 'lakebase_tokenizer';
+```
 
-<Admonition type="note">
-The latest available extension version is reported by `SELECT default_version FROM pg_available_extensions WHERE name = 'lakebase_tokenizer'`.
-</Admonition>
+To upgrade, run:
 
-`ALTER EXTENSION` does not regenerate stored `tsvector` values or rebuild dependent GIN or `lakebase_bm25` indexes. If an update changes tokenization output, regenerate stored `tsvector` values and follow the release notes for any required index maintenance.
+```sql
+ALTER EXTENSION lakebase_tokenizer UPDATE;
+```
+
+There's no rush. Older versions keep working, but upgrading when it's convenient keeps you on the supported version and saves you a bigger jump later.
+
+`ALTER EXTENSION` doesn't regenerate stored `tsvector` values or rebuild GIN or `lakebase_bm25` indexes. That only matters when a release changes how text is tokenized. Upgrading from 0.1.x to 0.2.0 doesn't: 0.2.0 adds the [`tokenizer_morph`](#template-tokenizermorph) template and the built-in CJK configurations and leaves your existing configurations alone, so you don't need to reindex.
 
 ## Quick start
 
