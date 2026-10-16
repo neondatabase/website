@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-10-15T11:27:21.154Z'
 ---
 
 Neon Object Storage uses the same scoped-credential system as [AI Gateway](/docs/ai-gateway/authentication): one credential API mints branch-scoped tokens that differ by scope (Object Storage uses `storage:read` and `storage:write`). You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
@@ -33,6 +33,8 @@ The `api_token` and `s3_secret_access_key` are printed once, so store them right
 <TabItem>
 
 In the Neon Console, click **Connect** at the top of the sidebar and open the **Storage** tab. Use the client selector to pick **S3 client**, **Files SDK**, or **Python** for a ready-to-run snippet, or **Parameters only** for the raw `.env`. Click **Reveal credential** to show `AWS_SECRET_ACCESS_KEY`, **Copy credentials** to copy it, or **Rotate credentials** to issue new keys.
+
+![Connect to your branch modal with the Storage tab open](/docs/connect/connect_to_branch_storage_tab.png)
 
 To create a separate credential with only the scopes you need, open your project's **Settings** > **Credentials**, select **Create credential**, enter a name, and choose `storage:read`, `storage:write`, or both. The secret is shown only once, so copy it right away.
 
