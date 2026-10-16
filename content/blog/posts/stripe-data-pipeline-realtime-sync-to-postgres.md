@@ -13,7 +13,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/stripe-data-pipeline-realtime-sync-to-postgres/stripe-data-pipeline-realtime-sync-to-postgres-cover.jpg
   alt: 'Sync Stripe data in real-time to Neon'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Sync Stripe data in real-time to Neon - Neon'
   description: >-
