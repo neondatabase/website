@@ -27,7 +27,7 @@ You can also jump straight to a service's tab without visiting Monitoring first:
 
 Both land you on the matching tab.
 
-Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`). Realtime lines have the `service_name` `neon-function/neonrealtimesocket`.
+Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`. `entity_type` identifies the kind of service a line came from (`function` or `storage`); `service_name` identifies the specific one (`neon-function/<slug>` or `neon-storage/<bucket>`).
 
 For what these fields mean for a given service, and how each service maps its own output onto the shared level set, see [Function logs](/docs/compute/functions/logs) or [Object Storage logs](/docs/storage/logs).
 
