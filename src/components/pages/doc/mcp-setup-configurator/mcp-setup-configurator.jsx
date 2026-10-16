@@ -47,6 +47,7 @@ const SCOPE_CATEGORIES = [
   { id: 'docs', label: 'Docs', description: 'Search and fetch docs' },
   { id: 'functions', label: 'Functions', description: 'List, deploy, and update functions' },
   { id: 'storage', label: 'Storage', description: 'Buckets, objects, and presigned URLs' },
+  { id: 'realtime', label: 'Realtime', description: 'Enable Realtime and manage its secret' },
 ];
 const SCOPE_IDS = SCOPE_CATEGORIES.map((scope) => scope.id);
 const SCOPE_ID_SET = new Set(SCOPE_IDS);
