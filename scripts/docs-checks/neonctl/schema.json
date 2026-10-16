@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.7.1",
+  "neonctlVersion": "8.7.2",
   "binaries": [
     "neonctl",
     "neon"
