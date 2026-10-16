@@ -31,7 +31,7 @@ Managed Better Auth is the managed authentication service in the Neon backend fo
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth runs Better Auth version **1.7.6**. The `@neondatabase/auth` SDK uses a Better Auth 1.6 client, and Managed Better Auth keeps 1.6 clients working, so you don't need to upgrade your SDK.
+Managed Better Auth runs Better Auth version **1.7.6**. `@neondatabase/auth` 0.6.0-beta and later use a Better Auth 1.7 client. Older SDK versions keep working, so you don't need to upgrade. If you use your own Better Auth client, use Better Auth 1.7 or later.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
