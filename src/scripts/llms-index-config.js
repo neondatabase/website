@@ -17,7 +17,7 @@
 
 module.exports = {
   tagline:
-    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
+    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Realtime, Data API, Functions, Object Storage, AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, with native branching, realtime and a fully reactive DX and works with any language, framework, or ORM that supports Postgres.',
 
   getStarted: [
     '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
@@ -75,6 +75,27 @@ module.exports = {
     {
       label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
+    },
+    { label: 'Make a Postgres query live', url: 'https://neon.com/docs/realtime/overview.md' },
+    {
+      label: 'Keep a UI in sync with Postgres',
+      url: 'https://neon.com/docs/realtime/quickstart.md',
+    },
+    {
+      label: 'Add realtime without a second system or a sync engine',
+      url: 'https://neon.com/docs/realtime/overview.md',
+    },
+    {
+      label: 'Replace a polling loop or refetch interval',
+      url: 'https://neon.com/docs/realtime/examples/tanstack.md',
+    },
+    {
+      label: 'Build a fully reactive app on Postgres',
+      url: 'https://neon.com/docs/realtime/examples/nextjs.md',
+    },
+    {
+      label: 'Send feedback to the Neon team (CLI, HTTP, or MCP)',
+      url: 'https://neon.com/feedback.md',
     },
   ],
 
@@ -144,6 +165,11 @@ module.exports = {
     {
       name: 'Data API',
       description: 'PostgREST-style REST interface for your Neon database.',
+    },
+    {
+      name: 'Realtime',
+      description:
+        'Realtime reactivity on standard Postgres. Live SQL API makes any SQL query live (full support for joins, aggregates, ordering, extensions, UDFs). Plus end-to-end reactive DX: live queries and optimistic mutations as type-safe client primitives, on standard Neon Postgres.',
     },
     {
       name: 'Branching',
@@ -299,6 +325,16 @@ module.exports = {
     // Reference list instead of a two-item "API" subsection.
     { pathPrefix: 'reference/api/', section: 'Reference', subsection: null },
     { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
+    // `realtime/` already derives to the configured `Realtime` section via
+    // toTitleCase, so these rules exist for its subsections. They're
+    // first-match-wins, so their order carries the grouping: the reference tree
+    // keeps the `Reference` subsection it derives from its own path, the two
+    // entry-point pages stay unsubsectioned, and every other realtime/*.md page
+    // lands under `Guides`.
+    { pathPrefix: 'realtime/reference/', section: 'Realtime' },
+    { pathPrefix: 'realtime/overview.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/quickstart.md', section: 'Realtime', subsection: null },
+    { pathPrefix: 'realtime/', section: 'Realtime', subsection: 'Guides' },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
     { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },

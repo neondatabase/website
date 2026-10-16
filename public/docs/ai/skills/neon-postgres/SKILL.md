@@ -6,7 +6,8 @@ description: >-
   scale-to-zero, instant restore, read replicas, IP allow lists, logical
   replication, and Lakebase Search. Use when the work is an existing
   DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files,
-  Functions, and LLM calls go to the parent `neon` skill. Also use for
+  Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive
+  UIs, and realtime data go to `neon-realtime`. Also use for
   "@neondatabase/serverless", "@neondatabase/neon-js", "neon inspect db",
   "semantic search", "vector search", "full-text search", "BM25", or
   "hybrid search".
@@ -30,6 +31,8 @@ Lakebase Postgres is the database at the core of Neon. It runs on the lakebase a
 It is the same database whether you reach it through Neon or through Databricks; this skill covers the Neon access path.
 
 Login, users, sessions, and `@neondatabase/auth` belong in `neon-auth`.
+
+Live queries, reactive UIs, and realtime data belong in `neon-realtime`.
 
 ## Setup Flow
 
@@ -257,7 +260,7 @@ Link: https://neon.com/docs/guides/logical-replication-guide.md
 
 Use Lakebase Search for semantic, full-text, and hybrid search:
 
-- For semantic search, read [Vector search](references/vector-search.md).
+- For semantic search, including generating embeddings with the Neon AI Gateway, read [Vector search](references/vector-search.md).
 - For full-text search with BM25 ranking, read [Full-text search](references/full-text-search.md).
 - For combining semantic and lexical results, read [Hybrid search](references/hybrid-search.md).
 - For managing any of the above through Drizzle ORM, read [Managing Lakebase Search with Drizzle](references/lakebase-search-drizzle.md).

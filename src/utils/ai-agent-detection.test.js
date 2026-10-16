@@ -31,14 +31,32 @@ describe('isAIAgentRequest', () => {
 
     aiAgentPatterns.forEach((pattern) => {
       it(`should detect AI agent with User-Agent containing "${pattern}"`, () => {
-        const req = createMockRequest(`Mozilla/5.0 ${pattern}/1.0`, 'text/html');
+        const req = createMockRequest(`Mozilla/5.0 ${pattern}/1.0`, '*/*');
         expect(isAIAgentRequest(req)).toBe(true);
       });
 
       it(`should detect AI agent with User-Agent containing lowercase "${pattern.toLowerCase()}"`, () => {
-        const req = createMockRequest(`Mozilla/5.0 ${pattern.toLowerCase()}/1.0`, 'text/html');
+        const req = createMockRequest(`Mozilla/5.0 ${pattern.toLowerCase()}/1.0`, '*/*');
         expect(isAIAgentRequest(req)).toBe(true);
       });
+
+      it(`should not detect AI agent with User-Agent containing "${pattern}" when Accept includes text/html`, () => {
+        const req = createMockRequest(
+          `Mozilla/5.0 ${pattern}/1.0`,
+          'text/html,application/xhtml+xml,*/*;q=0.8'
+        );
+        expect(isAIAgentRequest(req)).toBe(false);
+      });
+    });
+
+    it('should detect AI agent with User-Agent and no Accept header', () => {
+      const req = createMockRequest('curl/8.7.1', '');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect AI agent with User-Agent when Accept includes text/markdown and text/html', () => {
+      const req = createMockRequest('Claude-User/1.0', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
     });
 
     it('should not detect regular browser User-Agent', () => {
@@ -98,9 +116,9 @@ describe('isAIAgentRequest', () => {
       expect(isAIAgentRequest(req)).toBe(true);
     });
 
-    it('should detect AI agent with AI User-Agent even with HTML Accept', () => {
+    it('should NOT detect AI agent with AI User-Agent and HTML Accept', () => {
       const req = createMockRequest('Claude/1.0', 'text/html');
-      expect(isAIAgentRequest(req)).toBe(true);
+      expect(isAIAgentRequest(req)).toBe(false);
     });
   });
 
@@ -154,6 +172,12 @@ describe('getMarkdownPath', () => {
       ['/lakebase.md', '/md/lakebase.md'],
     ])('should resolve generated page %s to %s', (pagePath, markdownPath) => {
       expect(getMarkdownPath(pagePath)).toBe(markdownPath);
+    });
+
+    it('should alias /feedback.md to the Send feedback docs page mirror', () => {
+      expect(getMarkdownPath('/feedback.md')).toBe('/md/docs/introduction/feedback.md');
+      // Bare /feedback is a redirectFrom redirect to the docs page, not a markdown alias.
+      expect(getMarkdownPath('/feedback')).toBeNull();
     });
 
     it('should convert /docs/introduction to markdown path', () => {

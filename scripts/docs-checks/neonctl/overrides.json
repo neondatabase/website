@@ -23,12 +23,53 @@
         "init": {
           "options": {
             "services": {
-              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from an array join). See generate-schema.js parseOptionSpec for the limitation. type, alias, and describe verified against config.ts and neon_services.ts at neonctl 8.3.4, which replaced `none` with `postgres` for the starter policy.",
+              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from an array join). See generate-schema.js parseOptionSpec for the limitation. type, alias, and describe verified against config.ts and neon_services.ts at neonctl 8.3.4, which replaced `none` with `postgres` for the starter policy. 8.4.1 added realtime to NEON_SERVICES, and 8.5.0 removed the staging-only gate, so help lists it on every API host.",
               "type": "array",
-              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
+              "describe": "Services the scaffolded neon.ts declares: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY.",
               "alias": ["s", "service"]
             }
           }
+        }
+      }
+    },
+    "realtime": {
+      "commands": {
+        "subscribe": {
+          "_comment": "The static parser finds the subcommand in realtime.ts but cannot follow its imported builder into subscribe.ts. These builder-defined values are verified against subscribe.ts at neon 8.4.4.",
+          "positionals": [
+            {
+              "name": "query",
+              "required": true,
+              "describe": "SELECT query to subscribe to",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "changes": {
+              "type": "boolean",
+              "describe": "Show raw rows and changes events",
+              "default": false
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "usage": "$0 realtime subscribe \"<query>\" [options]",
+          "examples": [
+            {
+              "command": "$0 realtime subscribe \"SELECT * FROM items\"",
+              "description": "Print the initial result followed by a readable transaction log"
+            },
+            {
+              "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
+              "description": "Print raw rows and changes events"
+            }
+          ]
         }
       }
     },
@@ -37,9 +78,9 @@
         "pull": {
           "options": {
             "service": {
-              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type, alias, and describe verified against env.ts (ENV_PULL_SERVICES = NEON_SERVICES) at neonctl 8.3.4.",
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type, alias, and describe verified against env.ts (ENV_PULL_SERVICES = NEON_SERVICES) at neonctl 8.4.1, which added realtime (see config init services override).",
               "type": "array",
-              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name. Combines with --env as a union.",
               "alias": ["s", "services"]
             }
           }
@@ -198,10 +239,10 @@
     "init": {
       "options": {
         "services": {
-          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.3.4.",
+          "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.4.1, which added realtime (see config init services override).",
           "type": "array",
           "alias": ["s", "service"],
-          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
+          "describe": "Services to declare in neon.ts: postgres, auth, data-api, functions, object-storage, ai-gateway, realtime. Repeat the flag or comma-separate. postgres alone writes the starter policy; every branch has Postgres. Implies creating neon.ts. Cannot be combined with --no-config."
         }
       }
     }

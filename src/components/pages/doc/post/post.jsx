@@ -39,7 +39,9 @@ const Post = ({
     tag = null,
     tagTheme = 'gray',
     layout = null,
+    titleWidth = null,
     contentLayout = null,
+    hideCopyPage = false,
   },
   content,
   breadcrumbs,
@@ -92,9 +94,11 @@ const Post = ({
           <article>
             {isFaq ? (
               <>
-                <div className="mb-5 flex justify-end sm:mb-3">
-                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
-                </div>
+                {!hideCopyPage && (
+                  <div className="mb-5 flex justify-end sm:mb-3">
+                    <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                  </div>
+                )}
                 <div>
                   <h1
                     className={cn(
@@ -120,7 +124,8 @@ const Post = ({
                   className={cn(
                     !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
                     !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
-                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
+                    titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
                   )}
                 >
                   {eyebrow && (
@@ -153,7 +158,7 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && (
+                {!isChangelog && !isDocsIndex && !hideCopyPage && (
                   <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 )}
               </div>
@@ -205,7 +210,9 @@ Post.propTypes = {
     tagTheme: PropTypes.string,
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
+    titleWidth: PropTypes.oneOf(['530', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
+    hideCopyPage: PropTypes.bool,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),

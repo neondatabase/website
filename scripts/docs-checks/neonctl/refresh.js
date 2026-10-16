@@ -59,8 +59,12 @@ function compareSemver(a, b) {
 }
 
 async function latestTag() {
+  // Unauthenticated requests share a 60/hour per-IP quota; send GITHUB_TOKEN
+  // when set to avoid 403s.
+  const headers = { accept: 'application/vnd.github+json' };
+  if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   const res = await fetch(`https://api.github.com/repos/${REPO}/releases?per_page=100`, {
-    headers: { accept: 'application/vnd.github+json' },
+    headers,
   });
   if (!res.ok) throw new Error(`GitHub API ${res.status} fetching releases`);
   const releases = await res.json();

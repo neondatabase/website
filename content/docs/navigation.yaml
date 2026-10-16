@@ -138,6 +138,7 @@
           items:
             - title: Import Data Assistant
               slug: import/import-data-assistant
+              tag: beta
             - title: pg_dump / pg_restore
               slug: import/migrate-from-postgres
             - title: pgcopydb
@@ -606,39 +607,6 @@
                 - title: Compatibility
                   slug: reference/compatibility
                   icon: info
-        - section: Data API
-          icon: api
-          items:
-            - title: Overview
-              slug: data-api/overview
-            - title: Get started
-              slug: data-api/get-started
-            - title: Guides
-              items:
-                - title: Access control & security
-                  slug: data-api/access-control
-                - title: Secure your app with RLS
-                  slug: guides/rls-tutorial
-                - title: Custom authentication providers
-                  slug: data-api/custom-authentication-providers
-                - title: Data API Advisors
-                  slug: data-api/database-advisor
-            - title: Tools
-              items:
-                - title: Auth and Data API SDK
-                  slug: reference/javascript-sdk
-                - title: SQL to REST API Translator
-                  slug: data-api/sql-to-rest
-                - title: Generate TypeScript types
-                  slug: data-api/generate-types
-            - title: Using the Data API
-              items:
-                - title: Building a note-taking app
-                  slug: data-api/demo
-                - title: Managing the Data API
-                  slug: data-api/manage
-                - title: Troubleshooting
-                  slug: data-api/troubleshooting
         - section: Compute & scaling
           icon: features
           items:
@@ -731,6 +699,46 @@
                       slug: workflows/data-anonymization-api
                     - title: GitHub Actions
                       slug: workflows/data-anonymization-github-actions
+        - section: Realtime
+          icon: zap
+          items:
+            - title: 'Live SQL queries'
+              slug: introduction/live-sql-queries
+            - title: 'Reactivity'
+              slug: introduction/reactivity
+        - section: Data API
+          icon: api
+          items:
+            - title: Overview
+              slug: data-api/overview
+            - title: Get started
+              slug: data-api/get-started
+            - title: Guides
+              items:
+                - title: Access control & security
+                  slug: data-api/access-control
+                - title: Secure your app with RLS
+                  slug: guides/rls-tutorial
+                - title: Custom authentication providers
+                  slug: data-api/custom-authentication-providers
+                - title: Data API Advisors
+                  slug: data-api/database-advisor
+            - title: Tools
+              items:
+                - title: Auth and Data API SDK
+                  slug: reference/javascript-sdk
+                - title: SQL to REST API Translator
+                  slug: data-api/sql-to-rest
+                - title: Generate TypeScript types
+                  slug: data-api/generate-types
+            - title: Using the Data API
+              items:
+                - title: Building a note-taking app
+                  slug: data-api/demo
+                - title: Managing the Data API
+                  slug: data-api/manage
+                - title: Troubleshooting
+                  slug: data-api/troubleshooting
         - section: Backup & restore
           icon: report
           items:
@@ -757,8 +765,8 @@
       items:
         - section: Introduction
           items:
-            - title: Overview
-              slug: auth/overview
+            - title: About Managed Better Auth
+              slug: auth/about
             - title: Authentication Flow
               slug: auth/authentication-flow
             - title: Branching Authentication
@@ -839,7 +847,53 @@
                   slug: auth/legacy/overview
                 - title: Database integration
                   slug: auth/legacy/database-integration
-    - title: Neon Functions
+    - title: Realtime
+      icon: zap
+      slug: realtime/overview
+      items:
+        - section: Introduction
+          items:
+            - title: 'Overview'
+              slug: realtime/overview
+            - title: 'Quickstart'
+              slug: realtime/quickstart
+            - title: 'How it works'
+              slug: realtime/how-it-works
+        - section: Guides
+          items:
+            - title: 'Defining queries'
+              slug: realtime/guides/queries
+            - title: 'Subscribing to queries'
+              slug: realtime/guides/subscribing
+            - title: 'Client-side reactivity'
+              slug: realtime/guides/reactivity
+            - title: 'Optimistic mutations'
+              slug: realtime/guides/mutations
+            - title: 'Server-side rendering'
+              slug: realtime/guides/ssr
+        - section: Examples
+          items:
+            - title: 'Overview'
+              slug: realtime/examples/overview
+            - title: 'Next.js'
+              slug: realtime/examples/nextjs
+            - title: 'TanStack'
+              slug: realtime/examples/tanstack
+            - title: 'Mastra'
+              slug: realtime/examples/mastra
+            - title: 'Drizzle'
+              slug: realtime/examples/drizzle
+            - title: 'Kysely'
+              slug: realtime/examples/kysely
+        - section: SDKs
+          items:
+            - title: 'TypeScript'
+              slug: realtime/sdks/typescript
+        - section: Reference
+          items:
+            - title: 'API'
+              slug: realtime/reference/api
+    - title: Functions
       icon: features
       slug: compute/functions/overview
       items:
@@ -851,6 +905,7 @@
           slug: compute/functions/deploy
         - title: Custom domains
           slug: compute/functions/custom-domains
+          tag: beta
         - title: Logs
           slug: compute/functions/logs
         - title: Environment variables
@@ -925,7 +980,7 @@
               slug: ai-gateway/overview
             - title: Quickstart
               slug: ai-gateway/get-started
-            - title: Models
+            - title: Model reference
               slug: ai-gateway/models
             - title: Prepaid credits
               slug: ai-gateway/prepaid-credits
@@ -1372,6 +1427,8 @@
                   slug: cli/data-api
                 - title: neon-auth
                   slug: cli/neon-auth
+                - title: realtime
+                  slug: cli/realtime
                 - title: credentials
                   slug: cli/credentials
             - title: Organizations and networking
@@ -1412,6 +1469,8 @@
               slug: reference/sdk
             - title: Auth and Data API SDK
               slug: reference/javascript-sdk
+            - title: Live SQL API SDK
+              slug: realtime/sdks/typescript
             - title: Neon Management SDK
               slug: reference/typescript-sdk
             - title: Effect bindings

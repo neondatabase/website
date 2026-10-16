@@ -130,6 +130,13 @@ const META = {
     desc: 'Manage Neon Auth on a branch.',
     examples: ['neon neon-auth enable'],
   },
+  realtime: {
+    desc: 'Manage Neon Realtime and subscribe to live queries.',
+    examples: [
+      'neon realtime enable --allowed-origin https://app.example.com',
+      'neon realtime subscribe "SELECT * FROM items"',
+    ],
+  },
   orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
   'ip-allow': {
     desc: 'Manage the project IP allowlist.',

@@ -57,6 +57,7 @@ const GROUP_OF = {
   triggers: 'surfaces',
   git: 'setup',
   feedback: 'setup',
+  realtime: 'surfaces',
 };
 
 // Commands documented as a section of another command's page instead of a

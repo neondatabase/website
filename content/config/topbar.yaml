@@ -1,4 +1,4 @@
-text: 'Major update to our Free Plan: now with 1 GB of Postgres storage per project, 100 projects included'
+text: 'Neon now has realtime: Live SQL with full reactivity. Try it in Beta today'
 link:
-  url: 'https://neon.com/blog/neon-free-plan-1-gb-per-project'
+  url: 'https://neon.com/blog/neon-now-has-realtime'
   target: '_blank'
