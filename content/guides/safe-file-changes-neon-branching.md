@@ -371,7 +371,7 @@ export default function Home() {
 `app/page.tsx` renders the gallery in two parts. `AssetGallery` is an async server component. The `await io()` call marks a point that suspends during prerendering so the listing is excluded from the static shell and streams in at request time. The listing re-runs on every request because no cache scope wraps it. It lists the bucket with `ListObjectsV2Command`, sorts the keys, and renders each one as a tile with an image and caption. The three forms below it call the server actions you defined in `app/actions.ts`.
 
 <Admonition type="tip" title="Increase the request body limit for large files">
-Server actions cap the request body at 1 MB by default, so larger files fail to upload. The browser shows no error; the `Body exceeded 1 MB limit` message appears only in the dev server log. You can increase the limit in `next.config.ts`:
+Next.js caps server action request bodies at 1 MB by default (a framework limit, not an Object Storage one), so larger files fail to upload. The browser shows no error; the `Body exceeded 1 MB limit` message appears only in the server log. You can increase the limit in `next.config.ts`:
 
 ```ts filename="next.config.ts"
 import type { NextConfig } from "next";
