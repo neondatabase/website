@@ -288,28 +288,28 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
     document.getElementById(`${listId}-${activeIndex}`)?.scrollIntoView({ block: 'nearest' });
   }, [activeHit, activeIndex, listId]);
 
-  const samePageSections = useRef(null);
+  const samePageHit = useRef(null);
 
   // Waits for the dialog to close so its scroll lock can't restore the old position.
   useEffect(() => {
-    if (isOpen || !samePageSections.current) return undefined;
+    if (isOpen || !samePageHit.current) return undefined;
     const frame = requestAnimationFrame(() => {
-      const sections = samePageSections.current;
-      samePageSections.current = null;
-      if (sections) scrollToSection(sections);
+      const hit = samePageHit.current;
+      samePageHit.current = null;
+      if (hit && !scrollToSection(hit.sections)) router.push(hit.href);
     });
     return () => cancelAnimationFrame(frame);
-  }, [isOpen]);
+  }, [isOpen, router]);
 
   const goToHit = (hit) => {
     const href = hrefFromSearchHit(hit.url);
-    const sections = hitSections(hit.heading);
+    const sections = hitSections(hit.heading, hit.title);
     const target = new URL(href, window.location.origin);
     onClose();
-    if (sections.length === 0 || target.hash !== '') {
+    if (sections.length === 0 || target.hash !== '' || target.search !== '') {
       router.push(href);
-    } else if (target.pathname === pathname && target.search === window.location.search) {
-      samePageSections.current = sections;
+    } else if (target.pathname === pathname) {
+      samePageHit.current = { sections, href };
     } else {
       scrollToSectionAfterNavigation(target.pathname, sections);
       router.push(href);

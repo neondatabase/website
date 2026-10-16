@@ -17,12 +17,13 @@ export function scrollToSection(sections) {
     sections,
     elements.map((element) => ({ level: Number(element.tagName[1]), text: element.textContent }))
   );
-  if (index === -1) return;
+  if (index === -1) return false;
   const element = elements[index];
   element.scrollIntoView();
   if (element.id) {
     window.history.replaceState(null, '', `#${element.id}`);
   }
+  return true;
 }
 
 export function scrollToSectionAfterNavigation(pathname, sections) {

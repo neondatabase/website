@@ -3,10 +3,19 @@ import { describe, expect, it } from 'vitest';
 import { findSectionHeading, hitSections } from './site-search-section';
 
 describe('hitSections', () => {
-  it('drops the page title', () => {
-    expect(hitSections('Glossary > LSN')).toEqual(['LSN']);
-    expect(hitSections('Glossary')).toEqual([]);
-    expect(hitSections('')).toEqual([]);
+  it('drops a leading page title', () => {
+    expect(hitSections('Glossary > LSN', 'Glossary')).toEqual(['LSN']);
+    expect(hitSections('Glossary', 'Glossary')).toEqual([]);
+    expect(hitSections('', 'Pricing')).toEqual([]);
+  });
+
+  it('keeps the first heading when it is not the page title', () => {
+    expect(
+      hitSections(
+        'How compute is billed in Amazon RDS',
+        'How to reduce Postgres compute costs as you scale'
+      )
+    ).toEqual(['How compute is billed in Amazon RDS']);
   });
 });
 

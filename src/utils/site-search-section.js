@@ -1,8 +1,9 @@
 const normalize = (text) => text.replace(/\s+/g, ' ').trim();
 
-// A hit's heading starts with the page H1 ("Glossary > LSN"); the sections are what follows.
-export function hitSections(heading) {
-  return heading.split(' > ').slice(1).map(normalize);
+// Docs headings start with the page H1 ("Glossary > LSN"); blog headings don't.
+export function hitSections(heading, title) {
+  const parts = heading.split(' > ').map(normalize).filter(Boolean);
+  return parts[0] === normalize(title) ? parts.slice(1) : parts;
 }
 
 // `headings` are the page's rendered headings in document order, as { level, text }.
