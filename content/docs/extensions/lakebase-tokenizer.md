@@ -300,7 +300,6 @@ The language-specific analysis step applies these rules:
 
 Postgres's text-search parser splits text at whitespace and punctuation before calling `tokenizer_morph`. Each parser token can contain up to 2046 bytes. Longer tokens are skipped with a `NOTICE`. Most Chinese, Japanese, and Korean characters use 3 bytes in UTF-8, so a run of more than 682 of these characters without whitespace or punctuation is omitted from `to_tsvector` results.
 
-
 ### Supported languages and modes
 
 The available modes depend on the language. Each example shows source text → emitted terms.
