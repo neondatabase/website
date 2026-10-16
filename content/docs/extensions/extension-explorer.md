@@ -200,9 +200,9 @@ Browse supported Postgres extensions by category.
 
 <DetailIconCards>
 
-<a href="https://coffeescript.org/" description="Enables writing functions in CoffeeScript, a Javascript dialect with a syntax similar to Ruby" icon="binary-code">plcoffee</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a CoffeeScript procedural language that ships with plv8; use plpgsql or app-side logic instead" icon="binary-code">plcoffee</a>
 
-<a href="https://livescript.net/" description="Enables writing functions in LiveScript, a Javascript dialect that serves as a more powerful successor to CoffeeScript" icon="binary-code">plls</a>
+<a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a LiveScript procedural language that ships with plv8; use plpgsql or app-side logic instead" icon="binary-code">plls</a>
 
 <a href="/docs/extensions/plv8" description="Deprecated on Neon. Was a Postgres procedural language powered by V8 for JavaScript callable from SQL; use plpgsql or app-side logic instead" icon="binary-code">plv8</a>
 
