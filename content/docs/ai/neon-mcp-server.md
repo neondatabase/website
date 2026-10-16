@@ -68,7 +68,7 @@ Append `?readonly=true` to restrict the server to read operations:
 https://mcp.neon.tech/mcp?readonly=true
 ```
 
-`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled.
+`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction` isn't available in read-only mode; use `run_sql` for read queries.
 
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 

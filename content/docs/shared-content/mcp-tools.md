@@ -20,6 +20,7 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | Documentation (`docs`)            | Look up Neon documentation from within your assistant (no OAuth required)                                                   |
 | Functions (`functions`)           | List, deploy, update, and delete Neon Functions                                                                             |
 | Object storage (`storage`)        | Manage buckets and objects; create presigned URLs                                                                           |
+| Realtime (`realtime`)             | Enable and disable Realtime for a branch; get and rotate its secret                                                         |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode).
 
