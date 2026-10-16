@@ -7,11 +7,11 @@ createdAt: '2026-10-13T00:00:00.000Z'
 updatedOn: '2026-10-15T12:19:24.138Z'
 ---
 
-If you're building an app with file uploads (product photos, avatars, invoices, or PDF exports), you eventually have to change files that are already live. Maybe you're replacing a product image, moving objects to a new key prefix, or cleaning up attachments for accounts that were deleted. Whatever the change, one thing makes it different from the rest of your deploys: there's no undo. You can roll back code, but you can't roll back a file deletion or an overwrite. If you make a mistake, your users see it immediately.
+If you're building an app with file uploads (product photos, avatars, invoices, or PDF exports), you eventually have to change files that are already live. Maybe you're replacing a product image, moving objects to a new key prefix, or cleaning up attachments for accounts that were deleted. Unlike the rest of your deploys, file changes have no undo. You can roll back code, but you can't roll back a file deletion or an overwrite. If you make a mistake, your users see it immediately.
 
 The usual workarounds offer the same trade-off: test somewhere that isn't production, or test production itself. A standalone staging bucket drifts from production, so the files you test against aren't the files your users have. A dry run can print the keys it would touch, but it can't tell you whether the new image renders correctly, whether a replacement looks right, or whether the frontend still resolves a file after a deletion. S3 Versioning can restore an object you overwrite or delete, but only after the change has reached users, and it writes to the live bucket the whole time.
 
-[Neon Object Storage](/docs/storage/overview) removes that trade-off. Buckets [branch with your database](/docs/storage/buckets#bucket-branching) using the same copy-on-write model Neon uses for Postgres, so a branch gives you an isolated copy of both the rows and the files at the moment you create it. You can upload, replace, and delete real files on the branch, open the same frontend against it, and confirm the result, all without touching production.
+[Neon Object Storage](/docs/storage/overview) removes that trade-off. Buckets [branch with your database](/docs/storage/buckets#bucket-branching) using the same copy-on-write model as Lakebase Postgres branches, so a branch gives you an isolated copy of both the rows and the files at the moment you create it. You can upload, replace, and delete real files on the branch, open the same frontend against it, and confirm the result, all without touching production.
 
 This guide walks through the workflow by building a Next.js gallery app. You'll:
 
@@ -19,7 +19,7 @@ This guide walks through the workflow by building a Next.js gallery app. You'll:
 - Point a gallery app at the bucket
 - Create a branch in the Neon Console that inherits the bucket's objects
 - Run an upload, a replacement, and a deletion against the branch
-- Verify the change in the gallery and by confirming production is unchanged
+- Verify the change in the gallery and confirm production is unchanged
 - Discard the branch, or promote the verified change to production
 
 <Admonition type="info" title="Region availability">
@@ -50,7 +50,7 @@ Create a new project in the Neon Console with Object Storage enabled. The galler
 Neon provisions the project and its default branch (`production`), along with the `media` bucket on that branch.
 
 <Admonition type="note" title="Public versus private buckets">
-**Public** visibility sets the bucket's access level to `public_read`, which allows anonymous reads while still requiring credentials for writes. That lets the gallery render images from plain URLs, which makes the branch-versus-production comparison visually obvious. If your app stores private files, set the visibility as **Private** and generate [presigned URLs](/docs/storage/objects#presigned-urls) instead. The branching behavior is the same either way.
+**Public** visibility sets the bucket's access level to `public_read`, which allows anonymous reads while still requiring credentials for writes. That lets the gallery render images from plain URLs, which makes the branch-versus-production comparison visually obvious. If your app stores private files, set the visibility to **Private** and generate [presigned URLs](/docs/storage/objects#presigned-urls) instead. The branching behavior is the same either way.
 </Admonition>
 
 ## Get your storage credentials
@@ -113,7 +113,7 @@ export function publicUrl(key: string, version?: number) {
 
 `lib/s3.ts` creates an S3 client that points at the branch's endpoint and uses the access keys from your `.env.local`. The `publicUrl` helper builds a URL for a given object key, optionally appending a `?v=` query parameter so the browser fetches the new bytes when an object is overwritten instead of reusing a cached copy.
 
-The `forcePathStyle` option is required for Neon Object Storage, which uses path-style URLs rather than virtual-hosted style.
+The `forcePathStyle` option is required for Object Storage, which uses path-style URLs rather than virtual-hosted style.
 
 Now create a seed script that uploads four placeholder images to the bucket. The gallery will render these files, so you can see the branch's state before and after each change.
 
@@ -500,8 +500,6 @@ products/oculus-wall-clock.svg  (269 bytes)
 products/vertex-side-table.svg  (269 bytes)
 ```
 
-You've successfully tested the full upload, overwrite, and deletion workflows against a branch, verified the results in the gallery, and confirmed that production remains unaffected.
-
 ## Discard or promote the branch
 
 The test run is done. You can either throw the branch away or apply the change to production.
@@ -521,8 +519,6 @@ Files that exist only on the branch, such as new uploads, are deleted when the b
 
 ## Conclusion
 
-File changes can be difficult to reverse, but Neon Object Storage branching gives you a safe way to test them before they reach production. Create a branch, run real uploads, replacements, and deletions against a copy of your production files, and verify the results in your frontend. Once everything checks out, repeat the operation in production or discard the branch.
-
 This workflow is especially useful for testing file changes that would be costly to get wrong:
 
 - **Deleting files that are no longer needed.** Clean up files associated with closed accounts, expired exports, or orphaned uploads. Test the deletion on a branch first to confirm that the right files are removed and the frontend can still resolve the remaining assets. Check out [Clean up orphaned S3 objects with Neon Object Storage branching](/guides/clean-up-orphaned-s3-objects-neon-branching) for a more detailed example.
@@ -533,7 +529,7 @@ The same isolation applies to AI agents. An agent that uploads generated assets,
 
 Because branching also forks your Postgres data, you can test changes that span both database rows and stored objects in the same environment. For example, you can validate a new `thumbnail_url` column or a migration to a new key prefix alongside the corresponding object changes. This also makes branches useful as per-PR preview environments, where the database records and assets your tests depend on are consistent with production.
 
-Whenever overwriting or deleting live files could be expensive to get wrong, test the operation on a branch first. Learn more about [Neon branching](/docs/introduction/branching) and the [GitHub integration](/docs/guides/neon-github-integration) for creating branches automatically for pull requests.
+Learn more about [Neon branching](/docs/introduction/branching) and the [GitHub integration](/docs/guides/neon-github-integration) for creating branches automatically for pull requests.
 
 ## Resources
 
