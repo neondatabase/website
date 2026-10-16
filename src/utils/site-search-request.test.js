@@ -4,7 +4,6 @@ import {
   hrefFromSearchHit,
   parseSiteSearchHits,
   parseSiteSearchRequest,
-  searchHitHref,
   SEARCH_QUERY_MAX_CHARS,
   composeServerTiming,
 } from './site-search-request';
@@ -60,36 +59,6 @@ describe('hrefFromSearchHit', () => {
   it('rejects a path that would resolve to another host', () => {
     expect(() => hrefFromSearchHit('https://neon.com//example.com/#sign-in')).toThrow(
       /neon.com url/
-    );
-  });
-});
-
-describe('searchHitHref', () => {
-  const glossary = 'https://neon.com/docs/reference/glossary';
-
-  it('links to the matched section with the id the page renders', () => {
-    expect(searchHitHref({ url: glossary, heading: 'Glossary > LSN' })).toBe(
-      '/docs/reference/glossary#lsn'
-    );
-    expect(searchHitHref({ url: glossary, heading: 'Glossary > compute size' })).toBe(
-      '/docs/reference/glossary#compute-size'
-    );
-    expect(
-      searchHitHref({
-        url: 'https://neon.com/docs/introduction/plans',
-        heading: "Neon plans > Frequently asked questions > What's a CU?",
-      })
-    ).toBe('/docs/introduction/plans#whats-a-cu');
-  });
-
-  it('links to the page when the hit is the page itself', () => {
-    expect(searchHitHref({ url: glossary, heading: 'Glossary' })).toBe('/docs/reference/glossary');
-    expect(searchHitHref({ url: 'https://neon.com/pricing', heading: '' })).toBe('/pricing');
-  });
-
-  it('keeps an anchor the hit url already has', () => {
-    expect(searchHitHref({ url: `${glossary}#branch`, heading: 'Glossary > LSN' })).toBe(
-      '/docs/reference/glossary#branch'
     );
   });
 });

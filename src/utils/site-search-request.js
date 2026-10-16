@@ -1,5 +1,3 @@
-import { headingId } from './heading-id';
-
 export const SEARCH_QUERY_MAX_CHARS = 500;
 
 // `page` and `tutorial` only come from pinned results (site-search-pinned.js).
@@ -83,17 +81,6 @@ export function hrefFromSearchHit(url) {
     throw new Error(`Search hit is not a neon.com url: ${url}`);
   }
   return `${parsed.pathname}${parsed.search}${parsed.hash}`;
-}
-
-// `heading` is the matched section's path from the page H1 down, e.g. "Glossary > LSN".
-export function searchHitHref({ url, heading }) {
-  const href = hrefFromSearchHit(url);
-  const sections = heading.split(' > ');
-  if (href.includes('#') || sections.length < 2) {
-    return href;
-  }
-  const id = headingId(sections[sections.length - 1]);
-  return id ? `${href}#${id}` : href;
 }
 
 const BREADCRUMB_MAX_LABELS = 10;

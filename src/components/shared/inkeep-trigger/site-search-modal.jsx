@@ -10,7 +10,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useState } from 'react';
 
@@ -23,12 +23,35 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import { siteSearchHighlightRanges } from 'utils/site-search-highlight';
 import {
   parseSiteSearchHits,
-  searchHitHref,
+  hrefFromSearchHit,
   SEARCH_QUERY_MAX_CHARS,
   SITE_SEARCH_CATEGORIES,
 } from 'utils/site-search-request';
+import { findSectionHeading, hitSections } from 'utils/site-search-section';
 
 const SEARCH_DEBOUNCE_MS = 250;
+
+// Module scope, because the header that renders this modal can remount when the
+// navigation crosses layouts.
+let pendingSection = null;
+
+// The page is the authority on its heading ids: explicit `(#id)` headings and
+// component headings don't use the text-derived slug, and heading text repeats.
+function scrollToSection(sections) {
+  const elements = [...document.querySelectorAll('h2, h3, h4')].filter(
+    (element) => !element.closest('header, footer, nav, [role="dialog"]')
+  );
+  const index = findSectionHeading(
+    sections,
+    elements.map((element) => ({ level: Number(element.tagName[1]), text: element.textContent }))
+  );
+  if (index === -1) return;
+  const element = elements[index];
+  element.scrollIntoView();
+  if (element.id) {
+    window.history.replaceState(null, '', `#${element.id}`);
+  }
+}
 
 function HighlightedText({ text, query }) {
   const ranges = siteSearchHighlightRanges(text, query);
@@ -192,6 +215,7 @@ CategoryFilter.propTypes = {
 
 const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = [] }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const inputId = useId();
   const listId = useId();
   const [query, setQuery] = useState('');
@@ -284,9 +308,34 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
     document.getElementById(`${listId}-${activeIndex}`)?.scrollIntoView({ block: 'nearest' });
   }, [activeHit, activeIndex, listId]);
 
+  // Waits for the dialog to close so its scroll lock can't restore the old position.
+  useEffect(() => {
+    if (isOpen || pendingSection?.pathname !== pathname) return undefined;
+    const { sections } = pendingSection;
+    pendingSection = null;
+    const frame = requestAnimationFrame(() => scrollToSection(sections));
+    return () => cancelAnimationFrame(frame);
+  }, [isOpen, pathname]);
+
   const goToHit = (hit) => {
+    const href = hrefFromSearchHit(hit.url);
+    const sections = hitSections(hit.heading);
+    const target = new URL(href, window.location.origin);
+    if (sections.length > 0 && target.hash === '') {
+      pendingSection = { pathname: target.pathname, sections };
+    }
     onClose();
-    router.push(searchHitHref(hit));
+    if (target.pathname !== pathname || target.search !== window.location.search) {
+      router.push(href);
+    }
+  };
+
+  const onHitClick = (event, hit) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+    event.preventDefault();
+    goToHit(hit);
   };
 
   const askAi = () => {
@@ -377,7 +426,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
               )}
             >
               {hits.map((hit, index) => {
-                const href = searchHitHref(hit);
+                const href = hrefFromSearchHit(hit.url);
                 const section = sectionPath(hit.heading, hit.title);
                 return (
                   <li key={`${hit.url}-${hit.heading}`} role="presentation">
@@ -394,7 +443,7 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
                       )}
                       data-test="docs-search-hit"
                       onMouseEnter={() => setActiveIndex(index)}
-                      onClick={onClose}
+                      onClick={(event) => onHitClick(event, hit)}
                     >
                       {hit.breadcrumb.length > 0 && <Breadcrumb labels={hit.breadcrumb} />}
                       <span className="text-[13px] font-medium tracking-extra-tight text-black-new dark:text-white">
