@@ -12,7 +12,7 @@ import {
 } from '@headlessui/react';
 import { usePathname, useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -27,31 +27,11 @@ import {
   SEARCH_QUERY_MAX_CHARS,
   SITE_SEARCH_CATEGORIES,
 } from 'utils/site-search-request';
-import { findSectionHeading, hitSections } from 'utils/site-search-section';
+import { hitSections } from 'utils/site-search-section';
+
+import { scrollToSection, scrollToSectionAfterNavigation } from './section-scroll';
 
 const SEARCH_DEBOUNCE_MS = 250;
-
-// Module scope, because the header that renders this modal can remount when the
-// navigation crosses layouts.
-let pendingSection = null;
-
-// The page is the authority on its heading ids: explicit `(#id)` headings and
-// component headings don't use the text-derived slug, and heading text repeats.
-function scrollToSection(sections) {
-  const elements = [...document.querySelectorAll('h2, h3, h4')].filter(
-    (element) => !element.closest('header, footer, nav, [role="dialog"]')
-  );
-  const index = findSectionHeading(
-    sections,
-    elements.map((element) => ({ level: Number(element.tagName[1]), text: element.textContent }))
-  );
-  if (index === -1) return;
-  const element = elements[index];
-  element.scrollIntoView();
-  if (element.id) {
-    window.history.replaceState(null, '', `#${element.id}`);
-  }
-}
 
 function HighlightedText({ text, query }) {
   const ranges = siteSearchHighlightRanges(text, query);
@@ -308,24 +288,30 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
     document.getElementById(`${listId}-${activeIndex}`)?.scrollIntoView({ block: 'nearest' });
   }, [activeHit, activeIndex, listId]);
 
+  const samePageSections = useRef(null);
+
   // Waits for the dialog to close so its scroll lock can't restore the old position.
   useEffect(() => {
-    if (isOpen || pendingSection?.pathname !== pathname) return undefined;
-    const { sections } = pendingSection;
-    pendingSection = null;
-    const frame = requestAnimationFrame(() => scrollToSection(sections));
+    if (isOpen || !samePageSections.current) return undefined;
+    const frame = requestAnimationFrame(() => {
+      const sections = samePageSections.current;
+      samePageSections.current = null;
+      if (sections) scrollToSection(sections);
+    });
     return () => cancelAnimationFrame(frame);
-  }, [isOpen, pathname]);
+  }, [isOpen]);
 
   const goToHit = (hit) => {
     const href = hrefFromSearchHit(hit.url);
     const sections = hitSections(hit.heading);
     const target = new URL(href, window.location.origin);
-    if (sections.length > 0 && target.hash === '') {
-      pendingSection = { pathname: target.pathname, sections };
-    }
     onClose();
-    if (target.pathname !== pathname || target.search !== window.location.search) {
+    if (sections.length === 0 || target.hash !== '') {
+      router.push(href);
+    } else if (target.pathname === pathname && target.search === window.location.search) {
+      samePageSections.current = sections;
+    } else {
+      scrollToSectionAfterNavigation(target.pathname, sections);
       router.push(href);
     }
   };
