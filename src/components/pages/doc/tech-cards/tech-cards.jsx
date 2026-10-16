@@ -8,6 +8,7 @@ import React from 'react';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
+import getNofollowRel from 'utils/get-nofollow-rel';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import TechCardsWrapper from './tech-cards-wrapper';
@@ -23,6 +24,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
       const { lightIconPath, darkIconPath } = iconConfig;
 
       const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
+      const externalRel = isExternal ? 'noopener noreferrer' : undefined;
 
       return (
         <li className="m-0! before:hidden">
@@ -35,7 +37,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
             key={index}
             href={href}
             target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
+            rel={getNofollowRel(href, externalRel) ?? externalRel}
             onClick={() => sendGtagEvent('Link Clicked', { text: title, tag_name: 'TechCard' })}
           >
             <div className="relative z-10">

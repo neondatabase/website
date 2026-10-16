@@ -374,6 +374,36 @@ print(url)
 
 </CodeTabs>
 
+To set the filename the browser saves the download under, sign the URL with a `ResponseContentDisposition` override. The override is covered by the URL's signature, so it can't be changed after signing.
+
+<CodeTabs labels={["S3 Client", "Python"]}>
+
+```typescript shouldWrap
+const url = await getSignedUrl(
+  client,
+  new GetObjectCommand({
+    Bucket: 'my-bucket',
+    Key: 'report.pdf',
+    ResponseContentDisposition: 'attachment; filename="report.pdf"',
+  }),
+  { expiresIn: 3600 }, // 1 hour
+);
+```
+
+```python
+url = client.generate_presigned_url(
+    'get_object',
+    Params={
+        'Bucket': 'my-bucket',
+        'Key': 'report.pdf',
+        'ResponseContentDisposition': 'attachment; filename="report.pdf"',
+    },
+    ExpiresIn=3600,  # 1 hour
+)
+```
+
+</CodeTabs>
+
 **Presigned PUT (upload from browser):**
 
 <CodeTabs labels={["Files SDK", "S3 Client", "Python"]}>

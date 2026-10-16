@@ -113,6 +113,8 @@ neon bootstrap my-app --template realtime-react
 
 Bootstrap scaffolds the app, installs the dependencies and links the new `my-app` directory to a Neon project via `neon.ts` config.
 
+If the branch doesn't have Realtime yet, the link step can't pull the env vars and prints a warning to run `neon deploy`. That's the next step.
+
 Run [`neon deploy`](/docs/cli/deploy) to apply the generated config, enabling Realtime for your project and branch:
 
 ```bash filename="Terminal"
@@ -148,5 +150,6 @@ neon skills -s neon-realtime
 - read the guides on [defining](./guides/queries) and [subscribing](./guides/subscribing) to queries, [reactivity](./guides/reactivity), [optimistic mutations](./guides/mutations) and [server-side rendering](./guides/ssr)
 - see the [Next.js](./examples/nextjs) and [TanStack](./examples/tanstack) examples showing how to build full-stack reactive apps with auth and SSR support
 - see the [Mastra](./examples/mastra) example showing how users and background agents work on the same data in real time
+- view Realtime logs in the **Realtime** tab of the [Monitoring page](/docs/introduction/monitor-logs)
 
 <NeedHelp/>

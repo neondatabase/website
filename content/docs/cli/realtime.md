@@ -7,12 +7,12 @@ summary: >-
   to connect, `disable` to remove it, `rotate-secret` to replace its shared
   secret, and `subscribe` to stream a live SQL query.
 enableTableOfContents: true
-updatedOn: '2026-10-15T18:37:33.228Z'
+updatedOn: '2026-10-15T21:50:02.535Z'
 redirectFrom:
   - /docs/cli/subscribe
 ---
 
-The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
+The `realtime` command enables and disables [Neon Realtime](/docs/realtime/overview) on a branch and rotates the branch's Realtime secret. Once Realtime is on, you can stream a live SQL query's results with `neon realtime subscribe`, and [`neon env pull`](/docs/cli/env) writes the branch's `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET` to your `.env`. To manage Realtime declaratively instead, add it to your `neon.ts` with [`neon config add realtime`](/docs/cli/config#add-realtime).
 
 <CliSubcommands command="realtime" />
 
@@ -66,7 +66,7 @@ Requests a new Realtime shared secret for a branch. Rotation runs in the backgro
 
 <CliOptions command="realtime rotate-secret" />
 
-By default, the command waits up to a minute for the rotation to finish, then reminds you to pull the new secret. If the wait times out, the command exits with an error, but the rotation may still be in progress. With `--no-wait`, it returns as soon as the rotation is requested. If the rotation is still running, `neon env pull` waits for it to finish, then writes the new secret.
+By default, the command waits up to a minute for the rotation to finish, then reminds you to pull the new secret. If the wait times out, the command exits with an error, but the rotation may still be in progress. With `--no-wait`, it prints only the "rotation requested" line and returns right away. If the rotation is still running, `neon env pull` waits for it to finish, then writes the new secret.
 
 ```bash
 neon realtime rotate-secret
@@ -78,11 +78,13 @@ Realtime secret rotation completed for branch br-cool-darkness-123456.
 Run neon env pull --service realtime to update NEON_REALTIME_SECRET.
 ```
 
-Then write the new `NEON_REALTIME_SECRET` to your env file with [`neon env pull`](/docs/cli/env):
+The command doesn't print the new secret. Write the new `NEON_REALTIME_SECRET` to your env file with [`neon env pull`](/docs/cli/env):
 
 ```bash
 neon env pull --service realtime
 ```
+
+Every `rotate-secret` run replaces the secret, so only repeat the command when you want another rotation.
 
 ## neon realtime subscribe (#subscribe)
 

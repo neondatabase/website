@@ -673,6 +673,18 @@ function buildTests() {
     { spotCheck: (r) => expectBodyContains(r.body, 'neon', true) }
   );
 
+  // Root /llms.txt (rewrite to /docs/llms.txt) must link the agent feedback page.
+  add(
+    'LLMs txt',
+    '/llms.txt',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectBodyContains(r.body, 'https://neon.com/feedback.md'),
+    ],
+    { note: 'Common tasks links /feedback.md' }
+  );
+
   add(
     'LLMs txt',
     '/docs/llms-full.txt',
@@ -1212,6 +1224,56 @@ function buildTests() {
       note: 'agent gets llms.txt content',
     }
   );
+
+  // ── 9d-2. /feedback.md — agent feedback discovery URL, aliased to the Send feedback
+  // docs page mirror. Both the static rewrite (beforeFiles) and middleware
+  // (CUSTOM_MARKDOWN_PATHS) resolve it to /md/docs/introduction/feedback.md.
+  // Bare /feedback is a redirectFrom redirect to the docs page.
+
+  add(
+    'Feedback .md',
+    '/feedback.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, '## Where to send it'),
+      note: 'aliased to the /docs/introduction/feedback mirror',
+    }
+  );
+
+  add(
+    'Feedback .md',
+    '/feedback.md',
+    'agent-ua',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, '## Where to send it'),
+      note: 'agent gets the Send feedback page markdown',
+    }
+  );
+
+  for (const mode of ['browser', 'agent-ua']) {
+    add(
+      'Feedback .md',
+      '/feedback',
+      mode,
+      [
+        (r) => expectStatus(r.status, 308),
+        (r) => expectHeader(r.headers, 'location', '/docs/introduction/feedback'),
+      ],
+      { note: 'redirectFrom → /docs/introduction/feedback' }
+    );
+  }
 
   // ── 9e. Bare /docs — content-negotiated by the middleware (src/proxy.js). The
   // /docs→/docs/introduction redirect lives in middleware (not next.config) so it runs
