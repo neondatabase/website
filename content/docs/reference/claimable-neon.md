@@ -117,6 +117,8 @@ Content-Type: application/json
 
 `postgres` is always requested. Add `data_api` or `auth` only when the app needs them.
 
+`region_id` is optional. Without it, the project is created in `aws-us-east-2`. Pass any AWS [region](/docs/introduction/regions) that accepts new projects, for example `"region_id": "aws-eu-central-1"`.
+
 The response has this shape:
 
 ```json
@@ -126,6 +128,7 @@ The response has this shape:
   "project": {
     "id": "quiet-fog-12345678",
     "branch_id": "br-...",
+    "region_id": "aws-us-east-2",
     "expires_at": "2026-08-14T12:00:00.000Z"
   },
   "capabilities": [
