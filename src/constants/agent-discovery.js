@@ -26,6 +26,46 @@ const MCP_SERVER = {
   authorizationServer: 'https://mcp.neon.tech',
   cardUrl: 'https://neon.com/.well-known/mcp/server-card.json',
   serverInfo: { name: 'Neon MCP', version: '1.0.0' },
+  // Registry identity, mirrored from the upstream server.json that the official
+  // MCP Registry publishes (github.com/neondatabase/mcp-server-neon). The live
+  // verifier compares the built document against that file, so keep these in step.
+  registry: {
+    schema: 'https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json',
+    name: 'com.neon/mcp',
+    title: 'Neon',
+    description:
+      'Official Neon MCP server for managing Neon projects and Lakebase Postgres databases.',
+    version: '1.0.0',
+    websiteUrl: 'https://neon.com/docs/ai/neon-mcp-server',
+    repositoryUrl: 'https://github.com/neondatabase/mcp-server-neon',
+    icons: [
+      {
+        src: 'https://neon.com/brand/neon-logo-light-color.svg',
+        mimeType: 'image/svg+xml',
+        sizes: ['any'],
+        theme: 'light',
+      },
+      {
+        src: 'https://neon.com/brand/neon-logo-dark-color.svg',
+        mimeType: 'image/svg+xml',
+        sizes: ['any'],
+        theme: 'dark',
+      },
+    ],
+    headers: [
+      {
+        name: 'Authorization',
+        description: 'Optional Bearer token with a Neon API key.',
+        isSecret: true,
+      },
+      {
+        name: 'x-read-only',
+        description: 'Optional header to enable read-only mode for tool filtering.',
+        format: 'boolean',
+        default: 'false',
+      },
+    ],
+  },
 };
 
 // Neon REST management API and its published OpenAPI document. `openApiSpecUrl`
@@ -71,6 +111,26 @@ function buildMcpServerCard() {
   };
 }
 
+// /.well-known/mcp: MCP Registry server.json shape, so agents probing the bare
+// well-known path find the Streamable HTTP endpoint. Mirrors the upstream
+// registry entry; the connect URL and transport come from the fields above.
+function buildMcpWellKnown() {
+  const { registry } = MCP_SERVER;
+  return {
+    $schema: registry.schema,
+    name: registry.name,
+    title: registry.title,
+    description: registry.description,
+    repository: { url: registry.repositoryUrl, source: 'github' },
+    version: registry.version,
+    websiteUrl: registry.websiteUrl,
+    icons: registry.icons,
+    remotes: [
+      { type: MCP_SERVER.transport, url: MCP_SERVER.connectUrl, headers: registry.headers },
+    ],
+  };
+}
+
 // /.well-known/api-catalog — RFC 9727 linkset pointing at the API base, its
 // OpenAPI document, and the human docs.
 function buildApiCatalog() {
@@ -108,6 +168,7 @@ module.exports = {
   NEON_API,
   CLAIMABLE,
   buildMcpServerCard,
+  buildMcpWellKnown,
   buildApiCatalog,
   buildClaimableAuthorizationServer,
 };

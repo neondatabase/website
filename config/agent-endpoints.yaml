@@ -33,6 +33,26 @@
 version: 1
 
 endpoints:
+  - id: mcp-well-known
+    name: MCP well-known document
+    description: >-
+      Bare /.well-known/mcp path in the MCP Registry server.json shape, pointing
+      agents that probe it at Neon's Streamable HTTP MCP endpoint. Mirrors the
+      official MCP Registry entry (com.neon/mcp); --live compares it against the
+      upstream server.json. Not advertised in the Link header; agents find it
+      by probing the path.
+    servedPath: /.well-known/mcp
+    upstream: https://raw.githubusercontent.com/neondatabase/mcp-server-neon/main/server.json
+    contentType: application/json
+    spec:
+      name: MCP Registry server.json
+      url: https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json
+      standard: true
+    validator: mcp-well-known
+    check: builder
+    builder: buildMcpWellKnown
+    routeFile: src/app/.well-known/mcp/route.js
+
   - id: mcp-server-card
     name: MCP server card
     description: >-

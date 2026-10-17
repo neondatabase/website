@@ -51,6 +51,7 @@ const AI_CATALOG_HOST = {
 
 const AI_CATALOG_MCP_ENTRY = {
   identifier: 'urn:air:neon.com:mcp:neon',
+  displayName: 'Neon MCP Server',
   type: 'application/mcp-server-card+json',
   url: 'https://neon.com/.well-known/mcp/server-card.json',
   description:
@@ -103,7 +104,7 @@ async function discoverSkills(configSkillNames) {
       continue;
     }
 
-    const { data: frontmatter } = matter(content);
+    const { data: frontmatter, content: body } = matter(content);
 
     if (!frontmatter.name || !frontmatter.description) {
       console.warn(
@@ -115,9 +116,12 @@ async function discoverSkills(configSkillNames) {
     // Normalize multi-line YAML strings to a single line
     const description = String(frontmatter.description).replace(/\s+/g, ' ').trim();
 
+    // The SKILL.md H1 is the human-readable title (AI Catalog `displayName`)
+    const title = body.match(/^# (.+)$/m)?.[1].trim() || frontmatter.name;
+
     const digest = 'sha256:' + crypto.createHash('sha256').update(content).digest('hex');
 
-    skills.push({ name: frontmatter.name, description, digest });
+    skills.push({ name: frontmatter.name, title, description, digest });
   }
 
   return skills;
@@ -152,8 +156,9 @@ function buildAiCatalog(skills) {
     host: AI_CATALOG_HOST,
     entries: [
       AI_CATALOG_MCP_ENTRY,
-      ...skills.map(({ name, description }) => ({
+      ...skills.map(({ name, title, description }) => ({
         identifier: `urn:air:neon.com:skill:${name}`,
+        displayName: title || name,
         type: 'application/agent-skills+md',
         url: `${AI_CATALOG_SKILL_BASE_URL}${name}/SKILL.md`,
         description,
