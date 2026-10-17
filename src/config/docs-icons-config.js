@@ -151,6 +151,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/django.svg',
     darkIconPath: '/images/technology-logos/django-dark.svg',
   },
+  dot: {
+    name: 'dot',
+    lightIconPath: '/images/technology-logos/dot.svg',
+    darkIconPath: null,
+  },
   dotnet: {
     name: 'dotnet',
     lightIconPath: '/images/technology-logos/dotnet.svg',
