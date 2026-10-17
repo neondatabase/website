@@ -40,6 +40,12 @@ neon claim create \
   --env-pull
 ```
 
+`claim create` uses `aws-us-east-2` unless you pass `--region-id` with another AWS [region](/docs/introduction/regions) that accepts new projects. The output includes the project's `region_id`.
+
+```bash
+neon claim create --region-id aws-eu-central-1
+```
+
 `--env-pull` is on by default. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`.
 
 After create, regular Neon CLI commands use the saved assertion. Explicit Neon account credentials take precedence when you pass them.

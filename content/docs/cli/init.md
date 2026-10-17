@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-15T17:31:55.753Z'
+updatedOn: '2026-10-17T02:29:50.049Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -82,7 +82,7 @@ Pass `-y` (alias `--yes`) to run each step with its defaults instead of promptin
 
 Pass `--agent` (alias `-a`) to name the coding agents to set up, which skips both detection and the picker. It's repeatable (`neon init --agent cursor --agent claude-code`) and works with `-y`. Without skill or MCP flags, it installs the plugin, plus skills and MCP for any agent the plugin can't cover. Run `neon init --help` to see which agents each family supports. Passing `--agent` with no value returns an error.
 
-Pass `--claimable` to create a [claimable project](/docs/reference/claimable-neon) that expires in 72 hours unless it's claimed. This selects the custom setup.
+Pass `--claimable` to create a [claimable project](/docs/reference/claimable-neon) that expires in 72 hours unless it's claimed. This selects the custom setup. The project goes in `aws-us-east-2` unless you add `--region-id`. `--claimable` can't be combined with `--no-link`, `--org-id`, `--project-id`, `--project-name`, or `--branch`.
 
 ## Run it non-interactively
 
@@ -165,6 +165,7 @@ Installed the Neon plugin (project).
 Creating a claimable project...
 Project ID            sweet-breeze-12345678
 Branch ID             br-restless-wildflower-a1b2c3d4
+Region ID             aws-us-east-2
 State                 unclaimed
 Project Expires At    2026-09-29T01:51:07.360Z
 Granted Capabilities  postgres
