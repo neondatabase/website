@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.7.2",
+  "neonctlVersion": "8.8.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -990,6 +990,10 @@
             "file": {
               "type": "string",
               "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
+            },
+            "region-id": {
+              "type": "string",
+              "describe": "Region ID for the new project (e.g. aws-eu-central-1). Defaults to aws-us-east-2"
             },
             "service": {
               "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). Passed as `.option(\"service\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against claim.ts at neonctl 8.3.4.",
@@ -2333,7 +2337,7 @@
         },
         "region-id": {
           "type": "string",
-          "describe": "Forwarded to link: region for a new project"
+          "describe": "Region for a new project, forwarded to link or to the claimable project"
         },
         "services": {
           "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.4.1, which added realtime (see config init services override).",

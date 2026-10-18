@@ -111,6 +111,8 @@ CREATE ROLE app_reader LOGIN PASSWORD '<password>';
 GRANT SELECT ON public.orders TO app_reader;
 ```
 
+Create the role with SQL, as shown above. Roles created in the Neon Console, CLI, or API are members of [`neon_superuser`](/docs/manage/roles#the-neonsuperuser-role), which can read all data, so pinning one of those roles doesn't limit what the agent can read. See [Manage database access](/docs/manage/database-access) for least-privilege role examples.
+
 - `role_name` arguments that name a different role are rejected, and a role that cannot log in fails the call without falling back to the owner.
 - `get_connection_string` is not available on a pinned connection.
 - The role applies to SQL only. Combine it with `readonly=true` and `category` to limit Management API tools too.

@@ -25,15 +25,23 @@ CREATE EXTENSION IF NOT EXISTS lakebase_tokenizer WITH SCHEMA tokenizer_ext;
 
 ### Upgrade the extension
 
-A new Lakebase Search release can add features, fixes, and performance improvements. Although Lakebase Search is released as part of Neon updates, it does not upgrade everything automatically.
+Neon ships new Lakebase Search releases as part of its regular updates, but it doesn't upgrade the extension in your database for you. To see which version you have and which is available:
 
-Upgrading is not urgent. The extension is compatible with SQL objects from older versions, but staying current keeps you on the supported, best-performing path and avoids a larger migration later, so upgrade when convenient rather than deferring indefinitely.
+```sql
+SELECT installed_version, default_version
+FROM pg_available_extensions
+WHERE name = 'lakebase_tokenizer';
+```
 
-<Admonition type="note">
-The latest available extension version is reported by `SELECT default_version FROM pg_available_extensions WHERE name = 'lakebase_tokenizer'`.
-</Admonition>
+To upgrade, run:
 
-`ALTER EXTENSION` does not regenerate stored `tsvector` values or rebuild dependent GIN or `lakebase_bm25` indexes. If an update changes tokenization output, regenerate stored `tsvector` values and follow the release notes for any required index maintenance.
+```sql
+ALTER EXTENSION lakebase_tokenizer UPDATE;
+```
+
+There's no rush. Older versions keep working, but upgrading when it's convenient keeps you on the supported version and saves you a bigger jump later.
+
+`ALTER EXTENSION` doesn't regenerate stored `tsvector` values or rebuild GIN or `lakebase_bm25` indexes. That only matters when a release changes how text is tokenized. Upgrading from 0.1.x to 0.2.0 doesn't: 0.2.0 adds the [`tokenizer_morph`](#template-tokenizermorph) template and the built-in CJK configurations and leaves your existing configurations alone, so you don't need to reindex.
 
 ## Quick start
 
@@ -304,15 +312,15 @@ Postgres's text-search parser splits text at whitespace and punctuation before c
 
 The available modes depend on the language. Each example shows source text → emitted terms.
 
-| Language | Mode      | Behavior                                                                                       | Example |
-| :------- | :-------- | :--------------------------------------------------------------------------------------------- | :------ |
-| Chinese  | `none`    | Emits words from standard segmentation without adding shorter search terms.                    | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `架构` |
+| Language | Mode      | Behavior                                                                                       | Example                                                                                               |
+| :------- | :-------- | :--------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| Chinese  | `none`    | Emits words from standard segmentation without adding shorter search terms.                    | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `架构`                                           |
 | Chinese  | `mixed`   | Keeps words from standard segmentation and adds shorter search terms from some longer words.   | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `分布`, `分布式`, `布式`, `文件`, `系统`, `架构` |
-| Japanese | `none`    | Favors longer dictionary compounds.                                                            | `関西国際空港へのアクセス` → `関西国際空港`, `アクセス` |
-| Japanese | `discard` | Produces finer-grained terms for some long compounds without retaining their full form.        | `関西国際空港へのアクセス` → `関西`, `国際`, `空港`, `アクセス` |
-| Korean   | `none`    | Keeps compound and inflected dictionary entries as whole terms.                                | `한국어 형태소 분석` → `한국어`, `형태소`, `분석` |
-| Korean   | `discard` | Emits the parts of a compound or inflected form instead of the full term when it can be split. | `한국어 형태소 분석` → `한국`, `어`, `형태`, `소`, `분석` |
-| Korean   | `mixed`   | Emits both the full term and its parts when a compound or inflected form can be split.         | `한국어 형태소 분석` → `한국어`, `한국`, `어`, `형태소`, `형태`, `소`, `분석` |
+| Japanese | `none`    | Favors longer dictionary compounds.                                                            | `関西国際空港へのアクセス` → `関西国際空港`, `アクセス`                                               |
+| Japanese | `discard` | Produces finer-grained terms for some long compounds without retaining their full form.        | `関西国際空港へのアクセス` → `関西`, `国際`, `空港`, `アクセス`                                       |
+| Korean   | `none`    | Keeps compound and inflected dictionary entries as whole terms.                                | `한국어 형태소 분석` → `한국어`, `형태소`, `분석`                                                     |
+| Korean   | `discard` | Emits the parts of a compound or inflected form instead of the full term when it can be split. | `한국어 형태소 분석` → `한국`, `어`, `형태`, `소`, `분석`                                             |
+| Korean   | `mixed`   | Emits both the full term and its parts when a compound or inflected form can be split.         | `한국어 형태소 분석` → `한국어`, `한국`, `어`, `형태소`, `형태`, `소`, `분석`                         |
 
 In `mixed` mode, query with `plainto_tsquery`. When one query word produces multiple lexemes, `to_tsquery`, `websearch_to_tsquery`, and `phraseto_tsquery` join them with the `<->` operator, which requires adjacent positions. `mixed` mode inserts extra positions for the additional terms, so these phrase conditions can miss expected matches. For position-based queries, define a custom configuration with `none` or `discard` mode.
 
