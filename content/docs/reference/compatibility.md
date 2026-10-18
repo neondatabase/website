@@ -72,7 +72,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 | `max_replication_write_lag`           | 500           |                                                                                                                                                                                                                         |
 | `max_wal_senders`                     | 10            |                                                                                                                                                                                                                         |
 | `max_wal_size`                        | 1024          |                                                                                                                                                                                                                         |
-| `max_worker_processes`                | 26            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                        |
+| `max_worker_processes`                | 13            | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                        |
 | `password_encryption`                 | scram-sha-256 |                                                                                                                                                                                                                         |
 | `restart_after_crash`                 | off           |                                                                                                                                                                                                                         |
 | `shared_buffers`                      | 128MB         | The `shared_buffers` value differs by compute size; the [compute cache](/docs/reference/glossary#compute-cache) provides up to 75% of your compute's RAM. See [below](#parameter-settings-that-differ-by-compute-size). |
@@ -91,27 +91,27 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
   ```go
   compute_size = min(max_compute_size, 8 × min_compute_size)
-  max_connections = max(100, min(4000, floor(compute_size × 419.66)))
+  max_connections = max(100, min(4000, floor(compute_size × 450.61)))
   ```
 
   In simpler terms:
   - Neon first determines the effective compute size by taking the smaller of: your maximum size, or 8 times your minimum size
-  - This compute size is then multiplied by approximately 420 connections per CU
+  - This compute size is then multiplied by approximately 450 connections per CU
   - The result is capped between a minimum of 100 and a maximum of 4,000 connections
 
   **Examples:**
   - **Fixed compute size of 4 CU:**
     - Since your min and max are both 4 CU, the compute size is 4.
-    - Max connections = 4 × 419.66 = 1,678 connections
+    - Max connections = 4 × 450.61 = 1,802 connections
   - **Autoscaling from 0.25 to 2 CU:**
     - Compute size = min(2, 8 × 0.25) = min(2, 2) = 2
-    - Max connections = 2 × 419.66 = 839 connections
+    - Max connections = 2 × 450.61 = 901 connections
   - **Autoscaling from 0.25 to 4 CU:**
     - Compute size = min(4, 8 × 0.25) = min(4, 2) = 2
-    - Max connections = 2 × 419.66 = 839 connections
+    - Max connections = 2 × 450.61 = 901 connections
   - **Autoscaling from 2 to 8 CU:**
     - Compute size = min(8, 8 × 2) = min(8, 16) = 8
-    - Max connections = 8 × 419.66 = 3,357 connections
+    - Max connections = 8 × 450.61 = 3,604 connections
 
 You can view your `max_connections` setting in the Neon Console by navigating to **Branches**, selecting your compute, and clicking **Edit** on the **Compute** tab. The value is displayed as **direct connections**. As you adjust your compute settings, you'll see how changes to your min/max compute size affect the number of direct connections available.
 
@@ -177,7 +177,7 @@ _For most applications, we recommend using connection pooling, which supports up
 - The formula for `max_worker_processes` is:
 
   ```go
-  max_worker_processes := 13 + floor(2 * max_compute_size)
+  max_worker_processes := 13 + 2 * floor(max_compute_size)
   ```
 
   For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 21.
