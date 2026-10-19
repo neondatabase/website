@@ -1,107 +1,36 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 
 import { cn } from 'utils/cn';
 
-let mermaidAPI;
-
-const getNeonTheme = (isDark) => ({
-  theme: 'base',
-  themeVariables: {
-    primaryColor: '#00E599',
-    primaryBorderColor: '#00cc88',
-    primaryTextColor: isDark ? '#ffffff' : '#0c0d0d',
-    secondaryColor: isDark ? '#303236' : '#EFEFF0',
-    secondaryBorderColor: isDark ? '#494B50' : '#C9CBCF',
-    secondaryTextColor: isDark ? '#E4E5E7' : '#131415',
-    // Tertiary colors
-    tertiaryColor: isDark ? '#18191B' : '#FAFAFA',
-    tertiaryBorderColor: isDark ? '#494B50' : '#C9CBCF',
-    tertiaryTextColor: isDark ? '#E4E5E7' : '#131415',
-    // Note colors
-    noteBkgColor: isDark ? '#303236' : '#EFEFF0',
-    noteBorderColor: isDark ? '#494B50' : '#C9CBCF',
-    noteTextColor: isDark ? '#E4E5E7' : '#131415',
-    // Text and lines
-    textColor: isDark ? '#E4E5E7' : '#131415',
-    lineColor: isDark ? '#494B50' : '#C9CBCF',
-    // Background
-    background: isDark ? '#18191B' : '#ffffff',
-    mainBkg: isDark ? '#18191B' : '#ffffff',
-    // Fonts
-    fontFamily: 'var(--font-geist-mono), ui-monospace, monospace',
-    fontSize: '14px',
-    // Git graph
-    git0: '#00E599',
-    git1: '#ff4c79',
-    git2: '#f0f075',
-    git3: '#ffa64c',
-    git4: '#aa99ff',
-    git5: '#259df4',
-    git6: '#ADE0EB',
-    git7: '#fbd0d7',
-    gitBranchLabel0: isDark ? '#131415' : '#ffffff',
-    gitBranchLabel1: '#ffffff',
-    gitBranchLabel2: '#131415',
-    gitBranchLabel3: '#131415',
-    gitBranchLabel4: '#ffffff',
-    gitBranchLabel5: '#ffffff',
-    gitBranchLabel6: '#131415',
-    gitBranchLabel7: '#131415',
-    // Flowchart
-    nodeBorder: '#00cc88',
-    clusterBkg: isDark ? '#242628' : '#F2F2F3',
-    clusterBorder: isDark ? '#494B50' : '#C9CBCF',
-    // Sequence diagram
-    actorBkg: isDark ? '#303236' : '#EFEFF0',
-    actorBorder: '#00cc88',
-    actorTextColor: isDark ? '#E4E5E7' : '#131415',
-    actorLineColor: isDark ? '#494B50' : '#C9CBCF',
-    signalColor: isDark ? '#E4E5E7' : '#131415',
-    signalTextColor: isDark ? '#E4E5E7' : '#131415',
-    labelBoxBkgColor: isDark ? '#303236' : '#EFEFF0',
-    labelBoxBorderColor: isDark ? '#494B50' : '#C9CBCF',
-    labelTextColor: isDark ? '#E4E5E7' : '#131415',
-    loopTextColor: isDark ? '#E4E5E7' : '#131415',
-    activationBorderColor: '#00cc88',
-    activationBkgColor: isDark ? '#242628' : '#F2F2F3',
-    sequenceNumberColor: '#ffffff',
-    // State diagram
-    labelColor: isDark ? '#E4E5E7' : '#131415',
-    // ER diagram
-    attributeBackgroundColorOdd: isDark ? '#242628' : '#F2F2F3',
-    attributeBackgroundColorEven: isDark ? '#303236' : '#EFEFF0',
-  },
-});
-
+// Pele renders Mermaid syntax to SVG. Colors and fonts come from the --pele-* CSS variables
+// on .mermaid-container (see doc-content.css), so theme changes need no re-render.
+// mount() re-lays out the diagram when the container width or web fonts change.
 const Mermaid = ({ chart, className }) => {
   const containerRef = useRef(null);
-  const [svg, setSvg] = useState('');
   const [error, setError] = useState(null);
-  const [themeKey, setThemeKey] = useState(0);
+  // useId() returns values like ":r1:", which break SVG url(#id) references.
+  const idPrefix = `pele-${useId().replace(/:/g, '')}-`;
 
   useEffect(() => {
+    let mounted;
+    let cancelled = false;
+
     const renderChart = async () => {
       try {
-        await document.fonts.ready;
+        const { mountAsync } = await import('pele/lazy');
+        if (cancelled || !containerRef.current) return;
 
-        const isDark = document.documentElement.classList.contains('dark');
-
-        if (!mermaidAPI) {
-          const mermaid = (await import('mermaid')).default;
-          mermaid.initialize({
-            startOnLoad: false,
-            ...getNeonTheme(isDark),
-            flowchart: { padding: 25 },
-          });
-          mermaidAPI = mermaid;
-        }
-
-        const id = `mermaid-${Math.random().toString(36).substring(2, 11)}`;
-        const { svg: renderedSvg } = await mermaidAPI.render(id, chart);
-        setSvg(renderedSvg);
+        // zoom: false — pele's zoom buttons are wider than the container padding and cover
+        // the top-right corner of wide diagrams.
+        mounted = await mountAsync(containerRef.current, chart, {
+          idPrefix,
+          fontSize: 14,
+          zoom: false,
+        });
+        if (cancelled) mounted.destroy();
         setError(null);
       } catch (err) {
         console.error('Mermaid rendering error:', err);
@@ -110,50 +39,31 @@ const Mermaid = ({ chart, className }) => {
     };
 
     renderChart();
-  }, [chart, themeKey]);
 
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          mermaidAPI = null;
-          setThemeKey((prev) => prev + 1);
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  if (error) {
-    return (
-      <div
-        className={cn(
-          'my-8 rounded-lg border p-6',
-          'border-secondary-1/50 bg-secondary-4/20 dark:bg-secondary-1/10'
-        )}
-      >
-        <p className="text-sm font-semibold text-secondary-1">Mermaid Diagram Error</p>
-        <pre className="mt-2 overflow-auto text-xs text-secondary-1/80">{error}</pre>
-      </div>
-    );
-  }
-
-  if (!svg) {
-    return null;
-  }
+    return () => {
+      cancelled = true;
+      mounted?.destroy();
+    };
+  }, [chart, idPrefix]);
 
   return (
-    <div
-      className={cn('mermaid-container not-prose', className)}
-      ref={containerRef}
-      dangerouslySetInnerHTML={{ __html: svg }}
-    />
+    <>
+      <div
+        className={cn('mermaid-container not-prose', error && 'hidden', className)}
+        ref={containerRef}
+      />
+      {error && (
+        <div
+          className={cn(
+            'my-8 rounded-lg border p-6',
+            'border-secondary-1/50 bg-secondary-4/20 dark:bg-secondary-1/10'
+          )}
+        >
+          <p className="text-sm font-semibold text-secondary-1">Mermaid Diagram Error</p>
+          <pre className="mt-2 overflow-auto text-xs text-secondary-1/80">{error}</pre>
+        </div>
+      )}
+    </>
   );
 };
 
