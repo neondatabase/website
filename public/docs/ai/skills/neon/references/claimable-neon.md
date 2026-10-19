@@ -38,6 +38,8 @@ export default defineConfig({
 neon claim create --service auth --service data-api --env-pull
 ```
 
+The project is created in `aws-us-east-2` unless you pass `--region-id` (for example `neon claim create --region-id aws-eu-central-1`). Pick the region closest to where the app runs. A project's region cannot change after create.
+
 `neon claim create` reads `neon.ts` when it is present. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`. The identity assertion is the pre-claim credential.
 
 Before claim, Postgres is always granted; Auth and the Data API are granted when requested. Functions, Object Storage, and AI Gateway come back with `granted: false` and `reason: "requires_claim"`. The CLI prints those as `denied_capabilities`. Report what you were given. Do not retry or strip them.
