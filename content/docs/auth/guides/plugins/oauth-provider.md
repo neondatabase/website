@@ -4,11 +4,11 @@ subtitle: Let your MCP server, API, or other apps sign in your Managed Better Au
 summary: >-
   The OAuth provider plugin turns Managed Better Auth into an OAuth 2.1
   authorization server for your own apps. Use it to protect an MCP server so
-  clients like Cursor and Claude can sign in your users, or to let other apps
-  call your API on behalf of your users. Covers enabling the plugin in the
-  Console or API, login and consent pages, dynamic client registration,
-  managed confidential and public clients, and how a resource server verifies
-  access tokens against the branch issuer and JWKS. Currently in private
+  MCP clients can sign in your users, or to let other apps call your API on
+  behalf of your users. Covers enabling the plugin in the Console or API, the
+  login and consent pages you host, dynamic client registration, managed
+  confidential and public clients, and how a resource server verifies the
+  issuer, audience, and signature of access tokens. Currently in private
   preview.
 tag: beta
 enableTableOfContents: true
@@ -18,7 +18,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and 
 
 Use it to:
 
-- **Protect an MCP server.** MCP clients such as Cursor, Claude, and VS Code discover your authorization server, register themselves, and call your tools with an access token for your users.
+- **Protect an MCP server.** MCP clients that support OAuth dynamic client registration (DCR) discover your authorization server, register themselves, and call your tools with an access token for your users. MCP support is part of this plugin, not a separate plugin: you set it up with the **MCP server** field.
 - **Sign in your users to another app or API.** A web app, single-page app, desktop app, or CLI runs the authorization code flow with PKCE and calls your API with the resulting token.
 
 <Admonition type="comingSoon" title="Private preview">
@@ -28,8 +28,8 @@ The OAuth provider plugin is in private preview. Access is enabled per account o
 ## Prerequisites
 
 - A Neon project with **Auth enabled**.
-- **A login page and a consent page** hosted in your app. Managed Better Auth doesn't provide default pages. Authorization requests redirect users to your login page, and then to your consent page to approve the client.
-- The origin of both pages added as a [trusted domain](/docs/auth/guides/configure-domains) for the branch. Pages must use `https`, with no query string or fragment. `http` is allowed on `localhost` when [localhost access](/docs/auth/guides/manage-auth-api#related-auth-endpoints) is enabled for the branch.
+- **A login page and a consent page, both hosted by you.** Both are required. Managed Better Auth doesn't provide default pages. Authorization requests redirect users to your login page, and then to your consent page to approve the client. See [Build your consent page](#build-your-consent-page).
+- The origin of each page added as a [trusted domain](/docs/auth/guides/configure-domains) for the branch. Pages must use `https`, with no query string or fragment. `http` is allowed on `localhost` when [localhost access](/docs/auth/guides/manage-auth-api#related-auth-endpoints) is enabled for the branch.
 - At least one protected resource: an MCP server URL, or an API identifier. A resource is an absolute URL that identifies what the token is for. It becomes the token's `aud` claim and doesn't need to resolve.
 
 Configuration is per branch. Each branch has its own issuer, OAuth clients, and settings.
@@ -46,7 +46,7 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 4. Fill in the settings:
    - **Login page URL**: where authorization requests redirect for sign-in.
    - **Consent page URL**: where authorization requests redirect for user consent.
-   - **MCP server**: the URL of your MCP server, if you're protecting one.
+   - **MCP server**: the URL of your MCP server, if you're protecting one. MCP is configured here, in the OAuth provider panel.
    - **Allow MCP clients to dynamically register themselves**: on by default. Requires an MCP server URL. See [Dynamic client registration](#dynamic-client-registration).
    - **Protected resources**: URLs of other APIs that clients can request tokens for.
 5. Click **Enable**.
@@ -128,13 +128,13 @@ The issuer is the Auth URL of the branch (the `base_url` returned by `GET .../au
 
 ### Verify access tokens
 
-When the client sends the `resource` parameter, access tokens are signed JWTs (EdDSA). Verify them against the JWKS at `<issuer>/.well-known/jwks.json`, and check these claims:
+When the client sends the `resource` parameter, access tokens are signed JWTs (EdDSA). Verify them against the JWKS at `<issuer>/.well-known/jwks.json`. Your resource server must check both of these claims:
 
-- `iss` equals the branch issuer exactly.
-- `aud` contains your resource identifier.
+- `iss` equals the exact issuer of your branch.
+- `aud` contains the exact resource identifier of your server.
 
-<Admonition type="important" title="Check iss and aud, not only the signature">
-All branches of a project share the same signing keys but each branch has its own issuer. A signature check alone accepts tokens from any branch. Always check `iss` against the issuer for your branch, and `aud` against your resource identifier. The `aud` claim can be an array: with the `openid` scope it also contains the issuer's userinfo endpoint, so check for membership rather than equality.
+<Admonition type="important" title="Verify iss and aud, not only the signature">
+All branches of a project share the same signing keys, and only the issuer (`iss`) differs per branch. A token issued by one branch has a valid signature on every other branch, so the signature alone doesn't tell you which branch issued it. A resource server must verify `iss` against the issuer of its own branch and `aud` against its own resource identifier. The `aud` claim can be an array: with the `openid` scope it also contains the issuer's userinfo endpoint, so check for membership rather than equality. When you create a branch, it starts with the parent's OAuth clients (same client ID and secret), so also pin the issuer in each branch's resource server.
 </Admonition>
 
 The following example protects an MCP server built with the [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) and Express. It verifies tokens with [`jose`](https://github.com/panva/jose) and serves the protected resource metadata.
@@ -201,15 +201,25 @@ An SDK that wraps these steps is coming. Until then, the code above uses only st
 
 ### Dynamic client registration
 
-With dynamic client registration (DCR, [RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)), MCP clients register themselves at the issuer's `/oauth2/register` endpoint, so you don't create clients for them. It's on by default and applies only to your MCP server resource. A client registered this way can request tokens for the MCP server only, and it can't skip the consent screen on first use.
+With dynamic client registration (DCR, [RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)), MCP clients register themselves at the issuer's `/oauth2/register` endpoint, so you don't create clients for them. It's on by default when you set an MCP server, and you can turn it off in the Console or the API. It applies only to your MCP server resource. A client registered this way can request tokens for the MCP server only, and it can't skip the consent screen on first use.
 
 Turn off **Allow MCP clients to dynamically register themselves** (`mcp.dynamic_registration: false`) if you want to control which clients can request tokens. Then `/oauth2/register` returns `403`, and the authorization server metadata omits `registration_endpoint`. Clients you create yourself keep working, and new registrations stop. Existing clients are unaffected: to stop one, disable or delete it.
 
 <Admonition type="warning" title="Consent screens for dynamically registered clients">
-While DCR is on, anyone can register a client with any name and redirect URI. Show the client name and redirect URI clearly on your consent page so users can tell what they're approving.
+While DCR is on, anyone can register a client with any name and redirect URI. A client's name is self-asserted, so don't treat it as proof of identity. Follow [Build your consent page](#build-your-consent-page) so users can tell what they're approving.
 </Admonition>
 
-Custom URI schemes such as `cursor://` are rejected. DCR drops those redirect URIs and accepts only `https`, loopback `http`, and reverse-domain private-use schemes for native clients (for example, `com.example.app:/callback`). A client such as Cursor connects through its `https` or loopback redirect URIs. [Managed clients](#create-and-manage-oauth-clients) accept only `https` and loopback `http` redirect URIs.
+Custom URI schemes such as `cursor://` are rejected. DCR drops those redirect URIs and accepts only `https`, loopback `http`, and reverse-domain private-use schemes for native clients (for example, `com.example.app:/callback`). A client that relies on a custom scheme can only connect through an `https` or loopback redirect URI. [Managed clients](#create-and-manage-oauth-clients) accept only `https` and loopback `http` redirect URIs.
+
+### Build your consent page
+
+You host the consent page, so you control what users see before they approve a client. Show:
+
+- The client name.
+- The client's host, if the client registered a client URI.
+- The host of each redirect URI, because that's where the authorization code is sent.
+
+Warn the user when the only redirect URIs are `localhost` or loopback addresses. The client then runs on the user's own machine, and a self-registered name gives no assurance about who built it.
 
 ## Sign in users to your own apps and APIs
 
@@ -335,7 +345,7 @@ Update accepts `name`, `redirect_uris`, `resources`, `skip_consent`, and `disabl
 
 ## Limitations
 
-- Login and consent pages are required and hosted by your app. There's no default UI.
+- You must host both the login page and the consent page. There's no default UI.
 - Dynamic client registration is available for the MCP server resource only. Other resources need managed clients.
 - Managed clients: up to 100 per project, 10 redirect URIs each, and links to up to 11 resources.
 - Scopes, token lifetimes, and other provider options aren't configurable.
