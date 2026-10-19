@@ -3,7 +3,7 @@ title: Plugins
 subtitle: Supported Better Auth plugins in Managed Better Auth
 summary: >-
   Managed Better Auth exposes a managed subset of Better Auth plugins (Admin, Email OTP,
-  JWT, Magic Link, OAuth provider, Organization, Open API, Phone Number) through the Neon SDK;
+  JWT, Magic Link, OAuth provider, Organization, Open API, Phone Number);
   plugins are not installed or configured directly. Use this page to check which
   plugins are fully supported versus partially supported, and how to configure
   them via the Neon Console or Neon API. The Organization plugin has partial
