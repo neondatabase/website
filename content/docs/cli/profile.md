@@ -88,7 +88,7 @@ neon profile create work --api-key "$KEY"
 
 `create` ignores `NEON_API_KEY`, so exporting that variable doesn't supply the key here. Pass it explicitly with `--api-key`.
 
-By default the credential is saved to a `credentials.json` file. Pass `--keyring` to store it in your operating system's keyring instead. The choice is saved per profile and shown in the `Storage` column of `neon profile list`.
+By default the credential is saved to a `credentials.json` file. Pass `--keyring` to store it in your operating system's keyring instead. The choice is saved per profile. `neon profile list` shows `keyring` in the `Credentials` column for a keyring profile, and `-o json` includes a `storage` field.
 
 ## neon profile list (#list)
 
@@ -104,16 +104,16 @@ neon profile list
 
 ```text filename="Output"
 Profiles
-Active  Name     Account                               Auth     Scope                           File  Storage  Credentials
-*       DEFAULT  3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53  oauth    -                               ok    file     credentials.json
-        work     alex@example.com                      oauth    -                               ok    file     credentials.work.json
-        ci       alex@example.com                      api key  account                         ok    file     credentials.ci.json
-        org      org-example-12345678                  api key  org org-example-12345678        ok    file     credentials.org.json
-        project  org-example-12345678                  api key  project cool-darkness-12345678  ok    file     credentials.project.json
-        laptop   alex@example.com                      oauth    -                               ok    keyring  keyring
+Active  Name     Account                               Auth     Credentials               Scope
+*       DEFAULT  3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53  oauth    credentials.json          account
+        work     alex@example.com                      oauth    credentials.work.json     account
+        ci       alex@example.com                      api key  credentials.ci.json       account
+        org      org-example-12345678                  api key  credentials.org.json      org org-example-12345678
+        project  org-example-12345678                  api key  credentials.project.json  project cool-darkness-12345678
+        laptop   alex@example.com                      oauth    keyring                   account
 ```
 
-`Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key), and `Scope` shows what a minted key is limited to: `account`, `org <org-id>`, or `project <project-id>`. `File` reports whether the credential could be read: `ok` when it's present and readable, otherwise `missing`, `invalid`, or `unreadable`. `Storage` shows where the credential lives, `file` or `keyring`, and `Credentials` gives the file's name, or `keyring` when it's kept in the OS keyring.
+`Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon login`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key). `Credentials` gives the credentials file's name, or `keyring` when the credential is kept in the OS keyring. `Scope` shows what the credential can reach: `account` for a browser sign-in or an account key, or `org <org-id>` or `project <project-id>` for a key limited to that organization or project. Pass `-o json` to also get two more fields: `file`, which reports whether the credential could be read (`ok`, or else `missing`, `invalid`, or `unreadable`), and `storage`, which is `file` or `keyring`.
 
 ## neon profile rotate-key (#rotate-key)
 

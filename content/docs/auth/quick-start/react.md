@@ -269,6 +269,6 @@ SELECT * FROM neon_auth.user;
 ## Next steps
 
 - [Learn about Managed Better Auth concepts](/docs/auth/overview)
-- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
+- [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
 - [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
 - [View complete SDK reference](/docs/reference/javascript-sdk)

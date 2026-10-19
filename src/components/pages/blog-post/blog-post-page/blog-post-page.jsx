@@ -25,6 +25,7 @@ import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import getArticleSchema from 'utils/get-article-schema';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
+import getNofollowRel from 'utils/get-nofollow-rel';
 
 const renderBlogCodeBlockFromPre = async (props) => {
   const codeElement = props?.children;
@@ -72,6 +73,11 @@ const renderBlogRequestForm = (props) => {
 };
 
 const mdxComponents = {
+  a: ({ href, rel, children, ...props }) => (
+    <a href={href} rel={getNofollowRel(href, rel) ?? rel} {...props}>
+      {children}
+    </a>
+  ),
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
   img: renderBlogImage,

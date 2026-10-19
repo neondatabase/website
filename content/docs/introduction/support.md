@@ -57,7 +57,7 @@ The [Neon Discord Server](https://neon.com/discord) is not an official Neon Supp
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant** so you can ask questions about Neon.
+- **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask the AI assistant**.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://neon.com/discord)
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
@@ -70,19 +70,55 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-**Launch** plan (**Billing support**): you can get help with **billing and invoices** (for example through [Request billing support](/docs/introduction/manage-billing#request-billing-support) on the Billing page). Support tickets tied to the console are limited to **billing-related** issues on this plan.
+**Launch** plan (**Billing support**): you can open support tickets for **billing-related** issues only, such as questions about an invoice, charge, refund, or your plan.
 
 **Scale** plan (**Standard support**): you can open support tickets for **any** Neon issue.
 
 **Vercel-managed Neon integration**: if you use Neon through the Vercel-managed Neon integration and are on Neon's Scale plan, you can also open support tickets for any Neon issue.
 
-You can reach the ticketing flow in these ways:
+You open support tickets from the support center in the Neon Console.
 
-1. **Neon AI Assistant**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
-2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Support** from the Help menu (`?`) to reach the Neon AI Assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
+#### Open the support center
+
+1. In the Neon Console, open the organization menu in the top right corner.
+2. Select **Help** > **Get help**.
+
+The **Support center** drawer opens. Under **Which organization needs support?**, select the organization the request is for. The options under **How can we help?** depend on that organization's plan:
+
+- **Ask the AI assistant**: Get answers sourced from the Neon docs. See [Neon AI chat assistance](#neon-ai-chat-assistance).
+- **Read the docs**: Browse Neon guides, references, and quickstarts.
+- **Contact our support team**: Open a technical support ticket. Available on the **Scale** plan.
+- **Ask a billing question**: Open a billing support ticket about an invoice, charge, refund, or your plan. Available on the **Launch** and **Scale** plans.
+- **Get help from the community**: Join the [Neon Discord Server](#neon-discord-server).
+
+On the **Free** plan, the support center offers the AI assistant, the docs, and the community. To unlock support tickets, [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
+
+#### Open a technical support ticket (Scale plan)
+
+1. In the support center, select **Contact our support team**.
+2. In the **Create support ticket** form, fill in:
+   - **Organization**: The organization the issue affects.
+   - **Subject**: A short summary of the issue. Required.
+   - **Priority**: How urgent the issue is.
+   - **Project**, **Branch**, and **Compute**: Optional. Select the affected resources to help support find the problem faster.
+   - **Problem description**: A detailed description of the issue.
+   - **Attachments**: Optional. Add screenshots, logs, or other files.
+3. Leave **I consent to Neon employees connecting to my database to help resolve this support case** selected if you want support to be able to connect to your database. Clear it if you don't.
+4. Select **Submit support ticket**.
+
+Responses go to the contact email shown in the form, which is the email address for your Neon account.
+
+#### Open a billing support ticket (Launch and Scale plans)
+
+1. In the support center, select **Ask a billing question**.
+2. Under **Related invoice**, select the invoice your question is about, if any.
+3. Under **How can we help?**, describe your question or problem.
+4. Select **Submit request**.
+
+You can also open a billing support ticket from the **Billing** page. Select **Request billing support** in the page header, or select **View past invoices**, open an invoice's actions menu, and select **Request support** to open the form with that invoice pre-selected. See [Request billing support](/docs/introduction/manage-billing#request-billing-support).
 
 <Admonition type="tip">
-To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
+To ensure you receive responses from our support team, allowlist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
 </Admonition>
 
 ### Slack channel

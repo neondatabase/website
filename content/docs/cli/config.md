@@ -61,7 +61,7 @@ If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `confi
 neon config init
 ```
 
-Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
@@ -92,7 +92,7 @@ It edits the file in place, keeping your comments and formatting. It refuses edi
 
 ### neon config add auth (#add-auth)
 
-Enables Neon Auth by setting `auth: true`.
+Enables Managed Better Auth by setting `auth: true`.
 
 <CliUsage command="config add auth" />
 
@@ -104,7 +104,7 @@ neon config add auth
 
 ### neon config add data-api (#add-data-api)
 
-Enables the Data API by setting `dataApi: true`, and enables Neon Auth, which the default provider requires (it flips `auth: false` to `true`). An existing external auth provider is left unchanged.
+Enables the Data API by setting `dataApi: true`, and enables Managed Better Auth, which the default provider requires (it flips `auth: false` to `true`). An existing external auth provider is left unchanged.
 
 <CliUsage command="config add data-api" />
 
@@ -128,7 +128,7 @@ neon config add ai-gateway
 
 ### neon config add realtime (#add-realtime)
 
-Enables Neon Realtime by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
+Enables [Neon Realtime](/docs/realtime/overview) by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
 
 <CliUsage command="config add realtime" />
 

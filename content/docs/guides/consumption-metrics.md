@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-10-14T11:21:37.306Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -23,7 +23,7 @@ Using the Neon API, you can query consumption metrics to track your resource usa
 | API                               | Endpoint                           | Description                                                                                                                                      | Plan availability                |
 | --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
 | **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore, snapshot), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
-| **Branch metrics** (beta)         | `/consumption_history/v2/branches` | Returns the same usage-based metrics broken down by branch, across one or more projects                                                          | Launch, Scale, Agent, Enterprise |
+| **Branch metrics**                | `/consumption_history/v2/branches` | Returns the same usage-based metrics broken down by branch, across one or more projects                                                          | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?**

@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-09-15T18:26:27.284Z'
+updatedOn: '2026-10-08T19:31:47.306Z'
 ---
 
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
@@ -100,6 +100,10 @@ In addition to continuous history, Lakebase Postgres exposes [snapshots](/docs/g
 **What this means for DX**
 
 When your database keeps a complete, accessible record of its past, developers can work with a fundamentally different mindset: mistakes are reversible. They iterate more confidently, knowing that mistakes can be undone quickly and precisely.
+
+### Realtime live data
+
+Lakebase Postgres builds live data into the database itself. With [Realtime](/docs/realtime/overview), you can subscribe to any SQL query and sync it into the client for end-to-end reactive DX.
 
 ## Workflows
 

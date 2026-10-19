@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.4.1",
+  "neonctlVersion": "8.8.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -991,6 +991,10 @@
               "type": "string",
               "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
             },
+            "region-id": {
+              "type": "string",
+              "describe": "Region ID for the new project (e.g. aws-eu-central-1). Defaults to aws-us-east-2"
+            },
             "service": {
               "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). Passed as `.option(\"service\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against claim.ts at neonctl 8.3.4.",
               "type": "array",
@@ -1230,7 +1234,8 @@
                   "describe": "Allowed browser origin (repeatable). \"*\" allows every origin"
                 }
               },
-              "commands": {}
+              "commands": {},
+              "describe": "Enable Realtime (preview.realtime: true)"
             }
           },
           "describe": "Add a service, function, or bucket to neon.ts (creates it if missing)"
@@ -1814,6 +1819,10 @@
       "aliases": [],
       "positionals": [],
       "options": {
+        "env": {
+          "type": "string",
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts so Function env values resolve from it. Existing env vars are not overridden. Function env values that read process.env must be set in this file or the environment."
+        },
         "port": {
           "type": "number",
           "describe": "Port to listen on (single-function mode only, with --source). Fails if taken. Without it (and without a PORT env var) a free port is chosen automatically."
@@ -2328,7 +2337,7 @@
         },
         "region-id": {
           "type": "string",
-          "describe": "Forwarded to link: region for a new project"
+          "describe": "Region for a new project, forwarded to link or to the claimable project"
         },
         "services": {
           "_comment": "Built by the servicesOption() factory and passed as `.option(\"services\", servicesOption(...))`, which the parser drops entirely, so this override supplies the whole option. Verified against init.ts and neon_services.ts at neonctl 8.4.1, which added realtime (see config init services override).",
@@ -4061,6 +4070,60 @@
           },
           "commands": {},
           "describe": "Enable Realtime on a branch"
+        },
+        "rotate-secret": {
+          "name": "rotate-secret",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait for the Realtime secret rotation to finish",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Replace a branch's Realtime shared secret"
+        },
+        "subscribe": {
+          "name": "subscribe",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "required": true,
+              "describe": "SELECT query to subscribe to",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "changes": {
+              "type": "boolean",
+              "describe": "Show raw rows and changes events",
+              "default": false
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {},
+          "describe": "Subscribe to a live SQL query with Neon Realtime",
+          "usage": "$0 realtime subscribe \"<query>\" [options]",
+          "examples": [
+            {
+              "command": "$0 realtime subscribe \"SELECT * FROM items\"",
+              "description": "Print the initial result followed by a readable transaction log"
+            },
+            {
+              "command": "$0 realtime subscribe --changes \"SELECT * FROM items\"",
+              "description": "Print raw rows and changes events"
+            }
+          ]
         }
       },
       "describe": "Manage Neon Realtime for a branch",
@@ -4522,45 +4585,6 @@
       "commands": {},
       "describe": "Show the branch's live Neon state (alias of `config status`)",
       "usage": "$0 status [options]"
-    },
-    "subscribe": {
-      "aliases": [],
-      "positionals": [
-        {
-          "name": "query",
-          "required": true,
-          "describe": "SELECT query to subscribe to",
-          "type": "string"
-        }
-      ],
-      "options": {
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        },
-        "changes": {
-          "type": "boolean",
-          "describe": "Show raw resets and transaction batches instead of full query results",
-          "default": false
-        },
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        }
-      },
-      "commands": {},
-      "describe": "Subscribe to a live SQL query with Neon Realtime",
-      "usage": "$0 subscribe \"<query>\" [options]",
-      "examples": [
-        {
-          "command": "$0 subscribe \"SELECT * FROM items\"",
-          "description": "Print the full result whenever it changes"
-        },
-        {
-          "command": "$0 subscribe --changes \"SELECT * FROM items\"",
-          "description": "Print raw reset and delta events"
-        }
-      ]
     },
     "triggers": {
       "aliases": [

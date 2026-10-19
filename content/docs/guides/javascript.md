@@ -10,7 +10,7 @@ summary: >-
   suits serverless and edge runtimes. Bun and Deno users are directed to
   separate guides.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-14T02:43:52.455Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -685,6 +685,7 @@ Explore these guides to integrate popular data tools with Neon:
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
+- [Add Realtime](/docs/realtime/overview): Make any SQL query live, with end-to-end, type-safe reactivity for apps and agents
 
 ## Using Bun or Deno
 

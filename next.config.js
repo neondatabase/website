@@ -208,6 +208,14 @@ const defaultConfig = {
       },
       ...mdIndexHeaders,
       ...generatedPageMarkdownHeaders,
+      {
+        source: '/feedback.md',
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -2246,6 +2254,98 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/realtime',
+        destination: '/docs/realtime/overview',
+        permanent: true,
+      },
+      // Section roots. Each `/docs/<section>` path prefix is a directory under
+      // `content/docs/`, not a page, so it 404s unless it is redirected here.
+      // Destinations are taken from `content/docs/navigation.yaml`: the section's
+      // own landing slug where the nav declares one, otherwise its first child.
+      // `/docs/guides` and `/docs/workflows` are deliberately absent: neither has a
+      // single landing page in the nav. `/docs/cli`, `/docs/changelog` and
+      // `/docs/introduction` are absent because they have real root pages.
+      {
+        source: '/docs/ai',
+        destination: '/docs/ai/ai-agents-tools',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai-gateway',
+        destination: '/docs/ai-gateway/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/auth',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/community',
+        destination: '/docs/community/community-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute',
+        destination: '/docs/compute/functions/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/connect',
+        destination: '/docs/connect/connect-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/data-api',
+        destination: '/docs/data-api/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/data-types',
+        destination: '/docs/data-types/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/extensions',
+        destination: '/docs/extensions/pg-extensions',
+        permanent: true,
+      },
+      {
+        source: '/docs/get-started',
+        destination: '/docs/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/import',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
+        source: '/docs/local',
+        destination: '/docs/local/neon-local',
+        permanent: true,
+      },
+      {
+        source: '/docs/manage',
+        destination: '/docs/manage/platform',
+        permanent: true,
+      },
+      {
+        source: '/docs/postgresql',
+        destination: '/docs/postgresql/introduction',
+        permanent: true,
+      },
+      {
+        source: '/docs/serverless',
+        destination: '/docs/serverless/serverless-driver',
+        permanent: true,
+      },
+      {
+        source: '/docs/storage',
+        destination: '/docs/storage/overview',
+        permanent: true,
+      },
+      {
         source: '/early-access',
         destination: '/',
         permanent: true,
@@ -2269,6 +2369,11 @@ const defaultConfig = {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
+      },
+      {
+        source: '/blog/databutton-neon-integration',
+        destination: '/blog/riff-neon-integration',
+        permanent: true,
       },
       {
         source: '/blog/postgres-autoscaling',
@@ -2803,6 +2908,9 @@ const defaultConfig = {
         // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
         { source: '/docs.md', destination: '/docs/llms.txt' },
         { source: '/blog.md', destination: '/blog/llms.txt' },
+        // /feedback.md is the agent feedback discovery URL; it serves the Send feedback
+        // docs page mirror. Keep in sync with CUSTOM_MARKDOWN_PATHS in ai-agent-detection.js.
+        { source: '/feedback.md', destination: '/md/docs/introduction/feedback.md' },
         ...Object.entries(GENERATED_PAGE_MARKDOWN_PATHS)
           // /auth.md is the existing Claimable Neon protocol. The Auth product
           // page exposes its separate Markdown mirror at /md/auth-page.md.

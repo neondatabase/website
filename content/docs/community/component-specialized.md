@@ -10,7 +10,7 @@ summary: >-
   copy-paste MDX syntax, live rendering, dependency requirements, and guidance
   on when to choose a simpler alternative.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-10-14T10:52:09.441Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.
@@ -137,9 +137,7 @@ Status indicators for features in different stages:
 <PrivatePreviewEnquire />
 <PublicPreview />
 <FeatureBeta />
-<LRBeta />
 <NewPricing />
-<LRNotice />
 <MigrationAssistant />
 ```
 
@@ -149,9 +147,7 @@ Status indicators for features in different stages:
 <PrivatePreviewEnquire />
 <PublicPreview />
 <FeatureBeta />
-<LRBeta />
 <NewPricing />
-<LRNotice />
 <MigrationAssistant />
 
 ---

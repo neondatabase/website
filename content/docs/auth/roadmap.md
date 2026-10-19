@@ -71,7 +71,7 @@ These capabilities are documented in Managed Better Auth guides but are not Bett
 | Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains)             |
 | Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                                       |
 | Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api)             |
-| Manage Auth via Neon MCP (AI editor) | Supported | [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor) |
+| Manage Auth via Neon MCP (AI editor) | Supported | [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor) |
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
 

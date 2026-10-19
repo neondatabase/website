@@ -138,8 +138,8 @@ Each of these is a complete, runnable build. Read the source on GitHub, or scaff
 - [Image-generation agent](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) with the AI SDK, AI Gateway, and Object Storage (ai-sdk)
 - [Personal-assistant agent](https://github.com/neondatabase/examples/tree/main/with-mastra) with Mastra (mastra)
 - [MCP server](https://github.com/neondatabase/examples/tree/main/with-mcp) backed by Postgres (mcp)
-- [Realtime chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) over WebSockets (realtime-chat)
-- [Realtime counter](https://github.com/neondatabase/examples/tree/main/with-realtime-sse) with SSE (realtime-sse)
+- [Realtime chat](https://github.com/neondatabase/examples/tree/main/with-websockets-function) over WebSockets (realtime-chat)
+- [Realtime counter](https://github.com/neondatabase/examples/tree/main/with-server-sent-events-function) with SSE (realtime-sse)
 - [Discord](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http), [Telegram](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http), and [WhatsApp](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http) bots
 
 Browse them all at [Build on Neon](http://build-on-neon.vercel.app).

@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-10-09T15:55:57.334Z'
+updatedOn: '2026-10-15T16:33:34.223Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -83,7 +83,7 @@ In Cursor chat, run:
 Or install from [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon). To install from the command line, run [`npx neon@latest plugins --agent cursor`](/docs/cli/plugins). See [Cursor plugin for Neon](/docs/ai/ai-cursor-plugin) for details.
 
 <Admonition type="note">
-Editor plugins currently bundle the core Postgres skill set and MCP integration. To give your assistant context for **Neon Functions**, **Object Storage**, and **AI Gateway**, run `npx skills add neondatabase/agent-skills -y` or install the platform skills individually (see [Available skills](#available-skills)).
+Editor plugins currently bundle the core Postgres skill set and MCP integration. To give your assistant context for **Neon Functions**, **Object Storage**, **AI Gateway**, and **Realtime**, run `npx skills add neondatabase/agent-skills -y` or install the platform skills individually (see [Available skills](#available-skills)).
 </Admonition>
 
 ### Claude Code plugin
@@ -167,14 +167,15 @@ Branch and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, **AI Gateway**, and **Realtime** are available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore), with more regions coming. See the [backend overview](/docs/get-started/backend-overview) for details.
 
 | Skill                                                                                    | Description                                                                                                         | Docs                                               |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | [`neon-functions`](https://skills.sh/neondatabase/agent-skills/neon-functions)           | Long-running serverless Node.js HTTP functions on your branch, with `DATABASE_URL` injected automatically           | [Neon Functions](/docs/compute/functions/overview) |
 | [`neon-object-storage`](https://skills.sh/neondatabase/agent-skills/neon-object-storage) | S3-compatible object storage that branches with your project                                                        | [Object Storage](/docs/storage/overview)           |
 | [`neon-ai-gateway`](https://skills.sh/neondatabase/agent-skills/neon-ai-gateway)         | One API and credential for frontier and open-source LLMs; compatible with OpenAI, Anthropic, and Vercel AI SDKs     | [AI Gateway](/docs/ai-gateway/overview)            |
-| [`neon-auth`](https://skills.sh/neondatabase/agent-skills/neon-auth)                     | Add authentication with Managed Better Auth: sign-up, sign-in, OAuth, magic links, OTP, passkeys, and organizations | [Neon Auth](/docs/auth/overview)                   |
+| [`neon-auth`](https://skills.sh/neondatabase/agent-skills/neon-auth)                     | Add authentication with Managed Better Auth: sign-up, sign-in, OAuth, magic links, OTP, passkeys, and organizations | [Managed Better Auth](/docs/auth/overview)         |
+| [`neon-realtime`](https://skills.sh/neondatabase/agent-skills/neon-realtime)             | Live SQL queries and reactivity primitives, so app UI and agent state update as rows change                         | [Realtime](/docs/realtime/overview)                |
 
 ### Agent platforms
 

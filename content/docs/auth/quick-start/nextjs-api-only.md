@@ -487,6 +487,6 @@ The `auth` instance also includes `.handler()` for API routes and `.middleware()
 - [Auth troubleshooting](/docs/auth/troubleshooting#neon-auth-server-logging-in-the-terminal) — server logging, `NETWORK_*` errors, iframe cookies
 - [Add email verification](/docs/auth/guides/email-verification)
 - [Branching authentication](/docs/auth/branching-authentication)
-- [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
+- [More example apps](/docs/auth/about#example-applications) in the **neon-js** `examples/` directory
 
 <NeedHelp/>

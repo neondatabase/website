@@ -3,6 +3,12 @@ import LINKS from 'constants/links';
 
 const { objectStorage, functions } = BACKEND_PRICING;
 
+const realtimeFeature = {
+  title: 'Realtime (Beta)',
+  info: '<p>Free during beta</p><p>Database compute and egress are billed as usual</p>',
+  moreLink: { text: 'Read more', href: LINKS.realtime },
+};
+
 export default [
   {
     planId: 'free',
@@ -45,8 +51,9 @@ export default [
           },
           {
             title: 'Functions',
-            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
           },
+          { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
       },
     },
@@ -102,9 +109,10 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
@@ -160,9 +168,10 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
