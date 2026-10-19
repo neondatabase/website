@@ -1,15 +1,15 @@
 ---
 title: 'Sync Stripe data to Lakebase Postgres with Stripe Data Pipeline'
-subtitle: 'Query your live Stripe data directly in Postgres, with no webhooks or ETL pipelines to build'
+subtitle: 'Query your live Stripe data directly in Lakebase Postgres, with no webhooks or ETL pipelines to build'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-10T00:00:00.000Z'
-updatedOn: '2026-10-12T08:22:53.202Z'
+updatedOn: '2026-10-19T05:40:44.574Z'
 ---
 
 Most apps that use Stripe build their own copy of the Stripe data with webhooks. When something happens in Stripe, like a successful payment, Stripe sends a notification to your server, and your app writes a row to a table. That takes setup: an endpoint to receive the notifications, tables to store them, and code to retry failures. You also need a one-time import for the data that already existed. And each notification only describes what changed. To know a customer's current state, your app has to apply every event for that customer in order.
 
-[Stripe Data Pipeline](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres) does this for you. It keeps a copy of your Stripe data in a Postgres database that you own, and keeps that copy up to date. Every Stripe resource you can list, from charges to subscriptions, becomes a table with typed columns. Changes show up in the database within a few seconds, though a few tables lag up to 10 minutes during the public preview (see [Preview limitations](#preview-limitations)). You query the current state directly, with no event handlers to write and no extra data store to run.
+[Stripe Data Pipeline](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres) is a managed service that does all of that for you. It keeps a copy of your Stripe data in a Postgres database that you own, and keeps that copy up to date. Every Stripe resource you can list, from charges to subscriptions, becomes a table with typed columns. Changes show up in the database within a few seconds, though a few tables lag up to 10 minutes during the public preview (see [Preview limitations](#preview-limitations)). You query the current state directly, with no event handlers to write and no extra data store to run.
 
 On Neon, that database is [Lakebase Postgres](/docs/postgres/overview). Stripe supports Neon directly. You connect your Neon account to Stripe with OAuth from the Stripe Dashboard, and Stripe sets up the connection for you. You don't have to configure a Postgres user, create tables, or write any code. The pipeline creates a schema in your project, backfills it with your existing data, and keeps it current.
 
@@ -20,6 +20,7 @@ In this guide, you'll connect a Stripe account to a Neon project with Data Pipel
 - Connect your Neon account to Stripe with OAuth
 - Create a pipeline and choose which Stripe tables to sync
 - Verify the backfill and query your Stripe data from the Neon SQL Editor
+- Create a test product and subscription in Stripe, then watch it sync to your database
 
 ## Prerequisites
 
@@ -87,12 +88,12 @@ Now that Stripe can reach your Neon project, create the pipeline:
 
 1. On the **Pipelines** page on the Stripe Dashboard, select **Neon**. Your account should already be connected from the previous step.
 2. Choose the Neon project you want to write into.
-3. Select the tables to sync. Only the tables you pick are synced, and you can enable or disable individual tables at any time from the same page.
+3. Select the tables to sync. Stripe syncs only the tables you pick, and you can enable or disable individual tables at any time from the same page.
 4. Click **Create pipeline**.
 
-For example, a good starting set is: `customers`, `charges`, `invoices`, `subscriptions`, `payment_intents`, `payouts`, and `balance_transactions`. Add more later if you need them. Stripe backfills every table you add first, so on a large account, start with the tables you'll actually query.
+For example, a good starting set is: `customers`, `charges`, `invoices`, `subscriptions`, `payment_intents`, `payouts`, and `balance_transactions`. Stripe backfills a table when you enable it, so start with the tables you'll actually query and add more later from the same page.
 
-Once Stripe confirms it can connect, it creates the schema, creates a table for each object you enabled, backfills those tables, and then starts syncing changes. The pipeline page shows the backfill's progress. If the pipeline reports a sync error, or the backfill never finishes, see Stripe's [checklist for connection and sync problems](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/common-errors) for the fix.
+Once Stripe confirms it can connect, it creates the schema and a table for each object you enabled, backfills those tables, and then starts syncing changes. The pipeline page shows the backfill's progress. If the pipeline reports a sync error, or the backfill never finishes, see Stripe's [checklist for connection and sync problems](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/common-errors) for the fix.
 
 ## Verify the backfill
 
@@ -102,7 +103,7 @@ Once the pipeline reports that the backfill is done, check that the data is real
 SELECT schema_name FROM information_schema.schemata ORDER BY schema_name;
 ```
 
-You should see a `stripe` schema alongside your own schemas. List the tables in that schema:
+You should see a `stripe` schema alongside your existing schemas. You can specify a different schema name when creating the pipeline. If you do, replace `stripe` with your chosen schema name in the queries below.
 
 ```sql
 SELECT table_name FROM information_schema.tables
@@ -131,32 +132,64 @@ SELECT count(*) FROM stripe.charges;
 <Admonition type="important" title="Don't write to the Stripe-managed schema">
 Stripe manages the tables in this schema. Writing to them externally can cause sync errors and data inconsistencies, so **never write directly to the Stripe-managed schema**.
 
-You can run read-only queries, use BI tools, and join Stripe-managed tables with your own tables using foreign keys. To build custom models on top of the synced data, create them in a schema of your own in the same project, and leave the `stripe` schema read-only.
+You can run read-only queries, use BI tools, and join Stripe-managed tables with your own tables on the Stripe IDs they share (for example, match `stripe.customers.id` with the customer ID your app stores). To build custom models on top of the synced data, create them in a schema of your own in the same project, and leave the `stripe` schema read-only.
 </Admonition>
+
+## Sync a test subscription
+
+You can verify that the pipeline is working by creating a test product and subscription in Stripe. The new records should appear in your database within a few seconds.
+
+1. In the Stripe Dashboard, open **Products** and click **Add product**.
+2. Enter a name, such as `Stripe sync demo`, and add a recurring price, for example `$20` per month.
+3. Click **Add product**, then on the product page click **Create payment link** and copy the link.
+4. Open the payment link in a new tab and complete the checkout with a test card:
+   - Card number: `4242 4242 4242 4242`
+   - Expiry: any future date
+   - CVC: any three digits
+   - Email: `alex@example.com`
+
+Stripe processes the payment and creates a customer, a subscription, and an invoice. Open the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run these queries to verify that the new customer and subscription appear in your database:
+
+```sql filename="List the last five customers"
+SELECT id, email, created
+FROM stripe.customers
+ORDER BY created DESC
+LIMIT 5;
+```
+
+```sql filename="List the last five subscriptions"
+SELECT id, status, customer, created
+FROM stripe.subscriptions
+ORDER BY created DESC
+LIMIT 5;
+```
+
+The new customer and subscription should appear in your database within a few seconds. Once checkout is complete in Stripe, you can query the customer and subscription records directly in your database. No webhook handler or scheduled import is required.
 
 ## Query the synced data
 
-You can query the synced tables like any other Postgres table. A few things to know:
+Now that the pipeline is syncing data, query the synced tables like any other Postgres table.
 
-- Each table has an `id` column plus three sync metadata columns: `_account_id`, `_updated_at`, and `_raw_data`. The `_raw_data` column holds the complete JSON object for the row, so you can access any field that isn't in a typed column.
-- Money amounts are integers in the smallest currency unit, so `amount` is in cents for USD charges.
-- `created` is a Unix timestamp in seconds stored as a `bigint`, so wrap it with `to_timestamp()` to turn it into a timestamp.
+- Each table has an `id` column plus three sync metadata columns: `_account_id`, `_updated_at`, and `_raw_data`. `_raw_data` holds the complete JSON object for the row, so you can read any field that doesn't have a typed column.
+- Money amounts are integers in the smallest currency unit. For USD charges, `amount` is in cents.
+- `created` is a Unix timestamp in seconds, stored as a `bigint`. Wrap it with `to_timestamp()` to read it as a timestamp.
 
-For example, this query sums the gross USD charges per month for the last year:
+### Example queries
+
+This query sums the total USD captured by month for the last year:
 
 ```sql
 SELECT date_trunc('month', to_timestamp(created)) AS month,
-       sum(amount) / 100.0 AS gross_usd
+       sum(amount_captured - amount_refunded) / 100.0 AS captured_usd
 FROM stripe.charges
 WHERE captured
-  AND NOT refunded
   AND currency = 'usd'
+  AND created >= extract(epoch FROM now() - interval '1 year')
 GROUP BY 1
-ORDER BY 1 DESC
-LIMIT 12;
+ORDER BY 1 DESC;
 ```
 
-Some columns hold typed values, and others hold JSON. The `metadata` column, for example, is `jsonb`, so you can filter on the keys you set yourself:
+Columns such as `metadata` are `jsonb`, so you can read individual keys with the `->>` operator. This query lists the last ten charges that have a `team` key in their metadata:
 
 ```sql
 SELECT id, amount, metadata->>'team' AS team
@@ -166,18 +199,18 @@ ORDER BY created DESC
 LIMIT 10;
 ```
 
-You can also filter on the JSON in `_raw_data`. This query shows the network status for the last five failed charges:
+`outcome` is also `jsonb`. For a field without its own column, read the full object from `_raw_data`. This query lists the network status for the five most recent failed charges:
 
 ```sql
 SELECT id,
-       _raw_data->'outcome'->>'network_status' AS network_status
+       outcome->>'network_status' AS network_status
 FROM stripe.charges
 WHERE status = 'failed'
 ORDER BY created DESC
 LIMIT 5;
 ```
 
-For questions that span more than one resource, join the tables. This query matches failed charges with the dispute records Stripe created for them:
+To answer questions that span more than one resource, join the tables. If you enabled the `disputes` table, this query lists charges alongside any disputes Stripe created for them:
 
 ```sql
 SELECT c.id AS charge_id,
@@ -189,19 +222,23 @@ ORDER BY c.created DESC
 LIMIT 20;
 ```
 
-See the [real-time sync schema](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/schema) for the columns available on each table created by Stripe Data Pipeline.
+For the columns available on each table, see the [real-time sync schema](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/schema).
 
 ## Connect your own tools
 
-Anything that can connect to Postgres can read the synced tables. To connect an application, a notebook, or a BI tool, copy the connection string from the **Connect** modal on your project Dashboard.
+The synced tables work with any Postgres client. To connect an app, notebook, or BI tool, open your project in the [Neon Console](https://console.neon.tech), click **Connect**, and copy the connection string from the **Connect to your branch** modal.
+
+Use it wherever the client asks for Postgres connection details. For client-specific setup, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>
 
 ## IP Allow
 
-Neon's [IP Allow](/docs/introduction/ip-allow) feature restricts connections to IP addresses you specify, and it's available on the Scale plan. If it's enabled on the project the pipeline writes to, you need to add Stripe's addresses, or the sync can't connect.
+Neon's [IP Allow](https://neon.com/docs/introduction/ip-allow) feature restricts database connections to specified IP addresses and is available on the Scale plan. If IP Allow is enabled for the Neon project your pipeline writes to, you must add Stripe's IP addresses to the project's allowlist. Otherwise, Stripe won't be able to connect, and the pipeline won't work.
 
-Stripe connects from a set of IP addresses and ranges, and it can use any of them. Get the current list from [Configure Postgres for real-time syncing](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/configure#source-ip-addresses) in the Stripe docs, and allow all of them under **Settings** > **Networking** > **What IPs can connect** for the project.
+Stripe can connect from any IP address in its published list of addresses and ranges. Find the current list in Stripe's [Allow incoming connections from Stripe](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/configure#source-ip-addresses) documentation, and add all listed addresses and ranges to your Neon project's allowlist.
+
+To configure the allowlist, open the project in the Neon Console and go to **Settings** > **Networking** > **Public internet access**. Select **Only addresses on the allowlist** and add Stripe's IP addresses and ranges.
 
 IP Allow applies to all branches by default. See [Configure IP Allow](/docs/manage/projects#configure-ip-allow) for the options, including applying the restriction to protected branches only.
 
@@ -226,7 +263,7 @@ Everything else syncs in real time.
 
 You now have your Stripe data in Lakebase Postgres, and it stays up to date on its own. That also means you no longer have to build your own copy of the Stripe data with webhooks. You have no endpoint to host, no retries to replay, no event ordering to get right, and no separate import for the records that existed before your app.
 
-Put that data to work in your application: query `stripe.subscriptions`, `stripe.invoices`, and `stripe.customers` next to your own tables to gate features on a customer's plan, show invoice history in your UI, or reach customers before a charge fails. The rows are already current by the time a request reaches you, so your billing code reads a table instead of consuming events.
+Put that data to work in your application: query `stripe.subscriptions`, `stripe.invoices`, and `stripe.customers` next to your own tables to gate features on a customer's plan, show invoice history in your UI, or reach customers before a charge fails. The synced tables stay up to date in the background, so your billing code reads a table instead of consuming events.
 
 If you're shipping a SaaS product, [Postgres for SaaS](/use-cases/postgres-for-saas) covers branching, autoscaling, and database-per-tenant setups for the rest of your stack.
 
