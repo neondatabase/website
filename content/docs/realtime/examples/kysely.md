@@ -8,7 +8,7 @@ enableTableOfContents: true
 
 This page shows how to build a Realtime app with [Kysely](https://kysely.dev), using your existing schema, queries, types and writes.
 
-You'll learn how to [add the Kysely adapter](#create-the-realtime-server), [define your schema, migrations and live queries](#defining-queries), [pass query parameters](#pass-query-parameters), [keep end-to-end type-safety](#subscribing-to-queries) and [return the transaction ID from Kysely writes](#return-the-txid-from-kysely-writes).
+You'll learn how to [add the Kysely adapter](#create-the-realtime-server), [define your schema, migrations and live queries](#defining-queries), [pass query parameters](#passing-query-parameters), [keep end-to-end type-safety](#subscribing-to-queries) and [return the transaction ID from Kysely writes](#return-the-txid-from-kysely-writes).
 
 <Admonition type="tip" title="Full example on GitHub">
 The [`realtime/with-kysely`](https://github.com/neondatabase/examples/tree/main/realtime/with-kysely) app in the `neondatabase/examples` repository is a framework-free TypeScript app built with Kysely and Realtime.
@@ -25,9 +25,7 @@ npm install @neon/realtime @neon/realtime-kysely kysely pg
 npm install -D @types/pg
 ```
 
-`@neon/realtime-kysely` exports `kyselyAdapter()` for your server. The browser needs nothing from it.
-
-The queries guide's [setup](../guides/queries#setup) covers `neon.ts` and the environment variables. For Kysely on Neon in general, see [Connect from Kysely to Neon](/docs/guides/kysely).
+`@neon/realtime-kysely` exports `kyselyAdapter()` to use in your backend. There are no client imports. The queries guide's [setup](../guides/queries#setup) covers `neon.ts` and the environment variables. For Kysely on Neon in general, see [Connect from Kysely to Neon](/docs/guides/kysely).
 
 ### Create the Realtime server
 
@@ -163,16 +161,11 @@ The adapter doesn't check the SQL. That happens when a client subscribes, so a q
 
 ## Sealing queries
 
-Seal each query on the server. The browser can subscribe to a sealed query, but it can't read or change it, as the queries guide explains in [sealing queries](../guides/queries#sealing-queries).
+### Passing query parameters
 
-### Pass query parameters
+This example seals a single query with no parameters. When a query does need a parameter (like a user ID or search term) Kysely compiles each value to a bind parameter. The adapter encodes values the way node-postgres does, and Postgres infers each parameter's type from the SQL.
 
-This example seals one query for everyone, so `selectTodos()` takes no arguments. When a query does need a value — a user ID, a cursor, a search term — Kysely has no special syntax for it: it's an argument to the function that builds the query, filled in on the server from context you trust. The queries guide shows this in an [API endpoint](../guides/queries#exposing-an-endpoint) and a [server function](../guides/queries#using-server-functions).
-
-- Kysely compiles each value to a bind parameter. The sealed query carries the values alongside the SQL, never spliced into it
-- the adapter encodes values the way node-postgres does, and Postgres infers each parameter's type from the SQL. So unlike [raw SQL parameters](../guides/queries#parameter-types), a `Date` or JSON value needs no `pgParam` wrapper
-- where Postgres can't infer a parameter's type from the SQL, wrap the value in a [`pgParam`](../sdks/typescript#backend-pgparam) helper for a built-in type, inside a `sql` template
-- each sealed query is for one set of values. To change them, the browser fetches a new sealed query. See [changing query parameters](../guides/reactivity#changing-query-parameters) and [renewing sealed queries](../guides/queries#renewing-sealed-queries)
+Where Postgres can't infer a parameter's type from the SQL, wrap the value in a [`pgParam`](../sdks/typescript#backend-pgparam) helper for a built-in type, inside a `sql` template.
 
 ## Subscribing to queries
 
