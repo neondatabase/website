@@ -57,7 +57,8 @@ endpoints:
     name: MCP server card
     description: >-
       Advertises Neon's MCP connect endpoint and OAuth self-onboarding to MCP
-      clients and discovery crawlers (e.g. integrations.sh).
+      clients and discovery crawlers. Carries the fields integrations.sh,
+      Mintlify, and the draft MCP server-card extension each read.
     servedPath: /.well-known/mcp/server-card.json
     contentType: application/json
     spec:
@@ -84,6 +85,23 @@ endpoints:
     check: builder
     builder: buildApiCatalog
     routeFile: src/app/.well-known/api-catalog/route.js
+
+  - id: integrations-json
+    name: integrations.sh declaration
+    description: >-
+      integrations.sh owner declaration listing Neon's integration surfaces (the
+      REST API, the MCP server, and the CLI) and the credential each one takes,
+      so the integrations.sh listing reflects them directly.
+    servedPath: /.well-known/integrations.json
+    contentType: application/json
+    spec:
+      name: integrations.sh integrations.json (v3)
+      url: https://integrations.sh/publishing/
+      standard: false
+    validator: integrations-json
+    check: builder
+    builder: buildIntegrationsJson
+    routeFile: src/app/.well-known/integrations.json/route.js
 
   - id: agent-skills-index
     name: Agent skills index

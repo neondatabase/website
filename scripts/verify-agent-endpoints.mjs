@@ -133,12 +133,101 @@ const SCHEMAS = {
       },
     },
   },
+  // integrations.sh owner declaration (v3). Mirrors the parts of its Effect
+  // schema (src/lib/discovery-schema.ts in UsefulSoftwareCo/integrations) that
+  // decide whether the file is accepted; a file that fails there is ignored.
+  integrationsJson: {
+    type: 'object',
+    required: ['version'],
+    properties: {
+      version: { const: 3 },
+      summary: { type: 'string' },
+      credentials: {
+        type: 'object',
+        additionalProperties: {
+          type: 'object',
+          required: ['type', 'label', 'setup'],
+          properties: {
+            type: {
+              enum: [
+                'api_key',
+                'basic',
+                'bearer',
+                'oauth2',
+                'oauth2_cc',
+                'oauth1',
+                'jwt',
+                'app',
+                'two_step',
+                'signature',
+                'aws_sigv4',
+                'tba',
+                'compound',
+                'custom',
+              ],
+            },
+            label: { type: 'string' },
+            setup: { type: 'string' },
+            generateUrl: { type: 'string' },
+          },
+        },
+      },
+      surfaces: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['type', 'slug', 'name', 'basis', 'auth'],
+          properties: {
+            type: { enum: ['http', 'graphql', 'mcp', 'cli'] },
+            slug: { type: 'string' },
+            name: { type: 'string' },
+            basis: {
+              type: 'object',
+              required: ['via'],
+              properties: { via: { enum: ['detected', 'discovered', 'declared'] } },
+            },
+            auth: {
+              type: 'object',
+              required: ['status'],
+              properties: {
+                status: { enum: ['none', 'required', 'unknown'] },
+                entries: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    required: ['use', 'basis'],
+                    properties: {
+                      use: {
+                        type: 'array',
+                        items: { type: 'object', required: ['id', 'mechanics'] },
+                      },
+                    },
+                  },
+                },
+              },
+              // A "required" status must say how to authenticate.
+              if: { properties: { status: { const: 'required' } } },
+              then: { required: ['entries'] },
+            },
+          },
+        },
+      },
+    },
+  },
   mcpServerCard: {
     type: 'object',
-    required: ['url', 'authentication'],
+    required: ['url', 'authentication', 'name', 'version', 'remotes'],
     properties: {
       url: { type: 'string' },
       endpoint: { type: 'string' },
+      name: { type: 'string' },
+      version: { type: 'string' },
+      description: { type: 'string', maxLength: 100 },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
       authentication: {
         type: 'object',
         required: ['type'],
@@ -290,6 +379,7 @@ const VALIDATORS = {
       equalsCheck('remote url matches SoT connectUrl', remote.url, sot.MCP_SERVER.connectUrl),
       equalsCheck('remote type matches SoT transport', remote.type, sot.MCP_SERVER.transport),
       equalsCheck('name matches SoT registry name', payload.name, sot.MCP_SERVER.registry.name),
+      equalsCheck('top-level url matches SoT connectUrl', payload.url, sot.MCP_SERVER.connectUrl),
     ];
     // The registry fields are copied from upstream server.json, so live runs
     // catch a version bump or edit there that this copy hasn't picked up.
@@ -297,7 +387,9 @@ const VALIDATORS = {
       if (upstreamError) {
         checks.push(fail('matches upstream server.json', upstreamError));
       } else {
-        const drift = Object.keys({ ...upstreamJson, ...payload }).filter(
+        // Compare only the fields upstream defines; the top-level `url` and
+        // `transport` are additions for readers that expect Mintlify's shape.
+        const drift = Object.keys(upstreamJson).filter(
           (key) => canonicalJson(upstreamJson[key]) !== canonicalJson(payload[key])
         );
         checks.push(
@@ -310,9 +402,68 @@ const VALIDATORS = {
     return checks;
   },
 
+  'integrations-json'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.integrationsJson, payload)];
+    const credentialIds = new Set(Object.keys(payload.credentials || {}));
+    const surfaces = payload.surfaces || [];
+    const unresolved = surfaces.flatMap((surface) =>
+      (surface.auth?.entries || []).flatMap((authEntry) =>
+        (authEntry.use || [])
+          .filter((use) => !credentialIds.has(use.id))
+          .map((use) => `${surface.slug}:${use.id}`)
+      )
+    );
+    checks.push(
+      unresolved.length === 0
+        ? ok('auth references defined credentials')
+        : fail('auth references defined credentials', unresolved.join(', '))
+    );
+    const notDeclaredHere = surfaces.filter(
+      (surface) =>
+        surface.basis?.via !== 'declared' || surface.basis?.source !== sot.INTEGRATIONS.url
+    );
+    checks.push(
+      notDeclaredHere.length === 0
+        ? ok('surfaces declared at SoT url', sot.INTEGRATIONS.url)
+        : fail(
+            'surfaces declared at SoT url',
+            notDeclaredHere.map((surface) => surface.slug).join(', ')
+          )
+    );
+    const bySlug = Object.fromEntries(surfaces.map((surface) => [surface.slug, surface]));
+    checks.push(
+      equalsCheck('neon-api url matches SoT baseUrl', bySlug['neon-api']?.url, sot.NEON_API.baseUrl)
+    );
+    checks.push(
+      equalsCheck(
+        'neon-api spec matches SoT openApiSpecUrl',
+        bySlug['neon-api']?.spec,
+        sot.NEON_API.openApiSpecUrl
+      )
+    );
+    checks.push(
+      equalsCheck(
+        'neon-mcp-server url matches SoT connectUrl',
+        bySlug['neon-mcp-server']?.url,
+        sot.MCP_SERVER.connectUrl
+      )
+    );
+    return checks;
+  },
+
   'mcp-server-card'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.mcpServerCard, payload)];
     checks.push(equalsCheck('url matches SoT connectUrl', payload.url, sot.MCP_SERVER.connectUrl));
+    checks.push(
+      equalsCheck(
+        'remotes[0].url matches SoT connectUrl',
+        payload.remotes?.[0]?.url,
+        sot.MCP_SERVER.connectUrl
+      )
+    );
+    checks.push(
+      equalsCheck('name matches SoT registry name', payload.name, sot.MCP_SERVER.registry.name)
+    );
     checks.push(
       equalsCheck(
         'authorization_server matches SoT',
