@@ -6,6 +6,7 @@ import {
   parseSiteSearchRequest,
   SEARCH_QUERY_MAX_CHARS,
   composeServerTiming,
+  siteSearchUpstreamHeaders,
 } from './site-search-request';
 
 describe('parseSiteSearchRequest', () => {
@@ -115,5 +116,24 @@ describe('composeServerTiming', () => {
   it('emits proxy alone when upstream is missing', () => {
     expect(composeServerTiming(null, 10)).toBe('proxy;dur=10.0');
     expect(composeServerTiming('', 10)).toBe('proxy;dur=10.0');
+  });
+});
+
+describe('siteSearchUpstreamHeaders', () => {
+  it('tags the request as website and forwards the browser user agent', () => {
+    expect(siteSearchUpstreamHeaders(' Mozilla/5.0 (Macintosh) ')).toEqual({
+      'content-type': 'application/json',
+      'x-neon-source': 'website',
+      'x-neon-user-agent': 'Mozilla/5.0 (Macintosh)',
+    });
+  });
+
+  it('omits the user agent when the browser sent none', () => {
+    for (const userAgent of [null, undefined, '  ']) {
+      expect(siteSearchUpstreamHeaders(userAgent)).toEqual({
+        'content-type': 'application/json',
+        'x-neon-source': 'website',
+      });
+    }
   });
 });

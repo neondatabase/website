@@ -32,6 +32,14 @@ export function composeServerTiming(upstream, proxyMs) {
   return `${upstream.trim()}, ${proxy}`;
 }
 
+// neon-agent records each search by caller; the browser's user agent is the one worth recording.
+export function siteSearchUpstreamHeaders(userAgent) {
+  const headers = { 'content-type': 'application/json', 'x-neon-source': 'website' };
+  const trimmed = userAgent?.trim();
+  if (trimmed) headers['x-neon-user-agent'] = trimmed;
+  return headers;
+}
+
 export function parseSiteSearchRequest(body) {
   if (typeof body !== 'object' || body === null || Array.isArray(body)) {
     throw new Error('Invalid JSON body');

@@ -5,6 +5,7 @@ import {
   composeServerTiming,
   parseSiteSearchHits,
   parseSiteSearchRequest,
+  siteSearchUpstreamHeaders,
 } from 'utils/site-search-request';
 
 const SEARCH_FAILED = 'Search failed.';
@@ -45,7 +46,7 @@ export async function POST(request) {
   try {
     response = await fetch(searchUrl, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: siteSearchUpstreamHeaders(request.headers.get('user-agent')),
       body: JSON.stringify(body),
     });
   } catch {
