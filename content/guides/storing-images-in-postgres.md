@@ -25,7 +25,7 @@ Here's how storing images in Postgres compares to storing them in object storage
 | **Max size per image**  | 1 GB per `bytea` value                                           | 5 GiB per object on Neon Object Storage                             |
 | **Atomic with the row** | Yes, the image commits or rolls back with the row                | No, an upload and an `INSERT` are two separate steps                |
 | **Serving an image**    | Your app queries Postgres, then streams the bytes to the browser | The browser downloads directly from a presigned URL                 |
-| **Query results**       | Listing complete rows also returns their images                           | Rows stay small, only keys travel                                   |
+| **Query results**       | Listing complete rows also returns their images                  | Rows stay small, only keys travel                                   |
 | **Backups and dumps**   | Grow with every image                                            | Stay small, files are stored separately                             |
 | **Best for**            | A few very small images that must commit with their row          | Everything else: user uploads, galleries, media, AI-generated files |
 
@@ -162,7 +162,9 @@ For 50 GB of images on Neon and Supabase, here's the how the cost compares:
 | Postgres (`bytea`)          | 50 × $0.35 = **$17.50** | $25 + (50 − 8) × $0.125 = **$30.25**   |
 | Object storage              | 50 × $0.023 = **$1.15** | $25, with 100 GB included = **$25.00** |
 
-So keeping 50 GB of images in Neon Object Storage, uploaded with presigned URLs and with only their keys in Postgres, costs $1.15 a month, against $25 on Supabase.
+The Supabase Free plan includes only 1 GB of Storage, so the $25 Pro plan is the minimum tier you have to subscribe to before you can store 50 GB of images.
+
+So keeping 50 GB of images in Neon Object Storage, uploaded with presigned URLs and with only their keys in Postgres, costs $1.15 a month, against the $25 Pro plan on Supabase.
 
 ### 2. Query result size
 
@@ -238,6 +240,8 @@ Point the AWS SDK at your branch's storage endpoint:
 ```typescript filename="lib/s3.ts"
 import { S3Client } from '@aws-sdk/client-s3';
 
+export const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+
 export const s3 = new S3Client({
   region: process.env.AWS_REGION,
   endpoint: process.env.AWS_ENDPOINT_URL_S3,
@@ -279,13 +283,11 @@ Two routes are enough: one signs an upload URL, and one records the file after t
 ```typescript filename="app/api/photos/upload-url/route.ts"
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { s3 } from '@/lib/s3';
-
-const ALLOWED = new Set(['image/jpeg', 'image/png', 'image/webp']);
+import { ALLOWED_TYPES, s3 } from '@/lib/s3';
 
 export async function POST(request: Request) {
   const { contentType } = await request.json();
-  if (!ALLOWED.has(contentType)) return new Response('Unsupported type', { status: 400 });
+  if (!ALLOWED_TYPES.has(contentType)) return new Response('Unsupported type', { status: 400 });
 
   const ownerId = await getCurrentUserId(); // your auth
   const key = `users/${ownerId}/photos/${crypto.randomUUID()}`;
@@ -296,9 +298,9 @@ export async function POST(request: Request) {
 ```
 
 ```typescript filename="app/api/photos/route.ts"
-import { HeadObjectCommand } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 import { neon } from '@neondatabase/serverless';
-import { s3 } from '@/lib/s3';
+import { ALLOWED_TYPES, s3 } from '@/lib/s3';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -309,6 +311,10 @@ export async function POST(request: Request) {
 
   // Trust the bucket, not the client, for size and type
   const head = await s3.send(new HeadObjectCommand({ Bucket: 'images', Key: key }));
+  if (!head.ContentType || !ALLOWED_TYPES.has(head.ContentType)) {
+    await s3.send(new DeleteObjectCommand({ Bucket: 'images', Key: key }));
+    return new Response('Unsupported type', { status: 400 });
+  }
 
   const [photo] = await sql`
     INSERT INTO photos (owner_id, object_key, mime_type, size_bytes)
@@ -319,6 +325,8 @@ export async function POST(request: Request) {
   return Response.json(photo);
 }
 ```
+
+The record route checks the type again because the presigner signs only the `host` header by default. A URL signed for `image/jpeg` also accepts an upload sent as `text/html`, so the route reads the stored `Content-Type` from the bucket and deletes any object that isn't an allowed image type.
 
 In the browser, the upload is a single `fetch`:
 
@@ -361,7 +369,7 @@ With two systems, the row and the file can get out of sync. On Neon, [buckets an
 
 ## Choosing between Neon and Supabase for image storage
 
-So far, this guide has used Neon for the database and object storage. Here's how it compares to Supabase Storage.
+So far, this guide has used Neon for the database and object storage. Here's how it compares to Supabase Storage. For a wider comparison that also covers Amazon S3, Cloudflare R2, and Upstash Blob, see [Best object storage for SaaS and AI agents](/guides/best-s3-compatible-object-storage-saas-and-ai-agents-2026).
 
 ### S3 API compatibility
 
@@ -387,10 +395,11 @@ To test a change against real images, a branch needs both the rows and the files
 | Image files               | Every bucket and object from the parent, copy-on-write                   | Empty. Files have to be uploaded again                                                                                                                          |
 | Database rows             | All rows from the parent, copy-on-write                                  | Empty by default. **Include data** needs the PITR add-on ($100 a month)                                                                                         |
 
-On Neon, the whole setup is one command:
+On Neon, the setup is two commands. A new branch has its own storage endpoint, so after you create it, pull the branch's credentials into an env file:
 
 ```bash
 neon branches create --name preview/new-thumbnails
+neon env pull --branch preview/new-thumbnails --file .env.preview
 ```
 
 On Supabase, a branch's Storage starts empty, so you need a seed script that copies files from production into the branch. Every file it downloads counts as egress on the production organization.
@@ -464,16 +473,17 @@ Take an AI agent that tests changes to an image pipeline, such as regenerating t
 | :------- | :---------------- | :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :------------ |
 | Neon     | Launch            | Branch the project, copy-on-write                                            | 0.25 CU of compute for 110 run-hours at $0.106/CU-hour. Branching the rows and images is free.     | **$2.92**     |
 | Supabase | Pro + PITR add-on | Branch with **Include data**, then re-upload 20 GB of images from production | $100 PITR add-on, branch compute for 110 run-hours ($2.27), and 2,200 GB of cached egress ($58.50) | **$160.77**   |
+| Supabase | Pro + PITR add-on | Same, if the seed downloads miss the CDN cache                               | $100 PITR add-on, branch compute ($2.27), and 2,200 GB of uncached egress ($175.50)                | **$277.77**   |
 
 <details>
 <summary>Curious how each total is calculated?</summary>
 
 - **Neon:** 0.25 CU × 110 run-hours × $0.106/CU-hour = $2.92. Branching the rows and objects is copy-on-write, so there's no copy charge and nothing leaves the project as egress. Production plus one run branch fits in the Launch plan's 10 included branches.
-- **Supabase:** the runs are added to an existing Pro project, so the $25 plan fee isn't counted here. Copying rows into a branch with **Include data** needs the PITR add-on at $100 a month. A branch created with **Include data** matches the project's compute size, so branch compute is 110 run-hours × $0.0206 = $2.27. Branches start with empty Storage, so each run downloads the 20 GB from production and uploads it again: 110 × 20 GB = 2,200 GB of cached egress, and (2,200 GB − 250 GB) × $0.03 = $58.50. Total: $100 + $2.27 + $58.50 = $160.77.
+- **Supabase:** the runs are added to an existing Pro project, so the $25 plan fee isn't counted here. Copying rows into a branch with **Include data** needs the PITR add-on at $100 a month. A branch created with **Include data** matches the project's compute size, so branch compute is 110 run-hours × $0.0206 = $2.27. Branches start with empty Storage, so each run downloads the 20 GB from production and uploads it again: 110 × 20 GB = 2,200 GB of egress. At the cached rate, that's (2,200 GB − 250 GB) × $0.03 = $58.50, for a total of $100 + $2.27 + $58.50 = $160.77. A seed script that downloads private files through fresh signed URLs usually misses the CDN cache, so at the uncached rate, it's (2,200 GB − 250 GB) × $0.09 = $175.50, for a total of $100 + $2.27 + $175.50 = $277.77.
 
 </details>
 
-So the agent's runs cost $2.92 a month on Neon against $160.77 on Supabase, because a Neon branch gets the rows and images through copy-on-write, while a Supabase branch needs the PITR add-on and a fresh copy of every image.
+So the agent's runs cost $2.92 a month on Neon against $160.77 to $277.77 on Supabase, because a Neon branch gets the rows and images through copy-on-write, while a Supabase branch needs the PITR add-on and a fresh copy of every image.
 
 ## Frequently asked questions
 
