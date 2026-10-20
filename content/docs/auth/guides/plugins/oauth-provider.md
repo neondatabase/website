@@ -9,7 +9,7 @@ summary: >-
   login and consent pages you host, Client ID Metadata Documents and legacy
   dynamic client registration, managed confidential and public clients, scopes
   and refresh tokens, and how a resource server verifies the issuer, audience,
-  and signature of access tokens. Currently in private preview.
+  and signature of access tokens.
 tag: beta
 enableTableOfContents: true
 ---
@@ -21,9 +21,7 @@ Use it to:
 - **Protect an MCP server.** MCP clients discover your authorization server, identify themselves with a [Client ID Metadata Document](#client-id-metadata-documents) (CIMD), and call your tools with an access token for your users. Legacy [dynamic client registration](#dynamic-client-registration-legacy) (DCR) is available as an opt-in. MCP support is part of this plugin, not a separate plugin: you set it up with the **MCP server** field.
 - **Sign in your users to another app or API.** A web app, single-page app, desktop app, or CLI runs the authorization code flow with PKCE and calls your API with the resulting token.
 
-<Admonition type="comingSoon" title="Private preview">
-The OAuth provider plugin is in private preview. Access is enabled per account on request. To ask for access, [contact support](/docs/introduction/support).
-</Admonition>
+The OAuth provider plugin is available to all Managed Better Auth projects.
 
 ## Prerequisites
 

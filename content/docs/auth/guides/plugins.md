@@ -30,7 +30,7 @@ The following Better Auth plugins are currently supported in Managed Better Auth
 | [Email OTP](/docs/auth/guides/plugins/email-otp)           | ✅ Supported              |
 | [JWT](/docs/auth/guides/plugins/jwt)                       | ✅ Supported              |
 | [Magic Link](/docs/auth/guides/plugins/magic-link)         | ✅ Supported              |
-| [OAuth Provider](/docs/auth/guides/plugins/oauth-provider) | 🧪 Beta (private preview) |
+| [OAuth Provider](/docs/auth/guides/plugins/oauth-provider) | 🧪 Beta                   |
 | [Organization](/docs/auth/guides/plugins/organization)     | ⚠️ Partial                |
 | [Open API](/docs/auth/guides/plugins/openapi)              | ✅ Supported              |
 | [Phone Number](/docs/auth/guides/plugins/phone-number)     | ✅ Supported              |
