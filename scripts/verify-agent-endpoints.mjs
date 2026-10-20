@@ -80,6 +80,18 @@ function isUrl(value) {
   }
 }
 
+// JSON.stringify with sorted object keys, so key order doesn't count as a difference.
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`)
+      .join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
 function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf-8'));
 }
@@ -108,6 +120,19 @@ function offlinePayload(entry, sot) {
 // Each returns an array of check results. `sot` is the source-of-truth module.
 
 const SCHEMAS = {
+  mcpWellKnown: {
+    type: 'object',
+    required: ['name', 'version', 'remotes'],
+    properties: {
+      name: { type: 'string' },
+      version: { type: 'string' },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
+    },
+  },
   mcpServerCard: {
     type: 'object',
     required: ['url', 'authentication'],
@@ -191,7 +216,7 @@ const SCHEMAS = {
       entries: {
         type: 'array',
         minItems: 1,
-        items: { type: 'object', required: ['identifier', 'type', 'url'] },
+        items: { type: 'object', required: ['identifier', 'displayName', 'type', 'url'] },
       },
     },
   },
@@ -258,6 +283,33 @@ const SCHEMAS = {
 };
 
 const VALIDATORS = {
+  'mcp-well-known'(payload, entry, sot, { live, upstreamJson, upstreamError }) {
+    const remote = payload.remotes?.[0] || {};
+    const checks = [
+      schemaCheck(entry.spec.name, SCHEMAS.mcpWellKnown, payload),
+      equalsCheck('remote url matches SoT connectUrl', remote.url, sot.MCP_SERVER.connectUrl),
+      equalsCheck('remote type matches SoT transport', remote.type, sot.MCP_SERVER.transport),
+      equalsCheck('name matches SoT registry name', payload.name, sot.MCP_SERVER.registry.name),
+    ];
+    // The registry fields are copied from upstream server.json, so live runs
+    // catch a version bump or edit there that this copy hasn't picked up.
+    if (live && entry.upstream) {
+      if (upstreamError) {
+        checks.push(fail('matches upstream server.json', upstreamError));
+      } else {
+        const drift = Object.keys({ ...upstreamJson, ...payload }).filter(
+          (key) => canonicalJson(upstreamJson[key]) !== canonicalJson(payload[key])
+        );
+        checks.push(
+          drift.length === 0
+            ? ok('matches upstream server.json', entry.upstream)
+            : fail('matches upstream server.json', `differs in: ${drift.join(', ')}`)
+        );
+      }
+    }
+    return checks;
+  },
+
   'mcp-server-card'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.mcpServerCard, payload)];
     checks.push(equalsCheck('url matches SoT connectUrl', payload.url, sot.MCP_SERVER.connectUrl));
@@ -474,9 +526,7 @@ const VALIDATORS = {
     checks.push(
       equalsCheck('token_endpoint matches SoT', payload.token_endpoint, sot.CLAIMABLE.tokenEndpoint)
     );
-    checks.push(
-      equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri)
-    );
+    checks.push(equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri));
     checks.push(
       Array.isArray(payload.token_endpoint_auth_methods_supported) &&
         payload.token_endpoint_auth_methods_supported.includes('none')
@@ -577,6 +627,17 @@ async function runEntry(entry, sot) {
       }
     } catch (err) {
       checks.push(fail('served 200', `${BASE_URL}${entry.servedPath} -> ${err.message}`));
+    }
+
+    // Entries mirrored from an upstream document get it fetched for comparison.
+    if (entry.upstream) {
+      try {
+        const res = await fetch(entry.upstream);
+        if (res.ok) live.upstreamJson = await res.json();
+        else live.upstreamError = `${entry.upstream} -> ${res.status}`;
+      } catch (err) {
+        live.upstreamError = `${entry.upstream} -> ${err.message}`;
+      }
     }
   }
 

@@ -13,6 +13,7 @@ const {
 const SKILLS = [
   {
     name: 'neon-postgres',
+    title: 'Lakebase Postgres',
     description: 'Guides and best practices for Neon.',
     digest: 'sha256:abc123',
   },
@@ -124,6 +125,13 @@ describe('buildAiCatalog', () => {
       );
       expect(entry.description).toBe(SKILLS[i].description);
     });
+  });
+
+  it('gives every entry a displayName, falling back to the skill name', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    expect(catalog.entries[0].displayName).toBe('Neon MCP Server');
+    expect(catalog.entries[1].displayName).toBe('Lakebase Postgres');
+    expect(catalog.entries[2].displayName).toBe('neon-functions');
   });
 
   it('every entry has exactly one of url/data (Level 1 conformance)', () => {
