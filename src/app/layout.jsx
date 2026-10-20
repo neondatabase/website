@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
+import SectionScroll from 'components/shared/inkeep-trigger/section-scroll';
 import RiveWasm from 'components/shared/rive-wasm';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
@@ -50,6 +51,7 @@ const RootLayout = ({ children }) => (
           </TopbarProvider>
         </HomepageVisitProvider>
       </ThemeProvider>
+      <SectionScroll />
       <Analytics />
     </body>
   </html>
