@@ -4,20 +4,16 @@ subtitle: 'Use the TypeSafe System One model through the Neon AI Gateway to clas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-17T00:00:00.000Z'
-updatedOn: '2026-10-20T08:09:27.915Z'
+updatedOn: '2026-10-20T09:36:52.227Z'
 ---
 
-Content moderation is a common challenge when building products that accept user-generated content. Every message needs to be evaluated against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked?
-
-A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. While LLMs are good at understanding text, their responses can be inconsistent and difficult to integrate into automated workflows. For moderation pipelines that process large volumes of messages, structured, machine-readable outputs provide a more reliable and practical way to evaluate content and drive moderation decisions.
+Content moderation is a common challenge when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are a more reliable way to drive moderation decisions.
 
 [Jev](https://typesafe.ai), by TypeSafe AI, is a "System One" model built for this kind of task. You provide text and a set of questions. Jev returns structured answers: a label from a predefined set, a score on a scale you specify, or a probability between 0 and 1. Your application can consume these outputs directly instead of interpreting a natural-language response.
 
 The design separates **judgment from policy**. Jev evaluates a message against the questions you define; your application decides what to do with the results. You might ask Jev to classify a message, check for spam and personal information, and assess its severity. Your code then combines those answers using rules and thresholds you control to determine whether to allow, review, or block the message. When your moderation policy changes, you can adjust those rules without redesigning the entire pipeline.
 
-Because Jev returns a fixed set of answers instead of free text, it also scales differently. TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev) reports that Jev is far faster and cheaper than frontier models on workflow evaluations. That makes it practical to run on every message rather than a sample of them.
-
-In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the Neon AI Gateway. You'll evaluate a batch of sample messages, then use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline is simple, but it demonstrates how to turn model-based judgments into consistent moderation decisions.
+Because Jev returns a fixed set of answers instead of free text, it also scales differently. TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev) reports that Jev is far faster and cheaper than frontier models on workflow evaluations, which makes it practical to run on every message rather than a sample. In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the Neon AI Gateway. You'll evaluate a batch of sample messages. Then you'll use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline shows how to turn model-based judgments into consistent moderation decisions.
 
 ## How Jev answers questions
 
@@ -27,7 +23,7 @@ Every request has two parts: the **state** Jev should look at and the **question
 
 The state can be plain text, a set of named fields, or a list. If your questions need context, use named fields so a question can point to a specific part, like `message.text`.
 
-Each question has a type, a prompt, and a set of options or a scale. The type determines the shape of the answer. The three types are:
+Each question has a type and a prompt. Choice questions add a set of options, and Score questions add a scale. The type determines the shape of the answer. The three types are:
 
 | Type       | What it asks            | What you get back                                                        |
 | ---------- | ----------------------- | ------------------------------------------------------------------------ |
@@ -35,9 +31,9 @@ Each question has a type, a prompt, and a set of options or a scale. The type de
 | **Score**  | Pick a level on a scale | A score, a probability for each level, and a confidence value            |
 | **Noul**   | Is this statement true? | A probability between 0 and 1                                            |
 
-Choice picks one label from a list, like `spam`, `abuse`, or `discussion`. Score places the input on a scale you define, and the answer can fall between two levels. Noul answers a yes or no question with a probability.
+Choice picks one label from a list, like `spam`, `abuse`, or `discussion`. Score places the state on a scale you define, and the answer can fall between two levels. Noul gives the probability that a statement is true.
 
-You can mix all three types in one request. For example, you might ask Jev to classify a message, check for spam and personal information, and assess its severity.
+You can mix all three types in one request. For example, one request can combine a category choice, two probability checks, and a severity score.
 
 The following diagram shows how Jev evaluates a message and returns structured answers. Your code then applies your own thresholds to decide what to do with the message.
 
@@ -76,7 +72,7 @@ The following examples show how to use the three question types. Each example se
 
 ```ts
 const { answers } = await client.systemOne({
-  state: { message: 'Want more followers? Buy 1000 real followers for $5.' },
+  state: { message: 'Check out my espresso gear shop this week. Use code BREW10 for 20% off.' },
   questions: {
     category: choice('What is the main purpose of `message`?', {
       discussion: 'Ordinary conversation about the topic.',
@@ -87,11 +83,11 @@ const { answers } = await client.systemOne({
 });
 
 console.log(answers.category.choice); // 'promotion'
-console.log(answers.category.confidence); // 0.66
-console.log(answers.category.probabilities); // { discussion: 0, promotion: 0.77, spam: 0.23 }
+console.log(answers.category.confidence); // 1
+console.log(answers.category.probabilities); // { discussion: 0, promotion: 1, spam: 0 }
 ```
 
-The `choice` function takes a prompt and an object whose keys are the options you want Jev to choose from. The answer includes the chosen option, a probability for each option, and a confidence value between 0 and 1.
+The `choice` function takes a prompt and an object whose keys are the options you want Jev to choose from. The answer includes the chosen option, a probability for each option, and a confidence value between 0 and 1. Confidence is a separate, calibrated score that indicates how sure Jev is about its choice. A value near 1 means it is confident; a value near 0 means it is unsure. You'll use it in [Turn answers into a decision](#turn-answers-into-a-decision).
 
 </TabItem>
 
@@ -112,9 +108,9 @@ const { answers } = await client.systemOne({
   },
 });
 
-console.log(answers.severity.score); // 1.6
-console.log(answers.severity.confidence); // 0.6
-console.log(answers.severity.probabilities); // { '0': 0, '1': 0.4, '2': 0.6, '3': 0 }
+console.log(answers.severity.score); // 1.58
+console.log(answers.severity.confidence); // 0.58
+console.log(answers.severity.probabilities); // { '0': 0, '1': 0.42, '2': 0.58, '3': 0 }
 ```
 
 The `score` function takes a prompt and an array of levels. The answer includes the score, a probability for each level, and a confidence value between 0 and 1.
@@ -123,7 +119,7 @@ The `score` function takes a prompt and an array of levels. The answer includes 
 
 <TabItem>
 
-**Noul** answers a yes or no question with a probability. It suits checks where the probability itself is the signal your code acts on, rather than a label it has to interpret.
+**Noul** gives the probability that a statement is true. It suits checks where the probability itself is the signal your code acts on, rather than a label it has to interpret.
 
 ```ts
 const { answers } = await client.systemOne({
@@ -147,17 +143,18 @@ The `noul` function takes a prompt and returns a probability between 0 and 1. A 
 
 </Tabs>
 
-The state can be a plain string, as in the Score tab, or an object with named fields, as in the Choice and Noul tabs. When the state is an object, a question refers to a field through a backticked path such as `message`, which tells Jev which part of the state to judge.
+The state can be a plain string, as in the Score tab, or an object with named fields, as in the Choice and Noul tabs. When the state is an object, refer to a field with a backticked path such as `message` so Jev knows which part to judge.
 
 ## Prerequisites
 
 Before you begin, make sure you have the following:
 
 - **Node.js 22 or later:** Download it from [nodejs.org](https://nodejs.org/).
-- **A paid Neon account:** Sign up at [console.neon.tech](https://console.neon.tech/signup). Neon AI Gateway is available on the Launch and Scale plans and requires [prepaid credits](/docs/ai-gateway/prepaid-credits).
+- **A Neon account on the Launch or Scale plan:** Neon AI Gateway is available only on paid plans. Sign up at [console.neon.tech](https://console.neon.tech/signup).
+- **Prepaid AI Gateway credits:** Buy credits from the **Billing** page in the Neon Console. One credit is $1 USD, with a $5 minimum purchase. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 
 <Admonition type="info" title="Region availability">
-The AI Gateway is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to follow along.
+The AI Gateway is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Support is expanding toward [all regions](/docs/introduction/regions). Create your project in one of these regions to follow along.
 </Admonition>
 
 <Steps>
@@ -173,12 +170,12 @@ You need a Neon project with the AI Gateway enabled. Create one in the Neon Cons
 
 ![The create project dialog with the AI gateway service enabled](/docs/guides/create-neon-project-with-ai-gateway.png)
 
-## Get your AI Gateway base URL and API key
+## Get your AI Gateway credential
 
-1. In the Neon Console, open your project and click **Connect** in the sidebar.
-2. Switch to the **AI Gateway** tab. Copy the **Base URL** and **Token**. You'll use them in your code to authenticate with the AI Gateway.
+1. In the Neon Console, open your project and click **Connect** at the top of the sidebar.
+2. Switch to the **AI Gateway** tab. Click **Copy snippet** to copy both environment variables, or **Reveal credential** to show `NEON_AI_GATEWAY_TOKEN`.
 
-![The AI Gateway tab in the Connect dialog showing the base URL and token](/docs/guides/connect-ai-gateway.png)
+![The AI Gateway tab in the Connect dialog showing the environment variables and credential controls](/docs/guides/connect-ai-gateway.png)
 
 ## Set up the project
 
@@ -264,11 +261,11 @@ const MESSAGES: Message[] = [
 ];
 ```
 
-The batch mixes ordinary conversation with two scams, two jabs, one phone number, and one off-topic post. You'll see how a single set of questions handles all of them.
+You'll see how one set of questions handles all of them.
 
 ## Define the questions
 
-To the same file, add the questions you want Jev to answer. Each question has a type, a prompt, and a set of options or a scale. The five questions cover the main moderation concerns: category, harassment, spam, personal information, and severity.
+To the same file, add the questions you want Jev to answer. Each question has a type and a prompt. Choice questions add a set of options, and Score questions add a scale. The five questions cover the main moderation concerns: category, harassment, spam, personal information, and severity.
 
 ```ts filename="moderate.ts"
 const QUESTIONS = {
@@ -332,7 +329,7 @@ async function classify(message: Message, channel: Channel) {
 }
 ```
 
-Each message gets its own request because each message is its own state. The five questions about a single message share one request, so they run in parallel.
+Each message is a separate state, so each message gets its own request. The five questions about a message share that request and run in parallel.
 
 ## Turn answers into a decision
 
@@ -429,7 +426,7 @@ Run it:
 node moderate.ts
 ```
 
-You'll see output like this:
+You'll see output like this. The exact labels, scores, and probabilities may vary slightly each time you run it, but the overall decisions should be consistent.
 
 ```text
 ALLOW  maya_k: Has anyone tried the new dual-boiler machine from the gear shop? Wondering if it is worth the upgrade.
@@ -465,17 +462,19 @@ The summary shows that three messages were allowed, five were blocked, and none 
 
 ## Conclusion
 
-You now have a moderation pipeline that separates content evaluation from policy enforcement. The `classify` function asks Jev five questions about each message, while `decide` applies your thresholds to determine whether to allow the message, flag it for review, or block it. The script prints each decision along with the question that drove it, making the reasoning behind every outcome easy to inspect.
+You now have a moderation pipeline that separates content evaluation from policy enforcement. The `classify` function asks Jev five questions about each message. The `decide` function applies your thresholds to decide whether to allow, review, or block each message. The script prints each decision and the reason behind it, so you can see why each message got its outcome.
 
 For a real application, you would replace the console output with code that takes the appropriate action on each message. You can also extend the pipeline in several ways:
 
-- **Use stronger models for review:** Your Neon credentials work across the AI Gateway's model catalog. Messages flagged for review can be sent to a more capable model, such as Claude Opus 5.5 (`claude-opus-5-5`) or GPT-6 Astra (`gpt-6-astra`), for a second assessment before you make the final decision. See [AI Gateway models](/docs/ai-gateway/overview#available-models).
-- **Add more questions:** Extend the classification step with questions that reflect your moderation policy. You can also skip questions that don't affect your decisions, such as whether a message links to a known malicious domain or is written in one of your community's supported languages.
+- **Store decisions:** Write each decision and its reason to a Postgres table so you have an audit trail.
+- **Use stronger models for review:** Your Neon credentials work across the AI Gateway's model catalog. Messages flagged for review can be sent to a more capable model, such as Claude Opus 5.5 (`claude-opus-5-5`) or GPT-6 Astra (`gpt-6-astra`), for a second assessment before you make the final decision. See [AI Gateway models](/docs/ai-gateway/models).
+- **Use hybrid approaches:** Extend the classification step with checks for conditions that deterministic rules can reliably detect, such as malicious links or banned words.
 
 ## Resources
 
 - [Jev introduction](https://docs.typesafe.ai/introduction)
-- [TypeSafe Example use cases](https://docs.typesafe.ai/concepts/use-case-map)
+- [TypeSafe example use cases](https://docs.typesafe.ai/concepts/use-case-map)
 - [Neon AI Gateway](/docs/ai-gateway/overview)
+- [AI Gateway model reference](/docs/ai-gateway/models)
 
 <NeedHelp/>
