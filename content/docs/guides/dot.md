@@ -5,9 +5,9 @@ summary: >-
   Dot is an AI data analyst that connects to a Lakebase Postgres database and
   answers plain-English questions with SQL-backed tables and charts in Slack,
   Microsoft Teams, or the Dot web app. Use this guide to create a read-only
-  Postgres role for Dot, connect it over a direct (unpooled) connection with
-  the host and database from the Neon Console, choose the tables Dot uses, and
-  add table and column comments that help Dot write accurate queries.
+  Postgres role for Dot, paste your Neon connection string into Dot's Neon
+  connection, choose the tables Dot uses, and add table and column comments
+  that help Dot write accurate queries.
 enableTableOfContents: true
 ---
 
@@ -36,32 +36,27 @@ The password must have at least 60 bits of entropy. See [Manage roles with SQL](
 
 ## Connect Neon to Dot
 
-1. **Get your connection details**
+1. **Copy your connection string**
 
-   In the Neon Console, click **Connect** on your project dashboard, select your branch and database, and turn off **Connection pooling**. Dot needs a direct connection, because it sets a query timeout when it connects and [pooled connections](/docs/connect/connection-pooling) don't accept that setting. The connection string looks similar to the following:
+   In the Neon Console, click **Connect** on your project dashboard. Select your branch, your database, and the `dot_reader` role, then copy the connection string. Pooled and direct connection strings both work. The connection string looks similar to the following:
 
    ```text shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+   postgresql://dot_reader:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-   Dot needs the hostname, which is the part between `@` and `/`, and the database name.
+2. **Open the Neon connection in Dot**
 
-2. **Open the Postgres connection in Dot**
-
-   In Dot, go to **Settings** > **Connections** and click **Postgres**.
+   In Dot, go to **Settings** > **Connections** and click **Neon**.
 
    ![Dot connections page](/docs/guides/dot_connect_1.png)
 
-3. **Enter the connection details**
-   - **Host**: the hostname, for example `ep-cool-darkness-123456.us-east-2.aws.neon.tech`
-   - **Port**: `5432`
-   - **Database**: your database name, for example `dbname`
-   - **Username**: `dot_reader`
-   - **Password**: the password you set for `dot_reader`
-   - **Schemas**: optional. List the schemas Dot should sync, for example `public`. Leave it empty to sync every schema the role can read.
-   - **SSL Mode**: keep the default, **Require**
+3. **Paste the connection string**
+
+   Paste the connection string into **Host**. Dot fills in the host, port, database, username, and password. **Schemas** is optional: list the schemas Dot should sync, for example `public`, or leave it empty to sync every schema the role can read.
 
    ![Neon connection details in Dot](/docs/guides/dot_connect_2.png)
+
+   Dot always uses SSL mode `require`. It also removes `-pooler` from a pooled hostname and connects to the direct host, because it sets a time limit on each query and [Neon's connection pooler](/docs/connect/connection-pooling) doesn't accept that limit as a startup setting.
 
 4. **Connect**
 
@@ -73,7 +68,7 @@ If you restrict access with [IP Allow](/docs/introduction/ip-allow), add Dot's I
 
 ## Choose the tables Dot uses
 
-After the first sync, open **Model** in Dot. Under **Data Sources**, turn on the tables Dot should use for answers. On a larger database, Dot starts with only a few tables, so check that the ones your team asks about are on.
+After the first sync, open **Model** in Dot. Under **Data Sources**, turn on the tables Dot should use for answers. Dot answers only from tables that are on. If Neon is the first database your team connects to Dot, Dot turns on up to 10 tables that look most useful and lists them at the end of the sync log. Otherwise, new tables start off.
 
 ![Choosing tables in Dot](/docs/guides/dot_model.png)
 
@@ -105,6 +100,6 @@ Dot picks up new comments the next time it syncs the connection.
 ## What's next?
 
 - Add Dot to [Slack](https://docs.getdot.ai/integrations/slack-and-teams/slack) or [Microsoft Teams](https://docs.getdot.ai/integrations/slack-and-teams/microsoft-teams) so your team can ask questions where they already work.
-- Learn more about the [Postgres connection in Dot](https://docs.getdot.ai/integrations/databases/postgres).
+- Learn more about the [Neon connection in Dot](https://docs.getdot.ai/integrations/databases/neon).
 
 <NeedHelp/>
