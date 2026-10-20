@@ -46,6 +46,10 @@ const META = {
     desc: 'Ask the Neon assistant a question from the terminal.',
     examples: ['neon ask --prompt "How do schema-only branches work?"'],
   },
+  docs: {
+    desc: 'Search neon.com docs, guides, and more from the terminal.',
+    examples: ['neon docs search "reset a branch"'],
+  },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],

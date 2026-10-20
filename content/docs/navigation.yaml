@@ -1339,6 +1339,10 @@
                   slug: cli/ask
                   tag: new
                   tagTheme: green
+                - title: docs
+                  slug: cli/docs
+                  tag: new
+                  tagTheme: green
                 - title: mcp
                   slug: cli/mcp
                   tag: new

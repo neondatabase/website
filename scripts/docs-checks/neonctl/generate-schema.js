@@ -104,9 +104,11 @@ function unwrapExpression(node) {
 }
 
 // Builds a map of module-level `const name = { ... }` object literals
-// (so spreads like `.options({ ...settingsFlags })` resolve) and
+// (so spreads like `.options({ ...settingsFlags })` resolve),
 // `const name = [ ... ]` string arrays (so `${REGIONS.join(', ')}`
-// interpolations resolve).
+// interpolations resolve), and string/number literals (so a describe or
+// default held in a const, like docs.ts's `SEARCH_DESCRIBE` and
+// `default: DEFAULT_LIMIT`, resolves).
 function collectModuleConsts(sf) {
   const consts = new Map();
   sf.forEachChild((node) => {
@@ -114,7 +116,13 @@ function collectModuleConsts(sf) {
     for (const decl of node.declarationList.declarations) {
       if (!ts.isIdentifier(decl.name) || !decl.initializer) continue;
       const init = unwrapExpression(decl.initializer);
-      if (init && (ts.isObjectLiteralExpression(init) || ts.isArrayLiteralExpression(init))) {
+      if (
+        init &&
+        (ts.isObjectLiteralExpression(init) ||
+          ts.isArrayLiteralExpression(init) ||
+          ts.isNumericLiteral(init) ||
+          stringLiteralValue(init) !== undefined)
+      ) {
         consts.set(decl.name.text, init);
       }
     }
@@ -197,8 +205,11 @@ function resolveStringValue(expr, consts) {
   // parameters (`windowOptions(defaultWindow)`) whose value was substituted into
   // `consts` as a string-literal node by resolveOptionsObject.
   if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
-    const bound = stringLiteralValue(consts.get(e.text));
+    const node = consts.get(e.text);
+    const bound = stringLiteralValue(node);
     if (bound !== undefined) return bound;
+    // Number consts interpolated into a describe: `(1-${MAX_LIMIT})`.
+    if (node && ts.isNumericLiteral(node)) return node.text;
   }
   if (ts.isPropertyAccessExpression(e) && ts.isIdentifier(e.name)) {
     const target = resolveSpecObject(e.expression, consts);
@@ -260,10 +271,16 @@ function resolveStringValue(expr, consts) {
 
 // Resolves a literal default value: string, number, boolean, or array of
 // strings. Non-literal defaults (function calls, env lookups) come back as
-// `{ text }` so doc generation can show the source expression.
-function literalValue(expr) {
+// `{ text }` so doc generation can show the source expression. A bare
+// identifier bound to a literal const (`default: DEFAULT_LIMIT`) resolves
+// through `consts`.
+function literalValue(expr, consts) {
   const e = unwrapExpression(expr);
   if (!e) return undefined;
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const bound = literalValue(consts.get(e.text));
+    if (bound && 'value' in bound) return bound;
+  }
   const s = stringLiteralValue(e);
   if (s !== undefined) return { value: s };
   if (ts.isNumericLiteral(e)) return { value: Number(e.text) };
@@ -321,6 +338,13 @@ function parseOptionSpec(expr, consts) {
   if (booleanProp && booleanProp.initializer.kind === ts.SyntaxKind.TrueKeyword) {
     spec.type = 'boolean';
   }
+  // yargs declares a repeatable option either as `type: 'array'` or as
+  // `type: 'string', array: true`. Normalize the second form so both render as
+  // "array" in the options table.
+  const arrayProp = getProp(obj, 'array');
+  if (arrayProp && arrayProp.initializer.kind === ts.SyntaxKind.TrueKeyword) {
+    spec.type = 'array';
+  }
   // yargs accepts `describe`, `description`, and `desc`; parameters.gen.ts
   // uses `description`.
   for (const key of ['describe', 'description', 'desc']) {
@@ -337,7 +361,7 @@ function parseOptionSpec(expr, consts) {
   }
   const defaultProp = getProp(obj, 'default');
   if (defaultProp) {
-    const d = literalValue(defaultProp.initializer);
+    const d = literalValue(defaultProp.initializer, consts);
     if (d && 'value' in d) spec.default = d.value;
     else if (d && d.text) spec.defaultText = d.text;
   }
