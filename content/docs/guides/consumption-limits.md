@@ -42,6 +42,10 @@ Here are the relevant metrics that you can track in order to understand your use
 
 These consumption metrics represent total cumulative usage across all branches and computes in a given project, accrued so far in a given monthly billing period. Metrics are refreshed on the first day of the following month, when the new billing period starts.
 
+<Admonition type="note" title="Not for billing">
+These fields are approximate and not intended for billing or metering. For billing, use the [consumption history API](/docs/guides/consumption-metrics) (`/consumption_history/v2/projects`).
+</Admonition>
+
 #### Branch-level metric
 
 There is an additional value that you also might want to track: `logical_size`, which gives you the current size of a particular branch.

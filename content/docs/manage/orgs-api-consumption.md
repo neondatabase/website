@@ -142,6 +142,10 @@ curl --request GET \
 
 See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.
 
+<Admonition type="note" title="Not for billing">
+These fields are approximate and not intended for billing or metering. For billing, use the [consumption history API](/docs/guides/consumption-metrics) (`/consumption_history/v2/projects`).
+</Admonition>
+
 ## Metric definitions
 
 - **active_time_seconds**: The number of seconds the project’s computes have been active during the period.
