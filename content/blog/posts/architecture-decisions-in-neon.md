@@ -36,6 +36,10 @@ seo:
 
 ![Architecture decisions in Neon](https://cdn.neonapi.io/public/images/pages/blog/architecture-decisions-in-neon/architecture-decisions-in-neon-1-1024x538-a53a6eb3.jpg)
 
+<Admonition type="note" title="This design is now the lakebase architecture">
+This 2022 post captures the early architecture decisions behind Neon: separate storage and compute, stream WAL to a dedicated safekeeper service, reconstruct pages on demand, and keep durable history in object storage. That design became what we now call the **lakebase architecture**, the foundation of [Lakebase Postgres](/docs/get-started/why-neon) whether you access it via Neon or via Databricks. For how the system works today, see [Lakebase architecture](/docs/introduction/architecture-overview).
+</Admonition>
+
 The idea behind Neon is to create a new serverless Postgres service with a modern cloud-native architecture. When building for the cloud it usually is a good idea to separate storage and compute. For operational databases such design was first introduced by AWS Aurora <sup><a href="#fn-1">1</a></sup>, followed by many others <sup><a href="#fn-2">2</a><a href="#fn-3"> 3</a></sup>, however none of the implementations were open source and native to Postgres.
 
 We wanted to make Neon the best platform to run Postgres on. As we started to figure out the details we needed to understand what exactly the architecture should look like for an OLTP cloud database. We also knew that we couldn’t deviate from Postgres. People choose Postgres for many reasons. It’s open source, feature-rich, and has a large ecosystem of extensions and tools. But increasingly, it’s simply the default choice. There are a lot of databases out there with different strengths and weaknesses, but unless you have a particular reason to pick something else, you should just go with Postgres. Therefore, we don’t want to compete with Postgres itself or maintain a fork. We understood that Neon would only work in the market if it doesn’t fork Postgres and gives users 100% compatibility with their apps written for Postgres.
