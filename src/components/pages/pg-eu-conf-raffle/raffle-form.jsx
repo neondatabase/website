@@ -45,7 +45,7 @@ const RaffleForm = () => {
       if (submissionRef.current?.fields !== fields) {
         submissionRef.current = { fields, requestId: crypto.randomUUID() };
       }
-      const response = await fetch('/api/pg-us-conf-raffle', {
+      const response = await fetch('/api/pg-eu-conf-raffle', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, requestId: submissionRef.current.requestId }),
@@ -74,13 +74,13 @@ const RaffleForm = () => {
           </h2>
           <p className="mt-4 max-w-sm text-base leading-normal tracking-tight text-gray-new-70">
             Your entry has been received. We&apos;ll contact you at the email address you provided
-            if you win the $500 LEGO gift card.
+            if you win the $400 LEGO gift card.
           </p>
         </div>
       ) : (
         <form
           className="relative z-10 grid grid-cols-2 gap-6 gap-y-6 xl:gap-5 md:grid-cols-1"
-          id="pg-us-conf-raffle-form"
+          id="pg-eu-conf-raffle-form"
           data-test="raffle-form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
