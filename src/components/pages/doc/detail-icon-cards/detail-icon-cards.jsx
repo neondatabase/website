@@ -245,6 +245,7 @@ const DetailIconCards = ({
           description,
           icon,
           target,
+          lockup,
           tag,
           tagTheme = 'gray',
           theme: childTheme,
@@ -268,12 +269,18 @@ const DetailIconCards = ({
           ? GHOST_CARD_THEME
           : CARD_THEMES[cardThemeName] || CARD_THEMES['green-dotted'];
 
+        // Lockup variant (only the docs home uses `lockup`): its own padding and
+        // type scale. Every class below is gated on this flag, so cards without
+        // a lockup render exactly as before.
+        const isLockup = !withNumbers && !!lockup && !!Icon;
+
         return (
           <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
                 cols === 3 && 'p-4 md:p-5',
+                isLockup && 'px-[22px] pt-6 pb-[26px] md:px-[22px] md:pt-6 md:pb-[26px]',
                 withNumbers &&
                   'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
                 !withNumbers && cardTheme.card
@@ -310,6 +317,23 @@ const DetailIconCards = ({
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
                   Step {index + 1}
                 </span>
+              ) : isLockup ? (
+                // Optional product lockup: the icon plus a product name on one
+                // line, in the slot the icon alone otherwise occupies. The
+                // icons are drawn on a 16px grid, so the stroke is set as a
+                // non-scaling 1.46px (the spec's 1.75 on a 24px grid, at 20px).
+                <span className="mb-7 flex items-center gap-2">
+                  <Icon
+                    className={cn(
+                      'size-5 shrink-0 [&_*]:[stroke-width:1.46] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]',
+                      cardTheme.icon,
+                      forceGreenIcon && 'text-green-44 dark:text-green-44'
+                    )}
+                  />
+                  <span className="text-[13px] leading-snug font-normal tracking-normal text-[#6B6F77] dark:text-gray-new-60">
+                    {lockup}
+                  </span>
+                </span>
               ) : Icon ? (
                 <Icon
                   className={cn(
@@ -343,11 +367,13 @@ const DetailIconCards = ({
                   )}
                 </span>
               )}
-              <div className="flex flex-col gap-1.5">
+              <div className={cn('flex flex-col gap-1.5', isLockup && 'gap-2')}>
                 <h3
                   className={cn(
                     'text-lg leading-snug font-medium tracking-extra-tight',
-                    !withNumbers && cardTheme.title
+                    !withNumbers && cardTheme.title,
+                    isLockup &&
+                      'text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white'
                   )}
                 >
                   {children}
@@ -356,7 +382,9 @@ const DetailIconCards = ({
                   className={cn(
                     'text-base leading-snug tracking-extra-tight',
                     cols === 3 && 'text-[0.9375rem] md:text-base/snug',
-                    !withNumbers && cardTheme.description
+                    !withNumbers && cardTheme.description,
+                    isLockup &&
+                      'text-base leading-[1.5] font-normal text-[#6B6F77] dark:text-gray-new-60 md:text-base/[1.5]'
                   )}
                 >
                   {description}

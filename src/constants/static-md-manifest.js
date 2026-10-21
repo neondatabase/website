@@ -3,6 +3,7 @@
 // Regenerate with: npm run generate:static-md-manifest
 
 export const STATIC_MD_PATHS = [
+  '/agent-setup.md',
   '/agentic-provisioning-llm-context.md',
   '/auth.md',
   '/docs/ai/skills/neon-ai-gateway/SKILL.md',

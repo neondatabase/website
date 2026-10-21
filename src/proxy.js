@@ -300,18 +300,10 @@ async function handleProxy(req, analytics) {
       }
     }
 
-    // Bare /docs has no page of its own. Agents / Accept: markdown are handled above
-    // (served /docs/llms.txt); everyone else (browsers) is redirected to the intro.
-    // This redirect lives here, not in next.config, so it runs after the markdown check.
-    // Note: trailing slash (/docs/) intentionally not handled here — Next.js
-    // normalizes trailing slashes before middleware on most paths, and the matcher
-    // pattern '/docs' does not match '/docs/', so it falls through harmlessly.
-    if (pathname === '/docs') {
-      const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
-      // The /docs response is content-negotiated (agents/markdown get llms.txt above),
-      // so the redirect must vary on both negotiation inputs to stay correct in shared caches.
-      return applyNegotiationVary(res);
-    }
+    // Bare /docs is the docs front page (src/app/(docs)/docs/page.jsx). Agents /
+    // Accept: markdown are handled above (served /docs/llms.txt); browsers fall
+    // through to the page. Because /docs is content-negotiated, the doc headers
+    // applied below set Vary on both negotiation inputs to keep shared caches correct.
 
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
     // Negotiated Markdown responses vary on Accept and User-Agent (applyDocHeaders above).
@@ -415,7 +407,7 @@ export const config = {
     '/object-storage', // Agent-friendly Object Storage page
     '/auth', // Agent-friendly Auth product page
     '/lakebase', // Agent-friendly Lakebase page
-    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
+    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the docs front page
     '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
     '/blog/:slug.md', // Individual blog post markdown
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
