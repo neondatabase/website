@@ -58,7 +58,9 @@ function App() {
 | `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                                  | See example below                                        |
 | `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                                  | `avatar={{ size: 256, extension: 'webp' }}`              |
 | `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings                           | See example below                                        |
+| `credentials`                | `boolean`                | Set to `false` to hide password sign-in                                  | `credentials={false}`                                    |
 | `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                                              | `credentials={{ forgotPassword: true }}`                 |
+| `emailOTP`                   | `boolean`                | Enable email one-time password sign-in                                   | `emailOTP`                                               |
 | `magicLink`                  | `boolean`                | Enable passwordless magic link sign-in option                            | `magicLink`                                              |
 
 ### Enable OAuth Providers
@@ -144,6 +146,14 @@ function App() {
     fields: ['name', 'company'],
   }}
 >
+```
+
+**Email OTP without password sign-in:**
+
+```tsx
+<NeonAuthUIProvider authClient={authClient} credentials={false} emailOTP>
+  {/* Your app */}
+</NeonAuthUIProvider>
 ```
 
 For complete prop documentation, see the TypeScript types exported from `@neondatabase/neon-js/auth/react`.
