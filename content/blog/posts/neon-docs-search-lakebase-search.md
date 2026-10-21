@@ -63,6 +63,8 @@ The service runs entirely on Neon. neon.com already publishes every page as mark
 
 A [Neon Function](https://neon.com/docs/compute/functions/overview) runs a [Hono](https://hono.dev/) API that the website's search route calls. Whenever a docs change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function, which re-indexes them.
 
+![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
+
 The most interesting decision came from the search box itself. Search-as-you-type sends a request on every keystroke and calling an embedding model on every keystroke is too slow. So we cache the semantic part. For common queries, we precompute the results offline with hybrid search plus an LLM rerank. Anything the cache hasn't seen falls back to BM25 alone. Either way, the Function answers in a few milliseconds.
 
 Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For a search box that updates on every keystroke, I'll take the speed.
