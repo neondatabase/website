@@ -137,6 +137,8 @@ updatedOn: '2026-10-05T14:29:40.590Z'
 
 <a href="/docs/guides/logical-replication-databricks" title="Databricks" description="Replicate data from Neon to Databricks with Lakeflow Connect" icon="databricks"></a>
 
+<a href="/docs/guides/logical-replication-dbconvert-streams" title="DBConvert Streams" description="Replicate data from Neon with DBConvert Streams" icon="dbconvert-streams"></a>
+
 <a href="/docs/guides/logical-replication-decodable" title="Decodable" description="Replicate data from Neon with Decodable" icon="decodable"></a>
 
 <a href="/docs/guides/logical-replication-estuary-flow" title="Estuary Flow" description="Replicate data from Neon with Estuary Flow" icon="estuary"></a>
