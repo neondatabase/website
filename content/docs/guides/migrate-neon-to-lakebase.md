@@ -5,18 +5,21 @@ summary: >-
   Step-by-step migration from Neon Serverless Postgres to Databricks Lakebase
   Postgres using pg_dump and pg_restore, covering the Neon-specific ownership
   and ACL mismatch that requires --no-owner and --no-acl flags during restore.
-  Use this guide when moving a Neon database to Lakebase. Logical replication
-  from Neon to Lakebase is not supported. For pg_restore, use a native Postgres
-  password role because Lakebase OAuth tokens expire approximately every hour.
+  Use this guide when moving a Neon database to Lakebase. For a lower-downtime
+  migration, Lakebase can also subscribe to a Neon publication using logical
+  replication. For pg_restore, use a native Postgres password role because
+  Lakebase OAuth tokens expire approximately every hour.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-21T10:42:06.636Z'
 ---
 
 This guide describes how to migrate a **Neon** database to **Databricks Lakebase Postgres** using **`pg_dump`** and **`pg_restore`**.
 
 <Admonition type="note" title="Logical replication">
-Logical replication from Neon to **Lakebase** is not supported. However, you can replicate data from Neon to **Databricks Lakehouse**. See [Replicate data to Databricks with Lakeflow Connect](/docs/guides/logical-replication-databricks).
+If you need to keep downtime low, you can migrate with logical replication instead. Lakebase can subscribe to a publication on your Neon database, copy the existing data, and keep it current until you cut over. To set up the Neon side, see [Get started with logical replication](/docs/guides/logical-replication-guide). To subscribe from Lakebase, see [Replicate data into Lakebase](https://docs.databricks.com/aws/en/oltp/projects/logical-replication-subscription). Logical replication into Lakebase runs over public networking. Private Link isn't supported.
+
+To replicate data from Neon to the **Databricks Lakehouse** instead, see [Replicate data to Databricks with Lakeflow Connect](/docs/guides/logical-replication-databricks).
 </Admonition>
 
 ## Prerequisites
