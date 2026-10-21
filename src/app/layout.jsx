@@ -5,6 +5,7 @@ import Script from 'next/script';
 
 import SectionScroll from 'components/shared/inkeep-trigger/section-scroll';
 import RiveWasm from 'components/shared/rive-wasm';
+import WebMcpTools from 'components/shared/webmcp-tools';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
@@ -52,6 +53,7 @@ const RootLayout = ({ children }) => (
         </HomepageVisitProvider>
       </ThemeProvider>
       <SectionScroll />
+      <WebMcpTools />
       <Analytics />
     </body>
   </html>
