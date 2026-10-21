@@ -15,7 +15,7 @@ const RaffleHero = () => (
         <div className="flex max-w-[544px] flex-1 flex-col lg:contents">
           <div>
             <SectionLabel className="mb-5 lg:mb-[18px] md:mb-4" theme="white">
-              PGConf US · New York 2026
+              PGConf EU · Valencia, Spain 2026
             </SectionLabel>
             <Heading
               className="text-balance lg:max-w-2xl md:!text-[36px] xs:!text-[32px]"
@@ -23,7 +23,7 @@ const RaffleHero = () => (
               size="md-new"
               theme="white"
             >
-              Enter to win a $500&nbsp;LEGO gift card
+              Enter to win a $400&nbsp;LEGO gift card
             </Heading>
             <p className="mt-7 max-w-[470px] text-lg leading-normal tracking-tight text-pretty text-gray-new-70 xl:text-base lg:mt-5">
               Register for the Databricks / Neon raffle. Leave your details for a chance to bring
