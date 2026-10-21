@@ -628,7 +628,7 @@ const { data, error } = await client.from('todos').select('*, owner:users(*)');
 
 - Authentication token is included automatically
 - Can insert single or multiple rows
-- Returns inserted data by default
+- Returns the inserted rows only when you chain `.select()`
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
