@@ -71,6 +71,10 @@ In summary, two factors were at play here:
 
 In the end, I don't think that the delay in shipping Postgres 19 is particularly concerning. It is not a long delay in the grand scheme of things, and it emerges directly from the project's concern for quality.
 
+<blockquote>
+<p><strong>“I became a Postgres developer partly because the Postgres code base is some of the cleanest and highest-quality code upon which I have ever had the privilege to work. The recent success of AI in finding bugs in that code base does not change my high estimation of it.”</strong></p>
+</blockquote>
+
 The long-term picture is less clear and in some ways more troubling: given that we have forty years of bugs that humans were unable to find but LLMs are quite capable of discovering, how are we ever going to catch up, and how will Postgres continue to innovate?
 
 Right now, I'm not sure. What I do know is that I, and many others, are working really hard to figure it out.
