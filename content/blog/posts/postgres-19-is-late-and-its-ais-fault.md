@@ -32,11 +32,13 @@ This year is going to be different. Postgres 19 most likely won't be released un
 
 Moreover, this year, several rather large features were reverted quite late in the beta period: [UPDATE/DELETE FOR PORTION OF, SQL Property Graph Queries (SQL/PGQ), and ALTER TABLE … MERGE PARTITION/SPLIT PARTITION](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/) were [all reverted](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/) between August 27 and September 15.
 
-While major feature reverts are not especially uncommon immediately after feature freeze, which each year occurs on April 8, it is unusual to see multiple major features get pulled from the release at such a late date. So, what happened?
+While major feature reverts are not especially uncommon immediately after feature freeze, which each year occurs on April 8, it is unusual to see multiple major features get pulled from the release at such a late date. 
+
+So, what happened? Short answer: LLMs.
 
 ## LLMs made decades of Postgres bugs easy to find
 
-LLMs happened. All software contains bugs, and Postgres' code base is large, complex, and old. Our git history (converted from CVS!) now reaches back more than 30 years, and the first code was written a decade before that.
+All software contains bugs, and Postgres' code base is large, complex, and old. Our git history (converted from CVS!) now reaches back more than 30 years, and the first code was written a decade before that.
 
 So, there's a huge amount of code, and that code contains a huge number of bugs. That's always been true, and it hasn't stopped Postgres from being popular or successful.
 
