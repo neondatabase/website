@@ -23,7 +23,7 @@ The Access Key ID is wrong, missing, or the credential has been revoked.
 
 The Secret Access Key is wrong.
 
-**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
+**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the full value, `nsk_live_` followed by 64 hex characters, not the `api_token`. Keep the `nsk_live_` prefix. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
 
 ### `403 AccessDenied`: missing scope
 
