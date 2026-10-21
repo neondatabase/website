@@ -13,8 +13,11 @@ categories:
 authors:
   - robert-haas
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-late-and-its-ais-fault/cover.jpg
+  alt: >-
+    An hourglass with sand running out, labeled "+61% back-patches" at the top
+    and "3 features reverted" at the bottom
 isFeatured: false
 seo:
   title: Postgres 19 is late, and it's AI's fault - Neon
@@ -23,7 +26,8 @@ seo:
   noindex: false
   ogTitle: Postgres 19 is late, and it's AI's fault - Neon
   ogDescription: LLMs are finding bugs faster than committers can fix them
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/postgres-19-is-late-and-its-ais-fault/cover.jpg
 ---
 
 Over the past decade, the timing of Postgres major releases had become very predictable: no earlier than the middle of September, and no later than the middle of October.
