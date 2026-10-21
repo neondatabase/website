@@ -1589,6 +1589,8 @@
                   slug: guides/grafbase
                 - title: Hasura
                   slug: guides/hasura
+                - title: Intellrise
+                  slug: guides/intellrise
                 - title: PostgREST
                   slug: guides/postgrest
                 - title: WunderGraph

@@ -117,6 +117,8 @@ updatedOn: '2026-10-05T14:29:40.590Z'
 
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
 
+<a href="/docs/guides/intellrise" title="Intellrise" description="Query Lakebase Postgres in plain English with Intellrise" icon="database"></a>
+
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
 
 <a href="/docs/guides/wundergraph" title="Wundergraph" description="Use Wundergraph with Neon" icon="wundergraph"></a>
