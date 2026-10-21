@@ -11,13 +11,13 @@ summary: >-
   Lakebase OAuth tokens expire approximately every hour.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-21T10:42:06.636Z'
+updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
 This guide describes how to migrate a **Neon** database to **Databricks Lakebase Postgres** using **`pg_dump`** and **`pg_restore`**.
 
 <Admonition type="note" title="Logical replication">
-If you need to keep downtime low, you can migrate with logical replication instead. Lakebase can subscribe to a publication on your Neon database, copy the existing data, and keep it current until you cut over. To set up the Neon side, see [Get started with logical replication](/docs/guides/logical-replication-guide). To subscribe from Lakebase, see [Replicate data into Lakebase](https://docs.databricks.com/aws/en/oltp/projects/logical-replication-subscription). Logical replication into Lakebase runs over public networking. Private Link isn't supported.
+If you need to keep downtime low, you can migrate with logical replication instead. Lakebase can subscribe to a publication on your Neon database, copy the existing data, and keep it current until you cut over. See [Replicate data from Neon to Lakebase Postgres on Databricks](/docs/guides/logical-replication-neon-to-lakebase).
 
 To replicate data from Neon to the **Databricks Lakehouse** instead, see [Replicate data to Databricks with Lakeflow Connect](/docs/guides/logical-replication-databricks).
 </Admonition>
@@ -88,6 +88,7 @@ After you have **tested** the Lakebase database (for example with queries and ap
 **Neon**
 
 - [Region migration](/docs/import/region-migration)
+- [Replicate data from Neon to Lakebase Postgres on Databricks](/docs/guides/logical-replication-neon-to-lakebase)
 - [Migrate data from Postgres](/docs/import/migrate-from-postgres)
 
 **Databricks Lakebase**
