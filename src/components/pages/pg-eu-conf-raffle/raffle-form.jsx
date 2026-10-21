@@ -175,7 +175,7 @@ const RaffleForm = () => {
                   <Link
                     className="border-b border-green-45/40 hover:border-green-45"
                     theme="green"
-                    to="https://forms.gle/C7TgUq7nPLA2L5d76"
+                    to="https://docs.google.com/forms/d/e/1FAIpQLScAZjfx6TZN4cQQ7VKH6F1PXztK_7YNXL4ZXqF_-9oKivpw6g/viewform"
                   >
                     enter using Google Forms
                   </Link>
