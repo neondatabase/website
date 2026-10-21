@@ -44,7 +44,8 @@ const Footer = ({ hasThemesSupport = false }) => (
             </span>
           </div>
 
-          {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
+          {/* On desktop the docs header's overflow menu carries the theme switch. */}
+          {hasThemesSupport && <ThemeSelect className="mb-8 hidden lg:mb-6 lg:flex" />}
 
           <p className="max-w-146 text-[0.8125rem]/snug tracking-extra-tight text-gray-new-40">
             © Neon 2026. All rights reserved. Apache, Apache Spark, Spark, the Spark Logo, Apache

@@ -8,7 +8,7 @@ const CommandHeading = AnchorHeading('h2');
 
 const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
   <div className="prose-doc post-content prose mt-8 max-w-none dark:prose-invert xs:prose-code:break-words">
-    <div id="about" className="anchor-heading scroll-mt-32" aria-hidden />
+    <div id="about" className="anchor-heading scroll-mt-20" aria-hidden />
     {row.isEmbedding ? (
       <p>
         Neon AI Gateway provides {row.name} by {row.providerName}. It returns {row.dimensions}

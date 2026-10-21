@@ -445,9 +445,13 @@ const FoundationCard = () => (
   </div>
 );
 
+// Left gutter = max(64px, 200px - side gutter), so the H1 meets the docs
+// header's "Get started" at narrow desktop widths. The side gutter is the
+// layout Container's 32px padding plus this <main>'s centering margin, measured
+// against the @container wrapper (the Container's content box).
 const DocsHome = () => (
-  <div className="w-full font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
-    <main className="mx-auto max-w-[1296px] px-16 lg:px-10 md:px-8 sm:px-5">
+  <div className="@container w-full font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
+    <main className="mx-auto max-w-[1296px] px-16 pl-[max(64px,calc(168px_-_max(0px,(100cqw_-_1296px)/2)))] lg:px-10 md:px-8 sm:px-5">
       {/*
         Hero: text half on the left, composer box on the right, side by side on
         desktop and stacked (text then box) at lg and below. This hero uses its

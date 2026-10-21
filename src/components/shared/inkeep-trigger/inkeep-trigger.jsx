@@ -23,7 +23,12 @@ const SECTION_CATEGORIES = {
 };
 const DOCS_CATEGORIES = ['docs'];
 
-const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
+const InkeepTrigger = ({
+  className = null,
+  isNotFoundPage = false,
+  isDocsHeader = false,
+  docPageType = null,
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
@@ -110,9 +115,14 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         className={className}
         handleClick={() => setIsSearchOpen(true)}
         isNotFoundPage={isNotFoundPage}
+        isDocsHeader={isDocsHeader}
       />
       {!isNotFoundPage && (
-        <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
+        <InkeepAIButton
+          className="shrink-0"
+          handleClick={() => setIsChatOpen(true)}
+          isDocsHeader={isDocsHeader}
+        />
       )}
       <SiteSearchModal
         isOpen={isSearchOpen}
@@ -137,6 +147,7 @@ InkeepTrigger.propTypes = {
   className: PropTypes.string,
   topOffset: PropTypes.number,
   isNotFoundPage: PropTypes.bool,
+  isDocsHeader: PropTypes.bool,
   docPageType: PropTypes.string,
 };
 
