@@ -53,7 +53,7 @@ function App() {
 | ---------------------------- | ------------------------ | ------------------------------------------------------------------------ | -------------------------------------------------------- |
 | `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Managed Better Auth client instance                   | `authClient={authClient}`                                |
 | `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (for example, Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
-| `navigate`                   | `(href: string) => void` | Navigation function for React Router                                     | `navigate={navigate}`                                    |
+| `navigate`                   | `(href: string) => void` | Navigation function for React Router or TanStack Router                  | `navigate={navigate}`                                    |
 | `Link`                       | `ComponentType`          | Custom Link component for routing                                        | `Link={RouterLink}`                                      |
 | `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                                  | See example below                                        |
 | `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                                  | `avatar={{ size: 256, extension: 'webp' }}`              |
@@ -105,6 +105,39 @@ function App() {
       social={{
         providers: ['google', 'github', 'vercel'],
       }}
+    >
+      {/* Your app */}
+    </NeonAuthUIProvider>
+  );
+}
+```
+
+### TanStack Router Integration
+
+If using TanStack Router, pass the `navigate` function and a custom `Link` component:
+
+```tsx
+import { NeonAuthUIProvider } from '@neondatabase/auth-ui';
+import { Link as RouterLink, useNavigate } from '@tanstack/react-router';
+import type { AnchorHTMLAttributes } from 'react';
+import { authClient } from './auth';
+
+type AuthLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
+  href: string;
+};
+
+function AuthLink({ href, ...props }: AuthLinkProps) {
+  return <RouterLink to={href} {...props} />;
+}
+
+function App() {
+  const navigate = useNavigate();
+
+  return (
+    <NeonAuthUIProvider
+      authClient={authClient}
+      navigate={(href) => navigate({ href })}
+      Link={AuthLink}
     >
       {/* Your app */}
     </NeonAuthUIProvider>

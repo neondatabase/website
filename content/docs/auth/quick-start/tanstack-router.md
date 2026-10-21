@@ -136,6 +136,8 @@ Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. 
 
 Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
 
+For a full client-side navigation example, see [TanStack Router integration](/docs/auth/reference/ui-components#tanstack-router-integration).
+
 <details>
 <summary>Example: Adding optional props</summary>
 
@@ -143,7 +145,7 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 <NeonAuthUIProvider
   authClient={authClient}
   social={{ providers: ['google', 'github', 'vercel'] }}
-  navigate={navigate}
+  navigate={(href) => navigate({ href })}
   credentials={{ forgotPassword: true }}
 >
   {children}
