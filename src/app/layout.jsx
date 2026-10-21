@@ -39,6 +39,13 @@ const RootLayout = ({ children }) => (
           {`(function c(){try{var s=new WebSocket('ws://localhost:3549');s.onmessage=function(e){if(e.data==='reload')location.reload()};s.onclose=function(){setTimeout(c,1000)};s.onerror=function(){s.close()}}catch(e){setTimeout(c,1000)}})()`}
         </Script>
       )}
+      {/* Chrome origin-trial token that turns on WebMCP (document.modelContext) on
+          neon.com and its subdomains; other origins ignore it. Expires 2027-03-30.
+          Renew at https://developer.chrome.com/origintrials. */}
+      <meta
+        httpEquiv="origin-trial"
+        content="AlPoMMWZF+IAU3oyUxT98E0KWL4GO2m88YxAsoEjMLmDy+t6l5+d2Fn1bn73a6G5uwWDTzdl5CZexnXeFdyICwwAAABbeyJvcmlnaW4iOiJodHRwczovL25lb24uY29tOjQ0MyIsImZlYXR1cmUiOiJXZWJNQ1AiLCJleHBpcnkiOjE4MDYzNjQ4MDAsImlzU3ViZG9tYWluIjp0cnVlfQ=="
+      />
       <link rel="preconnect" href={LINKS.console} />
       <RiveWasm />
     </head>
