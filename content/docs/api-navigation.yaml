@@ -505,6 +505,9 @@
     - title: "Retrieve project details"
       slug: reference/api/projects/get-project
       method: GET
+    - title: "Retrieve projects count"
+      slug: reference/api/projects/count-projects
+      method: GET
     - title: "Revoke project access"
       slug: reference/api/projects/revoke-permission-from-project
       method: DELETE
