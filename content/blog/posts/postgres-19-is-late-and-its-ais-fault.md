@@ -50,15 +50,15 @@ What's different now is that it's become vastly easier to find those bugs. Fixin
 
 ## Back-patched fixes are up more than 60% vs 2025
 
-Between April 8th, 2025 and September 25, 2025, there were 1037 commits to PostgreSQL's master branch and 724 commits to REL_18_STABLE. In 2026, during the same date range, there were 1443 commits to the master branch and 1169 commits to REL_19_STABLE.
+Between April 8th, 2025 and September 25, 2025, there were 1037 commits to PostgreSQL's [master branch](https://git.postgresql.org/gitweb/?p=postgresql.git;a=shortlog;h=refs/heads/master) and 724 commits to [REL_18_STABLE](https://git.postgresql.org/gitweb/?p=postgresql.git;a=shortlog;h=refs/heads/REL_18_STABLE). In 2026, during the same date range, there were 1443 commits to the master branch and 1169 commits to [REL_19_STABLE](https://git.postgresql.org/gitweb/?p=postgresql.git;a=shortlog;h=refs/heads/REL_19_STABLE).
 
-In other words, if you look at the number of commits that went into the master branch only between feature freeze and September 25th, it actually declined slightly from last year to this year, but the number of back-patched commits jumped by more than 60%.
+In other words, if you look at the number of commits that went into the master branch only between feature freeze and September 25th, it actually declined slightly from last year to this year, but the number of [back-patched](https://www.postgresql.org/support/versioning/) commits jumped by more than 60%.
 
-It's possible that some of this jump is the result of committers making more mistakes this year than they did last year, but I don't think anyone who works on the project really believes that's the main cause. Rather, it seems likely that Postgres committers were about as conservative in 2026 as they were in preceding years, but a lot more of the mistakes they made were quickly found by LLMs.
+It's possible that some of this jump is the result of committers making more mistakes this year than they did last year, but I don't think anyone who works on the project really believes that's the main cause. Rather, it seems likely that [Postgres committers](https://wiki.postgresql.org/wiki/Committers) were about as conservative in 2026 as they were in preceding years, but a lot more of the mistakes they made were quickly found by LLMs.
 
-And it isn't just mistakes in the latest release. In the same time period, during 2025, there were 248 commits to REL_17_STABLE, and during 2026, there were 433 commits to REL_18_STABLE. In other words, the number of commits being back-patched not just to the release in progress but also to at least one prior release jumped by more than 74% in a single year.
+And it isn't just mistakes in the latest release. In the same time period, during 2025, there were 248 commits to [REL_17_STABLE](https://git.postgresql.org/gitweb/?p=postgresql.git;a=shortlog;h=refs/heads/REL_17_STABLE), and during 2026, there were 433 commits to REL_18_STABLE. In other words, the number of commits being back-patched not just to the release in progress but also to at least one prior release jumped by more than 74% in a single year.
 
-The reason for this is simply that a huge number of people on the Internet are now reporting bugs in Postgres that they found using LLMs, and the Postgres committers have been very, very busy fixing them.
+The reason for this is simply that a huge number of people on the Internet are now [reporting bugs](https://www.postgresql.org/docs/current/bug-reporting.html) in Postgres that they found using LLMs, and the Postgres committers have been very, very busy fixing them.
 
 ## So, why did the release slip?
 
