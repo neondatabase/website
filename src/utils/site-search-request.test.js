@@ -123,8 +123,8 @@ describe('siteSearchUpstreamHeaders', () => {
   it('tags the request as website and forwards the browser user agent', () => {
     expect(siteSearchUpstreamHeaders(' Mozilla/5.0 (Macintosh) ')).toEqual({
       'content-type': 'application/json',
-      'x-neon-source': 'website',
-      'x-neon-user-agent': 'Mozilla/5.0 (Macintosh)',
+      'x-caller-source': 'website',
+      'x-caller-user-agent': 'Mozilla/5.0 (Macintosh)',
     });
   });
 
@@ -132,7 +132,7 @@ describe('siteSearchUpstreamHeaders', () => {
     for (const userAgent of [null, undefined, '  ']) {
       expect(siteSearchUpstreamHeaders(userAgent)).toEqual({
         'content-type': 'application/json',
-        'x-neon-source': 'website',
+        'x-caller-source': 'website',
       });
     }
   });
