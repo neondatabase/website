@@ -30,7 +30,7 @@ Over the past decade, the timing of Postgres major releases had become very pred
 
 This year is going to be different. Postgres 19 most likely won't be released until November, and it's not impossible that the project could decide to postpone the release further.
 
-Moreover, this year, several rather large features were reverted quite late in the beta period: UPDATE/DELETE FOR PORTION OF, SQL Property Graph Queries (SQL/PGQ), and ALTER TABLE … MERGE PARTITION/SPLIT PARTITION were all reverted between August 27 and September 15.
+Moreover, this year, several rather large features were reverted quite late in the beta period: [UPDATE/DELETE FOR PORTION OF, SQL Property Graph Queries (SQL/PGQ), and ALTER TABLE … MERGE PARTITION/SPLIT PARTITION](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/) were [all reverted](https://www.postgresql.org/about/news/postgresql-19-beta-4-released-3386/) between August 27 and September 15.
 
 While major feature reverts are not especially uncommon immediately after feature freeze, which each year occurs on April 8, it is unusual to see multiple major features get pulled from the release at such a late date. So, what happened?
 
