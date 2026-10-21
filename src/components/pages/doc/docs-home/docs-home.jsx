@@ -46,7 +46,7 @@ const CAPS = [
     phrase: 'file uploads',
     cmds: ['neon buckets create my-bucket'],
     comment: 'Create a bucket for files and uploads',
-    to: '/docs/object-storage/overview',
+    to: '/docs/storage/overview',
     icon: 'data',
   },
   {
@@ -58,7 +58,7 @@ const CAPS = [
     phrase: 'serverless functions',
     cmds: ['neon functions deploy myfunction --src ./index.ts'],
     comment: 'Deploy backend code as a function (point --src at your function file)',
-    to: '/docs/functions/overview',
+    to: '/docs/compute/functions/overview',
     icon: 'code',
   },
   {
@@ -96,7 +96,7 @@ const SEARCH_CARD = {
   title: 'Add search',
   line: 'Vector, full-text, and hybrid search.',
   product: 'Lakebase Search',
-  to: '/docs/postgres/search',
+  to: '/docs/ai/lakebase-search',
   icon: 'search',
 };
 
@@ -396,15 +396,22 @@ const Composer = () => {
 // `lockup` prop, with the same shared database icon the live Products grid
 // uses for Lakebase Postgres. Inside, it splits into two columns like the
 // hero: lockup and title on the left, description and sub-links on the right,
-// stacking at md. See the rebuild notes for the flagged decision.
+// stacking at md. See the rebuild notes for the flagged decision. The whole
+// card links to /docs/get-started through a stretched overlay link, and the
+// three sub-links sit above it (relative z-10) so each is its own link; a
+// card-wide <a> can't contain them, since links can't nest.
 const FoundationCard = () => (
-  <NextLink
-    href="/docs/get-started"
+  <div
     className={cn(
-      'group grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-end gap-x-12 gap-y-4 border px-[26px] py-6 transition-colors hover:border-green-44 md:grid-cols-1',
+      'group relative grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-end gap-x-12 gap-y-4 border px-[26px] py-6 transition-colors hover:border-green-44 md:grid-cols-1',
       'border-green-44/70 bg-[#E4F1EB]/40 dark:border-green-44/30 dark:bg-[#101815]'
     )}
   >
+    <NextLink
+      href="/docs/get-started"
+      aria-label="Create a database"
+      className="absolute inset-0"
+    />
     <div className="grid">
       {/* Same lockup classes as the DetailIconCards lockup variant. */}
       <span className="mb-7 flex items-center gap-2">
@@ -422,14 +429,20 @@ const FoundationCard = () => (
         Serverless Postgres that branches with your app. Every other capability runs on it.
       </span>
       <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#303236] dark:text-gray-new-80">
-        <span>Quickstart</span>
+        <NextLink href="/docs/get-started/signing-up" className="relative z-10">
+          Quickstart
+        </NextLink>
         <span className="text-gray-new-70">/</span>
-        <span>Connect</span>
+        <NextLink href="/docs/connect/connect-hub" className="relative z-10">
+          Connect
+        </NextLink>
         <span className="text-gray-new-70">/</span>
-        <span>Branching</span>
+        <NextLink href="/docs/introduction/branching" className="relative z-10">
+          Branching
+        </NextLink>
       </span>
     </div>
-  </NextLink>
+  </div>
 );
 
 const DocsHome = () => (
@@ -463,11 +476,7 @@ const DocsHome = () => (
             >
               Full backend quickstart
             </Link>
-            <Link
-              to="/docs/get-started/connect-existing-app"
-              theme="grey-70-underlined"
-              className="text-[13px]"
-            >
+            <Link to="/docs/connect/connect-hub" theme="grey-70-underlined" className="text-[13px]">
               Connect an existing app
             </Link>
           </div>
