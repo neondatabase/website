@@ -28,9 +28,11 @@ seo:
 
 We're releasing a new search for neon.com. Open the search on any docs page (or press Cmd+K) and the results now come from [Lakebase Search](https://neon.com/docs/ai/lakebase-search), running on Neon. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
 
-Until this week, the search box ran on a hosted search vendor and it worked well for us. We moved to our own service because Neon now ships Postgres-native search and our own docs should run on it.
+Until this week, that search box ran on a hosted search vendor and it did its job well. But once we shipped Lakebase Search, it felt odd to tell everyone to keep their search in Postgres while ours lived somewhere else. So we decided to dogfood it and I got to build it.
 
-## What is Lakebase Search
+In this post, I want to share how that went, especially from the perspective of someone who builds apps for a living and doesn't think of himself as a search person.
+
+## A quick refresher on Lakebase Search
 
 Lakebase Search adds vector, keyword and hybrid search to Lakebase Postgres through Postgres extensions:
 
@@ -38,36 +40,36 @@ Lakebase Search adds vector, keyword and hybrid search to Lakebase Postgres thro
 - `lakebase_text` adds the `lakebase_bm25` index for BM25 keyword search on standard `tsvector` columns, with the top-K pushdown that GIN lacks.
 - `lakebase_tokenizer` manages synonyms and stop words as SQL tables.
 
-The indexes live in object storage, so they're available right after a cold start and show up on every new branch without a rebuild. If you want the full story, the [launch post](https://neon.com/blog/lakebase-search-on-neon) covers how the indexes work, the [GA post](https://neon.com/blog/lakebase-search-retrieval-agents) covers retrieval for agents and [BM25 is only as good as your tokens](https://neon.com/blog/bm25-is-only-as-good-as-your-tokens) covers custom dictionaries.
+The indexes live in object storage, so they're available right after a cold start and show up on every new branch without a rebuild. The [launch post](https://neon.com/blog/lakebase-search-on-neon) covers how the indexes work, the [GA post](https://neon.com/blog/lakebase-search-retrieval-agents) covers retrieval for agents and [BM25 is only as good as your tokens](https://neon.com/blog/bm25-is-only-as-good-as-your-tokens) covers custom dictionaries.
 
-## Why we built our own
+## Building search as an application builder
 
-The first reason is dogfooding. If we tell you to keep search in Postgres, our own search should live in Postgres too.
+I'm an application builder and Postgres internals have never been my area. When it comes to search, I don't usually feel like I have the background to make the deep decisions: which index types to use, how to rank results or how to merge keyword and semantic matches into one list. That's usually the point where a team hires a search specialist or pays a vendor.
 
-The second reason is personal. I build applications; I'm not a search engineer. I don't usually feel qualified to pick index types, tune BM25 or decide how to merge vector and keyword rankings. It turns out I didn't have to. Lakebase Search is SQL I already know: a column, an index and an `ORDER BY`. Here are the two indexes behind neon.com search:
+I also didn't write the SQL. Nobody really writes SQL by hand anymore; agents do. So the real question was whether my agent could pick up Lakebase Search well enough to guide me through those decisions.
+
+It could, mostly thanks to the `neon-postgres` [agent skill](https://neon.com/docs/ai/agent-skills). The skill now knows Lakebase Search in detail: the extensions, the index types, the query syntax and how to build hybrid search. My agent walked me through the options: a `lakebase_bm25` index for keyword matches, a `lakebase_ann` index for semantic matches and reciprocal rank fusion (RRF) to merge both rankings. My job was to make the calls and check that the results made sense.
+
+These are the two indexes it ended up creating for neon.com:
 
 ```sql
 CREATE INDEX search_chunks_tsv_bm25 ON search_chunks USING lakebase_bm25 (tsv);
 CREATE INDEX search_chunks_embedding_ann ON search_chunks USING lakebase_ann (embedding vector_cosine_ops);
 ```
 
-The `neon-postgres` [agent skill](https://neon.com/docs/ai/agent-skills) now includes the Lakebase Search instructions, so my coding agent knew the extensions, the query syntax and how to combine both rankings with reciprocal rank fusion (RRF). With today's models and that skill, a custom hybrid search on Postgres is something an application builder can ship.
-
 ## How it works
 
-The whole service runs on Neon:
+The service runs entirely on Neon. neon.com already publishes every page as markdown, so ingestion mostly means reading those files. Each page gets split into chunks by heading, each chunk gets an embedding through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and the text, embedding and `tsvector` land in one Lakebase Postgres table.
 
-- **Index:** neon.com publishes every page as markdown. An ingest step splits each page into chunks by heading, generates an embedding per chunk through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and stores the text, the embedding and a `tsvector` in one Lakebase Postgres table.
-- **Serve:** a [Neon Function](https://neon.com/docs/compute/functions/overview) runs a [Hono](https://hono.dev/) API. The website's search route forwards each query to it.
-- **Stay current:** when a docs change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function, which re-indexes them.
+A [Neon Function](https://neon.com/docs/compute/functions/overview) runs a [Hono](https://hono.dev/) API that the website's search route calls. Whenever a docs change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function, which re-indexes them.
 
-Search-as-you-type sends a request on every keystroke and an embedding call per keystroke would be too slow, so the semantic part is cached. For common queries, we precompute result lists offline with hybrid search (vector and BM25 merged with RRF) plus an LLM rerank. Queries the cache hasn't seen fall back to BM25 alone. Either way, the Function answers in a few milliseconds.
+The most interesting decision came from the search box itself. Search-as-you-type sends a request on every keystroke and calling an embedding model on every keystroke is too slow. So we cache the semantic part. For common queries, we precompute the results offline with hybrid search plus an LLM rerank. Anything the cache hasn't seen falls back to BM25 alone. Either way, the Function answers in a few milliseconds.
 
-That's the trade-off: a long-tail query gets keyword ranking instead of the full hybrid pipeline. For a search box that updates on every keystroke, we'll take the speed.
+Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For a search box that updates on every keystroke, I'll take the speed.
 
-## Get started
+## Try it on your own data
 
-Install the Neon agent skills:
+If I can build hybrid search for neon.com, your agent can build it for your app. Install the Neon agent skills:
 
 ```bash
 npx skills add neondatabase/agent-skills -y
@@ -83,6 +85,6 @@ and a hybrid query I can call from my API. Wait for my approval before
 changing anything.
 ```
 
-Try the result on [neon.com/docs](https://neon.com/docs) and let us know in [Discord](https://neon.com/discord) what you'd like it to find better.
+Try the new search on [neon.com/docs](https://neon.com/docs) and let us know in [Discord](https://neon.com/discord) what it should find better.
 
 Happy coding!
