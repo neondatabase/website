@@ -93,9 +93,7 @@ describe('Raffle form submission', () => {
     expect(screen.queryByText('Thanks for entering the raffle')).toBeNull();
     expect(
       screen.getByRole('link', { name: 'enter using Google Forms' }).getAttribute('href')
-    ).toBe(
-      'https://docs.google.com/forms/d/e/1FAIpQLScAZjfx6TZN4cQQ7VKH6F1PXztK_7YNXL4ZXqF_-9oKivpw6g/viewform'
-    );
+    ).toBe('https://forms.gle/C7TgUq7nPLA2L5d76');
   });
 
   it('disables submission while the request is in flight', async () => {
