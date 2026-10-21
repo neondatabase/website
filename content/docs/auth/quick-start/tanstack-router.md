@@ -121,8 +121,9 @@ import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapter
 // credentials: 'include' sends the session cookie on cross-origin requests.
 // Required if you later call authClient.token() from an origin other than your Managed Better Auth URL.
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
-  adapter: BetterAuthReactAdapter(),
-  fetchOptions: { credentials: 'include' },
+  adapter: BetterAuthReactAdapter({
+    fetchOptions: { credentials: 'include' },
+  }),
 });
 ```
 
