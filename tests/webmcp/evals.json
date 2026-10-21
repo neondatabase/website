@@ -20,6 +20,26 @@
     ]
   },
   {
+    "name": "Search the API reference",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Which Neon API endpoint creates a branch?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "search_neon_site",
+        "arguments": {
+          "query": {
+            "$contains": "branch"
+          }
+        }
+      }
+    ]
+  },
+  {
     "name": "Search for a PostgreSQL tutorial",
     "messages": [
       {
@@ -34,7 +54,8 @@
         "arguments": {
           "query": {
             "$contains": "window function"
-          }
+          },
+          "categories": ["postgresql"]
         }
       }
     ]

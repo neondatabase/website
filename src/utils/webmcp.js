@@ -7,6 +7,7 @@
 // passes the agent an OperationError, so failures are written as guidance the
 // agent can act on instead.
 
+import { pinnedSiteSearchHits } from 'utils/site-search-pinned';
 import {
   hrefFromSearchHit,
   parseSiteSearchHits,
@@ -20,6 +21,10 @@ export const TOOL_OUTPUT_MAX_CHARS = 1500;
 
 const SEARCH_DEFAULT_LIMIT = 5;
 const SEARCH_MAX_LIMIT = 10;
+// Unfiltered search ranks the API reference well below regular docs, so agents
+// asking about endpoints rarely see it. Searching docs and api together brings
+// those pages back without changing results for docs questions.
+const SEARCH_DEFAULT_CATEGORIES = ['docs', 'api'];
 const OUTLINE_MAX_CHARS = 400;
 // Room for the "[Characters x–y of z. …]" line under each part of a page.
 const FOOTER_RESERVE_CHARS = 200;
@@ -204,10 +209,15 @@ function searchArguments({ query, categories, limit }) {
   if (!Number.isInteger(count) || count < 1 || count > SEARCH_MAX_LIMIT) {
     throw new ToolInputError(`limit must be a whole number from 1 to ${SEARCH_MAX_LIMIT}.`);
   }
+  if (list?.length > 0) {
+    return { query: query.trim(), limit: count, categories: [...new Set(list)] };
+  }
+  // Pinned queries ("changelog", "sample database") answer from other
+  // categories, which the default would filter out, so they search everything.
   return {
     query: query.trim(),
     limit: count,
-    ...(list?.length > 0 ? { categories: [...new Set(list)] } : {}),
+    ...(pinnedSiteSearchHits(query) ? {} : { categories: SEARCH_DEFAULT_CATEGORIES }),
   };
 }
 
@@ -256,7 +266,8 @@ export function createNeonTools({ origin, fetch: fetchImpl, openPage }) {
     }
     const hits = parseSiteSearchHits(payload);
     if (hits.length === 0) {
-      return `No results for "${body.query}". Try fewer or different words${body.categories ? ', or search all categories' : ''}.`;
+      const others = Object.keys(CATEGORY_LABELS).filter((id) => !body.categories?.includes(id));
+      return `No results for "${body.query}". Try fewer or different words${others.length > 0 && body.categories ? `, or include other categories: ${others.join(', ')}` : ''}.`;
     }
     return formatSearchResults({ query: body.query, hits });
   };
@@ -299,7 +310,7 @@ export function createNeonTools({ origin, fetch: fetchImpl, openPage }) {
       name: 'search_neon_site',
       title: 'Search neon.com',
       description:
-        'Search neon.com for Neon serverless Postgres docs, guides, PostgreSQL tutorials, FAQs, blog posts, and changelog entries. Use it to find the pages that answer a question about Neon or Postgres. Returns matching pages with their path and a short excerpt, ready to read with read_neon_page.',
+        'Search neon.com for pages that answer a question about Neon or Postgres. Searches the Neon docs and API reference by default, and can also search PostgreSQL tutorials, guides, FAQs, blog posts, and changelog entries. Returns matching pages with their path and a short excerpt, ready to read with read_neon_page.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -311,7 +322,7 @@ export function createNeonTools({ origin, fetch: fetchImpl, openPage }) {
             type: 'array',
             items: { type: 'string', enum: Object.keys(CATEGORY_LABELS) },
             description:
-              'Parts of the site to search: docs, guides, faqs, blog, changelog, postgresql (PostgreSQL tutorial), api (Neon API reference). Omit to search all.',
+              'Defaults to docs and api (Neon API reference). Include postgresql (PostgreSQL tutorial), guides, faqs, blog, or changelog to search those.',
           },
           // Ranges live in descriptions, not minimum/maximum: an agent that
           // validates against the schema can stall on a violation instead of

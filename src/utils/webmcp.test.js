@@ -238,6 +238,23 @@ describe('createNeonTools', () => {
     expect(result).toContain('/docs/introduction/branching');
   });
 
+  it('search_neon_site searches docs and the API reference unless told otherwise', async () => {
+    const fetch = vi.fn().mockImplementation(async () => jsonResponse({ hits: [] }));
+    const tools = toolsWith(fetch);
+    const sent = () => JSON.parse(fetch.mock.calls.at(-1)[1].body);
+
+    const empty = await tools.search_neon_site.execute({ query: 'create a branch endpoint' });
+    expect(sent().categories).toEqual(['docs', 'api']);
+    expect(empty).toMatch(/include other categories: postgresql, guides, faqs, blog, changelog/);
+
+    await tools.search_neon_site.execute({ query: 'create a branch', categories: [] });
+    expect(sent().categories).toEqual(['docs', 'api']);
+
+    // Pinned queries answer from other categories, so they search everything.
+    await tools.search_neon_site.execute({ query: 'changelog' });
+    expect(sent()).not.toHaveProperty('categories');
+  });
+
   it('search_neon_site returns guidance instead of rejecting', async () => {
     const tools = toolsWith(vi.fn().mockResolvedValue(jsonResponse({ hits: [] })));
     await expect(tools.search_neon_site.execute({ query: 'zzz' })).resolves.toMatch(/No results/);

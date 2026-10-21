@@ -1,7 +1,7 @@
 // Loaded by WebMcpTools only in browsers with WebMCP, so other visitors never
 // download the tool definitions.
 
-import { scrollToSection } from 'components/shared/inkeep-trigger/section-scroll';
+import { revealHeading, sectionHeadings } from 'components/shared/inkeep-trigger/section-scroll';
 import { createNeonTools, matchSection } from 'utils/webmcp';
 
 const NAVIGATION_TIMEOUT_MS = 10000;
@@ -25,11 +25,8 @@ const waitFor = (check, timeoutMs, signal) =>
     poll();
   });
 
-// Same headings scrollToSection considers, so its match is the one we found.
 const findHeading = (section) => {
-  const elements = [...document.querySelectorAll('h2, h3, h4')].filter(
-    (element) => !element.closest('header, footer, nav, [role="dialog"]')
-  );
+  const elements = sectionHeadings();
   const index = matchSection(
     section,
     elements.map((element) => ({ text: element.textContent, id: element.id }))
@@ -67,10 +64,13 @@ const createOpenPage =
     if (!section) return `Opened ${describeLocation()}.`;
 
     const heading = await waitFor(() => findHeading(section), HEADING_TIMEOUT_MS, signal);
-    if (heading && scrollToSection([heading.textContent])) {
-      return `Opened ${describeLocation()} at "${heading.textContent.trim()}".`;
+    if (!heading) {
+      return `Opened ${describeLocation()}, but found no section matching "${section}". Use read_neon_page to list its sections.`;
     }
-    return `Opened ${describeLocation()}, but found no section matching "${section}". Use read_neon_page to list its sections.`;
+    // Reveal the matched element itself: headings can repeat, so searching
+    // again by text could land on a different one.
+    revealHeading(heading);
+    return `Opened ${describeLocation()} at "${heading.textContent.trim()}".`;
   };
 
 const createTools = (router) =>
