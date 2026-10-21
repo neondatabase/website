@@ -43,7 +43,7 @@ So, there's a huge amount of code, and that code contains a huge number of bugs.
 What's different now is that it's become vastly easier to find those bugs. Fixing them has also gotten easier, but not to the same degree - an LLM can draft a fix, but a committer still has to check that it's correct and meets the project's standards before it goes in.
 
 <blockquote>
-<p><strong>“What's different now is that it's become vastly easier to find those bugs. Fixing them has also gotten easier, but not to the same degree.”</strong></p>
+<p><strong>“LLMs are turning up forty years' worth of bugs in a matter of months, and every one of those fixes still has to be reviewed and committed by a human.”</strong></p>
 </blockquote>
 
 ## Back-patched fixes are up more than 60% vs 2025
