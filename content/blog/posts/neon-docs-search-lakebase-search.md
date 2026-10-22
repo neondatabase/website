@@ -35,7 +35,7 @@ In this post, I want to share how it went.
 [Lakebase Search](https://neon.com/docs/ai/lakebase-search) brings scalable vector and BM25 full-text search to Lakebase Postgres through two extensions:
 
 - `lakebase_vector` is a `pgvector`-compatible extension for vector search. Your existing types, operators and queries keep working, but the index needs a fraction of the memory of HNSW (under 10 GB for 100M vectors, where HNSW needs about 300 GB) and scales to over a billion vectors.
-- `lakebase_text` is a BM25 extension for keyword search on standard `tsvector` columns. It ranks with corpus-wide statistics and returns the top results without scoring every match, which Postgres' built-in GIN index can't do.
+- `lakebase_text` brings BM25 to Postgres. Native Postgres full-text search ranks matches with `ts_rank`, which scores each document on its own. BM25, the industry-standard ranking for keyword search, also weighs how rare each term is across all documents and how long each document is, so the most relevant results rise to the top. `lakebase_text` works on standard `tsvector` columns and returns the top results without scoring every match.
 
 Both indexes are designed for the lakebase architecture, where compute and storage are separated. `lakebase_vector` combines IVF partitioning with RaBitQ quantization, which keeps the index small and builds it up to 50-100x faster than HNSW. The indexes live in object storage with the rest of your data, so they stay available when compute scales to zero and come with every new branch, ready to tune and evaluate without touching production.
 
