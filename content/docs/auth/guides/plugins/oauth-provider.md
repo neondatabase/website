@@ -18,7 +18,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and 
 
 Use it to:
 
-- **Protect an MCP server.** MCP clients discover your authorization server, identify themselves with a [Client ID Metadata Document](#client-id-metadata-documents) (CIMD), and call your tools with an access token for your users. Legacy [dynamic client registration](#dynamic-client-registration-legacy) (DCR) is available as an opt-in. MCP support is part of this plugin, not a separate plugin: you set it up with the **MCP server** field.
+- **Protect an MCP server.** MCP clients discover your authorization server, identify themselves with a [Client ID Metadata Document](#client-id-metadata-documents) (CIMD), and call your tools with an access token for your users. Legacy [dynamic client registration](#dynamic-client-registration-legacy) (DCR) is available as an opt-in. MCP support is part of this plugin, not a separate plugin: you set it up with the **Server URL** field in the **MCP server** section.
 - **Sign in your users to another app or API.** A web app, single-page app, desktop app, or CLI runs the authorization code flow with PKCE and calls your API with the resulting token.
 
 The OAuth provider plugin is available to all Managed Better Auth projects.
@@ -39,14 +39,15 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 <TabItem>
 
 1. Open the [Neon Console](https://console.neon.tech).
-2. Select your project and go to **Settings** > **Better Auth** > **Plugins**.
+2. Select your project and go to **Settings** > **Better Auth**.
 3. In the **OAuth provider** section, toggle **Enable OAuth provider** on.
 4. Fill in the settings:
    - **Login page URL**: where authorization requests redirect for sign-in.
    - **Consent page URL**: where authorization requests redirect for user consent.
-   - **MCP server**: the URL of your MCP server, if you're protecting one. MCP is configured here, in the OAuth provider panel.
-   - **Allow MCP clients to dynamically register themselves**: off by default. Requires an MCP server URL. See [Dynamic client registration (legacy)](#dynamic-client-registration-legacy).
-   - **Protected resources**: URLs of other APIs that clients can request tokens for.
+   - **Server URL** (in the **MCP server** section): the URL of your MCP server, if you're protecting one. MCP is configured here, in the OAuth provider panel.
+   - **Client ID Metadata Documents**: on by default once you set a server URL. See [Client ID Metadata Documents](#client-id-metadata-documents).
+   - **Dynamic client registration (legacy)**: off by default. Requires a server URL. See [Dynamic client registration (legacy)](#dynamic-client-registration-legacy).
+   - **Resource URLs**: URLs of other APIs that clients can request tokens for.
 5. Click **Enable**.
 
 You need an MCP server URL or at least one protected resource to enable the provider.
@@ -101,7 +102,7 @@ The response returns the stored configuration:
 | `mcp.dynamic_registration`         | boolean | Legacy. Allow MCP clients to register themselves with RFC 7591 dynamic client registration. Defaults to `false`; takes effect only when `mcp.resource` is set |
 | `resources`                        | array   | Other protected resources, as `{ "identifier": "<url>" }` objects. Up to 10                                                                                   |
 
-Omitted fields keep their current values. A provided `resources` list replaces the stored list, so send the full list when you add a resource. A provided `mcp` object must include `resource`; its toggles keep their stored values when omitted.
+To remove MCP support, send `"mcp": { "resource": "" }`. CIMD and DCR then have no effect, and clients that onboarded through them stop working. Omitted fields keep their current values. A provided `resources` list replaces the stored list, so send the full list when you add a resource. A provided `mcp` object must include `resource`; its toggles keep their stored values when omitted.
 
 Enabling requires `login_page`, `consent_page`, and at least one of `mcp.resource` or `resources`. Resource identifiers must be absolute `https` URLs (or `http` on a loopback host) without credentials, query string, or fragment. They can't point at your Managed Better Auth host.
 
@@ -273,12 +274,12 @@ With Client ID Metadata Documents (CIMD), an MCP client uses an `https` URL as i
 
 A CIMD client:
 
-- Is a public client that uses PKCE.
+- Is a public client that uses PKCE, or a confidential client that authenticates with `private_key_jwt` and publishes its public keys in the document (`jwks` or `jwks_uri`). Symmetric methods such as `client_secret_basic` are rejected.
 - Can request tokens for the MCP server resource only. The document can't link the client to other resources.
 - Can't skip the consent screen. A document that sets `skip_consent` is rejected with `invalid_client`.
 - Must use redirect URIs that follow the [redirect URI rules](#redirect-uri-rules). A loopback `http` redirect URI matches on any port. All other redirect URIs must match the document exactly.
 
-Set `mcp.client_id_metadata_documents` to `false` if you want to control which clients can request tokens. New CIMD clients are then rejected and existing ones stop working. Clients you create yourself keep working.
+Clear **Client ID Metadata Documents** in the Console, or set `mcp.client_id_metadata_documents` to `false` in the API, if you want to control which clients can request tokens. New CIMD clients are then rejected and existing ones stop working. Clients you create yourself keep working.
 
 <Admonition type="warning" title="Consent screens for self-onboarded clients">
 A client's name comes from a document the client controls (or, with DCR, from anyone who registers), so don't treat it as proof of identity. Follow [Build your consent page](#build-your-consent-page) so users can tell what they're approving.
@@ -286,7 +287,7 @@ A client's name comes from a document the client controls (or, with DCR, from an
 
 ### Dynamic client registration (legacy)
 
-Dynamic client registration (DCR, [RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)) is the older way for MCP clients to register themselves, at the issuer's `/oauth2/register` endpoint. Prefer [Client ID Metadata Documents](#client-id-metadata-documents). DCR is off by default. To accept clients that only support DCR, turn on **Allow MCP clients to dynamically register themselves** (`mcp.dynamic_registration: true`), which requires an MCP server URL. It applies only to your MCP server resource. A client registered this way can request tokens for the MCP server only, and it can't skip the consent screen on first use. While DCR is on, anyone can register a client with any name and redirect URI, so the consent-screen warning above applies in full.
+Dynamic client registration (DCR, [RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)) is the older way for MCP clients to register themselves, at the issuer's `/oauth2/register` endpoint. Prefer [Client ID Metadata Documents](#client-id-metadata-documents). DCR is off by default. To accept clients that only support DCR, turn on **Dynamic client registration (legacy)** (`mcp.dynamic_registration: true`), which requires an MCP server URL. It applies only to your MCP server resource. A client registered this way can request tokens for the MCP server only, and it can't skip the consent screen on first use. While DCR is on, anyone can register a client with any name and redirect URI, so the consent-screen warning above applies in full.
 
 Branches configured before October 2026 may have relied on DCR being on by default. If yours did, set `mcp.dynamic_registration` to `true` explicitly to keep it.
 
@@ -311,7 +312,7 @@ Both pages receive the authorization request as query parameters. The query is s
 
 - **Login page.** The authorization request redirects here when the user has no session. Send `oauth_query` in the body of the sign-in request (for example, email and password sign-in). Managed Better Auth verifies the signature, signs the user in, and resumes the authorization request. The sign-in response tells your page where to go next, usually your consent page.
 - **Consent page.** Show what the user is approving, then send `POST <issuer>/oauth2/consent` with a JSON body of `{ "accept": true, "oauth_query": "<query>" }`, or `"accept": false` to deny. The response is JSON with a `redirect` flag and the `url` to navigate the browser to. That URL is the client's redirect URI with the authorization code, or an error.
-- **Client details.** To display the client name, call `GET <issuer>/oauth2/public-client?client_id=<client_id>` with the user's session. It returns public fields such as `client_name`, `client_uri`, and `logo_uri`. Before sign-in, `POST <issuer>/oauth2/public-client-prelogin` accepts `{ "client_id", "oauth_query" }`.
+- **Client details.** To display the client name, call `GET <issuer>/oauth2/public-client?client_id=<client_id>` with the user's session. It returns `client_id` and `client_name` for every client. Clients that identify with a Client ID Metadata Document also return the `client_uri` and `logo_uri` from their document when it sets them. Managed clients don't have these fields.
 
 For example, the buttons on your consent page can call:
 
@@ -340,7 +341,7 @@ Calls from your pages carry the user's session cookie, so make them with `creden
 
 To let an app call your API on behalf of your users, add the API as a protected resource and create a managed OAuth client for the app.
 
-1. Add the API identifier under **Protected resources**, or in the `resources` list of the API request.
+1. Add the API identifier under **Resource URLs**, or in the `resources` list of the API request.
 2. [Create an OAuth client](#create-and-manage-oauth-clients) linked to that resource.
 3. In the app, run the authorization code flow with PKCE. Send the API identifier as the `resource` parameter on both the authorize and token requests.
 4. The API verifies the access token the same way as the MCP example above, with its own identifier as the expected `aud`.
@@ -382,7 +383,7 @@ The `@neon/oauth` SDK (beta) implements this flow for you. `createOAuth()` from 
 Managed clients are for resources that clients can't register for themselves. You can also link a managed client to your MCP server resource, which is how you onboard known clients when you turn off CIMD and DCR.
 
 <Admonition type="warning" title="Keep the MCP server URL out of the resources list">
-For an MCP server, set the URL in `mcp.resource` (the **MCP server** field) and turn off `client_id_metadata_documents` and `dynamic_registration` so that only managed clients can connect. Don't list the MCP server URL under `resources` instead. The 30-second window that lets a client repeat a refresh request is set only when `mcp.resource` is set. Without it, an MCP client that refreshes concurrently presents an already-rotated refresh token, and Managed Better Auth revokes that user's refresh tokens for the client.
+For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and turn off `client_id_metadata_documents` and `dynamic_registration` so that only managed clients can connect. Don't list the MCP server URL under `resources` instead. The refresh-token reuse window (30 seconds) is configured only when `mcp.resource` is set. Without it, an MCP client that refreshes concurrently presents an already-rotated refresh token, and Managed Better Auth revokes that user's refresh tokens for the client.
 </Admonition>
 
 | Type           | Secret                    | Token endpoint auth   | Typical use                                |
@@ -489,11 +490,11 @@ The scopes are fixed. A client can request any of these:
 | Scope            | Grants                                                           |
 | ---------------- | ---------------------------------------------------------------- |
 | `openid`         | An ID token, and access to the userinfo endpoint                 |
-| `profile`        | `name` and `picture` from userinfo                               |
+| `profile`        | `name`, `given_name`, `family_name`, and `picture` from userinfo |
 | `email`          | `email` and `email_verified` from userinfo                       |
 | `offline_access` | A refresh token, so the client can renew access without the user |
 
-The supported grant types are `authorization_code` and `refresh_token`. Managed clients are created with both. To get a refresh token, request `offline_access` on the authorize request, with PKCE. Refresh tokens expire after 30 days and rotate on every use: each refresh returns a new refresh token. When you [protect an MCP server](#protect-an-mcp-server) with `mcp.resource`, a client can repeat the same refresh request for 30 seconds after the token rotates and gets the same response, so concurrent refreshes from one client succeed.
+The supported grant types are `authorization_code` and `refresh_token`. Managed clients are created with both. To get a refresh token, request `offline_access` on the authorize request, with PKCE. Refresh tokens expire after 30 days and rotate on every use: each refresh returns a new refresh token. When you [protect an MCP server](#protect-an-mcp-server) with `mcp.resource`, Managed Better Auth sets a 30-second refresh-token reuse window for every client on the branch, not only MCP clients: a client can repeat the same refresh request for 30 seconds after the token rotates and gets the same response, so concurrent refreshes from one client succeed.
 
 ```bash shouldWrap
 curl -X POST "$ISSUER/oauth2/token" \
@@ -509,7 +510,7 @@ A refreshed access token keeps the resource of the original authorization unless
 - You must host both the login page and the consent page. There's no default UI.
 - Self-onboarding (CIMD or DCR) is available for the MCP server resource only. Other resources need managed clients.
 - No `client_credentials` grant. Tokens are always issued on behalf of a signed-in user, so machine-to-machine access isn't supported. The authorization server metadata can still list `client_credentials` in `grant_types_supported`, but token requests that use it are rejected.
-- CIMD `client_id` URLs must use `https`. See the [redirect URI rules](#redirect-uri-rules) for what each kind of client can register.
+- CIMD `client_id` URLs must use `https` on the default port (443) and a hostname, not an IP address. They can't point at a Neon domain (such as `neon.tech` or `neon.com`, including subdomains), so a Neon Function URL doesn't work. The document must be served as JSON without redirects and be at most 5 KiB. If the fetch fails for any of these reasons, the client sees a generic "Failed to fetch metadata document" error. See the [redirect URI rules](#redirect-uri-rules) for what each kind of client can register.
 - Managed clients: up to 100 per branch, 10 redirect URIs each, and links to up to 11 resources: up to 10 configured resources plus the MCP server resource.
 - Scopes, token lifetimes, and other provider options aren't configurable.
 
