@@ -30,7 +30,10 @@ const MODE_HEADINGS = {
   text: 'Text generation',
   image: 'Image generation',
   embeddings: 'Embeddings',
+  decisions: 'Decisions',
 };
+
+const NO_EXAMPLES = 'Code examples are not currently available for this model.';
 
 const renderCommandSection = (examplesByMode, mode) => {
   const languages = getLanguagesForMode(examplesByMode, mode);
@@ -38,7 +41,7 @@ const renderCommandSection = (examplesByMode, mode) => {
   const blocks = [`### ${heading}`];
 
   if (languages.length === 0) {
-    blocks.push('Code examples are not currently available for this model.');
+    blocks.push(NO_EXAMPLES);
     return blocks.join('\n\n');
   }
 
@@ -58,17 +61,20 @@ const resolveExamplesByMode = (resolveModel, modelId) => ({
   text: resolveModel(modelsData, capabilities, modelId, 'chat')?.examples ?? [],
   image: resolveModel(modelsData, capabilities, modelId, 'image-generation')?.examples ?? [],
   embeddings: resolveModel(modelsData, capabilities, modelId, 'embeddings')?.examples ?? [],
+  decisions: resolveModel(modelsData, capabilities, modelId, 'systemone')?.examples ?? [],
 });
 
 const renderModelDetailMarkdown = (row, examplesByMode) => {
-  const about = row.isEmbedding
-    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. It returns ${row.dimensions}-dimensional embeddings on \`POST /v1/embeddings\`.`
-    : row.hasMeasuredCapabilities
-      ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
-      : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
-  const primaryMode = row.isEmbedding ? 'embeddings' : 'text';
+  const about = row.isDecision
+    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}, a System One decision model. It answers questions about a given state with a choice, a probability, or a score; it does not generate text.`
+    : row.isEmbedding
+      ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. It returns ${row.dimensions}-dimensional embeddings on \`POST /v1/embeddings\`.`
+      : row.hasMeasuredCapabilities
+        ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
+        : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
+  const primaryMode = row.isEmbedding ? 'embeddings' : row.isDecision ? 'decisions' : 'text';
   const commands = [renderCommandSection(examplesByMode, primaryMode)];
-  const hasExamples = ['text', 'image', 'embeddings'].some(
+  const hasExamples = ['text', 'image', 'embeddings', 'decisions'].some(
     (mode) => getLanguagesForMode(examplesByMode, mode).length > 0
   );
 

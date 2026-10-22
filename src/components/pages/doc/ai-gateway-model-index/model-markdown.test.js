@@ -76,4 +76,21 @@ describe('AI Gateway model Markdown index', () => {
     expect(embeddingSection).toContain('qwen3-embedding-0-6b');
     expect(embeddingSection).toContain('| 1024 |');
   });
+
+  it('gives decision models their own section, out of Text and Other', () => {
+    const decisionRow = {
+      ...createRow({ id: 'example-decision', inputs: [], isImageCapable: false }),
+      isDecision: true,
+      endpoints: [],
+    };
+    const markdown = renderAiGatewayModelIndex([
+      createRow({ id: 'text-model', inputs: ['text'], isImageCapable: false }),
+      decisionRow,
+    ]);
+    const [beforeDecision, decisionSection] = markdown.split('### Decision models');
+
+    expect(beforeDecision).not.toContain('example-decision');
+    expect(beforeDecision).not.toContain('### Other models');
+    expect(decisionSection).toContain('example-decision');
+  });
 });
