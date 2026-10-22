@@ -1,6 +1,6 @@
 ---
 title: Neon docs search is now powered by Lakebase Search
-description: The search on neon.com now runs on our own service, built with Lakebase Search on Neon
+description: 'The search on neon.com now runs on our own service, built fully with Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'
 excerpt: >-
   We're releasing a new search for neon.com. Results for the docs, API
   reference, guides, changelog and blog now come from our own search service:
@@ -18,11 +18,11 @@ cover:
 isFeatured: false
 seo:
   title: 'Neon docs search is now powered by Lakebase Search - Neon'
-  description: The search on neon.com now runs on our own service, built with Lakebase Search on Neon
+  description: 'The search on neon.com now runs on our own service, built fully with Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'
   keywords: []
   noindex: false
   ogTitle: 'Neon docs search is now powered by Lakebase Search - Neon'
-  ogDescription: The search on neon.com now runs on our own service, built with Lakebase Search on Neon
+  ogDescription: 'The search on neon.com now runs on our own service, built fully with Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.png'
 ---
 
