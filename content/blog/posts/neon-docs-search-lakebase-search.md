@@ -32,13 +32,11 @@ In this post, I want to share how it went.
 
 ## What is Lakebase Search
 
-Lakebase Search adds vector, keyword and hybrid search to Lakebase Postgres through Postgres extensions:
+[Lakebase Search](https://neon.com/docs/ai/lakebase-search) brings scalable vector and BM25 full-text search to Lakebase Postgres through two extensions. `lakebase_vector` adds the `lakebase_ann` index for vector search and is fully compatible with `pgvector`: same types, operators and queries, scaling to over a billion vectors on a single index. `lakebase_text` adds the `lakebase_bm25` index, which brings real BM25 ranking with corpus-wide statistics and top-K pushdown to standard `tsvector` columns.
 
-- `lakebase_vector` adds the `lakebase_ann` index for vector similarity search. It uses the same `vector` types and operators as `pgvector`.
-- `lakebase_text` adds the `lakebase_bm25` index for BM25 keyword search on standard `tsvector` columns, with the top-K pushdown that GIN lacks.
-- `lakebase_tokenizer` manages synonyms and stop words as SQL tables.
+Both indexes are designed for the lakebase architecture, where compute and storage are separated. `lakebase_vector` combines IVF partitioning with RaBitQ quantization, which compresses vectors about 32x and builds up to 50-100x faster than HNSW. The indexes live in object storage with the rest of your data, so they stay available when compute scales to zero and come with every new branch, ready to tune and evaluate without touching production.
 
-The indexes live in object storage, so they're available right after a cold start and show up on every new branch without a rebuild. The [launch post](https://neon.com/blog/lakebase-search-on-neon) covers how the indexes work, the [GA post](https://neon.com/blog/lakebase-search-retrieval-agents) covers retrieval for agents and [BM25 is only as good as your tokens](https://neon.com/blog/bm25-is-only-as-good-as-your-tokens) covers custom dictionaries.
+Because both indexes live in the same Postgres as your data, hybrid search is just SQL: one query, joined with your operational tables, in one transaction. The [launch post](https://neon.com/blog/lakebase-search-on-neon) tells the full story of why and how we built it and the [GA post](https://neon.com/blog/lakebase-search-retrieval-agents) covers retrieval for agents.
 
 ## How it works
 
