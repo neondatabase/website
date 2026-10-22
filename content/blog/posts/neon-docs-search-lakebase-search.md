@@ -32,7 +32,10 @@ In this post, I want to share how it went.
 
 ## What is Lakebase Search
 
-[Lakebase Search](https://neon.com/docs/ai/lakebase-search) brings scalable vector and BM25 full-text search to Lakebase Postgres through two extensions. `lakebase_vector` adds the `lakebase_ann` index for vector search and is fully compatible with `pgvector`: same types, operators and queries, scaling to over a billion vectors on a single index. `lakebase_text` adds the `lakebase_bm25` index, which brings real BM25 ranking with corpus-wide statistics and top-K pushdown to standard `tsvector` columns.
+[Lakebase Search](https://neon.com/docs/ai/lakebase-search) brings scalable vector and BM25 full-text search to Lakebase Postgres through two extensions:
+
+- `lakebase_vector` adds the `lakebase_ann` index for vector search. It's fully compatible with `pgvector` (same types, operators and queries) and scales to over a billion vectors on a single index.
+- `lakebase_text` adds the `lakebase_bm25` index for keyword search. It brings real BM25 ranking with corpus-wide statistics and top-K pushdown to standard `tsvector` columns.
 
 Both indexes are designed for the lakebase architecture, where compute and storage are separated. `lakebase_vector` combines IVF partitioning with RaBitQ quantization, which compresses vectors about 32x and builds up to 50-100x faster than HNSW. The indexes live in object storage with the rest of your data, so they stay available when compute scales to zero and come with every new branch, ready to tune and evaluate without touching production.
 
