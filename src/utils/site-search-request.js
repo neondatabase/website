@@ -14,12 +14,12 @@ const SEARCH_COLLECTIONS = new Set([
 
 export const SITE_SEARCH_CATEGORIES = [
   { id: 'docs', label: 'Docs' },
-  { id: 'postgresql', label: 'PostgreSQL Tutorial' },
-  { id: 'guides', label: 'Guides' },
-  { id: 'faqs', label: 'FAQs' },
-  { id: 'blog', label: 'Blog' },
-  { id: 'changelog', label: 'Changelog' },
   { id: 'api', label: 'API Docs' },
+  { id: 'changelog', label: 'Changelog' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'faqs', label: 'FAQs' },
+  { id: 'guides', label: 'Community Guides' },
+  { id: 'postgresql', label: 'PostgreSQL Tutorial' },
 ];
 
 const CATEGORY_IDS = new Set(SITE_SEARCH_CATEGORIES.map((category) => category.id));

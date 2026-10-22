@@ -88,12 +88,14 @@ function categoryLabels(categories) {
     .join(', ');
 }
 
-const CategoryFilter = ({ selected, onChange }) => {
+const CategoryFilter = ({ options, selected, onChange }) => {
   const toggle = (id) =>
     onChange(
-      SITE_SEARCH_CATEGORIES.map((category) => category.id).filter((candidate) =>
-        candidate === id ? !selected.includes(id) : selected.includes(candidate)
-      )
+      options
+        .map((category) => category.id)
+        .filter((candidate) =>
+          candidate === id ? !selected.includes(id) : selected.includes(candidate)
+        )
     );
   const chip = (pressed) =>
     cn(
@@ -113,7 +115,7 @@ const CategoryFilter = ({ selected, onChange }) => {
         >
           All
         </button>
-        {SITE_SEARCH_CATEGORIES.map((category) => (
+        {options.map((category) => (
           <button
             key={category.id}
             className={chip(selected.includes(category.id))}
@@ -126,7 +128,7 @@ const CategoryFilter = ({ selected, onChange }) => {
           </button>
         ))}
       </div>
-      <CategoryMenu selected={selected} onChange={onChange} />
+      <CategoryMenu options={options} selected={selected} onChange={onChange} />
     </div>
   );
 };
@@ -134,13 +136,13 @@ const CategoryFilter = ({ selected, onChange }) => {
 const ALL = 'all';
 
 // Phones get one menu instead of a row of chips that would wrap or scroll.
-const CategoryMenu = ({ selected, onChange }) => {
+const CategoryMenu = ({ options: categoryOptions, selected, onChange }) => {
   const value = selected.length === 0 ? [ALL] : selected;
   const change = (next) => {
     const pickedAll = next.includes(ALL) && !value.includes(ALL);
     onChange(pickedAll ? [] : next.filter((id) => id !== ALL));
   };
-  const options = [{ id: ALL, label: 'All' }, ...SITE_SEARCH_CATEGORIES];
+  const options = [{ id: ALL, label: 'All' }, ...categoryOptions];
   return (
     <Listbox value={value} onChange={change} multiple>
       <ListboxButton
@@ -183,17 +185,29 @@ const CategoryMenu = ({ selected, onChange }) => {
   );
 };
 
+const categoryOptionsPropType = PropTypes.arrayOf(
+  PropTypes.shape({ id: PropTypes.string.isRequired, label: PropTypes.string.isRequired })
+);
+
 CategoryMenu.propTypes = {
+  options: categoryOptionsPropType.isRequired,
   selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
 CategoryFilter.propTypes = {
+  options: categoryOptionsPropType.isRequired,
   selected: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = [] }) => {
+const SiteSearchModal = ({
+  isOpen,
+  onClose,
+  onAskAi = null,
+  defaultCategories = [],
+  categoryOptions = SITE_SEARCH_CATEGORIES,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const inputId = useId();
@@ -380,7 +394,11 @@ const SiteSearchModal = ({ isOpen, onClose, onAskAi = null, defaultCategories = 
               esc
             </kbd>
           </div>
-          <CategoryFilter selected={categories} onChange={setCategories} />
+          <CategoryFilter
+            options={categoryOptions}
+            selected={categories}
+            onChange={setCategories}
+          />
           <div className="max-h-[min(60vh,28rem)] overflow-y-auto">
             {trimmedQuery === '' && (
               <p className="px-4 py-6 text-sm tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
@@ -476,6 +494,7 @@ SiteSearchModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onAskAi: PropTypes.func,
   defaultCategories: PropTypes.arrayOf(PropTypes.string),
+  categoryOptions: categoryOptionsPropType,
 };
 
 export default SiteSearchModal;

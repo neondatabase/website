@@ -245,7 +245,7 @@ describe('createNeonTools', () => {
 
     const empty = await tools.search_neon_site.execute({ query: 'create a branch endpoint' });
     expect(sent().categories).toEqual(['docs', 'api']);
-    expect(empty).toMatch(/include other categories: postgresql, guides, faqs, blog, changelog/);
+    expect(empty).toMatch(/include other categories: changelog, blog, faqs, guides, postgresql/);
 
     await tools.search_neon_site.execute({ query: 'create a branch', categories: [] });
     expect(sent().categories).toEqual(['docs', 'api']);

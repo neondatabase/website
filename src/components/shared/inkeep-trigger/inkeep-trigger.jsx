@@ -1,12 +1,16 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+import { FAQS_BASE_PATH } from 'constants/faqs';
+import { GUIDES_BASE_PATH } from 'constants/guides';
 import { aiChatSettings, getInkeepBaseSettings } from 'lib/inkeep-settings';
 import sendGtagEvent from 'utils/send-gtag-event';
+import { SITE_SEARCH_CATEGORIES } from 'utils/site-search-request';
 
 import InkeepAIButton from './inkeep-ai-button';
 import InkeepSearch from './inkeep-search';
@@ -21,9 +25,21 @@ const InkeepModalChat = dynamic(
 const SECTION_CATEGORIES = {
   postgres: ['postgresql'],
 };
-const DOCS_CATEGORIES = ['docs'];
+const DOCS_CATEGORIES = ['docs', 'api'];
+// Offered as a filter only on that section's own pages.
+const SECTION_ONLY_FILTERS = { guides: GUIDES_BASE_PATH, faqs: FAQS_BASE_PATH };
+
+const isInSection = (pathname, basePath) =>
+  pathname === basePath.slice(0, -1) || pathname.startsWith(basePath);
+
+const filtersFor = (pathname) =>
+  SITE_SEARCH_CATEGORIES.filter(
+    ({ id }) => !SECTION_ONLY_FILTERS[id] || isInSection(pathname, SECTION_ONLY_FILTERS[id])
+  );
 
 const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
+  const pathname = usePathname();
+  const isGuidePage = isInSection(pathname, GUIDES_BASE_PATH);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
@@ -116,7 +132,8 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       )}
       <SiteSearchModal
         isOpen={isSearchOpen}
-        defaultCategories={SECTION_CATEGORIES[docPageType] ?? DOCS_CATEGORIES}
+        defaultCategories={isGuidePage ? [] : (SECTION_CATEGORIES[docPageType] ?? DOCS_CATEGORIES)}
+        categoryOptions={filtersFor(pathname)}
         onClose={() => setIsSearchOpen(false)}
         onAskAi={
           isNotFoundPage
