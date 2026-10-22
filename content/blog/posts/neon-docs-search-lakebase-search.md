@@ -2,7 +2,7 @@
 title: Neon docs search is now powered by Lakebase Search
 description: 'The search on neon.com now runs on our own service, built fully with Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'
 excerpt: >-
-  We're releasing a new search for neon.com. Results for the docs, API
+  We just released a new search for neon.com. Results for the docs, API
   reference, guides, changelog and blog now come from our own search service:
   Lakebase Search in Lakebase Postgres, served by a Neon Function.
 date: '2026-10-21T12:00:00'
@@ -26,7 +26,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.png'
 ---
 
-We're releasing a new search for neon.com. Open the search on any docs page (or press Cmd+K) and the results now come from [Lakebase Search](https://neon.com/docs/ai/lakebase-search), running on Neon. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
+We just released a new search for neon.com. Open the search on any docs page (or press Cmd+K) and the results now come from [Lakebase Search](https://neon.com/docs/ai/lakebase-search), running on Neon. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
 
 Until this week, that search box ran on a hosted search vendor and it did its job well. But once we shipped Lakebase Search, it felt odd to tell everyone to keep their search in Postgres while ours lived somewhere else. So we decided to dogfood it and I got to build it.
 
