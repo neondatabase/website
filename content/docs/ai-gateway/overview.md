@@ -29,7 +29,7 @@ hideCopyPage: true
 
 ## Available models
 
-Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddings**, and **Decisions** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL; System One decision models get AI SDK, TypeScript, Python, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation), `/typesafe/v1/systemone` for decisions.
+Browse the full catalog below. Switch between the **Text**, **Image**, and **Embeddings** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation).
 
 <AiGatewayModelIndex/>
 
