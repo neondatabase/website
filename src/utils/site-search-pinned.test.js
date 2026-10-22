@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { normalizePinnedQuery, pinnedSiteSearchHits } from './site-search-pinned';
+import { normalizePinnedQuery, pinnedSiteSearchHits, pinsAboveResults } from './site-search-pinned';
 import { parseSiteSearchHits } from './site-search-request';
 
 describe('normalizePinnedQuery', () => {
@@ -52,6 +52,20 @@ describe('pinnedSiteSearchHits', () => {
     );
   });
 
+  it('pins the model catalog above search results under any category filter', () => {
+    for (const query of ['models', 'Model', 'all models', 'AI Gateway models']) {
+      expect(pinsAboveResults(query)).toBe(true);
+      for (const categories of [undefined, ['docs', 'api'], ['blog']]) {
+        expect(pinnedSiteSearchHits(query, categories)?.map((hit) => hit.url)).toEqual([
+          'https://neon.com/ai-gateway#models',
+        ]);
+      }
+    }
+    for (const query of ['changelog', 'pricing', 'branching', 'models json']) {
+      expect(pinsAboveResults(query)).toBe(false);
+    }
+  });
+
   it('leaves every other query to search, including longer queries that contain a pinned one', () => {
     expect(pinnedSiteSearchHits('changelog march 2026')).toBeNull();
     expect(pinnedSiteSearchHits('branching')).toBeNull();
@@ -59,7 +73,7 @@ describe('pinnedSiteSearchHits', () => {
   });
 
   it('returns hits the modal accepts', () => {
-    for (const query of ['changelog', 'pricing', 'dvdrental']) {
+    for (const query of ['changelog', 'pricing', 'dvdrental', 'models']) {
       const hits = pinnedSiteSearchHits(query);
       expect(parseSiteSearchHits({ hits })).toEqual(hits);
     }

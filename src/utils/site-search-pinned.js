@@ -1,6 +1,7 @@
 // Queries with one obvious destination, answered without calling site search.
-// A pinned query returns only its pinned pages. Matching is exact after
-// normalizePinnedQuery, so "changelog march 2026" still goes to search.
+// A pinned query returns only its pinned pages, unless its entry sets
+// aboveResults. Matching is exact after normalizePinnedQuery, so
+// "changelog march 2026" still goes to search.
 
 const CHANGELOG = {
   url: 'https://neon.com/docs/changelog',
@@ -11,6 +12,19 @@ const CHANGELOG = {
   breadcrumb: ['Docs', 'Product updates'],
   heading: '',
   excerpt: 'The latest product updates from Neon, every week.',
+  score: 1,
+};
+
+const MODELS = {
+  url: 'https://neon.com/ai-gateway#models',
+  title: 'All models',
+  slug: 'ai-gateway',
+  collection: 'page',
+  category: 'docs',
+  breadcrumb: ['AI Gateway'],
+  heading: '',
+  excerpt:
+    'The full Neon AI Gateway model catalog. Filter by provider, sort any column, and click a model for a copy-paste quickstart.',
   score: 1,
 };
 
@@ -91,6 +105,26 @@ const PINNED = [
     // Readers asking for the changelog want it whatever filter is selected.
     anyCategory: true,
   },
+  {
+    queries: [
+      'model',
+      'models',
+      'all models',
+      'available models',
+      'supported models',
+      'model list',
+      'models list',
+      'list models',
+      'model catalog',
+      'ai models',
+      'ai gateway models',
+      'neon models',
+    ],
+    hits: [MODELS],
+    anyCategory: true,
+    // "models" also matches pages about specific models, so keep those below the catalog.
+    aboveResults: true,
+  },
   { queries: ['pricing', 'price', 'prices', 'neon pricing', 'plans', 'neon plans'], hits: PRICING },
   {
     queries: [
@@ -124,4 +158,8 @@ export function pinnedSiteSearchHits(query, categories) {
       ? entry.hits
       : entry.hits.filter((hit) => categories.includes(hit.category));
   return hits.map((hit) => ({ ...hit }));
+}
+
+export function pinsAboveResults(query) {
+  return PINNED_BY_QUERY.get(normalizePinnedQuery(query))?.aboveResults === true;
 }
