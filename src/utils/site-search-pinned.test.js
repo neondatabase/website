@@ -27,6 +27,21 @@ describe('pinnedSiteSearchHits', () => {
     }
   });
 
+  it('answers changelog spellings with the changelog under any category filter', () => {
+    for (const categories of [['docs', 'api'], ['postgresql'], ['guides'], ['changelog']]) {
+      expect(pinnedSiteSearchHits('changelog', categories)?.map((hit) => hit.url)).toEqual([
+        'https://neon.com/docs/changelog',
+      ]);
+    }
+  });
+
+  it('keeps other pinned hits to the selected categories', () => {
+    expect(pinnedSiteSearchHits('pricing', ['postgresql'])).toEqual([]);
+    expect(pinnedSiteSearchHits('dvdrental', ['docs'])?.map((hit) => hit.url)).toEqual([
+      'https://neon.com/docs/import/import-sample-data',
+    ]);
+  });
+
   it('pins pricing and the sample database', () => {
     expect(pinnedSiteSearchHits('pricing')?.map((hit) => hit.url)).toEqual([
       'https://neon.com/pricing',

@@ -88,6 +88,8 @@ const PINNED = [
       'whats new',
     ],
     hits: [CHANGELOG],
+    // Readers asking for the changelog want it whatever filter is selected.
+    anyCategory: true,
   },
   { queries: ['pricing', 'price', 'prices', 'neon pricing', 'plans', 'neon plans'], hits: PRICING },
   {
@@ -103,7 +105,7 @@ const PINNED = [
 ];
 
 const PINNED_BY_QUERY = new Map(
-  PINNED.flatMap((entry) => entry.queries.map((query) => [query, entry.hits]))
+  PINNED.flatMap((entry) => entry.queries.map((query) => [query, entry]))
 );
 
 export function normalizePinnedQuery(query) {
@@ -114,7 +116,13 @@ export function normalizePinnedQuery(query) {
     .trim();
 }
 
-export function pinnedSiteSearchHits(query) {
-  const hits = PINNED_BY_QUERY.get(normalizePinnedQuery(query));
-  return hits ? hits.map((hit) => ({ ...hit })) : null;
+// `categories` is the request's filter; omitted means every category.
+export function pinnedSiteSearchHits(query, categories) {
+  const entry = PINNED_BY_QUERY.get(normalizePinnedQuery(query));
+  if (!entry) return null;
+  const hits =
+    entry.anyCategory || !categories
+      ? entry.hits
+      : entry.hits.filter((hit) => categories.includes(hit.category));
+  return hits.map((hit) => ({ ...hit }));
 }
