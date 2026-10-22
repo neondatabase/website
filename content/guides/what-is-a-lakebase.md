@@ -40,7 +40,7 @@ People and AI agents can create, branch, break, restore, and delete a database a
 
 ## What makes a database a lakebase
 
-A lakebase has nine traits in three groups: how it's built, what that enables for agents, and what you get from keeping your app's data on the same storage as your analytics.
+Let's define a lakebase in terms of: how it's built, what that enables for agents, and what you get from keeping your app's data on the same storage as your analytics.
 
 ### How it's built
 
