@@ -446,10 +446,11 @@ const FoundationCard = () => (
 // The home now renders inside the shared (docs) layout's content column, to the
 // right of the Get started sidebar, so it drops the old full-width left-gutter
 // alignment trick. Per brief #7 the content column tops out ~1200px (main box
-// ~1328px less gutters) and centers in whatever width the sidebar leaves.
+// ~1328px less gutters) and left-aligns against the sidebar like interior docs
+// pages, with any extra width falling on the right.
 const DocsHome = () => (
   <div className="@container w-full font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
-    <main className="mx-auto w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-10 md:px-8 sm:px-5">
+    <main className="w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-10 md:px-8 sm:px-5">
       {/*
         Hero: text half on the left, composer box on the right, side by side on
         desktop and stacked (text then box) at lg and below. This hero uses its
