@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project).
+The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, install agent tooling, and link the directory to a Neon project). To add a single function to an existing project from a template, use [`neon functions new`](/docs/cli/functions#new) instead.
 
 ## Usage
 

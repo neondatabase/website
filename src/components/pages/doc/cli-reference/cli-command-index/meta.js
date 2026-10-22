@@ -111,8 +111,8 @@ const META = {
     examples: ['neon dev'],
   },
   functions: {
-    desc: 'Deploy and manage Neon Functions on a branch.',
-    examples: ['neon functions deploy api --src ./api.ts'],
+    desc: 'Create, deploy, and manage Neon Functions on a branch.',
+    examples: ['neon functions new basic', 'neon functions deploy api --src ./api.ts'],
   },
   triggers: {
     desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',

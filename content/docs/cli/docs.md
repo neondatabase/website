@@ -23,7 +23,7 @@ Searches neon.com and lists the matching pages.
 
 <CliOptions command="docs search" />
 
-The default table shows each result's page title, the section that matched, and the page URL. The section is blank when the matching heading is the page title. `--output json` and `--output yaml` also include each result's `category`, `breadcrumb`, and a short `excerpt` of the matching text.
+By default, each result shows the page title and matching section, with the URL on the next line. Long title lines are cut to fit your terminal; URLs never are. `--output json` and `--output yaml` also include each result's `category`, `breadcrumb`, and a short `excerpt` of the matching text.
 
 To search more than one category, repeat `--category`.
 
@@ -40,10 +40,14 @@ neon docs search "create branch" --category api --category docs --limit 3
 ```
 
 ```text
-Title                       Heading                                                     URL
-Manage branches             Branching with the Neon API > Create a branch with the API  https://neon.com/docs/manage/branches
-Neon CLI command: branches  neon branches create                                        https://neon.com/docs/cli/branches
-Neon CLI quickstart         Common operations > Create a branch                         https://neon.com/docs/cli/quickstart
+Manage branches › Branching with the Neon API › Create a branch with the API
+  https://neon.com/docs/manage/branches
+
+Neon CLI command: branches › neon branches create
+  https://neon.com/docs/cli/branches
+
+Neon CLI quickstart › Common operations › Create a branch
+  https://neon.com/docs/cli/quickstart
 ```
 
 Get results as JSON so you can process them in a script:
