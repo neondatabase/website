@@ -34,10 +34,10 @@ In this post, I want to share how it went.
 
 [Lakebase Search](https://neon.com/docs/ai/lakebase-search) brings scalable vector and BM25 full-text search to Lakebase Postgres through two extensions:
 
-- `lakebase_vector` adds the `lakebase_ann` index for vector search. It's fully compatible with `pgvector` (same types, operators and queries) and scales to over a billion vectors on a single index.
-- `lakebase_text` adds the `lakebase_bm25` index for keyword search. It brings real BM25 ranking with corpus-wide statistics and top-K pushdown to standard `tsvector` columns.
+- `lakebase_vector` is a `pgvector`-compatible extension for vector search. Your existing types, operators and queries keep working, but the index needs a fraction of the memory of HNSW (under 10 GB for 100M vectors, where HNSW needs about 300 GB) and scales to over a billion vectors.
+- `lakebase_text` is a BM25 extension for keyword search on standard `tsvector` columns. It ranks with corpus-wide statistics and returns the top results without scoring every match, which Postgres' built-in GIN index can't do.
 
-Both indexes are designed for the lakebase architecture, where compute and storage are separated. `lakebase_vector` combines IVF partitioning with RaBitQ quantization, which compresses vectors about 32x and builds up to 50-100x faster than HNSW. The indexes live in object storage with the rest of your data, so they stay available when compute scales to zero and come with every new branch, ready to tune and evaluate without touching production.
+Both indexes are designed for the lakebase architecture, where compute and storage are separated. `lakebase_vector` combines IVF partitioning with RaBitQ quantization, which keeps the index small and builds it up to 50-100x faster than HNSW. The indexes live in object storage with the rest of your data, so they stay available when compute scales to zero and come with every new branch, ready to tune and evaluate without touching production.
 
 Because both indexes live in the same Postgres as your data, hybrid search is just SQL: one query, joined with your operational tables, in one transaction. The [launch post](https://neon.com/blog/lakebase-search-on-neon) tells the full story of why and how we built it and the [GA post](https://neon.com/blog/lakebase-search-retrieval-agents) covers retrieval for agents.
 
