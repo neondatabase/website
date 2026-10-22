@@ -26,8 +26,6 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.png'
 ---
 
-We just released a new search for neon.com. Head to the [Neon docs](https://neon.com/docs), press Cmd+K and give it a try. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
-
 We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25 keyword and hybrid search in Lakebase Postgres. So it was obvious to us that we needed to dogfood it for our own docs search. Until this week, the search box on neon.com ran on a hosted search vendor. Now it's built fully on Neon primitives and powered by Lakebase Search.
 
 In this post, I want to share how it went.
