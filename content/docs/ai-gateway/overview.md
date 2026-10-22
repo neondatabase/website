@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-10-22T18:03:41.423Z'
+updatedOn: '2026-10-22T23:10:00.032Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -33,7 +33,7 @@ Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddi
 
 <AiGatewayModelIndex/>
 
-For full request paths and when to prefer each endpoint, see [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings).
+For full request paths and when to prefer each endpoint, see [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use). For embedding models (dimensions, normalization, and choosing a distance operator), see [Embeddings](/docs/ai-gateway/embeddings). For decision models (question types and answer shapes), see [Decisions](/docs/ai-gateway/decisions).
 
 ## Get started
 
@@ -46,6 +46,8 @@ For full request paths and when to prefer each endpoint, see [Which endpoint to 
 <a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with any model in the catalog." icon="code">Chat completions</a>
 
 <a href="/docs/ai-gateway/embeddings" description="Turn text into vectors for search with the OpenAI-compatible embeddings endpoint." icon="database">Embeddings</a>
+
+<a href="/docs/ai-gateway/decisions" description="Ask yes/no, choice, and score questions about text and get back probabilities." icon="code">Decisions</a>
 
 <a href="/docs/ai-gateway/authentication" description="Understand how Neon credentials work with AI Gateway." icon="lock-landscape">Authentication</a>
 
