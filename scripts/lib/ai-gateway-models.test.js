@@ -59,8 +59,6 @@ const EMBEDDING = {
   features: { open_weights: true, chat: false, embeddings: true },
 };
 
-// A System One decision model: takes a state and questions, returns a choice, a probability, or a
-// score per question, generates no text.
 const DECISION = {
   id: 'example-decision',
   owned_by: 'example',

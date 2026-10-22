@@ -76,8 +76,6 @@ const isImageCapable = (capability) =>
 // embedding model while unmeasured — it just has no known-working endpoint yet (see
 // `deriveEndpoints`, which stays capability-gated).
 const isEmbedding = (model) => model?.type === 'embedding';
-// A System One decision model answers questions, generates no text, so it has no
-// inputs/context/output price.
 const isDecision = (model) => model?.type === 'decision';
 
 // The gateway routes a model reaches. Conveyed to users mainly through the

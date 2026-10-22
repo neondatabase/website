@@ -268,6 +268,7 @@ describe('GET /models', () => {
         }
         const [aiSdk, typescript, python] = model.examples;
         expect(aiSdk.files[0].content).toContain(`neon.decisionModel("${id}")`);
+        expect(aiSdk.dependencies).toEqual(['ai@^7.0.133', '@neondatabase/ai-sdk-provider@^1.1.0']);
         expect(typescript.dependencies).toEqual(['@typesafe-ai/sdk']);
         expect(python.dependencies).toEqual(['typesafe-sdk']);
       }

@@ -43,8 +43,9 @@ ModelDetailIntro.propTypes = {
     text: PropTypes.arrayOf(PropTypes.object).isRequired,
     image: PropTypes.arrayOf(PropTypes.object).isRequired,
     embeddings: PropTypes.arrayOf(PropTypes.object).isRequired,
+    decisions: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings']).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings', 'decisions']).isRequired,
 };
 
 export default ModelDetailIntro;
