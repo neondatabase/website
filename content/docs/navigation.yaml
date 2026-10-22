@@ -1,10 +1,10 @@
 - nav: Get started
-  slug: get-started
+  slug: /docs
   title: Get started
   icon: home
   items:
     - title: Overview
-      slug: get-started
+      slug: /docs
     - section: Why Neon?
       icon: info
       items:

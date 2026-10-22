@@ -4,9 +4,10 @@ import LINKS from 'constants/links';
 import getMetadata from 'utils/get-metadata';
 
 // The docs front page. It lives at the bare `/docs` route (not in the
-// `[...slug]` catch-all) so the shared (docs) layout's Sidebar finds no
-// matching navigation slug and renders nothing: the page is full-width and
-// sidebar-less without any layout change. Agents and Accept: text/markdown
+// `[...slug]` catch-all). The Get started nav lane declares `/docs` as its
+// `Overview` item (content/docs/navigation.yaml), so the shared (docs) layout's
+// Sidebar matches it and renders the Get started menu with Overview active: the
+// home carries the Get started left sidebar. Agents and Accept: text/markdown
 // requests to `/docs` are answered with /docs/llms.txt by src/proxy.js before
 // they reach this page.
 const title = 'Neon documentation';

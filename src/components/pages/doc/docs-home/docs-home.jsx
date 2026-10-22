@@ -170,35 +170,33 @@ const mutedText = 'text-gray-new-50 dark:text-gray-new-70';
 // brightness brand neon green-45 (#00E599).
 const composerGreen = 'text-green-44 dark:text-green-52';
 
-// Thin local layout wrapper for the label-left sections (quiet heading in a
-// fixed left column, content on the right, divider on top). Turn 7 layout: a
-// fixed 300px label track + minmax(0,1fr) content, inside the one 1296px
-// content container (<main>), so every section shares the hero's left edge and
-// the container's right edge. There is no shared "label-left section" component
-// on the site: the marketing home re-implements this two-column grid inline in
-// every section (build-your-backend, scale-your-app, ...), with only
-// `SectionLabel` shared. This keeps the docs home from re-typing the grid per
-// section; see the rebuild notes for the flagged decision on whether to promote
-// it to a shared component.
-const LabelSection = ({ heading, description, action, children }) => (
-  <section
-    className={cn(
-      'grid grid-cols-[300px_minmax(0,1fr)] items-start gap-x-14 border-t pt-14 pb-24 xl:gap-x-10 md:grid-cols-1 md:gap-6 md:pt-10 md:pb-16',
-      softBorder
-    )}
-  >
-    <div className="grid content-start gap-2">
-      <h2 className="m-0 font-title text-[32px] leading-tight font-normal tracking-[-0.03em] text-balance md:text-[26px]">
+// Brief #7 body-section wrapper: a full-width header row (H2 left, one-liner
+// and any action right, baseline-aligned and wrapping on narrow) with the
+// section content full-width below it, divider on top. This replaces the
+// earlier label-left (fixed 300px label track) treatment: with the Get started
+// sidebar now occupying the left column, the content column is narrower, so the
+// sections span its full width and lead with a header row instead of spending
+// 300px on a label track. H2 is tuned to the brief's 22-28px range.
+const Section = ({ heading, description, action, children }) => (
+  <section className={cn('border-t pt-14 pb-20 md:pt-10 md:pb-14', softBorder)}>
+    <div className="mb-8 flex flex-wrap items-baseline justify-between gap-x-10 gap-y-1 md:mb-6">
+      <h2 className="m-0 font-title text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance md:text-[22px]">
         {heading}
       </h2>
-      {description && <span className={cn('text-sm leading-[1.5]', mutedText)}>{description}</span>}
-      {action}
+      {(description || action) && (
+        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          {description && (
+            <span className={cn('text-[15px] leading-[1.5]', mutedText)}>{description}</span>
+          )}
+          {action}
+        </div>
+      )}
     </div>
     <div className="min-w-0">{children}</div>
   </section>
 );
 
-LabelSection.propTypes = {
+Section.propTypes = {
   heading: PropTypes.string.isRequired,
   description: PropTypes.string,
   action: PropTypes.node,
@@ -445,18 +443,18 @@ const FoundationCard = () => (
   </div>
 );
 
-// Left gutter = max(64px, 200px - side gutter), so the H1 meets the docs
-// header's "Get started" at narrow desktop widths. The side gutter is the
-// layout Container's 32px padding plus this <main>'s centering margin, measured
-// against the @container wrapper (the Container's content box).
+// The home now renders inside the shared (docs) layout's content column, to the
+// right of the Get started sidebar, so it drops the old full-width left-gutter
+// alignment trick. Per brief #7 the content column tops out ~1200px (main box
+// ~1328px less gutters) and centers in whatever width the sidebar leaves.
 const DocsHome = () => (
   <div className="@container w-full font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
-    <main className="mx-auto max-w-[1296px] px-16 pl-[max(64px,calc(168px_-_max(0px,(100cqw_-_1296px)/2)))] lg:px-10 md:px-8 sm:px-5">
+    <main className="mx-auto w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-10 md:px-8 sm:px-5">
       {/*
         Hero: text half on the left, composer box on the right, side by side on
         desktop and stacked (text then box) at lg and below. This hero uses its
-        own two-column split and intentionally does NOT use the label-left
-        LabelSection layout the sections further down the page use.
+        own two-column split and intentionally does NOT use the header-row
+        Section layout the sections further down the page use.
       */}
       <section className="grid grid-cols-[minmax(0,47fr)_minmax(0,53fr)] items-start gap-x-16 gap-y-10 py-24 xl:gap-x-10 lg:grid-cols-1 lg:py-16 md:py-14">
         <div className="grid content-start gap-6">
@@ -488,9 +486,9 @@ const DocsHome = () => (
         <Composer />
       </section>
 
-      {/* Build your backend */}
-      <LabelSection
-        heading="Build your backend"
+      {/* What do you want to add to your app? */}
+      <Section
+        heading="What do you want to add to your app?"
         description="Every capability runs on the same Postgres branch."
       >
         <div className="grid gap-3">
@@ -516,18 +514,14 @@ const DocsHome = () => (
           </DetailIconCards>
           {/* eslint-enable react/no-unknown-property */}
         </div>
-      </LabelSection>
+      </Section>
 
       {/* Frameworks */}
-      <LabelSection
+      <Section
         heading="Frameworks"
         description="Quickstarts for the stacks most people use."
         action={
-          <Link
-            to="/docs/get-started/frameworks"
-            theme="green-underlined"
-            className="mt-1 text-[13px]"
-          >
+          <Link to="/docs/get-started/frameworks" theme="green-underlined" className="text-[13px]">
             See all frameworks
           </Link>
         }
@@ -539,10 +533,10 @@ const DocsHome = () => (
             </a>
           ))}
         </CompactCards>
-      </LabelSection>
+      </Section>
 
       {/* Set up your agent */}
-      <LabelSection
+      <Section
         heading="Set up your agent"
         description="Connect Neon over MCP so your coding agent can create branches, run SQL, and read docs."
       >
@@ -569,10 +563,10 @@ const DocsHome = () => (
             <CopyChip label="/agent-setup.md" url="https://neon.com/agent-setup.md" />
           </div>
         </div>
-      </LabelSection>
+      </Section>
 
       {/* Guided paths */}
-      <LabelSection
+      <Section
         heading="Guided paths"
         description="Longer walkthroughs when you want the whole picture."
       >
@@ -585,7 +579,7 @@ const DocsHome = () => (
           ))}
         </DetailIconCards>
         {/* eslint-enable react/no-unknown-property */}
-      </LabelSection>
+      </Section>
     </main>
   </div>
 );

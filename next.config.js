@@ -2249,6 +2249,15 @@ const defaultConfig = {
         destination: '/docs',
         permanent: true,
       },
+      // The former Get started section landing was folded into the `/docs` home
+      // (the home IS the Get started overview now). Only the exact path
+      // redirects: `/docs/get-started/*` subpages are real pages and keep their
+      // URLs.
+      {
+        source: '/docs/get-started',
+        destination: '/docs',
+        permanent: true,
+      },
       // Former redirectFrom entries of content/docs/introduction.md, pointed
       // straight at the new front page so they don't double-hop.
       {
@@ -2286,8 +2295,9 @@ const defaultConfig = {
       // Destinations are taken from `content/docs/navigation.yaml`: the section's
       // own landing slug where the nav declares one, otherwise its first child.
       // `/docs/guides` and `/docs/workflows` are deliberately absent: neither has a
-      // single landing page in the nav. `/docs/cli`, `/docs/changelog` and
-      // `/docs/get-started` are absent because they have real root pages.
+      // single landing page in the nav. `/docs/cli` and `/docs/changelog` are
+      // absent because they have real root pages; `/docs/get-started` and
+      // `/docs/introduction` are absent because they redirect to `/docs` (above).
       {
         source: '/docs/ai',
         destination: '/docs/ai/ai-agents-tools',

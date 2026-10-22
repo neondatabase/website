@@ -26,8 +26,18 @@ describe('docs home redirects', () => {
     expect(sources.filter((source) => source.startsWith('/docs/introduction/:'))).toEqual([]);
   });
 
-  it('serves /docs/get-started as a page instead of redirecting it', () => {
-    expect(redirects.map(({ source }) => source)).not.toContain('/docs/get-started');
+  it('permanently redirects /docs/get-started to /docs', () => {
+    expect(redirects).toContainEqual({
+      source: '/docs/get-started',
+      destination: '/docs',
+      permanent: true,
+    });
+  });
+
+  it('does not redirect /docs/get-started subpages', () => {
+    const sources = redirects.map(({ source }) => source);
+
+    expect(sources.filter((source) => source.startsWith('/docs/get-started/:'))).toEqual([]);
   });
 
   it('sends no redirect to the old /docs/introduction home', () => {
