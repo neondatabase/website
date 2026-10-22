@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-10-13T12:11:05.423Z'
+updatedOn: '2026-10-22T18:03:41.423Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -29,7 +29,7 @@ hideCopyPage: true
 
 ## Available models
 
-Browse the full catalog below. Switch between the **Text**, **Image**, and **Embeddings** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation).
+Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddings**, and **Decisions** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL; System One decision models get AI SDK, TypeScript, Python, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation), `/typesafe/v1/systemone` for decisions.
 
 <AiGatewayModelIndex/>
 
