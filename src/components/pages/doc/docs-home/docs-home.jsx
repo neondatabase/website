@@ -177,21 +177,34 @@ const composerGreen = 'text-green-44 dark:text-green-52';
 // sidebar now occupying the left column, the content column is narrower, so the
 // sections span its full width and lead with a header row instead of spending
 // 300px on a label track. H2 is tuned to the brief's 22-28px range.
+// Shared header row for a section (and for each column of the side-by-side
+// Frameworks / Coding agents block): H2 left, one-liner and any action right,
+// baseline-aligned and wrapping on narrow.
+const SectionHeader = ({ heading, description, action }) => (
+  <div className="mb-8 flex flex-wrap items-baseline justify-between gap-x-10 gap-y-1 md:mb-6">
+    <h2 className="m-0 font-title text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance md:text-[22px]">
+      {heading}
+    </h2>
+    {(description || action) && (
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        {description && (
+          <span className={cn('text-[15px] leading-[1.5]', mutedText)}>{description}</span>
+        )}
+        {action}
+      </div>
+    )}
+  </div>
+);
+
+SectionHeader.propTypes = {
+  heading: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  action: PropTypes.node,
+};
+
 const Section = ({ heading, description, action, children }) => (
   <section className={cn('border-t pt-14 pb-20 md:pt-10 md:pb-14', softBorder)}>
-    <div className="mb-8 flex flex-wrap items-baseline justify-between gap-x-10 gap-y-1 md:mb-6">
-      <h2 className="m-0 font-title text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance md:text-[22px]">
-        {heading}
-      </h2>
-      {(description || action) && (
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          {description && (
-            <span className={cn('text-[15px] leading-[1.5]', mutedText)}>{description}</span>
-          )}
-          {action}
-        </div>
-      )}
-    </div>
+    <SectionHeader heading={heading} description={description} action={action} />
     <div className="min-w-0">{children}</div>
   </section>
 );
@@ -384,62 +397,59 @@ const Composer = () => {
   );
 };
 
-// Postgres foundation card: full-width, foundation card across the top of the
-// capability grid, with the slash-separated sub-links. It uses the same plain
-// green-flat fill as the DetailIconCards cards below it (bg-[#E4F1EB]/40 light,
-// #101815 dark) so it sits calmly in the same card family while staying full-
-// width. DetailIconCards cannot render a single full-width card out of the box
-// (it lays children out in a 2/3/4-col grid of equal cards), so this stays
-// custom. Its lockup line repeats the classes DetailIconCards uses for its
-// `lockup` prop, with the same shared database icon the live Products grid
-// uses for Lakebase Postgres. Inside, it splits into two columns like the
-// hero: lockup and title on the left, description and sub-links on the right,
-// stacking at md. See the rebuild notes for the flagged decision. The whole
-// card links to /docs/get-started through a stretched overlay link, and the
-// three sub-links sit above it (relative z-10) so each is its own link; a
-// card-wide <a> can't contain them, since links can't nest.
+// Postgres foundation card: the full-width foundation tier that sits above the
+// 3-up grid of capability cards, with the slash-separated sub-links. It uses
+// the same plain green-flat fill as the DetailIconCards cards below it
+// (bg-[#E4F1EB]/40 light, #101815 dark) so it sits calmly in the same card
+// family while staying full-width. DetailIconCards cannot render a single
+// full-width card out of the box (it lays children out in a 2/3/4-col grid of
+// equal cards), so this stays custom. Its lockup line repeats the classes
+// DetailIconCards uses for its `lockup` prop, with the same shared database
+// icon the live Products grid uses for Lakebase Postgres. Inside, it is a
+// single tight, left-aligned block: lockup + title, a one-line description,
+// then the sub-links as a row underneath, so there is no dead middle gap. The
+// whole card links to the full backend quickstart through a stretched overlay
+// link (the old /docs/get-started target permanently redirects back to /docs, a
+// self-loop), and the three sub-links sit above it (relative z-10) so each is
+// its own link; a card-wide <a> can't contain them, since links can't nest.
 const FoundationCard = () => (
   <div
     className={cn(
-      'group relative grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-x-12 gap-y-4 border px-[26px] py-6 transition-colors hover:border-green-44 md:grid-cols-1',
+      'group relative flex flex-col gap-2.5 border px-[26px] py-6 transition-colors hover:border-green-44',
       'border-green-44/70 bg-[#E4F1EB]/40 dark:border-green-44/30 dark:bg-[#101815]'
     )}
   >
     <NextLink
-      href="/docs/get-started"
+      href="/docs/get-started/full-backend-quickstart"
       aria-label="Create a database"
       className="absolute inset-0"
     />
-    <div className="grid">
-      {/* Same lockup classes as the DetailIconCards lockup variant. */}
-      <span className="mb-7 flex items-center gap-2">
-        <DatabaseIcon className="size-5 shrink-0 text-[#2DAA7D] dark:text-[#00E599] [&_*]:[stroke-width:1.46] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]" />
-        <span className="text-[13px] leading-snug font-normal tracking-normal text-[#6B6F77] dark:text-gray-new-60">
-          Lakebase Postgres
-        </span>
+    {/* Same lockup classes as the DetailIconCards lockup variant. */}
+    <span className="flex items-center gap-2">
+      <DatabaseIcon className="size-5 shrink-0 text-[#2DAA7D] dark:text-[#00E599] [&_*]:[stroke-width:1.46] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]" />
+      <span className="text-[13px] leading-snug font-normal tracking-normal text-[#6B6F77] dark:text-gray-new-60">
+        Lakebase Postgres
       </span>
-      <span className="font-sans text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white">
-        Create a database
-      </span>
-    </div>
-    <div className="grid gap-2.5">
-      <span className="max-w-[440px] text-base leading-[1.5] text-[#6B6F77] dark:text-gray-new-60">
-        Serverless Postgres that branches with your app. Every other capability runs on it.
-      </span>
-      <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#303236] dark:text-gray-new-80">
-        <NextLink href="/docs/get-started/signing-up" className="relative z-10">
-          Quickstart
-        </NextLink>
-        <span className="text-gray-new-70">/</span>
-        <NextLink href="/docs/connect/connect-hub" className="relative z-10">
-          Connect
-        </NextLink>
-        <span className="text-gray-new-70">/</span>
-        <NextLink href="/docs/introduction/branching" className="relative z-10">
-          Branching
-        </NextLink>
-      </span>
-    </div>
+    </span>
+    <span className="font-sans text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white">
+      Create a database
+    </span>
+    <span className="text-base leading-[1.5] text-[#6B6F77] dark:text-gray-new-60">
+      Serverless Postgres that branches with your app.
+    </span>
+    <span className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#303236] dark:text-gray-new-80">
+      <NextLink href="/docs/get-started/signing-up" className="relative z-10">
+        Quickstart
+      </NextLink>
+      <span className="text-gray-new-70">/</span>
+      <NextLink href="/docs/connect/connect-hub" className="relative z-10">
+        Connect
+      </NextLink>
+      <span className="text-gray-new-70">/</span>
+      <NextLink href="/docs/introduction/branching" className="relative z-10">
+        Branching
+      </NextLink>
+    </span>
   </div>
 );
 
@@ -488,10 +498,7 @@ const DocsHome = () => (
       </section>
 
       {/* What do you want to add to your app? */}
-      <Section
-        heading="What do you want to add to your app?"
-        description="Every capability runs on the same Postgres branch."
-      >
+      <Section heading="What do you want to add to your app?">
         <div className="grid gap-3">
           <FoundationCard />
           {/*
@@ -517,54 +524,72 @@ const DocsHome = () => (
         </div>
       </Section>
 
-      {/* Frameworks */}
-      <Section
-        heading="Frameworks"
-        description="Quickstarts for the stacks most people use."
-        action={
-          <Link to="/docs/get-started/frameworks" theme="green-underlined" className="text-[13px]">
-            See all frameworks
-          </Link>
-        }
-      >
-        <CompactCards className="my-0!" cols={4}>
-          {FRAMEWORKS.map((f) => (
-            <a key={f.name} href={f.to} title={f.name} icon={f.icon}>
-              {f.name}
-            </a>
-          ))}
-        </CompactCards>
-      </Section>
+      {/*
+        Frameworks and Coding agents, side by side. These used to be two stacked
+        full-width Section blocks; the brief's Claude mockup puts them in two
+        columns. To balance the uneven content (Frameworks has 8 cards, Coding
+        agents has 4 cards plus the Markdown box), each column lays its cards out
+        2-up: Frameworks fills ~4 rows, Coding agents fills ~2 rows and the
+        Markdown box picks up the rest, so neither column looks lopsided. The two
+        columns collapse to a single stacked column at lg and below.
+      */}
+      <section className={cn('border-t pt-14 pb-20 md:pt-10 md:pb-14', softBorder)}>
+        <div className="grid grid-cols-2 gap-x-16 gap-y-12 lg:grid-cols-1 lg:gap-y-10">
+          {/* Frameworks */}
+          <div className="flex min-w-0 flex-col">
+            <SectionHeader
+              heading="Frameworks"
+              action={
+                <Link
+                  to="/docs/get-started/frameworks"
+                  theme="green-underlined"
+                  className="text-[13px]"
+                >
+                  See all
+                </Link>
+              }
+            />
+            <CompactCards className="my-0!" cols={2}>
+              {FRAMEWORKS.map((f) => (
+                <a key={f.name} href={f.to} title={f.name} icon={f.icon}>
+                  {f.name}
+                </a>
+              ))}
+            </CompactCards>
+          </div>
 
-      {/* Set up your agent */}
-      <Section
-        heading="Set up your agent"
-        description="Connect Neon over MCP so your coding agent can create branches, run SQL, and read docs."
-      >
-        <div className="grid gap-5">
-          <CompactCards className="my-0!" cols={4}>
-            {AGENTS.map((g) => (
-              <a key={g.name} href={MCP_HREF} title={g.name} icon={g.icon}>
-                {g.name}
-              </a>
-            ))}
-          </CompactCards>
-          <div
-            className={cn(
-              'flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[2px] border border-dashed p-3.5 px-4 text-[13px]',
-              strongBorder,
-              mutedText
-            )}
-          >
-            <span className="min-w-[220px] flex-1">
-              Every docs page is also served as Markdown. Point an agent at the index and it can
-              find the rest.
-            </span>
-            <CopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
-            <CopyChip label="/agent-setup.md" url="https://neon.com/agent-setup.md" />
+          {/* Coding agents */}
+          <div className="flex min-w-0 flex-col">
+            <SectionHeader
+              heading="Coding agents"
+              description="Connect over MCP to create branches, run SQL, and read docs."
+            />
+            <div className="grid gap-5">
+              <CompactCards className="my-0!" cols={2}>
+                {AGENTS.map((g) => (
+                  <a key={g.name} href={MCP_HREF} title={g.name} icon={g.icon}>
+                    {g.name}
+                  </a>
+                ))}
+              </CompactCards>
+              <div
+                className={cn(
+                  'flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[2px] border border-dashed p-3.5 px-4 text-[13px]',
+                  strongBorder,
+                  mutedText
+                )}
+              >
+                <span className="min-w-[220px] flex-1">
+                  Every docs page is also served as Markdown. Point an agent at the index and it can
+                  find the rest.
+                </span>
+                <CopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
+                <CopyChip label="/agent-setup.md" url="https://neon.com/agent-setup.md" />
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Guided paths */}
       <Section heading="Guided paths" description="End-to-end tutorials.">

@@ -71,17 +71,13 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           className="flex min-w-[max(140px,calc((100%_-_1232px)/2_-_60px))] shrink-0 items-center gap-x-2 lg:min-w-0 lg:shrink"
           to={customType?.link || LINKS.docs}
         >
-          <LogoLightIcon className="h-[22px] w-auto shrink-0 dark:hidden" width={80} height={22} />
-          <LogoDarkIcon
-            className="hidden h-[22px] w-auto shrink-0 dark:block"
-            width={80}
-            height={22}
-          />
+          <LogoLightIcon className="h-7 w-auto shrink-0 dark:hidden" width={102} height={28} />
+          <LogoDarkIcon className="hidden h-7 w-auto shrink-0 dark:block" width={102} height={28} />
           <span
             className={cn(
-              'mt-px min-w-0 truncate text-base leading-none font-bold tracking-[0.05em] text-[#157A55] uppercase dark:text-green-52',
+              'mt-px min-w-0 truncate text-[15px] leading-none font-semibold tracking-[0.02em] text-[#157A55] uppercase dark:text-green-52',
               // Long section labels (PostgreSQL Tutorial) step down on phones.
-              customType?.title && 'md:text-[13px] md:tracking-[0.02em]'
+              customType?.title && 'md:text-[13px] md:tracking-[0.01em]'
             )}
           >
             {customType?.title || 'Docs'}
