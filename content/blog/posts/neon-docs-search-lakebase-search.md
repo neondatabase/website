@@ -110,6 +110,6 @@ and a hybrid query I can call from my API. Wait for my approval before
 changing anything.
 ```
 
-Try the new search on [neon.com/docs](https://neon.com/docs) and let us know in [Discord](https://neon.com/discord) what it should find better.
+To see the result, head to the [Neon docs](https://neon.com/docs), press Cmd+K and give the new search a try. Let us know in [Discord](https://neon.com/discord) what it should find better.
 
 Happy coding!
