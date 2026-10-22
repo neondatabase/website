@@ -36,7 +36,7 @@ Moving the database onto the lake has three consequences. Compute owns no data, 
 
 People and AI agents can create, branch, break, restore, and delete a database as easily as a Git branch, and run thousands of them without paying for idle servers.
 
-![Anatomy of a lakebase. Apps, coding agents, agent tasks, and analysts sit at the top. A layer of stateless Postgres compute (a main branch, an agent branch, an idle branch scaled to zero, and a read replica) sits beside a layer of lakehouse analytics engines. Both read from and write to one object storage layer, the lake, which is the source of truth and holds transactional row data with full change history alongside analytical column tables](/guides/images/what-is-a-lakebase/lakebase-anatomy.svg 'no-border')
+![Anatomy of a lakebase. Apps, coding agents, agent tasks, and analysts sit at the top. A layer of stateless Postgres compute (a main branch, an agent branch, an idle branch scaled to zero, and a read replica) sits beside a layer of lakehouse analytics engines. Compute reaches one object storage layer, the lake, through safekeepers and pageservers, and analytics engines read from the same lake. The lake holds transactional row data with full change history alongside analytical column tables](/guides/images/what-is-a-lakebase/lakebase-anatomy.svg 'no-border')
 
 ## What makes a database a lakebase
 
@@ -45,7 +45,7 @@ A lakebase has nine traits in three groups: how it's built, what that enables fo
 ### How it's built
 
 1. **Storage and compute are separate.** Compute is stateless. It runs the queries, caches hot data in memory and on local SSDs, and can be started, stopped, resized, or replaced without losing anything, because it doesn't own the durable copy.
-2. **Object storage is the source of truth.** Durability lives in cloud object storage like Amazon S3, not on a disk attached to one machine. Object storage is cheap, durable, and effectively unlimited, and it keeps a full history of changes. A lakebase keeps object storage off the hot query path, so queries don't pay its latency.
+2. **Object storage is the source of truth.** Durability doesn't depend on a disk attached to one machine. Commits are replicated across a quorum of storage nodes, and the full history lives in cloud object storage like Amazon S3. Object storage is cheap, durable, and effectively unlimited, and it keeps a full history of changes. A lakebase keeps object storage off the hot query path, so queries don't pay its latency.
 3. **The data is open.** Data on the lake sits in open formats that other engines can read, so it isn't locked inside one vendor's black box.
 
 ### What it enables for agents

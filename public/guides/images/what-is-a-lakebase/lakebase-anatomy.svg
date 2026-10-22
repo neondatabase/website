@@ -66,7 +66,7 @@
 
   <!-- Arrows to storage -->
   <line x1="300" y1="296" x2="300" y2="334" stroke="#9ca3af" stroke-width="1.5" marker-start="url(#anat-ar-rev)" marker-end="url(#anat-ar)"/>
-  <text x="312" y="320" font-size="10.5" fill="#6b7280">WAL in, pages out</text>
+  <text x="312" y="320" font-size="10.5" fill="#6b7280">via safekeepers and pageservers</text>
   <line x1="668" y1="296" x2="668" y2="334" stroke="#9ca3af" stroke-width="1.5" marker-start="url(#anat-ar-rev)" marker-end="url(#anat-ar)"/>
   <text x="560" y="320" font-size="10.5" fill="#6b7280">open formats</text>
 
