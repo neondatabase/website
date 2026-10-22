@@ -12,7 +12,7 @@
 const ENV = ['NEON_AI_GATEWAY_BASE_URL', 'NEON_AI_GATEWAY_TOKEN'];
 const AI_SDK_DEPS = ['ai', '@neondatabase/ai-sdk-provider'];
 // `ai`'s latest dist-tag is a 6.x release, which has no experimental_decide.
-const DECISION_AI_SDK_DEPS = ['ai@^7.0.133', '@neondatabase/ai-sdk-provider@^1.1.0'];
+const DECISION_AI_SDK_DEPS = ['ai@7', '@neondatabase/ai-sdk-provider'];
 
 const CHAT_PROMPT = 'Explain Serverless Postgres.';
 const SEARCH_PROMPT = 'What is the latest stable Postgres release?';
