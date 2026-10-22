@@ -144,7 +144,7 @@ import express from 'express';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpAuth } from '@neon/oauth/mcp';
-import { expressMcp, type AuthedRequest } from '@neon/oauth/mcp/express';
+import { expressMcp } from '@neon/oauth/mcp/express';
 
 const auth = createMcpAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!, // the Auth URL of your branch
@@ -166,16 +166,13 @@ app.post('/mcp', async (req, res) => {
     server.close();
   });
   await server.connect(transport);
-  Object.assign(req, {
-    auth: auth.toAuthInfo((req as AuthedRequest).auth),
-  });
   await transport.handleRequest(req, res, req.body);
 });
 
 app.listen(3000);
 ```
 
-`createMcpAuth()` verifies the signature, `iss`, and `aud` of each access token. `expressMcp()` serves the protected resource metadata, answers requests without a valid token with a `401` that points to it, and sets `req.auth` for valid ones. The SDK also has adapters for Hono, Next.js, and `node:http`.
+`createMcpAuth()` verifies the signature, `iss`, and `aud` of each access token. `expressMcp()` serves the protected resource metadata, answers requests without a valid token with a `401` that points to it, and sets `req.auth` for valid ones, in the MCP SDK's `AuthInfo` shape, so the transport passes it to your tools as `extra.authInfo`. The full verification result is on `req.authResult`. Use `@neon/oauth` 0.3.0 or later. The SDK also has adapters for Hono, Next.js, and `node:http`.
 
 #### Without the SDK
 
