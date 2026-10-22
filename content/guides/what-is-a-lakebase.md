@@ -11,6 +11,7 @@ summary: >-
   available on Neon and on Databricks, is built on the lakebase architecture.
 author: neon-team
 enableTableOfContents: true
+excludeFromBlog: true
 createdAt: '2026-10-21T00:00:00.000Z'
 ---
 
