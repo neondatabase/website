@@ -401,7 +401,7 @@ const Composer = () => {
 const FoundationCard = () => (
   <div
     className={cn(
-      'group relative grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-end gap-x-12 gap-y-4 border px-[26px] py-6 transition-colors hover:border-green-44 md:grid-cols-1',
+      'group relative grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-x-12 gap-y-4 border px-[26px] py-6 transition-colors hover:border-green-44 md:grid-cols-1',
       'border-green-44/70 bg-[#E4F1EB]/40 dark:border-green-44/30 dark:bg-[#101815]'
     )}
   >
@@ -567,10 +567,7 @@ const DocsHome = () => (
       </Section>
 
       {/* Guided paths */}
-      <Section
-        heading="Guided paths"
-        description="Longer walkthroughs when you want the whole picture."
-      >
+      <Section heading="Guided paths" description="End-to-end tutorials.">
         {/* eslint-disable react/no-unknown-property */}
         <DetailIconCards className="my-0!" cols={3} theme="green-flat">
           {GUIDED_PATHS.map((p) => (
