@@ -60,7 +60,6 @@ Let's define a lakebase in terms of: how it's built, what that enables for agent
 
 9. **Rows for transactions, columns for analytics, on one lake.** Your app's data is stored in row format for fast reads and writes, and lands on the same lake in columnar, open table formats for analytics. Lakehouse engines query fresh app data directly, with no nightly exports or fragile sync jobs.
 
-Lakebase Postgres covers traits 3 and 9 partly today. On Databricks, it can [store Postgres changes as Delta tables](https://docs.databricks.com/aws/en/oltp/projects/quickstart-lakebase-cdf) (Public Preview). On Neon, its storage engine is [open source](https://github.com/neondatabase/neon), and data reaches analytics systems through [logical replication](/docs/guides/logical-replication-guide) rather than open table formats on the lake.
 
 ## Questions to ask any database
 
