@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { pinnedSiteSearchHits } from 'utils/site-search-pinned';
+import { pinnedSiteSearchHits, pinsAboveResults } from 'utils/site-search-pinned';
 import {
   composeServerTiming,
   parseSiteSearchHits,
@@ -32,7 +32,8 @@ export async function POST(request) {
   }
 
   const pinned = pinnedSiteSearchHits(body.query, body.categories);
-  if (pinned && pinned.length > 0) {
+  const aboveResults = pinsAboveResults(body.query);
+  if (pinned && pinned.length > 0 && !aboveResults) {
     return NextResponse.json(
       { hits: pinned.slice(0, body.limit ?? pinned.length) },
       { headers: { 'Server-Timing': 'pinned;dur=0' } }
@@ -68,6 +69,10 @@ export async function POST(request) {
     hits = parseSiteSearchHits(payload);
   } catch {
     return NextResponse.json({ error: SEARCH_FAILED }, { status: 502 });
+  }
+
+  if (aboveResults) {
+    hits = [...pinned, ...hits].slice(0, body.limit);
   }
 
   return NextResponse.json(
