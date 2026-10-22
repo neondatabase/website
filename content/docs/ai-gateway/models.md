@@ -9,7 +9,9 @@ enableTableOfContents: true
 updatedOn: '2026-10-05T19:21:27.285Z'
 ---
 
-This page covers how to call models through Neon AI Gateway and the rules that apply. The full model catalog, with every model and copy-paste quickstart, is on the [AI Gateway overview](/docs/ai-gateway/overview#available-models).
+This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
+
+<CTA title="See every model on Neon AI Gateway" description="Compare every available model by provider, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
