@@ -32,7 +32,7 @@ We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search)
 
 In this post, I want to share how it went.
 
-## A quick refresher on Lakebase Search
+## What is Lakebase Search
 
 Lakebase Search adds vector, keyword and hybrid search to Lakebase Postgres through Postgres extensions:
 
