@@ -31,6 +31,7 @@ const PROVIDER_LABELS = {
   thinkingmachines: 'Thinking Machines',
   moonshotai: 'Moonshot AI',
   xai: 'xAI',
+  typesafe: 'TypeSafe',
 };
 
 const MODEL_CATALOG_NOTE =
