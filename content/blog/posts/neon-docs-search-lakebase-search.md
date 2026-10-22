@@ -26,11 +26,11 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.png'
 ---
 
-We just released a new search for neon.com. Open the search on any docs page (or press Cmd+K) and the results now come from [Lakebase Search](https://neon.com/docs/ai/lakebase-search), running on Neon. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
+We just released a new search for neon.com. Head to the [Neon docs](https://neon.com/docs), press Cmd+K and give it a try. The results now come from [Lakebase Search](https://neon.com/docs/ai/lakebase-search) running on Neon. The docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog and blog all live in one index.
 
-Until this week, that search box ran on a hosted search vendor and it did its job well. But once we shipped Lakebase Search, it felt odd to tell everyone to keep their search in Postgres while ours lived somewhere else. So we decided to dogfood it and I got to build it.
+Until this week, that search box ran on a hosted search vendor and it did its job well. Once we shipped Lakebase Search though, it felt odd to tell everyone to keep their search in Postgres while ours lived somewhere else. So we decided to dogfood it and I got to build it.
 
-In this post, I want to share how that went, especially from the perspective of someone who builds apps for a living and doesn't think of himself as a search person.
+In this post, I want to share how that went from the perspective of someone who builds apps for a living and doesn't think of himself as a search person.
 
 ## A quick refresher on Lakebase Search
 
