@@ -97,13 +97,40 @@ describe('AI Gateway model Markdown', () => {
       },
       { models: [] }
     );
-    const markdown = renderModelDetailMarkdown(row, { text: [], image: [], embeddings: [] });
+    const markdown = renderModelDetailMarkdown(row, {
+      text: [],
+      image: [],
+      embeddings: [],
+      decisions: [],
+    });
 
     expect(markdown).toContain('a System One decision model');
     expect(markdown).toContain(
-      '## Command\n\nCode examples are not currently available for this model.'
+      '## Command\n\n### Decisions\n\nCode examples are not currently available for this model.'
     );
     expect(markdown).not.toContain('### Text generation');
+  });
+
+  it('renders the decision examples under a Decisions heading', () => {
+    const row = modelRows
+      .buildRows(modelsData.neon, capabilities)
+      .find((candidate) => candidate.id === 'typesafeai-jev-1-14-0');
+    const decisions = resolveModel(modelsData, capabilities, row.id, 'systemone').examples;
+    const markdown = renderModelDetailMarkdown(row, {
+      text: [],
+      image: [],
+      embeddings: [],
+      decisions,
+    });
+
+    expect(markdown).toContain('## Command\n\n### Decisions\n\n#### AI SDK');
+    for (const label of ['#### AI SDK', '#### TypeScript', '#### Python', '#### cURL']) {
+      expect(markdown).toContain(label);
+    }
+    expect(markdown).toContain('neon.decisionModel("typesafeai-jev-1-14-0")');
+    expect(markdown).toContain('pip install typesafe-sdk');
+    expect(markdown).toContain('/typesafe/v1/systemone');
+    expect(markdown).toContain('**Environment variables**');
   });
 
   it('writes one file per model to the public Markdown mirror', async () => {

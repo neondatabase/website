@@ -30,6 +30,7 @@ const MODE_HEADINGS = {
   text: 'Text generation',
   image: 'Image generation',
   embeddings: 'Embeddings',
+  decisions: 'Decisions',
 };
 
 const NO_EXAMPLES = 'Code examples are not currently available for this model.';
@@ -60,6 +61,7 @@ const resolveExamplesByMode = (resolveModel, modelId) => ({
   text: resolveModel(modelsData, capabilities, modelId, 'chat')?.examples ?? [],
   image: resolveModel(modelsData, capabilities, modelId, 'image-generation')?.examples ?? [],
   embeddings: resolveModel(modelsData, capabilities, modelId, 'embeddings')?.examples ?? [],
+  decisions: resolveModel(modelsData, capabilities, modelId, 'systemone')?.examples ?? [],
 });
 
 const renderModelDetailMarkdown = (row, examplesByMode) => {
@@ -70,11 +72,9 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
       : row.hasMeasuredCapabilities
         ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
         : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
-  const primaryMode = row.isEmbedding ? 'embeddings' : 'text';
-  const commands = row.isDecision
-    ? [NO_EXAMPLES]
-    : [renderCommandSection(examplesByMode, primaryMode)];
-  const hasExamples = ['text', 'image', 'embeddings'].some(
+  const primaryMode = row.isEmbedding ? 'embeddings' : row.isDecision ? 'decisions' : 'text';
+  const commands = [renderCommandSection(examplesByMode, primaryMode)];
+  const hasExamples = ['text', 'image', 'embeddings', 'decisions'].some(
     (mode) => getLanguagesForMode(examplesByMode, mode).length > 0
   );
 
