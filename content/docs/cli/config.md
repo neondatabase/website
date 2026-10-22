@@ -147,7 +147,7 @@ Next: `neon config plan` to preview, `neon config apply` to provision.
 
 ### neon config add function (#add-function)
 
-Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it.
+Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a Function Registry template instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
 
 <CliUsage command="config add function" />
 
