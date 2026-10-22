@@ -44,7 +44,7 @@ The indexes live in object storage, so they're available right after a cold star
 
 ## Building search as an application builder
 
-I'm an application builder and Postgres internals have never been my area. When it comes to search, I don't usually feel like I have the background to make the deep decisions: which index types to use, how to rank results or how to merge keyword and semantic matches into one list. That's usually the point where a team hires a search specialist or pays a vendor.
+I'm an application builder and Postgres internals have never been my area. When it comes to search, I don't usually feel like I have the background to make the deep decisions: which index types to use, how to rank results or how to merge keyword and semantic matches into one list. In the past, that's usually the point where a team hired a search specialist or paid a vendor. Today, you point your agent at a good, industry-standard search system and hope for the best. I guess that's what I did and it went great!
 
 I also didn't write the SQL. Nobody really writes SQL by hand anymore; agents do. So the real question was whether my agent could pick up Lakebase Search well enough to guide me through those decisions.
 
