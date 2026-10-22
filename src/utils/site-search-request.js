@@ -18,7 +18,7 @@ export const SITE_SEARCH_CATEGORIES = [
   { id: 'changelog', label: 'Changelog' },
   { id: 'blog', label: 'Blog' },
   { id: 'faqs', label: 'FAQs' },
-  { id: 'guides', label: 'Guides' },
+  { id: 'guides', label: 'Community Guides' },
   { id: 'postgresql', label: 'PostgreSQL Tutorial' },
 ];
 
