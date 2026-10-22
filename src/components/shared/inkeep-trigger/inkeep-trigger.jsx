@@ -21,7 +21,7 @@ const InkeepModalChat = dynamic(
 const SECTION_CATEGORIES = {
   postgres: ['postgresql'],
 };
-const DOCS_CATEGORIES = ['docs'];
+const DOCS_CATEGORIES = ['docs', 'api'];
 
 const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
