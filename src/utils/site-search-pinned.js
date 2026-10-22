@@ -116,7 +116,6 @@ export function normalizePinnedQuery(query) {
     .trim();
 }
 
-// `categories` is the request's filter; omitted means every category.
 export function pinnedSiteSearchHits(query, categories) {
   const entry = PINNED_BY_QUERY.get(normalizePinnedQuery(query));
   if (!entry) return null;
