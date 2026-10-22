@@ -539,6 +539,7 @@ const DocsHome = () => (
           <div className="flex min-w-0 flex-col">
             <SectionHeader
               heading="Frameworks"
+              description="Quickstarts for popular stacks."
               action={
                 <Link
                   to="/docs/get-started/frameworks"
