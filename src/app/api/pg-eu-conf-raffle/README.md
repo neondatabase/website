@@ -1,6 +1,6 @@
-# PGConf US raffle submissions
+# PGConf EU raffle submissions
 
-The form on `/pg-us-conf-raffle` posts to this server route. The route validates the fields, signs the payload with HMAC-SHA256, and calls the Apps Script Web app. Apps Script saves the entry in the existing Databricks Raffle Google Form responses.
+The form on `/pg-eu-conf-raffle` posts to this server route. The route validates the fields, signs the payload with HMAC-SHA256, and calls the Apps Script Web app. Apps Script saves the entry in the existing Databricks Raffle Google Form responses.
 
 ## Environment variables
 
@@ -26,7 +26,7 @@ Add variables to each intended deployment environment and create a new deploymen
 ## Tests
 
 ```bash
-npm run test:unit:run -- src/app/api/pg-us-conf-raffle/route.test.js src/components/pages/pg-us-conf-raffle/raffle-form.test.jsx
+npm run test:unit:run -- src/app/api/pg-eu-conf-raffle/route.test.js src/components/pages/pg-eu-conf-raffle/raffle-form.test.jsx
 ```
 
 These tests mock Google requests and do not create raffle entries.

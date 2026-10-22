@@ -256,6 +256,11 @@ const defaultConfig = {
         destination: '/docs/guides/cloudflare_sandbox_neon_branching.jpg',
         permanent: true,
       },
+      {
+        source: '/pg-us-conf-raffle',
+        destination: '/pg-eu-conf-raffle',
+        permanent: true,
+      },
       // Common paths from the logs with no page of their own; send them to the closest real page.
       {
         source: '/about',

@@ -8,6 +8,7 @@ export default {
     description:
       'The backend for apps and agents. Build with Lakebase Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
     pathname: '',
+    markdownPath: '/index.md',
   },
   about: {
     title: 'About Us - Neon',

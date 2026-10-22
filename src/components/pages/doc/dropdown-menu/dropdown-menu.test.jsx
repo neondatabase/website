@@ -44,7 +44,7 @@ describe('DropdownMenu', () => {
     for (const name of ['ChatGPT', 'Claude']) {
       expect(screen.getByRole('link', { name: new RegExp(`Open in ${name}`) })).toHaveAttribute(
         'href',
-        expect.stringContaining(`https://neon.com${markdownPath}`)
+        expect.stringContaining('https://neon.com/docs/ai-gateway/models/gemini-3-5-flash+so')
       );
     }
   });

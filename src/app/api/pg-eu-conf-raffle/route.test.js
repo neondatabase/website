@@ -15,13 +15,13 @@ const validEntry = {
   email: 'alex@example.com',
 };
 const request = (body, origin = 'https://neon.com') =>
-  new Request('https://neon.com/api/pg-us-conf-raffle', {
+  new Request('https://neon.com/api/pg-eu-conf-raffle', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Origin: origin },
     body: JSON.stringify(body),
   });
 
-describe('PGConf US raffle submissions', () => {
+describe('PGConf EU raffle submissions', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
     vi.stubEnv('RAFFLE_APPS_SCRIPT_URL', scriptUrl);
@@ -51,7 +51,7 @@ describe('PGConf US raffle submissions', () => {
 
   it('rejects malformed JSON', async () => {
     const response = await POST(
-      new Request('https://neon.com/api/pg-us-conf-raffle', {
+      new Request('https://neon.com/api/pg-eu-conf-raffle', {
         method: 'POST',
         body: '{',
       })

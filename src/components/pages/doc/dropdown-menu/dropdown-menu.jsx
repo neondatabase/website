@@ -154,7 +154,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
 
   const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || '';
   const markdownPath = customMarkdownPath || `/${gitHubPath.replace('content/', '')}`;
-  const markdownUrl = `${siteUrl}${markdownPath}`;
+  const pageUrl = `${siteUrl}${markdownPath.replace(/\.md$/, '')}`;
 
   const close = useCallback(() => setIsOpen(false), []);
 
@@ -211,7 +211,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
               key={bot.name}
               icon={bot.icon}
               text={`Open in ${bot.name}`}
-              url={bot.generateLink(markdownUrl)}
+              url={bot.generateLink(pageUrl)}
               description={bot.description}
               onClick={() =>
                 sendGtagEvent('Action Clicked', {

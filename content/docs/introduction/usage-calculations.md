@@ -203,6 +203,10 @@ The response includes:
 
 On paid plans, the [consumption history API](#fetch-your-usage) provides these as separate metrics: `compute_time_seconds` corresponds to `compute_unit_seconds`, `data_storage_bytes_hour` splits into `root_branch_bytes_month`, `child_branch_bytes_month`, and `instant_restore_bytes_month`, and `data_transfer_bytes` splits into `public_network_transfer_bytes` and `private_network_transfer_bytes`.
 
+<Admonition type="note" title="Not for billing">
+These fields are approximate and meant for monitoring usage, not for billing or metering. On paid plans, use the [consumption history API](#fetch-your-usage) (`/consumption_history/v2/projects`) for billing.
+</Admonition>
+
 ### Branch storage
 
 The Free plan caps storage per project based on `logical_size` across branches. Use `GET /projects/{project_id}/branches` to check each branch's size:

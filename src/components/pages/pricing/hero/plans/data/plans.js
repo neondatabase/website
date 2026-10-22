@@ -44,7 +44,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs per project' },
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             info: '<p>5 GB per project included</p>',
@@ -95,7 +95,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
@@ -154,7 +154,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,

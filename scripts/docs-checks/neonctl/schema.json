@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.8.0",
+  "neonctlVersion": "8.10.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -241,7 +241,7 @@
       "examples": [
         {
           "command": "$0 ask --prompt \"How do schema-only branches work?\"",
-          "description": ""
+          "description": "Ask a question about Neon"
         }
       ]
     },
@@ -1453,7 +1453,7 @@
               "describe": "Label for the credential"
             },
             "scope": {
-              "type": "string",
+              "type": "array",
               "describe": "Capability to grant. Repeatable. Values: storage:read, storage:write, ai_gateway:invoke, functions:invoke",
               "required": true,
               "choices": [
@@ -1897,6 +1897,64 @@
         }
       ]
     },
+    "docs": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "search": {
+          "name": "search",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "query",
+              "required": true,
+              "describe": "What to search for",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "category": {
+              "type": "array",
+              "describe": "Only return pages in these categories (repeatable)",
+              "choices": [
+                "docs",
+                "api",
+                "postgresql",
+                "guides",
+                "faqs",
+                "blog",
+                "changelog"
+              ]
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of results (1-40)",
+              "default": 10
+            },
+            "url": {
+              "type": "string",
+              "describe": "Override the site search URL",
+              "hidden": true
+            }
+          },
+          "commands": {},
+          "describe": "Search neon.com: docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog, and blog",
+          "examples": [
+            {
+              "command": "$0 docs search \"reset a branch\"",
+              "description": "Search neon.com: docs, API reference, PostgreSQL tutorial, guides, FAQs, changelog, and blog"
+            },
+            {
+              "command": "$0 docs search \"create branch\" --category api --category docs",
+              "description": "Search only the API reference and the docs"
+            }
+          ]
+        }
+      },
+      "describe": "Search neon.com docs, guides, and more",
+      "usage": "$0 docs <sub-command> [options]"
+    },
     "env": {
       "aliases": [],
       "positionals": [],
@@ -1996,7 +2054,7 @@
       "examples": [
         {
           "command": "$0 feedback --message \"The branch docs were unclear\"",
-          "description": ""
+          "description": "Send feedback to Neon"
         }
       ]
     },
@@ -2053,7 +2111,7 @@
               "hidden": true
             },
             "env": {
-              "type": "string",
+              "type": "array",
               "describe": "Environment variable as KEY=VALUE (repeatable)"
             },
             "path": {
@@ -2550,7 +2608,7 @@
               "name": "ips",
               "variadic": true,
               "describe": "The list of IP addresses to add",
-              "type": "string",
+              "type": "array",
               "default": []
             }
           ],
@@ -2580,7 +2638,7 @@
               "name": "ips",
               "variadic": true,
               "describe": "The list of IP addresses to remove",
-              "type": "string",
+              "type": "array",
               "default": []
             }
           ],
@@ -2597,7 +2655,7 @@
               "name": "ips",
               "variadic": true,
               "describe": "The list of IP addresses to reset",
-              "type": "string",
+              "type": "array",
               "default": []
             }
           ],
@@ -3225,7 +3283,7 @@
                       "required": true
                     },
                     "enabled-events": {
-                      "type": "string",
+                      "type": "array",
                       "describe": "Events to enable",
                       "choices": [
                         "user.before_create",
@@ -3551,7 +3609,7 @@
               ],
               "options": {
                 "roles": {
-                  "type": "string",
+                  "type": "array",
                   "describe": "Roles to assign",
                   "required": true
                 }
@@ -3583,7 +3641,7 @@
       "examples": [
         {
           "command": "$0 open",
-          "description": ""
+          "description": "Open the linked project in the Neon Console"
         }
       ]
     },

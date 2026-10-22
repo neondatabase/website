@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-21T12:44:07.000Z'
 ---
 
 Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
@@ -17,13 +17,13 @@ Every error described below also appears as a log line in the Console. See [Obje
 
 The Access Key ID is wrong, missing, or the credential has been revoked.
 
-**Fix:** Check that `AWS_ACCESS_KEY_ID` is set to the `token_id` from the credential response, not `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping. If you no longer have it, revoke the credential and create a new one.
+**Fix:** Check that `AWS_ACCESS_KEY_ID` is set to the `token_id` from the credential response, not `token_id_short`. See [Authentication](/docs/storage/authentication#mapping-to-your-s3-sdk) for the correct field mapping. If you no longer have it, [list your credentials](/docs/storage/authentication#listing-credentials).
 
 ### `403 SignatureDoesNotMatch`
 
 The Secret Access Key is wrong.
 
-**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the 64-character hex string, not the `api_token`. Both are returned only once at creation. If you no longer have the `s3_secret_access_key`, revoke the credential and create a new one.
+**Fix:** Check that `AWS_SECRET_ACCESS_KEY` is set to the `s3_secret_access_key` field from the credential response. This is the full value, `nsk_live_` followed by 64 hex characters, not the `api_token`. Keep the `nsk_live_` prefix. If you no longer have the `s3_secret_access_key`, [show it again](/docs/storage/authentication#listing-credentials).
 
 ### `403 AccessDenied`: missing scope
 

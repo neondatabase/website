@@ -76,6 +76,14 @@ module.exports = {
       label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
     },
+    {
+      label: 'Connect an agent to the Neon MCP server at https://mcp.neon.tech/mcp',
+      url: 'https://neon.com/docs/ai/neon-mcp-server.md',
+    },
+    {
+      label: 'Search and read these docs over MCP at https://neon.com/docs/mcp (no auth)',
+      url: 'https://neon.com/.well-known/mcp/docs-server-card.json',
+    },
     { label: 'Make a Postgres query live', url: 'https://neon.com/docs/realtime/overview.md' },
     {
       label: 'Keep a UI in sync with Postgres',
@@ -134,25 +142,86 @@ module.exports = {
     {
       name: 'Connect',
       description: 'Drivers, connection strings, pooling, local dev tooling, and troubleshooting.',
+      subIndex: {
+        outputPath: 'public/docs/connect/llms.txt',
+        url: 'https://neon.com/docs/connect/llms.txt',
+        highlights: [
+          'connect/choose-connection.md',
+          'connect/connect-from-any-app.md',
+          'connect/connection-pooling.md',
+          'serverless/serverless-driver.md',
+          'reference/neon-ts.md',
+          'connect/connection-errors.md',
+        ],
+      },
     },
     {
       name: 'Neon CLI',
       description:
         'Install: `npm i -g neon`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.',
+      subIndex: {
+        outputPath: 'public/docs/cli/llms.txt',
+        url: 'https://neon.com/docs/cli/llms.txt',
+        highlights: [
+          'cli.md',
+          'cli/quickstart.md',
+          'cli/install.md',
+          'cli/init.md',
+          'cli/login.md',
+          'cli/branches.md',
+          'cli/connection-string.md',
+          'cli/deploy.md',
+        ],
+      },
     },
     {
       name: 'AI & Agents',
       description:
         'Agent Skills, MCP integrations, vector search, and tools for building AI-powered applications with Neon.',
+      subIndex: {
+        outputPath: 'public/docs/ai/llms.txt',
+        url: 'https://neon.com/docs/ai/llms.txt',
+        highlights: [
+          'ai/neon-mcp-server.md',
+          'ai/connect-mcp-clients-to-neon.md',
+          'ai/agent-skills.md',
+          'ai/ai-claude-code-plugin.md',
+          'ai/lakebase-search.md',
+          'ai/ai-database-versioning.md',
+        ],
+      },
     },
     {
       name: 'Auth',
       description: 'Managed authentication built on Better Auth that branches with your database.',
       subsectionOrder: ['Quick Start', 'Reference', 'Guides', 'Migrate'],
+      subIndex: {
+        outputPath: 'public/docs/auth/llms.txt',
+        url: 'https://neon.com/docs/auth/llms.txt',
+        highlights: [
+          'auth/overview.md',
+          'auth/quick-start/nextjs-api-only.md',
+          'auth/quick-start/react.md',
+          'auth/guides/setup-oauth.md',
+          'auth/production-checklist.md',
+        ],
+      },
     },
     {
       name: 'Neon Functions',
       description: 'Long-running serverless compute, close to your database.',
+      subIndex: {
+        outputPath: 'public/docs/compute/llms.txt',
+        url: 'https://neon.com/docs/compute/llms.txt',
+        highlights: [
+          'compute/functions/overview.md',
+          'compute/functions/get-started.md',
+          'compute/functions/deploy.md',
+          'compute/functions/environment-variables.md',
+          'compute/functions/triggers/overview.md',
+          'compute/functions/reference/runtime-limits.md',
+        ],
+      },
     },
     {
       name: 'Object Storage',
@@ -161,15 +230,46 @@ module.exports = {
     {
       name: 'AI Gateway',
       description: 'Access frontier and open-source models through a single API.',
+      subIndex: {
+        outputPath: 'public/docs/ai-gateway/llms.txt',
+        url: 'https://neon.com/docs/ai-gateway/llms.txt',
+        highlights: [
+          'ai-gateway/overview.md',
+          'ai-gateway/get-started.md',
+          'ai-gateway/models.md',
+          'ai-gateway/chat-completions.md',
+        ],
+      },
     },
     {
       name: 'Data API',
       description: 'PostgREST-style REST interface for your Neon database.',
+      subIndex: {
+        outputPath: 'public/docs/data-api/llms.txt',
+        url: 'https://neon.com/docs/data-api/llms.txt',
+        highlights: [
+          'data-api/overview.md',
+          'data-api/get-started.md',
+          'data-api/access-control.md',
+          'data-api/sql-to-rest.md',
+        ],
+      },
     },
     {
       name: 'Realtime',
       description:
         'Realtime reactivity on standard Postgres. Live SQL API makes any SQL query live (full support for joins, aggregates, ordering, extensions, UDFs). Plus end-to-end reactive DX: live queries and optimistic mutations as type-safe client primitives, on standard Neon Postgres.',
+      subIndex: {
+        outputPath: 'public/docs/realtime/llms.txt',
+        url: 'https://neon.com/docs/realtime/llms.txt',
+        highlights: [
+          'realtime/overview.md',
+          'realtime/quickstart.md',
+          'realtime/how-it-works.md',
+          'realtime/examples/nextjs.md',
+          'realtime/reference/api.md',
+        ],
+      },
     },
     {
       name: 'Branching',
@@ -379,6 +479,22 @@ module.exports = {
       title: 'Blog',
       url: 'https://neon.com/blog.md',
       description: 'Engineering, product, and community posts from the Neon team',
+    },
+    // Public source repos. Each has an AGENTS.md for coding agents.
+    {
+      title: 'neondatabase/website',
+      url: 'https://github.com/neondatabase/website',
+      description: 'Source for neon.com and these docs, with AGENTS.md for coding agents',
+    },
+    {
+      title: 'neondatabase/agent-skills',
+      url: 'https://github.com/neondatabase/agent-skills',
+      description: 'Source for the Neon agent skills, with AGENTS.md for coding agents',
+    },
+    {
+      title: 'neondatabase/mcp-server-neon',
+      url: 'https://github.com/neondatabase/mcp-server-neon',
+      description: 'Source for the Neon MCP server, with AGENTS.md for coding agents',
     },
   ],
 

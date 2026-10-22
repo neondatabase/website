@@ -3,7 +3,9 @@ import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
+import SectionScroll from 'components/shared/inkeep-trigger/section-scroll';
 import RiveWasm from 'components/shared/rive-wasm';
+import WebMcpTools from 'components/shared/webmcp-tools';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
@@ -37,6 +39,13 @@ const RootLayout = ({ children }) => (
           {`(function c(){try{var s=new WebSocket('ws://localhost:3549');s.onmessage=function(e){if(e.data==='reload')location.reload()};s.onclose=function(){setTimeout(c,1000)};s.onerror=function(){s.close()}}catch(e){setTimeout(c,1000)}})()`}
         </Script>
       )}
+      {/* Chrome origin-trial token that turns on WebMCP (document.modelContext) on
+          neon.com and its subdomains; other origins ignore it. Expires 2027-03-30.
+          Renew at https://developer.chrome.com/origintrials. */}
+      <meta
+        httpEquiv="origin-trial"
+        content="AlPoMMWZF+IAU3oyUxT98E0KWL4GO2m88YxAsoEjMLmDy+t6l5+d2Fn1bn73a6G5uwWDTzdl5CZexnXeFdyICwwAAABbeyJvcmlnaW4iOiJodHRwczovL25lb24uY29tOjQ0MyIsImZlYXR1cmUiOiJXZWJNQ1AiLCJleHBpcnkiOjE4MDYzNjQ4MDAsImlzU3ViZG9tYWluIjp0cnVlfQ=="
+      />
       <link rel="preconnect" href={LINKS.console} />
       <RiveWasm />
     </head>
@@ -50,6 +59,8 @@ const RootLayout = ({ children }) => (
           </TopbarProvider>
         </HomepageVisitProvider>
       </ThemeProvider>
+      <SectionScroll />
+      <WebMcpTools />
       <Analytics />
     </body>
   </html>
