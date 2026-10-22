@@ -1,4 +1,5 @@
-// GET returns the MCP Foundation server.json descriptor (publicly cacheable).
+// GET returns the MCP Foundation server.json descriptor, or 405 when an MCP
+// client probes for an event stream (see GET below).
 // POST proxies MCP protocol requests (initialize, tools/list, tools/call) to
 // the unauthenticated docs-scoped endpoint at mcp.neon.tech so agents can
 // connect directly to neon.com/docs/mcp without OAuth.
@@ -6,53 +7,30 @@
 // NOTE: force-static is intentionally absent. The POST handler is dynamic
 // (proxies live requests). Adding force-static would break POST at build time.
 //
-// The ?category=docs parameter scopes the server to two read-only tools
-// (list_docs_resources, get_doc_resource) and bypasses OAuth — both behaviors
-// are server-side features of mcp.neon.tech, not enforced here.
-const UPSTREAM_URL = 'https://mcp.neon.tech/mcp?category=docs';
+// The ?category=docs parameter scopes the server to its documentation tools
+// and bypasses OAuth. Both behaviors are server-side features of mcp.neon.tech,
+// not enforced here. Run tools/list for the current set of tools.
+//
+// The descriptor and upstream URL come from the source of truth in
+// constants/agent-discovery. Do not hard-code them here; edit the SoT.
+import { DOCS_MCP_SERVER, buildDocsMcpServerJson } from 'constants/agent-discovery';
 
-export async function GET() {
-  return Response.json(
-    {
-      $schema: 'https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json',
-      name: 'com.neon/docs-mcp',
-      title: 'Neon Docs',
-      description:
-        'Read Neon documentation pages. Provides list_docs_resources and get_doc_resource tools.',
-      repository: {
-        url: 'https://github.com/neondatabase/mcp-server-neon',
-        source: 'github',
-        subfolder: 'landing',
-      },
-      version: '1.0.0',
-      websiteUrl: 'https://neon.com/docs/ai/neon-mcp-server',
-      icons: [
-        {
-          src: 'https://neon.com/brand/neon-logo-light-color.svg',
-          mimeType: 'image/svg+xml',
-          sizes: ['any'],
-          theme: 'light',
-        },
-        {
-          src: 'https://neon.com/brand/neon-logo-dark-color.svg',
-          mimeType: 'image/svg+xml',
-          sizes: ['any'],
-          theme: 'dark',
-        },
-      ],
-      remotes: [
-        {
-          type: 'streamable-http',
-          url: UPSTREAM_URL,
-        },
-      ],
-    },
-    {
-      headers: {
-        'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
-      },
-    }
-  );
+const UPSTREAM_URL = DOCS_MCP_SERVER.upstreamUrl;
+
+export async function GET(request) {
+  const accept = (request?.headers.get('Accept') ?? '').toLowerCase();
+  // MCP clients probe GET for an event stream; answer like the upstream (405 = no
+  // stream). Returning the JSON descriptor instead makes clients reconnect in a loop.
+  if (accept.includes('text/event-stream') && !accept.includes('application/json')) {
+    return new Response(null, {
+      status: 405,
+      headers: { Allow: 'POST', 'Cache-Control': 'no-store' },
+    });
+  }
+  // Not edge-cached, so a cached descriptor is never served to an event-stream probe.
+  return Response.json(buildDocsMcpServerJson(), {
+    headers: { 'Cache-Control': 'public, max-age=0, must-revalidate' },
+  });
 }
 
 export async function POST(request) {

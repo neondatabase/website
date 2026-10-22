@@ -40,8 +40,9 @@ const AI_CATALOG_PATH = path.resolve(__dirname, '../app/.well-known/ai-catalog.j
 const SCHEMA_0_2_0 = 'https://schemas.agentskills.io/discovery/0.2.0/schema.json';
 
 // AI Catalog (https://ai-catalog.io/) static scaffolding. The host block and the
-// non-skill MCP server entry are stable; the skill entries are generated from the
-// same SKILL.md frontmatter as the agent-skills index, so descriptions match.
+// non-skill MCP server entries (product and docs) are stable; the skill entries are
+// generated from the same SKILL.md frontmatter as the agent-skills index, so
+// descriptions match.
 const AI_CATALOG_HOST = {
   displayName: 'Neon',
   identifier: 'neon.com',
@@ -57,6 +58,15 @@ const AI_CATALOG_MCP_ENTRY = {
   description:
     'Neon MCP server for managing Neon Postgres projects, branches, databases, and running SQL from AI agents and MCP clients.',
   tags: ['postgres', 'database', 'mcp', 'neon'],
+};
+
+const AI_CATALOG_DOCS_MCP_ENTRY = {
+  identifier: 'urn:air:neon.com:mcp:neon-docs',
+  displayName: 'Neon Docs MCP Server',
+  type: 'application/mcp-server-card+json',
+  url: 'https://neon.com/.well-known/mcp/docs-server-card.json',
+  description: 'Search and read Neon documentation over MCP. No authentication required.',
+  tags: ['docs', 'documentation', 'mcp', 'neon'],
 };
 
 const AI_CATALOG_SKILL_BASE_URL = 'https://neon.com/.well-known/agent-skills/';
@@ -156,6 +166,7 @@ function buildAiCatalog(skills) {
     host: AI_CATALOG_HOST,
     entries: [
       AI_CATALOG_MCP_ENTRY,
+      AI_CATALOG_DOCS_MCP_ENTRY,
       ...skills.map(({ name, title, description }) => ({
         identifier: `urn:air:neon.com:skill:${name}`,
         displayName: title || name,

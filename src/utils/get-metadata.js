@@ -1,7 +1,17 @@
 import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import { getMarkdownPath } from 'utils/ai-agent-detection';
 
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
+
+// Public URL of a page's markdown twin, for pages that don't pass markdownPath.
+// getMarkdownPath decides which paths have a twin (the same check the proxy uses
+// to serve it); the homepage's twin is /index.md, every other page's is <path>.md.
+const getDefaultMarkdownPath = (pathname) => {
+  if (!pathname || !getMarkdownPath(pathname)) return null;
+  if (pathname === '/' || pathname === '/home') return '/index.md';
+  return `${pathname.replace(/\/$/, '')}.md`;
+};
 
 const assertAbsoluteHttpUrl = (value, fieldName) => {
   let parsed;
@@ -44,6 +54,8 @@ export default function getMetadata({
   const metaTitle = title || DEFAULT_TITLE;
   const metaDescription = description || DEFAULT_DESCRIPTION;
 
+  const metaMarkdownPath = markdownPath ?? getDefaultMarkdownPath(pathname);
+
   const siteName = 'Neon';
   const robots = robotsNoindex === 'noindex' ? { index: false } : null;
 
@@ -64,7 +76,7 @@ export default function getMetadata({
       canonical: alternateCanonical,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
-        'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
+        'text/markdown': metaMarkdownPath ? `${SITE_URL}${metaMarkdownPath}` : null,
       },
     },
     manifest: '/manifest.json',
