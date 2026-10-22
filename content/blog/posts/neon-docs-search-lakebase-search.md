@@ -30,7 +30,7 @@ We just released a new search for neon.com. Head to the [Neon docs](https://neon
 
 We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25 keyword and hybrid search in Lakebase Postgres. So it was obvious to us that we needed to dogfood it for our own docs search. Until this week, the search box on neon.com ran on a hosted search vendor. Now it's built fully on Neon primitives and powered by Lakebase Search.
 
-I got to build it. In this post, I want to share how that went from the perspective of someone who builds apps for a living and doesn't think of himself as a search person.
+In this post, I want to share how it went.
 
 ## A quick refresher on Lakebase Search
 
