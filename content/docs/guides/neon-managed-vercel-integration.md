@@ -17,7 +17,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:28:13.841Z'
+updatedOn: '2026-10-23T11:36:04.672Z'
 ---
 
 <InfoBlock>
@@ -217,7 +217,7 @@ By default, the integration sets `DATABASE_URL` and `DATABASE_URL_UNPOOLED` for 
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications). For Production, sourced from the [production branch you chose at connect](#choose-a-production-branch).
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on the production branch)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints. For Production, the values come from your production branch. You can select these variables on the **Settings** tab once Managed Better Auth is enabled on your project's default branch.
 
 **To customize which variables are used:**
 
