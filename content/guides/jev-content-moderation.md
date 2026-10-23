@@ -7,15 +7,15 @@ createdAt: '2026-10-17T00:00:00.000Z'
 updatedOn: '2026-10-23T10:50:13.441Z'
 ---
 
-Content moderation is a common challenge when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are more reliable for driving moderation decisions.
+Content moderation is a common problem when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are more reliable for driving moderation decisions.
 
 [Jev](https://typesafe.ai), by TypeSafe AI, is a **System One** decision model. Instead of generating a reply, it answers a set of questions about the input you send it. Each answer is structured: a label from a predefined set, a score on a scale you specify, or a probability between 0 and 1. Your application can consume these outputs directly instead of interpreting a natural-language response.
 
 The design separates **judgment from policy**. Jev evaluates a message against the questions you define; your application decides what to do with the results. You might ask Jev to classify a message, check for spam and personal information, and assess its severity. Your code then combines those answers using rules and thresholds you control to determine whether to allow, review, or block the message. When your moderation policy changes, you can adjust those rules without redesigning the entire pipeline.
 
-Because Jev returns scores and probabilities instead of generated text, the cost per message is much lower. In TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev), Jev runs faster and costs less than frontier chat models on workflow evaluations. That makes it practical to run on every message rather than a sample.
+Because Jev returns scores and probabilities instead of generated text, you're billed for input tokens only, so the cost per message is lower. In TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev), Jev runs faster and costs less than frontier chat models on workflow evaluations. That makes it practical to run on every message rather than a sample.
 
-In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the Neon AI Gateway. You'll evaluate a batch of sample messages. Then you'll use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline shows how to turn model-based judgments into consistent moderation decisions.
+In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the AI Gateway. You'll evaluate a batch of sample messages. Then you'll use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline shows how to turn model-based judgments into consistent moderation decisions.
 
 <CopyPrompt
   src="/prompts/jev-content-moderation-prompt.md"
@@ -162,7 +162,7 @@ The examples use both state forms: a plain string in the Score tab, and an objec
 Before you begin, make sure you have the following:
 
 - **Node.js 22 or later:** Download it from [nodejs.org](https://nodejs.org/).
-- **A Neon account on the Launch or Scale plan:** Neon AI Gateway is available only on paid plans. Sign up at [console.neon.tech](https://console.neon.tech/signup).
+- **A Neon account on the Launch or Scale plan:** The AI Gateway is available only on paid plans. Sign up at [console.neon.tech](https://console.neon.tech/signup).
 - **Prepaid AI Gateway credits:** Buy credits from the **Billing** page in the Neon Console. One credit is $1 USD, with a $5 minimum purchase. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 
 <Admonition type="info" title="Region availability">
@@ -486,7 +486,7 @@ Run it:
 node moderate.ts
 ```
 
-You'll see output like this. The exact labels, scores, and probabilities may vary slightly each time you run it, but the overall decisions should be consistent.
+You'll see output like this. The exact labels, scores, and probabilities vary slightly between runs. Decisions are usually the same, but a value close to a threshold can occasionally land on the other side of it.
 
 ```text
 ALLOW  maya_k: Has anyone tried the new dual-boiler machine from the gear shop? Wondering if it is worth the upgrade.
