@@ -4,7 +4,7 @@ subtitle: 'Use the TypeSafe System One model through the Neon AI Gateway to clas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-17T00:00:00.000Z'
-updatedOn: '2026-10-23T10:17:48.347Z'
+updatedOn: '2026-10-23T10:36:52.121Z'
 ---
 
 Content moderation is a common challenge when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are more reliable for driving moderation decisions.
@@ -16,6 +16,12 @@ The design separates **judgment from policy**. Jev evaluates a message against t
 Because Jev returns scores and probabilities instead of generated text, the cost per message is much lower. In TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev), Jev runs faster and costs less than frontier chat models on workflow evaluations, which makes it practical to run on every message rather than a sample.
 
 In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the Neon AI Gateway. You'll evaluate a batch of sample messages. Then you'll use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline shows how to turn model-based judgments into consistent moderation decisions.
+
+<CopyPrompt
+  src="/prompts/jev-content-moderation-prompt.md"
+  description="Use this prompt to customize the guide and build it with your AI agent."
+  buttonText="Copy prompt"
+/>
 
 ## How Jev answers questions
 
@@ -181,6 +187,8 @@ You need a Neon project with the AI Gateway enabled. Create one in the Neon Cons
 In the Neon Console, open your project, click **Connect** at the top of the sidebar, and open the **AI Gateway** tab. Click **Copy snippet** to copy both environment variables.
 
 ![The AI Gateway tab in the Connect dialog showing the environment variables and credential controls](/docs/guides/connect-ai-gateway.png 'no-border')
+
+If you'd rather use the Neon CLI or a `neon.ts` file, see [AI Gateway authentication](/docs/ai-gateway/authentication).
 
 ## Set up the project
 
