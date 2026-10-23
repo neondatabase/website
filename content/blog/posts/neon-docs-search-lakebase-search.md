@@ -93,7 +93,7 @@ The biggest ranking change ran on a Neon branch of the production database first
 
 ![Line chart of search relevance on 171 golden queries across five eval baselines. Recall@5 went from 77.8% at the October 13 baseline to 76.6% after stripping page boilerplate, 78.4% after dropping footers and adding breadcrumbs, 94.7% after category ranking and more content and stayed at 94.7% after exact query rewrites on October 18. MRR@5 went from 0.613 to 0.615, 0.627, 0.760 and 0.764.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/relevance.png)
 
-The dip is real. Stripping navigation text and frontmatter from the index cost two expected pages and the gate flagged both. We accepted the trade because it cleaned up 97 top-five results that showed boilerplate, frontmatter or stray markdown. The jump came from weighting pages by category and title matches, plus indexing the PostgreSQL tutorial and FAQs. Together, they took recall@5 from 78% to 95%.
+The small dip on October 13 came from stripping navigation text and frontmatter from the index. That cost two expected pages and the gate flagged both. We accepted the trade because it cleaned up 97 top-five results that showed boilerplate, frontmatter or stray markdown. The jump came from weighting pages by category and title matches, plus indexing the PostgreSQL tutorial and FAQs. Together, they took recall@5 from 78% to 95%.
 
 ## Try it on your own data
 
