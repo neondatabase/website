@@ -3,8 +3,8 @@ title: Roadmap
 summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
-  include higher storage and compute limits, CMK encryption, RBAC, and PCI
-  compliance. Recently shipped milestones include Postgres 18
+  include higher storage and compute limits, CMK encryption, and RBAC.
+  Recently shipped milestones include Postgres 18
   GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-10-23T18:34:18.407Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -68,10 +68,6 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - Role-based access control (RBAC) in the Neon Console
 - RBAC roles extended into the database
 - Audit logging of all database access
-
-### Compliance
-
-- PCI compliance
 
 ### High availability
 

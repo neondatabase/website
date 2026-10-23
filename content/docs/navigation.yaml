@@ -1190,10 +1190,14 @@
           slug: security/compliance
         - title: HIPAA
           slug: security/hipaa
-        - title: Acceptable Use Policy
-          slug: security/acceptable-use-policy
         - title: AI use in Neon
           slug: security/ai-use-in-neon
+        - section: Legal
+          items:
+            - title: Service Level Agreement
+              slug: legal/sla
+            - title: Acceptable Use Policy
+              slug: security/acceptable-use-policy
     - title: Plans & billing
       slug: introduction/about-billing
       icon: billing
