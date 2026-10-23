@@ -57,8 +57,6 @@ The same Function serves a `/site-search` endpoint, which the website's search r
 { "query": "create branch", "categories": ["docs", "api"] }
 ```
 
-A `neon.ts` file in the repository declares the whole project: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway and the Function. Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
-
 ## Building search as an application builder
 
 As an app builder, I was comfortable with most of this: setting up the Neon Function, calling AI Gateway for embeddings, wiring up the GitHub Action and the website route. Where I personally don't have expertise is search itself: which algorithms to use, how to structure semantic search, how to merge keyword and semantic matches and what trade-offs each option comes with. In the past, this is where I'd reach for Algolia or another search provider.
