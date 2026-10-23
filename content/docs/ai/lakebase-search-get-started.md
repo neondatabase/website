@@ -5,9 +5,9 @@ summary: >-
   Step-by-step guide to enabling lakebase_vector and lakebase_text on a Neon
   Postgres database, creating a documents table with vector embeddings and a
   BM25 full-text index, and running vector and keyword searches from a
-  TypeScript application using @neondatabase/serverless and OpenAI.
+  TypeScript application using @neondatabase/serverless and the Vercel AI SDK.
 enableTableOfContents: true
-updatedOn: '2026-10-23T14:19:51.129Z'
+updatedOn: '2026-10-23T14:49:00.291Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -16,10 +16,10 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 
 - A Neon project. You enable Lakebase Search on it in the first step below.
 - Postgres 16 or later (Lakebase Search requires PG16+)
-- Node.js 18 or later (22 or later for the Jev example)
+- Node.js 22 or later
 - Choose an embedding provider to turn text into vectors:
   - **Neon AI Gateway** (this guide's default): set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` (see [Get started](/docs/ai-gateway/get-started)) and use the [`qwen3-embedding-0-6b`](/docs/ai-gateway/embeddings) model (1024 dimensions). Requires a paid plan in a [Neon AI Gateway region](/docs/ai-gateway/overview).
-  - **OpenAI directly**: set `OPENAI_API_KEY` and drop both client overrides so it's just `new OpenAI()`, then change the model to `text-embedding-3-small` (1536 dimensions).
+  - **OpenAI directly**: install `@ai-sdk/openai`, set `OPENAI_API_KEY`, and use `openai.embeddingModel('text-embedding-3-small')` from that provider (1536 dimensions).
   - **Any other provider**: generate the vector with its SDK and match the `VECTOR` column to its dimensions.
 
 <Steps>
@@ -57,12 +57,10 @@ The `lakebase_bm25` index is created in a later step, after data is inserted. BM
 The remaining steps run from a local TypeScript project. Install dependencies:
 
 ```bash
-npm install @neondatabase/serverless openai dotenv
+npm install @neondatabase/serverless @neon/ai-sdk-provider@1.1.0 ai@7.0.133 dotenv
 ```
 
-<Admonition type="note">
-This guide uses the `openai` SDK pointed at the Neon AI Gateway. Version 6 of the SDK requires `encoding_format: 'float'` on embedding calls (included below); on v7 and later it's optional. See [Embeddings](/docs/ai-gateway/embeddings) for details.
-</Admonition>
+This guide uses Neon's provider with the Vercel AI SDK for embeddings and Jev. The provider reads your AI Gateway credentials automatically. Keep the SDK versions pinned while `experimental_decide` is experimental.
 
 Create a `.env` file with your Neon connection string and AI Gateway credentials. See [Get started with AI Gateway](/docs/ai-gateway/get-started) for how to obtain the gateway values:
 
@@ -79,15 +77,10 @@ Create `search.ts` and paste the following. It inserts documents with embeddings
 ```typescript filename="search.ts"
 import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';
-import OpenAI from 'openai';
+import { neon as neonAi } from '@neon/ai-sdk-provider';
+import { embed } from 'ai';
 
 const sql = neon(process.env.DATABASE_URL!);
-
-// Point the OpenAI SDK at the Neon AI Gateway.
-const openai = new OpenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
-});
 
 const documents = [
   {
@@ -112,31 +105,30 @@ const documents = [
   },
 ];
 
+async function embedText(text: string): Promise<string> {
+  const { embedding } = await embed({
+    model: neonAi.embeddingModel('qwen3-embedding-0-6b'),
+    value: text,
+  });
+  return JSON.stringify(embedding);
+}
+
 async function embedAndInsert() {
   for (const doc of documents) {
-    const { data } = await openai.embeddings.create({
-      model: 'qwen3-embedding-0-6b',
-      input: doc.body,
-      encoding_format: 'float', // required on the openai SDK v6; harmless on v7+
-    });
-
+    const vector = await embedText(doc.body);
     await sql`
       INSERT INTO documents (title, body, embedding)
-      VALUES (${doc.title}, ${doc.body}, ${JSON.stringify(data[0].embedding)}::vector)
+      VALUES (${doc.title}, ${doc.body}, ${vector}::vector)
     `;
   }
 }
 
 async function vectorSearch(query: string, limit = 5) {
-  const { data } = await openai.embeddings.create({
-    model: 'qwen3-embedding-0-6b',
-    input: query,
-    encoding_format: 'float',
-  });
+  const queryVector = await embedText(query);
 
   return sql`
     SELECT id, title,
-           embedding <=> ${JSON.stringify(data[0].embedding)}::vector AS distance
+           embedding <=> ${queryVector}::vector AS distance
     FROM documents
     ORDER BY distance
     LIMIT ${limit}
@@ -199,16 +191,9 @@ Vector search finds matches by meaning, while keyword search finds matches by wo
 
 Jev reads each result alongside your query and estimates how likely it is to answer your question. The example below combines both searches, removes duplicates, and puts the most likely answers first. It follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
 
-This example needs Node.js 22 or later. Install the SDK versions used here:
-
-```bash
-npm install @neon/ai-sdk-provider@1.1.0 ai@7.0.133
-```
-
-Add the following code to `search.ts`. It uses the same `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` you set up for embeddings. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for more about the SDK.
+Add the following code to `search.ts`. It reuses the provider and credentials from the embedding example. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for more about the SDK.
 
 ```typescript filename="search.ts"
-import { neon as neonAi } from '@neon/ai-sdk-provider';
 import { experimental_decide as decide } from 'ai';
 
 type Candidate = { id: number; title: string; body: string };
@@ -218,12 +203,7 @@ async function hybridSearchWithJev(query: string, limit = 5): Promise<Candidate[
     throw new Error('limit must be a positive integer');
   }
 
-  const { data } = await openai.embeddings.create({
-    model: 'qwen3-embedding-0-6b',
-    input: query,
-    encoding_format: 'float',
-  });
-  const queryVector = JSON.stringify(data[0].embedding);
+  const queryVector = await embedText(query);
   const candidates = (await sql`
     WITH vector_candidates AS (
       SELECT id
@@ -307,12 +287,7 @@ Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `text
 
 ```typescript filename="search.ts"
 async function hybridSearch(query: string, limit = 5) {
-  const { data } = await openai.embeddings.create({
-    model: 'qwen3-embedding-0-6b',
-    input: query,
-    encoding_format: 'float',
-  });
-  const queryVector = JSON.stringify(data[0].embedding);
+  const queryVector = await embedText(query);
 
   return sql`
     WITH vector_ranked AS (
