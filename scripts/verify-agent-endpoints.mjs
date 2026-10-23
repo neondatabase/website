@@ -80,6 +80,18 @@ function isUrl(value) {
   }
 }
 
+// JSON.stringify with sorted object keys, so key order doesn't count as a difference.
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`)
+      .join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
 function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf-8'));
 }
@@ -108,12 +120,121 @@ function offlinePayload(entry, sot) {
 // Each returns an array of check results. `sot` is the source-of-truth module.
 
 const SCHEMAS = {
+  mcpWellKnown: {
+    type: 'object',
+    required: ['name', 'version', 'remotes'],
+    properties: {
+      name: { type: 'string' },
+      version: { type: 'string' },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
+    },
+  },
+  // integrations.sh owner declaration (v3). Mirrors the parts of its Effect
+  // schema (src/lib/discovery-schema.ts in UsefulSoftwareCo/integrations) that
+  // decide whether the file is accepted; a file that fails there is ignored.
+  integrationsJson: {
+    type: 'object',
+    required: ['version'],
+    properties: {
+      version: { const: 3 },
+      summary: { type: 'string' },
+      credentials: {
+        type: 'object',
+        additionalProperties: {
+          type: 'object',
+          required: ['type', 'label', 'setup'],
+          properties: {
+            type: {
+              enum: [
+                'api_key',
+                'basic',
+                'bearer',
+                'oauth2',
+                'oauth2_cc',
+                'oauth1',
+                'jwt',
+                'app',
+                'two_step',
+                'signature',
+                'aws_sigv4',
+                'tba',
+                'compound',
+                'custom',
+              ],
+            },
+            label: { type: 'string' },
+            setup: { type: 'string' },
+            generateUrl: { type: 'string' },
+          },
+        },
+      },
+      surfaces: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['type', 'slug', 'name', 'basis', 'auth'],
+          properties: {
+            type: { enum: ['http', 'graphql', 'mcp', 'cli'] },
+            slug: { type: 'string' },
+            name: { type: 'string' },
+            basis: {
+              type: 'object',
+              required: ['via'],
+              properties: { via: { enum: ['detected', 'discovered', 'declared'] } },
+            },
+            auth: {
+              type: 'object',
+              required: ['status'],
+              properties: {
+                status: { enum: ['none', 'required', 'unknown'] },
+                entries: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    required: ['use', 'basis'],
+                    properties: {
+                      use: {
+                        type: 'array',
+                        items: { type: 'object', required: ['id', 'mechanics'] },
+                      },
+                    },
+                  },
+                },
+              },
+              // A "required" status must say how to authenticate.
+              if: { properties: { status: { const: 'required' } } },
+              then: { required: ['entries'] },
+            },
+          },
+        },
+      },
+    },
+  },
   mcpServerCard: {
     type: 'object',
-    required: ['url', 'authentication'],
+    required: ['$schema', 'url', 'authentication', 'name', 'version', 'description', 'remotes'],
     properties: {
+      $schema: {
+        type: 'string',
+        pattern:
+          '^https://static\\.modelcontextprotocol\\.io/schemas/v1/server-card\\.schema\\.json$',
+      },
       url: { type: 'string' },
       endpoint: { type: 'string' },
+      name: { type: 'string', pattern: '^[a-zA-Z0-9.-]+/[a-zA-Z0-9._-]+$' },
+      version: { type: 'string' },
+      description: { type: 'string', minLength: 1, maxLength: 100 },
+      title: { type: 'string', minLength: 1, maxLength: 100 },
+      repository: { type: 'object', required: ['url', 'source'] },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
       authentication: {
         type: 'object',
         required: ['type'],
@@ -121,6 +242,27 @@ const SCHEMAS = {
       },
       serverInfo: { type: 'object' },
       capabilities: { type: 'object' },
+    },
+  },
+  docsMcpServerCard: {
+    type: 'object',
+    required: ['$schema', 'name', 'version', 'description', 'remotes'],
+    properties: {
+      $schema: {
+        type: 'string',
+        pattern:
+          '^https://static\\.modelcontextprotocol\\.io/schemas/v1/server-card\\.schema\\.json$',
+      },
+      name: { type: 'string', pattern: '^[a-zA-Z0-9.-]+/[a-zA-Z0-9._-]+$' },
+      version: { type: 'string' },
+      description: { type: 'string', minLength: 1, maxLength: 100 },
+      title: { type: 'string', minLength: 1, maxLength: 100 },
+      repository: { type: 'object', required: ['url', 'source'] },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
     },
   },
   apiCatalog: {
@@ -135,6 +277,14 @@ const SCHEMAS = {
           required: ['anchor'],
           properties: {
             anchor: { type: 'string' },
+            item: {
+              type: 'array',
+              items: {
+                type: 'object',
+                required: ['href'],
+                properties: { href: { type: 'string' } },
+              },
+            },
             'service-desc': {
               type: 'array',
               items: {
@@ -191,7 +341,7 @@ const SCHEMAS = {
       entries: {
         type: 'array',
         minItems: 1,
-        items: { type: 'object', required: ['identifier', 'type', 'url'] },
+        items: { type: 'object', required: ['identifier', 'displayName', 'type', 'url'] },
       },
     },
   },
@@ -258,9 +408,98 @@ const SCHEMAS = {
 };
 
 const VALIDATORS = {
+  'mcp-well-known'(payload, entry, sot, { live, upstreamJson, upstreamError }) {
+    const remote = payload.remotes?.[0] || {};
+    const checks = [
+      schemaCheck(entry.spec.name, SCHEMAS.mcpWellKnown, payload),
+      equalsCheck('remote url matches SoT connectUrl', remote.url, sot.MCP_SERVER.connectUrl),
+      equalsCheck('remote type matches SoT transport', remote.type, sot.MCP_SERVER.transport),
+      equalsCheck('name matches SoT registry name', payload.name, sot.MCP_SERVER.registry.name),
+      equalsCheck('top-level url matches SoT connectUrl', payload.url, sot.MCP_SERVER.connectUrl),
+    ];
+    // The registry fields are copied from upstream server.json, so live runs
+    // catch a version bump or edit there that this copy hasn't picked up.
+    if (live && entry.upstream) {
+      if (upstreamError) {
+        checks.push(fail('matches upstream server.json', upstreamError));
+      } else {
+        // Compare only the fields upstream defines; the top-level `url` and
+        // `transport` are additions for readers that expect Mintlify's shape.
+        const drift = Object.keys(upstreamJson).filter(
+          (key) => canonicalJson(upstreamJson[key]) !== canonicalJson(payload[key])
+        );
+        checks.push(
+          drift.length === 0
+            ? ok('matches upstream server.json', entry.upstream)
+            : fail('matches upstream server.json', `differs in: ${drift.join(', ')}`)
+        );
+      }
+    }
+    return checks;
+  },
+
+  'integrations-json'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.integrationsJson, payload)];
+    const credentialIds = new Set(Object.keys(payload.credentials || {}));
+    const surfaces = payload.surfaces || [];
+    const unresolved = surfaces.flatMap((surface) =>
+      (surface.auth?.entries || []).flatMap((authEntry) =>
+        (authEntry.use || [])
+          .filter((use) => !credentialIds.has(use.id))
+          .map((use) => `${surface.slug}:${use.id}`)
+      )
+    );
+    checks.push(
+      unresolved.length === 0
+        ? ok('auth references defined credentials')
+        : fail('auth references defined credentials', unresolved.join(', '))
+    );
+    const notDeclaredHere = surfaces.filter(
+      (surface) =>
+        surface.basis?.via !== 'declared' || surface.basis?.source !== sot.INTEGRATIONS.url
+    );
+    checks.push(
+      notDeclaredHere.length === 0
+        ? ok('surfaces declared at SoT url', sot.INTEGRATIONS.url)
+        : fail(
+            'surfaces declared at SoT url',
+            notDeclaredHere.map((surface) => surface.slug).join(', ')
+          )
+    );
+    const bySlug = Object.fromEntries(surfaces.map((surface) => [surface.slug, surface]));
+    checks.push(
+      equalsCheck('neon-api url matches SoT baseUrl', bySlug['neon-api']?.url, sot.NEON_API.baseUrl)
+    );
+    checks.push(
+      equalsCheck(
+        'neon-api spec matches SoT openApiSpecUrl',
+        bySlug['neon-api']?.spec,
+        sot.NEON_API.openApiSpecUrl
+      )
+    );
+    checks.push(
+      equalsCheck(
+        'neon-mcp-server url matches SoT connectUrl',
+        bySlug['neon-mcp-server']?.url,
+        sot.MCP_SERVER.connectUrl
+      )
+    );
+    return checks;
+  },
+
   'mcp-server-card'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.mcpServerCard, payload)];
     checks.push(equalsCheck('url matches SoT connectUrl', payload.url, sot.MCP_SERVER.connectUrl));
+    checks.push(
+      equalsCheck(
+        'remotes[0].url matches SoT connectUrl',
+        payload.remotes?.[0]?.url,
+        sot.MCP_SERVER.connectUrl
+      )
+    );
+    checks.push(
+      equalsCheck('name matches SoT registry name', payload.name, sot.MCP_SERVER.registry.name)
+    );
     checks.push(
       equalsCheck(
         'authorization_server matches SoT',
@@ -276,9 +515,29 @@ const VALIDATORS = {
     return checks;
   },
 
+  'docs-mcp-server-card'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.docsMcpServerCard, payload)];
+    checks.push(
+      equalsCheck(
+        'remotes[0].url matches SoT connectUrl',
+        payload.remotes?.[0]?.url,
+        sot.DOCS_MCP_SERVER.connectUrl
+      )
+    );
+    checks.push(equalsCheck('name matches SoT name', payload.name, sot.DOCS_MCP_SERVER.name));
+    return checks;
+  },
+
   'api-catalog'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.apiCatalog, payload)];
-    const link = payload.linkset?.[0] || {};
+    const catalog = payload.linkset?.[0] || {};
+    checks.push(
+      equalsCheck('first anchor is the catalog URL', catalog.anchor, sot.NEON_API.catalogUrl)
+    );
+    checks.push(
+      equalsCheck('item href matches SoT baseUrl', catalog.item?.[0]?.href, sot.NEON_API.baseUrl)
+    );
+    const link = payload.linkset?.find((l) => l.anchor === sot.NEON_API.baseUrl) || {};
     checks.push(equalsCheck('anchor matches SoT baseUrl', link.anchor, sot.NEON_API.baseUrl));
     checks.push(
       equalsCheck(
@@ -328,14 +587,19 @@ const VALIDATORS = {
 
   'ai-catalog'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.aiCatalog, payload)];
-    const mcpEntry = (payload.entries || []).find(
-      (e) => e.type === 'application/mcp-server-card+json'
-    );
-    checks.push(
-      mcpEntry
-        ? equalsCheck('MCP entry url matches SoT cardUrl', mcpEntry.url, sot.MCP_SERVER.cardUrl)
-        : fail('MCP entry present', 'no application/mcp-server-card+json entry')
-    );
+    const mcpUrls = (payload.entries || [])
+      .filter((e) => e.type === 'application/mcp-server-card+json')
+      .map((e) => e.url);
+    for (const [label, cardUrl] of [
+      ['MCP', sot.MCP_SERVER.cardUrl],
+      ['docs MCP', sot.DOCS_MCP_SERVER.cardUrl],
+    ]) {
+      checks.push(
+        mcpUrls.includes(cardUrl)
+          ? ok(`${label} entry url matches SoT cardUrl`, cardUrl)
+          : fail(`${label} entry present`, `no MCP server card entry for ${cardUrl}`)
+      );
+    }
     // Cross-file: catalog skills must match the agent-skills index skills.
     try {
       const skillsIndex = readJson('public/.well-known/agent-skills/index.json');
@@ -474,9 +738,7 @@ const VALIDATORS = {
     checks.push(
       equalsCheck('token_endpoint matches SoT', payload.token_endpoint, sot.CLAIMABLE.tokenEndpoint)
     );
-    checks.push(
-      equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri)
-    );
+    checks.push(equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri));
     checks.push(
       Array.isArray(payload.token_endpoint_auth_methods_supported) &&
         payload.token_endpoint_auth_methods_supported.includes('none')
@@ -577,6 +839,17 @@ async function runEntry(entry, sot) {
       }
     } catch (err) {
       checks.push(fail('served 200', `${BASE_URL}${entry.servedPath} -> ${err.message}`));
+    }
+
+    // Entries mirrored from an upstream document get it fetched for comparison.
+    if (entry.upstream) {
+      try {
+        const res = await fetch(entry.upstream);
+        if (res.ok) live.upstreamJson = await res.json();
+        else live.upstreamError = `${entry.upstream} -> ${res.status}`;
+      } catch (err) {
+        live.upstreamError = `${entry.upstream} -> ${err.message}`;
+      }
     }
   }
 

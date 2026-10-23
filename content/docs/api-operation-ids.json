@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 192,
+  "count": 193,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -11,6 +11,7 @@
     "assignOrganizationVPCEndpoint",
     "assignProjectVPCEndpoint",
     "countProjectBranches",
+    "countProjects",
     "createApiKey",
     "createBranchNeonAuthNewUser",
     "createCredential",

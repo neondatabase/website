@@ -2,11 +2,11 @@
 title: 'Next.js example'
 subtitle: 'Full-stack example app using Realtime with Next.js.'
 summary: >-
-  Build a per-user todo app with Next.js, Kysely and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
+  Build a per-user todo app with Next.js, Drizzle and Managed Better Auth on Neon Realtime: read and seal live queries in a Server Component, renew them through a Route Handler, and settle optimistic server action writes by txid.
 enableTableOfContents: true
 ---
 
-This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Kysely](https://kysely.dev) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
+This example shows how to use Neon Realtime with [Next.js](https://nextjs.org), [Drizzle ORM](https://orm.drizzle.team) and Neon's [Managed Better Auth](/docs/auth/overview), with support for [auth](#authorize-with-the-session), [SSR](#server-side-rendering), [client-side reactivity](#client-side-reactivity) and [optimistic mutations](#optimistic-mutations).
 
 The sections follow the same order as the guides, from [defining](#defining-queries) and [sealing](#sealing-queries) queries to writing to them, and show the Next.js code for each step.
 
@@ -16,10 +16,11 @@ The complete app is in the [`realtime/with-nextjs`](https://github.com/neondatab
 
 ## Setup
 
-Install the Realtime SDK with its Kysely adapter and React bindings:
+Install the Realtime SDK with its Drizzle adapter and React bindings, Drizzle ORM and `drizzle-kit` for migrations:
 
 ```bash filename="Terminal"
-npm install @neon/realtime @neon/realtime-kysely @neon/realtime-react
+npm install @neon/realtime @neon/realtime-drizzle @neon/realtime-react drizzle-orm
+npm install -D drizzle-kit dotenv
 ```
 
 Add a `neon.ts` that enables Managed Better Auth and Realtime on your branch:
@@ -55,27 +56,36 @@ Note that `NEON_REALTIME_SECRET` never gets a `NEXT_PUBLIC_` prefix. The browser
 
 ### Define the schema
 
-Define your database schema. In this example, we're using Kysely and defining a single table:
+Define your database schema. In this example, we're using Drizzle and defining a single table:
 
 ```ts filename="src/lib/schema.ts"
-import type { Generated } from "kysely"
+import { boolean, index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core"
 
-// Keys equal the column names. Realtime builds live rows from PostgreSQL's result names, so a
-// result-transforming plugin such as CamelCasePlugin would give live rows different keys from server rows.
-export interface TodosTable {
-  id: string; // uuid, created in the browser, so the optimistic row and the live row share it
-  user_id: string; // uuid, the Managed Better Auth user id; only ever set from the session
-  title: string;
-  completed: Generated<boolean>;
-  created_at: Generated<Date>; // timestamptz: pg and the Realtime client both parse it to a Date
-}
+// The single schema source: the app and `drizzle-kit push` both read it. Columns are declared snake_case
+// on purpose. Realtime builds live rows from PostgreSQL's result names, so a camelCase JS property that
+// mapped to a different column would give live rows different keys from server rows.
+export const todos = pgTable(
+  "realtime_next_todos",
+  {
+    // uuid, created in the browser, so the optimistic row and the live row share it. This primary key is
+    // the replica identity Realtime needs.
+    id: uuid("id").primaryKey(),
+    // uuid, the Managed Better Auth user id; only ever set from the session. No foreign key to
+    // neon_auth."user": this app doesn't manage the neon_auth schema.
+    user_id: uuid("user_id").notNull(),
+    title: text("title").notNull(),
+    completed: boolean("completed").notNull().default(false),
+    // timestamptz: pg and the Realtime client both parse it to a Date.
+    created_at: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+  },
+  // Supports the `WHERE user_id = … ORDER BY created_at DESC` live query.
+  (t) => [index("realtime_next_todos_user_id_created_at_idx").on(t.user_id, t.created_at)]
+)
 
-export interface Database {
-  realtime_next_todos: TodosTable;
-}
+export type Todo = typeof todos.$inferSelect
 ```
 
-Give the table a primary key, here `id`, and create it with a [Kysely migration](https://kysely.dev/docs/migrations) or your usual migration tool. A primary key is all Realtime needs from the table, as [table requirements](../guides/queries#table-requirements) explains.
+Give the table a primary key, here `id`, and create it with [`drizzle-kit push`](/docs/guides/drizzle-migrations) or your usual migration tool. A primary key is all Realtime needs from the table, as [table requirements](../guides/queries#table-requirements) explains.
 
 ## Defining queries
 
@@ -83,30 +93,35 @@ Define, run and seal your live queries on the server, both to provide `initialDa
 
 ### Define the live query
 
-We then [define a query](../guides/queries#using-a-query-builder-or-orm) with Kysely. `getDb()` returns a Kysely client over a node-postgres (`pg`) pool, in `src/lib/db.ts`:
+We then [define a query](../guides/queries#using-a-query-builder-or-orm) with Drizzle. `getDb()` returns a Drizzle client over a node-postgres (`pg`) pool, in `src/lib/db.ts`:
 
 ```ts filename="src/lib/todos.ts"
 import "server-only"
 
-import type { InferResult } from "kysely"
+import { desc, eq } from "drizzle-orm"
 
 import { getDb } from "./db"
+import { todos } from "./schema"
 
 // The only place the live query is built. The server read, the seal and every renewal use it, so their
-// fingerprints match.
+// fingerprints match. `userId` must come from getUser(), never from the client.
 function todosQuery(userId: string) {
   return getDb()
-    .selectFrom("realtime_next_todos")
-    .select(["id", "title", "completed", "created_at"])
-    .where("user_id", "=", userId)
-    .orderBy("created_at", "desc")
-    .orderBy("id", "desc")
+    .select({
+      id: todos.id,
+      title: todos.title,
+      completed: todos.completed,
+      created_at: todos.created_at
+    })
+    .from(todos)
+    .where(eq(todos.user_id, userId))
+    .orderBy(desc(todos.created_at), desc(todos.id))
 }
 
-export type TodoRow = InferResult<ReturnType<typeof todosQuery>>[number]
+export type TodoRow = Awaited<ReturnType<typeof todosQuery>>[number]
 ```
 
-`TodoRow` is the row type Kysely infers from the select. The browser imports it as a type only, so no server code reaches it. `userId` always comes from the [server session](#authorize-with-the-session), never from the browser, and this `WHERE` keeps each user's todos separate.
+`TodoRow` is the row type Drizzle infers from the select. The browser imports it as a type only, so no server code reaches it. `userId` always comes from the [server session](#authorize-with-the-session), never from the browser, and this `WHERE` keeps each user's todos separate.
 
 Live rows don't keep the query's `ORDER BY` order, so the browser [sorts them](#apply-writes-optimistically) too.
 
@@ -116,13 +131,13 @@ Seal the query on the server, for the user in the session. The browser can subsc
 
 ### Create the Realtime server
 
-The Realtime server, from [`createRealtime()`](../sdks/typescript#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code. Pass it [`kyselyAdapter()`](../sdks/typescript#kysely-kyselyadapter), so it can seal Kysely queries:
+The Realtime server, from [`createRealtime()`](../sdks/typescript#backend-createrealtime), holds the secret and seals queries. It should be created and then used in your trusted server code. Pass it [`drizzleAdapter()`](../sdks/typescript#drizzle-drizzleadapter), so it can seal Drizzle queries:
 
 ```ts filename="src/lib/realtime.ts"
 import "server-only"
 
 import { createRealtime } from "@neon/realtime/server"
-import { kyselyAdapter } from "@neon/realtime-kysely"
+import { drizzleAdapter } from "@neon/realtime-drizzle"
 
 import { getEnv } from "./env"
 
@@ -132,7 +147,7 @@ function create() {
   return createRealtime({
     secret: env.realtimeSecret,
     db: env.database,
-    adapter: kyselyAdapter(),
+    adapter: drizzleAdapter(),
     debugMode: process.env.NODE_ENV === "development" // full database errors in dev only
   })
 }
@@ -226,11 +241,11 @@ Run the query and seal it in the same function, so the rows and the sealed query
 
 ```ts filename="src/lib/todos.ts"
 // Read and seal the same query. The stream's first full result replaces these rows, so nothing is missed
-// or doubled.
+// or doubled. It sends every row again rather than resuming from these.
 export async function loadTodos(userId: string) {
   const query = todosQuery(userId)
   const [rows, sealedQuery] = await Promise.all([
-    query.execute(),
+    query, // awaiting the builder runs it
     getRealtime().seal({ query }) // compiles the builder to SQL; never runs it
   ])
   return { rows, sealedQuery }
@@ -332,18 +347,20 @@ Create the Realtime client once, inside the React tree, in a `useState` initiali
 "use client"
 
 import { createRealtimeClient } from "@neon/realtime/client"
+import { drizzleParsers } from "@neon/realtime-drizzle/client"
 // @neon/realtime-react's build has no "use client" directive: import it only from client modules.
 import { RealtimeProvider } from "@neon/realtime-react"
 import { type ReactNode, useState } from "react"
 
 export function RealtimeRoot({ url, children }: { url: string; children: ReactNode }) {
-  // No parsers: the client's defaults match node-postgres, which Kysely's PostgresDialect uses on the server.
-  const [client] = useState(() => createRealtimeClient({ url }))
+  // drizzleParsers make the browser parse live rows the way Drizzle parses server rows, so created_at
+  // stays a Date and completed a boolean (todo-list.tsx reads both).
+  const [client] = useState(() => createRealtimeClient({ url, parsers: { ...drizzleParsers } }))
   return <RealtimeProvider client={client}>{children}</RealtimeProvider>
 }
 ```
 
-Creating the client doesn't connect, so it's safe during the server render. It connects on the first subscribe and disconnects after the last one ends, so you don't need an effect that closes it. With the default parsers, live rows have the same types as the rows Kysely reads on the server, and Server Component props keep `created_at` a `Date`, as [keep row shapes identical](../guides/ssr#keep-row-shapes-identical) explains.
+Creating the client doesn't connect, so it's safe during the server render. It connects on the first subscribe and disconnects after the last one ends, so you don't need an effect that closes it. With `drizzleParsers`, live rows have the same types as the rows Drizzle reads on the server, and Server Component props keep `created_at` a `Date`, as [keep row shapes identical](../guides/ssr#keep-row-shapes-identical) explains.
 
 Render `RealtimeRoot` around the components that subscribe. With one live query on the page, it can wrap that component and share its key, as `Todos` does. With several, render it higher up, for example in your root layout, and key each subscribing component on its own `queryFingerprint`.
 
@@ -518,11 +535,12 @@ On the server, each write is a server action that returns the transaction ID:
 ```ts filename="src/app/actions.ts"
 "use server"
 
-import { sql } from "kysely"
+import { and, eq, sql } from "drizzle-orm"
 import { z } from "zod"
 
 import { getUser } from "../auth/server"
 import { getDb } from "../lib/db"
+import { todos } from "../lib/schema"
 
 // Typed results rather than throws: in production Next.js hides a thrown error's message.
 export type WriteResult =
@@ -535,7 +553,7 @@ const setCompletedInput = z.object({ id: z.uuid(), completed: z.boolean() })
 const deleteInput = z.object({ id: z.uuid() })
 
 // Same statement, same transaction; works on any driver.
-const txid = sql<string>`pg_current_xact_id()::text`.as("txid")
+const txid = sql<string>`pg_current_xact_id()::text`
 const toResult = (row?: { txid: string }): WriteResult =>
   row ? { kind: "committed", txid: row.txid } : { kind: "unchanged" }
 
@@ -544,12 +562,11 @@ export async function addTodo(pageUserId: string, raw: z.input<typeof addInput>)
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = addInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
-  const row = await getDb()
-    .insertInto("realtime_next_todos")
+  const [row] = await getDb()
+    .insert(todos)
     .values({ id: input.data.id, user_id: user.id, title: input.data.title }) // user_id from the session only
-    .onConflict((oc) => oc.column("id").doNothing()) // replayed id: no write, nothing to wait for
-    .returning(txid)
-    .executeTakeFirst()
+    .onConflictDoNothing({ target: todos.id }) // replayed id: no write, nothing to wait for
+    .returning({ txid })
   return toResult(row)
 }
 
@@ -558,13 +575,11 @@ export async function setTodoCompleted(pageUserId: string, raw: z.input<typeof s
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = setCompletedInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
-  const row = await getDb()
-    .updateTable("realtime_next_todos")
+  const [row] = await getDb()
+    .update(todos)
     .set({ completed: input.data.completed })
-    .where("id", "=", input.data.id)
-    .where("user_id", "=", user.id) // only the user's own row
-    .returning(txid)
-    .executeTakeFirst()
+    .where(and(eq(todos.id, input.data.id), eq(todos.user_id, user.id))) // only the user's own row
+    .returning({ txid })
   return toResult(row)
 }
 
@@ -573,12 +588,10 @@ export async function deleteTodo(pageUserId: string, raw: z.input<typeof deleteI
   if (!user) return { kind: "rejected", reason: "UNAUTHENTICATED" }
   const input = deleteInput.safeParse(raw)
   if (!input.success) return { kind: "rejected", reason: "INVALID_INPUT" }
-  const row = await getDb()
-    .deleteFrom("realtime_next_todos")
-    .where("id", "=", input.data.id)
-    .where("user_id", "=", user.id) // only the user's own row
-    .returning(txid)
-    .executeTakeFirst()
+  const [row] = await getDb()
+    .delete(todos)
+    .where(and(eq(todos.id, input.data.id), eq(todos.user_id, user.id))) // only the user's own row
+    .returning({ txid })
   return toResult(row)
 }
 ```
@@ -593,6 +606,7 @@ Don't revalidate after a write. The live query already delivers it, and a revali
 
 - read the guides on [reactivity](../guides/reactivity), [optimistic mutations](../guides/mutations) and [server-side rendering](../guides/ssr) for the concepts behind each step
 - look up `useLiveQuery()` and `RealtimeProvider` in the [React section of the SDK reference](../sdks/typescript#react)
+- see how Realtime works with your own Drizzle schema, selects and writes in the [Drizzle example](./drizzle)
 - see the [TanStack example](./tanstack), which seeds a TanStack&nbsp;DB collection in a route loader and writes through collection handlers
 - browse the [full source on GitHub](https://github.com/neondatabase/examples/tree/main/realtime/with-nextjs)
 

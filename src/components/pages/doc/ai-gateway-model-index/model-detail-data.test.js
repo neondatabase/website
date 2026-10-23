@@ -61,4 +61,29 @@ describe('getModelDetailPageData', () => {
       'Input /M',
     ]);
   });
+
+  it('reports only identity, release and input price for a decision model', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'example-decision',
+      name: 'Example Decision',
+      providerName: 'Example',
+      endpoints: [],
+      isDecision: true,
+      releaseLabel: 'Sep 2026',
+      costInputLabel: '$0.10',
+    });
+
+    expect(content).toContain('System One decision model');
+    expect(content).toContain('## Input /M\n\n$0.10');
+    expect(content).not.toContain('## Dimensions');
+    expect(content).not.toContain('## Context');
+    expect(tableOfContents.map(({ title }) => title)).toEqual([
+      'About',
+      'Command',
+      'Model ID',
+      'Provider',
+      'Released',
+      'Input /M',
+    ]);
+  });
 });

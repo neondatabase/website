@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/compute/functions/preview-access
   - /docs/functions
   - /docs/functions/overview
-updatedOn: '2026-10-02T11:22:16.421Z'
+updatedOn: '2026-10-22T22:17:03.878Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -122,7 +122,7 @@ Neon Functions do not support hosting websites.
 
 ## Starter templates
 
-Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
+Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). To add one function to an existing project from a template, use [`neon functions new`](/docs/cli/functions#new).
 
 | Example                  | `--template`        | Source                                                                                                                  | Neon services                                   | Stack                 |
 | ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
