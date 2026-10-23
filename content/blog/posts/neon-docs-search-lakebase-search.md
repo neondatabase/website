@@ -41,13 +41,13 @@ Because both indexes live in the same Postgres as your data, hybrid search is ju
 
 ## How it works
 
-Neon Docs search is a standalone service that runs as its own Neon project. A `neon.ts` file in its repository declares everything the project needs: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway for embeddings and reranking and one Neon Function for the API.
+Neon Docs search is a standalone service that runs as its own Neon project. It uses three Neon services:
 
-Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
+- **[Lakebase Postgres](https://neon.com/docs/introduction/neon-and-lakebase)** stores the page chunks, their embeddings and the Lakebase Search indexes.
+- **[Neon Functions](https://neon.com/docs/compute/functions/overview)** run a [Hono](https://hono.dev/) API that ingests changed pages and answers search requests.
+- **[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview)** generates the embeddings and reranks hybrid results.
 
-neon.com already publishes every page as markdown, so ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the [Neon Function](https://neon.com/docs/compute/functions/overview). The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and writes the text, embedding and `tsvector` to one Lakebase Postgres table.
-
-The same Function runs a [Hono](https://hono.dev/) API that the website's search route calls for every query.
+neon.com already publishes every page as markdown, so ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function. The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through AI Gateway and writes the text, embedding and `tsvector` to one Lakebase Postgres table. The website's search route calls the same Function for every query.
 
 ![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
 
@@ -56,6 +56,8 @@ The index holds seven kinds of content: docs, the API reference, the PostgreSQL 
 ```json
 { "query": "create branch", "categories": ["docs", "api"] }
 ```
+
+A `neon.ts` file in the repository declares the whole project: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway and the Function. Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
 
 ## Building search as an application builder
 
