@@ -279,11 +279,16 @@ const Composer = () => {
   const agent = tab === 'agent';
   const sel = useMemo(() => CAPS.filter((c) => picks.includes(c.k)), [picks]);
 
+  // The sign-in sentence appears only when at least one chip is selected, and
+  // sits between the base sentence and the "Then add ..." clause. Account-free
+  // setup (steps 1 to 4 of agent-setup.md) needs no sign-in; adding a service
+  // is what requires a signed-in human, so it is gated on a selection.
+  const signin = useMemo(() => (sel.length ? ' Ask your human to sign in or sign up.' : ''), [sel]);
   const extra = useMemo(
     () => (sel.length ? ` Then add ${joinList(sel.map((c) => c.phrase))}.` : ''),
     [sel]
   );
-  const promptText = AGENT_BASE + extra;
+  const promptText = AGENT_BASE + signin + extra;
 
   // CLI: install the CLI globally, init, then one `# comment` + command block
   // per picked capability. Direct-command capabilities (Auth, Storage,
@@ -354,6 +359,7 @@ const Composer = () => {
             https://neon.com/agent-setup.md
           </span>
           <span> and follow it.</span>
+          {signin && <span className={composerGreen}>{signin}</span>}
           {extra && <span className={composerGreen}>{extra}</span>}
         </div>
       ) : (
@@ -458,12 +464,8 @@ const FoundationCard = () => (
         Serverless Postgres that branches with your app.
       </span>
     </div>
-    {/* Right block: the three sub-links, balanced against the left block. */}
+    {/* Right block: the two sub-links, balanced against the left block. */}
     <span className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#303236] dark:text-gray-new-80">
-      <NextLink href="/docs/get-started/signing-up" className="relative z-10">
-        Quickstart
-      </NextLink>
-      <span className="text-gray-new-70">/</span>
       <NextLink href="/docs/connect/connect-hub" className="relative z-10">
         Connect
       </NextLink>
@@ -590,17 +592,15 @@ const DocsHome = () => (
           </CompactCards>
           <div
             className={cn(
-              'flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[2px] border border-dashed p-3.5 px-4 text-[13px]',
-              strongBorder,
+              'flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[2px] p-3.5 px-4 text-[13px]',
+              panelBg,
               mutedText
             )}
           >
             <span className="min-w-[220px] flex-1">
-              Every docs page is also served as Markdown. Point an agent at the index and it can
-              find the rest.
+              Point your agent at this Markdown index to find any doc.
             </span>
             <CopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
-            <CopyChip label="/agent-setup.md" url="https://neon.com/agent-setup.md" />
           </div>
         </div>
       </Section>
