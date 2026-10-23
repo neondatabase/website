@@ -47,11 +47,11 @@ Neon Docs search is a standalone service that runs as its own Neon project. It u
 - **[Neon Functions](https://neon.com/docs/compute/functions/overview)** run a [Hono](https://hono.dev/) API that ingests changed pages and answers search requests.
 - **[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview)** generates the embeddings and reranks hybrid results.
 
-neon.com already publishes every page as markdown, so ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function. The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through AI Gateway and writes the text, embedding and `tsvector` to one Lakebase Postgres table. The website's search route calls the same Function for every query.
-
 ![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
 
-The index holds seven kinds of content: docs, the API reference, the PostgreSQL tutorial, guides, FAQs, the changelog and blog posts. Each chunk gets a category from its URL at ingest time and a search request can name the categories it wants:
+neon.com already publishes every page as markdown, so ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function. The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through AI Gateway and writes the text, embedding and `tsvector` to one Lakebase Postgres table.
+
+The same Function serves a `/site-search` endpoint, which the website's search route calls for every query. The index holds seven kinds of content: docs, the API reference, the PostgreSQL tutorial, guides, FAQs, the changelog and blog posts. Each chunk gets a category from its URL at ingest time and a request can name the categories it wants:
 
 ```json
 { "query": "create branch", "categories": ["docs", "api"] }
