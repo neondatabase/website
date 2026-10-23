@@ -25,16 +25,16 @@ Each Postgres connection creates a new process in the operating system, consumin
 
 | Compute size (CU) | RAM         | max_connections |
 | :---------------- | :---------- | :-------------- |
-| 0.25              | 1 GB        | 104             |
-| 0.50              | 2 GB        | 209             |
-| 1                 | 4 GB        | 419             |
-| 2                 | 8 GB        | 839             |
-| 3                 | 12 GB       | 1258            |
-| 4                 | 16 GB       | 1678            |
-| 5                 | 20 GB       | 2098            |
-| 6                 | 24 GB       | 2517            |
-| 7                 | 28 GB       | 2937            |
-| 8                 | 32 GB       | 3357            |
+| 0.25              | 1 GB        | 112             |
+| 0.50              | 2 GB        | 225             |
+| 1                 | 4 GB        | 450             |
+| 2                 | 8 GB        | 901             |
+| 3                 | 12 GB       | 1351            |
+| 4                 | 16 GB       | 1802            |
+| 5                 | 20 GB       | 2253            |
+| 6                 | 24 GB       | 2703            |
+| 7                 | 28 GB       | 3154            |
+| 8                 | 32 GB       | 3604            |
 | 9 - 56            | 36 - 224 GB | 4000            |
 
 <Admonition type="note">
@@ -42,7 +42,7 @@ For compute sizes 9 CU and above, `max_connections` is capped at 4000 regardless
 </Admonition>
 
 <Admonition type="note">
-Seven connections are reserved for the Neon superuser account. For a 0.25 CU compute, this means 97 connections are available for your application (104 total - 7 reserved).
+Seven connections are reserved for the Neon superuser account. For a 0.25 CU compute, this means 105 connections are available for your application (112 total - 7 reserved).
 </Admonition>
 
 **Common scenarios that exceed these limits:**
@@ -126,24 +126,24 @@ For details on how `max_connections` is set based on compute size, see [Paramete
 
 **Example with a 1 CU compute:**
 
-- `max_connections` = 419
-- `default_pool_size` = 377 (90% of 419)
+- `max_connections` = 450
+- `default_pool_size` = 405 (90% of 450)
 
 This means:
 
-- User `user1` can have up to 377 active transactions to `database1` through the pooler
-- User `user2` can simultaneously have up to 377 active transactions to the same `database1` database
-- User `user1` can also have up to 377 active transactions to a different database `database2`
+- User `user1` can have up to 405 active transactions to `database1` through the pooler
+- User `user2` can simultaneously have up to 405 active transactions to the same `database1` database
+- User `user1` can also have up to 405 active transactions to a different database `database2`
 
-All of these pools share the underlying `max_connections` limit (419 in this example).
+All of these pools share the underlying `max_connections` limit (450 in this example).
 
 ### Connection pooling vs concurrent queries
 
 **Important:** The 10,000 connection limit does not mean 10,000 simultaneous query results.
 
 - **10,000** = Maximum number of client connections PgBouncer can accept
-- **~377** (for 1 CU) = Maximum concurrent active transactions per user per database
-- **419** (for 1 CU) = Maximum concurrent connections to actual Postgres
+- **~405** (for 1 CU) = Maximum concurrent active transactions per user per database
+- **450** (for 1 CU) = Maximum concurrent connections to actual Postgres
 
 The 10,000 limit is useful for applications with many idle or short-lived connections, such as serverless functions where connections are opened and closed frequently.
 
@@ -161,10 +161,10 @@ The 10,000 limit is useful for applications with many idle or short-lived connec
 
 **Scenario 1: Hitting the per-user-per-database pool limit**
 
-You have a 1 CU compute (`default_pool_size` = 377). User `user1` opens 377 connections to `database1`, all running long queries:
+You have a 1 CU compute (`default_pool_size` = 405). User `user1` opens 405 connections to `database1`, all running long queries:
 
 ```
-Connection 378 from user1 to database1 → Waits in queue
+Connection 406 from user1 to database1 → Waits in queue
 After 2 minutes → Error: "query_wait_timeout"
 ```
 
@@ -190,10 +190,10 @@ Connection 10,001 → Error: "no more connections allowed (max_client_conn)"
 
 **Scenario 3: Hitting max_connections with direct connections**
 
-Using a non-pooled connection string with a 0.25 CU compute (104 max_connections):
+Using a non-pooled connection string with a 0.25 CU compute (112 max_connections):
 
 ```
-Connection 105 → Error: "FATAL: remaining connection slots are reserved"
+Connection 113 → Error: "FATAL: remaining connection slots are reserved"
 ```
 
 **Solution:**
