@@ -41,7 +41,7 @@ Because both indexes live in the same Postgres as your data, hybrid search is ju
 
 ## How it works
 
-Neon Docs search is a standalone service that runs as its own Neon project. A `neon.ts` file in its repository declares everything the project needs: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway for embeddings and reranking and one Neon Function for the API. A single `neon deploy` applies that file and ships the Function.
+Neon Docs search is a standalone service that runs as its own Neon project. A `neon.ts` file in its repository declares everything the project needs: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway for embeddings and reranking and one Neon Function for the API.
 
 Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
 
