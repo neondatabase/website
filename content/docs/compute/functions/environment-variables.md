@@ -6,7 +6,7 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-10-23T14:02:53.665Z'
 ---
 
 ## Neon-injected variables
@@ -124,6 +124,8 @@ To pull from a different branch, switch with `neon checkout`; it pulls the new b
 | Constraint                   | Value  |
 | ---------------------------- | ------ |
 | Max variables per deployment | 1,000  |
-| Max total size               | 64 KiB |
+| Max total size               | 32 KiB |
+
+The total size counts every variable's name and value. A deploy that exceeds it fails with `400 invalid environment: total size <N> bytes exceeds the 32768-byte limit`. To fix it, remove or shorten variables in the same deploy. Leave some headroom: the variables Neon injects at runtime, such as `DATABASE_URL`, also count toward the limit when your function runs.
 
 <NeedHelp/>
