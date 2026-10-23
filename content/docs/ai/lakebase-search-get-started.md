@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:19:40.118Z'
+updatedOn: '2026-10-23T11:22:59.906Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -190,22 +190,22 @@ npx tsx search.ts
 
 ## Combine results with hybrid search
 
-Vector and keyword search each catch matches the other misses. Combine their results with fusion or reranking:
+Vector search finds matches by meaning, while keyword search finds matches by wording. You can combine their results in two ways:
 
-- **Jev through Neon AI Gateway** scores the deduplicated candidates against the query.
-- **Reciprocal Rank Fusion (RRF)** combines the retrievers' ranks in SQL without an additional model call.
+- **Jev through Neon AI Gateway** reads each result alongside your query and scores how likely it is to answer your question.
+- **Reciprocal Rank Fusion (RRF)** uses each result's position in the two search lists to build a combined ranking, without an extra model call.
 
 ### Use Jev through Neon AI Gateway
 
-Retrieve candidates from both searches, deduplicate by document ID, then ask Jev whether each passage supplies the specific information the query asks for. Sort by the probability of yes. This follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
+Jev reads each result alongside your query and estimates how likely it is to answer your question. The example below combines both searches, removes duplicates, and puts the most likely answers first. It follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
 
-For this option, use Node.js 22 or later and install the tested SDK versions:
+This example needs Node.js 22 or later. Install the SDK versions used here:
 
 ```bash
 npm install @neon/ai-sdk-provider@1.1.0 ai@7.0.133
 ```
 
-Add the imports below to `search.ts`. The provider reads the same `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` used for embeddings. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for SDK details.
+Add the following code to `search.ts`. It uses the same `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` you set up for embeddings. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for more about the SDK.
 
 ```typescript filename="search.ts"
 import { neon as neonAi } from '@neon/ai-sdk-provider';
@@ -295,13 +295,13 @@ async function hybridSearchWithJev(query: string, limit = 5): Promise<Candidate[
 }
 ```
 
-Call `hybridSearchWithJev(query)` after inserting the documents and building the indexes. This example scores the candidate pool in one request. Keep the query and all candidate text within Jev 1.14's 65,536-token context window; retrieve shorter chunks or reduce candidate limits for long passages. Apply the same tenant and access-control filters inside both retrievers, before their limits.
+Call `hybridSearchWithJev(query)` after inserting the documents and building the indexes. It sends the query and all the search results to Jev in one request, which must fit within the model's 65,536-token context window. For long documents, search shorter passages or send fewer results. If your app restricts documents by tenant or user, apply those filters to both searches before limiting the results.
 
-A high rank doesn't establish that an answer exists. Calibrate an acceptance threshold on judged no-match queries if your application must return "no answer." The caller can catch reranking errors and use `hybridSearch` as a fallback.
+One result will always rank first, even if none answers the query. If your app needs to say "no answer," test it with unanswered queries to choose a minimum score for accepting a result. If the Jev call fails, you can catch the error and fall back to `hybridSearch`.
 
 ### Fuse ranks with RRF
 
-Each retriever contributes `1 / (60 + rank)` to a candidate's score. Candidates that rank well in either or both lists come out on top.
+RRF gives each result a score of `1 / (60 + rank)` for its position in each search list, then adds the two scores. Results near the top of either list get higher scores.
 
 Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `textSearch`. It reuses the `documents` table and indexes from above:
 
@@ -352,7 +352,7 @@ async function hybridSearch(query: string, limit = 5) {
 }
 ```
 
-Vector retrieval targets 40 candidates and preserves cutoff ties with `WITH TIES`, so it can return more than 40. Keyword retrieval excludes zero-score non-matches and caps candidates at 40 to avoid admitting a large group of tied BM25 matches. `RANK()` gives retained ties equal ranks, and `d.id` breaks final score ties. Tune candidate counts and the RRF constant for your data.
+`WITH TIES` keeps vector results that share the 40th result's distance, so the search can return more than 40 rows. The keyword search leaves out non-matches and stops at 40 because many BM25 matches can have the same score. `RANK()` gives tied results the same rank, and `d.id` keeps the final order stable when scores are equal. Try different candidate counts and RRF constants to find what works best for your data.
 
 </Steps>
 

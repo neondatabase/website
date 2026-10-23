@@ -8,7 +8,7 @@ summary: >-
   the search types, how the extensions work, the scale-to-zero architecture
   advantages, and where to get started.
 enableTableOfContents: true
-updatedOn: '2026-10-23T09:50:57.356Z'
+updatedOn: '2026-10-23T11:22:59.906Z'
 ---
 
 <Callout title="About Lakebase">
@@ -23,7 +23,7 @@ Lakebase Search gives you two complementary ways to search. Use either on its ow
 
 - **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding (a numeric vector from a model), and the `lakebase_ann` index returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
 - **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index. Use it for names, codes, and exact-term lookups where wording matters.
-- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows RRF and AI Gateway reranking examples.
+- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev through Neon AI Gateway or RRF.
 
 ![Keyword search matches only documents that contain the typed words and misses synonyms like "quick automobile" for "fast sports car." Vector search places the query and documents in the same embedding space and returns the nearest neighbors by meaning, including those synonyms.](/docs/ai/lakebase-search-keyword-vs-vector.png)
 
