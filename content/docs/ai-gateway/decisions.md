@@ -224,12 +224,15 @@ They also appear in `GET /v1/models` with `"dialects": ["systemone"]`.
 
 ## Error handling
 
-| Status                  | Meaning               | Common cause                                                                                         |
-| ----------------------- | --------------------- | ---------------------------------------------------------------------------------------------------- |
-| `400 Bad Request`       | Invalid request       | Missing or unknown model (including `jev-latest`), no questions, `stream: true`, or a `box` question |
-| `401 Unauthorized`      | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                           |
-| `403 Forbidden`         | Access denied         | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                      |
-| `429 Too Many Requests` | Quota or rate limited | Account quota or per-minute token limit. See [Rate limits](/docs/ai-gateway/models#rate-limits).     |
+| Status                         | Meaning               | Common cause                                                                                         |
+| ------------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------- |
+| `400 Bad Request`              | Invalid request       | Missing or unknown model (including `jev-latest`), no questions, `stream: true`, or a `box` question |
+| `401 Unauthorized`             | Authentication failed | Missing or invalid `NEON_AI_GATEWAY_TOKEN`                                                           |
+| `403 Forbidden`                | Access denied         | Credential lacks `ai_gateway:invoke` scope, or branch not in credential lineage                      |
+| `413 Request Entity Too Large` | Body too large        | Request body exceeds 32 MiB, before or after decompression                                           |
+| `415 Unsupported Media Type`   | Unsupported encoding  | `Content-Encoding` is something other than a single `gzip`, `x-gzip`, or `zstd` layer                |
+| `429 Too Many Requests`        | Quota or rate limited | Account quota or per-minute token limit. See [Rate limits](/docs/ai-gateway/models#rate-limits).     |
+| `503 Service Unavailable`      | Gateway busy          | Too many compressed requests are being decoded at once. Retry after the `Retry-After` interval.      |
 
 For exact error messages and fixes, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
