@@ -9,7 +9,6 @@ import {
 } from '@rive-app/react-canvas';
 import { cubicBezier, domAnimation, LazyMotion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
 import { cn } from 'utils/cn';
@@ -92,7 +91,7 @@ const getComposerText = (elapsed) => {
   return prompt.slice(0, Math.floor(TYPING_EASE(progress) * prompt.length));
 };
 
-const FINAL_MESSAGE_COUNT = 6;
+const REDUCED_MOTION_DURATION = 3000;
 const RIVE_FONT_URL = '/fonts/pages/home/operate-with-agents/geist-mono.ttf';
 
 const Animation = () => {
@@ -105,32 +104,24 @@ const Animation = () => {
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [timelineIndex, setTimelineIndex] = useState(0);
   const [composerText, setComposerText] = useState('');
-  const [chatVisibilityRef, isChatVisible] = useInView({ threshold: 0.3, triggerOnce: true });
   const shouldReduceMotion = useReducedMotion() ?? false;
   const fontLoader = useMemo(() => createRiveFontLoader({ 'Geist Mono': RIVE_FONT_URL }), []);
 
-  const {
-    isReady,
-    isLoaded,
-    wrapperRef,
-    animationRef,
-    isIntersecting,
-    isVisible,
-    rive,
-    RiveComponent,
-  } = useRiveAnimation({
-    src: '/animations/pages/home/branching-new.riv?20260921-2',
-    artboard: 'main',
-    stateMachines: 'SM',
-    autoBind: true,
-    fit: Fit.Contain,
-    alignment: Alignment.Center,
-    threshold: 0.1,
-    rootMargin: '800px 0px',
-    visibilityRootMargin: '250px 0px',
-    assetLoader: fontLoader,
-    managePlayback: false,
-  });
+  const { isReady, wrapperRef, animationRef, isIntersecting, isVisible, rive, RiveComponent } =
+    useRiveAnimation({
+      src: '/animations/pages/home/branching-new.riv?20260921-2',
+      artboard: 'main',
+      stateMachines: 'SM',
+      autoBind: true,
+      fit: Fit.Contain,
+      alignment: Alignment.Center,
+      threshold: 0.3,
+      rootMargin: '800px 0px',
+      assetLoader: fontLoader,
+      managePlayback: false,
+      // The shared timeline owns play/pause for both visuals, including offscreen rendering.
+      shouldUseIntersectionObserver: false,
+    });
 
   const viewModel = useViewModel(rive, { name: 'Main' });
   const viewModelInstance = useViewModelInstance(viewModel, { name: 'Instance', rive });
@@ -190,7 +181,7 @@ const Animation = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !viewModelInstance) {
+    if (!isReady || !viewModelInstance) {
       return undefined;
     }
 
@@ -199,49 +190,19 @@ const Animation = () => {
       return undefined;
     }
 
-    if (!isVisible) {
-      if (elapsedRef.current === 0) {
-        if (appliedRiveStateRef.current !== 0) {
-          appliedRiveStateRef.current = 0;
-          setRiveState(0);
-        }
-
-        rive?.play();
-        return () => rive?.pause();
-      }
-
-      rive?.pause();
-      return undefined;
-    }
-
-    if (shouldReduceMotion) {
-      hasCompletedRef.current = true;
-      appliedTimelineIndexRef.current = TIMELINE.length - 1;
-      appliedRiveStateRef.current = 3;
-      setTimelineIndex(TIMELINE.length - 1);
-      setComposerText('');
-      setRiveState(3);
-      rive?.play();
-
-      const pauseTimer = window.setTimeout(() => rive?.pause(), 3000);
-      return () => {
-        window.clearTimeout(pauseTimer);
-        rive?.pause();
-      };
-    }
-
-    let previousFrameAt = performance.now();
+    const duration = shouldReduceMotion ? REDUCED_MOTION_DURATION : ANIMATION_DURATION;
+    let previousFrameAt = null;
     let animationFrame = null;
 
     const applyTimeline = (elapsed) => {
-      const nextComposerText = getComposerText(elapsed);
+      const nextComposerText = shouldReduceMotion ? '' : getComposerText(elapsed);
       setComposerText((currentText) =>
         currentText === nextComposerText ? currentText : nextComposerText
       );
 
-      let nextTimelineIndex = 0;
+      let nextTimelineIndex = shouldReduceMotion ? TIMELINE.length - 1 : 0;
 
-      for (let index = 1; index < TIMELINE.length; index += 1) {
+      for (let index = nextTimelineIndex + 1; index < TIMELINE.length; index += 1) {
         if (elapsed < TIMELINE[index].at) break;
         nextTimelineIndex = index;
       }
@@ -258,18 +219,12 @@ const Animation = () => {
       }
     };
 
-    applyTimeline(elapsedRef.current);
-    rive?.play();
-
     const updateTimeline = (now) => {
-      elapsedRef.current = Math.min(
-        elapsedRef.current + (now - previousFrameAt),
-        ANIMATION_DURATION
-      );
+      elapsedRef.current = Math.min(elapsedRef.current + (now - previousFrameAt), duration);
       previousFrameAt = now;
       applyTimeline(elapsedRef.current);
 
-      if (elapsedRef.current >= ANIMATION_DURATION) {
+      if (elapsedRef.current >= duration) {
         hasCompletedRef.current = true;
         rive?.pause();
         return;
@@ -278,18 +233,36 @@ const Animation = () => {
       animationFrame = window.requestAnimationFrame(updateTimeline);
     };
 
-    animationFrame = window.requestAnimationFrame(updateTimeline);
-
-    return () => {
+    const pause = () => {
       if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
       rive?.pause();
     };
-  }, [isLoaded, isVisible, rive, setRiveState, shouldReduceMotion, viewModelInstance]);
 
-  const timelineVisibleMessages = shouldReduceMotion
-    ? FINAL_MESSAGE_COUNT
-    : TIMELINE[timelineIndex].visibleMessages;
-  const visibleMessages = isChatVisible ? timelineVisibleMessages : 0;
+    const updatePlayback = () => {
+      if (!isVisible || document.hidden || hasCompletedRef.current) {
+        pause();
+        return;
+      }
+
+      if (animationFrame !== null) return;
+      // Start a fresh frame interval on resume so time spent hidden is never counted.
+      previousFrameAt = performance.now();
+      applyTimeline(elapsedRef.current);
+      rive?.play();
+      animationFrame = window.requestAnimationFrame(updateTimeline);
+    };
+
+    updatePlayback();
+    document.addEventListener('visibilitychange', updatePlayback);
+
+    return () => {
+      document.removeEventListener('visibilitychange', updatePlayback);
+      pause();
+    };
+  }, [isReady, isVisible, rive, setRiveState, shouldReduceMotion, viewModelInstance]);
+
+  const visibleMessages = TIMELINE[timelineIndex].visibleMessages;
   const isThinking = visibleMessages > 0 && visibleMessages % 2 === 1;
   const measuredWidth = visualWidth ?? VISUAL_WIDTH;
   const desktopScale = Math.min(measuredWidth / VISUAL_WIDTH, 1);
@@ -335,7 +308,6 @@ const Animation = () => {
       <LazyMotion features={domAnimation}>
         <Chat
           className="absolute top-0 left-0 origin-top-left"
-          chatRef={chatVisibilityRef}
           composerText={composerText}
           isCompact={isMobileLayout}
           isThinking={isThinking}
