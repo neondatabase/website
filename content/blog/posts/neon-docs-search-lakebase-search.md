@@ -41,7 +41,11 @@ Because both indexes live in the same Postgres as your data, hybrid search is ju
 
 ## How it works
 
-The service runs entirely on Neon. neon.com already publishes every page as markdown, so ingestion mostly means reading those files. Each page gets split into chunks by heading, each chunk gets an embedding through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and the text, embedding and `tsvector` land in one Lakebase Postgres table.
+Neon Docs search is a standalone service that runs as its own Neon project. A `neon.ts` file in its repository declares everything the project needs: Lakebase Postgres with autoscaling compute on the production branch, AI Gateway for embeddings and reranking and one Neon Function for the API. A single `neon deploy` applies that file and ships the Function.
+
+Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
+
+neon.com already publishes every page as markdown, so ingestion mostly means reading those files. Each page gets split into chunks by heading, each chunk gets an embedding through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and the text, embedding and `tsvector` land in one Lakebase Postgres table.
 
 A [Neon Function](https://neon.com/docs/compute/functions/overview) runs a [Hono](https://hono.dev/) API that the website's search route calls. Whenever a docs change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function, which re-indexes them.
 
