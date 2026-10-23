@@ -57,8 +57,6 @@ The index holds seven kinds of content: docs, the API reference, the PostgreSQL 
 { "query": "create branch", "categories": ["docs", "api"] }
 ```
 
-Leave `categories` out and the search covers everything.
-
 ## Building search as an application builder
 
 As an app builder, I was comfortable with most of this: setting up the Neon Function, calling AI Gateway for embeddings, wiring up the GitHub Action and the website route. Where I personally don't have expertise is search itself: which algorithms to use, how to structure semantic search, how to merge keyword and semantic matches and what trade-offs each option comes with. In the past, this is where I'd reach for Algolia or another search provider.
