@@ -57,7 +57,7 @@ The index holds seven kinds of content: docs, the API reference, the PostgreSQL 
 { "query": "create branch", "categories": ["docs", "api"] }
 ```
 
-Leave `categories` out and the search covers everything. A filtered search still reads the cache first and fills any gap with BM25 over the same categories.
+Leave `categories` out and the search covers everything.
 
 ## Building search as an application builder
 
