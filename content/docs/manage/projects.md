@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-23T12:07:58.556Z'
+updatedOn: '2026-10-23T14:11:22.712Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -781,7 +781,7 @@ For attribute definitions, find the [List projects](/docs/reference/api/projects
 
 ### Count projects with the API
 
-To get the number of projects without paging through the list, use the following Neon API method. It counts active projects, so projects that are being created or deleted aren't included. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/count-projects).
+To get the number of projects without paging through the list, use the following Neon API method. It counts active projects only. Projects that are being created, or that were deleted and are still within the recovery window, aren't included. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/count-projects).
 
 ```http
 GET /projects/count
