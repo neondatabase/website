@@ -58,7 +58,7 @@ describe('AI Gateway model Markdown', () => {
     const textCommands = markdown.split('### Text generation')[1].split('### Image generation')[0];
 
     expect(markdown).toContain('### Image generation');
-    expect(markdown).toContain('tools: [{ type: "image_generation" }]');
+    expect(markdown).toContain('tools: [{ type: "image_generation", model: "gpt-image-2" }]');
     expect(textCommands).toContain('#### AI SDK');
     expect(textCommands).toContain('#### Mastra');
     expect(textCommands).toContain('#### TypeScript');
