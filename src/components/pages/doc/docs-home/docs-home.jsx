@@ -428,12 +428,13 @@ const Composer = () => {
 // DetailIconCards uses for its `lockup` prop, with the same shared database
 // icon the live Products grid uses for Lakebase Postgres. Layout: a horizontal
 // row that uses the card's full width, with the lockup + title + description as
-// a left block and the three sub-links pushed to the right edge
+// a left block and the two sub-links pushed to the right edge
 // (justify-between), vertically centered against the left block so the card
 // reads full rather than half-empty. It collapses to a stack on small screens.
-// The whole card links to the full backend quickstart through a stretched
-// overlay link (the old /docs/get-started target permanently redirects back to
-// /docs, a self-loop), and the three sub-links sit above it (relative z-10) so
+// The whole card links to the Lakebase Postgres product overview through a
+// stretched overlay link, consistent with how the six capability cards (Auth,
+// Object Storage, Functions, AI Gateway, Realtime, Search) link to their own
+// product overview pages; the two sub-links sit above it (relative z-10) so
 // each is its own link; a card-wide <a> can't contain them, since links can't
 // nest.
 const FoundationCard = () => (
@@ -444,7 +445,7 @@ const FoundationCard = () => (
     )}
   >
     <NextLink
-      href="/docs/get-started/full-backend-quickstart"
+      href="/docs/postgres/overview"
       aria-label="Create a database"
       className="absolute inset-0"
     />
