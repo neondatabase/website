@@ -307,7 +307,7 @@ Users approve a client once. Later authorizations for the same client, scopes, a
 
 Both pages receive the authorization request as query parameters. The query is signed and expires, so pass it back to Managed Better Auth exactly as received, as the `oauth_query` value.
 
-- **Login page.** The authorization request redirects here when the user has no session. Send `oauth_query` in the body of the sign-in request (for example, email and password sign-in). Managed Better Auth verifies the signature, signs the user in, and resumes the authorization request. The sign-in response tells your page where to go next, usually your consent page.
+- **Login page.** The authorization request redirects here when the user has no session. Send `oauth_query` in the body of the sign-in request. This works for email and password sign-in and for social sign-in, such as Google or GitHub. Managed Better Auth verifies the signature, signs the user in, and resumes the authorization request. With email and password, the sign-in response tells your page where to go next, usually your consent page. With social sign-in, the provider returns the user to your login page, signed in, with the same query. When your login page loads with a session, send `POST <issuer>/oauth2/continue` with `{ "selected": true, "oauth_query": "<query>" }` and navigate to the returned `url`. Do the same when a signed-in user reaches the login page.
 - **Consent page.** Show what the user is approving, then send `POST <issuer>/oauth2/consent` with a JSON body of `{ "accept": true, "oauth_query": "<query>" }`, or `"accept": false` to deny. The response is JSON with a `redirect` flag and the `url` to navigate the browser to. That URL is the client's redirect URI with the authorization code, or an error.
 - **Client details.** To display the client name, call `GET <issuer>/oauth2/public-client?client_id=<client_id>` with the user's session. It returns `client_id` and `client_name` for every client. Clients that identify with a Client ID Metadata Document also return the `client_uri` and `logo_uri` from their document when it sets them. Managed clients don't have these fields.
 
@@ -333,6 +333,10 @@ async function respond(accept: boolean) {
 ```
 
 Calls from your pages carry the user's session cookie, so make them with `credentials: 'include'` and add your pages' origins as [trusted domains](/docs/auth/guides/configure-domains). Navigate the browser to the returned `url`. Neither the sign-in nor the consent response is an HTTP redirect.
+
+<Admonition type="tip" title="Use the Neon Auth client">
+If your pages use [`@neondatabase/auth`](/docs/auth/overview) 0.7.0-beta or later (or `@neondatabase/neon-js` 0.9.0-beta or later), the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically. When your login page loads with a session, call `authClient.oauth2.continue({ selected: true })`. On your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above. The client navigates to the returned `url` itself, so don't navigate again.
+</Admonition>
 
 ## Sign in users to your own apps and APIs
 
@@ -510,5 +514,6 @@ A refreshed access token keeps the resource of the original authorization unless
 - CIMD `client_id` URLs must use `https` on the default port (443) and a hostname, not an IP address. They can't point at a Neon domain (such as `neon.tech` or `neon.com`, including subdomains), so a Neon Function URL doesn't work. The document must be served as JSON without redirects and be at most 5 KiB. If the fetch fails for any of these reasons, the client sees a generic "Failed to fetch metadata document" error. See the [redirect URI rules](#redirect-uri-rules) for what each kind of client can register.
 - Managed clients: up to 100 per branch, 10 redirect URIs each, and links to up to 11 resources: up to 10 configured resources plus the MCP server resource.
 - Scopes, token lifetimes, and other provider options aren't configurable.
+- Authorization requests with `prompt=login` or `max_age=0` loop back to the login page after sign-in, because continuing the flow doesn't clear these parameters.
 
 <NeedHelp/>

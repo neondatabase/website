@@ -46,6 +46,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon/references/logs-loki.md',
   '/docs/ai/skills/neon/references/parse-env.md',
   '/docs/ai/skills/neon/references/sdk.md',
+  '/get-started/prompt.md',
   '/index.md',
   '/pricing.md',
   '/prompts/ai-gateway-landing.md',
