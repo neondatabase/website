@@ -51,6 +51,14 @@ The same Function runs a [Hono](https://hono.dev/) API that the website's search
 
 ![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
 
+The index holds seven kinds of content: docs, the API reference, the PostgreSQL tutorial, guides, FAQs, the changelog and blog posts. Each chunk gets a category from its URL at ingest time and a search request can name the categories it wants:
+
+```json
+{ "query": "create branch", "categories": ["docs", "api"] }
+```
+
+Leave `categories` out and the search covers everything. A filtered search still reads the cache first and fills any gap with BM25 over the same categories.
+
 ## Building search as an application builder
 
 As an app builder, I was comfortable with most of this: setting up the Neon Function, calling AI Gateway for embeddings, wiring up the GitHub Action and the website route. Where I personally don't have expertise is search itself: which algorithms to use, how to structure semantic search, how to merge keyword and semantic matches and what trade-offs each option comes with.
