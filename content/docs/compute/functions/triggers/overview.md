@@ -65,7 +65,7 @@ When a trigger fires, Neon sends the function:
   }
   ```
 
-  `data` holds the event details: `scheduled_at` (UTC) for a `schedule` trigger, or `bucket_name` and `object_key` for a [`storage_object_created`](/docs/compute/functions/triggers/object-storage#what-your-function-receives) trigger. `trigger` says which trigger fired, so a function with several triggers can tell them apart. Here `trigger.id` is the same value as the trigger resource's `trigger_id`, and this `version` is the payload's schema version, not the trigger's configuration `version`.
+  `data` holds the event details: `scheduled_at` (UTC) for a `schedule` trigger, or `bucket_name` and `object_key` for a [`storage_object_created`](/docs/compute/functions/triggers/object-storage#what-your-function-receives) trigger. `trigger` says which trigger fired, so a function with several triggers can tell them apart. Here `trigger.id` is the same value as the trigger resource's `trigger_id`, and this `version` is the payload's schema version, not the trigger's configuration `version`. For `previous_attempts` and `previous_attempts_omitted`, see [Read previous failures](#read-previous-failures).
 
 - **Headers:** `content-type: application/json`, a W3C [`traceparent`](https://www.w3.org/TR/trace-context/), and `X-Neon-Trigger-Invocation-Id` (equal to the body's `invocation_id`).
 
@@ -81,9 +81,9 @@ The `invocation_id` is a correlation ID, not a secret. It's a digest of the trig
 
 ## Delivery and retries
 
-Neon retries failed trigger deliveries a few times within the next three days. A completed `2xx` response marks the delivery as successful. Other responses, including redirects and `429`, count as failures. Neon doesn't follow redirects. Errors in your function, including errors that prevent it from loading, also count as failures.
+Neon retries failed trigger deliveries a few times, up to 72 hours after the event is created. A `2xx` response marks the delivery as successful once your function finishes sending the response body. Other responses, including redirects and `429`, count as failures. Neon doesn't follow redirects. Errors in your function, including errors that prevent it from loading, also count as failures, as does a delivery to a function that's missing or can't run. If the last retry fails, Neon discards the event.
 
-Delivery can happen more than once, even if your handler already did the work. The `invocation_id` stays the same across deliveries of the same event. Make your handler idempotent, so processing the same event again doesn't repeat side effects. For example, use `invocation_id` as a unique key when recording a result, and commit that record together with the database changes it protects.
+Delivery can happen more than once, even if your handler already did the work, and deliveries can arrive out of order. The `invocation_id` stays the same across deliveries of the same event. Make your handler idempotent, so processing the same event again doesn't repeat side effects. For example, use `invocation_id` as a unique key when recording a result, and commit that record together with the database changes it protects.
 
 Retries use the same [Functions pricing](/docs/introduction/plans#functions) as other invocations.
 
@@ -91,7 +91,7 @@ Retries use the same [Functions pricing](/docs/introduction/plans#functions) as 
 
 If your handler needs more time before another attempt, return `503 Service Unavailable` with a `Retry-After` header. Neon honors this header only on a `503` returned by your handler. It ignores the header on other statuses, including `429`.
 
-The header accepts a whole number of seconds, such as `Retry-After: 60`, or an HTTP-date, such as `Retry-After: Wed, 21 Oct 2026 07:28:00 GMT`. Neon clamps the requested wait to 1–900 seconds. Zero or a past date becomes a one-second wait. The retry can happen slightly later than that wait.
+The header accepts a whole number of seconds, such as `Retry-After: 60`, or an HTTP-date, such as `Retry-After: Wed, 21 Oct 2026 07:28:00 GMT`. Neon clamps the requested wait to 1 to 900 seconds. Zero or a past date becomes a one-second wait. The retry can happen slightly later than that wait.
 
 A valid header can keep retries going beyond the usual retry limits, but it never extends the event's original 72-hour lifetime. The lifetime starts when the event is created, not when your handler returns `503`. Each later failure needs its own valid `503` and `Retry-After` to extend retries again. An absent or invalid header uses the usual retry policy; it doesn't reset the retry limits.
 
@@ -101,12 +101,12 @@ The request body's `previous_attempts` array is empty on the first delivery. On 
 
 Each entry has these fields:
 
-| Field                     | Type              | Description                                                                                                                             |
-| ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `status_code`             | Integer or `null` | HTTP status returned by your function, or `null` if the failure had no HTTP response.                                                   |
-| `timestamp`               | String            | UTC timestamp when the response or failure completed.                                                                                   |
-| `response_body`           | String            | Response prefix, up to 1 KiB, decoded as UTF-8 with replacement for invalid bytes. For failures without a response, a short error text. |
-| `response_body_truncated` | Boolean           | `true` if the response preview was cut short.                                                                                           |
+| Field                     | Type              | Description                                                                                                                                           |
+| ------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `status_code`             | Integer or `null` | HTTP status returned by your function, or `null` if the failure had no HTTP response.                                                                 |
+| `timestamp`               | String            | UTC timestamp when the response or failure completed.                                                                                                 |
+| `response_body`           | String            | Up to the first 1 KiB of the response body, decoded as UTF-8 with replacement for invalid bytes. For failures without a response, a short error text. |
+| `response_body_truncated` | Boolean           | `true` if the response preview was cut short.                                                                                                         |
 
 For example, a delivery after your handler returned `503` can include:
 
@@ -124,7 +124,7 @@ For example, a delivery after your handler returned `503` can include:
 }
 ```
 
-These fields are part of the [full request envelope](#what-your-function-receives). Internal delivery attempts don't appear in this history or use your function's retry limits. History is bounded, so use `invocation_id` to handle duplicates rather than the number of history entries.
+These fields are part of the [full request envelope](#what-your-function-receives). Failures on Neon's side don't appear in this history or count toward your function's retries. History is bounded, so use `invocation_id` to handle duplicates rather than the number of history entries.
 
 ## Test triggers locally
 
