@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-10-09T11:04:29.203Z'
+updatedOn: '2026-10-23T16:15:29.996Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -61,7 +61,9 @@ appears in your credit history as **Manual purchase**, with the date and amount.
 
 <Admonition type="important">
 Only **one purchase can be open at a time** per account. You can't start a second
-purchase until the first completes.
+purchase until the first completes. If an automatic top-up is in progress, a
+manual purchase fails with "Another credit purchase is in progress. Try again in a
+moment."
 </Admonition>
 
 **If a purchase fails.** If the payment card on file is declined, the purchase
@@ -76,7 +78,8 @@ card shows:
 
 - **Credits remaining**: your organization's current credit balance.
 - **Credits added in last 30 days**: a history panel that lists each entry's date,
-  source, and amount, plus the total credits added during the period.
+  source, and amount, plus the total credits added during the period. Automatic
+  top-ups are listed with the source **Auto-reload**.
 
 ![AI Gateway credits balance and credits added in the last 30 days](/docs/ai-gateway/ai-gateway-credits-balance.png)
 
@@ -140,9 +143,11 @@ To set up auto-reload:
 2. On the **AI gateway credits** card, select **Auto-reload**.
 3. Turn on auto-reload and set:
    - **Threshold**: when your balance drops below this amount, Neon buys more
-     credits. The threshold must be higher than the $2 minimum balance.
+     credits. The threshold must be higher than the $2 minimum balance. The
+     default is $10.
    - **Amount**: how many credits to buy each time. The amount must be at least
-     the threshold and within the same range as a manual purchase.
+     the threshold and within the same range as a manual purchase. The default
+     is $25.
 4. Save your settings.
 
 You can also turn on auto-reload in the **Add credits** dialog when you buy
@@ -155,7 +160,9 @@ auto-reload, Neon tops it up right away.
 Neon turns auto-reload off when it can't complete a top-up, for example when your
 card is declined or a top-up keeps failing. It also turns off if your
 organization no longer qualifies, such as after a downgrade to Free or removing
-your payment card. To resume, fix the issue and turn auto-reload back on.
+your payment card. When this happens, an alert on the **AI gateway credits** card
+and in the **Auto-reload** dialog explains why. To resume, fix the issue and turn
+auto-reload back on.
 
 ## Availability
 
