@@ -37,7 +37,7 @@ We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search)
 
 Both extensions ship new index types: `lakebase_ann` for vectors and `lakebase_bm25` for text. They're designed for the lakebase architecture, where compute and storage are separated.
 
-Because both indexes live in the same Postgres as your data, hybrid search is just SQL: one query, joined with your operational tables, in one transaction. The [launch post](https://neon.com/blog/lakebase-search-on-neon) tells the full story of why and how we built it.
+Because both indexes live in the same Postgres as your data, hybrid search is just SQL: one query, joined with your operational tables, in one transaction. Read more about Lakebase Search in the [launch post](https://neon.com/blog/lakebase-search-on-neon), which explains why and how we built it.
 
 ## How it works
 
