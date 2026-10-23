@@ -45,9 +45,9 @@ Neon Docs search is a standalone service that runs as its own Neon project. A `n
 
 Because it's a regular Neon project, branching comes for free. A child branch gets its own copy of the database, search indexes included, so we could run evals and try ranking changes against production data without touching live search.
 
-neon.com already publishes every page as markdown, so ingestion mostly means reading those files. Each page gets split into chunks by heading, each chunk gets an embedding through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and the text, embedding and `tsvector` land in one Lakebase Postgres table.
+neon.com already publishes every page as markdown, so ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the [Neon Function](https://neon.com/docs/compute/functions/overview). The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) and writes the text, embedding and `tsvector` to one Lakebase Postgres table.
 
-A [Neon Function](https://neon.com/docs/compute/functions/overview) runs a [Hono](https://hono.dev/) API that the website's search route calls. Whenever a docs change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function, which re-indexes them.
+The same Function runs a [Hono](https://hono.dev/) API that the website's search route calls for every query.
 
 ![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
 
