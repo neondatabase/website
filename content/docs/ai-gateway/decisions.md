@@ -205,6 +205,28 @@ console.log(answers.refund.probability); // 0.98
 
 The AI SDK calls the yes/no type `boolean` and returns its answer as `probability`; the provider sends it as `noul`. `choice` and `score` answers leave out `confidence`, which is in `providerMetadata.neon.confidence` instead. The provider accepts text and JSON state and throws `UnsupportedFunctionalityError` for file parts.
 
+You can also use TypeSafe's [`@ai-sdk/typesafe-ai`](https://www.npmjs.com/package/@ai-sdk/typesafe-ai) provider, which the examples in the Neon Console use. Point it at the gateway's `/typesafe/v1` path, since it appends `/systemone` itself, and pass your Neon credential as `apiKey`:
+
+```typescript shouldWrap
+import { createTypeSafeAi } from '@ai-sdk/typesafe-ai';
+import { experimental_decide as decide } from 'ai';
+
+const typesafe = createTypeSafeAi({
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/typesafe/v1`,
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+});
+
+const { answers } = await decide({
+  model: typesafe.decisionModel('typesafeai-jev-1-14-0'),
+  state: 'I was charged twice this month.',
+  questions: {
+    billing: { type: 'boolean', instructions: 'Is the user asking about billing?' },
+  },
+});
+
+console.log(answers.billing.probability); // 0.94
+```
+
 ## List the models
 
 `GET /typesafe/v1/models` lists the decision models your branch can call:
