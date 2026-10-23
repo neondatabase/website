@@ -90,11 +90,11 @@ It was incredibly easy for my agent to set up a few baseline and regression benc
 - **Ranking quality:** a public search benchmark ([NFCorpus](https://huggingface.co/datasets/CohereLabs/beir-embed-english-v3/tree/main/nfcorpus)) with labeled results, so changes to the search SQL can't make rankings worse.
 - **Speed:** after every deploy, we time the search and fail if either path goes over its budget.
 
-The biggest ranking change ran on a Neon branch of the production database first, so the evals saw real indexes without touching live search. Here's how relevance moved across the baselines we pinned in the week before launch. Recall@5 is the share of queries with the right page in the top five and MRR@5 rewards ranking it near the top:
+The biggest ranking change ran on a Neon branch of the production database first, so the evals saw real indexes without touching live search. Here's how the new search compares to our previous one on the same queries:
 
-![Line chart of search relevance on 171 golden queries across five eval baselines. Recall@5 went from 77.8% at the October 13 baseline to 76.6% after stripping page boilerplate, 78.4% after dropping footers and adding breadcrumbs, 94.7% after category ranking and more content and stayed at 94.7% after exact query rewrites on October 18. MRR@5 went from 0.613 to 0.615, 0.627, 0.760 and 0.764.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/relevance.png)
+![Bar chart comparing the new and previous neon.com search on the same queries, run on October 23. On 153 golden queries, excluding answers that only live in the PostgreSQL tutorial, the new search returns the right page in the top five for 94.1% of queries versus 79.7% and as the first result for 58.8% versus 54.2%. Over 342 requests per engine from the same client, the search round trip is 210 ms versus 202 ms at p50 and 333 ms versus 380 ms at p95.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/compare.png)
 
-The small dip on October 13 came from stripping navigation text and frontmatter from the index. That cost two expected pages and the gate flagged both. We accepted the trade because it cleaned up 97 top-five results that showed boilerplate, frontmatter or stray markdown. The jump came from weighting pages by category and title matches, plus indexing the PostgreSQL tutorial and FAQs. Together, they took the share of queries with the right page in the top five from 78% to 95%.
+The new search finds the right page in the top five for 94% of queries, where the previous search found it for 80%. We left out queries whose answer only lives in the PostgreSQL tutorial, since the previous search rarely returned those pages. Round trips take about the same time on both. Almost all of it is network: the Function itself spends single-digit milliseconds on each search.
 
 ## Try it on your own data
 
