@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-10-23T16:15:29.996Z'
+updatedOn: '2026-10-23T16:17:19.164Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -141,14 +141,15 @@ To set up auto-reload:
 
 1. In the Neon Console, select **Billing**.
 2. On the **AI gateway credits** card, select **Auto-reload**.
-3. Turn on auto-reload and set:
-   - **Threshold**: when your balance drops below this amount, Neon buys more
-     credits. The threshold must be higher than the $2 minimum balance. The
-     default is $10.
-   - **Amount**: how many credits to buy each time. The amount must be at least
-     the threshold and within the same range as a manual purchase. The default
-     is $25.
-4. Save your settings.
+3. Turn on **Enable auto-reload** and set:
+   - **When balance drops below (USD)**: the threshold that triggers a top-up. It
+     must be higher than the $2 minimum balance. The default is $10.
+   - **Automatically purchase (USD)**: how many credits to buy each time. The
+     amount must be at least the threshold and within the same range as a manual
+     purchase. The default is $25.
+4. Click **Save**.
+
+![Auto-reload credits dialog with a $10 threshold and a $25 purchase amount](/docs/ai-gateway/ai-gateway-auto-reload-modal.png)
 
 You can also turn on auto-reload in the **Add credits** dialog when you buy
 credits. Neon saves those settings only if the purchase succeeds.
