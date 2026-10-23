@@ -78,9 +78,9 @@ That said, we wanted the new search to be at least as good as the old one in bot
 
 ## Evaluating relevance and latency
 
-With search, you have to verify that it performs where you want it to: does the right page show up and how long does a search take? That matters even more once you keep changing things, because every tweak to the ranking or the index can quietly hurt results you already had.
+When you let an agent build something, you need to verify that the output matches your expectations. For search, that means two things: does the right page show up and how fast does it come back? So you need a verification loop.
 
-It was incredibly easy for my agent to set up a few baseline and regression benchmarks for this. They also told us when the new search matched or beat our previous one:
+For us, that loop is a few baseline and regression benchmarks. It was incredibly easy for my agent to set them up. They also told us when the new search matched or beat our previous one:
 
 - **Hit rate:** 171 real queries, including the most common searches on neon.com, each paired with the page it should return. A change fails if an expected page falls out of the top five.
 - **Ranking quality:** a public search benchmark ([NFCorpus](https://huggingface.co/datasets/CohereLabs/beir-embed-english-v3/tree/main/nfcorpus)) with labeled results, so changes to the search SQL can't make rankings worse.
