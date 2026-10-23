@@ -1592,6 +1592,8 @@
                   slug: guides/askyourdatabase
                 - title: Cloudflare Hyperdrive
                   slug: guides/cloudflare-hyperdrive
+                - title: Dot
+                  slug: guides/dot
                 - title: Draxlr
                   slug: guides/draxlr
                 - title: Exograph
