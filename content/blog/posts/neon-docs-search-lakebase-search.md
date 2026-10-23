@@ -86,7 +86,7 @@ For us, that loop is a few baseline and regression benchmarks. It was incredibly
 - **Ranking quality:** a public search benchmark ([NFCorpus](https://huggingface.co/datasets/CohereLabs/beir-embed-english-v3/tree/main/nfcorpus)) with labeled results, so changes to the search SQL can't make rankings worse.
 - **Speed:** after every deploy, we time the search and fail if either path goes over its budget.
 
-The biggest ranking change ran on a Neon branch of the production database first, so the evals saw real indexes without touching live search. Here's how the new search compares to our previous one on the same queries:
+Here's how the new search compares to our previous one on the same queries:
 
 ![Bar chart comparing the new and previous neon.com search on the same queries, run on October 23. On 153 golden queries, excluding answers that only live in the PostgreSQL tutorial, the new search returns the right page in the top five for 94.1% of queries versus 79.7% and as the first result for 58.8% versus 54.2%. Over 342 requests per engine from the same client, the search round trip is 210 ms versus 202 ms at p50 and 333 ms versus 380 ms at p95.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/compare.png)
 
