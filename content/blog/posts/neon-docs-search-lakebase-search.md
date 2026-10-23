@@ -61,13 +61,11 @@ Leave `categories` out and the search covers everything. A filtered search still
 
 ## Building search as an application builder
 
-As an app builder, I was comfortable with most of this: setting up the Neon Function, calling AI Gateway for embeddings, wiring up the GitHub Action and the website route. Where I personally don't have expertise is search itself: which algorithms to use, how to structure semantic search, how to merge keyword and semantic matches and what trade-offs each option comes with.
+As an app builder, I was comfortable with most of this: setting up the Neon Function, calling AI Gateway for embeddings, wiring up the GitHub Action and the website route. Where I personally don't have expertise is search itself: which algorithms to use, how to structure semantic search, how to merge keyword and semantic matches and what trade-offs each option comes with. In the past, this is where I'd reach for Algolia or another search provider.
 
-In the past, this is where I'd reach for Algolia or another search provider. This time, my agent and the `neon-postgres` skill got everything working. The result matches or beats our previous search experience.
+This time, I relied on my agent and the `neon-postgres` [agent skill](https://neon.com/docs/ai/agent-skills). Nobody really writes SQL by hand anymore; agents do. And our incredible Lakebase engineering team had already put their search knowledge into the skill: the extensions, the index types, the query syntax and how to build hybrid search.
 
-Nobody really writes SQL by hand anymore; agents do. So I relied on the `neon-postgres` [agent skill](https://neon.com/docs/ai/agent-skills) and our incredible Lakebase engineering team. My agent walked me through the options: a `lakebase_bm25` index for keyword matches, a `lakebase_ann` index for semantic matches and reciprocal rank fusion (RRF) to merge both rankings. My job was to make the calls and check that the results made sense.
-
-The Lakebase engineering team had already put their search knowledge into the `neon-postgres` skill: the extensions, the index types, the query syntax and how to build hybrid search. So my agent knew what I needed.
+So my agent walked me through the options: a `lakebase_bm25` index for keyword matches, a `lakebase_ann` index for semantic matches and reciprocal rank fusion (RRF) to merge both rankings. My job was to make the calls and check that the results made sense. The result matches or beats our previous search experience.
 
 ## Designing for search-as-you-type
 
