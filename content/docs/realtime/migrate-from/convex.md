@@ -1,24 +1,12 @@
 ---
 title: 'Migrate from Convex'
-subtitle: "Move a Convex app's reactive model onto Neon Realtime and standard Postgres."
+subtitle: "Migrate a reactive Convex app's schema, reactive queries and mutations to use Neon Realtime instead."
 summary: >-
-  Map each Convex building block, schema, reactive queries, mutations with optimistic updates, client wiring and auth, onto Neon Realtime: SQL live queries, sealed subscriptions, useLiveQuery and React's useOptimistic, on standard Postgres.
+  How to migrate a reactive app from Convex to Neon Realtime.
 enableTableOfContents: true
 ---
 
-Convex and Neon Realtime share the same reactive model: you define queries, subscribe to them, write data, and the UI updates as that data changes. So moving an app across is mostly a mechanical remapping. Each Convex building block has a Realtime equivalent that runs on Postgres with ordinary web tooling.
-
-This guide maps the reactive development model: your schema, reactive reads, mutations with optimistic UI, client wiring, and auth. It doesn't cover Convex features that aren't part of reactivity, such as actions, the scheduler, crons, file storage, and vector search. Those route to other Neon services, listed under [What doesn't map](#what-doesnt-map).
-
-## How the reactive models differ
-
-There's one conceptual difference worth understanding before you start, because it changes how you write your mutations.
-
-Convex reactivity is **query-level invalidation**. When a write touches data that a query read, Convex re-runs the whole query function on the server and pushes a fresh result to every subscriber. Writes only ever go through a registered `mutation` function.
-
-Neon Realtime is **row-level delta sync**. Changes to the Postgres rows underlying a sealed live query sync to subscribers as deltas. Writes can originate from anywhere that touches the table: your write endpoint, another service, or direct SQL. They don't have to funnel through one registered path.
-
-The practical consequence for the migration: you keep writing ordinary SQL writes. There's no special mutation path every write has to pass through. Any write that touches the table syncs to the live query on its own.
+<a class="group inline text-pretty" href="https://convex.dev" target="_blank" rel="nofollow noopener noreferrer">Convex<span class="whitespace-nowrap no-underline"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 14 14" class="ml-1 inline-block size-3.5! shrink-0 align-[-0.125em]"><path fill="currentColor" d="M0 0h14v14H0z" opacity="0.2"></path><path stroke="currentColor" stroke-linecap="square" d="M9.915 8.885V4.08H5.11M9.625 4.375 4.083 9.917"></path></svg></span></a> and [Neon Realtime](../overview) share a similar reactive model: define queries, subscribe to them, write data and everything updates in realtime.
 
 ## Concept mapping
 
@@ -35,33 +23,29 @@ The practical consequence for the migration: you keep writing ordinary SQL write
 | file storage (`ctx.storage`)                                           | Neon Object Storage (separate service)                                                                                                                                             |
 | vector search (`.vectorSearch`)                                        | Postgres `pgvector` / Lakebase Search (separate service)                                                                                                                           |
 
-The worked example throughout is a small chat app: channels, channel membership, messages, "list the messages in a channel" for reads, and "send a message" for writes.
+The example throughout is a small chat app: channels, members, and messages.
 
 <Steps>
 
 ## Set up Neon Realtime
 
-Enable Realtime on your Neon branch and install the React-path packages. The fastest way to see the shape of a working app is the `realtime-react` bootstrap template.
-
-Follow the [quickstart](../quickstart) to enable Realtime and get your `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`, or scaffold a running example:
+Follow the [quickstart](../quickstart) to enable Realtime on your branch and get your `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`. To scaffold a running example instead:
 
 ```bash filename="Terminal"
 neon bootstrap my-app --template realtime-react
 ```
 
-To add Realtime to your existing app, install the packages. You'll need [Node.js 22 or later](https://nodejs.org/):
+To add Realtime to an existing app, install the packages ([Node.js 22+](https://nodejs.org/)):
 
 ```bash filename="Terminal"
 npm install @neon/realtime @neon/realtime-react @neon/realtime-drizzle
 ```
 
-For the full enablement and setup details, see [Setup](../guides/queries#setup) in the queries guide. This guide links into the guides for depth rather than repeating them.
-
 ## Migrate your schema
 
-Convex tables are document definitions. On Neon you write ordinary Postgres tables. Lead with Drizzle: it's the closest match to Convex's typed TypeScript DX and it's what the template uses.
+Convex tables become ordinary Postgres tables. Use Drizzle: it's the closest match to Convex's typed TypeScript DX, and it's what the template uses.
 
-Your Convex schema declares tables and indexes, and Convex adds `_id` and `_creationTime` to every document for you:
+Your Convex schema, with the implicit `_id` and `_creationTime` on every document:
 
 ```ts filename="convex/schema.ts"
 import { defineSchema, defineTable } from 'convex/server';
@@ -81,7 +65,7 @@ export default defineSchema({
 });
 ```
 
-The Postgres equivalent declares the system fields explicitly, turns `v.id(...)` references into real foreign keys, and maps the nested object to a `jsonb` column:
+The Postgres equivalent:
 
 ```ts filename="backend/schema.ts"
 import { index, jsonb, pgTable, primaryKey, text, timestamp, uuid } from 'drizzle-orm/pg-core';
@@ -123,7 +107,7 @@ export type Channel = typeof channels.$inferSelect;
 export type Message = typeof messages.$inferSelect;
 ```
 
-The `channel_members` table records who belongs to each channel, which backs the per-channel authorization you'll wire up in [Migrate auth](#migrate-auth).
+The `channel_members` table backs the per-channel authorization in [Migrate auth](#migrate-auth).
 
 Field by field:
 
@@ -137,15 +121,15 @@ Field by field:
 | `metadata: v.object({...})`   | `metadata: jsonb('metadata').notNull()` (or flatten to columns)             |
 | `.index('by_channel', [...])` | `index('messages_channel_id_idx').on(table.channel_id)`                     |
 
-A couple of notes carry over from Convex's document model. `v.id("channels")` stores a document ID with no database-enforced integrity, because Convex has no joins; on Postgres you get a real foreign key and real joins. A single-field `v.object` can also be flattened into its own column (`boolean('edited').notNull()`); reach for `jsonb` when the shape is open-ended.
+Unlike a Convex document ID, a Postgres foreign key gives you real referential integrity and joins. Flatten a fixed-shape `v.object` into columns (`boolean('edited').notNull()`); use `jsonb` only when the shape is open-ended.
 
-Prefer plain SQL? The same schema is a standard `CREATE TABLE` with a `uuid PRIMARY KEY`, a `REFERENCES` foreign key, and a `CREATE INDEX`. Kysely works the same way. Use whichever you already have.
+Prefer plain SQL or Kysely? The same schema is a standard `CREATE TABLE` with a `uuid PRIMARY KEY`, a `REFERENCES` foreign key, and a `CREATE INDEX`.
 
 <Callout title="Realtime table requirements">
-Realtime streams row changes through logical replication, and each table needs a stable replica identity. A primary key gives you that, so the `id` column above is enough. For the full details, see [Table requirements](../guides/queries#table-requirements) in the queries guide.
+Realtime streams row changes through logical replication, so each table needs a stable replica identity. The `id` primary key above is enough. See [Table requirements](../guides/queries#table-requirements).
 </Callout>
 
-Your live queries and writes share one Drizzle client. Create it once from a `pg` pool, the same setup the [Drizzle example](../examples/drizzle) uses:
+Your live queries and writes share one Drizzle client, created once from a `pg` pool (the same setup as the [Drizzle example](../examples/drizzle)):
 
 ```ts filename="backend/db.ts"
 import { drizzle } from 'drizzle-orm/node-postgres';
@@ -163,13 +147,13 @@ export const db = drizzle(pool, { schema });
 pool.on('error', (error: Error) => console.error(error));
 ```
 
-The query and write files below both import this `db`. Realtime never runs your live queries through it; the adapter only compiles them to SQL. `db` still runs your writes and any server-side reads, such as the rows you server-render.
+The query and write files below import this `db`. Realtime never runs live queries through it (the adapter only compiles them to SQL); `db` runs your writes and any server-side reads.
 
 ## Migrate your data
 
-This is a one-time snapshot migration, not the reactive model. Keep it simple.
+A one-time snapshot, not the reactive model:
 
-1. **Export from Convex.** Run `npx convex export --path ./convex-snapshot.zip` to get a ZIP snapshot of your deployment's tables. (Add `--include-file-storage` only if you also need stored files; those go to Neon Object Storage, not Realtime.)
+1. **Export from Convex** for a ZIP snapshot of your tables (add `--include-file-storage` only if you need stored files, which go to Object Storage, not Realtime):
 
    ```bash filename="Terminal"
    npx convex export --path ./convex-snapshot.zip
@@ -178,7 +162,7 @@ This is a one-time snapshot migration, not the reactive model. Keep it simple.
 2. **Transform documents to rows.** Map each document to a Postgres row: `_id` to `id`, `_creationTime` (milliseconds since the epoch) to a `created_at` timestamp, nested objects to `jsonb` or flattened columns, and each `v.id(...)` reference to the matching foreign-key value.
 3. **Load into Postgres.** Insert the rows with your usual tooling (SQL `INSERT`, `COPY`, or a Drizzle seed script) against your Neon branch once the schema exists.
 
-Pick one id strategy and apply it consistently. Either keep Convex `_id` strings as `text` primary keys, which skips reference remapping but means changing the `uuid` columns above to `text`, or assign new `uuid`s and build an old-to-new id map during the transform so you can rewrite every reference. The schema above uses `uuid` to match the client-generated-id pattern that makes optimistic writes flicker-free, so the second option is the default.
+Pick one id strategy. Either keep Convex `_id` strings as `text` primary keys (which skips reference remapping, but change the `uuid` columns above to `text`), or assign new `uuid`s and build an old-to-new id map to rewrite every reference. The schema above uses `uuid` to match the client-generated-id pattern that keeps optimistic writes flicker-free, so that's the default.
 
 ## Migrate your queries
 
@@ -200,9 +184,9 @@ export const list = query({
 });
 ```
 
-On Neon you write the same read as an ordinary SQL query, seal it in a server handler, and subscribe to the sealed query on the client. Three pieces replace the Convex `query` plus `useQuery` pair:
+On Neon, three pieces replace the `query` plus `useQuery` pair: write the read as SQL, seal it in a server handler, and subscribe to the sealed query on the client.
 
-**1. The live query (SQL).** Write it with Drizzle. This query joins through a `channel_members` table so it only returns messages from channels the user belongs to, and that join is also the authorization (more on that in [Migrate auth](#migrate-auth)):
+**1. The live query.** The join through `channel_members` returns only messages from channels the user belongs to, which is also the authorization (see [Migrate auth](#migrate-auth)):
 
 ```ts filename="backend/queries.ts"
 import { and, asc, eq, getTableColumns } from 'drizzle-orm';
@@ -222,7 +206,7 @@ export function messagesQuery(userId: string, channelId: string) {
 
 Raw SQL and Kysely work too; a raw query must be a single `SELECT` with `$1`, `$2` placeholders. See [Defining live queries](../guides/queries#defining-live-queries).
 
-**2. Authorize, then seal.** Create the Realtime server once with the Drizzle adapter, then expose an endpoint that reads the verified identity, builds the query with server-side parameters, and seals it. `seal({ query })` takes an object with a `query` field and returns a short-lived, opaque `SealedLiveQuery` the client can subscribe to:
+**2. Authorize, then seal.** Create the Realtime server with the Drizzle adapter, then expose an endpoint that reads the verified identity, builds the query, and seals it. `seal({ query })` returns a short-lived, opaque `SealedLiveQuery`:
 
 ```ts filename="backend/realtime.ts"
 import { createRealtime } from '@neon/realtime/server';
@@ -255,9 +239,9 @@ const app = new Hono().post('/api/messages/live', async (c) => {
 export default app;
 ```
 
-This mirrors Convex's "check auth at the top of the function." The `user.id` comes from the verified session, never the client; the client only supplies `channelId`. You add the write route to this same app in [Migrate your mutations](#migrate-your-mutations). See [Sealing queries](../guides/queries#sealing-queries) and [Exposing queries](../guides/queries#exposing-queries).
+Like Convex's check at the top of a function, `user.id` comes from the verified session, never the client. See [Sealing queries](../guides/queries#sealing-queries) and [Exposing queries](../guides/queries#exposing-queries).
 
-**3. Subscribe with `useLiveQuery`.** The hook takes a sealed query (not raw params) and returns `{ data, status, error, utils }`. `data` is `undefined` until the first result arrives, which is the same loading contract as Convex's `useQuery` returning `undefined`:
+**3. Subscribe with `useLiveQuery`.** It takes the sealed query and returns `{ data, status, error, utils }`. `data` is `undefined` until the first result arrives, the same loading contract as Convex's `useQuery`:
 
 ```tsx filename="frontend/Messages.tsx"
 import { useLiveQuery } from '@neon/realtime-react';
@@ -287,18 +271,18 @@ export function Messages({ sealedQuery, refreshQuery }: Props) {
 }
 ```
 
-This is the read-only version. In [Migrate your mutations](#migrate-your-mutations) you extend this same `Messages` component with a send form, optimistic state, and SSR `initialData`, keeping the `refreshQuery` it already has.
+This is the read-only version. [Migrate your mutations](#migrate-your-mutations) extends it with a send form, optimistic state, and SSR `initialData`.
 
-Two differences from Convex are worth knowing:
+Two differences from Convex:
 
-- **Sealed queries expire** (currently 60 seconds). To keep a subscription running, pass a `refreshQuery` callback that returns a fresh sealed query for the _same_ query; the hook renews it before it expires. See [refreshQuery](../guides/reactivity#refreshquery).
-- **To change parameters** (switch channels), fetch a new sealed query for the new channel and pass it in. A new sealed query is a new logical subscription, so build a matching `refreshQuery` for the new parameters. See [Changing query parameters](../guides/reactivity#changing-query-parameters).
+- **Sealed queries expire** (currently 60 seconds). Pass a `refreshQuery` callback that returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. See [refreshQuery](../guides/reactivity#refreshquery).
+- **To change parameters** (switch channels), fetch a new sealed query and pass it in, with a matching `refreshQuery`. See [Changing query parameters](../guides/reactivity#changing-query-parameters).
 
 ## Migrate your mutations
 
 Convex's `.withOptimisticUpdate` maps onto **React's built-in `useOptimistic`**.
 
-In Convex, writes go through a registered `mutation` that validates its args and inserts the document:
+In Convex, writes go through a registered `mutation`:
 
 ```ts filename="convex/messages.ts"
 import { mutation } from './_generated/server';
@@ -319,7 +303,7 @@ export const send = mutation({
 });
 ```
 
-Optimistic UI is a callback on the client that patches the query cache, with automatic rollback. The optimistic document carries every field the schema requires, so it matches a real row:
+Optimistic UI is a client callback that patches the query cache, with automatic rollback:
 
 ```tsx filename="src/MessageSender.tsx"
 import { useMutation } from 'convex/react';
@@ -346,11 +330,11 @@ const sendMessage = useMutation(api.messages.send).withOptimisticUpdate((localSt
 // usage: await sendMessage({ channelId, body })
 ```
 
-On Neon you build this in two stages: a basic reactive write first, then the optimistic overlay.
+On Neon, build this in two stages.
 
 ### Stage 1: a basic reactive write
 
-The write is a plain POST endpoint running SQL. Its own `RETURNING` clause hands back the commit txid, which you'll use in stage 2:
+The write is a plain POST endpoint running SQL. Its `RETURNING` clause hands back the commit txid for stage 2:
 
 ```ts filename="backend/mutations.ts"
 import { sql } from 'drizzle-orm';
@@ -376,7 +360,10 @@ export async function sendMessage(
 }
 ```
 
-Expose it as a route on the same Hono app from [Migrate your queries](#migrate-your-queries). Hono wants every route chained onto one `new Hono()`, so here's the app with both the live-query endpoint and the write route. The handler reads the verified user, parses `{ id, channelId, body }`, and calls `sendMessage`:
+Add the write route to the same Hono app from [Migrate your queries](#migrate-your-queries):
+
+<details>
+  <summary>backend/server.ts with both routes</summary>
 
 ```ts filename="backend/server.ts"
 import { Hono } from 'hono';
@@ -406,7 +393,9 @@ const app = new Hono()
 export default app;
 ```
 
-On the client, POST. The live query picks up the new row on its own once it syncs back. There's no `revalidate` and no manual refetch, only a visible round-trip plus replication lag before the message appears:
+</details>
+
+On the client, just POST. The live query picks up the new row once it syncs back, with no `revalidate` or manual refetch:
 
 ```tsx
 async function send(body: string) {
@@ -418,11 +407,11 @@ async function send(body: string) {
 }
 ```
 
-This already replaces Convex's registered mutation plus automatic query re-run. The sealed live query delivers the change by row-level delta sync.
+That already replaces the Convex mutation and its automatic re-run: the live query delivers the change by row-level delta sync.
 
 ### Stage 2: optimistic UI with `useOptimistic`
 
-To make the write feel instant, overlay React's `useOptimistic`. The client picks the id with `crypto.randomUUID()`, applies the change optimistically inside `startTransition`, POSTs the write, and awaits the returned txid. The synced row carries the same id, so there's no flicker, and React drops the optimistic state when the transition ends.
+To make the write feel instant, overlay React's `useOptimistic`. The client picks the id with `crypto.randomUUID()` so the optimistic row and the synced row share a key, applies the change inside `startTransition`, POSTs, and awaits the returned txid.
 
 ```tsx filename="frontend/optimistic.ts"
 import type { Message } from '../backend/schema';
@@ -447,7 +436,7 @@ export function applyOptimisticAction(
 export const SYNC_TIMEOUT_MS = 10_000; // always pass a timeout to awaitTxId
 ```
 
-This is the final `Messages` component. It extends the read-only version from [Migrate your queries](#migrate-your-queries): it keeps `refreshQuery` (without it the sealed query expires after about 60 seconds) and accepts SSR `initialData`, then layers the send form and optimistic state on top. The [parent that wires it up](#wire-up-the-client) passes `sealedQuery`, `refreshQuery`, `channelId`, and `userId`, plus `initialData` when the page is server-rendered.
+The final `Messages` component extends the read-only version with a send form, optimistic state, and SSR `initialData`. The [parent](#wire-up-the-client) passes `sealedQuery`, `refreshQuery`, `channelId`, `userId`, and `initialData`:
 
 ```tsx filename="frontend/Messages.tsx"
 import { type FormEvent, startTransition, useOptimistic } from 'react';
@@ -534,15 +523,13 @@ export function Messages({ sealedQuery, refreshQuery, initialData, channelId, us
 }
 ```
 
-The mapping, piece by piece:
+The mapping:
 
 | Convex                                                         | Neon Realtime (React only)                                                                                           |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `useMutation(api.x).withOptimisticUpdate((localStore) => ...)` | `useOptimistic(data, reducer)` plus `addOptimistic(action)` inside `startTransition`                                 |
 | client auto-rolls-back when the mutation completes             | React drops the optimistic state when the transition ends; `awaitTxId(txid, timeout)` holds it until the row arrives |
 | Convex assigns `_id`                                           | the client picks `id` with `crypto.randomUUID()` so optimistic and synced rows share a key                           |
-
-Two things to get right:
 
 <Admonition type="important" title="Read the txid from RETURNING, and always pass a timeout">
 Get the txid from the write's own `RETURNING pg_current_xact_id()::text`. One statement is one transaction is one txid, with no extra round trip. Don't wrap the write in `db.transaction()` just to `SELECT pg_current_xact_id()`: that's four round trips (`BEGIN`, write, `SELECT`, `COMMIT`) and holds a pooled connection the whole time.
@@ -552,7 +539,7 @@ Always pass a timeout to `awaitTxId`. Its default is to wait forever. With a tim
 
 See [How optimistic mutations work](../guides/mutations#how-optimistic-mutations-work) and [With React's `useOptimistic` hook](../guides/mutations#with-reacts-useoptimistic-hook).
 
-If you keep state in a normalized client store, or need the same optimistic change to stay consistent across several views with automatic rollback, use the TanStack DB binding instead (see [TanStack DB](../guides/reactivity#tanstack-db) and [With TanStack DB collections](../guides/mutations#with-tanstack-db-collections)). It's an option, not a requirement; the core path above is React only.
+For a normalized client store or cross-view consistency with automatic rollback, use the TanStack DB binding instead (see [TanStack DB](../guides/reactivity#tanstack-db) and [With TanStack DB collections](../guides/mutations#with-tanstack-db-collections)).
 
 ## Wire up the client
 
@@ -570,7 +557,7 @@ root.render(
 );
 ```
 
-Neon Realtime is the same shape: one `createRealtimeClient` wrapped in a `RealtimeProvider`. Create it once inside the React tree, in a `useState` initializer, so the same code works with or without SSR and browser-only setup stays out of server code. `createRealtimeClient` takes a single options object with a required `url` and an optional `parsers`. There's no `secret` on the client; it carries no credential, because the sealed query is the authorization. The `drizzleParsers` spread keeps live-row types matching your Drizzle server reads:
+Neon Realtime is the same shape: one `createRealtimeClient` in a `RealtimeProvider`, created in a `useState` initializer so the same code works with or without SSR. There's no `secret` on the client; it carries no credential, because the sealed query is the authorization. The `drizzleParsers` spread keeps live-row types matching your Drizzle server reads:
 
 ```tsx filename="frontend/RealtimeRoot.tsx"
 import { createRealtimeClient } from '@neon/realtime/client';
@@ -598,9 +585,9 @@ root.render(
 );
 ```
 
-Components inside the provider read the shared client from context. `useLiveQuery` does this for you; when a component needs the client directly, it calls [`useRealtimeClient()`](../sdks/typescript#react-userealtimeclient), which returns the provider's client.
+Components inside the provider read the shared client from context; `useLiveQuery` does this for you, or call [`useRealtimeClient()`](../sdks/typescript#react-userealtimeclient) directly.
 
-One parent component ties the pieces together: it fetches the sealed query for a channel, builds a matching `refreshQuery`, and renders the final `Messages`.
+One parent component ties it together: it fetches the sealed query, builds a matching `refreshQuery`, and renders `Messages`.
 
 <details>
   <summary>The parent that fetches the sealed query and renders Messages</summary>
@@ -680,7 +667,7 @@ The `channelId` check never hands the previous channel's sealed query to a new c
 
 </details>
 
-For server-side rendering, Convex constructs a `ConvexHttpClient` (from `convex/browser`) per request to prefetch a one-off snapshot. Neon needs no special SSR client: run an ordinary Postgres query on the server for the initial rows, seal the _same_ query, and pass the rows to `useLiveQuery` as `initialData`. Awaiting the Drizzle builder runs it for the initial read; `realtime.seal({ query })` compiles the same builder without running it:
+For SSR, Convex builds a per-request `ConvexHttpClient` to prefetch a snapshot. Neon needs no special SSR client: run the query on the server for the initial rows, seal the _same_ query, and pass the rows as `initialData`. Awaiting the Drizzle builder runs it; `realtime.seal({ query })` compiles it without running it:
 
 ```ts filename="backend/messages-page.ts"
 import { messagesQuery } from './queries';
@@ -693,7 +680,7 @@ export async function loadMessagesPage(userId: string, channelId: string) {
 }
 ```
 
-`Messages` passes `initialData` into `useLiveQuery` so the server's rows render straight away, then the live subscription takes over after hydration. `RealtimeRoot` already creates the client in the React tree, so the same wiring renders on the server and connects in the browser. See [Server-side rendering](../guides/ssr) and [React](../guides/reactivity#react).
+`Messages` passes `initialData` into `useLiveQuery` so the server's rows render immediately, then the live subscription takes over after hydration. See [Server-side rendering](../guides/ssr) and [React](../guides/reactivity#react).
 
 ## Migrate auth
 
@@ -710,9 +697,9 @@ export const list = query({
 });
 ```
 
-On Neon, the same check moves into your request handler, which you already saw in [Migrate your queries](#migrate-your-queries): read the verified session or JWT, authorize with your own business logic, build the query with parameters baked in from the verified identity, then `seal()`. Managed Better Auth provides the identity. A sealed query is opaque and short-lived, and the client can't read or change its parameters, so they're fixed server-side.
+On Neon, the same check moves into your request handler (as in [Migrate your queries](#migrate-your-queries)): read the verified session, authorize with your own logic, build the query with the verified identity baked in, then `seal()`. Managed Better Auth provides the identity, and because the sealed query is opaque, its parameters are fixed server-side.
 
-Here's the `requireUser` the handler calls. With Vite and Hono, the browser sends its Managed Better Auth session as a bearer token, and the API verifies that JWT against your [Managed Better Auth JWKS](/docs/auth/guides/plugins/jwt#verify-a-token) with `jose`. Next.js and TanStack Start mount Managed Better Auth on your app's own origin and read the session from its cookie instead, as the [Next.js example](../examples/nextjs) and the [SSR guide](../guides/ssr) show.
+The handler calls `requireUser`. With Vite and Hono, the browser sends its Managed Better Auth session as a bearer token, and the API verifies that JWT against your [Managed Better Auth JWKS](/docs/auth/guides/plugins/jwt#verify-a-token) with `jose`. Next.js and TanStack Start mount Managed Better Auth on the app's own origin and read the session from its cookie instead (see the [Next.js example](../examples/nextjs) and the [SSR guide](../guides/ssr)).
 
 <details>
   <summary>backend/auth.ts: verify the token and return the user id</summary>
@@ -754,25 +741,21 @@ export async function requireUser(c: Context): Promise<{ id: string }> {
 
 </details>
 
-The handler then uses it exactly as [Migrate your queries](#migrate-your-queries) showed: `requireUser(c)` authorizes, you build the query with `user.id`, then `seal()`.
+Two properties worth calling out:
 
-Two properties are worth calling out:
-
-- **Live authorization.** The authorization is part of the query. `messagesQuery` joins through `channel_members` and filters on the user id, so it only returns messages from channels the user belongs to. Because that join is in the live query, removing someone from a channel revokes their access to its messages in real time. Realtime authorizes the query, not the connection. See [Live authorization](../guides/queries#live-authorization).
+- **Live authorization.** The authorization is part of the query: `messagesQuery` joins through `channel_members`, so removing someone from a channel revokes their access in real time. Realtime authorizes the query, not the connection. See [Live authorization](../guides/queries#live-authorization).
 - **RLS isn't the model yet.** Realtime reuses your existing backend auth logic rather than Postgres row-level security. RLS support is planned before GA but isn't the recommended approach today. See [Why not row-level security](../guides/queries#why-not-row-level-security).
 
 </Steps>
 
 ## What doesn't map
 
-Some Convex features aren't part of the reactive model, so there's no Realtime equivalent. Route them to the right Neon service instead:
+Some Convex features aren't part of the reactive model. Route them to the right Neon service:
 
 - **`action` / `internalAction`, the scheduler, and crons** map to [Neon Functions](/docs/compute/functions/overview), with [Function Triggers](/docs/compute/functions/triggers/overview) for scheduled runs and object-storage events.
 - **File storage (`ctx.storage`)** maps to [Neon Object Storage](/docs/storage/overview).
 - **Vector search (`.vectorSearch`)** maps to Postgres [`pgvector`](/docs/extensions/pgvector) or [Lakebase Search](/docs/ai/lakebase-search).
 - **External LLM calls** map to the [Neon AI Gateway](/docs/ai-gateway/overview).
-
-These are deliberately out of scope for a reactivity migration. Move your reactive reads and writes onto Realtime first, then wire up these services separately.
 
 ## Next steps
 
