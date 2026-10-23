@@ -4,16 +4,16 @@ subtitle: 'Use the TypeSafe System One model through the Neon AI Gateway to clas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-17T00:00:00.000Z'
-updatedOn: '2026-10-23T10:36:52.121Z'
+updatedOn: '2026-10-23T10:50:13.441Z'
 ---
 
 Content moderation is a common challenge when building products that accept user-generated content. You need to evaluate every message against a few key questions: Is it spam? Does it contain abusive language? Does it expose sensitive personal information? Should it be allowed, flagged for review, or blocked? A common approach is to use a large language model (LLM) to assess content and explain its decisions in natural language. LLMs are good at understanding text, but their responses can be inconsistent and difficult to integrate into automated workflows. For pipelines that process large volumes of messages, typed, machine-readable outputs are more reliable for driving moderation decisions.
 
-[Jev](https://typesafe.ai), by TypeSafe AI, is a **System One** decision model. Instead of generating a reply, it answers a set of questions about the input you send it, returning structured answers: a label from a predefined set, a score on a scale you specify, or a probability between 0 and 1. Your application can consume these outputs directly instead of interpreting a natural-language response.
+[Jev](https://typesafe.ai), by TypeSafe AI, is a **System One** decision model. Instead of generating a reply, it answers a set of questions about the input you send it. Each answer is structured: a label from a predefined set, a score on a scale you specify, or a probability between 0 and 1. Your application can consume these outputs directly instead of interpreting a natural-language response.
 
 The design separates **judgment from policy**. Jev evaluates a message against the questions you define; your application decides what to do with the results. You might ask Jev to classify a message, check for spam and personal information, and assess its severity. Your code then combines those answers using rules and thresholds you control to determine whether to allow, review, or block the message. When your moderation policy changes, you can adjust those rules without redesigning the entire pipeline.
 
-Because Jev returns scores and probabilities instead of generated text, the cost per message is much lower. In TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev), Jev runs faster and costs less than frontier chat models on workflow evaluations, which makes it practical to run on every message rather than a sample.
+Because Jev returns scores and probabilities instead of generated text, the cost per message is much lower. In TypeSafe's [benchmark](https://typesafe.ai/blog/introducing-system-one-models-and-jev), Jev runs faster and costs less than frontier chat models on workflow evaluations. That makes it practical to run on every message rather than a sample.
 
 In this guide, you'll build a content moderation pipeline in TypeScript using Jev through the Neon AI Gateway. You'll evaluate a batch of sample messages. Then you'll use Jev's structured outputs and your own rules to decide which messages to allow, flag for review, or block. The pipeline shows how to turn model-based judgments into consistent moderation decisions.
 
@@ -41,7 +41,7 @@ Each question has an `instructions` string and a type. The type determines the s
 
 Choice picks one label from a list, like `spam`, `abuse`, or `discussion`. You supply the options as a map, and each option gets a short description. Score places the state on an ordered list of levels you supply, and the answer can fall between two of them. Noul is TypeSafe's yes/no type, and it gives the probability that a statement is true.
 
-You can mix all three types in one request. For example, one request can combine a category choice, two probability checks, and a severity score. See [Decisions](/docs/ai-gateway/decisions#question-types) for the full question-type reference, including the optional true and false descriptions you can add to Noul questions and the `legend` a Score answer returns.
+You can mix all three types in one request. For example, one request can combine a category choice, two probability checks, and a severity score. See [Decisions](/docs/ai-gateway/decisions#question-types) for the full question-type reference.
 
 The following diagram shows how Jev evaluates a message and returns structured answers. Your code then applies your own thresholds to decide what to do with the message.
 
@@ -149,7 +149,7 @@ const { answers } = await client.systemOne({
 console.log(answers.personal_info.noul); // 0.7
 ```
 
-The `noul` function takes an `instructions` string and returns a probability between 0 and 1. A value near 1 means Jev thinks the statement is true; a value near 0 means it thinks the statement is false.
+The `noul` function takes an `instructions` string. Jev returns a probability between 0 and 1. A value near 1 means it thinks the statement is true, and a value near 0 means it thinks the statement is false.
 
 </TabItem>
 
@@ -216,7 +216,7 @@ NEON_AI_GATEWAY_BASE_URL="https://br-example-branch-123456-api.ai.c-6.us-east-2.
 
 ## Define the messages and context
 
-Create a file named `moderate.ts` and add the following code. It defines a channel and a batch of messages to evaluate. The messages mix ordinary conversation with two scams, two jabs, one phone number, and one off-topic post.
+Create a file named `moderate.ts` and add the following code. It defines a channel and a batch of messages to evaluate. The messages mix ordinary conversation with two scams, two insults, one phone number, and one off-topic post.
 
 The code has three parts:
 
@@ -357,7 +357,7 @@ Each message is a separate state, so each message gets its own request. The five
 
 `classify` collects Jev's judgments. Your code decides what to do with them. Add a `decide` function that applies your thresholds and returns an action (`allow`, `review`, or `block`) with a short reason.
 
-Confidence tells you how much to trust a Choice or Score answer: it's high when one option is clearly ahead, and it drops when the options are close or the message is too vague to judge. Noul answers carry the same signal in their probability, where a value near 0.5 means Jev is unsure.
+Confidence tells you how much to trust a Choice answer. It's high when one option is clearly ahead, and it drops when the options are close or the message is too vague to judge. Score answers also return a confidence value, but this example uses only the category choice's confidence. Noul answers carry the same signal in their probability, where a value near 0.5 means Jev is unsure.
 
 Use that to decide when the pipeline can act on its own. Act automatically on a high-confidence answer and send a low-confidence one to a person. Set the cutoffs by asking what a mistake costs: sending a harmless message to review is recoverable, but blocking a legitimate one is not.
 
@@ -443,9 +443,9 @@ For example, here is how the rules apply to two messages, using the values from 
 
 For `promo_pete`, the first `hazardAt` call finds `spam = 0.99` and returns at rule 1, so `decide` never reaches the severity check. The result is `{ action: 'block', reason: 'spam (0.99)' }`.
 
-For `sunny_j`, the highest hazard is `0.04`, `severity` is `0.62`, `off_topic` isn't in `REVIEW_CATEGORIES`, and the category confidence (`1.00`) is above `0.5`. Every rule passes, so `decide` returns `{ action: 'allow', reason: 'off_topic' }`.
+For `sunny_j`, the highest hazard is `0.04`, `severity` is `0.62`, `off_topic` isn't in `REVIEW_CATEGORIES`, and the category confidence (`1.00`) is above `0.5`. No block or review rule fires, so `decide` returns `{ action: 'allow', reason: 'off_topic' }`.
 
-A review decision happens when a message has a weak hazard, a risky category, or low confidence. For example, if `harassment` were `0.5`, the first `hazardAt` call would return `undefined`, but the second would return `{ name: 'harassment', probability: 0.5 }`, so rule 3 would fire and the result would be `{ action: 'review', reason: 'harassment (0.50)' }`.
+A review decision happens when a message has a weak hazard, a risky category, or low confidence. For example, if `harassment` were `0.5`, the first `hazardAt` call would return `undefined`, but the second would return `{ name: 'harassment', probability: 0.5 }`. Rule 3 would then fire, and the result would be `{ action: 'review', reason: 'harassment (0.50)' }`.
 
 ## Run the pipeline
 
@@ -516,7 +516,7 @@ BLOCK  quiet_quinn: whoever wrote this clearly has no idea what they are talking
 Summary: { allow: 3, review: 0, block: 5 }
 ```
 
-The summary shows that three messages were allowed, five were blocked, and none were sent for review. The reasons show which question triggered the action.
+The summary shows that the pipeline allowed three messages, blocked five, and sent none for review. The reasons show which question triggered the action.
 
 </Steps>
 
@@ -527,7 +527,7 @@ You now have a moderation pipeline that separates content evaluation from policy
 For a real application, replace the console output with code that takes the appropriate action on each message. You can also extend the pipeline in several ways:
 
 - **Store decisions:** Write each decision and its reason to a Postgres table so you have an audit trail.
-- **Use stronger models for review:** Your Neon credentials work across the AI Gateway's model catalog. Messages flagged for review can be sent to a more capable model, such as Claude Opus 5.5 (`claude-opus-5-5`) or GPT-6 Astra (`gpt-6-astra`), for a second assessment before you make the final decision. See [AI Gateway models](/docs/ai-gateway/models).
+- **Use stronger models for review:** Your Neon credentials work across the AI Gateway's model catalog. You can send messages flagged for review to a more capable model, such as Claude Opus 5.5 (`claude-opus-5-5`) or GPT-6 Astra (`gpt-6-astra`), for a second assessment before you make the final decision. See [AI Gateway models](/docs/ai-gateway/models).
 - **Use hybrid approaches:** Extend the classification step with checks for conditions that deterministic rules can reliably detect, such as malicious links or banned words.
 
 ## Resources
