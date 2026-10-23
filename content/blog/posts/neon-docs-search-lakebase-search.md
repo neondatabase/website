@@ -69,20 +69,16 @@ So my agent walked me through the options: a `lakebase_bm25` index for keyword m
 
 ## Designing for search-as-you-type
 
-Docs search has one hard requirement: it has to feel instant. The search box sends a request on every keystroke, so both search paths have to stay under 32 ms at p50 and 150 ms at p95, measured as server time.
+Docs search has to feel instant. The search box sends a request on every keystroke, so both search paths have to stay under 32 ms at p50 and 150 ms at p95 of server time.
 
-Semantic search matters just as much. Many docs queries are questions like "How do Neon branches work?" and the right page doesn't always share their keywords. The full hybrid pipeline finds those pages: an embedding call, `lakebase_ann` and `lakebase_bm25` results merged with RRF, then an LLM rerank. But with two model calls, a request takes seconds.
+Semantic search matters too: questions like "How do Neon branches work?" don't always share keywords with the right page. The full hybrid pipeline (an embedding call, `lakebase_ann` and `lakebase_bm25` results merged with RRF, then an LLM rerank) finds those pages, but its two model calls take seconds. So we split the work:
 
-So we split the work:
+- **Cached hybrid results:** we run the full pipeline offline for common queries and store the ranked lists in a `site_search_cache` table. Lookups match on the normalized query and its content words, so "what's neon" and "tell me about neon" read the same row.
+- **BM25 for everything else:** queries the cache hasn't seen go straight to the `lakebase_bm25` index, with no model call.
 
-- **Cached hybrid results:** for common queries, we run the full hybrid pipeline offline and store the ranked lists in a `site_search_cache` table. Lookups match on the normalized query and its content words, so "what's neon" and "tell me about neon" read the same row.
-- **BM25 for everything else:** a query the cache hasn't seen goes straight to the `lakebase_bm25` index, with no model call in the request path.
+Cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server; BM25 misses take 8.6 ms and 11.5 ms. Of course, long-tail queries get keyword ranking without the semantic half. For docs search, I want speed first.
 
-Today, cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server. BM25 misses take 8.6 ms and 11.5 ms.
-
-Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For docs search, I want speed first.
-
-That said, we wanted the new search to be at least as good as the old one, both in the quality of its results and in speed. So we wrote evals for both.
+That said, we wanted the new search to be at least as good as the old one in both result quality and speed. So we wrote evals for both.
 
 ## Evaluating relevance and latency
 
