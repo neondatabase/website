@@ -65,7 +65,7 @@ This time, I relied on my agent and the `neon-postgres` [agent skill](https://ne
 
 ## Designing for search-as-you-type
 
-Docs search has to feel instant. The search box sends a request on every keystroke, so both search paths have to stay under 32 ms at p50 and 150 ms at p95 of server time.
+Docs search has to feel instant. The search box sends a request on every keystroke, so a round trip has to land well under a second. Google's [RAIL model](https://web.dev/articles/rail) treats responses under 100 ms as instantaneous and [Nielsen Norman Group](https://www.nngroup.com/articles/response-times-3-important-limits/) puts the limit for keeping users in their flow at one second. Since most of that budget goes to the network, we kept the server time under 32 ms at p50 and 150 ms at p95.
 
 Semantic search matters too: questions like "How do Neon branches work?" don't always share keywords with the right page. The full hybrid pipeline (an embedding call, `lakebase_ann` and `lakebase_bm25` results merged with RRF, then an LLM rerank) finds those pages, but its two model calls take seconds. So we split the work:
 
