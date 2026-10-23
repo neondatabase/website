@@ -68,7 +68,7 @@ Next:
   neon functions deploy hello --src functions/hello/index.ts
 ```
 
-Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To try an unmerged template, set `NEON_FUNCTION_REGISTRY_DIR` to a local copy of that directory.
+Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To try an unmerged template, set `NEON_FUNCTION_REGISTRY_DIR` to a local copy of that directory. New templates are added over time, so run [`neon functions templates list`](#templates-list) to see what's available.
 
 ## neon functions templates (#templates)
 
@@ -89,8 +89,9 @@ neon functions templates list
 ```
 
 ```text filename="Output"
-ID     Title           Provider  Description
-basic  Basic function  Neon      A minimal Neon Function with a JSON response.
+ID           Title                 Provider     Description
+basic        Basic function        Neon         A minimal Neon Function with a JSON response.
+context-dev  Context.dev web data  Context.dev  Search the web and news, read pages, answer questions, and retrieve brand data with Context.dev.
 ```
 
 ## neon functions deploy (#deploy)
