@@ -76,7 +76,7 @@ Today, cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server. BM25 misse
 
 Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For docs search, I want speed first.
 
-Still, replacing our previous search set a clear bar: the new one had to match or beat it on both the quality of the results and speed. Keeping it there is what the evals are for.
+That said, we wanted the new search to be at least as good as the old one, both in the quality of its results and in speed. So we wrote evals for both.
 
 ## Evaluating relevance and latency
 
