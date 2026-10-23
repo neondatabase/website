@@ -3,13 +3,14 @@ title: Compliance
 summary: >-
   Neon holds SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, ISO 27701, GDPR,
   CCPA, and HIPAA certifications. Each is validated by independent audits or
-  regulatory adherence. HIPAA compliance is available on the Scale plan.
+  regulatory adherence. HIPAA compliance is available on the Scale plan. Neon
+  isn't PCI DSS compliant.
   Audit reports for all certifications can be requested through the Neon
   Trust Center at trust.neon.com.
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-23T18:34:18.407Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
@@ -43,6 +44,12 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 Neon offers HIPAA compliance as part of our Scale plan, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements. more information and how to get started, refer to our [Neon HIPAA Compliance Guide](/docs/security/hipaa).
 
 A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.com/).
+
+## PCI DSS
+
+Neon isn't PCI DSS compliant at this time. Don't store or process payment cardholder data in Neon.
+
+If you need a PCI DSS compliant Postgres database, [Lakebase](https://docs.databricks.com/aws/en/oltp/), Databricks-managed Postgres, supports [PCI DSS](https://docs.databricks.com/aws/en/security/privacy/pci) in supported AWS regions.
 
 ## Questions?
 
