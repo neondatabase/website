@@ -174,7 +174,8 @@ const GUIDED_PATHS = [
 
 const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 
-const AGENT_BASE = 'Set me up for Neon. Fetch https://neon.com/agent-setup.md and follow it.';
+const AGENT_BASE =
+  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 
 // "a", "a and b", "a, b, and c"
 function joinList(items) {
@@ -231,7 +232,7 @@ Section.propTypes = {
   children: PropTypes.node,
 };
 
-// Copy chip for the agent-fetch URLs (llms.txt, agent-setup.md). These are raw
+// Copy chip for the agent-fetch URLs (llms.txt, prompts/agent-setup.md). These are raw
 // files meant for agents, not pages for people, so the chip copies the absolute
 // URL instead of navigating. Same copy pattern as the composer's Copy button:
 // the shared `useCopyToClipboard` hook and the shared home copy/copied icons,
@@ -281,7 +282,7 @@ const Composer = () => {
 
   // The sign-in sentence appears only when at least one chip is selected, and
   // sits between the base sentence and the "Then add ..." clause. Account-free
-  // setup (steps 1 to 4 of agent-setup.md) needs no sign-in; adding a service
+  // setup (steps 1 to 4 of prompts/agent-setup.md) needs no sign-in; adding a service
   // is what requires a signed-in human, so it is gated on a selection.
   const signin = useMemo(() => (sel.length ? ' Ask your human to sign in or sign up.' : ''), [sel]);
   const extra = useMemo(
@@ -295,7 +296,7 @@ const Composer = () => {
   // Functions, Realtime) provision on their own; declared ones (AI) come after
   // them, followed by `neon deploy`, which only appears when one is picked. The
   // global install comes first so the bare `neon` in every later line resolves
-  // on a clean machine (same order as public/agent-setup.md).
+  // on a clean machine (same order as public/prompts/agent-setup.md).
   const cliLines = useMemo(() => {
     const blocks = [
       ['Install the Neon CLI (needs Node.js 22.20+)', ['npm install -g neon@latest']],
@@ -356,7 +357,7 @@ const Composer = () => {
         <div className="min-h-[84px] p-7 font-mono text-[15px] leading-[1.65] [text-wrap:pretty] text-gray-new-15 dark:text-gray-new-94 md:p-6">
           <span>Set me up for Neon. Fetch </span>
           <span className="border-b border-dashed border-gray-new-70 text-black-pure dark:border-gray-new-50 dark:text-white">
-            https://neon.com/agent-setup.md
+            https://neon.com/prompts/agent-setup.md
           </span>
           <span> and follow it.</span>
           {signin && <span className={composerGreen}>{signin}</span>}
