@@ -5,8 +5,8 @@ excerpt: >-
   We just released a new search for neon.com. Results for the docs, API
   reference, guides, changelog and blog now come from our own search service:
   Lakebase Search in Lakebase Postgres, served by a Neon Function.
-date: '2026-10-21T12:00:00'
-updatedOn: '2026-10-21T12:00:00'
+date: '2026-10-26T12:00:00'
+updatedOn: '2026-10-26T12:00:00'
 category: product
 categories:
   - product
