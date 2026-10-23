@@ -62,7 +62,7 @@ CREATE INDEX search_chunks_tsv_bm25 ON search_chunks USING lakebase_bm25 (tsv);
 CREATE INDEX search_chunks_embedding_ann ON search_chunks USING lakebase_ann (embedding vector_cosine_ops);
 ```
 
-Everything we learned along the way went back into the skill and we keep iterating on it. The skill now knows Lakebase Search in detail: the extensions, the index types, the query syntax and how to build hybrid search. So you can trust your agent to make the right search decisions, because they're encoded in the `neon-postgres` skill.
+The Lakebase engineering team had already put their search knowledge into the `neon-postgres` skill: the extensions, the index types, the query syntax and how to build hybrid search. So my agent knew what I needed and I never had to learn the details of search myself.
 
 ## Designing for search-as-you-type
 
