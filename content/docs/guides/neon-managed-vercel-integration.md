@@ -17,7 +17,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:16:51.998Z'
+updatedOn: '2026-10-23T11:28:13.841Z'
 ---
 
 <InfoBlock>
@@ -101,11 +101,11 @@ In the **Integrate Neon** dialog:
 
    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
 
-2. **Choose your Neon project, database, role, and production branch**
+2. **Choose your Neon account, project, production branch, database, and role**
 
    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
 
-   Under **Production branch**, pick the Neon branch whose credentials Vercel should use for **Production** deployments. If you leave the default selection, Production uses your project's default branch (the same behavior as before this option existed).
+   Under **Production branch**, pick the Neon branch whose credentials Vercel should use for **Production** deployments. If you leave the default selection, Production uses your project's default branch. The read-only **Default branch** field shows the branch that preview branches are created from.
 
    The branch you select must:
    - Belong to the chosen Neon project
@@ -142,7 +142,7 @@ If [Managed Better Auth](/docs/auth/overview) is enabled on your production bran
 
 The production branch is independent of your project's default branch. If you later change the default branch, Production keeps using the branch you chose.
 
-To change the production branch after setup, go to **Neon Console → Integrations**, click **Settings** next to **Vercel** under **Added**, select a different branch under **Production branch**, and click **Save**. Changing a branch that's already set asks you to confirm first. Redeploy your production deployment in Vercel so it picks up the new branch's credentials. The branch you choose must meet the requirements listed above and have a read-write compute.
+To change the production branch after setup, go to **Neon Console → Integrations**, click **Manage** next to **Vercel** under **Added**, and open the **Branches** tab. Select a different branch under **Production branch** and click **Save**. Changing a branch that's already set asks you to confirm first. Redeploy your production deployment in Vercel so it picks up the new branch's credentials. The branch you choose must meet the requirements listed above and have a read-write compute.
 
 While the integration is connected, the production branch and its read-write compute can't be deleted. To delete that branch, choose a different production branch first, or disconnect the integration.
 
@@ -213,7 +213,7 @@ This ensures schema changes in your commits are applied to each preview deployme
 
 ### Environment variables
 
-The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and legacy PostgreSQL variables (`POSTGRES_URL`, `PGHOST`, etc.) for Production and Development environments. Preview variables are injected dynamically per deployment.
+By default, the integration sets `DATABASE_URL` and `DATABASE_URL_UNPOOLED` for Production and Development environments. You can also select `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, and `PGPASSWORD`. Preview variables are injected dynamically per deployment.
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications). For Production, sourced from the [production branch you chose at connect](#choose-a-production-branch).
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
@@ -221,8 +221,8 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 **To customize which variables are used:**
 
-1. Go to **Neon Console → Integrations → Manage → Settings**
-2. Select the variables you want (for example, `PGHOST`, `PGUSER`, etc.)
+1. Go to **Neon Console → Integrations**, click **Manage** next to **Vercel**, and open the **Settings** tab
+2. Under **Vercel environment variables**, select the variables you want (for example, `PGHOST` or `PGUSER`)
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
@@ -231,21 +231,20 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 When you rotate the selected role password in Neon, the integration automatically syncs updated credentials to Vercel environment variables for connected projects.
 
-If deployments still use older credentials, open **Neon Console → Integrations → Manage → Settings** and click **Save changes** to force a resync.
+If deployments still use older credentials, open the **Settings** tab (**Neon Console → Integrations → Manage**) and click **Save changes** to force a resync.
 
 ### Branch cleanup
 
 **Automatic cleanup (recommended):**
-Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is deleted. Cleanup runs the next time a preview deployment is created.
+Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is merged or deleted. You can change this setting later on the **Branches** tab (**Neon Console → Integrations → Manage**), under **Automation workflows**. Cleanup runs the next time a preview deployment is created.
 
 Unlike the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), this cleanup is not affected by Vercel's deployment retention policies. For a full comparison and additional cleanup options, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 **Manual cleanup:**
 If needed, you can delete branches manually:
 
-- **Individual branches:** Neon Console → Integrations → Manage → Branches → trash icon
-- **Bulk delete:** Use **Delete all** in the same interface
-- **API/CLI:** Use Neon CLI or API for programmatic cleanup
+- **Neon Console:** delete branches from your project's **Branches** page. See [Delete a branch](/docs/manage/branches#delete-a-branch).
+- **API/CLI:** Use the [Neon CLI](/docs/cli/branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api) for programmatic cleanup
 
 <Admonition type="warning" title="Important cleanup considerations">
 - **Don't rename branches:** Renaming either the Git branch or Neon branch breaks name-matching logic and may cause unintended deletions
@@ -255,7 +254,7 @@ If needed, you can delete branches manually:
 
 ### Disconnect integration
 
-To disconnect the integration: **Neon Console → Integrations → Manage → Disconnect**. This stops creating new preview branches but doesn't remove existing branches or the integration from Vercel.
+To disconnect the integration, go to **Neon Console → Integrations**, click **Manage** next to **Vercel**, open the **Disconnect** tab, and click **Disconnect**. This stops Neon from setting environment variables in Vercel. It doesn't remove existing branches or the integration itself. To fully remove the integration, uninstall it from your Vercel project's **Settings**.
 
 ---
 
@@ -305,6 +304,6 @@ If you see "Failed to set environment variables" during setup, remove conflictin
 
 **Issue:** Preview branches no longer created
 **Cause:** The PostgreSQL role selected during setup was deleted
-**Solution:** Reinstall the integration with a valid role, or change the role in **Neon Console → Integrations → Manage → Settings**
+**Solution:** Reinstall the integration with a valid role, or change the role under **Default database and role** on the **Settings** tab (**Neon Console → Integrations → Manage**)
 
 <NeedHelp/>
