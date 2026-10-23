@@ -26,9 +26,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover-v2.png'
 ---
 
-We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25 keyword and hybrid search in Lakebase Postgres. So it was obvious to us that we needed to dogfood it for our own docs search. Until this week, the search box on neon.com ran on a hosted search vendor. Now it's built fully on Neon primitives and powered by Lakebase Search.
-
-In this post, I want to share how it went.
+We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25 keyword and hybrid search in Lakebase Postgres. So it was obvious to us that we needed to dogfood it for our own docs search. Until this week, the search box on neon.com ran on a hosted search vendor. Now it's built fully on Neon primitives and powered by Lakebase Search. In this post, I want to share how it went.
 
 ## What is Lakebase Search
 
