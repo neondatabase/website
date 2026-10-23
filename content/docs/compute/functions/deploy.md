@@ -7,7 +7,7 @@ summary: >-
   Also covers deploying a function from a Neon Function Registry template,
   checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-23T17:24:46.085Z'
+updatedOn: '2026-10-23T18:16:58.837Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -34,28 +34,6 @@ In a terminal, `neon deploy` asks before it overrides branch settings or applies
 You can declare scheduled [Function Triggers](/docs/compute/functions/triggers/schedule) and [custom domains](/docs/compute/functions/custom-domains) in the same `neon.ts` config, so they deploy alongside the function.
 
 Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
-
-## Deploy a function from a template
-
-The Neon Function Registry is a catalog of function templates you can add with the Neon CLI (8.11 or later). A [`neon bootstrap`](/docs/compute/functions/overview#starter-templates) template scaffolds a complete app. A registry template adds one function to the project in your current directory. To see what's available, run:
-
-```bash
-neon functions templates list
-```
-
-To add the `basic` template, run it locally, and deploy it:
-
-```bash
-neon functions new basic   # writes functions/basic/ and declares it in neon.ts
-npm install @neon/config @neon/env
-neon link                  # if the directory isn't linked to a Neon project yet
-neon dev                   # serves the function at http://localhost:8787
-neon deploy
-```
-
-`neon functions new` ends with a `Next:` list of the exact commands for that template, including the packages to install. If a template needs environment variables, such as an API key for a third-party service, it adds their names to `.env.example`. Set the values in `.env.local`, export them in your shell for `neon dev`, and deploy with `neon deploy --env .env.local`.
-
-Templates live in the [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) folder of the `neondatabase/examples` repository. Anyone can propose a new template by opening a pull request. Neon reviews each one before it's published. See the registry's [contributing guide](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md). For all command options, see [`neon functions new`](/docs/cli/functions#new).
 
 ## Deploy with `neon functions deploy`
 
@@ -180,6 +158,28 @@ const { data: deployment } = await neon.functions.deploy({
 ```
 
 `neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
+
+## Deploy a function from a template
+
+The Neon Function Registry is a catalog of function templates you can add with the Neon CLI (8.11 or later). A [`neon bootstrap`](/docs/compute/functions/overview#starter-templates) template scaffolds a complete app. A registry template adds one function to the project in your current directory. To see what's available, run:
+
+```bash
+neon functions templates list
+```
+
+To add the `basic` template, run it locally, and deploy it:
+
+```bash
+neon functions new basic   # writes functions/basic/ and declares it in neon.ts
+npm install @neon/config @neon/env
+neon link                  # if the directory isn't linked to a Neon project yet
+neon dev                   # serves the function at http://localhost:8787
+neon deploy
+```
+
+`neon functions new` ends with a `Next:` list of the exact commands for that template, including the packages to install. If a template needs environment variables, such as an API key for a third-party service, it adds their names to `.env.example`. Set the values in `.env.local`, export them in your shell for `neon dev`, and deploy with `neon deploy --env .env.local`.
+
+Templates live in the [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) folder of the `neondatabase/examples` repository. Anyone can propose a new template by opening a pull request. Neon reviews each one before it's published. See the registry's [contributing guide](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md). For all command options, see [`neon functions new`](/docs/cli/functions#new).
 
 ## Slugs
 
