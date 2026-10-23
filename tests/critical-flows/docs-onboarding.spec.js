@@ -12,7 +12,8 @@ const {
 // The docs home's guided-setup affordance is the Agent-prompt / CLI composer.
 // Its Copy button copies the active tab; the default (Agent prompt) tab copies
 // this base prompt verbatim when no capability chips are selected.
-const AGENT_PROMPT = 'Set me up for Neon. Fetch https://neon.com/agent-setup.md and follow it.';
+const AGENT_PROMPT =
+  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 
 test.describe('critical documentation onboarding', () => {
   test(`[${DOCS_ONBOARDING_CONTRACT.id}] docs onboarding exposes search, copy, and guided setup`, async ({
