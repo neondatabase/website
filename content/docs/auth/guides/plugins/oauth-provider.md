@@ -307,7 +307,7 @@ Users approve a client once. Later authorizations for the same client, scopes, a
 
 Both pages receive the authorization request as query parameters. The query is signed and expires, so pass it back to Managed Better Auth exactly as received, as the `oauth_query` value.
 
-- **Login page.** The authorization request redirects here when the user has no session. Send `oauth_query` in the body of the sign-in request (for example, email and password sign-in). Managed Better Auth verifies the signature, signs the user in, and resumes the authorization request. The sign-in response tells your page where to go next, usually your consent page.
+- **Login page.** The authorization request redirects here when the user has no session. Send `oauth_query` in the body of the sign-in request. This works for email and password sign-in and for social sign-in, such as Google or GitHub. Managed Better Auth verifies the signature, signs the user in, and resumes the authorization request. With email and password, the sign-in response tells your page where to go next, usually your consent page. With social sign-in, the user returns from the provider to your login page signed in, and the authorization request continues from there.
 - **Consent page.** Show what the user is approving, then send `POST <issuer>/oauth2/consent` with a JSON body of `{ "accept": true, "oauth_query": "<query>" }`, or `"accept": false` to deny. The response is JSON with a `redirect` flag and the `url` to navigate the browser to. That URL is the client's redirect URI with the authorization code, or an error.
 - **Client details.** To display the client name, call `GET <issuer>/oauth2/public-client?client_id=<client_id>` with the user's session. It returns `client_id` and `client_name` for every client. Clients that identify with a Client ID Metadata Document also return the `client_uri` and `logo_uri` from their document when it sets them. Managed clients don't have these fields.
 
@@ -333,6 +333,10 @@ async function respond(accept: boolean) {
 ```
 
 Calls from your pages carry the user's session cookie, so make them with `credentials: 'include'` and add your pages' origins as [trusted domains](/docs/auth/guides/configure-domains). Navigate the browser to the returned `url`. Neither the sign-in nor the consent response is an HTTP redirect.
+
+<Admonition type="tip" title="Use the Neon Auth client">
+If your pages use [`@neondatabase/auth`](/docs/auth/overview) 0.7.0-beta or later, the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically, and on your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above.
+</Admonition>
 
 ## Sign in users to your own apps and APIs
 
