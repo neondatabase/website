@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:22:59.906Z'
+updatedOn: '2026-10-23T14:19:51.129Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -16,7 +16,7 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 
 - A Neon project. You enable Lakebase Search on it in the first step below.
 - Postgres 16 or later (Lakebase Search requires PG16+)
-- Node.js 18 or later
+- Node.js 18 or later (22 or later for the Jev example)
 - Choose an embedding provider to turn text into vectors:
   - **Neon AI Gateway** (this guide's default): set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` (see [Get started](/docs/ai-gateway/get-started)) and use the [`qwen3-embedding-0-6b`](/docs/ai-gateway/embeddings) model (1024 dimensions). Requires a paid plan in a [Neon AI Gateway region](/docs/ai-gateway/overview).
   - **OpenAI directly**: set `OPENAI_API_KEY` and drop both client overrides so it's just `new OpenAI()`, then change the model to `text-embedding-3-small` (1536 dimensions).
@@ -284,7 +284,7 @@ async function hybridSearchWithJev(query: string, limit = 5): Promise<Candidate[
   return candidates
     .map((doc, index) => {
       const answer = answers[`d${index}`];
-      if (answer.type !== 'boolean') {
+      if (answer?.type !== 'boolean') {
         throw new Error(`Missing relevance probability for d${index}`);
       }
       return { doc, index, probability: answer.probability };
