@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-10-23T09:50:57.356Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -146,13 +146,17 @@ async function vectorSearch(query: string, limit = 5) {
 // BM25 scores are negative — lower (more negative) means more relevant
 async function textSearch(query: string, limit = 5) {
   return sql`
-    SELECT id, title,
-           body_tsv <@> to_bm25query(
-             to_tsvector('english', ${query}),
-             'documents_bm25'
-           ) AS score
-    FROM documents
-    ORDER BY score
+    SELECT id, title, score
+    FROM (
+      SELECT id, title,
+             body_tsv <@> to_bm25query(
+               to_tsvector('english', ${query}),
+               'documents_bm25'
+             ) AS score
+      FROM documents
+    ) AS scored
+    WHERE score < 0
+    ORDER BY score, id
     LIMIT ${limit}
   `;
 }
@@ -186,7 +190,14 @@ npx tsx search.ts
 
 ## Combine results with hybrid search
 
-Vector and keyword search each catch matches the other misses, so most real-world search combines them. There's no built-in hybrid function; you write one query that runs both searches and merges their results. The technique here is Reciprocal Rank Fusion (RRF): take the top candidates from each search, rank each list, then score every row by `1 / (60 + rank)` summed across both lists, so rows that rank well in either or both come out on top.
+Vector and keyword search each catch matches the other misses. Combine their results with fusion or reranking:
+
+- **Reciprocal Rank Fusion (RRF)** combines the retrievers' ranks in SQL without an additional model call.
+- **Jev reranking** scores the deduplicated candidates with an AI Gateway decision model. RRF isn't required before reranking.
+
+### Fuse ranks with RRF
+
+Each retriever contributes `1 / (60 + rank)` to a candidate's score. Candidates that rank well in either or both lists come out on top.
 
 Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `textSearch`. It reuses the `documents` table and indexes from above:
 
@@ -204,14 +215,25 @@ async function hybridSearch(query: string, limit = 5) {
       SELECT id, RANK() OVER (ORDER BY dist) AS rank
       FROM (
         SELECT id, embedding <=> ${queryVector}::vector AS dist
-        FROM documents ORDER BY dist LIMIT 40
+        FROM documents
+        WHERE embedding IS NOT NULL
+        ORDER BY dist
+        FETCH FIRST 40 ROWS WITH TIES
       ) v
     ),
     keyword_ranked AS (
       SELECT id, RANK() OVER (ORDER BY score) AS rank
       FROM (
-        SELECT id, body_tsv <@> to_bm25query(to_tsvector('english', ${query}), 'documents_bm25') AS score
-        FROM documents ORDER BY score LIMIT 40
+        SELECT id, score
+        FROM (
+          SELECT id, body_tsv <@> to_bm25query(
+            to_tsvector('english', ${query}), 'documents_bm25'
+          ) AS score
+          FROM documents
+        ) AS scored
+        WHERE score < 0
+        ORDER BY score, id
+        LIMIT 40
       ) k
     )
     SELECT d.id, d.title,
@@ -226,7 +248,111 @@ async function hybridSearch(query: string, limit = 5) {
 }
 ```
 
-Each search contributes its top 40 candidates. `RANK()` gives tied scores the same rank, the constant `60` keeps low-ranked results from dominating, and `d.id` breaks ties for stable ordering. Tune the per-search `LIMIT` and the RRF constant for your data; weighted scoring is another common approach.
+Vector retrieval targets 40 candidates and preserves cutoff ties with `WITH TIES`, so it can return more than 40. Keyword retrieval excludes zero-score non-matches and returns up to 40 candidates. `RANK()` gives retained ties equal ranks, and `d.id` breaks final score ties. Tune candidate counts and the RRF constant for your data.
+
+### Rerank candidates with Jev
+
+Retrieve candidates from both searches, deduplicate by document ID, then ask Jev whether each passage supplies the specific information the query asks for. Sort by the probability of yes. This follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
+
+For this option, use Node.js 22 or later and install the tested SDK versions:
+
+```bash
+npm install @neon/ai-sdk-provider@1.1.0 ai@7.0.133
+```
+
+Add the imports below to `search.ts`. The provider reads the same `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` used for embeddings. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for SDK details.
+
+```typescript filename="search.ts"
+import { neon as neonAi } from '@neon/ai-sdk-provider';
+import { experimental_decide as decide } from 'ai';
+
+type Candidate = { id: number; title: string; body: string };
+
+async function hybridSearchWithJev(query: string, limit = 5): Promise<Candidate[]> {
+  if (!Number.isInteger(limit) || limit < 1) {
+    throw new Error('limit must be a positive integer');
+  }
+
+  const { data } = await openai.embeddings.create({
+    model: 'qwen3-embedding-0-6b',
+    input: query,
+    encoding_format: 'float',
+  });
+  const queryVector = JSON.stringify(data[0].embedding);
+  const candidates = (await sql`
+    WITH vector_candidates AS (
+      SELECT id
+      FROM documents
+      WHERE embedding IS NOT NULL
+      ORDER BY embedding <=> ${queryVector}::vector
+      LIMIT 40
+    ),
+    keyword_candidates AS (
+      SELECT id
+      FROM (
+        SELECT id, body_tsv <@> to_bm25query(
+          to_tsvector('english', ${query}), 'documents_bm25'
+        ) AS score
+        FROM documents
+      ) AS scored
+      WHERE score < 0
+      ORDER BY score, id
+      LIMIT 40
+    ),
+    candidate_ids AS (
+      SELECT id FROM vector_candidates
+      UNION
+      SELECT id FROM keyword_candidates
+    )
+    SELECT d.id, d.title, d.body
+    FROM candidate_ids AS c
+    JOIN documents AS d ON d.id = c.id
+    ORDER BY d.id
+  `) as Candidate[];
+  if (candidates.length === 0) return [];
+
+  const { answers } = await decide({
+    model: neonAi.decisionModel('typesafeai-jev-1-14-0'),
+    state: { query },
+    questions: Object.fromEntries(
+      candidates.map((doc, index) => [
+        `d${index}`,
+        {
+          type: 'boolean' as const,
+          instructions: {
+            question:
+              'Given the search query in state.query, does this candidate passage supply the specific information the user is looking for?',
+            candidate: { title: doc.title, body: doc.body },
+          },
+          criteria: {
+            true: 'The candidate states the specific facts or steps the query asks for.',
+            false:
+              'The candidate only shares keywords or a topic with the query, answers a different question, or lacks the requested information.',
+          },
+        },
+      ])
+    ),
+    maxRetries: 0,
+    abortSignal: AbortSignal.timeout(10_000),
+  });
+
+  return candidates
+    .map((doc, index) => {
+      const answer = answers[`d${index}`];
+      if (answer.type !== 'boolean') {
+        throw new Error(`Missing relevance probability for d${index}`);
+      }
+      return { doc, index, probability: answer.probability };
+    })
+    .sort((a, b) => b.probability - a.probability || a.index - b.index)
+    .slice(0, limit)
+    .map(({ doc }) => doc);
+}
+```
+
+Call `hybridSearchWithJev(query)` after inserting the documents and building the indexes. This example scores the candidate pool in one request. Keep the query and all candidate text within Jev 1.14's 65,536-token context window; retrieve shorter chunks or reduce candidate limits for long passages. Apply the same tenant and access-control filters inside both retrievers, before their limits.
+
+A high rank doesn't establish that an answer exists. Calibrate an acceptance threshold on judged no-match queries if your application must return "no answer." The caller can catch reranking errors and use `hybridSearch` as a fallback.
 
 </Steps>
 
