@@ -1,15 +1,17 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
+
+import { cn } from 'utils/cn';
 
 import Item from './item';
 
-const DocsNavigation = ({ navigation, basePath }) => {
+const DocsNavigation = forwardRef(({ className = null, navigation, basePath, ...props }, ref) => {
   const [activeItems, setActiveItems] = useState([]);
 
   return (
-    <ul className="no-scrollbars flex size-full gap-x-6">
+    <ul className={cn('no-scrollbars flex size-full gap-x-6', className)} ref={ref} {...props}>
       {navigation?.map((item, index) => (
         <Item
           key={index}
@@ -21,9 +23,12 @@ const DocsNavigation = ({ navigation, basePath }) => {
       ))}
     </ul>
   );
-};
+});
+
+DocsNavigation.displayName = 'DocsNavigation';
 
 DocsNavigation.propTypes = {
+  className: PropTypes.string,
   navigation: PropTypes.array.isRequired,
   basePath: PropTypes.string.isRequired,
 };

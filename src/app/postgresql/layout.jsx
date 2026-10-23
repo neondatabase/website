@@ -16,7 +16,7 @@ const NeonPostgresLayout = async ({ children }) => {
 
   return (
     <Layout
-      headerClassName="h-28 lg:h-16"
+      headerClassName="h-15 lg:h-16"
       docsNavigation={navigation}
       docsBasePath={POSTGRESQL_BASE_PATH}
       customType={customType}

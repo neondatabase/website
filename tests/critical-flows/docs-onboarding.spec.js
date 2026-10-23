@@ -9,7 +9,11 @@ const {
   openCriticalPage,
 } = require('./helpers');
 
-const INIT_COMMAND = 'npx neon@latest init';
+// The docs home's guided-setup affordance is the Agent-prompt / CLI composer.
+// Its Copy button copies the active tab; the default (Agent prompt) tab copies
+// this base prompt verbatim when no capability chips are selected.
+const AGENT_PROMPT =
+  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 
 test.describe('critical documentation onboarding', () => {
   test(`[${DOCS_ONBOARDING_CONTRACT.id}] docs onboarding exposes search, copy, and guided setup`, async ({
@@ -20,18 +24,16 @@ test.describe('critical documentation onboarding', () => {
     await installClipboardMock(page);
     const applicationErrors = await openCriticalPage(page, DOCS_ONBOARDING_CONTRACT.pagePath);
 
-    await expect(page.getByRole('heading', { level: 1, name: 'Neon documentation' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Neon Docs' })).toBeVisible();
 
-    const copyButton = page.getByRole('button', {
-      name: `Copy command: ${INIT_COMMAND}`,
-    });
+    const copyButton = page.getByRole('button', { name: 'Copy', exact: true });
     await expect(copyButton).toBeVisible();
     await expectReactHandlerReady(copyButton, 'onClick');
     await copyButton.click();
-    await expectClipboardText(page, INIT_COMMAND);
+    await expectClipboardText(page, AGENT_PROMPT);
 
-    const quickstartLink = page.getByRole('link', { name: 'Open quickstart' });
-    await expect(quickstartLink).toHaveAttribute(
+    const quickstartLink = page.getByRole('link', { name: 'Full backend quickstart', exact: true });
+    await expect(quickstartLink.first()).toHaveAttribute(
       'href',
       '/docs/get-started/full-backend-quickstart'
     );

@@ -33,7 +33,6 @@ const Header = ({
         <DocsHeader
           customType={customType}
           docPageType={docPageType}
-          isClient={isClient}
           navigation={docsNavigation}
           basePath={docsBasePath}
         />
@@ -50,7 +49,12 @@ const Header = ({
         </Container>
       )}
     </HeaderWrapper>
-    <MobileMenu isDocPage={isDocPage} docPageType={docPageType} />
+    <MobileMenu
+      isDocPage={isDocPage}
+      docPageType={docPageType}
+      docsNavigation={docsNavigation}
+      docsBasePath={docsBasePath}
+    />
   </>
 );
 

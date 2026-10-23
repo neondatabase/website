@@ -7,11 +7,6 @@ summary: >-
   Object Storage, Functions, and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
-redirectFrom:
-  - /guides/neon-azure-integration
-  - /guides/azure-service-connector
-  - /guides/azure-todo-static-web-app
-  - /guides/azure-functions-referral-system
 updatedOn: '2026-10-08T19:30:40.839Z'
 ---
 
