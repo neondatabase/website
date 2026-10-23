@@ -78,21 +78,23 @@ Semantic search matters too: questions like "How do Neon branches work?" don't a
 
 Cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server; BM25 misses take 8.6 ms and 11.5 ms. Of course, long-tail queries get keyword ranking without the semantic half. For docs search, I want speed first.
 
-That said, we wanted the new search to be at least as good as the old one in both result quality and speed. So we wrote evals for both.
+That said, we wanted the new search to be at least as good as the old one in both result quality and speed.
 
 ## Evaluating relevance and latency
 
-The search service ships with evals and every change to the ranking, the index or the cache has to pass them:
+With search, you have to verify that it performs where you want it to: does the right page show up and how long does a search take? That matters even more once you keep changing things, because every tweak to the ranking or the index can quietly hurt results you already had.
 
-- **Relevance:** 171 golden queries, including the 100 most common queries typed into neon.com search, each paired with the page it should return. We track MRR@5 (how high the expected page ranks) and recall@5 (how often it lands in the top five) against a pinned baseline. A run fails if an expected page drops out of the top five, a cache hit turns into a BM25 miss or MRR@5 falls by more than 0.02.
-- **Ranking:** a frozen public benchmark ([NFCorpus](https://huggingface.co/datasets/CohereLabs/beir-embed-english-v3/tree/main/nfcorpus), 323 queries with graded relevance labels) fails any change to the retrieval SQL that lowers nDCG@5.
-- **Latency:** after every deploy, a timing eval reads the Function's `Server-Timing` header and fails if the cache or BM25 path goes over budget.
+It was incredibly easy for my agent to set up a few baseline and regression benchmarks for this. They also told us when the new search matched or beat our previous one:
 
-The biggest ranking change ran on a Neon branch of the production database first, so the evals saw real indexes without touching live search. Here's how relevance moved across the baselines we pinned in the week before launch:
+- **Hit rate:** 171 real queries, including the most common searches on neon.com, each paired with the page it should return. A change fails if an expected page falls out of the top five.
+- **Ranking quality:** a public search benchmark ([NFCorpus](https://huggingface.co/datasets/CohereLabs/beir-embed-english-v3/tree/main/nfcorpus)) with labeled results, so changes to the search SQL can't make rankings worse.
+- **Speed:** after every deploy, we time the search and fail if either path goes over its budget.
+
+The biggest ranking change ran on a Neon branch of the production database first, so the evals saw real indexes without touching live search. Here's how relevance moved across the baselines we pinned in the week before launch. Recall@5 is the share of queries with the right page in the top five and MRR@5 rewards ranking it near the top:
 
 ![Line chart of search relevance on 171 golden queries across five eval baselines. Recall@5 went from 77.8% at the October 13 baseline to 76.6% after stripping page boilerplate, 78.4% after dropping footers and adding breadcrumbs, 94.7% after category ranking and more content and stayed at 94.7% after exact query rewrites on October 18. MRR@5 went from 0.613 to 0.615, 0.627, 0.760 and 0.764.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/relevance.png)
 
-The small dip on October 13 came from stripping navigation text and frontmatter from the index. That cost two expected pages and the gate flagged both. We accepted the trade because it cleaned up 97 top-five results that showed boilerplate, frontmatter or stray markdown. The jump came from weighting pages by category and title matches, plus indexing the PostgreSQL tutorial and FAQs. Together, they took recall@5 from 78% to 95%.
+The small dip on October 13 came from stripping navigation text and frontmatter from the index. That cost two expected pages and the gate flagged both. We accepted the trade because it cleaned up 97 top-five results that showed boilerplate, frontmatter or stray markdown. The jump came from weighting pages by category and title matches, plus indexing the PostgreSQL tutorial and FAQs. Together, they took the share of queries with the right page in the top five from 78% to 95%.
 
 ## Try it on your own data
 
