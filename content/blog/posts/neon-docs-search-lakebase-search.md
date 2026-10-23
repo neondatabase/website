@@ -59,7 +59,7 @@ In the past, this is where I'd reach for Algolia or another search provider. Thi
 
 Nobody really writes SQL by hand anymore; agents do. So I relied on the `neon-postgres` [agent skill](https://neon.com/docs/ai/agent-skills) and our incredible Lakebase engineering team. My agent walked me through the options: a `lakebase_bm25` index for keyword matches, a `lakebase_ann` index for semantic matches and reciprocal rank fusion (RRF) to merge both rankings. My job was to make the calls and check that the results made sense.
 
-The Lakebase engineering team had already put their search knowledge into the `neon-postgres` skill: the extensions, the index types, the query syntax and how to build hybrid search. So my agent knew what I needed and I never had to learn the details of search myself.
+The Lakebase engineering team had already put their search knowledge into the `neon-postgres` skill: the extensions, the index types, the query syntax and how to build hybrid search. So my agent knew what I needed.
 
 ## Designing for search-as-you-type
 
