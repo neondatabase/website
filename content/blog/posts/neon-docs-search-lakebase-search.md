@@ -51,7 +51,7 @@ Neon Docs search is a standalone service that runs as its own Neon project. It u
 
 To ingest the site, we needed a clean representation of its content, like markdown. Thanks to our agent experience work, neon.com already publishes every page as markdown (try [neon.com/pricing.md](https://neon.com/pricing.md)). So ingestion mostly means getting notified when production content changes. Whenever a change merges in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function. The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through AI Gateway and writes the text, embedding and `tsvector` to one Lakebase Postgres table.
 
-The same Function serves a `/site-search` endpoint, which the website's search route calls for every query. The index holds seven kinds of content: docs, the API reference, the PostgreSQL tutorial, guides, FAQs, the changelog and blog posts. When we index a page, we tag it with its category based on the URL. That way, a search can ask for only docs and API reference results:
+The same Function serves a `/site-search` endpoint, which the website's search route calls for every query. The index holds seven kinds of content: docs, the API reference, the PostgreSQL tutorial, guides, FAQs, the changelog and blog posts. When we index a page, we tag it with its category based on the URL. This way, the caller can filter results by category when making an API call:
 
 ```json
 { "query": "create branch", "categories": ["docs", "api"] }
