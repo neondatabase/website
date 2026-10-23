@@ -69,7 +69,7 @@ Docs search has to feel instant. The search box sends a request on every keystro
 
 Semantic search matters too: questions like "How do Neon branches work?" don't always share keywords with the right page. The full hybrid pipeline (an embedding call, `lakebase_ann` and `lakebase_bm25` results merged with RRF, then an LLM rerank) finds those pages, but its two model calls take seconds. So we split the work:
 
-- **Cached hybrid results:** we run the full pipeline offline for common queries and store the ranked lists in a `site_search_cache` table. Lookups match on the normalized query and its content words, so "what's neon" and "tell me about neon" read the same row.
+- **Cached hybrid results:** we run the full pipeline offline for common queries and store the ranked lists in a `site_search_cache` table. Lookups match on the normalized query and its content words, so "mcp" and "mcp server" read the same row.
 - **BM25 for everything else:** queries the cache hasn't seen go straight to the `lakebase_bm25` index, with no model call.
 
 Cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server; BM25 misses take 8.6 ms and 11.5 ms. Of course, long-tail queries get keyword ranking without the semantic half. For docs search, I want speed first.
