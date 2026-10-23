@@ -904,6 +904,10 @@
               slug: realtime/guides/mutations
             - title: 'Server-side rendering'
               slug: realtime/guides/ssr
+        - section: Migrate from
+          items:
+            - title: 'Convex'
+              slug: realtime/migrate-from/convex
         - section: Examples
           items:
             - title: 'Overview'
