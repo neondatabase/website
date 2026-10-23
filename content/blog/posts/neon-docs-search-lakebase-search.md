@@ -77,7 +77,7 @@ So we split the work:
 
 Today, cache hits take 1.9 ms at p50 and 2.8 ms at p95 on the server. BM25 misses take 8.6 ms and 11.5 ms.
 
-Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For a search box that updates on every keystroke, I'll take the speed.
+Of course, that's a trade-off: a long-tail query gets keyword ranking without the semantic half. For docs search, I want speed first.
 
 ## Evaluating relevance and latency
 
