@@ -282,7 +282,7 @@ const Composer = () => {
 
   // The sign-in sentence appears only when at least one chip is selected, and
   // sits between the base sentence and the "Then add ..." clause. Account-free
-  // setup (steps 1 to 4 of prompts/agent-setup.md) needs no sign-in; adding a service
+  // setup (the setup steps in prompts/agent-setup.md) needs no sign-in; adding a service
   // is what requires a signed-in human, so it is gated on a selection.
   const signin = useMemo(() => (sel.length ? ' Ask your human to sign in or sign up.' : ''), [sel]);
   const extra = useMemo(
