@@ -1,6 +1,6 @@
 ---
-title: 'Sync Stripe data to Lakebase Postgres with Stripe Data Pipeline'
-subtitle: 'Query your live Stripe data directly in Lakebase Postgres, with no webhooks or ETL pipelines to build'
+title: 'Sync Stripe data to Lakebase Postgres on Neon with Stripe Data Pipeline'
+subtitle: 'Query your live Stripe data in Postgres on Neon, with no webhooks or ETL pipelines to build'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-10T00:00:00.000Z'
@@ -47,14 +47,14 @@ With a Neon project ready, you can connect it to Stripe and create the pipeline:
 
 1. Open the [Pipelines](https://dashboard.stripe.com/data-management/pipeline) page in the Stripe Dashboard.
 2. Click **+ Add pipeline**.
-3. Select **Neon**, enter a name for the pipeline (e.g., `stripe-sync`), and click **Connect your Neon account**.
+3. Select **Neon**, enter a name for the pipeline (for example, `stripe-sync`), and click **Connect your Neon account**.
 4. Complete the OAuth authorization flow to connect your Neon account.
 5. Select the Neon project where you want to sync your data, or let Stripe create a new project for you.
 6. Specify the schema name, or keep the default `stripe`. Stripe creates this schema in your Neon project and writes all synced tables to it.
 7. Choose which tables to sync. All tables are enabled by default, so you can keep them all or clear the ones you don't need yet. You can enable or disable individual tables later from the same page.
 8. Click **Create pipeline**.
 
-Stripe syncs only the tables you select. If you'd rather start small, common tables are `customers`, `charges`, `invoices`, `subscriptions`, `payment_intents` and `payouts`. Stripe backfills a table when you enable it, so you can add more later without recreating the pipeline.
+Stripe syncs only the tables you select. If you'd rather start small, common tables are `customers`, `charges`, `invoices`, `subscriptions`, `payment_intents`, and `payouts`. Stripe backfills a table when you enable it, so you can add more later without recreating the pipeline.
 
 Once Stripe confirms it can connect, it creates the schema and a table for each object you enabled, backfills those tables, and then starts syncing changes. The pipeline page shows the backfill's progress. If the pipeline reports a sync error, or the backfill never finishes, see Stripe's [checklist for connection and sync problems](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/common-errors) for the fix.
 
@@ -92,7 +92,7 @@ SELECT count(*) FROM stripe.charges;
 ```
 
 <Admonition type="important" title="Don't write to the Stripe-managed schema">
-Stripe manages the tables in this schema. Writing to them externally can cause sync errors and data inconsistencies, so **never write directly to the Stripe-managed schema**.
+Stripe manages the tables in this schema. Writing to them can cause sync errors and data inconsistencies.
 
 You can run read-only queries, use BI tools, and join Stripe-managed tables with your own tables on the Stripe IDs they share (for example, match `stripe.customers.id` with the customer ID your app stores). To build custom models on top of the synced data, create them in a schema of your own in the same project, and leave the `stripe` schema read-only.
 </Admonition>
@@ -225,7 +225,7 @@ Everything else syncs in real time.
 
 ## Next steps
 
-You now have your Stripe data in Lakebase Postgres, and it stays up to date on its own.
+You now have your Stripe data in your database on Neon, and it stays up to date on its own.
 
 Put that data to work in your application. Query `stripe.subscriptions`, `stripe.invoices`, and `stripe.customers` next to your own tables to gate features on a customer's plan, show invoice history in your UI, or follow up when a charge fails. The synced tables stay up to date in the background, so your billing code reads a table instead of consuming events.
 
