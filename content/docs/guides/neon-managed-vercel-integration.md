@@ -17,7 +17,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:11:21.384Z'
+updatedOn: '2026-10-23T11:16:51.998Z'
 ---
 
 <InfoBlock>
@@ -142,7 +142,7 @@ If [Managed Better Auth](/docs/auth/overview) is enabled on your production bran
 
 The production branch is independent of your project's default branch. If you later change the default branch, Production keeps using the branch you chose.
 
-To change the production branch after setup, go to **Neon Console → Integrations → Manage → Branches**, select a different branch under **Production branch**, and save. Changing a branch that's already set asks you to confirm first. Redeploy your production deployment in Vercel so it picks up the new branch's credentials. The branch you choose must meet the requirements listed above and have a read-write compute.
+To change the production branch after setup, go to **Neon Console → Integrations**, click **Settings** next to **Vercel** under **Added**, select a different branch under **Production branch**, and click **Save**. Changing a branch that's already set asks you to confirm first. Redeploy your production deployment in Vercel so it picks up the new branch's credentials. The branch you choose must meet the requirements listed above and have a read-write compute.
 
 While the integration is connected, the production branch and its read-write compute can't be deleted. To delete that branch, choose a different production branch first, or disconnect the integration.
 

@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:11:21.384Z'
+updatedOn: '2026-10-23T11:16:51.998Z'
 ---
 
 <InfoBlock>
@@ -86,11 +86,9 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 ## Connecting the database to a Vercel project
 
 1. In **Storage → `<your database>` → Connect Project**, choose the Vercel **Project** and the **Environments** that should receive database variables (Development, Preview, Production).
-2. (Optional) Under **Create database branch for deployment**, select **Preview** to turn on _Preview Branching_ (see next section).
-3. (Optional) Set a **Custom Prefix** for the environment variables.
+2. (Optional) Under **Create database branch for deployment**, select **Preview** to turn on _Preview Branching_ (see next section). Leave **Production** unchecked. It creates a new branch for every production deployment, which the recommended setup doesn't need: production deployments use your [production branch](#choose-a-production-branch).
+3. (Optional) Set a **Custom Prefix** for the environment variables. You only need one if your Vercel project already uses the unprefixed variable names, for example from a database you connected earlier.
 4. Click **Connect**.
-
-<Admonition type="tip" title="Environment variable prefix">Use a custom prefix if you have multiple databases in the same project, for example `PRIMARY`.</Admonition>
 
 ---
 
@@ -142,8 +140,8 @@ Your Vercel Production deployments use a dedicated **production branch** in Neon
 The production branch is independent of the default branch. If you later change the project's default branch, Production keeps using the same production branch. To point Production at a different branch, for example a protected `production` branch:
 
 1. In the Neon Console, open your project and go to **Integrations**.
-2. Next to **Vercel**, click **Settings**.
-3. Under **Production branch**, select the branch you want and save. If a production branch is already set, confirm the change.
+2. Under **Added**, click **Settings** next to **Vercel**.
+3. Under **Production branch**, select the branch you want and click **Save**. If a production branch is already set, confirm the change.
 4. Redeploy your production deployment in Vercel so it picks up the new branch's credentials.
 
 The branch you choose can't be a preview branch or have [branch expiration](/docs/guides/branch-expiration) set, and it needs a read-write compute. Branches created before January 14, 2024 aren't listed.
