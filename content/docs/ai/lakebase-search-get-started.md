@@ -7,7 +7,7 @@ summary: >-
   BM25 full-text index, and running vector and keyword searches from a
   TypeScript application using @neondatabase/serverless and OpenAI.
 enableTableOfContents: true
-updatedOn: '2026-10-23T09:50:57.356Z'
+updatedOn: '2026-10-23T11:19:40.118Z'
 ---
 
 This guide sets up Lakebase Search on a Neon project: enabling both extensions, creating a schema that supports vector and full-text search, inserting documents with embeddings, and querying from TypeScript.
@@ -192,65 +192,10 @@ npx tsx search.ts
 
 Vector and keyword search each catch matches the other misses. Combine their results with fusion or reranking:
 
+- **Jev through Neon AI Gateway** scores the deduplicated candidates against the query.
 - **Reciprocal Rank Fusion (RRF)** combines the retrievers' ranks in SQL without an additional model call.
-- **Jev reranking** scores the deduplicated candidates with an AI Gateway decision model. RRF isn't required before reranking.
 
-### Fuse ranks with RRF
-
-Each retriever contributes `1 / (60 + rank)` to a candidate's score. Candidates that rank well in either or both lists come out on top.
-
-Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `textSearch`. It reuses the `documents` table and indexes from above:
-
-```typescript filename="search.ts"
-async function hybridSearch(query: string, limit = 5) {
-  const { data } = await openai.embeddings.create({
-    model: 'qwen3-embedding-0-6b',
-    input: query,
-    encoding_format: 'float',
-  });
-  const queryVector = JSON.stringify(data[0].embedding);
-
-  return sql`
-    WITH vector_ranked AS (
-      SELECT id, RANK() OVER (ORDER BY dist) AS rank
-      FROM (
-        SELECT id, embedding <=> ${queryVector}::vector AS dist
-        FROM documents
-        WHERE embedding IS NOT NULL
-        ORDER BY dist
-        FETCH FIRST 40 ROWS WITH TIES
-      ) v
-    ),
-    keyword_ranked AS (
-      SELECT id, RANK() OVER (ORDER BY score) AS rank
-      FROM (
-        SELECT id, score
-        FROM (
-          SELECT id, body_tsv <@> to_bm25query(
-            to_tsvector('english', ${query}), 'documents_bm25'
-          ) AS score
-          FROM documents
-        ) AS scored
-        WHERE score < 0
-        ORDER BY score, id
-        LIMIT 40
-      ) k
-    )
-    SELECT d.id, d.title,
-      COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS rrf_score
-    FROM documents d
-    LEFT JOIN vector_ranked v ON d.id = v.id
-    LEFT JOIN keyword_ranked k ON d.id = k.id
-    WHERE v.id IS NOT NULL OR k.id IS NOT NULL
-    ORDER BY rrf_score DESC, d.id
-    LIMIT ${limit}
-  `;
-}
-```
-
-Vector retrieval targets 40 candidates and preserves cutoff ties with `WITH TIES`, so it can return more than 40. Keyword retrieval excludes zero-score non-matches and returns up to 40 candidates. `RANK()` gives retained ties equal ranks, and `d.id` breaks final score ties. Tune candidate counts and the RRF constant for your data.
-
-### Rerank candidates with Jev
+### Use Jev through Neon AI Gateway
 
 Retrieve candidates from both searches, deduplicate by document ID, then ask Jev whether each passage supplies the specific information the query asks for. Sort by the probability of yes. This follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
 
@@ -353,6 +298,61 @@ async function hybridSearchWithJev(query: string, limit = 5): Promise<Candidate[
 Call `hybridSearchWithJev(query)` after inserting the documents and building the indexes. This example scores the candidate pool in one request. Keep the query and all candidate text within Jev 1.14's 65,536-token context window; retrieve shorter chunks or reduce candidate limits for long passages. Apply the same tenant and access-control filters inside both retrievers, before their limits.
 
 A high rank doesn't establish that an answer exists. Calibrate an acceptance threshold on judged no-match queries if your application must return "no answer." The caller can catch reranking errors and use `hybridSearch` as a fallback.
+
+### Fuse ranks with RRF
+
+Each retriever contributes `1 / (60 + rank)` to a candidate's score. Candidates that rank well in either or both lists come out on top.
+
+Add a `hybridSearch` function to `search.ts`, alongside `vectorSearch` and `textSearch`. It reuses the `documents` table and indexes from above:
+
+```typescript filename="search.ts"
+async function hybridSearch(query: string, limit = 5) {
+  const { data } = await openai.embeddings.create({
+    model: 'qwen3-embedding-0-6b',
+    input: query,
+    encoding_format: 'float',
+  });
+  const queryVector = JSON.stringify(data[0].embedding);
+
+  return sql`
+    WITH vector_ranked AS (
+      SELECT id, RANK() OVER (ORDER BY dist) AS rank
+      FROM (
+        SELECT id, embedding <=> ${queryVector}::vector AS dist
+        FROM documents
+        WHERE embedding IS NOT NULL
+        ORDER BY dist
+        FETCH FIRST 40 ROWS WITH TIES
+      ) v
+    ),
+    keyword_ranked AS (
+      SELECT id, RANK() OVER (ORDER BY score) AS rank
+      FROM (
+        SELECT id, score
+        FROM (
+          SELECT id, body_tsv <@> to_bm25query(
+            to_tsvector('english', ${query}), 'documents_bm25'
+          ) AS score
+          FROM documents
+        ) AS scored
+        WHERE score < 0
+        ORDER BY score, id
+        LIMIT 40
+      ) k
+    )
+    SELECT d.id, d.title,
+      COALESCE(1.0 / (60 + v.rank), 0) + COALESCE(1.0 / (60 + k.rank), 0) AS rrf_score
+    FROM documents d
+    LEFT JOIN vector_ranked v ON d.id = v.id
+    LEFT JOIN keyword_ranked k ON d.id = k.id
+    WHERE v.id IS NOT NULL OR k.id IS NOT NULL
+    ORDER BY rrf_score DESC, d.id
+    LIMIT ${limit}
+  `;
+}
+```
+
+Vector retrieval targets 40 candidates and preserves cutoff ties with `WITH TIES`, so it can return more than 40. Keyword retrieval excludes zero-score non-matches and caps candidates at 40 to avoid admitting a large group of tied BM25 matches. `RANK()` gives retained ties equal ranks, and `d.id` breaks final score ties. Tune candidate counts and the RRF constant for your data.
 
 </Steps>
 
