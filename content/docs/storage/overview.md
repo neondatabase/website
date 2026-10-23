@@ -7,7 +7,7 @@ summary: >-
   its own view of storage. Point an S3 SDK at your branch endpoint and
   authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:41:50.089Z'
+updatedOn: '2026-10-23T14:02:32.319Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -83,10 +83,11 @@ neon bootstrap --template ai-sdk
 
 The following limits apply:
 
-| Limit                    | Value                                                                                                          |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| Object size (maximum)    | 5 GiB, whether uploaded in a single request or with [multipart upload](/docs/storage/objects#multipart-upload) |
-| Free plan object storage | 5 GB per project ([rates](/docs/introduction/plans#object-storage))                                            |
+| Limit                                                                             | Value                                                               |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Object size, single-request upload (maximum)                                      | 5 GiB                                                               |
+| Object size, [multipart upload](/docs/storage/objects#multipart-upload) (maximum) | 10 GiB                                                              |
+| Free plan object storage                                                          | 5 GB per project ([rates](/docs/introduction/plans#object-storage)) |
 
 Two limits are behavioral rather than fixed numbers:
 
