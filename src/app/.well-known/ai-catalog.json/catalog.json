@@ -21,6 +21,19 @@
       ]
     },
     {
+      "identifier": "urn:air:neon.com:mcp:neon-docs",
+      "displayName": "Neon Docs MCP Server",
+      "type": "application/mcp-server-card+json",
+      "url": "https://neon.com/.well-known/mcp/docs-server-card.json",
+      "description": "Search and read Neon documentation over MCP. No authentication required.",
+      "tags": [
+        "docs",
+        "documentation",
+        "mcp",
+        "neon"
+      ]
+    },
+    {
       "identifier": "urn:air:neon.com:skill:neon-postgres",
       "displayName": "Lakebase Postgres",
       "type": "application/agent-skills+md",

@@ -9,7 +9,13 @@ const CommandHeading = AnchorHeading('h2');
 const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
   <div className="prose-doc post-content prose mt-8 max-w-none dark:prose-invert xs:prose-code:break-words">
     <div id="about" className="anchor-heading scroll-mt-20" aria-hidden />
-    {row.isEmbedding ? (
+    {row.isDecision ? (
+      <p>
+        Neon AI Gateway provides {row.name} by {row.providerName}, a System One decision model. It
+        answers questions about a given state with a choice, a probability, or a score; it does not
+        generate text.
+      </p>
+    ) : row.isEmbedding ? (
       <p>
         Neon AI Gateway provides {row.name} by {row.providerName}. It returns {row.dimensions}
         -dimensional embeddings on <code>POST /v1/embeddings</code>.
@@ -37,8 +43,9 @@ ModelDetailIntro.propTypes = {
     text: PropTypes.arrayOf(PropTypes.object).isRequired,
     image: PropTypes.arrayOf(PropTypes.object).isRequired,
     embeddings: PropTypes.arrayOf(PropTypes.object).isRequired,
+    decisions: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings']).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings', 'decisions']).isRequired,
 };
 
 export default ModelDetailIntro;

@@ -3,7 +3,7 @@ title: Plugins
 subtitle: Supported Better Auth plugins in Managed Better Auth
 summary: >-
   Managed Better Auth exposes a managed subset of Better Auth plugins (Admin, Email OTP,
-  JWT, Magic Link, Organization, Open API, Phone Number) through the Neon SDK;
+  JWT, Magic Link, OAuth Provider, Organization, Open API, Phone Number) through the Neon SDK;
   plugins are not installed or configured directly. Use this page to check which
   plugins are fully supported versus partially supported, and how to configure
   them via the Neon Console or Neon API. The Organization plugin has partial
@@ -24,15 +24,16 @@ The following Better Auth plugins are currently supported in Managed Better Auth
 
 ## Supported plugins
 
-| Plugin                                                 | Status       |
-| ------------------------------------------------------ | ------------ |
-| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported |
-| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported |
-| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported |
-| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial   |
-| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported |
-| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported |
+| Plugin                                                     | Status                    |
+| ---------------------------------------------------------- | ------------------------- |
+| [Admin](/docs/auth/guides/plugins/admin)                   | ✅ Supported              |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)           | ✅ Supported              |
+| [JWT](/docs/auth/guides/plugins/jwt)                       | ✅ Supported              |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)         | ✅ Supported              |
+| [OAuth Provider](/docs/auth/guides/plugins/oauth-provider) | 🧪 Beta                   |
+| [Organization](/docs/auth/guides/plugins/organization)     | ⚠️ Partial                |
+| [Open API](/docs/auth/guides/plugins/openapi)              | ✅ Supported              |
+| [Phone Number](/docs/auth/guides/plugins/phone-number)     | ✅ Supported              |
 
 For more runnable Managed Better Auth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
 

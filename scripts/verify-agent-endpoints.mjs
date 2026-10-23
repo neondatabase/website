@@ -216,13 +216,20 @@ const SCHEMAS = {
   },
   mcpServerCard: {
     type: 'object',
-    required: ['url', 'authentication', 'name', 'version', 'remotes'],
+    required: ['$schema', 'url', 'authentication', 'name', 'version', 'description', 'remotes'],
     properties: {
+      $schema: {
+        type: 'string',
+        pattern:
+          '^https://static\\.modelcontextprotocol\\.io/schemas/v1/server-card\\.schema\\.json$',
+      },
       url: { type: 'string' },
       endpoint: { type: 'string' },
-      name: { type: 'string' },
+      name: { type: 'string', pattern: '^[a-zA-Z0-9.-]+/[a-zA-Z0-9._-]+$' },
       version: { type: 'string' },
-      description: { type: 'string', maxLength: 100 },
+      description: { type: 'string', minLength: 1, maxLength: 100 },
+      title: { type: 'string', minLength: 1, maxLength: 100 },
+      repository: { type: 'object', required: ['url', 'source'] },
       remotes: {
         type: 'array',
         minItems: 1,
@@ -237,6 +244,27 @@ const SCHEMAS = {
       capabilities: { type: 'object' },
     },
   },
+  docsMcpServerCard: {
+    type: 'object',
+    required: ['$schema', 'name', 'version', 'description', 'remotes'],
+    properties: {
+      $schema: {
+        type: 'string',
+        pattern:
+          '^https://static\\.modelcontextprotocol\\.io/schemas/v1/server-card\\.schema\\.json$',
+      },
+      name: { type: 'string', pattern: '^[a-zA-Z0-9.-]+/[a-zA-Z0-9._-]+$' },
+      version: { type: 'string' },
+      description: { type: 'string', minLength: 1, maxLength: 100 },
+      title: { type: 'string', minLength: 1, maxLength: 100 },
+      repository: { type: 'object', required: ['url', 'source'] },
+      remotes: {
+        type: 'array',
+        minItems: 1,
+        items: { type: 'object', required: ['type', 'url'] },
+      },
+    },
+  },
   apiCatalog: {
     type: 'object',
     required: ['linkset'],
@@ -249,6 +277,14 @@ const SCHEMAS = {
           required: ['anchor'],
           properties: {
             anchor: { type: 'string' },
+            item: {
+              type: 'array',
+              items: {
+                type: 'object',
+                required: ['href'],
+                properties: { href: { type: 'string' } },
+              },
+            },
             'service-desc': {
               type: 'array',
               items: {
@@ -479,9 +515,29 @@ const VALIDATORS = {
     return checks;
   },
 
+  'docs-mcp-server-card'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.docsMcpServerCard, payload)];
+    checks.push(
+      equalsCheck(
+        'remotes[0].url matches SoT connectUrl',
+        payload.remotes?.[0]?.url,
+        sot.DOCS_MCP_SERVER.connectUrl
+      )
+    );
+    checks.push(equalsCheck('name matches SoT name', payload.name, sot.DOCS_MCP_SERVER.name));
+    return checks;
+  },
+
   'api-catalog'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.apiCatalog, payload)];
-    const link = payload.linkset?.[0] || {};
+    const catalog = payload.linkset?.[0] || {};
+    checks.push(
+      equalsCheck('first anchor is the catalog URL', catalog.anchor, sot.NEON_API.catalogUrl)
+    );
+    checks.push(
+      equalsCheck('item href matches SoT baseUrl', catalog.item?.[0]?.href, sot.NEON_API.baseUrl)
+    );
+    const link = payload.linkset?.find((l) => l.anchor === sot.NEON_API.baseUrl) || {};
     checks.push(equalsCheck('anchor matches SoT baseUrl', link.anchor, sot.NEON_API.baseUrl));
     checks.push(
       equalsCheck(
@@ -531,14 +587,19 @@ const VALIDATORS = {
 
   'ai-catalog'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.aiCatalog, payload)];
-    const mcpEntry = (payload.entries || []).find(
-      (e) => e.type === 'application/mcp-server-card+json'
-    );
-    checks.push(
-      mcpEntry
-        ? equalsCheck('MCP entry url matches SoT cardUrl', mcpEntry.url, sot.MCP_SERVER.cardUrl)
-        : fail('MCP entry present', 'no application/mcp-server-card+json entry')
-    );
+    const mcpUrls = (payload.entries || [])
+      .filter((e) => e.type === 'application/mcp-server-card+json')
+      .map((e) => e.url);
+    for (const [label, cardUrl] of [
+      ['MCP', sot.MCP_SERVER.cardUrl],
+      ['docs MCP', sot.DOCS_MCP_SERVER.cardUrl],
+    ]) {
+      checks.push(
+        mcpUrls.includes(cardUrl)
+          ? ok(`${label} entry url matches SoT cardUrl`, cardUrl)
+          : fail(`${label} entry present`, `no MCP server card entry for ${cardUrl}`)
+      );
+    }
     // Cross-file: catalog skills must match the agent-skills index skills.
     try {
       const skillsIndex = readJson('public/.well-known/agent-skills/index.json');

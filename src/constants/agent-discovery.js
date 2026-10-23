@@ -29,6 +29,9 @@ const MCP_SERVER = {
   // Registry identity, mirrored from the upstream server.json that the official
   // MCP Registry publishes (github.com/neondatabase/mcp-server-neon). The live
   // verifier compares the built document against that file, so keep these in step.
+  // Server card schema (SEP-2127). Versioned by its /vN/ segment, not by date.
+  // Spec: https://github.com/modelcontextprotocol/experimental-ext-server-card
+  cardSchema: 'https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json',
   registry: {
     schema: 'https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json',
     name: 'com.neon/mcp',
@@ -68,6 +71,24 @@ const MCP_SERVER = {
   },
 };
 
+// Neon docs MCP server: the same mcp.neon.tech server scoped by ?category=docs
+// to its documentation tools (docs search, page fetch, and feedback), no OAuth.
+// The description names no tools: they change, and tools/list is authoritative.
+// Agents connect to connectUrl (neon.com/docs/mcp), which proxies POSTs to
+// upstreamUrl. Shares the product server's repository and icons.
+const DOCS_MCP_SERVER = {
+  connectUrl: 'https://neon.com/docs/mcp',
+  upstreamUrl: 'https://mcp.neon.tech/mcp?category=docs',
+  transport: 'streamable-http',
+  cardUrl: 'https://neon.com/.well-known/mcp/docs-server-card.json',
+  name: 'com.neon/docs-mcp',
+  title: 'Neon Docs',
+  description: 'Search and read Neon documentation over MCP. No authentication required.',
+  version: '1.0.0',
+  websiteUrl: 'https://neon.com/docs/ai/neon-mcp-server',
+  repositorySubfolder: 'landing',
+};
+
 // Neon REST management API and its published OpenAPI document. `openApiSpecUrl`
 // is also aliased to /openapi.json via next.config.js so agents probing the
 // conventional OpenAPI path resolve it.
@@ -77,6 +98,7 @@ const NEON_API = {
   docsUrl: 'https://neon.com/docs/reference/api',
   apiKeysUrl: 'https://console.neon.tech/app/settings/api-keys',
   apiKeysDocsUrl: 'https://neon.com/docs/manage/api-keys',
+  catalogUrl: 'https://neon.com/.well-known/api-catalog',
 };
 
 // Neon CLI, installed from npm as `neon`.
@@ -116,15 +138,23 @@ const CLAIMABLE = {
 // conventions, so it carries each one's fields:
 //   - `url` + `authentication` object: integrations.sh (reads authentication.type)
 //   - `name`, `version`, `description`, `transport`: Mintlify's server card
-//   - reverse-DNS `name` + `remotes[].url`: the draft MCP server-card extension (Ora)
-// `endpoint` and `serverInfo` are kept for backward compatibility. No `tools[]`:
-// agents read the live tools/list, and a copy here would drift.
+//   - `$schema`, reverse-DNS `name`, `title`, `websiteUrl`, `repository`, `icons`,
+//     `remotes[].url`: the MCP server-card extension (SEP-2127; read by Ora)
+// The extension schema allows extra properties, so the other conventions' fields
+// coexist with it. `endpoint` and `serverInfo` are kept for backward
+// compatibility. No `tools[]`: agents read the live tools/list, and a copy here
+// would drift.
 function buildMcpServerCard() {
   const { registry } = MCP_SERVER;
   return {
+    $schema: MCP_SERVER.cardSchema,
     name: registry.name,
     version: registry.version,
     description: registry.description,
+    title: registry.title,
+    websiteUrl: registry.websiteUrl,
+    repository: { url: registry.repositoryUrl, source: 'github' },
+    icons: registry.icons,
     url: MCP_SERVER.connectUrl,
     // Mintlify's field; always "http" per its spec. remotes[].type carries the MCP transport.
     transport: 'http',
@@ -164,11 +194,42 @@ function buildMcpWellKnown() {
   };
 }
 
-// /.well-known/api-catalog — RFC 9727 linkset pointing at the API base, its
-// OpenAPI document, and the human docs.
+// /.well-known/mcp/docs-server-card.json: server card (SEP-2127) for the docs
+// MCP server. Extension fields only: the server takes no auth, so there is no
+// `authentication` block for integrations.sh to read.
+function buildDocsMcpServerCard() {
+  return { ...buildDocsMcpServerJson(), $schema: MCP_SERVER.cardSchema };
+}
+
+// GET /docs/mcp: MCP Registry server.json descriptor for the docs MCP server.
+function buildDocsMcpServerJson() {
+  return {
+    $schema: MCP_SERVER.registry.schema,
+    name: DOCS_MCP_SERVER.name,
+    title: DOCS_MCP_SERVER.title,
+    description: DOCS_MCP_SERVER.description,
+    repository: {
+      url: MCP_SERVER.registry.repositoryUrl,
+      source: 'github',
+      subfolder: DOCS_MCP_SERVER.repositorySubfolder,
+    },
+    version: DOCS_MCP_SERVER.version,
+    websiteUrl: DOCS_MCP_SERVER.websiteUrl,
+    icons: MCP_SERVER.registry.icons,
+    remotes: [{ type: DOCS_MCP_SERVER.transport, url: DOCS_MCP_SERVER.connectUrl }],
+  };
+}
+
+// /.well-known/api-catalog: RFC 9727 linkset. The first entry is anchored at
+// the catalog itself and lists each API as an `item`; the second describes the
+// API base with its OpenAPI document and the human docs.
 function buildApiCatalog() {
   return {
     linkset: [
+      {
+        anchor: NEON_API.catalogUrl,
+        item: [{ href: NEON_API.baseUrl }],
+      },
       {
         anchor: NEON_API.baseUrl,
         'service-desc': [{ href: NEON_API.openApiSpecUrl, type: 'application/json' }],
@@ -271,12 +332,15 @@ function buildClaimableAuthorizationServer() {
 
 module.exports = {
   MCP_SERVER,
+  DOCS_MCP_SERVER,
   NEON_API,
   NEON_CLI,
   INTEGRATIONS,
   CLAIMABLE,
   buildMcpServerCard,
   buildMcpWellKnown,
+  buildDocsMcpServerCard,
+  buildDocsMcpServerJson,
   buildApiCatalog,
   buildIntegrationsJson,
   buildClaimableAuthorizationServer,

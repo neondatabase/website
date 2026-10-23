@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.10.0",
+  "neonctlVersion": "8.11.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2222,6 +2222,99 @@
           "options": {},
           "commands": {},
           "describe": "List functions on the branch"
+        },
+        "new": {
+          "name": "new",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "template",
+              "describe": "Template ID. Omit it in a terminal to pick one; `neon functions templates list` shows them all.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "add-to-config": {
+              "type": "boolean",
+              "describe": "Declare the function in neon.ts, creating it when missing. On by default; use --no-add-to-config to skip."
+            },
+            "all-operations": {
+              "type": "boolean",
+              "describe": "Include every operation. Conflicts with --operation."
+            },
+            "branch": {
+              "type": "string",
+              "hidden": true,
+              "describe": "Branch ID or name"
+            },
+            "config": {
+              "type": "string",
+              "describe": "Path to the neon.ts to edit (defaults to the neon.ts next to .neon, or in cwd without one; created there when missing)"
+            },
+            "dir": {
+              "type": "string",
+              "describe": "Destination directory (defaults to functions/<slug> next to neon.ts)"
+            },
+            "force": {
+              "type": "boolean",
+              "describe": "Overwrite differing files and keep an existing neon.ts declaration"
+            },
+            "install": {
+              "type": "boolean",
+              "describe": "Install the template's dependencies, plus @neon/config and @neon/env when neon.ts is created. A TTY asks when omitted, --yes installs, and anything else leaves the install command in Next."
+            },
+            "operation": {
+              "type": "array",
+              "describe": "Operation to include (repeatable). Without it, a TTY asks and anything else uses the recommended operations."
+            },
+            "project-id": {
+              "type": "string",
+              "hidden": true,
+              "describe": "Project ID"
+            },
+            "slug": {
+              "type": "string",
+              "describe": "Function slug, also used as the directory name. A separate template keeps its own slugs and uses this only for the directory. Defaults to the template ID"
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip prompts: use the recommended operations and install dependencies",
+              "alias": [
+                "y",
+                "default"
+              ]
+            }
+          },
+          "commands": {},
+          "describe": "Create a function from a Function Registry template"
+        },
+        "templates": {
+          "name": "templates",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Branch ID or name"
+                },
+                "project-id": {
+                  "type": "string",
+                  "hidden": true,
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "List function templates"
+            }
+          },
+          "describe": "Browse Function Registry templates"
         }
       },
       "describe": "Manage Neon Functions",

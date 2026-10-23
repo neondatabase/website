@@ -52,6 +52,7 @@ function toModel(id, entry, caps) {
       web_search: caps.webSearch,
       image_generation: caps.imageGeneration,
       embeddings: caps.embeddings === true,
+      decision: caps.decision === true,
     },
   };
 }

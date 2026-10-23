@@ -28,12 +28,12 @@ describe('/docs/mcp route', () => {
       expect(json.version).toBe('1.0.0');
     });
 
-    it('remotes[0] points to the docs-scoped unauthenticated endpoint', async () => {
+    it('remotes[0] points to the public neon.com/docs/mcp endpoint', async () => {
       const res = await GET();
       const json = await res.json();
       expect(json.remotes).toHaveLength(1);
       expect(json.remotes[0].type).toBe('streamable-http');
-      expect(json.remotes[0].url).toBe('https://mcp.neon.tech/mcp?category=docs');
+      expect(json.remotes[0].url).toBe('https://neon.com/docs/mcp');
       // No auth headers — this endpoint is intentionally unauthenticated
       expect(json.remotes[0].headers).toBeUndefined();
     });
@@ -43,6 +43,27 @@ describe('/docs/mcp route', () => {
       const cc = res.headers.get('Cache-Control');
       expect(cc).toMatch(/public/);
       expect(cc).toMatch(/max-age/);
+    });
+
+    it('returns 405 when an MCP client probes GET for an event stream', async () => {
+      const res = await GET(
+        new Request('https://neon.com/docs/mcp', {
+          headers: { Accept: 'TEXT/EVENT-STREAM' },
+        })
+      );
+      expect(res.status).toBe(405);
+      expect(res.headers.get('Allow')).toBe('POST');
+      expect(res.headers.get('Cache-Control')).toBe('no-store');
+    });
+
+    it('returns the descriptor when the client also accepts JSON', async () => {
+      const res = await GET(
+        new Request('https://neon.com/docs/mcp', {
+          headers: { Accept: 'application/json, text/event-stream' },
+        })
+      );
+      expect(res.status).toBe(200);
+      expect((await res.json()).name).toBe('com.neon/docs-mcp');
     });
   });
 
