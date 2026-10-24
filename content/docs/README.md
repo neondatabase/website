@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-09-24T15:43:20.888Z'
+updatedOn: '2026-10-24T21:13:07.960Z'
 ---
 
 # Docs
@@ -260,6 +260,21 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   export default function App() {
     return <div>Hello</div>;
   }
+  ```
+  ````
+
+- `collapse={X-Y}` - hide lines X to Y (inclusive) behind a clickable "N collapsed lines" row that expands them. Separate several ranges with commas. Collapsed lines are still copied by the copy button and stay in the page HTML.
+
+  Example:
+
+  ````md
+  ```js collapse={1-2, 6}
+  import { neon } from '@neondatabase/serverless';
+  const sql = neon(process.env.DATABASE_URL);
+
+  const rows = await sql`SELECT * FROM todos`;
+  console.log(rows);
+  export default rows;
   ```
   ````
 

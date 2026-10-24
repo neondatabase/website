@@ -28,3 +28,28 @@ describe('highlight shell placeholders', () => {
     expect(html).toContain('const');
   });
 });
+
+// The collapsible-sections transformer: `collapse={1-2}` wraps the lines in a
+// <details> whose <summary> shows how many lines are hidden.
+describe('highlight collapsible sections', () => {
+  const code = 'const a = 1;\nconst b = 2;\nconst c = a + b;';
+
+  it('wraps a collapsed range in details with a line count summary', async () => {
+    const html = await highlight(code, 'js', 'collapse={1-2}');
+    expect(html).toContain('<details class="collapsed-lines">');
+    expect(html).toContain('2 collapsed lines</summary>');
+    expect(html.match(/<details/g)).toHaveLength(1);
+  });
+
+  it('keeps line highlighting separate from collapse ranges', async () => {
+    const html = await highlight(code, 'js', 'collapse={1} {3}');
+    expect(html).toContain('1 collapsed line</summary>');
+    expect(html).toMatch(/data-line="3" data-highlighted-line/);
+    expect(html).not.toMatch(/data-line="1" data-highlighted-line/);
+  });
+
+  it('leaves code without collapse meta unchanged', async () => {
+    const html = await highlight(code, 'js', '{2}');
+    expect(html).not.toContain('<details');
+  });
+});

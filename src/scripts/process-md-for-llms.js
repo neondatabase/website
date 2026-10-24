@@ -2037,6 +2037,7 @@ function remarkCleanCodeBlocks() {
         node.meta =
           node.meta
             .replace(/\bshouldWrap\b/g, '')
+            .replace(/\bcollapse=\{[^}]*\}/g, '')
             .replace(/\s+/g, ' ')
             .trim() || null;
       }
