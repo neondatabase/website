@@ -371,7 +371,7 @@ export default function Home() {
 `app/page.tsx` renders the gallery in two parts. `AssetGallery` is an async server component. The `await io()` call marks a point that suspends during prerendering so the listing is excluded from the static shell and streams in at request time. The listing re-runs on every request because no cache scope wraps it. It lists the bucket with `ListObjectsV2Command`, sorts the keys, and renders each one as a tile with an image and caption. The three forms below it call the server actions you defined in `app/actions.ts`.
 
 <Admonition type="tip" title="Increase the request body limit for large files">
-Next.js caps server action request bodies at 1 MB by default (a framework limit, not an Object Storage one), so larger files fail to upload. The browser shows no error; the `Body exceeded 1 MB limit` message appears only in the server log. You can increase the limit in `next.config.ts`:
+Next.js caps server action request bodies at 1 MB by default (a framework limit, not an Object Storage one), so larger files fail to upload with a `Body exceeded 1 MB limit` error. During development, the error appears in the server log and the Next.js error overlay. You can increase the limit in `next.config.ts`:
 
 ```ts filename="next.config.ts"
 import type { NextConfig } from "next";
@@ -445,10 +445,10 @@ npx tsx --env-file=.env.local scripts/list.ts
 ```
 
 ```text
-products/aurora-desk-lamp.svg  (271 bytes)
-products/nimbus-chair.svg  (267 bytes)
-products/oculus-wall-clock.svg  (272 bytes)
-products/vertex-side-table.svg  (272 bytes)
+products/aurora-desk-lamp.svg  (268 bytes)
+products/nimbus-chair.svg  (264 bytes)
+products/oculus-wall-clock.svg  (269 bytes)
+products/vertex-side-table.svg  (269 bytes)
 ```
 
 ## Test uploads, replacements, and deletions
@@ -470,10 +470,10 @@ npx tsx --env-file=.env.local scripts/list.ts
 ```
 
 ```text
-products/aurora-desk-lamp.svg  (271 bytes)
+products/aurora-desk-lamp.svg  (268 bytes)
 products/lumen-desk-lamp.png  (27226 bytes)
 products/nimbus-chair.svg  (52711 bytes)
-products/vertex-side-table.svg  (272 bytes)
+products/vertex-side-table.svg  (269 bytes)
 ```
 
 ## Confirm production is unchanged
@@ -494,10 +494,10 @@ npx tsx --env-file=.env.local scripts/list.ts
 ```
 
 ```text
-products/aurora-desk-lamp.svg  (271 bytes)
-products/nimbus-chair.svg  (267 bytes)
-products/oculus-wall-clock.svg  (272 bytes)
-products/vertex-side-table.svg  (272 bytes)
+products/aurora-desk-lamp.svg  (268 bytes)
+products/nimbus-chair.svg  (264 bytes)
+products/oculus-wall-clock.svg  (269 bytes)
+products/vertex-side-table.svg  (269 bytes)
 ```
 
 ## Discard or promote the branch
