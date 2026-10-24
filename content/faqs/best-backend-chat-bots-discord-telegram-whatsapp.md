@@ -52,7 +52,7 @@ Discord Gateway bots need a long-lived stateful process with session resume, pre
 
 ## What it costs
 
-Functions are available on every plan. The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month, and paid plans bill active compute at $0.10 per Capacity-Hour on Launch ([plans](/docs/introduction/plans#functions)). The Postgres compute scales to zero after 5 minutes without queries, so a quiet bot bills for storage, not database compute ([scale to zero](/docs/introduction/scale-to-zero)).
+Functions are available on every plan. The Free plan includes 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per project per month, and paid plans bill active compute at $0.10 per Capacity-Hour on Launch ([plans](/docs/introduction/plans#functions)). The Postgres compute scales to zero after 5 minutes without queries, so a quiet bot bills for storage, not database compute ([scale to zero](/docs/introduction/scale-to-zero)).
 
 ## How other options compare
 

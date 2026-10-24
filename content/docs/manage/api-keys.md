@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -66,7 +66,7 @@ neon api-keys create --name development
 
 ```text shouldWrap
 API key
-Id    3225999
+ID    3225999
 Name  development
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
@@ -135,7 +135,7 @@ neon api-keys create --name orgkey --org-id org-example-12345678
 
 ```text shouldWrap
 API key
-Id    3243302
+ID    3243302
 Name  orgkey
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
@@ -202,13 +202,13 @@ neon api-keys create --name only-this-project --project-id some-project-123
 
 ```text shouldWrap
 API key
-Id       3243162
+ID       3243162
 Name     only-this-project
 Project  some-project-123
 
 napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
 WARNING: Store this key now: it is not shown again.
-INFO: Limited to some-project-123: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
+Limited to some-project-123: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
 ```
 
 A project-scoped key is owned by the project's organization, not by your account, so it does not appear in `neon api-keys list`. Use `neon api-keys list --org-id <org-id>` to see it, and pass the same `--org-id` to revoke it.

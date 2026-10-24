@@ -4,7 +4,7 @@ subtitle: 'Provision your entire Neon backend from a single TypeScript config: P
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file for full-stack TypeScript projects. Traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon) require learning a new DSL, managing state files, and wiring outputs into your application by hand. `neon.ts` is part of your local development loop instead. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli) and syncs connection strings directly into `.env.local`.
@@ -231,7 +231,7 @@ You should see output like this, showing the services that will be created:
 
 ```bash
 $ neon config plan
-INFO: → Planning against branch main (br-cool-forest-a1b2c3d4)
+→ Planning against branch main (br-cool-forest-a1b2c3d4)
 Planned changes
   + Neon Auth
   + bucket uploads
@@ -257,13 +257,13 @@ neon deploy
 </Admonition>
 
 <Admonition type="note" title="Conflicting remote state">
-If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), `neon deploy` may fail with:
+If your Neon project has different compute settings on the main branch (for example, set from the Neon Console), the CLI won't silently overwrite them. In a terminal, `neon deploy` shows the settings it would change and asks before overriding them. Without a terminal, such as in CI, it stops with:
 
 ```text
-ERROR: pushConfig refused to apply: local config conflicts with remote state.
+ERROR: Branch settings conflict with the policy. Re-run with --update-existing (or -y) to apply the changes shown above.
 ```
 
-The CLI won't silently overwrite existing remote settings. To override and apply your `neon.ts` configuration, pass the `--update-existing` flag:
+To override and apply your `neon.ts` configuration without the prompt, pass `--update-existing`:
 
 ```bash
 neon deploy --update-existing
@@ -401,7 +401,7 @@ neon triggers list
 ```
 
 ```text
-Trigger Id                                    Name            Type                    Function Slug  Function Path         Schedule   Storage   Enabled
+Trigger ID                                    Name            Type                    Function Slug  Function Path         Schedule   Storage   Enabled
 trigger-1a2b3c4d-5e6f-7890-abcd-ef1234567890  process-upload  storage_object_created  api            /tasks/upload-created            uploads uploads/  true
 trigger-8f7e6d5c-4b3a-2190-fedc-ba9876543210  daily-report    schedule                api            /tasks/daily          0 6 * * 1            true
 ```

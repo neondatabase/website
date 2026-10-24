@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-06T10:15:14.219Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -65,7 +65,7 @@ When you create a project, select the **Enable HIPAA compliance for this project
 To enable HIPAA compliance for an existing Neon project:
 
 1. In the Neon Console, navigate to your project's **Settings** page.
-2. Locate the **HIPAA support** section.
+2. Select the **HIPAA compliance** tab.
 3. Click **Enable**.
 
 </TabItem>
@@ -171,7 +171,7 @@ For information about disabling HIPAA compliance, see [Disabling HIPAA](#disabli
 
 4. Subcontractors and agents
    - Any subcontractors that handle PHI on our behalf are bound by restrictions and conditions that provide the same material level of protection for PHI as the BAA.
-   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors) and notifying customers of any changes if you sign up to notifications [here](https://share-eu1.hsforms.com/1XjUD9QeKQw-RSAgQtWUBfAfm9ld).
+   - We provide transparency by listing our subcontractors at [https://neon.com/hipaa-contractors](/hipaa-contractors).
 
 5. Customer responsibilities
    - Customers are responsible for configuring and using Neon in a way that complies with HIPAA.
@@ -348,6 +348,9 @@ The following features are not currently HIPAA-compliant and should not be used 
 
 - [Managed Better Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
 - [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
+- [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 
@@ -365,7 +368,7 @@ Once HIPAA compliance is enabled for a Neon project, it cannot be disabled.
 
 ### Delete a HIPAA-compliant project
 
-You can delete a HIPAA-compliant project using the same self-serve flow as any other Neon project: in the Console (**Settings** → **Delete**), via the [Neon API](/docs/manage/projects#delete-a-project-with-the-api), or with the [Neon CLI](/docs/cli/projects#delete). Deleting a project is permanent and removes all computes, branches, databases, and roles in that project.
+You can delete a HIPAA-compliant project using the same self-serve flow as any other Neon project: in the Console (**Settings** → **General** → **Delete project**), via the [Neon API](/docs/manage/projects#delete-a-project-with-the-api), or with the [Neon CLI](/docs/cli/projects#delete). Deleting a project is permanent and removes all computes, branches, databases, and roles in that project.
 
 <Admonition type="important">
 Before deleting a HIPAA project, export any audit logs or data you may need.

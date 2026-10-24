@@ -91,6 +91,26 @@ describe('getMetadata', () => {
     expect(metadata.alternates.canonical).toBe('https://www.postgresql.org/docs/16/tutorial.html');
     expect(metadata.openGraph.url).toBe('https://neon.com/postgresql/tutorial');
   });
+
+  it('derives the markdown alternate for pages with a markdown twin', () => {
+    const metadata = getMetadata({ pathname: '/guides/some-guide' });
+
+    expect(metadata.alternates.types['text/markdown']).toBe(
+      'https://neon.com/guides/some-guide.md'
+    );
+  });
+
+  it('prefers an explicit markdownPath over the derived one', () => {
+    const metadata = getMetadata({ pathname: '/auth', markdownPath: '/md/auth-page.md' });
+
+    expect(metadata.alternates.types['text/markdown']).toBe('https://neon.com/md/auth-page.md');
+  });
+
+  it('omits the markdown alternate for pages without a markdown twin', () => {
+    const metadata = getMetadata({ pathname: '/contact-sales' });
+
+    expect(metadata.alternates.types['text/markdown']).toBeNull();
+  });
 });
 
 describe('guide canonical frontmatter', () => {

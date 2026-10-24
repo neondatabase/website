@@ -13,7 +13,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -274,9 +274,9 @@ neon branches list --project-id dry-heart-13671059
 ```
 
 ```text filename="Output"
-Name                  Id                        Current State  Created At
-[default] main        br-morning-meadow-123456  ready          2026-08-04T07:07:55Z
-br-curly-wave-123456  br-curly-wave-123456      ready          2026-08-04T07:13:09Z
+Name                  ID                        Current State  Expires At  Created At
+[default] main        br-morning-meadow-123456  ready          never       2026-08-04T07:07:55Z
+br-curly-wave-123456  br-curly-wave-123456      ready          never       2026-08-04T07:13:09Z
 ```
 
 </TabItem>
@@ -733,7 +733,7 @@ For temporary branches, consider setting an expiration date when creating them t
 
 ## Check the data size
 
-You can check the logical data size for the databases on a branch by viewing the **Data size** value on the **Branches** page or page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
+You can check the logical data size for the databases on a branch by viewing the **Storage** column on the **Branches** page in the Neon Console. Alternatively, you can run the following query on your branch from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connected to your database:
 
 ```sql
 SELECT pg_size_pretty(sum(pg_database_size(datname)))

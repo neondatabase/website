@@ -282,7 +282,7 @@ export default defineConfig({
 
 ```bash filename="Terminal"
 neon deploy
-npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/lib-storage @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
 ```
 
 ```typescript filename="app/upload/actions.ts"

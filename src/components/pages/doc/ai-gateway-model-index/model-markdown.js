@@ -90,14 +90,35 @@ const renderEmbeddingTableRows = (rows) =>
     .map((line) => `| ${line} |`)
     .join('\n');
 
+const DECISION_TABLE_HEADER =
+  '| Model | Model ID | Released | Input /M | License |\n' + '| --- | --- | --- | --- | --- |';
+
+const renderDecisionTableRows = (rows) =>
+  rows
+    .map((row) =>
+      [
+        `[${escapeLinkLabel(row.name)}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(
+          row.id
+        )}.md)`,
+        renderCodeCell(row.id),
+        escapeTableCell(row.releaseLabel),
+        escapeTableCell(row.costInputLabel),
+        row.openWeights ? 'Open weights' : '—',
+      ].join(' | ')
+    )
+    .map((line) => `| ${line} |`)
+    .join('\n');
+
 const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, capabilities)) => {
   const embeddingRows = rows.filter((row) => row.isEmbedding);
+  const decisionRows = rows.filter((row) => row.isDecision);
   const textRows = rows.filter((row) => row.inputs.includes('text') && !row.isEmbedding);
   const imageRows = rows.filter((row) => row.isImageCapable);
   const otherRows = rows.filter(
-    (row) => !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding
+    (row) =>
+      !row.inputs.includes('text') && !row.isImageCapable && !row.isEmbedding && !row.isDecision
   );
-  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities && !row.isDecision);
   const sections = ['### Text models', renderProviderTables(textRows, '####')];
 
   sections.push(
@@ -134,6 +155,14 @@ const renderAiGatewayModelIndex = (rows = modelRows.buildRows(modelsData.neon, c
     );
     sections.push(`${EMBEDDING_TABLE_HEADER}\n${renderEmbeddingTableRows(embeddingRows)}`);
     sections.push('Select a linked model for embeddings-specific code examples.');
+  }
+
+  if (decisionRows.length > 0) {
+    sections.push('### Decision models');
+    sections.push(
+      'These System One models answer questions about a given state with a choice, a probability, or a score rather than generating text:'
+    );
+    sections.push(`${DECISION_TABLE_HEADER}\n${renderDecisionTableRows(decisionRows)}`);
   }
 
   sections.push(modelRows.MODEL_CATALOG_NOTE);

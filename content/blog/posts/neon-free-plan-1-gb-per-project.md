@@ -105,7 +105,7 @@ This installs the Neon plugin, which bundles agent skills and the [Neon MCP serv
 
 Each of these starter apps runs on Free plan primitives. Scaffold one with `neon bootstrap`, then hand it to your agent:
 
-**[Realtime chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat)**: a Next.js chat where signed-in users talk over WebSockets to a Hono server running on Functions, with every message stored in Postgres. Uses Lakebase Postgres, Managed Better Auth, and Functions.
+**[Realtime chat](https://github.com/neondatabase/examples/tree/main/with-websockets-function)**: a Next.js chat where signed-in users talk over WebSockets to a Hono server running on Functions, with every message stored in Postgres. Uses Lakebase Postgres, Managed Better Auth, and Functions.
 
   ```bash
   npx neon@latest bootstrap my-chat --template realtime-chat

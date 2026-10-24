@@ -12,7 +12,7 @@ updatedOn: '2026-09-25T09:58:44.827Z'
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console.
 
-The Monitoring page is organized into **Postgres**, **Storage**, and **Functions** tabs. This page describes the **Postgres** tab, which holds the metrics graphs below along with the **Active queries**, **Query performance**, **Data API Advisors**, and **System operations** views. The **Storage** and **Functions** tabs show [logs](/docs/introduction/monitor-logs) for Object Storage and Functions.
+The Monitoring page is organized into **Postgres**, **Storage**, **Functions**, and **Realtime** tabs. This page describes the **Postgres** tab, which holds the metrics graphs below along with the **Active queries**, **Query performance**, **Data API Advisors**, and **System operations** views. The **Storage**, **Functions**, and **Realtime** tabs show [logs](/docs/introduction/monitor-logs) for Object Storage, Functions, and Realtime.
 
 Your Neon plan defines the range of data you can view.
 

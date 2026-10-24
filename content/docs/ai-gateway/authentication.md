@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:25:06.094Z'
+updatedOn: '2026-10-09T09:48:21.765Z'
 ---
 
 AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
@@ -32,7 +32,7 @@ The `api_token` is printed once; set it as `NEON_AI_GATEWAY_TOKEN`. Run it in a 
 
 In the Neon Console, click **Connect** at the top of the sidebar and open the **AI Gateway** tab. The snippet includes both gateway env vars (see [Environment variables](#environment-variables) below). Click **Reveal credential** to show the token, or **Copy snippet** to copy the full `.env`. Use **Rotate credential** to replace the token in place.
 
-The Connect dialog reveals and rotates the current credential. To list all credentials for the branch or revoke one, use the [Neon CLI](/docs/cli/credentials) or the API (below).
+The Connect dialog reveals and rotates the current credential. To create a credential with specific scopes, open your project's **Settings** > **Credentials** and select **Create credential**. To list all credentials for the branch or revoke one, use the [Neon CLI](/docs/cli/credentials) or the API (below).
 
 </TabItem>
 <TabItem>

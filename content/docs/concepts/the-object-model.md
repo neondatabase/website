@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/overview
-updatedOn: '2026-08-27T15:07:41.821Z'
+updatedOn: '2026-10-13T11:53:00.421Z'
 ---
 
 On Neon, a **branch** is where your backend runs. It can include Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway.
@@ -48,7 +48,7 @@ When you create a child branch, it includes the same services enabled on its par
 | [**Functions**](/docs/compute/functions/overview) | Your backend code, deployed on the branch, at its own function URL.                                                                                        | The same function at its own function URL, against this branch's data.                                                                                                       |
 | [**AI Gateway**](/docs/ai-gateway/overview)       | One credential for all models across every major LLM provider. Each branch has its own endpoint, credentials, access, and metering.                        | A new endpoint and credentials, with usage metered on that branch. The [model catalog](/docs/ai-gateway/models) is shared and global: you don't configure models per branch. |
 
-Managed Better Auth, Object Storage, Functions, and the AI Gateway aren't available in every region yet. See [Product availability](/docs/introduction/regions#product-availability).
+Object Storage, Functions, and the AI Gateway aren't available in every region yet. See [Product availability](/docs/introduction/regions#product-availability).
 
 ### What Lakebase Postgres contains
 

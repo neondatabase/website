@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-02T13:41:36.830Z'
+updatedOn: '2026-10-23T11:00:38.670Z'
 ---
 
 ## Authentication errors
@@ -61,19 +61,18 @@ The request body does not contain a valid `model` field.
 
 **Fix:** Include `"model": "<model-id>"` in the request body.
 
-### `403 model requires a verified account`
+### Some models are restricted in the Console
 
-The model exists in the catalog, but your account can't call it yet. This is a per-model access gate, separate from the credential-scope and branch-lineage `403`s above. It's the same condition the `enabled` field reports in `GET /v1/models`: a model with `"enabled": false` returns this error when called. The response body looks like this:
+On your project's **AI Gateway** page, locked models show a padlock, and the **Some models are restricted** section lists them grouped by reason. Each reason links to the fix:
 
-```json
-{
-  "error": {
-    "message": "model requires a verified account"
-  }
-}
-```
+| Message                                                 | What to do                                                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **A paid plan is required to use these models**         | Select **Upgrade plan**. The AI Gateway is available on paid plans only.                    |
+| **AI Gateway credits are required to use these models** | Select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits). |
+| **Your account is restricted from using these models**  | [Contact Support](/docs/introduction/support).                                              |
+| **Some models are not available to your account**       | [Contact Support](/docs/introduction/support).                                              |
 
-**Fix:** List `GET /v1/models` and filter on `enabled` to see which models your account can call (see [Check what your account can call](/docs/ai-gateway/models#check-what-your-account-can-call)). If you're on a paid plan with prepaid credits and still can't call a model, [contact Support](/docs/introduction/support).
+After you upgrade or buy credits, models unlock once Neon confirms access. Reload the page if a model still shows as locked.
 
 ---
 

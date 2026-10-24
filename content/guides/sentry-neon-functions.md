@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-15T16:33:34.223Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
@@ -90,9 +90,9 @@ Pulled 3 Neon variables into .env.local
   Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
-INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts - the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions.
+Created hello.ts - the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function `hello.ts` that returns `"Hello from Neon Functions"`.
@@ -500,8 +500,8 @@ export const config = defineConfig({
       name: "Sentry-Instrumented API",
       source: "./src/index.ts",
       env: {
-        SENTRY_DSN: process.env.SENTRY_DSN!,
-        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
+        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
         SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
         PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
       },
@@ -515,7 +515,7 @@ export default config;
 Here's what each property does:
 
 - **`functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
-- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
+- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically. `SENTRY_DSN` and `SENTRY_RELEASE` are declared only when they have a value, so leaving one empty skips it instead of failing `parseEnv`.
 - **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
 Apply the configuration and deploy your function to Neon:
@@ -711,8 +711,8 @@ Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway:
       name: "Sentry-Instrumented API",
       source: "./src/index.ts",
       env: {
-        SENTRY_DSN: process.env.SENTRY_DSN!,
-        SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
+        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
+        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
         SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
         PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
         AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]

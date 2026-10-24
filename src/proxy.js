@@ -6,7 +6,7 @@ import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
 import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
-import { trackLLMPageview } from './utils/llm-analytics';
+import { createLLMAnalytics } from './utils/llm-analytics';
 import { markdownNotFoundResponse } from './utils/markdown-404';
 
 const SITE_URL =
@@ -159,8 +159,8 @@ const STATIC_MD = new Set(STATIC_MD_PATHS);
 // isContentRoute branch would otherwise apply (this short-circuit runs before it)
 // plus the LLM read beacon. Without this, static skill files would lose the
 // X-Robots-Tag: noindex they get on the isContentRoute path and become indexable.
-function servedStaticMarkdown(req) {
-  trackLLMPageview(req);
+function servedStaticMarkdown(analytics) {
+  analytics.track({ branch: 'static-markdown' });
   const response = applyDocHeaders(NextResponse.next());
   response.headers.set('X-Robots-Tag', 'noindex');
   return response;
@@ -178,7 +178,7 @@ function skillAliasTarget(pathname) {
   return match ? `/docs/ai/skills/${match[1]}/SKILL.md` : null;
 }
 
-function staticMarkdownResponse(req, pathname) {
+function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
 
   // Skill-discovery alias: no physical file here — a next.config rewrite maps it
@@ -187,33 +187,48 @@ function staticMarkdownResponse(req, pathname) {
   // falling through would fire again in the agent branch for agent UAs.
   const aliasTarget = skillAliasTarget(pathname);
   if (aliasTarget !== null) {
-    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(req);
-    trackLLMPageview(req, { is404: true });
+    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(analytics);
+    analytics.track({ is404: true, branch: 'missing-skill-alias' });
     return markdownNotFoundResponse(pathname, { source: 'agent-404' });
   }
 
   // Real static file (SKILL.md, references, prompts, /pricing.md): serve it as-is.
   // Checked before getMarkdownPath because some static files also have a
   // CUSTOM_MARKDOWN_PATHS mapping (e.g. /pricing.md) — the file is right here.
-  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(req);
+  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(analytics);
 
   // Has a generated /md sibling → let the existing fetch-based branch serve it
   // (or return its own markdown 404); both outcomes are tracked there.
   if (getMarkdownPath(pathname) !== null) return null;
 
   // No static file and no /md sibling → genuine miss.
-  trackLLMPageview(req, { is404: true });
+  analytics.track({ is404: true, branch: 'missing-static-markdown' });
   return markdownNotFoundResponse(pathname, { source: 'agent-404' });
 }
 
-export async function proxy(req) {
+export async function proxy(req, event) {
+  const analytics = createLLMAnalytics(req);
+  const response = await handleProxy(req, analytics);
+
+  if (analytics.beacon) {
+    if (event?.waitUntil) {
+      event.waitUntil(analytics.beacon);
+    } else {
+      // Direct callers without NextFetchEvent still complete the beacon safely.
+      await analytics.beacon;
+    }
+  }
+  analytics.logResponse(response);
+  return response;
+}
+
+async function handleProxy(req, analytics) {
   try {
     const { pathname } = req.nextUrl;
 
     // /blog/[slug].md — serve raw markdown from the in-repo blog snapshot (the
-    // same source the HTML post page renders from). Reading that snapshot needs
-    // the Node runtime (disk/fs), which this Edge middleware can't use, so
-    // rewrite to the Node route handler at /blog/[slug]/md, which reads it and
+    // same source the HTML post page renders from). Rewrite to
+    // the blog route handler at /blog/[slug]/md, which reads it and
     // fires the LLM read beacon. (Previously this fetched an external CDN that
     // stopped receiving new posts once the blog moved into this repo.)
     if (pathname.startsWith('/blog/') && pathname.endsWith('.md')) {
@@ -236,7 +251,7 @@ export async function proxy(req) {
 
     // Missing `.md` with no generated /md sibling → markdown 404 (real static
     // files pass through). Covers skills, .well-known, and arbitrary paths.
-    const staticMd = staticMarkdownResponse(req, pathname);
+    const staticMd = staticMarkdownResponse(pathname, analytics);
     if (staticMd) return staticMd;
 
     const isAgent = isAIAgentRequest(req);
@@ -250,16 +265,14 @@ export async function proxy(req) {
           const response = await fetch(markdownUrl);
 
           if (response.ok) {
-            trackLLMPageview(req);
+            analytics.track({ branch: 'agent-markdown' });
             const markdown = await response.text();
             return applyDocHeaders(
               new NextResponse(markdown, {
                 status: 200,
                 headers: {
                   'Content-Type': 'text/markdown; charset=utf-8',
-                  // Short TTL so a cached hit still re-enters the proxy and fires the
-                  // LLM read beacon (which runs only here). A long s-maxage lets the
-                  // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                  // Preserve the existing short Markdown cache policy.
                   'Cache-Control': 'public, max-age=60, s-maxage=300',
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
@@ -280,7 +293,7 @@ export async function proxy(req) {
         }
       }
 
-      trackLLMPageview(req, { is404: agentHit404 });
+      analytics.track({ is404: agentHit404, branch: 'agent-fallback' });
 
       if (agentHit404) {
         return markdownMovedOr404Response(req, pathname, 'agent-404');
@@ -318,7 +331,7 @@ export async function proxy(req) {
             // double-count (a browser only ever reaches this branch).
             const isMarkdown404 = response.status === 404;
             if (!isAgent && (response.ok || isMarkdown404)) {
-              trackLLMPageview(req, { is404: isMarkdown404 });
+              analytics.track({ is404: isMarkdown404, branch: 'direct-markdown' });
             }
 
             if (response.ok) {
@@ -328,9 +341,7 @@ export async function proxy(req) {
                   status: 200,
                   headers: {
                     'Content-Type': 'text/markdown; charset=utf-8',
-                    // Short TTL so a cached hit still re-enters the proxy and fires the
-                    // LLM read beacon (which runs only here). A long s-maxage lets the
-                    // CDN replay hits for a day, silently zeroing agent pageview tracking.
+                    // Preserve the existing short Markdown cache policy.
                     'Cache-Control': 'public, max-age=60, s-maxage=300',
                     'X-Content-Source': 'markdown',
                     'X-Robots-Tag': 'noindex',

@@ -47,8 +47,9 @@ const json = (body, status = 200) =>
 //   /models?model=gpt-5-4-mini&use_case=image-generation
 //
 // Core model data comes from the same ./models.json/data.json this site already serves, so the
-// two endpoints cannot drift on the facts they share. CI enforces that — see
-// src/scripts/check-models-endpoint-sync.js.
+// two endpoints cannot drift on the facts they share. CI enforces that on the committed file (see
+// src/scripts/check-models-endpoint-sync.js); the build-time refresh keeps every id in
+// ./capabilities.json in the catalog.
 export function GET(request) {
   const { searchParams } = request.nextUrl;
 

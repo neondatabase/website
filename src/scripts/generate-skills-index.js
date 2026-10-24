@@ -40,8 +40,9 @@ const AI_CATALOG_PATH = path.resolve(__dirname, '../app/.well-known/ai-catalog.j
 const SCHEMA_0_2_0 = 'https://schemas.agentskills.io/discovery/0.2.0/schema.json';
 
 // AI Catalog (https://ai-catalog.io/) static scaffolding. The host block and the
-// non-skill MCP server entry are stable; the skill entries are generated from the
-// same SKILL.md frontmatter as the agent-skills index, so descriptions match.
+// non-skill MCP server entries (product and docs) are stable; the skill entries are
+// generated from the same SKILL.md frontmatter as the agent-skills index, so
+// descriptions match.
 const AI_CATALOG_HOST = {
   displayName: 'Neon',
   identifier: 'neon.com',
@@ -51,11 +52,21 @@ const AI_CATALOG_HOST = {
 
 const AI_CATALOG_MCP_ENTRY = {
   identifier: 'urn:air:neon.com:mcp:neon',
+  displayName: 'Neon MCP Server',
   type: 'application/mcp-server-card+json',
   url: 'https://neon.com/.well-known/mcp/server-card.json',
   description:
     'Neon MCP server for managing Neon Postgres projects, branches, databases, and running SQL from AI agents and MCP clients.',
   tags: ['postgres', 'database', 'mcp', 'neon'],
+};
+
+const AI_CATALOG_DOCS_MCP_ENTRY = {
+  identifier: 'urn:air:neon.com:mcp:neon-docs',
+  displayName: 'Neon Docs MCP Server',
+  type: 'application/mcp-server-card+json',
+  url: 'https://neon.com/.well-known/mcp/docs-server-card.json',
+  description: 'Search and read Neon documentation over MCP. No authentication required.',
+  tags: ['docs', 'documentation', 'mcp', 'neon'],
 };
 
 const AI_CATALOG_SKILL_BASE_URL = 'https://neon.com/.well-known/agent-skills/';
@@ -103,7 +114,7 @@ async function discoverSkills(configSkillNames) {
       continue;
     }
 
-    const { data: frontmatter } = matter(content);
+    const { data: frontmatter, content: body } = matter(content);
 
     if (!frontmatter.name || !frontmatter.description) {
       console.warn(
@@ -115,9 +126,12 @@ async function discoverSkills(configSkillNames) {
     // Normalize multi-line YAML strings to a single line
     const description = String(frontmatter.description).replace(/\s+/g, ' ').trim();
 
+    // The SKILL.md H1 is the human-readable title (AI Catalog `displayName`)
+    const title = body.match(/^# (.+)$/m)?.[1].trim() || frontmatter.name;
+
     const digest = 'sha256:' + crypto.createHash('sha256').update(content).digest('hex');
 
-    skills.push({ name: frontmatter.name, description, digest });
+    skills.push({ name: frontmatter.name, title, description, digest });
   }
 
   return skills;
@@ -152,8 +166,10 @@ function buildAiCatalog(skills) {
     host: AI_CATALOG_HOST,
     entries: [
       AI_CATALOG_MCP_ENTRY,
-      ...skills.map(({ name, description }) => ({
+      AI_CATALOG_DOCS_MCP_ENTRY,
+      ...skills.map(({ name, title, description }) => ({
         identifier: `urn:air:neon.com:skill:${name}`,
+        displayName: title || name,
         type: 'application/agent-skills+md',
         url: `${AI_CATALOG_SKILL_BASE_URL}${name}/SKILL.md`,
         description,

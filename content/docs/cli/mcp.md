@@ -49,7 +49,7 @@ The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `co
 By default the server exposes every MCP tool. Use these flags to narrow what an agent can do:
 
 - `--read-only` hides the write tools by adding `?readonly=true` to the server URL.
-- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, and `storage`.
+- `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `endpoints`, `snapshots`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, `docs`, `functions`, `storage`, and `realtime`.
 - `--project-id <id>` pins the tools to a single Neon project with `?projectId=`, and limits a newly minted key to that project.
 
 `--read-only` and `--category` shape the server URL only; they don't change a key's scope, and neither does reusing an already-configured key.
@@ -91,12 +91,12 @@ neon mcp --oauth --project --agent cursor
 ```
 
 ```text
-INFO: Wrote /home/user/my-app/.cursor/mcp.json
-INFO: URL: https://mcp.neon.tech/mcp
+Wrote /home/user/my-app/.cursor/mcp.json
+URL: https://mcp.neon.tech/mcp
 MCP
 Agent   Status
 cursor  installed
-INFO: The agent will prompt for Neon sign-in on first use.
+The agent will prompt for Neon sign-in on first use.
 ```
 
 Give the agent read-only access:

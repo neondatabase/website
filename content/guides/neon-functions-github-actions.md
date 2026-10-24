@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-10-07T03:48:49.832Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That fits a workflow where every environment gets its own isolated function.
@@ -83,9 +83,9 @@ Pulled 3 Neon variables into .env.local
   Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
-INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts, the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions.
+Created hello.ts, the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function, `hello.ts`, at your project root and a `.env.local` file with your project's variables, including `DATABASE_URL`.
@@ -394,8 +394,8 @@ neon deploy \
 
 A few flags make the command safe to run unattended on a CI runner:
 
-- **`--update-existing`**: Answers "yes" when the deploy would override something already on the branch, so the CLI doesn't stop and ask for confirmation.
-- **`--allow-protected`**: Does the same for a production branch marked as [protected](/docs/guides/protected-branches). It's a no-op if the branch isn't protected.
+- **`--update-existing`**: Answers "yes" when the deploy would override something already on the branch. A CI runner has no terminal to prompt in, so without this flag the deploy stops with an error instead.
+- **`--allow-protected`**: Does the same for a production branch marked as [protected](/docs/guides/protected-branches). It's a no-op if the branch isn't protected. `-y` answers both at once, but naming each flag keeps the workflow explicit about what it allows.
 - **`--no-env-pull`**: Skips writing the branch's variables to a local `.env` file, which there's no use for on a throwaway runner.
 
 Because every job installs the CLI and runs this same deploy logic, the workflow scales to any number of functions. `neon deploy` applies whatever's in your `neon.ts`, and the steps that list URLs pick up every function on the branch, so you never need to touch the YAML when you add a function.

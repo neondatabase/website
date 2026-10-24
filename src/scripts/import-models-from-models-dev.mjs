@@ -3,15 +3,14 @@
  * Import model entries into src/app/models.json/data.json from a resolved
  * models.dev catalog.
  *
- * data.json is the source of truth and is authored here. This is a convenience
- * for the one thing models.dev genuinely does for us: it resolves `base_model`
- * inheritance, so an entry that only declares a base model and a price comes
- * back with the modalities, limits and dates filled in. Pulling that in beats
- * copying twenty fields by hand.
+ * Production builds refresh data.json from the Neon AI Gateway
+ * (scripts/update-models-from-ai-gateway.mjs), which overwrites every field the
+ * gateway supplies. What an import contributes past a build is only what the
+ * gateway lacks: `released`, `last_updated` and `cost.input_audio`. Use it to
+ * fill those for a new model, or to populate the committed fallback offline.
  *
- * It merges the models you name and leaves every other entry untouched. That is
- * the difference that matters: this file routinely holds models and prices that
- * models.dev does not have yet, and a wholesale regenerate would delete them.
+ * It merges the models you name and leaves every other entry untouched, because
+ * this file can hold models that models.dev does not have yet.
  *
  * `--from` takes a local file, so you do not have to wait for an upstream PR to
  * merge and redeploy. Build the resolved catalog from a models.dev checkout with

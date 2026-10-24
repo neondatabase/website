@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-19T16:37:42.945Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.
@@ -73,7 +73,36 @@ You can also view active connections on the [Monitoring page](/docs/introduction
 
 Connection pooling solves the `max_connections` limit by maintaining a pool of reusable connections. Instead of opening a new Postgres connection for each client, PgBouncer routes multiple client connections through a smaller pool of actual Postgres connections.
 
-![Connection](/docs/connect/connection.png)
+```mermaid
+flowchart LR
+  subgraph client["Client application"]
+    c1["user 1"]
+    c2["user 1"]
+    c3["..."]
+    c4["user 2"]
+    c5["user 1"]
+  end
+
+  subgraph pooler["PgBouncer connection pooler"]
+    p1["user1/database1 pool"]
+    p2["user2/database1 pool"]
+    p3["user1/database2 pool"]
+  end
+
+  subgraph postgres["Postgres (max_connections limit)"]
+    d1[("database 1")]
+    d2[("database 2")]
+  end
+
+  c1 --> p1
+  c2 --> p1
+  c3 --> p1
+  c4 --> p2
+  c5 --> p3
+  p1 --> d1
+  p2 --> d1
+  p3 --> d2
+```
 
 _The diagram shows how multiple client connections from different users route through separate PgBouncer pools (one per user/database combination), which share a limited number of actual Postgres connections to access the databases._
 

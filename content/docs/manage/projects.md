@@ -14,7 +14,7 @@ summary: >-
   projects can be recovered within a 7-day window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-10-02T04:38:24.068Z'
+updatedOn: '2026-10-23T14:11:22.712Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -45,7 +45,7 @@ You can create a project from the Console or the Neon CLI. To create one with th
 4. Under **Services**, choose what to enable. **Postgres database** is on by default (expand it to set the **Postgres version**). Where the selected region supports them, you can also enable **Object storage**, **Functions**, **AI gateway**, and **Neon Auth**. Services that aren't available in the selected region aren't shown.
 5. Click **Create project**.
 
-After creating a project, you are directed to the **Project Dashboard**.
+After creating a project, you are directed to the project's **Overview** page.
 
 </TabItem>
 
@@ -81,7 +81,7 @@ The **Settings** page includes these tabs:
 - **Postgres**: Configure project-wide database defaults (all labeled **Applies to all branches**): compute defaults (size and scale to zero) for new computes, the history window for [instant restore](/docs/introduction/branch-restore) and [Time Travel](/docs/guides/time-travel-assist), your [update schedule](/docs/manage/updates), [logical replication](/docs/guides/logical-replication-guide), and the [Data API](/docs/data-api/overview).
 - **Networking**: Control **Public internet access** (allow any IP address or restrict to an [IP allowlist](/docs/introduction/ip-allow)) and **VPC access** ([Private Networking](/docs/guides/neon-private-networking)).
 - **Credentials**: Manage branch-scoped, per-service credentials, used as S3 access keys for [Object Storage](/docs/storage/overview) and as Bearer API tokens for the [AI Gateway](/docs/ai-gateway/overview).
-- **Auth**: Configure [Neon Auth](/docs/auth/overview): application info and URLs, trusted redirect domains, email sign-up and sign-in, OAuth providers, the email provider, and webhooks.
+- **Auth**: Configure [Managed Better Auth](/docs/auth/overview): application info and URLs, trusted redirect domains, email sign-up and sign-in, OAuth providers, the email provider, and webhooks.
 - **Functions**: Manage [custom domains](/docs/compute/functions/custom-domains) for your [Neon Functions](/docs/compute/functions/overview).
 - **HIPAA compliance**: Enable [HIPAA compliance](/docs/security/hipaa) for the project.
 - **Sharing** and **Project permissions**: Invite external collaborators and grant organization members per-project access. See [User permissions](/docs/manage/user-permissions).
@@ -125,7 +125,7 @@ Also note that adjusting the history window affects _all_ branches in your proje
 To configure the history window:
 
 1. Select a project in the Neon Console.
-2. On your **Project Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**.
 4. Under **History window**, use the slider to choose how long to keep change history.
 5. Click **Save**.
@@ -193,10 +193,10 @@ Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wi
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the **Project Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Networking**.
 4. Under **Public internet access**, select **Only addresses on the allowlist**, then specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
+5. Optionally, under **Restricted branches**, select **Protected branches only** to enforce the allowlist only on branches you've designated as protected. Every other branch keeps accepting any address.
 6. Click **Save changes**.
 
 </TabItem>
@@ -207,7 +207,7 @@ The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configurat
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
-Id              wispy-haze-123456
+ID              wispy-haze-123456
 Name            wispy-haze-123456
 IP Addresses    203.0.113.0, 203.0.113.1
 Protected Only  false
@@ -314,11 +314,10 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon Console.
-2. On the **Project Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Networking**.
-4. Under **Public internet access**, clear the allowlisted IP addresses.
-5. If applicable, clear the **Restrict IP Access to protected branches only** checkbox.
-6. Click **Save changes**.
+4. Under **Public internet access**, select **Any IP address**.
+5. Click **Save changes**.
 
 </TabItem>
 
@@ -379,7 +378,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 <TabItem>
 
 1. Select your project in the Neon Console.
-2. On the **Project Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then find **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
@@ -439,7 +438,11 @@ To delete a project:
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select the project that you want to delete.
 3. Select **Settings**.
-4. Select **Delete**.
+4. On the **General** tab, under **Delete project**, select **Delete project**.
+
+<Admonition type="note">
+Deleting a project doesn't release its [custom domains](/docs/compute/functions/custom-domains#delete-a-custom-domain). Delete any domains you want to reuse before you delete the project.
+</Admonition>
 
 <Admonition type="note">
 For HIPAA-compliant projects, see [HIPAA Compliance](/docs/security/hipaa#delete-a-hipaa-compliant-project) before deleting a project—for example, to export audit logs you may need.
@@ -776,6 +779,30 @@ For attribute definitions, find the [List projects](/docs/reference/api/projects
 
 </details>
 
+### Count projects with the API
+
+To get the number of projects without paging through the list, use the following Neon API method. It counts active projects only. Projects that are being created, or that were deleted and are still within the recovery window, aren't included. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/count-projects).
+
+```http
+GET /projects/count
+```
+
+If you use a personal API key, include the `org_id` parameter to specify the organization. With an org API key, the organization is inferred from the key.
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/count?org_id=org-example-12345678' \
+ -H 'Accept: application/json' \
+ -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+The response contains the count:
+
+```json
+{
+  "count": 12
+}
+```
+
 ### Update a project with the API
 
 The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/update-project).
@@ -990,9 +1017,9 @@ The command returns details about the recovered project.
 
 ```bash
 neon projects recover crimson-voice-12345678
-Id          crimson-voice-12345678
+ID          crimson-voice-12345678
 Name        myproject
-Region Id   aws-us-east-2
+Region ID   aws-us-east-2
 Created At  2026-04-15T11:17:30Z
 ```
 

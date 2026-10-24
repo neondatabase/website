@@ -138,6 +138,23 @@ describe('ModelIndexClient', () => {
     expect(screen.getByText('Showing 1 model.')).toBeInTheDocument();
   });
 
+  it('lists decision models only under the Decisions tab, not Text', () => {
+    const decision = createRow({
+      id: 'example-decision',
+      name: 'Example Decision',
+      inputs: [],
+      inputsLabel: '—',
+      isDecision: true,
+    });
+    render(<ModelIndexClient rows={[...rows, decision]} variant="landing" />);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Decisions' }));
+    expect(getVisibleModelNames()).toEqual(['Example Decision']);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Text' }));
+    expect(getVisibleModelNames()).not.toContain('Example Decision');
+  });
+
   it('closes the provider listbox when focus leaves the control', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 

@@ -53,8 +53,8 @@ const CHECKS = [
       }
       if (!json.$schema) return 'missing $schema field';
       if (!json.remotes?.[0]?.url) return 'missing remotes[0].url';
-      if (!json.remotes[0].url.includes('?category=docs'))
-        return `remotes[0].url should include ?category=docs (got ${json.remotes[0].url})`;
+      if (json.remotes[0].url !== 'https://neon.com/docs/mcp')
+        return `remotes[0].url should be https://neon.com/docs/mcp (got ${json.remotes[0].url})`;
       if (json.remotes[0].headers)
         return 'remotes[0].headers should be absent — this endpoint is unauthenticated';
       return null;
