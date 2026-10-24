@@ -34,6 +34,8 @@ The `api_token` and `s3_secret_access_key` are printed once, so store them right
 
 In the Neon Console, click **Connect** at the top of the sidebar and open the **Storage** tab. Use the client selector to pick **S3 client**, **Files SDK**, or **Python** for a ready-to-run snippet, or **Parameters only** for the raw `.env`. Click **Reveal credential** to show `AWS_SECRET_ACCESS_KEY`, **Copy credentials** to copy it, or **Rotate credentials** to issue new keys.
 
+![Connect to your branch modal with the Storage tab open](/docs/connect/connect_to_branch_storage_tab.png)
+
 To create a separate credential with only the scopes you need, open your project's **Settings** > **Credentials**, select **Create credential**, enter a name, and choose `storage:read`, `storage:write`, or both. Copy the secret right away.
 
 ```text
