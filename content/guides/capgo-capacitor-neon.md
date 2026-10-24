@@ -12,7 +12,7 @@ Capacitor runs your web app inside a WebView on iOS and Android, where the [Mana
 The [`@capgo/capacitor-neon`](https://github.com/Cap-go/capacitor-neon) plugin solves this by running the auth flow in native code, where it signs users in with URLSession on iOS and OkHttp on Android, stores the session in the iOS Keychain or in app-private storage on Android, and gives your JavaScript a JWT that the [Neon Data API](/docs/data-api/overview) accepts.
 
 <Admonition type="important" title="Community-maintained plugin">
-`@capgo/capacitor-neon` is a community-maintained plugin published by Capgo, not an official Neon SDK. Report bugs and feature requests in the [plugin's GitHub repository](https://github.com/Cap-go/capacitor-neon/issues). For the full API reference, see the [Capgo plugin docs](https://capgo.app/docs/plugins/neon/).
+`@capgo/capacitor-neon` is a community-maintained plugin published by [Capgo](https://capgo.app), not an official Neon SDK. Report bugs and feature requests in the [plugin's GitHub repository](https://github.com/Cap-go/capacitor-neon/issues). For the full API reference, see the [Capgo plugin docs](https://capgo.app/docs/plugins/neon/).
 </Admonition>
 
 In this guide, you'll build a React and Capacitor todo app for iOS and Android with [email and password](/docs/auth/quick-start/react) and [Google](/docs/auth/guides/setup-oauth) sign-in, and store each user's todos in Neon behind [Row-Level Security (RLS)](/docs/guides/row-level-security), with everything on Neon set up from the Neon CLI. The complete source code for the app is available in the [neon-capacitor-todos-app](https://github.com/rishi-raj-jain/neon-capacitor-todos-app) repository on GitHub.
