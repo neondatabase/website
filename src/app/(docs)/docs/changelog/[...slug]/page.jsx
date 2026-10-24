@@ -120,6 +120,7 @@ const ChangelogPost = async ({ currentSlug }) => {
           <Content
             className="w-full max-w-full prose-h3:text-xl [&>*:first-child]:pt-4"
             content={content}
+            expandDetails
           />
         </article>
       </div>
