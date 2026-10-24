@@ -7,7 +7,7 @@ summary: >-
   Also covers deploying a function from a Neon Function Registry template,
   checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-23T18:16:58.837Z'
+updatedOn: '2026-10-24T11:11:10.465Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -177,7 +177,9 @@ neon dev                   # serves the function at http://localhost:8787
 neon deploy
 ```
 
-`neon functions new` ends with a `Next:` list of the exact commands for that template, including the packages to install. If a template needs environment variables, such as an API key for a third-party service, it adds their names to `.env.example`. Set the values in `.env.local`, export them in your shell for `neon dev`, and deploy with `neon deploy --env .env.local`.
+The function name is the template ID with any hyphens removed, so `neon functions new context-dev` creates a `contextdev` function in `functions/contextdev/`.
+
+`neon functions new` ends with a `Next:` list of the exact commands for that template, including the packages to install. The list may end with `neon config apply`, which does the same thing as `neon deploy`. If a template needs environment variables, such as an API key for a third-party service, it adds their names to `.env.example`. Set the values in `.env.local`, which `neon dev` loads automatically, and deploy with `neon deploy --env .env.local`. Without `--env`, the deploy fails because the variables are undefined.
 
 Templates live in the [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) folder of the `neondatabase/examples` repository. Anyone can propose a new template by opening a pull request. Neon reviews each one before it's published. See the registry's [contributing guide](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md). For all command options, see [`neon functions new`](/docs/cli/functions#new).
 
