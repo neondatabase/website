@@ -9,7 +9,7 @@ summary: >-
   wal_level to logical for all databases in the Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations. In this guide, you will learn how to define your Lakebase Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
@@ -205,7 +205,7 @@ To complete your source setup, click **Set up source** in the Airbyte UI. Airbyt
 
 To complete your data integration setup, you can now add Snowflake as your destination.
 
-### Prerequisites
+### Prerequisites (#prerequisites-2)
 
 - A Snowflake account with the `ACCOUNTADMIN` role. If you're using a company account, you may need to contact your Snowflake administrator to set one up for you.
 

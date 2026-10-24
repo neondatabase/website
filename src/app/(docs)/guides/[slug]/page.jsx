@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
+import JsonLd from 'components/shared/json-ld';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
 import { GUIDES_BASE_PATH } from 'constants/guides';
@@ -13,6 +14,7 @@ import {
   getGuideNavigationItems,
   getNavigationLinks,
 } from 'utils/api-guides';
+import getArticleSchema from 'utils/get-article-schema';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -65,22 +67,19 @@ const GuidePost = async (props) => {
   const authorID = data.author;
   const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.title,
-    author: {
-      '@type': 'Organization',
-      name: 'Neon',
-    },
-  };
+  const jsonLd = getArticleSchema({
+    title: data.title,
+    description: data.summary || data.subtitle || postBySlug.excerpt,
+    datePublished: data.createdAt,
+    dateModified: data.updatedOn,
+    url: data.canonical || `${VERCEL_URL}${LINKS.guides}/${slug}`,
+    image: `${VERCEL_URL}/api/og?title=${Buffer.from(data.title).toString('base64')}`,
+    authors: [{ '@type': 'Person', name: author.name }],
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Post
         content={content}
         data={data}

@@ -52,7 +52,7 @@ To follow along this guide, you will need the following:
 - A [Neon](https://console.neon.tech/signup) account
 - An [AWS](https://aws.amazon.com/free) account
 
-# Steps
+## Steps
 
 - [Provisioning a Serverless Postgres powered by Neon](#provisioning-a-serverless-postgres-powered-by-neon)
 - [Create a new Astro application](#create-a-new-astro-application)

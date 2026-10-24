@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-09-26T00:49:26.569Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.
@@ -455,7 +455,7 @@ Like other index types, it’s faster to create an index after loading your init
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
-#### Check indexing progress
+#### Check indexing progress (#check-indexing-progress-2)
 
 You can check indexing progress with the following query:
 

@@ -117,7 +117,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
             ? 'overflow-hidden rounded-none! border border-gray-new-20 bg-[rgba(19,20,21,0.60)]! shadow-none! dark:bg-none! sm:flex-col! sm:items-start! sm:gap-5!'
             : 'gap-0! overflow-hidden rounded-none! border border-gray-new-20 bg-[rgba(19,20,21,0.60)]! p-3! shadow-none! dark:bg-none!')
       )}
-      id="changelog-form"
+      id={isInArticle ? 'blog-changelog-form' : 'changelog-form'}
     >
       {isBlog ? (
         <div className="relative z-20">
@@ -172,6 +172,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           )}
           type="email"
           name="email"
+          aria-label="Email address"
           value={email}
           placeholder="Your email..."
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}

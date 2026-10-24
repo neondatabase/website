@@ -247,7 +247,7 @@ The branch metrics endpoint returns per-branch consumption data across one or mo
 GET https://console.neon.tech/api/v2/consumption_history/v2/branches
 ```
 
-### Metrics
+### Metrics (#metrics-2)
 
 Six of the eight project metrics are available on this endpoint:
 
@@ -262,7 +262,7 @@ Six of the eight project metrics are available on this endpoint:
 
 `extra_branches_month` and `snapshot_storage_bytes_month` are not available on this endpoint. Use the [project metrics endpoint](#request-overview) for those.
 
-### Required parameters
+### Required parameters (#required-parameters-2)
 
 - **`project_ids`** (array of strings, 1-100, required): Projects to include. Unlike the project endpoint, `project_ids` is always required here.
 - **`from`** (date-time, required): Start of the consumption period in RFC 3339 format.
@@ -271,13 +271,13 @@ Six of the eight project metrics are available on this endpoint:
 - **`org_id`** (string, required): Organization ID.
 - **`metrics`** (array of strings, required): One or more of the six supported metrics above.
 
-### Optional parameters
+### Optional parameters (#optional-parameters-2)
 
 - **`branch_ids`** (array of strings, up to 100): Filter to specific branches. If omitted, all branches in the specified projects are returned.
 - **`limit`** (integer, 1-1000): Branches per page. Default: 100.
 - **`cursor`** (string): Pagination cursor from the previous response.
 
-### Example request and response
+### Example request and response (#example-request-and-response-2)
 
 ```bash shouldWrap
 curl --request GET \

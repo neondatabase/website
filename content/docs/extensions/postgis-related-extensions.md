@@ -11,7 +11,7 @@ summary: >-
   with normalize_address. Each extension section includes a CREATE EXTENSION
   statement and working SQL examples.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:
@@ -170,7 +170,7 @@ CREATE EXTENSION IF NOT EXISTS h3 CASCADE;
 CREATE EXTENSION IF NOT EXISTS h3_postgis CASCADE;
 ```
 
-### Example usage
+### Example usage (#example-usage-2)
 
 We will show how to use H3 to analyze ride-sharing data in a large city, focusing on the distribution of pickup locations.
 
@@ -300,7 +300,7 @@ Enable the extension by running the following SQL statement:
 CREATE EXTENSION IF NOT EXISTS postgis_sfcgal CASCADE;
 ```
 
-### Example usage
+### Example usage (#example-usage-3)
 
 We will illustrate the use of SFCGAL to perform some urban planning tasks.
 
@@ -425,7 +425,7 @@ Enable the extension by running the following SQL statement:
 CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder CASCADE;
 ```
 
-### Example usage
+### Example usage (#example-usage-4)
 
 **Use Tiger Geocoder to normalize an address**
 

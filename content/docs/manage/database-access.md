@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.
@@ -190,7 +190,7 @@ To create a read-write role:
    dbname=> INSERT INTO <table_name> (col1, col2) VALUES (1, 2);
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-2)
 
 To create the read-write role and user described above, run the following statements from an SQL client:
 
@@ -278,7 +278,7 @@ To get started:
    dbname=>
    ```
 
-### SQL statement summary
+### SQL statement summary (#sql-statement-summary-3)
 
 ```sql
 -- dev_users role

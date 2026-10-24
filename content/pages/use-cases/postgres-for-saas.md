@@ -41,7 +41,7 @@ author={{
 
 ---
 
-### Database branching
+### Database branching (#database-branching-feature)
 
 A branch in Neon is a copy-on-write clone of your database. Branches include both schema and data. Teams use them to create ephemeral environments for development, testing, and preview environments.
 
@@ -68,7 +68,7 @@ Ephemeral Environments for Dev/Test
 
 ---
 
-### Autoscaling
+### Autoscaling (#autoscaling-feature)
 
 Neon dynamically adjusts the amount of resources allocated to your database in response to the current load, eliminating the need for manual intervention.
 
@@ -85,7 +85,7 @@ Performance for high connections
 
 ---
 
-### Serverless
+### Serverless (#serverless-feature)
 
 Neon abstracts away the concept of servers so that you can focus on building your SaaS, not managing your database.
 

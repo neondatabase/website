@@ -12,7 +12,7 @@ summary: >-
   structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Reference documentation for the Managed Better Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -187,7 +187,7 @@ The middleware automatically:
 - Redirects unauthenticated users to the login page
 - Refreshes session tokens when needed
 
-### Parameters
+### Parameters (#parameters-2)
 
 <details>
 <summary>View parameters</summary>
@@ -232,7 +232,7 @@ Retrieves the current session in Server Components, Server Actions, and API Rout
 
 Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies.
 
-### Returns
+### Returns (#returns-2)
 
 | Field   | Type            | Description                                          |
 | ------- | --------------- | ---------------------------------------------------- |
@@ -301,7 +301,7 @@ export async function GET() {
 
 Sign in with email and password. Use in Server Actions for form-based authentication.
 
-### Parameters
+### Parameters (#parameters-3)
 
 <details>
 <summary>View parameters</summary>
@@ -340,7 +340,7 @@ export async function signIn(formData: FormData) {
 
 Sign in with OAuth provider like Google, GitHub, etc.
 
-### Parameters
+### Parameters (#parameters-4)
 
 <details>
 <summary>View parameters</summary>
@@ -370,7 +370,7 @@ const { data, error } = await auth.signIn.social({
 
 Sign in with email OTP (one-time password). First call `emailOtp.sendVerificationOtp()` to send the code.
 
-### Parameters
+### Parameters (#parameters-5)
 
 <details>
 <summary>View parameters</summary>
@@ -400,7 +400,7 @@ const { data, error } = await auth.signIn.emailOtp({
 
 Create a new user account with email and password.
 
-### Parameters
+### Parameters (#parameters-6)
 
 <details>
 <summary>View parameters</summary>
@@ -454,7 +454,7 @@ export async function signOut() {
 
 Update the current user's profile. Password updates require the password reset flow for security.
 
-### Parameters
+### Parameters (#parameters-7)
 
 <details>
 <summary>View parameters</summary>
@@ -484,7 +484,7 @@ const { data, error } = await auth.updateUser({
 
 Change the current user's password.
 
-### Parameters
+### Parameters (#parameters-8)
 
 <details>
 <summary>View parameters</summary>
@@ -516,7 +516,7 @@ const { data, error } = await auth.changePassword({
 
 Send email verification to the current user.
 
-### Parameters
+### Parameters (#parameters-9)
 
 <details>
 <summary>View parameters</summary>
@@ -559,7 +559,7 @@ const { data, error } = await auth.deleteUser();
 
 Send a one-time password via email. Available when Email OTP authentication is enabled.
 
-### Parameters
+### Parameters (#parameters-10)
 
 <details>
 <summary>View parameters</summary>
@@ -587,7 +587,7 @@ const { data, error } = await auth.emailOtp.sendVerificationOtp({
 
 Verify email with OTP code.
 
-### Parameters
+### Parameters (#parameters-11)
 
 <details>
 <summary>View parameters</summary>
@@ -632,7 +632,7 @@ const { data, error } = await auth.listSessions();
 
 Revoke a specific session by ID.
 
-### Parameters
+### Parameters (#parameters-12)
 
 <details>
 <summary>View parameters</summary>
@@ -675,7 +675,7 @@ const { data, error } = await auth.revokeOtherSessions();
 
 Create a new organization. Available when the organizations plugin is enabled.
 
-### Parameters
+### Parameters (#parameters-13)
 
 <details>
 <summary>View parameters</summary>
@@ -720,7 +720,7 @@ const { data, error } = await auth.organization.list();
 
 Invite a member to an organization.
 
-### Parameters
+### Parameters (#parameters-14)
 
 <details>
 <summary>View parameters</summary>
@@ -752,7 +752,7 @@ const { data, error } = await auth.organization.inviteMember({
 
 List all users. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-15)
 
 <details>
 <summary>View parameters</summary>
@@ -782,7 +782,7 @@ const { data, error } = await auth.admin.listUsers({
 
 Ban a user. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-16)
 
 <details>
 <summary>View parameters</summary>
@@ -812,7 +812,7 @@ const { data, error } = await auth.admin.banUser({
 
 Set a user's role. Available for users with admin role.
 
-### Parameters
+### Parameters (#parameters-17)
 
 <details>
 <summary>View parameters</summary>

@@ -252,6 +252,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/guides/cloudflare_sandbox_neon_branching.png',
+        destination: '/docs/guides/cloudflare_sandbox_neon_branching.jpg',
+        permanent: true,
+      },
+      {
         source: '/pg-us-conf-raffle',
         destination: '/pg-eu-conf-raffle',
         permanent: true,

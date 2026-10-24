@@ -70,6 +70,7 @@ import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
 import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
+import rehypeTaskListLabels from 'lib/rehype-task-list-labels';
 import { cn } from 'utils/cn';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -287,7 +288,7 @@ const Content = ({
               // Adds support for GitHub Flavored Markdown
               remarkGfm,
             ],
-            rehypePlugins: [getCodeProps],
+            rehypePlugins: [getCodeProps, rehypeTaskListLabels],
           },
           blockJS: false,
           blockDangerousJS: true,

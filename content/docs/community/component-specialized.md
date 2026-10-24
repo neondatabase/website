@@ -92,15 +92,17 @@ Components for embedding and displaying multimedia content.
 
 ### YoutubeIframe
 
+Set `title` to a descriptive video name for screen readers. Use `start={seconds}` to begin at a specific time. Existing query parameters in `embedId` are preserved.
+
 Embedded YouTube video player.
 
 ```mdx
-<YoutubeIframe embedId="IcoOpnAcO1Y" />
+<YoutubeIframe embedId="IcoOpnAcO1Y" title="Create anonymized database previews with Neon and Neosync" />
 ```
 
 **Live preview:**
 
-<YoutubeIframe embedId="IcoOpnAcO1Y" />
+<YoutubeIframe embedId="IcoOpnAcO1Y" title="Create anonymized database previews with Neon and Neosync" />
 
 ---
 

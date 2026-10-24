@@ -10,7 +10,7 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:18:46.317Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -267,7 +267,7 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.te
 
 Keep your connection string handy for later use.
 
-### Create a new Worker project
+### Create a new Worker project (#create-a-new-worker-project-2)
 
 Run the following command in a terminal window to set up a new Cloudflare Workers project:
 
@@ -301,7 +301,7 @@ We'll develop and test the application locally before deploying it to Cloudflare
 
 The `create-cloudflare` CLI installs the `Wrangler` CLI to manage the full workflow of testing and managing your Worker applications.
 
-### Implement the Worker script
+### Implement the Worker script (#implement-the-worker-script-2)
 
 We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the Neon database, so you need to install it as a dependency:
 
@@ -326,7 +326,7 @@ export default {
 
 The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.
 
-### Test the worker application locally
+### Test the worker application locally (#test-the-worker-application-locally-2)
 
 You first need to configure the `DATABASE_URL` environment variable to point to our Neon database. You can do this by creating a `.dev.vars` file at the root of the project directory with the following content:
 

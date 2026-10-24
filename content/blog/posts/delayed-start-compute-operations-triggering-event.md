@@ -45,7 +45,7 @@ seo:
 
 _For further details, read the_ [top-level Post-Mortem](https://neon.com/blog/postmortem-delayed-start-compute-operations)_._
 
-# Summary
+## Summary
 
 The Neon Control Plane service is backed by a Postgres database. A scheduled job in the Control plane, _Activity Monitor,_ is responsible for identifying Computes that are ready to be suspended. A Postgres query executed by this job against the region’s control plane database changed its [execution plan](https://www.postgresql.org/docs/current/using-explain.html).
 
@@ -53,13 +53,13 @@ Different execution plans can cause dramatic performance changes – in this cas
 
 This resulted in IP Allocation failures – the specifics of which are described in the [top-level Postmortem](https://neon.com/blog/postmortem-delayed-start-compute-operations).
 
-# Architecture
+## Architecture
 
 Behind the Neon Console is the Neon Control Plane service. It is a regional Golang service which orchestrates many supporting functions, but primarily it starts and suspends Neon Postgres VMs, which we call “_Computes_”. Neon’s Serverless architecture requires the Control Plane to start _Computes_ when customers execute SQL statements, and suspend them if there are no statements executed for a (configurable) period of time. We call this functionality, [scale-to-zero](https://neon.com/docs/guides/scale-to-zero-guide).
 
 The mechanism that suspends _Computes_ is called the “_Activity Monitor_”, a scheduled job running inside the Neon Control Plane that evaluates running computes, and identifies those which can be suspended.
 
-## Chain of events
+### Chain of events
 
 The _Activity Monitor_ relies on a Postgres SQL query, which contains several joins, including one against the `computes` table. The `computes` table contains rows for every _Compute_ which has been started or made idle.
 
@@ -89,7 +89,7 @@ During the incident, and in other regions afterwards:
 - In the medium-term, we intend to move all historical data outside of the ‘hot’ control plane OLTP backing database into an OLAP system.
 - We have considered moving the _Activity Monitor_ to read from a Postgres read replica. Unfortunately, this is not a viable option due to its need for reading consistent (not stale) results and making transactional writes.
 
-# Next steps
+## Next steps
 
 One item we’re currently working on is understanding the exact conditions that lead to a change in execution plan. We observed different behaviours by region, depending on the shape of the `computes` table in each backing database.
 
