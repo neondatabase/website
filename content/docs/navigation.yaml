@@ -919,6 +919,14 @@
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
+        - section: Function Registry
+          tag: new
+          tagTheme: green
+          items:
+            - title: Overview
+              slug: compute/functions/registry
+            - title: Templates
+              slug: compute/functions/registry/templates
         - section: Function Triggers
           items:
             - title: Overview

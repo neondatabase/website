@@ -601,6 +601,12 @@ const componentHandlers = {
     return parseMarkdownToNodes(renderAiGatewayModelIndex());
   },
 
+  FunctionRegistryCards() {
+    return parseMarkdownToNodes(
+      'Browse [Function Registry templates](/docs/compute/functions/registry/templates). Catalog: [registry.json](https://neon.com/functions/registry/registry.json).'
+    );
+  },
+
   /**
    * StatBlock -> the figure inlined as one sentence
    * <StatBlock value="59%">of companies saw a failure.</StatBlock>
