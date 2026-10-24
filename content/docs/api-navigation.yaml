@@ -26,9 +26,15 @@
     - title: "Add domain to redirect_uri whitelist"
       slug: reference/api/auth/add-branch-neon-auth-trusted-domain
       method: POST
+    - title: "Create an OAuth client"
+      slug: reference/api/auth/create-neon-auth-o-auth-client
+      method: POST
     - title: "Create new auth user"
       slug: reference/api/auth/create-branch-neon-auth-new-user
       method: POST
+    - title: "Delete an OAuth client"
+      slug: reference/api/auth/delete-neon-auth-o-auth-client
+      method: DELETE
     - title: "Delete auth user"
       slug: reference/api/auth/delete-branch-neon-auth-user
       method: DELETE
@@ -47,8 +53,14 @@
     - title: "List domains in redirect_uri whitelist"
       slug: reference/api/auth/list-branch-neon-auth-trusted-domains
       method: GET
+    - title: "List OAuth clients"
+      slug: reference/api/auth/list-neon-auth-o-auth-clients
+      method: GET
     - title: "List OAuth providers for the branch"
       slug: reference/api/auth/list-branch-neon-auth-oauth-providers
+      method: GET
+    - title: "Retrieve an OAuth client"
+      slug: reference/api/auth/get-neon-auth-o-auth-client
       method: GET
     - title: "Retrieve email and password configuration"
       slug: reference/api/auth/get-neon-auth-email-and-password-config
@@ -68,12 +80,21 @@
     - title: "Retrieve Neon Auth webhook configuration"
       slug: reference/api/auth/get-neon-auth-webhook-config
       method: GET
+    - title: "Retrieve OAuth provider plugin configuration"
+      slug: reference/api/auth/get-neon-auth-o-auth-provider-plugin
+      method: GET
     - title: "Retrieve phone number plugin configuration"
       slug: reference/api/auth/get-neon-auth-phone-number-plugin
       method: GET
+    - title: "Rotate an OAuth client secret"
+      slug: reference/api/auth/rotate-neon-auth-o-auth-client-secret
+      method: POST
     - title: "Send test email using the saved email provider"
       slug: reference/api/auth/send-neon-auth-email-provider-test
       method: POST
+    - title: "Update an OAuth client"
+      slug: reference/api/auth/update-neon-auth-o-auth-client
+      method: PATCH
     - title: "Update auth configuration"
       slug: reference/api/auth/update-neon-auth-config
       method: PATCH
@@ -97,6 +118,9 @@
       method: PUT
     - title: "Update OAuth provider"
       slug: reference/api/auth/update-branch-neon-auth-oauth-provider
+      method: PATCH
+    - title: "Update OAuth provider plugin configuration"
+      slug: reference/api/auth/update-neon-auth-o-auth-provider-plugin
       method: PATCH
     - title: "Update organization plugin configuration"
       slug: reference/api/auth/update-neon-auth-organization-plugin
@@ -480,6 +504,9 @@
       method: GET
     - title: "Retrieve project details"
       slug: reference/api/projects/get-project
+      method: GET
+    - title: "Retrieve projects count"
+      slug: reference/api/projects/count-projects
       method: GET
     - title: "Revoke project access"
       slug: reference/api/projects/revoke-permission-from-project

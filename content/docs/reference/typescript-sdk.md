@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:54:26.415Z'
+updatedOn: '2026-10-21T12:44:07.000Z'
 ---
 
 <InfoBlock>
@@ -406,12 +406,14 @@ const { data: deployment } = await neon.functions.deploy({
 
 ## neon.credentials
 
-Branch-scoped credentials with explicit scopes. Secrets (`api_token`, `s3_secret_access_key`) are returned once, on `create`. <small>REST: [Credentials API](/docs/reference/api/credentials)</small>
+Branch-scoped credentials with explicit scopes. Secrets (`api_token`, `s3_secret_access_key`) are returned by `create`, `reveal`, and `rotate`. <small>REST: [Credentials API](/docs/reference/api/credentials)</small>
 
 | Method                                     | Returns                    | Arguments                                                                                                                             |
 | ------------------------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `list({ projectId, branchId })`            | `CredentialMeta[]`         |                                                                                                                                       |
 | `create({ projectId, branchId, ... })`     | `CreateCredentialResponse` | Fields: `{ name?, scopes, principal_type: "user" }`. Scopes: `storage:read`, `storage:write`, `ai_gateway:invoke`, `functions:invoke` |
+| `reveal({ projectId, branchId, tokenId })` | `CredentialSecret`         |                                                                                                                                       |
+| `rotate({ projectId, branchId, tokenId })` | `RotateCredentialResponse` |                                                                                                                                       |
 | `revoke({ projectId, branchId, tokenId })` | `void`                     |                                                                                                                                       |
 
 ## neon.aiGateway

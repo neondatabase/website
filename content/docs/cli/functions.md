@@ -1,10 +1,10 @@
 ---
 title: 'Neon CLI command: functions'
-subtitle: 'Deploy, list, inspect, and delete Neon Functions, and manage their custom domains'
+subtitle: 'Create, deploy, list, inspect, and delete Neon Functions, and manage their custom domains'
 summary: >-
-  The Neon CLI `neon functions` command manages Neon Functions on a branch: deploy,
-  list, get, and delete functions, and register and manage their custom domains with
-  the `domains` subcommands.
+  The Neon CLI `neon functions` command manages Neon Functions on a branch: create
+  functions from Function Registry templates, deploy, list, get, and delete functions,
+  and register and manage their custom domains with the `domains` subcommands.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cli/function
@@ -13,6 +13,86 @@ redirectFrom:
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev).
 
 <CliSubcommands command="functions" />
+
+## neon functions new (#new)
+
+Creates a function from a Neon Function Registry template. It writes the template's files to `functions/<slug>/` and declares the function in `neon.ts`, creating the file if needed. It doesn't need a project or a signed-in session.
+
+<CliUsage command="functions new" />
+
+<CliOptions command="functions new" />
+
+A `router` template becomes one function, with a generated `index.ts` that routes each URL path to an operation. A `separate` template declares one function per operation under slugs the template sets, so `--slug` only renames the directory.
+
+If the template needs environment variables, the command declares them in `neon.ts` and adds their names, without values, to `.env.example`. Set the values in your env file and pass it to `neon config apply --env`; the `Next:` list prints the exact command. For `neon dev`, export them in your shell.
+
+Create a function from the `basic` template:
+
+```bash
+neon functions new basic --no-install
+```
+
+```text filename="Output"
+Function created.
+-----------------
+
+  Template      Basic function (Neon)
+  Function      basic
+  Directory     functions/basic
+  Config        neon.ts created: added functions.basic
+  Dependencies  not installed
+
+Next:
+  npm install @neon/config @neon/env
+  neon dev
+  neon config apply
+```
+
+Use your own slug and skip `neon.ts`:
+
+```bash
+neon functions new basic --slug hello --no-add-to-config
+```
+
+```text filename="Output"
+Function created.
+-----------------
+
+  Template   Basic function (Neon)
+  Function   hello
+  Directory  functions/hello
+  Config     not added
+
+Next:
+  neon dev --source functions/hello/index.ts
+  neon functions deploy hello --src functions/hello/index.ts
+```
+
+Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To try an unmerged template, set `NEON_FUNCTION_REGISTRY_DIR` to a local copy of that directory. New templates are added over time, so run [`neon functions templates list`](#templates-list) to see what's available.
+
+## neon functions templates (#templates)
+
+Browse the templates in the Neon Function Registry.
+
+<CliSubcommands command="functions templates" anchorParts="templates" />
+
+### neon functions templates list (#templates-list)
+
+Lists the templates you can pass to [`neon functions new`](#new).
+
+<CliUsage command="functions templates list" />
+
+<CliOptions command="functions templates list" />
+
+```bash
+neon functions templates list
+```
+
+```text filename="Output"
+ID           Title                 Provider     Description
+basic        Basic function        Neon         A minimal Neon Function with a JSON response.
+context-dev  Context.dev web data  Context.dev  Search the web and news, read pages, answer questions, and retrieve brand data with Context.dev.
+```
 
 ## neon functions deploy (#deploy)
 

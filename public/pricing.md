@@ -37,7 +37,7 @@ Invoices under $0.50 are not collected.
 | Snapshots (scheduled)            | -                                                      | Yes ($0.09/GB-month)                                  | Yes ($0.09/GB-month)                                             |
 | Public network transfer (egress) | 5 GB per project included                              | 500 GB per project included, then $0.10/GB            | 500 GB per project included, then $0.10/GB                       |
 | Private network transfer         | -                                                      | -                                                     | $0.01/GB                                                         |
-| Auth (MAU)                       | Up to 60k MAU                                          | Up to 1M MAU                                          | Up to 1M MAU                                                     |
+| Auth (MAU)                       | Up to 60k MAU per project                              | Up to 1M MAU per project                              | Up to 1M MAU per project                                         |
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
 | Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
 | AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
@@ -107,6 +107,6 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 - Get started: https://neon.com/signup
 - Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
 - Get up to $100k in credits for your startup: https://neon.com/startups
-- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Get monthly sponsorship for maintaining open source: https://neon.com/programs/open-source.md
 - Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
 - More plan details: https://neon.com/docs/introduction/plans.md

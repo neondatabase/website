@@ -19,6 +19,7 @@
  * - Steps -> extracts children
  * - DetailIconCards -> bullet list with links
  * - CompactCards -> bullet list with links or prompt links
+ * - DemoCards -> bullet list of demos with live demo and GitHub links
  * - <a> with href/description -> markdown link
  * - <details>/<summary> -> preserved as HTML
  * - CTA -> blockquote with title, description, command, link
@@ -119,6 +120,13 @@ const SHARED_CONTENT_COMPONENTS = {
   NextjsProxyNote: 'nextjs-proxy-note',
   AuthAISetup: 'auth-ai-setup',
   AuthAISetupTip: 'auth-ai-setup-tip',
+  RealtimeSdkBackend: 'realtime-sdk-backend',
+  RealtimeSdkClient: 'realtime-sdk-client',
+  RealtimeSdkReact: 'realtime-sdk-react',
+  RealtimeSdkTanstackDb: 'realtime-sdk-tanstack-db',
+  RealtimeSdkDrizzle: 'realtime-sdk-drizzle',
+  RealtimeSdkDrizzleClient: 'realtime-sdk-drizzle-client',
+  RealtimeSdkKysely: 'realtime-sdk-kysely',
 };
 
 /**
@@ -316,6 +324,18 @@ function normalizeQuotes(text) {
       "'"
     )
     .replace(/[\u201C\u201D\u201E\u201F\u2033\u275D\u275E\uFF02]/g, '"');
+}
+
+/**
+ * Normalize non-breaking spaces to regular spaces
+ *
+ * Markdown parsing already decodes an authored &nbsp; to U+00A0, so matching the
+ * character alone covers prose. A literal &nbsp; only ever survives inside a code
+ * span or fence, where it is source the reader copies and must be left alone.
+ */
+function normalizeNonBreakingSpaces(text) {
+  if (!text) return text;
+  return text.replace(/\u00A0/g, ' ');
 }
 
 /**
@@ -878,6 +898,46 @@ const componentHandlers = {
 
     return links.length > 0
       ? { type: 'list', ordered: false, spread: false, children: links }
+      : null;
+  },
+
+  /**
+   * DemoCards -> bullet list of demos with description, stack and links
+   * <DemoCards><DemoCard title="1 Million Boxes" description="..." stack="Postgres, Realtime" demo="https://..." github="https://..." /></DemoCards>
+   */
+  DemoCards(node) {
+    const cards = findJsxElements(node, 'DemoCard');
+
+    if (cards.length === 0) {
+      return node.children?.length > 0 ? node.children : null;
+    }
+
+    const items = cards
+      .map((card) => {
+        const title = getAttr(card, 'title');
+        if (!title) return null;
+
+        const description = getAttr(card, 'description');
+        const stack = getAttr(card, 'stack');
+        const links = [
+          ['Live demo', getAttr(card, 'demo')],
+          ['GitHub', getAttr(card, 'github')],
+        ].filter(([, url]) => url);
+
+        const children = [{ type: 'strong', children: [{ type: 'text', value: title }] }];
+        if (description) children.push({ type: 'text', value: `: ${description}` });
+        if (stack) children.push({ type: 'text', value: ` Uses ${stack}.` });
+        links.forEach(([label, url], index) => {
+          children.push({ type: 'text', value: index === 0 ? ' ' : ' · ' });
+          children.push({ type: 'link', url, children: [{ type: 'text', value: label }] });
+        });
+
+        return { type: 'listItem', children: [{ type: 'paragraph', children }] };
+      })
+      .filter(Boolean);
+
+    return items.length > 0
+      ? { type: 'list', ordered: false, spread: false, children: items }
       : null;
   },
 
@@ -2274,6 +2334,9 @@ async function processFile(inputPath, pageUrl, rootDir) {
 
   // Normalize smart quotes to straight quotes (matches Python behavior)
   output = normalizeQuotes(output);
+
+  // Non-breaking spaces are web typography only, so agents get plain spaces
+  output = normalizeNonBreakingSpaces(output);
 
   return { content: output, title: frontmatter.title || null };
 }

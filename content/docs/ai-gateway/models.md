@@ -6,10 +6,12 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-05T19:21:27.285Z'
+updatedOn: '2026-10-23T19:28:25.610Z'
 ---
 
-This page covers how to call models through Neon AI Gateway and the rules that apply. The full model catalog, with every model and copy-paste quickstart, is on the [AI Gateway overview](/docs/ai-gateway/overview#available-models).
+This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
+
+<CTA title="See every model on Neon AI Gateway" description="Compare every available model by provider, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
 
 Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
@@ -67,16 +69,17 @@ Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) 
 
 All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
 
-| Provider                                       | Recommended endpoint   | Notes                                                                                        |
-| ---------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
-| OpenAI (most models)                           | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                        |
-| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions                  |
-| Anthropic Claude                               | `/v1/chat/completions` | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching |
-| Google Gemini                                  | `/v1/chat/completions` | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                |
-| Google Gemma 3 12B                             | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                               |
-| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions` | Chat completions only                                                                        |
-| Alibaba (chat models)                          | `/v1/chat/completions` | Chat completions only                                                                        |
-| Alibaba (embedding models)                     | `/v1/embeddings`       | No chat completions — returns a vector, not text                                             |
+| Provider                                       | Recommended endpoint     | Notes                                                                                                    |
+| ---------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| OpenAI (most models)                           | `/v1/chat/completions`   | Use `/openai/v1/responses` for Responses API features                                                    |
+| OpenAI (`gpt-5-3-codex`, `gpt-5-5-pro`)        | `/openai/v1/responses`   | These models require the Responses API and don't work with chat/completions                              |
+| Anthropic Claude                               | `/v1/chat/completions`   | Use `/anthropic/v1/messages` with the Anthropic SDK for extended thinking and prompt caching             |
+| Google Gemini                                  | `/v1/chat/completions`   | Use `/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK                            |
+| Google Gemma 3 12B                             | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                           |
+| Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions`   | Chat completions only                                                                                    |
+| Alibaba (chat models)                          | `/v1/chat/completions`   | Chat completions only                                                                                    |
+| Alibaba, BAAI (embedding models)               | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
+| TypeSafe (decision models)                     | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
 For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
@@ -100,6 +103,8 @@ Each inference dialect is reachable at two equivalent paths: a shorter top-level
 
 The shorter form isn't a uniform `/v1/<dialect>` rule. The unified chat completions endpoint is a bare `/v1/chat/completions`, matching the OpenAI and OpenRouter convention. The native dialects are prefixed by provider instead, and each keeps its own upstream version segment so the path matches what that provider's SDK expects: `/openai/v1/...`, `/anthropic/v1/...`, and `/gemini/v1beta/...`.
 
+Decisions are the exception: they're served only at `/typesafe/v1/systemone`.
+
 Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
 | Shorter path                                         | Equivalent to                                              |
@@ -111,7 +116,7 @@ Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-g
 
 ### List available models
 
-`GET /v1/models` lists the model catalog in an OpenRouter-shaped response, authenticated the same way as the endpoints above. Unlike the inference dialects, the model list has only this `/v1/models` path, with no `/ai-gateway/...` form.
+`GET /v1/models` lists the model catalog in an OpenRouter-shaped response, authenticated the same way as the endpoints above. Unlike the inference dialects, the model list has only this `/v1/models` path, with no `/ai-gateway/...` form. Decision models are also listed at `GET /typesafe/v1/models`; see [Decisions](/docs/ai-gateway/decisions#list-the-models).
 
 ```bash shouldWrap
 curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
@@ -176,7 +181,7 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                                                              |
+| Meta          | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                            |
 
 <Admonition type="important">
 Use of AI Gateway is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.

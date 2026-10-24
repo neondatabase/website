@@ -412,6 +412,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/jacob-prall.jpg",
     "photoAlt": "Jacob Prall"
   },
+  "james-arthur": {
+    "name": "James Arthur",
+    "role": "Engineering at Databricks, Co-founder of Electric",
+    "url": "https://linkedin.com/in/thruflo",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/james-arthur.jpg",
+    "photoAlt": "James Arthur"
+  },
   "jasraj-dange": {
     "name": "Jasraj Dange",
     "role": "Databricks Engineering",
@@ -642,6 +649,13 @@
     "url": "https://twitter.com/rishi_raj_jain_",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/rishi-raj-jain.jpg",
     "photoAlt": "Rishi Raj Jain"
+  },
+  "robert-haas": {
+    "name": "Robert Haas",
+    "role": "Postgres Committer, Databricks",
+    "url": null,
+    "photo": "/apple-touch-icon.png",
+    "photoAlt": "Robert Haas"
   },
   "rodney-sherwin-shibu": {
     "name": "Rodney Sherwin Shibu",

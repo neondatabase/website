@@ -47,6 +47,12 @@ Pull only the variables for the services you name, ignoring `neon.ts`. Repeat `-
 neon env pull --service ai-gateway --service postgres
 ```
 
+For [Realtime](/docs/realtime/overview), the pull writes `NEON_REALTIME_URL` and `NEON_REALTIME_SECRET`. With `--service realtime`, if Realtime is still provisioning on the branch (for example, right after [`neon realtime enable`](/docs/cli/realtime#enable)) or [rotating its secret](/docs/cli/realtime#rotate-secret), the pull waits until it's ready. `--service realtime` on its own doesn't write `DATABASE_URL`, so name `postgres` too when you need both:
+
+```bash
+neon env pull --service postgres --service realtime
+```
+
 Use a specific `neon.ts` policy instead of the one in the project directory (next to the nearest `.neon`, or the current directory when there's no `.neon`):
 
 ```bash

@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-09-01T16:04:17.197Z'
+updatedOn: '2026-10-17T02:29:50.049Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours (`project.expires_at`) and are capped at 100 MB storage and 1 GB transfer. Claim codes expire in 15 minutes (`expires_in`). Those are two clocks.
@@ -41,6 +41,8 @@ neon claim create \
   --service auth \
   --env-pull
 ```
+
+`neon claim create` uses `aws-us-east-2` unless you pass `--region-id`, for example `--region-id aws-eu-central-1`.
 
 The CLI saves the project's identity assertion in its secure credential store. Existing commands then use the claimable project automatically:
 
@@ -117,6 +119,8 @@ Content-Type: application/json
 
 `postgres` is always requested. Add `data_api` or `auth` only when the app needs them.
 
+`region_id` is optional. Without it, the project is created in `aws-us-east-2`. Pass any AWS [region](/docs/introduction/regions) that accepts new projects, for example `"region_id": "aws-eu-central-1"`.
+
 The response has this shape:
 
 ```json
@@ -126,6 +130,7 @@ The response has this shape:
   "project": {
     "id": "quiet-fog-12345678",
     "branch_id": "br-...",
+    "region_id": "aws-us-east-2",
     "expires_at": "2026-08-14T12:00:00.000Z"
   },
   "capabilities": [

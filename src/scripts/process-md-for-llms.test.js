@@ -277,6 +277,22 @@ Hidden content here.
       expect(result).not.toContain('<TechCards');
     });
 
+    it('should convert DemoCards to a list of demos with links', async () => {
+      const result = await processInlineMdx(`
+<DemoCards>
+<DemoCard title="1 Million Boxes" description="A multiplayer game." stack="Postgres, Realtime" demo="https://one-million-boxes.vercel.app" github="https://github.com/samwillis/one-million-boxes" image="/docs/realtime/examples/one-million-boxes.png" />
+<DemoCard title="Image jobs" description="Live image processing." github="https://github.com/msfstef/neon-realtime-image-jobs" />
+</DemoCards>
+`);
+      expect(result).toContain(
+        '- **1 Million Boxes**: A multiplayer game. Uses Postgres, Realtime. [Live demo](https://one-million-boxes.vercel.app) · [GitHub](https://github.com/samwillis/one-million-boxes)'
+      );
+      expect(result).toContain(
+        '- **Image jobs**: Live image processing. [GitHub](https://github.com/msfstef/neon-realtime-image-jobs)'
+      );
+      expect(result).not.toContain('<DemoCard');
+    });
+
     it('should extract InfoBlock children', async () => {
       const result = await processInlineMdx(`
 <InfoBlock>
@@ -688,6 +704,61 @@ See [CONN_MAX_AGE](https://example.com).
     });
   });
 
+  // Non-breaking spaces are web typography and should not reach agents
+  describe('Non-breaking spaces', () => {
+    const NBSP = '\u00A0';
+
+    async function processInlineMdx(mdxContent, frontmatter = 'title: Test') {
+      const tempPath = '/tmp/test-nbsp-conversion.md';
+      await fs.writeFile(tempPath, `---\n${frontmatter}\n---\n${mdxContent}`);
+      return (await processFile(tempPath)).content;
+    }
+
+    it('should convert the &nbsp; entity to a regular space', async () => {
+      const result = await processInlineMdx(`
+Share your feedback via the&nbsp;[Neon&nbsp;Console](https://example.com).
+`);
+      expect(result).toContain('via the [Neon Console](https://example.com)');
+      expect(result).not.toContain('&nbsp;');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code fence', async () => {
+      const result = await processInlineMdx(`
+\`\`\`jsx
+<h1>Community Message Board&nbsp;</h1>
+\`\`\`
+`);
+      expect(result).toContain('<h1>Community Message Board&nbsp;</h1>');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code span', async () => {
+      const result = await processInlineMdx(`
+Use \`&nbsp;\` to stop the wrap.
+`);
+      expect(result).toContain('`&nbsp;`');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert a literal U+00A0 character to a regular space', async () => {
+      const result = await processInlineMdx(`
+Built for apps${NBSP}and${NBSP}agents.
+`);
+      expect(result).toContain('Built for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert non-breaking spaces in the subtitle', async () => {
+      const result = await processInlineMdx(
+        'Body text.',
+        `title: Test\nsubtitle: 'Realtime live SQL for apps${NBSP}and${NBSP}agents.'`
+      );
+      expect(result).toContain('Realtime live SQL for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+  });
+
   // Test index pointer
   describe('Index pointer', () => {
     it('should not include index pointer in processFile output (moved to page header)', async () => {
@@ -1056,6 +1127,13 @@ See [CONN_MAX_AGE](https://example.com).
         'NextSteps',
         'NewPricing',
         'AzureRegionsDeprecation',
+        'RealtimeSdkBackend',
+        'RealtimeSdkClient',
+        'RealtimeSdkReact',
+        'RealtimeSdkTanstackDb',
+        'RealtimeSdkDrizzle',
+        'RealtimeSdkDrizzleClient',
+        'RealtimeSdkKysely',
         'CopyPrompt',
         'NeedHelp',
         'Comment',

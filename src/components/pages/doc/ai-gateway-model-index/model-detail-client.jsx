@@ -14,7 +14,12 @@ import highlight from 'lib/shiki';
 import { ENV_EXAMPLE, getAvailableModes, getInitialMode } from './model-examples';
 
 const EMPTY_LANGUAGES = [];
-const MODE_LABELS = { text: 'Text', image: 'Image', embeddings: 'Embeddings' };
+const MODE_LABELS = {
+  text: 'Text',
+  image: 'Image',
+  embeddings: 'Embeddings',
+  decisions: 'Decisions',
+};
 
 const HighlightedCode = ({ code, language }) => {
   const [html, setHtml] = useState('');
@@ -211,8 +216,9 @@ ModelDetailClient.propTypes = {
     text: PropTypes.arrayOf(PropTypes.object).isRequired,
     image: PropTypes.arrayOf(PropTypes.object).isRequired,
     embeddings: PropTypes.arrayOf(PropTypes.object).isRequired,
+    decisions: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings']).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image', 'embeddings', 'decisions']).isRequired,
 };
 
 export default ModelDetailClient;

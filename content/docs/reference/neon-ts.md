@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-10-13T00:38:52.280Z'
+updatedOn: '2026-10-15T16:33:34.223Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -86,7 +86,7 @@ To add any of these to an existing `neon.ts` without editing the file by hand, u
 | `functions`        | Record of slug → [function def](#functions)        | (none)  | [Neon Functions](/docs/compute/functions/overview). Long-running Node.js compute. The branch's service variables (`DATABASE_URL` and more) are injected at runtime; see [Environment variables](/docs/compute/functions/environment-variables) |
 | `buckets`          | Record of name → [bucket def](#buckets)            | (none)  | [Neon Object Storage](/docs/storage/overview). S3-compatible object storage, branched with your database. Injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`                                            |
 | `triggers`         | Record of name → [trigger def](#triggers)          | (none)  | [Function Triggers](/docs/compute/functions/triggers/overview). Invoke a function on a schedule or when an object is created in a bucket.                                                                                                      |
-| `preview.realtime` | `true`, `false`, [`{ allowedOrigins }`](#realtime) | (none)  | [Neon Realtime](/docs/cli/realtime). Live SQL query subscriptions. Injects `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET`                                                                                                                         |
+| `preview.realtime` | `true`, `false`, [`{ allowedOrigins }`](#realtime) | (none)  | [Neon Realtime](/docs/realtime/overview). Live SQL query subscriptions. Injects `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET`                                                                                                                    |
 
 <Admonition type="note" title="aiGateway, functions, and buckets moved out of preview">
 The `preview` block holds features that are still in preview, currently [`realtime`](#realtime). `aiGateway`, `functions`, and `buckets` used to live there too; `@neon/config` 1.6.0 and later accept them as the top-level keys shown here. Declaring those three under `preview` still works but logs a deprecation warning on `neon deploy`, so keep them there only if you're on a version earlier than 1.6.0. See [Troubleshooting](#troubleshooting) if a top-level config fails to apply on an older install.
@@ -152,15 +152,23 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
 
-`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
+`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string, so set each variable before you deploy and mark the read with `!`:
 
 ```ts
 env: {
-  API_KEY: process.env.API_KEY ?? "",
+  API_KEY: process.env.API_KEY!,
 }
 ```
 
-Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+Skip empty-string fallbacks like `?? ""`, because deploying an empty value deletes that variable from the live function. If you don't want to set a variable, remove its key from `neon.ts`. For an optional variable, declare it only when it has a value:
+
+```ts
+env: {
+  ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+}
+```
+
+Use `neon deploy --env .env.production` to load a `.env` file before evaluation. Commands that evaluate `neon.ts`, such as `neon deploy` and [`neon dev`](/docs/cli/dev#environment-variables), check that every `env` value is set and report any missing variable by name. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
 `bundler` controls how `source` becomes the deployed archive. The default, `"esbuild"`, bundles your source (TypeScript is compiled here). Set `"none"` to ship a prebuilt directory or file as-is, in which case the entry must be named `index.mjs` or `index.js`. This is the config form of the CLI's [`--no-bundle`](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy) flag. To use your own build system, set `bundler` to a function that receives the resolved function config and returns the files to deploy (a `FunctionBundle`, a record of path to file contents), so a framework that already emits its own build output can deploy it unchanged.
 
@@ -228,7 +236,7 @@ Bucket names follow S3 naming rules. `public_read` makes objects accessible with
 
 ### preview.realtime (#realtime)
 
-Enables [Neon Realtime](/docs/cli/realtime) on the branch, so clients can subscribe to live SQL queries. Requires `@neon/config` 1.9.0 or later. Pass `true`, or an object to set the browser origins allowed to connect:
+Enables [Neon Realtime](/docs/realtime/overview) on the branch, so clients can subscribe to live SQL queries. Requires `@neon/config` 1.9.0 or later. Pass `true`, or an object to set the browser origins allowed to connect:
 
 ```ts
 preview: {
@@ -240,7 +248,16 @@ preview: {
 
 Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, such as `https://app.example.com`. `*` allows every origin and can't be combined with others. `defineConfig` rejects invalid values before anything is sent. With `true`, any browser origin can connect unless the branch already has an origin list, which is kept. Allowed origins only restrict browsers, not server clients.
 
-On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon subscribe`](/docs/cli/subscribe).
+| Value                | What `neon deploy` does                                           |
+| -------------------- | ----------------------------------------------------------------- |
+| `true`               | Enables Realtime without changing allowed origins                 |
+| `{ allowedOrigins }` | Enables Realtime and sets the browser origins allowed to connect  |
+| `false`              | Disables Realtime                                                 |
+| omitted              | Leaves Realtime unmanaged: whatever the branch has stays as it is |
+
+Realtime is a static field, so the `branch` closure can't set it per branch.
+
+On `neon deploy`, a branch without Realtime gets it enabled. Changing `allowedOrigins` on a branch that already has Realtime, or setting `realtime: false` to disable it, is reported as a conflict unless you pass `--update-existing`. Omitting the key leaves the branch's Realtime as it is. To add it without editing the file by hand, use [`neon config add realtime`](/docs/cli/config#add-realtime); to stream a query from the terminal, use [`neon realtime subscribe`](/docs/cli/realtime#subscribe).
 
 ## Branch policy
 
@@ -364,12 +381,14 @@ env.storage.endpoint;             // AWS_ENDPOINT_URL_S3
 env.storage.region;               // AWS_REGION
 env.realtime.url;                 // NEON_REALTIME_URL        (env.realtime when preview.realtime enabled)
 env.realtime.secret;              // NEON_REALTIME_SECRET
-env.functions['<slug>'].baseUrl;  // a deployed function's URL, keyed by slug (env.functions when functions declared)
+env.functions?.['<slug>'].baseUrl; // NEON_FUNCTION_<SLUG>_BASE_URL (env.functions when functions declared and their URLs are set)
 ```
 
 Each namespace exists only when its service is declared: `env.auth` when `auth: true`, `env.storage` when you declare `buckets`, and so on. If you access a namespace your config doesn't declare, TypeScript catches it.
 
-`env.functions` (plural) is a map of every declared function's slug to its `baseUrl`. It's distinct from `env.function` (singular), which you get from `parseEnv(config, '<slug>')`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
+`env.functions` (plural) is a map of every declared function's slug to its `baseUrl`, read from `NEON_FUNCTION_<SLUG>_BASE_URL`. `neon env pull`, `neon dev`, and `neon-env run` set those variables, but deployed functions don't receive them, so `env.functions` is present only when every declared function's URL is set. Read it with optional chaining (`env.functions?.hello.baseUrl`). To require a URL, select its key explicitly: `parseEnv(config, ['NEON_FUNCTION_HELLO_BASE_URL'])` throws if it's missing. Requires `@neon/env` 1.6.2 or later; earlier versions throw inside deployed functions when these URLs are unset.
+
+`env.functions` is distinct from `env.function` (singular), which you get from `parseEnv(config, '<slug>')`: the scoped env for code running inside that function, exposing the `env` vars declared in its `neon.ts` definition.
 
 Pass an array of keys to validate and return only a subset. Useful when a process needs just one or two variables:
 

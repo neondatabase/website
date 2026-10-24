@@ -23,7 +23,7 @@ Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an a
 
 ## neon claim create (#create)
 
-Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service` for Data API, Managed Better Auth, or other services. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically.
+Creates a temporary project and saves its identity assertion. Postgres is always requested. Pass `--service` for Data API, Managed Better Auth, or other services. If a [`neon.ts`](/docs/reference/neon-ts) file is present, declared services are requested automatically. [Realtime](/docs/cli/realtime) isn't available until the project is claimed, so `--service` doesn't accept it and a `neon.ts` Realtime declaration isn't requested.
 
 <CliUsage command="claim create" />
 
@@ -38,6 +38,12 @@ neon claim create \
   --service data-api \
   --service auth \
   --env-pull
+```
+
+`claim create` uses `aws-us-east-2` unless you pass `--region-id` with another AWS [region](/docs/introduction/regions) that accepts new projects. The output includes the project's `region_id`.
+
+```bash
+neon claim create --region-id aws-eu-central-1
 ```
 
 `--env-pull` is on by default. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`.

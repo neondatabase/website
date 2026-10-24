@@ -33,21 +33,58 @@
 version: 1
 
 endpoints:
+  - id: mcp-well-known
+    name: MCP well-known document
+    description: >-
+      Bare /.well-known/mcp path in the MCP Registry server.json shape, pointing
+      agents that probe it at Neon's Streamable HTTP MCP endpoint. Mirrors the
+      official MCP Registry entry (com.neon/mcp); --live compares it against the
+      upstream server.json. Not advertised in the Link header; agents find it
+      by probing the path.
+    servedPath: /.well-known/mcp
+    upstream: https://raw.githubusercontent.com/neondatabase/mcp-server-neon/main/server.json
+    contentType: application/json
+    spec:
+      name: MCP Registry server.json
+      url: https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json
+      standard: true
+    validator: mcp-well-known
+    check: builder
+    builder: buildMcpWellKnown
+    routeFile: src/app/.well-known/mcp/route.js
+
   - id: mcp-server-card
     name: MCP server card
     description: >-
       Advertises Neon's MCP connect endpoint and OAuth self-onboarding to MCP
-      clients and discovery crawlers (e.g. integrations.sh).
+      clients and discovery crawlers. Carries the fields integrations.sh,
+      Mintlify, and the draft MCP server-card extension each read.
     servedPath: /.well-known/mcp/server-card.json
     contentType: application/json
     spec:
-      name: MCP server card
-      url: https://modelcontextprotocol.io
+      name: MCP server card (SEP-2127)
+      url: https://github.com/modelcontextprotocol/experimental-ext-server-card
       standard: true
     validator: mcp-server-card
     check: builder
     builder: buildMcpServerCard
     routeFile: src/app/.well-known/mcp/server-card.json/route.js
+
+  - id: docs-mcp-server-card
+    name: Docs MCP server card
+    description: >-
+      Server card for the no-auth Neon docs MCP server, so agents can find a
+      docs MCP surface alongside the product MCP server.
+    servedPath: /.well-known/mcp/docs-server-card.json
+    contentType: application/json
+    spec:
+      name: MCP server card (SEP-2127)
+      url: https://github.com/modelcontextprotocol/experimental-ext-server-card
+      standard: true
+    validator: docs-mcp-server-card
+    check: builder
+    builder: buildDocsMcpServerCard
+    routeFile: src/app/.well-known/mcp/docs-server-card.json/route.js
 
   - id: api-catalog
     name: API catalog
@@ -64,6 +101,23 @@ endpoints:
     check: builder
     builder: buildApiCatalog
     routeFile: src/app/.well-known/api-catalog/route.js
+
+  - id: integrations-json
+    name: integrations.sh declaration
+    description: >-
+      integrations.sh owner declaration listing Neon's integration surfaces (the
+      REST API, the MCP server, and the CLI) and the credential each one takes,
+      so the integrations.sh listing reflects them directly.
+    servedPath: /.well-known/integrations.json
+    contentType: application/json
+    spec:
+      name: integrations.sh integrations.json (v3)
+      url: https://integrations.sh/publishing/
+      standard: false
+    validator: integrations-json
+    check: builder
+    builder: buildIntegrationsJson
+    routeFile: src/app/.well-known/integrations.json/route.js
 
   - id: agent-skills-index
     name: Agent skills index

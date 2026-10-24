@@ -61,7 +61,7 @@ If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `confi
 neon config init
 ```
 
-Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
@@ -128,7 +128,7 @@ neon config add ai-gateway
 
 ### neon config add realtime (#add-realtime)
 
-Enables Neon Realtime by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
+Enables [Neon Realtime](/docs/realtime/overview) by setting `preview.realtime: true`. Pass `--allowed-origin` (repeatable) to set the browser origins allowed to connect instead, which writes `preview.realtime: { allowedOrigins: [...] }`. Each origin must be `*` or an `http` or `https` origin with no path, query, or fragment, and the command checks them before editing the file. See [`neon realtime enable`](/docs/cli/realtime#enable) for the full rules.
 
 <CliUsage command="config add realtime" />
 
@@ -147,7 +147,7 @@ Next: `neon config plan` to preview, `neon config apply` to provision.
 
 ### neon config add function (#add-function)
 
-Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it.
+Declares a [Neon Function](/docs/cli/functions) and creates its handler file. The handler defaults to `functions/<slug>.ts` (`.js` for a JavaScript config). A slug is 1 to 20 lowercase letters and digits, with no hyphens. Pass `--name` to set a display name (it defaults to the slug), or `--source` to register an existing handler relative to `neon.ts` without overwriting it. To start from a Function Registry template instead of the starter handler, use [`neon functions new`](/docs/cli/functions#new).
 
 <CliUsage command="config add function" />
 

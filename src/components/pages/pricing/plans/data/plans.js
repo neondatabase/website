@@ -156,11 +156,11 @@ export default {
       feature: {
         title: 'Managed Better Auth',
       },
-      free: 'Up to 60k MAUs',
+      free: 'Up to 60k MAUs per project',
       launch:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
       scale:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
     },
     {
       rows: '2',
@@ -234,6 +234,16 @@ export default {
         "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
         "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Realtime',
+        subtitle: 'Beta',
+      },
+      free: 'Free during beta',
+      launch: 'Free during beta<span>Compute and egress billed as usual</span>',
+      scale: 'Free during beta<span>Compute and egress billed as usual</span>',
     },
     {
       rows: '1',

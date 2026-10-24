@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-23T11:00:38.670Z'
 ---
 
 The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use it when you're already working with the `google-genai` SDK and want to keep your existing code. For most use cases, the [chat completions](/docs/ai-gateway/chat-completions) endpoint is simpler to set up and works with Gemini models via the OpenAI SDK.
@@ -36,6 +36,8 @@ This endpoint accepts Google models only:
 
 | Model ID                | Notes |
 | ----------------------- | ----- |
+| `gemini-3-8-flash`      |       |
+| `gemini-3-7-flash`      |       |
 | `gemini-3-6-flash`      |       |
 | `gemini-3-5-flash`      |       |
 | `gemini-3-5-flash-lite` |       |

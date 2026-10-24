@@ -46,6 +46,10 @@ const META = {
     desc: 'Ask the Neon assistant a question from the terminal.',
     examples: ['neon ask --prompt "How do schema-only branches work?"'],
   },
+  docs: {
+    desc: 'Search neon.com docs, guides, and more from the terminal.',
+    examples: ['neon docs search "reset a branch"'],
+  },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],
@@ -107,8 +111,8 @@ const META = {
     examples: ['neon dev'],
   },
   functions: {
-    desc: 'Deploy and manage Neon Functions on a branch.',
-    examples: ['neon functions deploy api --src ./api.ts'],
+    desc: 'Create, deploy, and manage Neon Functions on a branch.',
+    examples: ['neon functions new basic', 'neon functions deploy api --src ./api.ts'],
   },
   triggers: {
     desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',
@@ -131,12 +135,11 @@ const META = {
     examples: ['neon neon-auth enable'],
   },
   realtime: {
-    desc: 'Enable or disable Neon Realtime on a branch.',
-    examples: ['neon realtime enable --allowed-origin https://app.example.com'],
-  },
-  subscribe: {
-    desc: 'Stream a live SQL query with Neon Realtime.',
-    examples: ['neon subscribe "SELECT * FROM items"'],
+    desc: 'Manage Neon Realtime and subscribe to live queries.',
+    examples: [
+      'neon realtime enable --allowed-origin https://app.example.com',
+      'neon realtime subscribe "SELECT * FROM items"',
+    ],
   },
   orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
   'ip-allow': {

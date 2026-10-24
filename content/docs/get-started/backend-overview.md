@@ -238,7 +238,7 @@ const result = streamText({
 return result.toTextStreamResponse();
 ```
 
-Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. See the [model catalog](/docs/ai-gateway/models) for which models support what.
+Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. Set the tool's `model` option to `gpt-image-2`, because the default image model isn't available on AI Gateway. See the [model catalog](/docs/ai-gateway/models) for which models support what.
 
 <Admonition type="note" title="First call after a deploy">
 Right after `neon deploy` on a new branch, the first gateway call can return a `403` (`credential not authorized for this branch`) while the credential propagates. It clears within a few seconds, so retry.
@@ -353,5 +353,7 @@ A fast sanity check after deploy; each capability's get-started has the real tes
 ## Next steps
 
 **Reference for each capability:** [Storage](/docs/storage/get-started) · [Functions](/docs/compute/functions/get-started) · [AI Gateway](/docs/ai-gateway/get-started) · [Auth](/docs/auth/quick-start/nextjs-api-only) · [Postgres](/docs/serverless/serverless-driver)
+
+**Realtime:** [Realtime](/docs/realtime/overview). Live SQL and reactive DX on standard Postgres.
 
 <NeedHelp/>
