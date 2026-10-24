@@ -36,7 +36,18 @@ module.exports = {
     '/docs/auth/legacy/*',
   ],
   generateRobotsTxt: true,
-  additionalPaths: async (config) => [await config.transform(config, '/')],
+  additionalPaths: async (config) => {
+    const { getFunctionRegistryCatalog, registryTemplateDocsHref } =
+      await import('./src/utils/function-registry.js');
+    const templates = await getFunctionRegistryCatalog();
+    const paths = [
+      '/',
+      '/docs/compute/functions/registry',
+      '/docs/compute/functions/registry/templates',
+      ...templates.map((template) => registryTemplateDocsHref(template.id)),
+    ];
+    return Promise.all(paths.map((routePath) => config.transform(config, routePath)));
+  },
   robotsTxtOptions: {
     policies: [
       {
