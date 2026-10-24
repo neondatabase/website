@@ -7,7 +7,7 @@ createdAt: '2026-10-10T00:00:00.000Z'
 updatedOn: '2026-10-19T06:43:09.621Z'
 ---
 
-Most apps that use Stripe build their own copy of the Stripe data with webhooks. When something happens in Stripe, like a successful payment, Stripe sends a notification to your server, and your app writes a row to a table. That takes setup: an endpoint to receive the notifications, tables to store them, and code to retry failures. You also need a one-time import for the data that already existed. And each notification only describes what changed. To know a customer's current state, your app has to apply every event for that customer in order.
+A common way to keep Stripe data in your own database is with webhooks. When something happens in Stripe, like a successful payment, Stripe sends a notification to your server, and your app writes a row to a table. That takes setup: an endpoint to receive the notifications, tables to store them, and code to retry failures. You also need a one-time import for the data that already existed. And each notification only describes what changed. To know a customer's current state, your app has to apply every event for that customer in order.
 
 [Stripe Data Pipeline](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres) is a managed service that does all of that for you. It keeps a copy of your Stripe data in a Postgres database that you own, and keeps that copy up to date. Every Stripe resource you can list, from charges to subscriptions, becomes a table with typed columns. Changes show up in the database within a few seconds, though a few tables lag up to 10 minutes during the public preview (see [Preview limitations](#preview-limitations)). You query the current state directly, with no event handlers to write and no extra data store to run.
 
@@ -60,7 +60,7 @@ Once Stripe confirms it can connect, it creates the schema and a table for each 
 
 ## Verify the backfill
 
-Once the pipeline reports that the backfill is done, check that the data is really there. Open the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) for the project the pipeline is writing to and list the schemas:
+Once the pipeline reports that the backfill is done, check that the data is there. Open the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) for the project the pipeline is writing to and list the schemas:
 
 ```sql
 SELECT schema_name FROM information_schema.schemata ORDER BY schema_name;
@@ -198,6 +198,10 @@ Use it wherever the client asks for Postgres connection details. For client-spec
 
 ## IP Allow
 
+<Admonition type="note" title="Only needed if you enabled IP Allow">
+IP Allow is off by default. Skip this section unless IP Allow is enabled on the project.
+</Admonition>
+
 Neon's [IP Allow](/docs/introduction/ip-allow) feature restricts database connections to specified IP addresses and is available on the Scale plan. If IP Allow is enabled for the Neon project your pipeline writes to, you must add Stripe's IP addresses to the project's allowlist. Otherwise, Stripe won't be able to connect, and the pipeline won't work.
 
 Stripe can connect from any IP address in its published list of addresses and ranges. Find the current list in Stripe's [Allow incoming connections from Stripe](https://docs.stripe.com/data/data-pipeline/real-time-sync-to-postgres/configure#source-ip-addresses) documentation, and add all listed addresses and ranges to your Neon project's allowlist.
@@ -205,10 +209,6 @@ Stripe can connect from any IP address in its published list of addresses and ra
 To configure the allowlist, open the project in the Neon Console and go to **Settings** > **Networking** > **Public internet access**. Select **Only addresses on the allowlist** and add Stripe's IP addresses and ranges.
 
 IP Allow applies to all branches by default. See [Configure IP Allow](/docs/manage/projects#configure-ip-allow) for the options, including applying the restriction to protected branches only.
-
-<Admonition type="note" title="Only needed if you enabled IP Allow">
-IP Allow is off by default, so most projects don't need this step. Follow these steps if your organization requires it for compliance.
-</Admonition>
 
 ## Preview limitations
 
@@ -224,8 +224,6 @@ During public preview:
 Everything else syncs in real time.
 
 ## Next steps
-
-You now have your Stripe data in your database on Neon, and it stays up to date on its own.
 
 Put that data to work in your application. Query `stripe.subscriptions`, `stripe.invoices`, and `stripe.customers` next to your own tables to gate features on a customer's plan, show invoice history in your UI, or follow up when a charge fails. The synced tables stay up to date in the background, so your billing code reads a table instead of consuming events.
 
