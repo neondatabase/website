@@ -10,6 +10,8 @@ const escapeMdx = (value) =>
 
 const escapeMdxCell = (value) => escapeMdx(value).replace(/\|/g, '\\|');
 
+const isInlineCodeSafe = (value) => typeof value === 'string' && value && !/[`\r\n]/.test(value);
+
 const markdownTable = (headers, rows) => {
   const head = `| ${headers.join(' | ')} |`;
   const sep = `| ${headers.map(() => '--------').join(' | ')} |`;
@@ -51,7 +53,9 @@ export const buildFunctionRegistryTemplateContent = (template) => {
   const sections = [];
   const sourceUrl = registryTemplateSourceUrl(template);
   const operations = Array.isArray(template.operations) ? template.operations : [];
-  const environment = Array.isArray(template.environment) ? template.environment : [];
+  const environment = Array.isArray(template.environment)
+    ? template.environment.filter((item) => isInlineCodeSafe(item.name))
+    : [];
 
   const intro = [escapeMdx(template.description)];
   if (shouldNameProvider(template)) {
@@ -79,13 +83,13 @@ export const buildFunctionRegistryTemplateContent = (template) => {
     operations.forEach((item) => {
       sections.push(`### ${escapeMdx(item.title)}`);
       const body = [escapeMdx(item.description)];
-      if (item.route) {
+      if (isInlineCodeSafe(item.route)) {
         body.push(`The route is \`${item.route}\`.`);
       }
-      if (item.slug) {
+      if (isInlineCodeSafe(item.slug)) {
         body.push(`The function slug is \`${item.slug}\`.`);
       }
-      if (typeof item.source === 'string' && item.source) {
+      if (isInlineCodeSafe(item.source)) {
         body.push(`The handler is \`${item.source}\`.`);
       }
       sections.push(body.join(' '));

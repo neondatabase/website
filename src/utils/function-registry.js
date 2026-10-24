@@ -121,31 +121,17 @@ const fetchRegistryJson = async (path) => {
   return response.json();
 };
 
-export const getFunctionRegistryIndex = async () => {
-  try {
-    const data = await fetchRegistryJson('registry.json');
-    if (!data) return { homepage: null, name: null, templates: [] };
-    return {
-      homepage: typeof data.homepage === 'string' ? data.homepage : null,
-      name: typeof data.name === 'string' ? data.name : null,
-      templates: normalizeRegistryTemplates(data),
-    };
-  } catch {
-    return { homepage: null, name: null, templates: [] };
-  }
-};
-
 export const getFunctionRegistryCatalog = async () => {
-  const { templates } = await getFunctionRegistryIndex();
-  return templates;
+  try {
+    return normalizeRegistryTemplates(await fetchRegistryJson('registry.json'));
+  } catch {
+    return [];
+  }
 };
 
 const pickTemplateJsonFields = (data) => {
   if (!data || typeof data !== 'object') return {};
   const picked = {};
-  if (data.layout === 'router' || data.layout === 'separate') picked.layout = data.layout;
-  if (Array.isArray(data.dependencies))
-    picked.dependencies = data.dependencies.filter((item) => typeof item === 'string');
   if (Array.isArray(data.environment)) {
     picked.environment = data.environment.filter(
       (item) => item && typeof item.name === 'string' && typeof item.description === 'string'
@@ -166,7 +152,7 @@ const pickTemplateJsonFields = (data) => {
 
 export const getFunctionRegistryTemplate = async (id) => {
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(id)) return null;
-  const { homepage, templates } = await getFunctionRegistryIndex();
+  const templates = await getFunctionRegistryCatalog();
   const entry = templates.find((template) => template.id === id);
   if (!entry) return null;
 
@@ -185,7 +171,6 @@ export const getFunctionRegistryTemplate = async (id) => {
     id: entry.id,
     title: entry.title,
     description: entry.description,
-    homepage,
     website: registryWebsiteUrl(entry.website),
   };
 };

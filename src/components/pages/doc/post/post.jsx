@@ -71,6 +71,19 @@ const Post = ({
   // Check if split content layout is enabled (2-column grid for SDK reference style)
   const isSplitLayout = contentLayout === 'split';
 
+  const heading = (
+    <h1
+      className={cn(
+        eyebrow
+          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+          : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+        tag && 'inline'
+      )}
+    >
+      {title}
+    </h1>
+  );
+
   return (
     <>
       <div
@@ -134,19 +147,14 @@ const Post = ({
                       {eyebrow}
                     </div>
                   )}
-                  <div className={cn(titleLeading && 'flex items-center gap-3')}>
-                    {titleLeading}
-                    <h1
-                      className={cn(
-                        eyebrow
-                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
-                          : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                        tag && 'inline'
-                      )}
-                    >
-                      {title}
-                    </h1>
-                  </div>
+                  {titleLeading ? (
+                    <div className="flex items-center gap-3">
+                      {titleLeading}
+                      {heading}
+                    </div>
+                  ) : (
+                    heading
+                  )}
                   {tag && (
                     <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
                   )}

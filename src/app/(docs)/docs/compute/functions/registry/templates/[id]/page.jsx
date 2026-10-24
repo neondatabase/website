@@ -23,10 +23,19 @@ export async function generateStaticParams() {
   return templates.map((template) => ({ id: template.id }));
 }
 
+const getTemplatePageData = async (id) => {
+  const [template, templates] = await Promise.all([
+    getFunctionRegistryTemplate(id),
+    getFunctionRegistryCatalog(),
+  ]);
+  if (template) return { template, templates };
+  if (templates.length === 0) throw new Error('Function Registry catalog is unavailable');
+  return notFound();
+};
+
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const template = await getFunctionRegistryTemplate(id);
-  if (!template) return notFound();
+  const { template } = await getTemplatePageData(id);
 
   const encodedTitle = Buffer.from(template.title).toString('base64');
   const encodedCategory = Buffer.from('Registry').toString('base64');
@@ -43,12 +52,7 @@ export async function generateMetadata({ params }) {
 
 const FunctionRegistryTemplatePage = async ({ params }) => {
   const { id } = await params;
-  const [template, templates] = await Promise.all([
-    getFunctionRegistryTemplate(id),
-    getFunctionRegistryCatalog(),
-  ]);
-
-  if (!template) return notFound();
+  const { template, templates } = await getTemplatePageData(id);
 
   const currentSlug = registryTemplateDocsSlug(template.id);
   const content = buildFunctionRegistryTemplateContent(template);
