@@ -72,8 +72,16 @@ const Item = ({
   if (section) {
     return (
       <li className="mt-3 flex flex-col first:mt-0">
-        <span className="py-1.5 text-[11px] leading-tight font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+        <span className="flex items-center py-1.5 text-[11px] leading-tight font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
           {section}
+          {tag && (
+            <Tag
+              className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+              label={tag}
+              size="sm"
+              theme={tagTheme}
+            />
+          )}
         </span>
         <ul className="flex flex-col">
           {items?.map((item, index) => (

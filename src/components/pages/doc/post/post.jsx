@@ -58,6 +58,7 @@ const Post = ({
   tableOfContents,
   author,
   aboveContent = null,
+  titleLeading = null,
   isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
@@ -133,16 +134,19 @@ const Post = ({
                       {eyebrow}
                     </div>
                   )}
-                  <h1
-                    className={cn(
-                      eyebrow
-                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
-                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                      tag && 'inline'
-                    )}
-                  >
-                    {title}
-                  </h1>
+                  <div className={cn(titleLeading && 'flex items-center gap-3')}>
+                    {titleLeading}
+                    <h1
+                      className={cn(
+                        eyebrow
+                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+                          : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+                        tag && 'inline'
+                      )}
+                    >
+                      {title}
+                    </h1>
+                  </div>
                   {tag && (
                     <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
                   )}
@@ -247,6 +251,7 @@ Post.propTypes = {
     photo: PropTypes.string,
   }),
   aboveContent: PropTypes.node,
+  titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,
   className: PropTypes.string,
 };
