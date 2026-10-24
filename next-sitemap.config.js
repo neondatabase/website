@@ -40,12 +40,7 @@ module.exports = {
     const { getFunctionRegistryCatalog, registryTemplateDocsHref } =
       await import('./src/utils/function-registry.js');
     const templates = await getFunctionRegistryCatalog();
-    const paths = [
-      '/',
-      '/docs/compute/functions/registry',
-      '/docs/compute/functions/registry/templates',
-      ...templates.map((template) => registryTemplateDocsHref(template.id)),
-    ];
+    const paths = ['/', ...templates.map((template) => registryTemplateDocsHref(template.id))];
     return Promise.all(paths.map((routePath) => config.transform(config, routePath)));
   },
   robotsTxtOptions: {
