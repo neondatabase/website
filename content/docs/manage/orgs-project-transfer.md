@@ -12,7 +12,7 @@ Move projects between organizations you belong to in the Neon Console or via the
 
 Transferring a project does not change its credentials or connection string, so connected applications keep working. Billing and usage move to the destination organization, and project limits follow the destination organization's [plan](/docs/introduction/plans).
 
-Before you transfer, review [Limits and requirements](#limits-and-requirements). In particular, disconnect any project integrations first, and make sure the destination organization's plan is the same tier or higher than the source organization's.
+Before you transfer, review [Limits and requirements](#limits-and-requirements). In particular, disconnect any project integrations first, and make sure the destination organization's plan is the same tier or higher than the source organization's. Projects can't be transferred into or out of [Vercel-managed organizations](/docs/guides/vercel-managed-integration).
 
 ## Ways to transfer
 
@@ -92,7 +92,7 @@ As an alternative, to hand a project to a different Neon account, create a claim
 - Destination organization plan must be the **same tier or higher** than the source organization plan (for example, Launch to Scale works; Scale to Launch does not). This is a plan-level check, independent of the project's settings.
 - Requires **Admin** in the source organization, since transferring a project out of an organization is Admin-only. In the destination organization you need any role that can create projects: **Admin**, **Editor**, or **Viewer**. Collaborators can't receive transfers. See [User permissions](/docs/manage/user-permissions).
 - Disconnect project integrations before you transfer. Open the project's **Integrations** page and remove any added integrations (for example, GitHub or Vercel). See [Manage integrations](/docs/manage/integrations).
-- [Vercel-managed organizations](/docs/guides/vercel-managed-integration) are not supported as source or destination.
+- [Vercel-managed organizations](/docs/guides/vercel-managed-integration) can't be the source or destination of a transfer. This restriction applies to the whole organization, not to individual projects. Removing a project's integrations on its [Integrations](/docs/guides/integrations) page, or disconnecting its database from Vercel, doesn't make the project transferable.
 - HIPAA projects can only move to a HIPAA-enabled organization.
 
 If a transfer fails:

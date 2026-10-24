@@ -312,15 +312,15 @@ Postgres's text-search parser splits text at whitespace and punctuation before c
 
 The available modes depend on the language. Each example shows source text → emitted terms.
 
-| Language | Mode      | Behavior                                                                                       | Example |
-| :------- | :-------- | :--------------------------------------------------------------------------------------------- | :------ |
-| Chinese  | `none`    | Emits words from standard segmentation without adding shorter search terms.                    | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `架构` |
+| Language | Mode      | Behavior                                                                                       | Example                                                                                               |
+| :------- | :-------- | :--------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
+| Chinese  | `none`    | Emits words from standard segmentation without adding shorter search terms.                    | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `架构`                                           |
 | Chinese  | `mixed`   | Keeps words from standard segmentation and adds shorter search terms from some longer words.   | `现代分布式文件系统架构` → `现代`, `分布式文件系统`, `分布`, `分布式`, `布式`, `文件`, `系统`, `架构` |
-| Japanese | `none`    | Favors longer dictionary compounds.                                                            | `関西国際空港へのアクセス` → `関西国際空港`, `アクセス` |
-| Japanese | `discard` | Produces finer-grained terms for some long compounds without retaining their full form.        | `関西国際空港へのアクセス` → `関西`, `国際`, `空港`, `アクセス` |
-| Korean   | `none`    | Keeps compound and inflected dictionary entries as whole terms.                                | `한국어 형태소 분석` → `한국어`, `형태소`, `분석` |
-| Korean   | `discard` | Emits the parts of a compound or inflected form instead of the full term when it can be split. | `한국어 형태소 분석` → `한국`, `어`, `형태`, `소`, `분석` |
-| Korean   | `mixed`   | Emits both the full term and its parts when a compound or inflected form can be split.         | `한국어 형태소 분석` → `한국어`, `한국`, `어`, `형태소`, `형태`, `소`, `분석` |
+| Japanese | `none`    | Favors longer dictionary compounds.                                                            | `関西国際空港へのアクセス` → `関西国際空港`, `アクセス`                                               |
+| Japanese | `discard` | Produces finer-grained terms for some long compounds without retaining their full form.        | `関西国際空港へのアクセス` → `関西`, `国際`, `空港`, `アクセス`                                       |
+| Korean   | `none`    | Keeps compound and inflected dictionary entries as whole terms.                                | `한국어 형태소 분석` → `한국어`, `형태소`, `분석`                                                     |
+| Korean   | `discard` | Emits the parts of a compound or inflected form instead of the full term when it can be split. | `한국어 형태소 분석` → `한국`, `어`, `형태`, `소`, `분석`                                             |
+| Korean   | `mixed`   | Emits both the full term and its parts when a compound or inflected form can be split.         | `한국어 형태소 분석` → `한국어`, `한국`, `어`, `형태소`, `형태`, `소`, `분석`                         |
 
 In `mixed` mode, query with `plainto_tsquery`. When one query word produces multiple lexemes, `to_tsquery`, `websearch_to_tsquery`, and `phraseto_tsquery` join them with the `<->` operator, which requires adjacent positions. `mixed` mode inserts extra positions for the additional terms, so these phrase conditions can miss expected matches. For position-based queries, define a custom configuration with `none` or `discard` mode.
 

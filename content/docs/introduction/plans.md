@@ -25,7 +25,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-10-13T07:55:06.255Z'
+updatedOn: '2026-10-23T18:34:18.407Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -412,7 +412,7 @@ Security features:
 
 ### Uptime SLA
 
-Guaranteed service availability is offered on the **Scale** plan. Contact [support](https://console.neon.tech) via the console for details.
+Guaranteed service availability is offered on the **Scale** plan. For uptime commitments, Service Credits, and exclusions, see the [Neon Service Level Agreement](/docs/legal/sla).
 
 ### Support
 

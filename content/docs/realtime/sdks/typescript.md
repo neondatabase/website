@@ -58,6 +58,24 @@ subscription.onChange(({ data, status }) => render(data, status))
 
 Pass a `logLevel` to see what the client is doing, as [Log client diagnostics](../guides/subscribing#log-client-diagnostics) shows.
 
+### React Native
+
+The client also runs in React Native apps, with `@neon/realtime` 0.1.2 or later. Import it from `@neon/realtime/client` as usual.
+
+React Native's WebSocket sends an `Origin` header derived from the Realtime endpoint. If your branch restricts Realtime to specific origins, pass a `webSocketFactory` that sends one of the allowed origins:
+
+```ts
+const client = createRealtimeClient({
+  url: realtimeUrl,
+  webSocketFactory: (url, protocols) =>
+    new WebSocket(url, protocols, {
+      headers: { origin: "https://app.example.com" },
+    }),
+})
+```
+
+The third `WebSocket` argument is a React Native extension and isn't available in browsers. An origin allowlist protects browser apps only. A native app can send any origin, so don't rely on it to authenticate native clients.
+
 ### Renewing sealed queries
 
 Most apps pass a `refreshQuery` function to the [React or TanStack DB bindings](../guides/reactivity), which renew for them. To renew a subscription yourself, see [Renew the sealed query](../guides/subscribing#renew-the-sealed-query). Integration authors can build on [`QueryRefreshController`](#client-queryrefreshcontroller).

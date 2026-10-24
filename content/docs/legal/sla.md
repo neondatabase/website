@@ -1,14 +1,13 @@
 ---
-title: "Neon Service Level Agreement"
-template: Static
-seo:
-  title: "Neon Service Level Agreement - Neon"
-  metaDesc: ""
-  metaKeywords: ""
-  metaRobotsNoindex: true
-  opengraphTitle: "Neon Service Level Agreement - Neon"
-  opengraphDescription: "Last Modified: February 20, 2026  The Service Level Agreement (“SLA”) outlined below applies exclusively to customers who have subscribed to the Neon Business or Scale plan. This SLA is incorporated into and forms an integral part of the applicable Agreement between Neon, LLC. and the customer. Unless otherwise provided herein, capitalized terms will have the […]"
-  twitterImage: ""
+title: Neon Service Level Agreement
+summary: >-
+  The Neon Service Level Agreement (SLA) defines the Monthly Uptime Percentage
+  for Compute Endpoints on the Neon Business and Scale plans, the Service
+  Credits available when it isn't met, how to submit a claim, and exclusions.
+enableTableOfContents: false
+redirectFrom:
+  - /sla
+  - /neon-business-sla
 ---
 
 **Last Modified:** February 20, 2026 

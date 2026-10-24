@@ -89,8 +89,9 @@ neon functions templates list
 ```
 
 ```text filename="Output"
-ID     Title           Provider  Description
-basic  Basic function  Neon      A minimal Neon Function with a JSON response.
+ID           Title                 Provider     Description
+basic        Basic function        Neon         A minimal Neon Function with a JSON response.
+context-dev  Context.dev web data  Context.dev  Search the web and news, read pages, answer questions, and retrieve brand data with Context.dev.
 ```
 
 ## neon functions deploy (#deploy)

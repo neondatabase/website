@@ -2811,11 +2811,6 @@ const defaultConfig = {
         permanent: true,
       },
       {
-        source: '/neon-business-sla',
-        destination: '/sla',
-        permanent: true,
-      },
-      {
         source: '/msa',
         destination: '/platform-terms',
         permanent: true,

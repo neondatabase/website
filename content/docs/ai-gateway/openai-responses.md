@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-23T23:49:26.750Z'
 ---
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
@@ -146,7 +146,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/openai/v1/responses" \
 
 ## Image generation with Vercel AI SDK
 
-The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`.
+The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`. Set `model: 'gpt-image-2'` on the tool; the OpenAI default (`gpt-image-1`) is not available on AI Gateway.
 
 Use `streamText`, not `generateText`: image results are returned as tool-result parts, and a full base64 image reliably runs into size limits on a non-streaming response.
 
@@ -159,6 +159,7 @@ const result = streamText({
   messages: [{ role: 'user', content: 'Create a simple Neon database mascot.' }],
   tools: {
     image: neon.tools.imageGeneration({
+      model: 'gpt-image-2',
       outputFormat: 'jpeg',
       size: '1024x1024',
       partialImages: 3,

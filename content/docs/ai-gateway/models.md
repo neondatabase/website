@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-22T23:10:00.032Z'
+updatedOn: '2026-10-23T19:28:25.610Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -78,7 +78,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Google Gemma 3 12B                             | `/v1/chat/completions`   | Chat completions only. Doesn't support the Gemini SDK endpoint                                           |
 | Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions`   | Chat completions only                                                                                    |
 | Alibaba (chat models)                          | `/v1/chat/completions`   | Chat completions only                                                                                    |
-| Alibaba (embedding models)                     | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
+| Alibaba, BAAI (embedding models)               | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
 | TypeSafe (decision models)                     | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">

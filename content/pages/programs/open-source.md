@@ -2,7 +2,7 @@
 title: 'Neon Open Source Program'
 subtitle: Neon commits a minimum of $200,000 a year to cash sponsorships for open source maintainers, paid monthly through GitHub Sponsors.
 enableTableOfContents: true
-updatedOn: '2026-10-13T19:00:00.000Z'
+updatedOn: '2026-10-23T17:30:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
 ---
 
@@ -26,7 +26,7 @@ Near the end of each six-month term, we review the sponsorship with you and deci
 
 ### Neon and AI Gateway credits
 
-Accepted projects can also claim $5,000 in Neon credits and $5,000 in Neon AI Gateway credits, if they want them. The credits are optional and don't affect the cash sponsorship.
+Projects we support can also receive up to $5,000 in Neon credits and up to $5,000 in Neon AI Gateway credits, if they want them. The credits are optional and don't affect the cash sponsorship.
 
 ### A relationship if you want one
 
@@ -52,7 +52,7 @@ Before you apply, make sure your project has:
 
 ## How we choose projects
 
-Meeting the checklist makes a project eligible. We then review each application and decide whether it fits the open source community we sponsor. We look at the project's popularity, how unique it is, and the activity on the repository, along with other signals. Based on that review, we decide whether to sponsor the project and the monthly amount.
+Meeting the checklist makes a project eligible. We then review each application and decide whether it fits the open source community we sponsor. We look at the project's popularity, how unique it is, and the activity on the repository, along with other signals. Based on that review, we decide how to support the project and by how much, with cash sponsorship, Neon credits, or both.
 
 ## How to apply
 
@@ -63,7 +63,7 @@ Fill out the [application form](#openSource-form) at the top of this page with y
 <details>
 <summary>**Do I need to use Neon or Postgres?**</summary>
 
-No. The program supports open source that developers rely on, whatever database it uses, if any. If you do want to build on Neon, accepted projects can claim $5,000 in Neon credits and $5,000 in Neon AI Gateway credits.
+No. The program supports open source that developers rely on, whatever database it uses, if any. If you do want to build on Neon, projects we support can receive up to $5,000 in Neon credits and up to $5,000 in Neon AI Gateway credits.
 
 </details>
 <br/>
