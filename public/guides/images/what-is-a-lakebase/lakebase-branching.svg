@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="br-ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="358" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Branches are pointers into shared history</text>
+
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#6b7280">TIME</text>
+  <line x1="80" y1="66" x2="716" y2="66" stroke="#e5e7eb" stroke-width="1.5" marker-end="url(#br-ar)"/>
+
+  <!-- main -->
+  <text x="40" y="114" font-size="12" font-weight="600" fill="#111827">main</text>
+  <line x1="88" y1="110" x2="716" y2="110" stroke="#047857" stroke-width="3" marker-end="url(#br-ar)"/>
+  <circle cx="88" cy="110" r="5" fill="#047857"/>
+
+  <!-- restore point -->
+  <circle cx="300" cy="110" r="6" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
+  <line x1="300" y1="90" x2="300" y2="102" stroke="#b45309" stroke-width="1.5"/>
+  <text x="300" y="86" font-size="10.5" fill="#b45309" text-anchor="middle">restore to any point in history</text>
+
+  <!-- branch 1: preview (oldest fork, lowest lane) -->
+  <path d="M190,110 C215,110 215,280 240,280 L716,280" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#br-ar)"/>
+  <circle cx="190" cy="110" r="4.5" fill="#6b7280"/>
+  <text x="248" y="272" font-size="11.5" font-weight="600" fill="#374151">preview/pr-42</text>
+  <rect x="470" y="274" width="70" height="12" rx="6" fill="#fef3c7" stroke="#b45309"/>
+
+  <!-- branch 2: agent -->
+  <path d="M420,110 C445,110 445,220 470,220 L716,220" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#br-ar)"/>
+  <circle cx="420" cy="110" r="4.5" fill="#6b7280"/>
+  <text x="478" y="212" font-size="11.5" font-weight="600" fill="#374151">agent/task-17</text>
+  <rect x="600" y="214" width="44" height="12" rx="6" fill="#fef3c7" stroke="#b45309"/>
+
+  <!-- branch 3: short-lived agent branch -->
+  <path d="M560,110 C580,110 580,162 600,162 L656,162" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="5 4"/>
+  <circle cx="560" cy="110" r="4.5" fill="#9ca3af"/>
+  <text x="604" y="154" font-size="11.5" font-weight="600" fill="#9ca3af">agent/task-18</text>
+  <text x="664" y="166" font-size="10.5" fill="#9ca3af">deleted</text>
+
+  <!-- legend -->
+  <rect x="40" y="320" width="28" height="12" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text x="76" y="330" font-size="11" fill="#6b7280">New storage is only written for changes a branch makes. Everything else is shared with its parent.</text>
+</svg>
