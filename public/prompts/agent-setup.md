@@ -76,7 +76,7 @@ Neon Agent Setup Complete
 ⚡ Restart your agent to load the skills and MCP server
 ```
 
-If any step fails or is still pending, do not print the message above. Report which steps completed and which are still pending. Retrying a failed step is fine.
+If any step fails or is still pending, report which steps completed and which are still pending. Retrying a failed step is fine.
 
 ---
 
