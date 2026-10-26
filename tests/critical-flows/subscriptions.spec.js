@@ -36,7 +36,7 @@ async function openSubscriptionForm(page, contract, analyticsOptions = {}) {
   await installAnalyticsMock(page, analyticsOptions);
   await mockExternalFormSubmissions(page);
   const applicationErrors = await openCriticalPage(page, contract.pagePath);
-  const formContainer = page.locator('#changelog-form:visible');
+  const formContainer = page.locator('#changelog-form:visible, #blog-changelog-form:visible');
 
   await expect(formContainer).toHaveCount(1, { timeout: SUBSCRIPTION_EXPECT_TIMEOUT });
   await expectManagedFormReady(formContainer.locator('form'), SUBSCRIPTION_EXPECT_TIMEOUT);

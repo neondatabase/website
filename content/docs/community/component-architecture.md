@@ -9,7 +9,7 @@ summary: >-
   inline imports mapped in component code. Use this page when adding, modifying,
   or debugging MDX components, not when looking for usage examples or icon names.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 A technical reference for developers and maintainers who need to understand, modify, or extend the Neon documentation component system. This guide covers the architecture, file structure, and implementation details.
@@ -141,7 +141,7 @@ export const sharedMdxComponents = {
 };
 ```
 
-### MDX Integration
+### MDX Integration (#mdx-integration-2)
 
 The `sharedMdxComponents` object is passed to the MDX processor, making all registered components available in markdown files:
 

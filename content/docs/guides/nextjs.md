@@ -30,7 +30,7 @@ Next.js by Vercel is an open-source web development framework that enables React
 
 Watch **Getting started with Neon** for an end-to-end setup with Next.js and Drizzle.
 
-<YoutubeIframe embedId="XtMiMnX0hDg" />
+<YoutubeIframe embedId="XtMiMnX0hDg" title="Build with Next.js and Neon" />
 
 To create a Neon project and access it from a Next.js application:
 

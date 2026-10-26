@@ -9,7 +9,7 @@ summary: >-
   yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
   for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
-updatedOn: '2026-09-17T16:33:54.884Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 Managed Better Auth is in active development. This page shows what's currently supported and what we're working on next.
@@ -46,7 +46,7 @@ Architectures where frontend and backend are separate deployments (for example, 
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/). Not all Better Auth plugins are currently supported.
 
-### Supported
+### Supported (#supported-2)
 
 | Plugin                                                                             | Status       |
 | ---------------------------------------------------------------------------------- | ------------ |
@@ -75,7 +75,7 @@ These capabilities are documented in Managed Better Auth guides but are not Bett
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
 
-### On the roadmap
+### On the roadmap (#on-the-roadmap-2)
 
 | Plugin                                                        | Status          |
 | ------------------------------------------------------------- | --------------- |

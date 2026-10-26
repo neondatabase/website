@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Breaking Changes and Upgrade Notes'
 page_title: 'PostgreSQL 19 Breaking Changes - What to Check Before Upgrading'
 page_description: 'Review PostgreSQL 19 breaking changes including JIT disabled by default, LZ4 TOAST compression, RADIUS removal, and string handling changes before upgrading your database.'
 ogImage: ''
-updatedOn: '2026-06-04T14:03:00.799Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Monitoring and Operations'
@@ -152,7 +152,7 @@ SELECT E'line1\nline2';
 --          line2
 ```
 
-### Who Is Affected
+### Who Is Affected (#who-is-affected-2)
 
 Applications that rely on `\'` for escaping single quotes in SQL strings will break. The standard SQL approach is to double the quote: `''`.
 

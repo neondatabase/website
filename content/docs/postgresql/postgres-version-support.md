@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-09T15:55:57.334Z'
 ---
 
 This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
@@ -55,7 +55,7 @@ The first number is the major version. The second is the minor version, which Ne
 
 Your Postgres major version is also displayed in the **Postgres** panel on your project's **Overview** page. With the [Neon CLI](/docs/cli) installed and authenticated, `neon projects get <project_id> --output json` returns the same value in its `pg_version` field.
 
-### Minor releases
+### Minor releases (#minor-releases-2)
 
 In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official PostgreSQL release, these updates may occur a few days later than the official release date.
 
