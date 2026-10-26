@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-09-18T17:30:07.432Z'
+updatedOn: '2026-10-08T19:30:40.839Z'
 ---
 
 ## Getting started
@@ -30,13 +30,20 @@ Start with a one-command setup, or follow a guided tutorial to build the full Ne
     description="Next.js on the full Neon backend: Lakebase Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
+  <GuidedPath
+    title="Tour the Neon backend"
+    description="Learn how Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
+    href="/docs/get-started/backend-overview"
+    cta="Start the tour"
+    eta="~15 min"
+  />
+  <GuidedPath
+    title="Build a fully reactive app"
+    description="Learn how to build reactive apps and agents on standard Postgres with Realtime."
+    href="/docs/realtime/overview"
+    cta="Explore Realtime"
+  />
 </TwinPaths>
-
-<TourCallout
-  title="Tour the Neon backend"
-  description="Learn how Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
-  href="/docs/get-started/backend-overview"
-/>
 
 ## Products
 
@@ -49,13 +56,15 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
-<a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
+<a href="/docs/realtime/overview" description="Realtime makes any SQL query live and supports full reactivity on standard Postgres." icon="zap" tag="Beta" tagTheme="orange-muted">Realtime</a>
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data">Object Storage</a>
 
 <a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database, with triggers and custom domains." icon="code">Functions</a>
 
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models at provider prices with no markup, built into your Neon project." icon="sparkle">AI Gateway</a>
+
+<a href="/docs/ai/lakebase-search" description="Vector, keyword, and hybrid search built into Postgres, so agent retrieval and RAG need no separate vector store." icon="search">Lakebase Search</a>
 
 </DetailIconCards>
 
@@ -134,10 +143,6 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 <a href="/docs/guides/redwoodsdk" title="Redwood" icon="redwoodsdk"></a>
 
 </CompactCards>
-
-<Callout title="Retrieval for AI agents with Lakebase Search">
-Add vector, keyword, and hybrid search directly to your database, so agent retrieval and RAG need no separate vector store. [Explore Lakebase Search →](/docs/ai/lakebase-search)
-</Callout>
 
 ## AI tools and agents
 

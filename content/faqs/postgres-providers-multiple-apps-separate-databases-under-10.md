@@ -21,7 +21,7 @@ Each Neon project is an isolated Postgres database with its own compute and conn
 
 - 100 projects per organization
 - 100 CU-hours per project per month
-- 0.5 GB storage per project
+- 1 GB storage per project
 - 10 branches per project
 - 5 GB public network transfer per project per month
 

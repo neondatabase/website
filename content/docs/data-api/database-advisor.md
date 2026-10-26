@@ -11,12 +11,16 @@ summary: >-
   levels INFO, WARN, or ERROR, and are accessible via the Neon Console or the
   REST API.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-30T16:23:41.172Z'
 ---
 
 The Data API Advisors analyze your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. They run a set of checks against your database and report issues with severity levels and recommended fixes.
 
 Because the Data API exposes your database schema directly over HTTP, security misconfigurations that would normally be hidden behind an application server become directly exploitable. Missing RLS policies and overly permissive views are especially dangerous in this context. The advisors also check for common performance issues like unindexed foreign keys and table bloat, helping you catch issues before they reach production.
+
+<Admonition type="important" title="Secure your data before exposing it">
+The Data API has no permission layer of its own. Every request is authorized entirely by your PostgreSQL `GRANT` statements and [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, so a missing or misconfigured policy can expose a table to anyone with the endpoint URL. Before exposing data, follow [Access control & security](/docs/data-api/access-control) and [Secure your app with RLS](/docs/guides/rls-tutorial).
+</Admonition>
 
 ## Prerequisites
 

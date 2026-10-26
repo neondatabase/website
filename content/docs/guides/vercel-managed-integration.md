@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-09-08T15:58:09.171Z'
+updatedOn: '2026-10-23T11:16:51.998Z'
 ---
 
 <InfoBlock>
@@ -23,6 +23,7 @@ updatedOn: '2026-09-08T15:58:09.171Z'
 <a href="#about-this-integration">What the Vercel-Managed Integration is</a>
 <a href="#installation-walkthrough">How to install it from the Vercel Marketplace</a>
 <a href="#enable-automated-preview-branching-recommended">How (and why) to enable automated Preview Branching</a>
+<a href="#choose-a-production-branch">How to choose which branch feeds Vercel Production</a>
 <a href="#managing--billing">Where to manage billing and configuration</a>
 </DocsList>
 
@@ -61,11 +62,14 @@ Open the [Neon integration on the Vercel Marketplace](https://vercel.com/marketp
 
 This opens the **Install Neon** modal where you can choose between two options. Select **Create New Neon Account**, then click **Continue**.
 
-![Create a New Neon Account](/docs/guides/vercel_install_neon_modal_new_account.png)
-
 ## Complete Vercel's configuration
 
-Accept the terms, pick a region & plan, then name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
+Under **Configuration and Plan**, choose a region and set the optional services:
+
+- **Auth**: provisions [Managed Better Auth](/docs/auth/overview) for your app's users, with profiles synced to Postgres.
+- **Realtime**: enables [Neon Realtime](/docs/realtime/overview) (beta) on the database's default branch. Preview branches get their own. You can only turn on Realtime when you create a database, not for an existing one.
+
+Then pick a plan, accept the terms, and name your database. (Remember: a "Database" in Vercel is a **Project** in Neon.)
 
 ## View storage settings
 
@@ -73,7 +77,7 @@ After creation you'll land on Vercel's **Storage** tab that includes status, pla
 
 ## Optionally open the project in the Neon Console
 
-From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project dashboard in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
+From the **Storage** tab, click **Open in Neon** to jump straight to your new Neon project in the Neon Console. You'll notice it lives in an organization named `Vercel: <your-vercel-team>`.
 
 </Steps>
 
@@ -81,17 +85,10 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 ## Connecting the database to a Vercel project
 
-1. In **Storage → `<your database>` → Connect Project** choose the Vercel project and the environments that should receive database variables (Development, Preview, Production).
-
-   ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
-
-2. (Optional) Under **Advanced Options → Deployments Configuration** enable **Preview** to turn on _Preview Branching_ (see next section).
-
-   ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
-
-3. Click **Connect**.
-
-<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, for example `PRIMARY_`.</Admonition>
+1. In **Storage → `<your database>` → Connect Project**, choose the Vercel **Project** and the **Environments** that should receive database variables (Development, Preview, Production).
+2. (Optional) Under **Create database branch for deployment**, select **Preview** to turn on _Preview Branching_ (see next section). Leave **Production** unchecked. It creates a new branch for every production deployment, which the recommended setup doesn't need: production deployments use your [production branch](#choose-a-production-branch).
+3. (Optional) Set a **Custom Prefix** for the environment variables. You only need one if your Vercel project already uses the unprefixed variable names, for example from a database you connected earlier.
+4. Click **Connect**.
 
 ---
 
@@ -103,10 +100,7 @@ Preview branching creates an isolated Neon branch (copy-on-write) for every Verc
 If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
 </Admonition>
 
-To enable:
-
-1. While connecting the project (step above) toggle **Required → Preview**.
-2. Make sure **Resource must be active before deployment** is also on. This allows Vercel to wait for the branch to be ready.
+To enable it, select **Preview** under **Create database branch for deployment** when you connect the project (step above).
 
 Once enabled, the flow looks like this:
 
@@ -136,6 +130,23 @@ To verify preview branching works:
 2. Make any change and commit: `git commit -a -m "Test change"`
 3. Push: `git push`
 4. Check Vercel deployments and Neon Console branches to confirm the preview branch was created
+
+---
+
+## Choose a production branch
+
+Your Vercel Production deployments use a dedicated **production branch** in Neon. When the integration creates your database, the production branch is your project's default branch. Preview branches are always created from the default branch.
+
+The production branch is independent of the default branch. If you later change the project's default branch, Production keeps using the same production branch. To point Production at a different branch, for example a protected `production` branch:
+
+1. In the Neon Console, open your project and go to **Integrations**.
+2. Under **Added**, click **Settings** next to **Vercel**.
+3. Under **Production branch**, select the branch you want and click **Save**. If a production branch is already set, confirm the change.
+4. Redeploy your production deployment in Vercel so it picks up the new branch's credentials.
+
+The branch you choose can't be a preview branch or have [branch expiration](/docs/guides/branch-expiration) set, and it needs a read-write compute. Branches created before January 14, 2024 aren't listed.
+
+While the integration is connected, the production branch and its read-write compute can't be deleted. To delete that branch, choose a different production branch first.
 
 ---
 
@@ -190,6 +201,8 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
 
+This is separate from Neon's [project transfer](/docs/manage/orgs-project-transfer) feature, which doesn't support Vercel-managed organizations as a source or destination.
+
 ---
 
 ## Common operations
@@ -238,13 +251,14 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 
 ## Environment variables set by the integration
 
-| Variable                                                          | Purpose                                                             |
-| :---------------------------------------------------------------- | :------------------------------------------------------------------ |
-| `DATABASE_URL`                                                    | Pooled connection string (PgBouncer)                                |
-| `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
-| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
-| `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Managed Better Auth endpoints (when enabled on production branch)   |
+| Variable                                                          | Purpose                                                                                                                                     |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `DATABASE_URL`                                                    | Pooled connection string (PgBouncer)                                                                                                        |
+| `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                                                                                                    |
+| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                                                                                          |
+| `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates                                                                         |
+| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Managed Better Auth endpoints (when enabled on production branch)                                                                           |
+| `NEON_REALTIME_URL`, `NEON_REALTIME_SECRET`                       | [Neon Realtime](/docs/realtime/overview) endpoint and secret (when Realtime is enabled). Preview deployments get their own branch's values. |
 
 ---
 
@@ -253,6 +267,7 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 - You cannot use this integration with the **Neon-Managed integration** in the same Vercel project
 - **Neon CLI access**: Requires API key authentication (the `neon login` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
+- **Project transfer**: Neon's [project transfer](/docs/manage/orgs-project-transfer) doesn't work into or out of a Vercel-managed organization. Instead, [transfer the Vercel project to another team](#project-transfers-between-teams).
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
 ## Frequently asked questions

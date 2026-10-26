@@ -9,6 +9,7 @@ import ExternalIcon from 'icons/external.inline.svg';
 import GlossaryIcon from 'icons/glossary.inline.svg';
 import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
+import getNofollowRel from 'utils/get-nofollow-rel';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const underlineCommonStyles =
@@ -74,6 +75,7 @@ const Link = forwardRef(
       prefetch = undefined,
       isExternal = false,
       smoothScroll = false,
+      rel = undefined,
       ...props
     },
     ref
@@ -88,6 +90,9 @@ const Link = forwardRef(
     );
 
     const Icon = icons[icon];
+
+    const linkRel =
+      getNofollowRel(to, rel ?? (isExternal ? 'noopener noreferrer' : undefined)) ?? rel;
 
     const handleClick = (event) => {
       if (tagName) {
@@ -146,7 +151,14 @@ const Link = forwardRef(
     // TODO: remove this when we upgrade to latest version of Next.js
     if (to?.includes('#')) {
       return (
-        <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
+        <a
+          className={className}
+          href={to}
+          ref={ref}
+          onClick={handleClick}
+          {...props}
+          {...(linkRel && { rel: linkRel })}
+        >
           {content}
         </a>
       );
@@ -159,6 +171,7 @@ const Link = forwardRef(
           href={to}
           ref={ref}
           prefetch={prefetch}
+          rel={rel}
           onClick={handleClick}
           {...props}
         >
@@ -175,6 +188,7 @@ const Link = forwardRef(
         onClick={handleClick}
         {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
         {...props}
+        {...(linkRel && { rel: linkRel })}
       >
         {content}
       </a>
@@ -198,6 +212,7 @@ Link.propTypes = {
   tagText: PropTypes.string,
   isExternal: PropTypes.bool,
   smoothScroll: PropTypes.bool,
+  rel: PropTypes.string,
 };
 
 export default Link;

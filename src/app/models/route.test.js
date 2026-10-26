@@ -62,7 +62,7 @@ describe('/models is additive over /models.json', () => {
 });
 
 describe('GET /models', () => {
-  it.each(['chat', 'image-generation', 'web-search'])(
+  it.each(['chat', 'image-generation', 'web-search', 'embeddings'])(
     'allows cross-origin requests for the %s use case',
     async (useCase) => {
       const res = await GET(request(`?use_case=${useCase}`));
@@ -105,11 +105,17 @@ describe('GET /models', () => {
   });
 
   it('400s an unknown use case', async () => {
-    const res = await GET(request('?use_case=embeddings'));
+    const res = await GET(request('?use_case=audio-transcription'));
     const payload = await body(res);
 
     expect(res.status).toBe(400);
-    expect(payload.supported).toEqual(['chat', 'image-generation', 'web-search']);
+    expect(payload.supported).toEqual([
+      'chat',
+      'image-generation',
+      'web-search',
+      'embeddings',
+      'systemone',
+    ]);
   });
 
   describe('example selection follows measured capability, not model family', () => {
@@ -160,8 +166,8 @@ describe('GET /models', () => {
       expect(stranded.map((m) => m.id)).toEqual([]);
     });
 
-    it.skip('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
-      const res = await GET(request('?model=claude-opus-5'));
+    it('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
+      const res = await GET(request('?model=claude-opus-5-5'));
       const { model } = await body(res);
       const ids = model.examples.map((e) => e.id);
       const curl = model.examples.find((e) => e.id === 'curl');
@@ -174,7 +180,7 @@ describe('GET /models', () => {
       expect(curl.variantReason).toBeTruthy();
     });
 
-    it.skip('keeps cURL on chat completions for a conforming Claude model', async () => {
+    it('keeps cURL on chat completions for a conforming Claude model', async () => {
       const res = await GET(request('?model=claude-haiku-4-5'));
       const { model } = await body(res);
       const curl = model.examples.find((e) => e.id === 'curl');
@@ -185,8 +191,8 @@ describe('GET /models', () => {
       expect(curl.endpoint).toBe('/v1/chat/completions');
     });
 
-    it.skip('gives Mastra a provider instance when the neon/ string cannot work', async () => {
-      const res = await GET(request('?model=claude-opus-5'));
+    it('gives Mastra a provider instance when the neon/ string cannot work', async () => {
+      const res = await GET(request('?model=claude-opus-5-5'));
       const { model } = await body(res);
       const mastra = model.examples.find((e) => e.id === 'mastra');
 
@@ -242,6 +248,91 @@ describe('GET /models', () => {
         expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
         expect(mastra.files[0].content).toContain('model: "neon/gpt-5-nano"');
         expect(mastra.files[0].content).toContain('neon.tools.');
+      }
+    });
+  });
+
+  describe('systemone', () => {
+    it.each(['typesafeai-jev-1-14-0', 'openjev-qwen35-4b'])(
+      'serves AI SDK, TypeScript, Python and cURL decision examples for %s',
+      async (id) => {
+        const res = await GET(request(`?model=${id}&use_case=systemone`));
+        const { model } = await body(res);
+
+        expect(model.unsupported).toBeUndefined();
+        expect(model.capabilities.decision).toBe(true);
+        expect(model.examples.map((e) => e.id)).toEqual(['ai-sdk', 'typescript', 'python', 'curl']);
+        for (const example of model.examples) {
+          expect(example.endpoint).toMatch(/^\/typesafe\/v1\/systemone/);
+          expect(example.files[0].content).toContain(id);
+        }
+        const [aiSdk, typescript, python] = model.examples;
+        expect(aiSdk.files[0].content).toContain(`neon.decisionModel("${id}")`);
+        expect(aiSdk.dependencies).toEqual(['ai@7', '@neondatabase/ai-sdk-provider']);
+        expect(typescript.dependencies).toEqual(['@typesafe-ai/sdk']);
+        expect(python.dependencies).toEqual(['typesafe-sdk']);
+      }
+    );
+
+    it('refuses systemone for a chat model', async () => {
+      const res = await GET(request('?model=gpt-5-4-mini&use_case=systemone'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/not a System One decision model/);
+    });
+
+    it('refuses chat for a decision model with a message pointing at the systemone use case', async () => {
+      const res = await GET(request('?model=typesafeai-jev-1-14-0'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/systemone use case/);
+      expect(model.capabilities.chat).toBe('not-served');
+    });
+  });
+
+  describe('embeddings', () => {
+    it('serves TypeScript/Python/cURL examples for an embedding model, no AI SDK or Mastra', async () => {
+      const res = await GET(request('?model=qwen3-embedding-0-6b&use_case=embeddings'));
+      const { model } = await body(res);
+      const ids = model.examples.map((e) => e.id);
+
+      expect(model.unsupported).toBeUndefined();
+      expect(ids).toEqual(['typescript', 'python', 'curl']);
+      for (const example of model.examples) {
+        expect(example.endpoint).toBe('/v1/embeddings');
+        expect(example.files[0].content).toContain('qwen3-embedding-0-6b');
+        expect(example.files[0].content).toContain('encoding_format');
+      }
+    });
+
+    it('refuses embeddings for a chat model rather than returning examples that would fail', async () => {
+      const res = await GET(request('?model=gpt-5-4-mini&use_case=embeddings'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/not an embedding model/);
+    });
+
+    it('refuses chat completions for an embedding model with a message pointing at the right use case', async () => {
+      const res = await GET(request('?model=gte-large-en'));
+      const { model } = await body(res);
+
+      expect(model.examples).toEqual([]);
+      expect(model.unsupported).toMatch(/embedding model/);
+      expect(model.capabilities.chat).toBe('not-served');
+    });
+
+    // Embeddings bill on input tokens only — there is no completion to charge for, so
+    // neither model has an output rate.
+    it('carries dimensions and an input-only cost, no invented output rate', () => {
+      expect(catalog.neon.models['qwen3-embedding-0-6b'].cost).toEqual({ input: 0.02 });
+      expect(catalog.neon.models['gte-large-en'].cost).toEqual({ input: 0.13 });
+      for (const id of ['qwen3-embedding-0-6b', 'gte-large-en']) {
+        expect(catalog.neon.models[id].type).toBe('embedding');
+        expect(catalog.neon.models[id].dimensions).toBe(1024);
+        expect(catalog.neon.models[id].cost.output).toBeUndefined();
       }
     });
   });

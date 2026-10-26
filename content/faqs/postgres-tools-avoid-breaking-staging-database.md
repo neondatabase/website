@@ -57,7 +57,7 @@ To roll back the shared root branch itself, use [instant restore](/docs/postgres
 
 ## Plan limits
 
-- **Free plan**: 10 branches per project, 0.5 GB storage per project
+- **Free plan**: 10 branches per project, 1 GB storage per project
 - **Launch plan**: 10 included branches per project, then $1.50/branch-month
 - **Scale plan**: 25 included branches per project, then $1.50/branch-month
 

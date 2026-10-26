@@ -31,6 +31,7 @@ const PROVIDER_LABELS = {
   thinkingmachines: 'Thinking Machines',
   moonshotai: 'Moonshot AI',
   xai: 'xAI',
+  typesafe: 'TypeSafe',
 };
 
 const MODEL_CATALOG_NOTE =
@@ -70,6 +71,12 @@ const formatDate = (iso) => {
 
 const isImageCapable = (capability) =>
   capability?.entitled !== false && capability?.imageGeneration === true;
+// From the catalog (`model.type`), not measured capabilities: the catalog is allowed to list a
+// model before it has been probed, same as any other model, and an embedding model is still an
+// embedding model while unmeasured — it just has no known-working endpoint yet (see
+// `deriveEndpoints`, which stays capability-gated).
+const isEmbedding = (model) => model?.type === 'embedding';
+const isDecision = (model) => model?.type === 'decision';
 
 // The gateway routes a model reaches. Conveyed to users mainly through the
 // quickstart snippet's base URL; surfaced here for the markdown mirror.
@@ -77,6 +84,11 @@ const deriveEndpoints = (capability) => {
   if (!capability || capability.entitled === false || capability.chat === 'not-entitled') {
     return [];
   }
+
+  // An embedding model's chat-shaped fields (`chat: 'not-served'`, no native dialect, no
+  // Responses) all read false, so the checks below would silently return an empty list. Its
+  // actual route is /v1/embeddings, not "no route at all".
+  if (capability.embeddings) return ['embeddings'];
 
   const endpoints = [];
   if (capability.chat !== 'not-served') endpoints.push('chat/completions');
@@ -112,6 +124,9 @@ const toRow = (model, capability) => {
     license: model.open_weights ? 'Open weights' : 'Proprietary',
     endpoints: deriveEndpoints(capability),
     isImageCapable: isImageCapable(capability),
+    isEmbedding: isEmbedding(model),
+    isDecision: isDecision(model),
+    dimensions: model.dimensions,
     hasMeasuredCapabilities: Boolean(capability),
   };
 };
@@ -162,6 +177,8 @@ module.exports = {
   formatPrice,
   formatDate,
   isImageCapable,
+  isEmbedding,
+  isDecision,
   deriveEndpoints,
   toRow,
   buildRows,

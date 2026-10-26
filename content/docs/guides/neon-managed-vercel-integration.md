@@ -9,19 +9,22 @@ summary: >-
   integration instead of the Vercel-Managed Integration when you already have a
   Neon account or need direct billing control. The two integrations cannot
   coexist in the same Vercel project, and each Neon project maps to exactly one
-  Vercel project. The integration injects `DATABASE_URL`, `DATABASE_URL_UNPOOLED`,
-  and legacy `PG*` variables per deployment, with optional automatic branch
-  cleanup when Git branches are deleted.
+  Vercel project. When connecting, you can choose which Neon branch feeds
+  Vercel's Production environment variables. The integration injects
+  `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and legacy `PG*` variables per
+  deployment, with optional automatic branch cleanup when Git branches are
+  deleted.
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-07-17T10:14:24.892Z'
+updatedOn: '2026-10-23T11:36:04.672Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <a href="#about-this-integration">The purpose of the Neon-Managed Integration</a>
 <a href="#installation-steps">How to install it from Connectable Accounts</a>
+<a href="#choose-a-production-branch">How to choose which branch feeds Vercel Production</a>
 <a href="#how-preview-branching-works">How automated Preview Branching works</a>
 <a href="#managing-the-integration">How to manage environment variables and branch cleanup</a>
 </DocsList>
@@ -98,9 +101,17 @@ In the **Integrate Neon** dialog:
 
    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
 
-2. **Choose your Neon project, database, and role**
+2. **Choose your Neon account, project, production branch, database, and role**
 
    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
+
+   Under **Production branch**, pick the Neon branch whose credentials Vercel should use for **Production** deployments. If you leave the default selection, Production uses your project's default branch. The read-only **Default branch** field shows the branch that preview branches are created from.
+
+   The branch you select must:
+   - Belong to the chosen Neon project
+   - Include the database and role you selected
+   - Not be a Vercel preview branch (for example, `preview/<git-branch>`)
+   - Not have branch expiration (TTL) enabled
 
 3. **Configure optional settings:**
    - Enable **Create a branch for your development environment** to create a persistent `vercel-dev` branch
@@ -114,6 +125,26 @@ In the **Integrate Neon** dialog:
 ![Vercel integration success](/docs/guides/vercel_success.png)
 
 </Steps>
+
+### Choose a production branch
+
+By default, Neon uses your project's **default branch** for Vercel's Production environment variables. When your live application data lives on a different branch (for example, a protected `production` branch while `main` remains the default), select that branch during setup instead.
+
+| Vercel environment | Neon branch used                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------ |
+| **Production**     | The branch you choose at connect (or the project default if unchanged)                           |
+| **Preview**        | A new `preview/<git-branch>` branch per deployment, parented from the project **default** branch |
+| **Development**    | The optional `vercel-dev` branch, created as a clone of the project **default** branch           |
+
+Only Production credentials come from your chosen branch. Preview and Development environments are unchanged. Neon resolves that branch's read-write compute endpoint and the password for the role you selected on that branch (role passwords can differ across branches).
+
+If [Managed Better Auth](/docs/auth/overview) is enabled on your production branch, Production deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` from that branch. Preview deployments still get isolated auth on their own preview branches.
+
+The production branch is independent of your project's default branch. If you later change the default branch, Production keeps using the branch you chose.
+
+To change the production branch after setup, go to **Neon Console → Integrations**, click **Manage** next to **Vercel** under **Added**, and open the **Branches** tab. Select a different branch under **Production branch** and click **Save**. Changing a branch that's already set asks you to confirm first. Redeploy your production deployment in Vercel so it picks up the new branch's credentials. The branch you choose must meet the requirements listed above and have a read-write compute.
+
+While the integration is connected, the production branch and its read-write compute can't be deleted. To delete that branch, choose a different production branch first, or disconnect the integration.
 
 ### What happens after installation
 
@@ -139,7 +170,7 @@ Once connected successfully, you'll see:
 The integration automatically creates isolated database environments for each preview deployment:
 
 <Admonition type="tip" title="Managed Better Auth support for preview deployments">
-If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions. Preview branches are always parented from your project's **default branch**, even when Production uses a different branch.
 </Admonition>
 
 <Steps>
@@ -182,16 +213,16 @@ This ensures schema changes in your commits are applied to each preview deployme
 
 ### Environment variables
 
-The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and legacy PostgreSQL variables (`POSTGRES_URL`, `PGHOST`, etc.) for Production and Development environments. Preview variables are injected dynamically per deployment.
+By default, the integration sets `DATABASE_URL` and `DATABASE_URL_UNPOOLED` for Production and Development environments. You can also select `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, and `PGPASSWORD`. Preview variables are injected dynamically per deployment.
 
-- `DATABASE_URL`: Pooled connection (recommended for most applications)
+- `DATABASE_URL`: Pooled connection (recommended for most applications). For Production, sourced from the [production branch you chose at connect](#choose-a-production-branch).
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on production branch)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints. For Production, the values come from your production branch. You can select these variables on the **Settings** tab once Managed Better Auth is enabled on your project's default branch.
 
 **To customize which variables are used:**
 
-1. Go to **Neon Console → Integrations → Manage → Settings**
-2. Select the variables you want (for example, `PGHOST`, `PGUSER`, etc.)
+1. Go to **Neon Console → Integrations**, click **Manage** next to **Vercel**, and open the **Settings** tab
+2. Under **Vercel environment variables**, select the variables you want (for example, `PGHOST` or `PGUSER`)
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
@@ -200,21 +231,20 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 When you rotate the selected role password in Neon, the integration automatically syncs updated credentials to Vercel environment variables for connected projects.
 
-If deployments still use older credentials, open **Neon Console → Integrations → Manage → Settings** and click **Save changes** to force a resync.
+If deployments still use older credentials, open the **Settings** tab (**Neon Console → Integrations → Manage**) and click **Save changes** to force a resync.
 
 ### Branch cleanup
 
 **Automatic cleanup (recommended):**
-Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is deleted. Cleanup runs the next time a preview deployment is created.
+Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is merged or deleted. You can change this setting later on the **Branches** tab (**Neon Console → Integrations → Manage**), under **Automation workflows**. Cleanup runs the next time a preview deployment is created.
 
 Unlike the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), this cleanup is not affected by Vercel's deployment retention policies. For a full comparison and additional cleanup options, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 **Manual cleanup:**
 If needed, you can delete branches manually:
 
-- **Individual branches:** Neon Console → Integrations → Manage → Branches → trash icon
-- **Bulk delete:** Use **Delete all** in the same interface
-- **API/CLI:** Use Neon CLI or API for programmatic cleanup
+- **Neon Console:** delete branches from your project's **Branches** page. See [Delete a branch](/docs/manage/branches#delete-a-branch).
+- **API/CLI:** Use the [Neon CLI](/docs/cli/branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api) for programmatic cleanup
 
 <Admonition type="warning" title="Important cleanup considerations">
 - **Don't rename branches:** Renaming either the Git branch or Neon branch breaks name-matching logic and may cause unintended deletions
@@ -224,7 +254,7 @@ If needed, you can delete branches manually:
 
 ### Disconnect integration
 
-To disconnect the integration: **Neon Console → Integrations → Manage → Disconnect**. This stops creating new preview branches but doesn't remove existing branches or the integration from Vercel.
+To disconnect the integration, go to **Neon Console → Integrations**, click **Manage** next to **Vercel**, open the **Disconnect** tab, and click **Disconnect**. This stops Neon from setting environment variables in Vercel. It doesn't remove existing branches or the integration itself. To fully remove the integration, uninstall it from your Vercel project's **Settings**.
 
 ---
 
@@ -274,6 +304,6 @@ If you see "Failed to set environment variables" during setup, remove conflictin
 
 **Issue:** Preview branches no longer created
 **Cause:** The PostgreSQL role selected during setup was deleted
-**Solution:** Reinstall the integration with a valid role, or change the role in **Neon Console → Integrations → Manage → Settings**
+**Solution:** Reinstall the integration with a valid role, or change the role under **Default database and role** on the **Settings** tab (**Neon Console → Integrations → Manage**)
 
 <NeedHelp/>

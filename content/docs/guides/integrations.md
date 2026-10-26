@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2026-08-04T08:34:18.168Z'
+updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
 ## Authentication
@@ -147,11 +147,11 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
 
+<a href="/docs/guides/logical-replication-neon-to-lakebase" title="Neon to Lakebase" description="Replicate data from Neon to Lakebase Postgres on Databricks" icon="databricks"></a>
+
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
 <a href="/docs/guides/logical-replication-postgres" title="Neon to PostgreSQL" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
-
-<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
 
 <a href="/docs/guides/sequin" title="Sequin" description="Stream changes and rows from your database to anywhere with Sequin" icon="sequin"></a>
 
@@ -170,6 +170,8 @@ updatedOn: '2026-08-04T08:34:18.168Z'
 <a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 <a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
+
+<a href="/docs/guides/logical-replication-lakebase-to-neon" title="Lakebase to Neon" description="Replicate data from Lakebase Postgres on Databricks to Neon" icon="databricks"></a>
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 

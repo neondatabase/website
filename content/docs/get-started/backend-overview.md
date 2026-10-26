@@ -195,7 +195,23 @@ export default app;
 
 Run it locally with [`neon dev`](/docs/cli/dev), which serves the function with the same injected Neon variables it gets in production.
 
-**Reference:** [Functions get-started](/docs/compute/functions/get-started) (local dev, deploy, invoke, connection-pool guidance) · [Overview](/docs/compute/functions/overview)
+Beyond the `chat` endpoint the browser calls, Neon can invoke a function for you: [Function Triggers](/docs/compute/functions/triggers/overview) run it on a schedule or when an object is uploaded, so background work runs as the same function code and branches with your project. For example, run the function whenever a file is attached:
+
+```typescript filename="neon.ts"
+// top level
+triggers: {
+  "process-attachment": {
+    type: "storage_object_created",
+    function: "chat",
+    bucket: "attachments",
+    functionPath: "/on-upload",
+  },
+},
+```
+
+The function answers a `POST` at `/on-upload` with the bucket and object key, so it processes each new attachment. A `type: "schedule"` trigger with a `cron` field runs it on a timer instead.
+
+**Reference:** [Functions get-started](/docs/compute/functions/get-started) (local dev, deploy, invoke, connection-pool guidance) · [Overview](/docs/compute/functions/overview) · [Function Triggers](/docs/compute/functions/triggers/overview) (schedule or object-upload invocation)
 
 ## AI Gateway: the model call
 
@@ -222,7 +238,7 @@ const result = streamText({
 return result.toTextStreamResponse();
 ```
 
-Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. See the [model catalog](/docs/ai-gateway/models) for which models support what.
+Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. Set the tool's `model` option to `gpt-image-2`, because the default image model isn't available on AI Gateway. See the [model catalog](/docs/ai-gateway/models) for which models support what.
 
 <Admonition type="note" title="First call after a deploy">
 Right after `neon deploy` on a new branch, the first gateway call can return a `403` (`credential not authorized for this branch`) while the credential propagates. It clears within a few seconds, so retry.
@@ -337,5 +353,7 @@ A fast sanity check after deploy; each capability's get-started has the real tes
 ## Next steps
 
 **Reference for each capability:** [Storage](/docs/storage/get-started) · [Functions](/docs/compute/functions/get-started) · [AI Gateway](/docs/ai-gateway/get-started) · [Auth](/docs/auth/quick-start/nextjs-api-only) · [Postgres](/docs/serverless/serverless-driver)
+
+**Realtime:** [Realtime](/docs/realtime/overview). Live SQL and reactive DX on standard Postgres.
 
 <NeedHelp/>

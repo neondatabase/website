@@ -69,7 +69,7 @@ Plugins
 Scope    Plugin         Agent        Status
 project  neon-postgres  claude-code  installed
 
-INFO: Installed the Neon plugin (project).
+Installed the Neon plugin (project).
 ```
 
 Install into several agents at once:

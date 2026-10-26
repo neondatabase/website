@@ -39,9 +39,11 @@ export function isAIAgentRequest(request) {
     'curl', // Common CLI HTTP client used to fetch docs as markdown
   ];
 
-  const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
-    userAgent.toLowerCase().includes(pattern)
-  );
+  // User-Agent sniffing only applies when the client doesn't explicitly accept HTML.
+  // Some fetchers (ChatGPT web fetch) reject text/markdown, and search crawlers
+  // (OAI-SearchBot, PerplexityBot) need indexable HTML, not noindex markdown.
+  const hasAIAgentUserAgent =
+    !hasHtml && aiAgentPatterns.some((pattern) => userAgent.toLowerCase().includes(pattern));
 
   return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
@@ -53,6 +55,11 @@ const CUSTOM_MARKDOWN_PATHS = {
   // /auth.md is the existing Claimable Neon protocol, distinct from the /auth product page.
   'auth.md': '/auth.md',
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
+  // /feedback.md aliases the Send feedback docs page (the agent feedback discovery URL).
+  // Two places enforce this alias — keep in sync:
+  //   1. Here (getMarkdownPath — agent requests, and keeps /feedback.md out of the markdown 404)
+  //   2. next.config.js beforeFiles rewrite: /feedback.md → /md/docs/introduction/feedback.md
+  'feedback.md': '/md/docs/introduction/feedback.md',
   // Docs root aliases to the curated llms.txt rather than a generated page-listing.
   // Three places enforce this alias — keep them in sync if this changes:
   //   1. Here (getMarkdownPath — middleware serving for /docs and /docs.md agent requests)

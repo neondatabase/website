@@ -3,18 +3,19 @@ title: Lakebase Search
 subtitle: Scalable vector and full-text search for Postgres
 summary: >-
   Lakebase Search adds vector, keyword, and hybrid search to Neon through the
-  lakebase_vector and lakebase_text Postgres extensions. Use this page to
-  understand the search types, how the extensions work, the scale-to-zero
-  architecture advantages, and where to get started.
+  lakebase_vector and lakebase_text Postgres extensions, with optional
+  configurable tokenization from lakebase_tokenizer. Use this page to understand
+  the search types, how the extensions work, the scale-to-zero architecture
+  advantages, and where to get started.
 enableTableOfContents: true
-updatedOn: '2026-06-26T12:58:36.951Z'
+updatedOn: '2026-10-23T11:22:59.906Z'
 ---
 
 <Callout title="About Lakebase">
 Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
 </Callout>
 
-Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install the `lakebase_vector` and `lakebase_text` Postgres extensions to start building search features.
+Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install `lakebase_vector` for vector search, `lakebase_text` for BM25 keyword search, and `lakebase_tokenizer` for configurable tokenization.
 
 ## Vector, keyword, and hybrid search
 
@@ -22,16 +23,17 @@ Lakebase Search gives you two complementary ways to search. Use either on its ow
 
 - **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding (a numeric vector from a model), and the `lakebase_ann` index returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
 - **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index. Use it for names, codes, and exact-term lookups where wording matters.
-- **Hybrid search** runs both and merges the results into one ranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows a worked hybrid query.
+- **Hybrid search** combines vector and keyword results with fusion or reranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows how to combine results with Jev through Neon AI Gateway or RRF.
 
 ![Keyword search matches only documents that contain the typed words and misses synonyms like "quick automobile" for "fast sports car." Vector search places the query and documents in the same embedding space and returns the nearest neighbors by meaning, including those synonyms.](/docs/ai/lakebase-search-keyword-vs-vector.png)
 
 ## How it works
 
-Lakebase Search is two Postgres extensions:
+Lakebase Search is built on three Postgres extensions:
 
 - **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
 - **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from Postgres full-text search required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
+- **[`lakebase_tokenizer`](/docs/extensions/lakebase-tokenizer)**: adds configurable whole-word tokenization and Chinese, Japanese, and Korean (CJK) morphological analysis through Postgres's text-search dictionary interface. It produces standard `tsvector` values that work with GIN and `lakebase_bm25` indexes.
 
 ## How `lakebase_ann` scales
 
@@ -48,11 +50,13 @@ It uses IVF (Inverted File) partitioning to divide the vector space into lists a
 
 <DetailIconCards>
 
-<a href="/docs/ai/lakebase-search-get-started" description="Enable both extensions, create a schema, insert documents with embeddings, and run your first searches" icon="openai">Quickstart</a>
+<a href="/docs/ai/lakebase-search-get-started" description="Install lakebase_vector and lakebase_text, create a schema, insert documents with embeddings, and run your first searches" icon="openai">Quickstart</a>
 
 <a href="/docs/extensions/lakebase-vector" description="Index options, operator classes, and tuning reference for lakebase_vector" icon="openai">lakebase_vector reference</a>
 
 <a href="/docs/extensions/lakebase-text" description="BM25 operators, functions, fallback parameters, and prefilter reference for lakebase_text" icon="openai">lakebase_text reference</a>
+
+<a href="/docs/extensions/lakebase-tokenizer" description="Whole-word and CJK tokenization, built-in language configurations, custom stop words, synonyms, and stemming" icon="openai">lakebase_tokenizer reference</a>
 
 </DetailIconCards>
 

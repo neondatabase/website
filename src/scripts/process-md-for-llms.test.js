@@ -67,7 +67,7 @@ describe('MDX to Markdown Conversion', () => {
 
       // FeatureBeta should be replaced with its content (an Admonition)
       expect(result).toContain('**Note:**');
-      expect(result).toContain('This feature is in Beta');
+      expect(result).toContain('This feature is in beta');
       expect(result).not.toContain('<FeatureBeta');
     });
 
@@ -117,8 +117,9 @@ describe('MDX to Markdown Conversion', () => {
     });
 
     it('should render both AI Gateway model groups with links to accurate quickstarts', async () => {
-      const inputPath = 'content/docs/ai-gateway/models.md';
-      const pageUrl = 'https://neon.com/docs/ai-gateway/models';
+      // The interactive catalog lives on the AI Gateway landing page (overview).
+      const inputPath = 'content/docs/ai-gateway/overview.md';
+      const pageUrl = 'https://neon.com/docs/ai-gateway/overview';
       const projectRoot = process.cwd();
 
       const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
@@ -230,6 +231,21 @@ More content.
       expect(result).not.toContain('NeedHelp');
     });
 
+    it('should convert AgentPrompt like CopyPrompt (clean View prompt link)', async () => {
+      const result = await processInlineMdx(`
+Some content here.
+
+<AgentPrompt src="/prompts/test.md" title="Set up with your agent" buttonText="Copy prompt" />
+
+More content.
+`);
+      expect(result).toContain('Some content here.');
+      expect(result).toContain('More content.');
+      expect(result).toContain('[View prompt](https://neon.com/prompts/test.md)');
+      expect(result).not.toContain('<AgentPrompt');
+      expect(result).not.toContain('[AgentPrompt]');
+    });
+
     it('should preserve details/summary as HTML', async () => {
       const result = await processInlineMdx(`
 <details>
@@ -259,6 +275,22 @@ Hidden content here.
         '- [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon'
       );
       expect(result).not.toContain('<TechCards');
+    });
+
+    it('should convert DemoCards to a list of demos with links', async () => {
+      const result = await processInlineMdx(`
+<DemoCards>
+<DemoCard title="1 Million Boxes" description="A multiplayer game." stack="Postgres, Realtime" demo="https://one-million-boxes.vercel.app" github="https://github.com/samwillis/one-million-boxes" image="/docs/realtime/examples/one-million-boxes.png" />
+<DemoCard title="Image jobs" description="Live image processing." github="https://github.com/msfstef/neon-realtime-image-jobs" />
+</DemoCards>
+`);
+      expect(result).toContain(
+        '- **1 Million Boxes**: A multiplayer game. Uses Postgres, Realtime. [Live demo](https://one-million-boxes.vercel.app) · [GitHub](https://github.com/samwillis/one-million-boxes)'
+      );
+      expect(result).toContain(
+        '- **Image jobs**: Live image processing. [GitHub](https://github.com/msfstef/neon-realtime-image-jobs)'
+      );
+      expect(result).not.toContain('<DemoCard');
     });
 
     it('should extract InfoBlock children', async () => {
@@ -672,6 +704,61 @@ See [CONN_MAX_AGE](https://example.com).
     });
   });
 
+  // Non-breaking spaces are web typography and should not reach agents
+  describe('Non-breaking spaces', () => {
+    const NBSP = '\u00A0';
+
+    async function processInlineMdx(mdxContent, frontmatter = 'title: Test') {
+      const tempPath = '/tmp/test-nbsp-conversion.md';
+      await fs.writeFile(tempPath, `---\n${frontmatter}\n---\n${mdxContent}`);
+      return (await processFile(tempPath)).content;
+    }
+
+    it('should convert the &nbsp; entity to a regular space', async () => {
+      const result = await processInlineMdx(`
+Share your feedback via the&nbsp;[Neon&nbsp;Console](https://example.com).
+`);
+      expect(result).toContain('via the [Neon Console](https://example.com)');
+      expect(result).not.toContain('&nbsp;');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code fence', async () => {
+      const result = await processInlineMdx(`
+\`\`\`jsx
+<h1>Community Message Board&nbsp;</h1>
+\`\`\`
+`);
+      expect(result).toContain('<h1>Community Message Board&nbsp;</h1>');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should preserve a literal &nbsp; inside a code span', async () => {
+      const result = await processInlineMdx(`
+Use \`&nbsp;\` to stop the wrap.
+`);
+      expect(result).toContain('`&nbsp;`');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert a literal U+00A0 character to a regular space', async () => {
+      const result = await processInlineMdx(`
+Built for apps${NBSP}and${NBSP}agents.
+`);
+      expect(result).toContain('Built for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+
+    it('should convert non-breaking spaces in the subtitle', async () => {
+      const result = await processInlineMdx(
+        'Body text.',
+        `title: Test\nsubtitle: 'Realtime live SQL for apps${NBSP}and${NBSP}agents.'`
+      );
+      expect(result).toContain('Realtime live SQL for apps and agents.');
+      expect(result).not.toContain(NBSP);
+    });
+  });
+
   // Test index pointer
   describe('Index pointer', () => {
     it('should not include index pointer in processFile output (moved to page header)', async () => {
@@ -821,16 +908,16 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // extensions/pgvector appears in both AI section and Extensions section;
-      // should prefer Extensions (siblings share extensions/ prefix)
+      // extensions/pgvector appears in both AI section and Postgres extensions section;
+      // should prefer Postgres extensions (siblings share extensions/ prefix)
       const pgvectorEntry = navMap.get('extensions/pgvector');
       expect(pgvectorEntry).toBeDefined();
       expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
-      expect(pgvectorEntry.sectionName).toBe('Extensions');
+      expect(pgvectorEntry.sectionName).toBe('Postgres extensions');
 
-      // auth/overview appears in "Start with Neon" and the Auth section;
+      // auth/about appears in "Start with Neon" and the Auth section;
       // should prefer Auth section (siblings share auth/ prefix)
-      const authEntry = navMap.get('auth/overview');
+      const authEntry = navMap.get('auth/about');
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
       expect(authEntry.breadcrumbs).toContain('Auth');
@@ -848,7 +935,7 @@ See [CONN_MAX_AGE](https://example.com).
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('Note for AI assistants');
-      expect(stripped).not.toContain('/api/docs-feedback');
+      expect(stripped).not.toContain('feedback.neon.tech');
     });
 
     it('should strip related docs and feedback footers together', () => {
@@ -1033,15 +1120,20 @@ See [CONN_MAX_AGE](https://example.com).
         'AgentSkillsTip',
         'MCPTools',
         'LinkAPIKey',
-        'LRNotice',
         'PrivatePreview',
         'PrivatePreviewEnquire',
         'PublicPreview',
-        'LRBeta',
         'MigrationAssistant',
         'NextSteps',
         'NewPricing',
         'AzureRegionsDeprecation',
+        'RealtimeSdkBackend',
+        'RealtimeSdkClient',
+        'RealtimeSdkReact',
+        'RealtimeSdkTanstackDb',
+        'RealtimeSdkDrizzle',
+        'RealtimeSdkDrizzleClient',
+        'RealtimeSdkKysely',
         'CopyPrompt',
         'NeedHelp',
         'Comment',

@@ -9,7 +9,7 @@ summary: >-
   point-in-time operation. Writes on PlanetScale must be paused during
   migration to prevent data loss. Use this guide when switching from PlanetScale
   to Neon and needing a full schema-plus-data transfer. Neon's Free plan
-  supports up to 0.5 GB; larger databases require a paid plan. The Neon
+  supports up to 1 GB; larger databases require a paid plan. The Neon
   connection string needs the endpoint ID embedded in the password field as a
   pgloader workaround.
 enableTableOfContents: true
@@ -25,7 +25,7 @@ Before you begin, make sure that you have the following:
 - A PlanetScale account and a database you want to migrate. PlanetScale databases use MySQL-compatible Vitess.
 - A Neon account and a project. See [Sign up](/docs/get-started/signing-up).
 - A properly named database. For example, if you are migrating a database named `my_app`, you might want to create a database of the same name in Neon. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
-- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 1 GB of data. If your data size is more than 1 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 - **Schedule migration downtime:** `pgloader` performs a point-in-time migration, which means that any changes made to the PlanetScale database after the migration process has started will not be reflected in the Neon database. You will need to pause writes to your PlanetScale database (schedule downtime) during the migration to avoid data loss.
 - **Configure IP allowlisting:** Ensure that the machine running `pgloader` has its IP address permitted on both the PlanetScale and Neon sides. See [PlanetScale IP restrictions](https://planetscale.com/docs/postgres/connecting/ip-restrictions) and Neon [IP allow rules](/docs/manage/projects#configure-ip-allow).
 

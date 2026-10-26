@@ -21,7 +21,7 @@ Neon's three plans run on the same lakebase architecture. Moving from the Free p
 | ---------------- | ----------------------------- | ------------------ | -------------------------------------------- |
 | Monthly fee      | $0                            | Pay per use        | Pay per use                                  |
 | Compute price    | 100 CU-hours/project included | $0.106/CU-hour     | $0.222/CU-hour                               |
-| Storage          | 0.5 GB/project                | $0.35/GB-month     | $0.35/GB-month                               |
+| Storage          | 1 GB/project                  | $0.35/GB-month     | $0.35/GB-month                               |
 | Autoscaling max  | 2 CU (≈8 GB RAM)              | 16 CU (≈64 GB RAM) | 16 CU autoscaling, 56 CU fixed (≈224 GB RAM) |
 | Scale to zero    | 5 min, fixed                  | 5 min, can disable | 1 min to always on                           |
 | Branches/project | 10                            | 10                 | 25                                           |
@@ -41,7 +41,7 @@ Some features are only on the Scale plan: HIPAA, IP Allow, Private Networking, a
 Common signals:
 
 - You're hitting the 100 CU-hours per project Free plan compute allowance.
-- A project's data is approaching 0.5 GB.
+- A project's data is approaching 1 GB.
 - You need to turn off scale to zero for a production database.
 - You need more than the Free plan's 6-hour history window (up to 1 GB-month) for instant restore.
 - You want protected branches to guard production against accidental deletes and resets.

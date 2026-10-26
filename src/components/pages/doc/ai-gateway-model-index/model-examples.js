@@ -12,8 +12,9 @@ const ENV_EXAMPLE = `# Injected by \`neon env pull\` when AI Gateway is enabled 
 # apiKey + baseURL from them: apiKey = NEON_AI_GATEWAY_TOKEN (the bearer, nt_live_...).
 #
 # NEON_AI_GATEWAY_BASE_URL is the bare gateway host (no path). Append the route you need:
-#   - \`/v1\`        - unified Chat Completions
+#   - \`/v1\`        - unified Chat Completions and \`/v1/embeddings\`
 #   - \`/openai/v1\` - OpenAI Responses API
+#   - \`/typesafe\`  - TypeSafe SDK base URL for System One decisions (\`/typesafe/v1/systemone\`)
 # @neondatabase/ai-sdk-provider and Mastra route requests automatically.
 
 NEON_AI_GATEWAY_TOKEN=nt_live_...
@@ -24,7 +25,7 @@ const EXAMPLE_KEYS = {
   'ai-sdk': 'aisdk',
   typescript: 'ts',
 };
-const MODEL_MODES = ['text', 'image'];
+const MODEL_MODES = ['text', 'image', 'embeddings', 'decisions'];
 
 const getInstallCommand = ({ dependencies = [], language }) => {
   if (dependencies.length === 0) return null;

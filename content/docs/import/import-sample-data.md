@@ -9,7 +9,7 @@ summary: >-
   Pagila, Chinook, Employees, Wikipedia vector embeddings (pgvector), and
   Postgres Air.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -20,7 +20,7 @@ This guide describes how to download and install sample data for use with Neon.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button in the Console nav. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
-- A Neon [paid plan](/docs/introduction/plans) if you intend to install a dataset larger than 0.5 GB.
+- A Neon [paid plan](/docs/introduction/plans) if you intend to install a dataset larger than 1 GB.
 - Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 <Admonition type="note">
@@ -29,7 +29,7 @@ You can also load sample data using the Neon CLI. See [Load sample data with the
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free plan has a storage limit of 500 MB per branch. Datasets larger than 500 MB cannot be loaded on the Free plan.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free plan has a storage limit of 1 GB per project. Datasets larger than 1 GB cannot be loaded on the Free plan.
 
 | Name                                                        | Tables | Records  | Source file size | Installed size |
 | ----------------------------------------------------------- | ------ | -------- | ---------------- | -------------- |

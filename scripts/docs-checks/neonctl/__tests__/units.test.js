@@ -14,7 +14,11 @@ const {
   isLikelyCommand,
   buildTopLevelCommands,
 } = require('../extract-examples.js');
-const { parseCommandFile, enumerateConstEntries, inheritParentOptions } = require('../generate-schema.js');
+const {
+  parseCommandFile,
+  enumerateConstEntries,
+  inheritParentOptions,
+} = require('../generate-schema.js');
 const { loadSchema, resolvePath, resolveValidOptions } = require('../schema.js');
 
 // Writes `source` to a temp .ts file and returns its path, for exercising the
@@ -298,6 +302,59 @@ describe('parseCommandFile: getCliName() in describe templates', () => {
       'Branch to pin. Pin it with `neon checkout <branch>`.'
     );
     expect(parsed.options.link.describe).toBe('Run `neon link` after installing.');
+  });
+});
+
+describe('parseCommandFile: array: true options', () => {
+  it('normalizes `array: true` to type "array"', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "docs";
+      export const describe = "Search the docs";
+      export const builder = (argv: yargs.Argv) =>
+        argv.options({
+          category: { describe: "Category (repeatable)", type: "string", array: true },
+          agent: { describe: "Agent (repeatable)", type: "array" },
+        });
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.options.category.type).toBe('array');
+    expect(parsed.options.agent.type).toBe('array');
+  });
+});
+
+describe('parseCommandFile: string and number literal consts', () => {
+  it('resolves describes, defaults, and examples held in module-level consts', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      const MAX_LIMIT = 40;
+      const DEFAULT_LIMIT = 10;
+      const SEARCH_DESCRIBE = "Search neon.com";
+      export const command = "docs";
+      export const describe = "Search the docs";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("search <query>", SEARCH_DESCRIBE, (yargs) =>
+          yargs
+            .options({
+              limit: {
+                describe: \`Maximum number of results (1-\${MAX_LIMIT})\`,
+                type: "number",
+                default: DEFAULT_LIMIT,
+              },
+            })
+            .example('$0 docs search "reset a branch"', SEARCH_DESCRIBE),
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    const search = parsed.commands.search;
+    // Without literal-const pooling the describe is dropped, the default
+    // leaks as the raw identifier (defaultText: "DEFAULT_LIMIT"), and the
+    // example description comes out empty.
+    expect(search.describe).toBe('Search neon.com');
+    expect(search.options.limit.describe).toBe('Maximum number of results (1-40)');
+    expect(search.options.limit.default).toBe(10);
+    expect(search.options.limit.defaultText).toBeUndefined();
+    expect(search.examples[0].description).toBe('Search neon.com');
   });
 });
 

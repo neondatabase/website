@@ -103,7 +103,7 @@ export default {
         title: 'Database storage',
         subtitle: 'Root and child branches',
       },
-      free: 'Free<span>0.5 GB per Project</span>',
+      free: 'Free<span>1 GB per Project</span>',
       launch: '$0.35 per GB-month',
       scale: '$0.35 per GB-month',
     },
@@ -156,11 +156,11 @@ export default {
       feature: {
         title: 'Managed Better Auth',
       },
-      free: 'Up to 60k MAUs',
+      free: 'Up to 60k MAUs per project',
       launch:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
       scale:
-        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs per project <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
     },
     {
       rows: '2',
@@ -183,13 +183,13 @@ export default {
           {
             title: 'Compute',
             details: [
-              `${functions.free.activeCapacityHours} active capacity-hours`,
-              `${functions.free.waitingCapacityHours} waiting capacity-hours`,
+              `${functions.free.activeCapacityHours} active capacity-hours per project`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours per project`,
             ],
           },
           {
             title: 'Invocations',
-            details: [`${functions.free.invocations} invocations`],
+            details: [`${functions.free.invocations} invocations per project`],
           },
         ],
       },
@@ -231,9 +231,19 @@ export default {
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Prepaid credits</span>",
+        "<a href='/docs/ai-gateway/overview#available-models'>List prices here</a><span>Prepaid credits</span>",
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Realtime',
+        subtitle: 'Beta',
+      },
+      free: 'Free during beta',
+      launch: 'Free during beta<span>Compute and egress billed as usual</span>',
+      scale: 'Free during beta<span>Compute and egress billed as usual</span>',
     },
     {
       rows: '1',

@@ -15,10 +15,10 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-09T09:41:16.035Z'
 ---
 
-You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
+You can manage Managed Better Auth programmatically using the [Neon API](/docs/reference/api), or from the terminal with the [Neon CLI](/docs/cli/neon-auth) (`neon neon-auth`), which wraps these same operations. You can also enable and configure Managed Better Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#available-tools) (`provision_neon_auth`, `update_auth_config`, `add_auth_oauth_provider`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor).
 
 <Admonition type="note">
 Managed Better Auth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.
@@ -71,7 +71,7 @@ The response includes:
 | `base_url`                 | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
 
 <Admonition type="important">
-The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields. For client initialization examples that combine Neon Auth and the Data API from a single Neon URL, see [`createClient()` in the JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
+The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields. For client initialization examples that combine Managed Better Auth and the Data API from a single Neon URL, see [`createClient()` in the JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 If Managed Better Auth is already enabled on the branch, this call returns an error.
@@ -128,7 +128,7 @@ Response (200 OK):
 | ------ | -------------------------------------------------------------- |
 | `name` | The name shown in user-facing auth messages (1-256 characters) |
 
-Each branch manages its own application name independently. You can also update this from the **Auth** page > **Configuration** tab > **Project Info** panel in the Neon Console.
+Each branch manages its own application name independently. You can also update this from **Settings** > **Better Auth** > **Project Info** in the Neon Console.
 
 ## Disable Managed Better Auth
 
@@ -156,22 +156,24 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
 
-| Endpoint                | Methods                  | Description                                                                 |
-| ----------------------- | ------------------------ | --------------------------------------------------------------------------- |
-| `/domains`              | GET, POST, DELETE        | Manage trusted redirect domains                                             |
-| `/oauth_providers`      | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                            |
-| `/email_provider`       | GET, PATCH               | Configure the email provider                                                |
-| `/email_and_password`   | GET, PATCH               | Configure email/password authentication                                     |
-| `/users`                | POST, DELETE, PUT        | Create, delete, and manage user roles                                       |
-| `/plugins`              | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                |
-| `/plugins/magic-link`   | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)     |
-| `/plugins/phone-number` | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number) |
-| `/webhooks`             | GET, PUT                 | Configure webhook notifications                                             |
-| `/allow_localhost`      | GET, PATCH               | Toggle localhost access for development                                     |
-| `/config`               | PATCH                    | Update auth configuration (application name)                                |
-| `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
+| Endpoint                  | Methods                  | Description                                                                                      |
+| ------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------ |
+| `/domains`                | GET, POST, DELETE        | Manage trusted redirect domains                                                                  |
+| `/oauth_providers`        | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)                                                 |
+| `/email_provider`         | GET, PATCH               | Configure the email provider                                                                     |
+| `/email_and_password`     | GET, PATCH               | Configure email/password authentication                                                          |
+| `/users`                  | POST, DELETE, PUT        | Create, delete, and manage user roles                                                            |
+| `/plugins`                | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins)                                     |
+| `/plugins/magic-link`     | PATCH                    | Configure the [Magic Link plugin](/docs/auth/guides/plugins/magic-link)                          |
+| `/plugins/phone-number`   | GET, PATCH               | Configure the [Phone Number plugin](/docs/auth/guides/plugins/phone-number)                      |
+| `/plugins/oauth-provider` | GET, PATCH               | Configure the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider)                  |
+| `/oauth-provider/clients` | GET, POST, PATCH, DELETE | Manage [OAuth clients](/docs/auth/guides/plugins/oauth-provider#create-and-manage-oauth-clients) |
+| `/webhooks`               | GET, PUT                 | Configure webhook notifications                                                                  |
+| `/allow_localhost`        | GET, PATCH               | Toggle localhost access for development                                                          |
+| `/config`                 | PATCH                    | Update auth configuration (application name)                                                     |
+| `/send_test_email`        | POST                     | Send a test email to verify email configuration                                                  |
 
-For full request/response details on these endpoints, see the [interactive API Reference](/docs/reference/api).
+For full request/response details on these endpoints, see the [interactive API Reference](/docs/reference/api). For the OAuth provider (beta), see the reference for [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-provider-plugin) and [updating](/docs/reference/api/auth/update-neon-auth-o-auth-provider-plugin) the plugin configuration, and for [listing](/docs/reference/api/auth/list-neon-auth-o-auth-clients), [creating](/docs/reference/api/auth/create-neon-auth-o-auth-client), [retrieving](/docs/reference/api/auth/get-neon-auth-o-auth-client), [updating](/docs/reference/api/auth/update-neon-auth-o-auth-client), [deleting](/docs/reference/api/auth/delete-neon-auth-o-auth-client), and [rotating the secret of](/docs/reference/api/auth/rotate-neon-auth-o-auth-client-secret) OAuth clients.
 
 <Admonition type="tip" title="TypeScript SDK">
 You can also manage Managed Better Auth using the [Neon TypeScript SDK](/docs/reference/typescript-sdk).

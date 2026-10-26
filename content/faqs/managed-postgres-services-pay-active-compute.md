@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-services-reset-development-environment
 ---
 
-Neon bills compute in CU-hours (compute-unit hours): compute size multiplied by the time the compute runs. When your database is idle, the compute suspends and stops accruing compute charges. Paid plans have [no minimum monthly fee](/docs/introduction/plans). Storage still bills while the compute is suspended ($0.35/GB-month on paid plans; the Free plan includes 0.5 GB per project).
+Neon bills compute in CU-hours (compute-unit hours): compute size multiplied by the time the compute runs. When your database is idle, the compute suspends and stops accruing compute charges. Paid plans have [no minimum monthly fee](/docs/introduction/plans). Storage still bills while the compute is suspended ($0.35/GB-month on paid plans; the Free plan includes 1 GB per project).
 
 ## How CU-hours work
 

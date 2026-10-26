@@ -248,6 +248,21 @@
         @apply p-3 leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-85;
       }
 
+      /* First-column cells that hold only code chips (optionally linked),
+         e.g. the name column of an API or settings table. The global
+         inline-code rule's `overflow-wrap: anywhere` lets the table's auto
+         layout shrink this column until identifiers break mid-word; keep
+         each chip's words whole so the column fits its longest identifier.
+         Chips can still wrap at spaces. Applies above the `sm` breakpoint
+         only; below it, chips keep the default breaking so tables stay as
+         narrow as possible. */
+      @media (min-width: 640px) {
+        td:first-child:has(> code, > a > code):not(:has(> :not(code, a))) code {
+          overflow-wrap: normal;
+          word-break: normal;
+        }
+      }
+
       thead {
         @apply sticky top-0 z-10 bg-white dark:bg-black-pure;
 
@@ -494,20 +509,47 @@
       @apply mb-0;
     }
 
-    /* Mermaid diagram styles */
+    /* Mermaid diagram styles (rendered by pele, themed with --pele-* variables) */
     .mermaid-container {
       @apply my-8 overflow-x-auto rounded-lg border border-gray-new-94 bg-white p-6 dark:border-gray-new-20 dark:bg-gray-new-10;
       font-size: 14px;
       letter-spacing: normal;
       line-height: normal;
-    }
 
-    .mermaid-container foreignObject {
-      overflow: visible;
-    }
+      --pele-font: var(--font-geist-mono), ui-monospace, monospace;
+      --pele-font-mono: var(--font-geist-mono), ui-monospace, monospace;
+      --pele-bg: #ffffff;
+      --pele-fg: #131415;
+      --pele-muted: #61646b;
+      --pele-line: #94979e;
+      --pele-surface: #fafafa;
+      --pele-surface-alt: #f2f2f3;
+      --pele-border: #00cc88;
+      --pele-accent: #00e599;
+      --pele-critical: #ff4c79;
+      --pele-series-1: #00e599;
+      --pele-series-2: #ff4c79;
+      --pele-series-3: #f0f075;
+      --pele-series-4: #ffa64c;
+      --pele-series-5: #aa99ff;
+      --pele-series-6: #259df4;
+      --pele-series-7: #ade0eb;
+      --pele-series-8: #fbd0d7;
 
-    .mermaid-container foreignObject > div {
-      text-align: center;
+      .dark & {
+        --pele-bg: #18191b;
+        --pele-fg: #e4e5e7;
+        --pele-muted: #94979e;
+        --pele-line: #61646b;
+        --pele-surface: #242628;
+        --pele-surface-alt: #131415;
+      }
+
+      /* pele draws text on colored fills (e.g. gantt bars) in --pele-bg, which is white on our
+         bright accent colors in light mode. Keep it dark in both themes for contrast. */
+      text[fill='var(--_bg)'] {
+        fill: #131415;
+      }
     }
   }
 
@@ -533,6 +575,10 @@
 
   .prose-static {
     @apply prose-ol:list-none;
+
+    a {
+      @apply xs:wrap-anywhere;
+    }
 
     ol {
       counter-reset: item;

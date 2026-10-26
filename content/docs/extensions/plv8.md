@@ -17,6 +17,8 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 
 **plv8** is deprecated because of **security risks** tied to embedding the V8 JavaScript engine inside Postgres. Neon blocks **`CREATE EXTENSION plv8`** with an explicit deprecation message (same mechanism as other deprecated extensions).
 
+The **`plcoffee`** (CoffeeScript) and **`plls`** (LiveScript) extensions ship with plv8 on Postgres 14, 15, and 16 and run on the same V8 engine, so they're deprecated too. Neon also blocks **`CREATE EXTENSION plcoffee`** and **`CREATE EXTENSION plls`**. Databases that already have them keep working until you drop them.
+
 **If you use plv8 today:** move business logic out of JavaScript-in-SQL—for example rewrite functions in **[plpgsql](https://www.postgresql.org/docs/current/plpgsql.html)** or run JavaScript in your **application** or **worker** layer—and then drop **`plv8`** from databases that still have it. See also [Supported Postgres extensions](/docs/extensions/pg-extensions).
 
 **Alternatives:**

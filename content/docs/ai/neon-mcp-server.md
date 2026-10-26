@@ -6,7 +6,9 @@ summary: >-
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+redirectFrom:
+  - /docs/ai/mcp
+updatedOn: '2026-10-15T20:24:27.880Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -66,7 +68,7 @@ Append `?readonly=true` to restrict the server to read operations:
 https://mcp.neon.tech/mcp?readonly=true
 ```
 
-`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled.
+`SELECT` queries and schema inspection remain available. Write operations (creating branches, running migrations, modifying auth config) are disabled. `run_sql_transaction` isn't available in read-only mode; use `run_sql` for read queries.
 
 With OAuth, you can also choose read-only scope during the authorization flow instead of using the URL parameter.
 
@@ -93,6 +95,28 @@ See [Available tools](#available-tools) for the full category list. To verify wh
 ```bash
 curl "https://mcp.neon.tech/api/list-tools?readonly=true&category=querying"
 ```
+
+### Postgres role
+
+By default, SQL tools connect as the database owner. Set `?roleName=<role>` to make every SQL tool log in as that Postgres role instead, so the role's grants decide what the agent can read and change:
+
+```
+https://mcp.neon.tech/mcp?readonly=true&roleName=app_reader
+```
+
+The role must exist on each branch you query and be able to log in. For example, a role that can only read one table:
+
+```sql
+CREATE ROLE app_reader LOGIN PASSWORD '<password>';
+GRANT SELECT ON public.orders TO app_reader;
+```
+
+Create the role with SQL, as shown above. Roles created in the Neon Console, CLI, or API are members of [`neon_superuser`](/docs/manage/roles#the-neonsuperuser-role), which can read all data, so pinning one of those roles doesn't limit what the agent can read. See [Manage database access](/docs/manage/database-access) for least-privilege role examples.
+
+- `role_name` arguments that name a different role are rejected, and a role that cannot log in fails the call without falling back to the owner.
+- `get_connection_string` is not available on a pinned connection.
+- The role applies to SQL only. Combine it with `readonly=true` and `category` to limit Management API tools too.
+- With OAuth, `roleName` on the URL is fixed when you authorize. With the plain `https://mcp.neon.tech/mcp` URL, enter the role in the optional **Postgres role** field on the authorization page instead.
 
 ## MCP security guidance
 

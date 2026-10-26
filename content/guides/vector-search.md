@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use pgvector for vector search 
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-02-04T13:24:36.612Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-09-30T00:39:07.369Z'
 ---
 
 Vector search lets you run similarity searches on vectors stored in Postgres.
@@ -115,7 +115,28 @@ CREATE TABLE embeddings (
 
 ### How to generate embeddings
 
-In most cases, embeddings are created using external services such as [OpenAI](https://platform.openai.com/docs/guides/embeddings) or [Gemini](https://ai.google.dev/gemini-api/docs/embeddings). Once generated, they can be stored in Postgres for vector search with `pgvector`. The dimensionality of the `vector` column must match the model you use (for example, 512, 768, or 1536 dimensions), and your query vectors must use the same model.
+In most cases, embeddings are created using an embeddings API such as the [Neon AI Gateway](/docs/ai-gateway/embeddings), [OpenAI](https://platform.openai.com/docs/guides/embeddings), or [Gemini](https://ai.google.dev/gemini-api/docs/embeddings). Once generated, they can be stored in Postgres for vector search with `pgvector`. The dimensionality of the `vector` column must match the model you use (for example, 512, 768, or 1536 dimensions), and your query vectors must use the same model.
+
+The Neon AI Gateway serves embedding models on an OpenAI-compatible endpoint, using the same Neon credential as the rest of your project. Point the `openai` SDK at your branch's gateway URL:
+
+```javascript shouldWrap
+import OpenAI from 'openai';
+
+const client = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
+});
+
+const response = await client.embeddings.create({
+  model: 'qwen3-embedding-0-6b', // returns 1024-dimensional vectors
+  input: 'i like to eat tacos',
+  encoding_format: 'float', // required on the openai SDK v6; harmless on v7+
+});
+
+const embedding = response.data[0].embedding; // store this in a VECTOR(1024) column
+```
+
+Size the `vector` column to match the model (1024 for the gateway models above). See [Embeddings](/docs/ai-gateway/embeddings) for the full model list.
 
 For this example, we will use embeddings generated from the [Nomic API](https://docs.nomic.ai/reference/api/embed-text-v-1-embedding-text-post).
 

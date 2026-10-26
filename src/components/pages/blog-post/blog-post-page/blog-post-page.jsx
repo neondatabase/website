@@ -22,6 +22,7 @@ import RequestForm from 'components/shared/request-form';
 import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
+import getNofollowRel from 'utils/get-nofollow-rel';
 
 const renderBlogCodeBlockFromPre = async (props) => {
   const codeElement = props?.children;
@@ -69,6 +70,11 @@ const renderBlogRequestForm = (props) => {
 };
 
 const mdxComponents = {
+  a: ({ href, rel, children, ...props }) => (
+    <a href={href} rel={getNofollowRel(href, rel) ?? rel} {...props}>
+      {children}
+    </a>
+  ),
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
   img: renderBlogImage,

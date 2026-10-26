@@ -24,20 +24,21 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 Tools are grouped into categories. Use the \`?category=\` URL parameter to restrict which categories are active. You can pass it more than once to enable multiple categories.
 
-| Category                          | What it enables                                                                                                             |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Project management (\`projects\`)   | List, create, describe, and delete projects; list organizations                                                             |
-| Branch management (\`branches\`)    | Create, reset, and delete branches; manage Postgres roles and databases                                                     |
-| Compute endpoints (\`endpoints\`)   | List, create, start, suspend, and restart branch computes                                                                   |
-| Snapshots (\`snapshots\`)           | Create, restore, and schedule snapshots                                                                                     |
-| Schema (\`schema\`)                 | Inspect tables and columns; compare schemas                                                                                 |
-| SQL (\`querying\`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as \`neon inspect db\` |
-| Managed Better Auth (\`neon_auth\`) | Provision Auth; manage OAuth providers, trusted domains, and users                                                          |
-| Neon Data API (\`data_api\`)        | Enable, update, and disable the Data API for a branch                                                                       |
-| Observability (\`observability\`)   | Query function and storage logs; check AI Gateway availability                                                              |
-| Documentation (\`docs\`)            | Look up Neon documentation from within your assistant (no OAuth required)                                                   |
-| Functions (\`functions\`)           | List, deploy, update, and delete Neon Functions                                                                             |
-| Object storage (\`storage\`)        | Manage buckets and objects; create presigned URLs                                                                           |
+| Category                          | What it enables                                                                                                                                           |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project management (\`projects\`)   | List, create, describe, and delete projects; list organizations                                                                                           |
+| Branch management (\`branches\`)    | Create, reset, and delete branches; manage Postgres roles and databases                                                                                   |
+| Compute endpoints (\`endpoints\`)   | List, create, start, suspend, and restart branch computes                                                                                                 |
+| Snapshots (\`snapshots\`)           | Create, restore, and schedule snapshots                                                                                                                   |
+| Schema (\`schema\`)                 | Inspect tables and columns; compare schemas                                                                                                               |
+| SQL (\`querying\`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as \`neon inspect db\`                               |
+| Managed Better Auth (\`neon_auth\`) | Provision Auth; manage OAuth providers, trusted domains, and users                                                                                        |
+| Neon Data API (\`data_api\`)        | Enable, update, and disable the Data API for a branch                                                                                                     |
+| Observability (\`observability\`)   | Query function and storage logs; check AI Gateway availability                                                                                            |
+| Documentation (\`docs\`)            | Search and read Neon docs, the API reference, guides, the PostgreSQL tutorial, the blog, and the changelog from within your assistant (no OAuth required) |
+| Functions (\`functions\`)           | List, deploy, update, and delete Neon Functions                                                                                                           |
+| Object storage (\`storage\`)        | Manage buckets and objects; create presigned URLs                                                                                                         |
+| Realtime (\`realtime\`)             | Enable and disable Realtime for a branch; get and rotate its secret                                                                                       |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](https://neon.com/docs/ai/neon-mcp-server#project-scoped-mode).
 
@@ -50,12 +51,6 @@ The \`querying\` category includes \`inspect_database\`, which runs the same 15 
 ### LinkAPIKey
 
 **Note:** To learn more about the types of API keys you can create — personal, organization, or project-scoped — see [Manage API Keys](https://neon.com/docs/manage/api-keys).
-
-### LRNotice
-
-**Important: Enrollment Pause for Logical Replication Beta**
-
-We have temporarily paused new enrollments in our Logical Replication Beta program. This pause is aimed at evaluating the feature's performance and incorporating feedback from our early adopters. Please stay tuned for updates, and thank you for your interest. We plan to reopen enrollment again soon.
 
 ### PrivatePreview
 
@@ -74,12 +69,6 @@ This feature is in private preview: it's not ready for production use, and it ma
 **Note: Public Preview**
 
 This feature is in Public Preview. Please provide [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
-
-### LRBeta
-
-**Note: Beta**
-
-Replicating data to Neon, where Neon is configured as a subscriber in a Postgres logical replication setup, is currently in Beta. We welcome your feedback to help improve this feature. You can provide feedback via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or by reaching out to us on [Discord](https://neon.com/discord).
 
 ### MigrationAssistant
 
@@ -368,13 +357,13 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 **Note: Beta**
 
-This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord).
+This feature is in beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://neon.com/discord). For more ways to reach us, see [Send feedback](https://neon.com/docs/introduction/feedback).
 
 ### FeatureBetaProps (with prop)
 
 **Note: Beta**
 
-The **Autoscaling** is in Beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Example feature** is in beta. Share your feedback on [Discord](https://neon.com/discord) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 ### EarlyAccessProps (with prop)
 

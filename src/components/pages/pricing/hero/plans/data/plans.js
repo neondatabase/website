@@ -3,6 +3,12 @@ import LINKS from 'constants/links';
 
 const { objectStorage, functions } = BACKEND_PRICING;
 
+const realtimeFeature = {
+  title: 'Realtime (Beta)',
+  info: '<p>Free during beta</p><p>Database compute and egress are billed as usual</p>',
+  moreLink: { text: 'Read more', href: LINKS.realtime },
+};
+
 export default [
   {
     planId: 'free',
@@ -25,7 +31,7 @@ export default [
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
-            title: '0.5 GB of storage per project',
+            title: '1 GB of storage per project',
           },
           {
             title: 'Sizes up to 2 CU (8 GB RAM)',
@@ -38,15 +44,16 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs per project' },
           {
             title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             info: '<p>5 GB per project included</p>',
           },
           {
             title: 'Functions',
-            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per project per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per project per month</p><p>${functions.free.invocations} invocations per project per month</p>`,
           },
+          { ...realtimeFeature, info: '<p>Free during beta</p>' },
         ],
       },
     },
@@ -88,7 +95,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
@@ -102,9 +109,10 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },
@@ -146,7 +154,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs per project' },
           {
             title: 'Object Storage',
             info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p>`,
@@ -160,9 +168,10 @@ export default [
             info: 'Pricing matches model provider list prices (no markup). Billed as prepaid credits.',
             moreLink: {
               text: 'Full list here',
-              href: '/docs/ai-gateway/models#available-models',
+              href: '/docs/ai-gateway/overview#available-models',
             },
           },
+          realtimeFeature,
         ],
       },
     },

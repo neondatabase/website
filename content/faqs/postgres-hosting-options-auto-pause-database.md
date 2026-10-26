@@ -19,7 +19,7 @@ Neon suspends a Lakebase Postgres compute after a period of inactivity and resum
 
 A provisioned Postgres instance keeps running when no one is connected, and you pay for it by the hour either way.
 
-The lakebase architecture separates storage from compute. After 5 minutes of inactivity (by default), Neon suspends the compute. Your data stays in storage, which bills separately: $0.35/GB-month on paid plans, or up to 0.5 GB per project on the Free plan.
+The lakebase architecture separates storage from compute. After 5 minutes of inactivity (by default), Neon suspends the compute. Your data stays in storage, which bills separately: $0.35/GB-month on paid plans, or up to 1 GB per project on the Free plan.
 
 Per-plan settings from [Neon plans](/docs/introduction/plans):
 

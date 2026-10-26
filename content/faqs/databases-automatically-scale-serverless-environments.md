@@ -32,7 +32,7 @@ Each CU allocates about 4 GB of RAM, along with matching CPU and local SSD. See 
 After 5 minutes of inactivity, Neon suspends the compute, and it accrues no CU-hours while suspended. The next query wakes it in a few hundred milliseconds. The 5-minute setting is fixed on the Free plan. On the Launch plan you can turn scale to zero off, and on the Scale plan you can set the idle window anywhere from 1 minute to always on. See [Scale to zero](/docs/introduction/scale-to-zero).
 
 <Admonition type="note">
-Storage bills at $0.35/GB-month on paid plans, and the Free plan includes 0.5 GB per project. Suspending compute doesn't pause storage charges.
+Storage bills at $0.35/GB-month on paid plans, and the Free plan includes 1 GB per project. Suspending compute doesn't pause storage charges.
 </Admonition>
 
 ## A pricing example

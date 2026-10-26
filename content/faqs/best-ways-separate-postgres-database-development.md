@@ -32,7 +32,7 @@ Each branch has its own connection string and its own compute, which scales to z
 
 ## Plan limits
 
-- **Free plan**: 10 branches per project, 0.5 GB storage per project
+- **Free plan**: 10 branches per project, 1 GB storage per project
 - **Launch plan**: 10 branches included per project, then $1.50/branch-month, up to 5,000 per project
 - **Scale plan**: 25 branches included per project, then $1.50/branch-month, up to 5,000 per project
 

@@ -18,7 +18,7 @@ Neon. Sign up at [console.neon.tech](https://console.neon.tech/signup), create a
 ## What you get on the Free plan
 
 - 100 projects, so each app can have its own
-- 0.5 GB of storage per project
+- 1 GB of storage per project
 - 100 CU-hours/month of compute per project, autoscaling up to 2 CU (≈8 GB RAM)
 - 5 GB of public network transfer per project per month
 - 10 branches per project for development and previews
@@ -61,7 +61,7 @@ On serverless platforms like Vercel or Cloudflare Workers, use the [pooled conne
 
 ## As you grow
 
-Create a [branch](/docs/introduction/branching) for each pull request to test schema changes against a copy of your data. When traffic grows, [autoscaling](/docs/introduction/autoscaling) adjusts compute between the minimum and maximum you set. When traffic stops, the compute suspends and stops accruing CU-hours. Storage still bills on paid plans; on the Free plan, it's included up to 0.5 GB per project.
+Create a [branch](/docs/introduction/branching) for each pull request to test schema changes against a copy of your data. When traffic grows, [autoscaling](/docs/introduction/autoscaling) adjusts compute between the minimum and maximum you set. When traffic stops, the compute suspends and stops accruing CU-hours. Storage still bills on paid plans; on the Free plan, it's included up to 1 GB per project.
 
 ## How it compares for startups
 

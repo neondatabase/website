@@ -5,7 +5,7 @@ enableTableOfContents: true
 ---
 
 <Admonition type="warning" title="pg_search is deprecated">
-`pg_search` (ParadeDB) is deprecated on Neon: new installs are blocked, and existing installs will be removed on **September 21, 2026**. [`lakebase_text`](/docs/extensions/lakebase-text) is its replacement for BM25 search.
+`pg_search` (ParadeDB) was deprecated on Neon: new installs were blocked, and existing installs were retired on **September 21, 2026**. [`lakebase_text`](/docs/extensions/lakebase-text) is its replacement for BM25 search.
 </Admonition>
 
 This guide migrates your BM25 full-text search from `pg_search` to `lakebase_text`. You map your existing indexes and queries to their `lakebase_text` equivalents, verify the results, then remove `pg_search`. `lakebase_text` runs BM25 search through a `lakebase_bm25` index built on standard Postgres `tsvector` types.

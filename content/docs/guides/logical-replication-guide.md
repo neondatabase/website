@@ -12,8 +12,9 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
+  - /docs/guides/logical-replication-prisma-pulse
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Lakebase Postgres database:
@@ -72,11 +73,11 @@ To replicate data from Neon, you must first enable logical replication on your p
 
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
 
+<a href="/docs/guides/logical-replication-neon-to-lakebase" title="Neon to Lakebase" description="Replicate data from Neon to Lakebase Postgres on Databricks" icon="databricks"></a>
+
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 
 <a href="/docs/guides/logical-replication-postgres" title="Neon to PostgreSQL" description="Replicate data from Neon to PostgreSQL" icon="postgresql"></a>
-
-<a href="/docs/guides/logical-replication-prisma-pulse" title="Prisma Pulse" description="Stream database changes in real-time with Prisma Pulse" icon="prisma"></a>
 
 <a href="/docs/guides/sequin" title="Sequin" description="Stream data from platforms like Stripe, Linear, and GitHub to Neon" icon="sequin"></a>
 
@@ -95,6 +96,8 @@ To replicate data from Neon, you must first enable logical replication on your p
 <a href="/docs/import/migrate-from-azure-postgres" title="Azure PostgreSQL" description="Replicate data from Azure PostgreSQL to Neon" icon="azure"></a>
 
 <a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
+
+<a href="/docs/guides/logical-replication-lakebase-to-neon" title="Lakebase to Neon" description="Replicate data from Lakebase Postgres on Databricks to Neon" icon="databricks"></a>
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
 

@@ -11,11 +11,10 @@ description: >-
   a cron or an object-storage event that POSTs to a function. Triggers include
   "serverless function", "deploy an API", "long-running function",
   "streaming agent", "SSE server", "WebSocket server", "webhook handler",
-  "MCP server", "cron", "function trigger", "scheduled function", "cron job",
-  "object storage trigger", "on upload", "run code next to my database",
-  "function that won't time out", "function logs", "Neon Functions",
-  "Neon Compute", "DDoS protection", "rate limiting", and
-  "production hardening".
+  "MCP server", "cron", "scheduled function", "object storage trigger",
+  "on upload", "function that won't time out", "function logs",
+  "Neon Functions", "Neon Compute", "DDoS protection", "rate limiting", and
+  "production hardening". For live UIs over database rows, use neon-realtime.
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-functions
@@ -153,6 +152,16 @@ Keep `.env` or `.env.local` up to date with every key under `functions.*.env`. `
 To deploy a single function without applying `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). That command's `--env` is `KEY=VALUE` (repeatable), not a file path. Use it for a targeted env update. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
 
 When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically. Pass `--env <file>` on that create so Function env that reads `process.env` resolves (`neon checkout feat --create --env .env.local`). Existing process env wins over the file. Checking out an existing branch never reconciles it — apply config changes with `neon deploy --env <file>` (add `--update-existing` only after reviewing those changes).
+
+### Native binaries and custom builds
+
+The default deploy bundles `source` into one `index.mjs`, which cannot hold a compiled binary. Ship one as a separate archive file:
+
+- npm package with a Node addon (`sharp`): `externalPackages: ["sharp"]`. The deploy installs its linux-arm64 glibc build and copies the files in.
+- Your own build output (`.node`, `.so`, `.wasm`, data files): `bundler: "none"` with a prebuilt directory, or an inline `bundler: async (fn) => ({ "index.mjs": …, "bin/tool": … })`.
+- A standalone executable you spawn: ship it as above, then copy it to `/run` and `chmod 755` it at startup. Files in `/opt/function` arrive as mode `644` on a read-only filesystem, and `/tmp` is `noexec`.
+
+Runtime target, pros and cons, working snippets, and size limits: [references/native-binaries.md](references/native-binaries.md).
 
 ## Neon Infrastructure as Code (`neon.ts`)
 
@@ -442,13 +451,15 @@ beat.unref?.();
 
 The client skips these when handling messages. There is no protocol-level shortcut here: the standard `WebSocket` from `upgradeWebSocket` has no `ping()`, and a browser can't send ping frames from JavaScript, so an application-level message is the only keepalive a browser client can use. (A Node `ws` client can send ping frames, and the server auto-replies with a pong, but a browser can't.)
 
-### Keeping clients in sync across isolates (do not skip this)
+### Fan-out across isolates (do not skip this)
 
 Under load the runtime runs **several isolates in parallel, each with its own copy of module state** — so each isolate has its own `clients` set. Broadcasting only to that local set means a client on isolate A never sees an event produced on isolate B, and the feed silently fractures. It's easy to miss: `neon dev` runs a single process (one isolate), so in-process broadcast always _looks_ fine locally but breaks in production, where concurrent connections spread across many isolates.
 
+If the data is database rows (live dashboards, feeds, chat over stored messages), use Neon Realtime (the `neon-realtime` skill) instead of hand-rolling fan-out. Using Realtime does not prevent your database from scaling to zero. The strategies below are for push that doesn't come from database rows (presence, typing, LLM streams), and the fallback where Realtime isn't available, such as on Claimable projects until they're claimed.
+
 Module state doesn't survive eviction anyway, so **Postgres is the shared source of truth**. Pick a fan-out strategy. In every snippet below, `pool` is a pooled `pg` client and `clients` is this isolate's `Set` of live connections.
 
-**1. Poll Postgres — the default, and the only option that keeps Scale to Zero.** Each isolate re-reads the shared state (or rows past a cursor) on a short interval and pushes changes to its own clients. One query per isolate per tick (not per client), and none when the isolate has no clients — so an idle compute still suspends.
+**1. Poll Postgres — the default, and it keeps Scale to Zero.** Each isolate re-reads the shared state (or rows past a cursor) on a short interval and pushes changes to its own clients. One query per isolate per tick (not per client), and none when the isolate has no clients — so an idle compute still suspends.
 
 ```typescript
 let lastId = "0"; // bigint id, so a string
@@ -485,7 +496,7 @@ pool
   .finally(() => setInterval(poll, 1000).unref?.());
 ```
 
-- **Latency:** up to the interval (~1s) — fine for counters, chat, and dashboards.
+- **Latency:** up to the interval (~1s).
 - **Scaling:** database load grows with the number of live isolates, not clients. Keep the cursor on an indexed `serial`/`bigserial` PK and the interval sane.
 - **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
 - **Ordering:** `WHERE id > cursor` can skip a row that commits out of sequence: a transaction that took a lower id but commits after a higher one is already behind the cursor, so the poll never returns it. For a broadcast feed occasional loss is usually fine; when you need every row, use `LISTEN`/`NOTIFY` or poll by `created_at` with a small overlap window and dedupe by id.
@@ -529,7 +540,7 @@ function broadcast(event: unknown) {
 
 **3. External pub/sub (e.g. [Upstash](https://upstash.com) Redis) — best at scale.** For high fan-out, sub-second latency at large connection counts, or multi-region, publish/subscribe through a dedicated broker. Highest throughput, and it doesn't touch Postgres or block Scale to Zero — at the cost of another service to run.
 
-**Rule of thumb:** start with **polling** (works with Scale to Zero, no extra infra); switch to `LISTEN`/`NOTIFY` only on always-on compute that needs sub-second latency; move to Redis when fan-out outgrows Postgres.
+**Rule of thumb:** for database rows, use **Neon Realtime**. Otherwise start with **polling** (works with Scale to Zero, no extra infra); switch to `LISTEN`/`NOTIFY` only on always-on compute that needs sub-second latency; move to Redis when fan-out outgrows Postgres.
 
 ### Client must reconnect
 
@@ -559,7 +570,7 @@ async function connect() {
 connect();
 ```
 
-Together — `upgradeWebSocket` inside `fetch`, JWT auth over `?token=`, cross-isolate fan-out, and client backoff — these compose into a complete realtime chat backend on a single function.
+Together — `upgradeWebSocket` inside `fetch`, JWT auth over `?token=`, cross-isolate fan-out, and client backoff — these compose into a complete WebSocket backend on a single function, for push that doesn't come from database rows (presence, typing, LLM streams) or where Realtime isn't available. For persisted chat, feeds, and other live UIs over database rows, use Neon Realtime (the `neon-realtime` skill).
 
 ## Server-Sent Events (SSE)
 
@@ -595,7 +606,7 @@ export default {
 };
 ```
 
-The same rules as WebSockets apply. **Heartbeat:** a stream stays open only while bytes flow — Neon's window is 15 minutes ([Timeouts and Runtime Limits](#timeouts-and-runtime-limits)) but proxies are usually far stricter, so emit a `: ping\n\n` comment every ~25–30s (shown above) to keep idle streams from being dropped. Keep state in Postgres, and fan out across isolates using one of the [sync strategies](#keeping-clients-in-sync-across-isolates-do-not-skip-this) (hold a `Set` of stream controllers and `enqueue` to each). `EventSource` is GET-only and can't set headers, so authenticate with a `?token=` query param or cookie, exactly like the WebSocket case. [references/sse.md](https://neon.com/docs/ai/skills/neon-functions/references/sse.md) has the full pattern — Hono variant, cross-isolate fan-out, wire format, client, and caveats.
+The same rules as WebSockets apply. **Heartbeat:** a stream stays open only while bytes flow — Neon's window is 15 minutes ([Timeouts and Runtime Limits](#timeouts-and-runtime-limits)) but proxies are usually far stricter, so emit a `: ping\n\n` comment every ~25–30s (shown above) to keep idle streams from being dropped. Keep state in Postgres, and fan out across isolates using one of the [fan-out strategies](#fan-out-across-isolates-do-not-skip-this) (hold a `Set` of stream controllers and `enqueue` to each). `EventSource` is GET-only and can't set headers, so authenticate with a `?token=` query param or cookie, exactly like the WebSocket case. [references/sse.md](https://neon.com/docs/ai/skills/neon-functions/references/sse.md) has the full pattern — Hono variant, cross-isolate fan-out, wire format, client, and caveats.
 
 ## Function Triggers
 
@@ -652,4 +663,5 @@ The Neon documentation is the source of truth and Functions is evolving rapidly,
 - https://neon.com/docs/compute/functions/custom-domains.md
 - https://neon.com/docs/cli/triggers.md
 - [references/function-triggers.md](references/function-triggers.md)
+- [references/native-binaries.md](references/native-binaries.md)
 - [references/production-hardening.md](references/production-hardening.md)

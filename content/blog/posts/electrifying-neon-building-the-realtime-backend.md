@@ -58,7 +58,7 @@ Neon has huge reach and growth with developers. Databricks has a huge distributi
 The more we thought about it, the more we realised that building inside Neon and Databricks would just massively accelerate our route to mainstreaming the tech.
 
 <blockquote>
-<p><strong>“The hard truth about realtime today is that it often fails in production. There is still no general-purpose sync engine on Postgres that works for mainstream apps and agents”</strong></p>
+<p><strong>“The thing about realtime is it demos well but tends to fall over in production. There's a fundamental tension between expressiveness and performance.”</strong></p>
 </blockquote>
 
 ### So, what are you working on then?
@@ -67,15 +67,15 @@ We're doing what you'd expect: building realtime into Neon. Our goal is for Neon
 
 ### OK, go on, what does that mean? What's the problem with realtime that you're solving and what does it mean for Neon to have the best realtime in the market?
 
-The thing about realtime is it demos well but tends to fall over in production. There's a fundamental tension between the expressiveness of what you can sync and the performance of the system. That's why today, despite sync having been explored for decades, there is still no general purpose sync engine on top of Postgres that actually works for mainstream application and agentic system development.
+The classic thing about realtime is it tends to demo well but fall over in production. There's a fundamental tension between the expressiveness of what you can sync and the performance of the system. That's why today, despite sync having been explored for decades, it's still not the main approach developers reach for to build mainstream apps and agents.
 
-We are solving this. We are taking all our expertise from academic research and all our experience building and evolving Electric over the last five years and we are packing it into a next-generation realtime built natively into Neon. I can't tell you yet exactly how it works but I can say that it's going to be the best realtime sync service out there and it's going to work natively with Neon and Lakebase including native support for scale-to-zero and branching.
+We are solving this. We are taking all our expertise from academic research and all our experience building and evolving Electric over the last five years and we are packing it into a next-generation realtime built natively into Neon. I can't tell you yet exactly how it works but I can say that it's going to work natively with Neon and Lakebase including native support for scale-to-zero and branching.
 
-### Neon's recently announced GA for it's backend platform. How does your work on realtime fit into Neon's strategy to build a complete backend around Postgres?
+### Neon's recently announced GA for its backend platform. How does your work on realtime fit into Neon's strategy to build a complete backend around Postgres?
 
 Modern apps and agents need realtime data and end-to-end reactivity. CTOs, tech leads, coding agents, they all know this. So, when you're choosing a backend stack, you typically want to know at least that you can have realtime as part of it. Even if you're not using it right away.
 
-By adding realtime to Neon, we're rounding out the backend platform and taking away any last reason not to choose it. And the way we're doing it aims to not just add realtime to Neon but to make it the best in the market. So developers and coding agents actively choose Neon as the best backend platform for realtime reactivity.
+By adding realtime to Neon, we're rounding out the backend platform and taking away any last reason not to choose Postgres. And the way we're doing it aims to not just add realtime to Neon but to make it the best in the market. So developers and coding agents actively choose Neon as the best backend platform for realtime reactivity.
 
 ---
 

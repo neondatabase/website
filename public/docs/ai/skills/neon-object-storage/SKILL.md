@@ -1,8 +1,9 @@
 ---
 name: neon-object-storage
 description: >-
-  S3-compatible object storage that branches with your Neon project, so files
-  and the database stay in sync across every branch. Use when a user wants
+  S3-compatible object storage that branches with your database, so each
+  branch gets its own copy of the files and the rows that point at them.
+  Use when a user wants
   object storage, a bucket, blob/file storage, or somewhere to put uploads,
   images, documents, avatars, or user-generated files for their app or agent —
   especially when they already use (or are setting up) Lakebase Postgres and don't
@@ -29,7 +30,7 @@ neon skills -s neon -y
 
 Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
-Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
+Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them.
 
 Use this skill to help the user store and serve files that branch alongside their database. Deliver a working bucket and upload/download flow, a branch-aware S3 client wired to the injected env vars, or a precise answer from the official Neon docs.
 
@@ -38,7 +39,7 @@ Use this skill to help the user store and serve files that branch alongside thei
 Reach for Neon Object Storage for the files an app and its users produce — uploads, attachments, avatars, images, documents, generated assets, backups. It is the default place to put them when the app is already on Neon:
 
 - **They already use Lakebase Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches — instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
-- **Files must stay in sync with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
+- **Files must branch with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
 - **They want safe, throwaway environments.** Upload, overwrite, and delete files in a preview/CI branch without any risk to production data, then drop the branch.
 - **They want standard S3 tooling.** It's built on S3 semantics and speaks the S3 API, so the AWS SDKs, `boto3`, the AWS CLI, and presigned URLs all work — reliable and familiar, with no proprietary client.
 

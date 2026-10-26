@@ -22,6 +22,9 @@ const config = require('./llms-index-config');
 
 const BASE_URL = 'https://neon.com';
 const OUTPUT_PATH = 'public/docs/llms.txt';
+// Agent-readiness scanners (e.g. orank) flag a root index over this size. When
+// the build warns, move a large section into a subIndex in llms-index-config.js.
+const MAX_INDEX_CHARS = 30000;
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md', 'GUIDE_TEMPLATE.md'];
 
 const COLLAPSED_ROUTES = config.collapsedRoutes || {};
@@ -536,6 +539,12 @@ async function main() {
   const indexContent = generateIndexText(organized, collapsedEntries);
 
   validateConfig(organized, allExcludeMatchCounts);
+
+  if (indexContent.length > MAX_INDEX_CHARS) {
+    console.warn(
+      `Warning: llms.txt is ${indexContent.length} characters, over the ${MAX_INDEX_CHARS} limit. Move a large section into a subIndex.`
+    );
+  }
 
   // Collect sub-index files to write
   const subIndexFiles = [];

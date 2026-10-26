@@ -4,7 +4,7 @@ subtitle: 'Build a Discord bot with AI chat and image generation using Neon Func
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-23T23:49:26.750Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -90,16 +90,18 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-functions-discord
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-fog-09491284 ("neon-functions-discord") in aws-us-east-2.
-Linked /home/neon-discord-bot/.neon:
-  orgId:     org-round-waterfall-61562384
-  projectId: quiet-fog-09491284
-  branch:    main
+Created project neon-functions-discord in aws-us-east-2
+Linked .neon
+  Project         neon-functions-discord (quiet-fog-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-INFO: Pulled 3 Neon variables into /home/neon-discord-bot/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
-INFO: Created neon.ts with a starter policy.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts with a starter policy.
+Installing @neon/config, @neon/env with npm…
 
 added 15 packages, and audited 42 packages in 3s
 
@@ -107,8 +109,10 @@ added 15 packages, and audited 42 packages in 3s
   `npm run fund` for details
 
 found 0 vulnerabilities
-INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
-INFO: Pulled 3 Neon variables into /home/neon-discord-bot/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ```
 
 ## Configure environment variables
@@ -244,7 +248,7 @@ The CLI will output something like this:
 
 ```bash
 neon deploy --env .env.local
-INFO: → Applying to branch main (br-damp-voice-ajjys6qp)
+→ Applying to branch main (br-damp-voice-a1b2c3d4)
 Applied changes
 ┌────────┬─────────┬──────────────┐
 │ Action │ Kind    │ Identifier   │
@@ -253,7 +257,7 @@ Applied changes
 └────────┴─────────┴──────────────┘
 
 Function URLs
-  • bot: https://br-damp-voice-xxx-bot.compute.c-3.us-east-2.aws.neon.tech
+  • bot: https://br-damp-voice-a1b2c3d4-bot.compute.c-3.us-east-2.aws.neon.tech
 
 Utilized services: Postgres, Functions
 ```
@@ -412,6 +416,7 @@ const sendImagineResponse = async (prompt: string, token: string, application_id
       prompt,
       tools: {
         image_generation: neon.tools.imageGeneration({
+          model: 'gpt-image-2',
           outputFormat: 'jpeg',
           size: '1024x1024',
           quality: 'low',
@@ -508,7 +513,7 @@ The above code does the following:
 
 - **`sendChatResponse`**: This function runs after the deferred response has already been sent. It calls `generateText` with the user's prompt to get an LLM response, then sends a `PATCH` request to the [webhook endpoint](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) to replace the "Bot is thinking..." message with the generated text. If the AI call throws, the `catch` block still sends an error message back to Discord instead of leaving the user stuck on "Bot is thinking...".
 
-- **`sendImagineResponse`**: This function works similarly but uses the `image_generation` tool provided by the Neon AI SDK. The AI model decides when to invoke the tool based on the prompt. The tool returns the image as a base64-encoded string, which the function converts to a `Blob` and uploads to Discord as a file attachment using `FormData`. This is necessary because Discord's [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) endpoint accepts file uploads via multipart form data. You can't embed raw image data in a JSON payload.
+- **`sendImagineResponse`**: This function works similarly but uses the `image_generation` tool provided by the Neon AI SDK. The AI model decides when to invoke the tool based on the prompt. The tool's `model` option sets the image model, which is separate from the `gpt-5-mini` model that calls the tool. Set it to `gpt-image-2`. If you leave it out, the tool falls back to OpenAI's default image model (`gpt-image-1`), and the request fails on AI Gateway. The tool returns the image as a base64-encoded string, which the function converts to a `Blob` and uploads to Discord as a file attachment using `FormData`. This is necessary because Discord's [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) endpoint accepts file uploads via multipart form data. You can't embed raw image data in a JSON payload.
 
 - **Deferred responses in the handler**: When the handler receives a `/chat` or `/imagine` command, it calls the corresponding async function (fire-and-forget with `.catch(console.error)`) and immediately returns `DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE`. This tells Discord to show the "thinking" indicator while the AI processes in the background. The actual response arrives later via the webhook PATCH.
 

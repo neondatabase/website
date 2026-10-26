@@ -9,7 +9,7 @@ summary: >-
   running them against production. Replicas share primary storage at no extra
   cost and automatically suspend after 5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-09-25T09:40:59.046Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries work well for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
@@ -88,8 +88,8 @@ curl --request POST \
 
 ### Connect to the read replica
 
-1. Once the read replica is created, go to your **Project Dashboard**.
-2. Under **Connection Details**, select the replica compute.
+1. Once the read replica is created, click **Connect** at the top of the sidebar.
+2. In the **Connect to your branch** modal, select the replica compute.
 3. Copy the connection string and use it to connect to the replica, either via `psql` or your application.
 
    Your connection string will look something like this:

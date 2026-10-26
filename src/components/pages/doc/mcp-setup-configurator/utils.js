@@ -13,7 +13,21 @@ export function getListToolsBaseUrl() {
   return PROD_LIST_TOOLS_URL;
 }
 
-export function buildQueryParams({ readOnly, projectId, selectedScopes, scopeIdSet, scopeIds }) {
+// Same rule the server applies to `roleName`: one unquoted Postgres identifier.
+const ROLE_NAME_PATTERN = /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/;
+
+export function isValidRoleName(roleName) {
+  return ROLE_NAME_PATTERN.test(roleName);
+}
+
+export function buildQueryParams({
+  readOnly,
+  projectId,
+  roleName,
+  selectedScopes,
+  scopeIdSet,
+  scopeIds,
+}) {
   const params = new URLSearchParams();
   if (readOnly) {
     params.set('readonly', 'true');
@@ -21,6 +35,10 @@ export function buildQueryParams({ readOnly, projectId, selectedScopes, scopeIdS
   const trimmedProjectId = projectId.trim();
   if (trimmedProjectId) {
     params.set('projectId', trimmedProjectId);
+  }
+  const trimmedRoleName = roleName.trim();
+  if (trimmedRoleName && isValidRoleName(trimmedRoleName)) {
+    params.set('roleName', trimmedRoleName);
   }
   const validScopes = selectedScopes.filter((id) => scopeIdSet.has(id));
   if (validScopes.length > 0 && validScopes.length < scopeIds.length) {

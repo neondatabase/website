@@ -31,7 +31,7 @@ The first query after a suspend takes a few hundred milliseconds longer while th
 
 ## What it saves you
 
-On the [Launch plan](/docs/introduction/plans#launch-plan), compute is $0.106/CU-hour. A 0.25 CU (≈1 GB RAM) database that's active 4 hours a day uses 30 CU-hours a month, about $3.18 in compute. The same database running around the clock uses about 186 CU-hours, about $19.72, a little over six times as much. Storage is billed separately at $0.35/GB-month on paid plans; the Free plan includes 0.5 GB per project.
+On the [Launch plan](/docs/introduction/plans#launch-plan), compute is $0.106/CU-hour. A 0.25 CU (≈1 GB RAM) database that's active 4 hours a day uses 30 CU-hours a month, about $3.18 in compute. The same database running around the clock uses about 186 CU-hours, about $19.72, a little over six times as much. Storage is billed separately at $0.35/GB-month on paid plans; the Free plan includes 1 GB per project.
 
 ## Data durability stays the same
 

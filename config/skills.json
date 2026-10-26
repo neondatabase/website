@@ -13,6 +13,7 @@
     },
     { "name": "neon-object-storage", "ref": "main" },
     { "name": "neon-ai-gateway", "ref": "main" },
-    { "name": "neon-functions", "ref": "main" }
+    { "name": "neon-functions", "ref": "main" },
+    { "name": "neon-realtime", "ref": "main" }
   ]
 }

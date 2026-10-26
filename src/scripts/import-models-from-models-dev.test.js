@@ -42,4 +42,31 @@ describe('import-models-from-models-dev', () => {
 
     expect(merged.neon.models['grok-4-6'].provider).toBe('xai');
   });
+
+  it('keeps the catalog released flag on re-import and starts a new model unreleased', () => {
+    const from = path.join(os.tmpdir(), `import-released-${process.pid}.json`);
+    temps.push(from);
+    const { released: _released, ...grok } = catalog.neon.models['grok-4-6'];
+    fs.writeFileSync(
+      from,
+      JSON.stringify({
+        neon: {
+          models: {
+            'grok-4-6': { ...grok, released: false },
+            'grok-new': { ...grok, id: 'grok-new', name: 'Grok New' },
+          },
+        },
+      })
+    );
+
+    const stdout = execFileSync(
+      process.execPath,
+      [SCRIPT, '--from', from, '--models', 'grok-4-6,grok-new', '--stdout'],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    const { models } = JSON.parse(stdout).neon;
+
+    expect(models['grok-4-6'].released).toBe(true);
+    expect(models['grok-new'].released).toBe(false);
+  });
 });

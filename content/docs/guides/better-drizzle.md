@@ -7,7 +7,7 @@ summary: >-
   configure a Better Drizzle client, define schema relations, seed data, run
   CRUD queries, use plugins, and manage transactions with savepoints.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-08T19:32:04.700Z'
 ---
 
 <InfoBlock>
@@ -637,5 +637,6 @@ To explore more advanced capabilities of better-drizzle, refer to the following 
 - [better-drizzle GitHub repository](https://github.com/almeidazs/better-drizzle)
 - [Neon Drizzle setup guide](/docs/guides/drizzle)
 - [Schema migration with Neon and Drizzle](/docs/guides/drizzle-migrations)
+- [Realtime live SQL queries with Drizzle](/docs/realtime/examples/drizzle)
 
 <NeedHelp />
