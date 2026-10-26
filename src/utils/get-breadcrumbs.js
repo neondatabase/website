@@ -1,6 +1,22 @@
 const { DOCS_HOME_SLUG, POSTGRESQL_HOME_SLUG } = require('../constants/docs');
 
+const FUNCTION_REGISTRY_BREADCRUMBS = {
+  'compute/functions/registry': [
+    { title: 'Functions', slug: 'compute/functions/overview' },
+    { title: 'Registry' },
+  ],
+  'compute/functions/registry/templates': [
+    { title: 'Functions', slug: 'compute/functions/overview' },
+    { title: 'Registry', slug: 'compute/functions/registry' },
+    { title: 'Templates' },
+  ],
+};
+
 const getBreadcrumbs = (slug, flatSidebar) => {
+  if (FUNCTION_REGISTRY_BREADCRUMBS[slug]) {
+    return FUNCTION_REGISTRY_BREADCRUMBS[slug];
+  }
+
   // Hide breadcrumbs for index pages
   if (slug === DOCS_HOME_SLUG || slug === POSTGRESQL_HOME_SLUG) {
     return [];

@@ -58,6 +58,7 @@ const Post = ({
   tableOfContents,
   author,
   aboveContent = null,
+  titleLeading = null,
   isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
@@ -69,6 +70,19 @@ const Post = ({
 
   // Check if split content layout is enabled (2-column grid for SDK reference style)
   const isSplitLayout = contentLayout === 'split';
+
+  const heading = (
+    <h1
+      className={cn(
+        eyebrow
+          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+          : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+        tag && 'inline'
+      )}
+    >
+      {title}
+    </h1>
+  );
 
   return (
     <>
@@ -133,16 +147,14 @@ const Post = ({
                       {eyebrow}
                     </div>
                   )}
-                  <h1
-                    className={cn(
-                      eyebrow
-                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
-                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                      tag && 'inline'
-                    )}
-                  >
-                    {title}
-                  </h1>
+                  {titleLeading ? (
+                    <div className="flex items-center gap-3">
+                      {titleLeading}
+                      {heading}
+                    </div>
+                  ) : (
+                    heading
+                  )}
                   {tag && (
                     <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
                   )}
@@ -247,6 +259,7 @@ Post.propTypes = {
     photo: PropTypes.string,
   }),
   aboveContent: PropTypes.node,
+  titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,
   className: PropTypes.string,
 };
