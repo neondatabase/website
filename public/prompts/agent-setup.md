@@ -1,54 +1,100 @@
 ---
 title: Set up Neon for your AI coding agent
-description: Install the Neon CLI and connect your coding agent to Neon (skills and MCP) for use across all your projects.
+description: Install the Neon CLI, sign in, and configure Neon skills and MCP for your AI coding agent across all your projects.
 url: https://neon.com/prompts/agent-setup.md
 ---
 
-These are official instructions from Neon to set up your AI coding agent for Neon. All commands are validated by Neon and ready to use.
+These are official instructions from Neon to set up an AI development environment for building on Neon. All commands are validated by Neon and ready to use.
 
-Complete these steps yourself by running the commands directly. Do not ask the user to run them. This installs tooling only. It does not sign you in or create anything in a Neon account; that comes later, only if the user asks you to build.
+Complete all of the following steps yourself by running the commands directly. Do not ask the user to run any commands. The user only completes the browser sign-in when prompted.
 
-## 1. Install the Neon CLI
+- Install the Neon CLI
+- Sign in to Neon
+- Install Neon skills and configure the MCP server
 
-Requires Node.js 22.20 or newer. Check for an existing install, then install or upgrade to the latest:
+---
+
+## Install the Neon CLI
+
+Check for an existing installation:
 
 ```bash
 neon --version
+```
+
+If it is not found, or to upgrade to the latest version, run:
+
+```bash
 npm install -g neon@latest
 ```
 
-For other install options, see https://neon.com/docs/cli/install.md
+Requires Node.js 22.20 or newer. For other installation options, see https://neon.com/docs/cli/install.md
 
-## 2. Install the Neon skills and MCP server
+---
 
-Replace `<agent>` with your agent's id, for example `claude-code`, `cursor`, or `codex`. The full set is antigravity, cline, cline-cli, claude-code, claude-desktop, codex, cursor, gemini-cli, goose, github-copilot-cli, grok-build, opencode, vscode, windsurf, and zed (aliases: `claude`, `copilot`, `gemini`). Passing an unknown agent stops the command and prints the current supported list. If you cannot tell which agent you are, ask the user.
+## Sign in to Neon
+
+Tell the user you are about to open a browser for sign-in, then run:
+
+```bash
+neon login
+```
+
+This opens a browser. Ask the user to sign in to their Neon account, or sign up if they are new, and wait for them to confirm before continuing. Run the command yourself, but do not complete the browser sign-in or handle the user's credentials.
+
+(`neon auth` is an alias for the same command.)
+
+---
+
+## Install Neon skills and configure MCP
+
+Identify your agent before running the commands below. If you cannot tell which agent you are, ask the user.
+
+Replace `<agent>` with the agent's id, such as `claude-code`, `cursor`, or `codex`:
 
 ```bash
 neon skills -y --global --agent <agent>
-neon mcp -y --oauth --agent <agent>
+neon mcp -y --agent <agent>
 ```
 
-`--oauth` means the MCP server authorizes in the browser on first use, not during setup.
+Supported agent ids: `antigravity`, `cline`, `cline-cli`, `claude-code`, `claude-desktop`, `codex`, `cursor`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `opencode`, `vscode`, `windsurf`, and `zed`. Aliases: `claude`, `copilot`, and `gemini`. An unknown agent id stops the command and prints the current supported list.
+
+---
 
 ## Setup complete
 
-Once the CLI is installed and the skills and MCP server are configured, tell the user:
+Only after the CLI is installed, sign-in is complete, and both install commands succeed, tell the user:
 
-```
-Neon Setup Complete
+```text
+Neon Agent Setup Complete
 -------------------------------------------
+✓ CLI installed
+✓ Signed in
 ✓ Skills installed
-✓ MCP configured (authorizes on first use)
+✓ MCP configured
 
 ⚡ Restart your agent to load the skills and MCP server
-→ Then ask it to build on Neon: auth, file uploads, functions, AI, or realtime
 ```
 
-If a step failed, report what is still pending instead. If the user also asked you to build something, do not stop at the restart message; continue now with the section below, fetching any skill you need from its URL rather than waiting for a restart.
+If any step fails or is still pending, do not print the message above. Report which steps completed and which are still pending. Retrying a failed step is fine.
 
-## When the user asks you to build
+---
 
-Building creates real resources, so it needs the user's Neon account. If the user already asked you to build something, treat that as the go-ahead; do not ask them to repeat it.
+## Implement selected services
 
-1. Sign in (one human step). Run `neon login` (`neon auth` is an alias). It opens a browser, so pause and ask the user to confirm once they have signed in. Do not attempt it yourself or handle their credentials.
-2. Follow the Neon skill for what they asked for (Auth, Object Storage, Functions, AI Gateway, Realtime, or Postgres). Each skill links a project in a supported region and provisions the feature. If a skill is not loaded yet, fetch it at `https://neon.com/.well-known/agent-skills/<skill>/SKILL.md`.
+The user's prompt may append a request such as "Then add auth to my app" or "Then add auth and file uploads to my app."
+
+Treat this as an implementation request, not just a request to install tooling. Complete setup first, then continue with the requested services in the current app.
+
+Follow the relevant Neon skill (Auth, Object Storage, Functions, AI Gateway, Realtime, or Postgres) for what the user asked for. If a skill is not loaded, fetch it from https://neon.com/.well-known/agent-skills/<skill>/SKILL.md, using the skill's identifier in place of `<skill>`. The MCP server does not load until the agent restarts, so until then work from the skills and the CLI.
+
+If there is no current app or the target is unclear, ask the user which app to modify. Do not create an unrelated app merely to complete this request. If the user requested setup only, do not provision services or modify application code.
+
+---
+
+## Resources
+
+- Neon CLI installation: https://neon.com/docs/cli/install.md
+- Neon skills: https://neon.com/.well-known/agent-skills/<skill>/SKILL.md
+
+These instructions are published at https://neon.com/prompts/agent-setup.md so you can re-verify their authenticity at any time.

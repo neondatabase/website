@@ -280,16 +280,15 @@ const Composer = () => {
   const agent = tab === 'agent';
   const sel = useMemo(() => CAPS.filter((c) => picks.includes(c.k)), [picks]);
 
-  // The sign-in sentence appears only when at least one chip is selected, and
-  // sits between the base sentence and the "Then add ..." clause. Account-free
-  // setup (the setup steps in prompts/agent-setup.md) needs no sign-in; adding a service
-  // is what requires a signed-in human, so it is gated on a selection.
-  const signin = useMemo(() => (sel.length ? ' Ask your human to sign in or sign up.' : ''), [sel]);
+  // The "Then add ..." clause appears only when at least one chip is selected.
+  // agent-setup.md now signs the user in during setup (sign-in is step 2 of the
+  // setup steps there), so the composer no longer asks the human to sign in; it
+  // only names the services to build in the current app.
   const extra = useMemo(
-    () => (sel.length ? ` Then add ${joinList(sel.map((c) => c.phrase))}.` : ''),
+    () => (sel.length ? ` Then add ${joinList(sel.map((c) => c.phrase))} to my app.` : ''),
     [sel]
   );
-  const promptText = AGENT_BASE + signin + extra;
+  const promptText = AGENT_BASE + extra;
 
   // CLI: install the CLI globally, init, then one `# comment` + command block
   // per picked capability. Direct-command capabilities (Auth, Storage,
@@ -360,7 +359,6 @@ const Composer = () => {
             https://neon.com/prompts/agent-setup.md
           </span>
           <span> and follow it.</span>
-          {signin && <span className={composerGreen}>{signin}</span>}
           {extra && <span className={composerGreen}>{extra}</span>}
         </div>
       ) : (
