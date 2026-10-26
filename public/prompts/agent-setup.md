@@ -80,15 +80,11 @@ If any step fails or is still pending, do not print the message above. Report wh
 
 ---
 
-## Implement selected services
+## Build on Neon
 
-The user's prompt may append a request such as "Then add auth to my app" or "Then add auth and file uploads to my app."
+When the user asks you to build something, follow the relevant Neon skill: Auth, Object Storage, Functions, AI Gateway, Realtime, or Postgres. The skill links a project and provisions the feature. If a skill is not loaded, fetch it from https://neon.com/.well-known/agent-skills/<skill>/SKILL.md, using the skill's identifier in place of `<skill>`.
 
-Treat this as an implementation request, not just a request to install tooling. Complete setup first, then continue with the requested services in the current app.
-
-Follow the relevant Neon skill (Auth, Object Storage, Functions, AI Gateway, Realtime, or Postgres) for what the user asked for. If a skill is not loaded, fetch it from https://neon.com/.well-known/agent-skills/<skill>/SKILL.md, using the skill's identifier in place of `<skill>`. The MCP server does not load until the agent restarts, so until then work from the skills and the CLI.
-
-If there is no current app or the target is unclear, ask the user which app to modify. Do not create an unrelated app merely to complete this request. If the user requested setup only, do not provision services or modify application code.
+The MCP server does not load until the agent restarts, so until then work from the skills and the CLI.
 
 ---
 
