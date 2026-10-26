@@ -9,15 +9,14 @@ summary: >-
   and passkey removal both have a 24-hour security delay. Deleted accounts can
   be reactivated within 30 days, after which all data is permanently removed.
 enableTableOfContents: true
-updatedOn: '2026-07-14T14:03:39.757Z'
+updatedOn: '2026-10-26T16:37:59.022Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
 
 ## Account settings
 
-You can access your Neon account settings from anywhere in the Console. Just click your profile avatar in the top-right and select **Settings** under **Account**.
-
+You can access your Neon account settings from anywhere in the Console. Click your profile avatar in the top-right and select **Settings**. You can also go directly to [console.neon.tech/app/settings](https://console.neon.tech/app/settings).
 
 Here's what you can do from **Account settings**.
 
@@ -61,9 +60,9 @@ If your organization admin requires 2FA for the organization, you must enroll in
 
 ### Enable 2FA
 
-1. Go to **Account settings** and click **Set up two-factor authentication**.
-2. Scan the QR code with your authenticator app (for example, Google Authenticator, Authy, or 1Password).
-3. Enter the 6-digit code from your app to verify and activate 2FA.
+1. Go to **Account settings**, scroll to the **Two-factor authentication** section, and click **Set up two-factor authentication**.
+2. Scan the QR code with your authenticator app (for example, Google Authenticator, Authy, or 1Password). If you can't scan it, enter the setup key shown below the QR code manually.
+3. Enter the 6-digit code from your app and click **Verify and enable**.
 
 After setup, Neon will prompt you for a code from your authenticator app every time you log in.
 
@@ -94,7 +93,7 @@ You can set up both a passkey and two-factor authentication (2FA) on your accoun
 
 ### Add a passkey
 
-1. Go to **Account settings** and select **Passkeys** from the sidebar.
+1. Go to **Account settings** and scroll to the **Passkeys** section.
 2. Click **Add passkey**.
 3. Give the passkey a name, then click **Continue**.
 4. Follow your browser or device's prompts to save the passkey, for example, to Google Password Manager, iCloud Keychain, or a security key.
@@ -107,7 +106,7 @@ After you enter your email and password, click **Sign in with Passkey** to verif
 
 ### Remove a passkey
 
-1. Go to **Account settings** and select **Passkeys** from the sidebar.
+1. Go to **Account settings** and scroll to the **Passkeys** section.
 2. Click **Remove** next to the passkey you want to remove.
 3. Verify your identity with an existing passkey.
 
