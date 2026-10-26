@@ -13,7 +13,7 @@ Search the live [Function Registry](/docs/compute/functions/registry) catalog, t
 
 <FunctionRegistryCards searchable />
 
-## Missing something?
+## Request or add a template
 
 Ask on [Discord](https://neon.com/discord) if you want a template that isn't listed, or add one in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) on GitHub.
 

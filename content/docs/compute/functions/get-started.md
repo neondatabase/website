@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-10-24T18:15:09.800Z'
+updatedOn: '2026-10-26T11:09:12.958Z'
 ---
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
@@ -114,7 +114,7 @@ export default defineConfig({
 
 The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
-As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a [Function Registry](/docs/compute/functions/registry) template instead, use [`neon functions new`](/docs/cli/functions#new). See [Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a [Function Registry](/docs/compute/functions/registry) template instead, use [`neon functions new`](/docs/cli/functions#new). See [Function Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
 
 Install dependencies:
 

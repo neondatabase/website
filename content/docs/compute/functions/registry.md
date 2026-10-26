@@ -19,7 +19,7 @@ neon functions templates list
 neon functions new basic
 ```
 
-<p className="mt-2! text-[13px] leading-snug text-gray-new-50 dark:text-gray-new-60">Registry commands need CLI 8.11.0 or later.</p>
+<p className="mt-2! text-[13px] leading-snug text-gray-new-50 dark:text-gray-new-60">Registry commands need Neon CLI 8.11.0 or later.</p>
 
 The catalog `id` is what you pass to `neon functions new`. Installing doesn't deploy. Run [`neon dev`](/docs/cli/dev) locally, then [`neon deploy`](/docs/compute/functions/deploy) or [`neon functions deploy`](/docs/cli/functions#deploy).
 
@@ -33,7 +33,7 @@ env: {
 },
 ```
 
-Load values with `neon deploy --env .env.production`. Only keys you declare under `env` are uploaded; the `.env` file is not. The handler then reads the live snapshot, including Neon-injected branch credentials such as `DATABASE_URL`, from `process.env`:
+Load values with `neon deploy --env .env.production`. Only keys you declare under `env` are uploaded, not the whole file. At runtime, the handler reads these values, plus Neon-injected branch credentials such as `DATABASE_URL`, from `process.env`:
 
 ```ts
 const apiKey = process.env.API_KEY;
@@ -66,6 +66,6 @@ The CLI reads the files in that folder and doesn't download the GitHub tarball.
 
 ## Contribute
 
-Open a pull request in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) that adds a template folder and an index entry in `registry.json`. Field rules and review checklist: [CONTRIBUTING.md](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md).
+Open a pull request in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) that adds a template folder and an index entry in `registry.json`. See [CONTRIBUTING.md](https://github.com/neondatabase/examples/blob/main/registry/CONTRIBUTING.md) for field rules and the review checklist.
 
 <NeedHelp/>

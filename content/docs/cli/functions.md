@@ -16,15 +16,17 @@ The `functions` command manages [Neon Functions](/docs/compute/functions/overvie
 
 ## neon functions new (#new)
 
-Creates a function from a [Function Registry](/docs/compute/functions/registry) template. It writes the template's files to `functions/<slug>/` and declares the function in `neon.ts`, creating the file if needed. It doesn't need a project or a signed-in session. Requires the Neon CLI 8.11.0 or later. See [Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
+Creates a function from a [Function Registry](/docs/compute/functions/registry) template. It writes the template's files to `functions/<slug>/` and declares the function in `neon.ts`, creating the file if needed. It doesn't need a project or a signed-in session. Requires the Neon CLI 8.11.0 or later. See [Function Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
 
 <CliUsage command="functions new" />
 
 <CliOptions command="functions new" />
 
+By default, the slug is the template ID with everything except lowercase letters and digits removed, so `neon functions new context-dev` writes to `functions/contextdev/`.
+
 A `router` template becomes one function, with a generated `index.ts` that routes each URL path to an operation. A `separate` template declares one function per operation under slugs the template sets, so `--slug` only renames the directory.
 
-If the template needs environment variables, the command declares them in `neon.ts` and adds their names, without values, to `.env.example`. Set the values in your env file and pass it to `neon config apply --env`; the `Next:` list prints the exact command. For `neon dev`, export them in your shell.
+If the template needs environment variables, the command declares them in `neon.ts` and adds their names, without values, to `.env.example`. Set the values in `.env.local`, which `neon dev` loads automatically, and deploy with `neon deploy --env .env.local`. The `Next:` list may print `neon config apply` instead, which does the same thing as `neon deploy`.
 
 Create a function from the `basic` template:
 
@@ -33,6 +35,7 @@ neon functions new basic --no-install
 ```
 
 ```text filename="Output"
+Fetching template "basic" from the Function Registry…
 Function created.
 -----------------
 
@@ -55,6 +58,7 @@ neon functions new basic --slug hello --no-add-to-config
 ```
 
 ```text filename="Output"
+Fetching template "basic" from the Function Registry…
 Function created.
 -----------------
 
@@ -72,7 +76,7 @@ Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/ma
 
 ## neon functions templates (#templates)
 
-Browse the templates in the [Function Registry](/docs/compute/functions/registry). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json); see [Registry templates](/docs/compute/functions/registry/templates) for a readable list.
+Browse the templates in the [Function Registry](/docs/compute/functions/registry). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json); see [Function Registry templates](/docs/compute/functions/registry/templates) for a readable list.
 
 <CliSubcommands command="functions templates" anchorParts="templates" />
 
