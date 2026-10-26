@@ -13,7 +13,7 @@ categories:
 authors:
   - andre-landgraf
 cover:
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover-v2.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/cover.jpg'
   alt: 'Neon Docs search is now built on Neon'
 isFeatured: false
 seo:
@@ -23,7 +23,7 @@ seo:
   noindex: false
   ogTitle: 'Neon Docs search is now built on Neon - Neon'
   ogDescription: 'The search on neon.com now runs fully on Neon primitives: Lakebase Search, Neon Functions, Neon AI Gateway and Lakebase Postgres'
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/social.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/social.jpg'
 ---
 
 We recently launched [Lakebase Search](https://neon.com/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25 keyword and hybrid search in Lakebase Postgres. So it was obvious to us that we needed to dogfood it for our own docs search. Until this week, the search box on neon.com ran on a hosted search vendor. Now it's built fully on Neon primitives and powered by Lakebase Search. In this post, I want to share how it went.
