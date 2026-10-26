@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-10-23T12:02:08.579Z'
+updatedOn: '2026-10-26T18:26:53.751Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
@@ -70,7 +70,7 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-**Launch** plan (**Billing support**): you can open support tickets for **billing-related** issues only, such as questions about an invoice, charge, refund, or your plan.
+**Launch** plan (**Billing support**): you can open support tickets for **billing-related** issues only, such as questions about an invoice, charge, refund, or your plan. For what billing support can and can't help with, see [What billing support can and can't help with](/docs/introduction/manage-billing#what-billing-support-can-and-cant-help-with).
 
 **Scale** plan (**Standard support**): you can open support tickets for **any** Neon issue.
 
