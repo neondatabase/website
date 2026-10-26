@@ -16,7 +16,7 @@ Your **Neon account** is your personal identity for logging in, managing your pr
 
 ## Account settings
 
-You can access your Neon account settings from anywhere in the Console. Click your profile avatar in the top-right and select **Settings**. You can also go directly to [console.neon.tech/app/settings](https://console.neon.tech/app/settings).
+You can access your Neon account settings at [https://console.neon.tech/app/settings](https://console.neon.tech/app/settings) or from anywhere in the Console. Click your profile avatar in the top-right and select **Settings**. 
 
 Here's what you can do from **Account settings**.
 
