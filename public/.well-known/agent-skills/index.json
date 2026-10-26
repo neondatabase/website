@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching, autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive UIs, and realtime data go to `neon-realtime`. Also use for \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"neon inspect db\", \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:2a678875655810d33e42284de50d19a8c669691a39c2924d2c03f770068a1a87"
+      "digest": "sha256:efb692c6ba4c7d454e177eceb3aa8ef2ff02a0b6353d491037214afe49e48e9d"
     },
     {
       "name": "neon-postgres-egress-optimizer",
@@ -53,9 +53,9 @@
     {
       "name": "neon-ai-gateway",
       "type": "skill-md",
-      "description": "One API and one credential for frontier and open-source LLMs and embedding models, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, generate embeddings, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, and more), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", \"generate embeddings\", and \"log/rate-limit AI calls\".",
+      "description": "One API and one credential for frontier and open-source LLMs and embedding models, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, generate embeddings, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, and more), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", \"generate embeddings\", \"generate images\", and \"log/rate-limit AI calls\".",
       "url": "/.well-known/agent-skills/neon-ai-gateway/SKILL.md",
-      "digest": "sha256:eafda7c2ede9fcd24dc68f6d46334a37a6dedcbc4fb9e323ac10fb2df8a95312"
+      "digest": "sha256:23db230f6c722c9d63dbb6367d40f425426d03bd2b1c38f0978c24b3100864e8"
     },
     {
       "name": "neon-functions",
