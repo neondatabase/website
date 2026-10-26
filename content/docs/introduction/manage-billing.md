@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-26T18:26:53.751Z'
+updatedOn: '2026-10-26T18:36:20.868Z'
 ---
 
 <InfoBlock>
@@ -97,7 +97,7 @@ To update the company name, address, postal or ZIP code, country, or VAT or tax 
 If you are unable to update this information, please [contact support](/docs/introduction/support).
 
 <Admonition type="note">
-Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. It does not change invoices that have already been issued. If you need a correction on an invoice that was already issued, see [Invoice changes](#invoices) below.
+Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. It does not change invoices that have already been issued. If you need a correction on an invoice that was already issued, see [Invoices](#invoices) below.
 </Admonition>
 
 ## Invoices
@@ -105,7 +105,7 @@ Updating your billing details (company name, address, or tax or VAT ID) applies 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 <Admonition type="note" title="Invoice changes">
-An invoice that has already been issued cannot be edited, re-addressed, or regenerated as a self-serve action. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will advise on the options available for your account, case by case.
+An invoice that has already been issued cannot be edited, re-addressed, or regenerated as a self-serve action. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will advise on the options available for your account, case-by-case.
 
 [comment]: <> (REVIEW c: Should marketplace-billed customers, for example Vercel, AWS, or Azure, be directed to their marketplace for invoice corrections rather than to Neon billing support? Their invoices are managed through the marketplace, not by Neon directly.)
 </Admonition>
@@ -172,7 +172,7 @@ Billing support can help with questions about a specific invoice or charge, refu
 </FaqItem>
 
 <FaqItem question="Can a past invoice be reissued, re-addressed, or regenerated?">
-Reissuing, re-addressing, or regenerating an invoice that has already been issued is not a self-serve action, and it is not something that is generally done on request. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will review the options available for your account, case by case.
+Reissuing, re-addressing, or regenerating an invoice that has already been issued is not a self-serve action. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will review the options available for your account, case-by-case.
 
 [comment]: <> (REVIEW b: Are there other asks we should explicitly list here as not self-serve, for example consolidating multiple invoices into one, adding a custom PO number, backdating an invoice, or changing the invoice currency?)
 </FaqItem>
