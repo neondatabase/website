@@ -472,7 +472,7 @@
       @apply relative -mb-px border border-gray-new-80 bg-transparent p-4 dark:border-gray-new-20;
     }
 
-    details:not(.faq-item, .collapsed-lines) summary {
+    details:not(.faq-item, .collapsed-lines) > summary {
       @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-pure dark:text-white;
       list-style: none;
 

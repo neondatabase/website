@@ -3,8 +3,8 @@ title: 'Add native sign-in to a Capacitor app with Managed Better Auth and Neon'
 subtitle: 'Build a React and Capacitor todo app with email, password, and Google sign-in, native session storage, and Row-Level Security through the Neon Data API'
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2026-10-25T00:00:00.000Z'
-updatedOn: '2026-10-24T21:13:07.960Z'
+createdAt: '2026-10-26T00:00:00.000Z'
+updatedOn: '2026-10-26T21:29:26.493Z'
 ---
 
 Capacitor runs your web app inside a WebView on iOS and Android, where the [Managed Better Auth](/docs/auth/overview) browser SDK doesn't work well, because it depends on an HTTP-only session cookie and browser redirects.
@@ -58,7 +58,7 @@ sequenceDiagram
 4. The plugin stores the session natively and emits a `SIGNED_IN` event to your JavaScript.
 5. Your app reads the JWT with `getSession()` and sends it to the Data API, where Postgres applies your RLS policies using the user ID in that JWT.
 
-The session cookie stays in native code, and your JavaScript only gets a 15-minute JWT that the plugin refreshes for you.
+The session cookie stays out of the WebView's cookie store, but your JavaScript receives two tokens: a 15-minute JWT that the plugin refreshes for you, and the Neon Auth session token as `session.refreshToken`, which stays valid until `session.sessionExpiresAt` (7 days by default). Treat the session token as a credential (so don't log it, send it to analytics, or save it in `localStorage`).
 
 <Steps>
 
@@ -354,13 +354,13 @@ export function LoginPanel() {
 
 None of these handlers set the session themselves, because when sign-in succeeds, the plugin emits `SIGNED_IN`, and `AuthProvider` updates the session for the whole app.
 
-`signUp()` returns a `null` session when **Verify email at sign-up** is on for your branch. In that case, confirm the code from the email with `CapacitorNeon.verifyOtp({ email, token, type: 'signup' })`. The plugin also supports passwordless sign-in with `signInWithOtp()` and `verifyOtp()`, and the [Capgo plugin docs](https://capgo.app/docs/plugins/neon/) cover both flows.
+This guide assumes **Verify email at sign-up** is off for your branch, which is the default. If you [turn it on](/docs/auth/guides/email-verification), `signUp()` returns a `null` session until the user enters the code from the email, so add a code field to `LoginPanel` and confirm it with `CapacitorNeon.verifyOtp({ email, token, type: 'signup' })`. The plugin also supports passwordless sign-in with `signInWithOtp()` and `verifyOtp()`, and the [Capgo plugin docs](https://capgo.app/docs/plugins/neon/) cover both flows.
 
 ## Read and write todos through the Data API
 
 Create `src/components/TodoList.tsx`, which uses the plugin's native `select()`, `insert()`, `update()`, and `delete()` methods, which send the session's JWT to the Data API for you:
 
-```tsx filename="src/components/TodoList.tsx" collapse={1-11, 56-68, 80-83}
+```tsx filename="src/components/TodoList.tsx" collapse={1-11, 58-70, 82-85}
 import { useEffect, useState, type FormEvent } from 'react';
 import { CapacitorNeon } from '@capgo/capacitor-neon';
 import { useAuth } from '../auth/AuthProvider';
@@ -399,18 +399,20 @@ export function TodoList() {
   }
 
   async function toggleTodo(todo: Todo) {
-    await CapacitorNeon.update({
+    const { error } = await CapacitorNeon.update({
       table: 'todos',
       values: { is_complete: !todo.is_complete },
       filter: { id: todo.id },
     });
+    if (error) return setError(error);
     await load();
   }
 
   async function deleteTodo(todo: Todo) {
     setDeletingId(todo.id);
     try {
-      await CapacitorNeon.delete({ table: 'todos', filter: { id: todo.id } });
+      const { error } = await CapacitorNeon.delete({ table: 'todos', filter: { id: todo.id } });
+      if (error) return setError(error);
       await load();
     } finally {
       setDeletingId(null);
@@ -740,7 +742,14 @@ Check that the scheme in `oauth-bounce.mjs` matches the one registered in `Info.
 <details>
 <summary>The todo list is always empty</summary>
 
-Make sure RLS policies target the `authenticated` role and compare `auth.user_id()` with `user_id`. When no one is signed in, the plugin's database methods use an anonymous JWT for the `anonymous` role, which has no access to `todos` with the policy in this guide.
+Make sure the RLS policy targets the `authenticated` role and compares `auth.user_id()` with `user_id`, and that the rows you expect were created by the user who is signed in, since each user only sees their own todos.
+
+</details>
+
+<details>
+<summary>Data API calls fail with `permission denied for table todos`</summary>
+
+This happens when no one is signed in. The plugin's database methods then use an anonymous JWT for the `anonymous` role, and `--add-default-grants` only gives the `authenticated` role access to `todos`, so Postgres rejects the request. Sign in first, or, if signed-out users should read rows, grant the `anonymous` role access to the table and add an RLS policy for it.
 
 </details>
 
@@ -768,7 +777,7 @@ Email and password, sign up, email one-time codes with `signInWithOtp()` and `ve
 </FaqItem>
 
 <FaqItem question="Where does the plugin store the session?">
-The plugin stores the session in the Keychain on iOS and in app-private storage on Android, and never exposes the session cookie to the WebView, so your JavaScript only receives the JWT, which expires after 15 minutes.
+The plugin stores the session in the Keychain on iOS and in app-private storage on Android, and keeps the session cookie out of the WebView's cookie store. JavaScript still receives the session token as `session.refreshToken` (valid for 7 days by default) next to the 15-minute JWT, so treat it as a credential and don't log it or persist it in the WebView.
 </FaqItem>
 
 <FaqItem question="Does the plugin work in the browser?">
