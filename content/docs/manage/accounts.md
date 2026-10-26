@@ -106,7 +106,7 @@ After you enter your email and password, click **Sign in with Passkey** to verif
 
 ### Remove a passkey
 
-1. Go to **Account settings** and scroll to the **Passkeys** section.
+1. Go to **Account settings** and scroll to the **[Passkeys](https://console.neon.tech/app/settings#passkeys)** section.
 2. Click **Remove** next to the passkey you want to remove.
 3. Verify your identity with an existing passkey.
 
