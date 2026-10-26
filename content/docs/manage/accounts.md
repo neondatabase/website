@@ -93,7 +93,7 @@ You can set up both a passkey and two-factor authentication (2FA) on your accoun
 
 ### Add a passkey
 
-1. Go to **Account settings** and scroll to the **Passkeys** section.
+1. Go to **Account settings** and scroll to the **[Passkeys](https://console.neon.tech/app/settings#passkeys)** section.
 2. Click **Add passkey**.
 3. Give the passkey a name, then click **Continue**.
 4. Follow your browser or device's prompts to save the passkey, for example, to Google Password Manager, iCloud Keychain, or a security key.
