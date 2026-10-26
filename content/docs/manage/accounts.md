@@ -60,7 +60,7 @@ If your organization admin requires 2FA for the organization, you must enroll in
 
 ### Enable 2FA
 
-1. Go to **Account settings**, scroll to the **Two-factor authentication** section, and click **Set up two-factor authentication**.
+1. Go to **Account settings**, scroll to the **[Two-factor authentication](https://console.neon.tech/app/settings#two-factor)** section, and click **Set up two-factor authentication**.
 2. Scan the QR code with your authenticator app (for example, Google Authenticator, Authy, or 1Password). If you can't scan it, enter the setup key shown below the QR code manually.
 3. Enter the 6-digit code from your app and click **Verify and enable**.
 
