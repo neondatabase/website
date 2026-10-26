@@ -44,6 +44,71 @@ const parseHighlightLines = (meta) => {
   return highlightLines;
 };
 
+// Support "collapse={1-5, 12-14}" (same syntax as Expressive Code's collapsible sections)
+const COLLAPSE_RE = /\bcollapse=\{([^}]*)\}/;
+
+const parseCollapseRanges = (meta) => {
+  const match = meta.match(COLLAPSE_RE);
+  if (!match) return [];
+  return match[1]
+    .split(',')
+    .map((range) => range.split('-').map((n) => parseInt(n, 10)))
+    .filter(([start]) => start > 0)
+    .map(([start, end]) => [start, end || start]);
+};
+
+// Wraps each collapsed line range in a native <details>, so its <summary>
+// ("N collapsed lines") expands the hidden lines on click without client JS.
+const transformerCollapsibleSections = (ranges) => ({
+  name: 'collapsible-sections',
+  code(node) {
+    if (ranges.length === 0) return;
+    const children = [];
+    let section = null;
+    let lineNumber = 0;
+
+    node.children.forEach((child) => {
+      // Drop the newline text nodes between collapsed lines
+      if (child.type !== 'element') {
+        if (!section) children.push(child);
+        return;
+      }
+      lineNumber += 1;
+      const range = ranges.find(([start, end]) => lineNumber >= start && lineNumber <= end);
+      if (!range) {
+        section = null;
+        children.push(child);
+        return;
+      }
+      if (!section) {
+        section = {
+          type: 'element',
+          tagName: 'details',
+          properties: { class: 'collapsed-lines' },
+          children: [{ type: 'element', tagName: 'summary', properties: {}, children: [] }],
+        };
+        children.push(section);
+      }
+      section.children.push(child);
+      if (lineNumber === range[1]) section = null;
+    });
+
+    children
+      .filter((child) => child.properties?.class === 'collapsed-lines')
+      .forEach(({ children: [summary, ...lines] }) => {
+        const count = lines.length;
+        // Keep `showLineNumbers` counting the hidden lines while collapsed
+        summary.properties.style = `counter-increment: line ${count}`;
+        summary.children.push({
+          type: 'text',
+          value: `${count} collapsed line${count === 1 ? '' : 's'}`,
+        });
+      });
+
+    node.children = children;
+  },
+});
+
 // Shell grammars tokenize the `>` in placeholders like `<slug>` as an
 // output redirection, splitting the placeholder's coloring mid-word
 // (`<slu` one color, `g>` another). This transformer rebuilds each line's
@@ -116,6 +181,10 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
   highlighter = await _initPromise;
   await highlighter.loadLanguage(language);
 
+  const collapseRanges = parseCollapseRanges(meta);
+  // Keep collapse={...} out of the "{1,3-5}" highlight parsing below
+  const highlightMeta = meta.replace(COLLAPSE_RE, '');
+
   const html = highlighter.codeToHtml(code, {
     lang: language,
     theme,
@@ -130,8 +199,8 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
         line(node, line) {
           node.properties['data-line'] = line;
 
-          if (meta) {
-            const highlightedLines = parseHighlightLines(meta);
+          if (highlightMeta) {
+            const highlightedLines = parseHighlightLines(highlightMeta);
 
             highlightedLines.forEach((item) => {
               if (item === line) {
@@ -145,6 +214,7 @@ export default async function highlight(code, lang = 'bash', meta = '', theme = 
       transformerNotationHighlight(),
       transformerNotationWordHighlight(),
       transformerShellPlaceholders(),
+      transformerCollapsibleSections(collapseRanges),
     ],
   });
 
