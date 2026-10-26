@@ -225,7 +225,7 @@ const rows = await db.execute(sql`
 
 Filter `score < 0` before the candidate cutoff: scalar BM25 scoring returns zero for non-matches, which must not become keyword hits. Partial query-term matches remain eligible.
 
-Run the [hybrid search](hybrid-search.md) RRF query the same way: raw SQL through `db.execute`.
+Run either [hybrid search](hybrid-search.md) SQL query the same way: raw SQL through `db.execute`. For reranking with AI Gateway decision models, retrieve the deduplicated union of vector and full-text search candidates, including document bodies, and pass those rows directly to `rerankWithJev` before the final result cutoff. Use the RRF query as the alternative that needs no additional model call; RRF is optional before model-based reranking.
 
 ## Tune Per Query
 
