@@ -3,8 +3,8 @@ title: 'Build and deploy an MCP server with a custom domain on Neon Functions'
 subtitle: 'Learn how to build a remote MCP server on Neon Functions, serve it from your own domain, and secure it with an API key or OAuth.'
 author: dhanush-reddy
 enableTableOfContents: true
-createdAt: '2026-09-22T00:00:00.000Z'
-updatedOn: '2026-09-25T12:30:24.208Z'
+createdAt: '2026-10-26T00:00:00.000Z'
+updatedOn: '2026-10-26T18:05:32.861Z'
 ---
 
 An AI assistant like Cursor or Claude needs tools it can call over the internet to work with your APIs, your backend, or your data. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
@@ -18,7 +18,7 @@ Here's what you'll build:
 - A **Hono app** on Neon Functions that exposes three tools (create, search, and delete contacts) over the streamable HTTP transport, using the MCP TypeScript SDK
 - **Postgres-backed tools** with Drizzle ORM
 - A **stable URL on your own domain** with [custom domains for Neon Functions](/docs/compute/functions/custom-domains), so client configs and OAuth settings survive redeploys
-- **Authentication**, either a shared API key or OAuth 2.1 through [Better Auth](https://www.better-auth.com) and its MCP plugin, so a client can sign the user in through the browser
+- **Authentication**, either a shared API key or OAuth 2.1 through [Managed Better Auth's OAuth provider](/docs/auth/guides/plugins/oauth-provider), so a client can sign the user in through the browser
 
 <CopyPrompt
   src="/prompts/deploy-mcp-server-on-neon-functions-prompt.md"
@@ -32,23 +32,23 @@ The [Neon MCP Server](/docs/ai/neon-mcp-server) lets an assistant manage Neon it
 
 ## How it works
 
-An MCP setup has two parts. The **MCP client** is the app where the user chats, such as Cursor or Claude Code, and it holds the connection to your server. Your code is the **MCP server**: it advertises the tools and runs them when asked. The two talk over HTTP using [JSON-RPC 2.0](https://www.jsonrpc.org/specification), a small request/response format where every message names a method such as `tools/list`. The MCP SDK handles the protocol for you so you can focus on the tools themselves.
+An MCP setup has two parts. The **MCP client** is the app where the user chats, such as Cursor or Claude Code, and it holds the connection to your server. Your code is the **MCP server**: it advertises the tools and runs them when asked. The two talk over HTTP using [JSON-RPC 2.0](https://www.jsonrpc.org/specification), a small request/response format where every message names a method such as `tools/list`. The MCP SDK handles the protocol for you, so you can focus on the tools themselves.
 
 Here's the typical flow of a request from the client to your server:
 
 1. **Request**: The MCP client sends JSON-RPC to `https://mcp.example.com/mcp`.
-2. **Authentication**: The function checks the caller before any tool runs. With an API key, that's a string compare on the `Authorization` header. With OAuth, it verifies the access token against Better Auth's JWKS endpoint and reads the user identity from the claims.
+2. **Authentication**: The function checks the caller before any tool runs. With an API key, that's a string compare on the `Authorization` header. With OAuth, it verifies the access token against Managed Better Auth's JWKS endpoint and reads the user identity from the claims.
 3. **Tool execution**: The SDK matches the method to a tool handler, which queries Postgres through Drizzle.
 4. **Response**: The handler returns a `content` array, the SDK wraps it in a JSON-RPC result, and the client hands the text to the model.
 
 ## Prerequisites
 
-Make sure you have:
+Before you begin, make sure you have the following:
 
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
+2. **Neon account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
-4. **A domain (optional)**: To serve the function from your own URL, you'll need a domain. If you don't have one, you can still deploy the function and test it using the native Neon Function URL. Throughout this guide, whenever you see `mcp.example.com`, replace it with your own domain or the native function URL.
+4. **A domain (optional)**: To serve the function from your own URL, you'll need a domain. If you don't have one, you can still deploy the function and test it using the native Neon Function URL. This guide uses `mcp.example.com` in place of your domain. Replace it with your own domain or the native function URL.
 
 <Steps>
 
@@ -61,13 +61,13 @@ mkdir contacts-mcp && cd contacts-mcp
 npm init -y
 ```
 
-Install the Neon agent skills so AI agents like Claude Code and Cursor have the context to help you build and deploy. This project uses the **Neon**, **Neon Functions** and **Neon Postgres** skills:
+Install the Neon agent skills so AI agents like Claude Code and Cursor have the context to help you build and deploy. This project uses the **Neon**, **Neon Functions**, **Neon Postgres** and **Neon Auth** skills:
 
 ```bash
-neon skills -s neon -s neon-postgres -s neon-functions
+neon skills -s neon -s neon-postgres -s neon-functions -s neon-auth
 ```
 
-When prompted, select the AI assistant you'd like to use (for example, Claude Code or Cursor) and confirm the recommended skills. This will provide your agent with the necessary context to assist you with Neon.
+When prompted, select the AI assistant you'd like to use (for example, Claude Code or Cursor) and confirm the recommended skills. That gives your agent the context it needs to help you with Neon.
 
 Next, link your local workspace to a Neon project. Run the following command:
 
@@ -77,7 +77,7 @@ neon link
 
 You'll be prompted to select your organization, then a project. **Create a new project** named `contacts-mcp` (or pick an existing one), then select a region. Neon Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`); this guide uses US East (Ohio). Support is expanding toward [all regions](/docs/introduction/regions).
 
-Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Functions**:
+Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you need, select **Functions**:
 
 ```text
 $ neon link
@@ -120,7 +120,7 @@ Here's what each package does:
 - `@modelcontextprotocol/server`: The MCP server SDK used to register tools and handle JSON-RPC requests.
 - `drizzle-orm` and `pg`: The ORM and the Node.js Postgres driver it uses to query your database.
 - `zod`: Schema validation for tool input and output, which the MCP SDK uses to validate arguments before they reach your handlers.
-- `dotenv`: Loads `.env.local` into the environment for local scripts like Drizzle Kit and the Better Auth CLI.
+- `dotenv`: Loads `.env.local` into the environment for local scripts like Drizzle Kit.
 
 You'll also need a `tsconfig.json` file to tell TypeScript how to compile the function. Create it in the project root:
 
@@ -144,7 +144,7 @@ You'll also need a `tsconfig.json` file to tell TypeScript how to compile the fu
 You'll build a simple contacts app with three tools: `create_contact`, `search_contacts`, and `delete_contact`.
 
 <Admonition type="info" title="What is an MCP tool?">
-A tool is a function with: a name the model can call, a plain-language description of what it does, a schema that describes its arguments, and the function that runs. You write the function; the MCP SDK handles the protocol around it, including the initialization handshake, list of tools, and the JSON-RPC request/response. The SDK also validates the arguments against the schema before they reach your function, so you can assume the values are present and of the right type.
+A tool is a function with a name the model can call, a plain-language description of what it does, a schema for its arguments, and the code that runs when it's called. You write the function, and the MCP SDK handles the protocol around it: the initialization handshake, the tool list, and the JSON-RPC request and response. The SDK also validates the arguments against the schema before they reach your function, so you can assume the values are present and have the right type.
 </Admonition>
 
 Each contact has a name, email, phone number, company, and free-form notes. The model can call `create_contact` to add a new row, `search_contacts` to find rows by substring, and `delete_contact` to remove a row by id.
@@ -178,7 +178,6 @@ Create `src/db.ts` to export a Drizzle client that connects to the branch on Neo
 import { attachDatabasePool } from '@neon/functions';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
-import { contacts } from './schema';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
 attachDatabasePool(pool);
@@ -190,7 +189,7 @@ The pool is created once at module scope, so requests on the same instance reuse
 
 ### Create the Hono app with the MCP endpoint
 
-Create an `index.ts` file at the project root. It builds the MCP server, registers the three tools, and exposes them at the `/mcp` endpoint through Hono. The MCP SDK owns the protocol details; your code is the three tool functions and their schemas.
+Create an `index.ts` file at the project root. It builds the MCP server, registers the three tools, and exposes them at the `/mcp` endpoint through Hono. The MCP SDK handles the protocol details, so your code is just the three tool functions and their schemas.
 
 The file has three parts: a helper that shapes results, a factory that creates the server and registers the tools, and a Hono app with the routes.
 
@@ -307,12 +306,12 @@ export default app;
 
 Here's what the code does:
 
-- **`asTextResult()`**: Wraps each result in the MCP `content` array. When a tool reports a problem such as a missing id, it sets `isError: true`; the JSON-RPC response still succeeds, so the model can tell the user. An exception thrown out of a handler is a server error instead, and the stack lands in the [function logs](/docs/compute/functions/logs).
-- **`createServer()`**: Builds a new `McpServer` and registers the three tools. The factory closes over `db`, and the pool is process-wide.
-- **`registerTool()` with `inputSchema`**: Descriptions are the interface. Each `inputSchema` is a `z.object()`, and every field has `.describe()`. The client shows that text to the model, which uses it to pick the tool and fill the arguments. Vague descriptions produce wrong calls, and arguments that fail the schema never reach the handler because the SDK rejects the call first.
-- **`createMcpHandler()`**: The SDK v2 HTTP entry point. It returns a web-standard handler with a `fetch(request)` method, which is the shape a Neon Function already exports through Hono. It calls the factory per request, so every request gets a fresh `McpServer`.
+- **`asTextResult()`**: Wraps each result in the MCP `content` array. When a tool reports a problem such as a missing id, it sets `isError: true`; the JSON-RPC response still succeeds, so the model can tell the user. An exception thrown out of a handler is a server error instead, and its stack trace shows up in the [function logs](/docs/compute/functions/logs).
+- **`createServer()`**: Builds a new `McpServer` and registers the three tools. The factory closes over `db`, and the pool is shared across the process.
+- **`registerTool()` with `inputSchema`**: Each `inputSchema` is a `z.object()`, and every field has a `.describe()` call. The client shows those descriptions to the model, which uses them to pick the tool and fill in the arguments. Vague descriptions lead to wrong calls, and arguments that fail the schema never reach the handler because the SDK rejects the call first.
+- **`createMcpHandler()`**: This is the SDK's v2 HTTP entry point. It returns a web-standard handler with a `fetch(request)` method, which is the same shape a Neon Function exports through Hono. It calls the factory per request, so every request gets a fresh `McpServer`.
 - **Stateless by default**: The handler serves the current `2026-07-28` protocol and older `2025` clients, with no `Mcp-Session-Id` to store state.
-- **Bound parameters in Search**: The `search_contacts` tool uses `or()` and `ilike()` to match the query against multiple columns. If the query is omitted, it lists all contacts, limited by the `limit` argument.
+- **Search across columns**: The `search_contacts` tool uses `or()` and `ilike()` to match the query against several columns. If you omit the query, it lists all contacts, limited by the `limit` argument.
 
 ### Configure neon.ts
 
@@ -333,7 +332,7 @@ export const config = defineConfig({
 export default config;
 ```
 
-The function is named `mcp`, and its source is the `index.ts` file you just created. The `name` field is a human-readable description that appears in the Console and CLI. This file must be in place before you run `neon dev` in the next section: it tells the CLI which file to build and serve. Without it, `neon dev` reports that no function is found.
+The function is named `mcp`, and its source is the `index.ts` file you just created. The `name` field is a human-readable description that appears in the Console and CLI. The file has to be in place before you run `neon dev` in the next section, because it tells the CLI which file to build and serve. Without it, `neon dev` reports that it can't find a function.
 
 ## Generate and apply the migrations
 
@@ -436,11 +435,11 @@ npx add-mcp http://localhost:8787/mcp -a cursor
 
 `add-mcp` works with other MCP-capable coding agents too. See the [add-mcp supported agents](https://github.com/neon-solutions/add-mcp#supported-agents) list for the full set.
 
-That writes a `mcp.json` config file in your project root. The agent reads that file to discover the tools and their schemas, so it can call them when you ask for something. You can now ask the agent to create, search, and delete contacts through the local server.
+That writes a `mcp.json` config file in your project root. The agent reads that file to discover the tools and their schemas, so it can call them when you ask it to do something. You can now ask the agent to create, search, and delete contacts through the local server.
 
-Open your AI agent and ask it to create a contact. It will pick the `create_contact` tool, fill in the arguments, and send the call to your local server. The server runs the query and returns the result, which the agent shows you.
+Open your AI agent and ask it to create a contact. It picks the `create_contact` tool, fills in the arguments, and sends the call to your local server. The server runs the query and returns the result, which the agent shows you.
 
-For example in Claude Code, you can ask:
+In Claude Code, for example, you can ask:
 
 ```text
 Create 10 random contacts with placeholder values
@@ -450,7 +449,7 @@ and the agent will call `create_contact` ten times, returning the created rows.
 
 ![Claude Code creating contacts](/docs/guides/neon-functions-mcp-claude-code.png)
 
-You now have a working MCP server running locally. Next you'll deploy it so any MCP client can reach it over HTTPS.
+You now have a working MCP server running locally. Next, you'll deploy it so any MCP client can reach it over HTTPS.
 
 ## Deploy the function
 
@@ -484,7 +483,7 @@ Connect it to your coding agent too. The local server entry you added earlier is
 Ask your agent to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
 
 <Admonition type="warning" title="The function URL is public">
-A Neon Function gets a public HTTPS URL that anyone can reach. Right now anyone who finds this URL can create, search, and delete your contacts. The next section adds authentication so only authorized clients can call the tools.
+A Neon Function gets a public HTTPS URL that anyone can reach. Right now, anyone who finds this URL can create, search, and delete your contacts. The next section adds authentication so only authorized clients can call the tools.
 </Admonition>
 
 ## Serve it from your own domain
@@ -539,7 +538,7 @@ Create a CNAME record at your DNS provider. Follow [Configure DNS](/docs/compute
 - **Value:** The exact CNAME hostname from the deploy output, such as `fn-custom-domains.us-east-1.aws.neon.tech`. Don't include `https://` or a path.
 - **TTL:** Your provider's default.
 
-For example on Cloudflare, you would create a CNAME record with `mcp` as the name and `fn-custom-domains.us-east-1.aws.neon.tech` as the target.
+For example, on Cloudflare, create a CNAME record with `mcp` as the name and `fn-custom-domains.us-east-1.aws.neon.tech` as the target.
 
 ![Cloudflare CNAME record example](/docs/guides/neon-functions-custom-domain-cloudflare.png)
 
@@ -556,16 +555,16 @@ content-type: text/plain;charset=UTF-8
 Contacts MCP server. Connect an MCP client to /mcp
 ```
 
-The first request can trigger certificate issuance, so it may take a few seconds. For the Console, CLI, and API ways to register domains, status codes, and troubleshooting, see [Custom domains for Neon Functions](/docs/compute/functions/custom-domains).
+The first request can trigger certificate issuance, so it may take a few seconds. See [Custom domains for Neon Functions](/docs/compute/functions/custom-domains) for the Console, CLI, and API steps to register a domain, along with status codes and troubleshooting.
 
-Although the function is now available at your custom domain, the native URL remains functional. Update your agent's `mcp.json` to use the custom domain, or rerun the `add-mcp` command with the new URL. Then, test that the agent can still successfully access and use the tools.
+Although the function is now available at your custom domain, the native URL remains functional. Update your agent's `mcp.json` to use the custom domain, or rerun the `add-mcp` command with the new URL. Then test that the agent can still access and use the tools.
 
 ## Secure the server
 
-Right now, anyone who reaches `/mcp` can create, search, and delete contacts. You can secure the server with either a shared API key or OAuth 2.1 through Better Auth. Choose the option that fits your use case:
+Right now, anyone who reaches `/mcp` can create, search, and delete contacts. You can secure the server with either a shared API key or OAuth 2.1 through Managed Better Auth. Choose the option that fits your use case:
 
-- **API key**: You generate one secret, and every client sends it with each request. It can't tell callers apart, because they all present the same key. Use it if you're the only user or you don't need to know who made a call.
-- **OAuth**: Each client gets its own tokens, so you can tell which user made a call and revoke one client without affecting the others. It's the path the [MCP authorization spec](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) describes. Use it if you have multiple users or need to know which user made a call.
+- **API key**: You generate one secret, and every client sends it with each request. It's quick to set up, but it can't tell callers apart, because they all present the same key. Use it if you're the only user or you don't need to know who made a call.
+- **OAuth**: Each client gets its own tokens, so you can tell which user made a call and revoke one client without affecting the others. It's the path the [MCP authorization spec](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) describes. Use it if you have multiple users or need per-user access control.
 
 ### Option 1: API key
 
@@ -594,8 +593,7 @@ export const config = defineConfig({
       source: './index.ts',
       customDomains: ['mcp.example.com'],
       env: {
-        MCP_API_KEY: process.env.MCP_API_KEY!,
-        NEON_FUNCTION_MCP_BASE_URL: process.env.NEON_FUNCTION_MCP_BASE_URL!,
+        MCP_API_KEY: process.env.MCP_API_KEY!
       },
     },
   },
@@ -603,10 +601,6 @@ export const config = defineConfig({
 
 export default config;
 ```
-
-<Admonition type="note">
-The `parseEnv` function in `index.ts` requires the `NEON_FUNCTION_MCP_BASE_URL` environment variable (the base URL of your MCP function), which `neon link` automatically adds to your `.env.local` file.
-</Admonition>
 
 Add a check to the `/mcp` route in `index.ts` that reads the `Authorization` header and compares it to the secret. If the header is missing or doesn't match, return a `401 Unauthorized` response before calling the MCP handler.
 
@@ -665,119 +659,120 @@ npx add-mcp https://mcp.example.com/mcp -a cursor \
 
 </CodeTabs>
 
-### Option 2: OAuth with Better Auth
+Claude Desktop adds remote servers through its connector settings, which sign in with OAuth instead of a header. If you want to connect from the desktop app, use Option 2 below.
 
-With OAuth, each client signs the user in through a browser and sends an access token with every request. [Managed Better Auth](/docs/auth/overview) doesn't support the OAuth provider plugin yet, so you'll self-host [Better Auth](https://www.better-auth.com) inside the same Neon Function using its [MCP plugin](https://www.better-auth.com/docs/plugins/mcp). Better Auth stores its data in your database on Neon, so you don't need to run a separate service.
+### Option 2: OAuth with Managed Better Auth
 
-Before you write the OAuth code, there are two terms you'll see throughout this section. Both are roles your one function plays:
+With OAuth, each client signs the user in through a browser and sends an access token with every request. [Managed Better Auth](/docs/auth/overview) supports the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider) (beta), including MCP server protection. You enable the provider on the branch, and Managed Better Auth acts as the authorization server.
 
-- **Authorization server**: the service that signs the user in and hands out tokens. Think of it as the ID office.
-- **Protected resource**: the API that checks tokens before doing anything. That's your `/mcp` endpoint, the thing being protected.
+The two main components are:
 
-The MCP plugin sets both up in one process. The flow looks like this:
+- **Authorization server**: Managed Better Auth on your branch. It signs users in and issues tokens.
+- **Protected resource**: your `/mcp` endpoint. It checks the token before any tool runs.
+
+A typical flow looks like this:
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant User
+    participant User as User / browser
     participant Client as MCP client
     participant Fn as Neon Function
-    participant DB as Lakebase Postgres
+    participant Auth as Managed Better Auth
 
     Client->>Fn: POST /mcp with no token
-    Fn-->>Client: 401 and WWW-Authenticate
-    Client->>Fn: GET the metadata URLs from that header
-    Fn-->>Client: Authorize and token endpoints
-    Client->>User: Open the authorize URL in a browser
-    User->>Fn: Sign in at /sign-in, then Allow at /consent
-    Fn-->>Client: Redirect with an authorization code
-    Client->>Fn: Exchange the code at the token endpoint
-    Fn-->>Client: Access token (JWT)
-    Client->>Fn: POST /mcp with Authorization Bearer
-    Fn->>Fn: Check issuer, audience, and expiry via JWKS
-    Fn->>DB: Run the tool query
-    DB-->>Fn: Rows
+    Fn-->>Client: 401 with WWW-Authenticate: resource_metadata
+    Client->>Fn: GET /.well-known/oauth-protected-resource/mcp
+    Fn-->>Client: authorization_servers: [Auth issuer]
+    Client->>Auth: GET authorization server metadata
+    Auth-->>Client: authorize and token endpoints
+    Note over Client,Auth: Client registration: CIMD (default) or DCR (legacy)
+    Client->>User: Open the authorize URL
+    User->>Auth: GET /oauth2/authorize with resource and code_challenge
+    Auth-->>User: Redirect to the login page URL
+    User->>Fn: GET /sign-in with signed query
+    Fn-->>User: Login page
+    User->>Auth: POST /sign-in/email with oauth_query
+    Auth-->>User: Session cookie and continue URL
+    User->>Fn: GET /consent with signed query
+    Fn-->>User: Consent page
+    User->>Auth: POST /oauth2/consent with oauth_query
+    Auth-->>User: JSON with the redirect URL (code included)
+    User->>Client: Redirect to redirect_uri with code
+    Client->>Auth: POST token endpoint with code, PKCE verifier, and resource
+    Auth-->>Client: Access token (JWT)
+    Client->>Fn: POST /mcp with Authorization: Bearer
+    Fn->>Auth: Fetch JWKS (cached)
+    Auth-->>Fn: Public keys
+    Fn->>Fn: Verify signature, iss, and aud
     Fn-->>Client: Tool result
 ```
 
-Three values move through that flow, and you never handle any of the user's credentials directly:
+The tokens and PKCE pair are the key pieces of data that make this flow secure:
 
 - **Authorization code**: a one-time ticket issued when the user clicks Allow. The client trades it at the token endpoint for an access token.
-- **Access token**: a JWT, which is a signed string the server can verify without asking a database. It names `MCP_RESOURCE` as its audience, meaning "this token is only valid for the `/mcp` endpoint". The client sends it as `Authorization: Bearer` on every `/mcp` request.
-- **PKCE pair**: two related strings (a verifier and a challenge) the client generates before opening the browser. Better Auth checks they match when the code is exchanged, so someone who steals the code can't use it.
+- **Access token**: a JWT signed by Managed Better Auth. Its `aud` claim includes `https://mcp.example.com/mcp`, so a token issued for another resource is rejected here. The client sends it as `Authorization: Bearer` on every `/mcp` request.
+- **PKCE pair**: two related strings (a verifier and a challenge) the client generates before opening the browser. Managed Better Auth checks that they match when the code is exchanged, so someone who steals the code can't use it.
 
-Install the auth packages you'll need for Better Auth and the MCP plugin:
+#### Enable the OAuth provider
 
-```bash
-npm install better-auth @better-auth/mcp @better-auth/cimd
+Enable Managed Better Auth on the branch by setting `auth: true` in `neon.ts`. The CLI provisions the auth service and injects its URL into the function at runtime.
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export const config = defineConfig({
+  auth: true, // [!code ++]
+  functions: {
+    mcp: {
+      name: 'Contacts MCP server',
+      source: './index.ts',
+      customDomains: ['mcp.example.com'],
+    },
+  },
+});
+
+export default config;
 ```
 
-#### Configure Better Auth
+Apply the change to the branch by running `neon deploy`:
 
-Create an `auth.ts` file in your project root:
+```bash
+neon deploy
+```
 
-```typescript shouldWrap filename="auth.ts"
-import { betterAuth } from 'better-auth';
-import { jwt } from 'better-auth/plugins';
-import { mcp } from '@better-auth/mcp';
-import { cimd } from '@better-auth/cimd';
-import { fetchClientMetadataResource } from '@better-auth/cimd/node';
-import { Pool } from 'pg';
+Next, enable the OAuth provider in the [Neon Console](https://console.neon.tech). Open your project, go to **Settings** > **Better Auth**, and find the **OAuth provider** section:
+
+1. Add `https://mcp.example.com` under **Auth** > **Configuration** > **Domains**, then click **Add domain**. Use the origin only, with no path or trailing slash, so the login and consent pages can call Managed Better Auth from it.
+2. Turn on **Enable OAuth provider**.
+3. Set **Login page URL** to `https://mcp.example.com/sign-in`.
+4. Set **Consent page URL** to `https://mcp.example.com/consent`.
+5. In the **MCP server** section, set **Server URL** to `https://mcp.example.com/mcp`.
+6. Leave **Client ID Metadata Documents** (CIMD) on. It's on by default once you set a server URL.
+7. Leave **Dynamic client registration (legacy)** (DCR) off unless you need to support clients that only implement DCR.
+8. Click **Enable**.
+
+The example login page uses email and password, so confirm **Sign-up with Email** is enabled on the same **Settings** > **Better Auth** page.
+
+<Callout title="Use your custom domain">
+This guide uses a custom domain for the MCP endpoint and login and consent pages. A Neon Function URL works for the endpoint and for those pages, but a CIMD `client_id` document can't be served from a Neon domain. If you build an MCP client and host its `client_id` document yourself, serve it from your own domain. See [Limitations](/docs/auth/guides/plugins/oauth-provider#limitations).
+</Callout>
+
+#### Verify tokens in the function
+
+Install the Neon OAuth package, which provides the `createMcpAuth()` function and Hono middleware for verifying access tokens.
+
+```bash
+npm install @neon/oauth
+```
+
+Update `index.ts` to import the auth functions, create the verifier, and use it on the `/mcp` route. The verifier checks the signature, issuer, and audience of every access token before any tool runs.
+
+```typescript shouldWrap filename="index.ts" {1-4,14-21,25,27,31,33,35-37}
 import { parseEnv } from '@neon/env';
 import { config } from './neon';
-
-const env = parseEnv(config, 'mcp');
-
-export const MCP_RESOURCE = `${env.function.BETTER_AUTH_URL}/mcp`;
-
-export const auth = betterAuth({
-    baseUrl: env.function.BETTER_AUTH_URL!,
-    database: new Pool({ connectionString: env.postgres.databaseUrl, max: 5 }),
-    emailAndPassword: { enabled: true },
-    plugins: [
-        jwt(),
-        mcp({
-            loginPage: '/sign-in',
-            consentPage: '/consent',
-            resource: MCP_RESOURCE,
-            allowDynamicClientRegistration: true,
-            allowUnauthenticatedClientRegistration: true,
-        }),
-        cimd({
-            fetchClientMetadataResource,
-            metadataProfile: 'mcp-2026-07-28',
-        }),
-    ],
-});
-```
-
-Here's what each piece does:
-
-- **`database`**: A `pg` pool pointing at your database on Neon. Better Auth stores users, sessions, and OAuth records (clients, tokens) in tables it manages in the same database.
-- **`jwt()`**: Required by the MCP plugin. It provides the signing keys behind the `/api/auth/jwks` endpoint. JWKS is just a public list of the keys the server uses to sign tokens; anyone verifying a token can fetch that list and check the signature themselves, no shared secret needed.
-- **`mcp({...})`**: The OAuth provider configured for MCP. `resource` is the protected resource identifier, the exact URL clients connect to, path included. Every access token carries this URL as its audience, so a token meant for some other API is rejected here. The `loginPage` and `consentPage` are the HTML pages you serve for sign-in and consent.
-- **`allowDynamicClientRegistration` and `allowUnauthenticatedClientRegistration`**: Let a client `POST` a registration body and get a `client_id` back, even before anyone is signed in, so the first connection can register itself. Clients can also register with CIMD: the client publishes a small JSON document at an HTTPS URL, and that URL acts as its ID. The `cimd()` plugin fetches and checks it. The MCP spec requires one of these two methods for client registration, and the MCP plugin supports both.
-
-Better Auth needs a secret to sign access tokens. Generate one with the following command and add it to your `.env.local` file as `BETTER_AUTH_SECRET`:
-
-```bash
-openssl rand -base64 32
-```
-
-```bash filename=".env.local"
-BETTER_AUTH_SECRET=<the-value-you-generated>
-BETTER_AUTH_URL=https://mcp.example.com
-```
-
-`BETTER_AUTH_URL` is the base URL of your MCP function. The MCP plugin uses it to build the `aud` (audience) claim in access tokens, and the client checks that claim against the URL it connects to.
-
-#### Wire auth into the function
-
-Update `index.ts` to mount the Better Auth handler, add the sign-in and consent pages, and protect `/mcp` with `requireMcpAuth`:
-
-```typescript shouldWrap filename="index.ts" {1-2,13,15-17,23,25,27,29,31}
-import { auth, MCP_RESOURCE } from './auth';
-import { requireMcpAuth } from '@better-auth/mcp';
+import { createMcpAuth } from '@neon/oauth/mcp';
+import { honoMcp, type McpAuthVariables } from '@neon/oauth/mcp/hono';
 import { Hono } from 'hono';
 import { and, eq, ilike, or } from 'drizzle-orm';
 import { z } from 'zod';
@@ -785,48 +780,51 @@ import { McpServer, createMcpHandler } from '@modelcontextprotocol/server';
 import { db } from './src/db';
 import { contacts } from './src/schema';
 
-// ... asTextResult, createServer, and mcpHandler stay as they were,
-// with one change to the handler options shown below
+// ...asTextResult and createServer stay as they were...
 
-const mcpHandler = createMcpHandler(() => createServer(), { legacy: 'reject' });
+const env = parseEnv(config, 'mcp');
 
-const protectedMcp = requireMcpAuth(auth, (request) => mcpHandler.fetch(request), {
+const MCP_RESOURCE = 'https://mcp.example.com/mcp';
+
+const auth = createMcpAuth({
+  baseUrl: env.auth.baseUrl,
   resource: MCP_RESOURCE,
 });
 
-const app = new Hono();
+const mcpHandler = createMcpHandler(() => createServer());
+
+const app = new Hono<McpAuthVariables>();
+
+app.use(honoMcp(auth));
 
 app.get('/', (c) => c.text('Contacts MCP server. Connect an MCP client to /mcp'));
 
-app.all('/api/auth/*', (c) => auth.handler(c.req.raw));
+app.get('/sign-in', (c) => c.html(signInPage(env.auth.baseUrl)));
 
-app.all('/.well-known/*', (c) => auth.handler(c.req.raw));
+app.get('/consent', (c) => c.html(consentPage(env.auth.baseUrl)));
 
-app.get('/sign-in', (c) => c.html(signInPage()));
-
-app.get('/consent', (c) => c.html(consentPage()));
-
-app.all('/mcp', (c) => protectedMcp(c.req.raw));
+app.all('/mcp', (c) =>
+  mcpHandler.fetch(c.req.raw, { authInfo: c.get('authInfo') }),
+);
 
 export default app;
 ```
 
-Here's the idea behind each change:
+The code adds the following:
 
-- **`legacy: 'reject'`**: Tells the MCP SDK to only serve modern clients that support OAuth. An older client gets an error saying the server requires OAuth.
-- **`requireMcpAuth`**: This is the gate in front of `/mcp`. On every request it checks the access token: is the signature valid, is it meant for this server, and has it expired? If anything fails, it returns `401` with a header that tells the client where to sign in. The client handles the rest: it opens a browser and runs the flow from the diagram.
-- **`/api/auth/*`**: Hands these paths to Better Auth. It serves sign-in, sign-up, and the OAuth endpoints where clients trade codes for tokens.
-- **`/.well-known/*`**: Also hands these paths to Better Auth. This is where clients look first to find out who issues tokens for your server. It's a small JSON document, served automatically by the `mcp()` plugin, so clients can connect with no configuration on your side.
-- **`/sign-in` and `/consent`**: The two pages the user sees in the browser. You serve them yourself; the next snippet shows them.
+- **`createMcpAuth()`**: Creates the verifier for one MCP endpoint. `resource` must be the exact URL you set as **Server URL** in the provider. The token's `aud` claim must include it.
+- **`honoMcp()`**: Serves `/.well-known/oauth-protected-resource/mcp` (and the bare `/.well-known/oauth-protected-resource` fallback), and guards every method except `OPTIONS` on `/mcp`. It doesn't touch `/sign-in` or `/consent`.
+- **`mcpHandler.fetch(..., { authInfo })`**: Passes the verified caller to the MCP SDK. The SDK makes it available to the factory as `ctx.authInfo` and to tool handlers as `ctx.http.authInfo`.
+- **No auth routes**: Managed Better Auth serves the sign-in, consent, token, discovery, and JWKS endpoints on its own issuer. The function doesn't proxy them.
 
-Next, add the two HTML pages the user sees in the browser: one to sign in, one to approve the client. When the OAuth flow sends the user here, it passes along a signed query string (`oauth_query`). Both pages send it back with their request so Better Auth knows which authorization to continue.
+#### Add the login and consent pages
 
-<Admonition type="note" title="Example pages only">
-These pages are minimal examples for this guide. In a real app, you'd serve them from your own frontend with your own styling, and add the sign-in options you normally offer, like social providers (Google, GitHub, etc.). Better Auth supports all of this by default. See the [Better Auth authentication docs](https://better-auth.com/docs/authentication/google) and the [MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for details.
-</Admonition>
+The provider redirects the user to your function's `/sign-in` and `/consent` pages. The pages post to Managed Better Auth, which returns a JSON response with a `url` that continues the flow. The pages then navigate the browser to that URL.
+
+To `index.ts`, add two functions that return the HTML for the pages. The `authBaseUrl` is the Managed Better Auth issuer, which the pages use to post credentials and consent.
 
 ```typescript shouldWrap filename="index.ts"
-function signInPage() {
+function signInPage(authBaseUrl: string) {
   return `<!doctype html>
 <html>
   <body style="font-family: system-ui; max-width: 360px; margin: 80px auto">
@@ -841,22 +839,43 @@ function signInPage() {
     </form>
     <p id="error" style="color:#b91c1c"></p>
     <script>
+      const authBaseUrl = ${JSON.stringify(authBaseUrl)};
+      const oauthQuery = window.location.search.slice(1);
+
+      // If the user already has a session, continue the authorization request.
+      fetch(authBaseUrl + '/get-session', { credentials: 'include' })
+        .then((response) => (response.ok ? response.json() : null))
+        .then((session) => {
+          if (!session?.session) return;
+          return fetch(authBaseUrl + '/oauth2/continue', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ selected: true, oauth_query: oauthQuery }),
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              if (result.url) window.location.assign(result.url);
+            });
+        });
+
       const form = document.getElementById('form');
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const data = new FormData(form);
-        const response = await fetch('/api/auth/sign-in/email', {
+        const response = await fetch(authBaseUrl + '/sign-in/email', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
             email: data.get('email'),
             password: data.get('password'),
-            oauth_query: window.location.search.slice(1),
+            oauth_query: oauthQuery,
           }),
         });
         const result = await response.json();
-        if (result.redirect) {
-          window.location.href = result.url;
+        if (result.url) {
+          window.location.assign(result.url);
         } else if (!response.ok) {
           document.getElementById('error').textContent =
             result.message ?? 'Sign-in failed';
@@ -870,7 +889,7 @@ function signInPage() {
 </html>`;
 }
 
-function consentPage() {
+function consentPage(authBaseUrl: string) {
   return `<!doctype html>
 <html>
   <body style="font-family: system-ui; max-width: 360px; margin: 80px auto">
@@ -879,9 +898,11 @@ function consentPage() {
     <button id="allow" style="padding:10px 24px">Allow</button>
     <p id="status"></p>
     <script>
+      const authBaseUrl = ${JSON.stringify(authBaseUrl)};
       document.getElementById('allow').addEventListener('click', async () => {
-        const response = await fetch('/api/auth/oauth2/consent', {
+        const response = await fetch(authBaseUrl + '/oauth2/consent', {
           method: 'POST',
+          credentials: 'include',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
             accept: true,
@@ -889,8 +910,8 @@ function consentPage() {
           }),
         });
         const result = await response.json();
-        if (result.redirect) {
-          window.location.href = result.url;
+        if (result.url) {
+          window.location.assign(result.url);
         } else {
           document.getElementById('status').textContent =
             'Could not complete authorization. Reload and try again.';
@@ -902,65 +923,34 @@ function consentPage() {
 }
 ```
 
-The sign-in page posts the email and password to Better Auth's `/sign-in/email` endpoint, along with the signed query string from the URL. If the credentials are valid, Better Auth sets a session cookie and returns a `redirect` field with the URL to continue the OAuth flow. The consent page posts to `/oauth2/consent` with the same query string, and if the user clicks Allow, Better Auth issues an authorization code and redirects back to the client.
+The sign-in page posts the email and password to Managed Better Auth's `/sign-in/email` endpoint, along with the signed query string. If the credentials are valid, the response includes a `url` that continues the authorization flow, usually the consent page. If the user already has a session, the page calls `/oauth2/continue` first. The consent page posts to `/oauth2/consent`; when the user clicks Allow, Managed Better Auth returns a JSON response with a `url` that carries the authorization code to the client's redirect URI, and the page navigates the browser there. Neither response is an HTTP redirect.
 
-#### Pass the custom domain to the deployment
-
-Update `neon.ts` to inject the `BETTER_AUTH_URL` and `BETTER_AUTH_SECRET` environment variables into the function.
-
-```typescript filename="neon.ts"
-import { defineConfig } from '@neon/config/v1';
-
-export const config = defineConfig({
-  functions: {
-    mcp: {
-      name: 'Contacts MCP server',
-      source: './index.ts',
-      customDomains: ['mcp.example.com'],
-      env: {
-        BETTER_AUTH_URL: 'https://mcp.example.com',
-        BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET!,
-        NEON_FUNCTION_MCP_BASE_URL: process.env.NEON_FUNCTION_MCP_BASE_URL!,
-      },
-    },
-  },
-});
-
-export default config;
-```
-
-Redeploy the function to apply the changes:
-
-```bash
-neon deploy --env .env.local
-```
-
-#### Create the auth tables
-
-Better Auth's CLI applies its schema (users, sessions, OAuth clients, tokens, consents) directly to your database. Run the migration command with the custom domain as the base URL:
-
-```bash
-export BETTER_AUTH_URL=https://mcp.example.com
-npx auth@latest migrate
-```
-
-<Admonition type="note">
-Make sure to replace `mcp.example.com` with your actual custom domain.
+<Admonition type="note" title="Example pages only">
+These pages are minimal examples for this guide. In a real app, serve them from your own frontend with your own styling, add the sign-in options you normally offer, and show the client name and redirect host before the user approves access. See [Build your consent page](/docs/auth/guides/plugins/oauth-provider#build-your-consent-page) and the [Managed Better Auth SDK](/docs/auth/overview) for details.
 </Admonition>
 
-#### Create a user and verify the setup
+#### Redeploy and test
 
-Register the user who will authorize MCP clients. The following `curl` command creates a user using the Better Auth email/password endpoint. Replace the email, password, and name with your desired values:
-
-<Admonition type="note">
-In a real deployment, your frontend would typically include a sign-up page that uses Better Auth's user registration flow. The `curl` command performs the same operation as a sign-up form, but provides a fast way to create a user for testing.
-</Admonition>
+Deploy the function with the new pages and verifier:
 
 ```bash
-curl -X POST https://mcp.example.com/api/auth/sign-up/email \
+neon deploy
+```
+
+Create a user to sign in with. Replace `NEON_AUTH_BASE_URL` with the Auth URL from `.env.local` or the Console:
+
+```bash
+export NEON_AUTH_BASE_URL=https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth
+
+curl -X POST "$NEON_AUTH_BASE_URL/sign-up/email" \
   -H "Content-Type: application/json" \
-  -d '{"email":"dana@example.com","password":"AbC123dEf","name":"Dana Smith"}'
+  -H "Origin: https://mcp.example.com" \
+  -d '{"email":"dana@example.com","password":"AbC123dEf","name":"Dana Smith","callbackURL":"https://mcp.example.com"}'
 ```
+
+<Admonition type="note">
+In a real deployment, your frontend would include a sign-up page that uses the Managed Better Auth sign-up flow. The `curl` command performs the same operation, but gives you a fast way to create a user for testing.
+</Admonition>
 
 Now confirm that the server challenges unauthenticated MCP requests the way clients expect:
 
@@ -970,22 +960,22 @@ curl -s -i https://mcp.example.com/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"ping"}' | grep -i www-authenticate
 ```
 
-You should see a `WWW-Authenticate` header pointing at the protected resource metadata.
+You should see a `WWW-Authenticate` header pointing at the protected resource metadata:
 
 ```text
 www-authenticate: Bearer resource_metadata="https://mcp.example.com/.well-known/oauth-protected-resource/mcp"
 ```
 
-You can see the metadata yourself with a `curl` request to the protected-resource discovery endpoint:
+You can see the metadata yourself:
 
 ```bash
 curl -s https://mcp.example.com/.well-known/oauth-protected-resource/mcp
 ```
 
-This returns the protected resource metadata:
+This returns the protected resource metadata. The `authorization_servers` value is your branch's Managed Better Auth issuer:
 
 ```json
-{"resource":"https://mcp.example.com/mcp","authorization_servers":["https://mcp.example.com/api/auth"],"bearer_methods_supported":["header"],"dpop_signing_alg_values_supported":["EdDSA","ES256","ES512","PS256","RS256"]}
+{"resource":"https://mcp.example.com/mcp","authorization_servers":["https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth"]}
 ```
 
 You now have a working MCP server with OAuth. The next step is to connect an MCP client to it.
@@ -994,7 +984,9 @@ You now have a working MCP server with OAuth. The next step is to connect an MCP
 
 ## Verify the client connection
 
-Run the `add-mcp` command for your agent with the deployed URL:
+The steps below cover the OAuth setup. If you secured the server with an API key, keep sending the `Authorization` header in your client config instead of signing in.
+
+Run the `add-mcp` command for your coding agent with the deployed URL:
 
 <CodeTabs labels={["Claude Code", "Cursor"]}>
 
@@ -1008,7 +1000,7 @@ npx add-mcp https://mcp.example.com/mcp -a cursor
 
 </CodeTabs>
 
-Open your AI agent where you added the MCP server. On the first connect, the client calls `/mcp`, reads the `401` challenge, discovers the authorization server, and opens a browser. Sign in as `dana@example.com` and select **Allow**, and the client then lists the three tools. Ask it to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
+Open the AI agent where you added the MCP server. The first time the client connects, it calls `/mcp`, reads the `401` challenge, discovers the authorization server, and opens a browser. Sign in as `dana@example.com` and select **Allow**. The client then lists the three tools. Ask it to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
 
 ```text filename="Claude Code"
 ❯ /mcp
@@ -1030,26 +1022,44 @@ You have 10 contacts:
 ....
 ```
 
-On Claude Code, you will be prompted to enable the MCP server by running `/mcp` in the chat and then selecting the server from the list which opens the browser for you to sign in and authorize.
+In Claude Code, run `/mcp` in the chat and select the server from the list. Claude Code opens the browser so you can sign in and authorize the client.
+
+### Connect from Claude Desktop (OAuth)
+
+You can also use desktop applications such as Claude Desktop. To add the server, go to Settings > Connectors > Add custom connector, then enter the connector’s name and URL.
+
+- **Name:** `Contacts MCP`
+- **URL:** `https://mcp.example.com/mcp`
+
+Claude inspects the server, reads the `401` challenge, and fills in the OAuth settings for you. Both **Sign in now** under Authentication and **Use Claude's published identity** (CIMD) under OAuth client show a **Detected** badge, so you can leave the defaults and confirm:
+
+![Claude Desktop's Add custom connector dialog showing the Contacts MCP name, the MCP server URL, and the detected OAuth settings](/docs/guides/neon-functions-mcp-claude-desktop-connector.png)
+
+The browser opens so you can sign in and allow access. Once the connector is added, Claude lists the tools from your server and calls them in chat. Ask it to list your contacts to confirm the round trip:
+
+![Claude Desktop chat where Claude calls the Contacts MCP integration and returns a table of ten contacts](/docs/guides/neon-functions-mcp-claude-desktop-contacts.png)
+
+Claude loads the tools from the connector, calls `search_contacts` with no query, and renders the returned rows as a table. Because the client went through the OAuth flow, the token it sends is scoped to `https://mcp.example.com/mcp` and signed by your branch's Managed Better Auth instance.
 
 <Admonition type="note" title="Production hardening">
-The dynamic registration flags keep this guide simple, but on a production server prefer CIMD clients or pre-registering known clients with `auth.api.createOAuthClient`, and drop `allowUnauthenticatedClientRegistration` so registration requires a signed-in user. See the [Better Auth MCP plugin docs](https://www.better-auth.com/docs/plugins/mcp) for the full configuration surface, including scopes and DPoP.
+Keep **Client ID Metadata Documents** on and **Dynamic client registration (legacy)** off. DCR lets anyone register a client with any name and redirect URI, so enable it only for clients that can't use CIMD, and turn it off once they've migrated. To control exactly which clients can connect, turn off both CIMD and DCR and onboard known clients as managed clients, linking each one to your MCP server resource. Use **Skip consent** only for first-party apps you control. Access tokens expire after one hour. See [OAuth provider](/docs/auth/guides/plugins/oauth-provider) for the full configuration surface, including scopes, refresh tokens, and managed clients.
 </Admonition>
 
 ## Extending this workflow
 
 The server you built is a complete, secured MCP deployment. The contacts table is still shared by every caller: anyone who connects can see and edit all contacts, not just their own. Here's where to take it next:
 
-- **Per-user data**: Add a `user_id` column to the `contacts` table with a foreign key to Better Auth's `user` table. Read the user's id from the verified token (`requireMcpAuth` exposes it as the `sub` claim) inside each handler, and filter every query with `where(eq(contacts.userId, userId))`. Then one user's contacts stay invisible to everyone else, even though they share the same table.
-- **Scopes per tool**: The `mcp()` plugin supports OAuth scopes, and `requireMcpAuth` accepts `requiredScopes` to enforce them at the route level. For per-tool requirements, throw `createInsufficientScopeError` inside the handler; MCP clients handle the resulting challenge by re-authorizing with the missing scopes.
-- **Audit logging**: Record tool name, arguments, user id, and latency to a Postgres table from the handlers. With OAuth, each row has a verified `sub` claim from the access token, so you know which user made the call.
+- **Per-user data**: Add a `user_id` text column to the `contacts` table. Add the context argument to each tool handler and read the signed-in user's id from `ctx.http.authInfo.extra.claims.sub`. Store it when a contact is created, and filter every query with `where(eq(contacts.userId, userId))`. Then one user's contacts stay invisible to everyone else, even though they share the same table.
+- **Control who can connect**: Turn off CIMD and DCR, then create a managed client for each app you trust and link it to your MCP server resource. Managed clients also let you skip consent for first-party apps you control. See [Create and manage OAuth clients](/docs/auth/guides/plugins/oauth-provider#create-and-manage-oauth-clients).
+- **Audit logging**: Write the tool name, arguments, user id, and latency to a Postgres table from the handlers. With OAuth, each row has a verified `sub` claim from the access token, so you know which user made the call.
 
 ## Resources
 
 - [Neon Functions overview](/docs/compute/functions/overview)
 - [Custom domains for Neon Functions](/docs/compute/functions/custom-domains)
 - [Managed Better Auth overview](/docs/auth/overview)
-- [Better Auth MCP plugin](https://www.better-auth.com/docs/plugins/mcp)
+- [OAuth provider for Managed Better Auth](/docs/auth/guides/plugins/oauth-provider)
+- [Configure trusted domains](/docs/auth/guides/configure-domains)
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 - [with-mcp example repository](https://github.com/neondatabase/examples/tree/main/with-mcp)
 - [MCP authorization specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)

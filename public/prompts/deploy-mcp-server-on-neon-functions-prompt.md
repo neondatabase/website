@@ -16,7 +16,7 @@ Before writing code:
 
 4. Ask only the questions you need to understand my requirements. For example:
    - Which tools should the MCP server expose, and over which tables?
-   - Do I want authentication, and if so, an API key or OAuth with Better Auth?
+   - Do I want authentication, and if so, an API key or OAuth with Managed Better Auth?
    - Do I have a domain to serve the MCP server from, and do I have access to its DNS settings?
 
 5. Once you understand my requirements, propose a concise implementation plan. Explain which parts of the guide you are reusing and which parts you are adapting, and list the credentials the plan will actually need.
@@ -25,11 +25,11 @@ Before writing code:
 
 7. Implement the MCP server step by step following the guide's patterns. Use the Neon CLI (`neon link`) and select **Functions** as the service `neon.ts` declares, with the `aws-us-east-2` region, one of the regions where Neon Functions are available. Declare the function under top-level `functions` in `neon.ts`. Install the agent skills the guide lists: `neon skills -s neon -s neon-postgres -s neon-functions -y`. Build the server first and verify it with `neon dev` and `mcporter` before deploying. Use the MCP TypeScript SDK with `createMcpHandler`, and serve the endpoint at `/mcp` from a Hono app.
 
-8. If I choose a custom domain, declare it under `customDomains` in `neon.ts`, walk me through creating the CNAME record at my DNS provider, and verify HTTPS with `curl` before moving on. Never proceed to OAuth configuration until the custom domain serves the function successfully, because the OAuth issuer and resource identifiers depend on it.
+8. If I choose a custom domain, declare it under `customDomains` in `neon.ts`, walk me through creating the CNAME record at my DNS provider, and verify HTTPS with `curl` before moving on. Never proceed to OAuth configuration until the custom domain serves the function successfully, because the MCP server URL and the login and consent pages depend on it.
 
 9. If I choose authentication, ask me which method I want to use:
    - **API key**: When I have a single user or a small number of users who can share a key.
-   - **OAuth with Better Auth**: When I have multiple users accessing the MCP server.
+   - **OAuth with Managed Better Auth**: When I have multiple users accessing the MCP server. This uses Managed Better Auth's OAuth provider plugin, so I host only the login and consent pages and the function verifies tokens.
 
 10. Ask for a credential only when an implementation step actually needs it, and stop until I provide or configure it. Don't guess values or use placeholders without telling me what I need to do. Whenever I need to create or obtain a credential:
     - Tell me exactly what it is used for.
