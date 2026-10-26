@@ -48,30 +48,37 @@ This opens a browser. Ask the user to sign in to their Neon account, or sign up 
 
 ## Install Neon skills and configure MCP
 
-Identify your agent before running the commands below. If you cannot tell which agent you are, ask the user.
+Install the Neon skills and MCP server for your agent.
 
-Replace `<agent>` with the agent's id, such as `claude-code`, `cursor`, or `codex`:
+If your agent supports the Neon plugin, install it in one step (it bundles the skills and the MCP server):
+
+```bash
+neon plugins --global --agent <agent> -y
+```
+
+If the command reports your agent is not supported, install the skills and MCP server directly instead:
 
 ```bash
 neon skills -y --global --agent <agent>
 neon mcp -y --agent <agent>
 ```
 
-Supported agent ids: `antigravity`, `cline`, `cline-cli`, `claude-code`, `claude-desktop`, `codex`, `cursor`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `opencode`, `vscode`, `windsurf`, and `zed`. Aliases: `claude`, `copilot`, and `gemini`. An unknown agent id stops the command and prints the current supported list.
+Replace `<agent>` with your agent id (for example `claude-code`, `cursor`, or `codex`).
+
+Then reload or restart your agent to load them (Claude Code: run `/reload-plugins`; other agents: restart or start a new session).
 
 ---
 
 ## Setup complete
 
-Only after the CLI is installed, sign-in is complete, and both install commands succeed, tell the user:
+Only after the CLI is installed, sign-in is complete, and the skills and MCP server are installed, tell the user:
 
 ```text
 Neon Agent Setup Complete
 -------------------------------------------
 ✓ CLI installed
 ✓ Signed in
-✓ Skills installed
-✓ MCP configured
+✓ Neon skills and MCP server installed
 
 ⚡ Restart your agent to load the skills and MCP server
 ```
