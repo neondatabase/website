@@ -4,6 +4,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AgentSetupButton, { BASE_AGENT_PROMPT } from './agent-setup-button';
 
 vi.mock('utils/send-gtag-event', () => ({ default: vi.fn() }));
+vi.mock('icons/docs/sidebar/ai-agent.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
 
 describe('AgentSetupButton', () => {
   let writeText;

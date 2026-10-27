@@ -3,6 +3,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+import RobotIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -43,23 +44,6 @@ async function copyPlainText(text) {
   }
   document.body.removeChild(textarea);
 }
-
-const SparkleIcon = (props) => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    {...props}
-  >
-    <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />
-  </svg>
-);
 
 const CheckIcon = (props) => (
   <svg
@@ -109,7 +93,7 @@ const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
       onClick={isCopied ? undefined : handleClick}
     >
       <span className="flex text-green-44 dark:text-green-52">
-        {isCopied ? <CheckIcon /> : <SparkleIcon />}
+        {isCopied ? <CheckIcon /> : <RobotIcon width={15} height={15} aria-hidden="true" />}
       </span>
       {isCopied ? 'Prompt copied' : 'Agent setup'}
     </button>
