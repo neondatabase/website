@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.11.0",
+  "neonctlVersion": "8.12.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -4389,6 +4389,31 @@
         }
       },
       "commands": {
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "global": {
+              "type": "boolean",
+              "describe": "Check user-level skills (skills CLI -g). Default is this directory",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Check whether installed Neon skills match their source",
+          "examples": [
+            {
+              "command": "$0 skills status",
+              "description": "Neon skills in this directory's skills-lock.json"
+            },
+            {
+              "command": "$0 skills status --global",
+              "description": "User-level Neon skills"
+            }
+          ],
+          "usage": "$0 skills status [options]"
+        },
         "update": {
           "name": "update",
           "aliases": [],
