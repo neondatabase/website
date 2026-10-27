@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-27T13:07:53.132Z'
+updatedOn: '2026-10-27T14:05:46.976Z'
 ---
 
 <InfoBlock>
@@ -105,7 +105,7 @@ Updating your billing details (company name, address, or tax or VAT ID) applies 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 <Admonition type="note" title="Invoice changes">
-If you need to reissue a past invoice or fix something on one, contact [billing support](#request-billing-support) and they'll help you find the best option for your account.
+Updating your billing details applies to future invoices. A past invoice keeps the details it had when it was issued and is not reissued or re-addressed. If you think a specific charge is wrong, contact [billing support](#request-billing-support).
 
 </Admonition>
 
@@ -170,7 +170,7 @@ Billing support can help with questions about a specific invoice or charge, refu
 </FaqItem>
 
 <FaqItem question="I updated my billing address or tax ID. Can my past invoices be updated to match?">
-Updated billing details apply to new invoices, not ones already issued. If you need a corrected copy of a past invoice, for example for tax or accounting, contact billing support and they'll help you find the best option for your account.
+No. Updated billing details apply to new invoices only. Invoices that were already issued keep the company name, address, and tax or VAT ID they had when they were created, and Neon does not reissue or re-address a past invoice. Update your details on the Billing page so your future invoices reflect them.
 
 </FaqItem>
 
