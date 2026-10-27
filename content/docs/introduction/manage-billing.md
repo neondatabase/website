@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-27T19:45:49.243Z'
+updatedOn: '2026-10-27T20:26:38.639Z'
 ---
 
 <InfoBlock>
@@ -157,19 +157,9 @@ You can still use **Download** from the invoice menu to save a PDF. For other su
 
 #### What billing support can and can't help with
 
-<Faq>
-
-<FaqItem question="What can billing support help with?">
 Billing support can help with questions about a specific invoice or charge, refunds and credits, and questions about your plan or subscription.
 
-</FaqItem>
-
-<FaqItem question="I updated my billing address or tax ID. Can my past invoices be updated to match?">
-Not automatically. Updated billing details apply to new invoices only, so an invoice that was already issued keeps the company name, address, and tax or VAT ID it had when it was created. If you need a corrected invoice, for example for tax or accounting, contact [billing support](#request-billing-support).
-
-</FaqItem>
-
-</Faq>
+Updating your billing details applies to new invoices only. Invoices that were already issued keep the company name, address, and tax or VAT ID they had when they were created, and Neon does not reissue or re-address a past invoice. Update your details on the Billing page so your future invoices reflect them.
 
 ## Change your plan
 
