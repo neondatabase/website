@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-27T13:02:45.365Z'
+updatedOn: '2026-10-27T13:07:53.132Z'
 ---
 
 <InfoBlock>
@@ -169,8 +169,8 @@ Billing support can help with questions about a specific invoice or charge, refu
 
 </FaqItem>
 
-<FaqItem question="Can a past invoice be reissued, re-addressed, or regenerated?">
-Not on your own, but billing support can help. Let them know what needs correcting on the past invoice, and they'll find the best option for your account.
+<FaqItem question="I updated my billing address or tax ID. Can my past invoices be updated to match?">
+Updated billing details apply to new invoices, not ones already issued. If you need a corrected copy of a past invoice, for example for tax or accounting, contact billing support and they'll help you find the best option for your account.
 
 </FaqItem>
 
