@@ -1,8 +1,9 @@
 'use client';
 
 import Image from 'next/image';
+import { parseAsString, useQueryState } from 'nuqs';
 import PropTypes from 'prop-types';
-import { useId, useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useRef } from 'react';
 
 import Link from 'components/shared/link/link';
 import SearchIcon from 'icons/search.inline.svg';
@@ -30,7 +31,7 @@ const matchesQuery = (template, query) => {
 const FunctionRegistryCardsClient = ({ templates, searchable = false }) => {
   const searchId = useId();
   const searchInputRef = useRef(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useQueryState('q', parseAsString.withDefault(''));
   const query = searchable ? search.trim().toLowerCase() : '';
 
   const filtered = useMemo(
