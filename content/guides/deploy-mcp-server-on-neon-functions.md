@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a remote MCP server on Neon Functions, serve it fr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-26T00:00:00.000Z'
-updatedOn: '2026-10-27T09:39:32.533Z'
+updatedOn: '2026-10-27T09:51:09.852Z'
 ---
 
 An AI assistant like Cursor or Claude needs tools it can call over the internet to work with your APIs, your backend, or your data. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
@@ -96,10 +96,12 @@ Linked ~/contacts-mcp/.neon:
   branch:    main
 
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
+✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 
 INFO: Pulled 3 Neon variables into ~/contacts-mcp/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 INFO: Created neon.ts declaring functions.
 INFO: Created hello.ts - the source of the hello function.
+INFO: Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function, `hello.ts`, at your project root. You'll build the MCP server in your own files, so delete the placeholder:
@@ -502,7 +504,7 @@ export const config = defineConfig({
 export default config;
 ```
 
-Replace `mcp.example.com` with a hostname you control.
+Replace `mcp.example.com` with a hostname you control. A static `customDomains` entry applies to the default branch only. Child branches don't inherit the hostname and serve from their own native Function URL.
 
 Deploy the function again. The output shows the CNAME hostname you need to point your DNS record at:
 
