@@ -47,7 +47,10 @@ Neon Docs search is a standalone service that runs as its own Neon project. It u
 - **[Neon Functions](https://neon.com/docs/compute/functions/overview)** run a [Hono](https://hono.dev/) API that ingests changed pages and answers search requests.
 - **[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview)** generates the embeddings and reranks hybrid results.
 
-![Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website's API route, which forwards the query to the Function's site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/how-it-works.png)
+<video autoPlay muted loop playsInline width="708" height="538" aria-label="Diagram of neon.com search. Indexing: a merge in the neondatabase/website GitHub repo triggers a GitHub Action that sends changed pages to a Neon Function running a Hono API, which fetches the pages as markdown, chunks them by heading, embeds each chunk through Neon AI Gateway and upserts them into Lakebase Postgres. Search: the neon.com search box calls the website&#x27;s API route, which forwards the query to the Function&#x27;s site-search endpoint, which reads cached hybrid results or falls back to BM25 in Lakebase Postgres.">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/neon-search-architecture.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/neon-search-architecture.mp4" type="video/mp4" />
+</video>
 
 To ingest the site, we needed a clean representation of its content, like markdown. Thanks to our agent experience work, neon.com already publishes every page as markdown (try [neon.com/pricing.md](https://neon.com/pricing.md)). So ingestion mostly means getting notified when production content changes. Whenever a docs, guide or changelog page changes in the [website repo](https://github.com/neondatabase/website), a GitHub Action sends the changed pages to the Function. The Function fetches each page as markdown, splits it into chunks by heading, gets an embedding per chunk through AI Gateway and writes the text, embedding and `tsvector` to one Lakebase Postgres table.
 
@@ -88,7 +91,10 @@ For us, that loop is a few baseline and regression benchmarks. It was incredibly
 
 Here's how the new search compares to our previous one on the same queries:
 
-![Bar chart comparing the new and previous neon.com search on the same queries, run on October 23. On 153 golden queries, excluding answers that only live in the PostgreSQL tutorial, the new search returns the right page in the top five for 94.1% of queries versus 79.7% and as the first result for 58.8% versus 54.2%. Over 342 requests per engine from the same client, the search round trip is 210 ms versus 202 ms at p50 and 333 ms versus 380 ms at p95.](https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/compare.png)
+<video autoPlay muted loop playsInline width="708" height="336" aria-label="Bar chart comparing the new and previous neon.com search on the same queries, run on October 23. On 153 golden queries, excluding answers that only live in the PostgreSQL tutorial, the new search returns the right page in the top five for 94.1% of queries versus 79.7% and as the first result for 58.8% versus 54.2%. Over 342 requests per engine from the same client, the search round trip is 210 ms versus 202 ms at p50 and 333 ms versus 380 ms at p95.">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/neon-search-comparison.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/neon-docs-search-lakebase-search/neon-search-comparison.mp4" type="video/mp4" />
+</video>
 
 The new search finds the right page in the top five for 94% of queries, where the previous search found it for 80%. Round trips take about the same time on both. Almost all of it is network: the Function itself spends single-digit milliseconds on each search.
 
