@@ -1,7 +1,7 @@
 ---
 title: Set up Neon for your AI coding agent
 description: Install the Neon CLI, sign in, and configure Neon skills and MCP for your AI coding agent across all your projects.
-url: https://neon.com/get-started.md
+url: https://neon.com/prompts/agent-setup.md
 ---
 
 These are official instructions from Neon to set up an AI development environment for building on Neon. All commands are validated by Neon and ready to use.
@@ -100,4 +100,4 @@ The MCP server does not load until the agent restarts, so until then work from t
 - Neon CLI installation: https://neon.com/docs/cli/install.md
 - Neon skills: https://neon.com/.well-known/agent-skills/<skill>/SKILL.md
 
-These instructions are published at https://neon.com/get-started.md so you can re-verify their authenticity at any time.
+These instructions are published at https://neon.com/prompts/agent-setup.md so you can re-verify their authenticity at any time.

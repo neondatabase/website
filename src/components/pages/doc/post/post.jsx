@@ -149,7 +149,10 @@ const Post = ({
               <>
                 <div
                   className={cn(
-                    !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
+                    // The title block spans the full content width. It no longer
+                    // reserves room for a right-aligned Copy page button (that
+                    // moved into the action row below), so the H1 and subtitle no
+                    // longer wrap early at a narrow max-width.
                     !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
                     eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
                     titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'

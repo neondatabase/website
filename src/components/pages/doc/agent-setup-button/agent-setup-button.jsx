@@ -1,18 +1,48 @@
 'use client';
 
 import PropTypes from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
 
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 // Base prompt copied on every docs page. Pages may append a page-specific
 // sentence via the `agentPrompt` frontmatter field (threaded in from post.jsx).
 export const BASE_AGENT_PROMPT =
-  'Set up Neon. Fetch https://neon.com/get-started.md and follow it.';
+  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 
 // "Prompt copied" shows for 1.4s, then the button reverts to its default state.
 const COPIED_RESET_MS = 1400;
+
+// Copy as plain text only. navigator.clipboard.writeText writes a text/plain
+// payload (no text/html), so the prompt pastes as normal body text rather than
+// the styled/monospace markup a DOM-selection copy would carry. The hidden
+// textarea execCommand path is a plain-text fallback for browsers without the
+// async clipboard API.
+async function copyPlainText(text) {
+  if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      // Fall through to the textarea fallback.
+    }
+  }
+  if (typeof document === 'undefined') return;
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+  } catch {
+    // Clipboard unavailable; nothing more we can do.
+  }
+  document.body.removeChild(textarea);
+}
 
 const SparkleIcon = (props) => (
   <svg
@@ -49,12 +79,18 @@ const CheckIcon = (props) => (
 );
 
 const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
-  const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
+  const [isCopied, setIsCopied] = useState(false);
+  const resetTimeoutRef = useRef(null);
 
   const prompt = agentPrompt ? `${BASE_AGENT_PROMPT} ${agentPrompt}` : BASE_AGENT_PROMPT;
 
-  const handleClick = () => {
-    handleCopy(prompt);
+  useEffect(() => () => clearTimeout(resetTimeoutRef.current), []);
+
+  const handleClick = async () => {
+    await copyPlainText(prompt);
+    setIsCopied(true);
+    clearTimeout(resetTimeoutRef.current);
+    resetTimeoutRef.current = setTimeout(() => setIsCopied(false), COPIED_RESET_MS);
     sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetup' });
   };
 
