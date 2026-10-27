@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-27T14:05:46.976Z'
+updatedOn: '2026-10-27T19:45:49.243Z'
 ---
 
 <InfoBlock>
@@ -97,17 +97,12 @@ To update the company name, address, postal or ZIP code, country, or VAT or tax 
 If you are unable to update this information, please [contact support](/docs/introduction/support).
 
 <Admonition type="note">
-Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. It does not change invoices that have already been issued. If you need a correction on an invoice that was already issued, see [Invoices](#invoices) below.
+Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. Invoices that were already issued keep the details they had when they were created.
 </Admonition>
 
 ## Invoices
 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
-
-<Admonition type="note" title="Invoice changes">
-Updating your billing details applies to future invoices. A past invoice keeps the details it had when it was issued and is not reissued or re-addressed. If you think a specific charge is wrong, contact [billing support](#request-billing-support).
-
-</Admonition>
 
 ### Pay an invoice
 
@@ -170,7 +165,7 @@ Billing support can help with questions about a specific invoice or charge, refu
 </FaqItem>
 
 <FaqItem question="I updated my billing address or tax ID. Can my past invoices be updated to match?">
-No. Updated billing details apply to new invoices only. Invoices that were already issued keep the company name, address, and tax or VAT ID they had when they were created, and Neon does not reissue or re-address a past invoice. Update your details on the Billing page so your future invoices reflect them.
+Not automatically. Updated billing details apply to new invoices only, so an invoice that was already issued keeps the company name, address, and tax or VAT ID it had when it was created. If you need a corrected invoice, for example for tax or accounting, contact [billing support](#request-billing-support).
 
 </FaqItem>
 
