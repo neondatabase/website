@@ -4,20 +4,20 @@ subtitle: 'Learn how to build a remote MCP server on Neon Functions, serve it fr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-26T00:00:00.000Z'
-updatedOn: '2026-10-26T18:20:40.096Z'
+updatedOn: '2026-10-27T09:39:32.533Z'
 ---
 
 An AI assistant like Cursor or Claude needs tools it can call over the internet to work with your APIs, your backend, or your data. [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) is the standard for providing those tools. An MCP server advertises a set of tools, each with a description the model reads and a schema for its arguments. When the user asks for something, the model picks a tool, fills in the arguments, and the client sends the call to your server. Your server runs the code and returns a result the assistant can read.
 
 For example, you ask the assistant to "Add Ada Lovelace to my contacts." The assistant picks a tool named `create_contact`, fills in the values it can infer from your message, and sends the call to your server. Your server inserts the row in Postgres, replies with the created contact, and the assistant confirms it. The model never touches the database; it only sees the tool descriptions and the results.
 
-In this guide, you'll build a small contacts app served over MCP. The server is a [Neon Function](/docs/compute/functions/overview) running in the same region as Lakebase Postgres on Neon, so queries stay fast.
+In this guide, you'll build a contacts app served over MCP. The server is a [Neon Function](/docs/compute/functions/overview) running in the same region as Lakebase Postgres on Neon, so queries stay fast.
 
 Here's what you'll build:
 
 - A **Hono app** on Neon Functions that exposes three tools (create, search, and delete contacts) over the streamable HTTP transport, using the MCP TypeScript SDK
 - **Postgres-backed tools** with Drizzle ORM
-- A **stable URL on your own domain** with [custom domains for Neon Functions](/docs/compute/functions/custom-domains), so client configs and OAuth settings survive redeploys
+- A **stable URL on your own domain** with [custom domains for Neon Functions](/docs/compute/functions/custom-domains)
 - **Authentication**, either a shared API key or OAuth 2.1 through the [Managed Better Auth OAuth provider](/docs/auth/guides/plugins/oauth-provider) (beta), so a client can sign the user in through the browser
 
 <CopyPrompt
@@ -32,11 +32,11 @@ The [Neon MCP Server](/docs/ai/neon-mcp-server) lets an assistant manage Neon it
 
 ## How it works
 
-An MCP setup has two parts. The **MCP client** is the app where the user chats, such as Cursor or Claude Code, and it holds the connection to your server. Your code is the **MCP server**: it advertises the tools and runs them when asked. The two talk over HTTP using [JSON-RPC 2.0](https://www.jsonrpc.org/specification), a small request/response format where every message names a method such as `tools/list`. The MCP SDK handles the protocol for you, so you can focus on the tools themselves.
+An MCP setup has two parts. The **MCP client** is the app where the user chats, such as Cursor or Claude Code, and it holds the connection to your server. Your code is the **MCP server**: it advertises the tools and runs them when asked. The two talk over HTTP using [JSON-RPC 2.0](https://www.jsonrpc.org/specification), a request/response format where every message names a method such as `tools/list`. The MCP SDK handles the protocol details, so your code is just the tool functions and their schemas.
 
 Here's the typical flow of a request from the client to your server:
 
-1. **Request**: The MCP client sends JSON-RPC to `https://mcp.example.com/mcp`.
+1. **Request**: The MCP client sends JSON-RPC requests to your MCP server (`https://mcp.example.com/mcp`).
 2. **Authentication**: The function checks the caller before any tool runs. With an API key, that's a string compare on the `Authorization` header. With OAuth, it verifies the access token against the Managed Better Auth JWKS endpoint and reads the user identity from the claims.
 3. **Tool execution**: The SDK matches the method to a tool handler, which queries Postgres through Drizzle.
 4. **Response**: The handler returns a `content` array, the SDK wraps it in a JSON-RPC result, and the client hands the text to the model.
@@ -48,7 +48,11 @@ Before you begin, make sure you have the following:
 1. **Node.js**: Version 22 or later. Download from [nodejs.org](https://nodejs.org/).
 2. **Neon account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
-4. **A domain (optional)**: To serve the function from your own URL, you'll need a domain. If you don't have one, you can still deploy the function and test it using the native Neon Function URL. This guide uses `mcp.example.com` in place of your domain. Replace it with your own domain or the native function URL.
+4. **A domain (optional)**: A domain lets you serve the function from a URL you control. Without one, deploy and test on the native Neon Function URL instead, and skip [Serve it from your own domain](#serve-it-from-your-own-domain); both authentication options work on that URL. The one case that needs a domain you control is a custom MCP client whose [Client ID Metadata Document](/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents) you host yourself, because that document can't be served from a Neon domain.
+
+<Admonition type="important" title="Replace the example domain">
+This guide uses `mcp.example.com` in place of your domain, so replace it with your own domain or the native function URL wherever it appears.
+</Admonition>
 
 <Steps>
 
@@ -104,7 +108,7 @@ The `neon link` command also creates a placeholder function, `hello.ts`, at your
 rm hello.ts
 ```
 
-It also creates a `.env.local` file with your Neon project variables, including `DATABASE_URL`. Your function uses these to connect to the database.
+It also creates a `.env.local` file with your Neon project variables, including `DATABASE_URL` and `DATABASE_URL_UNPOOLED`. Your function uses these to connect to the database.
 
 Next, install the dependencies you'll need for the MCP server:
 
@@ -143,11 +147,7 @@ You'll also need a `tsconfig.json` file to tell TypeScript how to compile the fu
 
 You'll build a simple contacts app with three tools: `create_contact`, `search_contacts`, and `delete_contact`.
 
-<Admonition type="info" title="What is an MCP tool?">
-A tool is a function with a name the model can call, a plain-language description of what it does, a schema for its arguments, and the code that runs when it's called. You write the function, and the MCP SDK handles the protocol around it: the initialization handshake, the tool list, and the JSON-RPC request and response. The SDK also validates the arguments against the schema before they reach your function, so you can assume the values are present and have the right type.
-</Admonition>
-
-Each contact has a name, email, phone number, company, and free-form notes. The model can call `create_contact` to add a new row, `search_contacts` to find rows by substring, and `delete_contact` to remove a row by id.
+Every tool declares its `inputSchema` as a zod object, and the SDK validates arguments against it before your handler runs, so every value the handler receives is present and correctly typed. Each contact has a name, email, phone number, company, and free-form notes. The model can call `create_contact` to add a new row, `search_contacts` to find rows by substring, and `delete_contact` to remove a row by id.
 
 ### Define the database schema
 
@@ -168,8 +168,6 @@ export const contacts = pgTable('contacts', {
 });
 ```
 
-`id` is an auto-incrementing primary key, `name` is required, and the rest of the columns are optional. `created_at` and `updated_at` default to the current time.
-
 ### Create the database client
 
 Create `src/db.ts` to export a Drizzle client that connects to the branch on Neon. The MCP handlers import this client to run queries.
@@ -189,9 +187,7 @@ The pool is created once at module scope, so requests on the same instance reuse
 
 ### Create the Hono app with the MCP route
 
-Create an `index.ts` file at the project root. It builds the MCP server, registers the three tools, and exposes them at the `/mcp` route through Hono. The MCP SDK handles the protocol details, so your code is just the three tool functions and their schemas.
-
-The file has three parts: a helper that shapes results, a factory that creates the server and registers the tools, and a Hono app with the routes.
+Create an `index.ts` file at the project root. It has three parts: a helper that shapes results, a factory that creates the MCP server and registers the three tools, and a Hono app that exposes them at the `/mcp` route.
 
 ```typescript shouldWrap filename="index.ts"
 import { Hono } from 'hono';
@@ -307,11 +303,9 @@ export default app;
 Here's what the code does:
 
 - **`asTextResult()`**: Wraps each result in the MCP `content` array. When a tool reports a problem such as a missing id, it sets `isError: true`; the JSON-RPC response still succeeds, so the model can tell the user. An exception thrown out of a handler is a server error instead, and its stack trace shows up in the [function logs](/docs/compute/functions/logs).
-- **`createServer()`**: Builds a new `McpServer` and registers the three tools. The factory closes over `db`, and the pool is shared across the process.
-- **`registerTool()` with `inputSchema`**: Each `inputSchema` is a `z.object()`, and every field has a `.describe()` call. The client shows those descriptions to the model, which uses them to pick the tool and fill in the arguments. Vague descriptions lead to wrong calls, and arguments that fail the schema never reach the handler because the SDK rejects the call first.
-- **`createMcpHandler()`**: This is the SDK's v2 HTTP entry point. It returns a web-standard handler with a `fetch(request)` method, which is the same shape a Neon Function exports through Hono. It calls the factory per request, so every request gets a fresh `McpServer`.
-- **Stateless by default**: The handler serves the current `2026-07-28` protocol and older `2025` clients, with no `Mcp-Session-Id` to store state.
-- **Search across columns**: The `search_contacts` tool uses `or()` and `ilike()` to match the query against several columns. If you omit the query, it lists all contacts, limited by the `limit` argument.
+- **`createServer()`**: Builds a new `McpServer` and registers the three tools. The pool from `src/db.ts` is shared across the process.
+- **`registerTool()` with `inputSchema`**: Each `inputSchema` is a `z.object()`, and every field has a `.describe()` call. The client shows those descriptions to the model, which uses them to pick the tool and fill in the arguments.
+- **`createMcpHandler()`**: The SDK's HTTP entry point. It returns a web-standard handler with a `fetch(request)` method, the same shape a Neon Function exports through Hono. It calls the factory per request, so every request gets a fresh `McpServer`. It serves the `2026-07-28` revision, where each request is self-contained, and falls back to stateless serving for older clients.
 
 ### Configure neon.ts
 
@@ -332,11 +326,11 @@ export const config = defineConfig({
 export default config;
 ```
 
-The function is named `mcp`, and its source is the `index.ts` file you just created. The `name` field is a human-readable description that appears in the Neon Console and CLI. The file has to be in place before you run `neon dev` in the next section, because it tells the CLI which file to build and serve. Without it, `neon dev` reports that it can't find a function.
+The key `mcp` names the function, and `source` points to the `index.ts` file you just created. The `name` field is the human-readable label shown in the Neon Console and CLI.
 
 ## Generate and apply the migrations
 
-Drizzle Kit reads `DATABASE_URL_UNPOOLED` from the environment, so first create a `drizzle.config.ts` file in the project root. It points Drizzle Kit at your schema and tells it to use the Postgres dialect. Migrations need a direct connection, so use the unpooled URL; `neon link` pulls both into `.env.local`.
+Create a `drizzle.config.ts` file in the project root. The config loads `.env.local` and points Drizzle Kit at your schema.
 
 ```typescript filename="drizzle.config.ts"
 import { config } from 'dotenv';
@@ -354,14 +348,14 @@ export default defineConfig({
 });
 ```
 
-Then generate and apply the migrations by running:
+Generate and apply the migration to create the `contacts` table in Postgres. Run the following commands:
 
 ```bash
 npx drizzle-kit generate
 npx drizzle-kit migrate
 ```
 
-The `generate` command creates a migration file in the `drizzle` folder, and `migrate` applies it to your branch on Neon. The `contacts` table is now ready for the MCP server.
+The first command creates a migration file in the `drizzle` folder, and the second applies it to the database using the `DATABASE_URL_UNPOOLED` connection string.
 
 ## Run the server locally and test it
 
@@ -417,7 +411,7 @@ Finally, delete it:
 npx mcporter call "http://localhost:8787/mcp.delete_contact" --allow-http id=1
 ```
 
-Search again to confirm the row is gone. This time the response contains no contacts.
+Search again to confirm the row is deleted. This time the response contains no contacts.
 
 You can also connect the local server to a coding agent. Run the `add-mcp` command for your agent:
 
@@ -435,7 +429,7 @@ npx add-mcp http://localhost:8787/mcp -a cursor
 
 `add-mcp` works with other MCP-capable coding agents too. See the [add-mcp supported agents](https://github.com/neon-solutions/add-mcp#supported-agents) list for the full set.
 
-That writes the MCP config file for your agent: `.mcp.json` in your project root for Claude Code, or `.cursor/mcp.json` for Cursor. The agent reads that file to discover the tools and their schemas, so it can call them when you ask it to do something. You can now ask the agent to create, search, and delete contacts through the local server.
+`add-mcp` writes the MCP config file for your agent: `.mcp.json` in your project root for Claude Code, or `.cursor/mcp.json` for Cursor. The agent reads that file to discover the tools and their schemas, so it can call them when you ask it to do something. You can now ask the agent to create, search, and delete contacts through the local server.
 
 Open your AI agent and ask it to create a contact. It picks the `create_contact` tool, fills in the arguments, and sends the call to your local server. The server runs the query and returns the result, which the agent shows you.
 
@@ -592,9 +586,9 @@ export const config = defineConfig({
       name: 'Contacts MCP server',
       source: './index.ts',
       customDomains: ['mcp.example.com'],
-      env: {
-        MCP_API_KEY: process.env.MCP_API_KEY!
-      },
+      env: { // [!code ++]
+        MCP_API_KEY: process.env.MCP_API_KEY! // [!code ++]
+      }, // [!code ++]
     },
   },
 });
@@ -658,8 +652,6 @@ npx add-mcp https://mcp.example.com/mcp -a cursor \
 ```
 
 </CodeTabs>
-
-Claude Desktop adds remote servers through its connector settings, which sign in with OAuth instead of a header. If you want to connect from the desktop app, use Option 2 below.
 
 ### Option 2: OAuth with Managed Better Auth
 
@@ -743,7 +735,7 @@ neon deploy
 
 Next, enable the OAuth provider in the [Neon Console](https://console.neon.tech). Open your project, go to **Settings** > **Better Auth**, and find the **OAuth provider** section:
 
-1. Add `https://mcp.example.com` as a [trusted domain](/docs/auth/guides/configure-domains#add-a-domain). Use the origin only, with no path or trailing slash, so the login and consent pages can call Managed Better Auth from it.
+1. Add `https://mcp.example.com` as a [trusted domain](/docs/auth/guides/configure-domains#add-a-domain). Use the origin only, with no path or trailing slash, so the login and consent pages can call Managed Better Auth from it. If you host the pages on another domain, add that origin instead.
 2. Turn on **Enable OAuth provider**, then set:
    - **Login page URL**: `https://mcp.example.com/sign-in`
    - **Consent page URL**: `https://mcp.example.com/consent`
@@ -811,13 +803,13 @@ export default app;
 The code adds the following:
 
 - **`createMcpAuth()`**: Creates the verifier for one MCP endpoint. `resource` must be the exact URL you set as **Server URL** in the provider. The token's `aud` claim must include it.
-- **`honoMcp()`**: Serves `/.well-known/oauth-protected-resource/mcp` (and the bare `/.well-known/oauth-protected-resource` fallback), and guards every method except `OPTIONS` on `/mcp`. It doesn't touch `/sign-in` or `/consent`.
+- **`honoMcp()`**: Serves `/.well-known/oauth-protected-resource/mcp`, and guards every method except `OPTIONS` on `/mcp`. It doesn't touch `/sign-in` or `/consent`.
 - **`mcpHandler.fetch(..., { authInfo })`**: Passes the verified caller to the MCP SDK. The SDK makes it available to the factory as `ctx.authInfo` and to tool handlers as `ctx.http.authInfo`.
 - **No auth routes**: Managed Better Auth serves the sign-in, consent, token, discovery, and JWKS endpoints on its own issuer. The function doesn't proxy them.
 
 #### Add the login and consent pages
 
-The provider redirects the user to your function's `/sign-in` and `/consent` pages. The pages post to Managed Better Auth, which returns a JSON response with a `url` that continues the flow. The pages then navigate the browser to that URL.
+The provider redirects the user to your function's `/sign-in` and `/consent` pages. Both pages call Managed Better Auth from the browser.
 
 To `index.ts`, add two functions that return the HTML for the pages. The `authBaseUrl` is the Managed Better Auth issuer, which the pages use to post credentials and consent.
 
@@ -921,10 +913,10 @@ function consentPage(authBaseUrl: string) {
 }
 ```
 
-The sign-in page posts the email and password to the Managed Better Auth `/sign-in/email` endpoint, along with the signed query string. If the credentials are valid, the response includes a `url` that continues the authorization flow, usually the consent page. If the user already has a session, the page calls `/oauth2/continue` first. The consent page posts to `/oauth2/consent`. When the user clicks Allow, Managed Better Auth returns JSON with a `redirect` flag and the `url` to navigate to: the client's redirect URI with the authorization code, or an error. The page then navigates the browser there. Neither response is an HTTP redirect. See [How the pages complete the flow](/docs/auth/guides/plugins/oauth-provider#how-the-pages-complete-the-flow) for the full contract.
+Each page posts to Managed Better Auth with the signed query string: the sign-in page to `/sign-in/email`, and the consent page to `/oauth2/consent`. If the user already has a session, the sign-in page calls `/oauth2/continue` instead. Both endpoints return JSON. When the JSON includes a `url`, the page navigates the browser there. For the consent step, that URL is the client's redirect URI with the authorization code. See [How the pages complete the flow](/docs/auth/guides/plugins/oauth-provider#how-the-pages-complete-the-flow) for the full contract.
 
 <Admonition type="note" title="Example pages only">
-These pages are minimal examples for this guide. In a real app, serve them from your own frontend with your own styling, add the sign-in options you normally offer, and show the client name and redirect host before the user approves access. See [Build your consent page](/docs/auth/guides/plugins/oauth-provider#build-your-consent-page) and the [Managed Better Auth SDK](/docs/auth/overview) for details.
+These pages are minimal examples for this guide. In a real app, serve them from your own frontend with your own styling, add the sign-in options you normally offer, such as [Google, GitHub, or Vercel sign-in](/docs/auth/guides/setup-oauth), and show the client name and redirect host before the user approves access. The pages don't have to run on the MCP server's domain. Any origin works as long as you add it as a [trusted domain](/docs/auth/guides/configure-domains) for the branch and point the page URLs in the provider settings at it. See [Build your consent page](/docs/auth/guides/plugins/oauth-provider#build-your-consent-page) for what the page should show, and the quick starts for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router) to build the pages in your own stack.
 </Admonition>
 
 #### Redeploy and test
@@ -978,11 +970,9 @@ This returns the protected resource metadata. The `authorization_servers` value 
 
 You now have a working MCP server with OAuth. The next step is to connect an MCP client to it.
 
-## Verify the client connection
+## Verify the OAuth flow from a coding agent
 
-The steps below cover the OAuth setup. If you secured the server with an API key, keep sending the `Authorization` header in your client config instead of signing in.
-
-Run the `add-mcp` command for your coding agent with the deployed URL:
+You can connect the deployed server to a coding agent. Run the `add-mcp` command for your agent with the deployed URL:
 
 <CodeTabs labels={["Claude Code", "Cursor"]}>
 
@@ -996,7 +986,11 @@ npx add-mcp https://mcp.example.com/mcp -a cursor
 
 </CodeTabs>
 
-Open the AI agent where you added the MCP server. The first time the client connects, it calls `/mcp`, reads the `401` challenge, discovers the authorization server, and opens a browser. Sign in as `dana@example.com` and select **Allow**. The client then lists the three tools. Ask it to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
+Open the AI agent where you added the MCP server and start the connection. In Claude Code, run `/mcp` in the chat and select the server from the list. The first time the client calls your `/mcp` route, it reads the `401` challenge, discovers the authorization server, and opens a browser. Sign in as `dana@example.com` and select **Allow**.
+
+![Sign-in and consent flow in the browser](/docs/guides/neon-functions-mcp-claude-code-oauth.png)
+
+The client then lists the three tools. Ask it to create, search, or delete a contact to confirm it reaches the deployed server over HTTPS.
 
 ```text filename="Claude Code"
 ❯ /mcp
@@ -1018,8 +1012,6 @@ You have 10 contacts:
 ....
 ```
 
-In Claude Code, run `/mcp` in the chat and select the server from the list. Claude Code opens the browser so you can sign in and authorize the client.
-
 ### Connect from Claude Desktop (OAuth)
 
 You can also use desktop applications such as Claude Desktop. To add the server, go to **Settings** > **Connectors** > **Add custom connector**, then enter the connector's name and URL.
@@ -1031,14 +1023,14 @@ Claude inspects the server, reads the `401` challenge, and fills in the OAuth se
 
 ![Claude Desktop's Add custom connector dialog showing the Contacts MCP name, the MCP server URL, and the detected OAuth settings](/docs/guides/neon-functions-mcp-claude-desktop-connector.png)
 
-The browser opens so you can sign in and allow access. Once the connector is added, Claude lists the tools from your server and calls them in chat. Ask it to list your contacts to confirm the round trip:
+The browser opens so you can sign in and allow access. Once the connector is added, Claude lists the tools from your server and calls them in chat. Ask it to list your contacts to confirm the flow works:
 
 ![Claude Desktop chat where Claude calls the Contacts MCP integration and returns a table of ten contacts](/docs/guides/neon-functions-mcp-claude-desktop-contacts.png)
 
-Claude loads the tools from the connector, calls `search_contacts` with no query, and renders the returned rows as a table. Because the client went through the OAuth flow, the token it sends is scoped to `https://mcp.example.com/mcp` and signed by your branch's Managed Better Auth instance.
+Claude calls `search_contacts` with no query, and renders the returned rows as a table. You can also ask it to create or delete contacts, and it calls the corresponding tools on your server.
 
 <Admonition type="note" title="Production hardening">
-Keep **Client ID Metadata Documents** on and **Dynamic client registration (legacy)** off; see [Dynamic client registration (legacy)](/docs/auth/guides/plugins/oauth-provider#dynamic-client-registration-legacy) for why. To control exactly which clients can connect, turn off both and onboard known clients as [managed clients](/docs/auth/guides/plugins/oauth-provider#create-and-manage-oauth-clients). Use **Skip consent** only for first-party apps you control. Access tokens expire after one hour. See [OAuth provider](/docs/auth/guides/plugins/oauth-provider) for scopes, refresh tokens, and the rest of the configuration surface.
+Keep **Client ID Metadata Documents** on and **Dynamic client registration (legacy)** off; see [Dynamic client registration (legacy)](/docs/auth/guides/plugins/oauth-provider#dynamic-client-registration-legacy) for why. To control exactly which clients can connect, turn off both and onboard known clients as [managed clients](/docs/auth/guides/plugins/oauth-provider#create-and-manage-oauth-clients). Use **Skip consent** only for first-party apps you control. Access tokens expire after one hour, but the client renews them in the background with a refresh token, so you don't sign in again every hour. Refresh tokens expire after 30 days and rotate on every use, so a client that connects at least once every 30 days stays signed in. See [OAuth provider](/docs/auth/guides/plugins/oauth-provider) for scopes, refresh tokens, and the rest of the configuration surface.
 </Admonition>
 
 </Steps>
