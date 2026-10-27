@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-10-26T18:36:20.868Z'
+updatedOn: '2026-10-27T12:18:53.418Z'
 ---
 
 <InfoBlock>
@@ -107,7 +107,6 @@ A Neon invoice includes the charges and the amount due for the billing period. F
 <Admonition type="note" title="Invoice changes">
 An invoice that has already been issued cannot be edited, re-addressed, or regenerated as a self-serve action. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will advise on the options available for your account, case-by-case.
 
-[comment]: <> (REVIEW c: Should marketplace-billed customers, for example Vercel, AWS, or Azure, be directed to their marketplace for invoice corrections rather than to Neon billing support? Their invoices are managed through the marketplace, not by Neon directly.)
 </Admonition>
 
 ### Pay an invoice
@@ -168,13 +167,11 @@ You can still use **Download** from the invoice menu to save a PDF. For other su
 <FaqItem question="What can billing support help with?">
 Billing support can help with questions about a specific invoice or charge, refunds and credits, and questions about your plan or subscription.
 
-[comment]: <> (REVIEW a: Do we want to state refund time limits publicly here, for example a window within which a refund can be requested, or keep refund eligibility described only as case by case?)
 </FaqItem>
 
 <FaqItem question="Can a past invoice be reissued, re-addressed, or regenerated?">
 Reissuing, re-addressing, or regenerating an invoice that has already been issued is not a self-serve action. If you need a correction on a past invoice, [request billing support](#request-billing-support) and the billing team will review the options available for your account, case-by-case.
 
-[comment]: <> (REVIEW b: Are there other asks we should explicitly list here as not self-serve, for example consolidating multiple invoices into one, adding a custom PO number, backdating an invoice, or changing the invoice currency?)
 </FaqItem>
 
 </Faq>
