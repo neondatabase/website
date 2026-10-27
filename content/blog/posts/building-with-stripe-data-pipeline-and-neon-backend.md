@@ -13,7 +13,7 @@ categories:
 authors:
   - rishi-raj-jain
 cover:
-  image: '/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/cover.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/cover.jpg'
   alt: 'Building with Stripe Data Pipeline and the Neon backend'
 isFeatured: false
 seo:
@@ -23,10 +23,10 @@ seo:
   noindex: false
   ogTitle: Building with Stripe Data Pipeline and the Neon backend - Neon
   ogDescription: Stripe data in Postgres + branching = a debugging machine
-  image: '/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/cover.png'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/social.jpg'
 ---
 
-![Building with Stripe Data Pipeline and the Neon backend](/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/cover.png)
+![Building with Stripe Data Pipeline and the Neon backend](https://cdn.neonapi.io/public/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/cover.jpg)
 
 Stripe just released [real-time sync to Postgres for Stripe Data Pipeline](/blog/stripe-data-pipeline-realtime-sync-to-postgres), which streams your Stripe data into your own Postgres database within a few seconds. Every object in the Stripe API with a list endpoint, such as charges, customers, prices, invoices and subscriptions, syncs into a regular table you can join against.
 
@@ -174,7 +174,7 @@ Because the app computes credits from Stripe data on every read, the query alrea
 
 Headshot Studio is an AI headshot generator paid for with credits. You buy a credit pack (one credit buys one headshot) and upload a selfie directly from the browser to a private bucket. A few moments later, the headshots appear on the studio page.
 
-![Headshot Studio architecture. In the browser, the user buys credits through Stripe Checkout, uploads a selfie to Object Storage with a presigned PUT URL, and views headshots in the studio with presigned GET URLs. Stripe Data Pipeline syncs charges and payment intents into Lakebase Postgres. On the Neon branch, a storage_object_created trigger calls the onupload function, which claims the job against the app.credit_balances view, generates headshots through AI Gateway and writes them to Object Storage.](/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/headshot-studio-architecture.png)
+![Headshot Studio architecture. In the browser, the user buys credits through Stripe Checkout, uploads a selfie to Object Storage with a presigned PUT URL, and views headshots in the studio with presigned GET URLs. Stripe Data Pipeline syncs charges and payment intents into Lakebase Postgres. On the Neon branch, a storage_object_created trigger calls the onupload function, which claims the job against the app.credit_balances view, generates headshots through AI Gateway and writes them to Object Storage.](https://cdn.neonapi.io/public/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/headshot-studio-architecture.jpg)
 
 The stack:
 
@@ -234,7 +234,7 @@ A second function, `sweeper`, runs every five minutes on a [schedule trigger](ht
 
 Bouncer sells an AI-powered service by the unit. It's a content moderation API where customers prepay for credits, create an API key in the dashboard, and send text to `POST /v1/moderate`. The API labels each item allow, review or block and returns a score per category. Pricing is \$1 per 1,000 items. When the balance runs low, auto top-up buys more.
 
-![Bouncer architecture. The customer buys credit packs through Stripe Checkout in the dashboard, and their app sends text to the api function at POST /v1/moderate with a bearer key. The api function authorizes the request and writes a ledger row in Lakebase Postgres, and scores items with gpt-oss-20b through AI Gateway. The topups function runs every 5 minutes, finds accounts below their threshold and creates Stripe invoices. Stripe Data Pipeline syncs checkout sessions, invoices and charges into Postgres, where the app.balances view computes each balance.](/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/bouncer-architecture.png)
+![Bouncer architecture. The customer buys credit packs through Stripe Checkout in the dashboard, and their app sends text to the api function at POST /v1/moderate with a bearer key. The api function authorizes the request and writes a ledger row in Lakebase Postgres, and scores items with gpt-oss-20b through AI Gateway. The topups function runs every 5 minutes, finds accounts below their threshold and creates Stripe invoices. Stripe Data Pipeline syncs checkout sessions, invoices and charges into Postgres, where the app.balances view computes each balance.](https://cdn.neonapi.io/public/images/pages/blog/building-with-stripe-data-pipeline-and-neon-backend/bouncer-architecture.jpg)
 
 The stack:
 
