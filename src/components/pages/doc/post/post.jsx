@@ -193,15 +193,18 @@ const Post = ({
                         Updated {formattedUpdatedOn}
                       </span>
                     )}
-                    <div className="flex-1" aria-hidden="true" />
-                    <AgentSetupButton agentPrompt={agentPrompt} />
-                    {!hideCopyPage && (
-                      <DropdownMenu
-                        className="mt-0! sm:mt-0"
-                        gitHubPath={gitHubPath}
-                        markdownPath={markdownPath}
-                      />
-                    )}
+                    {/* ml-auto keeps the actions right-aligned whether or not the
+                        date is present, so a date-less page has no empty gap. */}
+                    <div className="ml-auto flex items-center gap-2">
+                      <AgentSetupButton agentPrompt={agentPrompt} />
+                      {!hideCopyPage && (
+                        <DropdownMenu
+                          className="mt-0! sm:mt-0"
+                          gitHubPath={gitHubPath}
+                          markdownPath={markdownPath}
+                        />
+                      )}
+                    </div>
                   </div>
                 )}
               </>
