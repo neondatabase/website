@@ -10,7 +10,7 @@ summary: >-
   required server certificate is isrgrootx1.pem from Let's Encrypt; client
   authentication should be left disabled.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-27T11:48:14.853Z'
 ---
 
 [Looker Studio](https://lookerstudio.google.com/) is Google's data visualization and business intelligence platform. This guide explains how to connect your database to Looker Studio using a PostgreSQL data source.
@@ -34,11 +34,11 @@ For more details, see [Connect from any application](/docs/connect/connect-from-
    For example, if your connection string is:
 
    ```bash
-   psql 'postgresql://neondb_owner:AbC123dEf@ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+   psql 'postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    ```
 
    You would enter:
-   - **Host name or IP**: `ep-quiet-mountain-a1t1firv-pooler.ap-southeast-1.aws.neon.tech`
+   - **Host name or IP**: `ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech`
    - **Port (optional)**: Leave blank
    - **Database**: `neondb`
    - **Username**: `neondb_owner`
