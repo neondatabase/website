@@ -21,7 +21,10 @@ const DocsHeaderSearch = ({ className = null, handleClick }) => (
     title="Search or ask AI (⌘K)"
     onClick={() => handleClick('SEARCH')}
   >
-    <DocsHeaderSearchIcon aria-hidden="true" className="shrink-0 dark:invert" />
+    <DocsHeaderSearchIcon
+      aria-hidden="true"
+      className="shrink-0 dark:[&_[stroke]]:stroke-gray-new-60"
+    />
     <span className="flex-1 text-left text-sm leading-none whitespace-nowrap">Search...</span>
     <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal dark:border-gray-new-20">
       ⌘K

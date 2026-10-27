@@ -6,7 +6,6 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import LogoDarkIcon from 'icons/logo-dark.inline.svg';
 import { cn } from 'utils/cn';
 import { getDocsHeaderLanes } from 'utils/get-docs-nav-href';
 
@@ -68,9 +67,11 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           className="flex w-[189px] shrink-0 items-center gap-x-3.5 lg:w-auto lg:min-w-0 lg:shrink"
           to={customType?.link || LINKS.docs}
         >
-          <LogoLightIcon className="shrink-0 dark:hidden" aria-label="Neon" />
-          <LogoDarkIcon className="hidden h-7 w-auto shrink-0 dark:block" width={102} height={28} />
-          <LogoDivider className="shrink-0 dark:opacity-40" aria-hidden />
+          <LogoLightIcon
+            className="shrink-0 dark:[&_path:first-child]:fill-green-52 dark:[&_path:last-child]:fill-white"
+            aria-label="Neon"
+          />
+          <LogoDivider className="shrink-0 dark:[&_[stroke]]:stroke-gray-new-20" aria-hidden />
           <span
             className={cn(
               'mt-px min-w-0 truncate text-[15px] leading-none font-semibold tracking-normal text-[#157A55] uppercase dark:text-green-52',

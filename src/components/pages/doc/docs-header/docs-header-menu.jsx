@@ -183,7 +183,7 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
         data-test="docs-header-menu-toggle"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <MenuIcon className="dark:invert" aria-hidden="true" />
+        <MenuIcon className="dark:[&_[stroke]]:stroke-gray-new-70" aria-hidden="true" />
       </button>
       {isOpen && (
         <div

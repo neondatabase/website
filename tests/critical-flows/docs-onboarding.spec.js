@@ -11,7 +11,7 @@ const {
 
 // The docs home's guided-setup affordance is the Agent-prompt / CLI composer.
 // Its Copy button copies the active tab; the default (Agent prompt) tab copies
-// this base prompt verbatim when no capability chips are selected.
+// this setup prompt verbatim.
 const AGENT_PROMPT =
   'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 

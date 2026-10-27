@@ -416,8 +416,8 @@ const DetailIconCards = ({
                       'text-base leading-[1.5] font-normal text-[#6B6F77] dark:text-gray-new-60 md:text-base/[1.5]',
                     appearance === 'home' &&
                       (isLockup
-                        ? 'text-[15px] leading-[21px] text-gray-new-50 dark:text-gray-new-60'
-                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-70')
+                        ? 'text-[15px] leading-[21px] text-gray-new-50'
+                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-50')
                   )}
                 >
                   {description}

@@ -111,7 +111,7 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
         {subnav && (
           <ChevronIcon
             className={cn(
-              'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white',
+              'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white dark:[&_[stroke]]:stroke-gray-new-70',
               isLastActive ? 'text-black-new dark:text-white' : 'text-gray-new-50'
             )}
           />

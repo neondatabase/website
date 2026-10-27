@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
@@ -17,80 +17,40 @@ import ConnectUnderline from './images/connect-underline.inline.svg';
 import IndexCopyIcon from './images/index-copy.inline.svg';
 import QuickstartUnderline from './images/quickstart-underline.inline.svg';
 
-// Capability definitions, mirrored from the Claude "Docs Home A2" mockup. One
-// picker drives both the Agent prompt and CLI tabs. `phrase` is the bare word
-// appended to the prompt's "Then add ..." clause; `cmds` are the exact verified
-// CLI commands (CLI 8.8.0), with shell-safe example values (my-bucket,
-// myfunction) where a name is needed; `comment` is the `#` line shown above them. `icon`
-// is the real DetailIconCards monochrome icon name, matching the icon the live
-// docs home (content/docs/introduction.md) already uses for each service.
-// `product` is the real Neon product name, shown in the lockup line at the top
-// of each card (icon + name) so the task-first title still teaches the product
-// vocabulary. `chip` is the shorter label the composer picker shows (a
-// different string, and a separate control).
+// Product definitions for the docs home capability cards.
 const CAPS = [
   {
-    k: 'auth',
     title: 'Add login and users',
     line: 'Sign-in, sign-up sessions, OAuth',
     product: 'Managed Better Auth',
-    chip: 'Auth',
-    phrase: 'auth',
-    cmds: ['neon neon-auth enable'],
-    comment: 'Add login and users',
     to: '/docs/auth/overview',
     icon: 'lock-landscape',
   },
   {
-    k: 'object-storage',
     title: 'Store files and uploads',
     line: 'Images, documents, user uploads.',
     product: 'Neon Object Storage',
-    chip: 'File uploads',
-    phrase: 'file uploads',
-    cmds: ['neon buckets create my-bucket'],
-    comment: 'Create a bucket for files and uploads',
     to: '/docs/storage/overview',
     icon: 'data',
   },
   {
-    k: 'functions',
     title: 'Run backend code',
     line: 'Host APIs, agents, webhooks, cron.',
     product: 'Neon Functions',
-    chip: 'Backend code',
-    phrase: 'serverless functions',
-    cmds: ['neon functions deploy myfunction --src ./index.ts'],
-    comment: 'Deploy backend code as a function (point --src at your function file)',
     to: '/docs/compute/functions/overview',
     icon: 'code',
   },
   {
-    k: 'ai-gateway',
     title: 'Call any LLM',
     line: 'One key for every model and embeddings.',
     product: 'Neon AI Gateway',
-    chip: 'AI',
-    phrase: 'AI',
-    // The AI Gateway is on by default, so the CLI declares it in neon.ts and
-    // `neon deploy` applies it. `declared` puts it after the direct-command
-    // capabilities and adds the trailing deploy line. Paid plans only: deploy
-    // fails with an upgrade error on Free, so the comment says so inline.
-    cmds: ['neon config add ai-gateway'],
-    comment: 'Declare the AI Gateway in your config (paid plan)',
-    declared: true,
     to: '/docs/ai-gateway/overview',
     icon: 'sparkle',
   },
   {
-    k: 'realtime',
     title: 'Make it reactive',
     line: 'Realtime, reactive data and UIs.',
     product: 'Neon Realtime',
-    chip: 'Realtime',
-    phrase: 'realtime',
-    cmds: ['neon realtime enable'],
-    comment: 'Enable Realtime',
     to: '/docs/realtime/overview',
     icon: 'zap',
   },
@@ -104,7 +64,7 @@ const SEARCH_CARD = {
   icon: 'search',
 };
 
-// Card order follows the Figma content container; the composer keeps its picker order.
+// Card order follows the Figma content container.
 const CAPABILITY_CARDS = [CAPS[0], CAPS[1], CAPS[2], CAPS[4], SEARCH_CARD, CAPS[3]];
 
 // Framework, language, and ORM quickstarts. This is the full list the original
@@ -184,32 +144,26 @@ const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 const AGENT_BASE =
   'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
 
-// "a", "a and b", "a, b, and c"
-function joinList(items) {
-  if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} and ${items[1]}`;
-  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
-}
+const CLI_LINES = [
+  { text: '# Install the Neon CLI (needs Node.js 22.20+)', comment: true },
+  { text: 'npm install -g neon@latest', comment: false },
+  { text: '# Create and link a project (walks you through sign-in)', comment: true, gap: true },
+  { text: 'neon init', comment: false },
+];
+const CLI_TEXT = CLI_LINES.map(({ text }) => text).join('\n');
 
 // Shared design tokens, kept as the site's gray/green scale. These are the
 // borders, panel fills, and muted-text values the rest of docs uses; the custom
 // composer and foundation card below are built from them so they sit on the
 // same palette as the real components.
-const softBorder = 'border-gray-new-90 dark:border-gray-new-20';
 const strongBorder = 'border-gray-new-80 dark:border-gray-new-20';
 const mutedText = 'text-[#494B50] dark:text-gray-new-70';
-// Calmer, less-saturated green used only inside the composer box so the
-// composed phrase and selected chips don't read as hot neon against the quiet
-// page. green-44 (#39A57D) / green-52 (#34D59A) is the same muted pair the
-// site's Link `blue-green` inline-emphasis theme uses, rather than the full
-// brightness brand neon green-45 (#00E599).
-const composerGreen = 'text-green-44 dark:text-green-52';
 
-// Section headings and descriptions sit above their full-width content grids.
+// Section introductions sit beside their content, stacking when the page narrows.
 const Section = ({ heading, description, action, children }) => (
-  <section className="grid grid-cols-1 gap-8 md:gap-6">
+  <section className="grid grid-cols-[240px_minmax(0,1fr)] items-start gap-x-14 border-t border-gray-new-90 pt-14 pb-24 @max-[900px]:grid-cols-1 @max-[900px]:gap-y-6 dark:border-gray-new-20 xl:gap-x-10 md:pt-10 md:pb-16">
     <div className="grid content-start gap-2">
-      <h2 className="m-0 font-sans text-[26px] leading-tight font-medium tracking-[-0.04em] text-balance md:text-2xl">
+      <h2 className="m-0 font-sans text-[26px] leading-tight font-medium tracking-[-0.04em] text-balance dark:text-white md:text-2xl">
         {heading}
       </h2>
       {description && (
@@ -217,7 +171,7 @@ const Section = ({ heading, description, action, children }) => (
       )}
       {action}
     </div>
-    <div className="min-w-0">{children}</div>
+    <div className="@container min-w-0">{children}</div>
   </section>
 );
 
@@ -235,11 +189,11 @@ const CopyChip = ({ label, url }) => {
     <div className="py-2">
       <div
         className={cn(
-          'flex min-h-15 min-w-0 items-center justify-between gap-5 rounded-none border bg-white px-[15px] dark:bg-black-pure',
+          'flex min-h-15 min-w-0 items-center justify-between gap-5 rounded-none border bg-white px-[15px] dark:bg-gray-new-8',
           strongBorder
         )}
       >
-        <code className="min-w-0 font-mono text-sm leading-[21px] tracking-[-0.02em] break-all text-[#8458D0] dark:text-[#B599FF]">
+        <code className="min-w-0 font-mono text-sm leading-[21px] tracking-[-0.02em] break-all text-[#8458D0] dark:text-green-52">
           {label}
         </code>
         <button
@@ -255,7 +209,7 @@ const CopyChip = ({ label, url }) => {
           {isCopied ? (
             <CopiedIcon className="size-3.5" aria-hidden />
           ) : (
-            <IndexCopyIcon aria-hidden />
+            <IndexCopyIcon className="dark:[&_[stroke]]:stroke-gray-new-70" aria-hidden />
           )}
         </button>
       </div>
@@ -268,56 +222,13 @@ CopyChip.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
-// Custom composer: the agent-prompt / CLI picker whose chips drive both the
-// prompt and the CLI command block. This is the one genuinely new piece with no
-// existing component, so it stays custom; only the copy control is rebuilt on
-// the shared `useCopyToClipboard` hook and the shared home copy icons.
+// Tabbed setup instructions with a copy control for the active tab.
 const Composer = () => {
   const [tab, setTab] = useState('agent');
-  const [picks, setPicks] = useState([]);
   const { isCopied, handleCopy } = useCopyToClipboard(1400);
 
   const agent = tab === 'agent';
-  const sel = useMemo(() => CAPS.filter((c) => picks.includes(c.k)), [picks]);
-
-  // The "Then add ..." clause appears only when at least one chip is selected.
-  // agent-setup.md now signs the user in during setup (sign-in is step 2 of the
-  // setup steps there), so the composer no longer asks the human to sign in; it
-  // only names the services to build in the current app.
-  const extra = useMemo(
-    () => (sel.length ? ` Then add ${joinList(sel.map((c) => c.phrase))} to my app.` : ''),
-    [sel]
-  );
-  const promptText = AGENT_BASE + extra;
-
-  // CLI: install the CLI globally, init, then one `# comment` + command block
-  // per picked capability. Direct-command capabilities (Auth, Storage,
-  // Functions, Realtime) provision on their own; declared ones (AI) come after
-  // them, followed by `neon deploy`, which only appears when one is picked. The
-  // global install comes first so the bare `neon` in every later line resolves
-  // on a clean machine (same order as public/prompts/agent-setup.md).
-  const cliLines = useMemo(() => {
-    const blocks = [
-      ['Install the Neon CLI (needs Node.js 22.20+)', ['npm install -g neon@latest']],
-      ['Create and link a project (walks you through sign-in)', ['neon init']],
-    ];
-    sel.filter((c) => !c.declared).forEach((c) => blocks.push([c.comment, c.cmds]));
-    const declared = sel.filter((c) => c.declared);
-    declared.forEach((c) => blocks.push([c.comment, c.cmds]));
-    if (declared.length) blocks.push(['Provision what you declared', ['neon deploy']]);
-    const lines = [];
-    blocks.forEach(([comment, cmds], i) => {
-      lines.push({ text: `# ${comment}`, comment: true, gap: i > 0 });
-      cmds.forEach((cmd) => lines.push({ text: cmd, comment: false, gap: false }));
-    });
-    return lines;
-  }, [sel]);
-  const cliText = cliLines.map((l) => l.text).join('\n');
-
-  const activeText = agent ? promptText : cliText;
-
-  const togglePick = (k) =>
-    setPicks((prev) => (prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k]));
+  const activeText = agent ? AGENT_BASE : CLI_TEXT;
 
   const tabBtn = (id) =>
     cn(
@@ -332,7 +243,7 @@ const Composer = () => {
   return (
     <div
       className={cn(
-        'min-w-0 rounded-none border bg-white font-sans text-base dark:bg-black-pure',
+        '@container min-w-0 rounded-none border bg-white font-sans text-base dark:bg-gray-new-8',
         strongBorder
       )}
     >
@@ -353,7 +264,7 @@ const Composer = () => {
         <button
           type="button"
           onClick={() => handleCopy(activeText)}
-          className="mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full bg-black-new px-4 text-[15px] leading-none font-medium tracking-normal text-white transition-colors duration-200 hover:bg-gray-new-20"
+          className="mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full bg-black-new px-4 text-[15px] leading-none font-medium tracking-normal text-white transition-colors duration-200 hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90"
         >
           {isCopied ? 'Copied' : 'Copy'}
           {isCopied ? <CopiedIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
@@ -361,17 +272,16 @@ const Composer = () => {
       </div>
 
       {agent ? (
-        <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-94 sm:px-4">
+        <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-80 sm:px-4">
           <span>Set me up for Neon. Fetch </span>
-          <span className="text-[#8754FF] dark:text-[#B599FF]">
+          <span className="text-green-44 dark:text-green-52">
             https://neon.com/prompts/agent-setup.md
           </span>
           <span> and follow it.</span>
-          {extra && <span className={composerGreen}>{extra}</span>}
         </div>
       ) : (
         <div className="grid gap-0.5 px-6 pt-6 pb-[25px] text-base leading-[30.8px] [overflow-wrap:anywhere] sm:px-4">
-          {cliLines.map((l, i) => (
+          {CLI_LINES.map((l, i) => (
             <div
               key={`${l.text}-${i}`}
               className={cn(
@@ -379,7 +289,7 @@ const Composer = () => {
                 l.gap && 'mt-2.5',
                 l.comment
                   ? 'text-[#494B50] dark:text-gray-new-60'
-                  : 'text-[#8754FF] dark:text-[#B599FF]'
+                  : 'text-green-44 dark:text-green-52'
               )}
             >
               {l.text}
@@ -387,37 +297,6 @@ const Composer = () => {
           ))}
         </div>
       )}
-
-      {/* Chip row drives both tabs */}
-      <div className={cn('flex flex-wrap items-center gap-2 border-t p-6 sm:p-4', softBorder)}>
-        <span
-          className={cn(
-            'shrink-0 pr-2 text-base leading-7 whitespace-nowrap text-[#494B50] @max-[720px]:pr-0 dark:text-gray-new-60 sm:w-full',
-            agent ? 'w-[132px] @max-[720px]:w-auto' : 'w-auto'
-          )}
-        >
-          {agent ? 'Add to prompt:' : 'Add to commands:'}
-        </span>
-        {CAPS.map((c) => {
-          const on = picks.includes(c.k);
-          return (
-            <button
-              key={c.k}
-              type="button"
-              aria-pressed={on}
-              onClick={() => togglePick(c.k)}
-              className={cn(
-                'flex min-h-9 items-center rounded-none border px-3 py-1 text-base leading-7 tracking-[-0.02333em] transition-colors duration-150',
-                on
-                  ? 'border-green-44 bg-green-44/10 text-green-44 dark:border-green-52 dark:bg-green-52/10 dark:text-green-52'
-                  : 'border-gray-new-90 bg-black-pure/[0.02] text-black-pure hover:border-green-44 dark:border-gray-new-50 dark:bg-white/[0.02] dark:text-gray-new-94 dark:hover:border-green-52'
-              )}
-            >
-              {c.chip}
-            </button>
-          );
-        })}
-      </div>
     </div>
   );
 };
@@ -446,7 +325,7 @@ const FoundationCard = () => (
         <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
           Create a database
         </span>
-        <span className="text-[15px] leading-snug text-gray-new-50 dark:text-gray-new-60">
+        <span className="text-[15px] leading-snug text-gray-new-50">
           Serverless Postgres that branches with your app.
         </span>
       </div>
@@ -465,11 +344,11 @@ const FoundationCard = () => (
         <Link
           key={label}
           to={to}
-          className="flex items-center gap-1.5 rounded-full border border-green-44/50 bg-white px-3 py-1.5 text-sm leading-5 tracking-[-0.01em] text-[#1A1A1A] transition-colors hover:border-green-44 hover:bg-green-44/5 dark:bg-black-pure dark:text-white"
+          className="flex items-center gap-1.5 rounded-full border border-green-44/50 bg-white px-3 py-1.5 text-sm leading-5 tracking-[-0.01em] text-[#1A1A1A] transition-colors hover:border-green-44 hover:bg-green-44/5 dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:border-gray-new-60"
         >
           {label}
           <span
-            className="font-mono text-[13px] leading-5 font-medium tracking-normal text-green-44"
+            className="font-mono text-[13px] leading-5 font-medium tracking-normal text-green-44 dark:text-green-52"
             aria-hidden
           >
             →
@@ -480,14 +359,13 @@ const FoundationCard = () => (
   </div>
 );
 
-// Keep the content at 832px on wide screens: three 264px cards with 20px gaps.
-// The outer padding belongs to the sidebar gutter, outside that content width.
+// Match the reference's 1200px page while keeping the mobile container gutters.
 const DocsHome = () => (
-  <div className="w-full min-w-0 px-6 font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white lg:px-0">
-    <main className="@container flex w-full max-w-[832px] flex-col gap-14 pb-16">
-      {/* The heading and intro precede the full-width composer, like the body sections. */}
-      <section className="grid grid-cols-1 gap-[52px]">
-        <div className="grid content-start gap-4">
+  <div className="@container w-full min-w-0 font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
+    <main className="@container w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-0">
+      {/* The intro and composer share the hero row on wide screens. */}
+      <section className="grid grid-cols-[minmax(0,47fr)_minmax(0,53fr)] items-start gap-x-16 gap-y-10 pt-0 pb-24 @max-[900px]:grid-cols-1 xl:gap-x-10 xl:pt-3 lg:py-16 md:py-14">
+        <div className="grid content-start gap-6">
           {/*
             Heading unit: the docs label as the H1, with the product descriptor
             as a calm subhead held close beneath it. The links sit a step below.
@@ -496,21 +374,21 @@ const DocsHome = () => (
             <h1 className="m-0 font-sans text-[40px] leading-[1.25] font-medium tracking-[-0.04em] text-balance md:text-[36px]">
               Neon Docs
             </h1>
-            <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-[#494B50] dark:text-gray-new-70 md:text-base">
+            <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-[#494B50] dark:text-gray-new-80 md:text-base">
               Postgres, Auth, Storage, Functions, AI, and Realtime on one branch.
             </p>
           </div>
-          <div className="flex flex-wrap items-start gap-x-6 gap-y-3 text-base">
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-2 text-base">
             <Link
               to="/docs/get-started/full-backend-quickstart"
-              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:hover:text-gray-new-70"
+              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
             >
               Full backend quickstart
               <QuickstartUnderline className="absolute bottom-0 left-0" aria-hidden />
             </Link>
             <Link
               to="/docs/connect/connect-hub"
-              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:hover:text-gray-new-70"
+              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
             >
               Connect an existing app
               <ConnectUnderline className="absolute bottom-0 left-0" aria-hidden />

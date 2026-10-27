@@ -28,7 +28,11 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
     aria-label="Open Neon AI"
     onClick={() => handleClick('AI_CHAT')}
   >
-    {isDocsHeader ? <DocsHeaderSparksIcon className="dark:invert" /> : <SparksIcon />}
+    {isDocsHeader ? (
+      <DocsHeaderSparksIcon className="dark:[&_[stroke]]:stroke-gray-new-70" />
+    ) : (
+      <SparksIcon />
+    )}
     <span
       className={cn(
         'block leading-none',
