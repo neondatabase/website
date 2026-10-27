@@ -15,6 +15,8 @@ import getDocsNavHref from 'utils/get-docs-nav-href';
 
 import Icon from '../menu/icon';
 
+import MenuIcon from './images/menu.inline.svg';
+
 const THEMES = [
   { value: 'system', label: 'System' },
   { value: 'light', label: 'Light' },
@@ -171,8 +173,8 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
     <div className={cn('relative', className)} ref={menuRef}>
       <button
         className={cn(
-          'flex size-9 items-center justify-center rounded-md border border-gray-new-85 text-gray-new-20 transition-colors duration-200 hover:border-gray-new-70',
-          'dark:border-gray-new-20 dark:text-gray-new-80 dark:hover:border-gray-new-30'
+          'flex size-9 items-center justify-center rounded-none text-gray-new-20 transition-colors duration-200 hover:bg-gray-new-98',
+          'dark:text-gray-new-80 dark:hover:bg-gray-new-10'
         )}
         type="button"
         aria-label={isOpen ? 'Close menu' : 'More'}
@@ -181,18 +183,7 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
         data-test="docs-header-menu-toggle"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          aria-hidden="true"
-        >
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
+        <MenuIcon className="dark:invert" aria-hidden="true" />
       </button>
       {isOpen && (
         <div

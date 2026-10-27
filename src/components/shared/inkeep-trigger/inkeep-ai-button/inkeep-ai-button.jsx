@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import DocsHeaderSparksIcon from 'components/pages/doc/docs-header/images/sparks.inline.svg';
 import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
 
@@ -10,9 +11,9 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
         ? // Single-bar docs header: outlined 36px button, hidden below 1100px
           // (Ask AI stays reachable from the ⌘K search modal).
           [
-            'chat-widget flex h-9 items-center gap-x-2 rounded-md border border-gray-new-85 px-3 text-sm text-gray-new-20',
+            'chat-widget flex h-9 items-center gap-x-2 rounded-none border border-gray-new-85 bg-gray-new-98 pr-3 pl-2.5 text-sm text-gray-new-20',
             'transition-colors duration-200 hover:border-gray-new-70',
-            'dark:border-gray-new-20 dark:text-gray-new-80 dark:hover:border-gray-new-30 dark:hover:text-white',
+            'dark:border-gray-new-20 dark:bg-black-new dark:text-gray-new-80 dark:hover:border-gray-new-30 dark:hover:text-white',
             'max-[1100px]:hidden',
           ]
         : [
@@ -27,11 +28,11 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
     aria-label="Open Neon AI"
     onClick={() => handleClick('AI_CHAT')}
   >
-    <SparksIcon />
+    {isDocsHeader ? <DocsHeaderSparksIcon className="dark:invert" /> : <SparksIcon />}
     <span
       className={cn(
         'block leading-none',
-        isDocsHeader ? 'text-sm whitespace-nowrap' : 'text-[13px] tracking-extra-tight'
+        isDocsHeader ? 'text-sm leading-5 whitespace-nowrap' : 'text-[13px] tracking-extra-tight'
       )}
     >
       Ask AI

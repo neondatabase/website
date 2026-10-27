@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { cn } from 'utils/cn';
 import getDocsNavHref from 'utils/get-docs-nav-href';
 import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
+import ChevronIcon from '../../docs-header/images/chevron-down.inline.svg';
 import Icon from '../../menu/icon';
 
 const isActiveItem = (slug, items, subnav, currentSlug) => {
@@ -95,7 +95,7 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
           'rounded-sm text-[15px] leading-snug tracking-extra-tight whitespace-nowrap',
           'transition-colors duration-200',
           'group-hover:text-black-new hover:text-black-new',
-          'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
+          'after:absolute after:inset-x-0 after:bottom-0 after:h-px after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
           'dark:group-hover:text-white dark:after:bg-white dark:hover:text-white',
           isLastActive
             ? 'text-black-new after:opacity-100 dark:text-white'

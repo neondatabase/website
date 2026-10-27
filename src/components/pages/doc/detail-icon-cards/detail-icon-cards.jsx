@@ -220,6 +220,7 @@ const DetailIconCards = ({
   forceGreenIcon = false,
   cols = 2,
   theme = 'green-dotted',
+  appearance = 'default',
 }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
   const isFlatGroupTheme = theme !== 'green-dotted';
@@ -275,12 +276,21 @@ const DetailIconCards = ({
         const isLockup = !withNumbers && !!lockup && !!Icon;
 
         return (
-          <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
+          <li
+            className={cn(
+              'm-0! flex min-h-[169px] pl-0! before:hidden',
+              appearance === 'home' && isLockup && 'min-h-[161px]'
+            )}
+            key={index}
+          >
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
-                cols === 3 && 'p-4 md:p-5',
-                isLockup && 'px-[22px] pt-6 pb-[26px] md:px-[22px] md:pt-6 md:pb-[26px]',
+                cols === 3 && appearance !== 'home' && 'p-4 md:p-5',
+                isLockup &&
+                  appearance !== 'home' &&
+                  'px-[22px] pt-6 pb-[26px] md:px-[22px] md:pt-6 md:pb-[26px]',
+                appearance === 'home' && (isLockup ? 'p-[15px]' : 'min-h-[173.75px] p-4'),
                 withNumbers &&
                   'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
                 !withNumbers && cardTheme.card
@@ -320,17 +330,21 @@ const DetailIconCards = ({
               ) : isLockup ? (
                 // Optional product lockup: the icon plus a product name on one
                 // line, in the slot the icon alone otherwise occupies. The
-                // icons are drawn on a 16px grid, so the stroke is set as a
-                // non-scaling 1.46px (the spec's 1.75 on a 24px grid, at 20px).
-                <span className="mb-7 flex items-center gap-2">
+                // icons are drawn on a 16px grid; keep their stroke at 1.5px
+                // while displaying the product lockup at 24px.
+                <span
+                  className={cn(
+                    'mb-7 flex shrink-0 items-center gap-3 text-green-44 dark:text-green-52',
+                    appearance === 'home' && 'mb-0 gap-2.5'
+                  )}
+                >
                   <Icon
                     className={cn(
-                      'size-5 shrink-0 [&_*]:[stroke-width:1.46] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]',
-                      cardTheme.icon,
+                      'size-6 shrink-0 [&_*]:[stroke-width:1.5] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]',
                       forceGreenIcon && 'text-green-44 dark:text-green-44'
                     )}
                   />
-                  <span className="text-[13px] leading-snug font-normal tracking-normal text-[#6B6F77] dark:text-gray-new-60">
+                  <span className="font-mono text-xs leading-snug font-medium tracking-normal uppercase">
                     {lockup}
                   </span>
                 </span>
@@ -339,7 +353,8 @@ const DetailIconCards = ({
                   className={cn(
                     'mb-8 size-7',
                     cardTheme.icon,
-                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
+                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44',
+                    appearance === 'home' && 'mb-9 size-6 shrink-0 text-green-44 dark:text-green-52'
                   )}
                 />
               ) : (
@@ -367,13 +382,26 @@ const DetailIconCards = ({
                   )}
                 </span>
               )}
-              <div className={cn('flex flex-col gap-1.5', isLockup && 'gap-2')}>
+              <div
+                className={cn(
+                  'flex flex-col gap-1.5',
+                  isLockup && appearance !== 'home' && 'gap-2',
+                  appearance === 'home' && (!isLockup && index === 0 ? 'mt-0' : 'mt-auto')
+                )}
+              >
                 <h3
                   className={cn(
-                    'text-lg leading-snug font-medium tracking-extra-tight',
+                    'font-sans text-lg leading-snug font-medium',
                     !withNumbers && cardTheme.title,
                     isLockup &&
-                      'text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white'
+                      appearance !== 'home' &&
+                      'text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white',
+                    appearance === 'home'
+                      ? cn(
+                          'text-lg leading-[25px] font-medium',
+                          isLockup ? 'tracking-[-0.02em]' : 'tracking-[-0.04em]'
+                        )
+                      : 'tracking-extra-tight'
                   )}
                 >
                   {children}
@@ -381,10 +409,15 @@ const DetailIconCards = ({
                 <p
                   className={cn(
                     'text-base leading-snug tracking-extra-tight',
-                    cols === 3 && 'text-[0.9375rem] md:text-base/snug',
+                    cols === 3 && appearance !== 'home' && 'text-[0.9375rem] md:text-base/snug',
                     !withNumbers && cardTheme.description,
                     isLockup &&
-                      'text-base leading-[1.5] font-normal text-[#6B6F77] dark:text-gray-new-60 md:text-base/[1.5]'
+                      appearance !== 'home' &&
+                      'text-base leading-[1.5] font-normal text-[#6B6F77] dark:text-gray-new-60 md:text-base/[1.5]',
+                    appearance === 'home' &&
+                      (isLockup
+                        ? 'text-[15px] leading-[21px] text-gray-new-50 dark:text-gray-new-60'
+                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-70')
                   )}
                 >
                   {description}
@@ -407,6 +440,7 @@ DetailIconCards.propTypes = {
   cols: PropTypes.oneOf([2, 3, 4]),
   theme: PropTypes.oneOf(['green-flat', 'grey', 'green-dotted']),
   highlightIndex: PropTypes.number,
+  appearance: PropTypes.oneOf(['default', 'home']),
 };
 
 export default DetailIconCards;

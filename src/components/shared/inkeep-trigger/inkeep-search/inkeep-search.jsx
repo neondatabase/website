@@ -2,18 +2,17 @@
 
 import PropTypes from 'prop-types';
 
+import DocsHeaderSearchIcon from 'components/pages/doc/docs-header/images/search.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 
-// Single-bar docs header: a 240px field that collapses to a 36px icon button
-// below 1200px. The docs header hides it entirely on mobile, where the shared
-// mobile menu renders its own search trigger.
+// Keep the full 240px field through the 1024px desktop header. On smaller
+// screens the shared mobile menu renders its own search trigger.
 const DocsHeaderSearch = ({ className = null, handleClick }) => (
   <button
     className={cn(
-      'flex h-9 w-60 items-center gap-x-2.5 rounded-md border border-gray-new-85 pr-2.5 pl-3 text-[#6B6F77] transition-colors duration-200 hover:border-gray-new-70',
-      'dark:border-gray-new-20 dark:text-gray-new-60 dark:hover:border-gray-new-30',
-      'max-[1200px]:w-9 max-[1200px]:justify-center max-[1200px]:px-0 max-[1200px]:text-gray-new-20 dark:max-[1200px]:text-gray-new-80',
+      'flex h-9 w-60 items-center gap-x-2.5 rounded-none border border-gray-new-85 bg-gray-new-98 pr-2.5 pl-3 text-[#6B6F77] transition-colors duration-200 hover:border-gray-new-70',
+      'dark:border-gray-new-20 dark:bg-black-new dark:text-gray-new-60 dark:hover:border-gray-new-30',
       className
     )}
     data-test="docs-search-trigger"
@@ -22,11 +21,9 @@ const DocsHeaderSearch = ({ className = null, handleClick }) => (
     title="Search or ask AI (⌘K)"
     onClick={() => handleClick('SEARCH')}
   >
-    <SearchIcon aria-hidden="true" className="size-4 shrink-0" />
-    <span className="flex-1 text-left text-sm leading-none whitespace-nowrap max-[1200px]:hidden">
-      Search...
-    </span>
-    <span className="rounded-sm border border-gray-new-85 px-[5px] py-px text-xs leading-normal max-[1200px]:hidden dark:border-gray-new-20">
+    <DocsHeaderSearchIcon aria-hidden="true" className="shrink-0 dark:invert" />
+    <span className="flex-1 text-left text-sm leading-none whitespace-nowrap">Search...</span>
+    <span className="rounded-none border border-gray-new-85 px-[5px] py-px text-xs leading-normal dark:border-gray-new-20">
       ⌘K
     </span>
   </button>

@@ -13,6 +13,10 @@ import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 
+import ConnectUnderline from './images/connect-underline.inline.svg';
+import IndexCopyIcon from './images/index-copy.inline.svg';
+import QuickstartUnderline from './images/quickstart-underline.inline.svg';
+
 // Capability definitions, mirrored from the Claude "Docs Home A2" mockup. One
 // picker drives both the Agent prompt and CLI tabs. `phrase` is the bare word
 // appended to the prompt's "Then add ..." clause; `cmds` are the exact verified
@@ -28,7 +32,7 @@ const CAPS = [
   {
     k: 'auth',
     title: 'Add login and users',
-    line: 'Sign-in, sign-up, sessions, OAuth.',
+    line: 'Sign-in, sign-up sessions, OAuth',
     product: 'Managed Better Auth',
     chip: 'Auth',
     phrase: 'auth',
@@ -64,7 +68,7 @@ const CAPS = [
   {
     k: 'ai-gateway',
     title: 'Call any LLM',
-    line: 'One API and one key for every model, plus embeddings.',
+    line: 'One key for every model and embeddings.',
     product: 'Neon AI Gateway',
     chip: 'AI',
     phrase: 'AI',
@@ -99,6 +103,9 @@ const SEARCH_CARD = {
   to: '/docs/ai/lakebase-search',
   icon: 'search',
 };
+
+// Card order follows the Figma content container; the composer keeps its picker order.
+const CAPABILITY_CARDS = [CAPS[0], CAPS[1], CAPS[2], CAPS[4], SEARCH_CARD, CAPS[3]];
 
 // Framework, language, and ORM quickstarts. This is the full list the original
 // docs front page (content/docs/introduction.md) rendered, in the same order,
@@ -190,8 +197,7 @@ function joinList(items) {
 // same palette as the real components.
 const softBorder = 'border-gray-new-90 dark:border-gray-new-20';
 const strongBorder = 'border-gray-new-80 dark:border-gray-new-20';
-const panelBg = 'bg-gray-new-98 dark:bg-gray-new-8';
-const mutedText = 'text-gray-new-50 dark:text-gray-new-70';
+const mutedText = 'text-[#494B50] dark:text-gray-new-70';
 // Calmer, less-saturated green used only inside the composer box so the
 // composed phrase and selected chips don't read as hot neon against the quiet
 // page. green-44 (#39A57D) / green-52 (#34D59A) is the same muted pair the
@@ -199,26 +205,16 @@ const mutedText = 'text-gray-new-50 dark:text-gray-new-70';
 // brightness brand neon green-45 (#00E599).
 const composerGreen = 'text-green-44 dark:text-green-52';
 
-// Label-left body-section wrapper, restored from the pre-sidebar-rebuild
-// `LabelSection`: the heading + description/action sit in a fixed LEFT column
-// and the section content (cards, card grid) sits in the RIGHT column beside it,
-// via a `grid-cols-[<track>_minmax(0,1fr)]` grid that collapses to a single
-// stacked column at md and below. The label track is 240px (narrowed from the
-// original 300px): the Get started sidebar now eats the left of the page, so a
-// full 300px track left the 3-up card grid cramped; 240px gives the cards room
-// while keeping a clear label column.
+// Section headings and descriptions sit above their full-width content grids.
 const Section = ({ heading, description, action, children }) => (
-  <section
-    className={cn(
-      'grid grid-cols-[240px_minmax(0,1fr)] items-start gap-x-14 border-t pt-14 pb-24 xl:gap-x-10 md:grid-cols-1 md:gap-6 md:pt-10 md:pb-16',
-      softBorder
-    )}
-  >
+  <section className="grid grid-cols-1 gap-8 md:gap-6">
     <div className="grid content-start gap-2">
-      <h2 className="m-0 font-title text-[32px] leading-tight font-normal tracking-[-0.03em] text-balance md:text-[26px]">
+      <h2 className="m-0 font-sans text-[26px] leading-tight font-medium tracking-[-0.04em] text-balance md:text-2xl">
         {heading}
       </h2>
-      {description && <span className={cn('text-sm leading-[1.5]', mutedText)}>{description}</span>}
+      {description && (
+        <span className={cn('text-base leading-[1.5] opacity-90', mutedText)}>{description}</span>
+      )}
       {action}
     </div>
     <div className="min-w-0">{children}</div>
@@ -232,34 +228,38 @@ Section.propTypes = {
   children: PropTypes.node,
 };
 
-// Copy chip for the agent-fetch URLs (llms.txt, prompts/agent-setup.md). These are raw
-// files meant for agents, not pages for people, so the chip copies the absolute
-// URL instead of navigating. Same copy pattern as the composer's Copy button:
-// the shared `useCopyToClipboard` hook and the shared home copy/copied icons,
-// with the label swapping to "Copied" briefly. The path and "Copied" share one
-// grid cell so the chip keeps its width when the label swaps.
+// Agent-file URL presented as a code line with a separate icon-only copy button.
 const CopyChip = ({ label, url }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(1400);
   return (
-    <button
-      type="button"
-      onClick={() => handleCopy(url)}
-      aria-label={isCopied ? `Copied ${url}` : `Copy ${url}`}
-      className={cn(
-        'flex items-center gap-1.5 rounded-[2px] border px-2.5 py-1.5 font-mono text-xs text-current transition-colors hover:border-gray-new-70 dark:hover:border-gray-new-40',
-        softBorder
-      )}
-    >
-      <span className="grid">
-        <span className={cn('col-start-1 row-start-1', isCopied && 'invisible')}>{label}</span>
-        <span className={cn('col-start-1 row-start-1', !isCopied && 'invisible')}>Copied</span>
-      </span>
-      {isCopied ? (
-        <CopiedIcon className="size-3" aria-hidden />
-      ) : (
-        <CopyIcon className="size-3" aria-hidden />
-      )}
-    </button>
+    <div className="py-2">
+      <div
+        className={cn(
+          'flex min-h-15 min-w-0 items-center justify-between gap-5 rounded-none border bg-white px-[15px] dark:bg-black-pure',
+          strongBorder
+        )}
+      >
+        <code className="min-w-0 font-mono text-sm leading-[21px] tracking-[-0.02em] break-all text-[#8458D0] dark:text-[#B599FF]">
+          {label}
+        </code>
+        <button
+          type="button"
+          onClick={() => handleCopy(url)}
+          aria-label={isCopied ? `Copied ${url}` : `Copy ${url}`}
+          title={isCopied ? 'Copied' : 'Copy'}
+          className={cn(
+            'flex size-7 shrink-0 items-center justify-center rounded-none border text-[#61646B] transition-colors hover:border-gray-new-60 dark:text-gray-new-70 dark:hover:border-gray-new-40',
+            strongBorder
+          )}
+        >
+          {isCopied ? (
+            <CopiedIcon className="size-3.5" aria-hidden />
+          ) : (
+            <IndexCopyIcon aria-hidden />
+          )}
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -321,48 +321,56 @@ const Composer = () => {
 
   const tabBtn = (id) =>
     cn(
-      'flex items-center px-[18px] font-mono text-xs transition-colors',
-      '-mb-px border-b',
+      'flex h-full shrink-0 items-center justify-center border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-[-0.02em] whitespace-nowrap transition-colors',
       tab === id
-        ? 'border-green-44 text-black-pure dark:border-green-52 dark:text-white'
-        : 'border-transparent text-gray-new-50 dark:text-gray-new-60'
+        ? 'border-black-pure text-black-pure dark:border-gray-new-70 dark:text-white'
+        : 'border-transparent text-gray-new-40 dark:text-gray-new-60',
+      id === 'cli' && 'w-[63px] shrink'
     );
 
-  // Returns only the composer box. The hero's text half (eyebrow, headline,
-  // intro, links) lives in the left column of the hero section in DocsHome.
+  // Full-width tabbed panel beneath the hero heading, intro and links.
   return (
-    <div className={cn('rounded-[2px] border', strongBorder, panelBg)}>
-      <div className={cn('flex h-11 items-stretch border-b', softBorder)}>
-        <button type="button" className={tabBtn('agent')} onClick={() => setTab('agent')}>
-          Agent prompt
-        </button>
-        <button type="button" className={tabBtn('cli')} onClick={() => setTab('cli')}>
-          CLI
-        </button>
-        <div className="flex-1" />
-        <div className="flex items-center pr-2">
-          <button
-            type="button"
-            onClick={() => handleCopy(activeText)}
-            className="flex h-[30px] items-center gap-1.5 rounded-[2px] bg-primary-1 px-3 text-[13px] font-medium text-black transition-colors hover:bg-primary-2"
-          >
-            {isCopied ? 'Copied' : 'Copy'}
-            {isCopied ? <CopiedIcon className="size-3" /> : <CopyIcon className="size-3" />}
+    <div
+      className={cn(
+        'min-w-0 rounded-none border bg-white font-sans text-base dark:bg-black-pure',
+        strongBorder
+      )}
+    >
+      <div
+        className={cn(
+          'flex h-16 items-start justify-between border-b bg-gray-new-98 pr-3.5 pl-[18px] dark:bg-gray-new-8',
+          strongBorder
+        )}
+      >
+        <div className="-mt-px flex h-[65px] min-w-0 items-stretch">
+          <button type="button" className={tabBtn('agent')} onClick={() => setTab('agent')}>
+            Agent prompt
+          </button>
+          <button type="button" className={tabBtn('cli')} onClick={() => setTab('cli')}>
+            CLI
           </button>
         </div>
+        <button
+          type="button"
+          onClick={() => handleCopy(activeText)}
+          className="mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full bg-black-new px-4 text-[15px] leading-none font-medium tracking-normal text-white transition-colors duration-200 hover:bg-gray-new-20"
+        >
+          {isCopied ? 'Copied' : 'Copy'}
+          {isCopied ? <CopiedIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
+        </button>
       </div>
 
       {agent ? (
-        <div className="min-h-[84px] p-7 font-mono text-[15px] leading-[1.65] [text-wrap:pretty] text-gray-new-15 dark:text-gray-new-94 md:p-6">
+        <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-94 sm:px-4">
           <span>Set me up for Neon. Fetch </span>
-          <span className="border-b border-dashed border-gray-new-70 text-black-pure dark:border-gray-new-50 dark:text-white">
+          <span className="text-[#8754FF] dark:text-[#B599FF]">
             https://neon.com/prompts/agent-setup.md
           </span>
           <span> and follow it.</span>
           {extra && <span className={composerGreen}>{extra}</span>}
         </div>
       ) : (
-        <div className="grid min-h-[84px] gap-0.5 p-7 font-mono text-[14px] leading-[1.6] md:p-6">
+        <div className="grid gap-0.5 px-6 pt-6 pb-[25px] text-base leading-[30.8px] [overflow-wrap:anywhere] sm:px-4">
           {cliLines.map((l, i) => (
             <div
               key={`${l.text}-${i}`}
@@ -370,8 +378,8 @@ const Composer = () => {
                 'break-words',
                 l.gap && 'mt-2.5',
                 l.comment
-                  ? 'text-gray-new-50 dark:text-gray-new-60'
-                  : 'text-black-pure dark:text-gray-new-94'
+                  ? 'text-[#494B50] dark:text-gray-new-60'
+                  : 'text-[#8754FF] dark:text-[#B599FF]'
               )}
             >
               {l.text}
@@ -381,14 +389,14 @@ const Composer = () => {
       )}
 
       {/* Chip row drives both tabs */}
-      <div
-        className={cn(
-          'flex flex-wrap items-center gap-1.5 border-t px-7 pt-3.5 pb-4 md:px-6',
-          softBorder
-        )}
-      >
-        <span className="mr-2 font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
-          {agent ? 'Add to prompt' : 'Add to commands'}
+      <div className={cn('flex flex-wrap items-center gap-2 border-t p-6 sm:p-4', softBorder)}>
+        <span
+          className={cn(
+            'shrink-0 pr-2 text-base leading-7 whitespace-nowrap text-[#494B50] @max-[720px]:pr-0 dark:text-gray-new-60 sm:w-full',
+            agent ? 'w-[132px] @max-[720px]:w-auto' : 'w-auto'
+          )}
+        >
+          {agent ? 'Add to prompt:' : 'Add to commands:'}
         </span>
         {CAPS.map((c) => {
           const on = picks.includes(c.k);
@@ -399,13 +407,10 @@ const Composer = () => {
               aria-pressed={on}
               onClick={() => togglePick(c.k)}
               className={cn(
-                'flex h-7 items-center rounded-[2px] border px-2.5 font-mono text-xs tracking-[-0.02em] transition-colors duration-150',
+                'flex min-h-9 items-center rounded-none border px-3 py-1 text-base leading-7 tracking-[-0.02333em] transition-colors duration-150',
                 on
                   ? 'border-green-44 bg-green-44/10 text-green-44 dark:border-green-52 dark:bg-green-52/10 dark:text-green-52'
-                  : cn(
-                      'text-gray-new-40 hover:border-green-44 dark:text-gray-new-60 dark:hover:border-green-52',
-                      softBorder
-                    )
+                  : 'border-gray-new-90 bg-black-pure/[0.02] text-black-pure hover:border-green-44 dark:border-gray-new-50 dark:bg-white/[0.02] dark:text-gray-new-94 dark:hover:border-green-52'
               )}
             >
               {c.chip}
@@ -417,29 +422,11 @@ const Composer = () => {
   );
 };
 
-// Postgres foundation card: the full-width foundation tier that sits above the
-// 3-up grid of capability cards, with the slash-separated sub-links. It uses
-// the same plain green-flat fill as the DetailIconCards cards below it
-// (bg-[#E4F1EB]/40 light, #101815 dark) so it sits calmly in the same card
-// family while staying full-width. DetailIconCards cannot render a single
-// full-width card out of the box (it lays children out in a 2/3/4-col grid of
-// equal cards), so this stays custom. Its lockup line repeats the classes
-// DetailIconCards uses for its `lockup` prop, with the same shared database
-// icon the live Products grid uses for Lakebase Postgres. Layout: a horizontal
-// row that uses the card's full width, with the lockup + title + description as
-// a left block and the two sub-links pushed to the right edge
-// (justify-between), vertically centered against the left block so the card
-// reads full rather than half-empty. It collapses to a stack on small screens.
-// The whole card links to the Lakebase Postgres product overview through a
-// stretched overlay link, consistent with how the six capability cards (Auth,
-// Object Storage, Functions, AI Gateway, Realtime, Search) link to their own
-// product overview pages; the two sub-links sit above it (relative z-10) so
-// each is its own link; a card-wide <a> can't contain them, since links can't
-// nest.
+// Full-width Postgres foundation card from the Figma content container.
 const FoundationCard = () => (
   <div
     className={cn(
-      'group relative flex items-center justify-between gap-6 border px-[26px] py-6 transition-colors hover:border-green-44 sm:flex-col sm:items-start sm:gap-4',
+      'group relative flex min-h-[142px] items-end justify-between gap-6 border p-4 transition-colors hover:border-green-44 @max-[680px]:flex-col @max-[680px]:items-start @max-[680px]:gap-5',
       'border-green-44/70 bg-[#E4F1EB]/40 dark:border-green-44/30 dark:bg-[#101815]'
     )}
   >
@@ -448,73 +435,85 @@ const FoundationCard = () => (
       aria-label="Create a database"
       className="absolute inset-0"
     />
-    {/* Left block: lockup + title + description. */}
-    <div className="flex flex-col gap-2.5">
-      {/* Same lockup classes as the DetailIconCards lockup variant. */}
-      <span className="flex items-center gap-2">
-        <DatabaseIcon className="size-5 shrink-0 text-[#2DAA7D] dark:text-[#00E599] [&_*]:[stroke-width:1.46] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]" />
-        <span className="text-[13px] leading-snug font-normal tracking-normal text-[#6B6F77] dark:text-gray-new-60">
+    <div className="flex min-w-0 flex-col gap-8">
+      <span className="flex items-center gap-3 text-green-44 dark:text-green-52">
+        <DatabaseIcon className="size-6 shrink-0 [&_*]:[stroke-width:1.5] [&_*]:[stroke-linecap:round] [&_*]:[stroke-linejoin:round] [&_*]:[vector-effect:non-scaling-stroke]" />
+        <span className="font-mono text-xs leading-4 font-medium tracking-[0.02em] uppercase">
           Lakebase Postgres
         </span>
       </span>
-      <span className="font-sans text-[20px] leading-[1.2] font-normal tracking-[-0.02em] text-[#0C0D0D] dark:text-white">
-        Create a database
-      </span>
-      <span className="text-base leading-[1.5] text-[#6B6F77] dark:text-gray-new-60">
-        Serverless Postgres that branches with your app.
-      </span>
+      <div className="flex flex-col gap-1.5">
+        <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
+          Create a database
+        </span>
+        <span className="text-[15px] leading-snug text-gray-new-50 dark:text-gray-new-60">
+          Serverless Postgres that branches with your app.
+        </span>
+      </div>
     </div>
-    {/* Right block: the two sub-links, balanced against the left block. */}
-    <span className="flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-[#303236] dark:text-gray-new-80">
-      <NextLink href="/docs/connect/connect-hub" className="relative z-10">
-        Connect
-      </NextLink>
-      <span className="text-gray-new-70">/</span>
-      <NextLink href="/docs/introduction/branching" className="relative z-10">
-        Branching
-      </NextLink>
-    </span>
+    <div className="relative z-10 flex shrink-0 gap-2">
+      {[
+        [
+          'Connect',
+          'https://neon-next-git-docs-ia-redesign-neondatabase.vercel.app/docs/connect/connect-hub',
+        ],
+        [
+          'Branching',
+          'https://neon-next-git-docs-ia-redesign-neondatabase.vercel.app/docs/introduction/branching',
+        ],
+      ].map(([label, to]) => (
+        <Link
+          key={label}
+          to={to}
+          className="flex items-center gap-1.5 rounded-full border border-green-44/50 bg-white px-3 py-1.5 text-sm leading-5 tracking-[-0.01em] text-[#1A1A1A] transition-colors hover:border-green-44 hover:bg-green-44/5 dark:bg-black-pure dark:text-white"
+        >
+          {label}
+          <span
+            className="font-mono text-[13px] leading-5 font-medium tracking-normal text-green-44"
+            aria-hidden
+          >
+            →
+          </span>
+        </Link>
+      ))}
+    </div>
   </div>
 );
 
-// The home now renders inside the shared (docs) layout's content column, to the
-// right of the Get started sidebar, so it drops the old full-width left-gutter
-// alignment trick. Per brief #7 the content column tops out ~1200px (main box
-// ~1328px less gutters) and left-aligns against the sidebar like interior docs
-// pages, with any extra width falling on the right.
+// Keep the content at 832px on wide screens: three 264px cards with 20px gaps.
+// The outer padding belongs to the sidebar gutter, outside that content width.
 const DocsHome = () => (
-  <div className="@container w-full font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
-    <main className="w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-10 md:px-8 sm:px-5">
-      {/*
-        Hero: text half on the left, composer box on the right, side by side on
-        desktop and stacked (text then box) at lg and below. This hero uses its
-        own two-column split and intentionally does NOT use the header-row
-        Section layout the sections further down the page use.
-      */}
-      <section className="grid grid-cols-[minmax(0,47fr)_minmax(0,53fr)] items-start gap-x-16 gap-y-10 py-24 xl:gap-x-10 lg:grid-cols-1 lg:py-16 md:py-14">
-        <div className="grid content-start gap-6">
+  <div className="w-full min-w-0 px-6 font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white lg:px-0">
+    <main className="@container flex w-full max-w-[832px] flex-col gap-14 pb-16">
+      {/* The heading and intro precede the full-width composer, like the body sections. */}
+      <section className="grid grid-cols-1 gap-[52px]">
+        <div className="grid content-start gap-4">
           {/*
             Heading unit: the docs label as the H1, with the product descriptor
             as a calm subhead held close beneath it. The links sit a step below.
           */}
           <div className="grid gap-3">
-            <h1 className="m-0 font-title text-[56px] leading-[1.08] font-normal tracking-[-0.04em] text-balance 2xl:text-[48px] lg:text-[40px] md:text-[36px]">
+            <h1 className="m-0 font-sans text-[40px] leading-[1.25] font-medium tracking-[-0.04em] text-balance md:text-[36px]">
               Neon Docs
             </h1>
-            <p className="m-0 text-lg leading-snug [text-wrap:pretty] text-gray-new-40 dark:text-gray-new-70 md:text-base">
+            <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-[#494B50] dark:text-gray-new-70 md:text-base">
               Postgres, Auth, Storage, Functions, AI, and Realtime on one branch.
             </p>
           </div>
-          <div className="grid justify-items-start gap-2 text-[13px]">
+          <div className="flex flex-wrap items-start gap-x-6 gap-y-3 text-base">
             <Link
               to="/docs/get-started/full-backend-quickstart"
-              theme="grey-70-underlined"
-              className="text-[13px]"
+              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:hover:text-gray-new-70"
             >
               Full backend quickstart
+              <QuickstartUnderline className="absolute bottom-0 left-0" aria-hidden />
             </Link>
-            <Link to="/docs/connect/connect-hub" theme="grey-70-underlined" className="text-[13px]">
+            <Link
+              to="/docs/connect/connect-hub"
+              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:hover:text-gray-new-70"
+            >
               Connect an existing app
+              <ConnectUnderline className="absolute bottom-0 left-0" aria-hidden />
             </Link>
           </div>
         </div>
@@ -526,7 +525,7 @@ const DocsHome = () => (
         heading="What do you want to add to your app?"
         description="Every capability runs on the same Postgres branch."
       >
-        <div className="grid gap-3">
+        <div className="grid gap-5">
           <FoundationCard />
           {/*
             Capability cards rendered with the real docs card component
@@ -540,8 +539,13 @@ const DocsHome = () => (
             stripped by `eslint --fix` as unknown DOM attributes.
           */}
           {/* eslint-disable react/no-unknown-property */}
-          <DetailIconCards className="my-0!" cols={3} theme="green-flat">
-            {[...CAPS, SEARCH_CARD].map((c) => (
+          <DetailIconCards
+            className="my-0! @max-[720px]:grid-cols-2 @max-[480px]:grid-cols-1"
+            cols={3}
+            theme="green-flat"
+            appearance="home"
+          >
+            {CAPABILITY_CARDS.map((c) => (
               <a key={c.to} href={c.to} description={c.line} icon={c.icon} lockup={c.product}>
                 {c.title}
               </a>
@@ -551,21 +555,12 @@ const DocsHome = () => (
         </div>
       </Section>
 
-      {/*
-        Frameworks and Coding agents, restored to two separate stacked label-left
-        sections (as in the pre-sidebar labels version) instead of the side-by-side
-        two-column block. Each is its own `Section`: heading + description/action in
-        the fixed left column, cards in the right column, matching the other body
-        sections. Each grid now gets the full right column, so the cards lay out
-        4-up (CompactCards supports 2 or 4 cols; 4 fills the wider column and steps
-        down to md:3 / sm:2 on its own).
-      */}
       {/* Frameworks */}
       <Section
         heading="Frameworks"
         description="Quickstart guides to connect Neon to your framework."
       >
-        <CompactCards className="my-0!" cols={4} withToggler>
+        <CompactCards className="my-0!" cols={4} withToggler appearance="home">
           {/* All frameworks render here; CompactCards shows the first 12 and
               collapses the rest behind a Show more / Hide toggle, expanding in
               place instead of linking away. */}
@@ -582,22 +577,16 @@ const DocsHome = () => (
         heading="Coding agents"
         description="Connect over MCP to create branches, run SQL, and read docs."
       >
-        <div className="grid gap-5">
-          <CompactCards className="my-0!" cols={4}>
+        <div className="grid gap-8">
+          <CompactCards className="my-0!" cols={2} appearance="home">
             {AGENTS.map((g) => (
               <a key={g.name} href={MCP_HREF} title={g.name} icon={g.icon}>
                 {g.name}
               </a>
             ))}
           </CompactCards>
-          <div
-            className={cn(
-              'flex flex-wrap items-center gap-x-4 gap-y-2 rounded-[2px] p-3.5 px-4 text-[13px]',
-              panelBg,
-              mutedText
-            )}
-          >
-            <span className="min-w-[220px] flex-1">
+          <div className="grid gap-2.5">
+            <span className={cn('text-base leading-normal', mutedText)}>
               Point your agent at this Markdown index to find any doc.
             </span>
             <CopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
@@ -611,7 +600,12 @@ const DocsHome = () => (
         description="Step-by-step tutorials that build a complete backend."
       >
         {/* eslint-disable react/no-unknown-property */}
-        <DetailIconCards className="my-0!" cols={3} theme="green-flat">
+        <DetailIconCards
+          className="my-0! @max-[720px]:grid-cols-2 @max-[480px]:grid-cols-1"
+          cols={3}
+          theme="green-flat"
+          appearance="home"
+        >
           {GUIDED_PATHS.map((p) => (
             <a key={p.to} href={p.to} description={p.line} icon={p.icon}>
               {p.title}
