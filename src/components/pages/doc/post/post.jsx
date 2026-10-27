@@ -14,6 +14,7 @@ import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
 
+import AgentSetupButton from '../agent-setup-button';
 import DropdownMenu from '../dropdown-menu';
 import Tag from '../tag';
 
@@ -42,6 +43,8 @@ const Post = ({
     titleWidth = null,
     contentLayout = null,
     hideCopyPage = false,
+    updatedOn = null,
+    agentPrompt = null,
   },
   content,
   breadcrumbs,
@@ -70,6 +73,16 @@ const Post = ({
 
   // Check if split content layout is enabled (2-column grid for SDK reference style)
   const isSplitLayout = contentLayout === 'split';
+
+  // "Updated {date}" stamp shown in the title action row. Same source as the
+  // footer's last-updated date (the auto-stamped `updatedOn` frontmatter).
+  const formattedUpdatedOn = updatedOn
+    ? new Date(updatedOn).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : null;
 
   const heading = (
     <h1
@@ -133,7 +146,7 @@ const Post = ({
                 </div>
               </>
             ) : (
-              <div className="flex items-start justify-between gap-6 sm:flex-col sm:items-stretch sm:gap-4">
+              <>
                 <div
                   className={cn(
                     !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
@@ -170,10 +183,25 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && !hideCopyPage && (
-                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                {!isChangelog && !isDocsIndex && (
+                  <div className="mt-6 flex flex-wrap items-center gap-2 border-b border-gray-new-90 pb-5 dark:border-gray-new-15 md:mt-5">
+                    {formattedUpdatedOn && (
+                      <span className="text-sm leading-snug text-[#6B6F77] dark:text-gray-new-60">
+                        Updated {formattedUpdatedOn}
+                      </span>
+                    )}
+                    <div className="flex-1" aria-hidden="true" />
+                    <AgentSetupButton agentPrompt={agentPrompt} />
+                    {!hideCopyPage && (
+                      <DropdownMenu
+                        className="mt-0! sm:mt-0"
+                        gitHubPath={gitHubPath}
+                        markdownPath={markdownPath}
+                      />
+                    )}
+                  </div>
                 )}
-              </div>
+              </>
             )}
             {aboveContent}
             <Content
@@ -225,6 +253,7 @@ Post.propTypes = {
     titleWidth: PropTypes.oneOf(['530', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
     hideCopyPage: PropTypes.bool,
+    agentPrompt: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),

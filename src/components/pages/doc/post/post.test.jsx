@@ -17,6 +17,9 @@ vi.mock('components/shared/navigation-links', () => ({ default: () => null }));
 vi.mock('../dropdown-menu', () => ({
   default: () => <div data-testid="copy-page-menu" />,
 }));
+vi.mock('../agent-setup-button', () => ({
+  default: () => <div data-testid="agent-setup-button" />,
+}));
 vi.mock('../tag', () => ({ default: () => null }));
 
 const renderPost = (data, props = {}) =>
@@ -48,5 +51,26 @@ describe('Post hideCopyPage', () => {
     renderPost({});
 
     expect(screen.getByTestId('copy-page-menu')).toBeInTheDocument();
+  });
+
+  it('shows the agent-setup button even when the copy-page menu is hidden', () => {
+    renderPost({ hideCopyPage: true });
+
+    expect(screen.getByTestId('agent-setup-button')).toBeInTheDocument();
+    expect(screen.queryByTestId('copy-page-menu')).not.toBeInTheDocument();
+  });
+});
+
+describe('Post updated date', () => {
+  it('renders the "Updated" stamp in the title row when updatedOn is set', () => {
+    renderPost({ updatedOn: '2026-09-16T12:00:00.000Z' });
+
+    expect(screen.getByText(/Updated Sep 16, 2026/)).toBeInTheDocument();
+  });
+
+  it('omits the "Updated" stamp when updatedOn is absent', () => {
+    renderPost({});
+
+    expect(screen.queryByText(/^Updated /)).not.toBeInTheDocument();
   });
 });
