@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import DocsHeaderSparksIcon from 'components/pages/doc/docs-header/images/sparks.inline.svg';
+import DocsHeaderSparksIcon from 'icons/docs/header/sparks.inline.svg';
 import SparksIcon from 'icons/sparks.inline.svg';
 import { cn } from 'utils/cn';
 

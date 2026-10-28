@@ -2,7 +2,7 @@
 
 import PropTypes from 'prop-types';
 
-import DocsHeaderSearchIcon from 'components/pages/doc/docs-header/images/search.inline.svg';
+import DocsHeaderSearchIcon from 'icons/docs/header/search.inline.svg';
 import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 

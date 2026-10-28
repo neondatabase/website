@@ -1,24 +1,20 @@
-'use client';
-
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
-import { useId, useRef, useState } from 'react';
 
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DatabaseIcon from 'components/pages/doc/detail-icon-cards/images/database.inline.svg';
 import Link from 'components/shared/link';
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
-import CopiedIcon from 'icons/home/copied.inline.svg';
-import CopyIcon from 'icons/home/copy.inline.svg';
 import { cn } from 'utils/cn';
 
+import DocsHomeComposer from './docs-home-composer';
+import DocsHomeCopyChip from './docs-home-copy-chip';
+import { mutedText } from './docs-home-tokens';
 import ConnectUnderline from './images/connect-underline.inline.svg';
-import IndexCopyIcon from './images/index-copy.inline.svg';
 import QuickstartUnderline from './images/quickstart-underline.inline.svg';
 
-// Product definitions for the docs home capability cards.
-const CAPS = [
+// Capability cards, in the order of the Figma content container.
+const CAPABILITY_CARDS = [
   {
     title: 'Add login and users',
     line: 'Sign-in, sign-up sessions, OAuth',
@@ -41,34 +37,30 @@ const CAPS = [
     icon: 'code',
   },
   {
-    title: 'Call any LLM',
-    line: 'One key for every model and embeddings.',
-    product: 'Neon AI Gateway',
-    to: '/docs/ai-gateway/overview',
-    icon: 'sparkle',
-  },
-  {
     title: 'Make it reactive',
     line: 'Realtime, reactive data and UIs.',
     product: 'Neon Realtime',
     to: '/docs/realtime/overview',
     icon: 'zap',
   },
+  {
+    title: 'Add search',
+    line: 'Vector, full-text, and hybrid search.',
+    product: 'Lakebase Search',
+    to: '/docs/ai/lakebase-search',
+    icon: 'search',
+  },
+  {
+    title: 'Call any LLM',
+    line: 'One key for every model and embeddings.',
+    product: 'Neon AI Gateway',
+    to: '/docs/ai-gateway/overview',
+    icon: 'sparkle',
+  },
 ];
 
-const SEARCH_CARD = {
-  title: 'Add search',
-  line: 'Vector, full-text, and hybrid search.',
-  product: 'Lakebase Search',
-  to: '/docs/ai/lakebase-search',
-  icon: 'search',
-};
-
-// Card order follows the Figma content container.
-const CAPABILITY_CARDS = [CAPS[0], CAPS[1], CAPS[2], CAPS[4], SEARCH_CARD, CAPS[3]];
-
 // Framework, language, and ORM quickstarts. This is the full list the original
-// docs front page (content/docs/introduction.md) rendered, in the same order,
+// docs front page (the retired content/docs/introduction.md) rendered, in the same order,
 // so the Frameworks section can show it all with CompactCards' `withToggler`
 // (first 12 shown, the rest behind a Show more toggle) instead of a short
 // hardcoded grid plus a navigate-away link. `icon` is the real technology-logo
@@ -141,26 +133,8 @@ const GUIDED_PATHS = [
 
 const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 
-const AGENT_BASE =
-  'Set me up for Neon. Fetch https://neon.com/prompts/agent-setup.md and follow it.';
-
-const CLI_LINES = [
-  { text: '# Install the Neon CLI (needs Node.js 22.20+)', comment: true },
-  { text: 'npm install -g neon@latest', comment: false },
-  { text: '# Create and link a project (walks you through sign-in)', comment: true, gap: true },
-  { text: 'neon init', comment: false },
-];
-const CLI_TEXT = CLI_LINES.map(({ text }) => text).join('\n');
-
-// Shared design tokens, kept as the site's gray/green scale. These are the
-// borders, panel fills, and muted-text values the rest of docs uses; the custom
-// composer and foundation card below are built from them so they sit on the
-// same palette as the real components.
-const strongBorder = 'border-gray-new-80 dark:border-gray-new-20';
-const mutedText = 'text-[#494B50] dark:text-gray-new-70';
-
 // Section introductions sit beside their content, stacking when the page narrows.
-const Section = ({ heading, description, action, children }) => (
+const Section = ({ heading, description, children }) => (
   <section className="grid grid-cols-[240px_minmax(0,1fr)] items-start gap-x-14 border-t border-gray-new-90 pt-14 pb-24 @max-[900px]:grid-cols-1 @max-[900px]:gap-y-6 dark:border-gray-new-20 xl:gap-x-10 md:pt-10 md:pb-16">
     <div className="grid content-start gap-2">
       <h2 className="m-0 font-sans text-[26px] leading-tight font-medium tracking-[-0.04em] text-balance dark:text-white md:text-2xl">
@@ -169,7 +143,6 @@ const Section = ({ heading, description, action, children }) => (
       {description && (
         <span className={cn('text-base leading-[1.5] opacity-90', mutedText)}>{description}</span>
       )}
-      {action}
     </div>
     <div className="@container min-w-0">{children}</div>
   </section>
@@ -178,174 +151,7 @@ const Section = ({ heading, description, action, children }) => (
 Section.propTypes = {
   heading: PropTypes.string.isRequired,
   description: PropTypes.string,
-  action: PropTypes.node,
   children: PropTypes.node,
-};
-
-// Agent-file URL presented as a code line with a separate icon-only copy button.
-const CopyChip = ({ label, url }) => {
-  const { isCopied, handleCopy } = useCopyToClipboard(1400);
-  return (
-    <div className="py-2">
-      <div
-        className={cn(
-          'flex min-h-15 min-w-0 items-center justify-between gap-5 rounded-none border bg-white px-[15px] dark:bg-gray-new-8',
-          strongBorder
-        )}
-      >
-        <code className="min-w-0 font-mono text-sm leading-[21px] tracking-[-0.02em] break-all text-[#8458D0] dark:text-green-52">
-          {label}
-        </code>
-        <button
-          type="button"
-          onClick={() => handleCopy(url)}
-          aria-label={isCopied ? `Copied ${url}` : `Copy ${url}`}
-          title={isCopied ? 'Copied' : 'Copy'}
-          className={cn(
-            'flex size-7 shrink-0 items-center justify-center rounded-none border text-[#61646B] transition-colors hover:border-gray-new-60 dark:text-gray-new-70 dark:hover:border-gray-new-40',
-            strongBorder
-          )}
-        >
-          {isCopied ? (
-            <CopiedIcon className="size-3.5" aria-hidden />
-          ) : (
-            <IndexCopyIcon className="dark:[&_[stroke]]:stroke-gray-new-70" aria-hidden />
-          )}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-CopyChip.propTypes = {
-  label: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-};
-
-const COMPOSER_TABS = [
-  { id: 'agent', label: 'Agent prompt' },
-  { id: 'cli', label: 'CLI' },
-];
-
-// Tabbed setup instructions with a copy control for the active tab.
-const Composer = () => {
-  const [tab, setTab] = useState('agent');
-  const { isCopied, handleCopy } = useCopyToClipboard(1400);
-  const idPrefix = useId();
-  const tabRefs = useRef({});
-
-  const agent = tab === 'agent';
-  const activeText = agent ? AGENT_BASE : CLI_TEXT;
-  const tabId = (id) => `${idPrefix}-tab-${id}`;
-  const panelId = `${idPrefix}-panel`;
-
-  // WAI-ARIA tabs keyboard pattern: arrows move between tabs (wrapping),
-  // Home/End jump to the first/last, and focus follows the selection.
-  const handleTabKeyDown = (event) => {
-    const index = COMPOSER_TABS.findIndex((t) => t.id === tab);
-    const last = COMPOSER_TABS.length - 1;
-    const nextIndex = {
-      ArrowRight: index === last ? 0 : index + 1,
-      ArrowLeft: index === 0 ? last : index - 1,
-      Home: 0,
-      End: last,
-    }[event.key];
-    if (nextIndex === undefined) return;
-    event.preventDefault();
-    const next = COMPOSER_TABS[nextIndex].id;
-    setTab(next);
-    tabRefs.current[next]?.focus();
-  };
-
-  const tabBtn = (id) =>
-    cn(
-      'flex h-full shrink-0 items-center justify-center border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-[-0.02em] whitespace-nowrap transition-colors',
-      tab === id
-        ? 'border-black-pure text-black-pure dark:border-gray-new-70 dark:text-white'
-        : 'border-transparent text-gray-new-40 dark:text-gray-new-60',
-      id === 'cli' && 'w-[63px] shrink'
-    );
-
-  // Full-width tabbed panel beneath the hero heading, intro and links.
-  return (
-    <div
-      className={cn(
-        '@container min-w-0 rounded-none border bg-white font-sans text-base dark:bg-gray-new-8',
-        strongBorder
-      )}
-    >
-      <div
-        className={cn(
-          'flex h-16 items-start justify-between border-b bg-gray-new-98 pr-3.5 pl-[18px] dark:bg-gray-new-8',
-          strongBorder
-        )}
-      >
-        <div
-          className="-mt-px flex h-[65px] min-w-0 items-stretch"
-          role="tablist"
-          aria-label="Setup method"
-        >
-          {COMPOSER_TABS.map(({ id, label }) => (
-            <button
-              key={id}
-              ref={(node) => {
-                tabRefs.current[id] = node;
-              }}
-              id={tabId(id)}
-              className={tabBtn(id)}
-              type="button"
-              role="tab"
-              aria-selected={tab === id}
-              aria-controls={panelId}
-              tabIndex={tab === id ? 0 : -1}
-              onClick={() => setTab(id)}
-              onKeyDown={handleTabKeyDown}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={() => handleCopy(activeText)}
-          className="mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full bg-black-new px-4 text-[15px] leading-none font-medium tracking-normal text-white transition-colors duration-200 hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90"
-        >
-          {isCopied ? 'Copied' : 'Copy'}
-          {isCopied ? <CopiedIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
-        </button>
-      </div>
-
-      {/* One panel whose content swaps with the active tab. */}
-      <div id={panelId} role="tabpanel" aria-labelledby={tabId(tab)}>
-        {agent ? (
-          <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-80 sm:px-4">
-            <span>Set me up for Neon. Fetch </span>
-            <span className="text-green-44 dark:text-green-52">
-              https://neon.com/prompts/agent-setup.md
-            </span>
-            <span> and follow it.</span>
-          </div>
-        ) : (
-          <div className="grid gap-0.5 px-6 pt-6 pb-[25px] text-base leading-[30.8px] [overflow-wrap:anywhere] sm:px-4">
-            {CLI_LINES.map((l, i) => (
-              <div
-                key={`${l.text}-${i}`}
-                className={cn(
-                  'break-words',
-                  l.gap && 'mt-2.5',
-                  l.comment
-                    ? 'text-[#494B50] dark:text-gray-new-60'
-                    : 'text-green-44 dark:text-green-52'
-                )}
-              >
-                {l.text}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
 };
 
 // Full-width Postgres foundation card from the Figma content container.
@@ -415,7 +221,7 @@ const DocsHome = () => (
             <h1 className="m-0 font-sans text-[40px] leading-[1.25] font-medium tracking-[-0.04em] text-balance md:text-[36px]">
               Neon Docs
             </h1>
-            <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-[#494B50] dark:text-gray-new-80 md:text-base">
+            <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-gray-new-30 dark:text-gray-new-80 md:text-base">
               Postgres, Auth, Storage, Functions, AI, and Realtime on one branch.
             </p>
           </div>
@@ -436,7 +242,7 @@ const DocsHome = () => (
             </Link>
           </div>
         </div>
-        <Composer />
+        <DocsHomeComposer />
       </section>
 
       {/* What do you want to add to your app? */}
@@ -449,8 +255,8 @@ const DocsHome = () => (
           {/*
             Capability cards rendered with the real docs card component
             (DetailIconCards), fed MDX-style <a> children, in the site's regular
-            `green-flat` theme (the same green-tinted treatment the live Products
-            grid in content/docs/introduction.md uses). The product name sits in
+            `green-flat` theme (the same green-tinted treatment the former
+            docs front page used for its Products grid). The product name sits in
             a lockup line at the top of the card (icon + name, via the
             component's `lockup` prop), so the card keeps its task-first title
             while still teaching the product name. The eslint-disable keeps the
@@ -508,7 +314,7 @@ const DocsHome = () => (
             <span className={cn('text-base leading-normal', mutedText)}>
               Point your agent at this Markdown index to find any doc.
             </span>
-            <CopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
+            <DocsHomeCopyChip label="/docs/llms.txt" url="https://neon.com/docs/llms.txt" />
           </div>
         </div>
       </Section>
