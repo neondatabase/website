@@ -72,13 +72,10 @@ const Tabs = ({ labels = [], children }) => {
           </button>
         ))}
       </div>
-      {Children.map(children, (child, index) => {
-        if (index !== currentIndex) {
-          return null;
-        }
-
-        return child;
-      })}
+      {/* Inactive panels are hidden with CSS so their content stays in the server-rendered HTML */}
+      {Children.map(children, (child, index) => (
+        <div className={cn(index !== currentIndex && 'hidden')}>{child}</div>
+      ))}
     </figure>
   );
 };
