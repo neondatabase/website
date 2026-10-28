@@ -4,7 +4,7 @@ subtitle: 'How AI agents can provision infrastructure and build real application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 AI has made writing code easy, but the setup tasks around it still kill your momentum.
@@ -261,7 +261,7 @@ You built and deployed a travel concierge app with Neon, OpenRouter, Firecrawl, 
 
 - [Projects.dev provider directory](https://projects.dev/providers)
 - [Stripe Projects CLI documentation](https://docs.stripe.com/cli)
-- [Neon documentation](/docs/introduction)
+- [Neon documentation](/docs)
 - [OpenCode](https://opencode.ai/)
 - [Agent Skills](https://github.com/agentskills/agentskills)
 

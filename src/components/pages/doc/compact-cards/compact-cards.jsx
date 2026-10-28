@@ -19,7 +19,13 @@ const GRID_CLASS_NAMES = {
   4: 'grid-cols-4 gap-x-10 gap-y-7 xl:gap-x-6 lg:gap-5 md:grid-cols-3 sm:grid-cols-2',
 };
 
-const CompactCards = ({ className, children = null, cols = 2, withToggler = false }) => {
+const CompactCards = ({
+  className,
+  children = null,
+  cols = 2,
+  withToggler = false,
+  appearance = 'default',
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -30,7 +36,12 @@ const CompactCards = ({ className, children = null, cols = 2, withToggler = fals
   const displayedChildren =
     withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
   const columns = Number(cols);
-  const gridClassName = GRID_CLASS_NAMES[columns] || GRID_CLASS_NAMES[2];
+  const gridClassName =
+    appearance === 'home'
+      ? columns === 4
+        ? 'grid-cols-4 gap-x-5 gap-y-7 @max-[720px]:grid-cols-3 @max-[560px]:grid-cols-2 @max-[360px]:grid-cols-1'
+        : 'grid-cols-2 gap-x-10 gap-y-8 @max-[520px]:grid-cols-1'
+      : GRID_CLASS_NAMES[columns] || GRID_CLASS_NAMES[2];
 
   return (
     <div className={cn('compact-cards not-prose my-7', className)}>
@@ -65,6 +76,7 @@ const CompactCards = ({ className, children = null, cols = 2, withToggler = fals
               promptSrc={promptSrc}
               href={href}
               index={index}
+              appearance={appearance}
             />
           );
         })}
@@ -105,6 +117,7 @@ const CompactCard = ({
   promptSrc = null,
   href = null,
   index,
+  appearance = 'default',
 }) => {
   const [isCopied, setIsCopied] = useState(false);
   const [markdown, setMarkdown] = useState('');
@@ -166,7 +179,12 @@ const CompactCard = ({
         )}
       </div>
       <div className="relative z-10 min-w-0 flex-1 self-center">
-        <span className="compact-card-title block text-base leading-snug font-medium tracking-extra-tight text-black-pure transition-colors duration-200 group-hover/card:text-green-44 dark:text-white dark:group-hover/card:text-green-44">
+        <span
+          className={cn(
+            'compact-card-title block text-base leading-snug font-medium text-black-pure transition-colors duration-200 group-hover/card:text-green-44 dark:text-white dark:group-hover/card:text-green-44',
+            appearance === 'home' ? 'font-normal tracking-[-0.04em]' : 'tracking-extra-tight'
+          )}
+        >
           {title}
         </span>
         {description && (
@@ -233,6 +251,7 @@ CompactCard.propTypes = {
   promptSrc: PropTypes.string,
   href: PropTypes.string,
   index: PropTypes.number.isRequired,
+  appearance: PropTypes.oneOf(['default', 'home']),
 };
 
 CompactCards.propTypes = {
@@ -240,6 +259,7 @@ CompactCards.propTypes = {
   children: PropTypes.node,
   cols: PropTypes.oneOfType([PropTypes.oneOf([2, 4]), PropTypes.oneOf(['2', '4'])]),
   withToggler: PropTypes.bool,
+  appearance: PropTypes.oneOf(['default', 'home']),
 };
 
 export { CompactCards };

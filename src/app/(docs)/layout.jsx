@@ -12,7 +12,7 @@ const NeonDocsLayout = async ({ children }) => {
 
   return (
     <Layout
-      headerClassName="h-28"
+      headerClassName="h-15"
       docsNavigation={navigation}
       docsBasePath={DOCS_BASE_PATH}
       isDocPage
@@ -25,7 +25,7 @@ const NeonDocsLayout = async ({ children }) => {
           <a href="https://neon.com/docs/llms.txt">https://neon.com/docs/llms.txt</a>
         </aside>
         <Container
-          className="flex w-full flex-1 gap-x-24 pt-12 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
+          className="flex w-full flex-1 gap-x-10 pt-12 xl:pt-9 lg:block sm:pt-7"
           size="1920"
         >
           <Sidebar

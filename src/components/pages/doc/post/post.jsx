@@ -48,7 +48,6 @@ const Post = ({
   breadcrumbsBaseUrl = DOCS_BASE_PATH,
   navigationLinks: { previousLink, nextLink },
   navigationLinksBasePath = DOCS_BASE_PATH,
-  isDocsIndex = false,
   isChangelog = false,
   isPostgres = false,
   changelogPosts = [],
@@ -170,7 +169,7 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && !hideCopyPage && (
+                {!isChangelog && !hideCopyPage && (
                   <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 )}
               </div>
@@ -183,11 +182,11 @@ const Post = ({
             />
           </article>
         )}
-        {!isDocsIndex && <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />}
+        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
 
         {!isChangelog && (
           <NavigationLinks
-            className={cn(isDocsIndex ? 'mt-14' : 'mt-6')}
+            className="mt-6"
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}
@@ -195,11 +194,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
-      {!isDocsIndex && !isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
           className="ml-0! w-78 shrink-0 xl:hidden"
-          isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
@@ -236,7 +234,6 @@ Post.propTypes = {
   navigationLinksBasePath: PropTypes.string,
   isChangelog: PropTypes.bool,
   isPostgres: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

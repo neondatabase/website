@@ -37,7 +37,12 @@ const filtersFor = (pathname) =>
     ({ id }) => !SECTION_ONLY_FILTERS[id] || isInSection(pathname, SECTION_ONLY_FILTERS[id])
   );
 
-const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
+const InkeepTrigger = ({
+  className = null,
+  isNotFoundPage = false,
+  isDocsHeader = false,
+  docPageType = null,
+}) => {
   const pathname = usePathname();
   const isGuidePage = isInSection(pathname, GUIDES_BASE_PATH);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -126,9 +131,14 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         className={className}
         handleClick={() => setIsSearchOpen(true)}
         isNotFoundPage={isNotFoundPage}
+        isDocsHeader={isDocsHeader}
       />
       {!isNotFoundPage && (
-        <InkeepAIButton className="shrink-0" handleClick={() => setIsChatOpen(true)} />
+        <InkeepAIButton
+          className="shrink-0"
+          handleClick={() => setIsChatOpen(true)}
+          isDocsHeader={isDocsHeader}
+        />
       )}
       <SiteSearchModal
         isOpen={isSearchOpen}
@@ -154,6 +164,7 @@ InkeepTrigger.propTypes = {
   className: PropTypes.string,
   topOffset: PropTypes.number,
   isNotFoundPage: PropTypes.bool,
+  isDocsHeader: PropTypes.bool,
   docPageType: PropTypes.string,
 };
 

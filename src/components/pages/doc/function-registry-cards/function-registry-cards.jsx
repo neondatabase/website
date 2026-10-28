@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
-
 import { getFunctionRegistryCatalog } from 'utils/function-registry';
 
 import FunctionRegistryCardsClient from './function-registry-cards-client';
