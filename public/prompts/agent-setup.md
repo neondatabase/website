@@ -28,7 +28,7 @@ If it is not found, or to upgrade to the latest version, run:
 npm install -g neon@latest
 ```
 
-Requires Node.js 22.20 or newer. For other installation options, see https://neon.com/docs/cli/install.md
+Use Node.js 22.20 or newer. The CLI itself runs on Node.js 20.19 or newer, but installing Neon skills later in this setup needs 22.20. For other installation options, see https://neon.com/docs/cli/install.md
 
 ---
 
