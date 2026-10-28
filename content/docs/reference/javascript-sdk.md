@@ -6,7 +6,7 @@ summary: >-
   Data API in one client, covering auth methods (email/password, OAuth, OTP,
   password reset) alongside a PostgREST-style query builder (select, insert,
   update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
-  over the standalone `@neondatabase/postgrest-js` or `@neondatabase/auth`
+  over the standalone `@neon/postgrest-js` or `@neon/auth`
   packages when you need the full combined API reference in one place. Three
   adapters are documented: BetterAuthVanillaAdapter (default, Promise-based),
   BetterAuthReactAdapter (React hooks), and SupabaseAuthAdapter
@@ -18,8 +18,8 @@ updatedOn: '2026-08-31T17:42:21.786Z'
 
 This page documents `@neondatabase/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
 
-- [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
-- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Managed Better Auth without the Data API
+- [`@neon/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
+- [`@neon/auth`](https://www.npmjs.com/package/@neon/auth): Managed Better Auth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 

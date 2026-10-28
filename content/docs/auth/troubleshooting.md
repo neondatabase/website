@@ -2,7 +2,7 @@
 title: Auth troubleshooting
 subtitle: Common issues when implementing Managed Better Auth and how to fix them
 summary: >-
-  Troubleshooting for common Managed Better Auth errors in `@neondatabase/auth` (Next.js)
+  Troubleshooting for common Managed Better Auth errors in `@neon/auth` (Next.js)
   and `@neondatabase/neon-js` (React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
   missing `force-dynamic` on server components, `NETWORK_DNS` / `NETWORK_TIMEOUT`
   upstream errors, and OAuth `redirect_uri_mismatch` from misconfigured callback
@@ -12,7 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
+This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
 
 ## Missing NEON_AUTH_COOKIE_SECRET
 
@@ -89,7 +89,7 @@ If you are upgrading from v0.1, use `createNeonAuth()` + `auth.handler()` instea
 
 ## Using useSession() without adapter in React SPA
 
-In a React SPA, `createAuthClient(url)` without an adapter returns a vanilla client with no React hooks. Calling `useSession()` on this client will fail. Either pass `BetterAuthReactAdapter()` or use UI components (`SignedIn`, `SignedOut`, `UserButton`) which do not require an adapter.
+In a React SPA, `createAuthClient(url)` without an adapter returns a vanilla client with no React hooks. Calling `useSession()` on this client will fail. Either pass `BetterAuthReactAdapter()`, or read the session with `useSession(authClient)` from `@better-auth-ui/react`, which takes any Managed Better Auth client.
 
 ```typescript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -115,12 +115,9 @@ import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapter
 const client = createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 ```
 
-## CSS import conflicts
+## Auth UI components are unstyled
 
-Choose one CSS import method. Never use both, as this causes duplicate styles:
-
-- **Without Tailwind:** `import '@neondatabase/auth-ui/css'`
-- **With Tailwind v4:** `@import '@neondatabase/auth-ui/tailwind'`
+Better Auth UI's components are compiled by your app's Tailwind build. If they render without styles, check that your global CSS imports the shadcn/ui theme that `npx shadcn@latest init` adds (`tw-animate-css` and `shadcn/tailwind.css`, plus the theme variables), and that Tailwind scans the folder the components were copied to.
 
 See the [UI Components reference](/docs/auth/reference/ui-components) for complete setup instructions.
 
@@ -138,8 +135,8 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 createAuthClient(url);
 createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 
-// Next.js — import from @neondatabase/auth/next (no arguments, uses proxy)
-import { createAuthClient } from '@neondatabase/auth/next';
+// Next.js — import from @neon/auth/next (no arguments, uses proxy)
+import { createAuthClient } from '@neon/auth/next';
 createAuthClient();
 ```
 

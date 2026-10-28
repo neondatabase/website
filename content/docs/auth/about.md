@@ -31,7 +31,7 @@ Managed Better Auth is the managed authentication service in the Neon backend fo
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth runs Better Auth version **1.7.6**. `@neondatabase/auth` 0.6.0-beta and later use a Better Auth 1.7 client. Older SDK versions keep working, so you don't need to upgrade. If you use your own Better Auth client, use Better Auth 1.7 or later.
+Managed Better Auth runs Better Auth version **1.7.6**. `@neon/auth` 0.6.0-beta and later use a Better Auth 1.7 client. Older SDK versions keep working, so you don't need to upgrade. If you use your own Better Auth client, use Better Auth 1.7 or later.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
@@ -47,7 +47,7 @@ Self-hosting Better Auth makes sense if you need:
 - Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Managed Better Auth.
 - Full control over your auth code and the ability to run it inside your own infrastructure.
 
-For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
+For more details on the SDK differences between `@neon/auth` and `better-auth/client`, see [Why use @neon/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
 
 As Managed Better Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
 
@@ -60,7 +60,7 @@ Enable Auth in the Neon Console, from the terminal with [`neon neon-auth enable`
 See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
 
 ```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -84,18 +84,36 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
+For pre-built sign-in and sign-up forms, add [Better Auth UI](/docs/auth/reference/ui-components) with `npx shadcn@latest add @better-auth-ui/auth` and pass the client to its `AuthProvider`:
+
 ```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
+import { getSafeRedirectTo } from '@better-auth-ui/core';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from '@/components/auth/auth-provider';
+import { Auth } from '@/components/auth/auth';
 import { authClient } from './auth';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" />
-    </NeonAuthUIProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider
+        authClient={authClient}
+        navigate={({ to }) => {
+          const path = getSafeRedirectTo(to, window.location.origin);
+          window.location.assign(path.startsWith('//') ? '/' : path);
+        }}
+        Link={({ to: _to, ...props }) => <a {...props} />}
+      >
+        <Auth view="signIn" />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 ```
+
+`navigate` checks the target because the components pass it the URL's `?redirectTo=` value after sign-in; see [Validate redirect targets](/docs/auth/reference/ui-components#validate-redirect-targets).
 
 ## Use cases
 

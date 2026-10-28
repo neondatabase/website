@@ -2,7 +2,7 @@
 title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Managed Better Auth
 summary: >-
-  Managed Better Auth Next.js Server SDK (`@neondatabase/auth/next/server`) provides
+  Managed Better Auth Next.js Server SDK (`@neon/auth/next/server`) provides
   server-side authentication for Next.js apps via React Server Components, API
   routes, middleware, and server actions. Session caching uses a signed HTTP-only
   cookie to reduce Auth Server calls. Use this page to implement or debug
@@ -15,7 +15,7 @@ layout: wide
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-Reference documentation for the Managed Better Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
+Reference documentation for the Managed Better Auth Next.js server SDK (`@neon/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
 
 For client-side authentication, see the [Client SDK reference](/docs/reference/javascript-sdk). For UI components, see the [UI Components reference](/docs/auth/reference/ui-components).
 
@@ -30,7 +30,7 @@ Install the Managed Better Auth package in your Next.js project using npm, yarn,
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/auth@latest
+npm install @neon/auth@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -91,7 +91,7 @@ See [Server logging](#server-logging) and [Upstream fetch errors](#upstream-fetc
 
 ```typescript
 // lib/auth/server.ts
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -120,7 +120,7 @@ Managed Better Auth emits structured logs from the API proxy, middleware, and Be
 <TwoColumnLayout.Block>
 
 ```typescript
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -945,7 +945,7 @@ Complete configuration options for `createNeonAuth()`:
 <TwoColumnLayout.Block>
 
 ```typescript
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
