@@ -11,6 +11,8 @@ import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
+import Tabs from 'components/pages/doc/tabs';
+import TabItem from 'components/pages/doc/tabs/tab-item';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
@@ -69,6 +71,14 @@ const renderBlogRequestForm = (props) => {
   );
 };
 
+// Blog MDX drops JS expressions, so labels arrive as a comma-separated string
+const renderBlogTabs = ({ labels, ...props }) => (
+  <Tabs
+    labels={typeof labels === 'string' ? labels.split(',').map((label) => label.trim()) : labels}
+    {...props}
+  />
+);
+
 const mdxComponents = {
   a: ({ href, rel, children, ...props }) => (
     <a href={href} rel={getNofollowRel(href, rel) ?? rel} {...props}>
@@ -77,6 +87,7 @@ const mdxComponents = {
   ),
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
+  h4: AnchorHeading('h4'),
   img: renderBlogImage,
   pre: renderBlogCodeBlockFromPre,
   table: (props) => (
@@ -90,6 +101,8 @@ const mdxComponents = {
   CTA,
   EmbedTweet,
   RequestForm: renderBlogRequestForm,
+  TabItem,
+  Tabs: renderBlogTabs,
   YoutubeIframe,
 };
 

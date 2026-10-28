@@ -3,8 +3,8 @@ title: Roadmap
 summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
-  include higher storage and compute limits, CMK encryption, RBAC, and PCI
-  compliance. Recently shipped milestones include Postgres 18
+  include higher storage and compute limits, CMK encryption, and RBAC.
+  Recently shipped milestones include Postgres 18
   GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-10-24T09:56:12.391Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -69,10 +69,6 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - RBAC roles extended into the database
 - Audit logging of all database access
 
-### Compliance
-
-- PCI compliance
-
 ### High availability
 
 - Cross-availability zone (AZ) highly available compute
@@ -80,6 +76,11 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Jev decision models on the AI Gateway**: TypeSafe's Jev 1.14 and the open-weights OpenJev answer questions about your input with a choice, a score, or a probability your code can act on, billed for input tokens only. [Learn more](/docs/ai-gateway/decisions).
+- **Automatic top-up for AI Gateway credits**: Organization admins can turn on auto-reload so Neon buys more AI Gateway credits with your card on file when your balance drops below a threshold you set. [Learn more](/docs/ai-gateway/prepaid-credits#automatic-top-up).
+- **OAuth provider for Managed Better Auth (beta)**: Managed Better Auth can act as an OAuth 2.1 authorization server, so your users can sign in to your MCP server, API, or other apps with their existing accounts. [Learn more](/docs/auth/guides/plugins/oauth-provider).
+- **Scaffold functions and search the docs from the Neon CLI**: `neon functions new` scaffolds a Neon Function from a template, and `neon docs search` searches neon.com from your terminal. [Learn more](/docs/cli/functions#new).
+- **Support center in the Console**: Ask the AI assistant, open a support ticket, or reach the community from one place under **Help** > **Get help** in your organization menu. [Learn more](/docs/introduction/support#open-the-support-center).
 - **Neon Realtime (public beta)**: Turn any SQL query into a live query that stays up to date as your data changes, running directly from Lakebase Postgres with support for scale to zero and branching. [Learn more](/docs/realtime/overview).
 - **Sync Stripe data to Neon in real time**: Stripe Data Pipeline can now stream your Stripe data into a Neon database and keep it in sync, so you can join payments and subscriptions with your app data without webhook handlers. [Read the blog post](/blog/stripe-data-pipeline-realtime-sync-to-postgres).
 - **CJK full-text search in Lakebase Search**: The `lakebase_tokenizer` extension now splits Chinese, Japanese, and Korean text into search terms, so you can run keyword and BM25 search over CJK content. [Learn more](/docs/extensions/lakebase-tokenizer#cjk-text).

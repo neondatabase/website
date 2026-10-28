@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-10-15T16:33:34.223Z'
+updatedOn: '2026-10-27T02:35:14.797Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -38,7 +38,7 @@ The [Neon CLI](/docs/cli) installs skills interactively:
 neon skills
 ```
 
-It pre-selects your detected agents, lets you pick which skills to add, and confirms before writing. Pass `-s <skill>` and `--agent <name>` to skip the prompts, `--global` to install user-level, and run `neon skills update` to refresh installed skills. See the [`neon skills` reference](/docs/cli/skills) for all options.
+It pre-selects your detected agents, lets you pick which skills to add, and confirms before writing. Pass `-s <skill>` and `--agent <name>` to skip the prompts, `--global` to install user-level, and run `neon skills update` to refresh installed skills. To see which installed skills have updates, run `neon skills status`. Other `neon` commands also warn you once a day when a skill is out of date. Both cover skills installed with `neon skills` or `npx skills add`, not plugins. See the [`neon skills` reference](/docs/cli/skills) for all options.
 
 ### neon plugins
 

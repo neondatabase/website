@@ -71,6 +71,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/image-processing-api-neon-functions-prompt.md',
   '/prompts/java-prompt.md',
   '/prompts/javascript-prompt.md',
+  '/prompts/jev-content-moderation-prompt.md',
   '/prompts/kotlin-prompt.md',
   '/prompts/kysely-prompt.md',
   '/prompts/laravel-prompt.md',

@@ -70,7 +70,7 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-**Launch** plan (**Billing support**): you can open support tickets for **billing-related** issues only, such as questions about an invoice, charge, refund, or your plan.
+**Launch** plan (**Billing support**): you can open support tickets for **billing-related** issues only, such as questions about an invoice, charge, refund, or your plan. For what billing support can and can't help with, see [What billing support can and can't help with](/docs/introduction/manage-billing#what-billing-support-can-and-cant-help-with).
 
 **Scale** plan (**Standard support**): you can open support tickets for **any** Neon issue.
 
@@ -95,18 +95,16 @@ On the **Free** plan, the support center offers the AI assistant, the docs, and 
 
 #### Open a technical support ticket (Scale plan)
 
-1. In the support center, select **Contact our support team**.
-2. In the **Create support ticket** form, fill in:
-   - **Organization**: The organization the issue affects.
+1. In the support center, select **Contact our support team**. The **Open a support ticket** form opens for the organization you selected.
+2. Fill in:
    - **Subject**: A short summary of the issue. Required.
    - **Priority**: How urgent the issue is.
-   - **Project**, **Branch**, and **Compute**: Optional. Select the affected resources to help support find the problem faster.
    - **Problem description**: A detailed description of the issue.
    - **Attachments**: Optional. Add screenshots, logs, or other files.
 3. Leave **I consent to Neon employees connecting to my database to help resolve this support case** selected if you want support to be able to connect to your database. Clear it if you don't.
-4. Select **Submit support ticket**.
-
-Responses go to the contact email shown in the form, which is the email address for your Neon account.
+4. Optionally, select the affected **Project**, **Branch**, **Compute**, and **Affected Service** to help support find the problem faster.
+5. Check **Your contact email**. Responses go to this address, which defaults to the email address for your Neon account.
+6. Select **Submit support ticket**.
 
 #### Open a billing support ticket (Launch and Scale plans)
 

@@ -97,8 +97,8 @@ const result = streamText({
   messages,
   tools: {
     image_generation: neon.tools.imageGeneration({
+      model: "gpt-image-2", // or gpt-image-1.5, gpt-image-1-mini
       outputFormat: "jpeg",
-      quality: "low", // the gateway caps a response near 640 KB — keep images small
       size: "1024x1024",
     }),
   },
@@ -117,7 +117,7 @@ const result = streamText({
 });
 ```
 
-Keep generated images small: the gateway caps a single response near 640 KB and has an upstream timeout, so request a compressed JPEG rather than a full-size PNG.
+Always stream image generation with `streamText`. A non-streaming response whose image is over 655,360 bytes fails with `400: The response content length cannot be greater than 655360 bytes long`; streamed images have no such cap. See the `neon-ai-gateway` skill's Generate Images section.
 
 ## 4. Call it directly from the client (don't proxy the stream)
 

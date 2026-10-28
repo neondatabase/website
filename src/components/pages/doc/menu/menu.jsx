@@ -5,6 +5,8 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import ArrowBackIcon from 'icons/docs/sidebar/arrow-back.inline.svg';
 import { cn } from 'utils/cn';
 
+import Tag from '../tag';
+
 import Icon from './icon';
 import Item from './item';
 
@@ -43,6 +45,14 @@ const Menu = ({
               >
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
                 {item.title || item.section}
+                {item.tag && (
+                  <Tag
+                    className="ml-0.5 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                    label={item.tag}
+                    size="sm"
+                    theme={item.tagTheme || 'gray'}
+                  />
+                )}
               </SectionLabel>
               <ul className="flex flex-col">
                 {item.items?.map((item, index) => (

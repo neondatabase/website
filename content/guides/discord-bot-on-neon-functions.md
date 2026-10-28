@@ -4,7 +4,7 @@ subtitle: 'Build a Discord bot with AI chat and image generation using Neon Func
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-10-09T15:17:33.920Z'
+updatedOn: '2026-10-23T23:49:26.750Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -416,6 +416,7 @@ const sendImagineResponse = async (prompt: string, token: string, application_id
       prompt,
       tools: {
         image_generation: neon.tools.imageGeneration({
+          model: 'gpt-image-2',
           outputFormat: 'jpeg',
           size: '1024x1024',
           quality: 'low',
@@ -512,7 +513,7 @@ The above code does the following:
 
 - **`sendChatResponse`**: This function runs after the deferred response has already been sent. It calls `generateText` with the user's prompt to get an LLM response, then sends a `PATCH` request to the [webhook endpoint](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) to replace the "Bot is thinking..." message with the generated text. If the AI call throws, the `catch` block still sends an error message back to Discord instead of leaving the user stuck on "Bot is thinking...".
 
-- **`sendImagineResponse`**: This function works similarly but uses the `image_generation` tool provided by the Neon AI SDK. The AI model decides when to invoke the tool based on the prompt. The tool returns the image as a base64-encoded string, which the function converts to a `Blob` and uploads to Discord as a file attachment using `FormData`. This is necessary because Discord's [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) endpoint accepts file uploads via multipart form data. You can't embed raw image data in a JSON payload.
+- **`sendImagineResponse`**: This function works similarly but uses the `image_generation` tool provided by the Neon AI SDK. The AI model decides when to invoke the tool based on the prompt. The tool's `model` option sets the image model, which is separate from the `gpt-5-mini` model that calls the tool. Set it to `gpt-image-2`. If you leave it out, the tool falls back to OpenAI's default image model (`gpt-image-1`), and the request fails on AI Gateway. The tool returns the image as a base64-encoded string, which the function converts to a `Blob` and uploads to Discord as a file attachment using `FormData`. This is necessary because Discord's [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) endpoint accepts file uploads via multipart form data. You can't embed raw image data in a JSON payload.
 
 - **Deferred responses in the handler**: When the handler receives a `/chat` or `/imagine` command, it calls the corresponding async function (fire-and-forget with `.catch(console.error)`) and immediately returns `DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE`. This tells Discord to show the "thinking" indicator while the AI processes in the background. The actual response arrives later via the webhook PATCH.
 

@@ -441,6 +441,8 @@ print(len(resp.data[0].embedding), resp.usage)
 
 /* ------------------------------------------------------ image generation */
 
+// Always set the image tool's model to gpt-image-2. The OpenAI default (gpt-image-1) is not
+// available on the gateway.
 // A generated image is ~3 MB of base64 and the gateway rejects buffered responses over 655,360
 // bytes, which is why the SDK variants stream and why there is no cURL variant. Mastra is the
 // exception: its agent call returns once, with the base64 whole.
@@ -457,7 +459,10 @@ const result = streamText({
   model: neon("${model}"),
   prompt: "${IMAGE_PROMPT}",
   tools: {
-    image_generation: neon.tools.imageGeneration({ outputFormat: "jpeg" }),
+    image_generation: neon.tools.imageGeneration({
+      model: "gpt-image-2",
+      outputFormat: "jpeg",
+    }),
   },
 });
 
@@ -482,7 +487,12 @@ const agent = new Agent({
   name: "neon-demo",
   instructions: "Generate the image the user asks for.",
   model: "neon/${model}",
-  tools: { image_generation: neon.tools.imageGeneration({ outputFormat: "jpeg" }) },
+  tools: {
+    image_generation: neon.tools.imageGeneration({
+      model: "gpt-image-2",
+      outputFormat: "jpeg",
+    }),
+  },
 });
 
 const { toolResults } = await agent.generate("${IMAGE_PROMPT}");
@@ -505,7 +515,7 @@ const client = new OpenAI({
 const stream = client.responses.stream({
   model: "${model}",
   input: "${IMAGE_PROMPT}",
-  tools: [{ type: "image_generation" }],
+  tools: [{ type: "image_generation", model: "gpt-image-2" }],
 });
 
 const response = await stream.finalResponse();
@@ -532,7 +542,7 @@ client = OpenAI(
 with client.responses.stream(
     model="${model}",
     input="${IMAGE_PROMPT}",
-    tools=[{"type": "image_generation"}],
+    tools=[{"type": "image_generation", "model": "gpt-image-2"}],
 ) as stream:
     for _ in stream:
         pass

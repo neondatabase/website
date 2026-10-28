@@ -2314,6 +2314,41 @@
         "cost": {
           "input": 0.042
         }
+      },
+      "gemini-4-argon": {
+        "id": "gemini-4-argon",
+        "name": "Gemini 4 Argon",
+        "provider": "google",
+        "family": "gemini",
+        "released": true,
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": ["low", "medium", "high"]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-10-13",
+        "last_updated": "2026-10-13",
+        "modalities": {
+          "input": ["text", "image", "video", "audio", "pdf"],
+          "output": ["text"]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 4,
+          "output": 20,
+          "cache_read": 0.2
+        }
       }
     }
   }
