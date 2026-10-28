@@ -332,14 +332,8 @@ const FoundationCard = () => (
     </div>
     <div className="relative z-10 flex shrink-0 gap-2">
       {[
-        [
-          'Connect',
-          'https://neon-next-git-docs-ia-redesign-neondatabase.vercel.app/docs/connect/connect-hub',
-        ],
-        [
-          'Branching',
-          'https://neon-next-git-docs-ia-redesign-neondatabase.vercel.app/docs/introduction/branching',
-        ],
+        ['Connect', '/docs/connect/connect-hub'],
+        ['Branching', '/docs/introduction/branching'],
       ].map(([label, to]) => (
         <Link
           key={label}
