@@ -171,10 +171,10 @@ The schemagate project measured the same comparison (full schema against selecti
 | Schemas                                         | Median tables | Median saving |
 | ----------------------------------------------- | ------------- | ------------- |
 | BIRD dev                                        | 7             | 8.8%          |
-| Spider 2.0-lite BigQuery and Snowflake          | 16            | 48.8%         |
-| Spider 2.0-lite databases with 50 or more tables |               | 92.9%         |
+| Spider 2.0-lite BigQuery and Snowflake          | 11            | 44.3%         |
+| Spider 2.0-lite databases with 50 or more tables |               | 91.1%         |
 
-A seven-table database is already small, so there is little to cut. Selection pays off on large schemas. It has a cost too: a table the question needs can be left out. On the Spider 2.0 warehouses, every table the reference SQL uses was selected for 79.6% of questions. Test with your own questions before relying on it, and raise `top_k` if the selection misses tables. The script and per-database results are in the project's [BENCHMARKS.md](https://github.com/ashishsinha1602/schemagate/blob/main/BENCHMARKS.md#prompt-tokens-on-public-schemas-the-saving-grows-with-the-schema).
+A seven-table database is already small, so there is little to cut. Selection pays off on large schemas. It has a cost too: a table the question needs can be left out. On the Spider 2.0 warehouses, every table the reference SQL uses was selected for 86.7% of questions. Test with your own questions before relying on it, and raise `top_k` if the selection misses tables. The script and per-database results are in the project's [BENCHMARKS.md](https://github.com/ashishsinha1602/schemagate/blob/main/BENCHMARKS.md#prompt-tokens-on-public-schemas-the-saving-grows-with-the-schema).
 
 ## Next steps
 
