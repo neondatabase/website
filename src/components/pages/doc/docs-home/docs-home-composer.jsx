@@ -110,7 +110,13 @@ const DocsHomeComposer = () => {
         <button
           type="button"
           onClick={() => handleCopy(activeText)}
-          className="mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full bg-black-new px-4 text-[15px] leading-none font-medium tracking-normal text-white transition-colors duration-200 hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90"
+          className={cn(
+            'mt-3.5 flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-[15px] leading-none font-medium tracking-normal transition-colors duration-200',
+            isCopied
+              ? 'bg-gray-new-20 text-white'
+              : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90'
+          )}
+          aria-live="polite"
         >
           {isCopied ? 'Copied' : 'Copy'}
           {isCopied ? <CopiedIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}

@@ -16,6 +16,9 @@ vi.mock('components/shared/code-block-wrapper/images/copy.inline.svg', () => ({
 vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
   default: (props) => <svg data-testid="check-icon" {...props} />,
 }));
+vi.mock('icons/home/copied.inline.svg', () => ({
+  default: (props) => <svg data-testid="copied-icon" {...props} />,
+}));
 vi.mock('images/pages/docs/copy-prompt/pattern.svg', () => ({ default: 'pattern.svg' }));
 vi.mock('utils/send-gtag-event', () => ({ default: vi.fn() }));
 
@@ -163,5 +166,22 @@ describe('CopyPrompt (legacy mode)', () => {
     expect(screen.getByText('Copy into your AI assistant.')).toBeInTheDocument();
     expect(screen.queryByText('AI prompt: Get started with the Neon API')).not.toBeInTheDocument();
     expect(screen.getByTestId('pattern-image')).toBeInTheDocument();
+  });
+
+  it('copies the loaded prompt and replaces the copy icon with the Copied confirmation', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    });
+    render(<CopyPrompt src="/prompts/example.md" />);
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledWith('/prompts/example.md'));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Copy prompt' }));
+
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Copied' })).toBeVisible());
+    expect(writeText).toHaveBeenCalledWith('# Prompt body');
+    expect(screen.getByTestId('copied-icon')).toBeInTheDocument();
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
   });
 });
