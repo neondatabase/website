@@ -10,14 +10,18 @@ import { cn } from 'utils/cn';
 import DocsHomeComposer from './docs-home-composer';
 import DocsHomeCopyChip from './docs-home-copy-chip';
 import { mutedText } from './docs-home-tokens';
-import ConnectUnderline from './images/connect-underline.inline.svg';
-import QuickstartUnderline from './images/quickstart-underline.inline.svg';
 
 // Capability cards, in the order of the Figma content container.
+// Dashed underline for the hero links: 2px dashes on a 4px rhythm, offset 1px
+// to match the Figma line. It spans the link, so it follows the text when the
+// font size or fallback font changes.
+const heroLinkUnderline =
+  'absolute inset-x-0 bottom-0 h-px text-gray-new-50 [background-image:repeating-linear-gradient(to_right,currentColor_0_2px,transparent_2px_4px)] [background-position:-1px_0]';
+
 const CAPABILITY_CARDS = [
   {
     title: 'Add login and users',
-    line: 'Sign-in, sign-up sessions, OAuth',
+    line: 'Sign-in, sign-up, sessions, OAuth.',
     product: 'Managed Better Auth',
     to: '/docs/auth/overview',
     icon: 'lock-landscape',
@@ -102,11 +106,14 @@ const FRAMEWORKS = [
   { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
 ];
 
+// Each agent links to its own section of the MCP clients page. Codex has no
+// section of its own; it's listed in the add-mcp supported agents table.
+const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 const AGENTS = [
-  { name: 'Cursor', icon: 'cursor' },
-  { name: 'Claude Code', icon: 'claude-code' },
-  { name: 'Codex', icon: 'codex' },
-  { name: 'GitHub Copilot', icon: 'copilot' },
+  { name: 'Cursor', icon: 'cursor', to: `${MCP_HREF}#cursor` },
+  { name: 'Claude Code', icon: 'claude-code', to: `${MCP_HREF}#claude-code` },
+  { name: 'Codex', icon: 'codex', to: `${MCP_HREF}#supported-agents-add-mcp` },
+  { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
 ];
 
 // Longer walkthroughs. `icon` is a real DetailIconCards monochrome icon name.
@@ -126,12 +133,10 @@ const GUIDED_PATHS = [
   {
     title: 'Build a reactive app',
     line: 'Live queries with Realtime.',
-    to: '/docs/realtime/overview',
+    to: '/docs/realtime/quickstart',
     icon: 'zap',
   },
 ];
-
-const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 
 // Section introductions sit beside their content, stacking when the page narrows.
 const Section = ({ heading, description, children }) => (
@@ -178,7 +183,7 @@ const FoundationCard = () => (
         <span className="font-sans text-lg leading-snug font-medium tracking-[-0.02em] text-black-pure dark:text-white">
           Create a database
         </span>
-        <span className="text-[15px] leading-snug text-gray-new-50">
+        <span className="text-[15px] leading-snug text-gray-new-45 dark:text-gray-new-60">
           Serverless Postgres that branches with your app.
         </span>
       </div>
@@ -228,17 +233,17 @@ const DocsHome = () => (
           <div className="flex flex-wrap items-start gap-x-6 gap-y-2 text-base">
             <Link
               to="/docs/get-started/full-backend-quickstart"
-              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
+              className="relative text-base leading-8 text-gray-new-45 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
             >
               Full backend quickstart
-              <QuickstartUnderline className="absolute bottom-0 left-0" aria-hidden />
+              <span className={heroLinkUnderline} aria-hidden />
             </Link>
             <Link
               to="/docs/connect/connect-hub"
-              className="relative text-base leading-8 text-gray-new-50 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
+              className="relative text-base leading-8 text-gray-new-45 transition-colors hover:text-gray-new-30 dark:text-gray-new-70 dark:hover:text-white"
             >
               Connect an existing app
-              <ConnectUnderline className="absolute bottom-0 left-0" aria-hidden />
+              <span className={heroLinkUnderline} aria-hidden />
             </Link>
           </div>
         </div>
@@ -305,7 +310,7 @@ const DocsHome = () => (
         <div className="grid gap-8">
           <CompactCards className="my-0!" cols={2} appearance="home">
             {AGENTS.map((g) => (
-              <a key={g.name} href={MCP_HREF} title={g.name} icon={g.icon}>
+              <a key={g.name} href={g.to} title={g.name} icon={g.icon}>
                 {g.name}
               </a>
             ))}

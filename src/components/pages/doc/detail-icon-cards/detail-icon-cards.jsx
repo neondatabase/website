@@ -377,7 +377,8 @@ const DetailIconCards = ({
               <div
                 className={cn(
                   'flex flex-col gap-1.5',
-                  appearance === 'home' && (!isLockup && index === 0 ? 'mt-0' : 'mt-auto')
+                  // Home cards pin the text to the bottom, whatever their order.
+                  appearance === 'home' && 'mt-auto'
                 )}
               >
                 <h3
@@ -401,8 +402,8 @@ const DetailIconCards = ({
                     !withNumbers && cardTheme.description,
                     appearance === 'home' &&
                       (isLockup
-                        ? 'text-[15px] leading-[21px] text-gray-new-50'
-                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-50')
+                        ? 'text-[15px] leading-[21px] text-gray-new-45 dark:text-gray-new-60'
+                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-60')
                   )}
                 >
                   {description}

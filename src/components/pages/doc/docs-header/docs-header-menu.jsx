@@ -78,7 +78,7 @@ const LaneGroup = ({ nav, subnav, basePath }) => {
           {subnav.map((item, index) =>
             item.section ? (
               <div className="grid gap-y-0.5" key={index}>
-                <span className="px-2.5 pt-2 pb-1 text-xs text-gray-new-50 uppercase">
+                <span className="px-2.5 pt-2 pb-1 text-xs text-gray-new-45 uppercase dark:text-gray-new-50">
                   {item.title || item.section}
                 </span>
                 {item.items?.map((sectionItem) => (
@@ -108,15 +108,34 @@ LaneGroup.propTypes = {
 const ThemeOptions = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const optionRefs = useRef([]);
 
   useEffect(() => setMounted(true), []);
+
+  // WAI-ARIA radio group: only the checked option is a Tab stop (the first one
+  // before the theme is known), and the arrow keys move and select, wrapping.
+  const selectedIndex = THEMES.findIndex(({ value }) => mounted && theme === value);
+  const tabStopIndex = selectedIndex === -1 ? 0 : selectedIndex;
+
+  const handleKeyDown = (event, index) => {
+    const last = THEMES.length - 1;
+    const previous = index === 0 ? last : index - 1;
+    const next = index === last ? 0 : index + 1;
+    const nextIndex = { ArrowUp: previous, ArrowLeft: previous, ArrowDown: next, ArrowRight: next }[
+      event.key
+    ];
+    if (nextIndex === undefined) return;
+    event.preventDefault();
+    setTheme(THEMES[nextIndex].value);
+    optionRefs.current[nextIndex]?.focus();
+  };
 
   return (
     <div className="grid" role="radiogroup" aria-label="Theme">
       <span className="px-2.5 pt-1.5 pb-0.5 text-xs text-[#6B6F77] dark:text-gray-new-60">
         Theme
       </span>
-      {THEMES.map(({ value, label }) => {
+      {THEMES.map(({ value, label }, index) => {
         const isSelected = mounted && theme === value;
 
         return (
@@ -128,10 +147,15 @@ const ThemeOptions = () => {
                 : 'text-gray-new-40 dark:text-gray-new-60'
             )}
             key={value}
+            ref={(node) => {
+              optionRefs.current[index] = node;
+            }}
             type="button"
             role="radio"
             aria-checked={isSelected}
+            tabIndex={index === tabStopIndex ? 0 : -1}
             onClick={() => setTheme(value)}
+            onKeyDown={(event) => handleKeyDown(event, index)}
           >
             <span
               className={cn(
@@ -150,6 +174,7 @@ const ThemeOptions = () => {
 const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+  const toggleRef = useRef(null);
   const pathname = usePathname();
   const id = useId();
 
@@ -160,8 +185,12 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
   useEffect(() => {
     if (!isOpen) return undefined;
 
+    // Escape closes the panel and hands focus back to the toggle, so keyboard
+    // users don't lose their place when the focused item unmounts.
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key !== 'Escape') return;
+      setIsOpen(false);
+      toggleRef.current?.focus();
     };
 
     document.addEventListener('keydown', handleKeyDown);
@@ -172,6 +201,7 @@ const DocsHeaderMenu = ({ className = null, lanes = [], basePath, isNavCollapsed
   return (
     <div className={cn('relative', className)} ref={menuRef}>
       <button
+        ref={toggleRef}
         className={cn(
           'flex size-9 items-center justify-center rounded-none text-gray-new-20 transition-colors duration-200 hover:bg-gray-new-98',
           'dark:text-gray-new-80 dark:hover:bg-gray-new-10'
