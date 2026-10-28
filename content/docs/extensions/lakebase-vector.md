@@ -90,11 +90,11 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 Set `build_mode` at index creation to control the accuracy/speed tradeoff:
 
 - `standard` (default): balances recall and index build time. Use for most workloads.
-- `quality`: improves recall but takes longer to build.
+- `quality`: improves recall but takes significantly longer to build. Use it only for tables with up to 50 million vectors.
 
 ```sql
 CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
-WITH (build_mode = 'quality');
+WITH (build_mode = 'standard');
 ```
 
 The `fast` build mode remains supported for backward compatibility.
@@ -106,9 +106,9 @@ CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops)
 WITH (lists = '1000');
 ```
 
-Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
+Before tuning, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
 
-Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of query speed. The default is `'auto'`. Test different values to meet your recall target.
+Use `lakebase_ann.probes` at query time to control how many inverted file (IVF) partitions are searched. Higher values improve recall at the cost of latency. The default value `'auto'` provides a balanced tradeoff between them. For finer control, use `lakebase_ann_advise` to [get recommended probes values](#get-recommended-probes-values).
 
 The shape of `probes` must match the shape of `lists`. Call `lakebase_ann_index_info` to find your `lists` array, then set one value for a one-level index or two comma-separated values for a two-level index:
 
@@ -138,6 +138,58 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
 
 `lakebase_ann.epsilon` controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer. The default value of `'auto'` works well for most workloads. During flat search on a small dataset, `epsilon` still controls full-precision reranking.
 
+### Get recommended probes values
+
+`lakebase_ann_advise`, `lakebase_ann_tune`, `lakebase_ann_latency`, and `lakebase_ann_sample` require `lakebase_vector` 1.1.2 and above. To check your installed version and update the extension, see [Upgrade the extension and indexes](#upgrade-the-extension-and-indexes).
+
+`lakebase_ann_advise` returns candidate `probes` values in increasing order of recall, from 0.5 to 0.9 in steps of 0.1 and 0.91 to 0.99 in steps of 0.01. Each row includes estimated recall and the query latency measured after warmup. Use real queries from your search workload as input. If they're unavailable, sample vectors from the indexed table with `lakebase_ann_sample`. The following examples show both options:
+
+```sql
+-- Option 1: real queries in a separate table
+SELECT probes, recall, avg_ms, p50_ms, p95_ms
+FROM lakebase_ann_advise(
+  'items_embedding_idx'::regclass,
+  ARRAY(
+    SELECT embedding FROM queries
+    WHERE embedding IS NOT NULL
+    LIMIT 512
+  )
+);
+
+-- Option 2: sampled from the indexed table
+-- NULL::items specifies items as the table to sample from.
+SELECT probes, recall, avg_ms, p50_ms, p95_ms
+FROM lakebase_ann_advise(
+  'items_embedding_idx'::regclass,
+  ARRAY(
+    SELECT embedding FROM lakebase_ann_sample(NULL::items, 512)
+    WHERE embedding IS NOT NULL
+  )
+);
+```
+
+| Column                       | Description                                                                     |
+| :--------------------------- | :------------------------------------------------------------------------------ |
+| `probes`                     | A `lakebase_ann.probes` value.                                                  |
+| `recall`                     | Estimated recall@10 for the sample queries.                                     |
+| `avg_ms`, `p50_ms`, `p95_ms` | Average, median, and 95th percentile latency of a single query in milliseconds. |
+
+Choose the fastest row that meets your recall target, then apply its `probes` value:
+
+```sql
+SET lakebase_ann.probes TO '10';
+```
+
+Recall and latency are estimated for top-10 queries with `lakebase_ann.epsilon` set to `1.9`, which can differ from your actual queries. Before you use a `probes` value in production, verify its recall and latency on your workload if possible.
+
+If the index has empty `lists`, `lakebase_ann_advise` returns no rows because there is nothing to tune.
+
+On large indexes, a `lakebase_ann_advise` call can take more than 20 minutes. More query vectors make the call slower. Start with 512 query vectors to balance recall accuracy and run time.
+
+`lakebase_ann_advise` calls `lakebase_ann_tune` to get recommended `probes` values, then `lakebase_ann_latency` to measure their latency. You can also use either `lakebase_ann_tune` or `lakebase_ann_latency` on its own. See [Functions](#functions).
+
+`lakebase_ann_advise` and `lakebase_ann_tune` require table-level `SELECT` on the indexed table, and return an error if [row-level security (RLS)](/docs/guides/row-level-security) applies to your role on that table. `lakebase_ann_sample` and `lakebase_ann_latency` apply RLS policies and only read rows that your role can see.
+
 ### Prefilter
 
 By default, Postgres applies non-vector filter conditions after the ANN index returns candidate rows. Enable `lakebase_ann.prefilter` to evaluate those conditions before full-precision distance reranking:
@@ -157,13 +209,13 @@ When you set these GUCs from application code, the `SET` and the query must run 
 
 ### Index build time
 
-Larger `shared_buffers` can significantly reduce index build time. Neon enables this optimization only on [larger computes](/docs/manage/computes#how-to-size-your-compute). Check the current value before optimizing an index build:
+Larger `shared_buffers` can significantly reduce index build time. Neon enables this optimization only on [larger fixed-size computes](/docs/manage/computes#how-to-size-your-compute). Check the current value before optimizing an index build:
 
 ```sql title="PostgreSQL"
 SHOW shared_buffers;
 ```
 
-If `shared_buffers` is 1 GB or less, consider temporarily resizing to a larger compute before starting the index build.
+If `shared_buffers` is 1 GB or less, consider temporarily resizing to a larger fixed-size compute before starting the index build.
 
 You can also speed up index creation by increasing the number of parallel workers.
 
@@ -254,24 +306,28 @@ The `halfvec`, `rabitq8`, and `rabitq4` families provide the same three metrics 
 
 ### Functions
 
-| Function                                                    | Returns | Description                                                                                         |
-| :---------------------------------------------------------- | :------ | :-------------------------------------------------------------------------------------------------- |
-| `lakebase_ann_prewarm(regclass, scope text DEFAULT 'search')` | void    | Loads frequently accessed index data into memory. Valid `scope` values are `search` and `routing`.  |
-| `lakebase_ann_index_info(regclass)`                         | text    | Returns index metadata as JSON text, including `version`, `lists`, `default_probes`, and `default_epsilon`. |
+| Function                                                              | Returns                                                                  | Description                                                                                                                                                                                                                                                       |
+| :-------------------------------------------------------------------- | :----------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lakebase_ann_prewarm(regclass, scope text DEFAULT 'search')`         | void                                                                     | Loads frequently accessed index data into memory. Valid `scope` values are `search` and `routing`.                                                                                                                                                                |
+| `lakebase_ann_index_info(regclass)`                                   | text                                                                     | Returns index metadata as JSON text, including `version`, `lists`, `default_probes`, and `default_epsilon`.                                                                                                                                                       |
+| `lakebase_ann_advise(regclass, vector[] \| halfvec[])`                | `TABLE(probes text, recall real, avg_ms real, p50_ms real, p95_ms real)` | Recommends `lakebase_ann.probes` values for the sample query vectors, with estimated recall@10 and measured latency. Requires table-level `SELECT` on the indexed table. Not supported when RLS applies to your role. Requires `lakebase_vector` 1.1.2 and above. |
+| `lakebase_ann_tune(regclass, vector[] \| halfvec[])`                  | `TABLE(probes text, recall real)`                                        | Recommends `lakebase_ann.probes` values for the sample query vectors, with estimated recall@10. Requires table-level `SELECT` on the indexed table. Not supported when RLS applies to your role. Requires `lakebase_vector` 1.1.2 and above.                      |
+| `lakebase_ann_latency(regclass, text[], vector[] \| halfvec[])`       | `TABLE(probes text, avg_ms real, p50_ms real, p95_ms real)`              | Measures the average, median, and 95th percentile query latency of the index for each `lakebase_ann.probes` value in the `text[]` array. Requires `lakebase_vector` 1.1.2 and above.                                                                              |
+| `lakebase_ann_sample(NULL::<table>, sample_size integer DEFAULT 128)` | `SETOF` the table's row type                                             | Samples up to `sample_size` rows from the table specified by `NULL::<table>`. Requires `lakebase_vector` 1.1.2 and above.                                                                                                                                         |
 
 ### Index options
 
 | Option       | Type   | Default      | Description                                                                                                                                                                                                                                                                                              |
 | :----------- | :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff. Use `'quality'` for better recall at the cost of a longer index build. `'fast'` remains supported for backward compatibility.                                                                                                                                      |
+| `build_mode` | string | `'standard'` | Controls the accuracy/speed tradeoff. Use `'quality'` for better recall at the cost of a significantly longer index build. `'fast'` remains supported for backward compatibility.                                                                                                                        |
 | `lists`      | string | `'auto'`     | Sets the IVF partition layout. With `'auto'`, the extension chooses a value based on the statistics of the table and the configuration of the index. Set a single integer such as `'1000'` for a one-level index, or two ascending comma-separated integers such as `'100, 1000'` for a two-level index. |
 
 ### Search parameters
 
-| GUC                      | Type   | Default  | Description                                                                                                                                                                     |
-| :----------------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `lakebase_ann.probes`    | string | `'auto'` | Number of IVF partitions to scan at each level. Higher values improve recall at the cost of query speed. The shape must match the `lists` array from `lakebase_ann_index_info`. |
-| `lakebase_ann.epsilon`   | string | `'auto'` | Controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer.                                                 |
-| `lakebase_ann.prefilter` | enum   | `off`    | Evaluates non-vector filters before full-precision distance reranking. Valid values are `on` and `off`. Best for cheap filters that remove most candidate rows.                 |
+| GUC                      | Type   | Default  | Description                                                                                                                                                                 |
+| :----------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lakebase_ann.probes`    | string | `'auto'` | Number of IVF partitions to scan at each level. Higher values improve recall at the cost of latency. The shape must match the `lists` array from `lakebase_ann_index_info`. |
+| `lakebase_ann.epsilon`   | string | `'auto'` | Controls how many candidates are reranked using full-precision distances. Higher values rerank more candidates and take longer.                                             |
+| `lakebase_ann.prefilter` | enum   | `off`    | Evaluates non-vector filters before full-precision distance reranking. Valid values are `on` and `off`. Best for cheap filters that remove most candidate rows.             |
 
 <NeedHelp />
