@@ -28,7 +28,7 @@ If it is not found, or to upgrade to the latest version, run:
 npm install -g neon@latest
 ```
 
-Requires Node.js 22.20 or newer. For other installation options, see https://neon.com/docs/cli/install.md
+Use Node.js 22.20 or newer. The CLI itself runs on Node.js 20.19 or newer, but installing Neon skills later in this setup needs 22.20. For other installation options, see https://neon.com/docs/cli/install.md
 
 ---
 
@@ -80,7 +80,7 @@ Neon Agent Setup Complete
 ✓ Signed in
 ✓ Neon skills and MCP server installed
 
-⚡ Restart your agent to load the skills and MCP server
+Restart your agent to load the skills and MCP server
 ```
 
 If any step fails or is still pending, report which steps completed and which are still pending. Retrying a failed step is fine.

@@ -19,6 +19,14 @@ describe('docs home redirects', () => {
     });
   });
 
+  it('permanently redirects the old home markdown copy to /docs.md', () => {
+    expect(redirects).toContainEqual({
+      source: '/docs/introduction.md',
+      destination: '/docs.md',
+      permanent: true,
+    });
+  });
+
   it('does not redirect bare /docs or /docs/introduction subpages', () => {
     const sources = redirects.map(({ source }) => source);
 

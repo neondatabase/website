@@ -69,7 +69,7 @@ export function resolveSitePath(input, origin) {
   const pathname = url.pathname.replace(/\/+$/, '') || '/';
   if (!isSite || /^\/(api|_next)(\/|$)/.test(pathname)) {
     throw new ToolInputError(
-      `${value} isn't a neon.com page. Pass a neon.com path such as "/docs/introduction".`
+      `${value} isn't a neon.com page. Pass a neon.com path such as "/docs/introduction/branching".`
     );
   }
   return { pathname, search: url.search, hash: decodeURIComponent(url.hash.slice(1)) };

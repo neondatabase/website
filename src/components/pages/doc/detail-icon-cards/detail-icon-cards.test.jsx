@@ -87,3 +87,29 @@ describe('DetailIconCards icon resolution', () => {
     expect(container.querySelectorAll('li')).toHaveLength(0);
   });
 });
+
+describe('DetailIconCards lockup', () => {
+  // `lockup` is a docs home prop: it only renders with `appearance="home"`.
+  /* eslint-disable react/no-unknown-property */
+  const renderCard = (appearance) =>
+    render(
+      <DetailIconCards cols={3} theme="green-flat" appearance={appearance}>
+        <a href={OVERVIEW_HREF} icon="neon" lockup="Neon Realtime">
+          Make it reactive
+        </a>
+      </DetailIconCards>
+    );
+  /* eslint-enable react/no-unknown-property */
+
+  it('renders the product lockup on the docs home appearance', () => {
+    const { getByText } = renderCard('home');
+    expect(getByText('Neon Realtime')).toBeInTheDocument();
+    expect(getByText('Make it reactive')).toBeInTheDocument();
+  });
+
+  it('ignores the lockup on the default appearance', () => {
+    const { queryByText, getByText } = renderCard('default');
+    expect(queryByText('Neon Realtime')).toBeNull();
+    expect(getByText('Make it reactive')).toBeInTheDocument();
+  });
+});

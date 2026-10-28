@@ -4,7 +4,7 @@ subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-08-25T00:00:00.000Z'
-updatedOn: '2026-09-24T17:56:34.189Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows:
@@ -38,7 +38,7 @@ Limit to 5 pages. Make sure to use relevant python libraries like langchain if r
 
 ## Demo
 
-The [agent prompt](#agent-prompt) above was used to generate a full reference app: hybrid retrieval, session-aware chat, live doc ingestion, and eval. The seed script fetches five pages from [Neon documentation](https://neon.com/docs/introduction) (introduction, Postgres overview, pgvector, full-backend quickstart, and the Cursor MCP guide), chunks them with LangChain, embeds with OpenAI, and upserts the chunks into Postgres on Neon.
+The [agent prompt](#agent-prompt) above was used to generate a full reference app: hybrid retrieval, session-aware chat, live doc ingestion, and eval. The seed script fetches five pages from [Neon documentation](https://neon.com/docs) (introduction, Postgres overview, pgvector, full-backend quickstart, and the Cursor MCP guide), chunks them with LangChain, embeds with OpenAI, and upserts the chunks into Postgres on Neon.
 
 <DetailIconCards>
 

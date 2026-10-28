@@ -44,10 +44,14 @@ const Footer = ({ hasThemesSupport = false }) => (
             </span>
           </div>
 
-          {/* On desktop the docs header's overflow menu carries the theme switch. */}
-          {hasThemesSupport && <ThemeSelect className="mb-8 hidden lg:mb-6 lg:flex" />}
+          {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-          <p className="max-w-146 text-[0.8125rem]/snug tracking-extra-tight text-gray-new-40">
+          <p
+            className={cn(
+              'max-w-146 text-[0.8125rem]/snug tracking-extra-tight text-gray-new-40',
+              hasThemesSupport && 'dark:text-gray-new-50'
+            )}
+          >
             © Neon 2026. All rights reserved. Apache, Apache Spark, Spark, the Spark Logo, Apache
             Iceberg, Iceberg, and the Apache Iceberg logo are trademarks of the{' '}
             <a
@@ -87,7 +91,8 @@ const Footer = ({ hasThemesSupport = false }) => (
                           'group/link relative -my-px flex cursor-pointer items-center rounded-sm py-px whitespace-nowrap',
                           'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
                           'transition-colors duration-200 hover:text-black-pure',
-                          'dark:text-gray-new-70 dark:hover:text-white'
+                          hasThemesSupport ? 'dark:text-gray-new-60' : 'dark:text-gray-new-70',
+                          'dark:hover:text-white'
                         )}
                         to={to}
                         rel={isExternalUrl ? 'noopener noreferrer' : null}

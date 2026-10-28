@@ -7,7 +7,7 @@ summary: >-
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-10-10T11:06:03.886Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information. To share ideas or report a docs gap without opening a support request, see [Send feedback](/docs/introduction/feedback).
@@ -58,7 +58,7 @@ The [Neon Discord Server](https://neon.com/discord) is not an official Neon Supp
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
 - **Neon Console**: Open the [support center](#open-the-support-center) and select **Ask the AI assistant**.
-- **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
+- **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://neon.com/discord)
 - **Neon CLI**: Run [`neon ask`](/docs/cli/ask) to ask questions about Neon from your terminal
 

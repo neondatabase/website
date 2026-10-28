@@ -6,14 +6,14 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import LogoDarkIcon from 'icons/logo-dark.inline.svg';
-import LogoLightIcon from 'icons/logo-light.inline.svg';
 import { cn } from 'utils/cn';
 import { getDocsHeaderLanes } from 'utils/get-docs-nav-href';
 
 import DocsNavigation from '../docs-navigation';
 
 import DocsHeaderMenu from './docs-header-menu';
+import LogoDivider from './images/logo-divider.inline.svg';
+import LogoLightIcon from './images/neon-logo.inline.svg';
 
 // Lanes collapse into the overflow menu whenever they don't fit between the
 // lockup and the right cluster (the spec's "< 1000px" case, and long lane sets
@@ -61,21 +61,20 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
       )}
     >
       {/* Below lg the shared mobile menu overlays its search + burger on the right. */}
-      <div className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 sm:pr-24">
-        {/*
-          The lockup reserves the space left of the lanes so "Get started" starts
-          at max(200px, (100% - 1296px) / 2), the docs content column. 100% here is
-          the bar minus its 32px side paddings, and 28px is the gap to the lanes.
-        */}
+      <div className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 md:pl-5 sm:pr-24">
+        {/* The 189px lockup and 28px gap align the first lane with the Figma header. */}
         <Link
-          className="flex min-w-[max(140px,calc((100%_-_1232px)/2_-_60px))] shrink-0 items-center gap-x-2 lg:min-w-0 lg:shrink"
+          className="flex w-[189px] shrink-0 items-center gap-x-3.5 lg:w-auto lg:min-w-0 lg:shrink"
           to={customType?.link || LINKS.docs}
         >
-          <LogoLightIcon className="h-7 w-auto shrink-0 dark:hidden" width={102} height={28} />
-          <LogoDarkIcon className="hidden h-7 w-auto shrink-0 dark:block" width={102} height={28} />
+          <LogoLightIcon
+            className="shrink-0 dark:[&_path:first-child]:fill-green-52 dark:[&_path:last-child]:fill-white"
+            aria-label="Neon"
+          />
+          <LogoDivider className="shrink-0 dark:[&_[stroke]]:stroke-gray-new-20" aria-hidden />
           <span
             className={cn(
-              'mt-px min-w-0 truncate text-[15px] leading-none font-semibold tracking-[0.02em] text-[#157A55] uppercase dark:text-green-52',
+              'mt-px min-w-0 truncate text-[15px] leading-none font-semibold tracking-normal text-[#157A55] uppercase dark:text-green-52',
               // Long section labels (PostgreSQL Tutorial) step down on phones.
               customType?.title && 'md:text-[13px] md:tracking-[0.01em]'
             )}
@@ -115,6 +114,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
           >
             Sign up
           </Link>
+          <span className="mx-1 h-5 w-px bg-gray-new-85 dark:bg-gray-new-20" aria-hidden="true" />
           <DocsHeaderMenu lanes={lanes} basePath={basePath} isNavCollapsed={isCollapsed} />
         </div>
       </div>
