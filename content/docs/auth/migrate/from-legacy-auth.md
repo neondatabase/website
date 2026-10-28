@@ -149,7 +149,7 @@ export default function SignInPage() {
 </CodeTabs>
 
 **What changed**  
-You render Better Auth UI's `Auth` component and tell it which flow to show with the `view` prop. To serve every auth flow from one route, use `app/auth/[path]/page.tsx` with `<Auth path={path} />`, as in the [UI components reference](/docs/auth/reference/ui-components#nextjs-app-router).
+You render Better Auth UI's `Auth` component and tell it which flow to show with the `view` prop. Also add the shared `app/auth/[path]/page.tsx` route with `<Auth path={path} />`, as in the [UI components reference](/docs/auth/reference/ui-components#nextjs-app-router): the user menu's **Sign Out** and the password reset links open `/auth/*` paths.
 
 #### Sign up page
 
@@ -192,14 +192,14 @@ export function Header() {
 import { UserButton } from '@/components/auth/user/user-button';
 
 export function Header() {
-  return <UserButton />;
+  return <UserButton hideSettings />;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You keep a `UserButton`, now the one the shadcn CLI copied into `components/auth/user/`.
+You keep a `UserButton`, now the one the shadcn CLI copied into `components/auth/user/`. `hideSettings` drops its link to `/settings/account`; to keep it, add `@better-auth-ui/settings` and a `settings/[path]` route.
 
 ### Replace hooks (#nextjs-replace-hooks)
 
@@ -269,7 +269,7 @@ export function Providers({ children }) {
     <QueryClientProvider client={queryClient}>
       <AuthProvider
         authClient={authClient}
-        emailAndPassword={{ requireEmailVerification: false }}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
         navigate={({ to, replace }) => {
           const path = getSafeRedirectTo(to, window.location.origin);
           const target = path.startsWith('//') ? '/' : path;
@@ -527,6 +527,7 @@ function App() {
 import { getSafeRedirectTo } from '@better-auth-ui/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/components/auth/auth-provider';
+import { Toaster } from '@/components/ui/sonner';
 import { authClient } from './auth';
 
 const queryClient = new QueryClient();
@@ -543,6 +544,7 @@ function App() {
         Link={({ to: _to, ...props }) => <a {...props} />}
       >
         {/* Your app */}
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   );

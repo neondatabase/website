@@ -25,18 +25,13 @@ Better Auth UI needs React 19.2.6 or later and Tailwind CSS 4.3.2 or later. If t
 npx shadcn@latest init
 ```
 
-Add the auth views, and the user menu if you want one:
-
-```bash
-npx shadcn@latest add @better-auth-ui/auth
-npx shadcn@latest add @better-auth-ui/user-button
-```
-
-The CLI writes the components to `components/auth/` and their shadcn/ui primitives to `components/ui/`, and installs `@better-auth-ui/react`, `@better-auth-ui/core`, and TanStack Query.
-
 ### npm overrides
 
-`@neon/auth` pins Better Auth to an exact version. `@better-auth-ui/react` requires `@better-auth/api-key` and `@better-auth/passkey` as peers, and npm installs them at their latest version, so `npm install` fails with `ERESOLVE`. Add `overrides` to `package.json` to keep one version of the Better Auth packages:
+`@neon/auth` pins Better Auth to an exact version. `@better-auth-ui/react` requires `@better-auth/api-key` and `@better-auth/passkey` as peers, and npm installs them at their latest version, so `npm install` fails with `ERESOLVE`. Before you add the components, install `better-auth` at an exact version and add `overrides` to `package.json` that hold every Better Auth package at that version. npm rejects an override that differs from a direct dependency's version, so the two must match.
+
+```bash
+npm install --save-exact better-auth@1.7.12
+```
 
 ```json
 {
@@ -52,6 +47,17 @@ The CLI writes the components to `components/auth/` and their shadcn/ui primitiv
 }
 ```
 
+### Add the components
+
+Add the auth views, and the user menu if you want one:
+
+```bash
+npx shadcn@latest add @better-auth-ui/auth
+npx shadcn@latest add @better-auth-ui/user-button
+```
+
+The CLI writes the components to `components/auth/` and their shadcn/ui primitives to `components/ui/`, and installs `@better-auth-ui/react`, `@better-auth-ui/core`, and TanStack Query.
+
 ## Provider setup
 
 Wrap the app in a TanStack Query `QueryClientProvider` and the copied `AuthProvider`. Pass the client from `createAuthClient()` in `@neon/auth` as `authClient`; it needs no adapter or type cast.
@@ -60,22 +66,23 @@ Wrap the app in a TanStack Query `QueryClientProvider` and the copied `AuthProvi
 'use client';
 
 import { getSafeRedirectTo } from '@better-auth-ui/core';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { AuthProvider } from '@/components/auth/auth-provider';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { authClient } from '@/lib/auth/client';
-import { getQueryClient } from '@/lib/query-client';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <QueryClientProvider client={getQueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <AuthProvider
         authClient={authClient}
-        emailAndPassword={{ requireEmailVerification: false }}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
         navigate={({ to, replace }) => {
           const path = getSafeRedirectTo(to, window.location.origin);
           const target = path.startsWith('//') ? '/' : path;
@@ -93,7 +100,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 }
 ```
 
-`getQueryClient()` returns a new `QueryClient` per server render and one shared client in the browser. In a single-page app, create one `QueryClient` at module level instead.
+Render `<Toaster />` once: the components report errors as toasts. In a single-page app, you can create the `QueryClient` once at module level instead.
 
 | Prop               | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
@@ -101,7 +108,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 | `navigate`         | **Required.** Called with `{ to, replace }` for every navigation the components make.                                       |
 | `Link`             | **Required.** The router's link component, for example `next/link` or a TanStack Router `Link` adapter.                     |
 | `redirectTo`       | Where to go after sign-in when the URL has no `?redirectTo=`.                                                               |
-| `emailAndPassword` | Email and password options. Set `requireEmailVerification: false`; see [Known limitations](#known-limitations).             |
+| `emailAndPassword` | Email and password options. Set `requireEmailVerification` to match your branch's **Verify email at signup** setting.       |
 | `socialProviders`  | OAuth provider buttons to show, for example `['google', 'github']`. Configure the providers for your branch first.          |
 | `plugins`          | Better Auth UI plugins, for example `emailOtpPlugin()`. A UI plugin doesn't enable the matching Managed Better Auth plugin. |
 
@@ -147,7 +154,9 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
 }
 ```
 
-Add the user menu to a header:
+The `/auth/[path]` route also serves `/auth/sign-out`, which the user menu's **Sign Out** opens.
+
+Add the user menu to a header. Its **Settings** link opens `/settings/account`: add `npx shadcn@latest add @better-auth-ui/settings` and a `settings/[path]` route that renders `<Settings path={path} />`, or pass `hideSettings`.
 
 ```tsx
 import { UserButton } from '@/components/auth/user/user-button';
@@ -155,7 +164,7 @@ import { UserButton } from '@/components/auth/user/user-button';
 export function Header() {
   return (
     <header>
-      <UserButton size="icon" />
+      <UserButton size="icon" hideSettings />
     </header>
   );
 }
@@ -187,7 +196,7 @@ To change colors, radius, or dark mode, edit the theme variables in that file or
 ## Known limitations
 
 - `@neon/auth` returns Supabase-style error codes, such as `invalid_credentials`, and Better Auth UI looks up messages by Better Auth's codes, such as `INVALID_EMAIL_OR_PASSWORD`. A wrong password shows "Please sign in again to continue." instead of an invalid-credentials message.
-- For the same reason, Better Auth UI's verify-email redirect doesn't run. Keep `requireEmailVerification: false` in `emailAndPassword`.
+- For the same reason, signing in with an email that isn't verified yet doesn't redirect to the verify-email view. Sign-up does show it when `requireEmailVerification` is `true`.
 
 ## Next steps
 

@@ -35,7 +35,7 @@ Managed Better Auth UI and Neon SDK are client-side SDKs, so you only invoke the
 
 ## Use Email OTP with UI components
 
-If you're using [Better Auth UI](/docs/auth/reference/ui-components), add its Email OTP components and pass the plugin to `AuthProvider`. This adds OTP sign-in, password reset, and email verification to the pre-built auth UI.
+If you're using [Better Auth UI](/docs/auth/reference/ui-components), add its Email OTP components and pass the plugin to `AuthProvider`. `emailOtpPlugin()` adds OTP sign-in; pass `emailOtpPlugin({ passwordReset: true, emailVerification: true })` to also use codes for password reset and email verification.
 
 ```bash
 npx shadcn@latest add @better-auth-ui/email-otp

@@ -148,7 +148,7 @@ function Root() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider
         authClient={authClient}
-        emailAndPassword={{ requireEmailVerification: false }}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
         navigate={({ to, replace }) => {
           const path = getSafeRedirectTo(to, window.location.origin);
           const target = path.startsWith('//') ? '/' : path;

@@ -91,6 +91,7 @@ import { getSafeRedirectTo } from '@better-auth-ui/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/components/auth/auth-provider';
 import { Auth } from '@/components/auth/auth';
+import { Toaster } from '@/components/ui/sonner';
 import { authClient } from './auth';
 
 const queryClient = new QueryClient();
@@ -107,6 +108,7 @@ export default function App() {
         Link={({ to: _to, ...props }) => <a {...props} />}
       >
         <Auth view="signIn" />
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   );
