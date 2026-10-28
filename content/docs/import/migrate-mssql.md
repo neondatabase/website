@@ -12,7 +12,7 @@ summary: >-
   SQL users may need FreeTDS driver configuration to resolve pgloader
   connection errors.
 enableTableOfContents: true
-updatedOn: '2026-09-29T17:10:40.931Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -240,6 +240,6 @@ For complex migrations or when you need more control over the migration process,
 For more information on `pgloader` and database migration, refer to the following resources:
 
 - [pgloader documentation - MSSQL to Postgres](https://pgloader.readthedocs.io/en/latest/ref/mssql.html)
-- [Neon documentation](/docs/introduction)
+- [Neon documentation](/docs)
 
 <NeedHelp/>

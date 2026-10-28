@@ -80,7 +80,7 @@ Neon Agent Setup Complete
 ✓ Signed in
 ✓ Neon skills and MCP server installed
 
-⚡ Restart your agent to load the skills and MCP server
+Restart your agent to load the skills and MCP server
 ```
 
 If any step fails or is still pending, report which steps completed and which are still pending. Retrying a failed step is fine.
