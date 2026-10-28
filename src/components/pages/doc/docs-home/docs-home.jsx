@@ -106,13 +106,18 @@ const FRAMEWORKS = [
   { name: 'Redwood', icon: 'redwoodsdk', to: '/docs/guides/redwoodsdk' },
 ];
 
-// Each agent links to its own section of the MCP clients page. Codex has no
-// section of its own; it's listed in the add-mcp supported agents table.
+// Cursor, Claude Code, and Codex link to the install section of their own
+// plugin page. GitHub Copilot has no plugin page, so it keeps pointing at its
+// section of the MCP clients page.
 const MCP_HREF = '/docs/ai/connect-mcp-clients-to-neon';
 const AGENTS = [
-  { name: 'Cursor', icon: 'cursor', to: `${MCP_HREF}#cursor` },
-  { name: 'Claude Code', icon: 'claude-code', to: `${MCP_HREF}#claude-code` },
-  { name: 'Codex', icon: 'codex', to: `${MCP_HREF}#supported-agents-add-mcp` },
+  { name: 'Cursor', icon: 'cursor', to: '/docs/ai/ai-cursor-plugin#install-the-plugin-in-cursor' },
+  {
+    name: 'Claude Code',
+    icon: 'claude-code',
+    to: '/docs/ai/ai-claude-code-plugin#install-the-plugin-in-claude-code',
+  },
+  { name: 'Codex', icon: 'codex', to: '/docs/ai/ai-codex-plugin#install-the-plugin-in-codex' },
   { name: 'GitHub Copilot', icon: 'copilot', to: `${MCP_HREF}#vs-code-with-github-copilot` },
 ];
 
