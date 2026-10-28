@@ -69,6 +69,12 @@ describe('generateIndexText — Common tasks', () => {
     expect(commonTasks).toContain('https://neon.com/auth.md');
   });
 
+  it('does not send agents to the retired docs home page', () => {
+    const text = generateIndexText(buildMinimalOrganized(), []);
+    expect(text).not.toContain('https://neon.com/docs/introduction.md');
+    expect(text).toContain('https://neon.com/docs/get-started/backend-overview.md');
+  });
+
   it('no longer renders the old "When to use Neon" or "Common Queries" headings', () => {
     const text = generateIndexText(buildMinimalOrganized(), []);
     expect(text).not.toContain('## When to use Neon');

@@ -9,7 +9,7 @@ summary: >-
   Useful when migrating from Heroku Postgres or hosting a new Node app on
   Heroku with Neon.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
@@ -192,7 +192,7 @@ To delete your Neon project, follow the steps outlined in the Neon documentation
 
 - [Heroku Documentation](https://devcenter.heroku.com/)
 - [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-- [Neon](/docs/introduction)
+- [Neon](/docs)
 - [Import data from Heroku Postgres to Neon](/docs/import/migrate-from-heroku)
 
 <NeedHelp/>

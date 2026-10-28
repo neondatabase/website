@@ -72,7 +72,6 @@ const DocPost = async (props) => {
   const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = currentSlug === 'changelog' || currentSlug.startsWith('changelog/');
 
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
@@ -127,7 +126,6 @@ const DocPost = async (props) => {
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
-        isDocsIndex={isDocsIndex}
       />
     </>
   );

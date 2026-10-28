@@ -71,7 +71,6 @@ const Post = ({
   breadcrumbsBaseUrl = DOCS_BASE_PATH,
   navigationLinks: { previousLink, nextLink },
   navigationLinksBasePath = DOCS_BASE_PATH,
-  isDocsIndex = false,
   isChangelog = false,
   isPostgres = false,
   changelogPosts = [],
@@ -117,7 +116,7 @@ const Post = ({
   const actionsDivider = (
     <span aria-hidden="true" className="h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20" />
   );
-  const pageActionsRow = !isDocsIndex && (
+  const pageActionsRow = (
     <div className="mt-3.5 flex flex-wrap items-center gap-3.5">
       {!hideCopyPage && (
         <>
@@ -196,8 +195,7 @@ const Post = ({
               <div
                 className={cn(
                   'grid gap-2.5',
-                  !isDocsIndex &&
-                    'mb-3 border-b border-gray-new-90 pb-[18px] dark:border-gray-new-15',
+                  'mb-3 border-b border-gray-new-90 pb-[18px] dark:border-gray-new-15',
                   !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
                   eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
                   titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
@@ -243,11 +241,11 @@ const Post = ({
             />
           </article>
         )}
-        {!isDocsIndex && <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />}
+        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
 
         {!isChangelog && (
           <NavigationLinks
-            className={cn(isDocsIndex ? 'mt-14' : 'mt-6')}
+            className="mt-6"
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}
@@ -255,11 +253,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
-      {!isDocsIndex && !isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
           className="ml-0! w-78 shrink-0 xl:hidden"
-          isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
@@ -296,7 +293,6 @@ Post.propTypes = {
   navigationLinksBasePath: PropTypes.string,
   isChangelog: PropTypes.bool,
   isPostgres: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,

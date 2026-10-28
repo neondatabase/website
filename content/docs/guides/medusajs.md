@@ -11,7 +11,7 @@ summary: >-
   and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
   Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
@@ -147,7 +147,7 @@ You can optionally enable IP whitelisting in the Neon Console to restrict databa
 
 ## Resources
 
-- [Neon Documentation](/docs/introduction)
+- [Neon Documentation](/docs)
 - [Medusa Official Documentation](https://docs.medusajs.com/)
 - [Medusa Application Deployment Guide](https://docs.medusajs.com/learn/deployment/general)
 

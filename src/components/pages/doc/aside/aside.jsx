@@ -29,7 +29,7 @@ const Aside = ({
         className
       )}
     >
-      <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] w-full max-w-64 flex-col pb-5 2xl:justify-self-end">
+      <div className="sticky top-[84px] flex max-h-[calc(100vh-84px)] w-full max-w-64 flex-col pb-5 2xl:justify-self-end">
         {enableTableOfContents && (
           <TableOfContents items={tableOfContents} isTemplate={isTemplate} />
         )}

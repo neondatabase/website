@@ -21,8 +21,8 @@ const ThemeSelect = ({ className = null }) => {
   return (
     <div
       className={cn(
-        'relative flex gap-x-1 rounded-full border border-gray-new-80 dark:border-gray-new-20',
-        'after:pointer-events-none after:absolute after:-top-px after:-left-px after:h-7 after:w-7 after:rounded-full after:border after:border-inherit',
+        'relative flex gap-x-1 rounded-full border border-gray-new-90 p-px dark:border-gray-new-20',
+        'after:pointer-events-none after:absolute after:top-px after:left-px after:size-[26px] after:rounded-full after:border after:border-inherit',
         'after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.34,1,0.64,1)] after:will-change-transform',
         {
           'after:translate-x-0': theme === 'system',
@@ -36,9 +36,10 @@ const ThemeSelect = ({ className = null }) => {
     >
       {themes.map((_theme) => {
         const isSelected = _theme === theme;
-        const themeIconClassNames = cn('text-gray-new-50 dark:text-gray-new-70', {
-          'text-black-pure! dark:text-white!': isSelected,
-        });
+        const themeIconClassNames = cn(
+          '[&_[stroke]:not([stroke=none])]:stroke-current [&_[fill]:not([fill=none])]:fill-current',
+          isSelected ? 'text-black-pure dark:text-white' : 'text-gray-new-30 dark:text-gray-new-70'
+        );
 
         return (
           <button

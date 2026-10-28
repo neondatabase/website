@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-06-10T15:22:41.769Z'
+updatedOn: '2026-10-27T20:26:38.639Z'
 ---
 
 <InfoBlock>
@@ -96,6 +96,10 @@ To update the company name, address, postal or ZIP code, country, or VAT or tax 
 
 If you are unable to update this information, please [contact support](/docs/introduction/support).
 
+<Admonition type="note">
+Updating your billing details (company name, address, or tax or VAT ID) applies to invoices generated after the change. Invoices that were already issued keep the details they had when they were created.
+</Admonition>
+
 ## Invoices
 
 A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
@@ -150,6 +154,12 @@ If you have no invoices yet, **Request billing support** may appear disabled wit
 1. For the invoice you care about, open the actions menu (`...`) and select **Request support**. The same form opens with that invoice pre-selected.
 
 You can still use **Download** from the invoice menu to save a PDF. For other support paths (for example **Launch** plan limits on ticket topics), see [Support](/docs/introduction/support).
+
+#### What billing support can and can't help with
+
+Billing support can help with questions about a specific invoice or charge, refunds and credits, and questions about your plan or subscription.
+
+Updating your billing details applies to new invoices only. Invoices that were already issued keep the company name, address, and tax or VAT ID they had when they were created, and Neon does not reissue or re-address a past invoice. Update your details on the Billing page so your future invoices reflect them.
 
 ## Change your plan
 

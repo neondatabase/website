@@ -23,7 +23,10 @@ const Menu = ({
   <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
       className="flex items-center gap-2.5 rounded-sm text-[15px] leading-snug font-medium tracking-extra-tight"
-      to={`${basePath}${slug}`}
+      // A site-absolute slug (starting with `/`, e.g. the Get started lane's
+      // `/docs` overview) is already a full path; only relative slugs hang off
+      // basePath. Matches how menu/item and mobile-nav resolve their hrefs.
+      to={slug?.startsWith('/') ? slug : `${basePath}${slug}`}
       theme="blue-green"
     >
       {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
