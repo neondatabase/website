@@ -131,13 +131,13 @@ const DocsHomeComposer = () => {
       {/* One panel whose content swaps with the active tab. */}
       <div id={panelId} role="tabpanel" aria-labelledby={tabId(tab)}>
         {agent ? (
-          <div className="bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-gray-new-30 dark:bg-gray-new-8 dark:text-gray-new-80 sm:px-4">
+          <div className="bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-sm leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-gray-new-30 dark:bg-gray-new-8 dark:text-gray-new-80 sm:px-4">
             <span>{AGENT_PROMPT_LEAD}</span>
             <span className="text-green-44 dark:text-green-52">{AGENT_SETUP_URL}</span>
             <span>{AGENT_PROMPT_TAIL}</span>
           </div>
         ) : (
-          <div className="grid gap-0.5 bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-base leading-[30.8px] [overflow-wrap:anywhere] dark:bg-gray-new-8 sm:px-4">
+          <div className="grid gap-0.5 bg-gray-new-98 px-6 pt-6 pb-[25px] font-mono text-sm leading-[30.8px] [overflow-wrap:anywhere] dark:bg-gray-new-8 sm:px-4">
             {CLI_LINES.map((l, i) => (
               <div
                 key={`${l.text}-${i}`}
