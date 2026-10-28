@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useId, useRef, useState } from 'react';
 
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
@@ -222,13 +222,40 @@ CopyChip.propTypes = {
   url: PropTypes.string.isRequired,
 };
 
+const COMPOSER_TABS = [
+  { id: 'agent', label: 'Agent prompt' },
+  { id: 'cli', label: 'CLI' },
+];
+
 // Tabbed setup instructions with a copy control for the active tab.
 const Composer = () => {
   const [tab, setTab] = useState('agent');
   const { isCopied, handleCopy } = useCopyToClipboard(1400);
+  const idPrefix = useId();
+  const tabRefs = useRef({});
 
   const agent = tab === 'agent';
   const activeText = agent ? AGENT_BASE : CLI_TEXT;
+  const tabId = (id) => `${idPrefix}-tab-${id}`;
+  const panelId = `${idPrefix}-panel`;
+
+  // WAI-ARIA tabs keyboard pattern: arrows move between tabs (wrapping),
+  // Home/End jump to the first/last, and focus follows the selection.
+  const handleTabKeyDown = (event) => {
+    const index = COMPOSER_TABS.findIndex((t) => t.id === tab);
+    const last = COMPOSER_TABS.length - 1;
+    const nextIndex = {
+      ArrowRight: index === last ? 0 : index + 1,
+      ArrowLeft: index === 0 ? last : index - 1,
+      Home: 0,
+      End: last,
+    }[event.key];
+    if (nextIndex === undefined) return;
+    event.preventDefault();
+    const next = COMPOSER_TABS[nextIndex].id;
+    setTab(next);
+    tabRefs.current[next]?.focus();
+  };
 
   const tabBtn = (id) =>
     cn(
@@ -253,13 +280,30 @@ const Composer = () => {
           strongBorder
         )}
       >
-        <div className="-mt-px flex h-[65px] min-w-0 items-stretch">
-          <button type="button" className={tabBtn('agent')} onClick={() => setTab('agent')}>
-            Agent prompt
-          </button>
-          <button type="button" className={tabBtn('cli')} onClick={() => setTab('cli')}>
-            CLI
-          </button>
+        <div
+          className="-mt-px flex h-[65px] min-w-0 items-stretch"
+          role="tablist"
+          aria-label="Setup method"
+        >
+          {COMPOSER_TABS.map(({ id, label }) => (
+            <button
+              key={id}
+              ref={(node) => {
+                tabRefs.current[id] = node;
+              }}
+              id={tabId(id)}
+              className={tabBtn(id)}
+              type="button"
+              role="tab"
+              aria-selected={tab === id}
+              aria-controls={panelId}
+              tabIndex={tab === id ? 0 : -1}
+              onClick={() => setTab(id)}
+              onKeyDown={handleTabKeyDown}
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <button
           type="button"
@@ -271,32 +315,35 @@ const Composer = () => {
         </button>
       </div>
 
-      {agent ? (
-        <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-80 sm:px-4">
-          <span>Set me up for Neon. Fetch </span>
-          <span className="text-green-44 dark:text-green-52">
-            https://neon.com/prompts/agent-setup.md
-          </span>
-          <span> and follow it.</span>
-        </div>
-      ) : (
-        <div className="grid gap-0.5 px-6 pt-6 pb-[25px] text-base leading-[30.8px] [overflow-wrap:anywhere] sm:px-4">
-          {CLI_LINES.map((l, i) => (
-            <div
-              key={`${l.text}-${i}`}
-              className={cn(
-                'break-words',
-                l.gap && 'mt-2.5',
-                l.comment
-                  ? 'text-[#494B50] dark:text-gray-new-60'
-                  : 'text-green-44 dark:text-green-52'
-              )}
-            >
-              {l.text}
-            </div>
-          ))}
-        </div>
-      )}
+      {/* One panel whose content swaps with the active tab. */}
+      <div id={panelId} role="tabpanel" aria-labelledby={tabId(tab)}>
+        {agent ? (
+          <div className="px-6 pt-6 pb-[25px] text-base leading-[30.8px] [text-wrap:pretty] [overflow-wrap:anywhere] text-[#494B50] dark:text-gray-new-80 sm:px-4">
+            <span>Set me up for Neon. Fetch </span>
+            <span className="text-green-44 dark:text-green-52">
+              https://neon.com/prompts/agent-setup.md
+            </span>
+            <span> and follow it.</span>
+          </div>
+        ) : (
+          <div className="grid gap-0.5 px-6 pt-6 pb-[25px] text-base leading-[30.8px] [overflow-wrap:anywhere] sm:px-4">
+            {CLI_LINES.map((l, i) => (
+              <div
+                key={`${l.text}-${i}`}
+                className={cn(
+                  'break-words',
+                  l.gap && 'mt-2.5',
+                  l.comment
+                    ? 'text-[#494B50] dark:text-gray-new-60'
+                    : 'text-green-44 dark:text-green-52'
+                )}
+              >
+                {l.text}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
