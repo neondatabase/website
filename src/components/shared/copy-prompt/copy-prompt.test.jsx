@@ -182,6 +182,6 @@ describe('CopyPrompt (legacy mode)', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Copied' })).toBeVisible());
     expect(writeText).toHaveBeenCalledWith('# Prompt body');
     expect(screen.getByTestId('copied-icon')).toBeInTheDocument();
-    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
+    expect(screen.getByTestId('copy-icon').parentElement).toHaveAttribute('aria-hidden', 'true');
   });
 });

@@ -148,27 +148,36 @@ const CopyPrompt = (props) => {
         </div>
         <Button
           className={cn(
-            'relative z-10 inline-flex items-center gap-2 leading-none',
-            copied
-              ? 'h-9 bg-gray-new-20 px-4 py-0 text-[15px] font-medium tracking-normal text-white hover:bg-gray-new-20'
-              : 'px-6 py-3.5 text-base font-normal tracking-tight dark:font-medium'
+            'relative z-10 inline-flex items-center gap-2 px-6 py-3.5 text-base leading-none font-normal tracking-tight dark:font-medium',
+            copied && 'bg-gray-new-20 text-white hover:bg-gray-new-20'
           )}
           theme={copied ? null : 'white-filled-multi'}
           aria-label={copied ? 'Copied' : buttonText}
           aria-live="polite"
           onClick={handleCopy}
         >
-          {copied ? (
-            <>
-              Copied
-              <CopiedIcon className="size-3.5" aria-hidden="true" />
-            </>
-          ) : (
-            <>
+          <span className="grid">
+            <span
+              className={cn(
+                'col-start-1 row-start-1 flex items-center justify-center gap-2',
+                copied && 'invisible'
+              )}
+              aria-hidden={copied}
+            >
               <CopyIcon className="size-3.5" aria-hidden="true" />
               {buttonText}
-            </>
-          )}
+            </span>
+            <span
+              className={cn(
+                'col-start-1 row-start-1 flex items-center justify-center gap-2',
+                !copied && 'invisible'
+              )}
+              aria-hidden={!copied}
+            >
+              Copied
+              <CopiedIcon className="size-3.5" aria-hidden="true" />
+            </span>
+          </span>
         </Button>
       </figure>
     );

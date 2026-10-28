@@ -116,10 +116,31 @@ const DocsHomeComposer = () => {
               ? 'bg-gray-new-20 text-white'
               : 'bg-black-new text-white hover:bg-gray-new-20 dark:bg-white dark:text-black-pure dark:hover:bg-gray-new-90'
           )}
+          aria-label={isCopied ? 'Copied' : 'Copy'}
           aria-live="polite"
         >
-          {isCopied ? 'Copied' : 'Copy'}
-          {isCopied ? <CopiedIcon className="size-3.5" /> : <CopyIcon className="size-3.5" />}
+          <span className="grid">
+            <span
+              className={cn(
+                'col-start-1 row-start-1 flex items-center justify-center gap-2',
+                isCopied && 'invisible'
+              )}
+              aria-hidden={isCopied}
+            >
+              Copy
+              <CopyIcon className="size-3.5" aria-hidden="true" />
+            </span>
+            <span
+              className={cn(
+                'col-start-1 row-start-1 flex items-center justify-center gap-2',
+                !isCopied && 'invisible'
+              )}
+              aria-hidden={!isCopied}
+            >
+              Copied
+              <CopiedIcon className="size-3.5" aria-hidden="true" />
+            </span>
+          </span>
         </button>
       </div>
 
