@@ -403,7 +403,7 @@ const FoundationCard = () => (
 // Match the reference's 1200px page while keeping the mobile container gutters.
 const DocsHome = () => (
   <div className="@container w-full min-w-0 font-sans tracking-[-0.02em] text-black-pure dark:bg-black-pure dark:text-white">
-    <main className="@container w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-0">
+    <div className="@container w-full max-w-[1200px] px-[clamp(0px,2cqi,24px)] lg:px-0">
       {/* The intro and composer share the hero row on wide screens. */}
       <section className="grid grid-cols-[minmax(0,47fr)_minmax(0,53fr)] items-start gap-x-16 gap-y-10 pt-0 pb-24 @max-[900px]:grid-cols-1 xl:gap-x-10 xl:pt-3 lg:py-16 md:py-14">
         <div className="grid content-start gap-6">
@@ -533,7 +533,7 @@ const DocsHome = () => (
         </DetailIconCards>
         {/* eslint-enable react/no-unknown-property */}
       </Section>
-    </main>
+    </div>
   </div>
 );
 

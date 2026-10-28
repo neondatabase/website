@@ -29,7 +29,7 @@ const InkeepAIButton = ({ className, handleClick, isDocsHeader = false }) => (
     onClick={() => handleClick('AI_CHAT')}
   >
     {isDocsHeader ? (
-      <DocsHeaderSparksIcon className="dark:[&_[stroke]]:stroke-gray-new-70" />
+      <DocsHeaderSparksIcon className="dark:[&_[stroke]]:stroke-gray-new-70 dark:[&_path[fill]]:fill-gray-new-70" />
     ) : (
       <SparksIcon />
     )}
