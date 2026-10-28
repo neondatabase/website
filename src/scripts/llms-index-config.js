@@ -58,7 +58,7 @@ module.exports = {
     },
     {
       label: 'Explore the full platform: functions, object storage, AI Gateway, and more',
-      url: 'https://neon.com/docs/introduction.md',
+      url: 'https://neon.com/docs/get-started/backend-overview.md',
     },
     {
       label: 'Choose a connection method (drivers, pooling, serverless)',
@@ -400,7 +400,6 @@ module.exports = {
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
     'guides/GUIDE_TEMPLATE.md',
-    'introduction.md',
   ],
 
   // Reclassify specific files into a different subsection.

@@ -2254,6 +2254,15 @@ const defaultConfig = {
         destination: '/docs',
         permanent: true,
       },
+      // Its markdown copy goes to the markdown form of the front page (/docs.md,
+      // rewritten to the curated /docs/llms.txt index below). The proxy's
+      // resolveMarkdownRedirect would infer this too, but an explicit rule is
+      // deterministic, unit-tested, and skips its probe fetches.
+      {
+        source: '/docs/introduction.md',
+        destination: '/docs.md',
+        permanent: true,
+      },
       // The former Get started section landing was folded into the `/docs` home
       // (the home IS the Get started overview now). Only the exact path
       // redirects: `/docs/get-started/*` subpages are real pages and keep their
