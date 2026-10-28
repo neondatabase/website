@@ -81,21 +81,23 @@ const AgentSetupButton = ({ agentPrompt = null, className = null }) => {
   return (
     <button
       className={cn(
-        'flex h-[34px] shrink-0 items-center gap-2 rounded-[6px] border bg-white px-3 text-sm leading-none transition-colors duration-[120ms] ease-out dark:bg-black-new',
+        'flex items-center gap-[7px] text-sm leading-none transition-colors duration-[120ms] ease-out',
         isCopied
-          ? 'border-green-44 text-[#157A55] dark:border-green-52 dark:text-green-52'
-          : 'border-gray-new-85 text-gray-new-20 hover:border-green-44 dark:border-gray-new-20 dark:text-gray-new-94 dark:hover:border-green-52',
+          ? 'text-[#157A55] dark:text-green-52'
+          : 'text-gray-new-20 hover:text-[#157A55] dark:text-gray-new-94 dark:hover:text-green-52',
         className
       )}
       type="button"
       title="Copy a prompt that sets up Neon in your coding agent"
-      aria-label={isCopied ? 'Prompt copied' : 'Agent setup'}
+      aria-label={isCopied ? 'Prompt copied' : 'Set up agent'}
       onClick={isCopied ? undefined : handleClick}
     >
-      <span className="flex text-green-44 dark:text-green-52">
+      <span
+        className={cn('flex', isCopied ? 'text-[#157A55] dark:text-green-52' : 'text-green-44')}
+      >
         {isCopied ? <CheckIcon /> : <RobotIcon width={15} height={15} aria-hidden="true" />}
       </span>
-      {isCopied ? 'Prompt copied' : 'Agent setup'}
+      {isCopied ? 'Prompt copied' : 'Set up agent'}
     </button>
   );
 };

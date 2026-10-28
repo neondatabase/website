@@ -10,6 +10,7 @@ import MODALS from 'components/pages/doc/modal/data';
 import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
+import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { cn } from 'utils/cn';
@@ -17,6 +18,26 @@ import { cn } from 'utils/cn';
 import AgentSetupButton from '../agent-setup-button';
 import DropdownMenu from '../dropdown-menu';
 import Tag from '../tag';
+
+// "View as Markdown" glyph for the page actions row (15px, stroke 1.6).
+const MarkdownViewIcon = (props) => (
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    {...props}
+  >
+    <rect x="3" y="6" width="18" height="12" rx="1" />
+    <path d="M6 15v-6l3 3 3-3v6" />
+    <path d="M16 9v6M14 13l2 2 2-2" />
+  </svg>
+);
 
 const Changelog = ({ posts }) => (
   <>
@@ -43,7 +64,6 @@ const Post = ({
     titleWidth = null,
     contentLayout = null,
     hideCopyPage = false,
-    updatedOn = null,
     agentPrompt = null,
   },
   content,
@@ -74,16 +94,6 @@ const Post = ({
   // Check if split content layout is enabled (2-column grid for SDK reference style)
   const isSplitLayout = contentLayout === 'split';
 
-  // "Updated {date}" stamp shown in the title action row. Same source as the
-  // footer's last-updated date (the auto-stamped `updatedOn` frontmatter).
-  const formattedUpdatedOn = updatedOn
-    ? new Date(updatedOn).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })
-    : null;
-
   const heading = (
     <h1
       className={cn(
@@ -95,6 +105,40 @@ const Post = ({
     >
       {title}
     </h1>
+  );
+
+  // The docs route doesn't pass markdownPath, so derive it from gitHubPath the
+  // same way DropdownMenu does (e.g. content/docs/x.md -> /docs/x.md).
+  const docMarkdownPath =
+    markdownPath || (gitHubPath ? `/${gitHubPath.replace('content/', '')}` : null);
+
+  // Page actions row: Copy page (menu) · View as Markdown · Set up agent.
+  // Text-only, left-aligned, with 1px dividers between items.
+  const actionsDivider = (
+    <span aria-hidden="true" className="h-4 w-px shrink-0 bg-gray-new-85 dark:bg-gray-new-20" />
+  );
+  const pageActionsRow = !isDocsIndex && (
+    <div className="mt-3.5 flex flex-wrap items-center gap-3.5">
+      {!hideCopyPage && (
+        <>
+          <DropdownMenu variant="inline" gitHubPath={gitHubPath} markdownPath={docMarkdownPath} />
+          {actionsDivider}
+        </>
+      )}
+      {docMarkdownPath && (
+        <>
+          <Link
+            className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
+            to={docMarkdownPath}
+          >
+            <MarkdownViewIcon />
+            View as Markdown
+          </Link>
+          {actionsDivider}
+        </>
+      )}
+      <AgentSetupButton agentPrompt={agentPrompt} />
+    </div>
   );
 
   return (
@@ -146,23 +190,25 @@ const Post = ({
                 </div>
               </>
             ) : (
-              <>
-                <div
-                  className={cn(
-                    // The title block spans the full content width. It no longer
-                    // reserves room for a right-aligned Copy page button (that
-                    // moved into the action row below), so the H1 and subtitle no
-                    // longer wrap early at a narrow max-width.
-                    !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
-                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
-                    titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
-                  )}
-                >
-                  {eyebrow && (
-                    <div className="mb-3.5 text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
-                      {eyebrow}
-                    </div>
-                  )}
+              // Title block: H1, subtitle, and the actions row as the last child,
+              // over a bottom rule. Full content width (no narrow max-width), so
+              // the H1 and subtitle no longer wrap early.
+              <div
+                className={cn(
+                  'grid gap-2.5',
+                  !isDocsIndex &&
+                    'mb-3 border-b border-gray-new-90 pb-[18px] dark:border-gray-new-15',
+                  !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
+                  eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
+                  titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
+                )}
+              >
+                {eyebrow && (
+                  <div className="text-xs leading-none font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-70">
+                    {eyebrow}
+                  </div>
+                )}
+                <div>
                   {titleLeading ? (
                     <div className="flex items-center gap-3">
                       {titleLeading}
@@ -174,40 +220,20 @@ const Post = ({
                   {tag && (
                     <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
                   )}
-                  {subtitle && (
-                    <p
-                      className={cn(
-                        eyebrow
-                          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
-                          : 'mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg'
-                      )}
-                    >
-                      {subtitle}
-                    </p>
-                  )}
                 </div>
-                {!isChangelog && !isDocsIndex && (
-                  <div className="mt-6 flex flex-wrap items-center gap-2 border-b border-gray-new-90 pb-5 dark:border-gray-new-15 md:mt-5">
-                    {formattedUpdatedOn && (
-                      <span className="text-sm leading-snug text-[#6B6F77] dark:text-gray-new-60">
-                        Updated {formattedUpdatedOn}
-                      </span>
+                {subtitle && (
+                  <p
+                    className={cn(
+                      eyebrow
+                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-gray-new-50 dark:text-gray-new-70 md:text-[28px]!'
+                        : 'max-w-[64ch] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:text-lg'
                     )}
-                    {/* ml-auto keeps the actions right-aligned whether or not the
-                        date is present, so a date-less page has no empty gap. */}
-                    <div className="ml-auto flex items-center gap-2">
-                      <AgentSetupButton agentPrompt={agentPrompt} />
-                      {!hideCopyPage && (
-                        <DropdownMenu
-                          className="mt-0! sm:mt-0"
-                          gitHubPath={gitHubPath}
-                          markdownPath={markdownPath}
-                        />
-                      )}
-                    </div>
-                  </div>
+                  >
+                    {subtitle}
+                  </p>
                 )}
-              </>
+                {pageActionsRow}
+              </div>
             )}
             {aboveContent}
             <Content
@@ -254,7 +280,6 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
     tagTheme: PropTypes.string,
-    updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     titleWidth: PropTypes.oneOf(['530', null]),
     contentLayout: PropTypes.oneOf(['split', null]),

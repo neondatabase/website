@@ -60,17 +60,3 @@ describe('Post hideCopyPage', () => {
     expect(screen.queryByTestId('copy-page-menu')).not.toBeInTheDocument();
   });
 });
-
-describe('Post updated date', () => {
-  it('renders the "Updated" stamp in the title row when updatedOn is set', () => {
-    renderPost({ updatedOn: '2026-09-16T12:00:00.000Z' });
-
-    expect(screen.getByText(/Updated Sep 16, 2026/)).toBeInTheDocument();
-  });
-
-  it('omits the "Updated" stamp when updatedOn is absent', () => {
-    renderPost({});
-
-    expect(screen.queryByText(/^Updated /)).not.toBeInTheDocument();
-  });
-});

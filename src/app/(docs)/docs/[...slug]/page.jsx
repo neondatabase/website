@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH, isUnusedOrSharedContent } from 'constants/content';
-import DOCS_LAST_MODIFIED from 'constants/docs-last-modified';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
@@ -104,11 +103,6 @@ const DocPost = async (props) => {
   const { data, content } = post;
   const tableOfContents = getTableOfContents(content);
 
-  // Show an accurate "Updated" date on every docs article. Prefer the page's
-  // own auto-stamped `updatedOn` frontmatter; fall back to the committed
-  // last-modified map (the file's last git commit) for pages that lack it.
-  const updatedOn = data.updatedOn || DOCS_LAST_MODIFIED[currentSlug] || null;
-
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -127,7 +121,7 @@ const DocPost = async (props) => {
       />
       <Post
         content={content}
-        data={{ ...data, updatedOn }}
+        data={data}
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}

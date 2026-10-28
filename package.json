@@ -25,7 +25,6 @@
     "sync:skills": "node src/scripts/sync-skills.js",
     "generate:skills": "node src/scripts/generate-skills-index.js",
     "generate:static-md-manifest": "node src/scripts/generate-static-md-manifest.js",
-    "generate:docs-last-modified": "node src/scripts/generate-docs-last-modified.js",
     "update:skills": "npm run sync:skills && npm run generate:skills && npm run generate:static-md-manifest",
     "generate:api-ref": "node scripts/generate-api-ref.mjs",
     "check:api-ref-generated": "node scripts/check-api-ref-generated.mjs",

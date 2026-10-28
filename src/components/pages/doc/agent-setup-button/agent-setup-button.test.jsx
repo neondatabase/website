@@ -32,7 +32,7 @@ describe('AgentSetupButton', () => {
   it('copies the base prompt as plain text when there is no page-specific prompt', async () => {
     render(<AgentSetupButton />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Agent setup' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Set up agent' }));
 
     await waitFor(() => expect(writeText).toHaveBeenCalledWith(BASE_AGENT_PROMPT));
     // writeText receives a plain string (text/plain), never an HTML payload or a DOM node.
@@ -43,7 +43,7 @@ describe('AgentSetupButton', () => {
   it('appends the page-specific prompt with a single leading space', async () => {
     render(<AgentSetupButton agentPrompt="Then connect this Node.js app." />);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Agent setup' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Set up agent' }));
 
     await waitFor(() =>
       expect(writeText).toHaveBeenCalledWith(`${BASE_AGENT_PROMPT} Then connect this Node.js app.`)
@@ -53,7 +53,7 @@ describe('AgentSetupButton', () => {
   it('exposes the helper title so readers know what it copies', () => {
     render(<AgentSetupButton />);
 
-    expect(screen.getByRole('button', { name: 'Agent setup' })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: 'Set up agent' })).toHaveAttribute(
       'title',
       'Copy a prompt that sets up Neon in your coding agent'
     );
