@@ -10,7 +10,7 @@ vi.mock('next/image', () => ({ default: () => <span data-testid="pattern-image" 
 vi.mock('components/shared/button', () => ({
   default: ({ children, ...props }) => <button {...props}>{children}</button>,
 }));
-vi.mock('components/shared/code-block-wrapper/images/copy.inline.svg', () => ({
+vi.mock('icons/home/copy.inline.svg', () => ({
   default: (props) => <svg data-testid="copy-icon" {...props} />,
 }));
 vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
@@ -182,6 +182,6 @@ describe('CopyPrompt (legacy mode)', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Copied' })).toBeVisible());
     expect(writeText).toHaveBeenCalledWith('# Prompt body');
     expect(screen.getByTestId('copied-icon')).toBeInTheDocument();
-    expect(screen.getByTestId('copy-icon').parentElement).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.queryByTestId('copy-icon')).not.toBeInTheDocument();
   });
 });

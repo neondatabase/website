@@ -6,8 +6,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
-import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
 import CopiedIcon from 'icons/home/copied.inline.svg';
+import CopyIcon from 'icons/home/copy.inline.svg';
 import patternSvg from 'images/pages/docs/copy-prompt/pattern.svg';
 import { cn } from 'utils/cn';
 import getNodeText from 'utils/get-node-text';
@@ -149,35 +149,24 @@ const CopyPrompt = (props) => {
         <Button
           className={cn(
             'relative z-10 inline-flex items-center gap-2 px-6 py-3.5 text-base leading-none font-normal tracking-tight dark:font-medium',
-            copied && 'bg-gray-new-20 text-white hover:bg-gray-new-20'
+            copied && 'hover:bg-black-pure dark:hover:bg-white'
           )}
-          theme={copied ? null : 'white-filled-multi'}
+          theme="white-filled-multi"
           aria-label={copied ? 'Copied' : buttonText}
           aria-live="polite"
           onClick={handleCopy}
         >
-          <span className="grid">
-            <span
-              className={cn(
-                'col-start-1 row-start-1 flex items-center justify-center gap-2',
-                copied && 'invisible'
-              )}
-              aria-hidden={copied}
-            >
-              <CopyIcon className="size-3.5" aria-hidden="true" />
-              {buttonText}
-            </span>
-            <span
-              className={cn(
-                'col-start-1 row-start-1 flex items-center justify-center gap-2',
-                !copied && 'invisible'
-              )}
-              aria-hidden={!copied}
-            >
+          {copied ? (
+            <>
               Copied
               <CopiedIcon className="size-3.5" aria-hidden="true" />
-            </span>
-          </span>
+            </>
+          ) : (
+            <>
+              {buttonText}
+              <CopyIcon className="size-3.5" aria-hidden="true" />
+            </>
+          )}
         </Button>
       </figure>
     );
