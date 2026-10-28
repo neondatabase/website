@@ -101,6 +101,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider
         authClient={authClient}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
         navigate={({ to }) => {
           const path = getSafeRedirectTo(to, window.location.origin);
           window.location.assign(path.startsWith('//') ? '/' : path);

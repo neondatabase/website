@@ -537,6 +537,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider
         authClient={authClient}
+        emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
         navigate={({ to }) => {
           const path = getSafeRedirectTo(to, window.location.origin);
           window.location.assign(path.startsWith('//') ? '/' : path);
@@ -562,18 +563,20 @@ To change how the auth UI looks, edit the shadcn/ui theme or the copied componen
 
 ### Remove auth handler route
 
-Delete any `StackHandler` routes. Create pages for sign-in and sign-up using `<Auth>`.
+Delete any `StackHandler` routes. Add one route for every auth path, for example `/auth/:path`, that renders `<Auth>`. The user menu's **Sign Out** and the password reset links open `/auth/*` paths.
 
-```tsx filename="src/pages/SignIn.tsx"
+```tsx filename="src/pages/AuthPage.tsx"
+import { useParams } from 'react-router-dom';
 import { Auth } from '@/components/auth/auth';
 
-export default function SignIn() {
-  return <Auth view="signIn" />;
+export default function AuthPage() {
+  const { path } = useParams();
+  return <Auth path={path} />;
 }
 ```
 
 **What changed**  
-Routing is fully controlled by your SPA, and the `Auth` component renders the view you pass it.
+Routing is fully controlled by your SPA, and the `Auth` component renders the view for each path.
 
 ### React Router integration
 
@@ -591,6 +594,7 @@ function App() {
   return (
     <AuthProvider
       authClient={authClient}
+      emailAndPassword={{ requireEmailVerification: false }} // match your branch's setting
       navigate={({ to, replace }) => {
         const path = getSafeRedirectTo(to, window.location.origin);
         navigate(path.startsWith('//') ? '/' : path, { replace });

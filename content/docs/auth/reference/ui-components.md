@@ -116,6 +116,13 @@ Render `<Toaster />` once: the components report errors as toasts. In a single-p
 
 After sign-in, the components call `navigate` with the `?redirectTo=` value from the URL. Check it before you navigate, as in the example above, so a link like `/auth/sign-in?redirectTo=https://example.com` can't send a signed-in user to another site. `getSafeRedirectTo` returns `/` for other origins, but it can return a protocol-relative path such as `//example.com` for `/a/..//example.com`, so also reject a result that starts with `//`.
 
+The `/auth/redirect` view navigates without `navigate`. Add the same check to the copied `components/auth/auth-redirect.tsx`:
+
+```tsx filename="components/auth/auth-redirect.tsx"
+window.location.replace(action.to); // [!code --]
+window.location.replace(action.to.startsWith('//') ? '/' : action.to); // [!code ++]
+```
+
 ## Components
 
 | Component      | Purpose                                                                                                      |

@@ -190,7 +190,9 @@ function RouterLink({
 <TwoColumnLayout.Step title="Create the Auth page">
 <TwoColumnLayout.Block>
 
-Create a route to handle authentication views (sign in, sign up, etc.). Create `src/routes/auth.$path.tsx`:
+Create a route to handle authentication views (sign in, sign up, etc.). Create `src/routes/auth.$path.tsx`.
+
+This route also serves `/auth/redirect`, which navigates on its own. Add the redirect check from [Validate redirect targets](/docs/auth/reference/ui-components#validate-redirect-targets) to `src/components/auth/auth-redirect.tsx`.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
