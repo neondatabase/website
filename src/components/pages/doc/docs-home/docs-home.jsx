@@ -227,7 +227,7 @@ const DocsHome = () => (
               Neon Docs
             </h1>
             <p className="m-0 text-lg leading-normal tracking-[-0.025em] [text-wrap:pretty] text-gray-new-30 dark:text-gray-new-80 md:text-base">
-              Postgres, Auth, Storage, Functions, AI, and Realtime on one branch.
+              Learn to build and scale apps with Neon&apos;s complete backend platform.
             </p>
           </div>
           <div className="flex flex-wrap items-start gap-x-6 gap-y-2 text-base">
@@ -250,9 +250,9 @@ const DocsHome = () => (
         <DocsHomeComposer />
       </section>
 
-      {/* What do you want to add to your app? */}
+      {/* Start building */}
       <Section
-        heading="What do you want to add to your app?"
+        heading="Start building"
         description="Every capability runs on the same Postgres branch."
       >
         <div className="grid gap-5">

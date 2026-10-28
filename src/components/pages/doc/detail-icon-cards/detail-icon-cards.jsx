@@ -402,8 +402,8 @@ const DetailIconCards = ({
                     !withNumbers && cardTheme.description,
                     appearance === 'home' &&
                       (isLockup
-                        ? 'text-[15px] leading-[21px] text-gray-new-45 dark:text-gray-new-60'
-                        : 'min-h-[23px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-60')
+                        ? 'min-h-[42px] text-[15px] leading-[21px] text-gray-new-45 dark:text-gray-new-60'
+                        : 'min-h-[45px] text-[15px] leading-[22.5px] text-gray-new-30 dark:text-gray-new-60')
                   )}
                 >
                   {description}
