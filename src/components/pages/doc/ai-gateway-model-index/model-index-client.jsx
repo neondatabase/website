@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
+  createParser,
   parseAsArrayOf,
   parseAsBoolean,
   parseAsString,
@@ -48,23 +49,39 @@ const COLUMNS = [
   { key: 'openWeights', label: 'License', sortable: true },
 ];
 
+const parseAsSortKey = parseAsStringLiteral(
+  COLUMNS.filter((column) => column.sortable).map((column) => column.key)
+);
+const parseAsSortDir = parseAsStringLiteral(['asc', 'desc']);
+
+// ?sort=costInput:asc <=> { key: 'costInput', dir: 'asc' }
+const parseAsSort = createParser({
+  parse(query) {
+    const [key = '', dir = ''] = query.split(':');
+    const sortKey = parseAsSortKey.parse(key);
+    if (sortKey === null) return null;
+    return { key: sortKey, dir: parseAsSortDir.parse(dir) ?? 'asc' };
+  },
+  serialize(value) {
+    return `${value.key}:${value.dir}`;
+  },
+  eq(a, b) {
+    return a.key === b.key && a.dir === b.dir;
+  },
+});
+
 const FILTER_PARSERS = {
   search: parseAsString.withDefault(''),
   mode: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
   providers: parseAsArrayOf(parseAsString).withDefault([]),
   openWeightsOnly: parseAsBoolean.withDefault(false),
-  sortKey: parseAsStringLiteral(
-    COLUMNS.filter((column) => column.sortable).map((column) => column.key)
-  ).withDefault('releaseDate'),
-  sortDir: parseAsStringLiteral(['asc', 'desc']).withDefault('desc'),
+  sort: parseAsSort.withDefault({ key: 'releaseDate', dir: 'desc' }),
 };
 
 const FILTER_URL_KEYS = {
   search: 'q',
   mode: 'type',
   openWeightsOnly: 'openWeights',
-  sortKey: 'sort',
-  sortDir: 'dir',
 };
 
 const DEFAULT_FILTERS = Object.fromEntries(
@@ -339,8 +356,7 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
   const searchInputRef = useRef(null);
   const searchId = useId();
   const [filtersHeight, setFiltersHeight] = useState(0);
-  const { search, mode, openWeightsOnly, sortKey, sortDir } = filters;
-  const sort = useMemo(() => ({ key: sortKey, dir: sortDir }), [sortKey, sortDir]);
+  const { search, mode, openWeightsOnly, sort } = filters;
   const setSearch = (value) => setFilters({ search: value });
   const setOpenWeightsOnly = (value) => setFilters({ openWeightsOnly: value });
 
@@ -387,9 +403,9 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
 
   const onSort = (key) => {
     setFilters(
-      sortKey === key
-        ? { sortDir: sortDir === 'asc' ? 'desc' : 'asc' }
-        : { sortKey: key, sortDir: 'asc' }
+      sort.key === key
+        ? { sort: { key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } }
+        : { sort: { key, dir: 'asc' } }
     );
   };
 
@@ -733,8 +749,10 @@ ModelIndexView.propTypes = {
     mode: PropTypes.string.isRequired,
     providers: PropTypes.arrayOf(PropTypes.string).isRequired,
     openWeightsOnly: PropTypes.bool.isRequired,
-    sortKey: PropTypes.string.isRequired,
-    sortDir: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    sort: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      dir: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    }).isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
 };
