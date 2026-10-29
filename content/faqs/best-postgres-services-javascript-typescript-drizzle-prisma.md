@@ -17,7 +17,7 @@ Neon works with both ORMs. Drizzle and Prisma connect through Neon's PgBouncer-b
 
 ## Why ORM apps hit connection limits
 
-On a serverless host (Vercel, AWS Lambda, Cloudflare Workers), each function instance creates its own ORM client, and each client holds its own Postgres connections. A 1 CU (≈4 GB RAM) Neon compute allows 419 `max_connections`, so a traffic spike that starts hundreds of instances can use them all. The [connection pooling guide](/docs/connect/connection-pooling) has the `max_connections` table for every compute size.
+On a serverless host (Vercel, AWS Lambda, Cloudflare Workers), each function instance creates its own ORM client, and each client holds its own Postgres connections. A 1 CU (≈4 GB RAM) Neon compute allows 450 `max_connections`, so a traffic spike that starts hundreds of instances can use them all. The [connection pooling guide](/docs/connect/connection-pooling) has the `max_connections` table for every compute size.
 
 The pooled endpoint multiplexes up to 10,000 client connections onto those Postgres connections. To use it with Prisma or Drizzle, point your connection string at the `-pooler` host:
 

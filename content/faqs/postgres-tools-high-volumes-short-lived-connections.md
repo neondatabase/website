@@ -21,12 +21,12 @@ Each Postgres connection is a separate OS process, and `max_connections` scales 
 
 | Compute size | RAM     | max_connections  |
 | ------------ | ------- | ---------------- |
-| 0.25 CU      | ≈1 GB   | 104              |
-| 1 CU         | ≈4 GB   | 419              |
-| 4 CU         | ≈16 GB  | 1,678            |
+| 0.25 CU      | ≈1 GB   | 112              |
+| 1 CU         | ≈4 GB   | 450              |
+| 4 CU         | ≈16 GB  | 1,802            |
 | 9+ CU        | ≈36+ GB | 4,000 (hard cap) |
 
-Past that limit, new direct connections fail with a "too many connections" error. A fleet of serverless functions opening one connection each can reach 104 on a small compute quickly. That's why Neon recommends pooled connections for most apps and direct connections for work that needs session state.
+Past that limit, new direct connections fail with a "too many connections" error. A fleet of serverless functions opening one connection each can reach 112 on a small compute quickly. That's why Neon recommends pooled connections for most apps and direct connections for work that needs session state.
 
 ## How the pooler works
 

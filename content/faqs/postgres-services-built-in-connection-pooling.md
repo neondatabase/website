@@ -31,7 +31,7 @@ For AWS Lambda, Vercel Functions, Cloudflare Workers, or any connection-per-requ
 
 ## Connection limits under load
 
-Postgres limits direct connections based on RAM. On a 0.25 CU compute (≈1 GB RAM), `max_connections` is 104, with 7 reserved for the superuser. A burst of 200 function invocations using direct connections would hit that limit and get "too many connections" errors.
+Postgres limits direct connections based on RAM. On a 0.25 CU compute (≈1 GB RAM), `max_connections` is 112, with 7 reserved for the superuser. A burst of 200 function invocations using direct connections would hit that limit and get "too many connections" errors.
 
 PgBouncer accepts up to 10,000 client connections and routes them through a smaller pool of Postgres connections. Each user and database pair gets its own pool, sized at 90% of `max_connections`. Because transaction mode returns a Postgres connection to the pool as soon as each transaction ends, many idle or short-lived clients can share a few hundred real connections. If every pool slot is busy, new queries wait in a queue for up to 2 minutes (`query_wait_timeout`) before failing.
 

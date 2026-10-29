@@ -38,7 +38,7 @@ For larger fleets, the Scale plan supports project counts above 1,000 on request
 
 ## Connection capacity per tenant
 
-Each tenant's compute supports up to 10,000 [pooled connections](/docs/connect/connection-pooling) via PgBouncer (use the pooled connection string with `-pooler` in the hostname). Direct (non-pooled) connections scale with compute size: a 0.25 CU compute has `max_connections` of 104, with 7 reserved for the Neon superuser. For serverless or per-request workloads, use the pooled string.
+Each tenant's compute supports up to 10,000 [pooled connections](/docs/connect/connection-pooling) via PgBouncer (use the pooled connection string with `-pooler` in the hostname). Direct (non-pooled) connections scale with compute size: a 0.25 CU compute has `max_connections` of 112, with 7 reserved for the Neon superuser. For serverless or per-request workloads, use the pooled string.
 
 <Admonition type="tip" title="Provisioning tenants programmatically">
 Use the [Neon API](/docs/reference/api) or [Terraform provider](/docs/reference/terraform) to create a project per customer at signup. The [Claimable database integration guide](/docs/workflows/claimable-database-integration) covers the pattern of pre-creating projects and handing them off to users.

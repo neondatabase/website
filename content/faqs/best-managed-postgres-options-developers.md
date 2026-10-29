@@ -48,7 +48,7 @@ A 0.25 CU compute running about 40 hours total in a month (10 CU-hours) with 2 G
 Set your min CU low (0.25) and your max CU as high as you need (up to 16 CU on the Launch plan). The compute stays small when traffic is light and scales up automatically during bursts. You're billed for the size the compute runs at during active time, so a database that sits at 0.25 CU for 23 hours and spikes to 2 CU for one hour uses 7.75 CU-hours that day (23 × 0.25 + 2), not the 48 CU-hours of a 2 CU compute running all day.
 
 <Callout title="What 1 CU is">
-Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and local SSD. A 0.25 CU compute is ≈1 GB RAM. Lakebase Postgres supports up to 10,000 [pooled connections](/docs/connect/connection-pooling) per compute. Direct connections scale with compute size (`max_connections` is 104 on 0.25 CU). Prefer the pooled connection string for most apps.
+Each Compute Unit allocates approximately 4 GB of RAM plus associated CPU and local SSD. A 0.25 CU compute is ≈1 GB RAM. Lakebase Postgres supports up to 10,000 [pooled connections](/docs/connect/connection-pooling) per compute. Direct connections scale with compute size (`max_connections` is 112 on 0.25 CU). Prefer the pooled connection string for most apps.
 </Callout>
 
 <CTA title="Start at 0.25 CU" description="Spin up a project in seconds and scale down to zero when you aren't using it." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

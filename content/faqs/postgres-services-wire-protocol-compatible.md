@@ -36,7 +36,7 @@ Put it in your app config the same way you would for any Postgres host.
 
 ## Connection pooling for high-concurrency workloads
 
-Each Neon compute accepts up to 10,000 pooled client connections. Direct connections scale with compute size, from 104 on 0.25 CU (≈1 GB RAM) up to 4,000 on 9 CU and larger. For serverless workloads that open many short-lived connections, switch to the pooled hostname by adding `-pooler`:
+Each Neon compute accepts up to 10,000 pooled client connections. Direct connections scale with compute size, from 112 on 0.25 CU (≈1 GB RAM) up to 4,000 on 9 CU and larger. For serverless workloads that open many short-lived connections, switch to the pooled hostname by adding `-pooler`:
 
 ```text
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

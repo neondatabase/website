@@ -49,7 +49,7 @@ For near-zero-downtime moves, set up [logical replication](/docs/guides/logical-
 
 ## What changes when you switch
 
-- **Prefer pooled connections for apps.** Lakebase Postgres supports up to 10,000 pooled connections per compute via PgBouncer. Direct connections scale with compute size (`max_connections` is 104 on 0.25 CU) and are for workloads that can't use a pooler, such as migrations and logical replication.
+- **Prefer pooled connections for apps.** Lakebase Postgres supports up to 10,000 pooled connections per compute via PgBouncer. Direct connections scale with compute size (`max_connections` is 112 on 0.25 CU) and are for workloads that can't use a pooler, such as migrations and logical replication.
 - **Branching replaces staging snapshots.** Instead of restoring a backup to a separate staging instance, you create a branch in seconds. See [Branching](/docs/introduction/branching).
 - **Scale-to-zero is on by default.** Dev and preview environments stop billing compute while idle. For production, you can disable it on the Launch and Scale plans. Storage continues to bill either way.
 

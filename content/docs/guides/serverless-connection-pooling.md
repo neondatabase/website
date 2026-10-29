@@ -4,7 +4,7 @@ subtitle: Manage connection lifecycles and prevent connection exhaustion in high
 summary: >-
    Learn how to manage database connection lifecycles and prevent connection exhaustion when using Neon from highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel.
 enableTableOfContents: true
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-10-29T21:25:47.650Z'
 ---
 
 Highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel can scale compute from zero to hundreds of concurrent instances within seconds. While Neon’s [lakebase architecture](/docs/introduction/architecture-overview) is designed for dynamic workloads, rapidly scaling out hundreds of workers can overwhelm your database unless connection lifecycles and local pool sizes are carefully managed.
@@ -298,16 +298,16 @@ The `max_connections` limit and therefore your `default_pool_size` depends on yo
 
 | Compute size (CU) | RAM         | max_connections | default_pool_size (90%) |
 | :---------------- | :---------- | :-------------- | :---------------------- |
-| 0.25              | 1 GB        | 104             | 93                      |
-| 0.50              | 2 GB        | 209             | 188                     |
-| 1                 | 4 GB        | 419             | 377                     |
-| 2                 | 8 GB        | 839             | 755                     |
-| 3                 | 12 GB       | 1258            | 1132                    |
-| 4                 | 16 GB       | 1678            | 1510                    |
+| 0.25              | 1 GB        | 112             | 100                     |
+| 0.50              | 2 GB        | 225             | 202                     |
+| 1                 | 4 GB        | 450             | 405                     |
+| 2                 | 8 GB        | 901             | 810                     |
+| 3                 | 12 GB       | 1351            | 1215                    |
+| 4                 | 16 GB       | 1802            | 1621                    |
 | 9 – 56            | 36 – 224 GB | 4000 (capped)   | 3600                    |
 
 <Admonition type="note">
-Seven connections are reserved for the Neon superuser account. On a 0.25 CU compute, this leaves 97 connections available to your application (104 − 7) via direct connections. The pooled endpoint's `default_pool_size` already reserves similar headroom.
+Seven connections are reserved for the Neon superuser account. On a 0.25 CU compute, this leaves 105 connections available to your application (112 − 7) via direct connections. The pooled endpoint's `default_pool_size` already reserves similar headroom.
 </Admonition>
 
 For the complete up-to-date table including intermediate compute sizes, see [Postgres settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).

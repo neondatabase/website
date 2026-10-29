@@ -29,12 +29,12 @@ Direct (non-pooled) connections are limited by `max_connections`, which scales w
 
 | Compute size        | max_connections |
 | ------------------- | --------------- |
-| 0.25 CU (≈1 GB RAM) | 104             |
-| 1 CU (≈4 GB RAM)    | 419             |
-| 4 CU (≈16 GB RAM)   | 1,678           |
+| 0.25 CU (≈1 GB RAM) | 112             |
+| 1 CU (≈4 GB RAM)    | 450             |
+| 4 CU (≈16 GB RAM)   | 1,802           |
 | 9 to 56 CU          | 4,000           |
 
-Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 97 direct connections for your application. Without the pooler, 98 function instances each holding one connection would exceed that.
+Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 105 direct connections for your application. Without the pooler, 106 function instances each holding one connection would exceed that.
 
 ## Option 2: The serverless driver
 

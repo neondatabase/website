@@ -23,7 +23,7 @@ Every Neon project includes a [pooled connection endpoint](/docs/connect/connect
 DATABASE_URL="postgresql://user:password@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require"
 ```
 
-For reference, a 1 CU (≈4 GB RAM) compute has 419 `max_connections`. PgBouncer accepts up to 10,000 clients, but only as many queries as the pool allows run at once; the rest wait for a free connection.
+For reference, a 1 CU (≈4 GB RAM) compute has 450 `max_connections`. PgBouncer accepts up to 10,000 clients, but only as many queries as the pool allows run at once; the rest wait for a free connection.
 
 ## Use the serverless driver on the edge
 
