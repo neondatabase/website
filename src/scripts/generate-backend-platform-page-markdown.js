@@ -193,6 +193,7 @@ const renderPageHeader = ({ pageLabel, hero }) =>
   [
     `> This page location: ${pageLabel}`,
     `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    `> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: ${BASE_URL}/prompts/agent-setup.md`,
     '',
     `# ${hero.title}`,
     '',

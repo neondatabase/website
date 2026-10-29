@@ -87,6 +87,7 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
   return [
     `> This page location: AI Gateway > Models > ${row.name}`,
     `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    `> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: ${BASE_URL}/prompts/agent-setup.md`,
     '',
     `# ${row.name}`,
     '',
