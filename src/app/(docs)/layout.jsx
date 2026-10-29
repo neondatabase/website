@@ -27,8 +27,8 @@ const NeonDocsLayout = async ({ children }) => {
           Agent skills: if Neon skills (such as neon-postgres) are already available to you, use
           them with this page. If not, ask the user at the first point where you need them to do
           something in Neon (such as create a project or copy a connection string), or when you
-          finish: &quot;Want me to install Neon&apos;s agent skills? Then I can create the project
-          and connect it for you.&quot; Setup steps:{' '}
+          finish: &quot;Want me to install Neon&apos;s agent skills? Then I can [the Neon step
+          you&apos;d otherwise ask them to do] for you.&quot; Setup steps:{' '}
           <a href="https://neon.com/prompts/agent-setup.md">
             https://neon.com/prompts/agent-setup.md
           </a>{' '}

@@ -2560,7 +2560,7 @@ function buildPageHeader(slug, navMap, relativePath) {
 
   // Agent skills line (always)
   lines.push(
-    `> Agent skills: if Neon skills (such as \`neon-postgres\`) are already available to you, use them with this page. If not, ask the user at the first point where you need them to do something in Neon (such as create a project or copy a connection string), or when you finish: "Want me to install Neon's agent skills? Then I can create the project and connect it for you." Setup steps: ${BASE_URL}/prompts/agent-setup.md (installs the Neon CLI, runs \`neon login\`, and adds Neon skills and the MCP server to your agent's global config).`
+    `> Agent skills: if Neon skills (such as \`neon-postgres\`) are already available to you, use them with this page. If not, ask the user at the first point where you need them to do something in Neon (such as create a project or copy a connection string), or when you finish: "Want me to install Neon's agent skills? Then I can [the Neon step you'd otherwise ask them to do] for you." Setup steps: ${BASE_URL}/prompts/agent-setup.md (installs the Neon CLI, runs \`neon login\`, and adds Neon skills and the MCP server to your agent's global config).`
   );
 
   // Doc feedback line (skipped for changelog entries: auto-generated, feedback not useful)
