@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-10-23T16:17:19.164Z'
+updatedOn: '2026-10-29T21:01:06.492Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -111,7 +111,7 @@ When you exceed a limit, the API returns **HTTP 429**:
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway daily token limit exceeded"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 

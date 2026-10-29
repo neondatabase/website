@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:00:38.670Z'
+updatedOn: '2026-10-29T21:01:06.492Z'
 ---
 
 ## Authentication errors
@@ -125,18 +125,24 @@ An account-wide TPM limit:
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account token rate limit exceeded (<N> tokens per minute across all models in this region). Retry after the current minute resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've exceeded your AI Gateway account input token limit (<N> input tokens per minute across all models). You can retry once the current minute resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 
-A per-model TPM limit names the model instead: `ai gateway account token rate limit exceeded for model "<model-id>" (<N> tokens per minute in this region). Retry after the current minute resets, ...`
+A per-model TPM limit names the model instead. Only the `message` value changes:
+
+```text
+You've exceeded your AI Gateway input token limit for model "<model-id>" (<N> input tokens per minute). You can retry once the current minute resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support
+```
+
+Input and output tokens are limited separately. When the output limit is hit, the same messages say `output` instead of `input`.
 
 A daily spend limit:
 
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account daily spend limit exceeded. Retry after the daily spend limit resets, or request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 
@@ -183,7 +189,7 @@ Quota blocks and all upstream (non-2xx) errors use a flat envelope, with the ups
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway account daily spend limit exceeded. Request a higher limit through Neon support: https://neon.com/docs/introduction/support"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 

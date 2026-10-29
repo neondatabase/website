@@ -6,7 +6,7 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-29T17:20:24.000Z'
+updatedOn: '2026-10-29T21:01:06.492Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
@@ -43,9 +43,9 @@ The following limit applies per account:
 | ----------------------- | ------- |
 | Tokens per minute (TPM) | 200,000 |
 
-If you hit the limit, you'll receive a `429 Too Many Requests` response with a message like `ai gateway per-minute token limit exceeded for model "<model-id>"`. Requests resume when the rate limit window resets.
+If you hit the limit, you'll receive a `429 Too Many Requests` response with a message that starts with `You've exceeded your AI Gateway input token limit for model "<model-id>"`. Requests resume when the rate limit window resets.
 
-The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
 The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
 
