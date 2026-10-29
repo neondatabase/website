@@ -10,7 +10,7 @@ summary: >-
   Security policies via the Data API. All auth state lands directly in your
   Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-09-16T15:38:57.808Z'
+updatedOn: '2026-10-29T20:47:51.594Z'
 ---
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
@@ -50,7 +50,7 @@ const { data, error } = await client.auth.signIn.email({
 });
 ```
 
-The SDK posts to `{NEON_AUTH_URL}/auth/sign-in/email`. The Auth service validates credentials against `neon_auth.account`, creates a session in `neon_auth.session`, and returns the session cookie with user data.
+The SDK posts to `{NEON_AUTH_URL}/sign-in/email`. The Auth service validates credentials against `neon_auth.account`, creates a session in `neon_auth.session`, and returns the session cookie with user data.
 
 **Response you receive:**
 
@@ -132,7 +132,7 @@ const { data, error } = await client.auth.signUp.email({
 });
 ```
 
-The SDK posts to `{NEON_AUTH_URL}/auth/sign-up/email`. The Auth service creates a new row in `neon_auth.user`, stores hashed credentials in `neon_auth.account`, and returns user data. If email verification is required, it creates a verification token in `neon_auth.verification` and may delay session creation until verification.
+The SDK posts to `{NEON_AUTH_URL}/sign-up/email`. The Auth service creates a new row in `neon_auth.user`, stores hashed credentials in `neon_auth.account`, and returns user data. If email verification is required, it creates a verification token in `neon_auth.verification` and may delay session creation until verification.
 
 <Admonition type="note">
 By default, anyone can sign up for your application. To add an additional verification layer, enable email verification (see [Email Verification](/docs/auth/guides/email-verification)). Built-in signup restrictions are coming soon.
