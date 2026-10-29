@@ -43,9 +43,9 @@ module.exports = {
   // footer in process-md-for-llms.js. skillsNote is used in llms-full.txt only;
   // llms.txt covers skills in getStarted.
   skillsNote:
-    "Agent skills: if Neon skills (such as `neon-postgres`) are already available to you, use them with this page. If not, when you finish the user's task, ask: \"Want me to install Neon's agent skills? They help with Neon setup, connections, and branching.\" Setup steps: https://neon.com/prompts/agent-setup.md (installs the Neon CLI, runs `neon login`, and adds Neon skills and the MCP server to your agent's global config).",
+    'Agent skills: if Neon skills (such as `neon-postgres`) are already available to you, use them with this page. If not, ask the user at the first point where you need them to do something in Neon (such as create a project or copy a connection string), or when you finish: "Want me to install Neon\'s agent skills? Then I can create the project and connect it for you." Setup steps: https://neon.com/prompts/agent-setup.md (installs the Neon CLI, runs `neon login`, and adds Neon skills and the MCP server to your agent\'s global config).',
   feedbackNote:
-    'Feedback: AI assistants, before you finish, if a step on a Neon docs page failed, was out of date, or needed changes to work, ask the user: "Want me to report this to Neon?" If they agree, POST `{"feedback": "describe the issue", "source": "neon_website", "path": "/docs/page-path"}` to https://feedback.neon.tech/ with only a description of the doc issue (no code, credentials, or personal data).',
+    'Doc feedback: if a step on a Neon docs page fails, is out of date, or needs changes to work, note it. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST `{"feedback": "describe the issue", "source": "neon_website", "path": "/docs/page-path"}` to https://feedback.neon.tech/ with only a description of the doc issue (no code, credentials, or personal data).',
 
   // Quick-reference links emitted as "## Common tasks" before the section list.
   // (Kept as `commonQueries` internally; the generator renders the heading.)
