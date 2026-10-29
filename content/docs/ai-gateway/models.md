@@ -82,7 +82,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | TypeSafe AI (decision models)                  | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.
