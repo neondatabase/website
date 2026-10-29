@@ -20,9 +20,9 @@ module.exports = {
     'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Realtime, Data API, Functions, Object Storage, AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, with native branching, realtime and a fully reactive DX and works with any language, framework, or ORM that supports Postgres.',
 
   getStarted: [
-    '**Get started.** Sign up for Neon or sign into an existing account. If the user cannot create an account right now, follow [Claimable Neon](https://neon.com/auth.md) to provision a Postgres project without signup. A human claims it later.',
+    '**Get started.** The user needs a Neon account. If they cannot create one right now, [Claimable Neon](https://neon.com/auth.md) provisions a Postgres project without signup, and the user claims it later.',
     '',
-    'If a Neon account is available, set things up locally by installing the Neon CLI and running the project init command to install the agent skills and creating/linking a Neon project:',
+    'With an account, these commands install the Neon CLI, sign in, and run `neon init`, which installs the agent skills and creates or links a Neon project. Check with the user before running them:',
     '',
     '```bash',
     'npm i -g neon',
@@ -38,6 +38,14 @@ module.exports = {
     'Append `.md` to any doc URL or set `Accept: text/markdown`.',
     'This is the primary index. Sections with many pages show key pages and link to full sub-indexes.',
   ].join(' '),
+
+  // Agent skills and feedback notes, worded to match the per-page header and
+  // footer in process-md-for-llms.js. skillsNote is used in llms-full.txt only;
+  // llms.txt covers skills in getStarted.
+  skillsNote:
+    "Neon offers agent skills for AI coding assistants: https://neon.com/prompts/agent-setup.md. They change your assistant's setup, so check with the user before installing them.",
+  feedbackNote:
+    'Feedback: to report an error in these docs, POST `{"feedback": "describe the issue", "source": "neon_website", "path": "/docs/page-path"}` to https://feedback.neon.tech/. AI assistants: ask the user first and send only a description of the issue.',
 
   // Quick-reference links emitted as "## Common tasks" before the section list.
   // (Kept as `commonQueries` internally; the generator renders the heading.)

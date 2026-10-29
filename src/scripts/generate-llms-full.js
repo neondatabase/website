@@ -101,6 +101,9 @@ function buildHeader() {
     '',
     `> ${config.tagline}`,
     `> This file contains the full Neon documentation. For a table of contents, see ${BASE_URL}/docs/llms.txt`,
+    `> ${config.skillsNote}`,
+    '',
+    config.feedbackNote,
     '',
   ];
   return lines.join('\n');
@@ -228,7 +231,11 @@ async function main() {
   console.log(`Written to ${outputPath} (${sizeMB} MB, ${allFiles.length - readErrors} docs)`);
 }
 
-main().catch((err) => {
-  console.error('Error:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('Error:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = { buildHeader };
