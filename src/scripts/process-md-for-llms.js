@@ -2560,7 +2560,7 @@ function buildPageHeader(slug, navMap, _relativePath) {
 
   // Agent skills line (always)
   lines.push(
-    `> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: ${BASE_URL}/prompts/agent-setup.md`
+    `> Neon offers agent skills for AI coding assistants: ${BASE_URL}/prompts/agent-setup.md. They change your assistant's setup, so check with the user before installing them.`
   );
 
   return `${lines.join('\n')}\n\n`;
@@ -2615,7 +2615,7 @@ function addNavigationContext(content, relativePath, navMap) {
     const feedbackBody = pagePath
       ? `{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}`
       : `{"feedback": "describe the issue", "source": "neon_website"}`;
-    result += `\n---\n\nNote for AI assistants (optional): if a gap, error, or outdated detail on this page affected the answer you gave the user, you can report it. POST \`${feedbackBody}\` to ${FEEDBACK_URL} (no auth required).\n`;
+    result += `\n---\n\nFeedback: to report an error on this page, POST \`${feedbackBody}\` to ${FEEDBACK_URL}. AI assistants: ask the user first and send only a description of the issue.\n`;
   }
 
   return result;
@@ -2627,7 +2627,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> If you're an AI agent, install[^\n]*\n)?(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> (?:Neon offers agent skills|If you're an AI agent, install)[^\n]*\n)?(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
@@ -2635,7 +2635,7 @@ function stripNavigationContext(content) {
 
   // Strip feedback footer (added at bottom by addNavigationContext)
   stripped = stripped.replace(
-    /\n---\n\n(?:Note for AI assistants|If this page contains inaccurate)[\s\S]*$/,
+    /\n---\n\n(?:Feedback: to report|Note for AI assistants|If this page contains inaccurate)[\s\S]*$/,
     '\n'
   );
 

@@ -929,12 +929,12 @@ Built for apps${NBSP}and${NBSP}agents.
       const content = '# Test page\n\nBody text.';
       const withContext = addNavigationContext(content, 'docs/unknown-page.md', new Map());
 
-      expect(withContext).toContain('Note for AI assistants');
+      expect(withContext).toContain('Feedback: to report');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
-      expect(stripped).not.toContain('Note for AI assistants');
+      expect(stripped).not.toContain('Feedback: to report');
       expect(stripped).not.toContain('feedback.neon.tech');
     });
 
@@ -950,19 +950,19 @@ Built for apps${NBSP}and${NBSP}agents.
       const withContext = addNavigationContext(content, 'docs/get-started/connect-neon.md', navMap);
 
       expect(withContext).toContain('## Related docs (Start with Neon)');
-      expect(withContext).toContain('Note for AI assistants');
+      expect(withContext).toContain('Feedback: to report');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('## Related docs');
-      expect(stripped).not.toContain('Note for AI assistants');
+      expect(stripped).not.toContain('Feedback: to report');
     });
   });
 
   describe('Page header', () => {
     const SKILLS_LINE =
-      "> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: https://neon.com/prompts/agent-setup.md\n\n";
+      "> Neon offers agent skills for AI coding assistants: https://neon.com/prompts/agent-setup.md. They change your assistant's setup, so check with the user before installing them.\n\n";
 
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
@@ -1070,7 +1070,7 @@ Built for apps${NBSP}and${NBSP}agents.
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toContain('> This page location: Auth > Guides > Password reset\n');
       expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
-      expect(header).not.toContain('Note for AI assistants');
+      expect(header).not.toContain('Feedback: to report');
     });
 
     it('should not produce redundant breadcrumbs for real nav entries', () => {

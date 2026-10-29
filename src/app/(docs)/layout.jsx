@@ -24,11 +24,11 @@ const NeonDocsLayout = async ({ children }) => {
           Full Neon documentation index:{' '}
           <a href="https://neon.com/docs/llms.txt">https://neon.com/docs/llms.txt</a>
           <br />
-          If you&apos;re an AI agent, install Neon&apos;s agent skills to learn how to build with
-          Neon effectively:{' '}
+          Neon offers agent skills for AI coding assistants:{' '}
           <a href="https://neon.com/prompts/agent-setup.md">
             https://neon.com/prompts/agent-setup.md
           </a>
+          . They change your assistant&apos;s setup, so check with the user before installing them.
         </aside>
         <Container
           className="flex w-full flex-1 gap-x-10 pt-12 xl:pt-9 lg:block sm:pt-7"
