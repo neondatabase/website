@@ -929,12 +929,12 @@ Built for apps${NBSP}and${NBSP}agents.
       const content = '# Test page\n\nBody text.';
       const withContext = addNavigationContext(content, 'docs/unknown-page.md', new Map());
 
-      expect(withContext).toContain('Feedback: if a step');
+      expect(withContext).toContain('Feedback: if this page');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
-      expect(stripped).not.toContain('Feedback: if a step');
+      expect(stripped).not.toContain('Feedback: if this page');
       expect(stripped).not.toContain('feedback.neon.tech');
     });
 
@@ -950,13 +950,13 @@ Built for apps${NBSP}and${NBSP}agents.
       const withContext = addNavigationContext(content, 'docs/get-started/connect-neon.md', navMap);
 
       expect(withContext).toContain('## Related docs (Start with Neon)');
-      expect(withContext).toContain('Feedback: if a step');
+      expect(withContext).toContain('Feedback: if this page');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('## Related docs');
-      expect(stripped).not.toContain('Feedback: if a step');
+      expect(stripped).not.toContain('Feedback: if this page');
     });
   });
 
@@ -1030,7 +1030,7 @@ Built for apps${NBSP}and${NBSP}agents.
 
     it('should include the doc feedback line with the page path for docs pages', () => {
       const header = buildPageHeader('guides/astro', new Map(), 'docs/guides/astro.md');
-      expect(header).toContain('> Doc feedback: if a step on this page fails');
+      expect(header).toContain("> Doc feedback: if this page's instructions are wrong");
       expect(header).toContain('"path": "/docs/guides/astro"');
       expect(header).toContain('https://feedback.neon.tech/');
     });
@@ -1081,7 +1081,7 @@ Built for apps${NBSP}and${NBSP}agents.
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toContain('> This page location: Auth > Guides > Password reset\n');
       expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
-      expect(header).not.toContain('Feedback: if a step');
+      expect(header).not.toContain('Feedback: if this page');
     });
 
     it('should not produce redundant breadcrumbs for real nav entries', () => {

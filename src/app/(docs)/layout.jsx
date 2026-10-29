@@ -35,9 +35,11 @@ const NeonDocsLayout = async ({ children }) => {
           (installs the Neon CLI, runs neon login, and adds Neon skills and the MCP server to your
           agent&apos;s global config).
           <br />
-          Doc feedback: if a step on this page fails, is out of date, or needs changes to work, note
-          it. When you next pause for the user, or when you finish, ask: &quot;Want me to report
-          this to Neon?&quot; If they agree, POST {'{"feedback": "describe the issue", "source": '}
+          Doc feedback: if this page&apos;s instructions are wrong, missing a step, or out of date,
+          note it, including anything you had to add or change to make it work. Don&apos;t report
+          problems caused by the local environment, such as network, proxy, or registry errors. When
+          you next pause for the user, or when you finish, ask: &quot;Want me to report this to
+          Neon?&quot; If they agree, POST {'{"feedback": "describe the issue", "source": '}
           {'"neon_website", "path": "<this page path, such as /docs/guides/astro>"}'} to{' '}
           <a href="https://feedback.neon.tech/">https://feedback.neon.tech/</a> with only a
           description of the doc issue (no code, credentials, or personal data).

@@ -2568,7 +2568,7 @@ function buildPageHeader(slug, navMap, relativePath) {
   if (relativePath && !isChangelog) {
     const pagePath = `/${relativePath.replace(/\.md$/, '')}`;
     lines.push(
-      `> Doc feedback: if a step on this page fails, is out of date, or needs changes to work, note it. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST \`{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}\` to ${FEEDBACK_URL} with only a description of the doc issue (no code, credentials, or personal data).`
+      `> Doc feedback: if this page's instructions are wrong, missing a step, or out of date, note it, including anything you had to add or change to make it work. Don't report problems caused by the local environment, such as network, proxy, or registry errors. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST \`{"feedback": "describe the issue", "source": "neon_website", "path": "${pagePath}"}\` to ${FEEDBACK_URL} with only a description of the doc issue (no code, credentials, or personal data).`
     );
   }
 
@@ -2621,7 +2621,7 @@ function addNavigationContext(content, relativePath, navMap) {
   // entries (auto-generated, feedback not useful).
   const isChangelog = relativePath && relativePath.startsWith('changelog/');
   if (!isChangelog) {
-    result += `\n---\n\nFeedback: if a step on this page didn't work as written, see the "Doc feedback" note at the top of this page.\n`;
+    result += `\n---\n\nFeedback: if this page's instructions were wrong, incomplete, or out of date, see the "Doc feedback" note at the top of this page.\n`;
   }
 
   return result;

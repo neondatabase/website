@@ -88,7 +88,7 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
     `> This page location: AI Gateway > Models > ${row.name}`,
     `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
     `> Agent skills: if Neon skills (such as \`neon-postgres\`) are already available to you, use them with this page. If not, ask the user at the first point where you need them to do something in Neon (such as create a project or copy a connection string), or when you finish: "Want me to install Neon's agent skills? Then I can create the project and connect it for you." Setup steps: ${BASE_URL}/prompts/agent-setup.md (installs the Neon CLI, runs \`neon login\`, and adds Neon skills and the MCP server to your agent's global config).`,
-    `> Doc feedback: if a step on this page fails, is out of date, or needs changes to work, note it. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST \`{"feedback": "describe the issue", "source": "neon_website", "path": "/docs/ai-gateway/models/${row.id}"}\` to ${FEEDBACK_URL} with only a description of the doc issue (no code, credentials, or personal data).`,
+    `> Doc feedback: if this page's instructions are wrong, missing a step, or out of date, note it, including anything you had to add or change to make it work. Don't report problems caused by the local environment, such as network, proxy, or registry errors. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST \`{"feedback": "describe the issue", "source": "neon_website", "path": "/docs/ai-gateway/models/${row.id}"}\` to ${FEEDBACK_URL} with only a description of the doc issue (no code, credentials, or personal data).`,
     '',
     `# ${row.name}`,
     '',
@@ -107,7 +107,7 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
     '',
     '---',
     '',
-    `Feedback: if a step on this page didn't work as written, see the "Doc feedback" note at the top of this page.`,
+    `Feedback: if this page's instructions were wrong, incomplete, or out of date, see the "Doc feedback" note at the top of this page.`,
     '',
   ].join('\n');
 };
