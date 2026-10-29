@@ -29,6 +29,8 @@ Render `<Auth>` for every auth path, as in the [Next.js App Router example](/doc
 import { viewPaths } from '@better-auth-ui/core';
 import { Auth } from '@/components/auth/auth';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return Object.values(viewPaths.auth).map((path) => ({ path }));
 }

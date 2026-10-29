@@ -2,8 +2,8 @@
 title: Auth troubleshooting
 subtitle: Common issues when implementing Managed Better Auth and how to fix them
 summary: >-
-  Troubleshooting for common Managed Better Auth errors in `@neon/auth` (Next.js)
-  and `@neondatabase/neon-js` (React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
+  Troubleshooting for common Managed Better Auth errors in `@neon/auth` (Next.js
+  and React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
   missing `force-dynamic` on server components, `NETWORK_DNS` / `NETWORK_TIMEOUT`
   upstream errors, and OAuth `redirect_uri_mismatch` from misconfigured callback
   URIs. Use this page when Managed Better Auth fails at startup, sessions do not persist,
@@ -12,7 +12,7 @@ enableTableOfContents: true
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
+This page covers common issues when integrating [Managed Better Auth](/docs/auth/overview) with `@neon/auth` in Next.js apps and React SPAs.
 
 ## Missing NEON_AUTH_COOKIE_SECRET
 
@@ -89,11 +89,11 @@ If you are upgrading from v0.1, use `createNeonAuth()` + `auth.handler()` instea
 
 ## Using useSession() without adapter in React SPA
 
-In a React SPA, `createAuthClient(url)` without an adapter returns a vanilla client with no React hooks. Calling `useSession()` on this client will fail. Either pass `BetterAuthReactAdapter()`, or read the session with `useSession(authClient)` from `@better-auth-ui/react`, which takes any Managed Better Auth client.
+In a React SPA, `createAuthClient(url)` without an adapter returns a vanilla client with no React hooks. Calling `useSession()` on this client will fail. Either pass `BetterAuthReactAdapter()`, or read the session with `useSession(authClient)` from `@better-auth-ui/react`, which takes any Managed Better Auth client. It reads the session through TanStack Query, so wrap your app in a `QueryClientProvider` (or pass a `queryClient` as the third argument).
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js/auth';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { createAuthClient } from '@neon/auth';
+import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
 
 const authClient = createAuthClient(url, {
   adapter: BetterAuthReactAdapter(),
@@ -108,10 +108,10 @@ The adapter must be imported from a subpath and called as a function:
 
 ```typescript
 // Wrong
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neon/auth';
 
 // Correct
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
 const client = createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 ```
 
@@ -130,8 +130,8 @@ In Next.js, any component that uses `useSession()` or other React hooks must inc
 The `createAuthClient` function has different signatures depending on the import path:
 
 ```typescript
-// React SPA — import from @neondatabase/neon-js/auth
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+// React SPA — import from @neon/auth
+import { createAuthClient } from '@neon/auth';
 createAuthClient(url);
 createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 

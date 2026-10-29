@@ -79,9 +79,13 @@ export const { GET, POST } = auth.handler();
 See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Managed Better Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
 
 ```typescript filename="src/auth.ts"
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/auth';
+import { BetterAuthReactAdapter } from '@neon/auth/react/adapters';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+// credentials: 'include' sends the session cookie on cross-origin requests.
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
+  adapter: BetterAuthReactAdapter({ fetchOptions: { credentials: 'include' } }),
+});
 ```
 
 For pre-built sign-in and sign-up forms, add [Better Auth UI](/docs/auth/reference/ui-components) with `npx shadcn@latest add @better-auth-ui/auth` and pass the client to its `AuthProvider`:
