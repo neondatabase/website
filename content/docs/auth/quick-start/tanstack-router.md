@@ -8,7 +8,7 @@ summary: >-
   account settings, and route protection without writing custom auth UI. User profiles are stored automatically in the `neon_auth.user` table
   in your database.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:21:18.858Z'
+updatedOn: '2026-10-29T00:20:05.587Z'
 layout: wide
 ---
 
@@ -54,6 +54,8 @@ npx create-tsrouter-app@latest my-app --template file-router --tailwind
 Install the Managed Better Auth SDK, initialize [shadcn/ui](https://ui.shadcn.com), and add [Better Auth UI](https://better-auth-ui.com)'s auth views, user menu, and settings pages. The shadcn CLI copies the components into `src/components/`.
 
 Add the `overrides` block from [npm overrides](/docs/auth/reference/ui-components#npm-overrides) to `package.json` before you run the shadcn commands. It keeps one version of the Better Auth packages. Install `better-auth` with the same exact version first, because npm rejects an override that differs from a direct dependency's version.
+
+To use the examples below, choose TypeScript, `src/styles.css` as the global CSS file, `@/components` as the component alias, and no React Server Components. You can use the defaults for the other prompts.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
