@@ -37,7 +37,7 @@ PgBouncer runs in transaction mode with these settings, which you can't change:
 - `default_pool_size` = 90% of `max_connections` (which depends on compute size)
 - `query_wait_timeout` = 120 seconds
 
-A 0.25 CU compute (≈1 GB RAM) has `max_connections = 104`, so each user-database pair gets a pool of about 93 server connections. Serverless functions and connection-per-request frameworks open many client connections that sit idle most of the time, and the pooler shares those few server connections among them.
+A 0.25 CU compute (≈1 GB RAM) has `max_connections = 112`, so each user-database pair gets a pool of about 100 server connections. Serverless functions and connection-per-request frameworks open many client connections that sit idle most of the time, and the pooler shares those few server connections among them.
 
 <Admonition type="warning" title="Transaction mode caveats">
 Because PgBouncer returns the server connection to the pool after each transaction, session-scoped features don't work over the pooler: `SET`/`RESET`, `LISTEN`/`NOTIFY`, `WITH HOLD CURSOR`, SQL-level `PREPARE`, temporary tables that persist across transactions, and session-level advisory locks. Protocol-level prepared statements from your driver do work. Use the direct string for migrations, `pg_dump`, and logical replication. See the [pooling limitations](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).

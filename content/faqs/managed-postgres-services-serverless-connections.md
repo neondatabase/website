@@ -21,14 +21,14 @@ Each Postgres connection is a process that consumes RAM, so `max_connections` sc
 
 | Compute size | RAM     | `max_connections` |
 | ------------ | ------- | ----------------- |
-| 0.25 CU      | ≈1 GB   | 104               |
-| 1 CU         | ≈4 GB   | 419               |
-| 4 CU         | ≈16 GB  | 1,678             |
+| 0.25 CU      | ≈1 GB   | 112               |
+| 1 CU         | ≈4 GB   | 450               |
+| 4 CU         | ≈16 GB  | 1,802             |
 | 9 CU+        | ≈36 GB+ | 4,000 (capped)    |
 
-Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 97 direct connections for your app. A burst of more than 97 concurrent function invocations, each opening its own direct connection, gets `remaining connection slots are reserved` errors.
+Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 105 direct connections for your app. A burst of more than 105 concurrent function invocations, each opening its own direct connection, gets `remaining connection slots are reserved` errors.
 
-PgBouncer multiplexes many short-lived client connections over a smaller pool of Postgres connections. The pool size for each user and database pair is `0.9 × max_connections`, so a 1 CU compute supports up to 377 concurrent active transactions per user/database pair.
+PgBouncer multiplexes many short-lived client connections over a smaller pool of Postgres connections. The pool size for each user and database pair is `0.9 × max_connections`, so a 1 CU compute supports up to 405 concurrent active transactions per user/database pair.
 
 ## Use the pooled connection string
 
