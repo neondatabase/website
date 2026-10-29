@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-29T17:13:49.594Z'
+updatedOn: '2026-10-29T21:37:59.548Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -358,6 +358,7 @@ The following features are not currently HIPAA-compliant and should not be used 
 - [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
 - [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
 - [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon Realtime](/docs/realtime/overview) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 
