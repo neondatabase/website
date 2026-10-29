@@ -225,8 +225,7 @@ const Modal = ({ id, title, description, destination, embedId, copyPrompt }) => 
                         </code>
                       </div>
                     </div>
-                    <p className="mt-[14px] text-xs leading-relaxed tracking-extra-tight text-gray-new-50 dark:text-gray-new-70">
-                      Works with Claude Code, Cursor, and Codex.{' '}
+                    <p className="mt-[14px] text-xs leading-relaxed tracking-extra-tight">
                       <Link
                         className="text-gray-new-50! underline decoration-gray-new-50/40 underline-offset-2 transition-colors hover:text-black-new! hover:decoration-current dark:text-gray-new-70! dark:hover:text-white!"
                         to={destination.url}
