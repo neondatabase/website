@@ -142,7 +142,7 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
-  social={{ providers: ['google', 'github', 'vercel'] }}
+  social={{ providers: ['google', 'github', 'vercel', 'microsoft', 'apple'] }}
   navigate={navigate}
   credentials={{ forgotPassword: true }}
 >
