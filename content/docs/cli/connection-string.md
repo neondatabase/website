@@ -9,7 +9,7 @@ summary: >-
   pooling (--pooled), read-only replicas (--endpoint-type read_only), or
   time-travel queries targeting a specific timestamp or LSN.
 enableTableOfContents: true
-updatedOn: '2026-10-09T18:53:48.985Z'
+updatedOn: '2026-10-29T21:09:39.820Z'
 redirectFrom:
   - /docs/reference/cli-connection-string
   - /docs/cli/cs
@@ -25,7 +25,7 @@ To open a `psql` session directly, use the dedicated [`neon psql`](/docs/cli/psq
 
 <CliUsage command="connection-string" />
 
-The `[branch]` is the branch name or ID. If omitted, the default branch is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
+The `[branch]` is the branch name or ID. If omitted, the default branch from your context (or the project's default branch) is used. To connect to a specific point in the branch's history, use the point-in-time format `branch@timestamp` or `branch@lsn`. If no timestamp or LSN is appended, the current state (HEAD) is used.
 
 ## Options
 
