@@ -6,26 +6,42 @@ import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
+import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import useLocalStorage from 'hooks/use-local-storage';
 import CloseIcon from 'icons/close-small.inline.svg';
-// import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import SupportIcon from 'icons/docs/modal/support.inline.svg';
+import RobotIcon from 'icons/docs/sidebar/ai-agent.inline.svg';
+// import SlackIcon from 'icons/docs/modal/slack.inline.svg';
 import ExpandIcon from 'icons/expand-icon.inline.svg';
+import CopiedIcon from 'icons/home/copied.inline.svg';
 import PlayIcon from 'icons/play.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const icons = {
   support: SupportIcon,
+  'docs-agent-setup': RobotIcon,
   // slack: SlackIcon,
 };
 
 const MOBILE_MEDIA_QUERY = '(max-width: 47.9375rem)';
 
-const Modal = ({ id, title, description, destination, embedId }) => {
+// "Prompt copied" confirmation shows for 1.4s, then the button reverts.
+const COPIED_RESET_MS = 1400;
+
+const Modal = ({
+  id,
+  title,
+  description,
+  destination,
+  embedId,
+  copyPrompt,
+  copyLabel = 'Copy prompt',
+}) => {
   const [closedModals, setClosedModals] = useLocalStorage('closedModals', []);
   const [isMounted, setIsMounted] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const { isCopied, handleCopy } = useCopyToClipboard(COPIED_RESET_MS);
 
   useEffect(() => {
     setIsMinimized(window.matchMedia(MOBILE_MEDIA_QUERY).matches);
@@ -46,6 +62,11 @@ const Modal = ({ id, title, description, destination, embedId }) => {
       link: linkTitle,
       destination: destination.url,
     });
+  };
+
+  const handleCopyPrompt = () => {
+    handleCopy(copyPrompt);
+    sendGtagEvent('Action Clicked', { text: 'Agent setup', tag_name: 'DocsAgentSetupPopup' });
   };
 
   return (
@@ -79,7 +100,14 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                   </button>
                 ) : (
                   Icon && (
-                    <Icon className="mr-2.5 size-[18px] shrink-0 text-secondary-8 dark:text-green-45" />
+                    <Icon
+                      className={cn(
+                        'mr-2.5 size-[18px] shrink-0',
+                        copyPrompt
+                          ? 'text-green-44 dark:text-green-45'
+                          : 'text-secondary-8 dark:text-green-45'
+                      )}
+                    />
                   )
                 )}
                 <button
@@ -158,7 +186,31 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                     </span>
                   </a>
                 ) : (
-                  Icon && <Icon className="mt-[15px] h-5 w-5 text-secondary-8 dark:text-green-45" />
+                  Icon && (
+                    <Icon
+                      className={cn(
+                        'mt-[15px] h-5 w-5',
+                        copyPrompt
+                          ? 'text-green-44 dark:text-green-45'
+                          : 'text-secondary-8 dark:text-green-45'
+                      )}
+                    />
+                  )
+                )}
+                {copyPrompt && (
+                  <button
+                    className={cn(
+                      'mt-4 flex w-fit items-center gap-2 px-3.5 py-2 text-sm leading-none font-medium tracking-extra-tight transition-colors duration-200',
+                      'bg-green-44 text-white hover:bg-[#157A55]',
+                      'dark:bg-green-45 dark:text-black-new dark:hover:bg-green-52'
+                    )}
+                    type="button"
+                    aria-label={isCopied ? 'Prompt copied' : copyLabel}
+                    onClick={isCopied ? undefined : handleCopyPrompt}
+                  >
+                    {isCopied && <CopiedIcon className="size-3.5" aria-hidden />}
+                    {isCopied ? 'Prompt copied' : copyLabel}
+                  </button>
                 )}
                 <Link
                   className={cn(
@@ -193,6 +245,8 @@ Modal.propTypes = {
     url: PropTypes.string.isRequired,
   }).isRequired,
   embedId: PropTypes.string,
+  copyPrompt: PropTypes.string,
+  copyLabel: PropTypes.string,
 };
 
 export default Modal;
