@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-29T16:11:33.426Z'
+updatedOn: '2026-10-29T17:13:49.594Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -18,7 +18,7 @@ HIPAA support is currently available at no additional cost. When we begin chargi
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are available to customers who have accepted our Business Associate Agreement (BAA) through the self-serve enablement process. The BAA is an agreement between you and Databricks, Neon's parent company. It sets out each party's responsibilities for protecting Protected Health Information (PHI).
 
-For the full terms, see the [Business Associate Agreement (BAA)](#business-associate-agreement-baa). If anything on this page differs from the BAA, the BAA applies.
+If anything on this page differs from the BAA, the BAA applies.
 
 ## Business Associate Agreement (BAA)
 
