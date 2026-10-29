@@ -71,6 +71,7 @@ Each processed markdown file has this structure:
 ```markdown
 > This page location: Section > Subsection > Page Title
 > Full Neon documentation index: https://neon.com/docs/llms.txt
+> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: https://neon.com/prompts/agent-setup.md
 
 # Title (from frontmatter)
 

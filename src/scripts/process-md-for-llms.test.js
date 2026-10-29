@@ -961,6 +961,9 @@ Built for apps${NBSP}and${NBSP}agents.
   });
 
   describe('Page header', () => {
+    const SKILLS_LINE =
+      "> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: https://neon.com/prompts/agent-setup.md\n\n";
+
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
       navMap.set('auth/guides/password-reset', {
@@ -978,14 +981,17 @@ Built for apps${NBSP}and${NBSP}agents.
       );
       expect(header).toBe(
         '> This page location: Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' +
+          SKILLS_LINE
       );
     });
 
     it('should include index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(
+        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' + SKILLS_LINE
+      );
     });
 
     it('should include index line for pages with empty breadcrumbs', () => {
@@ -998,24 +1004,32 @@ Built for apps${NBSP}and${NBSP}agents.
       });
 
       const header = buildPageHeader('top-level/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(
+        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' + SKILLS_LINE
+      );
     });
 
     it('should include index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(
+        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' + SKILLS_LINE
+      );
     });
 
     it('should include index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(
+        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' + SKILLS_LINE
+      );
     });
 
     it('should not include feedback in header (feedback is added at bottom by addNavigationContext)', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap, 'changelog/2026-01-01.md');
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(
+        '> Full Neon documentation index: https://neon.com/docs/llms.txt\n' + SKILLS_LINE
+      );
     });
 
     it('should deduplicate consecutive identical ancestors', () => {

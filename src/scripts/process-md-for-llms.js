@@ -2558,6 +2558,11 @@ function buildPageHeader(slug, navMap, _relativePath) {
   // Index line (always)
   lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
 
+  // Agent skills line (always)
+  lines.push(
+    `> If you're an AI agent, install Neon's agent skills to learn how to build with Neon effectively: ${BASE_URL}/prompts/agent-setup.md`
+  );
+
   return `${lines.join('\n')}\n\n`;
 }
 
@@ -2622,7 +2627,7 @@ function addNavigationContext(content, relativePath, navMap) {
  */
 function stripNavigationContext(content) {
   let stripped = content.replace(
-    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
+    /^(?:> This page location:[^\n]*\n)?> Full Neon documentation index:[^\n]*\n(?:> If you're an AI agent, install[^\n]*\n)?(?:> IMPORTANT: If this page[^\n]*\n)?\n/,
     ''
   );
 
