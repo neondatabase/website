@@ -32,9 +32,21 @@ export function composeServerTiming(upstream, proxyMs) {
   return `${upstream.trim()}, ${proxy}`;
 }
 
+// Callers of /api/search may only tag themselves webmcp; anything else is the search box.
+// Other sources (mcp, cli) call neon-agent directly, so the website never claims them.
+const BROWSER_SOURCES = new Set(['website', 'webmcp']);
+
+export function siteSearchCallerSource(header) {
+  const value = header?.trim().toLowerCase();
+  return BROWSER_SOURCES.has(value) ? value : 'website';
+}
+
 // neon-agent records each search by caller; the browser's user agent is the one worth recording.
-export function siteSearchUpstreamHeaders(userAgent) {
-  const headers = { 'content-type': 'application/json', 'x-caller-source': 'website' };
+export function siteSearchUpstreamHeaders(userAgent, callerSource) {
+  const headers = {
+    'content-type': 'application/json',
+    'x-caller-source': siteSearchCallerSource(callerSource),
+  };
   const trimmed = userAgent?.trim();
   if (trimmed) headers['x-caller-user-agent'] = trimmed;
   return headers;

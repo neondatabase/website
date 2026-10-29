@@ -250,7 +250,8 @@ export function createNeonTools({ origin, fetch: fetchImpl, openPage }) {
     const body = searchArguments(input);
     const response = await fetchImpl('/api/search', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      // Lets neon-agent count agent searches apart from the search box.
+      headers: { 'content-type': 'application/json', 'x-caller-source': 'webmcp' },
       body: JSON.stringify(body),
       signal,
     });
