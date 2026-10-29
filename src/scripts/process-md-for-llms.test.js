@@ -929,12 +929,12 @@ Built for apps${NBSP}and${NBSP}agents.
       const content = '# Test page\n\nBody text.';
       const withContext = addNavigationContext(content, 'docs/unknown-page.md', new Map());
 
-      expect(withContext).toContain('Feedback: to report');
+      expect(withContext).toContain('Feedback: AI assistants');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
-      expect(stripped).not.toContain('Feedback: to report');
+      expect(stripped).not.toContain('Feedback: AI assistants');
       expect(stripped).not.toContain('feedback.neon.tech');
     });
 
@@ -950,19 +950,19 @@ Built for apps${NBSP}and${NBSP}agents.
       const withContext = addNavigationContext(content, 'docs/get-started/connect-neon.md', navMap);
 
       expect(withContext).toContain('## Related docs (Start with Neon)');
-      expect(withContext).toContain('Feedback: to report');
+      expect(withContext).toContain('Feedback: AI assistants');
 
       const stripped = stripNavigationContext(withContext);
 
       expect(stripped.trim()).toBe(content);
       expect(stripped).not.toContain('## Related docs');
-      expect(stripped).not.toContain('Feedback: to report');
+      expect(stripped).not.toContain('Feedback: AI assistants');
     });
   });
 
   describe('Page header', () => {
     const SKILLS_LINE =
-      "> Neon offers agent skills for AI coding assistants: https://neon.com/prompts/agent-setup.md. They change your assistant's setup, so check with the user before installing them.\n\n";
+      "> Agent skills: if Neon skills (such as `neon-postgres`) are already available to you, use them with this page. If not, when you finish the user's task, ask: \"Want me to install Neon's agent skills? They help with Neon setup, connections, and branching.\" Setup steps: https://neon.com/prompts/agent-setup.md (installs the Neon CLI, runs `neon login`, and adds Neon skills and the MCP server to your agent's global config).\n\n";
 
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
@@ -1070,7 +1070,7 @@ Built for apps${NBSP}and${NBSP}agents.
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toContain('> This page location: Auth > Guides > Password reset\n');
       expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
-      expect(header).not.toContain('Feedback: to report');
+      expect(header).not.toContain('Feedback: AI assistants');
     });
 
     it('should not produce redundant breadcrumbs for real nav entries', () => {

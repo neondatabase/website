@@ -71,7 +71,7 @@ Each processed markdown file has this structure:
 ```markdown
 > This page location: Section > Subsection > Page Title
 > Full Neon documentation index: https://neon.com/docs/llms.txt
-> Neon offers agent skills for AI coding assistants: https://neon.com/prompts/agent-setup.md. They change your assistant's setup, so check with the user before installing them.
+> Agent skills: if Neon skills (such as `neon-postgres`) are already available to you, use them with this page. If not, when you finish the user's task, ask: "Want me to install Neon's agent skills? They help with Neon setup, connections, and branching." Setup steps: https://neon.com/prompts/agent-setup.md (installs the Neon CLI, runs `neon login`, and adds Neon skills and the MCP server to your agent's global config).
 
 # Title (from frontmatter)
 
