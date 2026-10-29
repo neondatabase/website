@@ -49,14 +49,22 @@ const COLUMNS = [
 ];
 
 const FILTER_PARSERS = {
-  q: parseAsString.withDefault(''),
-  type: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
+  search: parseAsString.withDefault(''),
+  mode: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
   providers: parseAsArrayOf(parseAsString).withDefault([]),
-  openWeights: parseAsBoolean.withDefault(false),
-  sort: parseAsStringLiteral(
+  openWeightsOnly: parseAsBoolean.withDefault(false),
+  sortKey: parseAsStringLiteral(
     COLUMNS.filter((column) => column.sortable).map((column) => column.key)
   ).withDefault('releaseDate'),
-  dir: parseAsStringLiteral(['asc', 'desc']).withDefault('desc'),
+  sortDir: parseAsStringLiteral(['asc', 'desc']).withDefault('desc'),
+};
+
+const FILTER_URL_KEYS = {
+  search: 'q',
+  mode: 'type',
+  openWeightsOnly: 'openWeights',
+  sortKey: 'sort',
+  sortDir: 'dir',
 };
 
 const DEFAULT_FILTERS = Object.fromEntries(
@@ -331,13 +339,10 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
   const searchInputRef = useRef(null);
   const searchId = useId();
   const [filtersHeight, setFiltersHeight] = useState(0);
-  const { q: search, type: mode, openWeights: openWeightsOnly } = filters;
-  const sort = useMemo(
-    () => ({ key: filters.sort, dir: filters.dir }),
-    [filters.sort, filters.dir]
-  );
-  const setSearch = (q) => setFilters({ q });
-  const setOpenWeightsOnly = (openWeights) => setFilters({ openWeights });
+  const { search, mode, openWeightsOnly, sortKey, sortDir } = filters;
+  const sort = useMemo(() => ({ key: sortKey, dir: sortDir }), [sortKey, sortDir]);
+  const setSearch = (value) => setFilters({ search: value });
+  const setOpenWeightsOnly = (value) => setFilters({ openWeightsOnly: value });
 
   const providers = useMemo(() => {
     const present = new Set(rows.map((row) => row.provider));
@@ -377,12 +382,14 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
 
   const changeMode = (next) => {
     if (next === mode) return;
-    setFilters({ type: next });
+    setFilters({ mode: next });
   };
 
   const onSort = (key) => {
     setFilters(
-      sort.key === key ? { dir: sort.dir === 'asc' ? 'desc' : 'asc' } : { sort: key, dir: 'asc' }
+      sortKey === key
+        ? { sortDir: sortDir === 'asc' ? 'desc' : 'asc' }
+        : { sortKey: key, sortDir: 'asc' }
     );
   };
 
@@ -722,12 +729,12 @@ const viewPropTypes = {
 ModelIndexView.propTypes = {
   ...viewPropTypes,
   filters: PropTypes.shape({
-    q: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
     providers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    openWeights: PropTypes.bool.isRequired,
-    sort: PropTypes.string.isRequired,
-    dir: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    openWeightsOnly: PropTypes.bool.isRequired,
+    sortKey: PropTypes.string.isRequired,
+    sortDir: PropTypes.oneOf(['asc', 'desc']).isRequired,
   }).isRequired,
   setFilters: PropTypes.func.isRequired,
 };
@@ -743,7 +750,7 @@ export const ModelIndexFallback = (props) => (
 ModelIndexFallback.propTypes = viewPropTypes;
 
 const ModelIndexClient = (props) => {
-  const [filters, setFilters] = useQueryStates(FILTER_PARSERS);
+  const [filters, setFilters] = useQueryStates(FILTER_PARSERS, { urlKeys: FILTER_URL_KEYS });
   return <ModelIndexView {...props} filters={filters} setFilters={setFilters} />;
 };
 
