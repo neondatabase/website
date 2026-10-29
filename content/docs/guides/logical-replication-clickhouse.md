@@ -10,7 +10,7 @@ summary: >-
   wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -48,7 +48,7 @@ To enable logical replication in Neon:
 <TabItem>
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. Select **Settings** in the sidebar.
 3. Select **Postgres**, then **Logical replication**.
 4. Click **Enable** to enable logical replication.
 
@@ -101,7 +101,7 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add Role**.
 6. In the role creation dialog, specify a role name (`replication_user`).

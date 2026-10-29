@@ -1,15 +1,15 @@
 ---
-title: Automated Database Branching with GitHub Actions
-subtitle: Learn how to automate database branching for your application using Neon and GitHub Actions
+title: Automated database branching with GitHub Actions
+subtitle: Automate database branching for your application with Neon and GitHub Actions
 enableTableOfContents: true
 author: dhanush-reddy
 createdAt: '2024-11-29T00:00:00.000Z'
 ---
 
-Database changes can be one of the trickiest parts of application development. When multiple developers work on features that require database modifications, they often face challenges like conflicting schema changes, difficulty in testing migrations, and the risk of breaking the production database.
+Database changes can be one of the trickiest parts of application development. When multiple developers work on features that require database modifications, they run into problems like conflicting schema changes, difficulty in testing migrations, and the risk of breaking the production database.
 
-Database branching solves these problems by allowing developers to create isolated database environments for each feature branch, just like they do with code.
-This guide demonstrates how to implement automated database branching using Neon and GitHub Actions, where each pull request gets its own database branch, complete with the necessary schema changes. You'll build a Next.js Todo application that showcases this workflow, which automates several critical database operations, including:
+Database branching addresses these problems by letting developers to create isolated database environments for each feature branch, just like they do with code.
+This guide sets up automated database branching with Neon and GitHub Actions, where each pull request gets its own database branch with the necessary schema changes applied. You'll build a Next.js Todo application with a workflow that handles:
 
 - Creating a new database branch when a pull request is opened
 - Automatically applying schema migrations to the new branch
@@ -25,10 +25,10 @@ By the end of this guide, you'll have a system where database changes flow like 
 - Node.js installed on your machine
 - Basic familiarity with Next.js and TypeScript
 
-## Setting Up Your Neon Database
+## Setting up your Neon database
 
 1. Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2. Note your connection string from the connection details page.
+2. Click **Connect** in the Console nav and copy your connection string.
 
    Your connection string will look similar to this:
 
@@ -54,7 +54,7 @@ By the end of this guide, you'll have a system where database changes flow like 
 
 ## Configure the database schema
 
-This guide demonstrates database schema definition using Drizzle ORM. The underlying principles can be easily adapted to your preferred ORM, such as Prisma, TypeORM, or Sequelize.
+This guide demonstrates database schema definition using Drizzle ORM. The same approach works with other ORMs, such as Prisma, TypeORM, or Sequelize.
 
 1. Create `app/db/schema.ts`:
    The following code defines the database schema for a simple Todo application:
@@ -119,7 +119,7 @@ The [Neon GitHub integration](/docs/guides/neon-github-integration) connects you
 4. If you have more than one GitHub account, select the account where you want to install the GitHub app.
 5. Select the GitHub repository to connect to your Neon project, and click **Connect**.
 
-   The final page of the GitHub integration setup provides a sample GitHub Actions workflow. With this workflow as a example, we'll create a custom GitHub Actions workflow in the next steps.
+   The final page of the GitHub integration setup provides a sample GitHub Actions workflow. Using this workflow as an example, we'll create a custom GitHub Actions workflow in the next steps.
 
 ## Create the GitHub Actions workflow
 
@@ -219,10 +219,10 @@ jobs:
 <Admonition type="note" title="Note">
 To set up GitHub Actions correctly:
 
-1. **Enable Workflow Permissions**:
+1. **Enable workflow permissions**:
    Go to your repository's GitHub Actions settings, navigate to **Actions** > **General**, and set **Workflow permissions** to **Read and write permissions**.
 
-2. **Add Database Connection String**:
+2. **Add a database connection string**:
    Add a `DATABASE_URL` secret to your repository under **Settings** > **Secrets and variables** > **Actions**, using the connection string for your production database that you noted earlier. While you're here, you should see the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable that have already been set by the Neon GitHub integration.
 
 </Admonition>
@@ -231,38 +231,38 @@ To set up GitHub Actions correctly:
 The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
 </Admonition>
 
-It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your primary production database. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+The two secrets play different roles. The `NEON_API_KEY` (created by the integration) manages your Neon project, for example creating and deleting branches. The `DATABASE_URL` secret you just created points to your production database. The workflow uses it only after a PR is merged, to apply migrations, so production stays separate from the ephemeral preview branches used during testing.
 
 ## Understanding the workflow
 
 The GitHub Actions workflow automates database branching and schema management for pull requests. Here's a breakdown of the workflow:
 
-### Create Branch Job
+### Create branch job
 
 This job runs when a pull request is opened, reopened, or synchronized:
 
-1. **Branch Creation**:
+1. **Branch creation**:
    - Uses Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
    - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
    - Inherits the schema and data from the parent branch
 
-2. **Migration Handling**:
+2. **Migration handling**:
    - Installs project dependencies
    - Generates migration files using Drizzle
    - Applies migrations to the newly created branch
    - Uses the branch-specific `DATABASE_URL` for migration operations
 
-3. **Schema Diff Generation**:
+3. **Schema diff generation**:
    - Uses Neon's [`schema-diff-action`](https://github.com/marketplace/actions/neon-schema-diff-github-action)
    - Compares the schema of the new branch with the parent branch
    - Automatically posts the differences as a comment on the pull request
    - Helps reviewers understand database changes at a glance
 
-### Delete Branch Job
+### Delete branch job
 
 This job executes when a pull request is closed (either merged or rejected):
 
-1. **Production Migration**:
+1. **Production migration**:
    - If the PR is merged, applies migrations to the production database
    - Uses the main `DATABASE_URL` stored in repository secrets
    - Ensures production database stays in sync with merged changes
@@ -270,7 +270,7 @@ This job executes when a pull request is closed (either merged or rejected):
 2. **Cleanup**:
    - Removes the preview branch using Neon's [`delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)
 
-## Flow Summary
+## Flow summary
 
 Here's how the entire process works from start to finish:
 
@@ -291,14 +291,14 @@ Here's how the entire process works from start to finish:
    - The preview branch is automatically deleted
    - No changes are made to the production database
 
-This automated workflow ensures that:
+With this workflow:
 
 1. Every feature gets its own isolated database environment
 2. Schema changes are automatically tracked and documented in the pull request
 3. Migrations are consistently applied across environments
 4. Production database stays in sync with merged code
-5. Database resources are efficiently managed
-6. The risk of manual migration errors is minimized
+5. Preview branches are deleted when their pull request closes
+6. Migrations run from CI instead of by hand
 
 ## Test the workflow
 
@@ -310,7 +310,7 @@ To test the workflow, perform the following steps:
    git checkout -b feature/add-todo-created-at
    ```
 
-2. Modify the schema in `db/schema/todos.ts`:
+2. Modify the schema in `app/db/schema.ts` (and add `timestamp` to the `drizzle-orm/pg-core` import):
 
    ```typescript
    export const todo = pgTable('todo', {
@@ -349,8 +349,8 @@ You can find the complete source code for this example on GitHub.
 
 ## Resources
 
-- [Neon GitHub Integration Documentation](/docs/guides/neon-github-integration)
-- [Database Branching Workflows](/branching)
+- [Neon GitHub integration](/docs/guides/neon-github-integration)
+- [Database branching workflows](/branching)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 
 <NeedHelp/>

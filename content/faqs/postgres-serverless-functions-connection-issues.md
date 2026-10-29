@@ -13,19 +13,19 @@ nextLink:
   slug: postgres-services-built-in-connection-pooling
 ---
 
-Serverless functions are hostile to traditional Postgres connections. Each invocation may open a fresh TCP connection. Without pooling, you exhaust `max_connections` quickly, especially at burst traffic. Neon addresses this two ways: a managed PgBouncer pooler in front of every database (up to 10,000 client connections), and a [serverless driver](/docs/serverless/serverless-driver) that talks to Postgres over HTTP or WebSockets.
+Serverless functions scale by running more instances, and each instance may open its own Postgres connection. Without pooling, a burst of traffic can exhaust `max_connections`. Neon handles this two ways: a managed PgBouncer pooler on every compute (up to 10,000 client connections), and a [serverless driver](/docs/serverless/serverless-driver) that queries Postgres over HTTP or WebSockets.
 
 ## Option 1: Pooled connection string
 
-Add `-pooler` to your endpoint hostname and route through PgBouncer:
+Add `-pooler` to your endpoint hostname to route through PgBouncer:
 
 ```text
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-PgBouncer accepts up to 10,000 client connections and multiplexes them onto the underlying `max_connections` pool. This is what you want for connection-per-request frameworks and Lambdas. See [connection pooling](/docs/connect/connection-pooling).
+PgBouncer accepts up to 10,000 client connections and shares a smaller set of server connections among them. Use it for Lambda, Vercel Functions, and connection-per-request frameworks. See [connection pooling](/docs/connect/connection-pooling).
 
-Direct (non-pooled) `max_connections` still scales with compute size and is intended for workloads that can't use a pooler:
+Direct (non-pooled) connections are limited by `max_connections`, which scales with compute size. Use them for migrations, `pg_dump`, and anything that needs session state:
 
 | Compute size        | max_connections |
 | ------------------- | --------------- |
@@ -34,11 +34,11 @@ Direct (non-pooled) `max_connections` still scales with compute size and is inte
 | 4 CU (≈16 GB RAM)   | 1,678           |
 | 9 to 56 CU          | 4,000           |
 
-Seven of those are reserved for the Neon superuser. A 0.25 CU compute leaves about 97 direct connections for the application. A Lambda or Edge Function under load will blow past that in seconds without pooling.
+Seven connections are reserved for the Neon superuser, so a 0.25 CU compute leaves 97 direct connections for your application. Without the pooler, 98 function instances each holding one connection would exceed that.
 
 ## Option 2: The serverless driver
 
-For Vercel Edge Functions, Cloudflare Workers, and other environments where TCP and process reuse are limited, use `@neondatabase/serverless`. It queries over HTTP for one-shot queries and WebSockets for sessions or transactions.
+For Cloudflare Workers and other edge runtimes that can't open raw TCP connections, use `@neondatabase/serverless`. Its `neon()` function sends each query over HTTP. Its `Pool` and `Client` use WebSockets for sessions and interactive transactions.
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -51,17 +51,17 @@ export default async (req) => {
 };
 ```
 
-Over HTTP, there's no TCP handshake or connection pool to manage. Each query is a `fetch`. For the trade-offs between HTTP and WebSockets, see the [driver docs](/docs/serverless/serverless-driver).
+Over HTTP, each query is a single `fetch`, so there's no Postgres connection or pool for your function to manage. For the trade-offs between HTTP and WebSockets, see the [driver docs](/docs/serverless/serverless-driver).
 
 <Admonition type="tip" title="Pick the right transport">
-Use HTTP for stateless, single-statement queries. Use WebSockets (`Pool`, `Client`) when you need transactions, sessions, or `node-postgres` compatibility. Both paths support Drizzle and Prisma.
+Use HTTP for stateless, single-statement queries. Use WebSockets (`Pool`, `Client`) when you need interactive transactions, sessions, or `node-postgres` compatibility. Drizzle and Prisma both have adapters for each transport.
 </Admonition>
 
 ## How other providers approach this
 
-- **Supabase** provides a transaction-mode pooler (Supavisor) plus a REST-over-HTTP layer ([PostgREST](https://supabase.com/docs/guides/database/connecting-to-postgres)) that can be called from edge runtimes. The HTTP layer is automatic; the direct Postgres path still uses the pooler.
-- **AWS Aurora and RDS for Postgres** rely on [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) for connection pooling in front of Lambda. Connection multiplexing isn't automatic, and you usually have to keep Lambdas inside the same VPC as the database, which adds cold-start overhead. AWS Lambda also has the [RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) for HTTP-style queries, but it's Aurora-only and has different SQL semantics.
+- **Supabase** includes the Supavisor pooler, with a transaction-mode connection string on port 6543 for serverless functions ([connecting to Postgres](https://supabase.com/docs/guides/database/connecting-to-postgres)). It also auto-generates a REST [Data API](https://supabase.com/docs/guides/api) from your schema with PostgREST, which edge runtimes can call over HTTP.
+- **Amazon RDS for Postgres and Aurora** pair with [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) for pooling in front of Lambda. The proxy is a separate resource you create and pay for, and it can't be publicly accessible, so functions that use it run inside the database's VPC. Aurora also offers the [RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html), an HTTP endpoint for running SQL without managing connections; it's available for Aurora only, not RDS for Postgres.
 
-On Neon, the pooler is automatic (every database has one) and the HTTP/WebSocket driver is a drop-in Postgres client that works with Drizzle and Prisma, so you can use the same query syntax in Edge Functions, Lambda, and long-running services.
+On Neon, every compute has a pooler, and the serverless driver works with Drizzle and Prisma, so the same query code runs in edge runtimes, Lambda, and long-running services.
 
 <CTA title="Connect from any serverless platform" description="See driver setup for Next.js, Vercel, Cloudflare Workers, and more." buttonText="Read the connection guide" buttonUrl="https://neon.com/docs/connect/choose-connection" />

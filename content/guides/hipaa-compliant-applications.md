@@ -4,25 +4,25 @@ subtitle: Learn how Neon's HIPAA architecture, BAA, audit logging, and shared re
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-When building a healthcare application, understanding how your database manages Protected Health Information (PHI) is essential. HIPAA compliance isn’t just a checklist. It demands strict safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.
+When you build a healthcare application, you need to know how your database handles Protected Health Information (PHI). HIPAA requires safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.
 
-This guide walks through how Neon supports HIPAA compliance. You’ll see how its architecture is designed, how audit logging ensures accountability, and how to structure your schema to prevent accidental PHI exposure. Together, these practices help you build secure, compliant trustworthy healthcare applications.
+This guide walks through how Neon supports HIPAA compliance. You’ll see how HIPAA-enabled projects are configured, what audit logging records, and how to structure your schema to prevent accidental PHI exposure.
 
 ## Key compliance questions
 
 When evaluating Neon for healthcare workloads, you likely have a few specific requirements. Here is how Neon addresses them:
 
-- **BAA & Certifications:** Neon signs a BAA (available [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf)) and supports PHI on the Scale plan. Neon is audited for HIPAA, SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA.
-- **Availability & Cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). A 15% surcharge will be applied to your monthly invoice in the future when billing begins. You will be notified well in advance of any billing changes. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
-- **Architecture & Isolation:** HIPAA-enabled projects run on specially configured infrastructure. Neon enforces strict tenant isolation at the project level, network controls, and storage-level encryption (AES-256).
-- **Compliant Features:** Core Postgres operations, database branching, read replicas, backups, and Point-in-Time Recovery (PITR) are fully covered under the BAA. [Data anonymization](/docs/workflows/data-anonymization) is also recommended in non-production branches.
-- **Feature Exclusions:** Managed Better Auth and the Data API reside outside the HIPAA boundary and must not be used for PHI.
-- **Shared Responsibility:** If you use logical replication or Change Data Capture (CDC) to stream data out of Neon, you are responsible for the destination's compliance.
-- **Audit Logging:** Audit logs are securely retained for the duration specified in your Business Associate Agreement (BAA). If you need to export logs for audits or investigations, you can [raise a support request](https://console.neon.tech/app/projects?modal=support).
-- **Subprocessors:** Neon uses compliant subprocessors that also sign data processing agreements. See the full list at [Databricks Subprocessors](https://www.databricks.com/legal/databricks-subprocessors).
+- **BAA and certifications:** Neon signs a BAA (available [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf)) and supports PHI on the Scale plan. Neon has completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and adheres to GDPR and CCPA ([Compliance](/docs/security/compliance)).
+- **Availability and cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). When Neon begins charging for HIPAA support, a 15% surcharge will be added to your monthly invoice. You'll be notified before this change takes effect. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
+- **Architecture and isolation:** HIPAA-enabled projects run on specially configured infrastructure. Neon enforces tenant isolation at the project level, network controls, and storage-level encryption (AES-256).
+- **Compliant features:** Core Postgres operations, database branching, read replicas, backups, and Point-in-Time Recovery (PITR) are fully covered under the BAA. [Data anonymization](/docs/workflows/data-anonymization) is also recommended in non-production branches.
+- **Feature exclusions:** Managed Better Auth and the Data API reside outside the HIPAA boundary and must not be used for PHI.
+- **Shared responsibility:** If you use logical replication or Change Data Capture (CDC) to stream data out of Neon, you are responsible for the destination's compliance.
+- **Audit logging:** Audit logs are retained for the duration specified in your Business Associate Agreement (BAA). If you need to export logs for audits or investigations, you can [raise a support request](https://console.neon.tech/app/projects?modal=support).
+- **Subprocessors:** Neon's subprocessors also sign data processing agreements. See the full list at [Databricks Subprocessors](https://www.databricks.com/legal/databricks-subprocessors).
 
 ## Architecture and data security
 
@@ -32,14 +32,13 @@ When you enable HIPAA on a Neon project, it runs on infrastructure configured to
 
 You can provision a dedicated project for each of your tenants. This gives each customer their own isolated Postgres instance, reducing the risk of cross-tenant data exposure.
 
-- **Cloud providers:** HIPAA compliance is supported across Neon's infrastructure.
-- **Network isolation:** You can restrict access to your database using [IP Allowlisting](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) to ensure only your application backend can connect.
+- **Network isolation:** You can restrict access to your database using [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) so only your application backend can connect.
 
 ### Encryption
 
 Neon protects PHI both in transit and at rest.
 
-- **At rest:** All data is encrypted using AES-256 at the storage layer. Neon manages these storage keys through secure key management services.
+- **At rest:** All data is encrypted using AES-256 at the storage layer. Neon manages these keys with AWS Key Management Service (KMS).
 - **In transit:** All network communications to the database require TLS 1.2 or higher. When connecting your application, Neon requires SSL.
 
 ## Audit logging
@@ -48,9 +47,9 @@ Compliance requires tracking who accessed what data and when they accessed it. N
 
 ### Postgres audit logs (pgaudit)
 
-When you enable HIPAA, Neon automatically configures the standard `pgaudit` extension for Postgres. Neon prioritizes security and minimizes the risk of accidentally logging PHI with these settings:
+When you enable HIPAA, Neon automatically configures the standard `pgaudit` extension for Postgres. These settings minimize the risk of accidentally logging PHI:
 
-- `pgaudit.log = 'all, -misc'`: Logs all major READ, WRITE, DDL, and ROLE statements.
+- `pgaudit.log = 'all, -misc'`: Logs READ, WRITE, FUNCTION, ROLE, DDL, and MISC_SET statements, excluding low-impact `MISC` commands.
 - `pgaudit.log_parameter = 'off'`: Prevents parameters passed to SQL statements from being logged. This keeps sensitive patient data out of plain text logs.
 - `pgaudit.log_catalog = 'off'`: Ignores queries on system catalogs to reduce noise.
 
@@ -76,7 +75,7 @@ Neon logs operations performed through the Neon Console and the Neon API.
 
 ### Accessing your logs
 
-Logs stream to a dedicated Neon audit collector. Self-serve export of HIPAA audit logs is not currently available in the console. To request logs for an audit or incident investigation, you can [raise a Support request](https://console.neon.tech/app/projects?modal=support) from the Neon Console.
+Logs stream to a dedicated Neon audit collector. Self-serve export of HIPAA audit logs isn't currently available in the Console. To request logs for an audit or incident investigation, [raise a support request](https://console.neon.tech/app/projects?modal=support) from the Neon Console.
 
 ## Shared responsibility model
 
@@ -87,16 +86,16 @@ HIPAA compliance is a shared effort. Neon secures the database infrastructure, b
 - Infrastructure security, physical safeguards, and OS-level patching.
 - Encryption at rest and enforcing TLS for connections.
 - Automated `pgaudit` configuration and secure log retention.
-- Vendor risk management and BAA execution with sub-processors.
+- Vendor risk management and BAA execution with subprocessors.
 
 **You handle:**
 
 - **PHI minimization in metadata:** You must never use PHI in database metadata. Avoid putting patient names in table names, column names, schema descriptions, or role names.
-- **Row-Level Security (RLS):** For multi-tenant or multi-user applications, you should configure [Postgres Row-Level Security](/postgresql/administration/row-level-security) to ensure users can only query the PHI they are explicitly authorized to view.
+- **Row-Level Security (RLS):** For multi-tenant or multi-user applications, configure [Postgres Row-Level Security](/postgresql/administration/row-level-security) so users can only query the PHI they are explicitly authorized to view.
 - **Application-layer access controls:** You need to implement access control logic in your application.
 - **Safe query execution:** You must use parameterized queries or an ORM to pass PHI securely.
 - **Data masking and anonymization:** When sharing data with analytics teams or lower environments, use Postgres views or data masking techniques to redact raw PHI. Create separate user roles with scoped user permissions to prevent unauthorized access to sensitive data.
-- **Session management:** You should configure inactivity timeouts in your application to prevent unauthorized access from abandoned sessions.
+- **Session management:** Configure inactivity timeouts in your application to prevent unauthorized access from abandoned sessions.
 - **Sanitizing support tickets:** You must verify that support tickets do not contain raw PHI, logs with PHI, or sensitive error messages.
 - **Secure coding practices:** Avoid logging sensitive data in your application logs. This includes error messages that may contain PHI, such as stack traces with query parameters or user input.
 
@@ -183,12 +182,12 @@ REVOKE ALL ON clinical_records FROM PUBLIC;
 GRANT SELECT ON clinical_records_analyst TO analyst_role;
 ```
 
-### Explanation of the schema design:
+### Explanation of the schema design
 
 - **Data separation:** Identifying information (names, SSNs) is stored in `patient_identities`, while clinical data resides in `clinical_records`. This allows for more granular access control.
 - **Views exclude sensitive columns:** The `clinical_records_analyst` view exposes only essential metadata (diagnosis codes, dates, IDs) while hiding the `notes` column. Provider notes often contain sensitive clinical details, medication adjustments, or other PHI that analysts may not need to see.
-- **Limited role access:** The analyst role connects with credentials and receives `SELECT` permissions on the view only, not the underlying raw table. This ensures analysts cannot query unpredictable columns or bypass the view.
-- **Strict permissions:** The explicit `REVOKE ALL` statements remove any default permissions, ensuring analysts have no accidental access to sensitive tables, even if a future schema change adds new columns to `clinical_records`.
+- **Limited role access:** The analyst role connects with credentials and receives `SELECT` permissions on the view only, not the underlying raw table. Analysts can't query columns outside the view or bypass it.
+- **Strict permissions:** The explicit `REVOKE ALL` statements remove any default permissions, so analysts have no accidental access to sensitive tables, even if a future schema change adds new columns to `clinical_records`.
 - **Audit trail:** All queries through this role are logged by `pgaudit`, making it easy to verify who accessed what data and when.
 
 Scale this design to your needs by adding more views for different teams (e.g., `clinical_records_finance`, `clinical_records_reporting`) and granting each role access only to the columns they need.
@@ -239,7 +238,7 @@ async function insertPatientRecord(firstName, lastName, dob) {
 
 ## Summary
 
-Building a healthcare application requires strict attention to security, but your database infrastructure can help carry that load. Neon provides built-in HIPAA compliance features like AES-256 encryption, pre-configured `pgaudit`, and BAA coverage on accessible plans.
+Neon's HIPAA support gives you AES-256 encryption at rest, preconfigured `pgaudit`, and BAA coverage on the Scale plan. Your application still owns PHI minimization, access controls, and parameterized queries.
 
 To get started, upgrade to the Scale plan and enable HIPAA in your Organization settings.
 
@@ -247,8 +246,8 @@ To get started, upgrade to the Scale plan and enable HIPAA in your Organization 
 
 - [Neon HIPAA compliance documentation](/docs/security/hipaa)
 - [Neon Trust Center (SOC 2, ISO, HIPAA Reports)](https://trust.neon.com/)
-- [PostgreSQL pgAudit documentation](https://www.pgaudit.org/)
-- [PostgreSQL Row-Level Security (RLS) documentation](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
+- [pgAudit documentation](https://www.pgaudit.org/)
+- [Postgres Row-Level Security (RLS) documentation](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
 - [HHS Guidance on HIPAA Compliance for Developers](https://www.hhs.gov/hipaa/for-professionals/special-topics/health-information-technology/index.html)
 - [Schema only branches](/docs/guides/branching-schema-only)
 - [Branching With or Without PII: The Future of Environments](/blog/branching-environments-anonymized-pii)

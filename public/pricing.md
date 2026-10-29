@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Postgres Database, Authentication, and more backend primitives coming soon with three plans: Free, Launch, and Scale. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
+> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
 
 ## How billing works
 
@@ -30,16 +30,16 @@ Invoices under $0.50 are not collected.
 | Compute                          | 100 CU-hours/project                                   | $0.106/CU-hour                                        | $0.222/CU-hour                                                   |
 | Autoscaling                      | Up to 2 CU (8 GB RAM)                                  | Up to 16 CU (64 GB RAM)                               | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM) |
 | Scale to zero                    | After 5 min                                            | After 5 min, can be disabled                          | Configurable (1 minute to always on)                             |
-| Storage                          | 0.5 GB/project                                         | $0.35/GB-month                                        | $0.35/GB-month                                                   |
+| Storage                          | 1 GB/project, 20 GB account total                    | $0.35/GB-month                                        | $0.35/GB-month                                                   |
 | Instant restore                  | -                                                      | $0.20/GB-month                                        | $0.20/GB-month                                                   |
 | History window                   | 6 hours (1 GB limit)                                   | Up to 7 days                                          | Up to 30 days                                                    |
 | Snapshots (manual)               | 1                                                      | 100                                                   | 100                                                              |
 | Snapshots (scheduled)            | -                                                      | Yes ($0.09/GB-month)                                  | Yes ($0.09/GB-month)                                             |
 | Public network transfer (egress) | 5 GB per project included                              | 500 GB per project included, then $0.10/GB            | 500 GB per project included, then $0.10/GB                       |
 | Private network transfer         | -                                                      | -                                                     | $0.01/GB                                                         |
-| Auth (MAU)                       | Up to 60k MAU                                          | Up to 1M MAU                                          | Up to 1M MAU                                                     |
+| Auth (MAU)                       | Up to 60k MAU per project                              | Up to 1M MAU per project                              | Up to 1M MAU per project                                         |
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
-| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
+| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
 | AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
 | Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
 | Metrics/logs export              | -                                                      | -                                                     | Yes                                                              |
@@ -60,7 +60,7 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 
 - **Branches** are capped at 5,000 per project on paid plans (10/25 included). Free is capped at 10 per project.
 - **Instant restore** is charged only on root branches; child branches don't add to this charge.
-- **Storage size** is unlimited on paid plans: there's no hard per-branch size limit and storage grows with your usage. Free is capped at 0.5 GB per project.
+- **Storage size** (Postgres storage) is unlimited on paid plans: there's no hard per-branch size limit and storage grows with your usage. Free is capped at 1 GB of Postgres storage per project and 20 GB total across all projects. This is separate from Object Storage, which has its own Free allowance.
 - **Storage on child branches** uses copy-on-write: they start at $0 and grow with writes on that branch, capped at the branch's data size. Root branches are billed on their full data size.
 - **Snapshots** are billed at $0.09/GB-month for both manual and scheduled storage. The table figures are per-project count limits, not free allowances. Scheduled snapshots don't count against the manual limit.
 - **Read replicas** are separate computes and count toward CU-hours.
@@ -68,7 +68,7 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Private Networking** ($0.01/GB on Scale) counts traffic in **both directions**.
 - **HIPAA** is self-serve on Scale (BAA required), currently at no additional cost. See [HIPAA](https://neon.com/docs/security/hipaa.md) for details.
 - **Object Storage** and **Functions**: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
-- **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per month.
+- **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per project per month.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
 
@@ -88,7 +88,7 @@ Branches above your plan's allowance (10 included on Free/Launch, 25 on Scale) a
 
 ### What happens when I hit Free plan limits?
 
-All limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 0.5 GB storage blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
+Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
 
 ### How can I control my costs?
 
@@ -107,6 +107,6 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 - Get started: https://neon.com/signup
 - Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
 - Get up to $100k in credits for your startup: https://neon.com/startups
-- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Get monthly sponsorship for maintaining open source: https://neon.com/programs/open-source.md
 - Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
 - More plan details: https://neon.com/docs/introduction/plans.md

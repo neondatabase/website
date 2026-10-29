@@ -12,7 +12,7 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-23T21:49:37.670Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -21,8 +21,8 @@ Neon provides [Managed Better Auth](/docs/auth/overview), a managed authenticati
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
-<Admonition type="comingSoon">
-Looking to manage **authorization** along with authentication? [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+<Admonition type="note">
+Looking to manage **authorization** along with authentication? The [Neon Data API](/docs/data-api/custom-authentication-providers) validates Clerk JWTs and enforces Row-Level Security (RLS) policies directly in Postgres, so you can manage access at the database level.
 </Admonition>
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Lakebase Postgres database.

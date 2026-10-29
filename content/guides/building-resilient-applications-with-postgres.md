@@ -4,10 +4,10 @@ subtitle: Learn best practices for building applications that gracefully handle 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-11-13T00:00:00.000Z'
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Building resilient applications is essential when working with managed database services, where brief connection drops though rare can occur. While this guide uses Neon as an example, these best practices and code examples apply to **any** managed database service, helping you handle interruptions gracefully and keep your application stable and responsive.
+Managed database services occasionally drop connections for a few seconds. This guide uses Neon as an example, but the practices and code examples apply to **any** managed database service, so your application can handle these interruptions and keep serving requests.
 
 Managed database services routinely perform maintenance, apply updates, and optimize resources. While some maintenance can be scheduled, urgent security patches or critical updates may require brief compute restarts. These restarts can lead to temporary connection drops lasting a few seconds.
 
@@ -15,34 +15,34 @@ Instead of treating these events as errors, resilient applications anticipate an
 
 ## Understanding connection drops in Neon
 
-In Neon, compute and storage are separate, so a "connection drop" typically means your compute instance has restarted: a fast operation that usually lasts only a few seconds. Understanding these restarts as a resilience challenge, not an availability issue, is key to building durable applications.
+In Neon, compute and storage are separate, so a "connection drop" typically means your compute has restarted, which usually takes only a few seconds. Your data stays intact in storage, so the job of your application is to reconnect and retry.
 
 Compute restarts most commonly occur for three reasons:
 
-- [Platform Maintenance](/docs/manage/platform-maintenance): Neon periodically performs essential infrastructure maintenance to ensure security, reliability, and performance, which sometimes requires a brief compute restart.
-- [Compute Updates](/docs/manage/updates): To keep your Postgres instances optimized and current, Neon applies updates that require a quick restart.
-- [Scale to Zero](/docs/introduction/scale-to-zero): To save costs, Neon automatically suspends idle computes after a period of inactivity (5 minutes by default on the Free plan). The first connection to a suspended compute triggers a "cold start," adding a few hundred milliseconds to connection time. Existing idle connections are terminated when the compute suspends.
+- [Platform maintenance](/docs/manage/platform-maintenance): Neon periodically performs infrastructure maintenance, which sometimes requires a brief compute restart.
+- [Compute updates](/docs/manage/updates): Neon applies Postgres and compute updates that require a quick restart.
+- [Scale to zero](/docs/introduction/scale-to-zero): Neon automatically suspends idle computes after 5 minutes of inactivity by default. The setting is fixed on the Free plan; paid plans can disable it. The first connection to a suspended compute triggers a "cold start," adding a few hundred milliseconds to connection time. Existing idle connections are terminated when the compute suspends.
 
-For more details on schedules and the nature of these events, see [Neon Maintenance and updates overview](/docs/manage/maintenance-updates-overview).
+For more details on schedules and the nature of these events, see [Maintenance and updates overview](/docs/manage/maintenance-updates-overview).
 
 ## Core strategies for resilience
 
-Building a resilient application involves three core strategies: using a connection pool, implementing intelligent retry logic, and configuring appropriate timeouts.
+Building a resilient application involves three core strategies: using a connection pool, retrying with backoff, and configuring appropriate timeouts.
 
 ### Use a connection pool
 
-A connection pool is essential. Instead of opening and closing connections for each query, a pool maintains a set of open connections that your application can borrow and return. This significantly reduces the overhead of establishing new connections and is the foundation for handling interruptions gracefully. Most production-grade database drivers and ORMs provide connection pooling.
+Instead of opening and closing connections for each query, a pool maintains a set of open connections that your application can borrow and return. This reduces the overhead of establishing new connections and gives your retry logic a place to get a fresh connection after a drop. Most production-grade database drivers and ORMs provide connection pooling.
 
 ### Implement retry logic with exponential backoff
 
 When a connection fails, your application shouldn't give up immediately. It should retry the operation. The best practice is to use **exponential backoff with jitter**:
 
-- **Exponential Backoff**: Increase the delay between retries exponentially (e.g., 1s, 2s, 4s, 8s). This prevents overwhelming the server with rapid-fire retries if it's in the process of restarting.
+- **Exponential backoff**: Increase the delay between retries exponentially (e.g., 1s, 2s, 4s, 8s). This prevents overwhelming the server with rapid-fire retries if it's in the process of restarting.
 - **Jitter**: Add a small, random amount of time to each delay. This prevents multiple instances of your application from retrying in lockstep (a [thundering herd problem](https://en.wikipedia.org/wiki/Thundering_herd_problem)), which can overload the database.
 
 ### Configure connection timeouts
 
-A compute restart or cold start on Neon typically takes only a few hundred milliseconds, though in very rare cases it can extend to a few seconds. If your application's connection timeout is too aggressive (e.g., 1 second), it may fail before the compute is ready. It is thus recommended to set a connection timeout of at least **10-15 seconds** to comfortably handle these brief interruptions.
+A compute restart or cold start on Neon typically takes only a few hundred milliseconds, though in very rare cases it can extend to a few seconds. If your application's connection timeout is too aggressive (e.g., 1 second), it may fail before the compute is ready. Set a connection timeout of at least **10-15 seconds** to cover these brief interruptions.
 
 ## Handling database errors
 
@@ -54,7 +54,7 @@ When a connection is terminated by Neon during a restart, Postgres sends a speci
 
 The most common transient error codes you'll encounter with Neon are:
 
-| SQLSTATE | Error Name                  | Description                                                              |
+| SQLSTATE | Error name                  | Description                                                              |
 | :------- | :-------------------------- | :----------------------------------------------------------------------- |
 | `57P01`  | `admin_shutdown`            | The server is shutting down. This is the typical error during a restart. |
 | `08006`  | `connection_failure`        | The connection to the server was lost.                                   |
@@ -62,7 +62,7 @@ The most common transient error codes you'll encounter with Neon are:
 
 Most database drivers wrap these SQLSTATEs in higher-level exceptions (e.g., `OperationalError` in Python's `psycopg` or a specific `NpgsqlException` in .NET). Your code should catch these exceptions and inspect them to decide whether to retry.
 
-### Handling transactions and Idempotency
+### Handling transactions and idempotency
 
 Retrying database operations is straightforward for read-only queries (`SELECT`), but write operations (`INSERT`, `UPDATE`, `DELETE`) require special care to avoid unintended side effects.
 
@@ -70,7 +70,7 @@ Retrying database operations is straightforward for read-only queries (`SELECT`)
 
 - **Write transactions**: Retrying a write transaction is more complex due to the ambiguity of connection failures.
 
-<Admonition type="important" title="The Challenge: Acknowledgment Loss">
+<Admonition type="important" title="Acknowledgment loss">
 Consider this scenario:
 1. Your application sends a `COMMIT` command for an `INSERT` transaction.
 2. The database successfully commits the transaction to disk.
@@ -81,7 +81,7 @@ Your application receives a connection error and is left in an ambiguous state: 
 While this specific scenario of a lost commit acknowledgment is rare, it is a critical edge case to handle for systems where data integrity matters most, such as e-commerce, financial services, or booking platforms.
 </Admonition>
 
-#### The Idempotency Key Pattern
+#### The idempotency key pattern
 
 The fix is to make your write operations **idempotent**. An idempotent operation is one that can be performed multiple times with the same result as if it were performed only once. This can be achieved by using a client-generated **idempotency key**.
 
@@ -119,7 +119,7 @@ The pattern works as follows:
     - If the connection drops and your application retries the transaction with the **same idempotency key**, the database's `UNIQUE` constraint will prevent a duplicate insert. The database will return a `unique_violation` error (SQLSTATE `23505`).
     - Your application's retry logic should catch this specific `unique_violation` error and interpret it as a **successful commit from a previous attempt**, not as a failure. It can then safely proceed, knowing the operation is complete.
 
-This pattern transforms an ambiguous connection error into a definitive success signal, ensuring that critical write operations are safely retriable without duplicating data.
+This pattern turns an ambiguous connection error into a clear success signal, so you can retry write operations without duplicating data.
 
 ## Language specific examples
 
@@ -754,7 +754,7 @@ After implementing connection pooling and retry logic, you must test it to ensur
 
 Your application needs to be running and performing a transaction that takes several seconds to complete. This provides a window of opportunity to trigger the restart while the connection is active and in use.
 
-The Node.js example below, which uses `node-postgres`, is a perfect template for this test. It begins a transaction, performs a query, and then waits for 10 seconds before committing. This 10-second window is when you will restart the compute. You can adapt this pattern to your preferred programming language.
+The Node.js example below, which uses `node-postgres`, works as a template for this test. It begins a transaction, performs a query, and then waits for 10 seconds before committing. This 10-second window is when you will restart the compute. You can adapt this pattern to your preferred programming language.
 
 ```javascript shouldWrap
 // A test-ready application snippet (full code in previous section)
@@ -827,11 +827,11 @@ While your application is running (specifically, during the 10-second simulated 
 
 <TabItem>
 
-Navigate to the **Branches** page in the Neon Console:
+In the Neon Console:
 
-1. Select the branch your application is connected to.
-2. Go to the **Computes** tab.
-3. Click the menu ( **⫶** ) next to your compute endpoint.
+1. Select the branch your application is connected to from the **BRANCH** selector.
+2. Select **Postgres database** > **Computes**.
+3. Open the menu next to your compute.
 4. Select **Restart compute**.
 
 ![Restarting a compute from the Neon Console](/docs/manage/restart_compute.png)
@@ -840,9 +840,9 @@ Navigate to the **Branches** page in the Neon Console:
 
 <TabItem>
 
-To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage/api-keys) section in the Neon Console settings. You also need your project ID and endpoint ID, which you can find in the [Branches](/docs/manage/branches#view-branches) page of your project. For more details on project settings, see [Project Settings](/docs/manage/projects#project-settings). See [Computes](/docs/manage/computes) for information on endpoints.
+To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage/api-keys) section in the Neon Console settings. You also need your project ID and endpoint ID, which you can find in the [Branches](/docs/manage/branches#view-branches) page of your project. For more details on project settings, see [Project settings](/docs/manage/projects#project-settings). See [Computes](/docs/manage/computes) for information on endpoints.
 
-Use the [Restart compute endpoint](/docs/reference/api#/operations/restartProjectEndpoint) API. This is ideal for automated testing.
+Use the [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API. This works well for automated testing.
 
 ```bash shouldWrap
 curl --request POST \
@@ -888,7 +888,7 @@ PostgreSQL version: PostgreSQL 17.5 (aa1f746) on x86_64-pc-linux-gnu, compiled b
 4.  **`Retrying... Attempt 1.`**: This is the payoff. The retry library catches the thrown error and, because `isTransientError` returned `true`, it initiates a new attempt.
 5.  **`Query successful!`**: The retry succeeds. The pool provides a new, healthy connection, the entire operation is re-executed, and this time it completes without interruption.
 
-This successful test run proves that your application can withstand a sudden compute restart, handle the resulting errors, and recover gracefully to complete its task.
+A run like this shows that your application can survive a compute restart, handle the resulting errors, and complete its task.
 
 </Steps>
 
@@ -901,8 +901,8 @@ description="A pre-built prompt to help AI agents add connection resilience best
 
 ## Resources
 
-- [Neon Platform Updates](/docs/manage/updates)
-- [Neon Platform maintenance](/docs/manage/platform-maintenance)
+- [Updates](/docs/manage/updates)
+- [Platform maintenance](/docs/manage/platform-maintenance)
 - [Connection latency and timeouts](/docs/connect/connection-latency)
 - [Neon serverless driver](/docs/serverless/serverless-driver)
 - [Restart a compute](/docs/manage/computes#restart-a-compute)

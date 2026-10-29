@@ -1,17 +1,17 @@
 ---
-title: Creating a Content Moderation System with Laravel, OpenAI API, and Lakebase Postgres
+title: Creating a content moderation system with Laravel, OpenAI API, and Lakebase Postgres
 subtitle: Build an automated content moderation system for your application using Laravel Livewire, OpenAI's moderation API, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-22T00:00:00.000Z'
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Content moderation is essential for maintaining healthy online communities and platforms. In this guide, we'll create a content moderation system that uses OpenAI's moderation API to automatically analyze and flag potentially problematic content before it reaches your users.
+In this guide, we'll create a content moderation system that uses OpenAI's moderation API to automatically analyze and flag potentially problematic content before it reaches your users.
 
-We will use Laravel, OpenAI's moderation API, and Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, and build a system that can handle content moderation for comments, forum posts, product reviews, or any user-generated content.
+We'll use Laravel, OpenAI's moderation API, and a Lakebase Postgres database on Neon to build a system that can moderate comments, forum posts, product reviews, or any other user-generated content.
 
-## What You'll Build
+## What you'll build
 
 In this guide, you'll build a content moderation system with the following features:
 
@@ -31,15 +31,15 @@ To follow the steps in this guide, you will need:
 - An [OpenAI](https://platform.openai.com/signup) account with API access
 - Basic familiarity with Laravel and PHP
 
-## Create a Neon Project
+## Create a Neon project
 
-Neon provides a serverless Postgres database that automatically scales as your application grows. Let's set up a Neon database for our content moderation system:
+Set up a database on Neon for the content moderation system:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
-2. Click "New Project" and select your preferred settings.
+2. Click **New Project** and select your preferred settings.
 3. Once your project is created, you'll see the connection details. Save the connection string for later use.
 
-## Set up a Laravel Project
+## Set up a Laravel project
 
 Now, let's create a new Laravel project and set it up to work with our Neon database:
 
@@ -48,9 +48,9 @@ composer create-project laravel/laravel moderation-system
 cd moderation-system
 ```
 
-This creates a new Laravel 11 project in a directory called `moderation-system` and moves you into that directory.
+This creates a new Laravel project in a directory called `moderation-system` and moves you into that directory.
 
-## Configure Environment Variables
+## Configure environment variables
 
 To configure your Laravel application to connect to Lakebase Postgres and OpenAI, you need to set up your environment variables.
 
@@ -75,7 +75,7 @@ OPENAI_API_KEY=your-openai-api-key
 
 The `OPENAI_API_KEY` will be used by our moderation service to communicate with [OpenAI's moderation API](https://platform.openai.com/docs/guides/moderation).
 
-## Install Livewire and Other Required Packages
+## Install Livewire and other required packages
 
 Let's install the necessary packages for our project:
 
@@ -85,7 +85,7 @@ composer require livewire/livewire openai-php/laravel
 
 This installs:
 
-- [Livewire](https://livewire.laravel.com/): A Laravel package that makes building dynamic web apps simple, without writing JavaScript
+- [Livewire](https://livewire.laravel.com/): A Laravel package for building dynamic interfaces without writing JavaScript
 - [OpenAI Laravel Client](https://github.com/openai-php/laravel): A library for interacting with OpenAI's API within Laravel
 
 Next, let's install Laravel Breeze with Livewire for authentication and UI scaffolding:
@@ -114,7 +114,7 @@ php artisan migrate
 Neon supports both direct and pooled database connection strings, which you can copy from the **Connect** modal (**Connect** in the Console nav). A pooled connection string connects your application to the database via a PgBouncer connection pool, allowing for a higher number of concurrent connections. However, using a pooled connection string for migrations can be prone to errors. For this reason, we recommend using a direct (non-pooled) connection when performing migrations. For more information about direct and pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-## Create Database Schema
+## Create the database schema
 
 Now we'll create the database schema for our content moderation system. We need to track three main types of data:
 
@@ -132,7 +132,7 @@ php artisan make:migration create_moderation_settings_table
 
 This will create three migration files in the `database/migrations` directory. Now, let's define the schema for each table:
 
-### 1. Content Items Table
+### 1. Content items table
 
 This table stores the actual content that needs moderation:
 
@@ -162,7 +162,7 @@ public function up(): void
 }
 ```
 
-### 2. Moderation Results Table
+### 2. Moderation results table
 
 This table stores the results returned by the OpenAI moderation API:
 
@@ -195,7 +195,7 @@ public function up(): void
 }
 ```
 
-### 3. Moderation Settings Table
+### 3. Moderation settings table
 
 This table stores moderation settings for different content types:
 
@@ -233,7 +233,7 @@ php artisan migrate
 
 After completing your migrations, you can switch to a pooled connection for better performance in your application.
 
-## Create Models
+## Create models
 
 Now let's create the Eloquent models for our database tables. These models will help us interact with the database using Laravel's ORM:
 
@@ -245,7 +245,7 @@ php artisan make:model ModerationSetting
 
 This will create three model files in the `app/Models` directory. Let's define each model with their relationships and attributes:
 
-### 1. ContentItem Model
+### 1. ContentItem model
 
 ```php
 // app/Models/ContentItem.php
@@ -295,7 +295,7 @@ class ContentItem extends Model
 
 In the `ContentItem` model, we define the `$fillable` array to specify which fields can be mass-assigned. We also define relationships with the `ModerationResult` and `User` models which will allow us to retrieve related data without writing complex SQL queries.
 
-### 2. ModerationResult Model
+### 2. ModerationResult model
 
 ```php
 // app/Models/ModerationResult.php
@@ -345,7 +345,7 @@ class ModerationResult extends Model
 
 Here again, we define the `$fillable` array to specify which fields can be mass-assigned. We also define a relationship with the `ContentItem` model to retrieve the content item associated with this moderation result.
 
-### 3. ModerationSetting Model
+### 3. ModerationSetting model
 
 ```php
 // app/Models/ModerationSetting.php
@@ -383,9 +383,9 @@ class ModerationSetting extends Model
 
 Similar to the other models, we define the structure of our data and the relationships between them. The `ModerationSetting` model will store the moderation settings for different content types.
 
-## Build Moderation Service
+## Build the moderation service
 
-Now, let's create a service class that will handle the content moderation logic. This service will use the OpenAI API to analyze content and store the results.
+Next, create a service class for the content moderation logic. It uses the OpenAI API to analyze content and store the results.
 
 First, create a new directory for services:
 
@@ -525,7 +525,7 @@ class ModerationService
 }
 ```
 
-There are a few key points that the `ModerationService` class does, let's break it down:
+Here's what the `ModerationService` class does:
 
 1. It initializes an OpenAI client using your API key.
 2. The `moderateContent` method:
@@ -591,9 +591,9 @@ Add this new service provider to the providers array in `bootstrap/providers.php
 ],
 ```
 
-With the service provider in place along the models and migration files, we can now move to the next step of creating the Livewire components.
+With the service provider, models, and migrations in place, you can create the Livewire components.
 
-## Create Livewire Components
+## Create Livewire components
 
 Now, let's create Livewire components for our content moderation system. Livewire allows us to create interactive UI components without writing JavaScript. We'll create a component for content submission, a moderation queue, and a dashboard for moderation statistics.
 
@@ -611,7 +611,7 @@ php artisan livewire:make DashboardStats
 
 This will create three new Livewire components in the `app/Livewire` directory along with their corresponding views in the `resources/views/livewire` directory.
 
-### 1. `ContentSubmission` Component
+### 1. `ContentSubmission` component
 
 First, let's implement the component class:
 
@@ -758,7 +758,7 @@ Now, let's create the view for this component:
 
 The view contains a form for users to submit content, including a dropdown for selecting the content type and a textarea for entering the content. The form submission is handled by the `submitContent` method in the component class.
 
-### 2. `ModerationQueue` Component
+### 2. `ModerationQueue` component
 
 Now, let's implement the moderation queue component class:
 
@@ -990,7 +990,7 @@ And the view for the moderation queue:
 
 The view displays a table of content items with columns for ID, type, content, status, flags, and actions. It also includes buttons to approve, reject, or moderate content items.
 
-### 3. `DashboardStats` Component
+### 3. `DashboardStats` component
 
 Finally, let's implement the dashboard stats component:
 
@@ -1144,7 +1144,7 @@ And the view for the dashboard stats:
 
 The view displays statistics for pending, approved, rejected, and flagged content items in a grid layout. It also includes a link to the moderation queue.
 
-## Set Up Routes
+## Set up routes
 
 Now let's define the routes for our admin dashboard and content submission page. We'll use Laravel's route middleware to protect the admin routes with the `viewModeration` gate. You can learn more about Laravel's authorization gates in the [Laravel authorization guide here](/guides/laravel-authorization).
 
@@ -1213,9 +1213,9 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-This `AppServiceProvider` defines who can access the moderation dashboard. In a real application, you would want to implement more sophisticated access control logic. For more information on Laravel authorization, check out the [official documentation](https://laravel.com/docs/8.x/authorization) and the [Laravel authorization guide](/guides/laravel-authorization).
+This `AppServiceProvider` defines who can access the moderation dashboard. In a real application, you'd want stricter access control logic. For more information on Laravel authorization, check out the [official documentation](https://laravel.com/docs/authorization) and the [Laravel authorization guide](/guides/laravel-authorization).
 
-## Create Admin Dashboard
+## Create the admin dashboard
 
 Let's create a layout for our admin dashboard. First, create an admin layout file:
 
@@ -1307,7 +1307,7 @@ npm run dev
 
 This will compile the assets and make them available for your application. You can now test the content submission page by visiting the `/submit` route and submitting some content, and then check the moderation queue at `/admin/moderation-queue` and the stats dashboard at `/admin`.
 
-## Test the System
+## Test the system
 
 With everything set up, you can now test the moderation system.
 
@@ -1444,7 +1444,7 @@ You can test the moderation system with this command:
 
   With this you will get a status of `rejected` and the content will be flagged as `violence` and `threatening`.
 
-## How the System Works
+## How the system works
 
 Let's walk through how the content moderation system works in practice:
 
@@ -1455,7 +1455,7 @@ Let's walk through how the content moderation system works in practice:
 
 2. AI Moderation:
    - OpenAI analyzes the content and returns categories, scores, and a flagged status
-   - The `ModerationService` saves these results to the `ModerationResult` table in our Lakebase Postgres database
+   - The `ModerationService` saves these results to the `moderation_results` table in your Lakebase Postgres database
    - Based on settings, content may be auto-approved or auto-rejected
 
 3. Manual Review:
@@ -1470,15 +1470,8 @@ Let's walk through how the content moderation system works in practice:
 
 ## Conclusion
 
-In this guide, we've built a content moderation system using Laravel, Livewire, OpenAI, and Lakebase Postgres. This system can:
+You built a content moderation system with Laravel, Livewire, OpenAI, and Lakebase Postgres that analyzes submitted content, stores flagged categories and scores, and gives moderators a queue for manual review.
 
-- Accept user-generated content and automatically analyze it for harmful content
-- Store moderation results in Neon with detailed information about flagged categories
-- Provide different moderation settings for different content types
-- Offer an interactive admin dashboard for manual review of flagged content
-
-This moderation system can be integrated into various applications, from forums and social networks to review platforms and comment systems.
-
-As a next step, you can use Laravel queues to process moderation tasks asynchronously, improving performance and scalability. You can check out the [Laravel queues guide](/guides/laravel-queue-workers-job-processing) for more information.
+As a next step, move moderation calls into Laravel queues so submissions don't wait on the OpenAI API. See the [Laravel queues guide](/guides/laravel-queue-workers-job-processing).
 
 <NeedHelp />

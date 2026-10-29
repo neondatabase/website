@@ -4,19 +4,19 @@ subtitle: Use Pulumi to provision and manage your Neon projects, branches, endpo
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-10-08T00:00:00.000Z'
-updatedOn: '2025-10-10T03:31:08.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Pulumi](https://www.pulumi.com) is an open-source infrastructure-as-code (IaC) tool that lets you define and provision cloud resources using familiar programming languages such as TypeScript, Python, Go, and C#. By expressing infrastructure as code, Pulumi enables you to use loops, functions, classes, and package management to create configurations that are more dynamic, reusable, and maintainable.
+[Pulumi](https://www.pulumi.com) is an open-source infrastructure-as-code (IaC) tool that lets you define and provision cloud resources using familiar programming languages such as TypeScript, Python, Go, and C#. Because your infrastructure is ordinary code, you can use loops, functions, classes, and package management to build configurations you can reuse.
 
-This guide will show you how to use **Pulumi to manage your Neon projects**, including your branches, databases, and compute endpoints. By using Pulumi with Neon, you get better control, can track changes, and automate your database setup.
+This guide will show you how to use **Pulumi to manage your Neon projects**, including your branches, databases, and compute endpoints. With Pulumi, your Neon setup lives in version control, changes go through preview before they apply, and you can automate provisioning.
 
 Neon can be managed using the following Pulumi provider, which is bridged from the community-developed Terraform provider:
 
 **Pulumi provider for Neon**
 
-- **Terraform Provider Maintainer:** Dmitry Kisler ([GitHub repository](https://github.com/kislerdm/terraform-provider-neon))
-- **Pulumi Provider Documentation:** [Pulumi Registry: Neon](https://www.pulumi.com/registry/packages/neon/)
+- **Terraform provider maintainer:** Dmitry Kisler ([GitHub repository](https://github.com/kislerdm/terraform-provider-neon))
+- **Pulumi provider documentation:** [Pulumi Registry: Neon](https://www.pulumi.com/registry/packages/neon/)
 
 <Admonition type="note">
 This provider is based on a community-maintained Terraform provider and is not officially supported by Neon. Use at your own discretion. If you have questions or find issues, please refer to the maintainer's GitHub repository.
@@ -28,8 +28,8 @@ Before you begin, ensure you have the following:
 
 1.  **Pulumi CLI installed:** If you don't have Pulumi installed, download and install it from the [official Pulumi website](https://www.pulumi.com/docs/install/).
 2.  **Node.js:** This guide uses TypeScript examples. You'll need Node.js installed to run them.
-3.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-4.  **Neon API key:** Generate an API key from the Neon Console. Navigate to your Account Settings > API Keys. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
+3.  **Neon account:** If you don't have one, [sign up for Neon](https://console.neon.tech/signup).
+4.  **Neon API key:** Generate an API key from the Neon Console. Select **Account settings** > **API keys**. This key is required for the provider to authenticate with the Neon API. Learn more about creating API keys in [Manage API keys](/docs/manage/api-keys).
 
 ## Set up the Pulumi Neon provider
 
@@ -100,7 +100,7 @@ This `neon` object contains two main types of components:
 - **Resources**: These are classes that map directly to objects you can create, update, and delete in your Neon account. The main resources you will use are `neon.Project`, `neon.Branch`, `neon.Endpoint`, `neon.Database`, and `neon.Role`.
 - **Functions**: These are used to read or query data about existing resources without managing them. For example, you can use the `getBranchEndpoints` function to fetch a list of endpoints for a specific branch.
 
-This guide focuses on creating and managing **Resources**. To explore data-sourcing **Functions**, please refer to the [Pulumi Neon Provider API Docs](https://www.pulumi.com/registry/packages/neon/api-docs/).
+This guide focuses on creating and managing **Resources**. To explore data-sourcing **Functions**, see the [Pulumi Neon provider API docs](https://www.pulumi.com/registry/packages/neon/api-docs/).
 
 ## Configure authentication
 
@@ -149,7 +149,7 @@ Now you can start defining Neon resources in your `index.ts` file. The following
 Open `index.ts` and replace its contents with the following:
 
 <Admonition type="warning">
-Always set the `orgId` property when creating a `neon.Project`. You can find your Organization ID in the Neon Console under Account Settings → Organization settings.
+Always set the `orgId` property when creating a `neon.Project`. You can find your organization ID in the Neon Console on your organization's **Settings** page, under **General information**.
 
 ![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
 
@@ -236,7 +236,7 @@ export const ciCdApiKeyValue = pulumi.secret(ciCdKey.key);
 ## Resource details
 
 - **`neon.Project`**: Creates a new Neon project. Key properties include `name`, `pgVersion`, `orgId`, and `regionId`. You can also define the default `branch` and `defaultEndpointSettings`. `historyRetentionSeconds` sets how long to retain change history for [Instant Restore](/docs/introduction/branch-restore).
-- **`neon.Branch`**: Creates a new branch. It requires a `projectId`. The `parentId` is optional and defaults to the project's primary branch.
+- **`neon.Branch`**: Creates a new branch. It requires a `projectId`. The `parentId` is optional and defaults to the project's default branch.
 - **`neon.Endpoint`**: Creates a compute endpoint. It requires a `projectId` and `branchId`. The `type` can be `read_write` or `read_only`. A branch can have only one `read_write` endpoint.
 - **`neon.Role`**: Creates a new role (user) on a specific branch. It requires `projectId`, `branchId`, and a `name`. The `password` is a computed, sensitive output.
 - **`neon.Database`**: Creates a new database on a specific branch. It requires `projectId`, `branchId`, a `name`, and an `ownerName`.
@@ -398,7 +398,7 @@ Outputs:
   + projectConnectionUri  : [secret]
 ```
 
-This is a critical security feature that prevents credentials from being accidentally exposed in logs, CI/CD output, or version control. In your code, wrapping an output in `pulumi.secret()` marks it as a secret, ensuring it's handled with encryption.
+Masking keeps credentials out of logs, CI/CD output, and version control. In your code, wrapping an output in `pulumi.secret()` marks it as a secret, and Pulumi encrypts it in the stack state.
 
 ```typescript
 // Marking outputs as secrets
@@ -456,7 +456,7 @@ The command format is: `pulumi import <type> <name> <id>`
 
 ### Neon resource types and ID formats
 
-| Resource | Pulumi Type Token              | ID Format                                    |
+| Resource | Pulumi type token              | ID format                                    |
 | -------- | ------------------------------ | -------------------------------------------- |
 | Project  | `neon:index/project:Project`   | Project ID (e.g., `damp-recipe-88779456`)    |
 | Branch   | `neon:index/branch:Branch`     | Branch ID (e.g., `br-orange-bonus-a4v00wjl`) |
@@ -609,7 +609,7 @@ Let's assume you have an existing project and a branch you want to manage with P
     Similarly, you can import other resources like `Endpoint`, `Role`, and `Database` using their respective IDs.
 
 3.  **Reconcile and finalize:**
-    After adding the code to your `index.ts`, run `pulumi preview` and `pulumi up`. Pulumi will compare the imported state with your new code and ensure they match. After this, your resources are fully managed by Pulumi.
+    After adding the code to your `index.ts`, run `pulumi preview` and `pulumi up`. Pulumi will compare the imported state with your new code and ensure they match. After this, Pulumi manages your resources.
 
 ## Destroying resources
 
@@ -639,12 +639,12 @@ Though this guide uses TypeScript, Pulumi supports multiple programming language
 - Java
 - YAML
 
-For all language-specific example code and API references, visit [Pulumi: Neon Provider](https://www.pulumi.com/registry/packages/neon/api-docs/)
+For all language-specific example code and API references, visit [Pulumi: Neon provider](https://www.pulumi.com/registry/packages/neon/api-docs/).
 
 ## Resources
 
-- [Pulumi Documentation](https://www.pulumi.com/docs/)
-- [Pulumi Neon Provider](https://www.pulumi.com/registry/packages/neon/)
+- [Pulumi documentation](https://www.pulumi.com/docs/)
+- [Pulumi Neon provider](https://www.pulumi.com/registry/packages/neon/)
 - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon)
 - [Manage Neon with Terraform](/docs/reference/terraform)
 

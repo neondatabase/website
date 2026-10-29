@@ -1,14 +1,14 @@
 ---
-title: Building a High-Performance Sensor Data API with FastAPI and Postgres' TimescaleDB Extension
-subtitle: Create an  API for streaming, storing, and querying sensor data using Postgres TimescaleDB and FastAPI
+title: Building a high-performance sensor data API with FastAPI and the Postgres TimescaleDB extension
+subtitle: Create an API for streaming, storing, and querying sensor data using Postgres TimescaleDB and FastAPI
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-12T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for efficient time-series data storage.
-By combining FastAPI with TimescaleDB's advanced time-series features, you'll be able to maintain low latency queries even at the petabyte scale, making it perfect for things like IoT systems that generate large volumes of sensor data.
+In this guide, you'll build a high-performance API for streaming, storing, and querying sensor data using FastAPI and TimescaleDB for time-series data storage.
+TimescaleDB partitions time-series data into chunks by time, which keeps queries fast as data grows. That fits IoT systems and other workloads that generate large volumes of sensor data.
 
 ## Prerequisites
 
@@ -18,9 +18,9 @@ Before starting, ensure you have the following tools and services ready:
   ```bash
   pip --version
   ```
-- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
+- A Neon account: you'll use it to create your Postgres database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup).
 
-## Setting up the Project
+## Setting up the project
 
 Follow these steps to set up your project and virtual environment:
 
@@ -38,7 +38,7 @@ Follow these steps to set up your project and virtual environment:
     uv init timescale_fastapi
     ```
 
-    This will create a new project directory called `timescale_fastapi`. Open this directory in your code editor of your choice.
+    This will create a new project directory called `timescale_fastapi`. Open this directory in your code editor.
 
 2.  Set up the virtual environment.
 
@@ -58,7 +58,7 @@ Follow these steps to set up your project and virtual environment:
 
         </CodeTabs>
 
-        You should see `(timescale_fastapi)` in your terminal now, this means that your virtual environment is activated.
+        You should see `(timescale_fastapi)` in your terminal now, which means your virtual environment is activated.
 
 3.  Install dependencies.
 
@@ -69,8 +69,8 @@ Follow these steps to set up your project and virtual environment:
     ```
 
     where each package does the following:
-    - `FastAPI`: A Web / API framework
-    - `AsyncPG`: An asynchronous PostgreSQL client
+    - `FastAPI`: A web and API framework
+    - `AsyncPG`: An asynchronous Postgres client
     - `Uvicorn`: An ASGI server for our app
     - `Loguru`: A logging library
     - `Python-dotenv`: To load environment variables from a .env file
@@ -96,11 +96,11 @@ Follow these steps to set up your project and virtual environment:
     └── uv.lock
     ```
 
-## Setting up your Database
+## Setting up your database
 
-In this section, you will set up the `TimescaleDB` extension using Neon's console, add the database's schema, and create the database connection pool and lifecycle management logic in FastAPI. Optionally, you can also add some mock data to test your API endpoints.
+In this section, you will set up the `TimescaleDB` extension in the Neon Console, add the database's schema, and create the database connection pool and lifecycle management logic in FastAPI. Optionally, you can also add some mock data to test your API endpoints.
 
-Given TimescaleDB is an extension on top of vanilla Postgres, you must first add the extension by running the following SQL in the `SQL Editor` tab of the Neon console.
+TimescaleDB is a Postgres extension, so first add it by running the following SQL in the **SQL Editor** of the Neon Console. Neon supports only the Apache-2 licensed TimescaleDB features, and compression isn't supported. See [The timescaledb extension](/docs/extensions/timescaledb) for details.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS timescaledb;
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS sensor_data (
 );
 ```
 
-One of TimescaleDB's core features is `Hypertables`, which is an optimized abstraction for handling large time-series data. It partitions your data into chunks based on time, allowing efficient storage, querying, and performance at scale. By converting the sensor_data table into a hypertable, TimescaleDB will manage the underlying chunking and indexing automatically.
+One of TimescaleDB's core features is `Hypertables`, an abstraction for handling large time-series tables. It partitions your data into chunks based on time, so queries over a time range only scan the relevant chunks. By converting the sensor_data table into a hypertable, TimescaleDB will manage the underlying chunking and indexing automatically.
 
 To convert the `sensor_data` table into a hypertable, use the following command:
 
@@ -142,7 +142,7 @@ VALUES
     ('humidity', 'Indoor humidity sensor', 'Living Room');
 ```
 
-Next, generate time-series data for the past 14 days with one-minute intervals for both sensors. Here's how you can insert random data for each sensor using Timescales `generate_series()` feature.
+Next, generate time-series data for the past 14 days with one-minute intervals for both sensors. Here's how you can insert random data for each sensor using the Postgres `generate_series()` function.
 
 ```sql
 INSERT INTO sensor_data (sensor_id, value, time)
@@ -164,15 +164,15 @@ SELECT 2 as sensor_id,
        ) AS time;
 ```
 
-With your schema and sample data in place, you're now ready to connect to your database in the FastAPI application. To do this you must create a `.env` file in the root of the project to hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
+With your schema and sample data in place, you're now ready to connect to your database in the FastAPI application. To do this, create a `.env` file in the root of the project to hold environment-specific variables, such as the connection string to your database on Neon.
 
 ```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials, which are available in the console.
+Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your Neon connection string, which you can copy by clicking **Connect** on your project dashboard in the Neon Console.
 
-In your project, the `database.py` file manages the connection to `PostgreSQL` using `asyncpg` and its connection pool, which is a mechanism for managing and reusing database connections efficiently. With this, you can use asynchronous queries, allowing the application to handle multiple requests concurrently.
+In your project, the `database.py` file manages the connection to Postgres using `asyncpg` and its connection pool, which reuses database connections. With it, you can run asynchronous queries, so the application can handle multiple requests concurrently.
 
 ```python
 import os
@@ -242,13 +242,13 @@ async def close_postgres() -> None:
 
 ```
 
-`init_postgres` is responsible for opening the connection pool to the `PostgreSQL` database and `close_postgres` is responsible for gracefully closing all connections in the pool when the `FastAPI` app shuts down to properly manage the lifecycle of the database.
+`init_postgres` is responsible for opening the connection pool to the Postgres database, and `close_postgres` closes all connections in the pool when the `FastAPI` app shuts down.
 
 Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool. If the pool is not initialized, an error is raised.
 
-## Defining the Pydantic Models
+## Defining the Pydantic models
 
-Now, you will create `Pydantic` models to define the structure of the data your API expects and returns, automatically validating incoming requests and responses versus the defined format.
+Now, you will create `Pydantic` models to define the structure of the data your API expects and returns, and validate incoming requests and responses against that format.
 
 ```python
 from pydantic import BaseModel
@@ -282,16 +282,16 @@ class SensorDailyStatsResponse(BaseModel):
     iqr_value: float
 ```
 
-Each of the models represent the following:
+Each model represents the following:
 
 - `SensorData`: A single sensor reading, including the value recorded and the timestamp when the reading occurred
 - `SensorDataBatch`: A batch of data points, to support batch streaming in your API
 - `SensorCreate`: The fields for creating a new sensor
 - `SensorDailyStatsResponse`: The daily sensor statistics
 
-## Creating the API Endpoints
+## Creating the API endpoints
 
-In this section, you will define the FastAPI endpoints that allow you to manage sensor data. These endpoints handle tasks like creating new sensors, streaming sensor data (both single points and batches), and querying daily statistics for a specific sensor. With these endpoints, you can efficiently manage and analyze sensor data using TimescaleDB’s time-series capabilities.
+In this section, you will define the FastAPI endpoints that allow you to manage sensor data. These endpoints handle tasks like creating new sensors, streaming sensor data (both single points and batches), and querying daily statistics for a specific sensor.
 
 ```python
 from fastapi import HTTPException, Path, Body, APIRouter, Depends
@@ -475,9 +475,9 @@ The code defines endpoints for:
 
 - `GET /daily_avg/{sensor_id}`: Retrieves daily statistics (average, min, max, median, IQR) for the given sensor over the last 7 days.
 
-In the query for the sensor statistics, the data is able to be partitioned quickly with Timescale's `time_bucket()` function by using the indexes generated when you created the hypertable. Likewise, you can easily calculate things like the interquartile range (IQR) using Timescale-specific functions.
+In the query for the sensor statistics, TimescaleDB's `time_bucket()` function groups readings into daily buckets, and the index created with the hypertable keeps the time-range filter fast. The median and interquartile range (IQR) come from the standard Postgres `percentile_cont()` aggregate.
 
-## Running the Application
+## Running the application
 
 After setting up the database, models, and API routes, the next step is to run the `FastAPI` application and test it out.
 
@@ -501,7 +501,7 @@ app: FastAPI = FastAPI(lifespan=lifespan, title="FastAPI TimescaleDB Sensor Data
 app.include_router(sensor_router)
 ```
 
-To run the application, use uvicorn CLI with the following command:
+To run the application, use the Uvicorn CLI with the following command:
 
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8080
@@ -509,9 +509,9 @@ uvicorn main:app --host 0.0.0.0 --port 8080
 
 Once the server is running, you can access the API documentation and test the endpoints directly in your browser:
 
-- Interactive API Docs (Swagger UI):  
+- Interactive API docs (Swagger UI):  
   Visit `http://127.0.0.1:8080/docs` to access the automatically generated API documentation where you can test the endpoints.
-- Alternative Docs (ReDoc):  
+- Alternative docs (ReDoc):  
   Visit `http://127.0.0.1:8080/redoc` for another style of API documentation.
 
 ## Testing the API
@@ -606,10 +606,10 @@ You can test your application using `HTTPie`, a command-line tool for making HTT
    ]
    ```
 
-By following these steps, you can easily create sensors, stream sensor data, and query statistics from your API. For sensors with pre-generated data, you can retrieve the statistics immediately. For new sensors, you can stream data and retrieve their daily stats dynamically.
+For sensors with pre-generated data, you can retrieve the statistics immediately. For new sensors, stream data first, then retrieve their daily stats.
 
 ## Conclusion
 
-Now, you have created and tested an API for managing, streaming, and querying sensor data into `TimescaleDB` using `FastAPI`. With TimescaleDB for time-series storage, you can handle sensor data at scale.
+You've built and tested a FastAPI application that stores, streams, and queries sensor data with TimescaleDB on Neon.
 
-As a next step, you can look into streaming data into the database using a distributed event platform like `Kafka` or `Red Panda`, or using `Timescale` to monitor the sensor data with `Apache Superset` or `Grafana`.
+As a next step, you can look into streaming data into the database using a distributed event platform like `Kafka` or `Redpanda`, or visualizing the sensor data in TimescaleDB with `Apache Superset` or `Grafana`.

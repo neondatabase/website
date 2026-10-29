@@ -23,10 +23,12 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import { CompactCards } from 'components/pages/doc/compact-cards';
 import DefinitionList from 'components/pages/doc/definition-list';
+import DemoCards, { DemoCard } from 'components/pages/doc/demo-cards';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 import Faq, { FaqItem } from 'components/pages/doc/faq';
+import FunctionRegistryCards from 'components/pages/doc/function-registry-cards';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
@@ -52,11 +54,12 @@ import AutoscalingViz from 'components/shared/autoscaling-viz';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
-import CopyPrompt from 'components/shared/copy-prompt';
+import CopyPrompt, { AgentPrompt } from 'components/shared/copy-prompt';
 // import CtaBlock from 'components/shared/cta-block';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
+import ImageWithCommand from 'components/shared/image-with-command';
 import ImageZoom from 'components/shared/image-zoom';
 import InlineSvg from 'components/shared/inline-svg';
 import LatencyCalculator from 'components/shared/latency-calculator';
@@ -200,6 +203,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Callout,
   CodeTabs,
   DetailIconCards,
+  DemoCards,
+  DemoCard,
   Faq,
   FaqItem,
   TechCards,
@@ -245,10 +250,13 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   InlineSvg,
   MegaLink,
   CopyPrompt,
+  AgentPrompt,
+  ImageWithCommand,
   McpSetupConfigurator,
   SqlToRestConverter,
   StatBlock,
   AiGatewayModelIndex,
+  FunctionRegistryCards,
   ...sharedComponents,
 });
 

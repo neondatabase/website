@@ -25,6 +25,10 @@ const META = {
     desc: 'Pin a branch in .neon; auto-pulls its env vars.',
     examples: ['neon checkout feat/auth'],
   },
+  git: {
+    desc: 'Sync the checked-out Neon branch to your git branch on checkout (Preview).',
+    examples: ['neon git install', 'neon git status'],
+  },
   env: {
     desc: "Write the branch's DATABASE_URL + Neon vars to .env.",
     examples: ['neon env pull'],
@@ -42,13 +46,17 @@ const META = {
     desc: 'Ask the Neon assistant a question from the terminal.',
     examples: ['neon ask --prompt "How do schema-only branches work?"'],
   },
+  docs: {
+    desc: 'Search neon.com docs, guides, and more from the terminal.',
+    examples: ['neon docs search "reset a branch"'],
+  },
   mcp: {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],
   },
   skills: {
-    desc: 'Install and update Neon agent skills in your coding agents.',
-    examples: ['neon skills', 'neon skills -y', 'neon skills update -y'],
+    desc: 'Install, update, and check Neon agent skills in your coding agents.',
+    examples: ['neon skills', 'neon skills update -y', 'neon skills status'],
   },
   plugins: {
     desc: 'Install the Neon plugin (skills plus MCP) into your coding agents.',
@@ -59,6 +67,10 @@ const META = {
     examples: ['neon claim create --env-pull', 'neon claim accept'],
   },
   completion: { desc: 'Generate a shell completion script.' },
+  feedback: {
+    desc: 'Send feedback about the CLI to the Neon team; no login required.',
+    examples: ['neon feedback --message "The branch docs were unclear"'],
+  },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {
     desc: 'Create, diff, reset, restore, and manage branches.',
@@ -99,8 +111,8 @@ const META = {
     examples: ['neon dev'],
   },
   functions: {
-    desc: 'Deploy and manage Neon Functions on a branch.',
-    examples: ['neon functions deploy api --src ./api.ts'],
+    desc: 'Create, deploy, and manage Neon Functions on a branch.',
+    examples: ['neon functions new basic', 'neon functions deploy api --src ./api.ts'],
   },
   triggers: {
     desc: 'Invoke a Neon Function on a cron schedule or when an object is created.',
@@ -121,6 +133,13 @@ const META = {
   'neon-auth': {
     desc: 'Manage Neon Auth on a branch.',
     examples: ['neon neon-auth enable'],
+  },
+  realtime: {
+    desc: 'Manage Neon Realtime and subscribe to live queries.',
+    examples: [
+      'neon realtime enable --allowed-origin https://app.example.com',
+      'neon realtime subscribe "SELECT * FROM items"',
+    ],
   },
   orgs: { desc: 'List organizations you belong to.', examples: ['neon orgs list'] },
   'ip-allow': {

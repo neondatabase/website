@@ -1,15 +1,15 @@
 ---
-title: Implementing Webhooks with FastAPI and Lakebase Postgres
+title: Implement webhooks with FastAPI and Lakebase Postgres
 subtitle: Learn how to build a webhook system to receive and store event data using FastAPI and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Webhooks are a way for services to communicate with each other by sending HTTP requests when specific events occur. They allow your application to receive real-time data from other services without having to constantly poll for updates.
+Webhooks let services notify each other by sending HTTP requests when specific events occur. Your application receives the data as events happen instead of polling for updates.
 
-In this guide, you'll learn how to implement a webhook system using FastAPI to receive event notifications and Lakebase Postgres to store and process the webhook data. We'll build a simple but practical webhook receiver that can handle events from GitHub, making this applicable to real-world development workflows.
+In this guide, you'll learn how to implement a webhook system using FastAPI to receive event notifications and Lakebase Postgres to store and process the webhook data. We'll build a webhook receiver that handles events from GitHub.
 
 ## Prerequisites
 
@@ -21,23 +21,23 @@ To follow this guide, you need:
 - [ngrok](https://ngrok.com/) or similar tool for exposing your local server (for testing)
 - A [GitHub](https://github.com/) account (for testing the webhook)
 
-## Create a Neon Project
+## Create a Neon project
 
-Let's start by creating a new Neon project and setting up a Postgres database:
+Start by creating a new Neon project:
 
-1. Log in to your [Neon Console](https://console.neon.tech)
-2. Click "New Project"
-3. Enter a name for your project, like "webhook-receiver"
-4. Select your preferred region
-5. Click "Create Project"
+1. Log in to the [Neon Console](https://console.neon.tech)
+2. Click **New Project**
+3. Enter a name for your project, like `webhook-receiver`
+4. Select your preferred AWS region
+5. Click **Create project**
 
-Once your project is created, you'll see the connection details. Save these details as we'll need them for our FastAPI application.
+Once your project is created, click **Connect** to view the connection details. Save them for the FastAPI application.
 
-## Set Up a FastAPI Project
+## Set up a FastAPI project
 
-FastAPI is a modern web framework for building APIs with Python. It's based on standard Python type hints and provides automatic OpenAPI documentation.
+FastAPI is a Python web framework for building APIs. It's based on standard Python type hints and generates OpenAPI documentation automatically.
 
-Now, let's set up a basic FastAPI project structure:
+Set up a basic FastAPI project structure:
 
 1. Create a new directory for your project and navigate to it:
 
@@ -80,9 +80,9 @@ WEBHOOK_SECRET=your_webhook_secret  # We'll use this later for verification
 
 Replace the placeholders in the `DATABASE_URL` with your Neon connection details.
 
-## Design the Database Schema
+## Design the database schema
 
-Before implementing our webhook receiver, we need to design the database schema. For our GitHub webhook example, we'll create a table to store webhook events with the following fields:
+Before implementing the webhook receiver, design the database schema. For our GitHub webhook example, we'll create a table to store webhook events with the following fields:
 
 - `id`: A unique identifier for each webhook event
 - `event_type`: The type of event (e.g., "push", "pull_request")
@@ -94,7 +94,7 @@ Before implementing our webhook receiver, we need to design the database schema.
 
 Now, let's set up the database connection and models.
 
-## Create the Database Models
+## Create the database models
 
 First, let's set up the configuration file (`app/config.py`):
 
@@ -204,13 +204,11 @@ class WebhookEvent(Base):
         return f"<WebhookEvent(id={self.id}, event_type='{self.event_type}')>"
 ```
 
-This model represents a webhook event with the fields we defined earlier. We'll use this model to store webhook events in our Postgres database.
+This model represents a webhook event with the fields defined earlier. We'll use it to store webhook events in Postgres.
 
-## Implement Webhook Endpoints
+## Implement webhook endpoints
 
-With the database models in place, we can now implement the webhook endpoint to receive and store GitHub webhook events.
-
-Now, let's implement the FastAPI application with our webhook endpoint. Update `app/main.py`:
+With the database models in place, implement the endpoint that receives and stores GitHub webhook events. Update `app/main.py`:
 
 ```python
 # app/main.py
@@ -299,11 +297,11 @@ async def process_webhook_event(event_id, db):
     pass
 ```
 
-Here we are setting up a FastAPI application with a `/webhooks/github` endpoint to receive GitHub webhook events. The endpoint reads the request body, verifies the webhook signature, parses the JSON payload, stores the event in the database, and processes the event asynchronously.
+Here we are setting up a FastAPI application with a `/webhooks/github` endpoint to receive GitHub webhook events. The endpoint reads the request body, verifies the webhook signature, parses the JSON payload, stores the event in the database, and then processes it.
 
-## Add Webhook Verification
+## Add webhook verification
 
-GitHub sends a signature with each webhook to verify that the webhook is coming from GitHub. Let's implement the signature verification function:
+GitHub signs each webhook so you can verify that it came from GitHub. Implement the signature verification function:
 
 ```python
 def verify_signature(body, signature):
@@ -327,7 +325,7 @@ def verify_signature(body, signature):
 
 Replace the placeholder `verify_signature` function with this implementation. This function verifies the webhook signature by calculating the HMAC SHA256 signature using the webhook secret and comparing it with the signature sent by GitHub.
 
-## Process Webhook Events
+## Process webhook events
 
 Now, let's implement the `process_webhook_event` function to handle different types of GitHub webhook events:
 
@@ -390,9 +388,9 @@ async def process_issue_event(event):
 
 In the `process_webhook_event` function, we fetch the webhook event from the database and process it based on the event type. We've provided placeholder functions for processing different types of GitHub webhook events, such as push events, pull request events, and issue events. You can extend these functions to handle other event types as needed.
 
-## Test Your Webhook Receiver
+## Test your webhook receiver
 
-Now that we have implemented our webhook receiver, let's run it and test it with GitHub webhooks.
+Now run the webhook receiver and test it with GitHub webhooks.
 
 We will use ngrok to expose our local server to the internet so that GitHub can send webhook events to our FastAPI application. If you haven't installed ngrok yet, you can download it from [ngrok.com](https://ngrok.com/).
 
@@ -410,7 +408,7 @@ uvicorn app.main:app --reload
 ngrok http 8000
 ```
 
-ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that forwards to your local server. For testing, you can use this URL as the webhook endpoint. For production, you would want to deploy your FastAPI application to a server with a public IP address and domain along with an SSL certificate.
+ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that forwards to your local server. For testing, you can use this URL as the webhook endpoint. For production, deploy your FastAPI application to a server with a public domain and an SSL certificate.
 
 3. If you don't have a GitHub repository to test with, create a new repository or use an existing one, and set up a webhook:
    - Go to your GitHub repository
@@ -428,17 +426,17 @@ ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that 
 
 5. Monitor your FastAPI application logs to see the webhook events being received and processed.
 
-After following these steps, you should see the webhook events being received by your FastAPI application and processed based on the event type and then stored in your Lakebase Postgres database.
+Your FastAPI application should receive each webhook event, store it in your database, and process it based on the event type.
 
 To view the stored webhook events, you can access the `/webhooks/events` endpoint. You should see the recent webhook events stored in the database returned as JSON.
 
-If you were to visit the `/docs` endpoint of your FastAPI application, you would see the automatically generated API documentation with details about your webhook endpoint.
+The `/docs` endpoint of your FastAPI application shows the generated API documentation for your webhook endpoints.
 
-## Security Considerations
+## Security considerations
 
 When implementing webhooks in a production environment, consider these security practices:
 
-1. We implemented signature validation for GitHub webhooks, but make sure to do this for any webhook provider. Make sure to use a secure secret for signing the webhook payloads and store it securely.
+1. Validate signatures for every webhook provider, not only GitHub. Use a long random secret for signing the webhook payloads and keep it out of source control.
 
 2. Always use HTTPS to encrypt webhook payloads in transit.
 
@@ -452,10 +450,8 @@ When implementing webhooks in a production environment, consider these security 
 
 ## Conclusion
 
-In this guide, you built a FastAPI application backed by Lakebase Postgres to securely receive and process webhook events. Along the way, you learned how to define a data model, implement a webhook endpoint, verify signatures, and handle different event types.
+You built a FastAPI application that verifies GitHub webhook signatures, stores events in a Neon database, and processes them by event type.
 
-Webhooks are an important part of many API integrations, allowing your applications to respond to events in real-time. By combining FastAPI with Lakebase Postgres, you can build webhook receivers that can handle various types of event notifications from external services.
-
-You can extend this basic webhook system to handle events from other services like Stripe (for payment notifications), Slack (for user interactions), or any other service that supports webhooks.
+You can extend this webhook system to handle events from other services like Stripe (for payment notifications), Slack (for user interactions), or any other service that supports webhooks.
 
 <NeedHelp />

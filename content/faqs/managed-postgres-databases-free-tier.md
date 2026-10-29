@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?"
-description: "Neon's Free plan includes 100 projects, 0.5 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
+description: "Neon's Free plan includes 100 projects, 1 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
 date: 2026-04-25
 slug: managed-postgres-databases-free-tier
 category: FAQ
@@ -13,25 +13,25 @@ nextLink:
   slug: managed-postgres-options-ten-databases-cost
 ---
 
-Neon's Free plan has no time limit, and it fits a real, low-traffic app: up to 100 projects, 0.5 GB of storage per project, and 100 CU-hours of compute per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero CU-hours of compute.
+Neon's Free plan has no time limit, and it fits a real, low-traffic app: up to 100 projects, 1 GB of storage per project, and 100 CU-hours of compute per project each month, with no credit card required. Compute scales to zero after 5 minutes of inactivity, so an idle prototype uses zero CU-hours of compute.
 
 ## What the Free plan includes
 
 Each project on the Free plan includes:
 
-- **Storage:** 0.5 GB per project
+- **Storage:** 1 GB per project
 - **Compute:** 100 CU-hours/month, with autoscaling up to 2 CU (≈8 GB RAM)
 - **Branches:** up to 10 per project, useful for previews and migrations
 - **Instant restore:** 6-hour history window (capped at 1 GB of change history)
 - **Egress:** 5 GB per project per month of public network transfer
 
-Hitting the monthly CU-hour or network transfer limit suspends compute until the next billing cycle. Exceeding 0.5 GB storage causes writes that increase storage to fail until you free space or upgrade. If you need spend alerts on a paid plan, set up [spending notifications](/docs/introduction/spending-notifications).
+Hitting the monthly CU-hour or network transfer limit suspends compute until the next billing cycle. Exceeding 1 GB storage causes writes that increase storage to fail until you free space or upgrade. If you need spend alerts on a paid plan, set up [spending notifications](/docs/introduction/spending-notifications).
 
 See the full list on the [Plans page](/docs/introduction/plans).
 
 ## Why a 0.25 CU compute is enough to start
 
-A 0.25 CU compute has ≈1 GB of RAM and supports up to 104 max connections (97 usable after Lakebase Postgres reserves seven). Combined with the [built-in PgBouncer pooler](/docs/connect/connection-pooling), which accepts up to 10,000 client connections, that's enough headroom for a typical side project or early SaaS app.
+A 0.25 CU compute has ≈1 GB of RAM. The [built-in PgBouncer pooler](/docs/connect/connection-pooling) accepts up to 10,000 client connections per compute. Direct connections are capped at 104 `max_connections`, and 7 of those are reserved for the Neon superuser, leaving 97 for your app.
 
 Because compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query, an app with sparse traffic can stay well under the 100 CU-hours allotted per project.
 
@@ -41,19 +41,15 @@ When you outgrow the Free plan limits, the Launch plan is pay-as-you-go with no 
 
 ## How Neon's Free plan compares
 
-| Provider         | Always free?         | Storage          | Compute                            | Project / database limit            |
-| ---------------- | -------------------- | ---------------- | ---------------------------------- | ----------------------------------- |
-| Neon Free plan   | Yes, no expiration   | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                        |
-| Supabase Free    | Yes, with caveat     | 500 MB / project | Shared Micro compute               | 2 projects, paused after inactivity |
-| Aurora Postgres  | On the AWS Free Tier | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances             |
-| RDS for Postgres | Sign-up credits only | Paid per GB      | Paid per instance-hour             | Account quotas                      |
+| Provider         | Always free?         | Storage          | Compute                            | Project / database limit                   |
+| ---------------- | -------------------- | ---------------- | ---------------------------------- | ------------------------------------------ |
+| Neon Free plan   | Yes, no expiration   | 1 GB / project   | 100 CU-hours, autoscale up to 2 CU | 100 projects                               |
+| Supabase Free    | Yes, with caveat     | 500 MB / project | Nano compute (0.5 GB RAM)          | 2 active projects, paused after inactivity |
+| Aurora Postgres  | On the AWS Free Tier | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances                    |
+| RDS for Postgres | Sign-up credits only | Paid per GB      | Paid per instance-hour             | Account quotas                             |
 
-A few things to know about the alternatives:
-
-- **Supabase Free** pauses projects after about 7 days of low activity, and you can only have two active free projects across organizations where you're an Owner or Admin. See [Free project pausing](https://supabase.com/docs/guides/platform/free-project-pausing) and [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
-- **Aurora Postgres** is the one AWS Postgres with a standing free allowance: up to 4 ACUs per cluster, 1 GB of storage per cluster, and a maximum of 2 clusters and 2 instances per account on the AWS Free Tier. Clusters have to be created with express configuration. See [Amazon Aurora on the AWS Free Tier](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
-- **RDS for Postgres** has no free allowance for new accounts. AWS reworked its Free Tier on July 17, 2025: new customers get up to $100 in credits at sign-up and up to $100 more, and RDS usage draws down those credits. The old entitlement of 750 hours/month on `db.t3.micro` or `db.t4g.micro` for 12 months is grandfathered for accounts created before that date. See [AWS Free Tier on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html).
-
-If the app is dormant most of the time, scale-to-zero on Neon means the 100 CU-hour budget covers a real prototype without the inactivity pause Supabase enforces or the credit balance RDS draws down.
+- **Supabase Free** pauses projects after about 7 days of low activity, and you can have two active free projects across organizations where you're an Owner or Admin. Paused projects don't count toward that limit. Free projects run on [Nano compute](https://supabase.com/docs/guides/platform/compute-and-disk). See [Free project pausing](https://supabase.com/docs/guides/platform/free-project-pausing) and the [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
+- **Aurora Postgres** is available on the AWS Free Tier with up to 4 ACUs per cluster, 1 GB of storage per cluster, and a maximum of 2 clusters and 2 instances per account. Clusters have to be created with express configuration. See [Amazon Aurora on the AWS Free Tier](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
+- **RDS for Postgres** has no standing free allowance for new accounts. AWS changed its Free Tier on July 17, 2025. New customers get up to $100 in credits at sign-up and can earn up to $100 more, and RDS usage on eligible `db.t3.micro` and `db.t4g.micro` instances draws down those credits. The old entitlement of 750 hours/month on `db.t3.micro` or `db.t4g.micro` for 12 months is grandfathered for accounts created before that date. See [AWS Free Tier on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html).
 
 <CTA title="Start on the Free plan" description="No credit card required. Spin up Postgres in seconds." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

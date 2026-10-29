@@ -1,10 +1,10 @@
 ---
-title: Document Store using JSONB in Postgres
+title: Document store using JSONB in Postgres
 subtitle: A step-by-step guide describing how to use Postgres as a document store using JSONB
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-12-17T13:24:36.612Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.
@@ -25,7 +25,7 @@ You can even use GIN indexes to index nested properties within JSONB objects.
 ## Set up a table with a JSONB column
 
 To use Postgres as a document store, you can create a table with two columns: an `id` and a `data` property that is of type `JSONB`.
-You can run the following `CREATE TABLE` statement in the Neon SQL Editor or from a client such as `psql` that is connected to Neon.
+You can run the following `CREATE TABLE` statement in the Neon SQL Editor or from a client such as `psql` that's connected to Neon.
 
 ```sql
 CREATE TABLE documents (
@@ -34,7 +34,7 @@ CREATE TABLE documents (
 );
 ```
 
-JSONB columns can store any JSON object, including objects, arrays, and even nested objects.
+JSONB columns can store any JSON value, including objects, arrays, and nested objects.
 
 ## Insert and retrieve JSONB data
 
@@ -86,7 +86,7 @@ SELECT * FROM documents WHERE data->'author'->>'name' = 'John Smith'
 ## Document store using Sequelize ORM
 
 Many developers use Postgres through an ORM, like [Sequelize](https://sequelize.org/) in Node.js.
-ORMs often provide neat syntactic shortcuts for working with JSONB.
+ORMs often provide syntactic shortcuts for working with JSONB.
 For example, the following Node.js code shows how you can connect to the existing `documents` table from previous examples using Sequelize.
 
 ```javascript
@@ -132,7 +132,7 @@ const documents = await Document.findAll({
 });
 ```
 
-You can read more about working with JSONB in [Sequelize](https://sequelize.org/docs/v7/querying/json/) [Prisma](https://www.prisma.io/docs/orm/prisma-client/special-fields-and-types/working-with-json-fields), and [Objection.js](https://vincit.github.io/objection.js/recipes/json-queries.html) on their respective documentation sites.
+You can read more about working with JSONB in [Sequelize](https://sequelize.org/docs/v7/querying/json/), [Prisma](https://www.prisma.io/docs/orm/prisma-client/special-fields-and-types/working-with-json-fields), and [Objection.js](https://vincit.github.io/objection.js/recipes/json-queries.html) on their respective documentation sites.
 
 ## Query arrays and objects in JSONB
 
@@ -144,10 +144,10 @@ For example, the following query returns all documents whose `tags` property con
 SELECT * FROM documents WHERE data->'tags' @> '["JSONB"]'
 ```
 
-Note that the right-hand side of `@>` is a JSON string.
+The right-hand side of `@>` is a JSON value written as a string.
 
 With objects, `@>` can check whether the document contains one or more properties.
-For example, the following query returns all documents whose `author` property has `author` equal to 'John Smith' and `age` equal to 30.
+For example, the following query returns all documents whose `author` property has `name` equal to 'John Smith' and `age` equal to 30.
 
 ```sql
 SELECT * FROM documents WHERE data->'author' @> '{"name":"John Smith","age":30}'
@@ -162,7 +162,7 @@ SELECT * FROM documents WHERE data->'author'->>'name' = 'John Smith' AND data->'
 ## Type casting in JSONB queries
 
 Operators like `=` and `@>` are fairly easy to work with: they don't throw any errors if the JSONB property has the wrong type.
-However, things get a bit more tricky if you want to find all documents whose `author`'s `age` property is greater than 25.
+Things get trickier if you want to find all documents whose `author`'s `age` property is greater than 25.
 For example, this query throws an "operator does not exist" error:
 
 ```sql
@@ -210,7 +210,7 @@ Note that `jsonb_set()` expects the nested property name separated by commas (`,
 CREATE INDEX content_idx ON documents USING GIN (data);
 ```
 
-To test out the GIN index, let's first insert 100 documents, 1 of which has `author.name` set to "John Smith", and 99 that do not. Sometimes Postgres decides to skip using indexes and use a sequential scan instead when a query matches most of the table.
+To test the GIN index, first insert 100 documents, 1 of which has `author.name` set to "John Smith", and 99 that don't. Postgres sometimes skips the index and uses a sequential scan when a table is small or a query matches most of its rows, so the extra rows make an index scan more likely.
 
 ```sql
 DO $$
@@ -243,7 +243,7 @@ BEGIN
 END $$;
 ```
 
-Next, you can run an `EXPLAIN ANALYZE` query (or just click the "Explain" button in the Neon SQL Editor) to confirm that Postgres is using your GIN index.
+Next, you can run an `EXPLAIN ANALYZE` query (or click the "Explain" button in the Neon SQL Editor) to confirm that Postgres is using your GIN index.
 
 ```sql
 EXPLAIN ANALYZE
@@ -254,13 +254,13 @@ WHERE data @> '{"author": {"name": "John Smith"}}'::jsonb;
 
 Note that the query above uses the containment operator `@>`, **not** `WHERE data->'author'->>'name' = 'John Smith'`. [GIN indexes only support certain operators with JSONB data](https://www.postgresql.org/docs/current/datatype-json.html#JSON-INDEXING), including `@>`.
 
-The `EXPLAIN ANALYZE` query should produce output that resembles the following. The Bitmap Index Scan means that Postgres is using a GIN index rather than a sequential scan to answer the query.
+The `EXPLAIN ANALYZE` query should produce output that resembles the following. The `Bitmap Index Scan on content_idx` line means that Postgres is using the GIN index rather than a sequential scan to answer the query.
 
 ```
 Bitmap Heap Scan on documents  (cost=8.52..12.54 rows=1 width=245) (actual time=0.014..0.016 rows=3 loops=1)
   Recheck Cond: (data @> '{"author": {"name": "John Smith"}}'::jsonb)
   Heap Blocks: exact=1
-  ->  Bitmap Index Scan on idx_documents_data  (cost=0.00..8.52 rows=1 width=0) (actual time=0.007..0.007 rows=3 loops=1)
+  ->  Bitmap Index Scan on content_idx  (cost=0.00..8.52 rows=1 width=0) (actual time=0.007..0.007 rows=3 loops=1)
         Index Cond: (data @> '{"author": {"name": "John Smith"}}'::jsonb)
 Planning Time: 0.066 ms
 Execution Time: 0.096 ms

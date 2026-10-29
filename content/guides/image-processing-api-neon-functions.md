@@ -8,9 +8,9 @@ createdAt: '2026-08-24T00:00:00.000Z'
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
 
-This guide shows you how to build a complete image processing API that handles all of that in one place. The API provides five endpoints to resize, crop, optimize, analyze, and caption images. You'll also learn how to store the processed images in your branch's [Neon Object Storage](/docs/storage/overview) bucket, so you can serve them directly from S3 instead of reprocessing on every request.
+This guide shows you how to build an image processing API that handles all of that in one place. The API provides five endpoints to resize, crop, optimize, analyze, and caption images. You'll also learn how to store the processed images in your branch's [Neon Object Storage](/docs/storage/overview) bucket, so you can serve them directly from S3 instead of reprocessing on every request.
 
-The API runs on [**Neon Functions**](/docs/compute/functions/overview) which provide a serverless compute environment in the same region as your Neon Postgres database. Image transformations run on [**Sharp**](https://sharp.pixelplumbing.com), a high-performance image processing library powered by libvips. And for captions, the [**Neon AI Gateway**](/docs/ai-gateway/overview) provides access to the latest vision models.
+The API runs on [**Neon Functions**](/docs/compute/functions/overview), which run your code on your Neon branch, in the same region as its Postgres database. Image transformations run on [**Sharp**](https://sharp.pixelplumbing.com), an image processing library built on libvips. For captions, the [**Neon AI Gateway**](/docs/ai-gateway/overview) provides access to vision models.
 
 <CopyPrompt
   src="/prompts/image-processing-api-neon-functions-prompt.md"
@@ -38,8 +38,8 @@ flowchart LR
 Before starting, ensure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for an account at [console.neon.tech](https://console.neon.tech/signup).
-3. **The Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
+2. **Neon account on a paid plan**: Sign up at [console.neon.tech](https://console.neon.tech/signup). The captioning endpoint uses the AI Gateway, which requires a paid plan (Launch or Scale) with [prepaid credits](/docs/ai-gateway/prepaid-credits).
+3. **The Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 
 <Steps>
 
@@ -58,9 +58,9 @@ Run the Neon CLI initialization command:
 neon init
 ```
 
-Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
+Accept the default options. The recommended option installs the `neon-postgres` plugin, which bundles agent skills and the Neon MCP server so AI agents such as Claude Code and Cursor can help you build on Neon. See [`neon init`](/docs/cli/init) for the other setup choices.
 
-During initialization, **Neon Platform** and **Postgres** skills are installed automatically. You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
+You'll also need the **Neon Functions**, **Neon AI Gateway**, and **Neon Object Storage** skills so AI agents have the context to help you build and deploy your image API. Install them with the following command:
 
 ```bash
 neon skills -s neon-functions -s neon-ai-gateway -s neon-object-storage
@@ -72,7 +72,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). When asked which Neon services you require, select **Functions** and **AI Gateway**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `image-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Functions** and **AI Gateway**:
 
 ```text
 $ neon link
@@ -80,19 +80,20 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … image-api
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-fog-09491284 ("image-api") in aws-us-east-2.
-Linked ~/image-api/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-fog-09491284
-  branch:    main
+Created project image-api in aws-us-east-2
+Linked .neon
+  Project         image-api (quiet-fog-09491284)
+  Branch          main
+  Org             org-example-12345678
 
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
-
-INFO: Pulled 5 Neon variables into ~/image-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
-INFO: Created neon.ts declaring functions, ai-gateway.
-INFO: Created hello.ts - the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions, ai-gateway.
+Created hello.ts - the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function: `hello.ts`, at your project root. You'll build the image API in your own `index.ts` file, so delete the placeholder:
@@ -338,35 +339,33 @@ The `/caption` route downscales the image and sends the thumbnail to `llama-4-ma
 Bad input throws `BadRequest`, mapped to a `400`; anything else becomes a `500`. The final line exports the app so Neon Functions can serve it.
 
 <Admonition type="note" title="Model access">
-For improved captioning, you can use frontier vision models like `claude-opus-5`, `gpt-5-6-sol` instead of `llama-4-maverick`.
+For better captions, you can use foundation vision models such as `claude-opus-5` or `gpt-5-6-sol` instead of `llama-4-maverick`.
 
-Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `claude-opus-5`, `gpt-5-6-sol` etc. aren't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are accessible immediately. Just swap the model ID in the `/caption` route. No other changes are required.
+Foundation models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `claude-opus-5` or `gpt-5-6-sol` isn't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are available right away with prepaid credits. To switch, change the model ID in the `/caption` route. No other changes are required.
 </Admonition>
 
 ## Configure neon.ts
 
 The `neon link` command created a `neon.ts` file in your project root. Replace its contents with the following:
 
-```ts filename="neon.ts" {4-13}
+```ts filename="neon.ts" {4-11}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      }
-    },
-    aiGateway: true
-  }
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
+    }
+  },
+  aiGateway: true
 });
 ```
 
 Here's what each property does:
 
-- **`preview.functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
+- **`functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
 - **`externalPackages: ['sharp']`**: Ships Sharp's files with the deploy instead of bundling them into the function bundle. See the note below for why this matters.
 - **`aiGateway: true`**: Enables the Neon AI Gateway on the branch. This is what injects the `NEON_AI_GATEWAY_*` credentials your `/caption` route uses.
 
@@ -402,7 +401,7 @@ curl -X POST "http://localhost:8787/optimize?format=webp&quality=70" -F "file=@s
 
 You can verify the images were processed correctly by opening `resized.webp` and `optimized.webp` in an image viewer.
 
-Test the `/caption` endpoint, which uses the `llama-4-maverick` from the Neon AI Gateway to generate a one-sentence alt text caption:
+Test the `/caption` endpoint, which uses `llama-4-maverick` through the Neon AI Gateway to generate a one-sentence alt text caption:
 
 ```bash shouldWrap
 curl -X POST "http://localhost:8787/caption" -H "Content-Type: image/jpeg" --data-binary @sample.jpg
@@ -504,7 +503,7 @@ You now have a working image processing API deployed on Neon Functions. The next
 
 ## Optional: Store processed images in your branch bucket
 
-The endpoints you've built return the processed bytes directly in the response. The `Cache-Control: immutable` header only helps clients cache the result, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket turns this into a real media pipeline: process once, store, and serve from the bucket.
+The endpoints you've built return the processed bytes directly in the response. The `Cache-Control: immutable` header only helps clients cache the result, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket lets you process an image once, store it, and serve it from the bucket.
 
 ### Install the AWS SDK
 
@@ -565,24 +564,22 @@ The `/store` route is similar to `/resize`, but instead of returning the process
 
 ### Declare the bucket
 
-Add the bucket to the `preview` block in `neon.ts`, next to the function and the AI Gateway:
+Add the bucket to `neon.ts`, next to the function and the AI Gateway:
 
-```ts filename="neon.ts" {13-15}
+```ts filename="neon.ts" {12-14}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      imageapi: {
-        name: 'Image API',
-        source: './index.ts',
-        externalPackages: ['sharp'],
-      },
+  functions: {
+    imageapi: {
+      name: 'Image API',
+      source: './index.ts',
+      externalPackages: ['sharp'],
     },
-    aiGateway: true,
-    buckets: {
-      'processed-images': {},
-    },
+  },
+  aiGateway: true,
+  buckets: {
+    'processed-images': {},
   },
 });
 ```
@@ -616,7 +613,7 @@ The URL is a presigned GET link that works for an hour. The object also lives in
 
 ## Next steps
 
-Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can easily extend it to store processed images and captions in your database. For example:
+Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can extend it to store processed images and captions in your database. For example:
 
 - **Cache transforms and captions in Postgres**: Image transforms are deterministic, so hash the image bytes plus the query parameters and cache the result location in a table. You can also store every caption and `/analyze` result alongside the image record, giving you a searchable media library with alt text included. `DATABASE_URL` is already injected into your function.
 - **Add authentication and rate limiting**: Image processing burns CPU, and AI captions burn tokens. Verify callers with a JWT and cap per-user usage using the pattern from [Build an LLM proxy with Neon Functions, Neon AI Gateway, and Managed Better Auth](/guides/llm-proxy-neon-functions).
@@ -629,6 +626,6 @@ Because the function runs on your Neon branch with Postgres and Object Storage c
 - [Sharp API documentation](https://sharp.pixelplumbing.com/)
 - [Vercel AI SDK: Generate Text with Image Prompt](https://ai-sdk.dev/cookbook/node/generate-text-with-image-prompt)
 - [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
-- [Hono Framework](https://hono.dev/)
+- [Hono](https://hono.dev/)
 
 <NeedHelp/>

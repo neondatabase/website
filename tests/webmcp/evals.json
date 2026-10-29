@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Search docs for a framework",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "How do I connect to Neon from Prisma?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "search_neon_site",
+        "arguments": {
+          "query": {
+            "$contains": "Prisma"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Search the API reference",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Which Neon API endpoint creates a branch?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "search_neon_site",
+        "arguments": {
+          "query": {
+            "$contains": "branch"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Search for a PostgreSQL tutorial",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Is there a PostgreSQL tutorial on window functions?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "search_neon_site",
+        "arguments": {
+          "query": {
+            "$contains": "window function"
+          },
+          "categories": ["postgresql"]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Answer from a known page section",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "According to Neon's pricing page, how does billing work?"
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "read_neon_page",
+        "arguments": {
+          "path": {
+            "$pattern": "/pricing"
+          },
+          "section": {
+            "$contains": "billing"
+          }
+        },
+        "result": {
+          "$contains": "How billing works"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Read a page from a pasted URL",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Read https://neon.com/docs/connect/connection-pooling and tell me which PgBouncer mode Neon uses."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "read_neon_page",
+        "arguments": {
+          "path": {
+            "$pattern": "/docs/connect/connection-pooling"
+          }
+        },
+        "result": {
+          "$contains": "transaction mode"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Find a page, then read it",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Find Neon's docs on branching and summarize what a branch is."
+      }
+    ],
+    "expectedCall": [
+      {
+        "ordered": [
+          {
+            "functionName": "search_neon_site",
+            "arguments": {
+              "query": {
+                "$contains": "branch"
+              }
+            }
+          },
+          {
+            "functionName": "read_neon_page",
+            "arguments": {
+              "path": {
+                "$pattern": "/docs/introduction/branching"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Show the user a page",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Take me to the pricing page."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "open_neon_page",
+        "arguments": {
+          "path": {
+            "$pattern": "/pricing"
+          }
+        },
+        "result": {
+          "$contains": "Opened"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Show the user a section",
+    "messages": [
+      {
+        "role": "user",
+        "type": "message",
+        "content": "Show me the branching workflows section of the branching docs."
+      }
+    ],
+    "expectedCall": [
+      {
+        "functionName": "open_neon_page",
+        "arguments": {
+          "path": {
+            "$pattern": "/docs/introduction/branching"
+          },
+          "section": {
+            "$contains": "workflows"
+          }
+        },
+        "result": {
+          "$contains": "Branching workflows"
+        }
+      }
+    ]
+  }
+]

@@ -153,7 +153,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
 
   const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || '';
   const markdownPath = customMarkdownPath || `/${gitHubPath.replace('content/', '')}`;
-  const markdownUrl = `${siteUrl}${markdownPath}`;
+  const pageUrl = `${siteUrl}${markdownPath.replace(/\.md$/, '')}`;
 
   const close = useCallback(() => setIsOpen(false), []);
 
@@ -184,9 +184,13 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
         <CopyMarkdownButton markdownPath={markdownPath} variant="sm" />
         <button
           className="flex h-8 items-center px-1 hover:bg-gray-new-98 dark:hover:bg-gray-new-8"
+          type="button"
+          aria-label="More page actions"
+          aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <ChevronDownIcon
+            aria-hidden="true"
             className={cn(
               'size-3.5 text-gray-new-50 transition-transform duration-200 dark:text-gray-new-50',
               isOpen && 'rotate-180'
@@ -202,7 +206,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
               key={bot.name}
               icon={bot.icon}
               text={`Open in ${bot.name}`}
-              url={bot.generateLink(markdownUrl)}
+              url={bot.generateLink(pageUrl)}
               description={bot.description}
               onClick={() =>
                 sendGtagEvent('Action Clicked', {

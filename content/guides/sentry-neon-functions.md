@@ -4,17 +4,17 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-10-15T16:33:34.223Z'
 canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
-[Neon Functions](/docs/compute/functions/overview) let you ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
+[Neon Functions](/docs/compute/functions/overview) let you ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a runtime-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
 
 But once that code is live, logs alone leave real questions unanswered: which errors keep firing, how a single failed request got to where it did, and where the latency came from.
 
-That's where [Sentry](https://sentry.io) comes in. It groups errors into issues, keeps structured logs next to traces, and ties everything to a single trace ID, so from one error you can jump straight to the logs and spans of the request that produced it.
+[Sentry](https://sentry.io) fills those gaps. It groups errors into issues, keeps structured logs next to traces, and ties everything to a single trace ID, so from one error you can jump straight to the logs and spans of the request that produced it.
 
-The integration fits Neon Functions naturally. A Neon Function is a long-lived Node.js process running a web-standard request/response handler, so the standard [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/) works unchanged. You initialize it once at module load before your handler starts serving requests, and it stays instrumented for the life of the isolate. You don't need any separate setup or wrapper.
+A Neon Function is a long-lived Node.js process running a web-standard request/response handler, so the standard [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/) works unchanged. You initialize it once at module load before your handler starts serving requests, and it stays instrumented for the life of the isolate. You don't need any separate setup or wrapper.
 
 You'll build a simple JSON API on Neon Functions and wire it up to Sentry's three signals:
 
@@ -35,9 +35,9 @@ Once the signals are flowing, you'll also tour where each one lands in the Sentr
 Before you start, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
-3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon login`). Check out the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
-4. **Sentry Account**: Sign up for a free account at [sentry.io](https://sentry.io/signup/).
+2. **Neon account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
+3. **Neon CLI**: Installed globally (`npm i -g neon@latest`) and authenticated (`neon login`). See the [Neon CLI quickstart](/docs/cli/quickstart) for details.
+4. **Sentry account**: Sign up for a free account at [sentry.io](https://sentry.io/signup/).
 
 <Steps>
 
@@ -47,7 +47,7 @@ First, create a Sentry project so you have a DSN (Data Source Name) your functio
 
 1. Log in to your [Sentry dashboard](https://sentry.io/projects/new/) and click **Create Project**.
 2. Select **Node.js** as the platform, give the project a name such as `neon-functions-api`, and create it.
-3. Click on the **Copy DSN** button in the project settings. You'll need this DSN to configure your Neon Function to send telemetry to Sentry.
+3. Click the **Copy DSN** button in the project settings. You'll need this DSN to configure your Neon Function to send telemetry to Sentry.
 
 The DSN looks like `https://examplePublicKey@o0.ingest.us.sentry.io/0`. Keep it handy for the environment configuration step later.
 
@@ -71,7 +71,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You’ll be prompted to select your organization. Once chosen, either pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project.
+You’ll be prompted to select your organization. Then pick an existing Neon project or create a new one named `neon-sentry-demo`. Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward [all regions](/docs/introduction/regions). Confirm that you want to manage your setup as code; this will generate a `neon.ts` file in the root of your project. Then, when asked which Neon services you require, select **Functions**.
 
 ```text
 $ neon link
@@ -79,18 +79,20 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-sentry-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-mist-12345678 ("neon-sentry-demo") in aws-us-east-2.
-Linked ~/neon-sentry-demo/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-mist-12345678
-  branch:    main
+Created project neon-sentry-demo in aws-us-east-2
+Linked .neon
+  Project         neon-sentry-demo (quiet-mist-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-INFO: Pulled 3 Neon variables into ~/neon-sentry-demo/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
-INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts - the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions.
+Created hello.ts - the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function `hello.ts` that returns `"Hello from Neon Functions"`.
@@ -350,7 +352,7 @@ function callProvider(name: string, orderId: string, forceFailure: boolean) {
 
 ### Add the test route and the global error handler
 
-Add a route that throws on purpose and a global error handler that reports any uncaught exception to Sentry. This is the last piece of the three-signal puzzle.
+Add a route that throws on purpose and a global error handler that reports any uncaught exception to Sentry.
 
 ```ts filename="src/index.ts"
 app.get("/debug-sentry", () => {
@@ -484,7 +486,7 @@ With three Sentry calls and one piece of middleware, every request now produces 
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to register the function and pass the Sentry variables as [deploy-time environment variables](/docs/compute/functions/environment-variables):
 
-```ts filename="neon.ts" {12-24}
+```ts filename="neon.ts" {10-20}
 import { defineConfig } from "@neon/config/v1";
 
 export const config = defineConfig({
@@ -493,19 +495,17 @@ export const config = defineConfig({
     if (!branch.exists) { return { ttl: "7d" }; }
     return {};
   },
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-        },
-      }
-    },
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
+        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+      },
+    }
   },
 });
 
@@ -514,8 +514,8 @@ export default config;
 
 Here's what each property does:
 
-- **`preview.functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
-- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
+- **`functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
+- **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically. `SENTRY_DSN` and `SENTRY_RELEASE` are declared only when they have a value, so leaving one empty skips it instead of failing `parseEnv`.
 - **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
 Apply the configuration and deploy your function to Neon:
@@ -581,7 +581,7 @@ curl -X POST "https://<your-function-url>/api/orders" \
 
 This time the primary provider succeeds on the first attempt, so no warning is logged. In **Explore > Traces**, you'll see the `POST /api/orders` root span with the nested `order.charge` child span.
 
-Once all three signals land, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows the waterfall of work that produced the error. You can now see exactly what happened, when, and why.
+Once all three signals land, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows the waterfall of work that produced the error.
 
 ## Add a streaming AI agent on the AI Gateway
 
@@ -706,22 +706,20 @@ In the trace, the request root span now carries a `gen_ai` hierarchy (agent → 
 Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway: true`:
 
 ```ts filename="neon.ts"
-  preview: {
-    functions: {
-      api: {
-        name: "Sentry-Instrumented API",
-        source: "./src/index.ts",
-        env: {
-          SENTRY_DSN: process.env.SENTRY_DSN!,
-          SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
-          SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
-          PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
-        },
-      }
-    },
-    aiGateway: true // [!code ++]
+  functions: {
+    api: {
+      name: "Sentry-Instrumented API",
+      source: "./src/index.ts",
+      env: {
+        ...(process.env.SENTRY_DSN ? { SENTRY_DSN: process.env.SENTRY_DSN } : {}),
+        ...(process.env.SENTRY_RELEASE ? { SENTRY_RELEASE: process.env.SENTRY_RELEASE } : {}),
+        SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
+        PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+        AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
+      },
+    }
   },
+  aiGateway: true // [!code ++]
 ```
 
 ```bash
@@ -744,7 +742,7 @@ The same debugging loop now covers AI work: the trace shows how long each model 
 
 ## Explore the telemetry in Sentry
 
-You now have three signals flowing into Sentry: errors, logs, and traces. Each has its own dashboard page, and together they give you a complete picture of what happened in a request.
+You now have three signals flowing into Sentry: errors, logs, and traces. Each has its own dashboard page.
 
 ### Issues: your alert surface
 
@@ -770,7 +768,7 @@ The win over raw stdout is the query bar. The attributes you logged are searchab
 
 Open **Explore > Traces**. Each request your function served shows up as a trace sample. Click `POST /api/orders` to open the waterfall: the `http.server` root span with the `order.charge` child span beneath it, durations on each.
 
-With real traffic, this page answers "why is it slow". Filter to one route, sort the samples by duration, and open the slowest one: the waterfall shows exactly which span consumed the time, whether that's the model call, a tool execution, or your own charge logic.
+With real traffic, this page answers "why is it slow?" Filter to one route, sort the samples by duration, and open the slowest one: the waterfall shows exactly which span consumed the time, whether that's the model call, a tool execution, or your own charge logic.
 
 ![Trace waterfall for a POST /api/orders request, showing the http.server root span](/docs/guides/sentry-neon-functions-explore-traces.png)
 
@@ -794,7 +792,7 @@ If you need source-mapped stack traces today, you can bypass the CLI and bundle 
 
 ## Best practices
 
-With the Sentry SDK in place, you can now follow a few best practices to keep your telemetry clean and actionable:
+A few practices keep your telemetry useful once the Sentry SDK is in place:
 
 - **Releases and regressions**: Set `SENTRY_RELEASE` to your commit SHA on every deploy so Sentry can tell you exactly which release introduced or resurfaced an issue.
 - **Alerts**: Add Sentry alert rules on new issues and on log patterns (for example, `phase:charge-attempt`), so failures page you instead of waiting for a user report.
@@ -803,13 +801,13 @@ With the Sentry SDK in place, you can now follow a few best practices to keep yo
 
 ## Resources
 
-- [Neon Functions Overview](/docs/compute/functions/overview)
+- [Neon Functions overview](/docs/compute/functions/overview)
 - [Neon Functions logs](/docs/compute/functions/logs)
 - [Neon Functions environment variables](/docs/compute/functions/environment-variables)
 - [Neon AI Gateway](/docs/ai-gateway/overview)
 - [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
 - [Sentry Node.js SDK documentation](https://docs.sentry.io/platforms/javascript/guides/node/)
-- [Vercel AI SDK Telemetry](https://ai-sdk.dev/docs/ai-sdk-core/telemetry)
+- [Vercel AI SDK telemetry](https://ai-sdk.dev/docs/ai-sdk-core/telemetry)
 - [Neon agent skills: Sentry on Functions reference](https://github.com/neondatabase/agent-skills/blob/main/skills/neon-functions/references/sentry.md)
 
 <NeedHelp/>

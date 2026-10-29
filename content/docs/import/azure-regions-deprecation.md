@@ -13,16 +13,16 @@ enableTableOfContents: true
 ---
 
 <Admonition type="warning">
-Neon Azure regions were deprecated on April 7, 2026.
+Neon Azure regions were deprecated on April 7, 2026, and stopped receiving platform updates on October 5, 2026.
 
-We recommend [migrating projects in Azure regions to another region](#what-to-do-next) by **October 5, 2026**.
+[Migrate or delete any projects in Azure regions](#what-to-do-next) immediately.
 </Admonition>
 
-As of April 7, 2026, Neon's Azure regions are deprecated, and you can no longer create new projects in those regions.
+Neon's Azure regions were deprecated on April 7, 2026. New projects can no longer be created in those regions, and as of October 5, 2026, these regions no longer receive Neon platform updates.
 
-After **October 5, 2026**, these regions will not receive Neon feature updates. Also on October 5, projects on Free plans that have been inactive for 90 days or more are subject to deletion.
+Projects still running in Azure regions should be [migrated to another region or deleted](#what-to-do-next) immediately. Projects on Free plans that have been inactive for 90 days or more are subject to deletion.
 
-Users with projects in Neon Azure regions will receive a personalized email about specific projects and next steps. This guide explains what's changing and what to do.
+Users with projects in Neon Azure regions have already received email about specific projects and next steps. This guide explains what's changing and what to do.
 
 ## Affected regions
 
@@ -68,8 +68,8 @@ We're focusing our infrastructure investment where our customers want to run Neo
 
 You can check from the Console, the CLI, or the API:
 
-- **Console.** Open your project, then check the **Project settings** widget on the project dashboard. The region is shown in the **Region** row.
-- **CLI.** Run `neon projects list`. The `Region Id` column shows each project's region.
+- **Console.** Open your project, then check the **Project** panel on the **Overview** page. The region is shown in the **Region** row.
+- **CLI.** Run `neon projects list`. The `Region ID` column shows each project's region.
 - **API.** Call `GET /projects` and check the `region_id` field on each project.
 
 ![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)

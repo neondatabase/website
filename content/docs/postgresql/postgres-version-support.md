@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgresql/postgres-version-policy
-updatedOn: '2026-09-16T15:12:58.425Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 This topic outlines [PostgreSQL version support on Neon](#postgresql-version-support-on-neon).
@@ -53,7 +53,7 @@ SELECT version();
 
 The first number is the major version. The second is the minor version, which Neon updates automatically.
 
-Your Postgres major version is also displayed in the **Project settings** widget on your Neon **Project Dashboard**. With the [Neon CLI](/docs/cli) installed and authenticated, `neon projects get <project_id> --output json` returns the same value in its `pg_version` field.
+Your Postgres major version is also displayed in the **Postgres** panel on your project's **Overview** page. With the [Neon CLI](/docs/cli) installed and authenticated, `neon projects get <project_id> --output json` returns the same value in its `pg_version` field.
 
 ### Minor releases
 

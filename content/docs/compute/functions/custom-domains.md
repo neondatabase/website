@@ -5,7 +5,12 @@ summary: >-
   Register a custom domain for a Neon Function, configure its DNS CNAME record,
   verify TLS and routing, troubleshoot domain status, and remove it safely.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/custom-domains
+tag: beta
 ---
+
+<FeatureBetaProps feature_name="Custom domains for Neon Functions" />
 
 Each Neon Function has a native invocation URL. You can also serve it from a
 domain you own, such as `api.example.com`. Neon routes the custom domain to one
@@ -22,6 +27,8 @@ Custom:  https://api.example.com
 Custom domains are branch-scoped: a domain registered on one branch isn't
 inherited by its child branches, and each hostname can be registered only once.
 Use a distinct hostname for each preview or development branch.
+
+Neon Functions do not support hosting websites.
 
 <Admonition type="warning" title="Secure both function URLs">
 Adding a custom domain doesn't authenticate the function or disable its native Neon URL. Both URLs remain publicly reachable, so protect the function with [application-level authentication](/docs/compute/functions/authentication).
@@ -41,7 +48,7 @@ You need:
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-1. In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**.
+1. In the Neon Console, open your project's **Settings**, then **Functions** > **Custom domains**.
 2. Enter the domain you own.
 3. Select **Function**, then select the function to serve from the domain.
 4. Select **Add custom domain**.
@@ -186,7 +193,7 @@ Encrypt.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-In the Neon Console, open your project's **Settings**, then **Functions → Custom Domains**. The table lists each domain, its target function, and its CNAME target.
+In the Neon Console, open your project's **Settings**, then **Functions** > **Custom domains**. The table lists each domain, its target function, and its CNAME target.
 
 </TabItem>
 <TabItem>
@@ -320,7 +327,7 @@ dangling CNAME from continuing to point at Neon's custom-domain edge.
 <Tabs labels={["Console", "CLI", "SDK", "API"]}>
 <TabItem>
 
-Under **Settings → Functions → Custom Domains** in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
+Under **Settings** > **Functions** > **Custom domains** in the Neon Console, open the actions menu (⋮) for the domain, select **Delete**, then select **Remove domain** to confirm.
 
 </TabItem>
 <TabItem>
@@ -372,5 +379,10 @@ no longer serves it before reassigning the hostname.
 
 Deleting a function doesn't remove its custom-domain registration. Remove the
 domain explicitly when deleting a function.
+
+Deleting a project doesn't release its custom domains either. If you want to
+reuse a hostname, delete its custom-domain registration before you delete the
+project. If you've already deleted the project, [contact Support](/docs/introduction/support)
+to release the domain.
 
 <NeedHelp/>

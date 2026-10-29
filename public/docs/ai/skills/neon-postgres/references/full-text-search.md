@@ -45,17 +45,23 @@ After a large bulk load, run `VACUUM` to refresh the statistics used by BM25 sco
 `to_bm25query` binds the query `tsvector` to the BM25 index whose corpus statistics should be used. The `<@>` operator returns a negative BM25 score, so lower (more negative) values are more relevant and must sort ascending:
 
 ```sql
-SELECT
-  id,
-  title,
-  body_tsv <@> to_bm25query(
-    to_tsvector('english', $1),
-    'documents_body_bm25'::regclass
-  ) AS score
-FROM documents
+SELECT id, title, score
+FROM (
+  SELECT
+    id,
+    title,
+    body_tsv <@> to_bm25query(
+      to_tsvector('english', $1),
+      'documents_body_bm25'::regclass
+    ) AS score
+  FROM documents
+) AS keyword_scored
+WHERE score < 0
 ORDER BY score
 LIMIT $2;
 ```
+
+Scalar BM25 scoring returns zero for documents containing none of the query terms. Filter `score < 0` before `ORDER BY` and `LIMIT` so keyword results exclude non-matches under both sequential and index plans. Partial query-term matches remain eligible.
 
 Use the same text-search configuration for document and query vectors. Select a language-specific or custom configuration that matches the corpus.
 
@@ -72,15 +78,19 @@ BEGIN;
 SET LOCAL lakebase_bm25.default_limit = 20;
 SET LOCAL lakebase_bm25.prefilter = on;
 
-SELECT
-  id,
-  title,
-  body_tsv <@> to_bm25query(
-    to_tsvector('english', $1),
-    'documents_body_bm25'::regclass
-  ) AS score
-FROM documents
-WHERE id % 1000 = 0
+SELECT id, title, score
+FROM (
+  SELECT
+    id,
+    title,
+    body_tsv <@> to_bm25query(
+      to_tsvector('english', $1),
+      'documents_body_bm25'::regclass
+    ) AS score
+  FROM documents
+  WHERE id % 1000 = 0
+) AS keyword_scored
+WHERE score < 0
 ORDER BY score
 LIMIT $2;
 COMMIT;

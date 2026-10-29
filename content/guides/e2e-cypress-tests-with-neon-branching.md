@@ -1,14 +1,14 @@
 ---
-title: Automated E2E Testing with Neon Branching and Cypress
+title: Automated E2E testing with Neon branching and Cypress
 subtitle: Learn how to use GitHub Actions to create isolated database branches for running Cypress tests against your schema changes
 enableTableOfContents: true
 author: dhanush-reddy
 createdAt: '2025-10-17T00:00:00.000Z'
 ---
 
-Running end-to-end (E2E) tests can be challenging when the database schema changes frequently. Tests that rely on a specific schema can fail or produce inconsistent results when run against a shared database environment, creating a bottleneck for development teams.
+Running end-to-end (E2E) tests gets harder when the database schema changes frequently. Tests that rely on a specific schema can fail or produce inconsistent results when they run against a shared database, and the team ends up waiting on each other.
 
-[Neon's database branching](/branching) helps solve this by providing an isolated database for each feature branch, similar to how Git manages code branches. This guide shows you how to integrate Neon's database branching with Cypress and GitHub Actions to build an automated testing pipeline.
+[Neon's database branching](/branching) gives each feature branch its own isolated database, similar to how Git manages code branches. This guide shows you how to integrate Neon's database branching with Cypress and GitHub Actions to build an automated testing pipeline.
 
 You will use a Next.js Todo application to configure a workflow that triggers on every pull request. This workflow will:
 
@@ -20,7 +20,7 @@ You will use a Next.js Todo application to configure a workflow that triggers on
 - Record test results, uploading screenshots and videos as artifacts in GitHub for any failures.
 - On merge, apply migrations to the main (production) branch and delete the temporary database branch.
 
-This process ensures that database-dependent E2E tests are run in a clean, predictable environment for every proposed change, improving the reliability of your test suite.
+Every proposed change gets its database-dependent E2E tests run against a clean, predictable database.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ This process ensures that database-dependent E2E tests are run in a clean, predi
 ## Setting up your Neon database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Copy your database connection string by clicking **Connect** in the Console nav.
+2.  Click **Connect** on your project dashboard to open the **Connect to your branch** modal, and copy your database connection string.
 
     ![Connection modal](/docs/connect/connect_to_branch_modal.png)
 
@@ -112,7 +112,7 @@ We'll start with a pre-configured example repository that includes a simple Todo
 
 ## Set up the Neon GitHub integration
 
-The [Neon GitHub integration](/docs/guides/neon-github-integration) securely connects your Neon project to your repository. It automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable in your repository, which are required for your GitHub Actions workflow.
+The [Neon GitHub integration](/docs/guides/neon-github-integration) connects your Neon project to your repository. It automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable in your repository, which are required for your GitHub Actions workflow.
 
 1.  In the Neon Console, navigate to the **Integrations** page for your project.
 2.  Locate the **GitHub** card and click **Add**.
@@ -120,14 +120,14 @@ The [Neon GitHub integration](/docs/guides/neon-github-integration) securely con
 3.  On the **GitHub** drawer, click **Install GitHub App**.
 4.  If you have more than one GitHub account, select the account where you want to install the GitHub app.
 5.  Select the GitHub repository to connect to your Neon project, and click **Connect**.
-6.  **Add Production Database Secret**:
+6.  **Add a production database secret**:
     - Navigate to your GitHub repository's **Settings** > **Secrets and variables** > **Actions**.
     - Create a new repository secret called `DATABASE_URL`.
     - Paste the connection string for your `production` branch (copied from the Neon Console).
     - Note that the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable should already be available from the GitHub integration setup.
 
     <Admonition type="note">
-    It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your production database branch. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+    The `NEON_API_KEY` secret (created by the integration) manages your Neon project, for example creating and deleting branches. The `DATABASE_URL` secret you just created points only to your production database branch. The workflow uses it only after a PR is merged to apply migrations, which keeps production separate from the ephemeral preview databases used during testing.
     </Admonition>
 
 ## Understanding the workflow
@@ -272,15 +272,15 @@ The workflow is divided into three jobs:
 
 ### Create branch & test job
 
-1.  **Branch Creation**: Uses Neon's `create-branch-action` to create a database branch named `preview/pr-{number}-{branch_name}`, which inherits the schema and data from your primary branch.
-2.  **Migration and Build**: Installs dependencies, runs schema migrations against the new branch, and builds the Next.js application. The branch-specific connection string from the `create-branch-action` output is used for these steps.
-3.  **Cypress Test Execution**: The official `cypress-io/github-action` is used to run the tests. The `wait-on` parameter ensures that tests only begin after the application server is responding. Videos of the test runs are always uploaded as artifacts, and screenshots are uploaded if any tests fail.
-4.  **Schema Diff**: Neon's `schema-diff-action` compares the schema of the preview branch against the parent branch and posts a summary comment to the pull request, making database changes easy to review.
+1.  **Branch creation**: Uses Neon's `create-branch-action` to create a database branch named `preview/pr-{number}-{branch_name}`, which starts with the schema and data of your project's default branch.
+2.  **Migrations**: Installs dependencies and runs schema migrations against the new branch, using the branch's pooled connection string (`db_url_pooled`) from the `create-branch-action` output.
+3.  **Cypress test execution**: The official `cypress-io/github-action` builds the Next.js app with `npm run build`, starts it with `npm start` against the new branch, and runs the tests. If the tests start before the server responds, add the action's `wait-on` input (for example, `wait-on: 'http://localhost:3000'`). Videos of the test runs are always uploaded as artifacts, and screenshots are uploaded if any tests fail.
+4.  **Schema diff**: Neon's `schema-diff-action` compares the schema of the preview branch against the parent branch and posts a summary comment to the pull request, so reviewers can see the database changes.
 
 ### Cleanup job
 
-1.  **Branch Deletion**: When the pull request is closed, the `delete-branch-action` removes the temporary database branch to free up resources.
-2.  **Apply Migrations to Production**: If the pull request was merged, the job checks out the code and applies any new migrations to the production database branch using the `DATABASE_URL` secret.
+1.  **Branch deletion**: When the pull request is closed, the `delete-branch-action` removes the temporary database branch to free up resources.
+2.  **Apply migrations to production**: If the pull request was merged, the job checks out the code and applies any new migrations to the production database branch using the `DATABASE_URL` secret.
 
 ## Test the workflow
 
@@ -368,22 +368,22 @@ GitHub Actions also uploads Cypress test artifacts. Videos are recorded for ever
 The complete source code for this example is available on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/neon-cypress-example" description="An example project for integrating Neon branching with Cypress and GitHub Actions for E2E testing." icon="github">Neon Branching with Cypress Example</a>
+<a href="https://github.com/dhanushreddy291/neon-cypress-example" description="An example project for integrating Neon branching with Cypress and GitHub Actions for E2E testing." icon="github">Neon branching with Cypress example</a>
 </DetailIconCards>
 
 ## Conclusion
 
-You have now configured a CI/CD pipeline that uses Neon branching to create isolated databases for your Cypress tests. This setup ensures that tests for new features run against the correct schema without interfering with a shared staging environment.
+You configured a CI/CD pipeline that uses Neon branching to create an isolated database for each pull request's Cypress tests, so tests for new features run against the correct schema without touching a shared staging environment.
 
-In a similar way, this concept can be extended to [Cypress component tests](https://docs.cypress.io/app/component-testing/get-started) to provide an isolated database for any components that fetch their own data. This approach can be easily adapted to any other E2E testing framework, such as Playwright or Selenium, by modifying the test execution steps in the GitHub Actions workflow while keeping the Neon branching logic intact.
+You can extend the same pattern to [Cypress component tests](https://docs.cypress.io/app/component-testing/get-started) for components that fetch their own data, or to other E2E frameworks such as Playwright or Selenium by changing the test execution steps and keeping the Neon branching steps as they are.
 
 ## Resources
 
-- [Neon Database Branching](/branching)
-- [Neon GitHub Integration](/docs/guides/neon-github-integration)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Automated E2E Testing with Neon Branching and Playwright](/guides/e2e-playwright-tests-with-neon-branching)
+- [Neon database branching](/branching)
+- [Neon GitHub integration](/docs/guides/neon-github-integration)
+- [Cypress documentation](https://docs.cypress.io/)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [Automated E2E testing with Neon branching and Playwright](/guides/e2e-playwright-tests-with-neon-branching)
 - [Cypress GitHub Action](https://github.com/marketplace/actions/cypress-io)
 
 <NeedHelp/>

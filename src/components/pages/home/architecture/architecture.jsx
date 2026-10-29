@@ -3,16 +3,23 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import schemaMobileImage from 'images/pages/home/architecture/schema-mobile.png';
+import { cn } from 'utils/cn';
 
 import Animation from './animation';
 
-const Highlight = ({ children }) => (
-  <mark className="-mr-[0.15em] -ml-[0.1em] bg-transparent bg-[linear-gradient(to_bottom,transparent_0.15em,rgba(57,165,125,0.6)_0.15em)] box-decoration-clone pr-[0.15em] pl-[0.1em]">
+const Highlight = ({ className, children }) => (
+  <mark
+    className={cn(
+      '-mr-[0.15em] -ml-[0.1em] bg-transparent bg-[linear-gradient(to_bottom,transparent_0.15em,rgba(57,165,125,0.6)_0.15em)] box-decoration-clone pr-[0.15em] pl-[0.1em]',
+      className
+    )}
+  >
     {children}
   </mark>
 );
 
 Highlight.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
@@ -45,9 +52,9 @@ const Architecture = () => (
             />
 
             <p className="mt-9 max-w-248 text-4xl leading-dense tracking-tighter text-gray-new-40 2xl:max-w-4/5 2xl:text-[2.25rem] xl:text-[2rem] lg:text-[1.75rem] md:mt-8 md:max-w-none md:text-[1.375rem] sm:text-xl">
-              The <span className="text-black-new">lakebase architecture</span> decouples storage
-              and compute to deliver instant operations and scale without compromise on performance
-              or reliability.
+              The <Highlight className="text-black-new">lakebase architecture</Highlight> decouples
+              storage and compute to deliver instant operations and scale without compromise on
+              performance or reliability.
             </p>
           </div>
         </div>

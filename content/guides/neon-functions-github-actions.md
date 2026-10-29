@@ -4,12 +4,12 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-09-16T22:49:09.716Z'
+updatedOn: '2026-10-09T15:17:33.920Z'
 ---
 
-[Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
+[Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That fits a workflow where every environment gets its own isolated function.
 
-The Neon CLI (`neon deploy`) lets you deploy a function to any branch with a single command. It works well for testing locally, but as a best practice you should never deploy to the production branch by hand or push changes to it directly. Instead, every change should go through a pull request that gets exercised in isolation first. Because a PR's preview branch runs the exact same code, config, and deploy command as production, merging it becomes a simple step: if it worked in preview, it works in production.
+The Neon CLI (`neon deploy`) lets you deploy a function to any branch with a single command. It works well for testing locally, but as a best practice you should never deploy to the production branch by hand or push changes to it directly. Instead, every change should go through a pull request that gets exercised in isolation first. Because a PR's preview branch runs the exact same code, config, and deploy command as production, merging it is a small step: what worked in preview runs the same way in production.
 
 Automating your deployments keeps things consistent and reproducible. No one has to remember the right command or wonder what state production is in, and there's less risk that an unreviewed change reaches production.
 
@@ -35,8 +35,8 @@ Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS U
 ## Prerequisites
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
-2. **Neon Account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
-3. **GitHub Account**: Sign up for a free account at [github.com](https://github.com/).
+2. **Neon account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
+3. **GitHub account**: Sign up for a free account at [github.com](https://github.com/).
 4. **The Neon CLI**: Installed and authenticated:
    ```bash
    npm install -g neon@latest
@@ -64,7 +64,7 @@ Link your local workspace to a Neon project:
 neon link
 ```
 
-You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward all regions. When asked which Neon services you require, select **Functions**. Finally, confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root:
+You'll be prompted to select your organization, then a project. **Create a new project** named `neon-functions-api` (or pick an existing one). Next, select a region. Choose **AWS US East (Ohio)** (`aws-us-east-2`), **AWS US East (N. Virginia)** (`aws-us-east-1`), **AWS Europe (Frankfurt)** (`aws-eu-central-1`), or **AWS Asia Pacific (Singapore)** (`aws-ap-southeast-1`); this guide uses US East (Ohio). Neon Functions are currently available in these regions. Support is expanding toward all regions. Confirm that you want to manage your setup as code, which generates a `neon.ts` file in your project root. Then, when asked which Neon services you require, select **Functions**:
 
 ```text
 $ neon link
@@ -72,18 +72,20 @@ $ neon link
 ✔ Which project would you like to link? › ＋ Create new project…
 ✔ Name for the new project: … neon-functions-api
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
-Created project quiet-mist-12345678 ("neon-functions-api") in aws-us-east-2.
-Linked ~/neon-functions-api/.neon:
-  orgId:     org-example-12345678
-  projectId: quiet-mist-12345678
-  branch:    main
+Created project neon-functions-api in aws-us-east-2
+Linked .neon
+  Project         neon-functions-api (quiet-mist-12345678)
+  Branch          main
+  Org             org-example-12345678
 
-INFO: Pulled 3 Neon variables into ~/neon-functions-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+Pulled 3 Neon variables into .env.local
+  Postgres        DATABASE_URL, DATABASE_URL_UNPOOLED
+  Branch          NEON_BRANCH
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
-INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts, the source of the hello function.
-INFO: Installing @neon/config, @neon/env with npm…
+Created neon.ts declaring functions.
+Created hello.ts, the source of the hello function.
+Installing @neon/config, @neon/env with npm…
 ```
 
 The `neon link` command also creates a placeholder function, `hello.ts`, at your project root and a `.env.local` file with your project's variables, including `DATABASE_URL`.
@@ -143,14 +145,12 @@ Replace the contents of the generated `neon.ts` with the following:
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
-  preview: {
-    functions: {
-      hello: {
-        name: 'Hello API',
-        source: './hello.ts',
-        env: {
-          GREETING: process.env.GREETING ?? 'Hello World',
-        },
+  functions: {
+    hello: {
+      name: 'Hello API',
+      source: './hello.ts',
+      env: {
+        GREETING: process.env.GREETING ?? 'Hello World',
       },
     },
   },
@@ -219,9 +219,9 @@ Before automating anything, verify the function deploys cleanly from your machin
 
 Now you have a working Neon Functions project with an API, ready to deploy automatically through GitHub Actions for both preview and production environments.
 
-## Set up the Neon GitHub Integration
+## Set up the Neon GitHub integration
 
-The [Neon GitHub Integration](/docs/guides/neon-github-integration) connects your Neon project to your repository and automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable, which are exactly what the workflow needs.
+The [Neon GitHub integration](/docs/guides/neon-github-integration) connects your Neon project to your repository and automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable, which are exactly what the workflow needs.
 
 1. In the [Neon Console](https://console.neon.tech), navigate to the **Integrations** page in your Neon project.
 2. Locate the **GitHub** card and click **Add**.
@@ -377,7 +377,7 @@ jobs:
 
 The workflow (excluding the setup) has three main jobs: **deploy preview**, **deploy production**, and **cleanup**, and each one runs the same idea: deploy function to a branch. Because functions are branch-scoped, every environment ends up with its own function at its own URL, running against its own database state. Thinking of it as "deploy to a branch" makes the whole workflow easy to follow.
 
-- **Deploy preview**: Runs when a PR is opened, reopened, or updated. It creates an isolated branch, deploys to it, comments the preview URL on the PR for review.
+- **Deploy preview**: Runs when a PR is opened, reopened, or updated. It creates an isolated branch, deploys to it, and comments the preview URL on the PR for review.
 - **Deploy production**: Runs on any push to `main` (which includes merged PRs). It applies the same code to the production branch.
 - **Cleanup**: Runs when a PR is closed. It deletes the preview branch, which removes the preview function too, so you don't have to worry about orphaned branches or functions.
 
@@ -394,8 +394,8 @@ neon deploy \
 
 A few flags make the command safe to run unattended on a CI runner:
 
-- **`--update-existing`**: Answers "yes" when the deploy would override something already on the branch, so the CLI doesn't stop and ask for confirmation.
-- **`--allow-protected`**: Does the same for a production branch marked as [protected](/docs/guides/protected-branches). It's a no-op if the branch isn't protected.
+- **`--update-existing`**: Answers "yes" when the deploy would override something already on the branch. A CI runner has no terminal to prompt in, so without this flag the deploy stops with an error instead.
+- **`--allow-protected`**: Does the same for a production branch marked as [protected](/docs/guides/protected-branches). It's a no-op if the branch isn't protected. `-y` answers both at once, but naming each flag keeps the workflow explicit about what it allows.
 - **`--no-env-pull`**: Skips writing the branch's variables to a local `.env` file, which there's no use for on a throwaway runner.
 
 Because every job installs the CLI and runs this same deploy logic, the workflow scales to any number of functions. `neon deploy` applies whatever's in your `neon.ts`, and the steps that list URLs pick up every function on the branch, so you never need to touch the YAML when you add a function.
@@ -404,7 +404,7 @@ Because every job installs the CLI and runs this same deploy logic, the workflow
 
 The workflow uses a few GitHub Actions to handle the branch lifecycle and other tasks:
 
-- **[`neondatabase/create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action)** (Neon): Creates a Neon branch from your primary branch. The preview job calls it to create a branch for the PR, so the function runs against that branch's database state.
+- **[`neondatabase/create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action)** (Neon): Creates a Neon branch from your default branch. The preview job calls it to create a branch for the PR, so the function runs against that branch's database state.
 - **[`neondatabase/delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)** (Neon): Removes a Neon branch when you no longer need it. The cleanup job calls it to tear down the preview branch (and its function) once its PR closes, so branches don't accumulate.
 - **`actions/checkout`**, **`actions/setup-node`**, and **`actions/github-script`**: Standard GitHub Actions for checking out the repo, installing Node, and running JavaScript against the GitHub API.
 - **`tj-actions/branch-names`**: Outputs the name of the branch that triggered the run. The preview branch is named after it (for example `preview/pr-12-fix-auth`) so you can tell which PR and code it came from.
@@ -509,9 +509,7 @@ Add `NEON_API_KEY` and `NEON_PROJECT_ID` to your CI/CD environment, and the work
 
 ## Conclusion
 
-You now have a CI/CD pipeline that treats every Neon Functions deployment like a branch: merge to `main` ships to production, and each pull request gets its own isolated preview function running against its own database. Because the deploy command is the same every time, review happens where it should, in a production-like preview, before a change ever reaches production.
-
-The same recipe adapts to any CI/CD platform and scales to any number of functions. Add a function to `neon.ts` and the pipeline picks it up automatically, so the setup you have today keeps working as your API grows.
+You now have a CI/CD pipeline that treats every Neon Functions deployment like a branch: merge to `main` ships to production, and each pull request gets its own isolated preview function running against its own database. Because the deploy command is the same every time, review happens in a production-like preview before a change reaches production. Add a function to `neon.ts` and the pipeline picks it up automatically.
 
 Use `neon deploy` on your local machine for your own dev branches while you iterate. But for branches the whole team shares, like QA, staging, or production, deploy through the pipeline instead. That way every change is reviewed, runs the same command, and reaches the branch with a commit trail you can trace, rather than depending on whoever happened to run the deploy by hand.
 

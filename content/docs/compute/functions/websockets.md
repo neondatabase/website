@@ -336,7 +336,7 @@ Reconnection doesn't replay what it missed: `EventSource` only resumes from a po
 
 To push to every client, fan out across isolates exactly as with WebSockets: hold a `Set` of stream controllers and `enqueue` to each when a new row appears (poll or `NOTIFY`; see [Cross-isolate messaging](#cross-isolate-messaging)). `EventSource` is GET-only and can't set headers, so authenticate it with a query parameter or cookie, the same as a WebSocket (see [Authentication](#authentication)).
 
-For a complete SSE backend (Hono endpoint, `LISTEN`/`NOTIFY` fan-out, a counter persisted in Postgres, and a client-only SPA), see the [realtime SSE example](https://github.com/neondatabase/examples/tree/main/with-realtime-sse).
+For a complete SSE backend (Hono endpoint, `LISTEN`/`NOTIFY` fan-out, a counter persisted in Postgres, and a client-only SPA), see the [server-sent events example](https://github.com/neondatabase/examples/tree/main/with-server-sent-events-function).
 
 ## Authentication
 
@@ -366,7 +366,7 @@ async fetch(request: Request) {
 },
 ```
 
-For a complete example with JWT verification, Managed Better Auth integration, and client-side reconnection, see the [realtime chat example](https://github.com/neondatabase/examples/tree/main/with-realtime-chat).
+For a complete example with JWT verification, Managed Better Auth integration, and client-side reconnection, see the [WebSocket chat example](https://github.com/neondatabase/examples/tree/main/with-websockets-function).
 
 ## Eviction and shutdown
 

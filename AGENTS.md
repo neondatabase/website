@@ -277,6 +277,7 @@ See `content/docs/README.md` for full syntax. Key features:
 
 - `showLineNumbers` — shows line numbers
 - `shouldWrap` — enables line wrapping (use for long commands)
+- `collapse={1-5, 12-14}` — hides line ranges behind a clickable "N collapsed lines" row (use for boilerplate in long examples)
 
 ### Diff notation
 

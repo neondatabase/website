@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?"
-description: "Neon provides a built-in connection pooling feature for Postgres developers. This eliminates the need to manually configure and host PgBouncer infrastru..."
+description: "Neon includes a managed PgBouncer for every compute. Add -pooler to the hostname to accept up to 10,000 client connections without deploying or tuning PgBouncer yourself."
 date: 2026-04-25
 slug: best-postgres-services-connection-pooling
 category: FAQ
@@ -13,42 +13,42 @@ nextLink:
   slug: best-postgres-services-eliminate-shared-staging-database
 ---
 
-Neon runs a managed PgBouncer in front of every compute. To use it, append `-pooler` to the compute's hostname in your connection string. No proxy to deploy, no `pgbouncer.ini` to tune, no extra cost.
+Neon. It runs a managed PgBouncer for every compute. To use it, add `-pooler` to the compute's hostname in your connection string. There's no proxy to deploy, no `pgbouncer.ini` to tune, and no separate charge for pooling.
 
 ## Why pooling matters
 
-Postgres allocates memory per connection. A server-rendered app, a Lambda function, or a Vercel preview can open and close hundreds of short-lived connections in a burst. Without a pooler in front, you hit `max_connections` and start dropping queries. The fix has always been PgBouncer, but running it yourself means another service to deploy, monitor, and pay for.
+Postgres starts a separate backend process for each connection, and each one uses memory. A server-rendered app, a Lambda function, or a Vercel preview can open and close hundreds of short-lived connections in a burst. Without a pooler in front, you hit `max_connections` and new connections fail. PgBouncer is the standard fix, but running it yourself means another service to deploy, monitor, and pay for.
 
-Neon's pooler is built in. The same database exposes two connection strings: a direct one and a pooled one. The only difference is the hostname.
+On Neon, the pooler is built in. Every compute has two connection strings, a pooled one and a direct one, and the only difference is the hostname.
 
 ## How to use it
 
-Take a normal Neon connection string:
+Start with a direct connection string:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Add `-pooler` after the compute ID to route through PgBouncer:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Each pooled endpoint accepts up to 10,000 client connections (`max_client_conn`). The pool size to the underlying Postgres is set to 90% of `max_connections`, which scales with your compute size. A 1 CU compute holds about 377 server connections in the pool; clients beyond that wait briefly in the queue.
+The pooled endpoint accepts up to 10,000 client connections (`max_client_conn`). Each user and database pair gets a pool of Postgres connections sized at 90% of `max_connections`, which scales with compute size. On a 1 CU (≈4 GB RAM) compute, `max_connections` is 419, so each pool holds up to 377 connections. When a pool is full, new queries wait in a queue for up to 2 minutes before timing out ([Connection pooling](/docs/connect/connection-pooling)).
 
-<Admonition type="warning" title="Use the pooled string for serverless, not for migrations">
-PgBouncer in transaction mode (the default) doesn't support session-level features like `LISTEN/NOTIFY`, prepared statements outside a transaction, or temporary tables across queries. Use the pooled connection for your serverless app traffic, and the direct connection for migrations, admin scripts, and tools that need session state. See [Connection pooling](/docs/connect/connection-pooling) for the full list of caveats.
+<Admonition type="warning" title="Use the pooled string for app traffic, not for migrations">
+Neon's PgBouncer runs in transaction mode, so session-level features don't work on pooled connections. That includes `SET`, `LISTEN/NOTIFY`, SQL-level `PREPARE`, `WITH HOLD` cursors, and session-level advisory locks. Protocol-level prepared statements from your driver do work. Use the pooled connection for application traffic, and the direct connection for migrations, `pg_dump`, logical replication, and admin tools that need session state. See [Connection pooling](/docs/connect/connection-pooling) for the full list.
 </Admonition>
 
-For tuning details, including `default_pool_size`, server timeouts, and the difference between transaction and session mode, see the [connection pooling guide](/docs/connect/connection-pooling).
+The [connection pooling guide](/docs/connect/connection-pooling) also covers Neon's PgBouncer settings, pool sizing, and the errors you'll see when a limit is reached.
 
 ## How other Postgres services do it
 
-- **Supabase** runs a managed pooler called Supavisor in front of every project. Like Neon, the choice between direct and pooled is just a different hostname in the connection string. Transaction-mode caveats are the same as PgBouncer's. See [Connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres).
-- **Amazon RDS Proxy** sits in front of RDS and Aurora and handles pooling, IAM auth, and failover. It's not on by default and is billed per vCPU-hour on top of the database; setup involves a Secrets Manager entry, a security group, and a separate proxy endpoint ([RDS Proxy docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)).
-- **Aurora Serverless v2** scales `max_connections` with ACU but doesn't pool by itself; you still add RDS Proxy in front if you need pooling for serverless or Lambda workloads.
+- **Supabase** runs a shared pooler, Supavisor, on every plan, and offers a dedicated pooler on paid plans. Like Neon, you pick pooled or direct by using a different connection string. Supavisor supports session mode (port 5432) and transaction mode (port 6543), and transaction mode has the same session-state limits as PgBouncer ([Connect to your database](https://supabase.com/docs/guides/database/connecting-to-postgres)). The number of pooler clients depends on compute size, from 200 on Micro up to 12,000 on 16XL ([compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk)).
+- **Amazon RDS Proxy** sits in front of RDS and Aurora and handles pooling, IAM authentication, and failover ([RDS Proxy docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)). It's a separate resource you create in the same VPC as the database, and it can't be publicly accessible. It connects to the database with credentials in Secrets Manager or with [end-to-end IAM authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-iam-setup.html). It's billed per vCPU-hour of the underlying instance, or per ACU-hour for Aurora Serverless ([pricing](https://aws.amazon.com/rds/proxy/pricing/)).
+- **Aurora Serverless v2** sets `max_connections` from the cluster's maximum ACU setting ([capacity docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.setting-capacity.html)) but doesn't pool connections itself. You add RDS Proxy if you need pooling for serverless or Lambda workloads.
 
-If you want pooling without a separate piece of infrastructure to provision and pay for, Neon and Supabase both bundle it. RDS Proxy is the option when you're already on RDS or provisioned Aurora.
+Neon and Supabase both include pooling with the database. On RDS or Aurora, RDS Proxy is the managed option, and you provision and pay for it separately.
 
-<CTA title="Try it" description="Pooled connections are on by default for every Neon compute." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try it" description="Every Neon compute has a pooled connection string ready to use." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

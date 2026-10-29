@@ -2,9 +2,9 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-04-24T22:05:15.000Z'
-title: How to Create a Reliable Testing Dataset with pg_dump and pg_restore
-subtitle: A practical guide to extracting a test dataset from Postgres using pg_dump, pg_restore and psql
+updatedOn: '2026-09-24T17:56:34.189Z'
+title: How to create a reliable testing dataset with pg_dump and pg_restore
+subtitle: Extract a test dataset from Postgres using pg_dump, pg_restore, and psql
 ---
 
 As your Postgres database grows, you'll likely need a way to generate a smaller, 'good-enough' dataset that preserves the structure and referential integrity of production but is better suited for testing.
@@ -13,7 +13,7 @@ There are several ways to do this, but here's a straightforward approach using `
 
 ## Running partial data dumps inside GitHub Actions
 
-You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across different Postgres database providers, but if you're looking for a cost-effective testing environment, consider trying Neon. Check out our [getting started guide](/docs/get-started/signing-up#sign-up) to see how easy it is to set up.
+You can run `pg_dump`, `pg_restore`, and `psql` from the command line, but sometimes, an automated, reproducible approach is more convenient. To better control when data dumps occur, I use a [scheduled GitHub Action](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule) to export data from my production database and restore it to a testing database. This method works across Postgres providers. If you need a testing database, you can create one on Neon; see [Getting started](/docs/get-started/signing-up).
 
 ## What is a scheduled GitHub Action?
 
@@ -67,7 +67,7 @@ jobs:
 
 This name will appear in the **Actions** section of the GitHub UI. Regardless of what you name your file, this is the name that will be displayed.
 
-## on
+### on
 
 This section of the workflow determines when the Action will run. The `schedule` field includes a `cron` expression, which uses [POSIX cron syntax](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07) to specify how often the Action should execute.
 
@@ -75,9 +75,9 @@ I've also included the `workflow_dispatch` field, which lets you manually trigge
 
 ### env
 
-This workflow requires two environment variables. The first is the Postgres connection string for the source database, typically your production or staging database. The second is the connection string for the target database, which will serve as your testing database. Both need to use the same version of Postgres. Both of these variables will also need to be added to your GitHub repositories secrets.
+This workflow requires two environment variables. The first is the Postgres connection string for the source database, typically your production or staging database. The second is the connection string for the target database, which will serve as your testing database. Both need to use the same version of Postgres. Both variables also need to be added to your GitHub repository's secrets.
 
-To do this, navigate to **Settings** > **Settings and variables** > **Actions** and add them under **Repository secrets**.
+To do this, navigate to **Settings** > **Secrets and variables** > **Actions** and add them under **Repository secrets**.
 
 ![Screenshot of GitHub repository secrets](/guides/images/reliable-testing-dataset-with-pg-dump-and-pg-restore/screenshot-of-github-respository-secrets.jpg)
 
@@ -91,7 +91,7 @@ The first step in the job is to install Postgres. While there are various method
 
 The next step is to define a variable that is needed when using `pg_dump`, `pg_restore`, and `psql`. This variable is named `POSTGRES` and will be referenced later as `$POSTGRES/pg_dump`.
 
-Before I jump into the dump/restore parts, I'll quickly explain the schema I've used in this example. It’s important to note the foreign key relationships between the tables.
+Before I jump into the dump/restore parts, I'll quickly explain the schema I've used in this example. Pay attention to the foreign key relationships between the tables.
 
 In my example, the foreign key relationships are as follows:
 
@@ -146,7 +146,7 @@ CREATE TABLE transactions (
 );
 ```
 
-The **transactions** table in my example relies on data from both the **users** and **products** tables. When performing a partial data dump, it's important that transaction rows can reference either a `user_id` from the **users** table or a `product_id` from the **products** table.
+The **transactions** table in my example relies on data from both the **users** and **products** tables. In a partial data dump, every transaction row you keep must reference a `user_id` and a `product_id` that are also in the dump.
 
 With this in mind, I'll start with the `transactions` table when deciding which data to include in the partial dump.
 
@@ -177,9 +177,9 @@ jobs:
       - name: Set PostgreSQL binary path
         run: echo "POSTGRES=/usr/lib/postgresql/${{ env.PG_VERSION }}/bin" >> $GITHUB_ENV
 
-     - name: Dump schema
+      - name: Dump schema
         run: |
-          $POSTGRES/w "${{ github.workspace }}/all-schema.bak" "${{ env.PROD_DATABASE_URL }}"
+          $POSTGRES/pg_dump -Fc --schema-only -f "${{ github.workspace }}/all-schema.bak" "${{ env.PROD_DATABASE_URL }}"
 
       - name: Dump data
         run: |
@@ -207,7 +207,7 @@ The above code snippet might look a bit complicated at first, but it’s actuall
 
 ### Dump schema
 
-In this step, I use `pg_dump` to export the entire schema from the production database and save it to the GitHub workspace as a file named `all-schema.bak`. This file is stored in memory so it can be accessed later by the **Restore schema** step towards the end of the job.
+In this step, I use `pg_dump` to export the entire schema from the production database and save it to the GitHub workspace as a file named `all-schema.bak`. The file stays on the runner so the **Restore schema** step can read it later in the job.
 
 The flags used in this step are explained below:
 
@@ -229,7 +229,7 @@ This query selects the 50 most recent **transactions** from the `transactions` t
 SELECT * FROM transactions ORDER BY transaction_id DESC LIMIT 50
 ```
 
-The results are saved to the GitHub workspace memory as a file called `transactions-subset.csv`, which will be used in a later step.
+The results are saved to the GitHub workspace as a file called `transactions-subset.csv`, which will be used in a later step.
 
 #### Products query
 
@@ -239,7 +239,7 @@ This query selects **products**, but only those with a `product_id` present in t
 SELECT * FROM products WHERE product_id IN (SELECT product_id FROM transactions ORDER BY transaction_id DESC LIMIT 50)
 ```
 
-The results are saved to the GitHub workspace memory as a file called `products-subset.csv`, which will be used in a later step.
+The results are saved to the GitHub workspace as a file called `products-subset.csv`, which will be used in a later step.
 
 #### Users query
 
@@ -249,7 +249,7 @@ This query selects **users**, but only those with a `user_id` present in the 50 
 SELECT * FROM users WHERE user_id IN (SELECT user_id FROM transactions ORDER BY transaction_id DESC LIMIT 50)
 ```
 
-The results are saved to the GitHub workspace memory as a file called `users-subset.csv`, which will be used in a later step.
+The results are saved to the GitHub workspace as a file called `users-subset.csv`, which will be used in a later step.
 
 ### Drop tables and schema
 
@@ -273,11 +273,11 @@ The flags used in this step are explained below:
 | `--clean`       | Drops existing database objects before recreating them, ensuring a clean restore.                              |
 | `--no-owner`    | Ignores ownership information in the dump file, so restored objects are owned by the user running the restore. |
 | `--no-acl`      | Excludes access control (GRANT/REVOKE) statements from the restore, preventing permission changes.             |
-| `–if-exits`     | Ensures that DROP commands (used with --clean) only execute if the object exists, preventing errors.           |
+| `--if-exists`   | Ensures that DROP commands (used with --clean) only execute if the object exists, preventing errors.           |
 | `--schema-only` | Restores only the schema (table structures, indexes, constraints) without inserting any data.                  |
 | `-d`            | Specifies the target database to restore into.                                                                 |
 
-## Restore data
+### Restore data
 
 In this step, I use `psql` to restore the data to the target database from the `.csv` files generated in the **Dump data** step.
 
@@ -285,6 +285,4 @@ In this step, I use `psql` to restore the data to the target database from the `
 
 Once the Action completes successfully, your target database will have a fresh test data set ready for use.
 
-This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. With a dedicated Neon database, while leaving production environments where they are, developers get Neon's full suite of features, including the [built-in SQL editor](/docs/get-started/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
-
-If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test).
+This workflow fits the [dev/test use case](/use-cases/dev-test): production stays where it is, and testing runs against a dedicated Neon database, where you also get the [SQL Editor](/docs/get-started/query-with-neon-sql-editor), the [Tables page](/docs/guides/tables), and [branching](/docs/introduction/branching).

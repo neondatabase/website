@@ -41,7 +41,7 @@ export default {
 
   // Docs
   docs: '/docs',
-  docsHome: '/docs/introduction',
+  docsHome: '/docs',
   api: '/docs/reference/api',
   architecture: '/docs/introduction/architecture-overview',
   postgresOverview: '/docs/postgres/overview',
@@ -74,6 +74,7 @@ export default {
   docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
   docsExtensionsTimescaledb: '/docs/extensions/timescaledb',
   readReplicas: '/docs/introduction/read-replicas',
+  realtime: '/docs/realtime/overview',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   scaleToZero: '/docs/guides/scale-to-zero-guide',

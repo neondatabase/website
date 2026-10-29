@@ -8,11 +8,11 @@ summary: >-
   automatically detects schemas, indexes, and constraints. Use this page when
   you need end-to-end steps covering credentials, firewall rules, pgloader
   configuration, running the migration, and post-migration verification. Neon's
-  Free plan supports up to 0.5 GB; larger datasets require a paid plan. Azure
+  Free plan supports up to 1 GB; larger datasets require a paid plan. Azure
   SQL users may need FreeTDS driver configuration to resolve pgloader
   connection errors.
 enableTableOfContents: true
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -29,7 +29,7 @@ The `pgloader` utility transforms data to a Postgres-compatible format as it rea
 
   For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 1 GB of data. If your data size is more than 1 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 - Review the [Pgloader MSSQL to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/mssql.html) guide. It will provide you with a good understanding of `pgloader` capabilities and how to configure your `pgloader` configuration file, if necessary.
 
@@ -240,6 +240,6 @@ For complex migrations or when you need more control over the migration process,
 For more information on `pgloader` and database migration, refer to the following resources:
 
 - [pgloader documentation - MSSQL to Postgres](https://pgloader.readthedocs.io/en/latest/ref/mssql.html)
-- [Neon documentation](/docs/introduction)
+- [Neon documentation](/docs)
 
 <NeedHelp/>

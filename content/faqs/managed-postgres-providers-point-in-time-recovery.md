@@ -13,11 +13,11 @@ nextLink:
   slug: managed-postgres-providers-rest-api-database-automation
 ---
 
-Point-in-time recovery on Neon is built into the storage layer. Every project has a **history window**: the time range you can restore from. Instant restore works on **root branches** only. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
+Point-in-time recovery on Neon is built into the storage layer. Every project has a history window, which sets how far back you can restore. Instant restore works on root branches only. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
 
 ## How the history window works
 
-When you write to a branch on Neon, the storage layer keeps the older versions of the changed pages for the duration of the [history window](/docs/introduction/history-window). To restore, Lakebase Postgres reconstructs the database state at the timestamp you choose. There's no separate WAL archive to manage and no backup bucket to provision.
+Neon's storage layer retains the change history (WAL records) for the duration of the [history window](/docs/postgres/backup-restore/history-window). To restore, it reconstructs the database state at the timestamp you choose. You don't manage a WAL archive or provision a backup bucket.
 
 | Plan        | Default history window | Maximum | Change history pricing |
 | ----------- | ---------------------- | ------- | ---------------------- |
@@ -30,15 +30,15 @@ When you write to a branch on Neon, the storage layer keeps the older versions o
 From the CLI, restore a root branch to a specific timestamp:
 
 ```bash
-neon branches restore main ^self@2026-05-17T14:30:00Z \
-  --preserve-under-name main-pre-restore
+neon branches restore production ^self@2026-09-22T14:30:00Z \
+  --preserve-under-name production-pre-restore
 ```
 
-This rewinds `main` to the chosen timestamp and keeps the pre-restore state under a new branch name in case you need it. See [instant restore](/docs/guides/branch-restore) for the full workflow.
+This rewinds the `production` root branch to the chosen timestamp and keeps the pre-restore state under a new branch name. Your root branch may be named `main` if you created the project with the CLI or API. Child branches don't use instant restore; you refresh them with [reset from parent](/docs/guides/reset-from-parent). See [Instant restore](/docs/postgres/backup-restore/branch-restore) for the full workflow.
 
 ## Why child branches don't add to the bill
 
-Change history is billed only on root branches. Creating a child branch from a point in time doesn't duplicate the history; it points back to the same change log. So branching at noon yesterday to recover a deleted row costs nothing extra in retention storage. You only pay for the compute that runs the branch and any new writes you make on it.
+Change history is billed only on root branches. A child branch created from a past point in time reads from the same change history instead of duplicating it. Branching from noon yesterday to recover a deleted row adds no history storage. You pay for the branch's compute while it runs and for its own storage, which is the lower of its changes or its logical data size.
 
 <Admonition type="tip" title="Don't over-extend the history window">
 Longer windows mean more change history stored, which means more $0.20/GB-month. If you only need to recover from accidents in the last day, keep the window at 1 day and use [snapshots](/docs/guides/backup-restore) for longer retention. Snapshots are billed at $0.09/GB-month.
@@ -46,18 +46,16 @@ Longer windows mean more change history stored, which means more $0.20/GB-month.
 
 ## How PITR works on other providers
 
-| Provider         | PITR included?                   | Retention                                      | Notes                                                                         |
-| ---------------- | -------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| Neon             | Yes, on every plan               | 6 hours (Free plan) up to 30 days (Scale plan) | Built into storage; change history billed at $0.20/GB-month on paid plans     |
-| RDS for Postgres | Yes, automated backups           | 0–35 days                                      | Configurable per instance; default 1 day via API, 7 days via console          |
-| Aurora Postgres  | Yes, automated backups           | 1–35 days                                      | Continuous backup to S3; restore creates a new cluster                        |
-| Supabase         | Paid add-on (Pro plan and above) | 7, 14, or 28 days                              | ~$100/month for 7-day retention; Pro plan daily backups (7 days) are included |
+| Provider         | PITR included?                   | Retention                                      | Notes                                                                                                           |
+| ---------------- | -------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Neon             | Yes, on every plan               | 6 hours (Free plan) up to 30 days (Scale plan) | Built into storage; change history billed at $0.20/GB-month on paid plans                                       |
+| RDS for Postgres | Yes, automated backups           | 0–35 days                                      | Configurable per instance; default 1 day via API, 7 days via console                                            |
+| Aurora Postgres  | Yes, automated backups           | 1–35 days                                      | Continuous backup to S3; restore creates a new cluster                                                          |
+| Supabase         | Paid add-on (Pro plan and above) | 7, 14, or 28 days                              | ~$100/month for 7-day retention; requires Small compute or larger; Pro plan daily backups (7 days) are included |
 
-A few specifics:
+- **RDS for Postgres** backup retention is configurable from 0 (disabled) to 35 days, with a default of 1 day through the API or CLI and 7 days in the console. See [RDS backup retention period](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). A [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) creates a new DB instance rather than restoring in place.
+- **Supabase PITR** is a per-project paid add-on for Pro, Team, and Enterprise projects on Small compute or larger. It costs about $100/month for 7-day retention, $200/month for 14 days, and $400/month for 28 days ([PITR usage](https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery)). Daily backups are included on Pro and above, and the project is inaccessible while a restore runs. See [Supabase backups](https://supabase.com/docs/guides/platform/backups).
 
-- **RDS for Postgres** automated backups are free up to the size of your database storage, and PITR restores create a new database instance (not an in-place restore). Backup retention is configurable from 0 (disabled) to 35 days. See [RDS backup retention period](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
-- **Supabase PITR** is a per-project paid add-on. Pricing is about $100/month for 7-day retention, $200/month for 14 days, and $400/month for 28 days. Daily backups are included on Pro and above. See [Supabase backups](https://supabase.com/docs/guides/platform/backups).
+On Neon, a restore rewinds an existing root branch in place, or you can create a new branch from a past point in time. Neither provisions a new instance.
 
-On Neon, restoring rewinds an existing root branch (or creates a new branch from a past point in time) without provisioning a new instance, which is what makes the workflow different from RDS or Aurora.
-
-<CTA title="Recover Postgres without managing backups" description="See how instant restore works on Neon." buttonText="Read the docs" buttonUrl="/docs/guides/branch-restore" />
+<CTA title="Recover Postgres without managing backups" description="See how instant restore works on Neon." buttonText="Read the docs" buttonUrl="/docs/postgres/backup-restore/branch-restore" />

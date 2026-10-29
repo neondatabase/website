@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-10-08T03:44:40.920Z'
 ---
 
 ## Overview
@@ -106,13 +106,13 @@ YYYY-MM-DDTHH:MM:SS-HH:MM    (Negative UTC offset)
 
 **Requirements:**
 
-- Time zone is required: use either `Z` for UTC or a numeric offset like `+05:00`
+- Time zone is required in API requests: use either `Z` for UTC or a numeric offset like `+05:00`. The Neon CLI accepts a timestamp without one and reads it as your local time, so include it to be explicit.
 - Fractional seconds are optional but only second precision is stored
 - Timestamp must be in the future
 - Maximum expiration is 30 days from the current time
 
 <Admonition type="note">
-Common errors include missing timezone (`2025-07-15T18:02:16`), past timestamps, or combining `Z` with offset (`2025-07-15T18:02:16Z-05:00`).
+Common errors include past timestamps, combining `Z` with an offset (`2025-07-15T18:02:16Z-05:00`), and, in API requests, a missing time zone (`2025-07-15T18:02:16`).
 </Admonition>
 
 ## Restrictions
@@ -141,7 +141,7 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 
 <TabItem>
 
-1. Navigate to the **Branches** page (under **Project**) in the Console
+1. Navigate to the **Branches** page in the Console
 2. Click **New branch**
 3. Enter branch name and select parent branch
 4. By default, **Automatically delete branch after** is checked with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable.
@@ -214,7 +214,7 @@ curl --request POST \
 
 <TabItem>
 
-1. Navigate to the **Branches** page (under **Project**) in the Console
+1. Navigate to the **Branches** page in the Console
 2. Choose the **Update expiration** option for your branch
 
 ![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
@@ -227,7 +227,7 @@ curl --request POST \
 
 <TabItem>
 
-```bash {4,12,18}
+```bash {4,12}
 # Update expiration to new timestamp
 neon branches set-expiration \
   <branch-id> \
@@ -242,10 +242,9 @@ neon branches set-expiration \
   --expires-at "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)" \
   --project-id <project-id>
 
-# Remove expiration from a branch
+# Remove expiration from a branch (omit --expires-at)
 neon branches set-expiration \
   <branch-id> \
-  --expires-at null \
   --project-id <project-id>
 ```
 
@@ -291,7 +290,7 @@ Check expiration status of your branches:
 
 <TabItem>
 
-1. Navigate to the **Branches** page (under **Project**) in the Console
+1. Navigate to the **Branches** page in the Console
 2. Click on the desired branch to open the **Branch Overview**
 3. See information similar to the following if branch expiration is set:
 

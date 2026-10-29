@@ -1,29 +1,29 @@
 ---
-title: Scale your Next.js application with Drizzle ORM and Lakebase Postgres Read Replicas
-subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Lakebase Postgres Read Replicas
+title: Scale your Next.js application with Drizzle ORM and Lakebase Postgres read replicas
+subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Lakebase Postgres read replicas on Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-14T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that improve database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only computes that read from the same storage as your primary compute. Sending read queries to replicas takes load off the primary compute, which helps read-heavy applications.
 
-A key advantage of Neon's architecture is that adding a read replica doesn't require additional storage, making it a highly efficient scaling solution. This cost-effective approach is ideal for businesses of all sizes that need to improve database performance without increasing storage costs.
+Because replicas share storage with the primary compute, adding one doesn't duplicate your data or add storage costs. You pay only for the replica's compute usage.
 
-This guide shows how to use Neon read replicas to scale Next.js applications using Drizzle ORM. You'll learn how to configure your Drizzle database client to work with read replicas, enabling you to optimize your database operations and improve overall application performance.
+This guide shows how to use Neon read replicas to scale Next.js applications using Drizzle ORM. You'll configure your Drizzle database client to send reads to a replica and writes to the primary compute.
 
 ## Prerequisites
 
-- A Neon account and a Project. If you don't have one, you can sign up for a Neon account and create a project by following the [Getting Started guide](/docs/get-started/signing-up).
+- A Neon account and a project. If you don't have one, sign up and create a project by following [Sign up](/docs/get-started/signing-up).
 - Basic knowledge of [Next.js](https://nextjs.org/docs) and TypeScript
 - [Node.js](https://nodejs.org/en/download/package-manager) and npm installed on your local machine
 
-## Build the Polling app
+## Build the polling app
 
-To demonstrate how to use Neon read replicas with Drizzle in Next.js, we'll build a simple Polling application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
+To demonstrate how to use Neon read replicas with Drizzle in Next.js, we'll build a simple polling application that uses a Neon database. We'll then update the application to use a read replica for read operations.
 
-### Part 1: Build the initial Polling app with a single database
+### Part 1: Build the initial polling app with a single database
 
 #### Set up the project
 
@@ -36,7 +36,7 @@ cd polling-app
 
 #### Install required packages
 
-Install Drizzle ORM and the PostgreSQL driver:
+Install Drizzle ORM and the Postgres driver:
 
 ```bash
 npm install drizzle-orm pg dotenv
@@ -345,8 +345,8 @@ Visit [`http://localhost:3000`](http://localhost:3000) to test the polling app.
 
 To create a read replica:
 
-1. In the Neon Console, select **Branches**.
-2. Select the branch where your database resides.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
@@ -355,9 +355,9 @@ To create a read replica:
    </Admonition>
 6. When you finish making selections, click **Create**.
 
-Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
+Your read replica compute is provisioned and appears on the **Computes** tab under **Postgres database**.
 
-Navigate to the **Dashboard** page, select the branch where the read replica compute was provisioned, and set the compute option to **Replica** to obtain the read replica connection string:
+To get the read replica connection string, click the **Connect** button in the Console nav. On the **Connect to your branch** modal, select the branch where you created the replica, and under **Compute**, select the **Replica**:
 
 ![Read replica connection string](/docs/guides/read_replica_connection_string.png)
 
@@ -436,8 +436,6 @@ You can find the source code for the application described in this guide on GitH
 
 ## Conclusion
 
-With Neon's read replicas and Drizzle in your Next.js application, you can improve your application's performance and scalability. Drizzle makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
-
-This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
+You built a Next.js polling app that uses Drizzle's `withReplicas()` to send reads to a Neon read replica and writes to the primary compute, without managing separate connections in your application code. As a next step, monitor replica load and add more replicas to the array if your read traffic grows.
 
 <NeedHelp/>

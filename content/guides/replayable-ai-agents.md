@@ -1,10 +1,10 @@
 ---
-title: 'Build replayable AI Agents with Neon Snapshots'
+title: 'Build replayable AI agents with Neon snapshots'
 subtitle: 'Learn how to build AI agents that can checkpoint execution, replay failed runs, and restore previous state using Neon snapshots and the OpenAI Agents SDK.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-09-16T20:12:32.981Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -18,18 +18,18 @@ In this guide, you'll build a **replayable AI agent** using the [OpenAI Agents S
 - Replayable runs and state restoration
 - Time-travel debugging
 
-The key idea is simple: **pair your agent's execution state with durable database state**. Every time the agent reaches a critical juncture, take a Neon snapshot and serialize the agent's memory. If a failure occurs, you can restore the database and resume the agent from the same logical point.
+The idea: **pair your agent's execution state with durable database state**. Every time the agent reaches a point you might want to return to, take a Neon snapshot and serialize the agent's memory. If a failure occurs, you can restore the database and resume the agent from the same logical point.
 
 ## Architecture overview
 
-Making an agent replayable requires capturing two critical pieces of state at the moment of interruption:
+Making an agent replayable requires capturing two pieces of state at the moment of interruption:
 
 1. **Agent state**: The conversation history, tool calls, and execution graph. The OpenAI Agents SDK provides this via the [`RunState`](https://openai.github.io/openai-agents-python/ref/run_state/) object, which can be serialized to JSON and resumed after a [human-in-the-loop](https://openai.github.io/openai-agents-python/human_in_the_loop/) interruption.
-2. **Database state**: The schema and data at the moment of the pause. Neon handles this with copy-on-write **snapshots**, which capture large databases instantly without heavy duplication.
+2. **Database state**: The schema and data at the moment of the pause. Neon handles this with copy-on-write **snapshots**, which are created instantly without copying the data.
 
-### What are Neon Snapshots?
+### What are Neon snapshots?
 
-A [Snapshot](/docs/reference/glossary#snapshot) in Neon is an immutable, point-in-time backup of your database branch's schema and data. While standard database branching is great for development and creating an isolated environment with a new connection string, snapshots are built for versioning and time-travel recovery.
+A [snapshot](/docs/reference/glossary#snapshot) in Neon is a read-only, point-in-time copy of a root branch's schema and data. A branch gives you an isolated environment with its own connection string. A snapshot is for versioning and recovery.
 
 When you call Neon's Restore API, you can restore a snapshot directly to your active branch. This in-place restore replaces the corrupted data while preserving the original database connection string. For an AI application, this means you don't need to restart or reconfigure the app after rolling back: the agent can resume execution against the restored database.
 
@@ -40,7 +40,7 @@ By tying the agent's memory and the database snapshot together, you create a **c
 To follow this guide, you will need:
 
 - **Python 3.10+** installed locally.
-- **Neon account:** Sign up at [console.neon.tech](https://console.neon.tech/signup) if you do not already have an account.
+- **Neon account:** Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't already have an account. The Free plan allows 1 manual snapshot, so delete the demo snapshot before you run the checkpoint script a second time. Paid plans allow 100 ([Backup & restore](/docs/guides/backup-restore)).
 - **OpenAI API key:** Required for use with the OpenAI Agents SDK. You can generate one in the [OpenAI dashboard](https://platform.openai.com/api-keys). Alternatively, you can use any LLM provider supported by the Agents SDK such as [OpenRouter](https://openrouter.ai/).
 
 <Steps>
@@ -50,15 +50,15 @@ To follow this guide, you will need:
 You need a Lakebase Postgres database for the demo application, plus a Neon API key to programmatically create snapshots and restorations.
 
 1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
-2. Open your organization settings from the sidebar and go to the **API Keys** tab.
-3. Click **Create new API Key**, give it a name such as "Replayable agent demo", and copy the generated key. You will use this as `NEON_API_KEY` in your application.
+2. Switch to your organization and go to **Settings** > **API keys**.
+3. Create a new API key, give it a name such as "Replayable agent demo", and copy the generated key. You will use this as `NEON_API_KEY` in your application.
    ![Create Neon API Key](/docs/manage/org_api_keys.png)
 4. Go back to the Projects page and create a new project. You can choose any name and region.
 5. Click **Connect** in the Console nav and copy the connection string. You will use this as the `DATABASE_URL` in your application.
 
    ![Connection details in Neon Console](/docs/connect/connect_to_branch_modal.png)
 
-6. Go to **Settings** > **General**, to copy the **Project ID**. You will use this as `NEON_PROJECT_ID` in your application.
+6. Go to **Settings** > **General** to copy the **Project ID**. You will use this as `NEON_PROJECT_ID` in your application.
 
    ![Neon project Settings page](/docs/manage/settings_page.png)
 
@@ -173,15 +173,15 @@ def _wait_for_operation(operation_id: str):
 ```
 
 <Admonition type="note" title="Branch IDs after restore">
-When `finalize_restore` is `True`, Neon preserves your connection string by moving the compute endpoint to the restored branch. The connection string stays stable, but the active branch ID changes. This simple helper is enough for this demo; in production, store the new active branch ID after restore before creating the next snapshot (using the Restore API response -> Branch -> ID. Checkout the [Neon API Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) for details).
+When `finalize_restore` is `True`, Neon preserves your connection string by moving the compute endpoint to the restored branch. The connection string stays stable, but the active branch ID changes. This simple helper is enough for this demo; in production, store the new active branch ID after restore before creating the next snapshot (from the branch ID in the Restore API response). See [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) in the Neon API reference for details.
 </Admonition>
 
 ## Define the agent and tools
 
-You’ll create a **Database Admin agent** that serves as the administrator for a Postgres database. Whenever the agent attempts a sensitive operation such as dropping a table it will automatically pause. At that point, you’ll trigger a Neon snapshot and preserve the agent’s memory state.
+You’ll create a **Database Admin agent** that serves as the administrator for a Postgres database. Whenever the agent attempts a sensitive operation, such as dropping a table, it pauses. At that point, you’ll trigger a Neon snapshot and preserve the agent’s memory state.
 
 <Admonition type="note" title="Use your own agents">  
-The agent and tools in this guide are intentionally kept simple to highlight the basics of replayability. In a real application, your agents and tools will be more complex, and you wouldn’t typically provide one with the ability to drop an entire table. The important takeaway is to identify the key points in your agent’s workflow where you want to capture checkpoints to enable replay and recovery.
+The agent and tools in this guide are intentionally kept simple to highlight the basics of replayability. In a real application, your agents and tools will be more complex, and you wouldn’t typically provide one with the ability to drop an entire table. What matters is identifying the points in your agent's workflow where you want checkpoints for replay and recovery.
 </Admonition>
 
 Create a file named `agent.py`:
@@ -530,27 +530,27 @@ Notice what happens:
 
 </Steps>
 
-## Why this architecture matters
+## Benefits of this pattern
 
-This pattern of pairing agent state with Neon snapshots gives you an architecture for building reliable, replayable AI agents. It addresses the main AI agent failure modes:
+Pairing agent state with Neon snapshots addresses three common problems with agents that change data:
 
 - **Recoverable state:** Standard retry logic fails if an agent has already mutated state. Neon snapshots let you restore the database to the checkpointed state.
 - **Stable connections:** By using `target_branch_id` and `finalize_restore: True` in the Neon API, the compute endpoint for your database moves to the restored state. Your application connection string does not have to change.
 - **Auditable AI:** By serializing the `RunState` alongside database checkpoints, you maintain an audit log of what an agent saw, planned, and executed.
 
-With this pattern, your AI agents are no longer black boxes making irreversible changes. They are fully versioned, durable, and easily debuggable systems. The recovery flow above shows the immediate case; the same idea also works for older runs that you need to replay without touching production.
+The recovery flow above shows the immediate case. The same idea also works for older runs that you need to replay without touching production.
 
 ## Replay historical runs safely with branches
 
 You demonstrated an immediate rollback by restoring the database in place using `finalize_restore: True`. But what happens if you discover a bad agent decision **10 days later**?
 
-Imagine your agent processed a massive financial reconciliation workflow a week ago. Today, you realize the agent's prompt had a subtle hallucination, and it categorized a batch of transactions incorrectly. You want to replay that exact execution from 10 days ago and fix it.
+Imagine your agent processed a large financial reconciliation workflow 10 days ago. Today, you realize the agent's prompt had a subtle hallucination, and it categorized a batch of transactions incorrectly. You want to replay that exact execution from 10 days ago and fix it.
 
-You cannot restore your production database in-place to 10 days ago. You would wipe out a week of real user activity.
+You cannot restore your production database in-place to 10 days ago. You would wipe out 10 days of real user activity.
 
-This is where Neon's branching capabilities make historical replay safe:
+Neon branches make historical replay safe:
 
-1. **Create an isolated branch:** Instead of an in-place restore, use the Neon API to create a **new branch** from the 10-day-old snapshot. This creates an isolated, ephemeral clone of the database exactly as it was. You can achieve this by calling the [Restore API](/docs/reference/api/snapshots/restore-snapshot) with `finalize_restore: False` and a new `target_branch_id` for the isolated branch.
+1. **Create an isolated branch:** Instead of an in-place restore, use the Neon API to create a **new branch** from the 10-day-old snapshot. This creates an isolated, ephemeral clone of the database exactly as it was. Call the [Restore API](/docs/reference/api/snapshots/restore-snapshot) with `finalize_restore: False` (and optionally a `name` for the new branch). This restores the snapshot to a new branch and leaves production untouched.
 2. **Load the historical agent:** You retrieve the agent's 10-day-old `RunState` JSON from your object store or metadata database and load it into memory.
 3. **Inject the new connection string:** You pass the new, isolated branch's `DATABASE_URL` into the agent's environment.
 4. **Replay and correct:** You reject the historical hallucination, provide the corrected prompt, and let the agent re-run the reconciliation in the isolated branch.
@@ -562,23 +562,21 @@ By combining serialized agent memory with copy-on-write database branches, you c
 
 The examples in this guide show the minimal components required for replayability: a Postgres database, a sample `users` table, and a local `checkpoint.json` file.
 
-In practice, AI systems run inside an **agent harness** using an asynchronous, event-driven architecture. The core primitive that pairs an agent state with a Neon snapshot remains the same, but the surrounding infrastructure ensures the system is durable and maintainable:
+In practice, AI systems run inside an **agent harness** using an asynchronous, event-driven architecture. The core step that pairs an agent state with a Neon snapshot stays the same, but the surrounding infrastructure changes:
 
 - **Cloud state persistence:** Instead of a local `checkpoint.json`, agent memory and execution graphs are stored in an object store like AWS S3 or in a JSONB column in a separate metadata database. Every `step_id` is durably linked to a Neon `snapshot_id`.
-- **Asynchronous approvals:** Instead of a local script, an interruption triggers a webhook that sends a Slack message (or email) to a human reviewer. The agent process gracefully shuts down while waiting. When the reviewer clicks "Approve", an API endpoint wakes up the orchestrator, reloads the checkpoint, and resumes the agent.
+- **Asynchronous approvals:** Instead of a local script, an interruption triggers a webhook that sends a Slack message (or email) to a human reviewer. The agent process shuts down while waiting. When the reviewer clicks "Approve", an API endpoint wakes up the orchestrator, reloads the checkpoint, and resumes the agent.
 - **Durable orchestration:** The `while result.interruptions:` loop is replaced by a durable execution framework like Temporal, [DBOS](/guides/pydantic-ai-dbos-neon), or AWS Step Functions. If a server crashes, the orchestrator restores the latest agent state and database snapshot on a new node.
 - **Observability:** Every snapshot and agent state ID is injected as metadata into your LLM observability platform (e.g., LangSmith, Braintrust, Datadog). When looking at a trace of a failed tool call, you have a direct link to the exact database snapshot needed to debug it.
 
 ## Apply the pattern to other agent frameworks
 
-Though this guide used the OpenAI Agents SDK for demonstration, the core pattern of pairing an agent state with Neon snapshots is framework-agnostic. The key requirement is that your agent framework has some concept of current execution state or memory that can be saved and reloaded.
-
-Whether you are using [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence) or [LlamaIndex Workflow Checkpointer](https://developers.llamaindex.ai/python/examples/workflow/checkpointing_workflows/), or raw API calls, every agent framework has a concept of current memory or execution state. By integrating Neon snapshots at the right points in your agent's workflow, you can achieve replayability and recoverability regardless of the specific agent framework you choose.
+This guide used the OpenAI Agents SDK, but pairing agent state with Neon snapshots works with any framework that can save and reload its execution state or memory. For example, [LangGraph persistence](https://docs.langchain.com/oss/python/langgraph/persistence) and the [LlamaIndex Workflow Checkpointer](https://developers.llamaindex.ai/python/examples/workflow/checkpointing_workflows/) both expose that state, and with raw API calls you manage it yourself. Take a Neon snapshot at the same points where you save that state.
 
 ## Resources
 
-- [Neon Snapshots API Reference](/docs/reference/api/snapshots/create-snapshot)
-- [OpenAI Agents SDK Documentation](https://openai.github.io/openai-agents-python/)
+- [Neon snapshots API reference](/docs/reference/api/snapshots/create-snapshot)
+- [OpenAI Agents SDK documentation](https://openai.github.io/openai-agents-python/)
 - [Database versioning with snapshots](/docs/ai/ai-database-versioning)
 - [Build Checkpoints For Your Agent Using Neon Snapshots](/blog/checkpoints-for-agents-with-neon-snapshots)
 - [Promoting Postgres Changes Safely From Multiple Environments to Production](/blog/promoting-postgres-changes-safely-production)

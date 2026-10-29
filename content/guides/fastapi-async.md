@@ -1,25 +1,25 @@
 ---
-title: Building an Async Product Management API with FastAPI, Pydantic, and PostgreSQL
-subtitle: Learn how to create an asynchronous API for managing products using FastAPI, Pydantic for data validation, and PostgreSQL with connection pooling
+title: Building an async product management API with FastAPI, Pydantic, and Postgres
+subtitle: Learn how to create an asynchronous API for managing products using FastAPI, Pydantic for data validation, and Postgres with connection pooling
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-08T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Following this guide, you’ll build an asynchronous product management API using FastAPI's async capabilities and connection pools to manage database connections, so your API can scale and handle high traffic.
+In this guide, you'll build an asynchronous product management API with FastAPI and an `asyncpg` connection pool, so your API can handle many concurrent requests.
 
 ## Prerequisites
 
-Before starting, ensure you have the following tools and services ready:
+Before starting, make sure you have the following:
 
 - pip : Required for installing and managing Python packages, including [uv](https://docs.astral.sh/uv/) for creating virtual environments. You can check if `pip` is installed by running the following command:
   ```bash
   pip --version
   ```
-- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
+- A Neon account to host your Postgres database. If you don't have one yet, [sign up here](https://console.neon.tech/signup).
 
-## Setting up the Project
+## Setting up the project
 
 Follow these steps to set up your project and virtual environment:
 
@@ -37,9 +37,9 @@ Follow these steps to set up your project and virtual environment:
     uv init async_postgres
     ```
 
-    This will create a new project directory called `async_postgres`. Open this directory in your code editor of your choice.
+    This will create a new project directory called `async_postgres`. Open this directory in your code editor.
 
-2.  Set Up the Virtual Environment
+2.  Set up the virtual environment
 
         You will now create and activate a virtual environment in which your project's dependencies will be installed.
 
@@ -57,9 +57,9 @@ Follow these steps to set up your project and virtual environment:
 
         </CodeTabs>
 
-        You should see `(async_postgres)` in your terminal now, this means that your virtual environment is activated.
+        You should see `(async_postgres)` in your terminal, which means your virtual environment is active.
 
-3.  Install Dependencies
+3.  Install dependencies
 
     Next, add all the necessary dependencies for your project:
 
@@ -67,12 +67,12 @@ Follow these steps to set up your project and virtual environment:
     uv add python-dotenv asyncpg loguru fastapi uvicorn
     ```
 
-    Where each package does the following :
-    - `FastAPI` : A Web / API framework
-    - `AsyncPG` : An asynchronous PostgreSQL client
-    - `Uvicorn` : An ASGI server for our app
-    - `Loguru` : A logging library
-    - `Python-dotenv` : To load environment variables from a .env file
+    Each package does the following:
+    - `FastAPI`: A web and API framework
+    - `AsyncPG`: An asynchronous Postgres client
+    - `Uvicorn`: An ASGI server for the app
+    - `Loguru`: A logging library
+    - `Python-dotenv`: Loads environment variables from a `.env` file
 
 4.  Create the project structure
 
@@ -95,19 +95,19 @@ Follow these steps to set up your project and virtual environment:
     └── uv.lock
     ```
 
-## Setting up your Database
+## Setting up your database
 
-In this section, you will set up the connection pool, ensure your database schema is in place, and manage database connections effectively. To connect to your `PostgreSQL` database, you will use the `asyncpg` library for asynchronous database connections.
+In this section, you'll set up the connection pool, create the database schema, and manage database connections. You'll use the `asyncpg` library for asynchronous connections to Postgres.
 
-First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
+First, create a `.env` file in the root of your project to store the database connection URL. This file holds environment-specific variables, such as the connection string for your Neon database.
 
 ```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
+Replace the placeholders (user, password, your-neon-hostname, and so on) with your Neon database credentials. You can copy the full connection string by clicking **Connect** on your project dashboard in the Neon Console.
 
-In your project, the `database.py` file manages the connection to `PostgreSQL` using `asyncpg` and its connection pool, which is a mechanism for managing and reusing database connections efficiently. With this, you can use asynchronous queries, allowing the application to handle multiple requests concurrently.
+In your project, the `src/database/postgres.py` file manages the connection to Postgres using an `asyncpg` connection pool, which reuses database connections instead of opening a new one per request. Queries run asynchronously, so the application can handle multiple requests concurrently.
 
 ```python
 import os
@@ -210,17 +210,17 @@ async def close_postgres() -> None:
         logger.warning("PostgreSQL connection pool was not initialized.")
 ```
 
-`init_postgres` is responsible for opening the connection pool to the `PostgreSQL` database and setting up the required database schema. Specifically, it ensures that the necessary database tables (such as the `products` table) are created if they don’t already exist, preparing the application to start accepting requests.
+`init_postgres` opens the connection pool and sets up the database schema. It creates the `products` table if it doesn't already exist, so the application is ready to accept requests.
 
-To properly manage the lifecycle of the database, you need a function to close the connection pool when the API spins down `close_postgres` is responsible for gracefully closing all connections in the pool when the `FastAPI` app shuts down.
+You also need a function to close the connection pool when the API shuts down. `close_postgres` closes all connections in the pool when the `FastAPI` app stops.
 
-Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool. If the pool is not initialized, an error is raised. The term for passing this in is Dependency Injection.
+Throughout your API you will also need access to the pool to get connection instances and run queries. `get_postgres` returns the active connection pool, or raises an error if the pool isn't initialized. FastAPI passes it to each endpoint through dependency injection.
 
-## Defining the Pydantic Models
+## Defining the Pydantic models
 
-`Pydantic` is a data validation library in Python that ensures data entering or leaving your API is valid by enforcing constraints and data types.
+`Pydantic` is a Python data validation library that checks data entering or leaving your API against constraints and data types.
 
-In your application, you will define several models using Pydantic to represent the data for products. These models will be used to create, update, and manage products in the database, as well as handle validation when clients interact with our API.
+In your application, you will define several models using Pydantic to represent the data for products. These models will be used to create, update, and manage products in the database, and to validate requests from clients.
 
 ```python
 from pydantic import BaseModel, Field, ConfigDict
@@ -267,22 +267,22 @@ class ProductStockUpdate(BaseModel):
     quantity: int = Field(..., ge=0)
 ```
 
-## Creating the API Endpoints
+## Creating the API endpoints
 
-In this section, you will create the API endpoints that allow you to manage products in your `PostgreSQL` database. These endpoints will allow you to create, retrieve, update, delete, and manage product stock. You will use asynchronous database connections with `asyncpg`.
+In this section, you'll create the API endpoints for managing products in your Postgres database. These endpoints create, retrieve, update, and delete products, and update product stock. You will use asynchronous database connections with `asyncpg`.
 
 Each endpoint follows a similar flow for interacting with the database. You will first get a connection from the connection pool, execute the desired query, and release the connection back to the pool. Since the connection pool is used as a context manager, the connection will automatically be returned to the pool after each operation.
 
-The common database flow goes as follows :
+The common database flow goes as follows:
 
-1. Getting the Connection Pool:
-   - You inject the connection pool using FastAPI's `Depends()` function, which allows you to easily retrieve a connection from the pool.
-2. Acquiring a Connection:
+1. Getting the connection pool:
+   - You inject the connection pool using FastAPI's `Depends()` function.
+2. Acquiring a connection:
    - Using the connection pool, you acquire a connection by calling `async with db_pool.acquire() as conn:`. This ensures you obtain a database connection to run the query.
-3. Running the Query:
+3. Running the query:
    - Once the connection is acquired, you run the query using methods such as `fetchrow()` (for single rows) or `fetch()` (for multiple rows) depending on the operation.
-4. Returning the Connection to the Pool:
-   - Once the query is complete, the connection is automatically returned to the pool because the async with context manager handles the lifecycle of the connection.
+4. Returning the connection to the pool:
+   - Once the query is complete, the `async with` context manager returns the connection to the pool.
 
 ```python
 from fastapi import HTTPException, Query, Path, Body, APIRouter, Depends
@@ -581,7 +581,7 @@ async def filter_products_by_price(
         )
 ```
 
-The code defines endpoints for :
+The code defines these endpoints:
 
 - `POST /products`: Creates a new product. It receives the product data (name, price, quantity, and description) and inserts it into the database. The newly created product is returned.
 
@@ -597,11 +597,11 @@ The code defines endpoints for :
 
 - `GET /products/filter/price`: Retrieves products within a specific price range. You pass min_price and max_price as query parameters, and the endpoint returns a list of products that fall within that range.
 
-## Running the Application
+## Running the application
 
 After setting up the database, models, and API routes, the next step is to run the `FastAPI` application. The `main.py` file is the entry point for the application, and `Uvicorn` starts and serves it.
 
-The `main.py` file defines the `FastAPI` application, manages lifecycle events like starting and closing the `PostgreSQL` connection pool, and includes the product-related routes. Here, you will use the `@asynccontextmanager` decorator to manage the database connection pool lifecycle.
+The `main.py` file defines the `FastAPI` application, manages lifecycle events like opening and closing the Postgres connection pool, and includes the product-related routes. Here, you will use the `@asynccontextmanager` decorator to manage the database connection pool lifecycle.
 
 ```python
 from fastapi import FastAPI
@@ -634,9 +634,9 @@ uv run src/main.py
 
 Once the server is running, you can access the API documentation and test the endpoints directly in your browser:
 
-- Interactive API Docs (Swagger UI):  
+- Interactive API docs (Swagger UI):  
   Visit `http://127.0.0.1:8080/docs` to access the automatically generated API documentation where you can test the endpoints.
-- Alternative Docs (ReDoc):  
+- Alternative docs (ReDoc):  
   Visit `http://127.0.0.1:8080/redoc` for another style of API documentation.
 
 ## Testing the API
@@ -645,7 +645,7 @@ You can also use tools like `httpie`, `curl`, and `Postman` to test the API.
 
 Below are examples of how to interact with the API using `httpie`, a command-line HTTP client.
 
-1. Create a Product
+1. Create a product
 
    Start by creating a new product:
 
@@ -665,7 +665,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    }
    ```
 
-2. Retrieve All Products
+2. Retrieve all products
 
    Next, retrieve all products from the database:
 
@@ -687,7 +687,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    ]
    ```
 
-3. Retrieve a Specific Product by ID
+3. Retrieve a specific product by ID
 
    You can also retrieve a specific product by its ID:
 
@@ -707,7 +707,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    }
    ```
 
-4. Update a Product
+4. Update a product
 
    To update an existing product, use the following command:
 
@@ -727,7 +727,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    }
    ```
 
-5. Update Product Stock
+5. Update product stock
 
    You can also update just the stock (quantity) of a product:
 
@@ -747,7 +747,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    }
    ```
 
-6. Filter Products by Price Range
+6. Filter products by price range
 
    To filter products by a specific price range, use this command:
 
@@ -769,7 +769,7 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
    ]
    ```
 
-7. Delete a Product
+7. Delete a product
 
    To delete a product by its ID, use the following command:
 
@@ -787,8 +787,6 @@ Below are examples of how to interact with the API using `httpie`, a command-lin
 
 ## Conclusion
 
-Using this guide, you have built a fully functional API for managing products using `FastAPI`, `Pydantic`, and `PostgreSQL` with `asyncpg`.
+You built an async product management API with `FastAPI`, `Pydantic`, and Postgres, using an `asyncpg` connection pool.
 
-This stack provides a solid foundation for building high-performance and scalable web services. `FastAPI`'s asynchronous support, combined with `Pydantic`'s data validation and `asyncpg`'s efficient database interactions, allows for fast and reliable API development.
-
-As a next step, you can look at deploying this application in the cloud using scalable technologies like `Docker` and `Kubernetes`, or implementing automated test, build, and deployment workflows using `GitHub CI`
+As a next step, containerize the app with `Docker` and deploy it, or add automated test, build, and deployment workflows with GitHub Actions.

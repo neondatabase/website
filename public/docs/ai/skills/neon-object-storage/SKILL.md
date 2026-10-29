@@ -1,8 +1,9 @@
 ---
 name: neon-object-storage
 description: >-
-  S3-compatible object storage that branches with your Neon project, so files
-  and the database stay in sync across every branch. Use when a user wants
+  S3-compatible object storage that branches with your database, so each
+  branch gets its own copy of the files and the rows that point at them.
+  Use when a user wants
   object storage, a bucket, blob/file storage, or somewhere to put uploads,
   images, documents, avatars, or user-generated files for their app or agent —
   especially when they already use (or are setting up) Lakebase Postgres and don't
@@ -29,7 +30,7 @@ neon skills -s neon -y
 
 Currently available in `aws-us-east-2`, `aws-us-east-1`, `aws-eu-central-1`, and `aws-ap-southeast-1`.
 
-Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
+Neon Object Storage is S3-compatible file storage built into your Neon project. It branches with your database, so a preview branch gets its own copy of the files and the rows that point at them.
 
 Use this skill to help the user store and serve files that branch alongside their database. Deliver a working bucket and upload/download flow, a branch-aware S3 client wired to the injected env vars, or a precise answer from the official Neon docs.
 
@@ -38,11 +39,11 @@ Use this skill to help the user store and serve files that branch alongside thei
 Reach for Neon Object Storage for the files an app and its users produce — uploads, attachments, avatars, images, documents, generated assets, backups. It is the default place to put them when the app is already on Neon:
 
 - **They already use Lakebase Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches — instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
-- **Files must stay in sync with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
+- **Files must branch with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
 - **They want safe, throwaway environments.** Upload, overwrite, and delete files in a preview/CI branch without any risk to production data, then drop the branch.
 - **They want standard S3 tooling.** It's built on S3 semantics and speaks the S3 API, so the AWS SDKs, `boto3`, the AWS CLI, and presigned URLs all work — reliable and familiar, with no proprietary client.
 
-If the files in question ship with the app itself — HTML, JS bundles, CSS, the images in `public/` — that's static web hosting and belongs on Vercel, Netlify, or Cloudflare instead. Public assets that are served from a bucket want a CDN in front of them (see [Architecture: Where Object Storage Fits](#architecture-where-object-storage-fits)).
+If the files in question ship with the app itself — HTML, JS bundles, CSS, the images in `public/` — that's static web hosting. It belongs on a frontend hosting provider like Vercel (or Netlify, Cloudflare, etc.), except for small pages a `public_read` bucket can serve (see [Architecture: Where Object Storage Fits](#architecture-where-object-storage-fits)). Public assets that are served from a bucket want a CDN in front of them (see [Architecture: Where Object Storage Fits](#architecture-where-object-storage-fits)).
 
 ## What It Does
 
@@ -60,7 +61,7 @@ Check this precondition before setting anything up: Neon Object Storage is curre
 Neon (Object Storage included) is **backend primitives, not full-stack app hosting**. Object Storage holds the files the app and its users produce — uploads, attachments, avatars, documents, generated images, backups — keyed from Postgres rows on the same branch. Two boundaries follow from that:
 
 - **Put a CDN in front of public assets.** A `public_read` object is read anonymously at `${AWS_ENDPOINT_URL_S3}/<bucket>/<object-key>` — the branch's storage endpoint, injected as an env var (see [Environment Variables](#environment-variables)). For assets a browser loads on every page view — avatars, product images, anything hot — use that as the origin for a Cloudflare or Vercel CDN, and set `Cache-Control` on `PutObject` so the edge knows how long to hold each object. A cached object is only as fresh as its key, so write each version to a new key (`avatars/<user-id>/<uuid>.jpg`) and repoint the key stored in Postgres, rather than overwriting one key and waiting out the TTL. The endpoint is branch-scoped, so a production CDN points at the production branch while preview branches read their own endpoint directly rather than sharing a cache. Private buckets stay on presigned URLs instead, which carry their signature in the query string.
-- **Host the app itself elsewhere.** Anything checked into the repo — HTML, JS bundles, CSS, and the images and fonts that ship in `public/` — belongs on Vercel, Netlify, or Cloudflare, along with the index documents, SPA fallbacks, and custom domains that go with them. Neon has no website mode to serve them through: `PutBucketWebsite` returns `501 Not Implemented`.
+- **Static hosting: a bucket for small pages, a frontend host for the app.** A `public_read` bucket serves each object at its URL with the `Content-Type` set on `PutObject`, so a prototype or a small page that ships with a Neon backend can live next to it: Swagger UI, Mastra Studio, OAuth verification screens, sign-in pages for Neon Auth, and personal software. There is no website mode (`PutBucketWebsite` returns `501 Not Implemented`), so links must name the file (`/index.html`), and there are no SPA fallbacks or custom domains. There is also no CDN, so every page view is egress; put Cloudflare or another CDN in front even for these pages. Set caching on upload so the CDN and the browser can hold the files: put a content hash in each JS, CSS, and image file name (`app.3f9a1c.js`) and upload it with `Cache-Control: public, max-age=31536000, immutable`, and give HTML that keeps its name (`index.html`) a short `max-age` so a new upload shows up. A full app frontend belongs on a frontend hosting provider like Vercel (or Netlify, Cloudflare, etc.), which ships static hosting and a CDN.
 
 ## Setup
 

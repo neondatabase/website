@@ -13,24 +13,22 @@ nextLink:
   slug: postgres-providers-multiple-apps-separate-databases-under-10
 ---
 
-## Short answer
-
-Neon's [instant restore](/docs/introduction/branch-restore) returns a **root** branch to any timestamp inside the history window. There's no `pg_restore`, no waiting for a backup to download, no replaying WAL by hand. The window is 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. Child branches don't support instant restore.
+Neon's [instant restore](/docs/postgres/backup-restore/branch-restore) returns a **root** branch to any timestamp inside the history window. You don't run `pg_restore`, wait for a backup to download, or replay WAL by hand. The window is 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. Child branches don't support instant restore; you [reset them from their parent](/docs/guides/reset-from-parent) instead.
 
 ## How it works
 
-A traditional restore copies data from a backup file. For a 200 GB database, that can take hours, and you typically restore to a new instance, then swap connection strings.
+A traditional restore copies data out of a backup, usually onto a new instance, and then you point the app at the new connection string. The time it takes grows with the size of the database.
 
-Lakebase Postgres storage already keeps the change history. Restoring to a timestamp is a metadata operation: the branch is reset to point at the right state, and writes resume from there. Two ways to do it:
+Lakebase Postgres storage already keeps the change history, so a restore doesn't copy the database. Neon builds the branch at the point in time you pick and moves your compute onto it, and the operation [typically takes a few seconds](/docs/postgres/backup-restore/branch-restore#changes-apply-to-all-databases). You can do it two ways.
 
 **Restore the root branch in place.**
 
 ```bash
-neon branches restore main ^self@2026-04-25T14:32:00Z \
-  --preserve-under-name main_old_pre_bug
+neon branches restore production ^self@2026-04-25T14:32:00Z \
+  --preserve-under-name production_old_pre_bug
 ```
 
-The branch keeps its name and connection string. Any writes made after the target timestamp are discarded. Lakebase Postgres also keeps a backup branch under the name you pass to `--preserve-under-name`.
+The branch keeps its name and connection string; open connections drop briefly and reconnect when the restore finishes. Writes made after the target timestamp are removed from the branch, and Neon keeps the pre-restore state as a backup branch under the name you pass to `--preserve-under-name`. The examples use `production`, the default branch name for Console-created projects (CLI- and API-created projects use `main`).
 
 **Branch from a timestamp.**
 
@@ -39,7 +37,9 @@ neon branches create --name pre-incident \
   --parent 2026-04-25T14:32:00Z
 ```
 
-This gives you a separate branch at the pre-bug state. Useful when you want to inspect the historical data without touching production.
+This gives you a separate branch at the pre-bug state, so you can inspect the historical data without touching production. For a quick look, [Time Travel](/docs/postgres/backup-restore/time-travel-assist) runs read-only queries against a past point without creating a branch you have to manage.
+
+A restore covers every database on the branch and the Managed Better Auth data in the `neon_auth` schema. It doesn't roll back Object Storage or Functions ([branch restore details](/docs/postgres/backup-restore/branch-restore#overwrite-not-a-merge)).
 
 ## History window per plan
 
@@ -49,29 +49,27 @@ This gives you a separate branch at the pre-bug state. Useful when you want to i
 | Launch plan | Up to 7 days                       | $0.20/GB-month |
 | Scale plan  | Up to 30 days                      | $0.20/GB-month |
 
-You only pay for history on root branches; child branches don't add to the cost. See [history window](/docs/introduction/history-window) for how to configure it and reduce costs by shortening the window.
+Paid plans default to a 1-day window, so extend it on production projects before you need it. History is charged for root branches only. See [history window](/docs/postgres/backup-restore/history-window) to configure it, or shorten it to cut cost.
 
 <Admonition type="warning" title="Restore in place is destructive">
-A restore in place drops writes that happened after the target timestamp. If you might need those rows for forensics or partial recovery, branch to a new name from the timestamp first, then merge what you need back.
+A restore in place removes writes that happened after the target timestamp from the branch. They survive only in the backup branch. If you need some of those rows, copy them back from the backup branch, or branch from the timestamp instead of restoring in place.
 </Admonition>
 
 ## What this replaces
 
-Without instant restore, your options are: a daily `pg_dump` (you lose any data after the snapshot), continuous WAL archiving with manual point-in-time recovery (slow, error-prone), or a managed provider's PITR feature (usually requires a separate restore target). Neon collapses these into a single API call against the existing root branch.
+Without instant restore, your options are a periodic `pg_dump` (you lose anything written after the dump), continuous WAL archiving with a manual point-in-time recovery, or a managed provider's PITR feature, which often restores to a separate target. On Neon it's one CLI command or API call against the existing root branch.
 
 ## How other Postgres providers restore
 
-| Provider                | Restore window                                   | Restores to                    | Cost                                                    |
-| ----------------------- | ------------------------------------------------ | ------------------------------ | ------------------------------------------------------- |
-| Neon                    | 6 hours (Free plan), up to 30 days (Scale plan)  | Same root branch or new branch | $0.20/GB-month on paid plans                            |
-| Amazon RDS for Postgres | 0 to 35 days                                     | New database instance          | Backup storage above database size is billed separately |
-| Aurora Postgres         | Up to 35 days                                    | New cluster                    | Backup storage above cluster size is billed separately  |
-| Supabase                | 7 days (Pro daily), or PITR add-on up to 28 days | Same project (in place)        | Daily included on Pro; PITR add-on from ~$100/mo        |
+| Provider                | Restore window                                                   | Restores to                    | Cost                                                                                                                                                           |
+| ----------------------- | ---------------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Neon                    | 6 hours (Free plan) to 30 days (Scale plan)                      | Same root branch or new branch | $0.20/GB-month on paid plans                                                                                                                                   |
+| Amazon RDS for Postgres | 0 to 35 days                                                     | New DB instance                | Backup storage billed per GB-month                                                                                                                             |
+| Aurora PostgreSQL       | 1 to 35 days                                                     | New DB cluster                 | [No charge for backup storage up to 100% of cluster size](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.Retaining.html) |
+| Supabase                | Daily backups (7 days on Pro), or PITR add-on with up to 28 days | Same project (in place)        | Daily backups included on Pro; PITR add-on from ~$100/month                                                                                                    |
 
-- **RDS / Aurora.** [Continuous backups support PITR](https://docs.aws.amazon.com/aws-backup/latest/devguide/point-in-time-recovery.html) with retention of [0 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). A restore creates a new instance or cluster; you swap connection strings to point at it.
+- **RDS and Aurora.** RDS [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) creates a new DB instance within a [retention period of 0 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html). Aurora [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-pitr.html) creates a new DB cluster within a [retention period of 1 to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html). In both cases you point your app at the new endpoint.
 
-- **Supabase.** [Daily backups](https://supabase.com/docs/guides/platform/backups) are available on Pro and above. [Point-in-Time Recovery](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) is a paid add-on with [retention periods of 7, 14, or 28 days](https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery) and a Small compute minimum. Restores happen in place; downtime depends on database size.
-
-A Lakebase Postgres restore keeps the connection string stable on the same root branch. If you'd rather inspect history without touching the branch, create a new branch from the timestamp instead.
+- **Supabase.** [Daily backups](https://supabase.com/docs/guides/platform/backups) are kept 7 days on Pro, 14 on Team, and up to 30 on Enterprise; the Free plan has none. [Point-in-Time Recovery](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery) is a paid add-on with [retention of 7, 14, or 28 days](https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery) and needs at least a Small compute. Restores happen in place, and the project is inaccessible until the restore finishes, which takes longer on larger databases.
 
 <CTA title="Try instant restore" description="Set up a Neon project and restore to any point in seconds." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

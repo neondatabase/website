@@ -1,13 +1,13 @@
 ---
-title: Creating a Secure Authentication System with Go, JWT, and Lakebase Postgres
+title: Creating a secure authentication system with Go, JWT, and Lakebase Postgres
 subtitle: Learn how to build a secure authentication system using Go, JWT tokens, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Lakebase Postgres.
+Authentication confirms that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Lakebase Postgres.
 
 We'll focus on the essential concepts and patterns for implementing an authentication system, including user registration, secure password storage, token-based authentication, and protected routes.
 
@@ -19,13 +19,13 @@ To follow the steps in this guide, you will need:
 - A [Neon](https://console.neon.tech/signup) account
 - Basic familiarity with SQL, Go programming, and authentication concepts
 
-## Understanding JWT in Our Go Authentication System
+## Understanding JWT in our Go authentication system
 
 Before the implementation details, let's look at how JSON Web Tokens (JWT) work and why they're a popular choice for authentication systems.
 
-JWT provides a compact, self-contained way to securely transmit information as a JSON object. In our Go authentication system, we'll use JWTs to maintain user sessions without server-side storage.
+A JWT is a compact, self-contained, signed JSON object for passing information between parties. In our Go authentication system, we'll use JWTs to maintain user sessions without server-side storage.
 
-### JWT Structure
+### JWT structure
 
 A JWT consists of three parts encoded in `Base64URL` format and separated by dots:
 
@@ -63,13 +63,13 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZXhwIjoxNjgwMDAwMDAwfQ.8Gj_9bJj
    tokenString, err := token.SignedString([]byte(jwtSecret))
    ```
 
-### How Our JWT Flow Works
+### How our JWT flow works
 
 To understand how JWT fits into our Go authentication system, let's walk through the flow of a user logging in and accessing protected routes:
 
 1. When a user successfully authenticates, our Go service:
    - Validates credentials against Lakebase Postgres
-   - Creates JWT with appropriate claims and expiration
+   - Creates a JWT with the user's claims and an expiration time
    - Signs the token with a secret key
 
 2. The client:
@@ -87,7 +87,7 @@ To understand how JWT fits into our Go authentication system, let's walk through
    - Extracts the user identity from claims
    - Adds the user ID to the request context
 
-4. Since the token contains all necessary user information, our server can authenticate requests without maintaining session state or additional database queries.
+4. Since the token contains the user information the server needs, it can authenticate requests without session state or extra database queries.
 
 The security of this system relies on keeping the signing key secret and using short-lived access tokens. If a token is compromised, it's only valid for a limited time, reducing the risk of unauthorized access.
 
@@ -95,22 +95,22 @@ The security of this system relies on keeping the signing key secret and using s
 
 First, let's create a Neon project to store our authentication data.
 
-1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and click New Project.
+1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and click **New Project**.
 2. Give your project a name, such as "auth-system".
-3. Choose your preferred region.
-4. Click Create Project.
+3. Choose your preferred AWS region.
+4. Click **Create project**.
 
-Once your project is created, you'll receive a connection string that looks like this:
+Once your project is created, click **Connect** on your project dashboard to get a connection string that looks like this:
 
 ```
 postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-Save this connection string, you'll need it to connect your Go application to the Neon database.
+Save this connection string. You'll need it to connect your Go application to your database.
 
 ## Set up the database schema
 
-Now we'll create a database schema that securely stores user information and authentication tokens. Connect to your Neon database and run the following SQL to create the necessary tables:
+Now we'll create a database schema that stores user information and authentication tokens. Connect to your database on Neon (for example, with the [SQL Editor](/docs/get-started/query-with-neon-sql-editor)) and run the following SQL to create the necessary tables:
 
 ```sql
 -- Create users table
@@ -137,13 +137,13 @@ CREATE TABLE refresh_tokens (
 CREATE INDEX idx_refresh_tokens_token ON refresh_tokens(token);
 ```
 
-This schema includes several key features for security and performance:
+This schema includes these security and performance features:
 
 - Using **UUIDs** for primary keys instead of sequential integers, making it harder to guess or enumerate IDs
 - Storing only **password hashes**, never plain-text passwords
 - Creating a separate table for **refresh tokens** with an expiration date
 - Using a **token revocation flag** to invalidate tokens when needed
-- Including appropriate **indexes** for performance optimization
+- **Indexes** on the columns used for lookups
 
 ## Create the Go application structure
 
@@ -178,7 +178,7 @@ For this guide, let's focus on the key components we'll need:
 4. HTTP handlers
 5. Middleware for route protection
 
-Let's start with a connection to our Neon database:
+Let's start with a connection to our database on Neon:
 
 ```go
 // db/db.go
@@ -208,7 +208,7 @@ func Connect(connectionString string) (*sql.DB, error) {
 }
 ```
 
-This simple function connects to our Lakebase Postgres database and verifies the connection with a ping.
+This function connects to Lakebase Postgres and verifies the connection with a ping.
 
 ## Implement password handling
 
@@ -359,7 +359,7 @@ func (r *UserRepository) GetUserByID(id uuid.UUID) (*User, error) {
 }
 ```
 
-This simple repository provides methods to create new users and retrieve existing users by email, which we'll need for our authentication logic. The `User` struct represents the core user data we'll store in the database.
+This repository provides methods to create new users and retrieve existing users by email, which we'll need for our authentication logic. The `User` struct represents the core user data we'll store in the database.
 
 We also store the `last_login` timestamp to track user activity along with the creation timestamp.
 
@@ -511,8 +511,8 @@ func (s *AuthService) ValidateToken(tokenString string) (jwt.MapClaims, error) {
 This authentication service handles three key functions:
 
 1. **Login**: Verifies a user's credentials and issues an access token
-2. **Token Generation**: Creates a JWT with appropriate claims and expiration
-3. **Token Validation**: Verifies that a token is valid and not expired
+2. **Token generation**: Creates a JWT with appropriate claims and expiration
+3. **Token validation**: Verifies that a token is valid and not expired
 
 Now let's create HTTP handlers to expose these authentication features via an API:
 
@@ -638,9 +638,7 @@ This handler exposes a simple login endpoint that accepts an email and password,
 
 Short-lived access tokens are more secure, but they require users to log in frequently.
 
-To improve user experience while maintaining security, we can implement a refresh token system. This essentially creates a two-tier authentication system, where a long-lived refresh token is used to obtain short-lived access tokens.
-
-The refresh token can be revoked if needed allowing for better control over user sessions.
+A refresh token system solves this with two tiers: a long-lived refresh token is used to obtain short-lived access tokens. You can revoke a refresh token at any time, which gives you control over user sessions.
 
 First, let's add support for refresh tokens to our database operations:
 
@@ -814,7 +812,7 @@ The main benefit of refresh tokens is that they:
 2. Enable longer sessions without requiring frequent logins
 3. Can be revoked server-side if needed, such as on logout or if a security breach is detected
 
-Let's add an HTTP handler for refreshing tokens:
+Let's update the login handler to return a refresh token along with the access token:
 
 ```go
 // handlers/auth.go
@@ -1288,17 +1286,15 @@ Expected response:
 Invalid or expired token
 ```
 
-These tests verify that our authentication system is working correctly.
+These tests confirm the registration, login, protected route, and refresh flows work.
 
 You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) for more advanced API testing with a graphical interface.
 
 ## Summary
 
-In this guide, you built a secure authentication system using Go, JWT, and Lakebase Postgres. The system includes secure password hashing, token-based authentication, refresh token support, middleware-protected routes, and basic rate limiting to prevent brute-force attacks. Security headers were also added to protect against common web vulnerabilities.
+In this guide, you built a secure authentication system using Go, JWT, and Lakebase Postgres. The system includes bcrypt password hashing, token-based authentication, refresh token support, and middleware-protected routes. As a next step, consider adding rate limiting on the login endpoint to slow down brute-force attempts.
 
-By building on Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, you gain the scalability and performance you need without sacrificing the reliability and flexibility developers expect from PostgreSQL. It's an ideal foundation for authentication systems that need to scale securely and efficiently.
-
-## Additional Resources
+## Additional resources
 
 - [Neon Documentation](/docs)
 - [Go Documentation](https://go.dev/doc/)

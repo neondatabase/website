@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-26T16:06:50.814Z'
+updatedOn: '2026-10-24T21:13:07.960Z'
 ---
 
 # Docs
@@ -260,6 +260,21 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   export default function App() {
     return <div>Hello</div>;
   }
+  ```
+  ````
+
+- `collapse={X-Y}` - hide lines X to Y (inclusive) behind a clickable "N collapsed lines" row that expands them. Separate several ranges with commas. Collapsed lines are still copied by the copy button and stay in the page HTML.
+
+  Example:
+
+  ````md
+  ```js collapse={1-2, 6}
+  import { neon } from '@neondatabase/serverless';
+  const sql = neon(process.env.DATABASE_URL);
+
+  const rows = await sql`SELECT * FROM todos`;
+  console.log(rows);
+  export default rows;
   ```
   ````
 
@@ -758,6 +773,24 @@ Images load lazily by default. For the one image that sits above the fold at the
 Flags can be combined, separated by a space: `'square priority'`. Use `priority` only for a hero image, never for images further down the page.
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
+
+### Image with a copyable command
+
+Use `ImageWithCommand` to pair an image with a native text footer and a command readers can copy. Set `width` and `height` to the source image dimensions. The component preserves image zoom and stacks the footer on small screens.
+
+```mdx
+<ImageWithCommand
+  src="/use-cases/full-stack-apps/neon-init-editor.jpg"
+  alt="Setting up Neon in a code editor"
+  width={1416}
+  height={956}
+  description="Try for yourself, start building with Neon now."
+  command="npx neon@latest init"
+  loading="eager"
+/>
+```
+
+The image fields, `description`, and `command` are required. `loading` accepts `lazy` (the default) or `eager`. Use `eager` for an image at the top of the page. The command uses the same `CopyCommand` component as the `QuickPath` setup card. Clicking anywhere on the command strip copies `command` without the displayed `$` prompt.
 
 ## Definition list
 

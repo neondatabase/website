@@ -1,15 +1,15 @@
 ---
-title: Building an Admin dashboard with Managed Better Auth
+title: Build an admin dashboard with Managed Better Auth
 subtitle: Learn how to create an internal admin dashboard for user management using Managed Better Auth's Admin APIs.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-31T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-In a production application, internal tooling is often critical for operations and support teams. The Managed Better Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
+Support and operations teams need internal tools to manage users. The Managed Better Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes user management APIs through the SDK, so you can build these tools without writing your own backend.
 
-This guide demonstrates how to build an **internal admin dashboard** using Managed Better Auth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
+This guide shows how to build an **internal admin dashboard** with Managed Better Auth. You'll create a React application that lets support staff view registered users, ban abusive accounts, and impersonate users to reproduce bugs. It covers the following features:
 
 1.  **A user table:** To list all registered users in your application.
 2.  **Moderation controls:** To ban and unban users instantly.
@@ -17,7 +17,7 @@ This guide demonstrates how to build an **internal admin dashboard** using Manag
 
 ## Prerequisites
 
-Before you begin, ensure you have the following:
+Before you begin, make sure you have the following:
 
 - **Node.js:** Version `18` or later installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
 - **Neon account:** A free Neon account. If you don't have one, sign up at [Neon](https://console.neon.tech/signup).
@@ -29,16 +29,16 @@ Before you begin, ensure you have the following:
 You'll need to create a Neon project and enable Managed Better Auth.
 
 1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
-2.  **Enable Managed Better Auth:**
-    - In your project's dashboard, go to the **Managed Better Auth** tab.
-    - Click on the **Enable Managed Better Auth** button to set up authentication for your project.
+2.  **Enable Auth:**
+    - In your project dashboard, go to the **Auth** page.
+    - Click **Enable Auth** to set up authentication for your project.
 
 3.  **Copy your Auth URL:**
 
-    Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+    Find it on the **Configuration** tab of the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
     ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
 
-## Create an Admin user
+## Create an admin user
 
 To use the Admin APIs, you must perform the operations as an authenticated user with the `admin` role. You cannot grant this role via the API initially; you must assign your first admin via the Neon Console.
 
@@ -98,7 +98,7 @@ You will need the following packages for this project:
 npm install @neondatabase/neon-js@latest @neondatabase/auth-ui react-router
 ```
 
-### Setup Tailwind CSS
+### Set up Tailwind CSS
 
 Install Tailwind CSS and the Vite plugin:
 
@@ -123,15 +123,15 @@ export default defineConfig({
 
 ### Configure environment variables
 
-Create a `.env` file in the root of your project and add the credentials you copied in [Step 1](#create-a-neon-project-with-neon-auth):
+Create a `.env` file in the root of your project and add the credentials you copied in [Step 1](#create-a-neon-project-with-managed-better-auth):
 
 ```env
 VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 ```
 
-## Configure Managed Better Auth client
+## Configure the Managed Better Auth client
 
-### Initialize the Auth client
+### Initialize the auth client
 
 Create a client instance to interact with Managed Better Auth.
 
@@ -172,9 +172,9 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
-### Create Auth and Account pages
+### Create auth and account pages
 
-Managed Better Auth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+Managed Better Auth provides pre‑built UI components for the full authentication flow, including sign-in, sign-up, and account management.
 
 As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
@@ -236,7 +236,7 @@ body {
 }
 ```
 
-## Implement actions (Ban & Impersonate)
+## Implement ban and impersonate actions
 
 Create a component to render each user row with Ban and Impersonate actions required for the dashboard.
 
@@ -411,7 +411,7 @@ The `UserRow` component includes the following functionality:
    - Appears when banning a user.
    - Provides quick‑select ban reasons and a textarea for custom reasons.
 
-This component ensures that admins can **manage user accounts directly from the dashboard**, with clear UI feedback for banning, unbanning, and impersonating users.
+With this component, admins can **manage user accounts directly from the dashboard** and see the result of each ban, unban, or impersonate action.
 
 ## Create the user list component
 
@@ -531,7 +531,7 @@ The `AdminDashboard` component includes the following features:
 5. **Dashboard rendering**
    - If the user has the `admin` role:
      - Displays a **Support dashboard** header.
-     - Renders a table of users with columns for **User ID, Email, Role, Status, and Actions** (using the `UserRow` component).
+     - Renders a table of users with columns for **User Name, Email, Role, Status, and Actions** (using the `UserRow` component).
    - If the user is not an admin:
      - Shows an **Access Denied** message.
 
@@ -539,9 +539,9 @@ The `AdminDashboard` component includes the following features:
    - Only renders the dashboard for signed‑in users by wrapping the content in `<SignedIn>`.
    - Uses `<RedirectToSignIn>` to redirect unauthenticated users to the sign‑in page.
 
-## Add an Impersonation banner
+## Add an impersonation banner
 
-When impersonating a user, it is critical to have a way to return to your admin account. This component checks the session for the `impersonatedBy` field on the session object and displays a banner with a button to stop impersonation.
+When you impersonate a user, you need a way back to your admin account. This component checks the session object for the `impersonatedBy` field and displays a banner with a button to stop impersonation.
 
 Create `src/components/ImpersonationBanner.tsx`:
 
@@ -586,10 +586,10 @@ The `ImpersonationBanner` component includes the following features:
    - Calls `authClient.admin.stopImpersonating()` to end the impersonation session and revert to the admin account.
 
 3. **Banner rendering**
-   - Displays a fixed banner at the top of the screen to display the user information being impersonated.
+   - Displays a fixed banner at the top of the screen showing which user is being impersonated.
    - Includes a **Return to Admin** button that triggers `stopImpersonation()`.
 
-This component ensures admins have clear visibility when impersonating a user and provides a quick way to return to their own account.
+Admins can always see when they're impersonating someone, and can return to their own account with one click.
 
 ## Complete the App component
 
@@ -741,11 +741,11 @@ This setup provides a **client dashboard** that shows session details, user stat
 
 ## Use cases for impersonation and admin tools
 
-While this demo app simply shows the impersonated user’s information and session details, in a production application impersonation and admin tools can do much more. They let support teams, moderators, and operations staff manage accounts effectively and resolve issues quickly. Common scenarios include:
+This demo app only shows the impersonated user’s information and session details. In a production application, support teams, moderators, and operations staff can use the same tools to manage accounts and resolve issues. Common scenarios include:
 
-- **Customer support & debugging:** Admins can impersonate a user to reproduce bugs, troubleshoot login issues, or verify account settings exactly as the user sees them. This eliminates guesswork when a user reports a problem that only occurs on their account.
+- **Customer support & debugging:** Admins can impersonate a user to reproduce bugs, troubleshoot login issues, or verify account settings exactly as the user sees them. This helps when a user reports a problem that only occurs on their account.
 - **Billing & subscriptions:** Support staff can impersonate a user to confirm subscription status, payment history, or upgrade/downgrade flows.
-- **Feature access & permissions:** Admins can check whether a user has the correct role‑based permissions or feature entitlements, ensuring access policies are applied correctly.
+- **Feature access & permissions:** Admins can check whether a user has the correct role‑based permissions or feature entitlements.
 - **Onboarding assistance:** Support teams can walk through the app as the user to confirm onboarding steps are completed properly.
 - **Trust & safety:** Moderators can use the **Ban** functionality to revoke access for users posting spam or violating terms of service, preventing future logins.
 - **Back‑office operations:** Operations managers can view user details, confirm email addresses, or audit user roles directly from a UI instead of running manual SQL queries.
@@ -760,10 +760,9 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Managed Better Auth Admin API Reference](/docs/auth/guides/plugins/admin)
-- [Managed Better Auth Overview](/docs/neon-auth/overview)
+- [Managed Better Auth Admin API reference](/docs/auth/guides/plugins/admin)
+- [Managed Better Auth overview](/docs/auth/overview)
 - [Managed Better Auth UI components](/docs/auth/reference/ui-components)
-- [UI components reference](/docs/auth/reference/ui-components)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 
 <NeedHelp />

@@ -2,21 +2,21 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-16T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
-title: Drizzle with Local and Serverless Postgres
-subtitle: A step-by-step guide to configure Drizzle ORM for local and serverless Postgres.
+updatedOn: '2026-09-24T17:56:34.189Z'
+title: Drizzle with local and serverless Postgres
+subtitle: Configure Drizzle ORM for a local Postgres database and a Postgres database on Neon
 ---
 
-Drizzle is an ORM that simplifies database interactions in JavaScript applications. This guide will walk you through the steps to set up Drizzle to work with both local and hosted Postgres databases, and run schema migrations against them.
+Drizzle is an ORM for JavaScript and TypeScript applications. This guide sets up Drizzle to work with both a local Postgres database and a hosted Postgres database on Neon, and runs schema migrations against each.
 
 ## Prerequisites
 
-- **Install Docker Desktop**: To set up a local Postgres database, ensure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed on your machine.
-- A [Neon](https://console.neon.tech) account to set up a hosted Postgres.
+- **Docker Desktop**: To run a local Postgres database, make sure you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed on your machine.
+- A [Neon](https://console.neon.tech) account to set up a hosted Postgres database.
 
 ## Create a new Next.js application
 
-Let’s get started by creating a new Next.js project with the following command:
+Create a new Next.js project with the following command:
 
 ```shell shouldWrap
 npx create-next-app@latest my-app
@@ -38,9 +38,9 @@ cd my-app
 npm run dev
 ```
 
-## Setting Up a Local Postgres
+## Set up a local Postgres database
 
-You will use Docker to run your instance of local Postgres. First, create a `docker-compose.yml` file in the root directory with the following code:
+You will use Docker to run a local Postgres instance. First, create a `docker-compose.yml` file in the root directory with the following code:
 
 ```yaml
 services:
@@ -64,19 +64,19 @@ services:
       - postgres
 ```
 
-In the YAML configuration file above, you have set up two services using Docker: a PostgreSQL database and a WebSocket proxy for Neon. The `postgres` service uses the latest PostgreSQL image and configures the necessary environment variables for the database user, password, and database name. It exposes port 5432 for database connections. The `pg_proxy` service uses a WebSocket proxy image, allowing connections to the PostgreSQL service through port `5433`.
+In the YAML configuration file above, you have set up two services using Docker: a Postgres database and a WebSocket proxy for the Neon serverless driver. The `postgres` service uses the latest Postgres image and configures the necessary environment variables for the database user, password, and database name. It exposes port 5432 for database connections. The `pg_proxy` service uses a WebSocket proxy image, allowing connections to the Postgres service through port `5433`.
 
-Next, spin up the services in Docker via the following command:
+Next, start the services in Docker with the following command:
 
 ```shell shouldWrap
 docker-compose up -d
 ```
 
-Use the connection string (`postgres://postgres:postgres@localhost:5432/postgres`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
+Add the local instance's connection string (`postgres://postgres:postgres@localhost:5432/postgres`) to your `.env` file as `LOCAL_POSTGRES_URL`.
 
-## Setting Up a Serverless Postgres
+## Set up a Postgres database on Neon
 
-To set up Neon serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+Go to the [Neon Console](https://console.neon.tech/app/projects) and create a new project. Then click **Connect** on your project dashboard to get the connection string for your database. It looks like this:
 
 ```bash
 postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
@@ -84,7 +84,7 @@ postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?ssl
 
 Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your specific details.
 
-Use this connection string as an environment variable designated as `POSTGRES_URL` in the `.env` file.
+Add this connection string to your `.env` file as `POSTGRES_URL`.
 
 ## Integrate Drizzle with Next.js
 
@@ -95,7 +95,7 @@ npm install ws postgres drizzle-orm @neondatabase/serverless
 npm install -D @types/ws drizzle-kit
 ```
 
-Note that the installation of the `postgres` package is important, as in local environments, Drizzle will automatically use that to apply the schema migrations to the Postgres. In production, Drizzle will use Neon’s serverless driver to apply schema migrations to Neon’s hosted Postgres instance.
+Install the `postgres` package even though your code doesn't import it: in local environments, Drizzle uses it to apply schema migrations to your local Postgres. In production, Drizzle uses the Neon serverless driver to apply schema migrations to your database on Neon.
 
 Then, create a file named `drizzle.server.ts` with the following code:
 
@@ -124,7 +124,7 @@ const pool = new Pool({ connectionString });
 export default drizzle(pool);
 ```
 
-The code above determines the connection string based on the environment variable (production or local). In production, it configures WebSocket settings for Neon, while in local development, it sets up a WebSocket proxy. Finally, it creates a connection pool and exports a Drizzle instance for database interactions.
+The code above picks the connection string based on the environment (production or local). In production, it configures the WebSocket settings for Neon. In local development, it routes connections through the local WebSocket proxy. Finally, it creates a connection pool and exports a Drizzle instance for database interactions.
 
 Next, create a file named `drizzle.config.ts` with the following code:
 
@@ -147,11 +147,11 @@ export default defineConfig({
 });
 ```
 
-The code above determines the Postgres connection string to be used based on the environment (production or local) for database operations, such as running schema migrations.
+The code above picks the Postgres connection string for the current environment (production or local), which drizzle-kit uses for operations such as schema migrations.
 
-## Running Schema Migrations
+## Run schema migrations
 
-Now, you can manage both the local and production environments and select the respective (local or production) Postgres to run the Drizzle migrations via the following commands:
+Run the Drizzle migrations with the following commands. `NODE_ENV` decides whether they run against your local Postgres or your database on Neon:
 
 ```bash
 npx drizzle-kit generate
@@ -164,7 +164,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with Local and Serverless Postgres" icon="github">Drizzle with Local and Serverless Postgres</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with local and serverless Postgres" icon="github">Drizzle with local and serverless Postgres</a>
 
 </DetailIconCards>
 

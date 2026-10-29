@@ -41,6 +41,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andreas-scherbaum.jpg",
     "photoAlt": "Andreas Scherbaum"
   },
+  "andrei-stolbovskii": {
+    "name": "Andrei Stolbovskii",
+    "role": "Engineering Manager, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andrei-stolbovskii.jpg",
+    "photoAlt": "Andrei Stolbovskii"
+  },
   "andrew-hamilton": {
     "name": "Andrew Hamilton",
     "role": "Chief Technology Officer at Layer",
@@ -190,7 +197,7 @@
   },
   "carlota-soto": {
     "name": "Carlota Soto",
-    "role": "Product Marketing Lead",
+    "role": "Product Team",
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/carlota-soto.jpg",
     "photoAlt": "Carlota Soto"
@@ -243,6 +250,13 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dian-m-fay.jpg",
     "photoAlt": "Dian M Fay"
+  },
+  "dmitrii-mokhnatkin": {
+    "name": "Dmitrii Mokhnatkin",
+    "role": "Software Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dmitrii-mokhnatkin.jpg",
+    "photoAlt": "Dmitrii Mokhnatkin"
   },
   "dom-eccleston": {
     "name": "Dom Eccleston",
@@ -397,6 +411,13 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/jacob-prall.jpg",
     "photoAlt": "Jacob Prall"
+  },
+  "james-arthur": {
+    "name": "James Arthur",
+    "role": "Engineering at Databricks, Co-founder of Electric",
+    "url": "https://linkedin.com/in/thruflo",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/james-arthur.jpg",
+    "photoAlt": "James Arthur"
   },
   "jasraj-dange": {
     "name": "Jasraj Dange",
@@ -628,6 +649,13 @@
     "url": "https://twitter.com/rishi_raj_jain_",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/rishi-raj-jain.jpg",
     "photoAlt": "Rishi Raj Jain"
+  },
+  "robert-haas": {
+    "name": "Robert Haas",
+    "role": "Postgres Committer, Databricks",
+    "url": null,
+    "photo": "/apple-touch-icon.png",
+    "photoAlt": "Robert Haas"
   },
   "rodney-sherwin-shibu": {
     "name": "Rodney Sherwin Shibu",

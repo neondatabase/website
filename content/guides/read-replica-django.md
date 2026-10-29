@@ -1,15 +1,15 @@
 ---
-title: Scale your Django application with Lakebase Postgres Read Replicas
-subtitle: Learn how to scale Django applications with Lakebase Postgres Read Replicas
+title: Scale your Django application with Neon read replicas
+subtitle: Learn how to scale Django applications with Neon read replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that improve database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only computes that read from the same storage as your primary compute. Sending read queries to replicas takes load off your primary compute, which helps read-heavy applications. Because replicas don't duplicate data, adding one doesn't require extra storage; you pay only for the replica's compute.
 
-This guide explains how to integrate Neon read replicas into your Django application. You'll learn how to configure your Django database router to direct read operations to these replicas, optimizing your database performance and overall application speed.
+This guide explains how to integrate Neon read replicas into your Django application. You'll learn how to configure a Django database router to send read operations to a replica.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before you begin, make sure you have:
 
 ## Build the note-taking app
 
-To demonstrate how to use Neon read replicas with Django, we'll build a simple note-taking application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
+To demonstrate how to use Neon read replicas with Django, we'll build a simple note-taking application that uses a Neon database. We'll then update the application to use a read replica for read operations.
 
 ### Part 1: Build the initial note-taking app with a single database
 
@@ -38,7 +38,7 @@ cd django_notes
 python manage.py startapp notes
 ```
 
-This creates a new virtual environment, installs Django, and sets up a new Django project called `django_notes`. We also create a new app called `notes`, which will contain the logic for managing notes. For the database driver, we use `psycopg2-binary` to connect to a PostgreSQL database.
+This creates a new virtual environment, installs Django, and sets up a new Django project called `django_notes`. We also create a new app called `notes`, which will contain the logic for managing notes. For the database driver, we use `psycopg2-binary` to connect to Postgres.
 
 #### Update settings
 
@@ -62,7 +62,7 @@ DATABASES = {
 }
 ```
 
-The `INSTALLED_APPS` array is updated to include the `notes` app we just created. The `DATABASES` dictionary is also updated to use a PostgreSQL database on Neon.
+The `INSTALLED_APPS` array is updated to include the `notes` app we just created. The `DATABASES` dictionary is also updated to use a Postgres database on Neon.
 
 #### Create the Note model
 
@@ -242,7 +242,7 @@ Create `notes/templates/notes/list_notes.html`:
 {% endblock %}
 ```
 
-This template displays a list of all notes. Each note shows its title, content, and creation time. A delete button is also provided next to each note, allowing for easy deletion.
+This template displays a list of all notes. Each note shows its title, content, and creation time. Each note also has a delete button.
 
 #### Run migrations and start the server
 
@@ -264,19 +264,19 @@ Visit `http://localhost:8000` to test the note-taking app.
 
 To create a read replica:
 
-1. In the Neon Console, select **Branches**.
-2. Select the branch where your database resides.
+1. In the Neon Console, select the branch where your database resides from the **BRANCH** selector.
+2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
+5. Specify the **Compute size settings**. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
-   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Plans](/docs/introduction/plans).
    </Admonition>
 6. When you finish making selections, click **Create**.
 
-Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
+Your read replica compute is provisioned and appears on the **Computes** tab under **Postgres database**.
 
-Navigate to the **Dashboard** page, select the branch where the read replica compute was provisioned, and set the compute option to **Replica** to obtain the read replica connection string:
+To get the read replica connection string, click **Connect** in the Console nav. In the **Connect to your branch** modal, select the branch and database, then select a **Replica** under **Compute**:
 
 ![Read replica connection string](/docs/guides/read_replica_connection_string.png)
 
@@ -299,7 +299,7 @@ class PrimaryReplicaRouter:
         return True
 ```
 
-This `PrimaryReplicaRouter` class defines the routing logic for database operations. The `db_for_read method` routes all read operations to the 'replica' database, while `db_for_write` directs write operations to the 'default' database. The `allow_relation` and `allow_migrate` methods are set to return `True`, allowing all relations and migrations across databases.
+This `PrimaryReplicaRouter` class defines the routing logic for database operations. The `db_for_read` method routes all read operations to the 'replica' database, while `db_for_write` directs write operations to the 'default' database. The `allow_relation` and `allow_migrate` methods are set to return `True`, allowing all relations and migrations across databases.
 
 Update `django_notes/settings.py`:
 
@@ -326,21 +326,19 @@ DATABASES = {
 DATABASE_ROUTERS = ['notes.db_router.PrimaryReplicaRouter']
 ```
 
-In the `settings.py` file, we define two database connections: `'default'` for the primary database and `'replica'` for the read replica. Both use the PostgreSQL engine and share the same database name, but have different host addresses. The `DATABASE_ROUTERS` setting tells Django to use our custom `PrimaryReplicaRouter` for database routing decisions.
+In the `settings.py` file, we define two database connections: `'default'` for the primary database and `'replica'` for the read replica. Both use the Postgres engine and share the same database name, but have different host addresses. The `DATABASE_ROUTERS` setting tells Django to use our custom `PrimaryReplicaRouter` for database routing decisions.
 
-With these configurations in place, Django will automatically route read queries to the read replica and write queries to the primary database, effectively distributing the database load and potentially improving your application's performance.
+With these configurations in place, Django routes read queries to the read replica and write queries to the primary compute.
 
 ## Conclusion
 
-With Neon's read replicas in your Django application, you can improve your application's performance and scalability. Django's database router makes it easy to set up and use read replicas without having to manually manage multiple database connections in your application code.
-
-This setup allows you to distribute your read load across one or more read replicas while ensuring that all write operations are performed on the primary database. Monitor your application's performance and adjust the number of read replicas as needed to handle your specific load requirements.
+Your Django app now sends reads to a Neon read replica and writes to the primary compute, and the database router handles the routing without changes to your views. As load grows, monitor your application and add read replicas as needed.
 
 You can find the source code for this application on GitHub:
 
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/neon-read-replica-django" description="
-Learn how to scale Django applications with Lakebase Postgres Read Replicas" icon="github">Use read replicas with Django</a>
+Learn how to scale Django applications with Neon read replicas" icon="github">Use read replicas with Django</a>
 </DetailIconCards>
 
 <NeedHelp/>

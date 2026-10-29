@@ -1,15 +1,15 @@
 ---
 title: Building an API with Django, Django REST Framework, and Lakebase Postgres
-subtitle: Learn how to create a RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres
+subtitle: Learn how to create a RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Postgres on Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django with tools for building RESTful APIs from your Django models with minimal code.
 
-In this guide, we will go over how to build a RESTful API for a fictional AI Model Marketplace using Django and Django REST Framework with Neon's serverless Postgres as the database backend.
+In this guide, we will go over how to build a RESTful API for a fictional AI Model Marketplace using Django and Django REST Framework with a Postgres database on Neon as the backend.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ python -m venv neon-django-ai-marketplace
 source neon-django-ai-marketplace/bin/activate  # On Windows, use `neon-django-ai-marketplace\Scripts\activate`
 ```
 
-This creates a new virtual environment named `neon-django-ai-marketplace` and activates it, ensuring our project dependencies are isolated.
+This creates a new virtual environment named `neon-django-ai-marketplace` and activates it, so the project dependencies stay isolated.
 
 After activating the virtual environment, you should see `(neon-django-ai-marketplace)` in your terminal prompt.
 
@@ -42,7 +42,7 @@ Now, let's install the necessary packages:
 pip install django djangorestframework psycopg2-binary python-dotenv
 ```
 
-This command installs Django, Django REST Framework, the PostgreSQL adapter for Python, and a package to manage environment variables. We'll use Django for the web framework, DRF for building the API, and psycopg2-binary to connect to the Lakebase Postgres database.
+This command installs Django, Django REST Framework, the Postgres adapter for Python, and a package to manage environment variables. We'll use Django for the web framework, DRF for building the API, and psycopg2-binary to connect to the database on Neon.
 
 ### Create a new Django project
 
@@ -60,7 +60,7 @@ cd ai_marketplace
 
 ### Configure the database connection
 
-To connect to Neon's serverless Postgres database, we need to set up the database connection in the Django project.
+To connect to your Neon database, set up the database connection in the Django project.
 
 Open the `settings.py` file to configure the database connection. By default, Django uses SQLite as the database backend. Replace the `DATABASES` section with the following:
 
@@ -77,7 +77,7 @@ DATABASES = {
 }
 ```
 
-Replace the placeholders with your Neon database details. You can find these details in the Neon Console under **Connection Details**.
+Replace the placeholders with your Neon database details. You can find these details by clicking the **Connect** button in the Neon Console, which opens the **Connect to your branch** modal.
 
 To verify the connection, run the Django development server:
 
@@ -99,7 +99,7 @@ In Django, models are Python classes that represent database tables. Create a ne
 python manage.py startapp models_api
 ```
 
-Add the new app to `INSTALLED_APPS` in `settings.py`, this essentially registers the app with the Django project:
+Add the new app to `INSTALLED_APPS` in `settings.py` to register the app with the Django project:
 
 ```python
 INSTALLED_APPS = [
@@ -233,11 +233,11 @@ Running migrations:
   Applying models_api.0001_initial... OK
 ```
 
-You can verify that the tables were created in the Neon Console or by connecting to the database using a PostgreSQL client like `psql`.
+You can verify that the tables were created in the Neon Console or by connecting to the database using a Postgres client like `psql`.
 
 ### Implement serializers
 
-With our models defined, we need to create serializers to convert model instances to JSON and vice versa. Serializers are a key component of Django REST Framework and are used to handle the conversion between complex data types (like Django model instances) and Python datatypes that can be easily rendered into JSON, XML, or other content types.
+With our models defined, we need to create serializers to convert model instances to JSON and vice versa. Serializers are a core part of Django REST Framework and handle the conversion between complex data types (like Django model instances) and Python datatypes that can be easily rendered into JSON, XML, or other content types.
 
 Start by creating a new file `models_api/serializers.py`:
 
@@ -280,7 +280,7 @@ class ModelBenchmarkSerializer(serializers.ModelSerializer):
 Let's break down each serializer to better understand their purpose:
 
 1. `ModelAuthorSerializer`:
-   - This serializer is used for the `ModelAuthor` model, it basically represents the author details.
+   - This serializer is used for the `ModelAuthor` model and represents the author details.
    - It includes all fields of the model (`id`, `name`, `bio`, `contact_info`, `rating`).
    - By using `ModelSerializer`, we automatically get create and update functionality that matches the model fields.
 
@@ -414,7 +414,7 @@ With our API views and URL routing configured, we can now test the API by runnin
 python manage.py runserver
 ```
 
-If you were to now visit `http://localhost:8000/api/` in your browser, you would see a list of available API endpoints. This is the default behavior of DRF's `DefaultRouter`. If you were to visit `http://localhost:8000/api/authors/`, you would see a list of authors (which is currently empty), and so on for other endpoints. The web interface provided by DRF allows you to interact with the API endpoints directly from the browser like a simple API client, you can view, create, update, and delete records by interacting with the API endpoints directly.
+If you were to now visit `http://localhost:8000/api/` in your browser, you would see a list of available API endpoints. This is the default behavior of DRF's `DefaultRouter`. If you were to visit `http://localhost:8000/api/authors/`, you would see a list of authors (which is currently empty), and so on for other endpoints. The web interface provided by DRF allows you to interact with the API endpoints directly from the browser like a simple API client. You can view, create, update, and delete records by interacting with the API endpoints directly.
 
 Alternatively, you can use tools like `curl` or Postman to interact with the API programmatically. Here are some example `curl` commands to test the API:
 
@@ -453,14 +453,14 @@ Alternatively, you can use tools like `curl` or Postman to interact with the API
 
 ## Conclusion
 
-In this guide, we've built a RESTful API for a simple AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres. We covered setting up the project, defining models for AI models, authors, purchases, usage scenarios, and benchmarks, creating serializers and views, and configuring URL routing.
+In this guide, we've built a RESTful API for a simple AI Model Marketplace using Django, Django REST Framework, and Postgres on Neon, with models, serializers, ViewSets, and URL routing for authors, AI models, purchases, usage scenarios, and benchmarks.
 
-This API provides a solid foundation for an AI Model Marketplace platform. You can extend it with features like user authentication, advanced search and filtering, model versioning, and integration with payment systems. The combination of Django's ORM, DRF's flexibility, and Neon's scalable Postgres database makes it easy to build and deploy performant APIs for complex applications like AI model distribution platforms.
+As a next step, you can extend it with user authentication, search and filtering, model versioning, or payment integration.
 
-## Additional Resources
+## Additional resources
 
-- [Django REST Framework Documentation](https://www.django-rest-framework.org/)
-- [Django Documentation](https://docs.djangoproject.com/en/stable/)
-- [Neon Documentation](/docs/)
+- [Django REST Framework documentation](https://www.django-rest-framework.org/)
+- [Django documentation](https://docs.djangoproject.com/en/stable/)
+- [Neon documentation](/docs/)
 
 <NeedHelp />

@@ -4,37 +4,37 @@ subtitle: 'Learn how to migrate your data and applications from FaunaDB to Lakeb
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Like Fauna, it offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
+Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Like Fauna, Lakebase Postgres is **serverless**, but it's built on **Postgres**, so you get serverless scaling on a SQL database you probably already know.
 
-This guide is designed to help FaunaDB users understand how to transition to Lakebase Postgres.
+This guide helps FaunaDB users move their data and applications to Lakebase Postgres on Neon.
 
 <Admonition type="note">
-Migrating from FaunaDB to Lakebase Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
+Migrating from FaunaDB to Lakebase Postgres involves schema translation, data migration, and query conversion. This guide walks through each of those steps.
 </Admonition>
 
-## FaunaDB vs. Neon (Postgres)
+## FaunaDB vs. Lakebase Postgres
 
-Before diving into the migration process, it's important to understand the fundamental differences between FaunaDB and Neon (Postgres). While both are databases, they operate with distinct paradigms:
+Before you start, it helps to understand how FaunaDB and Lakebase Postgres differ. Both are databases, but they use different paradigms:
 
-| Feature            | FaunaDB                                        | Neon (Postgres)                                                     |
+| Feature            | FaunaDB                                        | Lakebase Postgres                                                   |
 | ------------------ | ---------------------------------------------- | ------------------------------------------------------------------- |
 | **Database type**  | Multi-model (document-relational)              | Relational (SQL)                                                    |
 | **Data model**     | JSON documents in collections, flexible schema | Tables with rows and columns, rigid schema                          |
 | **Query language** | FQL (Fauna Query Language), functional         | SQL (Structured Query Language), declarative                        |
 | **Schema**         | Implicit, schemaless/schema-optional, evolving | Explicit, schema-first, requires migrations                         |
-| **Transactions**   | ACID, stateless, HTTPS requests                | ACID, stateful/Stateless, persistent TCP/HTTP/Websocket connections |
+| **Transactions**   | ACID, stateless, HTTPS requests                | ACID, stateful/stateless, persistent TCP/HTTP/WebSocket connections |
 | **Server model**   | Serverless (managed), cloud-native             | Serverless (managed), cloud-native                                  |
 
 ## Migration steps
 
-The migration process from FaunaDB to Lakebase Postgres involves several key steps, each essential for a successful transition. These steps include exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, and converting your queries from FQL to SQL. Let's break down these steps in detail:
+Migrating from FaunaDB to Lakebase Postgres involves exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, and converting your queries from FQL to SQL.
 
-### Step 1: Exporting data from FaunaDB
+### Step 1: Export data from FaunaDB
 
-If you are on a paid FaunaDB plan, you can use the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) can be used to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/)
+If you are on a paid FaunaDB plan, you can use the database's export functionality to save data in JSON format directly to an Amazon S3 bucket. You can use the [Fauna CLI](https://docs.fauna.com/fauna/current/build/cli/v4/) to [export data to S3](https://docs.fauna.com/fauna/current/manage/exports/).
 
 ```bash
 fauna export create s3 \
@@ -45,7 +45,7 @@ fauna export create s3 \
   --format simple
 ```
 
-For smaller datasets, you can export data directly to your local filesystem using FQL. The following script demonstrates exporting data from FaunaDB collections as JSON files. For example, here's a Node.js script that exports data from specific collections (e.g., `Product`, `Category`) to JSON files (e.g., `Product.json`, `Category.json`):
+For smaller datasets, you can export data directly to your local filesystem using FQL. For example, here's a Node.js script that exports data from specific collections (e.g., `Product`, `Category`) to JSON files (e.g., `Product.json`, `Category.json`):
 
 ```javascript
 import { Client, fql, FaunaError } from 'fauna';
@@ -125,13 +125,13 @@ For example, here's a sample JSON file for the exported `Product` collection:
 ]
 ```
 
-### Step 2: Exporting FaunaDB schema (FSL schema pull)
+### Step 2: Export the FaunaDB schema (FSL schema pull)
 
 In addition to your data, you'll need to export your FaunaDB schema, defined in Fauna Schema Language (FSL).
 
 **Using `fauna schema pull` command:**
 
-The `fauna schema pull` command in the Fauna CLI is used to export your database schema to a local directory.
+The `fauna schema pull` command in the Fauna CLI exports your database schema to a local directory.
 
 **Fauna CLI command:**
 
@@ -179,17 +179,17 @@ collection Product {
 
 ### Step 3: Schema translation - FSL to Postgres DDL
 
-<Admonition type="info" title="Manual schema translation 🥺">
-Unfortunately, there isn't a fully automated FSL to SQL DDL converter as these are fundamentally different database paradigms. You'll need to manually translate your FaunaDB schema to Postgres DDL. This process involves mapping FaunaDB collections, fields, indexes, and constraints to Postgres tables, columns, indexes, and constraints.
+<Admonition type="info" title="Manual schema translation">
+There isn't a fully automated FSL to SQL DDL converter, because these are fundamentally different database paradigms. You'll need to manually translate your FaunaDB schema to Postgres DDL. This process involves mapping FaunaDB collections, fields, indexes, and constraints to Postgres tables, columns, indexes, and constraints.
 </Admonition>
 
-Begin by thoroughly examining the exported Fauna Schema Language (FSL) files. This gives you a full picture of your FaunaDB schema structure. Pay close attention to the definitions of collections, their associated fields, indexes, and constraints.
+Start by reading through the exported Fauna Schema Language (FSL) files to get a full picture of your FaunaDB schema. Pay close attention to the definitions of collections, their fields, indexes, and constraints.
 
-For instance, the Product collection, as shown in the above example `collections.fsl` file, includes fields like `name`, `description`, `price`, `category`, and `stock`. The schema also specifies unique and check constraints for data integrity, along with indexes to optimize query performance.
+For instance, the Product collection, as shown in the above example `collections.fsl` file, includes fields like `name`, `description`, `price`, `category`, and `stock`. The schema also specifies unique and check constraints, along with indexes.
 
-Once you have a clear grasp of your exported FSL schema, the next step involves translating it into Postgres Data Definition Language (DDL). This translation process is necessary to create equivalent tables and indexes within your Postgres database. By accurately converting your FaunaDB schema into DDL, you ensure a smooth transition and maintain the structural integrity of your data during migration.
+Next, translate the FSL schema into Postgres Data Definition Language (DDL) to create equivalent tables and indexes in your database.
 
-If you need a refresher on Postgres, you can refer to Neon's [PostgreSQL Tutorial](/postgresql/tutorial).
+If you need a refresher on Postgres, see the [Postgres tutorial](/postgresql/tutorial).
 
 **Key translation considerations:**
 
@@ -197,11 +197,11 @@ If you need a refresher on Postgres, you can refer to Neon's [PostgreSQL Tutoria
 - **Field definitions to columns:** FaunaDB field definitions will guide your Lakebase Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
 - **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
 - **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres. Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
-- **Computed fields/functions:** FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation. Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
+- **Computed fields/functions:** FaunaDB's more advanced schema features, like `compute` fields and functions, need more work to translate. Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
 
 #### Example FSL to Postgres DDL translation
 
-Let's consider the `Category` collection from the FSL schema and translate it to a `categories` table in Lakebase Postgres. Here's the FSL schema for the `Category` collection:
+Take the `Category` collection from the FSL schema and translate it to a `categories` table in Lakebase Postgres. Here's the FSL schema for the `Category` collection:
 
 ```fsl
 collection Category {
@@ -217,7 +217,7 @@ collection Category {
 }
 ```
 
-**Lakebase Postgres DDL (Translated):**
+**Lakebase Postgres DDL (translated):**
 
 Here's how you can translate the `Category` collection to a `categories` table with the necessary constraints and indexes:
 
@@ -234,7 +234,7 @@ CREATE TABLE categories (
 CREATE INDEX idx_categories_name ON categories(name);
 ```
 
-Now let's consider the `Product` collection from the FSL schema and translate it to a `products` table in Lakebase Postgres. Here's the FSL schema for the `Product` collection:
+Next, take the `Product` collection from the FSL schema and translate it to a `products` table in Lakebase Postgres. Here's the FSL schema for the `Product` collection:
 
 ```fsl
 collection Product {
@@ -266,7 +266,7 @@ collection Product {
 }
 ```
 
-**Lakebase Postgres DDL (Translated):**
+**Lakebase Postgres DDL (translated):**
 
 Now that you have a `categories` table created in Lakebase Postgres, here's how you can translate the `Product` collection to a `products` table with the necessary constraints, references and indexes:
 
@@ -295,21 +295,21 @@ CREATE INDEX idx_products_category ON products(category_id);
 CREATE INDEX idx_products_price_asc ON products(price) INCLUDE (name, description, stock);
 ```
 
-Here we are adding a foreign key constraint `fk_category` to ensure that the `category_id` in the `products` table references the `id` column in the `categories` table. This constraint enforces referential integrity between the two tables.
+The foreign key constraint `fk_category` makes the `category_id` in the `products` table reference the `id` column in the `categories` table, which enforces referential integrity between the two tables.
 
-<Admonition type="tip" title="Don't want to use Raw SQL?">
-If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started/languages) and [ORM guides](/docs/get-started/orms) section.
+<Admonition type="tip" title="Don't want to use raw SQL?">
+If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your programming language to define and create your schema. See the [language guides](/docs/get-started/languages) and [ORM guides](/docs/get-started/orms).
 </Admonition>
 
-### Step 4: Data import to Neon
+### Step 4: Import data to Neon
 
 With your database on Neon ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
 
-For this guide, we'll demonstrate importing data from the `product.json` file (exported from FaunaDB) into the `products` table in Lakebase Postgres.
+This example imports data from the `Product.json` file (exported from FaunaDB) into the `products` table in Lakebase Postgres.
 
 This example Node.js script reads the `Product.json` file, parses the JSON data, and then generates and executes `INSERT` statements to populate your `products` table in Lakebase Postgres.
 
-You can get `NEON_CONNECTION_STRING` from your Neon dashboard. Learn more about [Connecting Neon to your stack](/docs/get-started/connect-neon)
+You can get `NEON_CONNECTION_STRING` by clicking **Connect** on your project dashboard in the Neon Console. Learn more about [connecting Neon to your stack](/docs/get-started/connect-neon).
 
 ```javascript
 import pg from 'pg';
@@ -367,36 +367,38 @@ You can adapt this script to import data from other collections by adjusting the
 
 <Admonition type="tip" title="Importing multiple collections with references">
 
-When importing data that spans multiple collections with relationships (for instance, `Product` collection documents referencing `Category` collection documents), it is **essential to import data in the correct order** to maintain data integrity.
+When importing data that spans multiple collections with relationships (for instance, `Product` collection documents referencing `Category` collection documents), **import data in the correct order** to maintain data integrity.
 
 Specifically, you must **import the data for the _referenced_ collection (e.g., `Category`) _before_ importing the data for the _referencing_ collection (e.g., `Product`)**.
 
 Keep the following considerations in mind when importing data with relationships:
 
-- **Establish referenced data first:** Postgres, being a relational database, relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
+- **Establish referenced data first:** Postgres relies on foreign key constraints to enforce relationships between tables. When you import data into the `Product` table that is intended to reference entries in the `Category` table, those `Category` entries must already exist in Postgres.
 
 - **ID handling depends on your strategy:** While FaunaDB uses its own distributed document ID system, Postgres ID generation is more flexible. **Whether you need to transform IDs depends on your chosen ID strategy in Postgres:**
-  - **Scenario 1: Using Postgres-Generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate _new_ IDs** for the rows in your tables. In this scenario, you _will_ need to manage ID transformation for relationships.
+  - **Scenario 1: Using Postgres-generated IDs:** If you are using Postgres's default ID generation mechanisms (like `SERIAL`, `UUID`, or `IDENTITY` columns), then **Postgres will automatically generate _new_ IDs** for the rows in your tables. In this scenario, you _will_ need to manage ID transformation for relationships.
 
   - **Scenario 2: Retaining FaunaDB IDs:** If you are explicitly setting IDs during import to retain FaunaDB IDs in Postgres, you must ensure that the IDs are correctly mapped and managed. You may choose this approach if you:
     - Want to retain FaunaDB IDs for compatibility and speed up the migration process.
     - Have a strategy to manage ID collisions and ensure uniqueness at the application level.
 
-- **Managing IDs for Relationships (Regardless of ID retention):** Even if you _do_ successfully retain FaunaDB IDs in Postgres (Scenario 2), you still need to be mindful of how relationships are established. If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This will be be valid if you are mapping the JSON data to Postgres tables without any transformation.
+- **Managing IDs for relationships (regardless of ID retention):** Even if you _do_ successfully retain FaunaDB IDs in Postgres (Scenario 2), you still need to be mindful of how relationships are established. If you are using foreign keys in Postgres (the recommended approach for relational data), you must ensure that the IDs used in your referencing tables (e.g., `product.category_id`) **correctly match the IDs in the referenced table (e.g., `categories.id`)**. This holds if you are mapping the JSON data to Postgres tables without any transformation.
 
-- **Strategies for ID management (If Not Retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you will need a strategy to: - **Option 1: Pre-map IDs:** Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs. - **Option 2: Lookup-based Insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
+- **Strategies for ID management (if not retaining FaunaDB IDs):** If you are using Postgres-generated IDs, you need a strategy such as:
+  - **Option 1: Pre-map IDs:** Before importing `Product` data, you might need to process your JSON data to replace the FaunaDB `Category` document IDs with the **newly generated Postgres IDs** of the corresponding categories. This involves creating a mapping between the FaunaDB IDs and the Postgres-generated IDs for the `Category` table and replacing the `category.id` references in your `Product.json` data dump with the corresponding Postgres IDs.
+  - **Option 2: Lookup-based insertion:** During the import of `Product` data, instead of directly inserting IDs, you might perform a **lookup** in the already imported `Category` table based on a unique identifier (like category name) from your JSON data to retrieve the correct Postgres `category_id` to use as a foreign key. You can use the [example below](#inserting-a-new-document) as a reference.
 
 </Admonition>
 
 ### Step 5: Query conversion - FQL to SQL
 
-<Admonition type="tip" title="Gradual migration with Flags">
-We recommend using a flag-based approach to gradually migrate your application from FaunaDB to Lakebase Postgres. This approach involves running your application with both FaunaDB and Lakebase Postgres connections simultaneously, using a feature flag to switch between the two databases. This strategy allows you to test and validate your application's behavior on Lakebase Postgres without disrupting your production environment. Once you see that your application is functioning correctly with Lakebase Postgres, you can fully transition away from FaunaDB.
+<Admonition type="tip" title="Gradual migration with flags">
+Consider a flag-based approach to gradually migrate your application from FaunaDB to Lakebase Postgres. This approach involves running your application with both FaunaDB and Lakebase Postgres connections simultaneously, using a feature flag to switch between the two databases. You can test your application's behavior on Lakebase Postgres without disrupting production, then fully move off FaunaDB once it works.
 </Admonition>
 
-This is a critical step in the migration process, as it involves converting your application's FaunaDB queries (written in Fauna Query Language - FQL) to equivalent SQL queries.
+This step converts your application's FaunaDB queries (written in Fauna Query Language, or FQL) to equivalent SQL queries.
 
-Here are some key translation patterns to consider when converting Fauna's `FQL` to Postgres `SQL`:
+Here are common translation patterns for converting Fauna's `FQL` to Postgres `SQL`:
 
 #### Retrieving all documents from a collection
 
@@ -576,11 +578,11 @@ RETURNING *;
 **Actionable steps for query conversion:**
 
 1.  **Review application queries:** Identify the key queries in your application that interact with FaunaDB.
-2.  **Translate FQL to SQL (focus on key queries):** Translate these key FQL queries into equivalent SQL queries, focusing on the patterns shown in the examples above.
+2.  **Translate FQL to SQL (focus on key queries):** Translate these queries into SQL, using the patterns shown in the examples above.
 3.  **Test SQL queries:** Test your translated SQL queries against your Lakebase Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
 
 <Admonition type="note" title="Recommendation for complex queries">
-Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a short timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)
+Your application may have many queries that insert and retrieve unstructured data, and translating all of them takes time. Start with the queries most critical to your application's core functionality and performance. For deeply nested unstructured data, consider the [JSONB data type in Postgres](/postgresql/postgresql-tutorial/postgresql-json).
 </Admonition>
 
 ## Resources

@@ -32,4 +32,58 @@ describe('getModelDetailPageData', () => {
       { title: 'Output /M', id: 'output-m' },
     ]);
   });
+
+  // No Inputs, Context, or Output /M — those describe chat completion behavior, not a fixed
+  // vector length, and there is no completion to charge for.
+  it('reports Dimensions instead of the chat-shaped sections for an embedding model', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'qwen3-embedding-0-6b',
+      name: 'Qwen3 Embedding 0.6B',
+      providerName: 'Alibaba',
+      endpoints: ['embeddings'],
+      isEmbedding: true,
+      dimensions: 1024,
+      releaseLabel: 'Jun 2025',
+      costInputLabel: '$0.02',
+    });
+
+    expect(content).toContain('## Dimensions\n\n1024');
+    expect(content).not.toContain('## Inputs');
+    expect(content).not.toContain('## Context');
+    expect(content).not.toContain('## Output /M');
+    expect(tableOfContents.map(({ title }) => title)).toEqual([
+      'About',
+      'Command',
+      'Model ID',
+      'Provider',
+      'Dimensions',
+      'Released',
+      'Input /M',
+    ]);
+  });
+
+  it('reports only identity, release and input price for a decision model', () => {
+    const { content, tableOfContents } = getModelDetailPageData({
+      id: 'example-decision',
+      name: 'Example Decision',
+      providerName: 'Example',
+      endpoints: [],
+      isDecision: true,
+      releaseLabel: 'Sep 2026',
+      costInputLabel: '$0.10',
+    });
+
+    expect(content).toContain('System One decision model');
+    expect(content).toContain('## Input /M\n\n$0.10');
+    expect(content).not.toContain('## Dimensions');
+    expect(content).not.toContain('## Context');
+    expect(tableOfContents.map(({ title }) => title)).toEqual([
+      'About',
+      'Command',
+      'Model ID',
+      'Provider',
+      'Released',
+      'Input /M',
+    ]);
+  });
 });

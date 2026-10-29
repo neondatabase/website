@@ -3,15 +3,14 @@
  * Import model entries into src/app/models.json/data.json from a resolved
  * models.dev catalog.
  *
- * data.json is the source of truth and is authored here. This is a convenience
- * for the one thing models.dev genuinely does for us: it resolves `base_model`
- * inheritance, so an entry that only declares a base model and a price comes
- * back with the modalities, limits and dates filled in. Pulling that in beats
- * copying twenty fields by hand.
+ * Production builds refresh data.json from the Neon AI Gateway
+ * (scripts/update-models-from-ai-gateway.mjs), which overwrites every field the
+ * gateway supplies. What an import contributes past a build is only what the
+ * gateway lacks: `released`, `last_updated` and `cost.input_audio`. Use it to
+ * fill those for a new model, or to populate the committed fallback offline.
  *
- * It merges the models you name and leaves every other entry untouched. That is
- * the difference that matters: this file routinely holds models and prices that
- * models.dev does not have yet, and a wholesale regenerate would delete them.
+ * It merges the models you name and leaves every other entry untouched, because
+ * this file can hold models that models.dev does not have yet.
  *
  * `--from` takes a local file, so you do not have to wait for an upstream PR to
  * merge and redeploy. Build the resolved catalog from a models.dev checkout with
@@ -58,6 +57,7 @@ const KEY_ORDER = [
   'name',
   'provider',
   'family',
+  'released',
   'attachment',
   'reasoning',
   'reasoning_options',
@@ -229,13 +229,23 @@ async function main() {
 
   const merged = { ...current };
   const noProvider = [];
+  const unreleased = [];
   for (const id of ids) {
     const { model, error } = shape(id, upstream[id]);
     if (error) {
       noProvider.push(error);
       continue;
     }
-    merged[id] = model;
+    // models.dev has no `released`. A re-import keeps the catalog's flag; a model new to the
+    // catalog starts unreleased, because importing it is not announcing it.
+    const isNew = !(id in current);
+    if (isNew) unreleased.push(id);
+    merged[id] = orderKeys({ ...model, released: isNew ? false : current[id].released });
+  }
+  if (unreleased.length) {
+    console.error(
+      `Imported as released: false: ${unreleased.join(', ')}. Set it to true once announced.`
+    );
   }
   if (noProvider.length) {
     console.error(`Could not derive provider for: ${noProvider.join(', ')}`);

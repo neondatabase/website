@@ -8,31 +8,35 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-09-18T17:46:57.332Z'
+  - /docs/functions
+  - /docs/functions/overview
+updatedOn: '2026-10-26T11:09:12.958Z'
+layout: wide
+hideCopyPage: true
 ---
 
-Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
+<div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
-What makes Neon Functions different from lambda-style serverless?
+<div className="[&>div]:my-0!">
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Your own code at an HTTP URL, with no servers to manage, running on your Neon branch right next to your Postgres data.</p>
+<AgentPrompt title="Set up with your agent" src="/prompts/functions-landing.md" buttonText="Copy prompt" />
+</div>
 
-- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
-- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
-- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
-- **Event-driven.** Invoke a function on a cron schedule or an object upload with [Function Triggers](/docs/compute/functions/triggers/overview), no external scheduler.
+<img
+  src="/docs/compute/functions/hero-functions.svg"
+  alt="Your app calls your function, which runs at an HTTP URL, queries the Postgres database next to it, and reaches more of your backend such as Object Storage and AI Gateway."
+  className="not-prose aspect-[364/350] w-full max-w-[320px] object-contain object-top lg:max-w-[420px]"
+/>
 
-Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
-
-> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
-
-<Admonition type="important" title="JavaScript and TypeScript only">
-Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
-</Admonition>
+</div>
 
 ## Get started
 
 <DetailIconCards>
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
+
+<a href="/docs/compute/functions/registry" description="Install reusable functions from the catalog with neon functions new." icon="cli">Function Registry</a>
 
 <a href="/docs/compute/functions/triggers/overview" description="Invoke a function on a cron schedule or an object upload, with no external scheduler." icon="stopwatch">Function Triggers</a>
 
@@ -53,6 +57,25 @@ Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. De
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 
 </DetailIconCards>
+
+## About Neon Functions
+
+Neon Functions put your backend code on a Neon branch, in the same region as your data. Use them for APIs, AI agents, real-time servers, and webhook handlers, with no servers to set up or manage. They're long-running, and branch with your database, so each branch runs its own copy of your functions against its own data.
+
+What makes Neon Functions different from lambda-style serverless?
+
+- **Next to your data.** A function runs in the same region as its branch, so queries reach Postgres with no cross-region hops.
+- **Long-running.** Start responding within 15 minutes, then keep streaming while data flows, so agents and WebSocket/SSE servers aren't cut off by a short execution limit. They're still serverless: idle functions can be evicted (see [Runtime limits](/docs/compute/functions/reference/runtime-limits)).
+- **Branch-scoped.** Functions branch with your project. Each branch runs its own deployment of them, at branch-specific URLs, against that branch's data.
+- **Event-driven.** Invoke a function on a cron schedule or an object upload with [Function Triggers](/docs/compute/functions/triggers/overview), no external scheduler.
+
+Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres.
+
+> Functions are currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use them. Support is expanding toward [all regions](/docs/introduction/regions). Functions are available on any plan, subject to [usage limits](/docs/compute/functions/reference/runtime-limits). See [plans and pricing](/docs/introduction/plans#functions) for rates.
+
+<Admonition type="important" title="JavaScript and TypeScript only">
+Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't currently supported.
+</Admonition>
 
 ## Request/response, not background jobs
 
@@ -95,20 +118,24 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 - **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
 - **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
 
+<Admonition type="note">
+Neon Functions do not support hosting websites.
+</Admonition>
+
 ## Starter templates
 
-Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
+Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). To add one function to an existing project, use the [Function Registry](/docs/compute/functions/registry) (`neon functions new`) instead of bootstrap. See [Function Registry templates](/docs/compute/functions/registry/templates) for what's available.
 
-| Example                  | `--template`        | Source                                                                                              | Neon services                                   | Stack                 |
-| ------------------------ | ------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
-| REST API                 | `hono`              | [with-hono](https://github.com/neondatabase/examples/tree/main/with-hono)                           | Functions, Postgres                             | Hono, Drizzle         |
-| Image-generation agent   | `ai-sdk`            | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)                       | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
-| Personal-assistant agent | `mastra`            | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)                       | Functions, Postgres, AI Gateway                 | Mastra                |
-| MCP server               | `mcp`               | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                             | Functions, Postgres                             | Hono, Drizzle         |
-| Realtime chat            | `realtime-chat`     | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat)         | Functions, Postgres, Managed Better Auth        | Next.js, Hono         |
-| Realtime counter         | `realtime-sse`      | [with-realtime-sse](https://github.com/neondatabase/examples/tree/main/with-realtime-sse)           | Functions, Postgres                             | TanStack Router, Hono |
-| Discord bot              | `discord-bot-http`  | [bots/discord-bot-http](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)   | Functions, Postgres                             | Drizzle               |
-| Telegram bot             | `telegram-bot-http` | [bots/telegram-bot-http](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http) | Functions, Postgres                             | Drizzle               |
-| WhatsApp bot             | `whatsapp-bot-http` | [bots/whatsapp-bot-http](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http) | Functions, Postgres                             | Drizzle               |
+| Example                  | `--template`        | Source                                                                                                                  | Neon services                                   | Stack                 |
+| ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
+| REST API                 | `hono`              | [with-hono](https://github.com/neondatabase/examples/tree/main/with-hono)                                               | Functions, Postgres                             | Hono, Drizzle         |
+| Image-generation agent   | `ai-sdk`            | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)                                           | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
+| Personal-assistant agent | `mastra`            | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)                                           | Functions, Postgres, AI Gateway                 | Mastra                |
+| MCP server               | `mcp`               | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                                                 | Functions, Postgres                             | Hono, Drizzle         |
+| WebSocket chat           | `realtime-chat`     | [with-websockets-function](https://github.com/neondatabase/examples/tree/main/with-websockets-function)                 | Functions, Postgres, Managed Better Auth        | Next.js, Hono         |
+| SSE counter              | `realtime-sse`      | [with-server-sent-events-function](https://github.com/neondatabase/examples/tree/main/with-server-sent-events-function) | Functions, Postgres                             | TanStack Router, Hono |
+| Discord bot              | `discord-bot-http`  | [bots/discord-bot-http](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)                       | Functions, Postgres                             | Drizzle               |
+| Telegram bot             | `telegram-bot-http` | [bots/telegram-bot-http](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http)                     | Functions, Postgres                             | Drizzle               |
+| WhatsApp bot             | `whatsapp-bot-http` | [bots/whatsapp-bot-http](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http)                     | Functions, Postgres                             | Drizzle               |
 
 <NeedHelp/>

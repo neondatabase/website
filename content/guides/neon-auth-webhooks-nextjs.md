@@ -1,25 +1,25 @@
 ---
-title: Customizing Managed Better Auth with Webhooks
-subtitle: Learn how to use Managed Better Auth Webhooks to build custom authentication flows
+title: Customizing Managed Better Auth with webhooks
+subtitle: Learn how to use Managed Better Auth webhooks to build custom authentication flows
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Managed Better Auth offers a fully integrated authentication and user management system designed to work with your Neon database. By default, Managed Better Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
+Managed Better Auth is a managed authentication and user management service that stores its data in your Neon database. By default, it handles common authentication flows and delivers OTPs for email verification and passwordless login.
 
-But every application is different, and you may need to customize how these messages are delivered or add extra logic to your authentication flow. Some common scenarios that go beyond the default Managed Better Auth features include:
+You may need to customize how these messages are delivered or add extra logic to your authentication flow. Common scenarios include:
 
 - **Multi-channel delivery:** Sending OTPs via SMS (e.g., with Twilio) or delivering notifications through WhatsApp or Slack instead of email.
 - **Custom branding:** Using dedicated providers like Resend, SendGrid, or Postmark to design branded HTML email templates.
 - **Localization:** Translating OTP or Magic Link messages dynamically based on the user’s language or region.
 - **Analytics & integrations:** Logging user creation events to a CRM, triggering marketing automations, or syncing with third-party identity providers.
-- **Enhanced validation:** Blocking disposable email domains, IP addresses, or implementing custom fraud detection logic before allowing user sign-ups.
+- **Signup validation:** Blocking disposable email domains, IP addresses, or implementing custom fraud detection logic before allowing user sign-ups.
 
-To support these advanced use cases, Managed Better Auth provides [**Webhooks**](/docs/auth/guides/webhooks). Webhooks let you securely intercept authentication events (such as `send.otp`, `send.magic_link`, and `user.before_create`) and handle them with your own backend logic. For example, when you subscribe to `send.otp`, Managed Better Auth skips its default delivery, leaving your webhook handler in charge of sending the OTP. This gives you full control over the content, delivery method, and any additional side effects you want to implement.
+For these cases, Managed Better Auth provides [**webhooks**](/docs/auth/guides/webhooks). Webhooks let you intercept authentication events (such as `send.otp`, `send.magic_link`, and `user.before_create`) and handle them with your own backend logic. For example, when you subscribe to `send.otp`, Managed Better Auth skips its default delivery, leaving your webhook handler in charge of sending the OTP. You control the content, the delivery method, and any side effects.
 
-This guide walks you through building a custom webhook handler in a Next.js application. You’ll learn how to send OTPs via email using Resend, implement a blocking handler to prevent sign-ups from disposable email providers, and optionally modify the handler to send SMS or WhatsApp messages using Twilio.
+This guide walks through building a custom webhook handler in a Next.js application. You’ll learn how to send OTPs via email using Resend, implement a blocking handler to prevent sign-ups from disposable email providers, and optionally modify the handler to send SMS or WhatsApp messages using Twilio.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Before you begin, ensure you have the following:
 - **Resend account:** To send custom emails. You'll need an [API key](https://resend.com/docs/dashboard/api-keys/introduction). You can use the default `resend.dev` testing domain, or [verify a custom domain](https://resend.com/docs/dashboard/domains/introduction).
 - **ngrok** (or a similar tunneling tool): To test webhooks locally, you will need `ngrok` installed and configured on your machine. See the [ngrok Quickstart](https://ngrok.com/docs/getting-started/) to sign up, install the CLI, and authenticate with your auth token.
 
-Review the [Managed Better Auth Webhooks Reference](/docs/auth/guides/webhooks) for complete event payload fields, required response formats, retry behavior, and signature verification details.
+See the [Managed Better Auth webhooks reference](/docs/auth/guides/webhooks) for complete event payload fields, required response formats, retry behavior, and signature verification details.
 
 <Steps>
 
@@ -39,13 +39,13 @@ Review the [Managed Better Auth Webhooks Reference](/docs/auth/guides/webhooks) 
 You'll need a Neon project with Auth enabled to generate webhook events.
 
 1. **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `neon-webhooks-demo`.
-2. **Enable Managed Better Auth:**
+2. **Enable Auth:**
    - In your project's dashboard, go to the **Auth** tab.
-   - Click on the **Enable Managed Better Auth** button to set up authentication for your project.
+   - Click **Enable Auth** to set up authentication for your project.
 3. **Copy your credentials:**
-   - **Managed Better Auth URL:** Found on the **Auth** page under Configuration.
+   - **Managed Better Auth URL:** Found on the **Configuration** tab of the **Auth** page.
      ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
-   - **Neon API Key:** Generate an API key from your Settings in the Neon Console. You will need this to register your webhook.
+   - **Neon API key:** Create an API key in the Neon Console (see [Creating API keys](/docs/manage/api-keys#creating-api-keys)). You'll need it to register your webhook.
      ![Neon API Key](/docs/manage/org_api_keys.png)
    - **Neon Project ID**: Found in your project settings.
    - **Neon Branch ID**: Found in the Branches section of your project. Click on the branch you are using (e.g., `production`) to find the Branch ID.
@@ -68,7 +68,7 @@ npm install @neondatabase/auth@latest @neondatabase/auth-ui @neondatabase/neon-j
 ## Configure environment variables
 
 Create a `.env.local` file in the root of your project. Add your API keys and Managed Better Auth details.
-Generate a secure random string for `NEON_AUTH_COOKIE_SECRET` (at least 32 characters). For example, you can use `openssl rand -base64 32` to generate a secure secret.
+Generate a random string of at least 32 characters for `NEON_AUTH_COOKIE_SECRET`. For example, run `openssl rand -base64 32`.
 
 ```bash
 # Neon configuration
@@ -108,7 +108,7 @@ Set up the Managed Better Auth SDK to handle user sessions, API routing, and the
     export const authClient = createAuthClient();
     ```
 
-3.  **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to your Neon database:
+3.  **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to the Managed Better Auth service:
 
     ```typescript shouldWrap
     import { auth } from '@/lib/auth/server';
@@ -166,7 +166,7 @@ Set up the Managed Better Auth SDK to handle user sessions, API routing, and the
     }
     ```
 
-7.  **Create the Main page:** Overwrite `app/page.tsx` with a simple app that shows a "Logged In" state or a link to sign up.
+7.  **Create the main page:** Overwrite `app/page.tsx` with a simple app that shows a "Logged In" state or a link to sign up.
 
     ```tsx shouldWrap
     'use client';
@@ -207,7 +207,7 @@ Set up the Managed Better Auth SDK to handle user sessions, API routing, and the
 
 ### Implement webhook signature verification
 
-Now, build the webhook functionality. Managed Better Auth uses EdDSA (Ed25519) signatures with detached JWS to secure webhook payloads. You must verify these signatures so bad actors cannot fake authentication events.
+Next, build the webhook functionality. Managed Better Auth uses EdDSA (Ed25519) signatures with detached JWS to secure webhook payloads. Verify these signatures so no one can forge authentication events.
 
 Create `lib/neon-webhook.ts`:
 
@@ -378,7 +378,7 @@ The above code does the following:
 - For `send.otp` events, it sends a custom OTP email using Resend.
 - For `send.magic_link` events, it sends a custom sign-in or password reset link email using Resend.
 - For `user.before_create` events, it checks if the email domain is in a blocked list and returns a response to allow or deny the signup accordingly.
-- Logs when a user is fully created (which can be useful for analytics or triggering other side effects).
+- For `user.created` events, logs the new user, which you can extend for analytics or other side effects.
 
 ## Expose and register the webhook
 
@@ -394,7 +394,7 @@ Managed Better Auth requires a public HTTPS URL to deliver webhooks. Use **ngrok
    ```
    _Note the forwarding URL provided by ngrok (e.g., `https://a1b2c3d4.ngrok.app`)._
 
-Now, register this webhook URL with Managed Better Auth using the Neon API. Run the following `curl` command, replacing the placeholders with your API Key, Project ID, Branch ID, and your ngrok URL:
+Next, register this webhook URL with Managed Better Auth using the Neon API. You can also do this in the Neon Console under **Auth** > **Configuration** > **Webhooks**. Run the following `curl` command, replacing the placeholders with your API Key, Project ID, Branch ID, and your ngrok URL:
 
 ```bash shouldWrap
 curl -X PUT "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches/$NEON_BRANCH_ID/auth/webhooks" \
@@ -407,7 +407,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches
   }'
 ```
 
-If successful, Managed Better Auth will return your updated configuration in a JSON response.
+If successful, the API returns your updated configuration as JSON.
 
 ```json
 {
@@ -420,24 +420,24 @@ If successful, Managed Better Auth will return your updated configuration in a J
 
 ## Test the complete flow
 
-With the webhook active and your Next.js app running, you can now test the entire authentication flow, including the blocking logic and custom OTP/magic link delivery.
+With the webhook active and your Next.js app running, test the full authentication flow, including the blocking logic and custom OTP/magic link delivery.
 
-1. **Test the Blocking Logic:**
+1. **Test the blocking logic:**
    - Open your browser to `http://localhost:3000`.
    - In the Sign Up form, try to register with `testuser@spam.com` and a random password.
    - **Result:** Managed Better Auth halts the signup. The UI immediately displays the error you defined in your webhook: _"Signups from this domain are not allowed. Please use a work email."_
      ![Blocked Signup](/docs/guides/neon-auth-webhooks-nextjs-blocked-signup.png)
 
-2. **Test the Custom OTP and Magic Link Delivery:**
-   - Signup using a valid email.
+2. **Test custom OTP and magic link delivery:**
+   - Sign up using a valid email.
    - Sign out and either click on "Sign In with Email Code" or click "Forgot your password?".
    - **Result:** Instead of receiving a default email from Neon, you receive your custom Resend email. OTP flows trigger `send.otp`, and if you choose "Send reset link" in password reset, Neon triggers `send.magic_link` and your webhook delivers the custom link email.
 
 </Steps>
 
-## Optional: Sending OTPs via SMS
+## Optional: Send OTPs via SMS
 
-While the example above handles email deliveries, you might want to send your OTPs via SMS or WhatsApp. The logic is simple to modify.
+The example above delivers email. To send OTPs via SMS or WhatsApp instead, change the delivery code in the handler.
 
 First, install the Twilio SDK in your project:
 
@@ -462,18 +462,18 @@ async function handleSendOtp(eventData: any, user: any) {
 }
 ```
 
-In a similar way, you could integrate WhatsApp messaging or other channels supported by Twilio or your chosen provider. You can also log these events to a CRM or analytics platform to track user engagement with your authentication flows.
+You can integrate WhatsApp or other channels supported by Twilio or your chosen provider the same way, and log these events to a CRM or analytics platform.
 
-## Deploying to production
+## Deploy to production
 
-When you are ready to take your application live:
+When you're ready to go live:
 
 1. Deploy your app to a hosting platform like Vercel, Netlify, or AWS.
 2. Ensure you configure your environment variables (`RESEND_API_KEY`, `NEON_AUTH_COOKIE_SECRET`, etc.) in your hosting provider's dashboard.
-3. Update your webhook URL in Managed Better Auth. Run the `curl` command from [Step 8](#expose-and-register-the-webhook) again, replacing the ngrok URL with your new production URL (e.g., `https://yourdomain.com/api/webhooks/neon`).
+3. Update your webhook URL in Managed Better Auth. Run the `curl` command from [Expose and register the webhook](#expose-and-register-the-webhook) again, replacing the ngrok URL with your new production URL (e.g., `https://yourdomain.com/api/webhooks/neon`).
 
 <Admonition type="important">
-**Fail-Closed Behavior:** The `user.before_create` event is a blocking event. If your webhook endpoint goes down or returns a 500 error in production, **all new sign-ups will fail**. Consider returning `200 OK` as quickly as possible to prevent timeouts under heavy load.
+**Fail-closed behavior:** The `user.before_create` event is a blocking event. If your webhook endpoint goes down or keeps returning errors in production, **all new sign-ups fail**. Blocking deliveries get up to 3 attempts (1 initial plus 2 retries) within a 15-second global timeout, so keep response times well under your configured `timeout_seconds`. For non-blocking events like `user.created`, return `200 OK` immediately and process the event asynchronously.
 </Admonition>
 
 ## Source code
@@ -481,11 +481,11 @@ When you are ready to take your application live:
 The complete source code for a Next.js application implementing these webhooks is available on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/neon-webhooks-demo" description="Complete source code for handling Managed Better Auth Webhooks using Next.js and Resend." icon="github">Managed Better Auth Webhooks Next.js Demo</a>
+<a href="https://github.com/dhanushreddy291/neon-webhooks-demo" description="Complete source code for handling Managed Better Auth Webhooks using Next.js and Resend." icon="github">Managed Better Auth webhooks Next.js demo</a>
 </DetailIconCards>
 
 ## Resources
 
-- [Managed Better Auth Webhooks Reference](/docs/auth/guides/webhooks)
+- [Managed Better Auth webhooks reference](/docs/auth/guides/webhooks)
 - [Managed Better Auth UI components](/docs/auth/reference/ui-components)
-- [Resend Documentation](https://resend.com/docs)
+- [Resend documentation](https://resend.com/docs)

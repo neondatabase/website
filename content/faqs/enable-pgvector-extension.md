@@ -3,7 +3,7 @@ title: 'How do I enable the pgvector extension in my Neon database?'
 subtitle: 'Run CREATE EXTENSION vector once and start storing embeddings.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: export-database-sql-file
 ---
 
-Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. That's the whole install step. `pgvector` is available on every Neon plan with no add-on required. You can run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), psql, or any Postgres client. See [The pgvector extension](/docs/extensions/pgvector) for distance operators, index types, and supported vector types.
+Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. There's nothing else to install, and `pgvector` is available on every Neon plan with no add-on required. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), psql, or any Postgres client. See [The pgvector extension](/docs/extensions/pgvector) for distance operators, index types, and supported vector types.
 
 ## Enable the extension
 
@@ -22,7 +22,7 @@ Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. That'
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
-Run it once per database. The extension is installed per database, not per project, so if you have multiple databases on a branch you need to enable it in each one.
+Extensions are installed per database, not per project, so if you have several databases on a branch, run it in each one where you want to store vectors.
 
 To confirm it's installed and check the version:
 
@@ -32,7 +32,7 @@ FROM pg_extension
 WHERE extname = 'vector';
 ```
 
-Neon also lets you install the previous supported version (one back from the latest). Check the [Postgres extensions page](/docs/extensions/pg-extensions) for the current latest on your Postgres major, then pass that prior version explicitly if you need it:
+Neon also lets you install the version one back from the latest supported release. Check the [Postgres extensions page](/docs/extensions/pg-extensions) for the latest version on your Postgres major version, then pass the prior version explicitly:
 
 ```sql
 CREATE EXTENSION vector VERSION '<prior_version>';
@@ -58,16 +58,16 @@ LIMIT 5;
 
 `<->` is L2 distance. `pgvector` also supports `<#>` (negative inner product), `<=>` (cosine distance), and `<+>` (L1 distance).
 
-For production-sized datasets, add an approximate index. HNSW is a good default; it doesn't need a training step and has the better speed-recall tradeoff:
+Without an index, `pgvector` runs an exact nearest-neighbor scan. For larger tables, add an approximate index. Compared with IVFFlat, HNSW has a better speed-recall tradeoff and needs no training step, so you can create it on an empty table. It builds more slowly and uses more memory. This index matches the L2 query above:
 
 ```sql
-CREATE INDEX ON items USING hnsw (embedding vector_cosine_ops);
+CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
 ```
 
-Match the operator class (`vector_cosine_ops`, `vector_l2_ops`, `vector_ip_ops`, and so on) to the distance function you query with.
+The operator class has to match the distance operator you query with: `vector_l2_ops` for `<->`, `vector_ip_ops` for `<#>`, `vector_cosine_ops` for `<=>`, and `vector_l1_ops` for `<+>`. Otherwise the planner won't use the index.
 
 <Admonition type="tip" title="Sizing index builds">
-HNSW index builds are much faster when the graph fits in `maintenance_work_mem`. For larger datasets, bump it for the session: `SET maintenance_work_mem = '4 GB';`. Keep it under 50 to 60 percent of your compute's RAM. See [HNSW index build time](/docs/extensions/pgvector#hnsw-index-build-time).
+HNSW indexes build much faster when the graph fits in `maintenance_work_mem`. You can raise it for the session, for example `SET maintenance_work_mem = '4 GB';` on a 4 CU (≈16 GB RAM) compute. Keep it under 50 to 60 percent of your compute's RAM. See [HNSW index build time](/docs/extensions/pgvector#hnsw-index-build-time).
 </Admonition>
 
 <CTA title="Tune pgvector for production" description="Walk through HNSW vs IVFFlat, vector types (halfvec, bit, sparsevec), and query tuning for similarity search." buttonText="Read the pgvector docs" buttonUrl="/docs/extensions/pgvector" />

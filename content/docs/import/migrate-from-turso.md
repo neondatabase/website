@@ -8,10 +8,10 @@ summary: >-
   SQLite; it also covers swapping Turso drivers for the Neon serverless driver,
   translating `?` placeholders to `$1` parameters, adapting dialect differences
   like LIKE vs ILIKE, and verifying sequences after migration. Neon's Free plan
-  supports up to 0.5 GB; larger Turso databases require a paid Neon plan.
+  supports up to 1 GB; larger Turso databases require a paid Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-09-16T19:45:35.340Z'
+updatedOn: '2026-09-29T17:10:40.931Z'
 ---
 
 This guide describes how to migrate your Turso database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -26,7 +26,7 @@ Before you begin, ensure you have the following:
 - A database created in your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - The [Turso CLI](https://docs.turso.tech/cli/introduction) installed. You'll use it to export your database.
 - The `sqlite3` command-line tool, typically pre-installed on macOS and Linux.
-- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 1 GB of data. If your data size is more than 1 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities and type mappings, which will be helpful for understanding the migration process.
 

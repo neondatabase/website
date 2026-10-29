@@ -1,15 +1,15 @@
 ---
-title: Building a Simple Real-Time Search with Laravel, Livewire, and Neon
-subtitle: Learn how to integrate Laravel with Postgres on Neon, using Laravel's Eloquent ORM and migrations for efficient database management.
+title: Building a simple real-time search with Laravel, Livewire, and Neon
+subtitle: Build a real-time product search with Laravel, Livewire, and Postgres on Neon, using Eloquent and Laravel migrations.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-29T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Laravel is a PHP framework known for its expressive syntax and large ecosystem. Livewire, a full-stack framework for Laravel, allows us to build dynamic interfaces with minimal JavaScript. Together, they provide a solid foundation for creating interactive web applications.
+Laravel is a PHP framework known for its expressive syntax and large ecosystem. Livewire, a full-stack framework for Laravel, lets you build dynamic interfaces with minimal JavaScript.
 
-In this guide, we'll build a simple real-time search feature using Laravel, Livewire, and Neon. We'll set up a Laravel project, create a database schema, implement the search functionality with Livewire, and optimize performance with Neon. By the end of this tutorial, you'll have a working real-time search feature built on Laravel, Livewire, and Neon.
+In this guide, we'll build a simple real-time search feature using Laravel, Livewire, and Neon. We'll set up a Laravel project, create a database schema, implement the search functionality with Livewire, and add an index to the Postgres table.
 
 ## Prerequisites
 
@@ -21,11 +21,11 @@ Before we begin, you will need to have the following:
 - A [Neon](https://console.neon.tech/signup) account
 - Basic knowledge of Laravel, Livewire, and Tailwind CSS
 
-## Setting up the Project
+## Setting up the project
 
 Before building the search functionality, let's set up a new Laravel project and configure the necessary components.
 
-### Creating a New Laravel Project
+### Creating a new Laravel project
 
 Open your terminal and run the following command to create a new Laravel project:
 
@@ -34,9 +34,9 @@ composer create-project laravel/laravel real-time-search
 cd real-time-search
 ```
 
-This command will create a new Laravel project in a directory named `real-time-search`. Navigate to the project directory to continue with the setup.
+This command creates a new Laravel project in a directory named `real-time-search` and moves into it.
 
-### Installing and Configuring Livewire
+### Installing and configuring Livewire
 
 Now that we have a Laravel project, let's install Livewire:
 
@@ -55,7 +55,7 @@ npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 npx tailwindcss init -p
 ```
 
-Update your `tailwind.config.js` file to include Laravel and Livewire specific paths:
+Update your `tailwind.config.js` file to include Laravel and Livewire-specific paths:
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
@@ -68,9 +68,7 @@ export default {
 };
 ```
 
-The above configuration tells Tailwind to scan the specified files in the `resources` directory for classes to include in the compiled CSS.
-
-This approach ensures that Tailwind's utility classes are available in your Laravel views and Livewire components and keeps your CSS bundle size minimal.
+The above configuration tells Tailwind to scan the specified files in the `resources` directory for classes to include in the compiled CSS. Your Laravel views and Livewire components get Tailwind's utility classes, and unused classes stay out of the CSS bundle.
 
 Next, add the `@tailwind` directives to your `resources/css/app.css` file:
 
@@ -88,9 +86,9 @@ npm run dev
 
 Leave the Vite development server running in the background to compile your assets and proceed with the next steps.
 
-### Connecting to Neon Database
+### Connecting to your Neon database
 
-To connect your Laravel application to your Neon database, update your `.env` file with the Neon database credentials:
+To connect your Laravel application to your Neon database, update your `.env` file with your database credentials. You can find them by clicking **Connect** on your project dashboard in the [Neon Console](https://console.neon.tech):
 
 ```env
 DB_CONNECTION=pgsql
@@ -103,11 +101,11 @@ DB_PASSWORD=your_password
 
 Make sure to replace the placeholders with your actual Neon database details.
 
-## Building the Search Functionality
+## Building the search functionality
 
 Now that our project is set up, let's build the search functionality. We'll create a simple product search feature that filters products based on their name and description.
 
-### Creating the Database Schema
+### Creating the database schema
 
 We'll create a simple `products` table for this example. Run the following command to create a migration:
 
@@ -138,9 +136,9 @@ Run the migration to create the `products` table in your database:
 php artisan migrate
 ```
 
-### Seeding Sample Data
+### Seeding sample data
 
-Laravel provides a convenient way to seed your database with sample data. Let's create some sample data. Create a new seeder:
+Laravel includes seeders for populating your database with sample data. Create a new seeder:
 
 ```bash
 php artisan make:seeder ProductSeeder
@@ -213,7 +211,7 @@ php artisan db:seed
 
 This command will insert the sample products into the `products` table so we can test our search functionality. Note that the `db:seed` command will run all seeders by default, and if you run it multiple times, it will insert duplicate records.
 
-### Implementing the Livewire Component
+### Implementing the Livewire component
 
 Next, let's create a Livewire component for our search functionality. Run the following command to generate a new Livewire component:
 
@@ -257,8 +255,8 @@ Rundown of the code above:
 
 - We start by defining a `$search` property that will be bound to the search input, and a `render` method that fetches products based on the search query.
 - The `render` method queries the `products` table for records that match the search query in the `name` or `description` columns.
-- We're using a simple `ILIKE` query to perform a case-insensitive search. You can customize the search logic based on your requirements.
-- Next we get all matching products using the `get` method and pass them to the view. Alternatively, you can paginate the results for better performance using Laravel's `paginate` method.
+- We're using a `LIKE` query, which is case-sensitive in Postgres. For a case-insensitive search, use `ilike` instead. You can customize the search logic based on your requirements.
+- Next we get all matching products using the `get` method and pass them to the view. For larger result sets, you can paginate with Laravel's `paginate` method instead.
 - The `render` method returns the view `livewire.product-search` along with the `$products` variable.
 
 Once you've updated the component class, let's create the view for this component. Open `resources/views/livewire/product-search.blade.php` and add the following content:
@@ -292,11 +290,11 @@ Once you've updated the component class, let's create the view for this componen
 
 This view includes an input field for the search query and a grid to display the search results.
 
-The `wire:model.live.debounce.300ms` attribute on the input field binds it to the `$search` property in our Livewire component, with a300ms debounce to reduce the number of database queries triggered by user input changes.
+The `wire:model.live.debounce.300ms` attribute on the input field binds it to the `$search` property in our Livewire component, with a 300ms debounce to reduce the number of database queries triggered by user input changes.
 
 Using the `@forelse` directive, we loop through the `$products` collection and display each product's name, description, and price. If no products match the search query, we display a message indicating that no products were found.
 
-### Updating the Layout
+### Updating the layout
 
 To use our new component, let's update the main layout. Open `resources/views/welcome.blade.php` and replace its content with:
 
@@ -328,13 +326,9 @@ After updating the layout, make sure that your Vite development server is still 
 npm run dev
 ```
 
-## Optimizing Search Performance with Neon
+## Adding an index
 
-To optimize our search performance, we can use Postgres indexes on Neon.
-
-Indexing the `name` and `description` columns will speed up search queries by allowing the database to quickly locate matching records.
-
-Let's create an index on the `name` and `description` columns of our `products` table.
+Postgres indexes let the database locate matching records without scanning the whole table. Let's create an index on the `name` and `description` columns of our `products` table.
 
 Create a new migration:
 
@@ -366,11 +360,11 @@ Run the migration:
 php artisan migrate
 ```
 
-This index will significantly improve the performance of our search queries, especially as the number of products grows.
+This is a standard B-tree index. It helps equality and prefix searches (`LIKE 'term%'`), but not the `%term%` pattern the component uses, because of the leading wildcard. For substring search on larger tables, consider a trigram index with the [pg_trgm](/docs/extensions/pg_trgm) extension.
 
-## Testing the Search Functionality
+## Testing the search functionality
 
-To ensure our search functionality works as expected, let's write a simple test. Run the following command to create a test file:
+To check that the search works as expected, let's write a simple test. Run the following command to create a test file:
 
 ```bash
 php artisan make:test ProductSearchTest
@@ -406,9 +400,9 @@ class ProductSearchTest extends TestCase
 }
 ```
 
-This test creates two products and then checks if the search functionality correctly filters the results.
+This test sets the search term to `Laptop` and checks that the component shows matching products and filters out the rest. It relies on the seeded data.
 
-> Make sure to only use the `RefreshDatabase` trait when running tests to avoid modifying your production database during testing.
+> The `RefreshDatabase` trait resets the database between tests, so never enable it against your production database. Point your tests at a separate database or a Neon branch instead.
 
 Run the test with:
 
@@ -416,27 +410,23 @@ Run the test with:
 php artisan test
 ```
 
-To learn more about testing in Laravel along with Neon branding, check out the [Testing Laravel Applications with Neon's Database Branching](/guides/laravel-test-on-branch).
+To learn more about testing Laravel with Neon branching, see [Testing Laravel applications with Neon's database branching](/guides/laravel-test-on-branch).
 
 ## Conclusion
 
-In this tutorial, we've built a real-time search feature using Laravel, Livewire, and Neon. We used Livewire's real-time capabilities to create a responsive search component, and Neon's Postgres to keep queries fast.
-
-This implementation provides a solid foundation for a search feature, but there are always ways to enhance and expand its functionality:
+You built a real-time product search with a Livewire component that queries a Postgres database on Neon as the user types. Some ways to extend it:
 
 - Implement pagination for large result sets
 - Add filters for more refined searches
-- Incorporate full-text search capabilities for more accurate results
-- Implement caching to further improve performance
-- Use [Laravel Scout](https://laravel.com/docs/11.x/scout) for full-text search capabilities
+- Use Postgres full-text search for more accurate results
+- Add caching to reduce database queries
+- Use [Laravel Scout](https://laravel.com/docs/11.x/scout) for full-text search
 
-By combining Laravel, Livewire, and Neon, you can create dynamic and responsive web applications that meet your users' needs.
+## Additional resources
 
-## Additional Resources
-
-- [Laravel Documentation](https://laravel.com/docs)
-- [Livewire Documentation](https://laravel-livewire.com/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Neon Documentation](/docs)
+- [Laravel documentation](https://laravel.com/docs)
+- [Livewire documentation](https://livewire.laravel.com/docs)
+- [Tailwind CSS documentation](https://tailwindcss.com/docs)
+- [Neon documentation](/docs)
 
 <NeedHelp />

@@ -39,14 +39,15 @@ const Post = ({
     tag = null,
     tagTheme = 'gray',
     layout = null,
+    titleWidth = null,
     contentLayout = null,
+    hideCopyPage = false,
   },
   content,
   breadcrumbs,
   breadcrumbsBaseUrl = DOCS_BASE_PATH,
   navigationLinks: { previousLink, nextLink },
   navigationLinksBasePath = DOCS_BASE_PATH,
-  isDocsIndex = false,
   isChangelog = false,
   isPostgres = false,
   changelogPosts = [],
@@ -56,6 +57,7 @@ const Post = ({
   tableOfContents,
   author,
   aboveContent = null,
+  titleLeading = null,
   isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
@@ -67,6 +69,19 @@ const Post = ({
 
   // Check if split content layout is enabled (2-column grid for SDK reference style)
   const isSplitLayout = contentLayout === 'split';
+
+  const heading = (
+    <h1
+      className={cn(
+        eyebrow
+          ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
+          : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
+        tag && 'inline'
+      )}
+    >
+      {title}
+    </h1>
+  );
 
   return (
     <>
@@ -92,9 +107,11 @@ const Post = ({
           <article>
             {isFaq ? (
               <>
-                <div className="mb-5 flex justify-end sm:mb-3">
-                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
-                </div>
+                {!hideCopyPage && (
+                  <div className="mb-5 flex justify-end sm:mb-3">
+                    <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                  </div>
+                )}
                 <div>
                   <h1
                     className={cn(
@@ -120,7 +137,8 @@ const Post = ({
                   className={cn(
                     !isChangelog && 'max-w-xl 2xl:max-w-[520px]',
                     !isChangelog && isWideLayout && 'max-w-[860px]! 2xl:max-w-[860px]!',
-                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!'
+                    eyebrow && 'max-w-[1100px]! 2xl:max-w-[1100px]!',
+                    titleWidth === '530' && '2xl:max-w-[530px]! xl:max-w-[700px]!'
                   )}
                 >
                   {eyebrow && (
@@ -128,16 +146,14 @@ const Post = ({
                       {eyebrow}
                     </div>
                   )}
-                  <h1
-                    className={cn(
-                      eyebrow
-                        ? 'text-[40px]! leading-[1.15]! font-semibold! tracking-tight text-balance md:text-[28px]!'
-                        : 'text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]',
-                      tag && 'inline'
-                    )}
-                  >
-                    {title}
-                  </h1>
+                  {titleLeading ? (
+                    <div className="flex items-center gap-3">
+                      {titleLeading}
+                      {heading}
+                    </div>
+                  ) : (
+                    heading
+                  )}
                   {tag && (
                     <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
                   )}
@@ -153,7 +169,7 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && (
+                {!isChangelog && !hideCopyPage && (
                   <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 )}
               </div>
@@ -166,11 +182,11 @@ const Post = ({
             />
           </article>
         )}
-        {!isDocsIndex && <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />}
+        <DocFooter slug={currentSlug} gitHubPath={gitHubPath} />
 
         {!isChangelog && (
           <NavigationLinks
-            className={cn(isDocsIndex ? 'mt-14' : 'mt-6')}
+            className="mt-6"
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}
@@ -178,11 +194,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
-      {!isDocsIndex && !isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
           className="ml-0! w-78 shrink-0 xl:hidden"
-          isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
@@ -205,7 +220,9 @@ Post.propTypes = {
     tagTheme: PropTypes.string,
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
+    titleWidth: PropTypes.oneOf(['530', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
+    hideCopyPage: PropTypes.bool,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
@@ -217,7 +234,6 @@ Post.propTypes = {
   navigationLinksBasePath: PropTypes.string,
   isChangelog: PropTypes.bool,
   isPostgres: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
@@ -240,6 +256,7 @@ Post.propTypes = {
     photo: PropTypes.string,
   }),
   aboveContent: PropTypes.node,
+  titleLeading: PropTypes.node,
   isFaq: PropTypes.bool,
   className: PropTypes.string,
 };

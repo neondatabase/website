@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?"
-description: "Create a Neon branch from production, attach a read-only role or read replica, and hand a contractor a connection string without granting production access."
+description: "Create a Neon branch from production, add a read-only role or read replica, and hand a contractor a connection string without granting production access."
 date: 2026-04-25
 slug: postgres-services-share-read-only-database-snapshot
 category: FAQ
@@ -13,43 +13,49 @@ nextLink:
   slug: postgres-services-terraform-pulumi-infrastructure-as-code
 ---
 
-Create a branch from your production database, attach a fresh role, and hand the contractor a connection string. They get a live, queryable copy. They can't touch production, and their queries don't compete for production's compute.
+Create a branch from your production database, add a read-only role on that branch, and give the contractor its connection string. They get a live, queryable copy of the data. They can't reach production, and their queries run on the branch's own compute, not production's.
 
 ## How the branch works
 
-A Neon branch is a full copy of your database at a point in time. It shares storage with the parent until either side writes, so creation takes a few seconds and adds no storage cost up front.
+A Neon branch is a full copy of its parent's data at a point in time. It shares storage with the parent until either side writes, so creating one takes seconds and adds no storage up front.
 
-You can spin one up from the CLI:
+Create one with the CLI. Without `--parent`, the branch comes from your project's default branch:
 
 ```bash
-neon branches create --name contractor-review --parent main
-neon roles create --name contractor --branch contractor-review
-neon connection-string contractor-review --role-name contractor
+neon branches create --name contractor-review
 ```
 
-The returned `postgresql://` connection string works with psql, DBeaver, DataGrip, Metabase, Tableau, or anything else that speaks the Postgres wire protocol.
+Changes on production after that point don't appear on the branch. To refresh it later, [reset it from its parent](/docs/guides/reset-from-parent).
 
 ## Make it read-only
 
-Two ways to lock the branch to reads:
-
-1. **Use a read replica endpoint.** Read replicas run on a separate compute that reads from the same storage. They can't write. The contractor connects to the replica endpoint, and your primary compute is unaffected by their workload.
-
-2. **`REVOKE` write privileges on the role.** Standard Postgres role management applies.
+Roles you create with the Neon Console, CLI, or API are members of `neon_superuser`, which includes `pg_write_all_data` and `BYPASSRLS`. Don't hand one of those to a contractor. Instead, connect to the branch as your owner role and [create a limited role with SQL](/docs/manage/database-access#create-a-read-only-role):
 
 ```sql
-REVOKE INSERT, UPDATE, DELETE, TRUNCATE ON ALL TABLES IN SCHEMA public FROM contractor;
+CREATE ROLE contractor WITH LOGIN PASSWORD '<password>';
+GRANT CONNECT ON DATABASE dbname TO contractor;
+GRANT USAGE ON SCHEMA public TO contractor;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO contractor;
 ```
 
+Roles created with SQL don't get `neon_superuser` membership, so this role can only read the tables you grant. The password needs at least 60 bits of entropy ([password rules](/docs/manage/roles#manage-roles-with-sql)). Because you set it in SQL, build the connection string yourself from the branch's hostname:
+
+```text
+postgresql://contractor:[password]@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
+
+For a second guard, add a [read replica](/docs/introduction/read-replicas) to the branch and give the contractor the replica's hostname. A read replica compute can't write, whatever the role allows, and it supports autoscaling and scale to zero like any other compute. The Free plan allows up to 3 read replica computes per project.
+
+The string works with psql, DBeaver, DataGrip, Metabase, Tableau, and other Postgres clients.
+
 <Admonition type="tip" title="Set an expiry">
-On paid plans, you can set a [time-to-live](https://neon.com/docs/guides/branch-expiration) on the branch so it auto-deletes when the engagement ends. Combine with [protected branches](https://neon.com/docs/guides/protected-branches) on the production root so nobody can accidentally restore over it.
+Set a [branch expiration](/docs/guides/branch-expiration) so the branch deletes itself when the engagement ends. On paid plans, mark your production branch as [protected](/docs/guides/protected-branches) so it can't be deleted or reset.
 </Admonition>
 
 ## What this costs
 
-A child branch is billed on the minimum of accumulated changes or the logical data size, at $0.35/GB-month. If the contractor only reads, that's effectively zero storage delta on the child. The parent branch's storage continues to bill as usual. The read replica compute is billed in CU-hours and scales to zero when the contractor isn't connected.
+A child branch is billed on the lower of its accumulated changes or its logical data size, at $0.35/GB-month. If the contractor only reads, the branch writes almost nothing, so its storage cost stays near zero. The parent's storage bills as usual.
 
-Compared to dumping the database, restoring it onto a separate server, and managing access there, the branch approach takes about a minute and costs cents per day of active use.
+Compute on the branch or its read replica bills in CU-hours and scales to zero when the contractor isn't connected. On the Launch plan, a 0.25 CU compute running for 8 hours a day costs about $0.21 per day.
 
 <CTA title="Try branching for contractor handoffs" description="Sign up free and create your first read-only review branch in under a minute." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

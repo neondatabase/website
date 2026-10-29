@@ -4,33 +4,33 @@ subtitle: A step-by-step guide to integrating feature flags in SvelteKit apps wi
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-24T13:24:36.612Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-This guide covers the step-by-step process of integrating feature flags in SvelteKit apps with Postgres (powered by Neon). Feature flags provide a way to control the behavior of your application without deploying new code, allowing you to test and roll out new features dynamically. Upon completing the guide, you will understand how to manage and roll out new features using dynamic feature flag integration.
+This guide walks through adding feature flags to a SvelteKit app, with the flags stored in a Postgres database on Neon. Feature flags let you change your application's behavior without deploying new code, so you can test and roll out new features gradually.
 
 ## Prerequisites
 
 To follow the steps in this guide, you will need the following:
 
 - [Node.js 18](https://nodejs.org/en/blog/announcements/v18-release-announce) or later
-- A [Neon](https://console.neon.tech/signup) account – The feature flags will be defined (or mutated) in a Postgres database
+- A [Neon](https://console.neon.tech/signup) account. The feature flags are defined (and updated) in a Postgres database.
 
 ## Steps
 
-- [Provisioning a Postgres database powered by Neon](#provisioning-a-postgres-database-powered-by-neon)
+- [Provisioning a Postgres database on Neon](#provisioning-a-postgres-database-on-neon)
 - [Creating a new SvelteKit application](#creating-a-new-sveltekit-application)
 - [(Optional) Adding Tailwind CSS to the application](#optional-adding-tailwind-css-to-the-application)
-- [Managing Feature Flags in Serverless Postgres](#managing-feature-flags-in-serverless-postgres)
-- [Dynamic Feature Flag Integration for Testing Fast Payment Methods](#dynamic-feature-flag-integration-for-testing-fast-payment-methods)
+- [Managing feature flags in Postgres](#managing-feature-flags-in-postgres)
+- [Dynamic feature flag integration for testing fast payment methods](#dynamic-feature-flag-integration-for-testing-fast-payment-methods)
 
-## Provisioning a Postgres database powered by Neon
+## Provisioning a Postgres database on Neon
 
-Using Serverless Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
+Lakebase Postgres scales compute down to zero when idle, so you don't pay for compute while the database isn't in use (storage still bills).
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
-You will then be presented with a dialog that provides a connecting string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
+You'll then see a dialog with your database connection string. Enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/feature-flags-sveltekit/index.png)
 
@@ -42,12 +42,12 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 
 - `user` is the database user.
 - `password` is the database user’s password.
-- `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
+- `endpoint_hostname` is the host, which ends in `neon.tech`.
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require&channel_binding=require` optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding while connecting to the Postgres instance for better security.
+- `?sslmode=require&channel_binding=require` are query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) and channel binding when connecting to the database.
 
-Save this connecting string somewhere safe to be used as the `DATABASE_URL` further in the guide. Proceed further in this guide to create a SvelteKit application.
+Save this connection string somewhere safe. You'll use it as `DATABASE_URL` later in the guide.
 
 ## Creating a new SvelteKit application
 
@@ -60,7 +60,7 @@ npm create svelte@latest my-app
 When prompted, choose:
 
 - `Skeleton project` for **Which Svelte app template?**
-- `Yes, using Typescript syntax` for **Add type checking with Typescript?**
+- `Yes, using TypeScript syntax` for **Add type checking with TypeScript?**
 
 Press **Enter** to proceed. Now, follow the instructions to install the dependencies and start the development server:
 
@@ -68,9 +68,9 @@ Press **Enter** to proceed. Now, follow the instructions to install the dependen
 npm run dev
 ```
 
-The app now should be running on [localhost:5173](http://localhost:5173).
+The app should now be running on [localhost:5173](http://localhost:5173).
 
-> Note: According to an [advanced SvelteKit guide](https://kit.svelte.dev/docs/server-only-modules), using `.server` in the filename allows you to mark the code to be executed on server only.
+> Note: Per the [SvelteKit docs on server-only modules](https://kit.svelte.dev/docs/server-only-modules), adding `.server` to a filename marks the code as server-only.
 
 Next, run the commands below to install the necessary libraries and packages for building the application:
 
@@ -162,13 +162,13 @@ Finally, add an import to `app.css` in your `+page.svelte` file:
 <!-- +page.svelte's HTML -->
 ```
 
-## Managing Feature Flags in Serverless Postgres
+## Managing feature flags in Postgres
 
-Feature flags let you control the behavior of your application without deploying new code. In a Serverless Postgres environment, you can easily create, read, and update feature flags using the following steps:
+The following steps create, read, and update feature flags stored in Postgres:
 
-### Create a serverless Postgres client
+### Create a Postgres client
 
-To create a client that interacts with your serverless postgres, create a `postgres.server.ts` file inside the `src/lib` directory with the following content:
+To create a client that talks to your database, create a `postgres.server.ts` file inside the `src/lib` directory with the following content:
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
@@ -206,17 +206,17 @@ export default new pg.Pool({ connectionString });
 
 </CodeTabs>
 
-The code above starts with importing the Postgres client. It further imports the config module by `dotenv` that makes sure that all environment variables are populated in application environment. It then creates a new instance of a Postgres connection pool.
+The code above starts with importing the Postgres client. It then imports `dotenv`'s config module, which loads your environment variables. It then creates a new instance of a Postgres connection pool.
 
-To create, read or update the feature flags from your SvelteKit application, you can use re-usable helper functions. Let's create a new directory by executing the following command in your terminal window to start creating those functions:
+To create, read, or update feature flags from your SvelteKit application, you'll write reusable helper functions. Create a directory for them:
 
 ```bash
 mkdir src/lib/feature_flags
 ```
 
-### Create & Populate Feature Flags Database
+### Create and populate the feature flags table
 
-In the `feature_flags` directory, create a file named `setup.server.ts` with the following code which will allow you to create and populate a database table for feature flags.
+In the `feature_flags` directory, create a file named `setup.server.ts` with the following code, which creates and populates a table for feature flags.
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
@@ -261,7 +261,7 @@ The code snippet above first ensures the existence of a table named `feature_fla
 
 ### Read and update the feature flags
 
-In the `feature_flags` directory, create a file named `get.server.ts` with the following code which will allow you to read the feature flag value in the database.
+In the `feature_flags` directory, create a file named `get.server.ts` with the following code, which reads a feature flag value from the database.
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
@@ -292,9 +292,9 @@ export const isEnabled = async (flagName: string): Promise<boolean> => {
 
 </CodeTabs>
 
-The `isEnabled` function queries the database to check whether a specific feature flag is enabled or not. In this example, you will use it to check if `fast_payments` feature flag is enabled or not.
+The `isEnabled` function queries the database to check whether a specific feature flag is enabled or not. In this example, you'll use it to check whether the `fast_payments` feature flag is enabled.
 
-In the `feature_flags` directory, create a file named `set.server.ts` with the following code which will allow you to update the feature flag value in the database.
+In the `feature_flags` directory, create a file named `set.server.ts` with the following code, which updates a feature flag value in the database.
 
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
@@ -323,17 +323,15 @@ export const setEnabled = async (flagName: string, flagValue: boolean) => {
 
 </CodeTabs>
 
-The `setEnabled` function updates the value of a feature flag in the database. In this example, you will update the `fast_payments` feature dynamically per request to get a taste of how feature flags are used in production.
-
-You can use these helper functions in your application to manage and control feature flags dynamically.
+The `setEnabled` function updates the value of a feature flag in the database. In this example, you'll update the `fast_payments` flag on each request to simulate how feature flags change in production.
 
 ## Dynamic feature flag integration for testing fast payment methods
 
-In this section, you will get an example of how a feature flag helps test and roll out new features, dynamically. For example, you are a payment processing company. You have just added a payment method named `PayGM` that helps users pay faster. But you want to test it out on a random basis for each cart that you process. Let's walk through the hypothetical code to understand the usage of a feature flag in this case.
+This section shows how a feature flag helps you test and roll out a new feature. Say you're a payment processing company. You have just added a payment method named `PayGM` that helps users pay faster. But you want to test it out on a random basis for each cart that you process. The following code shows how a feature flag handles this.
 
 ### Computing the user destination
 
-In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. For the sake of this example, you will load the feature flag dynamically and check if it's enabled to determine the user's destination experience. To do that, add the following snippet to `+page.server.ts` file:
+In a SvelteKit route, the data from the server to the user interface is passed via `+page.server.ts` file to `+page.svelte`. In this example, you'll load the feature flag at request time and check whether it's enabled to determine the user's destination experience. To do that, add the following snippet to `+page.server.ts` file:
 
 ```tsx
 // File: src/routes/+page.server.ts
@@ -357,11 +355,11 @@ export async function load({ cookies }) {
 }
 ```
 
-The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited, and sets the value in the cookie. Finally, it reads the cookie as the source to determine the user experience and check if the fast payment methods are enabled or not.
+The code above first looks for the bucket assigned to the user. If no such bucket is found, it looks for the value of the feature flag in the database, randomly assigns a boolean whenever the `/` route is visited, and sets the value in the cookie. Finally, it reads the cookie to decide the user experience and whether fast payment methods are enabled.
 
 ### Creating a conditional user experience
 
-Now, let's look at how the feature flag value can be used in the user interface to conditionally render UI elements. This will allow you to accept payments via PayGM if the `fast_payments` feature flag is enabled. To do that, use the following code in `+page.svelte` file:
+Next, use the feature flag value in the user interface to conditionally render UI elements, so users can pay via PayGM when the `fast_payments` feature flag is enabled. To do that, use the following code in `+page.svelte` file:
 
 ```svelte
 <script lang="ts">
@@ -397,7 +395,7 @@ In the code above, UI elements related to fast payment methods are conditionally
 
 ## Summary
 
-In this guide, you learned how to add feature flags in your SvelteKit apps using Serverless Postgres powered by Neon. By updating and reading feature flags at runtime, you can test and roll out new features like fast payment methods in a controlled, iterative way.
+In this guide, you added feature flags to a SvelteKit app, stored in a Postgres database on Neon. By updating and reading feature flags at runtime, you can test and roll out new features like fast payment methods in a controlled, iterative way.
 
 ## Source code
 

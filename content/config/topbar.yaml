@@ -1,4 +1,4 @@
-text: 'The Neon backend is GA: a complete set of primitives so agents can build'
+text: 'Neon now has realtime: Live SQL with full reactivity. Try it in Beta today'
 link:
-  url: 'https://neon.com/blog/neon-backend-is-ga'
+  url: 'https://neon.com/blog/neon-now-has-realtime'
   target: '_blank'

@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-27T15:07:41.821Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object model](/docs/concepts/the-object-model), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -36,7 +36,7 @@ The role that creates a database is automatically made the owner of that databas
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 1. Click **Add database**.
 1. Enter a database name, and select a database owner.
@@ -80,23 +80,23 @@ For attribute definitions, find the [Create database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "mydb",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "b51c8ece-b78e-49f7-8ec1-78b37cbae3c4",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:14:14Z",
-      "updated_at": "2025-08-04T08:14:14Z",
+      "created_at": "2026-08-04T08:14:14Z",
+      "updated_at": "2026-08-04T08:14:14Z",
       "total_duration_ms": 0
     }
   ]
@@ -121,7 +121,7 @@ Some names are not permitted. See [Reserved database names](#reserved-database-n
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 
 </TabItem>
@@ -135,13 +135,10 @@ neon databases list
 ```
 
 ```text filename="Output"
-┌────────┬────────────┬──────────────────────┐
-│ Name   │ Owner Name │ Created At           │
-├────────┼────────────┼──────────────────────┤
-│ neondb │ casey      │ 2023-06-19T18:27:19Z │
-├────────┼────────────┼──────────────────────┤
-│ mydb   │ casey      │ 2023-06-19T18:27:19Z │
-└────────┴────────────┴──────────────────────┘
+Databases on main
+Name    Owner Name  Created At
+neondb  casey       2026-06-19T18:27:19Z
+mydb    casey       2026-06-19T18:27:19Z
 ```
 
 </TabItem>
@@ -166,19 +163,19 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
   "databases": [
     {
       "id": 1139149,
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "neondb",
       "owner_name": "casey",
-      "created_at": "2023-01-04T18:38:23Z",
-      "updated_at": "2023-01-04T18:38:23Z"
+      "created_at": "2026-01-04T18:38:23Z",
+      "updated_at": "2026-01-04T18:38:23Z"
     },
     {
       "id": 1140822,
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "mydb",
       "owner_name": "casey",
-      "created_at": "2023-01-04T21:17:17Z",
-      "updated_at": "2023-01-04T21:17:17Z"
+      "created_at": "2026-01-04T21:17:17Z",
+      "updated_at": "2026-01-04T21:17:17Z"
     }
   ]
 }
@@ -215,23 +212,23 @@ For attribute definitions, find the [Update database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "2f8c0a6a-33b5-4d56-964b-739614b699c0",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:17:22Z",
-      "updated_at": "2025-08-04T08:17:22Z",
+      "created_at": "2026-08-04T08:17:22Z",
+      "updated_at": "2026-08-04T08:17:22Z",
       "total_duration_ms": 0
     }
   ]
@@ -250,7 +247,7 @@ Deleting a database is a permanent action. All database objects belonging to the
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Select your branch from the project/branch menu at the top of the sidebar.
 1. Under **Postgres database**, select **Databases**.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
@@ -287,23 +284,23 @@ For attribute definitions, find the [Delete database](/docs/reference/api/branch
 {
   "database": {
     "id": 2889509,
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "database1",
     "owner_name": "casey",
-    "created_at": "2025-08-04T08:14:14Z",
-    "updated_at": "2025-08-04T08:14:14Z"
+    "created_at": "2026-08-04T08:14:14Z",
+    "updated_at": "2026-08-04T08:14:14Z"
   },
   "operations": [
     {
       "id": "4cd4881b-2807-4377-a76d-8e7d39bc5448",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T08:19:39Z",
-      "updated_at": "2025-08-04T08:19:39Z",
+      "created_at": "2026-08-04T08:19:39Z",
+      "updated_at": "2026-08-04T08:19:39Z",
       "total_duration_ms": 0
     }
   ]

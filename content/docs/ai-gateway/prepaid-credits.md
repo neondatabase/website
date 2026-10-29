@@ -3,10 +3,10 @@ title: AI Gateway prepaid credits
 subtitle: Buy credits, understand pricing and limits, and manage your balance for the Neon AI Gateway
 summary: >-
   Learn how AI Gateway prepaid credits work, who can buy them, how to purchase
-  credits, how to check your balance, and how usage limits and metering affect
-  access.
+  credits, how to set up automatic top-up, how to check your balance, and how
+  usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-09-17T19:54:50.720Z'
+updatedOn: '2026-10-23T16:17:19.164Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -61,7 +61,9 @@ appears in your credit history as **Manual purchase**, with the date and amount.
 
 <Admonition type="important">
 Only **one purchase can be open at a time** per account. You can't start a second
-purchase until the first completes.
+purchase until the first completes. If an automatic top-up is in progress, a
+manual purchase fails with "Another credit purchase is in progress. Try again in a
+moment."
 </Admonition>
 
 **If a purchase fails.** If the payment card on file is declined, the purchase
@@ -76,7 +78,8 @@ card shows:
 
 - **Credits remaining**: your organization's current credit balance.
 - **Credits added in last 30 days**: a history panel that lists each entry's date,
-  source, and amount, plus the total credits added during the period.
+  source, and amount, plus the total credits added during the period. Automatic
+  top-ups are listed with the source **Auto-reload**.
 
 ![AI Gateway credits balance and credits added in the last 30 days](/docs/ai-gateway/ai-gateway-credits-balance.png)
 
@@ -114,18 +117,53 @@ When you exceed a limit, the API returns **HTTP 429**:
 
 ## Model access
 
-A paid account with prepaid credits can use the open-weight AI Gateway models.
-Foundation models are rolled out gradually and require requesting access.
-See [Model access](/docs/ai-gateway/overview#model-access) for what's included and
-how to apply.
+A paid account with prepaid credits can use every AI Gateway model.
+See [Model access](/docs/ai-gateway/models#model-access) for details.
+
+After you buy credits, locked models unlock once Neon confirms access. If a
+model still shows a padlock on the **AI Gateway** page, reload the page. See
+[Some models are restricted in the Console](/docs/ai-gateway/troubleshooting#some-models-are-restricted-in-the-console).
 
 The model list is subject to change. See
 [Supported models](/docs/ai-gateway/models) for the current catalog.
 
 ## Automatic top-up
 
-Automatic top-up is **not available**. You add credits manually by purchasing as
-described above.
+Turn on **auto-reload** to keep your balance from running out. When your balance
+drops below a threshold you set, Neon buys a fixed amount of credits with the
+payment card on file, with no action needed from you.
+
+Only organization admins can set up auto-reload, and the organization must meet
+the same requirements as for [buying credits](#who-can-buy-credits): a paid plan,
+billed directly by payment card.
+
+To set up auto-reload:
+
+1. In the Neon Console, select **Billing**.
+2. On the **AI gateway credits** card, select **Auto-reload**.
+3. Turn on **Enable auto-reload** and set:
+   - **When balance drops below (USD)**: the threshold that triggers a top-up. It
+     must be higher than the $2 minimum balance. The default is $10.
+   - **Automatically purchase (USD)**: how many credits to buy each time. The
+     amount must be at least the threshold and within the same range as a manual
+     purchase. The default is $25.
+4. Click **Save**.
+
+![Auto-reload credits dialog with a $10 threshold and a $25 purchase amount](/docs/ai-gateway/ai-gateway-auto-reload-modal.png)
+
+You can also turn on auto-reload in the **Add credits** dialog when you buy
+credits. Neon saves those settings only if the purchase succeeds.
+
+The **Auto-reload** button shows **On** or **Off** so you can check its status at
+a glance. If your balance is already below the threshold when you turn on
+auto-reload, Neon tops it up right away.
+
+Neon turns auto-reload off when it can't complete a top-up, for example when your
+card is declined or a top-up keeps failing. It also turns off if your
+organization no longer qualifies, such as after a downgrade to Free or removing
+your payment card. When this happens, an alert on the **AI gateway credits** card
+and in the **Auto-reload** dialog explains why. To resume, fix the issue and turn
+auto-reload back on.
 
 ## Availability
 
@@ -154,7 +192,7 @@ usable again when you upgrade to a paid plan.
 <Faq>
 
 <FaqItem question="Who can use AI Gateway?">
-AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use the open-weight models. Foundation models are rolled out gradually; see [Model access](/docs/ai-gateway/overview#model-access) to request access to the full catalog.
+AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon customer with prepaid credits can use every model in the catalog.
 </FaqItem>
 
 <FaqItem question="How much do AI Gateway credits cost?">
@@ -163,6 +201,10 @@ AI Gateway is available on Neon's paid plans (Launch and Scale). Any paid Neon c
 
 <FaqItem question="Can my credit balance go negative?">
 Yes, by a small amount. Usage can exceed your remaining balance before it's detected, so a minimum balance of $2 applies to account for this.
+</FaqItem>
+
+<FaqItem question="Can I top up credits automatically?">
+Yes. Organization admins can turn on auto-reload from the **AI gateway credits** card on the **Billing** page. When your balance drops below the threshold you set, Neon buys the amount you chose with the payment card on file. See [Automatic top-up](#automatic-top-up).
 </FaqItem>
 
 <FaqItem question="Do credits expire?">

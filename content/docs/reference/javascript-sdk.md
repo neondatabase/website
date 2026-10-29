@@ -65,7 +65,7 @@ Use this when you only need authentication (no database queries). You get:
 
 The auth methods are identical; only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
-For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The cell label (if present), region, and database path stay the same. If you need to override either derived URL, the object form is still supported.
+For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Managed Better Auth URL and Data API URL automatically. If you already have a Managed Better Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The cell label (if present), region, and database path stay the same. If you need to override either derived URL, the object form is still supported.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -935,7 +935,7 @@ const { data, error } = await client
 <TwoColumnLayout.Block>
 
 Filters rows based on whether a column is null or not null.
-Use `null` to find rows where the column is null, or `'not.null'` to find rows where it's not null.
+Use `.is(column, null)` to find rows where the column is null, or `.not(column, 'is', null)` to find rows where it's not null.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -946,7 +946,7 @@ const { data, error } = await client.from('todos').select('*').is('deleted_at', 
 ```
 
 ```typescript
-const { data, error } = await client.from('todos').select('*').is('completed_at', 'not.null');
+const { data, error } = await client.from('todos').select('*').not('completed_at', 'is', null);
 ```
 
 </CodeTabs>
@@ -991,10 +991,10 @@ const { data, error } = await client
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
 
-<TwoColumnLayout.Item title="Column value is between two values" method=".range(column, start, end)" id="range">
+<TwoColumnLayout.Item title="Column value is between two values" method=".gte(column, start).lte(column, end)" id="range">
 <TwoColumnLayout.Block>
 
-Range is inclusive (includes both start and end values).
+Use `.gte()` and `.lte()` to include both the start and end values.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -1003,7 +1003,8 @@ Range is inclusive (includes both start and end values).
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .range('priority', 5, 10)
+  .gte('priority', 5)
+  .lte('priority', 10)
 ```
 
 </TwoColumnLayout.Block>

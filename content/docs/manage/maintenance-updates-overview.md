@@ -9,7 +9,7 @@ summary: >-
   select a preferred update window.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 Neon performs two types of updates: **platform maintenance** and **updates** to your Neon [computes](/docs/reference/glossary#compute). While both are essential for maintaining a stable, secure, and optimized environment, they serve different purposes.
@@ -25,4 +25,4 @@ For both types of updates, we strive to minimize disruption to database operatio
 | Type                     | Where to check                                         | Details                                                                                                                                                                                                                                |
 | ------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Platform maintenance** | [Neon Status](https://neonstatus.com/)                 | Check the regional status page where your Neon project resides for upcoming platform maintenance. Optionally, subscribe to a regional status page to receive status updates. See [Neon Status](/docs/introduction/status) for details. |
-| **Updates**              | [Neon Console](https://console.neon.tech/app/projects) | On your Neon project dashboard, go to **Settings** > **Postgres** to view your update window and check for update notices. Paid plans allow you to select a preferred update window.                                                    |
+| **Updates**              | [Neon Console](https://console.neon.tech/app/projects) | In your Neon project, go to **Settings** > **Postgres** to view your update window and check for update notices. Paid plans allow you to select a preferred update window.                                                             |

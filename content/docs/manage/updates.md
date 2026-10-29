@@ -11,7 +11,7 @@ summary: >-
   to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-10-09T10:14:56.146Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -63,7 +63,7 @@ On the **Free plan**, updates are scheduled and applied automatically. You can c
 
 To view planned updates:
 
-1. Go to the Neon project dashboard.
+1. Open your project in the Neon Console.
 2. Select **Settings** > **Postgres**.
 
    ![Free plan updates UI](/docs/manage/free_plan_updates.png)
@@ -81,7 +81,7 @@ You can specify an update window in your Neon project's settings or using the Ne
 <TabItem>
 In the Neon Console:
 
-1. Go to the Neon project dashboard.
+1. Open your project in the Neon Console.
 2. Select **Settings** > **Postgres**.
 3. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
 

@@ -1,10 +1,10 @@
 ---
-title: Caching Layer in Postgres
+title: Caching layer in Postgres
 subtitle: A step-by-step guide describing how to use materialized views for caching in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-03-21T13:24:36.612Z'
-updatedOn: '2025-04-08T21:24:58.000Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
 Postgres provides several tools to optimize query performance, including caching layers that help reduce expensive computations.
@@ -20,7 +20,7 @@ This approach is particularly useful for complex aggregations, expensive joins, 
 - Index the materialized view for performance
 - Automate materialized view refreshes
 
-### Create the Orders Table
+### Create the orders table
 
 Before inserting sample data, create the `orders` table:
 
@@ -33,7 +33,7 @@ CREATE TABLE orders (
 );
 ```
 
-### Insert Sample Data into the Orders Table
+### Insert sample data into the orders table
 
 Now, let's insert some sample data into the `orders` table so we can see real results:
 
@@ -46,7 +46,7 @@ INSERT INTO orders (customer_id, total_price, created_at) VALUES
 (2, 450.75, NOW() - INTERVAL '4 days');
 ```
 
-### Create a Materialized View
+### Create a materialized view
 
 Suppose you want to answer queries like "which days did we receive the most orders over the last month?"
 This would require a complex query that may be slow.
@@ -59,7 +59,7 @@ FROM orders
 GROUP BY order_date;
 ```
 
-### Query the materialized View
+### Query the materialized view
 
 This materialized view stores total revenue per day, allowing for fast lookups of daily sales trends without needing to aggregate the full `orders` table repeatedly.
 For example, you can execute a query to find the daily revenue for 3 days ago:
@@ -83,7 +83,7 @@ The above query returns the following result, which shows the days with the most
 | 3   | 2025-03-19 | 250.50        |
 | 4   | 2025-03-20 | 100.00        |
 
-### Refresh the Materialized View
+### Refresh the materialized view
 
 Materialized views need to be refreshed to reflect updated data.
 You can refresh a materialized view manually as follows.
@@ -100,18 +100,20 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY daily_revenue;
 
 This allows the materialized view to remain accessible while it's being refreshed, but requires a unique index on the view. Without `CONCURRENTLY`, the materialized view is locked during the refresh, making it temporarily unavailable for queries.
 
-### Index the Materialized View for Performance
+### Index the materialized view for performance
 
-Adding indexes to materialized views can significantly improve query performance. For example, to index `order_date` for faster lookups:
+Adding indexes to materialized views can improve query performance. Because `order_date` has one row per day, a unique index works here, and it's also the unique index that `REFRESH MATERIALIZED VIEW CONCURRENTLY` requires:
 
 ```sql
-CREATE INDEX idx_daily_revenue_date ON daily_revenue(order_date);
+CREATE UNIQUE INDEX idx_daily_revenue_date ON daily_revenue(order_date);
 ```
 
-### Automate Materialized View Refreshes
+### Automate materialized view refreshes
 
-To keep the materialized view updated automatically, use a **cron job** or **PostgreSQL's built-in job scheduler** (like pg_cron). Here’s an example using `pg_cron` to refresh every hour:
+To keep the materialized view updated automatically, use an external **cron job** or the [`pg_cron`](/docs/extensions/pg_cron) extension. Here's an example using `pg_cron` to refresh every hour:
 
 ```sql
 SELECT cron.schedule('refresh_daily_revenue', '0 * * * *', $$REFRESH MATERIALIZED VIEW CONCURRENTLY daily_revenue$$);
 ```
+
+On Neon, `pg_cron` has to be enabled before you can install it, and its jobs only run while the compute is active. See [The pg_cron extension](/docs/extensions/pg_cron) for setup steps.

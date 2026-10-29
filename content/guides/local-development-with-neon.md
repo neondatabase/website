@@ -1,26 +1,24 @@
 ---
-title: Local Development with Neon
+title: Local development with Neon
 subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2026-09-07T21:32:59.304Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
+This guide covers two ways to set up a development environment for an app that uses Neon: a database branch per developer, or a local Postgres instance you reach through the same driver.
 
 <Admonition type="note">
-The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon over HTTP or WebSockets. To learn more, see [The Neon Serverless driver](/docs/serverless/serverless-driver).
+The setups described in this guide use the **Neon serverless driver** for connecting to a Postgres database hosted locally or on Neon over HTTP or WebSockets. To learn more, see [The Neon serverless driver](/docs/serverless/serverless-driver).
 </Admonition>
 
 ## Two ways to develop
 
-When setting up a development environment with Neon, there are a couple of different approaches you can take:
+You can set up a development environment with Neon in two ways:
 
 1. **Database branching**
-2. **Local PostgreSQL**
-
-Let's explore both options to help you pick the right one.
+2. **Local Postgres**
 
 ## Database branching
 
@@ -29,12 +27,12 @@ Let's explore both options to help you pick the right one.
 ### Why use it?
 
 - **Fast setup**: Create new environments in ~1 second
-- **Zero configuration**: No local PostgreSQL installation required
-- **True isolation**: Test changes without fear of breaking production
-- **Cost-efficient**: Pay only for unique data and actual compute usage
+- **No local install**: No local Postgres installation required
+- **Isolation**: Test changes without affecting production
+- **Cost**: Child branch storage bills only for data that changes, and compute bills only while it runs
 - **Team-friendly**: Share database branches as easily as sharing Git branches
-- **Autoscaling**: Resources scale to zero when you're not coding
-- **Data reset**: Need a fresh start or a do-over? Reset your branch to match production in seconds
+- **Scale to zero**: Compute suspends when you're not coding
+- **Data reset**: Reset your branch to match its parent in seconds
 
 ### Quickstart
 
@@ -56,7 +54,7 @@ Let's explore both options to help you pick the right one.
    ```
 
    <Admonition type="note">
-   You can also create branches through the Neon Console by navigating to your project and clicking the "Branches" tab. This provides a visual interface for branch management and configuration
+   You can also create branches in the Neon Console from your project's **Branches** page.
    </Admonition>
 
 4. **Set up your environment**
@@ -71,7 +69,7 @@ Let's explore both options to help you pick the right one.
    Dependencies include [Neon's serverless driver](/docs/serverless/serverless-driver) and a WebSockets library.
 
    <Admonition type="note">
-   The Neon serverless driver supports connections over HTTP and WebSockets, depending on your requirements. This setup assumes that you could be using either. For the differences, refer to the [Neon's serverless driver docs](/docs/serverless/serverless-driver).
+   The Neon serverless driver supports connections over HTTP and WebSockets, depending on your requirements. This setup assumes you could be using either. For the differences, see [Neon serverless driver](/docs/serverless/serverless-driver).
    </Admonition>
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
@@ -112,19 +110,19 @@ Let's explore both options to help you pick the right one.
 - **Stay organized**: Use prefixes like `dev/feature-auth` or `dev/alice`
 - **Reset data**: Start fresh when needed:
   ```bash
-  neon branches reset dev/your-name
+  neon branches reset dev/your-name --parent
   ```
 - **Feature work**: Create dedicated branches:
   ```bash
   neon branches create --name dev/auth-system --parent main
   ```
 
-## Local PostgreSQL
+## Local Postgres
 
-Sometimes you need to work offline or want full control over your database. Here's how to set up a local PostgreSQL instance that works perfectly with the Neon. This method uses:
+Sometimes you need to work offline or want full control over your database. Here's how to set up a local Postgres instance that you connect to with the Neon serverless driver. This method uses:
 
-- The [Neon Serverless driver](/docs/serverless/serverless-driver) to connect to your local database (same as the database branching setup described above)
-- A Docker compose file that installs a local instance of PostgreSQL 17 and the Neon Proxy. The Neon Proxy lets you to connect to your local PostgreSQL database using the Neon serverless driver.
+- The [Neon serverless driver](/docs/serverless/serverless-driver) to connect to your local database (same as the database branching setup described above)
+- A Docker Compose file that runs a local instance of Postgres 17 and the Neon Proxy. The Neon Proxy lets you connect to your local Postgres database using the Neon serverless driver.
 
 <Admonition type="note" title="kudos">
 The Neon Proxy setup uses the [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile, developed by [TimoWilhelm](https://github.com/TimoWilhelm).
@@ -132,9 +130,9 @@ The Neon Proxy setup uses the [local-neon-http-proxy](https://github.com/TimoWil
 
 ### Why use this method?
 
-- **Full control**: Your own PostgreSQL instance
-- **Offline work**: Code without internet dependency
-- **Fast queries**: Zero network latency
+- **Full control**: Your own Postgres instance
+- **Offline work**: Code without an internet connection
+- **Fast queries**: No network latency
 - **Free development**: Use your local resources
 
 ### Docker Compose setup
@@ -174,7 +172,7 @@ volumes:
   db_data:
 ```
 
-Run the following command to start local PostgreSQL and the Neon Proxy, which helps you connect to your local database:
+Run the following command to start local Postgres and the Neon Proxy:
 
 ```bash
 docker-compose up -d
@@ -183,7 +181,7 @@ docker-compose up -d
 <Admonition type="tip" title="Working offline?">
 The [local-neon-http-proxy](https://github.com/TimoWilhelm/local-neon-http-proxy) Dockerfile setup uses [*.localtest.me](https://readme.localtest.me/) to enable testing with local URLs without adding entries to your host file. The `localtest.me` domain and all wildcard subdomains point to `127.0.0.1`.
 
-However, this solution requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
+However, this setup requires an internet connection. To work offline, you'll need to add an entry to your system's hosts file to map `db.localtest.me` to localhost:
 
 ```bash
 127.0.0.1 db.localtest.me
@@ -204,7 +202,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
 
-2. **Install Dependencies**
+2. **Install dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -267,7 +265,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
 
-2. **Install Dependencies**
+2. **Install dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -330,7 +328,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
 4. **Migration setup**
 
-   To ensure your Drizzle migrations run smoothly and without errors in your development environment, you can install the `postgres` package as a development dependency.
+   To run Drizzle migrations against your local database, install the `postgres` package as a development dependency.
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -352,13 +350,13 @@ For instructions on editing your hosts file on different operating systems, see 
 
 <TabItem>
 
-Note that Driver Adapters are still in preview for Prisma. Please refer to the [Prisma documentation](https://www.prisma.io/docs/orm/overview/databases/neon) for the latest information.
+Driver adapters are generally available in current Prisma versions. The `driverAdapters` preview flag in step 3 is only needed on older Prisma versions. See the [Prisma documentation](https://www.prisma.io/docs/orm/overview/databases/neon) for the latest information.
 
 1. **Set your environment**
 
    The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
 
-2. **Install Dependencies**
+2. **Install dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -376,9 +374,9 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
 
    </CodeTabs>
 
-3. **Enable the Preview Flag**
+3. **Enable the preview flag (older Prisma versions only)**
 
-   To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
+   On older Prisma versions, enable the preview flag in your `schema.prisma` file to use the Neon serverless driver.
 
    ```prisma
      generator client {
@@ -433,34 +431,30 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
 
 ## Which development approach should you use?
 
-Before choosing between cloud-hosted or local development, it's important to understand the benefits of each approach.
-
-Cloud-hosted branches offer several compelling advantages:
+Cloud-hosted branches have these advantages over local development:
 
 ### Cost-efficient development
 
-- **Minimal storage costs**: Branches are extremely cost-effective as you only pay for unique data changes
-- **Smart compute usage**: Development happens on small computes (0.25 CU) that scale to zero by default
-- **Free Plan benefits**: Even the Free Plan includes 5 compute hours on dev branches
-  - This translates to 20 hours of development time on a 0.25 CU compute
-  - One compute hour at 1 CU equals four hours at 0.25 CU
+- **Storage**: Child branch storage is billed only on the data that changes, capped at your actual data size
+- **Compute**: Development branches can run on small computes (0.25 CU, ≈1 GB RAM) that scale to zero when idle
+- **Free plan**: The Free plan includes 100 CU-hours per project, enough to run a 0.25 CU compute for 400 hours
 
 ### Developer-friendly features
 
-- **Instant deployment**: Branches are created in seconds, just like Git branches
-- **Branch reset**: Easily refresh your development data from the parent branch
-- **Zero maintenance**: No need to manage local PostgreSQL installations
+- **Fast setup**: Branches are created in seconds
+- **Branch reset**: Refresh your development data from the parent branch
+- **Less maintenance**: No local Postgres installation to manage
 
-| Feature             | Database Branching                           | Local PostgreSQL                     |
-| ------------------- | -------------------------------------------- | ------------------------------------ |
-| Setup Time          | ✅ Instant (~1 second)                       | ⏱️ Requires initial configuration    |
-| Configuration       | ✅ Zero configuration needed                 | 🔧 Requires local setup              |
-| Team Collaboration  | ✅ Easy branch sharing and management        | 🤝 Requires additional setup         |
-| Cost Management     | ✅ Pay only for unique data and compute time | 💻 Local resources only              |
-| Resource Scaling    | ✅ Scale to zero when not in use             | ❌ Always consuming resources        |
-| Offline Development | ❌ Requires internet connection              | ✅ Works offline                     |
-| Network Latency     | 🌐 Depends on connection                     | ✅ Zero latency                      |
-| Production Parity   | ✅ Identical to production                   | 🔄 Requires additional configuration |
+| Feature             | Database branching                       | Local Postgres                       |
+| ------------------- | ---------------------------------------- | ------------------------------------ |
+| Setup time          | ✅ Instant (~1 second)                   | ⏱️ Requires initial configuration    |
+| Configuration       | ✅ Zero configuration needed             | 🔧 Requires local setup              |
+| Team collaboration  | ✅ Easy branch sharing and management    | 🤝 Requires additional setup         |
+| Cost management     | ✅ Pay for changed data and compute time | 💻 Local resources only              |
+| Resource scaling    | ✅ Scale to zero when not in use         | ❌ Always consuming resources        |
+| Offline development | ❌ Requires internet connection          | ✅ Works offline                     |
+| Network latency     | 🌐 Depends on connection                 | ✅ Zero latency                      |
+| Production parity   | ✅ Copy of production schema and data    | 🔄 Requires additional configuration |
 
 ## When to use each approach
 
@@ -470,7 +464,7 @@ Cloud-hosted branches offer several compelling advantages:
 - You need efficient resource use
 - You're working with a team
 
-**Perfect for:**
+**Good for:**
 
 - Most development workflows
 - Team environments
@@ -478,10 +472,10 @@ Cloud-hosted branches offer several compelling advantages:
 - Feature development
 - Testing database changes
 
-### Consider local PostgreSQL when:
+### Consider local Postgres when:
 
 - You need offline development
-- You need zero network latency
+- You need no network latency
 - You require complete database control
 - You have specific local testing requirements
 
@@ -490,7 +484,7 @@ Cloud-hosted branches offer several compelling advantages:
 ### Environment tips
 
 - Keep development and production database branches separate
-- Always Use clear branch naming
+- Use clear branch names
 - Never commit credentials to a version control system
 
 ### Resource tips
@@ -507,6 +501,6 @@ Cloud-hosted branches offer several compelling advantages:
 
 ## Start building
 
-You're now ready to set up a development environment with Neon. Choose the approach that fits your team best and start building.
+Pick the approach that fits your team. To automate branch creation for pull requests, see [Automate branching with GitHub Actions](/docs/guides/branching-github-actions).
 
 <NeedHelp/>

@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-09-14T21:34:48.957Z'
+updatedOn: '2026-10-03T12:43:38.865Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -72,7 +72,7 @@ You can create, list, delete, and reset passwords for roles using the Neon Conso
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Click **Add role**.
 6. In the role creation modal, specify a role name. The branch is pre-selected.
@@ -114,24 +114,24 @@ For attribute definitions, find the [Create role](/docs/reference/api/branches/c
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "password": "npg_A9xYoejTz6iQ",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:47:05Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:47:05Z"
   },
   "operations": [
     {
       "id": "9c61fc28-c89e-4b25-ad5c-8777742e66a3",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:47:05Z",
-      "updated_at": "2025-08-04T07:47:05Z",
+      "created_at": "2026-08-04T07:47:05Z",
+      "updated_at": "2026-08-04T07:47:05Z",
       "total_duration_ms": 0
     }
   ]
@@ -154,7 +154,7 @@ Role names cannot exceed 63 characters, and some names are not permitted. See [R
 
 <TabItem>
 
-In the Neon Console, select your branch from the **BRANCH** selector, then under **Postgres database** select **Roles** to see the roles on the branch.
+In the Neon Console, select your branch from the project/branch menu at the top of the sidebar, then under **Postgres database** select **Roles** to see the roles on the branch.
 
 </TabItem>
 
@@ -167,13 +167,10 @@ neon roles list
 ```
 
 ```text filename="Output"
-┌────────┬──────────────────────┐
-│ Name   │ Created At           │
-├────────┼──────────────────────┤
-│ daniel │ 2023-06-19T18:27:19Z │
-├────────┼──────────────────────┤
-│ alex   │ 2023-07-13T06:42:55Z │
-└────────┴──────────────────────┘
+Roles on main
+Name          Created At
+neondb_owner  2026-06-19T18:27:19Z
+alex          2026-07-13T06:42:55Z
 ```
 
 </TabItem>
@@ -197,18 +194,18 @@ For attribute definitions, find the [List roles](/docs/reference/api/branches/li
 {
   "roles": [
     {
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "name": "daniel",
+      "branch_id": "br-morning-meadow-123456",
+      "name": "neondb_owner",
       "protected": false,
-      "created_at": "2023-07-09T17:01:34Z",
-      "updated_at": "2023-07-09T17:01:34Z"
+      "created_at": "2026-07-09T17:01:34Z",
+      "updated_at": "2026-07-09T17:01:34Z"
     },
     {
-      "branch_id": "br-morning-meadow-afu2s1jl",
+      "branch_id": "br-morning-meadow-123456",
       "name": "alex",
       "protected": false,
-      "created_at": "2023-07-13T06:42:55Z",
-      "updated_at": "2023-07-13T14:48:29Z"
+      "created_at": "2026-07-13T06:42:55Z",
+      "updated_at": "2026-07-13T14:48:29Z"
     }
   ]
 }
@@ -230,7 +227,7 @@ Deleting a role is a permanent action that cannot be undone, and you cannot dele
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Select **Delete role** from the role menu.
 6. On the confirmation modal, click **Delete**.
@@ -266,23 +263,23 @@ For attribute definitions, find the [Delete role](/docs/reference/api/branches/d
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:51:10Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:51:10Z"
   },
   "operations": [
     {
       "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:53:22Z",
-      "updated_at": "2025-08-04T07:53:22Z",
+      "created_at": "2026-08-04T07:53:22Z",
+      "updated_at": "2026-08-04T07:53:22Z",
       "total_duration_ms": 0
     }
   ]
@@ -305,7 +302,7 @@ You can reset a role's password from the Neon Console or API. There's no CLI com
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. In the sidebar, select your branch from the **BRANCH** selector.
+3. Select your branch from the project/branch menu at the top of the sidebar.
 4. Under **Postgres database**, select **Roles**.
 5. Select **Reset password** from the role menu.
 6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
@@ -331,24 +328,24 @@ For attribute definitions, find the [Reset role password](/docs/reference/api/br
 ```json
 {
   "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
+    "branch_id": "br-morning-meadow-123456",
     "name": "alex",
     "password": "npg_iDKnwMW7bUg5",
     "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:51:10Z"
+    "created_at": "2026-08-04T07:47:05Z",
+    "updated_at": "2026-08-04T07:51:10Z"
   },
   "operations": [
     {
       "id": "23b3db33-d36a-45bf-9fda-0e73b5b272e5",
       "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "branch_id": "br-morning-meadow-123456",
+      "endpoint_id": "ep-holy-heart-123456",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2025-08-04T07:51:10Z",
-      "updated_at": "2025-08-04T07:51:10Z",
+      "created_at": "2026-08-04T07:51:10Z",
+      "updated_at": "2026-08-04T07:51:10Z",
       "total_duration_ms": 0
     }
   ]

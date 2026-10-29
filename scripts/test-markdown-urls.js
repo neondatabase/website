@@ -51,6 +51,11 @@
 // - Matches isAIAgentRequest() in src/utils/ai-agent-detection.js: we test text/markdown,
 //   text/plain, application/json (no text/html in Accept), axios UA, and Claude UA — not
 //   every UA pattern (got, perplexity, etc.) or application/xml Accept alone.
+// - User-Agent sniffing only applies when Accept doesn't include text/html. agent-ua and
+//   agent-axios send Accept: */* (markdown); agent-ua-html sends a browser-style Accept
+//   with a ChatGPT-User UA and must get HTML, while .md URLs still serve markdown.
+//   agent-ua-html-only and agent-axios-html-only cover a bare Accept: text/html.
+//   browser-any (browser UA, Accept: */*) is the control: it must get HTML.
 // - Root / and /home: assert index.md markdown is served to agents (Accept: markdown / agent
 //   UA) and HTML to browsers; login redirects for /home are not exercised.
 // - Changelog entry date is pinned; update if that file is removed from content/changelog/.
@@ -145,6 +150,8 @@ function runAssetGenerators() {
 const BROWSER_UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const AGENT_UA = 'Claude/1.0';
+const AGENT_HTML_UA =
+  'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot';
 
 // ---------------------------------------------------------------------------
 // Request mode presets
@@ -152,15 +159,27 @@ const AGENT_UA = 'Claude/1.0';
 
 const modes = {
   browser: { 'User-Agent': BROWSER_UA, Accept: 'text/html,application/xhtml+xml,*/*' },
+  /** Control: a wildcard Accept alone doesn't trigger markdown; agent-ua's markdown comes from the UA */
+  'browser-any': { 'User-Agent': BROWSER_UA, Accept: '*/*' },
   'accept-md': { 'User-Agent': BROWSER_UA, Accept: 'text/markdown, text/html, */*' },
-  'agent-ua': { 'User-Agent': AGENT_UA, Accept: 'text/html' },
+  /** isAIAgentRequest: agent User-Agent, Accept without text/html */
+  'agent-ua': { 'User-Agent': AGENT_UA, Accept: '*/*' },
+  /** isAIAgentRequest: agent User-Agent ignored because Accept includes text/html */
+  'agent-ua-html': {
+    'User-Agent': AGENT_HTML_UA,
+    Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  },
+  /** isAIAgentRequest: agent User-Agent ignored for a bare Accept: text/html */
+  'agent-ua-html-only': { 'User-Agent': AGENT_UA, Accept: 'text/html' },
+  /** isAIAgentRequest: HTTP-client User-Agent ignored for a bare Accept: text/html */
+  'agent-axios-html-only': { 'User-Agent': 'axios/1.8.4', Accept: 'text/html' },
   'dot-md': { 'User-Agent': BROWSER_UA, Accept: 'text/html,application/xhtml+xml,*/*' },
   /** isAIAgentRequest: prefersNonHtml — no text/html in Accept */
   'accept-plain': { 'User-Agent': BROWSER_UA, Accept: 'text/plain' },
   /** isAIAgentRequest: prefersNonHtml */
   'accept-json': { 'User-Agent': BROWSER_UA, Accept: 'application/json' },
   /** isAIAgentRequest: axios (Claude Code HTTP client) */
-  'agent-axios': { 'User-Agent': 'axios/1.8.4', Accept: 'text/html' },
+  'agent-axios': { 'User-Agent': 'axios/1.8.4', Accept: '*/*' },
 };
 
 // ---------------------------------------------------------------------------
@@ -228,7 +247,7 @@ function buildTests() {
   // ── 1. Content routes with markdown (happy path) ──────────────────────
 
   const contentRoutes = [
-    { path: '/docs/introduction', spotWord: 'Neon' },
+    { path: '/docs/introduction/branching', spotWord: 'Neon' },
     { path: '/postgresql/tutorial', spotWord: null },
     { path: '/guides/neon-sst', spotWord: null },
     { path: '/branching/introduction', spotWord: null },
@@ -281,6 +300,24 @@ function buildTests() {
       { spotCheck: spotWord ? (r) => expectBodyContains(r.body, spotWord, true) : null }
     );
 
+    for (const mode of ['agent-ua-html', 'agent-ua-html-only']) {
+      add(
+        'Content route',
+        path,
+        mode,
+        [
+          (r) => expectStatus(r.status, 200),
+          (r) => expectContentType(r.contentType, 'text/html'),
+          (r) => expectHtmlBody(r.body),
+          (r) =>
+            r.headers.get('x-content-source') === 'markdown'
+              ? 'agent with Accept: text/html must get HTML'
+              : null,
+        ],
+        { note: 'agent UA + Accept: text/html → HTML' }
+      );
+    }
+
     add('Content route', path, 'dot-md', [
       (r) => expectStatus(r.status, 200),
       (r) => expectContentType(r.contentType, 'text/markdown'),
@@ -292,7 +329,7 @@ function buildTests() {
   // isAIAgentRequest alternate triggers (see ai-agent-detection.js)
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'accept-plain',
     [
       (r) => expectStatus(r.status, 200),
@@ -305,7 +342,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'accept-json',
     [
       (r) => expectStatus(r.status, 200),
@@ -318,7 +355,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'agent-axios',
     [
       (r) => expectStatus(r.status, 200),
@@ -329,10 +366,47 @@ function buildTests() {
     { note: 'axios User-Agent (Claude Code)' }
   );
 
+  add(
+    'Agent detection',
+    '/docs/introduction/branching.md',
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+    ],
+    { note: '.md URL serves markdown even when Accept includes text/html' }
+  );
+
+  add(
+    'Agent detection',
+    '/docs/introduction/branching',
+    'browser-any',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'control: browser UA + Accept: */* → HTML, so agent-ua markdown is UA-driven' }
+  );
+
+  add(
+    'Agent detection',
+    '/docs/introduction/branching',
+    'agent-axios-html-only',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'axios User-Agent + Accept: text/html → HTML' }
+  );
+
   // Explicit .md in URL + Accept: text/markdown (distinct from dot-md which uses HTML Accept)
   add(
     'Content route',
-    '/docs/introduction.md',
+    '/docs/introduction/branching.md',
     'accept-md',
     [
       (r) => expectStatus(r.status, 200),
@@ -434,6 +508,18 @@ function buildTests() {
     { spotCheck: (r) => expectBodyContains(r.body, 'Scale', true) }
   );
 
+  add(
+    'Custom path',
+    '/pricing',
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'agent UA + Accept: text/html → HTML' }
+  );
+
   // /pricing.md is a static file in public/ (served as text/markdown; not middleware-negotiated)
   add(
     'Custom path',
@@ -477,6 +563,18 @@ function buildTests() {
       (r) => expectMarkdownBody(r.body),
     ],
     { spotCheck: (r) => expectBodyContains(r.body, 'changelog', true) }
+  );
+
+  add(
+    'Custom path',
+    '/docs/changelog',
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'agent UA + Accept: text/html → HTML' }
   );
 
   add(
@@ -546,6 +644,18 @@ function buildTests() {
     (r) => expectHeader(r.headers, 'x-content-source', 'agent-404'),
   ]);
 
+  add(
+    '404 handling',
+    fake404Path,
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 404),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'agent UA + Accept: text/html sees HTML 404 page' }
+  );
+
   add('404 handling', fake404Path, 'dot-md', [
     (r) => expectStatus(r.status, 404),
     (r) => expectContentType(r.contentType, 'text/markdown'),
@@ -561,6 +671,18 @@ function buildTests() {
     'browser',
     [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
     { spotCheck: (r) => expectBodyContains(r.body, 'neon', true) }
+  );
+
+  // Root /llms.txt (rewrite to /docs/llms.txt) must link the agent feedback page.
+  add(
+    'LLMs txt',
+    '/llms.txt',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectBodyContains(r.body, 'https://neon.com/feedback.md'),
+    ],
+    { note: 'Common tasks links /feedback.md' }
   );
 
   add(
@@ -661,6 +783,22 @@ function buildTests() {
     { note: 'browser gets the HTML homepage, not index.md' }
   );
 
+  add(
+    'Homepage',
+    '/',
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+      (r) =>
+        r.headers.get('x-content-source') === 'markdown'
+          ? 'agent with Accept: text/html must not get markdown at /'
+          : null,
+    ],
+    { note: 'agent UA + Accept: text/html gets the HTML homepage' }
+  );
+
   // Agents (Accept: markdown or agent UA) and the /home alias: serve public/index.md.
   for (const [homePath, homeMode] of [
     ['/', 'accept-md'],
@@ -754,6 +892,18 @@ function buildTests() {
       },
     ],
     { note: 'agent UA should get blog/llms.txt content' }
+  );
+
+  add(
+    'Blog index (agent UA)',
+    '/blog',
+    'agent-ua-html',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/html'),
+      (r) => expectHtmlBody(r.body),
+    ],
+    { note: 'agent UA + Accept: text/html gets the HTML blog index' }
   );
 
   // blog index: Accept: text/markdown gets markdown
@@ -1075,29 +1225,111 @@ function buildTests() {
     }
   );
 
-  // ── 9e. Bare /docs — content-negotiated by the middleware (src/proxy.js). The
-  // /docs→/docs/introduction redirect lives in middleware (not next.config) so it runs
-  // AFTER the markdown check: agents / non-HTML Accept get llms.txt; browsers redirect.
+  // ── 9d-2. /feedback.md — agent feedback discovery URL, aliased to the Send feedback
+  // docs page mirror. Both the static rewrite (beforeFiles) and middleware
+  // (CUSTOM_MARKDOWN_PATHS) resolve it to /md/docs/introduction/feedback.md.
+  // Bare /feedback is a redirectFrom redirect to the docs page.
 
-  // Browser (Accept: text/html, normal UA): redirected to the introduction page.
   add(
-    'Bare /docs',
-    '/docs',
+    'Feedback .md',
+    '/feedback.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, '## Where to send it'),
+      note: 'aliased to the /docs/introduction/feedback mirror',
+    }
+  );
+
+  add(
+    'Feedback .md',
+    '/feedback.md',
+    'agent-ua',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectMarkdownBody(r.body),
+      (r) => expectHeader(r.headers, 'x-content-source', 'markdown'),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, '## Where to send it'),
+      note: 'agent gets the Send feedback page markdown',
+    }
+  );
+
+  for (const mode of ['browser', 'agent-ua']) {
+    add(
+      'Feedback .md',
+      '/feedback',
+      mode,
+      [
+        (r) => expectStatus(r.status, 308),
+        (r) => expectHeader(r.headers, 'location', '/docs/introduction/feedback'),
+      ],
+      { note: 'redirectFrom → /docs/introduction/feedback' }
+    );
+  }
+
+  // ── 9e. Bare /docs — content-negotiated by the middleware (src/proxy.js).
+  // /docs is the docs front page (src/app/(docs)/docs/page.jsx): agents / non-HTML
+  // Accept get llms.txt; browsers get the page. Vary isn't asserted on the HTML
+  // response: Next replaces the proxy's Vary for app-router pages, the same as on
+  // every other content route.
+
+  for (const [mode, note] of [
+    ['browser', 'browser → docs front page'],
+    ['browser-any', 'browser UA + Accept: */* → docs front page'],
+    ['agent-ua-html', 'agent UA + Accept: text/html → docs front page, like a browser'],
+    ['agent-ua-html-only', 'agent UA + bare Accept: text/html → docs front page, like a browser'],
+  ]) {
+    add(
+      'Bare /docs',
+      '/docs',
+      mode,
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectContentType(r.contentType, 'text/html'),
+        (r) => expectHtmlBody(r.body),
+      ],
+      { note }
+    );
+  }
+
+  // The former docs home (content/docs/introduction.md) was retired; its page and
+  // markdown copy redirect to the /docs front page and its markdown form.
+  add(
+    'Retired docs home',
+    '/docs/introduction',
     'browser',
     [
       (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/introduction'),
-      (r) => expectHeader(r.headers, 'vary', 'Accept'),
+      (r) => expectHeader(r.headers, 'location', /^(https?:\/\/[^/]+)?\/docs$/),
     ],
-    { note: 'browser → redirect to /docs/introduction (Vary: Accept)' }
+    { note: 'old docs home → 308 to /docs' }
+  );
+
+  add(
+    'Retired docs home',
+    '/docs/introduction.md',
+    'agent-ua',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', /^(https?:\/\/[^/]+)?\/docs\.md$/),
+    ],
+    { note: 'old docs home markdown → 308 to /docs.md (the curated llms.txt index)' }
   );
 
   // Markdown-negotiated requests all resolve to /docs/llms.txt with the doc headers.
   // Each mode exercises a different branch of isAIAgentRequest():
   //   accept-md   → Accept: text/markdown
   //   accept-plain→ prefersNonHtml (no text/html in Accept)
-  //   agent-ua    → known agent User-Agent (Claude)
-  //   agent-axios → HTTP-client User-Agent (axios) with Accept: text/html
+  //   agent-ua    → known agent User-Agent (Claude) with Accept: */*
+  //   agent-axios → HTTP-client User-Agent (axios) with Accept: */*
   for (const mode of ['accept-md', 'accept-plain', 'agent-ua', 'agent-axios']) {
     add(
       'Bare /docs',
@@ -1174,7 +1406,7 @@ function buildTests() {
 
   add(
     'Doc headers on HTML',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'browser',
     [(r) => expectHeader(r.headers, 'x-llms-txt', '/docs/llms.txt')],
     { note: 'HTML content routes should still have X-LLMs-Txt' }

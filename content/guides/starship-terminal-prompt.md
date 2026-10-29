@@ -4,14 +4,14 @@ subtitle: 'Learn how to set up Starship, a cross-shell prompt, and add a custom 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-12T00:00:00.000Z'
-updatedOn: '2026-07-13T09:46:56.488Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Traditional shell prompt customization means wrestling with complex, shell-specific syntax: Zsh has its own prompt expansion rules, Bash uses the cryptic `PS1` escape sequences, and PowerShell relies on a completely different `prompt` function. Each shell requires a different approach, and moving between them often means rewriting everything from scratch.
+Customizing a shell prompt usually means shell-specific syntax: Zsh has its own prompt expansion rules, Bash uses the cryptic `PS1` escape sequences, and PowerShell relies on a completely different `prompt` function. Each shell requires a different approach, and moving between them often means rewriting everything from scratch.
 
-[Starship](https://starship.rs) solves this by standardizing prompt configuration across every shell through a single, friendly TOML file. Written in Rust, it runs on Zsh, Bash, Fish, PowerShell, and more, using the same config everywhere. Instead of a fixed prompt, Starship is built from small, independent modules: each module displays a piece of context only when it's relevant to the current directory. For example, the Git module shows your branch when you're inside a repository, and language modules show runtime versions when they detect matching project files like `package.json` or `requirements.txt`. You can enable, disable, reorder, and restyle these modules to build a prompt that fits your workflow.
+[Starship](https://starship.rs) uses one TOML config file for every shell. Written in Rust, it runs on Zsh, Bash, Fish, PowerShell, and more, using the same config everywhere. Instead of a fixed prompt, Starship is built from small, independent modules: each module displays a piece of context only when it's relevant to the current directory. For example, the Git module shows your branch when you're inside a repository, and language modules show runtime versions when they detect matching project files like `package.json` or `requirements.txt`. You can enable, disable, reorder, and restyle these modules to build a prompt that fits your workflow.
 
-Beyond the built-in modules, Starship lets you define custom modules that run an arbitrary command and render its output. That makes it straightforward to surface information that isn't covered by default. When you work with Git branches and Neon database branches in the same terminal, it helps to see at a glance which Neon branch your local development is connected to, so you don't accidentally run commands against the wrong environment. By configuring a custom Starship module, you can query the Neon CLI to show the active database branch alongside the Git branch.
+Beyond the built-in modules, Starship lets you define custom modules that run an arbitrary command and render its output. When you work with Git branches and Neon database branches in the same terminal, it helps to see at a glance which Neon branch your local development is connected to, so you don't run commands against the wrong environment. A custom Starship module can ask the Neon CLI for the active database branch and show it alongside the Git branch.
 
 In this guide, you'll set up Starship and build a custom module that detects and displays your active Neon branch using the Neon CLI. You'll cover:
 
@@ -23,12 +23,12 @@ In this guide, you'll set up Starship and build a custom module that detects and
 
 To follow along with this guide, you will need:
 
-- **Neon account and project:** Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
+- **Neon account and project:** Sign up for a [Neon account](https://console.neon.tech/signup) on the Free plan if you don't have one.
 - **Neon CLI (neon):** Version `2.28.0` or higher installed globally:
   ```bash
   npm install -g neon@latest
   ```
-  Checkout the [Neon CLI documentation](/docs/cli/install) for installation instructions using other package managers and OS distributions (Homebrew, Windows etc.).
+  See the [Neon CLI documentation](/docs/cli/install) for installation with other package managers and operating systems (Homebrew, Windows, and more).
 - **A Nerd Font:** Starship uses special glyphs and icons that require a patched developer font. Install a font like [FiraCode Nerd Font](https://www.nerdfonts.com/font-downloads) or [Hack Nerd Font](https://www.nerdfonts.com/font-downloads) and configure your terminal to use it.
 
 Follow the steps below to install Starship, configure it for your shell, and set up a custom module that displays your active Neon branch in the terminal prompt.
@@ -157,7 +157,7 @@ Invoke-Expression (&starship init powershell)
 
 Check the [official Starship shell integration guide](https://starship.rs/guide/#step-2-set-up-your-shell-to-use-starship) for additional shell options.
 
-After updating your configuration, reload the shell environment to see Starship in action. If you have AWS CLI or Git repositories in your current directory, you should see the corresponding modules appear in your prompt.
+After updating your configuration, reload your shell to see Starship. If you have AWS CLI or Git repositories in your current directory, you should see the corresponding modules appear in your prompt.
 ![Starship demo](https://raw.githubusercontent.com/starship/starship/main/media/demo.gif)
 
 ## Customize the Starship configuration
@@ -205,7 +205,7 @@ min_time = 2_000             # Show only if command took > 2 seconds
 format = "took [$duration]($style) "
 ```
 
-Alternatively, you can use one of the prebuilt Starship presets to quickly configure your prompt. The following table lists some popular presets, whether they require a Nerd Font, and the command to apply them:
+Alternatively, you can apply one of the prebuilt Starship presets. The following table lists some popular presets, whether they require a Nerd Font, and the command to apply them:
 
 | Preset                | Requires Nerd Font | Command                                                        |
 | :-------------------- | :----------------- | :------------------------------------------------------------- |
@@ -223,7 +223,7 @@ You can browse all presets visually on the [Starship Presets page](https://stars
 
 If you use [Neon database branching](/docs/introduction/branching) to create isolated database environments for development and testing, you will frequently switch branches.
 
-By using Starship's [custom commands](https://starship.rs/config/#custom-commands), you can run a shell command and display its output dynamically. You can query the Neon CLI's `neon status --current-branch` command to render the active database branch.
+Starship's [custom commands](https://starship.rs/config/#custom-commands) run a shell command and display its output. The Neon CLI's [`neon status --current-branch`](/docs/cli/config#current-branch) command prints the active database branch, so it fits this pattern.
 
 Append the following configuration block to your `~/.config/starship.toml`:
 
@@ -247,7 +247,7 @@ If you have a custom top-level `format` string defined in your `starship.toml`, 
 
 ## Optimize the module with a tree-walk condition
 
-The `when` check defined above invokes the Neon CLI on every single prompt render (~25ms execution time). Although fast, you can optimize this overhead to absolute zero outside of Neon projects by using a pure-shell script.
+The `when` check defined above invokes the Neon CLI on every prompt render (about 25 ms). You can remove that cost outside Neon projects with a pure-shell check.
 
 Replace the `[custom.neon]` block in your `~/.config/starship.toml` with this optimized version:
 
@@ -274,7 +274,7 @@ exit 1
 '''
 ```
 
-This configuration walks up the directory tree looking for a `.neon` file. It only runs the Neon CLI if it finds one, ensuring prompt rendering remains instantaneous in non-Neon projects.
+This configuration walks up the directory tree looking for a `.neon` file. It only runs the Neon CLI if it finds one, so the prompt doesn't call the CLI at all in non-Neon projects.
 
 ## Link your project and verify
 
@@ -294,7 +294,7 @@ To verify the integration, navigate to a project linked to a Neon database.
    ```text
    on 🌱 main 🌿 dev/feature-auth ➜
    ```
-4. Navigate out of the project directory. The Neon segment should disappear instantly:
+4. Navigate out of the project directory. The Neon segment should disappear:
    ```bash
    cd ~
    ```
@@ -303,7 +303,7 @@ To verify the integration, navigate to a project linked to a Neon database.
 
 ## Troubleshooting
 
-If your custom Neon prompt isn't rendering correctly, check these common troubleshooting steps:
+If your custom Neon prompt isn't rendering correctly, check the following:
 
 - **Symbols display as boxes or `?`**: Your terminal font is missing the required glyphs. Make sure you have installed a [Nerd Font](https://www.nerdfonts.com/) **and** updated your terminal emulator's font setting to use it. Open the settings for your specific terminal (VS Code: `terminal.integrated.fontFamily`, iTerm2: Profiles > Text > Font, Windows Terminal: `fontFace` in your profile) and set it to the Nerd Font you installed. Alternatively, use the `no-nerd-font` preset:
   ```bash
@@ -316,17 +316,15 @@ If your custom Neon prompt isn't rendering correctly, check these common trouble
 
 ## Summary
 
-Terminal prompts don’t have to be static or limited. With Starship and Neon, you can build a responsive, context‑aware development environment that adapts to your workflow. By adding a custom module that queries the Neon CLI, your active database branch appears directly alongside your Git branch reducing the risk of running commands against the wrong environment and keeping critical context visible at all times.
-
-Displaying your Git branch and Neon database branch side‑by‑side minimizes context switching, eliminates repetitive status checks, and creates a safer, more efficient setup for database‑backed development.
+You installed Starship and added a custom module that reads the pinned branch from `.neon` with `neon status --current-branch`, so your active Neon branch appears next to your Git branch. As a next step, add `${custom.neon}` to a custom top-level `format` to control where the segment appears.
 
 ## Resources
 
-- [Starship Official Documentation](https://starship.rs/guide/)
-- [Starship Configuration Reference](https://starship.rs/config/)
-- [Starship Presets Gallery](https://starship.rs/presets/)
-- [Nerd Fonts Directory](https://www.nerdfonts.com/)
-- [Neon CLI Documentation](/docs/cli)
-- [Neon Database Branching](/docs/introduction/branching)
+- [Starship documentation](https://starship.rs/guide/)
+- [Starship configuration reference](https://starship.rs/config/)
+- [Starship presets](https://starship.rs/presets/)
+- [Nerd Fonts](https://www.nerdfonts.com/)
+- [Neon CLI documentation](/docs/cli)
+- [Neon database branching](/docs/introduction/branching)
 
 <NeedHelp />

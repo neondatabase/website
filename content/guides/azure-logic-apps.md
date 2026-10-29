@@ -1,17 +1,15 @@
 ---
-title: Automating Workflows with Azure Logic Apps and Neon
+title: Automating workflows with Azure Logic Apps and Neon
 subtitle: Learn how to automate database operations and processes by connecting Azure Logic Apps with Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-26T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-09-24T17:56:34.189Z'
 ---
 
-Azure Logic Apps provides a way to build automated workflows that integrate apps, data, services, and systems.
+Azure Logic Apps lets you build automated workflows that connect apps, data, and services. Combined with Lakebase Postgres on Neon, those workflows can run database operations in response to triggers and events.
 
-When you combine it with Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, you can create automation solutions that handle database operations based on various triggers and events.
-
-In this guide, you'll learn how to create Logic Apps workflows that interact with Lakebase Postgres to automate common processes and database operations.
+In this guide, you'll create a Logic Apps workflow that inserts incoming orders into a Lakebase Postgres database.
 
 ## Prerequisites
 
@@ -30,23 +28,22 @@ Before starting this guide, ensure you have:
 - Process data using built-in operations and custom implementations
 - Handle errors, implement retries, and monitor your workflow execution
 
-## Setting Up Your Environment
+## Setting up your environment
 
 Before you can start creating workflows with Azure Logic Apps and Neon, you need to set up your environment.
 
-### Step 1: Create a Neon Project
+### Step 1: Create a Neon project
 
 1. Log in to the [Neon Console](https://console.neon.tech)
-2. Click "New Project"
-3. Select Azure as your cloud provider and pick a region
-4. Name your project
-5. Click "Create Project"
+2. Click **New Project**
+3. Name your project and choose an AWS region, ideally one close to the Azure region you'll use for Logic Apps
+4. Click **Create project**
 
-Save your connection details - you'll need them to connect Logic Apps to your database.
+Save your connection details. You'll need them to connect Logic Apps to your database.
 
-### Step 2: Create Database Schema
+### Step 2: Create the database schema
 
-For the purpose of this guide, let's create a sample schema for tracking customer orders. This will help demonstrate various automation scenarios:
+For this guide, create a sample table for tracking customer orders:
 
 ```sql
 CREATE TABLE orders (
@@ -58,9 +55,9 @@ CREATE TABLE orders (
 );
 ```
 
-You can run the SQL statement in the Neon Console's SQL editor to create the schema. This table will store order details, including the customer's email, product name, quantity, status, and creation timestamp.
+You can run the SQL statement in the **SQL Editor** in the Neon Console to create the schema. This table will store order details, including the customer's email, product name, quantity, status, and creation timestamp.
 
-### Step 3: Set Up Azure Logic Apps
+### Step 3: Set up Azure Logic Apps
 
 With your Neon project and database schema in place, you can now set up Azure Logic Apps.
 
@@ -72,19 +69,19 @@ With your Neon project and database schema in place, you can now set up Azure Lo
    - Choose your subscription
    - Select or create a resource group
    - Name your Logic App
-   - Choose the region, best to pick the same region as your Neon project
+   - Choose a region close to your Neon project's AWS region
 1. Click "Review + create" and then "Create"
 
 This will take a few moments to deploy your Logic App. Once it's ready, you can start building workflows.
 
-## Creating Your First Workflow
+## Creating your first workflow
 
 Before you start building your first workflow, let's understand the key components of an Azure Logic App:
 
 - **Trigger**: An event that starts the workflow. It could be a timer, HTTP request, or a change in a service. Each workflow must have at least one trigger.
 - **Action**: A step that performs a specific operation, such as sending an email, updating a database, or calling an API.
 
-You can chain multiple actions together to create complex workflows that automate business processes.
+You can chain multiple actions together to automate multi-step business processes.
 
 Let's create a workflow that automatically processes new orders. For our fictional store the workflow will:
 
@@ -92,9 +89,7 @@ Let's create a workflow that automatically processes new orders. For our fiction
 1. Update the order status in the database
 1. Send a notification email to the customer
 
-### Step 1: Configure a Trigger
-
-Every Logic App workflow starts with a trigger and each workflow needs at least one trigger.
+### Step 1: Configure a trigger
 
 For our order processing workflow, we'll use an HTTP trigger that listens for new orders:
 
@@ -122,7 +117,7 @@ For our order processing workflow, we'll use an HTTP trigger that listens for ne
    ```
 1. Click "Save" which will generate a URL that you can use to trigger the workflow
 
-### Step 2: Add a Postgres Connection
+### Step 2: Add a Postgres connection
 
 With the trigger in place, you can now add actions to the workflow. Let's start by connecting to your Lakebase Postgres database where you store order data:
 
@@ -130,16 +125,16 @@ With the trigger in place, you can now add actions to the workflow. Let's start 
 1. Search for "PostgreSQL" and select "Insert row"
 1. Configure the connection:
    - Connection Name: "NeonConnection"
-   - Server: Your Neon host (e.g., "ep-cool-smoke-123456.eastus2.azure.neon.tech")
+   - Server: Your Neon host (e.g., "ep-cool-smoke-123456.us-east-1.aws.neon.tech")
    - Database name: Your database name
    - Username: Your Neon database username
    - Password: Your Neon database password
    - Encrypt connection: Yes
 1. Click "Create"
 
-### Step 3: Insert Order Data
+### Step 3: Insert order data
 
-One important limitation to note in the [Azure Logic Apps PostgreSQL connector](https://learn.microsoft.com/en-gb/connectors/postgresql/#insert-row) is that insert row operation requires you to provide explicit value for Primary Key column, even though default/autoincrement value is defined.
+The [Azure Logic Apps PostgreSQL connector](https://learn.microsoft.com/en-gb/connectors/postgresql/#insert-row) has a limitation: the insert row operation requires an explicit value for a primary key column, even when a default or autoincrement value is defined. The `orders` table in this guide has no primary key column, so it isn't affected.
 
 With the database connection set up, you can now insert the order data into the database using the trigger payload:
 
@@ -171,7 +166,7 @@ With the database connection set up, you can now insert the order data into the 
    ```
 1. After adding the database action, click "Save"
 
-### Step 3: Test the Workflow
+### Step 4: Test the workflow
 
 To test the workflow, let's use the Azure Logic Apps run interface:
 
@@ -188,11 +183,11 @@ To test the workflow, let's use the Azure Logic Apps run interface:
 1. Click "Run" to execute the workflow
 1. Check the database to verify that the order was inserted
 
-## Extending Your Workflow
+## Extending your workflow
 
-Once your basic workflow is working, you can extend it by integrating additional actions. One common enhancement is sending an email notification when a new order is placed.
+Once the basic workflow works, you can add more actions. A common one is sending an email notification when a new order is placed.
 
-### Adding an Email Notification
+### Adding an email notification
 
 You can use the built-in email actions in Azure Logic Apps to notify customers when their order is received:
 
@@ -202,18 +197,16 @@ You can use the built-in email actions in Azure Logic Apps to notify customers w
 4. Depending on the service you choose, you may need to authorize Azure Logic Apps to send emails on your behalf. For example, if you're using Gmail, you can follow [this guide](https://learn.microsoft.com/en-gb/connectors/gmail/) to set up the email action.
 5. Click "Save".
 
-Now, every time a new order is placed, the Logic App will automatically insert the order into your Lakebase Postgres database and send a confirmation email to the customer.
+Now, every time a new order is placed, the Logic App inserts the order into your Lakebase Postgres database and send a confirmation email to the customer.
 
 ## Conclusion
 
-Azure Logic Apps and Lakebase Postgres provide a straightforward way to automate workflows and database operations. Whether you need to process orders, send notifications, or connect different services, this approach allows you to set up reliable automation with minimal effort.
+You now have a Logic App that takes orders over HTTP, writes them to Lakebase Postgres through the PostgreSQL connector, and can email customers, all without writing application code. From here, you can add other Logic Apps connectors to route the same order data to more services.
 
-Thanks to the Azure Logic Apps PostgreSQL connector, you can easily integrate your Lakebase Postgres database into your workflows and build automations without writing code or managing infrastructure. Azure Logic Apps has a large number of connectors available, so you can easily integrate with other services and systems to create complex workflows.
+## Additional resources
 
-## Additional Resources
-
-- [Azure Logic Apps Documentation](https://docs.microsoft.com/azure/logic-apps/)
-- [Neon Documentation](/docs)
-- [PostgreSQL Connector Documentation](https://docs.microsoft.com/connectors/postgresql/)
+- [Azure Logic Apps documentation](https://docs.microsoft.com/azure/logic-apps/)
+- [Neon documentation](/docs)
+- [PostgreSQL connector documentation](https://docs.microsoft.com/connectors/postgresql/)
 
 <NeedHelp />
