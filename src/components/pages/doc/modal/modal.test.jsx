@@ -14,7 +14,12 @@ vi.mock('copy-to-clipboard', () => ({ default: (...args) => copyToClipboard(...a
 vi.mock('icons/docs/sidebar/ai-agent.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
-vi.mock('icons/home/copied.inline.svg', () => ({ default: (props) => <svg {...props} /> }));
+vi.mock('icons/home/copied.inline.svg', () => ({
+  default: (props) => <svg data-testid="copied-icon" {...props} />,
+}));
+vi.mock('icons/home/copy.inline.svg', () => ({
+  default: (props) => <svg data-testid="copy-icon" {...props} />,
+}));
 
 const agentSetupModal = MODALS.find((modal) => modal.id === 'docs-agent-setup');
 
@@ -43,7 +48,8 @@ describe('docs agent-setup modal entry', () => {
   it('copies the base prompt as plain text and reports the copy analytics event', async () => {
     render(<Modal {...agentSetupModal} />);
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Copy prompt' }));
+    // The whole field is the copy target; the control is icon-only (aria-label on the field).
+    fireEvent.click(await screen.findByRole('button', { name: 'Copy agent setup prompt' }));
 
     expect(copyToClipboard).toHaveBeenCalledWith(BASE_AGENT_PROMPT);
     expect(typeof copyToClipboard.mock.calls[0][0]).toBe('string');
@@ -51,13 +57,16 @@ describe('docs agent-setup modal entry', () => {
       text: 'Agent setup',
       tag_name: 'DocsAgentSetupPopup',
     });
-    expect(await screen.findByRole('button', { name: 'Prompt copied' })).toBeInTheDocument();
+    // Success state swaps the copy icon for the green check icon.
+    expect(await screen.findByTestId('copied-icon')).toBeInTheDocument();
   });
 
   it('links to the agents page and fires the shared modal-link analytics event', async () => {
     render(<Modal {...agentSetupModal} />);
 
-    fireEvent.click(await screen.findByRole('link', { name: /Explore AI agents and tools/ }));
+    fireEvent.click(
+      await screen.findByRole('link', { name: new RegExp(agentSetupModal.destination.label) })
+    );
 
     expect(sendGtagEvent).toHaveBeenCalledWith('click_docs_modal_link', {
       modal: 'docs-agent-setup',

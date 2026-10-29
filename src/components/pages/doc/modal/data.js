@@ -38,9 +38,9 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
  * @property {string} [description] Optional supporting text.
  * @property {ModalTargeting} [targeting] Page targeting rules; omit to show on every page.
  * @property {ModalDestination} destination Thumbnail and CTA destination.
- * @property {string} [copyPrompt] When set, the card shows a primary "copy prompt" button that
- *   copies this plain-text string to the clipboard instead of a video thumbnail.
- * @property {string} [copyLabel] Label for the copy-prompt button. Defaults to "Copy prompt".
+ * @property {string} [copyPrompt] When set, the card renders a copyable code field (with an
+ *   icon-only copy control) that copies this plain-text string to the clipboard instead of a
+ *   video thumbnail.
  */
 
 /**
@@ -54,13 +54,11 @@ import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
 const MODALS = [
   {
     id: 'docs-agent-setup',
-    title: 'Set up your coding agent',
-    description: 'Copy a prompt that gets your AI coding agent building on Neon in seconds.',
+    title: 'Set up your agent',
     targeting: { all: true },
     copyPrompt: BASE_AGENT_PROMPT,
-    copyLabel: 'Copy prompt',
     destination: {
-      label: 'Explore AI agents and tools',
+      label: 'AI tools for agents',
       url: '/docs/ai/ai-agents-tools',
     },
   },
