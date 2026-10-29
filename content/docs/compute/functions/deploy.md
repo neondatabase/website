@@ -7,7 +7,7 @@ summary: >-
   Also covers deploying a function from a Neon Function Registry template,
   checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-10-24T11:11:10.465Z'
+updatedOn: '2026-10-29T21:17:59.974Z'
 ---
 
 ## Deploy with `neon.ts`
@@ -111,6 +111,7 @@ const zip = await buildFunctionBundle({
   source: "./functions/hello.ts",
   env: {},
   runtime: "nodejs24",
+  bundler: "esbuild",
 });
 ```
 

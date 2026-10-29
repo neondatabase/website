@@ -130,15 +130,15 @@ Applies a `neon.ts` policy to an existing branch. Never creates a project or bra
 
 Returns a `PushResult`:
 
-| Field        | Type               | Description                                                                                                                               |
-| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `projectId`  | `string`           | Target project id.                                                                                                                        |
-| `orgId`      | `string?`          | Organization id for the target project, when the API returns one.                                                                         |
-| `branchId`   | `string`           | Target branch id.                                                                                                                         |
-| `branchName` | `string`           | Target branch name.                                                                                                                       |
-| `dryRun`     | `boolean`          | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                          |
-| `applied`    | `AppliedChange[]`  | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field. |
-| `conflicts`  | `ConflictReport[]` | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                          |
+| Field           | Type                                     | Description                                                                                                                                                                                                                                              |
+| --------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`     | `string`                                 | Target project id.                                                                                                                                                                                                                                       |
+| `orgId`         | `string?`                                | Organization id for the target project, when the API returns one.                                                                                                                                                                                        |
+| `branchId`      | `string`                                 | Target branch id.                                                                                                                                                                                                                                        |
+| `branchName`    | `string`                                 | Target branch name.                                                                                                                                                                                                                                      |
+| `dryRun`        | `boolean`                                | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                                                                                                                                         |
+| `applied`       | `AppliedChange[]`                        | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field.                                                                                                                |
+| `conflicts`     | `ConflictReport[]`                       | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                                                                                                                                         |
 | `customDomains` | `Array<{ domain, slug, cnameTarget? }>?` | Custom domains declared for the branch after the push, or what `apply` would leave in place on a dry run. `cnameTarget` is absent for a not-yet-registered domain on a dry run, and is an empty string when the region has no custom-domains front door. |
 
 ### `createBranch`
@@ -211,7 +211,7 @@ function buildFunctionBundle(fn: ResolvedFunctionConfig): Promise<Uint8Array>;
 
 `buildFunctionBundle` is loaded lazily and only when a deploy actually bundles a function, so a caller that never deploys functions, or that supplies its own `bundleFunction`, never pulls esbuild's native binary into their build. Inject a custom bundler via the `bundleFunction` option on `apply` / `pushConfig` / `createBranch` when your runtime can't ship that binary, for example a single-file packaged CLI, or a restricted CI sandbox.
 
-`ResolvedFunctionConfig` (what your bundler receives) has all deploy defaults already applied: `slug`, `name`, `source` (path to the entry file), `env` (resolved key/value pairs), `runtime`, and an optional `dev` block used only by `neon dev`.
+`ResolvedFunctionConfig` (what your bundler receives) has all deploy defaults already applied: `slug`, `name`, `source` (path to the entry file), `env` (resolved key/value pairs), `runtime`, `bundler` (`"esbuild"`, `"none"`, or a custom bundler function), and an optional `dev` block used only by `neon dev`.
 
 <Admonition type="note">
 The `neon` CLI has its own separate `NEON_ESBUILD_PATH` escape hatch for "esbuild not found" errors (see [Deploy and manage Neon Functions](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy)). That variable is read by the CLI's own bundler, not by `buildFunctionBundle` in this package, so it has no effect when you call `@neon/config-runtime` directly. Pass `bundleFunction` instead.
