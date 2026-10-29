@@ -4,27 +4,27 @@ subtitle: 'Learn how to run a coding agent in a disposable Upstash Box sandbox w
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-10-29T00:00:00.000Z'
-updatedOn: '2026-10-29T17:56:56.375Z'
+updatedOn: '2026-10-29T18:05:57.073Z'
 ---
 
-Coding agents like Claude Code, Codex, and OpenCode can help automate repository tasks, from investigating issues and making code changes to running tests and opening pull requests. To run these tasks independently, each agent needs a working environment with access to the repository, development tools, and the credentials required to complete the job. Disposable environments make this easier by giving each task its own workspace that can be created on demand and discarded when the work is done.
+Coding agents like Claude Code, Codex, and OpenCode can automate repository tasks: investigating issues, making code changes, running tests, and opening pull requests. To do that independently, each agent needs a working environment with the repository, the development tools, and the credentials the job requires. Disposable environments make this easier by giving each task its own workspace, created on demand and discarded when the work is done.
 
 [Upstash Box](https://upstash.com/docs/box) provides a disposable Linux environment for each task, complete with a filesystem, shell, Git, and support for coding harnesses. Each task gets an isolated box, so multiple agents can work in parallel without sharing a working copy. Once a task finishes, the box and its temporary files are deleted, while the resulting Git branch and pull request remain in GitHub.
 
 [Neon AI Gateway](/docs/ai-gateway/overview) handles access to AI models through a single credential for all providers in its catalog, with usage billed against prepaid credits. This lets the agent use supported models without requiring individual provider credentials in the sandbox.
 
-In this guide, you’ll build a TypeScript CLI that connects these components into an automated issue-to-pull-request workflow. It will fetch a GitHub issue, create a Box sandbox, clone the repository, run OpenCode with GLM-5.3 Flash through Neon AI Gateway, and open a pull request with the proposed changes. You’ll also learn how to configure the gateway credential in Box, choose a supported coding harness and model, and add guardrails before running the agent against a real repository.
+In this guide, you'll build a TypeScript CLI that connects these components into an automated issue-to-pull-request workflow. It fetches a GitHub issue, creates a Box sandbox, clones the repository, runs OpenCode with GLM 5.3 Flash through Neon AI Gateway, and opens a pull request with the proposed changes. You'll also learn how to configure the gateway credential in Box, choose a supported coding harness and model, and add guardrails before running the agent against a real repository.
 
 ## Prerequisites
 
 Before you begin, make sure you have the following:
 
 - **A Neon account on a paid plan:** The AI Gateway requires the Launch or Scale plan. Sign up at [console.neon.tech](https://console.neon.tech/signup) if you don't have an account. See [Neon plans](/docs/introduction/plans).
-- **AI Gateway prepaid credits:** Buy at least $5 on the **Billing** page in the Neon Console: open the **AI gateway credits** option and select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
+- **AI Gateway prepaid credits:** Buy at least $5 on the **Billing** page in the Neon Console: open the **AI gateway credits** card and select **Add credits**. See [AI Gateway prepaid credits](/docs/ai-gateway/prepaid-credits).
 - **An Upstash account:** Create one in the [Upstash Console](https://console.upstash.com/box).
 - **The GitHub CLI, authenticated:** Install the [GitHub CLI](https://cli.github.com/) and run `gh auth login`.
 - **Node.js 22 or later:** Download it from [nodejs.org](https://nodejs.org/).
-- **A repository with an open issue:** Use a repository you own. For a safe first run, create a simple repository with a single issue that describes a small bug or missing feature.
+- **A repository with an open issue:** Use a repository you own. For a safe first run, create a repository with a single issue that describes a small bug or missing feature.
 
 <Admonition type="info" title="Region availability">
 The AI Gateway is available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions. Support is expanding toward [all regions](/docs/introduction/regions).
@@ -41,7 +41,7 @@ You'll need a Neon project with the AI Gateway enabled. Create one in the Neon C
 3. Under **Services**, make sure **AI gateway** is enabled.
 4. Click **Create project**.
 
-![The create project dialog with the AI gateway service enabled](/docs/guides/create-neon-project-with-ai-gateway.png)
+![The create project dialog with the AI gateway service enabled](/docs/guides/create-neon-project-with-ai-gateway.png 'no-border')
 
 ## Get your AI Gateway credential
 
@@ -50,7 +50,7 @@ Next, copy the token and the gateway URL that the box will use:
 1. Open your project and click **Connect** at the top of the sidebar.
 2. Switch to the **AI Gateway** tab, then click **Copy snippet** to copy both environment variables.
 
-![The AI Gateway tab in the Connect dialog showing the environment variables and credential controls](/docs/guides/connect-ai-gateway.png)
+![The AI Gateway tab in the Connect dialog showing the environment variables and credential controls](/docs/guides/connect-ai-gateway.png 'no-border')
 
 ## Store the credential in Upstash Box
 
@@ -61,7 +61,7 @@ Add the credential to your Upstash Box instance in the [Upstash Console](https:/
 3. Under **Neon AI Gateway**, click **Add key**, then paste the token and the gateway URL.
 4. Click **Save**.
 
-   ![The Upstash Box Agent API Keys page with the Neon AI Gateway credential fields filled in](/docs/guides/upstash-box-neon-ai-gateway-key.png)
+![The Upstash Box Agent API Keys page with the Neon AI Gateway credential fields filled in](/docs/guides/upstash-box-neon-ai-gateway-key.png 'no-border')
 
 ## Get your Upstash Box API key
 
@@ -83,7 +83,7 @@ You'll need to connect your GitHub account to Upstash Box so the box can clone t
 
 ## Set up the project
 
-With the Neon AI gateway credential and GitHub connection in place, create a new Node project for the runner:
+With the AI Gateway credential and GitHub connection in place, create a new Node project for the runner:
 
 ```bash filename="Terminal"
 mkdir box-ai-agent && cd box-ai-agent
@@ -119,7 +119,7 @@ UPSTASH_BOX_API_KEY=box_...
 BASE_BRANCH=main
 ```
 
-`BASE_BRANCH` is the branch the pull request targets. Use `main` for most repositories and `master` for older ones. If the branch doesn't exist, `createPR` fails, so check the name before your first run.
+`BASE_BRANCH` is the branch the pull request targets. Use the repository's default branch, which is `main` for most repositories.
 
 ## Fetch the issue
 
@@ -351,7 +351,7 @@ async function main() {
         stream.result.trim(),
         "",
         "---",
-        `Opened by an agent running in Upstash Box on \`${MODEL}\` via Neon AI Gateway.`,
+        `Opened by an agent running in Upstash Box on \`${MODEL}\` via AI Gateway.`,
       ].join("\n"),
       base: process.env.BASE_BRANCH ?? "main",
     });
@@ -374,10 +374,11 @@ main().catch((error) => {
 });
 ```
 
-The code creates a box with the OpenCode harness and GLM-5.3 Flash model, clones the repository, checks out a new branch, and streams the agent's output. If the agent made changes, it stages, commits, and pushes them, then opens a pull request. Finally, it deletes the box.
+Here is what the runner does for each issue:
 
-- **The stored credential.** `BoxApiKey.StoredKey` makes Box use the Neon credential you saved in the console. The `git` block only sets the commit identity; clone, push, and pull request go through the GitHub connection.
-- **The harness and model pair.** Box doesn't validate the pair when it creates the box. If it's incorrect, the agent fails at startup with a generic `Unexpected server error`. This guide uses [OpenCode](https://opencode.ai) with `neon/glm-5-3-flash`. To switch, use [Upstash's harness table](https://upstash.com/docs/box/guides/neon-ai-gateway#:~:text=on%20every%20harness%3A-,Models,-Harness): Codex runs OpenAI models, Claude Code runs Anthropic models, and OpenCode runs most of the catalog over chat completions. The [`neon` provider page on models.dev](https://models.dev/providers/neon) lists every model with the `neon/` prefix Box expects, along with its context window.
+- **The box.** It creates a box with the OpenCode harness and GLM 5.3 Flash model, clones the repository, checks out a new branch, and streams the agent's output.
+- **The stored credential.** `BoxApiKey.StoredKey` makes Box use the Neon credential you saved in the Upstash Console. The `git` block only sets the commit identity; clone, push, and pull request go through the GitHub connection.
+- **The harness and model pair.** Not every model runs on every harness. Box rejects a model the harness can't run, so a mismatched pair fails when the box starts. This guide uses [OpenCode](https://opencode.ai) with `neon/glm-5-3-flash`. To switch, check [Upstash's harness and model table](https://upstash.com/docs/box/guides/neon-ai-gateway#:~:text=on%20every%20harness%3A-,Models,-Harness): Codex runs OpenAI models, Claude Code runs Anthropic models, and OpenCode runs most of the catalog over chat completions. The [`neon` provider page on models.dev](https://models.dev/providers/neon) lists every model with the `neon/` prefix Box expects, along with its context window.
 - **The runner owns git.** The prompt tells the agent not to commit, push, or open a pull request. The runner records `baseSha`, then stages, commits, and pushes the branch itself, and exits before `createPR` if the agent has made no changes.
 
 ## Run it end to end
@@ -416,7 +417,7 @@ Open the pull request and read the diff before you merge.
 
 ## Guardrails
 
-The runner has broad access to the repository and the public internet, so you should add some guardrails before you run it on a real repository.
+The runner has broad access to the repository and the public internet. You can add guardrails to limit the agent's reach and reduce the risk of accidental changes:
 
 ### Limit access
 
@@ -428,7 +429,7 @@ Boxes can reach the public internet by default, which is convenient while you ge
 
 ## Extending the runner
 
-The runner in this guide is a simple example. You can extend it the following ways:
+The runner in this guide is a starting point. You can extend it in the following ways:
 
 ### Give each run a Neon branch
 
@@ -436,7 +437,7 @@ The example workflow in this guide gives you disposability at the OS level. The 
 
 A [Neon branch](/docs/introduction/branching) brings the same isolation to the data layer. Each branch is a copy-on-write fork of the [entire backend](/docs/concepts/branch-your-backend), including databases and roles, with its own compute. The agent can migrate, seed, or truncate data without affecting the shared database. Deleting the branch leaves the parent untouched, and parallel runs remain isolated: even when two issues modify the same table, they never see each other's data.
 
-The branch is created from your project's default branch, so the app in the box must already connect to that Neon project. Otherwise, the new branch starts empty.
+The branch is created from your project's default branch, so the app in the box must already connect to that Neon project. Otherwise, the new branch won't have the schema or data the app expects.
 
 The [Mastra and Upstash Box guide](/guides/mastra-upstash-box-neon) walks through the complete workflow using `@neon/sdk`. `branches.createAndConnect` creates the branch and returns a connection string, `branches.update` sets an `expires_at` backstop, and `branches.delete` runs in the same `finally` block that cleans up the box. Pass the connection string as `DATABASE_URL` when creating the box, using [environment variables](https://upstash.com/docs/box/overall/security#environment-variables).
 
@@ -444,11 +445,11 @@ The [Cloudflare Sandboxes guide](/guides/cloudflare-sandbox-neon-branching) cove
 
 ### Trigger it from GitHub Actions
 
-You can trigger the runner from a GitHub Actions workflow instead of running it locally. The workflow can run on a schedule, on pull request events, or when an issue is labeled. The workflow can use the same `npm run fix` command, passing the repository and issue number as arguments. This lets you automate the process of turning issues into pull requests without manual intervention.
+You can trigger the runner from a GitHub Actions workflow instead of running it locally. The workflow can run on a schedule, on pull request events, or when an issue is labeled. It can use the same `npm run fix` command, passing the repository and issue number as arguments. This turns issues into pull requests on a schedule or in response to events, without running the CLI yourself.
 
 ## Conclusion
 
-You now have a working TypeScript CLI that can fetch a GitHub issue, create a disposable Upstash Box sandbox, run an AI coding agent through Neon AI Gateway, and open a pull request with the proposed changes. This setup allows you to automate repository tasks while maintaining isolation and security for each run.
+You now have a working TypeScript CLI that can fetch a GitHub issue, create a disposable Upstash Box sandbox, run an AI coding agent through the AI Gateway, and open a pull request with the proposed changes. This setup lets you automate repository tasks while keeping each run isolated and under your control.
 
 ## Resources
 
