@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-29T21:37:59.548Z'
+updatedOn: '2026-10-30T15:56:48.576Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -401,7 +401,7 @@ We conduct regular internal audits and provide training to our employees to ensu
 </FaqItem>
 
 <FaqItem question="What should I do if I suspect a data breach?">
-Contact our security team immediately at security@neon.tech.
+Contact our security team immediately at [security@databricks.com](mailto:security@databricks.com).
 </FaqItem>
 
 </Faq>
