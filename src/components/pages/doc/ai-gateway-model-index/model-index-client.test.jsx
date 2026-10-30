@@ -195,6 +195,12 @@ describe('ModelIndexClient', () => {
     expect(screen.getByRole('button', { name: 'Labs (1)' })).toBeInTheDocument();
   });
 
+  it('sorts by lab from a link that still uses the old provider sort key', () => {
+    render(<ModelIndexClient rows={rows} variant="landing" />, '?sort=provider:asc');
+
+    expect(getVisibleModelNames()).toEqual(['Old open model', 'New image model', 'Unpriced model']);
+  });
+
   it('closes the lab listbox when focus leaves the control', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 

@@ -65,7 +65,8 @@ const parseAsSortDir = parseAsStringLiteral(['asc', 'desc']);
 const parseAsSort = createParser({
   parse(query) {
     const [key = '', dir = ''] = query.split(':');
-    const sortKey = parseAsSortKey.parse(key);
+    // `provider` was the maker column's sort key before the column was renamed Lab.
+    const sortKey = parseAsSortKey.parse(key === 'provider' ? 'lab' : key);
     if (sortKey === null) return null;
     return { key: sortKey, dir: parseAsSortDir.parse(dir) ?? 'asc' };
   },
