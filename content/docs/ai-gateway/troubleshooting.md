@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-10-23T11:00:38.670Z'
+updatedOn: '2026-10-29T21:05:07.123Z'
 ---
 
 ## Authentication errors
@@ -152,8 +152,8 @@ The message identifies the condition:
 
 | Condition               | Message                                                                                                                                                                |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Endpoint disabled       | `ai gateway upstream model endpoint is temporarily disabled. Contact Neon support`                                                                                     |
-| Timeout                 | `ai gateway upstream model timed out. Retry, or reduce the input size`                                                                                                 |
+| Endpoint disabled       | `This model is temporarily disabled. Contact Neon support for help: https://console.neon.tech/app/projects?modal=support`                                              |
+| Timeout                 | `The model took too long to respond. Reduce max_tokens or your input size, or use streaming.`                                                                          |
 | Request too large       | `ai gateway upstream rejected the request: body too large`                                                                                                             |
 | Model unavailable       | `ai gateway upstream model is not available. Contact Neon support`                                                                                                     |
 | Access denied           | `ai gateway upstream denied the request. Contact Neon support`                                                                                                         |
@@ -162,7 +162,7 @@ The message identifies the condition:
 | Invalid request         | `ai gateway upstream model rejected the request: <provider message>` (redacted to `...rejected the request as invalid` when the provider detail can't be shown safely) |
 | Unknown                 | `ai gateway upstream request failed. Contact Neon support if it persists`                                                                                              |
 
-**Fix:** Follow the guidance in the message. Retry transient conditions (timeout, over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. If an error persists, check the [Neon status page](https://neonstatus.com). For paid plan support options, see [Support](/docs/introduction/support).
+**Fix:** Follow the guidance in the message. Retry transient conditions (over capacity, upstream internal error) with exponential backoff, respecting any `Retry-After` header. Don't retry a timeout as is: the gateway sends `X-Should-Retry: false` so the OpenAI and Anthropic SDKs skip their automatic retry, because each retry runs the whole slow generation again. Reduce `max_tokens` or the input size, or use streaming. If an error persists, check the [Neon status page](https://neonstatus.com). For paid plan support options, see [Support](/docs/introduction/support).
 
 ---
 
