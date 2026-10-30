@@ -1,10 +1,11 @@
 ---
 title: Set up OAuth
-subtitle: Add Google, GitHub, or Vercel sign-in to your application
+subtitle: Add Google, GitHub, Vercel, Apple, or Microsoft sign-in to your application
 summary: >-
-  Managed Better Auth OAuth setup adds Google, GitHub, and Vercel social sign-in to
-  an application using `signIn.social()`, with Google enabled in development via
-  shared credentials and GitHub and Vercel requiring custom OAuth app credentials.
+  Managed Better Auth OAuth setup adds Google, GitHub, Vercel, Apple, and
+  Microsoft Entra ID social sign-in to an application using `signIn.social()`,
+  with Google enabled in development via shared credentials and the other
+  providers requiring custom OAuth app credentials.
   For production, register the provider's authorized redirect URI as
   `{NEON_AUTH_BASE_URL}/callback/{provider}` in each provider's console (not the
   app's callbackURL), and add every callbackURL origin to Managed Better Auth's trusted
@@ -15,7 +16,7 @@ enableTableOfContents: true
 updatedOn: '2026-09-17T22:48:53.595Z'
 ---
 
-OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
+OAuth lets users sign in with their Google, GitHub, Vercel, Apple, or Microsoft account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
 
 ## Development mode
 
@@ -32,14 +33,14 @@ This is safe for development and testing. An outside website can't use the share
 For production, add your own Google Client ID and secret. See [Production setup](#production-setup).
 
 <Admonition type="note">
-GitHub and Vercel OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
+GitHub, Vercel, Apple, and Microsoft OAuth require custom credentials and are not available with shared credentials. See [Production setup](#production-setup) to configure your own OAuth apps.
 </Admonition>
 
 ## Sign in with OAuth
 
-Call `signIn.social()` with your provider (`"google"`, `"github"`, or `"vercel"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Managed Better Auth's OAuth callback route (see [Production setup](#production-setup)), then Managed Better Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
+Call `signIn.social()` with your provider (`"google"`, `"github"`, `"vercel"`, `"apple"`, or `"microsoft"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Managed Better Auth's OAuth callback route (see [Production setup](#production-setup)), then Managed Better Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
 
-<CodeTabs labels={["Google","GitHub","Vercel"]}>
+<CodeTabs labels={["Google","GitHub","Vercel","Apple","Microsoft"]}>
 
 ```jsx {6} filename="src/App.jsx"
 import { authClient } from './auth';
@@ -86,6 +87,36 @@ const handleVercelSignIn = async () => {
 };
 ```
 
+```jsx {6} filename="src/App.jsx"
+import { authClient } from './auth';
+
+const handleAppleSignIn = async () => {
+  try {
+    await authClient.signIn.social({
+      provider: "apple",
+      callbackURL: window.location.origin,
+    });
+  } catch (error) {
+    console.error("Apple sign-in error:", error);
+  }
+};
+```
+
+```jsx {6} filename="src/App.jsx"
+import { authClient } from './auth';
+
+const handleMicrosoftSignIn = async () => {
+  try {
+    await authClient.signIn.social({
+      provider: "microsoft",
+      callbackURL: window.location.origin,
+    });
+  } catch (error) {
+    console.error("Microsoft sign-in error:", error);
+  }
+};
+```
+
 </CodeTabs>
 
 ## Handle the callback
@@ -111,7 +142,7 @@ Specify different URLs for new users or errors:
 
 ```jsx {3-5} filename="src/App.jsx"
 await authClient.signIn.social({
-  provider: "google", // or "github", "vercel"
+  provider: "google", // or "github", "vercel", "apple", "microsoft"
   callbackURL: "/dashboard",
   newUserCallbackURL: "/welcome",
   errorCallbackURL: "/error",
@@ -120,7 +151,7 @@ await authClient.signIn.social({
 
 ## Production setup
 
-For production, configure your own OAuth app credentials. GitHub and Vercel OAuth require custom credentials, while Google OAuth works with shared credentials for development but should use custom credentials in production.
+For production, configure your own OAuth app credentials. GitHub, Vercel, Apple, and Microsoft OAuth require custom credentials, while Google OAuth works with shared credentials for development but should use custom credentials in production.
 
 ### 1. Register redirect URIs with each provider
 
@@ -132,7 +163,7 @@ Managed Better Auth uses [Better Auth](https://www.better-auth.com/) callback ro
 
 Use the **Auth base URL** from the Neon Console for that branch. In your app it is usually the `NEON_AUTH_BASE_URL` or `VITE_NEON_AUTH_URL` value, or the URL you pass to `createAuthClient`. Do not add a trailing slash before `/callback`.
 
-Replace `{provider}` with `google`, `github`, or `vercel`.
+Replace `{provider}` with `google`, `github`, `vercel`, `apple`, or `microsoft`.
 
 Example authorized redirect URI for Google:
 
@@ -162,6 +193,36 @@ Set **Authorization callback URL** to **`{NEON_AUTH_BASE_URL}/callback/github`**
 
 Set the authorization callback URL to **`{NEON_AUTH_BASE_URL}/callback/vercel`**. In the Vercel app's permissions, enable the **`openid`**, **`email`**, and **`profile`** scopes, which Managed Better Auth requires to create a session. See [Vercel's OAuth app docs](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app).
 
+**Apple**
+
+In the [Apple Developer portal](https://developer.apple.com/account/resources/identifiers/list), create a **Services ID** and enable **Sign in with Apple** for it. When you configure it, add the host of your `NEON_AUTH_BASE_URL` under **Domains and Subdomains**, and set **Return URLs** to **`{NEON_AUTH_BASE_URL}/callback/apple`**. Then create a key with **Sign in with Apple** enabled and download the `.p8` file. Apple lets you download it only once.
+
+You need four values for Neon:
+
+- **Services ID**: the identifier of the Services ID (for example, `com.example.app.signin`). This is your client ID.
+- **Team ID**: your 10-character Apple team ID, shown in your Apple Developer account's membership details.
+- **Key ID**: the 10-character ID of the key you created.
+- **Private key**: the full contents of the `.p8` file, including the `BEGIN` and `END` lines.
+
+Managed Better Auth signs a fresh client secret from your private key for each sign-in, so you don't need to rotate a client secret every six months.
+
+**Microsoft Entra ID**
+
+In the [Microsoft Entra admin center](https://entra.microsoft.com), go to **App registrations** and create a new registration. Under **Redirect URI**, choose the **Web** platform and enter **`{NEON_AUTH_BASE_URL}/callback/microsoft`**. Copy the **Application (client) ID**, then go to **Certificates & secrets** and create a client secret. Copy the secret's **Value**, not its **Secret ID**.
+
+The tenant controls which Microsoft accounts can sign in:
+
+- `common`: work, school, and personal Microsoft accounts (the default)
+- `organizations`: work and school accounts only
+- `consumers`: personal Microsoft accounts only
+- A tenant ID (GUID) or verified domain: accounts from that one tenant only
+
+<Admonition type="important" title="Add the xms_edov and acct claims">
+Managed Better Auth treats a Microsoft email as verified only when the ID token includes the `xms_edov` claim set to `true` and the `acct` claim set to `0` (a member of the tenant, not a guest). In your app registration, go to **Token configuration**, select **Add optional claim**, choose **ID**, and add `xms_edov` and `acct`.
+
+Without these claims, every Microsoft email is treated as unverified. A Microsoft sign-in then can't link to an existing user with the same email, and the user is redirected to your app with `error=account_not_linked`.
+</Admonition>
+
 ### 2. Add trusted domains for your app
 
 Before testing production OAuth, add every origin you pass as **`callbackURL`** (and related URLs) to Managed Better Auth's allowlist. See [Configure trusted domains](/docs/auth/guides/configure-domains).
@@ -173,20 +234,24 @@ Create OAuth apps with your providers:
 - [Google OAuth setup](https://developers.google.com/identity/protocols/oauth2/web-server) (see [Google OAuth branding](#google-oauth-branding) below before going live)
 - [GitHub OAuth setup](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
 - [Vercel OAuth setup](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app)
+- [Sign in with Apple setup](https://developer.apple.com/help/account/configure-app-capabilities/configure-sign-in-with-apple-for-the-web)
+- [Microsoft Entra app registration](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
 
-Then give the **Client ID** and **Client Secret** to Managed Better Auth for that branch:
+Then give the credentials to Managed Better Auth for that branch. For most providers, that's the **Client ID** and **Client Secret**. Apple and Microsoft need [extra values](#1-register-redirect-uris-with-each-provider).
 
 <Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
-In the Neon Console, open your **project** and select the **branch**, then go to **Settings → Auth**. Under **OAuth providers**, click **Add OAuth provider** (or open an existing provider's **⋮** menu and choose **Configure**).
+In the Neon Console, open your **project** and select the **branch**, then go to **Settings** > **Better Auth**. Under **OAuth providers**, click **Add OAuth provider** (or open an existing provider's **⋮** menu and choose **Configure**).
 
-The dialog shows the exact **authorization callback URL** to register with the provider (for example, `{NEON_AUTH_BASE_URL}/callback/github`). Copy it from the dialog rather than assembling it by hand, then enter your **Client ID** and **Client Secret**.
+The dialog shows the exact **authorization callback URL** to register with the provider (for example, `{NEON_AUTH_BASE_URL}/callback/github`). Copy it from the dialog rather than assembling it by hand, then enter your **Client ID** and **Client Secret**. For Apple, enter the **Services ID**, **Team ID**, **Key ID**, and the contents of your `.p8` private key. For Microsoft, also enter the **Tenant ID**. If you leave it blank, Neon uses `common`.
 
 Click **Add** (or **Update** when editing an existing provider) to save. Neon applies the change to the branch and confirms with a success message. Your app uses the new credentials on the next sign-in. A provider using Neon's shared credentials shows a **Shared credentials** badge until you add your own.
 
 To disable a provider, open its **⋮** menu and choose **Remove**. Its sign-in button no longer appears in your app.
+
+When you edit an Apple provider, leave the private key blank to keep the stored key. To replace the key, enter the new key and its Key ID together.
 
 </TabItem>
 
@@ -197,6 +262,8 @@ Add a provider with [`neon neon-auth oauth-provider add`](/docs/cli/neon-auth#oa
 ```bash shouldWrap
 neon neon-auth oauth-provider add --provider-id google --oauth-client-id <client-id> --oauth-client-secret <client-secret>
 ```
+
+The CLI supports `google`, `github`, and `vercel`. To add Apple or Microsoft, use the Console or the API.
 
 </TabItem>
 
@@ -210,6 +277,28 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -H 'Content-Type: application/json' \
   -d '{"id": "google", "client_id": "<client-id>", "client_secret": "<client-secret>"}'
 ```
+
+For Microsoft, add `microsoft_tenant_id`:
+
+```bash shouldWrap
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/oauth_providers' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"id": "microsoft", "client_id": "<client-id>", "client_secret": "<client-secret>", "microsoft_tenant_id": "common"}'
+```
+
+For Apple, send the Services ID as `client_id`, the contents of the `.p8` file as `client_secret`, and the `apple_team_id` and `apple_key_id`. This example uses `jq` to read the key file into the request body:
+
+```bash shouldWrap
+jq -n --rawfile key AuthKey_ABC123DEFG.p8 \
+  '{id: "apple", client_id: "com.example.app.signin", client_secret: $key, apple_team_id: "ABCDE12345", apple_key_id: "ABC123DEFG"}' |
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/oauth_providers' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d @-
+```
+
+Responses never include the private key or client secret. They return a masked value instead.
 
 </TabItem>
 
