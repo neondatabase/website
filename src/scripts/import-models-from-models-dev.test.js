@@ -20,7 +20,7 @@ describe('import-models-from-models-dev', () => {
   // The committed catalog already has lab: xai. That does not prove labFor()
   // maps grok; deleting the prefix rule still leaves data.json and
   // model-rows.test.js green.
-  it('assigns grok ids to the xai lab and keeps the committed provider', () => {
+  it('assigns grok ids to the xai lab and derives the provider', () => {
     const from = path.join(os.tmpdir(), `import-grok-${process.pid}.json`);
     temps.push(from);
     const grok = catalog.neon.models['grok-4-6'];
@@ -43,7 +43,7 @@ describe('import-models-from-models-dev', () => {
     const merged = JSON.parse(stdout);
 
     expect(merged.neon.models['grok-4-6'].lab).toBe('xai');
-    expect(merged.neon.models['grok-4-6'].provider).toBe(grok.provider);
+    expect(merged.neon.models['grok-4-6'].provider).toBe('xai');
   });
 
   it('keeps the catalog released flag on re-import and starts a new model unreleased', () => {
@@ -64,7 +64,7 @@ describe('import-models-from-models-dev', () => {
 
     const stdout = execFileSync(
       process.execPath,
-      [SCRIPT, '--from', from, '--models', 'grok-4-6,grok-new', '--provider', 'xai', '--stdout'],
+      [SCRIPT, '--from', from, '--models', 'grok-4-6,grok-new', '--stdout'],
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
     );
     const { models } = JSON.parse(stdout).neon;
@@ -72,32 +72,5 @@ describe('import-models-from-models-dev', () => {
     expect(models['grok-4-6'].released).toBe(true);
     expect(models['grok-new'].released).toBe(false);
     expect(models['grok-new'].provider).toBe('xai');
-  });
-
-  it('refuses a new model without --provider and writes nothing', () => {
-    const from = path.join(os.tmpdir(), `import-no-provider-${process.pid}.json`);
-    temps.push(from);
-    const grok = catalog.neon.models['grok-4-6'];
-    fs.writeFileSync(
-      from,
-      JSON.stringify({
-        neon: { models: { 'grok-4-6': grok, 'grok-new': { ...grok, id: 'grok-new' } } },
-      })
-    );
-
-    let error;
-    try {
-      execFileSync(
-        process.execPath,
-        [SCRIPT, '--from', from, '--models', 'grok-4-6,grok-new', '--stdout'],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }
-      );
-    } catch (err) {
-      error = err;
-    }
-
-    expect(error.status).toBe(3);
-    expect(error.stdout).toBe('');
-    expect(error.stderr).toContain('grok-new');
   });
 });

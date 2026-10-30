@@ -76,6 +76,12 @@ const DECISION = {
 };
 
 describe('toCatalogEntry', () => {
+  it('names Databricks as the provider of open-weight models and the lab otherwise', () => {
+    expect(toCatalogEntry({ ...GPT, owned_by: 'openai' }).provider).toBe('openai');
+    const oss = { ...GPT, features: { ...GPT.features, open_weights: true } };
+    expect(toCatalogEntry(oss)).toMatchObject({ lab: 'openai', provider: 'databricks' });
+  });
+
   it('maps a System One decision model to an input-only entry without chat fields', () => {
     expect(toCatalogEntry(DECISION)).toEqual({
       id: 'example-decision',
@@ -97,7 +103,7 @@ describe('toCatalogEntry', () => {
       id: 'gpt-5-4',
       name: 'GPT-5.4',
       lab: 'openai',
-      provider: 'databricks',
+      provider: 'openai',
       family: 'gpt',
       released: true,
       attachment: true,
@@ -172,7 +178,7 @@ describe('buildCatalog', () => {
       id: 'gte-large-en',
       name: 'GTE Large (En)',
       lab: 'alibaba',
-      provider: 'alibaba',
+      provider: 'databricks',
       family: 'text-embedding',
       released: true,
       type: 'embedding',
