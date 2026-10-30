@@ -263,7 +263,11 @@ Add a provider with [`neon neon-auth oauth-provider add`](/docs/cli/neon-auth#oa
 neon neon-auth oauth-provider add --provider-id google --oauth-client-id <client-id> --oauth-client-secret <client-secret>
 ```
 
-The CLI supports `google`, `github`, and `vercel`. To add Apple or Microsoft, use the Console or the API.
+Apple and Microsoft need Neon CLI 8.14.0 or later. Use `--microsoft-tenant-id` for Microsoft, and `--apple-team-id`, `--apple-key-id`, and `--oauth-client-secret-file` (the path to your `.p8` key) for Apple:
+
+```bash shouldWrap
+neon neon-auth oauth-provider add --provider-id apple --oauth-client-id com.example.app.signin --oauth-client-secret-file AuthKey_ABC123DEFG.p8 --apple-team-id ABCDE12345 --apple-key-id ABC123DEFG
+```
 
 </TabItem>
 
