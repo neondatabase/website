@@ -62,11 +62,17 @@ function toCost(item, committedCost = {}) {
   return cost;
 }
 
+// models.dev terms: the lab made the model, the provider serves it. Databricks
+// serves every open-weight model on the gateway; any other model is labeled
+// with its lab.
+export const providerFor = ({ lab, openWeights }) => (openWeights ? 'databricks' : lab);
+
 export function toCatalogEntry(item, committedEntry = {}) {
   const entry = {
     id: item.id,
     name: item.name,
-    provider: item.owned_by,
+    lab: item.owned_by,
+    provider: providerFor({ lab: item.owned_by, openWeights: item.features.open_weights }),
     family: item.family,
     // Committed `released: false` holds a model back until it is announced.
     released: committedEntry.released ?? true,

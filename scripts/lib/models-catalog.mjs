@@ -46,6 +46,7 @@ const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
 const REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -67,6 +68,7 @@ const REQUIRED_KEYS = [
 const EMBEDDING_REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -265,7 +267,7 @@ export function validateCatalog(data) {
         `${at('dimensions')} must be a positive integer, got ${JSON.stringify(model.dimensions)}`
       );
     }
-    for (const field of ['id', 'name', 'provider', 'family']) {
+    for (const field of ['id', 'name', 'lab', 'provider', 'family']) {
       if (
         model[field] !== undefined &&
         (typeof model[field] !== 'string' || model[field].trim() === '')

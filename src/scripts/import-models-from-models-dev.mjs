@@ -35,6 +35,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { providerFor } from '../../scripts/lib/ai-gateway-models.mjs';
 import { validateCatalog } from '../../scripts/lib/models-catalog.mjs';
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
@@ -42,19 +43,22 @@ const OUT_PATH = path.resolve(DIRNAME, '../app/models.json/data.json');
 const DOC_URL = 'https://neon.com/docs/ai-gateway/models';
 
 // Not part of the capability catalog, or describing the canonical model rather
-// than the one Neon serves. `provider` is re-added below as the model's maker.
+// than the one Neon serves. models.dev's per-model `provider` is an SDK override;
+// our `lab` and `provider` are set below.
 const STRIP = new Set([
   'description',
   'benchmarks',
   'weights',
   'links',
   'experimental',
+  'lab',
   'provider',
 ]);
 
 const KEY_ORDER = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -74,7 +78,7 @@ const KEY_ORDER = [
   'status',
 ];
 
-const PROVIDER_ORDER = [
+const LAB_ORDER = [
   'anthropic',
   'openai',
   'google',
@@ -86,11 +90,9 @@ const PROVIDER_ORDER = [
   'xai',
 ];
 
-// The organisation that made the model, matching models.dev provider ids — not
-// the `owned_by` the gateway reports, which names whoever hosts it (`inkling`
-// comes back as `databricks`, `glm-5-2` as `zhipu`). Both are published: this on
-// /models.json, `owned_by` on /v1/models.
-function providerFor(model) {
+// The organisation that made the model, matching models.dev lab ids and the
+// gateway's `owned_by`.
+function labFor(model) {
   const match = (s) =>
     s.startsWith('claude')
       ? 'anthropic'
@@ -124,9 +126,9 @@ function orderKeys(model) {
 }
 
 function shape(id, raw) {
-  const provider = providerFor({ id, ...raw });
-  if (!provider) return { error: id };
-  const clean = { id, provider };
+  const lab = labFor({ id, ...raw });
+  if (!lab) return { error: id };
+  const clean = { id, lab, provider: providerFor({ lab, openWeights: raw.open_weights }) };
   for (const [k, v] of Object.entries(raw)) {
     if (k === 'id' || STRIP.has(k)) continue;
     clean[k] = v;
@@ -228,12 +230,12 @@ async function main() {
   }
 
   const merged = { ...current };
-  const noProvider = [];
+  const noLab = [];
   const unreleased = [];
   for (const id of ids) {
     const { model, error } = shape(id, upstream[id]);
     if (error) {
-      noProvider.push(error);
+      noLab.push(error);
       continue;
     }
     // models.dev has no `released`. A re-import keeps the catalog's flag; a model new to the
@@ -247,15 +249,15 @@ async function main() {
       `Imported as released: false: ${unreleased.join(', ')}. Set it to true once announced.`
     );
   }
-  if (noProvider.length) {
-    console.error(`Could not derive provider for: ${noProvider.join(', ')}`);
-    console.error('Extend providerFor() with the new family before importing.');
+  if (noLab.length) {
+    console.error(`Could not derive lab for: ${noLab.join(', ')}`);
+    console.error('Extend labFor() with the new family before importing.');
     process.exit(3);
   }
 
   const sortedIds = Object.keys(merged).sort((a, b) => {
-    const pa = PROVIDER_ORDER.indexOf(merged[a].provider);
-    const pb = PROVIDER_ORDER.indexOf(merged[b].provider);
+    const pa = LAB_ORDER.indexOf(merged[a].lab);
+    const pb = LAB_ORDER.indexOf(merged[b].lab);
     if (pa !== pb) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
     return String(merged[a].name).localeCompare(String(merged[b].name));
   });

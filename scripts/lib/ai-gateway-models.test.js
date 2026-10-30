@@ -47,6 +47,7 @@ const GPT = {
 const EMBEDDING = {
   id: 'gte-large-en',
   owned_by: 'alibaba',
+  provider: 'alibaba',
   name: 'GTE Large (En)',
   family: 'text-embedding',
   model_type: 'embedding',
@@ -62,6 +63,7 @@ const EMBEDDING = {
 const DECISION = {
   id: 'example-decision',
   owned_by: 'example',
+  provider: 'databricks',
   name: 'Example Decision',
   family: 'decision',
   model_type: 'language',
@@ -74,11 +76,18 @@ const DECISION = {
 };
 
 describe('toCatalogEntry', () => {
+  it('names Databricks as the provider of open-weight models and the lab otherwise', () => {
+    expect(toCatalogEntry({ ...GPT, owned_by: 'openai' }).provider).toBe('openai');
+    const oss = { ...GPT, features: { ...GPT.features, open_weights: true } };
+    expect(toCatalogEntry(oss)).toMatchObject({ lab: 'openai', provider: 'databricks' });
+  });
+
   it('maps a System One decision model to an input-only entry without chat fields', () => {
     expect(toCatalogEntry(DECISION)).toEqual({
       id: 'example-decision',
       name: 'Example Decision',
-      provider: 'example',
+      lab: 'example',
+      provider: 'databricks',
       family: 'decision',
       released: true,
       type: 'decision',
@@ -93,6 +102,7 @@ describe('toCatalogEntry', () => {
     expect(toCatalogEntry(GPT)).toEqual({
       id: 'gpt-5-4',
       name: 'GPT-5.4',
+      lab: 'openai',
       provider: 'openai',
       family: 'gpt',
       released: true,
@@ -167,7 +177,8 @@ describe('buildCatalog', () => {
     expect(out.neon.models['gte-large-en']).toEqual({
       id: 'gte-large-en',
       name: 'GTE Large (En)',
-      provider: 'alibaba',
+      lab: 'alibaba',
+      provider: 'databricks',
       family: 'text-embedding',
       released: true,
       type: 'embedding',

@@ -5,7 +5,10 @@ import { renderAiGatewayModelIndex } from './model-markdown';
 const createRow = ({ id, inputs, isImageCapable }) => ({
   id,
   name: id,
-  provider: 'openai',
+  lab: 'openai',
+  labName: 'OpenAI',
+  provider: 'databricks',
+  providerName: 'Databricks',
   inputs,
   inputsLabel: inputs.join(', '),
   contextLabel: '1K',
@@ -29,7 +32,8 @@ describe('AI Gateway model Markdown index', () => {
     const [textSection, afterText] = markdown.split('### Image models');
     const [imageSection, otherSection] = afterText.split('### Other models');
 
-    expect(textSection).toContain('text-model');
+    expect(textSection).toContain('#### OpenAI');
+    expect(textSection).toContain('| `text-model` | Databricks |');
     expect(textSection).not.toContain('image-only-model');
     expect(textSection).not.toContain('audio-only-model');
     expect(imageSection).toContain('image-only-model');
@@ -74,7 +78,7 @@ describe('AI Gateway model Markdown index', () => {
 
     expect(textSection).not.toContain('qwen3-embedding-0-6b');
     expect(embeddingSection).toContain('qwen3-embedding-0-6b');
-    expect(embeddingSection).toContain('| 1024 |');
+    expect(embeddingSection).toContain('| `qwen3-embedding-0-6b` | OpenAI | Databricks | 1024 |');
   });
 
   it('gives decision models their own section, out of Text and Other', () => {
@@ -91,6 +95,6 @@ describe('AI Gateway model Markdown index', () => {
 
     expect(beforeDecision).not.toContain('example-decision');
     expect(beforeDecision).not.toContain('### Other models');
-    expect(decisionSection).toContain('example-decision');
+    expect(decisionSection).toContain('| `example-decision` | OpenAI | Databricks |');
   });
 });

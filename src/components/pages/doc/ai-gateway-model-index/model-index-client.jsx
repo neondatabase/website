@@ -23,9 +23,17 @@ import { cn } from 'utils/cn';
 
 import AlibabaIcon from './images/alibaba.inline.svg';
 import AnthropicIcon from './images/anthropic.inline.svg';
+import BaaiIcon from './images/baai.inline.svg';
+import DatabricksIcon from './images/databricks.inline.svg';
+import DeepSeekIcon from './images/deepseek.inline.svg';
 import GoogleIcon from './images/google.inline.svg';
+import MoonshotIcon from './images/moonshotai.inline.svg';
 import OpenAIIcon from './images/openai.inline.svg';
-import { MODEL_CATALOG_NOTE, PROVIDER_ORDER, providerLabel } from './model-rows';
+import ThinkingMachinesIcon from './images/thinkingmachines.inline.svg';
+import TypeSafeIcon from './images/typesafe.inline.svg';
+import XaiIcon from './images/xai.inline.svg';
+import ZhipuIcon from './images/zhipuai.inline.svg';
+import { LAB_ORDER, MODEL_CATALOG_NOTE, orgLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
 
@@ -40,6 +48,7 @@ const MODEL_TYPES = [
 const COLUMNS = [
   { key: 'name', label: 'Model', sortable: true },
   { key: 'id', label: 'Model ID', sortable: true },
+  { key: 'lab', label: 'Lab', sortable: true },
   { key: 'provider', label: 'Provider', sortable: true },
   { key: 'inputs', label: 'Inputs', sortable: false },
   { key: 'contextWindow', label: 'Context', sortable: true },
@@ -73,7 +82,9 @@ const parseAsSort = createParser({
 const FILTER_PARSERS = {
   search: parseAsString.withDefault(''),
   mode: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
-  providers: parseAsArrayOf(parseAsString).withDefault([]),
+  labs: parseAsArrayOf(parseAsString).withDefault([]),
+  // The lab filter's URL key before it was renamed from `providers`; shared links still filter.
+  legacyProviders: parseAsArrayOf(parseAsString).withDefault([]),
   openWeightsOnly: parseAsBoolean.withDefault(false),
   sort: parseAsSort.withDefault({ key: 'releaseDate', dir: 'desc' }),
 };
@@ -81,6 +92,7 @@ const FILTER_PARSERS = {
 const FILTER_URL_KEYS = {
   search: 'q',
   mode: 'type',
+  legacyProviders: 'providers',
   openWeightsOnly: 'openWeights',
 };
 
@@ -92,12 +104,12 @@ const VARIANT_STYLES = {
   docs: {
     root: 'my-11 w-[min(1380px,calc(100vw-472px))] bg-white dark:bg-black-pure 2xl:w-[calc(100vw-408px)] xl:w-full md:my-8',
     filters: 'top-[var(--docs-header-height)] bg-white dark:bg-black-pure lg:top-0',
-    table: 'min-w-290!',
+    table: 'min-w-320!',
   },
   landing: {
     root: 'mt-17.5 w-full bg-black-pure [--docs-header-height:3.75rem] lg:[--docs-header-height:0] md:mt-12',
     filters: 'top-[var(--docs-header-height)] bg-black-pure',
-    table: 'min-w-300!',
+    table: 'min-w-330!',
   },
 };
 
@@ -146,16 +158,25 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
-const PROVIDER_ICONS = {
+// Keyed by lab and provider id; both use the same slugs.
+const ORG_ICONS = {
   alibaba: AlibabaIcon,
   anthropic: AnthropicIcon,
+  baai: BaaiIcon,
+  databricks: DatabricksIcon,
+  deepseek: DeepSeekIcon,
   google: GoogleIcon,
-  openai: OpenAIIcon,
   meta: SiMeta,
+  moonshotai: MoonshotIcon,
+  openai: OpenAIIcon,
+  thinkingmachines: ThinkingMachinesIcon,
+  typesafe: TypeSafeIcon,
+  xai: XaiIcon,
+  zhipuai: ZhipuIcon,
 };
 
-const ProviderLogo = ({ provider }) => {
-  const Icon = PROVIDER_ICONS[provider];
+const OrgLogo = ({ id }) => {
+  const Icon = ORG_ICONS[id];
 
   if (!Icon) return null;
 
@@ -166,8 +187,8 @@ const ProviderLogo = ({ provider }) => {
   );
 };
 
-ProviderLogo.propTypes = {
-  provider: PropTypes.string.isRequired,
+OrgLogo.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 const CheckMark = () => (
@@ -193,9 +214,9 @@ const ClearIcon = () => (
   </svg>
 );
 
-// Provider filter as a compact multi-select dropdown — stays a single control
-// no matter how many providers the catalog grows to.
-const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
+// Lab filter as a compact multi-select dropdown — stays a single control
+// no matter how many labs the catalog grows to.
+const LabMultiSelect = ({ labs, selected, onToggle, onClear }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const buttonRef = useRef(null);
@@ -220,7 +241,7 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
     };
   }, [open]);
 
-  const label = selected.size === 0 ? 'All providers' : `Providers (${selected.size})`;
+  const label = selected.size === 0 ? 'All labs' : `Labs (${selected.size})`;
 
   return (
     <div
@@ -265,20 +286,20 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
         <div
           id={listboxId}
           role="listbox"
-          aria-label="Model providers"
+          aria-label="Model labs"
           aria-multiselectable="true"
           className="absolute left-0 z-20 mt-1 min-w-47.5 border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
         >
-          {providers.map((providerId) => {
-            const checked = selected.has(providerId);
+          {labs.map((labId) => {
+            const checked = selected.has(labId);
             return (
               <button
-                key={providerId}
+                key={labId}
                 type="button"
                 role="option"
                 aria-selected={checked}
                 className="flex w-full items-center gap-2 px-2 py-1.5 text-left text-sm text-gray-new-30 transition-colors hover:bg-gray-new-98 dark:text-gray-new-80 dark:hover:bg-gray-new-8"
-                onClick={() => onToggle(providerId)}
+                onClick={() => onToggle(labId)}
               >
                 <span
                   className={cn(
@@ -290,7 +311,7 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
                 >
                   {checked && <CheckMark />}
                 </span>
-                {providerLabel(providerId)}
+                {orgLabel(labId)}
               </button>
             );
           })}
@@ -309,8 +330,8 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
   );
 };
 
-ProviderMultiSelect.propTypes = {
-  providers: PropTypes.arrayOf(PropTypes.string).isRequired,
+LabMultiSelect.propTypes = {
+  labs: PropTypes.arrayOf(PropTypes.string).isRequired,
   selected: PropTypes.instanceOf(Set).isRequired,
   onToggle: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
@@ -360,17 +381,18 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
   const setSearch = (value) => setFilters({ search: value });
   const setOpenWeightsOnly = (value) => setFilters({ openWeightsOnly: value });
 
-  const providers = useMemo(() => {
-    const present = new Set(rows.map((row) => row.provider));
+  const labs = useMemo(() => {
+    const present = new Set(rows.map((row) => row.lab));
     return [
-      ...PROVIDER_ORDER.filter((p) => present.has(p)),
-      ...[...present].filter((p) => !PROVIDER_ORDER.includes(p)),
+      ...LAB_ORDER.filter((lab) => present.has(lab)),
+      ...[...present].filter((lab) => !LAB_ORDER.includes(lab)),
     ];
   }, [rows]);
 
-  const providerFilter = useMemo(
-    () => new Set(filters.providers.filter((providerId) => providers.includes(providerId))),
-    [filters.providers, providers]
+  const selectedLabs = filters.labs.length > 0 ? filters.labs : filters.legacyProviders;
+  const labFilter = useMemo(
+    () => new Set(selectedLabs.filter((labId) => labs.includes(labId))),
+    [selectedLabs, labs]
   );
 
   const visibleRows = useMemo(() => {
@@ -383,18 +405,19 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
         return row.inputs.includes('text') && !row.isEmbedding && !row.isDecision;
       return true;
     });
-    if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
+    if (labFilter.size > 0) list = list.filter((row) => labFilter.has(row.lab));
     if (openWeightsOnly) list = list.filter((row) => row.openWeights);
     if (query) {
       list = list.filter(
         (row) =>
           row.name.toLowerCase().includes(query) ||
           row.id.toLowerCase().includes(query) ||
+          row.labName.toLowerCase().includes(query) ||
           row.providerName.toLowerCase().includes(query)
       );
     }
     return [...list].sort((a, b) => compareRows(a, b, sort.key, sort.dir));
-  }, [rows, mode, providerFilter, openWeightsOnly, search, sort]);
+  }, [rows, mode, labFilter, openWeightsOnly, search, sort]);
 
   const changeMode = (next) => {
     if (next === mode) return;
@@ -409,11 +432,13 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
     );
   };
 
-  const toggleProvider = (providerId) => {
-    const next = new Set(providerFilter);
-    if (next.has(providerId)) next.delete(providerId);
-    else next.add(providerId);
-    setFilters({ providers: providers.filter((p) => next.has(p)) });
+  const setLabs = (next) => setFilters({ labs: next, legacyProviders: [] });
+
+  const toggleLab = (labId) => {
+    const next = new Set(labFilter);
+    if (next.has(labId)) next.delete(labId);
+    else next.add(labId);
+    setLabs(labs.filter((lab) => next.has(lab)));
   };
 
   const getModelHref = (modelId) => {
@@ -519,7 +544,7 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
               className="h-9 w-full border border-gray-new-80 bg-gray-new-98 pr-10 pl-9 text-[.8125rem] text-black-pure transition-colors outline-none placeholder:text-gray-new-40 hover:border-gray-new-70 focus:border-gray-new-30 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:hover:border-gray-new-30 dark:focus:border-gray-new-60 md:text-base search-cancel:appearance-none"
               type="search"
               value={search}
-              placeholder="Search model, ID, or provider..."
+              placeholder="Search model, ID, lab, or provider..."
               onChange={(event) => setSearch(event.target.value)}
             />
             {search && (
@@ -562,11 +587,11 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <ProviderMultiSelect
-            providers={providers}
-            selected={providerFilter}
-            onToggle={toggleProvider}
-            onClear={() => setFilters({ providers: [] })}
+          <LabMultiSelect
+            labs={labs}
+            selected={labFilter}
+            onToggle={toggleLab}
+            onClear={() => setLabs([])}
           />
           <label
             className={cn(
@@ -617,15 +642,16 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
             )}
           >
             <colgroup>
-              <col className="w-[19%]" />
-              <col className="w-[21%]" />
-              <col className="w-[10%]" />
-              <col className="w-[15%]" />
+              <col className="w-[16%]" />
+              <col className="w-[18%]" />
+              <col className="w-[12%]" />
+              <col className="w-[9%]" />
+              <col className="w-[11%]" />
               <col className="w-[5%]" />
               <col className="w-[8%]" />
               <col className="w-[5%]" />
               <col className="w-[5%]" />
-              <col className="w-[9%]" />
+              <col className="w-[8%]" />
             </colgroup>
             <thead>
               <tr className="border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
@@ -687,7 +713,13 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       <span className="flex items-center gap-2 whitespace-nowrap">
-                        <ProviderLogo provider={row.provider} />
+                        <OrgLogo id={row.lab} />
+                        {row.labName}
+                      </span>
+                    </td>
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      <span className="flex items-center gap-2 whitespace-nowrap">
+                        <OrgLogo id={row.provider} />
                         {row.providerName}
                       </span>
                     </td>
@@ -747,7 +779,8 @@ ModelIndexView.propTypes = {
   filters: PropTypes.shape({
     search: PropTypes.string.isRequired,
     mode: PropTypes.string.isRequired,
-    providers: PropTypes.arrayOf(PropTypes.string).isRequired,
+    labs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    legacyProviders: PropTypes.arrayOf(PropTypes.string).isRequired,
     openWeightsOnly: PropTypes.bool.isRequired,
     sort: PropTypes.shape({
       key: PropTypes.string.isRequired,
