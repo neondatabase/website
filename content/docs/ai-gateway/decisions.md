@@ -205,7 +205,7 @@ console.log(answers.refund.probability); // 0.98
 
 The AI SDK calls the yes/no type `boolean` and returns its answer as `probability`; the provider sends it as `noul`. `choice` and `score` answers leave out `confidence`, which is in `providerMetadata.neon.confidence` instead. The provider accepts text and JSON state and throws `UnsupportedFunctionalityError` for file parts.
 
-You can also use TypeSafe's [`@ai-sdk/typesafe-ai`](https://www.npmjs.com/package/@ai-sdk/typesafe-ai) provider, which the examples in the Neon Console use. Point it at the gateway's `/typesafe/v1` path, since it appends `/systemone` itself, and pass your Neon credential as `apiKey`:
+You can also use TypeSafe's [`@ai-sdk/typesafe-ai`](https://www.npmjs.com/package/@ai-sdk/typesafe-ai) provider. Point it at the gateway's `/typesafe/v1` path, since it appends `/systemone` itself, and pass your Neon credential as `apiKey`:
 
 ```typescript shouldWrap
 import { createTypeSafeAi } from '@ai-sdk/typesafe-ai';
