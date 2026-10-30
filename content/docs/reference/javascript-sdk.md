@@ -1,8 +1,8 @@
 ---
 title: Managed Better Auth and Data API SDK
-subtitle: Reference documentation for @neondatabase/neon-js (authentication and Data API database queries)
+subtitle: Reference documentation for @neon/neon-js (authentication and Data API database queries)
 summary: >-
-  The `@neondatabase/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
+  The `@neon/neon-js` TypeScript SDK combines Managed Better Auth and the Neon
   Data API in one client, covering auth methods (email/password, OAuth, OTP,
   password reset) alongside a PostgREST-style query builder (select, insert,
   update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
@@ -16,7 +16,7 @@ layout: wide
 updatedOn: '2026-08-31T17:42:21.786Z'
 ---
 
-This page documents `@neondatabase/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
+This page documents `@neon/neon-js`, which combines Managed Better Auth and the Data API in a single client. Neon also publishes standalone packages:
 
 - [`@neon/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
 - [`@neon/auth`](https://www.npmjs.com/package/@neon/auth): Managed Better Auth without the Data API
@@ -25,7 +25,7 @@ Authentication is provided through an adapter-based architecture, letting you wo
 
 - **BetterAuthVanillaAdapter** (default): Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
 - **BetterAuthReactAdapter**: Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
-- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration, built into `createClient` from `@neon/neon-js/supabase`. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
 
@@ -40,7 +40,7 @@ Install the TypeScript SDK in your project using npm, yarn, pnpm, or bun.
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 </TwoColumnLayout.Block>
@@ -72,7 +72,7 @@ For the full client, pass a single HTTPS Neon database URL without credentials o
 <CodeTabs labels={["Full client","Auth-only","With TypeScript types","With a different adapter"]}>
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Use your Neon database URL without credentials or query parameters.
 // Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
@@ -80,21 +80,21 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 import type { Database } from './types/database.types';
 
 const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+import { createClient } from '@neon/neon-js';
+import { BetterAuthReactAdapter } from '@neon/neon-js/auth/react/adapters';
 
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
@@ -104,10 +104,6 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 ```
 
 </CodeTabs>
-
-<Admonition type="note" title="Version compatibility">
-The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the object form below.
-</Admonition>
 
 The object form remains available for custom endpoint layouts or local development setups where the Auth and Data API URLs cannot be derived from the same Neon database URL:
 

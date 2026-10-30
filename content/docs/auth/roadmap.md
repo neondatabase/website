@@ -29,7 +29,7 @@ Managed Better Auth is generally available. We're actively working on additional
 | React + React Router    | ✅ Supported | [Get started](/docs/auth/quick-start/react)           |
 | React + TanStack Router | ✅ Supported | [Get started](/docs/auth/quick-start/tanstack-router) |
 
-The [React quick start](/docs/auth/quick-start/react) steps through a **Vite** + React app. If you use **React Router** for URLs and layouts, use the same Managed Better Auth URL, `@neondatabase/neon-js` client, and SDK calls from that guide, then integrate them into your router and route components. For file-based routing with TanStack, use the TanStack Router quick start instead.
+The [React quick start](/docs/auth/quick-start/react) steps through a **Vite** + React app. If you use **React Router** for URLs and layouts, use the same Managed Better Auth URL, `@neon/neon-js` client, and SDK calls from that guide, then integrate them into your router and route components. For file-based routing with TanStack, use the TanStack Router quick start instead.
 
 ### On the roadmap
 
