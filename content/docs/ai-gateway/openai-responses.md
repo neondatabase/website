@@ -146,9 +146,9 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/openai/v1/responses" \
 
 ## Image generation with Vercel AI SDK
 
-The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`. Set `model: 'gpt-image-2'` on the tool; the OpenAI default (`gpt-image-1`) is not available on AI Gateway.
+The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`. Set `model` on the tool to `gpt-image-2`, `gpt-image-1.5`, or `gpt-image-1-mini`. The OpenAI default (`gpt-image-1`) is not available on AI Gateway.
 
-Use `streamText`, not `generateText`: image results are returned as tool-result parts, and a full base64 image reliably runs into size limits on a non-streaming response.
+Use `streamText`, not `generateText`. A non-streaming response is limited to 655,360 bytes, and most base64 images are larger, so the request fails with `400` and `The response content length cannot be greater than 655360 bytes long`. With the OpenAI SDK, pass `stream: true` to `client.responses.create()`.
 
 ```typescript shouldWrap
 import { neon } from '@neon/ai-sdk-provider';
