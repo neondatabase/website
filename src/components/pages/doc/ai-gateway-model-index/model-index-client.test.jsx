@@ -4,7 +4,8 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import ModelIndexClient from './model-index-client';
 
-const render = (ui) => rtlRender(ui, { wrapper: withNuqsTestingAdapter({ hasMemory: true }) });
+const render = (ui, searchParams) =>
+  rtlRender(ui, { wrapper: withNuqsTestingAdapter({ hasMemory: true, searchParams }) });
 
 const router = vi.hoisted(() => ({ push: vi.fn() }));
 
@@ -26,6 +27,30 @@ vi.mock('./images/google.inline.svg', () => ({
 vi.mock('./images/openai.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
+vi.mock('./images/baai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/databricks.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/deepseek.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/moonshotai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/thinkingmachines.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/typesafe.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/xai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/zhipuai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
 vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
@@ -39,6 +64,8 @@ vi.mock('icons/search.inline.svg', () => ({
 const createRow = (overrides) => ({
   id: 'model-id',
   name: 'Model',
+  lab: 'openai',
+  labName: 'OpenAI',
   provider: 'openai',
   providerName: 'OpenAI',
   inputs: ['text'],
@@ -60,6 +87,8 @@ const rows = [
   createRow({
     id: 'new-image-model',
     name: 'New image model',
+    lab: 'google',
+    labName: 'Google',
     provider: 'google',
     providerName: 'Google',
     inputs: ['text', 'image'],
@@ -73,8 +102,10 @@ const rows = [
   createRow({
     id: 'old-open-model',
     name: 'Old open model',
-    provider: 'anthropic',
-    providerName: 'Anthropic',
+    lab: 'anthropic',
+    labName: 'Anthropic',
+    provider: 'databricks',
+    providerName: 'Databricks',
     inputs: ['text', 'image'],
     inputsLabel: 'text, image',
     isImageCapable: true,
@@ -87,6 +118,8 @@ const rows = [
   createRow({
     id: 'unpriced-model',
     name: 'Unpriced model',
+    lab: 'google',
+    labName: 'Google',
     provider: 'google',
     providerName: 'Google',
     releaseDate: null,
@@ -127,13 +160,13 @@ describe('ModelIndexClient', () => {
     expect(getVisibleModelNames()).toEqual(['New image model', 'Old open model', 'Unpriced model']);
   });
 
-  it('combines model type, provider, and open-weight filters', () => {
+  it('combines model type, lab, and open-weight filters', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 
     fireEvent.click(screen.getByRole('button', { name: 'Image' }));
     expect(getVisibleModelNames()).toEqual(['New image model', 'Old open model']);
 
-    fireEvent.click(screen.getByRole('button', { name: 'All providers' }));
+    fireEvent.click(screen.getByRole('button', { name: 'All labs' }));
     fireEvent.click(screen.getByRole('option', { name: 'Anthropic' }));
     fireEvent.click(screen.getByRole('checkbox', { name: 'Open weights only' }));
 
@@ -158,17 +191,24 @@ describe('ModelIndexClient', () => {
     expect(getVisibleModelNames()).not.toContain('Example Decision');
   });
 
-  it('closes the provider listbox when focus leaves the control', () => {
+  it('filters by lab from a link that still uses the old providers parameter', () => {
+    render(<ModelIndexClient rows={rows} variant="landing" />, '?providers=anthropic');
+
+    expect(getVisibleModelNames()).toEqual(['Old open model']);
+    expect(screen.getByRole('button', { name: 'Labs (1)' })).toBeInTheDocument();
+  });
+
+  it('closes the lab listbox when focus leaves the control', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 
-    const trigger = screen.getByRole('button', { name: 'All providers' });
+    const trigger = screen.getByRole('button', { name: 'All labs' });
     const openWeights = screen.getByRole('checkbox', { name: 'Open weights only' });
 
     fireEvent.click(trigger);
-    expect(screen.getByRole('listbox', { name: 'Model providers' })).toBeInTheDocument();
+    expect(screen.getByRole('listbox', { name: 'Model labs' })).toBeInTheDocument();
 
     fireEvent.blur(trigger, { relatedTarget: openWeights });
-    expect(screen.queryByRole('listbox', { name: 'Model providers' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('listbox', { name: 'Model labs' })).not.toBeInTheDocument();
   });
 
   it('searches canonical row fields and returns focus after clearing', () => {
@@ -178,6 +218,9 @@ describe('ModelIndexClient', () => {
     fireEvent.change(searchInput, { target: { value: 'google' } });
 
     expect(getVisibleModelNames()).toEqual(['New image model', 'Unpriced model']);
+
+    fireEvent.change(searchInput, { target: { value: 'databricks' } });
+    expect(getVisibleModelNames()).toEqual(['Old open model']);
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
 

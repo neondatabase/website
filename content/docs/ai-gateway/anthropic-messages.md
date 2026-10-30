@@ -8,7 +8,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-10-03T17:33:03.999Z'
+updatedOn: '2026-10-29T20:50:22.187Z'
 ---
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
@@ -210,7 +210,7 @@ for block in message.content:
 ## Forwarded headers
 
 The gateway forwards these request headers to the upstream provider:
-`Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `User-Agent`.
+`Accept`, `Anthropic-Beta`, `Anthropic-Version`, `Content-Type`, `OpenAI-Beta`, `User-Agent`.
 
 All other headers are stripped. The `Authorization` header is replaced with the workspace credential before forwarding. Your `NEON_AI_GATEWAY_TOKEN` is never sent to Anthropic directly.
 

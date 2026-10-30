@@ -6,8 +6,8 @@ export const dynamic = 'force-static';
 //
 // The shape mirrors the models.dev API (https://models.dev/api.json): the
 // top-level key is the provider id ("neon"), whose `models` map is keyed by the
-// gateway catalog model id. Each model carries its underlying `provider`,
-// capability flags (`attachment`, `reasoning`, `tool_call`, `temperature`),
+// gateway catalog model id. Each model carries its `lab` (who made it) and
+// `provider` (who serves it), capability flags (`attachment`, `reasoning`, `tool_call`, `temperature`),
 // `modalities`, `limit`, and `cost`, so the same code that reads models.dev can
 // read this endpoint.
 //

@@ -163,7 +163,7 @@ Get the user from the [Managed Better Auth](/docs/auth/overview) session before 
 ```ts filename="src/auth/server.ts"
 import "server-only"
 
-import { createNeonAuth } from "@neondatabase/auth/next/server"
+import { createNeonAuth } from "@neon/auth/next/server"
 
 import { getEnv } from "../lib/env"
 
@@ -192,7 +192,7 @@ export async function getUser(pageUserId?: string) {
 
 `getUser()` wraps [`auth.getSession()`](/docs/auth/reference/nextjs-server#auth-getsession). The rest of `src/auth/` is Managed Better Auth setup: the auth route, the client and the [prebuilt sign-in UI](/docs/auth/reference/ui-components#nextjs-app-router), as in the [Managed Better Auth Next.js quick start](/docs/auth/quick-start/nextjs-api-only).
 
-Make every session change a full page load to `/`, which drops the Realtime client and the previous user's rows. In `NeonAuthUIProvider`, `onSessionChange` calls `window.location.assign("/")`. After Sign out, or a renewal or write the server refuses, `leaveSession()` in `src/auth/session-lost.ts` does the same. The SSR guide explains why in [when the session changes](../guides/ssr#when-the-session-changes).
+Make every session change a full page load to `/`, which drops the Realtime client and the previous user's rows. In `AuthProvider`, `navigate` calls `window.location.assign("/")` when the target is `/`. After Sign out, or a renewal or write the server refuses, `leaveSession()` in `src/auth/session-lost.ts` does the same. The SSR guide explains why in [when the session changes](../guides/ssr#when-the-session-changes).
 
 ### Seal in a Route Handler
 

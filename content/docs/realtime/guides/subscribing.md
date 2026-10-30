@@ -68,7 +68,7 @@ Most queries depend on who's asking and what they're asking for.
 If you've [exposed your sealed query via an API endpoint](./queries#exposing-an-endpoint), you can provide this context via the request data using your standard auth machinery, such as Neon's [Managed Better Auth](/docs/auth/overview):
 
 ```ts filename="frontend/auth.ts"
-import { createAuthClient } from "@neondatabase/auth"
+import { createAuthClient } from "@neon/auth"
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL)
 ```

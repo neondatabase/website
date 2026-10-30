@@ -14,7 +14,7 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | Snapshots (`snapshots`)           | Create, restore, and schedule snapshots                                                                                                                   |
 | Schema (`schema`)                 | Inspect tables and columns; compare schemas                                                                                                               |
 | SQL (`querying`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as `neon inspect db`                               |
-| Managed Better Auth (`neon_auth`) | Provision Auth; manage OAuth providers, trusted domains, and users                                                                                        |
+| Managed Better Auth (`neon_auth`) | Provision Auth; manage OAuth providers, the OAuth provider plugin and its clients, trusted domains, and users                                             |
 | Neon Data API (`data_api`)        | Enable, update, and disable the Data API for a branch                                                                                                     |
 | Observability (`observability`)   | Query function and storage logs; check AI Gateway availability                                                                                            |
 | Documentation (`docs`)            | Search and read Neon docs, the API reference, guides, the PostgreSQL tutorial, the blog, and the changelog from within your assistant (no OAuth required) |

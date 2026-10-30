@@ -489,3 +489,37 @@ describe('inheritParentOptions', () => {
     expect(leaf.default).toBe('gp');
   });
 });
+
+describe('parseCommandFile: enum-member arrays and template-literal consts', () => {
+  it('resolves choices and describes built from Enum.Member arrays', () => {
+    // neon_auth.ts at neon 8.14.0: arrays of NeonAuthOauthProviderId members,
+    // joined into describes, one of them through a template-literal const.
+    // In source the enum lives in utils/api_enums.ts, which buildSchema pools.
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      const ProviderId = { Google: "google", Apple: "apple" } as const;
+      const SUPPORTED = [ProviderId.Google, ProviderId.Apple] as const;
+      const NO_SHARED = [ProviderId.Apple] as const;
+      const NOTE = \`\${NO_SHARED.join(" and ")} always need your own credentials\`;
+      export const command = "auth";
+      export const describe = "Manage auth";
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("provider", \`Manage providers (\${SUPPORTED.join(", ")})\`, (yargs) =>
+          yargs.command("add", "Add a provider", (yargs) =>
+            yargs.options({
+              "provider-id": { describe: "Provider ID", type: "string", choices: SUPPORTED },
+              "client-id": { describe: \`Client ID; \${NOTE}.\`, type: "string" },
+            }),
+          ),
+        );
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    const provider = parsed.commands.provider;
+    // Without enum-member resolution all three are dropped silently.
+    expect(provider.describe).toBe('Manage providers (google, apple)');
+    expect(provider.commands.add.options['provider-id'].choices).toEqual(['google', 'apple']);
+    expect(provider.commands.add.options['client-id'].describe).toBe(
+      'Client ID; apple always need your own credentials.'
+    );
+  });
+});

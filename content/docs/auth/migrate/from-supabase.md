@@ -3,7 +3,7 @@ title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 summary: >-
   Step-by-step migration from Supabase Auth and Supabase database to Managed Better Auth
-  and Neon Data API. Replace `@supabase/supabase-js` with `@neondatabase/neon-js`,
+  and Neon Data API. Replace `@supabase/supabase-js` with `@neon/neon-js`,
   swap environment variables, and update client initialization while keeping
   existing auth method calls and `from()` database queries code-compatible.
   Existing password-based users cannot transfer due to incompatible password
@@ -36,7 +36,7 @@ Replace the Supabase SDK with Neon's:
 
 ```bash filename="Terminal"
 npm uninstall @supabase/supabase-js
-npm install @neondatabase/neon-js@latest
+npm install @neon/neon-js@latest
 ```
 
 ## Update environment variables
@@ -82,11 +82,9 @@ export const supabase = createClient(
 **After (Neon):**
 
 ```typescript filename="src/auth.ts"
-import { createClient, SupabaseAuthAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js/supabase';
 
-export const client = createClient(import.meta.env.VITE_NEON_URL, {
-  auth: { adapter: SupabaseAuthAdapter() },
-});
+export const client = createClient(import.meta.env.VITE_NEON_URL);
 ```
 
 This example renames the file to `auth.ts` and the variable to `client` for a provider-agnostic setup. You can use any naming, just stay consistent throughout your codebase.
@@ -183,7 +181,7 @@ ORDER BY "createdAt" DESC;
 | **User ID type**          | `UUID`                              | `UUID`                                              |
 | **Client config**         | URL + anon key                      | Single base URL (auto-derives Auth + Data API URLs) |
 | **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_URL`                                          |
-| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`                             |
+| **SDK package**           | `@supabase/supabase-js`             | `@neon/neon-js`                                     |
 
 ## API compatibility
 

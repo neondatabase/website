@@ -51,7 +51,7 @@ Anonymous access still uses a JWT, but no user sign-in is required. How you obta
 **With Managed Better Auth:** Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
 
 ```js
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
@@ -62,10 +62,6 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 // No sign-in needed. The SDK fetches and caches an anonymous JWT automatically.
 const { data, error } = await client.from('public_items').select('*');
 ```
-
-<Admonition type="note" title="Version compatibility">
-The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the [object form](/docs/reference/javascript-sdk#initializing).
-</Admonition>
 
 **With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 

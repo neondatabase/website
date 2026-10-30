@@ -7,6 +7,7 @@ describe('getModelDetailPageData', () => {
     const { content, tableOfContents } = getModelDetailPageData({
       id: 'example-model',
       name: 'Example Model',
+      labName: 'Example Lab',
       providerName: 'Example Provider',
       endpoints: ['chat/completions', 'responses'],
       inputsLabel: 'text, image',
@@ -16,7 +17,8 @@ describe('getModelDetailPageData', () => {
       costOutputLabel: '$2',
     });
 
-    expect(content).toContain('## Provider\n\nExample Provider provides Example Model.');
+    expect(content).toContain('## Lab\n\nExample Lab makes Example Model.');
+    expect(content).toContain('## Provider\n\nExample Provider\n');
     expect(content).toContain('## Inputs\n\nText, image');
     expect(content).toContain('## Input /M\n\n$1');
     expect(content).toContain('## Output /M\n\n$2');
@@ -24,6 +26,7 @@ describe('getModelDetailPageData', () => {
       { title: 'About', id: 'about' },
       { title: 'Command', id: 'command' },
       { title: 'Model ID', id: 'model-id' },
+      { title: 'Lab', id: 'lab' },
       { title: 'Provider', id: 'provider' },
       { title: 'Inputs', id: 'inputs' },
       { title: 'Context', id: 'context' },
@@ -39,6 +42,7 @@ describe('getModelDetailPageData', () => {
     const { content, tableOfContents } = getModelDetailPageData({
       id: 'qwen3-embedding-0-6b',
       name: 'Qwen3 Embedding 0.6B',
+      labName: 'Alibaba',
       providerName: 'Alibaba',
       endpoints: ['embeddings'],
       isEmbedding: true,
@@ -55,6 +59,7 @@ describe('getModelDetailPageData', () => {
       'About',
       'Command',
       'Model ID',
+      'Lab',
       'Provider',
       'Dimensions',
       'Released',
@@ -66,7 +71,8 @@ describe('getModelDetailPageData', () => {
     const { content, tableOfContents } = getModelDetailPageData({
       id: 'example-decision',
       name: 'Example Decision',
-      providerName: 'Example',
+      labName: 'Example',
+      providerName: 'Databricks',
       endpoints: [],
       isDecision: true,
       releaseLabel: 'Sep 2026',
@@ -81,6 +87,7 @@ describe('getModelDetailPageData', () => {
       'About',
       'Command',
       'Model ID',
+      'Lab',
       'Provider',
       'Released',
       'Input /M',
