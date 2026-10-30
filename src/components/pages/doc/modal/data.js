@@ -1,3 +1,5 @@
+import { BASE_AGENT_PROMPT } from 'components/pages/doc/agent-setup-button';
+
 /**
  * Link opened when a user clicks the thumbnail or CTA.
  *
@@ -31,11 +33,14 @@
  *
  * @typedef {Object} VideoModalConfig
  * @property {string} id Unique, stable modal identifier.
- * @property {string} embedId YouTube video ID used for the thumbnail.
+ * @property {string} [embedId] YouTube video ID used for the thumbnail.
  * @property {string} title Modal heading and thumbnail accessible label.
  * @property {string} [description] Optional supporting text.
  * @property {ModalTargeting} [targeting] Page targeting rules; omit to show on every page.
  * @property {ModalDestination} destination Thumbnail and CTA destination.
+ * @property {string} [copyPrompt] When set, the card renders a copyable code field (with an
+ *   icon-only copy control) that copies this plain-text string to the clipboard instead of a
+ *   video thumbnail.
  */
 
 /**
@@ -46,7 +51,18 @@
  *
  * @type {VideoModalConfig[]}
  */
-const MODALS = [];
+const MODALS = [
+  {
+    id: 'docs-agent-setup',
+    title: 'Set up your agent',
+    targeting: { all: true },
+    copyPrompt: BASE_AGENT_PROMPT,
+    destination: {
+      label: 'AI tools for agents',
+      url: '/docs/ai/ai-agents-tools',
+    },
+  },
+];
 
 /**
  * Disabled modal configurations, kept for easy re-enabling.

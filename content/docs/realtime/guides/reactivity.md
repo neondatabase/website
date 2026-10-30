@@ -332,7 +332,7 @@ if (!session) {
 }
 ```
 
-Sign-in isn't part of these guides: build the page with Neon's [Managed Better Auth UI components](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `AuthView` on `/auth/*` before it checks the session.
+Sign-in isn't part of these guides: build the page with [Better Auth UI](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `<Auth>` on `/auth/*` before it checks the session.
 
 Then read from the collection with TanStack's own `useLiveQuery()`. It shares a name with the Realtime hook, so import it under an alias that won't clash in an app that uses both. This view shows one channel, newest first:
 
