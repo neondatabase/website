@@ -76,10 +76,12 @@ const DECISION = {
 };
 
 describe('toCatalogEntry', () => {
-  it('names Databricks as the provider of open-weight models and the lab otherwise', () => {
-    expect(toCatalogEntry({ ...GPT, owned_by: 'openai' }).provider).toBe('openai');
-    const oss = { ...GPT, features: { ...GPT.features, open_weights: true } };
-    expect(toCatalogEntry(oss)).toMatchObject({ lab: 'openai', provider: 'databricks' });
+  it('names Databricks as the provider of every model except closed-weight TypeSafe AI models', () => {
+    expect(toCatalogEntry(GPT)).toMatchObject({ lab: 'openai', provider: 'databricks' });
+    const jev = { ...GPT, owned_by: 'typesafe' };
+    expect(toCatalogEntry(jev)).toMatchObject({ lab: 'typesafe', provider: 'typesafe' });
+    const openJev = { ...jev, features: { ...GPT.features, open_weights: true } };
+    expect(toCatalogEntry(openJev)).toMatchObject({ lab: 'typesafe', provider: 'databricks' });
   });
 
   it('maps a System One decision model to an input-only entry without chat fields', () => {
@@ -103,7 +105,7 @@ describe('toCatalogEntry', () => {
       id: 'gpt-5-4',
       name: 'GPT-5.4',
       lab: 'openai',
-      provider: 'openai',
+      provider: 'databricks',
       family: 'gpt',
       released: true,
       attachment: true,

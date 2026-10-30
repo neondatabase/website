@@ -43,7 +43,7 @@ describe('import-models-from-models-dev', () => {
     const merged = JSON.parse(stdout);
 
     expect(merged.neon.models['grok-4-6'].lab).toBe('xai');
-    expect(merged.neon.models['grok-4-6'].provider).toBe('xai');
+    expect(merged.neon.models['grok-4-6'].provider).toBe('databricks');
   });
 
   it('keeps the catalog released flag on re-import and starts a new model unreleased', () => {
@@ -71,6 +71,6 @@ describe('import-models-from-models-dev', () => {
 
     expect(models['grok-4-6'].released).toBe(true);
     expect(models['grok-new'].released).toBe(false);
-    expect(models['grok-new'].provider).toBe('xai');
+    expect(models['grok-new'].provider).toBe('databricks');
   });
 });
