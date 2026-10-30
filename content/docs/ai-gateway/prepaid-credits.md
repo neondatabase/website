@@ -92,7 +92,8 @@ AI Gateway usage is subject to **soft limits** that guard against runaway cost
 and abuse:
 
 - **Per-minute token limit.** A soft limit of **200,000 tokens per minute
-  (TPM)** applies, but this may vary by account.
+  (TPM)** applies to input and output tokens separately, but this may vary by
+  account.
 - **Daily spend cap.** A **$20 per day** limit applies to total usage, but this
   may vary by account.
 
@@ -216,7 +217,7 @@ Your credits stay on your account, but you can't use AI Gateway while on the Fre
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
-By default, each account has a soft limit of 200,000 tokens per minute (TPM) and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Usage limits](#usage-limits) for details.
+By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Usage limits](#usage-limits) for details.
 </FaqItem>
 
 <FaqItem question="What happens if I hit a usage limit?">

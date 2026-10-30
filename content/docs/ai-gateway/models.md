@@ -37,17 +37,18 @@ Neon AI Gateway gives you one credential for both open-weight and foundation mod
 
 ## Rate limits
 
-The following limit applies per account:
+The following limits apply per account. Input and output tokens are limited separately:
 
-| Limit                   | Value   |
-| ----------------------- | ------- |
-| Tokens per minute (TPM) | 200,000 |
+| Limit                          | Value   |
+| ------------------------------ | ------- |
+| Input tokens per minute (TPM)  | 200,000 |
+| Output tokens per minute (TPM) | 200,000 |
 
 If you hit the limit, you'll receive a `429 Too Many Requests` response with a message that starts with `You've exceeded your AI Gateway input token limit for model "<model-id>"`. Requests resume when the rate limit window resets.
 
 The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
+Both 200,000 TPM limits are soft limits. If you need a higher limit, [contact Support](/docs/introduction/support).
 
 A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
