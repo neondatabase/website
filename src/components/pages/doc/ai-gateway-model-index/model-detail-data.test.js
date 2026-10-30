@@ -67,7 +67,7 @@ describe('getModelDetailPageData', () => {
     ]);
   });
 
-  it('reports only identity, release and input price for a decision model', () => {
+  it('reports identity, context, release and input price for a decision model', () => {
     const { content, tableOfContents } = getModelDetailPageData({
       id: 'example-decision',
       name: 'Example Decision',
@@ -75,6 +75,7 @@ describe('getModelDetailPageData', () => {
       providerName: 'Databricks',
       endpoints: [],
       isDecision: true,
+      contextLabel: '131K',
       releaseLabel: 'Sep 2026',
       costInputLabel: '$0.10',
     });
@@ -82,13 +83,14 @@ describe('getModelDetailPageData', () => {
     expect(content).toContain('System One decision model');
     expect(content).toContain('## Input /M\n\n$0.10');
     expect(content).not.toContain('## Dimensions');
-    expect(content).not.toContain('## Context');
+    expect(content).toContain('## Context\n\n131K');
     expect(tableOfContents.map(({ title }) => title)).toEqual([
       'About',
       'Command',
       'Model ID',
       'Lab',
       'Provider',
+      'Context',
       'Released',
       'Input /M',
     ]);

@@ -126,4 +126,11 @@ describe('AI Gateway model rows', () => {
     expect(row.costInputLabel).toBe('$0.10');
     expect(row.costOutputLabel).toBe('—');
   });
+
+  it('keeps sub-cent digits and reports a decision model context window', () => {
+    const row = rows.find(({ id }) => id === 'typesafeai-jev-1-14-0');
+
+    expect(row.costInputLabel).toBe('$0.042');
+    expect(row.contextLabel).toBe('66K');
+  });
 });

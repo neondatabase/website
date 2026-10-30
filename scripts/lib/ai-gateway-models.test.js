@@ -69,6 +69,7 @@ const DECISION = {
   model_type: 'language',
   dialects: ['systemone'],
   release_date: '2026-09-01',
+  context_length: 131072,
   architecture: { input_modalities: ['text'], output_modalities: ['text'] },
   pricing: { prompt: '0.0000001', completion: '0' },
   supported_parameters: [],
@@ -84,7 +85,7 @@ describe('toCatalogEntry', () => {
     expect(toCatalogEntry(openJev)).toMatchObject({ lab: 'typesafe', provider: 'databricks' });
   });
 
-  it('maps a System One decision model to an input-only entry without chat fields', () => {
+  it('maps a System One decision model to an input-only entry with its context window', () => {
     expect(toCatalogEntry(DECISION)).toEqual({
       id: 'example-decision',
       name: 'Example Decision',
@@ -96,8 +97,10 @@ describe('toCatalogEntry', () => {
       open_weights: true,
       release_date: '2026-09-01',
       last_updated: '2026-09-01',
+      limit: { context: 131072 },
       cost: { input: 0.1 },
     });
+    expect(toCatalogEntry({ ...DECISION, context_length: null })).not.toHaveProperty('limit');
   });
 
   it('maps a listing item to a data.json entry', () => {

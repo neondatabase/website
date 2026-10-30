@@ -95,6 +95,8 @@ describe('AI Gateway model Markdown index', () => {
 
     expect(beforeDecision).not.toContain('example-decision');
     expect(beforeDecision).not.toContain('### Other models');
-    expect(decisionSection).toContain('| `example-decision` | OpenAI | Databricks |');
+    expect(decisionSection).toContain(
+      '| `example-decision` | OpenAI | Databricks | 1K | Sep 2026 |'
+    );
   });
 });
