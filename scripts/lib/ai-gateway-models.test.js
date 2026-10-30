@@ -47,6 +47,7 @@ const GPT = {
 const EMBEDDING = {
   id: 'gte-large-en',
   owned_by: 'alibaba',
+  provider: 'alibaba',
   name: 'GTE Large (En)',
   family: 'text-embedding',
   model_type: 'embedding',
@@ -62,6 +63,7 @@ const EMBEDDING = {
 const DECISION = {
   id: 'example-decision',
   owned_by: 'example',
+  provider: 'databricks',
   name: 'Example Decision',
   family: 'decision',
   model_type: 'language',
@@ -78,7 +80,8 @@ describe('toCatalogEntry', () => {
     expect(toCatalogEntry(DECISION)).toEqual({
       id: 'example-decision',
       name: 'Example Decision',
-      provider: 'example',
+      lab: 'example',
+      provider: 'databricks',
       family: 'decision',
       released: true,
       type: 'decision',
@@ -93,7 +96,8 @@ describe('toCatalogEntry', () => {
     expect(toCatalogEntry(GPT)).toEqual({
       id: 'gpt-5-4',
       name: 'GPT-5.4',
-      provider: 'openai',
+      lab: 'openai',
+      provider: 'databricks',
       family: 'gpt',
       released: true,
       attachment: true,
@@ -167,6 +171,7 @@ describe('buildCatalog', () => {
     expect(out.neon.models['gte-large-en']).toEqual({
       id: 'gte-large-en',
       name: 'GTE Large (En)',
+      lab: 'alibaba',
       provider: 'alibaba',
       family: 'text-embedding',
       released: true,

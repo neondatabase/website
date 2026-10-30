@@ -26,6 +26,9 @@
  * Usage:
  *   --models <a,b,c>   import exactly these ids (required)
  *   --from <file|url>  resolved catalog (default https://models.dev/api.json)
+ *   --provider <id>    provider (host) for ids new to the catalog; models.dev
+ *                      has no per-model host, so re-imports keep the catalog's
+ *                      value
  *   --stdout           print the merged catalog instead of writing it
  *
  * Exit codes: 0 written, 2 could not load, 3 bad selection or invalid result.
@@ -42,19 +45,22 @@ const OUT_PATH = path.resolve(DIRNAME, '../app/models.json/data.json');
 const DOC_URL = 'https://neon.com/docs/ai-gateway/models';
 
 // Not part of the capability catalog, or describing the canonical model rather
-// than the one Neon serves. `provider` is re-added below as the model's maker.
+// than the one Neon serves. models.dev's per-model `provider` is an SDK override;
+// our `lab` and `provider` are set below.
 const STRIP = new Set([
   'description',
   'benchmarks',
   'weights',
   'links',
   'experimental',
+  'lab',
   'provider',
 ]);
 
 const KEY_ORDER = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -74,7 +80,7 @@ const KEY_ORDER = [
   'status',
 ];
 
-const PROVIDER_ORDER = [
+const LAB_ORDER = [
   'anthropic',
   'openai',
   'google',
@@ -86,11 +92,9 @@ const PROVIDER_ORDER = [
   'xai',
 ];
 
-// The organisation that made the model, matching models.dev provider ids — not
-// the `owned_by` the gateway reports, which names whoever hosts it (`inkling`
-// comes back as `databricks`, `glm-5-2` as `zhipu`). Both are published: this on
-// /models.json, `owned_by` on /v1/models.
-function providerFor(model) {
+// The organisation that made the model, matching models.dev lab ids and the
+// gateway's `owned_by`.
+function labFor(model) {
   const match = (s) =>
     s.startsWith('claude')
       ? 'anthropic'
@@ -123,10 +127,10 @@ function orderKeys(model) {
   return out;
 }
 
-function shape(id, raw) {
-  const provider = providerFor({ id, ...raw });
-  if (!provider) return { error: id };
-  const clean = { id, provider };
+function shape(id, raw, provider) {
+  const lab = labFor({ id, ...raw });
+  if (!lab) return { error: id };
+  const clean = { id, lab, provider };
   for (const [k, v] of Object.entries(raw)) {
     if (k === 'id' || STRIP.has(k)) continue;
     clean[k] = v;
@@ -143,7 +147,7 @@ async function loadResolved(from) {
   return JSON.parse(fs.readFileSync(from, 'utf-8'));
 }
 
-const KNOWN_FLAGS = new Set(['--models', '--from', '--stdout']);
+const KNOWN_FLAGS = new Set(['--models', '--from', '--provider', '--stdout']);
 
 // A flag whose value is missing swallows the next flag, or nothing at all, and
 // the run looks like it worked. Refuse both that and an unrecognised flag.
@@ -172,6 +176,7 @@ async function main() {
   rejectUnknownFlags(args);
   const toStdout = args.includes('--stdout');
   const from = argValue(args, '--from') || 'https://models.dev/api.json';
+  const newProvider = argValue(args, '--provider');
   const requested = (argValue(args, '--models') || '')
     .split(',')
     .map((s) => s.trim())
@@ -227,18 +232,25 @@ async function main() {
     process.exit(3);
   }
 
+  const noHost = ids.filter((id) => !(id in current) && !newProvider);
+  if (noHost.length) {
+    console.error(`New to the catalog, so no provider (host) to keep: ${noHost.join(', ')}`);
+    console.error('Pass --provider <id> with the provider the gateway lists for them.');
+    process.exit(3);
+  }
+
   const merged = { ...current };
-  const noProvider = [];
+  const noLab = [];
   const unreleased = [];
   for (const id of ids) {
-    const { model, error } = shape(id, upstream[id]);
+    const isNew = !(id in current);
+    const { model, error } = shape(id, upstream[id], isNew ? newProvider : current[id].provider);
     if (error) {
-      noProvider.push(error);
+      noLab.push(error);
       continue;
     }
     // models.dev has no `released`. A re-import keeps the catalog's flag; a model new to the
     // catalog starts unreleased, because importing it is not announcing it.
-    const isNew = !(id in current);
     if (isNew) unreleased.push(id);
     merged[id] = orderKeys({ ...model, released: isNew ? false : current[id].released });
   }
@@ -247,15 +259,15 @@ async function main() {
       `Imported as released: false: ${unreleased.join(', ')}. Set it to true once announced.`
     );
   }
-  if (noProvider.length) {
-    console.error(`Could not derive provider for: ${noProvider.join(', ')}`);
-    console.error('Extend providerFor() with the new family before importing.');
+  if (noLab.length) {
+    console.error(`Could not derive lab for: ${noLab.join(', ')}`);
+    console.error('Extend labFor() with the new family before importing.');
     process.exit(3);
   }
 
   const sortedIds = Object.keys(merged).sort((a, b) => {
-    const pa = PROVIDER_ORDER.indexOf(merged[a].provider);
-    const pb = PROVIDER_ORDER.indexOf(merged[b].provider);
+    const pa = LAB_ORDER.indexOf(merged[a].lab);
+    const pb = LAB_ORDER.indexOf(merged[b].lab);
     if (pa !== pb) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
     return String(merged[a].name).localeCompare(String(merged[b].name));
   });

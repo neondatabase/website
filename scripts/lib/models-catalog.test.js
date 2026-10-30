@@ -12,7 +12,8 @@ const CATALOG = JSON.parse(
 const model = (over = {}) => ({
   id: 'a',
   name: 'A',
-  provider: 'openai',
+  lab: 'openai',
+  provider: 'databricks',
   family: 'gpt',
   released: true,
   attachment: false,
@@ -34,6 +35,7 @@ const catalog = (models) => ({
 const embeddingModel = (over = {}) => ({
   id: 'a',
   name: 'A',
+  lab: 'alibaba',
   provider: 'alibaba',
   family: 'text-embedding',
   released: true,
@@ -48,6 +50,7 @@ const embeddingModel = (over = {}) => ({
 const decisionModel = (over = {}) => ({
   id: 'a',
   name: 'A',
+  lab: 'example',
   provider: 'example',
   family: 'decision',
   released: true,
@@ -159,6 +162,7 @@ describe('validateCatalog', () => {
 
   it.each([
     ['name', { name: '' }],
+    ['lab', { lab: undefined }],
     ['provider', { provider: undefined }],
     ['family', { family: 42 }],
   ])('rejects a missing or malformed %s', (field, over) => {
@@ -169,6 +173,7 @@ describe('validateCatalog', () => {
 
   it.each([
     ['name', { name: "{[]['constructor']['constructor']('return 1')()}" }],
+    ['lab', { lab: '<b>' }],
     ['provider', { provider: '<script>' }],
     ['family', { family: 'gpt}' }],
   ])('rejects MDX syntax in %s, which the detail page would evaluate', (field, over) => {

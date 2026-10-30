@@ -10,6 +10,7 @@
       "claude-fable-5": {
         "id": "claude-fable-5",
         "name": "Claude Fable 5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-fable",
         "released": true,
@@ -46,6 +47,7 @@
       "claude-fable-5-1": {
         "id": "claude-fable-5-1",
         "name": "Claude Fable 5.1",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-fable",
         "released": true,
@@ -82,6 +84,7 @@
       "claude-haiku-4-5": {
         "id": "claude-haiku-4-5",
         "name": "Claude Haiku 4.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-haiku",
         "released": true,
@@ -122,6 +125,7 @@
       "claude-opus-4-1": {
         "id": "claude-opus-4-1",
         "name": "Claude Opus 4.1",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -162,6 +166,7 @@
       "claude-opus-4-5": {
         "id": "claude-opus-4-5",
         "name": "Claude Opus 4.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -202,6 +207,7 @@
       "claude-opus-4-6": {
         "id": "claude-opus-4-6",
         "name": "Claude Opus 4.6",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -242,6 +248,7 @@
       "claude-opus-4-7": {
         "id": "claude-opus-4-7",
         "name": "Claude Opus 4.7",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -281,6 +288,7 @@
       "claude-opus-4-8": {
         "id": "claude-opus-4-8",
         "name": "Claude Opus 4.8",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -320,6 +328,7 @@
       "claude-opus-5": {
         "id": "claude-opus-5",
         "name": "Claude Opus 5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -359,6 +368,7 @@
       "claude-opus-5-5": {
         "id": "claude-opus-5-5",
         "name": "Claude Opus 5.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-opus",
         "released": true,
@@ -395,6 +405,7 @@
       "claude-sonnet-4-5": {
         "id": "claude-sonnet-4-5",
         "name": "Claude Sonnet 4.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-sonnet",
         "released": true,
@@ -435,6 +446,7 @@
       "claude-sonnet-4-6": {
         "id": "claude-sonnet-4-6",
         "name": "Claude Sonnet 4.6",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-sonnet",
         "released": true,
@@ -475,6 +487,7 @@
       "claude-sonnet-5": {
         "id": "claude-sonnet-5",
         "name": "Claude Sonnet 5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-sonnet",
         "released": true,
@@ -514,7 +527,8 @@
       "gpt-oss-120b": {
         "id": "gpt-oss-120b",
         "name": "GPT OSS 120B",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-oss",
         "released": true,
         "attachment": false,
@@ -547,7 +561,8 @@
       "gpt-oss-20b": {
         "id": "gpt-oss-20b",
         "name": "GPT OSS 20B",
-        "provider": "openai",
+        "lab": "openai",
+        "provider": "databricks",
         "family": "gpt-oss",
         "released": true,
         "attachment": false,
@@ -580,6 +595,7 @@
       "gpt-5": {
         "id": "gpt-5",
         "name": "GPT-5",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt",
         "released": true,
@@ -616,6 +632,7 @@
       "gpt-5-mini": {
         "id": "gpt-5-mini",
         "name": "GPT-5 Mini",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-mini",
         "released": true,
@@ -652,6 +669,7 @@
       "gpt-5-nano": {
         "id": "gpt-5-nano",
         "name": "GPT-5 Nano",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-nano",
         "released": true,
@@ -688,6 +706,7 @@
       "gpt-5-1": {
         "id": "gpt-5-1",
         "name": "GPT-5.1",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt",
         "released": true,
@@ -724,6 +743,7 @@
       "gpt-5-2": {
         "id": "gpt-5-2",
         "name": "GPT-5.2",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt",
         "released": true,
@@ -760,6 +780,7 @@
       "gpt-5-3-codex": {
         "id": "gpt-5-3-codex",
         "name": "GPT-5.3 Codex",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-codex",
         "released": true,
@@ -796,6 +817,7 @@
       "gpt-5-4": {
         "id": "gpt-5-4",
         "name": "GPT-5.4",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt",
         "released": true,
@@ -848,6 +870,7 @@
       "gpt-5-4-mini": {
         "id": "gpt-5-4-mini",
         "name": "GPT-5.4 Mini",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-mini",
         "released": true,
@@ -884,6 +907,7 @@
       "gpt-5-4-nano": {
         "id": "gpt-5-4-nano",
         "name": "GPT-5.4 Nano",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-nano",
         "released": true,
@@ -920,6 +944,7 @@
       "gpt-5-5": {
         "id": "gpt-5-5",
         "name": "GPT-5.5",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt",
         "released": true,
@@ -972,6 +997,7 @@
       "gpt-5-5-pro": {
         "id": "gpt-5-5-pro",
         "name": "GPT-5.5 Pro",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-pro",
         "released": true,
@@ -1021,6 +1047,7 @@
       "gpt-5-6-luna": {
         "id": "gpt-5-6-luna",
         "name": "GPT-5.6 Luna",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-luna",
         "released": true,
@@ -1076,6 +1103,7 @@
       "gpt-5-6-sol": {
         "id": "gpt-5-6-sol",
         "name": "GPT-5.6 Sol",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-sol",
         "released": true,
@@ -1131,6 +1159,7 @@
       "gpt-5-6-terra": {
         "id": "gpt-5-6-terra",
         "name": "GPT-5.6 Terra",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-terra",
         "released": true,
@@ -1186,6 +1215,7 @@
       "gpt-6-astra": {
         "id": "gpt-6-astra",
         "name": "GPT-6 Astra",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-astra",
         "released": true,
@@ -1241,6 +1271,7 @@
       "gemini-3-flash": {
         "id": "gemini-3-flash",
         "name": "Gemini 3 Flash",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash",
         "released": true,
@@ -1277,6 +1308,7 @@
       "gemini-3-1-flash-lite": {
         "id": "gemini-3-1-flash-lite",
         "name": "Gemini 3.1 Flash Lite",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash-lite",
         "released": true,
@@ -1313,6 +1345,7 @@
       "gemini-3-1-pro": {
         "id": "gemini-3-1-pro",
         "name": "Gemini 3.1 Pro",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-pro",
         "released": true,
@@ -1364,6 +1397,7 @@
       "gemini-3-5-flash": {
         "id": "gemini-3-5-flash",
         "name": "Gemini 3.5 Flash",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash",
         "released": true,
@@ -1400,6 +1434,7 @@
       "gemini-3-5-flash-lite": {
         "id": "gemini-3-5-flash-lite",
         "name": "Gemini 3.5 Flash Lite",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash-lite",
         "released": true,
@@ -1435,6 +1470,7 @@
       "gemini-3-6-flash": {
         "id": "gemini-3-6-flash",
         "name": "Gemini 3.6 Flash",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash",
         "released": true,
@@ -1471,6 +1507,7 @@
       "gemma-3-12b": {
         "id": "gemma-3-12b",
         "name": "Gemma 3 12B",
+        "lab": "google",
         "provider": "google",
         "family": "gemma",
         "released": true,
@@ -1499,6 +1536,7 @@
       "meta-llama-3-1-8b-instruct": {
         "id": "meta-llama-3-1-8b-instruct",
         "name": "Meta Llama 3.1 8B Instruct",
+        "lab": "meta",
         "provider": "meta",
         "family": "llama",
         "released": true,
@@ -1527,6 +1565,7 @@
       "llama-4-maverick": {
         "id": "llama-4-maverick",
         "name": "Llama 4 Maverick",
+        "lab": "meta",
         "provider": "meta",
         "family": "llama",
         "released": true,
@@ -1555,6 +1594,7 @@
       "meta-llama-3-3-70b-instruct": {
         "id": "meta-llama-3-3-70b-instruct",
         "name": "Meta Llama 3.3 70B Instruct",
+        "lab": "meta",
         "provider": "meta",
         "family": "llama",
         "released": true,
@@ -1583,6 +1623,7 @@
       "qwen3-next-80b-a3b-instruct": {
         "id": "qwen3-next-80b-a3b-instruct",
         "name": "Qwen3 Next Instruct",
+        "lab": "alibaba",
         "provider": "alibaba",
         "family": "qwen",
         "released": true,
@@ -1611,6 +1652,7 @@
       "qwen35-122b-a10b": {
         "id": "qwen35-122b-a10b",
         "name": "Qwen3.5 122B A10B",
+        "lab": "alibaba",
         "provider": "alibaba",
         "family": "qwen",
         "released": true,
@@ -1644,7 +1686,8 @@
       "glm-5-2": {
         "id": "glm-5-2",
         "name": "GLM 5.2",
-        "provider": "zhipuai",
+        "lab": "zhipuai",
+        "provider": "zhipu",
         "family": "glm",
         "released": true,
         "attachment": false,
@@ -1681,7 +1724,8 @@
       "glm-5-3-flash": {
         "id": "glm-5-3-flash",
         "name": "GLM 5.3 Flash",
-        "provider": "zhipuai",
+        "lab": "zhipuai",
+        "provider": "zhipu",
         "family": "glm-flash",
         "released": true,
         "attachment": true,
@@ -1715,7 +1759,8 @@
       "inkling": {
         "id": "inkling",
         "name": "Inkling",
-        "provider": "thinkingmachines",
+        "lab": "thinkingmachines",
+        "provider": "databricks",
         "family": "ling",
         "released": true,
         "attachment": true,
@@ -1752,7 +1797,8 @@
       "kimi-k3": {
         "id": "kimi-k3",
         "name": "Kimi K3",
-        "provider": "moonshotai",
+        "lab": "moonshotai",
+        "provider": "moonshot",
         "family": "kimi-k3",
         "released": true,
         "attachment": true,
@@ -1789,6 +1835,7 @@
       "grok-4-6": {
         "id": "grok-4-6",
         "name": "Grok 4.6",
+        "lab": "xai",
         "provider": "xai",
         "family": "grok",
         "released": true,
@@ -1824,6 +1871,7 @@
       "qwen3-embedding-0-6b": {
         "id": "qwen3-embedding-0-6b",
         "name": "Qwen3 Embedding 0.6B",
+        "lab": "alibaba",
         "provider": "alibaba",
         "family": "text-embedding",
         "released": true,
@@ -1839,6 +1887,7 @@
       "gte-large-en": {
         "id": "gte-large-en",
         "name": "GTE Large (En)",
+        "lab": "alibaba",
         "provider": "alibaba",
         "family": "text-embedding",
         "released": true,
@@ -1854,6 +1903,7 @@
       "claude-sonnet-5-5": {
         "id": "claude-sonnet-5-5",
         "name": "Claude Sonnet 5.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-sonnet",
         "released": true,
@@ -1892,6 +1942,7 @@
       "claude-haiku-5-5": {
         "id": "claude-haiku-5-5",
         "name": "Claude Haiku 5.5",
+        "lab": "anthropic",
         "provider": "anthropic",
         "family": "claude-haiku",
         "released": true,
@@ -1949,6 +2000,7 @@
       "gemini-3-7-flash": {
         "id": "gemini-3-7-flash",
         "name": "Gemini 3.7 Flash",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash",
         "released": true,
@@ -1983,6 +2035,7 @@
       "gemini-3-8-flash": {
         "id": "gemini-3-8-flash",
         "name": "Gemini 3.8 Flash",
+        "lab": "google",
         "provider": "google",
         "family": "gemini-flash",
         "released": true,
@@ -2017,6 +2070,7 @@
       "gpt-6-sol": {
         "id": "gpt-6-sol",
         "name": "GPT-6 Sol",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-sol",
         "released": true,
@@ -2071,6 +2125,7 @@
       "gpt-6-1-sol": {
         "id": "gpt-6-1-sol",
         "name": "GPT-6.1 Sol",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-sol",
         "released": true,
@@ -2125,6 +2180,7 @@
       "gpt-6-luna": {
         "id": "gpt-6-luna",
         "name": "GPT-6 Luna",
+        "lab": "openai",
         "provider": "openai",
         "family": "gpt-luna",
         "released": true,
@@ -2179,6 +2235,7 @@
       "bge-large-en": {
         "id": "bge-large-en",
         "name": "BGE Large (En)",
+        "lab": "baai",
         "provider": "baai",
         "family": "text-embedding",
         "released": true,
@@ -2194,6 +2251,7 @@
       "grok-4-7": {
         "id": "grok-4-7",
         "name": "Grok 4.7",
+        "lab": "xai",
         "provider": "xai",
         "family": "grok",
         "released": true,
@@ -2228,7 +2286,8 @@
       "glm-5-3": {
         "id": "glm-5-3",
         "name": "GLM 5.3",
-        "provider": "zhipuai",
+        "lab": "zhipuai",
+        "provider": "zhipu",
         "family": "glm",
         "released": true,
         "attachment": false,
@@ -2262,6 +2321,7 @@
       "deepseek-v4-1-flash": {
         "id": "deepseek-v4-1-flash",
         "name": "DeepSeek V4.1 Flash",
+        "lab": "deepseek",
         "provider": "deepseek",
         "family": "deepseek-flash",
         "released": true,
@@ -2290,7 +2350,8 @@
       "openjev-qwen35-4b": {
         "id": "openjev-qwen35-4b",
         "name": "OpenJev (Qwen 3.5 4B)",
-        "provider": "typesafe",
+        "lab": "typesafe",
+        "provider": "databricks",
         "family": "openjev",
         "released": true,
         "type": "decision",
@@ -2304,7 +2365,8 @@
       "typesafeai-jev-1-14-0": {
         "id": "typesafeai-jev-1-14-0",
         "name": "Jev 1.14",
-        "provider": "typesafe",
+        "lab": "typesafe",
+        "provider": "databricks",
         "family": "jev",
         "released": true,
         "type": "decision",
@@ -2318,6 +2380,7 @@
       "gemini-4-argon": {
         "id": "gemini-4-argon",
         "name": "Gemini 4 Argon",
+        "lab": "google",
         "provider": "google",
         "family": "gemini",
         "released": true,

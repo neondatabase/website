@@ -66,7 +66,9 @@ export function toCatalogEntry(item, committedEntry = {}) {
   const entry = {
     id: item.id,
     name: item.name,
-    provider: item.owned_by,
+    // models.dev terms: the lab made the model, the provider serves it.
+    lab: item.owned_by,
+    provider: item.provider,
     family: item.family,
     // Committed `released: false` holds a model back until it is announced.
     released: committedEntry.released ?? true,
