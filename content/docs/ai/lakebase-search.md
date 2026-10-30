@@ -17,6 +17,8 @@ Lakebase Search is developed by Databricks. These extensions are part of the sha
 
 Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install `lakebase_vector` for vector search, `lakebase_text` for BM25 keyword search, and `lakebase_tokenizer` for configurable tokenization.
 
+<AgentPrompt title="Set up with your agent" src="/prompts/lakebase-search-landing.md" buttonText="Copy prompt" />
+
 ## Vector, keyword, and hybrid search
 
 Lakebase Search gives you two complementary ways to search. Use either on its own, or combine them:

@@ -6,17 +6,17 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-23T19:28:25.610Z'
+updatedOn: '2026-10-29T17:20:24.000Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
 
 <CTA title="See every model on Neon AI Gateway" description="Compare every available model by provider, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
 
-Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
+Neon AI Gateway serves models from many providers behind one credential. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
-Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
+Most models are served through Databricks. Jev is the exception: its provider, TypeSafe AI, hosts it. [Provider terms](#provider-terms) links each provider's terms and notes where hosting differs. Wherever a model is hosted, you're responsible for complying with its provider's terms of use.
 </Admonition>
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
@@ -79,10 +79,10 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Meta, Zhipu AI, Thinking Machines, Moonshot AI | `/v1/chat/completions`   | Chat completions only                                                                                    |
 | Alibaba (chat models)                          | `/v1/chat/completions`   | Chat completions only                                                                                    |
 | Alibaba, BAAI (embedding models)               | `/v1/embeddings`         | No chat completions. Returns a vector, not text                                                          |
-| TypeSafe (decision models)                     | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
+| TypeSafe AI (decision models)                  | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.
@@ -174,19 +174,22 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 
 ## Provider terms
 
-Models are hosted by Databricks and served through Neon AI Gateway. You are responsible for complying with each provider's applicable terms of use.
+Review a model's provider terms before you use it. You're responsible for complying with them, including any acceptable-use restrictions and license requirements.
 
-| Provider      | Terms                                                                                                                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
-| Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
-| Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
-| Meta          | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                            |
+| Provider          | Terms                                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| OpenAI            | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                  |
+| Google Gemini     | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy)  |
+| Google Gemma      | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                           |
+| Meta              | Terms differ by Llama version. See the Notes column in the [models catalog](/docs/ai-gateway/overview#available-models).                                                             |
+| TypeSafe AI (Jev) | [Terms of use](https://typesafe.ai/legal/terms) · [Data processing addendum](https://typesafe.ai/legal/data-processing) · [Privacy policy](https://typesafe.ai/legal/privacy-policy) |
+
+Jev is hosted by TypeSafe AI, Inc. and served through Neon AI Gateway. Neon provides access, authentication, and routing, and TypeSafe AI operates the environment the model runs in. OpenJev, the open-weight decision model, is hosted by Databricks. See [Decisions](/docs/ai-gateway/decisions#models).
 
 <Admonition type="important">
 Use of AI Gateway is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
 
-For what Databricks and partner model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
+For what Databricks and model providers retain, see [Data retention](/docs/ai-gateway/data-retention).
 
 <NeedHelp/>

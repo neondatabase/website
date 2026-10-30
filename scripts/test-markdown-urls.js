@@ -247,7 +247,7 @@ function buildTests() {
   // ── 1. Content routes with markdown (happy path) ──────────────────────
 
   const contentRoutes = [
-    { path: '/docs/introduction', spotWord: 'Neon' },
+    { path: '/docs/introduction/branching', spotWord: 'Neon' },
     { path: '/postgresql/tutorial', spotWord: null },
     { path: '/guides/neon-sst', spotWord: null },
     { path: '/branching/introduction', spotWord: null },
@@ -329,7 +329,7 @@ function buildTests() {
   // isAIAgentRequest alternate triggers (see ai-agent-detection.js)
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'accept-plain',
     [
       (r) => expectStatus(r.status, 200),
@@ -342,7 +342,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'accept-json',
     [
       (r) => expectStatus(r.status, 200),
@@ -355,7 +355,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'agent-axios',
     [
       (r) => expectStatus(r.status, 200),
@@ -368,7 +368,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction.md',
+    '/docs/introduction/branching.md',
     'agent-ua-html',
     [
       (r) => expectStatus(r.status, 200),
@@ -381,7 +381,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'browser-any',
     [
       (r) => expectStatus(r.status, 200),
@@ -393,7 +393,7 @@ function buildTests() {
 
   add(
     'Agent detection',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'agent-axios-html-only',
     [
       (r) => expectStatus(r.status, 200),
@@ -406,7 +406,7 @@ function buildTests() {
   // Explicit .md in URL + Accept: text/markdown (distinct from dot-md which uses HTML Accept)
   add(
     'Content route',
-    '/docs/introduction.md',
+    '/docs/introduction/branching.md',
     'accept-md',
     [
       (r) => expectStatus(r.status, 200),
@@ -1275,40 +1275,54 @@ function buildTests() {
     );
   }
 
-  // ── 9e. Bare /docs — content-negotiated by the middleware (src/proxy.js). The
-  // /docs→/docs/introduction redirect lives in middleware (not next.config) so it runs
-  // AFTER the markdown check: agents / non-HTML Accept get llms.txt; browsers redirect.
-
-  // Browser (Accept: text/html, normal UA): redirected to the introduction page.
-  add(
-    'Bare /docs',
-    '/docs',
-    'browser',
-    [
-      (r) => expectStatus(r.status, 308),
-      (r) => expectHeader(r.headers, 'location', '/docs/introduction'),
-      (r) => expectHeader(r.headers, 'vary', 'Accept'),
-    ],
-    { note: 'browser → redirect to /docs/introduction (Vary: Accept)' }
-  );
+  // ── 9e. Bare /docs — content-negotiated by the middleware (src/proxy.js).
+  // /docs is the docs front page (src/app/(docs)/docs/page.jsx): agents / non-HTML
+  // Accept get llms.txt; browsers get the page. Vary isn't asserted on the HTML
+  // response: Next replaces the proxy's Vary for app-router pages, the same as on
+  // every other content route.
 
   for (const [mode, note] of [
-    ['browser-any', 'browser UA + Accept: */* → redirect'],
-    ['agent-ua-html', 'agent UA + Accept: text/html → redirect, like a browser'],
-    ['agent-ua-html-only', 'agent UA + bare Accept: text/html → redirect, like a browser'],
+    ['browser', 'browser → docs front page'],
+    ['browser-any', 'browser UA + Accept: */* → docs front page'],
+    ['agent-ua-html', 'agent UA + Accept: text/html → docs front page, like a browser'],
+    ['agent-ua-html-only', 'agent UA + bare Accept: text/html → docs front page, like a browser'],
   ]) {
     add(
       'Bare /docs',
       '/docs',
       mode,
       [
-        (r) => expectStatus(r.status, 308),
-        (r) => expectHeader(r.headers, 'location', '/docs/introduction'),
-        (r) => expectHeader(r.headers, 'vary', 'Accept'),
+        (r) => expectStatus(r.status, 200),
+        (r) => expectContentType(r.contentType, 'text/html'),
+        (r) => expectHtmlBody(r.body),
       ],
       { note }
     );
   }
+
+  // The former docs home (content/docs/introduction.md) was retired; its page and
+  // markdown copy redirect to the /docs front page and its markdown form.
+  add(
+    'Retired docs home',
+    '/docs/introduction',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', /^(https?:\/\/[^/]+)?\/docs$/),
+    ],
+    { note: 'old docs home → 308 to /docs' }
+  );
+
+  add(
+    'Retired docs home',
+    '/docs/introduction.md',
+    'agent-ua',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', /^(https?:\/\/[^/]+)?\/docs\.md$/),
+    ],
+    { note: 'old docs home markdown → 308 to /docs.md (the curated llms.txt index)' }
+  );
 
   // Markdown-negotiated requests all resolve to /docs/llms.txt with the doc headers.
   // Each mode exercises a different branch of isAIAgentRequest():
@@ -1392,7 +1406,7 @@ function buildTests() {
 
   add(
     'Doc headers on HTML',
-    '/docs/introduction',
+    '/docs/introduction/branching',
     'browser',
     [(r) => expectHeader(r.headers, 'x-llms-txt', '/docs/llms.txt')],
     { note: 'HTML content routes should still have X-LLMs-Txt' }

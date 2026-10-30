@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:48:21.765Z'
+updatedOn: '2026-10-30T18:05:21.319Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -18,7 +18,14 @@ HIPAA support is currently available at no additional cost. When we begin chargi
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are available to customers who have accepted our Business Associate Agreement (BAA) through the self-serve enablement process. The BAA is an agreement between you and Databricks, Neon's parent company. It sets out each party's responsibilities for protecting Protected Health Information (PHI).
 
-Read the [Business Associate Agreement (BAA)](https://www.databricks.com/sites/default/files/legal/neon-business-associate-agreement.pdf). If anything on this page differs from the BAA, the BAA applies.
+If anything on this page differs from the BAA, the BAA applies.
+
+## Business Associate Agreement (BAA)
+
+The BAA sets out each party's responsibilities for protecting PHI. Accepting it is part of the self-serve HIPAA enablement process: you review and accept the BAA when you enable HIPAA for your organization. If you need a counter-signed (executed) copy of the BAA for your records, you can request one.
+
+- [Read the BAA](/baa)
+- [Request a counter-signed copy of the BAA](/baa/signed)
 
 ## What is HIPAA?
 
@@ -344,13 +351,9 @@ The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extensi
 
 ## Non-HIPAA-compliant features
 
-The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
+The following feature is not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
 
-- [Managed Better Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
-- [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
-- [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
-- [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
-- [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
+- [Data API](/docs/data-api/get-started) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 
@@ -393,7 +396,7 @@ We conduct regular internal audits and provide training to our employees to ensu
 </FaqItem>
 
 <FaqItem question="What should I do if I suspect a data breach?">
-Contact our security team immediately at security@neon.tech.
+Contact our security team immediately at [security@databricks.com](mailto:security@databricks.com).
 </FaqItem>
 
 </Faq>

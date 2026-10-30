@@ -6,7 +6,7 @@ summary: >-
   by JWT authentication and Row-Level Security. Applications can query tables
   without a connection pool or SQL driver. Use this page to enable the API,
   create an RLS-protected table, and run your first queries via the
-  @neondatabase/neon-js client or direct HTTP requests. The API is enabled per
+  @neon/neon-js client or direct HTTP requests. The API is enabled per
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
@@ -238,18 +238,18 @@ Install a client library and run your first query. Choose the option that matche
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Managed Better Auth](/docs/auth/overview). This library handles token management automatically.
+Use [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js) if you're using [Managed Better Auth](/docs/auth/overview). This library handles token management automatically.
 
 **1. Install**
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neon/neon-js
 ```
 
 **2. Usage**
 
 ```typescript shouldWrap
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 // Initialize with Managed Better Auth
 // Use your Neon database URL without credentials or query parameters.
@@ -266,10 +266,6 @@ const { data, error } = await client
 console.log(data);
 ```
 
-<Admonition type="note" title="Version compatibility">
-The single-URL form, `createClient(url)`, requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the [object form](/docs/reference/javascript-sdk#initializing).
-</Admonition>
-
 <Admonition type="note">
 This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Managed Better Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same.
 </Admonition>
@@ -278,12 +274,12 @@ This client runs in the browser. Environment variable syntax depends on your fra
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
+Use [`@neon/postgrest-js`](https://www.npmjs.com/package/@neon/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 
 ```bash
-npm install @neondatabase/postgrest-js
+npm install @neon/postgrest-js
 ```
 
 **2. Usage**
@@ -291,7 +287,7 @@ npm install @neondatabase/postgrest-js
 Provide a function that retrieves the JWT token from your authentication system. This token is included in each request to enforce RLS policies.
 
 ```typescript shouldWrap
-import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
+import { fetchWithToken, NeonPostgrestClient } from '@neon/postgrest-js';
 
 const getTokenFromAuthSystem = async (): Promise<string> => {
   // Retrieve the JWT token from your auth system (e.g., Auth0, Clerk, Firebase)
@@ -331,7 +327,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 **Where to get the JWT token:**
 
 - **Your auth provider's SDK**: Retrieve the token using your provider's API (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
-- **Managed Better Auth**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed Better Auth](#testing-with-neon-auth) below).
+- **Managed Better Auth**: Retrieve the token using `client.auth.getSession()` from the `@neon/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed Better Auth](#testing-with-neon-auth) below).
 
 **About the `sub` claim:**
 

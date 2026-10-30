@@ -147,7 +147,12 @@ const AI_CHATBOTS = [
   },
 ];
 
-const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className }) => {
+const DropdownMenu = ({
+  gitHubPath,
+  markdownPath: customMarkdownPath,
+  variant = 'box',
+  className,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -178,6 +183,60 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
     };
   }, [isOpen, close]);
 
+  // The menu panel is identical across variants: Copy page as Markdown, then the
+  // "Open in ChatGPT / Claude" items.
+  const menuItems = (
+    <>
+      <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
+      {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
+        <DropdownItem
+          key={bot.name}
+          icon={bot.icon}
+          text={`Open in ${bot.name}`}
+          url={bot.generateLink(pageUrl)}
+          description={bot.description}
+          onClick={() =>
+            sendGtagEvent('Action Clicked', {
+              text: `Open in ${bot.name}`,
+              tag_name: 'DropdownMenu',
+            })
+          }
+        />
+      ))}
+    </>
+  );
+
+  // Inline variant: a plain text "Copy page" trigger with a small chevron that
+  // opens the same menu. No border or background, to sit in the page actions row.
+  if (variant === 'inline') {
+    return (
+      <div ref={containerRef} className={cn('relative flex', className)}>
+        <button
+          className="flex items-center gap-[7px] text-sm leading-none text-gray-new-20 transition-colors duration-[120ms] ease-out hover:text-black-new dark:text-gray-new-94 dark:hover:text-white"
+          type="button"
+          aria-label="Copy page options"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          <CopyIcon className="size-[15px] shrink-0" />
+          Copy page
+          <ChevronDownIcon
+            aria-hidden="true"
+            className={cn(
+              'ml-[-2px] size-3 text-[#6B6F77] transition-transform duration-200 dark:text-gray-new-60',
+              isOpen && 'rotate-180'
+            )}
+          />
+        </button>
+        {isOpen && (
+          <div className="absolute top-[calc(100%+10px)] left-0 z-50 w-70 origin-top-left border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new">
+            {menuItems}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div ref={containerRef} className={cn('relative mt-2.5 w-fit sm:mt-0', className)}>
       <div className="flex items-center border border-gray-new-90 dark:border-gray-new-20">
@@ -200,22 +259,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
       </div>
       {isOpen && (
         <div className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
-          <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
-          {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
-            <DropdownItem
-              key={bot.name}
-              icon={bot.icon}
-              text={`Open in ${bot.name}`}
-              url={bot.generateLink(pageUrl)}
-              description={bot.description}
-              onClick={() =>
-                sendGtagEvent('Action Clicked', {
-                  text: `Open in ${bot.name}`,
-                  tag_name: 'DropdownMenu',
-                })
-              }
-            />
-          ))}
+          {menuItems}
         </div>
       )}
     </div>
@@ -225,6 +269,7 @@ const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className 
 DropdownMenu.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   markdownPath: PropTypes.string,
+  variant: PropTypes.oneOf(['box', 'inline']),
   className: PropTypes.string,
 };
 

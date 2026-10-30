@@ -162,7 +162,7 @@ console.log(response.choices[0].message.content);
 Managed Better Auth stores authentication data in the `neon_auth` schema and remains branch-aware as your database branches.
 
 ```typescript shouldWrap
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```

@@ -1,6 +1,6 @@
 ---
 title: 'Neon Realtime'
-subtitle: 'Realtime live SQL and reactive DX for building apps and agents.'
+subtitle: "Live queries that update your app's UI the moment your data changes."
 summary: >-
   Neon's Realtime makes any SQL query live. Subscribe in realtime to your Lakebase Postgres database. Develop apps and agents with end-to-end reactivity using type-safe live queries and optimistic mutations.
 enableTableOfContents: true
@@ -11,15 +11,19 @@ titleWidth: '530'
   <FeatureBetaProps feature_name="Realtime" />
 </div>
 
-Realtime makes [any SQL query](./guides/queries) live. [Subscribe in realtime](./guides/subscribing) to your [Lakebase Postgres](/docs/postgres/overview) database. Develop with end-to-end, type-safe reactivity using [live queries](./guides/reactivity) and [optimistic mutations](./guides/mutations).
+Build apps and agents whose UIs update the moment your data changes. Realtime makes [any SQL query](./guides/queries) live, so you can [subscribe](./guides/subscribing) to your [Lakebase Postgres](/docs/postgres/overview) database and get end-to-end, type-safe reactivity with [live queries](./guides/reactivity) and [optimistic mutations](./guides/mutations).
+
+<AgentPrompt title="Set up with your agent" src="/prompts/realtime-landing.md" buttonText="Copy prompt" />
 
 ## Get started
 
-[Get started](./quickstart) with Realtime and learn about [how it works](./how-it-works).
+Starting a new app? Scaffold one from the Realtime template:
 
 ```bash filename="Terminal"
 npx neon@latest bootstrap my-app --template realtime-react
 ```
+
+To add Realtime to an app by hand, follow the [Quickstart](./quickstart). To see how the pieces fit together, read [how it works](./how-it-works).
 
 <DetailIconCards cols={2} theme="green-flat">
 
@@ -205,11 +209,6 @@ Install the [Neon MCP server](/docs/ai/neon-mcp-server). Or [use the CLI](/docs/
 ```bash filename="Terminal"
 neon skills -s neon-realtime
 ```
-
-<CopyPrompt src="/prompts/neon-realtime.md"
-    description="Copy this to your coding agent to get started with Realtime."
-    buttonText="Copy prompt"
-/>
 
 ## Frequently asked questions
 

@@ -4,7 +4,7 @@ subtitle: Build your own auth UI using SDK methods
 summary: >-
   Managed Better Auth SDK integration for Next.js App Router using raw API methods. Call
   `createNeonAuth`, `auth.signUp.email()`, `auth.signIn.email()`, and
-  `auth.middleware()` directly from the `@neondatabase/auth` package for full
+  `auth.middleware()` directly from the `@neon/auth` package for full
   control over your auth UI. Use this guide instead of the UI components
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
@@ -56,7 +56,7 @@ cd my-app
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install @neondatabase/auth@latest
+npm install @neon/auth@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -101,7 +101,7 @@ The SDK logs structured **`error`** and **`warn`** messages to **`console`** by 
 <TwoColumnLayout.Block>
 
 ```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neon/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
@@ -128,7 +128,7 @@ Create an API route handler that proxies auth requests. All Managed Better Auth 
 ```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
@@ -183,7 +183,7 @@ The server-side `auth` instance was already created in a previous step. The clie
 ```tsx filename="lib/auth/client.ts"
 'use client';
 
-import { createAuthClient } from '@neondatabase/auth/next';
+import { createAuthClient } from '@neon/auth/next';
 
 export const authClient = createAuthClient();
 ```

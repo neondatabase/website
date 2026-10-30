@@ -142,4 +142,42 @@ describe('cli command coverage invariants', () => {
     }
     expect(dangling).toEqual([]);
   });
+
+  // The parser omits a describe it can't resolve (a template literal built
+  // from an imported enum, say) instead of failing, so the gap only shows as a
+  // removed line in the schema diff. In 8.14.0 that dropped five neon-auth
+  // oauth-provider describes unnoticed. Fix new entries with an override or a
+  // parser change; add to KNOWN_MISSING only after checking the source.
+  it('every command and visible option has a describe', () => {
+    const KNOWN_MISSING = new Set([
+      // ENV_PULL_KEY_HELP comes from env_services.ts, which the parser doesn't read.
+      'env pull --env',
+    ]);
+    const missing = [];
+    const walk = (node, parts) => {
+      if (parts.length && !node.describe) missing.push(parts.join(' '));
+      for (const [name, opt] of Object.entries(node.options || {})) {
+        if (!opt.describe && !opt.hidden) missing.push(`${parts.join(' ')} --${name}`);
+      }
+      for (const [name, sub] of Object.entries(node.commands || {})) walk(sub, [...parts, name]);
+    };
+    walk({ commands: schema.commands }, []);
+    const unexpected = missing.filter((entry) => !KNOWN_MISSING.has(entry));
+    expect(
+      unexpected,
+      unexpected.length
+        ? `Schema entries with no describe: ${unexpected.join('; ')}.\n` +
+            `The parser likely couldn't resolve them. Check the CLI source, then fix ` +
+            `generate-schema.js or add an override in overrides.json.`
+        : undefined
+    ).toEqual([]);
+    // A stale allowlist entry would hide a later regression on that option.
+    const stale = [...KNOWN_MISSING].filter((entry) => !missing.includes(entry));
+    expect(
+      stale,
+      stale.length
+        ? `KNOWN_MISSING entries that now have a describe: ${stale.join('; ')}. Remove them.`
+        : undefined
+    ).toEqual([]);
+  });
 });

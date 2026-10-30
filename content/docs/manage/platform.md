@@ -9,12 +9,12 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-10-14T02:43:52.455Z'
+updatedOn: '2026-10-28T11:11:18.780Z'
 ---
 
 ## The Neon platform, in brief
 
-Neon is a full backend platform for apps and agents, not just a database. For an overview of every product, start at the [Neon documentation home](/docs/introduction).
+Neon is a full backend platform for apps and agents, not just a database. For an overview of every product, start at the [Neon documentation home](/docs).
 
 <DetailIconCards>
 

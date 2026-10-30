@@ -201,7 +201,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Getting started** with Neon, including project setup and key features (branching, autoscaling, scale-to-zero, instant restore, read replicas)
 - **Connections**, including the serverless driver, connection pooling, and connection strings
 - **Authentication** with Managed Better Auth
-- **Data API** via `@neondatabase/neon-js`
+- **Data API** via `@neon/neon-js`
 - **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
 

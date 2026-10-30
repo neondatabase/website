@@ -55,10 +55,8 @@ describe('mapCompareFiles', () => {
     expect(result.skipped.collapsed).toBe(1);
   });
 
-  it('skips excludePaths such as introduction.md', () => {
-    const result = mapCompareFiles([
-      { filename: 'content/docs/introduction.md', status: 'modified' },
-    ]);
+  it('skips excludePaths such as changelog.md', () => {
+    const result = mapCompareFiles([{ filename: 'content/docs/changelog.md', status: 'modified' }]);
     expect(result.pages).toEqual([]);
     expect(result.skipped.excluded).toBe(1);
   });

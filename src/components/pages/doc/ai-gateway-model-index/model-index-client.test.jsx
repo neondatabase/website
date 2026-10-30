@@ -1,7 +1,10 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render as rtlRender, screen, within } from '@testing-library/react';
+import { withNuqsTestingAdapter } from 'nuqs/adapters/testing';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import ModelIndexClient from './model-index-client';
+
+const render = (ui) => rtlRender(ui, { wrapper: withNuqsTestingAdapter({ hasMemory: true }) });
 
 const router = vi.hoisted(() => ({ push: vi.fn() }));
 

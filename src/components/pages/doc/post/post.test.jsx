@@ -17,6 +17,9 @@ vi.mock('components/shared/navigation-links', () => ({ default: () => null }));
 vi.mock('../dropdown-menu', () => ({
   default: () => <div data-testid="copy-page-menu" />,
 }));
+vi.mock('../agent-setup-button', () => ({
+  default: () => <div data-testid="agent-setup-button" />,
+}));
 vi.mock('../tag', () => ({ default: () => null }));
 
 const renderPost = (data, props = {}) =>
@@ -48,5 +51,12 @@ describe('Post hideCopyPage', () => {
     renderPost({});
 
     expect(screen.getByTestId('copy-page-menu')).toBeInTheDocument();
+  });
+
+  it('shows the agent-setup button even when the copy-page menu is hidden', () => {
+    renderPost({ hideCopyPage: true });
+
+    expect(screen.getByTestId('agent-setup-button')).toBeInTheDocument();
+    expect(screen.queryByTestId('copy-page-menu')).not.toBeInTheDocument();
   });
 });
