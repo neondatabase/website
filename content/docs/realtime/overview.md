@@ -13,6 +13,8 @@ titleWidth: '530'
 
 Realtime makes [any SQL query](./guides/queries) live. [Subscribe in realtime](./guides/subscribing) to your [Lakebase Postgres](/docs/postgres/overview) database. Develop with end-to-end, type-safe reactivity using [live queries](./guides/reactivity) and [optimistic mutations](./guides/mutations).
 
+<AgentPrompt title="Set up with your agent" src="/prompts/realtime-landing.md" buttonText="Copy prompt" />
+
 ## Get started
 
 [Get started](./quickstart) with Realtime and learn about [how it works](./how-it-works).
@@ -205,11 +207,6 @@ Install the [Neon MCP server](/docs/ai/neon-mcp-server). Or [use the CLI](/docs/
 ```bash filename="Terminal"
 neon skills -s neon-realtime
 ```
-
-<CopyPrompt src="/prompts/neon-realtime.md"
-    description="Copy this to your coding agent to get started with Realtime."
-    buttonText="Copy prompt"
-/>
 
 ## Frequently asked questions
 
