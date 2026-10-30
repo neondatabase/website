@@ -23,8 +23,16 @@ import { cn } from 'utils/cn';
 
 import AlibabaIcon from './images/alibaba.inline.svg';
 import AnthropicIcon from './images/anthropic.inline.svg';
+import BaaiIcon from './images/baai.inline.svg';
+import DatabricksIcon from './images/databricks.inline.svg';
+import DeepSeekIcon from './images/deepseek.inline.svg';
 import GoogleIcon from './images/google.inline.svg';
+import MoonshotIcon from './images/moonshotai.inline.svg';
 import OpenAIIcon from './images/openai.inline.svg';
+import ThinkingMachinesIcon from './images/thinkingmachines.inline.svg';
+import TypeSafeIcon from './images/typesafe.inline.svg';
+import XaiIcon from './images/xai.inline.svg';
+import ZhipuIcon from './images/zhipuai.inline.svg';
 import { LAB_ORDER, MODEL_CATALOG_NOTE, orgLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
@@ -150,16 +158,25 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
-const LAB_ICONS = {
+// Keyed by lab and provider id; both use the same slugs.
+const ORG_ICONS = {
   alibaba: AlibabaIcon,
   anthropic: AnthropicIcon,
+  baai: BaaiIcon,
+  databricks: DatabricksIcon,
+  deepseek: DeepSeekIcon,
   google: GoogleIcon,
-  openai: OpenAIIcon,
   meta: SiMeta,
+  moonshotai: MoonshotIcon,
+  openai: OpenAIIcon,
+  thinkingmachines: ThinkingMachinesIcon,
+  typesafe: TypeSafeIcon,
+  xai: XaiIcon,
+  zhipuai: ZhipuIcon,
 };
 
-const LabLogo = ({ lab }) => {
-  const Icon = LAB_ICONS[lab];
+const OrgLogo = ({ id }) => {
+  const Icon = ORG_ICONS[id];
 
   if (!Icon) return null;
 
@@ -170,8 +187,8 @@ const LabLogo = ({ lab }) => {
   );
 };
 
-LabLogo.propTypes = {
-  lab: PropTypes.string.isRequired,
+OrgLogo.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 const CheckMark = () => (
@@ -627,9 +644,9 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
             <colgroup>
               <col className="w-[16%]" />
               <col className="w-[18%]" />
-              <col className="w-[10%]" />
+              <col className="w-[12%]" />
               <col className="w-[9%]" />
-              <col className="w-[13%]" />
+              <col className="w-[11%]" />
               <col className="w-[5%]" />
               <col className="w-[8%]" />
               <col className="w-[5%]" />
@@ -696,12 +713,15 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       <span className="flex items-center gap-2 whitespace-nowrap">
-                        <LabLogo lab={row.lab} />
+                        <OrgLogo id={row.lab} />
                         {row.labName}
                       </span>
                     </td>
-                    <td className="py-4! pl-4! text-left! text-[.8125rem]! whitespace-nowrap text-gray-new-30 dark:text-gray-new-80">
-                      {row.providerName}
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      <span className="flex items-center gap-2 whitespace-nowrap">
+                        <OrgLogo id={row.provider} />
+                        {row.providerName}
+                      </span>
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
                       {row.inputsLabel}

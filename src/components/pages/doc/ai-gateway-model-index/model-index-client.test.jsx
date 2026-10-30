@@ -27,6 +27,30 @@ vi.mock('./images/google.inline.svg', () => ({
 vi.mock('./images/openai.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
+vi.mock('./images/baai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/databricks.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/deepseek.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/moonshotai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/thinkingmachines.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/typesafe.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/xai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
+vi.mock('./images/zhipuai.inline.svg', () => ({
+  default: (props) => <svg {...props} />,
+}));
 vi.mock('components/shared/code-block-wrapper/images/check.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
