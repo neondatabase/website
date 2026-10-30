@@ -95,6 +95,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/quarkus-jdbc-prompt.md',
   '/prompts/quarkus-reactive-prompt.md',
   '/prompts/react-router-prompt.md',
+  '/prompts/realtime-landing.md',
   '/prompts/redwood-sdk-prompt.md',
   '/prompts/reflex-prompt.md',
   '/prompts/ruby-on-rails-prompt.md',
