@@ -59,7 +59,7 @@ You need an MCP server URL or at least one protected resource to enable the prov
 Use [`neon neon-auth config oauth-server`](/docs/cli/neon-auth#config-oauth-server). Add a protected resource, then enable the server with its login and consent pages, which must be on a [trusted domain](/docs/auth/guides/configure-domains):
 
 ```bash shouldWrap
-neon neon-auth config oauth-server resource add https://api.example.com
+neon neon-auth config oauth-server resource add https://api.example.com/reports
 neon neon-auth config oauth-server update --enabled --login-page https://app.example.com/login --consent-page https://app.example.com/consent
 ```
 
@@ -430,7 +430,7 @@ Use [`neon neon-auth oauth-client`](/docs/cli/neon-auth#oauth-client). Every res
 neon neon-auth oauth-client create --name "Reports" --type confidential --redirect-uris https://reports.example.com/callback --resources https://api.example.com/reports
 ```
 
-For a confidential client, the command prints the client secret once, on the last line of its output. Store it before you continue. The `list`, `get`, `update`, `rotate-secret`, and `delete` subcommands manage existing clients.
+For a confidential client, the command prints the client secret only once. Store it before you continue. The `list`, `get`, `update`, `rotate-secret`, and `delete` subcommands manage existing clients.
 
 </TabItem>
 
@@ -509,7 +509,7 @@ Redirect URIs can't contain a fragment or credentials, and they must match exact
 - **Access tokens** are JWTs signed with EdDSA and expire after one hour. The `aud` claim contains the requested resource. The `client_id` claim identifies the client, and `scope` lists the granted scopes.
 - **JWKS** is at `<issuer>/.well-known/jwks.json`.
 - **ID tokens** don't include `name` or `email`. Call the issuer's userinfo endpoint (`<issuer>/oauth2/userinfo`) with the access token to get them.
-- **Disabling a resource** (removing it from the configuration) stops new tokens from being issued for it. Access tokens that were already issued stay valid until they expire.
+- **Disabling a resource** (removing it from the configuration) stops new tokens from being issued for it. Clients stop listing it until you add it back. Access tokens that were already issued stay valid until they expire.
 
 ### Scopes and refresh tokens
 

@@ -431,7 +431,7 @@ neon neon-auth config oauth-server resource add https://api.example.com
 
 ### neon neon-auth config oauth-server resource remove (#config-oauth-server-resource-remove)
 
-Removes one or more protected resources. Clients still linked to a removed resource can't get tokens for it, so the command warns you about them.
+Removes one or more protected resources. Clients stop listing a removed resource, and list it again if you add it back. On an enabled server, removing the last resource fails unless an MCP server URL is set.
 
 <CliUsage command="neon-auth config oauth-server resource remove" />
 
@@ -461,7 +461,7 @@ neon neon-auth oauth-client list
 
 ### neon neon-auth oauth-client create (#oauth-client-create)
 
-Creates an OAuth client. Each resource you link must already be a [protected resource](#config-oauth-server-resource). A confidential client gets a client secret, which the command prints once on the last line of its output. Store it before you continue.
+Creates an OAuth client. Each resource you link must already be a [protected resource](#config-oauth-server-resource). A confidential client gets a client secret, which the command prints only once. Store it before you continue.
 
 <CliUsage command="neon-auth oauth-client create" />
 

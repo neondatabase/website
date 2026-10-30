@@ -3802,10 +3802,12 @@
                   "describe": "Tenant ID for the microsoft provider: common, organizations, consumers, a tenant GUID, or a domain"
                 },
                 "oauth-client-id": {
-                  "type": "string"
+                  "type": "string",
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
                 },
                 "oauth-client-secret": {
-                  "type": "string"
+                  "type": "string",
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3813,8 +3815,8 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "required": true,
                   "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "required": true,
                   "choices": [
                     "google",
                     "github",
@@ -3834,8 +3836,8 @@
               "options": {
                 "provider-id": {
                   "type": "string",
-                  "required": true,
                   "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "required": true,
                   "choices": [
                     "google",
                     "github",
@@ -3874,10 +3876,12 @@
                   "describe": "Tenant ID for the microsoft provider: common, organizations, consumers, a tenant GUID, or a domain"
                 },
                 "oauth-client-id": {
-                  "type": "string"
+                  "type": "string",
+                  "describe": "OAuth client ID from your provider app. For apple, the Services ID. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
                 },
                 "oauth-client-secret": {
-                  "type": "string"
+                  "type": "string",
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app, where one exists; microsoft and apple always need your own credentials."
                 },
                 "oauth-client-secret-file": {
                   "type": "string",
@@ -3885,8 +3889,8 @@
                 },
                 "provider-id": {
                   "type": "string",
-                  "required": true,
                   "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "required": true,
                   "choices": [
                     "google",
                     "github",
@@ -3900,6 +3904,7 @@
               "describe": "Update an OAuth provider"
             }
           },
+          "describe": "Manage social login providers (google, github, vercel, microsoft, apple)",
           "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
         },
         "plugins": {
