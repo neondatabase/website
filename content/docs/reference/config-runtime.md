@@ -120,25 +120,27 @@ function apply(config: Config, options: ApplyOptions): Promise<PushResult>;
 
 Applies a `neon.ts` policy to an existing branch. Never creates a project or branch: both must already exist (use [`createBranch`](#createbranch) to provision one from a policy). `ApplyOptions` extends `ConfigOperationOptions` with:
 
-| Field                  | Type               | Default | Description                                                                                                                                                          |
-| ---------------------- | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `updateExisting`       | `boolean`          | `false` | Auto-confirm overriding existing remote settings (TTL, `protected`, compute settings). Without it, drift from the branch's current state throws `PushConflictError`. |
-| `allowProtectedBranch` | `boolean`          | `false` | Auto-confirm applying to a branch marked protected on Neon (see the note below the table).                                                                           |
-| `bundleFunction`       | `FunctionBundler?` | esbuild | Custom bundler for function source. See [Function bundling](#function-bundling).                                                                                     |
+| Field                  | Type                                                           | Default | Description                                                                                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `updateExisting`       | `boolean`                                                      | `false` | Auto-confirm overriding existing remote settings (TTL, `protected`, compute settings). Without it, drift from the branch's current state throws `PushConflictError`.                                                           |
+| `allowProtectedBranch` | `boolean`                                                      | `false` | Auto-confirm applying to a branch marked protected on Neon (see the note below the table).                                                                                                                                     |
+| `confirm`              | `(context: PushConfirmContext) => boolean \| Promise<boolean>` | none    | Asked once, before any change, when the apply needs confirmation. See [`pushConfig`](#pushconfig) for when it runs and what it receives.                                                                                       |
+| `beforeMutations`      | `() => void \| Promise<void>`                                  | none    | Runs once on every real apply (not on a dry run), after `confirm` approves or isn't needed and before the first change or function bundle, even when there's nothing to change. A throw aborts the apply with nothing changed. |
+| `bundleFunction`       | `FunctionBundler?`                                             | esbuild | Custom bundler for function source. See [Function bundling](#function-bundling).                                                                                                                                               |
 
-`apply` doesn't accept an interactive confirmation callback (that's only on the lower-level [`pushConfig`](#pushconfig)), so it's either non-interactive (pass `updateExisting`/`allowProtectedBranch` up front) or it fails closed: unresolved drift throws `PushConflictError` (see [Error handling](#error-handling)). Note that a protected branch with **no** other drift is not itself blocked by `allowProtectedBranch: false`; that flag only matters together with the interactive `confirm` callback on `pushConfig`.
+Without a `confirm` callback, `apply` is non-interactive: pass `updateExisting`/`allowProtectedBranch` up front, or unresolved drift throws `PushConflictError` (see [Error handling](#error-handling)). Pass `confirm` to ask before overriding existing settings or applying to a protected branch instead. A protected branch with **no** other drift isn't blocked when `allowProtectedBranch` is `false` and no `confirm` callback is set.
 
 Returns a `PushResult`:
 
-| Field        | Type               | Description                                                                                                                               |
-| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `projectId`  | `string`           | Target project id.                                                                                                                        |
-| `orgId`      | `string?`          | Organization id for the target project, when the API returns one.                                                                         |
-| `branchId`   | `string`           | Target branch id.                                                                                                                         |
-| `branchName` | `string`           | Target branch name.                                                                                                                       |
-| `dryRun`     | `boolean`          | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                          |
-| `applied`    | `AppliedChange[]`  | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field. |
-| `conflicts`  | `ConflictReport[]` | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                          |
+| Field           | Type                                     | Description                                                                                                                                                                                                                                              |
+| --------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`     | `string`                                 | Target project id.                                                                                                                                                                                                                                       |
+| `orgId`         | `string?`                                | Organization id for the target project, when the API returns one.                                                                                                                                                                                        |
+| `branchId`      | `string`                                 | Target branch id.                                                                                                                                                                                                                                        |
+| `branchName`    | `string`                                 | Target branch name.                                                                                                                                                                                                                                      |
+| `dryRun`        | `boolean`                                | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                                                                                                                                         |
+| `applied`       | `AppliedChange[]`                        | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field.                                                                                                                |
+| `conflicts`     | `ConflictReport[]`                       | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                                                                                                                                         |
 | `customDomains` | `Array<{ domain, slug, cnameTarget? }>?` | Custom domains declared for the branch after the push, or what `apply` would leave in place on a dry run. `cnameTarget` is absent for a not-yet-registered domain on a dry run, and is an empty string when the region has no custom-domains front door. |
 
 ### `createBranch`
@@ -161,7 +163,7 @@ Returns `{ branchId, branchName, result: PushResult }`. Throws a `PlatformError`
 
 ## Lower-level: `pullConfig` and `pushConfig`
 
-`inspect`, `plan`, and `apply` are thin, intent-revealing wrappers over two lower-level primitives. Reach for these directly when you need control they don't expose: most commonly, an interactive confirmation prompt, or evaluating the `branch` closure as a creation (`branchExists: false`) so creation-time tuning resolves.
+`inspect`, `plan`, and `apply` are thin, intent-revealing wrappers over two lower-level primitives. Reach for these directly when you need control they don't expose: most commonly, evaluating the `branch` closure as a creation (`branchExists: false`) so creation-time tuning resolves.
 
 `pushConfig` always requires a `branchId` that already exists on the project; `branchExists: false` only changes how the policy is evaluated, not whether the branch has to exist. `pushConfig` never creates a branch, on `dryRun` or otherwise. If the branch doesn't exist yet, use [`createBranch`](#createbranch) instead.
 
@@ -181,7 +183,7 @@ function pushConfig(config: Config, options: PushConfigOptions): Promise<PushRes
 
 Returns the same `PushResult` shape as [`apply`](#apply). With `dryRun: true`, `applied` is the ordered list of changes that would be applied, and the function does not mutate remote state.
 
-The engine behind `plan` and `apply`. `PushConfigOptions` is `ApplyOptions` plus:
+The engine behind `plan` and `apply`. `PushConfigOptions` takes every `ApplyOptions` field, adds `branchExists` and `dryRun`, and the table below describes `confirm` in full:
 
 | Field          | Type                                                           | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------- | -------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -191,11 +193,12 @@ The engine behind `plan` and `apply`. `PushConfigOptions` is `ApplyOptions` plus
 
 `PushConfirmContext` passed to `confirm`:
 
-| Field             | Type      | Description                                                                                                                                                            |
-| ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `branchName`      | `string`  | Target branch's name.                                                                                                                                                  |
-| `protectedBranch` | `boolean` | `true` when the branch is protected on Neon and `allowProtectedBranch` wasn't set.                                                                                     |
-| `overrideUpdates` | `boolean` | `true` when the plan would override existing remote settings and `updateExisting` wasn't set. Additive changes (enabling a service for the first time) never set this. |
+| Field             | Type                        | Description                                                                                                                                                            |
+| ----------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `branchName`      | `string`                    | Target branch's name.                                                                                                                                                  |
+| `protectedBranch` | `boolean`                   | `true` when the branch is protected on Neon and `allowProtectedBranch` wasn't set.                                                                                     |
+| `overrideUpdates` | `boolean`                   | `true` when the plan would override existing remote settings and `updateExisting` wasn't set. Additive changes (enabling a service for the first time) never set this. |
+| `overrides`       | `readonly ConflictReport[]` | The settings that would be overridden, as current and desired values, so you can show what you're asking about. Empty when only `protectedBranch` applies.             |
 
 Use `confirm` to render your own "are you sure?" prompt instead of failing closed with `PushConflictError`, for example in an interactive CLI built on top of this package.
 
@@ -282,13 +285,13 @@ Every error this package throws extends `PlatformError` (also re-exported here f
 
 The subclasses relevant to programmatic use:
 
-| Class                                                 | `code`                        | Thrown by             | When                                                                                                                                                                           |
-| ----------------------------------------------------- | ----------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `PushConflictError`                                   | `PLATFORM_PUSH_CONFLICT`      | `apply`, `pushConfig` | Local policy conflicts with remote state and you didn't pass `updateExisting`. Carries a `conflicts: ConflictReport[]` array.                                                  |
-| `PushAbortedError`                                    | `PLATFORM_PUSH_ABORTED`       | `pushConfig`          | Your `confirm` callback returned `false`. Carries `branchName` and `reasons`.                                                                                                  |
-| `ConfigLoadError`                                     | `PLATFORM_CONFIG_LOAD_FAILED` | `loadConfigFromFile`  | No config file found, or it failed to evaluate.                                                                                                                                |
-| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`    | any operation         | You passed neither `apiKey` nor an `api` adapter. See [Authentication](#authentication).                                                                                       |
-| `PlatformError` with code `PLATFORM_BRANCH_NOT_FOUND` | `PLATFORM_BRANCH_NOT_FOUND`   | any operation         | `branchId` doesn't exist on the project (see [Resolving project and branch ids](#resolving-project-and-branch-ids)), or a policy's `parent` names a branch that doesn't exist. |
+| Class                                                 | `code`                        | Thrown by             | When                                                                                                                                                                                         |
+| ----------------------------------------------------- | ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PushConflictError`                                   | `PLATFORM_PUSH_CONFLICT`      | `apply`, `pushConfig` | Local policy conflicts with remote state and you passed neither `updateExisting` nor a `confirm` callback, or the conflict can't be resolved. Carries a `conflicts: ConflictReport[]` array. |
+| `PushAbortedError`                                    | `PLATFORM_PUSH_ABORTED`       | `apply`, `pushConfig` | Your `confirm` callback returned `false`. Carries `branchName` and `reasons`.                                                                                                                |
+| `ConfigLoadError`                                     | `PLATFORM_CONFIG_LOAD_FAILED` | `loadConfigFromFile`  | No config file found, or it failed to evaluate.                                                                                                                                              |
+| `PlatformError` with code `PLATFORM_MISSING_API_KEY`  | `PLATFORM_MISSING_API_KEY`    | any operation         | You passed neither `apiKey` nor an `api` adapter. See [Authentication](#authentication).                                                                                                     |
+| `PlatformError` with code `PLATFORM_BRANCH_NOT_FOUND` | `PLATFORM_BRANCH_NOT_FOUND`   | any operation         | `branchId` doesn't exist on the project (see [Resolving project and branch ids](#resolving-project-and-branch-ids)), or a policy's `parent` names a branch that doesn't exist.               |
 
 A `ConflictReport` (on `PushConflictError.conflicts` and `PushResult.conflicts`) has `kind`, `identifier`, `field`, `current`, `desired`, and a human-readable `reason`.
 
