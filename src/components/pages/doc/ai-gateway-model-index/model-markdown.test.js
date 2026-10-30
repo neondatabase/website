@@ -33,7 +33,8 @@ describe('AI Gateway model Markdown index', () => {
     const [imageSection, otherSection] = afterText.split('### Other models');
 
     expect(textSection).toContain('#### OpenAI');
-    expect(textSection).toContain('| `text-model` | Databricks |');
+    expect(textSection).toContain('| `text-model` | text |');
+    expect(markdown).not.toContain('Databricks');
     expect(textSection).not.toContain('image-only-model');
     expect(textSection).not.toContain('audio-only-model');
     expect(imageSection).toContain('image-only-model');
@@ -78,7 +79,7 @@ describe('AI Gateway model Markdown index', () => {
 
     expect(textSection).not.toContain('qwen3-embedding-0-6b');
     expect(embeddingSection).toContain('qwen3-embedding-0-6b');
-    expect(embeddingSection).toContain('| `qwen3-embedding-0-6b` | OpenAI | Databricks | 1024 |');
+    expect(embeddingSection).toContain('| `qwen3-embedding-0-6b` | OpenAI | 1024 |');
   });
 
   it('gives decision models their own section, out of Text and Other', () => {
@@ -95,8 +96,6 @@ describe('AI Gateway model Markdown index', () => {
 
     expect(beforeDecision).not.toContain('example-decision');
     expect(beforeDecision).not.toContain('### Other models');
-    expect(decisionSection).toContain(
-      '| `example-decision` | OpenAI | Databricks | 1K | Sep 2026 |'
-    );
+    expect(decisionSection).toContain('| `example-decision` | OpenAI | 1K | Sep 2026 |');
   });
 });

@@ -30,9 +30,6 @@ vi.mock('./images/openai.inline.svg', () => ({
 vi.mock('./images/baai.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
-vi.mock('./images/databricks.inline.svg', () => ({
-  default: (props) => <svg {...props} />,
-}));
 vi.mock('./images/deepseek.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
@@ -219,7 +216,7 @@ describe('ModelIndexClient', () => {
 
     expect(getVisibleModelNames()).toEqual(['New image model', 'Unpriced model']);
 
-    fireEvent.change(searchInput, { target: { value: 'databricks' } });
+    fireEvent.change(searchInput, { target: { value: 'anthropic' } });
     expect(getVisibleModelNames()).toEqual(['Old open model']);
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));

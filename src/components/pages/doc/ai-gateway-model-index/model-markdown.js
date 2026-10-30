@@ -5,8 +5,8 @@ const modelRows = require('./model-rows');
 
 const BASE_URL = 'https://neon.com';
 const MODEL_TABLE_HEADER =
-  '| Model | Model ID | Provider | Inputs | Context | Released | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |';
+  '| Model | Model ID | Inputs | Context | Released | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |';
 
 const escapeTableCell = (value) =>
   String(value)
@@ -46,7 +46,6 @@ const renderModelTableRows = (rows) =>
           row.id
         )}.md)`,
         renderCodeCell(row.id),
-        escapeTableCell(row.providerName),
         escapeTableCell(row.inputsLabel),
         escapeTableCell(row.contextLabel),
         escapeTableCell(row.releaseLabel),
@@ -70,8 +69,8 @@ const renderLabTables = (rows, headingDepth) =>
     .join('\n\n');
 
 const EMBEDDING_TABLE_HEADER =
-  '| Model | Model ID | Lab | Provider | Dimensions | Released | Input /M | Endpoints | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- | --- | --- |';
+  '| Model | Model ID | Lab | Dimensions | Released | Input /M | Endpoints | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- |';
 
 const renderEmbeddingTableRows = (rows) =>
   rows
@@ -82,7 +81,6 @@ const renderEmbeddingTableRows = (rows) =>
         )}.md)`,
         renderCodeCell(row.id),
         escapeTableCell(row.labName),
-        escapeTableCell(row.providerName),
         escapeTableCell(row.dimensions),
         escapeTableCell(row.releaseLabel),
         escapeTableCell(row.costInputLabel),
@@ -94,8 +92,8 @@ const renderEmbeddingTableRows = (rows) =>
     .join('\n');
 
 const DECISION_TABLE_HEADER =
-  '| Model | Model ID | Lab | Provider | Context | Released | Input /M | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- | --- |';
+  '| Model | Model ID | Lab | Context | Released | Input /M | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- |';
 
 const renderDecisionTableRows = (rows) =>
   rows
@@ -106,7 +104,6 @@ const renderDecisionTableRows = (rows) =>
         )}.md)`,
         renderCodeCell(row.id),
         escapeTableCell(row.labName),
-        escapeTableCell(row.providerName),
         escapeTableCell(row.contextLabel),
         escapeTableCell(row.releaseLabel),
         escapeTableCell(row.costInputLabel),

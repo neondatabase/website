@@ -24,7 +24,6 @@ import { cn } from 'utils/cn';
 import AlibabaIcon from './images/alibaba.inline.svg';
 import AnthropicIcon from './images/anthropic.inline.svg';
 import BaaiIcon from './images/baai.inline.svg';
-import DatabricksIcon from './images/databricks.inline.svg';
 import DeepSeekIcon from './images/deepseek.inline.svg';
 import GoogleIcon from './images/google.inline.svg';
 import MoonshotIcon from './images/moonshotai.inline.svg';
@@ -49,7 +48,6 @@ const COLUMNS = [
   { key: 'name', label: 'Model', sortable: true },
   { key: 'id', label: 'Model ID', sortable: true },
   { key: 'lab', label: 'Lab', sortable: true },
-  { key: 'provider', label: 'Provider', sortable: true },
   { key: 'inputs', label: 'Inputs', sortable: false },
   { key: 'contextWindow', label: 'Context', sortable: true },
   { key: 'releaseDate', label: 'Released', sortable: true },
@@ -158,12 +156,11 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
-// Keyed by lab and provider id; both use the same slugs.
+// Keyed by lab id.
 const ORG_ICONS = {
   alibaba: AlibabaIcon,
   anthropic: AnthropicIcon,
   baai: BaaiIcon,
-  databricks: DatabricksIcon,
   deepseek: DeepSeekIcon,
   google: GoogleIcon,
   meta: SiMeta,
@@ -412,8 +409,7 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
         (row) =>
           row.name.toLowerCase().includes(query) ||
           row.id.toLowerCase().includes(query) ||
-          row.labName.toLowerCase().includes(query) ||
-          row.providerName.toLowerCase().includes(query)
+          row.labName.toLowerCase().includes(query)
       );
     }
     return [...list].sort((a, b) => compareRows(a, b, sort.key, sort.dir));
@@ -544,7 +540,7 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
               className="h-9 w-full border border-gray-new-80 bg-gray-new-98 pr-10 pl-9 text-[.8125rem] text-black-pure transition-colors outline-none placeholder:text-gray-new-40 hover:border-gray-new-70 focus:border-gray-new-30 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:hover:border-gray-new-30 dark:focus:border-gray-new-60 md:text-base search-cancel:appearance-none"
               type="search"
               value={search}
-              placeholder="Search model, ID, lab, or provider..."
+              placeholder="Search model, ID, or lab..."
               onChange={(event) => setSearch(event.target.value)}
             />
             {search && (
@@ -642,16 +638,15 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
             )}
           >
             <colgroup>
-              <col className="w-[16%]" />
               <col className="w-[18%]" />
+              <col className="w-[20%]" />
               <col className="w-[12%]" />
+              <col className="w-[15%]" />
+              <col className="w-[5%]" />
+              <col className="w-[8%]" />
+              <col className="w-[5%]" />
+              <col className="w-[5%]" />
               <col className="w-[9%]" />
-              <col className="w-[11%]" />
-              <col className="w-[5%]" />
-              <col className="w-[8%]" />
-              <col className="w-[5%]" />
-              <col className="w-[5%]" />
-              <col className="w-[8%]" />
             </colgroup>
             <thead>
               <tr className="border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
@@ -715,12 +710,6 @@ const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
                       <span className="flex items-center gap-2 whitespace-nowrap">
                         <OrgLogo id={row.lab} />
                         {row.labName}
-                      </span>
-                    </td>
-                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
-                      <span className="flex items-center gap-2 whitespace-nowrap">
-                        <OrgLogo id={row.provider} />
-                        {row.providerName}
                       </span>
                     </td>
                     <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
