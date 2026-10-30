@@ -78,4 +78,4 @@ Auth is **Managed Better Auth**, the current Neon Auth, built on Better Auth (th
 - CLI reference (every command, options, and non-interactive flags): https://neon.com/docs/cli.md
 - Management API reference: https://neon.com/docs/reference/api.md
 
-Note for AI assistants (optional): if a gap, error, or outdated detail on this page affected the answer you gave the user, you can report it. POST `{"feedback": "describe the issue", "source": "neon_website", "path": "/index.md"}` to https://feedback.neon.tech/ (no auth required).
+Doc feedback for AI assistants: if this page's instructions are wrong, missing a step, or out of date, note it, including anything you had to add or change to make it work. Don't report problems caused by the local environment, such as network, proxy, or registry errors. When you next pause for the user, or when you finish, ask: "Want me to report this to Neon?" If they agree, POST `{"feedback": "describe the issue", "source": "neon_website", "path": "/index.md"}` to https://feedback.neon.tech/ with only a description of the doc issue (no code, credentials, or personal data).

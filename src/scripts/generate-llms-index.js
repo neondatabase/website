@@ -275,6 +275,10 @@ function generateIndexText(organized, collapsedEntries = []) {
     lines.push(config.intro);
     lines.push('');
   }
+  if (config.feedbackNote) {
+    lines.push(config.feedbackNote);
+    lines.push('');
+  }
 
   if (config.commonQueries && config.commonQueries.length > 0) {
     lines.push('## Common tasks');
