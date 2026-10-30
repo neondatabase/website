@@ -197,7 +197,7 @@ describe('GET /models', () => {
       const mastra = model.examples.find((e) => e.id === 'mastra');
 
       expect(model.capabilities.chat).toBe('array-content');
-      expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
+      expect(mastra.dependencies).toContain('@neon/ai-sdk-provider');
       expect(mastra.files[0].content).toContain('model: neon(');
     });
 
@@ -245,7 +245,7 @@ describe('GET /models', () => {
         const mastra = model.examples.find((e) => e.id === 'mastra');
 
         // The tool factory lives in the provider package even though the model is a router string.
-        expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
+        expect(mastra.dependencies).toContain('@neon/ai-sdk-provider');
         expect(mastra.files[0].content).toContain('model: "neon/gpt-5-nano"');
         expect(mastra.files[0].content).toContain('neon.tools.');
       }
@@ -268,7 +268,7 @@ describe('GET /models', () => {
         }
         const [aiSdk, typescript, python] = model.examples;
         expect(aiSdk.files[0].content).toContain(`neon.decisionModel("${id}")`);
-        expect(aiSdk.dependencies).toEqual(['ai@7', '@neondatabase/ai-sdk-provider']);
+        expect(aiSdk.dependencies).toEqual(['ai@7', '@neon/ai-sdk-provider']);
         expect(typescript.dependencies).toEqual(['@typesafe-ai/sdk']);
         expect(python.dependencies).toEqual(['typesafe-sdk']);
       }

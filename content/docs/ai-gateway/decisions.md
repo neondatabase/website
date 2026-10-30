@@ -272,7 +272,7 @@ The answer has the same shape as for text. Image requests have a few rules:
 
 ## Use with the Vercel AI SDK
 
-[`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) exposes the decision models to the AI SDK's `experimental_decide`. The AI SDK marks this API as experimental, so it may change in patch releases. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from [Setup](#setup) and needs `ai@7.0.133` or later. Install it with `npm install @neon/ai-sdk-provider ai@7`; a plain `npm install ai` installs AI SDK 6.
+[`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) exposes the decision models to the AI SDK's `experimental_decide`. The AI SDK marks this API as experimental, so it may change in patch releases. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from [Setup](#setup) and needs `ai@7.0.133` or later. Install it with `npm install @neon/ai-sdk-provider ai@7`.
 
 ```typescript shouldWrap
 import { neon } from '@neon/ai-sdk-provider';
