@@ -51,7 +51,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/). Not
 | Plugin                                                                             | Status       |
 | ---------------------------------------------------------------------------------- | ------------ |
 | [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
-| Social OAuth (Google, GitHub, Vercel)                                              | ✅ Supported |
+| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple)                            | ✅ Supported |
 | [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported |
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial   |

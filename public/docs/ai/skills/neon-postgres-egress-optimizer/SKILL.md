@@ -171,7 +171,7 @@ When adding pagination, check whether the consuming client already supports pagi
 
 Look for queries with extremely high call counts relative to other queries. Common examples: configuration tables, category lists, feature flags, user role definitions.
 
-**Fix:** Add a caching layer between the application and the database so it avoids hitting the database on every request.
+**Fix:** Add a caching layer between the application and the database so it avoids hitting the database on every request. Reuse a cache the app already has. Otherwise, a serverless Redis such as [Upstash Redis](https://upstash.com/docs/redis) works from serverless and edge runtimes without connection management.
 
 ### Application-side aggregation
 

@@ -30,7 +30,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="4. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
-  Set up your own Google and GitHub OAuth apps to replace shared development keys.
+  Set up your own OAuth apps (Google, GitHub, Vercel, Microsoft, or Apple). Google is the only provider with shared development credentials, so replace those with your own before launch.
 </CheckItem>
 
 <CheckItem title="5. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">

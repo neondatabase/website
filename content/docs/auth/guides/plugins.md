@@ -9,7 +9,7 @@ summary: >-
   them via the Neon Console or Neon API. The Organization plugin has partial
   support.
 enableTableOfContents: true
-updatedOn: '2026-10-09T09:36:23.504Z'
+updatedOn: '2026-10-30T16:43:50.867Z'
 ---
 
 Managed Better Auth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.
@@ -17,23 +17,23 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/), whi
 <Admonition type="info" title="Plugins are managed by Managed Better Auth">
 Managed Better Auth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Managed Better Auth exposes a supported subset of plugins through the Neon SDK.
 
-For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Settings** > **Better Auth** in the Neon Console, or use the Neon API. From the terminal, [`neon neon-auth config organization update`](/docs/cli/neon-auth#config-organization-update) configures the Organization plugin, and [`neon neon-auth plugins list`](/docs/cli/neon-auth#plugins-list) shows the current plugin configurations. Additional plugin options may still arrive over time; see the [Managed Better Auth roadmap](/docs/auth/roadmap).
+For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Settings** > **Better Auth** in the Neon Console, or use the Neon API. From the terminal, [`neon neon-auth config organization update`](/docs/cli/neon-auth#config-organization-update) configures the Organization plugin, [`neon neon-auth config oauth-server update`](/docs/cli/neon-auth#config-oauth-server-update) configures the OAuth Provider plugin, and [`neon neon-auth plugins list`](/docs/cli/neon-auth#plugins-list) shows the current plugin configurations. Additional plugin options may still arrive over time; see the [Managed Better Auth roadmap](/docs/auth/roadmap).
 </Admonition>
 
 The following Better Auth plugins are currently supported in Managed Better Auth:
 
 ## Supported plugins
 
-| Plugin                                                     | Status                    |
-| ---------------------------------------------------------- | ------------------------- |
-| [Admin](/docs/auth/guides/plugins/admin)                   | ✅ Supported              |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)           | ✅ Supported              |
-| [JWT](/docs/auth/guides/plugins/jwt)                       | ✅ Supported              |
-| [Magic Link](/docs/auth/guides/plugins/magic-link)         | ✅ Supported              |
-| [OAuth Provider](/docs/auth/guides/plugins/oauth-provider) | 🧪 Beta                   |
-| [Organization](/docs/auth/guides/plugins/organization)     | ⚠️ Partial                |
-| [Open API](/docs/auth/guides/plugins/openapi)              | ✅ Supported              |
-| [Phone Number](/docs/auth/guides/plugins/phone-number)     | ✅ Supported              |
+| Plugin                                                     | Status       |
+| ---------------------------------------------------------- | ------------ |
+| [Admin](/docs/auth/guides/plugins/admin)                   | ✅ Supported |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)           | ✅ Supported |
+| [JWT](/docs/auth/guides/plugins/jwt)                       | ✅ Supported |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)         | ✅ Supported |
+| [OAuth Provider](/docs/auth/guides/plugins/oauth-provider) | 🧪 Beta      |
+| [Organization](/docs/auth/guides/plugins/organization)     | ⚠️ Partial   |
+| [Open API](/docs/auth/guides/plugins/openapi)              | ✅ Supported |
+| [Phone Number](/docs/auth/guides/plugins/phone-number)     | ✅ Supported |
 
 For more runnable Managed Better Auth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
 

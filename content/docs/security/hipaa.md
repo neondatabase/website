@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-10-29T21:37:59.548Z'
+updatedOn: '2026-10-30T18:05:21.319Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -351,14 +351,9 @@ The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extensi
 
 ## Non-HIPAA-compliant features
 
-The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
+The following feature is not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
 
-- [Managed Better Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
-- [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
-- [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
-- [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
-- [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
-- [Neon Realtime](/docs/realtime/overview) – Not covered under Neon’s HIPAA compliance.
+- [Data API](/docs/data-api/get-started) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 
@@ -401,7 +396,7 @@ We conduct regular internal audits and provide training to our employees to ensu
 </FaqItem>
 
 <FaqItem question="What should I do if I suspect a data breach?">
-Contact our security team immediately at security@neon.tech.
+Contact our security team immediately at [security@databricks.com](mailto:security@databricks.com).
 </FaqItem>
 
 </Faq>

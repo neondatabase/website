@@ -53,8 +53,8 @@ const TrustCenter = () => (
               .
             </p>
             <p>
-              For additional security inquiries, contact{' '}
-              <a href="mailto:security@neon.tech">security@neon.tech</a>.
+              Learn more about how we protect your data in our{' '}
+              <a href="/docs/security/security-overview">Security overview</a>.
             </p>
           </div>
         </div>
