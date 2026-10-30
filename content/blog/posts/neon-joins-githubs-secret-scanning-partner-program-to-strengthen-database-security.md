@@ -61,6 +61,6 @@ To prevent accidental leaks, we strongly recommend following these security best
 
 ## What’s Next?
 
-Neon is committed to continuously improving security protections for our users. If you have any questions about this integration or need assistance securing your credentials, please reach out to us at security@neon.tech.
+Neon is committed to continuously improving security protections for our users. If you have any questions about this integration or need assistance securing your credentials, reach out on our [Discord server](https://neon.com/discord) or [submit a support ticket](https://neon.com/docs/introduction/support).
 
 Stay secure!

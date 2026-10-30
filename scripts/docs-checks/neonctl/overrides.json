@@ -181,24 +181,24 @@
             "add": {
               "options": {
                 "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "choices": ["google", "github", "vercel", "microsoft", "apple"]
                 }
               }
             },
             "update": {
               "options": {
                 "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "choices": ["google", "github", "vercel", "microsoft", "apple"]
                 }
               }
             },
             "delete": {
               "options": {
                 "provider-id": {
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": ["google", "github", "vercel"]
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
+                  "choices": ["google", "github", "vercel", "microsoft", "apple"]
                 }
               }
             }

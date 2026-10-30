@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.12.1",
+  "neonctlVersion": "8.14.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -3308,6 +3308,122 @@
               "describe": "Manage email provider configuration",
               "usage": "$0 neon-auth config email-provider <sub-command> [options]"
             },
+            "oauth-server": {
+              "name": "oauth-server",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {
+                "get": {
+                  "name": "get",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Get OAuth server config"
+                },
+                "resource": {
+                  "name": "resource",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {
+                    "add": {
+                      "name": "add",
+                      "aliases": [],
+                      "positionals": [
+                        {
+                          "name": "url",
+                          "required": true,
+                          "variadic": true,
+                          "describe": "Protected resource URLs to add",
+                          "type": "array"
+                        }
+                      ],
+                      "options": {},
+                      "commands": {},
+                      "describe": "Add protected resources (reads the stored list and writes back the full list; concurrent changes by others can be overwritten)"
+                    },
+                    "list": {
+                      "name": "list",
+                      "aliases": [],
+                      "positionals": [],
+                      "options": {},
+                      "commands": {},
+                      "describe": "List protected resources"
+                    },
+                    "remove": {
+                      "name": "remove",
+                      "aliases": [],
+                      "positionals": [
+                        {
+                          "name": "url",
+                          "required": true,
+                          "variadic": true,
+                          "describe": "Protected resource URLs to remove",
+                          "type": "array"
+                        }
+                      ],
+                      "options": {},
+                      "commands": {},
+                      "describe": "Remove protected resources (reads the stored list and writes back the full list; concurrent changes by others can be overwritten)"
+                    }
+                  },
+                  "describe": "Manage the protected resources of the OAuth server. Add and remove read the stored list and write back the full list, so concurrent changes by others can be overwritten",
+                  "usage": "$0 neon-auth config oauth-server resource <sub-command> [options]"
+                },
+                "update": {
+                  "name": "update",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {
+                    "consent-page": {
+                      "type": "string",
+                      "describe": "URL of the page authorization requests redirect to for consent"
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "describe": "Enable the OAuth server. Use --no-enabled or --enabled false to disable"
+                    },
+                    "login-page": {
+                      "type": "string",
+                      "describe": "URL of the page authorization requests redirect to for sign-in"
+                    },
+                    "mcp": {
+                      "type": "boolean",
+                      "describe": "Remove the MCP configuration (only --no-mcp is accepted)"
+                    },
+                    "mcp-client-id-metadata-documents": {
+                      "type": "boolean",
+                      "describe": "Allow MCP clients to identify themselves with a Client ID Metadata Document (CIMD) URL. Use --no-mcp-client-id-metadata-documents to disallow"
+                    },
+                    "mcp-dynamic-registration": {
+                      "type": "boolean",
+                      "describe": "Allow MCP clients to register themselves via dynamic client registration (deprecated in favor of CIMD)",
+                      "hidden": true
+                    },
+                    "mcp-resource": {
+                      "type": "string",
+                      "describe": "MCP server URL that MCP clients are linked to. Defaults to the stored value when another --mcp-* flag is given. To remove the MCP configuration, use --no-mcp"
+                    },
+                    "resources": {
+                      "type": "array",
+                      "describe": "Protected resource URLs that clients can be linked to; replaces the stored list. Use `resource add|remove` for incremental changes"
+                    }
+                  },
+                  "commands": {},
+                  "describe": "Update OAuth server config",
+                  "examples": [
+                    {
+                      "command": "$0 neon-auth config oauth-server update --enabled --mcp-resource https://example.com/mcp --mcp-client-id-metadata-documents",
+                      "description": "Enable the OAuth server for an MCP server"
+                    }
+                  ]
+                }
+              },
+              "describe": "Manage the OAuth 2.1 authorization server (API plugin: oauth_provider)",
+              "usage": "$0 neon-auth config oauth-server <sub-command> [options]"
+            },
             "organization": {
               "name": "organization",
               "aliases": [],
@@ -3516,6 +3632,152 @@
           "commands": {},
           "describe": "Enable Neon Auth on a branch"
         },
+        "oauth-client": {
+          "name": "oauth-client",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "create": {
+              "name": "create",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "name": {
+                  "type": "string",
+                  "describe": "Display name of the client",
+                  "required": true
+                },
+                "redirect-uris": {
+                  "type": "array",
+                  "describe": "Redirect URIs the client may use (https, or http on loopback when localhost is allowed)",
+                  "required": true
+                },
+                "resources": {
+                  "type": "array",
+                  "describe": "Protected resource URLs to link the client to; each must be configured with `neon-auth config oauth-server resource add`",
+                  "required": true
+                },
+                "skip-consent": {
+                  "type": "boolean",
+                  "describe": "Skip the consent prompt (first-party clients only)"
+                },
+                "type": {
+                  "type": "string",
+                  "describe": "Client type. Confidential clients receive a secret that is shown only once",
+                  "required": true,
+                  "choices": [
+                    "confidential",
+                    "public"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Create an OAuth client",
+              "examples": [
+                {
+                  "command": "$0 neon-auth oauth-client create --name 'My app' --type confidential --redirect-uris https://app.example.com/callback --resources https://api.example.com",
+                  "description": "Create a confidential client"
+                }
+              ]
+            },
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "client-id",
+                  "required": true,
+                  "describe": "OAuth client ID",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete an OAuth client",
+              "usage": "$0 neon-auth oauth-client delete <client-id> [options]"
+            },
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "client-id",
+                  "required": true,
+                  "describe": "OAuth client ID",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Get an OAuth client",
+              "usage": "$0 neon-auth oauth-client get <client-id> [options]"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List OAuth clients"
+            },
+            "rotate-secret": {
+              "name": "rotate-secret",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "client-id",
+                  "required": true,
+                  "describe": "OAuth client ID",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Rotate the secret of a confidential client; the old secret stops working immediately",
+              "usage": "$0 neon-auth oauth-client rotate-secret <client-id> [options]"
+            },
+            "update": {
+              "name": "update",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "client-id",
+                  "required": true,
+                  "describe": "OAuth client ID",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "disabled": {
+                  "type": "boolean",
+                  "describe": "Disable the client. Use --no-disabled or --disabled false to re-enable"
+                },
+                "name": {
+                  "type": "string",
+                  "describe": "Display name of the client"
+                },
+                "redirect-uris": {
+                  "type": "array",
+                  "describe": "Redirect URIs the client may use; replaces the stored list"
+                },
+                "resources": {
+                  "type": "array",
+                  "describe": "Protected resource URLs to link the client to; replaces the stored list (at least one)"
+                },
+                "skip-consent": {
+                  "type": "boolean",
+                  "describe": "Skip the consent prompt (first-party clients only). Use --no-skip-consent or --skip-consent false to turn off"
+                }
+              },
+              "commands": {},
+              "describe": "Update an OAuth client (the type cannot be changed)",
+              "usage": "$0 neon-auth oauth-client update <client-id> [options]"
+            }
+          },
+          "describe": "Manage clients of this Neon Auth OAuth server (e.g. MCP clients); configure the server with `config oauth-server`",
+          "usage": "$0 neon-auth oauth-client <sub-command> [options]"
+        },
         "oauth-provider": {
           "name": "oauth-provider",
           "aliases": [],
@@ -3527,22 +3789,38 @@
               "aliases": [],
               "positionals": [],
               "options": {
-                "oauth-client-id": {
+                "apple-key-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
+                  "describe": "Key ID of the Sign in with Apple private key (apple only). Sent together with a new apple client secret, and only with one"
+                },
+                "apple-team-id": {
+                  "type": "string",
+                  "describe": "Apple Developer Team ID (apple only)"
+                },
+                "microsoft-tenant-id": {
+                  "type": "string",
+                  "describe": "Tenant ID for the microsoft provider: common, organizations, consumers, a tenant GUID, or a domain"
+                },
+                "oauth-client-id": {
+                  "type": "string"
                 },
                 "oauth-client-secret": {
+                  "type": "string"
+                },
+                "oauth-client-secret-file": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
+                  "describe": "Read the OAuth client secret from a file, for example the apple .p8 private key"
                 },
                 "provider-id": {
                   "type": "string",
                   "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
                   "choices": [
                     "google",
                     "github",
-                    "vercel"
+                    "vercel",
+                    "microsoft",
+                    "apple"
                   ]
                 }
               },
@@ -3557,11 +3835,13 @@
                 "provider-id": {
                   "type": "string",
                   "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
                   "choices": [
                     "google",
                     "github",
-                    "vercel"
+                    "vercel",
+                    "microsoft",
+                    "apple"
                   ]
                 }
               },
@@ -3581,22 +3861,38 @@
               "aliases": [],
               "positionals": [],
               "options": {
-                "oauth-client-id": {
+                "apple-key-id": {
                   "type": "string",
-                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
+                  "describe": "Key ID of the Sign in with Apple private key (apple only). Sent together with a new apple client secret, and only with one"
+                },
+                "apple-team-id": {
+                  "type": "string",
+                  "describe": "Apple Developer Team ID (apple only)"
+                },
+                "microsoft-tenant-id": {
+                  "type": "string",
+                  "describe": "Tenant ID for the microsoft provider: common, organizations, consumers, a tenant GUID, or a domain"
+                },
+                "oauth-client-id": {
+                  "type": "string"
                 },
                 "oauth-client-secret": {
+                  "type": "string"
+                },
+                "oauth-client-secret-file": {
                   "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
+                  "describe": "Read the OAuth client secret from a file, for example the apple .p8 private key"
                 },
                 "provider-id": {
                   "type": "string",
                   "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel, microsoft, apple",
                   "choices": [
                     "google",
                     "github",
-                    "vercel"
+                    "vercel",
+                    "microsoft",
+                    "apple"
                   ]
                 }
               },
@@ -3604,7 +3900,6 @@
               "describe": "Update an OAuth provider"
             }
           },
-          "describe": "Manage OAuth providers",
           "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
         },
         "plugins": {
@@ -3620,7 +3915,7 @@
                 {
                   "name": "plugin-name",
                   "required": true,
-                  "describe": "Plugin name (e.g. organization, email_provider, email_and_password, oauth_providers, allow_localhost)",
+                  "describe": "Plugin name (e.g. organization, email_provider, email_and_password, oauth_providers, oauth_provider, allow_localhost)",
                   "type": "string"
                 }
               ],
