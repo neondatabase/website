@@ -383,6 +383,8 @@ The `@neon/oauth` SDK (beta) implements this flow for you. `createOAuth()` from 
 
 Managed clients are for resources that clients can't register for themselves. You can also link a managed client to your MCP server resource, which is how you onboard known clients when you turn off CIMD and DCR.
 
+If you work with an AI assistant, the [Neon MCP Server](/docs/ai/neon-mcp-server) can also manage the provider and its clients with the `*_auth_oauth_server` and `*_auth_oauth_client` tools.
+
 <Admonition type="warning" title="Keep the MCP server URL out of the resources list">
 For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and turn off `client_id_metadata_documents` and `dynamic_registration` so that only managed clients can connect. Don't list the MCP server URL under `resources` instead. The refresh-token reuse window (30 seconds) is configured only when `mcp.resource` is set. Without it, an MCP client that refreshes concurrently presents an already-rotated refresh token, and Managed Better Auth revokes that user's refresh tokens for the client.
 </Admonition>
