@@ -16,7 +16,7 @@ Keep Lakebase Postgres as the auth database. Use `better-auth` and `better-auth/
 - https://better-auth.com/docs/concepts/client
 - https://better-auth.com/docs/concepts/plugins
 
-Do not pass `plugins` into `@neondatabase/auth`. Replacing only the client package while Managed Auth is still the backend does not add plugins.
+Do not pass `plugins` into `@neon/auth`. Replacing only the client package while Managed Auth is still the backend does not add plugins.
 
 MCP OAuth (Cursor, Claude, and similar clients self-authorizing) is `neon-functions` [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md). That can sit beside existing Clerk or Managed login. Do not migrate the whole app's identity unless that was the request.
 
