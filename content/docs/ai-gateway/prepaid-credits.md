@@ -6,7 +6,7 @@ summary: >-
   credits, how to set up automatic top-up, how to check your balance, and how
   usage limits and metering affect access.
 enableTableOfContents: true
-updatedOn: '2026-10-23T16:17:19.164Z'
+updatedOn: '2026-10-29T21:01:06.492Z'
 ---
 
 The Neon AI Gateway is billed with **prepaid credits**. You buy credits up front,
@@ -92,7 +92,8 @@ AI Gateway usage is subject to **soft limits** that guard against runaway cost
 and abuse:
 
 - **Per-minute token limit.** A soft limit of **200,000 tokens per minute
-  (TPM)** applies, but this may vary by account.
+  (TPM)** applies to input and output tokens separately, but this may vary by
+  account.
 - **Daily spend cap.** A **$20 per day** limit applies to total usage, but this
   may vary by account.
 
@@ -111,7 +112,7 @@ When you exceed a limit, the API returns **HTTP 429**:
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway daily token limit exceeded"
+  "message": "You've reached your AI Gateway daily spend limit. You can retry after it resets, or ask Neon support to raise it (we review all increases to prevent abuse): https://console.neon.tech/app/projects?modal=support"
 }
 ```
 
@@ -216,7 +217,7 @@ Your credits stay on your account, but you can't use AI Gateway while on the Fre
 </FaqItem>
 
 <FaqItem question="What are the default usage limits?">
-By default, each account has a soft limit of 200,000 tokens per minute (TPM) and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Usage limits](#usage-limits) for details.
+By default, each account has a soft limit of 200,000 tokens per minute (TPM), applied to input and output tokens separately, and a $20 per day spend cap, though both may vary by account. Both guard against runaway costs. If you're blocked and need a limit raised, [contact Support](/docs/introduction/support). See [Usage limits](#usage-limits) for details.
 </FaqItem>
 
 <FaqItem question="What happens if I hit a usage limit?">
