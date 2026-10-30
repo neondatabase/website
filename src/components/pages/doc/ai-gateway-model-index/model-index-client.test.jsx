@@ -30,9 +30,6 @@ vi.mock('./images/openai.inline.svg', () => ({
 vi.mock('./images/baai.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
-vi.mock('./images/databricks.inline.svg', () => ({
-  default: (props) => <svg {...props} />,
-}));
 vi.mock('./images/deepseek.inline.svg', () => ({
   default: (props) => <svg {...props} />,
 }));
@@ -198,6 +195,12 @@ describe('ModelIndexClient', () => {
     expect(screen.getByRole('button', { name: 'Labs (1)' })).toBeInTheDocument();
   });
 
+  it('sorts by lab from a link that still uses the old provider sort key', () => {
+    render(<ModelIndexClient rows={rows} variant="landing" />, '?sort=provider:asc');
+
+    expect(getVisibleModelNames()).toEqual(['Old open model', 'New image model', 'Unpriced model']);
+  });
+
   it('closes the lab listbox when focus leaves the control', () => {
     render(<ModelIndexClient rows={rows} variant="landing" />);
 
@@ -219,7 +222,7 @@ describe('ModelIndexClient', () => {
 
     expect(getVisibleModelNames()).toEqual(['New image model', 'Unpriced model']);
 
-    fireEvent.change(searchInput, { target: { value: 'databricks' } });
+    fireEvent.change(searchInput, { target: { value: 'anthropic' } });
     expect(getVisibleModelNames()).toEqual(['Old open model']);
 
     fireEvent.click(screen.getByRole('button', { name: 'Clear search' }));
