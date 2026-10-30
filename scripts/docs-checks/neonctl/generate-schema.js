@@ -59,18 +59,31 @@ function stringLiteralValue(node) {
   return undefined;
 }
 
-function arrayLiteralStrings(node) {
+function arrayLiteralStrings(node, consts) {
   if (!node || !ts.isArrayLiteralExpression(node)) return undefined;
   const out = [];
   for (const el of node.elements) {
-    const v = stringLiteralValue(el);
-    // All-or-nothing: a partially resolved list (e.g. enum member
-    // references) is worse than none — it would validate real values as
-    // invalid choices.
+    const v = stringLiteralValue(el) ?? enumMemberString(el, consts);
+    // All-or-nothing: a partially resolved list (e.g. an enum member whose
+    // enum isn't in `consts`) is worse than none — it would validate real
+    // values as invalid choices.
     if (v === undefined) return undefined;
     out.push(v);
   }
   return out;
+}
+
+// `Enum.Member` where `Enum` is a const object of string literals in
+// `consts`, e.g. `NeonAuthOauthProviderId.Google` from utils/api_enums.ts.
+function enumMemberString(node, consts) {
+  const e = unwrapExpression(node);
+  if (!consts || !e || !ts.isPropertyAccessExpression(e) || !ts.isIdentifier(e.expression)) {
+    return undefined;
+  }
+  const container = unwrapExpression(consts.get(e.expression.text));
+  if (!container || !ts.isObjectLiteralExpression(container)) return undefined;
+  const prop = getProp(container, e.name.text);
+  return prop && ts.isPropertyAssignment(prop) ? stringLiteralValue(prop.initializer) : undefined;
 }
 
 // Grab the property named `name` from an ObjectLiteralExpression.
@@ -106,9 +119,10 @@ function unwrapExpression(node) {
 // Builds a map of module-level `const name = { ... }` object literals
 // (so spreads like `.options({ ...settingsFlags })` resolve),
 // `const name = [ ... ]` string arrays (so `${REGIONS.join(', ')}`
-// interpolations resolve), and string/number literals (so a describe or
+// interpolations resolve), string/number literals (so a describe or
 // default held in a const, like docs.ts's `SEARCH_DESCRIBE` and
-// `default: DEFAULT_LIMIT`, resolves).
+// `default: DEFAULT_LIMIT`, resolves), and template literals (so a
+// describe can interpolate one, like neon_auth.ts's `OWN_CREDENTIALS_NOTE`).
 function collectModuleConsts(sf) {
   const consts = new Map();
   sf.forEachChild((node) => {
@@ -121,6 +135,7 @@ function collectModuleConsts(sf) {
         (ts.isObjectLiteralExpression(init) ||
           ts.isArrayLiteralExpression(init) ||
           ts.isNumericLiteral(init) ||
+          ts.isTemplateExpression(init) ||
           stringLiteralValue(init) !== undefined)
       ) {
         consts.set(decl.name.text, init);
@@ -210,6 +225,8 @@ function resolveStringValue(expr, consts) {
     if (bound !== undefined) return bound;
     // Number consts interpolated into a describe: `(1-${MAX_LIMIT})`.
     if (node && ts.isNumericLiteral(node)) return node.text;
+    // A template-literal const interpolated into a describe.
+    if (node && ts.isTemplateExpression(node)) return resolveStringValue(node, consts);
   }
   if (ts.isPropertyAccessExpression(e) && ts.isIdentifier(e.name)) {
     const target = resolveSpecObject(e.expression, consts);
@@ -238,7 +255,7 @@ function resolveStringValue(expr, consts) {
     consts &&
     consts.has(e.expression.expression.text)
   ) {
-    const arr = arrayLiteralStrings(consts.get(e.expression.expression.text));
+    const arr = arrayLiteralStrings(consts.get(e.expression.expression.text), consts);
     const sep = e.arguments.length ? stringLiteralValue(e.arguments[0]) : ',';
     if (arr && sep !== undefined) return arr.join(sep);
     return undefined;
@@ -377,9 +394,9 @@ function parseOptionSpec(expr, consts) {
   const choicesProp = getProp(obj, 'choices');
   if (choicesProp) {
     const init = unwrapExpression(choicesProp.initializer);
-    let arr = arrayLiteralStrings(init);
+    let arr = arrayLiteralStrings(init, consts);
     if (!arr && init && ts.isIdentifier(init) && consts && consts.has(init.text)) {
-      arr = arrayLiteralStrings(consts.get(init.text));
+      arr = arrayLiteralStrings(consts.get(init.text), consts);
     }
     if (arr) spec.choices = arr;
     // Object.values(Enum) — accept anything; we lose choice checking.
@@ -1014,6 +1031,14 @@ function buildSchema({ src } = {}) {
   if (fs.existsSync(parametersGen)) {
     for (const [k, v] of collectModuleConsts(readSource(parametersGen))) {
       externalConsts.set(k, v);
+    }
+  }
+  // utils/api_enums.ts holds the const-object enums (NeonAuthOauthProviderId)
+  // that command files build choice arrays from.
+  const apiEnums = path.join(src, 'src', 'utils', 'api_enums.ts');
+  if (fs.existsSync(apiEnums)) {
+    for (const [k, v] of collectModuleConsts(readSource(apiEnums))) {
+      if (!externalConsts.has(k)) externalConsts.set(k, v);
     }
   }
   // Pool exported consts across command files so cross-file imports
