@@ -8,7 +8,7 @@ If the app already runs Better Auth, keep that server, its clients, users, and s
 
 ## New self-managed server
 
-Host it on the existing app (Vercel route handlers, or similar) when that host already serves `/api/auth`. Use a Neon Function when the auth server should sit next to Postgres, or when the Function itself must be an OAuth authorization server (MCP). Function hosting follows the `neon-functions` skill (region, claim, `neon.ts`, `neon deploy --env <file>`).
+Host it on the existing app (Vercel route handlers, or similar) when that host already serves `/api/auth`. Use a Neon Function when the auth server should sit next to Postgres, for example. Function hosting follows the `neon-functions` skill (region, claim, `neon.ts`, `neon deploy --env <file>`).
 
 Keep Lakebase Postgres as the auth database. Use `better-auth` and `better-auth/client`. Fetch upstream docs for the **installed** version:
 
@@ -18,7 +18,7 @@ Keep Lakebase Postgres as the auth database. Use `better-auth` and `better-auth/
 
 Do not pass `plugins` into `@neon/auth`. Replacing only the client package while Managed Auth is still the backend does not add plugins.
 
-MCP OAuth (Cursor, Claude, and similar clients self-authorizing) is `neon-functions` [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md). That can sit beside existing Clerk or Managed login. Do not migrate the whole app's identity unless that was the request.
+The OAuth provider and MCP OAuth (Cursor, Claude, and similar clients self-authorizing) are supported on Managed Auth: [oauth-server.md](oauth-server.md). They are not a reason to self-manage.
 
 Function JWT verification, CORS, and direct browser calls: `neon-functions` and https://neon.com/docs/compute/functions/authentication.md.
 

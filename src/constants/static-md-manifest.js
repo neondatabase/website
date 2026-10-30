@@ -8,6 +8,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-ai-gateway/SKILL.md',
   '/docs/ai/skills/neon-auth/SKILL.md',
   '/docs/ai/skills/neon-auth/references/managed-auth.md',
+  '/docs/ai/skills/neon-auth/references/oauth-server.md',
   '/docs/ai/skills/neon-auth/references/self-managed.md',
   '/docs/ai/skills/neon-functions/SKILL.md',
   '/docs/ai/skills/neon-functions/references/ai-sdk.md',
