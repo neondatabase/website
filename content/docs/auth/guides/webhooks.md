@@ -233,11 +233,11 @@ The `"sign-in"` link type is sent when a user signs in via the [Magic Link plugi
 
 These events fire only when a new user record is created in the database. They do not fire on subsequent sign-ins, including returning OAuth users.
 
-| Field           | Type   | Description                                           |
-| --------------- | ------ | ----------------------------------------------------- |
-| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
-| `ip_address`    | string | Requester's IP address                                |
-| `user_agent`    | string | Requester's user agent                                |
+| Field           | Type   | Description                                                                     |
+| --------------- | ------ | ------------------------------------------------------------------------------- |
+| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, `"vercel"`, `"microsoft"`, or `"apple"` |
+| `ip_address`    | string | Requester's IP address                                                          |
+| `user_agent`    | string | Requester's user agent                                                          |
 
 If sign-up metadata is present and passes validation, it is included as `event_data.signup_metadata`. To limit payload size and prevent oversized egress, Managed Better Auth only includes `signup_metadata` when it is a plain object, serializes to at most 10 KiB of UTF-8 JSON, and is nested no more than 5 levels deep. Oversized, too-deep, array, or primitive metadata is dropped from the webhook payload.
 

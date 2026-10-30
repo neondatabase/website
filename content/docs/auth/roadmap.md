@@ -51,7 +51,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/). Not
 | Plugin                                                                             | Status       |
 | ---------------------------------------------------------------------------------- | ------------ |
 | [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
-| Social OAuth (Google, GitHub, Vercel)                                              | ✅ Supported |
+| Social OAuth (Google, GitHub, Vercel, Microsoft, Apple)                            | ✅ Supported |
 | [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported |
 | [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported |
 | [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial   |
@@ -66,11 +66,11 @@ See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth config
 
 These capabilities are documented in Managed Better Auth guides but are not Better Auth plugins you enable through the SDK.
 
-| Capability                           | Status    | Documentation                                                                |
-| ------------------------------------ | --------- | ---------------------------------------------------------------------------- |
-| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains)             |
-| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                                       |
-| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api)             |
+| Capability                           | Status    | Documentation                                                             |
+| ------------------------------------ | --------- | ------------------------------------------------------------------------- |
+| Trusted domains (redirect allowlist) | Supported | [Configure trusted domains](/docs/auth/guides/configure-domains)          |
+| Webhooks (auth events)               | Supported | [Webhooks](/docs/auth/guides/webhooks)                                    |
+| Manage Auth via Neon API             | Supported | [Manage Auth in the Neon API](/docs/auth/guides/manage-auth-api)          |
 | Manage Auth via Neon MCP (AI editor) | Supported | [Set up with your AI editor](/docs/auth/about#set-up-with-your-ai-editor) |
 
 Branch-aware auth (separate auth state per Neon branch) is supported; see [Branching authentication](/docs/auth/branching-authentication) and [Authentication flow](/docs/auth/authentication-flow).
