@@ -33,7 +33,7 @@ npm install @neon/realtime @neon/realtime-drizzle
 Install the [Managed Better Auth](/docs/auth/overview) client for the frontend:
 
 ```bash filename="Terminal"
-npm install @neondatabase/auth
+npm install @neon/auth
 ```
 
 Add a `neon.ts` file that enables Managed Better Auth and [Realtime](../quickstart#enable-realtime) on your branch:
