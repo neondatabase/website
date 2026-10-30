@@ -63,9 +63,10 @@ function toCost(item, committedCost = {}) {
 }
 
 // models.dev terms: the lab made the model, the provider serves it. Databricks
-// serves every open-weight model on the gateway; any other model is labeled
-// with its lab.
-export const providerFor = ({ lab, openWeights }) => (openWeights ? 'databricks' : lab);
+// provides every model on the gateway except TypeSafe AI's own closed-weight Jev,
+// which TypeSafe AI hosts.
+export const providerFor = ({ lab, openWeights }) =>
+  lab === 'typesafe' && !openWeights ? 'typesafe' : 'databricks';
 
 export function toCatalogEntry(item, committedEntry = {}) {
   const entry = {
