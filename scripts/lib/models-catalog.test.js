@@ -520,6 +520,15 @@ describe('validateCatalog', () => {
       expect(validateCatalog(catalog({ a: decisionModel() }))).toEqual([]);
     });
 
+    it('accepts a context window without an output limit', () => {
+      expect(validateCatalog(catalog({ a: decisionModel({ limit: { context: 65536 } }) }))).toEqual(
+        []
+      );
+      expect(validateCatalog(catalog({ a: decisionModel({ limit: { context: 0 } }) }))).toEqual([
+        expect.stringContaining('a.limit.context must be a positive integer'),
+      ]);
+    });
+
     it('still rejects an empty cost block', () => {
       expect(validateCatalog(catalog({ a: decisionModel({ cost: {} }) }))).toEqual([
         expect.stringContaining('needs an input rate'),

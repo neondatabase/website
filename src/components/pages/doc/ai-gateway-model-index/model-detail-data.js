@@ -15,13 +15,14 @@ const getLabDescription = (row) =>
 
 // Embeddings has no inputs/context/output-cost to report — a fixed vector length replaces them,
 // and there is no completion to charge for.
-// A decision model reports the same minus `dimensions`: it has no vector length either.
+// A decision model has no vector length either, but it does have a context window.
 const getSections = (row) =>
   row.isDecision
     ? [
         { title: 'Model ID', id: 'model-id', value: row.id },
         { title: 'Lab', id: 'lab', value: getLabDescription(row) },
         { title: 'Provider', id: 'provider', value: row.providerName },
+        { title: 'Context', id: 'context', value: row.contextLabel },
         { title: 'Released', id: 'released', value: row.releaseLabel },
         { title: 'Input /M', id: 'input-m', value: row.costInputLabel },
       ]

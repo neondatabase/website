@@ -58,11 +58,12 @@ const formatContextWindow = (tokens) => {
   return `${Math.round(tokens / 1000)}K`;
 };
 
-// Price per million tokens: 0.4 -> "$0.40", 15 -> "$15", 0 -> "Free".
+// Price per million tokens: 0.4 -> "$0.40", 15 -> "$15", 0.042 -> "$0.042", 0 -> "Free".
 const formatPrice = (pricePerMillion) => {
   if (pricePerMillion === undefined || pricePerMillion === null) return '—';
   if (pricePerMillion === 0) return 'Free';
   const fixed = pricePerMillion.toFixed(2);
+  if (Number(fixed) !== pricePerMillion) return `$${pricePerMillion}`;
   const trimmed = fixed.endsWith('.00') ? fixed.slice(0, -3) : fixed;
   return `$${trimmed}`;
 };

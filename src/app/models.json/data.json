@@ -2358,6 +2358,9 @@
         "open_weights": true,
         "release_date": "2026-10-01",
         "last_updated": "2026-10-01",
+        "limit": {
+          "context": 131072
+        },
         "cost": {
           "input": 0.042
         }
@@ -2373,6 +2376,9 @@
         "open_weights": false,
         "release_date": "2026-10-15",
         "last_updated": "2026-10-15",
+        "limit": {
+          "context": 65536
+        },
         "cost": {
           "input": 0.042
         }

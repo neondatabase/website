@@ -94,8 +94,8 @@ const renderEmbeddingTableRows = (rows) =>
     .join('\n');
 
 const DECISION_TABLE_HEADER =
-  '| Model | Model ID | Lab | Provider | Released | Input /M | License |\n' +
-  '| --- | --- | --- | --- | --- | --- | --- |';
+  '| Model | Model ID | Lab | Provider | Context | Released | Input /M | License |\n' +
+  '| --- | --- | --- | --- | --- | --- | --- | --- |';
 
 const renderDecisionTableRows = (rows) =>
   rows
@@ -107,6 +107,7 @@ const renderDecisionTableRows = (rows) =>
         renderCodeCell(row.id),
         escapeTableCell(row.labName),
         escapeTableCell(row.providerName),
+        escapeTableCell(row.contextLabel),
         escapeTableCell(row.releaseLabel),
         escapeTableCell(row.costInputLabel),
         row.openWeights ? 'Open weights' : '—',

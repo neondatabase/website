@@ -100,6 +100,7 @@ export function toCatalogEntry(item, committedEntry = {}) {
       open_weights: f.open_weights,
       release_date: item.release_date,
       last_updated: lastUpdated,
+      ...(item.context_length && { limit: { context: item.context_length } }),
       cost: toCost(item, committedEntry.cost),
     };
   }
