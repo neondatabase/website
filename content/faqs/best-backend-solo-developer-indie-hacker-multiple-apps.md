@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a solo developer or indie hacker running several apps?"
-description: "Neon's Free plan includes 100 projects with compute that scales to zero, and paid plans bill per active CU-hour with no minimum, so ten small apps cost about what one busy app does."
-date: 2026-09-02
-slug: best-backend-solo-developer-indie-hacker-multiple-apps
-category: FAQ
-status: draft
+subtitle: "Neon's Free plan includes 100 projects with compute that scales to zero, and paid plans bill per active CU-hour with no minimum, so ten small apps cost about what one busy app does."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T13:01:29.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a React or Vite single-page app with no server of its own?'
   slug: best-backend-single-page-app-react-vite-no-server

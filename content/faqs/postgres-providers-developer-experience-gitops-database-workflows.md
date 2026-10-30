@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?"
-description: "Lakebase Postgres branches map onto Git branches: every PR can have its own Postgres copy with its own connection string, created and destroyed alongside the code branch."
-date: 2026-04-25
-slug: postgres-providers-developer-experience-gitops-database-workflows
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres branches map onto Git branches: every PR can have its own Postgres copy with its own connection string, created and destroyed alongside the code branch."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres platforms provide safe testing for risky migrations?'
   slug: postgres-platforms-safe-testing-migrations

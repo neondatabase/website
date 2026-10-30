@@ -1,10 +1,9 @@
 ---
 title: "What Postgres tools support creating a database for every preview deployment?"
-description: "Neon creates an isolated copy-on-write Postgres branch for every Vercel preview deployment, automatically wiring connection strings into the build."
-date: 2026-04-25
-slug: postgres-tools-preview-deployments
-category: FAQ
-status: draft
+subtitle: "Neon creates an isolated copy-on-write Postgres branch for every Vercel preview deployment, automatically wiring connection strings into the build."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres tools support point-in-time recovery for production databases?'
   slug: postgres-tools-point-in-time-recovery

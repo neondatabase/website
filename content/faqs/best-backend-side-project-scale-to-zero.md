@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a side project that should cost almost nothing when nobody is using it?"
-description: "Neon suspends compute after 5 minutes idle and resumes in milliseconds, so a side project pays for storage and a few active hours. The Free plan covers Postgres, Auth, and Functions with no credit card."
-date: 2026-09-02
-slug: best-backend-side-project-scale-to-zero
-category: FAQ
-status: draft
+subtitle: "Neon suspends compute after 5 minutes idle and resumes in milliseconds, so a side project pays for storage and a few active hours. The Free plan covers Postgres, Auth, and Functions with no credit card."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-13T07:55:04.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a real-time app with chat, presence, or live updates?'
   slug: best-backend-real-time-chat-presence-live-updates

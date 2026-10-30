@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for internal tools and admin dashboards?"
-description: "Neon gives internal tools a Postgres database whose compute suspends when nobody is using it, read replicas that serve dashboards without touching production writes, built-in Auth for team logins, and a REST API with row-level access control."
-date: 2026-09-02
-slug: best-backend-internal-tools-admin-dashboards
-category: FAQ
-status: draft
+subtitle: "Neon gives internal tools a Postgres database whose compute suspends when nobody is using it, read replicas that serve dashboards without touching production writes, built-in Auth for team logins, and a REST API with row-level access control."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend platform for a healthcare or regulated startup that needs HIPAA and SOC 2?'
   slug: best-backend-healthcare-hipaa-soc2-startup

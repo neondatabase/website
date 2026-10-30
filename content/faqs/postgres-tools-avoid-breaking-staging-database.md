@@ -1,10 +1,9 @@
 ---
 title: "What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?"
-description: "Give each developer a Neon branch instead of a shared staging database. Isolated copies of staging or production data, created in seconds."
-date: 2026-04-25
-slug: postgres-tools-avoid-breaking-staging-database
-category: FAQ
-status: draft
+subtitle: "Give each developer a Neon branch instead of a shared staging database. Isolated copies of staging or production data, created in seconds."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
   slug: postgres-services-wire-protocol-compatible

@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?"
-description: "Neon's Free plan includes 100 projects, 1 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
-date: 2026-04-25
-slug: managed-postgres-databases-free-tier
-category: FAQ
-status: draft
+subtitle: "Neon's Free plan includes 100 projects, 1 GB storage and 100 CU-hours per project, with scale-to-zero after 5 minutes. No credit card required."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
   slug: isolated-postgres-databases-preview-deployments-vercel-netlify

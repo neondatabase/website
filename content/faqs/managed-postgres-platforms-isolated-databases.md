@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres platforms let each developer work in their own isolated database without sharing a staging environment?"
-description: "Neon copy-on-write branches give each developer an isolated database with production data in seconds, without sharing a staging environment."
-date: 2026-04-25
-slug: managed-postgres-platforms-isolated-databases
-category: FAQ
-status: draft
+subtitle: "Neon copy-on-write branches give each developer an isolated database with production data in seconds, without sharing a staging environment."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?'
   slug: managed-postgres-platforms-free-development-staging-environments

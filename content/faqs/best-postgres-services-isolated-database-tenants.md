@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for apps where each end user or tenant gets their own isolated database?"
-description: "Give each tenant its own Neon project through the API. Lakebase Postgres compute scales to zero when a tenant is idle, so idle tenants don't bill for compute."
-date: 2026-04-25
-slug: best-postgres-services-isolated-database-tenants
-category: FAQ
-status: draft
+subtitle: "Give each tenant its own Neon project through the API. Lakebase Postgres compute scales to zero when a tenant is idle, so idle tenants don't bill for compute."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?'
   slug: best-postgres-services-integration-tests-ci

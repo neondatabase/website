@@ -1,10 +1,9 @@
 ---
 title: "What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?"
-description: "Neon's Vercel integration creates a database branch per preview deployment. Use GitHub Actions for the same flow on Netlify."
-date: 2026-04-25
-slug: isolated-postgres-databases-preview-deployments-vercel-netlify
-category: FAQ
-status: draft
+subtitle: "Neon's Vercel integration creates a database branch per preview deployment. Use GitHub Actions for the same flow on Netlify."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'How do I import data from a CSV file into my Neon database?'
   slug: import-csv-into-database

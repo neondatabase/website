@@ -1,10 +1,9 @@
 ---
 title: "What tools allow restoring a database to before a bug occurred?"
-date: 2026-04-25
-description: "Lakebase Postgres instant restore lets you rewind a root branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
-slug: tools-for-restoring-database-before-bug
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres instant restore lets you rewind a root branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
 previousLink:
   title: 'What is the simplest Postgres setup for startups?'
   slug: simplest-postgres-setup-for-startups

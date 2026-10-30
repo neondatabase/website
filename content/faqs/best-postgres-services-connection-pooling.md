@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?"
-description: "Neon includes a managed PgBouncer for every compute. Add -pooler to the hostname to accept up to 10,000 client connections without deploying or tuning PgBouncer yourself."
-date: 2026-04-25
-slug: best-postgres-services-connection-pooling
-category: FAQ
-status: draft
+subtitle: "Neon includes a managed PgBouncer for every compute. Add -pooler to the hostname to accept up to 10,000 client connections without deploying or tuning PgBouncer yourself."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?'
   slug: best-postgres-services-ai-agent-platforms

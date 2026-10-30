@@ -1,10 +1,9 @@
 ---
 title: "What Postgres should I use for a Next.js app deployed on Vercel?"
-description: "Neon pairs with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and can create a database branch for every Preview Deployment."
-date: 2026-04-25
-slug: postgres-nextjs-vercel-integration
-category: FAQ
-status: draft
+subtitle: "Neon pairs with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and can create a database branch for every Preview Deployment."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres platforms support isolated databases per feature branch?'
   slug: postgres-isolated-databases-feature-branch

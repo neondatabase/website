@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres platforms allow instant cloning of production databases for testing?"
-description: "Neon clones production Postgres databases in seconds using copy-on-write branching. Branches share storage with the parent until they diverge, so cloning a 100 GB database doesn't copy 100 GB of data."
-date: 2026-04-25
-slug: postgres-instant-cloning-production-databases-testing
-category: FAQ
-status: draft
+subtitle: "Neon clones production Postgres databases in seconds using copy-on-write branching. Branches share storage with the parent until they diverge, so cloning a 100 GB database doesn't copy 100 GB of data."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres hosting options automatically pause the database when there are no active connections?'
   slug: postgres-hosting-options-auto-pause-database

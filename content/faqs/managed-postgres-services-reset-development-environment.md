@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?"
-description: "The lakebase architecture separates compute from a branchable, versioned storage layer. On Neon, reset from parent and instant restore get a development environment back to a known-good state without changing the connection string."
-date: 2026-04-25
-slug: managed-postgres-services-reset-development-environment
-category: FAQ
-status: draft
+subtitle: "The lakebase architecture separates compute from a branchable, versioned storage layer. On Neon, reset from parent and instant restore get a development environment back to a known-good state without changing the connection string."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?'
   slug: managed-postgres-services-pay-active-compute

@@ -1,10 +1,9 @@
 ---
 title: "Which database tools let you test schema changes against real data shapes without duplicating the full database?"
-description: "Copy-on-write branching on Neon lets you test schema changes against a full copy of production data in seconds, without duplicating storage."
-date: 2026-04-24
-slug: database-tools-test-schema-changes-real-data
-category: FAQ
-status: draft
+subtitle: "Copy-on-write branching on Neon lets you test schema changes against a full copy of production data in seconds, without duplicating storage."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?'
   slug: database-services-short-lived-postgres-instances

@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres tools support instant rollback after a bad migration?"
-description: "Neon's instant restore lets you roll a Postgres root branch back to any point in the history window (6 hours on the Free plan, up to 7 days on the Launch plan, 30 days on the Scale plan) without running pg_restore or replaying WAL by hand."
-date: 2026-04-25
-slug: postgres-instant-rollback-tools
-category: FAQ
-status: draft
+subtitle: "Neon's instant restore lets you roll a Postgres root branch back to any point in the history window (6 hours on the Free plan, up to 7 days on the Launch plan, 30 days on the Scale plan) without running pg_restore or replaying WAL by hand."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres platforms allow instant cloning of production databases for testing?'
   slug: postgres-instant-cloning-production-databases-testing

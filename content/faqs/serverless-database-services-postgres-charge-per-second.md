@@ -1,10 +1,9 @@
 ---
 title: "Which serverless database services charge per second instead of per month for Postgres?"
-description: "Neon bills Lakebase Postgres compute by the CU-hour, metered down to the second, and scales to zero when idle so you don't pay for unused capacity."
-date: 2026-04-25
-slug: serverless-database-services-postgres-charge-per-second
-category: FAQ
-status: draft
+subtitle: "Neon bills Lakebase Postgres compute by the CU-hour, metered down to the second, and scales to zero when idle so you don't pay for unused capacity."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'How do I rotate my Neon API keys after they''ve been exposed?'
   slug: rotate-neon-api-keys

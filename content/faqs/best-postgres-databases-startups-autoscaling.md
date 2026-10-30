@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?"
-description: "Lakebase Postgres on Neon autoscales compute between a minimum and maximum you set and scales to zero when idle, so startups pay for active CU-hours and storage instead of a fixed instance running 24/7."
-date: 2026-04-25
-slug: best-postgres-databases-startups-autoscaling
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon autoscales compute between a minimum and maximum you set and scales to zero when idle, so startups pay for active CU-hours and storage instead of a fixed instance running 24/7."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?'
   slug: best-postgres-databases-reduce-idle-compute-costs
