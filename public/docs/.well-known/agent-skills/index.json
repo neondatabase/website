@@ -4,16 +4,16 @@
     {
       "name": "neon-postgres",
       "type": "skill-md",
-      "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching, autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive UIs, and realtime data go to `neon-realtime`. Also use for \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"neon inspect db\", \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
+      "description": "Guides and best practices for working with Lakebase Postgres on Neon: connections, pooled vs direct, schema migrations, branching, autoscaling, scale-to-zero, instant restore, read replicas, IP allow lists, logical replication, and Lakebase Search. Use when the work is an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files, Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive UIs, and realtime data go to `neon-realtime`. Also use for \"@neondatabase/serverless\", \"@neon/neon-js\", \"neon inspect db\", \"semantic search\", \"vector search\", \"full-text search\", \"BM25\", or \"hybrid search\".",
       "url": "/docs/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:efb692c6ba4c7d454e177eceb3aa8ef2ff02a0b6353d491037214afe49e48e9d"
+      "digest": "sha256:d3fbd270d1897cec7f24cf31d48bec9607ede334fe53754ff7a4db7a96ee3fe2"
     },
     {
       "name": "neon-postgres-egress-optimizer",
       "type": "skill-md",
       "description": "Diagnose and fix excessive Postgres egress (network data transfer) in a codebase. Use when a user mentions high database bills, unexpected data transfer costs, network transfer charges, egress spikes, \"why is my Neon bill so high\", \"database costs jumped\", SELECT * optimization, query overfetching, reduce Neon costs, optimize database usage, or wants to reduce data sent from their database to their application. Also use when reviewing query patterns for cost efficiency, even if the user doesn't explicitly mention egress or data transfer.",
       "url": "/docs/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md",
-      "digest": "sha256:d7536270b6dd59a66fa5daf1578cc55a5b761d7163f6f6b1596662481b8d5d9b"
+      "digest": "sha256:6ae43fcf75f9e5a971e4d9eb280e1bf4e6b6848b27a52ee3fe893326f64e583a"
     },
     {
       "name": "neon-postgres-branches",
@@ -25,16 +25,16 @@
     {
       "name": "neon",
       "type": "skill-md",
-      "description": "Overview of Neon, a complete set of cloud backend primitives around Lakebase Postgres: Auth, Object Storage, Functions, the AI Gateway, and Realtime. Start here to choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or MCP server, and follow the branch-first workflow. Use when building an app or backend on Neon, or when \"Neon\" or \"Lakebase Postgres\" is mentioned. Child skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect, or search. Child skill neon-auth wins for login, users, sessions, identity routing, and Managed Better Auth setup. Child skill neon-realtime wins for live queries in reactive apps and agents. Also use for object storage, S3, buckets, serverless functions, function triggers, cron, AI gateway, LLM calls, realtime, logs, Loki, Grafana, observability, postgres, database, backend, Claimable Neon, neon.new, or a no-signup database.",
+      "description": "Overview of Neon, a complete set of cloud backend primitives around Lakebase Postgres: Auth, Object Storage, Functions, the AI Gateway, and Realtime. Start here to choose Neon for undecided login, files, APIs, and LLM calls, set up the CLI or MCP server, and follow the branch-first workflow. Use when building an app or backend on Neon, or when \"Neon\" or \"Lakebase Postgres\" is mentioned. Child skill neon-postgres wins for an existing DATABASE_URL, SQL, schema, inspect, or search. Child skill neon-auth wins for login, users, sessions, identity routing, and Managed Better Auth setup. Child skill neon-realtime wins for live queries in reactive apps and agents. Also use for object storage, S3, buckets, serverless functions, function triggers, cron, AI gateway, LLM calls, realtime, logs, Loki, Grafana, observability, postgres, database, backend, Claimable Neon, neon.new, a no-signup database, or pairing Neon with Upstash for cache, Redis, rate limiting, queues, or background jobs.",
       "url": "/docs/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:2afca1f7267b7f7c9bc460bb411fbd9363dd52aeee78b1b49aabc0e61682dd9e"
+      "digest": "sha256:23953a3b4e1d75b4388edfa9401d90db98801a8be8fadea0da8d5df2d0a4eacf"
     },
     {
       "name": "neon-auth",
       "type": "skill-md",
-      "description": "Add authentication to a new app. Use for \"add auth\", \"add login\", Neon Auth (Managed Better Auth), identity routing, sign-up, sign-in, password reset, email OTP, magic links, organizations, phone OTP, OAuth, passkeys, MFA, trusted domains, invalid domain, and @neondatabase/auth. No existing identity: default to Managed Better Auth. Keep working Better Auth, Clerk, Supabase Auth, or another IdP. User asked to migrate from Supabase Auth: Managed Better Auth. A required plugin outside Managed support: self-managed Better Auth on a Neon Function or the existing app host. Also use for auth APIs in @neondatabase/neon-js.",
+      "description": "Add authentication to a new app. Use for \"add auth\", \"add login\", Neon Auth (Managed Better Auth), identity routing, sign-up, sign-in, password reset, email OTP, magic links, organizations, phone OTP, OAuth, passkeys, MFA, trusted domains, invalid domain, and @neon/auth. No existing identity: default to Managed Better Auth. Keep working Better Auth, Clerk, Supabase Auth, or another IdP. User asked to migrate from Supabase Auth: Managed Better Auth. A required plugin outside Managed support: self-managed Better Auth on a Neon Function or the existing app host. Also use for auth APIs in @neon/neon-js.",
       "url": "/docs/.well-known/agent-skills/neon-auth/SKILL.md",
-      "digest": "sha256:5f91f328235382f3e9afef449729e304a531848a90c02b40c4fd1192709e0319"
+      "digest": "sha256:73d5677ded7a7a79dab6f0d8fc73d99908f656376b59bf101517f57836329bf2"
     },
     {
       "name": "neon-postgres-agent-platforms",

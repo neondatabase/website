@@ -74,6 +74,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/jev-content-moderation-prompt.md',
   '/prompts/kotlin-prompt.md',
   '/prompts/kysely-prompt.md',
+  '/prompts/lakebase-search-landing.md',
   '/prompts/laravel-prompt.md',
   '/prompts/llm-proxy-neon-functions-prompt.md',
   '/prompts/mastra-upstash-box-neon-prompt.md',
