@@ -128,7 +128,7 @@ Create an API route handler that proxies auth requests. All Managed Better Auth 
 ```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>

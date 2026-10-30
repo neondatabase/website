@@ -160,7 +160,7 @@ Create a catch-all route at `app/api/auth/[...path]/route.ts`. This handles all 
 
 ### Returns
 
-Object with `GET` and `POST` Next.js route handlers.
+Object with `GET`, `POST`, `PUT`, `PATCH`, and `DELETE` Next.js route handlers.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -169,7 +169,7 @@ Object with `GET` and `POST` Next.js route handlers.
 // app/api/auth/[...path]/route.ts
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
@@ -192,9 +192,12 @@ The middleware automatically:
 <details>
 <summary>View parameters</summary>
 
-| Parameter         | Type   | Required | Default         |
-| ----------------- | ------ | -------- | --------------- |
-| <tt>loginUrl</tt> | string |          | `/auth/sign-in` |
+| Parameter             | Type     | Required | Default                                             |
+| --------------------- | -------- | -------- | --------------------------------------------------- |
+| <tt>loginUrl</tt>     | string   |          | `/auth/sign-in`                                     |
+| <tt>publicRoutes</tt> | string[] |          | `/api/auth` and the Better Auth UI signed-out views |
+
+`publicRoutes` adds routes that don't require a session, on top of the defaults. An entry matches the exact path and its subpaths, so `/pricing` also matches `/pricing/enterprise`. `"/"` matches only `/`. An invalid entry throws. `/auth` itself and `/settings/*` stay protected.
 
 </details>
 
@@ -207,7 +210,8 @@ The middleware automatically:
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
-  loginUrl: '/auth/sign-in'
+  loginUrl: '/auth/sign-in',
+  publicRoutes: ['/']
 });
 
 export const config = {

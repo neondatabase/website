@@ -31,7 +31,7 @@ Managed Better Auth is the managed authentication service in the Neon backend fo
 
 Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed Better Auth runs Better Auth version **1.7.6**. `@neon/auth` 0.8.0 uses a Better Auth 1.7 client. Apps on older `@neondatabase/auth` versions keep working, so you don't need to upgrade. If you use your own Better Auth client, use Better Auth 1.7 or later.
+Managed Better Auth runs Better Auth version **1.7.12**. Use `@neon/auth` **0.8.1 or later**, which uses a Better Auth 1.7.12 client. Apps on older `@neondatabase/auth` versions keep working, so you don't need to upgrade. If you use your own Better Auth client, use Better Auth 1.7 or later.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
@@ -71,7 +71,7 @@ export const auth = createNeonAuth({
 ```typescript filename="app/api/auth/[...path]/route.ts"
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 **For React/Vite (client-side):**

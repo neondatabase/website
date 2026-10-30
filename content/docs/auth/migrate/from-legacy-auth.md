@@ -73,15 +73,17 @@ You replace multiple Stack Auth-specific keys with a single Better Auth URL that
 
 ### Install packages (#nextjs-install-packages)
 
-Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI. Add the [npm overrides](/docs/auth/reference/ui-components#npm-overrides) to `package.json` before the shadcn commands.
+Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI.
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
 npm install @neon/auth@latest
-npm install --save-exact better-auth@1.7.12
 npx shadcn@latest init
 npx shadcn@latest add @better-auth-ui/auth @better-auth-ui/user-button
+npm i better-auth@~1.7.12
 ```
+
+The last command realigns `better-auth` with the version `@neon/auth` uses, because `shadcn add` installs the npm `latest` tag.
 
 **What changed**  
 Your app now depends on Managed Better Auth's Next.js SDK instead of the Stack Auth SDK, and the auth UI components are copied into `components/auth/`.
@@ -314,7 +316,7 @@ export default function Handler(props: any) {
 // app/api/auth/[...path]/route.ts
 import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = auth.handler();
+export const { GET, POST, PUT, PATCH, DELETE } = auth.handler();
 ```
 
 </CodeTabs>
@@ -374,22 +376,18 @@ import { auth } from '@/lib/auth/server';
 export default auth.middleware({
   // Redirects unauthenticated users to sign-in page
   loginUrl: '/auth/sign-in',
+  // Pages that don't require a session
+  publicRoutes: ['/'],
 });
 
 export const config = {
-  matcher: [
-    // Protected routes requiring authentication
-    '/dashboard/:path*',
-    '/settings/:path*',
-
-    // Do not run the middleware for the static resources
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+  // Run on all paths except static files
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
 ```
 
 **What changed**  
-You can optionally add middleware to enforce auth at the edge for specific paths.
+You can optionally add middleware to enforce auth at the edge. It protects every matched route except `/api/auth`, Better Auth UI's signed-out views, and the `publicRoutes` you list.
 
 ### Server-side user access
 
@@ -425,15 +423,17 @@ Server components now call `auth.getSession()` and read the user from the return
 
 ### Install packages (#react-install-packages)
 
-Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI. Add the [npm overrides](/docs/auth/reference/ui-components#npm-overrides) to `package.json` before the shadcn commands.
+Uninstall Stack Auth packages, install `@neon/auth`, and add [Better Auth UI](/docs/auth/reference/ui-components)'s components with the shadcn CLI.
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
 npm install @neon/auth@latest
-npm install --save-exact better-auth@1.7.12
 npx shadcn@latest init
 npx shadcn@latest add @better-auth-ui/auth @better-auth-ui/user-button
+npm i better-auth@~1.7.12
 ```
+
+The last command realigns `better-auth` with the version `@neon/auth` uses, because `shadcn add` installs the npm `latest` tag.
 
 **What changed**  
 You use the Managed Better Auth SDK and Better Auth UI's components instead of the Stack Auth client SDK.

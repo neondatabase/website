@@ -53,7 +53,7 @@ npx create-tsrouter-app@latest my-app --template file-router --tailwind
 
 Install the Managed Better Auth SDK, initialize [shadcn/ui](https://ui.shadcn.com), and add [Better Auth UI](https://better-auth-ui.com)'s auth views, user menu, and settings pages. The shadcn CLI copies the components into `src/components/`.
 
-Add the `overrides` block from [npm overrides](/docs/auth/reference/ui-components#npm-overrides) to `package.json` before you run the shadcn commands. It keeps one version of the Better Auth packages. Install `better-auth` with the same exact version first, because npm rejects an override that differs from a direct dependency's version.
+The shadcn CLI installs the npm `latest` tag of `better-auth`, so run `npm i better-auth@~1.7.12` after the last `shadcn add` to match the version `@neon/auth` uses and keep one copy.
 
 To use the examples below, choose TypeScript, `src/styles.css` as the global CSS file, `@/components` as the component alias, and no React Server Components. You can use the defaults for the other prompts.
 
@@ -63,10 +63,9 @@ To use the examples below, choose TypeScript, `src/styles.css` as the global CSS
 ```bash filename="Terminal"
 cd my-app
 npm install @neon/auth@latest
-npm install --save-exact better-auth@1.7.12
-# add the overrides block to package.json
 npx shadcn@latest init
 npx shadcn@latest add @better-auth-ui/auth @better-auth-ui/user-button @better-auth-ui/settings
+npm i better-auth@~1.7.12
 ```
 
 </TwoColumnLayout.Block>
@@ -86,6 +85,22 @@ Replace the URL with your actual Auth URL from the Neon Console.
 
 ```bash filename=".env"
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Add trusted origins">
+<TwoColumnLayout.Block>
+
+Managed Better Auth only redirects to [trusted domains](/docs/auth/guides/configure-domains). Add the origin your app runs on, `http://localhost:3000` for local development, and your production origin when you deploy. Otherwise sign-in redirects and email verification links fail.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+neon neon-auth domain add http://localhost:3000
+neon neon-auth domain add https://myapp.com
 ```
 
 </TwoColumnLayout.Block>

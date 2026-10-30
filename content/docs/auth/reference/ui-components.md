@@ -5,8 +5,8 @@ summary: >-
   How to add Better Auth UI's shadcn/ui components to an app on Managed Better
   Auth: install them with the shadcn CLI, wrap the app in `AuthProvider` with
   the `@neon/auth` client, and render `<Auth>` on `/auth/[path]` and
-  `<UserButton>` in the header. Use this page for the provider props, the npm
-  `overrides` block, redirect validation, and route protection.
+  `<UserButton>` in the header. Use this page for the provider props, redirect
+  validation, and route protection.
 enableTableOfContents: true
 updatedOn: '2026-09-16T15:38:57.808Z'
 ---
@@ -25,28 +25,6 @@ Better Auth UI needs React 19.2.6 or later and Tailwind CSS 4.3.2 or later. If t
 npx shadcn@latest init
 ```
 
-### npm overrides
-
-`@neon/auth` pins Better Auth to an exact version. `@better-auth-ui/react` requires `@better-auth/api-key` and `@better-auth/passkey` as peers, and npm installs them at their latest version, so `npm install` fails with `ERESOLVE`. Before you add the components, install `better-auth` at an exact version and add `overrides` to `package.json` that hold every Better Auth package at that version. npm rejects an override that differs from a direct dependency's version, so the two must match.
-
-```bash
-npm install --save-exact better-auth@1.7.12
-```
-
-```json
-{
-  "overrides": {
-    "better-auth": "1.7.12",
-    "@better-auth/core": "1.7.12",
-    "@better-auth/oauth-provider": "1.7.12",
-    "better-call": "1.4.4",
-    "@better-auth/utils": "0.5.0",
-    "@better-auth/api-key": "1.7.12",
-    "@better-auth/passkey": "1.7.12"
-  }
-}
-```
-
 ### Add the components
 
 Add the auth views, and the user menu if you want one:
@@ -57,6 +35,12 @@ npx shadcn@latest add @better-auth-ui/user-button
 ```
 
 The CLI writes the components to `components/auth/` and their shadcn/ui primitives to `components/ui/`, and installs `@better-auth-ui/react`, `@better-auth-ui/core`, and TanStack Query.
+
+The components list `better-auth` without a version, so the CLI installs the npm `latest` tag, which can be a newer pre-release than the version `@neon/auth` uses. After your last `shadcn add`, align it with `@neon/auth` so the app has one copy of Better Auth:
+
+```bash
+npm i better-auth@~1.7.12
+```
 
 ## Provider setup
 
@@ -179,7 +163,17 @@ export function Header() {
 
 ## Protected routes
 
-Redirect signed-out requests on the server, with `auth.middleware()` in `proxy.ts` (see the [Next.js server reference](/docs/auth/reference/nextjs-server)) or your router's guard. On the page, read the session with `useSession()` and wait for it to load.
+Redirect signed-out requests on the server, with `auth.middleware()` in `proxy.ts` (see the [Next.js server reference](/docs/auth/reference/nextjs-server)) or your router's guard.
+
+```typescript filename="proxy.ts"
+import { auth } from '@/lib/auth/server';
+
+export default auth.middleware({ loginUrl: '/auth/sign-in', publicRoutes: ['/'] });
+```
+
+Better Auth UI's signed-out views, such as reset password, verify email, and magic link, and `/api/auth` are public by default, so you don't need a custom `proxy.ts` for them. `/auth` itself and `/settings/*` stay protected. Use `publicRoutes` for your own public pages, such as a landing page.
+
+On the page, read the session with `useSession()` and wait for it to load.
 
 `useAuthenticate()` redirects whenever it has no session and the query isn't pending, including while a stale signed-out result refetches. Right after sign-up, that sends the new user back to sign-in. If you redirect on the client, wait until `isFetching` is `false`:
 
@@ -199,11 +193,6 @@ The copied components use your app's Tailwind build and shadcn/ui theme variable
 ```
 
 To change colors, radius, or dark mode, edit the theme variables in that file or the component files in `components/auth/`.
-
-## Known limitations
-
-- `@neon/auth` returns Supabase-style error codes, such as `invalid_credentials`, and Better Auth UI looks up messages by Better Auth's codes, such as `INVALID_EMAIL_OR_PASSWORD`. A wrong password shows "Please sign in again to continue." instead of an invalid-credentials message.
-- For the same reason, signing in with an email that isn't verified yet doesn't redirect to the verify-email view. Sign-up does show it when `requireEmailVerification` is `true`.
 
 ## Next steps
 
