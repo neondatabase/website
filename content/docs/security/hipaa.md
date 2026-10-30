@@ -18,7 +18,14 @@ HIPAA support is currently available at no additional cost. When we begin chargi
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are available to customers who have accepted our Business Associate Agreement (BAA) through the self-serve enablement process. The BAA is an agreement between you and Databricks, Neon's parent company. It sets out each party's responsibilities for protecting Protected Health Information (PHI).
 
-Read the [Business Associate Agreement (BAA)](https://www.databricks.com/sites/default/files/legal/neon-business-associate-agreement.pdf). If anything on this page differs from the BAA, the BAA applies.
+If anything on this page differs from the BAA, the BAA applies.
+
+## Business Associate Agreement (BAA)
+
+The BAA sets out each party's responsibilities for protecting PHI. Accepting it is part of the self-serve HIPAA enablement process: you review and accept the BAA when you enable HIPAA for your organization. If you need a counter-signed (executed) copy of the BAA for your records, you can request one.
+
+- [Read the BAA](/baa)
+- [Request a counter-signed copy of the BAA](/baa/signed)
 
 ## What is HIPAA?
 
@@ -351,6 +358,7 @@ The following features are not currently HIPAA-compliant and should not be used 
 - [Neon Functions](/docs/compute/functions/overview) – Not covered under Neon’s HIPAA compliance.
 - [Neon Object Storage](/docs/storage/overview) – Not covered under Neon’s HIPAA compliance.
 - [Neon AI Gateway](/docs/ai-gateway/overview) – Not covered under Neon’s HIPAA compliance.
+- [Neon Realtime](/docs/realtime/overview) – Not covered under Neon’s HIPAA compliance.
 
 ## Security incidents
 

@@ -19,6 +19,7 @@ const PROVIDER_ORDER = [
   'thinkingmachines',
   'moonshotai',
   'xai',
+  'typesafe',
 ];
 
 const PROVIDER_LABELS = {
@@ -31,7 +32,7 @@ const PROVIDER_LABELS = {
   thinkingmachines: 'Thinking Machines',
   moonshotai: 'Moonshot AI',
   xai: 'xAI',
-  typesafe: 'TypeSafe',
+  typesafe: 'TypeSafe AI',
 };
 
 const MODEL_CATALOG_NOTE =

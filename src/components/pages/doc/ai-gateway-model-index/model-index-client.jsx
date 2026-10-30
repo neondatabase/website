@@ -2,6 +2,14 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import {
+  createParser,
+  parseAsArrayOf,
+  parseAsBoolean,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryStates,
+} from 'nuqs';
 import PropTypes from 'prop-types';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { SiMeta } from 'react-icons/si';
@@ -40,6 +48,45 @@ const COLUMNS = [
   { key: 'costOutput', label: 'Output /M', sortable: true },
   { key: 'openWeights', label: 'License', sortable: true },
 ];
+
+const parseAsSortKey = parseAsStringLiteral(
+  COLUMNS.filter((column) => column.sortable).map((column) => column.key)
+);
+const parseAsSortDir = parseAsStringLiteral(['asc', 'desc']);
+
+// ?sort=costInput:asc <=> { key: 'costInput', dir: 'asc' }
+const parseAsSort = createParser({
+  parse(query) {
+    const [key = '', dir = ''] = query.split(':');
+    const sortKey = parseAsSortKey.parse(key);
+    if (sortKey === null) return null;
+    return { key: sortKey, dir: parseAsSortDir.parse(dir) ?? 'asc' };
+  },
+  serialize(value) {
+    return `${value.key}:${value.dir}`;
+  },
+  eq(a, b) {
+    return a.key === b.key && a.dir === b.dir;
+  },
+});
+
+const FILTER_PARSERS = {
+  search: parseAsString.withDefault(''),
+  mode: parseAsStringLiteral(MODEL_TYPES.map((type) => type.key)).withDefault('all'),
+  providers: parseAsArrayOf(parseAsString).withDefault([]),
+  openWeightsOnly: parseAsBoolean.withDefault(false),
+  sort: parseAsSort.withDefault({ key: 'releaseDate', dir: 'desc' }),
+};
+
+const FILTER_URL_KEYS = {
+  search: 'q',
+  mode: 'type',
+  openWeightsOnly: 'openWeights',
+};
+
+const DEFAULT_FILTERS = Object.fromEntries(
+  Object.entries(FILTER_PARSERS).map(([key, parser]) => [key, parser.defaultValue])
+);
 
 const VARIANT_STYLES = {
   docs: {
@@ -302,18 +349,16 @@ CopyableModelId.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-const ModelIndexClient = ({ rows, variant = 'docs' }) => {
+const ModelIndexView = ({ rows, variant = 'docs', filters, setFilters }) => {
   const router = useRouter();
   const rootRef = useRef(null);
   const filtersRef = useRef(null);
   const searchInputRef = useRef(null);
   const searchId = useId();
-  const [mode, setMode] = useState('all');
-  const [search, setSearch] = useState('');
-  const [providerFilter, setProviderFilter] = useState(() => new Set());
-  const [openWeightsOnly, setOpenWeightsOnly] = useState(false);
-  const [sort, setSort] = useState({ key: 'releaseDate', dir: 'desc' });
   const [filtersHeight, setFiltersHeight] = useState(0);
+  const { search, mode, openWeightsOnly, sort } = filters;
+  const setSearch = (value) => setFilters({ search: value });
+  const setOpenWeightsOnly = (value) => setFilters({ openWeightsOnly: value });
 
   const providers = useMemo(() => {
     const present = new Set(rows.map((row) => row.provider));
@@ -322,6 +367,11 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
       ...[...present].filter((p) => !PROVIDER_ORDER.includes(p)),
     ];
   }, [rows]);
+
+  const providerFilter = useMemo(
+    () => new Set(filters.providers.filter((providerId) => providers.includes(providerId))),
+    [filters.providers, providers]
+  );
 
   const visibleRows = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -348,22 +398,22 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
 
   const changeMode = (next) => {
     if (next === mode) return;
-    setMode(next);
+    setFilters({ mode: next });
   };
 
   const onSort = (key) => {
-    setSort((prev) =>
-      prev.key === key ? { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }
+    setFilters(
+      sort.key === key
+        ? { sort: { key, dir: sort.dir === 'asc' ? 'desc' : 'asc' } }
+        : { sort: { key, dir: 'asc' } }
     );
   };
 
   const toggleProvider = (providerId) => {
-    setProviderFilter((prev) => {
-      const next = new Set(prev);
-      if (next.has(providerId)) next.delete(providerId);
-      else next.add(providerId);
-      return next;
-    });
+    const next = new Set(providerFilter);
+    if (next.has(providerId)) next.delete(providerId);
+    else next.add(providerId);
+    setFilters({ providers: providers.filter((p) => next.has(p)) });
   };
 
   const getModelHref = (modelId) => {
@@ -516,7 +566,7 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
             providers={providers}
             selected={providerFilter}
             onToggle={toggleProvider}
-            onClear={() => setProviderFilter(new Set())}
+            onClear={() => setFilters({ providers: [] })}
           />
           <label
             className={cn(
@@ -687,9 +737,41 @@ const ModelIndexClient = ({ rows, variant = 'docs' }) => {
   );
 };
 
-ModelIndexClient.propTypes = {
+const viewPropTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
   variant: PropTypes.oneOf(['docs', 'landing']),
 };
+
+ModelIndexView.propTypes = {
+  ...viewPropTypes,
+  filters: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
+    providers: PropTypes.arrayOf(PropTypes.string).isRequired,
+    openWeightsOnly: PropTypes.bool.isRequired,
+    sort: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      dir: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    }).isRequired,
+  }).isRequired,
+  setFilters: PropTypes.func.isRequired,
+};
+
+const noop = () => {};
+
+// Static render with default filters, shown until the URL state is available
+// so the table stays in the prerendered HTML.
+export const ModelIndexFallback = (props) => (
+  <ModelIndexView {...props} filters={DEFAULT_FILTERS} setFilters={noop} />
+);
+
+ModelIndexFallback.propTypes = viewPropTypes;
+
+const ModelIndexClient = (props) => {
+  const [filters, setFilters] = useQueryStates(FILTER_PARSERS, { urlKeys: FILTER_URL_KEYS });
+  return <ModelIndexView {...props} filters={filters} setFilters={setFilters} />;
+};
+
+ModelIndexClient.propTypes = viewPropTypes;
 
 export default ModelIndexClient;

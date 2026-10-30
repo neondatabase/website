@@ -123,11 +123,7 @@ To maintain system integrity, expiration timestamps cannot be added to:
 - **Default branches** - Cannot expire default branches or set expiring branches as default
 - **Parent branches** - Cannot expire branches that have children or create children from expiring branches
 
-Branch expiration is not supported with these Neon features:
-
-- **Data API**
-
-Branch expiration is supported with [Managed Better Auth](/docs/auth/overview).
+Branch expiration is supported with the [Data API](/docs/data-api/get-started) and [Managed Better Auth](/docs/auth/overview). The Data API's configuration lives in the branch database, so it's removed when the branch expires.
 
 <Admonition type="note">
 When a branch expires and is deleted, all associated compute endpoints are also deleted. Ensure any critical workloads are migrated before expiration.

@@ -1,19 +1,20 @@
 ---
 title: Neon AI Gateway data retention
-subtitle: What Databricks and partner model providers retain when you use Neon AI Gateway
+subtitle: What Databricks and model providers retain when you use Neon AI Gateway
 summary: >-
-  Neon AI Gateway is powered by Databricks Model Serving. Databricks may
-  temporarily store inputs and outputs for up to 30 days to prevent, detect, and
-  mitigate abuse. Partner model providers OpenAI and Anthropic may retain data
-  for safety purposes for certain models.
+  Most Neon AI Gateway models run on Databricks Model Serving, where
+  Databricks may temporarily store inputs and outputs for up to 30 days to
+  prevent, detect, and mitigate abuse. OpenAI and Anthropic may retain data
+  for safety purposes for certain models. Jev is hosted by TypeSafe AI, and
+  TypeSafe AI's terms apply.
 enableTableOfContents: true
 ---
 
-Neon AI Gateway gives you one credential for many models, all served through [Databricks Model Serving](https://docs.databricks.com/aws/en/machine-learning/model-serving). Data retention for your requests follows Databricks' policy, which covers what Databricks retains and what partner model providers may retain.
+Neon AI Gateway gives you one credential for many models. Most models are served through [Databricks Model Serving](https://docs.databricks.com/aws/en/machine-learning/model-serving), and data retention for those requests follows Databricks' policy, which covers what Databricks retains and what partner model providers may retain.
 
-This page summarizes that policy. For the authoritative and latest terms, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving#data-retention).
+This page summarizes those policies. For the authoritative and latest terms, see [Databricks Model Serving data retention](https://docs.databricks.com/aws/en/machine-learning/model-serving#data-retention) and, for Jev, the TypeSafe AI [data processing addendum](https://typesafe.ai/legal/data-processing).
 
-## Data retention
+## Databricks data retention
 
 For all Model Serving workloads, Databricks retains container build logs for up to 30 days and metrics data for up to 14 days.
 
@@ -41,5 +42,15 @@ All other customers may be subject to additional retention upon advance notice.
 ### Anthropic
 
 For Anthropic's Fable 5 and future Mythos-class models, all customers are subject to data retention for safety purposes, as described in [Anthropic's data retention practices](https://support.claude.com/en/articles/15425996-data-retention-practices-for-mythos-class-models).
+
+## TypeSafe AI data retention
+
+Jev is hosted by TypeSafe AI, Inc. Its [data processing addendum](https://typesafe.ai/legal/data-processing) and [privacy policy](https://typesafe.ai/legal/privacy-policy) describe how TypeSafe AI handles your requests. The privacy policy states that TypeSafe AI:
+
+- Doesn't train or fine-tune AI or machine learning models on your prompts or other input
+- Retains personal data for as long as reasonably necessary to provide its services
+- Hosts its services in the United States
+
+Neither document gives a fixed retention period for inputs or outputs.
 
 <NeedHelp/>

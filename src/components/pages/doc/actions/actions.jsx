@@ -1,16 +1,12 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 
 import Link from 'components/shared/link';
 import ArrowBackToTopIcon from 'icons/arrow-back-to-top.inline.svg';
-import StarIcon from 'icons/docs/star.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
-
-import NeonInitModal from '../neon-init-modal';
 
 export const ActionItem = ({
   icon: Icon,
@@ -75,15 +71,6 @@ ActionItem.propTypes = {
   className: PropTypes.string,
 };
 
-const SetUpNeonButton = ({ onClick, tooltip }) => (
-  <ActionItem icon={StarIcon} text="Set up Neon with AI" tooltip={tooltip} onClick={onClick} />
-);
-
-SetUpNeonButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  tooltip: PropTypes.string,
-};
-
 /* Disabled for now - kept for possible future use
 const CopyMCPServerButton = () => {
   const [status, setStatus] = useState('default'); // 'default' | 'copied' | 'failed'
@@ -122,23 +109,22 @@ const CopyMCPServerButton = () => {
 */
 
 const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const githubBase = process.env.NEXT_PUBLIC_GITHUB_PATH;
 
   const gitHubLink = `${githubBase}${gitHubPath}`;
   const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-    sendGtagEvent('Action Clicked', { text: 'Set up Neon with your AI', tag_name: 'DocsSidebar' });
-  };
+  // The former docs "Set up Neon with AI" action (and its modal) is replaced by
+  // the title-row Agent setup button, so only template pages render actions now.
+  if (!isTemplate) return null;
 
-  const docsActions = (
-    <SetUpNeonButton tooltip="Copy neon init command" onClick={handleOpenModal} />
-  );
-
-  const templateActions = (
-    <>
+  return (
+    <div
+      className={cn(
+        'flex flex-col gap-3.5',
+        withBorder && 'mt-5 border-t border-gray-new-90 pt-5 dark:border-gray-new-20'
+      )}
+    >
       <ActionItem
         icon={GitHubIcon}
         text="Suggest edits"
@@ -154,21 +140,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         tooltip="Scroll to the top of the page"
         onClick={backToTop}
       />
-    </>
-  );
-
-  return (
-    <>
-      <div
-        className={cn(
-          'flex flex-col gap-3.5',
-          withBorder && 'mt-5 border-t border-gray-new-90 pt-5 dark:border-gray-new-20'
-        )}
-      >
-        {isTemplate ? templateActions : docsActions}
-      </div>
-      <NeonInitModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+    </div>
   );
 };
 

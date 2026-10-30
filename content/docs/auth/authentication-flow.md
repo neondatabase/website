@@ -140,7 +140,7 @@ By default, anyone can sign up for your application. To add an additional verifi
 
 ## OAuth flow
 
-OAuth authentication (Google, GitHub, Vercel, etc.):
+OAuth authentication (Google, GitHub, Vercel, Microsoft, Apple, etc.):
 
 ```typescript
 await client.auth.signIn.social({

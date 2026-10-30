@@ -7,18 +7,23 @@
 // AiGatewayModelIndex handler in src/scripts/process-md-for-llms.js), so the web
 // table and the agent-facing markdown can never disagree.
 import PropTypes from 'prop-types';
+import { Suspense } from 'react';
 
 import capabilities from '../../../../app/models/capabilities.json';
 import modelsData from '../../../../app/models.json/data.json';
 
-import ModelIndexClient from './model-index-client';
+import ModelIndexClient, { ModelIndexFallback } from './model-index-client';
 import * as modelRows from './model-rows';
 
 const AiGatewayModelIndex = ({ variant = 'docs' }) => {
   const provider = modelsData.neon;
   const rows = modelRows.buildRows(provider, capabilities);
 
-  return <ModelIndexClient rows={rows} variant={variant} />;
+  return (
+    <Suspense fallback={<ModelIndexFallback rows={rows} variant={variant} />}>
+      <ModelIndexClient rows={rows} variant={variant} />
+    </Suspense>
+  );
 };
 
 AiGatewayModelIndex.propTypes = {
