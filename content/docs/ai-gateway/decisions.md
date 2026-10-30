@@ -266,7 +266,7 @@ The answer has the same shape as for text. Image requests have a few rules:
 
 - Send PNG or JPEG files as plain base64 in `data_base64`, with no `data:` prefix, and set `format` to `png` or `jpeg`.
 - Jev 1.14 returns `400` for an image smaller than 280 × 280 pixels. OpenJev accepts smaller images.
-- Images count as input tokens, by resolution rather than file size. With a short question, a 448 × 448 image is about 800 tokens on Jev 1.14 and 250 on OpenJev; a 1024 × 1024 image is about 3,000 and 1,100.
+- Images count as input tokens, and the count depends on resolution, not file size. With a short question, a 448 × 448 image is about 800 tokens on Jev 1.14 and 250 on OpenJev; a 1024 × 1024 image is about 3,000 and 1,100.
 - Send images only in `assets`. An OpenAI-style `image_url` part in `state` returns `200`, but the model reads it as text and doesn't see the image.
 - When Jev 1.14 rejects an image request, the error is `400` with the message `ai gateway upstream model rejected the request as invalid` and no reason.
 
