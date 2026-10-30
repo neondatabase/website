@@ -460,7 +460,8 @@ module.exports = {
     faqs: {
       title: 'FAQs',
       url: 'https://neon.com/faqs',
-      description: 'Frequently asked questions about Neon',
+      description:
+        'Short answers about building on Neon: Postgres, Auth, Object Storage, Functions, AI Gateway, pricing, and comparisons',
     },
     'use-cases': null,
     programs: null,

@@ -56,8 +56,9 @@ export default {
     pathname: LINKS.guides,
   },
   faqs: {
-    title: 'FAQs — Neon',
-    description: 'Frequently asked questions about Neon.',
+    title: 'Neon FAQs: Postgres, Auth, Storage, Functions, and AI Gateway',
+    description:
+      'Answers to common questions about building on Neon: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and AI Gateway, plus pricing, plans, and how Neon compares.',
     pathname: LINKS.faqs,
   },
   caseStudies: {
