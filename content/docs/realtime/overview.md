@@ -17,11 +17,13 @@ Build apps and agents whose UIs update the moment your data changes. Realtime ma
 
 ## Get started
 
-[Get started](./quickstart) with Realtime and learn about [how it works](./how-it-works).
+Starting a new app? Scaffold one from the Realtime template:
 
 ```bash filename="Terminal"
 npx neon@latest bootstrap my-app --template realtime-react
 ```
+
+To add Realtime to an app by hand, follow the [Quickstart](./quickstart). To see how the pieces fit together, read [how it works](./how-it-works).
 
 <DetailIconCards cols={2} theme="green-flat">
 
