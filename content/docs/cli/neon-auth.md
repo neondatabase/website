@@ -5,7 +5,7 @@ summary: >-
   The Neon CLI `neon neon-auth` command manages Managed Better Auth on a database
   branch from the terminal. Use `enable`, `status`, and `disable` to provision,
   inspect, or remove Managed Better Auth, and the `oauth-provider` subcommands to add,
-  update, or delete Google, GitHub, and Vercel OAuth providers. The `domain`
+  update, or delete Google, GitHub, Vercel, Microsoft, and Apple OAuth providers. The `domain`
   subcommands manage trusted redirect domains, including `allow-localhost`
   settings for local development. The `config` subcommands cover email and
   password authentication, the email provider, the organization plugin,
@@ -69,7 +69,7 @@ neon neon-auth disable --delete-data
 
 ## OAuth providers (#oauth-provider)
 
-The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, and `vercel`) for the branch.
+The `oauth-provider` subcommands manage the OAuth providers (`google`, `github`, `vercel`, `microsoft`, and `apple`) for the branch.
 
 <CliSubcommands command="neon-auth oauth-provider" anchorParts="oauth-provider" />
 
@@ -98,6 +98,20 @@ Add the Google OAuth provider with your own credentials:
 ```bash shouldWrap
 neon neon-auth oauth-provider add --provider-id google --oauth-client-id <client-id> --oauth-client-secret <client-secret>
 ```
+
+Add Apple with the `.p8` key file, Team ID, and Key ID:
+
+```bash shouldWrap
+neon neon-auth oauth-provider add --provider-id apple --oauth-client-id <services-id> --oauth-client-secret-file AuthKey_XXXXXXXXXX.p8 --apple-team-id <team-id> --apple-key-id <key-id>
+```
+
+Add Microsoft, optionally restricted to a tenant:
+
+```bash shouldWrap
+neon neon-auth oauth-provider add --provider-id microsoft --oauth-client-id <client-id> --oauth-client-secret <client-secret> --microsoft-tenant-id <tenant>
+```
+
+See [Set up OAuth](/docs/auth/guides/setup-oauth) for the provider-side setup.
 
 ### neon neon-auth oauth-provider update (#oauth-provider-update)
 

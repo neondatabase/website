@@ -278,12 +278,12 @@ This client runs in the browser. Environment variable syntax depends on your fra
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
+Use [`@neon/postgrest-js`](https://www.npmjs.com/package/@neon/postgrest-js) with any authentication provider that issues JWTs, such as [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 
 ```bash
-npm install @neondatabase/postgrest-js
+npm install @neon/postgrest-js
 ```
 
 **2. Usage**
@@ -291,7 +291,7 @@ npm install @neondatabase/postgrest-js
 Provide a function that retrieves the JWT token from your authentication system. This token is included in each request to enforce RLS policies.
 
 ```typescript shouldWrap
-import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
+import { fetchWithToken, NeonPostgrestClient } from '@neon/postgrest-js';
 
 const getTokenFromAuthSystem = async (): Promise<string> => {
   // Retrieve the JWT token from your auth system (e.g., Auth0, Clerk, Firebase)

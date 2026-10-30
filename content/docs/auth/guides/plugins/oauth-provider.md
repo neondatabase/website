@@ -348,7 +348,7 @@ async function respond(accept: boolean) {
 Calls from your pages carry the user's session cookie, so make them with `credentials: 'include'` and add your pages' origins as [trusted domains](/docs/auth/guides/configure-domains). Navigate the browser to the returned `url`. Neither the sign-in nor the consent response is an HTTP redirect.
 
 <Admonition type="tip" title="Use the Neon Auth client">
-If your pages use [`@neondatabase/auth`](/docs/auth/overview) 0.7.0-beta or later (or `@neondatabase/neon-js` 0.9.0-beta or later), the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically. When your login page loads with a session, call `authClient.oauth2.continue({ selected: true })`. On your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above. The client navigates to the returned `url` itself, so don't navigate again.
+If your pages use [`@neon/auth`](/docs/auth/overview) 0.8.0 or later (or `@neondatabase/neon-js` 0.9.0-beta or later), the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically. When your login page loads with a session, call `authClient.oauth2.continue({ selected: true })`. On your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above. The client navigates to the returned `url` itself, so don't navigate again.
 </Admonition>
 
 ## Sign in users to your own apps and APIs
@@ -395,6 +395,8 @@ The `@neon/oauth` SDK (beta) implements this flow for you. `createOAuth()` from 
 ## Create and manage OAuth clients
 
 Managed clients are for resources that clients can't register for themselves. You can also link a managed client to your MCP server resource, which is how you onboard known clients when you turn off CIMD and DCR.
+
+If you work with an AI assistant, the [Neon MCP Server](/docs/ai/neon-mcp-server) can also manage the provider and its clients with the `*_auth_oauth_server` and `*_auth_oauth_client` tools.
 
 <Admonition type="warning" title="Keep the MCP server URL out of the resources list">
 For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and turn off `client_id_metadata_documents` and `dynamic_registration` so that only managed clients can connect. Don't list the MCP server URL under `resources` instead. The refresh-token reuse window (30 seconds) is configured only when `mcp.resource` is set. Without it, an MCP client that refreshes concurrently presents an already-rotated refresh token, and Managed Better Auth revokes that user's refresh tokens for the client.
