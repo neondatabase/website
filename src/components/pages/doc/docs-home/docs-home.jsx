@@ -56,7 +56,7 @@ const CAPABILITY_CARDS = [
   },
   {
     title: 'Add AI to your app',
-    line: 'Chat, agents, and embeddings for your users. Any model, one API key.',
+    line: 'Chat, agents, and embeddings. Any model, one key.',
     product: 'Neon AI Gateway',
     to: '/docs/ai-gateway/overview',
     icon: 'sparkle',
