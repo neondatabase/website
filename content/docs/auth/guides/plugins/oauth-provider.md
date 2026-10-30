@@ -34,7 +34,7 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 
 ## Enable the OAuth provider
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -51,6 +51,19 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 5. Click **Enable**.
 
 You need an MCP server URL or at least one protected resource to enable the provider.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon neon-auth config oauth-server`](/docs/cli/neon-auth#config-oauth-server). Add a protected resource, then enable the server with its login and consent pages, which must be on a [trusted domain](/docs/auth/guides/configure-domains):
+
+```bash shouldWrap
+neon neon-auth config oauth-server resource add https://api.example.com
+neon neon-auth config oauth-server update --enabled --login-page https://app.example.com/login --consent-page https://app.example.com/consent
+```
+
+To protect an MCP server, add `--mcp-resource https://mcp.example.com/mcp`. `neon neon-auth config oauth-server get` shows the current configuration.
 
 </TabItem>
 
@@ -394,7 +407,7 @@ For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and 
 
 The type can't be changed after creation. Redirect URIs must match exactly.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -404,6 +417,18 @@ Under the OAuth provider settings, use the **OAuth clients** list:
 - **Edit**: change the name, redirect URIs, resources, **Skip consent**, or **Disabled**. A disabled client can't obtain new tokens.
 - **Rotate secret**: generates a new secret for a confidential client. The previous secret stops working immediately.
 - **Delete**: removes the client.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon neon-auth oauth-client`](/docs/cli/neon-auth#oauth-client). Every resource you link must already be configured on the OAuth provider:
+
+```bash shouldWrap
+neon neon-auth oauth-client create --name "Reports" --type confidential --redirect-uris https://reports.example.com/callback --resources https://api.example.com/reports
+```
+
+For a confidential client, the command prints the client secret once, on the last line of its output. Store it before you continue. The `list`, `get`, `update`, `rotate-secret`, and `delete` subcommands manage existing clients.
 
 </TabItem>
 
