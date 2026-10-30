@@ -8,8 +8,9 @@ summary: >-
   update, or delete Google, GitHub, Vercel, Microsoft, and Apple OAuth providers. The `domain`
   subcommands manage trusted redirect domains, including `allow-localhost`
   settings for local development. The `config` subcommands cover email and
-  password authentication, the email provider, the organization plugin, and
-  webhooks, while `plugins` and `user` let you inspect plugin configurations
+  password authentication, the email provider, the organization plugin,
+  webhooks, and the OAuth server, and `oauth-client` manages that server's
+  clients, while `plugins` and `user` let you inspect plugin configurations
   and manage auth users.
 enableTableOfContents: true
 redirectFrom:
@@ -360,6 +361,162 @@ Updates the webhook configuration.
 
 ```bash shouldWrap
 neon neon-auth config webhook update --enabled --url https://example.com/webhooks/neon-auth --enabled-events user.created --timeout 5
+```
+
+### neon neon-auth config oauth-server (#config-oauth-server)
+
+Manages the [OAuth provider plugin](/docs/auth/guides/plugins/oauth-provider), which turns Managed Better Auth into an OAuth 2.1 authorization server for your MCP server, API, or other apps. These commands configure the server. To manage its clients, see [OAuth clients](#oauth-client). The `oauth-provider` commands are for social sign-in providers, not this server.
+
+<CliSubcommands command="neon-auth config oauth-server" anchorParts="config-oauth-server" />
+
+### neon neon-auth config oauth-server get (#config-oauth-server-get)
+
+Gets the current OAuth server configuration.
+
+<CliUsage command="neon-auth config oauth-server get" />
+
+<CliOptions command="neon-auth config oauth-server get" />
+
+```bash
+neon neon-auth config oauth-server get
+```
+
+### neon neon-auth config oauth-server update (#config-oauth-server-update)
+
+Updates the OAuth server configuration. To enable the server, it needs a login page, a consent page, and at least one protected resource or an MCP server URL. The login and consent pages must be on a [trusted domain](#domain).
+
+<CliUsage command="neon-auth config oauth-server update" />
+
+<CliOptions command="neon-auth config oauth-server update" />
+
+```bash shouldWrap
+neon neon-auth config oauth-server update --enabled --login-page https://app.example.com/sign-in --consent-page https://app.example.com/consent
+```
+
+Set the MCP server URL to protect an MCP server, or remove the MCP configuration with `--no-mcp`:
+
+```bash shouldWrap
+neon neon-auth config oauth-server update --mcp-resource https://mcp.example.com/mcp
+```
+
+### neon neon-auth config oauth-server resource (#config-oauth-server-resource)
+
+Manages the protected resources that OAuth clients can request tokens for. `add` and `remove` read the stored list and write back the full list, so a change someone else makes at the same time can be overwritten.
+
+<CliSubcommands command="neon-auth config oauth-server resource" anchorParts="config-oauth-server-resource" />
+
+### neon neon-auth config oauth-server resource list (#config-oauth-server-resource-list)
+
+Lists the protected resources.
+
+<CliUsage command="neon-auth config oauth-server resource list" />
+
+<CliOptions command="neon-auth config oauth-server resource list" />
+
+```bash
+neon neon-auth config oauth-server resource list
+```
+
+### neon neon-auth config oauth-server resource add (#config-oauth-server-resource-add)
+
+Adds one or more protected resources.
+
+<CliUsage command="neon-auth config oauth-server resource add" />
+
+<CliOptions command="neon-auth config oauth-server resource add" />
+
+```bash
+neon neon-auth config oauth-server resource add https://api.example.com
+```
+
+### neon neon-auth config oauth-server resource remove (#config-oauth-server-resource-remove)
+
+Removes one or more protected resources. Clients still linked to a removed resource can't get tokens for it, so the command warns you about them.
+
+<CliUsage command="neon-auth config oauth-server resource remove" />
+
+<CliOptions command="neon-auth config oauth-server resource remove" />
+
+```bash
+neon neon-auth config oauth-server resource remove https://api.example.com
+```
+
+## OAuth clients (#oauth-client)
+
+The `oauth-client` subcommands manage the clients registered with the branch's OAuth server. Enable and configure the server first with [`config oauth-server`](#config-oauth-server).
+
+<CliSubcommands command="neon-auth oauth-client" anchorParts="oauth-client" />
+
+### neon neon-auth oauth-client list (#oauth-client-list)
+
+Lists the OAuth clients.
+
+<CliUsage command="neon-auth oauth-client list" />
+
+<CliOptions command="neon-auth oauth-client list" />
+
+```bash
+neon neon-auth oauth-client list
+```
+
+### neon neon-auth oauth-client create (#oauth-client-create)
+
+Creates an OAuth client. Each resource you link must already be a [protected resource](#config-oauth-server-resource). A confidential client gets a client secret, which the command prints once on the last line of its output. Store it before you continue.
+
+<CliUsage command="neon-auth oauth-client create" />
+
+<CliOptions command="neon-auth oauth-client create" />
+
+```bash shouldWrap
+neon neon-auth oauth-client create --name "Example app" --type confidential --redirect-uris https://app.example.com/callback --resources https://api.example.com
+```
+
+### neon neon-auth oauth-client get (#oauth-client-get)
+
+Gets an OAuth client.
+
+<CliUsage command="neon-auth oauth-client get" />
+
+<CliOptions command="neon-auth oauth-client get" />
+
+```bash
+neon neon-auth oauth-client get <client-id>
+```
+
+### neon neon-auth oauth-client update (#oauth-client-update)
+
+Updates an OAuth client. `--redirect-uris` and `--resources` replace the stored lists. You can't change the client type.
+
+<CliUsage command="neon-auth oauth-client update" />
+
+<CliOptions command="neon-auth oauth-client update" />
+
+```bash
+neon neon-auth oauth-client update <client-id> --name "Example app (staging)"
+```
+
+### neon neon-auth oauth-client rotate-secret (#oauth-client-rotate-secret)
+
+Rotates the secret of a confidential client. The old secret stops working immediately.
+
+<CliUsage command="neon-auth oauth-client rotate-secret" />
+
+<CliOptions command="neon-auth oauth-client rotate-secret" />
+
+```bash
+neon neon-auth oauth-client rotate-secret <client-id>
+```
+
+### neon neon-auth oauth-client delete (#oauth-client-delete)
+
+Deletes an OAuth client. Tokens the client already received stay valid until they expire.
+
+<CliUsage command="neon-auth oauth-client delete" />
+
+<CliOptions command="neon-auth oauth-client delete" />
+
+```bash
+neon neon-auth oauth-client delete <client-id>
 ```
 
 ## Plugins (#plugins)
