@@ -3,7 +3,8 @@ name: neon-auth
 description: >-
   Add authentication to a new app. Use for "add auth", "add login", Neon Auth
   (Managed Better Auth), identity routing, sign-up, sign-in, password reset,
-  email OTP, magic links, organizations, phone OTP, OAuth, passkeys, MFA,
+  email OTP, magic links, organizations, phone OTP, OAuth, OAuth server for MCP
+  or third-party OAuth clients, passkeys, MFA,
   trusted domains, invalid domain, and @neon/auth. No existing identity:
   default to Managed Better Auth. Keep working Better Auth, Clerk, Supabase
   Auth, or another IdP. User asked to migrate from Supabase Auth: Managed
@@ -41,7 +42,7 @@ Inspect existing identity and the required login features before provisioning. A
 | User asked to migrate from Supabase Auth | Managed Better Auth. [Supabase Auth](#supabase-auth). Moving only Postgres or adding a Function keeps Supabase Auth. |
 | Clerk, Auth.js, Supabase Auth, or another working IdP | Keep it unless the user asks to migrate. |
 
-Google, GitHub, Microsoft, Vercel, and Apple social OAuth are offered on Managed Auth. They are not a reason to leave Managed Auth. Microsoft and Apple need your own credentials: [Apple and Microsoft OAuth](#apple-and-microsoft-oauth). Other OAuth providers, generic OAuth, MFA, passkeys, API keys, MCP OAuth, SSO, custom plugins, hooks, and custom JWT claims are the [plugin matrix](#plugin-support) check.
+Google, GitHub, Microsoft, Vercel, and Apple social OAuth are offered on Managed Auth. They are not a reason to leave Managed Auth. Microsoft and Apple need your own credentials: [Apple and Microsoft OAuth](#apple-and-microsoft-oauth). Making Neon Auth the OAuth server for your own MCP server or third-party OAuth clients is supported: [references/oauth-server.md](references/oauth-server.md). Other OAuth providers, generic OAuth, MFA, passkeys, API keys, SSO, custom plugins, hooks, and custom JWT claims are the [plugin matrix](#plugin-support) check.
 
 Before enabling Managed Auth, confirm the project is on AWS and does not use IP Allow or Private Networking. Leave those protections in place.
 
@@ -80,7 +81,7 @@ neon neon-auth status
 
 If Function env in that config reads `process.env`, use `neon deploy --env <file>` as the parent skill describes. The manual service command is `neon neon-auth enable`; do not run both enable and deploy as redundant required steps when `neon.ts` already declares `auth: true`.
 
-Then implement login: [references/managed-auth.md](references/managed-auth.md).
+Then implement login: [references/managed-auth.md](references/managed-auth.md). To make Neon Auth the OAuth server for an MCP server or OAuth clients, continue to [references/oauth-server.md](references/oauth-server.md).
 
 Claimable projects: follow the parent Claimable path, then `auth: true` and `neon deploy` when login is requested and no existing provider should be preserved.
 
@@ -106,7 +107,7 @@ A required plugin on the self-managed path is verified in that app's Better Auth
 
 ## Plugin support
 
-Checked 2026-09-17 against https://neon.com/docs/auth/guides/plugins.md, https://neon.com/docs/auth/roadmap.md, and the `@neon/auth` client plugin list. Re-fetch those pages if this skill may be stale. An unlisted upstream plugin needs a live check; do not treat absence from this table as a dated roadmap item.
+Checked 2026-10-30 against https://neon.com/docs/auth/guides/plugins.md, https://neon.com/docs/auth/guides/plugins/oauth-provider.md, https://neon.com/docs/auth/roadmap.md, and the `@neon/auth` client plugin list. Re-fetch those pages if this skill may be stale. An unlisted upstream plugin needs a live check; do not treat absence from this table as a dated roadmap item.
 
 "Not exposed" means the Managed SDK/UI contract. It is not a claim that every raw server request was tested.
 
@@ -123,7 +124,7 @@ Checked 2026-09-17 against https://neon.com/docs/auth/guides/plugins.md, https:/
 | Phone Number | Supported with constraints | Browser client: existing users link a number, then sign in; no phone-first signup; own SMS webhook; custom UI. Next.js `auth.handler()` forwards the catch-all path, including phone OTP. A missing `auth.phoneNumber` server method is a missing typed helper, not a proxy rejection. https://neon.com/docs/auth/guides/plugins/phone-number.md |
 | MFA / Two-Factor | Roadmap | Unavailable on Managed Auth. If required: [self-managed.md](references/self-managed.md), after confirming the installed Better Auth version. |
 | Passkey, API Key, Generic OAuth, One Tap, Multi Session | Not exposed by Managed SDK/UI | If required: [self-managed.md](references/self-managed.md). Generic OAuth is not Google/GitHub/Microsoft/Vercel/Apple social sign-in. |
-| MCP / OAuth Provider | Not Managed Auth | Third-party MCP clients self-authorizing against your server. Keep existing login. See `neon-functions` [references/mcp.md](https://neon.com/docs/ai/skills/neon-functions/references/mcp.md). |
+| OAuth Provider (OAuth server, MCP auth) | Supported (beta) | Neon Auth is the OAuth 2.1 / OIDC server for your MCP server or third-party OAuth clients. You host the login and consent pages; no client credentials grant. See [references/oauth-server.md](references/oauth-server.md). |
 | SSO / SAML | Not listed or exposed | If required: [self-managed.md](references/self-managed.md), after confirming the installed Better Auth version. |
 
 The default Managed client method is `getAnonymousToken()`. That JWT is a Neon anonymous Data API token. It is not Better Auth's Anonymous-account plugin (`signIn.anonymous`). `anonymousTokenClient()` is the SDK plugin factory, not a method on the public client. Do not call it, and do not call `getAnonymousToken()` on `SupabaseAuthAdapter()`.
