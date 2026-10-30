@@ -148,6 +148,8 @@ The branch you choose can't be a preview branch or have [branch expiration](/doc
 
 While the integration is connected, the production branch and its read-write compute can't be deleted. To delete that branch, choose a different production branch first.
 
+Vercel connects to your database as the `neondb_owner` role. Don't delete or rename it, or your Vercel deployments can no longer connect. On Vercel-managed projects created on or after October 21, 2026, Neon blocks deleting or renaming `neondb_owner`.
+
 ---
 
 ## Automatic branch cleanup
