@@ -5,5 +5,6 @@
     "node src/scripts/update-frontmatter.js",
     "prettier --write"
   ],
-  "content/changelog/**/*.{md,mdx}": "prettier --write"
+  "content/changelog/**/*.{md,mdx}": "prettier --write",
+  "public/pricing.md": "node src/scripts/update-pricing-date.js"
 }

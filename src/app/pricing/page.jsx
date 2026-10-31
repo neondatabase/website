@@ -5,9 +5,13 @@ import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
+import VERCEL_URL from 'constants/base';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getPricingUpdatedOn from 'utils/get-pricing-updated-on';
+
+const updatedOn = getPricingUpdatedOn();
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
@@ -31,18 +35,18 @@ const logos = [
 
 const faqItems = [
   {
-    question: 'Does Neon offer a backend now?',
+    question: 'What does Neon include besides Postgres?',
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Yes. Alongside Lakebase Postgres, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway. Together they form a full backend suite that runs alongside your database and branches with it.</p>
+      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
     `,
   },
   {
     question: 'What is a Neon project?',
     id: 'what-is-a-project',
     answer: `
-      <p>A project in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
+      <p>A <a href="${LINKS.docs}/manage/projects">project</a> in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
     `,
   },
   {
@@ -91,11 +95,38 @@ const faqItems = [
     `,
   },
   {
-    question:
-      'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
+    question: 'What happens when I hit Free plan limits?',
+    id: 'free-plan-limits',
+    answer: `
+      <p>The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project, and none of them delete your data:</p>
+      <ul>
+        <li>If a project uses up its 100 CU-hours or 5 GB of network transfer for the month, its compute is suspended until the next billing period</li>
+        <li>If a project exceeds 1 GB of Postgres storage, or your projects exceed 20 GB in total, operations that increase storage fail until you free space</li>
+        <li>Branch creation fails once a project has 10 branches</li>
+      </ul>
+      <p>Upgrading to a paid plan lifts these limits immediately. If you'd rather not upgrade yet and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
+    `,
+  },
+  {
+    question: 'Can I try Neon without signing up?',
+    id: 'claimable-neon',
+    answer: `
+      <p>Yes. <a href="${LINKS.claimableNeon}">Claimable Neon</a> gives you, or an AI agent working for you, an instant Postgres project with no account and no credit card. Claim it to a Neon account within 72 hours to keep it. Unclaimed projects are capped at 100 MB of storage and 1 GB of network transfer. <a href="${LINKS.docs}/reference/claimable-neon">See the reference.</a></p>
+    `,
+  },
+  {
+    question: 'Does Neon pause Free plan projects when they are inactive?',
+    id: 'free-plan-inactivity',
+    answer: `
+      <p>No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute <a href="${LINKS.docs}/introduction/scale-to-zero">scales to zero</a> after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same.</p>
+      <p>Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer. It resumes at the start of the next billing period, or as soon as you upgrade. If you hit these limits and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
+    `,
+  },
+  {
+    question: 'Do the backend services use my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>No. CU-hours measure Postgres database compute only. Object Storage, Functions, and AI Gateway have their own allowances and rates, shown in the plan table.</p>
+      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway is available on paid plans. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
     `,
   },
   {
@@ -151,13 +182,53 @@ const faqItems = [
     `,
   },
   {
-    question: 'How are Object Storage, Functions, and AI Gateway billed?',
+    question: 'How are the backend services billed?',
     id: 'backend-billing',
     answer: `
-      <p>Each is billed separately from Postgres compute (CU-hours).</p>
+      <p>Object Storage, Functions, and AI Gateway are billed separately from Postgres compute (CU-hours). Managed Better Auth, the Data API, and Realtime have no separate charge.</p>
+      <p><strong>Managed Better Auth</strong> is included up to 60,000 MAU per project on Free and 1 million MAU per project on paid plans.</p>
+      <p><strong>The Data API</strong> is included on every plan. The queries it runs use your database compute and count toward network transfer, like any other query.</p>
+      <p><strong>Realtime</strong> is free during the beta. Database compute and network transfer it generates are billed as usual.</p>
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
       <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+    `,
+  },
+  {
+    question: 'How much network transfer (egress) is included?',
+    id: 'egress',
+    answer: `
+      <p>Public network transfer is counted per project, not per account:</p>
+      <ul>
+        <li>Free plan: 5 GB per project per month, across up to 100 projects</li>
+        <li>Launch and Scale: 500 GB per project per month, then $0.10 per GB</li>
+      </ul>
+      <p>Each project's allowance is shared by everything in it: Postgres, Object Storage, and Functions. Eligible startups can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>. <a href="${LINKS.docs}/introduction/network-transfer">Learn how to reduce network transfer.</a></p>
+    `,
+  },
+  {
+    question: 'How do Neon costs scale as I add projects or traffic?',
+    id: 'how-costs-scale',
+    answer: `
+      <p>With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds.</p>
+      <ul>
+        <li>Idle databases scale to zero, so you don't pay for compute while they're suspended. Storage is still billed.</li>
+        <li>Autoscaling sizes compute to the load within the limits you set, so you don't pay for peak capacity all month.</li>
+      </ul>
+      <p>This makes Neon cost-efficient for many small databases, such as a database per tenant or per agent, and for intermittent or spiky workloads.</p>
+    `,
+  },
+  {
+    question: 'How much does a database per tenant or per agent cost on Neon?',
+    id: 'database-per-tenant-cost',
+    answer: `
+      <p>Neon's pricing is built for this pattern. Each tenant gets its own project, an isolated Postgres database with its own compute, and there's no per-project or per-database fee:</p>
+      <ul>
+        <li><strong>Free plan:</strong> up to 100 projects at $0, each with its own 100 CU-hours and 1 GB of storage, enough to build and test a database-per-tenant app.</li>
+        <li><strong>Launch and Scale:</strong> you pay only for the compute each tenant actually runs and the storage it holds. Idle tenant databases scale to zero, so inactive tenants don't add compute cost; storage is still billed. Launch includes 100 projects, and Scale includes 1,000, with more on request.</li>
+      </ul>
+      <p>For example, 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85 a month in total, or about $0.85 per tenant.</p>
+      <p>Platforms that provision databases for their users at scale can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>. For design guidance, see <a href="${LINKS.docs}/guides/multitenancy">Multitenancy with Neon</a>.</p>
     `,
   },
   {
@@ -224,14 +295,6 @@ const faqItems = [
     `,
   },
   {
-    question: 'How is Managed Better Auth billed?',
-    answer: `
-      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU) per project. If you need more, you can request an increase in the Neon Console.</p>
-      <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU per project.</p>
-      <p>MAU limits apply to each project separately. For example, three projects on the Free plan can each have up to 60,000 MAU.</p>
-    `,
-  },
-  {
     question: 'How can I control my Postgres database costs (compute and storage consumption)?',
     answer: `
       <p>Database compute is often the most variable part of a monthly bill. For Neon databases, the most effective way to control compute costs is to configure maximum autoscaling limits and scale-to-zero.</p>
@@ -241,18 +304,71 @@ const faqItems = [
     `,
   },
   {
-    question: 'Do you offer credit programs for startups?',
+    question: 'Can I set a spending limit?',
+    id: 'spending-limit',
     answer: `
-      <p>Early startups that have received venture funding are eligible to apply to our Startup Program. <a href="${LINKS.startups}">Learn more and apply here.</a></p>
+      <p>Yes, in three ways:</p>
+      <ul>
+        <li><a href="${LINKS.docs}/introduction/spending-notifications">Spending notifications</a> (Launch and Scale) email your organization at 80% and 100% of a monthly dollar threshold you set. They alert you but don't stop usage.</li>
+        <li>Autoscaling limits cap the compute size each database can reach, which puts a ceiling on compute spend.</li>
+        <li><a href="${LINKS.docs}/guides/consumption-limits">Consumption limits</a>, set per project with the Neon API, suspend compute when a project reaches a compute, storage, or data transfer quota.</li>
+      </ul>
+    `,
+  },
+  {
+    question: 'Do you offer credits or programs for startups, agent platforms, or open source?',
+    id: 'programs',
+    answer: `
+      <ul>
+        <li><strong>Startups:</strong> early startups that have received venture funding can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>.</li>
+        <li><strong>Agent platforms:</strong> platforms that provision databases for their users can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>, with sponsored free-tier infrastructure and up to $25,000 in paid-tier credits.</li>
+        <li><strong>Open source:</strong> the <a href="${LINKS.programs}/open-source">Open Source Program</a> offers monthly sponsorships for maintainers.</li>
+      </ul>
     `,
   },
 ];
 
+const htmlToText = (html) =>
+  html
+    .replace(/<\/(p|li|h3)>/g, '$& ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: SEO_DATA.pricing.title,
+      description: SEO_DATA.pricing.description,
+      url: `${VERCEL_URL}${LINKS.pricing}`,
+      dateModified: updatedOn,
+      publisher: { '@type': 'Organization', name: 'Neon' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: htmlToText(answer) },
+      })),
+    },
+  ],
+};
+
 const PricingPage = () => (
   <Layout>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <Hero />
     <Logos className="mt-[104px] md:mt-20" logos={logos} size="sm" />
-    <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
+    <Plans
+      className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]"
+      updatedOn={updatedOn}
+    />
     <Features />
     <Faq items={faqItems} />
     <CTANew

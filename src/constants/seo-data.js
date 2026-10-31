@@ -134,9 +134,9 @@ export default {
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Pricing — Neon',
+    title: 'Neon Pricing: Free Plan With 100 Projects, Typical Spend $15/Month',
     description:
-      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
+      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours and 1 GB of storage. Paid plans are usage-based with no monthly minimum and no per-project fee; typical spend is about $15/month for a small database on Launch and $701/month for a production workload on Scale.",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
