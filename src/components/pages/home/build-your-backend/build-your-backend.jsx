@@ -1,6 +1,7 @@
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 
+import BackendMotion from './backend-motion';
 import BackendServices from './services';
 
 const SERVICE_ITEMS = [
@@ -57,7 +58,16 @@ const BuildYourBackend = () => (
     id="build-your-backend"
     aria-labelledby="build-your-backend-heading"
   >
-    <Container className="lg:pt-10 md:pt-8 sm:pt-6" size="1600">
+    {/* Desktop: the animated scene, sets of services assembling along a carousel. Below lg the reels stay as they were. */}
+    <div className="lg:hidden">
+      <h2 className="sr-only">
+        Pick the services you need. Build the application you want. Use only the services you need,
+        or combine them into a complete platform.
+      </h2>
+      <BackendMotion />
+    </div>
+
+    <Container className="hidden lg:block lg:pt-10 md:pt-8 sm:pt-6" size="1600">
       <div className="grid grid-cols-[22rem_minmax(0,1fr)] xl:grid-cols-[16rem_minmax(0,1fr)] lg:block">
         <div className="pt-3.25 lg:pt-0">
           <SectionLabel theme="white">BUILD YOUR BACKEND</SectionLabel>
