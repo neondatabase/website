@@ -51,7 +51,7 @@ export default defineConfig({
 
 If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
-`config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
+`config init` detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
 
 <CliUsage command="config init" />
 
@@ -62,6 +62,8 @@ neon config init
 ```
 
 Pass `--services` to declare services in the file it scaffolds, for example `neon config init --services auth,functions,realtime`. This applies only when creating a new `neon.ts`; to add services to a file that already exists, use [`config add`](#add).
+
+In a linked project, declaring the Data API makes `config init` check the branch's Data API and pick `dataApi: true` or the external form, [as `init` does](/docs/cli/init). If the check fails, it declares `dataApi: true` with `auth: true` and prints a warning.
 
 For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
 
