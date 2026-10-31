@@ -418,7 +418,7 @@ Take a team of 8 developers that opens about 80 pull requests a month, or 2 to 3
 
 #### For AI companies in legal, healthcare, and finance
 
-- **Neon** for a separate project per customer, so you can restore or delete one customer's data without touching anyone else's. The Scale plan adds [HIPAA](/docs/security/hipaa), IP Allow, and private networking, on top of Neon's [SOC 2, ISO 27001, ISO 27701, and GDPR compliance](/docs/security/compliance)
+- **Neon** for a separate project per customer, so you can restore or delete one customer's data without touching anyone else's. The Scale plan adds [HIPAA](/docs/security/hipaa), on top of Neon's [SOC 2, ISO 27001, ISO 27701, and GDPR compliance](/docs/security/compliance)
 - **Amazon RDS for PostgreSQL** for Multi-AZ deployments and up to 35 days of point-in-time recovery, in your own AWS account and VPC
 
 #### For agencies that build apps for clients
