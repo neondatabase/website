@@ -3,44 +3,44 @@ title: Querying consumption metrics
 subtitle: Learn how to query project consumption metrics for usage-based plans using the
   Neon API
 summary: >-
-  The Neon consumption metrics API (/consumption_history/v2) returns
-  invoice-aligned usage metrics per project (compute units, storage types, data
-  transfer, extra branches) and per-branch metrics, available on Launch, Scale,
-  Agent, and Enterprise plans. Use the project endpoint for billing-aligned
-  totals and invoicing; use the branch endpoint to attribute compute and storage
-  costs to individual branches, CI environments, or development workflows.
-  Consumption history starts March 1, 2024. Granularity options are hourly,
-  daily, and monthly. Calls do not wake suspended compute endpoints.
+  The Neon consumption metrics API (/consumption_history/v2) returns project
+  usage metrics for compute, storage, data transfer, extra branches, and
+  Functions, plus per-branch metrics. It is available on Launch, Scale, Agent,
+  and Enterprise plans. Use the project endpoint for project totals and
+  invoicing inputs; use the branch endpoint to attribute compute, storage, and
+  Functions usage to individual branches, CI environments, or development
+  workflows. Granularity options are hourly, daily, and monthly. Calls do not
+  wake suspended compute endpoints.
 redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-10-14T11:21:37.306Z'
+updatedOn: '2026-10-31T12:33:31.190Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page covers the two v2 metrics endpoints for usage-based plans. To monitor usage in the Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
 
-| API                               | Endpoint                           | Description                                                                                                                                      | Plan availability                |
-| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore, snapshot), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
-| **Branch metrics**                | `/consumption_history/v2/branches` | Returns the same usage-based metrics broken down by branch, across one or more projects                                                          | Launch, Scale, Agent, Enterprise |
+| API                               | Endpoint                           | Description                                                                                | Plan availability                |
+| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------- |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns project metrics for compute, storage, data transfer, extra branches, and Functions | Launch, Scale, Agent, Enterprise |
+| **Branch metrics**                | `/consumption_history/v2/branches` | Returns 10 project metrics broken down by branch, across one or more projects              | Launch, Scale, Agent, Enterprise |
 
 <Admonition type="tip">
 **Which API should I use?**
 
-- For invoice-aligned usage totals per project, use the [project metrics API](#request-overview). It's the only endpoint that returns all eight usage-based metrics including `snapshot_storage_bytes_month` and `extra_branches_month`.
-- To attribute usage to individual branches within a project — for example, to see which CI or development branches are driving compute or storage — use the [branch metrics API](#branch-metrics).
+- For usage totals per project, use the [project metrics API](#request-overview). It's the only endpoint that returns all 12 project metrics, including snapshot storage, extra branches, and Functions metrics.
+- To attribute usage to individual branches within a project, for example, to see which CI or development branches are driving compute, storage, or Functions usage, use the [branch metrics API](#branch-metrics).
 - For legacy metrics on older plans, see the [legacy APIs](/docs/guides/consumption-metrics-legacy).
 
 </Admonition>
 
 <Admonition type="note" title="API reference: legacy vs v2">
-In the [API reference](/docs/reference/api), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including **`snapshot_storage_bytes_month`**, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)**.
+In the [API reference](/docs/reference/api), two similarly named pages cover different paths. **Retrieve project consumption metrics (legacy plans)** is **`GET /consumption_history/projects`** and lists older metrics such as `active_time_seconds` and `compute_time_seconds`. **Retrieve project consumption metrics** (no "legacy plans" in the title) is **`GET /consumption_history/v2/projects`** and documents usage-based metrics, including snapshot storage and Functions metrics, in the **`metrics`** parameter. That v2 page matches this guide; see **[Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)**.
 </Admonition>
 
 ## Request overview
 
-Retrieves consumption metrics for Launch, Scale, Agent, and Enterprise plan projects. Returns metrics that align with usage-based billing. History begins at the time of upgrade. Results are ordered by time in ascending order (oldest to newest). Issuing a call to this API does not wake a project's compute endpoint.
+Retrieves consumption metrics for Launch, Scale, Agent, and Enterprise plan projects. Returns project usage metrics. History begins at the time of upgrade. Results are ordered by time in ascending order (oldest to newest). Issuing a call to this API does not wake a project's compute endpoint.
 
 **Endpoint:**
 
@@ -50,34 +50,40 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/projects
 
 ### Metrics
 
-The response includes metrics that map directly to usage-based billing line items:
+The response includes these usage metrics:
 
-| Metric                           | Raw unit     | Billing unit  | Description                                                                                                                                                                                                    |
-| -------------------------------- | ------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `compute_unit_seconds`           | CU-seconds   | CU-hours      | CPU time weighted by compute size                                                                                                                                                                              |
-| `root_branch_bytes_month`        | byte-hours   | GB-months     | Storage consumed by root branches                                                                                                                                                                              |
-| `child_branch_bytes_month`       | byte-hours   | GB-months     | Storage consumed by child branches (delta from parent)                                                                                                                                                         |
-| `instant_restore_bytes_month`    | byte-hours   | GB-months     | Instant restore (PITR) history storage                                                                                                                                                                         |
-| `snapshot_storage_bytes_month`   | byte-hours   | GB-months     | Storage for [branch snapshots](/docs/guides/backup-restore): manual snapshots are full; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in the schedule |
-| `public_network_transfer_bytes`  | bytes        | GB            | Data transfer over the public internet                                                                                                                                                                         |
-| `private_network_transfer_bytes` | bytes        | GB            | Data transfer over private networks (for example, AWS PrivateLink)                                                                                                                                             |
-| `extra_branches_month`           | branch-hours | branch-months | All child branches per hour (subtract plan allowance before billing)                                                                                                                                           |
+| Metric                                    | Raw unit              | Converted unit      | Description                                                                                                                                                                                                    |
+| ----------------------------------------- | --------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `compute_unit_seconds`                    | CU-seconds            | CU-hours            | CPU time weighted by compute size                                                                                                                                                                              |
+| `root_branch_bytes_month`                 | byte-months           | GB-months           | Storage consumed by root branches                                                                                                                                                                              |
+| `child_branch_bytes_month`                | byte-months           | GB-months           | Storage consumed by child branches (delta from parent)                                                                                                                                                         |
+| `instant_restore_bytes_month`             | byte-months           | GB-months           | Instant restore (PITR) history storage                                                                                                                                                                         |
+| `snapshot_storage_bytes_month`            | byte-months           | GB-months           | Storage for [branch snapshots](/docs/guides/backup-restore): manual snapshots are full; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in the schedule |
+| `public_network_transfer_bytes`           | bytes                 | GB                  | Data transfer over the public internet                                                                                                                                                                         |
+| `private_network_transfer_bytes`          | bytes                 | GB                  | Data transfer over private networks (for example, AWS PrivateLink)                                                                                                                                             |
+| `extra_branches_month`                    | branch-hours          | branch-months       | All child branches per hour (subtract plan allowance before billing)                                                                                                                                           |
+| `functions_active_capacity_microseconds`  | capacity-microseconds | Capacity-Hours      | Time Functions spend actively using CPU                                                                                                                                                                        |
+| `functions_waiting_capacity_microseconds` | capacity-microseconds | Capacity-Hours      | Time Functions spend waiting on I/O                                                                                                                                                                            |
+| `functions_invocations`                   | invocations           | million invocations | Number of function calls                                                                                                                                                                                       |
+| `functions_egress_bytes`                  | bytes                 | GB                  | Data sent by Functions                                                                                                                                                                                         |
 
 Use `snapshot_storage_bytes_month` for invoice-aligned, time-windowed snapshot storage reporting.
 
-To convert these raw values into human-readable billing units and calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
+The four Functions metrics are available from both v2 endpoints. For current Functions rates, see [Plans](/docs/introduction/plans#functions).
+
+To convert these raw values into readable units and, where applicable, calculate costs, see [Usage and cost calculations](/docs/introduction/usage-calculations).
 
 ### Required parameters
 
-- **`from`** (date-time, required): Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available from March 1, 2024, at 00:00:00 UTC. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: last year).
+- **`from`** (date-time, required): Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The earliest allowed value is March 1, 2024, at 00:00:00 UTC. Metrics are returned from when the account upgraded to an eligible plan, which may be later. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: last year).
 - **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
 - **`granularity`** (string, required): Granularity of consumption metrics. Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days, and 1 year, respectively.
 - **`org_id`** (string, required): Organization for which the project consumption metrics should be returned.
-- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. Can be an array of parameter values or a comma-separated list in a single parameter value.
+- **`metrics`** (array of strings, required): List of metrics to include in the response. Possible values: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`, `functions_active_capacity_microseconds`, `functions_waiting_capacity_microseconds`, `functions_invocations`, `functions_egress_bytes`. Can be an array of parameter values or a comma-separated list in a single parameter value.
 
 ### Date format, range, and granularity
 
-The API requires timestamps in RFC 3339 format (for example, `2024-06-30T15:30:00Z`), including date, time, and timezone; the `Z` indicates UTC. You can use a [timestamp converter](https://it-tools.tech/date-converter) to generate RFC 3339 formatted timestamps. Consumption history is available starting from March 1, 2024, at 00:00:00 UTC; you cannot query data before this date.
+The API requires timestamps in RFC 3339 format (for example, `2024-06-30T15:30:00Z`), including date, time, and timezone; the `Z` indicates UTC. You can use a [timestamp converter](https://it-tools.tech/date-converter) to generate RFC 3339 formatted timestamps. The earliest allowed `from` value is March 1, 2024, at 00:00:00 UTC. Project metrics begin when the account upgrades to an eligible plan, which may be later.
 
 When setting `from` and `to`, keep these limits in mind based on your chosen granularity:
 
@@ -101,7 +107,7 @@ Replace `$ORG_ID` and `$NEON_API_KEY` with your organization ID and API key, the
 
 ```bash shouldWrap
 curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-02-01T00:00:00Z&to=2026-02-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
+  --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?from=2026-02-01T00:00:00Z&to=2026-02-06T00:00:00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes' \
   --header 'Accept: application/json' \
   --header 'Authorization: Bearer $NEON_API_KEY' | jq
 ```
@@ -207,7 +213,7 @@ Example request for the next page (using the `cursor` from the previous response
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month' \
+     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?cursor=divine-tree-77657175&limit=10&from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=$ORG_ID&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,public_network_transfer_bytes,private_network_transfer_bytes,extra_branches_month,functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,functions_invocations,functions_egress_bytes' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
@@ -222,7 +228,7 @@ The consumption API endpoints share a single rate limiter of approximately 50 re
 
 Calling the consumption APIs does not wake computes that have been suspended due to inactivity, so polling will not increase your consumption.
 
-The [project metrics endpoint](#request-overview) on this page returns metrics that align directly with usage-based billing (including storage and network transfer metrics that match your invoice). The legacy APIs return different metrics that don't map to usage-based line items; see [Query consumption metrics (legacy)](/docs/guides/consumption-metrics-legacy) for those endpoints.
+The [project metrics endpoint](#request-overview) on this page returns project usage metrics. The legacy APIs return different metrics that don't map to usage-based line items; see [Query consumption metrics (legacy)](/docs/guides/consumption-metrics-legacy) for those endpoints.
 
 ## Error responses
 
@@ -239,7 +245,7 @@ For a full example that uses this API to build a usage dashboard with Next.js (i
 
 ## Branch metrics
 
-The branch metrics endpoint returns per-branch consumption data across one or more projects. Use it when you need to see which branches within a project are driving usage — for example, attributing compute costs across CI branches, development environments, or feature branches.
+The branch metrics endpoint returns per-branch consumption data across one or more projects. Use it when you need to see which branches within a project are driving usage, for example, attributing compute costs across CI branches, development environments, or feature branches.
 
 **Endpoint:**
 
@@ -249,16 +255,20 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/branches
 
 ### Metrics
 
-Six of the eight project metrics are available on this endpoint:
+Ten of the 12 project metrics are available on this endpoint:
 
-| Metric                           | Description                            |
-| -------------------------------- | -------------------------------------- |
-| `compute_unit_seconds`           | CPU time weighted by compute size      |
-| `root_branch_bytes_month`        | Storage consumed by root branches      |
-| `child_branch_bytes_month`       | Storage consumed by child branches     |
-| `instant_restore_bytes_month`    | Instant restore (PITR) history storage |
-| `public_network_transfer_bytes`  | Data transfer over the public internet |
-| `private_network_transfer_bytes` | Data transfer over private networks    |
+| Metric                                    | Description                             |
+| ----------------------------------------- | --------------------------------------- |
+| `compute_unit_seconds`                    | CPU time weighted by compute size       |
+| `root_branch_bytes_month`                 | Storage consumed by root branches       |
+| `child_branch_bytes_month`                | Storage consumed by child branches      |
+| `instant_restore_bytes_month`             | Instant restore (PITR) history storage  |
+| `public_network_transfer_bytes`           | Data transfer over the public internet  |
+| `private_network_transfer_bytes`          | Data transfer over private networks     |
+| `functions_active_capacity_microseconds`  | Time Functions spend actively using CPU |
+| `functions_waiting_capacity_microseconds` | Time Functions spend waiting on I/O     |
+| `functions_invocations`                   | Number of function calls                |
+| `functions_egress_bytes`                  | Data sent by Functions                  |
 
 `extra_branches_month` and `snapshot_storage_bytes_month` are not available on this endpoint. Use the [project metrics endpoint](#request-overview) for those.
 
@@ -269,7 +279,7 @@ Six of the eight project metrics are available on this endpoint:
 - **`to`** (date-time, required): End of the consumption period in RFC 3339 format.
 - **`granularity`** (string, required): `hourly`, `daily`, or `monthly`. Subject to the same window limits as the project endpoint.
 - **`org_id`** (string, required): Organization ID.
-- **`metrics`** (array of strings, required): One or more of the six supported metrics above.
+- **`metrics`** (array of strings, required): One or more of the 10 supported metrics above.
 
 ### Optional parameters
 
