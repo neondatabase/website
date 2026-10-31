@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.14.0",
+  "neonctlVersion": "8.15.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1188,7 +1188,7 @@
                 }
               },
               "commands": {},
-              "describe": "Enable the Data API (dataApi: true) and Neon Auth, which the default provider requires"
+              "describe": "Enable the Data API (dataApi: true) and Neon Auth, which the default provider requires. For an external identity provider, set dataApi.authProvider to \"external\" instead"
             },
             "function": {
               "name": "function",
@@ -1285,7 +1285,7 @@
           "options": {
             "from-branch": {
               "type": "boolean",
-              "describe": "Seed neon.ts from a branch's live Neon state instead of asking. Uses the branch pinned in .neon, or --branch <name|id>, or the project's default branch. The only mode of `config init` that calls the Neon API."
+              "describe": "Seed neon.ts from a branch's live Neon state instead of asking. Uses the branch pinned in .neon, or --branch <name|id>, or the project's default branch. Needs credentials and a project."
             },
             "install": {
               "type": "boolean",

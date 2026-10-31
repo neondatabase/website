@@ -9,7 +9,7 @@ summary: >-
   runs interactively by default; pass -y for the recommended setup with no prompts,
   or add flags such as --skill, MCP options, or --claimable for the custom setup.
 enableTableOfContents: true
-updatedOn: '2026-10-17T02:29:50.049Z'
+updatedOn: '2026-10-31T00:04:51.920Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -73,6 +73,8 @@ When `init` creates a new `neon.ts`, it pulls environment variables once, after 
 When `init` writes a new `neon.ts` for a linked project, it lists next steps under `Next`. Preview the changes with [`neon config plan`](/docs/cli/config#plan), then apply them with [`neon deploy`](/docs/cli/deploy). It also suggests [`neon checkout dev --create`](/docs/cli/checkout) to work on a development branch once you've deployed. These steps appear even for the default Postgres-only `neon.ts`. For a claimable project, `init` lists `neon claim accept` instead, followed by the plan and deploy steps when `neon.ts` declares services beyond Postgres. If you skip `neon.ts` (for example, with `--no-config`) and the directory doesn't have one, `init` suggests [`neon config init`](/docs/cli/config#init) to create it later.
 
 `--services realtime` declares [Realtime](/docs/realtime/overview) in `neon.ts`. `init` doesn't enable it on the branch: [`neon deploy`](/docs/cli/deploy) does, or you can run [`neon realtime enable`](/docs/cli/realtime#enable). The interactive service picker doesn't list Realtime, so pass `--services realtime` to declare it.
+
+When `neon.ts` declares the [Data API](/docs/data-api/get-started), `init` checks the linked branch's Data API first. If it uses an external identity provider, `init` declares the [external form](/docs/reference/neon-ts#dataapi) (`authProvider: "external"`) instead of `dataApi: true`, so `neon deploy` doesn't enable Managed Better Auth. If `init` can't read the branch, for example without credentials, it declares `dataApi: true` with `auth: true`. It never starts a login to check.
 
 ## Options
 
