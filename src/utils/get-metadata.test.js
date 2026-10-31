@@ -36,6 +36,25 @@ describe('getMetadata', () => {
     expect(metadata.openGraph.url).toBe('https://neon.com/guides/sentry-neon-mcp');
   });
 
+  it('adds a missing leading slash instead of gluing the path onto the host', () => {
+    const metadata = getMetadata({ pathname: 'storage' });
+
+    expect(metadata.alternates.canonical).toBe('https://neon.com/storage');
+    expect(metadata.openGraph.url).toBe('https://neon.com/storage');
+  });
+
+  it('gives every SEO_DATA entry a site-relative pathname', () => {
+    // 404 and error only supply <title>; costFleets has no page
+    const exempt = ['404', 'error', 'costFleets'];
+
+    Object.entries(SEO_DATA)
+      .filter(([key, entry]) => !exempt.includes(key) && entry && typeof entry === 'object')
+      .forEach(([key, entry]) => {
+        expect(typeof entry.pathname, key).toBe('string');
+        expect(entry.pathname === '' || entry.pathname.startsWith('/'), key).toBe(true);
+      });
+  });
+
   it.each([
     [SEO_DATA.functions, 'https://neon.com/functions.md'],
     [SEO_DATA.aiGateway, 'https://neon.com/ai-gateway.md'],

@@ -47,14 +47,16 @@ export default function getMetadata({
     process.env.VERCEL_ENV === 'preview'
       ? `https://${process.env.VERCEL_BRANCH_URL}`
       : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
-  const canonicalUrl = SITE_URL + pathname;
+  // Without a leading slash the path glues onto the host (https://neon.comstorage)
+  const normalizedPathname = pathname && !pathname.startsWith('/') ? `/${pathname}` : pathname;
+  const canonicalUrl = SITE_URL + normalizedPathname;
   const imageUrl = imagePath?.startsWith('http') ? imagePath : SITE_URL + imagePath;
 
   const metaImageUrl = imagePath ? imageUrl : `${SITE_URL}${DEFAULT_IMAGE_PATH}`;
   const metaTitle = title || DEFAULT_TITLE;
   const metaDescription = description || DEFAULT_DESCRIPTION;
 
-  const metaMarkdownPath = markdownPath ?? getDefaultMarkdownPath(pathname);
+  const metaMarkdownPath = markdownPath ?? getDefaultMarkdownPath(normalizedPathname);
 
   const siteName = 'Neon';
   const robots = robotsNoindex === 'noindex' ? { index: false } : null;
