@@ -134,9 +134,9 @@ export default {
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Neon Pricing: $0 Free Plan, Typical Launch Spend $15/Month',
+    title: 'Neon Pricing: Free Plan With 100 Projects, Typical Spend $15/Month',
     description:
-      "Neon's Free plan is $0 with no credit card. Paid plans are usage-based with no monthly minimum: typical spend is about $15/month on Launch for a small database (140 CU-hours, 1 GB) and $701/month on Scale for a production workload (3,000 CU-hours, 100 GB).",
+      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours and 1 GB of storage. Paid plans are usage-based with no monthly minimum and no per-project fee; typical spend is about $15/month for a small database on Launch and $701/month for a production workload on Scale.",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },

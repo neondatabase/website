@@ -26,8 +26,8 @@ describe('typical spend quoted outside the hero', () => {
 
   it('matches the hero defaults in the pricing page title and description', () => {
     expect(SEO_DATA.pricing.title).toContain(`${launch}/Month`);
-    expect(SEO_DATA.pricing.description).toContain(`${launch}/month on Launch`);
-    expect(SEO_DATA.pricing.description).toContain(`${scale}/month on Scale`);
+    expect(SEO_DATA.pricing.description).toMatch(new RegExp(`\\${launch}/month[^;]*on Launch`));
+    expect(SEO_DATA.pricing.description).toMatch(new RegExp(`\\${scale}/month[^;]*on Scale`));
   });
 
   it('matches the hero in the pricing.md workload table', () => {

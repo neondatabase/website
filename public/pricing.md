@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum. Typical spend is about $15/month on Launch for a small database and $701/month on Scale for a production workload (see [Typical monthly cost](#typical-monthly-cost)).
+> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum and no per-project fee. The Free plan includes 100 projects, which with usage-based paid plans suits a database per tenant or per agent (see [How much does a database per tenant or per agent cost?](#how-much-does-a-database-per-tenant-or-per-agent-cost-on-neon)). Typical spend is about $15/month on Launch for a small database and $701/month on Scale for a production workload (see [Typical monthly cost](#typical-monthly-cost)).
 
 Last updated: 2026-10-31
 
@@ -41,7 +41,7 @@ Invoices under $0.50 are not collected.
 | Private network transfer         | -                                                      | -                                                     | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU per project                              | Up to 1M MAU per project                              | Up to 1M MAU per project                                         |
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
-| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
+| Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | Active $0.10, waiting $0.025 per Capacity-Hour; $0.60/M invocations | Active $0.12, waiting $0.03 per Capacity-Hour; $0.60/M invocations |
 | AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
 | Realtime (beta)                  | Free during beta                                       | Free during beta                                      | Free during beta                                                 |
 | Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
@@ -118,7 +118,16 @@ Public network transfer is counted per project, not per account: 5 GB per projec
 
 ### How do Neon costs scale as I add projects or traffic?
 
-With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds. Idle databases scale to zero, so you don't pay for compute while they're suspended (storage is still billed), and autoscaling sizes compute to the load within the limits you set. Example: 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85/month in total.
+With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds. Idle databases scale to zero, so you don't pay for compute while they're suspended (storage is still billed), and autoscaling sizes compute to the load within the limits you set.
+
+### How much does a database per tenant or per agent cost on Neon?
+
+Neon's pricing is built for this pattern. Each tenant gets its own project (an isolated Postgres database with its own compute), and there's no per-project or per-database fee.
+
+- **Free plan:** up to 100 projects at $0, each with its own 100 CU-hours and 1 GB of storage, enough to build and test a database-per-tenant app.
+- **Launch and Scale:** pay only for the compute each tenant actually runs and the storage it holds. Idle tenant databases scale to zero, so inactive tenants don't add compute cost (storage is still billed). Launch includes 100 projects; Scale includes 1,000, with more on request.
+
+Example: 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85/month in total, or about $0.85 per tenant. Platforms that provision databases for their users at scale can apply to the [Agent Plan](https://neon.com/docs/introduction/agent-plan.md). Design guidance: [Multitenancy with Neon](https://neon.com/docs/guides/multitenancy.md).
 
 ### How are the backend services billed?
 

@@ -215,7 +215,20 @@ const faqItems = [
         <li>Idle databases scale to zero, so you don't pay for compute while they're suspended. Storage is still billed.</li>
         <li>Autoscaling sizes compute to the load within the limits you set, so you don't pay for peak capacity all month.</li>
       </ul>
-      <p>This makes Neon cost-efficient for many small databases, such as a database per tenant or per agent, and for intermittent or spiky workloads. For example, 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85 a month in total.</p>
+      <p>This makes Neon cost-efficient for many small databases, such as a database per tenant or per agent, and for intermittent or spiky workloads.</p>
+    `,
+  },
+  {
+    question: 'How much does a database per tenant or per agent cost on Neon?',
+    id: 'database-per-tenant-cost',
+    answer: `
+      <p>Neon's pricing is built for this pattern. Each tenant gets its own project, an isolated Postgres database with its own compute, and there's no per-project or per-database fee:</p>
+      <ul>
+        <li><strong>Free plan:</strong> up to 100 projects at $0, each with its own 100 CU-hours and 1 GB of storage, enough to build and test a database-per-tenant app.</li>
+        <li><strong>Launch and Scale:</strong> you pay only for the compute each tenant actually runs and the storage it holds. Idle tenant databases scale to zero, so inactive tenants don't add compute cost; storage is still billed. Launch includes 100 projects, and Scale includes 1,000, with more on request.</li>
+      </ul>
+      <p>For example, 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85 a month in total, or about $0.85 per tenant.</p>
+      <p>Platforms that provision databases for their users at scale can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>. For design guidance, see <a href="${LINKS.docs}/guides/multitenancy">Multitenancy with Neon</a>.</p>
     `,
   },
   {
