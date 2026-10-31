@@ -134,9 +134,9 @@ export default {
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Pricing — Neon',
+    title: 'Neon Pricing: $0 Free Plan, Paid Plans From $0.106/CU-hour',
     description:
-      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
+      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours of compute and 1 GB of Postgres storage. Paid plans are usage-based with no monthly minimum: compute from $0.106/CU-hour, storage $0.35/GB-month.",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },

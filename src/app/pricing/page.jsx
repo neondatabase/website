@@ -5,11 +5,25 @@ import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
+import VERCEL_URL from 'constants/base';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getPricingUpdatedOn from 'utils/get-pricing-updated-on';
 
-export const metadata = getMetadata(SEO_DATA.pricing);
+const updatedOn = getPricingUpdatedOn();
+
+export const metadata = getMetadata({ ...SEO_DATA.pricing, modifiedTime: updatedOn });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: SEO_DATA.pricing.title,
+  description: SEO_DATA.pricing.description,
+  url: `${VERCEL_URL}${LINKS.pricing}`,
+  dateModified: updatedOn,
+  publisher: { '@type': 'Organization', name: 'Neon' },
+};
 
 const logos = [
   'eqt',
@@ -250,9 +264,16 @@ const faqItems = [
 
 const PricingPage = () => (
   <Layout>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <Hero />
     <Logos className="mt-[104px] md:mt-20" logos={logos} size="sm" />
-    <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
+    <Plans
+      className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]"
+      updatedOn={updatedOn}
+    />
     <Features />
     <Faq items={faqItems} />
     <CTANew

@@ -2,6 +2,8 @@
 
 > Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
 
+Last updated: 2026-10-31
+
 ## How billing works
 
 Paid plans are pay-as-you-go: usage is metered hourly and billed at the end of the month, with no monthly minimum. Plans apply per **organization**, and one Neon account can belong to multiple orgs on different plans. The Free plan is permanent (not a trial); no credit card required.
@@ -41,6 +43,7 @@ Invoices under $0.50 are not collected.
 | Object Storage                   | 5 GB per project included                              | $0.023/GB-month                                       | $0.023/GB-month                                                  |
 | Functions                        | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M                   | $0.12/$0.03/Capacity-Hour, $0.60/M                               |
 | AI Gateway                       | -                                                      | Prepaid credits (no markup) | Prepaid credits (no markup)            |
+| Realtime (beta)                  | Free during beta                                       | Free during beta                                      | Free during beta                                                 |
 | Monitoring retention             | 1 day                                                  | 3 days                                                | 14 days                                                          |
 | Metrics/logs export              | -                                                      | -                                                     | Yes                                                              |
 | Spending notifications           | -                                                      | Yes                                                   | Yes                                                              |
@@ -68,6 +71,7 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Private Networking** ($0.01/GB on Scale) counts traffic in **both directions**.
 - **HIPAA** is self-serve on Scale (BAA required), currently at no additional cost. See [HIPAA](https://neon.com/docs/security/hipaa.md) for details.
 - **Object Storage** and **Functions**: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
+- **Realtime** is in beta and free during the beta. Compute and egress it uses are billed as usual.
 - **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per project per month.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
