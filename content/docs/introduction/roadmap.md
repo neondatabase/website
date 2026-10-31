@@ -17,21 +17,16 @@ updatedOn: '2026-10-24T09:56:12.391Z'
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
-## New backend primitives for apps and agents
+## Backend primitives for apps and agents
 
-We're expanding Neon with [a branchable stack of backend primitives](/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
+We've expanded Neon with [a branchable stack of backend primitives](/blog/were-building-backends). Managed Better Auth, Functions, Object Storage, and AI Gateway are now generally available alongside Lakebase Postgres, and Realtime is in public beta. See [What we've shipped recently](#what-weve-shipped-recently-). Here's what we're working on next.
 
-- **Managed Better Auth general availability**: Managed Better Auth is moving toward general availability with additional plugins and features on the way. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for details.
-
-Functions, Object Storage, and AI Gateway are now generally available. See [What we've shipped recently](#what-weve-shipped-recently-).
+- **Realtime general availability**: Realtime is in public beta and moving toward general availability. [Learn more](/docs/realtime/overview).
+- **More regions for backend services**: Functions, Object Storage, AI Gateway, and Realtime are expanding beyond their current AWS regions. [Learn more](/docs/introduction/regions).
 
 ## Core Postgres database features and improvements
 
-We're accelerating work on improving and scaling the core database on Neon as well. Here is what is on the roadmap.
-
-### Real-time sync
-
-- Real-time Postgres sync powered by the Electric sync engine, keeping your database and connected clients (browser tabs, mobile apps, and agents) continuously in sync so you can build real-time, collaborative, and agentic apps without hand-rolling a sync layer. [Read the announcement](/blog/electric-joins-neon).
+We're also improving and scaling Lakebase Postgres on Neon. Here's what's on the roadmap.
 
 ### Backups & restore
 
@@ -39,6 +34,8 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - Integration with external backup systems
 - Cross-region branch snapshots and exported backups
 - Cross-cloud branch snapshots and exported backups
+- Branch recovery, so you can restore a deleted branch during a short recovery period
+- Snapshots on non-root branches
 
 ### Security
 
@@ -51,6 +48,10 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 - Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
 
+### Integrations
+
+- Vercel OIDC support, so Vercel apps can connect to Neon with a short-lived Vercel OIDC token instead of a static password
+
 ### Database storage
 
 - Increased ingestion speeds
@@ -59,15 +60,16 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Postgres compute
 
 - **Postgres 19 support**: We support Postgres 14 through 18 today, with Postgres 19 support on the way.
-- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
 - Fixed compute sizes up to 128 CUs
 - Autoscaling up to 60 CUs
+- Automatic updates for large computes, with no manual restart required
+- Scale to zero for computes larger than 16 CU
 
 ### Account security
 
-- Role-based access control (RBAC) in the Neon Console
-- RBAC roles extended into the database
-- Audit logging of all database access
+- Role-based access control (RBAC) roles extended into the database
+- Self-serve audit logs of all database access
+- Single sign-on (SSO) and SCIM user provisioning for organizations
 
 ### High availability
 
@@ -76,6 +78,13 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Managed Better Auth general availability**: Managed Better Auth is now generally available. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for upcoming plugins and features. [Learn more](/docs/auth/overview).
+- **HIPAA support for backend services**: HIPAA compliance now extends to Managed Better Auth, the Data API, Functions, Object Storage, AI Gateway, and Realtime, so you can use them with protected health information in a HIPAA-enabled project. [Learn more](/docs/security/hipaa).
+- **Set up your coding agent for Neon**: One prompt installs the Neon CLI, signs you in, and adds Neon's agent skills and MCP server. Each backend service overview page also has a prompt that builds a working example in your project. [Learn more](/docs/cli/skills).
+- **New Functions templates**: Six new Function Registry templates, including an MCP server, a Telegram bot, and image analysis and generation APIs, combine Functions with Postgres, AI Gateway, Object Storage, and Managed Better Auth. [Learn more](/docs/compute/functions/registry/templates).
+- **Apple and Microsoft sign-in for Managed Better Auth**: Managed Better Auth now supports Apple and Microsoft Entra ID as OAuth providers, alongside Google, GitHub, and Vercel. [Learn more](/docs/auth/guides/setup-oauth).
+- **Tune Lakebase Search indexes**: `lakebase_vector` 1.1.2 adds functions that recommend `lakebase_ann.probes` settings for your index, so you can trade off recall and latency without trial and error. [Learn more](/docs/extensions/lakebase-vector#get-recommended-probes-values).
+- **Gemini 4 Argon on the AI Gateway**: Google's Gemini 4 Argon is now available through the chat completions or native Gemini endpoint, with a 1M-token context window and text, image, video, audio, and PDF input. [Learn more](/docs/ai-gateway/models/gemini-4-argon).
 - **Jev decision models on the AI Gateway**: TypeSafe's Jev 1.14 and the open-weights OpenJev answer questions about your input with a choice, a score, or a probability your code can act on, billed for input tokens only. [Learn more](/docs/ai-gateway/decisions).
 - **Automatic top-up for AI Gateway credits**: Organization admins can turn on auto-reload so Neon buys more AI Gateway credits with your card on file when your balance drops below a threshold you set. [Learn more](/docs/ai-gateway/prepaid-credits#automatic-top-up).
 - **OAuth provider for Managed Better Auth (beta)**: Managed Better Auth can act as an OAuth 2.1 authorization server, so your users can sign in to your MCP server, API, or other apps with their existing accounts. [Learn more](/docs/auth/guides/plugins/oauth-provider).
