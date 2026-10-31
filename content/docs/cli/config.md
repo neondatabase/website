@@ -51,7 +51,7 @@ export default defineConfig({
 
 If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
-`config init` detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
+By default, `config init` runs locally and does not call the Neon API. With `--from-branch`, it reads the branch's live state through the Neon API, so it needs your Neon credentials and a project. It picks your package manager (npm, pnpm, yarn, or bun) from the project's lockfile, or from how the command was invoked if there's no lockfile. Before installing, it makes sure `node_modules/` is listed in your `.gitignore`, appending it if it's missing. Pass `--no-install` to skip installation and just print the command to run.
 
 <CliUsage command="config init" />
 
