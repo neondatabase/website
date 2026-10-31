@@ -88,7 +88,7 @@ Neon connects to external systems (for example, when replicating data into Neon 
 Allow **all** NAT gateway IP addresses listed for your project's region, not just the ones you connect through today, and add the new addresses to your allowlist after Neon expands a region. Expansions are announced in the [changelog](/docs/changelog).
 </Admonition>
 
-_NAT gateway IP lists last updated: October 7, 2026._
+_NAT gateway IP lists last updated: October 28, 2026._
 
 ### AWS NAT Gateway IP Addresses
 
