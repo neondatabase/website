@@ -162,7 +162,7 @@ An instance can't scale to zero: you can stop it for up to 7 days to stop paying
 
 **Rest of the backend:**
 
-- **Auth:** Amazon Cognito user pools (10K MAU free, then $0.0055/MAU)
+- **Auth:** Amazon Cognito user pools (10K MAU free, then $0.015/MAU)
 - **Files:** Amazon S3 ($0.023/GB-month)
 - **Functions:** AWS Lambda, connected to the database through your VPC and often RDS Proxy ($0.20 per 1M requests, plus duration)
 - **Model access:** Amazon Bedrock (per token, by model)
