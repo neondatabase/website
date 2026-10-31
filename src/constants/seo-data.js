@@ -134,9 +134,9 @@ export default {
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Neon Pricing: $0 Free Plan, Paid Plans From $0.106/CU-hour',
+    title: 'Neon Pricing: $0 Free Plan, Typical Launch Spend $15/Month',
     description:
-      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours of compute and 1 GB of Postgres storage. Paid plans are usage-based with no monthly minimum: compute from $0.106/CU-hour, storage $0.35/GB-month.",
+      "Neon's Free plan is $0 with no credit card. Paid plans are usage-based with no monthly minimum: typical spend is about $15/month on Launch for a small database (140 CU-hours, 1 GB) and $701/month on Scale for a production workload (3,000 CU-hours, 100 GB).",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },

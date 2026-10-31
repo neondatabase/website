@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum.
+> Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, a Data API, Functions, Object Storage, and an AI Gateway, on three plans: Free, Launch, and Scale. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres. Storage is unlimited on paid plans and grows with your usage. Pay only for what you use on paid plans; no monthly minimum. Typical spend is about $15/month on Launch for a small database and $701/month on Scale for a production workload (see [Typical monthly cost](#typical-monthly-cost)).
 
 Last updated: 2026-10-31
 
@@ -75,6 +75,20 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Free plan** for the backend services: 5 GB Object Storage per project and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per project per month.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
+
+## Typical monthly cost
+
+Estimated monthly cost of representative database workloads: CU-hours × the plan's CU-hour rate, plus storage GB-months × $0.35. Covers Postgres compute and storage only; Object Storage, Functions, and AI Gateway are billed separately. The pricing page shows Intermittent load on Launch ($15/month) and High load on Scale ($701/month) by default.
+
+| Workload          | Compute         | Storage | What it represents                                                       | Launch | Scale  |
+| ----------------- | --------------- | ------- | ------------------------------------------------------------------------ | ------ | ------ |
+| Intermittent load | 140 CU-hours    | 1 GB    | Small database that scales to zero when idle (0.25 to 2 CU when running) | $15    | $31    |
+| Low load          | 190 CU-hours    | 5 GB    | Small always-on database (scale to zero disabled, mostly at 0.25 CU)     | $22    | $44    |
+| Medium load       | 720 CU-hours    | 10 GB   | Constant-load app database scaling between 0.5 and 4 CU                  | $80    | $163   |
+| High load         | 3,000 CU-hours  | 100 GB  | Production app with sustained traffic, scaling between 3 and 7 CU        | $353   | $701   |
+| XL load           | 6,000 CU-hours  | 1 TB    | Large-scale production workload scaling between 6 and 14 CU              | Not listed | $1,682 |
+
+Actual cost depends on how much your database autoscales, how long computes run before scaling to zero, your data size and number of branches, and your history window.
 
 ## Common questions
 
