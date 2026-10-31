@@ -35,11 +35,11 @@ const logos = [
 
 const faqItems = [
   {
-    question: 'Does Neon offer a backend now?',
+    question: 'What does Neon include besides Postgres?',
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Yes. Alongside Lakebase Postgres, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway. Together they form a full backend suite that runs alongside your database and branches with it.</p>
+      <p>Alongside Lakebase Postgres, every Neon project can use Managed Better Auth, the Data API, Object Storage, Functions, AI Gateway, and Realtime (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
     `,
   },
   {
@@ -95,6 +95,26 @@ const faqItems = [
     `,
   },
   {
+    question: 'What happens when I hit Free plan limits?',
+    id: 'free-plan-limits',
+    answer: `
+      <p>The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project, and none of them delete your data:</p>
+      <ul>
+        <li>If a project uses up its 100 CU-hours or 5 GB of network transfer for the month, its compute is suspended until the next billing period</li>
+        <li>If a project exceeds 1 GB of Postgres storage, or your projects exceed 20 GB in total, operations that increase storage fail until you free space</li>
+        <li>Branch creation fails once a project has 10 branches</li>
+      </ul>
+      <p>Upgrading to a paid plan lifts these limits immediately.</p>
+    `,
+  },
+  {
+    question: 'Can I try Neon without signing up?',
+    id: 'claimable-neon',
+    answer: `
+      <p>Yes. <a href="${LINKS.claimableNeon}">Claimable Neon</a> gives you, or an AI agent working for you, an instant Postgres project with no account and no credit card. Claim it to a Neon account within 72 hours to keep it. Unclaimed projects are capped at 100 MB of storage and 1 GB of network transfer. <a href="${LINKS.docs}/reference/claimable-neon">See the reference.</a></p>
+    `,
+  },
+  {
     question: 'Does Neon pause Free plan projects when they are inactive?',
     id: 'free-plan-inactivity',
     answer: `
@@ -103,11 +123,10 @@ const faqItems = [
     `,
   },
   {
-    question:
-      'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
+    question: 'Do the backend services use my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
-      <p>No. CU-hours measure Postgres database compute only. Object Storage, Functions, and AI Gateway have their own allowances and rates, shown in the plan table.</p>
+      <p>CU-hours measure Postgres database compute only. Object Storage and Functions have their own Free plan allowances, Managed Better Auth has its own MAU limit, and AI Gateway is available on paid plans. The Data API and Realtime run queries against your database, so the database compute they use counts toward your CU-hours like any other query.</p>
     `,
   },
   {
@@ -163,10 +182,13 @@ const faqItems = [
     `,
   },
   {
-    question: 'How are Object Storage, Functions, and AI Gateway billed?',
+    question: 'How are the backend services billed?',
     id: 'backend-billing',
     answer: `
-      <p>Each is billed separately from Postgres compute (CU-hours).</p>
+      <p>Object Storage, Functions, and AI Gateway are billed separately from Postgres compute (CU-hours). Managed Better Auth, the Data API, and Realtime have no separate charge.</p>
+      <p><strong>Managed Better Auth</strong> is included up to 60,000 MAU per project on Free and 1 million MAU per project on paid plans.</p>
+      <p><strong>The Data API</strong> is included on every plan. The queries it runs use your database compute and count toward network transfer, like any other query.</p>
+      <p><strong>Realtime</strong> is free during the beta. Database compute and network transfer it generates are billed as usual.</p>
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
       <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
@@ -277,9 +299,26 @@ const faqItems = [
     `,
   },
   {
-    question: 'Do you offer credit programs for startups?',
+    question: 'Can I set a spending limit?',
+    id: 'spending-limit',
     answer: `
-      <p>Early startups that have received venture funding are eligible to apply to our Startup Program. <a href="${LINKS.startups}">Learn more and apply here.</a></p>
+      <p>Yes, in three ways:</p>
+      <ul>
+        <li><a href="${LINKS.docs}/introduction/spending-notifications">Spending notifications</a> (Launch and Scale) email your organization at 80% and 100% of a monthly dollar threshold you set. They alert you but don't stop usage.</li>
+        <li>Autoscaling limits cap the compute size each database can reach, which puts a ceiling on compute spend.</li>
+        <li><a href="${LINKS.docs}/guides/consumption-limits">Consumption limits</a>, set per project with the Neon API, suspend compute when a project reaches a compute, storage, or data transfer quota.</li>
+      </ul>
+    `,
+  },
+  {
+    question: 'Do you offer credits or programs for startups, agent platforms, or open source?',
+    id: 'programs',
+    answer: `
+      <ul>
+        <li><strong>Startups:</strong> early startups that have received venture funding can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>.</li>
+        <li><strong>Agent platforms:</strong> platforms that provision databases for their users can apply to the <a href="${LINKS.programsAgents}">Agent Plan</a>, with sponsored free-tier infrastructure and up to $25,000 in paid-tier credits.</li>
+        <li><strong>Open source:</strong> the <a href="${LINKS.programs}/open-source">Open Source Program</a> offers monthly sponsorships for maintainers.</li>
+      </ul>
     `,
   },
 ];

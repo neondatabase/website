@@ -106,7 +106,7 @@ Branches above your plan's allowance (10 included on Free/Launch, 25 on Scale) a
 
 ### What happens when I hit Free plan limits?
 
-Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
+The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
 
 ### Does Neon pause Free plan projects when they are inactive?
 
@@ -119,6 +119,18 @@ Public network transfer is counted per project, not per account: 5 GB per projec
 ### How do Neon costs scale as I add projects or traffic?
 
 With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds. Idle databases scale to zero, so you don't pay for compute while they're suspended (storage is still billed), and autoscaling sizes compute to the load within the limits you set. Example: 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85/month in total.
+
+### How are the backend services billed?
+
+Object Storage, Functions, and AI Gateway are billed separately from Postgres compute, at the rates in the plan table; AI Gateway is available on Launch and Scale. Managed Better Auth, the Data API, and Realtime have no separate charge: Auth is included up to 60,000 MAU per project on Free and 1M on paid plans; the Data API is included on every plan; Realtime is free during the beta. Queries from the Data API and Realtime run on your database, so the compute (CU-hours) and network transfer they use are billed as usual.
+
+### Can I set a spending limit?
+
+Yes, in three ways. [Spending notifications](https://neon.com/docs/introduction/spending-notifications.md) (Launch and Scale) email your organization at 80% and 100% of a monthly dollar threshold; they alert but don't stop usage. Autoscaling limits cap each database's compute size, which puts a ceiling on compute spend. [Consumption limits](https://neon.com/docs/guides/consumption-limits.md), set per project with the Neon API, suspend compute when a project reaches a compute, storage, or data transfer quota.
+
+### Do you offer credits or programs?
+
+Early startups that have received venture funding can apply for up to $100k in credits through the [Startup Program](https://neon.com/startups). Platforms that provision databases for their users can apply to the [Agent Plan](https://neon.com/docs/introduction/agent-plan.md) (sponsored free-tier infrastructure and up to $25,000 in paid-tier credits). The [Open Source Program](https://neon.com/programs/open-source.md) offers monthly sponsorships for maintainers.
 
 ### How can I control my costs?
 
