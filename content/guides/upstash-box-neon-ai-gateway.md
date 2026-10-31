@@ -445,11 +445,11 @@ The [Cloudflare Sandboxes guide](/guides/cloudflare-sandbox-neon-branching) cove
 
 ### Trigger it from GitHub Actions
 
-You can trigger the runner from a GitHub Actions workflow instead of running it locally. The workflow can run on a schedule, on pull request events, or when an issue is labeled. It can use the same `npm run fix` command, passing the repository and issue number as arguments. This turns issues into pull requests on a schedule or in response to events, without running the CLI yourself.
+You can trigger the runner from a GitHub Actions workflow instead of running it locally. The workflow can run on a schedule, on pull request events, or when an issue is labeled. It can use the same `npm run fix` command, passing the repository and issue number as arguments.
 
 ## Conclusion
 
-You now have a working TypeScript CLI that can fetch a GitHub issue, create a disposable Upstash Box sandbox, run an AI coding agent through the AI Gateway, and open a pull request with the proposed changes. This setup lets you automate repository tasks while keeping each run isolated and under your control.
+You now have a working TypeScript CLI that can fetch a GitHub issue, create a disposable Upstash Box sandbox, run an AI coding agent through the AI Gateway, and open a pull request with the proposed changes.
 
 ## Resources
 
