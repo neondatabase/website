@@ -15,16 +15,6 @@ const updatedOn = getPricingUpdatedOn();
 
 export const metadata = getMetadata(SEO_DATA.pricing);
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: SEO_DATA.pricing.title,
-  description: SEO_DATA.pricing.description,
-  url: `${VERCEL_URL}${LINKS.pricing}`,
-  dateModified: updatedOn,
-  publisher: { '@type': 'Organization', name: 'Neon' },
-};
-
 const logos = [
   'eqt',
   'openai',
@@ -105,6 +95,14 @@ const faqItems = [
     `,
   },
   {
+    question: 'Does Neon pause Free plan projects when they are inactive?',
+    id: 'free-plan-inactivity',
+    answer: `
+      <p>No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute <a href="${LINKS.docs}/introduction/scale-to-zero">scales to zero</a> after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same.</p>
+      <p>Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer. It resumes at the start of the next billing period, or as soon as you upgrade.</p>
+    `,
+  },
+  {
     question:
       'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
@@ -172,6 +170,30 @@ const faqItems = [
       <p><strong>Object Storage</strong> is $0.023 per GB-month of stored volume. There's no per-operation charge. Egress counts toward your public network transfer allowance. The Free plan includes 5 GB of Object Storage per project.</p>
       <p><strong>Functions</strong> are billed for active compute, waiting compute, and invocations at the rates in the plan table. The Free plan includes 10 active capacity-hours, 400 waiting capacity-hours, and 1 million invocations per project per month.</p>
       <p><strong>AI Gateway</strong> is available on Launch and Scale. Pricing matches the model provider's list prices, with no markup, and draws down prepaid credits. <a href="/docs/ai-gateway/prepaid-credits">Learn how prepaid credits work</a>, or see <a href="/docs/ai-gateway/overview#available-models">per-model rates</a>.</p>
+    `,
+  },
+  {
+    question: 'How much network transfer (egress) is included?',
+    id: 'egress',
+    answer: `
+      <p>Public network transfer is counted per project, not per account:</p>
+      <ul>
+        <li>Free plan: 5 GB per project per month, across up to 100 projects</li>
+        <li>Launch and Scale: 500 GB per project per month, then $0.10 per GB</li>
+      </ul>
+      <p>Each project's allowance is shared by everything in it: Postgres, Object Storage, and Functions. Eligible startups can apply for up to $100k in credits through the <a href="${LINKS.startups}">Startup Program</a>. <a href="${LINKS.docs}/introduction/network-transfer">Learn how to reduce network transfer.</a></p>
+    `,
+  },
+  {
+    question: 'How do Neon costs scale as I add projects or traffic?',
+    id: 'how-costs-scale',
+    answer: `
+      <p>With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds.</p>
+      <ul>
+        <li>Idle databases scale to zero, so you don't pay for compute while they're suspended. Storage is still billed.</li>
+        <li>Autoscaling sizes compute to the load within the limits you set, so you don't pay for peak capacity all month.</li>
+      </ul>
+      <p>This makes Neon cost-efficient for many small databases, such as a database per tenant or per agent, and for intermittent or spiky workloads. For example, 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85 a month in total.</p>
     `,
   },
   {
@@ -261,6 +283,35 @@ const faqItems = [
     `,
   },
 ];
+
+const htmlToText = (html) =>
+  html
+    .replace(/<\/(p|li|h3)>/g, '$& ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: SEO_DATA.pricing.title,
+      description: SEO_DATA.pricing.description,
+      url: `${VERCEL_URL}${LINKS.pricing}`,
+      dateModified: updatedOn,
+      publisher: { '@type': 'Organization', name: 'Neon' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: htmlToText(answer) },
+      })),
+    },
+  ],
+};
 
 const PricingPage = () => (
   <Layout>

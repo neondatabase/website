@@ -108,6 +108,18 @@ Branches above your plan's allowance (10 included on Free/Launch, 25 on Scale) a
 
 Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
 
+### Does Neon pause Free plan projects when they are inactive?
+
+No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute scales to zero after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same. Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer; it resumes at the start of the next billing period, or as soon as you upgrade.
+
+### How much network transfer (egress) is included?
+
+Public network transfer is counted per project, not per account: 5 GB per project per month on Free (across up to 100 projects), and 500 GB per project per month on Launch and Scale, then $0.10/GB. Each project's allowance is shared by Postgres, Object Storage, and Functions. Eligible startups can apply for up to $100k in credits through the [Startup Program](https://neon.com/startups).
+
+### How do Neon costs scale as I add projects or traffic?
+
+With usage, not with instance size or project count. There's no per-project or per-database fee: each project pays for the compute it actually runs (CU-hours) and the storage it holds. Idle databases scale to zero, so you don't pay for compute while they're suspended (storage is still billed), and autoscaling sizes compute to the load within the limits you set. Example: 100 tenant databases on Launch, each running at 0.25 CU for about an hour a day and storing 150 MB, use about 750 CU-hours and 15 GB of storage: roughly $85/month in total.
+
 ### How can I control my costs?
 
 | Action                                                                                           | Effect                                  |
