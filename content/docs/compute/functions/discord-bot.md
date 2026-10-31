@@ -1,14 +1,12 @@
 ---
 title: How to host a Discord bot on Neon Functions
-tag: new
-tagTheme: green
 subtitle: Receive slash commands at a public function URL with no Gateway connection
 summary: >-
   Host a Discord interactions bot on Neon Functions. Receive slash commands over HTTP at a
   public function URL, verify Discord's Ed25519 request signatures, and store data in Postgres
   on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 isDraft: false
 ---
 

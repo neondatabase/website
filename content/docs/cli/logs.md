@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: logs'
-tag: new
-tagTheme: green
 subtitle: Query the logs a branch's services emit
 summary: >-
   The Neon CLI `neon logs` command reads the logs a branch's services emit.
@@ -12,7 +10,7 @@ summary: >-
   available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt),
   and Asia Pacific (Singapore).
 enableTableOfContents: true
-updatedOn: '2026-09-18T04:16:26.638Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
 
 The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
