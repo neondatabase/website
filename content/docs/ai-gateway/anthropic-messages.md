@@ -1,14 +1,12 @@
 ---
 title: Anthropic Messages API
-tag: new
-tagTheme: green
 subtitle: Use the Anthropic SDK with Neon AI Gateway
 summary: >-
   The Anthropic Messages endpoint lets you use the Anthropic SDK with Neon AI
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-10-29T20:50:22.187Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.

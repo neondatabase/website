@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: skills'
-tag: new
-tagTheme: green
 subtitle: 'Install, update, and check Neon agent skills in your coding agents'
 summary: >-
   The Neon CLI `skills` command installs [Neon agent skills](/docs/ai/agent-skills)
@@ -11,7 +9,7 @@ summary: >-
   skills to their latest versions, and `neon skills status` to check whether
   they're current.
 enableTableOfContents: true
-updatedOn: '2026-10-27T02:35:14.797Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
