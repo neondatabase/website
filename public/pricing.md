@@ -57,7 +57,7 @@ Invoices under $0.50 are not collected.
 
 A "-" means the feature is not available on that plan.
 
-All plans include: multi-AZ storage, autoscaling, database branching, read replicas, connection pooling, Postgres extensions (pgvector, PostGIS, TimescaleDB, and more), full management API and CLI, and a Data API for querying over HTTP.
+All plans include: multi-AZ storage (high availability without standbys), autoscaling and scale to zero, database branching (auth, Object Storage, and Functions branch with the database), read replicas, connection pooling (up to 10,000 pooled connections per compute), Postgres extensions (pgvector, PostGIS, TimescaleDB, and more), Managed Better Auth, a Data API for querying over HTTP, Object Storage, Functions, Realtime (beta), and a full management API and CLI. Neon is ISO 27001 and 27701 certified, SOC 2 audited, and GDPR and CCPA compliant; HIPAA is available on Scale.
 
 ## Table clarifications
 
