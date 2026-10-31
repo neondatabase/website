@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-10-22T23:10:00.032Z'
+updatedOn: '2026-10-30T21:10:29.780Z'
 layout: wide
 hideCopyPage: true
 ---
@@ -14,7 +14,7 @@ hideCopyPage: true
 <div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
 <div className="[&>div]:my-0!">
-<p className="mt-0 mb-4 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">One endpoint and one Neon credential for models from many providers, scoped to your branch the same way your data is.</p>
+<p className="mt-0 mb-4 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Add chat, agents, and embeddings to your app through one endpoint and one Neon credential, with models from many providers, scoped to your branch the same way your data is.</p>
 <p className="mt-0 mb-6 max-w-2xl text-sm leading-[1.6] tracking-tight text-gray-new-30 [text-wrap:pretty] dark:text-gray-new-70"><strong className="font-medium text-black-pure dark:text-white">Before you start:</strong> AI Gateway needs a paid Neon plan (<a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/models#pricing">Launch or Scale</a>) with <a className="underline underline-offset-2 hover:text-green-45" href="/docs/ai-gateway/prepaid-credits">prepaid credits</a> ($5 minimum), and a project in AWS US East (Ohio) (<code>aws-us-east-2</code>), AWS US East (N. Virginia) (<code>aws-us-east-1</code>), AWS Europe (Frankfurt) (<code>aws-eu-central-1</code>), or AWS Asia Pacific (Singapore) (<code>aws-ap-southeast-1</code>). Support is expanding toward <a className="underline underline-offset-2 hover:text-green-45" href="/docs/introduction/regions">all regions</a>.</p>
 <AgentPrompt title="Set up with your agent" src="/prompts/ai-gateway-landing.md" buttonText="Copy prompt" />
 </div>
@@ -29,7 +29,7 @@ hideCopyPage: true
 
 ## Available models
 
-Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddings**, and **Decisions** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL; System One decision models get AI SDK, TypeScript, Python, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation), `/typesafe/v1/systemone` for decisions.
+Browse the full catalog below. Switch between the **Text**, **Image**, **Embeddings**, and **Decisions** tabs, filter by lab or open weights, sort any column, and click a model for a copy-paste quickstart. Chat and image models get AI SDK, Mastra, Python, TypeScript, and cURL; embedding models get Python, TypeScript, and cURL; System One decision models get AI SDK, TypeScript, Python, and cURL. The endpoint each snippet targets is baked into its base URL: `/v1` for chat completions and embeddings, `/openai/v1` for the Responses API (image generation), `/typesafe/v1/systemone` for decisions.
 
 <AiGatewayModelIndex/>
 

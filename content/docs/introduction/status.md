@@ -3,13 +3,14 @@ title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
 summary: >-
   The Neon status page (neonstatus.com) reports real-time uptime and incident
-  status for platform components including database connectivity, project/branch
+  status for platform components (database connectivity, project/branch
   operations, Console API, Console Frontend, account creation, login, and the
-  Neon website. Check here to confirm whether an outage is regional, and
+  Neon website) and backend services (Data API, Managed Better Auth, Object
+  Storage, Functions, and AI Gateway). Check here to confirm whether an outage is regional, and
   subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams. Routine
   maintenance and compute updates are not posted here.
 enableTableOfContents: true
-updatedOn: '2026-10-09T10:14:56.146Z'
+updatedOn: '2026-10-30T10:54:04.862Z'
 ---
 
 Real-time uptime and incident status live on the Neon status page, not on this page. Open it to see current platform status and bookmark it for quick access during incidents.
@@ -18,7 +19,9 @@ Real-time uptime and incident status live on the Neon status page, not on this p
 
 To monitor the status for your specific Neon project, check the region where your project is located. You can find your project's region on the **Overview** page in the Neon Console, in the **Project** panel.
 
-The Neon status page tracks the following components:
+The Neon status page tracks the following components. Most are reported per region. Console API, Console Frontend, Account Creation, and Console Login also have a global entry, and the Website is reported globally only.
+
+**Platform**
 
 - **Database Connectivity** – Ability to connect to active Neon database projects via Postgres protocol
 - **Project/Branch Operations** – Operations including project creation, auto-suspend, compute starts, and branch operations
@@ -27,6 +30,16 @@ The Neon status page tracks the following components:
 - **Account Creation** – The signup process at https://console.neon.tech/signup, including team invites
 - **Console Login** – The login process at https://console.neon.tech/login
 - **Website** – The Neon website at https://neon.com/
+
+**Backend services**
+
+- **Data API** – The [Neon Data API](/docs/data-api/overview) HTTP query interface
+- **Managed Better Auth** – [Managed Better Auth](/docs/auth/overview) authentication
+- **Object Storage** – [Neon Object Storage](/docs/storage/overview)
+- **Functions** – [Neon Functions](/docs/compute/functions/overview)
+- **AI Gateway** – [Neon AI Gateway](/docs/ai-gateway/overview)
+
+Backend services are listed only for the regions where they're available.
 
 <Admonition type="note" title="Updates and maintenance notices">
 Neon performs occasional platform maintenance and applies regular updates to your project's computes, but these maintenance activities and updates are not posted to the Neon status page. To stay informed about maintenance operations and updates, watch for notices in the Neon Console and your project settings. See [Maintenance & updates overview](/docs/manage/maintenance-updates-overview) for details.

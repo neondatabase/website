@@ -46,6 +46,7 @@ const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
 const REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -67,6 +68,7 @@ const REQUIRED_KEYS = [
 const EMBEDDING_REQUIRED_KEYS = [
   'id',
   'name',
+  'lab',
   'provider',
   'family',
   'released',
@@ -77,8 +79,8 @@ const EMBEDDING_REQUIRED_KEYS = [
 ];
 /**
  * `type: "decision"` (a System One model: takes a state and questions, returns a choice, a
- * probability, or a score per question) is likewise its own shape: no chat fields or limits,
- * input-only billing, and no `dimensions`.
+ * probability, or a score per question) is likewise its own shape: no chat fields, input-only
+ * billing, and no `dimensions`. It has a context window but no output limit.
  */
 const DECISION_REQUIRED_KEYS = EMBEDDING_REQUIRED_KEYS.filter((key) => key !== 'dimensions');
 const MODEL_TYPES = new Set(['embedding', 'decision']);
@@ -211,7 +213,8 @@ export function classifyDrift(website, modelsDev) {
  * and `dimensions` (the vector length) is the fact that actually describes it.
  *
  * `type: "decision"` (see `DECISION_REQUIRED_KEYS`) is the same idea without `dimensions`: a
- * decision model generates no text, so it has no chat fields or limits and is billed on input only.
+ * decision model generates no text, so it has no chat fields or output limit and is billed on
+ * input only.
  */
 export function validateCatalog(data) {
   const errors = [];
@@ -265,7 +268,7 @@ export function validateCatalog(data) {
         `${at('dimensions')} must be a positive integer, got ${JSON.stringify(model.dimensions)}`
       );
     }
-    for (const field of ['id', 'name', 'provider', 'family']) {
+    for (const field of ['id', 'name', 'lab', 'provider', 'family']) {
       if (
         model[field] !== undefined &&
         (typeof model[field] !== 'string' || model[field].trim() === '')
@@ -311,7 +314,7 @@ export function validateCatalog(data) {
       if (!isPlainObject(model.limit)) {
         fail(`${at('limit')} must be an object`);
       } else {
-        for (const field of REQUIRED_LIMIT_KEYS) {
+        for (const field of model.type === 'decision' ? [] : REQUIRED_LIMIT_KEYS) {
           if (model.limit[field] === undefined) fail(`${at(`limit.${field}`)} is missing`);
         }
         for (const [field, value] of Object.entries(model.limit)) {

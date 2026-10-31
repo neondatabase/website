@@ -15,7 +15,7 @@ hideCopyPage: true
 <div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
 <div className="[&>div]:my-0!">
-<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">S3-style object storage that lives in your backend, so your files branch and fork copy-on-write with your data.</p>
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Store images, video, and user uploads in S3-style object storage that lives in your backend, so your files branch with your data.</p>
 <AgentPrompt title="Set up with your agent" src="/prompts/object-storage-landing.md" buttonText="Copy prompt" />
 </div>
 

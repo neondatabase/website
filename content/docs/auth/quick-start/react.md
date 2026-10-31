@@ -2,7 +2,7 @@
 title: Use Managed Better Auth with React (API methods)
 subtitle: Build your own auth UI
 summary: >-
-  Managed Better Auth with React for Vite apps, using the `@neondatabase/neon-js` SDK's
+  Managed Better Auth with React for Vite apps, using the `@neon/neon-js` SDK's
   programmatic API methods (`signUp()`, `signIn.email()`, `getSession()`) instead
   of pre-built UI components. Use this page when you need full control over your
   own auth UI rather than dropping in ready-made components. Registered users are
@@ -61,7 +61,7 @@ The Neon SDK provides authentication methods like `signUp()`, `getSession()`, an
 
 ```bash filename="Terminal"
 cd my-app
-npm install @neondatabase/neon-js@latest
+npm install @neon/neon-js@latest
 ```
 
 </TwoColumnLayout.Block>
@@ -99,7 +99,7 @@ This quick start uses the standalone Auth client. For one `createClient()` insta
 <TwoColumnLayout.Block>
 
 ```javascript filename="src/auth.js"
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neon/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```

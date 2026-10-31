@@ -6,24 +6,24 @@ summary: >-
   models, which endpoint to use, shorter and longer request paths, the
   /v1/models API, rate limits, pricing, and provider terms.
 enableTableOfContents: true
-updatedOn: '2026-10-29T17:20:24.000Z'
+updatedOn: '2026-10-30T21:10:29.780Z'
 ---
 
 This page covers how to call models through Neon AI Gateway and the rules that apply. For the full list of models you can call, see the [model catalog](https://neon.com/ai-gateway#models).
 
-<CTA title="See every model on Neon AI Gateway" description="Compare every available model by provider, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
+<CTA title="See every model on Neon AI Gateway" description="Compare every available model by lab, inputs, context window, and pricing." buttonText="Browse all models" buttonUrl="https://neon.com/ai-gateway#models" />
 
 Neon AI Gateway serves models from many providers behind one credential. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
-Most models are served through Databricks. Jev is the exception: its provider, TypeSafe AI, hosts it. [Provider terms](#provider-terms) links each provider's terms and notes where hosting differs. Wherever a model is hosted, you're responsible for complying with its provider's terms of use.
+Most models are served through Databricks. Jev is the exception: TypeSafe AI, which made it, also hosts it. [Provider terms](#provider-terms) links each provider's terms and notes where hosting differs. Wherever a model is hosted, you're responsible for complying with its provider's terms of use.
 </Admonition>
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
 
 > AI Gateway is currently available in AWS US East (Ohio) (`aws-us-east-2`), AWS US East (N. Virginia) (`aws-us-east-1`), AWS Europe (Frankfurt) (`aws-eu-central-1`), and AWS Asia Pacific (Singapore) (`aws-ap-southeast-1`). Create your project in one of these regions to use it. Support is expanding toward [all regions](/docs/introduction/regions). It requires a paid Neon plan. See [Pricing](#pricing) for details.
 
-The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon).
+The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon). Each model lists its `lab`, the organization that made it, and its `provider`, the organization that provides it: Databricks for every model except Jev, which TypeSafe AI hosts. Both field names follow models.dev.
 
 Every model in the catalog carries a `released` boolean. `false` marks a model listed ahead of its announcement: it stays in `neon.com/models.json` and `neon.com/models`, and an app that shows a model list should leave it out:
 
@@ -37,17 +37,18 @@ Neon AI Gateway gives you one credential for both open-weight and foundation mod
 
 ## Rate limits
 
-The following limit applies per account:
+The following limits apply per account. Input and output tokens are limited separately:
 
-| Limit                   | Value   |
-| ----------------------- | ------- |
-| Tokens per minute (TPM) | 200,000 |
+| Limit                          | Value   |
+| ------------------------------ | ------- |
+| Input tokens per minute (TPM)  | 200,000 |
+| Output tokens per minute (TPM) | 200,000 |
 
-If you hit the limit, you'll receive a `429 Too Many Requests` response with a message like `ai gateway per-minute token limit exceeded for model "<model-id>"`. Requests resume when the rate limit window resets.
+If you hit the limit, you'll receive a `429 Too Many Requests` response with a message that starts with `You've exceeded your AI Gateway input token limit for model "<model-id>"`. Requests resume when the rate limit window resets.
 
-The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+The TPM limit applies to input tokens and output tokens separately. Each direction has its own limit, so using up your output allowance doesn't use up your input allowance. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
-The 200,000 TPM ceiling is a soft limit. If you need a higher limit, [contact Support](/docs/introduction/support).
+Both 200,000 TPM limits are soft limits. If you need a higher limit, [contact Support](/docs/introduction/support).
 
 A separate account-level daily spend cap also applies and can block AI Gateway requests with a `429` / `REQUEST_LIMIT_EXCEEDED`. It isn't a fixed published number and can vary by account. See [Pricing](#pricing) for details, or [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit it.
 
@@ -82,7 +83,7 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | TypeSafe AI (decision models)                  | `/typesafe/v1/systemone` | No chat completions. Returns answers to questions, not text. See [Decisions](/docs/ai-gateway/decisions) |
 
 <Admonition type="warning" title="Content shape varies by model">
-For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+For most models, `message.content` in a chat completions response is a plain string. For `claude-opus-5-5`, it's an array of typed content blocks once the model reasons (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`); a trivial prompt still returns a string. For `gemini-4-argon`, it's an array of `text` blocks, even for a trivial prompt. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
 
 ```typescript
 // The OpenAI SDK types content as string | null, so read it as unknown.

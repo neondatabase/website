@@ -34,7 +34,7 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 
 ## Enable the OAuth provider
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -51,6 +51,19 @@ Configuration is per branch. Each branch has its own issuer, OAuth clients, and 
 5. Click **Enable**.
 
 You need an MCP server URL or at least one protected resource to enable the provider.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon neon-auth config oauth-server`](/docs/cli/neon-auth#config-oauth-server). Add a protected resource, then enable the server with its login and consent pages, which must be on a [trusted domain](/docs/auth/guides/configure-domains):
+
+```bash shouldWrap
+neon neon-auth config oauth-server resource add https://api.example.com/reports
+neon neon-auth config oauth-server update --enabled --login-page https://app.example.com/login --consent-page https://app.example.com/consent
+```
+
+To protect an MCP server, add `--mcp-resource https://mcp.example.com/mcp`. `neon neon-auth config oauth-server get` shows the current configuration.
 
 </TabItem>
 
@@ -335,7 +348,7 @@ async function respond(accept: boolean) {
 Calls from your pages carry the user's session cookie, so make them with `credentials: 'include'` and add your pages' origins as [trusted domains](/docs/auth/guides/configure-domains). Navigate the browser to the returned `url`. Neither the sign-in nor the consent response is an HTTP redirect.
 
 <Admonition type="tip" title="Use the Neon Auth client">
-If your pages use [`@neondatabase/auth`](/docs/auth/overview) 0.7.0-beta or later (or `@neondatabase/neon-js` 0.9.0-beta or later), the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically. When your login page loads with a session, call `authClient.oauth2.continue({ selected: true })`. On your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above. The client navigates to the returned `url` itself, so don't navigate again.
+If your pages use [`@neon/auth`](/docs/auth/overview) 0.8.0 or later (or `@neon/neon-js` 0.10.0 or later), the client handles `oauth_query` for you. Sign-in requests on your login page attach it automatically. When your login page loads with a session, call `authClient.oauth2.continue({ selected: true })`. On your consent page, `authClient.oauth2.consent({ accept })` replaces the `fetch` call above. The client navigates to the returned `url` itself, so don't navigate again.
 </Admonition>
 
 ## Sign in users to your own apps and APIs
@@ -383,6 +396,8 @@ The `@neon/oauth` SDK (beta) implements this flow for you. `createOAuth()` from 
 
 Managed clients are for resources that clients can't register for themselves. You can also link a managed client to your MCP server resource, which is how you onboard known clients when you turn off CIMD and DCR.
 
+If you work with an AI assistant, the [Neon MCP Server](/docs/ai/neon-mcp-server) can also manage the provider and its clients with the `*_auth_oauth_server` and `*_auth_oauth_client` tools.
+
 <Admonition type="warning" title="Keep the MCP server URL out of the resources list">
 For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and turn off `client_id_metadata_documents` and `dynamic_registration` so that only managed clients can connect. Don't list the MCP server URL under `resources` instead. The refresh-token reuse window (30 seconds) is configured only when `mcp.resource` is set. Without it, an MCP client that refreshes concurrently presents an already-rotated refresh token, and Managed Better Auth revokes that user's refresh tokens for the client.
 </Admonition>
@@ -394,7 +409,7 @@ For an MCP server, set the URL in `mcp.resource` (the **Server URL** field) and 
 
 The type can't be changed after creation. Redirect URIs must match exactly.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -404,6 +419,18 @@ Under the OAuth provider settings, use the **OAuth clients** list:
 - **Edit**: change the name, redirect URIs, resources, **Skip consent**, or **Disabled**. A disabled client can't obtain new tokens.
 - **Rotate secret**: generates a new secret for a confidential client. The previous secret stops working immediately.
 - **Delete**: removes the client.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon neon-auth oauth-client`](/docs/cli/neon-auth#oauth-client). Every resource you link must already be configured on the OAuth provider:
+
+```bash shouldWrap
+neon neon-auth oauth-client create --name "Reports" --type confidential --redirect-uris https://reports.example.com/callback --resources https://api.example.com/reports
+```
+
+For a confidential client, the command prints the client secret only once. Store it before you continue. The `list`, `get`, `update`, `rotate-secret`, and `delete` subcommands manage existing clients.
 
 </TabItem>
 
@@ -482,7 +509,7 @@ Redirect URIs can't contain a fragment or credentials, and they must match exact
 - **Access tokens** are JWTs signed with EdDSA and expire after one hour. The `aud` claim contains the requested resource. The `client_id` claim identifies the client, and `scope` lists the granted scopes.
 - **JWKS** is at `<issuer>/.well-known/jwks.json`.
 - **ID tokens** don't include `name` or `email`. Call the issuer's userinfo endpoint (`<issuer>/oauth2/userinfo`) with the access token to get them.
-- **Disabling a resource** (removing it from the configuration) stops new tokens from being issued for it. Access tokens that were already issued stay valid until they expire.
+- **Disabling a resource** (removing it from the configuration) stops new tokens from being issued for it. Clients stop listing it until you add it back. Access tokens that were already issued stay valid until they expire.
 
 ### Scopes and refresh tokens
 

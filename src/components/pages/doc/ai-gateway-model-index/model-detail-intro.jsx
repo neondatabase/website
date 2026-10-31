@@ -11,19 +11,19 @@ const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
     <div id="about" className="anchor-heading scroll-mt-20" aria-hidden />
     {row.isDecision ? (
       <p>
-        Neon AI Gateway provides {row.name} by {row.providerName}, a System One decision model. It
+        Neon AI Gateway provides {row.name} by {row.labName}, a System One decision model. It
         answers questions about a given state with a choice, a probability, or a score; it does not
         generate text.
       </p>
     ) : row.isEmbedding ? (
       <p>
-        Neon AI Gateway provides {row.name} by {row.providerName}. It returns {row.dimensions}
+        Neon AI Gateway provides {row.name} by {row.labName}. It returns {row.dimensions}
         -dimensional embeddings on <code>POST /v1/embeddings</code>.
       </p>
     ) : row.hasMeasuredCapabilities ? (
       <p>
-        Neon AI Gateway provides {row.name} by {row.providerName}. The model supports{' '}
-        {row.inputsLabel} inputs and a {row.contextLabel} context window.
+        Neon AI Gateway provides {row.name} by {row.labName}. The model supports {row.inputsLabel}{' '}
+        inputs and a {row.contextLabel} context window.
       </p>
     ) : (
       <p>
