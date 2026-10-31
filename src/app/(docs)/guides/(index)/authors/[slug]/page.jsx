@@ -21,6 +21,7 @@ export async function generateMetadata(props) {
   if (!authorsData[params.slug]) return notFound();
   return getMetadata({
     title: `Neon guides by ${authorsData[params.slug].name}`,
+    pathname: `${GUIDES_BASE_PATH}authors/${params.slug}`,
     rssPathname: `${GUIDES_BASE_PATH}rss.xml`,
   });
 }
