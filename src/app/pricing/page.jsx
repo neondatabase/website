@@ -39,14 +39,14 @@ const faqItems = [
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Alongside Lakebase Postgres, every Neon project can use Managed Better Auth, the Data API, Object Storage, Functions, AI Gateway, and Realtime (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
+      <p>Alongside <a href="${LINKS.lakebase}">Lakebase Postgres</a>, every Neon project can use <a href="${LINKS.authPage}">Managed Better Auth</a>, the <a href="${LINKS.dataApi}">Data API</a>, <a href="${LINKS.objectStorage}">Object Storage</a>, <a href="${LINKS.functions}">Functions</a>, <a href="${LINKS.aiGateway}">AI Gateway</a>, and <a href="${LINKS.realtime}">Realtime</a> (in beta). Together they form a backend that runs next to your database: Auth, Object Storage, Functions, and AI Gateway branch with it. AI Gateway is available on Launch and Scale; everything else is on every plan, including Free.</p>
     `,
   },
   {
     question: 'What is a Neon project?',
     id: 'what-is-a-project',
     answer: `
-      <p>A project in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
+      <p>A <a href="${LINKS.docs}/manage/projects">project</a> in Neon is the top-level container for your environment. Each project includes all branches, with your Postgres databases and (if you deploy them) your Object Storage buckets, Functions, Managed Better Auth endpoints, and AI Gateway access.</p>
     `,
   },
   {
@@ -104,7 +104,7 @@ const faqItems = [
         <li>If a project exceeds 1 GB of Postgres storage, or your projects exceed 20 GB in total, operations that increase storage fail until you free space</li>
         <li>Branch creation fails once a project has 10 branches</li>
       </ul>
-      <p>Upgrading to a paid plan lifts these limits immediately.</p>
+      <p>Upgrading to a paid plan lifts these limits immediately. If you'd rather not upgrade yet and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
     `,
   },
   {
@@ -119,7 +119,7 @@ const faqItems = [
     id: 'free-plan-inactivity',
     answer: `
       <p>No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute <a href="${LINKS.docs}/introduction/scale-to-zero">scales to zero</a> after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same.</p>
-      <p>Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer. It resumes at the start of the next billing period, or as soon as you upgrade.</p>
+      <p>Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer. It resumes at the start of the next billing period, or as soon as you upgrade. If you hit these limits and need more room, <a href="${LINKS.contactSales}">reach out to us</a> about credits. We're happy to support developers and startups.</p>
     `,
   },
   {
@@ -292,14 +292,6 @@ const faqItems = [
         <li><a href="${LINKS.docs}/guides/branch-expiration">Use branch expiration.</a> Set automatic deletion times on temporary branches so they're cleaned up when no longer needed.</li>
         <li>Automate cleanup. Use the <a href="${LINKS.docs}/manage/branches#branching-with-the-neon-api">Neon API</a> or <a href="${LINKS.docs}/guides/branching-neon-cli">Neon CLI</a> to periodically delete unused branches and stay within your included allowance.</li>
       </ul>
-    `,
-  },
-  {
-    question: 'How is Managed Better Auth billed?',
-    answer: `
-      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU) per project. If you need more, you can request an increase in the Neon Console.</p>
-      <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU per project.</p>
-      <p>MAU limits apply to each project separately. For example, three projects on the Free plan can each have up to 60,000 MAU.</p>
     `,
   },
   {

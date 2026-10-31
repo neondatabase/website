@@ -106,11 +106,11 @@ Branches above your plan's allowance (10 included on Free/Launch, 25 on Scale) a
 
 ### What happens when I hit Free plan limits?
 
-The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately.
+The Free plan is permanent, not a trial, and doesn't require a credit card. Most limits are per project. Running out of CU-hours or egress (5 GB) suspends compute until the next billing period. Exceeding 1 GB of Postgres storage in a project, or 20 GB total across all your projects, blocks writes. Hitting 10 branches blocks branch creation. None of these limits delete your data. Upgrade to lift any limit immediately. If you'd rather not upgrade yet and need more room, [reach out to us](https://neon.com/contact-sales) about credits; we're happy to support developers and startups.
 
 ### Does Neon pause Free plan projects when they are inactive?
 
-No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute scales to zero after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same. Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer; it resumes at the start of the next billing period, or as soon as you upgrade.
+No. Neon doesn't pause Free projects for inactivity, and there's no restore step. When a database is idle, its compute scales to zero after 5 minutes and starts again on the next query, typically within a few hundred milliseconds. Your project, data, and connection string stay the same. Compute is suspended only if a project uses up its monthly 100 CU-hours or 5 GB of network transfer; it resumes at the start of the next billing period, or as soon as you upgrade. If you hit these limits and need more room, [reach out to us](https://neon.com/contact-sales) about credits; we're happy to support developers and startups.
 
 ### How much network transfer (egress) is included?
 
