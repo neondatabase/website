@@ -8,7 +8,7 @@ summary: >-
   cost-tracking tooling. Plan-specific rates, transfer allowances, and
   granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-08-11T23:11:30.998Z'
+updatedOn: '2026-10-31T12:33:31.190Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -17,14 +17,16 @@ It applies to **Launch**, **Scale**, **Agent**, and **Enterprise** plans. Consum
 
 ## Fetch your usage
 
-The [consumption history endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
+The [consumption history endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) returns per-project, per-day (or per-hour, or per-month) usage for the metrics you request.
 
 ```sh
 curl "https://console.neon.tech/api/v2/consumption_history/v2/projects?\
 org_id=${ORG_ID}&from=2026-03-01T00:00:00Z&to=2026-04-01T00:00:00Z&\
 granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,\
 child_branch_bytes_month,instant_restore_bytes_month,snapshot_storage_bytes_month,\
-extra_branches_month,public_network_transfer_bytes,private_network_transfer_bytes&\
+extra_branches_month,public_network_transfer_bytes,private_network_transfer_bytes,\
+functions_active_capacity_microseconds,functions_waiting_capacity_microseconds,\
+functions_invocations,functions_egress_bytes&\
 limit=100" \
   -H "Authorization: Bearer ${NEON_API_KEY}"
 ```
@@ -37,18 +39,22 @@ Required parameters: `org_id`, `from`, `to`, `granularity`, `metrics`. Optional:
 The older `/consumption_history/projects` endpoint returns different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
 </Admonition>
 
-## Billable metrics
+## Usage metrics and units
 
-| API metric name                  | What it measures                                                                                                                                                                           | Raw unit     | Billing unit  |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------------- |
-| `compute_unit_seconds`           | CPU time weighted by compute size                                                                                                                                                          | CU-seconds   | CU-hours      |
-| `root_branch_bytes_month`        | Storage on root branches                                                                                                                                                                   | byte-months  | GB-months     |
-| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                                                                                                                              | byte-months  | GB-months     |
-| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                                                                                                                                    | byte-months  | GB-months     |
-| `snapshot_storage_bytes_month`   | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-months  | GB-months     |
-| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                                                                                                                             | bytes        | GB            |
-| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)                                                                                                           | bytes        | GB            |
-| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)                                                                                                                       | branch-hours | branch-months |
+| API metric name                           | What it measures                                                                                                                                                                           | Raw unit              | Converted unit      |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | ------------------- |
+| `compute_unit_seconds`                    | CPU time weighted by compute size                                                                                                                                                          | CU-seconds            | CU-hours            |
+| `root_branch_bytes_month`                 | Storage on root branches                                                                                                                                                                   | byte-months           | GB-months           |
+| `child_branch_bytes_month`                | Storage on child branches (delta from parent)                                                                                                                                              | byte-months           | GB-months           |
+| `instant_restore_bytes_month`             | Instant restore (point-in-time recovery / PITR) history                                                                                                                                    | byte-months           | GB-months           |
+| `snapshot_storage_bytes_month`            | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-months           | GB-months           |
+| `public_network_transfer_bytes`           | Outbound (egress) data over the public network                                                                                                                                             | bytes                 | GB                  |
+| `private_network_transfer_bytes`          | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)                                                                                                           | bytes                 | GB                  |
+| `extra_branches_month`                    | All child branches per hour (subtract plan allowance before billing)                                                                                                                       | branch-hours          | branch-months       |
+| `functions_active_capacity_microseconds`  | Time Functions spend actively using CPU                                                                                                                                                    | capacity-microseconds | Capacity-Hours      |
+| `functions_waiting_capacity_microseconds` | Time Functions spend waiting on I/O                                                                                                                                                        | capacity-microseconds | Capacity-Hours      |
+| `functions_invocations`                   | Number of function calls                                                                                                                                                                   | invocations           | million invocations |
+| `functions_egress_bytes`                  | Data sent by Functions                                                                                                                                                                     | bytes                 | GB                  |
 
 A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumulates 2 CU-seconds for every wall-clock second it runs.
 
@@ -56,35 +62,44 @@ A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumula
 
 Neon uses decimal gigabytes (1 GB = 10^9 bytes), not gibibytes, and a fixed billing period of **744 hours** (31 x 24), regardless of actual month length.
 
-| From         | To                              | Formula                                |
-| ------------ | ------------------------------- | -------------------------------------- |
-| CU-seconds   | CU-hours                        | `value / 3600`                         |
-| byte-months  | GB-months (billing unit)        | `value / 1000000000`                   |
-| byte-hours   | GB-months (legacy field)        | `value / 744 / 1000000000`             |
-| byte-hours   | average GB (what Console shows) | `value / hours_in_period / 1000000000` |
-| bytes        | GB                              | `value / 1000000000`                   |
-| branch-hours | branch-months                   | `value / 744`                          |
+| From                  | To                              | Formula                                |
+| --------------------- | ------------------------------- | -------------------------------------- |
+| CU-seconds            | CU-hours                        | `value / 3600`                         |
+| byte-months           | GB-months (billing unit)        | `value / 1000000000`                   |
+| byte-hours            | GB-months (legacy field)        | `value / 744 / 1000000000`             |
+| byte-hours            | average GB (what Console shows) | `value / hours_in_period / 1000000000` |
+| bytes                 | GB                              | `value / 1000000000`                   |
+| branch-hours          | branch-months                   | `value / 744`                          |
+| capacity-microseconds | Capacity-Hours                  | `value / 3600000000`                   |
+| invocations           | million invocations             | `value / 1000000`                      |
 
 The v2 storage metrics (`root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`) are reported in **byte-months**: the underlying byte-hours already divided by 744, so converting to GB-months divides by `1000000000` only. The byte-hours rows above apply to the legacy `GET /projects/{project_id}` field `data_storage_bytes_hour`, which is raw byte-hours.
 
 For "average GB," `hours_in_period` is the number of hours between your `from` and `to` timestamps.
 
+Use the capacity-microseconds conversion for both active and waiting Functions capacity. Convert `functions_egress_bytes` with the same bytes-to-GB formula used for other byte metrics.
+
 ## Calculating your cost
 
-Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs/introduction/plans) for current pricing):
+For priced metrics, sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs/introduction/plans) for current pricing):
 
-| Metric           | Formula                           | Launch       | Scale        |
-| ---------------- | --------------------------------- | ------------ | ------------ |
-| Compute          | CU-hours x rate                   | $0.106/CU-hr | $0.222/CU-hr |
-| Root storage     | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
-| Child storage    | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
-| Instant restore  | GB-months x rate                  | $0.20/GB-mo  | $0.20/GB-mo  |
-| Snapshots        | GB-months x rate                  | $0.09/GB-mo  | $0.09/GB-mo  |
-| Public transfer  | max(0, org_total_GB - 500) x rate | $0.10/GB     | $0.10/GB     |
-| Private transfer | GB x rate                         | n/a          | $0.01/GB     |
-| Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
+| Metric                | Formula                         | Launch               | Scale               |
+| --------------------- | ------------------------------- | -------------------- | ------------------- |
+| Compute               | CU-hours x rate                 | $0.106/CU-hr         | $0.222/CU-hr        |
+| Root storage          | GB-months x rate                | $0.35/GB-mo          | $0.35/GB-mo         |
+| Child storage         | GB-months x rate                | $0.35/GB-mo          | $0.35/GB-mo         |
+| Instant restore       | GB-months x rate                | $0.20/GB-mo          | $0.20/GB-mo         |
+| Snapshots             | GB-months x rate                | $0.09/GB-mo          | $0.09/GB-mo         |
+| Public transfer       | max(0, project_GB - 500) x rate | $0.10/GB             | $0.10/GB            |
+| Private transfer      | GB x rate                       | n/a                  | $0.01/GB            |
+| Extra branches        | branch-months x rate            | $1.50/mo             | $1.50/mo            |
+| Functions active      | Capacity-Hours x rate           | $0.10/Capacity-Hour  | $0.12/Capacity-Hour |
+| Functions waiting     | Capacity-Hours x rate           | $0.025/Capacity-Hour | $0.03/Capacity-Hour |
+| Functions invocations | millions of invocations x rate  | $0.60/million        | $0.60/million       |
 
 Agent plan rates match Scale except compute, which is billed at $0.106/CU-hr (the Launch rate). Enterprise rates match Scale, and Enterprise plans may include custom negotiated pricing.
+
+For current Functions pricing and Free plan allowances, see [Plans](/docs/introduction/plans#functions).
 
 ### Example: compute
 
@@ -137,7 +152,7 @@ Repeat for each day in the billing period and sum the billable branch-hours acro
 
 On paid plans, each project receives a 500 GB free allowance. Subtract the allowance from each project's public transfer, then sum the billable usage:
 
-```
+```text
 billable GB per project = max(0, project_GB - 500)
 total cost = sum(billable_GB per project) x $0.10
 ```
@@ -156,13 +171,13 @@ These limits are measured from the current server time, not from billing period 
 
 ## Reconciling your bill
 
-Neon sends a weekly usage email that includes per-metric costs. You can also check charges to date on the [Billing page](/docs/introduction/monitor-usage#billing-page) in the Console. Those costs are calculated using the same formulas described above: raw API values converted to billing units, multiplied by the plan rate, with allowances subtracted where applicable.
+Neon sends a weekly usage email that includes per-metric costs. You can also check charges to date on the [Billing page](/docs/introduction/monitor-usage#billing-page) in the Console. For the priced metrics listed above, those costs are calculated using the same formulas: raw API values converted to billing units, multiplied by the plan rate, with allowances subtracted where applicable.
 
 To reconcile the numbers yourself:
 
 1. Fetch consumption history for the billing month (`from` = month start, `to` = month end or current date).
-2. Sum each metric across all projects.
-3. Convert to billing units using the formulas above.
+2. Sum each priced metric across all projects.
+3. Convert the priced metrics to billing units using the formulas above.
 4. Apply the 500 GB public transfer allowance and branch allowance to each project.
 5. Multiply by your plan's rates.
 
@@ -220,4 +235,4 @@ Each branch in the response includes a `logical_size` field (bytes). Sum across 
 
 ### Free plan limits
 
-See the [Neon Free plan docs](/docs/introduction/plans#free-plan) for current limits. Exceeding them suspends compute or blocks creation. There are no costs on the Free plan.
+See the [Neon Free plan docs](/docs/introduction/plans#plan-overview) for current limits. Exceeding them suspends compute or blocks creation. There are no costs on the Free plan.
