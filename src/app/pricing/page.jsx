@@ -13,7 +13,7 @@ import getPricingUpdatedOn from 'utils/get-pricing-updated-on';
 
 const updatedOn = getPricingUpdatedOn();
 
-export const metadata = getMetadata({ ...SEO_DATA.pricing, modifiedTime: updatedOn });
+export const metadata = getMetadata(SEO_DATA.pricing);
 
 const jsonLd = {
   '@context': 'https://schema.org',
