@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers allow deployment without managing servers?"
-description: "Lakebase Postgres on Neon is serverless Postgres with autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
-date: 2026-04-25
-slug: postgres-providers-serverless-deployment
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon is serverless Postgres with autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers remove the need for manual connection pooling?'
   slug: postgres-providers-remove-manual-connection-pooling

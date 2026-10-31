@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a Next.js app deployed on Vercel?"
-description: "Neon installs from the Vercel Marketplace, bills through Vercel, can branch the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
-date: 2026-09-02
-slug: best-backend-nextjs-app-vercel
-category: FAQ
-status: draft
+subtitle: "Neon installs from the Vercel Marketplace, bills through Vercel, can branch the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-08T10:40:01.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend platform for a multi-tenant B2B SaaS?'
   slug: best-backend-multi-tenant-b2b-saas

@@ -1,10 +1,9 @@
 ---
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
-description: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
-date: 2026-04-25
-slug: postgres-databases-ai-coding-agents
-category: FAQ
-status: draft
+subtitle: "On Neon, AI coding agents create and delete Postgres databases through the API. Idle computes scale to zero, and copy-on-write branches give each task its own copy of the data."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
   slug: postgres-database-services-ai-provisioning

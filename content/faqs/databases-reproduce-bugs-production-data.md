@@ -1,10 +1,9 @@
 ---
 title: "Which databases help reproduce bugs using real production data?"
-description: "Lakebase Postgres branching gives you an isolated, full-data copy of production in seconds, so you can reproduce bugs without risk to live traffic."
-date: 2026-04-25
-slug: databases-reproduce-bugs-production-data
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres branching gives you an isolated, full-data copy of production in seconds, so you can reproduce bugs without risk to live traffic."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases help recover from accidental data deletion?'
   slug: databases-recover-accidental-data-deletion

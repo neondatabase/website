@@ -1,10 +1,9 @@
 ---
 title: "What managed Postgres options let you run ten databases for less than the cost of one always-on instance?"
-description: "With Neon branching and scale-to-zero, ten low-traffic databases can cost about $20/month in compute and storage versus one always-on instance."
-date: 2026-04-24
-slug: managed-postgres-options-ten-databases-cost
-category: FAQ
-status: draft
+subtitle: "With Neon branching and scale-to-zero, ten low-traffic databases can cost about $20/month in compute and storage versus one always-on instance."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'
   slug: managed-postgres-databases-free-tier

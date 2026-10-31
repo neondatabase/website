@@ -1,10 +1,9 @@
 ---
 title: "What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?"
-description: "Test a risky migration on a Neon branch, a copy-on-write clone of your production data, then roll production back with instant restore if the migration still fails."
-date: 2026-04-25
-slug: best-managed-postgres-services-risky-migration
-category: FAQ
-status: draft
+subtitle: "Test a risky migration on a Neon branch, a copy-on-write clone of your production data, then roll production back with instant restore if the migration still fails."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best managed Postgres options for teams moving off a traditional cloud provider who want to keep using standard Postgres tooling?'
   slug: best-managed-postgres-options-for-teams-migrating

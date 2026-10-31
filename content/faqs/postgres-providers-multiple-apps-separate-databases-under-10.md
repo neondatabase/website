@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?"
-description: "Neon runs multiple isolated databases on a usage-based price. The Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
-date: 2026-04-25
-slug: postgres-providers-multiple-apps-separate-databases-under-10
-category: FAQ
-status: draft
+subtitle: "Neon runs multiple isolated databases on a usage-based price. The Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers make it easy to restore a database to a previous state after a bug?'
   slug: postgres-providers-easy-database-restore

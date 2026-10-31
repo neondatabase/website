@@ -1,10 +1,9 @@
 ---
 title: "What are the best managed Postgres options for teams moving off a traditional cloud provider who want to keep using standard Postgres tooling?"
-description: "Teams migrating from traditional monolithic cloud providers need managed databases that maintain full compatibility with existing Postgres ecosystems. Neon..."
-date: 2026-04-25
-slug: best-managed-postgres-options-for-teams-migrating
-category: FAQ
-status: draft
+subtitle: 'Lakebase Postgres on Neon is standard Postgres to your app: the same wire protocol, connection strings, extensions, and tools like psql and pg_dump. Most migrations move the data and change the connection string.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?'
   slug: best-managed-postgres-options-developers

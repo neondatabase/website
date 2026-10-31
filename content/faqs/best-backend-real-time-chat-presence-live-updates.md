@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a real-time app with chat, presence, or live updates?"
-description: "Neon Realtime makes any SQL query live on Postgres, with type-safe reactivity and no second realtime system. For custom protocols, Neon Functions host WebSocket and server-sent event servers next to your data."
-date: 2026-09-02
-slug: best-backend-real-time-chat-presence-live-updates
-category: FAQ
-status: draft
+subtitle: "Neon Realtime makes any SQL query live on Postgres, with type-safe reactivity and no second realtime system. For custom protocols, Neon Functions host WebSocket and server-sent event servers next to your data."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-20T17:05:31.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend platform for a Python app built with Django or FastAPI?'
   slug: best-backend-python-django-fastapi

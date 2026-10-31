@@ -1,10 +1,9 @@
 ---
 title: "What Postgres tools support both Edge functions and Node backends?"
-description: "The Neon serverless driver works in Edge runtimes over HTTP and in Node over HTTP or WebSockets, with a drop-in Pool/Client API compatible with node-postgres."
-date: 2026-04-25
-slug: postgres-tools-edge-functions-node-backends
-category: FAQ
-status: draft
+subtitle: "The Neon serverless driver works in Edge runtimes over HTTP and in Node over HTTP or WebSockets, with a drop-in Pool/Client API compatible with node-postgres."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?'
   slug: postgres-tools-avoid-breaking-staging-database

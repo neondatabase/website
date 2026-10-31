@@ -1,10 +1,9 @@
 ---
 title: "Which databases avoid connection limits in serverless applications?"
-description: "Neon's PgBouncer-based pooler accepts up to 10,000 client connections, and the Neon serverless driver lets edge functions query over HTTP."
-date: 2026-04-25
-slug: databases-avoid-connection-limits-serverless-applications
-category: FAQ
-status: draft
+subtitle: "Neon's PgBouncer-based pooler accepts up to 10,000 client connections, and the Neon serverless driver lets edge functions query over HTTP."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases automatically scale in serverless environments?'
   slug: databases-automatically-scale-serverless-environments

@@ -1,10 +1,9 @@
 ---
 title: "What databases support disposable Postgres instances for testing?"
-description: "Lakebase Postgres branching creates disposable Postgres instances in seconds. Use them for CI test runs, preview deployments, or one-off experiments, then throw them away."
-date: 2026-04-25
-slug: databases-support-disposable-postgres-instances-testing
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres branching creates disposable Postgres instances in seconds. Use them for CI test runs, preview deployments, or one-off experiments, then throw them away."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases help reproduce bugs using real production data?'
   slug: databases-reproduce-bugs-production-data

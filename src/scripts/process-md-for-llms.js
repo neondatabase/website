@@ -2328,13 +2328,18 @@ async function processFile(inputPath, pageUrl, rootDir) {
   if (frontmatter.subtitle) {
     output += `${frontmatter.subtitle}\n\n`;
   }
+
+  const relativeInputPath = rootDir
+    ? path.relative(rootDir, inputPath).split(path.sep).join('/')
+    : inputPath.split(path.sep).join('/');
+  const isFaq = relativeInputPath.startsWith('content/faqs/');
+  if (isFaq && frontmatter.updatedOn) {
+    output += `Last updated: ${new Date(frontmatter.updatedOn).toISOString().slice(0, 10)}\n\n`;
+  }
   output += `${markdown.trim()}\n`;
 
   // docs/changelog.md is a dynamic page in the app router. To provide useful
   // markdown for AI agents, append all dated changelog entries here.
-  const relativeInputPath = rootDir
-    ? path.relative(rootDir, inputPath).split(path.sep).join('/')
-    : inputPath.split(path.sep).join('/');
   if (relativeInputPath === 'content/docs/changelog.md') {
     output += `\n${await buildAggregatedChangelogMarkdown(rootDir)}`;
   }
@@ -2345,7 +2350,11 @@ async function processFile(inputPath, pageUrl, rootDir) {
   // Non-breaking spaces are web typography only, so agents get plain spaces
   output = normalizeNonBreakingSpaces(output);
 
-  return { content: output, title: frontmatter.title || null };
+  return {
+    content: output,
+    title: frontmatter.title || null,
+    summary: isFaq ? frontmatter.subtitle || null : null,
+  };
 }
 
 /**
@@ -2639,7 +2648,7 @@ function stripNavigationContext(content) {
 
 /**
  * Process a directory recursively.
- * Returns an array of { title, url } for every page written (used to build route indexes).
+ * Returns an array of { title, url, summary } for every page written (used to build route indexes).
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, stats = null) {
   const entries = await fs.readdir(inputDir, { withFileTypes: true });
@@ -2663,13 +2672,17 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir, st
       await ensureOutputDirectory(path.dirname(outputPath), stats);
 
       try {
-        const { content, title } = await processFile(inputPath, pageUrl, rootDir);
+        const { content, title, summary } = await processFile(inputPath, pageUrl, rootDir);
         const withNav = addNavigationContext(content, relativePath, navigationMap);
         await fs.writeFile(outputPath, withNav);
         stats && (stats.filesWritten += 1);
         logFileProcessed(`✓ ${relativePath}`);
         if (pageUrl) {
-          pages.push({ title: title || path.basename(entry.name, '.md'), url: `${pageUrl}.md` });
+          pages.push({
+            title: title || path.basename(entry.name, '.md'),
+            url: `${pageUrl}.md`,
+            summary,
+          });
         }
       } catch (error) {
         console.error(`✗ ${relativePath}: ${error.message}`);
@@ -2717,7 +2730,9 @@ async function generateRouteIndex(route, pages, outputDir, stats = null) {
     '',
     '## All pages',
     '',
-    ...pages.map(({ title, url }) => `- [${title}](${url})`),
+    ...pages.map(
+      ({ title, url, summary }) => `- [${title}](${url})${summary ? `: ${summary}` : ''}`
+    ),
     '',
   ];
 

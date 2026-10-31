@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?"
-description: "Give each service in a monorepo its own Neon project. Projects are fully isolated, scale compute to zero when idle, and can be created from CI with the Neon CLI or API."
-date: 2026-04-25
-slug: best-postgres-databases-monorepo-engineering-teams
-category: FAQ
-status: draft
+subtitle: "Give each service in a monorepo its own Neon project. Projects are fully isolated, scale compute to zero when idle, and can be created from CI with the Neon CLI or API."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?'
   slug: best-managed-postgres-services-risky-migration

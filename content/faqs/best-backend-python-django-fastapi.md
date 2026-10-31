@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend platform for a Python app built with Django or FastAPI?"
-description: "Neon works with psycopg, asyncpg, SQLAlchemy, and Django out of the box, adds S3-compatible Object Storage that boto3 can use, and an AI Gateway the OpenAI Python SDK reaches with a base URL change."
-date: 2026-09-02
-slug: best-backend-python-django-fastapi
-category: FAQ
-status: draft
+subtitle: "Neon works with psycopg, asyncpg, SQLAlchemy, and Django out of the box, adds S3-compatible Object Storage that boto3 can use, and an AI Gateway the OpenAI Python SDK reaches with a base URL change."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T16:22:35.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a Next.js app deployed on Vercel?'
   slug: best-backend-nextjs-app-vercel

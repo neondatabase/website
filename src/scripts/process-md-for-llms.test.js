@@ -1,9 +1,12 @@
 import fs from 'fs/promises';
+import os from 'os';
+import path from 'path';
 
 import { describe, it, expect, vi } from 'vitest';
 
 import {
   processFile,
+  generateRouteIndex,
   buildNavigationMap,
   buildNavigationFooter,
   buildPageHeader,
@@ -1245,5 +1248,51 @@ describe('CLI reference components', () => {
     // Nested subtrees flatten to full invocations
     expect(result).toContain('neon buckets object list');
     expect(result).not.toContain('<CliCommandIndex');
+  });
+});
+
+describe('FAQ markdown', () => {
+  it('adds the last updated date and returns the subtitle as the summary', async () => {
+    const { content, summary } = await processFile(
+      'content/faqs/change-project-region.md',
+      'https://neon.com/faqs/change-project-region',
+      process.cwd()
+    );
+
+    expect(content).toContain(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+    expect(content).toContain('Last updated: 2026-09-23');
+    expect(summary).toBe(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+  });
+
+  it('leaves docs pages without a last updated line or summary', async () => {
+    const { content, summary } = await processFile(
+      'content/docs/guides/prisma.md',
+      'https://neon.com/docs/guides/prisma',
+      process.cwd()
+    );
+
+    expect(content).not.toContain('Last updated:');
+    expect(summary).toBeNull();
+  });
+
+  it('lists each page summary in the route index', async () => {
+    const outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'faqs-index-'));
+    await generateRouteIndex(
+      'faqs',
+      [
+        { title: 'Can I change regions?', url: 'https://neon.com/faqs/a.md', summary: 'No.' },
+        { title: 'No summary', url: 'https://neon.com/faqs/b.md', summary: null },
+      ],
+      outputDir
+    );
+
+    const index = await fs.readFile(path.join(outputDir, 'faqs.md'), 'utf-8');
+    expect(index).toContain('- [Can I change regions?](https://neon.com/faqs/a.md): No.');
+    expect(index).toContain('- [No summary](https://neon.com/faqs/b.md)\n');
+    await fs.rm(outputDir, { recursive: true, force: true });
   });
 });

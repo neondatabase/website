@@ -1,10 +1,9 @@
 ---
 title: "Which tools allow using Postgres without managing infrastructure?"
-date: 2026-04-25
-description: "Managed and serverless Postgres options like Neon, AWS Aurora Serverless, and Supabase remove the need to provision, patch, or scale servers yourself."
-slug: tools-for-serverless-postgres-infrastructure
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Managed and serverless Postgres options like Neon, AWS Aurora Serverless, and Supabase remove the need to provision, patch, or scale servers yourself."
 previousLink:
   title: 'What tools allow restoring a database to before a bug occurred?'
   slug: tools-for-restoring-database-before-bug

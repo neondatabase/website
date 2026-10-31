@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a React or Vite single-page app with no server of its own?"
-description: "Neon lets a browser-only app sign users in with Managed Better Auth and query Postgres through the Data API with Row-Level Security, so a static React or Vite front end has a full backend without writing an API."
-date: 2026-09-02
-slug: best-backend-single-page-app-react-vite-no-server
-category: FAQ
-status: draft
+subtitle: "Neon lets a browser-only app sign users in with Managed Better Auth and query Postgres through the Data API with Row-Level Security, so a static React or Vite front end has a full backend without writing an API."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a side project that should cost almost nothing when nobody is using it?'
   slug: best-backend-side-project-scale-to-zero

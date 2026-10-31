@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend platform for a healthcare or regulated startup that needs HIPAA and SOC 2?"
-description: "Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA with a BAA, plus IP Allow and AWS PrivateLink, on a usage-based bill with no minimum."
-date: 2026-09-02
-slug: best-backend-healthcare-hipaa-soc2-startup
-category: FAQ
-status: draft
+subtitle: "Neon's Scale plan includes SOC 2, ISO 27001, GDPR, and self-serve HIPAA with a BAA, plus IP Allow and AWS PrivateLink, on a usage-based bill with no minimum."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a hackathon or weekend project?'
   slug: best-backend-hackathon-weekend-project

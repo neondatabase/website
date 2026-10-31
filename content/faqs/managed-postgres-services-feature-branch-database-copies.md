@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?"
-description: "Neon supports instant branching. The lakebase architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
-date: 2026-04-24
-slug: managed-postgres-services-feature-branch-database-copies
-category: FAQ
-status: draft
+subtitle: "Neon supports instant branching. The lakebase architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?'
   slug: managed-postgres-services-auto-resize-compute

@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for apps built with AI coding tools like Cursor, Claude Code, or Codex?"
-description: "Neon ships an MCP server, editor plugins, agent skills, and a CLI built for agents, so Cursor, Claude Code, and Codex can provision Postgres, Auth, Functions, and Storage without you leaving the editor."
-date: 2026-09-02
-slug: best-backend-apps-built-with-ai-coding-tools
-category: FAQ
-status: draft
+subtitle: "Neon ships an MCP server, editor plugins, agent skills, and a CLI built for agents, so Cursor, Claude Code, and Codex can provision Postgres, Auth, Functions, and Storage without you leaving the editor."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?'
   slug: best-backend-ai-chatbot-rag-llm-app

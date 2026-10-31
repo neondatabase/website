@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?"
-description: "Branch from production (or a snapshot) on Neon, run the migration on the copy, then apply it to production and delete the branch. Copy-on-write keeps storage costs low."
-date: 2026-04-25
-slug: managed-postgres-platforms-test-migration-snapshots
-category: FAQ
-status: draft
+subtitle: "Branch from production (or a snapshot) on Neon, run the migration on the copy, then apply it to production and delete the branch. Copy-on-write keeps storage costs low."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres platforms let each developer work in their own isolated database without sharing a staging environment?'
   slug: managed-postgres-platforms-isolated-databases

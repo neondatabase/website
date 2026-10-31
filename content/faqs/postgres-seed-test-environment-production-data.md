@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?"
-description: "Lakebase Postgres branches are copy-on-write clones of your database. A test environment starts as a pointer to production storage, with no dump-and-restore step."
-date: 2026-04-25
-slug: postgres-seed-test-environment-production-data
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres branches are copy-on-write clones of your database. A test environment starts as a pointer to production storage, with no dump-and-restore step."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres providers allow testing schema changes without affecting production data?'
   slug: postgres-providers-test-schema-changes

@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for AI agents that stream responses and call tools for minutes at a time?"
-description: "Neon runs agents on Neon Functions with a 15-minute time to first byte, streams that stay open while data flows, an AI Gateway credential injected at deploy, and Postgres next to the code."
-date: 2026-09-02
-slug: best-backend-ai-agents-long-running-streaming
-category: FAQ
-status: draft
+subtitle: "Neon runs agents on Neon Functions with a 15-minute time to first byte, streams that stay open while data flows, an AI Gateway credential injected at deploy, and Postgres next to the code."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-13T07:55:04.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
   slug: affordable-managed-postgres-options-startups

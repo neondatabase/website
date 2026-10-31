@@ -1,9 +1,9 @@
 ---
 title: "What are the best ways to give every developer on a team their own separate Postgres database for development?"
-date: 2026-04-25
-slug: best-ways-separate-postgres-database-development
-category: FAQ
-status: draft
+subtitle: 'Give each developer a Neon branch: a copy-on-write clone with the parent''s schema and data that only adds storage as data changes, created on demand from the Console, CLI, or API.'
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best Postgres setup for serverless APIs?'
   slug: best-postgres-setup-serverless-apis

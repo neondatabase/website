@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?"
-description: "Neon branching creates a copy-on-write fork of your database for each pull request in seconds. CI can create and delete branches through the API, the CLI, or a GitHub Action."
-date: 2026-04-24
-slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
-category: FAQ
-status: draft
+subtitle: "Neon branching creates a copy-on-write fork of your database for each pull request in seconds. CI can create and delete branches through the API, the CLI, or a GitHub Action."
+createdAt: '2026-04-24T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?'
   slug: best-postgres-databases-vibe-coding-platforms

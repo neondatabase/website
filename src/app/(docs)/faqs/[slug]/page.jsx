@@ -28,7 +28,7 @@ export async function generateMetadata(props) {
   if (!post) return notFound();
 
   const {
-    data: { title, subtitle },
+    data: { title, subtitle, createdAt, updatedOn },
   } = post;
 
   const encodedTitle = Buffer.from(title).toString('base64');
@@ -41,6 +41,8 @@ export async function generateMetadata(props) {
     rssPathname: null,
     type: 'article',
     category: 'FAQs',
+    publishedTime: createdAt,
+    modifiedTime: updatedOn,
   });
 }
 
@@ -58,11 +60,21 @@ const FaqPost = async (props) => {
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: data.title,
-    author: {
+    '@type': 'FAQPage',
+    url: `${VERCEL_URL}${LINKS.faqs}/${slug}`,
+    datePublished: data.createdAt,
+    dateModified: data.updatedOn,
+    publisher: {
       '@type': 'Organization',
       name: 'Neon',
+    },
+    mainEntity: {
+      '@type': 'Question',
+      name: data.title,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: data.subtitle,
+      },
     },
   };
 

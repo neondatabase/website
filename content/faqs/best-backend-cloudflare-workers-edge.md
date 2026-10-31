@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a Cloudflare Workers app or other edge runtime?"
-description: "Neon connects to Cloudflare Workers through Hyperdrive or the Neon serverless driver over HTTP, exposes a PostgREST-compatible Data API for connectionless queries, and pools up to 10,000 client connections per compute."
-date: 2026-09-02
-slug: best-backend-cloudflare-workers-edge
-category: FAQ
-status: draft
+subtitle: "Neon connects to Cloudflare Workers through Hyperdrive or the Neon serverless driver over HTTP, exposes a PostgREST-compatible Data API for connectionless queries, and pools up to 10,000 client connections per compute."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T12:40:10.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a Discord, Telegram, or WhatsApp bot?'
   slug: best-backend-chat-bots-discord-telegram-whatsapp

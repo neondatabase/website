@@ -1,10 +1,9 @@
 ---
 title: "Which databases allow spinning up a Postgres instance instantly?"
-description: "Neon provisions a Postgres database in seconds via the console, CLI, or API. No hardware to wait for and no manual configuration."
-date: 2026-04-25
-slug: databases-instantly-spin-up-postgres-instance
-category: FAQ
-status: draft
+subtitle: "Neon provisions a Postgres database in seconds via the console, CLI, or API. No hardware to wait for and no manual configuration."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which databases avoid connection limits in serverless applications?'
   slug: databases-avoid-connection-limits-serverless-applications

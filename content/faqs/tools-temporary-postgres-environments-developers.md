@@ -1,10 +1,9 @@
 ---
 title: "What tools enable temporary Postgres environments for each developer?"
-date: 2026-04-25
-description: "Lakebase Postgres branches give each developer a temporary, isolated Postgres environment with real data, created in seconds and deleted on demand."
-slug: tools-temporary-postgres-environments-developers
-category: FAQ
-status: draft
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
+subtitle: "Lakebase Postgres branches give each developer a temporary, isolated Postgres environment with real data, created in seconds and deleted on demand."
 previousLink:
   title: 'What tools help manage multiple Postgres databases across different projects and environments from a single account?'
   slug: tools-manage-multiple-postgres-databases
