@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: plugins'
-tag: new
-tagTheme: green
 subtitle: 'Install the Neon plugin into coding agents that support plugin marketplaces'
 summary: >-
   The Neon CLI `plugins` command installs the `neon-postgres` plugin into

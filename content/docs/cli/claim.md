@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: claim'
-tag: new
-tagTheme: green
 subtitle: Create and claim a temporary Neon project without an account
 summary: >-
   The Neon CLI `claim` command (`neon claimable` is an alias) creates a

@@ -1,7 +1,5 @@
 ---
 title: Grok Bot plugin for Neon
-tag: new
-tagTheme: green
 summary: >-
   Connect Neon to Grok Bot so you can create projects, work with branches and
   run SQL from chat.

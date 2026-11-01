@@ -1,13 +1,11 @@
 ---
 title: How to host a Telegram bot on Neon Functions
-tag: new
-tagTheme: green
 subtitle: Receive Telegram messages, run bot commands and store data in Postgres
 summary: >-
   Host a Telegram bot on Neon Functions. Receive webhook updates, run bot commands, verify the
   webhook secret token, and store data in Postgres on the same branch.
 enableTableOfContents: true
-updatedOn: '2026-09-17T21:40:25.774Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 isDraft: false
 ---
 
