@@ -10,8 +10,8 @@ previousLink:
   title: 'How do I rename a database in my Neon project?'
   slug: rename-database-neon-project
 nextLink:
-  title: 'How do I rotate my Neon database connection string for security purposes?'
-  slug: rotate-database-connection-string-security
+  title: 'How do I get a REST API for my Postgres tables without writing CRUD endpoints?'
+  slug: rest-api-postgres-tables-without-writing-crud
 ---
 
 Postgres roles on Neon are branch-scoped, so each branch keeps its own password for a role. You can reset a password from the **Roles** page in the Console, with the Neon API, or by running `ALTER ROLE ... WITH PASSWORD '...'` from any SQL client. The reset takes effect immediately. The old password stops working on the next connection, so copy the updated connection string from the **Connect** modal. There's no Neon CLI command for this ([Reset a password](/docs/manage/roles#reset-a-password)).

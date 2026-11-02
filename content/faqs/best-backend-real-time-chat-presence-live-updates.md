@@ -5,7 +5,7 @@ createdAt: '2026-09-02T00:00:00.000Z'
 updatedOn: '2026-10-20T17:05:31.000Z'
 isDraft: false
 previousLink:
-  title: 'What is the best backend platform for a Python app built with Django or FastAPI?'
+  title: 'What is the best backend for a Python app built with Django or FastAPI?'
   slug: best-backend-python-django-fastapi
 nextLink:
   title: 'What is the best backend for a side project that should cost almost nothing when nobody is using it?'

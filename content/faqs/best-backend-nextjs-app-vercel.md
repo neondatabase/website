@@ -2,13 +2,13 @@
 title: "What is the best backend for a Next.js app deployed on Vercel?"
 subtitle: "Neon installs from the Vercel Marketplace, bills through Vercel, can branch the database for every Preview Deployment, and adds Auth, Object Storage, and long-running Functions when route handlers aren't enough."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-08T10:40:01.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'What is the best backend platform for a multi-tenant B2B SaaS?'
+  title: 'What is the best backend for a multi-tenant B2B SaaS?'
   slug: best-backend-multi-tenant-b2b-saas
 nextLink:
-  title: 'What is the best backend platform for a Python app built with Django or FastAPI?'
+  title: 'What is the best backend for a Python app built with Django or FastAPI?'
   slug: best-backend-python-django-fastapi
 ---
 
@@ -29,6 +29,10 @@ Serverless Route Handlers can open many short-lived connections at once, so use 
 ## Auth that follows the branch
 
 Managed Better Auth has a Next.js server SDK: two files give you `auth.handler()` on an API route and session access in Server Components ([Next.js quick start](/docs/auth/quick-start/nextjs-api-only)). Users and sessions live in the `neon_auth` schema, so when a Preview Deployment gets its own branch it gets its own auth state too, and you can test sign-up flows with real data in a preview ([branching authentication](/docs/auth/branching-authentication)).
+
+## Live updates
+
+For screens that should update on their own, such as a feed, an unread count, or a shared board, [Realtime](/docs/realtime/overview) (public beta) makes any read-only SQL query live. You seal the query in a Server Component or Route Handler, and the browser subscribes to the Live SQL API, so your Vercel functions don't hold connections open. The [Next.js example](/docs/realtime/examples/nextjs) covers SSR and Managed Better Auth. Realtime is free during the beta and available in AWS US East (Ohio), US East (N. Virginia), Europe (Frankfurt), and Asia Pacific (Singapore) ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions)).
 
 ## When a route handler isn't enough
 

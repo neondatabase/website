@@ -2,14 +2,14 @@
 title: "What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?"
 subtitle: "Neon's Vercel integration creates a database branch per preview deployment. Use GitHub Actions for the same flow on Netlify."
 createdAt: '2026-04-25T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'How do I import data from a CSV file into my Neon database?'
   slug: import-csv-into-database
 nextLink:
-  title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'
-  slug: managed-postgres-databases-free-tier
+  title: 'How do I keep LLM API keys out of preview deployments and CI?'
+  slug: keep-llm-api-keys-out-of-preview-deployments-ci
 ---
 
 Branch the production database per preview deployment, point the preview's `DATABASE_URL` at the branch, and clean up the branch when the PR closes. On Neon, creating a branch is a single API call, and the [Vercel integration](/docs/guides/vercel-overview) automates the whole flow.
@@ -48,6 +48,18 @@ The action outputs a `db_url` that you can pass to Netlify as a deploy environme
 ```
 
 See [Branching with GitHub Actions](/docs/guides/branching-github-actions).
+
+## Give the preview the rest of the backend too
+
+A preview often needs more than a database: uploads, background jobs, sign-in, model calls. On Neon, a branch carries the whole backend. Postgres and [Object Storage](/docs/storage/overview) branch copy-on-write, and each branch runs its own [Functions](/docs/compute/functions/overview) at their own URLs and gets its own Managed Better Auth environment, [Data API](/docs/data-api/overview) URL, and [AI Gateway](/docs/ai-gateway/overview) endpoint ([Branch your whole backend](/docs/get-started/backend-overview#branch-your-whole-backend)). A preview can upload, delete, and sign up test users without touching production files or accounts.
+
+Both Vercel integrations provision Managed Better Auth on preview branches automatically when it's enabled on your production branch ([Vercel-Managed](/docs/guides/vercel-managed-integration), [Neon-Managed](/docs/guides/neon-managed-vercel-integration)). For services declared in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy` against the preview branch in CI. Without a terminal, pass `-y` so it applies without prompting ([`neon deploy`](/docs/cli/deploy)):
+
+```bash
+neon deploy --branch preview-pr-123 -y
+```
+
+Object Storage, Functions, and AI Gateway are available in four AWS regions today, and AI Gateway requires a paid plan ([backend overview](/docs/get-started/backend-overview)).
 
 ## What it costs
 

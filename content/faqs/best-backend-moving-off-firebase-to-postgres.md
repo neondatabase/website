@@ -1,14 +1,14 @@
 ---
 title: "What is the best backend for teams moving off Firebase who want Postgres?"
-subtitle: "Neon replaces Firestore with Postgres, Firebase Auth with Managed Better Auth or a bring-your-own JWT provider, Cloud Storage with S3-compatible Object Storage, and Cloud Functions with Neon Functions, with a migration guide for the data."
+subtitle: "Neon replaces Firestore with Postgres, Firebase Auth with Managed Better Auth or a bring-your-own JWT provider, Cloud Storage with S3-compatible Object Storage, Cloud Functions and their triggers with Neon Functions and Function Triggers, and realtime listeners with Realtime (public beta), with a migration guide for the data."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-09-23T21:17:23.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a mobile app (iOS, Android, React Native, or Flutter)?'
   slug: best-backend-mobile-app-ios-android
 nextLink:
-  title: 'What is the best backend platform for a multi-tenant B2B SaaS?'
+  title: 'What is the best backend for a multi-tenant B2B SaaS?'
   slug: best-backend-multi-tenant-b2b-saas
 ---
 
@@ -16,13 +16,16 @@ Neon, if you're leaving because you want SQL. Firestore is a NoSQL document data
 
 ## What maps to what
 
-| Firebase piece  | On Neon                                                                                                                                                    |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Firestore       | Postgres, with the [Firebase migration guide](/docs/import/migrate-from-firebase) for moving collections into tables                                       |
-| Firebase Auth   | [Managed Better Auth](/docs/auth/overview), or keep Firebase Auth and let the [Data API](/docs/data-api/custom-authentication-providers) validate its JWTs |
-| Cloud Storage   | [Object Storage](/docs/storage/overview), S3-compatible                                                                                                    |
-| Cloud Functions | [Neon Functions](/docs/compute/functions/overview), Node.js 24                                                                                             |
-| Client SDK      | [`@neondatabase/neon-js`](/docs/reference/javascript-sdk) for Auth and Data API, or any Postgres driver server-side                                        |
+| Firebase piece               | On Neon                                                                                                                                                                     |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Firestore                    | Postgres, with the [Firebase migration guide](/docs/import/migrate-from-firebase) for moving collections into tables                                                        |
+| Firestore realtime listeners | [Realtime](/docs/realtime/overview) (public beta), live SQL queries including joins and aggregates. No Row-Level Security support yet, so authorize queries in your backend |
+| Firebase Auth                | [Managed Better Auth](/docs/auth/overview), or keep Firebase Auth and let the [Data API](/docs/data-api/custom-authentication-providers) validate its JWTs                  |
+| Cloud Storage                | [Object Storage](/docs/storage/overview), S3-compatible                                                                                                                     |
+| Cloud Functions              | [Neon Functions](/docs/compute/functions/overview), Node.js 24                                                                                                              |
+| Cloud Storage triggers       | A `storage_object_created` [Function Trigger](/docs/compute/functions/triggers/object-storage), optionally scoped to a key prefix                                           |
+| Scheduled functions          | A scheduled [Function Trigger](/docs/compute/functions/triggers/schedule), five-field cron in UTC, fires even when the compute has scaled to zero                           |
+| Client SDK                   | [`@neon/neon-js`](/docs/reference/javascript-sdk) for Managed Better Auth and Data API, or any Postgres driver server-side                                                  |
 
 ## Move the data in stages
 
@@ -35,7 +38,7 @@ Test the cutover on a branch. A Neon branch is a copy-on-write clone of its pare
 You don't have to migrate identity on day one. The Data API validates JWTs from any provider that issues them, and RLS policies read the token's `sub` claim with `auth.user_id()` ([access control](/docs/data-api/access-control)). Point it at Firebase Auth's JWKS URL ([custom providers](/docs/data-api/custom-authentication-providers)), keep your users signed in, and move to Managed Better Auth later if you want to.
 
 <Admonition type="tip" title="Pricing">
-Neon bills compute in CU-hours and storage in GB-months, not per read or write ([plans](/docs/introduction/plans)). A 0.25 CU compute (≈1 GB RAM) active 200 hours a month is 50 CU-hours × $0.106 = $5.30 on Launch plus $0.35/GB-month of storage. Compute drops to $0 while suspended; storage continues to bill.
+Neon bills compute in CU-hours and storage in GB-months, not per read or write ([plans](/docs/introduction/plans)). A 0.25 CU compute (≈1 GB RAM) active 200 hours a month is 50 CU-hours × $0.106 = $5.30 on Launch plus $0.35/GB-month of storage. You don't pay for compute while it's suspended; storage continues to bill.
 </Admonition>
 
 ## How other options compare

@@ -7,8 +7,8 @@ updatedOn: '2026-09-23T21:00:25.204Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'What are the limits and quotas for Neon''s Free plan?'
-  slug: free-plan-limits-and-quotas
+  title: 'How do I test login and OAuth in preview environments?'
+  slug: how-to-test-login-oauth-preview-environments
 nextLink:
   title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
   slug: isolated-postgres-databases-preview-deployments-vercel-netlify

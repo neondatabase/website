@@ -2,7 +2,7 @@
 title: "What is the best backend for a React or Vite single-page app with no server of its own?"
 subtitle: "Neon lets a browser-only app sign users in with Managed Better Auth and query Postgres through the Data API with Row-Level Security, so a static React or Vite front end has a full backend without writing an API."
 createdAt: '2026-09-02T00:00:00.000Z'
-updatedOn: '2026-10-01T14:57:15.000Z'
+updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
   title: 'What is the best backend for a side project that should cost almost nothing when nobody is using it?'
@@ -16,10 +16,10 @@ Neon. A single-page app can't connect to Postgres directly; browsers don't speak
 
 ## One client for auth and data
 
-`@neondatabase/neon-js` handles sign-in and queries, injecting the session token automatically:
+`@neon/neon-js` handles sign-in and queries, injecting the session token automatically:
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient } from '@neon/neon-js';
 
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
 
@@ -35,27 +35,18 @@ The API is PostgREST-compatible, so filters, ordering, and joins follow PostgRES
 
 ## Security lives in the database
 
-There's no separate permission layer to configure. The Data API selects a Postgres role from the token (`authenticated`, or `anonymous` for public data) and enforces RLS policies you write in SQL, using `auth.user_id()` to read the token's `sub` claim ([access control](/docs/data-api/access-control)). RLS is required on every table the Data API exposes, which is what makes it safe to call from a browser ([Row-Level Security](/docs/guides/row-level-security)).
+There's no separate permission layer to configure. The Data API selects a Postgres role from the token (`authenticated`, or `anonymous` for public data) and enforces RLS policies you write in SQL, using `auth.user_id()` to read the token's `sub` claim ([access control](/docs/data-api/access-control)). Because those grants and policies are the only thing between the browser and your tables, enable RLS on every table you expose: a table without a policy is readable by any signed-in user ([get started](/docs/data-api/get-started), [Row-Level Security](/docs/guides/row-level-security)). The [Data API advisors](/docs/data-api/database-advisor) scan the exposed schema and flag missing RLS, security definer views, and other misconfigurations before you ship.
 
-Managed Better Auth ships drop-in components:
+For sign-in screens, Managed Better Auth works with [Better Auth UI](/docs/auth/reference/ui-components). The shadcn CLI copies the components into your app so you can edit them:
 
-```tsx
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
-
-export default function App() {
-  return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" />
-    </NeonAuthUIProvider>
-  );
-}
+```bash
+npx shadcn@latest add @better-auth-ui/auth
 ```
 
-The [React quick start](/docs/auth/quick-start/react) covers the API-method version if you want your own UI, and [TanStack Router](/docs/auth/quick-start/tanstack-router) has one with components.
+Then wrap the app in the copied `AuthProvider`, pass it your `@neon/auth` client, and render `<Auth view="signIn" />` ([basic usage](/docs/auth/about#basic-usage)). The [React quick start](/docs/auth/quick-start/react) covers the API-method version if you want your own UI, and [TanStack Router](/docs/auth/quick-start/tanstack-router) has one with components.
 
-<Admonition type="note" title="Client versions">
-The single-URL `createClient(url)` form requires `@neondatabase/neon-js` 0.7.0-beta or later. With 0.6.2-beta or earlier, use the object form in the [JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
+<Admonition type="note" title="Package names">
+`@neon/neon-js` is the current name of the package previously published as `@neondatabase/neon-js` ([generate types](/docs/data-api/generate-types)). Better Auth UI replaces the deprecated `@neondatabase/auth-ui`, and apps that already use it keep working ([UI components](/docs/auth/reference/ui-components)).
 </Admonition>
 
 ## When you need server logic anyway
