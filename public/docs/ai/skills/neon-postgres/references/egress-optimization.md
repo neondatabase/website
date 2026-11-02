@@ -1,27 +1,3 @@
----
-name: neon-postgres-egress-optimizer
-description: >-
-  Diagnose and fix excessive Postgres egress (network data transfer) in a codebase.
-  Use when a user mentions high database bills, unexpected data transfer costs,
-  network transfer charges, egress spikes, "why is my Neon bill so high",
-  "database costs jumped", SELECT * optimization, query overfetching,
-  reduce Neon costs, optimize database usage, or wants to reduce data sent
-  from their database to their application. Also use when reviewing query
-  patterns for cost efficiency, even if the user doesn't explicitly mention
-  egress or data transfer.
-metadata:
-  parent: neon
-  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres-egress-optimizer
----
-
-**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
-
-If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
-
-```bash
-neon skills -s neon -y
-```
-
 # Postgres Egress Optimizer
 
 Guide the user through diagnosing and fixing application-side query patterns that cause excessive data transfer (egress) from their Postgres database. Most high egress bills come from the application fetching more data than it uses.
@@ -44,13 +20,13 @@ If this errors, the extension needs to be created:
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-On Neon the extension is available by default, but it may still need this CREATE EXTENSION step.
+On Neon the extension is available by default, but it may still need this CREATE EXTENSION step. Ask before creating it because installing an extension modifies the database.
 
 ### Handle empty stats
 
 Stats are cleared when a Neon compute scales to zero and restarts. If the stats are empty or the compute recently woke up:
 
-1. Reset the stats to start a clean measurement window: `SELECT pg_stat_statements_reset();`
+1. Ask before resetting the stats, then start a clean measurement window with `SELECT pg_stat_statements_reset();`
 2. Let the application run under representative traffic for at least an hour.
 3. Return and run the diagnostic queries below.
 
@@ -223,7 +199,7 @@ After applying fixes:
 
 1. **Run existing tests** to confirm nothing broke.
 2. **Check the responses** — make sure the API still returns the same data shape. Column selection and pagination changes can break clients that depend on specific fields or full result sets.
-3. **Measure the improvement** — if pg_stat_statements data is available, reset it (`SELECT pg_stat_statements_reset();`), let traffic run, then re-run the diagnostic queries to compare before and after.
+3. **Measure the improvement** — if pg_stat_statements data is available, ask before resetting it (`SELECT pg_stat_statements_reset();`), let traffic run, then re-run the diagnostic queries to compare before and after.
 
 ## Neon Infrastructure as Code (`neon.ts`)
 

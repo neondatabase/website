@@ -1,27 +1,3 @@
----
-name: neon-postgres-branches
-description: >-
-  Choose and create the right Neon branch type for testing and development.
-  Use when users ask about Neon branching, migration testing with real data,
-  isolated test environments, schema-only branch workflows for sensitive data,
-  resetting a branch from its parent, branch expiration and CI/CD branch
-  lifecycles, or branch creation via Neon CLI or Neon MCP. Triggers include
-  "Neon branch", "test migrations safely", "branch production data",
-  "schema-only branch", "reset branch", "branch per PR" and
-  "sensitive data testing".
-metadata:
-  parent: neon
-  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres-branches
----
-
-**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
-
-If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
-
-```bash
-neon skills -s neon -y
-```
-
 # Lakebase Postgres Branching
 
 **Outcome:** a created Neon branch — or a clear, actionable next step if creation cannot proceed. Choose the correct branch type, then execute branch creation with the CLI (or MCP where the CLI isn't usable).
