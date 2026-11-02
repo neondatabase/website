@@ -18,8 +18,8 @@ const {
   getLanguagesForMode,
 } = require('../components/pages/doc/ai-gateway-model-index/model-examples');
 const modelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
+const { agentHeaderLines } = require('../constants/agent-directives');
 
-const BASE_URL = 'https://neon.com';
 const FEEDBACK_URL = 'https://feedback.neon.tech/';
 
 const getModelFilename = (modelId) => `${encodeURIComponent(modelId)}.md`;
@@ -86,7 +86,7 @@ const renderModelDetailMarkdown = (row, examplesByMode) => {
 
   return [
     `> This page location: AI Gateway > Models > ${row.name}`,
-    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    ...agentHeaderLines(),
     '',
     `# ${row.name}`,
     '',
