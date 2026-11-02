@@ -1581,12 +1581,14 @@
                   slug: guides/exograph
                 - title: Grafbase
                   slug: guides/grafbase
+                  tag: deprecated
                 - title: Hasura
                   slug: guides/hasura
                 - title: PostgREST
                   slug: guides/postgrest
                 - title: WunderGraph
                   slug: guides/wundergraph
+                  tag: deprecated
             - title: Replicate from Neon
               items:
                 - title: Airbyte
