@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
+import LastUpdatedDate from 'components/shared/doc-footer/last-updated-date';
 import { cn } from 'utils/cn';
 
 import Item from './item';
@@ -14,6 +15,7 @@ const variants = {
       'xl:w-[288px] xl:text-[36px] lg:w-full md:text-[28px]'
     ),
     items: null,
+    date: 'text-gray-new-60 dark:text-gray-new-60',
   },
   light: {
     section:
@@ -24,6 +26,7 @@ const variants = {
       'xl:w-84 xl:text-[3rem] lg:w-full md:text-[2.5rem]'
     ),
     items: '-mt-4 lg:mt-0',
+    date: 'text-gray-new-40 dark:text-gray-new-40',
     containerSize: '1152',
   },
   lakebase: {
@@ -34,13 +37,20 @@ const variants = {
       'xl:w-88 xl:text-[4rem] lg:w-full lg:max-w-144 md:text-[2.75rem]'
     ),
     items: 'mt-1 max-w-224 lg:mt-0 lg:max-w-none',
+    date: 'text-gray-new-60 dark:text-gray-new-60',
     containerSize: '1600',
   },
 };
 
 const DEFAULT_TITLE_LINES = ['Your questions,', 'answered'];
 
-const Faq = ({ items, titleLines = DEFAULT_TITLE_LINES, variant = 'default', className }) => {
+const Faq = ({
+  items,
+  titleLines = DEFAULT_TITLE_LINES,
+  variant = 'default',
+  className,
+  updatedOn = null,
+}) => {
   const resolvedVariant = variants[variant] ? variant : 'default';
   const styles = variants[resolvedVariant];
 
@@ -52,11 +62,16 @@ const Faq = ({ items, titleLines = DEFAULT_TITLE_LINES, variant = 'default', cla
           {titleLines[1]}
           {resolvedVariant === 'lakebase' ? '.' : null}
         </h2>
-        <ul className={cn('flex w-full flex-col', styles.items)}>
-          {items.map((item, index) => (
-            <Item {...item} key={item.question} index={index} variant={resolvedVariant} />
-          ))}
-        </ul>
+        <div className="w-full">
+          <ul className={cn('flex w-full flex-col', styles.items)}>
+            {items.map((item, index) => (
+              <Item {...item} key={item.question} index={index} variant={resolvedVariant} />
+            ))}
+          </ul>
+          {updatedOn && (
+            <LastUpdatedDate className={cn('mt-8', styles.date)} updatedOn={updatedOn} />
+          )}
+        </div>
       </Container>
     </section>
   );
@@ -74,6 +89,7 @@ Faq.propTypes = {
   titleLines: PropTypes.arrayOf(PropTypes.string),
   variant: PropTypes.oneOf(Object.keys(variants)),
   className: PropTypes.string,
+  updatedOn: PropTypes.string,
 };
 
 export default Faq;

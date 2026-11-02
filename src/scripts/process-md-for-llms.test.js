@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import os from 'os';
 import path from 'path';
 
+import matter from 'gray-matter';
 import { describe, it, expect, vi } from 'vitest';
 
 import {
@@ -1268,15 +1269,28 @@ describe('FAQ markdown', () => {
     );
   });
 
-  it('leaves docs pages without a last updated line or summary', async () => {
+  it('adds the last updated date to docs pages but no summary', async () => {
+    const { data } = matter(await fs.readFile('content/docs/guides/prisma.md', 'utf-8'));
     const { content, summary } = await processFile(
       'content/docs/guides/prisma.md',
       'https://neon.com/docs/guides/prisma',
       process.cwd()
     );
 
-    expect(content).not.toContain('Last updated:');
+    expect(content).toContain(
+      `Last updated: ${new Date(data.updatedOn).toISOString().slice(0, 10)}`
+    );
     expect(summary).toBeNull();
+  });
+
+  it('leaves pages without updatedOn without a last updated line', async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'no-updated-on-'));
+    const file = path.join(dir, 'page.md');
+    await fs.writeFile(file, '---\ntitle: No date\n---\n\nBody.\n');
+
+    const { content } = await processFile(file, 'https://neon.com/docs/page', dir);
+
+    expect(content).not.toContain('Last updated:');
   });
 
   it('lists each page summary in the route index', async () => {

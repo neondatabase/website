@@ -189,7 +189,7 @@ const renderPlatformFooter = (links) => {
 
   return [renderBackedBy(backedBy), renderCta(cta, links)].join('\n\n');
 };
-const renderPageHeader = ({ pageLabel, hero }) =>
+const renderPageHeader = ({ pageLabel, hero, updatedOn }) =>
   [
     `> This page location: ${pageLabel}`,
     `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
@@ -197,6 +197,7 @@ const renderPageHeader = ({ pageLabel, hero }) =>
     `# ${hero.title}`,
     '',
     hero.label,
+    ...(updatedOn ? ['', `Last updated: ${updatedOn}`] : []),
     '',
     `**Diagram:** ${hero.illustrationDescription}`,
   ].join('\n');
