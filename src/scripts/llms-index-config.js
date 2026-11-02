@@ -452,9 +452,12 @@ module.exports = {
       url: 'https://neon.com/postgresql/tutorial',
       description: 'Comprehensive PostgreSQL tutorial and reference',
     },
+    // Links the /guides.md listing (every guide as .md) so agents can reach the guides.
+    // Not /guides/llms.txt: site search follows every llms.txt linked from this index and
+    // would pull the guides into the docs catalog. A .md link is indexed as one page.
     guides: {
       title: 'Community Guides',
-      url: 'https://neon.com/guides',
+      url: 'https://neon.com/guides.md',
       description: 'Step-by-step tutorials for frameworks and tools',
     },
     faqs: {

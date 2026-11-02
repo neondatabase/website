@@ -4,7 +4,6 @@ subtitle: Move your application from the Vercel Postgres SDK to the Neon serverl
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedAt: '2024-10-28T00:00:00.000Z'
 updatedOn: '2026-10-08T10:40:01.000Z'
 ---
 

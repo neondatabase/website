@@ -95,6 +95,12 @@ describe('generateIndexText — Common tasks', () => {
   });
 });
 
+describe('collapsed Community Guides entry', () => {
+  it('links the /guides.md listing, not the HTML page or the guides llms.txt', () => {
+    expect(config.collapsedRoutes.guides.url).toBe('https://neon.com/guides.md');
+  });
+});
+
 describe('generateUnlinkedIndexText', () => {
   it('lists markdown urls without linking the parent docs index', () => {
     const text = generateUnlinkedIndexText(

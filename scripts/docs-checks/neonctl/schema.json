@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "8.15.0",
+  "neonctlVersion": "8.16.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2191,7 +2191,7 @@
               "describe": "Point a domain you already own at a function on the branch"
             }
           },
-          "describe": "Manage custom domains on the branch (beta)"
+          "describe": "Manage custom domains on the branch"
         },
         "get": {
           "name": "get",
