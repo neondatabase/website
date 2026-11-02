@@ -2,15 +2,18 @@
 name: neon-postgres
 description: >-
   Guides and best practices for working with Lakebase Postgres on Neon:
-  connections, pooled vs direct, schema migrations, branching, autoscaling,
+  connections, pooled vs direct, schema migrations, branching (including
+  schema-only, reset-from-parent, and branch-per-PR workflows), autoscaling,
   scale-to-zero, instant restore, read replicas, IP allow lists, logical
-  replication, and Lakebase Search. Use when the work is an existing
-  DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth, files,
-  Functions, and LLM calls go to the parent `neon` skill. Live queries, reactive
-  UIs, and realtime data go to `neon-realtime`. Also use for
-  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db",
-  "semantic search", "vector search", "full-text search", "BM25", or
-  "hybrid search".
+  replication, egress optimization, and Lakebase Search. Use when the work is
+  an existing DATABASE_URL, SQL, schema, inspect, or search. New backends, Auth,
+  files, Functions, and LLM calls go to the parent `neon` skill. Live queries,
+  reactive UIs, and realtime data go to `neon-realtime`. Also use for
+  "@neondatabase/serverless", "@neon/neon-js", "neon inspect db", "Neon
+  branch", "schema-only branch", "reset branch", "branch per PR", high database
+  bills, network transfer or egress, SELECT * optimization, query overfetching,
+  "semantic search", "vector search", "full-text search", "BM25", or "hybrid
+  search".
 metadata:
   parent: neon
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres
@@ -89,17 +92,19 @@ Key points:
 
 Link: https://neon.com/docs/introduction/branching.md
 
-For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill. If it isn't installed, fetch it from https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md or install it with:
-
-```bash
-neon skills -s neon-postgres-branches -y
-```
+For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection, and CI/CD patterns), read [Branching workflows](references/branching.md).
 
 ## Migrations
 
 Test a migration on a branch of production, against production-like data, before applying it to production.
 
 Use a **direct (non-pooled)** connection string when you run the migration, not a pooled one. `neon connection-string` returns the direct string by default; make sure the hostname does not include the `-pooler` suffix.
+
+## Egress Optimization
+
+Use this when a user reports high database bills, unexpected network transfer, egress spikes, query overfetching, or wants a cost-efficiency review of database query patterns.
+
+Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops. Read [Egress optimization](references/egress-optimization.md) for the full workflow.
 
 ## Troubleshooting and Neon-Specific Performance
 
