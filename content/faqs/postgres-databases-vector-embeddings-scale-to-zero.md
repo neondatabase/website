@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres databases support vector embeddings and can scale to zero between inference requests?"
-description: "Lakebase Postgres on Neon runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity, so idle time between inference requests accrues no compute charges. Storage still bills."
-date: 2026-04-25
-slug: postgres-databases-vector-embeddings-scale-to-zero
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity, so idle time between inference requests accrues no compute charges. Storage still bills."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres databases work natively in edge environments where you cannot hold open TCP connections?'
   slug: postgres-databases-edge-environments-no-tcp-connections

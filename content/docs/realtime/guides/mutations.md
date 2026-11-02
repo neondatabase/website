@@ -4,6 +4,7 @@ subtitle: 'Make apps and agents super fast, with instant local writes.'
 summary: >-
   Write through your own backend, return the transaction id, apply the change optimistically and drop the optimistic state once the change arrives on the live query. Without a framework, with React useOptimistic or with TanStack DB.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 Apply instant local writes using [optimistic mutations](#how-optimistic-mutations-work) that [automatically discard their optimistic state](#automatic-management-of-optimistic-state) when the changes [sync in through your live&nbsp;query subscriptions](./subscribing#listen-for-changes).

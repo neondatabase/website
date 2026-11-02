@@ -16,6 +16,7 @@ import fairPricingImage from 'images/pages/ai-gateway/gateway-benefits/fair-pric
 import simplifiedBillingImage from 'images/pages/ai-gateway/gateway-benefits/simplified-billing.jpg';
 import unifiedAccessImage from 'images/pages/ai-gateway/gateway-benefits/unified-access.jpg';
 import getMetadata from 'utils/get-metadata';
+import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 const ITEM_IMAGES = {
   'unified-access': unifiedAccessImage,
@@ -25,8 +26,17 @@ const ITEM_IMAGES = {
 
 export const metadata = getMetadata(SEO_DATA.aiGateway);
 
+const jsonLd = getWebPageJsonLd({
+  ...SEO_DATA.aiGateway,
+  updatedOn: aiGatewayPageContent.updatedOn,
+});
+
 const AiGatewayPage = () => (
   <BackendPlatformPage>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <BackendHero
       className="hero relative pt-40"
       content={aiGatewayPageContent.hero}
@@ -46,6 +56,7 @@ const AiGatewayPage = () => (
     />
     <Compatibility />
     <Faq
+      updatedOn={aiGatewayPageContent.updatedOn}
       items={aiGatewayPageContent.faqItems}
       titleLines={sharedBackendPlatformContent.faqTitleLines}
       variant="light"

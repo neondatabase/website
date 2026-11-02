@@ -15,13 +15,23 @@ import {
 } from 'constants/backend-platform-page-content';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
+import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 export const metadata = getMetadata(SEO_DATA.functions);
 
 export const revalidate = 3600;
 
+const jsonLd = getWebPageJsonLd({
+  ...SEO_DATA.functions,
+  updatedOn: functionsPageContent.updatedOn,
+});
+
 const FunctionsPage = () => (
   <BackendPlatformPage>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
     <BackendHero
       className="bg-black-pure pt-[146px] pb-20 text-white xl:pt-[122px] lg:pt-[98px] md:pt-24 md:pb-16"
       content={functionsPageContent.hero}
@@ -40,6 +50,7 @@ const FunctionsPage = () => (
       <TemplatesPreview />
     </Suspense>
     <Faq
+      updatedOn={functionsPageContent.updatedOn}
       items={functionsPageContent.faqItems}
       titleLines={sharedBackendPlatformContent.faqTitleLines}
       variant="light"

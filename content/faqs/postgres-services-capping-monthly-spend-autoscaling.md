@@ -1,10 +1,9 @@
 ---
 title: "What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?"
-description: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, per-project consumption quotas, and organization-level spending notifications."
-date: 2026-04-25
-slug: postgres-services-capping-monthly-spend-autoscaling
-category: FAQ
-status: draft
+subtitle: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, per-project consumption quotas, and organization-level spending notifications."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
   slug: postgres-services-built-in-connection-pooling

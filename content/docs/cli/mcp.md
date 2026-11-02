@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: mcp'
-tag: new
-tagTheme: green
 subtitle: 'Install the Neon MCP Server into your coding agents'
 summary: >-
   The Neon CLI `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server)
@@ -10,6 +8,7 @@ summary: >-
   install. It handles the server URL, authentication, and which tools each agent
   gets.
 enableTableOfContents: true
+updatedOn: '2026-11-01T14:46:44.000Z'
 ---
 
 The `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server) into your coding agents by writing their MCP config for you. It points each agent at the hosted server (`https://mcp.neon.tech/mcp`), sets up authentication, and can narrow which tools the agent sees.
@@ -42,7 +41,7 @@ To install without minting a key, pass `--oauth`. This writes the server URL onl
 
 Without `--agent`, the interactive command detects installed agents and lets you pick from them. In non-interactive mode, `-y` installs into every detected agent. Pass `--agent <name>` (repeatable) to name agents explicitly and skip the picker.
 
-The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `codex`, `cursor`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `mcporter`, `opencode`, `vscode`, `windsurf`, and `zed`. A few names also accept aliases (`claude` for `claude-code`, `copilot` for `vscode`, `gemini` for `gemini-cli`). Passing an unknown agent stops the command and prints the current supported list. A supported agent that can't take the chosen config (for example, one with no project-level config file when you pass `--project`) is reported and skipped.
+The supported agents are `antigravity`, `cline`, `cline-cli`, `claude-code`, `codex`, `cursor`, `factory-droid`, `fx`, `gemini-cli`, `goose`, `github-copilot-cli`, `grok-build`, `hermes`, `junie`, `kilo-code`, `kimi-code`, `kiro-cli`, `mcporter`, `opencode`, `pi`, `vscode`, `windsurf`, and `zed`. A few names also accept aliases (`claude` for `claude-code`, `copilot` for `vscode`, `gemini` for `gemini-cli`). Passing an unknown agent stops the command and prints the current supported list. A supported agent that can't take the chosen config (for example, one with no project-level config file when you pass `--project`) is reported and skipped.
 
 ### Scoping the tools
 

@@ -12,7 +12,9 @@ description: >-
   live queries in reactive apps and agents. Also use for object storage, S3,
   buckets, serverless functions, function triggers, cron, AI gateway, LLM calls,
   realtime, logs, Loki, Grafana, observability,
-  postgres, database, backend, Claimable Neon, neon.new, or a no-signup database.
+  postgres, database, backend, Claimable Neon, neon.new, a no-signup database,
+  or pairing Neon with Upstash for cache, Redis, rate limiting, queues, or
+  background jobs.
 metadata:
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
@@ -86,11 +88,15 @@ New projects are created in AWS regions. Prefer pooled `DATABASE_URL` for applic
 | HTTP APIs, cron, custom WebSocket or SSE push, long-running agents | Functions querying Postgres |
 | Live queries for realtime, reactive apps and agents; optimistic mutations | `neon-realtime` (`preview.realtime` in `neon.ts`). Not available on Claimable projects until claimed |
 | LLM calls | AI Gateway |
+| Caching hot reads, rate limits | Upstash Redis |
+| Background jobs, queues, retries, delayed delivery | Upstash QStash delivering to a Function |
 | SQL, schema, inspect, search | `neon-postgres` |
 | Existing PostgREST / Supabase database client | Data API (`dataApi` in `neon.ts`) |
 | Generic REST endpoints | Function or existing handler, not Data API |
 
 Use `neon-auth` to choose identity and to implement Managed Better Auth; the [Auth guide](references/auth.md) points there. Keep existing Better Auth, Clerk, and Supabase Auth unless the user asked to migrate login. Auth cannot be enabled on a project with IP Allow or Private Networking.
+
+Neon has no built-in key-value store or message queue. For a cache, rate limiting, or background jobs, pair it with Upstash Redis and QStash, and keep any Redis or queue the app already uses.
 
 ## Neon Documentation
 
@@ -121,14 +127,12 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 
 | Skill                            | Use it for                                                                                                                                                                           |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, and autoscaling: SQL development, schema design, performance optimization, and scaling decisions.           |
+| `neon-postgres`                  | Working with databases, including connections, schemas, queries, search, branching workflows, egress optimization, autoscaling, performance, and scaling decisions.                  |
 | `neon-auth`                      | Identity routing and Managed Better Auth setup (login, users, sessions, trusted domains). Fetch: https://neon.com/docs/ai/skills/neon-auth/SKILL.md |
-| `neon-postgres-branches`         | Choosing or creating the right branch type for dev, preview, test, or CI workflows. Use this skill as a slash command.                                                               |
 | `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
 | `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers, and Function Triggers (cron and object-storage).                                     |
 | `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
 | `neon-realtime`                  | Realtime makes any SQL query live, for realtime, reactive apps and agents: enabling Realtime, sealing queries, React and TanStack DB bindings, SSR, and optimistic mutations.      |
-| `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase.                                                                                          |
 
 There is no `neon-data-api` skill. Configure `dataApi` in `neon.ts` only for PostgREST / Supabase database-client compatibility or a migration that already depends on it.
 
@@ -166,9 +170,20 @@ If the Neon CLI is not available, you can visit https://neon.com/.well-known/age
 
 ### Updating Skills
 
-Keep the skills up to date: for every new session, update them so you are working with the latest best practices.
+Keep the skills up to date: for every new session, check them and update the stale ones so you are working with the latest best practices.
 
-Run `neon skills update` to update all installed Neon skills, or `neon skills update -y` to skip prompts. If the skills were installed via a plugin, they are updated automatically.
+Run `neon skills status` (neon 8.12.0 or newer) to check the Neon skills in this directory's `skills-lock.json`, or `neon skills status --global` for user-level skills. It lists each skill as `up to date`, `outdated`, or `not found upstream`, and prints the update command when any are outdated. It exits 0 either way, so read the Status column:
+
+```
+$ neon skills status
+Skills
+Scope           Skill          Status
+this directory  neon           outdated
+this directory  neon-postgres  up to date
+Update them: neon skills update -y
+```
+
+Run `neon skills update` to update all installed Neon skills, or `neon skills update -y` to skip prompts. Add `--global` for user-level skills. If the skills were installed via a plugin, they are updated automatically.
 
 ## Getting Started with Neon
 

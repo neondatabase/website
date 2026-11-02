@@ -10,6 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/orgs-auto-provision-domain
+updatedOn: '2026-08-07T18:23:48.000Z'
 ---
 
 Organization admins can add verified email domains so that users whose email matches one of those domains are automatically added as members when they sign up or log in. No manual invite is required for those users.

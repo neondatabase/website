@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-10-27T02:35:14.797Z'
+updatedOn: '2026-11-02T21:58:12.242Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -154,16 +154,7 @@ Start here for platform overview and Postgres development.
 | Skill                                                                        | Description                                                                                                                                                |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, including Claimable Neon when there is no account yet |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices                                                                                    |
-
-### Database workflows
-
-Branch and optimize Postgres projects.
-
-| Skill                                                                                                          | Description                                                                                                   |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows |
-| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                             |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices, including branching workflows and egress optimization                             |
 
 ### Neon Platform
 
@@ -201,7 +192,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Getting started** with Neon, including project setup and key features (branching, autoscaling, scale-to-zero, instant restore, read replicas)
 - **Connections**, including the serverless driver, connection pooling, and connection strings
 - **Authentication** with Managed Better Auth
-- **Data API** via `@neondatabase/neon-js`
+- **Data API** via `@neon/neon-js`
 - **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
 

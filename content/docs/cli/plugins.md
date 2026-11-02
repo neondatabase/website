@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: plugins'
-tag: new
-tagTheme: green
 subtitle: 'Install the Neon plugin into coding agents that support plugin marketplaces'
 summary: >-
   The Neon CLI `plugins` command installs the `neon-postgres` plugin into
@@ -10,6 +8,7 @@ summary: >-
   no flags for an interactive walkthrough, or pass `--agent` and `-y` to pick
   the agents and skip the prompts.
 enableTableOfContents: true
+updatedOn: '2026-11-01T14:46:44.000Z'
 ---
 
 The `plugins` command installs the `neon-postgres` plugin into coding agents that support plugin marketplaces, so tools like Claude Code, Cursor, and Codex know how to work with Neon. The plugin bundles [Neon's agent skills](/docs/ai/agent-skills) and the [Neon MCP Server](/docs/ai/neon-mcp-server) in one package.
@@ -40,7 +39,7 @@ Use [`neon plugins`](/docs/cli/plugins) for agents that support plugin marketpla
 
 Without `--agent`, the interactive command lists the supported agents, pre-selects the ones it detects, and lets you toggle the selection. In non-interactive mode, `-y` installs into every detected agent. Pass `--agent <name>` (repeatable) to name agents explicitly and skip the picker.
 
-The agents that support plugins are `claude-code`, `claude-desktop`, `codex`, `cursor`, `github-copilot-cli`, `grok-build`, and `vscode`. Several also accept aliases: `claude` for `claude-code`, `grok` for `grok-build`, and `copilot`, `github-copilot`, or `vs-code` for `vscode`. Passing an unknown agent stops the command and prints the supported list. An agent with no plugin support is skipped when others can install, or stops the command when it's the only one selected.
+The agents that support plugins are `claude-code`, `claude-desktop`, `codex`, `cursor`, `github-copilot-cli`, `grok-build`, `kimi-code`, and `vscode`. Several also accept aliases: `claude` for `claude-code`, `grok` for `grok-build`, and `copilot`, `github-copilot`, or `vs-code` for `vscode`. Passing an unknown agent stops the command and prints the supported list. An agent with no plugin support is skipped when others can install, or stops the command when it's the only one selected.
 
 Agents that share a target collapse into one: Claude Desktop and Claude Code both write to `claude-code`, and VS Code and the GitHub Copilot CLI both write to `github-copilot`.
 
@@ -48,7 +47,7 @@ Agents that share a target collapse into one: Claude Desktop and Claude Code bot
 
 By default `plugins` installs into the current project, so the setup travels with the repository. Pass `--global` to install user-level instead, which applies across your projects.
 
-Some agents only support user-level plugins. In a project install, `github-copilot-cli`, `grok-build`, and `vscode` need `--global`; without it, the command tells you to pass it.
+Some agents only support user-level plugins. In a project install, `github-copilot-cli`, `grok-build`, `kimi-code`, and `vscode` need `--global`; without it, the command tells you to pass it.
 
 ## Examples
 

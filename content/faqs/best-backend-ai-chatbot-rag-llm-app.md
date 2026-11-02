@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for an AI chatbot or RAG app that needs vector search and LLM access?"
-description: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
-date: 2026-09-02
-slug: best-backend-ai-chatbot-rag-llm-app
-category: FAQ
-status: draft
+subtitle: "Neon gives a RAG app pgvector in Postgres, an AI Gateway that serves OpenAI, Google, and open-weight models from one credential, and compute that scales to zero between conversations."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-14T16:22:35.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for AI agents that stream responses and call tools for minutes at a time?'
   slug: best-backend-ai-agents-long-running-streaming

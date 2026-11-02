@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { cn } from 'utils/cn';
+import getDocsNavHref from 'utils/get-docs-nav-href';
 import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
+import ChevronIcon from '../../docs-header/images/chevron-down.inline.svg';
 import Icon from '../../menu/icon';
 
 const isActiveItem = (slug, items, subnav, currentSlug) => {
@@ -74,13 +75,7 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = slug
-    ? isExternalSlug
-      ? slug
-      : slug.startsWith('/')
-        ? slug
-        : `${basePath}${slug}`
-    : undefined;
+  const href = getDocsNavHref(slug, basePath);
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;
@@ -97,10 +92,10 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
       <LinkTag
         className={cn(
           'relative flex h-full items-center gap-1',
-          'rounded-sm text-sm leading-snug tracking-extra-tight whitespace-nowrap',
+          'rounded-sm text-[15px] leading-snug tracking-extra-tight whitespace-nowrap',
           'transition-colors duration-200',
           'group-hover:text-black-new hover:text-black-new',
-          'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
+          'after:absolute after:inset-x-0 after:bottom-0 after:h-px after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
           'dark:group-hover:text-white dark:after:bg-white dark:hover:text-white',
           isLastActive
             ? 'text-black-new after:opacity-100 dark:text-white'
@@ -117,7 +112,9 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
           <ChevronIcon
             className={cn(
               'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white',
-              isLastActive ? 'text-black-new dark:text-white' : 'text-gray-new-50'
+              isLastActive
+                ? 'text-black-new dark:text-white'
+                : 'text-gray-new-50 dark:text-gray-new-70'
             )}
           />
         )}

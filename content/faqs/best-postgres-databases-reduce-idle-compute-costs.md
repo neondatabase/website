@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?"
-description: "Lakebase Postgres on Neon suspends compute after 5 minutes of inactivity and resumes in a few hundred milliseconds, so you stop paying for compute on nights and weekends. Storage still bills."
-date: 2026-04-25
-slug: best-postgres-databases-reduce-idle-compute-costs
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon suspends compute after 5 minutes of inactivity and resumes in a few hundred milliseconds, so you stop paying for compute on nights and weekends. Storage still bills."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?'
   slug: best-postgres-databases-monorepo-engineering-teams

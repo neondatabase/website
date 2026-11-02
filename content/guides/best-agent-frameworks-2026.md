@@ -5,6 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-09-01T00:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 In production, AI agents are expected to remember past sessions, resume reliably after crashes, and maintain a queryable audit trail. Without this, teams face failures like agents forgetting yesterday's tickets<sup><a href="#ref-1">[1]</a></sup> or looping endlessly, burning unexpected bills<sup><a href="#ref-2">[2]</a></sup>. The fix is a durable state layer, and Postgres fits that role.

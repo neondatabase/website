@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?"
-description: "Lakebase Postgres on Neon supports pgvector with HNSW and IVFFlat indexes, autoscales compute within a min/max range, and scales to zero after 5 minutes of inactivity, which suits RAG apps with bursty traffic."
-date: 2026-04-25
-slug: best-postgres-services-retrieval-augmented-generation
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres on Neon supports pgvector with HNSW and IVFFlat indexes, autoscales compute within a min/max range, and scales to zero after 5 minutes of inactivity, which suits RAG apps with bursty traffic."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?'
   slug: best-postgres-services-javascript-typescript-drizzle-prisma

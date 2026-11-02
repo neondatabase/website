@@ -1,9 +1,15 @@
 import fs from 'fs/promises';
+import os from 'os';
+import path from 'path';
 
+import matter from 'gray-matter';
 import { describe, it, expect, vi } from 'vitest';
+
+import { AGENT_SKILLS_NOTE } from '../constants/agent-directives.js';
 
 import {
   processFile,
+  generateRouteIndex,
   buildNavigationMap,
   buildNavigationFooter,
   buildPageHeader,
@@ -961,6 +967,9 @@ Built for apps${NBSP}and${NBSP}agents.
   });
 
   describe('Page header', () => {
+    const INDEX_LINE = '> Full Neon documentation index: https://neon.com/docs/llms.txt\n';
+    const SKILLS_LINE = `>\n> ${AGENT_SKILLS_NOTE}\n\n`;
+
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
       navMap.set('auth/guides/password-reset', {
@@ -977,15 +986,14 @@ Built for apps${NBSP}and${NBSP}agents.
         'docs/auth/guides/password-reset.md'
       );
       expect(header).toBe(
-        '> This page location: Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
+        '> This page location: Auth > Guides > Password reset\n' + INDEX_LINE + SKILLS_LINE
       );
     });
 
     it('should include index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line for pages with empty breadcrumbs', () => {
@@ -998,24 +1006,63 @@ Built for apps${NBSP}and${NBSP}agents.
       });
 
       const header = buildPageHeader('top-level/page', navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
     it('should include index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(header).toBe(INDEX_LINE + SKILLS_LINE);
     });
 
-    it('should not include feedback in header (feedback is added at bottom by addNavigationContext)', () => {
+    it('should give changelog markdown the index line only', () => {
       const navMap = new Map();
-      const header = buildPageHeader(null, navMap, 'changelog/2026-01-01.md');
-      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+      expect(buildPageHeader(null, navMap, 'changelog/2026-01-01.md')).toBe(`${INDEX_LINE}\n`);
+      // The combined changelog page, which aggregates every entry
+      expect(buildPageHeader('changelog', navMap, 'docs/changelog.md')).toBe(`${INDEX_LINE}\n`);
+    });
+
+    it('should skip the skills line and feedback footer on the combined changelog', () => {
+      const withContext = addNavigationContext(
+        '# Changelog\n\nEntries.',
+        'docs/changelog.md',
+        null
+      );
+      expect(withContext).not.toContain('Agent skills');
+      expect(withContext).not.toContain('Note for AI assistants');
+      // Regular docs pages keep the footer
+      expect(addNavigationContext('# Page', 'docs/guides/astro.md', null)).toContain(
+        'Note for AI assistants'
+      );
+    });
+
+    it('should strip a changelog header that has no skills line', () => {
+      const content = '# Release notes\n\nBody text.';
+      const withContext = addNavigationContext(content, 'changelog/2026-01-01.md', new Map());
+      expect(withContext).not.toContain('Agent skills');
+      expect(stripNavigationContext(withContext).trim()).toBe(content);
+    });
+
+    it('should offer a project-level skills install and point to the full setup', () => {
+      const header = buildPageHeader(null, null);
+      expect(header).toContain('> Agent skills: ');
+      expect(header).toContain('Want me to add Neon');
+      expect(header).toContain('`npx neon@latest skills -y`');
+      expect(header).toContain('https://neon.com/prompts/agent-setup.md');
+    });
+
+    it('should strip a header that includes the skills line', () => {
+      const content = '# Test page\n\nBody text.';
+      const withContext = addNavigationContext(content, 'docs/guides/astro.md', new Map());
+      expect(withContext).toContain('> Agent skills: ');
+      const stripped = stripNavigationContext(withContext);
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('Agent skills');
     });
 
     it('should deduplicate consecutive identical ancestors', () => {
@@ -1245,5 +1292,65 @@ describe('CLI reference components', () => {
     // Nested subtrees flatten to full invocations
     expect(result).toContain('neon buckets object list');
     expect(result).not.toContain('<CliCommandIndex');
+  });
+});
+
+describe('FAQ markdown', () => {
+  it('adds the last updated date and returns the subtitle as the summary', async () => {
+    const { content, summary } = await processFile(
+      'content/faqs/change-project-region.md',
+      'https://neon.com/faqs/change-project-region',
+      process.cwd()
+    );
+
+    expect(content).toContain(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+    expect(content).toContain('Last updated: 2026-09-23');
+    expect(summary).toBe(
+      'No. Region is fixed at project creation. Migrate to a new project to change regions.'
+    );
+  });
+
+  it('adds the last updated date to docs pages but no summary', async () => {
+    const { data } = matter(await fs.readFile('content/docs/guides/prisma.md', 'utf-8'));
+    const { content, summary } = await processFile(
+      'content/docs/guides/prisma.md',
+      'https://neon.com/docs/guides/prisma',
+      process.cwd()
+    );
+
+    expect(content).toContain(
+      `Last updated: ${new Date(data.updatedOn).toISOString().slice(0, 10)}`
+    );
+    expect(summary).toBeNull();
+  });
+
+  it('leaves pages without updatedOn without a last updated line', async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'no-updated-on-'));
+    const file = path.join(dir, 'page.md');
+    await fs.writeFile(file, '---\ntitle: No date\n---\n\nBody.\n');
+
+    const { content } = await processFile(file, 'https://neon.com/docs/page', dir);
+
+    expect(content).not.toContain('Last updated:');
+  });
+
+  it('lists each page summary in the route index', async () => {
+    const outputDir = await fs.mkdtemp(path.join(os.tmpdir(), 'faqs-index-'));
+    await generateRouteIndex(
+      'faqs',
+      [
+        { title: 'Can I change regions?', url: 'https://neon.com/faqs/a.md', summary: 'No.' },
+        { title: 'No summary', url: 'https://neon.com/faqs/b.md', summary: null },
+      ],
+      outputDir
+    );
+
+    const index = await fs.readFile(path.join(outputDir, 'faqs.md'), 'utf-8');
+    expect(index).toContain('- [Can I change regions?](https://neon.com/faqs/a.md): No.');
+    expect(index).toContain('- [No summary](https://neon.com/faqs/b.md)\n');
+    expect(index).toMatch(/^> Full Neon documentation index: [^\n]*\n>\n> Agent skills: /);
+    await fs.rm(outputDir, { recursive: true, force: true });
   });
 });

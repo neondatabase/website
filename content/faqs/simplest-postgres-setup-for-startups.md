@@ -1,10 +1,9 @@
 ---
 title: "What is the simplest Postgres setup for startups?"
-description: "Neon gives startups Lakebase Postgres in seconds, with a Free plan that supports 100 projects, scale-to-zero, and branching for dev and previews."
-date: 2026-04-25
-slug: simplest-postgres-setup-for-startups
-category: FAQ
-status: draft
+subtitle: "Neon gives startups Lakebase Postgres in seconds, with a Free plan that supports 100 projects, scale-to-zero, and branching for dev and previews."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-10-01T14:57:15.000Z'
+isDraft: false
 previousLink:
   title: 'Which serverless database services charge per second instead of per month for Postgres?'
   slug: serverless-database-services-postgres-charge-per-second

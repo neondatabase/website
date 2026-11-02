@@ -47,6 +47,7 @@ export async function generateMetadata(props) {
     pathname: `/postgresql/${currentSlug}`,
     rssPathname: null,
     type: 'article',
+    modifiedTime: post?.data?.updatedOn ?? null,
   });
 }
 
@@ -75,10 +76,13 @@ const PostgresTutorial = async (props) => {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.title,
+    url: `${VERCEL_URL}/postgresql/${currentSlug}`,
+    ...(data.updatedOn && { dateModified: data.updatedOn }),
     author: {
       '@type': 'Organization',
       name: 'Neon',
     },
+    publisher: { '@type': 'Organization', name: 'Neon' },
   };
 
   return (

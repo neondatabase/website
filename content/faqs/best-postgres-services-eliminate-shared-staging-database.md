@@ -1,10 +1,9 @@
 ---
 title: "What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?"
-description: "Replace a shared staging database with one Neon branch per pull request. Branches are copy-on-write, so they share storage until they diverge and per-PR copies stay cheap."
-date: 2026-04-25
-slug: best-postgres-services-eliminate-shared-staging-database
-category: FAQ
-status: draft
+subtitle: "Replace a shared staging database with one Neon branch per pull request. Branches are copy-on-write, so they share storage until they diverge and per-PR copies stay cheap."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?'
   slug: best-postgres-services-connection-pooling

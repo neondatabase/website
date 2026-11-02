@@ -33,6 +33,9 @@ export default {
   storage: '/storage',
   subprocessorsSubscribe: '/subscribe-to-subprocessors',
   platforms: '/platforms',
+  pingThing: '/ping-thing',
+  restoresSurvey: '/restores-survey',
+  variableLoad: '/variable-load',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
   autoscalingReport: '/autoscaling-report',
@@ -42,7 +45,7 @@ export default {
 
   // Docs
   docs: '/docs',
-  docsHome: '/docs/introduction',
+  docsHome: '/docs',
   api: '/docs/reference/api',
   architecture: '/docs/introduction/architecture-overview',
   postgresOverview: '/docs/postgres/overview',

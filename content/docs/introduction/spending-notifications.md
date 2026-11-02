@@ -10,6 +10,7 @@ summary: >-
 redirectFrom:
   - /docs/introduction/spending-limit
 enableTableOfContents: true
+updatedOn: '2026-09-18T13:57:46.000Z'
 ---
 
 <InfoBlock>

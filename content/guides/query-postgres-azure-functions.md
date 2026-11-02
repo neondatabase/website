@@ -4,6 +4,7 @@ subtitle: Learn how to query your Postgres database using Azure Functions
 author: adalbert-pungu
 enableTableOfContents: true
 createdAt: '2024-10-19T21:00:00.000Z'
+updatedOn: '2026-09-24T18:22:11.000Z'
 ---
 
 In this guide, you'll query a **Postgres** database hosted on **Neon** using **Azure Functions**. Neither side requires you to manage servers.

@@ -10,9 +10,14 @@ summary: >-
   a Lakebase Postgres project to WunderGraph, generate a typesafe client, and ship a
   full-stack app without a dedicated CI/CD pipeline or DevOps setup.
 enableTableOfContents: true
+tag: deprecated
 isDraft: false
 updatedOn: '2026-08-18T10:29:02.410Z'
 ---
+
+<Admonition type="warning" title="Deprecated">
+This guide uses the original WunderGraph SDK and WunderGraph Cloud, which WunderGraph has sunset in favor of WunderGraph Cosmo. This guide is no longer maintained, and its steps may no longer work. For other ways to build APIs on Neon, see [Neon integration guides](/docs/guides/integrations).
+</Admonition>
 
 _This guide was contributed by the team at WunderGraph_
 

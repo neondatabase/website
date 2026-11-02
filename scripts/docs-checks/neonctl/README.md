@@ -151,7 +151,13 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   border-char filter in `extract-examples.js`. (Converted pages avoid this
   by keeping output out of bash fences entirely.)
 - **Enum-reference defaults render as source text** unless patched via
-  `overrides.json`.
+  `overrides.json`. Arrays of enum members (`[Enum.A, Enum.B]`) do resolve
+  in `choices` and `.join()` describes, but only for enums the parser can
+  see: command files and `utils/api_enums.ts`. An enum anywhere else leaves
+  the describe unresolved, and the parser drops it without failing. The
+  "every command and visible option has a describe" coverage test catches
+  that. Nothing checks `choices` the same way: a list that stops resolving
+  drops silently and turns off choice validation for that option.
 - **Factory-built option specs aren't resolved.** An option whose spec is a
   factory call rather than an object literal (e.g. `services: servicesOption({…})`
   in `config init` and `env pull`, where `servicesOption()` lives in the

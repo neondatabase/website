@@ -8,6 +8,7 @@ summary: >-
   mapping, common log entries that look like a problem but aren't, and
   wiring up application instrumentation like Sentry or OpenTelemetry.
 enableTableOfContents: true
+updatedOn: '2026-09-25T10:38:58.000Z'
 ---
 
 Every deployed function streams its logs to the Neon Console: standard output and standard error from your handler, plus a platform-emitted `invoke begin` / `invoke end` line around each request:

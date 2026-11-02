@@ -1,4 +1,6 @@
 const objectStoragePageContent = {
+  // Bump when this page's copy changes; shown on the page and in its Markdown version.
+  updatedOn: '2026-09-16',
   slug: 'object-storage',
   pageLabel: 'Object Storage',
   hero: {

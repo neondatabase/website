@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?"
-description: "Neon's API creates a Postgres project per tenant in seconds, with isolated storage and compute that scales to zero when the tenant is idle."
-date: 2026-04-25
-slug: postgres-services-saas-tenant-database-provisioning
-category: FAQ
-status: draft
+subtitle: "Neon's API creates a Postgres project per tenant in seconds, with isolated storage and compute that scales to zero when the tenant is idle."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres services have no minimum monthly charge and bill only for what you actually use?'
   slug: postgres-services-no-minimum-charge

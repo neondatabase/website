@@ -4,6 +4,7 @@ subtitle: 'Bind live queries to component and agent state.'
 summary: >-
   Bind live queries to React component state with useLiveQuery, change their parameters and handle errors, or sync a broader live query into a TanStack DB collection and derive instant, local queries from it.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Build reactive apps and agents using higher-level reactivity primitives that manage live query [subscriptions](./subscribing) for you.
@@ -332,7 +333,7 @@ if (!session) {
 }
 ```
 
-Sign-in isn't part of these guides: build the page with Neon's [Managed Better Auth UI components](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `AuthView` on `/auth/*` before it checks the session.
+Sign-in isn't part of these guides: build the page with [Better Auth UI](/docs/auth/reference/ui-components), as the [running example](https://github.com/neondatabase/examples/tree/main/realtime/guides-chat-app) does by rendering `<Auth>` on `/auth/*` before it checks the session.
 
 Then read from the collection with TanStack's own `useLiveQuery()`. It shares a name with the Realtime hook, so import it under an alias that won't clash in an app that uses both. This view shows one channel, newest first:
 

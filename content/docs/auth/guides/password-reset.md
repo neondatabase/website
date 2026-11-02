@@ -19,68 +19,46 @@ In your project's **Settings** → **Better Auth** page, ensure **Sign-up with E
 
 ## Using UI components
 
-The easiest way to add password reset is using the pre-built UI components `<ForgotPasswordForm>` and `<ResetPasswordForm>`.
+With [Better Auth UI](/docs/auth/reference/ui-components), password reset is built in. `npx shadcn@latest add @better-auth-ui/auth` adds the `forgot-password`, `reset-link-sent`, and `reset-password` views, and the sign-in view links to **Forgot password?**.
 
-### 1. Enable forgot password in AuthView (#enable-forgot-password-authview)
+### 1. Route the auth views (#route-auth-views)
 
-If you're using `<AuthView>`, enable the forgot password flow:
+Render `<Auth>` for every auth path, as in the [Next.js App Router example](/docs/auth/reference/ui-components#nextjs-app-router):
 
-```tsx filename="src/App.tsx"
-import { NeonAuthUIProvider, AuthView } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
+```tsx filename="app/auth/[path]/page.tsx"
+import { viewPaths } from '@better-auth-ui/core';
+import { Auth } from '@/components/auth/auth';
 
-export default function App() {
-  return (
-    <NeonAuthUIProvider authClient={authClient}>
-      <AuthView pathname="sign-in" credentials={{ forgotPassword: true }} />
-    </NeonAuthUIProvider>
-  );
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return Object.values(viewPaths.auth).map((path) => ({ path }));
+}
+
+export default async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
+  const { path } = await params;
+  return <Auth path={path} />;
 }
 ```
 
-The `<AuthView>` component automatically includes a "Forgot password?" link when `forgotPassword` is enabled.
+`/auth/forgot-password` asks for the email and sends the reset link. The link opens `/auth/reset-password`, where the user sets a new password.
 
-### 2. Use standalone form components (#use-standalone-forms)
+### 2. Render a single view (#render-a-single-view)
 
-For more control, use `<ForgotPasswordForm>` and `<ResetPasswordForm>` separately:
+To place a view somewhere else, pass the view name instead of a path:
 
-```tsx filename="src/App.tsx"
-import { useState } from 'react';
-import { ForgotPasswordForm, ResetPasswordForm } from '@neondatabase/auth-ui';
-import { authClient } from './auth';
+```tsx filename="src/ForgotPasswordPage.tsx"
+import { Auth } from '@/components/auth/auth';
 
-export default function App() {
-  const [step, setStep] = useState<'forgot' | 'reset'>('forgot');
-  const [email, setEmail] = useState('');
-
-  if (step === 'forgot') {
-    return (
-      <ForgotPasswordForm
-        authClient={authClient}
-        redirectTo={`${window.location.origin}/reset-password`}
-        onSuccess={(data) => {
-          setEmail(data.email);
-          setStep('reset');
-        }}
-      />
-    );
-  }
-
-  return (
-    <ResetPasswordForm
-      authClient={authClient}
-      email={email}
-      onSuccess={() => {
-        setStep('forgot');
-        // Redirect to sign-in or show success message
-      }}
-    />
-  );
+export function ForgotPasswordPage() {
+  return <Auth view="forgotPassword" />;
 }
 ```
+
+The copied components (`components/auth/forgot-password.tsx` and `components/auth/reset-password.tsx`) are yours to edit.
 
 <Admonition type="note">
-SDK methods for password reset (`resetPasswordForEmail`) are not fully supported yet. Use the UI components (`<ForgotPasswordForm>` and `<ResetPasswordForm>`) for password reset functionality.
+SDK methods for password reset (`resetPasswordForEmail`) are not fully supported yet. Use the UI components for password reset functionality.
 </Admonition>
 
 ## Password reset flow

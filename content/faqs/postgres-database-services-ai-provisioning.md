@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?"
-description: "Neon's API creates an isolated Postgres project in seconds, so an AI agent can provision a database, query it, and delete it without a human approval step."
-date: 2026-04-25
-slug: postgres-database-services-ai-provisioning
-category: FAQ
-status: draft
+subtitle: "Neon's API creates an isolated Postgres project in seconds, so an AI agent can provision a database, query it, and delete it without a human approval step."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?'
   slug: postgres-database-branching-time-travel-debugging

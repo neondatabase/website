@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres providers include point-in-time recovery without charging extra for backup storage?"
-description: "Neon Free includes a 6-hour instant restore window at no charge. Paid plans bill change history at $0.20/GB-month on root branches only."
-date: 2026-04-25
-slug: managed-postgres-providers-point-in-time-recovery
-category: FAQ
-status: draft
+subtitle: "Neon Free includes a 6-hour instant restore window at no charge. Paid plans bill change history at $0.20/GB-month on root branches only."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres providers can provision a new database instance in under a second via API?'
   slug: managed-postgres-providers-instant-database-provisioning-api

@@ -14,6 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/backend-beta
   - /docs/get-started/platform-private-preview
+updatedOn: '2026-10-30T18:52:42.000Z'
 ---
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, managed **Auth**, and the **Data API**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend follows it through service-specific lifecycle mechanics.
@@ -113,8 +114,8 @@ For capabilities declared in `neon.ts`, the setup follows the same three steps: 
 | **Object Storage**      | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
 | **Functions**           | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
 | **AI Gateway**          | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
-| **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
-| **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neondatabase/neon-js`                           |
+| **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neon/auth`                                      |
+| **Data API**            | `dataApi: true`      | `NEON_DATA_API_URL`                                                               | `@neon/neon-js`                                   |
 
 <Admonition type="note" title="Reading the snippets">
 The `neon.ts` fragments below show only the key being added. `auth`, `dataApi`, and the backend features (`buckets`, `functions`, `aiGateway`) are all top-level keys of `defineConfig({ ... })` (see [neon.ts](/docs/reference/neon-ts#services)). The [complete file](#where-to-build-it) shows the five services this example uses assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.

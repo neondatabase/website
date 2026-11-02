@@ -1,7 +1,5 @@
 ---
 title: Claimable Neon
-tag: new
-tagTheme: green
 subtitle: CLI, claim, and HTTP reference
 summary: >-
   If an agent needs a Neon account and the user is not around, provision a
@@ -12,7 +10,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-10-17T02:29:50.049Z'
+updatedOn: '2026-10-31T13:11:38.215Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours (`project.expires_at`) and are capped at 100 MB storage and 1 GB transfer. Claim codes expire in 15 minutes (`expires_in`). Those are two clocks.

@@ -18,7 +18,7 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 - Postgres 16 or later (Lakebase Search requires PG16+)
 - Node.js 22 or later
 - Choose an embedding provider to turn text into vectors:
-  - **Neon AI Gateway** (this guide's default): set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` (see [Get started](/docs/ai-gateway/get-started)) and use the [`qwen3-embedding-0-6b`](/docs/ai-gateway/embeddings) model (1024 dimensions). Requires a paid plan in a [Neon AI Gateway region](/docs/ai-gateway/overview).
+  - **Neon AI Gateway** (this guide's default): set `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` (see [Get started](/docs/ai-gateway/get-started)) and use the [`qwen3-embedding-0-6b`](/docs/ai-gateway/embeddings) model (1024 dimensions). Requires a paid plan (Launch or Scale) with [prepaid AI Gateway credits](/docs/ai-gateway/prepaid-credits), in a [Neon AI Gateway region](/docs/ai-gateway/overview).
   - **OpenAI directly**: install `@ai-sdk/openai`, set `OPENAI_API_KEY`, and use `openai.embeddingModel('text-embedding-3-small')` from that provider (1536 dimensions).
   - **Any other provider**: generate the vector with its SDK and match the `VECTOR` column to its dimensions.
 
@@ -190,6 +190,8 @@ Vector search finds matches by meaning, while keyword search finds matches by wo
 ### Use Jev through Neon AI Gateway
 
 Jev reads each result alongside your query and estimates how likely it is to answer your question. The example below combines both searches, removes duplicates, and puts the most likely answers first. It follows the [TypeSafe reranking cookbook](https://docs.typesafe.ai/cookbooks/rerank_typesafe).
+
+Jev runs through AI Gateway, so it has the same paid plan and credits requirement as AI Gateway embeddings. If you don't have AI Gateway, use [RRF](#fuse-ranks-with-rrf) instead.
 
 Add the following code to `search.ts`. It reuses the provider and credentials from the embedding example. See [Decision models](/docs/ai-gateway/decisions#use-with-the-vercel-ai-sdk) for more about the SDK.
 

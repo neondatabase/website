@@ -6,7 +6,7 @@ summary: >-
   the CLI, the Neon API, or neon.ts: a Hono handler for the upload event, the bucket
   and prefix filter, what your function receives, and how to confirm a run in the logs.
 enableTableOfContents: true
-updatedOn: '2026-09-25T10:09:58.688Z'
+updatedOn: '2026-10-20T18:56:03.438Z'
 ---
 
 A `storage_object_created` trigger tells Neon to invoke a deployed [Neon Function](/docs/compute/functions/overview) when an object is created in an [Object Storage](/docs/storage/overview) bucket. Optionally scope it to a key `prefix`, so only uploads under that path fire the function. There's no external event wiring and no compute kept running to watch the bucket.
@@ -232,14 +232,16 @@ An object-created invocation delivers the same envelope shape as every trigger t
   "data": {
     "bucket_name": "my-bucket",
     "object_key": "uploads/report.csv"
-  }
+  },
+  "previous_attempts": [],
+  "previous_attempts_omitted": 0
 }
 ```
 
 - **`data.bucket_name`**: the bucket the object was created in.
 - **`data.object_key`**: the full key of the created object, including any prefix.
 
-The request carries the same headers as any trigger invocation. For the full envelope, headers, and how to confirm a request came from Neon, see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives) in the overview.
+The request carries the same headers as any trigger invocation. For the full envelope, headers, and how to confirm a request came from Neon, see [What your function receives](/docs/compute/functions/triggers/overview#what-your-function-receives) in the overview. For retries, failure history, and duplicate handling, see [Delivery and retries](/docs/compute/functions/triggers/overview#delivery-and-retries).
 
 ## Trigger config
 

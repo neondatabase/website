@@ -27,7 +27,7 @@ Each scenario is [described in detail](#find-your-scenario) further down the pag
 | [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)            | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
 | [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
 | [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
+| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neon/neon-js`            | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
 
 ## Find your scenario
 
@@ -71,7 +71,7 @@ Choose your transport based on your query pattern: use **HTTP** for single queri
 
 ### Building a client-side app without a backend?
 
-Use the [Neon Data API](/docs/data-api/overview) via [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
+Use the [Neon Data API](/docs/data-api/overview) via [`@neon/neon-js`](https://www.npmjs.com/package/@neon/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
 
 See the [JavaScript SDK reference](/docs/reference/javascript-sdk) for full documentation.
 

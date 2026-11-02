@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a startup building its MVP?"
-description: "Neon gives an MVP Postgres, Auth, a REST API, Object Storage, and Functions in one project with usage-based pricing and no minimum, plus branching so the team ships schema changes without a shared staging database."
-date: 2026-09-02
-slug: best-backend-startup-mvp
-category: FAQ
-status: draft
+subtitle: "Neon gives an MVP Postgres, Auth, a REST API, Object Storage, and Functions in one project with usage-based pricing and no minimum, plus branching so the team ships schema changes without a shared staging database."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-01T16:03:19.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for a solo developer or indie hacker running several apps?'
   slug: best-backend-solo-developer-indie-hacker-multiple-apps

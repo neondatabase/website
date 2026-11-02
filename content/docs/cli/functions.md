@@ -8,6 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/cli/function
+updatedOn: '2026-10-26T11:09:41.000Z'
 ---
 
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a template, browse [Function Registry templates](/functions/templates).

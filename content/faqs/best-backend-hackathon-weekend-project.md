@@ -1,10 +1,9 @@
 ---
 title: "What is the best backend for a hackathon or weekend project?"
-description: "Neon gets you Postgres, Auth, and a deployable API in one command on the Free plan, and an agent can provision a project before you've made an account."
-date: 2026-09-02
-slug: best-backend-hackathon-weekend-project
-category: FAQ
-status: draft
+subtitle: "Neon gets you Postgres, Auth, and a deployable API in one command on the Free plan, and an agent can provision a project before you've made an account."
+createdAt: '2026-09-02T00:00:00.000Z'
+updatedOn: '2026-10-15T21:51:33.000Z'
+isDraft: false
 previousLink:
   title: 'What is the best backend for an app that stores user-uploaded files alongside a database?'
   slug: best-backend-file-uploads-user-content

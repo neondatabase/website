@@ -103,7 +103,7 @@ export function getFunctionTemplatesMarkdownPath(normalizedPath) {
 }
 
 // Convert URL path to markdown file path
-// Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
+// Example: /docs/get-started -> /md/docs/get-started.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
 

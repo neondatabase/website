@@ -51,8 +51,8 @@ test.describe('critical acquisition journeys', () => {
 
     const docsLink = page.getByTestId('home-docs');
     await docsLink.click();
-    await expect(page).toHaveURL(new URL('/docs/introduction', baseURL).toString());
-    await expect(page.getByRole('heading', { level: 1, name: 'Neon documentation' })).toBeVisible();
+    await expect(page).toHaveURL(new URL('/docs', baseURL).toString());
+    await expect(page.getByRole('heading', { level: 1, name: 'Neon Docs' })).toBeVisible();
     await expectHealthyPage(applicationErrors);
   });
 

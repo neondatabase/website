@@ -6,6 +6,7 @@ summary: >-
   template.json and registry.json fields, layouts, categories, limits, local
   testing with NEON_FUNCTION_REGISTRY_DIR, and the review checklist.
 enableTableOfContents: true
+updatedOn: '2026-10-26T11:09:41.000Z'
 ---
 
 The Function Registry is the public catalog behind [`neon functions new`](/docs/cli/functions#new). Each template is a folder in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To add one, you open a pull request with the template folder and an index entry. Neon reviews it, and after it merges to `main`, the template shows up in the CLI and on [neon.com/functions/templates](/functions/templates) within about an hour. You don't publish anything yourself.

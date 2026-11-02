@@ -18,7 +18,7 @@ hideCopyPage: true
 <div className="not-prose -mb-4 grid grid-cols-[minmax(0,7fr)_minmax(0,4fr)] items-start gap-16 lg:mb-6 lg:grid-cols-1 lg:gap-10">
 
 <div className="[&>div]:my-0!">
-<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Your own code at an HTTP URL, with no servers to manage, running on your Neon branch right next to your Postgres data.</p>
+<p className="mt-0 mb-6 max-w-2xl text-base leading-[1.6] tracking-tight text-gray-new-20 [text-wrap:pretty] dark:text-gray-new-80">Host APIs, agents, and webhooks at an HTTP URL, with no servers to manage, running on your Neon branch right next to your Postgres data.</p>
 <AgentPrompt title="Set up with your agent" src="/prompts/functions-landing.md" buttonText="Copy prompt" />
 </div>
 

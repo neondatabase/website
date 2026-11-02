@@ -1,7 +1,5 @@
 ---
 title: 'Neon CLI command: claim'
-tag: new
-tagTheme: green
 subtitle: Create and claim a temporary Neon project without an account
 summary: >-
   The Neon CLI `claim` command (`neon claimable` is an alias) creates a
@@ -9,6 +7,7 @@ summary: >-
   assertion, writes credentials to `.env`, and later opens a claim URL so a
   human can take the project. See [Claimable Neon](/docs/reference/claimable-neon).
 enableTableOfContents: true
+updatedOn: '2026-11-01T14:46:44.000Z'
 ---
 
 The `claim` command creates a temporary Neon project when there is no Neon account yet. `neon claimable` is an alias. The CLI stores an identity assertion on the machine, writes provisioned variables to `.env` (or `.env.local`), and later opens a claim URL so a human can take the project into their organization.

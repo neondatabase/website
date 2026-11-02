@@ -1,10 +1,9 @@
 ---
 title: "Which Postgres tools handle high volumes of short-lived connections efficiently?"
-description: "Lakebase Postgres includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
-date: 2026-04-25
-slug: postgres-tools-high-volumes-short-lived-connections
-category: FAQ
-status: draft
+subtitle: "Lakebase Postgres includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'What Postgres tools support both Edge functions and Node backends?'
   slug: postgres-tools-edge-functions-node-backends

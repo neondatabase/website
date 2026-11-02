@@ -1,10 +1,9 @@
 ---
 title: "Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?"
-description: "Neon's API creates a new Postgres project or branch per user in seconds. Idle tenants scale to zero, so you only pay compute for databases that are active."
-date: 2026-04-25
-slug: database-providers-provision-postgres-user-signup
-category: FAQ
-status: draft
+subtitle: "Neon's API creates a new Postgres project or branch per user in seconds. Idle tenants scale to zero, so you only pay compute for databases that are active."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
   slug: database-providers-pgvector-autoscaling-ai-applications

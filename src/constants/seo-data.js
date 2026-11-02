@@ -56,8 +56,9 @@ export default {
     pathname: LINKS.guides,
   },
   faqs: {
-    title: 'FAQs — Neon',
-    description: 'Frequently asked questions about Neon.',
+    title: 'Neon FAQs: Postgres, Auth, Storage, Functions, and AI Gateway',
+    description:
+      'Answers to common questions about building on Neon: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and AI Gateway, plus pricing, plans, and how Neon compares.',
     pathname: LINKS.faqs,
   },
   caseStudies: {
@@ -135,12 +136,13 @@ export default {
     pathname: LINKS.partners,
   },
   pingThing: {
+    pathname: LINKS.pingThing,
     robotsNoindex: 'noindex',
   },
   pricing: {
-    title: 'Pricing — Neon',
+    title: 'Neon Pricing: Free Plan With 100 Projects, Typical Spend $15/Month',
     description:
-      'Neon brings serverless architecture to Postgres, which allows us to offer you flexible usage and volume-based plans.',
+      "Neon's Free plan is $0 with no credit card: 100 projects, each with 100 CU-hours and 1 GB of storage. Paid plans are usage-based with no monthly minimum and no per-project fee; typical spend is about $15/month for a small database on Launch and $701/month for a production workload on Scale.",
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
@@ -148,7 +150,7 @@ export default {
     title: 'Impact of Postgres restores survey',
     description:
       'We asked 50 developers managing production Postgres about recovery times and their business impact.',
-    pathname: LINKS.report,
+    pathname: LINKS.restoresSurvey,
     imagePath: '/images/social-previews/report.jpg',
   },
   variable: {
@@ -156,7 +158,7 @@ export default {
     description:
       'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
     imagePath: '/images/social-previews/variable.jpg',
-    pathname: LINKS.variable,
+    pathname: LINKS.variableLoad,
   },
   costFleets: {
     title: 'Neon for platforms: Cost estimator',

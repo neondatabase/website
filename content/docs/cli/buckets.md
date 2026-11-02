@@ -11,6 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/cli/bucket
+updatedOn: '2026-09-17T13:09:05.000Z'
 ---
 
 The `buckets` command manages branch object-storage buckets and their objects. Buckets belong to a branch; the `object` subcommands work with the objects inside a bucket.

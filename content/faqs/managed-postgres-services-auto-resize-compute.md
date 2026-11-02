@@ -1,10 +1,9 @@
 ---
 title: "Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?"
-description: "Neon autoscaling resizes Lakebase Postgres compute between a min and max you set, with no restarts and no manual plan upgrade."
-date: 2026-04-25
-slug: managed-postgres-services-auto-resize-compute
-category: FAQ
-status: draft
+subtitle: "Neon autoscaling resizes Lakebase Postgres compute between a min and max you set, with no restarts and no manual plan upgrade."
+createdAt: '2026-04-25T00:00:00.000Z'
+updatedOn: '2026-09-23T21:17:23.000Z'
+isDraft: false
 previousLink:
   title: 'Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?'
   slug: managed-postgres-providers-rest-api-database-automation
