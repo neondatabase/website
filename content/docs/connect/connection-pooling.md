@@ -246,6 +246,8 @@ The toggle is on by default for new projects. It doesn't start or stop the poole
 | Logical replication               | Direct          | Requires persistent connection            |
 | Admin tasks                       | Direct          | May need session-level features           |
 
+If you run on a highly elastic platform such as AWS Fargate, Google Cloud Run, or Vercel, see [Serverless connection pooling](/docs/guides/serverless-connection-pooling) for strategies that prevent connection leaks and exhaustion when instances scale out or suspend.
+
 ## Connection pooling in transaction mode
 
 Neon uses PgBouncer in transaction mode (`pool_mode=transaction`), which means connections are returned to the pool after each transaction completes. This limits some Postgres features that require persistent sessions:
