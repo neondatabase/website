@@ -1521,6 +1521,7 @@
                       slug: guides/cloudflare-workers
                 - title: Deno
                   slug: guides/deno
+                  tag: deprecated
                 - title: Heroku
                   slug: guides/heroku
                 - title: Koyeb
