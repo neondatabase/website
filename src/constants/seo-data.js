@@ -131,6 +131,7 @@ export default {
     pathname: LINKS.partners,
   },
   pingThing: {
+    pathname: LINKS.pingThing,
     robotsNoindex: 'noindex',
   },
   pricing: {
@@ -144,7 +145,7 @@ export default {
     title: 'Impact of Postgres restores survey',
     description:
       'We asked 50 developers managing production Postgres about recovery times and their business impact.',
-    pathname: LINKS.report,
+    pathname: LINKS.restoresSurvey,
     imagePath: '/images/social-previews/report.jpg',
   },
   variable: {
@@ -152,7 +153,7 @@ export default {
     description:
       'Discover how Neon dynamically scales Postgres compute resources for optimal performance during peak traffic without overpaying.',
     imagePath: '/images/social-previews/variable.jpg',
-    pathname: LINKS.variable,
+    pathname: LINKS.variableLoad,
   },
   costFleets: {
     title: 'Neon for platforms: Cost estimator',
