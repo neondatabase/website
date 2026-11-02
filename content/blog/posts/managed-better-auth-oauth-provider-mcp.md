@@ -12,7 +12,7 @@ authors:
 cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/managed-better-auth-oauth-provider-mcp/cover.jpg'
   alt: 'Managed Better Auth is now an OAuth provider, with MCP support'
-isFeatured: false
+isFeatured: true
 seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/managed-better-auth-oauth-provider-mcp/social.jpg'
   title: 'Managed Better Auth is now an OAuth provider, with MCP support - Neon'
