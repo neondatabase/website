@@ -518,6 +518,19 @@ module.exports = {
     },
   ],
 
+  // Site-level index served at /llms.txt, the location llmstxt.org tells agents to check first.
+  // Same content as public/docs/llms.txt, except the collapsed routes listed here link to their
+  // llms.txt catalogs instead of HTML landing pages, so agents starting at the site root can
+  // reach the community guides and changelog as markdown. public/docs/llms.txt is unchanged:
+  // it stays the official docs catalog that site search walks (see unlinkedIndexes above).
+  rootIndex: {
+    outputPath: 'public/llms.txt',
+    collapsedRouteUrls: {
+      guides: 'https://neon.com/guides/llms.txt',
+      'docs/changelog': 'https://neon.com/docs/changelog/llms.txt',
+    },
+  },
+
   // Configuration for llms-full.txt (single file with all doc content).
   // Uses shared excludePaths, EXCLUDED_DIRS, EXCLUDED_FILES from this config.
   // Section `collapse` settings are index-only and do not apply here.

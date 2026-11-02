@@ -3,7 +3,11 @@ import { createRequire } from 'module';
 import { describe, it, expect } from 'vitest';
 
 const require = createRequire(import.meta.url);
-const { generateIndexText, generateUnlinkedIndexText } = require('./generate-llms-index');
+const {
+  generateIndexText,
+  generateUnlinkedIndexText,
+  buildRootCollapsedEntries,
+} = require('./generate-llms-index');
 const config = require('./llms-index-config');
 
 // getSectionOrder (in the generator) includes any configured section that has a
@@ -92,6 +96,51 @@ describe('generateIndexText — Common tasks', () => {
       'public/guides/llms.txt',
       'public/docs/changelog/llms.txt',
     ]);
+  });
+});
+
+describe('site-level /llms.txt (rootIndex)', () => {
+  const collapsedEntries = [
+    {
+      route: 'docs/changelog',
+      title: 'Changelog',
+      url: 'https://neon.com/docs/changelog',
+      description: 'releases',
+    },
+    {
+      route: 'guides',
+      title: 'Community Guides',
+      url: 'https://neon.com/guides',
+      description: 'tutorials',
+    },
+  ];
+
+  it('links the guides and changelog llms.txt catalogs', () => {
+    const text = generateIndexText(
+      buildMinimalOrganized(),
+      buildRootCollapsedEntries(collapsedEntries, config.rootIndex)
+    );
+    expect(text).toContain('[Community Guides](https://neon.com/guides/llms.txt)');
+    expect(text).toContain('[Changelog](https://neon.com/docs/changelog/llms.txt)');
+    expect(text).toContain('## Common tasks');
+    expect(text).toContain(config.getStarted);
+  });
+
+  it('leaves the docs index entries unchanged', () => {
+    buildRootCollapsedEntries(collapsedEntries, config.rootIndex);
+    const text = generateIndexText(buildMinimalOrganized(), collapsedEntries);
+    expect(text).not.toContain('https://neon.com/guides/llms.txt');
+    expect(text).not.toContain('https://neon.com/docs/changelog/llms.txt');
+  });
+
+  it('writes to public/llms.txt, not over the docs index', () => {
+    expect(config.rootIndex.outputPath).toBe('public/llms.txt');
+  });
+
+  it('fails on a route that is not collapsed', () => {
+    expect(() =>
+      buildRootCollapsedEntries(collapsedEntries, { collapsedRouteUrls: { blog: 'x' } })
+    ).toThrow('not a collapsed route: blog');
   });
 });
 

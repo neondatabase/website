@@ -7,7 +7,7 @@
  * New pages auto-include; the config only shapes the output.
  *
  * Usage:
- *   node generate-llms-index.js              # Write to public/docs/llms.txt
+ *   node generate-llms-index.js              # Write public/docs/llms.txt and public/llms.txt
  *   node generate-llms-index.js --dry-run    # Print to console
  */
 
@@ -434,6 +434,20 @@ function generateSubIndexText(sectionName, sectionConf, sectionData) {
   return `${lines.join('\n').trim()}\n`;
 }
 
+/**
+ * Collapsed entries for the site-level /llms.txt: same as the docs index, but routes
+ * listed in rootIndex.collapsedRouteUrls link to their llms.txt catalogs.
+ */
+function buildRootCollapsedEntries(collapsedEntries, rootIndexConf) {
+  const urls = rootIndexConf.collapsedRouteUrls || {};
+  for (const route of Object.keys(urls)) {
+    if (!collapsedEntries.some((entry) => entry.route === route)) {
+      throw new Error(`rootIndex.collapsedRouteUrls route is not a collapsed route: ${route}`);
+    }
+  }
+  return collapsedEntries.map((entry) => ({ ...entry, url: urls[entry.route] || entry.url }));
+}
+
 function generateUnlinkedIndexText(indexConf, docs) {
   const lines = [];
   lines.push(`# ${indexConf.title}`);
@@ -506,6 +520,7 @@ async function main() {
       const collapsed = COLLAPSED_ROUTES[route];
       if (collapsed) {
         collapsedEntries.push({
+          route,
           title: collapsed.title,
           description: collapsed.description,
           url: collapsed.url,
@@ -586,9 +601,23 @@ async function main() {
     console.log(`  ${indexConf.route} (unlinked): ${docs.length} files`);
   }
 
+  const rootIndexFile = config.rootIndex
+    ? {
+        outputPath: config.rootIndex.outputPath,
+        content: generateIndexText(
+          organized,
+          buildRootCollapsedEntries(collapsedEntries, config.rootIndex)
+        ),
+      }
+    : null;
+
   if (dryRun) {
     console.log('--- Generated llms.txt ---\n');
     console.log(indexContent);
+    if (rootIndexFile) {
+      console.log(`--- Generated ${rootIndexFile.outputPath} ---\n`);
+      console.log(rootIndexFile.content);
+    }
     for (const sub of subIndexFiles) {
       console.log(`--- Generated ${sub.outputPath} ---\n`);
       console.log(sub.content);
@@ -601,6 +630,12 @@ async function main() {
     const outputPath = path.join(projectRoot, OUTPUT_PATH);
     await fs.writeFile(outputPath, indexContent);
     console.log(`Written to ${outputPath}`);
+
+    if (rootIndexFile) {
+      const rootPath = path.join(projectRoot, rootIndexFile.outputPath);
+      await fs.writeFile(rootPath, rootIndexFile.content);
+      console.log(`Written to ${rootPath}`);
+    }
 
     for (const sub of subIndexFiles) {
       const subPath = path.join(projectRoot, sub.outputPath);
@@ -628,4 +663,4 @@ if (require.main === module) {
 }
 
 // Export for testing
-module.exports = { generateIndexText, generateUnlinkedIndexText };
+module.exports = { generateIndexText, generateUnlinkedIndexText, buildRootCollapsedEntries };
