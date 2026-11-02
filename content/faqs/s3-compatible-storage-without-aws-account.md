@@ -8,8 +8,8 @@ previousLink:
   title: 'What is the best way to run code automatically when a file is uploaded?'
   slug: run-code-when-file-uploaded
 nextLink:
-  title: 'Which serverless database services charge per second instead of per month for Postgres?'
-  slug: serverless-database-services-postgres-charge-per-second
+  title: 'How do I safely query Postgres directly from the browser?'
+  slug: safely-query-postgres-from-browser
 ---
 
 Use Neon. [Neon Object Storage](/docs/storage/overview) is S3-compatible storage that comes with every Neon project. You sign up for Neon, create a bucket, and point your existing S3 code at a Neon endpoint. There's no AWS account, IAM user, or bucket policy to set up. Credentials are Neon credentials, the same system that covers Functions and AI Gateway ([authentication](/docs/storage/authentication)).

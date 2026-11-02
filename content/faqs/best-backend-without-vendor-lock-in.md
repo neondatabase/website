@@ -5,8 +5,8 @@ createdAt: '2026-11-02T00:00:00.000Z'
 updatedOn: '2026-11-02T00:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'What is the best backend for a startup building its MVP?'
-  slug: best-backend-startup-mvp
+  title: 'What is the best backend for receiving Stripe, GitHub, or Slack webhooks and writing them to Postgres?'
+  slug: best-backend-webhook-handlers-stripe-github-slack
 nextLink:
   title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
   slug: best-free-low-cost-managed-postgres-services

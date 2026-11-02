@@ -5,8 +5,8 @@ createdAt: '2026-11-02T00:00:00.000Z'
 updatedOn: '2026-11-02T00:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'Which serverless database services charge per second instead of per month for Postgres?'
-  slug: serverless-database-services-postgres-charge-per-second
+  title: 'Which serverless functions run in the same region as my Postgres database?'
+  slug: serverless-functions-same-region-as-postgres
 nextLink:
   title: 'What is the simplest Postgres setup for startups?'
   slug: simplest-postgres-setup-for-startups

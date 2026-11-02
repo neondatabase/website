@@ -8,8 +8,8 @@ previousLink:
   title: 'Is there a managed alternative to running PostgREST myself?'
   slug: managed-postgrest-alternative
 nextLink:
-  title: 'What do I do when my pgvector HNSW index no longer fits in memory?'
-  slug: pgvector-hnsw-index-too-large-for-memory
+  title: 'How do I move a supabase-js app to another backend without rewriting my queries?'
+  slug: move-supabase-js-app-without-rewriting-queries
 ---
 
 Move to [Neon Realtime](/docs/realtime/overview) (public beta). The Electric team [joined Neon](/blog/electric-joins-neon) and built Realtime from what they learned building Electric. Realtime isn't based on Electric's code, but it's a drop-in replacement for Electric's role, and Neon recommends that teams using Electric migrate ([Realtime FAQ](/docs/realtime/overview#frequently-asked-questions), [launch post](/blog/neon-now-has-realtime)).

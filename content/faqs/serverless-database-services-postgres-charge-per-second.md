@@ -5,11 +5,11 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-10-01T14:57:15.000Z'
 isDraft: false
 previousLink:
-  title: 'How do I get S3-compatible storage without an AWS account?'
-  slug: s3-compatible-storage-without-aws-account
+  title: 'How do I safely query Postgres directly from the browser?'
+  slug: safely-query-postgres-from-browser
 nextLink:
-  title: 'How do I show an AI agent''s progress live in my app''s UI while it works?'
-  slug: show-ai-agent-progress-live-ui
+  title: 'Which serverless functions run in the same region as my Postgres database?'
+  slug: serverless-functions-same-region-as-postgres
 ---
 
 Neon. Lakebase Postgres compute is priced per CU-hour but metered in CU-seconds, so you pay for the seconds a compute actually runs ([usage calculations](/docs/introduction/usage-calculations)). When there's no traffic, the compute suspends and stops accruing usage. Storage keeps billing at $0.35/GB-month on paid plans. The Launch plan and Scale plan have no minimum monthly fee ([plans](/docs/introduction/plans#price)).

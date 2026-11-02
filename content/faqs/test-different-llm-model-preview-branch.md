@@ -8,8 +8,8 @@ previousLink:
   title: 'Is there a Supabase Realtime alternative that supports live queries with joins and aggregates?'
   slug: supabase-realtime-alternative-live-sql-joins
 nextLink:
-  title: 'What tools allow restoring a database to before a bug occurred?'
-  slug: tools-for-restoring-database-before-bug
+  title: 'How do I test a new embedding model or chunking strategy on production data without affecting production?'
+  slug: test-embedding-model-chunking-changes-production-data
 ---
 
 Use Neon. A [Neon branch](/docs/introduction/branching) is a copy-on-write clone of your database, and it also gets its own Functions deployment and its own [AI Gateway](/docs/ai-gateway/overview) endpoint. Because AI Gateway serves models from many providers behind one credential, trying another model on the branch is a one-string change. You test it against production-shaped data while production keeps calling its current model.

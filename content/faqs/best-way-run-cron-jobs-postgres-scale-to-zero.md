@@ -5,8 +5,8 @@ createdAt: '2026-11-02T00:00:00.000Z'
 updatedOn: '2026-11-02T00:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'What is the best way to do hybrid search (BM25 plus vector) in Postgres?'
-  slug: best-way-hybrid-search-bm25-vector-postgres
+  title: 'What is the best way to run background jobs for a Postgres app?'
+  slug: best-way-run-background-jobs-postgres-app
 nextLink:
   title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
   slug: best-ways-separate-postgres-database-development

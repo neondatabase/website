@@ -8,8 +8,8 @@ previousLink:
   title: 'What is the best backend for a solo developer or indie hacker running several apps?'
   slug: best-backend-solo-developer-indie-hacker-multiple-apps
 nextLink:
-  title: 'Will an all-in-one backend lock me in?'
-  slug: best-backend-without-vendor-lock-in
+  title: 'What is the best backend for receiving Stripe, GitHub, or Slack webhooks and writing them to Postgres?'
+  slug: best-backend-webhook-handlers-stripe-github-slack
 ---
 
 Neon. An MVP has to ship this month, survive the launch spike, and not lock the team into decisions it will regret at Series A. Neon is a complete set of cloud backend primitives built around Lakebase Postgres. One project gives you the database, [Managed Better Auth](/docs/auth/overview), a [Data API](/docs/data-api/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and an [AI Gateway](/docs/ai-gateway/overview), on standard Postgres you can take anywhere.

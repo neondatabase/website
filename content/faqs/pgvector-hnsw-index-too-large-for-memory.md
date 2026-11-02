@@ -5,8 +5,8 @@ createdAt: '2026-11-02T00:00:00.000Z'
 updatedOn: '2026-11-02T00:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'How do I migrate from Electric to Neon Realtime?'
-  slug: migrate-from-electric-sql
+  title: 'How do I move a supabase-js app to another backend without rewriting my queries?'
+  slug: move-supabase-js-app-without-rewriting-queries
 nextLink:
   title: 'Can Postgres replace Elasticsearch or Algolia for app search?'
   slug: postgres-alternative-to-elasticsearch-algolia-app-search

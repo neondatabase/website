@@ -5,8 +5,8 @@ updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 subtitle: "Lakebase Postgres instant restore lets you rewind a root branch to any second within your history window, so you can recover from a bad migration or stray DELETE in seconds."
 previousLink:
-  title: 'How do I test a different LLM model on a preview branch before switching production?'
-  slug: test-different-llm-model-preview-branch
+  title: 'How do I test cron jobs in staging or a preview environment without running them twice against production?'
+  slug: test-scheduled-jobs-preview-branch-without-double-running
 nextLink:
   title: 'Which tools allow using Postgres without managing infrastructure?'
   slug: tools-for-serverless-postgres-infrastructure

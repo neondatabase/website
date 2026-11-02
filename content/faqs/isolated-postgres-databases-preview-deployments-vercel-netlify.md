@@ -5,8 +5,8 @@ createdAt: '2026-04-25T00:00:00.000Z'
 updatedOn: '2026-11-02T19:00:00.000Z'
 isDraft: false
 previousLink:
-  title: 'How do I import data from a CSV file into my Neon database?'
-  slug: import-csv-into-database
+  title: 'How do I automatically index uploaded documents for search in Postgres?'
+  slug: index-uploaded-documents-for-search-automatically
 nextLink:
   title: 'How do I keep LLM API keys out of preview deployments and CI?'
   slug: keep-llm-api-keys-out-of-preview-deployments-ci

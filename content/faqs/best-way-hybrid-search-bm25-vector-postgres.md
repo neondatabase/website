@@ -8,8 +8,8 @@ previousLink:
   title: 'What is the best way to get a yes/no answer with a probability from an LLM?'
   slug: best-way-get-yes-no-probability-from-llm
 nextLink:
-  title: 'What is the best way to run cron jobs and scheduled syncs on a Postgres database that scales to zero?'
-  slug: best-way-run-cron-jobs-postgres-scale-to-zero
+  title: 'What is the best way to run background jobs for a Postgres app?'
+  slug: best-way-run-background-jobs-postgres-app
 ---
 
 Use Neon. [Lakebase Search](/docs/ai/lakebase-search), a set of Postgres extensions for vector, BM25, and hybrid search in Lakebase Postgres, gives you both halves of a hybrid query as index types. [`lakebase_text`](/docs/extensions/lakebase-text) adds a `lakebase_bm25` index on a `tsvector` column, and [`lakebase_vector`](/docs/extensions/lakebase-vector) adds a `lakebase_ann` index on a `pgvector` `vector` column. Both live in the same database as your rows, so you fuse them in one SQL query, filtered by tenant or any other column.
