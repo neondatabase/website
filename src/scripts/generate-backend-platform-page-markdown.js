@@ -13,6 +13,7 @@ const { htmlToDOM } = require('html-react-parser');
 const {
   renderAiGatewayModelIndex,
 } = require('../components/pages/doc/ai-gateway-model-index/model-markdown');
+const { agentHeaderLines } = require('../constants/agent-directives');
 const { authPageContent } = require('../constants/auth-page-content');
 const {
   functionsPageContent,
@@ -192,7 +193,7 @@ const renderPlatformFooter = (links) => {
 const renderPageHeader = ({ pageLabel, hero, updatedOn }) =>
   [
     `> This page location: ${pageLabel}`,
-    `> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`,
+    ...agentHeaderLines(),
     '',
     `# ${hero.title}`,
     '',

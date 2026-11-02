@@ -3,6 +3,8 @@ import { createRequire } from 'module';
 import { describe, it, expect } from 'vitest';
 
 const require = createRequire(import.meta.url);
+const { AGENT_SKILLS_NOTE } = require('../constants/agent-directives');
+
 const { generateIndexText, generateUnlinkedIndexText } = require('./generate-llms-index');
 const config = require('./llms-index-config');
 
@@ -54,6 +56,15 @@ describe('generateIndexText — Get started', () => {
       '[Get started with your AI agent](https://neon.com/docs/get-started/with-an-agent.md)'
     );
     expect(text.indexOf(config.getStarted)).toBeLessThan(text.indexOf('## Get Started'));
+  });
+});
+
+describe('Agent skills note', () => {
+  it('is covered by getStarted in llms.txt, not repeated as a separate note', () => {
+    const text = generateIndexText(buildMinimalOrganized(), []);
+    expect(text).not.toContain(AGENT_SKILLS_NOTE);
+    expect(config.getStarted).toContain('Check with the user before running them');
+    expect(config.getStarted).toContain('`npx neon@latest skills -y`');
   });
 });
 
