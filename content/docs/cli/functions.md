@@ -10,13 +10,13 @@ redirectFrom:
   - /docs/cli/function
 ---
 
-The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a catalog template, see the [Function Registry](/docs/compute/functions/registry).
+The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a template, browse [Function Registry templates](/functions/templates).
 
 <CliSubcommands command="functions" />
 
 ## neon functions new (#new)
 
-Creates a function from a [Function Registry](/docs/compute/functions/registry) template. It writes the template's files to `functions/<slug>/` and declares the function in `neon.ts`, creating the file if needed. It doesn't need a project or a signed-in session. Requires the Neon CLI 8.11.0 or later. See [Function Registry templates](/docs/compute/functions/registry/templates) for the current catalog.
+Creates a function from a [Function Registry template](/functions/templates). It writes the template's files to `functions/<slug>/` and declares the function in `neon.ts`, creating the file if needed. It doesn't need a project or a signed-in session. Requires the Neon CLI 8.11.0 or later.
 
 <CliUsage command="functions new" />
 
@@ -72,11 +72,11 @@ Next:
   neon functions deploy hello --src functions/hello/index.ts
 ```
 
-Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. Set `NEON_FUNCTION_REGISTRY_DIR` to a local copy of that directory to install templates you're developing. See [Test a template locally](/docs/compute/functions/registry#test-a-template-locally).
+Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. Set `NEON_FUNCTION_REGISTRY_DIR` to a local copy of that directory to install templates you're developing. See [Test a template locally](/docs/compute/functions/registry#test-your-template-locally).
 
 ## neon functions templates (#templates)
 
-Browse the templates in the [Function Registry](/docs/compute/functions/registry). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json); see [Function Registry templates](/docs/compute/functions/registry/templates) for a readable list.
+Browse the templates at [neon.com/functions/templates](/functions/templates). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json). To publish your own, see [Create a Function Registry template](/docs/compute/functions/registry).
 
 <CliSubcommands command="functions templates" anchorParts="templates" />
 

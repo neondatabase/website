@@ -338,6 +338,27 @@ const defaultConfig = {
         destination: '/?ref=tbm-p',
         permanent: true,
       },
+      // Function Registry templates moved from docs to the /functions/templates marketing pages
+      {
+        source: '/docs/compute/functions/registry/templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry/templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates',
+        destination: '/functions/templates',
+        permanent: true,
+      },
+      {
+        source: '/docs/compute/functions/registry-templates/:id',
+        destination: '/functions/templates/:id',
+        permanent: true,
+      },
       // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
       {
         source: '/branching/identifying-use-case',

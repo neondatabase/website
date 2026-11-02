@@ -5,7 +5,11 @@ import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
-import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import {
+  isAIAgentRequest,
+  getFunctionTemplatesMarkdownPath,
+  getMarkdownPath,
+} from './utils/ai-agent-detection';
 import { createLLMAnalytics } from './utils/llm-analytics';
 import { markdownNotFoundResponse } from './utils/markdown-404';
 
@@ -17,7 +21,9 @@ const SITE_URL =
 function isContentRoute(pathname) {
   const path = pathname.slice(1).replace(/\/$/, '');
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
-  const isGeneratedPage = Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized);
+  const isGeneratedPage =
+    Object.hasOwn(GENERATED_PAGE_MARKDOWN_PATHS, normalized) ||
+    getFunctionTemplatesMarkdownPath(normalized) !== null;
   const isContentPage = Object.keys(CONTENT_ROUTES).some(
     (route) => normalized === route || path.startsWith(`${route}/`)
   );
@@ -411,6 +417,8 @@ export const config = {
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
     '/functions', // Agent-friendly Functions page
+    '/functions/templates', // Agent-friendly Function Registry catalog
+    '/functions/templates/:id', // Agent-friendly Function Registry template pages
     '/ai-gateway', // Agent-friendly AI Gateway page
     '/object-storage', // Agent-friendly Object Storage page
     '/auth', // Agent-friendly Auth product page

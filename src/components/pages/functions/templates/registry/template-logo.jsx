@@ -1,16 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import PropTypes from 'prop-types';
 
+import CodeIcon from 'components/pages/doc/detail-icon-cards/images/code.inline.svg';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import { cn } from 'utils/cn';
 import {
   isNeonRegistryTemplate,
   isRegistryLogoUrl,
   registryLogoAlt,
-  registryProviderLabel,
 } from 'utils/function-registry';
-
-import CodeIcon from '../detail-icon-cards/images/code.inline.svg';
 
 const NEON_LOGO = ICONS_CONFIG.neon;
 
@@ -18,9 +16,8 @@ const FunctionRegistryTemplateLogo = ({ template, eager = false, variant = 'card
   const isCard = variant === 'card';
   const loading = eager ? 'eager' : 'lazy';
   const sizeClass = isCard ? 'mb-8 size-7' : 'size-8';
-  const alt = registryLogoAlt(template, {
-    decorative: isCard || !registryProviderLabel(template),
-  });
+  // Cards already announce the title, so their logo stays decorative.
+  const alt = registryLogoAlt(template, { decorative: isCard });
 
   if (isRegistryLogoUrl(template.logo)) {
     return (
