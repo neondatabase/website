@@ -9,8 +9,12 @@ categories:
   - product
 authors:
   - shridhar-deshmukh
+cover:
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/managed-better-auth-oauth-provider-mcp/cover.jpg'
+  alt: 'Managed Better Auth is now an OAuth provider, with MCP support'
 isFeatured: false
 seo:
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/managed-better-auth-oauth-provider-mcp/social.jpg'
   title: 'Managed Better Auth is now an OAuth provider, with MCP support - Neon'
   description: >-
     Managed Better Auth now supports the OAuth Provider plugin. It turns your auth instance into an OAuth 2.1 authorization server, so other apps and MCP clients can sign users in with your app.
