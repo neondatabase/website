@@ -15,6 +15,7 @@ redirectFrom:
   - /docs/neon-auth/concepts/custom-user-data
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.

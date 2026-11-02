@@ -2333,7 +2333,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
     ? path.relative(rootDir, inputPath).split(path.sep).join('/')
     : inputPath.split(path.sep).join('/');
   const isFaq = relativeInputPath.startsWith('content/faqs/');
-  if (isFaq && frontmatter.updatedOn) {
+  if (frontmatter.updatedOn) {
     output += `Last updated: ${new Date(frontmatter.updatedOn).toISOString().slice(0, 10)}\n\n`;
   }
   output += `${markdown.trim()}\n`;

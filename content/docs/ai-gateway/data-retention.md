@@ -8,6 +8,7 @@ summary: >-
   for safety purposes for certain models. Jev is hosted by TypeSafe AI, and
   TypeSafe AI's terms apply.
 enableTableOfContents: true
+updatedOn: '2026-10-29T17:40:20.000Z'
 ---
 
 Neon AI Gateway gives you one credential for many models. Most models are served through [Databricks Model Serving](https://docs.databricks.com/aws/en/machine-learning/model-serving), and data retention for those requests follows Databricks' policy, which covers what Databricks retains and what partner model providers may retain.

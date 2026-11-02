@@ -5,6 +5,7 @@ summary: >-
   Neon's Realtime makes any SQL query live. Subscribe in realtime to your Lakebase Postgres database. Develop apps and agents with end-to-end reactivity using type-safe live queries and optimistic mutations.
 enableTableOfContents: true
 titleWidth: '530'
+updatedOn: '2026-10-30T16:28:20.000Z'
 ---
 
 <div className="mb-6">

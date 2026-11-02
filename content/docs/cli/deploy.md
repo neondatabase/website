@@ -6,6 +6,7 @@ summary: >-
   is a top-level alias of `neon config apply` with the same options, so you can
   reconcile a branch without the `config` prefix.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 The `deploy` command applies a `neon.ts` policy to a branch. It is a top-level alias of [`neon config apply`](/docs/cli/config#apply), with the same options.

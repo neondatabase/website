@@ -9,6 +9,7 @@ summary: >-
 redirectFrom:
   - /docs/cli/profiles
 enableTableOfContents: true
+updatedOn: '2026-10-19T14:21:42.000Z'
 ---
 
 A profile is a pointer to a credentials file, so one machine can hold logins for several Neon accounts and pick between them per command.

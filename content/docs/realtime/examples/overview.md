@@ -4,6 +4,7 @@ subtitle: 'Code examples and demo apps for building with Realtime.'
 summary: >-
   Examples of building realtime, reactive apps and agents with Neon Realtime: walkthroughs for Next.js, TanStack, Mastra, Drizzle and Kysely, plus demo apps that combine Realtime with the rest of the Neon platform.
 enableTableOfContents: true
+updatedOn: '2026-10-15T14:51:27.000Z'
 ---
 
 The [code&nbsp;examples](#code-examples) teach you how to use Realtime with a specific framework or library. The [demo&nbsp;apps](#demo-apps) show what you can build with Realtime and the wider Neon platform.

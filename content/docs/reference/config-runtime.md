@@ -8,6 +8,7 @@ summary: >-
   CI step, a deploy script, or another tool that needs to reconcile a branch
   against a neon.ts policy.
 enableTableOfContents: true
+updatedOn: '2026-10-30T19:13:49.000Z'
 ---
 
 `@neon/config-runtime` is the package the [`neon` CLI](/docs/cli/config) itself uses to run a [`neon.ts`](/docs/reference/neon-ts) policy: read a branch's live state, diff a policy against it, apply the result, bundle and deploy Neon Functions, and register their custom domains. Import it directly when you're writing your own CI step or script and the CLI commands (`neon config plan`, `neon deploy`) don't fit. For example, a custom GitHub Actions job that applies a policy to a freshly created preview branch.

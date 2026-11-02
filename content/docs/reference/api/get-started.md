@@ -7,6 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/api/getting-started
+updatedOn: '2026-09-04T22:12:54.000Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API" description="Copy into your AI assistant to get an API key and make your first API call."/>

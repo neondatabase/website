@@ -7,6 +7,7 @@ summary: >-
   the credentials on a branch, reveal a credential's secrets, rotate its secrets
   in place, and revoke it.
 enableTableOfContents: true
+updatedOn: '2026-10-21T14:03:15.000Z'
 ---
 
 The `credentials` command manages scoped credentials on a branch. A credential grants an application or agent direct access to a branch's surfaces without an account API key. Each credential carries one or more scopes and, when issued, a pair of secrets: an `api_token` and an `s3_secret_access_key`.
