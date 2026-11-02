@@ -73,10 +73,15 @@ export async function generateMetadata(props) {
 
 export async function generateStaticParams() {
   const templateSlugs = await getPostSlugs(TEMPLATE_PAGES_DIR_PATH);
-  return templateSlugs.map((slug) => ({
-    slug: slug.slice(1),
-  }));
+  // Only top-level pages: nested ones (use-cases/*, programs/*) are built by their own routes.
+  return templateSlugs
+    .map((slug) => slug.slice(1))
+    .filter((slug) => !slug.includes('/'))
+    .map((slug) => ({ slug }));
 }
+
+// Only serve the slugs above; anything else, like an encoded slash (/use-cases%2Fai-agents), is a 404.
+export const dynamicParams = false;
 
 export const revalidate = 60;
 
