@@ -210,6 +210,7 @@ If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/
   }
 }
 ```
+
 </Admonition>
 
 ## Resources

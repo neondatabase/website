@@ -86,6 +86,11 @@ export default {
     pathname: LINKS.functions,
     markdownPath: `${LINKS.functions}.md`,
   },
+  functionsTemplates: {
+    title: 'Function Registry templates — Neon',
+    description: 'Open-source functions you add to a Neon project with one command.',
+    pathname: LINKS.functionsTemplates,
+  },
   auth: {
     title: 'Neon Auth — Managed Better Auth that branches with your backend',
     description:

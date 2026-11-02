@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import BackendPlatformPage from 'components/pages/backend-platform/backend-platform-page';
 import BackendServices from 'components/pages/backend-platform/backend-services';
 import BuiltForAgents from 'components/pages/backend-platform/built-for-agents';
@@ -5,6 +7,7 @@ import BackendHero from 'components/pages/backend-platform/hero';
 import BackendCompute from 'components/pages/functions/backend-compute';
 import Branching from 'components/pages/functions/branching';
 import HeroIllustration from 'components/pages/functions/hero/illustration';
+import TemplatesPreview from 'components/pages/functions/templates-preview';
 import Faq from 'components/shared/faq';
 import {
   functionsPageContent,
@@ -15,6 +18,8 @@ import getMetadata from 'utils/get-metadata';
 import getWebPageJsonLd from 'utils/get-web-page-json-ld';
 
 export const metadata = getMetadata(SEO_DATA.functions);
+
+export const revalidate = 3600;
 
 const jsonLd = getWebPageJsonLd({
   ...SEO_DATA.functions,
@@ -41,6 +46,9 @@ const FunctionsPage = () => (
     />
     <BackendCompute />
     <Branching />
+    <Suspense fallback={null}>
+      <TemplatesPreview />
+    </Suspense>
     <Faq
       updatedOn={functionsPageContent.updatedOn}
       items={functionsPageContent.faqItems}
