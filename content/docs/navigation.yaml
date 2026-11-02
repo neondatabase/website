@@ -822,7 +822,6 @@
                   slug: auth/guides/plugins/magic-link
                 - title: OAuth Provider
                   slug: auth/guides/plugins/oauth-provider
-                  tag: beta
                 - title: OpenAPI
                   slug: auth/guides/plugins/openapi
                 - title: Organization
