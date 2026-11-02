@@ -104,7 +104,9 @@ Use a **direct (non-pooled)** connection string when you run the migration, not 
 
 Use this when a user reports high database bills, unexpected network transfer, egress spikes, query overfetching, or wants a cost-efficiency review of database query patterns.
 
-Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops. Read [Egress optimization](references/egress-optimization.md) for the full workflow.
+Before editing code, read [Egress optimization](references/egress-optimization.md). Audit all five patterns: unused columns, missing pagination, repeated static reads, application-side aggregation, and JOIN duplication. Do not stop after fixing `SELECT *`.
+
+Work in four steps: diagnose which queries transfer the most data, analyze the code behind them, fix the anti-patterns, then verify that behavior is preserved and transfer drops.
 
 ## Troubleshooting and Neon-Specific Performance
 
