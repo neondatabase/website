@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
+import { SITEMAP_MD } from 'constants/agent-discovery';
 import { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } from 'constants/content';
 import LINKS from 'constants/links';
 import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
@@ -148,6 +149,8 @@ function skillReferenceRedirectResponse(req, pathname) {
 // them. STATIC_MD is the build-time manifest of those files.
 const STATIC_MD = new Set(STATIC_MD_PATHS);
 
+const SITEMAP_MD_PATHS = new Set([SITEMAP_MD.path, ...SITEMAP_MD.aliases]);
+
 // For a `.md` URL with no generated /md sibling: serve the real static file if it
 // exists (manifest hit → next), else a markdown 404. This makes every missing
 // `.md` — skills, .well-known, or an arbitrary path like /foo/bar.md — return
@@ -180,6 +183,11 @@ function skillAliasTarget(pathname) {
 
 function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
+
+  // /docs/sitemap.md is a route handler, not a file in public/, and its aliases
+  // are rewritten to it. Serve them before the generated /md lookup below, which
+  // would otherwise send /docs/sitemap.md to a missing /md/docs/sitemap.md.
+  if (SITEMAP_MD_PATHS.has(pathname)) return servedStaticMarkdown(analytics);
 
   // Skill-discovery alias: no physical file here — a next.config rewrite maps it
   // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a

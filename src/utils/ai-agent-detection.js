@@ -144,6 +144,11 @@ const DEFAULT_404_LINKS = [
     description: 'full table of contents, start here to find the right page',
   },
   {
+    label: 'Neon docs sitemap',
+    href: '/docs/sitemap.md',
+    description: 'every docs page, grouped by the docs navigation',
+  },
+  {
     label: 'Neon REST API',
     href: '/docs/reference/api.md',
     description: 'all REST endpoints grouped by resource',

@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const { SITEMAP_MD } = require('./src/constants/agent-discovery');
 const { CONTENT_ROUTES, GENERATED_PAGE_MARKDOWN_PATHS } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
@@ -2978,6 +2979,8 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
+        // Serve /sitemap.md and /.well-known/sitemap.md from /docs/sitemap.md (same pattern)
+        ...SITEMAP_MD.aliases.map((source) => ({ source, destination: SITEMAP_MD.path })),
         // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
         // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
         // Update the destination here if the primary skill changes.
