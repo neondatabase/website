@@ -50,18 +50,16 @@ Without `--skill`, the interactive command lets you pick from the catalog, and `
 
 The available skills are:
 
-| Skill                            | Installed by default |
-| -------------------------------- | -------------------- |
-| `neon`                           | Yes                  |
-| `neon-ai-gateway`                | Yes                  |
-| `neon-auth`                      | Yes                  |
-| `neon-functions`                 | Yes                  |
-| `neon-object-storage`            | Yes                  |
-| `neon-postgres`                  | Yes                  |
-| `neon-postgres-branches`         | Yes                  |
-| `neon-postgres-egress-optimizer` | Yes                  |
-| `neon-realtime`                  | Yes                  |
-| `neon-postgres-agent-platforms`  | No                   |
+| Skill                           | Installed by default |
+| ------------------------------- | -------------------- |
+| `neon`                          | Yes                  |
+| `neon-ai-gateway`               | Yes                  |
+| `neon-auth`                     | Yes                  |
+| `neon-functions`                | Yes                  |
+| `neon-object-storage`           | Yes                  |
+| `neon-postgres`                 | Yes                  |
+| `neon-realtime`                 | Yes                  |
+| `neon-postgres-agent-platforms` | No                   |
 
 Passing an unknown skill stops the command and prints the current supported list.
 
