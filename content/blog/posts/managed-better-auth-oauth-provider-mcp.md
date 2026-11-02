@@ -25,6 +25,8 @@ seo:
     Managed Better Auth now supports the OAuth Provider plugin. It turns your auth instance into an OAuth 2.1 authorization server, so other apps and MCP clients can sign users in with your app.
 ---
 
+![Managed Better Auth is now an OAuth provider, with MCP support](https://cdn.neonapi.io/public/images/pages/blog/managed-better-auth-oauth-provider-mcp/cover.jpg)
+
 Managed Better Auth now supports the [OAuth Provider plugin](https://neon.com/docs/auth/guides/plugins/oauth-provider), one of our most requested features. It turns your auth instance into an OAuth 2.1 authorization server, so other apps and MCP clients can sign users in with your app.
 
 In Better Auth, OAuth provider and MCP are two separate plugins. In Managed Better Auth they're one. You enable the OAuth provider, add your MCP server URL in the same panel, and a single auth instance handles both:
