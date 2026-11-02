@@ -7,6 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/registry-templates
+updatedOn: '2026-10-26T11:09:41.000Z'
 ---
 
 Search the live [Function Registry](/docs/compute/functions/registry) catalog, then open a template.

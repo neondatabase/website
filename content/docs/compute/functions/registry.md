@@ -6,6 +6,7 @@ summary: >-
   browse /docs/compute/functions/registry/templates, fetch
   https://neon.com/functions/registry/registry.json.
 enableTableOfContents: true
+updatedOn: '2026-10-26T11:09:41.000Z'
 ---
 
 The Function Registry is a public catalog of [Neon Functions](/docs/compute/functions/overview). [`neon functions new`](/docs/cli/functions#new) copies a template into `functions/<slug>/` and declares it in [`neon.ts`](/docs/reference/neon-ts), creating that file if needed. Use [`neon bootstrap`](/docs/cli/bootstrap) when you're starting from an empty directory.

@@ -8,6 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/guides/custom-domains
 tag: beta
+updatedOn: '2026-10-14T11:41:12.000Z'
 ---
 
 <FeatureBetaProps feature_name="Custom domains for Neon Functions" />

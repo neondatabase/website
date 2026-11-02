@@ -4,6 +4,7 @@ subtitle: 'Bind live queries to component and agent state.'
 summary: >-
   Bind live queries to React component state with useLiveQuery, change their parameters and handle errors, or sync a broader live query into a TanStack DB collection and derive instant, local queries from it.
 enableTableOfContents: true
+updatedOn: '2026-10-30T15:07:38.000Z'
 ---
 
 Build reactive apps and agents using higher-level reactivity primitives that manage live query [subscriptions](./subscribing) for you.

@@ -8,6 +8,7 @@ summary: >-
   name, search log bodies, poll for new lines with Go live, and download the
   current view as a .log file. Logs are retained for 3 days.
 enableTableOfContents: true
+updatedOn: '2026-10-16T11:18:06.000Z'
 ---
 
 The Monitoring page shows service logs in three tabs: **Functions**, **Storage**, and **Realtime**. Each tab is a log viewer for that service on the current branch; there is no combined, all-services view. The tabs share the same controls, described below. The **Realtime** tab appears only on branches where [Realtime](/docs/realtime/overview) is available.
