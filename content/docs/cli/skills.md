@@ -50,20 +50,20 @@ Without `--skill`, the interactive command lets you pick from the catalog, and `
 
 The available skills are:
 
-| Skill                            | Installed by default |
-| -------------------------------- | -------------------- |
-| `neon`                           | Yes                  |
-| `neon-ai-gateway`                | Yes                  |
-| `neon-auth`                      | Yes                  |
-| `neon-functions`                 | Yes                  |
-| `neon-object-storage`            | Yes                  |
-| `neon-postgres`                  | Yes                  |
-| `neon-postgres-branches`         | Yes                  |
-| `neon-postgres-egress-optimizer` | Yes                  |
-| `neon-realtime`                  | Yes                  |
-| `neon-postgres-agent-platforms`  | No                   |
+| Skill                           | Installed by default |
+| ------------------------------- | -------------------- |
+| `neon`                          | Yes                  |
+| `neon-ai-gateway`               | Yes                  |
+| `neon-auth`                     | Yes                  |
+| `neon-functions`                | Yes                  |
+| `neon-object-storage`           | Yes                  |
+| `neon-postgres`                 | Yes                  |
+| `neon-realtime`                 | Yes                  |
+| `neon-postgres-agent-platforms` | No                   |
 
 Passing an unknown skill stops the command and prints the current supported list.
+
+Branching workflows and egress optimization are included in `neon-postgres`.
 
 The list of installable skills is built into each CLI release, so a skill that Neon publishes after the version you installed won't appear until you upgrade the CLI.
 

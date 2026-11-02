@@ -99,7 +99,7 @@ Or install it from the command line with [`npx neon@latest plugins --agent claud
 
 ### Codex plugin
 
-If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP), the main Neon skill, and the egress optimizer skill.
+If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP) and the `neon-postgres` skill, including its branching and egress-optimization workflows.
 
 To install from the command line instead, run [`npx neon@latest plugins --agent codex`](/docs/cli/plugins). See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
@@ -147,6 +147,10 @@ neon skills -s neon -s neon-postgres
 
 Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-postgres` instead.
 
+<Callout title="Standalone Postgres workflow skills retired">
+Branching and egress optimization now live in `neon-postgres`. If you previously installed `neon-postgres-branches` or `neon-postgres-egress-optimizer`, update `neon-postgres` and remove those stale local skill directories.
+</Callout>
+
 ### Core
 
 Start here for platform overview and Postgres development.
@@ -154,16 +158,7 @@ Start here for platform overview and Postgres development.
 | Skill                                                                        | Description                                                                                                                                                |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, including Claimable Neon when there is no account yet |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices                                                                                    |
-
-### Database workflows
-
-Branch and optimize Postgres projects.
-
-| Skill                                                                                                          | Description                                                                                                   |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows |
-| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                             |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Lakebase Postgres setup and best practices, including branching workflows, egress optimization, search, connections, and scaling                           |
 
 ### Neon Platform
 

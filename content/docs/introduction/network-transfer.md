@@ -288,15 +288,15 @@ For broader cost reduction strategies across all billing metrics, see [Cost opti
 
 **Use Private Link for internal traffic.** If your application runs in AWS, [Private Networking](/docs/guides/neon-private-networking) (Scale plan) routes traffic over PrivateLink at $0.01/GB instead of $0.10/GB for public network transfer beyond the included allowance.
 
-### Use the egress optimizer agent skill
+### Use the Neon Postgres agent skill
 
-An [agent skill](https://github.com/neondatabase/agent-skills) is available that guides your AI assistant through diagnosing and fixing application-side query patterns that cause excessive egress. The skill walks through analyzing your codebase for anti-patterns (such as `SELECT *`, missing pagination, high-frequency queries on static data, and application-side aggregation), applying fixes, and verifying with tests. To add it to your AI assistant with the [Neon CLI](/docs/cli):
+The [`neon-postgres` agent skill](https://skills.sh/neondatabase/agent-skills/neon-postgres) guides your AI assistant through diagnosing and fixing application-side query patterns that cause excessive egress. Its egress-optimization workflow walks through analyzing your codebase for anti-patterns (such as `SELECT *`, missing pagination, high-frequency queries on static data, and application-side aggregation), applying fixes, and verifying with tests. To add it to your AI assistant with the [Neon CLI](/docs/cli):
 
 ```bash
-neon skills -s neon-postgres-egress-optimizer
+neon skills -s neon-postgres
 ```
 
-Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon-postgres-egress-optimizer` instead.
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon-postgres` instead.
 
 <Admonition type="tip">
 Building a platform on Neon? You can cap per-project network transfer with [consumption limits](/docs/guides/consumption-limits).

@@ -41,11 +41,10 @@ Once everything is installed, Codex can help you:
 
 The Neon plugin bundles these parts (as shown in Codex):
 
-| Component                 | Type  | What it does                                                                                                                                                                                                                                               |
-| ------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Neon**                  | App   | Manage Lakebase Postgres databases. Backed by the **Neon MCP Server** for project and database operations.                                                                                                                                                 |
-| **Neon**                  | Skill | Guides and best practices for Neon: connection methods, branching, autoscaling, Managed Better Auth, and related topics. This corresponds to the **`neon-postgres`** skill in the [Agent Skills repository](https://github.com/neondatabase/agent-skills). |
-| **Neon Egress Optimizer** | Skill | Diagnose and reduce excessive Postgres **data transfer (egress)** costs.                                                                                                                                                                                   |
+| Component | Type  | What it does                                                                                                                                                                                                                                                                    |
+| --------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Neon**  | App   | Manage Lakebase Postgres databases. Backed by the **Neon MCP Server** for project and database operations.                                                                                                                                                                      |
+| **Neon**  | Skill | Guides and best practices for Neon: connection methods, branching, egress optimization, autoscaling, Managed Better Auth, and related topics. This corresponds to the **`neon-postgres`** skill in the [Agent Skills repository](https://github.com/neondatabase/agent-skills). |
 
 Together, the app gives Codex tools to act on your Neon organization and projects, while the skills steer workflows and deep dives (including cost optimization).
 
@@ -60,7 +59,7 @@ The **Neon** app connects Codex to Neon's APIs through MCP so it can, for exampl
 - Validate connection strings
 - Run SQL queries and migrations
 
-The **Neon Egress Optimizer** skill is for tasks focused on finding and fixing high egress, not for everyday CRUD.
+For tasks focused on finding and fixing high egress, the **Neon** skill loads its detailed egress-optimization workflow.
 
 ## Install the plugin in Codex
 

@@ -42,11 +42,10 @@ Once installed, Codex can interact with your Neon account, not just read static 
 
 ## What you can do with it
 
-The plugin bundles three components:
+The plugin bundles two components:
 
 - **Neon Postgres app** — gives Codex MCP-backed tools to create and manage projects, branches, and databases, run SQL queries, and validate connections.
-- **Neon Postgres skill** — guides Codex through Neon-specific workflows: connection patterns, ORM setup, branching strategies, autoscaling, and Neon Auth.
-- **Neon Postgres Egress Optimizer skill** — helps diagnose and reduce data transfer costs when egress is higher than expected.
+- **Neon Postgres skill** — guides Codex through Neon-specific workflows: connection patterns, ORM setup, branching strategies, egress optimization, autoscaling, and Neon Auth.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-codex-plugin/neon-plugin-in-openai-codex-marketplace-1024x574-8f535deb.png)
 
