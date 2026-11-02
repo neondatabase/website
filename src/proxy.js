@@ -178,14 +178,21 @@ function skillAliasTarget(pathname) {
   return match ? `/docs/ai/skills/${match[1]}/SKILL.md` : null;
 }
 
+// Alternate URLs for an existing static .md, so reads of each URL are tracked
+// separately while serving the same file. Keep in sync with the matching
+// rewrites in next.config.js.
+const STATIC_MD_ALIASES = {
+  '/prompts/agent-onboarding.md': '/prompts/agent-setup.md',
+};
+
 function staticMarkdownResponse(pathname, analytics) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
 
-  // Skill-discovery alias: no physical file here — a next.config rewrite maps it
-  // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a
-  // markdown 404. Returning next() rather than null keeps a single beacon —
+  // Skill-discovery or static .md alias: no physical file here — a next.config
+  // rewrite maps it to a real file. Serve (via the rewrite) if that file exists,
+  // else a markdown 404. Returning next() rather than null keeps a single beacon —
   // falling through would fire again in the agent branch for agent UAs.
-  const aliasTarget = skillAliasTarget(pathname);
+  const aliasTarget = STATIC_MD_ALIASES[pathname] ?? skillAliasTarget(pathname);
   if (aliasTarget !== null) {
     if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(analytics);
     analytics.track({ is404: true, branch: 'missing-skill-alias' });
