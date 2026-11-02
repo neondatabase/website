@@ -3,6 +3,7 @@ title: TypeScript SDK
 subtitle: Seal queries, subscribe from clients, and sync with frameworks
 summary: Reference for the Realtime TypeScript SDK, covering backend query sealing, low-level client subscriptions, React integration, and TanStack DB adapter.
 enableTableOfContents: true
+updatedOn: '2026-10-23T14:30:57.000Z'
 ---
 
 The Realtime SDK is split into modules:

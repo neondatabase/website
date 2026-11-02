@@ -5,6 +5,7 @@ author: rishi-raj-jain
 excludeFromBlog: true
 enableTableOfContents: true
 createdAt: '2026-09-24T00:00:00.000Z'
+updatedOn: '2026-09-30T23:17:02.000Z'
 ---
 
 Every SaaS app ends up storing files: avatars, invoices, PDF exports, chat attachments. AI agents add even more of them, like generated images, scraped pages, and tool outputs. Naturally, you'd store those files in an S3-compatible bucket and reference each one from a Postgres row.

@@ -8,6 +8,7 @@ enableTableOfContents: false
 redirectFrom:
   - /sla
   - /neon-business-sla
+updatedOn: '2026-10-23T20:52:45.000Z'
 ---
 
 **Last Modified:** February 20, 2026 

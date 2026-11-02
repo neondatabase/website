@@ -7,6 +7,7 @@ summary: >-
   levels derived from HTTP status. Covers scope_name values and common
   patterns that look like a problem but aren't.
 enableTableOfContents: true
+updatedOn: '2026-10-21T20:35:39.000Z'
 ---
 
 Every S3 request against a bucket streams a log line to the Neon Console. So does any bucket or object change made through the Console or Neon API (creating a bucket, deleting a bucket, deleting an object or prefix):
