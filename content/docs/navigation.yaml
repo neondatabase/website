@@ -1635,9 +1635,9 @@
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres-to-neon
-                - title: Replicate from Azure
+                - title: Azure
                   slug: import/migrate-from-azure-postgres
-                - title: Replicate from Supabase
+                - title: Supabase
                   slug: guides/logical-replication-supabase-to-neon
             - title: Schema Migration
               items:
