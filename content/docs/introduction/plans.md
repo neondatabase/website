@@ -53,7 +53,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Instant restore](#instant-restore)                   | Not available                                                      | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB of changes                                     | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                                                  | 100 manual snapshots, $0.09/GB-month       | 100 manual snapshots, $0.09/GB-month                                                              |
-| [Auth](#auth)                                         | Up to 60k MAU                                                      | Up to 1M MAU                               | Up to 1M MAU                                                                                      |
+| [Auth](#auth)                                         | Up to 60k MAU/project                                              | Up to 1M MAU/project                       | Up to 1M MAU/project                                                                              |
 | [Object Storage](#object-storage)                     | 5 GB/project                                                       | $0.023/GB-month                            | $0.023/GB-month                                                                                   |
 | [Functions](#functions)                               | 10 active / 400 waiting Capacity-Hours, 1M invocations per project | $0.10/$0.025/Capacity-Hour, $0.60/M        | $0.12/$0.03/Capacity-Hour, $0.60/M                                                                |
 | [AI Gateway](#ai-gateway)                             | Not available                                                      | Prepaid credits                            | Prepaid credits                                                                                   |
@@ -323,11 +323,11 @@ Automated backup schedules are available on paid plans. On the Agent plan, they 
 
 Managed Better Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
 
-Monthly Active User (MAU) limits per plan:
+Monthly Active User (MAU) limits per project:
 
-- **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
-- **Scale**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
+- **Free**: Up to 60,000 MAU per project
+- **Launch**: Up to 1M MAU per project ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
+- **Scale**: Up to 1M MAU per project ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
@@ -614,7 +614,7 @@ Only available on Scale: $0.01/GB, bidirectional, between Neon and private netwo
 </FaqItem>
 
 <FaqItem question="What are the limits and quotas for the Free plan?">
-The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 1 GB of Postgres storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (up to 1 GB of changes per project), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 1 GB of Postgres storage per project (up to 20 GB total across all projects), and 5 GB of public network transfer per project per month. It also includes a 6-hour instant restore history (up to 1 GB of changes per project), 1 manual snapshot, up to 60,000 Managed Better Auth MAU per project, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
 </FaqItem>
 
 <FaqItem question="What happens if I exceed my Free plan limits?">
