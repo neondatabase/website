@@ -121,7 +121,6 @@ const SKILL_REFERENCE_REDIRECTS = {
   'neon-typescript-sdk': '/docs/reference/typescript-sdk.md',
   'neon-python-sdk': '/docs/reference/python-sdk.md',
   'neon-auth': '/docs/auth/overview.md',
-  branching: '/docs/introduction/branching.md',
   'neon-cli': '/docs/cli/install.md',
   devtools: '/docs/reference/api.md',
 };
