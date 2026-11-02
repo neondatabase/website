@@ -2613,6 +2613,57 @@ const defaultConfig = {
         destination: '/auth.md',
         permanent: true,
       },
+      // Retired skills folded into neon-postgres (branching and egress references).
+      {
+        source: '/docs/ai/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-branches/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/neon-postgres-egress-optimizer/:path*',
+        destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+        permanent: true,
+      },
       {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',

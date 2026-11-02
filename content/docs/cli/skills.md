@@ -9,7 +9,7 @@ summary: >-
   skills to their latest versions, and `neon skills status` to check whether
   they're current.
 enableTableOfContents: true
-updatedOn: '2026-11-02T14:36:11.099Z'
+updatedOn: '2026-11-02T21:58:12.242Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
@@ -50,18 +50,16 @@ Without `--skill`, the interactive command lets you pick from the catalog, and `
 
 The available skills are:
 
-| Skill                            | Installed by default |
-| -------------------------------- | -------------------- |
-| `neon`                           | Yes                  |
-| `neon-ai-gateway`                | Yes                  |
-| `neon-auth`                      | Yes                  |
-| `neon-functions`                 | Yes                  |
-| `neon-object-storage`            | Yes                  |
-| `neon-postgres`                  | Yes                  |
-| `neon-postgres-branches`         | Yes                  |
-| `neon-postgres-egress-optimizer` | Yes                  |
-| `neon-realtime`                  | Yes                  |
-| `neon-postgres-agent-platforms`  | No                   |
+| Skill                           | Installed by default |
+| ------------------------------- | -------------------- |
+| `neon`                          | Yes                  |
+| `neon-ai-gateway`               | Yes                  |
+| `neon-auth`                     | Yes                  |
+| `neon-functions`                | Yes                  |
+| `neon-object-storage`           | Yes                  |
+| `neon-postgres`                 | Yes                  |
+| `neon-realtime`                 | Yes                  |
+| `neon-postgres-agent-platforms` | No                   |
 
 Passing an unknown skill stops the command and prints the current supported list.
 
