@@ -136,7 +136,7 @@ The branches stay isolated. All branches in a project share signing keys, so a p
 
 ## Get started
 
-The OAuth Provider plugin is available now in beta. Read the [OAuth Provider guide](https://neon.com/docs/auth/guides/plugins/oauth-provider), install the SDK with `npm install @neon/oauth`, or hand the whole setup to your agent:
+The OAuth Provider plugin is available now. Read the [OAuth Provider guide](https://neon.com/docs/auth/guides/plugins/oauth-provider), install the SDK with `npm install @neon/oauth`, or hand the whole setup to your agent:
 
 ```text
 > Set up a Neon backend with Postgres, Managed Better Auth, and Functions.
