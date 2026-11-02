@@ -136,7 +136,7 @@ Every docs page requires `title`. All other fields are optional.
 | `isDraft`               | `true` hides the page from production but keeps it visible in dev.                                                                 |
 | `enableTableOfContents` | `true` shows the h2/h3 outline panel on the right.                                                                                 |
 | `ogImage`               | Social preview image path.                                                                                                         |
-| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Updated automatically by the pre-commit hook on staged files. Don't set or update manually. |
+| `updatedOn`             | ISO 8601 timestamp (e.g. `2026-03-14T03:21:15.122Z`). Added (on new pages) and updated automatically by the pre-commit hook on staged files. Drives the sitemap `<lastmod>`. Don't set or update manually. |
 | `layout`                | Set to `wide` to hide the right sidebar (use with `TwoColumnLayout` pages).                                                        |
 
 The build will fail if any `.md` file in `content/docs/` is missing `title`.
