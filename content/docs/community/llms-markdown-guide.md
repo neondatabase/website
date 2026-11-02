@@ -42,10 +42,10 @@ The Markdown we serve is built from that MDX and gives you a single, flat page w
 
 A full table of contents is available at:
 
-- https://neon.com/llms.txt: the site-level index. It lists the same doc pages as the docs index, plus links to the [community guides](https://neon.com/guides/llms.txt) and [changelog](https://neon.com/docs/changelog/llms.txt) indexes.
-- https://neon.com/docs/llms.txt: the docs index, covering official documentation only.
+- https://neon.com/docs/llms.txt (canonical)
+- https://neon.com/llms.txt (also serves the same file)
 
-Each index lists pages with titles and links to their Markdown versions. Use one to discover URLs or to feed a list of pages into your tool.
+The index lists our doc pages with titles and links. Use it to discover URLs or to feed a list of pages into your tool.
 
 ## What you get on each page
 

@@ -72,7 +72,6 @@ public/robots.txt
 
 # ignore generated markdown/llms files
 public/md
-public/llms.txt
 public/docs/**/llms.txt
 public/docs/llms-full.txt
 public/guides/**/llms.txt

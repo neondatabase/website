@@ -452,9 +452,12 @@ module.exports = {
       url: 'https://neon.com/postgresql/tutorial',
       description: 'Comprehensive PostgreSQL tutorial and reference',
     },
+    // Links the /guides.md listing (every guide as .md) so agents can reach the guides.
+    // Not /guides/llms.txt: site search follows every llms.txt linked from this index and
+    // would pull the guides into the docs catalog. A .md link is indexed as one page.
     guides: {
       title: 'Community Guides',
-      url: 'https://neon.com/guides',
+      url: 'https://neon.com/guides.md',
       description: 'Step-by-step tutorials for frameworks and tools',
     },
     faqs: {
@@ -517,19 +520,6 @@ module.exports = {
       intro: 'Latest updates and releases.',
     },
   ],
-
-  // Site-level index served at /llms.txt, the location llmstxt.org tells agents to check first.
-  // Same content as public/docs/llms.txt, except the collapsed routes listed here link to their
-  // llms.txt catalogs instead of HTML landing pages, so agents starting at the site root can
-  // reach the community guides and changelog as markdown. public/docs/llms.txt is unchanged:
-  // it stays the official docs catalog that site search walks (see unlinkedIndexes above).
-  rootIndex: {
-    outputPath: 'public/llms.txt',
-    collapsedRouteUrls: {
-      guides: 'https://neon.com/guides/llms.txt',
-      'docs/changelog': 'https://neon.com/docs/changelog/llms.txt',
-    },
-  },
 
   // Configuration for llms-full.txt (single file with all doc content).
   // Uses shared excludePaths, EXCLUDED_DIRS, EXCLUDED_FILES from this config.

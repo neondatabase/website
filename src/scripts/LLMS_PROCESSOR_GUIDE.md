@@ -19,7 +19,7 @@ This is an **isolated post-build script** -- no changes to React components. A m
 
 - `process-md-for-llms.js` - Main processor (MDX -> markdown), includes navigation map/footer
 - `process-md-for-llms.test.js` - Vitest unit tests
-- `generate-llms-index.js` - Generates `llms.txt` Table of Contents (output: `public/docs/llms.txt` and the site-level `public/llms.txt`)
+- `generate-llms-index.js` - Generates `llms.txt` Table of Contents (output: `public/docs/llms.txt`)
 - `copy-md-content.js` - Postbuild entry point that calls the processor
 - `compare-md-conversion.js` - Dev tool for comparing single file conversions
 
@@ -62,7 +62,7 @@ All paths serve from the same source: `public/md/`.
 - **Explicit `.md` URL**: `GET /docs/guides/prisma.md` -> `next.config.js` rewrite (`afterFiles`) -> `public/md/docs/guides/prisma.md`
 - **User-Agent detection**: `GET /docs/guides/prisma` with AI User-Agent -> `middleware.js` -> `isAIAgentRequest()` -> fetch from `/md/docs/guides/prisma.md`
 - **Discoverability**: HTML pages include `<link rel="alternate" type="text/markdown" href="...">` via `markdownPath` in `getMetadata()` (`src/utils/get-metadata.js`)
-- **llms.txt**: The docs index is generated at build time and written to `public/docs/llms.txt`. It's served at `https://neon.com/docs/llms.txt` and is the official docs catalog that site search walks. The site-level index at `https://neon.com/llms.txt` (`public/llms.txt`, configured by `rootIndex` in `llms-index-config.js`) has the same content, but its Community Guides and Changelog entries link to `https://neon.com/guides/llms.txt` and `https://neon.com/docs/changelog/llms.txt`, so agents starting at the site root can reach those pages as Markdown.
+- **llms.txt**: The docs index is generated at build time and written to `public/docs/llms.txt`. We serve it at both `https://neon.com/docs/llms.txt` (canonical) and `https://neon.com/llms.txt` for backwards compatibility; they may diverge in the future, and we may add other indexes (e.g. `llms-full.txt`) later.
 
 ## Page Structure
 

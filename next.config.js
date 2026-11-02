@@ -96,7 +96,7 @@ const defaultConfig = {
             key: 'Link',
             value: [
               '</.well-known/api-catalog>; rel="api-catalog"',
-              '</llms.txt>; rel="llms-txt"',
+              '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
               '</.well-known/ai-catalog.json>; rel="ai-catalog"',
@@ -115,7 +115,7 @@ const defaultConfig = {
             key: 'Link',
             value: [
               '</.well-known/api-catalog>; rel="api-catalog"',
-              '</llms.txt>; rel="llms-txt"',
+              '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
               '</.well-known/ai-catalog.json>; rel="ai-catalog"',
@@ -2928,9 +2928,6 @@ const defaultConfig = {
         // without a beforeFiles identity rewrite; /docs/changelog/llms.txt is
         // already covered by /docs/:path*/llms.txt above.
         { source: '/guides/llms.txt', destination: '/guides/llms.txt' },
-        // Site-level index (public/llms.txt): the docs index plus links to the guides and
-        // changelog catalogs. The top-level [slug] catch-all would eat it without this.
-        { source: '/llms.txt', destination: '/llms.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
         // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
@@ -2978,8 +2975,8 @@ const defaultConfig = {
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
       afterFiles: [
-        // Serve /llms-full.txt from /docs/ (canonical location is public/docs/).
-        // /llms.txt is its own site-level index (public/llms.txt), served in beforeFiles.
+        // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
+        { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
         // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
