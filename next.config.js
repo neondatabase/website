@@ -2990,6 +2990,9 @@ const defaultConfig = {
           destination: '/docs/ai/skills/:name/SKILL.md',
         },
         { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
+        // Alternate URL for the onboarding prompt, tracked separately in LLM analytics.
+        // Keep in sync with STATIC_MD_ALIASES in src/proxy.js.
+        { source: '/get-started/onboarding.md', destination: '/get-started/prompt.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
         ...contentRewrites,
       ],

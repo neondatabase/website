@@ -610,6 +610,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       ['/skill.md alias', '/skill.md'],
       ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
       ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      ['onboarding prompt alias', '/get-started/onboarding.md'],
     ])('passes through a %s, tracks the read, no markdown fetch', async (_label, path) => {
       const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
 
