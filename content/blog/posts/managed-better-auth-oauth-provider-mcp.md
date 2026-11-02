@@ -30,13 +30,6 @@ In Better Auth, OAuth provider and MCP are two separate plugins. In Managed Bett
 
 Managed Better Auth already lets your users sign in to your app with [Google, GitHub, or Vercel](https://neon.com/docs/auth/guides/setup-oauth). This adds the other direction.
 
-### What Neon runs, and what you run
-
-Like [JWT](https://neon.com/docs/auth/guides/plugins/jwt) and [Organization](https://neon.com/docs/auth/guides/plugins/organization), OAuth Provider is a managed plugin.
-
-- **Neon runs:** the authorization server, the discovery endpoints (`/.well-known/oauth-authorization-server`, `/.well-known/openid-configuration`), the JWKS, token issuance and refresh, and client onboarding (managed clients, [Client ID Metadata Documents](https://neon.com/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents), and optional dynamic registration).
-- **You run:** a login page and a consent page in your own app, so you control what users see when they approve a client. You also run the API or MCP server that accepts the tokens, and the new [@neon/oauth](https://www.npmjs.com/package/@neon/oauth) SDK handles the token side of that.
-
 ## Turn it on
 
 In the Console, go to **Settings › Better Auth › OAuth provider**. Add your login and consent page URLs, your MCP server URL, and any other APIs you want to protect. Or simply ask your agent:
@@ -46,7 +39,18 @@ In the Console, go to **Settings › Better Auth › OAuth provider**. Add your 
 https://mcp.example.com/mcp, and add login and consent pages to my app.
 ```
 
-## Protect an MCP server
+## What Neon runs, and what you run
+
+Like [JWT](https://neon.com/docs/auth/guides/plugins/jwt) and [Organization](https://neon.com/docs/auth/guides/plugins/organization), OAuth Provider is a managed plugin.
+
+- **Neon runs:** the authorization server, the discovery endpoints (`/.well-known/oauth-authorization-server`, `/.well-known/openid-configuration`), the JWKS, token issuance and refresh, and client onboarding (managed clients, [Client ID Metadata Documents](https://neon.com/docs/auth/guides/plugins/oauth-provider#client-id-metadata-documents), and optional dynamic registration).
+- **You run:** a login page and a consent page in your own app, so you control what users see when they approve a client. You also run the API or MCP server that accepts the tokens, and the new [@neon/oauth](https://www.npmjs.com/package/@neon/oauth) SDK handles the token side of that.
+
+## What you can build with it
+
+The same auth instance covers two use cases: protecting an MCP server, and letting your other apps sign users in with your app.
+
+### Protect an MCP server
 
 Your MCP server has two jobs: publish its protected resource metadata, and verify access tokens. `@neon/oauth` does both:
 
@@ -85,7 +89,7 @@ sees their own orders, then show me how to connect it from my MCP client.
 We'll publish a full guide to building an MCP server on Neon soon.
 </Admonition>
 
-## Sign users in to your other apps
+### Sign users in to your other apps
 
 For your own companion apps, internal tools or partner integrations, create an **OAuth client** in the Console. It can be confidential (with a secret) or public (PKCE only), and because you trust it, it can skip the consent screen. `createOAuth()` handles discovery, PKCE sign-in with encrypted session cookies, refresh, and bearer-token checks for your API:
 
@@ -109,7 +113,15 @@ app.get('/api/things', honoBearerAuth(oauth), (c) => c.json({ user: c.get('auth'
 
 The token your API receives was issued by your auth instance, so the user's identity, roles and data all come from the same database.
 
-## Try it on a branch first
+## New to Managed Better Auth?
+
+[Managed Better Auth](https://neon.com/docs/auth/overview) is Better Auth, run by Neon, inside the same backend as your [database](https://neon.com/docs/postgres/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Object Storage](https://neon.com/docs/storage/overview) and [AI Gateway](https://neon.com/docs/ai-gateway/overview). You can enable it in one click, with CLI `neon neon-auth enable`, or by asking your agent. Users, sessions and organizations live in your database in the `neon_auth` schema, so a permission check is a JOIN, and auth state [branches](https://neon.com/docs/introduction/branching) with your data.
+
+<Admonition type="tip" title="Included in the Free plan">
+Managed Better Auth is included on every Neon plan, with the Free plan covering you up to 60,000 monthly active users.
+</Admonition>
+
+### Try it on a branch first
 
 OAuth is the kind of thing you want to get right before real users hit it: redirect URIs, consent screens, scopes, token checks. You don't have to test any of that in production. OAuth provider configuration is [per branch](https://neon.com/docs/auth/guides/plugins/oauth-provider#prerequisites), and because [auth lives in your database](https://neon.com/docs/auth/branching-authentication), a new branch comes with a copy of your users, sessions, and auth configuration. Each branch also gets its own Auth URL, which is [its own issuer](https://neon.com/docs/auth/guides/plugins/oauth-provider#find-the-issuer).
 
@@ -121,14 +133,6 @@ So the loop looks like this:
 4. When it works, apply the same configuration to production.
 
 The branches stay isolated. All branches in a project share signing keys, so a preview branch's tokens have a valid signature everywhere, but the issuer is different. Verifiers like `@neon/oauth` [pin the issuer](https://neon.com/docs/auth/guides/plugins/oauth-provider#verify-access-tokens), so a preview branch's tokens are rejected by your production servers.
-
-## New to Managed Better Auth?
-
-[Managed Better Auth](https://neon.com/docs/auth/overview) is Better Auth, run by Neon, inside the same backend as your [database](https://neon.com/docs/postgres/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Object Storage](https://neon.com/docs/storage/overview) and [AI Gateway](https://neon.com/docs/ai-gateway/overview). You can enable it in one click, with CLI `neon neon-auth enable`, or by asking your agent. Users, sessions and organizations live in your database in the `neon_auth` schema, so a permission check is a JOIN, and auth state [branches](https://neon.com/docs/introduction/branching) with your data.
-
-<Admonition type="tip" title="Included in the Free plan">
-Managed Better Auth is included on every Neon plan, with the Free plan covering you up to 60,000 monthly active users.
-</Admonition>
 
 ## Get started
 
