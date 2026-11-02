@@ -9,7 +9,9 @@ summary: >-
   specific platform or tool.
 enableTableOfContents: true
 redirectFrom:
-  - /docs/integrations/integrations-list/
+  - /docs/integrations/integrations-list
+  - /docs/guides/stepzen
+  - /docs/guides/outerbase
 updatedOn: '2026-10-21T11:04:20.383Z'
 ---
 
