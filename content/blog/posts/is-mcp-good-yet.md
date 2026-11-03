@@ -2,7 +2,7 @@
 title: 'Is MCP good yet?'
 subtitle: We added support for the stateless 2026-07-28 spec to the Neon MCP server and finally retired our old SSE endpoints
 description: >-
-  We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints. Here's what the new spec changes, which clients already support it and what to do if you still use /sse.
+  Agents keep picking our MCP server over our CLI, even though our own skills recommend the CLI. We share our MCP usage numbers, what the new stateless 2026-07-28 spec changes and why we finally retired our old SSE endpoints.
 date: '2026-11-04T09:00:00'
 updatedOn: '2026-11-04T09:00:00'
 category: product
@@ -17,12 +17,12 @@ isFeatured: false
 seo:
   title: 'Is MCP good yet? - Neon'
   description: >-
-    We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints.
+    Agents keep picking our MCP server over our CLI. Here are our MCP usage numbers, what the stateless 2026-07-28 spec changes and why we retired SSE.
   keywords: []
   noindex: false
   ogTitle: 'Is MCP good yet? - Neon'
   ogDescription: >-
-    We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints.
+    Agents keep picking our MCP server over our CLI. Here are our MCP usage numbers, what the stateless 2026-07-28 spec changes and why we retired SSE.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/social.png'
 ---
 
