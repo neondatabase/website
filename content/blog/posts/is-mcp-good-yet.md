@@ -121,7 +121,7 @@ The transport that's actually on its way out is the original 2024 HTTP+SSE desig
 
 ## Which clients already support it?
 
-Not many yet. Of the six coding agents I track, Claude Code is the only one that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
+Unfortunately, not many yet. Of the six coding agents I track, Claude Code is the only one that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
 
 | Client        | 2026-07-28 support                                                        |
 | ------------- | ------------------------------------------------------------------------- |
