@@ -1,8 +1,8 @@
 ---
 title: 'Is MCP good yet?'
-subtitle: The stateless 2026-07-28 spec is the biggest step MCP has taken, and mcp.neon.tech now speaks it
+subtitle: We added support for the stateless 2026-07-28 spec to the Neon MCP server and finally retired our old SSE endpoints
 description: >-
-  MCP's 2026-07-28 spec makes the protocol stateless. mcp.neon.tech now supports it and has retired the old HTTP+SSE transport. Here's what changed, which clients support it and what to do if you still use /sse.
+  We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints. Here's what the new spec changes, which clients already support it and what to do if you still use /sse.
 date: '2026-11-04T09:00:00'
 updatedOn: '2026-11-04T09:00:00'
 category: product
@@ -17,50 +17,52 @@ isFeatured: false
 seo:
   title: 'Is MCP good yet? - Neon'
   description: >-
-    MCP's 2026-07-28 spec makes the protocol stateless. mcp.neon.tech now supports it and has retired the old HTTP+SSE transport.
+    We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints.
   keywords: []
   noindex: false
   ogTitle: 'Is MCP good yet? - Neon'
   ogDescription: >-
-    MCP's 2026-07-28 spec makes the protocol stateless. mcp.neon.tech now supports it and has retired the old HTTP+SSE transport.
+    We added support for MCP's stateless 2026-07-28 spec to the Neon MCP server and retired our old HTTP+SSE endpoints.
   image: 'https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/social.png'
 ---
 
 ![Neon blog cover with the headline Is MCP good yet?](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/cover.png)
 
-The [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) has about twice as many daily active users as the [Neon CLI](https://neon.com/docs/cli). Between the first week of August and the last week of October, MCP tool calls grew 4.6x while CLI commands grew 2.7x. Daily active users roughly tripled on both.
+This week, we added support for the new stateless MCP spec (2026-07-28) to the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) and finally retired our old Server-Sent Events (SSE) endpoints. I want to use that as an excuse to talk about where MCP is today, because there's been a lot of debate about MCP vs. CLIs for agents and our own numbers tell an interesting story.
+
+## MCP is outgrowing our CLI
+
+We maintain both an MCP server and the [Neon CLI](https://neon.com/docs/cli) and agents use both. Since August, the Neon MCP server has had about twice as many daily active users as the CLI. Between the first week of August and the last week of October, MCP tool calls grew 4.6x while CLI commands grew 2.7x. Daily active users roughly tripled on both, so it's mostly the volume of work agents do over MCP that's pulling ahead.
 
 ![Line chart of weekly Neon MCP tool calls, Neon CLI commands, MCP daily active users and CLI daily active users from the week of August 3 to the week of October 26, 2026, each indexed to 100 in the first week. MCP tool calls end at 461, CLI commands at 266, MCP daily active users at 303 and CLI daily active users at 295.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-vs-cli-growth.png)
 
-I think the gap comes down to discoverability. A harness puts the tools of every connected MCP server in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. When someone has both installed, the agent tends to reach for the MCP server.
+I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. So when someone has both installed, the agent tends to reach for the MCP server first.
 
-Agent plugins push this further. [`neon plugins`](https://neon.com/docs/cli/plugins) installs a Neon plugin into Cursor, Claude Code and Codex that bundles the MCP server with our agent skills, and ChatGPT and Claude Desktop connect to Neon through the MCP server. In October, ChatGPT (24%) and Claude Desktop (22%) were the two biggest sources of tool calls on mcp.neon.tech, ahead of Codex (21%) and Claude Code (13%). Claude Desktop's tool calls grew almost 5x since August.
+Agent plugins push this even further. We ship a Neon plugin for Cursor, Claude Code and Codex (`npx neon@latest plugins`) that bundles the MCP server with our agent skills. ChatGPT and Claude Desktop connect to Neon through the MCP server, too. Funny enough, those last two are now our biggest clients: in October, ChatGPT made 24% of all tool calls on mcp.neon.tech and Claude Desktop 22%, ahead of Codex (21%) and Claude Code (13%). Claude Desktop's tool calls alone grew almost 5x since August.
 
-Just a quick disclaimer: we run a busy MCP server, so I'm biased. That said, a lot of the MCP vs. CLI debate is fair. The spec is barely two years old, and until this summer every remote MCP server had to keep sessions around. It's fair to ask whether MCP is good yet.
+Just a quick disclaimer: we run a pretty busy MCP server, so I'm biased. That said, a lot of the criticism of MCP is fair. The spec is barely two years old and until this summer every remote MCP server had to keep sessions around. So it's fair to ask whether MCP is good yet, and that's exactly the question we track at [ismcpgoodyet.com](https://ismcpgoodyet.com), a scoreboard of which MCP features Codex, Cursor, Claude Code, Grok Build, OpenCode and Factory Droid support.
 
-We track that question at [ismcpgoodyet.com](https://ismcpgoodyet.com), a scoreboard of which MCP features Codex, Cursor, Claude Code, Grok Build, OpenCode and Factory Droid support. Today it says no, at 64%. But it's moving, and the biggest move this year is the [2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/). Think of it as MCP 2.0: the maintainers call it the largest revision of the protocol since launch.
+Today, the scoreboard says no, at 64%. But it's moving and I'd argue the biggest step this year is the [2026-07-28 spec](https://blog.modelcontextprotocol.io/posts/2026-07-28/). You can think of it as MCP 2.0; the maintainers call it the largest revision of the protocol since launch. In this post, I want to walk you through how MCP's transports got here, what the new spec changes, which clients already support it and what we changed on our side.
 
-In this post, I want to walk through how MCP's transports got here, what the stateless spec changes, which clients support it and what we just changed on mcp.neon.tech.
+## How we got here
 
-## How MCP's transports got here
+MCP has gone through three designs for remote servers in just two years and we've been along for the ride since the early days.
 
-MCP has had three remote transport designs in two years. Here's the short version:
+- **November 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, which uses a long-lived SSE stream for messages from the server and a separate endpoint for the client's POST requests.
+- **March 26, 2025:** [Spec 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/changelog) replaces HTTP+SSE with Streamable HTTP. Every message becomes a POST to a single endpoint and sessions live in an `Mcp-Session-Id` header.
+- **April 4, 2025:** We [launch our remote MCP server](https://neon.com/blog/announcing-neons-remote-mcp-server) at mcp.neon.tech, on SSE.
+- **December 19, 2025:** The Transport Working Group [publishes its plan](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) for a stateless protocol, because sticky sessions and shared session stores were making remote servers hard to scale.
+- **May 21, 2026:** The [release candidate](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) for 2026-07-28 comes out.
+- **July 28, 2026:** The final spec ships and officially deprecates HTTP+SSE, with a year-long offramp.
+- **November 2, 2026:** We add 2026-07-28 support to mcp.neon.tech and retire our SSE endpoints.
 
-- **November 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, a long-lived Server-Sent Events stream for server messages plus a separate endpoint for client POSTs.
-- **March 26, 2025:** [Spec 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/changelog) replaces HTTP+SSE with Streamable HTTP. Every message is a POST to one endpoint and sessions live in an `Mcp-Session-Id` header.
-- **April 4, 2025:** We [launch the remote Neon MCP server](https://neon.com/blog/announcing-neons-remote-mcp-server) at mcp.neon.tech, on SSE.
-- **December 19, 2025:** The Transport Working Group [publishes its plan](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) for a stateless protocol, because sticky sessions and shared session stores made remote servers hard to scale.
-- **May 21, 2026:** The [release candidate](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) for 2026-07-28 ships.
-- **July 28, 2026:** The final spec ships, and HTTP+SSE is officially deprecated with a year-long offramp.
-- **November 2, 2026:** mcp.neon.tech speaks 2026-07-28 and retires HTTP+SSE.
+Funny enough, we launched our remote server on SSE nine days after the spec had already replaced it. It took us a while to clean that up, but we got there.
 
-Funny enough, we launched our remote server on SSE nine days after the spec had already replaced it. It took us a while to clean that up.
+## So what does stateless actually mean?
 
-## What stateless means in 2026-07-28
+With the 2026-07-28 spec, the `initialize` handshake and the `Mcp-Session-Id` header are gone. Instead, every request carries its own protocol version, client info and client capabilities in `_meta`. That means any request can land on any server instance behind a plain round-robin load balancer, which is great news for anyone running an MCP server at scale (like us).
 
-The 2026-07-28 spec drops the `initialize` handshake and the `Mcp-Session-Id` header. Each request carries its own protocol version, client info and client capabilities in `_meta`, so any request can land on any server instance behind a plain round-robin load balancer.
-
-Here's a `tools/list` request against mcp.neon.tech's anonymous docs endpoint:
+Here's what a `tools/list` request against our anonymous docs endpoint looks like now:
 
 ```bash
 curl 'https://mcp.neon.tech/mcp?category=docs' \
@@ -82,27 +84,23 @@ curl 'https://mcp.neon.tech/mcp?category=docs' \
   }'
 ```
 
-It returns `search_docs`, `get_doc` and `send_feedback`, and no session id. The rest of the spec follows from the same idea:
+You get back `search_docs`, `get_doc` and `send_feedback` without a session id. You might have also noticed the `Mcp-Method` header. Requests now carry `Mcp-Method` and `Mcp-Name` headers, so a gateway or rate limiter can route requests without parsing the JSON body.
 
-- **Header routing:** Requests carry `Mcp-Method` and `Mcp-Name` headers, so a gateway or rate limiter can route on headers without parsing JSON bodies.
-- **Multi round-trip requests:** When a tool needs user input mid-call, the server returns `input_required` and the client retries the call with the answers. Elicitation no longer needs a held-open stream.
-- **Cacheable lists:** `tools/list` and friends return `ttlMs` and `cacheScope`, so clients can cache tool catalogs and keep prompt caches stable.
-- **Auth hardening:** Clients validate the `iss` parameter (RFC 9207), and Dynamic Client Registration is deprecated in favor of Client ID Metadata Documents.
-- **Deprecation policy:** Deprecated features keep working for at least twelve months. HTTP+SSE, Roots, Sampling and Logging are on that clock now.
+The rest of the spec follows the same idea. When a tool needs input from the user mid-call, the server now returns `input_required` and the client retries the call with the answers, so elicitation no longer needs a stream that stays open. List responses like `tools/list` carry `ttlMs` and `cacheScope`, so clients can cache tool catalogs. On the auth side, clients now validate the `iss` parameter (RFC 9207), and Dynamic Client Registration is deprecated in favor of Client ID Metadata Documents. And there's finally a formal deprecation policy: deprecated features keep working for at least twelve months, and HTTP+SSE, Roots, Sampling and Logging are on that clock now.
 
-Your app can still be stateful. The spec's suggestion is to mint a handle from a tool, say a `basket_id`, and let the model pass it back as an argument. I like that pattern because the model can see the state it's threading through.
+Of course, your app can still be stateful. The spec suggests minting a handle from a tool, say a `basket_id`, and letting the model pass it back as an argument on the next call. I personally like that pattern a lot, because the model can see the state it's carrying around.
 
 ## Is Streamable HTTP going away?
 
-Streamable HTTP is staying. It's still one of the two standard transports, next to stdio, and the [Transport Working Group](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) committed to keeping it that way so every client and server can interoperate.
+No, Streamable HTTP is staying. It's still one of the two standard transports next to stdio. The [Transport Working Group](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) committed to keeping it that way so every client and server can keep talking to each other out of the box.
 
-What changed is what travels over it. Each POST now stands alone, and the [reply arrives as a JSON object or a request-scoped SSE stream](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports). SSE survives as a way to stream a single response. What's gone are the long-lived parts: the session id and the separate GET stream for server-initiated messages, replaced by multi round-trip requests and an opt-in `subscriptions/listen` stream.
+What changes is what travels over it. Each POST request now stands on its own and the [reply comes back as a JSON object or a request-scoped SSE stream](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports). So SSE is still around as a way to stream a single response. What's going away are the long-lived parts: the session id and the separate GET stream for messages from the server, which multi round-trip requests and an opt-in `subscriptions/listen` stream replace.
 
-The transport on its way out is the original 2024 HTTP+SSE design. The offramp runs until roughly July 2027, so servers could keep it around a while longer. We decided not to.
+The transport that's actually on its way out is the original 2024 HTTP+SSE design. The offramp runs until roughly July 2027, so we could have kept our SSE endpoints around a while longer. We decided not to.
 
-## Which clients speak 2026-07-28 today
+## Which clients already support it?
 
-Claude Code is the only client on the [ismcpgoodyet.com](https://ismcpgoodyet.com) scoreboard that negotiates 2026-07-28 by default. Codex and OpenCode support it behind an opt-in, and the rest still use the 2025 handshake:
+Not many yet. Claude Code is the only client on the [ismcpgoodyet.com](https://ismcpgoodyet.com) scoreboard that uses 2026-07-28 by default. Codex and OpenCode support it if you opt in and the rest still use the 2025 handshake:
 
 | Client        | 2026-07-28 support                                                        |
 | ------------- | ------------------------------------------------------------------------- |
@@ -113,18 +111,15 @@ Claude Code is the only client on the [ismcpgoodyet.com](https://ismcpgoodyet.co
 | Grok Build    | Pinned to 2025-11-25                                                      |
 | Factory Droid | Behind a server-side flag that is off                                     |
 
-That's why a server can't just switch over. It has to answer stateless requests and still accept the `initialize` handshake from every client that hasn't moved yet.
+That's why we couldn't just switch over. Our server has to answer stateless requests and still accept the `initialize` handshake from every client that hasn't moved yet.
 
-## What we changed on mcp.neon.tech
+## What we changed on the Neon MCP server
 
-mcp.neon.tech now speaks MCP 2026-07-28 on `https://mcp.neon.tech/mcp`, keeps serving 2025-era clients on the same URL and retires the old HTTP+SSE endpoints. Concretely:
+We moved mcp.neon.tech to `@modelcontextprotocol/server` 2.0 and [`mcp-handler`](https://github.com/vercel/mcp-handler) 2.1, so we now serve 2026-07-28 on `https://mcp.neon.tech/mcp`. Clients that still send `initialize` keep working on the same URL, and we test the 2025-03-26 and 2025-11-25 fallbacks to make sure they stay that way. You don't need to change anything: your OAuth tokens, API keys and grant URLs like `/mcp?projectId=<project-id>&readonly=true` work exactly like before.
 
-- **Same URL, both generations:** The server moved to `@modelcontextprotocol/server` 2.0 and [`mcp-handler`](https://github.com/vercel/mcp-handler) 2.1. Clients that still send `initialize` keep working, and we test the 2025-03-26 and 2025-11-25 fallbacks.
-- **No session store:** HTTP+SSE needed Redis to bind sessions to server instances. That code is gone, and authentication, tool grants and client attribution are resolved per request.
-- **Cancellation reaches Neon:** Cancelling a tool call, or closing the request, aborts the Neon API call behind it.
-- **Nothing to reconfigure on `/mcp`:** Existing OAuth tokens, API keys and grant URLs like `/mcp?projectId=<project-id>&readonly=true` mean what they meant before.
+Going stateless also let us delete code. HTTP+SSE needed Redis to bind each session to a server instance and we removed all of that. We now resolve authentication, tool grants and client attribution on every request. And while we were at it, we made cancellation reach the Neon API: if you cancel a tool call or close the request, we abort the Neon API call behind it.
 
-`/sse`, `/message`, `/api/sse` and `/api/message` now return `410 Gone` with a pointer to the new URL:
+Finally, we retired our SSE endpoints. `/sse`, `/message`, `/api/sse` and `/api/message` now return `410 Gone` with a pointer to the new URL:
 
 ```json
 {
@@ -133,19 +128,19 @@ mcp.neon.tech now speaks MCP 2026-07-28 on `https://mcp.neon.tech/mcp`, keeps se
 }
 ```
 
-The source is on [GitHub](https://github.com/neondatabase/mcp-server-neon), and [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320) has the full change.
+The Neon MCP server is open source, so if you're curious, you can find the full change in [neondatabase/mcp-server-neon#320](https://github.com/neondatabase/mcp-server-neon/pull/320).
 
-## Still pointing at /sse?
+## Still using our SSE endpoint?
 
-If your MCP config still has `https://mcp.neon.tech/sse`, swap it for `https://mcp.neon.tech/mcp`. [add-mcp](https://github.com/neondatabase/add-mcp) can do that for every agent on your machine:
+If your MCP config still points at `https://mcp.neon.tech/sse`, you'll need to swap it for `https://mcp.neon.tech/mcp`. We built [add-mcp](https://github.com/neondatabase/add-mcp) for exactly this kind of thing and it can update every agent on your machine in one go:
 
 ```bash
 npx add-mcp https://mcp.neon.tech/mcp --name Neon -g
 ```
 
-**Note:** `--name` has to match the name of your existing entry (`Neon` in our old setup instructions). With a different name, add-mcp adds a second server next to the old one. Drop `-g` to update a project-level config instead.
+**Note:** `--name` has to match the name of your existing entry (`Neon` if you followed our old setup instructions). With a different name, add-mcp adds a second server next to the old one instead of replacing it. Drop `-g` if you want to update a project-level config instead.
 
-If your client only supports local stdio servers, bridge to Streamable HTTP with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote):
+If your client only supports local stdio servers, you can bridge to Streamable HTTP with [`mcp-remote`](https://www.npmjs.com/package/mcp-remote):
 
 ```json
 {
@@ -160,16 +155,16 @@ If your client only supports local stdio servers, bridge to Streamable HTTP with
 
 ## New to the Neon MCP server?
 
-One command adds the Neon MCP server to every agent add-mcp detects on your machine:
+If you haven't tried the Neon MCP server yet, you can add it to every agent add-mcp detects on your machine with one command:
 
 ```bash
 npx add-mcp https://mcp.neon.tech/mcp -g
 ```
 
-Your agent opens a browser window to sign in with OAuth on first use. If you also want our agent skills and a linked Neon project, run `npx neon@latest init` instead. For API keys, read-only mode or scoping the server to one project, use the [config generator](https://neon.com/docs/ai/neon-mcp-server#config-generator) in our docs.
+On first use, your agent opens a browser window so you can sign in with OAuth. If you also want our agent skills and a linked Neon project, run `npx neon@latest init` instead. And if you want to use an API key, run the server in read-only mode or scope it to a single project, check out the [config generator](https://neon.com/docs/ai/neon-mcp-server#config-generator) in our docs.
 
 ## So, is MCP good yet?
 
-Not quite. Our own scoreboard says 64%, and only one of six clients speaks the new spec by default. But the stateless spec fixes the part of MCP that hurt server authors most, and every client that adopts it moves the number up. Keep an eye on [ismcpgoodyet.com](https://ismcpgoodyet.com); we update it as clients ship.
+Not quite, at least according to our own scoreboard: 64%, with only one of six clients using the new spec by default. But I think the stateless spec fixes the part of MCP that hurt server authors the most, and every client that adopts it moves that number up. We'll keep updating [ismcpgoodyet.com](https://ismcpgoodyet.com) as clients ship, so check back in a few months.
 
 Happy coding!
