@@ -41,7 +41,7 @@ You can create additional organizations at any time. [See how to create an organ
 
 ## Switching between organizations
 
-If you belong to more than one organization, use the org switcher at the top left of the Console to change the active organization. [See how to switch organizations.](/docs/manage/orgs-manage#switch-organizations)
+If you belong to more than one organization, use the org switcher in the profile menu (click your name in the top-right corner of the Console) to change the active organization. [See how to switch organizations.](/docs/manage/orgs-manage#switch-organizations)
 
 ## Limitations
 

@@ -32,14 +32,15 @@ After confirming, you'll be directed to your new organization's **Projects** pag
 
 ## Switch organizations
 
-If you belong to more than one organization, use the org switcher to change which one you're working in. The org switcher is the organization name at the top left of the Console, next to the Neon logo.
+If you belong to more than one organization, use the org switcher in the profile menu to change which one you're working in.
 
-1. Click the organization name to open the switcher. It lists every organization you belong to, with a check mark next to the active one.
-1. Select the organization you want to work in.
+1. Click your name in the top-right corner of the Console to open the profile menu.
+1. Under **Organization**, click the name of your current organization. A list of every organization you belong to opens, with a check mark next to the active one.
+1. Select the organization you want to work in. If you belong to many organizations, type in **Search organizations** to filter the list.
 
-The Console opens that organization's **Projects** page. The sidebar pages (**Projects**, **People**, **Billing**, **Integrations**, and **Settings**) now apply to the organization you selected.
+The Console opens that organization's projects, and the rest of the Console now applies to the organization you selected.
 
-![org switcher in the Neon Console](/docs/manage/orgs_create_button.png)
+![org switcher in the Neon Console profile menu](/docs/manage/orgs_switch.png)
 
 If someone has shared a project with you through [project sharing](#project-sharing), select **Projects shared with me** in the switcher to see those projects.
 
