@@ -36,7 +36,7 @@ After all the CLI vs. MCP discourse online, lately folks have been sharing how f
 
 And that's even though we recommend the CLI over the MCP server in our own agent skills. Deploying a [Neon Function](https://neon.com/docs/compute/functions/overview) means bundling your code, zipping it up and uploading it. The [Neon CLI](https://neon.com/docs/cli) does all of that for you with `neon deploy`, while the MCP server's `deploy_function` tool only accepts a zip that's already built. That's why our skills tell agents to prefer the CLI over the MCP server. We also recommend that everyone using Neon with an agent installs our skills. (By the way, you can install them right now by running `npx neon@latest init` in your project repo 😉)
 
-Agents keep picking the MCP server anyway. Since December, tool calls on the Neon MCP server grew 79x while CLI commands grew 21x, and by August the MCP server was handling more tool calls than our CLI ran commands. It has had more daily active users than the CLI since last November and now has about twice as many. (All MCP numbers in this post count only our remote server at mcp.neon.tech, not the stdio package we deprecated.)
+Agents keep picking the MCP server anyway. Since December, tool calls on the Neon MCP server grew 79x while CLI commands grew 21x, and by August the MCP server was handling more tool calls than our CLI ran commands. It has had more daily active users than the CLI since last November and now has about twice as many. And this doesn't include our deprecated stdio package - just our remote MCP server.
 
 Here's what the last three months looked like week by week. Tool calls grew 4.7x while CLI commands grew 2.7x, and daily active users roughly tripled on both:
 
