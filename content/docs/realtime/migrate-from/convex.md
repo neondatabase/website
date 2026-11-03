@@ -198,7 +198,7 @@ Both Convex and Neon Realtime share the approach of defining queries that you ca
 
 Migrating these queries involves porting them from the Convex `query()` DSL to standard SQL queries. You can do this [using raw SQL](../guides/queries#using-raw-sql) or your preferred [ORM or query builder](../guides/queries#using-a-query-builder-or-orm).
 
-For example, a Convex `query` like this (for all the messages in a channel ordered by created date):
+For example, a Convex `query` like this (for all the messages in a channel, ordered by creation time):
 
 ```ts filename="convex/messages.ts"
 export const list = query({
@@ -211,19 +211,28 @@ export const list = query({
 })
 ```
 
-Becomes a raw SQL query like this:
+Becomes a raw SQL query like this. It also takes the user's id, so it can [authorize in SQL](#auth). With raw SQL there's no Drizzle schema, so declare the row type yourself:
 
 ```ts filename="backend/queries.ts"
 import { rawSql } from "@neon/realtime/server"
 
-import type { Message } from "./schema"
+export type Message = {
+  id: string
+  channel: string
+  author: string
+  body: string
+  metadata: { edited: boolean }
+  created_at: Date
+}
 
-export function messagesQuery(channelId: string) {
+export function messagesQuery(userId: string, channelId: string) {
   return rawSql<Message>(
-    `SELECT id, channel, author, body, metadata, created_at FROM messages
-     WHERE channel = $1
-     ORDER BY created_at ASC`,
-    [channelId]
+    `SELECT messages.id, messages.channel, messages.author, messages.body, messages.metadata, messages.created_at
+     FROM messages
+     INNER JOIN channel_members ON channel_members.channel = messages.channel
+     WHERE channel_members.user_id = $1 AND messages.channel = $2
+     ORDER BY messages.created_at ASC`,
+    [userId, channelId]
   )
 }
 ```
@@ -231,18 +240,32 @@ export function messagesQuery(channelId: string) {
 Or a Drizzle query like this (`db` is set up as in the [Drizzle example](../examples/drizzle)):
 
 ```ts filename="backend/queries.ts"
-import { asc, eq } from "drizzle-orm"
+import { and, asc, eq, getTableColumns } from "drizzle-orm"
 
 import { db } from "./db"
-import { messages } from "./schema"
+import { channelMembers, messages } from "./schema"
 
-export function messagesQuery(channelId: string) {
-  return db.select()
+export function messagesQuery(userId: string, channelId: string) {
+  return db.select(getTableColumns(messages))
     .from(messages)
-    .where(eq(messages.channel, channelId))
+    .innerJoin(channelMembers, eq(channelMembers.channel, messages.channel))
+    .where(and(eq(channelMembers.user_id, userId), eq(messages.channel, channelId)))
     .orderBy(asc(messages.created_at))
 }
 ```
+
+### Live query limits
+
+A live query is a single read-only `SELECT`. Joins, subqueries, `GROUP BY` and aggregates work. These don't:
+
+- **Set-returning functions** such as `jsonb_array_elements()` and `unnest()`, anywhere in the query, including `LATERAL` and subqueries. Return the `jsonb` or array and unpack it on the client, or filter with `@>` or `= ANY(...)`.
+- **A query that reads no table**, such as `SELECT 1`.
+- **Functions that aren't `IMMUTABLE`**, such as `now()` and BM25's `<@>`. Pass the value as a parameter instead.
+- **Tables with an extension index**, such as `lakebase_bm25`, `lakebase_ann`, `hnsw` or `bloom`, and columns of an extension type, such as `vector`. Every live query on the table fails. Use a GIN index for live search.
+
+A rejected query fails with a generic error such as `upstream rejected` or `baseline_sync_failed`. Test a query first with `neon realtime subscribe "SELECT …"`, and turn on [`debugMode`](#subscribe-to-queries) to see the reason for a rejection. See [Live query limits](../guides/queries#live-query-limits) in the queries guide for the full list and the alternatives.
+
+With `ORDER BY` or `LIMIT`, a change resends the full result. That's often fine and intended. Realtime is moving more query shapes to incremental updates, which will improve for GA. `data` keeps the query's order.
 
 ## Auth
 
@@ -267,9 +290,9 @@ export const list = query({
 })
 ```
 
-With Neon Realtime, the check moves into the request handler that [seals the query](../guides/queries#sealing-queries):
+With Neon Realtime, the session check moves into the request handler that [seals the query](../guides/queries#sealing-queries), and authorization moves into the query's SQL:
 
-```ts filename="backend/server.ts" {3,9,10}
+```ts filename="backend/server.ts" {3,10,13,14,15}
 import { Hono } from "hono"
 
 import { requireUser } from "./auth"
@@ -277,21 +300,22 @@ import { messagesQuery } from "./queries"
 import { realtime } from "./realtime"
 
 export const app = new Hono()
-  .post('/api/messages/live', async (c) => {
-    // 401 if not signed in or 403 if the user doesn't have access to the channel
+  .post('/api/v1/messages/live', async (c) => {
+    // 401 without a valid session
     const user = await requireUser(c)
-    const { channelId } = await c.req.json()
+    const { channelId } = await c.req.json<{ channelId: string }>() // validate input
 
-    // You can also bake the `user.id` into the query, for example if the
-    // users had access to channels via a many to many table.
-    const sealedQuery = await realtime.seal({ query: messagesQuery(channelId) })
+    // Authorize in the query: it only returns messages from channels the user
+    // belongs to, so removing a membership removes them from the live result.
+    const sealedQuery = await realtime.seal({ query: messagesQuery(user.id, channelId) })
 
     return c.json(sealedQuery)
-  }
-)
+  })
+
+export type AppType = typeof app
 ```
 
-`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint). The client can subscribe to a sealed query, but it can't read or change it. See [Live authorization](../guides/queries#live-authorization) and [why not row-level security](../guides/queries#why-not-row-level-security) for more details.
+`requireUser` is the helper from the [queries guide](../guides/queries#exposing-an-endpoint). It verifies the session's token and answers 401 without one. The membership join in `messagesQuery` is the recommended model: because the join is part of the live query, the result stays authorized as memberships change. The client can subscribe to a sealed query, but it can't read or change it. See [Live authorization](../guides/queries#live-authorization) and [why not row-level security](../guides/queries#why-not-row-level-security) for more details.
 
 ## Subscribe to queries
 
