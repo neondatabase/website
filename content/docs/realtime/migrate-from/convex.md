@@ -360,6 +360,28 @@ root.render(
 )
 ```
 
+`neon env pull` writes `NEON_REALTIME_URL` for the server. Expose it to Vite under the name the browser code reads:
+
+```bash filename="Terminal"
+echo 'VITE_NEON_REALTIME_URL=$NEON_REALTIME_URL' >> .env.local
+```
+
+The server's `realtime` module, which `server.ts` imports, looks like this:
+
+```ts filename="backend/realtime.ts"
+import { createRealtime } from "@neon/realtime/server"
+import { drizzleAdapter } from "@neon/realtime-drizzle"
+
+export const realtime = createRealtime({
+  secret: process.env.NEON_REALTIME_SECRET!,
+  db: "neondb",
+  adapter: drizzleAdapter(), // leave out with raw SQL
+  debugMode: process.env.NODE_ENV === "development",
+})
+```
+
+`debugMode` puts the database's full error in subscription errors. Plain Node doesn't set `NODE_ENV`, so this stays off unless you set it. Don't use `NODE_ENV !== "production"`: that turns full database errors on wherever `NODE_ENV` is unset. See [Show full database errors](../guides/subscribing#show-full-database-errors).
+
 Then in your React components, switch out `useQuery`:
 
 ```tsx filename="src/Messages.tsx"
@@ -380,32 +402,44 @@ function Messages({ sealedQuery, refreshQuery }) {
 }
 ```
 
-Note that sealed queries expire. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`.
+Note that sealed queries expire. `refreshQuery` returns a fresh sealed query for the _same_ query, and the hook renews it before it expires. To switch channels, fetch a new sealed query with a matching `refreshQuery`. A renewal that fails, for example with a 401 after sign-out, keeps retrying, so unmount the components that subscribe when the user signs out. See [Handling errors](../guides/reactivity#handling-errors).
+
+Convex's `useQuery(..., "skip")` has no equivalent: `useLiveQuery` always needs a sealed query. Render the component that calls it only once you have one, as `Channel` does below.
 
 See the `Channel.tsx` example below and see [`refreshQuery`](../guides/reactivity#refreshquery) and [Changing query parameters](../guides/reactivity#changing-query-parameters) for more details.
 
 <details>
   <summary>frontend/api.ts and frontend/Channel.tsx</summary>
 
-For example, `fetchSealed()` fetches the sealed query from the route in [Auth](#auth):
+For example, `fetchSealed()` fetches the sealed query from the route in [Auth](#auth). It sends the session's token, and it has a timeout, so a stalled request fails instead of loading forever:
 
 ```ts filename="frontend/api.ts"
 import type { SealedLiveQuery } from "@neon/realtime/client"
 
 import type { Message } from "../backend/schema"
+import { authClient } from "./auth"
+
+// With another auth provider, send its token here instead
+export async function authHeaders(): Promise<Record<string, string>> {
+  const { data } = await authClient.getSession()
+  const token = data?.session.token
+
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
 
 export async function fetchSealed(channelId: string): Promise<SealedLiveQuery<Message>> {
-  const res = await fetch('/api/messages/live', {
+  const res = await fetch('/api/v1/messages/live', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', ...(await authHeaders()) },
     body: JSON.stringify({ channelId }),
+    signal: AbortSignal.timeout(10_000),
   })
   if (!res.ok) throw new Error(`Could not seal the query (${res.status})`)
   return res.json()
 }
 ```
 
-`Channel` uses it to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
+`authClient` is the Managed Better Auth client from [Migrate Convex Auth](#migrate-convex-auth). With raw SQL, import `Message` from `../backend/queries` instead. `Channel` uses `fetchSealed()` to fetch the sealed query and build its `refreshQuery`, then renders `<Messages>`. It shows an error if the fetch fails. See [Fetch from an API endpoint](../guides/subscribing#fetch-from-an-api-endpoint) and, for the initial server render, [Server-side rendering](../guides/ssr).
 
 ```tsx filename="frontend/Channel.tsx"
 import { useCallback, useEffect, useState } from "react"
@@ -417,18 +451,23 @@ import { Messages } from "./Messages"
 
 export function Channel({ channelId, userId }: { channelId: string; userId: string }) {
   const [sealed, setSealed] = useState<SealedLiveQuery<Message>>()
+  const [error, setError] = useState<Error>()
   // Renewals must be for the same query, so refresh with the same channel.
   const refreshQuery = useCallback(() => fetchSealed(channelId), [channelId])
 
   useEffect(() => {
     let active = true
     setSealed(undefined) // never hand the previous channel's query to a new channel
-    fetchSealed(channelId).then((q) => active && setSealed(q))
+    setError(undefined)
+    fetchSealed(channelId)
+      .then((q) => active && setSealed(q))
+      .catch((e: Error) => active && setError(e))
     return () => {
       active = false
     }
   }, [channelId])
 
+  if (error) return <p role="alert">Could not load messages: {error.message}</p>
   if (!sealed) return <p>Loading messages</p>
   return <Messages sealedQuery={sealed} refreshQuery={refreshQuery} channelId={channelId} userId={userId} />
 }
@@ -467,45 +506,88 @@ export const send = mutation({
 
 Becomes a standard request handler. This can use any web framework or server function.
 
-For example here using Hono:
+For example here using Hono, chained onto the same `app` as the live route, so `AppType` covers both:
 
 ```ts filename="backend/server.ts"
-import { sql } from "drizzle-orm"
+import { and, eq, sql } from "drizzle-orm"
+import { Hono } from "hono"
+import { HTTPException } from "hono/http-exception"
 
+import { requireUser } from "./auth"
 import { db } from "./db"
-import { messages } from "./schema"
+import { channelMembers, messages } from "./schema"
 
+// The id of the transaction that made the change, read in the write's own RETURNING
 const txid = sql<string>`pg_current_xact_id()::text`
 
-app.post('/api/messages', async (c) => {
-  const user = await requireUser(c)
+export type MutationResponse =
+  | { readonly kind: "committed"; readonly txid: string }
+  | { readonly kind: "unchanged" }
 
-  const { id, channelId, body } = await c.req.json()
+export const app = new Hono()
+  // .post('/api/v1/messages/live', ...) from Auth
+  .post('/api/v1/messages', async (c) => {
+    const user = await requireUser(c)
+    const { id, channelId, body } = await c.req.json<{ id: string; channelId: string; body: string }>() // validate input
 
-  const [ row ] = await db
-    .insert(messages)
-    .values({ id, channel: channelId, author: user.id, body, metadata: { edited: false } })
-    .returning({ txid })
+    // One statement: the membership row supplies the channel and author, so only a member's message is inserted.
+    // Select every column in the order the Drizzle table declares them, and alias each sql field.
+    const [row] = await db
+      .insert(messages)
+      .select(
+        db
+          .select({
+            id: sql`${id}::uuid`.as('id'),
+            channel: channelMembers.channel,
+            author: channelMembers.user_id,
+            body: sql`${body}`.as('body'),
+            metadata: sql`'{"edited": false}'::jsonb`.as('metadata'),
+            created_at: sql`now()`.as('created_at'),
+          })
+          .from(channelMembers)
+          .where(and(eq(channelMembers.channel, channelId), eq(channelMembers.user_id, user.id)))
+      )
+      .returning({ txid })
 
-  return c.json({ txid: row.txid })
-})
+    if (!row) throw new HTTPException(403, { message: 'Not a member of this channel' })
+    return c.json({ kind: 'committed', txid: row.txid } satisfies MutationResponse)
+  })
+
+export type AppType = typeof app
 ```
 
 This returns the `txid` which can then be used to automatically discard optimistic state. `RETURNING` directly from the write avoids an extra round trip.
+
+With raw SQL, put the txid in the write's own `RETURNING` too:
+
+```sql
+INSERT INTO messages (id, channel, author, body, metadata)
+SELECT $1::uuid, channel_members.channel, channel_members.user_id, $3, '{"edited": false}'::jsonb
+FROM channel_members
+WHERE channel_members.channel = $2 AND channel_members.user_id = $4
+RETURNING pg_current_xact_id()::text AS txid
+```
+
+A write that changes no rows, such as an edit that leaves the text as it was or a delete of a row that's already gone, returns no row and no txid. Respond with `{ kind: "unchanged" }`, and skip `awaitTxId`.
+
+Convex mutations were serializable. In Postgres, put a check and its write in one statement, as the route above does, rather than reading first and writing after. Convex also capped documents at 1 MiB, so add a request body limit, for example with Hono's `bodyLimit` middleware.
 
 On the client, a `sendMessage()` helper that calls the route replaces `useMutation`:
 
 <details>
   <summary>frontend/api.ts</summary>
 
-Add `sendMessage()` next to `fetchSealed()`:
+Add `sendMessage()` next to `fetchSealed()`. It sends the same auth header, and it has a timeout too:
 
 ```ts filename="frontend/api.ts"
-export async function sendMessage(message: Message): Promise<{ txid: string }> {
-  const res = await fetch('/api/messages', {
+import type { MutationResponse } from "../backend/server"
+
+export async function sendMessage(message: Message): Promise<MutationResponse> {
+  const res = await fetch('/api/v1/messages', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', ...(await authHeaders()) },
     body: JSON.stringify({ id: message.id, channelId: message.channel, body: message.body }),
+    signal: AbortSignal.timeout(10_000),
   })
   if (!res.ok) throw new Error(`Could not send the message (${res.status})`)
   return res.json()
@@ -516,7 +598,7 @@ export async function sendMessage(message: Message): Promise<{ txid: string }> {
 
 ## Optimistic state
 
-Convex's `.withOptimisticUpdate` becomes React's `useOptimistic` plus [`awaitTxId`](../sdks/typescript#client-rawlivequerysubscriptionawaittxid):
+Convex's `.withOptimisticUpdate` becomes React's `useOptimistic` plus [`awaitTxId`](../sdks/typescript#client-materializedlivequerysubscriptionawaittxid):
 
 ```tsx filename="src/MessageSender.tsx"
 const send = useMutation(api.messages.send).withOptimisticUpdate((store, { channelId, body }) => {
@@ -542,6 +624,7 @@ The client picks the id, so the optimistic and synced rows share a key. The tran
 
 ```tsx filename="frontend/Messages.tsx"
 const { data, utils } = useLiveQuery(sealedQuery, { refreshQuery })
+const [sendError, setSendError] = useState<Error>()
 
 // React re-applies pending actions to every new live snapshot, so skip a row the synced data already has.
 const [messages, addOptimistic] = useOptimistic(data ?? [], (current, message: Message) =>
@@ -549,7 +632,7 @@ const [messages, addOptimistic] = useOptimistic(data ?? [], (current, message: M
 )
 
 function send(body: string) {
-  const message = {
+  const message: Message = {
     id: crypto.randomUUID(),
     channel: channelId,
     author: userId,
@@ -558,14 +641,24 @@ function send(body: string) {
     created_at: new Date(),
   }
 
+  setSendError(undefined)
   startTransition(async () => {
     addOptimistic(message)
-    const { txid } = await sendMessage(message)
-    // Hold the transition until the stream applies the row: no flicker. Always pass a timeout, or it waits forever.
-    await utils.awaitTxId(txid, 10_000)
+    try {
+      const result = await sendMessage(message)
+      // Hold the transition until the subscription has caught up past the write: no flicker.
+      if (result.kind === 'committed') await utils.awaitTxId(result.txid, 10_000)
+    } catch (e) {
+      // The optimistic row drops when the transition ends, so tell the user the send failed
+      setSendError(e as Error)
+    }
   })
 }
 ```
+
+`awaitTxId()` resolves once the subscription has applied a state that includes the transaction, whether or not the write changed this query's rows. It keeps waiting through reconnects and renewals, so always pass a timeout.
+
+For an aggregate, such as an unread count, don't apply the optimistic change with `useOptimistic`. React re-applies pending updates to each new snapshot, which counts the change twice until the transition ends. Derive the count from a live list instead.
 
 <details>
   <summary>Full frontend/Messages.tsx</summary>
@@ -573,7 +666,7 @@ function send(body: string) {
 The same code in a component, with the form, loading and error states:
 
 ```tsx filename="frontend/Messages.tsx"
-import { type FormEvent, startTransition, useOptimistic } from "react"
+import { type FormEvent, startTransition, useOptimistic, useState } from "react"
 import { useLiveQuery } from "@neon/realtime-react"
 import type { SealedLiveQuery } from "@neon/realtime/client"
 
@@ -589,6 +682,7 @@ interface Props {
 
 export function Messages({ sealedQuery, refreshQuery, channelId, userId }: Props) {
   const { data, status, error, utils } = useLiveQuery(sealedQuery, { refreshQuery })
+  const [sendError, setSendError] = useState<Error>()
 
   // React re-applies pending actions to every new live snapshot, so skip a row the synced data already has.
   const [messages, addOptimistic] = useOptimistic(data ?? [], (current, message: Message) =>
@@ -605,11 +699,17 @@ export function Messages({ sealedQuery, refreshQuery, channelId, userId }: Props
       created_at: new Date(),
     }
 
+    setSendError(undefined)
     startTransition(async () => {
       addOptimistic(message)
-      const { txid } = await sendMessage(message)
-      // Hold the transition until the stream applies the row: no flicker. Always pass a timeout, or it waits forever.
-      await utils.awaitTxId(txid, 10_000)
+      try {
+        const result = await sendMessage(message)
+        // Hold the transition until the subscription has caught up past the write: no flicker.
+        if (result.kind === 'committed') await utils.awaitTxId(result.txid, 10_000)
+      } catch (e) {
+        // The optimistic row drops when the transition ends, so tell the user the send failed
+        setSendError(e as Error)
+      }
     })
   }
 
@@ -630,6 +730,7 @@ export function Messages({ sealedQuery, refreshQuery, channelId, userId }: Props
         <input name="body" placeholder="Message" required />
         <button type="submit">Send</button>
       </form>
+      {sendError && <p role="alert">{sendError.message}</p>}
       {status === 'stale' && <p role="status">Updating</p>}
       <ul>
         {messages.map((m) => (
