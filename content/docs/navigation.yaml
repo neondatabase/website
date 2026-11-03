@@ -914,6 +914,8 @@
           slug: compute/functions/overview
         - title: Get started
           slug: compute/functions/get-started
+        - title: Use templates
+          slug: compute/functions/templates
         - title: Deploy and manage
           slug: compute/functions/deploy
         - title: Custom domains
@@ -924,8 +926,6 @@
           slug: compute/functions/environment-variables
         - title: Authentication
           slug: compute/functions/authentication
-        - title: Create a registry template
-          slug: compute/functions/registry
         - section: Function Triggers
           items:
             - title: Overview
@@ -952,6 +952,8 @@
           items:
             - title: Runtime limits
               slug: compute/functions/reference/runtime-limits
+            - title: Create a registry template
+              slug: compute/functions/registry
     - title: Object Storage
       icon: import
       slug: storage/overview

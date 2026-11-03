@@ -252,6 +252,7 @@ The template stores Telegram user IDs, display names and usage counts in the `pr
 
 ## Related templates
 
+- [Telegram AI chat bot](/functions/templates/telegram-bot): a [function template](/docs/compute/functions/templates) that adds AI Gateway chat to a Telegram bot.
 - [Discord HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)
 - [WhatsApp HTTP bot](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http)
 

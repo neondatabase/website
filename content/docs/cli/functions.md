@@ -11,7 +11,7 @@ redirectFrom:
 updatedOn: '2026-10-26T11:09:41.000Z'
 ---
 
-The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a template, browse [Function Registry templates](/functions/templates).
+The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev). To add a function from a template, see [Use function templates](/docs/compute/functions/templates).
 
 <CliSubcommands command="functions" />
 
@@ -77,7 +77,7 @@ Templates live in [`registry/`](https://github.com/neondatabase/examples/tree/ma
 
 ## neon functions templates (#templates)
 
-Browse the templates at [neon.com/functions/templates](/functions/templates). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json). To publish your own, see [Create a Function Registry template](/docs/compute/functions/registry).
+Browse the templates at [neon.com/functions/templates](/functions/templates). For the end-to-end workflow, see [Use function templates](/docs/compute/functions/templates). The live catalog is [registry.json](https://neon.com/functions/registry/registry.json). To publish your own, see [Create a Function Registry template](/docs/compute/functions/registry).
 
 <CliSubcommands command="functions templates" anchorParts="templates" />
 
