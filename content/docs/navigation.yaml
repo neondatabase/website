@@ -952,7 +952,7 @@
           items:
             - title: Runtime limits
               slug: compute/functions/reference/runtime-limits
-            - title: Create a registry template
+            - title: Contribute a template
               slug: compute/functions/registry
     - title: Object Storage
       icon: import
