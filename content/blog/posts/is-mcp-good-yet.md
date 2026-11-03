@@ -1,8 +1,8 @@
 ---
 title: 'Is MCP good yet?'
-subtitle: Agents keep picking our MCP server. We share our MCP usage numbers, what the new stateless 2026-07-28 spec changes and why we finally retired our old SSE endpoints.
+subtitle: Agents pick our MCP server over our CLI, even when our own skills say otherwise. Here's what our usage numbers show and why the new stateless spec makes MCP a lot better.
 description: >-
-  Agents keep picking our MCP server. We share our MCP usage numbers, what the new stateless 2026-07-28 spec changes and why we finally retired our old SSE endpoints.
+  Agents pick our MCP server over our CLI, even when our own skills say otherwise. Here's what our usage numbers show and why the new stateless spec makes MCP a lot better.
 date: '2026-11-04T09:00:00'
 updatedOn: '2026-11-04T09:00:00'
 category: product
