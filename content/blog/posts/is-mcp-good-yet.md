@@ -55,9 +55,7 @@ And it's not just function deploys. Here's how our remote MCP server compares to
 | Tool calls / commands                     | 79x             | 21x      |
 | Daily active users                        | 36x             | 25x      |
 
-The MCP server overtook the CLI in daily active users last November and now has about twice as many. By August, it was also handling more tool calls than our CLI ran commands. Here's what the last three months looked like week by week:
-
-![Line chart of weekly remote Neon MCP tool calls, Neon CLI commands, remote MCP daily active users and CLI daily active users from the week of August 3 to the week of October 26, 2026, all starting from the same point on a linear scale. MCP tool calls grow the fastest; daily active users grow at about the same rate for the MCP server and the CLI.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-vs-cli-growth-v3.png)
+The MCP server overtook the CLI in daily active users last November and now has about twice as many. By August, it was also handling more tool calls than our CLI ran commands.
 
 I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. So when someone has both installed, the agent tends to reach for the MCP server first.
 
