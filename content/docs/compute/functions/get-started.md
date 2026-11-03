@@ -12,6 +12,10 @@ updatedOn: '2026-11-02T22:41:52.272Z'
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. The request can come over HTTP, or from a [Function Trigger](/docs/compute/functions/triggers/overview) on a schedule or object upload.
 
+<Callout title="Prefer to start from a working example?">
+Browse the [function templates](/functions/templates) for ready-made APIs, MCP servers, AI agents, and bots, then add one to your project with `neon functions new`. See [Use function templates](/docs/compute/functions/templates). To scaffold a complete app instead, use [`neon bootstrap`](/docs/cli/bootstrap).
+</Callout>
+
 ## Hello world
 
 Write a file and deploy it:
@@ -114,7 +118,7 @@ export default defineConfig({
 
 The slug is permanent: it can't be renamed after the first deploy. See the [neon.ts reference](/docs/reference/neon-ts) for all options.
 
-As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a [Function Registry template](/functions/templates) instead, use [`neon functions new`](/docs/cli/functions#new).
+As a shortcut, `neon config add function hello` creates this `neon.ts` and a starter `functions/hello.ts` handler for you. See [`neon config add`](/docs/cli/config#add). To start from a ready-made [function template](/functions/templates) instead, see [Use function templates](/docs/compute/functions/templates).
 
 Install dependencies:
 
@@ -231,7 +235,7 @@ The response is a JSON object with your branch's Postgres version:
 
 ## Next steps
 
-- [Function Registry templates](/functions/templates): add a ready-made function instead of writing one by hand
+- [Use function templates](/docs/compute/functions/templates): add a ready-made function from the [template catalog](/functions/templates) instead of writing one by hand
 - [Function Triggers](/docs/compute/functions/triggers/overview): invoke a function on a cron schedule or an object upload instead of over HTTP
 - [Deploy and manage](/docs/compute/functions/deploy): the CLI and API for managing deployed functions
 - [Authentication](/docs/compute/functions/authentication): verify callers before a function runs

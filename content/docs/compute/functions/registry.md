@@ -11,7 +11,7 @@ updatedOn: '2026-10-26T11:09:41.000Z'
 
 The Function Registry is the public catalog behind [`neon functions new`](/docs/cli/functions#new). Each template is a folder in [`registry/`](https://github.com/neondatabase/examples/tree/main/registry) in `neondatabase/examples`. To add one, you open a pull request with the template folder and an index entry. Neon reviews it, and after it merges to `main`, the template shows up in the CLI and on [neon.com/functions/templates](/functions/templates) within about an hour. You don't publish anything yourself.
 
-Merged files get copied straight into people's projects, so every template goes through review before it lands.
+Merged files get copied straight into people's projects, so every template goes through review before it lands. To use a template rather than publish one, see [Use function templates](/docs/compute/functions/templates).
 
 ## How a template is laid out
 
@@ -23,7 +23,7 @@ registry/
 │   └── template.schema.json
 └── <template-id>/
     ├── template.json        # metadata, no inline source
-    ├── README.md            # optional
+    ├── README.md            # setup and usage instructions
     └── functions/
         └── <operation>.ts   # one module per operation
 ```
@@ -198,6 +198,7 @@ The last command prints a `neon dev --source …` line for each function it crea
 - Every `process.env` read is declared in `environment`, and no secret or default key is hard-coded.
 - There are no network calls at import time and no telemetry the user didn't ask for.
 - The recommended operations are the ones most users want on day one.
+- `README.md` explains how to use the template: the Neon services to enable (for example, `neon config add ai-gateway`), environment variables to set, whether to deploy before running `neon dev`, and an example request. The `Next:` list from `neon functions new` doesn't cover services, so users rely on the README for them.
 
 ## Where the catalog is served
 
