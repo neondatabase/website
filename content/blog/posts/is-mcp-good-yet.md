@@ -38,15 +38,30 @@ And that's even though we recommend the CLI over the MCP server in our own agent
 
 However, agents are picking the MCP server anyway! In October, more than a quarter of all function deploys came through the MCP server, mostly from Codex and ChatGPT. The future is weird.
 
-And it's not just function deploys. Since December, tool calls on the Neon MCP server grew 79x while CLI commands grew 21x, and by August the MCP server was handling more tool calls than our CLI ran commands. It has had more daily active users than the CLI since last November and now has about twice as many. And this doesn't include our deprecated stdio package - just our remote MCP server.
+And it's not just function deploys. Here's how our remote MCP server compares to the CLI (this doesn't include our deprecated stdio package):
 
-Here's what the last three months looked like week by week. Tool calls grew 4.7x while CLI commands grew 2.7x, and daily active users roughly tripled on both:
+| Growth from December 2025 to October 2026 | Neon MCP server | Neon CLI |
+| ----------------------------------------- | --------------- | -------- |
+| Tool calls / commands                     | 79x             | 21x      |
+| Daily active users                        | 36x             | 25x      |
+
+The MCP server overtook the CLI in daily active users last November and now has about twice as many. By August, it was also handling more tool calls than our CLI ran commands. Here's what the last three months looked like week by week:
 
 ![Line chart of weekly remote Neon MCP tool calls, Neon CLI commands, remote MCP daily active users and CLI daily active users from the week of August 3 to the week of October 26, 2026, all starting from the same point on a linear scale. MCP tool calls grow the fastest; daily active users grow at about the same rate for the MCP server and the CLI.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-vs-cli-growth-v3.png)
 
 I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. So when someone has both installed, the agent tends to reach for the MCP server first.
 
-Agent plugins push this even further. We ship a Neon plugin for Cursor, Claude Code and Codex (`npx neon@latest plugins`) that bundles the MCP server with our agent skills. ChatGPT and Claude Desktop connect to Neon through the MCP server, too. In fact, those last two are now our biggest clients: in October, ChatGPT made 24% of all tool calls on mcp.neon.tech and Claude Desktop 22%, ahead of Codex (21%) and Claude Code (13%). Claude Desktop's tool calls alone grew almost 5x since August.
+Agent plugins push this even further. We ship a Neon plugin for Cursor, Claude Code and Codex (`npx neon@latest plugins`) that bundles the MCP server with our agent skills. ChatGPT and Claude Desktop connect to Neon through the MCP server, too. In fact, those last two are now our biggest clients:
+
+| Client         | Share of tool calls on mcp.neon.tech, October 2026 |
+| -------------- | -------------------------------------------------- |
+| ChatGPT        | 24%                                                |
+| Claude Desktop | 22%                                                |
+| Codex          | 21%                                                |
+| Claude Code    | 13%                                                |
+| Cursor         | 8%                                                 |
+
+Claude Desktop's tool calls alone grew almost 5x since August.
 
 So MCP is clearly winning, but is it good yet? Let's look at the timeline and where we're at today.
 
