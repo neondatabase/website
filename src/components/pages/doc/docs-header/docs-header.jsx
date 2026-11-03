@@ -217,17 +217,17 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
     <div
       className={cn(
         'relative flex h-full w-full items-center bg-white dark:bg-black-pure',
-        'after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-90 dark:after:bg-gray-new-20 lg:after:hidden'
+        'after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-90 dark:after:bg-gray-new-20 md:after:hidden'
       )}
     >
-      {/* Below lg the shared mobile menu overlays its search + burger on the right. */}
+      {/* Below md the shared mobile menu overlays its search + burger on the right. */}
       <div
-        className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 lg:pr-28 md:pl-5 sm:pr-24"
+        className="relative z-10 flex h-full w-full items-stretch gap-x-7 px-8 md:pr-28 md:pl-5 sm:pr-24"
         ref={rowRef}
       >
         {/* The 189px lockup and 28px gap align the first lane with the Figma header. */}
         <Link
-          className="flex w-[189px] shrink-0 items-center gap-x-3.5 lg:w-auto lg:min-w-0 lg:shrink"
+          className="flex w-[189px] shrink-0 items-center gap-x-3.5 md:w-auto md:min-w-0 md:shrink"
           to={customType?.link || LINKS.docs}
         >
           <LogoLightIcon
@@ -245,7 +245,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             {customType?.title || 'Docs'}
           </span>
         </Link>
-        <nav className="flex min-w-0 flex-1 lg:hidden" aria-label="Docs sections">
+        <nav className="flex min-w-0 flex-1 md:hidden" aria-label="Docs sections">
           <DocsNavigation
             className={cn('min-w-0 flex-1 overflow-hidden', !isMeasured && 'invisible')}
             navigation={lanes}
@@ -254,7 +254,7 @@ const DocsHeader = ({ customType = null, docPageType = null, basePath, navigatio
             hiddenIndexes={hiddenIndexes}
           />
         </nav>
-        <div className="flex shrink-0 items-center gap-x-2 lg:hidden">
+        <div className="flex shrink-0 items-center gap-x-2 md:hidden">
           <InkeepTrigger
             docPageType={docPageType}
             isDocsHeader

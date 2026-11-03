@@ -190,7 +190,16 @@ const MobileMenu = ({
 
   return (
     <>
-      <div className="absolute top-3 right-7 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
+      {/* Docs lower the burger/drawer cutoff to md (767px) so the single-bar docs
+          header survives down to 768px; marketing stays on lg (1023px). The two
+          breakpoints below move in lockstep with the docs header hiding, so there
+          is never a width with zero or two visible docs-search-triggers. */}
+      <div
+        className={cn(
+          'absolute top-3 right-7 z-50 hidden gap-5 sm:right-4',
+          isDocPage ? 'md:flex md:items-center md:gap-x-4' : 'lg:flex lg:items-center lg:gap-x-4'
+        )}
+      >
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-black dark:text-white"
@@ -201,7 +210,12 @@ const MobileMenu = ({
         />
       </div>
       {isMobileMenuOpen && (
-        <nav className="fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings dark:bg-black-pure lg:flex">
+        <nav
+          className={cn(
+            'fixed inset-0 z-40 hidden flex-col justify-between bg-white safe-paddings dark:bg-black-pure',
+            isDocPage ? 'md:flex' : 'lg:flex'
+          )}
+        >
           <div
             className={cn('relative h-full pt-14 pb-[101px] sm:pb-[125px]', {
               'pt-[96px]': hasTopbar,
