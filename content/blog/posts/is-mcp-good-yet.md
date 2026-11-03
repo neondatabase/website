@@ -47,7 +47,7 @@ And it's not just function deploys. Here's how our remote MCP server compares to
 
 The MCP server overtook the CLI in daily active users last November and now has about twice as many. By August, it was also handling more tool calls than our CLI ran commands.
 
-I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. So when someone has both installed, the agent tends to reach for the MCP server first.
+I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists or is instructed to use it via prompts, skills or `AGENTS.md` files. So when someone has both installed, the agent tends to reach for the MCP server first.
 
 Agent plugins push this even further. We ship a Neon plugin for Cursor, Claude Code and Codex (`npx neon@latest plugins`) that bundles the MCP server with our agent skills. ChatGPT and Claude Desktop connect to Neon through the MCP server, too. In fact, those last two are now our biggest clients: in October, ChatGPT made 24% of all tool calls on mcp.neon.tech and Claude Desktop 22%, ahead of Codex (21%), Claude Code (13%) and Cursor (8%). Claude Desktop's tool calls alone grew almost 5x since August.
 
