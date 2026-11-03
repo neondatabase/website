@@ -36,7 +36,7 @@ If you've followed the CLI vs. MCP discussion online, you've probably noticed th
 
 But even though our skills point agents at the CLI and the CLI can do more, agents keep picking the MCP server. Since August, the Neon MCP server has had about twice as many daily active users as the CLI. Between the first week of August and the last week of October, MCP tool calls grew 4.6x while CLI commands grew 2.7x. Daily active users roughly tripled on both, so it's mostly the volume of work agents do over MCP that's pulling ahead.
 
-![Line chart of weekly Neon MCP tool calls, Neon CLI commands, MCP daily active users and CLI daily active users from the week of August 3 to the week of October 26, 2026, each indexed to 100 in the first week. MCP tool calls end at 461, CLI commands at 266, MCP daily active users at 303 and CLI daily active users at 295.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-vs-cli-growth.png)
+![Line chart of weekly Neon MCP tool calls, Neon CLI commands, MCP daily active users and CLI daily active users from the week of August 3 to the week of October 26, 2026, all starting from the same point on a linear scale. MCP tool calls grow the fastest; daily active users grow at about the same rate for the MCP server and the CLI.](https://cdn.neonapi.io/public/images/pages/blog/is-mcp-good-yet/mcp-vs-cli-growth-v2.png)
 
 I think a lot of this comes down to discoverability. A harness puts the tools of every connected MCP server right in front of the model, while a CLI only gets used if the model remembers it exists and decides to shell out to it. So when someone has both installed, the agent tends to reach for the MCP server first.
 
