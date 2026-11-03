@@ -74,7 +74,7 @@ So MCP is clearly winning, but is it good yet? Let's look at the timeline and wh
 MCP has gone through three designs for remote servers in just two years and we've been along for the ride since the early days.
 
 - **November 25, 2024:** Anthropic open-sources MCP. Servers run locally over stdio or remotely over HTTP+SSE, which uses a long-lived SSE stream for messages from the server and a separate endpoint for the client's POST requests.
-- **December 3, 2024:** We publish our first MCP server, [`@neondatabase/mcp-server-neon`](https://www.npmjs.com/package/@neondatabase/mcp-server-neon), as a local stdio server on npm, just eight days after MCP launched.
+- **December 3, 2024:** We [publish our first MCP server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here), [`@neondatabase/mcp-server-neon`](https://www.npmjs.com/package/@neondatabase/mcp-server-neon), as a local stdio server on npm, just eight days after MCP launched.
 - **March 26, 2025:** [Spec 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/changelog) replaces HTTP+SSE with Streamable HTTP. Every message becomes a POST to a single endpoint and sessions live in an `Mcp-Session-Id` header.
 - **April 4, 2025:** We [launch our remote MCP server](https://neon.com/blog/announcing-neons-remote-mcp-server) at mcp.neon.tech, on SSE.
 - **December 19, 2025:** The Transport Working Group [publishes its plan](https://blog.modelcontextprotocol.io/posts/2025-12-19-mcp-transport-future/) for a stateless protocol, because sticky sessions and shared session stores were making remote servers hard to scale.
