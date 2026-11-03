@@ -60,10 +60,15 @@ const ASK_COLLAPSE_SAVING = 52;
 const useResponsiveDocsHeader = (rowRef, navRef, lanes) => {
   const metricsRef = useRef({ laneWidths: [], lanesTotal: 0, laneGap: 0, baseCollapsed: 0 });
   const appliedRef = useRef({ searchCollapsed: false, askCollapsed: false });
+  // Before the first (synchronous, pre-paint) measurement, render the right
+  // cluster in its COLLAPSED state. Collapsed is the safe default because it
+  // never overflows, so the search field and Ask AI can only ever grow once we
+  // know they fit, never flash their wider expanded state and snap narrower.
+  // The nav lanes stay gated invisible-until-measured separately.
   const [state, setState] = useState({
     isMeasured: false,
-    searchCollapsed: false,
-    askCollapsed: false,
+    searchCollapsed: true,
+    askCollapsed: true,
     hiddenIndexes: [],
   });
 
